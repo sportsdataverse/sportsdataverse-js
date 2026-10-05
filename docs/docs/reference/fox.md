@@ -25,7 +25,7 @@ await sdv.fox.fox_scoreboard({ sport: 'cfb' });
 
 ## Native API — Fox Sports
 
-Flat (non-ESPN) wrappers for the Fox Sports API. Host: `https://api.foxsports.com`. Each method is exposed under BOTH `fox_<endpoint>` (snake_case, py/R parity) and `fox<Endpoint>` (camelCase canonical) on `sdv.fox`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the Fox Sports API. Host: `https://api.foxsports.com`. Each method is exposed under BOTH its snake_case name `fox_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.fox`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|

@@ -34,11 +34,13 @@ await sdv.college_baseball.espnCollegeBaseballRankings({});
 // snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_rankings(...)
 ```
 
-## `espnCollegeBaseballRecruitingAthletes`
+## `espnCollegeBaseballRecruitingPlayers`
 
-COLLEGE_BASEBALL — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_BASEBALL — recruiting players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-baseball/recruiting/{year}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_baseball_recruiting_athletes` / `espnCollegeBaseballRecruitingAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,8 +58,8 @@ COLLEGE_BASEBALL — recruiting athletes (ESPN sports.core.api.espn.com (core v2
 **Example:**
 
 ```js
-await sdv.college_baseball.espnCollegeBaseballRecruitingAthletes({ year: '…' });
-// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_recruiting_athletes(...)
+await sdv.college_baseball.espnCollegeBaseballRecruitingPlayers({ year: '…' });
+// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_recruiting_players(...)
 ```
 
 ## `espnCollegeBaseballRecruitingRankings`

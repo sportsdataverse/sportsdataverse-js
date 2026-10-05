@@ -9,6 +9,8 @@ import { statcastGet } from "../core/statcast_runtime.js";
 import { hockeytechGet } from "../core/hockeytech_runtime.js";
 import { torvikGet } from "../core/torvik_runtime.js";
 import { parserFor } from "../parsers/_registry.js";
+import { aliasesFor, withDeprecatedAliases } from "../core/deprecation.js";
+import { FLAT_DEPRECATED_ALIASES } from "../generated/aliases.js";
 import type { WrapperDef, WrapperFn } from "../core/types.js";
 
 /** A flat-API getter: same shape as `core/client.ts` `get`. */
@@ -68,11 +70,14 @@ export async function callFlat(
  */
 export function makeFlatModule(defs: WrapperDef[]): Record<string, WrapperFn> {
   const mod: Record<string, WrapperFn> = {};
+  const aliases: Record<string, string> = {};
   for (const def of defs) {
     const fn: WrapperFn = (params = {}) => callFlat(def, params);
-    const snake = `${def.api}_${def.short}`;
+    const snake = def.publicName ?? `${def.api}_${def.short}`; // sdv-py's name (v4)
     mod[snake] = fn; // py/R-parity alias
     mod[toCamel(snake)] = fn; // mlbTeams — idiomatic JS canonical
+    Object.assign(aliases, FLAT_DEPRECATED_ALIASES[def.api!]);
   }
-  return mod;
+  // Pre-v4 names a rename replaced stay callable as deprecated aliases.
+  return withDeprecatedAliases(mod, aliasesFor(mod, aliases));
 }

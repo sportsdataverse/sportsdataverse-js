@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.wnba`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnWnbaAthleteAwards`
+## `espnWnbaPlayerAwards`
 
-WNBA — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+WNBA — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_awards` / `espnWnbaAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ WNBA — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_awards(...)
+await sdv.wnba.espnWnbaPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_awards(...)
 ```
 
-## `espnWnbaAthleteCareerStats`
+## `espnWnbaPlayerCareerStats`
 
-WNBA — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+WNBA — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_career_stats` / `espnWnbaAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ WNBA — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_career_stats(...)
+await sdv.wnba.espnWnbaPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_career_stats(...)
 ```
 
-## `espnWnbaAthleteContracts`
+## `espnWnbaPlayerContracts`
 
-WNBA — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+WNBA — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_contracts` / `espnWnbaAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ WNBA — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_contracts(...)
+await sdv.wnba.espnWnbaPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_contracts(...)
 ```
 
-## `espnWnbaAthleteCore`
+## `espnWnbaPlayerCore`
 
-WNBA — athlete core (ESPN sports.core.api.espn.com (core v2)).
+WNBA — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_core` / `espnWnbaAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ WNBA — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_core(...)
+await sdv.wnba.espnWnbaPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_core(...)
 ```
 
-## `espnWnbaAthleteEventlog`
+## `espnWnbaPlayerEventlog`
 
-WNBA — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+WNBA — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_eventlog` / `espnWnbaAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ WNBA — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_eventlog(...)
+await sdv.wnba.espnWnbaPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_eventlog(...)
 ```
 
-## `espnWnbaAthleteInjuries`
+## `espnWnbaPlayerInjuries`
 
-WNBA — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+WNBA — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_injuries` / `espnWnbaAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ WNBA — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_injuries(...)
+await sdv.wnba.espnWnbaPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_injuries(...)
 ```
 
-## `espnWnbaAthleteNotes`
+## `espnWnbaPlayerNotes`
 
-WNBA — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+WNBA — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_notes` / `espnWnbaAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ WNBA — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_notes(...)
+await sdv.wnba.espnWnbaPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_notes(...)
 ```
 
-## `espnWnbaAthleteRecords`
+## `espnWnbaPlayerRecords`
 
-WNBA — athlete records (ESPN sports.core.api.espn.com (core v2)).
+WNBA — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_records` / `espnWnbaAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ WNBA — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_records(...)
+await sdv.wnba.espnWnbaPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_records(...)
 ```
 
-## `espnWnbaAthleteSeasons`
+## `espnWnbaPlayerSeasons`
 
-WNBA — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+WNBA — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_seasons` / `espnWnbaAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ WNBA — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_seasons(...)
+await sdv.wnba.espnWnbaPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_seasons(...)
 ```
 
-## `espnWnbaAthleteStatisticslog`
+## `espnWnbaPlayerStatisticslog`
 
-WNBA — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+WNBA — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_statisticslog` / `espnWnbaAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ WNBA — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_statisticslog(...)
+await sdv.wnba.espnWnbaPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_statisticslog(...)
 ```
 
-## `espnWnbaAthleteVsAthlete`
+## `espnWnbaPlayerVsPlayer`
 
-WNBA — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+WNBA — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_vs_athlete` / `espnWnbaAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ WNBA — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_vs_athlete(...)
+await sdv.wnba.espnWnbaPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_vs_player(...)
 ```
 
-## `espnWnbaAthletesIndex`
+## `espnWnbaPlayersIndex`
 
-WNBA — athletes index (ESPN sports.core.api.espn.com (core v2)).
+WNBA — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athletes_index` / `espnWnbaAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ WNBA — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthletesIndex({});
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athletes_index(...)
+await sdv.wnba.espnWnbaPlayersIndex({});
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_players_index(...)
 ```
 
 ## `espnWnbaAward`
@@ -403,12 +427,14 @@ await sdv.wnba.espnWnbaCoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.wnba.espn_wnba_coach_season(...)
 ```
 
-## `espnWnbaEvent`
+## `espnWnbaGame`
 
-WNBA — event (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event` / `espnWnbaEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ WNBA — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event(...)
+await sdv.wnba.espnWnbaGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game(...)
 ```
 
-## `espnWnbaEventBroadcasts`
+## `espnWnbaGameBroadcasts`
 
-WNBA — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_broadcasts` / `espnWnbaEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ WNBA — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_broadcasts(...)
+await sdv.wnba.espnWnbaGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_broadcasts(...)
 ```
 
-## `espnWnbaEventCompetition`
+## `espnWnbaGameCompetition`
 
-WNBA — event competition (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_competition` / `espnWnbaEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ WNBA — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_competition(...)
+await sdv.wnba.espnWnbaGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_competition(...)
 ```
 
-## `espnWnbaEventCompetitor`
+## `espnWnbaGameTeam`
 
-WNBA — event competitor (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_competitor` / `espnWnbaEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ WNBA — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_competitor(...)
+await sdv.wnba.espnWnbaGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_team(...)
 ```
 
-## `espnWnbaEventCompetitorLeaders`
+## `espnWnbaGameTeamLeaders`
 
-WNBA — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_competitor_leaders` / `espnWnbaEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ WNBA — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_competitor_leaders(...)
+await sdv.wnba.espnWnbaGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_team_leaders(...)
 ```
 
-## `espnWnbaEventCompetitorLinescores`
+## `espnWnbaGameTeamLinescores`
 
-WNBA — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_competitor_linescores` / `espnWnbaEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ WNBA — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_competitor_linescores(...)
+await sdv.wnba.espnWnbaGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_team_linescores(...)
 ```
 
-## `espnWnbaEventCompetitorRecord`
+## `espnWnbaGameTeamRecord`
 
-WNBA — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_competitor_record` / `espnWnbaEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ WNBA — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_competitor_record(...)
+await sdv.wnba.espnWnbaGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_team_record(...)
 ```
 
-## `espnWnbaEventCompetitorRoster`
+## `espnWnbaGameTeamRoster`
 
-WNBA — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_competitor_roster` / `espnWnbaEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ WNBA — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_competitor_roster(...)
+await sdv.wnba.espnWnbaGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_team_roster(...)
 ```
 
-## `espnWnbaEventCompetitorStatistics`
+## `espnWnbaGameTeamStatistics`
 
-WNBA — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_competitor_statistics` / `espnWnbaEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ WNBA — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_competitor_statistics(...)
+await sdv.wnba.espnWnbaGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_team_statistics(...)
 ```
 
-## `espnWnbaEventCompetitors`
+## `espnWnbaGameTeams`
 
-WNBA — event competitors (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_competitors` / `espnWnbaEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ WNBA — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_competitors(...)
+await sdv.wnba.espnWnbaGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_teams(...)
 ```
 
-## `espnWnbaEventLeaders`
+## `espnWnbaGameLeaders`
 
-WNBA — event leaders (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_leaders` / `espnWnbaEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ WNBA — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_leaders(...)
+await sdv.wnba.espnWnbaGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_leaders(...)
 ```
 
-## `espnWnbaEventOdds`
+## `espnWnbaGameOdds`
 
-WNBA — event odds (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_odds` / `espnWnbaEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ WNBA — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_odds(...)
+await sdv.wnba.espnWnbaGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_odds(...)
 ```
 
-## `espnWnbaEventOfficialDetail`
+## `espnWnbaGameOfficialDetail`
 
-WNBA — event official detail (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_official_detail` / `espnWnbaEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ WNBA — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_official_detail(...)
+await sdv.wnba.espnWnbaGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_official_detail(...)
 ```
 
-## `espnWnbaEventOfficials`
+## `espnWnbaGameOfficials`
 
-WNBA — event officials (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_officials` / `espnWnbaEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ WNBA — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_officials(...)
+await sdv.wnba.espnWnbaGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_officials(...)
 ```
 
-## `espnWnbaEventPlay`
+## `espnWnbaGamePlay`
 
-WNBA — event play (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_play` / `espnWnbaEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ WNBA — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_play(...)
+await sdv.wnba.espnWnbaGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_play(...)
 ```
 
-## `espnWnbaEventPlayPersonnel`
+## `espnWnbaGamePlayPersonnel`
 
-WNBA — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_play_personnel` / `espnWnbaEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ WNBA — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_play_personnel(...)
+await sdv.wnba.espnWnbaGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_play_personnel(...)
 ```
 
-## `espnWnbaEventPlays`
+## `espnWnbaGamePlays`
 
-WNBA — event plays (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_plays` / `espnWnbaEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ WNBA — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_plays(...)
+await sdv.wnba.espnWnbaGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_plays(...)
 ```
 
-## `espnWnbaEventPowerindex`
+## `espnWnbaGamePowerindex`
 
-WNBA — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_powerindex` / `espnWnbaEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ WNBA — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_powerindex(...)
+await sdv.wnba.espnWnbaGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_powerindex(...)
 ```
 
-## `espnWnbaEventPredictor`
+## `espnWnbaGamePredictor`
 
-WNBA — event predictor (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_predictor` / `espnWnbaEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ WNBA — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_predictor(...)
+await sdv.wnba.espnWnbaGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_predictor(...)
 ```
 
-## `espnWnbaEventProbabilities`
+## `espnWnbaGameProbabilities`
 
-WNBA — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_probabilities` / `espnWnbaEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ WNBA — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_probabilities(...)
+await sdv.wnba.espnWnbaGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_probabilities(...)
 ```
 
-## `espnWnbaEventPropbets`
+## `espnWnbaGamePropbets`
 
-WNBA — event propbets (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_propbets` / `espnWnbaEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ WNBA — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_propbets(...)
+await sdv.wnba.espnWnbaGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_propbets(...)
 ```
 
-## `espnWnbaEventScoringplays`
+## `espnWnbaGameScoringplays`
 
-WNBA — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_scoringplays` / `espnWnbaEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ WNBA — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_scoringplays(...)
+await sdv.wnba.espnWnbaGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_scoringplays(...)
 ```
 
-## `espnWnbaEventSituation`
+## `espnWnbaGameSituation`
 
-WNBA — event situation (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_situation` / `espnWnbaEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ WNBA — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_situation(...)
+await sdv.wnba.espnWnbaGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_situation(...)
 ```
 
-## `espnWnbaEventStatus`
+## `espnWnbaGameStatus`
 
-WNBA — event status (ESPN sports.core.api.espn.com (core v2)).
+WNBA — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_event_status` / `espnWnbaEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ WNBA — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_event_status(...)
+await sdv.wnba.espnWnbaGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_game_status(...)
 ```
 
-## `espnWnbaEvents`
+## `espnWnbaGames`
 
-WNBA — events (ESPN sports.core.api.espn.com (core v2)).
+WNBA — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_events` / `espnWnbaEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ WNBA — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaEvents({});
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_events(...)
+await sdv.wnba.espnWnbaGames({});
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_games(...)
 ```
 
 ## `espnWnbaFranchise`
@@ -1145,11 +1219,13 @@ await sdv.wnba.espnWnbaPositions({});
 // snake_case alias (py/R parity): sdv.wnba.espn_wnba_positions(...)
 ```
 
-## `espnWnbaSeasonAthletes`
+## `espnWnbaSeasonPlayers`
 
-WNBA — season athletes (ESPN sports.core.api.espn.com (core v2)).
+WNBA — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_season_athletes` / `espnWnbaSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ WNBA — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_season_athletes(...)
+await sdv.wnba.espnWnbaSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_season_players(...)
 ```
 
 ## `espnWnbaSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.wnba.espnWnbaSeasonWeek({ season: '…', season_type: '…', week: '�
 // snake_case alias (py/R parity): sdv.wnba.espn_wnba_season_week(...)
 ```
 
-## `espnWnbaSeasonWeekEvents`
+## `espnWnbaSeasonWeekGames`
 
-WNBA — season week events (ESPN sports.core.api.espn.com (core v2)).
+WNBA — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_season_week_events` / `espnWnbaSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ WNBA — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_season_week_events(...)
+await sdv.wnba.espnWnbaSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_season_week_games(...)
 ```
 
 ## `espnWnbaSeasonWeekPowerindex`

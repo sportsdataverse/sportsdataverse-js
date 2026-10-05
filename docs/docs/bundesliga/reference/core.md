@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.bundesliga`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnBundesligaAthleteAwards`
+## `espnBundesligaPlayerAwards`
 
-BUNDESLIGA — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_awards` / `espnBundesligaAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ BUNDESLIGA — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_awards(...)
+await sdv.bundesliga.espnBundesligaPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_awards(...)
 ```
 
-## `espnBundesligaAthleteCareerStats`
+## `espnBundesligaPlayerCareerStats`
 
-BUNDESLIGA — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_career_stats` / `espnBundesligaAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ BUNDESLIGA — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_career_stats(...)
+await sdv.bundesliga.espnBundesligaPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_career_stats(...)
 ```
 
-## `espnBundesligaAthleteContracts`
+## `espnBundesligaPlayerContracts`
 
-BUNDESLIGA — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_contracts` / `espnBundesligaAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ BUNDESLIGA — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_contracts(...)
+await sdv.bundesliga.espnBundesligaPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_contracts(...)
 ```
 
-## `espnBundesligaAthleteCore`
+## `espnBundesligaPlayerCore`
 
-BUNDESLIGA — athlete core (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_core` / `espnBundesligaAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ BUNDESLIGA — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_core(...)
+await sdv.bundesliga.espnBundesligaPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_core(...)
 ```
 
-## `espnBundesligaAthleteEventlog`
+## `espnBundesligaPlayerEventlog`
 
-BUNDESLIGA — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_eventlog` / `espnBundesligaAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ BUNDESLIGA — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_eventlog(...)
+await sdv.bundesliga.espnBundesligaPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_eventlog(...)
 ```
 
-## `espnBundesligaAthleteInjuries`
+## `espnBundesligaPlayerInjuries`
 
-BUNDESLIGA — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_injuries` / `espnBundesligaAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ BUNDESLIGA — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_injuries(...)
+await sdv.bundesliga.espnBundesligaPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_injuries(...)
 ```
 
-## `espnBundesligaAthleteNotes`
+## `espnBundesligaPlayerNotes`
 
-BUNDESLIGA — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_notes` / `espnBundesligaAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ BUNDESLIGA — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_notes(...)
+await sdv.bundesliga.espnBundesligaPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_notes(...)
 ```
 
-## `espnBundesligaAthleteRecords`
+## `espnBundesligaPlayerRecords`
 
-BUNDESLIGA — athlete records (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_records` / `espnBundesligaAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ BUNDESLIGA — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_records(...)
+await sdv.bundesliga.espnBundesligaPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_records(...)
 ```
 
-## `espnBundesligaAthleteSeasons`
+## `espnBundesligaPlayerSeasons`
 
-BUNDESLIGA — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_seasons` / `espnBundesligaAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ BUNDESLIGA — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_seasons(...)
+await sdv.bundesliga.espnBundesligaPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_seasons(...)
 ```
 
-## `espnBundesligaAthleteStatisticslog`
+## `espnBundesligaPlayerStatisticslog`
 
-BUNDESLIGA — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_statisticslog` / `espnBundesligaAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ BUNDESLIGA — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_statisticslog(...)
+await sdv.bundesliga.espnBundesligaPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_statisticslog(...)
 ```
 
-## `espnBundesligaAthleteVsAthlete`
+## `espnBundesligaPlayerVsPlayer`
 
-BUNDESLIGA — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_vs_athlete` / `espnBundesligaAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ BUNDESLIGA — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_vs_athlete(...)
+await sdv.bundesliga.espnBundesligaPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_vs_player(...)
 ```
 
-## `espnBundesligaAthletesIndex`
+## `espnBundesligaPlayersIndex`
 
-BUNDESLIGA — athletes index (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athletes_index` / `espnBundesligaAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ BUNDESLIGA — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthletesIndex({});
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athletes_index(...)
+await sdv.bundesliga.espnBundesligaPlayersIndex({});
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_players_index(...)
 ```
 
 ## `espnBundesligaAward`
@@ -403,12 +427,14 @@ await sdv.bundesliga.espnBundesligaCoachSeason({ coach_id: '…', season: '…' 
 // snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_coach_season(...)
 ```
 
-## `espnBundesligaEvent`
+## `espnBundesligaGame`
 
-BUNDESLIGA — event (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event` / `espnBundesligaEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ BUNDESLIGA — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event(...)
+await sdv.bundesliga.espnBundesligaGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game(...)
 ```
 
-## `espnBundesligaEventBroadcasts`
+## `espnBundesligaGameBroadcasts`
 
-BUNDESLIGA — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_broadcasts` / `espnBundesligaEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ BUNDESLIGA — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_broadcasts(...)
+await sdv.bundesliga.espnBundesligaGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_broadcasts(...)
 ```
 
-## `espnBundesligaEventCompetition`
+## `espnBundesligaGameCompetition`
 
-BUNDESLIGA — event competition (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_competition` / `espnBundesligaEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ BUNDESLIGA — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_competition(...)
+await sdv.bundesliga.espnBundesligaGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_competition(...)
 ```
 
-## `espnBundesligaEventCompetitor`
+## `espnBundesligaGameTeam`
 
-BUNDESLIGA — event competitor (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_competitor` / `espnBundesligaEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ BUNDESLIGA — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_competitor(...)
+await sdv.bundesliga.espnBundesligaGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_team(...)
 ```
 
-## `espnBundesligaEventCompetitorLeaders`
+## `espnBundesligaGameTeamLeaders`
 
-BUNDESLIGA — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_competitor_leaders` / `espnBundesligaEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ BUNDESLIGA — event competitor leaders (ESPN sports.core.api.espn.com (core v2)
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_competitor_leaders(...)
+await sdv.bundesliga.espnBundesligaGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_team_leaders(...)
 ```
 
-## `espnBundesligaEventCompetitorLinescores`
+## `espnBundesligaGameTeamLinescores`
 
-BUNDESLIGA — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_competitor_linescores` / `espnBundesligaEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ BUNDESLIGA — event competitor linescores (ESPN sports.core.api.espn.com (core 
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_competitor_linescores(...)
+await sdv.bundesliga.espnBundesligaGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_team_linescores(...)
 ```
 
-## `espnBundesligaEventCompetitorRecord`
+## `espnBundesligaGameTeamRecord`
 
-BUNDESLIGA — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_competitor_record` / `espnBundesligaEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ BUNDESLIGA — event competitor record (ESPN sports.core.api.espn.com (core v2))
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_competitor_record(...)
+await sdv.bundesliga.espnBundesligaGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_team_record(...)
 ```
 
-## `espnBundesligaEventCompetitorRoster`
+## `espnBundesligaGameTeamRoster`
 
-BUNDESLIGA — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_competitor_roster` / `espnBundesligaEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ BUNDESLIGA — event competitor roster (ESPN sports.core.api.espn.com (core v2))
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_competitor_roster(...)
+await sdv.bundesliga.espnBundesligaGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_team_roster(...)
 ```
 
-## `espnBundesligaEventCompetitorStatistics`
+## `espnBundesligaGameTeamStatistics`
 
-BUNDESLIGA — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_competitor_statistics` / `espnBundesligaEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ BUNDESLIGA — event competitor statistics (ESPN sports.core.api.espn.com (core 
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_competitor_statistics(...)
+await sdv.bundesliga.espnBundesligaGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_team_statistics(...)
 ```
 
-## `espnBundesligaEventCompetitors`
+## `espnBundesligaGameTeams`
 
-BUNDESLIGA — event competitors (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_competitors` / `espnBundesligaEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ BUNDESLIGA — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_competitors(...)
+await sdv.bundesliga.espnBundesligaGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_teams(...)
 ```
 
-## `espnBundesligaEventLeaders`
+## `espnBundesligaGameLeaders`
 
-BUNDESLIGA — event leaders (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_leaders` / `espnBundesligaEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ BUNDESLIGA — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_leaders(...)
+await sdv.bundesliga.espnBundesligaGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_leaders(...)
 ```
 
-## `espnBundesligaEventOdds`
+## `espnBundesligaGameOdds`
 
-BUNDESLIGA — event odds (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_odds` / `espnBundesligaEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ BUNDESLIGA — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_odds(...)
+await sdv.bundesliga.espnBundesligaGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_odds(...)
 ```
 
-## `espnBundesligaEventOfficialDetail`
+## `espnBundesligaGameOfficialDetail`
 
-BUNDESLIGA — event official detail (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_official_detail` / `espnBundesligaEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ BUNDESLIGA — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_official_detail(...)
+await sdv.bundesliga.espnBundesligaGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_official_detail(...)
 ```
 
-## `espnBundesligaEventOfficials`
+## `espnBundesligaGameOfficials`
 
-BUNDESLIGA — event officials (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_officials` / `espnBundesligaEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ BUNDESLIGA — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_officials(...)
+await sdv.bundesliga.espnBundesligaGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_officials(...)
 ```
 
-## `espnBundesligaEventPlay`
+## `espnBundesligaGamePlay`
 
-BUNDESLIGA — event play (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_play` / `espnBundesligaEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ BUNDESLIGA — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_play(...)
+await sdv.bundesliga.espnBundesligaGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_play(...)
 ```
 
-## `espnBundesligaEventPlayPersonnel`
+## `espnBundesligaGamePlayPersonnel`
 
-BUNDESLIGA — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_play_personnel` / `espnBundesligaEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ BUNDESLIGA — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_play_personnel(...)
+await sdv.bundesliga.espnBundesligaGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_play_personnel(...)
 ```
 
-## `espnBundesligaEventPlays`
+## `espnBundesligaGamePlays`
 
-BUNDESLIGA — event plays (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_plays` / `espnBundesligaEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ BUNDESLIGA — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_plays(...)
+await sdv.bundesliga.espnBundesligaGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_plays(...)
 ```
 
-## `espnBundesligaEventPowerindex`
+## `espnBundesligaGamePowerindex`
 
-BUNDESLIGA — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_powerindex` / `espnBundesligaEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ BUNDESLIGA — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_powerindex(...)
+await sdv.bundesliga.espnBundesligaGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_powerindex(...)
 ```
 
-## `espnBundesligaEventPredictor`
+## `espnBundesligaGamePredictor`
 
-BUNDESLIGA — event predictor (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_predictor` / `espnBundesligaEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ BUNDESLIGA — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_predictor(...)
+await sdv.bundesliga.espnBundesligaGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_predictor(...)
 ```
 
-## `espnBundesligaEventProbabilities`
+## `espnBundesligaGameProbabilities`
 
-BUNDESLIGA — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_probabilities` / `espnBundesligaEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ BUNDESLIGA — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_probabilities(...)
+await sdv.bundesliga.espnBundesligaGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_probabilities(...)
 ```
 
-## `espnBundesligaEventPropbets`
+## `espnBundesligaGamePropbets`
 
-BUNDESLIGA — event propbets (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_propbets` / `espnBundesligaEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ BUNDESLIGA — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_propbets(...)
+await sdv.bundesliga.espnBundesligaGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_propbets(...)
 ```
 
-## `espnBundesligaEventScoringplays`
+## `espnBundesligaGameScoringplays`
 
-BUNDESLIGA — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_scoringplays` / `espnBundesligaEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ BUNDESLIGA — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_scoringplays(...)
+await sdv.bundesliga.espnBundesligaGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_scoringplays(...)
 ```
 
-## `espnBundesligaEventSituation`
+## `espnBundesligaGameSituation`
 
-BUNDESLIGA — event situation (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_situation` / `espnBundesligaEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ BUNDESLIGA — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_situation(...)
+await sdv.bundesliga.espnBundesligaGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_situation(...)
 ```
 
-## `espnBundesligaEventStatus`
+## `espnBundesligaGameStatus`
 
-BUNDESLIGA — event status (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_event_status` / `espnBundesligaEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ BUNDESLIGA — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_event_status(...)
+await sdv.bundesliga.espnBundesligaGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_game_status(...)
 ```
 
-## `espnBundesligaEvents`
+## `espnBundesligaGames`
 
-BUNDESLIGA — events (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_events` / `espnBundesligaEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ BUNDESLIGA — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaEvents({});
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_events(...)
+await sdv.bundesliga.espnBundesligaGames({});
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_games(...)
 ```
 
 ## `espnBundesligaFranchise`
@@ -1145,11 +1219,13 @@ await sdv.bundesliga.espnBundesligaPositions({});
 // snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_positions(...)
 ```
 
-## `espnBundesligaSeasonAthletes`
+## `espnBundesligaSeasonPlayers`
 
-BUNDESLIGA — season athletes (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_season_athletes` / `espnBundesligaSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ BUNDESLIGA — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_season_athletes(...)
+await sdv.bundesliga.espnBundesligaSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_season_players(...)
 ```
 
 ## `espnBundesligaSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.bundesliga.espnBundesligaSeasonWeek({ season: '…', season_type: '…
 // snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_season_week(...)
 ```
 
-## `espnBundesligaSeasonWeekEvents`
+## `espnBundesligaSeasonWeekGames`
 
-BUNDESLIGA — season week events (ESPN sports.core.api.espn.com (core v2)).
+BUNDESLIGA — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_season_week_events` / `espnBundesligaSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ BUNDESLIGA — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_season_week_events(...)
+await sdv.bundesliga.espnBundesligaSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_season_week_games(...)
 ```
 
 ## `espnBundesligaSeasonWeekPowerindex`

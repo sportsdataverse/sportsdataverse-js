@@ -268,6 +268,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_info",
+    "publicShort": "player_info",
     "family": "site_v2",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}",
@@ -280,6 +281,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_bio",
+    "publicShort": "player_bio",
     "family": "site_v2",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/bio",
@@ -292,6 +294,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_news",
+    "publicShort": "player_news",
     "family": "site_v2",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/news",
@@ -569,6 +572,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "season_week_events",
+    "publicShort": "season_week_games",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events",
@@ -631,6 +635,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "season_athletes",
+    "publicShort": "season_players",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/athletes",
@@ -769,6 +774,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athletes_index",
+    "publicShort": "players_index",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes",
@@ -794,6 +800,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_core",
+    "publicShort": "player_core",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}",
@@ -806,6 +813,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_career_stats",
+    "publicShort": "player_career_stats",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]",
@@ -822,6 +830,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_statisticslog",
+    "publicShort": "player_statisticslog",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statisticslog",
@@ -834,6 +843,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_eventlog",
+    "publicShort": "player_eventlog",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/eventlog",
@@ -846,6 +856,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_contracts",
+    "publicShort": "player_contracts",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/contracts",
@@ -858,6 +869,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_awards",
+    "publicShort": "player_awards",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/awards",
@@ -870,6 +882,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_seasons",
+    "publicShort": "player_seasons",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/seasons",
@@ -882,6 +895,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_records",
+    "publicShort": "player_records",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/records",
@@ -894,6 +908,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_injuries",
+    "publicShort": "player_injuries",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/injuries",
@@ -906,6 +921,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_notes",
+    "publicShort": "player_notes",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/notes",
@@ -918,6 +934,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_vs_athlete",
+    "publicShort": "player_vs_player",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}",
@@ -933,6 +950,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "events",
+    "publicShort": "games",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events",
@@ -951,6 +969,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event",
+    "publicShort": "game",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}",
@@ -963,6 +982,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competition",
+    "publicShort": "game_competition",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}",
@@ -980,6 +1000,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitors",
+    "publicShort": "game_teams",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors",
@@ -997,6 +1018,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor",
+    "publicShort": "game_team",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}",
@@ -1017,6 +1039,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_roster",
+    "publicShort": "game_team_roster",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster",
@@ -1037,6 +1060,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_linescores",
+    "publicShort": "game_team_linescores",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores",
@@ -1057,6 +1081,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_statistics",
+    "publicShort": "game_team_statistics",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics",
@@ -1077,6 +1102,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_record",
+    "publicShort": "game_team_record",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record",
@@ -1097,6 +1123,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_leaders",
+    "publicShort": "game_team_leaders",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders",
@@ -1117,6 +1144,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_odds",
+    "publicShort": "game_odds",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/odds",
@@ -1134,6 +1162,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_probabilities",
+    "publicShort": "game_probabilities",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities",
@@ -1157,6 +1186,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_plays",
+    "publicShort": "game_plays",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays",
@@ -1180,6 +1210,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_play",
+    "publicShort": "game_play",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}",
@@ -1200,6 +1231,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_play_personnel",
+    "publicShort": "game_play_personnel",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel",
@@ -1220,6 +1252,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_situation",
+    "publicShort": "game_situation",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/situation",
@@ -1237,6 +1270,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_status",
+    "publicShort": "game_status",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/status",
@@ -1254,6 +1288,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_officials",
+    "publicShort": "game_officials",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials",
@@ -1271,6 +1306,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_broadcasts",
+    "publicShort": "game_broadcasts",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts",
@@ -1288,6 +1324,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_predictor",
+    "publicShort": "game_predictor",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/predictor",
@@ -1305,6 +1342,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_powerindex",
+    "publicShort": "game_powerindex",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex",
@@ -1322,6 +1360,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_propbets",
+    "publicShort": "game_propbets",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/propbets",
@@ -1339,6 +1378,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_leaders",
+    "publicShort": "game_leaders",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/leaders",
@@ -1356,6 +1396,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_scoringplays",
+    "publicShort": "game_scoringplays",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays",
@@ -1373,6 +1414,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_official_detail",
+    "publicShort": "game_official_detail",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}",
@@ -1649,6 +1691,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "recruiting_athletes",
+    "publicShort": "recruiting_players",
     "family": "core_v2",
     "scope": "ncaa",
     "path": "/{sport}/leagues/{league}/recruiting/{year}/athletes",
@@ -1753,6 +1796,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_hotzones",
+    "publicShort": "player_hotzones",
     "family": "core_v2",
     "scope": "mlb",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/hotzones",
@@ -1765,6 +1809,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_overview",
+    "publicShort": "player_overview",
     "family": "web_v3",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/overview",
@@ -1777,6 +1822,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_stats",
+    "publicShort": "player_stats",
     "family": "web_v3",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/stats",
@@ -1794,6 +1840,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_gamelog",
+    "publicShort": "player_gamelog",
     "family": "web_v3",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/gamelog",
@@ -1811,6 +1858,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_splits",
+    "publicShort": "player_splits",
     "family": "web_v3",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/splits",
@@ -5376,6 +5424,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "pbp",
+    "publicName": "nhl_web_pbp",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5392,6 +5441,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "boxscore",
+    "publicName": "nhl_boxscore",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5408,6 +5458,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "landing",
+    "publicName": "nhl_landing",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5424,6 +5475,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "right_rail",
+    "publicName": "nhl_right_rail",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5440,6 +5492,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "schedule",
+    "publicName": "nhl_web_schedule",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5457,6 +5510,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "score",
+    "publicName": "nhl_score",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5474,6 +5528,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "schedule_calendar",
+    "publicName": "nhl_schedule_calendar",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5491,6 +5546,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "playoff_series",
+    "publicName": "nhl_playoff_series",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5511,6 +5567,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "standings",
+    "publicName": "nhl_standings",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5528,6 +5585,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "standings_season",
+    "publicName": "nhl_standings_season",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5540,6 +5598,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_schedule_season",
+    "publicName": "nhl_club_schedule_season",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5561,6 +5620,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_schedule_month",
+    "publicName": "nhl_club_schedule_month",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5581,6 +5641,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_schedule_week",
+    "publicName": "nhl_club_schedule_week",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5601,6 +5662,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_stats",
+    "publicName": "nhl_club_stats",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5627,6 +5689,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_stats_season",
+    "publicName": "nhl_club_stats_season",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5643,6 +5706,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "roster",
+    "publicName": "nhl_roster",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5664,6 +5728,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "roster_season",
+    "publicName": "nhl_roster_season",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5680,6 +5745,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_landing",
+    "publicName": "nhl_player_landing",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5696,6 +5762,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_game_log",
+    "publicName": "nhl_player_game_log",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5722,6 +5789,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_spotlight",
+    "publicName": "nhl_player_spotlight",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5734,6 +5802,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "skater_leaders",
+    "publicName": "nhl_skater_leaders",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5757,6 +5826,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "goalie_leaders",
+    "publicName": "nhl_goalie_leaders",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5780,6 +5850,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_picks",
+    "publicName": "nhl_draft_picks",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5801,6 +5872,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_rankings",
+    "publicName": "nhl_draft_rankings",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5822,6 +5894,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_picks_now",
+    "publicName": "nhl_draft_picks_now",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5834,6 +5907,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_rankings_now",
+    "publicName": "nhl_draft_rankings_now",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5846,6 +5920,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_tracker_picks_now",
+    "publicName": "nhl_draft_tracker_picks_now",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -7747,6 +7822,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "standings",
+    "publicName": "nfl_standings",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7781,6 +7857,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "rosters",
+    "publicName": "nfl_rosters",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7810,6 +7887,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "teams_history",
+    "publicName": "nfl_teams_history",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7834,6 +7912,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "team",
+    "publicName": "nfl_team",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7851,6 +7930,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "weeks",
+    "publicName": "nfl_weeks",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7875,6 +7955,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "weeks_by_date",
+    "publicName": "nfl_weeks_by_date",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7892,6 +7973,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "combine_profiles",
+    "publicName": "nfl_combine_profiles",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7916,6 +7998,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_picks",
+    "publicName": "nfl_draft_picks",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7940,6 +8023,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "injuries",
+    "publicName": "nfl_injuries",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7969,6 +8053,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_summaries",
+    "publicName": "nfl_game_summaries",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7998,6 +8083,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "weekly_game_details",
+    "publicName": "nfl_weekly_game_details",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8051,6 +8137,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "live_team_statistics",
+    "publicName": "nfl_live_team_statistics",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8067,6 +8154,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "live_player_statistics",
+    "publicName": "nfl_live_player_statistics",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8083,6 +8171,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_details_v2",
+    "publicName": "nfl_game_details_v2",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8124,6 +8213,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_details_by_slug",
+    "publicName": "nfl_game_details_by_slug",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -9327,7 +9417,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/bulk"
   },
   {
-    "short": "client_configuration",
+    "short": "client_config",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9397,7 +9487,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/coach_team_associations"
   },
   {
-    "short": "sub_divisions",
+    "short": "division_subdivisions",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9564,7 +9654,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_betting_splits"
   },
   {
-    "short": "boxscore",
+    "short": "game_boxscore",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9633,7 +9723,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_content_story"
   },
   {
-    "short": "featured_game",
+    "short": "game_featured",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9707,7 +9797,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_odds"
   },
   {
-    "short": "game_hq_odds",
+    "short": "game_odds_hq",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9739,7 +9829,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_outcomes"
   },
   {
-    "short": "probable_players",
+    "short": "game_probable_players",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9817,7 +9907,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_rtwp"
   },
   {
-    "short": "ruwt_highlights",
+    "short": "game_ruwt_highlights",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10041,7 +10131,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_ticket"
   },
   {
-    "short": "weather",
+    "short": "game_weather",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10222,7 +10312,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_combine_data"
   },
   {
-    "short": "depth_charts",
+    "short": "player_depth_charts",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10346,7 +10436,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_game_stats"
   },
   {
-    "short": "hockey_player_meta",
+    "short": "player_hockey_meta",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10383,7 +10473,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_injuries"
   },
   {
-    "short": "baseball_player_meta",
+    "short": "player_meta_baseball",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10399,7 +10489,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/baseball_player_meta"
   },
   {
-    "short": "player_golf_metadata",
+    "short": "player_meta_golf",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10436,7 +10526,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_outlook"
   },
   {
-    "short": "position_rankings",
+    "short": "player_position_rankings",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10494,7 +10584,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_rankings"
   },
   {
-    "short": "recruit_team_associations",
+    "short": "player_recruit_associations",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10874,7 +10964,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/team_rankings"
   },
   {
-    "short": "sports_line_team_rankings",
+    "short": "team_rankings_sportsline",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10956,7 +11046,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/team_standings"
   },
   {
-    "short": "sports_line_team_standings",
+    "short": "team_standings_sportsline",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",

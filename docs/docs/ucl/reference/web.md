@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.ucl`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnUclAthleteGamelog`
+## `espnUclPlayerGamelog`
 
-UCL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+UCL — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/uefa.champions/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_gamelog` / `espnUclAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ UCL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_gamelog(...)
+await sdv.ucl.espnUclPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_gamelog(...)
 ```
 
-## `espnUclAthleteOverview`
+## `espnUclPlayerOverview`
 
-UCL — athlete overview (ESPN site.web.api.espn.com (web v3)).
+UCL — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/uefa.champions/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_overview` / `espnUclAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ UCL — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_overview(...)
+await sdv.ucl.espnUclPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_overview(...)
 ```
 
-## `espnUclAthleteSplits`
+## `espnUclPlayerSplits`
 
-UCL — athlete splits (ESPN site.web.api.espn.com (web v3)).
+UCL — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/uefa.champions/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_splits` / `espnUclAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ UCL — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_splits(...)
+await sdv.ucl.espnUclPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_splits(...)
 ```
 
-## `espnUclAthleteStats`
+## `espnUclPlayerStats`
 
-UCL — athlete stats (ESPN site.web.api.espn.com (web v3)).
+UCL — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/uefa.champions/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_stats` / `espnUclAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ UCL — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_stats(...)
+await sdv.ucl.espnUclPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_stats(...)
 ```
 
 ## `espnUclLeaders`

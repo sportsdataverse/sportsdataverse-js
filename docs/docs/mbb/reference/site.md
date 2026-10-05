@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.mbb`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnMbbAthleteBio`
+## `espnMbbPlayerBio`
 
-MBB — athlete bio (ESPN site.api.espn.com).
+MBB — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_bio` / `espnMbbAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ MBB — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_bio(...)
+await sdv.mbb.espnMbbPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_bio(...)
 ```
 
-## `espnMbbAthleteInfo`
+## `espnMbbPlayerInfo`
 
-MBB — athlete info (ESPN site.api.espn.com).
+MBB — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_info` / `espnMbbAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ MBB — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_info(...)
+await sdv.mbb.espnMbbPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_info(...)
 ```
 
-## `espnMbbAthleteNews`
+## `espnMbbPlayerNews`
 
-MBB — athlete news (ESPN site.api.espn.com).
+MBB — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_news` / `espnMbbAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ MBB — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_news(...)
+await sdv.mbb.espnMbbPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_news(...)
 ```
 
 ## `espnMbbCalendar`

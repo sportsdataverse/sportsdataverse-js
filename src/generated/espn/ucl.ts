@@ -33,19 +33,19 @@ const ATHLETE_AWARDS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — player awards (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/awards`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteAwards({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerAwards({ athlete_id: '…' });
  */
-export const espnUclAthleteAwards: WrapperFn = (params = {}) =>
+export const espnUclPlayerAwards: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_AWARDS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteAwards} (py/R parity). */
-export const espn_ucl_athlete_awards = espnUclAthleteAwards;
+/** snake_case alias of {@link espnUclPlayerAwards} (py/R parity). */
+export const espn_ucl_player_awards = espnUclPlayerAwards;
 
 const ATHLETE_BIO_DEF: WrapperDef = {
   "short": "athlete_bio",
@@ -60,19 +60,19 @@ const ATHLETE_BIO_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete bio (ESPN site.api.espn.com).
+ * UCL — player bio (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/athletes/{athlete_id}/bio`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteBio({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerBio({ athlete_id: '…' });
  */
-export const espnUclAthleteBio: WrapperFn = (params = {}) =>
+export const espnUclPlayerBio: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_BIO_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteBio} (py/R parity). */
-export const espn_ucl_athlete_bio = espnUclAthleteBio;
+/** snake_case alias of {@link espnUclPlayerBio} (py/R parity). */
+export const espn_ucl_player_bio = espnUclPlayerBio;
 
 const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
   "short": "athlete_career_stats",
@@ -91,7 +91,7 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — player career stats (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/statistics[/{stat_type}]`
  *
@@ -99,12 +99,12 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
  * @param params.stat_type - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteCareerStats({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerCareerStats({ athlete_id: '…' });
  */
-export const espnUclAthleteCareerStats: WrapperFn = (params = {}) =>
+export const espnUclPlayerCareerStats: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_CAREER_STATS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteCareerStats} (py/R parity). */
-export const espn_ucl_athlete_career_stats = espnUclAthleteCareerStats;
+/** snake_case alias of {@link espnUclPlayerCareerStats} (py/R parity). */
+export const espn_ucl_player_career_stats = espnUclPlayerCareerStats;
 
 const ATHLETE_CONTRACTS_DEF: WrapperDef = {
   "short": "athlete_contracts",
@@ -119,19 +119,19 @@ const ATHLETE_CONTRACTS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — player contracts (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/contracts`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteContracts({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerContracts({ athlete_id: '…' });
  */
-export const espnUclAthleteContracts: WrapperFn = (params = {}) =>
+export const espnUclPlayerContracts: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_CONTRACTS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteContracts} (py/R parity). */
-export const espn_ucl_athlete_contracts = espnUclAthleteContracts;
+/** snake_case alias of {@link espnUclPlayerContracts} (py/R parity). */
+export const espn_ucl_player_contracts = espnUclPlayerContracts;
 
 const ATHLETE_CORE_DEF: WrapperDef = {
   "short": "athlete_core",
@@ -146,19 +146,19 @@ const ATHLETE_CORE_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete core (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — player core (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteCore({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerCore({ athlete_id: '…' });
  */
-export const espnUclAthleteCore: WrapperFn = (params = {}) =>
+export const espnUclPlayerCore: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_CORE_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteCore} (py/R parity). */
-export const espn_ucl_athlete_core = espnUclAthleteCore;
+/** snake_case alias of {@link espnUclPlayerCore} (py/R parity). */
+export const espn_ucl_player_core = espnUclPlayerCore;
 
 const ATHLETE_EVENTLOG_DEF: WrapperDef = {
   "short": "athlete_eventlog",
@@ -173,19 +173,19 @@ const ATHLETE_EVENTLOG_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — player eventlog (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/eventlog`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteEventlog({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerEventlog({ athlete_id: '…' });
  */
-export const espnUclAthleteEventlog: WrapperFn = (params = {}) =>
+export const espnUclPlayerEventlog: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_EVENTLOG_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteEventlog} (py/R parity). */
-export const espn_ucl_athlete_eventlog = espnUclAthleteEventlog;
+/** snake_case alias of {@link espnUclPlayerEventlog} (py/R parity). */
+export const espn_ucl_player_eventlog = espnUclPlayerEventlog;
 
 const ATHLETE_GAMELOG_DEF: WrapperDef = {
   "short": "athlete_gamelog",
@@ -205,7 +205,7 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
   ]
 };
 /**
- * UCL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+ * UCL — player gamelog (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/uefa.champions/athletes/{athlete_id}/gamelog`
  *
@@ -213,12 +213,12 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteGamelog({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerGamelog({ athlete_id: '…' });
  */
-export const espnUclAthleteGamelog: WrapperFn = (params = {}) =>
+export const espnUclPlayerGamelog: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_GAMELOG_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteGamelog} (py/R parity). */
-export const espn_ucl_athlete_gamelog = espnUclAthleteGamelog;
+/** snake_case alias of {@link espnUclPlayerGamelog} (py/R parity). */
+export const espn_ucl_player_gamelog = espnUclPlayerGamelog;
 
 const ATHLETE_INFO_DEF: WrapperDef = {
   "short": "athlete_info",
@@ -233,19 +233,19 @@ const ATHLETE_INFO_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete info (ESPN site.api.espn.com).
+ * UCL — player info (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/athletes/{athlete_id}`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteInfo({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerInfo({ athlete_id: '…' });
  */
-export const espnUclAthleteInfo: WrapperFn = (params = {}) =>
+export const espnUclPlayerInfo: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_INFO_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteInfo} (py/R parity). */
-export const espn_ucl_athlete_info = espnUclAthleteInfo;
+/** snake_case alias of {@link espnUclPlayerInfo} (py/R parity). */
+export const espn_ucl_player_info = espnUclPlayerInfo;
 
 const ATHLETE_INJURIES_DEF: WrapperDef = {
   "short": "athlete_injuries",
@@ -260,19 +260,19 @@ const ATHLETE_INJURIES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — player injuries (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/injuries`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteInjuries({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerInjuries({ athlete_id: '…' });
  */
-export const espnUclAthleteInjuries: WrapperFn = (params = {}) =>
+export const espnUclPlayerInjuries: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_INJURIES_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteInjuries} (py/R parity). */
-export const espn_ucl_athlete_injuries = espnUclAthleteInjuries;
+/** snake_case alias of {@link espnUclPlayerInjuries} (py/R parity). */
+export const espn_ucl_player_injuries = espnUclPlayerInjuries;
 
 const ATHLETE_NEWS_DEF: WrapperDef = {
   "short": "athlete_news",
@@ -287,19 +287,19 @@ const ATHLETE_NEWS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete news (ESPN site.api.espn.com).
+ * UCL — player news (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/athletes/{athlete_id}/news`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteNews({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerNews({ athlete_id: '…' });
  */
-export const espnUclAthleteNews: WrapperFn = (params = {}) =>
+export const espnUclPlayerNews: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_NEWS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteNews} (py/R parity). */
-export const espn_ucl_athlete_news = espnUclAthleteNews;
+/** snake_case alias of {@link espnUclPlayerNews} (py/R parity). */
+export const espn_ucl_player_news = espnUclPlayerNews;
 
 const ATHLETE_NOTES_DEF: WrapperDef = {
   "short": "athlete_notes",
@@ -314,19 +314,19 @@ const ATHLETE_NOTES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — player notes (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/notes`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteNotes({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerNotes({ athlete_id: '…' });
  */
-export const espnUclAthleteNotes: WrapperFn = (params = {}) =>
+export const espnUclPlayerNotes: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_NOTES_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteNotes} (py/R parity). */
-export const espn_ucl_athlete_notes = espnUclAthleteNotes;
+/** snake_case alias of {@link espnUclPlayerNotes} (py/R parity). */
+export const espn_ucl_player_notes = espnUclPlayerNotes;
 
 const ATHLETE_OVERVIEW_DEF: WrapperDef = {
   "short": "athlete_overview",
@@ -341,19 +341,19 @@ const ATHLETE_OVERVIEW_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete overview (ESPN site.web.api.espn.com (web v3)).
+ * UCL — player overview (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/uefa.champions/athletes/{athlete_id}/overview`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteOverview({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerOverview({ athlete_id: '…' });
  */
-export const espnUclAthleteOverview: WrapperFn = (params = {}) =>
+export const espnUclPlayerOverview: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_OVERVIEW_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteOverview} (py/R parity). */
-export const espn_ucl_athlete_overview = espnUclAthleteOverview;
+/** snake_case alias of {@link espnUclPlayerOverview} (py/R parity). */
+export const espn_ucl_player_overview = espnUclPlayerOverview;
 
 const ATHLETE_RECORDS_DEF: WrapperDef = {
   "short": "athlete_records",
@@ -368,19 +368,19 @@ const ATHLETE_RECORDS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete records (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — player records (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/records`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteRecords({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerRecords({ athlete_id: '…' });
  */
-export const espnUclAthleteRecords: WrapperFn = (params = {}) =>
+export const espnUclPlayerRecords: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_RECORDS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteRecords} (py/R parity). */
-export const espn_ucl_athlete_records = espnUclAthleteRecords;
+/** snake_case alias of {@link espnUclPlayerRecords} (py/R parity). */
+export const espn_ucl_player_records = espnUclPlayerRecords;
 
 const ATHLETE_SEASONS_DEF: WrapperDef = {
   "short": "athlete_seasons",
@@ -395,19 +395,19 @@ const ATHLETE_SEASONS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — player seasons (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/seasons`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteSeasons({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerSeasons({ athlete_id: '…' });
  */
-export const espnUclAthleteSeasons: WrapperFn = (params = {}) =>
+export const espnUclPlayerSeasons: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_SEASONS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteSeasons} (py/R parity). */
-export const espn_ucl_athlete_seasons = espnUclAthleteSeasons;
+/** snake_case alias of {@link espnUclPlayerSeasons} (py/R parity). */
+export const espn_ucl_player_seasons = espnUclPlayerSeasons;
 
 const ATHLETE_SPLITS_DEF: WrapperDef = {
   "short": "athlete_splits",
@@ -427,7 +427,7 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
   ]
 };
 /**
- * UCL — athlete splits (ESPN site.web.api.espn.com (web v3)).
+ * UCL — player splits (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/uefa.champions/athletes/{athlete_id}/splits`
  *
@@ -435,12 +435,12 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteSplits({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerSplits({ athlete_id: '…' });
  */
-export const espnUclAthleteSplits: WrapperFn = (params = {}) =>
+export const espnUclPlayerSplits: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_SPLITS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteSplits} (py/R parity). */
-export const espn_ucl_athlete_splits = espnUclAthleteSplits;
+/** snake_case alias of {@link espnUclPlayerSplits} (py/R parity). */
+export const espn_ucl_player_splits = espnUclPlayerSplits;
 
 const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
   "short": "athlete_statisticslog",
@@ -455,19 +455,19 @@ const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/statisticslog`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteStatisticslog({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerStatisticslog({ athlete_id: '…' });
  */
-export const espnUclAthleteStatisticslog: WrapperFn = (params = {}) =>
+export const espnUclPlayerStatisticslog: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_STATISTICSLOG_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteStatisticslog} (py/R parity). */
-export const espn_ucl_athlete_statisticslog = espnUclAthleteStatisticslog;
+/** snake_case alias of {@link espnUclPlayerStatisticslog} (py/R parity). */
+export const espn_ucl_player_statisticslog = espnUclPlayerStatisticslog;
 
 const ATHLETE_STATS_DEF: WrapperDef = {
   "short": "athlete_stats",
@@ -487,7 +487,7 @@ const ATHLETE_STATS_DEF: WrapperDef = {
   ]
 };
 /**
- * UCL — athlete stats (ESPN site.web.api.espn.com (web v3)).
+ * UCL — player stats (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/uefa.champions/athletes/{athlete_id}/stats`
  *
@@ -495,12 +495,12 @@ const ATHLETE_STATS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteStats({ athlete_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerStats({ athlete_id: '…' });
  */
-export const espnUclAthleteStats: WrapperFn = (params = {}) =>
+export const espnUclPlayerStats: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_STATS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteStats} (py/R parity). */
-export const espn_ucl_athlete_stats = espnUclAthleteStats;
+/** snake_case alias of {@link espnUclPlayerStats} (py/R parity). */
+export const espn_ucl_player_stats = espnUclPlayerStats;
 
 const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
   "short": "athlete_vs_athlete",
@@ -518,7 +518,7 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — player vs player (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/vsathlete/{opp_id}`
  *
@@ -526,12 +526,12 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
  * @param params.opp_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
+ * @example await sdv.ucl.espnUclPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
  */
-export const espnUclAthleteVsAthlete: WrapperFn = (params = {}) =>
+export const espnUclPlayerVsPlayer: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_VS_ATHLETE_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthleteVsAthlete} (py/R parity). */
-export const espn_ucl_athlete_vs_athlete = espnUclAthleteVsAthlete;
+/** snake_case alias of {@link espnUclPlayerVsPlayer} (py/R parity). */
+export const espn_ucl_player_vs_player = espnUclPlayerVsPlayer;
 
 const ATHLETES_INDEX_DEF: WrapperDef = {
   "short": "athletes_index",
@@ -559,7 +559,7 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
   ]
 };
 /**
- * UCL — athletes index (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — players index (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes`
  *
@@ -568,12 +568,12 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
  * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclAthletesIndex({});
+ * @example await sdv.ucl.espnUclPlayersIndex({});
  */
-export const espnUclAthletesIndex: WrapperFn = (params = {}) =>
+export const espnUclPlayersIndex: WrapperFn = (params = {}) =>
   callWrapper(ATHLETES_INDEX_DEF, CFG, params);
-/** snake_case alias of {@link espnUclAthletesIndex} (py/R parity). */
-export const espn_ucl_athletes_index = espnUclAthletesIndex;
+/** snake_case alias of {@link espnUclPlayersIndex} (py/R parity). */
+export const espn_ucl_players_index = espnUclPlayersIndex;
 
 const AWARD_DEF: WrapperDef = {
   "short": "award",
@@ -801,19 +801,19 @@ const EVENT_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}`
  *
  * @param params.event_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEvent({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGame({ event_id: '…' });
  */
-export const espnUclEvent: WrapperFn = (params = {}) =>
+export const espnUclGame: WrapperFn = (params = {}) =>
   callWrapper(EVENT_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEvent} (py/R parity). */
-export const espn_ucl_event = espnUclEvent;
+/** snake_case alias of {@link espnUclGame} (py/R parity). */
+export const espn_ucl_game = espnUclGame;
 
 const EVENT_BROADCASTS_DEF: WrapperDef = {
   "short": "event_broadcasts",
@@ -833,7 +833,7 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/broadcasts`
  *
@@ -841,12 +841,12 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventBroadcasts({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGameBroadcasts({ event_id: '…' });
  */
-export const espnUclEventBroadcasts: WrapperFn = (params = {}) =>
+export const espnUclGameBroadcasts: WrapperFn = (params = {}) =>
   callWrapper(EVENT_BROADCASTS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventBroadcasts} (py/R parity). */
-export const espn_ucl_event_broadcasts = espnUclEventBroadcasts;
+/** snake_case alias of {@link espnUclGameBroadcasts} (py/R parity). */
+export const espn_ucl_game_broadcasts = espnUclGameBroadcasts;
 
 const EVENT_COMPETITION_DEF: WrapperDef = {
   "short": "event_competition",
@@ -866,7 +866,7 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event competition (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game competition (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}`
  *
@@ -874,12 +874,12 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventCompetition({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGameCompetition({ event_id: '…' });
  */
-export const espnUclEventCompetition: WrapperFn = (params = {}) =>
+export const espnUclGameCompetition: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITION_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventCompetition} (py/R parity). */
-export const espn_ucl_event_competition = espnUclEventCompetition;
+/** snake_case alias of {@link espnUclGameCompetition} (py/R parity). */
+export const espn_ucl_game_competition = espnUclGameCompetition;
 
 const EVENT_COMPETITOR_DEF: WrapperDef = {
   "short": "event_competitor",
@@ -902,7 +902,7 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event competitor (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game team (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors/{team_id}`
  *
@@ -911,12 +911,12 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventCompetitor({ event_id: '…', team_id: '…' });
+ * @example await sdv.ucl.espnUclGameTeam({ event_id: '…', team_id: '…' });
  */
-export const espnUclEventCompetitor: WrapperFn = (params = {}) =>
+export const espnUclGameTeam: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventCompetitor} (py/R parity). */
-export const espn_ucl_event_competitor = espnUclEventCompetitor;
+/** snake_case alias of {@link espnUclGameTeam} (py/R parity). */
+export const espn_ucl_game_team = espnUclGameTeam;
 
 const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
   "short": "event_competitor_leaders",
@@ -939,7 +939,7 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game team leaders (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
  *
@@ -948,12 +948,12 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventCompetitorLeaders({ event_id: '…', team_id: '…' });
+ * @example await sdv.ucl.espnUclGameTeamLeaders({ event_id: '…', team_id: '…' });
  */
-export const espnUclEventCompetitorLeaders: WrapperFn = (params = {}) =>
+export const espnUclGameTeamLeaders: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_LEADERS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventCompetitorLeaders} (py/R parity). */
-export const espn_ucl_event_competitor_leaders = espnUclEventCompetitorLeaders;
+/** snake_case alias of {@link espnUclGameTeamLeaders} (py/R parity). */
+export const espn_ucl_game_team_leaders = espnUclGameTeamLeaders;
 
 const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
   "short": "event_competitor_linescores",
@@ -976,7 +976,7 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game team linescores (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
  *
@@ -985,12 +985,12 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventCompetitorLinescores({ event_id: '…', team_id: '…' });
+ * @example await sdv.ucl.espnUclGameTeamLinescores({ event_id: '…', team_id: '…' });
  */
-export const espnUclEventCompetitorLinescores: WrapperFn = (params = {}) =>
+export const espnUclGameTeamLinescores: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_LINESCORES_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventCompetitorLinescores} (py/R parity). */
-export const espn_ucl_event_competitor_linescores = espnUclEventCompetitorLinescores;
+/** snake_case alias of {@link espnUclGameTeamLinescores} (py/R parity). */
+export const espn_ucl_game_team_linescores = espnUclGameTeamLinescores;
 
 const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
   "short": "event_competitor_record",
@@ -1013,7 +1013,7 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game team record (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
  *
@@ -1022,12 +1022,12 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventCompetitorRecord({ event_id: '…', team_id: '…' });
+ * @example await sdv.ucl.espnUclGameTeamRecord({ event_id: '…', team_id: '…' });
  */
-export const espnUclEventCompetitorRecord: WrapperFn = (params = {}) =>
+export const espnUclGameTeamRecord: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_RECORD_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventCompetitorRecord} (py/R parity). */
-export const espn_ucl_event_competitor_record = espnUclEventCompetitorRecord;
+/** snake_case alias of {@link espnUclGameTeamRecord} (py/R parity). */
+export const espn_ucl_game_team_record = espnUclGameTeamRecord;
 
 const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
   "short": "event_competitor_roster",
@@ -1050,7 +1050,7 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game team roster (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
  *
@@ -1059,12 +1059,12 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventCompetitorRoster({ event_id: '…', team_id: '…' });
+ * @example await sdv.ucl.espnUclGameTeamRoster({ event_id: '…', team_id: '…' });
  */
-export const espnUclEventCompetitorRoster: WrapperFn = (params = {}) =>
+export const espnUclGameTeamRoster: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_ROSTER_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventCompetitorRoster} (py/R parity). */
-export const espn_ucl_event_competitor_roster = espnUclEventCompetitorRoster;
+/** snake_case alias of {@link espnUclGameTeamRoster} (py/R parity). */
+export const espn_ucl_game_team_roster = espnUclGameTeamRoster;
 
 const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
   "short": "event_competitor_statistics",
@@ -1087,7 +1087,7 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game team statistics (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
  *
@@ -1096,12 +1096,12 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventCompetitorStatistics({ event_id: '…', team_id: '…' });
+ * @example await sdv.ucl.espnUclGameTeamStatistics({ event_id: '…', team_id: '…' });
  */
-export const espnUclEventCompetitorStatistics: WrapperFn = (params = {}) =>
+export const espnUclGameTeamStatistics: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_STATISTICS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventCompetitorStatistics} (py/R parity). */
-export const espn_ucl_event_competitor_statistics = espnUclEventCompetitorStatistics;
+/** snake_case alias of {@link espnUclGameTeamStatistics} (py/R parity). */
+export const espn_ucl_game_team_statistics = espnUclGameTeamStatistics;
 
 const EVENT_COMPETITORS_DEF: WrapperDef = {
   "short": "event_competitors",
@@ -1121,7 +1121,7 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event competitors (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game teams (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors`
  *
@@ -1129,12 +1129,12 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventCompetitors({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGameTeams({ event_id: '…' });
  */
-export const espnUclEventCompetitors: WrapperFn = (params = {}) =>
+export const espnUclGameTeams: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITORS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventCompetitors} (py/R parity). */
-export const espn_ucl_event_competitors = espnUclEventCompetitors;
+/** snake_case alias of {@link espnUclGameTeams} (py/R parity). */
+export const espn_ucl_game_teams = espnUclGameTeams;
 
 const EVENT_LEADERS_DEF: WrapperDef = {
   "short": "event_leaders",
@@ -1154,7 +1154,7 @@ const EVENT_LEADERS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event leaders (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game leaders (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/leaders`
  *
@@ -1162,12 +1162,12 @@ const EVENT_LEADERS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventLeaders({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGameLeaders({ event_id: '…' });
  */
-export const espnUclEventLeaders: WrapperFn = (params = {}) =>
+export const espnUclGameLeaders: WrapperFn = (params = {}) =>
   callWrapper(EVENT_LEADERS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventLeaders} (py/R parity). */
-export const espn_ucl_event_leaders = espnUclEventLeaders;
+/** snake_case alias of {@link espnUclGameLeaders} (py/R parity). */
+export const espn_ucl_game_leaders = espnUclGameLeaders;
 
 const EVENT_ODDS_DEF: WrapperDef = {
   "short": "event_odds",
@@ -1187,7 +1187,7 @@ const EVENT_ODDS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event odds (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game odds (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/odds`
  *
@@ -1195,12 +1195,12 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventOdds({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGameOdds({ event_id: '…' });
  */
-export const espnUclEventOdds: WrapperFn = (params = {}) =>
+export const espnUclGameOdds: WrapperFn = (params = {}) =>
   callWrapper(EVENT_ODDS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventOdds} (py/R parity). */
-export const espn_ucl_event_odds = espnUclEventOdds;
+/** snake_case alias of {@link espnUclGameOdds} (py/R parity). */
+export const espn_ucl_game_odds = espnUclGameOdds;
 
 const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
   "short": "event_official_detail",
@@ -1223,7 +1223,7 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event official detail (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game official detail (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/officials/{official_id}`
  *
@@ -1232,12 +1232,12 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventOfficialDetail({ event_id: '…', official_id: '…' });
+ * @example await sdv.ucl.espnUclGameOfficialDetail({ event_id: '…', official_id: '…' });
  */
-export const espnUclEventOfficialDetail: WrapperFn = (params = {}) =>
+export const espnUclGameOfficialDetail: WrapperFn = (params = {}) =>
   callWrapper(EVENT_OFFICIAL_DETAIL_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventOfficialDetail} (py/R parity). */
-export const espn_ucl_event_official_detail = espnUclEventOfficialDetail;
+/** snake_case alias of {@link espnUclGameOfficialDetail} (py/R parity). */
+export const espn_ucl_game_official_detail = espnUclGameOfficialDetail;
 
 const EVENT_OFFICIALS_DEF: WrapperDef = {
   "short": "event_officials",
@@ -1257,7 +1257,7 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event officials (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game officials (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/officials`
  *
@@ -1265,12 +1265,12 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventOfficials({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGameOfficials({ event_id: '…' });
  */
-export const espnUclEventOfficials: WrapperFn = (params = {}) =>
+export const espnUclGameOfficials: WrapperFn = (params = {}) =>
   callWrapper(EVENT_OFFICIALS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventOfficials} (py/R parity). */
-export const espn_ucl_event_officials = espnUclEventOfficials;
+/** snake_case alias of {@link espnUclGameOfficials} (py/R parity). */
+export const espn_ucl_game_officials = espnUclGameOfficials;
 
 const EVENT_PLAY_DEF: WrapperDef = {
   "short": "event_play",
@@ -1293,7 +1293,7 @@ const EVENT_PLAY_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event play (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game play (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/plays/{play_id}`
  *
@@ -1302,12 +1302,12 @@ const EVENT_PLAY_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventPlay({ event_id: '…', play_id: '…' });
+ * @example await sdv.ucl.espnUclGamePlay({ event_id: '…', play_id: '…' });
  */
-export const espnUclEventPlay: WrapperFn = (params = {}) =>
+export const espnUclGamePlay: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PLAY_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventPlay} (py/R parity). */
-export const espn_ucl_event_play = espnUclEventPlay;
+/** snake_case alias of {@link espnUclGamePlay} (py/R parity). */
+export const espn_ucl_game_play = espnUclGamePlay;
 
 const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
   "short": "event_play_personnel",
@@ -1330,7 +1330,7 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game play personnel (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
  *
@@ -1339,12 +1339,12 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventPlayPersonnel({ event_id: '…', play_id: '…' });
+ * @example await sdv.ucl.espnUclGamePlayPersonnel({ event_id: '…', play_id: '…' });
  */
-export const espnUclEventPlayPersonnel: WrapperFn = (params = {}) =>
+export const espnUclGamePlayPersonnel: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PLAY_PERSONNEL_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventPlayPersonnel} (py/R parity). */
-export const espn_ucl_event_play_personnel = espnUclEventPlayPersonnel;
+/** snake_case alias of {@link espnUclGamePlayPersonnel} (py/R parity). */
+export const espn_ucl_game_play_personnel = espnUclGamePlayPersonnel;
 
 const EVENT_PLAYS_DEF: WrapperDef = {
   "short": "event_plays",
@@ -1370,7 +1370,7 @@ const EVENT_PLAYS_DEF: WrapperDef = {
   ]
 };
 /**
- * UCL — event plays (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game plays (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/plays`
  *
@@ -1379,12 +1379,12 @@ const EVENT_PLAYS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `1000`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventPlays({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGamePlays({ event_id: '…' });
  */
-export const espnUclEventPlays: WrapperFn = (params = {}) =>
+export const espnUclGamePlays: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PLAYS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventPlays} (py/R parity). */
-export const espn_ucl_event_plays = espnUclEventPlays;
+/** snake_case alias of {@link espnUclGamePlays} (py/R parity). */
+export const espn_ucl_game_plays = espnUclGamePlays;
 
 const EVENT_POWERINDEX_DEF: WrapperDef = {
   "short": "event_powerindex",
@@ -1404,7 +1404,7 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game powerindex (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/powerindex`
  *
@@ -1412,12 +1412,12 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventPowerindex({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGamePowerindex({ event_id: '…' });
  */
-export const espnUclEventPowerindex: WrapperFn = (params = {}) =>
+export const espnUclGamePowerindex: WrapperFn = (params = {}) =>
   callWrapper(EVENT_POWERINDEX_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventPowerindex} (py/R parity). */
-export const espn_ucl_event_powerindex = espnUclEventPowerindex;
+/** snake_case alias of {@link espnUclGamePowerindex} (py/R parity). */
+export const espn_ucl_game_powerindex = espnUclGamePowerindex;
 
 const EVENT_PREDICTOR_DEF: WrapperDef = {
   "short": "event_predictor",
@@ -1437,7 +1437,7 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event predictor (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game predictor (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/predictor`
  *
@@ -1445,12 +1445,12 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventPredictor({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGamePredictor({ event_id: '…' });
  */
-export const espnUclEventPredictor: WrapperFn = (params = {}) =>
+export const espnUclGamePredictor: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PREDICTOR_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventPredictor} (py/R parity). */
-export const espn_ucl_event_predictor = espnUclEventPredictor;
+/** snake_case alias of {@link espnUclGamePredictor} (py/R parity). */
+export const espn_ucl_game_predictor = espnUclGamePredictor;
 
 const EVENT_PROBABILITIES_DEF: WrapperDef = {
   "short": "event_probabilities",
@@ -1476,7 +1476,7 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
   ]
 };
 /**
- * UCL — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game probabilities (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/probabilities`
  *
@@ -1485,12 +1485,12 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `300`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventProbabilities({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGameProbabilities({ event_id: '…' });
  */
-export const espnUclEventProbabilities: WrapperFn = (params = {}) =>
+export const espnUclGameProbabilities: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PROBABILITIES_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventProbabilities} (py/R parity). */
-export const espn_ucl_event_probabilities = espnUclEventProbabilities;
+/** snake_case alias of {@link espnUclGameProbabilities} (py/R parity). */
+export const espn_ucl_game_probabilities = espnUclGameProbabilities;
 
 const EVENT_PROPBETS_DEF: WrapperDef = {
   "short": "event_propbets",
@@ -1510,7 +1510,7 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event propbets (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game propbets (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/propbets`
  *
@@ -1518,12 +1518,12 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventPropbets({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGamePropbets({ event_id: '…' });
  */
-export const espnUclEventPropbets: WrapperFn = (params = {}) =>
+export const espnUclGamePropbets: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PROPBETS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventPropbets} (py/R parity). */
-export const espn_ucl_event_propbets = espnUclEventPropbets;
+/** snake_case alias of {@link espnUclGamePropbets} (py/R parity). */
+export const espn_ucl_game_propbets = espnUclGamePropbets;
 
 const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
   "short": "event_scoringplays",
@@ -1543,7 +1543,7 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/scoringplays`
  *
@@ -1551,12 +1551,12 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventScoringplays({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGameScoringplays({ event_id: '…' });
  */
-export const espnUclEventScoringplays: WrapperFn = (params = {}) =>
+export const espnUclGameScoringplays: WrapperFn = (params = {}) =>
   callWrapper(EVENT_SCORINGPLAYS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventScoringplays} (py/R parity). */
-export const espn_ucl_event_scoringplays = espnUclEventScoringplays;
+/** snake_case alias of {@link espnUclGameScoringplays} (py/R parity). */
+export const espn_ucl_game_scoringplays = espnUclGameScoringplays;
 
 const EVENT_SITUATION_DEF: WrapperDef = {
   "short": "event_situation",
@@ -1576,7 +1576,7 @@ const EVENT_SITUATION_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event situation (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game situation (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/situation`
  *
@@ -1584,12 +1584,12 @@ const EVENT_SITUATION_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventSituation({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGameSituation({ event_id: '…' });
  */
-export const espnUclEventSituation: WrapperFn = (params = {}) =>
+export const espnUclGameSituation: WrapperFn = (params = {}) =>
   callWrapper(EVENT_SITUATION_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventSituation} (py/R parity). */
-export const espn_ucl_event_situation = espnUclEventSituation;
+/** snake_case alias of {@link espnUclGameSituation} (py/R parity). */
+export const espn_ucl_game_situation = espnUclGameSituation;
 
 const EVENT_STATUS_DEF: WrapperDef = {
   "short": "event_status",
@@ -1609,7 +1609,7 @@ const EVENT_STATUS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * UCL — event status (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — game status (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/status`
  *
@@ -1617,12 +1617,12 @@ const EVENT_STATUS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEventStatus({ event_id: '…' });
+ * @example await sdv.ucl.espnUclGameStatus({ event_id: '…' });
  */
-export const espnUclEventStatus: WrapperFn = (params = {}) =>
+export const espnUclGameStatus: WrapperFn = (params = {}) =>
   callWrapper(EVENT_STATUS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEventStatus} (py/R parity). */
-export const espn_ucl_event_status = espnUclEventStatus;
+/** snake_case alias of {@link espnUclGameStatus} (py/R parity). */
+export const espn_ucl_game_status = espnUclGameStatus;
 
 const EVENTS_DEF: WrapperDef = {
   "short": "events",
@@ -1643,7 +1643,7 @@ const EVENTS_DEF: WrapperDef = {
   ]
 };
 /**
- * UCL — events (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — games (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events`
  *
@@ -1651,12 +1651,12 @@ const EVENTS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclEvents({});
+ * @example await sdv.ucl.espnUclGames({});
  */
-export const espnUclEvents: WrapperFn = (params = {}) =>
+export const espnUclGames: WrapperFn = (params = {}) =>
   callWrapper(EVENTS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclEvents} (py/R parity). */
-export const espn_ucl_events = espnUclEvents;
+/** snake_case alias of {@link espnUclGames} (py/R parity). */
+export const espn_ucl_games = espnUclGames;
 
 const FRANCHISE_DEF: WrapperDef = {
   "short": "franchise",
@@ -2015,7 +2015,7 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
   ]
 };
 /**
- * UCL — season athletes (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — season players (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/seasons/{season}/athletes`
  *
@@ -2024,12 +2024,12 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
  * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclSeasonAthletes({ season: '…' });
+ * @example await sdv.ucl.espnUclSeasonPlayers({ season: '…' });
  */
-export const espnUclSeasonAthletes: WrapperFn = (params = {}) =>
+export const espnUclSeasonPlayers: WrapperFn = (params = {}) =>
   callWrapper(SEASON_ATHLETES_DEF, CFG, params);
-/** snake_case alias of {@link espnUclSeasonAthletes} (py/R parity). */
-export const espn_ucl_season_athletes = espnUclSeasonAthletes;
+/** snake_case alias of {@link espnUclSeasonPlayers} (py/R parity). */
+export const espn_ucl_season_players = espnUclSeasonPlayers;
 
 const SEASON_AWARDS_DEF: WrapperDef = {
   "short": "season_awards",
@@ -2720,7 +2720,7 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
   ]
 };
 /**
- * UCL — season week events (ESPN sports.core.api.espn.com (core v2)).
+ * UCL — season week games (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/seasons/{season}/types/{season_type}/weeks/{week}/events`
  *
@@ -2730,12 +2730,12 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.ucl.espnUclSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
+ * @example await sdv.ucl.espnUclSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
  */
-export const espnUclSeasonWeekEvents: WrapperFn = (params = {}) =>
+export const espnUclSeasonWeekGames: WrapperFn = (params = {}) =>
   callWrapper(SEASON_WEEK_EVENTS_DEF, CFG, params);
-/** snake_case alias of {@link espnUclSeasonWeekEvents} (py/R parity). */
-export const espn_ucl_season_week_events = espnUclSeasonWeekEvents;
+/** snake_case alias of {@link espnUclSeasonWeekGames} (py/R parity). */
+export const espn_ucl_season_week_games = espnUclSeasonWeekGames;
 
 const SEASON_WEEK_POWERINDEX_DEF: WrapperDef = {
   "short": "season_week_powerindex",

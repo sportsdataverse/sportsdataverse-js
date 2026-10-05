@@ -6,7 +6,7 @@ export type Scope = "universal" | "ncaa" | "football" | "mlb";
 
 /**
  * A league's binding into the ESPN core: the ESPN `(sport, league)` slugs plus
- * the public `prefix` used in generated wrapper names (`espn_<prefix>_<short>`).
+ * the public `prefix` used in generated wrapper names (`espn_<prefix>_<name>`).
  * `leagueParam` leagues (soccer/cricket) accept a `league` call-param override.
  */
 export interface LeagueConfig {
@@ -15,6 +15,12 @@ export interface LeagueConfig {
   league: string;
   scopes: Scope[];
   leagueParam?: boolean;
+  /**
+   * League-specific v4 public shorts, keyed by wrapper `short`, where they
+   * differ from the wrapper's own `publicShort` (sdv-py's curated renames and
+   * collision-versioned names, e.g. `athlete_stats` -> `player_stats_v3`).
+   */
+  publicShorts?: Record<string, string>;
 }
 
 /** A query parameter: the call-param `name` -> ESPN `queryKey`, with optional default. */
@@ -54,7 +60,19 @@ export interface PathParam {
  * `{sport}`/`{league}` — see `src/core/flat.ts` for the resolver.
  */
 export interface WrapperDef {
+  /** The endpoint's sdv-py short name (keys parsers, the playground proxy, overlays). */
   short: string;
+  /**
+   * ESPN only: the v4 public short when it differs from `short` (sdv-py's
+   * convention rename, e.g. `athlete_gamelog` -> `player_gamelog`). The public
+   * name is `espn_<prefix>_<cfg.publicShorts[short] ?? publicShort ?? short>`.
+   */
+  publicShort?: string;
+  /**
+   * Flat only: the v4 public snake_case name when it differs from
+   * `<api>_<short>` (sdv-py's name pattern, e.g. `nhl_boxscore`).
+   */
+  publicName?: string;
   /**
    * ESPN URL family slug (keys into `HOSTS`). Present on every ESPN wrapper;
    * omitted on flat-API wrappers (`flat: true`), which carry an absolute `host`.

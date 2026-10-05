@@ -13,6 +13,7 @@ ba5c7ba63f0765abd7456e59860e645ec5b240ad  endpoints/nhl_edge.yaml
 f50632edd02cf0132d84c4bb8f9e337a81390f7c  endpoints/releases.yaml
 897a37ee12db31a9d882daca7b4437f84e96f90b  endpoints/torvik.yaml
 060fe00efe4e956e81ba541fc4b566fca24fa6bc  endpoints/yahoo_shangrila.yaml
+27e776b2c23a4dc875141df8f9050c2ddec8280d  espn_rename_map.yaml
 66d9c63013519ef9f8f41db3ab38d8c5f534b3ea  schemas/injuries.yaml
 4a49ea111e4fd04d50b4a33c1afc3a70b1a7e32b  schemas/injuries/cfb.yaml
 4a49ea111e4fd04d50b4a33c1afc3a70b1a7e32b  schemas/injuries/mlb.yaml

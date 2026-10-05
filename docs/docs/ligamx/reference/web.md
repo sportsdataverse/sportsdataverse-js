@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.ligamx`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnLigamxAthleteGamelog`
+## `espnLigamxPlayerGamelog`
 
-LIGAMX — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+LIGAMX — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/mex.1/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_gamelog` / `espnLigamxAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ LIGAMX — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_gamelog(...)
+await sdv.ligamx.espnLigamxPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_gamelog(...)
 ```
 
-## `espnLigamxAthleteOverview`
+## `espnLigamxPlayerOverview`
 
-LIGAMX — athlete overview (ESPN site.web.api.espn.com (web v3)).
+LIGAMX — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/mex.1/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_overview` / `espnLigamxAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ LIGAMX — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_overview(...)
+await sdv.ligamx.espnLigamxPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_overview(...)
 ```
 
-## `espnLigamxAthleteSplits`
+## `espnLigamxPlayerSplits`
 
-LIGAMX — athlete splits (ESPN site.web.api.espn.com (web v3)).
+LIGAMX — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/mex.1/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_splits` / `espnLigamxAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ LIGAMX — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_splits(...)
+await sdv.ligamx.espnLigamxPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_splits(...)
 ```
 
-## `espnLigamxAthleteStats`
+## `espnLigamxPlayerStats`
 
-LIGAMX — athlete stats (ESPN site.web.api.espn.com (web v3)).
+LIGAMX — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/mex.1/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_stats` / `espnLigamxAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ LIGAMX — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_stats(...)
+await sdv.ligamx.espnLigamxPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_stats(...)
 ```
 
 ## `espnLigamxLeaders`

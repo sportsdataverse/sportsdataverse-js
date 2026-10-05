@@ -34,19 +34,19 @@ const ATHLETE_AWARDS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — player awards (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/awards`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteAwards({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerAwards({ athlete_id: '…' });
  */
-export const espnMbbAthleteAwards: WrapperFn = (params = {}) =>
+export const espnMbbPlayerAwards: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_AWARDS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteAwards} (py/R parity). */
-export const espn_mbb_athlete_awards = espnMbbAthleteAwards;
+/** snake_case alias of {@link espnMbbPlayerAwards} (py/R parity). */
+export const espn_mbb_player_awards = espnMbbPlayerAwards;
 
 const ATHLETE_BIO_DEF: WrapperDef = {
   "short": "athlete_bio",
@@ -61,19 +61,19 @@ const ATHLETE_BIO_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete bio (ESPN site.api.espn.com).
+ * MBB — player bio (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/athletes/{athlete_id}/bio`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteBio({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerBio({ athlete_id: '…' });
  */
-export const espnMbbAthleteBio: WrapperFn = (params = {}) =>
+export const espnMbbPlayerBio: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_BIO_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteBio} (py/R parity). */
-export const espn_mbb_athlete_bio = espnMbbAthleteBio;
+/** snake_case alias of {@link espnMbbPlayerBio} (py/R parity). */
+export const espn_mbb_player_bio = espnMbbPlayerBio;
 
 const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
   "short": "athlete_career_stats",
@@ -92,7 +92,7 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — player career stats (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/statistics[/{stat_type}]`
  *
@@ -100,12 +100,12 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
  * @param params.stat_type - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteCareerStats({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerCareerStats({ athlete_id: '…' });
  */
-export const espnMbbAthleteCareerStats: WrapperFn = (params = {}) =>
+export const espnMbbPlayerCareerStats: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_CAREER_STATS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteCareerStats} (py/R parity). */
-export const espn_mbb_athlete_career_stats = espnMbbAthleteCareerStats;
+/** snake_case alias of {@link espnMbbPlayerCareerStats} (py/R parity). */
+export const espn_mbb_player_career_stats = espnMbbPlayerCareerStats;
 
 const ATHLETE_CONTRACTS_DEF: WrapperDef = {
   "short": "athlete_contracts",
@@ -120,19 +120,19 @@ const ATHLETE_CONTRACTS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — player contracts (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/contracts`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteContracts({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerContracts({ athlete_id: '…' });
  */
-export const espnMbbAthleteContracts: WrapperFn = (params = {}) =>
+export const espnMbbPlayerContracts: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_CONTRACTS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteContracts} (py/R parity). */
-export const espn_mbb_athlete_contracts = espnMbbAthleteContracts;
+/** snake_case alias of {@link espnMbbPlayerContracts} (py/R parity). */
+export const espn_mbb_player_contracts = espnMbbPlayerContracts;
 
 const ATHLETE_CORE_DEF: WrapperDef = {
   "short": "athlete_core",
@@ -147,19 +147,19 @@ const ATHLETE_CORE_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete core (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — player core (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteCore({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerCore({ athlete_id: '…' });
  */
-export const espnMbbAthleteCore: WrapperFn = (params = {}) =>
+export const espnMbbPlayerCore: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_CORE_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteCore} (py/R parity). */
-export const espn_mbb_athlete_core = espnMbbAthleteCore;
+/** snake_case alias of {@link espnMbbPlayerCore} (py/R parity). */
+export const espn_mbb_player_core = espnMbbPlayerCore;
 
 const ATHLETE_EVENTLOG_DEF: WrapperDef = {
   "short": "athlete_eventlog",
@@ -174,19 +174,19 @@ const ATHLETE_EVENTLOG_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — player eventlog (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/eventlog`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteEventlog({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerEventlog({ athlete_id: '…' });
  */
-export const espnMbbAthleteEventlog: WrapperFn = (params = {}) =>
+export const espnMbbPlayerEventlog: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_EVENTLOG_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteEventlog} (py/R parity). */
-export const espn_mbb_athlete_eventlog = espnMbbAthleteEventlog;
+/** snake_case alias of {@link espnMbbPlayerEventlog} (py/R parity). */
+export const espn_mbb_player_eventlog = espnMbbPlayerEventlog;
 
 const ATHLETE_GAMELOG_DEF: WrapperDef = {
   "short": "athlete_gamelog",
@@ -206,7 +206,7 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
   ]
 };
 /**
- * MBB — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+ * MBB — player gamelog (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-college-basketball/athletes/{athlete_id}/gamelog`
  *
@@ -214,12 +214,12 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteGamelog({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerGamelog({ athlete_id: '…' });
  */
-export const espnMbbAthleteGamelog: WrapperFn = (params = {}) =>
+export const espnMbbPlayerGamelog: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_GAMELOG_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteGamelog} (py/R parity). */
-export const espn_mbb_athlete_gamelog = espnMbbAthleteGamelog;
+/** snake_case alias of {@link espnMbbPlayerGamelog} (py/R parity). */
+export const espn_mbb_player_gamelog = espnMbbPlayerGamelog;
 
 const ATHLETE_INFO_DEF: WrapperDef = {
   "short": "athlete_info",
@@ -234,19 +234,19 @@ const ATHLETE_INFO_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete info (ESPN site.api.espn.com).
+ * MBB — player info (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/athletes/{athlete_id}`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteInfo({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerInfo({ athlete_id: '…' });
  */
-export const espnMbbAthleteInfo: WrapperFn = (params = {}) =>
+export const espnMbbPlayerInfo: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_INFO_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteInfo} (py/R parity). */
-export const espn_mbb_athlete_info = espnMbbAthleteInfo;
+/** snake_case alias of {@link espnMbbPlayerInfo} (py/R parity). */
+export const espn_mbb_player_info = espnMbbPlayerInfo;
 
 const ATHLETE_INJURIES_DEF: WrapperDef = {
   "short": "athlete_injuries",
@@ -261,19 +261,19 @@ const ATHLETE_INJURIES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — player injuries (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/injuries`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteInjuries({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerInjuries({ athlete_id: '…' });
  */
-export const espnMbbAthleteInjuries: WrapperFn = (params = {}) =>
+export const espnMbbPlayerInjuries: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_INJURIES_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteInjuries} (py/R parity). */
-export const espn_mbb_athlete_injuries = espnMbbAthleteInjuries;
+/** snake_case alias of {@link espnMbbPlayerInjuries} (py/R parity). */
+export const espn_mbb_player_injuries = espnMbbPlayerInjuries;
 
 const ATHLETE_NEWS_DEF: WrapperDef = {
   "short": "athlete_news",
@@ -288,19 +288,19 @@ const ATHLETE_NEWS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete news (ESPN site.api.espn.com).
+ * MBB — player news (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/athletes/{athlete_id}/news`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteNews({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerNews({ athlete_id: '…' });
  */
-export const espnMbbAthleteNews: WrapperFn = (params = {}) =>
+export const espnMbbPlayerNews: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_NEWS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteNews} (py/R parity). */
-export const espn_mbb_athlete_news = espnMbbAthleteNews;
+/** snake_case alias of {@link espnMbbPlayerNews} (py/R parity). */
+export const espn_mbb_player_news = espnMbbPlayerNews;
 
 const ATHLETE_NOTES_DEF: WrapperDef = {
   "short": "athlete_notes",
@@ -315,19 +315,19 @@ const ATHLETE_NOTES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — player notes (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/notes`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteNotes({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerNotes({ athlete_id: '…' });
  */
-export const espnMbbAthleteNotes: WrapperFn = (params = {}) =>
+export const espnMbbPlayerNotes: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_NOTES_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteNotes} (py/R parity). */
-export const espn_mbb_athlete_notes = espnMbbAthleteNotes;
+/** snake_case alias of {@link espnMbbPlayerNotes} (py/R parity). */
+export const espn_mbb_player_notes = espnMbbPlayerNotes;
 
 const ATHLETE_OVERVIEW_DEF: WrapperDef = {
   "short": "athlete_overview",
@@ -342,19 +342,19 @@ const ATHLETE_OVERVIEW_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete overview (ESPN site.web.api.espn.com (web v3)).
+ * MBB — player overview (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-college-basketball/athletes/{athlete_id}/overview`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteOverview({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerOverview({ athlete_id: '…' });
  */
-export const espnMbbAthleteOverview: WrapperFn = (params = {}) =>
+export const espnMbbPlayerOverview: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_OVERVIEW_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteOverview} (py/R parity). */
-export const espn_mbb_athlete_overview = espnMbbAthleteOverview;
+/** snake_case alias of {@link espnMbbPlayerOverview} (py/R parity). */
+export const espn_mbb_player_overview = espnMbbPlayerOverview;
 
 const ATHLETE_RECORDS_DEF: WrapperDef = {
   "short": "athlete_records",
@@ -369,19 +369,19 @@ const ATHLETE_RECORDS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete records (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — player records (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/records`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteRecords({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerRecords({ athlete_id: '…' });
  */
-export const espnMbbAthleteRecords: WrapperFn = (params = {}) =>
+export const espnMbbPlayerRecords: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_RECORDS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteRecords} (py/R parity). */
-export const espn_mbb_athlete_records = espnMbbAthleteRecords;
+/** snake_case alias of {@link espnMbbPlayerRecords} (py/R parity). */
+export const espn_mbb_player_records = espnMbbPlayerRecords;
 
 const ATHLETE_SEASONS_DEF: WrapperDef = {
   "short": "athlete_seasons",
@@ -396,19 +396,19 @@ const ATHLETE_SEASONS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — player seasons (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/seasons`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteSeasons({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerSeasons({ athlete_id: '…' });
  */
-export const espnMbbAthleteSeasons: WrapperFn = (params = {}) =>
+export const espnMbbPlayerSeasons: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_SEASONS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteSeasons} (py/R parity). */
-export const espn_mbb_athlete_seasons = espnMbbAthleteSeasons;
+/** snake_case alias of {@link espnMbbPlayerSeasons} (py/R parity). */
+export const espn_mbb_player_seasons = espnMbbPlayerSeasons;
 
 const ATHLETE_SPLITS_DEF: WrapperDef = {
   "short": "athlete_splits",
@@ -428,7 +428,7 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
   ]
 };
 /**
- * MBB — athlete splits (ESPN site.web.api.espn.com (web v3)).
+ * MBB — player splits (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-college-basketball/athletes/{athlete_id}/splits`
  *
@@ -436,12 +436,12 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteSplits({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerSplits({ athlete_id: '…' });
  */
-export const espnMbbAthleteSplits: WrapperFn = (params = {}) =>
+export const espnMbbPlayerSplits: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_SPLITS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteSplits} (py/R parity). */
-export const espn_mbb_athlete_splits = espnMbbAthleteSplits;
+/** snake_case alias of {@link espnMbbPlayerSplits} (py/R parity). */
+export const espn_mbb_player_splits = espnMbbPlayerSplits;
 
 const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
   "short": "athlete_statisticslog",
@@ -456,19 +456,19 @@ const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/statisticslog`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteStatisticslog({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerStatisticslog({ athlete_id: '…' });
  */
-export const espnMbbAthleteStatisticslog: WrapperFn = (params = {}) =>
+export const espnMbbPlayerStatisticslog: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_STATISTICSLOG_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteStatisticslog} (py/R parity). */
-export const espn_mbb_athlete_statisticslog = espnMbbAthleteStatisticslog;
+/** snake_case alias of {@link espnMbbPlayerStatisticslog} (py/R parity). */
+export const espn_mbb_player_statisticslog = espnMbbPlayerStatisticslog;
 
 const ATHLETE_STATS_DEF: WrapperDef = {
   "short": "athlete_stats",
@@ -488,7 +488,7 @@ const ATHLETE_STATS_DEF: WrapperDef = {
   ]
 };
 /**
- * MBB — athlete stats (ESPN site.web.api.espn.com (web v3)).
+ * MBB — player stats v3 (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-college-basketball/athletes/{athlete_id}/stats`
  *
@@ -496,12 +496,12 @@ const ATHLETE_STATS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteStats({ athlete_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerStatsV3({ athlete_id: '…' });
  */
-export const espnMbbAthleteStats: WrapperFn = (params = {}) =>
+export const espnMbbPlayerStatsV3: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_STATS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteStats} (py/R parity). */
-export const espn_mbb_athlete_stats = espnMbbAthleteStats;
+/** snake_case alias of {@link espnMbbPlayerStatsV3} (py/R parity). */
+export const espn_mbb_player_stats_v3 = espnMbbPlayerStatsV3;
 
 const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
   "short": "athlete_vs_athlete",
@@ -519,7 +519,7 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — player vs player (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/vsathlete/{opp_id}`
  *
@@ -527,12 +527,12 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
  * @param params.opp_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
+ * @example await sdv.mbb.espnMbbPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
  */
-export const espnMbbAthleteVsAthlete: WrapperFn = (params = {}) =>
+export const espnMbbPlayerVsPlayer: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_VS_ATHLETE_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthleteVsAthlete} (py/R parity). */
-export const espn_mbb_athlete_vs_athlete = espnMbbAthleteVsAthlete;
+/** snake_case alias of {@link espnMbbPlayerVsPlayer} (py/R parity). */
+export const espn_mbb_player_vs_player = espnMbbPlayerVsPlayer;
 
 const ATHLETES_INDEX_DEF: WrapperDef = {
   "short": "athletes_index",
@@ -560,7 +560,7 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
   ]
 };
 /**
- * MBB — athletes index (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — players index (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes`
  *
@@ -569,12 +569,12 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
  * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbAthletesIndex({});
+ * @example await sdv.mbb.espnMbbPlayersIndex({});
  */
-export const espnMbbAthletesIndex: WrapperFn = (params = {}) =>
+export const espnMbbPlayersIndex: WrapperFn = (params = {}) =>
   callWrapper(ATHLETES_INDEX_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbAthletesIndex} (py/R parity). */
-export const espn_mbb_athletes_index = espnMbbAthletesIndex;
+/** snake_case alias of {@link espnMbbPlayersIndex} (py/R parity). */
+export const espn_mbb_players_index = espnMbbPlayersIndex;
 
 const AWARD_DEF: WrapperDef = {
   "short": "award",
@@ -802,19 +802,19 @@ const EVENT_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}`
  *
  * @param params.event_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEvent({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGame({ event_id: '…' });
  */
-export const espnMbbEvent: WrapperFn = (params = {}) =>
+export const espnMbbGame: WrapperFn = (params = {}) =>
   callWrapper(EVENT_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEvent} (py/R parity). */
-export const espn_mbb_event = espnMbbEvent;
+/** snake_case alias of {@link espnMbbGame} (py/R parity). */
+export const espn_mbb_game = espnMbbGame;
 
 const EVENT_BROADCASTS_DEF: WrapperDef = {
   "short": "event_broadcasts",
@@ -834,7 +834,7 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/broadcasts`
  *
@@ -842,12 +842,12 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventBroadcasts({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGameBroadcasts({ event_id: '…' });
  */
-export const espnMbbEventBroadcasts: WrapperFn = (params = {}) =>
+export const espnMbbGameBroadcasts: WrapperFn = (params = {}) =>
   callWrapper(EVENT_BROADCASTS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventBroadcasts} (py/R parity). */
-export const espn_mbb_event_broadcasts = espnMbbEventBroadcasts;
+/** snake_case alias of {@link espnMbbGameBroadcasts} (py/R parity). */
+export const espn_mbb_game_broadcasts = espnMbbGameBroadcasts;
 
 const EVENT_COMPETITION_DEF: WrapperDef = {
   "short": "event_competition",
@@ -867,7 +867,7 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event competition (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game competition (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}`
  *
@@ -875,12 +875,12 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventCompetition({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGameCompetition({ event_id: '…' });
  */
-export const espnMbbEventCompetition: WrapperFn = (params = {}) =>
+export const espnMbbGameCompetition: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITION_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventCompetition} (py/R parity). */
-export const espn_mbb_event_competition = espnMbbEventCompetition;
+/** snake_case alias of {@link espnMbbGameCompetition} (py/R parity). */
+export const espn_mbb_game_competition = espnMbbGameCompetition;
 
 const EVENT_COMPETITOR_DEF: WrapperDef = {
   "short": "event_competitor",
@@ -903,7 +903,7 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event competitor (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game team (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}`
  *
@@ -912,12 +912,12 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventCompetitor({ event_id: '…', team_id: '…' });
+ * @example await sdv.mbb.espnMbbGameTeam({ event_id: '…', team_id: '…' });
  */
-export const espnMbbEventCompetitor: WrapperFn = (params = {}) =>
+export const espnMbbGameTeam: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventCompetitor} (py/R parity). */
-export const espn_mbb_event_competitor = espnMbbEventCompetitor;
+/** snake_case alias of {@link espnMbbGameTeam} (py/R parity). */
+export const espn_mbb_game_team = espnMbbGameTeam;
 
 const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
   "short": "event_competitor_leaders",
@@ -940,7 +940,7 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game team leaders (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
  *
@@ -949,12 +949,12 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventCompetitorLeaders({ event_id: '…', team_id: '…' });
+ * @example await sdv.mbb.espnMbbGameTeamLeaders({ event_id: '…', team_id: '…' });
  */
-export const espnMbbEventCompetitorLeaders: WrapperFn = (params = {}) =>
+export const espnMbbGameTeamLeaders: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_LEADERS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventCompetitorLeaders} (py/R parity). */
-export const espn_mbb_event_competitor_leaders = espnMbbEventCompetitorLeaders;
+/** snake_case alias of {@link espnMbbGameTeamLeaders} (py/R parity). */
+export const espn_mbb_game_team_leaders = espnMbbGameTeamLeaders;
 
 const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
   "short": "event_competitor_linescores",
@@ -977,7 +977,7 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game team linescores (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
  *
@@ -986,12 +986,12 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventCompetitorLinescores({ event_id: '…', team_id: '…' });
+ * @example await sdv.mbb.espnMbbGameTeamLinescores({ event_id: '…', team_id: '…' });
  */
-export const espnMbbEventCompetitorLinescores: WrapperFn = (params = {}) =>
+export const espnMbbGameTeamLinescores: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_LINESCORES_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventCompetitorLinescores} (py/R parity). */
-export const espn_mbb_event_competitor_linescores = espnMbbEventCompetitorLinescores;
+/** snake_case alias of {@link espnMbbGameTeamLinescores} (py/R parity). */
+export const espn_mbb_game_team_linescores = espnMbbGameTeamLinescores;
 
 const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
   "short": "event_competitor_record",
@@ -1014,7 +1014,7 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game team record (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
  *
@@ -1023,12 +1023,12 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventCompetitorRecord({ event_id: '…', team_id: '…' });
+ * @example await sdv.mbb.espnMbbGameTeamRecord({ event_id: '…', team_id: '…' });
  */
-export const espnMbbEventCompetitorRecord: WrapperFn = (params = {}) =>
+export const espnMbbGameTeamRecord: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_RECORD_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventCompetitorRecord} (py/R parity). */
-export const espn_mbb_event_competitor_record = espnMbbEventCompetitorRecord;
+/** snake_case alias of {@link espnMbbGameTeamRecord} (py/R parity). */
+export const espn_mbb_game_team_record = espnMbbGameTeamRecord;
 
 const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
   "short": "event_competitor_roster",
@@ -1051,7 +1051,7 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game team roster (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
  *
@@ -1060,12 +1060,12 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventCompetitorRoster({ event_id: '…', team_id: '…' });
+ * @example await sdv.mbb.espnMbbGameTeamRoster({ event_id: '…', team_id: '…' });
  */
-export const espnMbbEventCompetitorRoster: WrapperFn = (params = {}) =>
+export const espnMbbGameTeamRoster: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_ROSTER_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventCompetitorRoster} (py/R parity). */
-export const espn_mbb_event_competitor_roster = espnMbbEventCompetitorRoster;
+/** snake_case alias of {@link espnMbbGameTeamRoster} (py/R parity). */
+export const espn_mbb_game_team_roster = espnMbbGameTeamRoster;
 
 const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
   "short": "event_competitor_statistics",
@@ -1088,7 +1088,7 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game team statistics (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
  *
@@ -1097,12 +1097,12 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventCompetitorStatistics({ event_id: '…', team_id: '…' });
+ * @example await sdv.mbb.espnMbbGameTeamStatistics({ event_id: '…', team_id: '…' });
  */
-export const espnMbbEventCompetitorStatistics: WrapperFn = (params = {}) =>
+export const espnMbbGameTeamStatistics: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_STATISTICS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventCompetitorStatistics} (py/R parity). */
-export const espn_mbb_event_competitor_statistics = espnMbbEventCompetitorStatistics;
+/** snake_case alias of {@link espnMbbGameTeamStatistics} (py/R parity). */
+export const espn_mbb_game_team_statistics = espnMbbGameTeamStatistics;
 
 const EVENT_COMPETITORS_DEF: WrapperDef = {
   "short": "event_competitors",
@@ -1122,7 +1122,7 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event competitors (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game teams (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors`
  *
@@ -1130,12 +1130,12 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventCompetitors({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGameTeams({ event_id: '…' });
  */
-export const espnMbbEventCompetitors: WrapperFn = (params = {}) =>
+export const espnMbbGameTeams: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITORS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventCompetitors} (py/R parity). */
-export const espn_mbb_event_competitors = espnMbbEventCompetitors;
+/** snake_case alias of {@link espnMbbGameTeams} (py/R parity). */
+export const espn_mbb_game_teams = espnMbbGameTeams;
 
 const EVENT_LEADERS_DEF: WrapperDef = {
   "short": "event_leaders",
@@ -1155,7 +1155,7 @@ const EVENT_LEADERS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event leaders (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game leaders (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/leaders`
  *
@@ -1163,12 +1163,12 @@ const EVENT_LEADERS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventLeaders({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGameLeaders({ event_id: '…' });
  */
-export const espnMbbEventLeaders: WrapperFn = (params = {}) =>
+export const espnMbbGameLeaders: WrapperFn = (params = {}) =>
   callWrapper(EVENT_LEADERS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventLeaders} (py/R parity). */
-export const espn_mbb_event_leaders = espnMbbEventLeaders;
+/** snake_case alias of {@link espnMbbGameLeaders} (py/R parity). */
+export const espn_mbb_game_leaders = espnMbbGameLeaders;
 
 const EVENT_ODDS_DEF: WrapperDef = {
   "short": "event_odds",
@@ -1188,7 +1188,7 @@ const EVENT_ODDS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event odds (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game odds (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/odds`
  *
@@ -1196,12 +1196,12 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventOdds({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGameOdds({ event_id: '…' });
  */
-export const espnMbbEventOdds: WrapperFn = (params = {}) =>
+export const espnMbbGameOdds: WrapperFn = (params = {}) =>
   callWrapper(EVENT_ODDS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventOdds} (py/R parity). */
-export const espn_mbb_event_odds = espnMbbEventOdds;
+/** snake_case alias of {@link espnMbbGameOdds} (py/R parity). */
+export const espn_mbb_game_odds = espnMbbGameOdds;
 
 const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
   "short": "event_official_detail",
@@ -1224,7 +1224,7 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event official detail (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game official detail (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/officials/{official_id}`
  *
@@ -1233,12 +1233,12 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventOfficialDetail({ event_id: '…', official_id: '…' });
+ * @example await sdv.mbb.espnMbbGameOfficialDetail({ event_id: '…', official_id: '…' });
  */
-export const espnMbbEventOfficialDetail: WrapperFn = (params = {}) =>
+export const espnMbbGameOfficialDetail: WrapperFn = (params = {}) =>
   callWrapper(EVENT_OFFICIAL_DETAIL_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventOfficialDetail} (py/R parity). */
-export const espn_mbb_event_official_detail = espnMbbEventOfficialDetail;
+/** snake_case alias of {@link espnMbbGameOfficialDetail} (py/R parity). */
+export const espn_mbb_game_official_detail = espnMbbGameOfficialDetail;
 
 const EVENT_OFFICIALS_DEF: WrapperDef = {
   "short": "event_officials",
@@ -1258,7 +1258,7 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event officials (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game officials (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/officials`
  *
@@ -1266,12 +1266,12 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventOfficials({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGameOfficials({ event_id: '…' });
  */
-export const espnMbbEventOfficials: WrapperFn = (params = {}) =>
+export const espnMbbGameOfficials: WrapperFn = (params = {}) =>
   callWrapper(EVENT_OFFICIALS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventOfficials} (py/R parity). */
-export const espn_mbb_event_officials = espnMbbEventOfficials;
+/** snake_case alias of {@link espnMbbGameOfficials} (py/R parity). */
+export const espn_mbb_game_officials = espnMbbGameOfficials;
 
 const EVENT_PLAY_DEF: WrapperDef = {
   "short": "event_play",
@@ -1294,7 +1294,7 @@ const EVENT_PLAY_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event play (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game play (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}`
  *
@@ -1303,12 +1303,12 @@ const EVENT_PLAY_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventPlay({ event_id: '…', play_id: '…' });
+ * @example await sdv.mbb.espnMbbGamePlay({ event_id: '…', play_id: '…' });
  */
-export const espnMbbEventPlay: WrapperFn = (params = {}) =>
+export const espnMbbGamePlay: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PLAY_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventPlay} (py/R parity). */
-export const espn_mbb_event_play = espnMbbEventPlay;
+/** snake_case alias of {@link espnMbbGamePlay} (py/R parity). */
+export const espn_mbb_game_play = espnMbbGamePlay;
 
 const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
   "short": "event_play_personnel",
@@ -1331,7 +1331,7 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game play personnel (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
  *
@@ -1340,12 +1340,12 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventPlayPersonnel({ event_id: '…', play_id: '…' });
+ * @example await sdv.mbb.espnMbbGamePlayPersonnel({ event_id: '…', play_id: '…' });
  */
-export const espnMbbEventPlayPersonnel: WrapperFn = (params = {}) =>
+export const espnMbbGamePlayPersonnel: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PLAY_PERSONNEL_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventPlayPersonnel} (py/R parity). */
-export const espn_mbb_event_play_personnel = espnMbbEventPlayPersonnel;
+/** snake_case alias of {@link espnMbbGamePlayPersonnel} (py/R parity). */
+export const espn_mbb_game_play_personnel = espnMbbGamePlayPersonnel;
 
 const EVENT_PLAYS_DEF: WrapperDef = {
   "short": "event_plays",
@@ -1371,7 +1371,7 @@ const EVENT_PLAYS_DEF: WrapperDef = {
   ]
 };
 /**
- * MBB — event plays (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game plays (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/plays`
  *
@@ -1380,12 +1380,12 @@ const EVENT_PLAYS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `1000`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventPlays({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGamePlays({ event_id: '…' });
  */
-export const espnMbbEventPlays: WrapperFn = (params = {}) =>
+export const espnMbbGamePlays: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PLAYS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventPlays} (py/R parity). */
-export const espn_mbb_event_plays = espnMbbEventPlays;
+/** snake_case alias of {@link espnMbbGamePlays} (py/R parity). */
+export const espn_mbb_game_plays = espnMbbGamePlays;
 
 const EVENT_POWERINDEX_DEF: WrapperDef = {
   "short": "event_powerindex",
@@ -1405,7 +1405,7 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game powerindex (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/powerindex`
  *
@@ -1413,12 +1413,12 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventPowerindex({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGamePowerindex({ event_id: '…' });
  */
-export const espnMbbEventPowerindex: WrapperFn = (params = {}) =>
+export const espnMbbGamePowerindex: WrapperFn = (params = {}) =>
   callWrapper(EVENT_POWERINDEX_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventPowerindex} (py/R parity). */
-export const espn_mbb_event_powerindex = espnMbbEventPowerindex;
+/** snake_case alias of {@link espnMbbGamePowerindex} (py/R parity). */
+export const espn_mbb_game_powerindex = espnMbbGamePowerindex;
 
 const EVENT_PREDICTOR_DEF: WrapperDef = {
   "short": "event_predictor",
@@ -1438,7 +1438,7 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event predictor (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game predictor (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/predictor`
  *
@@ -1446,12 +1446,12 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventPredictor({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGamePredictor({ event_id: '…' });
  */
-export const espnMbbEventPredictor: WrapperFn = (params = {}) =>
+export const espnMbbGamePredictor: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PREDICTOR_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventPredictor} (py/R parity). */
-export const espn_mbb_event_predictor = espnMbbEventPredictor;
+/** snake_case alias of {@link espnMbbGamePredictor} (py/R parity). */
+export const espn_mbb_game_predictor = espnMbbGamePredictor;
 
 const EVENT_PROBABILITIES_DEF: WrapperDef = {
   "short": "event_probabilities",
@@ -1477,7 +1477,7 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
   ]
 };
 /**
- * MBB — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game probabilities (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/probabilities`
  *
@@ -1486,12 +1486,12 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `300`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventProbabilities({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGameProbabilities({ event_id: '…' });
  */
-export const espnMbbEventProbabilities: WrapperFn = (params = {}) =>
+export const espnMbbGameProbabilities: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PROBABILITIES_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventProbabilities} (py/R parity). */
-export const espn_mbb_event_probabilities = espnMbbEventProbabilities;
+/** snake_case alias of {@link espnMbbGameProbabilities} (py/R parity). */
+export const espn_mbb_game_probabilities = espnMbbGameProbabilities;
 
 const EVENT_PROPBETS_DEF: WrapperDef = {
   "short": "event_propbets",
@@ -1511,7 +1511,7 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event propbets (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game propbets (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/propbets`
  *
@@ -1519,12 +1519,12 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventPropbets({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGamePropbets({ event_id: '…' });
  */
-export const espnMbbEventPropbets: WrapperFn = (params = {}) =>
+export const espnMbbGamePropbets: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PROPBETS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventPropbets} (py/R parity). */
-export const espn_mbb_event_propbets = espnMbbEventPropbets;
+/** snake_case alias of {@link espnMbbGamePropbets} (py/R parity). */
+export const espn_mbb_game_propbets = espnMbbGamePropbets;
 
 const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
   "short": "event_scoringplays",
@@ -1544,7 +1544,7 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/scoringplays`
  *
@@ -1552,12 +1552,12 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventScoringplays({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGameScoringplays({ event_id: '…' });
  */
-export const espnMbbEventScoringplays: WrapperFn = (params = {}) =>
+export const espnMbbGameScoringplays: WrapperFn = (params = {}) =>
   callWrapper(EVENT_SCORINGPLAYS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventScoringplays} (py/R parity). */
-export const espn_mbb_event_scoringplays = espnMbbEventScoringplays;
+/** snake_case alias of {@link espnMbbGameScoringplays} (py/R parity). */
+export const espn_mbb_game_scoringplays = espnMbbGameScoringplays;
 
 const EVENT_SITUATION_DEF: WrapperDef = {
   "short": "event_situation",
@@ -1577,7 +1577,7 @@ const EVENT_SITUATION_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event situation (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game situation (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/situation`
  *
@@ -1585,12 +1585,12 @@ const EVENT_SITUATION_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventSituation({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGameSituation({ event_id: '…' });
  */
-export const espnMbbEventSituation: WrapperFn = (params = {}) =>
+export const espnMbbGameSituation: WrapperFn = (params = {}) =>
   callWrapper(EVENT_SITUATION_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventSituation} (py/R parity). */
-export const espn_mbb_event_situation = espnMbbEventSituation;
+/** snake_case alias of {@link espnMbbGameSituation} (py/R parity). */
+export const espn_mbb_game_situation = espnMbbGameSituation;
 
 const EVENT_STATUS_DEF: WrapperDef = {
   "short": "event_status",
@@ -1610,7 +1610,7 @@ const EVENT_STATUS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — event status (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — game status (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/status`
  *
@@ -1618,12 +1618,12 @@ const EVENT_STATUS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEventStatus({ event_id: '…' });
+ * @example await sdv.mbb.espnMbbGameStatus({ event_id: '…' });
  */
-export const espnMbbEventStatus: WrapperFn = (params = {}) =>
+export const espnMbbGameStatus: WrapperFn = (params = {}) =>
   callWrapper(EVENT_STATUS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEventStatus} (py/R parity). */
-export const espn_mbb_event_status = espnMbbEventStatus;
+/** snake_case alias of {@link espnMbbGameStatus} (py/R parity). */
+export const espn_mbb_game_status = espnMbbGameStatus;
 
 const EVENTS_DEF: WrapperDef = {
   "short": "events",
@@ -1644,7 +1644,7 @@ const EVENTS_DEF: WrapperDef = {
   ]
 };
 /**
- * MBB — events (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — games (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events`
  *
@@ -1652,12 +1652,12 @@ const EVENTS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbEvents({});
+ * @example await sdv.mbb.espnMbbGames({});
  */
-export const espnMbbEvents: WrapperFn = (params = {}) =>
+export const espnMbbGames: WrapperFn = (params = {}) =>
   callWrapper(EVENTS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbEvents} (py/R parity). */
-export const espn_mbb_events = espnMbbEvents;
+/** snake_case alias of {@link espnMbbGames} (py/R parity). */
+export const espn_mbb_games = espnMbbGames;
 
 const FRANCHISE_DEF: WrapperDef = {
   "short": "franchise",
@@ -1989,7 +1989,7 @@ const RECRUITING_ATHLETES_DEF: WrapperDef = {
   ]
 };
 /**
- * MBB — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — recruiting players (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/recruiting/{year}/athletes`
  *
@@ -1998,12 +1998,12 @@ const RECRUITING_ATHLETES_DEF: WrapperDef = {
  * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbRecruitingAthletes({ year: '…' });
+ * @example await sdv.mbb.espnMbbRecruitingPlayers({ year: '…' });
  */
-export const espnMbbRecruitingAthletes: WrapperFn = (params = {}) =>
+export const espnMbbRecruitingPlayers: WrapperFn = (params = {}) =>
   callWrapper(RECRUITING_ATHLETES_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbRecruitingAthletes} (py/R parity). */
-export const espn_mbb_recruiting_athletes = espnMbbRecruitingAthletes;
+/** snake_case alias of {@link espnMbbRecruitingPlayers} (py/R parity). */
+export const espn_mbb_recruiting_players = espnMbbRecruitingPlayers;
 
 const RECRUITING_RANKINGS_DEF: WrapperDef = {
   "short": "recruiting_rankings",
@@ -2127,7 +2127,7 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
   ]
 };
 /**
- * MBB — season athletes (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — season players (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/seasons/{season}/athletes`
  *
@@ -2136,12 +2136,12 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
  * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbSeasonAthletes({ season: '…' });
+ * @example await sdv.mbb.espnMbbSeasonPlayers({ season: '…' });
  */
-export const espnMbbSeasonAthletes: WrapperFn = (params = {}) =>
+export const espnMbbSeasonPlayers: WrapperFn = (params = {}) =>
   callWrapper(SEASON_ATHLETES_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbSeasonAthletes} (py/R parity). */
-export const espn_mbb_season_athletes = espnMbbSeasonAthletes;
+/** snake_case alias of {@link espnMbbSeasonPlayers} (py/R parity). */
+export const espn_mbb_season_players = espnMbbSeasonPlayers;
 
 const SEASON_AWARDS_DEF: WrapperDef = {
   "short": "season_awards",
@@ -2872,7 +2872,7 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
   ]
 };
 /**
- * MBB — season week events (ESPN sports.core.api.espn.com (core v2)).
+ * MBB — season week games (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/events`
  *
@@ -2882,12 +2882,12 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mbb.espnMbbSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
+ * @example await sdv.mbb.espnMbbSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
  */
-export const espnMbbSeasonWeekEvents: WrapperFn = (params = {}) =>
+export const espnMbbSeasonWeekGames: WrapperFn = (params = {}) =>
   callWrapper(SEASON_WEEK_EVENTS_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbSeasonWeekEvents} (py/R parity). */
-export const espn_mbb_season_week_events = espnMbbSeasonWeekEvents;
+/** snake_case alias of {@link espnMbbSeasonWeekGames} (py/R parity). */
+export const espn_mbb_season_week_games = espnMbbSeasonWeekGames;
 
 const SEASON_WEEK_POWERINDEX_DEF: WrapperDef = {
   "short": "season_week_powerindex",

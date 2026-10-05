@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.cricket`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnCricketAthleteGamelog`
+## `espnCricketPlayerGamelog`
 
-CRICKET — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+CRICKET — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/cricket/{league}/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cricket_athlete_gamelog` / `espnCricketAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -44,15 +46,17 @@ CRICKET — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.cricket.espnCricketAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cricket.espn_cricket_athlete_gamelog(...)
+await sdv.cricket.espnCricketPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cricket.espn_cricket_player_gamelog(...)
 ```
 
-## `espnCricketAthleteOverview`
+## `espnCricketPlayerOverview`
 
-CRICKET — athlete overview (ESPN site.web.api.espn.com (web v3)).
+CRICKET — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/cricket/{league}/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cricket_athlete_overview` / `espnCricketAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -77,15 +81,17 @@ CRICKET — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.cricket.espnCricketAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cricket.espn_cricket_athlete_overview(...)
+await sdv.cricket.espnCricketPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cricket.espn_cricket_player_overview(...)
 ```
 
-## `espnCricketAthleteSplits`
+## `espnCricketPlayerSplits`
 
-CRICKET — athlete splits (ESPN site.web.api.espn.com (web v3)).
+CRICKET — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/cricket/{league}/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cricket_athlete_splits` / `espnCricketAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -108,15 +114,17 @@ CRICKET — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.cricket.espnCricketAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cricket.espn_cricket_athlete_splits(...)
+await sdv.cricket.espnCricketPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cricket.espn_cricket_player_splits(...)
 ```
 
-## `espnCricketAthleteStats`
+## `espnCricketPlayerStats`
 
-CRICKET — athlete stats (ESPN site.web.api.espn.com (web v3)).
+CRICKET — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/cricket/{league}/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cricket_athlete_stats` / `espnCricketAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -137,8 +145,8 @@ CRICKET — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.cricket.espnCricketAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cricket.espn_cricket_athlete_stats(...)
+await sdv.cricket.espnCricketPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cricket.espn_cricket_player_stats(...)
 ```
 
 ## `espnCricketLeaders`

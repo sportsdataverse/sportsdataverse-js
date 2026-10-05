@@ -410,8 +410,9 @@ export function writeVendor(root = CODEGEN_DIR) {
 // Fetch (network or local git) — not used by the check.
 // ---------------------------------------------------------------------------
 
-// Each source exposes `tree()` -> Map(codegen-relative path -> git blob sha) for
-// the pinned endpoints/ + schemas/ trees, and `getMany(paths)` -> Buffers.
+// Each source exposes `tree(extra)` -> Map(codegen-relative path -> git blob sha)
+// for the pinned endpoints/ + schemas/ trees plus the `extra` files (`copy:`
+// entries outside those dirs), and `getMany(paths)` -> Buffers.
 
 function gitSource(repo, ref) {
   const git = (args, input) => {
@@ -420,9 +421,10 @@ function gitSource(repo, ref) {
     return r.stdout;
   };
   return {
-    async tree() {
+    async tree(extra = []) {
       const out = new Map();
-      const ls = git(["ls-tree", "-r", ref, "--", `${PY_CODEGEN}endpoints`, `${PY_CODEGEN}schemas`]);
+      const paths = ["endpoints", "schemas", ...extra].map((p) => `${PY_CODEGEN}${p}`);
+      const ls = git(["ls-tree", "-r", ref, "--", ...paths]);
       for (const line of ls.toString("utf8").split("\n").filter(Boolean)) {
         const [meta, path] = line.split("\t"); // "<mode> blob <sha>\t<path>"
         const [, type, sha] = meta.split(" ");
@@ -457,13 +459,13 @@ function githubSource(repoSlug, ref) {
     return res;
   };
   return {
-    async tree() {
+    async tree(extra = []) {
       const url = `https://api.github.com/repos/${repoSlug}/git/trees/${ref}:${PY_CODEGEN.slice(0, -1)}?recursive=1`;
       const j = await (await get(url, { headers })).json();
       if (j.truncated) throw new Error(`tree listing truncated: ${url}`);
       return new Map(
         j.tree
-          .filter((t) => t.type === "blob" && /^(endpoints|schemas)\//.test(t.path))
+          .filter((t) => t.type === "blob" && (/^(endpoints|schemas)\//.test(t.path) || extra.includes(t.path)))
           .map((t) => [t.path, t.sha])
       );
     },
@@ -493,7 +495,7 @@ export async function fetchUpstream(root = CODEGEN_DIR, ref = loadManifest(root)
   const { repo } = manifest.source;
   const src = process.env.SDV_PY_REPO ? gitSource(process.env.SDV_PY_REPO, ref) : githubSource(repo, ref);
 
-  const tree = await src.tree();
+  const tree = await src.tree(manifest.copy ?? []);
   const endpointPaths = [
     ...new Set([
       ...familyEntries(manifest).map(([k, c]) => upstreamEndpointPath(k, c)),

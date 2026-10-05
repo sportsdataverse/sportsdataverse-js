@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.mbb`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnMbbAthleteGamelog`
+## `espnMbbPlayerGamelog`
 
-MBB — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+MBB — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-college-basketball/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_gamelog` / `espnMbbAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ MBB — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_gamelog(...)
+await sdv.mbb.espnMbbPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_gamelog(...)
 ```
 
-## `espnMbbAthleteOverview`
+## `espnMbbPlayerOverview`
 
-MBB — athlete overview (ESPN site.web.api.espn.com (web v3)).
+MBB — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-college-basketball/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_overview` / `espnMbbAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ MBB — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_overview(...)
+await sdv.mbb.espnMbbPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_overview(...)
 ```
 
-## `espnMbbAthleteSplits`
+## `espnMbbPlayerSplits`
 
-MBB — athlete splits (ESPN site.web.api.espn.com (web v3)).
+MBB — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-college-basketball/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_splits` / `espnMbbAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ MBB — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_splits(...)
+await sdv.mbb.espnMbbPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_splits(...)
 ```
 
-## `espnMbbAthleteStats`
+## `espnMbbPlayerStatsV3`
 
-MBB — athlete stats (ESPN site.web.api.espn.com (web v3)).
+MBB — player stats v3 (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-college-basketball/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_stats` / `espnMbbAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ MBB — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_stats(...)
+await sdv.mbb.espnMbbPlayerStatsV3({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_stats_v3(...)
 ```
 
 ## `espnMbbLeaders`
