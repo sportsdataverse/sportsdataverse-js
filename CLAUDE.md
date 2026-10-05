@@ -116,6 +116,7 @@ endpoint YAML in `tools/codegen/endpoints/*.yaml` (plus return schemas under
 | Runtime wrapper / league tables | `src/generated/wrappers.ts`, `src/generated/leagues.ts` | the TS the package imports at runtime |
 | Per-league Markdown reference | `docs/docs/reference/*.md` (+ `_category_.json`) | the docs site reference subtree |
 | Playground metadata | `docs/src/playground/endpoints.json` | the in-browser playground endpoint list |
+| Release dataset loaders | `src/generated/loaders/<league>.ts` (+ `<league>/reference/loaders.md`) | one `load*` per `endpoints/releases.yaml` entry (rendered by `render-loaders.mjs`; runtime `src/core/releases.ts`: hyparquet decode, `releases` transport family, 404-season skip, INT64 policy) |
 
 - `npm run codegen` **writes** those outputs.
 - `npm run codegen:check` (`--check`) is the **drift gate**: it regenerates in-memory

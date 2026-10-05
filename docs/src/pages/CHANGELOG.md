@@ -2,6 +2,13 @@
 
 ## **Unreleased**
 
+### Added — release dataset loaders (323 `load*` functions)
+
+- **New:** one loader per entry of sdv-py's `releases.yaml` (vendored verbatim), generated onto its league namespace as camelCase + snake alias, e.g. `await sdv.cfb.loadCfbPbp({ seasons: 2024 })` / `sdv.cfb.load_cfb_pbp(...)`: cfb 71, nba 41, mbb 34, wbb 34, wnba 34, mlb 32, nfl 29, nhl 27, pwhl 21 (new `sdv.pwhl` namespace). They read the published SportsDataverse / nflverse parquet assets — play-by-play with EPA/WP, schedules, rosters, box scores, ratings, player value — and resolve to an array of plain row objects. Options: `seasons` (one or a list), `columns` (read only those), `timeoutMs` (default 5 min).
+- Seasons below a loader's floor raise `SeasonNotFoundError` before any download; a season with no asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError`. Multi-season results union columns and null-fill gaps (sdv-py's `diagonal_relaxed`). `{season + 1}` assets (nba_stats) take the START year, as in sdv-py. The three `load_nba_stats_*_v3` loaders are deprecated aliases (one-time `DeprecationWarning`).
+- INT64 columns are plain `number` when every value is a safe integer, else left `BigInt` with one warning naming the column. `id_int64` columns are pinned to integers first, as sdv-py's `_cast_ids_int64` does (canonical integer strings convert; anything else is left untouched).
+- Downloads go through the new keyless `releases` transport family (default retry statuses, 403 included). Parquet is decoded by the new runtime dependencies `hyparquet` + `hyparquet-compressors` (the assets are ZSTD from Polars and SNAPPY from arrow-cpp). Node only; loaders are not in the docs playground. Each league's reference gains a **Dataset loaders** page.
+
 ### Fixed
 
 - `sdv.cbs.*`: host is now `https://api.cbssports.com/napi` (every endpoint 404'd without the `/napi` base). `tools/codegen/from-openapi.mjs` no longer drops the spec base path when `--host` is a bare origin.

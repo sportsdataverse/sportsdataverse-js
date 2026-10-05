@@ -12,6 +12,14 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { parse } from "yaml";
 import { checkTransform } from "./param-transforms.mjs";
+import {
+  loadReleaseLoaders,
+  loadersByLeague,
+  registerLoaderModules,
+  renderLoadersPage,
+  renderLoadersIndexSection,
+  renderLoaderOnlyIndex,
+} from "./render-loaders.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const endpointsDir = join(here, "endpoints");
@@ -1018,7 +1026,7 @@ function writtenLeagueGroups(league, wrappers) {
  * the `<prefix>/index.md`, the two `_category_.json`s, and one
  * `reference/<group>.md` per populated family group.
  */
-function registerWrittenLeagueDocs(outputs, league, wrappers, flatWrappers, parserMap, sidebarPosition) {
+function registerWrittenLeagueDocs(outputs, league, wrappers, flatWrappers, parserMap, sidebarPosition, loaders = []) {
   const leagueDir = join(referenceRootDir, league.prefix);
   const refDir = join(leagueDir, "reference");
   const groups = writtenLeagueGroups(league, wrappers);
@@ -1029,7 +1037,12 @@ function registerWrittenLeagueDocs(outputs, league, wrappers, flatWrappers, pars
   const nativeRows = (flatWrappers ?? []).filter((w) => nativeFamilies.includes(w.api));
   const indexGroups = nativeRows.length
     ? [...groups, { id: "native", label: "Native API", rows: nativeRows }]
-    : groups;
+    : [...groups];
+  // Release dataset loaders (releases.yaml) get their own reference page, last.
+  if (loaders.length) {
+    indexGroups.push({ id: "loaders", label: "Dataset loaders", rows: loaders });
+    outputs[join(refDir, "loaders.md")] = renderLoadersPage(league.prefix, loaders, 50);
+  }
 
   outputs[join(leagueDir, "index.md")] = renderWrittenLeagueIndex(league, wrappers, indexGroups);
   outputs[join(leagueDir, "_category_.json")] =
@@ -1365,10 +1378,17 @@ function groupBySportWithFlat(leagues, standaloneNs) {
   return { bySport, crossSportNs, sports };
 }
 
-function renderReferenceSidebar(leagues, standaloneNs) {
+function renderReferenceSidebar(leagues, standaloneNs, loaderOnly = []) {
   // Leagues grouped by sport, plus any sport-specific standalone provider
   // namespaces (torvik->basketball, hockeytech->hockey) nested under their sport.
   const { bySport, crossSportNs, sports } = groupBySportWithFlat(leagues, standaloneNs);
+  // Loader-only namespaces (`pwhl`: release loaders, no ESPN league) nest under
+  // their sport as a <ns>/ docs dir, like a written league.
+  for (const [ns, sport] of loaderOnly) {
+    if (!bySport.has(sport)) throw new Error(`sidebar: no "${sport}" group for loader namespace ${ns}`);
+    bySport.get(sport).push(ns);
+  }
+  const dirNs = new Set([...WRITTEN_ESPN_LEAGUES, ...loaderOnly.map(([ns]) => ns)]);
 
   const items = [
     { type: "doc", id: "reference/index", label: "Overview" },
@@ -1387,7 +1407,7 @@ function renderReferenceSidebar(leagues, standaloneNs) {
       // (`<prefix>/reference`). Every OTHER league stays a flat
       // `reference/<prefix>` doc (the runtime-factory path is unchanged).
       items: prefixes.map((p) =>
-        WRITTEN_ESPN_LEAGUES.includes(p)
+        dirNs.has(p)
           ? {
               type: "category",
               label: p,
@@ -1525,6 +1545,25 @@ const hosts = leaguesDoc.hosts;
 // standalone reference page instead of a "Native API" section on a league page.
 const standaloneNs = standaloneFlatNamespaces(leagues);
 
+// Release dataset loaders (vendored releases.yaml): one `load*` per entry on
+// its league namespace. A namespace with loaders but no ESPN league gets its
+// own docs dir, nested under its sport here (a new one fails loudly).
+const releaseLoaders = loadersByLeague(loadReleaseLoaders(endpointsDir));
+const LOADER_ONLY = {
+  pwhl: {
+    sport: "hockey",
+    note: "Live PWHL feeds are on [`sdv.hockeytech`](../reference/hockeytech.md) with `league: 'pwhl'`.",
+  },
+};
+const loaderOnly = [...releaseLoaders.keys()]
+  .filter((ns) => !WRITTEN_ESPN_LEAGUES.includes(ns))
+  .map((ns) => {
+    if (!LOADER_ONLY[ns]) {
+      throw new Error(`releases.yaml: loader namespace "${ns}" has no ESPN league; add it to LOADER_ONLY`);
+    }
+    return [ns, LOADER_ONLY[ns].sport];
+  });
+
 // The generated wrappers module exports the ESPN `WRAPPERS` table (unchanged)
 // plus a separate `FLAT_WRAPPERS` table for the non-ESPN flat APIs.
 const wrappersTs =
@@ -1534,10 +1573,12 @@ const wrappersTs =
 const outputs = {
   [join(generatedDir, "wrappers.ts")]: wrappersTs,
   [join(generatedDir, "leagues.ts")]: renderTs("LeagueConfig", "LEAGUES", leagues),
-  [join(referenceDir, "index.md")]: renderReferenceIndex(leagues, wrappers, flatWrappers, standaloneNs),
+  [join(referenceDir, "index.md")]:
+    renderReferenceIndex(leagues, wrappers, flatWrappers, standaloneNs) +
+    renderLoadersIndexSection(releaseLoaders),
   [join(referenceDir, "espn-parsed-returns.md")]: renderEspnParsedReturns(),
   [join(referenceDir, "_category_.json")]: REFERENCE_CATEGORY,
-  [join(docsGeneratedDir, "reference-sidebar.js")]: renderReferenceSidebar(leagues, standaloneNs),
+  [join(docsGeneratedDir, "reference-sidebar.js")]: renderReferenceSidebar(leagues, standaloneNs, loaderOnly),
   [join(docsGeneratedDir, "coverage.json")]: renderCoverageJson(leagues, standaloneNs, flatWrappers),
   [join(playgroundDir, "endpoints.json")]: renderEndpointsJson(
     wrappers,
@@ -1554,7 +1595,15 @@ leagues.forEach((league, i) => {
   // per-function reference pages (sdv-py-style) instead of the flat
   // reference/<prefix>.md page — registered separately below.
   if (writtenEspnSet.has(league.prefix)) {
-    registerWrittenLeagueDocs(outputs, league, wrappers, flatWrappers, espnParserMap, i + 2);
+    registerWrittenLeagueDocs(
+      outputs,
+      league,
+      wrappers,
+      flatWrappers,
+      espnParserMap,
+      i + 2,
+      releaseLoaders.get(league.prefix)
+    );
     return;
   }
   // +2: position 0 is the Overview index, position 1 is the shared parsed-returns
@@ -1602,6 +1651,29 @@ for (const api of FLAT_API_FILES) {
   writtenFlatApis.push(api);
 }
 outputs[join(generatedFlatDir, "index.ts")] = renderWrittenFlatBarrel(writtenFlatApis);
+
+// Release loader modules (src/generated/loaders/) + the docs dir of each
+// loader-only namespace (written leagues got their loaders page above).
+registerLoaderModules(outputs, generatedDir, releaseLoaders);
+loaderOnly.forEach(([ns], i) => {
+  const dir = join(referenceRootDir, ns);
+  const loaders = releaseLoaders.get(ns);
+  outputs[join(dir, "index.md")] = renderLoaderOnlyIndex(ns, loaders, LOADER_ONLY[ns].note);
+  outputs[join(dir, "_category_.json")] =
+    JSON.stringify(
+      {
+        label: ns.toUpperCase(),
+        position: leagues.length + standaloneNs.length + 2 + i,
+        collapsed: true,
+        link: { type: "doc", id: "index" },
+      },
+      null,
+      2
+    ) + "\n";
+  outputs[join(dir, "reference", "_category_.json")] =
+    JSON.stringify({ label: "Reference", position: 1, collapsed: true }, null, 2) + "\n";
+  outputs[join(dir, "reference", "loaders.md")] = renderLoadersPage(ns, loaders, 1);
+});
 
 // One WRITTEN flat-API module: each wrapper a real `export const` delegating to
 // the shared `callFlat(def, params)` core (its def hoisted to a module const).
@@ -1709,6 +1781,7 @@ for (const [file, content] of Object.entries(outputs)) {
 console.log(
   `codegen: ${wrappers.length} wrappers across ${leagues.length} leagues ` +
     `+ ${flatWrappers.length} flat-API wrappers (${FLAT_API_FILES.length} families) ` +
+    `+ ${[...releaseLoaders.values()].flat().length} release loaders ` +
     `(+ ${leagues.length + standaloneNs.length + 3} reference pages + playground metadata)`
 );
 if (check && drift) process.exit(1);

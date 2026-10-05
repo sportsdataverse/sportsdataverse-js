@@ -13,6 +13,7 @@ import wnba from './services/wnba.service.js';
 import { LEAGUES } from './generated/leagues.js';
 import { makeLeagueModule } from './leagues/_make.js';
 import { WRITTEN_FLAT } from './generated/flat/index.js';
+import { WRITTEN_LOADERS } from './generated/loaders/index.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
@@ -93,6 +94,13 @@ for (const [api, mod] of Object.entries(WRITTEN_FLAT)) {
   sdv[prefix] = { ...(sdv[prefix] ?? {}), ...mod };
 }
 
+// Release dataset loaders (`load*` + snake alias, generated from the vendored
+// sdv-py releases.yaml) merged onto their league namespace — additive, after
+// ESPN + flat. A loader-only namespace (`pwhl`) is created here.
+for (const [prefix, mod] of Object.entries(WRITTEN_LOADERS)) {
+  sdv[prefix] = { ...(sdv[prefix] ?? {}), ...mod };
+}
+
 // Hand-written Baseball Savant / Statcast wrappers (date-chunked search +
 // HTML-embedded player page) that aren't flat passthroughs — merged onto
 // `sdv.mlb` alongside the generated flat `mlb_statcast_*` wrappers, under BOTH
@@ -155,6 +163,8 @@ export type { ConfigureOptions, SdvConfig, FamilyDefaults } from './core/config.
 export { axiosTransport, createImpersonatingTransport } from './core/transport.js';
 export type { Transport, TransportRequest, TransportResponse } from './core/transport.js';
 export { bearerAuth, headerAuth, queryAuth, tokenAuth, sessionAuth } from './core/auth.js';
+export { RELEASES_FAMILY } from './core/releases.js';
+export type { ReleaseRow, ReleaseLoaderOptions, SeasonLoaderOptions } from './core/releases.js';
 export type { AuthProvider, AuthContext } from './core/auth.js';
 export { normalize } from './parsers/_normalize.js';
 export { PARSERS, parserFor } from './parsers/_registry.js';

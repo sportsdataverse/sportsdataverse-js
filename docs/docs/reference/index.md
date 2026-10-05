@@ -76,3 +76,19 @@ await sdv.nhl.nhlApiWebPbp({ gameId: 2023030417, parsed: true });
 await sdv.nfl.nflApiStandings({ season: 2024, seasonType: 'REG', week: 1 });
 ```
 :::
+
+## Dataset loaders
+
+`load*` functions read the published SportsDataverse release assets (parquet) — play-by-play with EPA/WP, schedules, rosters, box scores, ratings, player value — the way sportsdataverse-py's `load_*` functions do. Node only.
+
+| Namespace | loaders |
+|---|---:|
+| [cfb](../cfb/reference/loaders.md) | 71 |
+| [mbb](../mbb/reference/loaders.md) | 34 |
+| [mlb](../mlb/reference/loaders.md) | 32 |
+| [nba](../nba/reference/loaders.md) | 41 |
+| [nfl](../nfl/reference/loaders.md) | 29 |
+| [nhl](../nhl/reference/loaders.md) | 27 |
+| [pwhl](../pwhl/reference/loaders.md) | 21 |
+| [wbb](../wbb/reference/loaders.md) | 34 |
+| [wnba](../wnba/reference/loaders.md) | 34 |
