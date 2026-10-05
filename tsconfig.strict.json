@@ -12,6 +12,7 @@
     "src/core/auth.ts",
     "src/core/config.ts",
     "src/core/request.ts",
-    "src/core/transforms.ts"
+    "src/core/transforms.ts",
+    "src/core/nba_stats_runtime.ts"
   ]
 }
