@@ -6,6 +6,10 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ## Unreleased
 
+### Added — `section` on the stats.nba.com / stats.wnba.com wrappers
+
+- **`nba_stats_*` / `wnba_stats_*`:** `{ parsed: true, section: "<result set>" }` returns that one result set, as sdv-py's `result_set` does; an unknown name returns `[]` (sdv-py: a zero-row frame, no error). Without `section` the result is unchanged. Each result set of the committed real captures equals sdv-py's frame. The playground passes `section` to flat multi-table parsers and offers a section picker; the parity oracles keep sdv-py's NaN / inf as a marker the tests decode.
+
 ### Changed — sdv-py `frames_by` returns schemas and the `season_or_previous` transform
 
 - **Codegen:** sdv-py adds `frames_by` (a request parameter name) to a `kind: frames` returns schema when the function returns ONE table, whose columns are the frame that parameter's value names (the pff_api `/v2` reports: `position_report` and `team_report` by `report`, `team_leaders` by `group`, `team_stats` by `category`). `vendor` accepts the key only on `kind: frames`, only as a non-empty string, and only when every endpoint that attaches the schema takes that parameter; anything else still fails closed. The reference docs render one column table per value ("When `group` is `passing`") under a single-table heading instead of "an object of tables", and the wrapper's `@returns` says the columns depend on the parameter. The parity harness counts every frame's columns but leaves these endpoints unverified (a capture records no request parameter to pick the frame by). The returns-table renderer moved to `tools/codegen/returns-tables.mjs`, so the tests run the real sdv-py schema through it. Unblocks the vendor sync (#88, #95).
