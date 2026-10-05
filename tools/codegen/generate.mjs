@@ -682,8 +682,16 @@ const fixedQuery = (w) =>
   w.fixedParams ? `?${Object.entries(w.fixedParams).map(([k, v]) => `${k}=${v}`).join("&")}` : "";
 
 // Shorts whose `parsed` result is the summary dispatcher's (they take `section`);
-// mirrors SECTIONED_ENDPOINTS in src/parsers/espn.ts.
-const SECTIONED_SHORTS = new Set(["summary", "cdn_playbyplay", "cdn_boxscore"]);
+// One source: espn_parser_map.yaml `dispatchers` (test/espn-parser-map.test.js holds
+// it equal to the runtime's SECTIONED_ENDPOINTS).
+const ESPN_PARSER_MAP_DOC = parse(readFileSync(join(endpointsDir, "espn_parser_map.yaml"), "utf8")) ?? {};
+// Parsers that run the summary dispatcher (an object of sub-frames, no one table).
+const SUMMARY_DISPATCH = new Set(ESPN_PARSER_MAP_DOC.dispatchers ?? []);
+const SECTIONED_SHORTS = new Set(
+  Object.entries(ESPN_PARSER_MAP_DOC.endpoints ?? {})
+    .filter(([, fn]) => SUMMARY_DISPATCH.has(fn))
+    .map(([short]) => short)
+);
 
 /** Humanize a wrapper `short` for the JSDoc summary (`athlete_gamelog` -> `athlete gamelog`). */
 function humanizeShort(short) {
@@ -1534,8 +1542,6 @@ function renderWrittenLeagueNativePage(league, flatWrappers, position) {
 
 // Display order for the per-parser sections (dedicated first, the two generics
 // last; `parse_summary` is a dispatcher rendered as a pointer to the sub-frames).
-// Parsers that run the summary dispatcher (an object of sub-frames, no one table).
-const SUMMARY_DISPATCH = new Set(["parse_summary", "parse_cdn_game"]);
 // A parser whose rows are another parser's: its returns table is that one's.
 const ESPN_PARSER_SCHEMA = { parse_cdn_scoreboard: "parse_scoreboard", parse_cdn_schedule: "parse_scoreboard" };
 

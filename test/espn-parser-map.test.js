@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { parse } from 'yaml';
-import { ESPN_ENDPOINT_PARSERS } from '../dist/parsers/espn.js';
+import { ESPN_ENDPOINT_PARSERS, SECTIONED_ENDPOINTS } from '../dist/parsers/espn.js';
 import { WRAPPERS } from '../dist/generated/wrappers.js';
 
 // Drift guard: tools/codegen/endpoints/espn_parser_map.yaml is committed metadata
@@ -29,6 +29,17 @@ describe('codegen: espn_parser_map.yaml matches the runtime registry', () => {
       should(ESPN_ENDPOINT_PARSERS[short]).be.a.Function();
       ESPN_ENDPOINT_PARSERS[short].name.should.equal(fnName);
     }
+  });
+
+  it('dispatchers (codegen) == the runtime SECTIONED_ENDPOINTS (one sectioned-endpoint list)', () => {
+    const doc = parse(readFileSync(mapFile, 'utf8'));
+    const dispatchers = new Set(doc.dispatchers);
+    // the shorts the codegen documents a `section` for ...
+    const codegen = Object.entries(map).filter(([, fn]) => dispatchers.has(fn)).map(([s]) => s).sort();
+    codegen.should.eql([...SECTIONED_ENDPOINTS].sort());
+    codegen.should.eql(['cdn_boxscore', 'cdn_playbyplay', 'summary']);
+    // ... and the dispatcher names are exactly the runtime parsers behind them
+    [...new Set([...SECTIONED_ENDPOINTS].map((s) => ESPN_ENDPOINT_PARSERS[s].name))].sort().should.eql([...dispatchers].sort());
   });
 
   it('every ESPN wrapper short has a parser (ENDPOINT_PARSERS coverage invariant)', () => {

@@ -1312,9 +1312,6 @@ export function parse_cdn_rankings(payload: any): Record<string, any>[] {
 // single-resource payloads); the rich Site v2 surfaces get dedicated parsers,
 // and `summary` is the multi-section dispatcher.
 
-/** Endpoint shorts whose parser is (or runs) the summary dispatcher: they take `section`. */
-export const SECTIONED_ENDPOINTS: ReadonlySet<string> = new Set(["summary", "cdn_playbyplay", "cdn_boxscore"]);
-
 export const ESPN_ENDPOINT_PARSERS: Record<string, ParserFn | typeof parse_summary> = {
   // Site v2 (rich nested)
   scoreboard: parse_scoreboard,
@@ -1469,6 +1466,18 @@ export const ESPN_ENDPOINT_PARSERS: Record<string, ParserFn | typeof parse_summa
   cdn_scoreboard: parse_cdn_scoreboard,
   cdn_rankings: parse_cdn_rankings,
 };
+
+/** The parsers that run the summary dispatcher (an object of sub-frames, or one `section`). */
+const SUMMARY_DISPATCHERS = new Set<unknown>([parse_summary, parse_cdn_game]);
+
+/**
+ * Endpoint shorts whose parser is (or runs) the summary dispatcher: they take
+ * `section`. Derived from the registry; tools/codegen/endpoints/espn_parser_map.yaml
+ * `dispatchers` (the codegen's copy) is drift-tested against it.
+ */
+export const SECTIONED_ENDPOINTS: ReadonlySet<string> = new Set(
+  Object.keys(ESPN_ENDPOINT_PARSERS).filter((k) => SUMMARY_DISPATCHERS.has(ESPN_ENDPOINT_PARSERS[k]))
+);
 
 /**
  * Return the registered parser for an endpoint short name, or `undefined`.

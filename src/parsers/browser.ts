@@ -27,6 +27,7 @@ export {
   ESPN_ENDPOINT_PARSERS,
   parserForEndpoint,
   parse_summary,
+  SECTIONED_ENDPOINTS,
   SUMMARY_SECTION_PARSERS,
 } from "./espn.js";
 

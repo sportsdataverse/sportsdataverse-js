@@ -1051,13 +1051,16 @@ function pinIdColumns(rows) {
   const uncast = [];
   for (const col of MLBAM_ID_COLUMNS) {
     if (!rows.some((r) => col in r)) continue;
-    const present = rows.map((r) => r[col]).filter((v) => v !== null && v !== void 0);
+    const present = rows.map((r) => r[col]).filter((v) => v !== null && v !== void 0 && v !== "");
     const asInt = (v) => typeof v === "bigint" ? v : typeof v === "number" ? v : typeof v === "string" && CSV_NUMBER.test(v.trim()) ? csvNumber(v) : NaN;
     if (!present.every((v) => typeof v === "bigint" || Number.isInteger(asInt(v)))) {
       uncast.push(col);
       continue;
     }
-    for (const r of rows) if (r[col] !== null && r[col] !== void 0) r[col] = asInt(r[col]);
+    for (const r of rows) {
+      if (r[col] === "") r[col] = null;
+      else if (r[col] !== null && r[col] !== void 0) r[col] = asInt(r[col]);
+    }
   }
   if (uncast.length) {
     warn(
@@ -4137,7 +4140,6 @@ function parse_cdn_rankings(payload) {
     return out;
   });
 }
-var SECTIONED_ENDPOINTS = /* @__PURE__ */ new Set(["summary", "cdn_playbyplay", "cdn_boxscore"]);
 var ESPN_ENDPOINT_PARSERS = {
   // Site v2 (rich nested)
   scoreboard: parse_scoreboard,
@@ -4292,6 +4294,10 @@ var ESPN_ENDPOINT_PARSERS = {
   cdn_scoreboard: parse_cdn_scoreboard,
   cdn_rankings: parse_cdn_rankings
 };
+var SUMMARY_DISPATCHERS = /* @__PURE__ */ new Set([parse_summary, parse_cdn_game]);
+var SECTIONED_ENDPOINTS = new Set(
+  Object.keys(ESPN_ENDPOINT_PARSERS).filter((k) => SUMMARY_DISPATCHERS.has(ESPN_ENDPOINT_PARSERS[k]))
+);
 function parserForEndpoint(short) {
   return ESPN_ENDPOINT_PARSERS[short];
 }
@@ -4311,6 +4317,7 @@ export {
   ESPN_ENDPOINT_PARSERS,
   MULTI_TABLE_SECTIONS,
   PARSERS,
+  SECTIONED_ENDPOINTS,
   SUMMARY_SECTION_PARSERS,
   normalize,
   parseEndpoint,
