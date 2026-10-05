@@ -19,7 +19,15 @@ const CFG: LeagueConfig = {
     "universal",
     "ncaa",
     "football"
-  ]
+  ],
+  "publicShorts": {
+    "season_groups": "groups",
+    "season_futures": "futures",
+    "season_powerindex": "team_powerindex",
+    "season_recruits": "recruits",
+    "season_week_rankings": "week_rankings",
+    "athlete_stats": "player_stats_v3"
+  }
 };
 
 const ATHLETE_AWARDS_DEF: WrapperDef = {

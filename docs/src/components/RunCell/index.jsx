@@ -62,8 +62,16 @@ const ENUM_PARAMS = {
 
 /** snake_case -> camelCase (espn_nba_scoreboard -> espnNbaScoreboard). */
 const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
-const espnMethodName = (prefix, short) => toCamel(`espn_${prefix}_${short}`);
-const flatMethodName = (api, short) => toCamel(`${api}_${short}`);
+// v4 public (sdv-py) names: a league's override > the def's convention short > short.
+const espnMethodName = (prefix, short) => {
+  const lg = endpoints.leagues.find((l) => l.prefix === prefix);
+  const def = endpoints.endpoints.find((e) => e.short === short);
+  return toCamel(`espn_${prefix}_${lg?.publicShorts?.[short] ?? def?.publicShort ?? short}`);
+};
+const flatMethodName = (api, short) => {
+  const def = FLAT_APIS.find((e) => e.api === api && e.short === short);
+  return toCamel(def?.publicName ?? `${api}_${short}`);
+};
 
 /** Resolve the `endpoint` prop string to a def + dispatch metadata. */
 function resolveSelection(league, endpoint) {

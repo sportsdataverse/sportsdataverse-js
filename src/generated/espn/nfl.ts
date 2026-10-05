@@ -18,7 +18,10 @@ const CFG: LeagueConfig = {
   "scopes": [
     "universal",
     "football"
-  ]
+  ],
+  "publicShorts": {
+    "athlete_stats": "player_stats_v3"
+  }
 };
 
 const ATHLETE_AWARDS_DEF: WrapperDef = {

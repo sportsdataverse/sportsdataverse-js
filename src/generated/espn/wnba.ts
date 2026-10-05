@@ -17,7 +17,10 @@ const CFG: LeagueConfig = {
   "league": "wnba",
   "scopes": [
     "universal"
-  ]
+  ],
+  "publicShorts": {
+    "athlete_stats": "player_stats_v3"
+  }
 };
 
 const ATHLETE_AWARDS_DEF: WrapperDef = {

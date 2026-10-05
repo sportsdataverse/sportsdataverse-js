@@ -325,6 +325,10 @@ function espnLeagueNames(league, wrappers) {
  * `<prefix>_<short>` unless taken, else `<prefix>_<qualifier>_<short>`.
  */
 function flatFamilyNames(doc) {
+  if (doc.name_pattern && doc.name_pattern.replace("{short}", "").includes("{")) {
+    // e.g. `espn_{prefix}_{short}`: a league-bound family belongs in FAMILY_FILES.
+    throw new Error(`${doc.api}: flat name_pattern ${doc.name_pattern} has a token other than {short}`);
+  }
   const out = new Map();
   const used = new Set();
   for (const ep of doc.endpoints ?? []) {
@@ -533,6 +537,7 @@ function renderWrittenEspnModule(league, wrappers) {
       league: league.league,
       scopes: league.scopes,
       ...(league.leagueParam ? { leagueParam: true } : {}),
+      ...(league.publicShorts ? { publicShorts: league.publicShorts } : {}),
     },
     null,
     2

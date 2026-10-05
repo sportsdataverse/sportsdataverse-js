@@ -99,7 +99,8 @@ function buildPath(def, league, params) {
     if (v === undefined || v === null || v === '') {
       const pp = byName.get(name);
       if (pp && pp.required === false) return '';
-      throw new Error(`espn_${league.prefix}_${def.short}: missing required path parameter "${name}"`);
+      const pub = (league.publicShorts && league.publicShorts[def.short]) || def.publicShort || def.short;
+      throw new Error(`espn_${league.prefix}_${pub}: missing required path parameter "${name}"`);
     }
     return String(v);
   });
@@ -158,7 +159,7 @@ export function resolveFlat(def, params = {}, flatHosts = {}) {
     if (v === undefined || v === null || v === '') {
       const pp = byName.get(name);
       if (pp && pp.required === false) return '';
-      const camel = toCamel(`${def.api || 'flat'}_${def.short}`);
+      const camel = toCamel(def.publicName || `${def.api || 'flat'}_${def.short}`);
       throw new Error(`${camel}: missing required path parameter "${name}"`);
     }
     return String(v);
