@@ -15,6 +15,10 @@ import {
   dateChunks,
 } from '../../dist/leagues/mlb_statcast_extra.js';
 import { parserFor, PARSERS } from '../../dist/parsers/_registry.js';
+import sdv from '../../dist/index.js';
+import { configure, resetConfig } from '../../dist/core/config.js';
+import { readFileSync } from 'node:fs';
+import { gunzipSync } from 'node:zlib';
 
 // Unit tests for the Baseball Savant / Statcast parsers + the hand-written
 // search/player helpers. Inline raw payloads (no network) -> tidy rows: row
@@ -64,6 +68,55 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_leaderboard (CSV)', () => {
       { id: 2, name: null, flag: false, pct: null, note: 'x' },
       { id: 3, name: 'C', flag: true, pct: null, note: null },
     ]);
+  });
+
+  it('integers beyond Number.MAX_SAFE_INTEGER stay exact as BigInt (one warning); inf / -inf are +/-Infinity', async () => {
+    const warned = [];
+    const onWarn = (w) => warned.push(w.message);
+    process.on('warning', onWarn);
+    try {
+      parse_mlb_statcast_leaderboard('big,x\n9007199254740993,inf\n2,-inf').should.eql([
+        { big: 9007199254740993n, x: Infinity },
+        { big: 2n, x: -Infinity },
+      ]);
+    } finally {
+      await new Promise((r) => setImmediate(r));
+      process.off('warning', onWarn);
+    }
+    warned.filter((m) => /\[big\].*BigInt/.test(m)).length.should.equal(1);
+  });
+
+  it('pins MLBAM id columns to integers like sdv-py _pin_id_columns (CSV and the /gf feed)', () => {
+    // the /gf feed ships game_pk as a digit string; sdv-py casts it to Int64
+    parse_mlb_statcast_gamefeed({ team_home: [{ game_pk: '745444', batter: '660271', pitch_type: 'FF' }] }).should.eql([
+      { game_pk: 745444, batter: 660271, pitch_type: 'FF' },
+    ]);
+    // a non-integral id column is left as read (sdv-py warns and does not cast)
+    parse_mlb_statcast_leaderboard('game_pk,pitcher\n7.5,1\n8,2')[0].should.eql({ game_pk: 7.5, pitcher: 1 });
+  });
+
+  it('mlb_statcast_search / _minors / _wbc with { parsed: true } return the typed rows (real 2024-06-15 capture)', async () => {
+    // tests/fixtures/mlb_statcast/search_2024-06-15_head.csv at the sdv-py pin (test/fixtures/py/README.md)
+    const csv = gunzipSync(
+      readFileSync(new URL('../fixtures/py/mlb_statcast/search_2024-06-15_head.csv.gz', import.meta.url))
+    ).toString('utf8');
+    const transport = async (req) => ({ status: 200, headers: { 'content-type': 'text/csv' }, url: req.url, data: csv });
+    configure({ transport: { mlb_statcast: transport } });
+    try {
+      const typed = parse_mlb_statcast_search(csv);
+      typed.length.should.equal(46);
+      for (const fn of ['mlb_statcast_search', 'mlb_statcast_search_minors', 'mlb_statcast_search_wbc']) {
+        const rows = await sdv.mlb[fn]('2024-06-15', '2024-06-15', { parsed: true });
+        rows.should.eql(typed, fn);
+        rows[0].game_pk.should.be.a.Number();
+        rows[0].batter.should.be.a.Number();
+        rows[0].release_speed.should.be.a.Number();
+        const raw = await sdv.mlb[fn]('2024-06-15', '2024-06-15');
+        raw[0].game_pk.should.be.a.String(); // raw = the CSV text cells
+      }
+    } finally {
+      resetConfig();
+    }
   });
 
   it('csvToRowsRaw keeps original headers; underscoreKeys applies the tidy pass', () => {

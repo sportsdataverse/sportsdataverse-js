@@ -114,37 +114,108 @@ const CSV_NA = new Set([
   "", "#N/A", "#N/A N/A", "#NA", "-1.#IND", "-1.#QNAN", "-NaN", "-nan", "1.#IND",
   "1.#QNAN", "<NA>", "N/A", "NA", "NULL", "NaN", "None", "n/a", "nan", "null",
 ]);
-const CSV_NUMBER = /^[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?$/;
+const CSV_INT = /^[+-]?\d+$/;
+const CSV_NUMBER = /^[+-]?((\d+\.?\d*|\.\d+)([eE][+-]?\d+)?|inf|infinity)$/i;
 const CSV_TRUE = new Set(["True", "TRUE", "true"]);
 const CSV_BOOL = new Set([...CSV_TRUE, "False", "FALSE", "false"]);
+
+/** A numeric CSV cell as pandas reads it (`inf` / `-inf` -> +/-Infinity). */
+function csvNumber(v: string): number {
+  const t = v.trim();
+  return /inf/i.test(t) ? (t.startsWith("-") ? -Infinity : Infinity) : Number(t);
+}
+
+/** Node: a process warning; other runtimes (the browser playground): console.warn. */
+function warn(message: string): void {
+  const proc = (globalThis as { process?: { emitWarning?: (m: string) => void } }).process;
+  if (proc?.emitWarning) proc.emitWarning(message);
+  else console.warn(message);
+}
 
 /**
  * pandas.read_csv's per-column dtype inference (what sdv-py's `_csv_to_frame`
  * reads Savant CSVs with), in place: an NA cell becomes `null`; a column whose
- * every other cell is numeric becomes numbers, one of only True/False cells
- * booleans; anything else stays text.
+ * every other cell is numeric becomes numbers (an integer column holding a value
+ * beyond Number.MAX_SAFE_INTEGER becomes BigInt instead, with one warning,
+ * so no int64 precision is lost), one of only True/False cells booleans; anything
+ * else stays text.
  */
 function inferCsvTypes(rows: Record<string, any>[]): Record<string, any>[] {
+  const bigint: string[] = [];
   for (const col of rows.length ? Object.keys(rows[0]) : []) {
     const present = rows.map((r) => r[col]).filter((v) => typeof v === "string" && !CSV_NA.has(v));
-    const conv = !present.length
-      ? null
-      : present.every((v) => CSV_NUMBER.test(v.trim()))
-        ? (v: string) => Number(v)
-        : present.every((v) => CSV_BOOL.has(v))
-          ? (v: string) => CSV_TRUE.has(v)
-          : null;
+    let conv: ((v: string) => any) | null = null;
+    if (present.length && present.every((v) => CSV_NUMBER.test(v.trim()))) {
+      const big =
+        present.every((v) => CSV_INT.test(v.trim())) &&
+        present.some((v) => !Number.isSafeInteger(Number(v.trim())));
+      if (big) bigint.push(col);
+      conv = big ? (v) => BigInt(v.trim()) : csvNumber;
+    } else if (present.length && present.every((v) => CSV_BOOL.has(v))) {
+      conv = (v) => CSV_TRUE.has(v);
+    }
     for (const r of rows) {
       const v = r[col];
       r[col] = typeof v !== "string" || CSV_NA.has(v) ? null : conv ? conv(v) : v;
     }
   }
+  if (bigint.length) {
+    warn(`Savant CSV columns [${bigint.join(", ")}] hold integers beyond Number.MAX_SAFE_INTEGER; returned as BigInt.`);
+  }
   return rows;
 }
 
-/** `csvToRowsRaw` + pandas-style column typing + the `underscore` key transform (the tidy form). */
+/**
+ * Savant columns holding MLBAM integer ids (players, game); sdv-py's
+ * `_MLBAM_ID_COLUMNS` at the vendor pin. Pinned to integers at the parse boundary
+ * so the CSV (search / leaderboard) and JSON (`/gf`) frames join on them.
+ */
+export const MLBAM_ID_COLUMNS: readonly string[] = [
+  "batter", "pitcher", "on_1b", "on_2b", "on_3b",
+  ...[2, 3, 4, 5, 6, 7, 8, 9].map((i) => `fielder_${i}`),
+  "game_pk",
+];
+
+/**
+ * Port of sdv-py's `_pin_id_columns`, in place: an MLBAM id column whose every
+ * non-null cell is an integer (a number, or a digit string such as the `/gf`
+ * feed's `"745444"`) becomes integer numbers; a column holding a non-integral or
+ * non-numeric value is left as read and named in one warning (`_warn_uncast_ids`).
+ */
+function pinIdColumns(rows: Record<string, any>[]): Record<string, any>[] {
+  const uncast: string[] = [];
+  for (const col of MLBAM_ID_COLUMNS) {
+    if (!rows.some((r) => col in r)) continue;
+    const present = rows.map((r) => r[col]).filter((v) => v !== null && v !== undefined);
+    const asInt = (v: any) =>
+      typeof v === "bigint" ? v : typeof v === "number" ? v : typeof v === "string" && CSV_NUMBER.test(v.trim()) ? csvNumber(v) : NaN;
+    if (!present.every((v) => typeof v === "bigint" || Number.isInteger(asInt(v)))) {
+      uncast.push(col);
+      continue;
+    }
+    for (const r of rows) if (r[col] !== null && r[col] !== undefined) r[col] = asInt(r[col]);
+  }
+  if (uncast.length) {
+    warn(
+      `Savant CSV id columns [${uncast.sort().join(", ")}] hold non-integral or non-numeric values; ` +
+        "left as read, not cast to Int64."
+    );
+  }
+  return rows;
+}
+
+/**
+ * Raw CSV rows (`csvToRowsRaw`) -> the tidy, typed form sdv-py's `_csv_to_frame`
+ * returns: pandas-style column typing, the `underscore` key transform, MLBAM ids
+ * pinned to integers. Mutates the raw rows' cells.
+ */
+export function typedCsvRows(rows: Record<string, any>[]): Record<string, any>[] {
+  return pinIdColumns(inferCsvTypes(rows).map((row) => underscoreKeys(row)));
+}
+
+/** `csvToRowsRaw` + `typedCsvRows` (the tidy form). */
 function csvToRows(text: any): Record<string, any>[] {
-  return inferCsvTypes(csvToRowsRaw(text)).map((row) => underscoreKeys(row));
+  return typedCsvRows(csvToRowsRaw(text));
 }
 
 /**
@@ -259,7 +330,8 @@ export function parse_mlb_statcast_gamefeed(payload: any): Record<string, any>[]
   if (rows.length === 0 && Array.isArray(payload.exit_velocity)) {
     rows = payload.exit_velocity;
   }
-  return jsonRows(rows);
+  // MLBAM ids pinned to integers like the CSV parsers (the feed ships game_pk as "745444").
+  return pinIdColumns(jsonRows(rows));
 }
 
 /**

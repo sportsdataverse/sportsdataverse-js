@@ -66,11 +66,26 @@ def main() -> None:
         (JS / "tools/codegen/vendor.yaml").read_text(encoding="utf-8")
     )
     ref = vendor["source"]["ref"]
-    head = subprocess.run(
-        ["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True
-    ).stdout.strip()
+
+    def git(*args: str) -> str:
+        return subprocess.run(
+            ["git", *args], capture_output=True, text=True, check=True
+        ).stdout.strip()
+
+    head = git("rev-parse", "HEAD")
     if head != ref:
         raise SystemExit(f"sdv-py checkout is at {head}, the vendor pin is {ref}")
+    if git("status", "--porcelain"):
+        raise SystemExit(
+            "the sdv-py checkout has local changes; the oracle must come from the pin as committed"
+        )
+    # The parsers must be imported from this checkout, not another installed copy.
+    root = Path(git("rev-parse", "--show-toplevel")).resolve()
+    pkg = Path(importlib.import_module("sportsdataverse").__file__).resolve()
+    if root not in pkg.parents:
+        raise SystemExit(
+            f"sportsdataverse is imported from {pkg}, outside the pinned checkout {root}"
+        )
     manifest = yaml.safe_load((FIX / "py/manifest.yaml").read_text(encoding="utf-8"))
     out_dir = FIX / "py/oracle"
     out_dir.mkdir(exist_ok=True)

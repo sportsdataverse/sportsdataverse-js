@@ -1,334 +1,1341 @@
 {
-  "_doc": "Parser-parity coverage of the vendored py returns tables, written by test/parsers/parity.test.js (SDV_PARITY_WRITE=1). documented: py table attached; verified: documented and checked on a real sdv-py capture (verified_endpoints; generated row types are emitted only for these); unverified: documented, no capture; incompatible: py table vendor.yaml declares does not describe the JS parser (schema_compatible: false, or schema_incompatible).",
+  "_doc": "Parser-parity coverage of the vendored py returns tables, written by test/parsers/parity.test.js (SDV_PARITY_WRITE=1). py_tables = documented (attached, with columns) + no_schema (attached, missing or empty schema file) + incompatible (schema_compatible: false or schema_incompatible) + overridden (parser_overrides) + overlay_schema (the overlay attaches a JS-owned schema) + undeclared (no declaration). verified = documented endpoints checked on a real sdv-py capture; generated row types are emitted only for verified_endpoints, and each listed unexercised column (null in every capture, so its type is unchecked) must be typed unknown.",
   "source_ref": "719de79edb685b89c524f8b4c0c146fea0b53855",
   "totals": {
+    "py_tables": 825,
     "documented": 239,
+    "no_schema": 15,
+    "incompatible": 529,
+    "overridden": 25,
+    "overlay_schema": 0,
+    "undeclared": 17,
     "verified": 179,
     "unverified": 60,
-    "incompatible": 529
+    "unexercised_columns": 117
   },
   "families": {
     "asa": {
+      "py_tables": 15,
       "documented": 15,
+      "no_schema": 0,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 7,
       "unverified": 8,
-      "incompatible": 0,
-      "verified_endpoints": [
-        "games",
-        "players",
-        "players_goals_added",
-        "players_salaries",
-        "players_xgoals",
-        "teams",
-        "teams_goals_added"
-      ]
+      "verified_endpoints": {
+        "games": {
+          "columns": 17,
+          "exercised": 17,
+          "unexercised_columns": []
+        },
+        "players": {
+          "columns": 11,
+          "exercised": 11,
+          "unexercised_columns": []
+        },
+        "players_goals_added": {
+          "columns": 4,
+          "exercised": 4,
+          "unexercised_columns": []
+        },
+        "players_salaries": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "players_xgoals": {
+          "columns": 18,
+          "exercised": 18,
+          "unexercised_columns": []
+        },
+        "teams": {
+          "columns": 4,
+          "exercised": 4,
+          "unexercised_columns": []
+        },
+        "teams_goals_added": {
+          "columns": 2,
+          "exercised": 2,
+          "unexercised_columns": []
+        }
+      }
     },
     "bart_wbb": {
+      "py_tables": 1,
       "documented": 0,
+      "no_schema": 0,
+      "incompatible": 1,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 0,
       "unverified": 0,
-      "incompatible": 1,
-      "verified_endpoints": []
+      "verified_endpoints": {}
     },
     "cbs": {
+      "py_tables": 82,
       "documented": 0,
+      "no_schema": 0,
+      "incompatible": 73,
+      "overridden": 9,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 0,
       "unverified": 0,
-      "incompatible": 73,
-      "verified_endpoints": []
+      "verified_endpoints": {}
     },
     "espn_core_v2": {
+      "py_tables": 4,
       "documented": 0,
+      "no_schema": 0,
+      "incompatible": 1,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 3,
       "verified": 0,
       "unverified": 0,
-      "incompatible": 1,
-      "verified_endpoints": []
+      "verified_endpoints": {}
+    },
+    "espn_fitt_v3": {
+      "py_tables": 1,
+      "documented": 0,
+      "no_schema": 0,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 1,
+      "verified": 0,
+      "unverified": 0,
+      "verified_endpoints": {}
+    },
+    "espn_site_v2": {
+      "py_tables": 11,
+      "documented": 0,
+      "no_schema": 0,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 11,
+      "verified": 0,
+      "unverified": 0,
+      "verified_endpoints": {}
+    },
+    "espn_web_v3": {
+      "py_tables": 1,
+      "documented": 0,
+      "no_schema": 0,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 1,
+      "verified": 0,
+      "unverified": 0,
+      "verified_endpoints": {}
     },
     "mlb": {
+      "py_tables": 54,
       "documented": 46,
+      "no_schema": 6,
+      "incompatible": 0,
+      "overridden": 2,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 46,
       "unverified": 0,
-      "incompatible": 0,
-      "verified_endpoints": [
-        "all_star_ballot",
-        "all_star_final_vote",
-        "all_star_write_ins",
-        "award_recipients",
-        "awards",
-        "boxscore",
-        "conference",
-        "conferences",
-        "datacasters",
-        "draft_latest",
-        "free_agents",
-        "game_changes",
-        "game_pace",
-        "game_timestamps",
-        "high_low",
-        "home_run_derby",
-        "home_run_derby_bracket",
-        "home_run_derby_pool",
-        "jobs",
-        "leagues",
-        "linescore",
-        "official_scorers",
-        "people",
-        "person",
-        "person_game_stats",
-        "play_by_play",
-        "schedule_postseason",
-        "schedule_postseason_series",
-        "schedule_tied",
-        "season",
-        "seasons_all",
-        "sport",
-        "sport_players",
-        "sports",
-        "team",
-        "team_affiliates",
-        "team_alumni",
-        "team_coaches",
-        "team_personnel",
-        "team_roster",
-        "teams_history",
-        "teams_stats_leaders",
-        "umpires",
-        "venue",
-        "venues",
-        "win_probability"
-      ]
+      "verified_endpoints": {
+        "all_star_ballot": {
+          "columns": 47,
+          "exercised": 47,
+          "unexercised_columns": []
+        },
+        "all_star_final_vote": {
+          "columns": 47,
+          "exercised": 47,
+          "unexercised_columns": []
+        },
+        "all_star_write_ins": {
+          "columns": 43,
+          "exercised": 43,
+          "unexercised_columns": []
+        },
+        "award_recipients": {
+          "columns": 14,
+          "exercised": 14,
+          "unexercised_columns": []
+        },
+        "awards": {
+          "columns": 10,
+          "exercised": 10,
+          "unexercised_columns": []
+        },
+        "boxscore": {
+          "columns": 231,
+          "exercised": 231,
+          "unexercised_columns": []
+        },
+        "conference": {
+          "columns": 10,
+          "exercised": 10,
+          "unexercised_columns": []
+        },
+        "conferences": {
+          "columns": 10,
+          "exercised": 10,
+          "unexercised_columns": []
+        },
+        "datacasters": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "draft_latest": {
+          "columns": 94,
+          "exercised": 94,
+          "unexercised_columns": []
+        },
+        "free_agents": {
+          "columns": 17,
+          "exercised": 17,
+          "unexercised_columns": []
+        },
+        "game_changes": {
+          "columns": 64,
+          "exercised": 64,
+          "unexercised_columns": []
+        },
+        "game_pace": {
+          "columns": 49,
+          "exercised": 49,
+          "unexercised_columns": []
+        },
+        "game_timestamps": {
+          "columns": 1,
+          "exercised": 1,
+          "unexercised_columns": []
+        },
+        "high_low": {
+          "columns": 18,
+          "exercised": 18,
+          "unexercised_columns": []
+        },
+        "home_run_derby": {
+          "columns": 81,
+          "exercised": 81,
+          "unexercised_columns": []
+        },
+        "home_run_derby_bracket": {
+          "columns": 81,
+          "exercised": 81,
+          "unexercised_columns": []
+        },
+        "home_run_derby_pool": {
+          "columns": 81,
+          "exercised": 81,
+          "unexercised_columns": []
+        },
+        "jobs": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "leagues": {
+          "columns": 40,
+          "exercised": 40,
+          "unexercised_columns": []
+        },
+        "linescore": {
+          "columns": 10,
+          "exercised": 10,
+          "unexercised_columns": []
+        },
+        "official_scorers": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "people": {
+          "columns": 43,
+          "exercised": 43,
+          "unexercised_columns": []
+        },
+        "person": {
+          "columns": 40,
+          "exercised": 40,
+          "unexercised_columns": []
+        },
+        "person_game_stats": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "play_by_play": {
+          "columns": 57,
+          "exercised": 57,
+          "unexercised_columns": []
+        },
+        "schedule_postseason": {
+          "columns": 60,
+          "exercised": 60,
+          "unexercised_columns": []
+        },
+        "schedule_postseason_series": {
+          "columns": 9,
+          "exercised": 9,
+          "unexercised_columns": []
+        },
+        "schedule_tied": {
+          "columns": 57,
+          "exercised": 57,
+          "unexercised_columns": []
+        },
+        "season": {
+          "columns": 21,
+          "exercised": 21,
+          "unexercised_columns": []
+        },
+        "seasons_all": {
+          "columns": 21,
+          "exercised": 21,
+          "unexercised_columns": []
+        },
+        "sport": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "sport_players": {
+          "columns": 50,
+          "exercised": 50,
+          "unexercised_columns": []
+        },
+        "sports": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "team": {
+          "columns": 33,
+          "exercised": 33,
+          "unexercised_columns": []
+        },
+        "team_affiliates": {
+          "columns": 35,
+          "exercised": 35,
+          "unexercised_columns": []
+        },
+        "team_alumni": {
+          "columns": 46,
+          "exercised": 46,
+          "unexercised_columns": []
+        },
+        "team_coaches": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "team_personnel": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "team_roster": {
+          "columns": 10,
+          "exercised": 10,
+          "unexercised_columns": []
+        },
+        "teams_history": {
+          "columns": 26,
+          "exercised": 26,
+          "unexercised_columns": []
+        },
+        "teams_stats_leaders": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "umpires": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "venue": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "venues": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "win_probability": {
+          "columns": 64,
+          "exercised": 64,
+          "unexercised_columns": []
+        }
+      }
     },
     "mlb_statcast": {
+      "py_tables": 39,
       "documented": 37,
+      "no_schema": 0,
+      "incompatible": 2,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 1,
       "unverified": 36,
-      "incompatible": 2,
-      "verified_endpoints": [
-        "schedule"
-      ]
+      "verified_endpoints": {
+        "schedule": {
+          "columns": 211,
+          "exercised": 211,
+          "unexercised_columns": []
+        }
+      }
     },
     "mls_api": {
+      "py_tables": 12,
       "documented": 12,
+      "no_schema": 0,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 9,
       "unverified": 3,
-      "incompatible": 0,
-      "verified_endpoints": [
-        "club",
-        "competition_seasons",
-        "competitions",
-        "content_seasons",
-        "match",
-        "season_matches",
-        "sportapi_club_players",
-        "sportapi_match",
-        "standings"
-      ]
+      "verified_endpoints": {
+        "club": {
+          "columns": 36,
+          "exercised": 36,
+          "unexercised_columns": []
+        },
+        "competition_seasons": {
+          "columns": 2,
+          "exercised": 2,
+          "unexercised_columns": []
+        },
+        "competitions": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "content_seasons": {
+          "columns": 26,
+          "exercised": 26,
+          "unexercised_columns": []
+        },
+        "match": {
+          "columns": 34,
+          "exercised": 34,
+          "unexercised_columns": []
+        },
+        "season_matches": {
+          "columns": 41,
+          "exercised": 41,
+          "unexercised_columns": []
+        },
+        "sportapi_club_players": {
+          "columns": 24,
+          "exercised": 24,
+          "unexercised_columns": []
+        },
+        "sportapi_match": {
+          "columns": 78,
+          "exercised": 78,
+          "unexercised_columns": []
+        },
+        "standings": {
+          "columns": 26,
+          "exercised": 26,
+          "unexercised_columns": []
+        }
+      }
     },
     "nba_stats": {
+      "py_tables": 128,
       "documented": 0,
+      "no_schema": 0,
+      "incompatible": 128,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 0,
       "unverified": 0,
-      "incompatible": 128,
-      "verified_endpoints": []
+      "verified_endpoints": {}
     },
     "nfl_api": {
+      "py_tables": 15,
       "documented": 11,
+      "no_schema": 0,
+      "incompatible": 4,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 0,
       "unverified": 11,
-      "incompatible": 4,
-      "verified_endpoints": []
+      "verified_endpoints": {}
     },
     "nhl_api_web": {
+      "py_tables": 27,
       "documented": 20,
+      "no_schema": 7,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 20,
       "unverified": 0,
-      "incompatible": 0,
-      "verified_endpoints": [
-        "boxscore",
-        "club_schedule_season",
-        "draft_picks",
-        "draft_picks_now",
-        "draft_rankings",
-        "draft_rankings_now",
-        "draft_tracker_picks_now",
-        "goalie_leaders",
-        "landing",
-        "pbp",
-        "player_game_log",
-        "player_landing",
-        "player_spotlight",
-        "playoff_series",
-        "roster",
-        "schedule",
-        "score",
-        "skater_leaders",
-        "standings",
-        "standings_season"
-      ]
+      "verified_endpoints": {
+        "boxscore": {
+          "columns": 36,
+          "exercised": 36,
+          "unexercised_columns": []
+        },
+        "club_schedule_season": {
+          "columns": 79,
+          "exercised": 79,
+          "unexercised_columns": []
+        },
+        "draft_picks": {
+          "columns": 23,
+          "exercised": 23,
+          "unexercised_columns": []
+        },
+        "draft_picks_now": {
+          "columns": 22,
+          "exercised": 22,
+          "unexercised_columns": []
+        },
+        "draft_rankings": {
+          "columns": 17,
+          "exercised": 17,
+          "unexercised_columns": []
+        },
+        "draft_rankings_now": {
+          "columns": 17,
+          "exercised": 17,
+          "unexercised_columns": []
+        },
+        "draft_tracker_picks_now": {
+          "columns": 15,
+          "exercised": 15,
+          "unexercised_columns": []
+        },
+        "goalie_leaders": {
+          "columns": 16,
+          "exercised": 16,
+          "unexercised_columns": []
+        },
+        "landing": {
+          "columns": 49,
+          "exercised": 49,
+          "unexercised_columns": []
+        },
+        "pbp": {
+          "columns": 48,
+          "exercised": 48,
+          "unexercised_columns": []
+        },
+        "player_game_log": {
+          "columns": 22,
+          "exercised": 22,
+          "unexercised_columns": []
+        },
+        "player_landing": {
+          "columns": 130,
+          "exercised": 130,
+          "unexercised_columns": []
+        },
+        "player_spotlight": {
+          "columns": 13,
+          "exercised": 13,
+          "unexercised_columns": []
+        },
+        "playoff_series": {
+          "columns": 44,
+          "exercised": 44,
+          "unexercised_columns": []
+        },
+        "roster": {
+          "columns": 21,
+          "exercised": 21,
+          "unexercised_columns": []
+        },
+        "schedule": {
+          "columns": 60,
+          "exercised": 60,
+          "unexercised_columns": []
+        },
+        "score": {
+          "columns": 48,
+          "exercised": 48,
+          "unexercised_columns": []
+        },
+        "skater_leaders": {
+          "columns": 20,
+          "exercised": 20,
+          "unexercised_columns": []
+        },
+        "standings": {
+          "columns": 84,
+          "exercised": 84,
+          "unexercised_columns": []
+        },
+        "standings_season": {
+          "columns": 10,
+          "exercised": 10,
+          "unexercised_columns": []
+        }
+      }
     },
     "nhl_edge": {
+      "py_tables": 22,
       "documented": 21,
+      "no_schema": 0,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 1,
       "verified": 21,
       "unverified": 0,
-      "incompatible": 0,
-      "verified_endpoints": [
-        "cat_goalie_detail",
-        "cat_skater_detail",
-        "goalie_5v5_detail",
-        "goalie_comparison",
-        "goalie_detail",
-        "goalie_landing",
-        "goalie_save_percentage_detail",
-        "goalie_shot_location_detail",
-        "skater_comparison",
-        "skater_detail",
-        "skater_landing",
-        "skater_shot_location_detail",
-        "skater_shot_speed_detail",
-        "skater_skating_distance_detail",
-        "skater_skating_speed_detail",
-        "skater_zone_time",
-        "team_detail",
-        "team_landing",
-        "team_shot_location_detail",
-        "team_shot_speed_detail",
-        "team_zone_time_details"
-      ]
+      "verified_endpoints": {
+        "cat_goalie_detail": {
+          "columns": 38,
+          "exercised": 38,
+          "unexercised_columns": []
+        },
+        "cat_skater_detail": {
+          "columns": 52,
+          "exercised": 52,
+          "unexercised_columns": []
+        },
+        "goalie_5v5_detail": {
+          "columns": 13,
+          "exercised": 13,
+          "unexercised_columns": []
+        },
+        "goalie_comparison": {
+          "columns": 34,
+          "exercised": 34,
+          "unexercised_columns": []
+        },
+        "goalie_detail": {
+          "columns": 38,
+          "exercised": 38,
+          "unexercised_columns": []
+        },
+        "goalie_landing": {
+          "columns": 78,
+          "exercised": 78,
+          "unexercised_columns": []
+        },
+        "goalie_save_percentage_detail": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "goalie_shot_location_detail": {
+          "columns": 9,
+          "exercised": 9,
+          "unexercised_columns": []
+        },
+        "skater_comparison": {
+          "columns": 105,
+          "exercised": 105,
+          "unexercised_columns": []
+        },
+        "skater_detail": {
+          "columns": 96,
+          "exercised": 96,
+          "unexercised_columns": []
+        },
+        "skater_landing": {
+          "columns": 145,
+          "exercised": 145,
+          "unexercised_columns": []
+        },
+        "skater_shot_location_detail": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "skater_shot_speed_detail": {
+          "columns": 36,
+          "exercised": 36,
+          "unexercised_columns": []
+        },
+        "skater_skating_distance_detail": {
+          "columns": 2,
+          "exercised": 2,
+          "unexercised_columns": []
+        },
+        "skater_skating_speed_detail": {
+          "columns": 28,
+          "exercised": 28,
+          "unexercised_columns": []
+        },
+        "skater_zone_time": {
+          "columns": 10,
+          "exercised": 10,
+          "unexercised_columns": []
+        },
+        "team_detail": {
+          "columns": 79,
+          "exercised": 79,
+          "unexercised_columns": []
+        },
+        "team_landing": {
+          "columns": 87,
+          "exercised": 87,
+          "unexercised_columns": []
+        },
+        "team_shot_location_detail": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "team_shot_speed_detail": {
+          "columns": 2,
+          "exercised": 2,
+          "unexercised_columns": []
+        },
+        "team_zone_time_details": {
+          "columns": 10,
+          "exercised": 10,
+          "unexercised_columns": []
+        }
+      }
     },
     "nhl_records": {
+      "py_tables": 42,
       "documented": 41,
+      "no_schema": 1,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 41,
       "unverified": 0,
-      "incompatible": 0,
-      "verified_endpoints": [
-        "all_time_record_vs_franchise",
-        "allstar_coach_career",
-        "allstar_goalie_career",
-        "allstar_goalie_game",
-        "allstar_skater_career",
-        "allstar_skater_game",
-        "attendance",
-        "awards",
-        "awards_trophy_season",
-        "away_team_record",
-        "coach",
-        "coach_career",
-        "coach_career_with_playoffs",
-        "coach_franchise",
-        "coach_stanley_cup",
-        "coaches",
-        "consecutive_100pt_seasons",
-        "draft",
-        "draft_by_team",
-        "draft_lottery_odds",
-        "draft_prospect",
-        "expansion_draft_picks",
-        "franchise_detail",
-        "franchise_playoff_appearances",
-        "franchise_season_results",
-        "franchise_team_totals",
-        "franchise_totals",
-        "franchises",
-        "gm_career",
-        "gm_franchise",
-        "goalie_career_stats",
-        "goalie_career_stats_with_playoffs",
-        "goalie_playoff_streak",
-        "goalie_season_stats",
-        "goalie_shutout_streak",
-        "goalie_undefeated_streak",
-        "goalie_win_plateaus",
-        "goalie_win_streak",
-        "hof_players",
-        "hof_players_by_office",
-        "home_team_record"
-      ]
+      "verified_endpoints": {
+        "all_time_record_vs_franchise": {
+          "columns": 37,
+          "exercised": 37,
+          "unexercised_columns": []
+        },
+        "allstar_coach_career": {
+          "columns": 13,
+          "exercised": 13,
+          "unexercised_columns": []
+        },
+        "allstar_goalie_career": {
+          "columns": 22,
+          "exercised": 22,
+          "unexercised_columns": []
+        },
+        "allstar_goalie_game": {
+          "columns": 26,
+          "exercised": 26,
+          "unexercised_columns": []
+        },
+        "allstar_skater_career": {
+          "columns": 21,
+          "exercised": 21,
+          "unexercised_columns": []
+        },
+        "allstar_skater_game": {
+          "columns": 29,
+          "exercised": 29,
+          "unexercised_columns": []
+        },
+        "attendance": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "awards": {
+          "columns": 20,
+          "exercised": 17,
+          "unexercised_columns": [
+            "detail_summary",
+            "player_image_caption",
+            "value"
+          ]
+        },
+        "awards_trophy_season": {
+          "columns": 20,
+          "exercised": 16,
+          "unexercised_columns": [
+            "detail_summary",
+            "player_id",
+            "player_image_caption",
+            "value"
+          ]
+        },
+        "away_team_record": {
+          "columns": 17,
+          "exercised": 17,
+          "unexercised_columns": []
+        },
+        "coach": {
+          "columns": 27,
+          "exercised": 16,
+          "unexercised_columns": [
+            "bio",
+            "brief_description",
+            "date_of_death",
+            "description",
+            "featured_image",
+            "history",
+            "hockey_hof_link",
+            "instagram",
+            "team_id",
+            "top100_player_link",
+            "twitter"
+          ]
+        },
+        "coach_career": {
+          "columns": 39,
+          "exercised": 39,
+          "unexercised_columns": []
+        },
+        "coach_career_with_playoffs": {
+          "columns": 13,
+          "exercised": 13,
+          "unexercised_columns": []
+        },
+        "coach_franchise": {
+          "columns": 45,
+          "exercised": 45,
+          "unexercised_columns": []
+        },
+        "coach_stanley_cup": {
+          "columns": 11,
+          "exercised": 11,
+          "unexercised_columns": []
+        },
+        "coaches": {
+          "columns": 27,
+          "exercised": 19,
+          "unexercised_columns": [
+            "bio",
+            "date_of_death",
+            "featured_image",
+            "hockey_hof_link",
+            "instagram",
+            "team_id",
+            "top100_player_link",
+            "twitter"
+          ]
+        },
+        "consecutive_100pt_seasons": {
+          "columns": 14,
+          "exercised": 14,
+          "unexercised_columns": []
+        },
+        "draft": {
+          "columns": 31,
+          "exercised": 8,
+          "unexercised_columns": [
+            "age_in_days",
+            "age_in_days_for_year",
+            "age_in_years",
+            "amateur_club_name",
+            "amateur_league",
+            "birth_date",
+            "birth_place",
+            "country_code",
+            "cs_player_id",
+            "draft_date",
+            "drafted_by_team_id",
+            "first_name",
+            "height",
+            "last_name",
+            "notes",
+            "player_id",
+            "player_name",
+            "position",
+            "removed_outright_why",
+            "shoots_catches",
+            "team_pick_history",
+            "tri_code",
+            "weight"
+          ]
+        },
+        "draft_by_team": {
+          "columns": 31,
+          "exercised": 27,
+          "unexercised_columns": [
+            "cs_player_id",
+            "notes",
+            "player_id",
+            "removed_outright_why"
+          ]
+        },
+        "draft_lottery_odds": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "draft_prospect": {
+          "columns": 28,
+          "exercised": 27,
+          "unexercised_columns": [
+            "hometown"
+          ]
+        },
+        "expansion_draft_picks": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "franchise_detail": {
+          "columns": 13,
+          "exercised": 13,
+          "unexercised_columns": []
+        },
+        "franchise_playoff_appearances": {
+          "columns": 8,
+          "exercised": 8,
+          "unexercised_columns": []
+        },
+        "franchise_season_results": {
+          "columns": 38,
+          "exercised": 31,
+          "unexercised_columns": [
+            "conference_abbrev",
+            "conference_name",
+            "division_abbrev",
+            "division_name",
+            "home_overtime_losses",
+            "overtime_losses",
+            "road_overtime_losses"
+          ]
+        },
+        "franchise_team_totals": {
+          "columns": 38,
+          "exercised": 38,
+          "unexercised_columns": []
+        },
+        "franchise_totals": {
+          "columns": 37,
+          "exercised": 37,
+          "unexercised_columns": []
+        },
+        "franchises": {
+          "columns": 8,
+          "exercised": 8,
+          "unexercised_columns": []
+        },
+        "gm_career": {
+          "columns": 40,
+          "exercised": 40,
+          "unexercised_columns": []
+        },
+        "gm_franchise": {
+          "columns": 43,
+          "exercised": 43,
+          "unexercised_columns": []
+        },
+        "goalie_career_stats": {
+          "columns": 37,
+          "exercised": 32,
+          "unexercised_columns": [
+            "game_seven_games_played",
+            "game_seven_losses",
+            "game_seven_wins",
+            "overtime_goals_against_average",
+            "overtime_losses"
+          ]
+        },
+        "goalie_career_stats_with_playoffs": {
+          "columns": 22,
+          "exercised": 21,
+          "unexercised_columns": [
+            "overtime_losses"
+          ]
+        },
+        "goalie_playoff_streak": {
+          "columns": 13,
+          "exercised": 13,
+          "unexercised_columns": []
+        },
+        "goalie_season_stats": {
+          "columns": 34,
+          "exercised": 30,
+          "unexercised_columns": [
+            "game_seven_games_played",
+            "game_seven_losses",
+            "game_seven_wins",
+            "overtime_losses"
+          ]
+        },
+        "goalie_shutout_streak": {
+          "columns": 17,
+          "exercised": 16,
+          "unexercised_columns": [
+            "saves"
+          ]
+        },
+        "goalie_undefeated_streak": {
+          "columns": 15,
+          "exercised": 15,
+          "unexercised_columns": []
+        },
+        "goalie_win_plateaus": {
+          "columns": 12,
+          "exercised": 12,
+          "unexercised_columns": []
+        },
+        "goalie_win_streak": {
+          "columns": 16,
+          "exercised": 16,
+          "unexercised_columns": []
+        },
+        "hof_players": {
+          "columns": 7,
+          "exercised": 4,
+          "unexercised_columns": [
+            "date_inducted",
+            "misc_full_name",
+            "official_id"
+          ]
+        },
+        "hof_players_by_office": {
+          "columns": 7,
+          "exercised": 5,
+          "unexercised_columns": [
+            "official_id",
+            "player_id"
+          ]
+        },
+        "home_team_record": {
+          "columns": 17,
+          "exercised": 17,
+          "unexercised_columns": []
+        }
+      }
     },
     "nhl_stats_rest": {
+      "py_tables": 17,
       "documented": 16,
+      "no_schema": 1,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 16,
       "unverified": 0,
-      "incompatible": 0,
-      "verified_endpoints": [
-        "country",
-        "draft",
-        "franchise",
-        "game",
-        "glossary",
-        "goalie_report",
-        "leaders_goalies",
-        "leaders_skaters",
-        "milestones_goalies",
-        "milestones_skaters",
-        "season",
-        "shiftcharts",
-        "skater_report",
-        "team",
-        "team_by_id",
-        "team_report"
-      ]
+      "verified_endpoints": {
+        "country": {
+          "columns": 11,
+          "exercised": 11,
+          "unexercised_columns": []
+        },
+        "draft": {
+          "columns": 3,
+          "exercised": 3,
+          "unexercised_columns": []
+        },
+        "franchise": {
+          "columns": 4,
+          "exercised": 4,
+          "unexercised_columns": []
+        },
+        "game": {
+          "columns": 13,
+          "exercised": 13,
+          "unexercised_columns": []
+        },
+        "glossary": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "goalie_report": {
+          "columns": 23,
+          "exercised": 22,
+          "unexercised_columns": [
+            "ties"
+          ]
+        },
+        "leaders_goalies": {
+          "columns": 15,
+          "exercised": 15,
+          "unexercised_columns": []
+        },
+        "leaders_skaters": {
+          "columns": 15,
+          "exercised": 14,
+          "unexercised_columns": [
+            "player_current_team_id"
+          ]
+        },
+        "milestones_goalies": {
+          "columns": 17,
+          "exercised": 17,
+          "unexercised_columns": []
+        },
+        "milestones_skaters": {
+          "columns": 17,
+          "exercised": 17,
+          "unexercised_columns": []
+        },
+        "season": {
+          "columns": 23,
+          "exercised": 23,
+          "unexercised_columns": []
+        },
+        "shiftcharts": {
+          "columns": 19,
+          "exercised": 17,
+          "unexercised_columns": [
+            "event_description",
+            "event_details"
+          ]
+        },
+        "skater_report": {
+          "columns": 26,
+          "exercised": 26,
+          "unexercised_columns": []
+        },
+        "team": {
+          "columns": 6,
+          "exercised": 6,
+          "unexercised_columns": []
+        },
+        "team_by_id": {
+          "columns": 6,
+          "exercised": 6,
+          "unexercised_columns": []
+        },
+        "team_report": {
+          "columns": 25,
+          "exercised": 24,
+          "unexercised_columns": [
+            "ties"
+          ]
+        }
+      }
     },
     "nwsl_api": {
+      "py_tables": 9,
       "documented": 8,
+      "no_schema": 0,
+      "incompatible": 1,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 6,
       "unverified": 2,
-      "incompatible": 1,
-      "verified_endpoints": [
-        "competitions",
-        "match_lineups",
-        "player_stats",
-        "season_matches",
-        "team_stats",
-        "teams"
-      ]
+      "verified_endpoints": {
+        "competitions": {
+          "columns": 6,
+          "exercised": 6,
+          "unexercised_columns": []
+        },
+        "match_lineups": {
+          "columns": 23,
+          "exercised": 21,
+          "unexercised_columns": [
+            "average_x_position",
+            "average_y_position"
+          ]
+        },
+        "player_stats": {
+          "columns": 47,
+          "exercised": 44,
+          "unexercised_columns": [
+            "rank_label",
+            "team_overall_summary",
+            "team_stadium"
+          ]
+        },
+        "season_matches": {
+          "columns": 112,
+          "exercised": 96,
+          "unexercised_columns": [
+            "provider_penalty_score_home",
+            "provider_penalty_score_away",
+            "previous_legs_result",
+            "group",
+            "group_name",
+            "round_id",
+            "round_name",
+            "group_id",
+            "home_overall_summary",
+            "home_stadium",
+            "away_overall_summary",
+            "away_stadium",
+            "match_set_round_id",
+            "match_set_index",
+            "match_set_match_set_format_id",
+            "match_set_type"
+          ]
+        },
+        "team_stats": {
+          "columns": 33,
+          "exercised": 28,
+          "unexercised_columns": [
+            "rank_label",
+            "overall_summary",
+            "stadium",
+            "stats_unit",
+            "stats_unit_abbreviation"
+          ]
+        },
+        "teams": {
+          "columns": 35,
+          "exercised": 35,
+          "unexercised_columns": []
+        }
+      }
     },
     "on3": {
+      "py_tables": 78,
       "documented": 0,
+      "no_schema": 0,
+      "incompatible": 78,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 0,
       "unverified": 0,
-      "incompatible": 78,
-      "verified_endpoints": []
+      "verified_endpoints": {}
     },
     "sports247": {
+      "py_tables": 12,
       "documented": 12,
+      "no_schema": 0,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 12,
       "unverified": 0,
-      "incompatible": 0,
-      "verified_endpoints": [
-        "coaches",
-        "composite_team_ranking_feed",
-        "institution_rankings",
-        "positions",
-        "recruits",
-        "sport_years",
-        "tags_autocomplete",
-        "target_predictions",
-        "teams",
-        "transfer_portal_player_feed",
-        "transfer_portal_team_feed",
-        "transfers"
-      ]
+      "verified_endpoints": {
+        "coaches": {
+          "columns": 18,
+          "exercised": 12,
+          "unexercised_columns": [
+            "composite_rating",
+            "current_job",
+            "average_composite_rating",
+            "overall_rank",
+            "division_rank",
+            "conference_rank"
+          ]
+        },
+        "composite_team_ranking_feed": {
+          "columns": 24,
+          "exercised": 24,
+          "unexercised_columns": []
+        },
+        "institution_rankings": {
+          "columns": 32,
+          "exercised": 30,
+          "unexercised_columns": [
+            "high_school_ranking_position",
+            "transfer_points"
+          ]
+        },
+        "positions": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "recruits": {
+          "columns": 33,
+          "exercised": 32,
+          "unexercised_columns": [
+            "signed_institution"
+          ]
+        },
+        "sport_years": {
+          "columns": 1,
+          "exercised": 1,
+          "unexercised_columns": []
+        },
+        "tags_autocomplete": {
+          "columns": 4,
+          "exercised": 4,
+          "unexercised_columns": []
+        },
+        "target_predictions": {
+          "columns": 27,
+          "exercised": 27,
+          "unexercised_columns": []
+        },
+        "teams": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "transfer_portal_player_feed": {
+          "columns": 19,
+          "exercised": 19,
+          "unexercised_columns": []
+        },
+        "transfer_portal_team_feed": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "transfers": {
+          "columns": 39,
+          "exercised": 39,
+          "unexercised_columns": []
+        }
+      }
     },
     "sports247_site_pages": {
+      "py_tables": 35,
       "documented": 0,
+      "no_schema": 0,
+      "incompatible": 35,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 0,
       "unverified": 0,
-      "incompatible": 35,
-      "verified_endpoints": []
+      "verified_endpoints": {}
+    },
+    "torvik": {
+      "py_tables": 2,
+      "documented": 0,
+      "no_schema": 0,
+      "incompatible": 0,
+      "overridden": 2,
+      "overlay_schema": 0,
+      "undeclared": 0,
+      "verified": 0,
+      "unverified": 0,
+      "verified_endpoints": {}
     },
     "wnba_stats": {
+      "py_tables": 111,
       "documented": 0,
+      "no_schema": 0,
+      "incompatible": 111,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 0,
       "unverified": 0,
-      "incompatible": 111,
-      "verified_endpoints": []
+      "verified_endpoints": {}
     },
     "yahoo": {
+      "py_tables": 107,
       "documented": 0,
+      "no_schema": 0,
+      "incompatible": 95,
+      "overridden": 12,
+      "overlay_schema": 0,
+      "undeclared": 0,
       "verified": 0,
       "unverified": 0,
-      "incompatible": 95,
-      "verified_endpoints": []
+      "verified_endpoints": {}
     }
   }
 }

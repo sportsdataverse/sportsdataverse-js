@@ -155,18 +155,26 @@ export function mapParser(cfg, pyParser, where) {
     throw new Error(`vendor.yaml ${where}: schema_compatible must be a boolean`);
   }
   const m = (cfg.parsers ?? {})[pyParser];
-  if (m === undefined) return { js: pyParser, compatible: cfg.schema_compatible === true };
+  if (m === undefined) {
+    return { js: pyParser, compatible: cfg.schema_compatible === true, declared: cfg.schema_compatible !== undefined };
+  }
   if (typeof m?.js !== "string" || typeof m.schema_compatible !== "boolean") {
     throw new Error(`vendor.yaml ${where}: parsers.${pyParser} must be {js: <name>, schema_compatible: <bool>}`);
   }
-  return { js: m.js, compatible: m.schema_compatible };
+  return { js: m.js, compatible: m.schema_compatible, declared: true };
 }
 
 /**
  * Transform one upstream endpoint YAML into the JS family file. Pure: same
- * inputs, same bytes. Returns `{ text, schemaRefs, jsRefs }`: `schemaRefs` are the
- * py returns-schema refs still attached after the merge (the schemas to copy),
- * `jsRefs` the JS-owned ones the overlay attaches.
+ * inputs, same bytes. Returns `{ text, schemaRefs, jsRefs, pySchemas }`:
+ * `schemaRefs` are the py returns-schema refs still attached after the merge (the
+ * schemas to copy), `jsRefs` the JS-owned ones the overlay attaches, and
+ * `pySchemas` one `{ short, ref, status }` per upstream endpoint carrying a py
+ * `returns_schema` (`ref` = the JS-side ref when attached, else py's), where
+ * `status` is why it is or is not attached: `attached`, `parser_override`,
+ * `schema_incompatible`, `declared_incompatible` (a `schema_compatible: false`
+ * declaration), `undeclared` (no declaration: fail-closed) or `overlay_schema`
+ * (the overlay re-points it at a JS-owned schema).
  *
  * Returns-schema policy: a py `returns_schema` stays only when the endpoint's JS
  * parser is the declared equivalent of py's (see `mapParser`), no
@@ -206,6 +214,7 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
   }
   const unusedIncompatible = new Set(cfg.schema_incompatible ?? []);
   const pyRefs = new Map(); // endpoint node -> py returns_schema ref it keeps
+  const pySchemas = new Map(); // endpoint node -> { short, ref, status } for every py returns_schema
   for (const ep of items) {
     let short = ep.get("short");
     if (names[short]) {
@@ -215,24 +224,33 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
     }
     const pyParser = ep.get("parser");
     let compatible = false;
+    let declared = false;
     if (pyParser) {
       unusedParsers.delete(pyParser);
       const m = mapParser(cfg, pyParser, key);
       ep.set("parser", m.js);
       compatible = m.compatible;
+      declared = m.declared;
     }
+    let status = null;
     if (overrides[short]) {
       unusedOverrides.delete(short);
       ep.set("parser", overrides[short]);
       compatible = false;
+      status = "parser_override";
     }
-    if (unusedIncompatible.delete(short)) compatible = false;
+    if (unusedIncompatible.delete(short)) {
+      compatible = false;
+      status ??= "schema_incompatible";
+    }
     const rs = ep.get("returns_schema");
     if (rs && compatible) {
       ep.set("returns_schema", rewriteSchema(rs, cfg.schemas));
       pyRefs.set(ep, rs);
+      pySchemas.set(ep, { short, ref: rewriteSchema(rs, cfg.schemas), status: "attached" });
     } else if (rs) {
       ep.delete("returns_schema");
+      pySchemas.set(ep, { short, ref: rs, status: status ?? (declared ? "declared_incompatible" : "undeclared") });
     }
   }
 
@@ -270,7 +288,11 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
           );
         }
         target.set(k, pair.value);
-        if (k === "returns_schema") pyRefs.delete(target); // JS-owned now
+        if (k === "returns_schema") {
+          pyRefs.delete(target); // JS-owned now
+          // an attached py table the overlay replaces; any other status keeps its reason
+          if (pySchemas.get(target)?.status === "attached") pySchemas.get(target).status = "overlay_schema";
+        }
       }
       if (oep.commentBefore) {
         target.commentBefore = [target.commentBefore, oep.commentBefore]
@@ -296,6 +318,7 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
     text: doc.toString({ lineWidth: 0, indentSeq: false }),
     schemaRefs: [...new Set(pyRefs.values())],
     jsRefs: [...new Set(jsRefs)],
+    pySchemas: [...pySchemas.values()],
   };
 }
 
@@ -345,9 +368,10 @@ export function deriveAll(root = CODEGEN_DIR) {
 }
 
 /**
- * Schema files left behind in a directory the vendor writes into: not vendored
- * and not referenced by any endpoint YAML (vendored or JS-owned). These are
- * stale copies of a schema upstream renamed/dropped (or a hand-added file).
+ * py schema copies the vendor wrote and no longer attaches (upstream renamed or
+ * dropped the schema, or a declaration stopped attaching it): an exact py schema
+ * path, byte-identical to the upstream copy, not vendored now and not referenced
+ * by any endpoint YAML (vendored or JS-owned). A JS-authored file never qualifies.
  */
 export function findOrphans(root, outputs) {
   const referenced = new Set();
@@ -363,32 +387,26 @@ export function findOrphans(root, outputs) {
     const ref = rel.replace(/\.yaml$/, "");
     return referenced.has(ref) || (ref.includes("/") && referenced.has(ref.slice(0, ref.lastIndexOf("/"))));
   };
-  const dirs = new Set(
-    [...outputs.keys()]
-      .filter((p) => p.startsWith("schemas/"))
-      .map((p) => p.slice(0, p.lastIndexOf("/")))
-  );
-  // Every directory a family's py schema refs point into is vendor territory, even
-  // when none of them is attached any more (a family flipped to
-  // schema_compatible: false must not leave its old copies behind).
+  // Only exact paths of py schema copies the vendor wrote and no longer attaches:
+  // a file at a py schema's (rewritten) path, byte-identical to the upstream copy,
+  // not produced now and not referenced. Never a whole directory, so a JS-authored
+  // schema (not yet referenced, or at a py path with its own content) is never touched.
+  const up = join(root, UPSTREAM);
+  const upSchemas = listYaml(join(up, "schemas"));
+  const lf = (t) => t.replace(/\r\n/g, "\n");
+  const orphans = new Set();
   for (const [key, cfg] of familyEntries(loadManifest(root))) {
-    const up = join(root, UPSTREAM, upstreamEndpointPath(key, cfg));
-    for (const ref of existsSync(up) ? schemaRefs(read(up)) : []) {
-      const r = rewriteSchema(ref, cfg.schemas);
-      if (r.includes("/")) dirs.add(`schemas/${r.slice(0, r.lastIndexOf("/"))}`);
-    }
-  }
-  const orphans = [];
-  for (const d of dirs) {
-    if (!existsSync(join(root, d))) continue;
-    for (const e of readdirSync(join(root, d), { withFileTypes: true })) {
-      const p = `${d}/${e.name}`;
-      if (e.isFile() && e.name.endsWith(".yaml") && !outputs.has(p) && !isReferenced(p.slice("schemas/".length))) {
-        orphans.push(p);
+    const upFile = join(up, upstreamEndpointPath(key, cfg));
+    for (const ref of existsSync(upFile) ? schemaRefs(read(upFile)) : []) {
+      for (const f of schemaFilesFor(ref, upSchemas)) {
+        const p = `schemas/${rewriteSchema(f, cfg.schemas)}`;
+        const file = join(root, p);
+        if (outputs.has(p) || !existsSync(file) || isReferenced(p.slice("schemas/".length))) continue;
+        if (lf(read(file)) === lf(read(join(up, "schemas", f)))) orphans.add(p);
       }
     }
   }
-  return orphans.sort();
+  return [...orphans].sort();
 }
 
 /** Every file under `dir` (recursive), as `/`-joined paths relative to it. */

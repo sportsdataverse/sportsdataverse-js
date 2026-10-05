@@ -8,6 +8,7 @@ import {
   CODEGEN_DIR,
   checkVendor,
   deriveAll,
+  writeVendor,
   gitBlobSha,
   loadManifest,
   PY_NAMES_FILE,
@@ -27,9 +28,9 @@ const transform = (key, cfg, upstreamText, overlayText = null) =>
   transformFamily(key, cfg, upstreamText, overlayText, manifest.source);
 const family = (key, overlayText = null) => {
   const cfg = manifest.families[key] ?? {};
-  const { text, schemaRefs } = transform(key, cfg, upstream(`endpoints/${cfg.from ?? key}.yaml`), overlayText);
+  const { text, schemaRefs, pySchemas } = transform(key, cfg, upstream(`endpoints/${cfg.from ?? key}.yaml`), overlayText);
   const doc = parse(text);
-  return { text, doc, schemaRefs, ep: (s) => doc.endpoints.find((e) => e.short === s) };
+  return { text, doc, schemaRefs, pySchemas, ep: (s) => doc.endpoints.find((e) => e.short === s) };
 };
 
 describe('vendor: transforms (offline, committed upstream copies)', () => {
@@ -74,6 +75,13 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
     statcast.ep('schedule').returns_schema.should.equal('native/mlb_statcast/schedule');
     // ... and a family flipped wholesale (the harness disproved its tables) keeps none.
     family('nba_stats').schemaRefs.should.eql([]);
+    // pySchemas says why each py returns_schema is (not) attached.
+    const why = (key, short) => family(key).pySchemas.find((e) => e.short === short).status;
+    why('nhl_edge', 'skater_detail').should.equal('attached');
+    why('mlb', 'teams_stats').should.equal('parser_override');
+    why('mlb_statcast', 'gamefeed').should.equal('schema_incompatible');
+    why('nba_stats', 'scheduleleaguev2').should.equal('declared_incompatible');
+    why('espn_site_v2', 'scoreboard').should.equal('undeclared');
     (() => transform('nhl_edge', { schema_compatible: true, schema_incompatible: 'skater_detail' }, edge)).should.throw(
       /schema_incompatible must be a list/
     );
@@ -282,11 +290,31 @@ describe('vendor:check (offline drift gate)', function () {
     ]);
   });
 
-  it('flags a stray schema in a vendored directory', () => {
-    writeFileSync(join(tmp, 'schemas', 'native', 'nhl_edge', 'stray.yaml'), 'schema: stray\ncolumns: []\n');
+  it('flags (and `npm run vendor` deletes) a stale vendored copy, by exact path', () => {
+    // a py schema the declaration does not attach (nba_stats is schema_compatible: false),
+    // left behind byte-identical to its upstream copy
+    const rel = join('schemas', 'native', 'nba_stats', 'leaguedashplayerstats.yaml');
+    writeFileSync(join(tmp, rel), readFileSync(join(tmp, 'vendor', 'upstream', rel)));
     checkVendor(tmp).should.eql([
-      `ORPHAN: tools/codegen/schemas/native/nhl_edge/stray.yaml is not vendored and not referenced (delete it, or ${REGEN})`,
+      `ORPHAN: tools/codegen/schemas/native/nba_stats/leaguedashplayerstats.yaml is not vendored and not referenced (delete it, or ${REGEN})`,
     ]);
+    writeVendor(tmp).removed.should.eql(['schemas/native/nba_stats/leaguedashplayerstats.yaml']);
+    checkVendor(tmp).should.eql([]);
+  });
+
+  it('never touches a JS-authored schema, even unreferenced or in a directory the vendor writes into', () => {
+    const files = {
+      // a new JS-only schema in a shared directory (vendored py schemas + JS-owned overlay ones)
+      [join('schemas', 'native', 'mlb', 'js_only_new.yaml')]: 'schema: js_only_new\ncolumns: []\n',
+      // a JS-authored schema at a py schema's path, with its own content
+      [join('schemas', 'native', 'nba_stats', 'leaguegamelog.yaml')]: 'schema: leaguegamelog\ncolumns: []\n',
+      // a hand-added file in a fully vendored directory
+      [join('schemas', 'native', 'nhl_edge', 'stray.yaml')]: 'schema: stray\ncolumns: []\n',
+    };
+    for (const [rel, body] of Object.entries(files)) writeFileSync(join(tmp, rel), body);
+    checkVendor(tmp).should.eql([]);
+    writeVendor(tmp).removed.should.eql([]);
+    for (const [rel, body] of Object.entries(files)) readFileSync(join(tmp, rel), 'utf8').should.equal(body);
   });
 
   it('flags every schema a family flipped to schema_compatible: false leaves behind', () => {

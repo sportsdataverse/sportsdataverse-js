@@ -1,6 +1,29 @@
+import { MLBAM_ID_COLUMNS } from '../../dist/parsers/mlb_statcast.js';
+
 // Cell comparison for JS-parser vs sdv-py-oracle parity tests (keyless.test.js,
 // parity.test.js). py frames are polars; object-dtype columns that py
 // stringified compare by string form, everything else numerically.
+
+const MLBAM_IDS = new Set(MLBAM_ID_COLUMNS);
+/** A join-key column: `id`, `*_id`, `*_ids`, `*_pk`, or an MLBAM id column (`batter`, `on_1b`, ...). */
+export const isIdColumn = (col) => col === 'id' || /_(ids?|pk)$/.test(col) || MLBAM_IDS.has(col);
+
+/**
+ * Does a non-null JS value have the JS type of a polars dtype (the oracle's
+ * `dtypes`)? Integers / floats -> number|bigint, String -> string, Boolean ->
+ * boolean, a List / Struct (JS JSON-encodes nested cells) or temporal -> string,
+ * Null -> nothing (py has no value there). An unknown dtype fails closed.
+ */
+export function sameType(v, dtype) {
+  if (/^(U?Int\d+|Float\d+|Decimal)/.test(dtype)) return typeof v === 'number' || typeof v === 'bigint';
+  if (/^(String|Utf8|Categorical|Enum)/.test(dtype)) return typeof v === 'string';
+  if (dtype === 'Boolean') return typeof v === 'boolean';
+  if (/^(List|Array|Struct|Date|Datetime|Time|Duration)/.test(dtype)) return typeof v === 'string';
+  if (dtype === 'Null') return false;
+  if (dtype === 'Object') return true;
+  throw new Error(`unknown polars dtype ${dtype}`);
+}
+
 export function same(a, b, col) {
   const nil = (v) => v === null || v === undefined;
   // A nested list / object cell (never a join key, even under an `*_ids` name): JS
@@ -14,7 +37,7 @@ export function same(a, b, col) {
     }
   }
   // Id columns are join keys: strict. Same type, same value, no numeric coercion.
-  if (col && (col === 'id' || /_ids?$/.test(col)) && !nil(a) && !nil(b)) return a === b;
+  if (col && isIdColumn(col) && !nil(a) && !nil(b)) return a === b;
   // py stringifies a missing value in a mixed object column to "nan"; JS keeps null.
   if (b === 'nan' && nil(a)) return true;
   if (nil(a) || nil(b)) return (a ?? null) === (b ?? null);

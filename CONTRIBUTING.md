@@ -154,7 +154,11 @@ npm run codegen                 # then regenerate as usual
   `schema_compatible: false` instead). Add a capture to the manifest (and
   regenerate the oracle) to verify more endpoints; generated row types are emitted
   only for the verified ones recorded in `test/fixtures/py/parity_coverage.json`
-  (rewrite it with `SDV_PARITY_WRITE=1 npx mocha test/parsers/parity.test.js`).
+  (rewrite it with `SDV_PARITY_WRITE=1 npx mocha test/parsers/parity.test.js`),
+  and a column it lists as unexercised (null in every capture) is typed `unknown`.
+- `npm run vendor` deletes (and `vendor:check` flags) only the exact py schema
+  copies it wrote and no longer attaches (byte-identical to the upstream copy);
+  JS-authored schemas are never touched, wherever they live.
 - A new param `transform:` upstream fails `npm run codegen` until it is ported to
   `src/core/transforms.ts` (+ `docs/src/playground/resolve.mjs`) and listed in
   `tools/codegen/param-transforms.mjs`.
