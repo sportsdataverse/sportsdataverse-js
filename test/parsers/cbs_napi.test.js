@@ -199,11 +199,11 @@ describe('parsers/cbs: registry wiring', () => {
 describe('cbs flat-API family metadata (flat-contract style)', () => {
   const family = () => FLAT_WRAPPERS.filter((w) => w.api === 'cbs');
 
-  it('registers the cbs family (82 endpoints) on https://api.cbssports.com', () => {
+  it('registers the cbs family (82 endpoints) on https://api.cbssports.com/napi', () => {
     const rows = family();
     rows.length.should.equal(82);
-    FLAT_HOSTS.cbs.should.equal('https://api.cbssports.com');
-    for (const w of rows) w.host.should.equal('https://api.cbssports.com');
+    FLAT_HOSTS.cbs.should.equal('https://api.cbssports.com/napi');
+    for (const w of rows) w.host.should.equal('https://api.cbssports.com/napi');
   });
 
   it('every cbs wrapper names a registered parser, none auth', () => {

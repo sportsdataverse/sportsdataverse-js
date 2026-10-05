@@ -8940,7 +8940,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "baseball_player_meta",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/meta/baseball/{player_id}",
     "pathParams": [
@@ -8956,7 +8956,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "boxscore",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/boxscore/{game_id}",
     "pathParams": [
@@ -8972,7 +8972,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "bulk",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/bulk",
     "pathParams": [],
@@ -9013,7 +9013,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "client_configuration",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/client/config/{client_name}",
     "pathParams": [
@@ -9046,7 +9046,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "coach_rankings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/coach/rankings/{coach_id}",
     "pathParams": [
@@ -9062,7 +9062,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "coach_team_associations",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/coach/teamAssociations/{coach_id}",
     "pathParams": [
@@ -9083,7 +9083,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "depth_charts",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/depthCharts/{player_id}",
     "pathParams": [
@@ -9108,7 +9108,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "endpoint_registry",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/endpoint/registry",
     "pathParams": [],
@@ -9120,7 +9120,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "event_entrants",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/event/entrants/{event_id}",
     "pathParams": [
@@ -9136,7 +9136,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "event_leaderboard",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/event/leaderboard/{event_id}",
     "pathParams": [
@@ -9152,7 +9152,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "event",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/event/{event_id}",
     "pathParams": [
@@ -9177,7 +9177,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "event_seasons",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/event/seasons/{event_id}",
     "pathParams": [
@@ -9193,7 +9193,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "event_venues",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/event/venues/{event_id}",
     "pathParams": [
@@ -9209,7 +9209,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "featured_game",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/featured/{game_id}",
     "pathParams": [
@@ -9225,7 +9225,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_betting_splits",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/bettingSplits/{game_id}",
     "pathParams": [
@@ -9241,7 +9241,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_content_preview",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/content/preview/{game_id}",
     "pathParams": [
@@ -9257,7 +9257,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_content_recap",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/content/recap/{game_id}",
     "pathParams": [
@@ -9273,7 +9273,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_content_story",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/content/story/{game_id}",
     "pathParams": [
@@ -9294,7 +9294,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_hq_odds",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/odds/hq/{game_id}",
     "pathParams": [
@@ -9310,7 +9310,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_lineup",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/lineup/{game_id}",
     "pathParams": [
@@ -9331,7 +9331,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_odds",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/odds/{game_id}",
     "pathParams": [
@@ -9368,7 +9368,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_outcomes",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/outcomes/{game_id}",
     "pathParams": [
@@ -9384,7 +9384,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_props",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/props/{game_id}",
     "pathParams": [
@@ -9421,7 +9421,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_rtwp",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/rtwp/{game_id}",
     "pathParams": [
@@ -9437,7 +9437,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/{game_id}",
     "pathParams": [
@@ -9462,7 +9462,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_boxscores",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/boxscores/{game_id}",
     "pathParams": [
@@ -9478,7 +9478,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_drives",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/drives/{game_id}",
     "pathParams": [
@@ -9494,7 +9494,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_leaders",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/leaders/{game_id}",
     "pathParams": [
@@ -9510,7 +9510,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_player_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/playerStats/{game_id}",
     "pathParams": [
@@ -9526,7 +9526,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_plays",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/plays/{game_id}",
     "pathParams": [
@@ -9542,7 +9542,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_rosters",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/rosters/{game_id}",
     "pathParams": [
@@ -9558,7 +9558,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_scoreboard",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/scoreboard/{game_id}",
     "pathParams": [
@@ -9574,7 +9574,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_scores",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/scores/{game_id}",
     "pathParams": [
@@ -9590,7 +9590,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_team_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/teamStats/{game_id}",
     "pathParams": [
@@ -9606,7 +9606,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_winprob",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/winprob/{game_id}",
     "pathParams": [
@@ -9622,7 +9622,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_ytd_player_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/ytdPlayerStats/{game_id}",
     "pathParams": [
@@ -9638,7 +9638,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_ytd_team_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/ytdTeamStats/{game_id}",
     "pathParams": [
@@ -9654,7 +9654,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_ticket",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/ticket/{game_id}",
     "pathParams": [
@@ -9670,7 +9670,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "golf_event_markets",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/golf/event/markets/{event_id}",
     "pathParams": [
@@ -9686,7 +9686,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "golf_player_markets",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/golf/player/markets/{player_id}",
     "pathParams": [
@@ -9707,7 +9707,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "golfer_results",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/golfer/results/{player_id}",
     "pathParams": [
@@ -9732,7 +9732,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "hockey_player_meta",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/hockey/meta/{player_id}",
     "pathParams": [
@@ -9748,7 +9748,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/league/{league_id}",
     "pathParams": [
@@ -9769,7 +9769,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_teams",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/league/teams/{league_id}",
     "pathParams": [
@@ -9790,7 +9790,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "odds",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/odds/{game_id}",
     "pathParams": [
@@ -9806,7 +9806,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_combine_data",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/combineData/{player_id}",
     "pathParams": [
@@ -9822,7 +9822,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_draft_info",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/draftInfo/{player_id}",
     "pathParams": [
@@ -9851,7 +9851,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_encyclopedia",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/encyclopedia/{player_id}",
     "pathParams": [
@@ -9876,7 +9876,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_futures",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/futures/{player_id}",
     "pathParams": [
@@ -9892,7 +9892,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_game_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/gameStats/{player_id}",
     "pathParams": [
@@ -9921,7 +9921,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_golf_metadata",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/meta/golf/{player_id}",
     "pathParams": [
@@ -9937,7 +9937,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_injuries",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/injuries/{player_id}",
     "pathParams": [
@@ -9958,7 +9958,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_outlook",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/outlook/{player_id}",
     "pathParams": [
@@ -9979,7 +9979,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_rankings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/rankings/{player_id}",
     "pathParams": [
@@ -10016,7 +10016,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/{player_id}",
     "pathParams": [
@@ -10045,7 +10045,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_standings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/standings/{player_id}",
     "pathParams": [
@@ -10082,7 +10082,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/stats/{player_id}",
     "pathParams": [
@@ -10127,7 +10127,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_team_associations",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/teamAssociations/{player_id}",
     "pathParams": [
@@ -10156,7 +10156,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_transactions",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/transactions/{player_id}",
     "pathParams": [
@@ -10193,7 +10193,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "position_rankings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/positionRankings/{player_id}",
     "pathParams": [
@@ -10214,7 +10214,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "probable_players",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/probablePlayers/{game_id}",
     "pathParams": [
@@ -10239,7 +10239,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "recruit_rankings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/recruit/rankings/{player_id}",
     "pathParams": [
@@ -10255,7 +10255,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "recruit_team_associations",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/recruitAssociations/{player_id}",
     "pathParams": [
@@ -10276,7 +10276,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "ruwt_highlights",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/ruwtHighlights/{game_id}",
     "pathParams": [
@@ -10292,7 +10292,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/season/{season_id}",
     "pathParams": [
@@ -10317,7 +10317,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_teams",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/season/teams/{season_id}",
     "pathParams": [
@@ -10338,7 +10338,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "sport_leagues",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/sport/leagues/{sport_id}",
     "pathParams": [
@@ -10354,7 +10354,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "sport",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/sport/{sport_id}",
     "pathParams": [
@@ -10375,7 +10375,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "sports_line_team_rankings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/rankings/sportsline/{team_id}",
     "pathParams": [
@@ -10391,7 +10391,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "sports_line_team_standings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/standings/sportsline/{team_id}",
     "pathParams": [
@@ -10412,7 +10412,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "sub_divisions",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/division/subdivisions/{division_id}",
     "pathParams": [
@@ -10437,7 +10437,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_futures",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/futures/{team_id}",
     "pathParams": [
@@ -10453,7 +10453,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_metadata",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/metadata/{team_id}",
     "pathParams": [
@@ -10474,7 +10474,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_players",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/players/{team_id}",
     "pathParams": [
@@ -10495,7 +10495,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_polls",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/polls/{team_id}",
     "pathParams": [
@@ -10520,7 +10520,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_rankings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/rankings/{team_id}",
     "pathParams": [
@@ -10549,7 +10549,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_seasons",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/seasons/{team_id}",
     "pathParams": [
@@ -10586,7 +10586,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_standings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/standings/{team_id}",
     "pathParams": [
@@ -10615,7 +10615,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/stats/{team_id}",
     "pathParams": [
@@ -10648,7 +10648,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "venue_metadata",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/venue/metadata/{venue_id}",
     "pathParams": [
@@ -10664,7 +10664,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "venue",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/venue/{venue_id}",
     "pathParams": [
@@ -10685,7 +10685,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "weather",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/weather/{game_id}",
     "pathParams": [

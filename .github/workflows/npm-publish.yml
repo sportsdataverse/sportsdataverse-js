@@ -30,6 +30,7 @@ jobs:
       - run: npm run codegen:check
       - run: npm run typecheck
       - run: npm run build
+      - run: npm test
 
   publish-npm:
     needs: build

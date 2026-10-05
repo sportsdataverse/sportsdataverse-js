@@ -50,7 +50,7 @@ export const FLAT_HOSTS: Record<string, string> = {
   // onto the standalone `cbs` namespace (sdv.cbs.*). The CBS data resources are
   // anonymously reachable (the spec ships no securityScheme), so this family is
   // NOT `auth: true` — no token, no required `headers`.
-  cbs: "https://api.cbssports.com",
+  cbs: "https://api.cbssports.com/napi",
   // Fox Sports API — fourth cross-sport (non-league) provider family.
   // Merges onto the standalone `fox` namespace (sdv.fox.*). Auth is a public
   // apikey + api-version query pair (both default in the wrapper metadata), so
