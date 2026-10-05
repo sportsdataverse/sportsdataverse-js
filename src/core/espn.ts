@@ -128,7 +128,7 @@ export async function callWrapper(
   params: Record<string, any> = {}
 ): Promise<any> {
   const { url, query } = resolveRequest(def, cfg, params);
-  const raw = await get(url, { params: query });
+  const raw = await get(url, { params: query, family: def.family });
   if (!params.parsed) return raw;
   const parser = parserForEndpoint(def.short);
   if (!parser) return raw;

@@ -300,7 +300,7 @@ export interface StatcastPlayerOptions {
   parsed?: boolean;
 }
 
-/** Fetch the raw `/savant-player/{id}` HTML (`""` on transport failure). */
+/** Fetch the raw `/savant-player/{id}` HTML (`""` for a non-text body; a failed fetch throws). */
 async function playerPageHtml(playerId: number | string, stats?: string): Promise<string> {
   const url = `${SAVANT_BASE}/savant-player/${playerId}`;
   const params = stats ? { stats } : undefined;

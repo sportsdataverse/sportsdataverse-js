@@ -33,6 +33,10 @@ jobs:
         run: npm run codegen:check
       - name: Type-check
         run: npm run typecheck
+      # `strict: true` gate over the runtime core (tsconfig.strict.json) — the
+      # rest of the codebase still type-checks under the pragmatic base config.
+      - name: Strict type-check (runtime core)
+        run: npm run typecheck:strict
       - name: Verify the build output exists
         run: |
           node -e "import('./dist/index.js').then(m => { const s = Object.keys(m.default); if (s.length < 29 || !s.includes('nba') || !s.includes('soccer')) { throw new Error('unexpected namespaces ' + s.length); } console.log('OK', s.length, 'namespaces'); })"
