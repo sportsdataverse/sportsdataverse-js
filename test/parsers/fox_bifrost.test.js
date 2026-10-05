@@ -10,6 +10,7 @@ import {
 import { parserFor, PARSERS } from '../../dist/parsers/_registry.js';
 import sdv, { FLAT_WRAPPERS, configure, resetConfig } from '../../dist/index.js';
 import { FLAT_HOSTS } from '../../dist/core/client.js';
+import { captureWarnings } from '../helpers/warnings.mjs';
 
 // Unit tests for the Fox Sports Bifrost parsers. Inline raw payloads (no
 // network) -> tidy rows: row count + snake_cased flattened keys. Covers the
@@ -268,17 +269,16 @@ describe('fox flat-API family metadata (flat-contract style)', () => {
         },
       },
     });
-    const seen = [];
-    const on = (w) => /fox_fs_videos/.test(w.message) && seen.push(w);
-    process.on('warning', on);
+    let seen;
     try {
-      (await sdv.fox.fox_fs_videos()).should.eql({ ok: true });
-      await sdv.fox.foxFsVideos(); // same wrapper: warns once per process
-      await new Promise((r) => setImmediate(r));
+      seen = await captureWarnings(async () => {
+        (await sdv.fox.fox_fs_videos()).should.eql({ ok: true });
+        await sdv.fox.foxFsVideos(); // same wrapper: warns once per process
+      });
     } finally {
-      process.off('warning', on);
       resetConfig();
     }
+    seen = seen.filter((w) => /fox_fs_videos/.test(w.message));
     calls.should.eql(['https://api.foxsports.com/fs/videos', 'https://api.foxsports.com/fs/videos']);
     seen.length.should.equal(1);
     seen[0].name.should.equal('DeprecationWarning');
