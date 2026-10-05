@@ -41,4 +41,11 @@ describe('codegen from-openapi (#55 basePath)', function () {
     t.basePath.should.equal('');
     emitYaml('demo', t.host, t.basePath, t.security, t.endpoints).should.match(/^host: https:\/\/api\.example\.com$/m);
   });
+
+  it('a --host without its scheme fails with a message naming the fix, not a bare "Invalid URL"', function () {
+    for (const host of ['api.example.com', 'api.example.com/v1', 'localhost:8080']) {
+      (() => transform(parse(MIN_SPEC), 'demo', host)).should.throw(/--host must be an absolute http\(s\) URL .*got "/);
+    }
+    transform(parse(MIN_SPEC), 'demo', 'https://api.example.com/').host.should.equal('https://api.example.com/api/public/v1');
+  });
 });

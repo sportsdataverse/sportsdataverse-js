@@ -2,6 +2,7 @@ import * as cheerio from 'cheerio';
 import decode from 'decode-html';
 import { Tabletojson as tabletojson } from 'tabletojson';
 import { DEFAULT_RETRY_STATUSES, registerFamilyDefaults } from '../core/config.js';
+import { warnOnce } from '../core/deprecation.js';
 import { AssetFetchError } from '../core/errors.js';
 import { request, requestResponse } from '../core/request.js';
 import { getHtml } from './_cdn.js';
@@ -35,15 +36,12 @@ function extractSelectList($: any, array: any[], id: string) {
     });
 }
 
-
-const warned = new Set<string>();
 /** One-time DeprecationWarning per stats.ncaa.org scraper (Akamai 403s plain clients). */
 function warnDeprecated(name: string) {
-    if (warned.has(name)) return;
-    warned.add(name);
-    process.emitWarning(
+    warnOnce(
+        `ncaa:${name}`,
         `sdv.ncaa.${name}() scrapes stats.ncaa.org, which blocks plain HTTP clients (403 Access Denied); it is deprecated and will be removed.`,
-        'DeprecationWarning'
+        { type: 'DeprecationWarning' }
     );
 }
 

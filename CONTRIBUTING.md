@@ -65,13 +65,17 @@ generates:
 
 Two kinds of endpoints:
 
-- **ESPN** (`espn_site_v2.yaml`, `espn_core_v2.yaml`, `espn_web_v3.yaml`) — one core,
-  parameterized on `(sport, league)` slugs, exposed across **29 leagues** as
+- **ESPN** (`espn_site_v2.yaml`, `espn_core_v2.yaml`, `espn_web_v3.yaml`,
+  `espn_fitt_v3.yaml`, `espn_cdn.yaml`) — one core, parameterized on `(sport, league)`
+  slugs: **126 endpoint short names** exposed across **29 leagues** as
   `espn_<league>_<short>` + `espn<League><Short>`.
-- **Flat APIs** (non-ESPN absolute hosts) — **7 native** league APIs (MLB Stats,
-  Statcast, NHL ×4, NFL.com) merged onto their league namespace, and **5 cross-sport
-  providers** (Odds / 247 / CBS / Fox / Yahoo) on standalone `sdv.<provider>.*`
-  namespaces.
+- **Flat APIs** (non-ESPN absolute hosts) — **1059 wrappers across 27 families**:
+  **14 league families** (MLB Stats, Statcast, NHL ×4, NFL.com, PFF API, NFL Pro,
+  KenPom, MLS, NWSL, stats.nba.com, stats.wnba.com) merged onto their league
+  namespace, and **13 provider families** (Odds / 247 RDB + site pages / old 247 /
+  CBS / Fox / Yahoo ×2 / HockeyTech / BartTorvik men's + women's / On3 / ASA) on
+  standalone `sdv.<provider>.*` namespaces. `npm run codegen` prints the current
+  counts.
 
 Every wrapper returns raw JSON by default; `{ parsed: true }` runs it through a
 registered **parser** → a tidy array of flat, snake_cased row objects. See
