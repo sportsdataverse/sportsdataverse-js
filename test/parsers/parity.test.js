@@ -51,12 +51,18 @@ const body = (p) => (/\.(csv|html)(\.gz)?$/.test(p) ? text(p) : JSON.parse(text(
  * `kind: frames` schema, else one with `section: null`. `[]` when the file is
  * missing or publishes no columns (an `unverified` schema).
  */
+const tablesMemo = new Map(); // ref -> tables (each schema file is parsed once)
 const schemaTables = (ref) => {
+  if (tablesMemo.has(ref)) return tablesMemo.get(ref);
   const p = join(CODEGEN, 'schemas', `${ref}.yaml`);
-  if (!existsSync(p)) return [];
-  const doc = parse(text(p));
-  const tables = doc.kind === 'frames' ? doc.frames : [{ section: null, columns: doc.columns ?? [] }];
-  return tables.some((t) => t.columns.length) ? tables : [];
+  let tables = [];
+  if (existsSync(p)) {
+    const doc = parse(text(p));
+    const all = doc.kind === 'frames' ? doc.frames : [{ section: null, columns: doc.columns ?? [] }];
+    if (all.some((t) => t.columns.length)) tables = all;
+  }
+  tablesMemo.set(ref, tables);
+  return tables;
 };
 /** Every schema column as `[section, column]` (section null for one frame). */
 const schemaColumns = (ref) => schemaTables(ref).flatMap((t) => t.columns.map((c) => [t.section, c]));
@@ -175,7 +181,13 @@ const frameRows = (out, section) => {
  * Per documented endpoint with a capture: its schema columns, and those null in
  * every row of every capture (a frames schema's are `<section>.<column>`).
  */
+const exerciseMemo = new Map();
 function exercise(family, short) {
+  const key = `${family}.${short}`;
+  if (!exerciseMemo.has(key)) exerciseMemo.set(key, exerciseUncached(family, short));
+  return exerciseMemo.get(key);
+}
+function exerciseUncached(family, short) {
   const cols = schemaColumns(docs.get(family).get(short));
   const outs = [...runs.values()].filter((r) => r.family === family && r.short === short && r.out).map((r) => r.out);
   const unexercised = cols
