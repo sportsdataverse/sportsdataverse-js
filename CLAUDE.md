@@ -97,7 +97,16 @@ npm run vendor          # re-vendor sdv-py endpoint YAML + schemas (--ref <sha> 
 npm run vendor:check    # VENDOR GATE — fails on a hand-edit to a vendored file (offline)
 npm run bundle:parsers  # esbuild the browser parser bundle for the playground
 npm run docs            # typedoc -> the typed module reference
+
+npm run api:report      # rewrite etc/*.api.md (API Extractor) — commit with any public-API change
+npm run api:check       # API GATE — fails if etc/*.api.md no longer matches dist/*.d.ts
+npm run pack:check      # npm pack, then attw + publint --strict against that tarball
 ```
+
+- The API reports cover the two entry points (`etc/sportsdataverse.api.md`,
+  `etc/sportsdataverse-parsers.api.md`). Generated wrappers are not listed one by one:
+  the default export is typed `Record<string, Record<string, any>>`, and the wrapper
+  surface is reviewed through `src/generated/**` + the codegen drift gate.
 
 - `test` runs Mocha against `test/**/*.test.js` with no network access.
 - `prepare` / `prepublishOnly` build `dist/`; only `dist/` is published (`files:
@@ -239,7 +248,7 @@ families**:
 | `nhl_records` | `sdv.nhl.nhlRecords*` | `records.nhl.com` | keyless |
 | `nfl_api` | `sdv.nfl.nfl*` | `api.nfl.com` | **bearer token minted automatically** (anonymous `WEB_DESKTOP`, cached + auto-renewed; `src/core/nfl_auth.ts`) |
 | `pff_api` | `sdv.nfl.pffApi*` | `api.pff.com` | **caller's PFF Pro key** (`api_key` / `PFF_API_KEY`; `src/core/pff_api_runtime.ts`) |
-| `nfl_pro` | `sdv.nfl.nflPro*` | `pro.nfl.com` | **caller's user-bound NFL+ token** (`token` / `NFLPRO_TOKEN`; offset paging; `src/core/nfl_pro_runtime.ts`) |
+| `nfl_pro` | `sdv.nfl.nflPro*` | `pro.nfl.com` | **caller's user-bound NFL+ token** (`token` / `NFLPRO_TOKEN`, else an id.nfl.com browser login with `email` / `password` or `NFLPRO_EMAIL` / `NFLPRO_PW` via the optional peer `playwright`; offset paging; `src/core/nfl_pro_runtime.ts`) |
 | `kenpom` | `sdv.mbb.kenpom*` | `kenpom.com` | **caller's subscription login** (`KENPOM_EMAIL` / `KENPOM_PW`; impersonating transport, needs `impit`; `src/core/kenpom_runtime.ts`) |
 
 The three subscription families (`pff_api`, `nfl_pro`, `kenpom`) are never on the

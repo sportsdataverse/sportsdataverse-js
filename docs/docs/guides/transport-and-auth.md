@@ -362,23 +362,57 @@ the same column names as sportsdataverse-py (and hoopR's KenPom tables);
 add `section: '<table id>'` for one table. A page that comes back as the
 logged-out login form is never returned as data: the session that was used
 is refreshed once and the page re-fetched, then it throws `AssetFetchError`.
-Sessions for explicit credentials are keyed by e-mail plus a hash of the
-password, cached only after a successful login, and capped at 8. Concurrent
+Sessions for explicit credentials are keyed by an HMAC of e-mail and
+password under a random per-process key, cached only after a successful login, and capped at 8. Concurrent
 calls for one account share a single login.
 
 **NFL Pro** (`nfl_pro`, `sdv.nfl.nflPro*`, 16 wrappers, `pro.nfl.com`) serves
 the Next Gen Stats tables. Its secured routes need a **user-bound** token
-carrying an active NFL+ Premium plan: an `Authorization` header in `headers`,
-`token` on the call, or `NFLPRO_TOKEN`. The token's plan and expiry are checked
-before any request (`NflProAuthError`). No token is minted for you — an
-anonymous or client-credentials token is not user-bound and is refused on every
-route. sportsdataverse-py can also obtain the token through a headless-browser
-login; to do that in JS, plug your own `tokenAuth({ mint })` in for `nfl_pro`.
+carrying an active NFL+ Premium plan. It resolves in sportsdataverse-py's order:
+
+1. an `Authorization` header in `headers`;
+2. `token` on the call;
+3. `NFLPRO_TOKEN`;
+4. a headless-browser login to id.nfl.com with `email` / `password` on the
+   call, else `NFLPRO_EMAIL` / `NFLPRO_PW` (the same names as sdv-py).
+
+A supplied token's plan and expiry are checked before any request
+(`NflProAuthError`); an anonymous or client-credentials token is not user-bound
+and is refused on every route. Note that `NFLPRO_TOKEN` wins over `email` /
+`password` on the call, exactly as in sdv-py.
+
+The login needs the optional peer dependency `playwright`, imported only when
+a login is actually needed:
+`npm i playwright && npx playwright install chromium`. Without it, a login
+throws `TransportUnavailableError`. The login walks id.nfl.com's steps (e-mail,
+an optional passkey offer, password) in whatever order the site shows them, and
+keeps only a token whose JWT carries an active `NFL_PLUS_*` plan; "signed in"
+alone proves nothing, because an anonymous token looks the same. Logged-in
+tokens are cached per account until they expire (with 120 s to spare). The
+cache key is an HMAC of the e-mail and password under a random per-process
+key. Concurrent calls for one account share one login, and a login whose page
+flow has not finished 3 minutes after the browser starts is abandoned (the
+browser is closed and the call throws). Browser start-up itself is bounded by
+Playwright's own launch timeout (also 3 minutes), so the worst case is about 6. A `401` on a logged-in token drops it and logs in again once; a
+supplied token is never re-minted. `nflProClearTokenCache()` forgets every
+token. The e-mail, password and token never appear in an error, its `cause`,
+or a warning. An NFL account with no password on file (id.nfl.com asks you to
+set up a password or passkey) cannot log in this way: set a password on the
+account first, or use `NFLPRO_TOKEN`.
+
+:::warning
+`DEBUG=pw:api` makes Playwright itself log every `fill()` value, the password
+included, to stderr. Never enable it around an NFL Pro login.
+:::
 
 ```js
-// NFLPRO_TOKEN is set in the environment
+import sdv, { nflProToken } from 'sportsdataverse';
+
+// NFLPRO_TOKEN, or NFLPRO_EMAIL + NFLPRO_PW, is set in the environment
 const body = await sdv.nfl.nflProPlayersOffensePassingSeason({ season: 2024, season_type: 'REG' });
 const rows = await sdv.nfl.nflProTeamOffenseOverviewSeason({ season: 2024, parsed: true });
+// or resolve once and reuse it (logs in if no token is set)
+const token = await nflProToken({ email: 'you@example.com', password: process.env.MY_NFL_PW });
 ```
 
 Responses are cut off at the page size without saying so. The wrapper pages

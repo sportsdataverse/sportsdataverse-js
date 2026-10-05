@@ -243,12 +243,16 @@ const FLAT_API_META = {
     source: "NFL Pro's secured Next Gen Stats API (pro.nfl.com; NFL+ Premium)",
     authNote:
       "**Auth:** a user-bound NFL Pro bearer token carrying an active NFL+ plan is " +
-      "required — `token` on the call, or the `NFLPRO_TOKEN` environment variable. " +
+      "required — `token` on the call or the `NFLPRO_TOKEN` environment variable, else " +
+      "a headless-browser NFL login with `email` / `password` on the call or " +
+      "`NFLPRO_EMAIL` / `NFLPRO_PW` (needs the optional `playwright`). " +
       "Responses truncate at the page size, so the getter pages on `offset` until the " +
       "envelope's `total` is reached.",
     controls: {
-      headers: "optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.",
+      headers: "optional headers; an `Authorization` here wins over every other credential.",
       token: "NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.",
+      email: "NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.",
+      password: "NFL account password for that login; falls back to `NFLPRO_PW`.",
       paginate: "follow `offset` until the envelope's `total` is reached (default `true`).",
       max_pages: "cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.",
     },

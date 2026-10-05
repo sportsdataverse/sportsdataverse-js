@@ -4,15 +4,15 @@
 // pro.nfl.com serves the Next Gen Stats tables nextgenstats.nfl.com stopped
 // serving. `/api/secured/*` needs a USER-BOUND bearer token carrying an ACTIVE
 // `NFL_PLUS_*` plan: a client-credentials token is not user-bound and 401s on
-// every route, so nothing here mints one. The token comes from:
+// every route, so nothing here mints one. The token comes from (sdv-py's order):
 //   1. an `Authorization` header in the call's `headers`,
 //   2. `token` on the call,
 //   3. env `NFLPRO_TOKEN`,
-// and is checked (plan + expiry, from its JWT claims) before any request.
-// sdv-py can also obtain the token by driving a headless-browser login
-// (NFLPRO_EMAIL / NFLPRO_PW, optional Playwright); that is not ported here —
-// pass a token, or plug your own minting in with
-// `configure({ auth: { nfl_pro: tokenAuth({ mint }) } })`.
+//   4. a headless-browser id.nfl.com login with `email` / `password` on the
+//      call, else env `NFLPRO_EMAIL` / `NFLPRO_PW` (optional peer `playwright`,
+//      imported only when a login is actually needed),
+// and a supplied token is checked (plan + expiry, from its JWT claims) before
+// any request. Logged-in tokens are cached per account until they expire.
 //
 // Two measured API behaviours handled here:
 //   - an unsupported query param answers HTTP 200 with an EMPTY body (no error
@@ -23,9 +23,9 @@
 // Importing this module registers the `nfl_pro` family defaults.
 
 import { isDeepStrictEqual } from "node:util";
-import { bearerAuth } from "./auth.js";
-import { registerFamilyDefaults } from "./config.js";
-import { AssetFetchError, InvalidParameterError, SdvError } from "./errors.js";
+import { bearerAuth, credentialKey } from "./auth.js";
+import { registerFamilyDefaults, resolveFamily } from "./config.js";
+import { AssetFetchError, InvalidParameterError, SdvError, TransportUnavailableError, redactSecrets } from "./errors.js";
 import { request } from "./request.js";
 import { headerValue, mergeHeaders } from "./transport.js";
 import { NFL_PRO_COLLECTION_KEYS } from "../parsers/nfl_pro.js";
@@ -33,6 +33,8 @@ import { NFL_PRO_COLLECTION_KEYS } from "../parsers/nfl_pro.js";
 const FAMILY = "nfl_pro";
 export const NFL_PRO_HOST = "https://pro.nfl.com";
 const TOKEN_ENV = "NFLPRO_TOKEN";
+const EMAIL_ENV = "NFLPRO_EMAIL";
+const PASSWORD_ENV = "NFLPRO_PW";
 const MAX_PAGES = 40;
 const USER_AGENT =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
@@ -64,8 +66,9 @@ export function nflProTokenEntitled(token: string): boolean {
       p !== null &&
       typeof p === "object" &&
       String(p.plan ?? "").startsWith("NFL_PLUS") &&
-      // an expired subscription still lists its plan; only ACTIVE grants access
-      String(p.status ?? "ACTIVE").toUpperCase() === "ACTIVE"
+      // an expired subscription still lists its plan; only ACTIVE grants access.
+      // Only an ABSENT status defaults to ACTIVE: py's str(None) never matches.
+      (p.status === undefined ? "ACTIVE" : String(p.status)).toUpperCase() === "ACTIVE"
   );
 }
 
@@ -78,31 +81,330 @@ export function nflProTokenFresh(token: string, skew = 120): boolean {
   }
 }
 
-/**
- * Resolve a usable NFL Pro token: `token`, else env `NFLPRO_TOKEN`; it must be
- * entitled and unexpired. Throws {@link NflProAuthError} (no request is made).
- */
-export function nflProToken(token?: string): string {
-  const t = (token ?? "").trim() || (process.env[TOKEN_ENV] ?? "").trim();
-  if (!t) {
-    throw new NflProAuthError(
-      `nfl_pro: no NFL Pro token — pass token, or set ${TOKEN_ENV} to a user-bound pro.nfl.com ` +
-        "access token (an NFL+ Premium account; client-credentials tokens are not user-bound)."
-    );
-  }
-  if (!nflProTokenEntitled(t)) {
-    throw new NflProAuthError(
-      "nfl_pro: the NFL Pro token carries no active NFL_PLUS_* plan, so every /api/secured/* route " +
-        "would 401. A client-credentials token is not user-bound."
-    );
-  }
-  if (!nflProTokenFresh(t)) {
-    throw new NflProAuthError(`nfl_pro: the NFL Pro token has expired — obtain a fresh one (${TOKEN_ENV}).`);
-  }
-  return t;
+/** Minimal shape of the Playwright API the login drives (the `playwright` package). */
+export interface PlaywrightLike {
+  chromium: { launch(opts: { headless: boolean }): Promise<PlaywrightBrowser> };
+}
+interface PlaywrightBrowser {
+  newContext(opts: { userAgent: string; viewport: { width: number; height: number } }): Promise<{ newPage(): Promise<PlaywrightPage> }>;
+  close(): Promise<void>;
+}
+interface PlaywrightPage {
+  goto(url: string, opts: { waitUntil: "domcontentloaded"; timeout: number }): Promise<unknown>;
+  waitForTimeout(ms: number): Promise<void>;
+  evaluate<R>(fn: () => R): Promise<R>;
+  locator(selector: string): PlaywrightLocator;
+  url(): string;
+}
+interface PlaywrightLocator {
+  first(): PlaywrightLocator;
+  count(): Promise<number>;
+  isVisible(): Promise<boolean>;
+  fill(value: string, opts: { timeout: number }): Promise<void>;
+  press(key: string, opts: { timeout: number }): Promise<void>;
 }
 
-/** Bearer from `NFLPRO_TOKEN`; an `Authorization` header (or `token`, set by the getter) wins. */
+const PLAYWRIGHT_MODULE = "playwright";
+const PLAYWRIGHT_INSTALL = "npm i playwright && npx playwright install chromium";
+
+/**
+ * Test seam: the overall login deadline. After it the browser is closed and the
+ * login rejects, so a hung page can never block that account's later callers
+ * (they share the in-flight login). A measured live login takes ~25-60 s.
+ * @internal
+ */
+export const _loginLimits = { deadlineMs: 180_000 };
+
+const hostAndPath = (url: string): { host: string; path: string } => {
+  try {
+    const u = new URL(url);
+    return { host: u.hostname, path: u.pathname };
+  } catch {
+    return { host: "", path: "" };
+  }
+};
+
+/**
+ * Test seam: how the optional `playwright` package is loaded. The specifier is
+ * a variable so TypeScript and bundlers never require it to be installed.
+ * @internal
+ */
+export const _playwrightLoader = {
+  load: (): Promise<any> => import(PLAYWRIGHT_MODULE),
+};
+
+async function loadPlaywright(): Promise<PlaywrightLike> {
+  let mod: any;
+  try {
+    mod = await _playwrightLoader.load();
+  } catch (err) {
+    throw new TransportUnavailableError(
+      `nfl_pro: logging in to NFL Pro needs the optional dependency \`playwright\`. Install it with: ${PLAYWRIGHT_INSTALL} ` +
+        `— or set ${TOKEN_ENV} to a token obtained elsewhere.`,
+      { cause: err }
+    );
+  }
+  return mod.chromium ? mod : mod.default;
+}
+
+// Run INSIDE the page (Playwright serializes them), so browser globals only.
+const clickSignIn = (): void => {
+  (globalThis as any).document
+    .querySelectorAll('.login-button, [aria-label="Sign In"]')
+    .forEach((el: any) => el.click());
+};
+const clickUsePassword = (): boolean => {
+  const el = Array.from((globalThis as any).document.querySelectorAll("button,a")).find((e: any) =>
+    /sign in with password|use password/i.test(e.innerText || "")
+  ) as any;
+  if (el) {
+    el.click();
+    return true;
+  }
+  return false;
+};
+const readLocalStorage = (): string[] => {
+  const ls = (globalThis as any).localStorage;
+  const out: string[] = [];
+  for (let i = 0; i < ls.length; i++) out.push(ls.getItem(ls.key(i)) || "");
+  return out;
+};
+
+/**
+ * A copy of `err` (name / message / stack) with every `secrets` value cut out.
+ * The secrets go first — raw and URL-encoded, longest first, so a password that
+ * contains the e-mail is removed whole — and only then `redactSecrets`, which
+ * would otherwise rewrite a `scheme://…?` password before the split could match.
+ */
+// A lone surrogate makes encodeURIComponent throw; such a string has no URL-encoded form to cut.
+const uriEncoded = (x: string) => {
+  try {
+    return encodeURIComponent(x);
+  } catch {
+    return x;
+  }
+};
+
+function scrubbed(err: unknown, secrets: string[]): Error {
+  const forms = secrets
+    .filter(Boolean)
+    .flatMap((x) => [x, uriEncoded(x)])
+    .sort((a, b) => b.length - a.length);
+  const cut = (s: string) => redactSecrets(forms.reduce((acc, x) => acc.split(x).join("<redacted>"), s));
+  const e = (typeof err === "object" && err !== null ? err : {}) as Record<string, unknown>;
+  const out = new Error(cut(typeof e.message === "string" ? e.message : String(err)));
+  out.name = typeof e.name === "string" ? e.name : "Error";
+  out.stack = typeof e.stack === "string" ? cut(e.stack) : undefined;
+  return out;
+}
+
+/**
+ * Complete the real id.nfl.com login in headless Chromium and return the
+ * user-bound access token (port of sdv-py's `_browser_login`).
+ *
+ * The flow is three steps in a non-fixed order (email -> passkey offer ->
+ * password), so it is driven as a state machine: `/account/sign-in-biometric`
+ * reads like a passkey ENROLMENT page but is a sign-in OFFER with no password
+ * field, so a fixed email-then-password script stops there having submitted
+ * nothing. Only a token carrying an ACTIVE `NFL_PLUS_*` plan is returned — an
+ * anonymous token looks identical, so "the login worked" proves nothing.
+ *
+ * @param opts.playwright the `playwright` module (default: imported lazily;
+ *   missing -> {@link TransportUnavailableError}).
+ * @param opts.timeoutMs per-navigation timeout (default 60 s, as sdv-py).
+ * @param opts.deadlineMs the whole login's deadline (default 180 s): past it
+ *   the browser is closed and the login rejects.
+ * @throws {NflProAuthError} the login failed, timed out or found no entitled
+ *   token. The email and password never appear in the error or its cause.
+ */
+export async function nflProBrowserLogin(
+  email: string,
+  password: string,
+  opts: { playwright?: PlaywrightLike; timeoutMs?: number; deadlineMs?: number } = {}
+): Promise<string> {
+  const pw = opts.playwright ?? (await loadPlaywright());
+  const timeout = opts.timeoutMs ?? 60000;
+  const deadlineMs = opts.deadlineMs ?? _loginLimits.deadlineMs;
+  const home = `${NFL_PRO_HOST}/`;
+  const emailSel = "input[type=email], input[name*=email i], input[id*=email i], input[name=loginID]";
+
+  const drive = async (page: PlaywrightPage): Promise<string[]> => {
+    await page.goto(home, { waitUntil: "domcontentloaded", timeout });
+    await page.waitForTimeout(6000);
+    // The header collapses the control off-screen: dispatch the handler
+    // rather than waiting for a visibility that never comes.
+    await page.evaluate(clickSignIn);
+    await page.waitForTimeout(8000);
+
+    let submitted = false;
+    for (let step = 0; step < 6; step++) {
+      await page.waitForTimeout(2500);
+      let field = page.locator("input[type=password]:visible").first();
+      if (await field.count()) {
+        // Departure from sdv-py, which resubmits: a password field still showing
+        // after one submission means it was rejected, and every retry is another
+        // failed attempt that can lock the (paid) account.
+        if (submitted) {
+          throw new NflProAuthError(
+            "nfl_pro: id.nfl.com did not accept the password (the password field is still showing after one " +
+              "submission); not resubmitting, so a wrong password cannot lock the account"
+          );
+        }
+        await field.fill(password, { timeout: 8000 });
+        await field.press("Enter", { timeout: 8000 });
+        submitted = true;
+        await page.waitForTimeout(9000);
+        continue;
+      }
+      if (await page.evaluate(clickUsePassword)) continue;
+      field = page.locator(emailSel).first();
+      if ((await field.count()) && (await field.isVisible())) {
+        await field.fill(email, { timeout: 8000 });
+        await field.press("Enter", { timeout: 8000 });
+        continue;
+      }
+      break;
+    }
+    if (!submitted) {
+      // Measured live 2026-10-05 (not in sdv-py): an account with no password
+      // on file lands on /account/account-recovery after the e-mail step.
+      const why = hostAndPath(page.url()).path.includes("account-recovery")
+        ? "id.nfl.com says this account has no password (it asks to set up a password or passkey). " +
+          `Set a password on the NFL account, or set ${TOKEN_ENV}`
+        : "the password step was never reached";
+      throw new NflProAuthError(`nfl_pro: id.nfl.com login: ${why}`);
+    }
+
+    await page.waitForTimeout(8000);
+    if (hostAndPath(page.url()).host !== "pro.nfl.com") {
+      await page.goto(home, { waitUntil: "domcontentloaded", timeout });
+      await page.waitForTimeout(10000);
+    }
+    return page.evaluate(readLocalStorage);
+  };
+
+  let blobs: string[];
+  try {
+    const browser = await pw.chromium.launch({ headless: true });
+    let closing: Promise<void> | undefined;
+    const close = (): Promise<void> => (closing ??= browser.close().catch(() => undefined));
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    // ONE deadline for the whole login: page calls without their own timeout
+    // (evaluate, close) can hang, and a hung login would block every caller
+    // sharing it. Closing the browser also rejects the page's pending calls.
+    const deadline = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => {
+        void close();
+        reject(new NflProAuthError(`nfl_pro: the id.nfl.com browser login did not finish within ${deadlineMs / 1000} s`));
+      }, deadlineMs);
+    });
+    const flow = (async () => drive(await (await browser.newContext({ userAgent: USER_AGENT, viewport: { width: 1440, height: 900 } })).newPage()))();
+    flow.catch(() => undefined); // abandoned once the deadline wins: never an unhandled rejection
+    try {
+      blobs = await Promise.race([flow, deadline]);
+    } finally {
+      clearTimeout(timer);
+      // bounded too: a close that never settles must not outlive the deadline
+      await Promise.race([close(), new Promise<void>((r) => setTimeout(r, 5000).unref())]);
+    }
+  } catch (err) {
+    if (err instanceof SdvError) throw err;
+    const safe = scrubbed(err, [email, password]);
+    throw new NflProAuthError(`nfl_pro: the id.nfl.com browser login failed: ${safe.message}`, { cause: safe });
+  }
+  for (const blob of blobs ?? []) {
+    for (const m of String(blob).matchAll(/eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+/g)) {
+      if (nflProTokenEntitled(m[0])) return m[0];
+    }
+  }
+  throw new NflProAuthError(
+    "nfl_pro: signed in, but no token carrying an active NFL_PLUS_* plan was found — " +
+      "the account may not hold an NFL+ Premium subscription."
+  );
+}
+
+// Keyed by ACCOUNT (an HMAC of e-mail + password under a per-process key —
+// never the plaintext, never an unsalted hash): a single-slot cache would hand
+// account B the token minted for account A, and a wrong password must not be
+// answered from a cached right one. Expired tokens are dropped on insert.
+/** @internal (exported for tests) */
+export const _tokenCache = new Map<string, string>();
+const pendingLogins = new Map<string, Promise<string>>();
+
+/** Forget every logged-in NFL Pro token (the next call logs in again). */
+export function nflProClearTokenCache(): void {
+  _tokenCache.clear();
+  pendingLogins.clear();
+}
+
+/** Drop a logged-in token the API refused, so the next resolution logs in again. */
+function forgetToken(token: string): void {
+  for (const [k, v] of _tokenCache) if (v === token) _tokenCache.delete(k);
+}
+
+/** The token sdv-py would use as-is (`token`, else `NFLPRO_TOKEN`); "" when a login is needed. */
+const suppliedToken = (token: unknown): string => String(token ?? "").trim() || (process.env[TOKEN_ENV] ?? "").trim();
+
+/**
+ * Resolve a usable NFL Pro token, in sdv-py's order: `token`, else env
+ * `NFLPRO_TOKEN` (either must be entitled and unexpired), else a browser login
+ * with `email` / `password`, else env `NFLPRO_EMAIL` / `NFLPRO_PW`. A logged-in
+ * token is cached per account until it expires; concurrent calls for one
+ * account share one login. Throws {@link NflProAuthError} when nothing resolves
+ * (no request is made) and {@link TransportUnavailableError} when a login is
+ * needed but `playwright` is not installed.
+ */
+export async function nflProToken(opts: { token?: string; email?: string; password?: string } = {}): Promise<string> {
+  const t = suppliedToken(opts.token);
+  if (t) {
+    if (!nflProTokenEntitled(t)) {
+      throw new NflProAuthError(
+        "nfl_pro: the NFL Pro token carries no active NFL_PLUS_* plan, so every /api/secured/* route " +
+          "would 401. A client-credentials token is not user-bound."
+      );
+    }
+    // expiry is checked here too: a stale NFLPRO_TOKEN would otherwise 401 on every route
+    if (!nflProTokenFresh(t)) {
+      throw new NflProAuthError(
+        `nfl_pro: the NFL Pro token has expired — obtain a fresh one (unset ${TOKEN_ENV} to log in again).`
+      );
+    }
+    return t;
+  }
+
+  const email = String(opts.email ?? "").trim() || (process.env[EMAIL_ENV] ?? "").trim();
+  const password = String(opts.password ?? "") || (process.env[PASSWORD_ENV] ?? "");
+  if (!email || !password) {
+    throw new NflProAuthError(
+      `nfl_pro: no NFL Pro credentials — pass email / password, or set ${EMAIL_ENV} and ${PASSWORD_ENV}, ` +
+        `or set ${TOKEN_ENV} to an already-obtained user-bound token (an NFL+ Premium account).`
+    );
+  }
+  // looked up AFTER resolving which account is asked for, keyed on that account
+  const key = credentialKey(email, password);
+  const cached = _tokenCache.get(key);
+  if (cached && nflProTokenFresh(cached)) return cached;
+  let pending = pendingLogins.get(key);
+  if (!pending) {
+    const login: Promise<string> = nflProBrowserLogin(email, password).finally(() => {
+      if (pendingLogins.get(key) === login) pendingLogins.delete(key);
+    });
+    pendingLogins.set(key, login);
+    pending = login;
+  }
+  const fresh = await pending;
+  for (const [k, v] of _tokenCache) if (!nflProTokenFresh(v)) _tokenCache.delete(k);
+  _tokenCache.set(key, fresh);
+  return fresh;
+}
+
+/**
+ * Bearer from `NFLPRO_TOKEN`, else an `NFLPRO_EMAIL` / `NFLPRO_PW` login; an
+ * `Authorization` header wins. The `nfl_pro_*` wrappers resolve the token in
+ * {@link nflProGet} instead (which also re-logs-in once on a 401); this
+ * provider has no `refresh` on purpose — `request()` would resend the same
+ * request, and the getter's Authorization header, after it.
+ */
 export const nflProAuth = bearerAuth(() => nflProToken());
 
 const isObject = (v: unknown): v is Record<string, any> => v !== null && typeof v === "object" && !Array.isArray(v);
@@ -120,7 +422,8 @@ function collectionKey(body: Record<string, any>): string | undefined {
 /**
  * GET a `pro.nfl.com` payload, authenticating and de-truncating. The flat
  * dispatch calls this for every `nfl_pro_*` wrapper; `args` are the caller's
- * params (`token`, `paginate` (default true), `max_pages` (default 40)).
+ * params (`token`, `email`, `password`, `paginate` (default true),
+ * `max_pages` (default 40)).
  */
 export async function nflProGet(
   url: string,
@@ -131,9 +434,25 @@ export async function nflProGet(
     { "User-Agent": USER_AGENT, Referer: `${NFL_PRO_HOST}/`, Accept: "application/json, text/plain, */*" },
     config.headers
   );
-  if (headerValue(headers, "authorization") === undefined && args.token) {
-    headers = mergeHeaders(headers, { Authorization: `Bearer ${nflProToken(String(args.token))}` });
+  // The token is resolved here (not by the auth provider) whenever this family
+  // uses the built-in provider or the call carries credentials, so a 401 on a
+  // LOGGED-IN token can drop it and log in again once. A supplied token
+  // (`token` / NFLPRO_TOKEN) or the caller's own Authorization is never retried.
+  const explicit = Boolean(args.token || args.email || args.password);
+  const creds = explicit ? { token: args.token, email: args.email, password: args.password } : {};
+  let loggedIn: string | undefined;
+  const authorize = async (): Promise<void> => {
+    const token = await nflProToken(creds);
+    loggedIn = suppliedToken(creds.token) ? undefined : token;
+    headers = mergeHeaders(headers, { Authorization: `Bearer ${token}` });
+  };
+  if (
+    headerValue(headers, "authorization") === undefined &&
+    (explicit || resolveFamily(config.family).auth === nflProAuth)
+  ) {
+    await authorize();
   }
+  let reminted = false;
   // sdv-py sends its `bool` params (`qualifiedPasser`, …) through requests,
   // which writes Python's str(): "True" / "False" — send exactly that.
   // ponytail: unverified live (no token); matches py byte-for-byte on the wire.
@@ -141,7 +460,18 @@ export async function nflProGet(
     Object.entries(config.params ?? {}).map(([k, v]) => [k, typeof v === "boolean" ? (v ? "True" : "False") : v])
   );
   const fetchPage = async (query: Record<string, unknown>): Promise<unknown> => {
-    const text = await request(config.family, { method: "GET", url, query, headers, responseType: "text", timeoutMs: 45000 });
+    let text: unknown;
+    try {
+      text = await request(config.family, { method: "GET", url, query, headers, responseType: "text", timeoutMs: 45000 });
+    } catch (err) {
+      if (loggedIn !== undefined && !reminted && err instanceof AssetFetchError && err.status === 401) {
+        reminted = true; // once per call: a fresh login that still 401s is the answer
+        forgetToken(loggedIn);
+        await authorize();
+        return fetchPage(query);
+      }
+      throw err;
+    }
     const s = typeof text === "string" ? text : "";
     if (!s.trim()) {
       throw new InvalidParameterError(

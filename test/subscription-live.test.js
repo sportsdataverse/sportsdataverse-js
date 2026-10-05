@@ -1,5 +1,5 @@
 import should from 'should';
-import sdv, { hasKenpomLogin, resolvePffApiKey } from '../dist/index.js';
+import sdv, { hasKenpomLogin, resolvePffApiKey, nflProToken } from '../dist/index.js';
 
 // Live smoke for the subscription families. Each needs the caller's own paid
 // credentials, so each has its OWN gate (never set in CI) and also skips when
@@ -7,7 +7,9 @@ import sdv, { hasKenpomLogin, resolvePffApiKey } from '../dist/index.js';
 //
 //   SDV_PFF_LIVE=1     + PFF_API_KEY (or SDV_PFF_API_KEY)          npm test
 //   SDV_KENPOM_LIVE=1  + KENPOM_EMAIL / KENPOM_PW (or KP_USER / KP_PW)
-//   SDV_NFL_PRO_LIVE=1 + NFLPRO_TOKEN (a user-bound NFL+ Premium token)
+//   SDV_NFLPRO_LIVE=1 (or SDV_NFL_PRO_LIVE=1) + NFLPRO_TOKEN (a user-bound NFL+
+//     Premium token) or NFLPRO_EMAIL / NFLPRO_PW (a headless id.nfl.com login;
+//     needs `npm i playwright && npx playwright install chromium`)
 //
 // PFF's budget is 100 reads/min per ACCOUNT (shared with every client holding
 // the key), so this suite makes four calls.
@@ -57,8 +59,29 @@ gate('SDV_KENPOM_LIVE', hasKenpomLogin())('KenPom live smoke', function () {
   });
 });
 
-gate('SDV_NFL_PRO_LIVE', Boolean((process.env.NFLPRO_TOKEN ?? '').trim()))('NFL Pro live smoke', function () {
-  this.timeout(120000);
+const hasNflProLogin = Boolean((process.env.NFLPRO_EMAIL ?? '').trim() && process.env.NFLPRO_PW);
+gate(
+  on('SDV_NFLPRO_LIVE') ? 'SDV_NFLPRO_LIVE' : 'SDV_NFL_PRO_LIVE',
+  Boolean((process.env.NFLPRO_TOKEN ?? '').trim()) || hasNflProLogin
+)('NFL Pro live smoke', function () {
+  this.timeout(240000);
+
+  (hasNflProLogin ? it : it.skip)('logs in to id.nfl.com and gets a token carrying an NFL_PLUS_* plan', async () => {
+    // NFLPRO_TOKEN would win over the credentials (sdv-py's order): hide it so
+    // this test really logs in
+    const saved = process.env.NFLPRO_TOKEN;
+    delete process.env.NFLPRO_TOKEN;
+    try {
+      const creds = { email: process.env.NFLPRO_EMAIL, password: process.env.NFLPRO_PW };
+      const token = await nflProToken(creds);
+      const claims = JSON.parse(Buffer.from(token.split('.')[1], 'base64url').toString('utf8'));
+      claims.plans.some((p) => String(p.plan).startsWith('NFL_PLUS')).should.be.true();
+      // never `.should.equal(token)`: a failure would print both bearer tokens
+      ((await nflProToken(creds)) === token).should.be.true(); // the same account is served from the cache
+    } finally {
+      if (saved !== undefined) process.env.NFLPRO_TOKEN = saved;
+    }
+  });
 
   it('passing season pages to the envelope total and parses', async () => {
     const body = await sdv.nfl.nflProPlayersOffensePassingSeason({ season: 2024, season_type: 'REG' });

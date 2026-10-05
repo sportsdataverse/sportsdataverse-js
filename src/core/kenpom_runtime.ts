@@ -24,9 +24,9 @@
 //
 // Importing this module registers the `kenpom` family defaults.
 
-import { createHash, randomUUID } from "node:crypto";
+import { randomUUID } from "node:crypto";
 import type { AuthContext, AuthProvider } from "./auth.js";
-import { sessionAuth } from "./auth.js";
+import { credentialKey, sessionAuth } from "./auth.js";
 import { registerFamilyDefaults, resolveFamily } from "./config.js";
 import { AssetFetchError, SdvError } from "./errors.js";
 import { request } from "./request.js";
@@ -173,9 +173,10 @@ const SESSION_HEADER = "x-sdv-kenpom-session";
 const SESSION_CACHE_MAX = 8;
 
 /**
- * Explicit-credential sessions, keyed by e-mail + a SHA-256 of the password
- * (never the plaintext), so a corrected password is a different session. Only
- * a session whose login SUCCEEDED is cached.
+ * Explicit-credential sessions, keyed by an HMAC of e-mail + password under a
+ * per-process key ({@link credentialKey}: never the plaintext, never an
+ * unsalted hash), so a corrected password is a different session. Only a
+ * session whose login SUCCEEDED is cached, at most SESSION_CACHE_MAX (FIFO).
  */
 let explicitSessions = new Map<string, { id: string; provider: AuthProvider }>();
 
@@ -187,8 +188,8 @@ function sessionFor(creds?: { email: string; password: string }): AuthProvider {
 
 let envSession = sessionFor();
 
-const accountKey = (c: { email: string; password: string }): string =>
-  `${c.email}\u0000${createHash("sha256").update(c.password).digest("hex")}`;
+/** @internal (exported for tests) */
+export const accountKey = (c: { email: string; password: string }): string => credentialKey(c.email, c.password);
 
 type ExplicitSession = { id: string; provider: AuthProvider };
 

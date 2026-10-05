@@ -9598,7 +9598,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 
 ## Native API — NFL Pro (Next Gen Stats)
 
-Flat (non-ESPN) wrappers for NFL Pro's secured Next Gen Stats API (pro.nfl.com; NFL+ Premium). Host: `https://pro.nfl.com`. Each method is exposed under BOTH its snake_case name `nfl_pro_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nfl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. **Auth:** a user-bound NFL Pro bearer token carrying an active NFL+ plan is required — `token` on the call, or the `NFLPRO_TOKEN` environment variable. Responses truncate at the page size, so the getter pages on `offset` until the envelope's `total` is reached.
+Flat (non-ESPN) wrappers for NFL Pro's secured Next Gen Stats API (pro.nfl.com; NFL+ Premium). Host: `https://pro.nfl.com`. Each method is exposed under BOTH its snake_case name `nfl_pro_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nfl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. **Auth:** a user-bound NFL Pro bearer token carrying an active NFL+ plan is required — `token` on the call or the `NFLPRO_TOKEN` environment variable, else a headless-browser NFL login with `email` / `password` on the call or `NFLPRO_EMAIL` / `NFLPRO_PW` (needs the optional `playwright`). Responses truncate at the page size, so the getter pages on `offset` until the envelope's `total` is reached.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
