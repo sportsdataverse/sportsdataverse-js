@@ -270,7 +270,7 @@ appear in an error message.
 
 **PFF Developer API** (`pff_api`, `sdv.nfl.pffApi*`, 68 wrappers, `api.pff.com`)
 needs a PFF Pro API key (`ak_live_…`, created at
-<https://www.pff.com/account/api-keys>). The key is taken from, in order: an
+[pff.com/account/api-keys](https://www.pff.com/account/api-keys)). The key is taken from, in order: an
 `Authorization` header in `headers`, `api_key` on the call, `SDV_PFF_API_KEY`,
 then `PFF_API_KEY`.
 
