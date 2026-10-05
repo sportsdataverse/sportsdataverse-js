@@ -7,6 +7,10 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 ## Unreleased
 
 
+### Added — ESPN basketball box producers (NBA / WNBA / MBB / WBB)
+
+- `sdv.<lg>.helper_<lg>_player_box(summary)` and `helper_<lg>_team_box(summary)` (+ camelCase, e.g. `sdv.nba.helperNbaPlayerBox`) for `nba`, `wnba`, `mbb`, `wbb`: one game's ESPN summary payload in, the rows the hoopR / wehoop box-score releases publish out. Pure (no network): fetch with `espn_<lg>_summary({ event_id })` and pass the result in. Ported from sdv-py (pin 719de79) with its per-league facts: NBA/WNBA carry `plus_minus` (a string such as `"+16"`), MBB/WBB do not; MBB/WBB skip a game whose second team ships no athletes, NBA/WNBA publish the first team's rows; MBB orders `active` last. Same columns, order and null handling as sdv-py; Int32 columns are numbers (ids included), `game_date` is `"YYYY-MM-DD"` and `game_date_time` an ISO-8601 New York time with its offset. A payload sdv-py skips returns `[]`. Parity: every helper is compared cell by cell with sdv-py's output on 14 real captures (full games in all four leagues, plus archival, one-sided, scheduled and stat-less payloads) and 21 derived gate payloads (`tools/parity/espn_basketball_box_oracle.py`).
+
 ### Security
 
 - Credentials no longer reach `err.cause`. A raw axios error carries its request config — the `Authorization` header, cookies, and a POSTed login form, password included — and it was attached as-is to `AssetFetchError` (network failures, auth failures), so `util.inspect(err)` or a logged error could expose them. Every `SdvError` now stores its `cause` through `safeCause` (name, message and stack with URL query strings and `user:password@` redacted, plus `code` / `errno` / `syscall` — nothing else). `axiosTransport` and the impersonating (impit) transport reject with the same sanitized errors. This applies to every family; the old behavior predates this PR.
