@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import endpoints from '@site/src/playground/endpoints.json';
 import { resolveUrl, resolveFlatUrl, findFlatDef } from '@site/src/playground/resolve.mjs';
-import { parseEndpoint, SECTIONED_ENDPOINTS } from '@site/src/playground/parsers.bundle.mjs';
+import { parseEndpoint, SECTIONED_ENDPOINTS, MULTI_TABLE_SECTIONS } from '@site/src/playground/parsers.bundle.mjs';
 import { EXAMPLES, examplesBySport } from '@site/src/playground/examples.js';
 import styles from './styles.module.css';
 
@@ -107,6 +107,12 @@ function selectDef(league, id) {
   const short = id.slice('espn:'.length);
   const def = espnEndpointsFor(league).find((e) => e.short === short);
   return def ? { kind: 'espn', def, short } : null;
+}
+
+/** Does this selection's parse take `section` (the summary dispatcher, or a flat multi-table parser)? */
+function selHasSections(sel) {
+  if (!sel) return false;
+  return sel.kind === 'flat' ? !!sel.def.parser && sel.def.parser in MULTI_TABLE_SECTIONS : SECTIONED_ENDPOINTS.has(sel.short);
 }
 
 /** Does this selection have a registered parser (so `parsed` is meaningful)? */
@@ -285,6 +291,7 @@ export default function Playground() {
       return; // an Example just set its own params/parsed/section — keep them
     }
     setParams(defaultParams(fieldsFor(league, sel)));
+    setSection(null); // the old endpoint's section is not this one's
     setRawData(null);
     setRawText(null);
     setError(null);
@@ -318,7 +325,7 @@ export default function Playground() {
     const entries = Object.entries(params).filter(([, v]) => v !== '' && v != null);
     if (parsed && hasParser) {
       entries.push(['parsed', 'true']);
-      if (sel.kind === 'espn' && SECTIONED_ENDPOINTS.has(sel.short) && section) entries.push(['section', section]);
+      if (selHasSections(sel) && section) entries.push(['section', section]);
     }
     const args = entries
       .map(([k, v]) => {
@@ -345,7 +352,18 @@ export default function Playground() {
         const dict = parseEndpoint('espn', sel.short, rawData);
         const sections = dict && typeof dict === 'object' ? Object.keys(dict) : [];
         const active = section && sections.includes(section) ? section : sections[0];
-        return { kind: 'summary', sections, active, rows: active ? dict[active] : [] };
+        return { kind: 'sections', sections, active, rows: active ? dict[active] : [] };
+      }
+      // A flat multi-table parser: its fixed section names, or (payload-named tables)
+      // the keys of its default dict; the chosen one is parsed exactly as the
+      // wrapper's `{ parsed: true, section }` would. A one-table payload has no picker.
+      const spec = sel.kind === 'flat' ? MULTI_TABLE_SECTIONS[key] : undefined;
+      if (spec) {
+        const all = spec.sections ? null : parseEndpoint('flat', key, rawData);
+        const sections = spec.sections ?? (all && !Array.isArray(all) ? Object.keys(all) : []);
+        if (!sections.length) return { kind: 'table', rows: all };
+        const active = section && sections.includes(section) ? section : spec.default ?? sections[0];
+        return { kind: 'sections', sections, active, rows: parseEndpoint('flat', key, rawData, active) };
       }
       const out = parseEndpoint(sel.kind, key, rawData);
       if (out == null) return { error: 'No parser registered for this endpoint.' };
@@ -566,7 +584,7 @@ export default function Playground() {
             {!(parsed && hasParser) && prettyRaw != null && (
               <span className={styles.bytes}>{(prettyRaw.length / 1024).toFixed(1)} KB</span>
             )}
-            {parsed && hasParser && parsedView?.kind === 'summary' && (
+            {parsed && hasParser && parsedView?.kind === 'sections' && (
               <select
                 className={styles.sectionSelect}
                 value={parsedView.active || ''}

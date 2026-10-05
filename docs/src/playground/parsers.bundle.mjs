@@ -2319,6 +2319,13 @@ var MULTI_TABLE_SECTIONS = {
     default: null,
     sections: null,
     dynamic: "a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`)"
+  },
+  // stats.nba.com / stats.wnba.com: the parser selects itself (sdv-py `result_set`).
+  parse_nba_stats_result_sets: {
+    default: null,
+    sections: null,
+    dynamic: "a result-set name the payload ships (sdv-py's `result_set`)",
+    resultSet: true
   }
 };
 function sectionError(parser, name, valid, dflt) {
@@ -3064,7 +3071,9 @@ function parse_nba_stats_result_sets(raw, resultSet) {
   sets.forEach((rs, i) => {
     frames[rs.name ?? `set_${i}`] = toRows(rs);
   });
-  if (resultSet !== void 0) return frames[resultSet] ?? [];
+  if (resultSet != null) {
+    return Object.prototype.hasOwnProperty.call(frames, resultSet) ? frames[resultSet] : [];
+  }
   const names = Object.keys(frames);
   if (!names.length) return [];
   if (names.length === 1) return frames[names[0]];
@@ -4380,7 +4389,8 @@ function parseEndpoint(kind, key, raw, section) {
     return fn2(raw);
   }
   const fn = parserFor(key);
-  return fn ? fn(raw) : null;
+  if (!fn) return null;
+  return key in MULTI_TABLE_SECTIONS ? fn(raw, section) : fn(raw);
 }
 export {
   ESPN_ENDPOINT_PARSERS,

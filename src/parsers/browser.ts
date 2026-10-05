@@ -32,10 +32,12 @@ export {
 } from "./espn.js";
 
 import { parserFor } from "./_registry.js";
+import { MULTI_TABLE_SECTIONS } from "./_frames.js";
 import { SECTIONED_ENDPOINTS, parserForEndpoint } from "./espn.js";
 
-/** Tidy rows, or — for the ESPN `summary` dispatcher with no section — the dict
- * of all 21 sub-frames. `null` when no parser is registered for the endpoint. */
+/** Tidy rows, or — for the ESPN `summary` dispatcher, or a dict-default flat
+ * multi-table parser, with no section — a dict of sub-frames. `null` when no
+ * parser is registered for the endpoint. */
 export type ParsedResult =
   | Record<string, any>[]
   | Record<string, Record<string, any>[]>
@@ -49,7 +51,9 @@ export type ParsedResult =
  *   `"summary"`); the `summary` dispatcher (and the CDN game pages, which run it)
  *   honours `section` (omit it to get the dict of all 21 sub-frames).
  * - `kind: "flat"` — `key` is the registered parser name (a native wrapper's
- *   `parser`, e.g. `"parse_mlb_schedule"`).
+ *   `parser`, e.g. `"parse_mlb_schedule"`); a multi-table parser
+ *   (`MULTI_TABLE_SECTIONS`) honours `section` exactly as the wrapper's
+ *   `{ parsed: true, section }` does.
  *
  * Returns `null` when no parser is registered, so callers fall back to raw.
  */
@@ -66,5 +70,7 @@ export function parseEndpoint(
     return (fn as (p: any) => Record<string, any>[])(raw);
   }
   const fn = parserFor(key);
-  return fn ? fn(raw) : null;
+  if (!fn) return null;
+  // as callFlat (src/leagues/_make_flat.ts)
+  return key in MULTI_TABLE_SECTIONS ? fn(raw, section) : fn(raw);
 }

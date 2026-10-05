@@ -40,6 +40,21 @@ describe('playground parser bundle is in sync with src/parsers', () => {
     dict.should.have.property('boxscore_team');
   });
 
+  it('a flat multi-table parser honours `section` (the playground section picker), as the wrapper does', () => {
+    const fx = (...p) => JSON.parse(readFileSync(new URL(`fixtures/${p.join('/')}`, import.meta.url), 'utf8'));
+    const match = fx('mls_api', 'statsapi_match_single.json');
+    const tables = bundle.parse_mls_match_tables(match);
+    bundle.parseEndpoint('flat', 'parse_mls_match', match).should.eql(tables.match_information); // default
+    bundle.parseEndpoint('flat', 'parse_mls_match', match, 'players').should.eql(tables.players);
+    bundle.parseEndpoint('flat', 'parse_mls_match', match, 'players').length.should.be.above(0);
+    // payload-named tables (stats.nba.com): the default is every set; a name picks one
+    const career = fx('nba_stats', 'cap_playercareerstats_nba.json');
+    const all = bundle.parseEndpoint('flat', 'parse_nba_stats_result_sets', career);
+    Object.keys(all).should.have.length(14);
+    bundle.parseEndpoint('flat', 'parse_nba_stats_result_sets', career, 'SeasonHighs').should.eql(all.SeasonHighs);
+    bundle.MULTI_TABLE_SECTIONS.parse_mls_match.sections.should.containEql('players');
+  });
+
   it('is byte-identical to a fresh `npm run bundle:parsers` (a changed parser BODY is stale too)', async () => {
     // Same options as the package.json script, built in memory.
     const root = fileURLToPath(new URL('..', import.meta.url));
