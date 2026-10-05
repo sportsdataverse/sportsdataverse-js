@@ -548,6 +548,9 @@ function loadFlatWrappers() {
           ? ` (\`${doc.name_pattern.split("_{", 1)[0]}_${doc.qualifier}_<endpoint>\` where sdv-py's name is taken)`
           : "")
       : `\`${doc.api}_<endpoint>\``;
+    // sdv-py merges a family-level fixed_params only for ESPN API YAML; a flat one
+    // would be dropped there too, so refuse it rather than silently ignore it.
+    if (doc.fixed_params) throw new Error(`${doc.api}: family-level fixed_params is ESPN-only; set it per endpoint`);
     for (const ep of doc.endpoints ?? []) {
       if (ep.legacy_short) FLAT_LEGACY_SHORT.set(`${doc.api}.${ep.short}`, ep.legacy_short);
       // An overlay addition may pin its pre-v4 name (`public_name`, see vendor.yaml).
@@ -569,6 +572,8 @@ function loadFlatWrappers() {
         ...(ep.now_variant ? { nowVariant: ep.now_variant, nowToggle: nowToggle(ep) } : {}),
         pathParams: mapPathParams(ep),
         queryParams: mapQueryParams(ep),
+        // sdv-py endpoint fixed_params: constant query params, never arguments.
+        ...(ep.fixed_params && Object.keys(ep.fixed_params).length ? { fixedParams: ep.fixed_params } : {}),
         ...(ep.parser ? { parser: ep.parser } : {}),
         ...(ep.returns_schema ? { returnsSchema: ep.returns_schema } : {}),
         ...(auth ? { auth: true } : {}),

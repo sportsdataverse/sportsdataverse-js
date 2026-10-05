@@ -100,9 +100,9 @@ export interface WrapperDef {
   pathParams: PathParam[];
   queryParams: QueryParam[];
   /**
-   * ESPN only: constant query params sent on every request and never exposed as
-   * arguments (sdv-py `fixed_params`, e.g. the CDN's `xhr: 1`). A caller param
-   * of the same name overrides one.
+   * Constant query params sent on every request and never exposed as arguments
+   * (sdv-py `fixed_params`: per endpoint, or family-level on an ESPN family, e.g.
+   * the CDN's `xhr: 1`). A caller param of the same name overrides one.
    */
   fixedParams?: Record<string, string | number | boolean>;
   /** True for non-ESPN "flat API" wrappers (see `src/core/flat.ts`). */

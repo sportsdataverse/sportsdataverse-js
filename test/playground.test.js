@@ -15,6 +15,19 @@ const E = Object.fromEntries(WRAPPERS.map((w) => [w.short, w]));
 // Flat wrappers keyed by `${api}:${short}` (a flat `short` isn't unique across families).
 const F = Object.fromEntries(FLAT_WRAPPERS.map((w) => [`${w.api}:${w.short}`, w]));
 
+describe('flat endpoint fixed_params (sdv-py spec.Endpoint.fixed_params)', () => {
+  // No vendored flat family uses it at this pin; a synthetic def pins the contract.
+  const def = {
+    short: 'x', flat: true, api: 'mlb', host: 'https://statsapi.mlb.com', scope: 'universal', path: '/api/v1/x',
+    pathParams: [], queryParams: [{ name: 'season', queryKey: 'season' }], fixedParams: { format: 'json' },
+  };
+  it('is sent first, a caller param of the same name overrides it, package == playground', () => {
+    pkgResolveFlat(def, { season: 2024 }).query.should.eql({ format: 'json', season: 2024 });
+    pkgResolveFlat(def, { format: 'csv' }).query.should.eql({ format: 'csv' });
+    resolveFlat(def, { season: 2024 }, FLAT_HOSTS).query.should.eql({ format: 'json', season: 2024 });
+  });
+});
+
 describe('playground resolve.mjs matches the package resolver', () => {
   const cases = [
     ['nba', 'scoreboard', {}],

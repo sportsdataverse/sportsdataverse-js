@@ -138,6 +138,7 @@ export function resolveUrl(def, league, params, hosts) {
 /** Build the flat query map from `queryParams` (+ defaults), dropping empties. */
 function cleanFlatQuery(def, params) {
   const out = {};
+  for (const [k, v] of Object.entries(def.fixedParams || {})) out[k] = lookup(params, k) ?? v;
   for (const qp of def.queryParams || []) {
     const v = applyTransform(qp.transform, lookup(params, qp.name) ?? qp.default);
     if (v !== undefined && v !== null && v !== '') out[qp.queryKey] = v;
