@@ -4,13 +4,18 @@
 // `request()` (src/core/request.ts), so every transport gets them for free.
 
 import axios from "axios";
-import { TransportUnavailableError } from "./errors.js";
+import { SdvError, TransportUnavailableError } from "./errors.js";
 
 export interface TransportRequest {
   method: "GET" | "POST";
   /** Absolute URL without the query string. */
   url: string;
-  /** Query params; `undefined` / `null` values are dropped. */
+  /**
+   * Query params; `undefined` / `null` values are dropped. An array value
+   * repeats the key (`{ k: ["a", "b"] }` → `k=a&k=b`, as sdv-py / requests
+   * sends) — never `k[]=a`. Every built-in transport encodes the same way
+   * ({@link encodeQuery}).
+   */
   query?: Record<string, unknown>;
   headers?: Record<string, string>;
   /** Request body (POST). Strings / URLSearchParams are sent as-is, objects as JSON. */
@@ -82,6 +87,8 @@ export const axiosTransport: Transport = async (req) => {
   const responseType = req.responseType ?? "json";
   const config = {
     params: req.query,
+    // Repeated keys for arrays (axios' default would send `k[]=a&k[]=b`).
+    paramsSerializer: (params: Record<string, unknown>) => encodeQuery(params),
     headers: req.headers,
     timeout: req.timeoutMs,
     responseType,
@@ -105,14 +112,34 @@ export const axiosTransport: Transport = async (req) => {
   };
 };
 
-/** Append `query` to `url`, dropping `undefined` / `null`; arrays repeat the key. */
-function withQuery(url: string, query?: Record<string, unknown>): string {
-  const sp = new URLSearchParams();
+/** axios' own component encoder (lib/helpers/buildURL.js), so scalar encoding is unchanged. */
+function encodeComponent(value: string): string {
+  return encodeURIComponent(value)
+    .replace(/%3A/gi, ":")
+    .replace(/%24/g, "$")
+    .replace(/%2C/gi, ",")
+    .replace(/%20/g, "+");
+}
+
+/**
+ * Serialise a query map: `undefined` / `null` dropped, arrays as repeated keys
+ * (`k=a&k=b`). Shared by every built-in transport so the wire form is identical.
+ */
+export function encodeQuery(query?: Record<string, unknown>): string {
+  const parts: string[] = [];
   for (const [k, v] of Object.entries(query ?? {})) {
     if (v === undefined || v === null) continue;
-    for (const item of Array.isArray(v) ? v : [v]) sp.append(k, String(item));
+    for (const item of Array.isArray(v) ? v : [v]) {
+      if (item === undefined || item === null) continue;
+      parts.push(`${encodeComponent(k)}=${encodeComponent(String(item))}`);
+    }
   }
-  const qs = sp.toString();
+  return parts.join("&");
+}
+
+/** Append `query` to `url` with {@link encodeQuery}. */
+function withQuery(url: string, query?: Record<string, unknown>): string {
+  const qs = encodeQuery(query);
   if (!qs) return url;
   return `${url}${url.includes("?") ? "&" : "?"}${qs}`;
 }
@@ -156,20 +183,33 @@ export function createImpersonatingTransport(
   opts: { browser?: string; proxyUrl?: string } = {}
 ): Transport {
   let client: Promise<ImpitClient> | undefined;
+  const create = async (): Promise<ImpitClient> => {
+    let mod: any;
+    try {
+      mod = await _impitLoader.load();
+    } catch (err) {
+      throw new TransportUnavailableError(
+        "The impersonating transport needs the optional dependency `impit`. Install it with: npm install impit",
+        { cause: err }
+      );
+    }
+    try {
+      const Impit = mod.Impit ?? mod.default?.Impit;
+      return new Impit({ browser: opts.browser ?? "chrome", proxyUrl: opts.proxyUrl });
+    } catch (err) {
+      throw new SdvError(
+        `The impersonating transport could not create an impit client (browser ${JSON.stringify(opts.browser ?? "chrome")}): ${err instanceof Error ? err.message : String(err)}`,
+        { cause: err }
+      );
+    }
+  };
+  // Cache only a client that was created; a failure is retried on the next call
+  // (e.g. after `npm install impit`) instead of being replayed forever.
   const getClient = (): Promise<ImpitClient> =>
-    (client ??= _impitLoader.load().then(
-      (mod) => {
-        const Impit = mod.Impit ?? mod.default?.Impit;
-        return new Impit({ browser: opts.browser ?? "chrome", proxyUrl: opts.proxyUrl });
-      },
-      (err: unknown) => {
-        client = undefined; // let a later call retry after `npm install impit`
-        throw new TransportUnavailableError(
-          "The impersonating transport needs the optional dependency `impit`. Install it with: npm install impit",
-          { cause: err }
-        );
-      }
-    ));
+    (client ??= create().catch((err: unknown) => {
+      client = undefined;
+      throw err;
+    }));
 
   return async (req) => {
     const impit = await getClient();

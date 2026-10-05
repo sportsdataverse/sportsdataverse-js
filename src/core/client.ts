@@ -1,3 +1,4 @@
+import { SdvError } from "./errors.js";
 import { request } from "./request.js";
 import type { EspnFamily } from "./types.js";
 
@@ -81,16 +82,21 @@ export const FLAT_HOSTS: Record<string, string> = {
 
 /**
  * GET a URL through `request()` (configured transport + auth, retry, error
- * classification) and return the body. `family` selects the transport / auth
- * and enables the ESPN `{ code: 404 }` check for the ESPN families.
+ * classification) and return the body. `family` (required) selects the
+ * transport / auth and enables the ESPN `{ code: 404 }` check for the ESPN
+ * families — there is no fallback family, so a user's `default` entries are
+ * never applied by accident.
  *
  * @throws NoDataError on 404 (or an ESPN `{ code: 404 }` body); AssetFetchError on any other failure.
  */
 export async function get(
   url: string,
-  config: { params?: Record<string, unknown>; headers?: Record<string, string>; family?: string } = {}
+  config: { params?: Record<string, unknown>; headers?: Record<string, string>; family: string }
 ): Promise<any> {
-  return request(config.family ?? "default", {
+  if (!config?.family) {
+    throw new SdvError(`get(${url}): a family is required (e.g. "site_v2", "mlb")`);
+  }
+  return request(config.family, {
     method: "GET",
     url,
     query: config.params,

@@ -21,7 +21,8 @@ import sdv, {
 } from '../../dist/index.js';
 import { request, retryDelayMs, _timer } from '../../dist/core/request.js';
 import { registerFamilyDefaults, resolveFamily, DEFAULT_RETRY_STATUSES } from '../../dist/core/config.js';
-import { _impitLoader } from '../../dist/core/transport.js';
+import { _impitLoader, encodeQuery } from '../../dist/core/transport.js';
+import { get } from '../../dist/core/client.js';
 import { statcastGet } from '../../dist/core/statcast_runtime.js';
 import { torvikGet } from '../../dist/core/torvik_runtime.js';
 import { hockeytechGet, resolveSeasonId } from '../../dist/core/hockeytech_runtime.js';
@@ -427,6 +428,105 @@ describe('core/auth', () => {
   });
 });
 
+describe('core/auth: failures and empty credentials', () => {
+  isolate();
+
+  it('a throwing login is called exactly once, not retried, and the error names the auth step', async () => {
+    let logins = 0;
+    const t = fakeTransport({ status: 200 });
+    configure({
+      transport: t,
+      retries: 5,
+      auth: { kp: sessionAuth({ login: async () => { logins += 1; throw new Error('bad password'); } }) },
+    });
+    const err = await request('kp', GET()).should.be.rejectedWith(AssetFetchError);
+    err.message.should.equal('kp: auth failed (apply)');
+    err.cause.message.should.equal('bad password');
+    logins.should.equal(1);
+    t.calls.length.should.equal(0); // the data URL was never requested
+    sleeps.length.should.equal(0);
+  });
+
+  it('a throwing refresh is reported the same way (auth failed (refresh))', async () => {
+    let logins = 0;
+    configure({
+      transport: fakeTransport({ status: 401 }),
+      auth: {
+        kp: sessionAuth({
+          login: async () => {
+            logins += 1;
+            if (logins > 1) throw new Error('locked out');
+            return { cookies: { sid: 's1' } };
+          },
+        }),
+      },
+    });
+    const err = await request('kp', GET()).should.be.rejectedWith(AssetFetchError);
+    err.message.should.equal('kp: auth failed (refresh)');
+    err.status.should.equal(401);
+    logins.should.equal(2);
+  });
+
+  it('an SdvError thrown by mint passes through unchanged (no retry)', async () => {
+    const own = new SeasonNotFoundError('not entitled');
+    let mints = 0;
+    configure({
+      transport: fakeTransport({ status: 200 }),
+      retries: 5,
+      auth: { fam: tokenAuth({ mint: async () => { mints += 1; throw own; } }) },
+    });
+    (await request('fam', GET()).should.be.rejected()).should.equal(own);
+    mints.should.equal(1);
+  });
+
+  it('bearerAuth with an empty / undefined token throws an SdvError naming the family; nothing is sent', async () => {
+    for (const token of [() => undefined, async () => '', '', undefined]) {
+      const t = fakeTransport({ status: 200 });
+      configure({ transport: t, auth: { recruiting: bearerAuth(token) } });
+      const err = await request('recruiting', GET()).should.be.rejectedWith(SdvError);
+      (err instanceof AssetFetchError).should.be.false();
+      err.message.should.startWith('recruiting: no credential');
+      t.calls.length.should.equal(0);
+    }
+  });
+
+  it('tokenAuth mint returning an empty token throws an SdvError naming the family', async () => {
+    const t = fakeTransport({ status: 200 });
+    configure({ transport: t, auth: { fam: tokenAuth({ mint: async () => ({ token: '' }) }) } });
+    (await request('fam', GET()).should.be.rejectedWith(SdvError)).message.should.startWith('fam: no credential');
+    t.calls.length.should.equal(0);
+  });
+
+  it('headerAuth / queryAuth drop undefined and empty values', async () => {
+    const t = fakeTransport({ status: 200 });
+    configure({
+      transport: t,
+      auth: {
+        h: headerAuth({ 'X-Unset': undefined, 'X-Empty': '', 'X-Ok': 'v' }),
+        q: queryAuth({ unset: undefined, empty: '', ok: 'v' }),
+      },
+    });
+    await request('h', GET());
+    should(t.calls[0].headers['X-Unset']).be.undefined();
+    should(t.calls[0].headers['X-Empty']).be.undefined();
+    t.calls[0].headers['X-Ok'].should.equal('v');
+    await request('q', GET());
+    t.calls[1].query.should.eql({ ok: 'v' });
+  });
+
+  it('get() requires a family (SdvError, nothing sent)', async () => {
+    const t = fakeTransport({ status: 200 });
+    configure({ transport: t });
+    (await get('https://example.test/x').should.be.rejectedWith(SdvError)).message.should.containEql(
+      'a family is required'
+    );
+    await get('https://example.test/x', {}).should.be.rejectedWith(SdvError);
+    t.calls.length.should.equal(0);
+    await get('https://example.test/x', { family: 'mlb' });
+    t.calls.length.should.equal(1);
+  });
+});
+
 describe('core/transport', () => {
   isolate();
   let server;
@@ -491,6 +591,64 @@ describe('core/transport', () => {
     const fail = await t({ method: 'GET', url: `${base}/fail` });
     fail.status.should.equal(500);
     fail.data.should.equal('nope');
+  });
+
+  // The pinned TransportRequest.query contract: arrays repeat the key, never k[]=.
+  const QUERY = { k: ['a', 'b'], s: 'x y', c: 'a,b', skip: undefined };
+  const WIRE = '/q?k=a&k=b&s=x+y&c=a,b';
+
+  it('query contract: axiosTransport sends arrays as repeated keys (k=a&k=b)', async () => {
+    const res = await axiosTransport({ method: 'GET', url: `${base}/q`, query: QUERY });
+    res.data.path.should.equal(WIRE);
+  });
+
+  it('query contract: the impersonating transport sends the identical wire form', async function () {
+    try {
+      await import('impit');
+    } catch {
+      this.skip();
+    }
+    const res = await createImpersonatingTransport()({ method: 'GET', url: `${base}/q`, query: QUERY });
+    res.data.path.should.equal(WIRE);
+  });
+
+  it('encodeQuery keeps axios scalar encoding and drops undefined / null', () => {
+    encodeQuery({ a: 1, b: null, c: undefined, d: 'x:y$z', e: ['1', null, '2'] }).should.equal(
+      'a=1&d=x:y$z&e=1&e=2'
+    );
+  });
+
+  it('a throwing impit constructor -> SdvError (not retried), and the failure is not cached', async () => {
+    const real = _impitLoader.load;
+    let constructed = 0;
+    class FakeImpit {
+      constructor() {
+        constructed += 1;
+        if (constructed === 1) throw new Error('bad browser profile');
+      }
+      async fetch(url) {
+        return {
+          status: 200,
+          url,
+          headers: new Headers({ 'content-type': 'application/json' }),
+          text: async () => '{"ok":true}',
+          arrayBuffer: async () => new ArrayBuffer(0),
+        };
+      }
+    }
+    _impitLoader.load = async () => ({ Impit: FakeImpit });
+    try {
+      configure({ transport: { nba_stats: createImpersonatingTransport({ browser: 'nope' }) } });
+      const err = await request('nba_stats', GET()).should.be.rejectedWith(SdvError);
+      err.message.should.containEql('could not create an impit client');
+      (err instanceof AssetFetchError).should.be.false();
+      sleeps.length.should.equal(0); // not retried as a network error
+      constructed.should.equal(1);
+      (await request('nba_stats', GET())).should.eql({ ok: true }); // re-created, not replayed
+      constructed.should.equal(2);
+    } finally {
+      _impitLoader.load = real;
+    }
   });
 });
 

@@ -43,7 +43,7 @@
     "yaml": "^2.9.0"
   },
   "peerDependencies": {
-    "impit": ">=0.14.0"
+    "impit": ">=0.14.0 <1"
   },
   "peerDependenciesMeta": {
     "impit": {

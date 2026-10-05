@@ -15,7 +15,7 @@ describe('core/client: default User-Agent', () => {
     });
     await new Promise((r) => srv.listen(0, '127.0.0.1', r));
     try {
-      await get(`http://127.0.0.1:${srv.address().port}/`);
+      await get(`http://127.0.0.1:${srv.address().port}/`, { family: 'site_v2' });
     } finally {
       srv.close();
     }

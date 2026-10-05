@@ -76,11 +76,23 @@ export async function requestResponse(
   let attempt = 0;
   let statusRetries = 0;
   let refreshed = false;
+  // Auth failures (a throwing mint / login / token getter) are never retried
+  // here — re-submitting credentials is the provider's call — and are named as
+  // the auth step, not blamed on the data URL. An SdvError passes through.
+  const authFailed = (step: string, err: unknown, status?: number): SdvError =>
+    err instanceof SdvError
+      ? err
+      : new AssetFetchError(`${family}: auth failed (${step})`, { ...where, status, cause: err });
 
   for (;;) {
+    let authed: TransportRequest;
+    try {
+      authed = auth ? await auth.apply(base, ctx) : base;
+    } catch (err) {
+      throw authFailed("apply", err);
+    }
     let res: TransportResponse;
     try {
-      const authed = auth ? await auth.apply(base, ctx) : base;
       res = await transport({
         ...authed,
         headers: mergeHeaders({ "User-Agent": userAgent }, authed.headers),
@@ -104,12 +116,7 @@ export async function requestResponse(
       try {
         await auth.refresh(ctx);
       } catch (err) {
-        if (err instanceof SdvError) throw err;
-        throw new AssetFetchError(`${family}: auth refresh failed: ${req.url}`, {
-          ...where,
-          status,
-          cause: err,
-        });
+        throw authFailed("refresh", err, status);
       }
       continue;
     }
@@ -141,8 +148,10 @@ export async function requestResponse(
 /**
  * Fetch through the family's configured transport + auth and return the body.
  *
- * Auth is applied, then the transport is called. A 401 triggers one
- * `auth.refresh` and a retry. Network errors and the family's retry statuses
+ * Auth is applied, then the transport is called. A failing `auth.apply` /
+ * `auth.refresh` is not retried: an SdvError passes through, anything else
+ * becomes `AssetFetchError("<family>: auth failed (apply|refresh)")`. A 401
+ * triggers one `auth.refresh` and a retry. Network errors and the family's retry statuses
  * (default 403 / 408 / 429 / 500 / 502 / 503 / 504; auth-gated families drop
  * 403) are retried with bounded exponential backoff + jitter (honouring
  * `Retry-After`), up to `retries` (default 3) attempts in all, at most 4 of

@@ -14,7 +14,7 @@ import type { WrapperDef, WrapperFn } from "../core/types.js";
 /** A flat-API getter: same shape as `core/client.ts` `get`. */
 type GetterFn = (
   url: string,
-  config?: { params?: any; headers?: any; family?: string }
+  config: { params?: any; headers?: any; family: string }
 ) => Promise<any>;
 
 /**
@@ -51,7 +51,8 @@ export async function callFlat(
 ): Promise<any> {
   const getter: GetterFn = (def.api ? GETTER_OVERRIDES[def.api] : undefined) ?? get;
   const { url, query } = resolveFlat(def, params);
-  const raw = await getter(url, { params: query, headers: params.headers, family: def.api });
+  // Flat defs always carry their `api` stem (codegen); get() guards it at runtime.
+  const raw = await getter(url, { params: query, headers: params.headers, family: def.api! });
   const parser = params.parsed ? parserFor(def.parser) : undefined;
   return parser ? parser(raw) : raw;
 }

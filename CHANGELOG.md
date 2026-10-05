@@ -41,9 +41,10 @@ Every wrapper (ESPN and flat-API) now fetches through one runtime core
   exhausted; carries `status`, `url`, `cause`). They are siblings under `SdvError`;
   `NoESPNDataError` aliases `NoDataError`; `SeasonNotFoundError` and
   `TransportUnavailableError` are new too.
-- **BREAKING: the Statcast, BartTorvik and HockeyTech getters no longer swallow a
-  failed fetch** into `{}` / `""` — they throw like every other wrapper, so a
-  failed fetch can't be mistaken for an empty table.
+- **BREAKING: the Statcast, BartTorvik and HockeyTech getters no longer turn a
+  failed HTTP fetch** into `{}` / `""` — they throw like every other wrapper, so
+  a failed fetch can't be mistaken for an empty table. (Unchanged: HockeyTech
+  still returns `{}` for an unknown league or an unparseable 200 body.)
 - **Retries:** network errors and the family's retry statuses (default
   `DEFAULT_RETRY_STATUSES` = 403 / 408 / 429 / 500 / 502 / 503 / 504, as
   sdv-py) are retried with exponential backoff + jitter (0.5s doubling, capped
@@ -63,8 +64,10 @@ Every wrapper (ESPN and flat-API) now fetches through one runtime core
   cached tokens), `sessionAuth` (login cookies / headers). NFL.com auth is now a
   `tokenAuth` registered for `nfl_api` (same `NFL_ACCESS_TOKEN` /
   `NFL_CLIENT_KEY` / `NFL_CLIENT_SECRET` behaviour).
-- **Fix:** a flat wrapper's `headers` argument is now sent for every family (it
-  was dropped for non-`auth` families such as 247Sports and Yahoo).
+- **Fix:** a flat wrapper's `headers` argument is now forwarded for every family
+  whose getter takes headers. It was dropped for non-`auth` families such as
+  247Sports and Yahoo. HockeyTech's getter builds its own headers and still
+  takes params only.
 - New guide: *Transport, auth & errors*. CI adds a `strict: true` type-check of
   the runtime core (`npm run typecheck:strict`).
 

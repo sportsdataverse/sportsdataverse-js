@@ -34,7 +34,9 @@ retry → classification.
   body `{ code: 404 }`) / `AssetFetchError` (403, 429, 5xx, network, retries
   exhausted) instead of raw axios errors — siblings under `SdvError`;
   `NoESPNDataError` aliases `NoDataError`. The Statcast, BartTorvik and
-  HockeyTech getters no longer swallow a failed fetch into `{}` / `""`.
+  HockeyTech getters no longer turn a failed HTTP fetch into `{}` / `""`
+  (HockeyTech still returns `{}` for an unknown league or an unparseable 200
+  body).
 - Retries network errors and 403 / 408 / 429 / 500 / 502 / 503 / 504 with
   backoff + jitter (honours `Retry-After`; default 3 retries, at most 4 on
   statuses). Auth-gated families drop 403 via
@@ -46,7 +48,8 @@ retry → classification.
   the optional peer dependency `impit`. Auth helpers: `bearerAuth`,
   `headerAuth`, `queryAuth`, `tokenAuth`, `sessionAuth`; NFL.com auth is a
   registered `tokenAuth` (same `NFL_*` env vars).
-- Fix: a flat wrapper's `headers` argument is now sent for every family.
+- Fix: a flat wrapper's `headers` argument is now forwarded for every family
+  whose getter takes headers (not HockeyTech, which builds its own).
 - New guide: [Transport, auth & errors](/docs/guides/transport-and-auth).
 
 ### Changed (breaking) — provider method naming

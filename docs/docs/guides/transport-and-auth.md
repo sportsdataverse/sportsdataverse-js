@@ -104,7 +104,7 @@ const viaProxy = async (req) => {
   return { status: res.status, headers, data: res.data, url: req.url };
 };
 
-configure({ transport: viaProxy });                       // every family
+configure({ transport: viaProxy });                       // every family without its own registered transport
 configure({ transport: { core_v2: viaProxy } });          // just ESPN Core v2
 configure({ transport: { default: viaProxy, mlb: other } }); // per family + fallback
 ```
@@ -162,17 +162,34 @@ import {
   configure, bearerAuth, headerAuth, queryAuth, tokenAuth, sessionAuth,
 } from 'sportsdataverse';
 
-configure({
-  auth: {
-    // A key sent as a query parameter (The Odds API's apiKey).
-    odds_api: queryAuth({ apiKey: process.env.ODDS_API_KEY }),
-    // A static or lazily-read bearer token (247Sports takes your own JWT).
-    recruiting: bearerAuth(() => process.env.SPORTS247_TOKEN),
-    // A key sent as a header.
-    my_family: headerAuth({ 'X-Api-Key': process.env.MY_KEY }),
-  },
-});
+// Only configure a family when its key is actually set.
+const auth = {};
+if (process.env.ODDS_API_KEY) {
+  // A key sent as a query parameter (The Odds API's apiKey).
+  auth.odds_api = queryAuth({ apiKey: process.env.ODDS_API_KEY });
+}
+if (process.env.SPORTS247_TOKEN) {
+  // A bearer token (247Sports takes your own JWT). A getter is read per request.
+  auth.recruiting = bearerAuth(() => process.env.SPORTS247_TOKEN);
+}
+if (process.env.MY_KEY) {
+  // A key sent as a header.
+  auth.my_family = headerAuth({ 'X-Api-Key': process.env.MY_KEY });
+}
+configure({ auth });
 ```
+
+Empty credentials are never sent. If a `bearerAuth` token (or getter) yields an
+empty value, or `tokenAuth`'s `mint` returns an empty token, the call throws
+an `SdvError` naming the family before any request goes out. `headerAuth` and
+`queryAuth` drop `undefined` or empty values.
+
+**Failures are not retried.** `mint`, `login` and token getters **throw** on
+failure. `request()` calls them once per need and never re-submits credentials
+in its retry loop. If you want to ride out transient errors there, retry inside
+`mint` / `login` yourself. An `SdvError` you throw reaches the caller unchanged.
+Anything else becomes `AssetFetchError` with the message
+`"<family>: auth failed (apply)"` (or `(refresh)`).
 
 **Minted tokens** — `tokenAuth` calls `mint` once, caches the token in-process,
 re-mints `skewSeconds` (default 60) before `expiresAt` (unix epoch **seconds**,
