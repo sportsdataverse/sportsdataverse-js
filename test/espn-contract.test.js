@@ -61,7 +61,9 @@ describe('every wrapper is exposed under both names on every applicable league',
       const ns = sdv[league.prefix];
       should(ns).be.an.Object();
       for (const w of wrappers) {
-        const snake = `espn_${league.prefix}_${w.short}`;
+        // v4 public name (sdv-py's); pre-v4 names are covered by test/naming.test.js
+        const pub = league.publicShorts?.[w.short] ?? w.publicShort ?? w.short;
+        const snake = `espn_${league.prefix}_${pub}`;
         const camel = toCamel(snake);
         (typeof ns[snake]).should.equal('function', `missing ${snake}`);
         (typeof ns[camel]).should.equal('function', `missing ${camel}`);
