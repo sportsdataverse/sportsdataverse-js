@@ -5,6 +5,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import sdv from '../../dist/index.js';
 import { configure, resetConfig } from '../../dist/core/config.js';
+import { AssetFetchError } from '../../dist/core/errors.js';
+import * as FLAT from '../../dist/generated/flat/hockeytech.js';
 import * as A from '../../dist/analytics/hockeytech.js';
 
 // Parity: every case below is compared cell-by-cell against `oracle.json`, produced ONCE by
@@ -159,13 +161,22 @@ describe('hockeytech analytics: edge cases vs the oracle (hand-built frames thro
 describe('hockeytech analytics: per-league wrappers (offline stub transport serving the captures)', () => {
   const jsonp = (o) => `angular.callbacks._0(${JSON.stringify(o)})`;
   const calls = [];
+  let mode = 'ok'; // ok | garbage | sentinel | emptyGame
   before(() => {
     configure({
       retries: 0,
       transport: async (req) => {
         const q = req.query ?? {};
         calls.push({ url: req.url, q });
+        if (mode === 'garbage') return { status: 200, headers: {}, data: '<html>blocked</html>', url: req.url };
+        if (mode === 'sentinel') return { status: 200, headers: {}, data: jsonp({ error: 'invalid key' }), url: req.url };
         let body = {};
+        if (mode === 'emptyGame') {
+          if (q.view === 'gameshifts') body = { SiteKit: { Gameshifts: { home: [], visitor: [] } } };
+          else if (q.feed === 'statviewfeed') body = [];
+          else if (q.feed === 'gc') body = { GC: { Gamesummary: {} } };
+          return { status: 200, headers: {}, data: jsonp(body), url: req.url };
+        }
         if (q.client_code === 'pwhl') {
           if (q.feed === 'modulekit' && q.view === 'gameshifts') body = shifts42;
           else if (q.feed === 'statviewfeed') body = pbp42;
@@ -204,9 +215,45 @@ describe('hockeytech analytics: per-league wrappers (offline stub transport serv
     );
     expectFrame(await sdv.hockeytech.hockeytechGameCorsi({ league: 'pwhl', game_id: 42 }), O.pwhl_family_game_corsi);
   });
-  it('a game with no shift feed: empty shifts / toi / corsi (not an error)', async () => {
-    (await sdv.hockeytech.ohl_game_shifts(27225)).should.eql([]);
-    (await sdv.hockeytech.ohl_player_toi(27225)).should.eql([]);
-    (await sdv.hockeytech.ohl_game_corsi(27225)).should.eql([]);
+  it('a valid game with no events / shifts (envelopes present, no rows) is [] for every function', async () => {
+    mode = 'emptyGame';
+    try {
+      for (const f of ['game_shifts', 'player_toi', 'pbp', 'game_corsi']) {
+        (await sdv.hockeytech[`ohl_${f}`](27225)).should.eql([]);
+      }
+    } finally {
+      mode = 'ok';
+    }
+  });
+  for (const bad of ['garbage', 'sentinel']) {
+    it(`a ${bad} 200 body is AssetFetchError, never an empty game`, async () => {
+      mode = bad;
+      try {
+        for (const f of ['game_shifts', 'player_toi', 'pbp', 'game_corsi']) {
+          await sdv.hockeytech[`pwhl_${f}`](42).should.be.rejectedWith(AssetFetchError);
+        }
+        await sdv.hockeytech.hockeytech_enriched_pbp({ league: 'pwhl', game_id: 42 }).should.be.rejectedWith(AssetFetchError);
+      } finally {
+        mode = 'ok';
+      }
+    });
+  }
+  it('pwhl_pbp (public in py) matches the enriched oracle', async () => {
+    expectFrame(await sdv.hockeytech.pwhl_pbp(42), O.pwhl_family_pbp);
+  });
+  it('new public names never collide with an existing flat sdv.hockeytech key', () => {
+    const flat = new Set(Object.keys(FLAT));
+    const camel = (x) => x.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
+    const mine = [];
+    for (const lg of ['pwhl', 'ahl', 'ohl', 'whl', 'qmjhl', 'echl', 'mjhl']) {
+      for (const f of ['game_shifts', 'player_toi', 'game_corsi', 'pbp']) mine.push(`${lg}_${f}`);
+    }
+    mine.push('hockeytech_shift_stints', 'hockeytech_enriched_pbp', 'hockeytech_player_toi', 'hockeytech_game_corsi');
+    for (const n of mine) {
+      flat.has(n).should.be.false(n);
+      flat.has(camel(n)).should.be.false(camel(n));
+    }
+    // and the real namespace carries the flat raw-feed wrappers unchanged
+    sdv.hockeytech.hockeytech_game_shifts.should.equal(FLAT.hockeytech_game_shifts);
   });
 });
