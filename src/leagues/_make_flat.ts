@@ -1,7 +1,7 @@
 import { get } from "../core/client.js";
 import { resolveFlat } from "../core/flat.js";
 import { toCamel } from "../core/espn.js";
-import { DEPRECATED_ENDPOINT_CODE } from "../core/deprecation.js";
+import { DEPRECATED_ENDPOINT_CODE, warnOnce } from "../core/deprecation.js";
 // Side-effect import: registers the `nfl_api` bearer-token auth provider
 // (registerFamilyDefaults). Auth for every family is applied inside `request()`
 // from the provider registered / configured for the wrapper's `api` stem.
@@ -73,8 +73,6 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
   wnba_stats: nbaStatsGet,
 };
 
-const warnedDeprecated = new Set<string>();
-
 /**
  * Make one flat-API call (the flat analogue of `callWrapper`): pick the family
  * getter (content-type / JSONP / UA overrides), resolve the URL + query from the
@@ -89,13 +87,10 @@ export async function callFlat(
 ): Promise<any> {
   if (def.deprecated) {
     const name = `${def.api}_${def.short}`;
-    if (!warnedDeprecated.has(name)) {
-      warnedDeprecated.add(name);
-      process.emitWarning(`${name}() is deprecated: ${def.deprecated}`, {
-        type: "DeprecationWarning",
-        code: DEPRECATED_ENDPOINT_CODE,
-      });
-    }
+    warnOnce(`endpoint:${name}`, `${name}() is deprecated: ${def.deprecated}`, {
+      type: "DeprecationWarning",
+      code: DEPRECATED_ENDPOINT_CODE,
+    });
   }
   const getter: GetterFn = (def.api ? GETTER_OVERRIDES[def.api] : undefined) ?? get;
   const { url, query } = resolveFlat(def, params);

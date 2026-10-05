@@ -4,6 +4,8 @@ import { parse } from 'yaml';
 import * as pkg from '../dist/index.js';
 import { configure, resetConfig, LEAGUES, FLAT_WRAPPERS, makeLeagueModule, makeFlatModule } from '../dist/index.js';
 import { ESPN_DEPRECATED_ALIASES, FLAT_DEPRECATED_ALIASES } from '../dist/generated/aliases.js';
+import { resetWarnOnce } from '../dist/core/deprecation.js';
+import { captureWarnings } from './helpers/warnings.mjs';
 
 // v4 naming: JS public names are sdv-py's (tools/codegen/generate.mjs ports
 // py's emit-time rename layer); every pre-v4 name stays callable as a
@@ -126,7 +128,9 @@ describe('v4 naming: deprecated aliases', () => {
     afterEach(() => resetConfig());
 
     it('an ESPN alias builds the same request as its v4 wrapper', async () => {
-      (await sdv.nba.espn_nba_athlete_bio({ athlete_id: 1966 })).should.eql({ ok: true });
+      await captureWarnings(async () => {
+        (await sdv.nba.espn_nba_athlete_bio({ athlete_id: 1966 })).should.eql({ ok: true });
+      });
       await sdv.nba.espnNbaPlayerBio({ athlete_id: 1966 });
       calls.length.should.equal(2);
       calls[0].should.equal(calls[1]);
@@ -135,25 +139,19 @@ describe('v4 naming: deprecated aliases', () => {
 
     it('a native (flat) alias builds the same request as its v4 wrapper', async () => {
       const def = FLAT_WRAPPERS.find((w) => w.api === 'cbs' && w.short === 'game_boxscore');
-      await sdv.cbs.cbsBoxscore(minimalParams(def));
+      await captureWarnings(() => sdv.cbs.cbsBoxscore(minimalParams(def)));
       await sdv.cbs.cbsGameBoxscore(minimalParams(def));
       calls.length.should.equal(2);
       calls[0].should.equal(calls[1]);
     });
 
     it('warns once per name per process, naming the replacement', async () => {
-      const seen = [];
-      const on = (w) => seen.push(w);
-      process.on('warning', on);
-      try {
-        // Names no other test calls, so this process has not warned for them yet.
+      resetWarnOnce(); // warn-once state is per process: start clean whatever ran before
+      const seen = await captureWarnings(async () => {
         for (let i = 0; i < 3; i++) await sdv.wch.espn_wch_athlete_overview({ athlete_id: 1 });
         await sdv.wch.espnWchAthleteOverview({ athlete_id: 1 }); // the camelCase alias is its own name
         await sdv.wch.espnWchPlayerOverview({ athlete_id: 1 }); // a v4 name never warns
-        await new Promise((r) => setImmediate(r));
-      } finally {
-        process.off('warning', on);
-      }
+      });
       const ours = seen.filter((w) => /espn_?[Ww]ch_?[Aa]thlete_?[Oo]verview/.test(w.message));
       ours.length.should.equal(2);
       ours.every((w) => w.name === 'DeprecationWarning').should.be.true();
@@ -161,6 +159,15 @@ describe('v4 naming: deprecated aliases', () => {
       ours[0].message.should.containEql('espn_wch_player_overview');
       ours[1].message.should.containEql('espnWchPlayerOverview');
       seen.filter((w) => /espnWchPlayerOverview\(\) is deprecated/.test(w.message)).length.should.equal(0);
+    });
+
+    it('resetWarnOnce makes a name warn again (so warn-once tests do not depend on test order)', async () => {
+      const call = () => sdv.wch.espn_wch_athlete_overview({ athlete_id: 1 });
+      resetWarnOnce();
+      (await captureWarnings(call)).length.should.equal(1);
+      (await captureWarnings(call)).length.should.equal(0); // already warned in this process
+      resetWarnOnce();
+      (await captureWarnings(call)).length.should.equal(1);
     });
   });
 });

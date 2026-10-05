@@ -8,6 +8,7 @@
 // today's page comes back (sdv-py espn_cdn.yaml, probed 2026-10-05).
 
 import { DEFAULT_RETRY_STATUSES, registerFamilyDefaults } from '../core/config.js';
+import { warnOnce } from '../core/deprecation.js';
 import { request } from '../core/request.js';
 
 // The deprecated cfb / mbb 247sports.com HTML scrapers' family (plain transport:
@@ -37,17 +38,14 @@ export function cdnDate(year: any, month: any, day: any): string | undefined {
   return `${year}${pad(month)}${pad(day)}`;
 }
 
-const warned = new Set<string>();
-
 /**
  * Football (cfb, nfl) schedule pages are week-oriented: the CDN ignores a date
  * and returns the current week. Warn once per league when a caller passes one
  * without a `week`.
  */
 export function warnFootballDate(league: string): void {
-  if (warned.has(league)) return;
-  warned.add(league);
-  process.emitWarning(
+  warnOnce(
+    `cdn-football-date:${league}`,
     `sdv.${league}.getSchedule: the espn.com ${league} schedule page is week-oriented and ignores a date ` +
       `(it returns the current week); pass { week, year, seasontype } instead.`,
     { code: "SDV_CDN_FOOTBALL_DATE" }

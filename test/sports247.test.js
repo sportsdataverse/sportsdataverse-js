@@ -16,6 +16,8 @@ import sdv, {
 import { _impitLoader } from '../dist/core/transport.js';
 import { SPORTS247_HEADERS } from '../dist/core/sports247_runtime.js';
 import handler from '../docs/api/run.mjs';
+import { resetWarnOnce } from '../dist/core/deprecation.js';
+import { captureWarnings } from './helpers/warnings.mjs';
 
 // No-network tests for the 247Sports families (sports247 + sports247_site_pages)
 // and the deprecation of the old `recruiting` family. The transport is replaced
@@ -350,24 +352,24 @@ describe('recruiting (api.247sports.com): deprecated', () => {
   });
 
   it('emits one DeprecationWarning per method, then still calls through', async () => {
-    const seen = [];
-    const onWarning = (w) => w.name === 'DeprecationWarning' && seen.push(w.message);
-    process.on('warning', onWarning);
     let fetched = 0;
     configure({
       transport: {
         recruiting: async (req) => (fetched++, { status: 200, headers: {}, data: [{ teamId: 1 }], url: req.url }),
       },
     });
+    resetWarnOnce(); // warn-once state is per process: start clean whatever ran before
+    let warnings;
     try {
-      await sdv.recruiting.recruitingTeams();
-      await sdv.recruiting.recruiting_teams();
-      await sdv.recruiting.recruitingCoaches();
-      await new Promise((r) => setImmediate(r)); // 'warning' is emitted on the next tick
+      warnings = await captureWarnings(async () => {
+        await sdv.recruiting.recruitingTeams();
+        await sdv.recruiting.recruiting_teams();
+        await sdv.recruiting.recruitingCoaches();
+      });
     } finally {
-      process.off('warning', onWarning);
       resetConfig();
     }
+    const seen = warnings.filter((w) => w.name === 'DeprecationWarning').map((w) => w.message);
     fetched.should.equal(3);
     seen.length.should.equal(2);
     seen[0].should.match(/^recruiting_teams\(\) is deprecated: use sdv\.sports247\.sports247_teams\(\)/);
