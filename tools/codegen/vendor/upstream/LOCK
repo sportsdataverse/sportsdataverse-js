@@ -1,6 +1,7 @@
 f58ae70ae1b8482ef6c3f4b983731ed9db9ed97b  endpoints/asa.yaml
 5c63daf3293fbd541da382d5e9bd5cfa65db0dfa  endpoints/bart_wbb.yaml
 66c5cb560d58731631c1166481e25b886c93577e  endpoints/cbs_napi.yaml
+a39a62f6b5ae5975e055223ba032358df26147b0  endpoints/espn_cdn.yaml
 0aaa36156ca487f70af2f1af7a600b85ae03db69  endpoints/espn_core_v2.yaml
 29ba208cbdb23a9e61353e9b7f828ac97bf7f3e8  endpoints/espn_fitt_v3.yaml
 89ec300e3c60071ebdaea106394de776cc02e959  endpoints/espn_site_v2.yaml
@@ -78,6 +79,8 @@ f4f6d7b3a0d27bff807bc5f8cbc08d37468b1472  py/sportsdataverse/wbb/wbb_espn_ext.py
 db0343179fd53d62abe0ad828a481c49e7329df5  py/sportsdataverse/wnba/wnba_espn_ext.py
 766bf708773aed962ab85a6c568ff643a230cd24  py/sportsdataverse/wnba/wnba_stats.py
 66142b1c22a818bc86247e93b2e69f441e253a4c  py/sportsdataverse/yahoo/yahoo_shangrila.py
+16578a94080620466beb4e82c59b1303ec44507a  schemas/cdn_rankings/cfb.yaml
+cf2969a6cecd2f1f4291cde4445489408eff99e4  schemas/cdn_scoreboard.yaml
 66d9c63013519ef9f8f41db3ab38d8c5f534b3ea  schemas/injuries.yaml
 4a49ea111e4fd04d50b4a33c1afc3a70b1a7e32b  schemas/injuries/cfb.yaml
 4a49ea111e4fd04d50b4a33c1afc3a70b1a7e32b  schemas/injuries/mlb.yaml

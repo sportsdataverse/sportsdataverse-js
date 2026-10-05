@@ -13,7 +13,7 @@ sidebar_position: 0
 - **sport slug:** `football`
 - **league slug:** `nfl`
 - **scopes:** `universal`, `football`
-- **wrappers:** 114
+- **wrappers:** 118
 
 `sdv.nfl` is composed from **written, documented source** (`src/generated/espn/nfl.ts`) — a phased proof of converting the runtime wrapper factory into reviewable modules. Every endpoint is a real `export const` with JSDoc, callable as `sdv.nfl.espnNfl<Endpoint>(params)` and under its snake_case alias (`espn_nfl_<endpoint>`) for parity with the Python / R packages.
 
@@ -33,6 +33,7 @@ Endpoints are grouped by ESPN API family. Pick a page for its per-function refer
 | [Core API](./reference/core) | 82 |
 | [Web API](./reference/web) | 5 |
 | [FPI API (fitt v3)](./reference/fitt) | 1 |
+| [CDN (espn.com page data)](./reference/cdn) | 4 |
 | [Native API](./reference/native) | 99 |
 | [Dataset loaders](./reference/loaders) | 29 |
 

@@ -26,6 +26,11 @@ endpoints:
   award: parse_single_entity
   awards: parse_items
   calendar: parse_items
+  cdn_boxscore: parse_cdn_game
+  cdn_playbyplay: parse_cdn_game
+  cdn_rankings: parse_cdn_rankings
+  cdn_schedule: parse_cdn_schedule
+  cdn_scoreboard: parse_cdn_scoreboard
   coach: parse_single_entity
   coach_record: parse_single_entity
   coach_season: parse_single_entity

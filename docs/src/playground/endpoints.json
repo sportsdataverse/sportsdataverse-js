@@ -2209,6 +2209,169 @@
           "queryKey": "page"
         }
       ]
+    },
+    {
+      "short": "cdn_playbyplay",
+      "family": "cdn",
+      "scope": "universal",
+      "includePrefixes": [
+        "nba",
+        "wnba",
+        "mbb",
+        "wbb",
+        "cfb",
+        "nfl",
+        "mlb",
+        "college_baseball",
+        "college_softball"
+      ],
+      "path": "/{league}/playbyplay",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "game_id",
+          "queryKey": "gameId"
+        }
+      ],
+      "fixedParams": {
+        "xhr": 1
+      }
+    },
+    {
+      "short": "cdn_boxscore",
+      "family": "cdn",
+      "scope": "universal",
+      "includePrefixes": [
+        "nba",
+        "wnba",
+        "mbb",
+        "wbb",
+        "cfb",
+        "nfl",
+        "mlb",
+        "college_baseball",
+        "college_softball"
+      ],
+      "path": "/{league}/boxscore",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "game_id",
+          "queryKey": "gameId"
+        }
+      ],
+      "fixedParams": {
+        "xhr": 1
+      }
+    },
+    {
+      "short": "cdn_schedule",
+      "family": "cdn",
+      "scope": "universal",
+      "includePrefixes": [
+        "nba",
+        "wnba",
+        "mbb",
+        "wbb",
+        "cfb",
+        "nfl",
+        "mlb",
+        "nhl",
+        "college_baseball",
+        "college_softball",
+        "ufl"
+      ],
+      "path": "/{league}/schedule",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "date",
+          "queryKey": "date"
+        },
+        {
+          "name": "week",
+          "queryKey": "week"
+        },
+        {
+          "name": "season",
+          "queryKey": "year"
+        },
+        {
+          "name": "season_type",
+          "queryKey": "seasontype"
+        }
+      ],
+      "fixedParams": {
+        "xhr": 1
+      }
+    },
+    {
+      "short": "cdn_scoreboard",
+      "family": "cdn",
+      "scope": "universal",
+      "includePrefixes": [
+        "nba",
+        "wnba",
+        "mbb",
+        "wbb",
+        "cfb",
+        "nfl",
+        "mlb",
+        "college_baseball",
+        "epl",
+        "mls",
+        "ucl"
+      ],
+      "path": "/{league}/scoreboard",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "date",
+          "queryKey": "date"
+        },
+        {
+          "name": "week",
+          "queryKey": "week"
+        },
+        {
+          "name": "season",
+          "queryKey": "year"
+        },
+        {
+          "name": "season_type",
+          "queryKey": "seasontype"
+        }
+      ],
+      "fixedParams": {
+        "xhr": 1
+      }
+    },
+    {
+      "short": "cdn_rankings",
+      "family": "cdn",
+      "scope": "universal",
+      "includePrefixes": [
+        "cfb"
+      ],
+      "path": "/{league}/rankings",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "week",
+          "queryKey": "week"
+        },
+        {
+          "name": "season",
+          "queryKey": "year"
+        },
+        {
+          "name": "season_type",
+          "queryKey": "seasontype"
+        }
+      ],
+      "fixedParams": {
+        "xhr": 1
+      }
     }
   ],
   "flatHosts": {

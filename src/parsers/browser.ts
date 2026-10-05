@@ -31,7 +31,7 @@ export {
 } from "./espn.js";
 
 import { parserFor } from "./_registry.js";
-import { parserForEndpoint, parse_summary } from "./espn.js";
+import { SECTIONED_ENDPOINTS, parserForEndpoint } from "./espn.js";
 
 /** Tidy rows, or — for the ESPN `summary` dispatcher with no section — the dict
  * of all 21 sub-frames. `null` when no parser is registered for the endpoint. */
@@ -45,8 +45,8 @@ export type ParsedResult =
  * was dispatched.
  *
  * - `kind: "espn"` — `key` is the endpoint short name (e.g. `"scoreboard"`,
- *   `"summary"`); the `summary` dispatcher honours `section` (omit it to get the
- *   dict of all 21 sub-frames).
+ *   `"summary"`); the `summary` dispatcher (and the CDN game pages, which run it)
+ *   honours `section` (omit it to get the dict of all 21 sub-frames).
  * - `kind: "flat"` — `key` is the registered parser name (a native wrapper's
  *   `parser`, e.g. `"parse_mlb_schedule"`).
  *
@@ -61,7 +61,7 @@ export function parseEndpoint(
   if (kind === "espn") {
     const fn = parserForEndpoint(key);
     if (!fn) return null;
-    if (key === "summary") return parse_summary(raw, section);
+    if (SECTIONED_ENDPOINTS.has(key)) return (fn as (p: any, s?: string) => ParsedResult)(raw, section);
     return (fn as (p: any) => Record<string, any>[])(raw);
   }
   const fn = parserFor(key);

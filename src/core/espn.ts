@@ -2,7 +2,7 @@ import { HOSTS, get } from "./client.js";
 import type { LeagueConfig, Scope, WrapperDef } from "./types.js";
 import { applyTransform } from "./transforms.js";
 import { WRAPPERS } from "../generated/wrappers.js";
-import { parserForEndpoint } from "../parsers/espn.js";
+import { SECTIONED_ENDPOINTS, parserForEndpoint } from "../parsers/espn.js";
 
 /** snake_case -> camelCase (e.g. `event_id` -> `eventId`, `espn_nba_scoreboard` -> `espnNbaScoreboard`). */
 export function toCamel(s: string): string {
@@ -28,6 +28,9 @@ function cleanQuery(
   params: Record<string, any>
 ): Record<string, any> | undefined {
   const out: Record<string, any> = {};
+  // Constant params first (sdv-py renders them before the caller's), so a caller
+  // param of the same name still overrides one.
+  for (const [k, v] of Object.entries(def.fixedParams ?? {})) out[k] = lookup(params, k) ?? v;
   for (const qp of def.queryParams) {
     const v = applyTransform(qp.transform, lookup(params, qp.name) ?? qp.default);
     if (v !== undefined && v !== null) out[qp.queryKey] = v;
@@ -119,7 +122,8 @@ export function resolveRequest(
  * the raw payload unchanged, so the dispatch is strictly additive (mirrors the
  * native flat wrappers + sdv-py's `return_parsed=True`).
  *
- * The `summary` dispatcher additionally honours a `section` control param:
+ * The `summary` dispatcher (and the CDN game pages, which run it) additionally
+ * honours a `section` control param:
  * `{ parsed: true, section: "boxscore_team" }` returns just that sub-frame, while
  * `{ parsed: true }` alone returns the dict of all 21 summary sub-frames.
  * `parsed`/`section` are control params, not declared query params, so
@@ -135,7 +139,7 @@ export async function callWrapper(
   if (!params.parsed) return raw;
   const parser = parserForEndpoint(def.short);
   if (!parser) return raw;
-  if (def.short === "summary") {
+  if (SECTIONED_ENDPOINTS.has(def.short)) {
     return (parser as (p: any, section?: string) => any)(raw, params.section);
   }
   return (parser as (p: any) => any)(raw);

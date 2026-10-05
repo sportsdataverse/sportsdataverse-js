@@ -23,6 +23,9 @@ describe('playground resolve.mjs matches the package resolver', () => {
     ['nfl', 'team_schedule', { teamId: 12, season: 2024 }],
     ['soccer', 'scoreboard', { league: 'eng.1' }],
     ['cfb', 'rankings', {}],
+    // CDN: league-slug path, fixed xhr=1 before the caller's params
+    ['nba', 'cdn_schedule', { date: '20250115' }],
+    ['cfb', 'cdn_rankings', { season: 2024, week: 5 }],
   ];
   for (const [prefix, short, params] of cases) {
     it(`${prefix}.${short} resolves to an identical URL`, () => {
@@ -68,6 +71,12 @@ describe('playground proxy (run.mjs) validation + allowlist', () => {
   it('rejects an out-of-scope endpoint with 400 (nba + rankings)', async () => {
     const res = mockRes();
     await handler({ method: 'POST', body: { league: 'nba', endpoint: 'rankings', params: {} } }, res);
+    res.statusCode.should.equal(400);
+  });
+
+  it('rejects a league outside the endpoint includePrefixes with 400 (nba + cdn_rankings)', async () => {
+    const res = mockRes();
+    await handler({ method: 'POST', body: { league: 'nba', endpoint: 'cdn_rankings', params: {} } }, res);
     res.statusCode.should.equal(400);
   });
 

@@ -52,6 +52,8 @@ function lookup(params, name) {
 /** Build the `?key=value` query from the wrapper's queryParams (+ defaults). */
 function cleanQuery(def, params) {
   const out = {};
+  // Constant params first (the CDN's xhr=1); a caller param of the same name wins.
+  for (const [k, v] of Object.entries(def.fixedParams || {})) out[k] = lookup(params, k) ?? v;
   for (const qp of def.queryParams || []) {
     const v = applyTransform(qp.transform, lookup(params, qp.name) ?? qp.default);
     if (v !== undefined && v !== null && v !== '') out[qp.queryKey] = v;

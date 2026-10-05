@@ -653,6 +653,52 @@ export const espnUflCalendar: WrapperFn = (params = {}) =>
 /** snake_case alias of {@link espnUflCalendar} (py/R parity). */
 export const espn_ufl_calendar = espnUflCalendar;
 
+const CDN_SCHEDULE_DEF: WrapperDef = {
+  "short": "cdn_schedule",
+  "family": "cdn",
+  "scope": "universal",
+  "path": "/{league}/schedule",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "date",
+      "queryKey": "date"
+    },
+    {
+      "name": "week",
+      "queryKey": "week"
+    },
+    {
+      "name": "season",
+      "queryKey": "year"
+    },
+    {
+      "name": "season_type",
+      "queryKey": "seasontype"
+    }
+  ],
+  "fixedParams": {
+    "xhr": 1
+  }
+};
+/**
+ * UFL — cdn schedule (ESPN cdn.espn.com (espn.com page data)).
+ *
+ * **Endpoint:** `GET https://cdn.espn.com/core/ufl/schedule?xhr=1`
+ *
+ * @param params.date - query parameter.
+ * @param params.week - query parameter.
+ * @param params.season - query parameter (ESPN `year`).
+ * @param params.season_type - query parameter (ESPN `seasontype`).
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.ufl.espnUflCdnSchedule({});
+ */
+export const espnUflCdnSchedule: WrapperFn = (params = {}) =>
+  callWrapper(CDN_SCHEDULE_DEF, CFG, params);
+/** snake_case alias of {@link espnUflCdnSchedule} (py/R parity). */
+export const espn_ufl_cdn_schedule = espnUflCdnSchedule;
+
 const COACH_DEF: WrapperDef = {
   "short": "coach",
   "family": "core_v2",

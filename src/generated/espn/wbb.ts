@@ -657,6 +657,162 @@ export const espnWbbCalendar: WrapperFn = (params = {}) =>
 /** snake_case alias of {@link espnWbbCalendar} (py/R parity). */
 export const espn_wbb_calendar = espnWbbCalendar;
 
+const CDN_BOXSCORE_DEF: WrapperDef = {
+  "short": "cdn_boxscore",
+  "family": "cdn",
+  "scope": "universal",
+  "path": "/{league}/boxscore",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "game_id",
+      "queryKey": "gameId"
+    }
+  ],
+  "fixedParams": {
+    "xhr": 1
+  }
+};
+/**
+ * WBB — cdn boxscore (ESPN cdn.espn.com (espn.com page data)).
+ *
+ * **Endpoint:** `GET https://cdn.espn.com/core/womens-college-basketball/boxscore?xhr=1`
+ *
+ * @param params.game_id - query parameter (ESPN `gameId`).
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @param params.section - (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
+ * @example await sdv.wbb.espnWbbCdnBoxscore({});
+ */
+export const espnWbbCdnBoxscore: WrapperFn = (params = {}) =>
+  callWrapper(CDN_BOXSCORE_DEF, CFG, params);
+/** snake_case alias of {@link espnWbbCdnBoxscore} (py/R parity). */
+export const espn_wbb_cdn_boxscore = espnWbbCdnBoxscore;
+
+const CDN_PLAYBYPLAY_DEF: WrapperDef = {
+  "short": "cdn_playbyplay",
+  "family": "cdn",
+  "scope": "universal",
+  "path": "/{league}/playbyplay",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "game_id",
+      "queryKey": "gameId"
+    }
+  ],
+  "fixedParams": {
+    "xhr": 1
+  }
+};
+/**
+ * WBB — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)).
+ *
+ * **Endpoint:** `GET https://cdn.espn.com/core/womens-college-basketball/playbyplay?xhr=1`
+ *
+ * @param params.game_id - query parameter (ESPN `gameId`).
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @param params.section - (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
+ * @example await sdv.wbb.espnWbbCdnPlaybyplay({});
+ */
+export const espnWbbCdnPlaybyplay: WrapperFn = (params = {}) =>
+  callWrapper(CDN_PLAYBYPLAY_DEF, CFG, params);
+/** snake_case alias of {@link espnWbbCdnPlaybyplay} (py/R parity). */
+export const espn_wbb_cdn_playbyplay = espnWbbCdnPlaybyplay;
+
+const CDN_SCHEDULE_DEF: WrapperDef = {
+  "short": "cdn_schedule",
+  "family": "cdn",
+  "scope": "universal",
+  "path": "/{league}/schedule",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "date",
+      "queryKey": "date"
+    },
+    {
+      "name": "week",
+      "queryKey": "week"
+    },
+    {
+      "name": "season",
+      "queryKey": "year"
+    },
+    {
+      "name": "season_type",
+      "queryKey": "seasontype"
+    }
+  ],
+  "fixedParams": {
+    "xhr": 1
+  }
+};
+/**
+ * WBB — cdn schedule (ESPN cdn.espn.com (espn.com page data)).
+ *
+ * **Endpoint:** `GET https://cdn.espn.com/core/womens-college-basketball/schedule?xhr=1`
+ *
+ * @param params.date - query parameter.
+ * @param params.week - query parameter.
+ * @param params.season - query parameter (ESPN `year`).
+ * @param params.season_type - query parameter (ESPN `seasontype`).
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.wbb.espnWbbCdnSchedule({});
+ */
+export const espnWbbCdnSchedule: WrapperFn = (params = {}) =>
+  callWrapper(CDN_SCHEDULE_DEF, CFG, params);
+/** snake_case alias of {@link espnWbbCdnSchedule} (py/R parity). */
+export const espn_wbb_cdn_schedule = espnWbbCdnSchedule;
+
+const CDN_SCOREBOARD_DEF: WrapperDef = {
+  "short": "cdn_scoreboard",
+  "family": "cdn",
+  "scope": "universal",
+  "path": "/{league}/scoreboard",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "date",
+      "queryKey": "date"
+    },
+    {
+      "name": "week",
+      "queryKey": "week"
+    },
+    {
+      "name": "season",
+      "queryKey": "year"
+    },
+    {
+      "name": "season_type",
+      "queryKey": "seasontype"
+    }
+  ],
+  "fixedParams": {
+    "xhr": 1
+  }
+};
+/**
+ * WBB — cdn scoreboard (ESPN cdn.espn.com (espn.com page data)).
+ *
+ * **Endpoint:** `GET https://cdn.espn.com/core/womens-college-basketball/scoreboard?xhr=1`
+ *
+ * @param params.date - query parameter.
+ * @param params.week - query parameter.
+ * @param params.season - query parameter (ESPN `year`).
+ * @param params.season_type - query parameter (ESPN `seasontype`).
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.wbb.espnWbbCdnScoreboard({});
+ */
+export const espnWbbCdnScoreboard: WrapperFn = (params = {}) =>
+  callWrapper(CDN_SCOREBOARD_DEF, CFG, params);
+/** snake_case alias of {@link espnWbbCdnScoreboard} (py/R parity). */
+export const espn_wbb_cdn_scoreboard = espnWbbCdnScoreboard;
+
 const COACH_DEF: WrapperDef = {
   "short": "coach",
   "family": "core_v2",

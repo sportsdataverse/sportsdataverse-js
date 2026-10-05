@@ -67,11 +67,11 @@ const flatMethodName = (api, short) => {
 const espnId = (short) => `espn:${short}`;
 const flatId = (api, short) => `flat:${api}:${short}`;
 
-/** ESPN endpoints applicable to a league = those whose scope is in its scopes. */
+/** ESPN endpoints applicable to a league = scope in its scopes, and on the endpoint's includePrefixes allowlist if any. */
 function espnEndpointsFor(league) {
   const scopes = new Set(league.scopes);
   return endpoints.endpoints
-    .filter((e) => scopes.has(e.scope))
+    .filter((e) => scopes.has(e.scope) && (!e.includePrefixes || e.includePrefixes.includes(league.prefix)))
     .sort((a, b) => a.short.localeCompare(b.short));
 }
 

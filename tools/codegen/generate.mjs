@@ -32,7 +32,7 @@ const referenceDir = join(referenceRootDir, "reference");
 const playgroundDir = join(repoRoot, "docs", "src", "playground");
 const docsGeneratedDir = join(repoRoot, "docs", "src", "generated");
 
-const FAMILY_FILES = ["espn_site_v2", "espn_core_v2", "espn_web_v3", "espn_fitt_v3"];
+const FAMILY_FILES = ["espn_site_v2", "espn_core_v2", "espn_web_v3", "espn_fitt_v3", "espn_cdn"];
 
 // Non-ESPN "flat API" families (one YAML each). These are absolute-host live
 // APIs (no {sport}/{league} nesting) and are emitted into a SEPARATE
@@ -495,6 +495,9 @@ function loadWrappers() {
     const fileHost = doc.host;
     for (const ep of doc.endpoints ?? []) {
       const publicShort = conventionRename(ep.short);
+      // sdv-py spec.load_espn_api: a family-level fixed_params merges into each
+      // endpoint's (the endpoint's own keys win).
+      const fixedParams = { ...(doc.fixed_params ?? {}), ...(ep.fixed_params ?? {}) };
       wrappers.push({
         short: ep.short,
         // League-independent sdv-py convention short; a league's curated /
@@ -502,9 +505,12 @@ function loadWrappers() {
         ...(publicShort !== ep.short ? { publicShort } : {}),
         family: ep.host ?? fileHost, // per-endpoint host override (e.g. standings)
         scope: ep.scope ?? "universal",
+        // sdv-py include_prefixes: a live-probed league allowlist on top of scope.
+        ...(ep.include_prefixes?.length ? { includePrefixes: ep.include_prefixes } : {}),
         path: ep.path,
         pathParams: mapPathParams(ep),
         queryParams: mapQueryParams(ep),
+        ...(Object.keys(fixedParams).length ? { fixedParams } : {}),
       });
     }
   }
@@ -582,10 +588,15 @@ function loadLeagues(doc) {
 // Shared helpers
 // ---------------------------------------------------------------------------
 
-/** Wrappers applicable to a league = those whose scope is in the league's scopes. */
+/**
+ * Wrappers applicable to a league = those whose scope is in the league's scopes
+ * and, when the wrapper carries an `includePrefixes` allowlist, that list it.
+ */
 function wrappersForLeague(league, wrappers) {
   const scopes = new Set(league.scopes);
-  return wrappers.filter((w) => scopes.has(w.scope));
+  return wrappers.filter(
+    (w) => scopes.has(w.scope) && (!w.includePrefixes || w.includePrefixes.includes(league.prefix))
+  );
 }
 
 const SCOPE_ORDER = ["universal", "ncaa", "football", "mlb"];
@@ -643,6 +654,7 @@ const ESPN_FAMILY_LABEL = {
   web_v3: "ESPN site.web.api.espn.com (web v3)",
   core_v2: "ESPN sports.core.api.espn.com (core v2)",
   fitt_v3: "ESPN site.web.api.espn.com (FPI, fitt v3)",
+  cdn: "ESPN cdn.espn.com (espn.com page data)",
 };
 
 // Absolute host roots per ESPN family (mirrors HOSTS in src/core/client.ts) —
@@ -653,7 +665,16 @@ const ESPN_FAMILY_HOST = {
   web_v3: "https://site.web.api.espn.com/apis/common/v3/sports",
   core_v2: "https://sports.core.api.espn.com/v2/sports",
   fitt_v3: "https://site.web.api.espn.com/apis/fitt/v3/sports",
+  cdn: "https://cdn.espn.com/core",
 };
+
+/** The `?k=v` string of a wrapper's constant query params (the CDN's `xhr=1`), or "". */
+const fixedQuery = (w) =>
+  w.fixedParams ? `?${Object.entries(w.fixedParams).map(([k, v]) => `${k}=${v}`).join("&")}` : "";
+
+// Shorts whose `parsed` result is the summary dispatcher's (they take `section`);
+// mirrors SECTIONED_ENDPOINTS in src/parsers/espn.ts.
+const SECTIONED_SHORTS = new Set(["summary", "cdn_playbyplay", "cdn_boxscore"]);
 
 /** Humanize a wrapper `short` for the JSDoc summary (`athlete_gamelog` -> `athlete gamelog`). */
 function humanizeShort(short) {
@@ -720,6 +741,7 @@ function renderWrittenEspnModule(league, wrappers) {
         path: w.path,
         pathParams: w.pathParams,
         queryParams: w.queryParams,
+        ...(w.fixedParams ? { fixedParams: w.fixedParams } : {}),
       },
       null,
       2
@@ -727,12 +749,12 @@ function renderWrittenEspnModule(league, wrappers) {
 
     // The `summary` endpoint is the Site v2 dispatcher: `{ parsed: true }` yields
     // an object of all sub-frames, and `section` narrows to one named sub-frame.
-    const isSummary = w.short === "summary";
+    const isSummary = SECTIONED_SHORTS.has(w.short);
 
     // JSDoc: summary, endpoint URL, @param per path/query param (+ parsed, +
     // section for the summary dispatcher), @returns, @example.
     let jsdoc = `/**\n * ${summary}\n *\n`;
-    jsdoc += ` * **Endpoint:** \`GET ${host}${httpPath}\`\n`;
+    jsdoc += ` * **Endpoint:** \`GET ${host}${httpPath}${fixedQuery(w)}\`\n`;
     const pyNote = pyHandwrittenNote(league, w);
     if (pyNote) jsdoc += ` *\n * Note: ${pyNote}\n`;
     if (league.leagueParam) {
@@ -1184,6 +1206,7 @@ const REFERENCE_FAMILY_GROUPS = [
   { id: "core", label: "Core API", families: ["core_v2"], scope: "universal" },
   { id: "web", label: "Web API", families: ["web_v3"], scope: "universal" },
   { id: "fitt", label: "FPI API (fitt v3)", families: ["fitt_v3"], scope: "universal" },
+  { id: "cdn", label: "CDN (espn.com page data)", families: ["cdn"], scope: "universal" },
 ];
 // NCAA-scope extras (mbb/wbb) get their own page, like sdv-py's `additional.md`.
 const REFERENCE_NCAA_GROUP = { id: "additional", label: "NCAA additional", scope: "ncaa" };
@@ -1215,7 +1238,7 @@ function renderFunctionBlock(league, wrapper, parserMap) {
 
   let body = `\n## \`${camel}\`\n\n`;
   body += `${summary}\n\n`;
-  body += `**Endpoint URL:** \`GET ${host}${httpPath}\`\n\n`;
+  body += `**Endpoint URL:** \`GET ${host}${httpPath}${fixedQuery(wrapper)}\`\n\n`;
   body += deprecatedNote(aliasesOf(ALIASES.espn[league.prefix], snake));
   const pyNote = pyHandwrittenNote(league, wrapper);
   if (pyNote) body += `> **Note:** ${pyNote}\n\n`;
@@ -1238,7 +1261,7 @@ function renderFunctionBlock(league, wrapper, parserMap) {
     rows.push([`\`${apiName}\``, `\`${p.name}\``, "no", `query parameter${def}`]);
   }
   rows.push(["—", "`parsed`", "no", "return tidy rows instead of raw JSON"]);
-  if (wrapper.short === "summary") {
+  if (SECTIONED_SHORTS.has(wrapper.short)) {
     rows.push([
       "—",
       "`section`",
@@ -1256,16 +1279,19 @@ function renderFunctionBlock(league, wrapper, parserMap) {
   // when one exists; otherwise the raw-JSON note.
   const parser = parserMap[wrapper.short];
   let cols = null;
-  if (parser && parser !== "parse_summary") {
-    cols = loadReturnsColumns(`espn/${parser.replace(/^parse_/, "")}`);
+  if (parser && !SUMMARY_DISPATCH.has(parser)) {
+    cols = loadReturnsColumns(`espn/${(ESPN_PARSER_SCHEMA[parser] ?? parser).replace(/^parse_/, "")}`);
   }
   if (cols) {
     body += `\n**Returns** (with \`{ parsed: true }\`, via \`${parser}\`):\n\n`;
     body += renderColumnsTable(cols);
-  } else if (parser === "parse_summary") {
+  } else if (SUMMARY_DISPATCH.has(parser)) {
     body +=
       `\n**Returns:** raw ESPN \`Dict\` by default. With \`{ parsed: true }\` the ` +
-      `\`summary\` dispatcher returns an object of 21 sub-frames keyed by section ` +
+      (parser === "parse_summary"
+        ? "`summary` dispatcher returns"
+        : "page's `gamepackageJSON` (a Site v2 summary) goes through the `summary` dispatcher, which returns") +
+      ` an object of 21 sub-frames keyed by section ` +
       `(\`{ parsed: true, section: '<name>' }\` for one); see ` +
       `[ESPN parsed returns](../../reference/espn-parsed-returns).\n`;
   } else {
@@ -1461,6 +1487,11 @@ function renderWrittenLeagueNativePage(league, flatWrappers, position) {
 
 // Display order for the per-parser sections (dedicated first, the two generics
 // last; `parse_summary` is a dispatcher rendered as a pointer to the sub-frames).
+// Parsers that run the summary dispatcher (an object of sub-frames, no one table).
+const SUMMARY_DISPATCH = new Set(["parse_summary", "parse_cdn_game"]);
+// A parser whose rows are another parser's: its returns table is that one's.
+const ESPN_PARSER_SCHEMA = { parse_cdn_scoreboard: "parse_scoreboard", parse_cdn_schedule: "parse_scoreboard" };
+
 const ESPN_PARSER_ORDER = [
   "parse_scoreboard", "parse_teams", "parse_standings", "parse_groups",
   "parse_athlete_overview", "parse_athlete_stats", "parse_athlete_gamelog", "parse_athlete_splits",
@@ -1469,6 +1500,7 @@ const ESPN_PARSER_ORDER = [
   "parse_event_competitor_linescores", "parse_event_plays",
   "parse_team_schedule", "parse_team_roster", "parse_news", "parse_injuries",
   "parse_summary", "parse_items", "parse_single_entity",
+  "parse_cdn_game", "parse_cdn_scoreboard", "parse_cdn_schedule", "parse_cdn_rankings",
 ];
 
 // The 21 summary sub-frames in dispatcher order (SUMMARY_SECTION_PARSERS).
@@ -1502,6 +1534,11 @@ const ESPN_PARSER_DESC = {
   parse_summary: "Site v2 game summary dispatcher — returns 21 sub-frames.",
   parse_items: "Generic Core v2 paginated list — one row per item (often a `$ref` pointer).",
   parse_single_entity: "Generic Core v2 single resource — one row for the entity.",
+  parse_cdn_game:
+    "CDN play-by-play / box-score page: its `gamepackageJSON` (a Site v2 summary) through the `summary` dispatcher — an object of 21 sub-frames, or one `section` (see [Summary sub-frames](#summary-sub-frames)).",
+  parse_cdn_scoreboard: "CDN scoreboard page: its `sbData` (a Site v2 scoreboard), one row per game — the `parse_scoreboard` columns.",
+  parse_cdn_schedule: "CDN schedule page: every day's games, one row per game — the `parse_scoreboard` columns.",
+  parse_cdn_rankings: "CDN poll rankings page (cfb): one row per (poll, team), ranked teams and those receiving votes.",
 };
 
 /** Load the committed ESPN short-name -> parser fn map (drift-guarded by a test). */
@@ -1558,6 +1595,7 @@ function renderEspnParsedReturns() {
     body += `\n## \`${fn}\`\n\n`;
     if (ESPN_PARSER_DESC[fn]) body += `${ESPN_PARSER_DESC[fn]}\n\n`;
     body += `**Endpoints (${shorts.length}):** ${shorts.map((s) => `\`${s}\``).join(", ")}\n\n`;
+    if (fn === "parse_cdn_game") continue; // described above; its frames are the summary's
     if (fn === "parse_summary") {
       body +=
         `\`summary\` is a dispatcher: \`{ parsed: true }\` returns an object of all ` +
@@ -1565,7 +1603,7 @@ function renderEspnParsedReturns() {
         `returns just that one. See [Summary sub-frames](#summary-sub-frames) below.\n`;
       continue;
     }
-    const cols = loadReturnsColumns(`espn/${fn.replace(/^parse_/, "")}`);
+    const cols = loadReturnsColumns(`espn/${(ESPN_PARSER_SCHEMA[fn] ?? fn).replace(/^parse_/, "")}`);
     if (cols) body += renderColumnsTable(cols);
     else
       body +=

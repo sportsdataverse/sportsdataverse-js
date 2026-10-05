@@ -89,6 +89,14 @@ families:
   # src/parsers/espn.ts (a faithful port of sdv-py's); ESPN returns tables come
   # from schemas/espn/, so the YAML returns_schema is not used.
   espn_fitt_v3: {}
+  # ESPN CDN (cdn.espn.com/core/{league}/{page}?xhr=1): espn.com's own page data,
+  # a 6th ESPN host family (HOSTS.cdn). Each endpoint carries sdv-py's live-probed
+  # `include_prefixes` league allowlist and the family-level `fixed_params`
+  # (xhr: 1), both honoured by generate.mjs. The CDN parsers in
+  # src/parsers/espn.ts are ports of sdv-py's (parse_cdn_game runs parse_summary,
+  # schedule/scoreboard run parse_scoreboard); ESPN returns tables come from
+  # schemas/espn/, so the YAML returns_schema is not used.
+  espn_cdn: {}
   # Keyless providers / native league APIs that exist only in sdv-py.
   on3:
     # src/parsers/on3.ts: faithful port of sdv-py cfb/on3_parsers.py parse_on3_rdb

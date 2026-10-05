@@ -13,7 +13,7 @@ sidebar_position: 0
 - **sport slug:** `baseball`
 - **league slug:** `mlb`
 - **scopes:** `universal`, `mlb`
-- **wrappers:** 113
+- **wrappers:** 117
 
 `sdv.mlb` is composed from **written, documented source** (`src/generated/espn/mlb.ts`) — a phased proof of converting the runtime wrapper factory into reviewable modules. Every endpoint is a real `export const` with JSDoc, callable as `sdv.mlb.espnMlb<Endpoint>(params)` and under its snake_case alias (`espn_mlb_<endpoint>`) for parity with the Python / R packages.
 
@@ -33,6 +33,7 @@ Endpoints are grouped by ESPN API family. Pick a page for its per-function refer
 | [Core API](./reference/core) | 82 |
 | [Web API](./reference/web) | 5 |
 | [FPI API (fitt v3)](./reference/fitt) | 1 |
+| [CDN (espn.com page data)](./reference/cdn) | 4 |
 | [Native API](./reference/native) | 117 |
 | [Dataset loaders](./reference/loaders) | 32 |
 

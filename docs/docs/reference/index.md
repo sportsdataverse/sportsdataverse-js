@@ -17,30 +17,30 @@ Some leagues additionally ship **native (non-ESPN) API** wrappers — the MLB St
 
 | League | sport | ESPN slug | scopes | wrappers | native |
 |---|---|---|---|---:|---:|
-| [nba](../nba/) | `basketball` | `nba` | universal | 112 | 128 |
-| [wnba](../wnba/) | `basketball` | `wnba` | universal | 112 | 111 |
-| [mbb](../mbb/) | `basketball` | `mens-college-basketball` | universal, ncaa | 118 | 30 |
-| [wbb](../wbb/) | `basketball` | `womens-college-basketball` | universal, ncaa | 118 | — |
-| [cfb](../cfb/) | `football` | `college-football` | universal, ncaa, football | 120 | — |
-| [nfl](../nfl/) | `football` | `nfl` | universal, football | 114 | 99 |
-| [mlb](../mlb/) | `baseball` | `mlb` | universal, mlb | 113 | 117 |
-| [nhl](../nhl/) | `hockey` | `nhl` | universal | 112 | 127 |
+| [nba](../nba/) | `basketball` | `nba` | universal | 116 | 128 |
+| [wnba](../wnba/) | `basketball` | `wnba` | universal | 116 | 111 |
+| [mbb](../mbb/) | `basketball` | `mens-college-basketball` | universal, ncaa | 122 | 30 |
+| [wbb](../wbb/) | `basketball` | `womens-college-basketball` | universal, ncaa | 122 | — |
+| [cfb](../cfb/) | `football` | `college-football` | universal, ncaa, football | 125 | — |
+| [nfl](../nfl/) | `football` | `nfl` | universal, football | 118 | 99 |
+| [mlb](../mlb/) | `baseball` | `mlb` | universal, mlb | 117 | 117 |
+| [nhl](../nhl/) | `hockey` | `nhl` | universal | 113 | 127 |
 | [mch](../mch/) | `hockey` | `mens-college-hockey` | universal, ncaa | 118 | — |
 | [wch](../wch/) | `hockey` | `womens-college-hockey` | universal, ncaa | 118 | — |
-| [college_baseball](../college_baseball/) | `baseball` | `college-baseball` | universal, ncaa | 118 | — |
-| [college_softball](../college_softball/) | `baseball` | `college-softball` | universal, ncaa | 118 | — |
-| [ufl](../ufl/) | `football` | `ufl` | universal | 112 | — |
+| [college_baseball](../college_baseball/) | `baseball` | `college-baseball` | universal, ncaa | 122 | — |
+| [college_softball](../college_softball/) | `baseball` | `college-softball` | universal, ncaa | 121 | — |
+| [ufl](../ufl/) | `football` | `ufl` | universal | 113 | — |
 | [xfl](../xfl/) | `football` | `xfl` | universal | 112 | — |
 | [cfl](../cfl/) | `football` | `cfl` | universal | 112 | — |
 | [soccer](../soccer/) | `soccer` | `eng.1 *(param)*` | universal | 112 | — |
-| [epl](../epl/) | `soccer` | `eng.1` | universal | 112 | — |
+| [epl](../epl/) | `soccer` | `eng.1` | universal | 113 | — |
 | [laliga](../laliga/) | `soccer` | `esp.1` | universal | 112 | — |
 | [bundesliga](../bundesliga/) | `soccer` | `ger.1` | universal | 112 | — |
 | [seriea](../seriea/) | `soccer` | `ita.1` | universal | 112 | — |
 | [ligue1](../ligue1/) | `soccer` | `fra.1` | universal | 112 | — |
-| [mls](../mls/) | `soccer` | `usa.1` | universal | 112 | 12 |
+| [mls](../mls/) | `soccer` | `usa.1` | universal | 113 | 12 |
 | [ligamx](../ligamx/) | `soccer` | `mex.1` | universal | 112 | — |
-| [ucl](../ucl/) | `soccer` | `uefa.champions` | universal | 112 | — |
+| [ucl](../ucl/) | `soccer` | `uefa.champions` | universal | 113 | — |
 | [uel](../uel/) | `soccer` | `uefa.europa` | universal | 112 | — |
 | [nwsl](../nwsl/) | `soccer` | `usa.nwsl` | universal | 112 | 9 |
 | [wwc](../wwc/) | `soccer` | `fifa.wwc` | universal | 112 | — |

@@ -4091,6 +4091,53 @@ function parse_summary(payload, section) {
   }
   return out;
 }
+function cdnContent(payload) {
+  const content = isPlainObject18(payload) ? payload.content : void 0;
+  return isPlainObject18(content) ? content : {};
+}
+function parse_cdn_game(payload, section) {
+  const gp = isPlainObject18(payload) ? payload.gamepackageJSON : void 0;
+  return parse_summary(isPlainObject18(gp) ? gp : {}, section);
+}
+function parse_cdn_scoreboard(payload) {
+  const sb = cdnContent(payload).sbData;
+  return parse_scoreboard(isPlainObject18(sb) ? sb : {});
+}
+function parse_cdn_schedule(payload) {
+  const sch = cdnContent(payload).schedule;
+  const days = isPlainObject18(sch) ? Object.values(sch) : [];
+  const games = days.filter(isPlainObject18).flatMap((day) => Array.isArray(day.games) ? day.games : []).filter(isPlainObject18);
+  return parse_scoreboard({ events: games });
+}
+var CDN_RANKINGS_LEAD = ["poll_id", "poll_name", "poll_short_name", "ranked", "team_id"];
+function parse_cdn_rankings(payload) {
+  const data = cdnContent(payload).data;
+  const polls = isPlainObject18(data) ? data.rankings : void 0;
+  const rows = [];
+  for (const poll of Array.isArray(polls) ? polls : []) {
+    if (!isPlainObject18(poll)) continue;
+    const head = { poll_id: poll.id, poll_name: poll.name, poll_short_name: poll.short_name };
+    for (const [ranked, key] of [[true, "ranks"], [false, "others"]]) {
+      for (const entry of Array.isArray(poll[key]) ? poll[key] : []) {
+        if (isPlainObject18(entry)) rows.push({ ...head, ranked, ...entry });
+      }
+    }
+  }
+  if (!rows.length) return [];
+  const cols = [...new Set(rows.flatMap((r) => Object.keys(r)))];
+  const rest = cols.map(pyUnderscore).filter((c) => !CDN_RANKINGS_LEAD.includes(c));
+  return rows.map((r) => {
+    const snaked = {};
+    for (const c of cols) snaked[pyUnderscore(c)] = r[c] ?? null;
+    const url = snaked.team_url;
+    const m = typeof url === "string" ? /\/id\/(\d+)/.exec(url) : null;
+    const out = {};
+    for (const c of CDN_RANKINGS_LEAD) out[c] = c === "team_id" ? m ? m[1] : null : snaked[c] ?? null;
+    for (const c of rest) out[c] = snaked[c];
+    return out;
+  });
+}
+var SECTIONED_ENDPOINTS = /* @__PURE__ */ new Set(["summary", "cdn_playbyplay", "cdn_boxscore"]);
 var ESPN_ENDPOINT_PARSERS = {
   // Site v2 (rich nested)
   scoreboard: parse_scoreboard,
@@ -4237,7 +4284,13 @@ var ESPN_ENDPOINT_PARSERS = {
   event_status: parse_single_entity,
   event_predictor: parse_single_entity,
   event_powerindex: parse_single_entity,
-  event_official_detail: parse_single_entity
+  event_official_detail: parse_single_entity,
+  // ---- ESPN CDN page payloads (cdn.espn.com/core) ----
+  cdn_playbyplay: parse_cdn_game,
+  cdn_boxscore: parse_cdn_game,
+  cdn_schedule: parse_cdn_schedule,
+  cdn_scoreboard: parse_cdn_scoreboard,
+  cdn_rankings: parse_cdn_rankings
 };
 function parserForEndpoint(short) {
   return ESPN_ENDPOINT_PARSERS[short];
@@ -4248,7 +4301,7 @@ function parseEndpoint(kind, key, raw, section) {
   if (kind === "espn") {
     const fn2 = parserForEndpoint(key);
     if (!fn2) return null;
-    if (key === "summary") return parse_summary(raw, section);
+    if (SECTIONED_ENDPOINTS.has(key)) return fn2(raw, section);
     return fn2(raw);
   }
   const fn = parserFor(key);

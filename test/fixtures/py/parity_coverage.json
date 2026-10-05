@@ -2,13 +2,13 @@
   "_doc": "Parser-parity coverage of the vendored py returns tables, written by test/parsers/parity.test.js (SDV_PARITY_WRITE=1). py_tables = documented (attached, with columns) + no_schema (attached, missing or empty schema file) + incompatible (schema_compatible: false or schema_incompatible) + overridden (parser_overrides) + overlay_schema (the overlay attaches a JS-owned schema) + undeclared (no declaration). verified = documented endpoints checked on a real sdv-py capture; generated row types are emitted only for verified_endpoints, and each listed unexercised column (null in every capture, so its type is unchecked) must be typed unknown.",
   "source_ref": "81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f",
   "totals": {
-    "py_tables": 911,
+    "py_tables": 916,
     "documented": 334,
     "no_schema": 38,
     "incompatible": 494,
     "overridden": 25,
     "overlay_schema": 0,
-    "undeclared": 20,
+    "undeclared": 25,
     "verified": 179,
     "unverified": 155,
     "unexercised_columns": 117
@@ -82,6 +82,18 @@
       "overridden": 9,
       "overlay_schema": 0,
       "undeclared": 0,
+      "verified": 0,
+      "unverified": 0,
+      "verified_endpoints": {}
+    },
+    "espn_cdn": {
+      "py_tables": 5,
+      "documented": 0,
+      "no_schema": 0,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 5,
       "verified": 0,
       "unverified": 0,
       "verified_endpoints": {}

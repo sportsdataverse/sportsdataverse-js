@@ -13,7 +13,7 @@ sidebar_position: 0
 - **sport slug:** `football`
 - **league slug:** `college-football`
 - **scopes:** `universal`, `ncaa`, `football`
-- **wrappers:** 120
+- **wrappers:** 125
 
 `sdv.cfb` is composed from **written, documented source** (`src/generated/espn/cfb.ts`) — a phased proof of converting the runtime wrapper factory into reviewable modules. Every endpoint is a real `export const` with JSDoc, callable as `sdv.cfb.espnCfb<Endpoint>(params)` and under its snake_case alias (`espn_cfb_<endpoint>`) for parity with the Python / R packages.
 
@@ -33,6 +33,7 @@ Endpoints are grouped by ESPN API family. Pick a page for its per-function refer
 | [Core API](./reference/core) | 82 |
 | [Web API](./reference/web) | 5 |
 | [FPI API (fitt v3)](./reference/fitt) | 1 |
+| [CDN (espn.com page data)](./reference/cdn) | 5 |
 | [NCAA additional](./reference/additional) | 6 |
 | [Dataset loaders](./reference/loaders) | 71 |
 
