@@ -2,6 +2,13 @@
 
 ## **Unreleased**
 
+### Changed (breaking) — HockeyTech season years and season resolution (sdv-py parity)
+
+- **BREAKING: season names written `2025-2026` or `2025/26` give the right end year.** The seasons parser read "2025-2026 Regular Season" as 2120 and "2025/26 Regular Season" as 2025. A `YYYY-YY`, `YYYY/YY` or `YYYY-YYYY` name (spaces around the separator allowed) now gives its end year, 2026 in both examples; a name with one year still gives that year. The `season_yr` column of `hockeytech_season_id`, the year `most_recent_hockeytech_season` returns, and the season `hockeytech_resolve_season_id` picks all change for AJHL, GOJHL, KIJHL, SPHL, CCHL, OJHL and VIJHL (86 of the 410 season rows captured across 17 leagues). For example, AJHL's newest season was 2120 and is now 2027. All 218 two-year names in those captures now give their start year + 1. Same rule as sdv-py.
+- **BREAKING: `hockeytech_resolve_season_id` skips one-off events when it resolves a regular season or playoffs.** The feed lists all-star games, showcases, prospect games, combines, special events, exhibitions and play-ins as seasons, and the parser labels them "regular". The resolver took the first match, so AHL 2026 resolved to 91 (the 2026 All-Star Challenge) instead of 90, and OJHL 2026 to the 2026 Combine instead of 74. Preseason resolution still accepts names such as "2025-26 Preseason Exhibition". Same name patterns as sdv-py.
+- The PWHL fallback table (used when the seasons feed fails or lacks the season) now has ids 1 to 11, as in sdv-py: it adds the three preseasons (2, 4, 7), the 2026 playoffs (9), the 2026-27 preseason (10) and the 2026-27 regular season (11).
+- 50 return-column descriptions in the `hockeytech_scorebar`, `_schedule`, `_stats`, `_player_search`, `_leaders` and `_team_roster` tables now use sdv-py's corrected text (sdv-py #690), with sdv-py function names replaced by the JS ones, so both libraries describe these columns the same way.
+
 ### Changed — vendor tooling + CI hardening
 
 - **`fetchWithRetry`:** each attempt gets its own `AbortSignal.timeout` (30 s), and the body is read inside the attempt, so a hung socket or a mid-body reset is retried (error names the URL) and cannot stall a job. Worst case per URL: 3 x 30 s plus 1.5 s of backoff. `raw.githubusercontent.com` file fetches retry exactly like the API ones.
