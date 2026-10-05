@@ -239,7 +239,7 @@ families**:
 | `nhl_records` | `sdv.nhl.nhlRecords*` | `records.nhl.com` | keyless |
 | `nfl_api` | `sdv.nfl.nfl*` | `api.nfl.com` | **bearer token minted automatically** (anonymous `WEB_DESKTOP`, cached + auto-renewed; `src/core/nfl_auth.ts`) |
 | `pff_api` | `sdv.nfl.pffApi*` | `api.pff.com` | **caller's PFF Pro key** (`api_key` / `PFF_API_KEY`; `src/core/pff_api_runtime.ts`) |
-| `nfl_pro` | `sdv.nfl.nflPro*` | `pro.nfl.com` | **caller's user-bound NFL+ token** (`token` / `NFLPRO_TOKEN`; offset paging; `src/core/nfl_pro_runtime.ts`) |
+| `nfl_pro` | `sdv.nfl.nflPro*` | `pro.nfl.com` | **caller's user-bound NFL+ token** (`token` / `NFLPRO_TOKEN`, else an id.nfl.com browser login with `email` / `password` or `NFLPRO_EMAIL` / `NFLPRO_PW` via the optional peer `playwright`; offset paging; `src/core/nfl_pro_runtime.ts`) |
 | `kenpom` | `sdv.mbb.kenpom*` | `kenpom.com` | **caller's subscription login** (`KENPOM_EMAIL` / `KENPOM_PW`; impersonating transport, needs `impit`; `src/core/kenpom_runtime.ts`) |
 
 The three subscription families (`pff_api`, `nfl_pro`, `kenpom`) are never on the

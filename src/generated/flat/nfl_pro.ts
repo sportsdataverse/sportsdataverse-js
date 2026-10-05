@@ -70,8 +70,10 @@ const DEFENSE_NEAREST_SEASON_DEF: WrapperDef = {
  * @param params.sort_key - query parameter (`sortKey`) — default `null`.
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
  * @param params.qualified - query parameter (`qualifiedDefender`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -150,8 +152,10 @@ const DEFENSE_NEAREST_WEEK_DEF: WrapperDef = {
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
  * @param params.qualified - query parameter (`qualifiedDefender`) — default `null`.
  * @param params.nfl_id - query parameter (`nflId`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -224,8 +228,10 @@ const DEFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  * @param params.sort_key - query parameter (`sortKey`) — default `null`.
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
  * @param params.qualified - query parameter (`qualifiedDefender`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -304,8 +310,10 @@ const DEFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
  * @param params.qualified - query parameter (`qualifiedDefender`) — default `null`.
  * @param params.nfl_id - query parameter (`nflId`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -383,8 +391,10 @@ const FANTASY_GAME_DEF: WrapperDef = {
  * @param params.position_group - query parameter (`positionGroup`).
  * @param params.sort_key - query parameter (`sortKey`) — default `null`.
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -463,8 +473,10 @@ const FANTASY_SEASON_DEF: WrapperDef = {
  * @param params.position_group - query parameter (`positionGroup`) — default `null`.
  * @param params.sort_key - query parameter (`sortKey`) — default `null`.
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -537,8 +549,10 @@ const PLAYERS_OFFENSE_PASSING_SEASON_DEF: WrapperDef = {
  * @param params.sort_key - query parameter (`sortKey`) — default `null`.
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
  * @param params.qualified - query parameter (`qualifiedPasser`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -617,8 +631,10 @@ const PLAYERS_OFFENSE_PASSING_WEEK_DEF: WrapperDef = {
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
  * @param params.qualified - query parameter (`qualifiedPasser`) — default `null`.
  * @param params.nfl_id - query parameter (`nflId`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -691,8 +707,10 @@ const PLAYERS_OFFENSE_RECEIVING_SEASON_DEF: WrapperDef = {
  * @param params.sort_key - query parameter (`sortKey`) — default `null`.
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
  * @param params.qualified - query parameter (`qualifiedReceiver`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -771,8 +789,10 @@ const PLAYERS_OFFENSE_RECEIVING_WEEK_DEF: WrapperDef = {
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
  * @param params.qualified - query parameter (`qualifiedReceiver`) — default `null`.
  * @param params.nfl_id - query parameter (`nflId`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -845,8 +865,10 @@ const PLAYERS_OFFENSE_RUSHING_SEASON_DEF: WrapperDef = {
  * @param params.sort_key - query parameter (`sortKey`) — default `null`.
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
  * @param params.qualified - query parameter (`qualifiedRusher`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -925,8 +947,10 @@ const PLAYERS_OFFENSE_RUSHING_WEEK_DEF: WrapperDef = {
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
  * @param params.qualified - query parameter (`qualifiedRusher`) — default `null`.
  * @param params.nfl_id - query parameter (`nflId`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -993,8 +1017,10 @@ const TEAM_DEFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  * @param params.offset - query parameter — default `null`.
  * @param params.sort_key - query parameter (`sortKey`) — default `null`.
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1061,8 +1087,10 @@ const TEAM_DEFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  * @param params.offset - query parameter — default `null`.
  * @param params.sort_key - query parameter (`sortKey`) — default `null`.
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1129,8 +1157,10 @@ const TEAM_OFFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  * @param params.offset - query parameter — default `null`.
  * @param params.sort_key - query parameter (`sortKey`) — default `null`.
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1197,8 +1227,10 @@ const TEAM_OFFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  * @param params.offset - query parameter — default `null`.
  * @param params.sort_key - query parameter (`sortKey`) — default `null`.
  * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
+ * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.

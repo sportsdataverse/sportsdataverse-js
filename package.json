@@ -45,10 +45,14 @@
     "yaml": "^2.9.0"
   },
   "peerDependencies": {
-    "impit": ">=0.14.0 <1"
+    "impit": ">=0.14.0 <1",
+    "playwright": ">=1.40.0 <2"
   },
   "peerDependenciesMeta": {
     "impit": {
+      "optional": true
+    },
+    "playwright": {
       "optional": true
     }
   },

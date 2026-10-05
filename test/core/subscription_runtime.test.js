@@ -14,7 +14,15 @@ import sdv, {
 import { _timer } from '../../dist/core/request.js';
 import { resolveFamily } from '../../dist/core/config.js';
 import { loginFormAction, looksLoggedOut } from '../../dist/core/kenpom_runtime.js';
-import { nflProTokenEntitled, nflProTokenFresh } from '../../dist/core/nfl_pro_runtime.js';
+import {
+  nflProTokenEntitled,
+  nflProTokenFresh,
+  nflProBrowserLogin,
+  nflProClearTokenCache,
+  _playwrightLoader,
+} from '../../dist/core/nfl_pro_runtime.js';
+import { TransportUnavailableError } from '../../dist/core/errors.js';
+import { inspect } from 'node:util';
 
 // No-network tests for the subscription runtimes (src/core/{pff_api,kenpom,
 // nfl_pro}_runtime.ts): credential precedence, the login flow, error mapping,
@@ -45,7 +53,7 @@ const header = (req, name) => {
 const ENV = [
   'PFF_API_KEY', 'SDV_PFF_API_KEY', 'SDV_PFF_STRICT',
   'KENPOM_EMAIL', 'KENPOM_PW', 'KENPOM_PASSWORD', 'KP_USER', 'KP_PW', 'SDV_KENPOM_EMAIL', 'SDV_KENPOM_PW',
-  'NFLPRO_TOKEN',
+  'NFLPRO_TOKEN', 'NFLPRO_EMAIL', 'NFLPRO_PW',
 ];
 
 function isolate() {
@@ -436,6 +444,264 @@ describe('nfl_pro runtime (user token + offset paging)', () => {
     }
     configure({ transport: { nfl_pro: fakeTransport({ status: 500, data: 'positionGroup is required' }) }, retries: 0 });
     (await sdv.nfl.nflProFantasyGame().then(() => null, (e) => e)).message.should.match(/positionGroup is required/);
+  });
+});
+
+/**
+ * A fake `playwright` module driving a scripted id.nfl.com. `steps` are the
+ * screens shown after "Sign In" is clicked, in order ('email', 'passkey' — the
+ * sign-in-biometric OFFER with no password field — and 'password'); Enter on a
+ * field (or "use password" on the passkey offer) advances to the next screen,
+ * and past the last one the page is signed in. `blobs(email)` is what
+ * localStorage holds afterwards. Every launch starts a fresh page.
+ */
+function fakePlaywright({ steps, blobs, onFill }) {
+  const log = { launched: 0, closed: 0, fills: [] };
+  const chromium = {
+    async launch(opts) {
+      opts.should.eql({ headless: true });
+      log.launched++;
+      let at = -1; // the pro.nfl.com home page, before "Sign In"
+      let filledEmail;
+      const screen = () => steps[at];
+      const page = {
+        async goto() {},
+        async waitForTimeout() {},
+        url: () =>
+          at >= steps.length
+            ? 'https://pro.nfl.com/'
+            : `https://id.nfl.com/account/${screen() === 'recovery' ? 'account-recovery' : 'sign-in'}`,
+        async evaluate(fn) {
+          const src = String(fn);
+          if (src.includes('login-button')) {
+            at = Math.max(at, 0);
+            return undefined;
+          }
+          if (src.includes('use password')) {
+            if (screen() !== 'passkey') return false;
+            at++;
+            return true;
+          }
+          if (src.includes('localStorage')) return blobs(filledEmail);
+          throw new Error(`unexpected evaluate: ${src}`);
+        },
+        locator(sel) {
+          const kind = sel.includes('password') ? 'password' : 'email';
+          const loc = {
+            first: () => loc,
+            count: async () => (screen() === kind ? 1 : 0),
+            isVisible: async () => screen() === kind,
+            async fill(value, o) {
+              o.timeout.should.equal(8000);
+              log.fills.push([kind, value]);
+              if (kind === 'email') filledEmail = value;
+              if (onFill) onFill(kind, value);
+            },
+            async press(key) {
+              if (key === 'Enter') at++;
+            },
+          };
+          return loc;
+        },
+      };
+      return {
+        async newContext(o) {
+          o.viewport.should.eql({ width: 1440, height: 900 });
+          return { newPage: async () => page };
+        },
+        async close() {
+          log.closed++;
+        },
+      };
+    },
+  };
+  return { chromium, log };
+}
+
+describe('nfl_pro login (id.nfl.com via an injected Playwright)', () => {
+  isolate();
+  const page = fixture('nfl_pro', 'players_offense_passing_season.json');
+  const PW = 'hunter2-Sekret!';
+  const tokenFor = (email, extra = {}) =>
+    jwt({ exp: inAnHour(), sub: email, plans: [{ plan: 'NFL_PLUS_PREMIUM', status: 'ACTIVE' }], ...extra });
+  const ANON = jwt({ exp: inAnHour(), plans: [] }); // an anonymous / Gigya-UID token: same shape, no plan
+  let realLoad;
+  let realNow;
+  beforeEach(() => {
+    realLoad = _playwrightLoader.load;
+    realNow = Date.now;
+    nflProClearTokenCache();
+  });
+  afterEach(() => {
+    _playwrightLoader.load = realLoad;
+    Date.now = realNow;
+    nflProClearTokenCache();
+  });
+
+  it('drives every step order to the password and returns the entitled token', async () => {
+    for (const steps of [['email', 'password'], ['email', 'passkey', 'password'], ['passkey', 'email', 'password']]) {
+      const pw = fakePlaywright({ steps, blobs: (e) => ['{"theme":"dark"}', `{"accessToken":"${ANON}"}`, `{"user":{"accessToken":"${tokenFor(e)}"}}`] });
+      const token = await nflProBrowserLogin('a@example.com', PW, { playwright: pw });
+      token.should.equal(tokenFor('a@example.com'));
+      pw.log.fills.should.eql([['email', 'a@example.com'], ['password', PW]]);
+      pw.log.closed.should.equal(1);
+    }
+  });
+
+  it('a password screen first (remembered e-mail) skips the e-mail step', async () => {
+    const pw = fakePlaywright({ steps: ['password'], blobs: () => [tokenFor('a@example.com')] });
+    (await nflProBrowserLogin('a@example.com', PW, { playwright: pw })).should.equal(tokenFor('a@example.com'));
+    pw.log.fills.should.eql([['password', PW]]);
+  });
+
+  it('never reaching the password step, or no entitled token after sign-in, is NflProAuthError (browser closed)', async () => {
+    // "Sign In" opens no recognisable form: the state machine finds nothing to fill
+    let pw = fakePlaywright({ steps: [], blobs: () => [] });
+    let err = await nflProBrowserLogin('a@example.com', PW, { playwright: pw }).then(() => null, (e) => e);
+    err.should.be.instanceOf(NflProAuthError);
+    err.message.should.match(/password step was never reached/);
+    pw.log.closed.should.equal(1);
+    // an account with no password on file: id.nfl.com sends the e-mail step to
+    // /account/account-recovery (measured live 2026-10-05)
+    pw = fakePlaywright({ steps: ['email', 'recovery'], blobs: () => [] });
+    err = await nflProBrowserLogin('a@example.com', PW, { playwright: pw }).then(() => null, (e) => e);
+    err.should.be.instanceOf(NflProAuthError);
+    err.message.should.match(/this account has no password/);
+    err.message.should.not.containEql('a@example.com');
+    // signed in, but localStorage holds only an anonymous token and a lapsed plan
+    const lapsed = jwt({ exp: inAnHour(), plans: [{ plan: 'NFL_PLUS_PREMIUM', status: 'CANCELLED' }] });
+    pw = fakePlaywright({ steps: ['email', 'password'], blobs: () => [ANON, lapsed] });
+    err = await nflProBrowserLogin('a@example.com', PW, { playwright: pw }).then(() => null, (e) => e);
+    err.should.be.instanceOf(NflProAuthError);
+    err.message.should.match(/no token carrying an active NFL_PLUS_\* plan/);
+  });
+
+  it('wrapper with email / password logs in once, caches per account, re-logs in after expiry', async () => {
+    const pw = fakePlaywright({ steps: ['email', 'password'], blobs: (e) => [tokenFor(e)] });
+    _playwrightLoader.load = async () => pw;
+    const t = fakeTransport({ status: 200, data: JSON.stringify(page) });
+    configure({ transport: { nfl_pro: t } });
+    const creds = { email: 'a@example.com', password: PW, paginate: false };
+    await sdv.nfl.nflProPlayersOffensePassingSeason(creds);
+    await sdv.nfl.nflProPlayersOffensePassingSeason(creds);
+    pw.log.launched.should.equal(1);
+    header(t.calls[0], 'authorization').should.equal(`Bearer ${tokenFor('a@example.com')}`);
+    header(t.calls[1], 'authorization').should.equal(`Bearer ${tokenFor('a@example.com')}`);
+    t.calls[0].query.should.eql({ season: 2024, seasonType: 'REG', limit: 500 }); // credentials never in the query
+    // the cached token expires -> a fresh login
+    const now = realNow();
+    Date.now = () => now + 2 * 3600 * 1000;
+    await sdv.nfl.nflProPlayersOffensePassingSeason(creds);
+    pw.log.launched.should.equal(2);
+  });
+
+  it('two accounts never share a token (the cache is keyed by account), nor does a wrong password', async () => {
+    const pw = fakePlaywright({ steps: ['email', 'password'], blobs: (e) => [tokenFor(e)] });
+    _playwrightLoader.load = async () => pw;
+    const t = fakeTransport({ status: 200, data: JSON.stringify(page) });
+    configure({ transport: { nfl_pro: t } });
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ email: 'a@example.com', password: PW, paginate: false });
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ email: 'b@example.com', password: PW, paginate: false });
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ email: 'a@example.com', password: PW, paginate: false });
+    header(t.calls[0], 'authorization').should.equal(`Bearer ${tokenFor('a@example.com')}`);
+    header(t.calls[1], 'authorization').should.equal(`Bearer ${tokenFor('b@example.com')}`);
+    header(t.calls[2], 'authorization').should.equal(`Bearer ${tokenFor('a@example.com')}`);
+    pw.log.launched.should.equal(2);
+    // same e-mail, different password: not answered from the cache
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ email: 'a@example.com', password: 'other', paginate: false });
+    pw.log.launched.should.equal(3);
+  });
+
+  it('resolution order is sdv-py\'s: token > NFLPRO_TOKEN > email / password > NFLPRO_EMAIL / NFLPRO_PW', async () => {
+    const pw = fakePlaywright({ steps: ['email', 'password'], blobs: (e) => [tokenFor(e)] });
+    _playwrightLoader.load = async () => pw;
+    const t = fakeTransport({ status: 200, data: JSON.stringify(page) });
+    configure({ transport: { nfl_pro: t } });
+    const envTok = tokenFor('env-token@example.com');
+    const argTok = tokenFor('arg-token@example.com');
+    process.env.NFLPRO_TOKEN = envTok;
+    process.env.NFLPRO_EMAIL = 'env@example.com';
+    process.env.NFLPRO_PW = PW;
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ token: argTok, email: 'a@example.com', password: PW, paginate: false });
+    header(t.calls[0], 'authorization').should.equal(`Bearer ${argTok}`);
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ email: 'a@example.com', password: PW, paginate: false });
+    header(t.calls[1], 'authorization').should.equal(`Bearer ${envTok}`);
+    pw.log.launched.should.equal(0);
+    delete process.env.NFLPRO_TOKEN;
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ email: 'a@example.com', password: PW, paginate: false });
+    header(t.calls[2], 'authorization').should.equal(`Bearer ${tokenFor('a@example.com')}`);
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ paginate: false }); // family auth provider: env login
+    header(t.calls[3], 'authorization').should.equal(`Bearer ${tokenFor('env@example.com')}`);
+    pw.log.launched.should.equal(2);
+    delete process.env.NFLPRO_PW;
+    const err = await sdv.nfl.nflProPlayersOffensePassingSeason({ paginate: false }).then(() => null, (e) => e);
+    err.should.be.instanceOf(NflProAuthError);
+    err.message.should.match(/NFLPRO_EMAIL and NFLPRO_PW/);
+    err.message.should.not.match(/env@example\.com/);
+  });
+
+  it('concurrent calls for one account share a single login', async () => {
+    const pw = fakePlaywright({ steps: ['email', 'password'], blobs: (e) => [tokenFor(e)] });
+    _playwrightLoader.load = async () => pw;
+    configure({ transport: { nfl_pro: fakeTransport({ status: 200, data: JSON.stringify(page) }) } });
+    const creds = { email: 'a@example.com', password: PW, paginate: false };
+    await Promise.all([sdv.nfl.nflProPlayersOffensePassingSeason(creds), sdv.nfl.nflProTeamOffenseOverviewSeason(creds)]);
+    pw.log.launched.should.equal(1);
+  });
+
+  it('playwright missing -> TransportUnavailableError naming the install command; no request made', async () => {
+    _playwrightLoader.load = async () => {
+      throw Object.assign(new Error("Cannot find package 'playwright'"), { code: 'ERR_MODULE_NOT_FOUND' });
+    };
+    const t = fakeTransport({ status: 200, data: JSON.stringify(page) });
+    configure({ transport: { nfl_pro: t } });
+    const err = await sdv.nfl.nflProPlayersOffensePassingSeason({ email: 'a@example.com', password: PW }).then(() => null, (e) => e);
+    err.should.be.instanceOf(TransportUnavailableError);
+    err.message.should.containEql('npm i playwright && npx playwright install chromium');
+    t.calls.length.should.equal(0);
+  });
+
+  it('SECURITY: a failing login never carries the e-mail, password or a token in the error or its cause chain', async () => {
+    const email = 'secret.person@example.com';
+    const leaky = (kind, value) => {
+      // what a browser-automation error can look like: the value echoed in its call log
+      const e = new Error(`locator.fill: Timeout 8000ms exceeded.\nCall log:\n  - fill("${value}") on ${kind}`);
+      e.stack = `${e.message}\n    at fill (${value})`;
+      e.log = [value];
+      throw e;
+    };
+    const found = tokenFor(email, { plans: [] }); // a non-entitled token sitting in localStorage
+    const cases = [
+      fakePlaywright({ steps: ['email', 'password'], blobs: () => [found], onFill: (k, v) => k === 'password' && leaky(k, v) }),
+      fakePlaywright({ steps: ['email', 'password'], blobs: () => [found], onFill: (k, v) => k === 'email' && leaky(k, v) }),
+      fakePlaywright({ steps: ['email', 'password'], blobs: () => [found] }), // signed in, token not entitled
+    ];
+    for (const pw of cases) {
+      _playwrightLoader.load = async () => pw;
+      const t = fakeTransport({ status: 200, data: JSON.stringify(page) });
+      configure({ transport: { nfl_pro: t } });
+      for (const call of [
+        () => sdv.nfl.nflProPlayersOffensePassingSeason({ email, password: PW }),
+        () => {
+          process.env.NFLPRO_EMAIL = email;
+          process.env.NFLPRO_PW = PW;
+          return sdv.nfl.nflProPlayersOffensePassingSeason();
+        },
+      ]) {
+        const err = await call().then(() => null, (e) => e);
+        err.should.be.instanceOf(NflProAuthError);
+        const dumps = [inspect(err, { depth: Infinity, showHidden: true }), JSON.stringify(err), String(err.stack)];
+        for (let c = err.cause; c; c = c.cause) dumps.push(inspect(c, { depth: Infinity, showHidden: true }), String(c.stack));
+        for (const d of dumps) {
+          d.should.not.containEql(PW);
+          d.should.not.containEql(email);
+          d.should.not.containEql(found);
+        }
+        t.calls.length.should.equal(0);
+      }
+      delete process.env.NFLPRO_EMAIL;
+      delete process.env.NFLPRO_PW;
+    }
   });
 });
 
