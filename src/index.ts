@@ -20,7 +20,7 @@ import { withDeprecatedAliases } from './core/deprecation.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
 import * as cricketWp from './models/cricket_wp.js';
 import { BASKETBALL_BOX_PRODUCERS } from './producers/espn_basketball_box.js';
-import { BASKETBALL_PBP_PRODUCERS, espn_basketball_pbp_from_summary } from './producers/espn_basketball_pbp.js';
+import { BASKETBALL_PBP_PRODUCERS, _espnPbp } from './producers/espn_basketball_pbp.js';
 import { oddsMath, oddsErrors } from './odds/math.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
@@ -195,9 +195,20 @@ for (const [name, fn] of Object.entries(cricketWpExports)) {
 }
 
 // ESPN basketball box + PBP producers (py `helper_<lg>_player_box` / `helper_<lg>_team_box`,
-// `helper_<lg>_pbp` and its stages; pure: one summary payload in) merged onto sdv.nba / wnba /
-// mbb / wbb under py + camelCase names. Never silently overwrite an existing key.
-for (const [lg, fns] of [...Object.entries(BASKETBALL_BOX_PRODUCERS), ...Object.entries(BASKETBALL_PBP_PRODUCERS)]) {
+// `helper_<lg>_pbp` and its stages; pure: one summary payload in) plus py's `espn_<lg>_pbp`
+// (the generated `espn_<lg>_summary` -> py's key trimming -> `helper_<lg>_pbp`) merged onto
+// sdv.nba / wnba / mbb / wbb under py + camelCase names. Never silently overwrite an existing key.
+const espnPbp = Object.fromEntries(
+  Object.keys(BASKETBALL_PBP_PRODUCERS).map((lg) => [
+    lg,
+    { [`espn_${lg}_pbp`]: _espnPbp(lg as keyof typeof BASKETBALL_PBP_PRODUCERS, sdv[lg][`espn_${lg}_summary`]) },
+  ])
+);
+for (const [lg, fns] of [
+  ...Object.entries(BASKETBALL_BOX_PRODUCERS),
+  ...Object.entries(BASKETBALL_PBP_PRODUCERS),
+  ...Object.entries(espnPbp),
+]) {
   for (const [name, fn] of Object.entries(fns)) {
     for (const n of [name, toCamel(name)]) {
       if (n in sdv[lg]) throw new Error(`sdv.${lg}.${n} already exists`);
@@ -215,9 +226,6 @@ export { OddsValueError, OddsZeroDivisionError, OddsOverflowError, OddsRuntimeEr
 
 // Advanced / tree-shakeable use:
 export { LEAGUES };
-// sdv-py `espn_<lg>_pbp` after its fetch: trim a summary (`espn_<lg>_summary`) to py's keys,
-// then `helper_<lg>_pbp` (`raw: true` returns the trimmed payload).
-export { espn_basketball_pbp_from_summary };
 export { makeLeagueModule } from './leagues/_make.js';
 export { makeFlatModule } from './leagues/_make_flat.js';
 export { WRAPPERS, FLAT_WRAPPERS } from './generated/wrappers.js';

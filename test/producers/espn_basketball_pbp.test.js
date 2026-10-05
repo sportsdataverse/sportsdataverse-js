@@ -4,7 +4,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import sdv, { configure, resetConfig, espn_basketball_pbp_from_summary } from '../../dist/index.js';
+import sdv, * as root from '../../dist/index.js';
 import * as P from '../../dist/producers/espn_basketball_pbp.js';
 import { _warn } from '../../dist/core/releases.js';
 
@@ -65,9 +65,15 @@ function expectPlays(rows, want, label) {
   return idMode.bigint;
 }
 
+/**
+ * The JS error for a py exception: its message starts with py's exception name (pandas -> arrow's
+ * ArrowInvalid on a mixed-type column is reported as the TypeError pandas raises for str / int).
+ */
+const raisesAs = (k) => new RegExp('^' + ({ ArrowInvalid: 'TypeError' }[k] ?? k) + ':');
+
 /** One league on one payload: raw trimming, the cleaned dict, and the stage helpers' init. */
 function expectLeague(lg, payload, gameId, want, label) {
-  const trimmed = P.espn_basketball_pbp_from_summary(lg, gameId, payload, true);
+  const trimmed = P._pbpFromSummary(lg, gameId, payload, true);
   Object.keys(trimmed).should.eql(want.raw.keys, `${label}: raw key order`);
   for (const [k, v] of Object.entries(want.raw.values)) {
     if (v.__same__) assert.deepStrictEqual(trimmed[k], payload[k], `${label}: raw.${k} is the capture's own`);
@@ -76,7 +82,7 @@ function expectLeague(lg, payload, gameId, want, label) {
 
   if (want.init.raises) {
     (() => P[`helper_${lg}_game_data`](trimmed, P[`helper_${lg}_pickcenter`](trimmed))).should.throw(
-      undefined,
+      raisesAs(want.init.raises),
       `${label}: py raises ${want.init.raises} before init`
     );
   } else {
@@ -85,8 +91,8 @@ function expectLeague(lg, payload, gameId, want, label) {
     for (const [k, v] of Object.entries(want.init.pbp_txt)) assert.deepStrictEqual(txt[k], decode(v), `${label}: game_data pbp_txt.${k}`);
   }
 
-  const run = () => P.espn_basketball_pbp_from_summary(lg, gameId, payload);
-  if (want.out.raises) return run.should.throw(undefined, `${label}: py raises ${want.out.raises}`);
+  const run = () => P._pbpFromSummary(lg, gameId, payload);
+  if (want.out.raises) return run.should.throw(raisesAs(want.out.raises), `${label}: py raises ${want.out.raises}`);
   const out = run();
   Object.keys(out).should.eql(want.out.keys, `${label}: output key order`);
   assert.deepStrictEqual(out.gameId, decode(want.out.gameId), `${label}: gameId`);
@@ -143,7 +149,7 @@ describe('ESPN basketball pbp league facts', () => {
   quiet();
   const run = (lg, name) => {
     const cap = capture(name);
-    return P.espn_basketball_pbp_from_summary(lg, Number(cap.header.id), cap);
+    return P._pbpFromSummary(lg, Number(cap.header.id), cap);
   };
   // py's end.* overrides fire on the FIRST play of the new period (lag == previous period).
   const firstOf = (rows, period) => rows.find((r) => r['period.number'] === period);
@@ -221,7 +227,7 @@ describe('ESPN basketball pbp league facts', () => {
     ]) {
       const stageA = (name) => {
         const cap = capture(name);
-        const t = P.espn_basketball_pbp_from_summary(lg, Number(cap.header.id), cap, true);
+        const t = P._pbpFromSummary(lg, Number(cap.header.id), cap, true);
         const [txt, init] = P[`helper_${lg}_game_data`](t, P[`helper_${lg}_pickcenter`](t));
         return { f: P._playsFrame(lg, Number(cap.header.id), txt, init), init, v: P._variant(lg, txt) };
       };
@@ -244,7 +250,7 @@ describe('ESPN basketball pbp league facts', () => {
     }
   });
 
-  it('is on sdv.<lg> under py and camelCase names; the trim core is a root export', () => {
+  it('is on sdv.<lg> under py and camelCase names (helpers + espn_<lg>_pbp); the trim core is internal', () => {
     const camel = (s) => s.replace(/_([a-z0-9])/g, (_m, ch) => ch.toUpperCase());
     for (const lg of LEAGUES) {
       for (const stage of ['pbp', 'pickcenter', 'game_data', 'pbp_features']) {
@@ -252,24 +258,35 @@ describe('ESPN basketball pbp league facts', () => {
         sdv[lg][name].should.equal(P[name]);
         sdv[lg][camel(name)].should.equal(P[name]);
       }
-      should(sdv[lg][`espn_${lg}_pbp`]).be.undefined(); // sdv.<lg>.espn_<lg>_* = the generated wrappers
+      sdv[lg][`espn_${lg}_pbp`].should.be.a.Function();
+      sdv[lg][camel(`espn_${lg}_pbp`)].should.equal(sdv[lg][`espn_${lg}_pbp`]);
     }
-    espn_basketball_pbp_from_summary.should.equal(P.espn_basketball_pbp_from_summary);
+    Object.keys(root).filter((k) => /pbp|summary/i.test(k)).should.eql([]); // no py-less root name
   });
 
-  describe('py espn_<lg>_pbp = espn_<lg>_summary + espn_basketball_pbp_from_summary', () => {
-    afterEach(() => resetConfig());
-    it('the summary wrapper requests summary?event=<id>; the trim core makes helper_<lg>_pbp of it', async () => {
-      const cap = capture('wbb_summary_401587390.json.gz');
-      const calls = [];
-      configure({ transport: async (req) => (calls.push(req), { status: 200, headers: {}, data: cap, url: req.url }) });
-      const summary = await sdv.wbb.espn_wbb_summary({ event_id: 401587390 });
-      calls.length.should.equal(1);
-      String(calls[0].url).should.match(/\/basketball\/womens-college-basketball\/summary$/);
-      String(calls[0].query.event).should.equal('401587390');
-      const want = O.captures['wbb_summary_401587390.json.gz'].wbb;
-      espn_basketball_pbp_from_summary('wbb', 401587390, summary).plays.length.should.equal(want.out.plays.rows.length);
-      Object.keys(espn_basketball_pbp_from_summary('wbb', 401587390, summary, true)).should.eql(want.raw.keys);
-    });
+  describe('espn_<lg>_pbp: the ESPN summary wrapper -> py trimming -> helper_<lg>_pbp (injected transport)', () => {
+    afterEach(() => root.resetConfig());
+    const games = {
+      nba: 'nba_summary_401360428.json.gz',
+      wnba: 'wnba_summary_230614002.json.gz',
+      mbb: 'mbb_summary_401600379.json.gz',
+      wbb: 'wbb_summary_401587390.json.gz',
+    };
+    const slug = { nba: 'nba', wnba: 'wnba', mbb: 'mens-college-basketball', wbb: 'womens-college-basketball' };
+    for (const [lg, name] of Object.entries(games)) {
+      it(`${lg}: requests summary?event=<id> once and returns py's dict for ${name} (raw: py's raw)`, async () => {
+        const cap = capture(name);
+        const id = O.captures[name].game_id;
+        const calls = [];
+        root.configure({ transport: async (req) => (calls.push(req), { status: 200, headers: {}, data: cap, url: req.url }) });
+        const out = await sdv[lg][`espn_${lg}_pbp`](id);
+        calls.length.should.equal(1);
+        String(calls[0].url).should.match(new RegExp(`/basketball/${slug[lg]}/summary$`));
+        String(calls[0].query.event).should.equal(String(id));
+        assert.deepStrictEqual(out, P._pbpFromSummary(lg, id, cap)); // == the oracle-checked core
+        out.plays.length.should.equal(O.captures[name][lg].out.plays.rows.length);
+        Object.keys(await sdv[lg][`espn_${lg}_pbp`](id, { raw: true })).should.eql(O.captures[name][lg].raw.keys);
+      });
+    }
   });
 });

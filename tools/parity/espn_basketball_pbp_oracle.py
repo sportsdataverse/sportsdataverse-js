@@ -197,6 +197,26 @@ def derived(captures):
             "format.regulation set to null (`or {}` -> year fallback)",
             setp(lambda p: p["format"].update(regulation=None)),
         ),
+        # The halves cutoffs pinned on both sides (format absent, so the season year decides):
+        # WNBA 2005 halves / 2006 quarters; WBB 2015 halves (format_regulation_null) / 2016 quarters.
+        (
+            "format_absent_2005",
+            "wnba_summary_230614002.json.gz",
+            "`format` removed and header.season.year 2005 (last WNBA halves year)",
+            setp(lambda p: (p.pop("format"), p["header"]["season"].update(year=2005))),
+        ),
+        (
+            "format_absent_2006",
+            "wnba_summary_230614002.json.gz",
+            "`format` removed and header.season.year 2006 (first WNBA quarters year)",
+            setp(lambda p: (p.pop("format"), p["header"]["season"].update(year=2006))),
+        ),
+        (
+            "format_absent_2016",
+            "wbb_summary_400787556.json.gz",
+            "`format` removed and header.season.year 2016 (first WBB quarters year)",
+            setp(lambda p: (p.pop("format"), p["header"]["season"].update(year=2016))),
+        ),
         (
             "pickcenter_favorite_false",
             nba_pc,
