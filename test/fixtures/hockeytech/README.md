@@ -35,3 +35,13 @@ internal-refs commit b78eb2c; stored pretty-printed, wire form was compact):
 `pwhl_svf_streaks_invalidview.json` (`statviewfeed` / `streaks` →
 `{"error": "InvalidView error: streaks"}`). The access-denied plain-text reply is
 `analytics/live-2026-10-05/mjhl_summary_7301.txt`.
+
+## Added 2026-10-05 (sdv-js JS-9, season names and one-off events)
+
+`seasons/<league>.json`: the `modulekit` / `seasons` list of 17 leagues, used by the
+season-name and `resolveSeasonId` tests. `pwhl.json` is sdv-py's
+`tests/fixtures/hockeytech/pwhl_seasons.json` (ids 1-10, at sdv-py faf886106d). The other
+16 are sdv-internal-refs `hockeytech/captures/samples/<league>/seasons.json` (captured live
+2026-07-12, internal-refs commit ba7ab44) with the `...N more items` trim marker dropped;
+`ahl.json` then equals sdv-py's `ahl_seasons.json` row for row. The `key` in `Parameters`
+is replaced with `REDACTED` in all 17, and they are re-serialized with 1-space indent.

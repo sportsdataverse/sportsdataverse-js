@@ -1,0 +1,248 @@
+{
+ "SiteKit": {
+  "Parameters": {
+   "feed": "modulekit",
+   "key": "REDACTED",
+   "client_code": "gojhl",
+   "site_id": "0",
+   "lang": "en",
+   "view": "seasons",
+   "lang_id": 1,
+   "league_id": "1",
+   "season_id": "99"
+  },
+  "Seasons": [
+   {
+    "season_id": "99",
+    "season_name": "2026 GOHL Pre-Season",
+    "shortname": "2026 Pre-Season",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2026-06-01",
+    "end_date": "2026-09-09"
+   },
+   {
+    "season_id": "98",
+    "season_name": "2026 Sutherland Cup Playoffs",
+    "shortname": "2026 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2026-03-10",
+    "end_date": "2026-05-12"
+   },
+   {
+    "season_id": "96",
+    "season_name": "2025-2026 GOHL Season",
+    "shortname": "2025-2026 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2025-09-10",
+    "end_date": "2026-03-08"
+   },
+   {
+    "season_id": "97",
+    "season_name": "2025-2026 Special Events",
+    "shortname": "2025-2026 S.E.",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2025-09-01",
+    "end_date": "2026-02-01"
+   },
+   {
+    "season_id": "94",
+    "season_name": "2025 GOJHL Pre-Season",
+    "shortname": "2025 Pre-Season",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2025-06-01",
+    "end_date": "2025-09-09"
+   },
+   {
+    "season_id": "93",
+    "season_name": "2025 Sutherland Cup Playoffs",
+    "shortname": "2025 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2025-03-11",
+    "end_date": "2025-05-13"
+   },
+   {
+    "season_id": "90",
+    "season_name": "2024-2025 GOJHL Season",
+    "shortname": "2024-2025 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2024-09-11",
+    "end_date": "2025-03-10"
+   },
+   {
+    "season_id": "92",
+    "season_name": "2024-2025 Special Events",
+    "shortname": "2024-2025 S.E.",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2024-09-01",
+    "end_date": "2025-01-31"
+   },
+   {
+    "season_id": "89",
+    "season_name": "2024 GOJHL Pre-Season",
+    "shortname": "2024 Pre-Season",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2024-06-01",
+    "end_date": "2024-09-10"
+   },
+   {
+    "season_id": "88",
+    "season_name": "2024 Sutherland Cup Playoffs",
+    "shortname": "2024 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2024-03-04",
+    "end_date": "2024-05-22"
+   },
+   {
+    "season_id": "84",
+    "season_name": "2023-2024 GOJHL Season",
+    "shortname": "2023-2024 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2023-09-13",
+    "end_date": "2024-03-03"
+   },
+   {
+    "season_id": "82",
+    "season_name": "2023 Sutherland Cup Playoffs",
+    "shortname": "2023 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2023-02-27",
+    "end_date": "2023-05-12"
+   },
+   {
+    "season_id": "81",
+    "season_name": "2022-2023 Special Events",
+    "shortname": "2022-2023 S.E.",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2022-09-22",
+    "end_date": "2022-12-31"
+   },
+   {
+    "season_id": "78",
+    "season_name": "2022-2023 GOJHL Season",
+    "shortname": "2022-2023 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2022-09-07",
+    "end_date": "2023-02-26"
+   },
+   {
+    "season_id": "76",
+    "season_name": "2022 Sutherland Cup Playoffs",
+    "shortname": "2022 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2022-04-05",
+    "end_date": "2022-05-31"
+   },
+   {
+    "season_id": "75",
+    "season_name": "2021-2022 GOJHL Season",
+    "shortname": "2021-2022 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2021-09-24",
+    "end_date": "2022-04-03"
+   },
+   {
+    "season_id": "72",
+    "season_name": "2020-2021 GOJHL Season",
+    "shortname": "2020-2021 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2020-12-03",
+    "end_date": "2021-02-14"
+   },
+   {
+    "season_id": "2",
+    "season_name": "2020 Sutherland Cup Playoffs",
+    "shortname": "2020 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2020-02-25",
+    "end_date": "2020-03-13"
+   },
+   {
+    "season_id": "4",
+    "season_name": "2019-2020 Special Events",
+    "shortname": "2019-2020 S.E.",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2019-12-27",
+    "end_date": "2019-12-29"
+   },
+   {
+    "season_id": "3",
+    "season_name": "2019-2020 GOJHL Season",
+    "shortname": "2019-2020 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2019-09-06",
+    "end_date": "2020-02-23"
+   },
+   {
+    "season_id": "6",
+    "season_name": "2019 Sutherland Cup Playoffs",
+    "shortname": "2019 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2019-02-25",
+    "end_date": "2019-05-09"
+   },
+   {
+    "season_id": "7",
+    "season_name": "2018-2019 Special Events",
+    "shortname": "2018-2019 S.E.",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2018-12-26",
+    "end_date": "2018-12-28"
+   },
+   {
+    "season_id": "8",
+    "season_name": "2018-2019 GOJHL Season",
+    "shortname": "2018-2019 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2018-09-10",
+    "end_date": "2019-02-24"
+   },
+   {
+    "season_id": "10",
+    "season_name": "2018 Sutherland Cup Playoffs",
+    "shortname": "2018 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2018-02-27",
+    "end_date": "2018-05-01"
+   },
+   {
+    "season_id": "11",
+    "season_name": "2017-2018 Special Events",
+    "shortname": "2017-2018 S.E.",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2017-12-27",
+    "end_date": "2017-12-29"
+   }
+  ],
+  "Copyright": {
+   "required_copyright": "Official statistics provided by Greater Ontario Junior Hockey League",
+   "required_link": "http://leaguestat.com",
+   "powered_by": "Powered by HockeyTech.com",
+   "powered_by_url": "http://hockeytech.com"
+  }
+ }
+}

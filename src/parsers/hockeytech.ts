@@ -42,11 +42,17 @@ function siteKitRows(payload: any): any[] {
   return [];
 }
 
-/** End-year of a season name ("2025-26 Regular Season" -> 2026, "2026 Playoffs" -> 2026). Port of py `_derive_season_year`. */
+/**
+ * End-year of a season name. Port of py `_derive_season_year`: "2025-26 Regular Season",
+ * "2025/26 Regular Season" (KIJHL), "2025-2026 Regular Season" (AJHL, GOJHL, SPHL, ...) and
+ * "2026 - 2027 Preseason" all give the end year (2026, 2026, 2026, 2027); a name with one
+ * year ("2026 Playoffs") gives that year.
+ */
 function deriveSeasonYear(name: any): number | null {
   const s = String(name ?? "");
-  const m = /(\d{4})-(\d{2})/.exec(s);
+  const m = /(\d{4})\s*[-/]\s*(\d{4}|\d{2})(?!\d)/.exec(s);
   if (m) {
+    if (m[2].length === 4) return Number(m[2]);
     const start = Number(m[1]);
     let end = Math.floor(start / 100) * 100 + Number(m[2]);
     if (end < start) end += 100;

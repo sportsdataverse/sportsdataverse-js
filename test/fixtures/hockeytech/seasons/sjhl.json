@@ -1,0 +1,248 @@
+{
+ "SiteKit": {
+  "Parameters": {
+   "feed": "modulekit",
+   "key": "REDACTED",
+   "client_code": "sjhl",
+   "site_id": "0",
+   "lang": "en",
+   "view": "seasons",
+   "lang_id": 1,
+   "league_id": "3",
+   "season_id": "69"
+  },
+  "Seasons": [
+   {
+    "season_id": "69",
+    "season_name": "2026-27 Regular Season",
+    "shortname": "2026-27 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2026-09-18",
+    "end_date": "2027-03-15"
+   },
+   {
+    "season_id": "68",
+    "season_name": "2026 Playoffs",
+    "shortname": "2026 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2026-03-20",
+    "end_date": "2026-05-06"
+   },
+   {
+    "season_id": "67",
+    "season_name": "2025 Western All Star Challenge",
+    "shortname": "2025 WAS",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2025-11-04",
+    "end_date": "2025-11-05"
+   },
+   {
+    "season_id": "65",
+    "season_name": "2025-26 Regular Season",
+    "shortname": "2025-26 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2025-09-19",
+    "end_date": "2026-03-16"
+   },
+   {
+    "season_id": "66",
+    "season_name": "2025-26 Preseason Exhibition",
+    "shortname": "2025-26 Preseason",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2025-08-29",
+    "end_date": "2025-09-15"
+   },
+   {
+    "season_id": "64",
+    "season_name": "2025 Playoffs",
+    "shortname": "2025 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2025-03-21",
+    "end_date": "2025-05-04"
+   },
+   {
+    "season_id": "63",
+    "season_name": "2024 Western All-Star Showcase",
+    "shortname": "2024 WAS Showcase",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2024-11-05",
+    "end_date": "2024-11-06"
+   },
+   {
+    "season_id": "61",
+    "season_name": "2024-25 Regular Season",
+    "shortname": "2024-25 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2024-09-20",
+    "end_date": "2025-03-18"
+   },
+   {
+    "season_id": "62",
+    "season_name": "2024-25 Preseason Exhibition",
+    "shortname": "2024-25 Preseason",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2024-09-01",
+    "end_date": "2024-09-15"
+   },
+   {
+    "season_id": "60",
+    "season_name": "2024 Playoffs",
+    "shortname": "2024 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2024-03-22",
+    "end_date": "2024-05-05"
+   },
+   {
+    "season_id": "58",
+    "season_name": "2023-24 Regular Season",
+    "shortname": "2023-24 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2023-09-19",
+    "end_date": "2024-03-19"
+   },
+   {
+    "season_id": "59",
+    "season_name": "2023-24 Preseason Exhibition",
+    "shortname": "2023-24 Preseason",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2023-09-05",
+    "end_date": "2023-09-18"
+   },
+   {
+    "season_id": "57",
+    "season_name": "2023 Playoffs",
+    "shortname": "2023 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2023-03-17",
+    "end_date": "2023-04-26"
+   },
+   {
+    "season_id": "56",
+    "season_name": "2022-23 Regular Season",
+    "shortname": "2022-23 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2022-09-16",
+    "end_date": "2023-03-15"
+   },
+   {
+    "season_id": "55",
+    "season_name": "2022-23 Preseason Exhibition",
+    "shortname": "2022-23 Preseason",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2022-08-29",
+    "end_date": "2022-09-12"
+   },
+   {
+    "season_id": "54",
+    "season_name": "2022 Playoffs",
+    "shortname": "2022 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2022-03-18",
+    "end_date": "2022-05-08"
+   },
+   {
+    "season_id": "53",
+    "season_name": "2021-22 Regular Season",
+    "shortname": "2021-22 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2021-09-24",
+    "end_date": "2022-03-15"
+   },
+   {
+    "season_id": "52",
+    "season_name": "2021-22 Preseason Exhibition",
+    "shortname": "2021-22 Preseason",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2021-09-03",
+    "end_date": "2021-09-19"
+   },
+   {
+    "season_id": "51",
+    "season_name": "2020-21 Regular Season",
+    "shortname": "2020-21 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2020-11-06",
+    "end_date": "2021-04-04"
+   },
+   {
+    "season_id": "50",
+    "season_name": "2020-21 Preseason Exhibition",
+    "shortname": "2020-21 Preseason",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2020-10-17",
+    "end_date": "2020-11-02"
+   },
+   {
+    "season_id": "48",
+    "season_name": "2020 Playoffs",
+    "shortname": "2020 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2020-03-06",
+    "end_date": "2020-03-13"
+   },
+   {
+    "season_id": "49",
+    "season_name": "2020 SJHL-MJHL Showcase",
+    "shortname": "2020 SJ-MJ",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2020-01-08",
+    "end_date": "2020-01-23"
+   },
+   {
+    "season_id": "46",
+    "season_name": "2019-20 Regular Season",
+    "shortname": "2019-20 Season",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2019-09-13",
+    "end_date": "2020-03-04"
+   },
+   {
+    "season_id": "42",
+    "season_name": "2019 ANAVET Cup",
+    "shortname": "2019 ANAVET Cup",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2019-04-26",
+    "end_date": "2019-05-07"
+   },
+   {
+    "season_id": "41",
+    "season_name": "2019 Playoffs",
+    "shortname": "2019 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2019-03-08",
+    "end_date": "2019-04-23"
+   }
+  ],
+  "Copyright": {
+   "required_copyright": "Official statistics provided by Saskatchewan Junior Hockey League",
+   "required_link": "http://leaguestat.com",
+   "powered_by": "Powered by HockeyTech.com",
+   "powered_by_url": "http://hockeytech.com"
+  }
+ }
+}

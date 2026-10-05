@@ -1,0 +1,248 @@
+{
+ "SiteKit": {
+  "Parameters": {
+   "feed": "modulekit",
+   "key": "REDACTED",
+   "client_code": "ushl",
+   "site_id": "0",
+   "lang": "en",
+   "view": "seasons",
+   "lang_id": 1,
+   "league_id": "1",
+   "season_id": "91"
+  },
+  "Seasons": [
+   {
+    "season_id": "91",
+    "season_name": "2026-27",
+    "shortname": "26-27",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2026-09-15",
+    "end_date": "2027-04-03"
+   },
+   {
+    "season_id": "90",
+    "season_name": "2025-26 Playoffs",
+    "shortname": "2025-26 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2026-04-07",
+    "end_date": "2026-05-27"
+   },
+   {
+    "season_id": "88",
+    "season_name": "2025-26",
+    "shortname": "25-26",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2025-09-15",
+    "end_date": "2026-04-07"
+   },
+   {
+    "season_id": "89",
+    "season_name": "2025-26 Preseason",
+    "shortname": "2025-26 Preseason",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2025-09-04",
+    "end_date": "2025-09-13"
+   },
+   {
+    "season_id": "87",
+    "season_name": "2024-25 Playoffs",
+    "shortname": "2024-25 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2025-04-13",
+    "end_date": "2025-05-30"
+   },
+   {
+    "season_id": "85",
+    "season_name": "2024-25",
+    "shortname": "24-25",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2024-09-15",
+    "end_date": "2025-04-20"
+   },
+   {
+    "season_id": "86",
+    "season_name": "2024-25 Preseason",
+    "shortname": "2024-25 Preseason",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2024-09-04",
+    "end_date": "2024-09-15"
+   },
+   {
+    "season_id": "84",
+    "season_name": "2023-24 Playoffs",
+    "shortname": "2023-24 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2024-04-15",
+    "end_date": "2024-05-21"
+   },
+   {
+    "season_id": "82",
+    "season_name": "2023-24",
+    "shortname": "23-24",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2023-09-20",
+    "end_date": "2024-04-13"
+   },
+   {
+    "season_id": "83",
+    "season_name": "2023-24 Preseason",
+    "shortname": "2023-24 Preseason",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2023-09-08",
+    "end_date": "2023-09-16"
+   },
+   {
+    "season_id": "81",
+    "season_name": "2022-23 Playoffs",
+    "shortname": "2023 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2023-04-24",
+    "end_date": "2023-05-23"
+   },
+   {
+    "season_id": "79",
+    "season_name": "2022-23",
+    "shortname": "22-23",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2022-09-22",
+    "end_date": "2023-04-22"
+   },
+   {
+    "season_id": "80",
+    "season_name": "2022-23 Preseason",
+    "shortname": "22-23 PS",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2022-09-08",
+    "end_date": "2022-09-17"
+   },
+   {
+    "season_id": "78",
+    "season_name": "2021-22 Playoffs",
+    "shortname": "2022 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2022-04-24",
+    "end_date": "2022-05-25"
+   },
+   {
+    "season_id": "76",
+    "season_name": "2021-22",
+    "shortname": "21-22",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2021-09-22",
+    "end_date": "2022-04-24"
+   },
+   {
+    "season_id": "77",
+    "season_name": "2021-22 Preseason",
+    "shortname": "21-22 PS",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2021-09-08",
+    "end_date": "2021-09-20"
+   },
+   {
+    "season_id": "75",
+    "season_name": "2020-21 Playoffs",
+    "shortname": "2021 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2021-04-26",
+    "end_date": "2021-05-28"
+   },
+   {
+    "season_id": "73",
+    "season_name": "2020-21",
+    "shortname": "20-21",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2020-11-01",
+    "end_date": "2021-05-26"
+   },
+   {
+    "season_id": "74",
+    "season_name": "2020-21 Preseason",
+    "shortname": "20-21 PS",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2020-10-10",
+    "end_date": "2020-11-02"
+   },
+   {
+    "season_id": "71",
+    "season_name": "2019-20",
+    "shortname": "19-20",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2019-09-25",
+    "end_date": "2020-04-19"
+   },
+   {
+    "season_id": "72",
+    "season_name": "2019-20 Preseason",
+    "shortname": "19-20 PS",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2019-09-06",
+    "end_date": "2019-09-22"
+   },
+   {
+    "season_id": "70",
+    "season_name": "2018-19 Playoffs",
+    "shortname": "2019 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2019-04-15",
+    "end_date": "2019-05-22"
+   },
+   {
+    "season_id": "69",
+    "season_name": "2019 USHL/NHL Top Prospects Game",
+    "shortname": "2019 TPG",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2019-01-08",
+    "end_date": "2019-01-08"
+   },
+   {
+    "season_id": "67",
+    "season_name": "2018-19",
+    "shortname": "18-19",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2018-09-27",
+    "end_date": "2019-04-14"
+   },
+   {
+    "season_id": "68",
+    "season_name": "2018-19 Preseason",
+    "shortname": "18-19 PS",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2018-09-07",
+    "end_date": "2018-09-23"
+   }
+  ],
+  "Copyright": {
+   "required_copyright": "Official statistics provided by United States Hockey League",
+   "required_link": "http://leaguestat.com",
+   "powered_by": "Powered by HockeyTech.com",
+   "powered_by_url": "http://hockeytech.com"
+  }
+ }
+}

@@ -1,0 +1,248 @@
+{
+ "SiteKit": {
+  "Parameters": {
+   "feed": "modulekit",
+   "key": "REDACTED",
+   "client_code": "vijhl",
+   "site_id": "0",
+   "lang": "en",
+   "view": "seasons",
+   "lang_id": 1,
+   "league_id": "1",
+   "season_id": "46"
+  },
+  "Seasons": [
+   {
+    "season_id": "46",
+    "season_name": "2025-2026 VIJHL Playoffs",
+    "shortname": "2025-2026 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2026-03-01",
+    "end_date": "2026-04-06"
+   },
+   {
+    "season_id": "45",
+    "season_name": "2026 VIJHL All Star Game",
+    "shortname": "2026 All Stars",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2026-01-17",
+    "end_date": "2026-01-18"
+   },
+   {
+    "season_id": "44",
+    "season_name": "2026 VIJHL Top Prospects Game",
+    "shortname": "2026 Top Prospects",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2026-01-16",
+    "end_date": "2026-01-18"
+   },
+   {
+    "season_id": "42",
+    "season_name": "2025-2026 Regular Season",
+    "shortname": "25/26 Reg",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2025-09-04",
+    "end_date": "2026-02-28"
+   },
+   {
+    "season_id": "43",
+    "season_name": "2025-2026 Exhibition Season",
+    "shortname": "25/26 Exi",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2025-07-01",
+    "end_date": "2025-09-03"
+   },
+   {
+    "season_id": "41",
+    "season_name": "2024-2025 VIJHL Playoffs",
+    "shortname": "2024-2025 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2025-02-23",
+    "end_date": "2025-04-06"
+   },
+   {
+    "season_id": "40",
+    "season_name": "2025 VIJHL All Star Game",
+    "shortname": "2025 All Star Game",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2025-01-18",
+    "end_date": "2025-01-18"
+   },
+   {
+    "season_id": "39",
+    "season_name": "2025 VIJHL Top Prospects Game",
+    "shortname": "2025 Top Prospects",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2025-01-17",
+    "end_date": "2025-01-17"
+   },
+   {
+    "season_id": "37",
+    "season_name": "2024-2025 Regular Season",
+    "shortname": "24/25 Reg",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2024-09-05",
+    "end_date": "2025-02-22"
+   },
+   {
+    "season_id": "38",
+    "season_name": "2024-2025 Exhibition Season",
+    "shortname": "24/25 Exi",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2024-08-16",
+    "end_date": "2024-09-03"
+   },
+   {
+    "season_id": "36",
+    "season_name": "2023-2024 VIJHL Playoffs",
+    "shortname": "2023-2024 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2024-02-27",
+    "end_date": "2024-04-30"
+   },
+   {
+    "season_id": "35",
+    "season_name": "2024 VIJHL All Star Game",
+    "shortname": "2024 All Star Game",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2024-01-28",
+    "end_date": "2024-01-28"
+   },
+   {
+    "season_id": "34",
+    "season_name": "2024 VIJHL Top Prospects Game",
+    "shortname": "2024 Top Prospects",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2024-01-28",
+    "end_date": "2024-01-28"
+   },
+   {
+    "season_id": "32",
+    "season_name": "2023-2024 VIJHL Regular Season",
+    "shortname": "2023-2024 VIJHL Reg",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2023-09-06",
+    "end_date": "2024-02-24"
+   },
+   {
+    "season_id": "33",
+    "season_name": "2023-2024 VIJHL Exhibition",
+    "shortname": "2023-2024 Exhibition",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2023-08-16",
+    "end_date": "2023-09-05"
+   },
+   {
+    "season_id": "31",
+    "season_name": "2022-2023 VIJHL Playoffs",
+    "shortname": "2022-2023 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2023-02-27",
+    "end_date": "2023-04-30"
+   },
+   {
+    "season_id": "30",
+    "season_name": "2022 - 2023 VIJHL Regular Season",
+    "shortname": "2022 - 2023 Regular",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2022-09-07",
+    "end_date": "2023-02-26"
+   },
+   {
+    "season_id": "29",
+    "season_name": "2022-2023 VIJHL Exhibition",
+    "shortname": "2022-2023 Exhibition",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2022-08-15",
+    "end_date": "2022-09-04"
+   },
+   {
+    "season_id": "28",
+    "season_name": "2021 - 2022 Playoffs",
+    "shortname": "2021-2022 Playoffs",
+    "career": "1",
+    "playoff": "1",
+    "start_date": "2022-02-22",
+    "end_date": "2022-04-30"
+   },
+   {
+    "season_id": "26",
+    "season_name": "2021-22 Regular Season",
+    "shortname": "2021-22 Reg",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2021-09-07",
+    "end_date": "2022-02-21"
+   },
+   {
+    "season_id": "27",
+    "season_name": "2021-22 Exhibition Season",
+    "shortname": "2021-22 Exhbition",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2021-08-20",
+    "end_date": "2021-09-05"
+   },
+   {
+    "season_id": "25",
+    "season_name": "COVID Exhibition",
+    "shortname": "COVID Exhibition",
+    "career": "0",
+    "playoff": "0",
+    "start_date": "2020-11-24",
+    "end_date": "2020-12-07"
+   },
+   {
+    "season_id": "24",
+    "season_name": "2020-21 Regular Season",
+    "shortname": "2020-21 Reg",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2020-09-27",
+    "end_date": "2021-02-22"
+   },
+   {
+    "season_id": "5",
+    "season_name": "2019-20 Regular Season",
+    "shortname": "2019-20 Reg",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2019-09-05",
+    "end_date": "2020-02-22"
+   },
+   {
+    "season_id": "7",
+    "season_name": "2018-19 Regular Season",
+    "shortname": "2018-19 Reg",
+    "career": "1",
+    "playoff": "0",
+    "start_date": "2018-09-05",
+    "end_date": "2019-02-24"
+   }
+  ],
+  "Copyright": {
+   "required_copyright": "Official statistics provided by Vancouver Island Junior Hockey",
+   "required_link": "http://leaguestat.com",
+   "powered_by": "Powered by HockeyTech.com",
+   "powered_by_url": "http://hockeytech.com"
+  }
+ }
+}

@@ -1764,8 +1764,9 @@ function siteKitRows(payload) {
 }
 function deriveSeasonYear(name) {
   const s = String(name ?? "");
-  const m = /(\d{4})-(\d{2})/.exec(s);
+  const m = /(\d{4})\s*[-/]\s*(\d{4}|\d{2})(?!\d)/.exec(s);
   if (m) {
+    if (m[2].length === 4) return Number(m[2]);
     const start = Number(m[1]);
     let end = Math.floor(start / 100) * 100 + Number(m[2]);
     if (end < start) end += 100;
@@ -1870,7 +1871,7 @@ function parse_hockeytech_game_summary(payload) {
   return normalize(goals);
 }
 function parse_hockeytech_scorebar(payload) {
-  return normalize(siteKitRows(payload));
+  return parse_hockeytech_schedule(payload);
 }
 function parse_hockeytech_player_search(payload) {
   return normalize(siteKitRows(payload));

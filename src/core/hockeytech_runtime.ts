@@ -262,14 +262,33 @@ export async function hockeytechGetText(params?: Record<string, unknown>): Promi
 // `most_recent_<lg>_season`).
 // ---------------------------------------------------------------------------
 
-/** Hardcoded PWHL fallback (from fastRhockey) used when the live seasons feed is unreachable. */
+/**
+ * Hardcoded PWHL fallback (from fastRhockey; same table as py `_PWHL_SEASON_FALLBACK`) used
+ * when the live seasons feed is unreachable or lacks the season. Ids 1-10 match the committed
+ * seasons capture (test/fixtures/hockeytech/seasons/pwhl.json, a test locks it); 11 is the
+ * live feed's "2026-27 Regular Season" (2026-10-05). Extend it when a season starts.
+ */
 const PWHL_SEASON_FALLBACK = [
   { season_id: 1, season_yr: 2024, game_type_label: "regular" },
+  { season_id: 2, season_yr: 2024, game_type_label: "preseason" },
   { season_id: 3, season_yr: 2024, game_type_label: "playoffs" },
+  { season_id: 4, season_yr: 2025, game_type_label: "preseason" },
   { season_id: 5, season_yr: 2025, game_type_label: "regular" },
   { season_id: 6, season_yr: 2025, game_type_label: "playoffs" },
+  { season_id: 7, season_yr: 2026, game_type_label: "preseason" },
   { season_id: 8, season_yr: 2026, game_type_label: "regular" },
+  { season_id: 9, season_yr: 2026, game_type_label: "playoffs" },
+  { season_id: 10, season_yr: 2027, game_type_label: "preseason" },
+  { season_id: 11, season_yr: 2027, game_type_label: "regular" },
 ];
+
+/**
+ * Season names that are one-off events, not a league's regular season or playoffs (py
+ * `SPECIAL_EVENT_SEASON_RE`): the feed lists them as seasons too ("2026 All-Star Challenge",
+ * "2025 Top Prospects", "CCHL Pre-Draft Combine 2026", "2026 Exhibition Season", ...), and the
+ * seasons parser labels them "regular" because the name says neither playoff nor preseason.
+ */
+const SPECIAL_EVENT_SEASON_RE = /all[- ]?star|showcase|prospect|combine|special event|exhibition|play[- ]?in\b/i;
 
 /**
  * All of a league's seasons (tidy rows incl. `season_yr` + `game_type_label`) — py
@@ -322,7 +341,12 @@ export async function resolveSeasonId(
     if (league !== "pwhl" || !(err instanceof SdvError)) throw err;
   }
   const hit = rows.find(
-    (r) => Number(r.season_yr) === Number(season) && r.game_type_label === gameType
+    (r) =>
+      Number(r.season_yr) === Number(season) &&
+      r.game_type_label === gameType &&
+      // "2025-26 Preseason Exhibition" is a real preseason; one-off events never resolve
+      // as a regular season or playoffs (AHL 2026: 90, not the 91 All-Star Challenge).
+      (gameType === "preseason" || !SPECIAL_EVENT_SEASON_RE.test(String(r.season_name ?? "")))
   );
   if (hit) return Number(hit.season_id);
   if (league === "pwhl") {
