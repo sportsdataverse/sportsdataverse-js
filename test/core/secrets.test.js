@@ -10,7 +10,7 @@ import sdv, {
   AssetFetchError,
   kenpomClearSessionCache,
 } from '../../dist/index.js';
-import { _timer } from '../../dist/core/request.js';
+import { _timer, request } from '../../dist/core/request.js';
 import { _impitLoader } from '../../dist/core/transport.js';
 import { safeCause, redactSecrets } from '../../dist/core/errors.js';
 
@@ -172,5 +172,93 @@ describe('security: credentials never reach an error or its cause', function () 
     c.syscall.should.equal('connect');
     should(c.config).be.undefined();
     redactSecrets('no urls here').should.equal('no urls here');
+  });
+});
+
+// A USER transport's own error text (a custom fetch wrapper, a proxy client)
+// can echo the request it failed on. safeCause redacts credential-looking
+// substrings in it; ordinary text must survive untouched. Synthetic values only.
+describe('security: safeCause redacts credential-looking text, and only that', () => {
+  // [text, the secret fragment that must not survive]
+  const LEAKS = [
+    ['Authorization: Bearer abc123.def456', 'abc123.def456'],
+    ['{ "authorization": "Basic dXNlcjpwYXNz" }', 'dXNlcjpwYXNz'],
+    ["headers: { Authorization: 'Token sk_live_9f8e7d' }", 'sk_live_9f8e7d'],
+    ['authorization=SyntheticCredentialValue', 'SyntheticCredentialValue'],
+    ['Proxy-Authorization: Basic Zm9vOmJhcg==', 'Zm9vOmJhcg=='],
+    ['x-api-key: ak_live_123456789', 'ak_live_123456789'],
+    ['sent bearer ak_live_0123456789abcdef upstream', 'ak_live_0123456789abcdef'],
+    ['Bearer AbCdEfGhIjKlMnOpQrStUv', 'AbCdEfGhIjKlMnOpQrStUv'],
+    ['token was eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.c2lnbmF0dXJl here', 'eyJzdWIiOiIxIn0'],
+    ['unsigned eyJhbGciOiJub25lIn0.eyJzdWIiOiIxIn0. token', 'eyJhbGciOiJub25lIn0'],
+    ['POST body: email=a%40b.c&password=hunter2-Sekret!', 'hunter2-Sekret!'],
+    ['clientKey=public&clientSecret=CZsyntheticSecret1', 'CZsyntheticSecret1'],
+    ['access_token=ya29.synthetic&x=1', 'ya29.synthetic'],
+    ['x_refresh_token=1//0gSynthetic', '1//0gSynthetic'],
+    ['retrying with apiKey=0123456789abcdef', '0123456789abcdef'],
+    ['form: PASSWORD=Upper.Case.Pw', 'Upper.Case.Pw'],
+    ['{"password":"pa ss word","user":"x"}', 'pa ss word'],
+    ["{ 'api_key': 'k-1234567' }", 'k-1234567'],
+    ['Cookie: sid=s3cr3tSession; theme=dark', 's3cr3tSession'],
+    ['set-cookie: JWT=abc.def.ghi; path=/', 'abc.def.ghi'],
+  ];
+  const ORDINARY = [
+    'nfl_api: auth failed (apply)',
+    'Authorization failed for this route',
+    'the Authorization header is missing',
+    'Bearer token required',
+    'Bearer undefined',
+    'request timed out after 30000 ms',
+    'connect ECONNREFUSED 127.0.0.1:443',
+    'max_tokens=512 exceeded',
+    'monkey=banana',
+    'token budget exhausted; retry later',
+    'password must be at least 8 characters',
+    'missing required path parameter "key"',
+    'eyJ is the prefix of a JWT header',
+    'version 1.2.3-beta (build 42)',
+    'GET https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard -> HTTP 503',
+  ];
+
+  it('redacts every credential in the matrix (message, stack and name)', () => {
+    for (const [text, secret] of LEAKS) {
+      const out = redactSecrets(text);
+      out.should.not.containEql(secret, `leaked from: ${text}`);
+      out.should.containEql('<redacted>');
+      const err = new Error(text);
+      err.name = `ProxyError ${text}`;
+      const c = safeCause(err);
+      for (const field of [c.message, c.stack, c.name]) field.should.not.containEql(secret);
+    }
+  });
+
+  it('leaves ordinary text alone', () => {
+    for (const text of ORDINARY) redactSecrets(text).should.equal(text);
+  });
+
+  it('a user transport that throws a leaky message: the AssetFetchError and its cause carry none of it', async () => {
+    const realSleep = _timer.sleep;
+    _timer.sleep = async () => {};
+    try {
+      const message = LEAKS.map(([text]) => text).join(' | ');
+      configure({
+        transport: {
+          t_user: async () => {
+            throw Object.assign(new Error(`proxy said: ${message}`), { code: 'EPROXY' });
+          },
+        },
+      });
+      const err = await request('t_user', { method: 'GET', url: 'https://example.test/x' }).then(
+        () => null,
+        (e) => e
+      );
+      err.should.be.instanceOf(AssetFetchError);
+      err.cause.code.should.equal('EPROXY');
+      const dumps = [inspect(err, { depth: Infinity, showHidden: true }), String(err.stack), String(err.cause.stack)];
+      for (const d of dumps) for (const [, secret] of LEAKS) d.should.not.containEql(secret);
+    } finally {
+      _timer.sleep = realSleep;
+      resetConfig();
+    }
   });
 });

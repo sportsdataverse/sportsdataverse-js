@@ -18,20 +18,52 @@ export interface FetchErrorDetails {
   cause?: unknown;
 }
 
+/** Names whose `name=value` / `"name": "value"` value is a credential. */
+const SECRET_NAMES = String.raw`(?:password|passwd|pwd|(?:access_|refresh_|id_|auth_)?token|client_?secret|secret|api_?key|key|jwt)`;
+/** A credential's alphabet (base64, base64url, hex, API keys, JWTs). */
+const CREDENTIAL = String.raw`[A-Za-z0-9._~+/=-]+`;
+const AUTH_HEADER = new RegExp(
+  String.raw`\b((?:proxy-)?authorization|x-api-key)(["']?\s*[:=]\s*["']?)(?:(?:bearer|basic|token|digest|negotiate)\s+)?${CREDENTIAL}`,
+  "gi"
+);
+const COOKIE_HEADER = /\b((?:set-)?cookie["']?\s*[:=]\s*["']?)[^"'\r\n]+/gi;
+const BEARER = new RegExp(String.raw`\b(bearer\s+)(${CREDENTIAL})`, "gi");
+const JWT = /\beyJ[A-Za-z0-9_-]{2,}\.[A-Za-z0-9_-]{2,}\.[A-Za-z0-9_-]*/g;
+const JSON_SECRET = new RegExp(String.raw`(["']${SECRET_NAMES}["']\s*:\s*["'])[^"']*`, "gi");
+const PAIR_SECRET = new RegExp(String.raw`(?<![A-Za-z0-9])(${SECRET_NAMES}=)[^&\s"'<>]+`, "gi");
+
+/**
+ * A bare `Bearer x` is redacted only when `x` looks like a credential (8+
+ * characters with a digit or symbol, or 20+), so prose such as "Bearer token
+ * required" survives.
+ */
+const looksLikeCredential = (v: string): boolean => v.length >= 20 || (v.length >= 8 && /[^A-Za-z]/.test(v));
+
 /**
  * Redact what must never reach a log from free text: URL query strings (API keys
- * ride there, e.g. The Odds API's `apiKey`) and `user:password@` URL credentials
- * (proxy URLs).
+ * ride there, e.g. The Odds API's `apiKey`), `user:password@` URL credentials
+ * (proxy URLs), and credential-looking text a transport may echo in its error
+ * message — `Authorization` / `Proxy-Authorization` / `X-Api-Key` and `Cookie` /
+ * `Set-Cookie` values, `Bearer <token>`, JWT-shaped strings, and the value of
+ * `password=` / `token=` / `api_key=` / `client_secret=` / … pairs (also as
+ * `"password": "…"`). Ordinary text is left alone.
  */
 export function redactSecrets(text: string): string {
   return text
+    .replace(AUTH_HEADER, "$1$2<redacted>")
+    .replace(COOKIE_HEADER, "$1<redacted>")
+    .replace(BEARER, (m: string, prefix: string, v: string) => (looksLikeCredential(v) ? `${prefix}<redacted>` : m))
+    .replace(JWT, "<redacted>")
+    .replace(JSON_SECRET, "$1<redacted>")
+    .replace(PAIR_SECRET, "$1<redacted>")
     .replace(/(\b[a-z][a-z0-9+.-]*:\/\/)[^\s/@'"]+@/gi, "$1<redacted>@")
     .replace(/(\b[a-z][a-z0-9+.-]*:\/\/[^\s?#'"]*)\?[^\s#'"]*/gi, "$1?<redacted>");
 }
 
 /**
  * A copy of `err` that is safe to keep as an error's `cause`: its name,
- * message and stack (both through {@link redactSecrets}) and its
+ * message and stack (all through {@link redactSecrets}, so a user transport's
+ * own error text is covered too) and its
  * `code` / `errno` / `syscall` — nothing else. A raw HTTP-client error must
  * never be attached as-is: an axios error carries the request config, so its
  * `Authorization` header, cookies and a POSTed login form (password included)
@@ -42,7 +74,7 @@ export function safeCause(err: unknown): unknown {
   if (err === undefined || err === null || err instanceof SdvError) return err;
   const e = (typeof err === "object" ? err : {}) as Record<string, unknown>;
   const out = new Error(redactSecrets(typeof e.message === "string" ? e.message : String(err)));
-  out.name = typeof e.name === "string" ? e.name : "Error";
+  out.name = typeof e.name === "string" ? redactSecrets(e.name) : "Error";
   for (const k of ["code", "errno", "syscall"]) {
     const v = e[k];
     if (typeof v === "string" || typeof v === "number") (out as unknown as Record<string, unknown>)[k] = v;
