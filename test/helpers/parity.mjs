@@ -7,6 +7,19 @@ import { isIdColumn } from '../../dist/core/int64.js';
 /** A join-key column (`id`, `*_id`, `*_ids`, `*_pk`, MLBAM ids): the runtime's own rule, src/core/int64.ts. */
 export { isIdColumn };
 
+const PY_FLOAT = { nan: NaN, inf: Infinity, '-inf': -Infinity };
+
+/**
+ * `JSON.parse` reviver for the sdv-py oracles (tools/parity/py_oracle.py `clean`): JSON
+ * has no NaN / inf, so py writes `{"__float__": "nan" | "inf" | "-inf"}`; this turns the
+ * marker back into the JS number.
+ */
+export function pyOracleReviver(_key, v) {
+  if (v === null || typeof v !== 'object' || Array.isArray(v)) return v;
+  const keys = Object.keys(v);
+  return keys.length === 1 && keys[0] === '__float__' && Object.hasOwn(PY_FLOAT, v.__float__) ? PY_FLOAT[v.__float__] : v;
+}
+
 /**
  * sdv-py golden rows as sdv-js v4 returns them: an integer in an id column becomes
  * its decimal string (the INT64 id rule); everything else is untouched.
@@ -56,6 +69,8 @@ export function same(a, b, col) {
   }
   // py stringifies a missing value in a mixed object column to "nan"; JS keeps null.
   if (b === 'nan' && nil(a)) return true;
+  // py's NaN float (a decoded oracle marker) is a missing value too: JS null, or NaN.
+  if (Number.isNaN(b)) return nil(a) || Number.isNaN(a);
   if (nil(a) || nil(b)) return (a ?? null) === (b ?? null);
   // CSV cells arrive as text in JS; py parsed them numerically.
   if (typeof a === 'string' && typeof b === 'number' && a.trim() !== '' && !Number.isNaN(Number(a))) a = Number(a);

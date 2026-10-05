@@ -46,8 +46,10 @@ def read(path: Path):
 
 
 def clean(v):
+    # JSON has no NaN / inf: write the marker test/helpers/parity.mjs decodes
+    # (pyOracleReviver), the one the basketball / hockeytech oracles use.
     if isinstance(v, float) and (math.isnan(v) or math.isinf(v)):
-        return None
+        return {"__float__": str(v)}
     return v
 
 

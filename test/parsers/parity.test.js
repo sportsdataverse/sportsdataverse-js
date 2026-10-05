@@ -8,7 +8,7 @@ import { FLAT_WRAPPERS } from '../../dist/index.js';
 import { parserFor } from '../../dist/parsers/_registry.js';
 import { MULTI_TABLE_SECTIONS } from '../../dist/parsers/_frames.js';
 import { loadManifest, transformFamily } from '../../tools/codegen/vendor.mjs';
-import { isIdColumn, same, sameType } from '../helpers/parity.mjs';
+import { isIdColumn, pyOracleReviver, same, sameType } from '../helpers/parity.mjs';
 
 // Parser-parity harness: the gate that a vendored py returns schema describes
 // what the JS parser returns, on sdv-py's REAL committed captures
@@ -52,6 +52,8 @@ const here = dirname(fileURLToPath(import.meta.url));
 const FIX = join(here, '..', 'fixtures');
 const CODEGEN = join(here, '..', '..', 'tools', 'codegen');
 const text = (p) => (p.endsWith('.gz') ? gunzipSync(readFileSync(p)) : readFileSync(p)).toString('utf8');
+/** sdv-py's output on every capture of a family (tools/parity/py_oracle.py), NaN / inf markers decoded. */
+const readOracle = (family) => JSON.parse(text(join(FIX, 'py', 'oracle', `${family}.json.gz`)), pyOracleReviver);
 // CSV / HTML bodies reach the parser as text, JSON as the decoded value (callFlat).
 const body = (p) => (/\.(csv|html)(\.gz)?$/.test(p) ? text(p) : JSON.parse(text(p)));
 /**
@@ -216,7 +218,7 @@ function exerciseUncached(family, short) {
 }
 
 for (const [family, fixtures] of Object.entries(manifest)) {
-  const oracle = JSON.parse(text(join(FIX, 'py', 'oracle', `${family}.json.gz`)));
+  const oracle = readOracle(family);
   describe(`parser parity: ${family} (sdv-py real captures)`, () => {
     for (const [path, short] of Object.entries(fixtures)) {
       const ref = verifiable(family, short);
@@ -296,7 +298,7 @@ describe('parser parity: nba_stats / wnba_stats `section` = sdv-py result_set (r
     MULTI_TABLE_SECTIONS[parser].should.containEql({ default: null, sections: null, resultSet: true });
   });
   for (const family of ['nba_stats', 'wnba_stats']) {
-    const oracle = JSON.parse(text(join(FIX, 'py', 'oracle', `${family}.json.gz`)));
+    const oracle = readOracle(family);
     const captures = Object.keys(manifest[family]).map((path) => [path, body(join(FIX, path)), oracle[path].out]);
     it(`${family}: every result set of every capture, by name, equals py's frame`, () => {
       let multi = 0;
@@ -414,9 +416,36 @@ describe('parser parity: manifest + coverage', () => {
     frames.should.be.above(0);
   });
 
+  it("py_oracle.py's NaN / inf marker comes back as the JS number, and compares as py's float", () => {
+    // what the generator writes: clean() -> {"__float__": str(v)}; Python's str() of the three
+    readFileSync(join(here, '..', '..', 'tools', 'parity', 'py_oracle.py'), 'utf8').should.match(
+      /return \{"__float__": str\(v\)\}/
+    );
+    const oracle = JSON.parse(
+      JSON.stringify({
+        rows: [{ a: { __float__: 'inf' }, b: { __float__: '-inf' }, c: { __float__: 'nan' }, d: 1.5 }],
+        keep: [{ __float__: 'x' }, { __float__: 'inf', other: 1 }, { __float__: 'constructor' }],
+      }),
+      pyOracleReviver
+    );
+    const [r] = oracle.rows;
+    r.a.should.equal(Infinity);
+    r.b.should.equal(-Infinity);
+    Number.isNaN(r.c).should.be.true();
+    r.d.should.equal(1.5);
+    oracle.keep.should.eql([{ __float__: 'x' }, { __float__: 'inf', other: 1 }, { __float__: 'constructor' }]);
+    same(Infinity, r.a, 'x').should.be.true();
+    same(-Infinity, r.b, 'x').should.be.true();
+    same(Infinity, r.b, 'x').should.be.false();
+    same(1e308, r.a, 'x').should.be.false();
+    same(NaN, r.c, 'x').should.be.true(); // a JS NaN, or a missing value (null), is py's NaN
+    same(null, r.c, 'x').should.be.true();
+    same(0, r.c, 'x').should.be.false();
+  });
+
   it('every oracle entry has a capture in the manifest (regenerate with tools/parity/py_oracle.py)', () => {
     for (const [family, fixtures] of Object.entries(manifest)) {
-      const oracle = JSON.parse(text(join(FIX, 'py', 'oracle', `${family}.json.gz`)));
+      const oracle = readOracle(family);
       Object.keys(oracle).filter((k) => k !== '_provenance').sort().should.eql(Object.keys(fixtures).sort(), family);
     }
   });
