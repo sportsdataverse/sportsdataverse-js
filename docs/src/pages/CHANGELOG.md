@@ -11,6 +11,7 @@
 
 
 
+
 ### Security
 
 - Credentials no longer reach `err.cause`. A raw axios error carries its request config — the `Authorization` header, cookies, and a POSTed login form, password included — and it was attached as-is to `AssetFetchError` (network failures, auth failures), so `util.inspect(err)` or a logged error could expose them. Every `SdvError` now stores its `cause` through `safeCause` (name, message and stack with URL query strings and `user:password@` redacted, plus `code` / `errno` / `syscall` — nothing else). `axiosTransport` and the impersonating (impit) transport reject with the same sanitized errors. This applies to every family; the old behavior predates this PR.
@@ -86,6 +87,7 @@ the v4 names and register the same aliases.
 
 ### Fixed
 
+- NHL api-web / EDGE / records wrappers now honor sdv-py's `now_variant`: omitting the toggle arg (`season`, `date`, ...) requests the endpoint's `now_variant` route (`/now`, `/current`, or the collection path) instead of a malformed dated URL (`now_variant`/`now_toggle` carried through codegen, `resolveFlat`, and the playground resolver).
 - `sdv.cbs.*`: host is now `https://api.cbssports.com/napi` (every endpoint 404'd without the `/napi` base). `tools/codegen/from-openapi.mjs` no longer drops the spec base path when `--host` is a bare origin.
 - `getPicks` (cfb, mbb, mlb, nba, nfl, nhl): `pickcenter` was populated from `winprobability`; it now returns the real `pickcenter`.
 - `sdv.wnba.getTeamList()` no longer throws when called with no argument.
