@@ -241,6 +241,15 @@ export async function nflProBrowserLogin(
       await page.waitForTimeout(2500);
       let field = page.locator("input[type=password]:visible").first();
       if (await field.count()) {
+        // Departure from sdv-py, which resubmits: a password field still showing
+        // after one submission means it was rejected, and every retry is another
+        // failed attempt that can lock the (paid) account.
+        if (submitted) {
+          throw new NflProAuthError(
+            "nfl_pro: id.nfl.com did not accept the password (the password field is still showing after one " +
+              "submission); not resubmitting, so a wrong password cannot lock the account"
+          );
+        }
         await field.fill(password, { timeout: 8000 });
         await field.press("Enter", { timeout: 8000 });
         submitted = true;

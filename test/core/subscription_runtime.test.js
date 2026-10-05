@@ -562,6 +562,16 @@ describe('nfl_pro login (id.nfl.com via an injected Playwright)', () => {
     }
   });
 
+  it('a rejected password is submitted once, never retried (no account lockout)', async () => {
+    // id.nfl.com keeps the password field on screen after a wrong password
+    const pw = fakePlaywright({ steps: ['email', 'password', 'password', 'password'], blobs: () => [] });
+    const err = await nflProBrowserLogin('a@example.com', PW, { playwright: pw }).then(() => null, (e) => e);
+    err.should.be.instanceOf(NflProAuthError);
+    err.message.should.match(/did not accept the password/);
+    pw.log.fills.filter(([k]) => k === 'password').length.should.equal(1);
+    pw.log.closed.should.equal(1);
+  });
+
   it('a password screen first (remembered e-mail) skips the e-mail step', async () => {
     const pw = fakePlaywright({ steps: ['password'], blobs: () => [tokenFor('a@example.com')] });
     (await nflProBrowserLogin('a@example.com', PW, { playwright: pw })).should.equal(tokenFor('a@example.com'));
