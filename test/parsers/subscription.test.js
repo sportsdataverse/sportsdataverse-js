@@ -200,3 +200,67 @@ describe('kenpom parser — parity with sdv-py (pandas.read_html rules)', () => 
     parse_kenpom_page(null).should.eql({});
   });
 });
+
+describe('section: one table from the PFF + KenPom multi-table parsers (MULTI_TABLE_SECTIONS)', () => {
+  it('PFF /v2 teamTotals, player career and a /v1 report key match sdv-py\'s table= / career= / report=', () => {
+    sameAsPy(parse_pff_v2_table(json('pff_api', 'team_rushing_direction.json'), 'teamTotals'),
+      json('pff_api', 'team_rushing_direction.teamTotals.py.json'));
+    sameAsPy(parse_pff_player_detail(json('pff_api', 'player_offense_pass_blocking.json'), 'career'),
+      json('pff_api', 'player_offense_pass_blocking.career.py.json'));
+    sameAsPy(parse_pff_report(json('pff_api', 'facet_passing_summary.json'), 'passing_summary'),
+      json('pff_api', 'facet_passing_summary.passing_summary.py.json'));
+    // the defaults are unchanged: rows / weeks / py's own shape
+    parse_pff_v2_table(json('pff_api', 'team_rushing_direction.json'), 'rows')
+      .should.eql(parse_pff_v2_table(json('pff_api', 'team_rushing_direction.json')));
+    parse_pff_player_detail(json('pff_api', 'player_offense_pass_blocking.json'), 'weeks')
+      .should.eql(parse_pff_player_detail(json('pff_api', 'player_offense_pass_blocking.json')));
+  });
+
+  it('dict-default parsers keep py\'s dict without section and return one table with it', () => {
+    const facet = json('pff_api', 'facet_passing_summary.json');
+    const rows = facet[Object.keys(facet)[0]];
+    const multi = { teams: rows, games: rows.slice(0, 1) };
+    parse_pff_report(multi).should.have.keys('teams', 'games');
+    parse_pff_report(multi, 'games').should.eql(parse_pff_report(multi).games);
+    const matrix = { receiving_coverage_stats: { defenders: rows, receivers: [], versus: rows } };
+    parse_pff_report(matrix, 'versus').should.eql(parse_pff_report(matrix).versus);
+    const html = readFileSync(fixture('kenpom', 'ratings_2025.trim.html'), 'utf8');
+    parse_kenpom_page(html, 'ratings_table').should.eql(parse_kenpom_page(html).ratings_table);
+  });
+
+  it('an unknown section throws, listing the valid names', () => {
+    const html = readFileSync(fixture('kenpom', 'ratings_2025.trim.html'), 'utf8');
+    (() => parse_pff_v2_table(json('pff_api', 'team_stats.json'), 'nope'))
+      .should.throw(/parse_pff_v2_table: unknown section 'nope'\. Choose one of \["rows","teamTotals"\] \(default 'rows'\)/);
+    (() => parse_pff_player_detail(json('pff_api', 'player_offense_pass_blocking.json'), 'nope'))
+      .should.throw(/\["weeks","career"\]/);
+    (() => parse_pff_report(json('pff_api', 'facet_passing_summary.json'), 'nope'))
+      .should.throw(/Choose one of \["passing_summary"\] \(default: every table, as a dict\)/);
+    (() => parse_kenpom_page(html, 'nope')).should.throw(/Choose one of \["ratings_table"\]/);
+    // empty input stays [] (parser contract), whatever the section
+    parse_kenpom_page('<p>no tables</p>', 'ratings_table').should.eql([]);
+    parse_pff_report({}, 'passing_summary').should.eql([]);
+  });
+
+  it('MULTI_TABLE_SECTIONS registers the four parsers (callFlat passes `section` to them)', async () => {
+    const { MULTI_TABLE_SECTIONS } = await import('../../dist/parsers/_frames.js');
+    MULTI_TABLE_SECTIONS.parse_pff_v2_table.should.eql({ default: 'rows', sections: ['rows', 'teamTotals'] });
+    MULTI_TABLE_SECTIONS.parse_pff_player_detail.should.eql({ default: 'weeks', sections: ['weeks', 'career'] });
+    for (const p of ['parse_pff_report', 'parse_kenpom_page']) {
+      should(MULTI_TABLE_SECTIONS[p].default).be.null();
+      should(MULTI_TABLE_SECTIONS[p].sections).be.null();
+      MULTI_TABLE_SECTIONS[p].dynamic.should.be.a.String();
+    }
+  });
+
+  it('the parsers are exported from sportsdataverse/parsers; the browser barrel leaves KenPom out', async () => {
+    const pkg = await import('sportsdataverse/parsers');
+    for (const n of ['parse_pff_report', 'parse_pff_player_detail', 'parse_pff_v2_table', 'parse_pff_matrix', 'parse_nfl_pro_stats', 'parse_kenpom_page']) {
+      (typeof pkg[n]).should.equal('function', n);
+    }
+    (typeof pkg.parserFor('parse_kenpom_page')).should.equal('function'); // registered on import
+    const browser = await import('../../dist/parsers/browser.js');
+    should(browser.parse_kenpom_page).be.undefined();
+    (typeof browser.parse_pff_v2_table).should.equal('function');
+  });
+});

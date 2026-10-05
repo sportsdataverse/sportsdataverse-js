@@ -301,13 +301,14 @@ export const PARSERS: Record<string, FlatParserFn> = {
   // ---- PFF Developer API (api.pff.com) ----
   // /v1 envelopes (one table, or a dict for matrix / multi-key bodies), /v1
   // player-detail weeks, and the self-describing /v2 tables.
-  parse_pff_report: (raw) => parse_pff_report(raw),
-  parse_pff_player_detail: (raw) => parse_pff_player_detail(raw),
-  parse_pff_v2_table: (raw) => parse_pff_v2_table(raw),
+  // `section` (MULTI_TABLE_SECTIONS) maps to py's report / career / table.
+  parse_pff_report,
+  parse_pff_player_detail,
+  parse_pff_v2_table,
   // ---- NFL Pro (pro.nfl.com /api/secured/stats/*) ----
   parse_nfl_pro_stats,
-  // ---- KenPom (kenpom.com HTML): parse_kenpom_page is NODE-ONLY, added by
-  // src/core/kenpom_runtime.ts via registerParser (see NODE_ONLY_PARSERS).
+  // ---- KenPom (kenpom.com HTML): parse_kenpom_page is NODE-ONLY; importing
+  // src/parsers/kenpom.ts adds it via registerParser (see NODE_ONLY_PARSERS).
   // ---- Keyless providers / league APIs (vendored from sdv-py) ----
   parse_on3_rdb,
   parse_asa,
@@ -330,7 +331,9 @@ export const PARSERS: Record<string, FlatParserFn> = {
  * above, because they pull in a heavy dependency the browser parser bundle
  * (`npm run bundle:parsers`, the docs playground) must not carry — e.g. KenPom's
  * HTML parser needs cheerio (the bundle would grow ~4x), and the playground
- * never reaches that family. Importing the package root registers them.
+ * never reaches that family. Importing the package root (or the
+ * `sportsdataverse/parsers` entry, src/parsers/index.ts) registers them; the
+ * browser bundle is built from src/parsers/browser.ts, which leaves them out.
  */
 export const NODE_ONLY_PARSERS = new Set<string>();
 

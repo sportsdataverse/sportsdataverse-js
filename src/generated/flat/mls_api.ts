@@ -188,6 +188,7 @@ const MATCH_DEF: WrapperDef = {
  *
  * @param params.match_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: `match_information`, `environment`, `teams`, `players`, `staff`, `referees`, `last_matches`. Default: `match_information`; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mls.mlsApiMatch({ match_id: '…' });
  */
@@ -432,6 +433,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.standings_type - query parameter (`type`).
  * @param params.is_live - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: `tables`, `entries`. Default: `entries`; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mls.mlsApiStandings({ competition_id: '…', season_id: '…' });
  */

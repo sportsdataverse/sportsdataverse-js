@@ -15,6 +15,8 @@
 
 import { load } from "cheerio/slim";
 import { isPlainObject, underscore } from "./_normalize.js";
+import { MULTI_TABLE_SECTIONS, sectionError } from "./_frames.js";
+import { registerParser } from "./_registry.js";
 
 type Row = Record<string, any>;
 type Cell = string | number | null;
@@ -435,8 +437,23 @@ function depthChartTable(raw: string): Frame | null {
  * columns become numbers. On `team.php` a `depth_chart` table is added from the
  * page's embedded script. Returns `{}` when the page has no data table (a
  * logged-out page, or a season / team that found nothing).
+ *
+ * @param section One table by its id (e.g. `"ratings_table"`) instead of the
+ *   dict; an id the page does not have throws, listing the ids it does have
+ *   (a page with no tables gives `[]`).
  */
-export function parse_kenpom_page(raw: any): Record<string, Row[]> {
+export function parse_kenpom_page(raw: any, section?: string): Record<string, Row[]> | Row[] {
+  const tables = kenpomTables(raw);
+  if (section === undefined) return tables;
+  if (!Object.keys(tables).length) return [];
+  if (!Object.prototype.hasOwnProperty.call(tables, section)) {
+    throw sectionError("parse_kenpom_page", section, Object.keys(tables), MULTI_TABLE_SECTIONS.parse_kenpom_page.default);
+  }
+  return tables[section];
+}
+
+/** Every table on the page, keyed by id (`parse_kenpom_page` without `section`). */
+function kenpomTables(raw: any): Record<string, Row[]> {
   const html = typeof raw === "string" ? raw : "";
   const out: Record<string, Row[]> = {};
   for (const [key, frame] of Object.entries(htmlTables(html, 2))) {
@@ -446,3 +463,7 @@ export function parse_kenpom_page(raw: any): Record<string, Row[]> {
   if (depth) out.depth_chart = castNumerics(depth).rows;
   return out;
 }
+
+// Node-only (cheerio): registered on import instead of listed in the browser-safe
+// registry, so the playground's parser bundle never carries an HTML parser.
+registerParser("parse_kenpom_page", parse_kenpom_page);

@@ -15,6 +15,7 @@
 //   - keys are snake-cased with py's `underscore`; empty input returns `[]`.
 
 import { isPlainObject, underscore } from "./_normalize.js";
+import { MULTI_TABLE_SECTIONS, sectionError } from "./_frames.js";
 
 type Row = Record<string, any>;
 type Tables = Record<string, Row[]>;
@@ -180,6 +181,9 @@ export function parse_pff_matrix(raw: any, report?: string): Tables {
   return out;
 }
 
+/** Own-key check (never a prototype key such as `constructor`). */
+const has = (o: object, k: string): boolean => Object.prototype.hasOwnProperty.call(o, k);
+
 /**
  * Parse a `/v1` facet / singleton / matrix envelope.
  *
@@ -188,16 +192,29 @@ export function parse_pff_matrix(raw: any, report?: string): Tables {
  * - a multi-key singleton (`/v1/teams`) -> `{ <key>: rows }` over every list key;
  * - empty / malformed -> `[]`.
  *
- * @param report Envelope key to select; auto-detected when omitted.
+ * @param section One table: a key of the dict above, or a single report's own
+ *   key (sdv-py's `report`). Unknown -> an error listing the valid names.
  */
-export function parse_pff_report(raw: any, report?: string): Row[] | Tables {
+export function parse_pff_report(raw: any, section?: string): Row[] | Tables {
+  const all = reportTables(raw);
+  if (section === undefined) return all;
+  let tables: Tables = {};
+  if (!Array.isArray(all)) tables = all;
+  else if (isPlainObject(raw)) {
+    const keys = Object.keys(envelope(raw));
+    if (keys.length === 1 && Array.isArray(raw[keys[0]])) tables = { [keys[0]]: all };
+  }
+  if (!Object.keys(tables).length) return [];
+  if (!has(tables, section)) {
+    throw sectionError("parse_pff_report", section, Object.keys(tables), MULTI_TABLE_SECTIONS.parse_pff_report.default);
+  }
+  return tables[section];
+}
+
+/** `parse_pff_report`'s default result (no `section`). */
+function reportTables(raw: any): Row[] | Tables {
   if (!isPlainObject(raw) || !Object.keys(raw).length) return [];
   const env = envelope(raw);
-  if (report !== undefined) {
-    const val = env[report];
-    if (isMatrix(val)) return parse_pff_matrix({ [report]: val });
-    return frame(Array.isArray(val) ? val : []);
-  }
   const keys = Object.keys(env);
   if (keys.length === 1) {
     const val = env[keys[0]];
@@ -212,13 +229,25 @@ export function parse_pff_report(raw: any, report?: string): Row[] | Tables {
   return Object.keys(out).length ? out : [];
 }
 
+/** Validate a fixed-name `section` against the parser's MULTI_TABLE_SECTIONS entry. */
+function fixedSection(parser: string, section: string | undefined): string {
+  const spec = MULTI_TABLE_SECTIONS[parser];
+  const name = section ?? (spec.default as string);
+  if (!(spec.sections as string[]).includes(name)) throw sectionError(parser, name, spec.sections as string[], spec.default);
+  return name;
+}
+
 /**
  * Parse a `/v1/player/...` detail envelope (`{slug: {subject, week_totals,
- * weeks}}`) into one row per week (or per season with `career`). The nested
- * `game` object becomes `game_*` columns; `player_id` / `league_id` / `season`
- * are filled from `subject` when a row lacks them.
+ * weeks}}`) into one row per week, or with `section: "career"` (sdv-py's
+ * `career=True`) one row per season. The nested `game` object becomes
+ * `game_*` columns; `player_id` / `league_id` / `season` are filled from
+ * `subject` when a row lacks them.
+ *
+ * @param section `"weeks"` (default) or `"career"`.
  */
-export function parse_pff_player_detail(raw: any, career = false): Row[] {
+export function parse_pff_player_detail(raw: any, section?: string): Row[] {
+  const career = fixedSection("parse_pff_player_detail", section) === "career";
   if (!isPlainObject(raw) || !Object.keys(raw).length) return [];
   const env = envelope(raw);
   const keys = Object.keys(env);
@@ -264,9 +293,10 @@ function inferredKind(values: any[]): "int" | "float" | "bool" | "str" | "null" 
  * every row is added as `null`. Metadata beside the table (`team`, `sos`,
  * `updatedAt`, …) is not a column — read it from the raw body.
  *
- * @param table Which table: `"rows"` (default) or `"teamTotals"`.
+ * @param section Which table: `"rows"` (default) or `"teamTotals"` (sdv-py's `table`).
  */
-export function parse_pff_v2_table(raw: any, table = "rows"): Row[] {
+export function parse_pff_v2_table(raw: any, section?: string): Row[] {
+  const table = fixedSection("parse_pff_v2_table", section);
   const body = isPlainObject(raw) ? raw : {};
   const declared = ((body[V2_TABLES[table] ?? `${table}Columns`] as any[]) || []).filter(
     (c) => isPlainObject(c) && c.key

@@ -76,6 +76,7 @@ const MATCH_LINEUPS_DEF: WrapperDef = {
  * @param params.match_id - path parameter.
  * @param params.locale - query parameter — default `en-US`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: `teams`, `players`, `staff`. Default: `players`; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nwsl.nwslApiMatchLineups({ season_id: '…', match_id: '…' });
  */

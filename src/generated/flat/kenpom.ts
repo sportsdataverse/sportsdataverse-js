@@ -35,6 +35,7 @@ const ARCHIVE_RATINGS_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomArchiveRatings({});
  */
@@ -69,6 +70,7 @@ const ARENAS_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomArenas({});
  */
@@ -108,6 +110,7 @@ const BOX_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomBox({});
  */
@@ -142,6 +145,7 @@ const COACH_HISTORY_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomCoachHistory({});
  */
@@ -181,6 +185,7 @@ const CONFERENCE_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomConference({});
  */
@@ -215,6 +220,7 @@ const CONFERENCE_HISTORY_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomConferenceHistory({});
  */
@@ -249,6 +255,7 @@ const CONFERENCE_STATS_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomConferenceStats({});
  */
@@ -283,6 +290,7 @@ const EFFICIENCY_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomEfficiency({});
  */
@@ -317,6 +325,7 @@ const FAN_MATCH_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomFanMatch({});
  */
@@ -351,6 +360,7 @@ const FOUL_TROUBLE_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomFoulTrouble({});
  */
@@ -385,6 +395,7 @@ const FOUR_FACTORS_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomFourFactors({});
  */
@@ -424,6 +435,7 @@ const GAME_ATTRIBUTES_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomGameAttributes({});
  */
@@ -463,6 +475,7 @@ const GAME_PLAN_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomGamePlan({});
  */
@@ -497,6 +510,7 @@ const HEIGHT_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomHeight({});
  */
@@ -525,6 +539,7 @@ const HOME_COURT_ADVANTAGE_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomHomeCourtAdvantage({});
  */
@@ -559,6 +574,7 @@ const KPOY_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomKpoy({});
  */
@@ -593,6 +609,7 @@ const OFFICIALS_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomOfficials({});
  */
@@ -637,6 +654,7 @@ const OPPONENT_TRACKER_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomOpponentTracker({});
  */
@@ -671,6 +689,7 @@ const PLAYER_CAREER_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomPlayerCareer({});
  */
@@ -720,6 +739,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomPlayerStats({});
  */
@@ -754,6 +774,7 @@ const POINT_DISTRIBUTION_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomPointDistribution({});
  */
@@ -782,6 +803,7 @@ const PROGRAM_RATINGS_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomProgramRatings({});
  */
@@ -816,6 +838,7 @@ const RATINGS_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomRatings({});
  */
@@ -855,6 +878,7 @@ const REFEREE_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomReferee({});
  */
@@ -894,6 +918,7 @@ const TEAM_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomTeam({});
  */
@@ -928,6 +953,7 @@ const TEAM_HISTORY_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomTeamHistory({});
  */
@@ -967,6 +993,7 @@ const TEAM_PLAYERS_EXPANDED_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomTeamPlayersExpanded({});
  */
@@ -1006,6 +1033,7 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomTeamStats({});
  */
@@ -1034,6 +1062,7 @@ const TRENDS_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomTrends({});
  */
@@ -1073,6 +1102,7 @@ const WIN_PROBABILITY_DEF: WrapperDef = {
  * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomWinProbability({});
  */

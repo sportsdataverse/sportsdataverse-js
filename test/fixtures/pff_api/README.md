@@ -13,3 +13,10 @@ franchise 7, 2022, week 1; Joe Burrow, player 28022). None are our own captures.
 `{columns, rows}` (`polars.DataFrame.to_dicts()`; NaN -> null).
 `test/parsers/pff_api.test.js` asserts the JS port returns exactly these rows,
 in this column order.
+
+`<name>.<section>.py.json` — the same golden master for a non-default table,
+i.e. sdv-py's own argument for it: `team_rushing_direction.teamTotals`
+(`parse_pff_v2_table(raw, table="teamTotals")`), `player_offense_pass_blocking.career`
+(`parse_pff_player_detail(raw, career=True)`), and
+`facet_passing_summary.passing_summary` (`parse_pff_report(raw, report="passing_summary")`).
+The JS wrappers select these with `section`.

@@ -13,7 +13,7 @@ Beyond the ESPN surface, `sdv.nwsl` also wraps the league's own live APIs. Same 
 
 ## Native API — NWSL (StatsPerform SDP)
 
-Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `https://api-sdp.nwslsoccer.com/v1/nwsl/football`. Each method is exposed under BOTH `nwsl_api_<endpoint>` (snake_case, py/R parity) and `nwslApi<Endpoint>` (camelCase canonical) on `sdv.nwsl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default sub-frame shown in the Parser column, and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
+Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `https://api-sdp.nwslsoccer.com/v1/nwsl/football`. Each method is exposed under BOTH `nwsl_api_<endpoint>` (snake_case, py/R parity) and `nwslApi<Endpoint>` (camelCase canonical) on `sdv.nwsl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default shown in the Parser column (one sub-frame, or every table as a dict), and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|

@@ -203,6 +203,7 @@ const FLAT_API_META = {
       headers: "optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.",
       token: "NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.",
       paginate: "follow `offset` until the envelope's `total` is reached (default `true`).",
+      max_pages: "cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.",
     },
   },
   kenpom: {
@@ -663,8 +664,12 @@ function flatParserCell(wrapper) {
   if (!wrapper.parser) return "*(raw)*";
   const spec = FLAT_PARSER_SECTIONS[wrapper.parser];
   if (!spec) return `\`${wrapper.parser}\``;
+  // `default: null` = every table as a dict (sdv-py's shape); `sections: null` =
+  // the payload names its tables (`dynamic` says how).
+  const dflt = spec.default === null ? " (default: every table, as a dict)" : "";
+  if (!spec.sections) return `\`${wrapper.parser}\` — multi-table${dflt}: \`section\` = ${spec.dynamic}`;
   const names = spec.sections.map((s) => (s === spec.default ? `\`${s}\` (default)` : `\`${s}\``));
-  return `\`${wrapper.parser}\` — multi-table: \`section\` = ${names.join(", ")}`;
+  return `\`${wrapper.parser}\` — multi-table${dflt}: \`section\` = ${names.join(", ")}`;
 }
 
 // In-process cache so each `returns_schema` YAML is read + parsed at most once.
@@ -754,7 +759,7 @@ function renderNativeFamilySection(api, rows, nsPrefix) {
   if (rows.some((w) => FLAT_PARSER_SECTIONS[w.parser])) {
     body +=
       ` Endpoints marked **multi-table** parse to several frames in sdv-py; with ` +
-      `\`parsed: true\` they return the default sub-frame shown in the Parser column, ` +
+      `\`parsed: true\` they return the default shown in the Parser column (one sub-frame, or every table as a dict), ` +
       `and \`section: "<name>"\` selects any other (an unknown name throws, listing the valid ones).`;
   }
   if (authed) {
@@ -1771,6 +1776,12 @@ function renderWrittenFlatModule(api, defs) {
     }
     if (def.parser) {
       jsdoc += ` * @param params.parsed - when \`true\`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.\n`;
+      const sec = FLAT_PARSER_SECTIONS[def.parser];
+      if (sec) {
+        const names = sec.sections ? sec.sections.map((s) => `\`${s}\``).join(", ") : sec.dynamic;
+        const dflt = sec.default === null ? "every table, as a dict" : `\`${sec.default}\``;
+        jsdoc += ` * @param params.section - (with \`parsed: true\`) the table to return: ${names}. Default: ${dflt}; an unknown name throws, listing the valid ones.\n`;
+      }
       jsdoc += ` * @returns The raw response by default; a tidy array of row objects when \`{ parsed: true }\`.\n`;
     } else {
       jsdoc += ` * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.\n`;

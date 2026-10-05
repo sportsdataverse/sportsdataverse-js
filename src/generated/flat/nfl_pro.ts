@@ -73,6 +73,7 @@ const DEFENSE_NEAREST_SEASON_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProDefenseNearestSeason({});
@@ -152,6 +153,7 @@ const DEFENSE_NEAREST_WEEK_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProDefenseNearestWeek({});
@@ -225,6 +227,7 @@ const DEFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProDefenseOverviewSeason({});
@@ -304,6 +307,7 @@ const DEFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProDefenseOverviewWeek({});
@@ -382,6 +386,7 @@ const FANTASY_GAME_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProFantasyGame({});
@@ -461,6 +466,7 @@ const FANTASY_SEASON_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProFantasySeason({});
@@ -534,6 +540,7 @@ const PLAYERS_OFFENSE_PASSING_SEASON_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProPlayersOffensePassingSeason({});
@@ -613,6 +620,7 @@ const PLAYERS_OFFENSE_PASSING_WEEK_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProPlayersOffensePassingWeek({});
@@ -686,6 +694,7 @@ const PLAYERS_OFFENSE_RECEIVING_SEASON_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProPlayersOffenseReceivingSeason({});
@@ -765,6 +774,7 @@ const PLAYERS_OFFENSE_RECEIVING_WEEK_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProPlayersOffenseReceivingWeek({});
@@ -838,6 +848,7 @@ const PLAYERS_OFFENSE_RUSHING_SEASON_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProPlayersOffenseRushingSeason({});
@@ -917,6 +928,7 @@ const PLAYERS_OFFENSE_RUSHING_WEEK_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProPlayersOffenseRushingWeek({});
@@ -984,6 +996,7 @@ const TEAM_DEFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProTeamDefenseOverviewSeason({});
@@ -1051,6 +1064,7 @@ const TEAM_DEFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProTeamDefenseOverviewWeek({});
@@ -1118,6 +1132,7 @@ const TEAM_OFFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProTeamOffenseOverviewSeason({});
@@ -1185,6 +1200,7 @@ const TEAM_OFFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.
  * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
  * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProTeamOffenseOverviewWeek({});

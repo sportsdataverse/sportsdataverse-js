@@ -2009,6 +2009,117 @@ function parse_torvik_game_schedule(input) {
   return parsePositionalJson(input, GAME_SCHEDULE_COLS);
 }
 
+// src/parsers/_frames.ts
+function pyUnderscore(word) {
+  return word.replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2").replace(/([a-z\d])([A-Z])/g, "$1_$2").replace(/-/g, "_").toLowerCase();
+}
+function pyJson(v) {
+  return JSON.stringify(v).replace(
+    /("(?:[^"\\]|\\.)*")|([,:])/g,
+    (_m, str, sep) => str !== void 0 ? str : `${sep} `
+  ).replace(/[\u007f-￿]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, "0")}`);
+}
+function isPlainObject16(v) {
+  return v !== null && typeof v === "object" && !Array.isArray(v);
+}
+function isIdName(name) {
+  return name === "id" || name.endsWith("_id") || name.endsWith("_ids");
+}
+function flatten(obj, prefix, out) {
+  const top = prefix === "";
+  const nested = [];
+  for (const [k, v] of Object.entries(obj)) {
+    const key = top ? k : `${prefix}_${k}`;
+    if (!isPlainObject16(v)) out.push([key, v]);
+    else if (top) nested.push([key, v]);
+    else flatten(v, key, out);
+  }
+  for (const [key, v] of nested) flatten(v, key, out);
+}
+function idString(v) {
+  if (v === null || v === void 0) return null;
+  if (typeof v === "string") return v;
+  if (Array.isArray(v)) return v.map((x) => String(x)).join(",");
+  if (isPlainObject16(v)) return pyJson(v);
+  return String(v);
+}
+function rowsToFrame(rows, opts = {}) {
+  const kept = (rows ?? []).filter((r) => !(opts.dropNull && (r === null || r === void 0)));
+  if (kept.length === 0) return [];
+  if (!kept.some(isPlainObject16)) return kept.map((r) => ({ value: String(r) }));
+  const records2 = kept.map((r) => {
+    const pairs = [];
+    flatten(isPlainObject16(r) ? r : { value: r }, "", pairs);
+    return pairs;
+  });
+  const finalName = /* @__PURE__ */ new Map();
+  const used = /* @__PURE__ */ new Map();
+  for (const pairs of records2) {
+    for (const [path] of pairs) {
+      if (finalName.has(path)) continue;
+      const base = pyUnderscore(path);
+      const n = (used.get(base) ?? 0) + 1;
+      used.set(base, n);
+      finalName.set(path, n === 1 ? base : `${base}_${n}`);
+    }
+  }
+  const columns = [...finalName.values()];
+  return records2.map((pairs) => {
+    const row = {};
+    for (const c of columns) row[c] = null;
+    for (const [path, v] of pairs) {
+      const name = finalName.get(path);
+      let cell = v === void 0 ? null : v;
+      if (opts.ids && isIdName(name)) cell = idString(cell);
+      else if (Array.isArray(cell) || isPlainObject16(cell)) cell = pyJson(cell);
+      row[name] = cell;
+    }
+    return row;
+  });
+}
+function asRows(raw) {
+  if (Array.isArray(raw)) return raw;
+  if (isPlainObject16(raw) && Object.keys(raw).length > 0) return [raw];
+  return [];
+}
+var MULTI_TABLE_SECTIONS = {
+  parse_asa_goals_added: { default: "summary", sections: ["summary", "actions"] },
+  parse_mls_standings: { default: "entries", sections: ["tables", "entries"] },
+  parse_mls_match: {
+    default: "match_information",
+    sections: ["match_information", "environment", "teams", "players", "staff", "referees", "last_matches"]
+  },
+  parse_nwsl_lineups: { default: "players", sections: ["teams", "players", "staff"] },
+  // PFF (py's `report` / `career` / `table` arguments) and KenPom (one table per
+  // HTML id). The two dict-default parsers keep sdv-py's return shape.
+  parse_pff_report: {
+    default: null,
+    sections: null,
+    dynamic: "a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`)"
+  },
+  parse_pff_player_detail: { default: "weeks", sections: ["weeks", "career"] },
+  parse_pff_v2_table: { default: "rows", sections: ["rows", "teamTotals"] },
+  parse_kenpom_page: {
+    default: null,
+    sections: null,
+    dynamic: "a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`)"
+  }
+};
+function sectionError(parser, name, valid, dflt) {
+  return new Error(
+    `${parser}: unknown section '${name}'. Choose one of ${JSON.stringify(valid)}` + (dflt === null ? " (default: every table, as a dict)." : ` (default '${dflt}').`)
+  );
+}
+function pickSection(parser, tables, section) {
+  const spec = MULTI_TABLE_SECTIONS[parser];
+  const name = section ?? spec.default ?? "";
+  const valid = spec.sections ?? Object.keys(tables);
+  if (!Object.prototype.hasOwnProperty.call(tables, name) || !valid.includes(name)) {
+    throw sectionError(parser, name, valid, spec.default);
+  }
+  return tables[name];
+}
+
 // src/parsers/pff_api.ts
 var MATRIX_KEYS = ["defenders", "receivers", "versus"];
 var META_KEYS = /* @__PURE__ */ new Set(["restricted"]);
@@ -2131,14 +2242,25 @@ function parse_pff_matrix(raw, report) {
   for (const name of MATRIX_KEYS) out[name] = frame(truthy(obj[name]) ? obj[name] : []);
   return out;
 }
-function parse_pff_report(raw, report) {
+var has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+function parse_pff_report(raw, section) {
+  const all = reportTables(raw);
+  if (section === void 0) return all;
+  let tables = {};
+  if (!Array.isArray(all)) tables = all;
+  else if (isPlainObject(raw)) {
+    const keys = Object.keys(envelope(raw));
+    if (keys.length === 1 && Array.isArray(raw[keys[0]])) tables = { [keys[0]]: all };
+  }
+  if (!Object.keys(tables).length) return [];
+  if (!has(tables, section)) {
+    throw sectionError("parse_pff_report", section, Object.keys(tables), MULTI_TABLE_SECTIONS.parse_pff_report.default);
+  }
+  return tables[section];
+}
+function reportTables(raw) {
   if (!isPlainObject(raw) || !Object.keys(raw).length) return [];
   const env = envelope(raw);
-  if (report !== void 0) {
-    const val = env[report];
-    if (isMatrix(val)) return parse_pff_matrix({ [report]: val });
-    return frame(Array.isArray(val) ? val : []);
-  }
   const keys = Object.keys(env);
   if (keys.length === 1) {
     const val = env[keys[0]];
@@ -2150,7 +2272,14 @@ function parse_pff_report(raw, report) {
   for (const [k, v] of Object.entries(env)) if (Array.isArray(v)) out[k] = frame(v);
   return Object.keys(out).length ? out : [];
 }
-function parse_pff_player_detail(raw, career = false) {
+function fixedSection(parser, section) {
+  const spec = MULTI_TABLE_SECTIONS[parser];
+  const name = section ?? spec.default;
+  if (!spec.sections.includes(name)) throw sectionError(parser, name, spec.sections, spec.default);
+  return name;
+}
+function parse_pff_player_detail(raw, section) {
+  const career = fixedSection("parse_pff_player_detail", section) === "career";
   if (!isPlainObject(raw) || !Object.keys(raw).length) return [];
   const env = envelope(raw);
   const keys = Object.keys(env);
@@ -2185,7 +2314,8 @@ function inferredKind(values) {
   if ([...kinds].every((k) => k === "int" || k === "float")) return "float";
   return "mixed";
 }
-function parse_pff_v2_table(raw, table = "rows") {
+function parse_pff_v2_table(raw, section) {
+  const table = fixedSection("parse_pff_v2_table", section);
   const body = isPlainObject(raw) ? raw : {};
   const declared = (body[V2_TABLES[table] ?? `${table}Columns`] || []).filter(
     (c) => isPlainObject(c) && c.key
@@ -2249,10 +2379,10 @@ function records(payload) {
   for (const v of Object.values(body)) if (isRecordList(v) && (!best || v.length > best.length)) best = v;
   return best ? dicts(best) : [];
 }
-function flatten(obj, prefix, out) {
+function flatten2(obj, prefix, out) {
   for (const [k, v] of Object.entries(obj)) {
     const key = prefix ? `${prefix}_${k}` : k;
-    if (isPlainObject(v)) flatten(v, key, out);
+    if (isPlainObject(v)) flatten2(v, key, out);
     else out[key] = v;
   }
 }
@@ -2277,7 +2407,7 @@ function parse_nfl_pro_stats(payload) {
   if (!recs.length) return [];
   const flat = recs.map((r) => {
     const o = {};
-    flatten(r, "", o);
+    flatten2(r, "", o);
     return o;
   });
   const raw = [];
@@ -2302,99 +2432,6 @@ function parse_nfl_pro_stats(payload) {
     }
     return o;
   });
-}
-
-// src/parsers/_frames.ts
-function pyUnderscore(word) {
-  return word.replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2").replace(/([a-z\d])([A-Z])/g, "$1_$2").replace(/-/g, "_").toLowerCase();
-}
-function pyJson(v) {
-  return JSON.stringify(v).replace(
-    /("(?:[^"\\]|\\.)*")|([,:])/g,
-    (_m, str, sep) => str !== void 0 ? str : `${sep} `
-  ).replace(/[\u007f-￿]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, "0")}`);
-}
-function isPlainObject16(v) {
-  return v !== null && typeof v === "object" && !Array.isArray(v);
-}
-function isIdName(name) {
-  return name === "id" || name.endsWith("_id") || name.endsWith("_ids");
-}
-function flatten2(obj, prefix, out) {
-  const top = prefix === "";
-  const nested = [];
-  for (const [k, v] of Object.entries(obj)) {
-    const key = top ? k : `${prefix}_${k}`;
-    if (!isPlainObject16(v)) out.push([key, v]);
-    else if (top) nested.push([key, v]);
-    else flatten2(v, key, out);
-  }
-  for (const [key, v] of nested) flatten2(v, key, out);
-}
-function idString(v) {
-  if (v === null || v === void 0) return null;
-  if (typeof v === "string") return v;
-  if (Array.isArray(v)) return v.map((x) => String(x)).join(",");
-  if (isPlainObject16(v)) return pyJson(v);
-  return String(v);
-}
-function rowsToFrame(rows, opts = {}) {
-  const kept = (rows ?? []).filter((r) => !(opts.dropNull && (r === null || r === void 0)));
-  if (kept.length === 0) return [];
-  if (!kept.some(isPlainObject16)) return kept.map((r) => ({ value: String(r) }));
-  const records2 = kept.map((r) => {
-    const pairs = [];
-    flatten2(isPlainObject16(r) ? r : { value: r }, "", pairs);
-    return pairs;
-  });
-  const finalName = /* @__PURE__ */ new Map();
-  const used = /* @__PURE__ */ new Map();
-  for (const pairs of records2) {
-    for (const [path] of pairs) {
-      if (finalName.has(path)) continue;
-      const base = pyUnderscore(path);
-      const n = (used.get(base) ?? 0) + 1;
-      used.set(base, n);
-      finalName.set(path, n === 1 ? base : `${base}_${n}`);
-    }
-  }
-  const columns = [...finalName.values()];
-  return records2.map((pairs) => {
-    const row = {};
-    for (const c of columns) row[c] = null;
-    for (const [path, v] of pairs) {
-      const name = finalName.get(path);
-      let cell = v === void 0 ? null : v;
-      if (opts.ids && isIdName(name)) cell = idString(cell);
-      else if (Array.isArray(cell) || isPlainObject16(cell)) cell = pyJson(cell);
-      row[name] = cell;
-    }
-    return row;
-  });
-}
-function asRows(raw) {
-  if (Array.isArray(raw)) return raw;
-  if (isPlainObject16(raw) && Object.keys(raw).length > 0) return [raw];
-  return [];
-}
-var MULTI_TABLE_SECTIONS = {
-  parse_asa_goals_added: { default: "summary", sections: ["summary", "actions"] },
-  parse_mls_standings: { default: "entries", sections: ["tables", "entries"] },
-  parse_mls_match: {
-    default: "match_information",
-    sections: ["match_information", "environment", "teams", "players", "staff", "referees", "last_matches"]
-  },
-  parse_nwsl_lineups: { default: "players", sections: ["teams", "players", "staff"] }
-};
-function pickSection(parser, tables, section) {
-  const spec = MULTI_TABLE_SECTIONS[parser];
-  const name = section ?? spec.default;
-  if (!Object.prototype.hasOwnProperty.call(tables, name) || !spec.sections.includes(name)) {
-    throw new Error(
-      `${parser}: unknown section '${name}'. Choose one of ${JSON.stringify(spec.sections)} (default '${spec.default}').`
-    );
-  }
-  return tables[name];
 }
 
 // src/parsers/on3.ts
@@ -2952,13 +2989,14 @@ var PARSERS = {
   // ---- PFF Developer API (api.pff.com) ----
   // /v1 envelopes (one table, or a dict for matrix / multi-key bodies), /v1
   // player-detail weeks, and the self-describing /v2 tables.
-  parse_pff_report: (raw) => parse_pff_report(raw),
-  parse_pff_player_detail: (raw) => parse_pff_player_detail(raw),
-  parse_pff_v2_table: (raw) => parse_pff_v2_table(raw),
+  // `section` (MULTI_TABLE_SECTIONS) maps to py's report / career / table.
+  parse_pff_report,
+  parse_pff_player_detail,
+  parse_pff_v2_table,
   // ---- NFL Pro (pro.nfl.com /api/secured/stats/*) ----
   parse_nfl_pro_stats,
-  // ---- KenPom (kenpom.com HTML): parse_kenpom_page is NODE-ONLY, added by
-  // src/core/kenpom_runtime.ts via registerParser (see NODE_ONLY_PARSERS).
+  // ---- KenPom (kenpom.com HTML): parse_kenpom_page is NODE-ONLY; importing
+  // src/parsers/kenpom.ts adds it via registerParser (see NODE_ONLY_PARSERS).
   // ---- Keyless providers / league APIs (vendored from sdv-py) ----
   parse_on3_rdb,
   parse_asa,
@@ -4048,7 +4086,7 @@ function parserForEndpoint(short) {
   return ESPN_ENDPOINT_PARSERS[short];
 }
 
-// src/parsers/index.ts
+// src/parsers/browser.ts
 function parseEndpoint(kind, key, raw, section) {
   if (kind === "espn") {
     const fn2 = parserForEndpoint(key);
@@ -4069,7 +4107,12 @@ export {
   parse_asa_goals_added_tables,
   parse_mls_match_tables,
   parse_mls_standings_tables,
+  parse_nfl_pro_stats,
   parse_nwsl_lineups_tables,
+  parse_pff_matrix,
+  parse_pff_player_detail,
+  parse_pff_report,
+  parse_pff_v2_table,
   parse_summary,
   parserFor,
   parserForEndpoint,
