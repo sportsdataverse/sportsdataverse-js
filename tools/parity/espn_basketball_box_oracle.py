@@ -33,33 +33,26 @@ JS = Path(__file__).resolve().parents[2]
 DIR = JS / "test" / "fixtures" / "espn" / "basketball_box"
 # Real captures: every *.json.gz in DIR, plus the existing NBA summary capture.
 EXTRA = [JS / "test" / "fixtures" / "espn" / "summary_nba.json"]
+OUT = DIR / "oracle.json.gz"
 LEAGUES = ("nba", "wnba", "mbb", "wbb")
 
 
 def git(*args: str) -> str:
-    return subprocess.run(
-        ["git", *args], capture_output=True, text=True, check=True
-    ).stdout.strip()
+    return subprocess.run(["git", *args], capture_output=True, text=True, check=True).stdout.strip()
 
 
 def pinned_checkout() -> str:
-    vendor = yaml.safe_load(
-        (JS / "tools/codegen/vendor.yaml").read_text(encoding="utf-8")
-    )
+    vendor = yaml.safe_load((JS / "tools/codegen/vendor.yaml").read_text(encoding="utf-8"))
     ref = vendor["source"]["ref"]
     head = git("rev-parse", "HEAD")
     if head != ref:
         raise SystemExit(f"sdv-py checkout is at {head}, the vendor pin is {ref}")
     if git("status", "--porcelain"):
-        raise SystemExit(
-            "the sdv-py checkout has local changes; the oracle must come from the pin as committed"
-        )
+        raise SystemExit("the sdv-py checkout has local changes; the oracle must come from the pin as committed")
     root = Path(git("rev-parse", "--show-toplevel")).resolve()
     pkg = Path(importlib.import_module("sportsdataverse").__file__).resolve()
     if root not in pkg.parents:
-        raise SystemExit(
-            f"sportsdataverse is imported from {pkg}, outside the pinned checkout {root}"
-        )
+        raise SystemExit(f"sportsdataverse is imported from {pkg}, outside the pinned checkout {root}")
     return ref
 
 
@@ -81,9 +74,7 @@ def helpers():
     for lg in LEAGUES:
         for kind in ("player_box", "team_box"):
             name = f"helper_{lg}_{kind}"
-            out[name] = getattr(
-                importlib.import_module(f"sportsdataverse.{lg}.{lg}_{kind}"), name
-            )
+            out[name] = getattr(importlib.import_module(f"sportsdataverse.{lg}.{lg}_{kind}"), name)
     return out
 
 
@@ -180,9 +171,7 @@ def derived(captures):
             "no_stat_keys",
             "summary_wbb.json.gz",
             "players[0].statistics[0].keys emptied",
-            set_(
-                lambda p: p["boxscore"]["players"][0]["statistics"][0].update(keys=[])
-            ),
+            set_(lambda p: p["boxscore"]["players"][0]["statistics"][0].update(keys=[])),
         ),
         (
             "didnotplay_absent",
@@ -249,24 +238,33 @@ def derived(captures):
             ),
         ),
         (
+            "int32_whitespace",
+            "summary_wnba.json.gz",
+            "first played athlete's points ' 5' and rebounds '5 ' (Int32 cast -> null)",
+            set_(
+                lambda p: (
+                    first_played(p, 0)["stats"].__setitem__(1, " 5"),
+                    first_played(p, 0)["stats"].__setitem__(5, "5 "),
+                )
+            ),
+        ),
+        (
             "date_with_seconds",
             "summary_wbb.json.gz",
             "competition date '2024-03-10T07:30:00Z' (second strptime format; just after the spring-forward)",
-            set_(
-                lambda p: p["header"]["competitions"][0].update(
-                    date="2024-03-10T07:30:00Z"
-                )
-            ),
+            set_(lambda p: p["header"]["competitions"][0].update(date="2024-03-10T07:30:00Z")),
         ),
         (
             "date_standard_time",
             "summary_mbb.json.gz",
             "competition date '2024-01-02T04:59Z' (EST, local date one day earlier)",
-            set_(
-                lambda p: p["header"]["competitions"][0].update(
-                    date="2024-01-02T04:59Z"
-                )
-            ),
+            set_(lambda p: p["header"]["competitions"][0].update(date="2024-01-02T04:59Z")),
+        ),
+        (
+            "date_single_digit_fields",
+            "summary_mbb.json.gz",
+            "competition date '2024-4-9T1:5Z' (strptime takes one-digit month / day / hour / minute)",
+            set_(lambda p: p["header"]["competitions"][0].update(date="2024-4-9T1:5Z")),
         ),
         (
             "date_unparseable",
@@ -297,6 +295,12 @@ def derived(captures):
             set_(lambda p: p["boxscore"]["teams"][1]["statistics"].clear()),
         ),
         (
+            "team_first_no_stats",
+            "summary_mbb.json.gz",
+            "boxscore.teams[0].statistics emptied (teams[1] keeps its statistics)",
+            set_(lambda p: p["boxscore"]["teams"][0]["statistics"].clear()),
+        ),
+        (
             "team_split_absent_both",
             "summary_wbb.json.gz",
             "freeThrowsMade-freeThrowsAttempted removed from both teams",
@@ -306,26 +310,20 @@ def derived(captures):
             "team_split_absent_one",
             "summary_wbb.json.gz",
             "freeThrowsMade-freeThrowsAttempted removed from teams[1] only",
-            set_(
-                lambda p: drop_stat(p, "freeThrowsMade-freeThrowsAttempted", teams=(1,))
-            ),
+            set_(lambda p: drop_stat(p, "freeThrowsMade-freeThrowsAttempted", teams=(1,))),
         ),
         (
             "team_stat_second_only",
             "summary_wbb.json.gz",
             "a 'zoneDefense' stat added to teams[1] only (row-2-only column appended last)",
             set_(
-                lambda p: p["boxscore"]["teams"][1]["statistics"].append(
-                    {"name": "zoneDefense", "displayValue": "7"}
-                )
+                lambda p: p["boxscore"]["teams"][1]["statistics"].append({"name": "zoneDefense", "displayValue": "7"})
             ),
         ),
     ]
     out = {}
     for name, src, mutation, fn in cases:
-        payload = strip_links(
-            {k: copy.deepcopy(captures[src][k]) for k in ("header", "boxscore")}
-        )
+        payload = strip_links({k: copy.deepcopy(captures[src][k]) for k in ("header", "boxscore")})
         out[name] = {"from": src, "mutation": mutation, "input": fn(payload)}
     return out
 
@@ -333,7 +331,8 @@ def derived(captures):
 def main() -> None:
     ref = pinned_checkout()
     fns = helpers()
-    paths = sorted(DIR.glob("*.json.gz")) + EXTRA
+    # never read our own output back in as a capture
+    paths = sorted(p for p in DIR.glob("*.json.gz") if p.name != OUT.name) + EXTRA
     captures = {p.name: read(p) for p in paths}
     result = {
         "_provenance": f"sportsdataverse-py@{ref} helper_<lg>_player_box / helper_<lg>_team_box output; "
@@ -345,17 +344,12 @@ def main() -> None:
         case["out"] = run_all(case["input"], fns)
         result["derived"][name] = case
     text = json.dumps(result, indent=1, ensure_ascii=False) + "\n"
-    (DIR / "oracle.json.gz").write_bytes(
-        gzip.compress(text.encode("utf-8"), compresslevel=9, mtime=0)
-    )
+    OUT.write_bytes(gzip.compress(text.encode("utf-8"), compresslevel=9, mtime=0))
     for name, res in {
         **result["captures"],
         **{f"derived:{k}": v["out"] for k, v in result["derived"].items()},
     }.items():
-        shape = {
-            h: ("raises " + r["raises"]) if "raises" in r else len(r["rows"])
-            for h, r in res.items()
-        }
+        shape = {h: ("raises " + r["raises"]) if "raises" in r else len(r["rows"]) for h, r in res.items()}
         print(name, shape)
 
 

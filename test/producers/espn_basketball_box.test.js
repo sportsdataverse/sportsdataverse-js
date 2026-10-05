@@ -1,6 +1,6 @@
 import should from 'should';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -20,18 +20,30 @@ const O = read(join(ESPN, 'basketball_box', 'oracle.json.gz'));
 const capture = (name) => read(name === 'summary_nba.json' ? join(ESPN, name) : join(ESPN, 'basketball_box', name));
 const HELPERS = ['nba', 'wnba', 'mbb', 'wbb'].flatMap((lg) => [`helper_${lg}_player_box`, `helper_${lg}_team_box`]);
 
+const DATETIME_NY = "Datetime(time_unit='us', time_zone='America/New_York')";
+
 /** Does a non-null JS value have the JS shape of a polars dtype? */
 function dtypeOk(v, dtype) {
   if (/^U?Int\d+$/.test(dtype)) return Number.isInteger(v);
   if (/^Float\d+$/.test(dtype)) return typeof v === 'number';
   if (dtype === 'String') return typeof v === 'string';
   if (dtype === 'Boolean') return typeof v === 'boolean';
-  if (dtype === 'Date') return /^\d{4}-\d{2}-\d{2}$/.test(v);
-  if (dtype === "Datetime(time_unit='us', time_zone='America/New_York')") {
-    return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/.test(v);
-  }
+  // Date / Datetime decode to JS Date, as the release loaders (hyparquet) decode them.
+  if (dtype === 'Date' || dtype === DATETIME_NY) return v instanceof Date && !Number.isNaN(v.getTime());
   if (dtype === 'Null') return false; // py has no value anywhere in the column
   throw new Error(`unknown polars dtype ${dtype}`);
+}
+
+/**
+ * An oracle cell as the JS value it must equal: py `isoformat()` strings in Date / Datetime
+ * columns -> Date (a date-only ISO string parses as UTC midnight, the DATE convention);
+ * `{"__float__": "nan" | "inf" | "-inf"}` (non-JSON floats) -> NaN / +-Infinity.
+ */
+function pyCell(v, dtype) {
+  if (v !== null && typeof v === 'object' && '__float__' in v) {
+    return { nan: NaN, inf: Infinity, '-inf': -Infinity }[v.__float__];
+  }
+  return v !== null && (dtype === 'Date' || dtype === DATETIME_NY) ? new Date(v) : v;
 }
 
 function expectFrame(fn, payload, want, label) {
@@ -47,8 +59,19 @@ function expectFrame(fn, payload, want, label) {
     const bad = rows.find((r) => r[c] !== null && !dtypeOk(r[c], want.dtypes[k]));
     assert.equal(bad?.[c], undefined, `${label}.${c}: JS value does not fit py dtype ${want.dtypes[k]}`);
   });
-  rows.forEach((r, i) => want.columns.forEach((c) => assert.deepStrictEqual(r[c], want.rows[i][c], `${label}[${i}].${c}`)));
+  rows.forEach((r, i) =>
+    want.columns.forEach((c, k) =>
+      assert.deepStrictEqual(r[c], pyCell(want.rows[i][c], want.dtypes[k]), `${label}[${i}].${c}`)
+    )
+  );
 }
+
+describe('ESPN basketball box oracle covers exactly the committed captures', () => {
+  it('fixture files == oracle capture keys (a capture added without regenerating fails here)', () => {
+    const files = readdirSync(join(ESPN, 'basketball_box')).filter((f) => f.endsWith('.json.gz') && f !== 'oracle.json.gz');
+    Object.keys(O.captures).sort().should.eql([...files, 'summary_nba.json'].sort());
+  });
+});
 
 describe('ESPN basketball box producers vs the sdv-py oracle (real captures)', () => {
   for (const [name, outs] of Object.entries(O.captures)) {
@@ -100,6 +123,19 @@ describe('ESPN basketball box league facts', () => {
   it('ids are numbers (py Int32), never strings', () => {
     for (const r of [...P.helper_nba_player_box(nba), ...P.helper_nba_team_box(nba)]) {
       for (const k of Object.keys(r).filter((c) => c.endsWith('_id'))) r[k].should.be.a.Number();
+    }
+  });
+  it('date columns are JS Dates like the release loaders: the instant, and the New York date at UTC midnight', () => {
+    // MBB event 401638645 tips at 2024-04-09T01:20Z = 2024-04-08 21:20 EDT.
+    const mbb = capture('summary_mbb.json.gz');
+    for (const rows of [P.helper_mbb_player_box(mbb), P.helper_mbb_team_box(mbb)]) {
+      for (const r of rows) {
+        r.game_date_time.should.be.instanceof(Date);
+        r.game_date.should.be.instanceof(Date);
+        r.game_date_time.getTime().should.equal(Date.UTC(2024, 3, 9, 1, 20));
+        r.game_date.getTime().should.equal(Date.UTC(2024, 3, 8));
+      }
+      rows[0].game_date.should.not.equal(rows[1].game_date); // one Date per row, not shared
     }
   });
   it('is on sdv.<lg> under py and camelCase names', () => {

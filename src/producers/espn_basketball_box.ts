@@ -21,9 +21,11 @@
 //
 // dtypes (py polars -> JS): Int32 / Float64 -> number (Int32 casts follow polars
 // `cast(strict=False)`: only an ASCII `[+-]digits` string in the int32 range parses,
-// anything else is null); String -> string; Boolean -> boolean; Date `game_date` ->
-// "YYYY-MM-DD"; Datetime(us, America/New_York) `game_date_time` -> ISO-8601 with the
-// New York offset ("2024-06-17T20:30:00-04:00", py `datetime.isoformat()`).
+// anything else is null); String -> string; Boolean -> boolean. The two date columns
+// are JS `Date`s, exactly as the release loaders decode the published parquet (hyparquet):
+// Datetime(us, America/New_York) `game_date_time` -> the same instant; Date
+// `game_date` (the New York calendar date) -> that date at UTC midnight. So producer
+// rows and loaded release rows join / dedup on the same values.
 // Ids are numbers (py Int32), never strings.
 //
 // Known ceiling (not reproduced): a column whose cells mix JSON types (an int in one
@@ -126,44 +128,35 @@ function castFloat64(v: unknown): number | null {
 const STRPTIME =
   /^(\d{4})-(1[0-2]|0[1-9]|[1-9])-(3[01]|[12]\d|0[1-9]|[1-9]| [1-9])T(2[0-3]|[01]\d|\d):([0-5]\d|\d)(?::(6[01]|[0-5]\d|\d))?$/i;
 
-const NY = new Intl.DateTimeFormat("en-US", {
-  timeZone: "America/New_York",
-  hourCycle: "h23",
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-  hour: "2-digit",
-  minute: "2-digit",
-  second: "2-digit",
-});
-const pad = (n: number, w = 2): string => String(n).padStart(w, "0");
+// The New York calendar date of an instant.
+const NY = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", year: "numeric", month: "numeric", day: "numeric" });
+
+/** A UTC `Date` (not `Date.UTC`, which maps years 0-99 to 19xx). */
+function utc(y: number, mo: number, d: number, h = 0, mi = 0, s = 0): Date {
+  const at = new Date(0);
+  at.setUTCFullYear(y, mo - 1, d);
+  at.setUTCHours(h, mi, s, 0);
+  return at;
+}
 
 /**
  * sdv-py `_game_datetime`: strip a trailing Z, parse as UTC, convert to
- * America/New_York. Returns py's `date.isoformat()` and `datetime.isoformat()`.
+ * America/New_York. `game_date_time` is that instant; `game_date` its New York
+ * calendar date at UTC midnight (how hyparquet decodes the release's DATE column).
  */
-function gameDatetime(dateStr: unknown): { game_date: string; game_date_time: string } {
+function gameDatetime(dateStr: unknown): { game_date: Date; game_date_time: Date } {
   if (typeof dateStr !== "string") throw new TypeError(`competition date is not a string: ${String(dateStr)}`);
   const raw = dateStr.endsWith("Z") ? dateStr.slice(0, -1) : dateStr;
   const m = STRPTIME.exec(raw);
   const [y, mo, d, h, mi, s] = m ? m.slice(1).map((x) => Number(x ?? 0)) : [];
-  const at = new Date(0);
-  at.setUTCFullYear(y, mo - 1, d); // not Date.UTC: it maps years 0-99 to 19xx
-  at.setUTCHours(h, mi, s, 0);
-  const ms = at.getTime();
+  const at = utc(y, mo, d, h, mi, s);
   // datetime() rejects year 0, a day past the month's end and a leap second.
   if (!m || y < 1 || at.getUTCDate() !== d || s > 59) {
     throw new Error(`unparseable competition date: '${dateStr}'`);
   }
   const p: Record<string, number> = {};
-  for (const part of NY.formatToParts(new Date(ms))) if (part.type !== "literal") p[part.type] = Number(part.value);
-  const off = (Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second) - ms) / 60000;
-  const sign = off < 0 ? "-" : "+";
-  const date = `${pad(p.year, 4)}-${pad(p.month)}-${pad(p.day)}`;
-  return {
-    game_date: date,
-    game_date_time: `${date}T${pad(p.hour)}:${pad(p.minute)}:${pad(p.second)}${sign}${pad(Math.floor(Math.abs(off) / 60))}:${pad(Math.abs(off) % 60)}`,
-  };
+  for (const part of NY.formatToParts(at)) if (part.type !== "literal") p[part.type] = Number(part.value);
+  return { game_date: utc(p.year, p.month, p.day), game_date_time: at };
 }
 
 /** Build the frame: keep `cols`, missing -> null, then apply the casts. */
@@ -174,7 +167,8 @@ function frame(rows: Row[], cols: string[], int32: readonly string[], float64: r
     const out: Row = {};
     for (const c of cols) {
       const v = r[c] ?? null;
-      out[c] = ints.has(c) ? castInt32(v) : floats.has(c) ? castFloat64(v) : v;
+      // every row gets its own Date (rows share one game-level Date before this)
+      out[c] = ints.has(c) ? castInt32(v) : floats.has(c) ? castFloat64(v) : v instanceof Date ? new Date(v) : v;
     }
     return out;
   });
