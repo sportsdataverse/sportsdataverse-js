@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   pull_request:
+  # Events made with the default GITHUB_TOKEN (the vendor-sync PR) never start a
+  # pull_request run; workflow_dispatch is exempt, so vendor-sync dispatches this.
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -12,6 +15,7 @@ jobs:
   build:
     name: build + typecheck (node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -64,6 +68,7 @@ jobs:
   docs:
     name: docs build (Docusaurus + TypeDoc)
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5 # v4
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444  # v5 # v4

@@ -6,6 +6,18 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ## Unreleased
 
+### Changed — vendor tooling + CI hardening
+
+- **`fetchWithRetry`:** each attempt gets its own `AbortSignal.timeout` (30 s), and the body is read inside the attempt, so a hung socket or a mid-body reset is retried (error names the URL) and cannot stall a job. Worst case per URL: 3 x 30 s plus 1.5 s of backoff. `raw.githubusercontent.com` file fetches retry exactly like the API ones.
+- **BOM:** upstream text is decoded by one function for a fresh fetch and a committed copy, so a leading BOM can never make the two diverge. The bytes on disk (and in LOCK) stay verbatim.
+- **Overlays:** an overlay addition whose `path` duplicates a vendored endpoint (or an earlier addition) now throws. On a pin bump, `vendor` warns when a whole-key overlay patch replaces a key whose upstream value also changed in that bump (the change is masked).
+- **`vendor.yaml`:** `py_reserved` gains `espn_nba_pbp`, `espn_wnba_pbp`, `espn_mbb_pbp`, `espn_wbb_pbp` (hand-written in sdv-py); a test checks no generated ESPN wrapper takes one.
+- **Workflows:** `timeout-minutes` on every CI, vendor-sync and live-smoke job. The vendor and live steps have their own step timeouts, so a hang reaches the issue step. Live smoke serialises runs and files a separate `live-tests:build-failure` issue when install or build fails (only a failing live step is "drift"). The vendor-sync failure issue names the resolved sdv-py sha.
+- **vendor-sync to CI:** the sync PR is opened with `GITHUB_TOKEN`, which starts no `pull_request` run. `ci.yml` gains `workflow_dispatch`, and a separate `dispatch-ci` job (fresh VM, no checkout or npm, the only place with `actions: write`) runs `gh workflow run ci.yml --ref chore/vendor-sync` after the PR is created or updated. The workflow-wide permissions are now empty; the `sync` job holds contents / pull-requests / issues write only, so its token cannot dispatch other workflows (for example a publish).
+- **Masked overlay patches:** the check compares the raw upstream value (taken before the schema policy runs) and the warning shows old -> new; it lands in the sync PR body and the step summary. The duplicate-path check keys on host + path + params.
+- **Tests:** the token-scoping check allows a token or secret expression only in a step `env` (any other place, including `toJSON(secrets)`, `secrets[...]`, `secrets: inherit` and container credentials, fails, proven on mutated workflow clones); the failed-fetch test runs on a temp copy (`SDV_VENDOR_ROOT`), never the real codegen dir; the pipefail semantics test no longer spawns a bare `bash` on Windows (WSL); the pruned-file check asserts the file is gone instead of reading a spawned process status; the skipped-family pre-bump message is covered.
+- **Docs:** `@param params.parsed` on the 130 `kind: frames` flat endpoints now says it returns an object of tables keyed by result set (matching `@returns`). `FLAT_FAMILY_HOSTS` in the generator is built once and frozen.
+
 ### Fixed — legacy `get*` methods fetch through the request layer
 
 - The last 77 raw axios calls in the hand-written `sdv.<league>.get*` methods (`src/services`) now go through the core request layer. That gives them https, retries with backoff, `configure()` transports, and the `NoDataError` / `AssetFetchError` vocabulary. Signatures, URLs (bar `http://` → `https://`), queries and return shapes are unchanged. For each ESPN endpoint shape, the old and new code returned the same object live.

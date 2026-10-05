@@ -22,6 +22,7 @@
 // to an sdv-py clone> reads the same ref through `git cat-file` (never the
 // clone's working tree).
 import {
+  appendFileSync,
   readFileSync,
   writeFileSync,
   existsSync,
@@ -51,6 +52,14 @@ const PY_PKG = "sportsdataverse";
 export const PY_NAMES_FILE = "py_public_names.json";
 
 const read = (p) => readFileSync(p, "utf8");
+/**
+ * Decode upstream bytes to text with a leading UTF-8 BOM stripped. The ONE decoder
+ * for upstream text, used for both a fresh fetch (bytes from GitHub / git) and a
+ * committed copy read back from disk, so a BOM can never make the two diverge.
+ * The bytes themselves stay verbatim on disk (LOCK hashes them).
+ */
+export const decodeText = (buf) => buf.toString("utf8").replace(/^﻿/, "");
+const readUp = (p) => decodeText(readFileSync(p));
 
 /** sdv-py repo path of an upstream path (codegen files, or `py/<repo path>`). */
 const repoPath = (p) => (p.startsWith(PY_UP) ? p.slice(PY_UP.length) : `${PY_CODEGEN}${p}`);
@@ -234,6 +243,10 @@ function transformFamilyUncached(key, cfg, upstreamText, overlayText, source) {
     throw new Error(`vendor.yaml ${key}: schema_incompatible must be a list of endpoint shorts`);
   }
   const unusedIncompatible = new Set(cfg.schema_incompatible ?? []);
+  // Raw upstream endpoints BEFORE the rename/policy loop below (which deletes a
+  // dropped returns_schema, renames shorts and swaps parsers): what a whole-key overlay
+  // patch actually replaces.
+  const rawUp = new Map(items.map((ep) => [ep, plain(ep)]));
   const pyRefs = new Map(); // endpoint node -> py returns_schema ref it keeps
   const pySchemas = new Map(); // endpoint node -> { short, ref, status } for every py returns_schema
   for (const ep of items) {
@@ -275,6 +288,7 @@ function transformFamilyUncached(key, cfg, upstreamText, overlayText, source) {
     }
   }
 
+  const patches = [];
   if (overlayText) {
     const ovSeq = parseDocument(overlayText).get("endpoints");
     // A comment above the first overlay entry parses onto the sequence; keep it
@@ -284,6 +298,16 @@ function transformFamilyUncached(key, cfg, upstreamText, overlayText, source) {
       first.commentBefore = [ovSeq.commentBefore, first.commentBefore].filter(Boolean).join("\n");
     }
     const vendored = [...items]; // overlay additions never become patch targets
+    // Endpoint identity = host + path + fixed/extra params (upstream ships legitimate
+    // same-path pairs: on3 nil_100 / nil_100_v2 on different hosts, kenpom /history.php
+    // with different query keys), so a bare path would false-positive.
+    const famHost = plain(doc.get("host"));
+    const sig = (ep) => {
+      const o = plain(ep);
+      return stable([o.host ?? famHost ?? null, o.path, o.fixed_params ?? null, o.extra_params ?? null, o.query_params ?? null]);
+    };
+    const taken = new Map(); // signature -> short, upstream first then overlay additions
+    for (const ep of items) if (ep.get("path") !== undefined) taken.set(sig(ep), ep.get("short"));
     for (const oep of ovSeq?.items ?? []) {
       const short = oep.get("short");
       const target = vendored.find((ep) => ep.get("short") === short);
@@ -293,6 +317,14 @@ function transformFamilyUncached(key, cfg, upstreamText, overlayText, source) {
             `overlay/${key}.yaml ${short}: patches no vendored endpoint (renamed or dropped upstream?); an addition needs a \`path\``
           );
         }
+        const addPath = String(oep.get("path"));
+        const addSig = sig(oep);
+        if (taken.has(addSig)) {
+          throw new Error(
+            `overlay/${key}.yaml ${short}: path ${addPath} (same host and params) duplicates endpoint ${taken.get(addSig)} (upstream or an earlier overlay addition); patch that endpoint instead`
+          );
+        }
+        taken.set(addSig, short);
         seq.add(oep);
         continue;
       }
@@ -308,6 +340,10 @@ function transformFamilyUncached(key, cfg, upstreamText, overlayText, source) {
             `overlay/${key}.yaml ${short}.${k}: already equal upstream; remove it from this overlay entry`
           );
         }
+        // Remember what upstream said, so a pin bump can tell when a whole-key patch
+        // is now masking a changed upstream value (findMaskedPatches).
+        const rawVal = rawUp.get(target)?.[k];
+        patches.push({ short, k, upstream: rawVal === undefined ? "(absent)" : stable(rawVal) });
         target.set(k, pair.value);
         if (k === "returns_schema") {
           pyRefs.delete(target); // JS-owned now
@@ -340,7 +376,35 @@ function transformFamilyUncached(key, cfg, upstreamText, overlayText, source) {
     schemaRefs: [...new Set(pyRefs.values())],
     jsRefs: [...new Set(jsRefs)],
     pySchemas: [...pySchemas.values()],
+    patches,
   };
+}
+
+/**
+ * Whole-key overlay patches whose upstream value changed between two derivations
+ * (`familyPatches` before and after a pin bump). The overlay replaces the key
+ * wholesale, so the upstream change is invisible in the output: warn a human.
+ * Returns human-readable warnings.
+ */
+export function findMaskedPatches(family, oldPatches, newPatches) {
+  const old = new Map(oldPatches.map((p) => [`${p.short}.${p.k}`, p.upstream]));
+  return newPatches
+    .filter((p) => old.has(`${p.short}.${p.k}`) && old.get(`${p.short}.${p.k}`) !== p.upstream)
+    .map((p) => {
+      const was = old.get(`${p.short}.${p.k}`);
+      const cut = (s) => (s.length > 120 ? `${s.slice(0, 117)}...` : s);
+      return `overlay/${family}.yaml ${p.short}.${p.k} replaces the whole upstream value, and sdv-py changed that value in this bump (${cut(was)} -> ${cut(p.upstream)}): the change is MASKED by the overlay; review whether the patch still applies`;
+    });
+}
+
+/** The whole-key overlay patches a family currently applies (see findMaskedPatches). */
+export function familyPatches(root, key) {
+  const manifest = loadManifest(root);
+  const cfg = manifest.families[key] ?? {};
+  const up = join(root, UPSTREAM);
+  const ovPath = join(root, "overlay", `${key}.yaml`);
+  const text = readUp(join(up, upstreamEndpointPath(key, cfg)));
+  return transformFamily(key, cfg, text, existsSync(ovPath) ? read(ovPath) : null, manifest.source).patches;
 }
 
 /** Recursively list `*.yaml` under `dir`, as `/`-joined paths relative to it. */
@@ -428,13 +492,13 @@ export function deriveAll(root = CODEGEN_DIR, only = null) {
   const out = new Map();
   const jsOwned = new Set(); // schema files overlays attach (never vendored over)
   if (!only) {
-    for (const c of manifest.copy ?? []) out.set(c, read(join(up, c)));
+    for (const c of manifest.copy ?? []) out.set(c, readUp(join(up, c)));
     const refFile = join(up, REF_FILE);
     out.set(PY_NAMES_FILE, renderPyNames(up, existsSync(refFile) ? read(refFile).trim() : "(missing)"));
   }
   for (const [key, cfg] of familyEntries(manifest)) {
     if (only && key !== only) continue;
-    const text = read(join(up, upstreamEndpointPath(key, cfg)));
+    const text = readUp(join(up, upstreamEndpointPath(key, cfg)));
     const ovPath = join(root, "overlay", `${key}.yaml`);
     const overlay = existsSync(ovPath) ? read(ovPath) : null;
     const fam = transformFamily(key, cfg, text, overlay, manifest.source);
@@ -442,7 +506,7 @@ export function deriveAll(root = CODEGEN_DIR, only = null) {
     for (const ref of fam.jsRefs) jsOwned.add(`schemas/${ref}.yaml`);
     for (const ref of fam.schemaRefs) {
       for (const f of schemaFilesFor(ref, upSchemas)) {
-        const text = read(join(up, "schemas", f));
+        const text = readUp(join(up, "schemas", f));
         checkSchemaShape(text, `vendor/upstream/schemas/${f} (family ${key})`);
         out.set(`schemas/${rewriteSchema(f, cfg.schemas)}`, text);
       }
@@ -658,21 +722,27 @@ function gitSource(repo, ref) {
 
 /**
  * GET with a bounded retry (default 3 attempts, exponential backoff) on network
- * errors and HTTP 5xx only. Any other status (403 rate limit/entitlement, 404, ...)
- * fails at once, and exhausted retries still throw: this never turns a failure into
- * a pass. `fetchImpl` / `sleep` are injectable for tests.
+ * errors, per-attempt timeouts and HTTP 5xx only. Each attempt gets its own
+ * `AbortSignal.timeout(timeoutMs)` (default 30 s); the signal stays attached while
+ * the body streams, and with `readBody` (`res => Promise`) the body is read INSIDE
+ * the attempt, so a body timeout or reset is retried and the error names the URL.
+ * Worst case per URL: `attempts * timeoutMs + backoff` = 3 * 30 s + 0.5 s + 1 s = 91.5 s.
+ * Any other status (403 rate limit/entitlement, 404, ...) fails at once, and exhausted
+ * retries still throw: this never turns a failure into a pass. `fetchImpl` / `sleep`
+ * are injectable for tests.
  */
 export async function fetchWithRetry(
   url,
   opts = {},
-  { fetchImpl = fetch, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), attempts = 3, baseMs = 500 } = {}
+  { fetchImpl = fetch, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), attempts = 3, baseMs = 500, timeoutMs = 30_000, readBody = null } = {}
 ) {
   let last;
   for (let i = 0; i < attempts; i++) {
     if (i) await sleep(baseMs * 2 ** (i - 1));
     let res;
     try {
-      res = await fetchImpl(url, opts);
+      res = await fetchImpl(url, { ...opts, signal: AbortSignal.timeout(timeoutMs) });
+      if (res.ok && readBody) return await readBody(res); // body timeouts/resets retry too, naming the URL
     } catch (e) {
       last = new Error(`GET ${url} -> network error: ${e.message ?? e}`);
       continue;
@@ -684,16 +754,16 @@ export async function fetchWithRetry(
   throw last;
 }
 
-export function githubSource(repoSlug, ref) {
+export function githubSource(repoSlug, ref, retryOpts = {}) {
   const headers = process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {};
-  const get = (url, opts = {}) => fetchWithRetry(url, opts);
+  const get = (url, opts = {}, readBody) => fetchWithRetry(url, opts, { ...retryOpts, readBody }); // API and raw.githubusercontent alike
   return {
     async tree(extra = []) {
       const url = `https://api.github.com/repos/${repoSlug}/git/trees/${ref}:${PY_CODEGEN.slice(0, -1)}?recursive=1`;
-      const j = await (await get(url, { headers })).json();
+      const j = await get(url, { headers }, (r) => r.json());
       if (j.truncated) throw new Error(`tree listing truncated: ${url}`);
       const pkgUrl = `https://api.github.com/repos/${repoSlug}/git/trees/${ref}:${PY_PKG}?recursive=1`;
-      const pkg = await (await get(pkgUrl, { headers })).json();
+      const pkg = await get(pkgUrl, { headers }, (r) => r.json());
       if (pkg.truncated) throw new Error(`tree listing truncated: ${pkgUrl}`);
       return new Map([
         ...j.tree
@@ -709,7 +779,7 @@ export function githubSource(repoSlug, ref) {
         while (next < paths.length) {
           const i = next++;
           const url = `https://raw.githubusercontent.com/${repoSlug}/${ref}/${repoPath(paths[i])}`;
-          out[i] = Buffer.from(await (await get(url)).arrayBuffer());
+          out[i] = await get(url, {}, async (r) => Buffer.from(await r.arrayBuffer()));
         }
       };
       await Promise.all(Array.from({ length: 8 }, worker));
@@ -768,7 +838,7 @@ export async function fetchUpstream(root = CODEGEN_DIR, ref = loadManifest(root)
   const endpointPaths = endpointPathsOf(manifest);
   for (const p of endpointPaths) if (!tree.has(p)) throw new Error(`${PY_CODEGEN}${p} not found at ${ref}`);
   const endpointBufs = await src.getMany(endpointPaths);
-  const fetched = new Map(endpointPaths.map((p, i) => [p, endpointBufs[i].toString("utf8")]));
+  const fetched = new Map(endpointPaths.map((p, i) => [p, decodeText(endpointBufs[i])]));
   const { schemaList, pyList, dangling } = selectUpstreamPaths(manifest, tree, (p) => fetched.get(p), ref);
   const schemaBufs = await src.getMany(schemaList);
   const pyBufs = await src.getMany(pyList);
@@ -802,6 +872,28 @@ function bumpRef(root, sha) {
   writeFileSync(file, next);
 }
 
+/**
+ * Derive the OUTGOING outputs (and overlay patches) per family from the committed
+ * upstream copy, before a fetch replaces it. A family that cannot derive (newly added
+ * to vendor.yaml, say) is named via `warn` and listed in `skipped`, without disabling
+ * pruning for the rest.
+ */
+export function deriveOutgoing(root = CODEGEN_DIR, warn = console.warn) {
+  const before = new Map();
+  const oldPatches = new Map();
+  const skipped = [];
+  for (const [key] of familyEntries(loadManifest(root))) {
+    try {
+      for (const [p, c] of deriveAll(root, key)) before.set(p, c);
+      oldPatches.set(key, familyPatches(root, key));
+    } catch (e) {
+      skipped.push(key);
+      warn(`vendor: prune skipped for family ${key} (outgoing outputs not derivable: ${e.message})`);
+    }
+  }
+  return { before, oldPatches, skipped };
+}
+
 async function main(argv) {
   if (argv.includes("--check")) {
     const problems = checkVendor();
@@ -822,6 +914,7 @@ async function main(argv) {
   }
   let before = null;
   const skippedPrune = [];
+  const oldPatches = new Map();
   if (!argv.includes("--offline")) {
     // Fetch first: a failed fetch leaves vendor.yaml (and vendor/upstream) untouched.
     const ref = sha ?? loadManifest().source.ref;
@@ -829,19 +922,22 @@ async function main(argv) {
     // so a py schema the new pin renamed/dropped can be recognised (findStaleAfterBump).
     // A family that cannot derive (newly added to vendor.yaml, say) is named and skipped
     // without disabling pruning for the rest.
-    before = new Map();
-    for (const [key] of familyEntries(loadManifest())) {
-      try {
-        for (const [p, c] of deriveAll(CODEGEN_DIR, key)) before.set(p, c);
-      } catch (e) {
-        skippedPrune.push(key);
-        console.warn(`vendor: prune skipped for family ${key} (outgoing outputs not derivable: ${e.message})`);
-      }
-    }
+    const out = deriveOutgoing();
+    before = out.before;
+    out.oldPatches.forEach((v, k) => oldPatches.set(k, v));
+    skippedPrune.push(...out.skipped);
     const { files, dangling } = await fetchUpstream(CODEGEN_DIR, ref);
     if (sha) bumpRef(CODEGEN_DIR, sha);
     console.log(`vendor: fetched ${files} upstream files at ${ref}`);
     if (dangling.length) console.warn(`vendor: upstream names schemas it does not ship: ${dangling.join(", ")}`);
+  }
+  for (const [key, old] of oldPatches) {
+    for (const w of findMaskedPatches(key, old, familyPatches(CODEGEN_DIR, key))) {
+      console.warn(`vendor: WARNING ${w}`);
+      // CI sets this so the sync PR body and the step summary can show the warning.
+      if (process.env.SDV_VENDOR_WARNINGS) appendFileSync(process.env.SDV_VENDOR_WARNINGS, `- ${w}
+`);
+    }
   }
   const { written, removed } = writeVendor();
   if (before) for (const r of findStaleAfterBump(CODEGEN_DIR, before, deriveAll())) {
