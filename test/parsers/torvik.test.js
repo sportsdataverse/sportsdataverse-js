@@ -97,6 +97,11 @@ describe('parsers/torvik: parse_torvik_game_stats (headerless JSON, 31 cols)', (
     (typeof rows[0].game_stats).should.equal('string');
     rows[0].game_stats.length.should.be.above(0);
   });
+  it('keeps the hoopR column name `game_stats` (hoopR torvik_game_stats.R: parity, not a bug) at position 30', () => {
+    const keys = Object.keys(parse_torvik_game_stats(load('torvik_game_stats.json'))[0]);
+    keys.indexOf('game_stats').should.equal(29);
+    keys[30].should.equal('overtimes');
+  });
   it('accepts an already-parsed array as well as the raw JSON string', () => {
     const arr = JSON.parse(load('torvik_game_stats.json'));
     parse_torvik_game_stats(arr).length.should.equal(arr.length);
