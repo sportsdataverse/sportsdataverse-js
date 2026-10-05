@@ -27,7 +27,7 @@ const isObj = (v: unknown): v is Record<string, any> => v !== null && typeof v =
  * A league that never has the data is "nothing here" (py returns empty / blank for it), not a
  * failed fetch.
  */
-const ACCESS_DENIED = /^s*Feed type access denied.?s*$/i;
+const ACCESS_DENIED = /^\s*Feed type access denied\.?\s*$/i; // JS \s also covers a leading BOM (U+FEFF)
 
 interface FeedSpec {
   /** Does the parsed body carry the feed's recognisable envelope? */

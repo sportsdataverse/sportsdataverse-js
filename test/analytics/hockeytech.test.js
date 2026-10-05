@@ -303,6 +303,28 @@ describe('hockeytech analytics: live 2026-10-05 captures (MJHL access denied, US
     (await sdv.hockeytech.mjhl_game_shifts(7301)).should.eql([]);
     (await sdv.hockeytech.mjhl_game_corsi(7301)).should.eql([]);
   });
+  it('the access-denied sentinel tolerates whitespace / CRLF / BOM / optional period', async () => {
+    for (const body of [
+      'Feed type access denied.\n',
+      'Feed type access denied.\r\n',
+      ' Feed type access denied.',
+      '﻿Feed type access denied.',
+      '﻿Feed type access denied\r\n',
+      'feed type access denied',
+    ]) {
+      override = { pbp: body, shifts: body };
+      (await sdv.hockeytech.mjhl_pbp(7301)).should.eql([], JSON.stringify(body));
+      (await sdv.hockeytech.mjhl_game_shifts(7301)).should.eql([], JSON.stringify(body));
+    }
+  });
+  it('near-miss sentinels are AssetFetchError', async () => {
+    for (const body of ['Feed type access denied!', 'Feed type access deniedX', 'Feed type access denied. Contact us']) {
+      override = { pbp: body };
+      await sdv.hockeytech.mjhl_pbp(7301).should.be.rejectedWith(AssetFetchError);
+      override = { shifts: body };
+      await sdv.hockeytech.mjhl_game_shifts(7301).should.be.rejectedWith(AssetFetchError);
+    }
+  });
   it('an empty OHL shift envelope (real capture) is []', async () => {
     (await sdv.hockeytech.ohl_game_shifts(29044)).should.eql([]);
   });
