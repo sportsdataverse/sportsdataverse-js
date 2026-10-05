@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import sdv from '../../dist/index.js';
 import * as P from '../../dist/producers/espn_basketball_box.js';
+import { isIdColumn } from '../../dist/core/int64.js';
 
 // Parity: all eight helpers (helper_<lg>_player_box / helper_<lg>_team_box, lg = nba wnba mbb
 // wbb) run on every payload and are compared to sdv-py@719de79's own output
@@ -22,9 +23,9 @@ const HELPERS = ['nba', 'wnba', 'mbb', 'wbb'].flatMap((lg) => [`helper_${lg}_pla
 
 const DATETIME_NY = "Datetime(time_unit='us', time_zone='America/New_York')";
 
-/** Does a non-null JS value have the JS shape of a polars dtype? */
-function dtypeOk(v, dtype) {
-  if (/^U?Int\d+$/.test(dtype)) return Number.isInteger(v);
+/** Does a non-null JS value of column `col` have the JS shape of a polars dtype? (An integer id is a decimal string: the v4 id rule.) */
+function dtypeOk(v, dtype, col) {
+  if (/^U?Int\d+$/.test(dtype)) return isIdColumn(col) ? typeof v === 'string' && /^-?\d+$/.test(v) : Number.isInteger(v);
   if (/^Float\d+$/.test(dtype)) return typeof v === 'number';
   if (dtype === 'String') return typeof v === 'string';
   if (dtype === 'Boolean') return typeof v === 'boolean';
@@ -39,7 +40,8 @@ function dtypeOk(v, dtype) {
  * columns -> Date (a date-only ISO string parses as UTC midnight, the DATE convention);
  * `{"__float__": "nan" | "inf" | "-inf"}` (non-JSON floats) -> NaN / +-Infinity.
  */
-function pyCell(v, dtype) {
+function pyCell(v, dtype, col) {
+  if (v !== null && /^U?Int\d+$/.test(dtype) && isIdColumn(col)) return String(v); // py's Int32 id -> JS decimal string
   if (v !== null && typeof v === 'object' && '__float__' in v) {
     return { nan: NaN, inf: Infinity, '-inf': -Infinity }[v.__float__];
   }
@@ -56,12 +58,12 @@ function expectFrame(fn, payload, want, label) {
   if (!rows.length) return want.columns.should.eql([], `${label}: py's empty frame has no columns`);
   rows.forEach((r, i) => Object.keys(r).should.eql(want.columns, `${label}[${i}]: column names/order`));
   want.columns.forEach((c, k) => {
-    const bad = rows.find((r) => r[c] !== null && !dtypeOk(r[c], want.dtypes[k]));
+    const bad = rows.find((r) => r[c] !== null && !dtypeOk(r[c], want.dtypes[k], c));
     assert.equal(bad?.[c], undefined, `${label}.${c}: JS value does not fit py dtype ${want.dtypes[k]}`);
   });
   rows.forEach((r, i) =>
     want.columns.forEach((c, k) =>
-      assert.deepStrictEqual(r[c], pyCell(want.rows[i][c], want.dtypes[k]), `${label}[${i}].${c}`)
+      assert.deepStrictEqual(r[c], pyCell(want.rows[i][c], want.dtypes[k], c), `${label}[${i}].${c}`)
     )
   );
 }
@@ -117,13 +119,20 @@ describe('ESPN basketball box league facts', () => {
     for (const h of ['helper_nba_player_box', 'helper_wnba_player_box']) {
       const rows = P[h](one);
       rows.length.should.equal(21);
-      new Set(rows.map((r) => r.team_id)).should.eql(new Set([2443]));
+      new Set(rows.map((r) => r.team_id)).should.eql(new Set(['2443']));
     }
   });
-  it('ids are numbers (py Int32), never strings', () => {
+  it('ids are decimal strings (py Int32; the v4 id rule), the values the release loaders return', () => {
+    const ids = new Set();
     for (const r of [...P.helper_nba_player_box(nba), ...P.helper_nba_team_box(nba)]) {
-      for (const k of Object.keys(r).filter((c) => c.endsWith('_id'))) r[k].should.be.a.Number();
+      for (const k of Object.keys(r).filter((c) => c.endsWith('_id'))) {
+        r[k].should.be.a.String();
+        r[k].should.match(/^\d+$/);
+        ids.add(k);
+      }
+      (typeof r.season).should.equal('number'); // a non-id Int32 column stays a number
     }
+    [...ids].sort().should.eql(['athlete_id', 'game_id', 'opponent_team_id', 'team_id']);
   });
   it('date columns are JS Dates like the release loaders: the instant, and the New York date at UTC midnight', () => {
     // MBB event 401638645 tips at 2024-04-09T01:20Z = 2024-04-08 21:20 EDT.

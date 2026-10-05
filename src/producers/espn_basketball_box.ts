@@ -26,12 +26,16 @@
 // Datetime(us, America/New_York) `game_date_time` -> the same instant; Date
 // `game_date` (the New York calendar date) -> that date at UTC midnight. So producer
 // rows and loaded release rows join / dedup on the same values.
-// Ids are numbers (py Int32), never strings.
+// Id columns (`game_id`, `team_id`, `athlete_id`, `opponent_team_id`: py Int32) are
+// decimal strings, from the Int32 cast (the v4 id rule, src/core/int64.ts), exactly as the
+// release loaders return them.
 //
 // Known ceiling (not reproduced): a column whose cells mix JSON types (an int in one
 // row, a string in another) -- polars' `strict=False` construction would coerce the
 // whole column to a supertype; ESPN ships each field with one type, so each cell
 // keeps its own here.
+
+import { idColumnsToStrings } from "../core/int64.js";
 
 export type Row = Record<string, any>;
 
@@ -159,11 +163,11 @@ function gameDatetime(dateStr: unknown): { game_date: Date; game_date_time: Date
   return { game_date: utc(p.year, p.month, p.day), game_date_time: at };
 }
 
-/** Build the frame: keep `cols`, missing -> null, then apply the casts. */
+/** Build the frame: keep `cols`, missing -> null, then apply the casts; id columns -> decimal strings. */
 function frame(rows: Row[], cols: string[], int32: readonly string[], float64: readonly string[]): Row[] {
   const ints = new Set(int32);
   const floats = new Set(float64);
-  return rows.map((r) => {
+  const framed = rows.map((r) => {
     const out: Row = {};
     for (const c of cols) {
       const v = r[c] ?? null;
@@ -172,6 +176,7 @@ function frame(rows: Row[], cols: string[], int32: readonly string[], float64: r
     }
     return out;
   });
+  return idColumnsToStrings(framed);
 }
 
 // ---------------------------------------------------------------------------

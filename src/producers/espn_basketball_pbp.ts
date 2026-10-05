@@ -39,11 +39,11 @@
 //
 // dtypes (py polars -> JS): Int32 / UInt32 -> number; Float32 -> number rounded to float32 at
 // every arithmetic step exactly as polars computes it (Math.fround); Float64 -> number; String;
-// Boolean; Int64 -> the INT64 policy (`applyInt64Policy`, src/core/int64.ts): the play `id` is
-// parsed exactly and returned as its decimal STRING in every game of every era (owner decision
-// 2026-10-05: ESPN's college play ids are 12-13 digits through 2013 and 18 digits from 2014-15,
-// beyond 2^53, so a number-if-safe id changed type with the season); the other Int64 columns
-// (scores, coordinates) are numbers (safe integers). The timeouts lists hold the same id strings. No py column is a date / datetime (`wallclock` is a String in py, kept so).
+// Boolean; Int64 -> number (safe integers: scores, coordinates). Id columns follow the id rule
+// (`applyInt64Policy`, src/core/int64.ts; owner decision 2026-10-05): the play `id` (Int64,
+// parsed exactly) and `game_id` (Int32) are decimal STRINGS in every game of every era (ESPN's
+// college play ids are 12-13 digits through 2013 and 18 digits from 2014-15, beyond 2^53), as
+// the release loaders return them. The timeouts lists hold the same id strings. No py column is a date / datetime (`wallclock` is a String in py, kept so).
 //
 // Every lag / lead / row-number op runs per `game_id` (py's frames are single-game; here a
 // concatenated frame never leaks across games -- see the test).
