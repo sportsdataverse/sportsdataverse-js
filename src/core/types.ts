@@ -87,6 +87,10 @@ export interface WrapperDef {
   family?: EspnFamily;
   scope: Scope;
   path: string;
+  /** Flat only (sdv-py `now_variant`): path used when the `nowToggle` param is absent. */
+  nowVariant?: string;
+  /** Flat only: the path param whose absence selects `nowVariant`. */
+  nowToggle?: string;
   pathParams: PathParam[];
   queryParams: QueryParam[];
   /** True for non-ESPN "flat API" wrappers (see `src/core/flat.ts`). */

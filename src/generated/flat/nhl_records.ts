@@ -346,6 +346,8 @@ const COACH_CAREER_DEF: WrapperDef = {
   "host": "https://records.nhl.com/site/api",
   "scope": "universal",
   "path": "/coach-career-records/{coach_id}",
+  "nowVariant": "/coach-career-records",
+  "nowToggle": "coach_id",
   "pathParams": [
     {
       "name": "coach_id",
@@ -404,6 +406,8 @@ const COACH_FRANCHISE_DEF: WrapperDef = {
   "host": "https://records.nhl.com/site/api",
   "scope": "universal",
   "path": "/coach-franchise-records/{coach_id}",
+  "nowVariant": "/coach-franchise-records",
+  "nowToggle": "coach_id",
   "pathParams": [
     {
       "name": "coach_id",
@@ -514,6 +518,8 @@ const DRAFT_DEF: WrapperDef = {
   "host": "https://records.nhl.com/site/api",
   "scope": "universal",
   "path": "/draft/{draft_id}",
+  "nowVariant": "/draft",
+  "nowToggle": "draft_id",
   "pathParams": [
     {
       "name": "draft_id",
@@ -603,6 +609,8 @@ const DRAFT_PROSPECT_DEF: WrapperDef = {
   "host": "https://records.nhl.com/site/api",
   "scope": "universal",
   "path": "/draft-prospect/{prospect_id}",
+  "nowVariant": "/draft-prospect",
+  "nowToggle": "prospect_id",
   "pathParams": [
     {
       "name": "prospect_id",
@@ -817,6 +825,8 @@ const GM_CAREER_DEF: WrapperDef = {
   "host": "https://records.nhl.com/site/api",
   "scope": "universal",
   "path": "/general-manager/{gm_id}",
+  "nowVariant": "/general-manager-career-records",
+  "nowToggle": "gm_id",
   "pathParams": [
     {
       "name": "gm_id",
