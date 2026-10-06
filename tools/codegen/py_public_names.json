@@ -1,6 +1,6 @@
 {
   "_generated": "tools/codegen/vendor.mjs from vendor/upstream/py/ (verbatim sdv-py modules at ref) — do not edit",
-  "ref": "28ee34b46520e1648b4f9fcf9ac20ba27ff37403",
+  "ref": "afafaedae47bca0799d64578e446d85d43b3f5ed",
   "modules": {
     "asa": { "path": "sportsdataverse/soccer/asa.py", "names": ["asa_games","asa_games_xgoals","asa_goalkeepers_goals_added","asa_goalkeepers_xgoals","asa_managers","asa_players","asa_players_goals_added","asa_players_salaries","asa_players_xgoals","asa_referees","asa_stadia","asa_teams","asa_teams_goals_added","asa_teams_xgoals","asa_teams_xpass"] },
     "bart_wbb": { "path": "sportsdataverse/wbb/bart_wbb.py", "names": ["bart_wbb_ratings"] },

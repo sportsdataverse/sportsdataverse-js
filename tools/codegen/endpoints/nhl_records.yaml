@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@28ee34b46520e1648b4f9fcf9ac20ba27ff37403
+# VENDORED from sportsdataverse/sportsdataverse-py@afafaedae47bca0799d64578e446d85d43b3f5ed
 # tools/codegen/endpoints/nhl_records.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/nhl_records.yaml; shared changes land in sdv-py first.
