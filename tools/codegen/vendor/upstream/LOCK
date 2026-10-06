@@ -12,7 +12,7 @@ fb8b79ee824164657756cceb64b3dceb12988db8  endpoints/espn_site_v2.yaml
 7355d9ed54cef6accfbab5f531d181f9953e3cf5  endpoints/mlb_api.yaml
 3cb27577b4a2bf769ce2e48c5aa7c7a0de611e54  endpoints/mlb_statcast.yaml
 45683e14e0ae4c3be59acc63f3d5c9ed24f3a595  endpoints/mls_api.yaml
-3d15ff7e432e65d22bb60b0aa9b55c4732e51b45  endpoints/nba_stats.yaml
+3cc0a3c91560a7b6b6ac6bf89fbb4a83794281b4  endpoints/nba_stats.yaml
 6b09aa9431b443f43f0c53557e32dbef7cad9e19  endpoints/nfl_api.yaml
 f2ed497b640fca08311e2d9b9169978b350e1292  endpoints/nflpro.yaml
 385eb5e8bb1efaeb18b852cd0259f92248d77c2d  endpoints/nhl_api_web.yaml
@@ -26,7 +26,7 @@ a20dcc42cbbea4556c1894f68362e9b940800460  endpoints/pff_api.yaml
 30fac6d2509b3038a524a13f19408281684ea678  endpoints/sports247_site_pages.yaml
 b2b250211ad6f78e961cfcd056fbef8021e06717  endpoints/sports247.yaml
 943b1896a4ea24a60c706ccb68c47ad39d5aa3bb  endpoints/torvik.yaml
-534cc17faf7e3b4e66e60aec92298f43951eb422  endpoints/wnba_stats.yaml
+15bfb1cc8d2e9f5a0885d64996c54b466993c9e9  endpoints/wnba_stats.yaml
 f80d67c88c673b523cf5d921eba3a563b457fa24  endpoints/yahoo_shangrila.yaml
 27e776b2c23a4dc875141df8f9050c2ddec8280d  espn_rename_map.yaml
 2fd9ea7a2f1616aecc16eaa34cdfd3d6f4740f10  py/sportsdataverse/baseball/college_baseball/college_baseball_espn_ext.py
@@ -50,7 +50,7 @@ cf30df8f1f8ddc95ead70d8ff43959a1488206ab  py/sportsdataverse/mlb/mlb_api.py
 f9012c6527d13491b09aeaf3acfb531fad939132  py/sportsdataverse/mlb/mlb_espn_ext.py
 cb41f2c11cbd08c5264c0528b2adb5a37b0ea2ac  py/sportsdataverse/mlb/mlb_statcast.py
 3c43ee0bc30c5b330da27327c9c6b96917c220cd  py/sportsdataverse/nba/nba_espn_ext.py
-49c918d6b8f400af7562968cfe6ffed7b3880adf  py/sportsdataverse/nba/nba_stats.py
+c6b05c0a148d364266b35a1c94ae13255a4c99c5  py/sportsdataverse/nba/nba_stats.py
 6a9ebd98afe9cc002103cf496f971b55ebea42ca  py/sportsdataverse/nbagl/nbagl_espn_ext.py
 901c4cacdaa6e2ca1abc2acd66656dec091101b3  py/sportsdataverse/nfl/nfl_api.py
 f85517f31c0597e3e024a96332ee63b0f0450c64  py/sportsdataverse/nfl/nfl_espn_ext.py
@@ -80,7 +80,7 @@ abd6682eec315bbae4868ae8bee3ecd131d15f6e  py/sportsdataverse/soccer/uel/uel_espn
 53c90151516981cb73d32f5f462da63493e5662f  py/sportsdataverse/wbb/bart_wbb.py
 c62e9d531ece8efd756bddee1019b1bc5efbace6  py/sportsdataverse/wbb/wbb_espn_ext.py
 4ed8f13beb7a764bdf28b2dc7242f3e125e5d76c  py/sportsdataverse/wnba/wnba_espn_ext.py
-a5baa0148f3c6a9c440dafd149ef62fdc6bf2257  py/sportsdataverse/wnba/wnba_stats.py
+44333d1b4b814fa854854dc1f8236984254d22d1  py/sportsdataverse/wnba/wnba_stats.py
 21c45f0378c0a1f2ac6f5aadd23712f44ab323f1  py/sportsdataverse/yahoo/yahoo_shangrila.py
 16578a94080620466beb4e82c59b1303ec44507a  schemas/cdn_rankings/cfb.yaml
 cf2969a6cecd2f1f4291cde4445489408eff99e4  schemas/cdn_scoreboard.yaml
