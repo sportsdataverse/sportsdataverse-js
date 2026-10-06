@@ -504,6 +504,17 @@ sports247:
 # (schema_compatible: false): no py returns table, so these are parity-only —
 # the JS parser must emit what sdv-py's does on the same bytes. The captures
 # live beside their family's README (test/fixtures/{cbs,fox,yahoo}/).
+cbs:
+  cbs/team_standings_nfl.json: team_standings
+  cbs/team_standings_nhl.json: team_standings
+  cbs/season_teams_nfl.json: season_teams
+  cbs/team_players_nfl.json: team_players
+  cbs/league_meta_nfl.json: league
+  cbs/endpoint_registry.json: endpoint_registry
+  cbs/game_scoring_plays_nfl.json: game_scoring_plays
+  cbs/game_scoring_plays_ncaaf.json: game_scoring_plays
+  cbs/game_scoring_drives_nfl.json: game_scoring_drives
+  cbs/game_scoring_drives_ncaaf.json: game_scoring_drives
 fox:
   fox/nfl_league_scores_segment.json: league_scores_segment
   fox/topevents_segment.json: topevents_scoreboard_segment
