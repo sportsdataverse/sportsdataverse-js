@@ -102,6 +102,10 @@ module.exports = {
     ],
   ],
   themeConfig: {
+    // Live-editable ```jsx live``` blocks (react-live). The scope a block sees
+    // is docs/src/theme/ReactLiveScope — the parsers bundle, the proxy fetch,
+    // the URL resolver and a <Table/>; see docs/docs/guides/live-blocks.md.
+    liveCodeBlock: { playgroundPosition: 'bottom' },
     docs: {
       sidebar: {
         hideable: true,
@@ -381,6 +385,8 @@ module.exports = {
         indexBlog: false,
       },
     ],
+    // ```jsx live``` code blocks (react-live); scope in src/theme/ReactLiveScope.
+    '@docusaurus/theme-live-codeblock',
   ],
   presets: [
     [
