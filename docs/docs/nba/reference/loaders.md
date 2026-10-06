@@ -267,11 +267,11 @@ const rows = await sdv.nba.loadNbaSchedule({ seasons: 2024 });
 | `time_valid` | `boolean` | Time valid. |
 | `neutral_site` | `boolean` | Neutral site. |
 | `conference_competition` | `boolean` | Conference competition. |
-| `play_by_play_available` | `boolean` | Whether play-by-play data is available. |
+| `play_by_play_available` | `boolean` |  |
 | `recent` | `boolean` | Recent. |
 | `start_date` | `string` | Start date (YYYY-MM-DD). |
 | `broadcast` | `string` | Broadcast information string. |
-| `highlights` | `string` | Game highlight urls. |
+| `highlights` | `string` |  |
 | `notes_type` | `string` | Notes type. |
 | `notes_headline` | `string` | Notes headline. |
 | `broadcast_market` | `string` | Broadcast market label (e.g. 'national', 'home'). |
@@ -330,11 +330,11 @@ const rows = await sdv.nba.loadNbaSchedule({ seasons: 2024 });
 | `season_type` | `number` | Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). |
 | `venue_address_state` | `string` | Venue address state / region. |
 | `status_type_alt_detail` | `string` | Status type alt detail. |
-| `game_json` | `boolean` | Whether processed game JSON is available. |
-| `game_json_url` | `string` | URL to the processed game JSON. |
+| `game_json` | `boolean` |  |
+| `game_json_url` | `string` |  |
 | `game_date_time` | `Date` | Game start date/time (ISO 8601). |
 | `game_date` | `Date` | Game date (YYYY-MM-DD). |
-| `PBP` | `boolean` | Whether play-by-play data is available. |
+| `PBP` | `boolean` |  |
 | `team_box` | `boolean` | Team box. |
 | `player_box` | `boolean` | Player box. |
 
@@ -456,8 +456,8 @@ const rows = await sdv.nba.loadNbaGameRosters({ seasons: 2002 });
 | `athlete_guid` | `string` | ESPN athlete GUID. |
 | `athlete_display_name` | `string` | Athlete display name (full). |
 | `athlete_short_name` | `string` | Athlete short display name. |
-| `athlete_first_name` | `string` | Player first name. |
-| `athlete_last_name` | `string` | Athlete last name. |
+| `athlete_first_name` | `string` |  |
+| `athlete_last_name` | `string` |  |
 | `athlete_jersey` | `string` | Athlete jersey number. |
 | `athlete_position` | `string` | Athlete position. |
 | `athlete_headshot` | `string` | URL of the player's headshot image. |
@@ -567,8 +567,8 @@ const rows = await sdv.nba.loadNbaStandings({ seasons: 2002 });
 |---|---|---|
 | `season` | `number` | Season year. |
 | `group_id` | `string` | ESPN group id. |
-| `group_name` | `string` | Group name (conference / division). |
-| `group_abbreviation` | `string` | Group abbreviation. |
+| `group_name` | `string` |  |
+| `group_abbreviation` | `string` |  |
 | `group_short_name` | `string` | ESPN's short name for the standings grouping the team sits in, read from the group node's shortName; the NBA standings payload supplies only the group name and abbreviation, so this is null throughout. |
 | `team_id` | `string` | Unique team identifier. |
 | `team_uid` | `string` | ESPN universal team identifier (UID format 's:40~l:...~t:...'). |
@@ -583,7 +583,7 @@ const rows = await sdv.nba.loadNbaStandings({ seasons: 2002 });
 | `team_logo` | `string` | Team logo image URL. |
 | `stat_name` | `string` | Stat key. |
 | `stat_display_name` | `string` | Stat display name. |
-| `stat_short_display_name` | `string` | Short human-readable stat name. |
+| `stat_short_display_name` | `string` |  |
 | `stat_description` | `string` | ESPN's prose gloss for the standings statistic on this row; for the clincher stat it is not a fixed label but the team's actual status text, such as Clinched Playoff Berth or Eliminated From Playoff. |
 | `stat_abbreviation` | `string` | ESPN's short code for the standings statistic, such as PCT, GB or OPP PPG; it is null for the four record-style splits (Home, Road, vs. Conf., vs. Div.), which ship no abbreviation. |
 | `stat_type` | `string` | Stat type code (e.g. "win", "loss"). |
@@ -622,7 +622,7 @@ const rows = await sdv.nba.loadNbaPlayerSeasonStats({ seasons: 2025 });
 | `team_slug` | `string` | URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). |
 | `team_display_name` | `string` | Full team display name. |
 | `category` | `string` | Category label. |
-| `stat_label` | `string` | Human-readable label of the statistic (e.g. 'At bats'). |
+| `stat_label` | `string` |  |
 | `stat_name` | `string` | Stat key. |
 | `stat_display_name` | `string` | Stat display name. |
 | `stat_description` | `string` | ESPN's prose definition of the statistic on this row, for example the ratio of field goals made to field goals attempted; for the paired Made-Attempted stats it is the two definitions joined with a hyphen. |
@@ -662,7 +662,7 @@ const rows = await sdv.nba.loadNbaTeamSeasonStats({ seasons: 2025 });
 | `team_alternate_color` | `string` | Team alternate color (hex without leading '#'). |
 | `team_logo` | `string` | Team logo image URL. |
 | `category` | `string` | Category label. |
-| `stat_label` | `string` | Human-readable label of the statistic (e.g. 'At bats'). |
+| `stat_label` | `string` |  |
 | `stat_name` | `string` | Stat key. |
 | `stat_display_name` | `string` | Stat display name. |
 | `stat_description` | `string` | ESPN's prose definition of the team statistic on this row, for example the average number of assists a team records per turnover. |
@@ -702,19 +702,19 @@ const rows = await sdv.nba.loadNbaDraft({ seasons: 2025 });
 | `athlete_id` | `string` | Unique athlete identifier (ESPN). |
 | `athlete_uid` | `string` | ESPN athlete UID (universal identifier). |
 | `athlete_guid` | `string` | ESPN athlete GUID. |
-| `athlete_first_name` | `string` | Player first name. |
-| `athlete_last_name` | `string` | Athlete last name. |
-| `athlete_full_name` | `string` | Drafted player full name. |
+| `athlete_first_name` | `string` |  |
+| `athlete_last_name` | `string` |  |
+| `athlete_full_name` | `string` |  |
 | `athlete_display_name` | `string` | Athlete display name (full). |
 | `athlete_short_name` | `string` | Athlete short display name. |
-| `athlete_height` | `string` | Athlete height. |
-| `athlete_weight` | `string` | Athlete weight. |
+| `athlete_height` | `string` |  |
+| `athlete_weight` | `string` |  |
 | `athlete_position_abbreviation` | `string` | Athlete position abbreviation (G / F / C). |
 | `athlete_position_name` | `string` | Athlete position ('Guard', 'Forward', 'Center'). |
 | `athlete_headshot_href` | `string` | Athlete headshot image URL. |
 | `college_id` | `string` | Unique identifier for college. |
 | `college_name` | `string` | College / pre-draft team. |
-| `college_short_name` | `string` | College short name. |
+| `college_short_name` | `string` |  |
 | `college_abbreviation` | `string` | Abbreviation of the drafted player's college taken from the pick's nested college block; the ESPN NBA draft feed omits that block entirely, so this and the other college columns are null throughout. |
 | `team_id` | `string` | Unique team identifier. |
 | `team_uid` | `string` | ESPN universal team identifier (UID format 's:40~l:...~t:...'). |
@@ -819,12 +819,12 @@ const rows = await sdv.nba.loadNbaStatsSchedules({ seasons: 2025 });
 | `game_date` | `string` | Game date (YYYY-MM-DD). |
 | `matchup` | `string` | Matchup. |
 | `home_team_id` | `string` | Unique identifier for the home team. |
-| `home_team_abbreviation` | `string` | Home team abbreviation. |
+| `home_team_abbreviation` | `string` |  |
 | `home_team_name` | `string` | Home team name. |
 | `home_pts` | `number \| bigint` | Final points scored by the home team. |
 | `home_wl` | `string` | Home team's result for the game (W or L). |
 | `away_team_id` | `string` | Unique identifier for the away team. |
-| `away_team_abbreviation` | `string` | Away team abbreviation. |
+| `away_team_abbreviation` | `string` |  |
 | `away_team_name` | `string` | Away team name. |
 | `away_pts` | `number \| bigint` | Final points scored by the away team. |
 | `away_wl` | `string` | Away team's result for the game (W or L). |
@@ -930,7 +930,7 @@ const rows = await sdv.nba.loadNbaStatsLineups({ seasons: 2025 });
 |---|---|---|
 | `group_set` | `string` | Lineup grouping label from the NBA Stats API (e.g. "Lineups"). |
 | `group_id` | `string` | ESPN group id. |
-| `group_name` | `string` | Group name (conference / division). |
+| `group_name` | `string` |  |
 | `team_id` | `string` | Unique team identifier. |
 | `team_abbreviation` | `string` | Short team abbreviation (e.g. 'LAS'). |
 | `gp` | `number \| bigint` | Games played. |
@@ -1244,7 +1244,7 @@ const rows = await sdv.nba.loadNbaStatsPbp({ seasons: 2025, columns: ['game_id',
 | `is_missed_shot` | `boolean` | Whether the event is a missed field goal. |
 | `is_free_throw` | `boolean` | Whether the event is a free throw attempt. |
 | `is_rebound` | `boolean` | Whether the event is a rebound. |
-| `is_turnover` | `boolean` | `TRUE` if the play was a turnover. |
+| `is_turnover` | `boolean` |  |
 | `is_foul` | `boolean` | Whether the event is a foul. |
 | `is_substitution` | `boolean` | Whether the event is a substitution. |
 | `is_jump_ball` | `boolean` | Whether the event is a jump ball. |
@@ -1500,7 +1500,7 @@ const rows = await sdv.nba.loadNbaStatsPbpV3({ seasons: 2025, columns: ['game_id
 | `is_missed_shot` | `boolean` | Whether the event is a missed field goal. |
 | `is_free_throw` | `boolean` | Whether the event is a free throw attempt. |
 | `is_rebound` | `boolean` | Whether the event is a rebound. |
-| `is_turnover` | `boolean` | `TRUE` if the play was a turnover. |
+| `is_turnover` | `boolean` |  |
 | `is_foul` | `boolean` | Whether the event is a foul. |
 | `is_substitution` | `boolean` | Whether the event is a substitution. |
 | `is_jump_ball` | `boolean` | Whether the event is a jump ball. |
@@ -2580,14 +2580,14 @@ const rows = await sdv.nba.loadNbaPlayerCore({ seasons: 2025 });
 | `date_of_birth` | `string` | Date of birth (YYYY-MM-DD). |
 | `birth_city` | `string` | Birth city. |
 | `birth_state` | `string` | Birth state / region. |
-| `birth_country` | `string` | Player birth country. |
+| `birth_country` | `string` |  |
 | `jersey` | `string` | Jersey number worn by the player. |
 | `position_id` | `string` | Unique position identifier. |
 | `position_name` | `string` | Listed roster position ('Guard', 'Forward', 'Center'). |
 | `position_abbreviation` | `string` | Position abbreviation ('G' / 'F' / 'C'). |
 | `position_display_name` | `string` | Position display name. |
 | `college_id` | `string` | Unique identifier for college. |
-| `current_team_id` | `string` | Player's current team identifier. |
+| `current_team_id` | `string` |  |
 | `headshot_href` | `string` | Headshot image URL. |
 | `experience_years` | `number` | Experience years. |
 | `status_id` | `string` | Status identifier. |

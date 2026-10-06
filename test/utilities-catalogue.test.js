@@ -1,7 +1,7 @@
 import 'should';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parse } from 'yaml';
 import * as pkg from '../dist/index.js';
 import { UTILITY_CATEGORIES } from '../dist/generated/utilities.js';
@@ -22,40 +22,68 @@ for (const m of doc.modules) {
   }
 }
 
-/** The named exports of src/index.ts that are not re-exported from src/generated/. */
-function indexExports() {
+/**
+ * The named exports of src/index.ts that are not re-exported from src/generated/:
+ * `export { a, b } from '...'`, `export type { T }`, inline `export const x` /
+ * `export function f` / `export type T =`, and the names an `export * from '<non-generated>'`
+ * brings in (resolved through the built module).
+ */
+async function indexExports() {
   const src = readFileSync(join(root, 'src', 'index.ts'), 'utf8');
   const names = new Set();
-  const re = /^export\s+(type\s+)?\{([^}]*)\}(?:\s*from\s*'([^']+)')?/gm;
-  for (const m of src.matchAll(re)) {
+  for (const m of src.matchAll(/^export\s+(type\s+)?\{([^}]*)\}(?:\s*from\s*'([^']+)')?/gm)) {
     if (m[3] && m[3].startsWith('./generated/')) continue;
     for (const raw of m[2].split(',')) {
       const n = raw.trim().replace(/^type\s+/, '').split(/\s+as\s+/).pop();
       if (n) names.add(n);
     }
   }
-  for (const m of src.matchAll(/^export\s+type\s+(\w+)\s*=/gm)) names.add(m[1]);
+  for (const m of src.matchAll(/^export\s+(?:const|let|function|class|type|interface|enum)\s+(\w+)/gm)) names.add(m[1]);
+  for (const m of src.matchAll(/^export\s+\*\s+from\s+'([^']+)'/gm)) {
+    if (m[1].startsWith('./generated/')) continue;
+    const mod = await import(pathToFileURL(join(root, 'dist', m[1].replace(/^\.\//, ''))).href);
+    for (const n of Object.keys(mod)) names.add(n);
+  }
+  names.delete('default');
+  return names;
+}
+
+/** The loader names src/generated/loaders/ defines (the only `load*` exempt from the catalogue). */
+function generatedLoaderNames() {
+  const dir = join(root, 'src', 'generated', 'loaders');
+  const names = new Set();
+  for (const f of readdirSync(dir)) {
+    for (const m of readFileSync(join(dir, f), 'utf8').matchAll(/^export const (load\w+)/gm)) names.add(m[1]);
+  }
   return names;
 }
 
 describe('utilities catalogue (tools/codegen/utilities.yaml)', () => {
-  const NAMESPACE_LIKE = new Set(['LEAGUES', 'WRAPPERS', 'FLAT_WRAPPERS']);
+  // Re-exported generated tables: a namespace-like data surface, not a utility.
+  const NAMESPACE_LIKE = new Set(['LEAGUES', 'WRAPPERS', 'FLAT_WRAPPERS', 'UTILITY_CATEGORIES', 'UtilityCategory']);
 
-  it('lists every public non-data export of src/index.ts', () => {
-    const missing = [...indexExports()].filter(
-      (n) => !NAMESPACE_LIKE.has(n) && !/^load[A-Z_]/.test(n) && !catalogued.has(n) && !aliased.has(n)
+  it('lists every public non-data export of src/index.ts', async () => {
+    const loaders = generatedLoaderNames();
+    const missing = [...(await indexExports())].filter(
+      (n) => !NAMESPACE_LIKE.has(n) && !loaders.has(n) && !catalogued.has(n) && !aliased.has(n)
     );
     missing.should.eql([], `add to tools/codegen/utilities.yaml: ${missing.join(', ')}`);
   });
 
-  it('every catalogued value export exists on the built package or its module', () => {
+  it('every catalogued value export is a real export of its built module (or the package root)', async () => {
     const missing = [];
     for (const m of doc.modules) {
       const modPath = join(root, 'dist', m.module.replace(/^src\//, '').replace(/\.ts$/, '.js'));
+      const mod = existsSync(modPath) ? await import(pathToFileURL(modPath).href) : {};
+      const sources = await Promise.all(
+        (m.sources ?? []).map((s) => {
+          const p = join(root, 'dist', s.replace(/^src\//, '').replace(/\.ts$/, '.js'));
+          return existsSync(p) ? import(pathToFileURL(p).href) : {};
+        })
+      );
       for (const e of m.exports) {
         if (e.kind === 'type') continue;
-        if (e.name in pkg) continue;
-        if (existsSync(modPath)) continue; // module-level export: the signature lookup already proved it
+        if (e.name in pkg || e.name in mod || sources.some((s) => e.name in s)) continue;
         missing.push(`${m.module}.${e.name}`);
       }
     }

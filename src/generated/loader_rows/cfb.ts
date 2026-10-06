@@ -243,13 +243,13 @@ export interface LoadCfbPbpRow {
   lead_pos_team2?: number | bigint | null;
   /** 247Sports referencing id for the recruit. `Int64` (an id) */
   id?: string | null;
-  /** Broadcast sequence order number. `Int64` */
+  /** `Int64` */
   sequenceNumber?: number | bigint | null;
   /** Full play description. `String` */
   text?: string | null;
-  /** Away team score after the goal. `Int64` */
+  /** `Int64` */
   awayScore?: number | bigint | null;
-  /** Home team score after the goal. `Int64` */
+  /** `Int64` */
   homeScore?: number | bigint | null;
   /** ESPN flag marking the play as a scoring play. `Boolean` */
   scoringPlay?: boolean | null;
@@ -371,7 +371,7 @@ export interface LoadCfbPbpRow {
   seasonType?: number | bigint | null;
   /** Game week of the season. `Int64` */
   week?: number | bigint | null;
-  /** Whether the game is complete. `Boolean` */
+  /** `Boolean` */
   status_type_completed?: boolean | null;
   /** ESPN's home-team Id for the game, stamped on every play. `Int64` (an id) */
   homeTeamId?: string | null;
@@ -507,7 +507,7 @@ export interface LoadCfbPbpRow {
   td_check?: boolean | null;
   /** True when the defense forced a fumble on the play. `Boolean` */
   forced_fumble?: boolean | null;
-  /** Whether the subject team was the home team. `Boolean` */
+  /** `Boolean` */
   is_home?: boolean | null;
   /** Value of HA_score_diff on the previous play, used for sequence-aware derivations. `Int64` */
   lag_HA_score_diff?: number | bigint | null;
@@ -575,7 +575,7 @@ export interface LoadCfbPbpRow {
   pos_unit?: string | null;
   /** Defensive possession-team unit label (defense or special teams). `String` */
   def_pos_unit?: string | null;
-  /** Binary indicator for whether or not a score occurred on the play. `Boolean` */
+  /** `Boolean` */
   sp?: boolean | null;
   /** Binary flag indicating the row is a counted play (excludes end markers/timeouts/penalties). `Boolean` */
   play?: boolean | null;
@@ -587,19 +587,19 @@ export interface LoadCfbPbpRow {
   scrimmage_play?: boolean | null;
   /** Score differential from the possessing team's perspective at the end of the play. `Int64` */
   pos_score_diff_end?: number | bigint | null;
-  /** Binary indicator for if the fumble was lost. `Boolean` */
+  /** `Boolean` */
   fumble_lost?: boolean | null;
   /** True when a fumble on the play was recovered. `Boolean` */
   fumble_recovered?: boolean | null;
-  /** String indicator for result of field goal attempt: made, missed, or blocked. `String` */
+  /** `String` */
   field_goal_result?: string | null;
-  /** String indicator for the result of the extra point attempt: good, failed, blocked, safety (touchback in defensive endzone is 1 point apparently), or aborted. `String` */
+  /** `String` */
   extra_point_result?: string | null;
   /** String result of the two-point conversion attempt: success, failure, or safety (touchback in the defensive end zone). `String` */
   two_point_conv_result?: string | null;
-  /** Binary indicator whether or not the defense was able to have an attempt on a two point conversion, this results following a turnover. `Boolean` */
+  /** `Boolean` */
   defensive_two_point_attempt?: boolean | null;
-  /** Binary indicator whether or not the defense successfully scored on the two point conversion. `Boolean` */
+  /** `Boolean` */
   defensive_two_point_conv?: boolean | null;
   /** Provenance of yds_punted: "text" when the value was present before the special-teams derivation step (parsed from the play text, or set by a flag convention such as a blocked punt's 0), "derived" when that step filled it from field position, null when there is no value. `String` */
   yds_punted_source?: string | null;
@@ -609,9 +609,9 @@ export interface LoadCfbPbpRow {
   yds_punt_return_source?: string | null;
   /** Yards to the endzone at the catch spot, parsed from the 2025+ vendor catch-spot text; null before 2025 or when unresolvable. `Int64` */
   air_yardsToEndzone?: number | bigint | null;
-  /** Numeric value for distance in yards perpendicular to the line of scrimmage at where the targeted receiver either caught or didn't catch the ball. `Int64` */
+  /** `Int64` */
   air_yards?: number | bigint | null;
-  /** Numeric value for distance in yards perpendicular to the yard line where the receiver made the reception to where the play ended. `Int64` */
+  /** `Int64` */
   yards_after_catch?: number | bigint | null;
   /** Name of the player returning the kickoff, when the play was returned. `String` */
   kickoff_return_player_name?: string | null;
@@ -695,7 +695,7 @@ export interface LoadCfbPbpRow {
   new_distance?: number | bigint | null;
   /** Whether the play began with two minutes or less remaining in the half. `Boolean` */
   under_2?: boolean | null;
-  /** Binary indicator for whether or not the posteam is in a goal down situation. `Boolean` */
+  /** `Boolean` */
   goal_to_go?: boolean | null;
   /** True when the rush was stopped at or behind the line of scrimmage. `Boolean` */
   stopped_run?: boolean | null;
@@ -749,7 +749,7 @@ export interface LoadCfbPbpRow {
   havoc?: boolean | null;
   /** Whether the play gained enough yardage to earn a first down. `Boolean` */
   first_down_yards?: boolean | null;
-  /** Binary indicator for if a penalty converted the first down. `Boolean` */
+  /** `Boolean` */
   first_down_penalty?: boolean | null;
   /** Whether the play earned a first down by means other than yardage (e.g. by penalty). `Boolean` */
   first_down_earned?: boolean | null;
@@ -887,19 +887,19 @@ export interface LoadCfbPbpRow {
   away_wp_after_naive?: number | null;
   /** Win probability added on the play under the spread-free (naive) model. `Float64` */
   wpa_naive?: number | null;
-  /** Numeric value indicating the probability for a complete pass based on comparable game situations. `Float64` */
+  /** `Float64` */
   cp?: number | null;
   /** Completion probability from the 8-feature game-state booster, scored on every pass play regardless of which model produced cp. On one scale across seasons, so use it (not cp) for anything summed or averaged; null on non-pass plays. `Float64` */
   cp_game_state?: number | null;
   /** Which completion-probability booster scored cp on the play: "air_yards" (the 11-feature model, used where ESPN's play text gives a catch/target spot -- essentially 2025 onward) or "game_state" (the 8-feature model used everywhere else). The two are not on one scale, so group any cpoe aggregate by this column; null on non-pass plays. `String` */
   cp_model?: string | null;
-  /** For a single pass play this is 1 - cp when the pass was completed or 0 - cp when the pass was incomplete. Analyzed for a whole game or season an indicator for the passer how much over or under expectation his completion percentage was. `Float64` */
+  /** `Float64` */
   cpoe?: number | null;
-  /** one of pre2018 (2006-2017) or post2018 (2018+) `Int64` */
+  /** `Int64` */
   era?: number | bigint | null;
-  /** Probability of dropback scaled from 0 to 1. `Float64` */
+  /** `Float64` */
   xpass?: number | null;
-  /** Dropback percent over expected on a given play scaled from 0 to 100. `Float64` */
+  /** `Float64` */
   pass_oe?: number | null;
   /** Yard line at which the drive began. `Float64` */
   drive_start?: number | null;
@@ -943,11 +943,11 @@ export interface LoadCfbPbpRow {
   action_play?: boolean | null;
   /** Player full name. `String` */
   athlete_name?: string | null;
-  /** Unique identifier for the player that attempted the run. `Int64` (an id) */
+  /** `Int64` (an id) */
   rusher_player_id?: string | null;
-  /** Unique identifier for the player that attempted the pass. `Int64` (an id) */
+  /** `Int64` (an id) */
   passer_player_id?: string | null;
-  /** Unique identifier for the receiver that was targeted on the pass. `Int64` (an id) */
+  /** `Int64` (an id) */
   receiver_player_id?: string | null;
   /** CFBD athlete_id of the player who fumbled. `Int64` (an id) */
   fumble_player_id?: string | null;
@@ -965,7 +965,7 @@ export interface LoadCfbPbpRow {
   fumble_recovered_player_id?: string | null;
   /** ESPN athlete id of the field-goal kicker. `Int64` (an id) */
   fg_kicker_player_id?: string | null;
-  /** Unique identifier for the punter. `Int64` (an id) */
+  /** `Int64` (an id) */
   punter_player_id?: string | null;
   /** ESPN athlete id of the player kicking off. `Int64` (an id) */
   kickoff_player_id?: string | null;
@@ -1093,7 +1093,7 @@ export interface LoadCfbRecruitsRow {
   team?: string | null;
   /** ESPN recruit id. `String` (an id) */
   recruit_id?: string | null;
-  /** Full name of player `String` */
+  /** `String` */
   player_name?: string | null;
   /** Recruit star rating on the 247Sports scale (2-5). `Int64` */
   stars?: number | bigint | null;
@@ -1465,7 +1465,7 @@ export interface LoadCfbTeamInfoRow {
   color?: string | null;
   /** Team color (alternate). `String` */
   alt_color?: string | null;
-  /** Team or league logo URL. `String` */
+  /** `String` */
   logo?: string | null;
   /** URL of the team's alternate dark-background 500-pixel logo on ESPN's CDN, null for programs with no dark variant. `String` */
   logo_2?: string | null;
@@ -1697,7 +1697,7 @@ export interface LoadCfbTeamsCrosswalkRow {
   espn_team_id?: string | null;
   /** ESPN's full team display name, school plus mascot, null when the row was anchored on a non-ESPN provider. `String` */
   espn_team?: string | null;
-  /** ESPN abbreviation. `String` */
+  /** `String` */
   espn_abbreviation?: string | null;
   /** Fox Sports team id for the same team. `String` (an id) */
   fox_team_id?: string | null;
@@ -1825,7 +1825,7 @@ export interface LoadCfbPlayerBoxRow {
   rushingTouchdowns?: string | null;
   /** Longest rush of the game, in yards. `String` */
   longRushing?: string | null;
-  /** The number of pass receptions. Lateral receptions officially don't count as reception. `String` */
+  /** `String` */
   receptions?: string | null;
   /** Receiving yards gained. `String` */
   receivingYards?: string | null;
@@ -2155,11 +2155,11 @@ export interface LoadCfbPlayParticipantsRow {
 export interface LoadCfbGameRostersRow {
   /** ESPN athlete id. `Int64` (an id) */
   athlete_id?: string | null;
-  /** ESPN athlete UID (universal identifier). `String` */
+  /** `String` */
   athlete_uid?: string | null;
-  /** ESPN athlete GUID. `String` */
+  /** `String` */
   athlete_guid?: string | null;
-  /** Athlete type / class. `String` */
+  /** `String` */
   athlete_type?: string | null;
   /** Athlete first name. `String` */
   first_name?: string | null;
@@ -2183,25 +2183,25 @@ export interface LoadCfbGameRostersRow {
   slug?: string | null;
   /** Jersey number. `String` */
   jersey?: string | null;
-  /** TRUE if the record is linked to a related entity. `Boolean` */
+  /** `Boolean` */
   linked?: boolean | null;
   /** `TRUE` if the player was active for the game. `Boolean` */
   active?: boolean | null;
-  /** Alternate ids sdr. `String` */
+  /** `String` */
   alternate_ids_sdr?: string | null;
-  /** Birth place city. `String` */
+  /** `String` */
   birth_place_city?: string | null;
-  /** Birth place state. `String` */
+  /** `String` */
   birth_place_state?: string | null;
-  /** Birth place country. `String` */
+  /** `String` */
   birth_place_country?: string | null;
   /** ESPN's internal alternate identifier for the athlete's birth country, paired with birth_place_country and the flag fields. `String` (an id) */
   birth_country_alternate_id?: string | null;
-  /** Birth country abbreviation. `String` */
+  /** `String` */
   birth_country_abbreviation?: string | null;
   /** URL of the athlete headshot image. `String` */
   headshot_href?: string | null;
-  /** Alternative-text label for the headshot. `String` */
+  /** `String` */
   headshot_alt?: string | null;
   /** URL of the birth-country flag image hosted on ESPN's CDN under teamlogos/countries. `String` */
   flag_href?: string | null;
@@ -2211,9 +2211,9 @@ export interface LoadCfbGameRostersRow {
   flag_rel?: string | null;
   /** Years of experience. `Float64` */
   experience_years?: number | null;
-  /** Experience display value. `String` */
+  /** `String` */
   experience_display_value?: string | null;
-  /** Experience abbreviation. `String` */
+  /** `String` */
   experience_abbreviation?: string | null;
   /** ESPN commitment status id. `String` (an id) */
   status_id?: string | null;
@@ -2221,13 +2221,13 @@ export interface LoadCfbGameRostersRow {
   status_name?: string | null;
   /** Status type. `String` */
   status_type?: string | null;
-  /** Status abbreviation. `String` */
+  /** `String` */
   status_abbreviation?: string | null;
-  /** Hand type. `String` */
+  /** `String` */
   hand_type?: string | null;
-  /** Hand abbreviation. `String` */
+  /** `String` */
   hand_abbreviation?: string | null;
-  /** Hand display value. `String` */
+  /** `String` */
   hand_display_value?: string | null;
   /** `TRUE` if the athlete started the game. `Boolean` */
   starter?: boolean | null;
@@ -2253,9 +2253,9 @@ export interface LoadCfbGameRostersRow {
   home_away?: string | null;
   /** `TRUE` if this team won the game. `Boolean` */
   winner?: boolean | null;
-  /** ESPN team GUID. `String` */
+  /** `String` */
   team_guid?: string | null;
-  /** ESPN universal team identifier (UID format 's:40~l:...~t:...'). `String` */
+  /** `String` */
   team_uid?: string | null;
   /** Team slug for the stat row. `String` */
   team_slug?: string | null;
@@ -2291,21 +2291,21 @@ export interface LoadCfbGameRostersRow {
   season?: number | bigint | null;
   /** Game week of the season. `Int64` */
   week?: number | bigint | null;
-  /** Citizenship. `String` */
+  /** `String` */
   citizenship?: string | null;
-  /** Middle name of the player. `String` */
+  /** `String` */
   middle_name?: string | null;
-  /** Age as of last pipeline build, rounded to one decimal. Pipeline is built on a weekly basis. `Float64` */
+  /** `Float64` */
   age?: number | null;
   /** Player date of birth (if published). `String` */
   date_of_birth?: string | null;
-  /** Draft display text. `String` */
+  /** `String` */
   draft_display_text?: string | null;
-  /** Round that player was drafted in `Float64` */
+  /** `Float64` */
   draft_round?: number | null;
-  /** Year that player was drafted `Float64` */
+  /** `Float64` */
   draft_year?: number | null;
-  /** Draft selection. `Float64` */
+  /** `Float64` */
   draft_selection?: number | null;
   /** Team nickname / location label. `String` */
   nickname?: string | null;
@@ -2337,15 +2337,15 @@ export interface LoadCfbBettingRow {
   season?: number | bigint | null;
   /** Game week of the season. `Int64` */
   week?: number | bigint | null;
-  /** Game spread in (-X Team) format. There are almost none, I would recommend not trusting any of these three columns `Float64` */
+  /** `Float64` */
   game_spread?: number | null;
   /** Pre-game over/under total from the selected provider. `Float64` */
   over_under?: number | null;
   /** `TRUE` if the home team is the favorite. `Boolean` */
   home_favorite?: boolean | null;
-  /** The game spread with respect to the home team `Float64` */
+  /** `Float64` */
   home_team_spread?: number | null;
-  /** Logical (TRUE/FALSE) indicating whether the spread was available from ESPN. Basically, I would just not recommend using any of the spread information, I think I defaulted a lot of them to -2.5 for the home team. Most games probably do not have spread information. This column should really be listed first `Boolean` */
+  /** `Boolean` */
   game_spread_available?: boolean | null;
   /** Provenance of the spread and over/under used for the game: summary_pickcenter when ESPN's own pickcenter carried them, core_odds_api when they came from the live odds endpoint, default when neither resolved, injected when supplied by an offline rebuild. `String` */
   odds_source?: string | null;
@@ -2673,7 +2673,7 @@ export interface LoadCfbAdvPassingRow {
   EPA?: number | null;
   /** EPA per play on the passer's plays. `Float64` */
   EPA_per_Play?: number | null;
-  /** Win Probability Added. `Float64` */
+  /** `Float64` */
   WPA?: number | null;
   /** Success rate on the passer's plays. `Float64` */
   SR?: number | null;
@@ -2747,7 +2747,7 @@ export interface LoadCfbAdvRushingRow {
   EPA?: number | null;
   /** EPA per play on the passer's plays. `Float64` */
   EPA_per_Play?: number | null;
-  /** Win Probability Added. `Float64` */
+  /** `Float64` */
   WPA?: number | null;
   /** Success rate on the passer's plays. `Float64` */
   SR?: number | null;
@@ -2787,7 +2787,7 @@ export interface LoadCfbAdvReceivingRow {
   EPA?: number | null;
   /** EPA per play on the passer's plays. `Float64` */
   EPA_per_Play?: number | null;
-  /** Win Probability Added. `Float64` */
+  /** `Float64` */
   WPA?: number | null;
   /** Success rate on the passer's plays. `Float64` */
   SR?: number | null;
@@ -3089,7 +3089,7 @@ export interface LoadCfbAdvSpecialistsRow {
   pos_team_id?: string | null;
   /** Team name in possession at the start of the play (offense, kickoff-aware). `String` */
   pos_team?: string | null;
-  /** Full name of player `String` */
+  /** `String` */
   player_name?: string | null;
   /** Number of field-goal attempts. `Int64` */
   field_goals?: number | bigint | null;
@@ -3155,7 +3155,7 @@ export interface LoadCfbAdvTurnoverRow {
   turnover_margin?: number | bigint | null;
   /** Points of scoring luck attributed to turnovers, five points per turnover times the gap between turnover_margin and expected_turnover_margin. `Float64` */
   turnover_luck?: number | null;
-  /** Takeaways. `Int64` */
+  /** `Int64` */
   takeaways?: number | bigint | null;
   /** Special-teams turnovers this team recovered, taken as the opponent's st_turnovers_lost. `Int64` */
   st_turnovers_gained?: number | bigint | null;
@@ -3177,7 +3177,7 @@ export interface LoadCfbModelPbpRow {
   game_id?: string | null;
   /** 247Sports referencing id for the recruit. `String` (an id) */
   id?: string | null;
-  /** Broadcast sequence order number. `String` */
+  /** `String` */
   sequenceNumber?: string | null;
   /** Sequential play number within the game (excludes timeouts/end markers). `Int64` */
   game_play_number?: number | bigint | null;
@@ -3237,7 +3237,7 @@ export interface LoadCfbModelPbpRow {
   ep_before?: number | null;
   /** Expected points value after the play (cfbfastR EPA model). `Float64` */
   ep_after?: number | null;
-  /** Expected points added (EPA) by the posteam for the given play. `Float64` */
+  /** `Float64` */
   epa?: number | null;
   /** Win probability for the possession team before the play (0-1). `Float64` */
   wp_before?: number | null;
@@ -3247,7 +3247,7 @@ export interface LoadCfbModelPbpRow {
   wpa?: number | null;
   /** Modelled probability the pass is completed. `Float64` */
   completion_prob?: number | null;
-  /** For a single pass play this is 1 - cp when the pass was completed or 0 - cp when the pass was incomplete. Analyzed for a whole game or season an indicator for the passer how much over or under expectation his completion percentage was. `Float64` */
+  /** `Float64` */
   cpoe?: number | null;
   /** Version of the model-scored play-by-play build. `String` */
   model_pbp_version?: string | null;
@@ -3539,7 +3539,7 @@ export interface LoadCfbReceivingRow {
   success?: number | null;
   /** Completed passes. `UInt32` */
   comp?: number | null;
-  /** The number of pass plays where the player was the targeted receiver. `UInt32` */
+  /** `UInt32` */
   targets?: number | null;
   /** Passing touchdowns thrown. `Float64` */
   passing_td?: number | null;
@@ -5359,17 +5359,17 @@ export interface LoadCfbAdvTeamGamelogRow {
   opponent_id?: string | null;
   /** Opponent team name. `String` */
   opponent?: string | null;
-  /** Whether the subject team was the home team. `Boolean` */
+  /** `Boolean` */
   is_home?: boolean | null;
   /** TRUE/FALSE flag for if the game took place at a neutral site. `Boolean` */
   neutral_site?: boolean | null;
-  /** Goals/points scored. `Int64` */
+  /** `Int64` */
   points_for?: number | bigint | null;
-  /** Points allowed. `Int64` */
+  /** `Int64` */
   points_against?: number | bigint | null;
   /** Final scoring margin from this team's perspective, exactly points_for minus points_against. `Int64` */
   margin?: number | bigint | null;
-  /** Whether the game was a win (goalie). `Boolean` */
+  /** `Boolean` */
   win?: boolean | null;
   /** Highlight yards per rushing opportunity. `Float64` */
   rushing_highlight_yards_per_opp?: number | null;
@@ -11667,7 +11667,7 @@ export interface LoadCfbPbpRRow {
   home_team_id?: string | null;
   /** Home team name. `String` */
   home_team?: string | null;
-  /** Home team NCAA division (1, 2, 3). `String` */
+  /** `String` */
   home_team_division?: string | null;
   /** Conference name of the home team. `String` */
   home_team_conference?: string | null;
@@ -11677,7 +11677,7 @@ export interface LoadCfbPbpRRow {
   away_team_id?: string | null;
   /** Away team name. `String` */
   away_team?: string | null;
-  /** Away team NCAA division (1, 2, 3). `String` */
+  /** `String` */
   away_team_division?: string | null;
   /** Conference name of the away team. `String` */
   away_team_conference?: string | null;
@@ -12151,7 +12151,7 @@ export interface LoadCfbPbpRRow {
 
 /** One row of `sdv.cfb.loadNcaaMfbPbp` (`ncaa_mfb_pbp`; sdv-py loader schema `load_ncaa_mfb_pbp`). */
 export interface LoadNcaaMfbPbpRow {
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** Sequential drive number within the game (1-indexed). `Int64` */
   drive_number?: number | bigint | null;
@@ -12181,11 +12181,11 @@ export interface LoadNcaaMfbPbpRow {
   yards_gained?: number | bigint | null;
   /** Offensive formation or personnel grouping reported for the play (e.g. 'Shotgun', 'I-Formation'), when the source narrative names it. `String` */
   formation?: string | null;
-  /** Name of the dropback player (scrambles included) including plays with penalties. `String` */
+  /** `String` */
   passer?: string | null;
-  /** Name of the rusher (no scrambles) including plays with penalties. `String` */
+  /** `String` */
   rusher?: string | null;
-  /** Name of the receiver including plays with penalties. `String` */
+  /** `String` */
   receiver?: string | null;
   /** Name of the player who kicked off, punted, or attempted the field goal/PAT on this play. `String` */
   kicker?: string | null;
@@ -12195,7 +12195,7 @@ export interface LoadNcaaMfbPbpRow {
   returner?: string | null;
   /** Hole or side the ball carrier ran through on a rush play (e.g. 'left end', 'right guard'), when the narrative reports it. `String` */
   run_direction?: string | null;
-  /** Binary indicator for whether or not the QB scrambled. `Boolean` */
+  /** `Boolean` */
   qb_scramble?: boolean | null;
   /** Whether a pass attempt on this play was completed. `Boolean` */
   pass_complete?: boolean | null;
@@ -12209,7 +12209,7 @@ export interface LoadNcaaMfbPbpRow {
   tackler_2?: string | null;
   /** Yards traveled on a kickoff. `Int64` */
   kick_yards?: number | bigint | null;
-  /** Yards gained by the return team. Returns may occur on any of: interception, fumble, kickoff, punt, or blocked kicks. `Int64` */
+  /** `Int64` */
   return_yards?: number | bigint | null;
   /** Gross yards traveled on a punt, before any return. `Int64` */
   punt_yards?: number | bigint | null;
@@ -12229,7 +12229,7 @@ export interface LoadNcaaMfbPbpRow {
   is_turnover?: boolean | null;
   /** Kind of turnover on the play, if any (e.g. 'interception', 'fumble lost'); null when no turnover occurred. `String` */
   turnover_type?: string | null;
-  /** 1 if play description contains ran ob, pushed ob, or sacked ob; 0 otherwise. `Boolean` */
+  /** `Boolean` */
   out_of_bounds?: boolean | null;
   /** Whether the play was negated (e.g. by a penalty on the preceding down) and is excluded from drive/stat totals. `Boolean` */
   no_play?: boolean | null;
@@ -12237,19 +12237,19 @@ export interface LoadNcaaMfbPbpRow {
   fair_catch?: boolean | null;
   /** TRUE when a penalty was flagged on the play. `Boolean` */
   penalty_flag?: boolean | null;
-  /** String abbreviation of the team with the penalty. `String` */
+  /** `String` */
   penalty_team?: string | null;
-  /** String indicating the penalty type of the first penalty in the given play. Will be `NA` if `desc` is missing the type. `String` */
+  /** `String` */
   penalty_type?: string | null;
   /** Name of the player penalized on the play, when a penalty occurred. `String` */
   penalty_player?: string | null;
-  /** Yards gained (or lost) by the posteam from the penalty. `Int64` */
+  /** `Int64` */
   penalty_yards?: number | bigint | null;
   /** Yard line at the end of the play. `String` */
   end_yard_line?: string | null;
   /** Free-form text description of the play from the CFBD feed. `String` */
   play_text?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
@@ -12467,7 +12467,7 @@ export interface LoadNcaaMfbPbpCfbfastrRow {
   play_after_turnover?: boolean | null;
   /** Total number of plays in the game this row belongs to, repeated on every row for convenience. `UInt32` */
   n_plays_in_game?: number | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -12475,7 +12475,7 @@ export interface LoadNcaaMfbPbpCfbfastrRow {
 
 /** One row of `sdv.cfb.loadNcaaMfbDrives` (`ncaa_mfb_drives`; sdv-py loader schema `load_ncaa_mfb_drives`). */
 export interface LoadNcaaMfbDrivesRow {
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** Sequential drive number within the game (1-indexed). `Int64` */
   drive_number?: number | bigint | null;
@@ -12505,7 +12505,7 @@ export interface LoadNcaaMfbDrivesRow {
   n_plays?: number | bigint | null;
   /** Total yards gained on the drive. `Int64` */
   yards?: number | bigint | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
@@ -12533,13 +12533,13 @@ export interface LoadNcaaMfbScheduleRow {
   team_score?: number | bigint | null;
   /** Defense / opponent team score at the time of the play. `Int64` */
   opponent_score?: number | bigint | null;
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** Reported attendance at the game. `Int64` */
   attendance?: number | bigint | null;
   /** Academic year the game was played in (the ENDING year of the fall/spring split, e.g. 2025 for the 2024 fall season) -- distinct from `season`, which is the STARTING year. `Int32` */
   academic_year?: number | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
@@ -12555,7 +12555,7 @@ export interface LoadNcaaMfbRostersRow {
   team_name?: string | null;
   /** ESPN player id from the roster entry. `String` (an id) */
   player_id?: string | null;
-  /** Full name of player `String` */
+  /** `String` */
   player_name?: string | null;
   /** Jersey number. `String` */
   jersey?: string | null;
@@ -12569,13 +12569,13 @@ export interface LoadNcaaMfbRostersRow {
   height?: string | null;
   /** Listed weight (lbs). `Int64` */
   weight?: number | bigint | null;
-  /** Prospect hometown. `String` */
+  /** `String` */
   hometown?: string | null;
-  /** High school `String` */
+  /** `String` */
   high_school?: string | null;
-  /** Games played. `Int64` */
+  /** `Int64` */
   games_played?: number | bigint | null;
-  /** Games started (goalies). `Int64` */
+  /** `Int64` */
   games_started?: number | bigint | null;
   /** Academic year the roster snapshot covers (the ENDING year of the fall/spring split) -- distinct from `season`, which is the STARTING year. `Int32` */
   academic_year?: number | null;
@@ -12603,11 +12603,11 @@ export interface LoadNcaaMfbTeamsRow {
 
 /** One row of `sdv.cfb.loadNcaaMfbTeamStats` (`ncaa_mfb_team_stats`; sdv-py loader schema `load_ncaa_mfb_team_stats`). */
 export interface LoadNcaaMfbTeamStatsRow {
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** stats.ncaa.org box-score section the stat belongs to (Passing, Rushing, First Downs, Total Offense, Kicking, Punt Returns, Kickoffs and KO Returns, Sacks, Passes Defended); not a CFBD category. `String` */
   category?: string | null;
-  /** Stat. `String` */
+  /** `String` */
   stat?: string | null;
   /** Period (quarter) number. `String` */
   period?: string | null;
@@ -12619,7 +12619,7 @@ export interface LoadNcaaMfbTeamStatsRow {
   home_team?: string | null;
   /** Team-stat value for the home team; each row is one stat category for one game, wide by side. `String` */
   home_value?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
@@ -12629,17 +12629,17 @@ export interface LoadNcaaMfbTeamStatsRow {
 
 /** One row of `sdv.cfb.loadNcaaMfbPlayerStats` (`ncaa_mfb_player_stats`; sdv-py loader schema `load_ncaa_mfb_player_stats`). */
 export interface LoadNcaaMfbPlayerStatsRow {
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** ESPN team id. `String` (an id) */
   team_id?: string | null;
-  /** Week number as returned by the API. `String` */
+  /** `String` */
   number?: string | null;
   /** Position name (e.g. `Quarterback`). `String` */
   name?: string | null;
   /** Athlete position. `String` */
   position?: string | null;
-  /** The number of rushing attempts `String` */
+  /** `String` */
   rush_attempts?: string | null;
   /** Total positive rushing yards gained on carries, before subtracting yards lost to tackles for loss. `String` */
   rush_yds_gained?: string | null;
@@ -12653,13 +12653,13 @@ export interface LoadNcaaMfbPlayerStatsRow {
   rush_long?: string | null;
   /** CFBD stats category name (e.g. passing, rushing, defensive). `String` */
   category?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** Pass attempts for the game. Populated only on this player-game's 'passing' category row (null on the 'rushing'/'receiving' rows for the same player-game) -- the loader returns one row per player-game-category. `String` */
   pass_attempts?: string | null;
-  /** The number of completed passes. `String` */
+  /** `String` */
   completions?: string | null;
-  /** Number of yards gained on pass plays `String` */
+  /** `String` */
   pass_yards?: string | null;
   /** Passing interceptions. `String` */
   interceptions?: string | null;
@@ -12669,13 +12669,13 @@ export interface LoadNcaaMfbPlayerStatsRow {
   pass_eff?: string | null;
   /** Passing yards divided by completions. `String` */
   yds_per_completion?: string | null;
-  /** Win percentage. `String` */
+  /** `String` */
   pct?: string | null;
   /** Longest completed pass of the game. `String` */
   long_pass?: string | null;
   /** Total receptions for the game. `String` */
   rec?: string | null;
-  /** Numeric yards by the receiver_player_name, excluding yards gained in pass plays with laterals. This should equal official receiving statistics but could miss yards gained in pass plays with laterals. Please see the description of `lateral_receiver_player_name` for further information. `String` */
+  /** `String` */
   receiving_yards?: string | null;
   /** Receiving yards divided by receptions. `String` */
   yards_per_reception?: string | null;
@@ -12713,9 +12713,9 @@ export interface LoadNcaaMfbPlayerStatsRow {
   asst_tack?: string | null;
   /** Team tackles. `String` */
   tackles?: string | null;
-  /** Field goals made. `String` */
+  /** `String` */
   fgm?: string | null;
-  /** Field goal attempts. `String` */
+  /** `String` */
   fga?: string | null;
   /** Field goals blocked against the player's unit. `String` */
   fg_blocks_allowed?: string | null;
@@ -12735,13 +12735,13 @@ export interface LoadNcaaMfbPlayerStatsRow {
 
 /** One row of `sdv.cfb.loadNcaaMfbOfficials` (`ncaa_mfb_officials`; sdv-py loader schema `load_ncaa_mfb_officials`). */
 export interface LoadNcaaMfbOfficialsRow {
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
-  /** Grouped official role (Referee/Linesperson). `String` */
+  /** `String` */
   role?: string | null;
   /** Flag indicating that the media item comes from the official league feed rather than an editorial source. `String` */
   official?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
@@ -12751,7 +12751,7 @@ export interface LoadNcaaMfbOfficialsRow {
 
 /** One row of `sdv.cfb.loadNcaaMfbLinescore` (`ncaa_mfb_linescore`; sdv-py loader schema `load_ncaa_mfb_linescore`). */
 export interface LoadNcaaMfbLinescoreRow {
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** Team name. `String` */
   team?: string | null;
@@ -12761,7 +12761,7 @@ export interface LoadNcaaMfbLinescoreRow {
   period?: string | null;
   /** Total points accumulated by the school in the poll's weighted voting. `Int64` */
   points?: number | bigint | null;
-  /** Flag for whether the game is final. `Int64` */
+  /** `Int64` */
   final?: number | bigint | null;
   /** Kickoff date-time (ISO 8601, UTC). `String` */
   game_date?: string | null;
@@ -12769,7 +12769,7 @@ export interface LoadNcaaMfbLinescoreRow {
   venue?: string | null;
   /** Reported attendance at the game. `Int64` */
   attendance?: number | bigint | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;

@@ -281,7 +281,7 @@ export interface LoadWnbaScheduleRow {
   neutral_site?: boolean | null;
   /** Conference competition. `Boolean` */
   conference_competition?: boolean | null;
-  /** Whether play-by-play data is available. `Boolean` */
+  /** `Boolean` */
   play_by_play_available?: boolean | null;
   /** Recent. `Boolean` */
   recent?: boolean | null;
@@ -289,7 +289,7 @@ export interface LoadWnbaScheduleRow {
   start_date?: string | null;
   /** Broadcast information string. `String` */
   broadcast?: string | null;
-  /** Game highlight urls. `String` */
+  /** `String` */
   highlights?: string | null;
   /** Notes type. `String` */
   notes_type?: string | null;
@@ -407,15 +407,15 @@ export interface LoadWnbaScheduleRow {
   season_type?: number | null;
   /** Status type alt detail. `String` */
   status_type_alt_detail?: string | null;
-  /** Whether processed game JSON is available. `Boolean` */
+  /** `Boolean` */
   game_json?: boolean | null;
-  /** URL to the processed game JSON. `String` */
+  /** `String` */
   game_json_url?: string | null;
   /** Game start date/time (ISO 8601). `Datetime(time_unit='us', time_zone='America/New_York')` */
   game_date_time?: Date | null;
   /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
-  /** Whether play-by-play data is available. `Boolean` */
+  /** `Boolean` */
   PBP?: boolean | null;
   /** Team box. `Boolean` */
   team_box?: boolean | null;
@@ -571,19 +571,19 @@ export interface LoadWnbaDraftRow {
   athlete_uid?: string | null;
   /** ESPN athlete GUID. `String` */
   athlete_guid?: string | null;
-  /** Player first name. `String` */
+  /** `String` */
   athlete_first_name?: string | null;
-  /** Athlete last name. `String` */
+  /** `String` */
   athlete_last_name?: string | null;
-  /** Drafted player full name. `String` */
+  /** `String` */
   athlete_full_name?: string | null;
   /** Athlete display name (full). `String` */
   athlete_display_name?: string | null;
   /** Athlete short display name. `String` */
   athlete_short_name?: string | null;
-  /** Athlete height. `String` */
+  /** `String` */
   athlete_height?: string | null;
-  /** Athlete weight. `String` */
+  /** `String` */
   athlete_weight?: string | null;
   /** Athlete position abbreviation (G / F / C). `String` */
   athlete_position_abbreviation?: string | null;
@@ -595,7 +595,7 @@ export interface LoadWnbaDraftRow {
   college_id?: string | null;
   /** College name. `String` */
   college_name?: string | null;
-  /** College short name. `String` */
+  /** `String` */
   college_short_name?: string | null;
   /** Short code for the drafted player's school, read from the athlete's ESPN college block; null throughout the published data because ESPN ships no college block on these picks. `String` */
   college_abbreviation?: string | null;
@@ -651,9 +651,9 @@ export interface LoadWnbaGameRostersRow {
   athlete_display_name?: string | null;
   /** Athlete short display name. `String` */
   athlete_short_name?: string | null;
-  /** Player first name. `String` */
+  /** `String` */
   athlete_first_name?: string | null;
-  /** Athlete last name. `String` */
+  /** `String` */
   athlete_last_name?: string | null;
   /** Athlete jersey number. `String` */
   athlete_jersey?: string | null;
@@ -711,9 +711,9 @@ export interface LoadWnbaPlayerSeasonStatsRow {
   athlete_id?: string | null;
   /** Athlete display name (full). `String` */
   athlete_display_name?: string | null;
-  /** Player first name. `String` */
+  /** `String` */
   athlete_first_name?: string | null;
-  /** Athlete last name. `String` */
+  /** `String` */
   athlete_last_name?: string | null;
   /** Athlete position abbreviation (G / F / C). `String` */
   athlete_position_abbreviation?: string | null;
@@ -725,7 +725,7 @@ export interface LoadWnbaPlayerSeasonStatsRow {
   team_display_name?: string | null;
   /** Category label. `String` */
   category?: string | null;
-  /** Human-readable label of the statistic (e.g. 'At bats'). `String` */
+  /** `String` */
   stat_label?: string | null;
   /** Internal stat key. `String` */
   stat_name?: string | null;
@@ -871,9 +871,9 @@ export interface LoadWnbaStandingsRow {
   season?: number | null;
   /** ESPN group id. `String` (an id) */
   group_id?: string | null;
-  /** Group name (conference / division). `String` */
+  /** `String` */
   group_name?: string | null;
-  /** Group abbreviation. `String` */
+  /** `String` */
   group_abbreviation?: string | null;
   /** Short label of the standings group node the team sits under, read from ESPN shortName; the WNBA conference nodes ship only name and abbreviation, so it is null on every published row. `String` */
   group_short_name?: string | null;
@@ -903,7 +903,7 @@ export interface LoadWnbaStandingsRow {
   stat_name?: string | null;
   /** Stat display name. `String` */
   stat_display_name?: string | null;
-  /** Short human-readable stat name. `String` */
+  /** `String` */
   stat_short_display_name?: string | null;
   /** ESPN's long-form explanation of the standings stat, such as Clinched Best League Record for clincher or Record last 10 games for lasttengames. `String` */
   stat_description?: string | null;
@@ -941,7 +941,7 @@ export interface LoadWnbaTeamSeasonStatsRow {
   team_logo?: string | null;
   /** Category label. `String` */
   category?: string | null;
-  /** Human-readable label of the statistic (e.g. 'At bats'). `String` */
+  /** `String` */
   stat_label?: string | null;
   /** Internal stat key. `String` */
   stat_name?: string | null;
@@ -1127,7 +1127,7 @@ export interface LoadWnbaPlayerCoreRow {
   birth_city?: string | null;
   /** Birth state / region. `String` */
   birth_state?: string | null;
-  /** Player birth country. `String` */
+  /** `String` */
   birth_country?: string | null;
   /** Jersey number worn by the player. `String` */
   jersey?: string | null;
@@ -1141,7 +1141,7 @@ export interface LoadWnbaPlayerCoreRow {
   position_display_name?: string | null;
   /** Unique identifier for college. `Int32` (an id) */
   college_id?: string | null;
-  /** Player's current team identifier. `Int32` (an id) */
+  /** `Int32` (an id) */
   current_team_id?: string | null;
   /** Headshot image URL. `String` */
   headshot_href?: string | null;
@@ -1397,7 +1397,7 @@ export interface LoadWnbaStatsPbpRow {
   is_free_throw?: boolean | null;
   /** True when the event is a rebound (player or team). `Boolean` */
   is_rebound?: boolean | null;
-  /** `TRUE` if the play was a turnover. `Boolean` */
+  /** `Boolean` */
   is_turnover?: boolean | null;
   /** True when the event is a foul. `Boolean` */
   is_foul?: boolean | null;
@@ -1729,7 +1729,7 @@ export interface LoadWnbaStatsSchedulesRow {
   matchup?: string | null;
   /** Unique identifier for the home team. `Int64` (an id) */
   home_team_id?: string | null;
-  /** Home team abbreviation. `String` */
+  /** `String` */
   home_team_abbreviation?: string | null;
   /** Home team name. `String` */
   home_team_name?: string | null;
@@ -1739,7 +1739,7 @@ export interface LoadWnbaStatsSchedulesRow {
   home_wl?: string | null;
   /** Unique identifier for the away team. `Int64` (an id) */
   away_team_id?: string | null;
-  /** Away team abbreviation. `String` */
+  /** `String` */
   away_team_abbreviation?: string | null;
   /** Away team name. `String` */
   away_team_name?: string | null;

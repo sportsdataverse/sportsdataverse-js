@@ -272,51 +272,51 @@ WCH — scoreboard (ESPN site.api.espn.com).
 | col_name | type | description |
 |---|---|---|
 | `game_id` | character | Unique game identifier. |
-| `uid` | character | ESPN UID string. |
+| `uid` | character | Competitor uid string. |
 | `date` | character | Match start timestamp (ISO 8601, UTC). |
 | `name` | character | Full event name (e.g. 'Team A at Team B'). |
 | `short_name` | character | Abbreviated event name (e.g. 'TA @ TB'). |
 | `season_year` | integer | Integer season year ESPN assigns the event (e.g. 2025 for the 2025-26 season). |
 | `season_type` | integer | ESPN season-type id of the event's season: 1 preseason, 2 regular season, 3 postseason, 4 offseason for the US leagues; soccer competitions carry their own competition-specific ids (e.g. 13481). |
-| `season_slug` | character | Season slug. |
-| `status_type_id` | character | Unique identifier for status type. |
+| `season_slug` | character | Season type slug. |
+| `status_type_id` | character | Status type identifier. |
 | `status_type_name` | character | Status type name. |
 | `status_type_state` | character | Status state (pre/in/post). |
 | `status_type_completed` | logical | Whether the game is complete. |
-| `status_type_description` | character | Status type description. |
-| `status_type_detail` | character | Status type detail. |
-| `status_type_short_detail` | character | Status type short detail. |
+| `status_type_description` | character | Status description. |
+| `status_type_detail` | character | Status detail text. |
+| `status_type_short_detail` | character | Short status detail. |
 | `status_clock` | integer | Game clock in seconds as ESPN reports it: time remaining in the period for clock sports, elapsed seconds for soccer (e.g. 5400.0 at full time); 0.0 once a game has ended. |
-| `status_display_clock` | character | Status display clock. |
+| `status_display_clock` | character | Display clock string. |
 | `status_period` | integer | Current or final period number (quarter, half, inning or period, depending on the sport). |
 | `neutral_site` | logical | Whether the match is played at a neutral venue. |
-| `conference_competition` | logical | Conference competition. |
-| `attendance` | integer | Reported attendance. |
-| `venue_id` | character | Unique venue identifier. |
+| `conference_competition` | logical | Whether it is a conference competition. |
+| `attendance` | integer | Game attendance. |
+| `venue_id` | character | Venue identifier. |
 | `venue_full_name` | character | Venue full name. |
 | `venue_city` | character | Venue city. |
-| `venue_state` | character | Venue state / region. |
-| `venue_indoor` | logical | Whether the home venue is indoors. |
-| `broadcast` | character | Broadcast information string. |
+| `venue_state` | character | Venue state. |
+| `venue_indoor` | logical | Whether the venue is indoors. |
+| `broadcast` | character | Broadcast network(s). |
 | `note` | character | Event note text from the competition (e.g. a series or game label such as 'World Series - Game 1', or a shootout result); an empty string when there is none. |
-| `home_id` | character | Unique identifier for home. |
+| `home_id` | character | Home team ESPN identifier. |
 | `home_name` | character | Home team display name. |
-| `home_abbreviation` | character | Home team's abbreviation. |
+| `home_abbreviation` | character | Home team abbreviation. |
 | `home_display_name` | character | Home team display name. |
-| `home_location` | character | Home team's location. |
+| `home_location` | character | Home team city. |
 | `home_color` | character | Home team primary color hex. |
-| `home_alternate_color` | character | Color code (hex) for home alternate. |
+| `home_alternate_color` | character | Home team alternate color hex. |
 | `home_logo` | character | Home team logo URL. |
 | `home_score` | character | Home team's score. For cricket, the innings string (e.g. '161/5 (18/20 ov, target 156)'). |
 | `home_winner` | logical | Whether the home team won. |
 | `home_rank` | character | Home team rank (if ranked). |
-| `away_id` | character | Unique identifier for away. |
+| `away_id` | character | Away team ESPN identifier. |
 | `away_name` | character | Away team display name. |
-| `away_abbreviation` | character | Away team's abbreviation. |
+| `away_abbreviation` | character | Away team abbreviation. |
 | `away_display_name` | character | Away team display name. |
-| `away_location` | character | Away team's location. |
+| `away_location` | character | Away team city. |
 | `away_color` | character | Away team primary color hex. |
-| `away_alternate_color` | character | Color code (hex) for away alternate. |
+| `away_alternate_color` | character | Away team alternate color hex. |
 | `away_logo` | character | Away team logo URL. |
 | `away_score` | character | Away team's score. For cricket, the innings string. |
 | `away_winner` | logical | Whether the away team won. |
@@ -351,15 +351,15 @@ WCH — standings (ESPN site.api.espn.com (v2)).
 | `group_name` | character | Group name (conference / division). |
 | `group_abbreviation` | character | Group abbreviation. |
 | `team_id` | character | ESPN team id |
-| `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
+| `team_name` | character | Team name. |
 | `team_abbreviation` | character | Team abbreviation |
 | `team_display_name` | character | Team display name |
-| `team_location` | character | Team city or location string. |
-| `team_logo` | character | Team logo image URL. |
+| `team_location` | character | Team city/location. |
+| `team_logo` | character | URL to the team logo image. |
 | `avg_points_against` | number |  |
 | `avg_points_for` | number |  |
-| `clincher` | integer | Clincher. |
-| `differential` | integer | Differential. |
+| `clincher` | integer |  |
+| `differential` | integer |  |
 | `division_win_percent` | number |  |
 | `games_behind` | integer |  |
 | `league_win_percent` | number |  |
@@ -369,13 +369,13 @@ WCH — standings (ESPN site.api.espn.com (v2)).
 | `points` | integer | Competition points. |
 | `points_against` | integer | Goals conceded. |
 | `points_for` | integer | Goals (or runs) scored by the team. |
-| `streak` | integer | Current streak (e.g. 'W3' for three-game win streak). |
-| `win_percent` | number | Win percent. |
+| `streak` | integer | Current streak value. |
+| `win_percent` | number |  |
 | `wins` | integer | Number of matches the team has won. |
 | `games_ahead` | integer |  |
 | `overall` | character | Overall record summary as published by ESPN. |
-| `home` | character | Home. |
-| `road` | character | Road. |
+| `home` | character | Whether the player's team was home. |
+| `road` | character |  |
 | `vs_div` | character |  |
 | `vs_conf` | character |  |
 | `last_ten_games` | character |  |
@@ -650,13 +650,13 @@ WCH — team roster (ESPN site.api.espn.com).
 
 | col_name | type | description |
 |---|---|---|
-| `id` | character | ID of the player in the 'name' column. |
+| `id` | character | Unique player identifier. |
 | `uid` | character | ESPN universal id for the athlete. |
-| `guid` | character | Stable cross-league team GUID. |
+| `guid` | character | Athlete global unique identifier. |
 | `alternate_ids_sdr` | character | Alternate ids sdr. |
 | `first_name` | character | Athlete's first (given) name. |
 | `last_name` | character | Athlete's last (family) name. |
-| `full_name` | character | Player's full name. |
+| `full_name` | character | Player full name. |
 | `display_name` | character | Athlete's full display name as shown on ESPN. |
 | `short_name` | character | Athlete's abbreviated display name (e.g. 'L. James'). |
 | `weight` | integer | Athlete weight in pounds. |
@@ -665,11 +665,11 @@ WCH — team roster (ESPN site.api.espn.com).
 | `display_height` | character | Athlete height, formatted for display. |
 | `age` | integer | Athlete age in years. |
 | `date_of_birth` | character | Athlete date of birth (ISO 8601). |
-| `debut_year` | integer | Year of professional debut. |
+| `debut_year` | integer | Year of NHL debut. |
 | `links` | character |  |
 | `birth_place_city` | character | Birth place city. |
 | `birth_place_country` | character | Birth place country. |
-| `college_id` | character | Unique identifier for college. |
+| `college_id` | character | College identifier. |
 | `college_guid` | character | College guid. |
 | `college_mascot` | character | College mascot. |
 | `college_name` | character | College name. |
@@ -677,45 +677,45 @@ WCH — team roster (ESPN site.api.espn.com).
 | `college_abbrev` | character | College abbreviation. |
 | `college_logos` | character | College logo URLs (pipe-delimited). |
 | `slug` | character | URL slug for the athlete. |
-| `headshot_href` | character | Headshot image URL. |
-| `headshot_alt` | character | Alternative-text label for the headshot. |
+| `headshot_href` | character | Player headshot image URL. |
+| `headshot_alt` | character | Headshot alt text. |
 | `jersey` | character | Athlete's jersey number as a string. |
-| `position_id` | character | Unique position identifier. |
+| `position_id` | character | Official position identifier. |
 | `position_name` | character | Full position name (e.g. 'Point Guard', 'Goalkeeper'). |
 | `position_display_name` | character | Position display name. |
-| `position_abbreviation` | character | Position abbreviation ('G' / 'F' / 'C'). |
-| `position_leaf` | logical | Position leaf. |
+| `position_abbreviation` | character | Position abbreviation. |
+| `position_leaf` | logical | Whether position is a leaf node. |
 | `injuries` | character |  |
-| `teams` | character | Nested list of member-team membership spans. |
+| `teams` | character |  |
 | `contracts` | character |  |
 | `experience_years` | integer | Experience years. |
-| `contract_bird_status` | integer | Contract bird status. |
-| `contract_base_year_compensation_active` | logical | Contract base year compensation active. |
+| `contract_bird_status` | integer |  |
+| `contract_base_year_compensation_active` | logical |  |
 | `contract_poison_pill_provision_active` | logical |  |
-| `contract_incoming_trade_value` | integer | Contract incoming trade value. |
-| `contract_outgoing_trade_value` | integer | Contract outgoing trade value. |
-| `contract_minimum_salary_exception` | logical | Contract minimum salary exception. |
-| `contract_option_type` | integer | Contract option type. |
-| `contract_salary` | integer | Contract salary. |
-| `contract_salary_remaining` | integer | Contract salary remaining. |
-| `contract_years_remaining` | integer | Contract years remaining. |
+| `contract_incoming_trade_value` | integer |  |
+| `contract_outgoing_trade_value` | integer |  |
+| `contract_minimum_salary_exception` | logical |  |
+| `contract_option_type` | integer |  |
+| `contract_salary` | integer |  |
+| `contract_salary_remaining` | integer |  |
+| `contract_years_remaining` | integer |  |
 | `contract_season_year` | integer |  |
 | `contract_season_start_date` | character |  |
 | `contract_season_end_date` | character |  |
-| `contract_trade_kicker_active` | logical | Contract trade kicker active. |
-| `contract_trade_kicker_percentage` | integer | Contract trade kicker percentage (0-1 decimal). |
-| `contract_trade_kicker_value` | integer | Contract trade kicker value. |
-| `contract_trade_kicker_trade_value` | integer | Contract trade kicker trade value. |
-| `contract_trade_restriction` | logical | Contract trade restriction. |
-| `contract_unsigned_foreign_pick` | logical | Contract unsigned foreign pick. |
-| `contract_active` | logical | Contract active. |
+| `contract_trade_kicker_active` | logical |  |
+| `contract_trade_kicker_percentage` | integer |  |
+| `contract_trade_kicker_value` | integer |  |
+| `contract_trade_kicker_trade_value` | integer |  |
+| `contract_trade_restriction` | logical |  |
+| `contract_unsigned_foreign_pick` | logical |  |
+| `contract_active` | logical |  |
 | `status_id` | character | Status identifier. |
-| `status_name` | character | Status label. |
+| `status_name` | character | Status name. |
 | `status_type` | character | Status type. |
 | `status_abbreviation` | character | Status abbreviation. |
 | `citizenship` | character | Athlete citizenship. |
 | `birth_place_state` | character | Birth place state. |
-| `hand_type` | character | Hand type. |
+| `hand_type` | character | Shooting/catching hand type. |
 | `hand_abbreviation` | character | Hand abbreviation. |
 | `hand_display_value` | character | Hand display value. |
 

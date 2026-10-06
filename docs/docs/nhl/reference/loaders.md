@@ -268,7 +268,7 @@ const rows = await sdv.nhl.loadNhlSchedule({ seasons: 2024 });
 | `venue` | `string` | Venue where the game was played. |
 | `series_letter` | `string` | Playoff series identifier letter, populated only for postseason games (88 of 1,400 rows in 2024) and null for the regular season. |
 | `playoff_round` | `number` | Playoff round identifier. |
-| `series_game_number` | `number` | Series game number. |
+| `series_game_number` | `number` |  |
 | `season` | `number` | Season year (echoed from arg). |
 | `game_json` | `boolean` | Whether processed game JSON is available. |
 | `game_json_url` | `string` | URL to the processed game JSON. |
@@ -954,7 +954,7 @@ const rows = await sdv.nhl.loadNhlSchedules({ seasons: 2010 });
 | `venue` | `string` | Venue where the game was played. |
 | `series_letter` | `string` | NHL API letter code identifying the playoff series the game belongs to (null for regular-season games). |
 | `playoff_round` | `number` | Playoff round identifier. |
-| `series_game_number` | `number` | Series game number. |
+| `series_game_number` | `number` |  |
 | `season` | `number` | Season year (echoed from arg). |
 | `game_json` | `boolean` | Whether processed game JSON is available. |
 | `game_json_url` | `string` | URL to the processed game JSON. |
@@ -965,7 +965,7 @@ const rows = await sdv.nhl.loadNhlSchedules({ seasons: 2010 });
 | `goalie_box` | `boolean` | Whether goalie box data is available. |
 | `game_info` | `boolean` | Whether game info data is available. |
 | `game_rosters` | `boolean` | Whether game rosters data is available. |
-| `scoring` | `boolean` | TRUE when the play results in a score (TD, FG, safety, two-point conversion). |
+| `scoring` | `boolean` |  |
 | `penalties` | `boolean` | Penalty count. |
 | `scratches` | `boolean` | Flag indicating a scratches payload was captured for this game in the NHL raw store. |
 | `linescore` | `boolean` | Flag indicating a period-by-period linescore payload was captured for this game in the NHL raw store. |

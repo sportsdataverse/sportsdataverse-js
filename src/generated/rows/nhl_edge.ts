@@ -22,7 +22,7 @@ export interface NhlEdgeCatGoalieDetailRow {
   player_first_name_default?: string | null;
   /** Player last name (default language). Schema `character`. */
   player_last_name_default?: string | null;
-  /** Participant birth date (YYYY-MM-DD). Schema `character`. */
+  /** Schema `character`. */
   player_birth_date?: string | null;
   /** Side on which the goalie catches — L (left) or R (right). Schema `character`. */
   player_shoots_catches?: string | null;
@@ -104,7 +104,7 @@ export interface NhlEdgeCatSkaterDetailRow {
   player_first_name_default?: string | null;
   /** Player last name (default language). Schema `character`. */
   player_last_name_default?: string | null;
-  /** Participant birth date (YYYY-MM-DD). Schema `character`. */
+  /** Schema `character`. */
   player_birth_date?: string | null;
   /** Side on which the skater shoots — L (left) or R (right). Schema `character`. */
   player_shoots_catches?: string | null;
@@ -120,7 +120,7 @@ export interface NhlEdgeCatSkaterDetailRow {
   player_goals?: number | null;
   /** Number of assists credited to the skater during the relevant tracking period. Schema `integer`. */
   player_assists?: number | null;
-  /** Player points. Schema `integer`. */
+  /** Schema `integer`. */
   player_points?: number | null;
   /** Number of games in which the skater appeared during the relevant tracking period. Schema `integer`. */
   player_games_played?: number | null;
@@ -250,7 +250,7 @@ export interface NhlEdgeGoalieComparisonRow {
   player_first_name_default?: string | null;
   /** Player last name (default language). Schema `character`. */
   player_last_name_default?: string | null;
-  /** Participant birth date (YYYY-MM-DD). Schema `character`. */
+  /** Schema `character`. */
   player_birth_date?: string | null;
   /** Handedness indicator showing which side the goalie catches (L = left-catch, R = right-catch). Schema `character`. */
   player_shoots_catches?: string | null;
@@ -320,7 +320,7 @@ export interface NhlEdgeGoalieDetailRow {
   player_first_name_default?: string | null;
   /** Player last name (default language). Schema `character`. */
   player_last_name_default?: string | null;
-  /** Participant birth date (YYYY-MM-DD). Schema `character`. */
+  /** Schema `character`. */
   player_birth_date?: string | null;
   /** Hand on which the goalie catches (glove side), typically 'L' for left or 'R' for right. Schema `character`. */
   player_shoots_catches?: string | null;
@@ -610,7 +610,7 @@ export interface NhlEdgeSkaterComparisonRow {
   player_first_name_default?: string | null;
   /** Player last name (default language). Schema `character`. */
   player_last_name_default?: string | null;
-  /** Participant birth date (YYYY-MM-DD). Schema `character`. */
+  /** Schema `character`. */
   player_birth_date?: string | null;
   /** Handedness of the skater's shot or, for goalies, their catching hand (L or R). Schema `character`. */
   player_shoots_catches?: string | null;
@@ -626,7 +626,7 @@ export interface NhlEdgeSkaterComparisonRow {
   player_goals?: number | null;
   /** Total regular-season assists recorded by the skater in the current season. Schema `integer`. */
   player_assists?: number | null;
-  /** Player points. Schema `integer`. */
+  /** Schema `integer`. */
   player_points?: number | null;
   /** Number of regular-season games the skater appeared in during the current season. Schema `integer`. */
   player_games_played?: number | null;
@@ -824,7 +824,7 @@ export interface NhlEdgeSkaterDetailRow {
   player_first_name_default?: string | null;
   /** Player last name (default language). Schema `character`. */
   player_last_name_default?: string | null;
-  /** Participant birth date (YYYY-MM-DD). Schema `character`. */
+  /** Schema `character`. */
   player_birth_date?: string | null;
   /** Handedness indicator for the skater showing the side they shoot from ('L' for left, 'R' for right). Schema `character`. */
   player_shoots_catches?: string | null;
@@ -840,7 +840,7 @@ export interface NhlEdgeSkaterDetailRow {
   player_goals?: number | null;
   /** Total regular-season assists recorded by the skater in the current NHL season, as returned in the EDGE skater detail. Schema `integer`. */
   player_assists?: number | null;
-  /** Player points. Schema `integer`. */
+  /** Schema `integer`. */
   player_points?: number | null;
   /** Total number of regular-season games played by the skater in the current NHL season, as returned in the EDGE skater detail. Schema `integer`. */
   player_games_played?: number | null;
@@ -1528,15 +1528,15 @@ export interface NhlEdgeTeamDetailRow {
   team_conference?: string | null;
   /** Name of the NHL division (e.g., Atlantic, Metro, Central, Pacific) to which this team belongs, as returned by the NHL api-web team detail endpoint. Schema `character`. */
   team_division?: string | null;
-  /** Team wins. Schema `integer`. */
+  /** Schema `integer`. */
   team_wins?: number | null;
-  /** Team losses. Schema `integer`. */
+  /** Schema `integer`. */
   team_losses?: number | null;
   /** Total number of games this team has lost in overtime or a shootout (earning one standings point each) in the current season. Schema `integer`. */
   team_ot_losses?: number | null;
   /** Total number of regular-season or playoff games this team has played in the current season, from the NHL api-web team detail endpoint. Schema `integer`. */
   team_games_played?: number | null;
-  /** Total points scored by the player's team in this game. Schema `integer`. */
+  /** Schema `integer`. */
   team_points?: number | null;
   /** Total count of shot attempts recorded at a speed exceeding 90 mph by this team's players during the season, from NHL EDGE tracking data. Schema `integer`. */
   shot_speed_shot_attempts_over90_value?: number | null;

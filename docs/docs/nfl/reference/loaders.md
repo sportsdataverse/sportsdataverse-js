@@ -482,7 +482,7 @@ const rows = await sdv.nfl.loadNflModelPbp({ seasons: 2024, columns: ['game_id',
 | `defteam` | `string` | String abbreviation for the team on defense. |
 | `home_team` | `string` | The home team. Note that this contains the designated home team for games which no team is playing at home such as Super Bowls or NFL International games. |
 | `away_team` | `string` | String abbreviation for the away team. |
-| `home` | `number \| bigint` | Home team name. |
+| `home` | `number \| bigint` |  |
 | `qtr` | `number \| bigint` | Quarter of the game (5 is overtime). |
 | `game_half` | `string` | String indicating which half the play is in, either Half1, Half2, or Overtime. |
 | `down` | `number \| bigint` | The down for the given play. |
@@ -788,7 +788,7 @@ const rows = await sdv.nfl.loadNflModelPbp({ seasons: 2024, columns: ['game_id',
 | `first_down_prob` | `number` | Modeled probability of converting the fourth down if the offense goes for it. |
 | `wp_succeed` | `number` | Mean win probability across the conversion outcomes, i.e. the WP conditional on converting the fourth down. |
 | `wp_fail` | `number` | Mean win probability across the failure outcomes, i.e. the WP conditional on failing to convert. |
-| `fg_make_prob` | `number` | Predicted probability of making the field goal (cfbfastR FG model, 0-1). |
+| `fg_make_prob` | `number` |  |
 | `make_fg_wp` | `number` | Win probability conditional on the field-goal attempt being good. |
 | `miss_fg_wp` | `number` | Win probability conditional on the field-goal attempt being missed (opponent takes over at the spot). |
 | `fg_wp` | `number` | Probability-weighted win probability of attempting the field goal, from the kicking team's perspective. |
@@ -823,7 +823,7 @@ const rows = await sdv.nfl.loadNflRatingsWeekly({ seasons: 2024 });
 | col_name | type | description |
 |---|---|---|
 | `season` | `number \| bigint` | 4 digit number indicating to which season(s) the specified timeframe belongs to. |
-| `team_id` | `string` | ESPN team id. |
+| `team_id` | `string` |  |
 | `adj_off_epa` | `number` | Opponent-adjusted offensive EPA per play for the team as of this week. |
 | `adj_def_epa` | `number` | Opponent-adjusted defensive EPA per play for the team as of this week (negative is better for the defense). |
 | `adj_st_epa` | `number` | Opponent-adjusted special-teams EPA per play for the team as of this week. |
@@ -863,10 +863,10 @@ const rows = await sdv.nfl.loadNflNgs({ seasons: 2024 });
 | `week` | `number \| bigint` | Season week. |
 | `scope` | `string` | Aggregation scope of the row -- "season" for the season-to-date aggregate (always week 0) or "week" for a single week's statboard (week 0 is preseason week 0). |
 | `threshold` | `number \| bigint` | Minimum-attempts qualifying threshold NGS applied to the statboard the row came from (differs between weekly and season scopes). |
-| `games_played` | `number \| bigint` | Games played. |
+| `games_played` | `number \| bigint` |  |
 | `player_name` | `string` | Full name of player |
 | `position` | `string` | Primary position as reported by NFL.com |
-| `team_id` | `string` | ESPN team id. |
+| `team_id` | `string` |  |
 | `player_gsis_id` | `string` | Unique identifier of the player |
 | `player_display_name` | `string` | Full name of the player |
 | `player_short_name` | `string` | Short version of player's name |
@@ -874,7 +874,7 @@ const rows = await sdv.nfl.loadNflNgs({ seasons: 2024 });
 | `player_position_group` | `string` | Roster position group the player is listed under (e.g. "QB", "WR", "RB"). |
 | `player_position` | `string` | Position of the player accordinng to NGS |
 | `player_jersey_number` | `number \| bigint` | Player's jersey number |
-| `player_current_team_id` | `string` | Player's current team identifier. |
+| `player_current_team_id` | `string` |  |
 | `player_season` | `number \| bigint` | Season the embedded player record was resolved against; mirrors season. |
 | `player_gsis_it_id` | `string` | Integer NFL GSIS "IT" player id used by the league's internal tracking systems; a second id alongside the string player_gsis_id. |
 | `player_smart_id` | `string` | NFL "smart id", a UUID-style player identifier shared across NFL data products. |
@@ -885,7 +885,7 @@ const rows = await sdv.nfl.loadNflNgs({ seasons: 2024 });
 | `player_ngs_position_group` | `string` | Position group the Next Gen Stats tracking model assigns the player to (e.g. "QB", "WR"). |
 | `player_uniform_number` | `string` | Jersey number as the zero-padded string NGS lists it (e.g. "07"). |
 | `player_status` | `string` | Roster status code of the player at capture time (e.g. "ACT" active, "RES" reserve, "CUT", "DEV" practice squad). |
-| `player_headshot` | `string` | URL to the player headshot image. |
+| `player_headshot` | `string` |  |
 | `attempts` | `number \| bigint` | The number of pass attempts as defined by the NFL. |
 | `completions` | `number \| bigint` | The number of completed passes. |
 | `interceptions` | `number \| bigint` | The number of interceptions thrown. |

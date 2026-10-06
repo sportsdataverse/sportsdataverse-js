@@ -2017,8 +2017,8 @@ MLB — standings core (ESPN sports.core.api.espn.com (core v2)).
 
 | col_name | type | description |
 |---|---|---|
-| `group_name` | character | Group name (conference / division). |
-| `group_abbreviation` | character | Group abbreviation. |
+| `group_name` | character |  |
+| `group_abbreviation` | character |  |
 | `team_id` | character | ESPN team id |
 | `team_name` | character | Team name. |
 | `team_abbreviation` | character | Team abbreviation |
@@ -2033,13 +2033,13 @@ MLB — standings core (ESPN sports.core.api.espn.com (core v2)).
 | `games_behind` | integer |  |
 | `league_win_percent` | number |  |
 | `losses` | integer | Number of matches the team has lost. |
-| `playoff_seed` | integer | Current playoff seed. |
+| `playoff_seed` | integer |  |
 | `point_differential` | integer | Goal difference (for minus against). |
 | `points` | integer | Competition points. |
 | `points_against` | integer | Goals conceded. |
 | `points_for` | integer | Goals (or runs) scored by the team. |
 | `streak` | integer | Streak. |
-| `win_percent` | number | Win percent. |
+| `win_percent` | number |  |
 | `wins` | integer | Number of matches the team has won. |
 | `games_ahead` | integer |  |
 | `overall` | character | Overall record summary as published by ESPN. |

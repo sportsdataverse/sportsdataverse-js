@@ -109,7 +109,7 @@ const rows = await sdv.mlb.loadMlbWeTable({ seasons: 2024 });
 | col_name | type | description |
 |---|---|---|
 | `inning_capped` | `number \| bigint` | Inning number with the ninth and every extra inning collapsed into 9, so extras share the ninth-inning win-expectancy cells. |
-| `half` | `string` | Half of the game (1 or 2). |
+| `half` | `string` |  |
 | `base_state` | `string` | Three-character pre-play base occupancy where each slot carries its base number when occupied and an underscore when empty, so ___ is bases empty and 123 is bases loaded. |
 | `outs_start` | `number \| bigint` | Outs already recorded when the plate appearance began, normally 0 through 2, though a handful of published rows carry a stale 3 that the RE24 matrix filters out but this table does not. |
 | `score_diff_bucket` | `number \| bigint` | Home score minus away score before the play, clipped to the range -6 through +6 so blowouts collapse into the end buckets. |
@@ -143,7 +143,7 @@ const rows = await sdv.mlb.loadMlbWpa({ seasons: 2024 });
 |---|---|---|
 | `game_id` | `string` | Unique ESPN game/event identifier. |
 | `at_bat_index` | `number \| bigint` | Zero-based index of the at-bat within the game. |
-| `wpa` | `number` | Win probability added (WPA) for the posteam. |
+| `wpa` | `number` |  |
 | `season` | `number \| bigint` | Season year. |
 
 ## `loadMlbPbp`
@@ -540,9 +540,9 @@ const rows = await sdv.mlb.loadNcaaBaseballPbp({ seasons: 2023, columns: ['conte
 | `inning_top_bot` | `string` | Half-inning ("top" or "bot"). |
 | `batting` | `string` | Whether the situation applies to batting stats. |
 | `fielding` | `string` | Whether the situation applies to fielding stats. |
-| `play_number` | `number \| bigint` | Sequential play number within the game (1-indexed). |
-| `score_away` | `number \| bigint` | Score away. |
-| `score_home` | `number \| bigint` | Score home. |
+| `play_number` | `number \| bigint` |  |
+| `score_away` | `number \| bigint` |  |
+| `score_home` | `number \| bigint` |  |
 | `batter` | `string` | MLBAM player id of the batter. |
 | `play_type` | `string` | Play category the NCAA baseball parser classified from the play text: single, double, triple, home_run, strikeout, walk, hit_by_pitch, groundout, flyout, lineout, out, double_play, fielders_choice, reached_on_error, stolen_base, wild_pitch, passed_ball, runner_advance, substitution, other, or unknown when the clause could not be classified. |
 | `hit_trajectory` | `string` | Batted-ball trajectory: one of ground, line, fly, pop, foul. |
@@ -566,7 +566,7 @@ const rows = await sdv.mlb.loadNcaaBaseballPbp({ seasons: 2023, columns: ['conte
 | `is_scoring_play` | `boolean` | Flag indicating that the play put points on the board (1 = scoring play, 0 = not). |
 | `description` | `string` | Long-form description text. |
 | `source` | `string` | Source. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `game_key` | `string` | NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. |
 | `game_date` | `string` | Game date (YYYY-MM-DD). |
 | `location` | `string` | Team city/region (e.g. "Los Angeles"). |
@@ -601,7 +601,7 @@ const rows = await sdv.mlb.loadNcaaBaseballSchedule({ seasons: 2023 });
 | `date` | `string` | Date in YYYY-MM-DD format. |
 | `game_number` | `number \| bigint` | Game number within a doubleheader. |
 | `opponent_id` | `string` | Unique identifier for opponent. |
-| `opponent` | `string` | Opposing team of player |
+| `opponent` | `string` |  |
 | `result` | `string` | Win/loss/tie result for `team_id`. |
 | `outcome` | `string` | Result for the team the row is keyed to: 'W', 'L' or 'T'. |
 | `team_score` | `number \| bigint` | Team's score / final score. |
@@ -672,8 +672,8 @@ const rows = await sdv.mlb.loadNcaaBaseballRosters({ seasons: 2025 });
 | `position` | `string` | Position the NCAA baseball feed reports for the player. |
 | `height` | `string` | Height (feet and inches). |
 | `weight` | `number \| bigint` | Weight in pounds. |
-| `hometown` | `string` | Prospect hometown. |
-| `high_school` | `string` | High school |
+| `hometown` | `string` |  |
+| `high_school` | `string` |  |
 | `games_played` | `number \| bigint` | Games played. |
 | `games_started` | `number \| bigint` | Games started. |
 | `season` | `number \| bigint` | Season year. |
@@ -710,10 +710,10 @@ const rows = await sdv.mlb.loadNcaaBaseballLinescore({ seasons: 2025 });
 | `hits` | `number \| bigint` | Hits. |
 | `errors` | `number \| bigint` | Fielding errors. |
 | `game_date` | `string` | Game date (YYYY-MM-DD). |
-| `venue` | `string` | Venue name. |
+| `venue` | `string` |  |
 | `attendance` | `number \| bigint` | Reported attendance (NA on the redesigned page). |
 | `source` | `string` | Source. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `game_key` | `string` | NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. |
 | `location` | `string` | Team city/region (e.g. "Los Angeles"). |
 | `season` | `number \| bigint` | Season year. |
@@ -743,14 +743,14 @@ const rows = await sdv.mlb.loadNcaaBaseballTeamStats({ seasons: 2025, columns: [
 |---|---|---|
 | `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
 | `category` | `string` | Category label. |
-| `stat` | `string` | Stat. |
+| `stat` | `string` |  |
 | `period` | `string` | Inning number. |
 | `away_team` | `string` | Away team name. |
 | `away_value` | `string` | Away team's value for the stat named by the row, as a string (the table is long/tidy, one stat per row). |
 | `home_team` | `string` | Home team name. |
 | `home_value` | `string` | Home team's value for the stat named by the row, as a string (the table is long/tidy, one stat per row). |
 | `source` | `string` | Source. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `game_key` | `string` | NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. |
 | `game_date` | `string` | Game date (YYYY-MM-DD). |
 | `location` | `string` | Team city/region (e.g. "Los Angeles"). |
@@ -806,7 +806,7 @@ const rows = await sdv.mlb.loadNcaaBaseballPlayerStats({ seasons: 2025 });
 | `kl` | `string` | Strikeouts looking -- called third strikes, as opposed to swinging strikeouts. |
 | `category` | `string` | Category label. |
 | `source` | `string` | Source. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `game_key` | `string` | NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. |
 | `game_date` | `string` | Game date (YYYY-MM-DD). |
 | `location` | `string` | Team city/region (e.g. "Los Angeles"). |
@@ -865,7 +865,7 @@ const rows = await sdv.mlb.loadNcaaBaseballSituationalStats({ seasons: 2025 });
 |---|---|---|
 | `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
 | `team_seq` | `number \| bigint` | Side indicator for the row: 0 and 1 distinguish the two teams in the contest. |
-| `player` | `string` | Player name. |
+| `player` | `string` |  |
 | `position` | `string` | Position the NCAA baseball feed reports for the player. |
 | `with_runrs` | `string` | Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- plate appearances with runners on base. |
 | `hits_scorepos` | `string` | Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- at-bats with runners in scoring position. |
@@ -882,7 +882,7 @@ const rows = await sdv.mlb.loadNcaaBaseballSituationalStats({ seasons: 2025 });
 | `bases_loaded` | `string` | Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- plate appearances with the bases loaded. |
 | `category` | `string` | Category label. |
 | `source` | `string` | Source. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `game_key` | `string` | NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. |
 | `game_date` | `string` | Game date (YYYY-MM-DD). |
 | `location` | `string` | Team city/region (e.g. "Los Angeles"). |
@@ -925,7 +925,7 @@ const rows = await sdv.mlb.loadNcaaBaseballGames({ seasons: 2024 });
 | `game_pbp_id` | `string` | stats.ncaa.org play-by-play (contest) identifier. |
 | `season` | `number \| bigint` | Season year. |
 | `source` | `string` | Source. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `away_team` | `string` | Away team name. |
 | `away_final` | `number \| bigint` | Final runs scored by the away team. |
 | `home_team` | `string` | Home team name. |

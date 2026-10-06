@@ -132,12 +132,12 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `key` | integer | On3 RDB key for the NIL collective group. |
-| `name` | character | Display name. |
+| `name` | character |  |
 | `default_asset_key` | integer | On3 asset key for the collective's primary logo image. |
 | `social_asset_key` | integer | On3 asset key for the collective's social-media image. |
 | `organization_key` | integer | On3 organization key of the school the collective supports. |
 | `launch_date` | character | Date the NIL collective launched. |
-| `organization_type` | character | Organization type. |
+| `organization_type` | character |  |
 | `twitter_handle` | character | Collective's Twitter/X account handle. |
 | `instagram_handle` | character | Collective's Instagram account handle. |
 | `tik_tok_handle` | character | Collective's TikTok account handle. |
@@ -146,12 +146,12 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `website_name` | character | Display name of the collective's website. |
 | `website_url` | character | URL of the collective's website. |
 | `mission_statement` | character | Collective's stated mission, as published to On3. |
-| `description` | character | Long-form description text. |
+| `description` | character |  |
 | `annual_goal_amount` | numeric | Collective's annual fundraising goal in dollars, as reported to On3. |
 | `confirmed_raised_amount` | numeric | Dollar amount the collective has confirmed raising, per On3. |
 | `merged_into_group_key` | integer | On3 key of the collective this group merged into, when applicable. |
 | `merged_into_group` | character | Nested On3 record for the collective this group merged into (stringified). |
-| `slug` | character | URL-safe identifier. |
+| `slug` | character |  |
 | `founders` | character | Founders of the collective, as a stringified list. |
 | `sports` | character | Sports the collective funds, as a stringified list. |
 | `default_asset_key_2` | integer |  |
@@ -281,7 +281,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `four_stars` | integer | Number of drafted players who were four-star recruits. |
 | `three_stars` | integer | Number of drafted players who were three-star recruits. |
 | `zero_stars` | integer | Number of drafted players who were unrated (zero-star) recruits. |
-| `total` | integer | Total. |
+| `total` | integer |  |
 | `state_key` | integer |  |
 | `state_name` | character |  |
 | `state_abbreviation` | character |  |
@@ -311,7 +311,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `round` | integer | Tournament / playoff round. |
+| `round` | integer |  |
 
 **Row type:** `On3FiltersDraftRoundsRow` (exported from the package root).
 
@@ -331,7 +331,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `value` | character | Numeric or string value field. |
+| `value` | character |  |
 
 **Row type:** `On3FiltersStatusRow` (exported from the package root).
 
@@ -442,8 +442,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `person_default_asset_duration` | integer |  |
 | `person_default_asset_mime_type` | character |  |
 | `person_position_abbreviation` | character |  |
-| `person_height` | character | Height (feet and inches). |
-| `person_weight` | integer | Weight in pounds. |
+| `person_height` | character |  |
+| `person_weight` | integer |  |
 | `person_roster_rating` | character |  |
 | `person_commit_status_type` | character |  |
 | `person_commit_status_short_term_signee` | logical |  |
@@ -642,9 +642,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `person_early_signee` | logical |  |
 | `person_early_enrollee` | logical |  |
 | `person_position_abbreviation` | character |  |
-| `person_height` | numeric | Height (feet and inches). |
+| `person_height` | numeric |  |
 | `person_formatted_height` | character |  |
-| `person_weight` | integer | Weight in pounds. |
+| `person_weight` | integer |  |
 | `person_class_year` | integer |  |
 | `person_athlete_verified` | logical |  |
 | `person_prospect_verified` | logical |  |
@@ -804,13 +804,13 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `valuation` | integer | Athlete's latest On3 NIL valuation in dollars. |
 | `valuation_change` | integer | Change in the NIL valuation since the previous update, in dollars. |
 | `followers` | integer | Total social-media followers counted toward the valuation. |
-| `rank` | integer | Position of the school within the poll for the given week (1 = top-ranked). |
-| `last_updated` | integer | Last-updated timestamp. |
+| `rank` | integer |  |
+| `last_updated` | integer |  |
 | `whisper` | numeric |  |
 | `whisper_change` | numeric |  |
 | `social_valuations` | character | Per-platform breakdown of the social components of the valuation (stringified list). |
-| `group_rank` | integer | League/season rank for group. |
-| `group_name` | character | Group name (conference / division). |
+| `group_rank` | integer |  |
+| `group_name` | character |  |
 | `tags` | character |  |
 | `roster_value` | character |  |
 | `nil_value` | character |  |
@@ -835,7 +835,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `type` | character | Record type / category. |
+| `type` | character |  |
 | `handle` | character | Athlete's account handle on the social platform. |
 | `handshake` | logical | On3 RDB handshake field on the social-account record (platform link/verification metadata). |
 
@@ -846,7 +846,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `social_type` | character | Social platform the post summary covers (e.g. Twitter/X, Instagram). |
-| `type` | character | Record type / category. |
+| `type` | character |  |
 | `followers` | integer | Athlete's follower count on the platform. |
 
 **Row type:** `On3PeopleSocialPostSummaryRow` (exported from the package root).
@@ -903,20 +903,20 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `type` | character | Record type / category. |
-| `link` | character | API link to the game feed. |
+| `type` | character |  |
+| `link` | character |  |
 | `ranking_key` | integer | On3 key of the ranking cycle the row belongs to. |
 | `ranking_year` | integer |  |
-| `ranking_type` | character | Poll type code (e.g. `ap`, `coaches`, `cfp`). |
-| `rating` | numeric | Overall SP+ rating (Bill Connelly methodology, in points per game). |
+| `ranking_type` | character |  |
+| `rating` | numeric |  |
 | `sport` | character | Nested On3 sport object for the ranking row (stringified). |
 | `class_year` | integer | Recruiting class year the ranking covers. |
-| `state_rank` | integer | State ranking. |
+| `state_rank` | integer |  |
 | `state_abbr` | character | Two-letter abbreviation of the player's home state. |
-| `position_rank` | integer | Pre-draft position rank. |
-| `position_abbr` | character | Position abbreviation. |
-| `overall_rank` | integer | Overall recruit ranking (top recruits only; may be `NA`). |
-| `stars` | integer | Recruit star rating on the 247Sports scale (2-5). |
+| `position_rank` | integer |  |
+| `position_abbr` | character |  |
+| `overall_rank` | integer |  |
+| `stars` | integer |  |
 | `five_star_plus` | logical | Whether On3 designates the player a Five-Star Plus+ prospect. |
 | `nearly_five_star_plus` | logical | On3 flag that the player narrowly missed the Five-Star Plus+ designation. |
 | `change_1` | character |  |
@@ -928,10 +928,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `key` | integer | On3 RDB key for the database-update entry. |
-| `type` | character | Record type / category. |
-| `text` | character | Text description of the play / record. |
+| `type` | character |  |
+| `text` | character |  |
 | `replacement_text` | character | Rendered text of the update entry (with references substituted in). |
-| `link` | character | API link to the game feed. |
+| `link` | character |  |
 | `date_added` | integer | Date the update entry was logged. |
 | `date_occurred` | integer | Date the underlying event occurred. |
 | `object_key` | integer | On3 key of the object the update refers to. |
@@ -949,20 +949,20 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `domain_override` | character | Override CDN domain for serving the image, when set. |
 | `domain` | character | CDN domain the image is served from. |
 | `source_override` | character | Override source attribution for the image, when set. |
-| `source` | character | News source. |
-| `title` | character | Specific role title for the assignment. |
-| `description` | character | Long-form description text. |
+| `source` | character |  |
+| `title` | character |  |
+| `description` | character |  |
 | `caption` | character | Caption text for the image. |
-| `category` | character | Category label. |
+| `category` | character |  |
 | `alt_text` | character | Alt text for the image. |
-| `height` | integer | Player height (string e.g. '6-2' or inches). |
+| `height` | integer |  |
 | `width` | integer | Image width in pixels. |
 | `asset_type` | character | Type of the asset (e.g. image) in On3's asset system. |
 | `file_system` | character | Storage file system the asset lives on (On3 asset metadata). |
 | `path` | character | Storage path of the image file. |
-| `type` | character | Record type / category. |
+| `type` | character |  |
 | `thumbnail` | character | URL or path of the image's thumbnail rendition. |
-| `duration` | integer | Duration. |
+| `duration` | integer |  |
 | `mime_type` | character | MIME type of the image file (e.g. image/jpeg). |
 
 **Row type:** `On3PlayerImagesRow` (exported from the package root).
@@ -985,21 +985,21 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 |---|---|---|
 | `key` | integer | On3 RDB key for the player's ranking row. |
 | `ranking_key` | integer | On3 key of the ranking cycle the row belongs to. |
-| `rating` | integer | Overall SP+ rating (Bill Connelly methodology, in points per game). |
-| `state_rank` | integer | State ranking. |
+| `rating` | integer |  |
+| `state_rank` | integer |  |
 | `state_abbr` | character | Two-letter abbreviation of the player's home state. |
-| `position_rank` | integer | Pre-draft position rank. |
-| `position_abbr` | character | Position abbreviation. |
-| `overall_rank` | integer | Overall recruit ranking (top recruits only; may be `NA`). |
-| `stars` | integer | Recruit star rating on the 247Sports scale (2-5). |
+| `position_rank` | integer |  |
+| `position_abbr` | character |  |
+| `overall_rank` | integer |  |
+| `stars` | integer |  |
 | `consensus_rating` | numeric | Player's industry-consensus rating (blend of the major recruiting services). |
 | `consensus_state_rank` | integer | Player's consensus rank within their home state. |
 | `consensus_position_rank` | integer | Player's consensus rank at their position. |
 | `consensus_overall_rank` | integer | Player's national consensus rank. |
 | `consensus_stars` | integer | Player's star rating under the industry consensus. |
-| `strength` | integer | Strength label (Even, Power Play, Shorthanded). |
+| `strength` | integer |  |
 | `five_star_plus` | logical | Whether On3 designates the player a Five-Star Plus+ prospect. |
-| `ranking_type` | character | Poll type code (e.g. `ap`, `coaches`, `cfp`). |
+| `ranking_type` | character |  |
 | `ranking_key_2` | integer |  |
 | `ranking_sport_key` | integer |  |
 | `ranking_sport_key_2` | integer |  |
@@ -1021,19 +1021,19 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `ranking_key` | integer | On3 key of the ranking cycle the profile's rating belongs to. |
 | `person_sport_key` | integer | On3 key of the athlete-sport profile (person x sport). |
 | `oracle_key` | character | On3's internal oracle identifier for the player record. |
-| `name` | character | Display name. |
-| `slug` | character | URL-safe identifier. |
-| `high_school_name` | character | Recruit high-school name. |
+| `name` | character |  |
+| `slug` | character |  |
+| `high_school_name` | character |  |
 | `hometown_name` | character | Player's hometown, as listed by On3. |
-| `position_abbreviation` | character | Position abbreviation ('G' / 'F' / 'C'). |
+| `position_abbreviation` | character |  |
 | `class_rank` | character | Player's rank within their recruiting class. |
-| `height` | character | Player height (string e.g. '6-2' or inches). |
-| `weight` | integer | Player weight in pounds. |
+| `height` | character |  |
+| `weight` | integer |  |
 | `class_year` | integer | Player's recruiting class year. |
 | `degree` | character | Degree the player earned or is pursuing, when listed. |
-| `age` | integer | Player age (in years). |
+| `age` | integer |  |
 | `sports` | character | Sports the player is profiled in, as a stringified list. |
-| `description` | character | Long-form description text. |
+| `description` | character |  |
 | `bio_pro_prospect` | character | Bio text framing the player as a pro prospect (On3 RDB). |
 | `bio_college_recruit` | character | Bio text framing the player as a college recruit (On3 RDB). |
 | `organization_level` | character | Level of the player's current organization (e.g. high school, college, professional). |
@@ -1049,7 +1049,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `visibility` | character | Profile visibility setting on On3. |
 | `tier` | character | On3 profile tier classification for the player. |
 | `review_status` | character | Editorial review status of the profile in the On3 database. |
-| `jersey_number` | integer | Jersey number. |
+| `jersey_number` | integer |  |
 | `badge` | character | Profile badge assigned by On3, when any. |
 | `ncaa_id` | character | Player's NCAA identifier, when known to On3. |
 | `managed_by_user` | logical | On3 user account that manages the player's profile, when claimed. |
@@ -1097,7 +1097,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `high_school_url_slug` | character |  |
 | `hometown_state_key` | integer |  |
 | `hometown_state_name` | character |  |
-| `hometown_state_abbreviation` | character | Recruit hometown state abbreviation. |
+| `hometown_state_abbreviation` | character |  |
 | `hometown_state_country_key` | integer |  |
 | `current_state_key` | integer |  |
 | `current_state_name` | character |  |
@@ -1123,8 +1123,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `default_asset_duration` | integer |  |
 | `default_asset_mime_type` | character |  |
 | `primary_position_key` | integer |  |
-| `primary_position_name` | character | Primary fielding position name. |
-| `primary_position_abbreviation` | character | Primary position abbreviation. |
+| `primary_position_name` | character |  |
+| `primary_position_abbreviation` | character |  |
 | `primary_position_sport_key` | integer |  |
 | `primary_position_sport_key_2` | integer |  |
 | `primary_position_sport_name` | character |  |
@@ -1236,9 +1236,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 |---|---|---|
 | `key` | integer | On3 RDB key for the video record. |
 | `source_url` | character | Source URL of the hosted video. |
-| `title` | character | Specific role title for the assignment. |
+| `title` | character |  |
 | `thumbnail` | character | URL of the video's thumbnail image. |
-| `description` | character | Long-form description text. |
+| `description` | character |  |
 | `date` | integer | Publication date of the video, per On3. |
 | `person_key` | integer | On3 person key of the featured athlete. |
 | `person_sport` | character | Nested athlete-sport profile the video is attached to (stringified). |
@@ -1322,9 +1322,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `person_early_signee` | logical |  |
 | `person_early_enrollee` | logical |  |
 | `person_position_abbreviation` | character |  |
-| `person_height` | numeric | Height (feet and inches). |
+| `person_height` | numeric |  |
 | `person_formatted_height` | character |  |
-| `person_weight` | integer | Weight in pounds. |
+| `person_weight` | integer |  |
 | `person_class_year` | integer |  |
 | `person_athlete_verified` | logical |  |
 | `person_prospect_verified` | logical |  |
@@ -1352,14 +1352,14 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 |---|---|---|
 | `key` | integer | On3 RDB key for the quote record. |
 | `body` | character | Full text of the quote. |
-| `category` | character | Category label. |
+| `category` | character |  |
 | `person_key` | integer | On3 person key of the person quoted or quoted about. |
 | `date_added` | character | Date the quote was added to the On3 database. |
 | `date_updated` | character | Date the quote was last updated. |
 | `person_key_2` | integer |  |
 | `person_known_as_name` | character |  |
-| `person_first_name` | character | Player first name. |
-| `person_last_name` | character | Player last name. |
+| `person_first_name` | character |  |
+| `person_last_name` | character |  |
 | `person_twitter_handle` | character |  |
 | `person_instagram_profile` | character |  |
 | `person_tik_tok_handle` | character |  |
@@ -1393,8 +1393,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `class_year` | integer | Recruiting class year of the recruitment. |
-| `high_school` | character | High school |
-| `home_town` | character | Home town of the player. |
+| `high_school` | character |  |
+| `home_town` | character |  |
 | `rating_key` | integer |  |
 | `rating_rating` | numeric |  |
 | `rating_stars` | integer |  |
@@ -1530,7 +1530,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `key` | integer | On3 organization-ranking key for the class row. |
-| `year` | integer | 4-digit year. |
+| `year` | integer |  |
 | `applied_total_rating` | numeric | Total On3 rating applied to the class after deductions. |
 | `applied_total_consensus_rating` | numeric | Total consensus rating applied to the class after deductions. |
 | `applied_average_rating` | numeric | Average On3 rating applied to the class after deductions. |

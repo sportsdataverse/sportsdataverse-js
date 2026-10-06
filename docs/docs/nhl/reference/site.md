@@ -358,8 +358,8 @@ NHL — standings (ESPN site.api.espn.com (v2)).
 | `team_logo` | character | URL to the team logo image. |
 | `avg_points_against` | number |  |
 | `avg_points_for` | number |  |
-| `clincher` | integer | Clincher. |
-| `differential` | integer | Differential. |
+| `clincher` | integer |  |
+| `differential` | integer |  |
 | `division_win_percent` | number |  |
 | `games_behind` | integer |  |
 | `league_win_percent` | number |  |
@@ -370,12 +370,12 @@ NHL — standings (ESPN site.api.espn.com (v2)).
 | `points_against` | integer | Goals conceded. |
 | `points_for` | integer | Goals (or runs) scored by the team. |
 | `streak` | integer | Current streak value. |
-| `win_percent` | number | Win percent. |
+| `win_percent` | number |  |
 | `wins` | integer | Number of matches the team has won. |
 | `games_ahead` | integer |  |
 | `overall` | character | Overall record summary as published by ESPN. |
 | `home` | character | Whether the player's team was home. |
-| `road` | character | Road. |
+| `road` | character |  |
 | `vs_div` | character |  |
 | `vs_conf` | character |  |
 | `last_ten_games` | character |  |
@@ -686,29 +686,29 @@ NHL — team roster (ESPN site.api.espn.com).
 | `position_abbreviation` | character | Position abbreviation. |
 | `position_leaf` | logical | Whether position is a leaf node. |
 | `injuries` | character |  |
-| `teams` | character | Nested list of member-team membership spans. |
+| `teams` | character |  |
 | `contracts` | character |  |
 | `experience_years` | integer | Experience years. |
-| `contract_bird_status` | integer | Contract bird status. |
-| `contract_base_year_compensation_active` | logical | Contract base year compensation active. |
+| `contract_bird_status` | integer |  |
+| `contract_base_year_compensation_active` | logical |  |
 | `contract_poison_pill_provision_active` | logical |  |
-| `contract_incoming_trade_value` | integer | Contract incoming trade value. |
-| `contract_outgoing_trade_value` | integer | Contract outgoing trade value. |
-| `contract_minimum_salary_exception` | logical | Contract minimum salary exception. |
-| `contract_option_type` | integer | Contract option type. |
-| `contract_salary` | integer | Contract salary. |
-| `contract_salary_remaining` | integer | Contract salary remaining. |
-| `contract_years_remaining` | integer | Contract years remaining. |
+| `contract_incoming_trade_value` | integer |  |
+| `contract_outgoing_trade_value` | integer |  |
+| `contract_minimum_salary_exception` | logical |  |
+| `contract_option_type` | integer |  |
+| `contract_salary` | integer |  |
+| `contract_salary_remaining` | integer |  |
+| `contract_years_remaining` | integer |  |
 | `contract_season_year` | integer |  |
 | `contract_season_start_date` | character |  |
 | `contract_season_end_date` | character |  |
-| `contract_trade_kicker_active` | logical | Contract trade kicker active. |
-| `contract_trade_kicker_percentage` | integer | Contract trade kicker percentage (0-1 decimal). |
-| `contract_trade_kicker_value` | integer | Contract trade kicker value. |
-| `contract_trade_kicker_trade_value` | integer | Contract trade kicker trade value. |
-| `contract_trade_restriction` | logical | Contract trade restriction. |
-| `contract_unsigned_foreign_pick` | logical | Contract unsigned foreign pick. |
-| `contract_active` | logical | Contract active. |
+| `contract_trade_kicker_active` | logical |  |
+| `contract_trade_kicker_percentage` | integer |  |
+| `contract_trade_kicker_value` | integer |  |
+| `contract_trade_kicker_trade_value` | integer |  |
+| `contract_trade_restriction` | logical |  |
+| `contract_unsigned_foreign_pick` | logical |  |
+| `contract_active` | logical |  |
 | `status_id` | character | Status identifier. |
 | `status_name` | character | Status name. |
 | `status_type` | character | Status type. |

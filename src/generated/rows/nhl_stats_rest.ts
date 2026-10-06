@@ -380,11 +380,11 @@ export interface NhlStatsRestShiftchartsRow {
   duration?: string | null;
   /** Shift end time (MM:SS countdown clock). Schema `character`. */
   end_time?: string | null;
-  /** Human-readable event description. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   event_description?: unknown;
   /** Serialized details describing the on-ice event associated with the shift, such as play type and participants. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   event_details?: unknown;
-  /** Event number identifier. Schema `integer`. */
+  /** Schema `integer`. */
   event_number?: number | null;
   /** Player first name. Schema `character`. */
   first_name?: string | null;

@@ -373,7 +373,7 @@ export interface NbaStatsAssistleadersRow {
   team_name?: string | null;
   /** Jersey number worn by the player. Schema `character`. */
   jersey_num?: string | null;
-  /** Position of the player accordinng to NGS Schema `character`. */
+  /** Schema `character`. */
   player_position?: string | null;
   /** Assists. Schema `numeric`. */
   ast?: number | null;
@@ -2372,7 +2372,7 @@ export interface NbaStatsCommonallplayersRow {
   team_name?: string | null;
   /** Short team abbreviation (e.g. 'LAS'). Schema `character`. */
   team_abbreviation?: string | null;
-  /** Internal team code. Schema `character`. */
+  /** Schema `character`. */
   team_code?: string | null;
   /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). Schema `character`. */
   team_slug?: string | null;
@@ -2400,7 +2400,7 @@ export interface NbaStatsCommonplayerinfoCommonPlayerInfoRow {
   display_fi_last?: string | null;
   /** URL-safe player identifier. Schema `character`. */
   player_slug?: string | null;
-  /** Date of birth. Schema `character`. */
+  /** Schema `character`. */
   birthdate?: string | null;
   /** Player school / pre-draft team. Schema `character`. */
   school?: string | null;
@@ -2428,7 +2428,7 @@ export interface NbaStatsCommonplayerinfoCommonPlayerInfoRow {
   team_name?: string | null;
   /** Short team abbreviation (e.g. 'LAS'). Schema `character`. */
   team_abbreviation?: string | null;
-  /** Internal team code. Schema `character`. */
+  /** Schema `character`. */
   team_code?: string | null;
   /** Team city or region (e.g. 'Las Vegas'). Schema `character`. */
   team_city?: string | null;
@@ -2448,7 +2448,7 @@ export interface NbaStatsCommonplayerinfoCommonPlayerInfoRow {
   draft_year?: string | null;
   /** Round of the draft selection. Schema `character`. */
   draft_round?: string | null;
-  /** The number pick that was used to select a given player. Schema `character`. */
+  /** Schema `character`. */
   draft_number?: string | null;
   /** Flag indicating greatest 75 flag for the requested NBA or WNBA Stats context. Schema `character`. */
   greatest_75_flag?: string | null;
@@ -2505,7 +2505,7 @@ export interface NbaStatsCommonplayoffseriesRow {
   home_team_id?: string | null;
   /** Unique identifier for visitor team. Schema `integer` (an id). */
   visitor_team_id?: string | null;
-  /** Series identifier (e.g. 'W_1'). Schema `character` (an id). */
+  /** Schema `character` (an id). */
   series_id?: string | null;
   /** NBA or WNBA Stats value for game number in the commonplayoffseries result set. Schema `integer`. */
   game_num?: number | null;
@@ -2527,7 +2527,7 @@ export interface NbaStatsCommonteamrosterCommonTeamRosterRow {
   nickname?: string | null;
   /** URL-safe player identifier. Schema `character`. */
   player_slug?: string | null;
-  /** Inning number. Schema `character`. */
+  /** Schema `character`. */
   num?: string | null;
   /** Listed roster position (G, F, C, etc.). Schema `character`. */
   position?: string | null;
@@ -3378,7 +3378,7 @@ export interface NbaStatsFantasywidgetRow {
   player_id?: string | null;
   /** Player name. Schema `character`. */
   player_name?: string | null;
-  /** Position of the player accordinng to NGS Schema `character`. */
+  /** Schema `character`. */
   player_position?: string | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -3428,9 +3428,9 @@ export interface NbaStatsFranchisehistoryFranchiseHistoryRow {
   team_city?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Span starting year. Schema `character`. */
+  /** Schema `character`. */
   start_year?: string | null;
-  /** Span ending year. Schema `character`. */
+  /** Schema `character`. */
   end_year?: string | null;
   /** Years. Schema `integer`. */
   years?: number | null;
@@ -3464,9 +3464,9 @@ export interface NbaStatsFranchisehistoryDefunctTeamsRow {
   team_city?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Span starting year. Schema `character`. */
+  /** Schema `character`. */
   start_year?: string | null;
-  /** Span ending year. Schema `character`. */
+  /** Schema `character`. */
   end_year?: string | null;
   /** Years. Schema `integer`. */
   years?: number | null;
@@ -3865,7 +3865,7 @@ export interface NbaStatsHomepagev2HomePageStat1Row {
   team_name?: string | null;
   /** Jersey number worn by the player. Schema `character`. */
   jersey_num?: string | null;
-  /** Position of the player accordinng to NGS Schema `character`. */
+  /** Schema `character`. */
   player_position?: string | null;
   /** Points scored. Schema `numeric`. */
   pts?: number | null;
@@ -3889,7 +3889,7 @@ export interface NbaStatsHomepagev2HomePageStat2Row {
   team_name?: string | null;
   /** Jersey number worn by the player. Schema `character`. */
   jersey_num?: string | null;
-  /** Position of the player accordinng to NGS Schema `character`. */
+  /** Schema `character`. */
   player_position?: string | null;
   /** Rebounds per game. Schema `numeric`. */
   reb?: number | null;
@@ -3913,7 +3913,7 @@ export interface NbaStatsHomepagev2HomePageStat3Row {
   team_name?: string | null;
   /** Jersey number worn by the player. Schema `character`. */
   jersey_num?: string | null;
-  /** Position of the player accordinng to NGS Schema `character`. */
+  /** Schema `character`. */
   player_position?: string | null;
   /** Assists. Schema `numeric`. */
   ast?: number | null;
@@ -3937,7 +3937,7 @@ export interface NbaStatsHomepagev2HomePageStat4Row {
   team_name?: string | null;
   /** Jersey number worn by the player. Schema `character`. */
   jersey_num?: string | null;
-  /** Position of the player accordinng to NGS Schema `character`. */
+  /** Schema `character`. */
   player_position?: string | null;
   /** Steals. Schema `numeric`. */
   stl?: number | null;
@@ -3961,7 +3961,7 @@ export interface NbaStatsHomepagev2HomePageStat5Row {
   team_name?: string | null;
   /** Jersey number worn by the player. Schema `character`. */
   jersey_num?: string | null;
-  /** Position of the player accordinng to NGS Schema `character`. */
+  /** Schema `character`. */
   player_position?: string | null;
   /** Field goal percentage (0-1). Schema `numeric`. */
   fg_pct?: number | null;
@@ -3985,7 +3985,7 @@ export interface NbaStatsHomepagev2HomePageStat6Row {
   team_name?: string | null;
   /** Jersey number worn by the player. Schema `character`. */
   jersey_num?: string | null;
-  /** Position of the player accordinng to NGS Schema `character`. */
+  /** Schema `character`. */
   player_position?: string | null;
   /** Free throw percentage (0-1). Schema `numeric`. */
   ft_pct?: number | null;
@@ -4009,7 +4009,7 @@ export interface NbaStatsHomepagev2HomePageStat7Row {
   team_name?: string | null;
   /** Jersey number worn by the player. Schema `character`. */
   jersey_num?: string | null;
-  /** Position of the player accordinng to NGS Schema `character`. */
+  /** Schema `character`. */
   player_position?: string | null;
   /** Three-point field goal percentage (0-1). Schema `numeric`. */
   fg3_pct?: number | null;
@@ -4033,7 +4033,7 @@ export interface NbaStatsHomepagev2HomePageStat8Row {
   team_name?: string | null;
   /** Jersey number worn by the player. Schema `character`. */
   jersey_num?: string | null;
-  /** Position of the player accordinng to NGS Schema `character`. */
+  /** Schema `character`. */
   player_position?: string | null;
   /** Blocks. Schema `numeric`. */
   blk?: number | null;
@@ -4207,7 +4207,7 @@ export interface NbaStatsInfographicfanduelplayerRow {
   team_abbreviation?: string | null;
   /** Jersey number worn by the player. Schema `character`. */
   jersey_num?: string | null;
-  /** Position of the player accordinng to NGS Schema `character`. */
+  /** Schema `character`. */
   player_position?: string | null;
   /** Location. Schema `character`. */
   location?: string | null;
@@ -4366,7 +4366,7 @@ export interface NbaStatsLeaguedashlineupsRow {
   group_set?: string | null;
   /** ESPN group id. Schema `character` (an id). */
   group_id?: string | null;
-  /** Group name (conference / division). Schema `character`. */
+  /** Schema `character`. */
   group_name?: string | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -4536,11 +4536,11 @@ export interface NbaStatsLeaguedashplayerbiostatsRow {
   team_abbreviation?: string | null;
   /** Player age (in years). Schema `numeric`. */
   age?: number | null;
-  /** Participant height (e.g. "6' 5\""). Schema `character`. */
+  /** Schema `character`. */
   player_height?: string | null;
   /** NBA or WNBA Stats value for player height inches in the leaguedashplayerbiostats result set. Schema `integer`. */
   player_height_inches?: number | null;
-  /** Participant weight in pounds. Schema `character`. */
+  /** Schema `character`. */
   player_weight?: string | null;
   /** College. Schema `character`. */
   college?: string | null;
@@ -4550,7 +4550,7 @@ export interface NbaStatsLeaguedashplayerbiostatsRow {
   draft_year?: string | null;
   /** Round of the draft selection. Schema `character`. */
   draft_round?: string | null;
-  /** The number pick that was used to select a given player. Schema `character`. */
+  /** Schema `character`. */
   draft_number?: string | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -4986,7 +4986,7 @@ export interface NbaStatsLeaguedashptdefendRow {
   player_last_team_id?: string | null;
   /** NBA or WNBA Stats value for player last team abbreviation in the leaguedashptdefend result set. Schema `character`. */
   player_last_team_abbreviation?: string | null;
-  /** Position of the player accordinng to NGS Schema `character`. */
+  /** Schema `character`. */
   player_position?: string | null;
   /** Player age (in years). Schema `numeric`. */
   age?: number | null;
@@ -5666,7 +5666,7 @@ export interface NbaStatsLeagueleadersRow {
 export interface NbaStatsLeaguelineupvizRow {
   /** ESPN group id. Schema `character` (an id). */
   group_id?: string | null;
-  /** Group name (conference / division). Schema `character`. */
+  /** Schema `character`. */
   group_name?: string | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -6925,7 +6925,7 @@ export interface NbaStatsPlayercareerstatsSeasonTotalsCollegeSeasonRow {
   league_id?: unknown;
   /** Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_id?: unknown;
-  /** School name. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   school_name?: unknown;
   /** NBA or WNBA Stats value for player age in the playercareerstats result set. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_age?: unknown;
@@ -13311,7 +13311,7 @@ export interface NbaStatsPlayerdashptpassPassesMadeRow {
   pass_teammate_player_id?: string | null;
   /** NBA or WNBA Stats value for frequency in the playerdashptpass result set. Schema `numeric`. */
   frequency?: number | null;
-  /** Binary indicator if the play was a pass play (sacks and scrambles included). Schema `numeric`. */
+  /** Schema `numeric`. */
   pass?: number | null;
   /** Assists. Schema `numeric`. */
   ast?: number | null;
@@ -13359,7 +13359,7 @@ export interface NbaStatsPlayerdashptpassPassesReceivedRow {
   pass_teammate_player_id?: string | null;
   /** NBA or WNBA Stats value for frequency in the playerdashptpass result set. Schema `numeric`. */
   frequency?: number | null;
-  /** Binary indicator if the play was a pass play (sacks and scrambles included). Schema `numeric`. */
+  /** Schema `numeric`. */
   pass?: number | null;
   /** Assists. Schema `numeric`. */
   ast?: number | null;
@@ -13440,7 +13440,7 @@ export interface NbaStatsPlayerdashptrebShotTypeReboundingRow {
   player_id?: string | null;
   /** Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. Schema `character`. */
   player_name_last_first?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -13480,7 +13480,7 @@ export interface NbaStatsPlayerdashptrebNumContestedReboundingRow {
   player_id?: string | null;
   /** Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. Schema `character`. */
   player_name_last_first?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -13520,7 +13520,7 @@ export interface NbaStatsPlayerdashptrebShotDistanceReboundingRow {
   player_id?: string | null;
   /** Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. Schema `character`. */
   player_name_last_first?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -13560,7 +13560,7 @@ export interface NbaStatsPlayerdashptrebRebDistanceReboundingRow {
   player_id?: string | null;
   /** Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. Schema `character`. */
   player_name_last_first?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -13643,7 +13643,7 @@ export interface NbaStatsPlayerdashptshotsOverallRow {
   player_id?: string | null;
   /** Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. Schema `character`. */
   player_name_last_first?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -13687,7 +13687,7 @@ export interface NbaStatsPlayerdashptshotsGeneralShootingRow {
   player_id?: string | null;
   /** Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. Schema `character`. */
   player_name_last_first?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -13731,7 +13731,7 @@ export interface NbaStatsPlayerdashptshotsShotClockShootingRow {
   player_id?: string | null;
   /** Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. Schema `character`. */
   player_name_last_first?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -13775,7 +13775,7 @@ export interface NbaStatsPlayerdashptshotsDribbleShootingRow {
   player_id?: string | null;
   /** Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. Schema `character`. */
   player_name_last_first?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -13819,7 +13819,7 @@ export interface NbaStatsPlayerdashptshotsClosestDefenderShootingRow {
   player_id?: string | null;
   /** Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. Schema `character`. */
   player_name_last_first?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -13863,7 +13863,7 @@ export interface NbaStatsPlayerdashptshotsClosestDefender10ftPlusShootingRow {
   player_id?: string | null;
   /** Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. Schema `character`. */
   player_name_last_first?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -13907,7 +13907,7 @@ export interface NbaStatsPlayerdashptshotsTouchTimeShootingRow {
   player_id?: string | null;
   /** Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. Schema `character`. */
   player_name_last_first?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -14722,9 +14722,9 @@ export interface NbaStatsPlayergamestreakfinderRow {
 export interface NbaStatsPlayerindexRow {
   /** Unique player identifier (V3 endpoints). Schema `integer` (an id). */
   person_id?: string | null;
-  /** Participant last name. Schema `character`. */
+  /** Schema `character`. */
   player_last_name?: string | null;
-  /** Participant first name. Schema `character`. */
+  /** Schema `character`. */
   player_first_name?: string | null;
   /** URL-safe player identifier. Schema `character`. */
   player_slug?: string | null;
@@ -14756,9 +14756,9 @@ export interface NbaStatsPlayerindexRow {
   draft_year?: number | null;
   /** Round of the draft selection. Schema `integer`. */
   draft_round?: number | null;
-  /** The number pick that was used to select a given player. Schema `integer`. */
+  /** Schema `integer`. */
   draft_number?: number | null;
-  /** Payroll table the row came from: Active, IL, or Retained Salary. Schema `numeric`. */
+  /** Schema `numeric`. */
   roster_status?: number | null;
   /** First season. Schema `character`. */
   from_year?: string | null;
@@ -15128,7 +15128,7 @@ export interface NbaStatsPlayerprofilev2SeasonTotalsCollegeSeasonRow {
   league_id?: unknown;
   /** Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_id?: unknown;
-  /** School name. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   school_name?: unknown;
   /** NBA or WNBA Stats value for player age in the playerprofilev2 result set. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_age?: unknown;
@@ -15532,7 +15532,7 @@ export interface NbaStatsPlayerprofilev2NextGameRow {
   game_time?: unknown;
   /** Location. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   location?: unknown;
-  /** Unique team identifier of the primary player. Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_team_id?: unknown;
   /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_team_city?: unknown;
@@ -15887,7 +15887,7 @@ export interface NbaStatsPlayervsplayerPlayerInfoRow {
   display_last_comma_first?: string | null;
   /** Schema `character`. */
   display_fi_last?: string | null;
-  /** Date of birth. Schema `character`. */
+  /** Schema `character`. */
   birthdate?: string | null;
   /** Player school / pre-draft team. Schema `character`. */
   school?: string | null;
@@ -15913,7 +15913,7 @@ export interface NbaStatsPlayervsplayerVsPlayerInfoRow {
   display_last_comma_first?: string | null;
   /** Schema `character`. */
   display_fi_last?: string | null;
-  /** Date of birth. Schema `character`. */
+  /** Schema `character`. */
   birthdate?: string | null;
   /** Player school / pre-draft team. Schema `character`. */
   school?: string | null;
@@ -16720,7 +16720,7 @@ export interface NbaStatsScoreboardv3Row {
   gameclock?: string | null;
   /** Gamecode. Schema `character`. */
   gamecode?: string | null;
-  /** Game date as parsed from the source feed. Schema `character`. */
+  /** Schema `character`. */
   gamedate?: string | null;
   /** Scheduled game start time in US Eastern time. Schema `character`. */
   gameet?: string | null;
@@ -16973,7 +16973,7 @@ export interface NbaStatsShotchartlineupdetailShotChartLineupDetailRow {
   game_event_id?: unknown;
   /** ESPN group id. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   group_id?: unknown;
-  /** Group name (conference / division). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   group_name?: unknown;
   /** Unique player identifier. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_id?: unknown;
@@ -19214,7 +19214,7 @@ export interface NbaStatsTeamdashboardbygeneralsplitsWinsLossesTeamDashboardRow 
   group_set?: string | null;
   /** Specific grouping value for this dashboard or split row. Schema `character`. */
   group_value?: string | null;
-  /** Game result for the player's team (`W`/`L`). Schema `character`. */
+  /** Schema `character`. */
   game_result?: string | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -22198,7 +22198,7 @@ export interface NbaStatsTeamdashlineupsLineupsRow {
   group_set?: string | null;
   /** ESPN group id. Schema `character` (an id). */
   group_id?: string | null;
-  /** Group name (conference / division). Schema `character`. */
+  /** Schema `character`. */
   group_name?: string | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -22337,7 +22337,7 @@ export interface NbaStatsTeamdashptpassPassesMadeRow {
   pass_teammate_player_id?: string | null;
   /** NBA or WNBA Stats value for frequency in the teamdashptpass result set. Schema `numeric`. */
   frequency?: number | null;
-  /** Binary indicator if the play was a pass play (sacks and scrambles included). Schema `numeric`. */
+  /** Schema `numeric`. */
   pass?: number | null;
   /** Assists. Schema `numeric`. */
   ast?: number | null;
@@ -22379,7 +22379,7 @@ export interface NbaStatsTeamdashptpassPassesReceivedRow {
   pass_teammate_player_id?: string | null;
   /** NBA or WNBA Stats value for frequency in the teamdashptpass result set. Schema `numeric`. */
   frequency?: number | null;
-  /** Binary indicator if the play was a pass play (sacks and scrambles included). Schema `numeric`. */
+  /** Schema `numeric`. */
   pass?: number | null;
   /** Assists. Schema `numeric`. */
   ast?: number | null;
@@ -22460,7 +22460,7 @@ export interface NbaStatsTeamdashptrebShotTypeReboundingRow {
   team_id?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -22500,7 +22500,7 @@ export interface NbaStatsTeamdashptrebNumContestedReboundingRow {
   team_id?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -22540,7 +22540,7 @@ export interface NbaStatsTeamdashptrebShotDistanceReboundingRow {
   team_id?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -22580,7 +22580,7 @@ export interface NbaStatsTeamdashptrebRebDistanceReboundingRow {
   team_id?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -22637,7 +22637,7 @@ export interface NbaStatsTeamdashptshotsGeneralShootingRow {
   team_id?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -22679,7 +22679,7 @@ export interface NbaStatsTeamdashptshotsShotClockShootingRow {
   team_id?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -22721,7 +22721,7 @@ export interface NbaStatsTeamdashptshotsDribbleShootingRow {
   team_id?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -22763,7 +22763,7 @@ export interface NbaStatsTeamdashptshotsClosestDefenderShootingRow {
   team_id?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -22805,7 +22805,7 @@ export interface NbaStatsTeamdashptshotsClosestDefender10ftPlusShootingRow {
   team_id?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -22847,7 +22847,7 @@ export interface NbaStatsTeamdashptshotsTouchTimeShootingRow {
   team_id?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Games played. Schema `integer`. */
   g?: number | null;
@@ -23319,7 +23319,7 @@ export interface NbaStatsTeaminfocommonTeamInfoCommonRow {
   team_conference?: string | null;
   /** Division the team belongs to. Schema `character`. */
   team_division?: string | null;
-  /** Internal team code. Schema `character`. */
+  /** Schema `character`. */
   team_code?: string | null;
   /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). Schema `character`. */
   team_slug?: string | null;
@@ -25131,7 +25131,7 @@ export interface NbaStatsVideostatusRow {
   home_team_city?: string | null;
   /** Home team name. Schema `character`. */
   home_team_name?: string | null;
-  /** Home team abbreviation. Schema `character`. */
+  /** Schema `character`. */
   home_team_abbreviation?: string | null;
   /** Game status label. Schema `integer`. */
   game_status?: number | null;

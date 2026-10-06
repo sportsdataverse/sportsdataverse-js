@@ -131,7 +131,7 @@ export interface LoadMbbPbpRow {
   media_id?: string | null;
   /** Model's pre-game win probability for the home team (0-1), constant within a game. `Float64` */
   pregame_home_prob?: number | null;
-  /** Home win probability - pre-game prediction (0-1). `Float64` */
+  /** `Float64` */
   home_win_prob?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -269,7 +269,7 @@ export interface LoadMbbScheduleRow {
   neutral_site?: boolean | null;
   /** Conference competition. `Boolean` */
   conference_competition?: boolean | null;
-  /** Whether play-by-play data is available. `Boolean` */
+  /** `Boolean` */
   play_by_play_available?: boolean | null;
   /** Recent. `Boolean` */
   recent?: boolean | null;
@@ -277,7 +277,7 @@ export interface LoadMbbScheduleRow {
   start_date?: string | null;
   /** Broadcast information string. `String` */
   broadcast?: string | null;
-  /** Game highlight urls. `String` */
+  /** `String` */
   highlights?: string | null;
   /** Notes type. `String` */
   notes_type?: string | null;
@@ -415,15 +415,15 @@ export interface LoadMbbScheduleRow {
   groups_short_name?: string | null;
   /** Groups is conference. `Boolean` */
   groups_is_conference?: boolean | null;
-  /** Whether processed game JSON is available. `Boolean` */
+  /** `Boolean` */
   game_json?: boolean | null;
-  /** URL to the processed game JSON. `String` */
+  /** `String` */
   game_json_url?: string | null;
   /** Game start date/time (ISO 8601). `Datetime(time_unit='us', time_zone='America/New_York')` */
   game_date_time?: Date | null;
   /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
-  /** Whether play-by-play data is available. `Boolean` */
+  /** `Boolean` */
   PBP?: boolean | null;
   /** Team box. `Boolean` */
   team_box?: boolean | null;
@@ -603,7 +603,7 @@ export interface LoadMbbPlayerValueRow {
   box_dbpm?: number | null;
   /** Total box plus/minus in points per 100 possessions above an average player, exactly box_obpm plus box_dbpm (verified to zero residual across all 9,805 rows of 2025). `Float64` */
   box_bpm?: number | null;
-  /** True/False indicator of whether or not player meets minimum play requirement `Boolean` */
+  /** `Boolean` */
   qualified?: boolean | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -661,9 +661,9 @@ export interface LoadMbbStandingsRow {
   season?: number | null;
   /** ESPN group id. `String` (an id) */
   group_id?: string | null;
-  /** Group name (conference / division). `String` */
+  /** `String` */
   group_name?: string | null;
-  /** Group abbreviation. `String` */
+  /** `String` */
   group_abbreviation?: string | null;
   /** Abbreviated conference label ESPN prints in standings tables, such as ACC, Big Ten or Am. East, one value per group_id. `String` */
   group_short_name?: string | null;
@@ -693,7 +693,7 @@ export interface LoadMbbStandingsRow {
   stat_name?: string | null;
   /** Stat display name. `String` */
   stat_display_name?: string | null;
-  /** Short human-readable stat name. `String` */
+  /** `String` */
   stat_short_display_name?: string | null;
   /** ESPN's longer-form label for the standings statistic, which can differ from stat_display_name (streak is described as Current Streak and playoffSeed as Playoff Seed). `String` */
   stat_description?: string | null;
@@ -729,7 +729,7 @@ export interface LoadMbbPlayerSeasonStatsRow {
   team_display_name?: string | null;
   /** Category label. `String` */
   category?: string | null;
-  /** Human-readable label of the statistic (e.g. 'At bats'). `String` */
+  /** `String` */
   stat_label?: string | null;
   /** Stat key. `String` */
   stat_name?: string | null;
@@ -869,9 +869,9 @@ export interface LoadMbbGameRostersRow {
   athlete_display_name?: string | null;
   /** Athlete short display name. `String` */
   athlete_short_name?: string | null;
-  /** Player first name. `String` */
+  /** `String` */
   athlete_first_name?: string | null;
-  /** Athlete last name. `String` */
+  /** `String` */
   athlete_last_name?: string | null;
   /** Athlete jersey number. `String` */
   athlete_jersey?: string | null;
@@ -915,7 +915,7 @@ export interface LoadMbbTeamSeasonStatsRow {
   team_logo?: string | null;
   /** Category label. `String` */
   category?: string | null;
-  /** Human-readable label of the statistic (e.g. 'At bats'). `String` */
+  /** `String` */
   stat_label?: string | null;
   /** Stat key. `String` */
   stat_name?: string | null;
@@ -1093,7 +1093,7 @@ export interface LoadMbbPlayerCoreRow {
   birth_city?: string | null;
   /** Birth state / region. `String` */
   birth_state?: string | null;
-  /** Player birth country. `String` */
+  /** `String` */
   birth_country?: string | null;
   /** Jersey number worn by the player. `String` */
   jersey?: string | null;
@@ -1107,7 +1107,7 @@ export interface LoadMbbPlayerCoreRow {
   position_display_name?: string | null;
   /** Unique identifier for college. `Int32` (an id) */
   college_id?: string | null;
-  /** Player's current team identifier. `Int32` (an id) */
+  /** `Int32` (an id) */
   current_team_id?: string | null;
   /** Headshot image URL. `String` */
   headshot_href?: string | null;
@@ -1145,15 +1145,15 @@ export interface LoadNcaaMbbPbpRow {
   clock?: string | null;
   /** Game start time. `String` */
   game_time?: string | null;
-  /** Elapsed seconds in the game. `Int64` */
+  /** `Int64` */
   game_seconds?: number | bigint | null;
   /** Home team score at the time of the play. `Int64` */
   home_score?: number | bigint | null;
   /** Away team score at the time of the play. `Int64` */
   away_score?: number | bigint | null;
-  /** Team associated with the shift change. `String` */
+  /** `String` */
   event_team?: string | null;
-  /** Human-readable event description. `String` */
+  /** `String` */
   event_description?: string | null;
   /** Name of the primary player credited on the event (shooter, fouler, rebounder, etc.), as scraped from stats.ncaa.org. `String` */
   player_1?: string | null;
@@ -1201,7 +1201,7 @@ export interface LoadNcaaMbbPbpRow {
   is_garbage_time?: boolean | null;
   /** Per-game count of substitution-tracking deviations found while walking lineups forward; nonzero flags imperfect substitution data. `Int64` */
   sub_deviate?: number | bigint | null;
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** stats.ncaa.org team identifier for the home team. `String` (an id) */
   home_ncaa_team_id?: string | null;
@@ -1313,7 +1313,7 @@ export interface LoadNcaaMbbPbpRow {
 
 /** One row of `sdv.mbb.loadNcaaMbbSchedule` (`ncaa_mbb_schedule`; sdv-py loader schema `load_ncaa_mbb_schedule`). */
 export interface LoadNcaaMbbScheduleRow {
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** Game date (YYYY-MM-DD). `String` */
   game_date?: string | null;
@@ -1561,7 +1561,7 @@ export interface LoadNcaaMbbPlayerBoxRow {
   mida_unast?: number | null;
   /** Mid-range field-goal percentage in the unassisted split (makes for which no assist was credited). `Float64` */
   mid_pct_unast?: number | null;
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** stats.ncaa.org team identifier for the home team. `String` (an id) */
   home_ncaa_team_id?: string | null;
@@ -1733,7 +1733,7 @@ export interface LoadNcaaMbbTeamBoxRow {
   time_per_poss?: number | null;
   /** Average seconds per defensive possession. `Float64` */
   d_time_per_poss?: number | null;
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** stats.ncaa.org team identifier for the home team. `String` (an id) */
   home_ncaa_team_id?: string | null;
@@ -1797,7 +1797,7 @@ export interface LoadNcaaMbbTeamRostersRow {
   ht_inches?: number | bigint | null;
   /** Player hometown. `String` */
   hometown?: string | null;
-  /** High school `String` */
+  /** `String` */
   high_school?: string | null;
   /** Games played. `String` */
   gp?: string | null;
@@ -1877,7 +1877,7 @@ export interface LoadNcaaMbbPossessionsRow {
   last_event_time?: number | bigint | null;
   /** Event type that ended the possession (e.g., a made shot, turnover, or defensive rebound). `String` */
   last_event_type?: string | null;
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** stats.ncaa.org team identifier for the home team. `String` (an id) */
   home_ncaa_team_id?: string | null;
@@ -2091,7 +2091,7 @@ export interface LoadNcaaMbbLineupsRow {
   opp_foul?: number | bigint | null;
   /** Sequential on-floor stint number for the lineup within the game. `Int64` */
   stint_num?: number | bigint | null;
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** Season year. `Int64` */
   season?: number | bigint | null;
@@ -2101,7 +2101,7 @@ export interface LoadNcaaMbbLineupsRow {
 
 /** One row of `sdv.mbb.loadNcaaMbbMatchupStints` (`ncaa_mbb_matchup_stints`; sdv-py loader schema `load_ncaa_mbb_matchup_stints`). */
 export interface LoadNcaaMbbMatchupStintsRow {
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** Season year. `Int64` */
   season?: number | bigint | null;
@@ -2197,9 +2197,9 @@ export interface LoadNcaaMbbShotsRow {
   period?: unknown;
   /** Seconds remaining in the period when the shot was taken (all-null in current captures). `Null` */
   sec_left?: unknown;
-  /** News source. `String` */
+  /** `String` */
   source?: string | null;
-  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
+  /** `String` (an id) */
   contest_id?: string | null;
   /** stats.ncaa.org team identifier of the shooting team. `String` (an id) */
   ncaa_team_id?: string | null;

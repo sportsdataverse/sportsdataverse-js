@@ -311,7 +311,7 @@ export interface LoadNhlScheduleRow {
   series_letter?: string | null;
   /** Playoff round identifier. `Int32` */
   playoff_round?: number | null;
-  /** Series game number. `Int32` */
+  /** `Int32` */
   series_game_number?: number | null;
   /** Season year (echoed from arg). `Int32` */
   season?: number | null;
@@ -1179,7 +1179,7 @@ export interface LoadNhlSchedulesRow {
   series_letter?: string | null;
   /** Playoff round identifier. `Int32` */
   playoff_round?: number | null;
-  /** Series game number. `Int32` */
+  /** `Int32` */
   series_game_number?: number | null;
   /** Season year (echoed from arg). `Int32` */
   season?: number | null;
@@ -1201,7 +1201,7 @@ export interface LoadNhlSchedulesRow {
   game_info?: boolean | null;
   /** Whether game rosters data is available. `Boolean` */
   game_rosters?: boolean | null;
-  /** TRUE when the play results in a score (TD, FG, safety, two-point conversion). `Boolean` */
+  /** `Boolean` */
   scoring?: boolean | null;
   /** Penalty count. `Boolean` */
   penalties?: boolean | null;

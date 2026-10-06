@@ -7,7 +7,7 @@
 
 /** One row of `sdv.pwhl.loadPhfPbp` (`phf_pbp`; sdv-py loader schema `load_phf_pbp`). */
 export interface LoadPhfPbpRow {
-  /** String indicating the type of play: pass (includes sacks), run (includes scrambles), punt, field_goal, kickoff, extra_point, qb_kneel, qb_spike, no_play (timeouts and penalties), and missing for rows indicating end of play. `String` */
+  /** `String` */
   play_type?: string | null;
   /** Team name. `String` */
   team?: string | null;
@@ -47,7 +47,7 @@ export interface LoadPhfPbpRow {
   away_goalie_jersey?: string | null;
   /** True when the play records a goaltender change. `String` */
   goalie_change?: string | null;
-  /** Binary indicator for whether or not a penalty occurred. `Int32` */
+  /** `Int32` */
   penalty?: number | null;
   /** Strength situation on the ice for the play (e.g. even strength, power play). `String` */
   on_ice_situation?: string | null;
@@ -69,9 +69,9 @@ export interface LoadPhfPbpRow {
   sec_from_start?: number | null;
   /** Elapsed seconds of the power play at this play. `Int32` */
   power_play_seconds?: number | null;
-  /** Elapsed game time for the drive (`MM:SS`). `String` */
+  /** `String` */
   time_elapsed?: string | null;
-  /** Time remaining. `String` */
+  /** `String` */
   time_remaining?: string | null;
   /** Name of the player in slot 1 of the play's participant list. `String` */
   player_name_1?: string | null;
@@ -89,11 +89,11 @@ export interface LoadPhfPbpRow {
   player_name_2?: string | null;
   /** Jersey number of the player in slot 2 of the play's participant list. `String` */
   player_jersey_2?: string | null;
-  /** Shot result ('Made' / 'Missed'). `String` */
+  /** `String` */
   shot_result?: string | null;
   /** Name of the goaltender involved in the play. `String` */
   goalie_involved?: string | null;
-  /** String indicating the penalty type of the first penalty in the given play. Will be `NA` if `desc` is missing the type. `String` */
+  /** `String` */
   penalty_type?: string | null;
   /** Severity classification of the penalty (e.g. minor, major). `String` */
   penalty_level?: string | null;
@@ -189,7 +189,7 @@ export interface LoadPhfPlayerBoxscoresRow {
   plus_minus?: number | null;
   /** Shots on goal. `Int32` */
   shots_on_goal?: number | null;
-  /** Total blocks. `Int32` */
+  /** `Int32` */
   blocks?: number | null;
   /** Giveaways. `Int32` */
   giveaways?: number | null;
@@ -311,7 +311,7 @@ export interface LoadPhfSchedulesRow {
   home_division?: string | null;
   /** League identifier for the away team's division. `Int32` (an id) */
   away_division_id?: string | null;
-  /** Away team division. `String` */
+  /** `String` */
   away_division?: string | null;
   /** Home team final score. `Int32` */
   home_score?: number | null;
@@ -345,7 +345,7 @@ export interface LoadPhfSchedulesRow {
   notes?: string | null;
   /** Status string (e.g. captain markers). `String` */
   status?: string | null;
-  /** Binary indicator of whether or not game went to overtime. `Boolean` */
+  /** `Boolean` */
   overtime?: boolean | null;
   /** Whether shootout data is available. `Boolean` */
   shootout?: boolean | null;

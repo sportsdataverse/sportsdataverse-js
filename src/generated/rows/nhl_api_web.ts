@@ -616,9 +616,9 @@ export interface NhlApiWebPbpRow {
   event_id?: string | null;
   /** Time elapsed in the period when the shot occurred. Schema `character`. */
   time_in_period?: string | null;
-  /** Time remaining. Schema `character`. */
+  /** Schema `character`. */
   time_remaining?: string | null;
-  /** Code identifying the game situation. Schema `character`. */
+  /** Schema `character`. */
   situation_code?: string | null;
   /** Ice end ('left' or 'right') that the home team is defending in the current period, used to orient x/y coordinates in the NHL api-web play-by-play feed. Schema `character`. */
   home_team_defending_side?: string | null;
@@ -626,7 +626,7 @@ export interface NhlApiWebPbpRow {
   type_code?: number | null;
   /** String key describing the event type category (e.g., 'goal', 'shot-on-goal', 'hit', 'faceoff') in the NHL api-web play-by-play feed. Schema `character`. */
   type_desc_key?: string | null;
-  /** Display sort order for the sport. Schema `integer`. */
+  /** Schema `integer`. */
   sort_order?: number | null;
   /** Period number. Schema `integer`. */
   period_descriptor_number?: number | null;
@@ -1082,7 +1082,7 @@ export interface NhlApiWebPlayoffSeriesRow {
   game_type?: number | null;
   /** Game number within the schedule. Schema `integer`. */
   game_number?: number | null;
-  /** If necessary. Schema `logical`. */
+  /** Schema `logical`. */
   if_necessary?: boolean | null;
   /** Whether the game is at a neutral site. Schema `logical`. */
   neutral_site?: boolean | null;
@@ -1478,7 +1478,7 @@ export interface NhlApiWebSkaterLeadersRow {
  * One row of `sdv.nhl.nhl_standings({ parsed: true })` (returns schema `native/nhl_api_web/standings`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebStandingsRow {
-  /** Playoff clinch indicator (e.g. 'x' clinched playoff, 'e' eliminated). Schema `character`. */
+  /** Schema `character`. */
   clinch_indicator?: string | null;
   /** Conference abbreviation. Schema `character`. */
   conference_abbrev?: string | null;
@@ -1532,7 +1532,7 @@ export interface NhlApiWebStandingsRow {
   home_losses?: number | null;
   /** Home overtime losses. Schema `integer`. */
   home_ot_losses?: number | null;
-  /** Home team total points scored in the game so far. Schema `integer`. */
+  /** Schema `integer`. */
   home_points?: number | null;
   /** Number of home wins achieved in regulation or overtime (excluding shootout decisions) in the current season. Schema `integer`. */
   home_regulation_plus_ot_wins?: number | null;

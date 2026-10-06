@@ -32,7 +32,7 @@ export interface NhlRecordsAllTimeRecordVsFranchiseRow {
   home_losses?: number | null;
   /** Home overtime losses. Schema `integer`. */
   home_ot_losses?: number | null;
-  /** Home team total points scored in the game so far. Schema `integer`. */
+  /** Schema `integer`. */
   home_points?: number | null;
   /** Ties at home. Schema `integer`. */
   home_ties?: number | null;
@@ -80,9 +80,9 @@ export interface NhlRecordsAllTimeRecordVsFranchiseRow {
   total_ot_losses?: number | null;
   /** Total standings points earned by the franchise across all all-time games against this opponent. Schema `integer`. */
   total_points?: number | null;
-  /** Total ties. Schema `integer`. */
+  /** Schema `integer`. */
   total_ties?: number | null;
-  /** Total wins. Schema `integer`. */
+  /** Schema `integer`. */
   total_wins?: number | null;
 }
 
@@ -156,9 +156,9 @@ export interface NhlRecordsAllstarGoalieCareerRow {
   season_id?: string | null;
   /** Shots faced. Schema `integer`. */
   shots_against?: number | null;
-  /** Team losses. Schema `integer`. */
+  /** Schema `integer`. */
   team_losses?: number | null;
-  /** Team wins. Schema `integer`. */
+  /** Schema `integer`. */
   team_wins?: number | null;
   /** Total ties. Schema `integer`. */
   ties?: number | null;
@@ -178,7 +178,7 @@ export interface NhlRecordsAllstarGoalieGameRow {
   all_star_team_id?: string | null;
   /** Goals scored by the goalie's All-Star team in that game. Schema `integer`. */
   all_star_team_score?: number | null;
-  /** Arena name. Schema `character`. */
+  /** Schema `character`. */
   arena_name?: string | null;
   /** City where the venue is located. Schema `character`. */
   city?: string | null;
@@ -190,7 +190,7 @@ export interface NhlRecordsAllstarGoalieGameRow {
   game_date?: string | null;
   /** Unique game identifier. Schema `integer` (an id). */
   game_id?: string | null;
-  /** Full event name. Schema `character`. */
+  /** Schema `character`. */
   game_name?: string | null;
   /** Goals against. Schema `integer`. */
   goals_against?: number | null;
@@ -202,11 +202,11 @@ export interface NhlRecordsAllstarGoalieGameRow {
   is_rookie?: boolean | null;
   /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Mvp. Schema `character`. */
+  /** Schema `character`. */
   mvp?: string | null;
   /** NHL identifier for the goalie's regular-season franchise at the time of the All-Star game. Schema `integer` (an id). */
   nhl_team_id?: string | null;
-  /** Opponent score. Schema `integer`. */
+  /** Schema `integer`. */
   opponent_score?: number | null;
   /** Opponent team identifier. Schema `integer` (an id). */
   opponent_team_id?: string | null;
@@ -284,7 +284,7 @@ export interface NhlRecordsAllstarSkaterGameRow {
   all_star_team_id?: string | null;
   /** Goals scored by the skater's All-Star team in this specific All-Star game. Schema `integer`. */
   all_star_team_score?: number | null;
-  /** Arena name. Schema `character`. */
+  /** Schema `character`. */
   arena_name?: string | null;
   /** Assists. Schema `integer`. */
   assists?: number | null;
@@ -298,7 +298,7 @@ export interface NhlRecordsAllstarSkaterGameRow {
   game_date?: string | null;
   /** Unique game identifier. Schema `integer` (an id). */
   game_id?: string | null;
-  /** Full event name. Schema `character`. */
+  /** Schema `character`. */
   game_name?: string | null;
   /** Goals scored. Schema `integer`. */
   goals?: number | null;
@@ -310,11 +310,11 @@ export interface NhlRecordsAllstarSkaterGameRow {
   is_rookie?: boolean | null;
   /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Mvp. Schema `character`. */
+  /** Schema `character`. */
   mvp?: string | null;
   /** NHL identifier for the skater's regular-season team at the time this All-Star game was played. Schema `integer` (an id). */
   nhl_team_id?: string | null;
-  /** Opponent score. Schema `integer`. */
+  /** Schema `integer`. */
   opponent_score?: number | null;
   /** Opponent team identifier. Schema `integer` (an id). */
   opponent_team_id?: string | null;
@@ -516,7 +516,7 @@ export interface NhlRecordsCoachRow {
   first_name?: string | null;
   /** Player full name. Schema `character`. */
   full_name?: string | null;
-  /** ESPN's long-form history text for the award. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   history?: unknown;
   /** URL to the coach's page on the Hockey Hall of Fame website, if inducted. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   hockey_hof_link?: unknown;
@@ -564,7 +564,7 @@ export interface NhlRecordsCoachCareerRow {
   game_type_id?: string | null;
   /** Games played. Schema `integer`. */
   games?: number | null;
-  /** Total home games. Schema `integer`. */
+  /** Schema `integer`. */
   home_games?: number | null;
   /** Losses at home. Schema `integer`. */
   home_losses?: number | null;
@@ -686,7 +686,7 @@ export interface NhlRecordsCoachFranchiseRow {
   game_type_id?: string | null;
   /** Games played. Schema `integer`. */
   games?: number | null;
-  /** Total home games. Schema `integer`. */
+  /** Schema `integer`. */
   home_games?: number | null;
   /** Losses at home. Schema `integer`. */
   home_losses?: number | null;
@@ -816,7 +816,7 @@ export interface NhlRecordsCoachesRow {
   first_name?: string | null;
   /** Player full name. Schema `character`. */
   full_name?: string | null;
-  /** ESPN's long-form history text for the award. Schema `character`. */
+  /** Schema `character`. */
   history?: string | null;
   /** URL to the coach's Hockey Hall of Fame profile page, if they are an inductee. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   hockey_hof_link?: unknown;
@@ -1452,7 +1452,7 @@ export interface NhlRecordsGmCareerRow {
   games?: number | null;
   /** Number of times the general manager won the NHL GM of the Year Award during their career. Schema `integer`. */
   gm_of_the_year?: number | null;
-  /** Total home games. Schema `integer`. */
+  /** Schema `integer`. */
   home_games?: number | null;
   /** Losses at home. Schema `integer`. */
   home_losses?: number | null;
@@ -1542,7 +1542,7 @@ export interface NhlRecordsGmFranchiseRow {
   games?: number | null;
   /** Number of NHL General Manager of the Year awards won during this franchise tenure. Schema `integer`. */
   gm_of_the_year?: number | null;
-  /** Total home games. Schema `integer`. */
+  /** Schema `integer`. */
   home_games?: number | null;
   /** Losses at home. Schema `integer`. */
   home_losses?: number | null;

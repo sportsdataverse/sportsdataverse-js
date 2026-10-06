@@ -2027,8 +2027,8 @@ NHL — standings core (ESPN sports.core.api.espn.com (core v2)).
 | `team_logo` | character | URL to the team logo image. |
 | `avg_points_against` | number |  |
 | `avg_points_for` | number |  |
-| `clincher` | integer | Clincher. |
-| `differential` | integer | Differential. |
+| `clincher` | integer |  |
+| `differential` | integer |  |
 | `division_win_percent` | number |  |
 | `games_behind` | integer |  |
 | `league_win_percent` | number |  |
@@ -2039,12 +2039,12 @@ NHL — standings core (ESPN sports.core.api.espn.com (core v2)).
 | `points_against` | integer | Goals conceded. |
 | `points_for` | integer | Goals (or runs) scored by the team. |
 | `streak` | integer | Current streak value. |
-| `win_percent` | number | Win percent. |
+| `win_percent` | number |  |
 | `wins` | integer | Number of matches the team has won. |
 | `games_ahead` | integer |  |
 | `overall` | character | Overall record summary as published by ESPN. |
 | `home` | character | Whether the player's team was home. |
-| `road` | character | Road. |
+| `road` | character |  |
 | `vs_div` | character |  |
 | `vs_conf` | character |  |
 | `last_ten_games` | character |  |

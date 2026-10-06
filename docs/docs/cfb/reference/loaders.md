@@ -236,10 +236,10 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `lead_wp_before` | `number` | Value of wp_before on the next play, used for sequence-aware derivations. |
 | `lead_pos_team2` | `number \| bigint` | Value of pos_team 2 plays ahead, used for sequence-aware derivations. |
 | `id` | `string` | 247Sports referencing id for the recruit. |
-| `sequenceNumber` | `number \| bigint` | Broadcast sequence order number. |
+| `sequenceNumber` | `number \| bigint` |  |
 | `text` | `string` | Full play description. |
-| `awayScore` | `number \| bigint` | Away team score after the goal. |
-| `homeScore` | `number \| bigint` | Home team score after the goal. |
+| `awayScore` | `number \| bigint` |  |
+| `homeScore` | `number \| bigint` |  |
 | `scoringPlay` | `boolean` | ESPN flag marking the play as a scoring play. |
 | `priority` | `boolean` | `TRUE` if ESPN flags the play as a priority highlight. |
 | `modified` | `string` | ISO timestamp the play record was last modified. |
@@ -300,7 +300,7 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `drive.end.clock.displayValue` | `string` | ESPN's `end.clock.displayValue` field for the drive containing this play. |
 | `seasonType` | `number \| bigint` | ESPN season type for the game (2 = regular season, 3 = postseason). |
 | `week` | `number \| bigint` | Game week of the season. |
-| `status_type_completed` | `boolean` | Whether the game is complete. |
+| `status_type_completed` | `boolean` |  |
 | `homeTeamId` | `string` | ESPN's home-team Id for the game, stamped on every play. |
 | `awayTeamId` | `string` | ESPN's away-team Id for the game, stamped on every play. |
 | `homeFinalScore` | `number \| bigint` | Final score of the home team from the ESPN game header, repeated on every play of the game; the processing step checks the running score at the last play against it. |
@@ -368,7 +368,7 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `down_4_end` | `boolean` | True when it is 4th down at the end of the play. |
 | `td_check` | `boolean` | Internal flag used while reconciling whether the play produced a touchdown. |
 | `forced_fumble` | `boolean` | True when the defense forced a fumble on the play. |
-| `is_home` | `boolean` | Whether the subject team was the home team. |
+| `is_home` | `boolean` |  |
 | `lag_HA_score_diff` | `number \| bigint` | Value of HA_score_diff on the previous play, used for sequence-aware derivations. |
 | `HA_score_diff` | `number \| bigint` | Home score minus away score for the play. |
 | `net_HA_score_pts` | `number \| bigint` | Net points the play added to the home-minus-away score margin. |
@@ -402,25 +402,25 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `fg_attempt` | `boolean` | True when the play was a field-goal attempt. |
 | `pos_unit` | `string` | Possession-team unit label (offense or special teams). |
 | `def_pos_unit` | `string` | Defensive possession-team unit label (defense or special teams). |
-| `sp` | `boolean` | Binary indicator for whether or not a score occurred on the play. |
+| `sp` | `boolean` |  |
 | `play` | `boolean` | Binary flag indicating the row is a counted play (excludes end markers/timeouts/penalties). |
 | `cleaned_text` | `string` | Play description with overturned-call prefixes stripped; the text the name and team extractors run against. |
 | `kneel_down` | `boolean` | Whether the play is an offensive kneel, from explicit kneel text plus an end-of-half TEAM-rush heuristic. |
 | `scrimmage_play` | `boolean` | True when the play is a play from scrimmage rather than a special-teams or administrative row. |
 | `pos_score_diff_end` | `number \| bigint` | Score differential from the possessing team's perspective at the end of the play. |
-| `fumble_lost` | `boolean` | Binary indicator for if the fumble was lost. |
+| `fumble_lost` | `boolean` |  |
 | `fumble_recovered` | `boolean` | True when a fumble on the play was recovered. |
-| `field_goal_result` | `string` | String indicator for result of field goal attempt: made, missed, or blocked. |
-| `extra_point_result` | `string` | String indicator for the result of the extra point attempt: good, failed, blocked, safety (touchback in defensive endzone is 1 point apparently), or aborted. |
+| `field_goal_result` | `string` |  |
+| `extra_point_result` | `string` |  |
 | `two_point_conv_result` | `string` | String result of the two-point conversion attempt: success, failure, or safety (touchback in the defensive end zone). |
-| `defensive_two_point_attempt` | `boolean` | Binary indicator whether or not the defense was able to have an attempt on a two point conversion, this results following a turnover. |
-| `defensive_two_point_conv` | `boolean` | Binary indicator whether or not the defense successfully scored on the two point conversion. |
+| `defensive_two_point_attempt` | `boolean` |  |
+| `defensive_two_point_conv` | `boolean` |  |
 | `yds_punted_source` | `string` | Provenance of yds_punted: "text" when the value was present before the special-teams derivation step (parsed from the play text, or set by a flag convention such as a blocked punt's 0), "derived" when that step filled it from field position, null when there is no value. |
 | `yds_kickoff_source` | `string` | Provenance of yds_kickoff: "text" when the value was present before the special-teams derivation step (parsed from the play text, or set by a flag convention such as a blocked punt's 0), "derived" when that step filled it from field position, null when there is no value. |
 | `yds_punt_return_source` | `string` | Provenance of yds_punt_return: "text" when the value was present before the special-teams derivation step (parsed from the play text, or set by a flag convention such as a blocked punt's 0), "derived" when that step filled it from field position, null when there is no value. |
 | `air_yardsToEndzone` | `number \| bigint` | Yards to the endzone at the catch spot, parsed from the 2025+ vendor catch-spot text; null before 2025 or when unresolvable. |
-| `air_yards` | `number \| bigint` | Numeric value for distance in yards perpendicular to the line of scrimmage at where the targeted receiver either caught or didn't catch the ball. |
-| `yards_after_catch` | `number \| bigint` | Numeric value for distance in yards perpendicular to the yard line where the receiver made the reception to where the play ended. |
+| `air_yards` | `number \| bigint` |  |
+| `yards_after_catch` | `number \| bigint` |  |
 | `kickoff_return_player_name` | `string` | Name of the player returning the kickoff, when the play was returned. |
 | `punt_return_player_name` | `string` | Name of the player returning the punt, when the punt was returned. |
 | `xp_attempt` | `boolean` | Whether an extra-point kick was attempted on the play. |
@@ -462,7 +462,7 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `new_down` | `number \| bigint` | Down after the play, including any penalty enforcement. |
 | `new_distance` | `number \| bigint` | Distance to go after the play, including any penalty enforcement. |
 | `under_2` | `boolean` | Whether the play began with two minutes or less remaining in the half. |
-| `goal_to_go` | `boolean` | Binary indicator for whether or not the posteam is in a goal down situation. |
+| `goal_to_go` | `boolean` |  |
 | `stopped_run` | `boolean` | True when the rush was stopped at or behind the line of scrimmage. |
 | `opportunity_run` | `boolean` | True when a rush reached 4 yards -- the carries on which the blocking did its job. Matches cfbfastR's espn_cfb_15 definition. Assets published before the 2026-08 fix carry the inverted (4 yards or fewer) flag. |
 | `highlight_run` | `boolean` | True when the rush gained 8 or more yards. |
@@ -489,7 +489,7 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `TFL_rush` | `boolean` | True when the play was a tackle for loss on a rush play. |
 | `havoc` | `boolean` | True when the defense disrupted the play: a pass breakup, tackle for loss, interception or forced fumble. |
 | `first_down_yards` | `boolean` | Whether the play gained enough yardage to earn a first down. |
-| `first_down_penalty` | `boolean` | Binary indicator for if a penalty converted the first down. |
+| `first_down_penalty` | `boolean` |  |
 | `first_down_earned` | `boolean` | Whether the play earned a first down by means other than yardage (e.g. by penalty). |
 | `start.pos_team_spread` | `number` | ESPN's `pos_team_spread` value for the play state at the start of the play. |
 | `start.elapsed_share` | `number` | ESPN's `elapsed_share` value for the play state at the start of the play. |
@@ -558,13 +558,13 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `home_wp_after_naive` | `number` | End-of-play naive win probability mapped to the home team. |
 | `away_wp_after_naive` | `number` | End-of-play naive win probability mapped to the away team. |
 | `wpa_naive` | `number` | Win probability added on the play under the spread-free (naive) model. |
-| `cp` | `number` | Numeric value indicating the probability for a complete pass based on comparable game situations. |
+| `cp` | `number` |  |
 | `cp_game_state` | `number` | Completion probability from the 8-feature game-state booster, scored on every pass play regardless of which model produced cp. On one scale across seasons, so use it (not cp) for anything summed or averaged; null on non-pass plays. |
 | `cp_model` | `string` | Which completion-probability booster scored cp on the play: "air_yards" (the 11-feature model, used where ESPN's play text gives a catch/target spot -- essentially 2025 onward) or "game_state" (the 8-feature model used everywhere else). The two are not on one scale, so group any cpoe aggregate by this column; null on non-pass plays. |
-| `cpoe` | `number` | For a single pass play this is 1 - cp when the pass was completed or 0 - cp when the pass was incomplete. Analyzed for a whole game or season an indicator for the passer how much over or under expectation his completion percentage was. |
-| `era` | `number \| bigint` | one of pre2018 (2006-2017) or post2018 (2018+) |
-| `xpass` | `number` | Probability of dropback scaled from 0 to 1. |
-| `pass_oe` | `number` | Dropback percent over expected on a given play scaled from 0 to 100. |
+| `cpoe` | `number` |  |
+| `era` | `number \| bigint` |  |
+| `xpass` | `number` |  |
+| `pass_oe` | `number` |  |
 | `drive_start` | `number` | Yard line at which the drive began. |
 | `drive_stopped` | `boolean` | True when the play ended the drive. |
 | `drive_play_index` | `number \| bigint` | Sequence number of the play within its drive. |
@@ -586,9 +586,9 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `pen_weight` | `number` | Weighting applied to the penalty component of the play. |
 | `action_play` | `boolean` | True when the play advanced the game state -- excludes timeouts, end-of-period markers and other non-action rows. |
 | `athlete_name` | `string` | Player full name. |
-| `rusher_player_id` | `string` | Unique identifier for the player that attempted the run. |
-| `passer_player_id` | `string` | Unique identifier for the player that attempted the pass. |
-| `receiver_player_id` | `string` | Unique identifier for the receiver that was targeted on the pass. |
+| `rusher_player_id` | `string` |  |
+| `passer_player_id` | `string` |  |
+| `receiver_player_id` | `string` |  |
 | `fumble_player_id` | `string` | CFBD athlete_id of the player who fumbled. |
 | `sack_player_id` | `string` | Comma-separated CFBD athlete_id(s) of the sacking defender(s). |
 | `sack_player_id2` | `string` | ESPN athlete id of the second sacker on a split sack (regex fallback for an ESPN sidecar blind spot). |
@@ -597,7 +597,7 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `fumble_forced_player_id` | `string` | CFBD athlete_id of the defender credited with forcing the fumble. |
 | `fumble_recovered_player_id` | `string` | CFBD athlete_id of the player recovering the fumble. |
 | `fg_kicker_player_id` | `string` | ESPN athlete id of the field-goal kicker. |
-| `punter_player_id` | `string` | Unique identifier for the punter. |
+| `punter_player_id` | `string` |  |
 | `kickoff_player_id` | `string` | ESPN athlete id of the player kicking off. |
 | `kickoff_return_player_id` | `string` | ESPN athlete id of the kickoff returner. |
 | `punt_return_player_id` | `string` | ESPN athlete id of the punt returner. |
@@ -724,7 +724,7 @@ const rows = await sdv.cfb.loadCfbRecruits({ seasons: 2024 });
 | `team_id_247` | `string` | 247Sports' own team key for the recruit's committed or signed school; not interchangeable with the ESPN/CFBD team id. |
 | `team` | `string` | Team name. |
 | `recruit_id` | `string` | ESPN recruit id. |
-| `player_name` | `string` | Full name of player |
+| `player_name` | `string` |  |
 | `stars` | `number \| bigint` | Recruit star rating on the 247Sports scale (2-5). |
 | `grade` | `number` | ESPN recruit grade (0-100; `0` = not rated). |
 | `position` | `string` | Athlete position. |
@@ -1015,7 +1015,7 @@ const rows = await sdv.cfb.loadCfbTeamInfo({ seasons: 2024 });
 | `classification` | `string` | Conference classification (fbs, fcs, ii, iii). |
 | `color` | `string` | Primary team color (hex, no `#`). |
 | `alt_color` | `string` | Team color (alternate). |
-| `logo` | `string` | Team or league logo URL. |
+| `logo` | `string` |  |
 | `logo_2` | `string` | URL of the team's alternate dark-background 500-pixel logo on ESPN's CDN, null for programs with no dark variant. |
 | `logos_3` | `string` | URL of the team's logo variant in slot 3 of ESPN's team-info logo list; null when the team publishes fewer variants. |
 | `logos_4` | `string` | URL of the team's logo variant in slot 4 of ESPN's team-info logo list; null when the team publishes fewer variants. |
@@ -1219,7 +1219,7 @@ const rows = await sdv.cfb.loadCfbTeamsCrosswalk({ seasons: 2024 });
 | `norm_key` | `string` | Shared join key across providers: the team name lowercased, ASCII-folded, stripped of punctuation, whitespace-collapsed, and alias-mapped. |
 | `espn_team_id` | `string` | ESPN team id for the crosswalk row. |
 | `espn_team` | `string` | ESPN's full team display name, school plus mascot, null when the row was anchored on a non-ESPN provider. |
-| `espn_abbreviation` | `string` | ESPN abbreviation. |
+| `espn_abbreviation` | `string` |  |
 | `fox_team_id` | `string` | Fox Sports team id for the same team. |
 | `fox_team` | `string` | Fox Sports' team name, which that feed ships in all capitals. |
 | `fox_abbreviation` | `string` | Fox Sports' short team code, which frequently differs from the ESPN abbreviation for the same school. |
@@ -1346,7 +1346,7 @@ const rows = await sdv.cfb.loadCfbPlayerBox({ seasons: 2024 });
 | `yardsPerRushAttempt` | `string` | Yards gained per rushing attempt. |
 | `rushingTouchdowns` | `string` | Rushing touchdowns. |
 | `longRushing` | `string` | Longest rush of the game, in yards. |
-| `receptions` | `string` | The number of pass receptions. Lateral receptions officially don't count as reception. |
+| `receptions` | `string` |  |
 | `receivingYards` | `string` | Receiving yards gained. |
 | `yardsPerReception` | `string` | Yards gained per reception. |
 | `receivingTouchdowns` | `string` | Receiving touchdowns. |
@@ -1574,9 +1574,9 @@ const rows = await sdv.cfb.loadCfbGameRosters({ seasons: 2024 });
 | col_name | type | description |
 |---|---|---|
 | `athlete_id` | `string` | ESPN athlete id. |
-| `athlete_uid` | `string` | ESPN athlete UID (universal identifier). |
-| `athlete_guid` | `string` | ESPN athlete GUID. |
-| `athlete_type` | `string` | Athlete type / class. |
+| `athlete_uid` | `string` |  |
+| `athlete_guid` | `string` |  |
+| `athlete_type` | `string` |  |
 | `first_name` | `string` | Athlete first name. |
 | `last_name` | `string` | Athlete last name. |
 | `full_name` | `string` | Venue full name (e.g. `Tenney Stadium`). |
@@ -1588,29 +1588,29 @@ const rows = await sdv.cfb.loadCfbGameRosters({ seasons: 2024 });
 | `display_height` | `string` | Human-readable height (e.g. `6' 1"`). |
 | `slug` | `string` | URL slug for the team. |
 | `jersey` | `string` | Jersey number. |
-| `linked` | `boolean` | TRUE if the record is linked to a related entity. |
+| `linked` | `boolean` |  |
 | `active` | `boolean` | `TRUE` if the player was active for the game. |
-| `alternate_ids_sdr` | `string` | Alternate ids sdr. |
-| `birth_place_city` | `string` | Birth place city. |
-| `birth_place_state` | `string` | Birth place state. |
-| `birth_place_country` | `string` | Birth place country. |
+| `alternate_ids_sdr` | `string` |  |
+| `birth_place_city` | `string` |  |
+| `birth_place_state` | `string` |  |
+| `birth_place_country` | `string` |  |
 | `birth_country_alternate_id` | `string` | ESPN's internal alternate identifier for the athlete's birth country, paired with birth_place_country and the flag fields. |
-| `birth_country_abbreviation` | `string` | Birth country abbreviation. |
+| `birth_country_abbreviation` | `string` |  |
 | `headshot_href` | `string` | URL of the athlete headshot image. |
-| `headshot_alt` | `string` | Alternative-text label for the headshot. |
+| `headshot_alt` | `string` |  |
 | `flag_href` | `string` | URL of the birth-country flag image hosted on ESPN's CDN under teamlogos/countries. |
 | `flag_alt` | `string` | Alt text ESPN attaches to the birth-country flag image, which is the country's name spelled out. |
 | `flag_rel` | `string` | Stringified relationship list ESPN ships with the flag image; the only non-null value observed is a single country-flag entry. |
 | `experience_years` | `number` | Years of experience. |
-| `experience_display_value` | `string` | Experience display value. |
-| `experience_abbreviation` | `string` | Experience abbreviation. |
+| `experience_display_value` | `string` |  |
+| `experience_abbreviation` | `string` |  |
 | `status_id` | `string` | ESPN commitment status id. |
 | `status_name` | `string` | Status-type key (e.g. `STATUS_FINAL`). |
 | `status_type` | `string` | Status type. |
-| `status_abbreviation` | `string` | Status abbreviation. |
-| `hand_type` | `string` | Hand type. |
-| `hand_abbreviation` | `string` | Hand abbreviation. |
-| `hand_display_value` | `string` | Hand display value. |
+| `status_abbreviation` | `string` |  |
+| `hand_type` | `string` |  |
+| `hand_abbreviation` | `string` |  |
+| `hand_display_value` | `string` |  |
 | `starter` | `boolean` | `TRUE` if the athlete started the game. |
 | `jersey_right` | `string` | Secondary or alternate jersey number display string from ESPN's roster record, distinct from the primary jersey number. |
 | `valid` | `boolean` | `TRUE` if the roster entry is flagged valid by ESPN. |
@@ -1623,8 +1623,8 @@ const rows = await sdv.cfb.loadCfbGameRosters({ seasons: 2024 });
 | `order` | `number \| bigint` | Team order within the competition (0 = first). |
 | `home_away` | `string` | `home` or `away`. |
 | `winner` | `boolean` | `TRUE` if this team won the game. |
-| `team_guid` | `string` | ESPN team GUID. |
-| `team_uid` | `string` | ESPN universal team identifier (UID format 's:40~l:...~t:...'). |
+| `team_guid` | `string` |  |
+| `team_uid` | `string` |  |
 | `team_slug` | `string` | Team slug for the stat row. |
 | `team_location` | `string` | Team location / school name. |
 | `team_name` | `string` | Team nickname. |
@@ -1642,14 +1642,14 @@ const rows = await sdv.cfb.loadCfbGameRosters({ seasons: 2024 });
 | `game_id` | `string` | ESPN game identifier. |
 | `season` | `number \| bigint` | Season (4-digit year). |
 | `week` | `number \| bigint` | Game week of the season. |
-| `citizenship` | `string` | Citizenship. |
-| `middle_name` | `string` | Middle name of the player. |
-| `age` | `number` | Age as of last pipeline build, rounded to one decimal. Pipeline is built on a weekly basis. |
+| `citizenship` | `string` |  |
+| `middle_name` | `string` |  |
+| `age` | `number` |  |
 | `date_of_birth` | `string` | Player date of birth (if published). |
-| `draft_display_text` | `string` | Draft display text. |
-| `draft_round` | `number` | Round that player was drafted in |
-| `draft_year` | `number` | Year that player was drafted |
-| `draft_selection` | `number` | Draft selection. |
+| `draft_display_text` | `string` |  |
+| `draft_round` | `number` |  |
+| `draft_year` | `number` |  |
+| `draft_selection` | `number` |  |
 | `nickname` | `string` | Team nickname / location label. |
 
 ## `loadCfbLinescores`
@@ -1707,11 +1707,11 @@ const rows = await sdv.cfb.loadCfbBetting({ seasons: 2024 });
 | `game_id` | `string` | ESPN game identifier. |
 | `season` | `number \| bigint` | Season (4-digit year). |
 | `week` | `number \| bigint` | Game week of the season. |
-| `game_spread` | `number` | Game spread in (-X Team) format. There are almost none, I would recommend not trusting any of these three columns |
+| `game_spread` | `number` |  |
 | `over_under` | `number` | Pre-game over/under total from the selected provider. |
 | `home_favorite` | `boolean` | `TRUE` if the home team is the favorite. |
-| `home_team_spread` | `number` | The game spread with respect to the home team |
-| `game_spread_available` | `boolean` | Logical (TRUE/FALSE) indicating whether the spread was available from ESPN. Basically, I would just not recommend using any of the spread information, I think I defaulted a lot of them to -2.5 for the home team. Most games probably do not have spread information. This column should really be listed first |
+| `home_team_spread` | `number` |  |
+| `game_spread_available` | `boolean` |  |
 | `odds_source` | `string` | Provenance of the spread and over/under used for the game: summary_pickcenter when ESPN's own pickcenter carried them, core_odds_api when they came from the live odds endpoint, default when neither resolved, injected when supplied by an offline rebuild. |
 
 ## `loadCfbFpiWeekly`
@@ -1959,7 +1959,7 @@ const rows = await sdv.cfb.loadCfbAdvPassing({ seasons: 2024 });
 | `YPA` | `number` | Yards per pass attempt. |
 | `EPA` | `number` | Expected Points Added on the play (cfbfastR EPA model output). |
 | `EPA_per_Play` | `number` | EPA per play on the passer's plays. |
-| `WPA` | `number` | Win Probability Added. |
+| `WPA` | `number` |  |
 | `SR` | `number` | Success rate on the passer's plays. |
 | `Sck` | `number \| bigint` | Times the passer was sacked. |
 | `CompPct` | `number` | Completion percentage from the advanced box score. |
@@ -2017,7 +2017,7 @@ const rows = await sdv.cfb.loadCfbAdvRushing({ seasons: 2024 });
 | `YPC` | `number` | Yards per carry, the mean rushing yardage across the player's attempts in the game. |
 | `EPA` | `number` | Expected Points Added on the play (cfbfastR EPA model output). |
 | `EPA_per_Play` | `number` | EPA per play on the passer's plays. |
-| `WPA` | `number` | Win Probability Added. |
+| `WPA` | `number` |  |
 | `SR` | `number` | Success rate on the passer's plays. |
 | `Fum` | `number \| bigint` | Count of the carrier's rush attempts whose play text mentions a fumble; it is a play-level flag, not a fumble charged to this player. |
 | `Fum_Lost` | `number \| bigint` | Count of the carrier's rush attempts on which a fumble was lost to the opponent. |
@@ -2058,7 +2058,7 @@ const rows = await sdv.cfb.loadCfbAdvReceiving({ seasons: 2024 });
 | `YPT` | `number` | Receiving yards per target, the mean of receiving yardage over every target rather than over receptions only. |
 | `EPA` | `number` | Expected Points Added on the play (cfbfastR EPA model output). |
 | `EPA_per_Play` | `number` | EPA per play on the passer's plays. |
-| `WPA` | `number` | Win Probability Added. |
+| `WPA` | `number` |  |
 | `SR` | `number` | Success rate on the passer's plays. |
 | `Fum` | `number \| bigint` | Count of the receiver's targeted pass plays whose text mentions a fumble; it is a play-level flag, not a fumble charged to this player. |
 | `Fum_Lost` | `number \| bigint` | Count of the receiver's targeted plays on which a fumble was lost to the opponent. |
@@ -2314,7 +2314,7 @@ const rows = await sdv.cfb.loadCfbAdvSpecialists({ seasons: 2024 });
 |---|---|---|
 | `pos_team_id` | `string` | ESPN team id of the team on offense. Present for every season 2004+. |
 | `pos_team` | `string` | Team name in possession at the start of the play (offense, kickoff-aware). |
-| `player_name` | `string` | Full name of player |
+| `player_name` | `string` |  |
 | `field_goals` | `number \| bigint` | Number of field-goal attempts. |
 | `field_goals_yards` | `number \| bigint` | Sum of the field-goal attempt distances parsed out of the play text; it stays at zero when no distance could be parsed from the narrative. |
 | `punts` | `number \| bigint` | Punts attempted. |
@@ -2368,7 +2368,7 @@ const rows = await sdv.cfb.loadCfbAdvTurnover({ seasons: 2024 });
 | `expected_turnover_margin` | `number` | The opponent's expected_turnovers minus this team's, so positive means the team was expected to win the turnover battle. |
 | `turnover_margin` | `number \| bigint` | The opponent's turnovers minus this team's turnovers, positive when the team gained more possessions than it gave away. |
 | `turnover_luck` | `number` | Points of scoring luck attributed to turnovers, five points per turnover times the gap between turnover_margin and expected_turnover_margin. |
-| `takeaways` | `number \| bigint` | Takeaways. |
+| `takeaways` | `number \| bigint` |  |
 | `st_turnovers_gained` | `number \| bigint` | Special-teams turnovers this team recovered, taken as the opponent's st_turnovers_lost. |
 | `fumble_recoveries_gained` | `number \| bigint` | Opponent fumbles this team recovered, taken as the opponent's fumbles_lost. |
 | `game_id` | `string` | ESPN game identifier. |
@@ -2400,7 +2400,7 @@ const rows = await sdv.cfb.loadCfbModelPbp({ seasons: 2024, columns: ['game_id',
 |---|---|---|
 | `game_id` | `string` | ESPN game identifier. |
 | `id` | `string` | 247Sports referencing id for the recruit. |
-| `sequenceNumber` | `string` | Broadcast sequence order number. |
+| `sequenceNumber` | `string` |  |
 | `game_play_number` | `number \| bigint` | Sequential play number within the game (excludes timeouts/end markers). |
 | `drive.id` | `string` | ESPN's drive identifier, formed as the game id followed by the drive's sequence number within that game. |
 | `season` | `number \| bigint` | Season (4-digit year). |
@@ -2430,12 +2430,12 @@ const rows = await sdv.cfb.loadCfbModelPbp({ seasons: 2024, columns: ['game_id',
 | `passer_player_name` | `string` | Display name of the passer -- the FIRST participant in that role on the play. |
 | `ep_before` | `number` | Expected points value before the play (cfbfastR EPA model). |
 | `ep_after` | `number` | Expected points value after the play (cfbfastR EPA model). |
-| `epa` | `number` | Expected points added (EPA) by the posteam for the given play. |
+| `epa` | `number` |  |
 | `wp_before` | `number` | Win probability for the possession team before the play (0-1). |
 | `wp_after` | `number` | Win probability for the possession team after the play (0-1). |
 | `wpa` | `number` | Win Probability Added on the play (cfbfastR WP model output). |
 | `completion_prob` | `number` | Modelled probability the pass is completed. |
-| `cpoe` | `number` | For a single pass play this is 1 - cp when the pass was completed or 0 - cp when the pass was incomplete. Analyzed for a whole game or season an indicator for the passer how much over or under expectation his completion percentage was. |
+| `cpoe` | `number` |  |
 | `model_pbp_version` | `string` | Version of the model-scored play-by-play build. |
 | `cp_model_version` | `string` | Version of the completion-probability model that scored the play. |
 | `ep_model_version` | `string` | Version of the expected-points model that scored the play. |
@@ -2644,7 +2644,7 @@ const rows = await sdv.cfb.loadCfbReceiving({ seasons: 2024 });
 | `yards` | `number \| bigint` | Total yards gained on the drive. |
 | `success` | `number` | Success rate across the team plays. |
 | `comp` | `number` | Completed passes. |
-| `targets` | `number` | The number of pass plays where the player was the targeted receiver. |
+| `targets` | `number` |  |
 | `passing_td` | `number` | Passing touchdowns thrown. |
 | `fumbles` | `number` | Count of the receiver's targeted pass plays across the season whose play text mentions a fumble by either team. |
 | `playsgame` | `number` | Plays per game. |
@@ -3617,12 +3617,12 @@ const rows = await sdv.cfb.loadCfbAdvTeamGamelog({ seasons: 2024 });
 | `team` | `string` | Team name. |
 | `opponent_id` | `string` | ESPN team id of the opponent. |
 | `opponent` | `string` | Opponent team name. |
-| `is_home` | `boolean` | Whether the subject team was the home team. |
+| `is_home` | `boolean` |  |
 | `neutral_site` | `boolean` | TRUE/FALSE flag for if the game took place at a neutral site. |
-| `points_for` | `number \| bigint` | Goals/points scored. |
-| `points_against` | `number \| bigint` | Points allowed. |
+| `points_for` | `number \| bigint` |  |
+| `points_against` | `number \| bigint` |  |
 | `margin` | `number \| bigint` | Final scoring margin from this team's perspective, exactly points_for minus points_against. |
-| `win` | `boolean` | Whether the game was a win (goalie). |
+| `win` | `boolean` |  |
 | `rushing_highlight_yards_per_opp` | `number` | Highlight yards per rushing opportunity. |
 | `total_pen_yards` | `number \| bigint` | Total penalty yards assessed. |
 | `EPA_penalty` | `number` | Total EPA attributed to penalties. |
@@ -7151,12 +7151,12 @@ const rows = await sdv.cfb.loadCfbPbpR({ seasons: 2024, columns: ['game_id', 'pl
 | `completed` | `boolean` | `TRUE` if the game is complete. |
 | `home_team_id` | `string` | ESPN home team id (parsed from `home_team_ref`). |
 | `home_team` | `string` | Home team name. |
-| `home_team_division` | `string` | Home team NCAA division (1, 2, 3). |
+| `home_team_division` | `string` |  |
 | `home_team_conference` | `string` | Conference name of the home team. |
 | `home_team_pregame_elo` | `number` | Home team's pregame Elo rating, carried on the cfbfastR-shaped schema. |
 | `away_team_id` | `string` | ESPN away team id (parsed from `away_team_ref`). |
 | `away_team` | `string` | Away team name. |
-| `away_team_division` | `string` | Away team NCAA division (1, 2, 3). |
+| `away_team_division` | `string` |  |
 | `away_team_conference` | `string` | Conference name of the away team. |
 | `away_team_pregame_elo` | `number` | Away team's pregame Elo rating, carried on the cfbfastR-shaped schema. |
 | `season` | `number` | Season (4-digit year). |
@@ -7414,7 +7414,7 @@ const rows = await sdv.cfb.loadNcaaMfbPbp({ seasons: 2024, columns: ['contest_id
 
 | col_name | type | description |
 |---|---|---|
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `drive_number` | `number \| bigint` | Sequential drive number within the game (1-indexed). |
 | `play_number` | `number \| bigint` | Sequential play number within the game (1-indexed). |
 | `offense` | `string` | Full name of the offense (team in possession) on the play. |
@@ -7429,21 +7429,21 @@ const rows = await sdv.cfb.loadNcaaMfbPbp({ seasons: 2024, columns: ['contest_id
 | `clock` | `string` | Game clock display value at the play (`MM:SS`). |
 | `yards_gained` | `number \| bigint` | Net yards gained by the offense on the play. |
 | `formation` | `string` | Offensive formation or personnel grouping reported for the play (e.g. 'Shotgun', 'I-Formation'), when the source narrative names it. |
-| `passer` | `string` | Name of the dropback player (scrambles included) including plays with penalties. |
-| `rusher` | `string` | Name of the rusher (no scrambles) including plays with penalties. |
-| `receiver` | `string` | Name of the receiver including plays with penalties. |
+| `passer` | `string` |  |
+| `rusher` | `string` |  |
+| `receiver` | `string` |  |
 | `kicker` | `string` | Name of the player who kicked off, punted, or attempted the field goal/PAT on this play. |
 | `punter` | `string` | Name of the player who punted on this play. |
 | `returner` | `string` | Name of the player who fielded or returned the kickoff or punt on this play. |
 | `run_direction` | `string` | Hole or side the ball carrier ran through on a rush play (e.g. 'left end', 'right guard'), when the narrative reports it. |
-| `qb_scramble` | `boolean` | Binary indicator for whether or not the QB scrambled. |
+| `qb_scramble` | `boolean` |  |
 | `pass_complete` | `boolean` | Whether a pass attempt on this play was completed. |
 | `pass_depth` | `string` | Depth classification of a pass attempt (e.g. 'short', 'deep'), when the narrative reports it. |
 | `pass_direction` | `string` | Side of the field the pass was thrown to (e.g. 'left', 'middle', 'right'), when the narrative reports it. |
 | `tackler_1` | `string` | Name of the primary (first-listed) tackler on the play. |
 | `tackler_2` | `string` | Name of the secondary (assisting) tackler on the play, when the narrative credits an assist. |
 | `kick_yards` | `number \| bigint` | Yards traveled on a kickoff. |
-| `return_yards` | `number \| bigint` | Yards gained by the return team. Returns may occur on any of: interception, fumble, kickoff, punt, or blocked kicks. |
+| `return_yards` | `number \| bigint` |  |
 | `punt_yards` | `number \| bigint` | Gross yards traveled on a punt, before any return. |
 | `fg_distance` | `number \| bigint` | Distance in yards of a field goal attempt. |
 | `fg_made` | `boolean` | TRUE when the field goal attempt was successful. |
@@ -7453,17 +7453,17 @@ const rows = await sdv.cfb.loadNcaaMfbPbp({ seasons: 2024, columns: ['contest_id
 | `is_fumble` | `boolean` | Whether a fumble occurred on the play, regardless of which team recovered it. |
 | `is_turnover` | `boolean` | `TRUE` if the play was a turnover. |
 | `turnover_type` | `string` | Kind of turnover on the play, if any (e.g. 'interception', 'fumble lost'); null when no turnover occurred. |
-| `out_of_bounds` | `boolean` | 1 if play description contains ran ob, pushed ob, or sacked ob; 0 otherwise. |
+| `out_of_bounds` | `boolean` |  |
 | `no_play` | `boolean` | Whether the play was negated (e.g. by a penalty on the preceding down) and is excluded from drive/stat totals. |
 | `fair_catch` | `boolean` | Whether the returner called a fair catch on a kickoff or punt. |
 | `penalty_flag` | `boolean` | TRUE when a penalty was flagged on the play. |
-| `penalty_team` | `string` | String abbreviation of the team with the penalty. |
-| `penalty_type` | `string` | String indicating the penalty type of the first penalty in the given play. Will be `NA` if `desc` is missing the type. |
+| `penalty_team` | `string` |  |
+| `penalty_type` | `string` |  |
 | `penalty_player` | `string` | Name of the player penalized on the play, when a penalty occurred. |
-| `penalty_yards` | `number \| bigint` | Yards gained (or lost) by the posteam from the penalty. |
+| `penalty_yards` | `number \| bigint` |  |
 | `end_yard_line` | `string` | Yard line at the end of the play. |
 | `play_text` | `string` | Free-form text description of the play from the CFBD feed. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaMfbPbpCfbfastr`
@@ -7593,7 +7593,7 @@ const rows = await sdv.cfb.loadNcaaMfbPbpCfbfastr({ seasons: 2024, columns: ['ga
 | `change_of_pos_team` | `boolean` | Binary flag for change of possession-team on the play. |
 | `play_after_turnover` | `boolean` | Binary flag indicating the play immediately following a turnover. |
 | `n_plays_in_game` | `number` | Total number of plays in the game this row belongs to, repeated on every row for convenience. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 
 ## `loadNcaaMfbDrives`
 
@@ -7618,7 +7618,7 @@ const rows = await sdv.cfb.loadNcaaMfbDrives({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `drive_number` | `number \| bigint` | Sequential drive number within the game (1-indexed). |
 | `quarter` | `number \| bigint` | Quarter in which the drive started (1-4 for regulation, 5+ for overtime periods). |
 | `period` | `number \| bigint` | Period (quarter) number. |
@@ -7633,7 +7633,7 @@ const rows = await sdv.cfb.loadNcaaMfbDrives({ seasons: 2024 });
 | `end_yard_line` | `string` | Yard line at the end of the play. |
 | `n_plays` | `number \| bigint` | Number of plays run during the drive. |
 | `yards` | `number \| bigint` | Total yards gained on the drive. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaMfbSchedule`
@@ -7668,10 +7668,10 @@ const rows = await sdv.cfb.loadNcaaMfbSchedule({ seasons: 2024 });
 | `outcome` | `string` | Result of the game from the home team's perspective (e.g. 'W', 'L', 'T'). |
 | `team_score` | `number \| bigint` | Offense team score at the time of the play. |
 | `opponent_score` | `number \| bigint` | Defense / opponent team score at the time of the play. |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `attendance` | `number \| bigint` | Reported attendance at the game. |
 | `academic_year` | `number` | Academic year the game was played in (the ENDING year of the fall/spring split, e.g. 2025 for the 2024 fall season) -- distinct from `season`, which is the STARTING year. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaMfbRosters`
@@ -7700,17 +7700,17 @@ const rows = await sdv.cfb.loadNcaaMfbRosters({ seasons: 2024 });
 | `team_id` | `string` | ESPN team id. |
 | `team_name` | `string` | Team nickname. |
 | `player_id` | `string` | ESPN player id from the roster entry. |
-| `player_name` | `string` | Full name of player |
+| `player_name` | `string` |  |
 | `jersey` | `string` | Jersey number. |
 | `statcrew_jersey` | `string` | Jersey number as recorded in the NCAA StatCrew roster feed; can differ from the number a player actually wears on a given game day. |
 | `player_class` | `string` | Player's academic/eligibility class (e.g. 'FR', 'SO', 'JR', 'SR', 'GR'). |
 | `position` | `string` | Athlete position. |
 | `height` | `string` | Listed height (inches). |
 | `weight` | `number \| bigint` | Listed weight (lbs). |
-| `hometown` | `string` | Prospect hometown. |
-| `high_school` | `string` | High school |
-| `games_played` | `number \| bigint` | Games played. |
-| `games_started` | `number \| bigint` | Games started (goalies). |
+| `hometown` | `string` |  |
+| `high_school` | `string` |  |
+| `games_played` | `number \| bigint` |  |
+| `games_started` | `number \| bigint` |  |
 | `academic_year` | `number` | Academic year the roster snapshot covers (the ENDING year of the fall/spring split) -- distinct from `season`, which is the STARTING year. |
 | `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 
@@ -7770,15 +7770,15 @@ const rows = await sdv.cfb.loadNcaaMfbTeamStats({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `category` | `string` | stats.ncaa.org box-score section the stat belongs to (Passing, Rushing, First Downs, Total Offense, Kicking, Punt Returns, Kickoffs and KO Returns, Sacks, Passes Defended); not a CFBD category. |
-| `stat` | `string` | Stat. |
+| `stat` | `string` |  |
 | `period` | `string` | Period (quarter) number. |
 | `away_team` | `string` | Away team name. |
 | `away_value` | `string` | Team-stat value for the away team; each row is one stat category for one game, wide by side. |
 | `home_team` | `string` | Home team name. |
 | `home_value` | `string` | Team-stat value for the home team; each row is one stat category for one game, wide by side. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaMfbPlayerStats`
@@ -7804,30 +7804,30 @@ const rows = await sdv.cfb.loadNcaaMfbPlayerStats({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `team_id` | `string` | ESPN team id. |
-| `number` | `string` | Week number as returned by the API. |
+| `number` | `string` |  |
 | `name` | `string` | Position name (e.g. `Quarterback`). |
 | `position` | `string` | Athlete position. |
-| `rush_attempts` | `string` | The number of rushing attempts |
+| `rush_attempts` | `string` |  |
 | `rush_yds_gained` | `string` | Total positive rushing yards gained on carries, before subtracting yards lost to tackles for loss. |
 | `rush_yds_lost` | `string` | Total rushing yards lost to tackles for loss on carries. |
 | `yds_rush` | `string` | Net rushing yards (rush_yds_gained minus rush_yds_lost). |
 | `rush_tds` | `string` | Rushing touchdowns for the game. Populated only on this player-game's 'rushing' category row (null on the 'passing'/'receiving' rows for the same player-game) -- the loader returns one row per player-game-category. |
 | `rush_long` | `string` | Longest single rush of the game. |
 | `category` | `string` | CFBD stats category name (e.g. passing, rushing, defensive). |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `pass_attempts` | `string` | Pass attempts for the game. Populated only on this player-game's 'passing' category row (null on the 'rushing'/'receiving' rows for the same player-game) -- the loader returns one row per player-game-category. |
-| `completions` | `string` | The number of completed passes. |
-| `pass_yards` | `string` | Number of yards gained on pass plays |
+| `completions` | `string` |  |
+| `pass_yards` | `string` |  |
 | `interceptions` | `string` | Passing interceptions. |
 | `pass_tds` | `string` | Passing touchdowns thrown for the game. Populated only on this player-game's 'passing' category row (null on the 'rushing'/'receiving' rows for the same player-game) -- the loader returns one row per player-game-category. |
 | `pass_eff` | `string` | Passer efficiency rating for the game, per the NCAA passer-rating formula. |
 | `yds_per_completion` | `string` | Passing yards divided by completions. |
-| `pct` | `string` | Win percentage. |
+| `pct` | `string` |  |
 | `long_pass` | `string` | Longest completed pass of the game. |
 | `rec` | `string` | Total receptions for the game. |
-| `receiving_yards` | `string` | Numeric yards by the receiver_player_name, excluding yards gained in pass plays with laterals. This should equal official receiving statistics but could miss yards gained in pass plays with laterals. Please see the description of `lateral_receiver_player_name` for further information. |
+| `receiving_yards` | `string` |  |
 | `yards_per_reception` | `string` | Receiving yards divided by receptions. |
 | `rec_td` | `string` | Receiving touchdowns. |
 | `long_rec` | `string` | Longest reception of the game. |
@@ -7846,8 +7846,8 @@ const rows = await sdv.cfb.loadNcaaMfbPlayerStats({ seasons: 2024 });
 | `solo_tack` | `string` | Solo (unassisted) tackles. |
 | `asst_tack` | `string` | Assisted tackles. |
 | `tackles` | `string` | Team tackles. |
-| `fgm` | `string` | Field goals made. |
-| `fga` | `string` | Field goal attempts. |
+| `fgm` | `string` |  |
+| `fga` | `string` |  |
 | `fg_blocks_allowed` | `string` | Field goals blocked against the player's unit. |
 | `punt_ret` | `string` | Punt returns fielded by the player. |
 | `punt_ret_yds` | `string` | Punt return yards (can be negative). |
@@ -7878,10 +7878,10 @@ const rows = await sdv.cfb.loadNcaaMfbOfficials({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
-| `role` | `string` | Grouped official role (Referee/Linesperson). |
+| `contest_id` | `string` |  |
+| `role` | `string` |  |
 | `official` | `string` | Flag indicating that the media item comes from the official league feed rather than an editorial source. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaMfbLinescore`
@@ -7907,16 +7907,16 @@ const rows = await sdv.cfb.loadNcaaMfbLinescore({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `team` | `string` | Team name. |
 | `home_away` | `string` | `home` or `away`. |
 | `period` | `string` | Period (quarter) number. |
 | `points` | `number \| bigint` | Total points accumulated by the school in the poll's weighted voting. |
-| `final` | `number \| bigint` | Flag for whether the game is final. |
+| `final` | `number \| bigint` |  |
 | `game_date` | `string` | Kickoff date-time (ISO 8601, UTC). |
 | `venue` | `string` | Venue name. |
 | `attendance` | `number \| bigint` | Reported attendance at the game. |
-| `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
+| `espn_game_id` | `string` |  |
 | `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 
 ## `loadCfbGroups`

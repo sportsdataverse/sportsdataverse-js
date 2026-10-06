@@ -11,11 +11,14 @@
 //   2. manual[<key>][col] for each candidate key of the table (its `schema:` field,
 //      its file stem, the endpoint short, the public name, a loader's `load_*` fn)
 //   3. manual._global[col]
-//   4. the R package(s) of the table's league (LEAGUE_R_PACKAGES), then the other
-//      packages of the same sport (sdv-py `_sport_merged`: wehoop text for an nba
-//      column beats nflreadr's)
-//   5. r._merged[col] (the cross-package union)
-//   6. "" (left blank, never invented)
+//   4. the R package(s) of the table's league (LEAGUE_R_PACKAGES) — ONLY the packages of
+//      that league's own sport, in order (hoopR then wehoop for a basketball league, …)
+//   5. "" (left blank, never invented)
+// There is NO cross-sport fallback: r._merged (the union of every package, first package
+// wins) put "Inning number." on a basketball jersey number and SP+ text on NFL Pro
+// ratings, so it is never read; a namespace with no entry in LEAGUE_R_PACKAGES (cbs,
+// fox, yahoo, on3, 247, asa, odds, soccer, cricket, …) and the shared ESPN
+// parsed-returns page (league null) resolve through the manual file only.
 // R text gets sdv-py's read-time fixes: four roxygen typos and the trailing
 // "; `team_detail = TRUE` only" condition (the JS parsers always return the column).
 //
@@ -28,35 +31,39 @@ import { parse } from "yaml";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
-/** sdv-py `_LEAGUE_R_PACKAGE`, plus the JS namespaces that merge onto a league. */
+/**
+ * The R packages whose column descriptions may back a league's blanks — the packages of
+ * THAT sport only, in order (sdv-py `_LEAGUE_R_PACKAGE` + its same-sport sibling, e.g.
+ * wehoop after hoopR for a basketball league; cfbfastR and the NFL packages are both
+ * football but are NOT siblings here: SP+ text on an NFL rating is wrong). A namespace
+ * missing from this table gets no R fallback at all.
+ */
 export const LEAGUE_R_PACKAGES = {
+  // basketball
+  nba: ["hoopR", "wehoop"],
+  nbagl: ["hoopR", "wehoop"],
+  mbb: ["hoopR", "wehoop"],
+  torvik: ["hoopR", "wehoop"],
+  kenpom: ["hoopR", "wehoop"],
+  wnba: ["wehoop", "hoopR"],
+  wbb: ["wehoop", "hoopR"],
+  // football
   cfb: ["cfbfastR"],
-  nba: ["hoopR"],
-  mbb: ["hoopR"],
-  torvik: ["hoopR"],
-  kenpom: ["hoopR"],
-  wnba: ["wehoop"],
-  wbb: ["wehoop"],
-  mlb: ["baseballr"],
-  nhl: ["fastRhockey"],
   nfl: ["nflreadr", "nflfastR"],
+  // baseball
+  mlb: ["baseballr"],
+  college_baseball: ["baseballr"],
+  college_softball: ["baseballr"],
+  // hockey
+  nhl: ["fastRhockey"],
+  mch: ["fastRhockey"],
+  wch: ["fastRhockey"],
   hockeytech: ["fastRhockey"],
   ahl: ["fastRhockey"],
   ohl: ["fastRhockey"],
   whl: ["fastRhockey"],
   qmjhl: ["fastRhockey"],
   pwhl: ["fastRhockey"],
-};
-
-/** sdv-py `_PACKAGE_SPORT`: same-sport siblings are tried before `_merged`. */
-const PACKAGE_SPORT = {
-  hoopR: "basketball",
-  wehoop: "basketball",
-  cfbfastR: "football",
-  nflreadr: "football",
-  nflfastR: "football",
-  fastRhockey: "hockey",
-  baseballr: "baseball",
 };
 
 /** sdv-py `_R_DESC_TYPO_FIXES`: roxygen misspellings, corrected at read time. */
@@ -69,8 +76,15 @@ const TYPO_FIXES = [
 /** sdv-py `_R_ONLY_ARG`: an R-only argument condition the JS parsers do not have. */
 const R_ONLY_ARG = /;\s*`[a-z_]+ = (?:TRUE|FALSE)` only(?=\.?$)/;
 
+/**
+ * A mined R entry that is a function ARGUMENT's description, not a column's (wehoop's
+ * `rank` = "Whether to include statistical ranks in the returned table."): never used.
+ */
+const R_ARGUMENT_TEXT = /^Whether to (?:include|return) .* table\.?$/i;
+
 const cleanR = (text) => {
   let t = String(text ?? "");
+  if (R_ARGUMENT_TEXT.test(t)) return "";
   for (const [bad, good] of TYPO_FIXES) t = t.split(bad).join(good);
   return t.replace(R_ONLY_ARG, "");
 };
@@ -87,28 +101,19 @@ export function loadDescriptionSources(dir = here) {
   return SOURCES;
 }
 
-/** sdv-py `_sport_merged`: the union of the same-sport packages' dicts (first package wins). */
-const sportDicts = new Map();
-function sameSport(r, pkg) {
-  const sport = PACKAGE_SPORT[pkg];
-  if (!sport) return {};
-  if (!sportDicts.has(sport)) {
-    const out = {};
-    for (const [p, s] of Object.entries(PACKAGE_SPORT)) {
-      if (s !== sport) continue;
-      for (const [col, desc] of Object.entries(r[p] ?? {})) if (desc && !(col in out)) out[col] = desc;
-    }
-    sportDicts.set(sport, out);
-  }
-  return sportDicts.get(sport);
-}
-
 /**
  * The description of one column: `existing` (the schema's own text) if non-empty, else
- * the manual file under each of `keys`, then `_global`, then the R dicts for `league`
- * (its package(s), its sport's other packages, `_merged`), else "".
+ * the manual file under each of `keys`, then `_global`, then the R package(s) of
+ * `league`'s own sport (LEAGUE_R_PACKAGES; none for an unmapped namespace or `null`), else "".
  */
-export function describeColumn(existing, col, keys = [], league = null, sources = loadDescriptionSources()) {
+/**
+ * Families whose tables are player / team AGGREGATES while their sport's R dicts describe
+ * play-by-play columns ("Binary indicator for if the play ended in a sack" on a season
+ * total): no R fallback, manual text only. Keyed by flat family (api stem).
+ */
+export const FAMILY_R_PACKAGES = { nfl_api: [], nfl_pro: [], pff_api: [] };
+
+export function describeColumn(existing, col, keys = [], league = null, sources = loadDescriptionSources(), packages = null) {
   if (existing && String(existing).trim()) return String(existing).trim();
   if (!col) return "";
   const { manual, r } = sources;
@@ -118,17 +123,11 @@ export function describeColumn(existing, col, keys = [], league = null, sources 
   }
   const g = manual._global?.[col];
   if (g) return String(g);
-  const pkgs = LEAGUE_R_PACKAGES[league ?? ""] ?? [];
-  for (const pkg of pkgs) {
-    const v = r[pkg]?.[col];
-    if (v) return cleanR(v);
+  for (const pkg of packages ?? LEAGUE_R_PACKAGES[league ?? ""] ?? []) {
+    const v = r[pkg]?.[col] ? cleanR(r[pkg][col]) : "";
+    if (v) return v;
   }
-  for (const pkg of pkgs) {
-    const v = sameSport(r, pkg)[col];
-    if (v) return cleanR(v);
-  }
-  const m = r._merged?.[col];
-  return m ? cleanR(m) : "";
+  return "";
 }
 
 /** family -> { filled, total }, one count per (family, league, table). */
@@ -143,7 +142,11 @@ const COUNTED = new Set();
  */
 export function describeColumns(family, ref, columns, { keys = [], league = null } = {}) {
   if (!columns) return columns;
-  const out = columns.map((c) => ({ ...c, description: describeColumn(c.description, c.name, keys, league) }));
+  const packages = FAMILY_R_PACKAGES[family] ?? null;
+  const out = columns.map((c) => ({
+    ...c,
+    description: describeColumn(c.description, c.name, keys, league, loadDescriptionSources(), packages),
+  }));
   const tag = `${family}\0${league ?? ""}\0${ref}`;
   if (!COUNTED.has(tag)) {
     COUNTED.add(tag);

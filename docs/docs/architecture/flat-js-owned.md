@@ -20,7 +20,6 @@ minor leagues, The Odds API, Yahoo's scoreboard feed and the deprecated 247Sport
 | `recruiting` | 25 |
 | `yahoo_scores` | 2 |
 | `hockeytech` | 16 |
-| `kenpom` | 30 |
 <!-- /gen:status -->
 
 **Generator step:** the same as a [vendored family](./flat-vendored): `generate.mjs` renders

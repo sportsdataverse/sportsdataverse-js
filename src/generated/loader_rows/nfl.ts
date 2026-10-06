@@ -777,7 +777,7 @@ export interface LoadNflModelPbpRow {
   home_team?: string | null;
   /** String abbreviation for the away team. `String` */
   away_team?: string | null;
-  /** Home team name. `Int64` */
+  /** `Int64` */
   home?: number | bigint | null;
   /** Quarter of the game (5 is overtime). `Int64` */
   qtr?: number | bigint | null;
@@ -1389,7 +1389,7 @@ export interface LoadNflModelPbpRow {
   wp_succeed?: number | null;
   /** Mean win probability across the failure outcomes, i.e. the WP conditional on failing to convert. `Float64` */
   wp_fail?: number | null;
-  /** Predicted probability of making the field goal (cfbfastR FG model, 0-1). `Float64` */
+  /** `Float64` */
   fg_make_prob?: number | null;
   /** Win probability conditional on the field-goal attempt being good. `Float64` */
   make_fg_wp?: number | null;
@@ -1417,7 +1417,7 @@ export interface LoadNflModelPbpRow {
 export interface LoadNflRatingsWeeklyRow {
   /** 4 digit number indicating to which season(s) the specified timeframe belongs to. `Int64` */
   season?: number | bigint | null;
-  /** ESPN team id. `String` (an id) */
+  /** `String` (an id) */
   team_id?: string | null;
   /** Opponent-adjusted offensive EPA per play for the team as of this week. `Float64` */
   adj_off_epa?: number | null;
@@ -1455,13 +1455,13 @@ export interface LoadNflNgsRow {
   scope?: string | null;
   /** Minimum-attempts qualifying threshold NGS applied to the statboard the row came from (differs between weekly and season scopes). `Int64` */
   threshold?: number | bigint | null;
-  /** Games played. `Int64` */
+  /** `Int64` */
   games_played?: number | bigint | null;
   /** Full name of player `String` */
   player_name?: string | null;
   /** Primary position as reported by NFL.com `String` */
   position?: string | null;
-  /** ESPN team id. `String` (an id) */
+  /** `String` (an id) */
   team_id?: string | null;
   /** Unique identifier of the player `String` (an id) */
   player_gsis_id?: string | null;
@@ -1477,7 +1477,7 @@ export interface LoadNflNgsRow {
   player_position?: string | null;
   /** Player's jersey number `Int64` */
   player_jersey_number?: number | bigint | null;
-  /** Player's current team identifier. `String` (an id) */
+  /** `String` (an id) */
   player_current_team_id?: string | null;
   /** Season the embedded player record was resolved against; mirrors season. `Int64` */
   player_season?: number | bigint | null;
@@ -1499,7 +1499,7 @@ export interface LoadNflNgsRow {
   player_uniform_number?: string | null;
   /** Roster status code of the player at capture time (e.g. "ACT" active, "RES" reserve, "CUT", "DEV" practice squad). `String` */
   player_status?: string | null;
-  /** URL to the player headshot image. `String` */
+  /** `String` */
   player_headshot?: string | null;
   /** The number of pass attempts as defined by the NFL. `Int64` */
   attempts?: number | bigint | null;

@@ -143,7 +143,7 @@ const rows = await sdv.mbb.loadMbbPbp({ seasons: 2024, columns: ['game_id', 'seq
 | `athlete_name_3` | `string` | Display name of the third athlete in the ESPN play participants, when present. |
 | `media_id` | `string` | Media identifier (video / image). |
 | `pregame_home_prob` | `number` | Model's pre-game win probability for the home team (0-1), constant within a game. |
-| `home_win_prob` | `number` | Home win probability - pre-game prediction (0-1). |
+| `home_win_prob` | `number` |  |
 
 ## `loadMbbPlayerBoxscore`
 
@@ -254,11 +254,11 @@ const rows = await sdv.mbb.loadMbbSchedule({ seasons: 2024 });
 | `time_valid` | `boolean` | Time valid. |
 | `neutral_site` | `boolean` | Neutral site. |
 | `conference_competition` | `boolean` | Conference competition. |
-| `play_by_play_available` | `boolean` | Whether play-by-play data is available. |
+| `play_by_play_available` | `boolean` |  |
 | `recent` | `boolean` | Recent. |
 | `start_date` | `string` | Start date (YYYY-MM-DD). |
 | `broadcast` | `string` | Broadcast information string. |
-| `highlights` | `string` | Game highlight urls. |
+| `highlights` | `string` |  |
 | `notes_type` | `string` | Notes type. |
 | `notes_headline` | `string` | Notes headline. |
 | `broadcast_market` | `string` | Broadcast market label (e.g. 'national', 'home'). |
@@ -327,11 +327,11 @@ const rows = await sdv.mbb.loadMbbSchedule({ seasons: 2024 });
 | `groups_name` | `string` | Groups name. |
 | `groups_short_name` | `string` | Groups short name. |
 | `groups_is_conference` | `boolean` | Groups is conference. |
-| `game_json` | `boolean` | Whether processed game JSON is available. |
-| `game_json_url` | `string` | URL to the processed game JSON. |
+| `game_json` | `boolean` |  |
+| `game_json_url` | `string` |  |
 | `game_date_time` | `Date` | Game start date/time (ISO 8601). |
 | `game_date` | `Date` | Game date (YYYY-MM-DD). |
-| `PBP` | `boolean` | Whether play-by-play data is available. |
+| `PBP` | `boolean` |  |
 | `team_box` | `boolean` | Team box. |
 | `player_box` | `boolean` | Player box. |
 
@@ -484,7 +484,7 @@ const rows = await sdv.mbb.loadMbbPlayerValue({ seasons: 2025 });
 | `box_obpm` | `number` | Box-score offensive plus/minus for the player, the offensive half of box BPM. |
 | `box_dbpm` | `number` | Box-score defensive plus/minus for the player, the defensive half of box BPM. |
 | `box_bpm` | `number` | Total box plus/minus in points per 100 possessions above an average player, exactly box_obpm plus box_dbpm (verified to zero residual across all 9,805 rows of 2025). |
-| `qualified` | `boolean` | True/False indicator of whether or not player meets minimum play requirement |
+| `qualified` | `boolean` |  |
 
 ## `loadMbbShots`
 
@@ -555,8 +555,8 @@ const rows = await sdv.mbb.loadMbbStandings({ seasons: 2025 });
 |---|---|---|
 | `season` | `number` | Season year. |
 | `group_id` | `string` | ESPN group id. |
-| `group_name` | `string` | Group name (conference / division). |
-| `group_abbreviation` | `string` | Group abbreviation. |
+| `group_name` | `string` |  |
+| `group_abbreviation` | `string` |  |
 | `group_short_name` | `string` | Abbreviated conference label ESPN prints in standings tables, such as ACC, Big Ten or Am. East, one value per group_id. |
 | `team_id` | `string` | Unique team identifier. |
 | `team_uid` | `string` | ESPN universal team identifier (UID format 's:40~l:...~t:...'). |
@@ -571,7 +571,7 @@ const rows = await sdv.mbb.loadMbbStandings({ seasons: 2025 });
 | `team_logo` | `string` | Team logo image URL. |
 | `stat_name` | `string` | Stat key. |
 | `stat_display_name` | `string` | Stat display name. |
-| `stat_short_display_name` | `string` | Short human-readable stat name. |
+| `stat_short_display_name` | `string` |  |
 | `stat_description` | `string` | ESPN's longer-form label for the standings statistic, which can differ from stat_display_name (streak is described as Current Streak and playoffSeed as Playoff Seed). |
 | `stat_abbreviation` | `string` | Short code ESPN prints for the standings statistic in a table header, such as W, L, PCT, GB or STRK; it diverges from stat_short_display_name for playoff seed and the home and conference record rows. |
 | `stat_type` | `string` | Stat type code (e.g. "win", "loss"). |
@@ -610,7 +610,7 @@ const rows = await sdv.mbb.loadMbbPlayerSeasonStats({ seasons: 2025 });
 | `team_slug` | `string` | URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). |
 | `team_display_name` | `string` | Full team display name. |
 | `category` | `string` | Category label. |
-| `stat_label` | `string` | Human-readable label of the statistic (e.g. 'At bats'). |
+| `stat_label` | `string` |  |
 | `stat_name` | `string` | Stat key. |
 | `stat_display_name` | `string` | Stat display name. |
 | `stat_description` | `string` | ESPN's prose glossary definition of the statistic named in stat_name, for example defining assists as a pass to a teammate that leads directly to a field goal. |
@@ -743,8 +743,8 @@ const rows = await sdv.mbb.loadMbbGameRosters({ seasons: 2025 });
 | `athlete_guid` | `string` | ESPN athlete GUID. |
 | `athlete_display_name` | `string` | Athlete display name (full). |
 | `athlete_short_name` | `string` | Athlete short display name. |
-| `athlete_first_name` | `string` | Player first name. |
-| `athlete_last_name` | `string` | Athlete last name. |
+| `athlete_first_name` | `string` |  |
+| `athlete_last_name` | `string` |  |
 | `athlete_jersey` | `string` | Athlete jersey number. |
 | `athlete_position` | `string` | Athlete position. |
 | `athlete_headshot` | `string` | URL of the player's ESPN headshot image, whose filename is the athlete_id (verified equal for all 190,365 non-null rows in 2025); null when ESPN publishes no photo for that player. |
@@ -787,7 +787,7 @@ const rows = await sdv.mbb.loadMbbTeamSeasonStats({ seasons: 2025 });
 | `team_alternate_color` | `string` | Team alternate color (hex without leading '#'). |
 | `team_logo` | `string` | Team logo image URL. |
 | `category` | `string` | Category label. |
-| `stat_label` | `string` | Human-readable label of the statistic (e.g. 'At bats'). |
+| `stat_label` | `string` |  |
 | `stat_name` | `string` | Stat key. |
 | `stat_display_name` | `string` | Stat display name. |
 | `stat_description` | `string` | ESPN's prose glossary definition of the statistic named in stat_name, for example defining field goal percentage as the ratio of field goals made to field goals attempted. |
@@ -960,14 +960,14 @@ const rows = await sdv.mbb.loadMbbPlayerCore({ seasons: 2025 });
 | `date_of_birth` | `string` | Date of birth (YYYY-MM-DD). |
 | `birth_city` | `string` | Birth city. |
 | `birth_state` | `string` | Birth state / region. |
-| `birth_country` | `string` | Player birth country. |
+| `birth_country` | `string` |  |
 | `jersey` | `string` | Jersey number worn by the player. |
 | `position_id` | `string` | Unique position identifier. |
 | `position_name` | `string` | Listed roster position ('Guard', 'Forward', 'Center'). |
 | `position_abbreviation` | `string` | Position abbreviation ('G' / 'F' / 'C'). |
 | `position_display_name` | `string` | Position display name. |
 | `college_id` | `string` | Unique identifier for college. |
-| `current_team_id` | `string` | Player's current team identifier. |
+| `current_team_id` | `string` |  |
 | `headshot_href` | `string` | Headshot image URL. |
 | `experience_years` | `number` | Experience years. |
 | `status_id` | `string` | Status identifier. |
@@ -1007,11 +1007,11 @@ const rows = await sdv.mbb.loadNcaaMbbPbp({ seasons: 2024, columns: ['game_date'
 | `period` | `number \| bigint` | Period of the game (1-4 quarters; 5+ for OT). |
 | `clock` | `string` | Game clock value. |
 | `game_time` | `string` | Game start time. |
-| `game_seconds` | `number \| bigint` | Elapsed seconds in the game. |
+| `game_seconds` | `number \| bigint` |  |
 | `home_score` | `number \| bigint` | Home team score at the time of the play. |
 | `away_score` | `number \| bigint` | Away team score at the time of the play. |
-| `event_team` | `string` | Team associated with the shift change. |
-| `event_description` | `string` | Human-readable event description. |
+| `event_team` | `string` |  |
+| `event_description` | `string` |  |
 | `player_1` | `string` | Name of the primary player credited on the event (shooter, fouler, rebounder, etc.), as scraped from stats.ncaa.org. |
 | `player_2` | `string` | Name of the secondary player on the event (e.g., the assister or the player subbed for), when present. |
 | `event_type` | `string` | Event / play type code (V2 PBP). |
@@ -1035,7 +1035,7 @@ const rows = await sdv.mbb.loadNcaaMbbPbp({ seasons: 2024, columns: ['game_date'
 | `status` | `string` | Status label. |
 | `is_garbage_time` | `boolean` | Flag marking events in garbage time under the score-margin and clock rule of the pbp builder. |
 | `sub_deviate` | `number \| bigint` | Per-game count of substitution-tracking deviations found while walking lineups forward; nonzero flags imperfect substitution data. |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `home_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the home team. |
 | `home_espn_team_id` | `string` | ESPN home team id (NA for bart-only rows). |
 | `away_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the away team. |
@@ -1112,7 +1112,7 @@ const rows = await sdv.mbb.loadNcaaMbbSchedule({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `game_date` | `string` | Game date (YYYY-MM-DD). |
 | `home` | `string` | Home. |
 | `away` | `string` | Away record. |
@@ -1257,7 +1257,7 @@ const rows = await sdv.mbb.loadNcaaMbbPlayerBox({ seasons: 2024 });
 | `midm_unast` | `number` | Mid-range shots made in the unassisted split (makes for which no assist was credited). |
 | `mida_unast` | `number` | Mid-range shots attempted in the unassisted split (makes for which no assist was credited). |
 | `mid_pct_unast` | `number` | Mid-range field-goal percentage in the unassisted split (makes for which no assist was credited). |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `home_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the home team. |
 | `home_espn_team_id` | `string` | ESPN home team id (NA for bart-only rows). |
 | `away_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the away team. |
@@ -1364,7 +1364,7 @@ const rows = await sdv.mbb.loadNcaaMbbTeamBox({ seasons: 2024 });
 | `drb_pct` | `number` | Defensive rebound percentage. |
 | `time_per_poss` | `number` | Average seconds per offensive possession. |
 | `d_time_per_poss` | `number` | Average seconds per defensive possession. |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `home_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the home team. |
 | `home_espn_team_id` | `string` | ESPN home team id (NA for bart-only rows). |
 | `away_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the away team. |
@@ -1438,7 +1438,7 @@ const rows = await sdv.mbb.loadNcaaMbbTeamRosters({ seasons: 2024 });
 | `height` | `string` | Player height (string e.g. '6-2' or inches). |
 | `ht_inches` | `number \| bigint` | Player height converted to total inches from the stats.ncaa.org roster listing. |
 | `hometown` | `string` | Player hometown. |
-| `high_school` | `string` | High school |
+| `high_school` | `string` |  |
 | `gp` | `string` | Games played. |
 | `gs` | `string` | Games started. |
 
@@ -1520,7 +1520,7 @@ const rows = await sdv.mbb.loadNcaaMbbPossessions({ seasons: 2024, columns: ['ga
 | `first_shot_type` | `string` | Shot class of the possession's first attempt (rim, mid-range, or three). |
 | `last_event_time` | `number \| bigint` | Clock time in seconds at the possession's final event. |
 | `last_event_type` | `string` | Event type that ended the possession (e.g., a made shot, turnover, or defensive rebound). |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `home_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the home team. |
 | `home_espn_team_id` | `string` | ESPN home team id (NA for bart-only rows). |
 | `away_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the away team. |
@@ -1648,7 +1648,7 @@ const rows = await sdv.mbb.loadNcaaMbbLineups({ seasons: 2024 });
 | `opp_ast` | `number \| bigint` | Opponent assists while the lineup was on the floor during the stint. |
 | `opp_foul` | `number \| bigint` | Opponent fouls committed while the lineup was on the floor during the stint. |
 | `stint_num` | `number \| bigint` | Sequential on-floor stint number for the lineup within the game. |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `season` | `number \| bigint` | Season year. |
 
 ## `loadNcaaMbbMatchupStints`
@@ -1674,7 +1674,7 @@ const rows = await sdv.mbb.loadNcaaMbbMatchupStints({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `season` | `number \| bigint` | Season year. |
 | `game_date` | `string` | Game date (YYYY-MM-DD). |
 | `home` | `string` | Home. |
@@ -1743,8 +1743,8 @@ const rows = await sdv.mbb.loadNcaaMbbShots({ seasons: 2024 });
 | `point_value` | `number \| bigint` | Point value of the attempt (2 or 3). |
 | `period` | `unknown` | Period of the game (1-4 quarters; 5+ for OT). |
 | `sec_left` | `unknown` | Seconds remaining in the period when the shot was taken (all-null in current captures). |
-| `source` | `string` | News source. |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `source` | `string` |  |
+| `contest_id` | `string` |  |
 | `ncaa_team_id` | `string` | stats.ncaa.org team identifier of the shooting team. |
 | `espn_team_id` | `string` | ESPN team id (canonical key). |
 | `shooter_player_id` | `string` | stats.ncaa.org player identifier of the shooter. |

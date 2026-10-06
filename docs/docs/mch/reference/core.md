@@ -2020,15 +2020,15 @@ MCH — standings core (ESPN sports.core.api.espn.com (core v2)).
 | `group_name` | character | Group name (conference / division). |
 | `group_abbreviation` | character | Group abbreviation. |
 | `team_id` | character | ESPN team id |
-| `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
+| `team_name` | character | Team name. |
 | `team_abbreviation` | character | Team abbreviation |
 | `team_display_name` | character | Team display name |
-| `team_location` | character | Team city or location string. |
-| `team_logo` | character | Team logo image URL. |
+| `team_location` | character | Team city/location. |
+| `team_logo` | character | URL to the team logo image. |
 | `avg_points_against` | number |  |
 | `avg_points_for` | number |  |
-| `clincher` | integer | Clincher. |
-| `differential` | integer | Differential. |
+| `clincher` | integer |  |
+| `differential` | integer |  |
 | `division_win_percent` | number |  |
 | `games_behind` | integer |  |
 | `league_win_percent` | number |  |
@@ -2038,13 +2038,13 @@ MCH — standings core (ESPN sports.core.api.espn.com (core v2)).
 | `points` | integer | Competition points. |
 | `points_against` | integer | Goals conceded. |
 | `points_for` | integer | Goals (or runs) scored by the team. |
-| `streak` | integer | Current streak (e.g. 'W3' for three-game win streak). |
-| `win_percent` | number | Win percent. |
+| `streak` | integer | Current streak value. |
+| `win_percent` | number |  |
 | `wins` | integer | Number of matches the team has won. |
 | `games_ahead` | integer |  |
 | `overall` | character | Overall record summary as published by ESPN. |
-| `home` | character | Home. |
-| `road` | character | Road. |
+| `home` | character | Whether the player's team was home. |
+| `road` | character |  |
 | `vs_div` | character |  |
 | `vs_conf` | character |  |
 | `last_ten_games` | character |  |

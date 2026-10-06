@@ -133,49 +133,49 @@ CFB — cdn schedule (ESPN cdn.espn.com (espn.com page data)).
 | `short_name` | character | Abbreviated event name (e.g. 'TA @ TB'). |
 | `season_year` | integer | Integer season year ESPN assigns the event (e.g. 2025 for the 2025-26 season). |
 | `season_type` | integer | ESPN season-type id of the event's season: 1 preseason, 2 regular season, 3 postseason, 4 offseason for the US leagues; soccer competitions carry their own competition-specific ids (e.g. 13481). |
-| `season_slug` | character | Season slug. |
-| `status_type_id` | character | Unique identifier for status type. |
-| `status_type_name` | character | Status type name. |
-| `status_type_state` | character | Status state (pre/in/post). |
-| `status_type_completed` | logical | Whether the game is complete. |
-| `status_type_description` | character | Status type description. |
-| `status_type_detail` | character | Status type detail. |
-| `status_type_short_detail` | character | Status type short detail. |
+| `season_slug` | character |  |
+| `status_type_id` | character |  |
+| `status_type_name` | character |  |
+| `status_type_state` | character |  |
+| `status_type_completed` | logical |  |
+| `status_type_description` | character |  |
+| `status_type_detail` | character |  |
+| `status_type_short_detail` | character |  |
 | `status_clock` | integer | Game clock in seconds as ESPN reports it: time remaining in the period for clock sports, elapsed seconds for soccer (e.g. 5400.0 at full time); 0.0 once a game has ended. |
-| `status_display_clock` | character | Status display clock. |
+| `status_display_clock` | character |  |
 | `status_period` | integer | Current or final period number (quarter, half, inning or period, depending on the sport). |
 | `neutral_site` | logical | Whether the match is played at a neutral venue. |
-| `conference_competition` | logical | Conference competition. |
+| `conference_competition` | logical |  |
 | `attendance` | integer | Reported attendance at the game. |
 | `venue_id` | character | Referencing venue id. |
-| `venue_full_name` | character | Venue full name. |
+| `venue_full_name` | character |  |
 | `venue_city` | character | City where the venue is located. |
 | `venue_state` | character | State (or province/country) where the venue is located. |
 | `venue_indoor` | logical | Whether the home venue is indoors. |
 | `broadcast` | character | Broadcast network short name. |
 | `note` | character | Event note text from the competition (e.g. a series or game label such as 'World Series - Game 1', or a shootout result); an empty string when there is none. |
 | `home_id` | character | Home team referencing id. |
-| `home_name` | character | Home team display name. |
-| `home_abbreviation` | character | Home team's abbreviation. |
-| `home_display_name` | character | Home team display name. |
-| `home_location` | character | Home team's location. |
-| `home_color` | character | Home team primary color hex. |
-| `home_alternate_color` | character | Color code (hex) for home alternate. |
-| `home_logo` | character | Home team logo URL. |
+| `home_name` | character |  |
+| `home_abbreviation` | character |  |
+| `home_display_name` | character |  |
+| `home_location` | character |  |
+| `home_color` | character |  |
+| `home_alternate_color` | character |  |
+| `home_logo` | character |  |
 | `home_score` | character | Home team's score. For cricket, the innings string (e.g. '161/5 (18/20 ov, target 156)'). |
-| `home_winner` | logical | Whether the home team won. |
-| `home_rank` | character | Home team rank (if ranked). |
+| `home_winner` | logical |  |
+| `home_rank` | character |  |
 | `away_id` | character | Away team referencing id. |
-| `away_name` | character | Away team display name. |
-| `away_abbreviation` | character | Away team's abbreviation. |
-| `away_display_name` | character | Away team display name. |
-| `away_location` | character | Away team's location. |
-| `away_color` | character | Away team primary color hex. |
-| `away_alternate_color` | character | Color code (hex) for away alternate. |
-| `away_logo` | character | Away team logo URL. |
+| `away_name` | character |  |
+| `away_abbreviation` | character |  |
+| `away_display_name` | character |  |
+| `away_location` | character |  |
+| `away_color` | character |  |
+| `away_alternate_color` | character |  |
+| `away_logo` | character |  |
 | `away_score` | character | Away team's score. For cricket, the innings string. |
-| `away_winner` | logical | Whether the away team won. |
-| `away_rank` | character | Away team rank (if ranked). |
+| `away_winner` | logical |  |
+| `away_rank` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -211,49 +211,49 @@ CFB — cdn scoreboard (ESPN cdn.espn.com (espn.com page data)).
 | `short_name` | character | Abbreviated event name (e.g. 'TA @ TB'). |
 | `season_year` | integer | Integer season year ESPN assigns the event (e.g. 2025 for the 2025-26 season). |
 | `season_type` | integer | ESPN season-type id of the event's season: 1 preseason, 2 regular season, 3 postseason, 4 offseason for the US leagues; soccer competitions carry their own competition-specific ids (e.g. 13481). |
-| `season_slug` | character | Season slug. |
-| `status_type_id` | character | Unique identifier for status type. |
-| `status_type_name` | character | Status type name. |
-| `status_type_state` | character | Status state (pre/in/post). |
-| `status_type_completed` | logical | Whether the game is complete. |
-| `status_type_description` | character | Status type description. |
-| `status_type_detail` | character | Status type detail. |
-| `status_type_short_detail` | character | Status type short detail. |
+| `season_slug` | character |  |
+| `status_type_id` | character |  |
+| `status_type_name` | character |  |
+| `status_type_state` | character |  |
+| `status_type_completed` | logical |  |
+| `status_type_description` | character |  |
+| `status_type_detail` | character |  |
+| `status_type_short_detail` | character |  |
 | `status_clock` | integer | Game clock in seconds as ESPN reports it: time remaining in the period for clock sports, elapsed seconds for soccer (e.g. 5400.0 at full time); 0.0 once a game has ended. |
-| `status_display_clock` | character | Status display clock. |
+| `status_display_clock` | character |  |
 | `status_period` | integer | Current or final period number (quarter, half, inning or period, depending on the sport). |
 | `neutral_site` | logical | Whether the match is played at a neutral venue. |
-| `conference_competition` | logical | Conference competition. |
+| `conference_competition` | logical |  |
 | `attendance` | integer | Reported attendance at the game. |
 | `venue_id` | character | Referencing venue id. |
-| `venue_full_name` | character | Venue full name. |
+| `venue_full_name` | character |  |
 | `venue_city` | character | City where the venue is located. |
 | `venue_state` | character | State (or province/country) where the venue is located. |
 | `venue_indoor` | logical | Whether the home venue is indoors. |
 | `broadcast` | character | Broadcast network short name. |
 | `note` | character | Event note text from the competition (e.g. a series or game label such as 'World Series - Game 1', or a shootout result); an empty string when there is none. |
 | `home_id` | character | Home team referencing id. |
-| `home_name` | character | Home team display name. |
-| `home_abbreviation` | character | Home team's abbreviation. |
-| `home_display_name` | character | Home team display name. |
-| `home_location` | character | Home team's location. |
-| `home_color` | character | Home team primary color hex. |
-| `home_alternate_color` | character | Color code (hex) for home alternate. |
-| `home_logo` | character | Home team logo URL. |
+| `home_name` | character |  |
+| `home_abbreviation` | character |  |
+| `home_display_name` | character |  |
+| `home_location` | character |  |
+| `home_color` | character |  |
+| `home_alternate_color` | character |  |
+| `home_logo` | character |  |
 | `home_score` | character | Home team's score. For cricket, the innings string (e.g. '161/5 (18/20 ov, target 156)'). |
-| `home_winner` | logical | Whether the home team won. |
-| `home_rank` | character | Home team rank (if ranked). |
+| `home_winner` | logical |  |
+| `home_rank` | character |  |
 | `away_id` | character | Away team referencing id. |
-| `away_name` | character | Away team display name. |
-| `away_abbreviation` | character | Away team's abbreviation. |
-| `away_display_name` | character | Away team display name. |
-| `away_location` | character | Away team's location. |
-| `away_color` | character | Away team primary color hex. |
-| `away_alternate_color` | character | Color code (hex) for away alternate. |
-| `away_logo` | character | Away team logo URL. |
+| `away_name` | character |  |
+| `away_abbreviation` | character |  |
+| `away_display_name` | character |  |
+| `away_location` | character |  |
+| `away_color` | character |  |
+| `away_alternate_color` | character |  |
+| `away_logo` | character |  |
 | `away_score` | character | Away team's score. For cricket, the innings string. |
-| `away_winner` | logical | Whether the away team won. |
-| `away_rank` | character | Away team rank (if ranked). |
+| `away_winner` | logical |  |
+| `away_rank` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 

@@ -13,6 +13,7 @@ sidebar_position: 6
 - **Typed returns — generated row types for `parsed: true`** — TypeScript only. A wrapper's raw payload resolves to `unknown` (was `any`); verified endpoints resolve to their row interfaces; the summary dispatchers to `ParsedTables`. Narrow or cast a raw payload. ([changelog](/CHANGELOG#typescript--typed-returns-generated-row-types-for-parsed-true))
 - **Typed wrapper params and loader rows; `strict` mode** — TypeScript only. A param the endpoint does not have, a missing required path param or a non-boolean `bool` param is a type error; parser rows are `Record<string, unknown>`; loader rows are their generated row types. ([changelog](/CHANGELOG#typescript--typed-wrapper-params-and-loader-rows-strict-mode))
 - **Wrapper failures raise `NoDataError` / `AssetFetchError`** — Instead of raw axios errors. `NoDataError` = the fetch worked and there is nothing there (404, ESPN `{ code: 404 }`); `AssetFetchError` = the fetch failed (403 / 429 / 5xx after retries, network). Retries follow `DEFAULT_RETRY_STATUSES` with backoff. ([changelog](/CHANGELOG#error-vocabulary-pluggable-transport--auth))
+- **Baseball Savant `parsed: true` rows are typed like sdv-py's** — Savant CSV rows (`parse_mlb_statcast_leaderboard`, `parse_mlb_statcast_search`, the `mlb_statcast_search*` wrappers): numeric columns are numbers (were strings), an integer past `Number.MAX_SAFE_INTEGER` is `BigInt`, `inf` is `Infinity`, True/False are booleans, NA cells are `null`; the MLBAM id columns (`batter`, `pitcher`, `on_1b`…, `fielder_2`…, `game_pk`) are pinned to Int64 and come back as decimal strings. ([changelog](/CHANGELOG#integer-id-columns-are-decimal-strings-everywhere))
 - **The Statcast, BartTorvik and HockeyTech getters throw on a failed fetch** — A failed HTTP fetch is no longer `{}` / `""` — it throws like every other wrapper, so a failed fetch cannot be mistaken for an empty table. ([changelog](/CHANGELOG#error-vocabulary-pluggable-transport--auth))
 
 :::
@@ -307,7 +308,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 
 | col_name | type | description |
 |---|---|---|
-| `team_side` | character | Home or away indicator. |
+| `team_side` | character |  |
 | `team_id` | integer | Unique ESPN team identifier. |
 | `team_name` | character | Team name. |
 | `jersey_number` | character | Jersey number worn (often blank for non-uniformed roles). |
@@ -550,7 +551,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `link` | character | API link to the game feed. |
 | `abbreviation` | character | Short abbreviation. |
 | `has_wildcard` | logical | Whether the season has a wild card round. |
-| `name_short` | character | Short name of player (First Initial, Last Name) |
+| `name_short` | character |  |
 | `league_id` | integer | League MLBAM ID. |
 | `league_link` | character | API link to the league. |
 | `sport_id` | integer | Sport MLBAM ID. |
@@ -567,7 +568,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `link` | character | API link to the game feed. |
 | `abbreviation` | character | Short abbreviation. |
 | `has_wildcard` | logical | Whether the season has a wild card round. |
-| `name_short` | character | Short name of player (First Initial, Last Name) |
+| `name_short` | character |  |
 | `league_id` | integer | League MLBAM ID. |
 | `league_link` | character | API link to the league. |
 | `sport_id` | integer | Sport MLBAM ID. |
@@ -902,7 +903,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `is_verified` | logical | Whether the player profile is verified. |
 | `draft_year` | double | Year the player was drafted. |
 | `pronunciation` | character | Phonetic name pronunciation. |
-| `stats` | character | Stats. |
+| `stats` | character |  |
 | `mlb_debut_date` | character | MLB debut date (YYYY-MM-DD). |
 | `name_first_last` | character | Name in first-last order. |
 | `name_slug` | character | URL-friendly name slug. |
@@ -990,7 +991,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `is_verified` | logical | Whether the player profile is verified. |
 | `draft_year` | double | Year the player was drafted. |
 | `pronunciation` | character | Phonetic name pronunciation. |
-| `stats` | character | Stats. |
+| `stats` | character |  |
 | `mlb_debut_date` | character | MLB debut date (YYYY-MM-DD). |
 | `name_first_last` | character | Name in first-last order. |
 | `name_slug` | character | URL-friendly name slug. |
@@ -1078,7 +1079,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `is_verified` | logical | Whether the player profile is verified. |
 | `draft_year` | double | Year the player was drafted. |
 | `pronunciation` | character | Phonetic name pronunciation. |
-| `stats` | character | Stats. |
+| `stats` | character |  |
 | `mlb_debut_date` | character | MLB debut date (YYYY-MM-DD). |
 | `name_first_last` | character | Name in first-last order. |
 | `name_slug` | character | URL-friendly name slug. |
@@ -1160,7 +1161,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `name` | character | Display name. |
 | `link` | character | API link to the game feed. |
 | `abbreviation` | character | Short abbreviation. |
-| `name_short` | character | Short name of player (First Initial, Last Name) |
+| `name_short` | character |  |
 | `season_state` | character | A string describing the current phase of the league's season (e.g., 'inProgress', 'offseason', 'preseason'). |
 | `has_wild_card` | logical | Boolean flag indicating whether this league includes a wild card playoff format for postseason eligibility. |
 | `has_split_season` | logical | Boolean flag indicating whether this league divides its season into two halves with separate standings (as used historically in some minor leagues). |
@@ -1170,8 +1171,8 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `num_wildcard_teams` | double | The number of wild card berths available for postseason entry in this league for the given season. |
 | `season` | character | Season year. |
 | `org_code` | character | The organizational code identifying the parent body (e.g., 'MLB') governing this league within the MLB Stats API hierarchy. |
-| `conferences_in_use` | logical | Whether conferences were in use that season. |
-| `divisions_in_use` | logical | Whether divisions were in use that season. |
+| `conferences_in_use` | logical |  |
+| `divisions_in_use` | logical |  |
 | `sort_order` | integer | Display sort order for the sport. |
 | `active` | logical | Whether the player is currently active. |
 | `season_date_info_season_id` | character | Season identifier for the date info block. |
@@ -1477,7 +1478,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `total_items` | integer | Total schedule items on the date. |
 | `total_games` | integer | Total games on the date. |
 | `total_games_in_progress` | integer | Games currently in progress on the date. |
-| `games` | character | Games played. |
+| `games` | character |  |
 | `sort_order` | integer | Display sort order for the sport. |
 | `series_id` | character | Series identifier (e.g. 'W_1'). |
 | `series_sort_number` | integer | Sort number for the series. |
@@ -3872,4 +3873,4 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
-_Generated by tools/codegen/generate.mjs from tools/codegen/endpoints/mlb.yaml + tools/codegen/endpoints/mlb_statcast.yaml (vendored from sdv-py) — see [How this library is built](/docs/architecture/flat-vendored)._
+_Generated by tools/codegen/generate.mjs from tools/codegen/endpoints/mlb.yaml (vendored from sdv-py) + tools/codegen/endpoints/mlb_statcast.yaml (vendored from sdv-py) — see [How this library is built](/docs/architecture/flat-vendored)._

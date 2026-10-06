@@ -150,7 +150,7 @@ const rows = await sdv.wbb.loadWbbPbp({ seasons: 2024, columns: ['game_id', 'seq
 | `athlete_name_2` | `string` | Display name of the second athlete in the ESPN play participants (e.g., the assisting player), when present. |
 | `athlete_name_3` | `string` | Display name of the third athlete in the ESPN play participants, when present. |
 | `pregame_home_prob` | `number` | Model's pre-game win probability for the home team (0-1), constant within a game. |
-| `home_win_prob` | `number` | Home win probability - pre-game prediction (0-1). |
+| `home_win_prob` | `number` |  |
 
 ## `loadWbbPlayerBoxscore`
 
@@ -261,11 +261,11 @@ const rows = await sdv.wbb.loadWbbSchedule({ seasons: 2024 });
 | `time_valid` | `boolean` | Time valid. |
 | `neutral_site` | `boolean` | Neutral site. |
 | `conference_competition` | `boolean` | Conference competition. |
-| `play_by_play_available` | `boolean` | Whether play-by-play data is available. |
+| `play_by_play_available` | `boolean` |  |
 | `recent` | `boolean` | Recent. |
 | `start_date` | `string` | Start date (YYYY-MM-DD). |
 | `broadcast` | `string` | Broadcast information string. |
-| `highlights` | `string` | Game highlight urls. |
+| `highlights` | `string` |  |
 | `notes_type` | `string` | Notes type. |
 | `notes_headline` | `string` | Notes headline. |
 | `broadcast_market` | `string` | Broadcast market label (e.g. 'national', 'home'). |
@@ -333,8 +333,8 @@ const rows = await sdv.wbb.loadWbbSchedule({ seasons: 2024 });
 | `groups_name` | `string` | Groups name. |
 | `groups_short_name` | `string` | Groups short name. |
 | `groups_is_conference` | `boolean` | Groups is conference. |
-| `game_json` | `boolean` | Whether processed game JSON is available. |
-| `game_json_url` | `string` | URL to the processed game JSON. |
+| `game_json` | `boolean` |  |
+| `game_json_url` | `string` |  |
 | `has_game_json` | `boolean` | Whether the raw game JSON payload exists in the raw store for this game. |
 | `game_json_raw_url` | `string` | raw.githubusercontent.com URL of the game's raw JSON payload in wehoop-wbb-raw. |
 | `game_rosters_json_url` | `string` | raw.githubusercontent.com URL of the game's rosters JSON payload in wehoop-wbb-raw. |
@@ -343,7 +343,7 @@ const rows = await sdv.wbb.loadWbbSchedule({ seasons: 2024 });
 | `has_officials_json` | `boolean` | Whether the officials JSON payload exists in the raw store for this game. |
 | `game_date_time` | `Date` | Game start date/time (ISO 8601). |
 | `game_date` | `Date` | Game date (YYYY-MM-DD). |
-| `PBP` | `boolean` | Whether play-by-play data is available. |
+| `PBP` | `boolean` |  |
 | `team_box` | `boolean` | Team box. |
 | `player_box` | `boolean` | Player box. |
 | `in_shots` | `boolean` | Whether the game is represented in the built shots dataset. |
@@ -464,7 +464,7 @@ const rows = await sdv.wbb.loadWbbRatings({ seasons: 2025 });
 | `raw_o` | `number` | Raw o. |
 | `raw_d` | `number` | Raw d. |
 | `games` | `number \| bigint` | Games played. |
-| `rank` | `number \| bigint` | Whether to include statistical ranks in the returned table. |
+| `rank` | `number \| bigint` | Rank. |
 | `adj_em_z` | `number` | Within-season z-score of adj_em, computed as adj_em minus the season mean divided by the season standard deviation over every team in the frame, so it is mean 0 and standard deviation 1 per season. |
 
 ## `loadWbbPlayerValue`
@@ -498,7 +498,7 @@ const rows = await sdv.wbb.loadWbbPlayerValue({ seasons: 2025 });
 | `box_obpm` | `number` | Box-score offensive plus/minus for the player, the offensive half of box BPM. |
 | `box_dbpm` | `number` | Box-score defensive plus/minus for the player, the defensive half of box BPM. |
 | `box_bpm` | `number` | Total box plus/minus in points per 100 possessions above average, exactly box_obpm plus box_dbpm in every published row. |
-| `qualified` | `boolean` | True/False indicator of whether or not player meets minimum play requirement |
+| `qualified` | `boolean` |  |
 
 ## `loadWbbGameRosters`
 
@@ -535,8 +535,8 @@ const rows = await sdv.wbb.loadWbbGameRosters({ seasons: 2026 });
 | `athlete_guid` | `string` | ESPN athlete GUID. |
 | `athlete_display_name` | `string` | Athlete display name (full). |
 | `athlete_short_name` | `string` | Athlete short display name. |
-| `athlete_first_name` | `string` | Player first name. |
-| `athlete_last_name` | `string` | Athlete last name. |
+| `athlete_first_name` | `string` |  |
+| `athlete_last_name` | `string` |  |
 | `athlete_jersey` | `string` | Athlete jersey number. |
 | `athlete_position` | `string` | Athlete position. |
 | `athlete_headshot` | `string` | URL of the player's ESPN headshot image on a.espncdn.com, whose filename is the athlete_id; null when ESPN publishes no headshot for that player. |
@@ -607,14 +607,14 @@ const rows = await sdv.wbb.loadWbbPlayerSeasonStats({ seasons: 2026 });
 | `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 | `athlete_id` | `string` | Unique athlete identifier (ESPN). |
 | `athlete_display_name` | `string` | Athlete display name (full). |
-| `athlete_first_name` | `string` | Player first name. |
-| `athlete_last_name` | `string` | Athlete last name. |
+| `athlete_first_name` | `string` |  |
+| `athlete_last_name` | `string` |  |
 | `athlete_position_abbreviation` | `string` | Athlete position abbreviation (G / F / C). |
 | `athlete_jersey` | `string` | Athlete jersey number. |
 | `team_id` | `string` | Unique team identifier. |
 | `team_display_name` | `string` | Full team display name. |
 | `category` | `string` | Category label. |
-| `stat_label` | `string` | Human-readable label of the statistic (e.g. 'At bats'). |
+| `stat_label` | `string` |  |
 | `stat_name` | `string` | Internal stat key. |
 | `stat_display_name` | `string` | Stat display name. |
 | `stat_description` | `string` | ESPN's prose definition of the statistic named in stat_name, for example The average assists per game for avgAssists; combined made-attempted stats carry both definitions joined by a hyphen. |
@@ -750,8 +750,8 @@ const rows = await sdv.wbb.loadWbbStandings({ seasons: 2026 });
 |---|---|---|
 | `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 | `group_id` | `string` | ESPN group id. |
-| `group_name` | `string` | Group name (conference / division). |
-| `group_abbreviation` | `string` | Group abbreviation. |
+| `group_name` | `string` |  |
+| `group_abbreviation` | `string` |  |
 | `group_short_name` | `string` | Short display name of the conference or division grouping the row belongs to. |
 | `team_id` | `string` | Unique team identifier. |
 | `team_uid` | `string` | ESPN universal team identifier (UID format 's:40~l:...~t:...'). |
@@ -766,7 +766,7 @@ const rows = await sdv.wbb.loadWbbStandings({ seasons: 2026 });
 | `team_logo` | `string` | Team logo image URL. |
 | `stat_name` | `string` | Internal stat key. |
 | `stat_display_name` | `string` | Stat display name. |
-| `stat_short_display_name` | `string` | Short human-readable stat name. |
+| `stat_short_display_name` | `string` |  |
 | `stat_description` | `string` | ESPN's longer wording for the standings stat, for example Overall Record for the Team Season Record entry and Current Streak for Streak; null for stats ESPN ships without one, such as vs AP Top 25. |
 | `stat_abbreviation` | `string` | ESPN's abbreviation for the standings stat, such as GB, OPP PPG or VS CONF; always populated and matching stat_short_display_name for about 90 percent of rows. |
 | `stat_type` | `string` | Stat type code (e.g. "win", "loss"). |
@@ -806,7 +806,7 @@ const rows = await sdv.wbb.loadWbbTeamSeasonStats({ seasons: 2026 });
 | `team_alternate_color` | `string` | Team alternate color (hex without leading '#'). |
 | `team_logo` | `string` | Team logo image URL. |
 | `category` | `string` | Category label. |
-| `stat_label` | `string` | Human-readable label of the statistic (e.g. 'At bats'). |
+| `stat_label` | `string` |  |
 | `stat_name` | `string` | Internal stat key. |
 | `stat_display_name` | `string` | Stat display name. |
 | `stat_description` | `string` | ESPN's prose definition of the team statistic named in stat_name, for example The average blocks per game for avgBlocks or the full sentence defining a blocked shot for blocks. |
@@ -975,14 +975,14 @@ const rows = await sdv.wbb.loadWbbPlayerCore({ seasons: 2025 });
 | `date_of_birth` | `string` | Date of birth (YYYY-MM-DD). |
 | `birth_city` | `string` | Birth city. |
 | `birth_state` | `string` | Birth state / region. |
-| `birth_country` | `string` | Player birth country. |
+| `birth_country` | `string` |  |
 | `jersey` | `string` | Jersey number worn by the player. |
 | `position_id` | `string` | Unique position identifier. |
 | `position_name` | `string` | Listed roster position ('Guard', 'Forward', 'Center'). |
 | `position_abbreviation` | `string` | Position abbreviation ('G' / 'F' / 'C'). |
 | `position_display_name` | `string` | Position display name. |
 | `college_id` | `string` | Unique identifier for college. |
-| `current_team_id` | `string` | Player's current team identifier. |
+| `current_team_id` | `string` |  |
 | `headshot_href` | `string` | Headshot image URL. |
 | `experience_years` | `number` | Experience years. |
 | `status_id` | `string` | Status identifier. |
@@ -1057,11 +1057,11 @@ const rows = await sdv.wbb.loadNcaaWbbPbp({ seasons: 2024, columns: ['game_date'
 | `period` | `number \| bigint` | Period of the game (1-4 quarters; 5+ for OT). |
 | `clock` | `string` | Game clock value. |
 | `game_time` | `string` | Game start time. |
-| `game_seconds` | `number \| bigint` | Elapsed seconds in the game. |
+| `game_seconds` | `number \| bigint` |  |
 | `home_score` | `number \| bigint` | Home team score at the time of the play. |
 | `away_score` | `number \| bigint` | Away team score at the time of the play. |
-| `event_team` | `string` | Team associated with the shift change. |
-| `event_description` | `string` | Human-readable event description. |
+| `event_team` | `string` |  |
+| `event_description` | `string` |  |
 | `player_1` | `string` | Name of the primary player credited on the event (shooter, fouler, rebounder, etc.), as scraped from stats.ncaa.org. |
 | `player_2` | `string` | Name of the secondary player on the event (e.g., the assister or the player subbed for), when present. |
 | `event_type` | `string` | Event / play type code (V2 PBP). |
@@ -1085,7 +1085,7 @@ const rows = await sdv.wbb.loadNcaaWbbPbp({ seasons: 2024, columns: ['game_date'
 | `status` | `string` | Status label. |
 | `is_garbage_time` | `boolean` | Flag marking events in garbage time under the score-margin and clock rule of the pbp builder. |
 | `sub_deviate` | `number \| bigint` | Per-game count of substitution-tracking deviations found while walking lineups forward; nonzero flags imperfect substitution data. |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `home_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the home team. |
 | `home_espn_team_id` | `string` | ESPN home team id (NA for bart-only rows). |
 | `away_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the away team. |
@@ -1162,7 +1162,7 @@ const rows = await sdv.wbb.loadNcaaWbbSchedule({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `game_date` | `string` | Game date (YYYY-MM-DD). |
 | `home` | `string` | Home. |
 | `away` | `string` | Away record. |
@@ -1307,7 +1307,7 @@ const rows = await sdv.wbb.loadNcaaWbbPlayerBox({ seasons: 2024 });
 | `midm_unast` | `number` | Mid-range shots made in the unassisted split (makes for which no assist was credited). |
 | `mida_unast` | `number` | Mid-range shots attempted in the unassisted split (makes for which no assist was credited). |
 | `mid_pct_unast` | `number` | Mid-range field-goal percentage in the unassisted split (makes for which no assist was credited). |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `home_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the home team. |
 | `home_espn_team_id` | `string` | ESPN home team id (NA for bart-only rows). |
 | `away_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the away team. |
@@ -1414,7 +1414,7 @@ const rows = await sdv.wbb.loadNcaaWbbTeamBox({ seasons: 2024 });
 | `drb_pct` | `number` | Defensive rebound percentage. |
 | `time_per_poss` | `number` | Average seconds per offensive possession. |
 | `d_time_per_poss` | `number` | Average seconds per defensive possession. |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `home_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the home team. |
 | `home_espn_team_id` | `string` | ESPN home team id (NA for bart-only rows). |
 | `away_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the away team. |
@@ -1488,7 +1488,7 @@ const rows = await sdv.wbb.loadNcaaWbbTeamRosters({ seasons: 2024 });
 | `height` | `string` | Player height (string e.g. '6-2' or inches). |
 | `ht_inches` | `number \| bigint` | Player height converted to total inches from the stats.ncaa.org roster listing. |
 | `hometown` | `string` | Player hometown. |
-| `high_school` | `string` | High school |
+| `high_school` | `string` |  |
 | `gp` | `string` | Games played. |
 | `gs` | `string` | Games started. |
 
@@ -1570,7 +1570,7 @@ const rows = await sdv.wbb.loadNcaaWbbPossessions({ seasons: 2024, columns: ['ga
 | `first_shot_type` | `string` | Shot class of the possession's first attempt (rim, mid-range, or three). |
 | `last_event_time` | `number \| bigint` | Clock time in seconds at the possession's final event. |
 | `last_event_type` | `string` | Event type that ended the possession (e.g., a made shot, turnover, or defensive rebound). |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `home_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the home team. |
 | `home_espn_team_id` | `string` | ESPN home team id (NA for bart-only rows). |
 | `away_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the away team. |
@@ -1698,7 +1698,7 @@ const rows = await sdv.wbb.loadNcaaWbbLineups({ seasons: 2024 });
 | `opp_ast` | `number \| bigint` | Opponent assists while the lineup was on the floor during the stint. |
 | `opp_foul` | `number \| bigint` | Opponent fouls committed while the lineup was on the floor during the stint. |
 | `stint_num` | `number \| bigint` | Sequential on-floor stint number for the lineup within the game. |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaWbbMatchupStints`
@@ -1724,7 +1724,7 @@ const rows = await sdv.wbb.loadNcaaWbbMatchupStints({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `contest_id` | `string` |  |
 | `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 | `game_date` | `string` | Game date (YYYY-MM-DD). |
 | `home` | `string` | Home. |
@@ -1793,8 +1793,8 @@ const rows = await sdv.wbb.loadNcaaWbbShots({ seasons: 2024 });
 | `point_value` | `number \| bigint` | Point value of the attempt (2 or 3). |
 | `period` | `unknown` | Period of the game (1-4 quarters; 5+ for OT). |
 | `sec_left` | `unknown` | Seconds remaining in the period when the shot was taken (all-null in current captures). |
-| `source` | `string` | News source. |
-| `contest_id` | `string` | stats.ncaa.org contest (game) identifier. |
+| `source` | `string` |  |
+| `contest_id` | `string` |  |
 | `ncaa_team_id` | `string` | stats.ncaa.org team identifier of the shooting team. |
 | `espn_team_id` | `string` | ESPN team id (canonical key). |
 | `shooter_player_id` | `string` | stats.ncaa.org player identifier of the shooter. |

@@ -362,7 +362,7 @@ export interface MlbAwardsRow {
  * One row of `sdv.mlb.mlb_boxscore({ parsed: true })` (returns schema `native/mlb/boxscore`, verified on a real sdv-py capture).
  */
 export interface MlbBoxscoreRow {
-  /** Home or away indicator. Schema `character`. */
+  /** Schema `character`. */
   team_side?: string | null;
   /** Unique ESPN team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -840,7 +840,7 @@ export interface MlbConferenceRow {
   abbreviation?: string | null;
   /** Whether the season has a wild card round. Schema `logical`. */
   has_wildcard?: boolean | null;
-  /** Short name of player (First Initial, Last Name) Schema `character`. */
+  /** Schema `character`. */
   name_short?: string | null;
   /** League MLBAM ID. Schema `integer` (an id). */
   league_id?: string | null;
@@ -866,7 +866,7 @@ export interface MlbConferencesRow {
   abbreviation?: string | null;
   /** Whether the season has a wild card round. Schema `logical`. */
   has_wildcard?: boolean | null;
-  /** Short name of player (First Initial, Last Name) Schema `character`. */
+  /** Schema `character`. */
   name_short?: string | null;
   /** League MLBAM ID. Schema `integer` (an id). */
   league_id?: string | null;
@@ -1472,7 +1472,7 @@ export interface MlbHomeRunDerbyRow {
   draft_year?: number | null;
   /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
-  /** Stats. Schema `character`. */
+  /** Schema `character`. */
   stats?: string | null;
   /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
@@ -1640,7 +1640,7 @@ export interface MlbHomeRunDerbyBracketRow {
   draft_year?: number | null;
   /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
-  /** Stats. Schema `character`. */
+  /** Schema `character`. */
   stats?: string | null;
   /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
@@ -1808,7 +1808,7 @@ export interface MlbHomeRunDerbyPoolRow {
   draft_year?: number | null;
   /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
-  /** Stats. Schema `character`. */
+  /** Schema `character`. */
   stats?: string | null;
   /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
@@ -1956,7 +1956,7 @@ export interface MlbLeaguesRow {
   link?: string | null;
   /** Short abbreviation. Schema `character`. */
   abbreviation?: string | null;
-  /** Short name of player (First Initial, Last Name) Schema `character`. */
+  /** Schema `character`. */
   name_short?: string | null;
   /** A string describing the current phase of the league's season (e.g., 'inProgress', 'offseason', 'preseason'). Schema `character`. */
   season_state?: string | null;
@@ -1976,9 +1976,9 @@ export interface MlbLeaguesRow {
   season?: string | null;
   /** The organizational code identifying the parent body (e.g., 'MLB') governing this league within the MLB Stats API hierarchy. Schema `character`. */
   org_code?: string | null;
-  /** Whether conferences were in use that season. Schema `logical`. */
+  /** Schema `logical`. */
   conferences_in_use?: boolean | null;
-  /** Whether divisions were in use that season. Schema `logical`. */
+  /** Schema `logical`. */
   divisions_in_use?: boolean | null;
   /** Display sort order for the sport. Schema `integer`. */
   sort_order?: number | null;
@@ -2526,7 +2526,7 @@ export interface MlbSchedulePostseasonSeriesRow {
   total_games?: number | null;
   /** Games currently in progress on the date. Schema `integer`. */
   total_games_in_progress?: number | null;
-  /** Games played. Schema `character`. */
+  /** Schema `character`. */
   games?: string | null;
   /** Display sort order for the sport. Schema `integer`. */
   sort_order?: number | null;

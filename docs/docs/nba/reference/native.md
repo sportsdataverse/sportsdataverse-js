@@ -362,7 +362,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `jersey_num` | character | Jersey number worn by the player. |
-| `player_position` | character | Position of the player accordinng to NGS |
+| `player_position` | character |  |
 | `ast` | numeric | Assists. |
 
 **Row type:** `NbaStatsAssistleadersRow` (exported from the package root).
@@ -1437,7 +1437,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_city` | character | Team city or region (e.g. 'Las Vegas'). |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
-| `team_code` | character | Internal team code. |
+| `team_code` | character |  |
 | `team_slug` | character | URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). |
 | `games_played_flag` | character | Y/N flag for whether the player has appeared in a league game. |
 | `otherleague_experience_ch` | character | Code for the player's experience in another league (e.g. G League), as reported by the stats API. |
@@ -1459,7 +1459,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `display_last_comma_first` | character | NBA or WNBA Stats value for display last comma first in the commonplayerinfo result set. |
 | `display_fi_last` | character | NBA or WNBA Stats value for display fi last in the commonplayerinfo result set. |
 | `player_slug` | character | URL-safe player identifier. |
-| `birthdate` | character | Date of birth. |
+| `birthdate` | character |  |
 | `school` | character | Player school / pre-draft team. |
 | `country` | character | Venue country. |
 | `last_affiliation` | character | NBA or WNBA Stats value for last affiliation in the commonplayerinfo result set. |
@@ -1473,7 +1473,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_id` | integer | Unique team identifier. |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
-| `team_code` | character | Internal team code. |
+| `team_code` | character |  |
 | `team_city` | character | Team city or region (e.g. 'Las Vegas'). |
 | `playercode` | character | NBA or WNBA Stats value for playercode in the commonplayerinfo result set. |
 | `from_year` | integer | First season. |
@@ -1483,7 +1483,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `games_played_flag` | character | Flag indicating games played flag for the requested NBA or WNBA Stats context. |
 | `draft_year` | character | Draft year (4-digit). |
 | `draft_round` | character | Round of the draft selection. |
-| `draft_number` | character | The number pick that was used to select a given player. |
+| `draft_number` | character |  |
 | `greatest_75_flag` | character | Flag indicating greatest 75 flag for the requested NBA or WNBA Stats context. |
 
 **`PlayerHeadlineStats`**
@@ -1513,7 +1513,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `game_id` | character | Unique game identifier. |
 | `home_team_id` | integer | Unique identifier for the home team. |
 | `visitor_team_id` | integer | Unique identifier for visitor team. |
-| `series_id` | character | Series identifier (e.g. 'W_1'). |
+| `series_id` | character |  |
 | `game_num` | integer | NBA or WNBA Stats value for game number in the commonplayoffseries result set. |
 
 **Row type:** `NbaStatsCommonplayoffseriesRow` (exported from the package root).
@@ -1532,7 +1532,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `player` | character | Player name. |
 | `nickname` | character | Team or athlete nickname. |
 | `player_slug` | character | URL-safe player identifier. |
-| `num` | character | Inning number. |
+| `num` | character |  |
 | `position` | character | Listed roster position (G, F, C, etc.). |
 | `height` | character | Player height (string e.g. '6-2' or inches). |
 | `weight` | character | Player weight in pounds. |
@@ -2003,7 +2003,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `player_id` | integer | Unique player identifier. |
 | `player_name` | character | Player name. |
-| `player_position` | character | Position of the player accordinng to NGS |
+| `player_position` | character |  |
 | `team_id` | integer | Unique team identifier. |
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `gp` | integer | Games played. |
@@ -2036,8 +2036,8 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_id` | integer | Unique team identifier. |
 | `team_city` | character | Team city or region (e.g. 'Las Vegas'). |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
-| `start_year` | character | Span starting year. |
-| `end_year` | character | Span ending year. |
+| `start_year` | character |  |
+| `end_year` | character |  |
 | `years` | integer | Years. |
 | `games` | integer | Games played. |
 | `wins` | integer | Total wins. |
@@ -2056,8 +2056,8 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_id` | integer | Unique team identifier. |
 | `team_city` | character | Team city or region (e.g. 'Las Vegas'). |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
-| `start_year` | character | Span starting year. |
-| `end_year` | character | Span ending year. |
+| `start_year` | character |  |
+| `end_year` | character |  |
 | `years` | integer | Years. |
 | `games` | integer | Games played. |
 | `wins` | integer | Total wins. |
@@ -2281,7 +2281,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `jersey_num` | character | Jersey number worn by the player. |
-| `player_position` | character | Position of the player accordinng to NGS |
+| `player_position` | character |  |
 | `pts` | numeric | Points scored. |
 
 **`HomePageStat2`**
@@ -2295,7 +2295,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `jersey_num` | character | Jersey number worn by the player. |
-| `player_position` | character | Position of the player accordinng to NGS |
+| `player_position` | character |  |
 | `reb` | numeric | Rebounds per game. |
 
 **`HomePageStat3`**
@@ -2309,7 +2309,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `jersey_num` | character | Jersey number worn by the player. |
-| `player_position` | character | Position of the player accordinng to NGS |
+| `player_position` | character |  |
 | `ast` | numeric | Assists. |
 
 **`HomePageStat4`**
@@ -2323,7 +2323,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `jersey_num` | character | Jersey number worn by the player. |
-| `player_position` | character | Position of the player accordinng to NGS |
+| `player_position` | character |  |
 | `stl` | numeric | Steals. |
 
 **`HomePageStat5`**
@@ -2337,7 +2337,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `jersey_num` | character | Jersey number worn by the player. |
-| `player_position` | character | Position of the player accordinng to NGS |
+| `player_position` | character |  |
 | `fg_pct` | numeric | Field goal percentage (0-1). |
 
 **`HomePageStat6`**
@@ -2351,7 +2351,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `jersey_num` | character | Jersey number worn by the player. |
-| `player_position` | character | Position of the player accordinng to NGS |
+| `player_position` | character |  |
 | `ft_pct` | numeric | Free throw percentage (0-1). |
 
 **`HomePageStat7`**
@@ -2365,7 +2365,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `jersey_num` | character | Jersey number worn by the player. |
-| `player_position` | character | Position of the player accordinng to NGS |
+| `player_position` | character |  |
 | `fg3_pct` | numeric | Three-point field goal percentage (0-1). |
 
 **`HomePageStat8`**
@@ -2379,7 +2379,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `jersey_num` | character | Jersey number worn by the player. |
-| `player_position` | character | Position of the player accordinng to NGS |
+| `player_position` | character |  |
 | `blk` | numeric | Blocks. |
 
 **Row type:** `NbaStatsHomepagev2Tables`, `NbaStatsHomepagev2HomePageStat1Row`, `NbaStatsHomepagev2HomePageStat2Row`, `NbaStatsHomepagev2HomePageStat3Row`, `NbaStatsHomepagev2HomePageStat4Row`, `NbaStatsHomepagev2HomePageStat5Row`, `NbaStatsHomepagev2HomePageStat6Row`, `NbaStatsHomepagev2HomePageStat7Row`, `NbaStatsHomepagev2HomePageStat8Row` (exported from the package root).
@@ -2464,7 +2464,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `jersey_num` | character | Jersey number worn by the player. |
-| `player_position` | character | Position of the player accordinng to NGS |
+| `player_position` | character |  |
 | `location` | character | Location. |
 | `fan_duel_pts` | numeric | Scoring or score-margin metric for fan duel points in the requested NBA or WNBA Stats split. |
 | `nba_fantasy_pts` | numeric | Nba fantasy points for the requested NBA or WNBA Stats split. |
@@ -2554,7 +2554,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `group_set` | character | Name of the grouping family used for this dashboard or split row. |
 | `group_id` | character | ESPN group id. |
-| `group_name` | character | Group name (conference / division). |
+| `group_name` | character |  |
 | `team_id` | integer | Unique team identifier. |
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `gp` | integer | Games played. |
@@ -2647,14 +2647,14 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_id` | integer | Unique team identifier. |
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `age` | numeric | Player age (in years). |
-| `player_height` | character | Participant height (e.g. "6' 5\""). |
+| `player_height` | character |  |
 | `player_height_inches` | integer | NBA or WNBA Stats value for player height inches in the leaguedashplayerbiostats result set. |
-| `player_weight` | character | Participant weight in pounds. |
+| `player_weight` | character |  |
 | `college` | character | College. |
 | `country` | character | Venue country. |
 | `draft_year` | character | Draft year (4-digit). |
 | `draft_round` | character | Round of the draft selection. |
-| `draft_number` | character | The number pick that was used to select a given player. |
+| `draft_number` | character |  |
 | `gp` | integer | Games played. |
 | `pts` | numeric | Points scored. |
 | `reb` | numeric | Rebounds per game. |
@@ -2892,7 +2892,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `player_name` | character | Player name. |
 | `player_last_team_id` | integer | Stats API identifier for player last team identifier associated with this NBA or WNBA Stats row. |
 | `player_last_team_abbreviation` | character | NBA or WNBA Stats value for player last team abbreviation in the leaguedashptdefend result set. |
-| `player_position` | character | Position of the player accordinng to NGS |
+| `player_position` | character |  |
 | `age` | numeric | Player age (in years). |
 | `gp` | integer | Games played. |
 | `g` | integer | Games played. |
@@ -3276,7 +3276,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | col_name | type | description |
 |---|---|---|
 | `group_id` | character | ESPN group id. |
-| `group_name` | character | Group name (conference / division). |
+| `group_name` | character |  |
 | `team_id` | integer | Unique team identifier. |
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `min` | numeric | Minutes played. |
@@ -3962,7 +3962,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `season_id` | character | Unique season identifier. |
 | `league_id` | character | League identifier ('10' = WNBA). |
 | `organization_id` | character |  |
-| `school_name` | character | School name. |
+| `school_name` | character |  |
 | `player_age` | character | NBA or WNBA Stats value for player age in the playercareerstats result set. |
 | `gp` | character | Games played. |
 | `gs` | character | Games started. |
@@ -7231,7 +7231,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `pass_to` | character |  |
 | `pass_teammate_player_id` | integer | Stats API identifier for pass teammate player identifier associated with this NBA or WNBA Stats row. |
 | `frequency` | numeric | NBA or WNBA Stats value for frequency in the playerdashptpass result set. |
-| `pass` | numeric | Binary indicator if the play was a pass play (sacks and scrambles included). |
+| `pass` | numeric |  |
 | `ast` | numeric | Assists. |
 | `fgm` | numeric | Field goals made. |
 | `fga` | numeric | Field goal attempts. |
@@ -7257,7 +7257,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `pass_from` | character | Passing or assist metric for pass from in the requested NBA or WNBA Stats split. |
 | `pass_teammate_player_id` | integer | Stats API identifier for pass teammate player identifier associated with this NBA or WNBA Stats row. |
 | `frequency` | numeric | NBA or WNBA Stats value for frequency in the playerdashptpass result set. |
-| `pass` | numeric | Binary indicator if the play was a pass play (sacks and scrambles included). |
+| `pass` | numeric |  |
 | `ast` | numeric | Assists. |
 | `fgm` | numeric | Field goals made. |
 | `fga` | numeric | Field goal attempts. |
@@ -7302,7 +7302,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `player_id` | integer | Unique player identifier. |
 | `player_name_last_first` | character | Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `shot_type_range` | character | Shooting metric for shot type range in the requested NBA or WNBA Stats split. |
 | `reb_frequency` | numeric | Rebounding metric for rebounds frequency in the requested NBA or WNBA Stats split. |
@@ -7324,7 +7324,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `player_id` | integer | Unique player identifier. |
 | `player_name_last_first` | character | Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `reb_num_contesting_range` | character |  |
 | `reb_frequency` | numeric | Rebounding metric for rebounds frequency in the requested NBA or WNBA Stats split. |
@@ -7346,7 +7346,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `player_id` | integer | Unique player identifier. |
 | `player_name_last_first` | character | Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `shot_dist_range` | character |  |
 | `reb_frequency` | numeric | Rebounding metric for rebounds frequency in the requested NBA or WNBA Stats split. |
@@ -7368,7 +7368,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `player_id` | integer | Unique player identifier. |
 | `player_name_last_first` | character | Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `reb_dist_range` | character |  |
 | `reb_frequency` | numeric | Rebounding metric for rebounds frequency in the requested NBA or WNBA Stats split. |
@@ -7413,7 +7413,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `player_id` | integer | Unique player identifier. |
 | `player_name_last_first` | character | Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `gp` | integer | Games played. |
 | `g` | integer | Games played. |
 | `shot_type` | character | Shot type label (e.g. 'Jump Shot', 'Layup'). |
@@ -7437,7 +7437,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `player_id` | integer | Unique player identifier. |
 | `player_name_last_first` | character | Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `gp` | integer | Games played. |
 | `g` | integer | Games played. |
 | `shot_type` | character | Shot type label (e.g. 'Jump Shot', 'Layup'). |
@@ -7461,7 +7461,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `player_id` | integer | Unique player identifier. |
 | `player_name_last_first` | character | Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `gp` | integer | Games played. |
 | `g` | integer | Games played. |
 | `shot_clock_range` | character |  |
@@ -7485,7 +7485,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `player_id` | integer | Unique player identifier. |
 | `player_name_last_first` | character | Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `gp` | integer | Games played. |
 | `g` | integer | Games played. |
 | `dribble_range` | character |  |
@@ -7509,7 +7509,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `player_id` | integer | Unique player identifier. |
 | `player_name_last_first` | character | Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `gp` | integer | Games played. |
 | `g` | integer | Games played. |
 | `close_def_dist_range` | character |  |
@@ -7533,7 +7533,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `player_id` | integer | Unique player identifier. |
 | `player_name_last_first` | character | Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `gp` | integer | Games played. |
 | `g` | integer | Games played. |
 | `close_def_dist_range` | character |  |
@@ -7557,7 +7557,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `player_id` | integer | Unique player identifier. |
 | `player_name_last_first` | character | Player display name formatted as Last, First for sorting in NBA or WNBA Stats tables. |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `gp` | integer | Games played. |
 | `g` | integer | Games played. |
 | `touch_time_range` | character | Time value for touch time range in the NBA or WNBA Stats result set. |
@@ -7986,8 +7986,8 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | col_name | type | description |
 |---|---|---|
 | `person_id` | integer | Unique player identifier (V3 endpoints). |
-| `player_last_name` | character | Participant last name. |
-| `player_first_name` | character | Participant first name. |
+| `player_last_name` | character |  |
+| `player_first_name` | character |  |
 | `player_slug` | character | URL-safe player identifier. |
 | `team_id` | integer | Unique team identifier. |
 | `team_slug` | character | URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). |
@@ -8003,8 +8003,8 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `country` | character | Venue country. |
 | `draft_year` | integer | Draft year (4-digit). |
 | `draft_round` | integer | Round of the draft selection. |
-| `draft_number` | integer | The number pick that was used to select a given player. |
-| `roster_status` | numeric | Payroll table the row came from: Active, IL, or Retained Salary. |
+| `draft_number` | integer |  |
+| `roster_status` | numeric |  |
 | `from_year` | character | First season. |
 | `to_year` | character | Most recent season. |
 | `pts` | numeric | Points scored. |
@@ -8209,7 +8209,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `season_id` | character | Unique season identifier. |
 | `league_id` | character | League identifier ('10' = WNBA). |
 | `organization_id` | character |  |
-| `school_name` | character | School name. |
+| `school_name` | character |  |
 | `player_age` | character | NBA or WNBA Stats value for player age in the playerprofilev2 result set. |
 | `gp` | character | Games played. |
 | `gs` | character | Games started. |
@@ -8427,7 +8427,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `game_date` | character | Game date (YYYY-MM-DD). |
 | `game_time` | character | Game start time. |
 | `location` | character | Location. |
-| `player_team_id` | integer | Unique team identifier of the primary player. |
+| `player_team_id` | integer |  |
 | `player_team_city` | character |  |
 | `player_team_nickname` | character |  |
 | `player_team_abbreviation` | character |  |
@@ -8610,7 +8610,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `display_first_last` | character |  |
 | `display_last_comma_first` | character |  |
 | `display_fi_last` | character |  |
-| `birthdate` | character | Date of birth. |
+| `birthdate` | character |  |
 | `school` | character | Player school / pre-draft team. |
 | `country` | character | Venue country. |
 | `last_affiliation` | character |  |
@@ -8625,7 +8625,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `display_first_last` | character |  |
 | `display_last_comma_first` | character |  |
 | `display_fi_last` | character |  |
-| `birthdate` | character | Date of birth. |
+| `birthdate` | character |  |
 | `school` | character | Player school / pre-draft team. |
 | `country` | character | Venue country. |
 | `last_affiliation` | character |  |
@@ -9047,7 +9047,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `awayteam_wins` | integer | Away team's win total entering the game. |
 | `gameclock` | character | Current game clock display for a live game. |
 | `gamecode` | character | Gamecode. |
-| `gamedate` | character | Game date as parsed from the source feed. |
+| `gamedate` | character |  |
 | `gameet` | character | Scheduled game start time in US Eastern time. |
 | `gameid` | character | Unique 10-character game identifier from the league's stats API. |
 | `gamelabel` | character | Display label for the game (e.g. a playoff series or event name). |
@@ -9190,7 +9190,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `game_id` | character | Unique game identifier. |
 | `game_event_id` | character | Unique identifier for game event. |
 | `group_id` | character | ESPN group id. |
-| `group_name` | character | Group name (conference / division). |
+| `group_name` | character |  |
 | `player_id` | character | Unique player identifier. |
 | `player_name` | character | Player name. |
 | `team_id` | character | Unique team identifier. |
@@ -10344,7 +10344,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `group_set` | character | Name of the grouping family used for this dashboard or split row. |
 | `group_value` | character | Specific grouping value for this dashboard or split row. |
-| `game_result` | character | Game result for the player's team (`W`/`L`). |
+| `game_result` | character |  |
 | `gp` | integer | Games played. |
 | `w` | integer | Wins. |
 | `l` | integer | Losses. |
@@ -11878,7 +11878,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `group_set` | character | Name of the grouping family used for this dashboard or split row. |
 | `group_id` | character | ESPN group id. |
-| `group_name` | character | Group name (conference / division). |
+| `group_name` | character |  |
 | `gp` | integer | Games played. |
 | `w` | integer | Wins. |
 | `l` | integer | Losses. |
@@ -11950,7 +11950,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `pass_from` | character |  |
 | `pass_teammate_player_id` | integer | Stats API identifier for pass teammate player identifier associated with this NBA or WNBA Stats row. |
 | `frequency` | numeric | NBA or WNBA Stats value for frequency in the teamdashptpass result set. |
-| `pass` | numeric | Binary indicator if the play was a pass play (sacks and scrambles included). |
+| `pass` | numeric |  |
 | `ast` | numeric | Assists. |
 | `fgm` | numeric | Field goals made. |
 | `fga` | numeric | Field goal attempts. |
@@ -11973,7 +11973,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `pass_to` | character | Passing or assist metric for pass to in the requested NBA or WNBA Stats split. |
 | `pass_teammate_player_id` | integer | Stats API identifier for pass teammate player identifier associated with this NBA or WNBA Stats row. |
 | `frequency` | numeric | NBA or WNBA Stats value for frequency in the teamdashptpass result set. |
-| `pass` | numeric | Binary indicator if the play was a pass play (sacks and scrambles included). |
+| `pass` | numeric |  |
 | `ast` | numeric | Assists. |
 | `fgm` | numeric | Field goals made. |
 | `fga` | numeric | Field goal attempts. |
@@ -12018,7 +12018,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `team_id` | integer | Unique team identifier. |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `shot_type_range` | character | Shooting metric for shot type range in the requested NBA or WNBA Stats split. |
 | `reb_frequency` | numeric | Rebounding metric for rebounds frequency in the requested NBA or WNBA Stats split. |
@@ -12040,7 +12040,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `team_id` | integer | Unique team identifier. |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `reb_num_contesting_range` | character |  |
 | `reb_frequency` | numeric | Rebounding metric for rebounds frequency in the requested NBA or WNBA Stats split. |
@@ -12062,7 +12062,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `team_id` | integer | Unique team identifier. |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `shot_dist_range` | character |  |
 | `reb_frequency` | numeric | Rebounding metric for rebounds frequency in the requested NBA or WNBA Stats split. |
@@ -12084,7 +12084,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `team_id` | integer | Unique team identifier. |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `reb_dist_range` | character |  |
 | `reb_frequency` | numeric | Rebounding metric for rebounds frequency in the requested NBA or WNBA Stats split. |
@@ -12112,7 +12112,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `team_id` | integer | Unique team identifier. |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `shot_type` | character | Shot type label (e.g. 'Jump Shot', 'Layup'). |
 | `fga_frequency` | numeric | Shooting metric for fga frequency in the requested NBA or WNBA Stats split. |
@@ -12135,7 +12135,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `team_id` | integer | Unique team identifier. |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `shot_clock_range` | character |  |
 | `fga_frequency` | numeric | Shooting metric for fga frequency in the requested NBA or WNBA Stats split. |
@@ -12158,7 +12158,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `team_id` | integer | Unique team identifier. |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `dribble_range` | character |  |
 | `fga_frequency` | numeric | Shooting metric for fga frequency in the requested NBA or WNBA Stats split. |
@@ -12181,7 +12181,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `team_id` | integer | Unique team identifier. |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `close_def_dist_range` | character |  |
 | `fga_frequency` | numeric | Shooting metric for fga frequency in the requested NBA or WNBA Stats split. |
@@ -12204,7 +12204,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `team_id` | integer | Unique team identifier. |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `close_def_dist_range` | character |  |
 | `fga_frequency` | numeric | Shooting metric for fga frequency in the requested NBA or WNBA Stats split. |
@@ -12227,7 +12227,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 |---|---|---|
 | `team_id` | integer | Unique team identifier. |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
-| `sort_order` | integer | Display sort order for the sport. |
+| `sort_order` | integer |  |
 | `g` | integer | Games played. |
 | `touch_time_range` | character | Time value for touch time range in the NBA or WNBA Stats result set. |
 | `fga_frequency` | numeric | Shooting metric for fga frequency in the requested NBA or WNBA Stats split. |
@@ -12485,7 +12485,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_abbreviation` | character | Short team abbreviation (e.g. 'LAS'). |
 | `team_conference` | character | Conference the team belongs to. |
 | `team_division` | character | Division the team belongs to. |
-| `team_code` | character | Internal team code. |
+| `team_code` | character |  |
 | `team_slug` | character | URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). |
 | `w` | integer | Wins. |
 | `l` | integer | Losses. |
@@ -13437,7 +13437,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `home_team_id` | integer | Unique identifier for the home team. |
 | `home_team_city` | character | Home team city / location. |
 | `home_team_name` | character | Home team name. |
-| `home_team_abbreviation` | character | Home team abbreviation. |
+| `home_team_abbreviation` | character |  |
 | `game_status` | integer | Game status label. |
 | `game_status_text` | character | Game status display text (e.g. 'Final', '4:32 - 4th'). |
 | `is_available` | integer | Flag indicating whether game video is available in the league's stats video system. |

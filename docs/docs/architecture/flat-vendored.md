@@ -35,6 +35,7 @@ sdv-py pin: [`afafaedae47b`](https://github.com/sportsdataverse/sportsdataverse-
 | `torvik` | 5 |
 | `pff_api` | 68 |
 | `nfl_pro` | 16 |
+| `kenpom` | 30 |
 | `bart_wbb` | 1 |
 | `on3` | 78 |
 | `asa` | 15 |

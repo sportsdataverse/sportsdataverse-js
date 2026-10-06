@@ -13,7 +13,7 @@ sidebar_position: 37
 - **Typed returns — generated row types for `parsed: true`** — TypeScript only. A wrapper's raw payload resolves to `unknown` (was `any`); verified endpoints resolve to their row interfaces; the summary dispatchers to `ParsedTables`. Narrow or cast a raw payload. ([changelog](/CHANGELOG#typescript--typed-returns-generated-row-types-for-parsed-true))
 - **Typed wrapper params and loader rows; `strict` mode** — TypeScript only. A param the endpoint does not have, a missing required path param or a non-boolean `bool` param is a type error; parser rows are `Record<string, unknown>`; loader rows are their generated row types. ([changelog](/CHANGELOG#typescript--typed-wrapper-params-and-loader-rows-strict-mode))
 - **Wrapper failures raise `NoDataError` / `AssetFetchError`** — Instead of raw axios errors. `NoDataError` = the fetch worked and there is nothing there (404, ESPN `{ code: 404 }`); `AssetFetchError` = the fetch failed (403 / 429 / 5xx after retries, network). Retries follow `DEFAULT_RETRY_STATUSES` with backoff. ([changelog](/CHANGELOG#error-vocabulary-pluggable-transport--auth))
-- **`sdv.yahoo.*` no longer defaults `league=ncaaf` or sets a locale** — The stats queries send no `lang` / `region` / `tz` and no default `league` — pass `league` explicitly. ([changelog](/CHANGELOG#changed))
+- **`sdv.yahoo.*` no longer defaults `league=ncaaf` or sets a locale** — The stats queries send no `lang` / `region` / `tz` and no default `league` — pass `league` explicitly. ([changelog](/CHANGELOG#400-2026-10-06))
 
 :::
 
@@ -168,15 +168,15 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `alias_lang` | character | Language/locale tag attached to the entity's Yahoo alias (e.g., "en-US"). |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `alias_domain` | character | Host the entity's Yahoo alias resolves against (e.g., "sports.yahoo.com"). |
-| `player_id` | character | Unique player identifier. |
-| `display_name` | character | Display name. |
-| `short_display_name` | character | Short display name. |
+| `player_id` | character |  |
+| `display_name` | character |  |
+| `short_display_name` | character |  |
 | `player_cutout` | character | JSON-encoded image node for the player's transparent cut-out portrait. |
 | `team_alias` | character | JSON-encoded alias object for the entity's team, carrying its Yahoo page URL and path. |
-| `team_display_name` | character | Full team display name. |
+| `team_display_name` | character |  |
 | `team_primary_color` | character | Primary brand color of the entity's team, as a hex RGB string without the leading hash. |
 | `team_secondary_color` | character | Secondary brand color of the entity's team, as a hex RGB string without the leading hash. |
-| `team_team_id` | character | Unique identifier for team team. |
+| `team_team_id` | character |  |
 | `team_team_logo_white` | character | JSON-encoded image node for the team's white knockout logo. |
 | `team_team_logo` | character | JSON-encoded image node for the team's standard logo. |
 | `team_gametime_ticket_url` | character | Gametime affiliate ticket-purchase URL for the team's home games. |
@@ -191,11 +191,11 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `alias_lang` | character | Language/locale tag attached to the entity's Yahoo alias (e.g., "en-US"). |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `alias_domain` | character | Host the entity's Yahoo alias resolves against (e.g., "sports.yahoo.com"). |
-| `display_name` | character | Display name. |
-| `nickname` | character | Team or athlete nickname. |
-| `primary_color` | character | Primary team color (hex). |
-| `secondary_color` | character | Secondary team color (hex). |
-| `team_id` | character | Unique team identifier. |
+| `display_name` | character |  |
+| `nickname` | character |  |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
+| `team_id` | character |  |
 | `team_logo_white_width` | character | Pixel width of the team's white knockout logo image. |
 | `team_logo_white_last_updated` | character | Timestamp at which the team's white knockout logo asset was last refreshed. |
 | `team_logo_white_image_type` | character | File format of the team's white knockout logo asset (e.g., "png"). |
@@ -216,8 +216,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `player_id` | character | Unique player identifier. |
-| `display_name` | character | Display name. |
+| `player_id` | character |  |
+| `display_name` | character |  |
 | `suggested_headshot` | character | JSON-encoded image node for the headshot Yahoo recommends for this player. |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 
@@ -228,7 +228,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `disclaimer_id` | character | Identifier of the responsible-gambling disclaimer block to render alongside the odds. |
-| `text` | character | Text description of the play / record. |
+| `text` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -236,8 +236,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `short_name` | character | Short display name. |
-| `full_name` | character | Player's full name. |
+| `short_name` | character |  |
+| `full_name` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -245,8 +245,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `short_name` | character | Short display name. |
-| `full_name` | character | Player's full name. |
+| `short_name` | character |  |
+| `full_name` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -254,7 +254,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `game_id` | character | Unique game identifier. |
+| `game_id` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -266,14 +266,14 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `alias_lang` | character | Language/locale tag attached to the entity's Yahoo alias (e.g., "en-US"). |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `alias_domain` | character | Host the entity's Yahoo alias resolves against (e.g., "sports.yahoo.com"). |
-| `game_id` | character | Unique game identifier. |
-| `status` | character | Status label. |
+| `game_id` | character |  |
+| `status` | character |  |
 | `away_team_team_id` | character | Yahoo composite team id of the away team (e.g., "ncaaf.t.29"). |
 | `away_team_primary_color` | character | Primary brand color of the away team, as a hex RGB string without the leading hash. |
-| `away_team_display_name` | character | Away team full display name. |
+| `away_team_display_name` | character |  |
 | `home_team_team_id` | character | Yahoo composite team id of the home team (e.g., "ncaaf.t.29"). |
 | `home_team_primary_color` | character | Primary brand color of the home team, as a hex RGB string without the leading hash. |
-| `home_team_display_name` | character | Home team full display name. |
+| `home_team_display_name` | character |  |
 | `active_prop_bets` | list | JSON-encoded list of the prop-bet markets currently open for the game. |
 | `game_props` | list | JSON-encoded list of player and game prop markets offered on the game. |
 
@@ -283,7 +283,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `status` | character | Status label. |
+| `status` | character |  |
 | `league_full_name` | character | Full league name (e.g., "NCAA Football"). |
 | `league_football_team_season_stats0` | character | JSON-encoded league-wide team season-stat leader board occupying slot 0 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
 | `league_football_team_season_stats1` | character | JSON-encoded league-wide team season-stat leader board occupying slot 1 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
@@ -307,13 +307,13 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `home_team_game_stats1_stats` | character | JSON-encoded home-team game-stat block occupying slot 1 of that team's game-stats list; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
 | `home_team_lineup` | list | JSON-encoded starting lineup fielded by the home team. |
 | `away_team_lineup` | list | JSON-encoded starting lineup fielded by the away team. |
-| `away_team_id` | character | Unique identifier for the away team. |
-| `away_team_full_name` | character | Full away team name (e.g. 'Las Vegas Aces'). |
+| `away_team_id` | character |  |
+| `away_team_full_name` | character |  |
 | `away_team_team_id` | character | Yahoo composite team id of the away team (e.g., "ncaaf.t.29"). |
 | `away_team_primary_color` | character | Primary brand color of the away team, as a hex RGB string without the leading hash. |
 | `away_team_secondary_color` | character | Secondary brand color of the away team, as a hex RGB string without the leading hash. |
-| `away_team_display_name` | character | Away team full display name. |
-| `away_team_abbreviation` | character | Away team abbreviation. |
+| `away_team_display_name` | character |  |
+| `away_team_abbreviation` | character |  |
 | `away_team_team_logo_white` | character | JSON-encoded image node for the away team's white knockout logo, used on dark backgrounds. |
 | `away_team_team_logo` | character | JSON-encoded image node for the away team's standard logo. |
 | `away_team_league` | character | JSON-encoded league node identifying the league the away team plays in. |
@@ -329,13 +329,13 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `away_team_player_season_stats5` | character | JSON-encoded away-team player season-stat block occupying slot 5 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
 | `away_team_player_season_stats6` | character | JSON-encoded away-team player season-stat block occupying slot 6 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
 | `away_team_player_season_stats7` | character | JSON-encoded away-team player season-stat block occupying slot 7 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_id` | character | Unique identifier for the home team. |
-| `home_team_full_name` | character | Full home team name (e.g. 'Las Vegas Aces'). |
+| `home_team_id` | character |  |
+| `home_team_full_name` | character |  |
 | `home_team_team_id` | character | Yahoo composite team id of the home team (e.g., "ncaaf.t.29"). |
 | `home_team_primary_color` | character | Primary brand color of the home team, as a hex RGB string without the leading hash. |
 | `home_team_secondary_color` | character | Secondary brand color of the home team, as a hex RGB string without the leading hash. |
-| `home_team_display_name` | character | Home team full display name. |
-| `home_team_abbreviation` | character | Home team abbreviation. |
+| `home_team_display_name` | character |  |
+| `home_team_abbreviation` | character |  |
 | `home_team_team_logo_white` | character | JSON-encoded image node for the home team's white knockout logo, used on dark backgrounds. |
 | `home_team_team_logo` | character | JSON-encoded image node for the home team's standard logo. |
 | `home_team_league` | character | JSON-encoded league node identifying the league the home team plays in. |
@@ -358,7 +358,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `game_id` | character | Unique game identifier. |
+| `game_id` | character |  |
 | `gametime_ticket_url` | character | Gametime affiliate ticket-purchase URL for the event or team. |
 | `game_ticket_price` | character | Lowest available ticket price for the game from the Gametime affiliate feed, in US dollars. |
 
@@ -369,7 +369,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `gametime_ticket_url` | character | Gametime affiliate ticket-purchase URL for the event or team. |
-| `team_id` | character | Unique team identifier. |
+| `team_id` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -380,20 +380,20 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `alias_path` | character | Site-relative path portion of the entity's Yahoo alias (e.g., "/ncaaf/teams/tcu/"). |
 | `event_group_id` | character | Yahoo identifier that groups the rounds or legs making up a single tournament. |
-| `name` | character | Display name. |
-| `display_name` | character | Display name. |
-| `start_time` | character | Kickoff time in eastern time zone. |
-| `start_date` | character | Start date (YYYY-MM-DD). |
-| `end_date` | character | End date (YYYY-MM-DD). |
-| `status` | character | Status label. |
+| `name` | character |  |
+| `display_name` | character |  |
+| `start_time` | character |  |
+| `start_date` | character |  |
+| `end_date` | character |  |
+| `status` | character |  |
 | `status_display_name` | character | Short game or event status as shown on the scoreboard (e.g., "Final", "12:00 pm ET"). |
 | `player_tournament_stats` | list | JSON-encoded per-player statistics recorded at the golf tournament. |
 | `purse` | character | Total prize money on offer at the tournament, in US dollars. |
 | `major` | logical | Flag indicating that the golf tournament is one of the sport's majors. |
 | `venue_display_name` | character | Name of the venue hosting the event. |
 | `venue_country` | character | Country the venue is located in. |
-| `venue_city` | character | Venue city. |
-| `venue_state` | character | Venue state / region. |
+| `venue_city` | character |  |
+| `venue_state` | character |  |
 | `par` | numeric | Par of the golf course in play for the tournament. |
 | `yardage` | numeric | Total yardage of the golf course in play for the tournament. |
 
@@ -404,18 +404,18 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `event_group_id` | character | Yahoo identifier that groups the rounds or legs making up a single tournament. |
-| `start_time` | character | Kickoff time in eastern time zone. |
-| `start_date` | character | Start date (YYYY-MM-DD). |
-| `end_date` | character | End date (YYYY-MM-DD). |
-| `season` | numeric | Season year. |
+| `start_time` | character |  |
+| `start_date` | character |  |
+| `end_date` | character |  |
+| `season` | numeric |  |
 | `clubs` | list | JSON-encoded list of the golf clubs hosting the tournament. |
 | `courses` | list | JSON-encoded list of the courses in play at the tournament, with their par and yardage. |
-| `name` | character | Display name. |
-| `status` | character | Status label. |
+| `name` | character |  |
+| `status` | character |  |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `alias_path` | character | Site-relative path portion of the entity's Yahoo alias (e.g., "/ncaaf/teams/tcu/"). |
 | `association` | character | Governing tour that sanctions the event (e.g., "pga"). |
-| `league_short_name` | character | League short name. |
+| `league_short_name` | character |  |
 | `league_full_name` | character | Full league name (e.g., "NCAA Football"). |
 | `league_alias` | character | JSON-encoded Yahoo alias object for the league, carrying its site URL and path. |
 | `purse` | character | Total prize money on offer at the tournament, in US dollars. |
@@ -426,7 +426,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `short_name` | character | Short display name. |
+| `short_name` | character |  |
 | `conferences` | list | JSON-encoded list of the league's conference nodes, each carrying an id, a name and its member teams. |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
@@ -436,12 +436,12 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `sport_sport_id` | character | Yahoo identifier of the sport the league belongs to. |
-| `sport_name` | character | Sport name (e.g., Major League Baseball). |
-| `short_name` | character | Short display name. |
-| `full_name` | character | Player's full name. |
-| `name` | character | Display name. |
+| `sport_name` | character |  |
+| `short_name` | character |  |
+| `full_name` | character |  |
+| `name` | character |  |
 | `current_league_day` | list | Calendar date the league's live scoreboard is anchored on, in YYYY-MM-DD form. |
-| `teams` | list | Nested list of member-team membership spans. |
+| `teams` | list |  |
 | `current_week` | numeric | Week number within the league's current season phase, counting from 1. |
 | `current_season_phase` | character | Phase of the season currently in effect (e.g., "season.phase.season", "season.phase.offseason"). |
 | `current_game_season_phase` | character | Season phase of the games the league feed is currently serving. |
@@ -460,7 +460,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `bets` | list | JSON-encoded list of the betting markets offered on the event (spread, moneyline and total). |
-| `league` | character | League slug. |
+| `league` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -471,7 +471,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `alias_navigation_links` | character | JSON-encoded map of navigation links (scores, standings, teams) hanging off the entity's Yahoo alias. |
 | `current_week` | numeric | Week number within the league's current season phase, counting from 1. |
-| `games` | list | Games played. |
+| `games` | list |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -480,12 +480,12 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `display_short` | character | Short league label used in navigation and compact UI (e.g., "NCAA FB"). |
-| `full_name` | character | Player's full name. |
-| `name` | character | Display name. |
+| `full_name` | character |  |
+| `name` | character |  |
 | `current_week` | numeric | Week number within the league's current season phase, counting from 1. |
 | `current_game_season_phase` | character | Season phase of the games the league feed is currently serving. |
 | `current_league_season` | list | Yahoo league-season identifier for the season currently in progress. |
-| `games` | list | Games played. |
+| `games` | list |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -494,9 +494,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `display_short` | character | Short league label used in navigation and compact UI (e.g., "NCAA FB"). |
-| `name` | character | Display name. |
-| `full_name` | character | Player's full name. |
-| `short_name` | character | Short display name. |
+| `name` | character |  |
+| `full_name` | character |  |
+| `short_name` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -504,7 +504,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `teams` | list | Nested list of member-team membership spans. |
+| `teams` | list |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -512,10 +512,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `league_id` | numeric | League identifier ('10' = WNBA). |
-| `short_name` | character | Short display name. |
-| `full_name` | character | Player's full name. |
-| `name` | character | Display name. |
+| `league_id` | numeric |  |
+| `short_name` | character |  |
+| `full_name` | character |  |
+| `name` | character |  |
 | `display_short` | character | Short league label used in navigation and compact UI (e.g., "NCAA FB"). |
 | `display_abbr` | character | Compact league abbreviation used in dense UI (e.g., "NCAAF"). |
 | `current_season` | numeric | Season the league is currently playing, as the four-digit starting year. |
@@ -530,11 +530,11 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `sport_name` | character | Sport name (e.g., Major League Baseball). |
+| `sport_name` | character |  |
 | `current_season_phase` | character | Phase of the season currently in effect (e.g., "season.phase.season", "season.phase.offseason"). |
 | `current_league_season` | list | Yahoo league-season identifier for the season currently in progress. |
 | `divisions` | list | JSON-encoded list of the league's division nodes, each carrying its member conferences and teams. |
-| `teams` | list | Nested list of member-team membership spans. |
+| `teams` | list |  |
 | `conferences` | list | JSON-encoded list of the league's conference nodes, each carrying an id, a name and its member teams. |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
@@ -544,10 +544,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `sport_sport_id` | character | Yahoo identifier of the sport the league belongs to. |
-| `sport_name` | character | Sport name (e.g., Major League Baseball). |
-| `short_name` | character | Short display name. |
-| `full_name` | character | Player's full name. |
-| `name` | character | Display name. |
+| `sport_name` | character |  |
+| `short_name` | character |  |
+| `full_name` | character |  |
+| `name` | character |  |
 | `football_stats` | list | JSON-encoded football statistics block returned by the league stats query. |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
@@ -557,10 +557,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `sport_sport_id` | character | Yahoo identifier of the sport the league belongs to. |
-| `sport_name` | character | Sport name (e.g., Major League Baseball). |
-| `short_name` | character | Short display name. |
-| `full_name` | character | Player's full name. |
-| `name` | character | Display name. |
+| `sport_name` | character |  |
+| `short_name` | character |  |
+| `full_name` | character |  |
+| `name` | character |  |
 | `football_stats` | list | JSON-encoded football statistics block returned by the league stats query. |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
@@ -570,10 +570,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `sport_sport_id` | character | Yahoo identifier of the sport the league belongs to. |
-| `sport_name` | character | Sport name (e.g., Major League Baseball). |
-| `short_name` | character | Short display name. |
-| `full_name` | character | Player's full name. |
-| `name` | character | Display name. |
+| `sport_name` | character |  |
+| `short_name` | character |  |
+| `full_name` | character |  |
+| `name` | character |  |
 | `football_stats` | list | JSON-encoded football statistics block returned by the league stats query. |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
@@ -582,8 +582,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `short_name` | character | Short display name. |
-| `teams` | list | Nested list of member-team membership spans. |
+| `short_name` | character |  |
+| `teams` | list |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -591,8 +591,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `short_name` | character | Short display name. |
-| `teams` | list | Nested list of member-team membership spans. |
+| `short_name` | character |  |
+| `teams` | list |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -600,15 +600,15 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `name` | character | Display name. |
-| `short_name` | character | Short display name. |
-| `full_name` | character | Player's full name. |
+| `name` | character |  |
+| `short_name` | character |  |
+| `full_name` | character |  |
 | `display_short` | character | Short league label used in navigation and compact UI (e.g., "NCAA FB"). |
 | `current_season_phase` | character | Phase of the season currently in effect (e.g., "season.phase.season", "season.phase.offseason"). |
 | `current_week` | numeric | Week number within the league's current season phase, counting from 1. |
 | `current_season` | numeric | Season the league is currently playing, as the four-digit starting year. |
 | `stats_season` | list | Season the returned statistics cover, as a four-digit year. |
-| `sport_name` | character | Sport name (e.g., Major League Baseball). |
+| `sport_name` | character |  |
 | `league_weeks` | list | JSON-encoded list of the league's week nodes for the season. |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `alias_navigation_links` | character | JSON-encoded map of navigation links (scores, standings, teams) hanging off the entity's Yahoo alias. |
@@ -622,63 +622,63 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `game_id` | character | Unique game identifier. |
-| `display_name` | character | Display name. |
-| `league_name` | character | League name. |
+| `game_id` | character |  |
+| `display_name` | character |  |
+| `league_name` | character |  |
 | `league_full_name` | character | Full league name (e.g., "NCAA Football"). |
 | `league_display_abbr` | character | Compact league abbreviation used in dense UI alongside the game. |
 | `league_display_short` | character | Short league label used in navigation and compact UI (e.g., "NCAA FB"). |
-| `league_short_name` | character | League short name. |
+| `league_short_name` | character |  |
 | `league_sport` | character | Sport the league belongs to (e.g., "football"). |
 | `league_alias` | character | JSON-encoded Yahoo alias object for the league, carrying its site URL and path. |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
-| `away_team_id` | character | Unique identifier for the away team. |
-| `away_team_record` | character | Away team's win-loss record. |
-| `away_team_full_name` | character | Full away team name (e.g. 'Las Vegas Aces'). |
+| `away_team_id` | character |  |
+| `away_team_record` | character |  |
+| `away_team_full_name` | character |  |
 | `away_team_team_id` | character | Yahoo composite team id of the away team (e.g., "ncaaf.t.29"). |
 | `away_team_primary_color` | character | Primary brand color of the away team, as a hex RGB string without the leading hash. |
 | `away_team_secondary_color` | character | Secondary brand color of the away team, as a hex RGB string without the leading hash. |
-| `away_team_display_name` | character | Away team full display name. |
-| `away_team_abbreviation` | character | Away team abbreviation. |
-| `away_team_location` | character | Away team's team location. |
+| `away_team_display_name` | character |  |
+| `away_team_abbreviation` | character |  |
+| `away_team_location` | character |  |
 | `away_team_gametime_ticket_url` | character | Gametime affiliate ticket-purchase URL for the away team's games. |
 | `away_team_alias` | character | JSON-encoded Yahoo alias object for the away team, carrying its site URL and path. |
-| `away_team_nickname` | character | Away team nickname label. |
+| `away_team_nickname` | character |  |
 | `away_team_last_games` | character | JSON-encoded list of the away team's most recently completed games. |
 | `away_team_team_logo_white` | character | JSON-encoded image node for the away team's white knockout logo, used on dark backgrounds. |
 | `away_team_team_logo` | character | JSON-encoded image node for the away team's standard logo. |
 | `away_team_team_standings` | character | JSON-encoded standings node for the away team, carrying its record, position and streak. |
 | `away_team_rank_polls` | character | JSON-encoded list of the poll rankings the away team currently holds. |
 | `away_team_playoff_seeds` | character | JSON-encoded list of the away team's playoff-seed entries for the season. |
-| `home_team_id` | character | Unique identifier for the home team. |
-| `home_team_record` | character | Home team's win-loss record. |
-| `home_team_full_name` | character | Full home team name (e.g. 'Las Vegas Aces'). |
+| `home_team_id` | character |  |
+| `home_team_record` | character |  |
+| `home_team_full_name` | character |  |
 | `home_team_team_id` | character | Yahoo composite team id of the home team (e.g., "ncaaf.t.29"). |
 | `home_team_primary_color` | character | Primary brand color of the home team, as a hex RGB string without the leading hash. |
 | `home_team_secondary_color` | character | Secondary brand color of the home team, as a hex RGB string without the leading hash. |
-| `home_team_display_name` | character | Home team full display name. |
-| `home_team_abbreviation` | character | Home team abbreviation. |
-| `home_team_location` | character | Home team's team location. |
+| `home_team_display_name` | character |  |
+| `home_team_abbreviation` | character |  |
+| `home_team_location` | character |  |
 | `home_team_gametime_ticket_url` | character | Gametime affiliate ticket-purchase URL for the home team's games. |
 | `home_team_alias` | character | JSON-encoded Yahoo alias object for the home team, carrying its site URL and path. |
-| `home_team_nickname` | character | Home team nickname label. |
+| `home_team_nickname` | character |  |
 | `home_team_last_games` | character | JSON-encoded list of the home team's most recently completed games. |
 | `home_team_team_logo_white` | character | JSON-encoded image node for the home team's white knockout logo, used on dark backgrounds. |
 | `home_team_team_logo` | character | JSON-encoded image node for the home team's standard logo. |
 | `home_team_team_standings` | character | JSON-encoded standings node for the home team, carrying its record, position and streak. |
 | `home_team_rank_polls` | character | JSON-encoded list of the poll rankings the home team currently holds. |
 | `home_team_playoff_seeds` | character | JSON-encoded list of the home team's playoff-seed entries for the season. |
-| `away_score` | numeric | Away team score at the time of the play. |
-| `home_score` | numeric | Home team score at the time of the play. |
-| `start_time` | character | Kickoff time in eastern time zone. |
-| `start_date` | character | Start date (YYYY-MM-DD). |
-| `if_necessary` | character | If necessary. |
-| `status` | character | Status label. |
+| `away_score` | numeric |  |
+| `home_score` | numeric |  |
+| `start_time` | character |  |
+| `start_date` | character |  |
+| `if_necessary` | character |  |
+| `status` | character |  |
 | `status_display_name` | character | Short game or event status as shown on the scoreboard (e.g., "Final", "12:00 pm ET"). |
-| `season` | numeric | Season year. |
+| `season` | numeric |  |
 | `season_phase` | character | Phase of the season the game falls in (e.g., "season.phase.season"). |
-| `time_left` | character | Time left. |
-| `tournament_id` | character | ESPN tournament identifier. |
+| `time_left` | character |  |
+| `tournament_id` | character |  |
 | `gametime_ticket_url` | character | Gametime affiliate ticket-purchase URL for the event or team. |
 | `game_ticket_price` | character | Lowest available ticket price for the game from the Gametime affiliate feed, in US dollars. |
 | `playoff_series` | character | JSON-encoded playoff-series node the game belongs to. |
@@ -692,25 +692,25 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `event_extended_display_name` | character | Long-form event title used for marquee games, such as a bowl or rivalry name. |
 | `bets` | list | JSON-encoded list of the betting markets offered on the event (spread, moneyline and total). |
 | `venue_display_name` | character | Name of the venue hosting the event. |
-| `venue_city` | character | Venue city. |
+| `venue_city` | character |  |
 | `venue_cover_type` | character | Whether the venue is open-air, domed or fitted with a retractable roof. |
-| `venue_state` | character | Venue state / region. |
+| `venue_state` | character |  |
 | `venue_venue_id` | character | Yahoo identifier of the venue hosting the event. |
 | `venue_country` | character | Country the venue is located in. |
 | `tv_coverage` | character | Network carrying the game, as a short broadcast abbreviation (e.g., "CBS", "ESPN"). |
-| `weather` | character | String describing the weather including temperature, humidity and wind (direction and speed). Doesn't change during the game! |
+| `weather` | character |  |
 | `away_line_score` | list | JSON-encoded per-period scoring line for the away team. |
 | `current_period_period` | character | Ordinal number of the period currently in progress within the game. |
 | `field_position` | character | Ball spot expressed on Yahoo's 0-100 field scale, measured toward the offense's target goal line. |
 | `field_position_display_name` | character | Ball spot rendered the way a scoreboard shows it (e.g., "MICH 35"). |
 | `home_line_score` | list | JSON-encoded per-period scoring line for the home team. |
-| `home_timeouts_remaining` | numeric | Numeric timeouts remaining in the half for the home team. |
-| `away_timeouts_remaining` | numeric | Numeric timeouts remaining in the half for the away team. |
-| `last_play` | list | Free-text description of the most recent play. |
+| `home_timeouts_remaining` | numeric |  |
+| `away_timeouts_remaining` | numeric |  |
+| `last_play` | list |  |
 | `game_stat_leaders` | list | JSON-encoded pointer to the per-category statistical leaders for the game. |
 | `team_possessing_ball` | character | Yahoo team id of the side currently possessing the ball. |
 | `recap_videos` | list | JSON-encoded list of recap videos published for the game. |
-| `week` | numeric | Week number. |
+| `week` | numeric |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -718,8 +718,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `name` | character | Display name. |
-| `full_name` | character | Player's full name. |
+| `name` | character |  |
+| `full_name` | character |  |
 | `current_league_season` | list | Yahoo league-season identifier for the season currently in progress. |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
@@ -728,8 +728,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `short_name` | character | Short display name. |
-| `players` | list | Nested list of per-player box scores. |
+| `short_name` | character |  |
+| `players` | list |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -737,8 +737,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `short_name` | character | Short display name. |
-| `teams` | list | Nested list of member-team membership spans. |
+| `short_name` | character |  |
+| `teams` | list |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -746,11 +746,11 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `display_name` | character | Display name. |
-| `short_display_name` | character | Short display name. |
-| `start_date` | character | Start date (YYYY-MM-DD). |
-| `end_date` | character | End date (YYYY-MM-DD). |
-| `season` | numeric | Season year. |
+| `display_name` | character |  |
+| `short_display_name` | character |  |
+| `start_date` | character |  |
+| `end_date` | character |  |
+| `season` | numeric |  |
 | `alias` | character | JSON-encoded Yahoo alias object for the entity, carrying the site URL, path and subpage routing used to build links to its page. |
 | `olympic_team` | list | JSON-encoded national team node whose medal count this row reports. |
 
@@ -760,9 +760,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `season` | numeric | Season year. |
-| `display_name` | character | Display name. |
-| `type` | character | Record type / category. |
+| `season` | numeric |  |
+| `display_name` | character |  |
+| `type` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -779,9 +779,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `position_id` | character | Unique position identifier. |
-| `name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
+| `position_id` | character |  |
+| `name` | character |  |
+| `abbreviation` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -789,9 +789,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `position_id` | character | Unique position identifier. |
-| `name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
+| `position_id` | character |  |
+| `name` | character |  |
+| `abbreviation` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -799,20 +799,20 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `game_id` | character | Unique game identifier. |
-| `away_team_active` | character | Whether the away team is active. |
+| `game_id` | character |  |
+| `away_team_active` | character |  |
 | `away_team_primary_color` | character | Primary brand color of the away team, as a hex RGB string without the leading hash. |
 | `away_team_secondary_color` | character | Secondary brand color of the away team, as a hex RGB string without the leading hash. |
 | `away_team_team_logo_white` | character | JSON-encoded image node for the away team's white knockout logo, used on dark backgrounds. |
 | `away_team_team_logo` | character | JSON-encoded image node for the away team's standard logo. |
-| `home_team_active` | character | Whether the home team is active. |
+| `home_team_active` | character |  |
 | `home_team_primary_color` | character | Primary brand color of the home team, as a hex RGB string without the leading hash. |
 | `home_team_secondary_color` | character | Secondary brand color of the home team, as a hex RGB string without the leading hash. |
 | `home_team_team_logo_white` | character | JSON-encoded image node for the home team's white knockout logo, used on dark backgrounds. |
 | `home_team_team_logo` | character | JSON-encoded image node for the home team's standard logo. |
 | `league_league_logo` | character | JSON-encoded image node for the league's logo. |
-| `start_time` | character | Kickoff time in eastern time zone. |
-| `start_date` | character | Start date (YYYY-MM-DD). |
+| `start_time` | character |  |
+| `start_date` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -820,25 +820,25 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `game_id` | character | Unique game identifier. |
-| `display_name` | character | Display name. |
-| `league_name` | character | League name. |
+| `game_id` | character |  |
+| `display_name` | character |  |
+| `league_name` | character |  |
 | `league_full_name` | character | Full league name (e.g., "NCAA Football"). |
 | `league_display_short` | character | Short league label used in navigation and compact UI (e.g., "NCAA FB"). |
-| `league_short_name` | character | League short name. |
+| `league_short_name` | character |  |
 | `league_sport` | character | Sport the league belongs to (e.g., "football"). |
 | `league_alias` | character | JSON-encoded Yahoo alias object for the league, carrying its site URL and path. |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
-| `away_team_id` | character | Unique identifier for the away team. |
-| `away_team_full_name` | character | Full away team name (e.g. 'Las Vegas Aces'). |
+| `away_team_id` | character |  |
+| `away_team_full_name` | character |  |
 | `away_team_team_id` | character | Yahoo composite team id of the away team (e.g., "ncaaf.t.29"). |
 | `away_team_primary_color` | character | Primary brand color of the away team, as a hex RGB string without the leading hash. |
 | `away_team_secondary_color` | character | Secondary brand color of the away team, as a hex RGB string without the leading hash. |
-| `away_team_display_name` | character | Away team full display name. |
-| `away_team_abbreviation` | character | Away team abbreviation. |
-| `away_team_location` | character | Away team's team location. |
+| `away_team_display_name` | character |  |
+| `away_team_abbreviation` | character |  |
+| `away_team_location` | character |  |
 | `away_team_alias` | character | JSON-encoded Yahoo alias object for the away team, carrying its site URL and path. |
-| `away_team_nickname` | character | Away team nickname label. |
+| `away_team_nickname` | character |  |
 | `away_team_last_games` | character | JSON-encoded list of the away team's most recently completed games. |
 | `away_team_team_logo_white` | character | JSON-encoded image node for the away team's white knockout logo, used on dark backgrounds. |
 | `away_team_team_logo` | character | JSON-encoded image node for the away team's standard logo. |
@@ -846,16 +846,16 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `away_team_players` | character | JSON-encoded roster of away-team players attached to the game. |
 | `away_team_rank_polls` | character | JSON-encoded list of the poll rankings the away team currently holds. |
 | `away_team_playoff_seeds` | character | JSON-encoded list of the away team's playoff-seed entries for the season. |
-| `home_team_id` | character | Unique identifier for the home team. |
-| `home_team_full_name` | character | Full home team name (e.g. 'Las Vegas Aces'). |
+| `home_team_id` | character |  |
+| `home_team_full_name` | character |  |
 | `home_team_team_id` | character | Yahoo composite team id of the home team (e.g., "ncaaf.t.29"). |
 | `home_team_primary_color` | character | Primary brand color of the home team, as a hex RGB string without the leading hash. |
 | `home_team_secondary_color` | character | Secondary brand color of the home team, as a hex RGB string without the leading hash. |
-| `home_team_display_name` | character | Home team full display name. |
-| `home_team_abbreviation` | character | Home team abbreviation. |
-| `home_team_location` | character | Home team's team location. |
+| `home_team_display_name` | character |  |
+| `home_team_abbreviation` | character |  |
+| `home_team_location` | character |  |
 | `home_team_alias` | character | JSON-encoded Yahoo alias object for the home team, carrying its site URL and path. |
-| `home_team_nickname` | character | Home team nickname label. |
+| `home_team_nickname` | character |  |
 | `home_team_last_games` | character | JSON-encoded list of the home team's most recently completed games. |
 | `home_team_team_logo_white` | character | JSON-encoded image node for the home team's white knockout logo, used on dark backgrounds. |
 | `home_team_team_logo` | character | JSON-encoded image node for the home team's standard logo. |
@@ -863,17 +863,17 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `home_team_players` | character | JSON-encoded roster of home-team players attached to the game. |
 | `home_team_rank_polls` | character | JSON-encoded list of the poll rankings the home team currently holds. |
 | `home_team_playoff_seeds` | character | JSON-encoded list of the home team's playoff-seed entries for the season. |
-| `away_score` | numeric | Away team score at the time of the play. |
-| `home_score` | numeric | Home team score at the time of the play. |
-| `start_time` | character | Kickoff time in eastern time zone. |
-| `start_date` | character | Start date (YYYY-MM-DD). |
-| `if_necessary` | character | If necessary. |
-| `status` | character | Status label. |
+| `away_score` | numeric |  |
+| `home_score` | numeric |  |
+| `start_time` | character |  |
+| `start_date` | character |  |
+| `if_necessary` | character |  |
+| `status` | character |  |
 | `status_display_name` | character | Short game or event status as shown on the scoreboard (e.g., "Final", "12:00 pm ET"). |
-| `season` | numeric | Season year. |
+| `season` | numeric |  |
 | `season_phase` | character | Phase of the season the game falls in (e.g., "season.phase.season"). |
-| `time_left` | character | Time left. |
-| `tournament_id` | character | ESPN tournament identifier. |
+| `time_left` | character |  |
+| `tournament_id` | character |  |
 | `playoff_series` | character | JSON-encoded playoff-series node the game belongs to. |
 | `winning_team_id` | character | Composite Yahoo team id of the side that won the game (e.g., "ncaaf.t.29"). |
 | `broadcast_channels` | list | JSON-encoded list of the channels broadcasting the event. |
@@ -884,25 +884,25 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `brief` | character | Short editorial blurb summarizing the game's state or result. |
 | `bets` | list | JSON-encoded list of the betting markets offered on the event (spread, moneyline and total). |
 | `venue_display_name` | character | Name of the venue hosting the event. |
-| `venue_city` | character | Venue city. |
+| `venue_city` | character |  |
 | `venue_cover_type` | character | Whether the venue is open-air, domed or fitted with a retractable roof. |
-| `venue_state` | character | Venue state / region. |
+| `venue_state` | character |  |
 | `venue_venue_id` | character | Yahoo identifier of the venue hosting the event. |
 | `venue_country` | character | Country the venue is located in. |
 | `tv_coverage` | character | Network carrying the game, as a short broadcast abbreviation (e.g., "CBS", "ESPN"). |
-| `weather` | character | String describing the weather including temperature, humidity and wind (direction and speed). Doesn't change during the game! |
+| `weather` | character |  |
 | `away_line_score` | list | JSON-encoded per-period scoring line for the away team. |
 | `current_period_period` | character | Ordinal number of the period currently in progress within the game. |
 | `field_position` | character | Ball spot expressed on Yahoo's 0-100 field scale, measured toward the offense's target goal line. |
 | `field_position_display_name` | character | Ball spot rendered the way a scoreboard shows it (e.g., "MICH 35"). |
 | `home_line_score` | list | JSON-encoded per-period scoring line for the home team. |
-| `home_timeouts_remaining` | numeric | Numeric timeouts remaining in the half for the home team. |
-| `away_timeouts_remaining` | numeric | Numeric timeouts remaining in the half for the away team. |
-| `last_play` | list | Free-text description of the most recent play. |
+| `home_timeouts_remaining` | numeric |  |
+| `away_timeouts_remaining` | numeric |  |
+| `last_play` | list |  |
 | `game_stat_leaders` | list | JSON-encoded pointer to the per-category statistical leaders for the game. |
 | `team_possessing_ball` | character | Yahoo team id of the side currently possessing the ball. |
 | `recap_videos` | list | JSON-encoded list of recap videos published for the game. |
-| `week` | numeric | Week number. |
+| `week` | numeric |  |
 | `play_by_play` | list | JSON-encoded data-island pointer to the game's play-by-play collection in the same editorial payload. |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
@@ -911,7 +911,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `game_id` | character | Unique game identifier. |
+| `game_id` | character |  |
 | `bets` | list | JSON-encoded list of the betting markets offered on the event (spread, moneyline and total). |
 | `partial_game_bets` | list | JSON-encoded list of in-game betting markets covering only part of the game, such as halves or quarters. |
 
@@ -930,30 +930,30 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `player_id` | character | Unique player identifier. |
+| `player_id` | character |  |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `alias_subpages` | character | JSON-encoded list of subpage aliases (roster, schedule, stats) available beneath the entity's Yahoo page. |
-| `sport_name` | character | Sport name (e.g., Major League Baseball). |
-| `first_name` | character | Player's first name. |
-| `last_name` | character | Player's last name. |
-| `display_name` | character | Display name. |
-| `college` | character | Official college (usually the last one attended) |
-| `birth_state` | character | Birth state / region. |
-| `birth_city` | character | Birth city. |
-| `birth_country` | character | Player birth country. |
-| `birth_date` | character | Date of birth (YYYY-MM-DD). |
-| `height` | numeric | Player height (string e.g. '6-2' or inches). |
-| `display_height` | character | Player height in display format (e.g. '6-2'). |
-| `weight` | numeric | Player weight in pounds. |
-| `status` | character | Status label. |
-| `active` | logical | TRUE if the row represents an active record (player / team / season). |
+| `sport_name` | character |  |
+| `first_name` | character |  |
+| `last_name` | character |  |
+| `display_name` | character |  |
+| `college` | character |  |
+| `birth_state` | character |  |
+| `birth_city` | character |  |
+| `birth_country` | character |  |
+| `birth_date` | character |  |
+| `height` | numeric |  |
+| `display_height` | character |  |
+| `weight` | numeric |  |
+| `status` | character |  |
+| `active` | logical |  |
 | `suggested_headshot` | character | JSON-encoded image node for the headshot Yahoo recommends for this player. |
 | `uniform_number` | character | Jersey number the player wears for the team. |
-| `positions` | list | Positions. |
-| `team_id` | character | Unique team identifier. |
-| `team_team_id` | character | Unique identifier for team team. |
-| `team_display_name` | character | Full team display name. |
-| `team_full_name` | character | Full team name. |
+| `positions` | list |  |
+| `team_id` | character |  |
+| `team_team_id` | character |  |
+| `team_display_name` | character |  |
+| `team_full_name` | character |  |
 | `team_alias` | character | JSON-encoded alias object for the entity's team, carrying its Yahoo page URL and path. |
 | `team_team_logo` | character | JSON-encoded image node for the team's standard logo. |
 | `team_team_logo_white` | character | JSON-encoded image node for the team's white knockout logo. |
@@ -976,7 +976,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `earnings` | list | Prize money the player has earned over the covered period, in US dollars. |
 | `first_year` | character | First season in which the player appeared in this league. |
 | `last_year` | numeric | Most recent season in which the player appeared in this league. |
-| `injury` | character | Injury (body part / description). |
+| `injury` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -984,8 +984,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `sport_name` | character | Sport name (e.g., Major League Baseball). |
-| `short_display_name` | character | Short display name. |
+| `sport_name` | character |  |
+| `short_display_name` | character |  |
 | `suggested_headshot` | character | JSON-encoded image node for the headshot Yahoo recommends for this player. |
 | `team_primary_color` | character | Primary brand color of the entity's team, as a hex RGB string without the leading hash. |
 | `team_secondary_color` | character | Secondary brand color of the entity's team, as a hex RGB string without the leading hash. |
@@ -998,18 +998,18 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `sport_sport_id` | character | Yahoo identifier of the sport the league belongs to. |
-| `sport_name` | character | Sport name (e.g., Major League Baseball). |
-| `league_name` | character | League name. |
-| `league_short_name` | character | League short name. |
+| `sport_name` | character |  |
+| `league_name` | character |  |
+| `league_short_name` | character |  |
 | `league_current_season_phase` | character | Phase the league's season is currently in (e.g., "season.phase.season"). |
-| `team_id` | character | Unique team identifier. |
-| `conference_id` | numeric | Conference identifier. |
-| `full_name` | character | Player's full name. |
-| `display_name` | character | Display name. |
-| `location` | character | Either Home if the home team is playing in their home stadium, or Neutral if the game is being played at a neutral location. This still shows as Home for games between the Giants and Jets even though they share the same home stadium. |
-| `nickname` | character | Team or athlete nickname. |
-| `primary_color` | character | Primary team color (hex). |
-| `secondary_color` | character | Secondary team color (hex). |
+| `team_id` | character |  |
+| `conference_id` | numeric |  |
+| `full_name` | character |  |
+| `display_name` | character |  |
+| `location` | character |  |
+| `nickname` | character |  |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
 | `team_logo_white_url` | character | Absolute URL of the team's white knockout logo, the variant used on dark backgrounds. |
 | `team_logo_url` | character | Absolute URL of the team's standard logo image on Yahoo's image CDN. |
 | `alias_navigation_links` | character | JSON-encoded map of navigation links (scores, standings, teams) hanging off the entity's Yahoo alias. |
@@ -1017,13 +1017,13 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `alias_path` | character | Site-relative path portion of the entity's Yahoo alias (e.g., "/ncaaf/teams/tcu/"). |
 | `last_games` | list | JSON-encoded list of the team's most recently completed games, used for form and streak displays. |
 | `next_games` | list | JSON-encoded list of the team's next scheduled games. |
-| `division_name` | character | Division name. |
+| `division_name` | character |  |
 | `division_teams` | character | JSON-encoded list of the teams that make up the division. |
-| `conference_short_name` | character | Conference short name (e.g. 'ACC'). |
-| `conference_name` | character | Full conference name. |
+| `conference_short_name` | character |  |
+| `conference_name` | character |  |
 | `conference_conference_id` | character | Yahoo numeric identifier of the conference carried on the team's conference node. |
 | `conference_team_standings` | character | JSON-encoded standings rows for every team in the conference. |
-| `conference_abbreviation` | character | Conference abbreviation. |
+| `conference_abbreviation` | character |  |
 | `team_standings_team` | character | JSON-encoded team node the standings row describes. |
 | `team_standings_conference_id` | character | Yahoo numeric conference id for the team's standings row. |
 | `team_standings_conference` | character | JSON-encoded conference node the standings row sits under. |
@@ -1051,18 +1051,18 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `sport_sport_id` | character | Yahoo identifier of the sport the league belongs to. |
-| `sport_name` | character | Sport name (e.g., Major League Baseball). |
-| `league_name` | character | League name. |
-| `league_short_name` | character | League short name. |
+| `sport_name` | character |  |
+| `league_name` | character |  |
+| `league_short_name` | character |  |
 | `league_current_season_phase` | character | Phase the league's season is currently in (e.g., "season.phase.season"). |
-| `team_id` | character | Unique team identifier. |
-| `conference_id` | numeric | Conference identifier. |
-| `full_name` | character | Player's full name. |
-| `display_name` | character | Display name. |
-| `location` | character | Either Home if the home team is playing in their home stadium, or Neutral if the game is being played at a neutral location. This still shows as Home for games between the Giants and Jets even though they share the same home stadium. |
-| `nickname` | character | Team or athlete nickname. |
-| `primary_color` | character | Primary team color (hex). |
-| `secondary_color` | character | Secondary team color (hex). |
+| `team_id` | character |  |
+| `conference_id` | numeric |  |
+| `full_name` | character |  |
+| `display_name` | character |  |
+| `location` | character |  |
+| `nickname` | character |  |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
 | `team_logo_white_url` | character | Absolute URL of the team's white knockout logo, the variant used on dark backgrounds. |
 | `team_logo_url` | character | Absolute URL of the team's standard logo image on Yahoo's image CDN. |
 | `alias_navigation_links` | character | JSON-encoded map of navigation links (scores, standings, teams) hanging off the entity's Yahoo alias. |
@@ -1070,11 +1070,11 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `alias_path` | character | Site-relative path portion of the entity's Yahoo alias (e.g., "/ncaaf/teams/tcu/"). |
 | `last_games` | list | JSON-encoded list of the team's most recently completed games, used for form and streak displays. |
 | `next_games` | list | JSON-encoded list of the team's next scheduled games. |
-| `division_name` | character | Division name. |
-| `conference_short_name` | character | Conference short name (e.g. 'ACC'). |
-| `conference_name` | character | Full conference name. |
+| `division_name` | character |  |
+| `conference_short_name` | character |  |
+| `conference_name` | character |  |
 | `conference_conference_id` | character | Yahoo numeric identifier of the conference carried on the team's conference node. |
-| `conference_abbreviation` | character | Conference abbreviation. |
+| `conference_abbreviation` | character |  |
 | `team_standings_team` | character | JSON-encoded team node the standings row describes. |
 | `team_standings_conference_id` | character | Yahoo numeric conference id for the team's standings row. |
 | `team_standings_conference` | character | JSON-encoded conference node the standings row sits under. |
@@ -1097,9 +1097,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `sport_sport_id` | character | Yahoo identifier of the sport the league belongs to. |
-| `sport_name` | character | Sport name (e.g., Major League Baseball). |
-| `team_id` | character | Unique team identifier. |
-| `primary_color` | character | Primary team color (hex). |
+| `sport_name` | character |  |
+| `team_id` | character |  |
+| `primary_color` | character |  |
 | `team_logo_url` | character | Absolute URL of the team's standard logo image on Yahoo's image CDN. |
 | `team_logo_white_url` | character | Absolute URL of the team's white knockout logo, the variant used on dark backgrounds. |
 
@@ -1113,15 +1113,15 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `alias_lang` | character | Language/locale tag attached to the entity's Yahoo alias (e.g., "en-US"). |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `alias_domain` | character | Host the entity's Yahoo alias resolves against (e.g., "sports.yahoo.com"). |
-| `display_name` | character | Display name. |
-| `first_name` | character | Player's first name. |
-| `last_name` | character | Player's last name. |
-| `player_id` | character | Unique player identifier. |
-| `positions` | list | Positions. |
-| `team_display_name` | character | Full team display name. |
-| `team_team_id` | character | Unique identifier for team team. |
+| `display_name` | character |  |
+| `first_name` | character |  |
+| `last_name` | character |  |
+| `player_id` | character |  |
+| `positions` | list |  |
+| `team_display_name` | character |  |
+| `team_team_id` | character |  |
 | `uniform_number` | character | Jersey number the player wears for the team. |
-| `injury` | character | Injury (body part / description). |
+| `injury` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1129,7 +1129,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `positions` | list | Positions. |
+| `positions` | list |  |
 | `stats_by_season` | list | JSON-encoded per-season statistical lines for the player. |
 | `total_stats` | list | JSON-encoded career-total statistical line summing the player's seasons. |
 | `career_stats` | list | JSON-encoded career statistical totals for the player across every season. |
@@ -1140,10 +1140,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `player_id` | character | Unique player identifier. |
-| `active` | logical | TRUE if the row represents an active record (player / team / season). |
-| `positions` | list | Positions. |
-| `team_id` | character | Unique team identifier. |
+| `player_id` | character |  |
+| `active` | logical |  |
+| `positions` | list |  |
+| `team_id` | character |  |
 | `player_game_stats` | list | JSON-encoded per-game statistical lines for the player across the requested game log. |
 | `player_season_stats` | list | JSON-encoded season statistical totals for the player. |
 
@@ -1153,9 +1153,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `games` | list | Games played. |
-| `player_id` | character | Unique player identifier. |
-| `display_name` | character | Display name. |
+| `games` | list |  |
+| `player_id` | character |  |
+| `display_name` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1163,7 +1163,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `players` | list | Nested list of per-player box scores. |
+| `players` | list |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1171,10 +1171,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `player_id` | character | Unique player identifier. |
-| `active` | logical | TRUE if the row represents an active record (player / team / season). |
-| `positions` | list | Positions. |
-| `team_id` | character | Unique team identifier. |
+| `player_id` | character |  |
+| `active` | logical |  |
+| `positions` | list |  |
+| `team_id` | character |  |
 | `player_season_stats` | list | JSON-encoded season statistical totals for the player. |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
@@ -1191,7 +1191,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `game_id` | character | Unique game identifier. |
+| `game_id` | character |  |
 | `playoff_series` | character | JSON-encoded playoff-series node the game belongs to. |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
@@ -1200,7 +1200,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `game_id` | character | Unique game identifier. |
+| `game_id` | character |  |
 | `polymarket_url` | character | Polymarket prediction-market URL for wagering on the game. |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
@@ -1218,58 +1218,58 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `game_id` | character | Unique game identifier. |
-| `display_name` | character | Display name. |
-| `league_name` | character | League name. |
+| `game_id` | character |  |
+| `display_name` | character |  |
+| `league_name` | character |  |
 | `league_full_name` | character | Full league name (e.g., "NCAA Football"). |
 | `league_display_short` | character | Short league label used in navigation and compact UI (e.g., "NCAA FB"). |
-| `league_short_name` | character | League short name. |
+| `league_short_name` | character |  |
 | `league_sport` | character | Sport the league belongs to (e.g., "football"). |
 | `league_alias` | character | JSON-encoded Yahoo alias object for the league, carrying its site URL and path. |
 | `league_league_logo` | character | JSON-encoded image node for the league's logo. |
 | `partner_url` | list | Partner or affiliate deep link associated with the scoreboard game. |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
-| `away_team_id` | character | Unique identifier for the away team. |
-| `away_team_full_name` | character | Full away team name (e.g. 'Las Vegas Aces'). |
+| `away_team_id` | character |  |
+| `away_team_full_name` | character |  |
 | `away_team_team_id` | character | Yahoo composite team id of the away team (e.g., "ncaaf.t.29"). |
-| `away_team_display_name` | character | Away team full display name. |
-| `away_team_abbreviation` | character | Away team abbreviation. |
+| `away_team_display_name` | character |  |
+| `away_team_abbreviation` | character |  |
 | `away_team_alias` | character | JSON-encoded Yahoo alias object for the away team, carrying its site URL and path. |
-| `away_team_nickname` | character | Away team nickname label. |
+| `away_team_nickname` | character |  |
 | `away_team_team_logo_white` | character | JSON-encoded image node for the away team's white knockout logo, used on dark backgrounds. |
 | `away_team_team_logo` | character | JSON-encoded image node for the away team's standard logo. |
 | `away_team_team_standings` | character | JSON-encoded standings node for the away team, carrying its record, position and streak. |
 | `away_team_rank_polls` | character | JSON-encoded list of the poll rankings the away team currently holds. |
 | `away_team_playoff_seeds` | character | JSON-encoded list of the away team's playoff-seed entries for the season. |
-| `away_team_record` | character | Away team's win-loss record. |
-| `home_team_id` | character | Unique identifier for the home team. |
-| `home_team_full_name` | character | Full home team name (e.g. 'Las Vegas Aces'). |
+| `away_team_record` | character |  |
+| `home_team_id` | character |  |
+| `home_team_full_name` | character |  |
 | `home_team_team_id` | character | Yahoo composite team id of the home team (e.g., "ncaaf.t.29"). |
-| `home_team_display_name` | character | Home team full display name. |
-| `home_team_abbreviation` | character | Home team abbreviation. |
+| `home_team_display_name` | character |  |
+| `home_team_abbreviation` | character |  |
 | `home_team_alias` | character | JSON-encoded Yahoo alias object for the home team, carrying its site URL and path. |
-| `home_team_nickname` | character | Home team nickname label. |
+| `home_team_nickname` | character |  |
 | `home_team_team_logo_white` | character | JSON-encoded image node for the home team's white knockout logo, used on dark backgrounds. |
 | `home_team_team_logo` | character | JSON-encoded image node for the home team's standard logo. |
 | `home_team_team_standings` | character | JSON-encoded standings node for the home team, carrying its record, position and streak. |
 | `home_team_rank_polls` | character | JSON-encoded list of the poll rankings the home team currently holds. |
 | `home_team_playoff_seeds` | character | JSON-encoded list of the home team's playoff-seed entries for the season. |
-| `home_team_record` | character | Home team's win-loss record. |
+| `home_team_record` | character |  |
 | `current_period_overtime` | character | Flag indicating that the period in progress is an overtime period. |
 | `current_period_short_display_name` | character | Abbreviated label for the period in progress (e.g., "4th"). |
-| `away_score` | numeric | Away team score at the time of the play. |
-| `home_score` | numeric | Home team score at the time of the play. |
-| `start_time` | character | Kickoff time in eastern time zone. |
-| `start_date` | character | Start date (YYYY-MM-DD). |
-| `if_necessary` | character | If necessary. |
-| `status` | character | Status label. |
+| `away_score` | numeric |  |
+| `home_score` | numeric |  |
+| `start_time` | character |  |
+| `start_date` | character |  |
+| `if_necessary` | character |  |
+| `status` | character |  |
 | `status_display_name` | character | Short game or event status as shown on the scoreboard (e.g., "Final", "12:00 pm ET"). |
 | `full_status_display_name` | character | Long-form game status label including overtime and date context (e.g., "Final/OT"). |
-| `season` | numeric | Season year. |
+| `season` | numeric |  |
 | `season_phase` | character | Phase of the season the game falls in (e.g., "season.phase.season"). |
-| `time_left` | character | Time left. |
-| `tournament_id` | character | ESPN tournament identifier. |
-| `display_result` | character | Drive-result label (e.g. `Punt`, `Touchdown`). |
+| `time_left` | character |  |
+| `tournament_id` | character |  |
+| `display_result` | character |  |
 | `playoff_series` | character | JSON-encoded playoff-series node the game belongs to. |
 | `winning_team_id` | character | Composite Yahoo team id of the side that won the game (e.g., "ncaaf.t.29"). |
 | `broadcast_channels` | list | JSON-encoded list of the channels broadcasting the event. |
@@ -1283,14 +1283,14 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `special_event_type` | character | Marker identifying a special framing for the game, such as a bowl game or neutral-site showcase. |
 | `bets` | list | JSON-encoded list of the betting markets offered on the event (spread, moneyline and total). |
 | `venue_display_name` | character | Name of the venue hosting the event. |
-| `weather` | character | String describing the weather including temperature, humidity and wind (direction and speed). Doesn't change during the game! |
+| `weather` | character |  |
 | `gametime_ticket_url` | character | Gametime affiliate ticket-purchase URL for the event or team. |
 | `game_ticket_price` | character | Lowest available ticket price for the game from the Gametime affiliate feed, in US dollars. |
-| `teams` | list | Nested list of member-team membership spans. |
+| `teams` | list |  |
 | `field_position` | character | Ball spot expressed on Yahoo's 0-100 field scale, measured toward the offense's target goal line. |
 | `field_position_display_name` | character | Ball spot rendered the way a scoreboard shows it (e.g., "MICH 35"). |
 | `team_possessing_ball` | character | Yahoo team id of the side currently possessing the ball. |
-| `week` | numeric | Week number. |
+| `week` | numeric |  |
 | `passing_leader` | list | JSON-encoded leading passer for the game or team, with the statistics that earned the billing. |
 | `rushing_leader` | list | JSON-encoded leading rusher for the game or team, with the statistics that earned the billing. |
 | `receiving_leader` | list | JSON-encoded leading receiver for the game or team, with the statistics that earned the billing. |
@@ -1302,9 +1302,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1313,9 +1313,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1324,9 +1324,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1335,9 +1335,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1346,9 +1346,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1357,9 +1357,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1368,9 +1368,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1379,9 +1379,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1390,9 +1390,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1401,9 +1401,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1412,9 +1412,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1423,9 +1423,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1434,9 +1434,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1445,9 +1445,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1456,9 +1456,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1467,9 +1467,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1478,9 +1478,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1489,9 +1489,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1500,9 +1500,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character | Display name. |
-| `abbreviation` | character | Short abbreviation. |
-| `sort_order` | character | Display sort order for the sport. |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1510,18 +1510,18 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `team_id` | character | Unique team identifier. |
-| `nickname` | character | Team or athlete nickname. |
-| `full_name` | character | Player's full name. |
-| `location` | character | Either Home if the home team is playing in their home stadium, or Neutral if the game is being played at a neutral location. This still shows as Home for games between the Giants and Jets even though they share the same home stadium. |
-| `display_name` | character | Display name. |
-| `primary_color` | character | Primary team color (hex). |
-| `abbreviation` | character | Short abbreviation. |
+| `team_id` | character |  |
+| `nickname` | character |  |
+| `full_name` | character |  |
+| `location` | character |  |
+| `display_name` | character |  |
+| `primary_color` | character |  |
+| `abbreviation` | character |  |
 | `alias_path` | character | Site-relative path portion of the entity's Yahoo alias (e.g., "/ncaaf/teams/tcu/"). |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `team_logo_white_url` | character | Absolute URL of the team's white knockout logo, the variant used on dark backgrounds. |
 | `team_logo_url` | character | Absolute URL of the team's standard logo image on Yahoo's image CDN. |
-| `players` | list | Nested list of per-player box scores. |
+| `players` | list |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1546,17 +1546,17 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `team_id` | character | Unique team identifier. |
-| `display_name` | character | Display name. |
-| `primary_color` | character | Primary team color (hex). |
-| `secondary_color` | character | Secondary team color (hex). |
+| `team_id` | character |  |
+| `display_name` | character |  |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
 | `gametime_ticket_url` | character | Gametime affiliate ticket-purchase URL for the event or team. |
 | `bye_weeks` | list | JSON-encoded list of the week numbers in which the team has no scheduled game. |
-| `games` | list | Games played. |
+| `games` | list |  |
 | `leagues` | list | JSON-encoded list of the league nodes the team's schedule spans. |
-| `full_name` | character | Player's full name. |
-| `abbreviation` | character | Short abbreviation. |
-| `nickname` | character | Team or athlete nickname. |
+| `full_name` | character |  |
+| `abbreviation` | character |  |
+| `nickname` | character |  |
 | `team_logo_white_url` | character | Absolute URL of the team's white knockout logo, the variant used on dark backgrounds. |
 | `team_logo_url` | character | Absolute URL of the team's standard logo image on Yahoo's image CDN. |
 | `team_standings_team_record` | character | Formatted overall record for the team (e.g., "8-2"). |
@@ -1568,17 +1568,17 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `team_id` | character | Unique team identifier. |
-| `display_name` | character | Display name. |
-| `full_name` | character | Player's full name. |
+| `team_id` | character |  |
+| `display_name` | character |  |
+| `full_name` | character |  |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `alias_path` | character | Site-relative path portion of the entity's Yahoo alias (e.g., "/ncaaf/teams/tcu/"). |
-| `primary_color` | character | Primary team color (hex). |
-| `secondary_color` | character | Secondary team color (hex). |
-| `abbreviation` | character | Short abbreviation. |
-| `league_short_name` | character | League short name. |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
+| `abbreviation` | character |  |
+| `league_short_name` | character |  |
 | `league_display_short` | character | Short league label used in navigation and compact UI (e.g., "NCAA FB"). |
-| `league_name` | character | League name. |
+| `league_name` | character |  |
 | `team_logo_url` | character | Absolute URL of the team's standard logo image on Yahoo's image CDN. |
 | `team_logo_white_url` | character | Absolute URL of the team's white knockout logo, the variant used on dark backgrounds. |
 
@@ -1588,13 +1588,13 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `team_id` | character | Unique team identifier. |
-| `nickname` | character | Team or athlete nickname. |
-| `full_name` | character | Player's full name. |
-| `location` | character | Either Home if the home team is playing in their home stadium, or Neutral if the game is being played at a neutral location. This still shows as Home for games between the Giants and Jets even though they share the same home stadium. |
-| `display_name` | character | Display name. |
-| `primary_color` | character | Primary team color (hex). |
-| `abbreviation` | character | Short abbreviation. |
+| `team_id` | character |  |
+| `nickname` | character |  |
+| `full_name` | character |  |
+| `location` | character |  |
+| `display_name` | character |  |
+| `primary_color` | character |  |
+| `abbreviation` | character |  |
 | `alias_path` | character | Site-relative path portion of the entity's Yahoo alias (e.g., "/ncaaf/teams/tcu/"). |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `alias_domain` | character | Host the entity's Yahoo alias resolves against (e.g., "sports.yahoo.com"). |
@@ -1608,20 +1608,20 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `team_id` | character | Unique team identifier. |
+| `team_id` | character |  |
 | `team_logo_url` | character | Absolute URL of the team's standard logo image on Yahoo's image CDN. |
 | `team_logo_white_url` | character | Absolute URL of the team's white knockout logo, the variant used on dark backgrounds. |
-| `display_name` | character | Display name. |
-| `full_name` | character | Player's full name. |
-| `nickname` | character | Team or athlete nickname. |
+| `display_name` | character |  |
+| `full_name` | character |  |
+| `nickname` | character |  |
 | `alias_url` | character | Absolute sports.yahoo.com URL of the entity's page (e.g., "https://sports.yahoo.com/ncaaf/players/464024/"). |
 | `alias_path` | character | Site-relative path portion of the entity's Yahoo alias (e.g., "/ncaaf/teams/tcu/"). |
-| `primary_color` | character | Primary team color (hex). |
-| `secondary_color` | character | Secondary team color (hex). |
-| `abbreviation` | character | Short abbreviation. |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
+| `abbreviation` | character |  |
 | `league_display_short` | character | Short league label used in navigation and compact UI (e.g., "NCAA FB"). |
-| `league_name` | character | League name. |
-| `league_short_name` | character | League short name. |
+| `league_name` | character |  |
+| `league_short_name` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1629,16 +1629,16 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `display_name` | character | Display name. |
+| `display_name` | character |  |
 | `tournament_status` | character | State of the tournament, distinguishing scheduled, in-progress and completed events. |
-| `start_time` | character | Kickoff time in eastern time zone. |
-| `end_time` | character | Shift end time (MM:SS countdown clock). |
-| `events` | list | Nested list of non-game events. |
+| `start_time` | character |  |
+| `end_time` | character |  |
+| `events` | list |  |
 | `champions` | list | JSON-encoded list of the current champions of the tennis event, one entry per draw. |
 | `previous_champions` | list | JSON-encoded list of the champions of the previous edition of the tennis event. |
 | `venue_country` | character | Country the venue is located in. |
-| `venue_city` | character | Venue city. |
-| `venue_state` | character | Venue state / region. |
+| `venue_city` | character |  |
+| `venue_state` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1646,16 +1646,16 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `display_name` | character | Display name. |
+| `display_name` | character |  |
 | `tournament_status` | character | State of the tournament, distinguishing scheduled, in-progress and completed events. |
-| `start_time` | character | Kickoff time in eastern time zone. |
-| `end_time` | character | Shift end time (MM:SS countdown clock). |
-| `events` | list | Nested list of non-game events. |
+| `start_time` | character |  |
+| `end_time` | character |  |
+| `events` | list |  |
 | `champions` | list | JSON-encoded list of the current champions of the tennis event, one entry per draw. |
 | `previous_champions` | list | JSON-encoded list of the champions of the previous edition of the tennis event. |
 | `venue_country` | character | Country the venue is located in. |
-| `venue_city` | character | Venue city. |
-| `venue_state` | character | Venue state / region. |
+| `venue_city` | character |  |
+| `venue_state` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1663,13 +1663,13 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `gender` | character | League gender designation. |
+| `gender` | character |  |
 | `event_group_id` | character | Yahoo identifier that groups the rounds or legs making up a single tournament. |
-| `display_name` | character | Display name. |
+| `display_name` | character |  |
 | `match_type` | character | Format of the matches in the tennis draw (e.g., "SINGLES", "DOUBLES"). |
-| `surface` | character | What type of ground the game was played on. (Source: Pro-Football-Reference) |
-| `start_time` | character | Kickoff time in eastern time zone. |
-| `end_time` | character | Shift end time (MM:SS countdown clock). |
+| `surface` | character |  |
+| `start_time` | character |  |
+| `end_time` | character |  |
 | `tournament_status` | character | State of the tournament, distinguishing scheduled, in-progress and completed events. |
 | `champions` | list | JSON-encoded list of the current champions of the tennis event, one entry per draw. |
 | `alias_path` | character | Site-relative path portion of the entity's Yahoo alias (e.g., "/ncaaf/teams/tcu/"). |
@@ -1678,9 +1678,9 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `alias_domain` | character | Host the entity's Yahoo alias resolves against (e.g., "sports.yahoo.com"). |
 | `previous_champions` | list | JSON-encoded list of the champions of the previous edition of the tennis event. |
 | `venue_country` | character | Country the venue is located in. |
-| `venue_city` | character | Venue city. |
-| `venue_state` | character | Venue state / region. |
+| `venue_city` | character |  |
+| `venue_state` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
-_Generated by tools/codegen/generate.mjs from tools/codegen/endpoints/yahoo_scores.yaml + tools/codegen/endpoints/yahoo.yaml (vendored from sdv-py) — see [How this library is built](/docs/architecture/flat-vendored)._
+_Generated by tools/codegen/generate.mjs from tools/codegen/endpoints/yahoo_scores.yaml (JS-owned) + tools/codegen/endpoints/yahoo.yaml (vendored from sdv-py) — see [How this library is built](/docs/architecture/flat-vendored)._

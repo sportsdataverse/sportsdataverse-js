@@ -309,7 +309,7 @@ WNBA — scoreboard (ESPN site.api.espn.com).
 | `home_logo` | character | Home team logo URL. |
 | `home_score` | character | Home team's score. For cricket, the innings string (e.g. '161/5 (18/20 ov, target 156)'). |
 | `home_winner` | logical | Home team's winner. |
-| `home_rank` | character | Home team rank (if ranked). |
+| `home_rank` | character |  |
 | `away_id` | character | Unique identifier for away. |
 | `away_name` | character | Away name. |
 | `away_abbreviation` | character | Away team's abbreviation. |
@@ -320,7 +320,7 @@ WNBA — scoreboard (ESPN site.api.espn.com).
 | `away_logo` | character | Away team logo URL. |
 | `away_score` | character | Away team's score. For cricket, the innings string. |
 | `away_winner` | logical | Away team's winner. |
-| `away_rank` | character | Away team rank (if ranked). |
+| `away_rank` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -348,8 +348,8 @@ WNBA — standings (ESPN site.api.espn.com (v2)).
 
 | col_name | type | description |
 |---|---|---|
-| `group_name` | character | Group name (conference / division). |
-| `group_abbreviation` | character | Group abbreviation. |
+| `group_name` | character |  |
+| `group_abbreviation` | character |  |
 | `team_id` | character | ESPN team id |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `team_abbreviation` | character | Team abbreviation |
@@ -364,7 +364,7 @@ WNBA — standings (ESPN site.api.espn.com (v2)).
 | `games_behind` | integer |  |
 | `league_win_percent` | number |  |
 | `losses` | integer | Number of matches the team has lost. |
-| `playoff_seed` | integer | Current playoff seed. |
+| `playoff_seed` | integer |  |
 | `point_differential` | integer | Goal difference (for minus against). |
 | `points` | integer | Competition points. |
 | `points_against` | integer | Goals conceded. |
@@ -653,7 +653,7 @@ WNBA — team roster (ESPN site.api.espn.com).
 | `id` | character | Unique play identification number |
 | `uid` | character | ESPN universal id for the athlete. |
 | `guid` | character | Stable cross-league team GUID. |
-| `alternate_ids_sdr` | character | Alternate ids sdr. |
+| `alternate_ids_sdr` | character |  |
 | `first_name` | character | Athlete's first (given) name. |
 | `last_name` | character | Athlete's last (family) name. |
 | `full_name` | character | Player's full name. |
@@ -670,12 +670,12 @@ WNBA — team roster (ESPN site.api.espn.com).
 | `birth_place_city` | character | Birth place city. |
 | `birth_place_country` | character | Birth place country. |
 | `college_id` | character | Unique identifier for college. |
-| `college_guid` | character | College guid. |
-| `college_mascot` | character | College mascot. |
+| `college_guid` | character |  |
+| `college_mascot` | character |  |
 | `college_name` | character | College name. |
-| `college_short_name` | character | College short name. |
-| `college_abbrev` | character | College abbreviation. |
-| `college_logos` | character | College logo URLs (pipe-delimited). |
+| `college_short_name` | character |  |
+| `college_abbrev` | character |  |
+| `college_logos` | character |  |
 | `slug` | character | URL slug for the athlete. |
 | `headshot_href` | character | Headshot image URL. |
 | `headshot_alt` | character | Alternative-text label for the headshot. |

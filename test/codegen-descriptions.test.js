@@ -13,9 +13,9 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const codegen = join(root, 'tools', 'codegen');
 const coverage = JSON.parse(readFileSync(join(root, 'docs', 'src', 'generated', 'description_coverage.json'), 'utf8'));
 
-// The measured overall fill rate at the time this gate was set (95.8% on 2026-10-06),
+// The measured overall fill rate at the time this gate was set (90.6% on 2026-10-06, after the cross-sport fallback was removed),
 // rounded DOWN. Raise it when coverage improves; never lower it.
-const FLOOR = 0.95;
+const FLOOR = 0.9;
 
 describe('codegen: column descriptions', () => {
   it('vendors manual_column_descriptions.yaml + r_column_descriptions.yaml (verbatim copy + LOCK)', () => {
@@ -31,21 +31,87 @@ describe('codegen: column descriptions', () => {
     }
   });
 
-  it('resolves schema text -> manual[schema] -> manual._global -> R package -> _merged -> ""', () => {
+  it('resolves schema text -> manual[schema] -> manual._global -> the league\'s own-sport R packages -> ""', () => {
     const { manual, r } = loadDescriptionSources(codegen);
     Object.keys(manual).length.should.be.above(100);
-    Object.keys(r._merged).length.should.be.above(1000);
     describeColumn('Kept as is.', 'anything', ['boxscore'], 'nba').should.equal('Kept as is.');
     // a manual schema-keyed entry beats _global
     const schemaKey = Object.keys(manual).find((k) => k !== '_global' && Object.keys(manual[k] ?? {}).some((c) => manual._global[c]));
     const col = Object.keys(manual[schemaKey]).find((c) => manual._global[c]);
     describeColumn('', col, [schemaKey], null).should.equal(String(manual[schemaKey][col]));
     describeColumn('', col, [], null).should.equal(String(manual._global[col]));
-    // an R-package entry for the league wins over _merged; unknown league -> _merged
-    const hoopCol = Object.keys(r.hoopR).find((c) => !manual._global[c] && r._merged[c] && r._merged[c] !== r.hoopR[c]);
-    describeColumn('', hoopCol, [], 'nba').should.equal(r.hoopR[hoopCol].replace(/;\s*`[a-z_]+ = (?:TRUE|FALSE)` only(?=\.?$)/, ''));
-    describeColumn('', hoopCol, [], null).should.equal(r._merged[hoopCol].replace(/;\s*`[a-z_]+ = (?:TRUE|FALSE)` only(?=\.?$)/, ''));
+    // the league's own package backs a blank; its same-sport sibling next; NEVER another sport
+    const strip = (s) => s.replace(/;\s*`[a-z_]+ = (?:TRUE|FALSE)` only(?=\.?$)/, '');
+    const hoopCol = Object.keys(r.hoopR).find((c) => !manual._global[c] && r.wehoop[c] && r.wehoop[c] !== r.hoopR[c]);
+    describeColumn('', hoopCol, [], 'nba').should.equal(strip(r.hoopR[hoopCol]));
+    describeColumn('', hoopCol, [], 'wnba').should.equal(strip(r.wehoop[hoopCol]));
+    const wehoopOnly = Object.keys(r.wehoop).find((c) => !manual._global[c] && !r.hoopR[c]);
+    describeColumn('', wehoopOnly, [], 'nba').should.equal(strip(r.wehoop[wehoopOnly]));
+    // cross-sport text is never used: a baseballr-only column stays blank on a basketball league,
+    // a cfbfastR-only column on the NFL, and an unmapped namespace / the shared page get no R text
+    const baseballOnly = Object.keys(r.baseballr).find((c) => !manual._global[c] && !r.hoopR[c] && !r.wehoop[c]);
+    describeColumn('', baseballOnly, [], 'nba').should.equal('');
+    const cfbOnly = Object.keys(r.cfbfastR).find((c) => !manual._global[c] && !r.nflreadr[c] && !r.nflfastR[c]);
+    describeColumn('', cfbOnly, [], 'nfl').should.equal('');
+    describeColumn('', hoopCol, [], 'cbs').should.equal('');
+    describeColumn('', hoopCol, [], null).should.equal('');
     describeColumn('', 'no_such_column_zzz', ['boxscore'], 'nba').should.equal('');
+  });
+
+  // Sport-specific phrases that must never describe a column of another sport's family
+  // (every one shipped before the cross-sport `_merged` fallback was removed).
+  const DENY = [
+    { phrase: 'Inning', except: ['mlb', 'college_baseball', 'college_softball', 'reference/asa'] },
+    { phrase: 'SP+', except: ['cfb'] },
+    { phrase: 'Binary flag', except: ['cfb', 'nfl/reference/loaders'] },
+    // nflfastR play-level vocabulary on the NFL aggregate families (nfl_api / nfl_pro / pff_api)
+    // and on the recruiting provider: checked only where it is wrong by construction
+    { phrase: 'Binary indicator', only: ['nfl/reference/native.md', 'reference/on3.md'] },
+    { phrase: 'play ended', only: ['nfl/reference/native.md', 'reference/on3.md'] },
+    { phrase: 'given play', only: ['nfl/reference/native.md', 'reference/on3.md'] },
+    { phrase: 'statistical ranks', except: [] },
+    { phrase: 'Position in the poll', except: ['cfb', 'mbb', 'wbb', 'reference/espn-parsed-returns', 'cdn'] },
+  ];
+  const SPOT = [
+    ['nba/reference/native.md', '`num`', 'Inning'],
+    ['wnba/reference/native.md', '`num`', 'Inning'],
+    ['wnba/reference/native.md', '`rank`', 'statistical ranks'],
+    ['nba/reference/native.md', '`rank`', 'statistical ranks'],
+    ['reference/on3.md', '`rating`', 'SP+'],
+    ['reference/on3.md', '`rank`', 'poll'],
+    ['nfl/reference/native.md', '`rating`', 'SP+'],
+    ['nfl/reference/native.md', '`int`', 'Binary flag'],
+    ['nfl/reference/native.md', '`sack`', 'Binary flag'],
+  ];
+
+  it('never describes a column with another sport\'s text (denylist over the generated docs)', () => {
+    const docsRoot = join(root, 'docs', 'docs');
+    const pages = walk(docsRoot).filter((p) => !/[\\/](guides|tutorials|api|architecture|utilities)[\\/]/.test(p));
+    const hits = [];
+    for (const page of pages) {
+      const rel = page.slice(docsRoot.length + 1).replace(/\\/g, '/');
+      const lines = readFileSync(page, 'utf8').split('\n');
+      for (const { phrase, except, only } of DENY) {
+        if (only && !only.includes(rel)) continue;
+        if (except?.some((e) => rel.startsWith(e) || rel.includes(`/${e}`) || rel.includes(e))) continue;
+        lines.forEach((l, i) => {
+          if (l.startsWith('| `') && l.includes(phrase)) hits.push(`${rel}:${i + 1}: ${phrase}`);
+        });
+      }
+    }
+    hits.should.eql([]);
+  });
+
+  it('the reviewed wrong-sport cells are clean (spot list)', () => {
+    const docsRoot = join(root, 'docs', 'docs');
+    const bad = [];
+    for (const [file, col, phrase] of SPOT) {
+      const lines = readFileSync(join(docsRoot, file), 'utf8').split('\n');
+      lines.forEach((l, i) => {
+        if (l.startsWith(`| ${col} |`) && l.includes(phrase)) bad.push(`${file}:${i + 1}: ${col} contains ${phrase}`);
+      });
+    }
+    bad.should.eql([]);
   });
 
   it(`fills at least ${FLOOR * 100}% of every rendered returns-table cell overall`, () => {

@@ -8158,10 +8158,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `home_franchise_id` | numeric | PFF franchise id of the home team. |
 | `home_team` | list | Home team object (JSON-stringified in the tidy frame). |
 | `id` | numeric | PFF game id (integer join key). |
-| `league` | list | League slug. |
+| `league` | list |  |
 | `league_id` | numeric | PFF league id (integer). |
 | `lock_status` | character | Data lock/publish status for the game. |
-| `score` | list | Final score string. |
+| `score` | list |  |
 | `season` | numeric | Season (starting year) of the game. |
 | `stadium_id` | numeric | PFF stadium identifier for the game venue. |
 | `start` | character | Kickoff timestamp (ISO 8601 string). |
@@ -8173,14 +8173,14 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `abbreviation` | character | Metric abbreviation. |
+| `abbreviation` | character |  |
 | `default_season` | numeric | Season the source API currently treats as the default for this league. |
 | `default_week` | numeric | Week number the source API currently treats as the default for this league. |
 | `default_week_group` | character | Identifier of the week grouping (e.g., regular season or postseason phase) currently set as the league default. |
-| `id` | numeric | ID of the player in the 'name' column. |
-| `name` | character | Name, as reported by MFL but reordered into FirstName LastName instead of Last, First |
-| `seasons` | list | NBA seasons played. |
-| `slug` | character | URL slug for the team. |
+| `id` | numeric |  |
+| `name` | character |  |
+| `seasons` | list |  |
+| `slug` | character |  |
 | `week_groups` | list | Nested list of week-group objects (phase label and week span) defined for the league. |
 | `weeks` | list | Nested list of week objects available for the league. |
 
@@ -8190,20 +8190,20 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `college` | character | Official college (usually the last one attended) |
+| `college` | character |  |
 | `current_class` | character | Player's current college class designation (e.g., Freshman, Senior), per PFF. |
 | `current_eligible_year` | numeric | Year the player is or was first draft-eligible, per PFF. |
-| `dob` | character | Player date of birth. |
+| `dob` | character |  |
 | `draft` | list | Nested draft-selection details for the player (year, round, pick, and franchise) as returned by the source API. |
-| `first_name` | character | First name of player |
-| `height` | numeric | Official height, in inches |
-| `id` | numeric | ID of the player in the 'name' column. |
-| `jersey_number` | character | Jersey number. Often useful for joins by name/team/jersey. |
-| `last_name` | character | Last name of player |
-| `position` | character | Primary position as reported by NFL.com |
-| `speed` | numeric | Speed. |
-| `team` | list | NFL team. Uses official abbreviations as per NFL.com |
-| `weight` | numeric | Official weight, in pounds |
+| `first_name` | character |  |
+| `height` | numeric |  |
+| `id` | numeric |  |
+| `jersey_number` | character |  |
+| `last_name` | character |  |
+| `position` | character |  |
+| `speed` | numeric |  |
+| `team` | list |  |
+| `weight` | numeric |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -10739,18 +10739,18 @@ Flat (non-ESPN) wrappers for NFL Pro's secured Next Gen Stats API (pro.nfl.com; 
 
 | col_name | type | description |
 |---|---|---|
-| `nfl_id` | character | NFL ID of player (this is used in Big Data Bowl Data) |
-| `display_name` | character | Full name of player |
-| `short_name` | character | Player short name (i.e. "F.Last") |
-| `headshot` | character | NFL headshot url for player |
-| `team_id` | character | ESPN team id. |
-| `jersey_number` | integer | Jersey number. Often useful for joins by name/team/jersey. |
-| `position` | character | Primary position as reported by NFL.com |
-| `position_group` | character | Postion group of player as listed by NFL |
-| `ngs_position` | character | Primary position as reported by the NextGen stats API. |
-| `ngs_position_group` | character | Position group of player as listed by Next Gen Stats |
-| `gp` | integer | Games played. |
-| `gs` | integer | Games started. |
+| `nfl_id` | character |  |
+| `display_name` | character |  |
+| `short_name` | character |  |
+| `headshot` | character |  |
+| `team_id` | character |  |
+| `jersey_number` | integer |  |
+| `position` | character |  |
+| `position_group` | character |  |
+| `ngs_position` | character |  |
+| `ngs_position_group` | character |  |
+| `gp` | integer |  |
+| `gs` | integer |  |
 | `tg` | integer |  |
 | `total_tg` | integer |  |
 | `cov` | integer |  |
@@ -10759,7 +10759,7 @@ Flat (non-ESPN) wrappers for NFL Pro's secured Next Gen Stats API (pro.nfl.com; 
 | `rec_nd` | integer |  |
 | `rec_yds_nd` | integer |  |
 | `rec_td_nd` | integer |  |
-| `int` | integer | Binary flag for an interception. |
+| `int` | integer |  |
 | `pass_rating_nd` | double |  |
 | `catch_nd` | double |  |
 | `croe_nd` | double |  |
@@ -10779,34 +10779,34 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `nfl_id` | character | NFL ID of player (this is used in Big Data Bowl Data) |
-| `display_name` | character | Full name of player |
-| `short_name` | character | Player short name (i.e. "F.Last") |
-| `headshot` | character | NFL headshot url for player |
-| `team_id` | character | ESPN team id. |
-| `jersey_number` | integer | Jersey number. Often useful for joins by name/team/jersey. |
-| `position` | character | Primary position as reported by NFL.com |
-| `position_group` | character | Postion group of player as listed by NFL |
-| `ngs_position` | character | Primary position as reported by the NextGen stats API. |
-| `ngs_position_group` | character | Position group of player as listed by Next Gen Stats |
-| `gp` | integer | Games played. |
-| `gs` | integer | Games started. |
+| `nfl_id` | character |  |
+| `display_name` | character |  |
+| `short_name` | character |  |
+| `headshot` | character |  |
+| `team_id` | character |  |
+| `jersey_number` | integer |  |
+| `position` | character |  |
+| `position_group` | character |  |
+| `ngs_position` | character |  |
+| `ngs_position_group` | character |  |
+| `gp` | integer |  |
+| `gs` | integer |  |
 | `tg` | integer |  |
 | `total_tg` | integer |  |
 | `week_slug` | character |  |
-| `game_id` | integer | Ten digit identifier for NFL game. |
+| `game_id` | integer |  |
 | `fapi_game_id` | character |  |
-| `opponent_team_id` | character | Unique identifier for the opponent team. |
-| `is_home` | logical | Whether the subject team was the home team. |
+| `opponent_team_id` | character |  |
+| `is_home` | logical |  |
 | `final_score` | character |  |
-| `game_result` | character | Game result for the player's team (`W`/`L`). |
+| `game_result` | character |  |
 | `cov` | integer |  |
 | `cov_nd` | integer |  |
 | `tgt_nd` | integer |  |
 | `rec_nd` | integer |  |
 | `rec_yds_nd` | integer |  |
 | `rec_td_nd` | integer |  |
-| `int` | integer | Binary flag for an interception. |
+| `int` | integer |  |
 | `pass_rating_nd` | double |  |
 | `catch_nd` | double |  |
 | `croe_nd` | double |  |
@@ -10826,18 +10826,18 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `nfl_id` | character | NFL ID of player (this is used in Big Data Bowl Data) |
-| `display_name` | character | Full name of player |
-| `short_name` | character | Player short name (i.e. "F.Last") |
-| `headshot` | character | NFL headshot url for player |
-| `team_id` | character | ESPN team id. |
-| `jersey_number` | integer | Jersey number. Often useful for joins by name/team/jersey. |
-| `position` | character | Primary position as reported by NFL.com |
-| `position_group` | character | Postion group of player as listed by NFL |
-| `ngs_position` | character | Primary position as reported by the NextGen stats API. |
-| `ngs_position_group` | character | Position group of player as listed by Next Gen Stats |
-| `gp` | integer | Games played. |
-| `gs` | integer | Games started. |
+| `nfl_id` | character |  |
+| `display_name` | character |  |
+| `short_name` | character |  |
+| `headshot` | character |  |
+| `team_id` | character |  |
+| `jersey_number` | integer |  |
+| `position` | character |  |
+| `position_group` | character |  |
+| `ngs_position` | character |  |
+| `ngs_position_group` | character |  |
+| `gp` | integer |  |
+| `gs` | integer |  |
 | `tg` | integer |  |
 | `total_tg` | integer |  |
 | `snap` | integer |  |
@@ -10849,12 +10849,12 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `h_stop` | integer |  |
 | `qbp` | integer |  |
 | `qbp_r` | double |  |
-| `sack` | double | Binary indicator for if the play ended in a sack. |
+| `sack` | double |  |
 | `tgt_nd` | integer |  |
 | `rec_nd` | integer |  |
 | `rec_yds_nd` | integer |  |
 | `rec_td_nd` | integer |  |
-| `int` | integer | Binary flag for an interception. |
+| `int` | integer |  |
 | `pass_rating_nd` | double |  |
 | `qd` | logical |  |
 | `game_snap` | integer |  |
@@ -10866,27 +10866,27 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `nfl_id` | character | NFL ID of player (this is used in Big Data Bowl Data) |
-| `display_name` | character | Full name of player |
-| `short_name` | character | Player short name (i.e. "F.Last") |
-| `headshot` | character | NFL headshot url for player |
-| `team_id` | character | ESPN team id. |
-| `jersey_number` | integer | Jersey number. Often useful for joins by name/team/jersey. |
-| `position` | character | Primary position as reported by NFL.com |
-| `position_group` | character | Postion group of player as listed by NFL |
-| `ngs_position` | character | Primary position as reported by the NextGen stats API. |
-| `ngs_position_group` | character | Position group of player as listed by Next Gen Stats |
-| `gp` | integer | Games played. |
-| `gs` | integer | Games started. |
+| `nfl_id` | character |  |
+| `display_name` | character |  |
+| `short_name` | character |  |
+| `headshot` | character |  |
+| `team_id` | character |  |
+| `jersey_number` | integer |  |
+| `position` | character |  |
+| `position_group` | character |  |
+| `ngs_position` | character |  |
+| `ngs_position_group` | character |  |
+| `gp` | integer |  |
+| `gs` | integer |  |
 | `tg` | integer |  |
 | `total_tg` | integer |  |
 | `week_slug` | character |  |
-| `game_id` | integer | Ten digit identifier for NFL game. |
+| `game_id` | integer |  |
 | `fapi_game_id` | character |  |
-| `opponent_team_id` | character | Unique identifier for the opponent team. |
-| `is_home` | logical | Whether the subject team was the home team. |
+| `opponent_team_id` | character |  |
+| `is_home` | logical |  |
 | `final_score` | character |  |
-| `game_result` | character | Game result for the player's team (`W`/`L`). |
+| `game_result` | character |  |
 | `snap` | integer |  |
 | `snap_pct` | double |  |
 | `rd` | integer |  |
@@ -10896,12 +10896,12 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `h_stop` | integer |  |
 | `qbp` | integer |  |
 | `qbp_r` | double |  |
-| `sack` | integer | Binary indicator for if the play ended in a sack. |
+| `sack` | integer |  |
 | `tgt_nd` | integer |  |
 | `rec_nd` | integer |  |
 | `rec_yds_nd` | integer |  |
 | `rec_td_nd` | integer |  |
-| `int` | integer | Binary flag for an interception. |
+| `int` | integer |  |
 | `pass_rating_nd` | double |  |
 | `qd` | logical |  |
 | `game_snap` | integer |  |
@@ -10913,23 +10913,23 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `nfl_id` | character | NFL ID of player (this is used in Big Data Bowl Data) |
-| `display_name` | character | Full name of player |
-| `short_name` | character | Player short name (i.e. "F.Last") |
-| `headshot` | character | NFL headshot url for player |
-| `team_id` | character | ESPN team id. |
-| `jersey_number` | integer | Jersey number. Often useful for joins by name/team/jersey. |
-| `position` | character | Primary position as reported by NFL.com |
-| `position_group` | character | Postion group of player as listed by NFL |
-| `gp` | integer | Games played. |
-| `gs` | integer | Games started. |
+| `nfl_id` | character |  |
+| `display_name` | character |  |
+| `short_name` | character |  |
+| `headshot` | character |  |
+| `team_id` | character |  |
+| `jersey_number` | integer |  |
+| `position` | character |  |
+| `position_group` | character |  |
+| `gp` | integer |  |
+| `gs` | integer |  |
 | `week_slug` | character |  |
-| `game_id` | integer | Ten digit identifier for NFL game. |
+| `game_id` | integer |  |
 | `fapi_game_id` | character |  |
-| `opponent_team_id` | character | Unique identifier for the opponent team. |
-| `is_home` | logical | Whether the subject team was the home team. |
+| `opponent_team_id` | character |  |
+| `is_home` | logical |  |
 | `final_score` | character |  |
-| `game_result` | character | Game result for the player's team (`W`/`L`). |
+| `game_result` | character |  |
 | `o_snap` | integer |  |
 | `o_snap3rd` | integer |  |
 | `o_tm_snap` | integer |  |
@@ -10939,7 +10939,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `pass_cmp` | integer |  |
 | `pass_att` | integer |  |
 | `pass_yd` | integer |  |
-| `pass_td` | integer | Binary flag for a passing touchdown. |
+| `pass_td` | integer |  |
 | `pass_int` | integer |  |
 | `pass_two_pt_conv` | integer |  |
 | `pass_db` | integer |  |
@@ -10963,7 +10963,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `pass_db_pg` | integer |  |
 | `rush_att` | integer |  |
 | `rush_yd` | integer |  |
-| `rush_td` | integer | Binary flag for a rushing touchdown. |
+| `rush_td` | integer |  |
 | `rush_two_pt_conv` | integer |  |
 | `rush_exp_yd` | integer |  |
 | `rush_ryoe` | integer |  |
@@ -11118,16 +11118,16 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `nfl_id` | character | NFL ID of player (this is used in Big Data Bowl Data) |
-| `display_name` | character | Full name of player |
-| `short_name` | character | Player short name (i.e. "F.Last") |
-| `headshot` | character | NFL headshot url for player |
-| `team_id` | character | ESPN team id. |
-| `jersey_number` | integer | Jersey number. Often useful for joins by name/team/jersey. |
-| `position` | character | Primary position as reported by NFL.com |
-| `position_group` | character | Postion group of player as listed by NFL |
-| `gp` | integer | Games played. |
-| `gs` | integer | Games started. |
+| `nfl_id` | character |  |
+| `display_name` | character |  |
+| `short_name` | character |  |
+| `headshot` | character |  |
+| `team_id` | character |  |
+| `jersey_number` | integer |  |
+| `position` | character |  |
+| `position_group` | character |  |
+| `gp` | integer |  |
+| `gs` | integer |  |
 | `o_snap` | integer |  |
 | `o_snap3rd` | integer |  |
 | `o_tm_snap` | integer |  |
@@ -11137,7 +11137,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `pass_cmp` | integer |  |
 | `pass_att` | integer |  |
 | `pass_yd` | integer |  |
-| `pass_td` | integer | Binary flag for a passing touchdown. |
+| `pass_td` | integer |  |
 | `pass_int` | integer |  |
 | `pass_two_pt_conv` | integer |  |
 | `pass_db` | integer |  |
@@ -11161,7 +11161,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `pass_db_pg` | double |  |
 | `rush_att` | integer |  |
 | `rush_yd` | integer |  |
-| `rush_td` | integer | Binary flag for a rushing touchdown. |
+| `rush_td` | integer |  |
 | `rush_two_pt_conv` | integer |  |
 | `rush_exp_yd` | integer |  |
 | `rush_ryoe` | integer |  |
@@ -11316,33 +11316,33 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `nfl_id` | character | NFL ID of player (this is used in Big Data Bowl Data) |
-| `display_name` | character | Full name of player |
-| `short_name` | character | Player short name (i.e. "F.Last") |
-| `headshot` | character | NFL headshot url for player |
-| `team_id` | character | ESPN team id. |
-| `jersey_number` | integer | Jersey number. Often useful for joins by name/team/jersey. |
-| `position` | character | Primary position as reported by NFL.com |
-| `position_group` | character | Postion group of player as listed by NFL |
-| `ngs_position` | character | Primary position as reported by the NextGen stats API. |
-| `ngs_position_group` | character | Position group of player as listed by Next Gen Stats |
-| `gp` | integer | Games played. |
-| `gs` | integer | Games started. |
+| `nfl_id` | character |  |
+| `display_name` | character |  |
+| `short_name` | character |  |
+| `headshot` | character |  |
+| `team_id` | character |  |
+| `jersey_number` | integer |  |
+| `position` | character |  |
+| `position_group` | character |  |
+| `ngs_position` | character |  |
+| `ngs_position_group` | character |  |
+| `gp` | integer |  |
+| `gs` | integer |  |
 | `tg` | integer |  |
 | `total_tg` | integer |  |
 | `cmp` | integer |  |
 | `att` | integer |  |
 | `yds` | integer |  |
 | `td` | integer |  |
-| `int` | integer | Binary flag for an interception. |
-| `rating` | double | Overall SP+ rating (Bill Connelly methodology, in points per game). |
+| `int` | integer |  |
+| `rating` | double |  |
 | `ypa` | double |  |
 | `cmp_pct` | double |  |
-| `sack` | integer | Binary indicator for if the play ended in a sack. |
+| `sack` | integer |  |
 | `x_cmp` | double |  |
-| `cpoe` | double | For a single pass play this is 1 - cp when the pass was completed or 0 - cp when the pass was incomplete. Analyzed for a whole game or season an indicator for the passer how much over or under expectation his completion percentage was. |
+| `cpoe` | double |  |
 | `db` | integer |  |
-| `epa` | double | Expected points added (EPA) by the posteam for the given play. |
+| `epa` | double |  |
 | `epa_db` | double |  |
 | `avg_ttt` | double |  |
 | `avg_ttp` | double |  |
@@ -11352,7 +11352,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `blitz_r` | double |  |
 | `drop` | integer |  |
 | `drop_r` | double |  |
-| `ay` | double | Acceleration of the pitch in the y-direction at y=50 ft (ft/s^2). |
+| `ay` | double |  |
 | `yac` | double |  |
 | `x_yac` | double |  |
 | `yac_pct` | double |  |
@@ -11380,40 +11380,40 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `nfl_id` | character | NFL ID of player (this is used in Big Data Bowl Data) |
-| `display_name` | character | Full name of player |
-| `short_name` | character | Player short name (i.e. "F.Last") |
-| `headshot` | character | NFL headshot url for player |
-| `team_id` | character | ESPN team id. |
-| `jersey_number` | integer | Jersey number. Often useful for joins by name/team/jersey. |
-| `position` | character | Primary position as reported by NFL.com |
-| `position_group` | character | Postion group of player as listed by NFL |
-| `ngs_position` | character | Primary position as reported by the NextGen stats API. |
-| `ngs_position_group` | character | Position group of player as listed by Next Gen Stats |
-| `gp` | integer | Games played. |
-| `gs` | integer | Games started. |
+| `nfl_id` | character |  |
+| `display_name` | character |  |
+| `short_name` | character |  |
+| `headshot` | character |  |
+| `team_id` | character |  |
+| `jersey_number` | integer |  |
+| `position` | character |  |
+| `position_group` | character |  |
+| `ngs_position` | character |  |
+| `ngs_position_group` | character |  |
+| `gp` | integer |  |
+| `gs` | integer |  |
 | `tg` | integer |  |
 | `total_tg` | integer |  |
 | `week_slug` | character |  |
-| `game_id` | integer | Ten digit identifier for NFL game. |
+| `game_id` | integer |  |
 | `fapi_game_id` | character |  |
-| `opponent_team_id` | character | Unique identifier for the opponent team. |
-| `is_home` | logical | Whether the subject team was the home team. |
+| `opponent_team_id` | character |  |
+| `is_home` | logical |  |
 | `final_score` | character |  |
-| `game_result` | character | Game result for the player's team (`W`/`L`). |
+| `game_result` | character |  |
 | `cmp` | integer |  |
 | `att` | integer |  |
 | `yds` | integer |  |
 | `td` | integer |  |
-| `int` | integer | Binary flag for an interception. |
-| `rating` | double | Overall SP+ rating (Bill Connelly methodology, in points per game). |
+| `int` | integer |  |
+| `rating` | double |  |
 | `ypa` | double |  |
 | `cmp_pct` | double |  |
-| `sack` | integer | Binary indicator for if the play ended in a sack. |
+| `sack` | integer |  |
 | `x_cmp` | double |  |
-| `cpoe` | double | For a single pass play this is 1 - cp when the pass was completed or 0 - cp when the pass was incomplete. Analyzed for a whole game or season an indicator for the passer how much over or under expectation his completion percentage was. |
+| `cpoe` | double |  |
 | `db` | integer |  |
-| `epa` | double | Expected points added (EPA) by the posteam for the given play. |
+| `epa` | double |  |
 | `epa_db` | double |  |
 | `avg_ttt` | double |  |
 | `avg_ttp` | double |  |
@@ -11423,7 +11423,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `blitz_r` | double |  |
 | `drop` | integer |  |
 | `drop_r` | double |  |
-| `ay` | double | Acceleration of the pitch in the y-direction at y=50 ft (ft/s^2). |
+| `ay` | double |  |
 | `yac` | double |  |
 | `x_yac` | double |  |
 | `yac_pct` | double |  |
@@ -11451,18 +11451,18 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `nfl_id` | character | NFL ID of player (this is used in Big Data Bowl Data) |
-| `display_name` | character | Full name of player |
-| `short_name` | character | Player short name (i.e. "F.Last") |
-| `headshot` | character | NFL headshot url for player |
-| `team_id` | character | ESPN team id. |
-| `jersey_number` | integer | Jersey number. Often useful for joins by name/team/jersey. |
-| `position` | character | Primary position as reported by NFL.com |
-| `position_group` | character | Postion group of player as listed by NFL |
-| `ngs_position` | character | Primary position as reported by the NextGen stats API. |
-| `ngs_position_group` | character | Position group of player as listed by Next Gen Stats |
-| `gp` | integer | Games played. |
-| `gs` | integer | Games started. |
+| `nfl_id` | character |  |
+| `display_name` | character |  |
+| `short_name` | character |  |
+| `headshot` | character |  |
+| `team_id` | character |  |
+| `jersey_number` | integer |  |
+| `position` | character |  |
+| `position_group` | character |  |
+| `ngs_position` | character |  |
+| `ngs_position_group` | character |  |
+| `gp` | integer |  |
+| `gs` | integer |  |
 | `tg` | integer |  |
 | `total_tg` | integer |  |
 | `rt` | integer |  |
@@ -11470,14 +11470,14 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `rec` | integer |  |
 | `yds` | integer |  |
 | `td` | integer |  |
-| `int` | integer | Binary flag for an interception. |
-| `rating` | double | Overall SP+ rating (Bill Connelly methodology, in points per game). |
+| `int` | integer |  |
+| `rating` | double |  |
 | `catch` | double |  |
 | `x_catch` | double |  |
 | `croe` | double |  |
 | `yds_rec` | double |  |
 | `yds_rt` | double |  |
-| `epa` | double | Expected points added (EPA) by the posteam for the given play. |
+| `epa` | double |  |
 | `epa_tgt` | double |  |
 | `epa_rt` | double |  |
 | `drop` | integer |  |
@@ -11487,7 +11487,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `yacoe` | integer |  |
 | `yac_rec` | double |  |
 | `avg_sep` | double |  |
-| `ay` | double | Acceleration of the pitch in the y-direction at y=50 ft (ft/s^2). |
+| `ay` | double |  |
 | `ay_tgt` | double |  |
 | `tgt_rt` | double |  |
 | `avg_rt_dep` | double |  |
@@ -11517,40 +11517,40 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `nfl_id` | character | NFL ID of player (this is used in Big Data Bowl Data) |
-| `display_name` | character | Full name of player |
-| `short_name` | character | Player short name (i.e. "F.Last") |
-| `headshot` | character | NFL headshot url for player |
-| `team_id` | character | ESPN team id. |
-| `jersey_number` | integer | Jersey number. Often useful for joins by name/team/jersey. |
-| `position` | character | Primary position as reported by NFL.com |
-| `position_group` | character | Postion group of player as listed by NFL |
-| `ngs_position` | character | Primary position as reported by the NextGen stats API. |
-| `ngs_position_group` | character | Position group of player as listed by Next Gen Stats |
-| `gp` | integer | Games played. |
-| `gs` | integer | Games started. |
+| `nfl_id` | character |  |
+| `display_name` | character |  |
+| `short_name` | character |  |
+| `headshot` | character |  |
+| `team_id` | character |  |
+| `jersey_number` | integer |  |
+| `position` | character |  |
+| `position_group` | character |  |
+| `ngs_position` | character |  |
+| `ngs_position_group` | character |  |
+| `gp` | integer |  |
+| `gs` | integer |  |
 | `tg` | integer |  |
 | `total_tg` | integer |  |
 | `week_slug` | character |  |
-| `game_id` | integer | Ten digit identifier for NFL game. |
+| `game_id` | integer |  |
 | `fapi_game_id` | character |  |
-| `opponent_team_id` | character | Unique identifier for the opponent team. |
-| `is_home` | logical | Whether the subject team was the home team. |
+| `opponent_team_id` | character |  |
+| `is_home` | logical |  |
 | `final_score` | character |  |
-| `game_result` | character | Game result for the player's team (`W`/`L`). |
+| `game_result` | character |  |
 | `rt` | integer |  |
 | `tgt` | integer |  |
 | `rec` | integer |  |
 | `yds` | integer |  |
 | `td` | integer |  |
-| `int` | integer | Binary flag for an interception. |
-| `rating` | integer | Overall SP+ rating (Bill Connelly methodology, in points per game). |
+| `int` | integer |  |
+| `rating` | integer |  |
 | `catch` | integer |  |
 | `x_catch` | integer |  |
 | `croe` | integer |  |
 | `yds_rec` | integer |  |
 | `yds_rt` | integer |  |
-| `epa` | integer | Expected points added (EPA) by the posteam for the given play. |
+| `epa` | integer |  |
 | `epa_tgt` | integer |  |
 | `epa_rt` | integer |  |
 | `drop` | integer |  |
@@ -11560,7 +11560,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `yacoe` | integer |  |
 | `yac_rec` | integer |  |
 | `avg_sep` | integer |  |
-| `ay` | integer | Acceleration of the pitch in the y-direction at y=50 ft (ft/s^2). |
+| `ay` | integer |  |
 | `ay_tgt` | integer |  |
 | `tgt_rt` | integer |  |
 | `avg_rt_dep` | integer |  |
@@ -11590,25 +11590,25 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `nfl_id` | character | NFL ID of player (this is used in Big Data Bowl Data) |
-| `display_name` | character | Full name of player |
-| `short_name` | character | Player short name (i.e. "F.Last") |
-| `headshot` | character | NFL headshot url for player |
-| `team_id` | character | ESPN team id. |
-| `jersey_number` | integer | Jersey number. Often useful for joins by name/team/jersey. |
-| `position` | character | Primary position as reported by NFL.com |
-| `position_group` | character | Postion group of player as listed by NFL |
-| `ngs_position` | character | Primary position as reported by the NextGen stats API. |
-| `ngs_position_group` | character | Position group of player as listed by Next Gen Stats |
-| `gp` | integer | Games played. |
-| `gs` | integer | Games started. |
+| `nfl_id` | character |  |
+| `display_name` | character |  |
+| `short_name` | character |  |
+| `headshot` | character |  |
+| `team_id` | character |  |
+| `jersey_number` | integer |  |
+| `position` | character |  |
+| `position_group` | character |  |
+| `ngs_position` | character |  |
+| `ngs_position_group` | character |  |
+| `gp` | integer |  |
+| `gs` | integer |  |
 | `tg` | integer |  |
 | `total_tg` | integer |  |
 | `att` | integer |  |
 | `yds` | integer |  |
 | `td` | integer |  |
 | `ypc` | double |  |
-| `epa` | double | Expected points added (EPA) by the posteam for the given play. |
+| `epa` | double |  |
 | `epa_att` | double |  |
 | `x_ry` | double |  |
 | `x_ypc` | double |  |
@@ -11618,13 +11618,13 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `yaco_att` | double |  |
 | `ybco` | double |  |
 | `ybco_att` | double |  |
-| `success` | double | Binary indicator whether epa > 0 in the given play. |
+| `success` | double |  |
 | `fum` | integer |  |
 | `lost` | integer |  |
 | `rush10_p_yds` | integer |  |
 | `rush15_p_mph` | integer |  |
 | `rush20_p_mph` | integer |  |
-| `eff` | double | Eff. |
+| `eff` | double |  |
 | `in_t_pct` | double |  |
 | `st_box_pct` | double |  |
 | `under_pct` | double |  |
@@ -11649,32 +11649,32 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `nfl_id` | character | NFL ID of player (this is used in Big Data Bowl Data) |
-| `display_name` | character | Full name of player |
-| `short_name` | character | Player short name (i.e. "F.Last") |
-| `headshot` | character | NFL headshot url for player |
-| `team_id` | character | ESPN team id. |
-| `jersey_number` | integer | Jersey number. Often useful for joins by name/team/jersey. |
-| `position` | character | Primary position as reported by NFL.com |
-| `position_group` | character | Postion group of player as listed by NFL |
-| `ngs_position` | character | Primary position as reported by the NextGen stats API. |
-| `ngs_position_group` | character | Position group of player as listed by Next Gen Stats |
-| `gp` | integer | Games played. |
-| `gs` | integer | Games started. |
+| `nfl_id` | character |  |
+| `display_name` | character |  |
+| `short_name` | character |  |
+| `headshot` | character |  |
+| `team_id` | character |  |
+| `jersey_number` | integer |  |
+| `position` | character |  |
+| `position_group` | character |  |
+| `ngs_position` | character |  |
+| `ngs_position_group` | character |  |
+| `gp` | integer |  |
+| `gs` | integer |  |
 | `tg` | integer |  |
 | `total_tg` | integer |  |
 | `week_slug` | character |  |
-| `game_id` | integer | Ten digit identifier for NFL game. |
+| `game_id` | integer |  |
 | `fapi_game_id` | character |  |
-| `opponent_team_id` | character | Unique identifier for the opponent team. |
-| `is_home` | logical | Whether the subject team was the home team. |
+| `opponent_team_id` | character |  |
+| `is_home` | logical |  |
 | `final_score` | character |  |
-| `game_result` | character | Game result for the player's team (`W`/`L`). |
+| `game_result` | character |  |
 | `att` | integer |  |
 | `yds` | integer |  |
 | `td` | integer |  |
 | `ypc` | double |  |
-| `epa` | double | Expected points added (EPA) by the posteam for the given play. |
+| `epa` | double |  |
 | `epa_att` | double |  |
 | `x_ry` | double |  |
 | `x_ypc` | double |  |
@@ -11684,13 +11684,13 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `yaco_att` | double |  |
 | `ybco` | double |  |
 | `ybco_att` | double |  |
-| `success` | double | Binary indicator whether epa > 0 in the given play. |
+| `success` | double |  |
 | `fum` | integer |  |
 | `lost` | integer |  |
 | `rush10_p_yds` | integer |  |
 | `rush15_p_mph` | integer |  |
 | `rush20_p_mph` | integer |  |
-| `eff` | double | Eff. |
+| `eff` | double |  |
 | `in_t_pct` | double |  |
 | `st_box_pct` | integer |  |
 | `under_pct` | double |  |
@@ -11715,20 +11715,20 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `team_id` | character | ESPN team id. |
-| `gp` | integer | Games played. |
-| `total` | integer | The sum of each team's score in the game. Equals h_score + v_score. Is NA for games which haven't yet been played. Convenient for evaluating over/under total bets. |
-| `pass` | integer | Binary indicator if the play was a pass play (sacks and scrambles included). |
-| `run` | integer | Expected Points Added on run plays |
+| `team_id` | character |  |
+| `gp` | integer |  |
+| `total` | integer |  |
+| `pass` | integer |  |
+| `run` | integer |  |
 | `pass_pct` | double |  |
-| `ppg` | double | Points per game. |
+| `ppg` | double |  |
 | `yds` | integer |  |
 | `ypg` | double |  |
 | `ypp` | double |  |
 | `td` | integer |  |
-| `pass_td` | integer | Binary flag for a passing touchdown. |
-| `rush_td` | integer | Binary flag for a rushing touchdown. |
-| `epa` | double | Expected points added (EPA) by the posteam for the given play. |
+| `pass_td` | integer |  |
+| `rush_td` | integer |  |
+| `epa` | double |  |
 | `epa_pp` | double |  |
 | `pass_yds` | integer |  |
 | `pass_ypg` | double |  |
@@ -11737,7 +11737,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `sacked_ypg` | double |  |
 | `epa_pass` | double |  |
 | `epa_pass_pp` | double |  |
-| `rush_yds` | integer | Rushing yards gained on the play. |
+| `rush_yds` | integer |  |
 | `rush_ypg` | double |  |
 | `rush_ypp` | double |  |
 | `epa_rush` | double |  |
@@ -11746,7 +11746,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `ttt` | double |  |
 | `qbp` | integer |  |
 | `qbp_pct` | double |  |
-| `interception` | integer | Binary indicator for if the pass was intercepted. |
+| `interception` | integer |  |
 | `forced_fumble` | integer |  |
 | `fumble_recovered` | integer |  |
 | `defensive_touchdown` | integer |  |
@@ -11758,20 +11758,20 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `team_id` | character | ESPN team id. |
-| `gp` | integer | Games played. |
-| `total` | integer | The sum of each team's score in the game. Equals h_score + v_score. Is NA for games which haven't yet been played. Convenient for evaluating over/under total bets. |
-| `pass` | integer | Binary indicator if the play was a pass play (sacks and scrambles included). |
-| `run` | integer | Expected Points Added on run plays |
+| `team_id` | character |  |
+| `gp` | integer |  |
+| `total` | integer |  |
+| `pass` | integer |  |
+| `run` | integer |  |
 | `pass_pct` | double |  |
-| `ppg` | integer | Points per game. |
+| `ppg` | integer |  |
 | `yds` | integer |  |
 | `ypg` | integer |  |
 | `ypp` | double |  |
 | `td` | integer |  |
-| `pass_td` | integer | Binary flag for a passing touchdown. |
-| `rush_td` | integer | Binary flag for a rushing touchdown. |
-| `epa` | double | Expected points added (EPA) by the posteam for the given play. |
+| `pass_td` | integer |  |
+| `rush_td` | integer |  |
+| `epa` | double |  |
 | `epa_pp` | double |  |
 | `pass_yds` | integer |  |
 | `pass_ypg` | integer |  |
@@ -11780,7 +11780,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `sacked_ypg` | integer |  |
 | `epa_pass` | double |  |
 | `epa_pass_pp` | double |  |
-| `rush_yds` | integer | Rushing yards gained on the play. |
+| `rush_yds` | integer |  |
 | `rush_ypg` | integer |  |
 | `rush_ypp` | double |  |
 | `epa_rush` | double |  |
@@ -11789,17 +11789,17 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `ttt` | double |  |
 | `qbp` | integer |  |
 | `qbp_pct` | double |  |
-| `interception` | integer | Binary indicator for if the pass was intercepted. |
+| `interception` | integer |  |
 | `forced_fumble` | integer |  |
 | `fumble_recovered` | integer |  |
 | `defensive_touchdown` | integer |  |
 | `total_takeaways` | integer |  |
 | `week_slug` | character |  |
-| `opponent_team_id` | character | Unique identifier for the opponent team. |
-| `game_result` | character | Game result for the player's team (`W`/`L`). |
+| `opponent_team_id` | character |  |
+| `game_result` | character |  |
 | `final_score` | character |  |
-| `is_home` | logical | Whether the subject team was the home team. |
-| `game_id` | integer | Ten digit identifier for NFL game. |
+| `is_home` | logical |  |
+| `game_id` | integer |  |
 | `fapi_game_id` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
@@ -11808,18 +11808,18 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `team_id` | character | ESPN team id. |
-| `gp` | integer | Games played. |
-| `total` | integer | The sum of each team's score in the game. Equals h_score + v_score. Is NA for games which haven't yet been played. Convenient for evaluating over/under total bets. |
-| `pass` | integer | Binary indicator if the play was a pass play (sacks and scrambles included). |
-| `run` | integer | Expected Points Added on run plays |
+| `team_id` | character |  |
+| `gp` | integer |  |
+| `total` | integer |  |
+| `pass` | integer |  |
+| `run` | integer |  |
 | `pass_pct` | double |  |
-| `ppg` | double | Points per game. |
+| `ppg` | double |  |
 | `yds` | integer |  |
 | `ypg` | double |  |
 | `ypp` | double |  |
 | `td` | integer |  |
-| `epa` | double | Expected points added (EPA) by the posteam for the given play. |
+| `epa` | double |  |
 | `epa_pp` | double |  |
 | `pass_yds` | integer |  |
 | `pass_ypg` | double |  |
@@ -11828,7 +11828,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `sacked_ypg` | double |  |
 | `epa_pass` | double |  |
 | `epa_pass_pp` | double |  |
-| `rush_yds` | integer | Rushing yards gained on the play. |
+| `rush_yds` | integer |  |
 | `rush_ypg` | double |  |
 | `rush_ypp` | double |  |
 | `epa_rush` | double |  |
@@ -11844,18 +11844,18 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `team_id` | character | ESPN team id. |
-| `gp` | integer | Games played. |
-| `total` | integer | The sum of each team's score in the game. Equals h_score + v_score. Is NA for games which haven't yet been played. Convenient for evaluating over/under total bets. |
-| `pass` | integer | Binary indicator if the play was a pass play (sacks and scrambles included). |
-| `run` | integer | Expected Points Added on run plays |
+| `team_id` | character |  |
+| `gp` | integer |  |
+| `total` | integer |  |
+| `pass` | integer |  |
+| `run` | integer |  |
 | `pass_pct` | double |  |
-| `ppg` | integer | Points per game. |
+| `ppg` | integer |  |
 | `yds` | integer |  |
 | `ypg` | integer |  |
 | `ypp` | double |  |
 | `td` | integer |  |
-| `epa` | double | Expected points added (EPA) by the posteam for the given play. |
+| `epa` | double |  |
 | `epa_pp` | double |  |
 | `pass_yds` | integer |  |
 | `pass_ypg` | integer |  |
@@ -11864,7 +11864,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `sacked_ypg` | integer |  |
 | `epa_pass` | double |  |
 | `epa_pass_pp` | double |  |
-| `rush_yds` | integer | Rushing yards gained on the play. |
+| `rush_yds` | integer |  |
 | `rush_ypg` | integer |  |
 | `rush_ypp` | double |  |
 | `epa_rush` | double |  |
@@ -11874,13 +11874,13 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `qbp` | integer |  |
 | `qbp_pct` | double |  |
 | `week_slug` | character |  |
-| `opponent_team_id` | character | Unique identifier for the opponent team. |
-| `game_result` | character | Game result for the player's team (`W`/`L`). |
+| `opponent_team_id` | character |  |
+| `game_result` | character |  |
 | `final_score` | character |  |
-| `is_home` | logical | Whether the subject team was the home team. |
-| `game_id` | integer | Ten digit identifier for NFL game. |
+| `is_home` | logical |  |
+| `game_id` | integer |  |
 | `fapi_game_id` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
-_Generated by tools/codegen/generate.mjs from tools/codegen/endpoints/nfl_api.yaml + tools/codegen/endpoints/pff_api.yaml + tools/codegen/endpoints/nfl_pro.yaml (vendored from sdv-py) — see [How this library is built](/docs/architecture/flat-vendored)._
+_Generated by tools/codegen/generate.mjs from tools/codegen/endpoints/nfl_api.yaml (vendored from sdv-py) + tools/codegen/endpoints/pff_api.yaml (vendored from sdv-py) + tools/codegen/endpoints/nfl_pro.yaml (vendored from sdv-py) — see [How this library is built](/docs/architecture/flat-vendored)._

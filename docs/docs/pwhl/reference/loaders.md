@@ -68,7 +68,7 @@ const rows = await sdv.pwhl.loadPhfPbp({ seasons: 2023, columns: ['game_id', 'pe
 
 | col_name | type | description |
 |---|---|---|
-| `play_type` | `string` | String indicating the type of play: pass (includes sacks), run (includes scrambles), punt, field_goal, kickoff, extra_point, qb_kneel, qb_spike, no_play (timeouts and penalties), and missing for rows indicating end of play. |
+| `play_type` | `string` |  |
 | `team` | `string` | Team name. |
 | `time` | `string` | Game clock at infraction (MM:SS). |
 | `play_description` | `string` | Free-text description of the play as published by the league. |
@@ -88,7 +88,7 @@ const rows = await sdv.pwhl.loadPhfPbp({ seasons: 2023, columns: ['game_id', 'pe
 | `away_goalie` | `string` | Name of the away goalie on the ice. |
 | `away_goalie_jersey` | `string` | Jersey number of the away goaltender on the ice. |
 | `goalie_change` | `string` | True when the play records a goaltender change. |
-| `penalty` | `number` | Binary indicator for whether or not a penalty occurred. |
+| `penalty` | `number` |  |
 | `on_ice_situation` | `string` | Strength situation on the ice for the play (e.g. even strength, power play). |
 | `score` | `string` | Final score string. |
 | `minute_start` | `number` | Minute mark of the period when the event started. |
@@ -99,8 +99,8 @@ const rows = await sdv.pwhl.loadPhfPbp({ seasons: 2023, columns: ['game_id', 'pe
 | `home_goals` | `string` | Home goals in the period. |
 | `sec_from_start` | `number` | Seconds elapsed since the start of the game. |
 | `power_play_seconds` | `number` | Elapsed seconds of the power play at this play. |
-| `time_elapsed` | `string` | Elapsed game time for the drive (`MM:SS`). |
-| `time_remaining` | `string` | Time remaining. |
+| `time_elapsed` | `string` |  |
+| `time_remaining` | `string` |  |
 | `player_name_1` | `string` | Name of the player in slot 1 of the play's participant list. |
 | `player_jersey_1` | `string` | Jersey number of the player in slot 1 of the play's participant list. |
 | `home_skaters` | `number` | Number of home skaters on the ice. |
@@ -109,9 +109,9 @@ const rows = await sdv.pwhl.loadPhfPbp({ seasons: 2023, columns: ['game_id', 'pe
 | `home_goalie_jersey` | `string` | Jersey number of the home goaltender on the ice. |
 | `player_name_2` | `string` | Name of the player in slot 2 of the play's participant list. |
 | `player_jersey_2` | `string` | Jersey number of the player in slot 2 of the play's participant list. |
-| `shot_result` | `string` | Shot result ('Made' / 'Missed'). |
+| `shot_result` | `string` |  |
 | `goalie_involved` | `string` | Name of the goaltender involved in the play. |
-| `penalty_type` | `string` | String indicating the penalty type of the first penalty in the given play. Will be `NA` if `desc` is missing the type. |
+| `penalty_type` | `string` |  |
 | `penalty_level` | `string` | Severity classification of the penalty (e.g. minor, major). |
 | `penalty_length` | `string` | Penalty length in minutes. |
 | `start_power_play` | `number` | True on the play where a power play begins. |
@@ -180,7 +180,7 @@ const rows = await sdv.pwhl.loadPhfPlayerBoxscores({ seasons: 2023 });
 | `penalty_minutes` | `number` | Penalty minutes. |
 | `plus_minus` | `number` | Plus/minus rating. |
 | `shots_on_goal` | `number` | Shots on goal. |
-| `blocks` | `number` | Total blocks. |
+| `blocks` | `number` |  |
 | `giveaways` | `number` | Giveaways. |
 | `takeaways` | `number` | Takeaways. |
 | `faceoffs_won_lost` | `string` | Faceoffs won and lost, as the league's combined won-lost string. |
@@ -262,7 +262,7 @@ const rows = await sdv.pwhl.loadPhfSchedules({ seasons: 2023 });
 | `home_division_id` | `string` | League identifier for the home team's division. |
 | `home_division` | `string` | Home team division. |
 | `away_division_id` | `string` | League identifier for the away team's division. |
-| `away_division` | `string` | Away team division. |
+| `away_division` | `string` |  |
 | `home_score` | `number` | Home team final score. |
 | `away_score` | `number` | Away team final score. |
 | `home_shots` | `number` | Home team shots in the period. |
@@ -279,7 +279,7 @@ const rows = await sdv.pwhl.loadPhfSchedules({ seasons: 2023 });
 | `game_type` | `string` | Game type the row belongs to. |
 | `notes` | `string` | Notes flag for the pick. |
 | `status` | `string` | Status string (e.g. captain markers). |
-| `overtime` | `boolean` | Binary indicator of whether or not game went to overtime. |
+| `overtime` | `boolean` |  |
 | `shootout` | `boolean` | Whether shootout data is available. |
 | `allow_players` | `boolean` | League flag for whether player-level detail is published for the game. |
 | `tickets_url` | `string` | Link to purchase tickets for the game. |

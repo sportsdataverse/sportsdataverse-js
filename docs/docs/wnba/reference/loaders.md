@@ -260,11 +260,11 @@ const rows = await sdv.wnba.loadWnbaSchedule({ seasons: 2024 });
 | `time_valid` | `boolean` | Time valid. |
 | `neutral_site` | `boolean` | Neutral site. |
 | `conference_competition` | `boolean` | Conference competition. |
-| `play_by_play_available` | `boolean` | Whether play-by-play data is available. |
+| `play_by_play_available` | `boolean` |  |
 | `recent` | `boolean` | Recent. |
 | `start_date` | `string` | Start date (YYYY-MM-DD). |
 | `broadcast` | `string` | Broadcast information string. |
-| `highlights` | `string` | Game highlight urls. |
+| `highlights` | `string` |  |
 | `notes_type` | `string` | Notes type. |
 | `notes_headline` | `string` | Notes headline. |
 | `broadcast_market` | `string` | Broadcast market label (e.g. 'national', 'home'). |
@@ -323,11 +323,11 @@ const rows = await sdv.wnba.loadWnbaSchedule({ seasons: 2024 });
 | `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 | `season_type` | `number` | Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). |
 | `status_type_alt_detail` | `string` | Status type alt detail. |
-| `game_json` | `boolean` | Whether processed game JSON is available. |
-| `game_json_url` | `string` | URL to the processed game JSON. |
+| `game_json` | `boolean` |  |
+| `game_json_url` | `string` |  |
 | `game_date_time` | `Date` | Game start date/time (ISO 8601). |
 | `game_date` | `Date` | Game date (YYYY-MM-DD). |
-| `PBP` | `boolean` | Whether play-by-play data is available. |
+| `PBP` | `boolean` |  |
 | `team_box` | `boolean` | Team box. |
 | `player_box` | `boolean` | Player box. |
 
@@ -447,19 +447,19 @@ const rows = await sdv.wnba.loadWnbaDraft({ seasons: 2026 });
 | `athlete_id` | `string` | Unique athlete identifier (ESPN). |
 | `athlete_uid` | `string` | ESPN athlete UID (universal identifier). |
 | `athlete_guid` | `string` | ESPN athlete GUID. |
-| `athlete_first_name` | `string` | Player first name. |
-| `athlete_last_name` | `string` | Athlete last name. |
-| `athlete_full_name` | `string` | Drafted player full name. |
+| `athlete_first_name` | `string` |  |
+| `athlete_last_name` | `string` |  |
+| `athlete_full_name` | `string` |  |
 | `athlete_display_name` | `string` | Athlete display name (full). |
 | `athlete_short_name` | `string` | Athlete short display name. |
-| `athlete_height` | `string` | Athlete height. |
-| `athlete_weight` | `string` | Athlete weight. |
+| `athlete_height` | `string` |  |
+| `athlete_weight` | `string` |  |
 | `athlete_position_abbreviation` | `string` | Athlete position abbreviation (G / F / C). |
 | `athlete_position_name` | `string` | Athlete position ('Guard', 'Forward', 'Center'). |
 | `athlete_headshot_href` | `string` | Athlete headshot image URL. |
 | `college_id` | `string` | Unique identifier for college. |
 | `college_name` | `string` | College name. |
-| `college_short_name` | `string` | College short name. |
+| `college_short_name` | `string` |  |
 | `college_abbreviation` | `string` | Short code for the drafted player's school, read from the athlete's ESPN college block; null throughout the published data because ESPN ships no college block on these picks. |
 | `team_id` | `string` | Unique team identifier. |
 | `team_uid` | `string` | ESPN universal team identifier (UID format 's:40~l:...~t:...'). |
@@ -508,8 +508,8 @@ const rows = await sdv.wnba.loadWnbaGameRosters({ seasons: 2024 });
 | `athlete_guid` | `string` | ESPN athlete GUID. |
 | `athlete_display_name` | `string` | Athlete display name (full). |
 | `athlete_short_name` | `string` | Athlete short display name. |
-| `athlete_first_name` | `string` | Player first name. |
-| `athlete_last_name` | `string` | Athlete last name. |
+| `athlete_first_name` | `string` |  |
+| `athlete_last_name` | `string` |  |
 | `athlete_jersey` | `string` | Athlete jersey number. |
 | `athlete_position` | `string` | Athlete position. |
 | `athlete_headshot` | `string` | Direct link to the player's ESPN headshot image, always of the form https://a.espncdn.com/i/headshots/wnba/players/full/\{athlete_id\}.png, and null for the few players ESPN has no photo for. |
@@ -580,14 +580,14 @@ const rows = await sdv.wnba.loadWnbaPlayerSeasonStats({ seasons: 2024 });
 | `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 | `athlete_id` | `string` | Unique athlete identifier (ESPN). |
 | `athlete_display_name` | `string` | Athlete display name (full). |
-| `athlete_first_name` | `string` | Player first name. |
-| `athlete_last_name` | `string` | Athlete last name. |
+| `athlete_first_name` | `string` |  |
+| `athlete_last_name` | `string` |  |
 | `athlete_position_abbreviation` | `string` | Athlete position abbreviation (G / F / C). |
 | `athlete_jersey` | `string` | Athlete jersey number. |
 | `team_id` | `string` | Unique team identifier. |
 | `team_display_name` | `string` | Full team display name. |
 | `category` | `string` | Category label. |
-| `stat_label` | `string` | Human-readable label of the statistic (e.g. 'At bats'). |
+| `stat_label` | `string` |  |
 | `stat_name` | `string` | Internal stat key. |
 | `stat_display_name` | `string` | Stat display name. |
 | `stat_description` | `string` | ESPN's prose definition of the statistic on this row, for example The average number of points scored per game for avgPoints; combined made-attempted stats carry both halves joined by a hyphen. |
@@ -723,8 +723,8 @@ const rows = await sdv.wnba.loadWnbaStandings({ seasons: 2024 });
 |---|---|---|
 | `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 | `group_id` | `string` | ESPN group id. |
-| `group_name` | `string` | Group name (conference / division). |
-| `group_abbreviation` | `string` | Group abbreviation. |
+| `group_name` | `string` |  |
+| `group_abbreviation` | `string` |  |
 | `group_short_name` | `string` | Short label of the standings group node the team sits under, read from ESPN shortName; the WNBA conference nodes ship only name and abbreviation, so it is null on every published row. |
 | `team_id` | `string` | Unique team identifier. |
 | `team_uid` | `string` | ESPN universal team identifier (UID format 's:40~l:...~t:...'). |
@@ -739,7 +739,7 @@ const rows = await sdv.wnba.loadWnbaStandings({ seasons: 2024 });
 | `team_logo` | `string` | Team logo image URL. |
 | `stat_name` | `string` | Internal stat key. |
 | `stat_display_name` | `string` | Stat display name. |
-| `stat_short_display_name` | `string` | Short human-readable stat name. |
+| `stat_short_display_name` | `string` |  |
 | `stat_description` | `string` | ESPN's long-form explanation of the standings stat, such as Clinched Best League Record for clincher or Record last 10 games for lasttengames. |
 | `stat_abbreviation` | `string` | ESPN's abbreviation for the standings stat, which can differ from stat_short_display_name (playoffSeed is SEED here but POS there) and is null on the record-split rows such as Home and vs. Conf. |
 | `stat_type` | `string` | Stat type code (e.g. "win", "loss"). |
@@ -779,7 +779,7 @@ const rows = await sdv.wnba.loadWnbaTeamSeasonStats({ seasons: 2024 });
 | `team_alternate_color` | `string` | Team alternate color (hex without leading '#'). |
 | `team_logo` | `string` | Team logo image URL. |
 | `category` | `string` | Category label. |
-| `stat_label` | `string` | Human-readable label of the statistic (e.g. 'At bats'). |
+| `stat_label` | `string` |  |
 | `stat_name` | `string` | Internal stat key. |
 | `stat_display_name` | `string` | Stat display name. |
 | `stat_description` | `string` | Human-readable description of the statistic the row reports. |
@@ -956,14 +956,14 @@ const rows = await sdv.wnba.loadWnbaPlayerCore({ seasons: 2025 });
 | `date_of_birth` | `string` | Date of birth (YYYY-MM-DD). |
 | `birth_city` | `string` | Birth city. |
 | `birth_state` | `string` | Birth state / region. |
-| `birth_country` | `string` | Player birth country. |
+| `birth_country` | `string` |  |
 | `jersey` | `string` | Jersey number worn by the player. |
 | `position_id` | `string` | Unique position identifier. |
 | `position_name` | `string` | Listed roster position ('Guard', 'Forward', 'Center'). |
 | `position_abbreviation` | `string` | Position abbreviation ('G' / 'F' / 'C'). |
 | `position_display_name` | `string` | Position display name. |
 | `college_id` | `string` | Unique identifier for college. |
-| `current_team_id` | `string` | Player's current team identifier. |
+| `current_team_id` | `string` |  |
 | `headshot_href` | `string` | Headshot image URL. |
 | `experience_years` | `number` | Experience years. |
 | `status_id` | `string` | Status identifier. |
@@ -1217,7 +1217,7 @@ const rows = await sdv.wnba.loadWnbaStatsPbp({ seasons: 2025, columns: ['game_id
 | `is_missed_shot` | `boolean` | True when the event is a missed field goal. |
 | `is_free_throw` | `boolean` | True when the event is a free throw attempt. |
 | `is_rebound` | `boolean` | True when the event is a rebound (player or team). |
-| `is_turnover` | `boolean` | `TRUE` if the play was a turnover. |
+| `is_turnover` | `boolean` |  |
 | `is_foul` | `boolean` | True when the event is a foul. |
 | `is_substitution` | `boolean` | True when the event is a substitution. |
 | `is_jump_ball` | `boolean` | True when the event is a jump ball. |
@@ -1509,12 +1509,12 @@ const rows = await sdv.wnba.loadWnbaStatsSchedules({ seasons: 2025 });
 | `game_date` | `string` | Game date (YYYY-MM-DD). |
 | `matchup` | `string` | Matchup. |
 | `home_team_id` | `string` | Unique identifier for the home team. |
-| `home_team_abbreviation` | `string` | Home team abbreviation. |
+| `home_team_abbreviation` | `string` |  |
 | `home_team_name` | `string` | Home team name. |
 | `home_pts` | `number \| bigint` | Final points scored by the home team. |
 | `home_wl` | `string` | Result for the home team ('W' or 'L'); null before the game is final. |
 | `away_team_id` | `string` | Unique identifier for the away team. |
-| `away_team_abbreviation` | `string` | Away team abbreviation. |
+| `away_team_abbreviation` | `string` |  |
 | `away_team_name` | `string` | Away team name. |
 | `away_pts` | `number \| bigint` | Final points scored by the away team. |
 | `away_wl` | `string` | Result for the away team ('W' or 'L'); null before the game is final. |

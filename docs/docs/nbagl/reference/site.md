@@ -275,8 +275,8 @@ NBAGL — scoreboard (ESPN site.api.espn.com).
 | `season_slug` | character | Season slug. |
 | `status_type_id` | character | Unique identifier for status type. |
 | `status_type_name` | character | Status type name. |
-| `status_type_state` | character | Status state (pre/in/post). |
-| `status_type_completed` | logical | Whether the game is complete. |
+| `status_type_state` | character | Status type state. |
+| `status_type_completed` | logical | Status type completed. |
 | `status_type_description` | character | Status type description. |
 | `status_type_detail` | character | Status type detail. |
 | `status_type_short_detail` | character | Status type short detail. |
@@ -290,31 +290,31 @@ NBAGL — scoreboard (ESPN site.api.espn.com).
 | `venue_full_name` | character | Venue full name. |
 | `venue_city` | character | Venue city. |
 | `venue_state` | character | Venue state / region. |
-| `venue_indoor` | logical | Whether the home venue is indoors. |
+| `venue_indoor` | logical | TRUE if the venue is indoors. |
 | `broadcast` | character | Broadcast information string. |
 | `note` | character | Event note text from the competition (e.g. a series or game label such as 'World Series - Game 1', or a shootout result); an empty string when there is none. |
 | `home_id` | character | Unique identifier for home. |
-| `home_name` | character | Home team display name. |
+| `home_name` | character | Home name. |
 | `home_abbreviation` | character | Home team's abbreviation. |
-| `home_display_name` | character | Home team display name. |
+| `home_display_name` | character | Home display name. |
 | `home_location` | character | Home team's location. |
-| `home_color` | character | Home team primary color hex. |
+| `home_color` | character | Color code (hex) for home. |
 | `home_alternate_color` | character | Color code (hex) for home alternate. |
 | `home_logo` | character | Home team logo URL. |
 | `home_score` | character | Home team's score. For cricket, the innings string (e.g. '161/5 (18/20 ov, target 156)'). |
-| `home_winner` | logical | Whether the home team won. |
-| `home_rank` | character | Home team rank (if ranked). |
+| `home_winner` | logical | Home team's winner. |
+| `home_rank` | character |  |
 | `away_id` | character | Unique identifier for away. |
-| `away_name` | character | Away team display name. |
+| `away_name` | character | Away name. |
 | `away_abbreviation` | character | Away team's abbreviation. |
-| `away_display_name` | character | Away team display name. |
+| `away_display_name` | character | Away display name. |
 | `away_location` | character | Away team's location. |
-| `away_color` | character | Away team primary color hex. |
+| `away_color` | character | Color code (hex) for away. |
 | `away_alternate_color` | character | Color code (hex) for away alternate. |
 | `away_logo` | character | Away team logo URL. |
 | `away_score` | character | Away team's score. For cricket, the innings string. |
-| `away_winner` | logical | Whether the away team won. |
-| `away_rank` | character | Away team rank (if ranked). |
+| `away_winner` | logical | Away team's winner. |
+| `away_rank` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -342,8 +342,8 @@ NBAGL — standings (ESPN site.api.espn.com (v2)).
 
 | col_name | type | description |
 |---|---|---|
-| `group_name` | character | Group name (conference / division). |
-| `group_abbreviation` | character | Group abbreviation. |
+| `group_name` | character |  |
+| `group_abbreviation` | character |  |
 | `team_id` | character | ESPN team id |
 | `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `team_abbreviation` | character | Team abbreviation |
@@ -358,7 +358,7 @@ NBAGL — standings (ESPN site.api.espn.com (v2)).
 | `games_behind` | integer |  |
 | `league_win_percent` | number |  |
 | `losses` | integer | Number of matches the team has lost. |
-| `playoff_seed` | integer | Current playoff seed. |
+| `playoff_seed` | integer |  |
 | `point_differential` | integer | Goal difference (for minus against). |
 | `points` | integer | Competition points. |
 | `points_against` | integer | Goals conceded. |
@@ -644,10 +644,10 @@ NBAGL — team roster (ESPN site.api.espn.com).
 
 | col_name | type | description |
 |---|---|---|
-| `id` | character | ID of the player in the 'name' column. |
+| `id` | character | Id. |
 | `uid` | character | ESPN universal id for the athlete. |
 | `guid` | character | Stable cross-league team GUID. |
-| `alternate_ids_sdr` | character | Alternate ids sdr. |
+| `alternate_ids_sdr` | character |  |
 | `first_name` | character | Athlete's first (given) name. |
 | `last_name` | character | Athlete's last (family) name. |
 | `full_name` | character | Player's full name. |
@@ -664,12 +664,12 @@ NBAGL — team roster (ESPN site.api.espn.com).
 | `birth_place_city` | character | Birth place city. |
 | `birth_place_country` | character | Birth place country. |
 | `college_id` | character | Unique identifier for college. |
-| `college_guid` | character | College guid. |
-| `college_mascot` | character | College mascot. |
-| `college_name` | character | College name. |
-| `college_short_name` | character | College short name. |
-| `college_abbrev` | character | College abbreviation. |
-| `college_logos` | character | College logo URLs (pipe-delimited). |
+| `college_guid` | character |  |
+| `college_mascot` | character |  |
+| `college_name` | character | College / pre-draft team. |
+| `college_short_name` | character |  |
+| `college_abbrev` | character |  |
+| `college_logos` | character |  |
 | `slug` | character | URL slug for the athlete. |
 | `headshot_href` | character | Headshot image URL. |
 | `headshot_alt` | character | Alternative-text label for the headshot. |

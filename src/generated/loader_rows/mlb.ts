@@ -25,7 +25,7 @@ export interface LoadMlbRe24MatrixRow {
 export interface LoadMlbWeTableRow {
   /** Inning number with the ninth and every extra inning collapsed into 9, so extras share the ninth-inning win-expectancy cells. `Int64` */
   inning_capped?: number | bigint | null;
-  /** Half of the game (1 or 2). `String` */
+  /** `String` */
   half?: string | null;
   /** Three-character pre-play base occupancy where each slot carries its base number when occupied and an underscore when empty, so ___ is bases empty and 123 is bases loaded. `String` */
   base_state?: string | null;
@@ -51,7 +51,7 @@ export interface LoadMlbWpaRow {
   game_id?: string | null;
   /** Zero-based index of the at-bat within the game. `Int64` */
   at_bat_index?: number | bigint | null;
-  /** Win probability added (WPA) for the posteam. `Float64` */
+  /** `Float64` */
   wpa?: number | null;
   /** Season year. `Int64` */
   season?: number | bigint | null;
@@ -341,11 +341,11 @@ export interface LoadNcaaBaseballPbpRow {
   batting?: string | null;
   /** Whether the situation applies to fielding stats. `String` */
   fielding?: string | null;
-  /** Sequential play number within the game (1-indexed). `Int64` */
+  /** `Int64` */
   play_number?: number | bigint | null;
-  /** Score away. `Int64` */
+  /** `Int64` */
   score_away?: number | bigint | null;
-  /** Score home. `Int64` */
+  /** `Int64` */
   score_home?: number | bigint | null;
   /** MLBAM player id of the batter. `String` (an id) */
   batter?: string | null;
@@ -393,7 +393,7 @@ export interface LoadNcaaBaseballPbpRow {
   description?: string | null;
   /** Source. `String` */
   source?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. `String` */
   game_key?: string | null;
@@ -421,7 +421,7 @@ export interface LoadNcaaBaseballScheduleRow {
   game_number?: number | bigint | null;
   /** Unique identifier for opponent. `String` (an id) */
   opponent_id?: string | null;
-  /** Opposing team of player `String` */
+  /** `String` */
   opponent?: string | null;
   /** Win/loss/tie result for `team_id`. `String` */
   result?: string | null;
@@ -479,9 +479,9 @@ export interface LoadNcaaBaseballRostersRow {
   height?: string | null;
   /** Weight in pounds. `Int64` */
   weight?: number | bigint | null;
-  /** Prospect hometown. `String` */
+  /** `String` */
   hometown?: string | null;
-  /** High school `String` */
+  /** `String` */
   high_school?: string | null;
   /** Games played. `Int64` */
   games_played?: number | bigint | null;
@@ -513,13 +513,13 @@ export interface LoadNcaaBaseballLinescoreRow {
   errors?: number | bigint | null;
   /** Game date (YYYY-MM-DD). `String` */
   game_date?: string | null;
-  /** Venue name. `String` */
+  /** `String` */
   venue?: string | null;
   /** Reported attendance (NA on the redesigned page). `Int64` */
   attendance?: number | bigint | null;
   /** Source. `String` */
   source?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. `String` */
   game_key?: string | null;
@@ -537,7 +537,7 @@ export interface LoadNcaaBaseballTeamStatsRow {
   contest_id?: string | null;
   /** Category label. `String` */
   category?: string | null;
-  /** Stat. `String` */
+  /** `String` */
   stat?: string | null;
   /** Inning number. `String` */
   period?: string | null;
@@ -551,7 +551,7 @@ export interface LoadNcaaBaseballTeamStatsRow {
   home_value?: string | null;
   /** Source. `String` */
   source?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. `String` */
   game_key?: string | null;
@@ -621,7 +621,7 @@ export interface LoadNcaaBaseballPlayerStatsRow {
   category?: string | null;
   /** Source. `String` */
   source?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. `String` */
   game_key?: string | null;
@@ -697,7 +697,7 @@ export interface LoadNcaaBaseballSituationalStatsRow {
   contest_id?: string | null;
   /** Side indicator for the row: 0 and 1 distinguish the two teams in the contest. `Int64` */
   team_seq?: number | bigint | null;
-  /** Player name. `String` */
+  /** `String` */
   player?: string | null;
   /** Position the NCAA baseball feed reports for the player. `String` */
   position?: string | null;
@@ -731,7 +731,7 @@ export interface LoadNcaaBaseballSituationalStatsRow {
   category?: string | null;
   /** Source. `String` */
   source?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. `String` */
   game_key?: string | null;
@@ -775,7 +775,7 @@ export interface LoadNcaaBaseballGamesRow {
   season?: number | bigint | null;
   /** Source. `String` */
   source?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** `String` (an id) */
   espn_game_id?: string | null;
   /** Away team name. `String` */
   away_team?: string | null;
