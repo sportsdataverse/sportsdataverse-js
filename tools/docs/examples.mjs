@@ -90,7 +90,9 @@ export const EXAMPLES = [
   //   <!-- inject:example:ID -->  and its source between  <!-- inject:source:ID -->
   // in the tutorial page (`dir: 'tutorials'`). `artifacts` are files the script
   // writes to examples/out/, copied to docs/static/examples/ (drift-gated too).
-  // Needs `npm install` in examples/ (it links the package with file:..).
+  // Scripts run with `--import ./_resolve.mjs` (resolves the package from this
+  // worktree's dist/; no install in examples/). The 9x sdvplot scripts skip
+  // themselves without a sibling sdvplot-js build; their committed output stays.
   ...[
     ['ex01', '01_nba_scoreboard_to_table.mjs', 'scoreboard-to-table.md'],
     ['ex02', '02_nba_pbp_shots.mjs', 'nba-pbp-shots.mdx'],

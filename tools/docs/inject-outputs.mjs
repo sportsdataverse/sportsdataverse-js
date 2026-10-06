@@ -127,12 +127,15 @@ function rowsFor(parsers, ex) {
   throw new Error(`example "${ex.id}": unknown family "${ex.family}"`);
 }
 
-/** Run examples/<script> offline; returns its stdout (deterministic: fixtures only). */
+/**
+ * Run examples/<script> offline; returns its stdout (deterministic: fixtures
+ * only), or null when the script skipped itself (a 9x sdvplot script without
+ * the sibling sdvplot-js build: examples/_resolve.mjs prints `skipped:`).
+ * The `--import ./_resolve.mjs` preload resolves `sportsdataverse` to this
+ * worktree's dist/, so no `npm install` in examples/ is needed.
+ */
 function runScript(ex) {
-  if (!existsSync(join(EXAMPLES_DIR, 'node_modules', 'sportsdataverse'))) {
-    throw new Error(`example "${ex.id}": examples/node_modules is missing — run \`npm install\` in examples/ first`);
-  }
-  const res = spawnSync(process.execPath, [ex.script], {
+  const res = spawnSync(process.execPath, ['--import', './_resolve.mjs', ex.script], {
     cwd: EXAMPLES_DIR,
     encoding: 'utf8',
     env: { ...process.env, SDV_LIVE: '' },
@@ -141,13 +144,15 @@ function runScript(ex) {
   if (res.status !== 0) {
     throw new Error(`example "${ex.id}": ${ex.script} exited ${res.status}\n${res.stderr}`);
   }
-  return res.stdout.replace(/\r\n/g, '\n').trimEnd();
+  const out = res.stdout.replace(/\r\n/g, '\n').trimEnd();
+  return out.startsWith('skipped:') ? null : out;
 }
 
-/** Build the full injected block (caption + table) for an entry. */
+/** Build the full injected block (caption + table) for an entry; `block: null` = script skipped. */
 function blockFor(parsers, ex) {
   if (ex.family === 'script') {
     const out = runScript(ex);
+    if (out === null) return { block: null, count: 0 };
     const count = (out.match(/^## /gm) ?? []).length;
     return { block: `${ex.caption}\n\n\`\`\`text\n${out}\n\`\`\``, count };
   }
@@ -221,6 +226,12 @@ async function main() {
 
     for (const ex of exs) {
       const { block, count } = blockFor(parsers, ex);
+      if (block === null) {
+        // The script skipped itself (optional dependency absent): keep the
+        // committed output + artifacts rather than blanking them.
+        console.log(`  - ${ex.id.padEnd(18)} ${target.padEnd(34)} ${ex.family.padEnd(13)} skipped (kept committed output)`);
+        continue;
+      }
       // A script entry also freezes its own source (`<!-- inject:source:ID -->`)
       // so the tutorial can never show code that differs from examples/.
       const parts = [['example', block]];

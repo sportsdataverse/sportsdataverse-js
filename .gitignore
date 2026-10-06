@@ -1,6 +1,7 @@
 node_modules
 .vscode
 mochawesome-report
+coverage/
 dist/
 # Local-only TypeDoc HTML (`npm run docs`). The DEPLOYED API reference is
 # generated into the Docusaurus site by docusaurus-plugin-typedoc instead.
@@ -12,7 +13,7 @@ temp/
 # Python bytecode from the oracle generators (tools/parity, tools/oracle, tools/sdv_py_pin.py).
 __pycache__/
 
-# examples/ — local install of the worktree package (+ the unpublished sdvplot-js link) and script output
+# examples/ — optional local install of the worktree package (`--import ./_resolve.mjs` needs none) and script output
 examples/node_modules/
 examples/package-lock.json
 examples/out/

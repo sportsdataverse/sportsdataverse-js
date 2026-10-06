@@ -10,10 +10,15 @@ the real hosts instead. Every script is also a docs tutorial
 
 ```sh
 cd examples
-npm install            # links the repo package (file:..) — build dist/ first (`npm run build` at the root)
-node 01_nba_scoreboard_to_table.mjs
-SDV_LIVE=1 node 01_nba_scoreboard_to_table.mjs   # live
+node --import ./_resolve.mjs 01_nba_scoreboard_to_table.mjs            # offline, no install needed
+SDV_LIVE=1 node --import ./_resolve.mjs 01_nba_scoreboard_to_table.mjs # live
 ```
+
+`_resolve.mjs` is a preload that resolves `import sdv from 'sportsdataverse'` to
+this repo's `dist/` (run `npm run build` at the root first), so the scripts stay
+copy-pasteable and need no install here. `npm install` in this directory
+(`package.json` links the package with `file:..`) is an optional convenience for
+plain `node NN_*.mjs`.
 
 | Script | Sources |
 | --- | --- |
@@ -40,24 +45,22 @@ SDV_LIVE=1 node 01_nba_scoreboard_to_table.mjs   # live
 
 `@sportsdataverse/sdvplot` (team colours, logo + headshot URLs) and
 `@sportsdataverse/sporty` (sport surfaces, SVG) are **not on npm yet**. They live
-in <https://github.com/sportsdataverse/sdvplot-js>; `package.json` here links
-them with `file:../../../sdvplot-js/packages/{sdvplot,sporty}` — relative to
-`examples/`, i.e. a checkout two directories above this repo's root (that is the
-SportsDataverse worktree layout; edit the two `file:` entries to match yours).
-To set it up:
+in <https://github.com/sportsdataverse/sdvplot-js>. `_resolve.mjs` resolves them
+from a built checkout at `$SDVPLOT_JS_DIR` (default: `../../sdvplot-js` relative
+to this repo's root, i.e. a sibling clone). To set it up:
 
 ```sh
-git clone https://github.com/sportsdataverse/sdvplot-js ../../../sdvplot-js   # from examples/
-cd ../../../sdvplot-js && pnpm install
+git clone https://github.com/sportsdataverse/sdvplot-js ../../sdvplot-js   # from the repo root
+cd ../../sdvplot-js && pnpm install
 cd packages/sporty  && npx tsup          # the root `pnpm build` filter can be a no-op on Windows
 cd ../sdvplot       && npx tsup
-cd <this repo>/examples && npm install   # resolves the two file: links
-node 90_sdvplot_shot_chart.mjs           # writes out/shot_chart.svg
+cd <this repo>/examples
+node --import ./_resolve.mjs 90_sdvplot_shot_chart.mjs   # writes out/shot_chart.svg
+SDVPLOT_JS_DIR=/path/to/sdvplot-js node --import ./_resolve.mjs 90_sdvplot_shot_chart.mjs  # elsewhere
 ```
 
-If the checkout is elsewhere, point the two `file:` paths at it. Without it,
-`npm install` here fails; remove the two lines from `package.json` to run only
-`01`–`13`, and `test/examples.test.js` skips the `9x` scripts when
-`node_modules/@sportsdataverse/sporty` is absent. Colours and URLs come from
-sdvplot's bundled index, so the `9x` scripts are offline too (the logo / headshot
-values are URL strings; nothing is fetched).
+Without that build, a `9x` script prints `skipped: build sdvplot-js first` and
+exits 0: `test/examples.test.js` skips it and the docs injector keeps the
+committed output for its tutorial. Colours and URLs come from sdvplot's bundled
+index, so the `9x` scripts are offline too (the logo / headshot values are URL
+strings; nothing is fetched).
