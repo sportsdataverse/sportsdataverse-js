@@ -19,7 +19,7 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ### Removed
 
-- The unused `tsx` devDependency, and `decode-html`: the one call site (`ncaa.service.ts`'s `<select>` scraper) reads cheerio's already-decoded `.text()`, which is identical to `decode($(el).html())` on every entity the old helper handled.
+- The unused `tsx` devDependency, and `decode-html`: the one call site (`ncaa.service.ts`'s `<select>` scraper) reads cheerio's already-decoded `.text()`, which is identical to `decode($(el).html())` on every entity the old helper handled (an offline test pins `&amp;amp;` / `&#39;` decoding; `SECURITY.md` no longer lists it or the root `overrides`).
 
 ### Tests
 
