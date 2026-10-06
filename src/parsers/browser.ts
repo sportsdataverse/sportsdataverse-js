@@ -32,16 +32,14 @@ export {
 } from "./espn.js";
 
 import { parserFor } from "./_registry.js";
+import type { ParserRow } from "../core/types.js";
 import { MULTI_TABLE_SECTIONS } from "./_frames.js";
 import { SECTIONED_ENDPOINTS, parserForEndpoint } from "./espn.js";
 
 /** Tidy rows, or — for the ESPN `summary` dispatcher, or a dict-default flat
  * multi-table parser, with no section — a dict of sub-frames. `null` when no
  * parser is registered for the endpoint. */
-export type ParsedResult =
-  | Record<string, any>[]
-  | Record<string, Record<string, any>[]>
-  | null;
+export type ParsedResult = ParserRow[] | Record<string, ParserRow[]> | null;
 
 /**
  * Unified parse helper: turn a raw payload into tidy rows given how the endpoint
@@ -60,14 +58,14 @@ export type ParsedResult =
 export function parseEndpoint(
   kind: "espn" | "flat",
   key: string,
-  raw: any,
+  raw: unknown,
   section?: string
 ): ParsedResult {
   if (kind === "espn") {
     const fn = parserForEndpoint(key);
     if (!fn) return null;
-    if (SECTIONED_ENDPOINTS.has(key)) return (fn as (p: any, s?: string) => ParsedResult)(raw, section);
-    return (fn as (p: any) => Record<string, any>[])(raw);
+    if (SECTIONED_ENDPOINTS.has(key)) return (fn as (p: unknown, s?: string) => ParsedResult)(raw, section);
+    return (fn as (p: unknown) => ParserRow[])(raw);
   }
   const fn = parserFor(key);
   if (!fn) return null;

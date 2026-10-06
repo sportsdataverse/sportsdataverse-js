@@ -6,7 +6,7 @@
 //
 // Same contract as the native flat-API parsers (mlb.ts, nhl_api_web.ts):
 //
-//   - every parser is `(payload: any) => Record<string, any>[]` (the JS analogue
+//   - every parser is `(payload: any) => ParserRow[]` (the JS analogue
 //     of a polars frame — an array of flat row objects);
 //   - empty / malformed / null payloads return `[]` instead of throwing, so
 //     callers can chain without null-checks (mirrors each Python `_empty_frame`);
@@ -24,6 +24,7 @@ import { normalize, snakeCase } from "./_normalize.js";
 import type { ParserFn } from "./_registry.js";
 import { pyUnderscore } from "./_frames.js";
 import { idColumnsToStrings } from "../core/int64.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -139,7 +140,7 @@ function scoreboardEventParsing(event: any): Record<string, any> {
 }
 
 /** Parse a scoreboard response into one row per event (from `events[]`). */
-export function parse_scoreboard(payload: any): Record<string, any>[] {
+export function parse_scoreboard(payload: any): ParserRow[] {
   if (!payload) return [];
   const events = payload.events || [];
   if (!events.length) return [];
@@ -154,7 +155,7 @@ export function parse_scoreboard(payload: any): Record<string, any>[] {
  * Parse a site-v2 teams response into one row per team
  * (`sports[0].leagues[0].teams[]`, with `items`/`teams` Core v2 fallbacks).
  */
-export function parse_teams(payload: any): Record<string, any>[] {
+export function parse_teams(payload: any): ParserRow[] {
   if (!payload) return [];
   try {
     const sports = payload.sports || [];
@@ -224,7 +225,7 @@ function extractStandingEntries(
 }
 
 /** Parse a standings (alt v2) response into one row per team entry. */
-export function parse_standings(payload: any): Record<string, any>[] {
+export function parse_standings(payload: any): ParserRow[] {
   if (!payload) return [];
   let children = payload.children || [];
   if (!children.length) {
@@ -266,7 +267,7 @@ function flattenGroups(groups: any[], parentId = "", depth = 0): Record<string, 
 }
 
 /** Parse a groups response into one row per group (conference/division). */
-export function parse_groups(payload: any): Record<string, any>[] {
+export function parse_groups(payload: any): ParserRow[] {
   if (!payload) return [];
   let groups: any[];
   try {
@@ -291,7 +292,7 @@ export function parse_groups(payload: any): Record<string, any>[] {
 // ===========================================================================
 
 /** Parse an athlete overview response into one row per stats split. */
-export function parse_athlete_overview(payload: any): Record<string, any>[] {
+export function parse_athlete_overview(payload: any): ParserRow[] {
   if (!payload) return [];
   const athlete = payload.athlete || {};
   const bio = {
@@ -334,7 +335,7 @@ export function parse_athlete_overview(payload: any): Record<string, any>[] {
 // ===========================================================================
 
 /** Parse an athlete stats response into one row per (category × split). */
-export function parse_athlete_stats(payload: any): Record<string, any>[] {
+export function parse_athlete_stats(payload: any): ParserRow[] {
   if (!payload) return [];
   let categories = payload.categories || [];
   if (!categories.length) {
@@ -378,7 +379,7 @@ export function parse_athlete_stats(payload: any): Record<string, any>[] {
 // ===========================================================================
 
 /** Parse an athlete gamelog response into one row per game. */
-export function parse_athlete_gamelog(payload: any): Record<string, any>[] {
+export function parse_athlete_gamelog(payload: any): ParserRow[] {
   if (!payload) return [];
   let seasonTypes = payload.seasonTypes || [];
   if (!seasonTypes.length) {
@@ -433,7 +434,7 @@ export function parse_athlete_gamelog(payload: any): Record<string, any>[] {
 // ===========================================================================
 
 /** Parse an athlete splits response into one row per split. */
-export function parse_athlete_splits(payload: any): Record<string, any>[] {
+export function parse_athlete_splits(payload: any): ParserRow[] {
   if (!payload) return [];
   const categories = payload.categories || [];
   const rows: Record<string, any>[] = [];
@@ -472,7 +473,7 @@ export function parse_athlete_splits(payload: any): Record<string, any>[] {
 // ===========================================================================
 
 /** Parse a statistics-by-athlete leaderboard into one row per athlete. */
-export function parse_leaders(payload: any): Record<string, any>[] {
+export function parse_leaders(payload: any): ParserRow[] {
   if (!payload) return [];
 
   const categories = payload.categories || [];
@@ -540,7 +541,7 @@ function flattenScalarOneDeep(item: any): Record<string, any> {
 }
 
 /** Parse a season coaches response into one row per coach (from `items[]`). */
-export function parse_coaches(payload: any): Record<string, any>[] {
+export function parse_coaches(payload: any): ParserRow[] {
   if (!payload) return [];
   const items = payload.items || payload.coaches || [];
   if (!items.length) return [];
@@ -556,7 +557,7 @@ export function parse_coaches(payload: any): Record<string, any>[] {
 // ===========================================================================
 
 /** Parse a draft response into one row per pick (from `rounds[].picks[]`). */
-export function parse_draft(payload: any): Record<string, any>[] {
+export function parse_draft(payload: any): ParserRow[] {
   if (!payload) return [];
   const rounds = payload.rounds || [];
   let allPicks: any[] = [];
@@ -584,7 +585,7 @@ export function parse_draft(payload: any): Record<string, any>[] {
 // ===========================================================================
 
 /** Parse an event competitor roster into one row per athlete. */
-export function parse_event_competitor_roster(payload: any): Record<string, any>[] {
+export function parse_event_competitor_roster(payload: any): ParserRow[] {
   if (!payload) return [];
   const entries = payload.entries || payload.items || [];
   if (!entries.length) return [];
@@ -611,7 +612,7 @@ export function parse_event_competitor_roster(payload: any): Record<string, any>
 // ===========================================================================
 
 /** Parse event competitor statistics into one row per stat. */
-export function parse_event_competitor_statistics(payload: any): Record<string, any>[] {
+export function parse_event_competitor_statistics(payload: any): ParserRow[] {
   if (!payload) return [];
   let splits = payload.splits || [];
   if (!splits.length) {
@@ -651,7 +652,7 @@ export function parse_event_competitor_statistics(payload: any): Record<string, 
 // ===========================================================================
 
 /** Parse event competitor linescores into one row per period (from `items[]`). */
-export function parse_event_competitor_linescores(payload: any): Record<string, any>[] {
+export function parse_event_competitor_linescores(payload: any): ParserRow[] {
   if (!payload) return [];
   const items = payload.items || payload.linescores || [];
   if (!items.length) return [];
@@ -668,7 +669,7 @@ export function parse_event_competitor_linescores(payload: any): Record<string, 
 // ===========================================================================
 
 /** Parse an event plays response into one row per play (from `items[]`). */
-export function parse_event_plays(payload: any): Record<string, any>[] {
+export function parse_event_plays(payload: any): ParserRow[] {
   if (!payload) return [];
   const items = payload.items || payload.plays || [];
   if (!items.length) return [];
@@ -721,7 +722,7 @@ const LIST_PAYLOAD_KEYS = ["items", "entries", "events", "athletes"];
  * non-empty array. Core v2 `$ref`-only items yield a frame with a single
  * `_ref` (`$ref` → snake-cased) column — this parser does NOT auto-resolve.
  */
-export function parse_items(payload: any): Record<string, any>[] {
+export function parse_items(payload: any): ParserRow[] {
   if (!payload || !isPlainObject(payload)) return [];
   let rows: any[] | null = null;
   for (const key of LIST_PAYLOAD_KEYS) {
@@ -740,7 +741,7 @@ export function parse_items(payload: any): Record<string, any>[] {
 // ===========================================================================
 
 /** Parse a Site v2 `team/{id}/schedule` response into one row per event. */
-export function parse_team_schedule(payload: any): Record<string, any>[] {
+export function parse_team_schedule(payload: any): ParserRow[] {
   if (!payload || !isPlainObject(payload)) return [];
   const events = payload.events;
   if (!Array.isArray(events) || !events.length) return [];
@@ -754,7 +755,7 @@ export function parse_team_schedule(payload: any): Record<string, any>[] {
  * list of `{position, items:[...]}` groups, unrolled with a `position_group`
  * column carried from the parent).
  */
-export function parse_team_roster(payload: any): Record<string, any>[] {
+export function parse_team_roster(payload: any): ParserRow[] {
   if (!payload || !isPlainObject(payload)) return [];
   const athletes = payload.athletes;
   if (!Array.isArray(athletes) || !athletes.length) return [];
@@ -784,7 +785,7 @@ export function parse_team_roster(payload: any): Record<string, any>[] {
 // ===========================================================================
 
 /** Parse a Site v2 `news` response into one row per article. */
-export function parse_news(payload: any): Record<string, any>[] {
+export function parse_news(payload: any): ParserRow[] {
   if (!payload || !isPlainObject(payload)) return [];
   const articles = payload.articles;
   if (!Array.isArray(articles) || !articles.length) return [];
@@ -796,7 +797,7 @@ export function parse_news(payload: any): Record<string, any>[] {
  * reported. The nested per-player `injuries` sub-list is stringified (kept as a
  * single column) — the outer rows are per team.
  */
-export function parse_injuries(payload: any): Record<string, any>[] {
+export function parse_injuries(payload: any): ParserRow[] {
   if (!payload || !isPlainObject(payload)) return [];
   const teams = payload.injuries;
   if (!Array.isArray(teams) || !teams.length) return [];
@@ -820,7 +821,7 @@ function rowPerItem(items: any): Record<string, any>[] {
 }
 
 /** Extract per-athlete boxscore stats from `boxscore.players`. */
-export function parse_summary_boxscore_player(payload: any): Record<string, any>[] {
+export function parse_summary_boxscore_player(payload: any): ParserRow[] {
   if (!isPlainObject(payload)) return [];
   const bs = payload.boxscore || {};
   const teams = bs.players || [];
@@ -865,7 +866,7 @@ export function parse_summary_boxscore_player(payload: any): Record<string, any>
 }
 
 /** Extract per-team boxscore stats from `boxscore.teams`. */
-export function parse_summary_boxscore_team(payload: any): Record<string, any>[] {
+export function parse_summary_boxscore_team(payload: any): ParserRow[] {
   if (!isPlainObject(payload)) return [];
   const bs = payload.boxscore || {};
   const teams = bs.teams || [];
@@ -897,7 +898,7 @@ export function parse_summary_boxscore_team(payload: any): Record<string, any>[]
 }
 
 /** Extract the play-by-play list from `payload["plays"]`. */
-export function parse_summary_plays(payload: any): Record<string, any>[] {
+export function parse_summary_plays(payload: any): ParserRow[] {
   if (!isPlainObject(payload)) return [];
   const plays = payload.plays;
   if (!Array.isArray(plays) || !plays.length) return [];
@@ -905,7 +906,7 @@ export function parse_summary_plays(payload: any): Record<string, any>[] {
 }
 
 /** Extract win-probability over time from `payload["winprobability"]`. */
-export function parse_summary_winprobability(payload: any): Record<string, any>[] {
+export function parse_summary_winprobability(payload: any): ParserRow[] {
   if (!isPlainObject(payload)) return [];
   const wp = payload.winprobability;
   if (!Array.isArray(wp) || !wp.length) return [];
@@ -913,7 +914,7 @@ export function parse_summary_winprobability(payload: any): Record<string, any>[
 }
 
 /** Extract per-game stat leaders from `payload["leaders"]`. */
-export function parse_summary_leaders(payload: any): Record<string, any>[] {
+export function parse_summary_leaders(payload: any): ParserRow[] {
   if (!isPlainObject(payload)) return [];
   const teams = payload.leaders;
   if (!Array.isArray(teams) || !teams.length) return [];
@@ -951,7 +952,7 @@ export function parse_summary_leaders(payload: any): Record<string, any>[] {
 }
 
 /** Extract venue + attendance from `payload["gameInfo"]`. */
-export function parse_summary_game_info(payload: any): Record<string, any>[] {
+export function parse_summary_game_info(payload: any): ParserRow[] {
   const info = (payload || {}).gameInfo || {};
   if (!Object.keys(info).length) return [];
   const flat: Record<string, any> = { attendance: info.attendance };
@@ -969,23 +970,23 @@ export function parse_summary_game_info(payload: any): Record<string, any>[] {
 }
 
 /** Extract the per-game officials list from `gameInfo.officials`. */
-export function parse_summary_officials(payload: any): Record<string, any>[] {
+export function parse_summary_officials(payload: any): ParserRow[] {
   const officials = ((payload || {}).gameInfo || {}).officials;
   return rowPerItem(officials);
 }
 
 /** Extract the single-row game header from `payload["header"]`. */
-export function parse_summary_header(payload: any): Record<string, any>[] {
+export function parse_summary_header(payload: any): ParserRow[] {
   return singleRow(isPlainObject(payload) ? payload.header : null);
 }
 
 /** Extract head-to-head season series from `payload["seasonseries"]`. */
-export function parse_summary_season_series(payload: any): Record<string, any>[] {
+export function parse_summary_season_series(payload: any): ParserRow[] {
   return rowPerItem((payload || {}).seasonseries);
 }
 
 /** Extract per-team ATS records from `payload["againstTheSpread"]`. */
-export function parse_summary_against_the_spread(payload: any): Record<string, any>[] {
+export function parse_summary_against_the_spread(payload: any): ParserRow[] {
   const teams = (payload || {}).againstTheSpread;
   if (!Array.isArray(teams) || !teams.length) return [];
   const rows: Record<string, any>[] = [];
@@ -1015,7 +1016,7 @@ export function parse_summary_against_the_spread(payload: any): Record<string, a
 }
 
 /** Extract a standings snapshot from `payload["standings"]`. */
-export function parse_summary_standings(payload: any): Record<string, any>[] {
+export function parse_summary_standings(payload: any): ParserRow[] {
   const st = (payload || {}).standings || {};
   const groups = st.groups || [];
   if (!Array.isArray(groups) || !groups.length) return [];
@@ -1049,37 +1050,37 @@ export function parse_summary_standings(payload: any): Record<string, any>[] {
 }
 
 /** Extract TV broadcast info from `payload["broadcasts"]`. */
-export function parse_summary_broadcasts(payload: any): Record<string, any>[] {
+export function parse_summary_broadcasts(payload: any): ParserRow[] {
   return rowPerItem((payload || {}).broadcasts);
 }
 
 /** Extract the game format from `payload["format"]`. */
-export function parse_summary_format(payload: any): Record<string, any>[] {
+export function parse_summary_format(payload: any): ParserRow[] {
   return singleRow(isPlainObject(payload) ? payload.format : null);
 }
 
 /** Extract pre-game odds / picks from `payload["pickcenter"]`. */
-export function parse_summary_pickcenter(payload: any): Record<string, any>[] {
+export function parse_summary_pickcenter(payload: any): ParserRow[] {
   return rowPerItem((payload || {}).pickcenter);
 }
 
 /** Extract odds entries from `payload["odds"]`. */
-export function parse_summary_odds(payload: any): Record<string, any>[] {
+export function parse_summary_odds(payload: any): ParserRow[] {
   return rowPerItem((payload || {}).odds);
 }
 
 /** Extract the recap article metadata from `payload["article"]`. */
-export function parse_summary_article(payload: any): Record<string, any>[] {
+export function parse_summary_article(payload: any): ParserRow[] {
   return singleRow(isPlainObject(payload) ? payload.article : null);
 }
 
 /** Extract per-team injuries from `payload["injuries"]`. */
-export function parse_summary_injuries(payload: any): Record<string, any>[] {
+export function parse_summary_injuries(payload: any): ParserRow[] {
   return rowPerItem((payload || {}).injuries);
 }
 
 /** Extract the embedded news feed from `payload["news"].articles`. */
-export function parse_summary_news(payload: any): Record<string, any>[] {
+export function parse_summary_news(payload: any): ParserRow[] {
   const news = (payload || {}).news || {};
   return rowPerItem(news.articles);
 }
@@ -1092,7 +1093,7 @@ export function parse_summary_news(payload: any): Record<string, any>[] {
  * must not shift later labels). A name repeated across categories (`fpirank` in
  * both `fpi` and `resume`) gets the category appended instead of overwriting.
  */
-export function parse_fpi(payload: any): Record<string, any>[] {
+export function parse_fpi(payload: any): ParserRow[] {
   const teams = (payload || {}).teams;
   if (!Array.isArray(teams) || teams.length === 0) return [];
   const namesByCat: Record<string, any[]> = {};
@@ -1125,24 +1126,24 @@ export function parse_fpi(payload: any): Record<string, any>[] {
 }
 
 /** Generic single-row flattener for any ESPN single-entity payload. */
-export function parse_single_entity(payload: any): Record<string, any>[] {
+export function parse_single_entity(payload: any): ParserRow[] {
   return singleRow(isPlainObject(payload) ? payload : null);
 }
 
 /** Extract per-drive context from `payload["drives"].previous` (NFL/CFB). */
-export function parse_summary_drives(payload: any): Record<string, any>[] {
+export function parse_summary_drives(payload: any): ParserRow[] {
   const drives = (payload || {}).drives || {};
   const previous = isPlainObject(drives) ? drives.previous : null;
   return rowPerItem(previous);
 }
 
 /** Extract the scoring-plays summary from `payload["scoringPlays"]`. */
-export function parse_summary_scoring_plays(payload: any): Record<string, any>[] {
+export function parse_summary_scoring_plays(payload: any): ParserRow[] {
   return rowPerItem((payload || {}).scoringPlays);
 }
 
 /** Explode NFL/CFB `drives.previous[].plays[]` into long-form rows. */
-export function parse_summary_drive_plays(payload: any): Record<string, any>[] {
+export function parse_summary_drive_plays(payload: any): ParserRow[] {
   const drives = (payload || {}).drives || {};
   const previous = isPlainObject(drives) ? drives.previous : null;
   if (!Array.isArray(previous) || !previous.length) return [];
@@ -1197,7 +1198,7 @@ export const SUMMARY_SECTION_PARSERS: Record<string, ParserFn> = {
 export function parse_summary(
   payload: any,
   section?: string
-): Record<string, any>[] | Record<string, Record<string, any>[]> {
+): ParserRow[] | Record<string, ParserRow[]> {
   if (section !== undefined) {
     if (!(section in SUMMARY_SECTION_PARSERS)) {
       const valid = Object.keys(SUMMARY_SECTION_PARSERS).sort();
@@ -1239,13 +1240,13 @@ function cdnContent(payload: any): any {
 export function parse_cdn_game(
   payload: any,
   section?: string
-): Record<string, any>[] | Record<string, Record<string, any>[]> {
+): ParserRow[] | Record<string, ParserRow[]> {
   const gp = isPlainObject(payload) ? payload.gamepackageJSON : undefined;
   return parse_summary(isPlainObject(gp) ? gp : {}, section);
 }
 
 /** Parse a CDN `scoreboard` page: its `content.sbData` block is a Site v2 scoreboard. */
-export function parse_cdn_scoreboard(payload: any): Record<string, any>[] {
+export function parse_cdn_scoreboard(payload: any): ParserRow[] {
   const sb = cdnContent(payload).sbData;
   return parse_scoreboard(isPlainObject(sb) ? sb : {});
 }
@@ -1255,7 +1256,7 @@ export function parse_cdn_scoreboard(payload: any): Record<string, any>[] {
  * day's block, whose `games` are scoreboard events; every day's games become one
  * frame of {@link parse_scoreboard} rows.
  */
-export function parse_cdn_schedule(payload: any): Record<string, any>[] {
+export function parse_cdn_schedule(payload: any): ParserRow[] {
   const sch = cdnContent(payload).schedule;
   const days: any[] = isPlainObject(sch) ? Object.values(sch) : [];
   const games = days
@@ -1275,7 +1276,7 @@ const CDN_RANKINGS_LEAD = ["poll_id", "poll_name", "poll_short_name", "ranked", 
  * is a decimal string too (the v4 id rule). Rows are rectangular: a column an
  * entry lacks is `null`.
  */
-export function parse_cdn_rankings(payload: any): Record<string, any>[] {
+export function parse_cdn_rankings(payload: any): ParserRow[] {
   const data = cdnContent(payload).data;
   const polls = isPlainObject(data) ? data.rankings : undefined;
   const rows: Record<string, any>[] = [];

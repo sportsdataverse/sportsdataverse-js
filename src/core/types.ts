@@ -160,10 +160,11 @@ export type Row = Record<string, unknown>;
 export type ParsedTables = Record<string, Row[]>;
 
 /**
- * A row as a parser function builds it (the `sportsdataverse/parsers` functions'
- * signatures). The wrappers return {@link Row} or a generated row type.
+ * A row as a parser function returns it (the `sportsdataverse/parsers` functions'
+ * signatures): column name -> value, the same {@link Row} the wrappers return for an
+ * endpoint without a generated row type.
  */
-export type ParserRow = Record<string, any>;
+export type ParserRow = Row;
 
 /**
  * The params of a generated wrapper call: the endpoint's path / query params plus

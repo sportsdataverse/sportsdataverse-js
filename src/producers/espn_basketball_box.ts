@@ -486,7 +486,8 @@ function basketballPlayerBox(final: any, finalOrder: readonly string[], requireB
     if (x === y) return 0;
     if (x === null) return 1;
     if (y === null) return -1;
-    return x < y ? -1 : 1;
+    // home_away is "home" / "away" here (null is handled above)
+    return (x as string) < (y as string) ? -1 : 1;
   });
 }
 

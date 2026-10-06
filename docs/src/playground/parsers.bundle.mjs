@@ -2531,7 +2531,7 @@ function parse_pff_player_detail(raw, section) {
   const keys = Object.keys(env);
   const obj = keys.length === 1 && isPlainObject(env[keys[0]]) ? env[keys[0]] : env;
   if (!isPlainObject(obj)) return [];
-  const subject = truthy(obj.subject) ? obj.subject : {};
+  const subject = isPlainObject(obj.subject) ? obj.subject : {};
   let rows = career ? obj.seasons : obj.weeks;
   if (!truthy(rows)) rows = truthy(obj.week_totals) ? obj.week_totals : truthy(obj.career) ? obj.career : [];
   if (isPlainObject(rows)) rows = [rows];
@@ -2937,7 +2937,7 @@ function videoResultSets(rs) {
 function boxscoreV3ResultSets(box) {
   const gameMeta = {};
   for (const [k, v] of Object.entries(box)) if (!isNested(v)) gameMeta[k] = v;
-  const teams = ["homeTeam", "awayTeam"].filter((s) => isObj(box[s])).map((s) => box[s]);
+  const teams = ["homeTeam", "awayTeam"].map((s) => box[s]).filter(isObj);
   if (!teams.length) {
     const row = {};
     for (const [k, v] of Object.entries(box)) row[k] = isNested(v) ? pyJson2(v) : v;
@@ -3089,7 +3089,7 @@ function parse_nba_stats_result_sets(raw, resultSet) {
   }
   const frames = {};
   sets.forEach((rs, i) => {
-    Object.defineProperty(frames, rs.name ?? `set_${i}`, {
+    Object.defineProperty(frames, String(rs.name ?? `set_${i}`), {
       value: toRows(rs),
       enumerable: true,
       writable: true,

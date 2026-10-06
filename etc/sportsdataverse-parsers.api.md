@@ -8,13 +8,13 @@
 export const ESPN_ENDPOINT_PARSERS: Record<string, ParserFn | typeof parse_summary>;
 
 // @public
-export type FlatParserFn = (raw: any, section?: string) => Record<string, any>[] | ParsedTables;
+export type FlatParserFn = (raw: unknown, section?: string) => ParserRow[] | ParsedTables;
 
 // @public (undocumented)
 export const MULTI_TABLE_SECTIONS: Record<string, SectionSpec>;
 
 // @public
-export function normalize(rows: any[]): Record<string, any>[];
+export function normalize(rows: any[]): ParserRow[];
 
 // @public
 export function parse_asa_goals_added_tables(raw: any): {
@@ -57,19 +57,19 @@ export function parse_pff_report(raw: any, section?: string): ParserRow[] | Tabl
 export function parse_pff_v2_table(raw: any, section?: string): ParserRow[];
 
 // @public
-export function parse_summary(payload: any, section?: string): Record<string, any>[] | Record<string, Record<string, any>[]>;
+export function parse_summary(payload: any, section?: string): ParserRow[] | Record<string, ParserRow[]>;
 
 // @public
-export type ParsedResult = Record<string, any>[] | Record<string, Record<string, any>[]> | null;
+export type ParsedResult = ParserRow[] | Record<string, ParserRow[]> | null;
 
 // @public
 export type ParsedTables = Record<string, Row[]>;
 
 // @public
-export function parseEndpoint(kind: "espn" | "flat", key: string, raw: any, section?: string): ParsedResult;
+export function parseEndpoint(kind: "espn" | "flat", key: string, raw: unknown, section?: string): ParsedResult;
 
 // @public
-export type ParserFn = (raw: any, section?: string) => Record<string, any>[];
+export type ParserFn = (raw: unknown, section?: string) => ParserRow[];
 
 // @public
 export function parserFor(name?: string): FlatParserFn | undefined;

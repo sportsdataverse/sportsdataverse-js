@@ -6,6 +6,7 @@
 // and pass through as raw JSON.
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -18,7 +19,7 @@ function isPlainObject(v: any): boolean {
  * it. Returns `[]` for meta payloads (`config`, `componentSeason`, `ping`) that
  * don't carry a `data` array, or for empty / malformed input.
  */
-export function parse_nhl_stats_rest(raw: any): Record<string, any>[] {
+export function parse_nhl_stats_rest(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const rows = raw.data;
   if (!Array.isArray(rows) || rows.length === 0) return [];

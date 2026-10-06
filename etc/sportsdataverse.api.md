@@ -3809,7 +3809,7 @@ export const FLAT_HOSTS: Record<string, string>;
 export const FLAT_WRAPPERS: WrapperDef[];
 
 // @public
-export type FlatParserFn = (raw: any, section?: string) => Record<string, any>[] | ParsedTables;
+export type FlatParserFn = (raw: unknown, section?: string) => ParserRow[] | ParsedTables;
 
 // @public
 export interface FoxWrappers {
@@ -28807,7 +28807,7 @@ export const NoESPNDataError: typeof NoDataError;
 export type NoESPNDataError = NoDataError;
 
 // @public
-export function normalize(rows: any[]): Record<string, any>[];
+export function normalize(rows: any[]): ParserRow[];
 
 // @public
 export interface NwslApiCompetitionsRow {
@@ -30854,13 +30854,13 @@ export function parse_kenpom_page(raw: any, section?: string): Record<string, Pa
 export type ParsedTables = Record<string, Row[]>;
 
 // @public
-export type ParserFn = (raw: any, section?: string) => Record<string, any>[];
+export type ParserFn = (raw: unknown, section?: string) => ParserRow[];
 
 // @public
 export function parserFor(name?: string): FlatParserFn | undefined;
 
 // @public
-export type ParserRow = Record<string, any>;
+export type ParserRow = Row;
 
 // @public
 export const PARSERS: Record<string, FlatParserFn>;

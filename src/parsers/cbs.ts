@@ -17,6 +17,7 @@
 // those resource families publish.
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -97,7 +98,7 @@ function firstListIn(obj: Record<string, any>): any[] | null {
  *
  * Returns `[]` for empty / error-envelope / unrecognized payloads.
  */
-export function parse_cbs_list(raw: any): Record<string, any>[] {
+export function parse_cbs_list(raw: any): ParserRow[] {
   const data = unwrapData(raw);
   if (Array.isArray(data)) return normalize(data);
   if (!isPlainObject(data)) return [];
@@ -118,7 +119,7 @@ export function parse_cbs_list(raw: any): Record<string, any>[] {
  * `home_*` / `away_*` / `status_*` columns). A single-game payload (one game
  * object under `data`) yields one row. Returns `[]` when empty / malformed.
  */
-export function parse_cbs_scoreboard(raw: any): Record<string, any>[] {
+export function parse_cbs_scoreboard(raw: any): ParserRow[] {
   const data = unwrapData(raw);
   if (Array.isArray(data)) return normalize(data);
   if (!isPlainObject(data)) return [];
@@ -142,7 +143,7 @@ export function parse_cbs_scoreboard(raw: any): Record<string, any>[] {
  * each row as `group_*` so a flattened row keeps its grouping context. Returns
  * `[]` when empty / malformed.
  */
-export function parse_cbs_standings(raw: any): Record<string, any>[] {
+export function parse_cbs_standings(raw: any): ParserRow[] {
   const data = unwrapData(raw);
   if (Array.isArray(data)) return normalize(data);
   if (!isPlainObject(data)) return [];
@@ -188,7 +189,7 @@ export function parse_cbs_standings(raw: any): Record<string, any>[] {
  * with no nested book list flatten to a single row. Returns `[]` when empty /
  * malformed.
  */
-export function parse_cbs_odds(raw: any): Record<string, any>[] {
+export function parse_cbs_odds(raw: any): ParserRow[] {
   const data = unwrapData(raw);
   let markets: any[] | null = null;
   if (Array.isArray(data)) {

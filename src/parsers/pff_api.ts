@@ -258,7 +258,8 @@ export function parse_pff_player_detail(raw: any, section?: string): Row[] {
   const keys = Object.keys(env);
   const obj = keys.length === 1 && isPlainObject(env[keys[0]]) ? env[keys[0]] : env;
   if (!isPlainObject(obj)) return [];
-  const subject = truthy(obj.subject) ? obj.subject : {};
+  // a non-object subject reads as no subject (every field null), as indexing it did
+  const subject: Row = isPlainObject(obj.subject) ? obj.subject : {};
   let rows = career ? obj.seasons : obj.weeks;
   if (!truthy(rows)) rows = truthy(obj.week_totals) ? obj.week_totals : truthy(obj.career) ? obj.career : [];
   if (isPlainObject(rows)) rows = [rows];

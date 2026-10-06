@@ -17,6 +17,7 @@
 // reach into the specific nested-list shape those families publish.
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -70,7 +71,7 @@ function firstListIn(obj: Record<string, any>): any[] | null {
  *
  * Returns `[]` for empty / unrecognized payloads.
  */
-export function parse_fox_list(raw: any): Record<string, any>[] {
+export function parse_fox_list(raw: any): ParserRow[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject(raw)) return [];
   const list = firstListIn(raw);
@@ -88,7 +89,7 @@ export function parse_fox_list(raw: any): Record<string, any>[] {
  * `title` / `id` onto each row as `group_*`. Falls back to a bare `events[]` /
  * `groupList[]` list, then to the generic flattener. Returns `[]` when empty.
  */
-export function parse_fox_scoreboard(raw: any): Record<string, any>[] {
+export function parse_fox_scoreboard(raw: any): ParserRow[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject(raw)) return [];
 
@@ -127,7 +128,7 @@ export function parse_fox_scoreboard(raw: any): Record<string, any>[] {
  * `stats-con` tables ship the same sectioned shape. Falls back to the generic
  * flattener for un-sectioned payloads. Returns `[]` when empty / malformed.
  */
-export function parse_fox_standings(raw: any): Record<string, any>[] {
+export function parse_fox_standings(raw: any): ParserRow[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject(raw)) return [];
 
@@ -160,7 +161,7 @@ export function parse_fox_standings(raw: any): Record<string, any>[] {
  * into one row per compared stat, falling back to a single flattened row of the
  * whole module shell so callers always get the raw fields. Returns `[]` empty.
  */
-export function parse_fox_event(raw: any): Record<string, any>[] {
+export function parse_fox_event(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
 
   const comparison =
@@ -181,7 +182,7 @@ export function parse_fox_event(raw: any): Record<string, any>[] {
  * `headers[]` + `rows[]`. This walks every group's `rows[]` and prefixes the
  * group `template` onto each row as `group_*`. Returns `[]` when empty.
  */
-export function parse_fox_team_roster(raw: any): Record<string, any>[] {
+export function parse_fox_team_roster(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   // When `groups` is PRESENT (even if empty), this is the canonical roster
   // shape — return its unrolled player rows directly (`[]` when empty).
@@ -208,7 +209,7 @@ export function parse_fox_team_roster(raw: any): Record<string, any>[] {
  * Fox search payloads (`SearchResults`) wrap hits under `results[]`. Each
  * result object is flattened to a row. Returns `[]` when empty / malformed.
  */
-export function parse_fox_search(raw: any): Record<string, any>[] {
+export function parse_fox_search(raw: any): ParserRow[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject(raw)) return [];
   const results = raw.results;

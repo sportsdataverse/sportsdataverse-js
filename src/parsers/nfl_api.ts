@@ -11,6 +11,7 @@
 //   - keys are deep-flattened (`_`) and snake_cased via `normalize`.
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -23,7 +24,7 @@ function isPlainObject(v: any): boolean {
  * The records live under `weeks[].standings[]` — walk every returned week and
  * concat its `standings` array.
  */
-export function parse_nfl_standings(raw: any): Record<string, any>[] {
+export function parse_nfl_standings(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const records: any[] = [];
   for (const wk of raw.weeks ?? []) {
@@ -33,12 +34,12 @@ export function parse_nfl_standings(raw: any): Record<string, any>[] {
 }
 
 /** Flatten `/football/v2/rosters` into one row per team roster (`rosters[]`). */
-export function parse_nfl_rosters(raw: any): Record<string, any>[] {
+export function parse_nfl_rosters(raw: any): ParserRow[] {
   return normalize(raw?.rosters ?? []);
 }
 
 /** Flatten `/football/v2/teams/history` into one row per team (`teams[]`). */
-export function parse_nfl_teams_history(raw: any): Record<string, any>[] {
+export function parse_nfl_teams_history(raw: any): ParserRow[] {
   return normalize(raw?.teams ?? []);
 }
 
@@ -48,14 +49,14 @@ export function parse_nfl_teams_history(raw: any): Record<string, any>[] {
  * The single-team endpoint returns one object — wrap it into a one-element list
  * — or an already-list payload, which is flattened directly.
  */
-export function parse_nfl_team(raw: any): Record<string, any>[] {
+export function parse_nfl_team(raw: any): ParserRow[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (isPlainObject(raw)) return normalize([raw]);
   return [];
 }
 
 /** Flatten `/football/v2/weeks/season/...` into one row per week (`weeks[]`). */
-export function parse_nfl_weeks(raw: any): Record<string, any>[] {
+export function parse_nfl_weeks(raw: any): ParserRow[] {
   return normalize(raw?.weeks ?? []);
 }
 
@@ -64,7 +65,7 @@ export function parse_nfl_weeks(raw: any): Record<string, any>[] {
  *
  * Returns a single week object (wrapped into a one-element list) or a list.
  */
-export function parse_nfl_weeks_by_date(raw: any): Record<string, any>[] {
+export function parse_nfl_weeks_by_date(raw: any): ParserRow[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (isPlainObject(raw)) return normalize([raw]);
   return [];
@@ -74,17 +75,17 @@ export function parse_nfl_weeks_by_date(raw: any): Record<string, any>[] {
  * Flatten `/football/v2/combine/profiles` into one row per prospect
  * (`combineProfiles[]`).
  */
-export function parse_nfl_combine_profiles(raw: any): Record<string, any>[] {
+export function parse_nfl_combine_profiles(raw: any): ParserRow[] {
   return normalize(raw?.combineProfiles ?? []);
 }
 
 /** Flatten `/football/v2/draft/picks/report` into one row per pick (`picks[]`). */
-export function parse_nfl_draft_picks(raw: any): Record<string, any>[] {
+export function parse_nfl_draft_picks(raw: any): ParserRow[] {
   return normalize(raw?.picks ?? []);
 }
 
 /** Flatten `/football/v2/injuries` into one row per injured player (`injuries[]`). */
-export function parse_nfl_injuries(raw: any): Record<string, any>[] {
+export function parse_nfl_injuries(raw: any): ParserRow[] {
   return normalize(raw?.injuries ?? []);
 }
 
@@ -92,7 +93,7 @@ export function parse_nfl_injuries(raw: any): Record<string, any>[] {
  * Flatten `/football/v2/stats/live/game-summaries` into one row per game
  * (records under the `data` key).
  */
-export function parse_nfl_game_summaries(raw: any): Record<string, any>[] {
+export function parse_nfl_game_summaries(raw: any): ParserRow[] {
   return normalize(raw?.data ?? []);
 }
 
@@ -101,7 +102,7 @@ export function parse_nfl_game_summaries(raw: any): Record<string, any>[] {
  *
  * Typically a bare list, with a `games` / `data` dict fallback.
  */
-export function parse_nfl_weekly_game_details(raw: any): Record<string, any>[] {
+export function parse_nfl_weekly_game_details(raw: any): ParserRow[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (isPlainObject(raw)) return normalize(raw.games ?? raw.data ?? []);
   return [];

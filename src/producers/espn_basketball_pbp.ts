@@ -517,7 +517,7 @@ export function _playsFrame(league: League, game_id: unknown, pbp_txt: any, init
     ["homeFavorite", fill(favorite)],
     ["gameSpreadAvailable", fill(at(init, "gameSpreadAvailable"))],
   ]);
-  withColumns(f, [["homeTeamSpread", f.rows.map((r) => (r.homeFavorite === true ? r.gameSpread : -1 * r.gameSpread))]]);
+  withColumns(f, [["homeTeamSpread", f.rows.map((r) => (r.homeFavorite === true ? r.gameSpread : -1 * (r.gameSpread as number)))]]);
   return f;
 }
 

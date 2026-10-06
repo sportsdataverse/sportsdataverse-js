@@ -4,6 +4,7 @@
 // (identical to NHL Stats REST), so a single generic parser handles all of them.
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -15,7 +16,7 @@ function isPlainObject(v: any): boolean {
  * `{data: [{...}, ...], total: N}`; this unwraps `data` and deep-flattens it.
  * Returns `[]` when the payload is missing `data` or has an empty list.
  */
-export function parse_nhl_records(raw: any): Record<string, any>[] {
+export function parse_nhl_records(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const rows = raw.data;
   if (!Array.isArray(rows) || rows.length === 0) return [];
