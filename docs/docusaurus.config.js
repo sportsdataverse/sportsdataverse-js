@@ -63,6 +63,43 @@ module.exports = {
         sidebar: { pretty: true },
       },
     ],
+    // llms.txt (llmstxt.org): a link index + a full-content bundle of the docs
+    // for LLM readers, plus a Markdown copy of every page next to its HTML
+    // route (`<route>.md`). Generated from the source MDX at postBuild. The
+    // TypeDoc API tree (`docs/api/**`, ~1k generated pages) is left out of
+    // all three: the codegen reference pages already cover every wrapper.
+    // The dir globs are deliberately permissive so `utilities/` and
+    // `architecture/` are picked up the moment they exist.
+    [
+      'docusaurus-plugin-llms',
+      {
+        title: 'sportsdataverse (sportsdataverse-js) — Node.js sports data client',
+        description:
+          'Documentation for the sportsdataverse npm package: typed wrappers over ' +
+          'ESPN (every league), MLB Stats API, Baseball Savant / Statcast, NHL ' +
+          'api-web + EDGE + Stats REST + Records, NFL.com, NFL Pro, PFF, HockeyTech ' +
+          '(PWHL + minor/junior leagues), BartTorvik, KenPom, The Odds API, CBS, Fox, ' +
+          'Yahoo, 247Sports / On3, MLS / NWSL / ASA, plus SportsDataverse release ' +
+          'loaders. Every wrapper returns the raw payload or tidy rows (`parsed: true`).',
+        generateLLMsTxt: true,
+        generateLLMsFullTxt: true,
+        generateMarkdownFiles: true,
+        ignoreFiles: ['api/**'],
+        includeOrder: [
+          'intro.md',
+          'guides/**',
+          'tutorials/**',
+          'reference/**',
+          'utilities/**',
+          'architecture/**',
+          '*/index.md',
+          '*/reference/**',
+        ],
+        includeUnmatchedLast: true,
+        excludeImports: true,
+        removeDuplicateHeadings: true,
+      },
+    ],
   ],
   themeConfig: {
     docs: {
