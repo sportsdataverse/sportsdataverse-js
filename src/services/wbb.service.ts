@@ -25,7 +25,7 @@ export default {
      */
     getPlayByPlay: async function (id) {
         // via espn_wbb_cdn_playbyplay (https; core request layer + error vocabulary)
-        const res = { data: await espnWbbCdnPlaybyplay({ game_id: id }) };
+        const res = { data: (await espnWbbCdnPlaybyplay({ game_id: id })) as any };
 
         return {
             id: res.data.gamepackageJSON.header.id,
@@ -48,7 +48,7 @@ export default {
      */
     getBoxScore: async function (id) {
         // via espn_wbb_cdn_boxscore (https; core request layer + error vocabulary)
-        const res = { data: await espnWbbCdnBoxscore({ game_id: id }) };
+        const res = { data: (await espnWbbCdnBoxscore({ game_id: id })) as any };
 
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
@@ -110,7 +110,7 @@ export default {
         limit = 300
     }) {
         // espn_wbb_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
-        const res = await espnWbbCdnSchedule({ date: cdnDate(year, month, day) });
+        const res = (await espnWbbCdnSchedule({ date: cdnDate(year, month, day) })) as any;
         return res.content.schedule;
     },
     /**

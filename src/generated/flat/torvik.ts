@@ -6,7 +6,7 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
 
 const GAME_SCHEDULE_DEF: WrapperDef = {
   "short": "game_schedule",
@@ -35,7 +35,7 @@ const GAME_SCHEDULE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.torvik.torvikGameSchedule({ year: '…' });
  */
-export const torvikGameSchedule: WrapperFn = (params = {}) => callFlat(GAME_SCHEDULE_DEF, params);
+export const torvikGameSchedule: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCHEDULE_DEF, params);
 /** snake_case alias of {@link torvikGameSchedule} (py/R parity). */
 export const torvik_game_schedule = torvikGameSchedule;
 
@@ -73,7 +73,7 @@ const GAME_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.torvik.torvikGameStats({});
  */
-export const torvikGameStats: WrapperFn = (params = {}) => callFlat(GAME_STATS_DEF, params);
+export const torvikGameStats: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_STATS_DEF, params);
 /** snake_case alias of {@link torvikGameStats} (py/R parity). */
 export const torvik_game_stats = torvikGameStats;
 
@@ -111,7 +111,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.torvik.torvikPlayerStats({});
  */
-export const torvikPlayerStats: WrapperFn = (params = {}) => callFlat(PLAYER_STATS_DEF, params);
+export const torvikPlayerStats: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link torvikPlayerStats} (py/R parity). */
 export const torvik_player_stats = torvikPlayerStats;
 
@@ -142,7 +142,7 @@ const RATINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.torvik.torvikRatings({ year: '…' });
  */
-export const torvikRatings: WrapperFn = (params = {}) => callFlat(RATINGS_DEF, params);
+export const torvikRatings: Wrapper = (params: WrapperParams = {}) => callFlat(RATINGS_DEF, params);
 /** snake_case alias of {@link torvikRatings} (py/R parity). */
 export const torvik_ratings = torvikRatings;
 
@@ -173,6 +173,6 @@ const TEAM_FACTORS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.torvik.torvikTeamFactors({ year: '…' });
  */
-export const torvikTeamFactors: WrapperFn = (params = {}) => callFlat(TEAM_FACTORS_DEF, params);
+export const torvikTeamFactors: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_FACTORS_DEF, params);
 /** snake_case alias of {@link torvikTeamFactors} (py/R parity). */
 export const torvik_team_factors = torvikTeamFactors;

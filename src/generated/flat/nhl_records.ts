@@ -6,7 +6,50 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  NhlRecordsAllTimeRecordVsFranchiseRow,
+  NhlRecordsAllstarCoachCareerRow,
+  NhlRecordsAllstarGoalieCareerRow,
+  NhlRecordsAllstarGoalieGameRow,
+  NhlRecordsAllstarSkaterCareerRow,
+  NhlRecordsAllstarSkaterGameRow,
+  NhlRecordsAttendanceRow,
+  NhlRecordsAwardsRow,
+  NhlRecordsAwardsTrophySeasonRow,
+  NhlRecordsAwayTeamRecordRow,
+  NhlRecordsCoachRow,
+  NhlRecordsCoachCareerRow,
+  NhlRecordsCoachCareerWithPlayoffsRow,
+  NhlRecordsCoachFranchiseRow,
+  NhlRecordsCoachStanleyCupRow,
+  NhlRecordsCoachesRow,
+  NhlRecordsConsecutive100ptSeasonsRow,
+  NhlRecordsDraftRow,
+  NhlRecordsDraftByTeamRow,
+  NhlRecordsDraftLotteryOddsRow,
+  NhlRecordsDraftProspectRow,
+  NhlRecordsExpansionDraftPicksRow,
+  NhlRecordsFranchiseDetailRow,
+  NhlRecordsFranchisePlayoffAppearancesRow,
+  NhlRecordsFranchiseSeasonResultsRow,
+  NhlRecordsFranchiseTeamTotalsRow,
+  NhlRecordsFranchiseTotalsRow,
+  NhlRecordsFranchisesRow,
+  NhlRecordsGmCareerRow,
+  NhlRecordsGmFranchiseRow,
+  NhlRecordsGoalieCareerStatsRow,
+  NhlRecordsGoalieCareerStatsWithPlayoffsRow,
+  NhlRecordsGoaliePlayoffStreakRow,
+  NhlRecordsGoalieSeasonStatsRow,
+  NhlRecordsGoalieShutoutStreakRow,
+  NhlRecordsGoalieUndefeatedStreakRow,
+  NhlRecordsGoalieWinPlateausRow,
+  NhlRecordsGoalieWinStreakRow,
+  NhlRecordsHofPlayersRow,
+  NhlRecordsHofPlayersByOfficeRow,
+  NhlRecordsHomeTeamRecordRow,
+} from "../rows/nhl_records.js";
 
 const ALL_TIME_RECORD_VS_FRANCHISE_DEF: WrapperDef = {
   "short": "all_time_record_vs_franchise",
@@ -30,7 +73,7 @@ const ALL_TIME_RECORD_VS_FRANCHISE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAllTimeRecordVsFranchise({});
  */
-export const nhlRecordsAllTimeRecordVsFranchise: WrapperFn = (params = {}) => callFlat(ALL_TIME_RECORD_VS_FRANCHISE_DEF, params);
+export const nhlRecordsAllTimeRecordVsFranchise: Wrapper<NhlRecordsAllTimeRecordVsFranchiseRow[]> = (params: WrapperParams = {}) => callFlat(ALL_TIME_RECORD_VS_FRANCHISE_DEF, params);
 /** snake_case alias of {@link nhlRecordsAllTimeRecordVsFranchise} (py/R parity). */
 export const nhl_records_all_time_record_vs_franchise = nhlRecordsAllTimeRecordVsFranchise;
 
@@ -56,7 +99,7 @@ const ALLSTAR_COACH_CAREER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAllstarCoachCareer({});
  */
-export const nhlRecordsAllstarCoachCareer: WrapperFn = (params = {}) => callFlat(ALLSTAR_COACH_CAREER_DEF, params);
+export const nhlRecordsAllstarCoachCareer: Wrapper<NhlRecordsAllstarCoachCareerRow[]> = (params: WrapperParams = {}) => callFlat(ALLSTAR_COACH_CAREER_DEF, params);
 /** snake_case alias of {@link nhlRecordsAllstarCoachCareer} (py/R parity). */
 export const nhl_records_allstar_coach_career = nhlRecordsAllstarCoachCareer;
 
@@ -82,7 +125,7 @@ const ALLSTAR_GOALIE_CAREER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAllstarGoalieCareer({});
  */
-export const nhlRecordsAllstarGoalieCareer: WrapperFn = (params = {}) => callFlat(ALLSTAR_GOALIE_CAREER_DEF, params);
+export const nhlRecordsAllstarGoalieCareer: Wrapper<NhlRecordsAllstarGoalieCareerRow[]> = (params: WrapperParams = {}) => callFlat(ALLSTAR_GOALIE_CAREER_DEF, params);
 /** snake_case alias of {@link nhlRecordsAllstarGoalieCareer} (py/R parity). */
 export const nhl_records_allstar_goalie_career = nhlRecordsAllstarGoalieCareer;
 
@@ -108,7 +151,7 @@ const ALLSTAR_GOALIE_GAME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAllstarGoalieGame({});
  */
-export const nhlRecordsAllstarGoalieGame: WrapperFn = (params = {}) => callFlat(ALLSTAR_GOALIE_GAME_DEF, params);
+export const nhlRecordsAllstarGoalieGame: Wrapper<NhlRecordsAllstarGoalieGameRow[]> = (params: WrapperParams = {}) => callFlat(ALLSTAR_GOALIE_GAME_DEF, params);
 /** snake_case alias of {@link nhlRecordsAllstarGoalieGame} (py/R parity). */
 export const nhl_records_allstar_goalie_game = nhlRecordsAllstarGoalieGame;
 
@@ -134,7 +177,7 @@ const ALLSTAR_SKATER_CAREER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAllstarSkaterCareer({});
  */
-export const nhlRecordsAllstarSkaterCareer: WrapperFn = (params = {}) => callFlat(ALLSTAR_SKATER_CAREER_DEF, params);
+export const nhlRecordsAllstarSkaterCareer: Wrapper<NhlRecordsAllstarSkaterCareerRow[]> = (params: WrapperParams = {}) => callFlat(ALLSTAR_SKATER_CAREER_DEF, params);
 /** snake_case alias of {@link nhlRecordsAllstarSkaterCareer} (py/R parity). */
 export const nhl_records_allstar_skater_career = nhlRecordsAllstarSkaterCareer;
 
@@ -160,7 +203,7 @@ const ALLSTAR_SKATER_GAME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAllstarSkaterGame({});
  */
-export const nhlRecordsAllstarSkaterGame: WrapperFn = (params = {}) => callFlat(ALLSTAR_SKATER_GAME_DEF, params);
+export const nhlRecordsAllstarSkaterGame: Wrapper<NhlRecordsAllstarSkaterGameRow[]> = (params: WrapperParams = {}) => callFlat(ALLSTAR_SKATER_GAME_DEF, params);
 /** snake_case alias of {@link nhlRecordsAllstarSkaterGame} (py/R parity). */
 export const nhl_records_allstar_skater_game = nhlRecordsAllstarSkaterGame;
 
@@ -186,7 +229,7 @@ const ATTENDANCE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAttendance({});
  */
-export const nhlRecordsAttendance: WrapperFn = (params = {}) => callFlat(ATTENDANCE_DEF, params);
+export const nhlRecordsAttendance: Wrapper<NhlRecordsAttendanceRow[]> = (params: WrapperParams = {}) => callFlat(ATTENDANCE_DEF, params);
 /** snake_case alias of {@link nhlRecordsAttendance} (py/R parity). */
 export const nhl_records_attendance = nhlRecordsAttendance;
 
@@ -212,7 +255,7 @@ const AWARDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAwards({});
  */
-export const nhlRecordsAwards: WrapperFn = (params = {}) => callFlat(AWARDS_DEF, params);
+export const nhlRecordsAwards: Wrapper<NhlRecordsAwardsRow[]> = (params: WrapperParams = {}) => callFlat(AWARDS_DEF, params);
 /** snake_case alias of {@link nhlRecordsAwards} (py/R parity). */
 export const nhl_records_awards = nhlRecordsAwards;
 
@@ -243,7 +286,7 @@ const AWARDS_BY_FRANCHISE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAwardsByFranchise({ franchise_id: '…' });
  */
-export const nhlRecordsAwardsByFranchise: WrapperFn = (params = {}) => callFlat(AWARDS_BY_FRANCHISE_DEF, params);
+export const nhlRecordsAwardsByFranchise: Wrapper = (params: WrapperParams = {}) => callFlat(AWARDS_BY_FRANCHISE_DEF, params);
 /** snake_case alias of {@link nhlRecordsAwardsByFranchise} (py/R parity). */
 export const nhl_records_awards_by_franchise = nhlRecordsAwardsByFranchise;
 
@@ -278,7 +321,7 @@ const AWARDS_TROPHY_SEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAwardsTrophySeason({ trophy_id: '…', season_id: '…' });
  */
-export const nhlRecordsAwardsTrophySeason: WrapperFn = (params = {}) => callFlat(AWARDS_TROPHY_SEASON_DEF, params);
+export const nhlRecordsAwardsTrophySeason: Wrapper<NhlRecordsAwardsTrophySeasonRow[]> = (params: WrapperParams = {}) => callFlat(AWARDS_TROPHY_SEASON_DEF, params);
 /** snake_case alias of {@link nhlRecordsAwardsTrophySeason} (py/R parity). */
 export const nhl_records_awards_trophy_season = nhlRecordsAwardsTrophySeason;
 
@@ -304,7 +347,7 @@ const AWAY_TEAM_RECORD_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAwayTeamRecord({});
  */
-export const nhlRecordsAwayTeamRecord: WrapperFn = (params = {}) => callFlat(AWAY_TEAM_RECORD_DEF, params);
+export const nhlRecordsAwayTeamRecord: Wrapper<NhlRecordsAwayTeamRecordRow[]> = (params: WrapperParams = {}) => callFlat(AWAY_TEAM_RECORD_DEF, params);
 /** snake_case alias of {@link nhlRecordsAwayTeamRecord} (py/R parity). */
 export const nhl_records_away_team_record = nhlRecordsAwayTeamRecord;
 
@@ -335,7 +378,7 @@ const COACH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsCoach({ coach_id: '…' });
  */
-export const nhlRecordsCoach: WrapperFn = (params = {}) => callFlat(COACH_DEF, params);
+export const nhlRecordsCoach: Wrapper<NhlRecordsCoachRow[]> = (params: WrapperParams = {}) => callFlat(COACH_DEF, params);
 /** snake_case alias of {@link nhlRecordsCoach} (py/R parity). */
 export const nhl_records_coach = nhlRecordsCoach;
 
@@ -369,7 +412,7 @@ const COACH_CAREER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsCoachCareer({});
  */
-export const nhlRecordsCoachCareer: WrapperFn = (params = {}) => callFlat(COACH_CAREER_DEF, params);
+export const nhlRecordsCoachCareer: Wrapper<NhlRecordsCoachCareerRow[]> = (params: WrapperParams = {}) => callFlat(COACH_CAREER_DEF, params);
 /** snake_case alias of {@link nhlRecordsCoachCareer} (py/R parity). */
 export const nhl_records_coach_career = nhlRecordsCoachCareer;
 
@@ -395,7 +438,7 @@ const COACH_CAREER_WITH_PLAYOFFS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsCoachCareerWithPlayoffs({});
  */
-export const nhlRecordsCoachCareerWithPlayoffs: WrapperFn = (params = {}) => callFlat(COACH_CAREER_WITH_PLAYOFFS_DEF, params);
+export const nhlRecordsCoachCareerWithPlayoffs: Wrapper<NhlRecordsCoachCareerWithPlayoffsRow[]> = (params: WrapperParams = {}) => callFlat(COACH_CAREER_WITH_PLAYOFFS_DEF, params);
 /** snake_case alias of {@link nhlRecordsCoachCareerWithPlayoffs} (py/R parity). */
 export const nhl_records_coach_career_with_playoffs = nhlRecordsCoachCareerWithPlayoffs;
 
@@ -429,7 +472,7 @@ const COACH_FRANCHISE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsCoachFranchise({});
  */
-export const nhlRecordsCoachFranchise: WrapperFn = (params = {}) => callFlat(COACH_FRANCHISE_DEF, params);
+export const nhlRecordsCoachFranchise: Wrapper<NhlRecordsCoachFranchiseRow[]> = (params: WrapperParams = {}) => callFlat(COACH_FRANCHISE_DEF, params);
 /** snake_case alias of {@link nhlRecordsCoachFranchise} (py/R parity). */
 export const nhl_records_coach_franchise = nhlRecordsCoachFranchise;
 
@@ -455,7 +498,7 @@ const COACH_STANLEY_CUP_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsCoachStanleyCup({});
  */
-export const nhlRecordsCoachStanleyCup: WrapperFn = (params = {}) => callFlat(COACH_STANLEY_CUP_DEF, params);
+export const nhlRecordsCoachStanleyCup: Wrapper<NhlRecordsCoachStanleyCupRow[]> = (params: WrapperParams = {}) => callFlat(COACH_STANLEY_CUP_DEF, params);
 /** snake_case alias of {@link nhlRecordsCoachStanleyCup} (py/R parity). */
 export const nhl_records_coach_stanley_cup = nhlRecordsCoachStanleyCup;
 
@@ -481,7 +524,7 @@ const COACHES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsCoaches({});
  */
-export const nhlRecordsCoaches: WrapperFn = (params = {}) => callFlat(COACHES_DEF, params);
+export const nhlRecordsCoaches: Wrapper<NhlRecordsCoachesRow[]> = (params: WrapperParams = {}) => callFlat(COACHES_DEF, params);
 /** snake_case alias of {@link nhlRecordsCoaches} (py/R parity). */
 export const nhl_records_coaches = nhlRecordsCoaches;
 
@@ -507,7 +550,7 @@ const CONSECUTIVE_100PT_SEASONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsConsecutive100ptSeasons({});
  */
-export const nhlRecordsConsecutive100ptSeasons: WrapperFn = (params = {}) => callFlat(CONSECUTIVE_100PT_SEASONS_DEF, params);
+export const nhlRecordsConsecutive100ptSeasons: Wrapper<NhlRecordsConsecutive100ptSeasonsRow[]> = (params: WrapperParams = {}) => callFlat(CONSECUTIVE_100PT_SEASONS_DEF, params);
 /** snake_case alias of {@link nhlRecordsConsecutive100ptSeasons} (py/R parity). */
 export const nhl_records_consecutive_100pt_seasons = nhlRecordsConsecutive100ptSeasons;
 
@@ -541,7 +584,7 @@ const DRAFT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsDraft({});
  */
-export const nhlRecordsDraft: WrapperFn = (params = {}) => callFlat(DRAFT_DEF, params);
+export const nhlRecordsDraft: Wrapper<NhlRecordsDraftRow[]> = (params: WrapperParams = {}) => callFlat(DRAFT_DEF, params);
 /** snake_case alias of {@link nhlRecordsDraft} (py/R parity). */
 export const nhl_records_draft = nhlRecordsDraft;
 
@@ -572,7 +615,7 @@ const DRAFT_BY_TEAM_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsDraftByTeam({ team_id: '…' });
  */
-export const nhlRecordsDraftByTeam: WrapperFn = (params = {}) => callFlat(DRAFT_BY_TEAM_DEF, params);
+export const nhlRecordsDraftByTeam: Wrapper<NhlRecordsDraftByTeamRow[]> = (params: WrapperParams = {}) => callFlat(DRAFT_BY_TEAM_DEF, params);
 /** snake_case alias of {@link nhlRecordsDraftByTeam} (py/R parity). */
 export const nhl_records_draft_by_team = nhlRecordsDraftByTeam;
 
@@ -598,7 +641,7 @@ const DRAFT_LOTTERY_ODDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsDraftLotteryOdds({});
  */
-export const nhlRecordsDraftLotteryOdds: WrapperFn = (params = {}) => callFlat(DRAFT_LOTTERY_ODDS_DEF, params);
+export const nhlRecordsDraftLotteryOdds: Wrapper<NhlRecordsDraftLotteryOddsRow[]> = (params: WrapperParams = {}) => callFlat(DRAFT_LOTTERY_ODDS_DEF, params);
 /** snake_case alias of {@link nhlRecordsDraftLotteryOdds} (py/R parity). */
 export const nhl_records_draft_lottery_odds = nhlRecordsDraftLotteryOdds;
 
@@ -632,7 +675,7 @@ const DRAFT_PROSPECT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsDraftProspect({});
  */
-export const nhlRecordsDraftProspect: WrapperFn = (params = {}) => callFlat(DRAFT_PROSPECT_DEF, params);
+export const nhlRecordsDraftProspect: Wrapper<NhlRecordsDraftProspectRow[]> = (params: WrapperParams = {}) => callFlat(DRAFT_PROSPECT_DEF, params);
 /** snake_case alias of {@link nhlRecordsDraftProspect} (py/R parity). */
 export const nhl_records_draft_prospect = nhlRecordsDraftProspect;
 
@@ -658,7 +701,7 @@ const EXPANSION_DRAFT_PICKS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsExpansionDraftPicks({});
  */
-export const nhlRecordsExpansionDraftPicks: WrapperFn = (params = {}) => callFlat(EXPANSION_DRAFT_PICKS_DEF, params);
+export const nhlRecordsExpansionDraftPicks: Wrapper<NhlRecordsExpansionDraftPicksRow[]> = (params: WrapperParams = {}) => callFlat(EXPANSION_DRAFT_PICKS_DEF, params);
 /** snake_case alias of {@link nhlRecordsExpansionDraftPicks} (py/R parity). */
 export const nhl_records_expansion_draft_picks = nhlRecordsExpansionDraftPicks;
 
@@ -684,7 +727,7 @@ const FRANCHISE_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsFranchiseDetail({});
  */
-export const nhlRecordsFranchiseDetail: WrapperFn = (params = {}) => callFlat(FRANCHISE_DETAIL_DEF, params);
+export const nhlRecordsFranchiseDetail: Wrapper<NhlRecordsFranchiseDetailRow[]> = (params: WrapperParams = {}) => callFlat(FRANCHISE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlRecordsFranchiseDetail} (py/R parity). */
 export const nhl_records_franchise_detail = nhlRecordsFranchiseDetail;
 
@@ -710,7 +753,7 @@ const FRANCHISE_PLAYOFF_APPEARANCES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsFranchisePlayoffAppearances({});
  */
-export const nhlRecordsFranchisePlayoffAppearances: WrapperFn = (params = {}) => callFlat(FRANCHISE_PLAYOFF_APPEARANCES_DEF, params);
+export const nhlRecordsFranchisePlayoffAppearances: Wrapper<NhlRecordsFranchisePlayoffAppearancesRow[]> = (params: WrapperParams = {}) => callFlat(FRANCHISE_PLAYOFF_APPEARANCES_DEF, params);
 /** snake_case alias of {@link nhlRecordsFranchisePlayoffAppearances} (py/R parity). */
 export const nhl_records_franchise_playoff_appearances = nhlRecordsFranchisePlayoffAppearances;
 
@@ -736,7 +779,7 @@ const FRANCHISE_SEASON_RESULTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsFranchiseSeasonResults({});
  */
-export const nhlRecordsFranchiseSeasonResults: WrapperFn = (params = {}) => callFlat(FRANCHISE_SEASON_RESULTS_DEF, params);
+export const nhlRecordsFranchiseSeasonResults: Wrapper<NhlRecordsFranchiseSeasonResultsRow[]> = (params: WrapperParams = {}) => callFlat(FRANCHISE_SEASON_RESULTS_DEF, params);
 /** snake_case alias of {@link nhlRecordsFranchiseSeasonResults} (py/R parity). */
 export const nhl_records_franchise_season_results = nhlRecordsFranchiseSeasonResults;
 
@@ -762,7 +805,7 @@ const FRANCHISE_TEAM_TOTALS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsFranchiseTeamTotals({});
  */
-export const nhlRecordsFranchiseTeamTotals: WrapperFn = (params = {}) => callFlat(FRANCHISE_TEAM_TOTALS_DEF, params);
+export const nhlRecordsFranchiseTeamTotals: Wrapper<NhlRecordsFranchiseTeamTotalsRow[]> = (params: WrapperParams = {}) => callFlat(FRANCHISE_TEAM_TOTALS_DEF, params);
 /** snake_case alias of {@link nhlRecordsFranchiseTeamTotals} (py/R parity). */
 export const nhl_records_franchise_team_totals = nhlRecordsFranchiseTeamTotals;
 
@@ -788,7 +831,7 @@ const FRANCHISE_TOTALS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsFranchiseTotals({});
  */
-export const nhlRecordsFranchiseTotals: WrapperFn = (params = {}) => callFlat(FRANCHISE_TOTALS_DEF, params);
+export const nhlRecordsFranchiseTotals: Wrapper<NhlRecordsFranchiseTotalsRow[]> = (params: WrapperParams = {}) => callFlat(FRANCHISE_TOTALS_DEF, params);
 /** snake_case alias of {@link nhlRecordsFranchiseTotals} (py/R parity). */
 export const nhl_records_franchise_totals = nhlRecordsFranchiseTotals;
 
@@ -814,7 +857,7 @@ const FRANCHISES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsFranchises({});
  */
-export const nhlRecordsFranchises: WrapperFn = (params = {}) => callFlat(FRANCHISES_DEF, params);
+export const nhlRecordsFranchises: Wrapper<NhlRecordsFranchisesRow[]> = (params: WrapperParams = {}) => callFlat(FRANCHISES_DEF, params);
 /** snake_case alias of {@link nhlRecordsFranchises} (py/R parity). */
 export const nhl_records_franchises = nhlRecordsFranchises;
 
@@ -848,7 +891,7 @@ const GM_CAREER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGmCareer({});
  */
-export const nhlRecordsGmCareer: WrapperFn = (params = {}) => callFlat(GM_CAREER_DEF, params);
+export const nhlRecordsGmCareer: Wrapper<NhlRecordsGmCareerRow[]> = (params: WrapperParams = {}) => callFlat(GM_CAREER_DEF, params);
 /** snake_case alias of {@link nhlRecordsGmCareer} (py/R parity). */
 export const nhl_records_gm_career = nhlRecordsGmCareer;
 
@@ -874,7 +917,7 @@ const GM_FRANCHISE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGmFranchise({});
  */
-export const nhlRecordsGmFranchise: WrapperFn = (params = {}) => callFlat(GM_FRANCHISE_DEF, params);
+export const nhlRecordsGmFranchise: Wrapper<NhlRecordsGmFranchiseRow[]> = (params: WrapperParams = {}) => callFlat(GM_FRANCHISE_DEF, params);
 /** snake_case alias of {@link nhlRecordsGmFranchise} (py/R parity). */
 export const nhl_records_gm_franchise = nhlRecordsGmFranchise;
 
@@ -900,7 +943,7 @@ const GOALIE_CAREER_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieCareerStats({});
  */
-export const nhlRecordsGoalieCareerStats: WrapperFn = (params = {}) => callFlat(GOALIE_CAREER_STATS_DEF, params);
+export const nhlRecordsGoalieCareerStats: Wrapper<NhlRecordsGoalieCareerStatsRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_CAREER_STATS_DEF, params);
 /** snake_case alias of {@link nhlRecordsGoalieCareerStats} (py/R parity). */
 export const nhl_records_goalie_career_stats = nhlRecordsGoalieCareerStats;
 
@@ -926,7 +969,7 @@ const GOALIE_CAREER_STATS_WITH_PLAYOFFS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieCareerStatsWithPlayoffs({});
  */
-export const nhlRecordsGoalieCareerStatsWithPlayoffs: WrapperFn = (params = {}) => callFlat(GOALIE_CAREER_STATS_WITH_PLAYOFFS_DEF, params);
+export const nhlRecordsGoalieCareerStatsWithPlayoffs: Wrapper<NhlRecordsGoalieCareerStatsWithPlayoffsRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_CAREER_STATS_WITH_PLAYOFFS_DEF, params);
 /** snake_case alias of {@link nhlRecordsGoalieCareerStatsWithPlayoffs} (py/R parity). */
 export const nhl_records_goalie_career_stats_with_playoffs = nhlRecordsGoalieCareerStatsWithPlayoffs;
 
@@ -952,7 +995,7 @@ const GOALIE_PLAYOFF_STREAK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoaliePlayoffStreak({});
  */
-export const nhlRecordsGoaliePlayoffStreak: WrapperFn = (params = {}) => callFlat(GOALIE_PLAYOFF_STREAK_DEF, params);
+export const nhlRecordsGoaliePlayoffStreak: Wrapper<NhlRecordsGoaliePlayoffStreakRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_PLAYOFF_STREAK_DEF, params);
 /** snake_case alias of {@link nhlRecordsGoaliePlayoffStreak} (py/R parity). */
 export const nhl_records_goalie_playoff_streak = nhlRecordsGoaliePlayoffStreak;
 
@@ -978,7 +1021,7 @@ const GOALIE_SEASON_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieSeasonStats({});
  */
-export const nhlRecordsGoalieSeasonStats: WrapperFn = (params = {}) => callFlat(GOALIE_SEASON_STATS_DEF, params);
+export const nhlRecordsGoalieSeasonStats: Wrapper<NhlRecordsGoalieSeasonStatsRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_SEASON_STATS_DEF, params);
 /** snake_case alias of {@link nhlRecordsGoalieSeasonStats} (py/R parity). */
 export const nhl_records_goalie_season_stats = nhlRecordsGoalieSeasonStats;
 
@@ -1004,7 +1047,7 @@ const GOALIE_SHUTOUT_STREAK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieShutoutStreak({});
  */
-export const nhlRecordsGoalieShutoutStreak: WrapperFn = (params = {}) => callFlat(GOALIE_SHUTOUT_STREAK_DEF, params);
+export const nhlRecordsGoalieShutoutStreak: Wrapper<NhlRecordsGoalieShutoutStreakRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_SHUTOUT_STREAK_DEF, params);
 /** snake_case alias of {@link nhlRecordsGoalieShutoutStreak} (py/R parity). */
 export const nhl_records_goalie_shutout_streak = nhlRecordsGoalieShutoutStreak;
 
@@ -1030,7 +1073,7 @@ const GOALIE_UNDEFEATED_STREAK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieUndefeatedStreak({});
  */
-export const nhlRecordsGoalieUndefeatedStreak: WrapperFn = (params = {}) => callFlat(GOALIE_UNDEFEATED_STREAK_DEF, params);
+export const nhlRecordsGoalieUndefeatedStreak: Wrapper<NhlRecordsGoalieUndefeatedStreakRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_UNDEFEATED_STREAK_DEF, params);
 /** snake_case alias of {@link nhlRecordsGoalieUndefeatedStreak} (py/R parity). */
 export const nhl_records_goalie_undefeated_streak = nhlRecordsGoalieUndefeatedStreak;
 
@@ -1056,7 +1099,7 @@ const GOALIE_WIN_PLATEAUS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieWinPlateaus({});
  */
-export const nhlRecordsGoalieWinPlateaus: WrapperFn = (params = {}) => callFlat(GOALIE_WIN_PLATEAUS_DEF, params);
+export const nhlRecordsGoalieWinPlateaus: Wrapper<NhlRecordsGoalieWinPlateausRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_WIN_PLATEAUS_DEF, params);
 /** snake_case alias of {@link nhlRecordsGoalieWinPlateaus} (py/R parity). */
 export const nhl_records_goalie_win_plateaus = nhlRecordsGoalieWinPlateaus;
 
@@ -1082,7 +1125,7 @@ const GOALIE_WIN_STREAK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieWinStreak({});
  */
-export const nhlRecordsGoalieWinStreak: WrapperFn = (params = {}) => callFlat(GOALIE_WIN_STREAK_DEF, params);
+export const nhlRecordsGoalieWinStreak: Wrapper<NhlRecordsGoalieWinStreakRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_WIN_STREAK_DEF, params);
 /** snake_case alias of {@link nhlRecordsGoalieWinStreak} (py/R parity). */
 export const nhl_records_goalie_win_streak = nhlRecordsGoalieWinStreak;
 
@@ -1108,7 +1151,7 @@ const HOF_PLAYERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsHofPlayers({});
  */
-export const nhlRecordsHofPlayers: WrapperFn = (params = {}) => callFlat(HOF_PLAYERS_DEF, params);
+export const nhlRecordsHofPlayers: Wrapper<NhlRecordsHofPlayersRow[]> = (params: WrapperParams = {}) => callFlat(HOF_PLAYERS_DEF, params);
 /** snake_case alias of {@link nhlRecordsHofPlayers} (py/R parity). */
 export const nhl_records_hof_players = nhlRecordsHofPlayers;
 
@@ -1139,7 +1182,7 @@ const HOF_PLAYERS_BY_OFFICE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsHofPlayersByOffice({ office_id: '…' });
  */
-export const nhlRecordsHofPlayersByOffice: WrapperFn = (params = {}) => callFlat(HOF_PLAYERS_BY_OFFICE_DEF, params);
+export const nhlRecordsHofPlayersByOffice: Wrapper<NhlRecordsHofPlayersByOfficeRow[]> = (params: WrapperParams = {}) => callFlat(HOF_PLAYERS_BY_OFFICE_DEF, params);
 /** snake_case alias of {@link nhlRecordsHofPlayersByOffice} (py/R parity). */
 export const nhl_records_hof_players_by_office = nhlRecordsHofPlayersByOffice;
 
@@ -1165,7 +1208,7 @@ const HOME_TEAM_RECORD_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsHomeTeamRecord({});
  */
-export const nhlRecordsHomeTeamRecord: WrapperFn = (params = {}) => callFlat(HOME_TEAM_RECORD_DEF, params);
+export const nhlRecordsHomeTeamRecord: Wrapper<NhlRecordsHomeTeamRecordRow[]> = (params: WrapperParams = {}) => callFlat(HOME_TEAM_RECORD_DEF, params);
 /** snake_case alias of {@link nhlRecordsHomeTeamRecord} (py/R parity). */
 export const nhl_records_home_team_record = nhlRecordsHomeTeamRecord;
 
@@ -1190,7 +1233,7 @@ const SKATER_CAREER_LEADERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsSkaterCareerLeaders({});
  */
-export const nhlRecordsSkaterCareerLeaders: WrapperFn = (params = {}) => callFlat(SKATER_CAREER_LEADERS_DEF, params);
+export const nhlRecordsSkaterCareerLeaders: Wrapper = (params: WrapperParams = {}) => callFlat(SKATER_CAREER_LEADERS_DEF, params);
 /** snake_case alias of {@link nhlRecordsSkaterCareerLeaders} (py/R parity). */
 export const nhl_records_skater_career_leaders = nhlRecordsSkaterCareerLeaders;
 
@@ -1215,6 +1258,6 @@ const SKATER_CAREER_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsSkaterCareerStats({});
  */
-export const nhlRecordsSkaterCareerStats: WrapperFn = (params = {}) => callFlat(SKATER_CAREER_STATS_DEF, params);
+export const nhlRecordsSkaterCareerStats: Wrapper = (params: WrapperParams = {}) => callFlat(SKATER_CAREER_STATS_DEF, params);
 /** snake_case alias of {@link nhlRecordsSkaterCareerStats} (py/R parity). */
 export const nhl_records_skater_career_stats = nhlRecordsSkaterCareerStats;

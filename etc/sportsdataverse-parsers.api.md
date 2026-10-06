@@ -18,43 +18,43 @@ export function normalize(rows: any[]): Record<string, any>[];
 
 // @public
 export function parse_asa_goals_added_tables(raw: any): {
-    summary: Row_2[];
-    actions: Row_2[];
+    summary: ParserRow[];
+    actions: ParserRow[];
 };
 
 // @public
-export function parse_kenpom_page(raw: any, section?: string): Record<string, Row[]> | Row[];
+export function parse_kenpom_page(raw: any, section?: string): Record<string, ParserRow[]> | ParserRow[];
 
 // @public
 export function parse_mls_match_tables(raw: any): MatchTables;
 
 // @public
 export function parse_mls_standings_tables(raw: any): {
-    tables: Row_2[];
-    entries: Row_2[];
+    tables: ParserRow[];
+    entries: ParserRow[];
 };
 
 // @public
-export function parse_nfl_pro_stats(payload: any): Row_4[];
+export function parse_nfl_pro_stats(payload: any): ParserRow[];
 
 // @public
 export function parse_nwsl_lineups_tables(raw: any): {
-    teams: Row_2[];
-    players: Row_2[];
-    staff: Row_2[];
+    teams: ParserRow[];
+    players: ParserRow[];
+    staff: ParserRow[];
 };
 
 // @public
 export function parse_pff_matrix(raw: any, report?: string): Tables;
 
 // @public
-export function parse_pff_player_detail(raw: any, section?: string): Row_3[];
+export function parse_pff_player_detail(raw: any, section?: string): ParserRow[];
 
 // @public
-export function parse_pff_report(raw: any, section?: string): Row_3[] | Tables;
+export function parse_pff_report(raw: any, section?: string): ParserRow[] | Tables;
 
 // @public
-export function parse_pff_v2_table(raw: any, section?: string): Row_3[];
+export function parse_pff_v2_table(raw: any, section?: string): ParserRow[];
 
 // @public
 export function parse_summary(payload: any, section?: string): Record<string, any>[] | Record<string, Record<string, any>[]>;
@@ -63,7 +63,7 @@ export function parse_summary(payload: any, section?: string): Record<string, an
 export type ParsedResult = Record<string, any>[] | Record<string, Record<string, any>[]> | null;
 
 // @public
-export type ParsedTables = Record<string, Record<string, any>[]>;
+export type ParsedTables = Record<string, Row[]>;
 
 // @public
 export function parseEndpoint(kind: "espn" | "flat", key: string, raw: any, section?: string): ParsedResult;

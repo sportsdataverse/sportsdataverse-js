@@ -45,7 +45,8 @@ export function pyJson(v: any): string {
     .replace(/[\u007f-￿]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, "0")}`);
 }
 
-export type Row = Record<string, any>;
+export type { ParserRow as Row } from "../core/types.js";
+import type { ParserRow as Row } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 export function isPlainObject(v: any): v is Record<string, any> {

@@ -6,7 +6,7 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
 
 const ALIAS_DEF: WrapperDef = {
   "short": "alias",
@@ -36,7 +36,7 @@ const ALIAS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooAlias({});
  */
-export const yahooAlias: WrapperFn = (params = {}) => callFlat(ALIAS_DEF, params);
+export const yahooAlias: Wrapper = (params: WrapperParams = {}) => callFlat(ALIAS_DEF, params);
 /** snake_case alias of {@link yahooAlias} (py/R parity). */
 export const yahoo_alias = yahooAlias;
 
@@ -68,7 +68,7 @@ const ARTICLE_LIST_CARD_PLAYERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooArticleListCardPlayers({});
  */
-export const yahooArticleListCardPlayers: WrapperFn = (params = {}) => callFlat(ARTICLE_LIST_CARD_PLAYERS_DEF, params);
+export const yahooArticleListCardPlayers: Wrapper = (params: WrapperParams = {}) => callFlat(ARTICLE_LIST_CARD_PLAYERS_DEF, params);
 /** snake_case alias of {@link yahooArticleListCardPlayers} (py/R parity). */
 export const yahoo_article_list_card_players = yahooArticleListCardPlayers;
 
@@ -100,7 +100,7 @@ const ARTICLE_LIST_CARD_TEAMS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooArticleListCardTeams({});
  */
-export const yahooArticleListCardTeams: WrapperFn = (params = {}) => callFlat(ARTICLE_LIST_CARD_TEAMS_DEF, params);
+export const yahooArticleListCardTeams: Wrapper = (params: WrapperParams = {}) => callFlat(ARTICLE_LIST_CARD_TEAMS_DEF, params);
 /** snake_case alias of {@link yahooArticleListCardTeams} (py/R parity). */
 export const yahoo_article_list_card_teams = yahooArticleListCardTeams;
 
@@ -132,7 +132,7 @@ const BASIC_PLAYERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooBasicPlayers({});
  */
-export const yahooBasicPlayers: WrapperFn = (params = {}) => callFlat(BASIC_PLAYERS_DEF, params);
+export const yahooBasicPlayers: Wrapper = (params: WrapperParams = {}) => callFlat(BASIC_PLAYERS_DEF, params);
 /** snake_case alias of {@link yahooBasicPlayers} (py/R parity). */
 export const yahoo_basic_players = yahooBasicPlayers;
 
@@ -164,7 +164,7 @@ const BETTING_DISCLAIMER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooBettingDisclaimer({});
  */
-export const yahooBettingDisclaimer: WrapperFn = (params = {}) => callFlat(BETTING_DISCLAIMER_DEF, params);
+export const yahooBettingDisclaimer: Wrapper = (params: WrapperParams = {}) => callFlat(BETTING_DISCLAIMER_DEF, params);
 /** snake_case alias of {@link yahooBettingDisclaimer} (py/R parity). */
 export const yahoo_betting_disclaimer = yahooBettingDisclaimer;
 
@@ -206,7 +206,7 @@ const COMBAT_EVENT_FIGHTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooCombatEventFights({});
  */
-export const yahooCombatEventFights: WrapperFn = (params = {}) => callFlat(COMBAT_EVENT_FIGHTS_DEF, params);
+export const yahooCombatEventFights: Wrapper = (params: WrapperParams = {}) => callFlat(COMBAT_EVENT_FIGHTS_DEF, params);
 /** snake_case alias of {@link yahooCombatEventFights} (py/R parity). */
 export const yahoo_combat_event_fights = yahooCombatEventFights;
 
@@ -243,7 +243,7 @@ const COMBAT_SCHEDULE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooCombatSchedule({});
  */
-export const yahooCombatSchedule: WrapperFn = (params = {}) => callFlat(COMBAT_SCHEDULE_DEF, params);
+export const yahooCombatSchedule: Wrapper = (params: WrapperParams = {}) => callFlat(COMBAT_SCHEDULE_DEF, params);
 /** snake_case alias of {@link yahooCombatSchedule} (py/R parity). */
 export const yahoo_combat_schedule = yahooCombatSchedule;
 
@@ -285,7 +285,7 @@ const COMMON_PILLS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooCommonPills({});
  */
-export const yahooCommonPills: WrapperFn = (params = {}) => callFlat(COMMON_PILLS_DEF, params);
+export const yahooCommonPills: Wrapper = (params: WrapperParams = {}) => callFlat(COMMON_PILLS_DEF, params);
 /** snake_case alias of {@link yahooCommonPills} (py/R parity). */
 export const yahoo_common_pills = yahooCommonPills;
 
@@ -342,7 +342,7 @@ const CONSENSUS_RANKINGS_PHP_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooConsensusRankingsPhp({});
  */
-export const yahooConsensusRankingsPhp: WrapperFn = (params = {}) => callFlat(CONSENSUS_RANKINGS_PHP_DEF, params);
+export const yahooConsensusRankingsPhp: Wrapper = (params: WrapperParams = {}) => callFlat(CONSENSUS_RANKINGS_PHP_DEF, params);
 /** snake_case alias of {@link yahooConsensusRankingsPhp} (py/R parity). */
 export const yahoo_consensus_rankings_php = yahooConsensusRankingsPhp;
 
@@ -379,7 +379,7 @@ const DRAFT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooDraft({});
  */
-export const yahooDraft: WrapperFn = (params = {}) => callFlat(DRAFT_DEF, params);
+export const yahooDraft: Wrapper = (params: WrapperParams = {}) => callFlat(DRAFT_DEF, params);
 /** snake_case alias of {@link yahooDraft} (py/R parity). */
 export const yahoo_draft = yahooDraft;
 
@@ -426,7 +426,7 @@ const DRAFT_PROSPECTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooDraftProspects({});
  */
-export const yahooDraftProspects: WrapperFn = (params = {}) => callFlat(DRAFT_PROSPECTS_DEF, params);
+export const yahooDraftProspects: Wrapper = (params: WrapperParams = {}) => callFlat(DRAFT_PROSPECTS_DEF, params);
 /** snake_case alias of {@link yahooDraftProspects} (py/R parity). */
 export const yahoo_draft_prospects = yahooDraftProspects;
 
@@ -463,7 +463,7 @@ const DRIVER_RESULTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooDriverResults({});
  */
-export const yahooDriverResults: WrapperFn = (params = {}) => callFlat(DRIVER_RESULTS_DEF, params);
+export const yahooDriverResults: Wrapper = (params: WrapperParams = {}) => callFlat(DRIVER_RESULTS_DEF, params);
 /** snake_case alias of {@link yahooDriverResults} (py/R parity). */
 export const yahoo_driver_results = yahooDriverResults;
 
@@ -495,7 +495,7 @@ const DRIVER_SPLITS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooDriverSplits({});
  */
-export const yahooDriverSplits: WrapperFn = (params = {}) => callFlat(DRIVER_SPLITS_DEF, params);
+export const yahooDriverSplits: Wrapper = (params: WrapperParams = {}) => callFlat(DRIVER_SPLITS_DEF, params);
 /** snake_case alias of {@link yahooDriverSplits} (py/R parity). */
 export const yahoo_driver_splits = yahooDriverSplits;
 
@@ -537,7 +537,7 @@ const EDITORIAL_BOXSCORE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooEditorialBoxscore({ game_id: '…' });
  */
-export const yahooEditorialBoxscore: WrapperFn = (params = {}) => callFlat(EDITORIAL_BOXSCORE_DEF, params);
+export const yahooEditorialBoxscore: Wrapper = (params: WrapperParams = {}) => callFlat(EDITORIAL_BOXSCORE_DEF, params);
 /** snake_case alias of {@link yahooEditorialBoxscore} (py/R parity). */
 export const yahoo_editorial_boxscore = yahooEditorialBoxscore;
 
@@ -594,7 +594,7 @@ const EDITORIAL_SCOREBOARD_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooEditorialScoreboard({});
  */
-export const yahooEditorialScoreboard: WrapperFn = (params = {}) => callFlat(EDITORIAL_SCOREBOARD_DEF, params);
+export const yahooEditorialScoreboard: Wrapper = (params: WrapperParams = {}) => callFlat(EDITORIAL_SCOREBOARD_DEF, params);
 /** snake_case alias of {@link yahooEditorialScoreboard} (py/R parity). */
 export const yahoo_editorial_scoreboard = yahooEditorialScoreboard;
 
@@ -620,7 +620,7 @@ const FEATURED_GAME_IDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooFeaturedGameIds({});
  */
-export const yahooFeaturedGameIds: WrapperFn = (params = {}) => callFlat(FEATURED_GAME_IDS_DEF, params);
+export const yahooFeaturedGameIds: Wrapper = (params: WrapperParams = {}) => callFlat(FEATURED_GAME_IDS_DEF, params);
 /** snake_case alias of {@link yahooFeaturedGameIds} (py/R parity). */
 export const yahoo_featured_game_ids = yahooFeaturedGameIds;
 
@@ -652,7 +652,7 @@ const GAME_PROP_BETS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGamePropBets({});
  */
-export const yahooGamePropBets: WrapperFn = (params = {}) => callFlat(GAME_PROP_BETS_DEF, params);
+export const yahooGamePropBets: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_PROP_BETS_DEF, params);
 /** snake_case alias of {@link yahooGamePropBets} (py/R parity). */
 export const yahoo_game_prop_bets = yahooGamePropBets;
 
@@ -1474,7 +1474,7 @@ const GAME_STATS_LEADERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGameStatsLeaders({});
  */
-export const yahooGameStatsLeaders: WrapperFn = (params = {}) => callFlat(GAME_STATS_LEADERS_DEF, params);
+export const yahooGameStatsLeaders: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_STATS_LEADERS_DEF, params);
 /** snake_case alias of {@link yahooGameStatsLeaders} (py/R parity). */
 export const yahoo_game_stats_leaders = yahooGameStatsLeaders;
 
@@ -1506,7 +1506,7 @@ const GAMETIME_GAME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGametimeGame({});
  */
-export const yahooGametimeGame: WrapperFn = (params = {}) => callFlat(GAMETIME_GAME_DEF, params);
+export const yahooGametimeGame: Wrapper = (params: WrapperParams = {}) => callFlat(GAMETIME_GAME_DEF, params);
 /** snake_case alias of {@link yahooGametimeGame} (py/R parity). */
 export const yahoo_gametime_game = yahooGametimeGame;
 
@@ -1538,7 +1538,7 @@ const GAMETIME_TEAM_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGametimeTeam({});
  */
-export const yahooGametimeTeam: WrapperFn = (params = {}) => callFlat(GAMETIME_TEAM_DEF, params);
+export const yahooGametimeTeam: Wrapper = (params: WrapperParams = {}) => callFlat(GAMETIME_TEAM_DEF, params);
 /** snake_case alias of {@link yahooGametimeTeam} (py/R parity). */
 export const yahoo_gametime_team = yahooGametimeTeam;
 
@@ -1570,7 +1570,7 @@ const GOLF_TOURNAMENT_SEASONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGolfTournamentSeasons({});
  */
-export const yahooGolfTournamentSeasons: WrapperFn = (params = {}) => callFlat(GOLF_TOURNAMENT_SEASONS_DEF, params);
+export const yahooGolfTournamentSeasons: Wrapper = (params: WrapperParams = {}) => callFlat(GOLF_TOURNAMENT_SEASONS_DEF, params);
 /** snake_case alias of {@link yahooGolfTournamentSeasons} (py/R parity). */
 export const yahoo_golf_tournament_seasons = yahooGolfTournamentSeasons;
 
@@ -1612,7 +1612,7 @@ const GOLF_TOURNAMENTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGolfTournaments({});
  */
-export const yahooGolfTournaments: WrapperFn = (params = {}) => callFlat(GOLF_TOURNAMENTS_DEF, params);
+export const yahooGolfTournaments: Wrapper = (params: WrapperParams = {}) => callFlat(GOLF_TOURNAMENTS_DEF, params);
 /** snake_case alias of {@link yahooGolfTournaments} (py/R parity). */
 export const yahoo_golf_tournaments = yahooGolfTournaments;
 
@@ -1654,7 +1654,7 @@ const GOLF_TOURNAMENTS_BASIC_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGolfTournamentsBasic({});
  */
-export const yahooGolfTournamentsBasic: WrapperFn = (params = {}) => callFlat(GOLF_TOURNAMENTS_BASIC_DEF, params);
+export const yahooGolfTournamentsBasic: Wrapper = (params: WrapperParams = {}) => callFlat(GOLF_TOURNAMENTS_BASIC_DEF, params);
 /** snake_case alias of {@link yahooGolfTournamentsBasic} (py/R parity). */
 export const yahoo_golf_tournaments_basic = yahooGolfTournamentsBasic;
 
@@ -1691,7 +1691,7 @@ const LEAGUE_CONFERENCES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueConferences({});
  */
-export const yahooLeagueConferences: WrapperFn = (params = {}) => callFlat(LEAGUE_CONFERENCES_DEF, params);
+export const yahooLeagueConferences: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_CONFERENCES_DEF, params);
 /** snake_case alias of {@link yahooLeagueConferences} (py/R parity). */
 export const yahoo_league_conferences = yahooLeagueConferences;
 
@@ -1738,7 +1738,7 @@ const LEAGUE_FILTERS_DATA_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueFiltersData({});
  */
-export const yahooLeagueFiltersData: WrapperFn = (params = {}) => callFlat(LEAGUE_FILTERS_DATA_DEF, params);
+export const yahooLeagueFiltersData: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_FILTERS_DATA_DEF, params);
 /** snake_case alias of {@link yahooLeagueFiltersData} (py/R parity). */
 export const yahoo_league_filters_data = yahooLeagueFiltersData;
 
@@ -1775,7 +1775,7 @@ const LEAGUE_FUTURE_ODDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueFutureOdds({});
  */
-export const yahooLeagueFutureOdds: WrapperFn = (params = {}) => callFlat(LEAGUE_FUTURE_ODDS_DEF, params);
+export const yahooLeagueFutureOdds: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_FUTURE_ODDS_DEF, params);
 /** snake_case alias of {@link yahooLeagueFutureOdds} (py/R parity). */
 export const yahoo_league_future_odds = yahooLeagueFutureOdds;
 
@@ -1862,7 +1862,7 @@ const LEAGUE_GAME_IDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueGameIds({});
  */
-export const yahooLeagueGameIds: WrapperFn = (params = {}) => callFlat(LEAGUE_GAME_IDS_DEF, params);
+export const yahooLeagueGameIds: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_GAME_IDS_DEF, params);
 /** snake_case alias of {@link yahooLeagueGameIds} (py/R parity). */
 export const yahoo_league_game_ids = yahooLeagueGameIds;
 
@@ -1949,7 +1949,7 @@ const LEAGUE_GAME_IDS_BY_DATE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueGameIdsByDate({});
  */
-export const yahooLeagueGameIdsByDate: WrapperFn = (params = {}) => callFlat(LEAGUE_GAME_IDS_BY_DATE_DEF, params);
+export const yahooLeagueGameIdsByDate: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_GAME_IDS_BY_DATE_DEF, params);
 /** snake_case alias of {@link yahooLeagueGameIdsByDate} (py/R parity). */
 export const yahoo_league_game_ids_by_date = yahooLeagueGameIdsByDate;
 
@@ -1991,7 +1991,7 @@ const LEAGUE_GAMES_BY_ROUND_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueGamesByRound({});
  */
-export const yahooLeagueGamesByRound: WrapperFn = (params = {}) => callFlat(LEAGUE_GAMES_BY_ROUND_DEF, params);
+export const yahooLeagueGamesByRound: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_GAMES_BY_ROUND_DEF, params);
 /** snake_case alias of {@link yahooLeagueGamesByRound} (py/R parity). */
 export const yahoo_league_games_by_round = yahooLeagueGamesByRound;
 
@@ -2023,7 +2023,7 @@ const LEAGUE_INFO_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueInfo({});
  */
-export const yahooLeagueInfo: WrapperFn = (params = {}) => callFlat(LEAGUE_INFO_DEF, params);
+export const yahooLeagueInfo: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_INFO_DEF, params);
 /** snake_case alias of {@link yahooLeagueInfo} (py/R parity). */
 export const yahoo_league_info = yahooLeagueInfo;
 
@@ -2055,7 +2055,7 @@ const LEAGUE_INJURIES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueInjuries({});
  */
-export const yahooLeagueInjuries: WrapperFn = (params = {}) => callFlat(LEAGUE_INJURIES_DEF, params);
+export const yahooLeagueInjuries: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_INJURIES_DEF, params);
 /** snake_case alias of {@link yahooLeagueInjuries} (py/R parity). */
 export const yahoo_league_injuries = yahooLeagueInjuries;
 
@@ -2087,7 +2087,7 @@ const LEAGUE_NAMES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueNames({});
  */
-export const yahooLeagueNames: WrapperFn = (params = {}) => callFlat(LEAGUE_NAMES_DEF, params);
+export const yahooLeagueNames: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_NAMES_DEF, params);
 /** snake_case alias of {@link yahooLeagueNames} (py/R parity). */
 export const yahoo_league_names = yahooLeagueNames;
 
@@ -2124,7 +2124,7 @@ const LEAGUE_PROP_ODDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeaguePropOdds({});
  */
-export const yahooLeaguePropOdds: WrapperFn = (params = {}) => callFlat(LEAGUE_PROP_ODDS_DEF, params);
+export const yahooLeaguePropOdds: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_PROP_ODDS_DEF, params);
 /** snake_case alias of {@link yahooLeaguePropOdds} (py/R parity). */
 export const yahoo_league_prop_odds = yahooLeaguePropOdds;
 
@@ -2166,7 +2166,7 @@ const LEAGUE_STANDINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueStandings({});
  */
-export const yahooLeagueStandings: WrapperFn = (params = {}) => callFlat(LEAGUE_STANDINGS_DEF, params);
+export const yahooLeagueStandings: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_STANDINGS_DEF, params);
 /** snake_case alias of {@link yahooLeagueStandings} (py/R parity). */
 export const yahoo_league_standings = yahooLeagueStandings;
 
@@ -2233,7 +2233,7 @@ const LEAGUE_STATS_BY_TEAM_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueStatsByTeam({});
  */
-export const yahooLeagueStatsByTeam: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_BY_TEAM_DEF, params);
+export const yahooLeagueStatsByTeam: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_BY_TEAM_DEF, params);
 /** snake_case alias of {@link yahooLeagueStatsByTeam} (py/R parity). */
 export const yahoo_league_stats_by_team = yahooLeagueStatsByTeam;
 
@@ -2340,7 +2340,7 @@ const LEAGUE_STATS_INDIVIDUAL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueStatsIndividual({});
  */
-export const yahooLeagueStatsIndividual: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_INDIVIDUAL_DEF, params);
+export const yahooLeagueStatsIndividual: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_INDIVIDUAL_DEF, params);
 /** snake_case alias of {@link yahooLeagueStatsIndividual} (py/R parity). */
 export const yahoo_league_stats_individual = yahooLeagueStatsIndividual;
 
@@ -2417,7 +2417,7 @@ const LEAGUE_STATS_OVERVIEW_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueStatsOverview({});
  */
-export const yahooLeagueStatsOverview: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_OVERVIEW_DEF, params);
+export const yahooLeagueStatsOverview: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_OVERVIEW_DEF, params);
 /** snake_case alias of {@link yahooLeagueStatsOverview} (py/R parity). */
 export const yahoo_league_stats_overview = yahooLeagueStatsOverview;
 
@@ -2469,7 +2469,7 @@ const LEAGUE_STATS_WEEKLY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueStatsWeekly({});
  */
-export const yahooLeagueStatsWeekly: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_WEEKLY_DEF, params);
+export const yahooLeagueStatsWeekly: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_WEEKLY_DEF, params);
 /** snake_case alias of {@link yahooLeagueStatsWeekly} (py/R parity). */
 export const yahoo_league_stats_weekly = yahooLeagueStatsWeekly;
 
@@ -2511,7 +2511,7 @@ const LEAGUE_TEAM_IDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueTeamIds({});
  */
-export const yahooLeagueTeamIds: WrapperFn = (params = {}) => callFlat(LEAGUE_TEAM_IDS_DEF, params);
+export const yahooLeagueTeamIds: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_TEAM_IDS_DEF, params);
 /** snake_case alias of {@link yahooLeagueTeamIds} (py/R parity). */
 export const yahoo_league_team_ids = yahooLeagueTeamIds;
 
@@ -2558,7 +2558,7 @@ const LEAGUE_TEAMS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueTeams({});
  */
-export const yahooLeagueTeams: WrapperFn = (params = {}) => callFlat(LEAGUE_TEAMS_DEF, params);
+export const yahooLeagueTeams: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_TEAMS_DEF, params);
 /** snake_case alias of {@link yahooLeagueTeams} (py/R parity). */
 export const yahoo_league_teams = yahooLeagueTeams;
 
@@ -2590,7 +2590,7 @@ const LEAGUES_SEASON_STATES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeaguesSeasonStates({});
  */
-export const yahooLeaguesSeasonStates: WrapperFn = (params = {}) => callFlat(LEAGUES_SEASON_STATES_DEF, params);
+export const yahooLeaguesSeasonStates: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUES_SEASON_STATES_DEF, params);
 /** snake_case alias of {@link yahooLeaguesSeasonStates} (py/R parity). */
 export const yahoo_leagues_season_states = yahooLeaguesSeasonStates;
 
@@ -2632,7 +2632,7 @@ const MODULE_GAME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooModuleGame({});
  */
-export const yahooModuleGame: WrapperFn = (params = {}) => callFlat(MODULE_GAME_DEF, params);
+export const yahooModuleGame: Wrapper = (params: WrapperParams = {}) => callFlat(MODULE_GAME_DEF, params);
 /** snake_case alias of {@link yahooModuleGame} (py/R parity). */
 export const yahoo_module_game = yahooModuleGame;
 
@@ -2669,7 +2669,7 @@ const MOTORSPORT_STANDINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooMotorsportStandings({});
  */
-export const yahooMotorsportStandings: WrapperFn = (params = {}) => callFlat(MOTORSPORT_STANDINGS_DEF, params);
+export const yahooMotorsportStandings: Wrapper = (params: WrapperParams = {}) => callFlat(MOTORSPORT_STANDINGS_DEF, params);
 /** snake_case alias of {@link yahooMotorsportStandings} (py/R parity). */
 export const yahoo_motorsport_standings = yahooMotorsportStandings;
 
@@ -2701,7 +2701,7 @@ const NASCAR_DRIVERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooNascarDrivers({});
  */
-export const yahooNascarDrivers: WrapperFn = (params = {}) => callFlat(NASCAR_DRIVERS_DEF, params);
+export const yahooNascarDrivers: Wrapper = (params: WrapperParams = {}) => callFlat(NASCAR_DRIVERS_DEF, params);
 /** snake_case alias of {@link yahooNascarDrivers} (py/R parity). */
 export const yahoo_nascar_drivers = yahooNascarDrivers;
 
@@ -2743,7 +2743,7 @@ const NAV_DROPDOWN_TRAY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooNavDropdownTray({});
  */
-export const yahooNavDropdownTray: WrapperFn = (params = {}) => callFlat(NAV_DROPDOWN_TRAY_DEF, params);
+export const yahooNavDropdownTray: Wrapper = (params: WrapperParams = {}) => callFlat(NAV_DROPDOWN_TRAY_DEF, params);
 /** snake_case alias of {@link yahooNavDropdownTray} (py/R parity). */
 export const yahoo_nav_dropdown_tray = yahooNavDropdownTray;
 
@@ -2780,7 +2780,7 @@ const OLY_MEDAL_COUNT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooOlyMedalCount({});
  */
-export const yahooOlyMedalCount: WrapperFn = (params = {}) => callFlat(OLY_MEDAL_COUNT_DEF, params);
+export const yahooOlyMedalCount: Wrapper = (params: WrapperParams = {}) => callFlat(OLY_MEDAL_COUNT_DEF, params);
 /** snake_case alias of {@link yahooOlyMedalCount} (py/R parity). */
 export const yahoo_oly_medal_count = yahooOlyMedalCount;
 
@@ -2812,7 +2812,7 @@ const OLY_SEASONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooOlySeasons({});
  */
-export const yahooOlySeasons: WrapperFn = (params = {}) => callFlat(OLY_SEASONS_DEF, params);
+export const yahooOlySeasons: Wrapper = (params: WrapperParams = {}) => callFlat(OLY_SEASONS_DEF, params);
 /** snake_case alias of {@link yahooOlySeasons} (py/R parity). */
 export const yahoo_oly_seasons = yahooOlySeasons;
 
@@ -2854,7 +2854,7 @@ const PICK_DISTRIBUTION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPickDistribution({});
  */
-export const yahooPickDistribution: WrapperFn = (params = {}) => callFlat(PICK_DISTRIBUTION_DEF, params);
+export const yahooPickDistribution: Wrapper = (params: WrapperParams = {}) => callFlat(PICK_DISTRIBUTION_DEF, params);
 /** snake_case alias of {@link yahooPickDistribution} (py/R parity). */
 export const yahoo_pick_distribution = yahooPickDistribution;
 
@@ -2936,7 +2936,7 @@ const PLAYBOOK_BOXSCORE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookBoxscore({});
  */
-export const yahooPlaybookBoxscore: WrapperFn = (params = {}) => callFlat(PLAYBOOK_BOXSCORE_DEF, params);
+export const yahooPlaybookBoxscore: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_BOXSCORE_DEF, params);
 /** snake_case alias of {@link yahooPlaybookBoxscore} (py/R parity). */
 export const yahoo_playbook_boxscore = yahooPlaybookBoxscore;
 
@@ -3008,7 +3008,7 @@ const PLAYBOOK_BOXSCORE_POLL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookBoxscorePoll({});
  */
-export const yahooPlaybookBoxscorePoll: WrapperFn = (params = {}) => callFlat(PLAYBOOK_BOXSCORE_POLL_DEF, params);
+export const yahooPlaybookBoxscorePoll: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_BOXSCORE_POLL_DEF, params);
 /** snake_case alias of {@link yahooPlaybookBoxscorePoll} (py/R parity). */
 export const yahoo_playbook_boxscore_poll = yahooPlaybookBoxscorePoll;
 
@@ -3040,7 +3040,7 @@ const PLAYBOOK_BOXSCORE_SOCIAL_SHARE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookBoxscoreSocialShare({});
  */
-export const yahooPlaybookBoxscoreSocialShare: WrapperFn = (params = {}) => callFlat(PLAYBOOK_BOXSCORE_SOCIAL_SHARE_DEF, params);
+export const yahooPlaybookBoxscoreSocialShare: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_BOXSCORE_SOCIAL_SHARE_DEF, params);
 /** snake_case alias of {@link yahooPlaybookBoxscoreSocialShare} (py/R parity). */
 export const yahoo_playbook_boxscore_social_share = yahooPlaybookBoxscoreSocialShare;
 
@@ -3092,7 +3092,7 @@ const PLAYBOOK_COMBAT_MATCH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookCombatMatch({});
  */
-export const yahooPlaybookCombatMatch: WrapperFn = (params = {}) => callFlat(PLAYBOOK_COMBAT_MATCH_DEF, params);
+export const yahooPlaybookCombatMatch: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_COMBAT_MATCH_DEF, params);
 /** snake_case alias of {@link yahooPlaybookCombatMatch} (py/R parity). */
 export const yahoo_playbook_combat_match = yahooPlaybookCombatMatch;
 
@@ -3134,7 +3134,7 @@ const PLAYBOOK_GAME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookGame({});
  */
-export const yahooPlaybookGame: WrapperFn = (params = {}) => callFlat(PLAYBOOK_GAME_DEF, params);
+export const yahooPlaybookGame: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_GAME_DEF, params);
 /** snake_case alias of {@link yahooPlaybookGame} (py/R parity). */
 export const yahoo_playbook_game = yahooPlaybookGame;
 
@@ -3171,7 +3171,7 @@ const PLAYBOOK_GAME_ODDS_POLL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookGameOddsPoll({});
  */
-export const yahooPlaybookGameOddsPoll: WrapperFn = (params = {}) => callFlat(PLAYBOOK_GAME_ODDS_POLL_DEF, params);
+export const yahooPlaybookGameOddsPoll: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_GAME_ODDS_POLL_DEF, params);
 /** snake_case alias of {@link yahooPlaybookGameOddsPoll} (py/R parity). */
 export const yahoo_playbook_game_odds_poll = yahooPlaybookGameOddsPoll;
 
@@ -3223,7 +3223,7 @@ const PLAYBOOK_GOLF_TOURNAMENT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookGolfTournament({});
  */
-export const yahooPlaybookGolfTournament: WrapperFn = (params = {}) => callFlat(PLAYBOOK_GOLF_TOURNAMENT_DEF, params);
+export const yahooPlaybookGolfTournament: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_GOLF_TOURNAMENT_DEF, params);
 /** snake_case alias of {@link yahooPlaybookGolfTournament} (py/R parity). */
 export const yahoo_playbook_golf_tournament = yahooPlaybookGolfTournament;
 
@@ -3280,7 +3280,7 @@ const PLAYBOOK_LEAGUE_ODDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookLeagueOdds({});
  */
-export const yahooPlaybookLeagueOdds: WrapperFn = (params = {}) => callFlat(PLAYBOOK_LEAGUE_ODDS_DEF, params);
+export const yahooPlaybookLeagueOdds: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_LEAGUE_ODDS_DEF, params);
 /** snake_case alias of {@link yahooPlaybookLeagueOdds} (py/R parity). */
 export const yahoo_playbook_league_odds = yahooPlaybookLeagueOdds;
 
@@ -3317,7 +3317,7 @@ const PLAYBOOK_PLAYER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookPlayer({});
  */
-export const yahooPlaybookPlayer: WrapperFn = (params = {}) => callFlat(PLAYBOOK_PLAYER_DEF, params);
+export const yahooPlaybookPlayer: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_PLAYER_DEF, params);
 /** snake_case alias of {@link yahooPlaybookPlayer} (py/R parity). */
 export const yahoo_playbook_player = yahooPlaybookPlayer;
 
@@ -3349,7 +3349,7 @@ const PLAYBOOK_PLAYER_SOCIAL_SHARE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookPlayerSocialShare({});
  */
-export const yahooPlaybookPlayerSocialShare: WrapperFn = (params = {}) => callFlat(PLAYBOOK_PLAYER_SOCIAL_SHARE_DEF, params);
+export const yahooPlaybookPlayerSocialShare: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_PLAYER_SOCIAL_SHARE_DEF, params);
 /** snake_case alias of {@link yahooPlaybookPlayerSocialShare} (py/R parity). */
 export const yahoo_playbook_player_social_share = yahooPlaybookPlayerSocialShare;
 
@@ -3391,7 +3391,7 @@ const PLAYBOOK_RACE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookRace({});
  */
-export const yahooPlaybookRace: WrapperFn = (params = {}) => callFlat(PLAYBOOK_RACE_DEF, params);
+export const yahooPlaybookRace: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_RACE_DEF, params);
 /** snake_case alias of {@link yahooPlaybookRace} (py/R parity). */
 export const yahoo_playbook_race = yahooPlaybookRace;
 
@@ -3448,7 +3448,7 @@ const PLAYBOOK_TEAM_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookTeam({});
  */
-export const yahooPlaybookTeam: WrapperFn = (params = {}) => callFlat(PLAYBOOK_TEAM_DEF, params);
+export const yahooPlaybookTeam: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_TEAM_DEF, params);
 /** snake_case alias of {@link yahooPlaybookTeam} (py/R parity). */
 export const yahoo_playbook_team = yahooPlaybookTeam;
 
@@ -3490,7 +3490,7 @@ const PLAYBOOK_TEAM_BASIC_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookTeamBasic({});
  */
-export const yahooPlaybookTeamBasic: WrapperFn = (params = {}) => callFlat(PLAYBOOK_TEAM_BASIC_DEF, params);
+export const yahooPlaybookTeamBasic: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_TEAM_BASIC_DEF, params);
 /** snake_case alias of {@link yahooPlaybookTeamBasic} (py/R parity). */
 export const yahoo_playbook_team_basic = yahooPlaybookTeamBasic;
 
@@ -3522,7 +3522,7 @@ const PLAYBOOK_TEAM_SOCIAL_SHARE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookTeamSocialShare({});
  */
-export const yahooPlaybookTeamSocialShare: WrapperFn = (params = {}) => callFlat(PLAYBOOK_TEAM_SOCIAL_SHARE_DEF, params);
+export const yahooPlaybookTeamSocialShare: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_TEAM_SOCIAL_SHARE_DEF, params);
 /** snake_case alias of {@link yahooPlaybookTeamSocialShare} (py/R parity). */
 export const yahoo_playbook_team_social_share = yahooPlaybookTeamSocialShare;
 
@@ -3554,7 +3554,7 @@ const PLAYBOOK_TENNIS_MATCH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookTennisMatch({});
  */
-export const yahooPlaybookTennisMatch: WrapperFn = (params = {}) => callFlat(PLAYBOOK_TENNIS_MATCH_DEF, params);
+export const yahooPlaybookTennisMatch: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYBOOK_TENNIS_MATCH_DEF, params);
 /** snake_case alias of {@link yahooPlaybookTennisMatch} (py/R parity). */
 export const yahoo_playbook_tennis_match = yahooPlaybookTennisMatch;
 
@@ -3591,7 +3591,7 @@ const PLAYER_BASIC_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayerBasic({});
  */
-export const yahooPlayerBasic: WrapperFn = (params = {}) => callFlat(PLAYER_BASIC_DEF, params);
+export const yahooPlayerBasic: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_BASIC_DEF, params);
 /** snake_case alias of {@link yahooPlayerBasic} (py/R parity). */
 export const yahoo_player_basic = yahooPlayerBasic;
 
@@ -3653,7 +3653,7 @@ const PLAYER_CAREER_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayerCareerStats({});
  */
-export const yahooPlayerCareerStats: WrapperFn = (params = {}) => callFlat(PLAYER_CAREER_STATS_DEF, params);
+export const yahooPlayerCareerStats: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_CAREER_STATS_DEF, params);
 /** snake_case alias of {@link yahooPlayerCareerStats} (py/R parity). */
 export const yahoo_player_career_stats = yahooPlayerCareerStats;
 
@@ -3725,7 +3725,7 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayerGameLog({});
  */
-export const yahooPlayerGameLog: WrapperFn = (params = {}) => callFlat(PLAYER_GAME_LOG_DEF, params);
+export const yahooPlayerGameLog: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_GAME_LOG_DEF, params);
 /** snake_case alias of {@link yahooPlayerGameLog} (py/R parity). */
 export const yahoo_player_game_log = yahooPlayerGameLog;
 
@@ -3757,7 +3757,7 @@ const PLAYER_PROPS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayerProps({});
  */
-export const yahooPlayerProps: WrapperFn = (params = {}) => callFlat(PLAYER_PROPS_DEF, params);
+export const yahooPlayerProps: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_PROPS_DEF, params);
 /** snake_case alias of {@link yahooPlayerProps} (py/R parity). */
 export const yahoo_player_props = yahooPlayerProps;
 
@@ -3819,7 +3819,7 @@ const PLAYER_SEARCH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayerSearch({});
  */
-export const yahooPlayerSearch: WrapperFn = (params = {}) => callFlat(PLAYER_SEARCH_DEF, params);
+export const yahooPlayerSearch: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_SEARCH_DEF, params);
 /** snake_case alias of {@link yahooPlayerSearch} (py/R parity). */
 export const yahoo_player_search = yahooPlayerSearch;
 
@@ -3911,7 +3911,7 @@ const PLAYER_SEASON_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayerSeasonStats({});
  */
-export const yahooPlayerSeasonStats: WrapperFn = (params = {}) => callFlat(PLAYER_SEASON_STATS_DEF, params);
+export const yahooPlayerSeasonStats: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_SEASON_STATS_DEF, params);
 /** snake_case alias of {@link yahooPlayerSeasonStats} (py/R parity). */
 export const yahoo_player_season_stats = yahooPlayerSeasonStats;
 
@@ -3963,7 +3963,7 @@ const PLAYOFF_BRACKET_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayoffBracket({});
  */
-export const yahooPlayoffBracket: WrapperFn = (params = {}) => callFlat(PLAYOFF_BRACKET_DEF, params);
+export const yahooPlayoffBracket: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYOFF_BRACKET_DEF, params);
 /** snake_case alias of {@link yahooPlayoffBracket} (py/R parity). */
 export const yahoo_playoff_bracket = yahooPlayoffBracket;
 
@@ -3995,7 +3995,7 @@ const PLAYOFF_SERIES_GAME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayoffSeriesGame({});
  */
-export const yahooPlayoffSeriesGame: WrapperFn = (params = {}) => callFlat(PLAYOFF_SERIES_GAME_DEF, params);
+export const yahooPlayoffSeriesGame: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYOFF_SERIES_GAME_DEF, params);
 /** snake_case alias of {@link yahooPlayoffSeriesGame} (py/R parity). */
 export const yahoo_playoff_series_game = yahooPlayoffSeriesGame;
 
@@ -4027,7 +4027,7 @@ const POLYMARKET_GAME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPolymarketGame({});
  */
-export const yahooPolymarketGame: WrapperFn = (params = {}) => callFlat(POLYMARKET_GAME_DEF, params);
+export const yahooPolymarketGame: Wrapper = (params: WrapperParams = {}) => callFlat(POLYMARKET_GAME_DEF, params);
 /** snake_case alias of {@link yahooPolymarketGame} (py/R parity). */
 export const yahoo_polymarket_game = yahooPolymarketGame;
 
@@ -4074,7 +4074,7 @@ const RACING_SCHEDULE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooRacingSchedule({});
  */
-export const yahooRacingSchedule: WrapperFn = (params = {}) => callFlat(RACING_SCHEDULE_DEF, params);
+export const yahooRacingSchedule: Wrapper = (params: WrapperParams = {}) => callFlat(RACING_SCHEDULE_DEF, params);
 /** snake_case alias of {@link yahooRacingSchedule} (py/R parity). */
 export const yahoo_racing_schedule = yahooRacingSchedule;
 
@@ -4131,7 +4131,7 @@ const SCOREBOARD_GAME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooScoreboardGame({});
  */
-export const yahooScoreboardGame: WrapperFn = (params = {}) => callFlat(SCOREBOARD_GAME_DEF, params);
+export const yahooScoreboardGame: Wrapper = (params: WrapperParams = {}) => callFlat(SCOREBOARD_GAME_DEF, params);
 /** snake_case alias of {@link yahooScoreboardGame} (py/R parity). */
 export const yahoo_scoreboard_game = yahooScoreboardGame;
 
@@ -4183,7 +4183,7 @@ const SEASON_STATS_FOOTBALL_DEFENSE_NCAAF_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballDefenseNcaaf({});
  */
-export const yahooSeasonStatsFootballDefenseNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_DEFENSE_NCAAF_DEF, params);
+export const yahooSeasonStatsFootballDefenseNcaaf: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_DEFENSE_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballDefenseNcaaf} (py/R parity). */
 export const yahoo_season_stats_football_defense_ncaaf = yahooSeasonStatsFootballDefenseNcaaf;
 
@@ -4235,7 +4235,7 @@ const SEASON_STATS_FOOTBALL_KICKING_NCAAF_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballKickingNcaaf({});
  */
-export const yahooSeasonStatsFootballKickingNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_KICKING_NCAAF_DEF, params);
+export const yahooSeasonStatsFootballKickingNcaaf: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_KICKING_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballKickingNcaaf} (py/R parity). */
 export const yahoo_season_stats_football_kicking_ncaaf = yahooSeasonStatsFootballKickingNcaaf;
 
@@ -4287,7 +4287,7 @@ const SEASON_STATS_FOOTBALL_PASSING_NCAAF_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballPassingNcaaf({});
  */
-export const yahooSeasonStatsFootballPassingNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_PASSING_NCAAF_DEF, params);
+export const yahooSeasonStatsFootballPassingNcaaf: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_PASSING_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballPassingNcaaf} (py/R parity). */
 export const yahoo_season_stats_football_passing_ncaaf = yahooSeasonStatsFootballPassingNcaaf;
 
@@ -4339,7 +4339,7 @@ const SEASON_STATS_FOOTBALL_PUNTING_NCAAF_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballPuntingNcaaf({});
  */
-export const yahooSeasonStatsFootballPuntingNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_PUNTING_NCAAF_DEF, params);
+export const yahooSeasonStatsFootballPuntingNcaaf: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_PUNTING_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballPuntingNcaaf} (py/R parity). */
 export const yahoo_season_stats_football_punting_ncaaf = yahooSeasonStatsFootballPuntingNcaaf;
 
@@ -4391,7 +4391,7 @@ const SEASON_STATS_FOOTBALL_RECEIVING_NCAAF_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballReceivingNcaaf({});
  */
-export const yahooSeasonStatsFootballReceivingNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_RECEIVING_NCAAF_DEF, params);
+export const yahooSeasonStatsFootballReceivingNcaaf: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_RECEIVING_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballReceivingNcaaf} (py/R parity). */
 export const yahoo_season_stats_football_receiving_ncaaf = yahooSeasonStatsFootballReceivingNcaaf;
 
@@ -4443,7 +4443,7 @@ const SEASON_STATS_FOOTBALL_RETURNS_NCAAF_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballReturnsNcaaf({});
  */
-export const yahooSeasonStatsFootballReturnsNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_RETURNS_NCAAF_DEF, params);
+export const yahooSeasonStatsFootballReturnsNcaaf: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_RETURNS_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballReturnsNcaaf} (py/R parity). */
 export const yahoo_season_stats_football_returns_ncaaf = yahooSeasonStatsFootballReturnsNcaaf;
 
@@ -4495,7 +4495,7 @@ const SEASON_STATS_FOOTBALL_RUSHING_NCAAF_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballRushingNcaaf({});
  */
-export const yahooSeasonStatsFootballRushingNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_RUSHING_NCAAF_DEF, params);
+export const yahooSeasonStatsFootballRushingNcaaf: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_RUSHING_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballRushingNcaaf} (py/R parity). */
 export const yahoo_season_stats_football_rushing_ncaaf = yahooSeasonStatsFootballRushingNcaaf;
 
@@ -4547,7 +4547,7 @@ const SEASON_TEAM_STATS_FOOTBALL_DEFENSE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballDefense({});
  */
-export const yahooSeasonTeamStatsFootballDefense: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_DEFENSE_DEF, params);
+export const yahooSeasonTeamStatsFootballDefense: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_DEFENSE_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballDefense} (py/R parity). */
 export const yahoo_season_team_stats_football_defense = yahooSeasonTeamStatsFootballDefense;
 
@@ -4599,7 +4599,7 @@ const SEASON_TEAM_STATS_FOOTBALL_KICKING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballKicking({});
  */
-export const yahooSeasonTeamStatsFootballKicking: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_KICKING_DEF, params);
+export const yahooSeasonTeamStatsFootballKicking: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_KICKING_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballKicking} (py/R parity). */
 export const yahoo_season_team_stats_football_kicking = yahooSeasonTeamStatsFootballKicking;
 
@@ -4651,7 +4651,7 @@ const SEASON_TEAM_STATS_FOOTBALL_KICKOFFS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballKickoffs({});
  */
-export const yahooSeasonTeamStatsFootballKickoffs: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_KICKOFFS_DEF, params);
+export const yahooSeasonTeamStatsFootballKickoffs: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_KICKOFFS_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballKickoffs} (py/R parity). */
 export const yahoo_season_team_stats_football_kickoffs = yahooSeasonTeamStatsFootballKickoffs;
 
@@ -4703,7 +4703,7 @@ const SEASON_TEAM_STATS_FOOTBALL_OFFENSE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballOffense({});
  */
-export const yahooSeasonTeamStatsFootballOffense: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_OFFENSE_DEF, params);
+export const yahooSeasonTeamStatsFootballOffense: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_OFFENSE_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballOffense} (py/R parity). */
 export const yahoo_season_team_stats_football_offense = yahooSeasonTeamStatsFootballOffense;
 
@@ -4755,7 +4755,7 @@ const SEASON_TEAM_STATS_FOOTBALL_PASSING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballPassing({});
  */
-export const yahooSeasonTeamStatsFootballPassing: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_PASSING_DEF, params);
+export const yahooSeasonTeamStatsFootballPassing: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_PASSING_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballPassing} (py/R parity). */
 export const yahoo_season_team_stats_football_passing = yahooSeasonTeamStatsFootballPassing;
 
@@ -4807,7 +4807,7 @@ const SEASON_TEAM_STATS_FOOTBALL_PASSING_DEFENSE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballPassingDefense({});
  */
-export const yahooSeasonTeamStatsFootballPassingDefense: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_PASSING_DEFENSE_DEF, params);
+export const yahooSeasonTeamStatsFootballPassingDefense: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_PASSING_DEFENSE_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballPassingDefense} (py/R parity). */
 export const yahoo_season_team_stats_football_passing_defense = yahooSeasonTeamStatsFootballPassingDefense;
 
@@ -4859,7 +4859,7 @@ const SEASON_TEAM_STATS_FOOTBALL_PUNTING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballPunting({});
  */
-export const yahooSeasonTeamStatsFootballPunting: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_PUNTING_DEF, params);
+export const yahooSeasonTeamStatsFootballPunting: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_PUNTING_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballPunting} (py/R parity). */
 export const yahoo_season_team_stats_football_punting = yahooSeasonTeamStatsFootballPunting;
 
@@ -4911,7 +4911,7 @@ const SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballReceiving({});
  */
-export const yahooSeasonTeamStatsFootballReceiving: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEF, params);
+export const yahooSeasonTeamStatsFootballReceiving: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballReceiving} (py/R parity). */
 export const yahoo_season_team_stats_football_receiving = yahooSeasonTeamStatsFootballReceiving;
 
@@ -4963,7 +4963,7 @@ const SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEFENSE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballReceivingDefense({});
  */
-export const yahooSeasonTeamStatsFootballReceivingDefense: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEFENSE_DEF, params);
+export const yahooSeasonTeamStatsFootballReceivingDefense: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEFENSE_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballReceivingDefense} (py/R parity). */
 export const yahoo_season_team_stats_football_receiving_defense = yahooSeasonTeamStatsFootballReceivingDefense;
 
@@ -5015,7 +5015,7 @@ const SEASON_TEAM_STATS_FOOTBALL_RETURNS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballReturns({});
  */
-export const yahooSeasonTeamStatsFootballReturns: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RETURNS_DEF, params);
+export const yahooSeasonTeamStatsFootballReturns: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RETURNS_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballReturns} (py/R parity). */
 export const yahoo_season_team_stats_football_returns = yahooSeasonTeamStatsFootballReturns;
 
@@ -5067,7 +5067,7 @@ const SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballRushing({});
  */
-export const yahooSeasonTeamStatsFootballRushing: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEF, params);
+export const yahooSeasonTeamStatsFootballRushing: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballRushing} (py/R parity). */
 export const yahoo_season_team_stats_football_rushing = yahooSeasonTeamStatsFootballRushing;
 
@@ -5119,7 +5119,7 @@ const SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEFENSE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballRushingDefense({});
  */
-export const yahooSeasonTeamStatsFootballRushingDefense: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEFENSE_DEF, params);
+export const yahooSeasonTeamStatsFootballRushingDefense: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEFENSE_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballRushingDefense} (py/R parity). */
 export const yahoo_season_team_stats_football_rushing_defense = yahooSeasonTeamStatsFootballRushingDefense;
 
@@ -5151,7 +5151,7 @@ const TEAM_INJURIES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamInjuries({});
  */
-export const yahooTeamInjuries: WrapperFn = (params = {}) => callFlat(TEAM_INJURIES_DEF, params);
+export const yahooTeamInjuries: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_INJURIES_DEF, params);
 /** snake_case alias of {@link yahooTeamInjuries} (py/R parity). */
 export const yahoo_team_injuries = yahooTeamInjuries;
 
@@ -5188,7 +5188,7 @@ const TEAM_PLAYOFF_SERIES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamPlayoffSeries({});
  */
-export const yahooTeamPlayoffSeries: WrapperFn = (params = {}) => callFlat(TEAM_PLAYOFF_SERIES_DEF, params);
+export const yahooTeamPlayoffSeries: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_PLAYOFF_SERIES_DEF, params);
 /** snake_case alias of {@link yahooTeamPlayoffSeries} (py/R parity). */
 export const yahoo_team_playoff_series = yahooTeamPlayoffSeries;
 
@@ -5230,7 +5230,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamRoster({});
  */
-export const yahooTeamRoster: WrapperFn = (params = {}) => callFlat(TEAM_ROSTER_DEF, params);
+export const yahooTeamRoster: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_DEF, params);
 /** snake_case alias of {@link yahooTeamRoster} (py/R parity). */
 export const yahoo_team_roster = yahooTeamRoster;
 
@@ -5267,7 +5267,7 @@ const TEAM_SCHEDULE_BY_SEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamScheduleBySeason({});
  */
-export const yahooTeamScheduleBySeason: WrapperFn = (params = {}) => callFlat(TEAM_SCHEDULE_BY_SEASON_DEF, params);
+export const yahooTeamScheduleBySeason: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_SCHEDULE_BY_SEASON_DEF, params);
 /** snake_case alias of {@link yahooTeamScheduleBySeason} (py/R parity). */
 export const yahoo_team_schedule_by_season = yahooTeamScheduleBySeason;
 
@@ -5309,7 +5309,7 @@ const TEAM_SEARCH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamSearch({});
  */
-export const yahooTeamSearch: WrapperFn = (params = {}) => callFlat(TEAM_SEARCH_DEF, params);
+export const yahooTeamSearch: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_SEARCH_DEF, params);
 /** snake_case alias of {@link yahooTeamSearch} (py/R parity). */
 export const yahoo_team_search = yahooTeamSearch;
 
@@ -5381,7 +5381,7 @@ const TEAM_STATS_LEADERS_V2_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamStatsLeadersV2({});
  */
-export const yahooTeamStatsLeadersV2: WrapperFn = (params = {}) => callFlat(TEAM_STATS_LEADERS_V2_DEF, params);
+export const yahooTeamStatsLeadersV2: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_STATS_LEADERS_V2_DEF, params);
 /** snake_case alias of {@link yahooTeamStatsLeadersV2} (py/R parity). */
 export const yahoo_team_stats_leaders_v2 = yahooTeamStatsLeadersV2;
 
@@ -5413,7 +5413,7 @@ const TEAM_TRANSACTIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamTransactions({});
  */
-export const yahooTeamTransactions: WrapperFn = (params = {}) => callFlat(TEAM_TRANSACTIONS_DEF, params);
+export const yahooTeamTransactions: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_TRANSACTIONS_DEF, params);
 /** snake_case alias of {@link yahooTeamTransactions} (py/R parity). */
 export const yahoo_team_transactions = yahooTeamTransactions;
 
@@ -5455,7 +5455,7 @@ const TEAMS_BASIC_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamsBasic({});
  */
-export const yahooTeamsBasic: WrapperFn = (params = {}) => callFlat(TEAMS_BASIC_DEF, params);
+export const yahooTeamsBasic: Wrapper = (params: WrapperParams = {}) => callFlat(TEAMS_BASIC_DEF, params);
 /** snake_case alias of {@link yahooTeamsBasic} (py/R parity). */
 export const yahoo_teams_basic = yahooTeamsBasic;
 
@@ -5497,7 +5497,7 @@ const TENNIS_MATCHES_BY_DATE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTennisMatchesByDate({});
  */
-export const yahooTennisMatchesByDate: WrapperFn = (params = {}) => callFlat(TENNIS_MATCHES_BY_DATE_DEF, params);
+export const yahooTennisMatchesByDate: Wrapper = (params: WrapperParams = {}) => callFlat(TENNIS_MATCHES_BY_DATE_DEF, params);
 /** snake_case alias of {@link yahooTennisMatchesByDate} (py/R parity). */
 export const yahoo_tennis_matches_by_date = yahooTennisMatchesByDate;
 
@@ -5534,7 +5534,7 @@ const TENNIS_TOURNAMENT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTennisTournament({});
  */
-export const yahooTennisTournament: WrapperFn = (params = {}) => callFlat(TENNIS_TOURNAMENT_DEF, params);
+export const yahooTennisTournament: Wrapper = (params: WrapperParams = {}) => callFlat(TENNIS_TOURNAMENT_DEF, params);
 /** snake_case alias of {@link yahooTennisTournament} (py/R parity). */
 export const yahoo_tennis_tournament = yahooTennisTournament;
 
@@ -5576,7 +5576,7 @@ const TENNIS_TOURNAMENTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTennisTournaments({});
  */
-export const yahooTennisTournaments: WrapperFn = (params = {}) => callFlat(TENNIS_TOURNAMENTS_DEF, params);
+export const yahooTennisTournaments: Wrapper = (params: WrapperParams = {}) => callFlat(TENNIS_TOURNAMENTS_DEF, params);
 /** snake_case alias of {@link yahooTennisTournaments} (py/R parity). */
 export const yahoo_tennis_tournaments = yahooTennisTournaments;
 
@@ -5613,7 +5613,7 @@ const TENNIS_TOURNAMENTS_BY_DATE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTennisTournamentsByDate({});
  */
-export const yahooTennisTournamentsByDate: WrapperFn = (params = {}) => callFlat(TENNIS_TOURNAMENTS_BY_DATE_DEF, params);
+export const yahooTennisTournamentsByDate: Wrapper = (params: WrapperParams = {}) => callFlat(TENNIS_TOURNAMENTS_BY_DATE_DEF, params);
 /** snake_case alias of {@link yahooTennisTournamentsByDate} (py/R parity). */
 export const yahoo_tennis_tournaments_by_date = yahooTennisTournamentsByDate;
 
@@ -5655,7 +5655,7 @@ const TRENDING_EVENT_IDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTrendingEventIds({});
  */
-export const yahooTrendingEventIds: WrapperFn = (params = {}) => callFlat(TRENDING_EVENT_IDS_DEF, params);
+export const yahooTrendingEventIds: Wrapper = (params: WrapperParams = {}) => callFlat(TRENDING_EVENT_IDS_DEF, params);
 /** snake_case alias of {@link yahooTrendingEventIds} (py/R parity). */
 export const yahoo_trending_event_ids = yahooTrendingEventIds;
 
@@ -5702,6 +5702,6 @@ const TRENDING_GAME_IDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTrendingGameIds({});
  */
-export const yahooTrendingGameIds: WrapperFn = (params = {}) => callFlat(TRENDING_GAME_IDS_DEF, params);
+export const yahooTrendingGameIds: Wrapper = (params: WrapperParams = {}) => callFlat(TRENDING_GAME_IDS_DEF, params);
 /** snake_case alias of {@link yahooTrendingGameIds} (py/R parity). */
 export const yahoo_trending_game_ids = yahooTrendingGameIds;

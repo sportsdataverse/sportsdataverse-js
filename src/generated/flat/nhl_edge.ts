@@ -6,7 +6,30 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  NhlEdgeCatGoalieDetailRow,
+  NhlEdgeCatSkaterDetailRow,
+  NhlEdgeGoalie5v5DetailRow,
+  NhlEdgeGoalieComparisonRow,
+  NhlEdgeGoalieDetailRow,
+  NhlEdgeGoalieLandingRow,
+  NhlEdgeGoalieSavePercentageDetailRow,
+  NhlEdgeGoalieShotLocationDetailRow,
+  NhlEdgeSkaterComparisonRow,
+  NhlEdgeSkaterDetailRow,
+  NhlEdgeSkaterLandingRow,
+  NhlEdgeSkaterShotLocationDetailRow,
+  NhlEdgeSkaterShotSpeedDetailRow,
+  NhlEdgeSkaterSkatingDistanceDetailRow,
+  NhlEdgeSkaterSkatingSpeedDetailRow,
+  NhlEdgeSkaterZoneTimeRow,
+  NhlEdgeTeamDetailRow,
+  NhlEdgeTeamLandingRow,
+  NhlEdgeTeamShotLocationDetailRow,
+  NhlEdgeTeamShotSpeedDetailRow,
+  NhlEdgeTeamZoneTimeDetailsRow,
+} from "../rows/nhl_edge.js";
 
 const CAT_GOALIE_DETAIL_DEF: WrapperDef = {
   "short": "cat_goalie_detail",
@@ -49,7 +72,7 @@ const CAT_GOALIE_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeCatGoalieDetail({ player_id: '…' });
  */
-export const nhlEdgeCatGoalieDetail: WrapperFn = (params = {}) => callFlat(CAT_GOALIE_DETAIL_DEF, params);
+export const nhlEdgeCatGoalieDetail: Wrapper<NhlEdgeCatGoalieDetailRow[]> = (params: WrapperParams = {}) => callFlat(CAT_GOALIE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeCatGoalieDetail} (py/R parity). */
 export const nhl_edge_cat_goalie_detail = nhlEdgeCatGoalieDetail;
 
@@ -94,7 +117,7 @@ const CAT_SKATER_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeCatSkaterDetail({ player_id: '…' });
  */
-export const nhlEdgeCatSkaterDetail: WrapperFn = (params = {}) => callFlat(CAT_SKATER_DETAIL_DEF, params);
+export const nhlEdgeCatSkaterDetail: Wrapper<NhlEdgeCatSkaterDetailRow[]> = (params: WrapperParams = {}) => callFlat(CAT_SKATER_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeCatSkaterDetail} (py/R parity). */
 export const nhl_edge_cat_skater_detail = nhlEdgeCatSkaterDetail;
 
@@ -139,7 +162,7 @@ const GOALIE_5V5_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeGoalie5v5Detail({ player_id: '…' });
  */
-export const nhlEdgeGoalie5v5Detail: WrapperFn = (params = {}) => callFlat(GOALIE_5V5_DETAIL_DEF, params);
+export const nhlEdgeGoalie5v5Detail: Wrapper<NhlEdgeGoalie5v5DetailRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_5V5_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalie5v5Detail} (py/R parity). */
 export const nhl_edge_goalie_5v5_detail = nhlEdgeGoalie5v5Detail;
 
@@ -183,7 +206,7 @@ const GOALIE_5V5_TOP_10_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeGoalie5v5Top10({ sort_by: '…' });
  */
-export const nhlEdgeGoalie5v5Top10: WrapperFn = (params = {}) => callFlat(GOALIE_5V5_TOP_10_DEF, params);
+export const nhlEdgeGoalie5v5Top10: Wrapper = (params: WrapperParams = {}) => callFlat(GOALIE_5V5_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalie5v5Top10} (py/R parity). */
 export const nhl_edge_goalie_5v5_top_10 = nhlEdgeGoalie5v5Top10;
 
@@ -228,7 +251,7 @@ const GOALIE_COMPARISON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeGoalieComparison({ player_id: '…' });
  */
-export const nhlEdgeGoalieComparison: WrapperFn = (params = {}) => callFlat(GOALIE_COMPARISON_DEF, params);
+export const nhlEdgeGoalieComparison: Wrapper<NhlEdgeGoalieComparisonRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_COMPARISON_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieComparison} (py/R parity). */
 export const nhl_edge_goalie_comparison = nhlEdgeGoalieComparison;
 
@@ -273,7 +296,7 @@ const GOALIE_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeGoalieDetail({ player_id: '…' });
  */
-export const nhlEdgeGoalieDetail: WrapperFn = (params = {}) => callFlat(GOALIE_DETAIL_DEF, params);
+export const nhlEdgeGoalieDetail: Wrapper<NhlEdgeGoalieDetailRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieDetail} (py/R parity). */
 export const nhl_edge_goalie_detail = nhlEdgeGoalieDetail;
 
@@ -317,7 +340,7 @@ const GOALIE_EDGE_SAVE_PCTG_TOP_10_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeGoalieEdgeSavePctgTop10({ sort_by: '…' });
  */
-export const nhlEdgeGoalieEdgeSavePctgTop10: WrapperFn = (params = {}) => callFlat(GOALIE_EDGE_SAVE_PCTG_TOP_10_DEF, params);
+export const nhlEdgeGoalieEdgeSavePctgTop10: Wrapper = (params: WrapperParams = {}) => callFlat(GOALIE_EDGE_SAVE_PCTG_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieEdgeSavePctgTop10} (py/R parity). */
 export const nhl_edge_goalie_edge_save_pctg_top_10 = nhlEdgeGoalieEdgeSavePctgTop10;
 
@@ -358,7 +381,7 @@ const GOALIE_LANDING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeGoalieLanding({});
  */
-export const nhlEdgeGoalieLanding: WrapperFn = (params = {}) => callFlat(GOALIE_LANDING_DEF, params);
+export const nhlEdgeGoalieLanding: Wrapper<NhlEdgeGoalieLandingRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_LANDING_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieLanding} (py/R parity). */
 export const nhl_edge_goalie_landing = nhlEdgeGoalieLanding;
 
@@ -403,7 +426,7 @@ const GOALIE_SAVE_PERCENTAGE_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeGoalieSavePercentageDetail({ player_id: '…' });
  */
-export const nhlEdgeGoalieSavePercentageDetail: WrapperFn = (params = {}) => callFlat(GOALIE_SAVE_PERCENTAGE_DETAIL_DEF, params);
+export const nhlEdgeGoalieSavePercentageDetail: Wrapper<NhlEdgeGoalieSavePercentageDetailRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_SAVE_PERCENTAGE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieSavePercentageDetail} (py/R parity). */
 export const nhl_edge_goalie_save_percentage_detail = nhlEdgeGoalieSavePercentageDetail;
 
@@ -448,7 +471,7 @@ const GOALIE_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeGoalieShotLocationDetail({ player_id: '…' });
  */
-export const nhlEdgeGoalieShotLocationDetail: WrapperFn = (params = {}) => callFlat(GOALIE_SHOT_LOCATION_DETAIL_DEF, params);
+export const nhlEdgeGoalieShotLocationDetail: Wrapper<NhlEdgeGoalieShotLocationDetailRow[]> = (params: WrapperParams = {}) => callFlat(GOALIE_SHOT_LOCATION_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieShotLocationDetail} (py/R parity). */
 export const nhl_edge_goalie_shot_location_detail = nhlEdgeGoalieShotLocationDetail;
 
@@ -496,7 +519,7 @@ const GOALIE_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeGoalieShotLocationTop10({ category: '…', sort_by: '…' });
  */
-export const nhlEdgeGoalieShotLocationTop10: WrapperFn = (params = {}) => callFlat(GOALIE_SHOT_LOCATION_TOP_10_DEF, params);
+export const nhlEdgeGoalieShotLocationTop10: Wrapper = (params: WrapperParams = {}) => callFlat(GOALIE_SHOT_LOCATION_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieShotLocationTop10} (py/R parity). */
 export const nhl_edge_goalie_shot_location_top_10 = nhlEdgeGoalieShotLocationTop10;
 
@@ -541,7 +564,7 @@ const SKATER_COMPARISON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterComparison({ player_id: '…' });
  */
-export const nhlEdgeSkaterComparison: WrapperFn = (params = {}) => callFlat(SKATER_COMPARISON_DEF, params);
+export const nhlEdgeSkaterComparison: Wrapper<NhlEdgeSkaterComparisonRow[]> = (params: WrapperParams = {}) => callFlat(SKATER_COMPARISON_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterComparison} (py/R parity). */
 export const nhl_edge_skater_comparison = nhlEdgeSkaterComparison;
 
@@ -586,7 +609,7 @@ const SKATER_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterDetail({ player_id: '…' });
  */
-export const nhlEdgeSkaterDetail: WrapperFn = (params = {}) => callFlat(SKATER_DETAIL_DEF, params);
+export const nhlEdgeSkaterDetail: Wrapper<NhlEdgeSkaterDetailRow[]> = (params: WrapperParams = {}) => callFlat(SKATER_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterDetail} (py/R parity). */
 export const nhl_edge_skater_detail = nhlEdgeSkaterDetail;
 
@@ -638,7 +661,7 @@ const SKATER_DISTANCE_TOP_10_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterDistanceTop10({ positions: '…', strength: '…', sort_by: '…' });
  */
-export const nhlEdgeSkaterDistanceTop10: WrapperFn = (params = {}) => callFlat(SKATER_DISTANCE_TOP_10_DEF, params);
+export const nhlEdgeSkaterDistanceTop10: Wrapper = (params: WrapperParams = {}) => callFlat(SKATER_DISTANCE_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterDistanceTop10} (py/R parity). */
 export const nhl_edge_skater_distance_top_10 = nhlEdgeSkaterDistanceTop10;
 
@@ -679,7 +702,7 @@ const SKATER_LANDING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterLanding({});
  */
-export const nhlEdgeSkaterLanding: WrapperFn = (params = {}) => callFlat(SKATER_LANDING_DEF, params);
+export const nhlEdgeSkaterLanding: Wrapper<NhlEdgeSkaterLandingRow[]> = (params: WrapperParams = {}) => callFlat(SKATER_LANDING_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterLanding} (py/R parity). */
 export const nhl_edge_skater_landing = nhlEdgeSkaterLanding;
 
@@ -724,7 +747,7 @@ const SKATER_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterShotLocationDetail({ player_id: '…' });
  */
-export const nhlEdgeSkaterShotLocationDetail: WrapperFn = (params = {}) => callFlat(SKATER_SHOT_LOCATION_DETAIL_DEF, params);
+export const nhlEdgeSkaterShotLocationDetail: Wrapper<NhlEdgeSkaterShotLocationDetailRow[]> = (params: WrapperParams = {}) => callFlat(SKATER_SHOT_LOCATION_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterShotLocationDetail} (py/R parity). */
 export const nhl_edge_skater_shot_location_detail = nhlEdgeSkaterShotLocationDetail;
 
@@ -776,7 +799,7 @@ const SKATER_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterShotLocationTop10({ position: '…', category: '…', sort_by: '…' });
  */
-export const nhlEdgeSkaterShotLocationTop10: WrapperFn = (params = {}) => callFlat(SKATER_SHOT_LOCATION_TOP_10_DEF, params);
+export const nhlEdgeSkaterShotLocationTop10: Wrapper = (params: WrapperParams = {}) => callFlat(SKATER_SHOT_LOCATION_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterShotLocationTop10} (py/R parity). */
 export const nhl_edge_skater_shot_location_top_10 = nhlEdgeSkaterShotLocationTop10;
 
@@ -821,7 +844,7 @@ const SKATER_SHOT_SPEED_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterShotSpeedDetail({ player_id: '…' });
  */
-export const nhlEdgeSkaterShotSpeedDetail: WrapperFn = (params = {}) => callFlat(SKATER_SHOT_SPEED_DETAIL_DEF, params);
+export const nhlEdgeSkaterShotSpeedDetail: Wrapper<NhlEdgeSkaterShotSpeedDetailRow[]> = (params: WrapperParams = {}) => callFlat(SKATER_SHOT_SPEED_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterShotSpeedDetail} (py/R parity). */
 export const nhl_edge_skater_shot_speed_detail = nhlEdgeSkaterShotSpeedDetail;
 
@@ -869,7 +892,7 @@ const SKATER_SHOT_SPEED_TOP_10_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterShotSpeedTop10({ positions: '…', sort_by: '…' });
  */
-export const nhlEdgeSkaterShotSpeedTop10: WrapperFn = (params = {}) => callFlat(SKATER_SHOT_SPEED_TOP_10_DEF, params);
+export const nhlEdgeSkaterShotSpeedTop10: Wrapper = (params: WrapperParams = {}) => callFlat(SKATER_SHOT_SPEED_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterShotSpeedTop10} (py/R parity). */
 export const nhl_edge_skater_shot_speed_top_10 = nhlEdgeSkaterShotSpeedTop10;
 
@@ -914,7 +937,7 @@ const SKATER_SKATING_DISTANCE_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterSkatingDistanceDetail({ player_id: '…' });
  */
-export const nhlEdgeSkaterSkatingDistanceDetail: WrapperFn = (params = {}) => callFlat(SKATER_SKATING_DISTANCE_DETAIL_DEF, params);
+export const nhlEdgeSkaterSkatingDistanceDetail: Wrapper<NhlEdgeSkaterSkatingDistanceDetailRow[]> = (params: WrapperParams = {}) => callFlat(SKATER_SKATING_DISTANCE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterSkatingDistanceDetail} (py/R parity). */
 export const nhl_edge_skater_skating_distance_detail = nhlEdgeSkaterSkatingDistanceDetail;
 
@@ -959,7 +982,7 @@ const SKATER_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterSkatingSpeedDetail({ player_id: '…' });
  */
-export const nhlEdgeSkaterSkatingSpeedDetail: WrapperFn = (params = {}) => callFlat(SKATER_SKATING_SPEED_DETAIL_DEF, params);
+export const nhlEdgeSkaterSkatingSpeedDetail: Wrapper<NhlEdgeSkaterSkatingSpeedDetailRow[]> = (params: WrapperParams = {}) => callFlat(SKATER_SKATING_SPEED_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterSkatingSpeedDetail} (py/R parity). */
 export const nhl_edge_skater_skating_speed_detail = nhlEdgeSkaterSkatingSpeedDetail;
 
@@ -1007,7 +1030,7 @@ const SKATER_SPEED_TOP_10_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterSpeedTop10({ positions: '…', sort_by: '…' });
  */
-export const nhlEdgeSkaterSpeedTop10: WrapperFn = (params = {}) => callFlat(SKATER_SPEED_TOP_10_DEF, params);
+export const nhlEdgeSkaterSpeedTop10: Wrapper = (params: WrapperParams = {}) => callFlat(SKATER_SPEED_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterSpeedTop10} (py/R parity). */
 export const nhl_edge_skater_speed_top_10 = nhlEdgeSkaterSpeedTop10;
 
@@ -1052,7 +1075,7 @@ const SKATER_ZONE_TIME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterZoneTime({ player_id: '…' });
  */
-export const nhlEdgeSkaterZoneTime: WrapperFn = (params = {}) => callFlat(SKATER_ZONE_TIME_DEF, params);
+export const nhlEdgeSkaterZoneTime: Wrapper<NhlEdgeSkaterZoneTimeRow[]> = (params: WrapperParams = {}) => callFlat(SKATER_ZONE_TIME_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterZoneTime} (py/R parity). */
 export const nhl_edge_skater_zone_time = nhlEdgeSkaterZoneTime;
 
@@ -1104,7 +1127,7 @@ const SKATER_ZONE_TIME_TOP_10_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterZoneTimeTop10({ positions: '…', strength: '…', sort_by: '…' });
  */
-export const nhlEdgeSkaterZoneTimeTop10: WrapperFn = (params = {}) => callFlat(SKATER_ZONE_TIME_TOP_10_DEF, params);
+export const nhlEdgeSkaterZoneTimeTop10: Wrapper = (params: WrapperParams = {}) => callFlat(SKATER_ZONE_TIME_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterZoneTimeTop10} (py/R parity). */
 export const nhl_edge_skater_zone_time_top_10 = nhlEdgeSkaterZoneTimeTop10;
 
@@ -1149,7 +1172,7 @@ const TEAM_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeTeamDetail({ team_id: '…' });
  */
-export const nhlEdgeTeamDetail: WrapperFn = (params = {}) => callFlat(TEAM_DETAIL_DEF, params);
+export const nhlEdgeTeamDetail: Wrapper<NhlEdgeTeamDetailRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamDetail} (py/R parity). */
 export const nhl_edge_team_detail = nhlEdgeTeamDetail;
 
@@ -1190,7 +1213,7 @@ const TEAM_LANDING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeTeamLanding({});
  */
-export const nhlEdgeTeamLanding: WrapperFn = (params = {}) => callFlat(TEAM_LANDING_DEF, params);
+export const nhlEdgeTeamLanding: Wrapper<NhlEdgeTeamLandingRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_LANDING_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamLanding} (py/R parity). */
 export const nhl_edge_team_landing = nhlEdgeTeamLanding;
 
@@ -1235,7 +1258,7 @@ const TEAM_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeTeamShotLocationDetail({ team_id: '…' });
  */
-export const nhlEdgeTeamShotLocationDetail: WrapperFn = (params = {}) => callFlat(TEAM_SHOT_LOCATION_DETAIL_DEF, params);
+export const nhlEdgeTeamShotLocationDetail: Wrapper<NhlEdgeTeamShotLocationDetailRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_SHOT_LOCATION_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamShotLocationDetail} (py/R parity). */
 export const nhl_edge_team_shot_location_detail = nhlEdgeTeamShotLocationDetail;
 
@@ -1287,7 +1310,7 @@ const TEAM_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeTeamShotLocationTop10({ position: '…', category: '…', sort_by: '…' });
  */
-export const nhlEdgeTeamShotLocationTop10: WrapperFn = (params = {}) => callFlat(TEAM_SHOT_LOCATION_TOP_10_DEF, params);
+export const nhlEdgeTeamShotLocationTop10: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_SHOT_LOCATION_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamShotLocationTop10} (py/R parity). */
 export const nhl_edge_team_shot_location_top_10 = nhlEdgeTeamShotLocationTop10;
 
@@ -1332,7 +1355,7 @@ const TEAM_SHOT_SPEED_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeTeamShotSpeedDetail({ team_id: '…' });
  */
-export const nhlEdgeTeamShotSpeedDetail: WrapperFn = (params = {}) => callFlat(TEAM_SHOT_SPEED_DETAIL_DEF, params);
+export const nhlEdgeTeamShotSpeedDetail: Wrapper<NhlEdgeTeamShotSpeedDetailRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_SHOT_SPEED_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamShotSpeedDetail} (py/R parity). */
 export const nhl_edge_team_shot_speed_detail = nhlEdgeTeamShotSpeedDetail;
 
@@ -1375,7 +1398,7 @@ const TEAM_SKATING_DISTANCE_DETAIL_DEF: WrapperDef = {
  * @returns The raw response (this endpoint has no parser).
  * @example await sdv.nhl.nhlEdgeTeamSkatingDistanceDetail({ team_id: '…' });
  */
-export const nhlEdgeTeamSkatingDistanceDetail: WrapperFn = (params = {}) => callFlat(TEAM_SKATING_DISTANCE_DETAIL_DEF, params);
+export const nhlEdgeTeamSkatingDistanceDetail: Wrapper<unknown> = (params: WrapperParams = {}) => callFlat(TEAM_SKATING_DISTANCE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamSkatingDistanceDetail} (py/R parity). */
 export const nhl_edge_team_skating_distance_detail = nhlEdgeTeamSkatingDistanceDetail;
 
@@ -1427,7 +1450,7 @@ const TEAM_SKATING_DISTANCE_TOP_10_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeTeamSkatingDistanceTop10({ positions: '…', strength: '…', sort_by: '…' });
  */
-export const nhlEdgeTeamSkatingDistanceTop10: WrapperFn = (params = {}) => callFlat(TEAM_SKATING_DISTANCE_TOP_10_DEF, params);
+export const nhlEdgeTeamSkatingDistanceTop10: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_SKATING_DISTANCE_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamSkatingDistanceTop10} (py/R parity). */
 export const nhl_edge_team_skating_distance_top_10 = nhlEdgeTeamSkatingDistanceTop10;
 
@@ -1470,7 +1493,7 @@ const TEAM_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
  * @returns The raw response (this endpoint has no parser).
  * @example await sdv.nhl.nhlEdgeTeamSkatingSpeedDetail({ team_id: '…' });
  */
-export const nhlEdgeTeamSkatingSpeedDetail: WrapperFn = (params = {}) => callFlat(TEAM_SKATING_SPEED_DETAIL_DEF, params);
+export const nhlEdgeTeamSkatingSpeedDetail: Wrapper<unknown> = (params: WrapperParams = {}) => callFlat(TEAM_SKATING_SPEED_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamSkatingSpeedDetail} (py/R parity). */
 export const nhl_edge_team_skating_speed_detail = nhlEdgeTeamSkatingSpeedDetail;
 
@@ -1518,7 +1541,7 @@ const TEAM_SKATING_SPEED_TOP_10_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeTeamSkatingSpeedTop10({ positions: '…', sort_by: '…' });
  */
-export const nhlEdgeTeamSkatingSpeedTop10: WrapperFn = (params = {}) => callFlat(TEAM_SKATING_SPEED_TOP_10_DEF, params);
+export const nhlEdgeTeamSkatingSpeedTop10: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_SKATING_SPEED_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamSkatingSpeedTop10} (py/R parity). */
 export const nhl_edge_team_skating_speed_top_10 = nhlEdgeTeamSkatingSpeedTop10;
 
@@ -1563,7 +1586,7 @@ const TEAM_ZONE_TIME_DETAILS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeTeamZoneTimeDetails({ team_id: '…' });
  */
-export const nhlEdgeTeamZoneTimeDetails: WrapperFn = (params = {}) => callFlat(TEAM_ZONE_TIME_DETAILS_DEF, params);
+export const nhlEdgeTeamZoneTimeDetails: Wrapper<NhlEdgeTeamZoneTimeDetailsRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_ZONE_TIME_DETAILS_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamZoneTimeDetails} (py/R parity). */
 export const nhl_edge_team_zone_time_details = nhlEdgeTeamZoneTimeDetails;
 
@@ -1611,6 +1634,6 @@ const TEAM_ZONE_TIME_TOP_10_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeTeamZoneTimeTop10({ strength: '…', sort_by: '…' });
  */
-export const nhlEdgeTeamZoneTimeTop10: WrapperFn = (params = {}) => callFlat(TEAM_ZONE_TIME_TOP_10_DEF, params);
+export const nhlEdgeTeamZoneTimeTop10: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_ZONE_TIME_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamZoneTimeTop10} (py/R parity). */
 export const nhl_edge_team_zone_time_top_10 = nhlEdgeTeamZoneTimeTop10;

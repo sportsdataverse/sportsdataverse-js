@@ -6,7 +6,7 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
 
 const COACH_DEF: WrapperDef = {
   "short": "coach",
@@ -35,7 +35,7 @@ const COACH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesCoach({ key: '…' });
  */
-export const sports247SitePagesCoach: WrapperFn = (params = {}) => callFlat(COACH_DEF, params);
+export const sports247SitePagesCoach: Wrapper = (params: WrapperParams = {}) => callFlat(COACH_DEF, params);
 /** snake_case alias of {@link sports247SitePagesCoach} (py/R parity). */
 export const sports247_site_pages_coach = sports247SitePagesCoach;
 
@@ -66,7 +66,7 @@ const COACH_ALMA_MATER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesCoachAlmaMater({ key: '…' });
  */
-export const sports247SitePagesCoachAlmaMater: WrapperFn = (params = {}) => callFlat(COACH_ALMA_MATER_DEF, params);
+export const sports247SitePagesCoachAlmaMater: Wrapper = (params: WrapperParams = {}) => callFlat(COACH_ALMA_MATER_DEF, params);
 /** snake_case alias of {@link sports247SitePagesCoachAlmaMater} (py/R parity). */
 export const sports247_site_pages_coach_alma_mater = sports247SitePagesCoachAlmaMater;
 
@@ -97,7 +97,7 @@ const COACH_HOMETOWN_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesCoachHometown({ key: '…' });
  */
-export const sports247SitePagesCoachHometown: WrapperFn = (params = {}) => callFlat(COACH_HOMETOWN_DEF, params);
+export const sports247SitePagesCoachHometown: Wrapper = (params: WrapperParams = {}) => callFlat(COACH_HOMETOWN_DEF, params);
 /** snake_case alias of {@link sports247SitePagesCoachHometown} (py/R parity). */
 export const sports247_site_pages_coach_hometown = sports247SitePagesCoachHometown;
 
@@ -128,7 +128,7 @@ const COACH_RANKING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesCoachRanking({ key: '…' });
  */
-export const sports247SitePagesCoachRanking: WrapperFn = (params = {}) => callFlat(COACH_RANKING_DEF, params);
+export const sports247SitePagesCoachRanking: Wrapper = (params: WrapperParams = {}) => callFlat(COACH_RANKING_DEF, params);
 /** snake_case alias of {@link sports247SitePagesCoachRanking} (py/R parity). */
 export const sports247_site_pages_coach_ranking = sports247SitePagesCoachRanking;
 
@@ -159,7 +159,7 @@ const COACH_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesCoachRankings({ key: '…' });
  */
-export const sports247SitePagesCoachRankings: WrapperFn = (params = {}) => callFlat(COACH_RANKINGS_DEF, params);
+export const sports247SitePagesCoachRankings: Wrapper = (params: WrapperParams = {}) => callFlat(COACH_RANKINGS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesCoachRankings} (py/R parity). */
 export const sports247_site_pages_coach_rankings = sports247SitePagesCoachRankings;
 
@@ -190,7 +190,7 @@ const EVENT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesEvent({ slug: '…' });
  */
-export const sports247SitePagesEvent: WrapperFn = (params = {}) => callFlat(EVENT_DEF, params);
+export const sports247SitePagesEvent: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_DEF, params);
 /** snake_case alias of {@link sports247SitePagesEvent} (py/R parity). */
 export const sports247_site_pages_event = sports247SitePagesEvent;
 
@@ -221,7 +221,7 @@ const INSTITUTION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesInstitution({ key: '…' });
  */
-export const sports247SitePagesInstitution: WrapperFn = (params = {}) => callFlat(INSTITUTION_DEF, params);
+export const sports247SitePagesInstitution: Wrapper = (params: WrapperParams = {}) => callFlat(INSTITUTION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesInstitution} (py/R parity). */
 export const sports247_site_pages_institution = sports247SitePagesInstitution;
 
@@ -253,7 +253,7 @@ const INSTITUTION_LIST_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesInstitutionList({});
  */
-export const sports247SitePagesInstitutionList: WrapperFn = (params = {}) => callFlat(INSTITUTION_LIST_DEF, params);
+export const sports247SitePagesInstitutionList: Wrapper = (params: WrapperParams = {}) => callFlat(INSTITUTION_LIST_DEF, params);
 /** snake_case alias of {@link sports247SitePagesInstitutionList} (py/R parity). */
 export const sports247_site_pages_institution_list = sports247SitePagesInstitutionList;
 
@@ -284,7 +284,7 @@ const INSTITUTION_LOCATION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesInstitutionLocation({ key: '…' });
  */
-export const sports247SitePagesInstitutionLocation: WrapperFn = (params = {}) => callFlat(INSTITUTION_LOCATION_DEF, params);
+export const sports247SitePagesInstitutionLocation: Wrapper = (params: WrapperParams = {}) => callFlat(INSTITUTION_LOCATION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesInstitutionLocation} (py/R parity). */
 export const sports247_site_pages_institution_location = sports247SitePagesInstitutionLocation;
 
@@ -319,7 +319,7 @@ const INSTITUTION_TIMELINE_EVENTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesInstitutionTimelineEvents({ school_slug: '…', key: '…' });
  */
-export const sports247SitePagesInstitutionTimelineEvents: WrapperFn = (params = {}) => callFlat(INSTITUTION_TIMELINE_EVENTS_DEF, params);
+export const sports247SitePagesInstitutionTimelineEvents: Wrapper = (params: WrapperParams = {}) => callFlat(INSTITUTION_TIMELINE_EVENTS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesInstitutionTimelineEvents} (py/R parity). */
 export const sports247_site_pages_institution_timeline_events = sports247SitePagesInstitutionTimelineEvents;
 
@@ -361,7 +361,7 @@ const LEAGUE_DRAFT_PICKS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesLeagueDraftPicks({ league_slug: '…' });
  */
-export const sports247SitePagesLeagueDraftPicks: WrapperFn = (params = {}) => callFlat(LEAGUE_DRAFT_PICKS_DEF, params);
+export const sports247SitePagesLeagueDraftPicks: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_DRAFT_PICKS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesLeagueDraftPicks} (py/R parity). */
 export const sports247_site_pages_league_draft_picks = sports247SitePagesLeagueDraftPicks;
 
@@ -398,7 +398,7 @@ const LEAGUE_INSTITUTIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesLeagueInstitutions({ league_id: '…' });
  */
-export const sports247SitePagesLeagueInstitutions: WrapperFn = (params = {}) => callFlat(LEAGUE_INSTITUTIONS_DEF, params);
+export const sports247SitePagesLeagueInstitutions: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_INSTITUTIONS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesLeagueInstitutions} (py/R parity). */
 export const sports247_site_pages_league_institutions = sports247SitePagesLeagueInstitutions;
 
@@ -429,7 +429,7 @@ const PAGE_FEEDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesPageFeeds({ page_id: '…' });
  */
-export const sports247SitePagesPageFeeds: WrapperFn = (params = {}) => callFlat(PAGE_FEEDS_DEF, params);
+export const sports247SitePagesPageFeeds: Wrapper = (params: WrapperParams = {}) => callFlat(PAGE_FEEDS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPageFeeds} (py/R parity). */
 export const sports247_site_pages_page_feeds = sports247SitePagesPageFeeds;
 
@@ -460,7 +460,7 @@ const PLAYER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesPlayer({ key: '…' });
  */
-export const sports247SitePagesPlayer: WrapperFn = (params = {}) => callFlat(PLAYER_DEF, params);
+export const sports247SitePagesPlayer: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayer} (py/R parity). */
 export const sports247_site_pages_player = sports247SitePagesPlayer;
 
@@ -491,7 +491,7 @@ const PLAYER_CURRENT_INSTITUTION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesPlayerCurrentInstitution({ key: '…' });
  */
-export const sports247SitePagesPlayerCurrentInstitution: WrapperFn = (params = {}) => callFlat(PLAYER_CURRENT_INSTITUTION_DEF, params);
+export const sports247SitePagesPlayerCurrentInstitution: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_CURRENT_INSTITUTION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayerCurrentInstitution} (py/R parity). */
 export const sports247_site_pages_player_current_institution = sports247SitePagesPlayerCurrentInstitution;
 
@@ -522,7 +522,7 @@ const PLAYER_HIGH_SCHOOL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesPlayerHighSchool({ key: '…' });
  */
-export const sports247SitePagesPlayerHighSchool: WrapperFn = (params = {}) => callFlat(PLAYER_HIGH_SCHOOL_DEF, params);
+export const sports247SitePagesPlayerHighSchool: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_HIGH_SCHOOL_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayerHighSchool} (py/R parity). */
 export const sports247_site_pages_player_high_school = sports247SitePagesPlayerHighSchool;
 
@@ -553,7 +553,7 @@ const PLAYER_INSTITUTION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesPlayerInstitution({ key: '…' });
  */
-export const sports247SitePagesPlayerInstitution: WrapperFn = (params = {}) => callFlat(PLAYER_INSTITUTION_DEF, params);
+export const sports247SitePagesPlayerInstitution: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_INSTITUTION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayerInstitution} (py/R parity). */
 export const sports247_site_pages_player_institution = sports247SitePagesPlayerInstitution;
 
@@ -584,7 +584,7 @@ const PLAYER_INSTITUTION_EVALUATION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesPlayerInstitutionEvaluation({ key: '…' });
  */
-export const sports247SitePagesPlayerInstitutionEvaluation: WrapperFn = (params = {}) => callFlat(PLAYER_INSTITUTION_EVALUATION_DEF, params);
+export const sports247SitePagesPlayerInstitutionEvaluation: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_INSTITUTION_EVALUATION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayerInstitutionEvaluation} (py/R parity). */
 export const sports247_site_pages_player_institution_evaluation = sports247SitePagesPlayerInstitutionEvaluation;
 
@@ -615,7 +615,7 @@ const PLAYER_PRIMARY_SPORT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesPlayerPrimarySport({ key: '…' });
  */
-export const sports247SitePagesPlayerPrimarySport: WrapperFn = (params = {}) => callFlat(PLAYER_PRIMARY_SPORT_DEF, params);
+export const sports247SitePagesPlayerPrimarySport: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_PRIMARY_SPORT_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayerPrimarySport} (py/R parity). */
 export const sports247_site_pages_player_primary_sport = sports247SitePagesPlayerPrimarySport;
 
@@ -652,7 +652,7 @@ const PLAYER_SEARCH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesPlayerSearch({});
  */
-export const sports247SitePagesPlayerSearch: WrapperFn = (params = {}) => callFlat(PLAYER_SEARCH_DEF, params);
+export const sports247SitePagesPlayerSearch: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_SEARCH_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayerSearch} (py/R parity). */
 export const sports247_site_pages_player_search = sports247SitePagesPlayerSearch;
 
@@ -683,7 +683,7 @@ const PLAYERSPORT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesPlayersport({ key: '…' });
  */
-export const sports247SitePagesPlayersport: WrapperFn = (params = {}) => callFlat(PLAYERSPORT_DEF, params);
+export const sports247SitePagesPlayersport: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYERSPORT_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayersport} (py/R parity). */
 export const sports247_site_pages_playersport = sports247SitePagesPlayersport;
 
@@ -714,7 +714,7 @@ const PLAYERSPORT_INSTITUTION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesPlayersportInstitution({ key: '…' });
  */
-export const sports247SitePagesPlayersportInstitution: WrapperFn = (params = {}) => callFlat(PLAYERSPORT_INSTITUTION_DEF, params);
+export const sports247SitePagesPlayersportInstitution: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYERSPORT_INSTITUTION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayersportInstitution} (py/R parity). */
 export const sports247_site_pages_playersport_institution = sports247SitePagesPlayersportInstitution;
 
@@ -745,7 +745,7 @@ const PLAYERSPORT_RANK_HISTORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesPlayersportRankHistory({ key: '…' });
  */
-export const sports247SitePagesPlayersportRankHistory: WrapperFn = (params = {}) => callFlat(PLAYERSPORT_RANK_HISTORY_DEF, params);
+export const sports247SitePagesPlayersportRankHistory: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYERSPORT_RANK_HISTORY_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayersportRankHistory} (py/R parity). */
 export const sports247_site_pages_playersport_rank_history = sports247SitePagesPlayersportRankHistory;
 
@@ -776,7 +776,7 @@ const POSITION_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesPositionRankings({ key: '…' });
  */
-export const sports247SitePagesPositionRankings: WrapperFn = (params = {}) => callFlat(POSITION_RANKINGS_DEF, params);
+export const sports247SitePagesPositionRankings: Wrapper = (params: WrapperParams = {}) => callFlat(POSITION_RANKINGS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPositionRankings} (py/R parity). */
 export const sports247_site_pages_position_rankings = sports247SitePagesPositionRankings;
 
@@ -807,7 +807,7 @@ const RECRUIT_INTEREST_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesRecruitInterest({ key: '…' });
  */
-export const sports247SitePagesRecruitInterest: WrapperFn = (params = {}) => callFlat(RECRUIT_INTEREST_DEF, params);
+export const sports247SitePagesRecruitInterest: Wrapper = (params: WrapperParams = {}) => callFlat(RECRUIT_INTEREST_DEF, params);
 /** snake_case alias of {@link sports247SitePagesRecruitInterest} (py/R parity). */
 export const sports247_site_pages_recruit_interest = sports247SitePagesRecruitInterest;
 
@@ -838,7 +838,7 @@ const RECRUITMENT_FINAL_CHOICE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesRecruitmentFinalChoice({ key: '…' });
  */
-export const sports247SitePagesRecruitmentFinalChoice: WrapperFn = (params = {}) => callFlat(RECRUITMENT_FINAL_CHOICE_DEF, params);
+export const sports247SitePagesRecruitmentFinalChoice: Wrapper = (params: WrapperParams = {}) => callFlat(RECRUITMENT_FINAL_CHOICE_DEF, params);
 /** snake_case alias of {@link sports247SitePagesRecruitmentFinalChoice} (py/R parity). */
 export const sports247_site_pages_recruitment_final_choice = sports247SitePagesRecruitmentFinalChoice;
 
@@ -869,7 +869,7 @@ const RECRUITMENT_INSTITUTION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesRecruitmentInstitution({ key: '…' });
  */
-export const sports247SitePagesRecruitmentInstitution: WrapperFn = (params = {}) => callFlat(RECRUITMENT_INSTITUTION_DEF, params);
+export const sports247SitePagesRecruitmentInstitution: Wrapper = (params: WrapperParams = {}) => callFlat(RECRUITMENT_INSTITUTION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesRecruitmentInstitution} (py/R parity). */
 export const sports247_site_pages_recruitment_institution = sports247SitePagesRecruitmentInstitution;
 
@@ -900,7 +900,7 @@ const RECRUITMENT_INTERESTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesRecruitmentInterests({ key: '…' });
  */
-export const sports247SitePagesRecruitmentInterests: WrapperFn = (params = {}) => callFlat(RECRUITMENT_INTERESTS_DEF, params);
+export const sports247SitePagesRecruitmentInterests: Wrapper = (params: WrapperParams = {}) => callFlat(RECRUITMENT_INTERESTS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesRecruitmentInterests} (py/R parity). */
 export const sports247_site_pages_recruitment_interests = sports247SitePagesRecruitmentInterests;
 
@@ -931,7 +931,7 @@ const RECRUITMENT_OFFERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesRecruitmentOffers({ key: '…' });
  */
-export const sports247SitePagesRecruitmentOffers: WrapperFn = (params = {}) => callFlat(RECRUITMENT_OFFERS_DEF, params);
+export const sports247SitePagesRecruitmentOffers: Wrapper = (params: WrapperParams = {}) => callFlat(RECRUITMENT_OFFERS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesRecruitmentOffers} (py/R parity). */
 export const sports247_site_pages_recruitment_offers = sports247SitePagesRecruitmentOffers;
 
@@ -962,7 +962,7 @@ const RECRUITMENT_PLAYER_SPORT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesRecruitmentPlayerSport({ key: '…' });
  */
-export const sports247SitePagesRecruitmentPlayerSport: WrapperFn = (params = {}) => callFlat(RECRUITMENT_PLAYER_SPORT_DEF, params);
+export const sports247SitePagesRecruitmentPlayerSport: Wrapper = (params: WrapperParams = {}) => callFlat(RECRUITMENT_PLAYER_SPORT_DEF, params);
 /** snake_case alias of {@link sports247SitePagesRecruitmentPlayerSport} (py/R parity). */
 export const sports247_site_pages_recruitment_player_sport = sports247SitePagesRecruitmentPlayerSport;
 
@@ -993,7 +993,7 @@ const SEASON_CURRENT_EXPERT_PREDICTIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesSeasonCurrentExpertPredictions({ season: '…' });
  */
-export const sports247SitePagesSeasonCurrentExpertPredictions: WrapperFn = (params = {}) => callFlat(SEASON_CURRENT_EXPERT_PREDICTIONS_DEF, params);
+export const sports247SitePagesSeasonCurrentExpertPredictions: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_CURRENT_EXPERT_PREDICTIONS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesSeasonCurrentExpertPredictions} (py/R parity). */
 export const sports247_site_pages_season_current_expert_predictions = sports247SitePagesSeasonCurrentExpertPredictions;
 
@@ -1024,7 +1024,7 @@ const SEASON_RECRUIT_INTEREST_EVENTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesSeasonRecruitInterestEvents({ season: '…' });
  */
-export const sports247SitePagesSeasonRecruitInterestEvents: WrapperFn = (params = {}) => callFlat(SEASON_RECRUIT_INTEREST_EVENTS_DEF, params);
+export const sports247SitePagesSeasonRecruitInterestEvents: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_RECRUIT_INTEREST_EVENTS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesSeasonRecruitInterestEvents} (py/R parity). */
 export const sports247_site_pages_season_recruit_interest_events = sports247SitePagesSeasonRecruitInterestEvents;
 
@@ -1055,7 +1055,7 @@ const SEASON_RECRUIT_INTERESTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesSeasonRecruitInterests({ season: '…' });
  */
-export const sports247SitePagesSeasonRecruitInterests: WrapperFn = (params = {}) => callFlat(SEASON_RECRUIT_INTERESTS_DEF, params);
+export const sports247SitePagesSeasonRecruitInterests: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_RECRUIT_INTERESTS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesSeasonRecruitInterests} (py/R parity). */
 export const sports247_site_pages_season_recruit_interests = sports247SitePagesSeasonRecruitInterests;
 
@@ -1107,7 +1107,7 @@ const SEASON_RECRUITS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesSeasonRecruits({ season: '…' });
  */
-export const sports247SitePagesSeasonRecruits: WrapperFn = (params = {}) => callFlat(SEASON_RECRUITS_DEF, params);
+export const sports247SitePagesSeasonRecruits: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_RECRUITS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesSeasonRecruits} (py/R parity). */
 export const sports247_site_pages_season_recruits = sports247SitePagesSeasonRecruits;
 
@@ -1138,6 +1138,6 @@ const SEASON_ROSTER_EMBED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SitePagesSeasonRosterEmbed({ season: '…' });
  */
-export const sports247SitePagesSeasonRosterEmbed: WrapperFn = (params = {}) => callFlat(SEASON_ROSTER_EMBED_DEF, params);
+export const sports247SitePagesSeasonRosterEmbed: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_ROSTER_EMBED_DEF, params);
 /** snake_case alias of {@link sports247SitePagesSeasonRosterEmbed} (py/R parity). */
 export const sports247_site_pages_season_roster_embed = sports247SitePagesSeasonRosterEmbed;

@@ -14,7 +14,7 @@
 import { isIdColumn, warnBigint } from "../core/int64.js";
 import { normalize } from "./_normalize.js";
 
-type Row = Record<string, any>;
+import type { ParserRow as Row } from "../core/types.js";
 
 function isPlainObject(v: unknown): v is Record<string, unknown> {
   return v !== null && typeof v === "object" && !Array.isArray(v);
