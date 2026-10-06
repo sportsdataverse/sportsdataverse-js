@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.cfb` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.cfb`
+
+<SourcesCovered league="cfb" />
+
 - **namespace:** `sdv.cfb`
 - **sport slug:** `football`
 - **league slug:** `college-football`

@@ -40,7 +40,8 @@
 // build instead of silently drifting.
 // ---------------------------------------------------------------------------
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join } from 'node:path';
 import { EXAMPLES } from './examples.mjs';
@@ -53,7 +54,17 @@ const FIXTURE_DIRS = {
   tools: join(__dirname, 'fixtures'),
 };
 const PARSERS = join(REPO, 'docs', 'src', 'playground', 'parsers.bundle.mjs');
-const GUIDES = join(REPO, 'docs', 'docs', 'guides');
+/** Target page dirs: an entry's `dir` (default "guides") picks one. */
+const DOC_DIRS = {
+  guides: join(REPO, 'docs', 'docs', 'guides'),
+  tutorials: join(REPO, 'docs', 'docs', 'tutorials'),
+};
+// The "script" family: run examples/<script> offline (examples/_offline.mjs
+// serves committed fixtures) and freeze its stdout; its `artifacts` (files the
+// script writes to examples/out/) are copied to docs/static/examples/ so a
+// tutorial can embed them. Needs `npm install` in examples/ (file:.. link).
+const EXAMPLES_DIR = join(REPO, 'examples');
+const STATIC_EXAMPLES = join(REPO, 'docs', 'static', 'examples');
 
 const MAX_ROWS = 8;
 const MAX_COLS = 6;
@@ -116,16 +127,69 @@ function rowsFor(parsers, ex) {
   throw new Error(`example "${ex.id}": unknown family "${ex.family}"`);
 }
 
-/** Build the full injected block (caption + table) for an entry. */
+/**
+ * Run examples/<script> offline; returns its stdout (deterministic: fixtures
+ * only), or null when the script skipped itself (a 9x sdvplot script without
+ * the sibling sdvplot-js build: examples/_resolve.mjs prints `skipped:`).
+ * The `--import ./_resolve.mjs` preload resolves `sportsdataverse` to this
+ * worktree's dist/, so no `npm install` in examples/ is needed.
+ */
+function runScript(ex) {
+  const res = spawnSync(process.execPath, ['--import', './_resolve.mjs', ex.script], {
+    cwd: EXAMPLES_DIR,
+    encoding: 'utf8',
+    env: { ...process.env, SDV_LIVE: '' },
+    timeout: 60_000,
+  });
+  if (res.status !== 0) {
+    throw new Error(`example "${ex.id}": ${ex.script} exited ${res.status}\n${res.stderr}`);
+  }
+  const out = res.stdout.replace(/\r\n/g, '\n').trimEnd();
+  return out.startsWith('skipped:') ? null : out;
+}
+
+/** Build the full injected block (caption + table) for an entry; `block: null` = script skipped. */
 function blockFor(parsers, ex) {
+  if (ex.family === 'script') {
+    const out = runScript(ex);
+    if (out === null) return { block: null, count: 0 };
+    const count = (out.match(/^## /gm) ?? []).length;
+    return { block: `${ex.caption}\n\n\`\`\`text\n${out}\n\`\`\``, count };
+  }
   const rows = rowsFor(parsers, ex);
   const count = Array.isArray(rows) ? rows.length : 0;
   return { block: `${ex.caption}\n\n${renderTable(rows)}`, count };
 }
 
-/** Replace the content between `<!-- inject:example:ID -->` and `<!-- /inject -->`. */
-function injectBlock(doc, id, block) {
-  const open = `<!-- inject:example:${id} -->`;
+/** The script's own source as a fenced block (for `<!-- inject:source:ID -->`). */
+function sourceBlock(ex) {
+  const src = readFileSync(join(EXAMPLES_DIR, ex.script), 'utf8').replace(/\r\n/g, '\n').trimEnd();
+  return `\`\`\`js title="examples/${ex.script}"\n${src}\n\`\`\``;
+}
+
+/**
+ * Copy a script's artifacts (examples/out/<f>) to docs/static/examples/<f>.
+ * Returns the names whose committed copy differs (or is missing).
+ */
+function syncArtifacts(ex) {
+  const stale = [];
+  for (const f of ex.artifacts ?? []) {
+    const src = readFileSync(join(EXAMPLES_DIR, 'out', f));
+    const dst = join(STATIC_EXAMPLES, f);
+    const same = existsSync(dst) && readFileSync(dst).equals(src);
+    if (same) continue;
+    stale.push(f);
+    if (!CHECK) {
+      mkdirSync(STATIC_EXAMPLES, { recursive: true });
+      writeFileSync(dst, src);
+    }
+  }
+  return stale;
+}
+
+/** Replace the content between `<!-- inject:<kind>:ID -->` and `<!-- /inject -->`. */
+function injectBlock(doc, id, block, kind = 'example') {
+  const open = `<!-- inject:${kind}:${id} -->`;
   const close = '<!-- /inject -->';
   const start = doc.indexOf(open);
   if (start === -1) return { doc, found: false };
@@ -144,8 +208,9 @@ async function main() {
   // Group examples by target guide so each file is read + written once.
   const byTarget = new Map();
   for (const ex of EXAMPLES) {
-    if (!byTarget.has(ex.target)) byTarget.set(ex.target, []);
-    byTarget.get(ex.target).push(ex);
+    const key = `${ex.dir ?? 'guides'}/${ex.target}`;
+    if (!byTarget.has(key)) byTarget.set(key, []);
+    byTarget.get(key).push(ex);
   }
 
   let staleFiles = 0;
@@ -153,24 +218,47 @@ async function main() {
   let missingMarkers = 0;
 
   for (const [target, exs] of byTarget) {
-    const path = join(GUIDES, target);
+    const [dir, file] = target.split('/');
+    if (!DOC_DIRS[dir]) throw new Error(`unknown docs dir "${dir}" (use ${Object.keys(DOC_DIRS).join(' | ')})`);
+    const path = join(DOC_DIRS[dir], file);
     const original = readFileSync(path, 'utf8');
     let doc = original;
 
     for (const ex of exs) {
       const { block, count } = blockFor(parsers, ex);
-      const res = injectBlock(doc, ex.id, block);
-      if (!res.found) {
-        // A manifest entry pointing at a marker that isn't in the guide is
-        // broken wiring — fail (don't silently skip), since a missing marker
-        // leaves `doc === original` and would otherwise sneak past --check.
-        missingMarkers += 1;
-        console.error(`  ✗ marker not found for "${ex.id}" in ${target} — manifest ↔ guide wiring is broken`);
+      if (block === null) {
+        // The script skipped itself (optional dependency absent): keep the
+        // committed output + artifacts rather than blanking them.
+        console.log(`  - ${ex.id.padEnd(18)} ${target.padEnd(34)} ${ex.family.padEnd(13)} skipped (kept committed output)`);
         continue;
       }
-      doc = res.doc;
+      // A script entry also freezes its own source (`<!-- inject:source:ID -->`)
+      // so the tutorial can never show code that differs from examples/.
+      const parts = [['example', block]];
+      if (ex.family === 'script') parts.push(['source', sourceBlock(ex)]);
+      let ok = true;
+      for (const [kind, content] of parts) {
+        const res = injectBlock(doc, ex.id, content, kind);
+        if (!res.found) {
+          // A manifest entry pointing at a marker that isn't in the page is
+          // broken wiring — fail (don't silently skip), since a missing marker
+          // leaves `doc === original` and would otherwise sneak past --check.
+          missingMarkers += 1;
+          ok = false;
+          console.error(`  ✗ ${kind} marker not found for "${ex.id}" in ${target} — manifest ↔ page wiring is broken`);
+          continue;
+        }
+        doc = res.doc;
+      }
+      if (!ok) continue;
       injected += 1;
-      console.log(`  ✓ ${ex.id.padEnd(18)} ${target.padEnd(20)} ${ex.family.padEnd(13)} ${count} rows`);
+      const staleArtifacts = ex.family === 'script' ? syncArtifacts(ex) : [];
+      if (CHECK && staleArtifacts.length > 0) {
+        staleFiles += 1;
+        console.error(`  ✗ STALE: docs/static/examples/{${staleArtifacts.join(',')}} differ from a fresh run of ${ex.script}`);
+      }
+      const unit = ex.family === 'script' ? 'tables' : 'rows';
+      console.log(`  ✓ ${ex.id.padEnd(18)} ${target.padEnd(34)} ${ex.family.padEnd(13)} ${count} ${unit}`);
     }
 
     if (doc !== original) {

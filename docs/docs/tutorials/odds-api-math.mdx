@@ -1,0 +1,216 @@
+---
+title: The Odds API and market math
+sidebar_label: 12. Odds API + market math
+sidebar_position: 12
+description: A historical odds snapshot parsed to one row per outcome, then de-vigged into win probabilities with the market-math helpers on sdv.odds.
+---
+
+import OpenInStackBlitz from '@site/src/components/OpenInStackBlitz';
+
+# The Odds API: from prices to de-vigged probabilities
+
+**What you'll build:** the h2h lines every bookmaker posted on a 2020 NFL
+opener, each book's implied win probability for the favourite before and
+after removing the vig (two methods), and a consensus blended with a
+spread-implied probability. Real lines from a real snapshot.
+
+## Sources used
+
+| Source | Host | Call |
+| --- | --- | --- |
+| The Odds API v4 (historical) | `api.the-odds-api.com/v4/historical/sports/americanfootball_nfl/odds` | `sdv.odds.oddsApiSportsOddsHistory({ sport_key, api_key, date, regions, markets })` |
+| `sdv.odds` market math | — | `probFromAmerican`, `devigMultiplicative`, `devigShin`, `spreadToProb`, `logitBlend` |
+
+Offline fixture: `test/fixtures/odds/nfl_lines_20200911T001500Z_0.json` — one
+verbatim response from the SportsDataverse
+[odds-data](https://github.com/sportsdataverse/odds-data) backfill (Houston
+Texans at Kansas City Chiefs, snapshot 2020-09-11T00:15Z, 14 bookmakers).
+
+## A keyed provider
+
+The Odds API is the one provider in the package that needs the caller's key
+on every call (`api_key`, sent as the `apiKey` query parameter). The ten
+wrappers on `sdv.odds.oddsApi*` cover the sports list, current odds, scores,
+events, participants, per-event odds and markets, and the three historical
+endpoints — which take a `date` and return a snapshot wrapped in
+`{ timestamp, previous_timestamp, next_timestamp, data }`. Offline, the script
+passes a placeholder key; set `ODDS_API_KEY` and `SDV_LIVE=1` to pull a live
+snapshot (historical calls cost credits).
+
+## One row per outcome
+
+The payload nests `data[] → bookmakers[] → markets[] → outcomes[]`. The parser
+unrolls all of it: one row per outcome with the event (`id`, `home_team`,
+`away_team`, `commence_time`), the book (`bookmaker_key`, `bookmaker`,
+`bookmaker_last_update`), the market (`market_key`: `h2h`, `spreads`,
+`totals`, …), `outcomes_name`, `outcomes_price` (American odds as numbers),
+`outcomes_point` for spreads and totals, and the snapshot timestamps on every
+row. The script filters to `h2h` and groups by book.
+
+## The market math
+
+`sdv.odds` also carries a port of sdv-py's `wexp.market` (parity-tested to
+1e-12 against the Python output):
+
+- `probFromAmerican(price)` / `probFromDecimal(price)` — the raw implied
+  probability; across a market these sum to more than 1 (the overround, 0.4%
+  at the exchange and 3–4% at most books here).
+- `devigMultiplicative(probs)` — scale the vector to sum to 1.
+- `devigShin(probs)` — Shin's method, which attributes the overround to an
+  insider-trading share and removes it non-uniformly, favouring the
+  favourite slightly; it is the usual choice when you want a fair price.
+- `spreadToProb(spread, sigma)` — Φ(spread / σ) with `spread` the expected
+  home margin (positive when the home side is favoured; KC was −9.5 at the
+  books, so +9.5 here) and σ the historical margin standard deviation (about
+  13.5 for the NFL).
+- `logitBlend(pA, pB, weightA)` — blend two probabilities in logit space,
+  the 70/30 practice nfelo uses to mix a model with the market.
+
+The consensus in the output (median Shin-de-vigged P(KC) ≈ 0.79) and the
+spread-implied 0.76 land close, which is the sanity check you want before
+feeding either into a model.
+
+## The script
+
+<!-- inject:source:ex11 -->
+
+```js title="examples/11_providers_odds_math.mjs"
+// 11 — The Odds API: a historical odds snapshot → de-vigged win probabilities.
+//
+// Shows: a provider namespace (`sdv.odds.oddsApi*`, caller-supplied api_key)
+// whose parsed frame unrolls bookmakers × markets × outcomes into one row per
+// outcome, and the market-math helpers merged onto the same namespace
+// (`probFromAmerican`, `devigMultiplicative`, `devigShin`, … — a port of sdv-py
+// `wexp.market`). The lines are real: a 2020 NFL opener snapshot from the
+// SportsDataverse odds-data backfill.
+//
+// Sources: The Odds API v4 — api.the-odds-api.com/v4/historical/sports/americanfootball_nfl/odds
+// Offline fixture: test/fixtures/odds/nfl_lines_20200911T001500Z_0.json
+// (sportsdataverse/odds-data `odds/nfl/lines/20200911T001500Z_0.json`, HOU @ KC 2020-09-10).
+
+import sdv from 'sportsdataverse';
+import { setup } from './_offline.mjs';
+import { printTable, round } from './_util.mjs';
+
+setup();
+
+const rows = await sdv.odds.oddsApiSportsOddsHistory({
+  sport_key: 'americanfootball_nfl',
+  api_key: process.env.ODDS_API_KEY ?? 'offline',
+  date: '2020-09-11T00:15:00Z',
+  regions: 'us',
+  markets: 'h2h',
+  parsed: true,
+});
+console.log(`${rows.length} outcome rows, snapshot ${rows[0]?.timestamp}, markets: ${[...new Set(rows.map((r) => r.market_key))].join(', ')}`);
+
+const h2h = rows.filter((r) => r.market_key === 'h2h');
+printTable(h2h, ['home_team', 'away_team', 'bookmaker', 'outcomes_name', 'outcomes_price'], 6, 'h2h outcomes (one row per bookmaker × outcome)');
+
+// Per bookmaker: raw implied probabilities, the overround, and two de-vig methods.
+const byBook = new Map();
+for (const r of h2h) {
+  if (!byBook.has(r.bookmaker_key)) byBook.set(r.bookmaker_key, []);
+  byBook.get(r.bookmaker_key).push(r);
+}
+const table = [];
+for (const [book, outs] of byBook) {
+  const home = outs.find((o) => o.outcomes_name === o.home_team);
+  const away = outs.find((o) => o.outcomes_name === o.away_team);
+  if (!home || !away) continue;
+  const raw = [sdv.odds.probFromAmerican(home.outcomes_price), sdv.odds.probFromAmerican(away.outcomes_price)];
+  const mult = sdv.odds.devigMultiplicative(raw);
+  const shin = sdv.odds.devigShin(raw);
+  table.push({
+    bookmaker: book,
+    home_price: home.outcomes_price,
+    away_price: away.outcomes_price,
+    overround: round(raw[0] + raw[1] - 1, 4),
+    home_raw: round(raw[0], 4),
+    home_mult: round(mult[0], 4),
+    home_shin: round(shin[0], 4),
+  });
+}
+printTable(table.sort((a, b) => a.overround - b.overround), ['bookmaker', 'home_price', 'away_price', 'overround', 'home_raw', 'home_mult', 'home_shin'], 10, 'Kansas City win probability by bookmaker (raw → de-vigged)');
+
+// The consensus (median of the Shin-de-vigged home probabilities) and a spread
+// cross-check. `spreadToProb(spread, sigma)` is Phi(spread / sigma) with `spread`
+// the expected HOME margin (KC was a 9.5-point favourite → +9.5), sigma the
+// historical NFL margin sd (~13.5).
+const med = (a) => { const s = [...a].sort((x, y) => x - y); return s[s.length >> 1]; };
+const consensus = med(table.map((t) => t.home_shin));
+const fromSpread = sdv.odds.spreadToProb(9.5, 13.5);
+printTable(
+  [
+    { quantity: 'consensus P(home): median Shin', value: round(consensus, 4) },
+    { quantity: 'spreadToProb(+9.5, 13.5)', value: round(fromSpread, 4) },
+    { quantity: 'logitBlend(consensus, spread, 0.7)', value: round(sdv.odds.logitBlend(consensus, fromSpread, 0.7), 4) },
+  ],
+  ['quantity', 'value'],
+  3,
+  'Market math helpers'
+);
+```
+
+<!-- /inject -->
+
+<OpenInStackBlitz src="examples/11_providers_odds_math.mjs" title="The Odds API and market math" />
+
+## Output
+
+<!-- inject:example:ex11 -->
+
+Output of `node examples/11_providers_odds_math.mjs` (offline, against the committed fixtures):
+
+```text
+78 outcome rows, snapshot 2020-09-11T00:15:00Z, markets: h2h, spreads, totals, h2h_lay
+
+## h2h outcomes (one row per bookmaker × outcome)
+| home_team          | away_team      | bookmaker    | outcomes_name      | outcomes_price |
+| ------------------ | -------------- | ------------ | ------------------ | -------------- |
+| Kansas City Chiefs | Houston Texans | Unibet       | Houston Texans     | 335            |
+| Kansas City Chiefs | Houston Texans | Unibet       | Kansas City Chiefs | -400           |
+| Kansas City Chiefs | Houston Texans | BetOnline.ag | Houston Texans     | 350            |
+| Kansas City Chiefs | Houston Texans | BetOnline.ag | Kansas City Chiefs | -435           |
+| Kansas City Chiefs | Houston Texans | LowVig.ag    | Houston Texans     | 350            |
+| Kansas City Chiefs | Houston Texans | LowVig.ag    | Kansas City Chiefs | -435           |
+(28 rows, first 6 shown)
+
+## Kansas City win probability by bookmaker (raw → de-vigged)
+| bookmaker      | home_price | away_price | overround | home_raw | home_mult | home_shin |
+| -------------- | ---------- | ---------- | --------- | -------- | --------- | --------- |
+| betfair        | -400       | 390        | 0.004     | 0.8      | 0.797     | 0.798     |
+| unibet         | -400       | 335        | 0.03      | 0.8      | 0.777     | 0.785     |
+| draftkings     | -400       | 335        | 0.03      | 0.8      | 0.777     | 0.785     |
+| williamhill_us | -435       | 360        | 0.03      | 0.813    | 0.789     | 0.798     |
+| betonlineag    | -435       | 350        | 0.035     | 0.813    | 0.785     | 0.795     |
+| lowvig         | -435       | 350        | 0.035     | 0.813    | 0.785     | 0.795     |
+| mybookieag     | -435       | 350        | 0.035     | 0.813    | 0.785     | 0.795     |
+| fanduel        | -400       | 320        | 0.038     | 0.8      | 0.771     | 0.781     |
+| bookmaker      | -435       | 344        | 0.038     | 0.813    | 0.783     | 0.794     |
+| intertops      | -417       | 330        | 0.039     | 0.807    | 0.776     | 0.787     |
+(14 rows, first 10 shown)
+
+## Market math helpers
+| quantity                   | value |
+| -------------------------- | ----- |
+| consensus P(home): median… | 0.794 |
+| spreadToProb(+9.5, 13.5)   | 0.759 |
+| logitBlend(consensus, spr… | 0.784 |
+(3 rows, all shown)
+```
+
+<!-- /inject -->
+
+## Variations
+
+- `markets: 'spreads,totals'` in the same call adds `outcomes_point` rows for
+  the line and the total.
+- `sdv.odds.oddsApiEventOddsHistory` is the per-event endpoint for player
+  props and alternate lines (2023-05 onward).
+- The `odds-data` repo's crosswalk joins these snapshots to ESPN game ids.
+
+## Next steps
+
+- **[Release-dataset loaders](./release-loaders)** — the betting-lines releases for seasons at a time.
+- **[NFL schedule and standings](./nfl-schedule-standings)** — the games these lines were for.

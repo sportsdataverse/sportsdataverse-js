@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.ligue1` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.ligue1`
+
+<SourcesCovered league="ligue1" />
+
 - **namespace:** `sdv.ligue1`
 - **sport slug:** `soccer`
 - **league slug:** `fra.1`

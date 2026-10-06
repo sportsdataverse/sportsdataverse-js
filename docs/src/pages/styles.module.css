@@ -20,20 +20,38 @@
 
 .buttons {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  gap: 0.75rem;
 }
 
-.features {
-  display: flex;
-  align-items: center;
-  padding: 2rem 0;
+/* "sportsdataverse" is one word: scale it instead of breaking it mid-word. */
+.heroBanner h1 {
+  font-size: clamp(1.9rem, 8.5vw, 3rem);
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+/* Outline buttons on the brand-blue band: white, not the light-theme grey. */
+.heroBanner :global(.button.button--outline.button--secondary) {
+  /* the theme paints a resting outline button var(--ifm-font-color-base) at 0,5,0 */
+  --ifm-font-color-base: #fff;
+  --ifm-button-color: #fff;
+  --ifm-button-border-color: rgba(255, 255, 255, 0.75);
+  color: #fff;
+}
+
+.heroBanner :global(.button.button--outline.button--secondary):hover {
+  --ifm-button-color: #014f84;
+  color: #014f84;
+  background: #fff;
+  border-color: #fff;
+}
+
+.sources {
+  padding: 2rem 0 1rem;
   width: 100%;
-}
-
-.featureImage {
-  height: 200px;
-  width: 200px;
 }
 
 .funcs {

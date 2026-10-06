@@ -1,0 +1,36 @@
+---
+title: Sources & coverage
+sidebar_label: Sources & coverage
+sidebar_position: 2
+description: Every upstream source sportsdataverse wraps — host, families, leagues, auth, ownership, parity and description coverage — generated from the codegen pass.
+---
+
+import SourcesCovered, { SourcesLegend } from '@site/src/components/SourcesCovered';
+
+# Sources & coverage
+
+One card per upstream source. Everything on this page is read from
+`docs/src/generated/sources.json`, which `npm run codegen` writes from the endpoint
+registries, the parser-parity harness and the description coverage — so a new
+family, league or loader shows up here with no hand edit, and `codegen:check` fails
+when the page is stale.
+
+<SourcesCovered />
+
+## Legend
+
+<SourcesLegend />
+
+## Per-league view
+
+Every league overview (for example [`sdv.nba`](./nba/)) opens with the subset of
+these sources that touch that league: ESPN, the native families merged onto its
+namespace, and its dataset loaders. Cross-sport providers (CBS, Fox, Yahoo, The Odds
+API, …) have their own reference pages under
+[Providers](./reference/#standalone-provider-namespaces).
+
+## How each surface is built
+
+The [How this library is built](./architecture/) section explains, per ownership
+kind, where the source of truth lives, which generator step reads it, what it
+emits and how to change it.

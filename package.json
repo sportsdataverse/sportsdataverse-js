@@ -87,8 +87,8 @@
     "pack:check": "node tools/pack-check.mjs",
     "vendor:check:online": "node tools/codegen/vendor-lock-online.mjs",
     "bundle:parsers": "esbuild src/parsers/browser.ts --bundle --format=esm --platform=browser --legal-comments=eof --outfile=docs/src/playground/parsers.bundle.mjs",
-    "docs:examples": "node tools/docs/inject-outputs.mjs",
-    "docs:examples:check": "node tools/docs/inject-outputs.mjs --check",
+    "docs:examples": "node tools/docs/inject-outputs.mjs && node tools/docs/examples-source.mjs",
+    "docs:examples:check": "node tools/docs/inject-outputs.mjs --check && node tools/docs/examples-source.mjs --check",
     "coverage:generated": "c8 report --include=\"dist/generated/**\" --exclude=\"\" --check-coverage=false --reporter=text-summary"
   },
   "repository": {

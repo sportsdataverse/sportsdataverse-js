@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.xfl` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.xfl`
+
+<SourcesCovered league="xfl" />
+
 - **namespace:** `sdv.xfl`
 - **sport slug:** `football`
 - **league slug:** `xfl`

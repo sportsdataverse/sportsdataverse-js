@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.ligamx` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.ligamx`
+
+<SourcesCovered league="ligamx" />
+
 - **namespace:** `sdv.ligamx`
 - **sport slug:** `soccer`
 - **league slug:** `mex.1`

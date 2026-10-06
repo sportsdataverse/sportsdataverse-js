@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.wbb` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.wbb`
+
+<SourcesCovered league="wbb" />
+
 - **namespace:** `sdv.wbb`
 - **sport slug:** `basketball`
 - **league slug:** `womens-college-basketball`

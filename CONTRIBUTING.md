@@ -14,7 +14,10 @@ conventions. By participating you agree to the
 - [Adding an ESPN endpoint](#adding-an-espn-endpoint)
 - [Vendored families (sync from sdv-py)](#vendored-families-sync-from-sdv-py)
 - [Adding a new flat-API family](#adding-a-new-flat-api-family)
+- [Release dataset loaders](#release-dataset-loaders)
 - [The parser contract](#the-parser-contract)
+- [The error vocabulary](#the-error-vocabulary)
+- [Utilities catalogue and breaking changes](#utilities-catalogue-and-breaking-changes)
 - [Testing](#testing)
 - [Docs & playground](#docs--playground)
 - [Commit conventions](#commit-conventions)
@@ -48,9 +51,13 @@ Useful scripts:
 | `npm run codegen` | regenerate `src/generated/**`, `docs/docs/reference/**`, playground JSON |
 | `npm run codegen:check` | **drift gate** — fails if committed generated output is stale |
 | `npm run bundle:parsers` | esbuild the browser parser bundle for the playground |
-| `npm run docs` | TypeDoc (the typed module reference) |
+| `npm run vendor -- --ref <sha>` / `npm run vendor:check` | re-vendor sdv-py's YAML + schemas at a pin / **vendor gate** (CI) |
+| `npm run docs` | TypeDoc (local only; the site builds its own API pages) |
 | `npm run build` | compile TypeScript to `dist/` |
-| `npm test` | Mocha suite over `test/**/*.test.js` (no network) |
+| `npm run typecheck:strict` | `tsc -p tsconfig.strict.json` (equals the build; CI) |
+| `npm test` | Mocha suite over `test/**/*.test.js` under **c8** (no network; coverage thresholds enforced) |
+| `npm run coverage:generated` | re-report the last run over `dist/generated/**` alone (not gated) |
+| `npm run docs:examples` / `docs:examples:check` | refresh / **gate** the frozen guide + tutorial outputs and `examples-source.json` |
 | `npm run api:report` | rewrite the API Extractor reports `etc/*.api.md` from the built `.d.ts`; commit them with any public-API change |
 | `npm run api:check` | **API gate** (CI) — fails if `etc/*.api.md` is stale |
 | `npm run pack:check` | `npm pack`, then `@arethetypeswrong/cli` + `publint --strict` on that tarball (CI) |
@@ -61,12 +68,18 @@ The library is **codegen-driven**. `tools/codegen/generate.mjs` reads the vendor
 endpoint YAML in `tools/codegen/endpoints/*.yaml` — the single source of truth — and
 generates:
 
-- the runtime TypeScript wrapper / league tables under `src/generated/`
-  (`wrappers.ts`, `leagues.ts`),
-- the per-league/provider Markdown reference under `docs/docs/reference/`, and
+- the runtime TypeScript under `src/generated/`: the wrapper / league / alias /
+  namespace tables (`wrappers.ts`, `leagues.ts`, `aliases.ts`, `namespaces.ts`), the
+  written ESPN and flat modules (`espn/<league>.ts`, `flat/<family>.ts`), the params
+  and row types (`params/`, `rows/`), the release loaders and their row types
+  (`loaders/`, `loader_rows/`) and the utilities table (`utilities.ts`);
+- the docs: per-league dirs (`docs/docs/<league>/`), the shared + provider reference
+  pages (`docs/docs/reference/`), the utilities catalogue (`docs/docs/utilities/`), the
+  `<!-- gen:status -->` blocks of `docs/docs/architecture/` and `docs/src/generated/`
+  (sidebar, coverage); and
 - the playground metadata `docs/src/playground/endpoints.json`.
 
-Two kinds of endpoints:
+Three kinds of callables:
 
 - **ESPN** (`espn_site_v2.yaml`, `espn_core_v2.yaml`, `espn_web_v3.yaml`,
   `espn_fitt_v3.yaml`, `espn_cdn.yaml`) — one core, parameterized on `(sport, league)`
@@ -80,23 +93,30 @@ Two kinds of endpoints:
   standalone `sdv.<provider>.*` namespaces. `npm run codegen` prints the current
   counts.
 
+- **Release loaders** — **323 `load*` functions**, one per entry of sdv-py's
+  `releases.yaml` (see [Release dataset loaders](#release-dataset-loaders)).
+
 Every wrapper returns raw JSON by default; `{ parsed: true }` runs it through a
 registered **parser** → a tidy array of flat, snake_cased row objects. See
-[`CLAUDE.md`](CLAUDE.md) for the full deep-dive.
+[`CLAUDE.md`](CLAUDE.md) for the full deep-dive and the
+[How this library is built](https://js.sportsdataverse.org/docs/architecture/) pages
+for the per-surface account (source of truth, generator, gate, how to change it).
 
 ## Codegen workflow
 
 > **Generated files are never hand-edited.** Every file under `src/generated/` and
 > `docs/docs/reference/` starts with an `AUTO-GENERATED … do not edit by hand`
-> header. Edit the **YAML** (or the renderer/templates) and regenerate.
+> header. Edit the **YAML** (or the string-builder renderers — `generate.mjs`,
+> `render-loaders.mjs`, `row-types.mjs`, `utilities.mjs`, `breaking.mjs`; there is no
+> templates directory) and regenerate.
 
 The loop is:
 
 ```sh
-# 1. edit tools/codegen/endpoints/<file>.yaml  (or generate.mjs / templates)
+# 1. edit tools/codegen/endpoints/<file>.yaml  (or a renderer under tools/codegen/)
 npm run codegen          # 2. regenerate the runtime + docs + playground outputs
 npm run codegen:check    # 3. confirm there is no drift
-git add src/generated docs/docs/reference docs/src/playground tools/codegen
+git add src/generated docs/docs docs/src/generated docs/src/playground tools/codegen
 ```
 
 `codegen:check` runs in CI (there is no pre-commit hook; run it yourself before pushing). **A PR that changes endpoint
@@ -235,6 +255,30 @@ npm run codegen                 # then regenerate as usual
 5. `npm run codegen`, then `npm run bundle:parsers` if the parsers are browser-relevant.
 6. Add Mocha tests with captured fixtures.
 
+## Release dataset loaders
+
+The 323 `load*` functions read the published SportsDataverse / nflverse release
+parquet. They are generated, not hand-written:
+
+- **Source of truth:** sdv-py's `releases.yaml` (vendored verbatim to
+  `tools/codegen/endpoints/releases.yaml`) names each loader, its release URL pattern,
+  season floor and `id_int64` columns; sdv-py's `schemas/loader_schemas.yaml` (also
+  vendored) gives each loader's columns and dtypes.
+- **Generated:** `src/generated/loaders/<league>.ts` (`render-loaders.mjs`; one
+  camelCase `loadNbaPbp` + snake alias `load_nba_pbp` per entry) and
+  `src/generated/loader_rows/<league>.ts` (`loader-types.mjs`; one `Load<Name>Row`
+  interface per loader, re-exported from the package root), plus each league's
+  `reference/loaders.md` with a returns table per loader.
+- **Runtime:** `src/core/releases.ts` — hyparquet decode, the `releases` transport
+  family, `seasons` / `columns` / `format: "columns"` / `maxCells`, the 404-season skip
+  (a failed fetch still throws `AssetFetchError`), and the integer policy: id columns
+  are decimal strings, other INT64 columns `number` or `BigInt`.
+- **Adding or changing a loader** happens in sdv-py (`releases.yaml` +
+  `loader_schemas.yaml`), then `npm run vendor -- --ref <sha>` and `npm run codegen`.
+- **Tests:** `test/types/loader-agreement.test.js` checks every value of the committed
+  real release fixtures (`test/fixtures/releases/`) against the generated row type;
+  the loader runtime tests run on those same fixtures behind a stubbed transport.
+
 ## The parser contract
 
 A parser is a function `(raw) => rows[]`:
@@ -258,13 +302,66 @@ plus node-only parsers (KenPom's cheerio HTML parser, registered via
 `registerParser`). Run `npm run bundle:parsers` after editing any parser so the
 playground bundle stays current.
 
+## The error vocabulary
+
+Every wrapper, loader and legacy `get*` method fetches through `src/core/request.ts`
+(auth provider → transport → retry → classification) and throws from one vocabulary
+(`src/core/errors.ts`, all subclasses of `SdvError`):
+
+| Error | When | Retried? |
+|---|---|---|
+| `NoDataError` | the fetch **worked** and there is nothing there: HTTP 404, ESPN's 200 `{ code: 404 }` | no |
+| `AssetFetchError` | the fetch **failed** and the answer is unknown: 403 / 429 / 5xx after the retry budget, a network error, an empty or non-JSON 2xx body | yes, first |
+| `InvalidParameterError` | 400 / 422 — the call as made can never succeed | never |
+| `SeasonNotFoundError` | a loader season below its floor | no |
+| `TransportUnavailableError` | an optional peer (`impit`, `playwright`) is missing | no |
+
+Rules: a failed fetch is **never** returned as `[]` / `{}` / `""`; never collapse
+`NoDataError` into `AssetFetchError` (a failed fetch recorded as an empty season is
+silent data loss); a family narrows the retry set or maps a final response with
+`registerFamilyDefaults(family, { retryStatuses, classifyError })`; every `cause` goes
+through `safeCause`, so credentials never reach an error. `NoESPNDataError` is an alias
+of `NoDataError`. `tools/oracle/error_vocabulary_oracle.py` records sdv-py's own outcome
+for the wire cases the tests replay.
+
+## Utilities catalogue and breaking changes
+
+- **`tools/codegen/utilities.yaml`** labels every hand-written non-data export
+  (module, name, category, one-liner). Codegen renders `docs/docs/utilities/` (signatures
+  read off the TypeScript source), `src/generated/utilities.ts` and a sidebar group;
+  `listFunctions(ns, { detail: true })` labels entries with it. A new exported helper
+  in `src/` gets a YAML entry, or `test/utilities-catalogue.test.js` fails; a listed
+  name the source lacks fails codegen.
+- **`tools/codegen/breaking.yaml`** is the register of breaking changes (version, the
+  surface — `espn`, `flat:<family>`, `loaders`, `legacy`, `core` — and a one-line
+  summary linking the CHANGELOG anchor). Codegen puts a `:::danger Breaking in <version>`
+  admonition on every affected generated page and the "Breaking changes by version"
+  table on `reference/deprecations.md`. A `!:` commit adds a YAML entry **and** a
+  CHANGELOG line under the release's `### BREAKING` heading.
+- In both cases: edit the YAML, run `npm run codegen`, commit the regenerated output.
+
 ## Testing
 
 - Tests live under `test/**/*.test.js` and run with **Mocha** + `should`.
 - **No network in the default suite** — use captured fixtures.
-- `npm test` runs `npm run build` first (via `pretest`), then Mocha.
+- `npm test` runs `npm run build` first (via `pretest`), then Mocha **under c8**.
 - Add a test for any new endpoint, parser, or bug fix. Parser tests should be
   payload-agnostic where possible so re-captured fixtures keep working.
+- **Fixtures are real captures with provenance.** Every `test/fixtures/<dir>/` has a
+  `README.md` naming each file's request URL, capture date, trimming and consuming
+  test; a capture copied from sdv-py cites the commit and is byte-identical. Synthetic
+  payloads survive only as labelled malformed-/empty-payload edge cases (the three
+  suites with no public capture anywhere are listed in `test/fixtures/README.md`).
+- **Coverage gate.** `.c8rc.json` measures `dist/**` minus `dist/generated/**` (the
+  generated modules are contract-tested by the codegen suites) and `npm test` fails
+  below **lines 94 / functions 95 / branches 84** — the measured baseline at the time
+  the gate landed. The thresholds are never lowered; raise them when the measured
+  number rises. `npm run coverage:generated` reports the generated tree separately.
+  CI uploads `coverage/lcov.info`.
+- Live suites are gated: `SDV_LIVE=1` (ESPN + keyless families, run by the weekly
+  `live-smoke.yml`), `SDV_NBA_STATS_LIVE=1` (stats.nba.com / stats.wnba.com, never in
+  CI), and per-family gates for the subscription families (`SDV_PFF_LIVE`,
+  `SDV_KENPOM_LIVE`, `SDV_NFL_PRO_LIVE`).
 
 ## Docs & playground
 
@@ -275,8 +372,14 @@ playground bundle stays current.
 - Build the site to confirm nothing broke:
 
   ```sh
-  cd docs && npx docusaurus build
+  cd docs && npx docusaurus build   # onBrokenLinks: 'throw'
   ```
+
+  On a box where the `@swc/html` native addon refuses to load, build through a
+  throwaway wrapper config (`docs/docusaurus.local.config.js`, requiring the real one
+  and setting `future.faster` to the flag object with `swcHtmlMinimizer: false`), build
+  with `npx docusaurus build --config docusaurus.local.config.js`, and delete the
+  wrapper before committing; CI builds the real config.
 
 - The playground runs the **bundled** parser layer
   (`docs/src/playground/parsers.bundle.mjs`) plus a serverless proxy
@@ -306,6 +409,54 @@ playground bundle stays current.
   `npm run docs:examples:check` is a **CI drift gate** — it must stay green. Add a
   new example by dropping a fixture + an entry in `examples.mjs` + the marker pair in
   the target guide; `test/docs-examples.test.js` checks the manifest is consistent.
+
+### Examples and tutorials (`examples/` + `docs/docs/tutorials/`)
+
+- `examples/NN_<topic>.mjs` are the runnable scripts (one per surface); each prints one
+  to three tables. They are the source of the tutorial pages. Run one with
+  `npm run build && cd examples && node --import ./_resolve.mjs 01_nba_scoreboard_to_table.mjs`.
+- **Offline by default.** `examples/_offline.mjs` installs a `configure({ transport })`
+  that serves `test/fixtures/**` by URL and throws on an unrouted URL, so a script can
+  never silently return `{}`; `SDV_LIVE=1` hits the real hosts instead. A new script
+  needs its fixtures routed there (add a capture with a provenance README).
+- `examples/_resolve.mjs` is a `--import` preload: it resolves `sportsdataverse` and
+  `sportsdataverse/parsers` to the repo's `dist/` (no install), and `@sportsdataverse/*`
+  (the unpublished sdvplot-js packages) from `SDVPLOT_JS_DIR` (default `../../sdvplot-js`,
+  a sibling clone; see `examples/README.md` for the build steps). A script that needs an
+  unbuilt sdvplot-js prints `skipped:` and exits 0, so CI stays green without it.
+  **That means CI never runs the three `9x_sdvplot_*.mjs` scripts**: the injector keeps
+  their committed source / output / artifacts, so a change to one of them, to
+  `docs/docs/tutorials/sdvplot-*.mdx` or to `docs/static/examples/*` must be followed by a
+  manual `SDVPLOT_JS_DIR=<built sdvplot-js> npm run docs:examples` before pushing (CI cannot
+  catch a stale page there).
+- **Tutorial pages** (`docs/docs/tutorials/<topic>.mdx`) carry a `script` entry in
+  `tools/docs/examples.mjs`; `npm run docs:examples` runs the script offline and freezes
+  its source (`<!-- inject:source:ex<NN> -->`) and stdout (`<!-- inject:example:ex<NN> -->`)
+  into the page, copies declared artifacts to `docs/static/examples/`, and writes
+  `docs/src/generated/examples-source.json` (`tools/docs/examples-source.mjs`) for the
+  StackBlitz button. `docs:examples:check` fails on any drift. `test/examples.test.js`
+  runs every script; `test/docs-examples.test.js` checks the wiring.
+- To add a tutorial: write the script, route its fixtures, add the manifest entry and
+  the page with both marker pairs + an `<OpenInStackBlitz src="examples/NN_*.mjs" />`
+  under the source block, run `npm run docs:examples`, commit everything.
+
+### llms.txt, live blocks and StackBlitz
+
+- **llms.txt:** `docusaurus-plugin-llms` (in `docs/docusaurus.config.js`) emits
+  `llms.txt`, `llms-full.txt` and a `.md` beside every page at build time; the TypeDoc
+  tree (`docs/api/**`) is excluded from all three. `test/docs-llms.test.js` pins the
+  config offline — change the options there too.
+- **Live-editable blocks:** `@docusaurus/theme-live-codeblock` with the swizzled
+  `docs/src/theme/ReactLiveScope` exposing the browser parser bundle, `fetchViaProxy`
+  (POSTs the `/api/run` body — `{ league | api, endpoint, params }` — the proxy resolves
+  URLs itself), `resolve` + `endpoints`, `<Table/>` and React. A ` ```jsx live noInline`
+  block cannot `import` the package; use it for parser / transform snippets (see
+  `guides/live-blocks.md`).
+- **Open in StackBlitz:** `docs/src/components/OpenInStackBlitz` opens a snippet (`code=`)
+  or a tutorial script (`src=`) as a Node project; the generated `package.json` pins
+  `sportsdataverse: "latest"` until 4.x is published (`// TODO(release)`).
+- Every page Docusaurus compiles is MDX: `test/docs-mdx.test.js` flags bare `{`, `<`
+  and unknown tags (file:line) before the build does.
 
 ### The sport-grouped reference sidebar
 
@@ -339,13 +490,20 @@ the change was generated, refactored, or reviewed with AI assistance.
 
 Before opening a PR, confirm:
 
-- [ ] `npm test` passes.
-- [ ] `npm run codegen:check` passes (regenerated output committed if you touched
-      endpoint YAML / renderers).
-- [ ] `npm run typecheck` is clean.
+- [ ] `npm test` passes (coverage thresholds included).
+- [ ] `npm run codegen:check` and `npm run vendor:check` pass (regenerated output
+      committed if you touched endpoint YAML / renderers / `utilities.yaml` / `breaking.yaml`).
+- [ ] `npm run typecheck` and `npm run typecheck:strict` are clean; `npm run api:check`
+      passes (run `npm run api:report` and commit `etc/*.api.md` on a public-API change).
+- [ ] `npm run docs:examples:check` passes (run `npm run docs:examples` after a parser,
+      fixture, example or tutorial change).
 - [ ] `cd docs && npx docusaurus build` succeeds (for doc-affecting changes).
-- [ ] No hand-edited generated files (`src/generated/**`, `docs/docs/reference/**`).
+- [ ] No hand-edited generated or vendored files (`src/generated/**`, `docs/docs/<league>/`,
+      `docs/docs/reference/**`, `docs/docs/utilities/**`, `tools/codegen/vendor/upstream/**`).
 - [ ] Parsers rebundled (`npm run bundle:parsers`) if you changed `src/parsers/`.
+- [ ] New fixtures are real captures with a provenance README entry.
+- [ ] A breaking change has a `tools/codegen/breaking.yaml` entry and a CHANGELOG line
+      under `BREAKING`; other changes go under `## Unreleased`.
 - [ ] Conventional Commit messages, no AI attribution.
 
 Fill out the [pull request template](.github/pull_request_template.md) and link any

@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.mch` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.mch`
+
+<SourcesCovered league="mch" />
+
 - **namespace:** `sdv.mch`
 - **sport slug:** `hockey`
 - **league slug:** `mens-college-hockey`

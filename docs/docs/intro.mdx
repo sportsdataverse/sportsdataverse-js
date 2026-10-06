@@ -4,6 +4,9 @@ sidebar_label: Getting Started
 sidebar_position: 1
 ---
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+import sources from '@site/src/generated/sources.json';
+
 # sportsdataverse-js
 
 <a href='https://js.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/sportsdataverse/sportsdataverse-js/main/docs/static/img/sdv-js-logo.png' alt="sportsdataverse-js logo" align="right" width="20%" min-width="100px"/></a>
@@ -15,12 +18,15 @@ sidebar_position: 1
 
 **`sportsdataverse`** is the SportsDataverse's Node.js client for sports data. As
 of **v4.0.0** it is a **cross-league ESPN client**: a single, uniform surface of
-**126 endpoint wrappers** generated for **30 leagues** — play-by-play, box scores,
-schedules, rosters, standings, rankings, odds, and more — plus **1059 flat-API
-wrappers across 27 families** (league APIs such as MLB Stats, NHL, NFL.com, MLS, NWSL
-and stats.nba.com, and providers such as The Odds API, 247Sports, CBS, Fox, Yahoo,
-HockeyTech, BartTorvik, On3 and American Soccer Analysis) and the original
-hand-written scrapers it has always shipped.
+**{sources.totals.espnShorts} endpoint wrappers** generated for **{sources.totals.espnLeagues} leagues** —
+play-by-play, box scores, schedules, rosters, standings, rankings, odds, and more —
+plus **{sources.totals.flatWrappers} native-API wrappers across {sources.totals.flatFamilies} families**
+(league APIs such as MLB Stats, NHL, NFL.com, MLS, NWSL and stats.nba.com, and
+providers such as The Odds API, 247Sports, CBS, Fox, Yahoo, HockeyTech, BartTorvik,
+On3 and American Soccer Analysis), **{sources.totals.loaders} dataset loaders** over the
+SportsDataverse release assets, and the original hand-written scrapers it has
+always shipped. The counts on this page come from the generated
+[sources matrix](./sources), so they track the code.
 
 It is the Node.js sister to the [`sportsdataverse-py`](https://py.sportsdataverse.org/)
 Python package and the [SportsDataverse R packages](https://r.sportsdataverse.org/)
@@ -40,6 +46,14 @@ import sdv from 'sportsdataverse';
 ```
 
 > Using CommonJS? Load it with a dynamic import: `const sdv = (await import('sportsdataverse')).default;`
+
+## Sources covered
+
+One card per upstream source — host, families, what you need to authenticate,
+where the endpoint definitions live, and how much of the returns documentation
+is verified. The [Sources & coverage](./sources) page has the legend.
+
+<SourcesCovered />
 
 ## Quick start
 
@@ -104,8 +118,8 @@ const box = await sdv.cfb.getBoxScore(401628319);
 
 The ESPN client is **generated from a single YAML source of truth**
 (`tools/codegen/endpoints/*.yaml`). Each endpoint is wrapped once and bound to
-every applicable league, so the 126 endpoints × 30 leagues stay perfectly in
-sync. Endpoints are grouped into **scopes**:
+every applicable league, so the {sources.totals.espnShorts} endpoints × {sources.totals.espnLeagues} leagues
+stay perfectly in sync. Endpoints are grouped into **scopes**:
 
 | Scope | Applies to | Examples |
 |---|---|---|
@@ -120,14 +134,18 @@ You can introspect the whole surface at runtime:
 import sdv, { LEAGUES, WRAPPERS } from 'sportsdataverse';
 
 LEAGUES.map((l) => l.prefix);            // ['nba','nfl','nhl',...,'soccer','cricket','ufl',...]
-WRAPPERS.length;                          // 126 endpoint definitions
+WRAPPERS.length;                          // one definition per endpoint short
 Object.keys(sdv.nba).filter((k) => k.startsWith('espnNba'));  // every NBA wrapper
 ```
 
 ## Where to next
 
-- **[Tutorials](./tutorials/quickstart)** — guided, copy-pasteable walkthroughs.
-- **[Reference](./reference/)** — every `espn<League><Endpoint>` wrapper, by league.
+- **[Quickstart](./guides/quickstart)** — from an empty folder to a parsed table.
+- **[Sources & coverage](./sources)** — every upstream source, with auth, ownership and parity.
+- **[How this library is built](./architecture/)** — vendored vs JS-owned vs hand-written, per surface.
+- **[Guides](./guides)** and **[Tutorials](./tutorials/)** — recipes, and runnable scripts with frozen output.
+- **[Reference](./reference/)** — every `espn<League><Endpoint>` wrapper, by league, plus the native families.
+- **[Utilities](./utilities/)** — parsers, analytics, odds math, transforms and errors.
 - **[Playground](/playground)** — run live ESPN calls in your browser.
 - **[API (TypeDoc)](./api/)** — the full typed module surface.
 

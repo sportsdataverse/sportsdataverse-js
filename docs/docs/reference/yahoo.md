@@ -2,6 +2,7 @@
 title: yahoo
 sidebar_label: yahoo
 sidebar_position: 37
+toc_max_heading_level: 2
 ---
 
 :::danger Breaking in 4.0.0

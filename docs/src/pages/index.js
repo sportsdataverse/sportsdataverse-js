@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 // Small, codegen-derived coverage view-model (sport -> league prefixes +
 // provider namespace counts), built by tools/codegen/generate.mjs. Purpose-built
@@ -12,6 +11,7 @@ import styles from './styles.module.css';
 // sport/league/provider (then re-running codegen) updates this page with no hand
 // edit here.
 import coverage from '@site/src/generated/coverage.json';
+import SourcesCovered from '@site/src/components/SourcesCovered';
 
 // Every ESPN league is documented as WRITTEN source — its reference lives in a
 // per-league dir (`/docs/<prefix>/`). Sport-specific PROVIDERS (torvik,
@@ -19,58 +19,6 @@ import coverage from '@site/src/generated/coverage.json';
 // page. `isProvider` (from coverage.sports[].providers) distinguishes them.
 const chipDocPath = (p, isProvider) =>
   isProvider ? `/docs/reference/${p}` : `/docs/${p}/`;
-
-const FeatureList = [
-  {
-    title: "Men's College Basketball",
-    description: (
-      <>
-        It provides users with the capability to access the ESPN API’s
-        men's college basketball game play-by-plays,
-        box scores, and schedules.
-      </>
-    ),
-  },
-  {
-    title: "College Football",
-    description: (
-      <>
-        It provides users with the capability to access the ESPN API’s
-        college football game play-by-plays,
-        box scores, and schedules to analyze the data for themselves.
-      </>
-    ),
-  },
-  {
-    title: 'EPA and WPA',
-    description: (
-      <>
-        It provides users with the capability to access the cfbfastR team's
-        expected points added and win probability metrics.
-      </>
-    ),
-  },
-  {
-    title: 'NFL',
-    description: (
-      <>
-        It provides users with the capability to access the nflfastR team's
-        game play-by-plays, box scores, and schedules. Additionally, the
-        package provides users with functions to access the ESPN NFL API
-        endpoints during live game-play.
-      </>
-    ),
-  },
-  {
-    title: 'NHL',
-    description: (
-      <>
-        It provides users with the capability to access ESPN's NHL endpoints for
-        game play-by-plays, box scores, and schedules.
-      </>
-    ),
-  },
-];
 
 // Display labels for the sport groups (the ordering + grouping is already done
 // by the codegen and baked into coverage.json).
@@ -105,21 +53,6 @@ const providers = (coverage.providers || []).map(({ns, count}) => ({
   count,
 }));
 
-function Feature({ imageUrl, title, description }) {
-  const imgUrl = useBaseUrl(imageUrl);
-  return (
-    <div className={clsx('col col--4', styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
-        </div>
-      )}
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </div>
-  );
-}
-
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
@@ -128,16 +61,14 @@ function HomepageHeader() {
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Getting Started
+          <Link className="button button--secondary button--lg" to="/docs/intro">
+            Get started
           </Link>
-          &nbsp;&nbsp;
-          <Link
-            className="button button--outline button--secondary button--lg"
-            to="/playground">
-            Try the Playground
+          <Link className="button button--outline button--secondary button--lg" to="/docs/tutorials/">
+            Tutorials
+          </Link>
+          <Link className="button button--outline button--secondary button--lg" to="/playground">
+            Playground
           </Link>
         </div>
       </div>
@@ -209,13 +140,15 @@ export default function Home() {
       description="The SportsDataverse's Node.js Package for Sports Data.">
       <HomepageHeader />
       <main>
-        <section className={styles.features}>
+        <section className={styles.sources}>
           <div className="container">
-            <div className="row">
-              {FeatureList.map((props, idx) => (
-                <Feature key={idx} {...props} />
-              ))}
-            </div>
+            <h2 className="text--center">Sources covered</h2>
+            <p className="text--center">
+              Every upstream source the package wraps, with its auth, ownership and
+              coverage — all read from the generated{' '}
+              <Link to="/docs/sources">sources matrix</Link>.
+            </p>
+            <SourcesCovered />
           </div>
         </section>
         <CoverageSection />

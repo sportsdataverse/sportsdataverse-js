@@ -1,0 +1,195 @@
+---
+title: College football rankings and drives
+sidebar_label: 6. CFB rankings + drives
+sidebar_position: 6
+description: The ESPN CDN family — the pages espn.com renders — for the AP poll, and the football play-by-play shape (drives, drive_plays, scoring_plays).
+---
+
+import OpenInStackBlitz from '@site/src/components/OpenInStackBlitz';
+
+# College football: the AP poll and one game's drives
+
+**What you'll build:** the AP Top 25 from the rankings page, then a game's
+drive chart and scoring summary from its play-by-play page — three tables from
+the ESPN CDN family.
+
+## Sources used
+
+| Source | Host | Call |
+| --- | --- | --- |
+| ESPN CDN (core pages) | `cdn.espn.com/core/college-football/rankings?xhr=1&week=5` | `sdv.cfb.espnCfbCdnRankings({ week: 5 })` |
+| ESPN CDN (core pages) | `cdn.espn.com/core/college-football/playbyplay?xhr=1&gameId=401628551` | `sdv.cfb.espnCfbCdnPlaybyplay({ game_id: 401628551, section })` |
+
+Offline fixtures: `test/fixtures/espn/cdn/rankings_cfb.json.gz` (2024 week 5,
+five polls) and `playbyplay_cfb.json.gz` (Wisconsin at Oregon, 2024-11-16),
+both sdv-py captures trimmed to the keys the parsers read.
+
+## The CDN family
+
+`cdn.espn.com/core/<league>/<page>?xhr=1` returns the JSON that espn.com's own
+pages are built from. The package wraps five pages — `cdn_scoreboard`,
+`cdn_schedule`, `cdn_playbyplay`, `cdn_boxscore`, `cdn_rankings` — on the
+leagues ESPN serves them for (the `xhr=1` is sent for you). They are useful
+when the site API lags or omits something: the rankings page carries every
+poll at once, and the play-by-play page carries the same `gamepackageJSON` as
+`summary`, so `cdn_playbyplay` honours `section` exactly like `summary` does.
+
+## Rankings: one row per poll entry
+
+`cdn_rankings` flattens every poll into one frame — `poll_name` tells them
+apart (AP, Coaches, FCS, Division II and III here), and each row carries
+`rank`, `previous_rank`, `trend` (`+1`, `-1`, `-`), `points`,
+`first_place_votes`, `formatted_record` and the ESPN `team_id`. The script
+filters to `AP Top 25` and shows the top 10.
+
+## Football play-by-play is drive-shaped
+
+Basketball and hockey summaries ship a flat `plays[]`. Football ships
+`drives.previous[]`, each with its own `plays[]`, plus a top-level
+`scoringPlays[]`. The dispatcher exposes that as three sections:
+
+- `drives` — one row per drive: offense, start (`start_text`, `start_yard_line`),
+  `offensive_plays`, `yards`, `time_elapsed_display_value`, `display_result`.
+- `drive_plays` — every play unrolled into a long frame with `drive_id` and
+  `drive_sequence` join keys, plus `start_down`, `start_distance`,
+  `start_yards_to_endzone`, `stat_yardage`, `type_text`, `scoring_play`,
+  `is_turnover`, `is_penalty` and the play `text`.
+- `scoring_plays` — the scoring summary with `scoring_type_abbreviation`
+  (`TD`, `FG`, …), the clock, and the score after the play.
+
+The script's drive table takes the drive sequence from the tail of the drive
+id (ESPN builds it as `<game_id><n>`), and the scoring table shows a 16–13
+Oregon win that was 6–13 entering the fourth quarter.
+
+## The script
+
+<!-- inject:source:ex05 -->
+
+```js title="examples/05_cfb_rankings_and_pbp.mjs"
+// 05 — College football: AP poll + one game's drives and scoring plays.
+//
+// Shows: the ESPN CDN family (cdn.espn.com/core, the pages espn.com itself
+// renders): `cdn_rankings` gives one row per poll entry across every poll, and
+// `cdn_playbyplay` is a sectioned dispatcher like `summary` — football ships
+// drives[] + scoringPlays[] instead of flat plays[], so ask for `drives`,
+// `drive_plays` (plays unrolled with drive_id / drive_sequence) or `scoring_plays`.
+//
+// Sources: ESPN CDN — cdn.espn.com/core/college-football/rankings?xhr=1&week=5
+//                     cdn.espn.com/core/college-football/playbyplay?xhr=1&gameId=401628551
+// Offline fixtures: test/fixtures/espn/cdn/rankings_cfb.json.gz, playbyplay_cfb.json.gz
+// (sdv-py captures, 2024 week 5 / Wisconsin at Oregon 2024-11-16).
+
+import sdv from 'sportsdataverse';
+import { setup } from './_offline.mjs';
+import { printTable } from './_util.mjs';
+
+setup();
+
+const polls = await sdv.cfb.espnCfbCdnRankings({ week: 5, parsed: true });
+console.log(`${polls.length} poll entries across polls: ${[...new Set(polls.map((p) => p.poll_name))].join(' | ')}`);
+printTable(
+  polls.filter((p) => p.poll_name === 'AP Top 25'),
+  ['rank', 'team_abbreviation', 'team_display_name', 'formatted_record', 'points', 'first_place_votes', 'trend'],
+  10,
+  'AP Top 25'
+);
+
+const GAME_ID = 401628551;
+const drives = await sdv.cfb.espnCfbCdnPlaybyplay({ game_id: GAME_ID, parsed: true, section: 'drives' });
+const scoring = await sdv.cfb.espnCfbCdnPlaybyplay({ game_id: GAME_ID, parsed: true, section: 'scoring_plays' });
+const plays = await sdv.cfb.espnCfbCdnPlaybyplay({ game_id: GAME_ID, parsed: true, section: 'drive_plays' });
+console.log(`${drives.length} drives, ${plays.length} plays, ${scoring.length} scoring plays`);
+
+printTable(
+  drives.map((d) => ({
+    seq: d.id.slice(-2),
+    offense: d.team_abbreviation,
+    start: d.start_text,
+    plays: d.offensive_plays,
+    yards: d.yards,
+    time: d.time_elapsed_display_value,
+    result: d.display_result,
+  })),
+  ['seq', 'offense', 'start', 'plays', 'yards', 'time', 'result'],
+  8,
+  'Drives'
+);
+
+printTable(
+  scoring.map((s) => ({ q: s.period_number, clock: s.clock_display_value, team: s.team_abbreviation, type: s.scoring_type_abbreviation, score: `${s.away_score}-${s.home_score}`, text: s.text.trim() })),
+  ['q', 'clock', 'team', 'type', 'score', 'text'],
+  8,
+  'Scoring plays'
+);
+```
+
+<!-- /inject -->
+
+<OpenInStackBlitz src="examples/05_cfb_rankings_and_pbp.mjs" title="College football rankings and drives" />
+
+## Output
+
+<!-- inject:example:ex05 -->
+
+Output of `node examples/05_cfb_rankings_and_pbp.mjs` (offline, against the committed fixtures):
+
+```text
+217 poll entries across polls: AP Top 25 | AFCA Coaches Poll | FCS Coaches Poll | AFCA Division II Coaches Poll | AFCA Division III Coaches Poll
+
+## AP Top 25
+| rank | team_abbreviation | team_display_name | formatted_record | points | first_place_votes | trend |
+| ---- | ----------------- | ----------------- | ---------------- | ------ | ----------------- | ----- |
+| 1    | TEX               | Texas             | 4-0              | 1527   | 44                | -     |
+| 2    | UGA               | Georgia           | 3-0              | 1482   | 13                | -     |
+| 3    | OSU               | Ohio State        | 3-0              | 1432   | 5                 | -     |
+| 4    | ALA               | Alabama           | 3-0              | 1328   | 0                 | -     |
+| 5    | TENN              | Tennessee         | 4-0              | 1283   | 0                 | +1    |
+| 6    | MISS              | Ole Miss          | 4-0              | 1269   | 0                 | -1    |
+| 7    | MIA               | Miami             | 4-0              | 1139   | 0                 | +1    |
+| 8    | ORE               | Oregon            | 3-0              | 1073   | 0                 | +1    |
+| 9    | PSU               | Penn State        | 3-0              | 1051   | 0                 | +1    |
+| 10   | UTAH              | Utah              | 4-0              | 1037   | 0                 | +2    |
+(40 rows, first 10 shown)
+23 drives, 179 plays, 7 scoring plays
+
+## Drives
+| seq | offense | start  | plays | yards | time | result       |
+| --- | ------- | ------ | ----- | ----- | ---- | ------------ |
+| 11  | WIS     | WIS 25 | 3     | -4    | 1:23 | Punt         |
+| 12  | ORE     | ORE 40 | 11    | 43    | 4:36 | Field Goal   |
+| 13  | WIS     | WIS 26 | 3     | -4    | 0:40 | Punt         |
+| 14  | ORE     | ORE 27 | 6     | 64    | 2:22 | Interception |
+| 15  | WIS     | WIS 11 | 3     | 0     | 1:16 | Punt         |
+| 16  | ORE     | ORE 46 | 6     | 30    | 3:08 | Field Goal   |
+| 17  | WIS     | WIS 30 | 13    | 56    | 5:52 | Field Goal   |
+| 18  | ORE     | ORE 25 | 5     | 16    | 2:17 | Punt         |
+(23 rows, first 8 shown)
+
+## Scoring plays
+| q | clock | team | type | score | text                       |
+| - | ----- | ---- | ---- | ----- | -------------------------- |
+| 1 | 9:01  | ORE  | FG   | 3-0   | Atticus Sappington 35 Yd … |
+| 1 | 1:11  | ORE  | FG   | 6-0   | Atticus Sappington 42 Yd … |
+| 2 | 10:19 | WIS  | FG   | 6-3   | Nathanial Vakos 31 Yd Fie… |
+| 2 | 0:25  | WIS  | TD   | 6-10  | Will Pauling 2 Yd pass fr… |
+| 3 | 4:43  | WIS  | FG   | 6-13  | Nathanial Vakos 35 Yd Fie… |
+| 4 | 13:14 | ORE  | TD   | 13-13 | Jordan James 11 Yd Run (A… |
+| 4 | 2:36  | ORE  | FG   | 16-13 | Atticus Sappington 24 Yd … |
+(7 rows, all shown)
+```
+
+<!-- /inject -->
+
+## Variations
+
+- `sdv.nfl.espnNflCdnPlaybyplay` returns the same three sections for the NFL.
+- For enriched play-by-play (EPA, WPA, success rate, participants), use the
+  season releases instead: `sdv.cfb.loadCfbPbp({ seasons: [2024] })` — see
+  [release loaders](./release-loaders).
+- The site-API `summary` for a CFB game gives the same sections plus the box
+  score, officials and odds.
+
+## Next steps
+
+- **[Release-dataset loaders](./release-loaders)** — the enriched season pbp.
+- **[College basketball](./college-basketball-torvik)** — a non-ESPN ratings source.

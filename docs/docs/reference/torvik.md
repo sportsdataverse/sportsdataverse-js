@@ -2,6 +2,7 @@
 title: torvik
 sidebar_label: torvik
 sidebar_position: 39
+toc_max_heading_level: 2
 ---
 
 :::danger Breaking in 4.0.0

@@ -83,4 +83,40 @@ export const EXAMPLES = [
       '`sdv.nfl.nflStandings({ season: 2024, parsed: true })` — the native ' +
       'NFL.com Shield standings, one row per team (sample fixture).',
   },
+
+  // --- Runnable example scripts (examples/NN_*.mjs → docs/docs/tutorials/) ---
+  // family "script": the injector runs the script OFFLINE (examples/_offline.mjs
+  // serves the committed fixtures), freezes its stdout between
+  //   <!-- inject:example:ID -->  and its source between  <!-- inject:source:ID -->
+  // in the tutorial page (`dir: 'tutorials'`). `artifacts` are files the script
+  // writes to examples/out/, copied to docs/static/examples/ (drift-gated too).
+  // Scripts run with `--import ./_resolve.mjs` (resolves the package from this
+  // worktree's dist/; no install in examples/). The 9x sdvplot scripts skip
+  // themselves without a sibling sdvplot-js build; their committed output stays.
+  ...[
+    ['ex01', '01_nba_scoreboard_to_table.mjs', 'scoreboard-to-table.md'],
+    ['ex02', '02_nba_pbp_shots.mjs', 'nba-pbp-shots.mdx'],
+    ['ex03', '03_wnba_standings.mjs', 'wnba-standings.mdx'],
+    ['ex04', '04_nfl_schedule_and_standings.mjs', 'nfl-schedule-standings.mdx'],
+    ['ex05', '05_cfb_rankings_and_pbp.mjs', 'cfb-rankings-pbp.mdx'],
+    ['ex06', '06_college_basketball_torvik_and_espn.mjs', 'college-basketball-torvik.mdx'],
+    ['ex07', '07_mlb_statcast_and_stats_api.mjs', 'mlb-statcast-stats-api.mdx'],
+    ['ex08', '08_nhl_api_web_and_edge.mjs', 'nhl-api-web-edge.mdx'],
+    ['ex09', '09_hockeytech_pwhl_corsi.mjs', 'pwhl-hockeytech-corsi.mdx'],
+    ['ex10', '10_soccer_cross_league.mjs', 'soccer-cross-league.mdx'],
+    ['ex11', '11_providers_odds_math.mjs', 'odds-api-math.mdx'],
+    ['ex12', '12_release_loaders.mjs', 'release-loaders.mdx'],
+    ['ex13', '13_discover_and_utilities.mjs', 'cross-league.md'],
+    ['ex90', '90_sdvplot_shot_chart.mjs', 'sdvplot-shot-chart.mdx', ['shot_chart.svg']],
+    ['ex91', '91_sdvplot_standings_colors.mjs', 'sdvplot-standings-colors.mdx', ['standings.svg']],
+    ['ex92', '92_sdvplot_roster_table.mjs', 'sdvplot-roster-table.mdx', ['roster.html']],
+  ].map(([id, script, target, artifacts]) => ({
+    id,
+    family: 'script',
+    script,
+    dir: 'tutorials',
+    target,
+    caption: `Output of \`node examples/${script}\` (offline, against the committed fixtures):`,
+    ...(artifacts ? { artifacts } : {}),
+  })),
 ];

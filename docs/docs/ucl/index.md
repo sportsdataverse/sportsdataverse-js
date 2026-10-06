@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.ucl` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.ucl`
+
+<SourcesCovered league="ucl" />
+
 - **namespace:** `sdv.ucl`
 - **sport slug:** `soccer`
 - **league slug:** `uefa.champions`

@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.nfl` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.nfl`
+
+<SourcesCovered league="nfl" />
+
 - **namespace:** `sdv.nfl`
 - **sport slug:** `football`
 - **league slug:** `nfl`

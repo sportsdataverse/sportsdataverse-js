@@ -230,13 +230,47 @@ a.table-of-contents__link.table-of-contents__link--active {
   --ifm-color-primary-lightest: rgb(146, 224, 208); */
   --ifm-code-font-size: 95%;
 
-  --ifm-link-color: var(--ifm-color-primary-dark);
+  /* #3F72AF on white is 4.24:1 (below AA); the brand blue is 8.6:1 */
+  --ifm-link-color: var(--ifm-color-primary);
   --ifm-menu-color-active: var(--ifm-link-color);
   --ifm-navbar-link-hover-color: var(--ifm-link-color);
 }
 
+/* Dark mode: the brand blue (#014F84) is 1.9:1 on the dark background, so links,
+   active menu items and buttons get a lighter blue (7:1); the hero keeps the brand
+   blue explicitly below. */
 html[data-theme='dark'] {
-  --ifm-color-primary: #014F84;
+  --ifm-color-primary: #7ab3e5;
+  --ifm-color-primary-dark: #62a4df;
+  --ifm-color-primary-darker: #559cdb;
+  --ifm-color-primary-darkest: #3188d2;
+  --ifm-color-primary-light: #92c2ea;
+  --ifm-color-primary-lighter: #9fc9ed;
+  --ifm-color-primary-lightest: #c6dff4;
+  --ifm-link-color: var(--ifm-color-primary);
+}
+
+.hero--primary {
+  --ifm-hero-background-color: #014F84;
+  --ifm-hero-text-color: #fff;
+}
+
+/* Reference tables: an identifier in a code span never wraps one character per line
+   (the stats.nba.com "Method" column did at 1280px); the table scrolls instead. */
+.markdown table code {
+  white-space: nowrap;
+}
+
+/* A category's own index doc is also its link; hide the duplicate item
+   (front matter `sidebar_class_name: sidebar-category-index`). */
+.sidebar-category-index {
+  display: none;
+}
+
+/* The copyright line's author link is a bare <a> on the dark footer. */
+.footer--dark .footer__copyright a {
+  color: var(--ifm-footer-link-color);
+  text-decoration: underline;
 }
 
 .docusaurus-highlight-code-line {

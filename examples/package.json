@@ -1,0 +1,9 @@
+{
+  "name": "sportsdataverse-examples",
+  "private": true,
+  "type": "module",
+  "description": "Runnable examples for sportsdataverse (offline against committed fixtures by default; SDV_LIVE=1 for the network). Optional convenience install: `node --import ./_resolve.mjs NN_*.mjs` runs without it. The 9x scripts need a sibling sdvplot-js build (SDVPLOT_JS_DIR; see README.md).",
+  "dependencies": {
+    "sportsdataverse": "file:.."
+  }
+}

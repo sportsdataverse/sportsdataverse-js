@@ -128,13 +128,20 @@ function fmtCell(v) {
   return String(v);
 }
 
-function CompactTable({ rows }) {
+/**
+ * <CompactTable rows cols? max? /> — the tidy-rows table RunCell renders. Also
+ * exposed to live code blocks as <Table/> (docs/src/theme/ReactLiveScope).
+ *   rows  array of row objects
+ *   cols  columns to show (default: the first MAX_TABLE_COLS seen)
+ *   max   rows to show (default MAX_TABLE_ROWS)
+ */
+export function CompactTable({ rows, cols: pickCols, max = MAX_TABLE_ROWS }) {
   if (!Array.isArray(rows) || rows.length === 0) {
     return <div className={styles.empty}>0 rows (empty frame).</div>;
   }
   const allCols = [...new Set(rows.flatMap((r) => Object.keys(r)))];
-  const cols = allCols.slice(0, MAX_TABLE_COLS);
-  const shown = rows.slice(0, MAX_TABLE_ROWS);
+  const cols = Array.isArray(pickCols) && pickCols.length > 0 ? pickCols : allCols.slice(0, MAX_TABLE_COLS);
+  const shown = rows.slice(0, max);
   return (
     <>
       <div className={styles.tableWrap}>
@@ -163,8 +170,8 @@ function CompactTable({ rows }) {
       </div>
       <div className={styles.meta}>
         {rows.length} rows × {allCols.length} cols
-        {rows.length > MAX_TABLE_ROWS && ` — showing first ${MAX_TABLE_ROWS}`}
-        {allCols.length > MAX_TABLE_COLS && `, first ${MAX_TABLE_COLS} cols`}
+        {rows.length > max && ` — showing first ${max}`}
+        {cols.length < allCols.length && `, ${cols.length} cols`}
       </div>
     </>
   );

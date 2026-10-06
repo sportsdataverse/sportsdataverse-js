@@ -1,0 +1,187 @@
+---
+title: "MLB: Statcast and the Stats API"
+sidebar_label: 8. MLB Statcast + Stats API
+sidebar_position: 8
+description: A Baseball Savant CSV leaderboard and the MLB Stats API's linescore and boxscore for one game, behind one parsed contract.
+---
+
+import OpenInStackBlitz from '@site/src/components/OpenInStackBlitz';
+
+# MLB: a Statcast leaderboard and one game from the Stats API
+
+**What you'll build:** Baseball Savant's catcher-stance leaderboard, then a
+game's inning-by-inning linescore and both starting lineups from the official
+Stats API.
+
+## Sources used
+
+| Source | Host | Call |
+| --- | --- | --- |
+| Baseball Savant (Statcast) | `baseballsavant.mlb.com/leaderboard/catcher-stance?csv=true` | `sdv.mlb.mlbStatcastLeaderboardCatcherStance()` |
+| MLB Stats API | `statsapi.mlb.com/api/v1/game/745282/linescore` | `sdv.mlb.mlbLinescore({ game_pk: 745282 })` |
+| MLB Stats API | `statsapi.mlb.com/api/v1/game/745282/boxscore` | `sdv.mlb.mlbBoxscore({ game_pk: 745282 })` |
+
+Offline fixtures: `test/fixtures/py/mlb_statcast/leaderboard_catcher_stance.csv`,
+`test/fixtures/py/mlb/linescore_745282.json`, `boxscore_745282.json.gz` (sdv-py
+captures; game 745282 is Cardinals at Giants, 2024).
+
+## Two wire formats, one contract
+
+`sdv.mlb` carries two native families. The Statcast one (`mlbStatcast*`, ~43
+endpoints) wraps Baseball Savant, which answers with CSV for most leaderboards,
+JSON for the game feed, and HTML with an embedded data blob for two of them.
+Its runtime asks for `csv=true`, detects the content type, and the parser
+turns it into typed rows (`pitches` is a number, `knee_down_pct` a fraction).
+The Stats API family (`mlb*`, 100+ endpoints) is plain JSON. Both answer to
+`{ parsed: true }`.
+
+The leaderboard here is league-level (`name: League`, one row per season) —
+pass `min`, `season` or player filters as the endpoint's parameters to drill
+down; the reference page lists them.
+
+## Linescore and boxscore
+
+`mlbLinescore` is one row per inning with `home_*` / `away_*` runs, hits,
+errors and left-on-base. `mlbBoxscore` is one row per player on either roster
+(`team_side` = `home` / `away`) with the batting, pitching and fielding stat
+groups flattened under `stats_batting_*`, `stats_pitching_*`,
+`stats_fielding_*`. Only players who batted carry a `batting_order` — a string
+like `"100"`, `"200"` … for the starters and `"301"` for the first substitute
+in that slot — which is how the script separates lineups from the bench and
+keeps substitutions in order.
+
+Ids follow the package rule: `person_id`, `team_id` and `parent_team_id` are
+strings.
+
+## The script
+
+<!-- inject:source:ex07 -->
+
+```js title="examples/07_mlb_statcast_and_stats_api.mjs"
+// 07 — MLB: a Baseball Savant leaderboard + the Stats API for one game.
+//
+// Shows: two MLB sources with different wire formats behind one contract. Savant
+// leaderboards are CSV (the `mlb_statcast` runtime asks for csv=true and parses
+// it); the Stats API is JSON. `mlbLinescore` gives one row per inning and
+// `mlbBoxscore` one row per player with `stats_batting_*` / `stats_pitching_*`.
+//
+// Sources: Baseball Savant — baseballsavant.mlb.com/leaderboard/catcher-stance?csv=true
+//          MLB Stats API — statsapi.mlb.com/api/v1/game/745282/linescore, …/boxscore
+// Offline fixtures: test/fixtures/py/mlb_statcast/leaderboard_catcher_stance.csv,
+//                   test/fixtures/py/mlb/linescore_745282.json, boxscore_745282.json.gz
+// (sdv-py captures; game 745282 = Cardinals at Giants, 2024).
+
+import sdv from 'sportsdataverse';
+import { setup } from './_offline.mjs';
+import { printTable, round } from './_util.mjs';
+
+setup();
+
+const stance = await sdv.mlb.mlbStatcastLeaderboardCatcherStance({ parsed: true });
+printTable(
+  stance.map((r) => ({
+    name: r.name,
+    year: r.year,
+    pitches: r.pitches,
+    knee_down_pct: round(r.knee_down_pct, 3),
+    one_knee_framing_rv: round(r.one_knee_framing_rv, 1),
+    other_framing_rv: round(r.other_framing_rv, 1),
+    catching_rv: round(r.catching_rv, 1),
+  })),
+  ['name', 'year', 'pitches', 'knee_down_pct', 'one_knee_framing_rv', 'other_framing_rv', 'catching_rv'],
+  7,
+  'Statcast catcher-stance leaderboard (CSV → rows)'
+);
+
+const GAME_PK = 745282;
+const line = await sdv.mlb.mlbLinescore({ game_pk: GAME_PK, parsed: true });
+printTable(line, ['ordinal_num', 'away_runs', 'away_hits', 'away_errors', 'home_runs', 'home_hits', 'home_errors'], 9, `Linescore, game ${GAME_PK}`);
+
+const box = await sdv.mlb.mlbBoxscore({ game_pk: GAME_PK, parsed: true });
+const batters = box
+  .filter((p) => p.batting_order)
+  .map((p) => ({
+    side: p.team_side,
+    order: p.batting_order,
+    player: p.person_boxscore_name,
+    pos: p.position_abbreviation,
+    ab: p.stats_batting_at_bats,
+    h: p.stats_batting_hits,
+    hr: p.stats_batting_home_runs,
+    rbi: p.stats_batting_rbi,
+    bb: p.stats_batting_base_on_balls,
+    k: p.stats_batting_strike_outs,
+  }))
+  .sort((a, b) => a.side.localeCompare(b.side) || Number(a.order) - Number(b.order));
+printTable(batters, ['side', 'order', 'player', 'pos', 'ab', 'h', 'hr', 'rbi', 'bb', 'k'], 9, 'Starting lineups (boxscore rows with a batting order)');
+```
+
+<!-- /inject -->
+
+<OpenInStackBlitz src="examples/07_mlb_statcast_and_stats_api.mjs" title="MLB: Statcast and the Stats API" />
+
+## Output
+
+<!-- inject:example:ex07 -->
+
+Output of `node examples/07_mlb_statcast_and_stats_api.mjs` (offline, against the committed fixtures):
+
+```text
+
+## Statcast catcher-stance leaderboard (CSV → rows)
+| name   | year | pitches | knee_down_pct | one_knee_framing_rv | other_framing_rv | catching_rv |
+| ------ | ---- | ------- | ------------- | ------------------- | ---------------- | ----------- |
+| League | 2024 | 725642  | 0.902         | 33.5                | -29.7            | -1          |
+| League | 2023 | 733272  | 0.801         | 64.5                | -64.1            | -1.6        |
+| League | 2020 | 270600  | 0.231         | 2.1                 | 5.1              | 3.5         |
+| League | 2026 | 325219  | 0.956         | 3.2                 | -3               | -1.4        |
+| League | 2022 | 725695  | 0.593         | 62.1                | -67.9            | -8.5        |
+| League | 2025 | 727071  | 0.952         | 3                   | -4.6             | -1          |
+| League | 2021 | 728113  | 0.501         | 40.1                | -45.8            | -6.4        |
+(7 rows, all shown)
+
+## Linescore, game 745282
+| ordinal_num | away_runs | away_hits | away_errors | home_runs | home_hits | home_errors |
+| ----------- | --------- | --------- | ----------- | --------- | --------- | ----------- |
+| 1st         | 0         | 0         | 0           | 0         | 0         | 0           |
+| 2nd         | 0         | 1         | 0           | 0         | 1         | 0           |
+| 3rd         | 1         | 1         | 0           | 0         | 0         | 0           |
+| 4th         | 0         | 0         | 0           | 0         | 0         | 0           |
+| 5th         | 2         | 2         | 0           | 0         | 0         | 0           |
+| 6th         | 3         | 3         | 0           | 0         | 2         | 0           |
+| 7th         | 0         | 0         | 1           | 1         | 2         | 0           |
+| 8th         | 0         | 0         | 0           | 0         | 0         | 0           |
+| 9th         | 0         | 0         | 0           | 0         | 2         | 0           |
+(9 rows, all shown)
+
+## Starting lineups (boxscore rows with a batting order)
+| side | order | player      | pos | ab | h | hr | rbi | bb | k |
+| ---- | ----- | ----------- | --- | -- | - | -- | --- | -- | - |
+| away | 100   | Donovan     | 2B  | 3  | 2 | 1  | 2   | 2  | 0 |
+| away | 200   | Burleson    | 1B  | 4  | 2 | 0  | 3   | 1  | 1 |
+| away | 300   | Goldschmidt | DH  | 2  | 0 | 0  | 0   | 0  | 2 |
+| away | 301   | Baker       | DH  | 3  | 0 | 0  | 0   | 0  | 0 |
+| away | 400   | Nootbaar    | LF  | 4  | 0 | 0  | 0   | 0  | 2 |
+| away | 500   | Carpenter   | 1B  | 1  | 1 | 0  | 0   | 0  | 0 |
+| away | 501   | Siani       | CF  | 2  | 0 | 0  | 0   | 1  | 1 |
+| away | 600   | Walker, J   | RF  | 4  | 1 | 0  | 0   | 0  | 2 |
+| away | 700   | Saggese     | SS  | 3  | 0 | 0  | 0   | 1  | 1 |
+(23 rows, first 9 shown)
+```
+
+<!-- /inject -->
+
+## Variations
+
+- `sdv.mlb.mlbStatcastSearch({ season, pitch_type, … })` is the pitch-level
+  search; it chunks date ranges to stay under Savant's 25,000-row cap and
+  translates friendly filter names to Savant's query keys.
+- `sdv.mlb.mlbPlayByPlay({ game_pk })` gives every pitch of a game from the
+  Stats API; `sdv.mlb.mlbSchedule({ sport_id: 1, date })` finds `game_pk`s.
+- ESPN's MLB endpoints (`sdv.mlb.espnMlb*`) are there too when you want the
+  cross-league shape.
+
+## Next steps
+
+- **[NHL: api-web and EDGE](./nhl-api-web-edge)** — another native, keyless family.
+- **[The Odds API and market math](./odds-api-math)** — a keyed provider.

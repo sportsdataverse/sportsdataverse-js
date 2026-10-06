@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.bundesliga` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.bundesliga`
+
+<SourcesCovered league="bundesliga" />
+
 - **namespace:** `sdv.bundesliga`
 - **sport slug:** `soccer`
 - **league slug:** `ger.1`

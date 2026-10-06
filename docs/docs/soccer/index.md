@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.soccer` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.soccer`
+
+<SourcesCovered league="soccer" />
+
 - **namespace:** `sdv.soccer`
 - **sport slug:** `soccer`
 - **league slug:** `eng.1`

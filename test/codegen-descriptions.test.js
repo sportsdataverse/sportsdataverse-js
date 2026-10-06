@@ -163,7 +163,8 @@ describe('codegen: generated docs pages', () => {
   it('every generated page carries the visible provenance footer (no hidden MDX comment)', () => {
     const generated = walk(docsRoot).filter((p) => {
       const rel = p.slice(docsRoot.length + 1).replace(/\\/g, '/');
-      return !/^(guides|tutorials|api|architecture)\//.test(rel) && rel !== 'intro.md';
+      // the top-level pages (intro.mdx, sources.mdx) are hand-written
+      return !/^(guides|tutorials|api|architecture)\//.test(rel) && rel.includes('/');
     });
     generated.length.should.be.above(200);
     for (const page of generated) {

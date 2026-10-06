@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.ufl` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.ufl`
+
+<SourcesCovered league="ufl" />
+
 - **namespace:** `sdv.ufl`
 - **sport slug:** `football`
 - **league slug:** `ufl`

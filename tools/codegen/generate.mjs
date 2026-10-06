@@ -34,6 +34,7 @@ import { loadLoaderSchemas, loaderRowName } from "./loader-types.mjs";
 import { breakingAdmonition, breakingTable, loadBreaking } from "./breaking.mjs";
 import { registerUtilityDocs, utilitiesCoverage, utilitiesSidebar, loadUtilities, renderUtilitiesTs } from "./utilities.mjs";
 import { architectureSidebar, registerArchitectureDocs } from "./architecture.mjs";
+import { renderSourcesJson } from "./sources.mjs";
 import {
   CONTROL_TYPES,
   espnParamsName,
@@ -1305,6 +1306,7 @@ function renderStandaloneFlatPage(ns, position, flatWrappers) {
     `title: ${ns}\n` +
     `sidebar_label: ${ns}\n` +
     `sidebar_position: ${position}\n` +
+    `toc_max_heading_level: 2\n` +
     `---\n\n` +
     DOCS_NOTE +
     `\n# \`${ns}\` — native provider reference\n\n` +
@@ -1553,6 +1555,24 @@ function renderReferenceFamilyPage(league, group, groupRows, position, parserMap
   return body;
 }
 
+/**
+ * "Sources for sdv.<ns>" at the top of a league index: the SourcesCovered component
+ * filtered to that league (rows from docs/src/generated/sources.json). The import goes
+ * after the H1 (MDX allows imports anywhere at top level); the section follows it.
+ */
+function withSourcesSection(page, ns) {
+  const h1 = /^# .*\n/m.exec(page);
+  if (!h1) throw new Error(`sources: no H1 on the ${ns} index page`);
+  const at = h1.index + h1[0].length;
+  return (
+    page.slice(0, at) +
+    `\nimport SourcesCovered from '@site/src/components/SourcesCovered';\n\n` +
+    `## Sources for \`sdv.${ns}\`\n\n` +
+    `<SourcesCovered league="${ns}" />\n` +
+    page.slice(at)
+  );
+}
+
 /** Render the per-league landing page (`<prefix>/index.md`). */
 function renderWrittenLeagueIndex(league, wrappers, groups) {
   const applicable = wrappersForLeague(league, wrappers);
@@ -1637,7 +1657,7 @@ function registerWrittenLeagueDocs(outputs, league, wrappers, flatWrappers, pars
     outputs[join(refDir, "loaders.md")] = renderLoadersPage(league.prefix, loaders, 50, LOADER_SCHEMAS, describeLoader);
   }
 
-  outputs[join(leagueDir, "index.md")] = renderWrittenLeagueIndex(league, wrappers, indexGroups);
+  outputs[join(leagueDir, "index.md")] = withSourcesSection(renderWrittenLeagueIndex(league, wrappers, indexGroups), league.prefix);
   outputs[join(leagueDir, "_category_.json")] =
     JSON.stringify(
       {
@@ -1677,6 +1697,8 @@ function renderWrittenLeagueNativePage(league, flatWrappers, position) {
     `title: Native API\n` +
     `sidebar_label: Native API\n` +
     `sidebar_position: ${position}\n` +
+    // one h3 per endpoint (100+ on stats.nba.com): keep the right rail to the family h2s
+    `toc_max_heading_level: 2\n` +
     `---\n\n` +
     DOCS_NOTE +
     `\n# \`sdv.${league.prefix}\` — Native (non-ESPN) APIs\n\n` +
@@ -1851,11 +1873,17 @@ function renderReferenceIndex(leagues, wrappers, flatWrappers = [], standaloneNs
     `Every endpoint also accepts \`{ parsed: true }\` to return tidy rows instead ` +
     `of raw JSON — see [**ESPN parsed returns**](./espn-parsed-returns) for the ` +
     `column reference (116 endpoints across 22 parsers).\n\n` +
-    `Some leagues additionally ship **native (non-ESPN) API** wrappers — the MLB ` +
-    `Stats API + Baseball Savant/Statcast (\`mlb\`), the four NHL native APIs ` +
-    `(\`nhl\`), and the NFL.com Shield API (\`nfl\`). They're listed in the ` +
-    `**Native API** sections of each league page; the \`native\` column below ` +
-    `counts them.\n\n` +
+    `Some leagues additionally ship **native (non-ESPN) API** wrappers — ` +
+    leagues
+      .filter((l) => flatWrappersForLeague(l.prefix, flatWrappers).length)
+      .map((l) => {
+        const fams = FLAT_API_FILES.filter((api) => FLAT_API_NAMESPACES[api] === l.prefix).map((api) => FLAT_API_META[api]?.label ?? api);
+        return `${fams.join(' + ')} (\`${l.prefix}\`)`;
+      })
+      .join(', ') +
+    `. They're listed in the **Native API** sections of each league page; the ` +
+    `\`native\` column below counts them. The [Sources & coverage](/docs/sources) page ` +
+    `lists every upstream source with its auth, ownership and parity.\n\n` +
     `| League | sport | ESPN slug | scopes | wrappers | native |\n` +
     `|---|---|---|---|---:|---:|\n`;
   for (const l of leagues) {
@@ -2563,7 +2591,7 @@ outputs[join(generatedDir, "namespaces.ts")] = renderNamespacesTs(
 loaderOnly.forEach(([ns], i) => {
   const dir = join(referenceRootDir, ns);
   const loaders = releaseLoaders.get(ns);
-  outputs[join(dir, "index.md")] = renderLoaderOnlyIndex(ns, loaders, LOADER_ONLY[ns].note);
+  outputs[join(dir, "index.md")] = withSourcesSection(renderLoaderOnlyIndex(ns, loaders, LOADER_ONLY[ns].note), ns);
   outputs[join(dir, "_category_.json")] =
     JSON.stringify(
       {
@@ -2836,6 +2864,20 @@ outputs[join(docsGeneratedDir, "description_coverage.json")] =
     null,
     2
   ) + "\n";
+// Sources-first view-model (tools/codegen/sources.mjs): one row per upstream source.
+outputs[join(docsGeneratedDir, "sources.json")] = renderSourcesJson({
+  leagues,
+  wrappers,
+  flatWrappers,
+  namespaces: FLAT_API_NAMESPACES,
+  hosts: FLAT_FAMILY_HOSTS,
+  meta: FLAT_API_META,
+  isVendored: isVendoredFamily,
+  loaders: releaseLoaders,
+  parity: PARITY_COVERAGE.families ?? {},
+  descriptions: descriptionCoverage().families ?? {},
+  espnHosts: hosts,
+});
 // coverage.json gains the utilities block (homepage + tests).
 outputs[join(docsGeneratedDir, "coverage.json")] = outputs[join(docsGeneratedDir, "coverage.json")].replace(
   /\n}\n$/,

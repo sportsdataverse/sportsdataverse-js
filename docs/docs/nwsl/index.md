@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.nwsl` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.nwsl`
+
+<SourcesCovered league="nwsl" />
+
 - **namespace:** `sdv.nwsl`
 - **sport slug:** `soccer`
 - **league slug:** `usa.nwsl`

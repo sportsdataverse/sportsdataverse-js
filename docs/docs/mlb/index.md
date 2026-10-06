@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.mlb` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.mlb`
+
+<SourcesCovered league="mlb" />
+
 - **namespace:** `sdv.mlb`
 - **sport slug:** `baseball`
 - **league slug:** `mlb`

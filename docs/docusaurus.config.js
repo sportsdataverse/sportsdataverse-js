@@ -26,6 +26,17 @@ module.exports = {
   organizationName: 'SportsDataverse', // Usually your GitHub org/user name.
   projectName: 'sportsdataverse', // Usually your repo name.
   plugins: [
+    // Old URLs that moved: the numbered guide stem Docusaurus strips, and the
+    // tutorials' duplicate quickstart (the guide is the one quickstart).
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          { from: '/docs/guides/01-quickstart', to: '/docs/guides/quickstart' },
+          { from: '/docs/tutorials/quickstart', to: '/docs/guides/quickstart' },
+        ],
+      },
+    ],
     // Generate the TypeScript API reference (TypeDoc -> Markdown) into the docs
     // content tree at build time, so it ships with the deployed site. The old
     // root `npm run docs` HTML output was local-only and never reached the web.
@@ -89,8 +100,50 @@ module.exports = {
         sidebar: { pretty: true },
       },
     ],
+    // llms.txt (llmstxt.org): a link index + a full-content bundle of the docs
+    // for LLM readers, plus a Markdown copy of every page next to its HTML
+    // route (`<route>.md`). Generated from the source MDX at postBuild. The
+    // TypeDoc API tree (`docs/api/**`, ~1k generated pages) is left out of
+    // all three: the codegen reference pages already cover every wrapper.
+    // The dir globs are deliberately permissive so `utilities/` and
+    // `architecture/` are picked up the moment they exist.
+    [
+      'docusaurus-plugin-llms',
+      {
+        title: 'sportsdataverse (sportsdataverse-js) — Node.js sports data client',
+        description:
+          'Documentation for the sportsdataverse npm package: typed wrappers over ' +
+          'ESPN (every league), MLB Stats API, Baseball Savant / Statcast, NHL ' +
+          'api-web + EDGE + Stats REST + Records, NFL.com, NFL Pro, PFF, HockeyTech ' +
+          '(PWHL + minor/junior leagues), BartTorvik, KenPom, The Odds API, CBS, Fox, ' +
+          'Yahoo, 247Sports / On3, MLS / NWSL / ASA, plus SportsDataverse release ' +
+          'loaders. Every wrapper returns the raw payload or tidy rows (`parsed: true`).',
+        generateLLMsTxt: true,
+        generateLLMsFullTxt: true,
+        generateMarkdownFiles: true,
+        ignoreFiles: ['api/**'],
+        includeOrder: [
+          'intro.mdx',
+          'sources.mdx',
+          'guides/**',
+          'tutorials/**',
+          'reference/**',
+          'utilities/**',
+          'architecture/**',
+          '*/index.md',
+          '*/reference/**',
+        ],
+        includeUnmatchedLast: true,
+        excludeImports: true,
+        removeDuplicateHeadings: true,
+      },
+    ],
   ],
   themeConfig: {
+    // Live-editable ```jsx live``` blocks (react-live). The scope a block sees
+    // is docs/src/theme/ReactLiveScope — the parsers bundle, the proxy fetch,
+    // the URL resolver and a <Table/>; see docs/docs/guides/live-blocks.md.
+    liveCodeBlock: { playgroundPosition: 'bottom' },
     docs: {
       sidebar: {
         hideable: true,
@@ -124,7 +177,7 @@ module.exports = {
         },
         {
           label: 'Tutorials',
-          to: '/docs/tutorials/quickstart',
+          to: '/docs/tutorials/',
           position: 'left',
         },
         {
@@ -309,7 +362,7 @@ module.exports = {
             },
             {
               label: 'Tutorials',
-              to: '/docs/tutorials/quickstart',
+              to: '/docs/tutorials/',
             },
             {
               label: 'Playground',
@@ -368,8 +421,15 @@ module.exports = {
       {
         hashed: true,
         indexBlog: false,
+        // Keep the TypeDoc API tree (docs/api/**, ~1k pages of generated
+        // signatures) out of the local index: it dwarfed the hand-written +
+        // codegen reference and every query surfaced TypeDoc noise first.
+        // The pages stay built, linked and in the sitemap.
+        ignoreFiles: [/^docs\/api(\/|$)/],
       },
     ],
+    // ```jsx live``` code blocks (react-live); scope in src/theme/ReactLiveScope.
+    '@docusaurus/theme-live-codeblock',
   ],
   presets: [
     [

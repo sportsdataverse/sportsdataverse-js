@@ -20,3 +20,14 @@ sdv-py@81eb7e7060 `tests/fixtures/espn/cdn/*.json`, gzipped verbatim (`gzip -9 -
 | `scoreboard_nba` | `nba/scoreboard?date=20250115` (11 games) |
 | `scoreboard_epl` | `eng.1/scoreboard?date=20250201` (6 games) |
 | `rankings_cfb` | `college-football/rankings?week=5&year=2024&seasontype=2` (5 polls) |
+
+## standings_wnba_2025.json / scoreboard_nfl_2024_w1.json / standings_nfl_2024.json / standings_laliga_2024.json
+
+Captured live 2026-10-06 (verbatim, untrimmed) for the runnable examples (`examples/`, served by `examples/_offline.mjs`) and the tutorial output injector.
+
+| File | Request |
+|---|---|
+| `standings_wnba_2025.json` | `GET https://site.api.espn.com/apis/v2/sports/basketball/wnba/standings?season=2025` (2 conferences, 13 teams) |
+| `scoreboard_nfl_2024_w1.json` | `GET https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=2024&week=1&seasontype=2&limit=500` (16 games) |
+| `standings_nfl_2024.json` | `GET https://site.api.espn.com/apis/v2/sports/football/nfl/standings?season=2024` (2 conferences, 32 teams) |
+| `standings_laliga_2024.json` | `GET https://site.api.espn.com/apis/v2/sports/soccer/esp.1/standings?season=2024` (20 teams) |

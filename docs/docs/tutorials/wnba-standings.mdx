@@ -1,0 +1,153 @@
+---
+title: WNBA standings
+sidebar_label: 4. WNBA standings
+sidebar_position: 4
+description: The ESPN standings endpoint parsed to one row per team, split by conference, with a derived Pythagorean expectation.
+---
+
+import OpenInStackBlitz from '@site/src/components/OpenInStackBlitz';
+
+# WNBA standings by conference
+
+**What you'll build:** two conference tables from one standings call — record,
+win percentage, point differential, playoff seed, and a Pythagorean expectation
+computed from points for and against.
+
+## Sources used
+
+| Source | Host | Call |
+| --- | --- | --- |
+| ESPN Site API (v2 standings) | `site.api.espn.com/apis/v2/sports/basketball/wnba/standings?season=2025` | `sdv.wnba.espnWnbaStandings({ season: 2025 })` |
+
+Offline fixture: `test/fixtures/espn/standings_wnba_2025.json` (captured
+2026-10-06; 13 teams, two conferences).
+
+## The standings payload
+
+ESPN's standings come back as a tree: `children[]` (one per conference or
+division) each holding `standings.entries[]`, and each entry holding a `team`
+object plus a `stats[]` list of `{ name, value, displayValue }` records. The
+parser flattens that to **one row per team** with the group name carried along
+(`group_name`, `group_abbreviation`) and every stat promoted to its own column
+by `name`: `wins`, `losses`, `win_percent`, `games_behind`, `points_for`,
+`points_against`, `differential`, `streak`, `playoff_seed`, `clincher`, plus the
+record-string stats `overall`, `home`, `road`, `vs_conf`, `last_ten_games`.
+
+Because the stats are keyed by name rather than position, the same parser
+serves every league — the [NFL tutorial](./nfl-schedule-standings) uses it for
+32 teams with `ties` and `division_record` appearing automatically.
+
+## Numbers, not strings
+
+Unlike the scoreboard's scores, standings stats arrive as numbers
+(`value`), so `wins`, `points_for` and `win_percent` need no casting. The
+script uses that directly in the Pythagorean formula with the basketball
+exponent 13.91 (Morey's number), which is a quick way to see which records are
+"earned": a team whose `pyth` sits well above its `win_pct` has been unlucky in
+close games.
+
+`streak` is signed (positive = winning streak), and `differential` is per
+game while `point_differential` is the season total.
+
+## The script
+
+<!-- inject:source:ex03 -->
+
+```js title="examples/03_wnba_standings.mjs"
+// 03 — WNBA standings → conference tables.
+//
+// Shows: the ESPN `standings` endpoint parsed to one row per team, grouped by
+// conference, plus a derived Pythagorean-expectation column. The same call works
+// on every league namespace (sdv.nba / sdv.nfl / sdv.nhl / … .espn<Lg>Standings).
+//
+// Sources: ESPN Site API v2 — site.api.espn.com/apis/v2/sports/basketball/wnba/standings?season=2025
+// Offline fixture: test/fixtures/espn/standings_wnba_2025.json (captured 2026-10-06).
+
+import sdv from 'sportsdataverse';
+import { setup } from './_offline.mjs';
+import { printTable, round } from './_util.mjs';
+
+setup();
+
+const rows = await sdv.wnba.espnWnbaStandings({ season: 2025, parsed: true });
+console.log(`${rows.length} teams across ${new Set(rows.map((r) => r.group_name)).size} groups`);
+
+const table = rows.map((r) => {
+  const pf = r.points_for;
+  const pa = r.points_against;
+  return {
+    conf: r.group_abbreviation,
+    team: r.team_abbreviation,
+    w: r.wins,
+    l: r.losses,
+    win_pct: round(r.win_percent, 3),
+    diff: round(r.differential, 1),
+    pyth: round(pf ** 13.91 / (pf ** 13.91 + pa ** 13.91), 3), // basketball exponent
+    streak: r.streak,
+    seed: r.playoff_seed,
+  };
+});
+
+for (const conf of ['E', 'W']) {
+  printTable(
+    table.filter((t) => t.conf === conf).sort((a, b) => b.win_pct - a.win_pct),
+    ['team', 'w', 'l', 'win_pct', 'diff', 'pyth', 'streak', 'seed'],
+    8,
+    `${conf === 'E' ? 'Eastern' : 'Western'} Conference`
+  );
+}
+```
+
+<!-- /inject -->
+
+<OpenInStackBlitz src="examples/03_wnba_standings.mjs" title="WNBA standings" />
+
+## Output
+
+<!-- inject:example:ex03 -->
+
+Output of `node examples/03_wnba_standings.mjs` (offline, against the committed fixtures):
+
+```text
+13 teams across 2 groups
+
+## Eastern Conference
+| team | w  | l  | win_pct | diff  | pyth  | streak | seed |
+| ---- | -- | -- | ------- | ----- | ----- | ------ | ---- |
+| ATL  | 30 | 14 | 0.682   | 7.6   | 0.788 | 6      | 1    |
+| NY   | 27 | 17 | 0.614   | 4.1   | 0.665 | 3      | 2    |
+| IND  | 24 | 20 | 0.545   | 3.4   | 0.637 | 3      | 3    |
+| WSH  | 16 | 28 | 0.364   | -4.5  | 0.315 | -10    | 4    |
+| CON  | 11 | 33 | 0.25    | -10.2 | 0.149 | -2     | 5    |
+| CHI  | 10 | 34 | 0.227   | -10   | 0.15  | -4     | 6    |
+(6 rows, all shown)
+
+## Western Conference
+| team | w  | l  | win_pct | diff | pyth  | streak | seed |
+| ---- | -- | -- | ------- | ---- | ----- | ------ | ---- |
+| MIN  | 34 | 10 | 0.773   | 9.4  | 0.833 | 1      | 1    |
+| LV   | 30 | 14 | 0.682   | 2.9  | 0.621 | 16     | 2    |
+| PHX  | 27 | 17 | 0.614   | 2.7  | 0.613 | -3     | 3    |
+| SEA  | 23 | 21 | 0.523   | 2    | 0.587 | 1      | 4    |
+| GS   | 23 | 21 | 0.523   | 1.4  | 0.562 | -3     | 5    |
+| LA   | 21 | 23 | 0.477   | -2.6 | 0.398 | -1     | 6    |
+| DAL  | 10 | 34 | 0.227   | -6.3 | 0.263 | 1      | 7    |
+(7 rows, all shown)
+```
+
+<!-- /inject -->
+
+## Variations
+
+- `sdv.nba.espnNbaStandings`, `sdv.nhl.espnNhlStandings`, `sdv.mlb.espnMlbStandings`
+  and the college leagues all return the same shape; group names become
+  divisions or conferences as the league defines them.
+- The `season` parameter selects the season; omit it for the current one.
+- For a non-ESPN view of the same table, `sdv.wnba.wnba_stats_leaguestandingsv3`
+  wraps stats.wnba.com (it needs the impersonating transport; see the
+  reference page).
+
+## Next steps
+
+- **[Standings bars in team colours](./sdvplot-standings-colors)** — draw this table.
+- **[NFL schedule and standings](./nfl-schedule-standings)** — join standings to a schedule.

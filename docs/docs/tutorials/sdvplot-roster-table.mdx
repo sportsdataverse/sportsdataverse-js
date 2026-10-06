@@ -1,0 +1,170 @@
+---
+title: Roster table with headshots
+sidebar_label: 16. Roster table (sdvplot)
+sidebar_position: 16
+description: An ESPN roster rendered as a branded HTML table — headshotUrl per player, logoUrl and teamColors for the header — with no image fetching.
+---
+
+# A roster table with headshots and the team logo
+
+**What you'll build:** a self-contained HTML page listing a team's roster with
+each player's headshot, the team logo in the heading, and the header row in
+the team's primary colour with sdvplot choosing a readable text colour.
+Written to `examples/out/roster.html`
+([open the rendered page](pathname:///examples/roster.html)).
+
+## Sources used
+
+| Source | Host | Call |
+| --- | --- | --- |
+| ESPN Site API v2 | `site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/13/roster` | `sdv.nba.espnNbaTeamRoster({ team_id: 13 })` |
+| `@sportsdataverse/sdvplot` | (library; bundled index, no network) | `headshotUrl(athleteId, 'nba')`, `logoUrl(13, 'nba')`, `teamColors`, `onColor` |
+
+Offline fixture: `test/fixtures/espn/team_roster_nba.json` (the Lakers).
+sdvplot-js is unpublished — see the [shot chart tutorial](./sdvplot-shot-chart)
+for how to build and link it.
+
+## The roster frame
+
+`team_roster` parses to one row per athlete with the identity columns
+(`id`, `display_name`, `short_name`, `jersey`, `position_abbreviation`),
+biographical ones (`age`, `date_of_birth`, `display_height`, `display_weight`,
+`birth_place_city`, `college_name`, `experience_years`, `debut_year`), a
+`headshot_href` ESPN supplies, status, and — for the NBA — the contract block
+flattened to `contract_*` columns. The athlete `id` is the ESPN id as a string.
+
+## Headshots by id
+
+`headshotUrl(playerId, league)` builds ESPN's combiner URL for the leagues
+that use ESPN ids (`nfl`, `nba`, `wnba`, `mlb`, `nhl`, `cfb`, `mbb`, `wbb`);
+`nbaHeadshotUrl`, `mlbHeadshotUrl` and `nhlHeadshotUrl` take those leagues'
+own ids instead, and `idSystem: 'gsis'` handles NFL GSIS ids after
+`loadGsis()`. It is a synchronous string builder: you can call it for a
+thousand rows without touching the network, and the roster's own
+`headshot_href` is there if you would rather trust ESPN's.
+
+`teamColors('nba', [13], { which: 'primary' })` and `logoUrl(13, 'nba')`
+resolve the ESPN team id (sdvplot's canonical `team_id` for the NBA), and
+`onColor(primary)` picks `#ffffff` or `#000000` for text on that colour — the
+script uses it for the table header.
+
+## The page
+
+The HTML is a template string: a `<style>` block that puts the primary colour
+on `h1` and `th`, an `<h1>` with the logo, and one `<tr>` per player with the
+headshot in a rounded `<img>`. Every value passes through a four-character
+escape (`&`, `<`, `"`) because player names and places are provider data.
+Open `examples/out/roster.html` in a browser to see the images load.
+
+## The script
+
+<!-- inject:source:ex92 -->
+
+```js title="examples/92_sdvplot_roster_table.mjs"
+// 92 — Roster table: ESPN NBA roster → an HTML table with headshots and the logo.
+//
+// Shows: @sportsdataverse/sdvplot `headshotUrl(playerId, league)` (ESPN ids by
+// default) and `logoUrl` / `teamColors` to brand a plain HTML table. Written to
+// examples/out/roster.html. URLs are strings — nothing is fetched, so this runs
+// offline. The packages are UNPUBLISHED (see README.md).
+//
+// Sources: ESPN Site API v2 — site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/13/roster
+// Offline fixture: test/fixtures/espn/team_roster_nba.json (Lakers).
+
+import { mkdirSync, writeFileSync } from 'node:fs';
+import sdv from 'sportsdataverse';
+import { headshotUrl, logoUrl, teamColors, onColor } from '@sportsdataverse/sdvplot';
+import { setup } from './_offline.mjs';
+import { printTable } from './_util.mjs';
+
+setup();
+
+const TEAM_ID = 13;
+const roster = await sdv.nba.espnNbaTeamRoster({ team_id: TEAM_ID, parsed: true });
+const [primary] = await teamColors('nba', [TEAM_ID], { which: 'primary' });
+const logo = await logoUrl(TEAM_ID, 'nba');
+
+const players = roster
+  .map((p) => ({
+    jersey: p.jersey,
+    player: p.display_name,
+    pos: p.position_abbreviation,
+    height: p.display_height,
+    weight: p.display_weight,
+    age: p.age,
+    exp: p.experience_years,
+    headshot: headshotUrl(p.id, 'nba'),
+  }))
+  .sort((a, b) => Number(a.jersey) - Number(b.jersey));
+
+printTable(players, ['jersey', 'player', 'pos', 'height', 'weight', 'age', 'exp', 'headshot'], 6, `Roster, team ${TEAM_ID} (headshotUrl from the ESPN athlete id)`);
+
+const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+const html = `<!doctype html>
+<meta charset="utf-8">
+<title>Roster ${TEAM_ID}</title>
+<style>
+  body { font: 14px/1.4 system-ui, sans-serif; margin: 24px; }
+  h1 { display: flex; align-items: center; gap: 12px; color: ${primary}; }
+  h1 img { height: 48px; }
+  table { border-collapse: collapse; }
+  th { background: ${primary}; color: ${onColor(primary)}; text-align: left; padding: 6px 10px; }
+  td { padding: 4px 10px; border-bottom: 1px solid #ddd; }
+  td img { height: 40px; width: 40px; object-fit: cover; border-radius: 50%; background: #eee; }
+</style>
+<h1><img src="${esc(logo)}" alt=""> Team ${TEAM_ID} roster</h1>
+<table>
+<tr><th></th><th>#</th><th>Player</th><th>Pos</th><th>Ht</th><th>Wt</th><th>Age</th><th>Exp</th></tr>
+${players.map((p) => `<tr><td><img src="${esc(p.headshot)}" alt=""></td><td>${esc(p.jersey)}</td><td>${esc(p.player)}</td><td>${esc(p.pos)}</td><td>${esc(p.height)}</td><td>${esc(p.weight)}</td><td>${esc(p.age)}</td><td>${esc(p.exp)}</td></tr>`).join('\n')}
+</table>
+`;
+
+mkdirSync(new URL('./out/', import.meta.url), { recursive: true });
+writeFileSync(new URL('./out/roster.html', import.meta.url), html);
+console.log(`wrote examples/out/roster.html (${players.length} players, primary colour ${primary})`);
+```
+
+<!-- /inject -->
+
+:::note[No "Open in StackBlitz" for this one]
+This script imports `@sportsdataverse/sdvplot` / `@sportsdataverse/sporty`, which are not published to npm yet, so a sandbox cannot install them. Build sdvplot-js locally as described above and run it from `examples/`.
+:::
+
+## Output
+
+<!-- inject:example:ex92 -->
+
+Output of `node examples/92_sdvplot_roster_table.mjs` (offline, against the committed fixtures):
+
+```text
+
+## Roster, team 13 (headshotUrl from the ESPN athlete id)
+| jersey | player            | pos | height | weight  | age | exp | headshot                   |
+| ------ | ----------------- | --- | ------ | ------- | --- | --- | -------------------------- |
+| 1      | Adou Thiero       | F   | 6' 8"  | 220 lbs | 22  | 0   | https://a.espncdn.com/com… |
+| 2      | Jarred Vanderbilt | F   | 6' 8"  | 214 lbs | 27  | 7   | https://a.espncdn.com/com… |
+| 4      | Dalton Knecht     | F   | 6' 6"  | 215 lbs | 25  | 1   | https://a.espncdn.com/com… |
+| 5      | Deandre Ayton     | C   | 7' 0"  | 252 lbs | 27  | 7   | https://a.espncdn.com/com… |
+| 9      | Bronny James      | G   | 6' 2"  | 210 lbs | 21  | 1   | https://a.espncdn.com/com… |
+| 10     | Luke Kennard      | G   | 6' 5"  | 206 lbs | 29  | 8   | https://a.espncdn.com/com… |
+(17 rows, first 6 shown)
+wrote examples/out/roster.html (17 players, primary colour #552583)
+```
+
+<!-- /inject -->
+
+## Variations
+
+- `sdv.nfl.espnNflTeamRoster({ team_id })` with `headshotUrl(id, 'nfl')` is
+  the same page for an NFL team; `sdv.mlb.espnMlbTeamRoster` and
+  `mlbHeadshotUrl(person_id)` pair ESPN's roster with MLBAM headshots when you
+  join through the Stats API.
+- `espnNbaTeamRoster({ team_id, season })` returns a past roster; the
+  headshot URLs do not change with the season.
+- The React subpath (`@sportsdataverse/sdvplot/react`) exports a `Headshot`
+  component that handles the fallback image.
+
+## Next steps
+
+- **[Shot chart with sdvplot + sporty](./sdvplot-shot-chart)** — the court surface.
+- **[The cross-league surface](./cross-league)** — `findTeam` to turn a name into the `team_id` you need here.

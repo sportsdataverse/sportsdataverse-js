@@ -1,0 +1,164 @@
+/* Sources grid: responsive cards, infima tokens only (dark mode follows the theme). */
+.wrap {
+  margin: 0 0 1.5rem;
+}
+
+.totals {
+  margin: 0 0 1rem;
+  color: var(--ifm-color-emphasis-800);
+  font-size: 0.95rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 0.75rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-card-border-radius, 8px);
+  background: var(--ifm-card-background-color);
+}
+
+.cardDeprecated {
+  border-style: dashed;
+  opacity: 0.85;
+}
+
+.cardHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 0.5rem;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ifm-font-color-base);
+}
+
+.title:hover {
+  color: var(--ifm-link-color);
+  text-decoration: none;
+}
+
+.badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-emphasis-800);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.badge_success {
+  background: var(--ifm-color-success-contrast-background);
+  color: var(--ifm-color-success-contrast-foreground);
+  border-color: var(--ifm-color-success-dark);
+}
+
+.badge_warning {
+  background: var(--ifm-color-warning-contrast-background);
+  color: var(--ifm-color-warning-contrast-foreground);
+  border-color: var(--ifm-color-warning-dark);
+}
+
+.badge_danger {
+  background: var(--ifm-color-danger-contrast-background);
+  color: var(--ifm-color-danger-contrast-foreground);
+  border-color: var(--ifm-color-danger-dark);
+}
+
+.badge_info {
+  background: var(--ifm-color-info-contrast-background);
+  color: var(--ifm-color-info-contrast-foreground);
+  border-color: var(--ifm-color-info-dark);
+}
+
+.host {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.families {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.family {
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  background: var(--ifm-color-emphasis-100);
+  font-size: 0.8rem;
+  color: var(--ifm-font-color-base);
+}
+
+.family b {
+  margin-left: 0.2rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem 0.75rem;
+  margin: 0.25rem 0 0;
+}
+
+.stats > div {
+  min-width: 0;
+}
+
+.stats dt {
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.stats dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.note {
+  margin: 0.25rem 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.legend p {
+  margin-bottom: 0.75rem;
+}
+
+.legendItem {
+  display: inline-block;
+  margin: 0.2rem 0.75rem 0.2rem 0;
+}
