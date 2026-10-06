@@ -39,7 +39,8 @@ try {
     // The fetch worked and there is nothing there: HTTP 404, or ESPN's
     // 200 response with a { code: 404 } body.
   } else if (err instanceof AssetFetchError) {
-    // The fetch FAILED (403, 429, 5xx, network, retries exhausted).
+    // The fetch FAILED (403, 429, 5xx, network, retries exhausted, or a
+    // 2xx whose body is empty or not the JSON the API serves).
     // The answer is unknown. Do not record it as "no data".
     console.error(err.status, err.url, err.cause);
   }
@@ -52,8 +53,18 @@ other — and both extend `SdvError`. `NoESPNDataError` is an alias of
 keys passed as query parameters are not leaked into logs.
 
 `InvalidParameterError` (also an `SdvError`) means the server rejected the
-arguments themselves (a PFF `400` / `422`, NFL Pro's empty `200`): the call can
-never succeed as made, so it is neither "no data" nor a failed fetch.
+arguments themselves (a `400` / `422` from any family, NFL Pro's empty `200`):
+the call can never succeed as made, so it is neither "no data" nor a failed
+fetch. Retrying cannot help, so it is never retried.
+
+**A failed fetch never comes back as empty data** (the same rules as sdv-py's
+`_get`). A `204` / `205` has no content by definition and returns `{}`. Any
+other `2xx` with an empty body is an `AssetFetchError`: it is how barttorvik
+answers a blocked request, how pro.nfl.com answers bad parameters and how a
+throttled stats host answers. So is a `2xx` whose body is not JSON (an HTML
+challenge or error page) on a JSON API. The families that serve CSV or HTML on
+purpose, `torvik` and `mlb_statcast`, return that text as it is; a body they
+label JSON must still decode.
 
 **No credentials in errors.** An error's `cause` is always a sanitized copy
 of the underlying error: its name, message and stack — with URL query strings,
@@ -99,20 +110,22 @@ pass to `configure` always wins over a family's own; the built-in 3 retries /
 30 s apply only where neither is set. Login and token-mint requests (KenPom,
 247Sports, `nfl_api`) use the same resolved timeout.
 
-A family can also map a final failed response — non-2xx, not `404`, no retry
-left — to its own error with `classifyError`. Return an `SdvError` to throw it
-instead of the default `AssetFetchError`, or `undefined` to keep the default;
-`404` is always `NoDataError` and never reaches the hook. `url` carries no
-query string. The PFF family uses it to turn `400` / `422` into
-`InvalidParameterError` with PFF's own error message:
+A family can also map a final failed response to its own error with
+`classifyError`: a non-2xx with no retry left, or a `2xx` whose body is empty
+(or not JSON, on a JSON request). Return an `SdvError` to throw it instead of
+the default `AssetFetchError`, or `undefined` to keep the default. `404`
+(`NoDataError`) and `400` / `422` (`InvalidParameterError`) are classified by
+the core and never reach the hook. `url` carries no query string. The
+`nfl_pro` family uses it to name its expired-token `401` / `403` and to turn
+its empty `200` into `InvalidParameterError`:
 
 ```js
-import { registerFamilyDefaults, InvalidParameterError, AssetFetchError } from 'sportsdataverse';
+import { registerFamilyDefaults, AssetFetchError } from 'sportsdataverse';
 
 registerFamilyDefaults('my_family', {
   classifyError: (res, url) =>
-    res.status === 400 || res.status === 422
-      ? new InvalidParameterError(`my_family: rejected ${url}`, { url, status: res.status })
+    res.status === 403
+      ? new AssetFetchError(`my_family: ${url} needs a paid plan`, { url, status: res.status })
       : undefined,
 });
 ```
@@ -341,7 +354,7 @@ const table = await sdv.nfl.pffApiTeamStats({
 - `/v1` query keys are PFF's exact snake_case names (`franchise_id`,
   `game_id`); PFF silently ignores camelCase there. `/v2` routes take
   camelCase keys (`weekGroup`, `weekIds`) and the league in the path.
-- A `400` / `422` throws `InvalidParameterError` with PFF's own message (the
+- A `400` / `422` throws `InvalidParameterError` quoting PFF's error body (the
   call can never succeed as made). `404` is `NoDataError`. `401` / `403` /
   `429` / `5xx` that outlive the retries are `AssetFetchError`, and so is a
   `200` whose body is not a JSON object.

@@ -1,0 +1,189 @@
+{
+ "sdv_py": "938df901a5d50b3224c438dde817b3e1e48eb3ab",
+ "generator": "tools/oracle/error_vocabulary_oracle.py",
+ "cases": [
+  {
+   "getter": "default",
+   "status": 200,
+   "content_type": "application/json",
+   "body": "{\"teams\": [{\"id\": 1}]}",
+   "ok": {
+    "teams": [
+     {
+      "id": 1
+     }
+    ]
+   }
+  },
+  {
+   "getter": "default",
+   "status": 200,
+   "content_type": "application/json",
+   "body": "[]",
+   "ok": []
+  },
+  {
+   "getter": "default",
+   "status": 204,
+   "content_type": "application/json",
+   "body": "",
+   "ok": {}
+  },
+  {
+   "getter": "default",
+   "status": 205,
+   "content_type": "application/json",
+   "body": "",
+   "ok": {}
+  },
+  {
+   "getter": "default",
+   "status": 200,
+   "content_type": "application/json",
+   "body": "",
+   "error": "AssetFetchError"
+  },
+  {
+   "getter": "default",
+   "status": 200,
+   "content_type": "text/html",
+   "body": "<html><body>Checking your browser...</body></html>",
+   "error": "AssetFetchError"
+  },
+  {
+   "getter": "default",
+   "status": 400,
+   "content_type": "application/json",
+   "body": "{\"message\": \"season is invalid\"}",
+   "error": "InvalidParameterError"
+  },
+  {
+   "getter": "default",
+   "status": 422,
+   "content_type": "application/json",
+   "body": "{\"message\": \"unprocessable\"}",
+   "error": "InvalidParameterError"
+  },
+  {
+   "getter": "default",
+   "status": 404,
+   "content_type": "application/json",
+   "body": "",
+   "error": "NoDataError"
+  },
+  {
+   "getter": "default",
+   "status": 403,
+   "content_type": "text/html",
+   "body": "<html><body>Checking your browser...</body></html>",
+   "error": "AssetFetchError"
+  },
+  {
+   "getter": "default",
+   "status": 500,
+   "content_type": "application/json",
+   "body": "",
+   "error": "AssetFetchError"
+  },
+  {
+   "getter": "torvik",
+   "status": 200,
+   "content_type": "text/csv",
+   "body": "team,adj_o\nHouston,118.2\n",
+   "ok": "team,adj_o\nHouston,118.2\n"
+  },
+  {
+   "getter": "torvik",
+   "status": 200,
+   "content_type": "text/html",
+   "body": "<html><body>Checking your browser...</body></html>",
+   "ok": "<html><body>Checking your browser...</body></html>"
+  },
+  {
+   "getter": "torvik",
+   "status": 200,
+   "content_type": "application/json",
+   "body": "<html><body>Checking your browser...</body></html>",
+   "error": "AssetFetchError"
+  },
+  {
+   "getter": "torvik",
+   "status": 200,
+   "content_type": "text/csv",
+   "body": "",
+   "error": "AssetFetchError"
+  },
+  {
+   "getter": "torvik",
+   "status": 204,
+   "content_type": "text/csv",
+   "body": "",
+   "ok": ""
+  },
+  {
+   "getter": "torvik",
+   "status": 400,
+   "content_type": "text/html",
+   "body": "",
+   "error": "InvalidParameterError"
+  },
+  {
+   "getter": "statcast",
+   "status": 200,
+   "content_type": "application/json",
+   "body": "{\"game_status\": \"F\"}",
+   "ok": {
+    "game_status": "F"
+   }
+  },
+  {
+   "getter": "statcast",
+   "status": 200,
+   "content_type": "text/csv",
+   "body": "pitch_type,velo\nFF,95.1\n",
+   "ok": "pitch_type,velo\nFF,95.1\n"
+  },
+  {
+   "getter": "statcast",
+   "status": 200,
+   "content_type": "text/html",
+   "body": "<html><body>Checking your browser...</body></html>",
+   "ok": "<html><body>Checking your browser...</body></html>"
+  },
+  {
+   "getter": "statcast",
+   "status": 200,
+   "content_type": "application/json",
+   "body": "<html><body>Checking your browser...</body></html>",
+   "error": "AssetFetchError"
+  },
+  {
+   "getter": "statcast",
+   "status": 200,
+   "content_type": "application/json",
+   "body": "",
+   "error": "AssetFetchError"
+  },
+  {
+   "getter": "statcast",
+   "status": 204,
+   "content_type": "application/json",
+   "body": "",
+   "ok": {}
+  },
+  {
+   "getter": "statcast",
+   "status": 204,
+   "content_type": "text/csv",
+   "body": "",
+   "ok": ""
+  },
+  {
+   "getter": "statcast",
+   "status": 422,
+   "content_type": "application/json",
+   "body": "{\"error\": \"bad\"}",
+   "error": "InvalidParameterError"
+  }
+ ]
+}

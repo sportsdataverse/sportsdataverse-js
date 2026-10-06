@@ -17,6 +17,7 @@ const PIN = {
   'oracle/gen_cricket_wp_oracle.py': 'PORT_PIN',
   'oracle/hockeytech_analytics_oracle.py': 'PORT_PIN',
   'oracle/odds_math_oracle.py': 'PORT_PIN',
+  'oracle/error_vocabulary_oracle.py': 'ERROR_VOCAB_PIN',
   'oracle/gen_norm_cdf_oracle.py': null,
 };
 const generators = ['parity', 'oracle'].flatMap((dir) =>
@@ -42,7 +43,7 @@ describe('sdv-py oracle generators share one pin guard', () => {
     }
     it(`${g} calls pinned_checkout(${pin}) only and has no private git guard`, () => {
       [...src.matchAll(/pinned_checkout\(([^()]*(?:\(\))?)\)/g)].map((m) => m[1]).should.eql([pin]);
-      src.should.not.match(/\b(PORT_PIN|BASKETBALL_PBP_PIN|vendor_pin)\s+as\s/); // no renamed pin
+      src.should.not.match(/\b(PORT_PIN|BASKETBALL_PBP_PIN|ERROR_VOCAB_PIN|vendor_pin)\s+as\s/); // no renamed pin
       src.should.not.match(/rev-parse|--porcelain/);
     });
   }

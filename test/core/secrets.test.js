@@ -288,6 +288,62 @@ describe('security: safeCause redacts credential-looking text, and only that', (
     }
   });
 
+  // sdv-py #692 tests/test_credential_redaction.py::test_redact_secrets, token for token
+  // (py writes REDACTED, sdv-js <redacted>).
+  const R = '<redacted>';
+  const PY_PAIRS = [
+    ['/v4/sports?apiKey=abc123&all=false', `/v4/sports?apiKey=${R}&all=false`],
+    ['?api_key=abc&x=1', `?api_key=${R}&x=1`],
+    ['?APIKEY=abc', `?APIKEY=${R}`],
+    ['?apikey=jE7yBJVR&api-version=1.1', `?apikey=${R}&api-version=1.1`],
+    ['?feed=modulekit&key=f1aa699db3d81487&fmt=json', `?feed=modulekit&key=${R}&fmt=json`],
+    ['?token=t&access_token=a&client_secret=c', `?token=${R}&access_token=${R}&client_secret=${R}`],
+    ['?password=hunter2 secret=s3', `?password=${R} secret=${R}`],
+    // The punctuation closing an unquoted value stays.
+    ['{"token": 12345}', `{"token": ${R}}`],
+    ['(password=hunter2), next', `(password=${R}), next`],
+    ["{'key': 12345678901234567890, 'a': 1}", `{'key': ${R}, 'a': 1}`],
+    ['next=%2Fv4%3Fall%3Dx%26apiKey%3Dabc123', `next=%2Fv4%3Fall%3Dx%26apiKey%3D${R}`],
+    ["{'feed': 'modulekit', 'key': 'f1aa699db3d81487'}", `{'feed': 'modulekit', 'key': '${R}'}`],
+    ['{"apiKey": "abc123", "regions": "us"}', `{"apiKey": "${R}", "regions": "us"}`],
+    // A quoted value runs to its quote: spaces and closing punctuation inside are secret.
+    ["{'password': 'a b', 'x': 1}", `{'password': '${R}', 'x': 1}`],
+    ['token="abc)" next', `token="${R}" next`],
+    ['password="a b"', `password="${R}"`],
+    // Left alone: a bare `key` needs a credential-length value, and a name only
+    // counts at the start of a word.
+    ['primary key=player_id', 'primary key=player_id'],
+    ['monkey=banana&keyboard=qwerty&pageToken=2', 'monkey=banana&keyboard=qwerty&pageToken=2'],
+  ];
+
+  it('mirrors the sdv-py #692 pair grammar (quoted values to their quote, closing punctuation kept), idempotently', () => {
+    for (const [text, expected] of PY_PAIRS) {
+      redactSecrets(text).should.equal(expected, text);
+      redactSecrets(expected).should.equal(expected, `not idempotent: ${expected}`);
+    }
+  });
+
+  it('is linear on the sdv-py #692 adversarial shapes (~100 KB each, < 50 ms)', () => {
+    const shapes = {
+      names: 'key'.repeat(34_000),
+      pairs: 'apiKey='.repeat(15_000),
+      long_value: 'key=' + 'a'.repeat(100_000),
+      spaces_no_separator: "apiKey'" + ' '.repeat(100_000) + 'x',
+      name_space: 'key '.repeat(25_000),
+      escapes: '%26'.repeat(34_000),
+      escaped_almost_pairs: '%26key%3'.repeat(12_500),
+      plain: 'a'.repeat(100_000),
+      unclosed_quote: 'key="' + 'a'.repeat(100_000),
+      quoted_pairs: 'key="'.repeat(20_000),
+    };
+    for (const [shape, text] of Object.entries(shapes)) {
+      redactSecrets(text); // warm the regex compiler
+      const t0 = performance.now();
+      redactSecrets(text);
+      (performance.now() - t0).should.be.below(50, `slow on ${shape}`);
+    }
+  });
+
   it('a user transport that throws a leaky message: the AssetFetchError and its cause carry none of it', async () => {
     const realSleep = _timer.sleep;
     _timer.sleep = async () => {};

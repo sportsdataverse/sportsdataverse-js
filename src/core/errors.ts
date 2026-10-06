@@ -37,10 +37,12 @@ const AUTH_HEADER = new RegExp(
 );
 const COOKIE_HEADER = /\b((?:set-)?cookie["']?\s*[:=]\s*["']?)[^"'\r\n]+/gi;
 const BARE_SCHEME = new RegExp(String.raw`\b((bearer|basic)(?:\s+|%20|\+))(${CREDENTIAL})`, "gi");
-const JSON_SECRET = new RegExp(String.raw`(["'](${SECRET_NAMES})["']\s*:\s*["'])([^"']*)`, "gi");
-// The name starts a word, or follows a URL escape (`…%26password%3D…`).
+// sdv-py `errors._SECRET_PAIR`. The name starts a word, or follows a URL escape
+// (`…%26password%3D…`); the leading lookahead (every name's first letter) only
+// makes the scan cheaper. A quoted value runs to its closing quote (it may hold
+// spaces); an unquoted one stops at the first separator.
 const PAIR_SECRET = new RegExp(
-  String.raw`(?<=^|[^A-Za-z0-9]|%[0-9A-Fa-f]{2})((${SECRET_NAMES})${SEP})([^&\s"'<>]+)`,
+  String.raw`(?=[acijkprst])(?<=^|[^A-Za-z0-9]|%[0-9A-Fa-f]{2})((${SECRET_NAMES})${SEP})((?<=")[^"\n]*|(?<=')[^'\n]*|[^&\s"'<>]+)`,
   "gi"
 );
 /** A run that may hold a JWT (dots included); started only at a run boundary. */
@@ -67,8 +69,19 @@ function isBasicCredential(v: string): boolean {
   }
 }
 
-/** The value of `name`: a bare `key` must look like a credential (≥ 16 chars), so "primary key=player_id" stays. */
-const secretValue = (name: string, value: string): boolean => name.toLowerCase() !== "key" || value.length >= 16;
+/**
+ * sdv-py `_redact_pair`. An unquoted value (`{'key': 1234}`, `(token=abc)`) runs
+ * into the punctuation that closes it; that punctuation stays out of the
+ * redaction. A quoted value already stopped at its quote, so all of it is the
+ * secret. A bare `key` must look like a credential (16+ characters, as every
+ * HockeyTech key is), so "primary key=player_id" survives; the short value is
+ * still scanned, since it may hold an escaped pair of its own.
+ */
+function redactPair(_m: string, prefix: string, name: string, value: string): string {
+  const secret = /["']$/.test(prefix) ? value : value.replace(/[,;)\]}]+$/, "");
+  if (name.toLowerCase() === "key" && secret.length < 16) return prefix + value.replace(PAIR_SECRET, redactPair);
+  return `${prefix}<redacted>${value.slice(secret.length)}`;
+}
 
 /** Cut each JWT (`eyJ…` header, payload, signature) out of a dotted run, even when glued to a prefix. */
 function redactJwts(run: string): string {
@@ -106,12 +119,7 @@ export function redactSecrets(text: string): string {
       looksLikeCredential(v) || (scheme.toLowerCase() === "basic" && isBasicCredential(v)) ? `${prefix}<redacted>` : m
     )
     .replace(TOKEN_RUN, redactJwts)
-    .replace(JSON_SECRET, (m: string, prefix: string, name: string, v: string) =>
-      secretValue(name, v) ? `${prefix}<redacted>` : m
-    )
-    .replace(PAIR_SECRET, (m: string, prefix: string, name: string, v: string) =>
-      secretValue(name, v) ? `${prefix}<redacted>` : m
-    )
+    .replace(PAIR_SECRET, redactPair)
     .replace(URL_USERINFO, "$1<redacted>@")
     .replace(URL_QUERY, "$1?<redacted>");
 }

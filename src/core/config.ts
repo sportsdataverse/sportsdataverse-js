@@ -63,9 +63,11 @@ export interface FamilyDefaults {
    */
   retryStatuses?: readonly number[];
   /**
-   * Map a final failed response to a family-specific error (e.g. PFF's 400 / 422
-   * -> `InvalidParameterError`, with the API's own error message). 404 is
-   * always `NoDataError` and never reaches this hook.
+   * Map a final failed response to a family-specific error (e.g. PFF's error
+   * envelope in the message, or pro.nfl.com's empty 200 -> `InvalidParameterError`).
+   * It sees a non-2xx that outlived the retries and a 2xx whose body is empty or,
+   * for a JSON request, not JSON. 404 (`NoDataError`) and 400 / 422
+   * (`InvalidParameterError`) are classified by `request()` and never reach it.
    */
   classifyError?: ClassifyError;
   /**

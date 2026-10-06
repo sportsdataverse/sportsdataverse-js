@@ -5,6 +5,19 @@
 _The next release is **4.0.0**. The last published release is 3.0.0: 3.1.0 was never
 published, and its entries are folded in below._
 
+### Changed (breaking) — a failed fetch never comes back as empty data; 400 / 422 raise `InvalidParameterError` (sdv-py #696 / #700)
+
+- **BREAKING: an empty or non-JSON 2xx body raises `AssetFetchError`.** Before, the shared getter returned any 2xx body as data for the non-ESPN families on it (`mlb`, `nhl_api_web`, `nhl_edge`, `nhl_stats_rest`, `nhl_records`, `cbs`, `yahoo`, `yahoo_scores`, `fox`, `nfl_api`, `odds_api`, `asa`, `recruiting`), so an empty 200 or an HTML challenge page came back as `""` or the page text, and `parsed: true` turned it into `[]`. Now `request()` raises for every family: on an empty 2xx (barttorvik's block page, pro.nfl.com's rejected params, a throttled stats host) and, on a JSON request, on a body that is not JSON. `torvik` / `bart_wbb` and `mlb_statcast` still return CSV and HTML as text, as sdv-py does, but a body they label JSON must decode, and an empty 200 raises there too (it returned `""`, then `[]`).
+- **BREAKING: 400 / 422 raise `InvalidParameterError`** for every family (it was `AssetFetchError` everywhere but `pff_api`), and are never retried. The message names host, path and status with a redacted excerpt of at most 200 characters of the body, never the query string. The PFF message now quotes PFF's error body instead of reformatting it.
+- **204 / 205 return `{}`** (`""` for a text request) on every path. ESPN raised `AssetFetchError` and the shared getter returned `""`. `nba_stats` / `wnba_stats` still read a blank reply as throttling (`AssetFetchError`), as sdv-py does.
+- `classifyError` (`registerFamilyDefaults`) now also sees an empty or non-JSON 2xx, so `nfl_pro` keeps its empty-200 `InvalidParameterError`; 400 / 422 no longer reach the hook.
+- **Checked against sdv-py:** `tools/oracle/error_vocabulary_oracle.py` records sdv-py's own `_get` outcome (sdv-py 938df90, #700) for 25 wire answers across the default, torvik and statcast getters. Served from a local server through the real axios transport, sdv-js gives the same outcome for all 25. A status-by-family matrix covers 19 families (17 JSON ones plus torvik and statcast), on real captured bodies where the repo has one.
+- **Migrating:** code that read `[]`, `{}` or `""` as "no rows" after a failed fetch now gets an error. Catch `AssetFetchError` (the answer is unknown: retry later) apart from `NoDataError` (nothing is there), and catch `InvalidParameterError` for a 400 / 422 (fix the arguments). A 204 / 205 is still a success with nothing in it.
+
+### Fixed — redaction of quoted credential values (sdv-py #692)
+
+- `redactSecrets`, and so every error message and `cause`, follows sdv-py's pair grammar. A quoted value runs to its closing quote, so `password="a b"` no longer leaks ` b`, and the `,;)]}` closing an unquoted value stays outside the redaction (`(password=x), next` keeps `), next`). sdv-py's test table and its ten linear-time shapes are ported.
+
 ### Added (breaking for TypeScript) — typed returns: generated row types for `parsed: true`
 
 - **Row types for every verified endpoint.** Codegen writes a row interface for each returns schema the parser-parity harness verified on a real sdv-py capture: 438 endpoints in 13 families (MLB Stats API, Statcast, the four NHL APIs, stats.nba.com, stats.wnba.com, ASA, MLS, NWSL, On3, 247Sports). They are exported from the package root (`MlbTeamRosterRow`, `NbaStatsBoxscoredefensivev2Tables`, ...), and `sdv.nhl.nhlRecordsAllTimeRecordVsFranchise({ parsed: true })` resolves to `NhlRecordsAllTimeRecordVsFranchiseRow[]`. Every other wrapper's parsed rows are `Row` (`Record<string, unknown>`).

@@ -478,13 +478,8 @@ export async function nflProGet(
       throw err;
     }
     const s = typeof text === "string" ? text : "";
-    if (!s.trim()) {
-      throw new InvalidParameterError(
-        `${FAMILY}: pro.nfl.com returned HTTP 200 with an empty body for ${url} — how this API rejects ` +
-          "unsupported query params (note: `week` is a path scope, not a query param).",
-        { url, status: 200 }
-      );
-    }
+    // request() hands an empty 200 to classifyError; a 204 / 205 arrives here as "" (sdv-py: both raise)
+    if (!s.trim()) throw rejectedParams(url, 204);
     try {
       return JSON.parse(s);
     } catch (err) {
@@ -545,6 +540,15 @@ export async function nflProGet(
   return body;
 }
 
+/** pro.nfl.com's answer to unsupported query params: a 2xx with an EMPTY body (no error envelope). */
+function rejectedParams(url: string, status: number): InvalidParameterError {
+  return new InvalidParameterError(
+    `${FAMILY}: pro.nfl.com returned HTTP ${status} with an empty body for ${url} — how this API rejects ` +
+      "unsupported query params (note: `week` is a path scope, not a query param).",
+    { url, status }
+  );
+}
+
 registerFamilyDefaults(FAMILY, {
   auth: nflProAuth,
   // a 401 / 403 is the entitlement answer, not load: never retried
@@ -553,6 +557,8 @@ registerFamilyDefaults(FAMILY, {
   // slow. A configure({ timeoutMs }) still wins.
   timeoutMs: 45000,
   classifyError: (res, url) => {
+    // the only 2xx request() classifies on a text request is an empty body
+    if (res.status >= 200 && res.status < 300) return rejectedParams(url, res.status);
     if (res.status === 401 || res.status === 403) {
       return new AssetFetchError(
         `${FAMILY}: pro.nfl.com refused ${url} (${res.status}). The token is expired, not user-bound, ` +
