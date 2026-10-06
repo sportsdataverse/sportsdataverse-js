@@ -10,7 +10,8 @@ export function escapeCell(text) {
 export function renderColumnsTable(columns) {
   let out = `| col_name | type | description |\n|---|---|---|\n`;
   for (const c of columns) {
-    const desc = c.description ? escapeCell(c.description) : "";
+    // MDX: a bare `{` / `<` in prose opens an expression / a tag (test/docs-mdx.test.js).
+    const desc = c.description ? escapeCell(c.description).replace(/[{}<>]/g, (ch) => `\\${ch}`) : "";
     out += `| \`${escapeCell(c.name)}\` | ${escapeCell(c.type)} | ${desc} |\n`;
   }
   return out;

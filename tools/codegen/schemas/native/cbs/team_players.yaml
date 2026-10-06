@@ -1,14 +1,13 @@
-# CBS NAPI returns schema — columns DERIVED from a captured live response run
-# through the registered parser (parse_cbs_*). The CBS NAPI OpenAPI spec
-# ships no typed 200-response schema, so columns are not enumerable from the
-# spec; they are enumerated here from a representative capture. `type` is
-# inferred from the captured JS value; `description` is best-effort from the
-# snake_cased key. Endpoints with no capture remain `columns: []`.
+# cbs returns schema (JS-owned): columns derived from the registered parser's rows on
+# the committed real capture(s) cbs/team_players_nfl.json by
+# tools/codegen/regen-capture-schemas.mjs. Types are inferred from the captured values;
+# `description` is JS-owned text kept across regeneration (blanks fill at render time from
+# sdv-py's manual_column_descriptions.yaml). Do not hand-type columns: re-run the script.
 schema: team_players
 kind: dataframe
 columns:
 - name: player_id
-  type: integer
+  type: character
   description: Player ID.
 - name: first_name
   type: character

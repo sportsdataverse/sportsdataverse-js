@@ -61,12 +61,12 @@ Flat (non-ESPN) wrappers for the American Soccer Analysis public API. Host: `htt
 | `date_time_utc` | character | Kickoff timestamp (UTC, ISO 8601). |
 | `home_score` | integer | Home goals (regulation + extra time). |
 | `away_score` | integer | Away goals (regulation + extra time). |
-| `home_team_id` | character | FK -> Team (home side). |
-| `away_team_id` | character | FK -> Team (away side). |
+| `home_team_id` | character | FK -\> Team (home side). |
+| `away_team_id` | character | FK -\> Team (away side). |
 | `referee_id` | character | ASA referee id (base62 string; Utf8 join key). |
 | `stadium_id` | character | ASA stadium id (base62 string; Utf8 join key). |
-| `home_manager_id` | character | FK -> Manager (home side; nullable). |
-| `away_manager_id` | character | FK -> Manager (away side; nullable). |
+| `home_manager_id` | character | FK -\> Manager (home side; nullable). |
+| `away_manager_id` | character | FK -\> Manager (away side; nullable). |
 | `expanded_minutes` | integer | Total match minutes incl. stoppage (data coverage window). |
 | `season_name` | character | Season(s) the player appears in; may serialize as a scalar, a list, or an object across the leagues. |
 | `matchday` | integer | Round/matchday number. |
@@ -83,11 +83,11 @@ Flat (non-ESPN) wrappers for the American Soccer Analysis public API. Host: `htt
 |---|---|---|
 | `game_id` | character | ASA game id (base62 string; Utf8 join key). |
 | `date_time_utc` | character | Kickoff timestamp (UTC, ISO 8601). |
-| `home_team_id` | character | FK -> Team (home side). |
+| `home_team_id` | character | FK -\> Team (home side). |
 | `home_goals` | integer | Home goals scored. |
 | `home_team_xgoals` | numeric | Home expected goals (team model). |
 | `home_player_xgoals` | numeric | Home expected goals (player-shot model). |
-| `away_team_id` | character | FK -> Team (away side). |
+| `away_team_id` | character | FK -\> Team (away side). |
 | `away_goals` | integer | Away goals scored. |
 | `away_team_xgoals` | numeric | Away expected goals (team model). |
 | `away_player_xgoals` | numeric | Away expected goals (player-shot model). |

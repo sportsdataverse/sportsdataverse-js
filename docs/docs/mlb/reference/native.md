@@ -3753,7 +3753,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `runner_runs_xb` | integer | Runner runs xb. |
 | `net_bases_runner` | integer | Net bases runner. |
 | `net_bases_pitcher` | character | Net bases pitcher. |
-| `fast_swing_rate` | character | Fast-swing rate (>=75 mph). |
+| `fast_swing_rate` | character | Fast-swing rate (\>=75 mph). |
 | `squared_up_contact` | character | Squared up contact. |
 | `squared_up_swing` | character | Squared up swing. |
 | `blasts_contact` | character | Blasts contact. |

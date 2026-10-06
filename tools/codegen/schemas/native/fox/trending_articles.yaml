@@ -6,6 +6,7 @@
 # capture remain `columns: []`.
 schema: trending_articles
 kind: dataframe
+unverified: these columns were written for parse_fox_list's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 columns:
 - name: data_existing_total
   type: integer

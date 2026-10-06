@@ -1,13 +1,38 @@
-# Fox Sports Bifrost — generated returns schema. Columns are derived from the
-# spec's captured `components.schemas` (the item props of the list the parser
-# flattens), snake_cased to match the parser's output. Untyped (`object`)
-# responses carry `columns: []` (the parser flattens whatever the payload ships).
+# fox returns schema (JS-owned): columns derived from the registered parser's rows on
+# the committed real capture(s) fox/search_content.json by
+# tools/codegen/regen-capture-schemas.mjs. Types are inferred from the captured values;
+# `description` is JS-owned text kept across regeneration (blanks fill at render time from
+# sdv-py's manual_column_descriptions.yaml). Do not hand-type columns: re-run the script.
 schema: search_content
 kind: dataframe
 columns:
+- name: group
+  type: character
+  description: ""
+- name: type
+  type: character
+  description: ""
+- name: entity_id
+  type: character
+  description: ""
 - name: title
   type: character
   description: Bifrost search_content field `title`.
-- name: components
-  type: list
-  description: Bifrost search_content field `components`.
+- name: subtitle
+  type: character
+  description: ""
+- name: content_type
+  type: character
+  description: ""
+- name: content_uri
+  type: character
+  description: ""
+- name: web_url
+  type: character
+  description: ""
+- name: analytics_name
+  type: character
+  description: ""
+- name: image_url
+  type: character
+  description: ""

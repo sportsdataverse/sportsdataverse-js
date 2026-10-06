@@ -8,9 +8,9 @@
       "rate": 1
     },
     "cbs": {
-      "filled": 1821,
-      "total": 1821,
-      "rate": 1
+      "filled": 178,
+      "total": 186,
+      "rate": 0.957
     },
     "espn": {
       "filled": 4162,
@@ -18,9 +18,9 @@
       "rate": 0.5894
     },
     "fox": {
-      "filled": 164,
-      "total": 164,
-      "rate": 1
+      "filled": 18,
+      "total": 193,
+      "rate": 0.0933
     },
     "hockeytech": {
       "filled": 574,
@@ -128,15 +128,20 @@
       "rate": 0.9698
     },
     "yahoo": {
-      "filled": 515,
-      "total": 921,
-      "rate": 0.5592
+      "filled": 545,
+      "total": 906,
+      "rate": 0.6015
+    },
+    "yahoo_scores": {
+      "filled": 111,
+      "total": 137,
+      "rate": 0.8102
     }
   },
   "totals": {
-    "filled": 59168,
-    "total": 65471,
-    "rate": 0.9037
+    "filled": 57520,
+    "total": 63987,
+    "rate": 0.8989
   },
   "breaking_pages": 213
 }

@@ -423,8 +423,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `name` | character |  |
 | `type` | character | Institution type code (college / pro / high school). |
 | `group` | character | Institution group (division/level) bitmask code. |
-| `location` | integer | FK -> Location (`/Institution/{Location}/Location.json`). |
-| `state` | integer | FK -> State entity. |
+| `location` | integer | FK -\> Location (`/Institution/\{Location\}/Location.json`). |
+| `state` | integer | FK -\> State entity. |
 | `latitude` | numeric |  |
 | `longitude` | numeric |  |
 | `rankable` | character | Whether the institution participates in class rankings. |
@@ -433,7 +433,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `primary_color` | character |  |
 | `secondary_color` | character |  |
 | `is_foreign` | character | Whether the institution is located outside the United States. |
-| `site` | integer | FK -> team Site (network site key). |
+| `site` | integer | FK -\> team Site (network site key). |
 | `default_asset` | numeric | Nested 247Sports image asset for the institution's primary logo (stringified). |
 | `alternate_asset` | numeric | Nested 247Sports image asset for the institution's alternate logo (stringified). |
 | `light_asset` | numeric | Nested 247Sports image asset for the light-background logo variant (stringified). |
@@ -470,7 +470,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `coach` | integer |  |
 | `institution` | integer | Nested 247Sports institution the coach recruited for during the ranking cycle (stringified). |
 | `conference` | integer |  |
-| `ranking` | integer | FK -> the Ranking snapshot this row belongs to. |
+| `ranking` | integer | FK -\> the Ranking snapshot this row belongs to. |
 | `sport` | integer | Nested 247Sports sport the ranking covers (stringified). |
 | `recruitment` | character | Nested 247Sports recruitment record credited to the coach on this row (stringified). |
 | `rating` | numeric | Overall rating score for the coach's recruiting haul in the 247Sports coach ranking. |
@@ -516,7 +516,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `coach` | integer |  |
 | `institution` | integer | Nested 247Sports institution the coach recruited for during the ranking cycle (stringified). |
 | `conference` | integer |  |
-| `ranking` | integer | FK -> the Ranking snapshot this row belongs to. |
+| `ranking` | integer | FK -\> the Ranking snapshot this row belongs to. |
 | `sport` | integer | Nested 247Sports sport the ranking covers (stringified). |
 | `recruitment` | character | Nested 247Sports recruitment record credited to the coach on this row (stringified). |
 | `rating` | numeric | Overall rating score for the coach's recruiting haul in the 247Sports coach ranking. |
@@ -578,8 +578,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `name` | character |  |
 | `type` | character | Institution type code (college / pro / high school). |
 | `group` | character | Institution group (division/level) bitmask code. |
-| `location` | integer | FK -> Location (`/Institution/{Location}/Location.json`). |
-| `state` | integer | FK -> State entity. |
+| `location` | integer | FK -\> Location (`/Institution/\{Location\}/Location.json`). |
+| `state` | integer | FK -\> State entity. |
 | `latitude` | numeric |  |
 | `longitude` | numeric |  |
 | `rankable` | character | Whether the institution participates in class rankings. |
@@ -588,7 +588,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `primary_color` | character |  |
 | `secondary_color` | character |  |
 | `is_foreign` | character | Whether the institution is located outside the United States. |
-| `site` | integer | FK -> team Site (network site key). |
+| `site` | integer | FK -\> team Site (network site key). |
 | `default_asset` | numeric | Nested 247Sports image asset for the institution's primary logo (stringified). |
 | `alternate_asset` | numeric | Nested 247Sports image asset for the institution's alternate logo (stringified). |
 | `light_asset` | numeric | Nested 247Sports image asset for the light-background logo variant (stringified). |
@@ -607,8 +607,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `name` | character |  |
 | `type` | character | Institution type code (college / pro / high school). |
 | `group` | character | Institution group (division/level) bitmask code. |
-| `location` | integer | FK -> Location (`/Institution/{Location}/Location.json`). |
-| `state` | integer | FK -> State entity. |
+| `location` | integer | FK -\> Location (`/Institution/\{Location\}/Location.json`). |
+| `state` | integer | FK -\> State entity. |
 | `latitude` | numeric |  |
 | `longitude` | numeric |  |
 | `rankable` | character | Whether the institution participates in class rankings. |
@@ -617,7 +617,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `primary_color` | character |  |
 | `secondary_color` | character |  |
 | `is_foreign` | character | Whether the institution is located outside the United States. |
-| `site` | integer | FK -> team Site (network site key). |
+| `site` | integer | FK -\> team Site (network site key). |
 | `default_asset` | numeric | Nested 247Sports image asset for the institution's primary logo (stringified). |
 | `alternate_asset` | numeric | Nested 247Sports image asset for the institution's alternate logo (stringified). |
 | `light_asset` | numeric | Nested 247Sports image asset for the light-background logo variant (stringified). |
@@ -691,8 +691,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `name` | character |  |
 | `type` | character | Institution type code (college / pro / high school). |
 | `group` | character | Institution group (division/level) bitmask code. |
-| `location` | integer | FK -> Location (`/Institution/{Location}/Location.json`). |
-| `state` | integer | FK -> State entity. |
+| `location` | integer | FK -\> Location (`/Institution/\{Location\}/Location.json`). |
+| `state` | integer | FK -\> State entity. |
 | `latitude` | numeric |  |
 | `longitude` | numeric |  |
 | `rankable` | character | Whether the institution participates in class rankings. |
@@ -701,7 +701,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `primary_color` | character |  |
 | `secondary_color` | character |  |
 | `is_foreign` | character | Whether the institution is located outside the United States. |
-| `site` | integer | FK -> team Site (network site key). |
+| `site` | integer | FK -\> team Site (network site key). |
 | `default_asset` | numeric | Nested 247Sports image asset for the institution's primary logo (stringified). |
 | `alternate_asset` | numeric | Nested 247Sports image asset for the institution's alternate logo (stringified). |
 | `light_asset` | numeric | Nested 247Sports image asset for the light-background logo variant (stringified). |
@@ -742,10 +742,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `cbs_key` | integer | Cross-reference key into the CBS Sports id space. |
 | `url` | character |  |
 | `last_recruitment_player_institution` | integer | Nested player-institution record from the player's most recent recruitment (stringified). |
-| `current_player_institution` | integer | FK -> PlayerInstitution (current school). |
+| `current_player_institution` | integer | FK -\> PlayerInstitution (current school). |
 | `twitter_contact` | integer | Nested 247Sports contact record for the player's Twitter/X account (stringified). |
 | `mobile_phone_contact` | character | Player's mobile phone contact field on the 247Sports record. |
-| `primary_player_sport` | integer | FK -> PlayerSport (`/PlayerSport/{id}.json`). |
+| `primary_player_sport` | integer | FK -\> PlayerSport (`/PlayerSport/\{id\}.json`). |
 | `primary_recruitment` | integer | Nested 247Sports record for the player's primary recruitment (stringified). |
 | `default_name` | character | Server-rendered display label for the entity. |
 | `default_asset` | integer | Nested 247Sports image asset for the player's headshot (stringified). |
@@ -922,7 +922,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `primary` | character | Whether this is the player's primary sport. |
 | `class_year_override` | character | Override of the player's recruiting class year, when 247Sports reassigns it. |
 | `class_year` | character | Recruiting class year. |
-| `recruitment` | integer | FK -> Recruitment aggregate for this player-sport. |
+| `recruitment` | integer | FK -\> Recruitment aggregate for this player-sport. |
 | `primary_institution_prediction` | numeric | Nested leading Crystal Ball institution prediction for the player (stringified). |
 | `secondary_institution_prediction` | integer | Nested second-place Crystal Ball institution prediction (stringified). |
 | `primary_institution_prediction_percentage` | numeric | Share of Crystal Ball predictions favoring the leading institution. |
@@ -958,10 +958,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `cbs_key` | integer | Cross-reference key into the CBS Sports id space. |
 | `url` | character |  |
 | `last_recruitment_player_institution` | integer | Nested player-institution record from the player's most recent recruitment (stringified). |
-| `current_player_institution` | integer | FK -> PlayerInstitution (current school). |
+| `current_player_institution` | integer | FK -\> PlayerInstitution (current school). |
 | `twitter_contact` | integer | Nested 247Sports contact record for the player's Twitter/X account (stringified). |
 | `mobile_phone_contact` | character | Player's mobile phone contact field on the 247Sports record. |
-| `primary_player_sport` | integer | FK -> PlayerSport (`/PlayerSport/{id}.json`). |
+| `primary_player_sport` | integer | FK -\> PlayerSport (`/PlayerSport/\{id\}.json`). |
 | `primary_recruitment` | integer | Nested 247Sports record for the player's primary recruitment (stringified). |
 | `default_name` | character | Server-rendered display label for the entity. |
 | `default_asset` | integer | Nested 247Sports image asset for the player's headshot (stringified). |
@@ -1010,7 +1010,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `primary` | character | Whether this is the player's primary sport. |
 | `class_year_override` | character | Override of the player's recruiting class year, when 247Sports reassigns it. |
 | `class_year` | character | Recruiting class year. |
-| `recruitment` | integer | FK -> Recruitment aggregate for this player-sport. |
+| `recruitment` | integer | FK -\> Recruitment aggregate for this player-sport. |
 | `primary_institution_prediction` | numeric | Nested leading Crystal Ball institution prediction for the player (stringified). |
 | `secondary_institution_prediction` | integer | Nested second-place Crystal Ball institution prediction (stringified). |
 | `primary_institution_prediction_percentage` | numeric | Share of Crystal Ball predictions favoring the leading institution. |
@@ -1070,10 +1070,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `key` | integer | Primary key of this entity (the id used in its `.json` route). |
-| `ranking` | integer | FK -> Ranking snapshot. |
+| `ranking` | integer | FK -\> Ranking snapshot. |
 | `sport` | integer | Nested 247Sports sport the ranking row covers (stringified). |
 | `player_sport` | integer | Nested player-sport profile the ranking row belongs to (stringified). |
-| `committed_institution` | integer | FK -> committed Institution (null if uncommitted). |
+| `committed_institution` | integer | FK -\> committed Institution (null if uncommitted). |
 | `order` | integer | Display order of the entry within the 247Sports ranking list. |
 | `position` | integer |  |
 | `position_group` | integer |  |
@@ -1105,10 +1105,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `key` | integer | Primary key of this entity (the id used in its `.json` route). |
-| `ranking` | integer | FK -> Ranking snapshot. |
+| `ranking` | integer | FK -\> Ranking snapshot. |
 | `sport` | integer | Nested 247Sports sport the ranking row covers (stringified). |
 | `player_sport` | integer | Nested player-sport profile the ranking row belongs to (stringified). |
-| `committed_institution` | integer | FK -> committed Institution (null if uncommitted). |
+| `committed_institution` | integer | FK -\> committed Institution (null if uncommitted). |
 | `order` | integer | Display order of the entry within the 247Sports ranking list. |
 | `position` | integer |  |
 | `position_group` | integer |  |
@@ -1140,10 +1140,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `key` | integer | Primary key of this entity (the id used in its `.json` route). |
-| `recruitment` | integer | FK -> parent Recruitment. |
+| `recruitment` | integer | FK -\> parent Recruitment. |
 | `player_sport` | integer | Nested player-sport profile the interest entry belongs to (stringified). |
 | `recruit_state` | integer | 247Sports status of the recruit's interest entry for the school (e.g. committed, signed, decommitted). |
-| `institution` | integer | FK -> the interested/interesting Institution. |
+| `institution` | integer | FK -\> the interested/interesting Institution. |
 | `lock_prediction` | character | Crystal Ball lock-prediction value for the school on this recruitment (247Sports field). |
 | `recruits_interest` | character | Recruit's stated interest level in the school, per 247Sports. |
 | `primary_coach` | numeric | Lead recruiting coach at the school for this recruit. |
@@ -1159,7 +1159,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `official_visit` | numeric | Date of the recruit's official visit to the school. |
 | `second_official_visit` | character | Date of the recruit's second official visit to the school. |
 | `soft_commit` | character | Whether 247Sports marks the commitment as a soft commit. |
-| `hard_commit` | numeric | FK -> the RecruitInterestEvent marking a hard commit. |
+| `hard_commit` | numeric | FK -\> the RecruitInterestEvent marking a hard commit. |
 | `signing_date` | numeric | Date the recruit signed with the school. |
 | `enrollment_date` | numeric | Date the recruit enrolled at the school. |
 | `decommit` | character | Date the recruit decommitted from the school, when applicable. |
@@ -1196,7 +1196,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `primary` | character | Whether this is the player's primary sport. |
 | `class_year_override` | character | Override of the player's recruiting class year, when 247Sports reassigns it. |
 | `class_year` | character | Recruiting class year. |
-| `recruitment` | integer | FK -> Recruitment aggregate for this player-sport. |
+| `recruitment` | integer | FK -\> Recruitment aggregate for this player-sport. |
 | `primary_institution_prediction` | numeric | Nested leading Crystal Ball institution prediction for the player (stringified). |
 | `secondary_institution_prediction` | integer | Nested second-place Crystal Ball institution prediction (stringified). |
 | `primary_institution_prediction_percentage` | numeric | Share of Crystal Ball predictions favoring the leading institution. |
@@ -1222,8 +1222,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `name` | character |  |
 | `type` | character | Institution type code (college / pro / high school). |
 | `group` | character | Institution group (division/level) bitmask code. |
-| `location` | integer | FK -> Location (`/Institution/{Location}/Location.json`). |
-| `state` | integer | FK -> State entity. |
+| `location` | integer | FK -\> Location (`/Institution/\{Location\}/Location.json`). |
+| `state` | integer | FK -\> State entity. |
 | `latitude` | numeric |  |
 | `longitude` | numeric |  |
 | `rankable` | character | Whether the institution participates in class rankings. |
@@ -1232,7 +1232,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `primary_color` | character |  |
 | `secondary_color` | character |  |
 | `is_foreign` | character | Whether the institution is located outside the United States. |
-| `site` | integer | FK -> team Site (network site key). |
+| `site` | integer | FK -\> team Site (network site key). |
 | `default_asset` | numeric | Nested 247Sports image asset for the institution's primary logo (stringified). |
 | `alternate_asset` | numeric | Nested 247Sports image asset for the institution's alternate logo (stringified). |
 | `light_asset` | numeric | Nested 247Sports image asset for the light-background logo variant (stringified). |
@@ -1251,8 +1251,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `name` | character |  |
 | `type` | character | Institution type code (college / pro / high school). |
 | `group` | character | Institution group (division/level) bitmask code. |
-| `location` | integer | FK -> Location (`/Institution/{Location}/Location.json`). |
-| `state` | integer | FK -> State entity. |
+| `location` | integer | FK -\> Location (`/Institution/\{Location\}/Location.json`). |
+| `state` | integer | FK -\> State entity. |
 | `latitude` | numeric |  |
 | `longitude` | numeric |  |
 | `rankable` | character | Whether the institution participates in class rankings. |
@@ -1261,7 +1261,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `primary_color` | character |  |
 | `secondary_color` | character |  |
 | `is_foreign` | character | Whether the institution is located outside the United States. |
-| `site` | integer | FK -> team Site (network site key). |
+| `site` | integer | FK -\> team Site (network site key). |
 | `default_asset` | numeric | Nested 247Sports image asset for the institution's primary logo (stringified). |
 | `alternate_asset` | numeric | Nested 247Sports image asset for the institution's alternate logo (stringified). |
 | `light_asset` | numeric | Nested 247Sports image asset for the light-background logo variant (stringified). |
@@ -1280,8 +1280,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `name` | character |  |
 | `type` | character | Institution type code (college / pro / high school). |
 | `group` | character | Institution group (division/level) bitmask code. |
-| `location` | integer | FK -> Location (`/Institution/{Location}/Location.json`). |
-| `state` | integer | FK -> State entity. |
+| `location` | integer | FK -\> Location (`/Institution/\{Location\}/Location.json`). |
+| `state` | integer | FK -\> State entity. |
 | `latitude` | numeric |  |
 | `longitude` | numeric |  |
 | `rankable` | character | Whether the institution participates in class rankings. |
@@ -1290,7 +1290,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `primary_color` | character |  |
 | `secondary_color` | character |  |
 | `is_foreign` | character | Whether the institution is located outside the United States. |
-| `site` | integer | FK -> team Site (network site key). |
+| `site` | integer | FK -\> team Site (network site key). |
 | `default_asset` | numeric | Nested 247Sports image asset for the institution's primary logo (stringified). |
 | `alternate_asset` | numeric | Nested 247Sports image asset for the institution's alternate logo (stringified). |
 | `light_asset` | numeric | Nested 247Sports image asset for the light-background logo variant (stringified). |
@@ -1327,7 +1327,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `primary` | character | Whether this is the player's primary sport. |
 | `class_year_override` | character | Override of the player's recruiting class year, when 247Sports reassigns it. |
 | `class_year` | character | Recruiting class year. |
-| `recruitment` | integer | FK -> Recruitment aggregate for this player-sport. |
+| `recruitment` | integer | FK -\> Recruitment aggregate for this player-sport. |
 | `primary_institution_prediction` | numeric | Nested leading Crystal Ball institution prediction for the player (stringified). |
 | `secondary_institution_prediction` | integer | Nested second-place Crystal Ball institution prediction (stringified). |
 | `primary_institution_prediction_percentage` | numeric | Share of Crystal Ball predictions favoring the leading institution. |
@@ -1351,7 +1351,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 |---|---|---|
 | `key` | integer | Primary key of this entity (the id used in its `.json` route). |
 | `player_institution` | integer | Nested player-institution stint the Crystal Ball prediction targets (stringified). |
-| `institution` | integer | FK -> predicted destination Institution. |
+| `institution` | integer | FK -\> predicted destination Institution. |
 | `user` | integer | 247Sports user account of the predictor (nested, stringified). |
 | `updated_on` | character | Date the prediction was last updated. |
 | `prediction_status` | character | Crystal-ball prediction status code. |
@@ -1384,10 +1384,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `key` | integer | Primary key of this entity (the id used in its `.json` route). |
-| `recruitment` | integer | FK -> parent Recruitment. |
+| `recruitment` | integer | FK -\> parent Recruitment. |
 | `player_sport` | integer | Nested player-sport profile the interest entry belongs to (stringified). |
 | `recruit_state` | integer | 247Sports status of the recruit's interest entry for the school (e.g. committed, signed, decommitted). |
-| `institution` | integer | FK -> the interested/interesting Institution. |
+| `institution` | integer | FK -\> the interested/interesting Institution. |
 | `lock_prediction` | character | Crystal Ball lock-prediction value for the school on this recruitment (247Sports field). |
 | `recruits_interest` | character | Recruit's stated interest level in the school, per 247Sports. |
 | `primary_coach` | numeric | Lead recruiting coach at the school for this recruit. |
@@ -1403,7 +1403,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `official_visit` | numeric | Date of the recruit's official visit to the school. |
 | `second_official_visit` | character | Date of the recruit's second official visit to the school. |
 | `soft_commit` | character | Whether 247Sports marks the commitment as a soft commit. |
-| `hard_commit` | numeric | FK -> the RecruitInterestEvent marking a hard commit. |
+| `hard_commit` | numeric | FK -\> the RecruitInterestEvent marking a hard commit. |
 | `signing_date` | numeric | Date the recruit signed with the school. |
 | `enrollment_date` | numeric | Date the recruit enrolled at the school. |
 | `decommit` | character | Date the recruit decommitted from the school, when applicable. |
@@ -1432,7 +1432,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `highest_recruit_interest_event_type` | character | Type of the highest-signal event on the recruit's interest timeline (e.g. commit, signing). |
 | `highest_recruit_interest_event` | integer | Nested highest-signal event on the recruit's interest timeline (stringified). |
 | `committed_recruit_interest` | integer | Nested interest record for the school the recruit committed to (stringified). |
-| `committed_institution` | integer | FK -> committed Institution. |
+| `committed_institution` | integer | FK -\> committed Institution. |
 | `highest_recruit_interest` | integer | Nested interest record carrying the recruit's highest interest signal (stringified). |
 | `primary_player_position` | integer | Nested 247Sports record for the recruit's primary position (stringified). |
 | `primary_position` | integer | Recruit's primary position on the 247Sports profile. |
@@ -1454,10 +1454,10 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `player_cbs_key` | integer | Cross-reference key into the CBS Sports id space. |
 | `player_url` | character |  |
 | `player_last_recruitment_player_institution` | integer | Nested player-institution record from the player's most recent recruitment (stringified). |
-| `player_current_player_institution` | integer | FK -> PlayerInstitution (current school). |
+| `player_current_player_institution` | integer | FK -\> PlayerInstitution (current school). |
 | `player_twitter_contact` | numeric | Nested 247Sports contact record for the player's Twitter/X account (stringified). |
 | `player_mobile_phone_contact` | character | Player's mobile phone contact field on the 247Sports record. |
-| `player_primary_player_sport` | integer | FK -> PlayerSport (`/PlayerSport/{id}.json`). |
+| `player_primary_player_sport` | integer | FK -\> PlayerSport (`/PlayerSport/\{id\}.json`). |
 | `player_primary_recruitment` | integer | Nested 247Sports record for the player's primary recruitment (stringified). |
 | `player_default_name` | character | Server-rendered display label for the entity. |
 | `player_default_asset` | integer | Nested 247Sports image asset for the player's headshot (stringified). |
@@ -1506,7 +1506,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `primary` | character | Whether this is the player's primary sport. |
 | `class_year_override` | character | Override of the player's recruiting class year, when 247Sports reassigns it. |
 | `class_year` | character | Recruiting class year. |
-| `recruitment` | integer | FK -> Recruitment aggregate for this player-sport. |
+| `recruitment` | integer | FK -\> Recruitment aggregate for this player-sport. |
 | `primary_institution_prediction` | numeric | Nested leading Crystal Ball institution prediction for the player (stringified). |
 | `secondary_institution_prediction` | integer | Nested second-place Crystal Ball institution prediction (stringified). |
 | `primary_institution_prediction_percentage` | numeric | Share of Crystal Ball predictions favoring the leading institution. |

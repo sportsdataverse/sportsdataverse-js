@@ -88,7 +88,7 @@ Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `http
 | `season_id` | character | Composite Season id (Utf8 join key). |
 | `competition_id` | character | Composite Competition id (Utf8 join key). |
 | `round_id` | character | Composite id of the round. |
-| `stage_id` | character | Composite Stage id (`nwsl::Football_Stage::{hex}`). |
+| `stage_id` | character | Composite Stage id (`nwsl::Football_Stage::\{hex\}`). |
 | `index` | character | Ordinal position of the match day within the season. |
 | `short_name` | character | Short team name. |
 | `match_set_format_id` | character | Identifier of the match-day format. |
@@ -135,7 +135,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `team_country_code` | character | Club: ISO country code. |
 | `team_team_type` | character | Club: team type (e.g. `club`). |
 | `team_overall_summary` | character | Club: Season summary blurb. |
-| `team_stadium` | character | Club: home venue: `{id, providerId, name, cityName, country, address, capacity, yearOfConstruction, mapsGeoCodeLatitude, mapsGeoCodeLongitude, imagery}`. |
+| `team_stadium` | character | Club: home venue: `\{id, providerId, name, cityName, country, address, capacity, yearOfConstruction, mapsGeoCodeLatitude, mapsGeoCodeLongitude, imagery\}`. |
 | `team_all_season_imagery` | character | Club: per-season crest variants. |
 | `team_editorial_social_facebook` | character | Club editorial: facebook handle or URL. |
 | `team_editorial_social_instagram` | character | Club editorial: instagram handle or URL. |
@@ -215,7 +215,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `home_country_code` | character | Home club: ISO country code. |
 | `home_team_type` | character | Home club: team type (e.g. `club`). |
 | `home_overall_summary` | character | Home club: Season summary blurb. |
-| `home_stadium` | character | Home club: home venue: `{id, providerId, name, cityName, country, address, capacity, yearOfConstruction, mapsGeoCodeLatitude, mapsGeoCodeLongitude, imagery}`. |
+| `home_stadium` | character | Home club: home venue: `\{id, providerId, name, cityName, country, address, capacity, yearOfConstruction, mapsGeoCodeLatitude, mapsGeoCodeLongitude, imagery\}`. |
 | `home_all_season_imagery` | character | Home club: per-season crest variants. |
 | `home_editorial_social_facebook` | character | Home club editorial: facebook handle or URL. |
 | `home_editorial_social_instagram` | character | Home club editorial: instagram handle or URL. |
@@ -241,7 +241,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `away_country_code` | character | Away club: ISO country code. |
 | `away_team_type` | character | Away club: team type (e.g. `club`). |
 | `away_overall_summary` | character | Away club: Season summary blurb. |
-| `away_stadium` | character | Away club: home venue: `{id, providerId, name, cityName, country, address, capacity, yearOfConstruction, mapsGeoCodeLatitude, mapsGeoCodeLongitude, imagery}`. |
+| `away_stadium` | character | Away club: home venue: `\{id, providerId, name, cityName, country, address, capacity, yearOfConstruction, mapsGeoCodeLatitude, mapsGeoCodeLongitude, imagery\}`. |
 | `away_all_season_imagery` | character | Away club: per-season crest variants. |
 | `away_editorial_social_facebook` | character | Away club editorial: facebook handle or URL. |
 | `away_editorial_social_instagram` | character | Away club editorial: instagram handle or URL. |
@@ -261,7 +261,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `match_set_season_id` | character | Match day (round): Composite Season id (Utf8 join key). |
 | `match_set_competition_id` | character | Match day (round): Composite Competition id (Utf8 join key). |
 | `match_set_round_id` | character | Match day (round): Composite id of the round. |
-| `match_set_stage_id` | character | Match day (round): Composite Stage id (`nwsl::Football_Stage::{hex}`). |
+| `match_set_stage_id` | character | Match day (round): Composite Stage id (`nwsl::Football_Stage::\{hex\}`). |
 | `match_set_index` | character | Match day (round): ordinal position of the match day within the season. |
 | `match_set_short_name` | character | Match day (round): short team name. |
 | `match_set_match_set_format_id` | character | Match day (round): identifier of the match-day format. |
@@ -276,7 +276,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `stage_id` | character | Composite Stage id (`nwsl::Football_Stage::{hex}`). |
+| `stage_id` | character | Composite Stage id (`nwsl::Football_Stage::\{hex\}`). |
 | `name` | character | Stage display name. |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
@@ -298,7 +298,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `country_code` | character | ISO country code. |
 | `team_type` | character | Team type (e.g. `club`). |
 | `overall_summary` | character | Season summary blurb. |
-| `stadium` | character | Home venue: `{id, providerId, name, cityName, country, address, capacity, yearOfConstruction, mapsGeoCodeLatitude, mapsGeoCodeLongitude, imagery}`. |
+| `stadium` | character | Home venue: `\{id, providerId, name, cityName, country, address, capacity, yearOfConstruction, mapsGeoCodeLatitude, mapsGeoCodeLongitude, imagery\}`. |
 | `all_season_imagery` | character | Per-season crest variants. |
 | `stats_id` | character | Stable stat key (e.g. `goals`, `points`, `Xg`). |
 | `stats_label` | character | Human stat name. |

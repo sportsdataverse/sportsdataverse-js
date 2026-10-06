@@ -1,5 +1,107 @@
-# Yahoo Sports editorial — generated returns schema.
-# Parsed by parse_yahoo_scores_boxscore. The editorial boxscore payload is a keyed map (id -> object) with no typed item schema; the parser unrolls + snake_cases whatever keys the payload ships, so columns are not enumerable ahead of a live capture.
+# yahoo returns schema (JS-owned): columns derived from the registered parser's rows on
+# the committed real capture(s) yahoo/editorial_boxscore_ncaaf.json, yahoo/editorial_boxscore_ncaaf_ala_at_uk.json by
+# tools/codegen/regen-capture-schemas.mjs. Types are inferred from the captured values;
+# `description` is JS-owned text kept across regeneration (blanks fill at render time from
+# sdv-py's manual_column_descriptions.yaml). Do not hand-type columns: re-run the script.
 schema: boxscore
 kind: dataframe
-columns: []
+columns:
+- name: entity_id
+  type: character
+  description: ""
+- name: sub_id
+  type: character
+  description: ""
+- name: ncaaf_stat_type_102
+  type: character
+  description: ""
+- name: ncaaf_stat_type_103
+  type: character
+  description: ""
+- name: ncaaf_stat_type_105
+  type: character
+  description: ""
+- name: ncaaf_stat_type_104
+  type: character
+  description: ""
+- name: ncaaf_stat_type_106
+  type: character
+  description: ""
+- name: ncaaf_stat_type_111
+  type: character
+  description: ""
+- name: ncaaf_stat_type_112
+  type: character
+  description: ""
+- name: ncaaf_stat_type_108
+  type: character
+  description: ""
+- name: ncaaf_stat_type_109
+  type: character
+  description: ""
+- name: ncaaf_stat_type_113
+  type: character
+  description: ""
+- name: ncaaf_stat_type_202
+  type: character
+  description: ""
+- name: ncaaf_stat_type_203
+  type: character
+  description: ""
+- name: ncaaf_stat_type_205
+  type: character
+  description: ""
+- name: ncaaf_stat_type_206
+  type: character
+  description: ""
+- name: ncaaf_stat_type_207
+  type: character
+  description: ""
+- name: ncaaf_stat_type_411
+  type: character
+  description: ""
+- name: ncaaf_stat_type_412
+  type: character
+  description: ""
+- name: ncaaf_stat_type_407
+  type: character
+  description: ""
+- name: ncaaf_stat_type_408
+  type: character
+  description: ""
+- name: ncaaf_stat_type_410
+  type: character
+  description: ""
+- name: ncaaf_stat_type_409
+  type: character
+  description: ""
+- name: ncaaf_stat_type_502
+  type: character
+  description: ""
+- name: ncaaf_stat_type_503
+  type: character
+  description: ""
+- name: ncaaf_stat_type_505
+  type: character
+  description: ""
+- name: ncaaf_stat_type_506
+  type: character
+  description: ""
+- name: ncaaf_stat_type_507
+  type: character
+  description: ""
+- name: ncaaf_stat_type_508
+  type: character
+  description: ""
+- name: ncaaf_stat_type_509
+  type: character
+  description: ""
+- name: ncaaf_stat_type_511
+  type: character
+  description: ""
+- name: ncaaf_stat_type_512
+  type: character
+  description: ""
+- name: ncaaf_stat_type_513
+  type: character
+  description: ""

@@ -117,7 +117,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `person_id` | character | NFL.com Shield GUID of the drafted player (may be empty until the pick is announced). |
 | `pick_is_in` | logical | Whether the pick has officially been submitted / announced. |
 | `team_id` | character | NFL.com Shield GUID of the team making the pick. |
-| `trade_note` | character | Trade annotation for the pick (e.g. "CAR>CHI" denoting a traded selection). |
+| `trade_note` | character | Trade annotation for the pick (e.g. "CAR\>CHI" denoting a traded selection). |
 | `tweet_sent` | logical | Whether the announcement tweet has been sent for the pick. |
 | `tweets_sent` | character | JSON-stringified array of per-account tweet-sent status objects. |
 

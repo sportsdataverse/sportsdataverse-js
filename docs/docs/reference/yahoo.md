@@ -46,6 +46,157 @@ Flat (non-ESPN) wrappers for the Yahoo Sports scoreboard/boxscore feed. Host: `h
 | `yahoo_scores_boxscore` / `yahooScoresBoxscore` | `https://api-secure.sports.yahoo.com/v1/editorial/s/boxscore/{game_id}` | `game_id`\* | `lang`, `region`, `tz`, `v`, `polling` | `parse_yahoo_scores_boxscore` | — |
 | `yahoo_scores_scoreboard` / `yahooScoresScoreboard` | `https://api-secure.sports.yahoo.com/v1/editorial/s/scoreboard` | — | `lang`, `region`, `tz`, `leagues`, `week`, `season`, `conferences`, `count`, `v` | `parse_yahoo_scores_scoreboard` | — |
 
+### Returns — `yahoo_scores_boxscore` / `yahooScoresBoxscore`
+
+| col_name | type | description |
+|---|---|---|
+| `entity_id` | character | Composite Yahoo id this editorial row was keyed under, surfaced from the collection map key (e.g., "ncaaf.g.202509200023" for a game, "ncaaf.t.29" for a team); always carried as Utf8. |
+| `sub_id` | character | Second-level key of an id-keyed editorial collection, present when one entity holds many sub-records — a play id, a scoring-play id, or a stat variation such as "ncaaf.stat_variation.2". |
+| `ncaaf_stat_type_102` | character | Value recorded for the "Completions" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.102, abbreviated "Comp"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_103` | character | Value recorded for the "Attempts" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.103, abbreviated "Att"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_105` | character | Value recorded for the "Yards" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.105, abbreviated "Yds"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_104` | character | Value recorded for the "Completion Percentage" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.104, abbreviated "Pct"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_106` | character | Value recorded for the "Yards per Attempt" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.106, abbreviated "Y/A"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_111` | character | Value recorded for the "Sacks" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.111, abbreviated "Sack"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_112` | character | Value recorded for the "Yards Lost" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.112, abbreviated "YdsL"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_108` | character | Value recorded for the "Touchdowns" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.108, abbreviated "TD"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_109` | character | Value recorded for the "Interceptions" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.109, abbreviated "Int"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_113` | character | Value recorded for the "QB Rating" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.113, abbreviated "QBRat"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_202` | character | Value recorded for the "Rushes" statistic in Yahoo's Rushing category (stat type ncaaf.stat_type.202, abbreviated "Rush"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_203` | character | Value recorded for the "Yards" statistic in Yahoo's Rushing category (stat type ncaaf.stat_type.203, abbreviated "Yds"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_205` | character | Value recorded for the "Average" statistic in Yahoo's Rushing category (stat type ncaaf.stat_type.205, abbreviated "Avg"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_206` | character | Value recorded for the "Longest" statistic in Yahoo's Rushing category (stat type ncaaf.stat_type.206, abbreviated "Long"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_207` | character | Value recorded for the "Touchdowns" statistic in Yahoo's Rushing category (stat type ncaaf.stat_type.207, abbreviated "TD"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_411` | character | Value recorded for the "Extra Points Made" statistic in Yahoo's Kicking category (stat type ncaaf.stat_type.411, abbreviated "XPM"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_412` | character | Value recorded for the "Extra Points Attempted" statistic in Yahoo's Kicking category (stat type ncaaf.stat_type.412, abbreviated "XPA"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_407` | character | Value recorded for the "Total Made" statistic in Yahoo's Kicking category (stat type ncaaf.stat_type.407, abbreviated "FGM"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_408` | character | Value recorded for the "Total Attempted" statistic in Yahoo's Kicking category (stat type ncaaf.stat_type.408, abbreviated "FGA"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_410` | character | Value recorded for the "Long" statistic in Yahoo's Kicking category (stat type ncaaf.stat_type.410, abbreviated "Long"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_409` | character | Value recorded for the "Percent" statistic in Yahoo's Kicking category (stat type ncaaf.stat_type.409, abbreviated "Pct"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_502` | character | Value recorded for the "Kickoff Returns" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.502, abbreviated "KR"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_503` | character | Value recorded for the "Yards" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.503, abbreviated "Yds"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_505` | character | Value recorded for the "Average" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.505, abbreviated "Avg"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_506` | character | Value recorded for the "Longest" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.506, abbreviated "Long"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_507` | character | Value recorded for the "Touchdowns" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.507, abbreviated "TD"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_508` | character | Value recorded for the "Punt Returns" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.508, abbreviated "PR"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_509` | character | Value recorded for the "Yards" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.509, abbreviated "Yds"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_511` | character | Value recorded for the "Average" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.511, abbreviated "Avg"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_512` | character | Value recorded for the "Longest" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.512, abbreviated "Long"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_513` | character | Value recorded for the "Touchdowns" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.513, abbreviated "TD"), for the player or team on this boxscore row. |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
+### Returns — `yahoo_scores_scoreboard` / `yahooScoresScoreboard`
+
+| col_name | type | description |
+|---|---|---|
+| `entity_id` | character | Composite Yahoo id this editorial row was keyed under, surfaced from the collection map key (e.g., "ncaaf.g.202509200023" for a game, "ncaaf.t.29" for a team); always carried as Utf8. |
+| `gameid` | character | Date-encoded Yahoo composite game id for this row (e.g., "ncaaf.g.202509200023"). |
+| `global_gameid` | character | Yahoo cross-provider game id, distinct from the date-encoded gameid (e.g., "ncaaf.g.13556882"). |
+| `start_time` | character |  |
+| `is_time_tba` | logical | Flag indicating that the scheduled start time has not yet been announced. |
+| `season_phase_id` | character | Identifier of the season phase the game falls in (e.g., "season.phase.season"). |
+| `game_type` | character |  |
+| `winning_team_id` | character | Composite Yahoo team id of the side that won the game (e.g., "ncaaf.t.29"). |
+| `is_rank_upset` | character | Flag indicating that the lower-ranked side won, judged against the teams' poll rankings. |
+| `is_spread_upset` | character | Flag indicating that the winning side was the betting underdog against the closing spread. |
+| `outcome_type` | character | Outcome classification for a completed game (e.g., "outcome.type.won", "outcome.type.tied"). |
+| `home_team_id` | character | Home team ESPN id. |
+| `away_team_id` | character | Away team ESPN id. |
+| `week_number` | character |  |
+| `sportacular_url` | character | Deep link into the Yahoo Sportacular mobile app for this game (a "ysportacular://" URL). |
+| `status_display_name` | character | Short game or event status as shown on the scoreboard (e.g., "Final", "12:00 pm ET"). |
+| `status_description` | character |  |
+| `status_type` | character |  |
+| `total_away_points` | character | Points scored by the away team in the game. |
+| `current_period_id` | character | Ordinal number of the period currently in progress, counting from 1. |
+| `total_home_points` | character | Points scored by the home team in the game. |
+| `total_away_shootout_points` | character | Shootout goals converted by the away team, populated only for sports that break ties by shootout. |
+| `total_home_shootout_points` | character | Shootout goals converted by the home team, populated only for sports that break ties by shootout. |
+| `home_team_stats` | character | JSON-encoded team-stat block for the home team, populated once the game is under way. |
+| `away_team_stats` | character | JSON-encoded team-stat block for the away team, populated once the game is under way. |
+| `game_period_balls` | character | Balls in the count for the at-bat in progress; baseball only. |
+| `game_period_strikes` | character | Strikes in the count for the at-bat in progress; baseball only. |
+| `game_period_outs` | character | Outs recorded so far in the current half-inning; baseball only. |
+| `yards_to_endzone` | character | Distance from the current ball spot to the opponent's goal line, in yards. |
+| `start_yardline` | character |  |
+| `distance` | character |  |
+| `down` | character |  |
+| `team_in_possession` | character | Yahoo team id of the side currently in possession of the ball. |
+| `power_play_strength_home` | character | Number of skaters the home team has on the ice during special-teams play; hockey only. |
+| `power_play_strength_away` | character | Number of skaters the away team has on the ice during special-teams play; hockey only. |
+| `game_time_elapsed` | character | Playing time elapsed in the game, in seconds. |
+| `game_time_elapsed_display` | character | Playing time elapsed formatted for display (e.g., "67:12"), used by sports whose clock counts up. |
+| `inning_status` | character | Half-inning indicator for a game in progress (e.g., "Top", "Bottom"); baseball only. |
+| `away_timeouts` | character |  |
+| `home_timeouts` | character |  |
+| `is_halftime` | character | Flag indicating that the game is currently stopped at halftime. |
+| `minimum_periods` | character | Number of periods a game of this sport runs before overtime is required (4 for football, 9 for baseball). |
+| `game_periods` | character | JSON-encoded list of the game's period nodes, each carrying a period number and its display names. |
+| `baserunners` | character | JSON-encoded baserunner occupancy for the game in progress; baseball only. |
+| `season` | character |  |
+| `subleague` | character | Sub-league the game belongs to, for leagues split into constituent circuits. |
+| `subleague_display_name` | character | Display name of the sub-league the game belongs to. |
+| `agg_score` | character | Aggregate score across the legs of a two-leg tie, populated only for competitions decided on aggregate. |
+| `leg_number` | character | Ordinal of this leg within a multi-leg tie, counting from 1. |
+| `tv_coverage` | character | Network carrying the game, as a short broadcast abbreviation (e.g., "CBS", "ESPN"). |
+| `seatgeek_id` | character | SeatGeek performer or event identifier used to build the ticket-purchase link. |
+| `last_updated` | logical |  |
+| `teams` | character |  |
+| `play_by_play` | character | JSON-encoded data-island pointer to the game's play-by-play collection in the same editorial payload. |
+| `pitches` | character | JSON-encoded data-island pointer to the game's pitch-level feed; baseball only. |
+| `at_bat` | character | JSON-encoded data-island pointer to the game's current at-bat feed; baseball only. |
+| `penalty_summary` | character |  |
+| `scoring_summary` | character |  |
+| `stat_categories` | character | JSON-encoded pointer to the stat-category dictionary that groups this feed's statistics. |
+| `stadium` | character |  |
+| `stadium_id` | character |  |
+| `stadium_image` | character | JSON-encoded data-island pointer to the venue photograph used on the game page. |
+| `attendance` | character |  |
+| `lineups` | character | JSON-encoded data-island pointer to the game's lineup collection. |
+| `top_performer` | character | JSON-encoded data-island pointer to the game's top-performing players. |
+| `players` | character |  |
+| `byline` | character |  |
+| `highlight` | character | JSON-encoded data-island pointer to the game's highlight video. |
+| `highlights` | character |  |
+| `live_video` | character | JSON-encoded data-island pointer to the live video stream for the game. |
+| `odds` | character | JSON-encoded data-island pointer to the game's odds collection. |
+| `current_players` | character | JSON-encoded data-island pointer to the players currently on the field, ice or court. |
+| `last_play` | character |  |
+| `series_type` | character | JSON-encoded data-island pointer to the kind of series the game belongs to. |
+| `series_status` | character | JSON-encoded data-island pointer to the current state of the series the game belongs to. |
+| `games` | character |  |
+| `series_games` | character | JSON-encoded data-island pointer to the games making up the series. |
+| `game_details` | character | JSON-encoded data-island pointer to supplementary detail notes for the game. |
+| `section_notes` | character | JSON-encoded data-island pointer to editorial section notes attached to the game page. |
+| `articles` | character | JSON-encoded data-island pointer to the editorial articles attached to the game. |
+| `tweets` | character | JSON-encoded data-island pointer to the social posts attached to the game page. |
+| `playoff_round` | character |  |
+| `media_stream` | character | JSON-encoded data-island pointer to the game's media-stream collection. |
+| `playoff_series_status` | character | JSON-encoded data-island pointer to the current state of the playoff series the game belongs to. |
+| `playoff_series_details` | character | JSON-encoded data-island pointer to detail about the playoff series the game belongs to. |
+| `drives` | character | JSON-encoded data-island pointer to the game's drive collection; football only. |
+| `user_teams_game` | character | JSON-encoded data-island pointer to the viewer's followed-team context for the game. |
+| `page_metadata` | character | JSON-encoded data-island pointer to the SEO and page metadata for the entity. |
+| `penalty_box` | character | JSON-encoded data-island pointer to the game's penalty-box feed; hockey only. |
+| `starting_pitchers` | character | JSON-encoded data-island pointer to the game's announced starting pitchers; baseball only. |
+| `unrestricted_streams` | character | JSON-encoded data-island pointer to the streams viewable without a subscription. |
+| `tv_details` | character | JSON-encoded list of broadcast entries for the game, each carrying a network abbreviation and full channel name (e.g., [\{"abbr": "NBC", "name": "NBC/Peacock"\}]). |
+| `away_seed` | character |  |
+| `home_seed` | character |  |
+| `navigation_links_tickets_url` | character | Affiliate ticket-purchase URL for the game, pointing at the SeatGeek marketplace. |
+| `navigation_links_boxscore_url` | character | Site-relative URL of the game's boxscore page on sports.yahoo.com. |
+| `navigation_links_match_page_url` | character | Site-relative URL of the game's match page on sports.yahoo.com. |
+| `navigation_links_league_home_url` | character | Site-relative URL of the league's home page on sports.yahoo.com. |
+| `navigation_links_league_scores_url` | character | Site-relative URL of the league's scoreboard page on sports.yahoo.com. |
+| `provider_coverage_score_update_frequency_in_minutes` | character | How often, in minutes, the data provider refreshes the score for this game. |
+| `provider_coverage_has_plays` | character | Flag indicating that the data provider supplies play-by-play for this game. |
+| `provider_coverage_has_stats` | character | Flag indicating that the data provider supplies box-score statistics for this game. |
+| `provider_coverage_has_extended_stats` | character | Flag indicating that the data provider supplies extended statistics beyond the standard box score. |
+| `provider_coverage_has_final_stats` | character | Flag indicating that the data provider has published final, official statistics for the game. |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
 ## Native API — Yahoo Sports
 
 Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite-secure.sports.yahoo.com/v1/query/shangrila`. Each method is exposed under BOTH its snake_case name `yahoo_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.yahoo`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
@@ -250,6 +401,157 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
+### Returns — `yahoo_editorial_boxscore` / `yahooEditorialBoxscore`
+
+| col_name | type | description |
+|---|---|---|
+| `entity_id` | character | Composite Yahoo id this editorial row was keyed under, surfaced from the collection map key (e.g., "ncaaf.g.202509200023" for a game, "ncaaf.t.29" for a team); always carried as Utf8. |
+| `sub_id` | character | Second-level key of an id-keyed editorial collection, present when one entity holds many sub-records — a play id, a scoring-play id, or a stat variation such as "ncaaf.stat_variation.2". |
+| `ncaaf_stat_type_102` | character | Value recorded for the "Completions" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.102, abbreviated "Comp"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_103` | character | Value recorded for the "Attempts" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.103, abbreviated "Att"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_105` | character | Value recorded for the "Yards" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.105, abbreviated "Yds"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_104` | character | Value recorded for the "Completion Percentage" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.104, abbreviated "Pct"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_106` | character | Value recorded for the "Yards per Attempt" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.106, abbreviated "Y/A"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_111` | character | Value recorded for the "Sacks" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.111, abbreviated "Sack"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_112` | character | Value recorded for the "Yards Lost" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.112, abbreviated "YdsL"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_108` | character | Value recorded for the "Touchdowns" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.108, abbreviated "TD"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_109` | character | Value recorded for the "Interceptions" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.109, abbreviated "Int"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_113` | character | Value recorded for the "QB Rating" statistic in Yahoo's Passing category (stat type ncaaf.stat_type.113, abbreviated "QBRat"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_202` | character | Value recorded for the "Rushes" statistic in Yahoo's Rushing category (stat type ncaaf.stat_type.202, abbreviated "Rush"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_203` | character | Value recorded for the "Yards" statistic in Yahoo's Rushing category (stat type ncaaf.stat_type.203, abbreviated "Yds"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_205` | character | Value recorded for the "Average" statistic in Yahoo's Rushing category (stat type ncaaf.stat_type.205, abbreviated "Avg"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_206` | character | Value recorded for the "Longest" statistic in Yahoo's Rushing category (stat type ncaaf.stat_type.206, abbreviated "Long"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_207` | character | Value recorded for the "Touchdowns" statistic in Yahoo's Rushing category (stat type ncaaf.stat_type.207, abbreviated "TD"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_411` | character | Value recorded for the "Extra Points Made" statistic in Yahoo's Kicking category (stat type ncaaf.stat_type.411, abbreviated "XPM"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_412` | character | Value recorded for the "Extra Points Attempted" statistic in Yahoo's Kicking category (stat type ncaaf.stat_type.412, abbreviated "XPA"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_407` | character | Value recorded for the "Total Made" statistic in Yahoo's Kicking category (stat type ncaaf.stat_type.407, abbreviated "FGM"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_408` | character | Value recorded for the "Total Attempted" statistic in Yahoo's Kicking category (stat type ncaaf.stat_type.408, abbreviated "FGA"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_410` | character | Value recorded for the "Long" statistic in Yahoo's Kicking category (stat type ncaaf.stat_type.410, abbreviated "Long"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_409` | character | Value recorded for the "Percent" statistic in Yahoo's Kicking category (stat type ncaaf.stat_type.409, abbreviated "Pct"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_502` | character | Value recorded for the "Kickoff Returns" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.502, abbreviated "KR"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_503` | character | Value recorded for the "Yards" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.503, abbreviated "Yds"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_505` | character | Value recorded for the "Average" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.505, abbreviated "Avg"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_506` | character | Value recorded for the "Longest" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.506, abbreviated "Long"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_507` | character | Value recorded for the "Touchdowns" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.507, abbreviated "TD"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_508` | character | Value recorded for the "Punt Returns" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.508, abbreviated "PR"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_509` | character | Value recorded for the "Yards" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.509, abbreviated "Yds"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_511` | character | Value recorded for the "Average" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.511, abbreviated "Avg"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_512` | character | Value recorded for the "Longest" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.512, abbreviated "Long"), for the player or team on this boxscore row. |
+| `ncaaf_stat_type_513` | character | Value recorded for the "Touchdowns" statistic in Yahoo's Returns category (stat type ncaaf.stat_type.513, abbreviated "TD"), for the player or team on this boxscore row. |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
+### Returns — `yahoo_editorial_scoreboard` / `yahooEditorialScoreboard`
+
+| col_name | type | description |
+|---|---|---|
+| `entity_id` | character | Composite Yahoo id this editorial row was keyed under, surfaced from the collection map key (e.g., "ncaaf.g.202509200023" for a game, "ncaaf.t.29" for a team); always carried as Utf8. |
+| `gameid` | character | Date-encoded Yahoo composite game id for this row (e.g., "ncaaf.g.202509200023"). |
+| `global_gameid` | character | Yahoo cross-provider game id, distinct from the date-encoded gameid (e.g., "ncaaf.g.13556882"). |
+| `start_time` | character |  |
+| `is_time_tba` | logical | Flag indicating that the scheduled start time has not yet been announced. |
+| `season_phase_id` | character | Identifier of the season phase the game falls in (e.g., "season.phase.season"). |
+| `game_type` | character |  |
+| `winning_team_id` | character | Composite Yahoo team id of the side that won the game (e.g., "ncaaf.t.29"). |
+| `is_rank_upset` | character | Flag indicating that the lower-ranked side won, judged against the teams' poll rankings. |
+| `is_spread_upset` | character | Flag indicating that the winning side was the betting underdog against the closing spread. |
+| `outcome_type` | character | Outcome classification for a completed game (e.g., "outcome.type.won", "outcome.type.tied"). |
+| `home_team_id` | character | Home team ESPN id. |
+| `away_team_id` | character | Away team ESPN id. |
+| `week_number` | character |  |
+| `sportacular_url` | character | Deep link into the Yahoo Sportacular mobile app for this game (a "ysportacular://" URL). |
+| `status_display_name` | character | Short game or event status as shown on the scoreboard (e.g., "Final", "12:00 pm ET"). |
+| `status_description` | character |  |
+| `status_type` | character |  |
+| `total_away_points` | character | Points scored by the away team in the game. |
+| `current_period_id` | character | Ordinal number of the period currently in progress, counting from 1. |
+| `total_home_points` | character | Points scored by the home team in the game. |
+| `total_away_shootout_points` | character | Shootout goals converted by the away team, populated only for sports that break ties by shootout. |
+| `total_home_shootout_points` | character | Shootout goals converted by the home team, populated only for sports that break ties by shootout. |
+| `home_team_stats` | character | JSON-encoded team-stat block for the home team, populated once the game is under way. |
+| `away_team_stats` | character | JSON-encoded team-stat block for the away team, populated once the game is under way. |
+| `game_period_balls` | character | Balls in the count for the at-bat in progress; baseball only. |
+| `game_period_strikes` | character | Strikes in the count for the at-bat in progress; baseball only. |
+| `game_period_outs` | character | Outs recorded so far in the current half-inning; baseball only. |
+| `yards_to_endzone` | character | Distance from the current ball spot to the opponent's goal line, in yards. |
+| `start_yardline` | character |  |
+| `distance` | character |  |
+| `down` | character |  |
+| `team_in_possession` | character | Yahoo team id of the side currently in possession of the ball. |
+| `power_play_strength_home` | character | Number of skaters the home team has on the ice during special-teams play; hockey only. |
+| `power_play_strength_away` | character | Number of skaters the away team has on the ice during special-teams play; hockey only. |
+| `game_time_elapsed` | character | Playing time elapsed in the game, in seconds. |
+| `game_time_elapsed_display` | character | Playing time elapsed formatted for display (e.g., "67:12"), used by sports whose clock counts up. |
+| `inning_status` | character | Half-inning indicator for a game in progress (e.g., "Top", "Bottom"); baseball only. |
+| `away_timeouts` | character |  |
+| `home_timeouts` | character |  |
+| `is_halftime` | character | Flag indicating that the game is currently stopped at halftime. |
+| `minimum_periods` | character | Number of periods a game of this sport runs before overtime is required (4 for football, 9 for baseball). |
+| `game_periods` | character | JSON-encoded list of the game's period nodes, each carrying a period number and its display names. |
+| `baserunners` | character | JSON-encoded baserunner occupancy for the game in progress; baseball only. |
+| `season` | character |  |
+| `subleague` | character | Sub-league the game belongs to, for leagues split into constituent circuits. |
+| `subleague_display_name` | character | Display name of the sub-league the game belongs to. |
+| `agg_score` | character | Aggregate score across the legs of a two-leg tie, populated only for competitions decided on aggregate. |
+| `leg_number` | character | Ordinal of this leg within a multi-leg tie, counting from 1. |
+| `tv_coverage` | character | Network carrying the game, as a short broadcast abbreviation (e.g., "CBS", "ESPN"). |
+| `seatgeek_id` | character | SeatGeek performer or event identifier used to build the ticket-purchase link. |
+| `last_updated` | logical |  |
+| `teams` | character |  |
+| `play_by_play` | character | JSON-encoded data-island pointer to the game's play-by-play collection in the same editorial payload. |
+| `pitches` | character | JSON-encoded data-island pointer to the game's pitch-level feed; baseball only. |
+| `at_bat` | character | JSON-encoded data-island pointer to the game's current at-bat feed; baseball only. |
+| `penalty_summary` | character |  |
+| `scoring_summary` | character |  |
+| `stat_categories` | character | JSON-encoded pointer to the stat-category dictionary that groups this feed's statistics. |
+| `stadium` | character |  |
+| `stadium_id` | character |  |
+| `stadium_image` | character | JSON-encoded data-island pointer to the venue photograph used on the game page. |
+| `attendance` | character |  |
+| `lineups` | character | JSON-encoded data-island pointer to the game's lineup collection. |
+| `top_performer` | character | JSON-encoded data-island pointer to the game's top-performing players. |
+| `players` | character |  |
+| `byline` | character |  |
+| `highlight` | character | JSON-encoded data-island pointer to the game's highlight video. |
+| `highlights` | character |  |
+| `live_video` | character | JSON-encoded data-island pointer to the live video stream for the game. |
+| `odds` | character | JSON-encoded data-island pointer to the game's odds collection. |
+| `current_players` | character | JSON-encoded data-island pointer to the players currently on the field, ice or court. |
+| `last_play` | character |  |
+| `series_type` | character | JSON-encoded data-island pointer to the kind of series the game belongs to. |
+| `series_status` | character | JSON-encoded data-island pointer to the current state of the series the game belongs to. |
+| `games` | character |  |
+| `series_games` | character | JSON-encoded data-island pointer to the games making up the series. |
+| `game_details` | character | JSON-encoded data-island pointer to supplementary detail notes for the game. |
+| `section_notes` | character | JSON-encoded data-island pointer to editorial section notes attached to the game page. |
+| `articles` | character | JSON-encoded data-island pointer to the editorial articles attached to the game. |
+| `tweets` | character | JSON-encoded data-island pointer to the social posts attached to the game page. |
+| `playoff_round` | character |  |
+| `media_stream` | character | JSON-encoded data-island pointer to the game's media-stream collection. |
+| `playoff_series_status` | character | JSON-encoded data-island pointer to the current state of the playoff series the game belongs to. |
+| `playoff_series_details` | character | JSON-encoded data-island pointer to detail about the playoff series the game belongs to. |
+| `drives` | character | JSON-encoded data-island pointer to the game's drive collection; football only. |
+| `user_teams_game` | character | JSON-encoded data-island pointer to the viewer's followed-team context for the game. |
+| `page_metadata` | character | JSON-encoded data-island pointer to the SEO and page metadata for the entity. |
+| `penalty_box` | character | JSON-encoded data-island pointer to the game's penalty-box feed; hockey only. |
+| `starting_pitchers` | character | JSON-encoded data-island pointer to the game's announced starting pitchers; baseball only. |
+| `unrestricted_streams` | character | JSON-encoded data-island pointer to the streams viewable without a subscription. |
+| `tv_details` | character | JSON-encoded list of broadcast entries for the game, each carrying a network abbreviation and full channel name (e.g., [\{"abbr": "NBC", "name": "NBC/Peacock"\}]). |
+| `away_seed` | character |  |
+| `home_seed` | character |  |
+| `navigation_links_tickets_url` | character | Affiliate ticket-purchase URL for the game, pointing at the SeatGeek marketplace. |
+| `navigation_links_boxscore_url` | character | Site-relative URL of the game's boxscore page on sports.yahoo.com. |
+| `navigation_links_match_page_url` | character | Site-relative URL of the game's match page on sports.yahoo.com. |
+| `navigation_links_league_home_url` | character | Site-relative URL of the league's home page on sports.yahoo.com. |
+| `navigation_links_league_scores_url` | character | Site-relative URL of the league's scoreboard page on sports.yahoo.com. |
+| `provider_coverage_score_update_frequency_in_minutes` | character | How often, in minutes, the data provider refreshes the score for this game. |
+| `provider_coverage_has_plays` | character | Flag indicating that the data provider supplies play-by-play for this game. |
+| `provider_coverage_has_stats` | character | Flag indicating that the data provider supplies box-score statistics for this game. |
+| `provider_coverage_has_extended_stats` | character | Flag indicating that the data provider supplies extended statistics beyond the standard box score. |
+| `provider_coverage_has_final_stats` | character | Flag indicating that the data provider has published final, official statistics for the game. |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
 ### Returns — `yahoo_featured_game_ids` / `yahooFeaturedGameIds`
 
 | col_name | type | description |
@@ -281,76 +583,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_game_stats_leaders` / `yahooGameStatsLeaders`
 
-| col_name | type | description |
-|---|---|---|
-| `status` | character |  |
-| `league_full_name` | character | Full league name (e.g., "NCAA Football"). |
-| `league_football_team_season_stats0` | character | JSON-encoded league-wide team season-stat leader board occupying slot 0 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `league_football_team_season_stats1` | character | JSON-encoded league-wide team season-stat leader board occupying slot 1 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `league_football_team_season_stats2` | character | JSON-encoded league-wide team season-stat leader board occupying slot 2 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `league_football_team_season_stats3` | character | JSON-encoded league-wide team season-stat leader board occupying slot 3 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `league_football_team_season_stats4` | character | JSON-encoded league-wide team season-stat leader board occupying slot 4 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `league_football_team_season_stats5` | character | JSON-encoded league-wide team season-stat leader board occupying slot 5 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `league_football_team_season_stats6` | character | JSON-encoded league-wide team season-stat leader board occupying slot 6 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `league_football_team_season_stats7` | character | JSON-encoded league-wide team season-stat leader board occupying slot 7 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `league_football_team_season_stats8` | character | JSON-encoded league-wide team season-stat leader board occupying slot 8 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `league_football_team_season_stats9` | character | JSON-encoded league-wide team season-stat leader board occupying slot 9 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `league_football_team_season_stats10` | character | JSON-encoded league-wide team season-stat leader board occupying slot 10 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `league_football_team_season_stats11` | character | JSON-encoded league-wide team season-stat leader board occupying slot 11 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `game_leader_stats0` | list | JSON-encoded in-game statistical leader board occupying slot 0 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `game_leader_stats1` | list | JSON-encoded in-game statistical leader board occupying slot 1 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `game_leader_stats2` | list | JSON-encoded in-game statistical leader board occupying slot 2 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `game_leader_stats3` | list | JSON-encoded in-game statistical leader board occupying slot 3 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_game_stats0_stats` | character | JSON-encoded away-team game-stat block occupying slot 0 of that team's game-stats list; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_game_stats1_stats` | character | JSON-encoded away-team game-stat block occupying slot 1 of that team's game-stats list; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_game_stats0_stats` | character | JSON-encoded home-team game-stat block occupying slot 0 of that team's game-stats list; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_game_stats1_stats` | character | JSON-encoded home-team game-stat block occupying slot 1 of that team's game-stats list; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_lineup` | list | JSON-encoded starting lineup fielded by the home team. |
-| `away_team_lineup` | list | JSON-encoded starting lineup fielded by the away team. |
-| `away_team_id` | character |  |
-| `away_team_full_name` | character |  |
-| `away_team_team_id` | character | Yahoo composite team id of the away team (e.g., "ncaaf.t.29"). |
-| `away_team_primary_color` | character | Primary brand color of the away team, as a hex RGB string without the leading hash. |
-| `away_team_secondary_color` | character | Secondary brand color of the away team, as a hex RGB string without the leading hash. |
-| `away_team_display_name` | character |  |
-| `away_team_abbreviation` | character |  |
-| `away_team_team_logo_white` | character | JSON-encoded image node for the away team's white knockout logo, used on dark backgrounds. |
-| `away_team_team_logo` | character | JSON-encoded image node for the away team's standard logo. |
-| `away_team_league` | character | JSON-encoded league node identifying the league the away team plays in. |
-| `away_team_season_leader_stats0` | character | JSON-encoded away-team season leader board occupying slot 0 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_season_leader_stats1` | character | JSON-encoded away-team season leader board occupying slot 1 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_season_leader_stats2` | character | JSON-encoded away-team season leader board occupying slot 2 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_season_leader_stats3` | character | JSON-encoded away-team season leader board occupying slot 3 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_player_season_stats0` | character | JSON-encoded away-team player season-stat block occupying slot 0 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_player_season_stats1` | character | JSON-encoded away-team player season-stat block occupying slot 1 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_player_season_stats2` | character | JSON-encoded away-team player season-stat block occupying slot 2 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_player_season_stats3` | character | JSON-encoded away-team player season-stat block occupying slot 3 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_player_season_stats4` | character | JSON-encoded away-team player season-stat block occupying slot 4 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_player_season_stats5` | character | JSON-encoded away-team player season-stat block occupying slot 5 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_player_season_stats6` | character | JSON-encoded away-team player season-stat block occupying slot 6 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `away_team_player_season_stats7` | character | JSON-encoded away-team player season-stat block occupying slot 7 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_id` | character |  |
-| `home_team_full_name` | character |  |
-| `home_team_team_id` | character | Yahoo composite team id of the home team (e.g., "ncaaf.t.29"). |
-| `home_team_primary_color` | character | Primary brand color of the home team, as a hex RGB string without the leading hash. |
-| `home_team_secondary_color` | character | Secondary brand color of the home team, as a hex RGB string without the leading hash. |
-| `home_team_display_name` | character |  |
-| `home_team_abbreviation` | character |  |
-| `home_team_team_logo_white` | character | JSON-encoded image node for the home team's white knockout logo, used on dark backgrounds. |
-| `home_team_team_logo` | character | JSON-encoded image node for the home team's standard logo. |
-| `home_team_league` | character | JSON-encoded league node identifying the league the home team plays in. |
-| `home_team_season_leader_stats0` | character | JSON-encoded home-team season leader board occupying slot 0 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_season_leader_stats1` | character | JSON-encoded home-team season leader board occupying slot 1 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_season_leader_stats2` | character | JSON-encoded home-team season leader board occupying slot 2 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_season_leader_stats3` | character | JSON-encoded home-team season leader board occupying slot 3 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_player_season_stats0` | character | JSON-encoded home-team player season-stat block occupying slot 0 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_player_season_stats1` | character | JSON-encoded home-team player season-stat block occupying slot 1 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_player_season_stats2` | character | JSON-encoded home-team player season-stat block occupying slot 2 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_player_season_stats3` | character | JSON-encoded home-team player season-stat block occupying slot 3 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_player_season_stats4` | character | JSON-encoded home-team player season-stat block occupying slot 4 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_player_season_stats5` | character | JSON-encoded home-team player season-stat block occupying slot 5 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_player_season_stats6` | character | JSON-encoded home-team player season-stat block occupying slot 6 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
-| `home_team_player_season_stats7` | character | JSON-encoded home-team player season-stat block occupying slot 7 of that list in the payload; the slots are positional, so read the block's own stat ids rather than assuming a fixed category order. |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -541,40 +774,25 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_league_stats_by_team` / `yahooLeagueStatsByTeam`
 
-| col_name | type | description |
-|---|---|---|
-| `sport_sport_id` | character | Yahoo identifier of the sport the league belongs to. |
-| `sport_name` | character |  |
-| `short_name` | character |  |
-| `full_name` | character |  |
-| `name` | character |  |
-| `football_stats` | list | JSON-encoded football statistics block returned by the league stats query. |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_league_stats_individual` / `yahooLeagueStatsIndividual`
 
-| col_name | type | description |
-|---|---|---|
-| `sport_sport_id` | character | Yahoo identifier of the sport the league belongs to. |
-| `sport_name` | character |  |
-| `short_name` | character |  |
-| `full_name` | character |  |
-| `name` | character |  |
-| `football_stats` | list | JSON-encoded football statistics block returned by the league stats query. |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
+### Returns — `yahoo_league_stats_overview` / `yahooLeagueStatsOverview`
+
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_league_stats_weekly` / `yahooLeagueStatsWeekly`
 
-| col_name | type | description |
-|---|---|---|
-| `sport_sport_id` | character | Yahoo identifier of the sport the league belongs to. |
-| `sport_name` | character |  |
-| `short_name` | character |  |
-| `full_name` | character |  |
-| `name` | character |  |
-| `football_stats` | list | JSON-encoded football statistics block returned by the league stats query. |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1299,23 +1517,13 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_stats_football_defense_ncaaf` / `yahooSeasonStatsFootballDefenseNcaaf`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_stats_football_kicking_ncaaf` / `yahooSeasonStatsFootballKickingNcaaf`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1323,186 +1531,112 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+| `stats` | character |  |
+| `player_display_name` | character |  |
+| `player_player_id` | character | Yahoo composite player id of the leader-board entry (e.g., "ncaaf.p.464024"); always carried as Utf8. |
+| `player_team_display_name` | character |  |
+| `player_team_abbreviation` | character |  |
+| `player_team_team_logo_url` | character |  |
+| `player_positions` | character | JSON-encoded list of the positions the leader-board entry plays, each with a name, abbreviation and position id (e.g., [\{"name": "Quarterback", "abbreviation": "QB", "positionId": "QUARTERBACK"\}]). |
+| `player_alias_url` | character |  |
+| `player_player_cutout` | character | JSON-encoded image node for the leader-board entry's transparent cut-out portrait. |
+| `player_player_cutout_url` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_stats_football_punting_ncaaf` / `yahooSeasonStatsFootballPuntingNcaaf`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_stats_football_receiving_ncaaf` / `yahooSeasonStatsFootballReceivingNcaaf`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_stats_football_returns_ncaaf` / `yahooSeasonStatsFootballReturnsNcaaf`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_stats_football_rushing_ncaaf` / `yahooSeasonStatsFootballRushingNcaaf`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_team_stats_football_defense` / `yahooSeasonTeamStatsFootballDefense`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_team_stats_football_kicking` / `yahooSeasonTeamStatsFootballKicking`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_team_stats_football_kickoffs` / `yahooSeasonTeamStatsFootballKickoffs`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_team_stats_football_offense` / `yahooSeasonTeamStatsFootballOffense`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_team_stats_football_passing` / `yahooSeasonTeamStatsFootballPassing`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_team_stats_football_passing_defense` / `yahooSeasonTeamStatsFootballPassingDefense`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_team_stats_football_punting` / `yahooSeasonTeamStatsFootballPunting`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_team_stats_football_receiving` / `yahooSeasonTeamStatsFootballReceiving`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_team_stats_football_receiving_defense` / `yahooSeasonTeamStatsFootballReceivingDefense`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_team_stats_football_returns` / `yahooSeasonTeamStatsFootballReturns`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_team_stats_football_rushing` / `yahooSeasonTeamStatsFootballRushing`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `yahoo_season_team_stats_football_rushing_defense` / `yahooSeasonTeamStatsFootballRushingDefense`
 
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character | Yahoo stat-type key the leader board is built on (e.g., "PASSING_YARDS", "GAMES_RUSHING"). |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1581,6 +1715,12 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `league_name` | character |  |
 | `team_logo_url` | character | Absolute URL of the team's standard logo image on Yahoo's image CDN. |
 | `team_logo_white_url` | character | Absolute URL of the team's white knockout logo, the variant used on dark backgrounds. |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
+### Returns — `yahoo_team_stats_leaders_v2` / `yahooTeamStatsLeadersV2`
+
+No returns table is published for this endpoint: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 

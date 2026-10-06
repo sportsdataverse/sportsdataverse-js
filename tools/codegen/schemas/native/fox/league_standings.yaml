@@ -1,22 +1,74 @@
-# Fox Sports Bifrost — generated returns schema. Columns are derived from the
-# spec's captured `components.schemas` (the item props of the list the parser
-# flattens), snake_cased to match the parser's output. Untyped (`object`)
-# responses carry `columns: []` (the parser flattens whatever the payload ships).
+# fox returns schema (JS-owned): columns derived from the registered parser's rows on
+# the committed real capture(s) fox/nfl_league_standings.json by
+# tools/codegen/regen-capture-schemas.mjs. Types are inferred from the captured values;
+# `description` is JS-owned text kept across regeneration (blanks fill at render time from
+# sdv-py's manual_column_descriptions.yaml). Do not hand-type columns: re-run the script.
 schema: league_standings
 kind: dataframe
 columns:
-- name: section_id
+- name: section
   type: character
-  description: Bifrost league_standings field `id`.
-- name: section_title
+  description: ""
+- name: afc_east
   type: character
-  description: Bifrost league_standings field `title`.
-- name: section_page_title
+  description: ""
+- name: v1
   type: character
-  description: Bifrost league_standings field `pageTitle`.
-- name: section_last_updated
+  description: ""
+- name: w_l_t
   type: character
-  description: Bifrost league_standings field `lastUpdated`.
-- name: section_metadata
-  type: list
-  description: Bifrost league_standings field `metadata`.
+  description: ""
+- name: pct
+  type: character
+  description: ""
+- name: pf
+  type: character
+  description: ""
+- name: pa
+  type: character
+  description: ""
+- name: home
+  type: character
+  description: ""
+- name: away
+  type: character
+  description: ""
+- name: conf
+  type: character
+  description: ""
+- name: div
+  type: character
+  description: ""
+- name: strk
+  type: character
+  description: ""
+- name: entity_id
+  type: character
+  description: ""
+- name: afc_north
+  type: character
+  description: ""
+- name: afc_south
+  type: character
+  description: ""
+- name: afc_west
+  type: character
+  description: ""
+- name: nfc_east
+  type: character
+  description: ""
+- name: nfc_north
+  type: character
+  description: ""
+- name: nfc_south
+  type: character
+  description: ""
+- name: nfc_west
+  type: character
+  description: ""
+- name: american_football_conference
+  type: character
+  description: ""
+- name: national_football_conference
+  type: character
+  description: ""
