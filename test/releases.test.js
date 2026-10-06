@@ -589,6 +589,33 @@ describe('release loaders', () => {
       codes.should.eql(['SDV_INT64', 'SDV_INT64', 'SDV_INT64']);
     });
 
+    // The generated-type rule for a DOUBLE id (tools/codegen/row-types.mjs `columnType`), on the
+    // REAL column it exists for: cfbfastR's R-written pbp stores `id_play` as a DOUBLE already
+    // rounded past 2^53 (its first two plays both read 401628319101849900), so it is no exact id:
+    // the runtime leaves it a number (one SDV_INT64 warning) and the type says `string | number`.
+    it('real data: load_cfb_pbp_r id_play (DOUBLE past 2^53) stays a number with one SDV_INT64 warning; a double id is typed string | number', async () => {
+      _int64Warned.clear();
+      const codes = [];
+      _warn.emit = (m, code) => {
+        warnings.push(m);
+        codes.push(code);
+      };
+      use(releasesTransport(() => 'cfb_pbp_r_2024_head20.parquet'));
+      const rows = await sdv.cfb.loadCfbPbpR({ seasons: 2024 });
+      rows.length.should.equal(20);
+      Object.keys(rows[0]).length.should.equal(362);
+      rows.every((r) => typeof r.id_play === 'number' && Math.abs(r.id_play) > Number.MAX_SAFE_INTEGER).should.be.true();
+      rows[0].id_play.should.equal(rows[1].id_play); // two plays, one rounded double: not an id
+      rows[0].game_id.should.equal('401628319'); // an INT32 id in the same file: a string
+      warnings.should.eql([
+        'load_cfb_pbp_r: id column "id_play" holds values that are not exact integers (a fraction, a number beyond Number.MAX_SAFE_INTEGER, a boolean or an object); left as read, not decimal strings',
+      ]);
+      codes.should.eql(['SDV_INT64']);
+      const { columnType } = await import('../tools/codegen/row-types.mjs');
+      columnType('id_play', 'double', false).should.equal('string | number | null');
+      columnType('game_id', 'integer', false).should.equal('string | null');
+    });
+
     // Crafted parquet (test/fixtures/releases/README.md): play_id STRING (2021), DOUBLE with a
     // fraction (2022), DOUBLE integral + NaN (2023). The cross-season type unification must not
     // turn a DOUBLE NaN into "NaN" nor a fraction into "1.5": the id rule decides.

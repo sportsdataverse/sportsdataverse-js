@@ -164,6 +164,9 @@ npm run codegen                 # then regenerate as usual
   only for the verified ones recorded in `test/fixtures/py/parity_coverage.json`
   (rewrite it with `SDV_PARITY_WRITE=1 npx mocha test/parsers/parity.test.js`),
   and a column it lists as unexercised (null in every capture) is typed `unknown`.
+  `tools/codegen/row-types.mjs` holds the column rule; `test/types/agreement.test.js`
+  checks every parsed value of every capture against the generated TypeScript, so a
+  newly verified endpoint is type-checked against its real capture automatically.
 - A vendored returns schema must have a shape JS understands, or `npm run vendor`
   fails (`checkSchemaShape` in `vendor.mjs`): `kind: dataframe` + `columns`,
   `kind: frames` + `frames: [{section, columns}]` (one table per key of the parser's
