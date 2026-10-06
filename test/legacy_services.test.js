@@ -444,4 +444,20 @@ describe('legacy ncaa methods: through the request layer', () => {
     });
     all.map((c) => c.url).should.eql(Array(4).fill('https://stats.ncaa.org/rankings/change_sport_year_div'));
   });
+
+  it('getSeasons / getDivisions decode the <option> text (synthetic edge case: stats.ncaa.org 403s every plain client)', async () => {
+    // decode-html is gone (4.x): the scraper reads cheerio's entity-decoded .text().
+    // A double-escaped ampersand and a numeric apostrophe are the entities the old
+    // helper handled; the trailing undefined is the method's documented return shape.
+    const html =
+      '<select id="acadyr"><option value="">--</option><option value="2017">A &amp;amp; B &#39;x&#39;</option></select>' +
+      '<select id="u_div"><option value="1">Division I</option></select>';
+    fake(() => ({ data: html }));
+    await captureWarnings(async () => {
+      const seasons = await sdv.ncaa.getSeasons('MBB');
+      seasons.should.eql({ seasons: [{ value: '2017', name: "A &amp; B 'x'" }, undefined] });
+      const divisions = await sdv.ncaa.getDivisions('MBB', '2017');
+      divisions.should.eql({ divisions: [{ value: '1', name: 'Division I' }, undefined] });
+    });
+  });
 });

@@ -64,6 +64,15 @@ jobs:
       # behind SDV_LIVE (not set here), so this stays deterministic.
       - name: Test
         run: npm test
+      # `npm test` runs mocha under c8 (.c8rc.json: dist/** minus dist/generated/**,
+      # thresholds fail the run). Keep the lcov report for inspection.
+      - name: Upload coverage (lcov)
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
+        if: always()
+        with:
+          name: coverage-node-${{ matrix.node-version }}
+          path: coverage/lcov.info
+          if-no-files-found: error
 
   docs:
     name: docs build (Docusaurus + TypeDoc)

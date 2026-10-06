@@ -1,0 +1,15 @@
+# nfl_api fixtures
+
+sdv-py@2cfc90c9e7 `tests/fixtures/nfl_api/*.json`, copied verbatim (byte-identical to the sdv-py blob; none exceed 1 MB so none is gzipped). Trimmed real bodies from `api.nfl.com` (the NFL.com "Shield" API), captured anonymously by sdv-py (the web app's `/identity/v3/token` device grant, plan `free`) during an in-progress game: DEN @ KC, 2026 REG week 1, Shield id `a9a890ed-4feb-11f1-abca-2c54536568a9`, 2026-09-15 01:00 UTC. Full bodies: `sdv-internal-refs/nfl/captures/shield/2026-09-14/`.
+
+All five routes map to `parse_nfl_team` (single-object flatten) in `tools/codegen/endpoints/nfl_api.yaml`. Used by `test/parsers/nfl_api.test.js`.
+
+| File | Route | Captured | Trimmed |
+|---|---|---|---|
+| `live_team_statistics.json` | `/football/v2/stats/live/team-statistics/{game_id}` | 2026-09-15 | no |
+| `live_player_statistics.json` | `/football/v2/stats/live/player-statistics/{game_id}` | 2026-09-15 | first 3 players per side |
+| `game_details_v2.json` | `/experience/v2/gamedetails/{game_id}` (all `include*` flags on) | 2026-09-15 | drive-chart lists and replays cut to their first items |
+| `game_details_by_slug.json` | `/experience/v1/gamedetailsbyslug/{slug}` (`broncos-at-chiefs-2026-reg-1`, no flags) | 2026-09-15, after the final | drive-chart lists cut to their first two items |
+| `game_details_v1.json` | `/experience/v1/gamedetails/{game_id}` (CLE @ JAX, 2026 REG week 1, `a8fc1728-4feb-11f1-abca-2c54536568a9`). The game sits under `data.viewer.gameDetail` | 2026-09-17, after the final | plays cut to the first 5, drives and scoring summaries to the first 1 |
+
+No public capture exists for the other `nfl_api` routes (standings, rosters, teams/history, weeks, weeks/date, combine profiles, draft picks, injuries, game summaries, weekly game details): `api.nfl.com` needs a minted token and the test harness is offline, so those parsers are tested on synthetic payloads only.

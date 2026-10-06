@@ -35,10 +35,13 @@ var require_papaparse_min = __commonJS({
       "function" == typeof define && define.amd ? define([], t) : "object" == typeof module && "undefined" != typeof exports ? module.exports = t() : e.Papa = t();
     })(exports, function r() {
       var n = "undefined" != typeof self ? self : "undefined" != typeof window ? window : void 0 !== n ? n : {};
-      var d, s = !n.document && !!n.postMessage, a = n.IS_PAPA_WORKER || false, o = {}, h = 0, v = {};
+      var s = !n.document && !!n.postMessage, a = n.IS_PAPA_WORKER || false, o = {}, h = 0, w = {};
+      function q(e) {
+        return 65279 === e.charCodeAt(0) ? e.slice(1) : e;
+      }
       function u(e) {
         this._handle = null, this._finished = false, this._completed = false, this._halted = false, this._input = null, this._baseIndex = 0, this._partialLine = "", this._rowCount = 0, this._start = 0, this._nextChunk = null, this.isFirstChunk = true, this._completeResults = { data: [], errors: [], meta: {} }, function(e2) {
-          var t = b(e2);
+          var t = v(e2);
           t.chunkSize = parseInt(t.chunkSize), e2.step || e2.chunk || (t.chunkSize = null);
           this._handle = new i(t), (this._handle.streamer = this)._config = t;
         }.call(this, e), this.parseChunk = function(t, e2) {
@@ -51,7 +54,7 @@ var require_papaparse_min = __commonJS({
           var i2 = this._partialLine + t, r2 = (this._partialLine = "", this._handle.parse(i2, this._baseIndex, !this._finished));
           if (!this._handle.paused() && !this._handle.aborted()) {
             t = r2.meta.cursor, i2 = (this._finished || (this._partialLine = i2.substring(t - this._baseIndex), this._baseIndex = t), r2 && r2.data && (this._rowCount += r2.data.length), this._finished || this._config.preview && this._rowCount >= this._config.preview);
-            if (a) n.postMessage({ results: r2, workerId: v.WORKER_ID, finished: i2 });
+            if (a) n.postMessage({ results: r2, workerId: w.WORKER_ID, finished: i2 });
             else if (U(this._config.chunk) && !e2) {
               if (this._config.chunk(r2, this._handle), this._handle.paused() || this._handle.aborted()) return void (this._halted = true);
               this._completeResults = r2 = void 0;
@@ -60,12 +63,12 @@ var require_papaparse_min = __commonJS({
           }
           this._halted = true;
         }, this._sendError = function(e2) {
-          U(this._config.error) ? this._config.error(e2) : a && this._config.error && n.postMessage({ workerId: v.WORKER_ID, error: e2, finished: false });
+          U(this._config.error) ? this._config.error(e2) : a && this._config.error && n.postMessage({ workerId: w.WORKER_ID, error: e2, finished: false });
         };
       }
-      function f(e) {
+      function d(e) {
         var r2;
-        (e = e || {}).chunkSize || (e.chunkSize = v.RemoteChunkSize), u.call(this, e), this._nextChunk = s ? function() {
+        (e = e || {}).chunkSize || (e.chunkSize = w.RemoteChunkSize), u.call(this, e), this._nextChunk = s ? function() {
           this._readChunk(), this._chunkLoaded();
         } : function() {
           this._readChunk();
@@ -74,7 +77,7 @@ var require_papaparse_min = __commonJS({
         }, this._readChunk = function() {
           if (this._finished) this._chunkLoaded();
           else {
-            if (r2 = new XMLHttpRequest(), this._config.withCredentials && (r2.withCredentials = this._config.withCredentials), s || (r2.onload = y(this._chunkLoaded, this), r2.onerror = y(this._chunkError, this)), r2.open(this._config.downloadRequestBody ? "POST" : "GET", this._input, !s), this._config.downloadRequestHeaders) {
+            if (r2 = new XMLHttpRequest(), this._config.withCredentials && (r2.withCredentials = this._config.withCredentials), s || (r2.onload = m(this._chunkLoaded, this), r2.onerror = m(this._chunkError, this)), r2.ontimeout = m(this._chunkTimeout, this), r2.open(this._config.downloadRequestBody ? "POST" : "GET", this._input, !s), this._config.downloadTimeout && !s && (r2.timeout = this._config.downloadTimeout), this._config.downloadRequestHeaders) {
               var e2, t = this._config.downloadRequestHeaders;
               for (e2 in t) r2.setRequestHeader(e2, t[e2]);
             }
@@ -92,13 +95,15 @@ var require_papaparse_min = __commonJS({
         }, this._chunkError = function(e2) {
           e2 = r2.statusText || e2;
           this._sendError(new Error(e2));
+        }, this._chunkTimeout = function() {
+          this._chunkError("Request timed out after " + this._config.downloadTimeout + "ms");
         };
       }
       function l(e) {
-        (e = e || {}).chunkSize || (e.chunkSize = v.LocalChunkSize), u.call(this, e);
+        (e = e || {}).chunkSize || (e.chunkSize = w.LocalChunkSize), u.call(this, e);
         var i2, r2, n2 = "undefined" != typeof FileReader;
         this.stream = function(e2) {
-          this._input = e2, r2 = e2.slice || e2.webkitSlice || e2.mozSlice, n2 ? ((i2 = new FileReader()).onload = y(this._chunkLoaded, this), i2.onerror = y(this._chunkError, this)) : i2 = new FileReaderSync(), this._nextChunk();
+          this._input = e2, r2 = e2.slice || e2.webkitSlice || e2.mozSlice, n2 ? ((i2 = new FileReader()).onload = m(this._chunkLoaded, this), i2.onerror = m(this._chunkError, this)) : i2 = new FileReaderSync(), this._nextChunk();
         }, this._nextChunk = function() {
           this._finished || this._config.preview && !(this._rowCount < this._config.preview) || this._readChunk();
         }, this._readChunk = function() {
@@ -110,7 +115,7 @@ var require_papaparse_min = __commonJS({
           this._sendError(i2.error);
         };
       }
-      function c(e) {
+      function f(e) {
         var i2;
         u.call(this, e = e || {}), this.stream = function(e2) {
           return i2 = e2, this._nextChunk();
@@ -119,7 +124,7 @@ var require_papaparse_min = __commonJS({
           if (!this._finished) return e2 = this._config.chunkSize, i2 = e2 ? (t = i2.substring(0, e2), i2.substring(e2)) : (t = i2, ""), this._finished = !i2, this.parseChunk(t);
         };
       }
-      function p(e) {
+      function c(e) {
         u.call(this, e = e || {});
         var t = [], i2 = true, r2 = false;
         this.pause = function() {
@@ -132,35 +137,35 @@ var require_papaparse_min = __commonJS({
           r2 && 1 === t.length && (this._finished = true);
         }, this._nextChunk = function() {
           this._checkIsFinished(), t.length ? this.parseChunk(t.shift()) : i2 = true;
-        }, this._streamData = y(function(e2) {
+        }, this._streamData = m(function(e2) {
           try {
             t.push("string" == typeof e2 ? e2 : e2.toString(this._config.encoding)), i2 && (i2 = false, this._checkIsFinished(), this.parseChunk(t.shift()));
           } catch (e3) {
             this._streamError(e3);
           }
-        }, this), this._streamError = y(function(e2) {
+        }, this), this._streamError = m(function(e2) {
           this._streamCleanUp(), this._sendError(e2);
-        }, this), this._streamEnd = y(function() {
+        }, this), this._streamEnd = m(function() {
           this._streamCleanUp(), r2 = true, this._streamData("");
-        }, this), this._streamCleanUp = y(function() {
+        }, this), this._streamCleanUp = m(function() {
           this._input.removeListener("data", this._streamData), this._input.removeListener("end", this._streamEnd), this._input.removeListener("error", this._streamError);
         }, this);
       }
       function i(m2) {
-        var n2, s2, a2, t, o2 = Math.pow(2, 53), h2 = -o2, u2 = /^\s*-?(\d+\.?|\.\d+|\d+\.\d+)([eE][-+]?\d+)?\s*$/, d2 = /^((\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z)))$/, i2 = this, r2 = 0, f2 = 0, l2 = false, e = false, c2 = [], p2 = { data: [], errors: [], meta: {} };
-        function y2(e2) {
+        var n2, s2, a2, t, o2 = Math.pow(2, 53), h2 = -o2, u2 = /^\s*-?(\d+\.?|\.\d+|\d+\.\d+)([eE][-+]?\d+)?\s*$/, d2 = /^((\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z)))$/, i2 = this, r2 = 0, l2 = 0, f2 = false, e = false, c2 = [], p2 = { data: [], errors: [], meta: {} };
+        function y(e2) {
           return "greedy" === m2.skipEmptyLines ? "" === e2.join("").trim() : 1 === e2.length && 0 === e2[0].length;
         }
-        function g2() {
-          if (p2 && a2 && (k("Delimiter", "UndetectableDelimiter", "Unable to auto-detect delimiting character; defaulted to '" + v.DefaultDelimiter + "'"), a2 = false), m2.skipEmptyLines && (p2.data = p2.data.filter(function(e3) {
-            return !y2(e3);
-          })), _2()) {
-            let t3 = function(e3, t4) {
-              U(m2.transformHeader) && (e3 = m2.transformHeader(e3, t4)), c2.push(e3);
+        function _2() {
+          if (p2 && a2 && (k("Delimiter", "UndetectableDelimiter", "Unable to auto-detect delimiting character; defaulted to '" + w.DefaultDelimiter + "'"), a2 = false), m2.skipEmptyLines && (p2.data = p2.data.filter(function(e3) {
+            return !y(e3);
+          })), g2()) {
+            let t3 = function(e3) {
+              c2.push(e3);
             };
             var t2 = t3;
             if (p2) if (Array.isArray(p2.data[0])) {
-              for (var e2 = 0; _2() && e2 < p2.data.length; e2++) p2.data[e2].forEach(t3);
+              for (var e2 = 0; g2() && e2 < p2.data.length; e2++) p2.data[e2].forEach(t3);
               p2.data.splice(0, 1);
             } else p2.data.forEach(t3);
           }
@@ -174,12 +179,12 @@ var require_papaparse_min = __commonJS({
               })(t4) ? parseFloat(t4) : d2.test(t4) ? new Date(t4) : "" === t4 ? null : t4) : t4)(n3 = m2.header ? r4 >= c2.length ? "__parsed_extra" : c2[r4] : n3, s3 = m2.transform ? m2.transform(s3, n3) : s3);
               "__parsed_extra" === n3 ? (i4[n3] = i4[n3] || [], i4[n3].push(s3)) : i4[n3] = s3;
             }
-            return m2.header && (r4 > c2.length ? k("FieldMismatch", "TooManyFields", "Too many fields: expected " + c2.length + " fields but parsed " + r4, f2 + t3) : r4 < c2.length && k("FieldMismatch", "TooFewFields", "Too few fields: expected " + c2.length + " fields but parsed " + r4, f2 + t3)), i4;
+            return m2.header && (r4 > c2.length ? k("FieldMismatch", "TooManyFields", "Too many fields: expected " + c2.length + " fields but parsed " + r4, l2 + t3) : r4 < c2.length && k("FieldMismatch", "TooFewFields", "Too few fields: expected " + c2.length + " fields but parsed " + r4, l2 + t3)), i4;
           }
           var r3;
-          p2 && (m2.header || m2.dynamicTyping || m2.transform) && (r3 = 1, !p2.data.length || Array.isArray(p2.data[0]) ? (p2.data = p2.data.map(i3), r3 = p2.data.length) : p2.data = i3(p2.data, 0), m2.header && p2.meta && (p2.meta.fields = c2), f2 += r3);
+          p2 && (m2.header || m2.dynamicTyping || m2.transform) && (r3 = 1, !p2.data.length || Array.isArray(p2.data[0]) ? (p2.data = p2.data.map(i3), r3 = p2.data.length) : p2.data = i3(p2.data, 0), m2.header && p2.meta && (p2.meta.fields = c2), l2 += r3);
         }
-        function _2() {
+        function g2() {
           return m2.header && 0 === c2.length;
         }
         function k(e2, t2, i3, r3) {
@@ -187,24 +192,24 @@ var require_papaparse_min = __commonJS({
           void 0 !== r3 && (e2.row = r3), p2.errors.push(e2);
         }
         U(m2.step) && (t = m2.step, m2.step = function(e2) {
-          p2 = e2, _2() ? g2() : (g2(), 0 !== p2.data.length && (r2 += e2.data.length, m2.preview && r2 > m2.preview ? s2.abort() : (p2.data = p2.data[0], t(p2, i2))));
+          p2 = e2, g2() ? _2() : (_2(), 0 !== p2.data.length && (r2 += e2.data.length, m2.preview && r2 > m2.preview ? s2.abort() : (p2.data = p2.data[0], t(p2, i2))));
         }), this.parse = function(e2, t2, i3) {
           var r3 = m2.quoteChar || '"', r3 = (m2.newline || (m2.newline = this.guessLineEndings(e2, r3)), a2 = false, m2.delimiter ? U(m2.delimiter) && (m2.delimiter = m2.delimiter(e2), p2.meta.delimiter = m2.delimiter) : ((r3 = ((e3, t3, i4, r4, n3) => {
             var s3, a3, o3, h3;
-            n3 = n3 || [",", "	", "|", ";", v.RECORD_SEP, v.UNIT_SEP];
+            n3 = n3 || [",", "	", "|", ";", w.RECORD_SEP, w.UNIT_SEP];
             for (var u3 = 0; u3 < n3.length; u3++) {
-              for (var d3, f3 = n3[u3], l3 = 0, c3 = 0, p3 = 0, g3 = (o3 = void 0, new E({ comments: r4, delimiter: f3, newline: t3, preview: 10 }).parse(e3)), _3 = 0; _3 < g3.data.length; _3++) i4 && y2(g3.data[_3]) ? p3++ : (d3 = g3.data[_3].length, c3 += d3, void 0 === o3 ? o3 = d3 : 0 < d3 && (l3 += Math.abs(d3 - o3), o3 = d3));
-              0 < g3.data.length && (c3 /= g3.data.length - p3), (void 0 === a3 || l3 <= a3) && (void 0 === h3 || h3 < c3) && 1.99 < c3 && (a3 = l3, s3 = f3, h3 = c3);
+              for (var d3, l3 = n3[u3], f3 = 0, c3 = 0, p3 = 0, _3 = (o3 = void 0, new E({ comments: r4, delimiter: l3, newline: t3, preview: 10 }).parse(e3)), g3 = 0; g3 < _3.data.length; g3++) i4 && y(_3.data[g3]) ? p3++ : (d3 = _3.data[g3].length, c3 += d3, void 0 === o3 ? o3 = d3 : 0 < d3 && (f3 += Math.abs(d3 - o3), o3 = d3));
+              0 < _3.data.length && (c3 /= _3.data.length - p3), 1.99 < c3 && (void 0 === a3 || f3 < a3 || f3 === a3 && h3 < c3) && (a3 = f3, s3 = l3, h3 = c3);
             }
             return { successful: !!(m2.delimiter = s3), bestDelimiter: s3 };
-          })(e2, m2.newline, m2.skipEmptyLines, m2.comments, m2.delimitersToGuess)).successful ? m2.delimiter = r3.bestDelimiter : (a2 = true, m2.delimiter = v.DefaultDelimiter), p2.meta.delimiter = m2.delimiter), b(m2));
-          return m2.preview && m2.header && r3.preview++, n2 = e2, s2 = new E(r3), p2 = s2.parse(n2, t2, i3), g2(), l2 ? { meta: { paused: true } } : p2 || { meta: { paused: false } };
+          })(e2, m2.newline, m2.skipEmptyLines, m2.comments, m2.delimitersToGuess)).successful ? m2.delimiter = r3.bestDelimiter : (a2 = true, m2.delimiter = w.DefaultDelimiter), p2.meta.delimiter = m2.delimiter), v(m2));
+          return r3.header = g2(), m2.preview && m2.header && r3.preview++, n2 = e2, s2 = new E(r3), p2 = s2.parse(n2, t2, i3), _2(), f2 ? { meta: { paused: true } } : p2 || { meta: { paused: false } };
         }, this.paused = function() {
-          return l2;
+          return f2;
         }, this.pause = function() {
-          l2 = true, s2.abort(), n2 = U(m2.chunk) ? "" : n2.substring(s2.getCharIndex());
+          f2 = true, s2.abort(), n2 = U(m2.chunk) ? "" : n2.substring(s2.getCharIndex());
         }, this.resume = function() {
-          i2.streamer._halted ? (l2 = false, i2.streamer.parseChunk(n2, true)) : setTimeout(i2.resume, 3);
+          i2.streamer._halted ? (f2 = false, i2.streamer.parseChunk(n2, true)) : setTimeout(i2.resume, 3);
         }, this.aborted = function() {
           return e;
         }, this.abort = function() {
@@ -221,76 +226,76 @@ var require_papaparse_min = __commonJS({
         return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       }
       function E(C) {
-        var S = (C = C || {}).delimiter, O = C.newline, x = C.comments, I = C.step, A = C.preview, T = C.fastMode, D = null, L = false, F = null == C.quoteChar ? '"' : C.quoteChar, j = F;
-        if (void 0 !== C.escapeChar && (j = C.escapeChar), ("string" != typeof S || -1 < v.BAD_DELIMITERS.indexOf(S)) && (S = ","), x === S) throw new Error("Comment character same as delimiter");
-        true === x ? x = "#" : ("string" != typeof x || -1 < v.BAD_DELIMITERS.indexOf(x)) && (x = false), "\n" !== O && "\r" !== O && "\r\n" !== O && (O = "\n");
-        var z = 0, M = false;
+        var S = (C = C || {}).delimiter, O = C.newline, x = C.comments, T = C.step, I = C.preview, A = C.fastMode, D = null, L = false, F = null == C.quoteChar ? '"' : C.quoteChar, z = F;
+        if (void 0 !== C.escapeChar && (z = C.escapeChar), ("string" != typeof S || -1 < w.BAD_DELIMITERS.indexOf(S)) && (S = ","), x === S) throw new Error("Comment character same as delimiter");
+        true === x ? x = "#" : ("string" != typeof x || -1 < w.BAD_DELIMITERS.indexOf(x)) && (x = false), "\n" !== O && "\r" !== O && "\r\n" !== O && (O = "\n");
+        var M = 0, j = false;
         this.parse = function(i2, t, r2) {
           if ("string" != typeof i2) throw new Error("Input must be a string");
-          var n2 = i2.length, e = S.length, s2 = O.length, a2 = x.length, o2 = U(I), h2 = [], u2 = [], d2 = [], f2 = z = 0;
-          if (!i2) return w();
-          if (T || false !== T && -1 === i2.indexOf(F)) {
-            for (var l2 = i2.split(O), c2 = 0; c2 < l2.length; c2++) {
-              if (d2 = l2[c2], z += d2.length, c2 !== l2.length - 1) z += O.length;
-              else if (r2) return w();
+          var n2 = i2.length, e = S.length, s2 = O.length, a2 = x.length, o2 = U(T), h2 = [], u2 = [], d2 = [], l2 = M = 0;
+          if (!i2) return b();
+          if (A || false !== A && -1 === i2.indexOf(F)) {
+            for (var f2 = i2.split(O), c2 = 0; c2 < f2.length; c2++) {
+              if (d2 = f2[c2], M += d2.length, c2 !== f2.length - 1) M += O.length;
+              else if (r2) return b();
               if (!x || d2.substring(0, a2) !== x) {
                 if (o2) {
-                  if (h2 = [], k(d2.split(S)), R(), M) return w();
+                  if (h2 = [], k(d2.split(S)), R(), j) return b();
                 } else k(d2.split(S));
-                if (A && A <= c2) return h2 = h2.slice(0, A), w(true);
+                if (I && I <= c2) return h2 = h2.slice(0, I), b(true);
               }
             }
-            return w();
+            return b();
           }
-          for (var p2 = i2.indexOf(S, z), g2 = i2.indexOf(O, z), _2 = new RegExp(P(j) + P(F), "g"), m2 = i2.indexOf(F, z); ; ) if (i2[z] === F) for (m2 = z, z++; ; ) {
-            if (-1 === (m2 = i2.indexOf(F, m2 + 1))) return r2 || u2.push({ type: "Quotes", code: "MissingQuotes", message: "Quoted field unterminated", row: h2.length, index: z }), E2();
-            if (m2 === n2 - 1) return E2(i2.substring(z, m2).replace(_2, F));
-            if (F === j && i2[m2 + 1] === j) m2++;
-            else if (F === j || 0 === m2 || i2[m2 - 1] !== j) {
+          for (var p2 = i2.indexOf(S, M), _2 = i2.indexOf(O, M), g2 = new RegExp(P(z) + P(F), "g"), m2 = i2.indexOf(F, M); ; ) if (i2[M] === F) for (m2 = M, M++; ; ) {
+            if (-1 === (m2 = i2.indexOf(F, m2 + 1))) return r2 || u2.push({ type: "Quotes", code: "MissingQuotes", message: "Quoted field unterminated", row: h2.length, index: M }), E2();
+            if (m2 === n2 - 1) return E2(i2.substring(M, m2).replace(g2, F));
+            if (F === z && i2[m2 + 1] === z) m2++;
+            else if (F === z || 0 === m2 || i2[m2 - 1] !== z) {
               -1 !== p2 && p2 < m2 + 1 && (p2 = i2.indexOf(S, m2 + 1));
-              var y2 = v2(-1 === (g2 = -1 !== g2 && g2 < m2 + 1 ? i2.indexOf(O, m2 + 1) : g2) ? p2 : Math.min(p2, g2));
-              if (i2.substr(m2 + 1 + y2, e) === S) {
-                d2.push(i2.substring(z, m2).replace(_2, F)), i2[z = m2 + 1 + y2 + e] !== F && (m2 = i2.indexOf(F, z)), p2 = i2.indexOf(S, z), g2 = i2.indexOf(O, z);
+              var y = w2(-1 === (_2 = -1 !== _2 && _2 < m2 + 1 ? i2.indexOf(O, m2 + 1) : _2) ? p2 : Math.min(p2, _2));
+              if (i2.substr(m2 + 1 + y, e) === S) {
+                d2.push(i2.substring(M, m2).replace(g2, F)), i2[M = m2 + 1 + y + e] !== F && (m2 = i2.indexOf(F, M)), p2 = i2.indexOf(S, M), _2 = i2.indexOf(O, M);
                 break;
               }
-              y2 = v2(g2);
-              if (i2.substring(m2 + 1 + y2, m2 + 1 + y2 + s2) === O) {
-                if (d2.push(i2.substring(z, m2).replace(_2, F)), b2(m2 + 1 + y2 + s2), p2 = i2.indexOf(S, z), m2 = i2.indexOf(F, z), o2 && (R(), M)) return w();
-                if (A && h2.length >= A) return w(true);
+              y = w2(_2);
+              if (i2.substring(m2 + 1 + y, m2 + 1 + y + s2) === O) {
+                if (d2.push(i2.substring(M, m2).replace(g2, F)), v2(m2 + 1 + y + s2), p2 = i2.indexOf(S, M), m2 = i2.indexOf(F, M), o2 && (R(), j)) return b();
+                if (I && h2.length >= I) return b(true);
                 break;
               }
-              u2.push({ type: "Quotes", code: "InvalidQuotes", message: "Trailing quote on quoted field is malformed", row: h2.length, index: z }), m2++;
+              u2.push({ type: "Quotes", code: "InvalidQuotes", message: "Trailing quote on quoted field is malformed", row: h2.length, index: M }), m2++;
             }
           }
-          else if (x && 0 === d2.length && i2.substring(z, z + a2) === x) {
-            if (-1 === g2) return w();
-            z = g2 + s2, g2 = i2.indexOf(O, z), p2 = i2.indexOf(S, z);
-          } else if (-1 !== p2 && (p2 < g2 || -1 === g2)) d2.push(i2.substring(z, p2)), z = p2 + e, p2 = i2.indexOf(S, z);
+          else if (x && 0 === d2.length && i2.substring(M, M + a2) === x) {
+            if (-1 === _2) return b();
+            M = _2 + s2, _2 = i2.indexOf(O, M), p2 = i2.indexOf(S, M);
+          } else if (-1 !== p2 && (p2 < _2 || -1 === _2)) d2.push(i2.substring(M, p2)), M = p2 + e, p2 = i2.indexOf(S, M);
           else {
-            if (-1 === g2) break;
-            if (d2.push(i2.substring(z, g2)), b2(g2 + s2), o2 && (R(), M)) return w();
-            if (A && h2.length >= A) return w(true);
+            if (-1 === _2) break;
+            if (d2.push(i2.substring(M, _2)), v2(_2 + s2), o2 && (R(), j)) return b();
+            if (I && h2.length >= I) return b(true);
           }
           return E2();
           function k(e2) {
-            h2.push(e2), f2 = z;
+            h2.push(e2), l2 = M;
           }
-          function v2(e2) {
+          function w2(e2) {
             var t2 = 0;
             return t2 = -1 !== e2 && (e2 = i2.substring(m2 + 1, e2)) && "" === e2.trim() ? e2.length : t2;
           }
           function E2(e2) {
-            return r2 || (void 0 === e2 && (e2 = i2.substring(z)), d2.push(e2), z = n2, k(d2), o2 && R()), w();
+            return r2 || (void 0 === e2 && (e2 = i2.substring(M)), d2.push(e2), M = n2, k(d2), o2 && R()), b();
           }
-          function b2(e2) {
-            z = e2, k(d2), d2 = [], g2 = i2.indexOf(O, z);
+          function v2(e2) {
+            M = e2, k(d2), d2 = [], _2 = i2.indexOf(O, M);
           }
-          function w(e2) {
+          function b(e2) {
             if (C.header && !t && h2.length && !L) {
               var s3 = h2[0], a3 = /* @__PURE__ */ Object.create(null), o3 = new Set(s3);
               let n3 = false;
               for (let r3 = 0; r3 < s3.length; r3++) {
-                let i3 = s3[r3];
+                let i3 = q(s3[r3]);
                 if (a3[i3 = U(C.transformHeader) ? C.transformHeader(i3, r3) : i3]) {
                   let e3, t2 = a3[i3];
                   for (; e3 = i3 + "_" + t2, t2++, o3.has(e3); ) ;
@@ -300,24 +305,24 @@ var require_papaparse_min = __commonJS({
               }
               n3 && console.warn("Duplicate headers found and renamed."), L = true;
             }
-            return { data: h2, errors: u2, meta: { delimiter: S, linebreak: O, aborted: M, truncated: !!e2, cursor: f2 + (t || 0), renamedHeaders: D } };
+            return { data: h2, errors: u2, meta: { delimiter: S, linebreak: O, aborted: j, truncated: !!e2, cursor: l2 + (t || 0), renamedHeaders: D } };
           }
           function R() {
-            I(w()), h2 = [], u2 = [];
+            T(b()), h2 = [], u2 = [];
           }
         }, this.abort = function() {
-          M = true;
+          j = true;
         }, this.getCharIndex = function() {
-          return z;
+          return M;
         };
       }
-      function g(e) {
+      function p(e) {
         var t = e.data, i2 = o[t.workerId], r2 = false;
         if (t.error) i2.userError(t.error, t.file);
         else if (t.results && t.results.data) {
           var n2 = { abort: function() {
             r2 = true, _(t.workerId, { data: [], errors: [], meta: { aborted: true } });
-          }, pause: m, resume: m };
+          }, pause: g, resume: g };
           if (U(i2.userStep)) {
             for (var s2 = 0; s2 < t.results.data.length && (i2.userStep({ data: t.results.data[s2], errors: t.results.errors, meta: t.results.meta }, n2), !r2); s2++) ;
             delete t.results;
@@ -329,16 +334,16 @@ var require_papaparse_min = __commonJS({
         var i2 = o[e];
         U(i2.userComplete) && i2.userComplete(t), i2.terminate(), delete o[e];
       }
-      function m() {
+      function g() {
         throw new Error("Not implemented.");
       }
-      function b(e) {
+      function v(e) {
         if ("object" != typeof e || null === e) return e;
         var t, i2 = Array.isArray(e) ? [] : {};
-        for (t in e) i2[t] = b(e[t]);
+        for (t in e) i2[t] = v(e[t]);
         return i2;
       }
-      function y(e, t) {
+      function m(e, t) {
         return function() {
           e.apply(t, arguments);
         };
@@ -346,100 +351,78 @@ var require_papaparse_min = __commonJS({
       function U(e) {
         return "function" == typeof e;
       }
-      return v.parse = function(e, t) {
+      return w.parse = function(e, t) {
         var i2 = (t = t || {}).dynamicTyping || false;
         U(i2) && (t.dynamicTypingFunction = i2, i2 = {});
-        if (t.dynamicTyping = i2, t.transform = !!U(t.transform) && t.transform, !t.worker || !v.WORKERS_SUPPORTED) return i2 = null, v.NODE_STREAM_INPUT, "string" == typeof e ? (e = ((e2) => 65279 !== e2.charCodeAt(0) ? e2 : e2.slice(1))(e), i2 = new (t.download ? f : c)(t)) : true === e.readable && U(e.read) && U(e.on) ? i2 = new p(t) : (n.File && e instanceof File || e instanceof Object) && (i2 = new l(t)), i2.stream(e);
+        if (t.dynamicTyping = i2, t.transform = !!U(t.transform) && t.transform, void 0 !== t.downloadTimeout) {
+          var i2 = parseInt(t.downloadTimeout);
+          if (isNaN(i2)) throw new Error("Config downloadTimeout value (" + t.downloadTimeout + ") not parsable by parseInt(val).");
+          t.downloadTimeout = i2;
+        }
+        if (!t.worker || !w.WORKERS_SUPPORTED) return i2 = null, w.NODE_STREAM_INPUT, "string" == typeof e ? (e = q(e), i2 = new (t.download ? d : f)(t)) : true === e.readable && U(e.read) && U(e.on) ? i2 = new c(t) : (n.File && e instanceof File || e instanceof Object) && (i2 = new l(t)), i2.stream(e);
         (i2 = (() => {
           var e2;
-          return !!v.WORKERS_SUPPORTED && (e2 = (() => {
+          return !!w.WORKERS_SUPPORTED && (e2 = (() => {
             var e3 = n.URL || n.webkitURL || null, t2 = r.toString();
-            return v.BLOB_URL || (v.BLOB_URL = e3.createObjectURL(new Blob(["var global = (function() { if (typeof self !== 'undefined') { return self; } if (typeof window !== 'undefined') { return window; } if (typeof global !== 'undefined') { return global; } return {}; })(); global.IS_PAPA_WORKER=true; ", "(", t2, ")();"], { type: "text/javascript" })));
-          })(), (e2 = new n.Worker(e2)).onmessage = g, e2.id = h++, o[e2.id] = e2);
+            return w.BLOB_URL || (w.BLOB_URL = e3.createObjectURL(new Blob(["var global = (function() { if (typeof self !== 'undefined') { return self; } if (typeof window !== 'undefined') { return window; } if (typeof global !== 'undefined') { return global; } return {}; })(); global.IS_PAPA_WORKER=true; ", "(", t2, ")();"], { type: "text/javascript" })));
+          })(), (e2 = new n.Worker(e2)).onmessage = p, e2.id = h++, o[e2.id] = e2);
         })()).userStep = t.step, i2.userChunk = t.chunk, i2.userComplete = t.complete, i2.userError = t.error, t.step = U(t.step), t.chunk = U(t.chunk), t.complete = U(t.complete), t.error = U(t.error), delete t.worker, i2.postMessage({ input: e, config: t, workerId: i2.id });
-      }, v.unparse = function(e, t) {
-        var n2 = false, _2 = true, m2 = ",", y2 = "\r\n", s2 = '"', a2 = s2 + s2, i2 = false, r2 = null, o2 = false, h2 = ((() => {
+      }, w.unparse = function(e, t) {
+        var s2 = false, g2 = true, m2 = ",", y = "\r\n", a2 = '"', o2 = a2 + a2, i2 = false, r2 = null, h2 = false, u2 = ((() => {
           if ("object" == typeof t) {
-            if ("string" != typeof t.delimiter || v.BAD_DELIMITERS.filter(function(e2) {
+            if ("string" != typeof t.delimiter || w.BAD_DELIMITERS.filter(function(e2) {
               return -1 !== t.delimiter.indexOf(e2);
-            }).length || (m2 = t.delimiter), "boolean" != typeof t.quotes && "function" != typeof t.quotes && !Array.isArray(t.quotes) || (n2 = t.quotes), "boolean" != typeof t.skipEmptyLines && "string" != typeof t.skipEmptyLines || (i2 = t.skipEmptyLines), "string" == typeof t.newline && (y2 = t.newline), "string" == typeof t.quoteChar && (s2 = t.quoteChar), "boolean" == typeof t.header && (_2 = t.header), Array.isArray(t.columns)) {
+            }).length || (m2 = t.delimiter), "boolean" != typeof t.quotes && "function" != typeof t.quotes && !Array.isArray(t.quotes) || (s2 = t.quotes), "boolean" != typeof t.skipEmptyLines && "string" != typeof t.skipEmptyLines || (i2 = t.skipEmptyLines), "string" == typeof t.newline && (y = t.newline), "string" == typeof t.quoteChar && (a2 = t.quoteChar, o2 = a2 + a2), "boolean" == typeof t.header && (g2 = t.header), Array.isArray(t.columns)) {
               if (0 === t.columns.length) throw new Error("Option columns is empty");
               r2 = t.columns;
             }
-            void 0 !== t.escapeChar && (a2 = t.escapeChar + s2), t.escapeFormulae instanceof RegExp ? o2 = t.escapeFormulae : "boolean" == typeof t.escapeFormulae && t.escapeFormulae && (o2 = /^[=+\-@\t\r].*$/);
+            void 0 !== t.escapeChar && (o2 = t.escapeChar + a2), t.escapeFormulae instanceof RegExp ? h2 = t.escapeFormulae : "boolean" == typeof t.escapeFormulae && t.escapeFormulae && (h2 = /^[=+\-@\t\r].*$/);
           }
-        })(), new RegExp(P(s2), "g"));
+        })(), new RegExp(P(a2), "g"));
         "string" == typeof e && (e = JSON.parse(e));
         if (Array.isArray(e)) {
-          if (!e.length || Array.isArray(e[0])) return u2(null, e, i2);
-          if ("object" == typeof e[0]) return u2(r2 || Object.keys(e[0]), e, i2);
-        } else if ("object" == typeof e) return "string" == typeof e.data && (e.data = JSON.parse(e.data)), Array.isArray(e.data) && (e.fields || (e.fields = e.meta && e.meta.fields || r2), e.fields || (e.fields = Array.isArray(e.data[0]) ? e.fields : "object" == typeof e.data[0] ? Object.keys(e.data[0]) : []), Array.isArray(e.data[0]) || "object" == typeof e.data[0] || (e.data = [e.data])), u2(e.fields || [], e.data || [], i2);
+          if (!e.length || Array.isArray(e[0])) return n2(null, e, i2);
+          if ("object" == typeof e[0]) return n2(r2 || Object.keys(e[0]), e, i2);
+        } else if ("object" == typeof e) return "string" == typeof e.data && (e.data = JSON.parse(e.data)), Array.isArray(e.data) && (e.fields || (e.fields = e.meta && e.meta.fields || r2), e.fields || (e.fields = Array.isArray(e.data[0]) ? e.fields : "object" == typeof e.data[0] ? Object.keys(e.data[0]) : []), Array.isArray(e.data[0]) || "object" == typeof e.data[0] || (e.data = [e.data])), n2(e.fields || [], e.data || [], i2);
         throw new Error("Unable to serialize unrecognized input");
-        function u2(e2, t2, i3) {
+        function n2(e2, t2, i3) {
           var r3 = "", n3 = ("string" == typeof e2 && (e2 = JSON.parse(e2)), "string" == typeof t2 && (t2 = JSON.parse(t2)), Array.isArray(e2) && 0 < e2.length), s3 = !Array.isArray(t2[0]);
-          if (n3 && _2) {
+          if (n3 && g2) {
             for (var a3 = 0; a3 < e2.length; a3++) 0 < a3 && (r3 += m2), r3 += k(e2[a3], a3);
-            0 < t2.length && (r3 += y2);
+            0 < t2.length && (r3 += y);
           }
           for (var o3 = 0; o3 < t2.length; o3++) {
             var h3 = (n3 ? e2 : t2[o3]).length, u3 = false, d2 = n3 ? 0 === Object.keys(t2[o3]).length : 0 === t2[o3].length;
             if (i3 && !n3 && (u3 = "greedy" === i3 ? "" === t2[o3].join("").trim() : 1 === t2[o3].length && 0 === t2[o3][0].length), "greedy" === i3 && n3) {
-              for (var f2 = [], l2 = 0; l2 < h3; l2++) {
-                var c2 = s3 ? e2[l2] : l2;
-                f2.push(t2[o3][c2]);
+              for (var l2 = [], f2 = 0; f2 < h3; f2++) {
+                var c2 = s3 ? e2[f2] : f2;
+                l2.push(t2[o3][c2]);
               }
-              u3 = "" === f2.join("").trim();
+              u3 = "" === l2.join("").trim();
             }
             if (!u3) {
               for (var p2 = 0; p2 < h3; p2++) {
                 0 < p2 && !d2 && (r3 += m2);
-                var g2 = n3 && s3 ? e2[p2] : p2;
-                r3 += k(t2[o3][g2], p2);
+                var _2 = n3 && s3 ? e2[p2] : p2;
+                r3 += k(t2[o3][_2], p2);
               }
-              o3 < t2.length - 1 && (!i3 || 0 < h3 && !d2) && (r3 += y2);
+              o3 < t2.length - 1 && (!i3 || 0 < h3 && !d2) && (r3 += y);
             }
           }
           return r3;
         }
         function k(e2, t2) {
-          var i3, r3;
-          return null == e2 ? "" : e2.constructor === Date ? JSON.stringify(e2).slice(1, 25) : (r3 = false, o2 && "string" == typeof e2 && o2.test(e2) && (e2 = "'" + e2, r3 = true), i3 = e2.toString().replace(h2, a2), (r3 = r3 || true === n2 || "function" == typeof n2 && n2(e2, t2) || Array.isArray(n2) && n2[t2] || ((e3, t3) => {
+          var i3, r3, n3;
+          return null == e2 ? "" : e2.constructor === Date ? isNaN(e2.getTime()) ? "" : e2.toISOString() : (n3 = false, h2 && "string" == typeof e2 && h2.test(e2) && (e2 = "'" + e2, n3 = true), r3 = (i3 = e2.toString()).replace(u2, o2), (n3 = n3 || true === s2 || "function" == typeof s2 && s2(e2, t2) || Array.isArray(s2) && s2[t2] || ((e3, t3) => {
             for (var i4 = 0; i4 < t3.length; i4++) if (-1 < e3.indexOf(t3[i4])) return true;
             return false;
-          })(i3, v.BAD_DELIMITERS) || -1 < i3.indexOf(m2) || " " === i3.charAt(0) || " " === i3.charAt(i3.length - 1)) ? s2 + i3 + s2 : i3);
+          })(r3, w.BAD_DELIMITERS) || -1 < r3.indexOf(m2) || -1 < i3.indexOf(a2) || " " === r3.charAt(0) || " " === r3.charAt(r3.length - 1)) ? a2 + r3 + a2 : r3);
         }
-      }, v.RECORD_SEP = String.fromCharCode(30), v.UNIT_SEP = String.fromCharCode(31), v.BYTE_ORDER_MARK = "\uFEFF", v.BAD_DELIMITERS = ["\r", "\n", '"', v.BYTE_ORDER_MARK], v.WORKERS_SUPPORTED = !s && !!n.Worker, v.NODE_STREAM_INPUT = 1, v.LocalChunkSize = 10485760, v.RemoteChunkSize = 5242880, v.DefaultDelimiter = ",", v.Parser = E, v.ParserHandle = i, v.NetworkStreamer = f, v.FileStreamer = l, v.StringStreamer = c, v.ReadableStreamStreamer = p, n.jQuery && ((d = n.jQuery).fn.parse = function(o2) {
-        var i2 = o2.config || {}, h2 = [];
-        return this.each(function(e2) {
-          if (!("INPUT" === d(this).prop("tagName").toUpperCase() && "file" === d(this).attr("type").toLowerCase() && n.FileReader) || !this.files || 0 === this.files.length) return true;
-          for (var t = 0; t < this.files.length; t++) h2.push({ file: this.files[t], inputElem: this, instanceConfig: d.extend({}, i2) });
-        }), e(), this;
-        function e() {
-          if (0 === h2.length) U(o2.complete) && o2.complete();
-          else {
-            var e2, t, i3, r2, n2 = h2[0];
-            if (U(o2.before)) {
-              var s2 = o2.before(n2.file, n2.inputElem);
-              if ("object" == typeof s2) {
-                if ("abort" === s2.action) return e2 = "AbortError", t = n2.file, i3 = n2.inputElem, r2 = s2.reason, void (U(o2.error) && o2.error({ name: e2 }, t, i3, r2));
-                if ("skip" === s2.action) return void u2();
-                "object" == typeof s2.config && (n2.instanceConfig = d.extend(n2.instanceConfig, s2.config));
-              } else if ("skip" === s2) return void u2();
-            }
-            var a2 = n2.instanceConfig.complete;
-            n2.instanceConfig.complete = function(e3) {
-              U(a2) && a2(e3, n2.file, n2.inputElem), u2();
-            }, v.parse(n2.file, n2.instanceConfig);
-          }
-        }
-        function u2() {
-          h2.splice(0, 1), e();
-        }
-      }), a && (n.onmessage = function(e) {
+      }, w.RECORD_SEP = String.fromCharCode(30), w.UNIT_SEP = String.fromCharCode(31), w.BYTE_ORDER_MARK = "\uFEFF", w.BAD_DELIMITERS = ["\r", "\n", '"', w.BYTE_ORDER_MARK], w.WORKERS_SUPPORTED = !s && !!n.Worker, w.NODE_STREAM_INPUT = 1, w.LocalChunkSize = 10485760, w.RemoteChunkSize = 5242880, w.DefaultDelimiter = ",", w.Parser = E, w.ParserHandle = i, w.NetworkStreamer = d, w.FileStreamer = l, w.StringStreamer = f, w.ReadableStreamStreamer = c, a && (n.onmessage = function(e) {
         e = e.data;
-        void 0 === v.WORKER_ID && e && (v.WORKER_ID = e.workerId);
-        "string" == typeof e.input ? n.postMessage({ workerId: v.WORKER_ID, results: v.parse(e.input, e.config), finished: true }) : (n.File && e.input instanceof File || e.input instanceof Object) && (e = v.parse(e.input, e.config)) && n.postMessage({ workerId: v.WORKER_ID, results: e, finished: true });
-      }), (f.prototype = Object.create(u.prototype)).constructor = f, (l.prototype = Object.create(u.prototype)).constructor = l, (c.prototype = Object.create(c.prototype)).constructor = c, (p.prototype = Object.create(u.prototype)).constructor = p, v;
+        void 0 === w.WORKER_ID && e && (w.WORKER_ID = e.workerId);
+        "string" == typeof e.input ? n.postMessage({ workerId: w.WORKER_ID, results: w.parse(e.input, e.config), finished: true }) : (n.File && e.input instanceof File || e.input instanceof Object) && (e = w.parse(e.input, e.config)) && n.postMessage({ workerId: w.WORKER_ID, results: e, finished: true });
+      }), (d.prototype = Object.create(u.prototype)).constructor = d, (l.prototype = Object.create(u.prototype)).constructor = l, (f.prototype = Object.create(f.prototype)).constructor = f, (c.prototype = Object.create(u.prototype)).constructor = c, w;
     });
   }
 });
@@ -527,8 +510,8 @@ function snakeCase(key) {
 function underscore(word) {
   return word.replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2").replace(/([a-z\d])([A-Z])/g, "$1_$2").replace(/-/g, "_").toLowerCase();
 }
-function flattenRow(obj, prefix, out) {
-  for (const [k, v] of Object.entries(obj)) {
+function flattenRow(obj2, prefix, out) {
+  for (const [k, v] of Object.entries(obj2)) {
     const key = prefix ? `${prefix}_${k}` : k;
     if (isPlainObject(v)) {
       flattenRow(v, key, out);
@@ -1014,8 +997,8 @@ function underscore2(word) {
 function isPlainObject8(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
-function flattenRow2(obj, prefix, out) {
-  for (const [k, v] of Object.entries(obj)) {
+function flattenRow2(obj2, prefix, out) {
+  for (const [k, v] of Object.entries(obj2)) {
     const key = prefix ? `${prefix}_${k}` : k;
     if (isPlainObject8(v)) {
       flattenRow2(v, key, out);
@@ -1197,8 +1180,8 @@ function decodeJsonAt(text, pos) {
   return void 0;
 }
 function htmlScriptJson(html, varName) {
-  const obj = htmlDecodeVar(html, varName);
-  return isPlainObject8(obj) ? obj : {};
+  const obj2 = htmlDecodeVar(html, varName);
+  return isPlainObject8(obj2) ? obj2 : {};
 }
 function parse_mlb_statcast_search(payload) {
   return csvToRows(payload);
@@ -1375,12 +1358,12 @@ function parse_recruiting_paged_list(raw) {
 function parse_recruiting_institution_rankings(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject10(raw)) return [];
-  const list = raw.list;
-  if (!Array.isArray(list) || list.length === 0) return [];
+  const list2 = raw.list;
+  if (!Array.isArray(list2) || list2.length === 0) return [];
   const pag = isPlainObject10(raw.pagination) ? raw.pagination : {};
   const base = {};
   for (const [k, v] of Object.entries(pag)) base[`pagination_${k}`] = v;
-  return normalize(list.map((row) => ({ ...base, ...isPlainObject10(row) ? row : {} })));
+  return normalize(list2.map((row) => ({ ...base, ...isPlainObject10(row) ? row : {} })));
 }
 function parse_recruiting_ranking_feed(raw) {
   if (Array.isArray(raw)) return normalize(raw);
@@ -1445,16 +1428,129 @@ function parse_sports247_site_page(raw) {
   return castNumericStrings(normalize(rows));
 }
 
-// src/parsers/cbs.ts
+// src/parsers/_frames.ts
+function pyUnderscore(word) {
+  return word.replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2").replace(/([a-z\d])([A-Z])/g, "$1_$2").replace(/-/g, "_").toLowerCase();
+}
+function pyJson(v) {
+  return JSON.stringify(v).replace(
+    /("(?:[^"\\]|\\.)*")|([,:])/g,
+    (_m, str, sep) => str !== void 0 ? str : `${sep} `
+  ).replace(/[\u007f-￿]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, "0")}`);
+}
 function isPlainObject12(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
+function flatten(obj2, prefix, out) {
+  const top = prefix === "";
+  const nested = [];
+  for (const [k, v] of Object.entries(obj2)) {
+    const key = top ? k : `${prefix}_${k}`;
+    if (!isPlainObject12(v)) out.push([key, v]);
+    else if (top) nested.push([key, v]);
+    else flatten(v, key, out);
+  }
+  for (const [key, v] of nested) flatten(v, key, out);
+}
+function idString(v) {
+  if (v === null || v === void 0) return null;
+  if (typeof v === "string") return v;
+  if (Array.isArray(v)) return v.map((x) => String(x)).join(",");
+  if (isPlainObject12(v)) return pyJson(v);
+  return String(v);
+}
+function rowsToFrame(rows, opts = {}) {
+  const kept = (rows ?? []).filter((r) => !(opts.dropNull && (r === null || r === void 0)));
+  if (kept.length === 0) return [];
+  if (!kept.some(isPlainObject12)) return kept.map((r) => ({ value: String(r) }));
+  const records2 = kept.map((r) => {
+    const pairs = [];
+    flatten(isPlainObject12(r) ? r : { value: r }, "", pairs);
+    return pairs;
+  });
+  const finalName = /* @__PURE__ */ new Map();
+  const used = /* @__PURE__ */ new Map();
+  for (const pairs of records2) {
+    for (const [path] of pairs) {
+      if (finalName.has(path)) continue;
+      const base = pyUnderscore(path);
+      const n = (used.get(base) ?? 0) + 1;
+      used.set(base, n);
+      finalName.set(path, n === 1 ? base : `${base}_${n}`);
+    }
+  }
+  const columns = [...finalName.values()];
+  const out = records2.map((pairs) => {
+    const row = {};
+    for (const c of columns) row[c] = null;
+    for (const [path, v] of pairs) {
+      const name = finalName.get(path);
+      let cell = v === void 0 ? null : v;
+      if (opts.ids && isIdColumn(name)) cell = idString(cell);
+      else if (Array.isArray(cell) || isPlainObject12(cell)) cell = pyJson(cell);
+      row[name] = cell;
+    }
+    return row;
+  });
+  return opts.ids ? out : idColumnsToStrings(out);
+}
+function asRows(raw) {
+  if (Array.isArray(raw)) return raw;
+  if (isPlainObject12(raw) && Object.keys(raw).length > 0) return [raw];
+  return [];
+}
+var MULTI_TABLE_SECTIONS = {
+  parse_asa_goals_added: { default: "summary", sections: ["summary", "actions"] },
+  parse_mls_standings: { default: "entries", sections: ["tables", "entries"] },
+  parse_mls_match: {
+    default: "match_information",
+    sections: ["match_information", "environment", "teams", "players", "staff", "referees", "last_matches"]
+  },
+  parse_nwsl_lineups: { default: "players", sections: ["teams", "players", "staff"] },
+  // PFF (py's `report` / `career` / `table` arguments) and KenPom (one table per
+  // HTML id). The two dict-default parsers keep sdv-py's return shape.
+  parse_pff_report: {
+    default: null,
+    sections: null,
+    dynamic: "a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`)"
+  },
+  parse_pff_player_detail: { default: "weeks", sections: ["weeks", "career"] },
+  parse_pff_v2_table: { default: "rows", sections: ["rows", "teamTotals"] },
+  parse_kenpom_page: {
+    default: null,
+    sections: null,
+    dynamic: "a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`)"
+  },
+  // stats.nba.com / stats.wnba.com: the parser selects itself (sdv-py `result_set`).
+  parse_nba_stats_result_sets: {
+    default: null,
+    sections: null,
+    dynamic: "a result-set name the payload ships (sdv-py's `result_set`)",
+    resultSet: true
+  }
+};
+function sectionError(parser, name, valid, dflt) {
+  return new Error(
+    `${parser}: unknown section '${name}'. Choose one of ${JSON.stringify(valid)}` + (dflt === null ? " (default: every table, as a dict)." : ` (default '${dflt}').`)
+  );
+}
+function pickSection(parser, tables2, section) {
+  const spec = MULTI_TABLE_SECTIONS[parser];
+  const name = section ?? spec.default ?? "";
+  const valid = spec.sections ?? Object.keys(tables2);
+  if (!Object.prototype.hasOwnProperty.call(tables2, name) || !valid.includes(name)) {
+    throw sectionError(parser, name, valid, spec.default);
+  }
+  return tables2[name];
+}
+
+// src/parsers/cbs.ts
 var ERROR_KEYS = ["error", "errors", "warnings"];
+var isErrorEnvelope = (obj2) => ERROR_KEYS.some((k) => k in obj2);
 function unwrapData(raw) {
   if (isPlainObject12(raw)) {
-    const obj = raw;
-    if ("data" in obj) return obj.data;
-    if (ERROR_KEYS.some((k) => k in obj)) return null;
+    if ("data" in raw) return raw.data;
+    if (isErrorEnvelope(raw)) return null;
   }
   return raw;
 }
@@ -1477,24 +1573,160 @@ var LIST_KEYS4 = [
   "markets",
   "data"
 ];
-function firstListIn(obj) {
+function firstListIn(obj2) {
   for (const key of LIST_KEYS4) {
-    const c = obj[key];
+    const c = obj2[key];
     if (Array.isArray(c) && c.length > 0 && isPlainObject12(c[0])) return c;
   }
-  for (const v of Object.values(obj)) {
+  for (const v of Object.values(obj2)) {
     if (Array.isArray(v) && v.length > 0 && isPlainObject12(v[0])) return v;
   }
   return null;
 }
+function envelopeRows(raw) {
+  if (Array.isArray(raw)) return raw;
+  if (!isPlainObject12(raw) || Object.keys(raw).length === 0) return [];
+  if ("data" in raw) {
+    const data = raw.data;
+    if (Array.isArray(data)) return data;
+    return isPlainObject12(data) && Object.keys(data).length > 0 ? [data] : [];
+  }
+  if (isErrorEnvelope(raw)) return [];
+  const values = Object.values(raw);
+  if (values.every(isPlainObject12)) {
+    return Object.entries(raw).map(([key, value]) => ({ key, ...value }));
+  }
+  return [raw];
+}
+function pandasObjectColumns(rows) {
+  const columns = new Set(rows.flatMap((r) => Object.keys(r)));
+  for (const c of columns) {
+    const cells2 = rows.map((r) => r[c]);
+    if (!cells2.some((v) => typeof v === "string")) continue;
+    for (const r of rows) {
+      if (typeof r[c] === "number") r[c] = String(r[c]);
+    }
+  }
+  return rows;
+}
+var PLAY_COLUMNS = [
+  "id",
+  "game_id",
+  "drive_id",
+  "quarter",
+  "time_remaining",
+  "down",
+  "distance",
+  "side",
+  "yardline",
+  "team_in_possession",
+  "description",
+  "medium",
+  "short",
+  "score_on_play",
+  "score_type",
+  "short_score",
+  "under_review",
+  "home_timeouts_remaining",
+  "away_timeouts_remaining",
+  "real_clock",
+  "subplays"
+];
+var DRIVE_COLUMNS = [
+  "id",
+  "team_id",
+  "quarter",
+  "starting_time",
+  "ending_time",
+  "time_of_possession",
+  "starting_yardline",
+  "ending_yardline",
+  "starting_play_id",
+  "ending_play_id",
+  "drive_plays",
+  "yards_on_drive",
+  "drive_yards_total",
+  "penalty_yards",
+  "first_downs_on_drive",
+  "inside_the_20",
+  "score_on_drive",
+  "result"
+];
+var PLAY_INT_COLUMNS = /* @__PURE__ */ new Set([
+  "id",
+  "game_id",
+  "drive_id",
+  "quarter",
+  "down",
+  "yardline",
+  "team_in_possession",
+  "home_timeouts_remaining",
+  "away_timeouts_remaining"
+]);
+var DRIVE_INT_COLUMNS = /* @__PURE__ */ new Set([
+  "id",
+  "team_id",
+  "quarter",
+  "drive_plays",
+  "starting_play_id",
+  "ending_play_id",
+  "yards_on_drive",
+  "drive_yards_total",
+  "penalty_yards",
+  "first_downs_on_drive"
+]);
+var PLAY_BOOL_COLUMNS = /* @__PURE__ */ new Set(["score_on_play", "under_review"]);
+var DRIVE_BOOL_COLUMNS = /* @__PURE__ */ new Set(["score_on_drive", "inside_the_20"]);
+function flatSubplays(subplays) {
+  let events = isPlainObject12(subplays) ? subplays.subplay : subplays;
+  if (isPlainObject12(events)) events = [events];
+  const out = [];
+  for (const event of Array.isArray(events) ? events : []) {
+    if (!isPlainObject12(event)) continue;
+    const flat = {};
+    for (const [key, value] of Object.entries(event)) {
+      if (isPlainObject12(value)) Object.assign(flat, value);
+      else flat[key] = value;
+    }
+    out.push(flat);
+  }
+  return out;
+}
+function scoringCell(column, v, ints, bools) {
+  if (v === null || v === void 0) return null;
+  if (ints.has(column)) {
+    const s = String(v);
+    if (!/^-?\d+$/.test(s)) return null;
+    return isIdColumn(column) ? String(BigInt(s)) : Number(s);
+  }
+  if (bools.has(column)) return String(v) === "Yes";
+  return Array.isArray(v) || isPlainObject12(v) ? pyJson(v) : v;
+}
+function scoringRows(raw, key, order, ints, bools) {
+  const list2 = raw[key];
+  const records2 = Array.isArray(list2) ? list2.filter(isPlainObject12) : [];
+  if (records2.length === 0) return [];
+  let subplays = [];
+  if (key === "plays") {
+    const flat = records2.map((r) => flatSubplays(r.subplays));
+    const fields = [...new Set(flat.flat().flatMap((e) => Object.keys(e)))];
+    subplays = flat.map((events) => events.map((e) => Object.fromEntries(fields.map((f) => [f, e[f] ?? null]))));
+  }
+  const rows = records2.map((r, i) => {
+    const row = {};
+    for (const c of order) row[c] = c === "subplays" ? JSON.stringify(subplays[i]) : scoringCell(c, r[c], ints, bools);
+    for (const [k, v] of Object.entries(r)) if (!(k in row)) row[k] = scoringCell(k, v, ints, bools);
+    return row;
+  });
+  return idColumnsToStrings(rows);
+}
 function parse_cbs_list(raw) {
-  const data = unwrapData(raw);
-  if (Array.isArray(data)) return normalize(data);
-  if (!isPlainObject12(data)) return [];
-  const list = firstListIn(data);
-  if (list) return normalize(list);
-  if (Object.keys(data).length > 0) return normalize([data]);
-  return [];
+  if (isPlainObject12(raw)) {
+    const keys = Object.keys(raw);
+    if (keys.length === 1 && keys[0] === "plays") return scoringRows(raw, "plays", PLAY_COLUMNS, PLAY_INT_COLUMNS, PLAY_BOOL_COLUMNS);
+    if (keys.length === 1 && keys[0] === "drives") return scoringRows(raw, "drives", DRIVE_COLUMNS, DRIVE_INT_COLUMNS, DRIVE_BOOL_COLUMNS);
+  }
+  return pandasObjectColumns(rowsToFrame(envelopeRows(raw)));
 }
 function parse_cbs_scoreboard(raw) {
   const data = unwrapData(raw);
@@ -1504,42 +1736,24 @@ function parse_cbs_scoreboard(raw) {
     const c = data[key];
     if (Array.isArray(c)) return normalize(c);
   }
-  const list = firstListIn(data);
-  if (list) return normalize(list);
+  const list2 = firstListIn(data);
+  if (list2) return normalize(list2);
   if (Object.keys(data).length > 0) return normalize([data]);
   return [];
 }
 function parse_cbs_standings(raw) {
-  const data = unwrapData(raw);
-  if (Array.isArray(data)) return normalize(data);
-  if (!isPlainObject12(data)) return [];
-  const groups = data.groups ?? data.divisions;
-  if (Array.isArray(groups) && groups.length > 0 && isPlainObject12(groups[0])) {
-    const rows = [];
-    for (const g of groups) {
-      if (!isPlainObject12(g)) continue;
-      const { standings, rows: gRows, entries, ...groupCols } = g;
-      const inner = [standings, gRows, entries].find(
-        (x) => Array.isArray(x) && x.length > 0
-      );
-      const groupPrefixed = {};
-      for (const [k, v] of Object.entries(groupCols)) {
-        if (!isPlainObject12(v) && !Array.isArray(v)) groupPrefixed[`group_${k}`] = v;
-      }
-      for (const r of inner ?? []) {
-        if (isPlainObject12(r)) rows.push({ ...groupPrefixed, ...r });
-      }
+  if (!isPlainObject12(raw) || Object.keys(raw).length === 0 || isErrorEnvelope(raw)) return [];
+  const numericYears = Object.keys(raw).every((y) => /^\d+$/.test(y));
+  const rows = [];
+  for (const [year, byType] of Object.entries(raw)) {
+    if (!isPlainObject12(byType)) continue;
+    for (const [seasonType, block] of Object.entries(byType)) {
+      if (!isPlainObject12(block)) continue;
+      rows.push({ season_year: numericYears ? Number(year) : year, season_type: String(seasonType), ...block });
     }
-    if (rows.length > 0) return normalize(rows);
   }
-  for (const key of ["standings", "rows", "entries"]) {
-    const c = data[key];
-    if (Array.isArray(c)) return normalize(c);
-  }
-  const list = firstListIn(data);
-  if (list) return normalize(list);
-  if (Object.keys(data).length > 0) return normalize([data]);
-  return [];
+  if (rows.length > 0) return pandasObjectColumns(rowsToFrame(rows));
+  return "data" in raw ? parse_cbs_list(raw) : [];
 }
 function parse_cbs_odds(raw) {
   const data = unwrapData(raw);
@@ -1574,255 +1788,465 @@ function parse_cbs_odds(raw) {
 }
 
 // src/parsers/fox.ts
-function isPlainObject13(v) {
-  return v !== null && typeof v === "object" && !Array.isArray(v);
+var cells = (columns) => (Array.isArray(columns) ? columns : []).map((c) => isPlainObject(c) ? c.text ?? null : c);
+function uriId(uri) {
+  if (!uri || typeof uri !== "string") return null;
+  const m = /(\d+)$/.exec(uri);
+  return m ? m[1] : null;
 }
-var LIST_KEYS5 = [
-  "selectionGroupList",
-  "groupList",
-  "sectionList",
-  "standingsSections",
-  "navItems",
-  "results",
-  "items",
-  "events",
-  "rows",
-  "groups",
-  "list",
-  "entries"
-];
-function firstListIn2(obj) {
-  for (const key of LIST_KEYS5) {
-    const c = obj[key];
-    if (Array.isArray(c) && c.length > 0 && isPlainObject13(c[0])) return c;
+var clean = (name) => String(name).replace(/[^\p{L}\p{N}_]+/gu, "_").replace(/^_+|_+$/g, "").toLowerCase() || "v";
+var nil = (v) => v === null || v === void 0;
+var list = (v) => Array.isArray(v) ? v : [];
+var obj = (v) => isPlainObject(v) ? v : {};
+function tableRows(tbl, extra = {}) {
+  if (!tbl || !isPlainObject(tbl)) return [];
+  const t = tbl;
+  const headers = cells(obj(list(t.headers)[0]).columns);
+  const names = headers.map((h, i) => nil(h) || h === "" ? `v${i}` : clean(h));
+  const out = [];
+  for (const r of list(t.rows)) {
+    const row = { ...extra };
+    const vals = cells(obj(r).columns);
+    for (let i = 0; i < Math.min(names.length, vals.length); i++) row[names[i]] = vals[i];
+    row.entity_id = uriId(obj(obj(r).entityLink).contentUri);
+    out.push(row);
   }
-  for (const v of Object.values(obj)) {
-    if (Array.isArray(v) && v.length > 0 && isPlainObject13(v[0])) return v;
-  }
-  return null;
+  return out;
 }
-function parse_fox_list(raw) {
-  if (Array.isArray(raw)) return normalize(raw);
-  if (!isPlainObject13(raw)) return [];
-  const list = firstListIn2(raw);
-  if (list) return normalize(list);
-  if (Object.keys(raw).length > 0) return normalize([raw]);
-  return [];
+function fullTeamName(team) {
+  if (!team) return null;
+  const stacked = `${team.stackedNameTop || ""} ${team.stackedNameBottom || ""}`.trim();
+  return stacked || team.longName || team.name || null;
 }
-function parse_fox_scoreboard(raw) {
-  if (Array.isArray(raw)) return normalize(raw);
-  if (!isPlainObject13(raw)) return [];
-  const selectionGroups = raw.selectionGroupList;
-  if (Array.isArray(selectionGroups)) {
-    const rows = [];
-    for (const g of selectionGroups) {
-      if (!isPlainObject13(g)) continue;
-      const { selectionList, ...groupMeta } = g;
-      const list = Array.isArray(selectionList) ? selectionList : [];
-      for (const sel of list) {
-        if (!isPlainObject13(sel)) continue;
-        rows.push({ group: groupMeta, ...sel });
-      }
-    }
-    return normalize(rows);
-  }
-  for (const key of ["events", "groupList", "sectionList"]) {
-    const c = raw[key];
-    if (Array.isArray(c) && c.length > 0 && isPlainObject13(c[0])) return normalize(c);
-  }
-  return parse_fox_list(raw);
-}
-function parse_fox_standings(raw) {
-  if (Array.isArray(raw)) return normalize(raw);
-  if (!isPlainObject13(raw)) return [];
-  const sections = raw.standingsSections;
-  if (Array.isArray(sections)) {
-    const rows = [];
-    for (const s of sections) {
-      if (!isPlainObject13(s)) continue;
-      const { standings, ...sectionMeta } = s;
-      const list = Array.isArray(standings) ? standings : [];
-      for (const r of list) {
-        if (!isPlainObject13(r)) continue;
-        rows.push({ section: sectionMeta, ...r });
-      }
-    }
-    return normalize(rows);
-  }
-  return parse_fox_list(raw);
-}
-function parse_fox_event(raw) {
-  if (!isPlainObject13(raw)) return [];
-  const comparison = raw?.teamStatsComparison?.items ?? raw?.gameStats?.items ?? raw?.eventStatsTab?.eventStatsList;
-  if (Array.isArray(comparison) && comparison.length > 0 && isPlainObject13(comparison[0])) {
-    return normalize(comparison);
-  }
-  if (Object.keys(raw).length > 0) return normalize([raw]);
-  return [];
-}
-function parse_fox_team_roster(raw) {
-  if (!isPlainObject13(raw)) return [];
-  const groups = raw.groups;
-  if (Array.isArray(groups)) {
-    const rows = [];
-    for (const g of groups) {
-      if (!isPlainObject13(g)) continue;
-      const { rows: groupRows, ...groupMeta } = g;
-      const list = Array.isArray(groupRows) ? groupRows : [];
-      for (const r of list) {
-        if (!isPlainObject13(r)) continue;
-        rows.push({ group: groupMeta, ...r });
-      }
-    }
-    return normalize(rows);
-  }
-  return parse_fox_list(raw);
-}
-function parse_fox_search(raw) {
-  if (Array.isArray(raw)) return normalize(raw);
-  if (!isPlainObject13(raw)) return [];
-  const results = raw.results;
-  if (Array.isArray(results)) return normalize(results);
-  return parse_fox_list(raw);
-}
-
-// src/parsers/yahoo_scores.ts
-function isPlainObject14(v) {
-  return v !== null && typeof v === "object" && !Array.isArray(v);
-}
-var LIST_KEYS6 = [
-  "games",
-  "events",
-  "scores",
-  "players",
-  "teams",
-  "leaders",
-  "rows",
-  "items",
-  "list",
-  "results",
-  "entries"
-];
-function firstListIn3(obj) {
-  for (const key of LIST_KEYS6) {
-    const c = obj[key];
-    if (Array.isArray(c) && c.length > 0 && isPlainObject14(c[0])) return c;
-  }
-  for (const v of Object.values(obj)) {
-    if (Array.isArray(v) && v.length > 0 && isPlainObject14(v[0])) return v;
-  }
-  return null;
-}
-function unwrapService(raw) {
-  if (isPlainObject14(raw) && isPlainObject14(raw.service)) {
-    return raw.service;
-  }
-  return raw;
-}
-function unrollKeyedMap(map) {
-  if (!isPlainObject14(map)) return [];
+function segmentEvents(raw) {
   const rows = [];
-  for (const [key, val] of Object.entries(map)) {
-    if (isPlainObject14(val)) rows.push({ id: key, ...val });
+  for (const sec of list(raw.sectionList)) {
+    const s = obj(sec);
+    const events = [...list(s.events)];
+    for (const mod of list(s.modules)) events.push(...list(obj(obj(mod).model).events));
+    for (const e of events) {
+      const ev = obj(e);
+      const tokens = obj(obj(obj(ev.entityLink).layout).tokens);
+      const homeUri = tokens.homeUri;
+      const awayUri = tokens.awayUri;
+      const upper = obj(ev.upperTeam);
+      const lower = obj(ev.lowerTeam);
+      const byUri = /* @__PURE__ */ new Map();
+      for (const t of [upper, lower]) if (t.uri) byUri.set(t.uri, t);
+      const home = homeUri ? byUri.get(homeUri) ?? null : lower;
+      const away = awayUri ? byUri.get(awayUri) ?? null : upper;
+      rows.push({
+        segment_id: null,
+        section_id: s.id ?? null,
+        section_title: s.title ?? null,
+        game_id: tokens.id || uriId(ev.contentUri),
+        chip_id: ev.id ?? null,
+        league: ev.league ?? null,
+        date: ev.eventTime ?? null,
+        event_status: ev.eventStatus ?? null,
+        status: ev.statusLine ?? null,
+        tv_station: ev.tvStation ?? null,
+        headline: ev.eventHeadline ?? null,
+        odds_line: ev.oddsLine ?? null,
+        over_under_line: ev.overUnderLine ?? null,
+        home_team: fullTeamName(home),
+        home_team_id: uriId(homeUri) || uriId(home?.uri),
+        home_score: home?.score ?? null,
+        home_record: home?.record ?? null,
+        away_team: fullTeamName(away),
+        away_team_id: uriId(awayUri) || uriId(away?.uri),
+        away_score: away?.score ?? null,
+        away_record: away?.record ?? null
+      });
+    }
   }
   return rows;
 }
-function parse_yahoo_scores_list(raw) {
-  const svc = unwrapService(raw);
-  if (Array.isArray(svc)) return normalize(svc);
-  if (!isPlainObject14(svc)) return [];
-  const list = firstListIn3(svc);
-  if (list) return normalize(list);
-  if (Object.keys(svc).length > 0) return normalize([svc]);
-  return [];
+function standings(raw) {
+  const rows = [];
+  for (const sec of list(raw.standingsSections)) {
+    const s = obj(sec);
+    for (const tbl of list(s.standings)) rows.push(...tableRows(tbl, { section: s.title ?? null }));
+  }
+  return rows;
 }
-function parse_yahoo_scores_scoreboard(raw) {
-  const svc = unwrapService(raw);
-  if (!isPlainObject14(svc)) return [];
-  const games = svc.scoreboard?.games ?? svc.games;
-  if (isPlainObject14(games)) return normalize(unrollKeyedMap(games));
-  if (Array.isArray(games)) return normalize(games);
-  return parse_yahoo_scores_list(raw);
+var MOVE_SIGN = { up: 1, down: -1 };
+function polls(raw) {
+  const rows = [];
+  for (const sec of list(raw.standingsSections)) {
+    const s = obj(sec);
+    for (const tbl of list(s.standings)) {
+      if (!tbl || !isPlainObject(tbl)) continue;
+      const t = tbl;
+      const templates = list(obj(list(t.headers)[0]).columns).map((c) => isPlainObject(c) ? c.template : null);
+      const ent = templates.indexOf("cell-entity");
+      const chg = templates.indexOf("cell-change");
+      const built = tableRows(t, { section: s.title ?? null });
+      const raws = list(t.rows);
+      for (let i = 0; i < Math.min(built.length, raws.length); i++) {
+        const row = built[i];
+        const cols = list(obj(raws[i]).columns).map((c) => isPlainObject(c) ? c : { text: c });
+        const cell = chg >= 0 && chg < cols.length ? cols[chg] : {};
+        const sign = MOVE_SIGN[cell.subType || ""];
+        const text = cell.text;
+        if (ent >= 0 && ent < cols.length) row.team = cols[ent].text ?? null;
+        if (!("team" in row)) row.team = null;
+        const decimal = typeof text === "string" && /^\d+$/.test(text) ? text : null;
+        row.rank_change = sign && decimal ? sign * Number(decimal) : null;
+        rows.push(row);
+      }
+    }
+  }
+  return rows;
 }
-function parse_yahoo_scores_boxscore(raw) {
-  const svc = unwrapService(raw);
-  if (!isPlainObject14(svc)) return [];
-  const playerStats = svc.boxscore?.player_stats ?? svc.player_stats;
-  if (isPlainObject14(playerStats)) return normalize(unrollKeyedMap(playerStats));
-  if (Array.isArray(playerStats)) return normalize(playerStats);
-  return parse_yahoo_scores_list(raw);
+function navItems(raw) {
+  const buckets = [[null, list(raw.navItems)]];
+  for (const g of list(raw.groups)) buckets.push([obj(obj(g).header).title ?? null, list(obj(g).items)]);
+  const rows = [];
+  for (const [group, items] of buckets) {
+    for (const i of items) {
+      const it = obj(i);
+      const link = obj(it.entityLink);
+      rows.push({
+        group,
+        fox_id: uriId(link.contentUri),
+        abbreviation: it.title ?? null,
+        name: link.title || it.imageAltText || null,
+        content_uri: link.contentUri ?? null,
+        content_type: link.contentType ?? null,
+        web_url: link.webUrl || it.webUrl || null,
+        color: link.color ?? null,
+        logo_url: it.logoUrl ?? null
+      });
+    }
+  }
+  return rows;
+}
+function header(raw) {
+  if (!(raw.title || raw.contentUri)) return [];
+  const details = list(raw.details).filter(isPlainObject).map((d) => d.text).filter((d) => d);
+  return [
+    {
+      template: raw.template ?? null,
+      title: raw.title ?? null,
+      entity_id: uriId(raw.contentUri),
+      content_uri: raw.contentUri ?? null,
+      content_type: raw.contentType ?? null,
+      color: raw.color ?? null,
+      logo_url: raw.logoUrl ?? null,
+      image_alt_text: raw.imageAltText ?? null,
+      rank: raw.rank ?? null,
+      details: details.map(String).join(" \xB7 ") || null
+    }
+  ];
+}
+function searchResults(raw) {
+  const rows = [];
+  for (const r of list(raw.results)) {
+    const res = obj(r);
+    for (const c of list(res.components)) {
+      const comp = obj(c);
+      const model = obj(comp.model);
+      rows.push({
+        group: res.title ?? null,
+        type: comp.type ?? null,
+        entity_id: uriId(model.contentUri),
+        title: model.title ?? null,
+        subtitle: model.subtitle ?? null,
+        content_type: model.contentType ?? null,
+        content_uri: model.contentUri ?? null,
+        web_url: model.webUrl ?? null,
+        analytics_name: model.analyticsName ?? null,
+        image_url: isPlainObject(model.image) ? model.image.url ?? null : null
+      });
+    }
+  }
+  return rows;
+}
+function trending(raw) {
+  const rows = [];
+  for (const i of list(obj(raw.data).results)) {
+    const it = obj(i);
+    let thumbUrl = null;
+    if (isPlainObject(it.thumbnail)) {
+      const thumb = it.thumbnail;
+      thumbUrl = thumb.url || (isPlainObject(thumb.content) ? thumb.content.url ?? null : null);
+    }
+    rows.push({
+      id: it.id ?? null,
+      spark_id: it.spark_id ?? null,
+      title: it.title ?? null,
+      description: it.description || it.dek || it.meta_description || null,
+      content_type: it.content_type ?? null,
+      component_type: it.component_type ?? null,
+      publication_date: it.publication_date ?? null,
+      last_published_date: it.last_published_date ?? null,
+      canonical_url: it.canonical_url ?? null,
+      thumbnail_url: thumbUrl ?? null,
+      playback_url: it.playback_url ?? null
+    });
+  }
+  return rows;
+}
+function roster(raw) {
+  const rows = [];
+  for (const g of list(raw.groups)) {
+    const grp = obj(g);
+    const headers = cells(obj(list(grp.headers)[0]).columns);
+    const groupLabel = grp.title || (headers.length ? headers[0] : null);
+    const names = ["player", ...headers.slice(1).map((h) => nil(h) ? "none" : String(h).toLowerCase())];
+    for (const r of list(grp.rows)) {
+      const uri = obj(obj(r).entityLink).contentUri;
+      if (!uri || typeof uri !== "string" || !uri.includes("athletes/")) continue;
+      const vals = cells(obj(r).columns);
+      const row = { position_group: groupLabel ?? null };
+      for (let i = 0; i < Math.min(names.length, vals.length); i++) row[names[i]] = vals[i];
+      row.athlete_id = uriId(uri);
+      rows.push(row);
+    }
+  }
+  return rows;
+}
+var scorechip = (raw) => raw.id ? [flatten2(raw)] : [];
+function flatten2(rec, prefix = "", out = {}) {
+  for (const [k, v] of Object.entries(rec)) {
+    const key = `${prefix}${underscore(String(k))}`;
+    if (isPlainObject(v)) flatten2(v, `${key}_`, out);
+    else if (Array.isArray(v)) out[key] = JSON.stringify(v);
+    else out[key] = v;
+  }
+  return out;
+}
+function largestRecordList(payload) {
+  let best = [];
+  const queue = [payload];
+  while (queue.length) {
+    const node = queue.shift();
+    if (isPlainObject(node)) queue.push(...Object.values(node));
+    else if (Array.isArray(node)) {
+      const recs = node.filter(isPlainObject);
+      if (recs.length > best.length) best = recs;
+      queue.push(...recs);
+    }
+  }
+  return best;
+}
+function homogenize(rows) {
+  const kinds = /* @__PURE__ */ new Map();
+  for (const r of rows) {
+    for (const [k, v] of Object.entries(r)) {
+      if (v === null || v === void 0) continue;
+      if (!kinds.has(k)) kinds.set(k, /* @__PURE__ */ new Set());
+      kinds.get(k).add(typeof v);
+    }
+  }
+  const toStr2 = new Set([...kinds].filter(([, t]) => t.size > 1).map(([k]) => k));
+  if (!toStr2.size) return rows;
+  const str = (v) => v === null || v === void 0 ? v : typeof v === "boolean" ? v ? "True" : "False" : String(v);
+  return rows.map((r) => Object.fromEntries(Object.entries(r).map(([k, v]) => [k, toStr2.has(k) ? str(v) : v])));
+}
+function generic(raw) {
+  try {
+    return idColumnsToStrings(homogenize(largestRecordList(raw).map((r) => flatten2(r))));
+  } catch {
+    return [];
+  }
+}
+function dedicated(raw, ...builders) {
+  if (isPlainObject(raw)) {
+    for (const b of builders) {
+      let rows = [];
+      try {
+        rows = b(raw);
+      } catch {
+        rows = [];
+      }
+      if (rows.length) return idColumnsToStrings(rows);
+    }
+  }
+  return generic(raw);
+}
+function parse_fox_list(raw) {
+  return dedicated(
+    raw,
+    navItems,
+    trending,
+    (r) => r.template === "entity-header" ? header(r) : [],
+    scorechip
+  );
+}
+function parse_fox_scoreboard(raw) {
+  return dedicated(raw, segmentEvents);
+}
+function parse_fox_standings(raw) {
+  return dedicated(
+    raw,
+    (r) => list(r.standingsSections).some((s) => list(obj(s).standings).some((t) => obj(t).template === "table-polls")) ? polls(r) : [],
+    standings
+  );
+}
+function parse_fox_event(raw) {
+  return generic(raw);
+}
+function parse_fox_team_roster(raw) {
+  return dedicated(raw, roster);
+}
+function parse_fox_search(raw) {
+  return dedicated(raw, searchResults);
 }
 
 // src/parsers/yahoo.ts
-function isPlainObject15(v) {
-  return v !== null && typeof v === "object" && !Array.isArray(v);
+function pyStr(v) {
+  return String(v);
 }
-function unwrapData2(raw) {
-  if (isPlainObject15(raw) && "data" in raw) {
-    return raw.data;
+var pyName = (key) => underscore(key.replace(/[^\p{L}\p{N}_]+/gu, "_")).replace(/^_+|_+$/g, "");
+function flattenRecord(rec) {
+  const out = {};
+  const nested = {};
+  for (const [k, v] of Object.entries(rec)) (isPlainObject(v) ? nested : out)[k] = v;
+  const walk = (obj2, prefix) => {
+    for (const [k, v] of Object.entries(obj2)) {
+      const key = `${prefix}_${k}`;
+      if (isPlainObject(v)) walk(v, key);
+      else out[key] = v;
+    }
+  };
+  for (const [k, v] of Object.entries(nested)) walk(v, k);
+  return out;
+}
+function pyFrame(rows) {
+  if (!Array.isArray(rows) || rows.length === 0) return [];
+  if (!rows.some(isPlainObject)) {
+    return rows.map((r) => ({ value: r === null || r === void 0 ? null : pyStr(r) }));
   }
-  return raw;
-}
-function firstRootList(data) {
-  for (const v of Object.values(data)) {
-    if (Array.isArray(v) && v.length > 0 && isPlainObject15(v[0])) return v;
+  const flat = rows.map((r) => isPlainObject(r) ? flattenRecord(r) : { value: r });
+  const names = /* @__PURE__ */ new Map();
+  const seen = /* @__PURE__ */ new Map();
+  for (const r of flat) {
+    for (const k of Object.keys(r)) {
+      if (names.has(k)) continue;
+      let name = pyName(k);
+      const n = (seen.get(name) ?? 0) + 1;
+      seen.set(name, n);
+      if (n > 1) name = `${name}_${n}`;
+      names.set(k, name);
+    }
   }
-  return null;
+  const cols = [...new Set(names.values())];
+  const out = flat.map((r) => {
+    const o = {};
+    for (const c of cols) o[c] = null;
+    for (const [k, v] of Object.entries(r)) o[names.get(k)] = v === void 0 ? null : v;
+    return o;
+  });
+  for (const c of cols) {
+    const vals = out.map((r) => r[c]).filter((v) => v !== null);
+    const kinds = new Set(vals.map((v) => typeof v === "object" ? "nested" : typeof v));
+    const native = kinds.size === 0 || kinds.size === 1 && (kinds.has("number") || kinds.has("string") || kinds.has("boolean"));
+    if (native) continue;
+    for (const r of out) {
+      const v = r[c];
+      if (v === null || typeof v === "string" || typeof v === "boolean") continue;
+      r[c] = typeof v === "object" ? JSON.stringify(v) : pyStr(v);
+    }
+  }
+  return idColumnsToStrings(out);
 }
-var STAT_ARRAY_KEYS = [
-  "footballStats",
-  "basketballStats",
-  "baseballStats",
-  "hockeyStats",
-  "soccerStats",
-  "leaders",
-  "stats",
-  "statLeaders",
-  "players",
-  "teams"
-];
+function descend(node) {
+  for (; ; ) {
+    if (Array.isArray(node)) {
+      const dicts2 = node.filter(isPlainObject);
+      if (node.length && dicts2.length === node.length && dicts2.every((d) => Object.keys(d).length === 1)) {
+        const keys = new Set(dicts2.map((d) => Object.keys(d)[0]));
+        if (keys.size === 1) {
+          const inner = dicts2.map((d) => d[Object.keys(d)[0]]);
+          if (inner.every((v) => Array.isArray(v) || isPlainObject(v))) {
+            node = inner.flatMap((v) => Array.isArray(v) ? v : [v]);
+            continue;
+          }
+        }
+      }
+      return node;
+    }
+    if (isPlainObject(node)) {
+      const keys = Object.keys(node);
+      if (keys.length === 1 && (Array.isArray(node[keys[0]]) || isPlainObject(node[keys[0]]))) {
+        node = node[keys[0]];
+        continue;
+      }
+      return keys.length ? [node] : [];
+    }
+    return [];
+  }
+}
+function tables(raw) {
+  const out = /* @__PURE__ */ new Map();
+  const data = isPlainObject(raw) ? raw.data : void 0;
+  if (!isPlainObject(data)) return out;
+  for (const [key, value] of Object.entries(data)) out.set(underscore(key), pyFrame(descend(value)));
+  return out;
+}
 function parse_yahoo_list(raw) {
-  const data = unwrapData2(raw);
-  if (Array.isArray(data)) return normalize(data);
-  if (!isPlainObject15(data)) return [];
-  const list = firstRootList(data);
-  if (list) return normalize(list);
-  if (Object.keys(data).length > 0) return normalize([data]);
-  return [];
+  const first = tables(raw).values().next();
+  return first.done ? [] : first.value;
 }
 function parse_yahoo_stats(raw) {
-  const data = unwrapData2(raw);
-  if (!isPlainObject15(data)) return [];
-  const rootList = firstRootList(data);
-  if (!rootList) return parse_yahoo_list(raw);
+  const t = tables(raw);
+  const leagues = t.get("leagues");
+  if (leagues?.length) return leagues;
+  return [...t.values()].find((rows) => rows.length) ?? [];
+}
+
+// src/parsers/yahoo_scores.ts
+var isIdMap = (entry) => isPlainObject(entry) && Object.keys(entry).length > 0 && Object.values(entry).every(isPlainObject);
+function collectionRows(collection) {
   const rows = [];
-  let sawStatArray = false;
-  for (const entry of rootList) {
-    if (!isPlainObject15(entry)) continue;
-    const statArray = STAT_ARRAY_KEYS.map((k) => entry[k]).find(
-      (x) => Array.isArray(x) && x.length > 0 && isPlainObject15(x[0])
-    );
-    if (!Array.isArray(statArray)) continue;
-    sawStatArray = true;
-    const meta = {};
-    for (const [k, v] of Object.entries(entry)) {
-      if (!isPlainObject15(v) && !Array.isArray(v)) meta[k] = v;
-    }
-    for (const rec of statArray) {
-      if (isPlainObject15(rec)) rows.push({ ...meta, ...rec });
+  for (const [entity_id, entry] of Object.entries(collection)) {
+    if (isIdMap(entry)) {
+      for (const [sub_id, rec] of Object.entries(entry)) rows.push({ entity_id, sub_id, ...rec });
+    } else if (isPlainObject(entry)) {
+      rows.push({ entity_id, ...entry });
+    } else if (Array.isArray(entry)) {
+      for (const item of entry) rows.push(isPlainObject(item) ? { entity_id, ...item } : { entity_id, value: item });
+    } else {
+      rows.push({ entity_id, value: entry });
     }
   }
-  if (!sawStatArray) return normalize(rootList);
-  return normalize(rows);
+  return rows;
+}
+function collections(raw) {
+  const out = /* @__PURE__ */ new Map();
+  const service = isPlainObject(raw) ? raw.service : void 0;
+  if (!isPlainObject(service)) return out;
+  const root = Object.entries(service).find(([k, v]) => k !== "xml:lang" && isPlainObject(v))?.[1];
+  if (!isPlainObject(root)) return out;
+  for (const [name, collection] of Object.entries(root)) {
+    if (isPlainObject(collection)) out.set(underscore(name), collection);
+  }
+  return out;
+}
+var frame = (raw, name) => {
+  const collection = collections(raw).get(name);
+  return collection ? pyFrame(collectionRows(collection)) : [];
+};
+function parse_yahoo_scores_list(raw) {
+  const first = collections(raw).keys().next();
+  return first.done ? [] : frame(raw, first.value);
+}
+function parse_yahoo_scores_scoreboard(raw) {
+  return frame(raw, "games");
+}
+function parse_yahoo_scores_boxscore(raw) {
+  return frame(raw, "player_stats");
 }
 
 // src/parsers/hockeytech.ts
-function isPlainObject16(v) {
+function isPlainObject13(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
 function siteKitRows(payload) {
-  const kit = isPlainObject16(payload) ? payload.SiteKit : void 0;
-  if (!isPlainObject16(kit)) return [];
+  const kit = isPlainObject13(payload) ? payload.SiteKit : void 0;
+  if (!isPlainObject13(kit)) return [];
   for (const v of Object.values(kit)) {
     if (Array.isArray(v)) return v;
   }
@@ -1859,7 +2283,7 @@ function gameTypeLabel(name) {
 var TWO_YEAR_NAME_RE = /\d{2}\s*[-/]\s*\d{2}/;
 function parse_hockeytech_seasons(payload) {
   const rows = siteKitRows(payload).map((r) => {
-    if (!isPlainObject16(r)) return r;
+    if (!isPlainObject13(r)) return r;
     const name = String(r.season_name ?? "");
     let yr = deriveSeasonYear(r.season_name);
     const label = gameTypeLabel(r.season_name);
@@ -1880,27 +2304,27 @@ function parse_hockeytech_team_roster(payload) {
   return normalize(siteKitRows(payload));
 }
 function parse_hockeytech_player_stats(payload) {
-  const kit = isPlainObject16(payload) ? payload.SiteKit : void 0;
-  const player = isPlainObject16(kit) ? kit.Player : void 0;
-  if (!isPlainObject16(player)) return normalize(siteKitRows(payload));
+  const kit = isPlainObject13(payload) ? payload.SiteKit : void 0;
+  const player = isPlainObject13(kit) ? kit.Player : void 0;
+  if (!isPlainObject13(player)) return normalize(siteKitRows(payload));
   const rows = [];
   for (const [statClass, lines] of Object.entries(player)) {
     if (!Array.isArray(lines)) continue;
     for (const r of lines) {
-      if (isPlainObject16(r)) rows.push({ stat_class: statClass, ...r });
+      if (isPlainObject13(r)) rows.push({ stat_class: statClass, ...r });
     }
   }
   return normalize(rows);
 }
 function parse_hockeytech_game_shifts(payload) {
-  const kit = isPlainObject16(payload) ? payload.SiteKit : void 0;
-  const gs = isPlainObject16(kit) ? kit.Gameshifts : void 0;
-  if (!isPlainObject16(gs)) return [];
+  const kit = isPlainObject13(payload) ? payload.SiteKit : void 0;
+  const gs = isPlainObject13(kit) ? kit.Gameshifts : void 0;
+  if (!isPlainObject13(gs)) return [];
   const rows = [];
   for (const side of ["home", "visitor"]) {
     const arr = gs[side];
     if (Array.isArray(arr)) {
-      for (const r of arr) rows.push(isPlainObject16(r) ? { side, ...r } : { side, value: r });
+      for (const r of arr) rows.push(isPlainObject13(r) ? { side, ...r } : { side, value: r });
     }
   }
   return normalize(rows);
@@ -1909,29 +2333,29 @@ function parse_hockeytech_standings(payload) {
   if (!Array.isArray(payload) || payload.length === 0) return [];
   const rows = [];
   for (const block of payload) {
-    const sections = isPlainObject16(block) ? block.sections : void 0;
+    const sections = isPlainObject13(block) ? block.sections : void 0;
     if (!Array.isArray(sections)) continue;
     for (const sec of sections) {
-      const data = isPlainObject16(sec) ? sec.data : void 0;
+      const data = isPlainObject13(sec) ? sec.data : void 0;
       if (!Array.isArray(data)) continue;
       for (const d of data) {
-        const row = isPlainObject16(d) ? d.row : void 0;
-        if (isPlainObject16(row)) rows.push(row);
+        const row = isPlainObject13(d) ? d.row : void 0;
+        if (isPlainObject13(row)) rows.push(row);
       }
     }
   }
   return normalize(rows);
 }
 function parse_hockeytech_leaders(payload) {
-  if (!isPlainObject16(payload)) return [];
+  if (!isPlainObject13(payload)) return [];
   const rows = [];
   for (const [playerType, group] of Object.entries(payload)) {
-    if (!isPlainObject16(group)) continue;
+    if (!isPlainObject13(group)) continue;
     for (const [category, body] of Object.entries(group)) {
-      const results = isPlainObject16(body) ? body.results : void 0;
+      const results = isPlainObject13(body) ? body.results : void 0;
       if (!Array.isArray(results)) continue;
       for (const r of results) {
-        if (isPlainObject16(r)) rows.push({ player_type: playerType, category, ...r });
+        if (isPlainObject13(r)) rows.push({ player_type: playerType, category, ...r });
       }
     }
   }
@@ -1940,16 +2364,16 @@ function parse_hockeytech_leaders(payload) {
 function parse_hockeytech_pbp(payload) {
   if (!Array.isArray(payload) || payload.length === 0) return [];
   const rows = payload.map((p) => {
-    if (!isPlainObject16(p)) return { value: p };
+    if (!isPlainObject13(p)) return { value: p };
     const { event, details } = p;
-    return isPlainObject16(details) ? { event, ...details } : { event, details };
+    return isPlainObject13(details) ? { event, ...details } : { event, details };
   });
   return normalize(rows);
 }
 function parse_hockeytech_game_summary(payload) {
-  const gc = isPlainObject16(payload) ? payload.GC : void 0;
-  const summary = isPlainObject16(gc) ? gc.Gamesummary : void 0;
-  const goals = isPlainObject16(summary) ? summary.goals : void 0;
+  const gc = isPlainObject13(payload) ? payload.GC : void 0;
+  const summary = isPlainObject13(gc) ? gc.Gamesummary : void 0;
+  const goals = isPlainObject13(summary) ? summary.goals : void 0;
   if (!Array.isArray(goals)) return [];
   return normalize(goals);
 }
@@ -1963,29 +2387,29 @@ function parse_hockeytech_stats(payload) {
   return normalize(siteKitRows(payload));
 }
 function parse_hockeytech_player_game_log(payload) {
-  const kit = isPlainObject16(payload) ? payload.SiteKit : void 0;
-  const player = isPlainObject16(kit) ? kit.Player : void 0;
-  const games = isPlainObject16(player) ? player.games : void 0;
+  const kit = isPlainObject13(payload) ? payload.SiteKit : void 0;
+  const player = isPlainObject13(kit) ? kit.Player : void 0;
+  const games = isPlainObject13(player) ? player.games : void 0;
   return Array.isArray(games) ? normalize(games) : [];
 }
 function parse_hockeytech_transactions(payload) {
-  const kit = isPlainObject16(payload) ? payload.SiteKit : void 0;
-  const tx = isPlainObject16(kit) ? kit.Transactions : void 0;
-  const rows = isPlainObject16(tx) ? tx.transactions : void 0;
+  const kit = isPlainObject13(payload) ? payload.SiteKit : void 0;
+  const tx = isPlainObject13(kit) ? kit.Transactions : void 0;
+  const rows = isPlainObject13(tx) ? tx.transactions : void 0;
   return Array.isArray(rows) ? normalize(rows) : [];
 }
 function parse_hockeytech_playoff_bracket(payload) {
-  const kit = isPlainObject16(payload) ? payload.SiteKit : void 0;
-  const br = isPlainObject16(kit) ? kit.Brackets : void 0;
-  const rounds = isPlainObject16(br) ? br.rounds : void 0;
+  const kit = isPlainObject13(payload) ? payload.SiteKit : void 0;
+  const br = isPlainObject13(kit) ? kit.Brackets : void 0;
+  const rounds = isPlainObject13(br) ? br.rounds : void 0;
   if (!Array.isArray(rounds)) return [];
   const rows = [];
   for (const rd of rounds) {
-    if (!isPlainObject16(rd)) continue;
+    if (!isPlainObject13(rd)) continue;
     const { matchups, ...roundFields } = rd;
     if (!Array.isArray(matchups)) continue;
     for (const m of matchups) {
-      if (!isPlainObject16(m)) continue;
+      if (!isPlainObject13(m)) continue;
       const prefixed = Object.fromEntries(Object.entries(roundFields).map(([k, v]) => [k === "round" ? "round_number" : k.startsWith("round_") ? k : `round_${k}`, v]));
       rows.push({ ...prefixed, ...m });
     }
@@ -2247,122 +2671,6 @@ function parse_torvik_game_schedule(input) {
   return parsePositionalJson(input, GAME_SCHEDULE_COLS);
 }
 
-// src/parsers/_frames.ts
-function pyUnderscore(word) {
-  return word.replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2").replace(/([a-z\d])([A-Z])/g, "$1_$2").replace(/-/g, "_").toLowerCase();
-}
-function pyJson(v) {
-  return JSON.stringify(v).replace(
-    /("(?:[^"\\]|\\.)*")|([,:])/g,
-    (_m, str, sep) => str !== void 0 ? str : `${sep} `
-  ).replace(/[\u007f-￿]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, "0")}`);
-}
-function isPlainObject17(v) {
-  return v !== null && typeof v === "object" && !Array.isArray(v);
-}
-function flatten(obj, prefix, out) {
-  const top = prefix === "";
-  const nested = [];
-  for (const [k, v] of Object.entries(obj)) {
-    const key = top ? k : `${prefix}_${k}`;
-    if (!isPlainObject17(v)) out.push([key, v]);
-    else if (top) nested.push([key, v]);
-    else flatten(v, key, out);
-  }
-  for (const [key, v] of nested) flatten(v, key, out);
-}
-function idString(v) {
-  if (v === null || v === void 0) return null;
-  if (typeof v === "string") return v;
-  if (Array.isArray(v)) return v.map((x) => String(x)).join(",");
-  if (isPlainObject17(v)) return pyJson(v);
-  return String(v);
-}
-function rowsToFrame(rows, opts = {}) {
-  const kept = (rows ?? []).filter((r) => !(opts.dropNull && (r === null || r === void 0)));
-  if (kept.length === 0) return [];
-  if (!kept.some(isPlainObject17)) return kept.map((r) => ({ value: String(r) }));
-  const records2 = kept.map((r) => {
-    const pairs = [];
-    flatten(isPlainObject17(r) ? r : { value: r }, "", pairs);
-    return pairs;
-  });
-  const finalName = /* @__PURE__ */ new Map();
-  const used = /* @__PURE__ */ new Map();
-  for (const pairs of records2) {
-    for (const [path] of pairs) {
-      if (finalName.has(path)) continue;
-      const base = pyUnderscore(path);
-      const n = (used.get(base) ?? 0) + 1;
-      used.set(base, n);
-      finalName.set(path, n === 1 ? base : `${base}_${n}`);
-    }
-  }
-  const columns = [...finalName.values()];
-  const out = records2.map((pairs) => {
-    const row = {};
-    for (const c of columns) row[c] = null;
-    for (const [path, v] of pairs) {
-      const name = finalName.get(path);
-      let cell = v === void 0 ? null : v;
-      if (opts.ids && isIdColumn(name)) cell = idString(cell);
-      else if (Array.isArray(cell) || isPlainObject17(cell)) cell = pyJson(cell);
-      row[name] = cell;
-    }
-    return row;
-  });
-  return opts.ids ? out : idColumnsToStrings(out);
-}
-function asRows(raw) {
-  if (Array.isArray(raw)) return raw;
-  if (isPlainObject17(raw) && Object.keys(raw).length > 0) return [raw];
-  return [];
-}
-var MULTI_TABLE_SECTIONS = {
-  parse_asa_goals_added: { default: "summary", sections: ["summary", "actions"] },
-  parse_mls_standings: { default: "entries", sections: ["tables", "entries"] },
-  parse_mls_match: {
-    default: "match_information",
-    sections: ["match_information", "environment", "teams", "players", "staff", "referees", "last_matches"]
-  },
-  parse_nwsl_lineups: { default: "players", sections: ["teams", "players", "staff"] },
-  // PFF (py's `report` / `career` / `table` arguments) and KenPom (one table per
-  // HTML id). The two dict-default parsers keep sdv-py's return shape.
-  parse_pff_report: {
-    default: null,
-    sections: null,
-    dynamic: "a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`)"
-  },
-  parse_pff_player_detail: { default: "weeks", sections: ["weeks", "career"] },
-  parse_pff_v2_table: { default: "rows", sections: ["rows", "teamTotals"] },
-  parse_kenpom_page: {
-    default: null,
-    sections: null,
-    dynamic: "a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`)"
-  },
-  // stats.nba.com / stats.wnba.com: the parser selects itself (sdv-py `result_set`).
-  parse_nba_stats_result_sets: {
-    default: null,
-    sections: null,
-    dynamic: "a result-set name the payload ships (sdv-py's `result_set`)",
-    resultSet: true
-  }
-};
-function sectionError(parser, name, valid, dflt) {
-  return new Error(
-    `${parser}: unknown section '${name}'. Choose one of ${JSON.stringify(valid)}` + (dflt === null ? " (default: every table, as a dict)." : ` (default '${dflt}').`)
-  );
-}
-function pickSection(parser, tables, section) {
-  const spec = MULTI_TABLE_SECTIONS[parser];
-  const name = section ?? spec.default ?? "";
-  const valid = spec.sections ?? Object.keys(tables);
-  if (!Object.prototype.hasOwnProperty.call(tables, name) || !valid.includes(name)) {
-    throw sectionError(parser, name, valid, spec.default);
-  }
-  return tables[name];
-}
-
 // src/parsers/pff_api.ts
 var MATRIX_KEYS = ["defenders", "receivers", "versus"];
 var META_KEYS = /* @__PURE__ */ new Set(["restricted"]);
@@ -2451,7 +2759,7 @@ function toFloat(v) {
 function toStr(v) {
   return v === null || v === void 0 ? null : String(v);
 }
-function frame(rows) {
+function frame2(rows) {
   if (!Array.isArray(rows) || rows.length === 0) return [];
   if (!isPlainObject(rows[0])) return rows.map((r) => ({ value: scalarize(r) }));
   const norm = rows.map((row) => {
@@ -2471,38 +2779,38 @@ function isMatrix(v) {
   return isPlainObject(v) && MATRIX_KEYS.every((k) => k in v);
 }
 function parse_pff_matrix(raw, report) {
-  let obj = {};
+  let obj2 = {};
   if (isPlainObject(raw) && Object.keys(raw).length) {
     if (report !== void 0 && isPlainObject(raw[report])) {
-      obj = raw[report];
+      obj2 = raw[report];
     } else {
       for (const v of Object.values(raw)) {
         if (isMatrix(v)) {
-          obj = v;
+          obj2 = v;
           break;
         }
       }
     }
   }
   const out = {};
-  for (const name of MATRIX_KEYS) out[name] = frame(truthy(obj[name]) ? obj[name] : []);
+  for (const name of MATRIX_KEYS) out[name] = frame2(truthy(obj2[name]) ? obj2[name] : []);
   return out;
 }
 var has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
 function parse_pff_report(raw, section) {
   const all = reportTables(raw);
   if (section === void 0) return all;
-  let tables = {};
-  if (!Array.isArray(all)) tables = all;
+  let tables2 = {};
+  if (!Array.isArray(all)) tables2 = all;
   else if (isPlainObject(raw)) {
     const keys = Object.keys(envelope(raw));
-    if (keys.length === 1 && Array.isArray(raw[keys[0]])) tables = { [keys[0]]: all };
+    if (keys.length === 1 && Array.isArray(raw[keys[0]])) tables2 = { [keys[0]]: all };
   }
-  if (!Object.keys(tables).length) return [];
-  if (!has(tables, section)) {
-    throw sectionError("parse_pff_report", section, Object.keys(tables), MULTI_TABLE_SECTIONS.parse_pff_report.default);
+  if (!Object.keys(tables2).length) return [];
+  if (!has(tables2, section)) {
+    throw sectionError("parse_pff_report", section, Object.keys(tables2), MULTI_TABLE_SECTIONS.parse_pff_report.default);
   }
-  return tables[section];
+  return tables2[section];
 }
 function reportTables(raw) {
   if (!isPlainObject(raw) || !Object.keys(raw).length) return [];
@@ -2511,11 +2819,11 @@ function reportTables(raw) {
   if (keys.length === 1) {
     const val = env[keys[0]];
     if (isMatrix(val)) return parse_pff_matrix(env);
-    if (Array.isArray(val)) return frame(val);
+    if (Array.isArray(val)) return frame2(val);
     return [];
   }
   const out = {};
-  for (const [k, v] of Object.entries(env)) if (Array.isArray(v)) out[k] = frame(v);
+  for (const [k, v] of Object.entries(env)) if (Array.isArray(v)) out[k] = frame2(v);
   return Object.keys(out).length ? out : [];
 }
 function fixedSection(parser, section) {
@@ -2529,11 +2837,11 @@ function parse_pff_player_detail(raw, section) {
   if (!isPlainObject(raw) || !Object.keys(raw).length) return [];
   const env = envelope(raw);
   const keys = Object.keys(env);
-  const obj = keys.length === 1 && isPlainObject(env[keys[0]]) ? env[keys[0]] : env;
-  if (!isPlainObject(obj)) return [];
-  const subject = isPlainObject(obj.subject) ? obj.subject : {};
-  let rows = career ? obj.seasons : obj.weeks;
-  if (!truthy(rows)) rows = truthy(obj.week_totals) ? obj.week_totals : truthy(obj.career) ? obj.career : [];
+  const obj2 = keys.length === 1 && isPlainObject(env[keys[0]]) ? env[keys[0]] : env;
+  if (!isPlainObject(obj2)) return [];
+  const subject = isPlainObject(obj2.subject) ? obj2.subject : {};
+  let rows = career ? obj2.seasons : obj2.weeks;
+  if (!truthy(rows)) rows = truthy(obj2.week_totals) ? obj2.week_totals : truthy(obj2.career) ? obj2.career : [];
   if (isPlainObject(rows)) rows = [rows];
   const flat = [];
   for (const row of Array.isArray(rows) ? rows : []) {
@@ -2545,7 +2853,7 @@ function parse_pff_player_detail(raw, section) {
     for (const sk of ["player_id", "league_id", "season"]) if (!(sk in r)) r[sk] = subject[sk] ?? null;
     flat.push(r);
   }
-  return frame(flat);
+  return frame2(flat);
 }
 function inferredKind(values) {
   const kinds = /* @__PURE__ */ new Set();
@@ -2627,14 +2935,14 @@ function records(payload) {
   for (const v of Object.values(body)) if (isRecordList(v) && (!best || v.length > best.length)) best = v;
   return best ? dicts(best) : [];
 }
-function flatten2(obj, prefix, out) {
-  for (const [k, v] of Object.entries(obj)) {
+function flatten3(obj2, prefix, out) {
+  for (const [k, v] of Object.entries(obj2)) {
     const key = prefix ? `${prefix}_${k}` : k;
-    if (isPlainObject(v)) flatten2(v, key, out);
+    if (isPlainObject(v)) flatten3(v, key, out);
     else out[key] = v;
   }
 }
-function pyStr(v, missing) {
+function pyStr2(v, missing) {
   if (missing) return "nan";
   const repr = (x) => {
     if (x === null || x === void 0) return "None";
@@ -2655,7 +2963,7 @@ function parse_nfl_pro_stats(payload) {
   if (!recs.length) return [];
   const flat = recs.map((r) => {
     const o = {};
-    flatten2(r, "", o);
+    flatten3(r, "", o);
     return o;
   });
   const raw = [];
@@ -2676,7 +2984,7 @@ function parse_nfl_pro_stats(payload) {
     const o = {};
     for (const [k, name] of keep) {
       const missing = !(k in r);
-      o[name] = stringify.has(k) ? pyStr(r[k], missing) : missing || r[k] === void 0 ? null : r[k];
+      o[name] = stringify.has(k) ? pyStr2(r[k], missing) : missing || r[k] === void 0 ? null : r[k];
     }
     return o;
   });
@@ -2687,7 +2995,7 @@ function parse_nfl_pro_stats(payload) {
 function parse_on3_rdb(raw) {
   let rows = [];
   if (Array.isArray(raw)) rows = raw;
-  else if (isPlainObject17(raw)) {
+  else if (isPlainObject12(raw)) {
     rows = Array.isArray(raw.list) ? raw.list : Object.keys(raw).length ? [raw] : [];
   }
   return rowsToFrame(rows);
@@ -2700,14 +3008,14 @@ function parse_asa(raw) {
   return rowsToFrame(asRows(raw), OPTS);
 }
 function parse_asa_goals_added_tables(raw) {
-  const rows = asRows(raw).filter(isPlainObject17);
+  const rows = asRows(raw).filter(isPlainObject12);
   const summary = rows.map(({ data: _data, ...rest }) => rest);
   const actions = [];
   for (const row of rows) {
     const keys = {};
     for (const k of GOALS_ADDED_KEYS) if (k in row) keys[k] = row[k];
     for (const action of Array.isArray(row.data) ? row.data : []) {
-      if (isPlainObject17(action)) actions.push({ ...keys, ...action });
+      if (isPlainObject12(action)) actions.push({ ...keys, ...action });
     }
   }
   return { summary: rowsToFrame(summary, OPTS), actions: rowsToFrame(actions, OPTS) };
@@ -2722,34 +3030,34 @@ var META_KEYS2 = /* @__PURE__ */ new Set(["meta", "pagination", "next_page_token
 function rowsKey(raw) {
   for (const [key, value] of Object.entries(raw)) {
     if (META_KEYS2.has(key) || !Array.isArray(value) || value.length === 0) continue;
-    if (value.every(isPlainObject17)) return value;
+    if (value.every(isPlainObject12)) return value;
   }
   return void 0;
 }
 function parse_mls_api(raw) {
   let rows = [];
   if (Array.isArray(raw)) rows = raw;
-  else if (isPlainObject17(raw) && Object.keys(raw).length) rows = rowsKey(raw) ?? [raw];
+  else if (isPlainObject12(raw) && Object.keys(raw).length) rows = rowsKey(raw) ?? [raw];
   return rowsToFrame(rows, OPTS2);
 }
 function parse_mls_entity(raw) {
   let rows = [];
   if (Array.isArray(raw)) rows = raw;
-  else if (isPlainObject17(raw) && Object.keys(raw).length) rows = [raw];
+  else if (isPlainObject12(raw) && Object.keys(raw).length) rows = [raw];
   return rowsToFrame(rows, OPTS2);
 }
 function parse_mls_standings_tables(raw) {
-  const rawTables = isPlainObject17(raw) ? raw.tables : Array.isArray(raw) ? raw : null;
-  const tables = (Array.isArray(rawTables) ? rawTables : []).filter(isPlainObject17);
-  const meta = tables.map(({ entries: _entries, ...rest }) => rest);
+  const rawTables = isPlainObject12(raw) ? raw.tables : Array.isArray(raw) ? raw : null;
+  const tables2 = (Array.isArray(rawTables) ? rawTables : []).filter(isPlainObject12);
+  const meta = tables2.map(({ entries: _entries, ...rest }) => rest);
   const entries = [];
-  for (const table of tables) {
+  for (const table of tables2) {
     const keys = {};
     for (const k of ["competition_id", "season_id", "group", "category", "type"]) {
       if (k in table) keys[k] = table[k];
     }
     for (const entry of Array.isArray(table.entries) ? table.entries : []) {
-      if (isPlainObject17(entry)) entries.push({ ...keys, ...entry });
+      if (isPlainObject12(entry)) entries.push({ ...keys, ...entry });
     }
   }
   return { tables: rowsToFrame(meta, OPTS2), entries: rowsToFrame(entries, OPTS2) };
@@ -2767,32 +3075,32 @@ var MATCH_TABLES = [
   "last_matches"
 ];
 function parse_mls_match_tables(raw) {
-  const match = isPlainObject17(raw) ? raw : {};
+  const match = isPlainObject12(raw) ? raw : {};
   const teams = [];
   const players = [];
   const staff = [];
   for (const side of ["home", "away"]) {
     const block = match[side];
-    if (!isPlainObject17(block)) continue;
+    if (!isPlainObject12(block)) continue;
     const scalars = {};
     for (const [k, v] of Object.entries(block)) {
-      if (!Array.isArray(v) && !isPlainObject17(v)) scalars[k] = v;
+      if (!Array.isArray(v) && !isPlainObject12(v)) scalars[k] = v;
     }
     teams.push({ side, ...scalars });
     const keys = { side, team_id: block.team_id, team_name: block.team_name };
     for (const person of Array.isArray(block.players) ? block.players : []) {
-      if (isPlainObject17(person)) players.push({ ...keys, ...person });
+      if (isPlainObject12(person)) players.push({ ...keys, ...person });
     }
     for (const group of ["trainer_staff", "official_staff"]) {
       for (const person of Array.isArray(block[group]) ? block[group] : []) {
-        if (isPlainObject17(person)) staff.push({ ...keys, staff_group: group, ...person });
+        if (isPlainObject12(person)) staff.push({ ...keys, staff_group: group, ...person });
       }
     }
   }
-  const objs = (v) => Array.isArray(v) ? v.filter(isPlainObject17) : [];
+  const objs = (v) => Array.isArray(v) ? v.filter(isPlainObject12) : [];
   const blocks = {
-    match_information: isPlainObject17(match.match_information) ? [match.match_information] : [],
-    environment: isPlainObject17(match.environment) ? [match.environment] : [],
+    match_information: isPlainObject12(match.match_information) ? [match.match_information] : [],
+    environment: isPlainObject12(match.environment) ? [match.environment] : [],
     teams,
     players,
     staff,
@@ -2811,32 +3119,32 @@ function parse_mls_match(raw, section) {
 var OPTS3 = { ids: true, dropNull: true };
 var ROWS_KEYS = ["matches", "matchdays", "stages", "standings", "players", "teams", "competitions"];
 var META_KEYS3 = /* @__PURE__ */ new Set(["apiCallRequestTime", "competition", "pagination"]);
-function envelopeRows(raw) {
+function envelopeRows2(raw) {
   if (Array.isArray(raw)) return raw;
-  if (!isPlainObject17(raw)) return [];
+  if (!isPlainObject12(raw)) return [];
   for (const key of ROWS_KEYS) {
     const v = raw[key];
     if (Array.isArray(v) && v.length) return v;
   }
   for (const [key, v] of Object.entries(raw)) {
     if (META_KEYS3.has(key) || !Array.isArray(v) || v.length === 0) continue;
-    if (v.every(isPlainObject17)) return v;
+    if (v.every(isPlainObject12)) return v;
   }
   return [];
 }
-var statCells = (row) => (Array.isArray(row.stats) ? row.stats : []).filter(isPlainObject17);
+var statCells = (row) => (Array.isArray(row.stats) ? row.stats : []).filter(isPlainObject12);
 var withoutStats = ({ stats: _stats, ...rest }) => rest;
-var scalar = (v) => Array.isArray(v) || isPlainObject17(v) ? pyJson(v) : v;
+var scalar = (v) => Array.isArray(v) || isPlainObject12(v) ? pyJson(v) : v;
 function parse_nwsl_sdp(raw) {
-  return rowsToFrame(envelopeRows(raw), OPTS3);
+  return rowsToFrame(envelopeRows2(raw), OPTS3);
 }
 function parse_nwsl_standings(raw) {
-  const splits = isPlainObject17(raw) ? raw.standings : raw;
+  const splits = isPlainObject12(raw) ? raw.standings : raw;
   const rows = [];
   for (const split of Array.isArray(splits) ? splits : []) {
-    if (!isPlainObject17(split)) continue;
+    if (!isPlainObject12(split)) continue;
     for (const club of Array.isArray(split.teams) ? split.teams : []) {
-      if (!isPlainObject17(club)) continue;
+      if (!isPlainObject12(club)) continue;
       const row = { split_type: split.type, ...withoutStats(club) };
       for (const cell of statCells(club)) {
         if (cell.statsId) row[pyUnderscore(String(cell.statsId))] = scalar(cell.statsValue);
@@ -2848,8 +3156,8 @@ function parse_nwsl_standings(raw) {
 }
 function parse_nwsl_stats(raw) {
   const rows = [];
-  for (const entity of envelopeRows(raw)) {
-    if (!isPlainObject17(entity)) continue;
+  for (const entity of envelopeRows2(raw)) {
+    if (!isPlainObject12(entity)) continue;
     const identity = withoutStats(entity);
     for (const cell of statCells(entity)) {
       rows.push({ ...identity, ...cell, statsValue: scalar(cell.statsValue) });
@@ -2863,27 +3171,27 @@ function parse_nwsl_stats(raw) {
   });
 }
 function parse_nwsl_lineups_tables(raw) {
-  const body = isPlainObject17(raw) ? raw : {};
+  const body = isPlainObject12(raw) ? raw : {};
   const matchId = body.matchId;
   const teams = [];
   const players = [];
   const staff = [];
   for (const side of ["home", "away"]) {
     const block = body[side];
-    if (!isPlainObject17(block)) continue;
+    if (!isPlainObject12(block)) continue;
     const scalars = {};
     for (const [k, v] of Object.entries(block)) {
-      if (!Array.isArray(v) && !isPlainObject17(v)) scalars[k] = v;
+      if (!Array.isArray(v) && !isPlainObject12(v)) scalars[k] = v;
     }
     teams.push({ matchId, side, ...scalars });
     const keys = { matchId, side, teamId: block.teamId };
     for (const selection of ["fielded", "benched"]) {
       for (const person of Array.isArray(block[selection]) ? block[selection] : []) {
-        if (isPlainObject17(person)) players.push({ ...keys, selection, ...person });
+        if (isPlainObject12(person)) players.push({ ...keys, selection, ...person });
       }
     }
     for (const person of Array.isArray(block.staff) ? block.staff : []) {
-      if (isPlainObject17(person)) staff.push({ ...keys, ...person });
+      if (isPlainObject12(person)) staff.push({ ...keys, ...person });
     }
   }
   return {
@@ -3280,7 +3588,7 @@ function parserFor(name) {
 }
 
 // src/parsers/espn.ts
-function isPlainObject18(v) {
+function isPlainObject14(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
 function isScalar(v) {
@@ -3682,7 +3990,7 @@ function flattenScalarOneDeep(item) {
   for (const [k, v] of Object.entries(item)) {
     if (isScalar(v)) {
       row[k] = v;
-    } else if (isPlainObject18(v)) {
+    } else if (isPlainObject14(v)) {
       for (const [k2, v2] of Object.entries(v)) {
         if (isScalar(v2)) row[`${k}_${k2}`] = v2;
       }
@@ -3792,11 +4100,11 @@ function parse_event_plays(payload) {
       if (skip.has(k)) continue;
       if (isScalar(v)) {
         row[k] = v;
-      } else if (isPlainObject18(v)) {
+      } else if (isPlainObject14(v)) {
         for (const [k2, v2] of Object.entries(v)) {
           if (isScalar(v2)) {
             row[`${k}_${k2}`] = v2;
-          } else if (isPlainObject18(v2)) {
+          } else if (isPlainObject14(v2)) {
             for (const [k3, v3] of Object.entries(v2)) {
               if (isScalar(v3)) row[`${k}_${k2}_${k3}`] = v3;
             }
@@ -3815,7 +4123,7 @@ function parse_event_plays(payload) {
 }
 var LIST_PAYLOAD_KEYS = ["items", "entries", "events", "athletes"];
 function parse_items(payload) {
-  if (!payload || !isPlainObject18(payload)) return [];
+  if (!payload || !isPlainObject14(payload)) return [];
   let rows = null;
   for (const key of LIST_PAYLOAD_KEYS) {
     const candidate = payload[key];
@@ -3828,24 +4136,24 @@ function parse_items(payload) {
   return normalize(rows);
 }
 function parse_team_schedule(payload) {
-  if (!payload || !isPlainObject18(payload)) return [];
+  if (!payload || !isPlainObject14(payload)) return [];
   const events = payload.events;
   if (!Array.isArray(events) || !events.length) return [];
   return normalize(events);
 }
 function parse_team_roster(payload) {
-  if (!payload || !isPlainObject18(payload)) return [];
+  if (!payload || !isPlainObject14(payload)) return [];
   const athletes = payload.athletes;
   if (!Array.isArray(athletes) || !athletes.length) return [];
   const first = athletes[0] || {};
-  const isGrouped = isPlainObject18(first) && "position" in first && Array.isArray(first.items);
+  const isGrouped = isPlainObject14(first) && "position" in first && Array.isArray(first.items);
   if (isGrouped) {
     const rows = [];
     for (const group of athletes) {
-      if (!isPlainObject18(group)) continue;
+      if (!isPlainObject14(group)) continue;
       const groupName = group.position;
       for (const player of group.items || []) {
-        if (!isPlainObject18(player)) continue;
+        if (!isPlainObject14(player)) continue;
         rows.push({ position_group: groupName, ...player });
       }
     }
@@ -3855,19 +4163,19 @@ function parse_team_roster(payload) {
   return normalize(athletes);
 }
 function parse_news(payload) {
-  if (!payload || !isPlainObject18(payload)) return [];
+  if (!payload || !isPlainObject14(payload)) return [];
   const articles = payload.articles;
   if (!Array.isArray(articles) || !articles.length) return [];
   return normalize(articles);
 }
 function parse_injuries(payload) {
-  if (!payload || !isPlainObject18(payload)) return [];
+  if (!payload || !isPlainObject14(payload)) return [];
   const teams = payload.injuries;
   if (!Array.isArray(teams) || !teams.length) return [];
   return normalize(teams);
 }
 function singleRow(payloadDict) {
-  if (!isPlainObject18(payloadDict) || Object.keys(payloadDict).length === 0) return [];
+  if (!isPlainObject14(payloadDict) || Object.keys(payloadDict).length === 0) return [];
   return normalize([payloadDict]);
 }
 function rowPerItem(items) {
@@ -3875,7 +4183,7 @@ function rowPerItem(items) {
   return normalize(items);
 }
 function parse_summary_boxscore_player(payload) {
-  if (!isPlainObject18(payload)) return [];
+  if (!isPlainObject14(payload)) return [];
   const bs = payload.boxscore || {};
   const teams = bs.players || [];
   if (!Array.isArray(teams) || !teams.length) return [];
@@ -3916,7 +4224,7 @@ function parse_summary_boxscore_player(payload) {
   return normalize(rows);
 }
 function parse_summary_boxscore_team(payload) {
-  if (!isPlainObject18(payload)) return [];
+  if (!isPlainObject14(payload)) return [];
   const bs = payload.boxscore || {};
   const teams = bs.teams || [];
   if (!Array.isArray(teams) || !teams.length) return [];
@@ -3944,19 +4252,19 @@ function parse_summary_boxscore_team(payload) {
   return normalize(rows);
 }
 function parse_summary_plays(payload) {
-  if (!isPlainObject18(payload)) return [];
+  if (!isPlainObject14(payload)) return [];
   const plays = payload.plays;
   if (!Array.isArray(plays) || !plays.length) return [];
   return normalize(plays);
 }
 function parse_summary_winprobability(payload) {
-  if (!isPlainObject18(payload)) return [];
+  if (!isPlainObject14(payload)) return [];
   const wp = payload.winprobability;
   if (!Array.isArray(wp) || !wp.length) return [];
   return normalize(wp);
 }
 function parse_summary_leaders(payload) {
-  if (!isPlainObject18(payload)) return [];
+  if (!isPlainObject14(payload)) return [];
   const teams = payload.leaders;
   if (!Array.isArray(teams) || !teams.length) return [];
   const rows = [];
@@ -3997,7 +4305,7 @@ function parse_summary_game_info(payload) {
   for (const [k, v] of Object.entries(venue)) {
     if (isScalar(v)) {
       flat[`venue_${k}`] = v;
-    } else if (isPlainObject18(v)) {
+    } else if (isPlainObject14(v)) {
       for (const [k2, v2] of Object.entries(v)) {
         if (isScalar(v2)) flat[`venue_${k}_${k2}`] = v2;
       }
@@ -4010,7 +4318,7 @@ function parse_summary_officials(payload) {
   return rowPerItem(officials);
 }
 function parse_summary_header(payload) {
-  return singleRow(isPlainObject18(payload) ? payload.header : null);
+  return singleRow(isPlainObject14(payload) ? payload.header : null);
 }
 function parse_summary_season_series(payload) {
   return rowPerItem((payload || {}).seasonseries);
@@ -4031,7 +4339,7 @@ function parse_summary_against_the_spread(payload) {
       for (const [k, v] of Object.entries(rec || {})) {
         if (isScalar(v)) {
           row[k] = v;
-        } else if (isPlainObject18(v)) {
+        } else if (isPlainObject14(v)) {
           for (const [k2, v2] of Object.entries(v)) {
             if (isScalar(v2)) row[`${k}_${k2}`] = v2;
           }
@@ -4049,7 +4357,7 @@ function parse_summary_standings(payload) {
   if (!Array.isArray(groups) || !groups.length) return [];
   const rows = [];
   for (const grp of groups) {
-    if (!isPlainObject18(grp)) continue;
+    if (!isPlainObject14(grp)) continue;
     const grpBase = {
       group_header: grp.header,
       conference_header: grp.conferenceHeader,
@@ -4061,7 +4369,7 @@ function parse_summary_standings(payload) {
       row.team_id = entry.id;
       row.team_uid = entry.uid;
       row.team_location = typeof teamField === "string" ? teamField : null;
-      if (isPlainObject18(teamField)) {
+      if (isPlainObject14(teamField)) {
         row.team_abbreviation = teamField.abbreviation;
         row.team_display_name = teamField.displayName;
       }
@@ -4079,7 +4387,7 @@ function parse_summary_broadcasts(payload) {
   return rowPerItem((payload || {}).broadcasts);
 }
 function parse_summary_format(payload) {
-  return singleRow(isPlainObject18(payload) ? payload.format : null);
+  return singleRow(isPlainObject14(payload) ? payload.format : null);
 }
 function parse_summary_pickcenter(payload) {
   return rowPerItem((payload || {}).pickcenter);
@@ -4088,7 +4396,7 @@ function parse_summary_odds(payload) {
   return rowPerItem((payload || {}).odds);
 }
 function parse_summary_article(payload) {
-  return singleRow(isPlainObject18(payload) ? payload.article : null);
+  return singleRow(isPlainObject14(payload) ? payload.article : null);
 }
 function parse_summary_injuries(payload) {
   return rowPerItem((payload || {}).injuries);
@@ -4128,11 +4436,11 @@ function parse_fpi(payload) {
   return normalize(rows);
 }
 function parse_single_entity(payload) {
-  return singleRow(isPlainObject18(payload) ? payload : null);
+  return singleRow(isPlainObject14(payload) ? payload : null);
 }
 function parse_summary_drives(payload) {
   const drives = (payload || {}).drives || {};
-  const previous = isPlainObject18(drives) ? drives.previous : null;
+  const previous = isPlainObject14(drives) ? drives.previous : null;
   return rowPerItem(previous);
 }
 function parse_summary_scoring_plays(payload) {
@@ -4140,15 +4448,15 @@ function parse_summary_scoring_plays(payload) {
 }
 function parse_summary_drive_plays(payload) {
   const drives = (payload || {}).drives || {};
-  const previous = isPlainObject18(drives) ? drives.previous : null;
+  const previous = isPlainObject14(drives) ? drives.previous : null;
   if (!Array.isArray(previous) || !previous.length) return [];
   const rows = [];
   previous.forEach((drive, idx) => {
-    if (!isPlainObject18(drive)) return;
+    if (!isPlainObject14(drive)) return;
     const driveId = drive.id;
     const driveSeq = idx + 1;
     for (const play of drive.plays || []) {
-      if (!isPlainObject18(play)) continue;
+      if (!isPlainObject14(play)) continue;
       rows.push({ drive_id: driveId, drive_sequence: driveSeq, ...play });
     }
   });
@@ -4197,34 +4505,34 @@ function parse_summary(payload, section) {
   return out;
 }
 function cdnContent(payload) {
-  const content = isPlainObject18(payload) ? payload.content : void 0;
-  return isPlainObject18(content) ? content : {};
+  const content = isPlainObject14(payload) ? payload.content : void 0;
+  return isPlainObject14(content) ? content : {};
 }
 function parse_cdn_game(payload, section) {
-  const gp = isPlainObject18(payload) ? payload.gamepackageJSON : void 0;
-  return parse_summary(isPlainObject18(gp) ? gp : {}, section);
+  const gp = isPlainObject14(payload) ? payload.gamepackageJSON : void 0;
+  return parse_summary(isPlainObject14(gp) ? gp : {}, section);
 }
 function parse_cdn_scoreboard(payload) {
   const sb = cdnContent(payload).sbData;
-  return parse_scoreboard(isPlainObject18(sb) ? sb : {});
+  return parse_scoreboard(isPlainObject14(sb) ? sb : {});
 }
 function parse_cdn_schedule(payload) {
   const sch = cdnContent(payload).schedule;
-  const days = isPlainObject18(sch) ? Object.values(sch) : [];
-  const games = days.filter(isPlainObject18).flatMap((day) => Array.isArray(day.games) ? day.games : []).filter(isPlainObject18);
+  const days = isPlainObject14(sch) ? Object.values(sch) : [];
+  const games = days.filter(isPlainObject14).flatMap((day) => Array.isArray(day.games) ? day.games : []).filter(isPlainObject14);
   return parse_scoreboard({ events: games });
 }
 var CDN_RANKINGS_LEAD = ["poll_id", "poll_name", "poll_short_name", "ranked", "team_id"];
 function parse_cdn_rankings(payload) {
   const data = cdnContent(payload).data;
-  const polls = isPlainObject18(data) ? data.rankings : void 0;
+  const polls2 = isPlainObject14(data) ? data.rankings : void 0;
   const rows = [];
-  for (const poll of Array.isArray(polls) ? polls : []) {
-    if (!isPlainObject18(poll)) continue;
+  for (const poll of Array.isArray(polls2) ? polls2 : []) {
+    if (!isPlainObject14(poll)) continue;
     const head = { poll_id: poll.id, poll_name: poll.name, poll_short_name: poll.short_name };
     for (const [ranked, key] of [[true, "ranks"], [false, "others"]]) {
       for (const entry of Array.isArray(poll[key]) ? poll[key] : []) {
-        if (isPlainObject18(entry)) rows.push({ ...head, ranked, ...entry });
+        if (isPlainObject14(entry)) rows.push({ ...head, ranked, ...entry });
       }
     }
   }
@@ -4444,7 +4752,7 @@ export {
 papaparse/papaparse.min.js:
   (* @license
   Papa Parse
-  v5.5.3
+  v5.7.0
   https://github.com/mholt/PapaParse
   License: MIT
   *)
