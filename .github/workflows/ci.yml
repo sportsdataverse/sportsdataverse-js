@@ -42,6 +42,8 @@ jobs:
         run: npm run vendor:check:online
       - name: Codegen drift check
         run: npm run codegen:check
+      - name: Capture-derived returns schemas drift check (fox / cbs / yahoo / yahoo_scores)
+        run: npm run schemas:captures:check
       - name: Type-check
         run: npm run typecheck
       # The root build is `strict: true` (T18b-2); tsconfig.strict.json extends it

@@ -75,14 +75,15 @@ const COACHES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://ipa.247sports.com/rdb/v1/coaches/`
  *
- * @param params.sport_key - query parameter (`sportKey`) — default `1`.
- * @param params.year - query parameter — default `2026`.
- * @param params.page_size - query parameter (`pageSize`) — default `50`.
- * @param params.page - query parameter.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — 247Sports sport key (1 = football, 2 = basketball); default `1`.
+ * @param params.year - `number | string` — the `year` query parameter; default `2026`.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `50`.
+ * @param params.page - `number | string` — the `page` query parameter.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Sports247Sports247CoachesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247Coaches({});
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
 export const sports247Coaches: Wrapper<Sports247Sports247CoachesRow[], Sports247CoachesParams> = (params: WrapperParams = {}) => callFlat(COACHES_DEF, params);
 /** snake_case alias of {@link sports247Coaches} (py/R parity). */
@@ -122,13 +123,14 @@ const COMPOSITE_TEAM_RANKING_FEED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://ipa.247sports.com/rdb/v1/rankings/{sport_key}/{year}/compositeTeamRankingFeed/`
  *
- * @param params.year - path parameter.
- * @param params.sport_key - path parameter *(optional)*.
- * @param params.page_size - query parameter (`pageSize`) — default `50`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.sport_key - `number | string` — 247Sports sport key (1 = football, 2 = basketball); optional; default `1`.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `50`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Sports247Sports247CompositeTeamRankingFeedRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247CompositeTeamRankingFeed({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
 export const sports247CompositeTeamRankingFeed: Wrapper<Sports247Sports247CompositeTeamRankingFeedRow[], Sports247CompositeTeamRankingFeedParams> = (params: WrapperParams = {}) => callFlat(COMPOSITE_TEAM_RANKING_FEED_DEF, params);
 /** snake_case alias of {@link sports247CompositeTeamRankingFeed} (py/R parity). */
@@ -184,17 +186,18 @@ const INSTITUTION_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://ipa.247sports.com/rdb/v1/rankings/{sport_key}/{year}/institutionrankings/`
  *
- * @param params.year - path parameter.
- * @param params.sport_key - path parameter *(optional)*.
- * @param params.page_size - query parameter (`pagesize`) — default `50`.
- * @param params.page - query parameter.
- * @param params.use_composite - query parameter (`useComposite`).
- * @param params.conference_abbreviation - query parameter (`conferenceAbbreviation`).
- * @param params.institution_key - query parameter (`institutionKey`).
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.sport_key - `number | string` — 247Sports sport key (1 = football, 2 = basketball); optional; default `1`.
+ * @param params.page_size - `number | string` — the `pagesize` query parameter; default `50`.
+ * @param params.page - `number | string` — the `page` query parameter.
+ * @param params.use_composite - `number | string` — the `useComposite` query parameter.
+ * @param params.conference_abbreviation - `number | string` — the `conferenceAbbreviation` query parameter.
+ * @param params.institution_key - `number | string` — the `institutionKey` query parameter.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Sports247Sports247InstitutionRankingsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247InstitutionRankings({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
 export const sports247InstitutionRankings: Wrapper<Sports247Sports247InstitutionRankingsRow[], Sports247InstitutionRankingsParams> = (params: WrapperParams = {}) => callFlat(INSTITUTION_RANKINGS_DEF, params);
 /** snake_case alias of {@link sports247InstitutionRankings} (py/R parity). */
@@ -233,13 +236,14 @@ const POSITIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://ipa.247sports.com/rdb/v1/positions/`
  *
- * @param params.sport_key - query parameter (`sportKey`) — default `1`.
- * @param params.year - query parameter.
- * @param params.ranking_key - query parameter (`rankingKey`).
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — 247Sports sport key (1 = football, 2 = basketball); default `1`.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.ranking_key - `number | string` — the `rankingKey` query parameter.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Sports247Sports247PositionsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247Positions({});
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
 export const sports247Positions: Wrapper<Sports247Sports247PositionsRow[], Sports247PositionsParams> = (params: WrapperParams = {}) => callFlat(POSITIONS_DEF, params);
 /** snake_case alias of {@link sports247Positions} (py/R parity). */
@@ -292,16 +296,17 @@ const RECRUITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://ipa.247sports.com/rdb/v1/recruits/`
  *
- * @param params.sport_key - query parameter (`sportKey`) — default `1`.
- * @param params.year - query parameter — default `2026`.
- * @param params.page_size - query parameter (`pagesize`) — default `50`.
- * @param params.page - query parameter.
- * @param params.position_abbreviation - query parameter (`positionAbbreviation`).
- * @param params.state_abbreviation - query parameter (`stateAbbreviation`).
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — 247Sports sport key (1 = football, 2 = basketball); default `1`.
+ * @param params.year - `number | string` — the `year` query parameter; default `2026`.
+ * @param params.page_size - `number | string` — the `pagesize` query parameter; default `50`.
+ * @param params.page - `number | string` — the `page` query parameter.
+ * @param params.position_abbreviation - `number | string` — the `positionAbbreviation` query parameter.
+ * @param params.state_abbreviation - `number | string` — the `stateAbbreviation` query parameter.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Sports247Sports247RecruitsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247Recruits({});
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
 export const sports247Recruits: Wrapper<Sports247Sports247RecruitsRow[], Sports247RecruitsParams> = (params: WrapperParams = {}) => callFlat(RECRUITS_DEF, params);
 /** snake_case alias of {@link sports247Recruits} (py/R parity). */
@@ -332,11 +337,12 @@ const SPORT_YEARS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://ipa.247sports.com/rdb/v1/sports/{sport_key}/year/`
  *
- * @param params.sport_key - path parameter *(optional)*.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — 247Sports sport key (1 = football, 2 = basketball); optional; default `1`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Sports247Sports247SportYearsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SportYears({});
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
 export const sports247SportYears: Wrapper<Sports247Sports247SportYearsRow[], Sports247SportYearsParams> = (params: WrapperParams = {}) => callFlat(SPORT_YEARS_DEF, params);
 /** snake_case alias of {@link sports247SportYears} (py/R parity). */
@@ -371,12 +377,13 @@ const TAGS_AUTOCOMPLETE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://ipa.247sports.com/rdb/v1/tags/autocomplete/`
  *
- * @param params.default_name - query parameter (`defaultName`).
- * @param params.items - query parameter — default `10`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.default_name - `number | string` — the `defaultName` query parameter.
+ * @param params.items - `number | string` — the `items` query parameter; default `10`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Sports247Sports247TagsAutocompleteRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247TagsAutocomplete({});
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
 export const sports247TagsAutocomplete: Wrapper<Sports247Sports247TagsAutocompleteRow[], Sports247TagsAutocompleteParams> = (params: WrapperParams = {}) => callFlat(TAGS_AUTOCOMPLETE_DEF, params);
 /** snake_case alias of {@link sports247TagsAutocomplete} (py/R parity). */
@@ -419,14 +426,15 @@ const TARGET_PREDICTIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://ipa.247sports.com/rdb/v1/sites/{site_key}/years/{year}/sports/{sport_key}/currentTargetPredictions/`
  *
- * @param params.site_key - path parameter.
- * @param params.year - path parameter.
- * @param params.sport_key - path parameter *(optional)*.
- * @param params.page_size - query parameter (`pageSize`) — default `50`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.site_key - `number | string` — the `{site_key}` path segment.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.sport_key - `number | string` — 247Sports sport key (1 = football, 2 = basketball); optional; default `1`.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `50`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Sports247Sports247TargetPredictionsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247TargetPredictions({ site_key: '…', year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
 export const sports247TargetPredictions: Wrapper<Sports247Sports247TargetPredictionsRow[], Sports247TargetPredictionsParams> = (params: WrapperParams = {}) => callFlat(TARGET_PREDICTIONS_DEF, params);
 /** snake_case alias of {@link sports247TargetPredictions} (py/R parity). */
@@ -465,13 +473,14 @@ const TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://ipa.247sports.com/rdb/v1/teams/`
  *
- * @param params.sport_key - query parameter (`sportKey`) — default `1`.
- * @param params.year - query parameter.
- * @param params.institution_type - query parameter (`institutionType`).
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — 247Sports sport key (1 = football, 2 = basketball); default `1`.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.institution_type - `number | string` — the `institutionType` query parameter.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Sports247Sports247TeamsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247Teams({});
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
 export const sports247Teams: Wrapper<Sports247Sports247TeamsRow[], Sports247TeamsParams> = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
 /** snake_case alias of {@link sports247Teams} (py/R parity). */
@@ -511,13 +520,14 @@ const TRANSFER_PORTAL_PLAYER_FEED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://ipa.247sports.com/rdb/v1/rankings/{sport_key}/{year}/transferPortalPlayerfeed/`
  *
- * @param params.year - path parameter.
- * @param params.sport_key - path parameter *(optional)*.
- * @param params.page_size - query parameter (`pageSize`) — default `50`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.sport_key - `number | string` — 247Sports sport key (1 = football, 2 = basketball); optional; default `1`.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `50`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Sports247Sports247TransferPortalPlayerFeedRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247TransferPortalPlayerFeed({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
 export const sports247TransferPortalPlayerFeed: Wrapper<Sports247Sports247TransferPortalPlayerFeedRow[], Sports247TransferPortalPlayerFeedParams> = (params: WrapperParams = {}) => callFlat(TRANSFER_PORTAL_PLAYER_FEED_DEF, params);
 /** snake_case alias of {@link sports247TransferPortalPlayerFeed} (py/R parity). */
@@ -557,13 +567,14 @@ const TRANSFER_PORTAL_TEAM_FEED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://ipa.247sports.com/rdb/v1/rankings/{sport_key}/{year}/transferPortalOnlyTeamFeed/`
  *
- * @param params.year - path parameter.
- * @param params.sport_key - path parameter *(optional)*.
- * @param params.page_size - query parameter (`pageSize`) — default `50`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.sport_key - `number | string` — 247Sports sport key (1 = football, 2 = basketball); optional; default `1`.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `50`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Sports247Sports247TransferPortalTeamFeedRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247TransferPortalTeamFeed({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
 export const sports247TransferPortalTeamFeed: Wrapper<Sports247Sports247TransferPortalTeamFeedRow[], Sports247TransferPortalTeamFeedParams> = (params: WrapperParams = {}) => callFlat(TRANSFER_PORTAL_TEAM_FEED_DEF, params);
 /** snake_case alias of {@link sports247TransferPortalTeamFeed} (py/R parity). */
@@ -608,14 +619,15 @@ const TRANSFERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://ipa.247sports.com/rdb/v1/transfers/`
  *
- * @param params.sport_key - query parameter (`sportKey`) — default `1`.
- * @param params.year - query parameter — default `2026`.
- * @param params.page_size - query parameter (`pagesize`) — default `50`.
- * @param params.page - query parameter.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — 247Sports sport key (1 = football, 2 = basketball); default `1`.
+ * @param params.year - `number | string` — the `year` query parameter; default `2026`.
+ * @param params.page_size - `number | string` — the `pagesize` query parameter; default `50`.
+ * @param params.page - `number | string` — the `page` query parameter.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Sports247Sports247TransfersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247Transfers({});
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
 export const sports247Transfers: Wrapper<Sports247Sports247TransfersRow[], Sports247TransfersParams> = (params: WrapperParams = {}) => callFlat(TRANSFERS_DEF, params);
 /** snake_case alias of {@link sports247Transfers} (py/R parity). */

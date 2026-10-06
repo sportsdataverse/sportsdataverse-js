@@ -32,10 +32,11 @@ const RATINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://barttorvik.com/ncaaw/{year}_team_results.csv`
  *
- * @param params.year - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.torvik.bartWbbRatings({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/torvik#native-api--barttorvik-womens-t-rank
  */
 export const bartWbbRatings: Wrapper<Row[], BartWbbRatingsParams> = (params: WrapperParams = {}) => callFlat(RATINGS_DEF, params);
 /** snake_case alias of {@link bartWbbRatings} (py/R parity). */

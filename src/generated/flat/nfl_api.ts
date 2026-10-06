@@ -56,12 +56,13 @@ const COMBINE_PROFILES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/combine/profiles`
  *
- * @param params.year - query parameter — default `2024`.
- * @param params.limit - query parameter — default `40`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `year` query parameter; default `2024`.
+ * @param params.limit - `number | string` — the `limit` query parameter; default `40`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflCombineProfiles({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflCombineProfiles: Wrapper<Row[], NflCombineProfilesParams> = (params: WrapperParams = {}) => callFlat(COMBINE_PROFILES_DEF, params);
 /** snake_case alias of {@link nflCombineProfiles} (py/R parity). */
@@ -98,12 +99,13 @@ const DRAFT_PICKS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/draft/picks/report`
  *
- * @param params.year - query parameter — default `2024`.
- * @param params.limit - query parameter — default `40`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `year` query parameter; default `2024`.
+ * @param params.limit - `number | string` — the `limit` query parameter; default `40`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflDraftPicks({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflDraftPicks: Wrapper<Row[], NflDraftPicksParams> = (params: WrapperParams = {}) => callFlat(DRAFT_PICKS_DEF, params);
 /** snake_case alias of {@link nflDraftPicks} (py/R parity). */
@@ -139,12 +141,13 @@ const GAME_DETAILS_BY_SLUG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/experience/v1/gamedetailsbyslug/{slug}`
  *
- * @param params.slug - path parameter.
- * @param params.include_replays - query parameter (`includeReplays`) — default `false`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.slug - `number | string` — nfl.com game slug, e.g. `broncos-at-chiefs-2026-reg-1` -- the last segment of the nfl.com game page URL and the `slug` external id.
+ * @param params.include_replays - `boolean` — the `includeReplays` query parameter; default `false`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflGameDetailsBySlug({ slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflGameDetailsBySlug: Wrapper<Row[], NflGameDetailsBySlugParams> = (params: WrapperParams = {}) => callFlat(GAME_DETAILS_BY_SLUG_DEF, params);
 /** snake_case alias of {@link nflGameDetailsBySlug} (py/R parity). */
@@ -198,15 +201,16 @@ const GAME_DETAILS_V2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/experience/v2/gamedetails/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.include_drive_chart - query parameter (`includeDriveChart`) — default `false`.
- * @param params.include_replays - query parameter (`includeReplays`) — default `false`.
- * @param params.include_standings - query parameter (`includeStandings`) — default `false`.
- * @param params.include_tagged_videos - query parameter (`includeTaggedVideos`) — default `false`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Shield uuid game id -- the `id` column of the week games and weekly game details listings.
+ * @param params.include_drive_chart - `boolean` — the `includeDriveChart` query parameter; default `false`.
+ * @param params.include_replays - `boolean` — the `includeReplays` query parameter; default `false`.
+ * @param params.include_standings - `boolean` — the `includeStandings` query parameter; default `false`.
+ * @param params.include_tagged_videos - `boolean` — the `includeTaggedVideos` query parameter; default `false`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflGameDetailsV2({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflGameDetailsV2: Wrapper<Row[], NflGameDetailsV2Params> = (params: WrapperParams = {}) => callFlat(GAME_DETAILS_V2_DEF, params);
 /** snake_case alias of {@link nflGameDetailsV2} (py/R parity). */
@@ -248,13 +252,14 @@ const GAME_SUMMARIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/stats/live/game-summaries`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.week - query parameter — default `1`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter; default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.week - `number | string` — the `week` query parameter; default `1`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflGameSummaries({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflGameSummaries: Wrapper<Row[], NflGameSummariesParams> = (params: WrapperParams = {}) => callFlat(GAME_SUMMARIES_DEF, params);
 /** snake_case alias of {@link nflGameSummaries} (py/R parity). */
@@ -296,13 +301,14 @@ const INJURIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/injuries`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.week - query parameter — default `1`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter; default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.week - `number | string` — the `week` query parameter; default `1`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflInjuries({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflInjuries: Wrapper<Row[], NflInjuriesParams> = (params: WrapperParams = {}) => callFlat(INJURIES_DEF, params);
 /** snake_case alias of {@link nflInjuries} (py/R parity). */
@@ -331,11 +337,12 @@ const LIVE_PLAYER_STATISTICS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/stats/live/player-statistics/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Shield uuid game id -- the `id` column of the week games and weekly game details listings.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflLivePlayerStatistics({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflLivePlayerStatistics: Wrapper<Row[], NflLivePlayerStatisticsParams> = (params: WrapperParams = {}) => callFlat(LIVE_PLAYER_STATISTICS_DEF, params);
 /** snake_case alias of {@link nflLivePlayerStatistics} (py/R parity). */
@@ -364,11 +371,12 @@ const LIVE_TEAM_STATISTICS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/stats/live/team-statistics/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Shield uuid game id -- the `id` column of the week games and weekly game details listings.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflLiveTeamStatistics({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflLiveTeamStatistics: Wrapper<Row[], NflLiveTeamStatisticsParams> = (params: WrapperParams = {}) => callFlat(LIVE_TEAM_STATISTICS_DEF, params);
 /** snake_case alias of {@link nflLiveTeamStatistics} (py/R parity). */
@@ -410,13 +418,14 @@ const ROSTERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/rosters`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.limit - query parameter — default `40`.
- * @param params.team_id - query parameter (`teamId`) — default `null`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter; default `2024`.
+ * @param params.limit - `number | string` — the `limit` query parameter; default `40`.
+ * @param params.team_id - `number | string` — Shield team uuid (the `id` of a team in the teams history listing). Returns just that team's roster -- one roster (~37 KB) instead of all 32 (~1.2 MB); default `null`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflRosters({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflRosters: Wrapper<Row[], NflRostersParams> = (params: WrapperParams = {}) => callFlat(ROSTERS_DEF, params);
 /** snake_case alias of {@link nflRosters} (py/R parity). */
@@ -463,14 +472,15 @@ const STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/standings`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.week - query parameter — default `1`.
- * @param params.limit - query parameter — default `40`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter; default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.week - `number | string` — the `week` query parameter; default `1`.
+ * @param params.limit - `number | string` — the `limit` query parameter; default `40`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflStandings({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflStandings: Wrapper<Row[], NflStandingsParams> = (params: WrapperParams = {}) => callFlat(STANDINGS_DEF, params);
 /** snake_case alias of {@link nflStandings} (py/R parity). */
@@ -500,11 +510,12 @@ const TEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/teams/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflTeam({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflTeam: Wrapper<Row[], NflTeamParams> = (params: WrapperParams = {}) => callFlat(TEAM_DEF, params);
 /** snake_case alias of {@link nflTeam} (py/R parity). */
@@ -541,12 +552,13 @@ const TEAMS_HISTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/teams/history`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.limit - query parameter — default `40`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter; default `2024`.
+ * @param params.limit - `number | string` — the `limit` query parameter; default `40`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflTeamsHistory({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflTeamsHistory: Wrapper<Row[], NflTeamsHistoryParams> = (params: WrapperParams = {}) => callFlat(TEAMS_HISTORY_DEF, params);
 /** snake_case alias of {@link nflTeamsHistory} (py/R parity). */
@@ -612,17 +624,18 @@ const WEEKLY_GAME_DETAILS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/experience/weekly-game-details`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`type`) — default `REG`.
- * @param params.week - query parameter — default `1`.
- * @param params.include_drive_chart - query parameter (`includeDriveChart`) — default `true`.
- * @param params.include_replays - query parameter (`includeReplays`) — default `false`.
- * @param params.include_standings - query parameter (`includeStandings`) — default `false`.
- * @param params.include_tagged_videos - query parameter (`includeTaggedVideos`) — default `false`.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter; default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST (sent as the `type` query param) -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.week - `number | string` — the `week` query parameter; default `1`.
+ * @param params.include_drive_chart - `boolean` — the `includeDriveChart` query parameter; default `true`.
+ * @param params.include_replays - `boolean` — the `includeReplays` query parameter; default `false`.
+ * @param params.include_standings - `boolean` — the `includeStandings` query parameter; default `false`.
+ * @param params.include_tagged_videos - `boolean` — the `includeTaggedVideos` query parameter; default `false`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflWeeklyGameDetails({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflWeeklyGameDetails: Wrapper<Row[], NflWeeklyGameDetailsParams> = (params: WrapperParams = {}) => callFlat(WEEKLY_GAME_DETAILS_DEF, params);
 /** snake_case alias of {@link nflWeeklyGameDetails} (py/R parity). */
@@ -659,12 +672,13 @@ const WEEKS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/weeks/season/{season}/seasonType/{season_type}`
  *
- * @param params.season - path parameter *(optional)*.
- * @param params.season_type - path parameter *(optional)*.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `{season}` path segment; optional; default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; optional; default `REG`.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflWeeks({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflWeeks: Wrapper<Row[], NflWeeksParams> = (params: WrapperParams = {}) => callFlat(WEEKS_DEF, params);
 /** snake_case alias of {@link nflWeeks} (py/R parity). */
@@ -694,11 +708,12 @@ const WEEKS_BY_DATE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nfl.com/football/v2/weeks/date/{date}`
  *
- * @param params.date - path parameter.
- * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.date - `number | string` — the `{date}` path segment.
+ * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflWeeksByDate({ date: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
 export const nflWeeksByDate: Wrapper<Row[], NflWeeksByDateParams> = (params: WrapperParams = {}) => callFlat(WEEKS_BY_DATE_DEF, params);
 /** snake_case alias of {@link nflWeeksByDate} (py/R parity). */

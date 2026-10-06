@@ -1,0 +1,156 @@
+# Breaking-change callouts (JS-owned; not vendored). One entry per `!:` item of a
+# release's BREAKING section in CHANGELOG.md (plus the breaking notes filed under
+# other headings). tools/codegen/breaking.mjs renders a `:::danger Breaking in
+# <version>` admonition at the top of every generated docs page whose surface an entry
+# names, and the "Breaking changes by version" table on reference/deprecations.md.
+#
+# surface: one or a list of
+#   espn            every ESPN league page, the parsed-returns page and deprecations
+#   flat:<family>   a native family's page / section (`flat:*` = every flat family)
+#   loaders         the dataset-loader pages
+#   hockeytech      the HockeyTech provider page (= flat:hockeytech)
+#   legacy          the pre-3.0 `get*` service methods (no generated page; table only)
+#   core            the utilities pages (runtime core, errors, config)
+# changelog_anchor: the heading id on /CHANGELOG the entry lives under.
+entries:
+  - version: "4.0.0"
+    surface: [espn, flat:nhl_api_web, flat:nfl_api, flat:cbs, flat:mlb, flat:fox, flat:yahoo, flat:recruiting]
+    title: Public names are sportsdataverse-py's
+    note: >-
+      `athlete` → `player`, `event` → `game` on every ESPN league; sdv-py's `name_pattern` on the
+      native families (`nhlApiWeb*` → `nhl*`, `nflApi*` → `nfl*`, CBS's 16 shorts, the 3.0.0
+      file-stem names). Every pre-v4 name still works as a deprecated alias that warns once.
+    changelog_anchor: public-names-are-sportsdataverse-pys-every-pre-v4-and-300-name-is-a-deprecated-alias
+  - version: "4.0.0"
+    surface: [espn, "flat:*", loaders, core]
+    title: Integer id columns are decimal strings
+    note: >-
+      Every id column of integers (`id`, `*_id`, `game_pk`, `playerId`, …) comes back as exact
+      decimal strings on every surface — parsers, producers, loaders, HockeyTech analytics.
+      Compare and join ids as strings; `Number(row.game_id)` for a safe number back.
+    changelog_anchor: integer-id-columns-are-decimal-strings-everywhere
+  - version: "4.0.0"
+    surface: [flat:mlb, flat:nhl_api_web, flat:nhl_edge, flat:nhl_stats_rest, flat:nhl_records, flat:cbs, flat:yahoo, flat:yahoo_scores, flat:fox, flat:nfl_api, flat:odds_api, flat:asa, flat:recruiting, flat:torvik, flat:bart_wbb, flat:mlb_statcast]
+    title: An empty or non-JSON 2xx body raises `AssetFetchError`
+    note: >-
+      An empty 200 or an HTML challenge page is a failed fetch, not `""` / `[]`. Catch
+      `AssetFetchError` (unknown — retry later) apart from `NoDataError` (nothing there).
+    changelog_anchor: a-failed-fetch-never-comes-back-as-empty-data-400--422-raise-invalidparametererror-sdv-py-696--700
+  - version: "4.0.0"
+    surface: [espn, "flat:*", core]
+    title: 400 / 422 raise `InvalidParameterError`
+    note: >-
+      For every family (it was `AssetFetchError`), never retried; the message names host, path
+      and status with a redacted excerpt of the body.
+    changelog_anchor: a-failed-fetch-never-comes-back-as-empty-data-400--422-raise-invalidparametererror-sdv-py-696--700
+  - version: "4.0.0"
+    surface: [flat:nba_stats, flat:wnba_stats]
+    title: An unset season is the latest season with rows
+    note: >-
+      Not the previous season. Dated per request for the league, endpoint and `SeasonType`
+      (NBA rolls over in November, G League in January, Summer League in August, WNBA in June);
+      pass `season` for a lockout or pandemic year.
+    changelog_anchor: statsnbacom--statswnbacom-default-season-the-latest-season-with-data-sdv-py-693
+  - version: "4.0.0"
+    surface: [espn, "flat:*", core]
+    title: "Typed returns — generated row types for `parsed: true`"
+    note: >-
+      TypeScript only. A wrapper's raw payload resolves to `unknown` (was `any`); verified
+      endpoints resolve to their row interfaces; the summary dispatchers to `ParsedTables`.
+      Narrow or cast a raw payload.
+    changelog_anchor: typescript--typed-returns-generated-row-types-for-parsed-true
+  - version: "4.0.0"
+    surface: [espn, "flat:*", loaders, legacy]
+    title: "Typed wrapper params and loader rows; `strict` mode"
+    note: >-
+      TypeScript only. A param the endpoint does not have, a missing required path param or a
+      non-boolean `bool` param is a type error; parser rows are `Record<string, unknown>`;
+      loader rows are their generated row types.
+    changelog_anchor: typescript--typed-wrapper-params-and-loader-rows-strict-mode
+  - version: "4.0.0"
+    surface: [espn, "flat:*", legacy, core]
+    title: Wrapper failures raise `NoDataError` / `AssetFetchError`
+    note: >-
+      Instead of raw axios errors. `NoDataError` = the fetch worked and there is nothing there
+      (404, ESPN `{ code: 404 }`); `AssetFetchError` = the fetch failed (403 / 429 / 5xx after
+      retries, network). Retries follow `DEFAULT_RETRY_STATUSES` with backoff.
+    changelog_anchor: error-vocabulary-pluggable-transport--auth
+  - version: "4.0.0"
+    surface: [flat:mlb_statcast, flat:mlb]
+    title: "Baseball Savant `parsed: true` rows are typed like sdv-py's"
+    note: >-
+      Savant CSV rows (`parse_mlb_statcast_leaderboard`, `parse_mlb_statcast_search`, the
+      `mlb_statcast_search*` wrappers): numeric columns are numbers (were strings), an integer past
+      `Number.MAX_SAFE_INTEGER` is `BigInt`, `inf` is `Infinity`, True/False are booleans, NA cells
+      are `null`; the MLBAM id columns (`batter`, `pitcher`, `on_1b`…, `fielder_2`…, `game_pk`) are
+      pinned to Int64 and come back as decimal strings.
+    changelog_anchor: integer-id-columns-are-decimal-strings-everywhere
+  - version: "4.0.0"
+    surface: [flat:mlb_statcast, flat:torvik, flat:bart_wbb, hockeytech]
+    title: The Statcast, BartTorvik and HockeyTech getters throw on a failed fetch
+    note: >-
+      A failed HTTP fetch is no longer `{}` / `""` — it throws like every other wrapper, so a
+      failed fetch cannot be mistaken for an empty table.
+    changelog_anchor: error-vocabulary-pluggable-transport--auth
+  - version: "4.0.0"
+    surface: hockeytech
+    title: "`season_yr` is the season's end year in every name form"
+    note: >-
+      `"2025-2026"` and `"2025/26"` are 2026 (were 2120 / 2025); `"26-27 Regular Season"` is
+      2027; a preseason named with its start year belongs to the next season.
+    changelog_anchor: hockeytech-season-years-and-season-resolution-sdv-py-parity
+  - version: "4.0.0"
+    surface: hockeytech
+    title: Exhibitions get their own `game_type_label`
+    note: >-
+      `"exhibition"` (was `"regular"`); `hockeytech_resolve_season_id` takes `gameType: "exhibition"`.
+    changelog_anchor: hockeytech-season-years-and-season-resolution-sdv-py-parity
+  - version: "4.0.0"
+    surface: hockeytech
+    title: "`most_recent_hockeytech_season` is the newest regular season"
+    note: >-
+      One-off events and a preseason listed before its regular season are no longer the
+      default (ECHL in the 2026 preseason window gives 2026, not 2027).
+    changelog_anchor: hockeytech-season-years-and-season-resolution-sdv-py-parity
+  - version: "4.0.0"
+    surface: hockeytech
+    title: "`hockeytech_resolve_season_id` skips one-off events and ranks what is left"
+    note: >-
+      All-star games, showcases, combines, exhibitions and play-ins are dropped for a regular
+      season or playoffs; the rest rank by league code, named game type, two-year span, feed order.
+    changelog_anchor: hockeytech-season-years-and-season-resolution-sdv-py-parity
+  - version: "4.0.0"
+    surface: hockeytech
+    title: A failed HockeyTech fetch is no longer an empty result
+    note: >-
+      An empty or unparseable body and the in-body error sentinels throw `AssetFetchError`; only
+      the recognised `Feed type access denied.` stays `{}` / `[]`. A missing or unknown `league` throws.
+    changelog_anchor: hockeytech-hardening-error-vocabulary-user-agent-returns-descriptions
+  - version: "4.0.0"
+    surface: hockeytech
+    title: "`most_recent_hockeytech_season` / `hockeytech_season_id` throw on a failed fetch"
+    note: >-
+      Instead of returning 2026 / `[]`. With no seasons in the feed, `hockeytech_season_id`
+      returns `[]` and `most_recent_hockeytech_season` throws `NoDataError`.
+    changelog_anchor: hockeytech-hardening-error-vocabulary-user-agent-returns-descriptions
+  # Breaking notes filed under other 4.0.0 headings.
+  - version: "4.0.0"
+    surface: flat:fox
+    title: "`sdv.fox` is vendored from sdv-py's `fox_api`"
+    note: >-
+      The canonical names are `fox_api_*` / `foxApi*`; every pre-v4 `fox_*` name is a deprecated alias.
+    changelog_anchor: vendor-pin-81eb7e7060-espn-cdn-fox-statson3-returns-tables-on_missing
+  - version: "4.0.0"
+    surface: flat:yahoo
+    title: "`sdv.yahoo.*` no longer defaults `league=ncaaf` or sets a locale"
+    note: >-
+      The stats queries send no `lang` / `region` / `tz` and no default `league` — pass `league`
+      explicitly.
+    changelog_anchor: shared-endpoint-yaml-is-vendored-from-sportsdataverse-py
+  - version: "4.0.0"
+    surface: legacy
+    title: Legacy `get*` methods throw typed errors
+    note: >-
+      A failed fetch throws `NoDataError` (404, ESPN's `{ code: 404 }`) or `AssetFetchError`
+      instead of a raw axios error.
+    changelog_anchor: legacy-get-methods-fetch-through-the-request-layer

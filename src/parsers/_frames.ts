@@ -27,6 +27,15 @@ import { idColumnsToStrings, isIdColumn } from "../core/int64.js";
  * sdv-py `dl_utils.underscore`, verbatim: split capital runs and camel humps,
  * `-` -> `_`, lower-case. Unlike `snakeCase` it keeps a leading `_` and spaces,
  * so column names match the sdv-py frames exactly.
+ *
+ * @param word - The source key (camelCase, PascalCase, kebab-case or already snake_case).
+ * @returns The lower-cased, underscore-separated name.
+ * @remarks
+ * Dots, spaces and repeated underscores pass through untouched (use `snakeCase` from
+ * `_normalize.ts` when those must collapse). Same rule as `underscore` in `_normalize.ts`.
+ * @example
+ * pyUnderscore("highSchoolName"); // "high_school_name"
+ * pyUnderscore("team-id"); // "team_id"
  */
 export function pyUnderscore(word: string): string {
   return word
@@ -36,7 +45,18 @@ export function pyUnderscore(word: string): string {
     .toLowerCase();
 }
 
-/** Python `json.dumps` text for a JSON value: ", " and ": " separators, non-ASCII as \uXXXX. */
+/**
+ * Python `json.dumps` text for a JSON value: ", " and ": " separators, non-ASCII as \uXXXX.
+ *
+ * @param v - Any JSON-serialisable value (an object, array, string, number, boolean or null).
+ * @returns The `json.dumps`-shaped text, so a JSON-encoded cell compares equal to sdv-py's.
+ * @remarks
+ * Built on `JSON.stringify`: `undefined` input yields `undefined` and the `.replace` chain then
+ * throws a `TypeError`, so pass JSON values only. Every code point from U+007F up is escaped
+ * as `\uXXXX`, matching Python's default `ensure_ascii=True`.
+ * @example
+ * pyJson({ a: [1, 2], b: "é" }); // '{"a": [1, 2], "b": "\\u00e9"}'
+ */
 export function pyJson(v: any): string {
   return JSON.stringify(v)
     .replace(/("(?:[^"\\]|\\.)*")|([,:])/g, (_m, str?: string, sep?: string) =>
@@ -45,10 +65,20 @@ export function pyJson(v: any): string {
     .replace(/[\u007f-￿]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, "0")}`);
 }
 
+/** One tidy row (column name -> cell): the shared `ParserRow` type under its `_frames` alias. */
 export type { ParserRow as Row } from "../core/types.js";
 import type { ParserRow as Row } from "../core/types.js";
 
-/** Is `v` a plain object (not null, not an array)? */
+/**
+ * Is `v` a plain object (not null, not an array)?
+ *
+ * @param v - Any value.
+ * @returns `true` for a non-null, non-array object (a `Date` or class instance counts too —
+ *   unlike the `_normalize.ts` twin, which excludes `Date`).
+ * @example
+ * isPlainObject({ id: 1 }); // true
+ * isPlainObject([1]); // false
+ */
 export function isPlainObject(v: any): v is Record<string, any> {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
@@ -80,6 +110,7 @@ function idString(v: any): any {
   return String(v);
 }
 
+/** Options for {@link rowsToFrame}. */
 export interface RowsToFrameOptions {
   /** Pin every id column to strings, whatever its values (the soccer providers). */
   ids?: boolean;
@@ -87,7 +118,28 @@ export interface RowsToFrameOptions {
   dropNull?: boolean;
 }
 
-/** Flatten a list of JSON records into rectangular, snake_cased rows. `[]` for no input. */
+/**
+ * Flatten a list of JSON records into rectangular, snake_cased rows. `[]` for no input.
+ *
+ * @param rows - The records (a JSON array; `null` / `undefined` count as empty). A record that
+ *   is not an object is kept under a `value` column; a list with no objects at all becomes
+ *   one `value` column of strings.
+ * @param opts - `ids`: pin every id column (`isIdColumn`) to strings via the id-cell rule (a
+ *   whole-number float prints as `"123"`, a list comma-joins, an object JSON-encodes).
+ *   `dropNull`: drop `null` / `undefined` entries before flattening. Both default to `false`.
+ * @returns One row per kept record, every row carrying every column (missing -> `null`) in
+ *   first-seen order; nested objects flatten with `_`, names are `pyUnderscore`d and
+ *   de-duplicated with `_2`, `_3`, ... suffixes, array / object cells are `pyJson` text.
+ * @remarks
+ * Port of sdv-py `soccer/_frames.py::rows_to_frame` (`pandas.json_normalize(sep="_")` +
+ * `underscore()`). Column order follows `json_normalize`: top-level scalar / array keys first,
+ * then each nested object's keys. Without `ids`, id columns still go through the v4 INT64 id
+ * rule (`idColumnsToStrings`): a column of integers becomes decimal strings, anything else is
+ * left as read. Unlike pandas a JS number stays a number in a mixed-type column.
+ * @example
+ * const rows = rowsToFrame(payload.players, { ids: true, dropNull: true });
+ * rows[0].team_id; // "1234" (a list id -> "1234,5678")
+ */
 export function rowsToFrame(rows: readonly any[] | null | undefined, opts: RowsToFrameOptions = {}): Row[] {
   const kept = (rows ?? []).filter((r) => !(opts.dropNull && (r === null || r === undefined)));
   if (kept.length === 0) return [];
@@ -129,7 +181,15 @@ export function rowsToFrame(rows: readonly any[] | null | undefined, opts: RowsT
   return opts.ids ? out : idColumnsToStrings(out);
 }
 
-/** A JSON body as a row list: a list as-is, a non-empty object as one row, else `[]`. */
+/**
+ * A JSON body as a row list: a list as-is, a non-empty object as one row, else `[]`.
+ *
+ * @param raw - A decoded JSON body (array, object, scalar, `null`).
+ * @returns The array itself (not a copy), `[raw]` for a non-empty plain object, `[]` for
+ *   anything else (an empty object, a scalar, `null`).
+ * @example
+ * const rows = rowsToFrame(asRows(payload));
+ */
 export function asRows(raw: any): any[] {
   if (Array.isArray(raw)) return raw;
   if (isPlainObject(raw) && Object.keys(raw).length > 0) return [raw];
@@ -157,6 +217,15 @@ export interface SectionSpec {
   resultSet?: true;
 }
 
+/**
+ * The multi-table parsers (by registry name) and their {@link SectionSpec}: which sub-frame
+ * each returns by default and which `section` names it accepts.
+ *
+ * @remarks
+ * A parser's presence here is what makes the flat wrapper dispatch (and `parseEndpoint`) pass
+ * `section` through. Mirrored in `tools/codegen/endpoints/flat_parser_sections.yaml`; a test
+ * keeps the two equal, so an entry added here needs the YAML edit too.
+ */
 export const MULTI_TABLE_SECTIONS: Record<string, SectionSpec> = {
   parse_asa_goals_added: { default: "summary", sections: ["summary", "actions"] },
   parse_mls_standings: { default: "entries", sections: ["tables", "entries"] },
@@ -188,7 +257,18 @@ export const MULTI_TABLE_SECTIONS: Record<string, SectionSpec> = {
   },
 };
 
-/** The error for a `section` the parser does not have, listing the valid names. */
+/**
+ * The error for a `section` the parser does not have, listing the valid names.
+ *
+ * @param parser - The parser's registry name (the message prefix).
+ * @param name - The rejected section name.
+ * @param valid - The names the parser does accept (JSON-encoded in the message).
+ * @param dflt - The parser's default section, or `null` for a dict-default parser.
+ * @returns A plain `Error` (not thrown here) whose message names the valid sections and the
+ *   default.
+ * @example
+ * throw sectionError("parse_nwsl_lineups", "benches", ["teams", "players", "staff"], "players");
+ */
 export function sectionError(parser: string, name: string, valid: readonly string[], dflt: string | null): Error {
   return new Error(
     `${parser}: unknown section '${name}'. Choose one of ${JSON.stringify(valid)}` +
@@ -200,6 +280,17 @@ export function sectionError(parser: string, name: string, valid: readonly strin
  * Select one sub-frame of a multi-table parse. `section` omitted -> the parser's
  * default (for a dict-default parser, every table). An unknown name throws,
  * listing the valid ones.
+ *
+ * @param parser - A key of {@link MULTI_TABLE_SECTIONS} (the spec is read without a guard, so
+ *   an unregistered name fails on `spec.default`).
+ * @param tables - The parser's full output, every sub-frame keyed by name.
+ * @param section - The sub-frame to return; omitted = the spec's `default`.
+ * @returns The selected rows (the array held in `tables`, not a copy).
+ * @throws Error when `section` (or the default) is not both present in `tables` and listed in
+ *   the spec's `sections` — see {@link sectionError}. For a dict-default parser called without
+ *   `section` the name is `""`, which throws as well; its callers return the whole dict instead.
+ * @example
+ * const players = pickSection("parse_mls_match", parse_mls_match_tables(raw), "players");
  */
 export function pickSection(parser: string, tables: Record<string, Row[]>, section?: string): Row[] {
   const spec = MULTI_TABLE_SECTIONS[parser];

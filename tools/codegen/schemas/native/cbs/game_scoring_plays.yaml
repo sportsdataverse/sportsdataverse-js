@@ -1,8 +1,71 @@
-# CBS NAPI game scoring plays resource (/resource/game/scoring/plays/{game_id}). Generic flattened frame parsed
-# by parse_cbs_list.
-# The CBS NAPI OpenAPI spec ships no typed 200-response schema (every resource is
-# a free-form {data: ...} envelope), so columns are not enumerable ahead of a
-# live capture; the parser snake_cases + flattens whatever keys the payload ships.
+# cbs returns schema (JS-owned): columns derived from the registered parser's rows on
+# the committed real capture(s) cbs/game_scoring_plays_nfl.json, cbs/game_scoring_plays_ncaaf.json by
+# tools/codegen/regen-capture-schemas.mjs. Types are inferred from the captured values;
+# `description` is JS-owned text kept across regeneration (blanks fill at render time from
+# sdv-py's manual_column_descriptions.yaml). Do not hand-type columns: re-run the script.
 schema: game_scoring_plays
 kind: dataframe
-columns: []
+columns:
+- name: id
+  type: character
+  description: ""
+- name: game_id
+  type: character
+  description: ""
+- name: drive_id
+  type: character
+  description: ""
+- name: quarter
+  type: integer
+  description: ""
+- name: time_remaining
+  type: character
+  description: ""
+- name: down
+  type: integer
+  description: ""
+- name: distance
+  type: character
+  description: ""
+- name: side
+  type: character
+  description: ""
+- name: yardline
+  type: integer
+  description: ""
+- name: team_in_possession
+  type: integer
+  description: ""
+- name: description
+  type: character
+  description: ""
+- name: medium
+  type: character
+  description: ""
+- name: short
+  type: character
+  description: ""
+- name: score_on_play
+  type: logical
+  description: ""
+- name: score_type
+  type: character
+  description: ""
+- name: short_score
+  type: character
+  description: ""
+- name: under_review
+  type: logical
+  description: ""
+- name: home_timeouts_remaining
+  type: integer
+  description: ""
+- name: away_timeouts_remaining
+  type: integer
+  description: ""
+- name: real_clock
+  type: character
+  description: ""
+- name: subplays
+  type: character
+  description: ""

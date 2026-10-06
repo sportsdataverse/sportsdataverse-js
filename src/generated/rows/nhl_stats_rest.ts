@@ -10,27 +10,27 @@
  * One row of `sdv.nhl.nhl_stats_rest_country({ parsed: true })` (returns schema `native/nhl_stats_rest/country`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestCountryRow {
-  /** Schema `character` (an id). */
+  /** Unique player identifier. Schema `character` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Three-letter ISO country code used by the NHL api-web country reference endpoint. Schema `character`. */
   country3_code?: string | null;
-  /** Schema `character`. */
+  /** Player country code. Schema `character`. */
   country_code?: string | null;
-  /** Schema `character`. */
+  /** Full English display name of the country as provided by the NHL api-web country reference. Schema `character`. */
   country_name?: string | null;
-  /** Schema `integer`. */
+  /** Flag (1/0) indicating whether the NHL api-web tracks player statistics for this country. Schema `integer`. */
   has_player_stats?: number | null;
-  /** Schema `character`. */
+  /** Player headshot URL. Schema `character`. */
   image_url?: string | null;
-  /** Schema `character`. */
+  /** International Olympic Committee three-letter country code assigned to this nation. Schema `character`. */
   ioc_code?: string | null;
-  /** Schema `integer`. */
+  /** Whether the team is active. Schema `integer`. */
   is_active?: number | null;
-  /** Schema `character`. */
+  /** Nationality label string used on player profiles in the NHL api-web (e.g., 'Canadian', 'American'). Schema `character`. */
   nationality_name?: string | null;
-  /** Schema `character`. */
+  /** URL to the country's Olympic profile page linked from the NHL api-web country record. Schema `character`. */
   olympic_url?: string | null;
-  /** Schema `character`. */
+  /** URL to a small thumbnail image representing the country's flag or emblem in the NHL api-web. Schema `character`. */
   thumbnail_url?: string | null;
 }
 
@@ -38,11 +38,11 @@ export interface NhlStatsRestCountryRow {
  * One row of `sdv.nhl.nhl_stats_rest_draft({ parsed: true })` (returns schema `native/nhl_stats_rest/draft`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestDraftRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer`. */
+  /** Draft year the lottery applies to. Schema `integer`. */
   draft_year?: number | null;
-  /** Schema `integer`. */
+  /** Number of rounds in the draft. Schema `integer`. */
   rounds?: number | null;
 }
 
@@ -50,13 +50,13 @@ export interface NhlStatsRestDraftRow {
  * One row of `sdv.nhl.nhl_stats_rest_franchise({ parsed: true })` (returns schema `native/nhl_stats_rest/franchise`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestFranchiseRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** Team common (nickname) name. Schema `character`. */
   team_common_name?: string | null;
-  /** Schema `character`. */
+  /** Team place (city/location) name. Schema `character`. */
   team_place_name?: string | null;
 }
 
@@ -64,31 +64,31 @@ export interface NhlStatsRestFranchiseRow {
  * One row of `sdv.nhl.nhl_stats_rest_game({ parsed: true })` (returns schema `native/nhl_stats_rest/game`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestGameRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Game start time in Eastern time. Schema `character`. */
   eastern_start_time?: string | null;
-  /** Schema `character`. */
+  /** Game date. Schema `character`. */
   game_date?: string | null;
-  /** Schema `integer`. */
+  /** Game number within the schedule. Schema `integer`. */
   game_number?: number | null;
-  /** Schema `integer` (an id). */
+  /** Schedule state identifier. Schema `integer` (an id). */
   game_schedule_state_id?: string | null;
-  /** Schema `integer` (an id). */
+  /** Game state identifier. Schema `integer` (an id). */
   game_state_id?: string | null;
-  /** Schema `integer`. */
+  /** Game type the row belongs to. Schema `integer`. */
   game_type?: number | null;
-  /** Schema `integer`. */
+  /** Home team final score. Schema `integer`. */
   home_score?: number | null;
-  /** Schema `integer` (an id). */
+  /** Home team identifier. Schema `integer` (an id). */
   home_team_id?: string | null;
-  /** Schema `integer`. */
+  /** Period number. Schema `integer`. */
   period?: number | null;
-  /** Schema `integer`. */
+  /** Season year (echoed from arg). Schema `integer`. */
   season?: number | null;
-  /** Schema `integer`. */
+  /** Visiting team score. Schema `integer`. */
   visiting_score?: number | null;
-  /** Schema `integer` (an id). */
+  /** Visiting team identifier. Schema `integer` (an id). */
   visiting_team_id?: string | null;
 }
 
@@ -96,19 +96,19 @@ export interface NhlStatsRestGameRow {
  * One row of `sdv.nhl.nhl_stats_rest_glossary({ parsed: true })` (returns schema `native/nhl_stats_rest/glossary`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestGlossaryRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Team abbreviation. Schema `character`. */
   abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Definition of the stat or term. Schema `character`. */
   definition?: string | null;
-  /** Schema `double`. */
+  /** First season the stat was tracked (YYYYYYYY). Schema `double`. */
   first_season_for_stat?: number | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** Language code of the entry. Schema `character`. */
   language_code?: string | null;
-  /** Schema `character`. */
+  /** Timestamp the entry was last updated. Schema `character`. */
   last_updated?: string | null;
 }
 
@@ -116,51 +116,51 @@ export interface NhlStatsRestGlossaryRow {
  * One row of `sdv.nhl.nhl_stats_rest_goalie_report({ parsed: true })` (returns schema `native/nhl_stats_rest/goalie_report`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestGoalieReportRow {
-  /** Schema `integer`. */
+  /** Assists. Schema `integer`. */
   assists?: number | null;
-  /** Schema `integer`. */
+  /** Games played. Schema `integer`. */
   games_played?: number | null;
-  /** Schema `integer`. */
+  /** Games started (goalies). Schema `integer`. */
   games_started?: number | null;
-  /** Schema `character`. */
+  /** Goalie full name. Schema `character`. */
   goalie_full_name?: string | null;
-  /** Schema `integer`. */
+  /** Goals scored. Schema `integer`. */
   goals?: number | null;
-  /** Schema `integer`. */
+  /** Goals against. Schema `integer`. */
   goals_against?: number | null;
-  /** Schema `double`. */
+  /** Goals against average. Schema `double`. */
   goals_against_average?: number | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `integer`. */
+  /** Losses. Schema `integer`. */
   losses?: number | null;
-  /** Schema `integer`. */
+  /** Overtime losses. Schema `integer`. */
   ot_losses?: number | null;
-  /** Schema `integer`. */
+  /** Penalty minutes. Schema `integer`. */
   penalty_minutes?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `integer`. */
+  /** Total points (goals + assists). Schema `integer`. */
   points?: number | null;
-  /** Schema `double`. */
+  /** Save percentage. Schema `double`. */
   save_pct?: number | null;
-  /** Schema `integer`. */
+  /** Saves made. Schema `integer`. */
   saves?: number | null;
-  /** Schema `integer` (an id). */
+  /** Season identifier. Schema `integer` (an id). */
   season_id?: string | null;
-  /** Schema `character`. */
+  /** Handedness (shoots/catches). Schema `character`. */
   shoots_catches?: string | null;
-  /** Schema `integer`. */
+  /** Shots faced. Schema `integer`. */
   shots_against?: number | null;
-  /** Schema `integer`. */
+  /** Shutouts recorded. Schema `integer`. */
   shutouts?: number | null;
-  /** Schema `character`. */
+  /** Team abbreviation(s). Schema `character`. */
   team_abbrevs?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Total ties. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   ties?: unknown;
-  /** Schema `integer`. */
+  /** Time on ice in seconds. Schema `integer`. */
   time_on_ice?: number | null;
-  /** Schema `integer`. */
+  /** Wins. Schema `integer`. */
   wins?: number | null;
 }
 
@@ -168,35 +168,35 @@ export interface NhlStatsRestGoalieReportRow {
  * One row of `sdv.nhl.nhl_stats_rest_leaders_goalies({ parsed: true })` (returns schema `native/nhl_stats_rest/leaders_goalies`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestLeadersGoaliesRow {
-  /** Schema `double`. */
+  /** Save percentage. Schema `double`. */
   save_pctg?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `double` (an id). */
+  /** Player's current team identifier. Schema `double` (an id). */
   player_current_team_id?: string | number | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   player_first_name?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   player_full_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   player_last_name?: string | null;
-  /** Schema `character`. */
+  /** Player position code. Schema `character`. */
   player_position_code?: string | null;
-  /** Schema `double`. */
+  /** Player jersey number. Schema `double`. */
   player_sweater_number?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
-  /** Schema `integer` (an id). */
+  /** Team franchise identifier. Schema `integer` (an id). */
   team_franchise_id?: string | null;
-  /** Schema `character`. */
+  /** Full team name. Schema `character`. */
   team_full_name?: string | null;
-  /** Schema `integer` (an id). */
+  /** League identifier of the team. Schema `integer` (an id). */
   team_league_id?: string | null;
-  /** Schema `character`. */
+  /** Team logo metadata. Schema `character`. */
   team_logos?: string | null;
-  /** Schema `character`. */
+  /** Team raw three-letter code. Schema `character`. */
   team_raw_tricode?: string | null;
-  /** Schema `character`. */
+  /** Team tri-code abbreviation. Schema `character`. */
   team_tri_code?: string | null;
 }
 
@@ -204,35 +204,35 @@ export interface NhlStatsRestLeadersGoaliesRow {
  * One row of `sdv.nhl.nhl_stats_rest_leaders_skaters({ parsed: true })` (returns schema `native/nhl_stats_rest/leaders_skaters`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestLeadersSkatersRow {
-  /** Schema `integer`. */
+  /** Goals scored. Schema `integer`. */
   goals?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Player's current team identifier. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_current_team_id?: unknown;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   player_first_name?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   player_full_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   player_last_name?: string | null;
-  /** Schema `character`. */
+  /** Player position code. Schema `character`. */
   player_position_code?: string | null;
-  /** Schema `integer`. */
+  /** Player jersey number. Schema `integer`. */
   player_sweater_number?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
-  /** Schema `integer` (an id). */
+  /** Team franchise identifier. Schema `integer` (an id). */
   team_franchise_id?: string | null;
-  /** Schema `character`. */
+  /** Full team name. Schema `character`. */
   team_full_name?: string | null;
-  /** Schema `integer` (an id). */
+  /** League identifier of the team. Schema `integer` (an id). */
   team_league_id?: string | null;
-  /** Schema `character`. */
+  /** Team logo metadata. Schema `character`. */
   team_logos?: string | null;
-  /** Schema `character`. */
+  /** Team raw three-letter code. Schema `character`. */
   team_raw_tricode?: string | null;
-  /** Schema `character`. */
+  /** Team tri-code abbreviation. Schema `character`. */
   team_tri_code?: string | null;
 }
 
@@ -240,39 +240,39 @@ export interface NhlStatsRestLeadersSkatersRow {
  * One row of `sdv.nhl.nhl_stats_rest_milestones_goalies({ parsed: true })` (returns schema `native/nhl_stats_rest/milestones_goalies`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestMilestonesGoaliesRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer` (an id). */
+  /** Player's current team identifier. Schema `integer` (an id). */
   current_team_id?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `integer` (an id). */
+  /** Game type identifier (regular/playoffs). Schema `integer` (an id). */
   game_type_id?: string | null;
-  /** Schema `integer`. */
+  /** Games played. Schema `integer`. */
   games_played?: number | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Milestone category. Schema `character`. */
   milestone?: string | null;
-  /** Schema `integer`. */
+  /** Amount remaining to reach the milestone. Schema `integer`. */
   milestone_amount?: number | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   player_full_name?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `integer`. */
+  /** Shutouts. Schema `integer`. */
   so?: number | null;
-  /** Schema `character`. */
+  /** Team abbreviation. Schema `character`. */
   team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Team common (nickname) name. Schema `character`. */
   team_common_name?: string | null;
-  /** Schema `character`. */
+  /** Full team name. Schema `character`. */
   team_full_name?: string | null;
-  /** Schema `character`. */
+  /** Team place (city/location) name. Schema `character`. */
   team_place_name?: string | null;
-  /** Schema `integer`. */
+  /** Time on ice in minutes. Schema `integer`. */
   toi_minutes?: number | null;
-  /** Schema `integer`. */
+  /** Wins. Schema `integer`. */
   wins?: number | null;
 }
 
@@ -280,39 +280,39 @@ export interface NhlStatsRestMilestonesGoaliesRow {
  * One row of `sdv.nhl.nhl_stats_rest_milestones_skaters({ parsed: true })` (returns schema `native/nhl_stats_rest/milestones_skaters`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestMilestonesSkatersRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer`. */
+  /** Assists. Schema `integer`. */
   assists?: number | null;
-  /** Schema `integer` (an id). */
+  /** Player's current team identifier. Schema `integer` (an id). */
   current_team_id?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `integer` (an id). */
+  /** Game type identifier (regular/playoffs). Schema `integer` (an id). */
   game_type_id?: string | null;
-  /** Schema `integer`. */
+  /** Games played. Schema `integer`. */
   games_played?: number | null;
-  /** Schema `integer`. */
+  /** Goals scored. Schema `integer`. */
   goals?: number | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Milestone category. Schema `character`. */
   milestone?: string | null;
-  /** Schema `integer`. */
+  /** Amount remaining to reach the milestone. Schema `integer`. */
   milestone_amount?: number | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   player_full_name?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `integer`. */
+  /** Total points (goals + assists). Schema `integer`. */
   points?: number | null;
-  /** Schema `character`. */
+  /** Team abbreviation. Schema `character`. */
   team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Team common (nickname) name. Schema `character`. */
   team_common_name?: string | null;
-  /** Schema `character`. */
+  /** Full team name. Schema `character`. */
   team_full_name?: string | null;
-  /** Schema `character`. */
+  /** Team place (city/location) name. Schema `character`. */
   team_place_name?: string | null;
 }
 
@@ -320,51 +320,51 @@ export interface NhlStatsRestMilestonesSkatersRow {
  * One row of `sdv.nhl.nhl_stats_rest_season({ parsed: true })` (returns schema `native/nhl_stats_rest/season`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestSeasonRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer`. */
+  /** Whether an All-Star Game was held this season. Schema `integer`. */
   all_star_game_in_use?: number | null;
-  /** Schema `integer`. */
+  /** Whether conferences were in use that season. Schema `integer`. */
   conferences_in_use?: number | null;
-  /** Schema `integer`. */
+  /** Whether divisions were in use that season. Schema `integer`. */
   divisions_in_use?: number | null;
-  /** Schema `character`. */
+  /** Season end date. Schema `character`. */
   end_date?: string | null;
-  /** Schema `integer`. */
+  /** Whether an entry draft was in use this season. Schema `integer`. */
   entry_draft_in_use?: number | null;
-  /** Schema `character` (an id). */
+  /** Human-readable season string (e.g. "2023-24"). Schema `character` (an id). */
   formatted_season_id?: string | null;
-  /** Schema `integer`. */
+  /** Minimum playoff minutes to qualify for goalie stats leaders. Schema `integer`. */
   minimum_playoff_minutes_for_goalie_stats_leaders?: number | null;
-  /** Schema `integer`. */
+  /** Minimum regular-season games to qualify for goalie stats leaders. Schema `integer`. */
   minimum_regular_games_for_goalie_stats_leaders?: number | null;
-  /** Schema `integer`. */
+  /** Whether the NHL owned the Stanley Cup this season. Schema `integer`. */
   nhl_stanley_cup_owner?: number | null;
-  /** Schema `integer`. */
+  /** Number of games per team this season. Schema `integer`. */
   number_of_games?: number | null;
-  /** Schema `integer`. */
+  /** Whether NHL players participated in the Olympics this season. Schema `integer`. */
   olympics_participation?: number | null;
-  /** Schema `integer`. */
+  /** Whether the overtime-loss point was in use this season. Schema `integer`. */
   point_for_ot_loss_in_use?: number | null;
-  /** Schema `character`. */
+  /** Preseason start date. Schema `character`. */
   preseason_startdate?: string | null;
-  /** Schema `character`. */
+  /** Regular-season end date. Schema `character`. */
   regular_season_end_date?: string | null;
-  /** Schema `integer`. */
+  /** Whether the regulation/overtime/shootout format was in use. Schema `integer`. */
   row_in_use?: number | null;
-  /** Schema `integer`. */
+  /** Ordinal sequence number of the season. Schema `integer`. */
   season_ordinal?: number | null;
-  /** Schema `character`. */
+  /** Season start date. Schema `character`. */
   start_date?: string | null;
-  /** Schema `integer`. */
+  /** Whether a supplemental draft was in use this season. Schema `integer`. */
   supplemental_draft_in_use?: number | null;
-  /** Schema `integer`. */
+  /** Whether ties were in use that season. Schema `integer`. */
   ties_in_use?: number | null;
-  /** Schema `integer`. */
+  /** Total number of playoff games this season. Schema `integer`. */
   total_playoff_games?: number | null;
-  /** Schema `integer`. */
+  /** Total number of regular-season games this season. Schema `integer`. */
   total_regular_season_games?: number | null;
-  /** Schema `integer`. */
+  /** Whether the wild-card playoff format was in use this season. Schema `integer`. */
   wildcard_in_use?: number | null;
 }
 
@@ -372,43 +372,43 @@ export interface NhlStatsRestSeasonRow {
  * One row of `sdv.nhl.nhl_stats_rest_shiftcharts({ parsed: true })` (returns schema `native/nhl_stats_rest/shiftcharts`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestShiftchartsRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer`. */
+  /** Numeric code identifying the specific detail type or sub-category within the shift or event record. Schema `integer`. */
   detail_code?: number | null;
-  /** Schema `character`. */
+  /** Penalty duration in minutes. Schema `character`. */
   duration?: string | null;
-  /** Schema `character`. */
+  /** Shift end time (MM:SS countdown clock). Schema `character`. */
   end_time?: string | null;
   /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   event_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Serialized details describing the on-ice event associated with the shift, such as play type and participants. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   event_details?: unknown;
   /** Schema `integer`. */
   event_number?: number | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique game identifier. Schema `integer` (an id). */
   game_id?: string | null;
-  /** Schema `character`. */
+  /** Hexadecimal color code associated with the event or team, used for display rendering. Schema `character`. */
   hex_value?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `integer`. */
+  /** Period number. Schema `integer`. */
   period?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `integer`. */
+  /** Sequential number identifying the shift within the game, ordered chronologically by start time. Schema `integer`. */
   shift_number?: number | null;
-  /** Schema `character`. */
+  /** Shift start time (MM:SS countdown clock). Schema `character`. */
   start_time?: string | null;
-  /** Schema `character`. */
+  /** Team abbreviation. Schema `character`. */
   team_abbrev?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
-  /** Schema `character`. */
+  /** Team name. Schema `character`. */
   team_name?: string | null;
-  /** Schema `integer`. */
+  /** Numeric code identifying the high-level event type (e.g., faceoff, goal, penalty) for this shift record. Schema `integer`. */
   type_code?: number | null;
 }
 
@@ -416,57 +416,57 @@ export interface NhlStatsRestShiftchartsRow {
  * One row of `sdv.nhl.nhl_stats_rest_skater_report({ parsed: true })` (returns schema `native/nhl_stats_rest/skater_report`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestSkaterReportRow {
-  /** Schema `integer`. */
+  /** Assists. Schema `integer`. */
   assists?: number | null;
-  /** Schema `integer`. */
+  /** Even-strength goals. Schema `integer`. */
   ev_goals?: number | null;
-  /** Schema `integer`. */
+  /** Even-strength points. Schema `integer`. */
   ev_points?: number | null;
-  /** Schema `double`. */
+  /** Faceoff win percentage. Schema `double`. */
   faceoff_win_pct?: number | null;
-  /** Schema `integer`. */
+  /** Game-winning goals. Schema `integer`. */
   game_winning_goals?: number | null;
-  /** Schema `integer`. */
+  /** Games played. Schema `integer`. */
   games_played?: number | null;
-  /** Schema `integer`. */
+  /** Goals scored. Schema `integer`. */
   goals?: number | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `integer`. */
+  /** Overtime goals. Schema `integer`. */
   ot_goals?: number | null;
-  /** Schema `integer`. */
+  /** Penalty minutes. Schema `integer`. */
   penalty_minutes?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `integer`. */
+  /** Plus/minus rating. Schema `integer`. */
   plus_minus?: number | null;
-  /** Schema `integer`. */
+  /** Total points (goals + assists). Schema `integer`. */
   points?: number | null;
-  /** Schema `double`. */
+  /** Points per game. Schema `double`. */
   points_per_game?: number | null;
-  /** Schema `character`. */
+  /** Player position code. Schema `character`. */
   position_code?: string | null;
-  /** Schema `integer`. */
+  /** Power-play goals. Schema `integer`. */
   pp_goals?: number | null;
-  /** Schema `integer`. */
+  /** Power-play points. Schema `integer`. */
   pp_points?: number | null;
-  /** Schema `integer` (an id). */
+  /** Season identifier. Schema `integer` (an id). */
   season_id?: string | null;
-  /** Schema `integer`. */
+  /** Short-handed goals. Schema `integer`. */
   sh_goals?: number | null;
-  /** Schema `integer`. */
+  /** Short-handed points. Schema `integer`. */
   sh_points?: number | null;
-  /** Schema `double`. */
+  /** Shooting percentage. Schema `double`. */
   shooting_pct?: number | null;
-  /** Schema `character`. */
+  /** Handedness (shoots/catches). Schema `character`. */
   shoots_catches?: string | null;
-  /** Schema `integer`. */
+  /** Shots on goal. Schema `integer`. */
   shots?: number | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   skater_full_name?: string | null;
-  /** Schema `character`. */
+  /** Team abbreviation(s). Schema `character`. */
   team_abbrevs?: string | null;
-  /** Schema `double`. */
+  /** Average time on ice per game. Schema `double`. */
   time_on_ice_per_game?: number | null;
 }
 
@@ -474,17 +474,17 @@ export interface NhlStatsRestSkaterReportRow {
  * One row of `sdv.nhl.nhl_stats_rest_team({ parsed: true })` (returns schema `native/nhl_stats_rest/team`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestTeamRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique franchise identifier. Schema `integer` (an id). */
   franchise_id?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `integer` (an id). */
+  /** League identifier of the team. Schema `integer` (an id). */
   league_id?: string | null;
-  /** Schema `character`. */
+  /** Team raw three-letter code. Schema `character`. */
   raw_tricode?: string | null;
-  /** Schema `character`. */
+  /** Team three-letter code. Schema `character`. */
   tri_code?: string | null;
 }
 
@@ -492,17 +492,17 @@ export interface NhlStatsRestTeamRow {
  * One row of `sdv.nhl.nhl_stats_rest_team_by_id({ parsed: true })` (returns schema `native/nhl_stats_rest/team_by_id`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestTeamByIdRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique franchise identifier. Schema `integer` (an id). */
   franchise_id?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `integer` (an id). */
+  /** League identifier of the team. Schema `integer` (an id). */
   league_id?: string | null;
-  /** Schema `character`. */
+  /** Team raw three-letter code. Schema `character`. */
   raw_tricode?: string | null;
-  /** Schema `character`. */
+  /** Team three-letter code. Schema `character`. */
   tri_code?: string | null;
 }
 
@@ -510,54 +510,54 @@ export interface NhlStatsRestTeamByIdRow {
  * One row of `sdv.nhl.nhl_stats_rest_team_report({ parsed: true })` (returns schema `native/nhl_stats_rest/team_report`, verified on a real sdv-py capture).
  */
 export interface NhlStatsRestTeamReportRow {
-  /** Schema `double`. */
+  /** Faceoff win percentage. Schema `double`. */
   faceoff_win_pct?: number | null;
-  /** Schema `integer`. */
+  /** Games played. Schema `integer`. */
   games_played?: number | null;
-  /** Schema `integer`. */
+  /** Goals against. Schema `integer`. */
   goals_against?: number | null;
-  /** Schema `double`. */
+  /** Goals against per game. Schema `double`. */
   goals_against_per_game?: number | null;
-  /** Schema `integer`. */
+  /** Goals for. Schema `integer`. */
   goals_for?: number | null;
-  /** Schema `double`. */
+  /** Goals for per game. Schema `double`. */
   goals_for_per_game?: number | null;
-  /** Schema `integer`. */
+  /** Losses. Schema `integer`. */
   losses?: number | null;
-  /** Schema `integer`. */
+  /** Overtime losses. Schema `integer`. */
   ot_losses?: number | null;
-  /** Schema `double`. */
+  /** Net penalty kill percentage. Schema `double`. */
   penalty_kill_net_pct?: number | null;
-  /** Schema `double`. */
+  /** Penalty kill percentage. Schema `double`. */
   penalty_kill_pct?: number | null;
-  /** Schema `double`. */
+  /** Points percentage. Schema `double`. */
   point_pct?: number | null;
-  /** Schema `integer`. */
+  /** Total points (goals + assists). Schema `integer`. */
   points?: number | null;
-  /** Schema `double`. */
+  /** Net power play percentage. Schema `double`. */
   power_play_net_pct?: number | null;
-  /** Schema `double`. */
+  /** Power play percentage. Schema `double`. */
   power_play_pct?: number | null;
-  /** Schema `integer`. */
+  /** Wins in regulation and overtime. Schema `integer`. */
   regulation_and_ot_wins?: number | null;
-  /** Schema `integer` (an id). */
+  /** Season identifier. Schema `integer` (an id). */
   season_id?: string | null;
-  /** Schema `double`. */
+  /** Shots against per game. Schema `double`. */
   shots_against_per_game?: number | null;
-  /** Schema `double`. */
+  /** Shots for per game. Schema `double`. */
   shots_for_per_game?: number | null;
-  /** Schema `character`. */
+  /** Full team name. Schema `character`. */
   team_full_name?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
-  /** Schema `integer`. */
+  /** Team shutouts. Schema `integer`. */
   team_shutouts?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Total ties. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   ties?: unknown;
-  /** Schema `integer`. */
+  /** Wins. Schema `integer`. */
   wins?: number | null;
-  /** Schema `integer`. */
+  /** Wins in regulation. Schema `integer`. */
   wins_in_regulation?: number | null;
-  /** Schema `integer`. */
+  /** Wins in shootout. Schema `integer`. */
   wins_in_shootout?: number | null;
 }

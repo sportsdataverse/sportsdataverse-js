@@ -9,161 +9,161 @@
 export interface LoadPhfPbpRow {
   /** `String` */
   play_type?: string | null;
-  /** `String` */
+  /** Team name. `String` */
   team?: string | null;
-  /** `String` */
+  /** Game clock at infraction (MM:SS). `String` */
   time?: string | null;
-  /** `String` */
+  /** Free-text description of the play as published by the league. `String` */
   play_description?: string | null;
-  /** `Int32` (an id) */
+  /** Period identifier. `Int32` (an id) */
   period_id?: string | null;
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team?: string | null;
-  /** `String` */
+  /** Home team city. `String` */
   home_location?: string | null;
-  /** `String` */
+  /** Nickname of the home team. `String` */
   home_nickname?: string | null;
-  /** `String` */
+  /** Home team abbreviation. `String` */
   home_abbreviation?: string | null;
-  /** `Int32` */
+  /** Home team's cumulative score after the play. `Int32` */
   home_score_total?: number | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team?: string | null;
-  /** `String` */
+  /** Away team city. `String` */
   away_location?: string | null;
-  /** `String` */
+  /** Nickname of the away team. `String` */
   away_nickname?: string | null;
-  /** `String` */
+  /** Away team abbreviation. `String` */
   away_abbreviation?: string | null;
-  /** `Int32` */
+  /** Away team's cumulative score after the play. `Int32` */
   away_score_total?: number | null;
-  /** `String` */
+  /** Name of the away goalie on the ice. `String` */
   away_goalie?: string | null;
-  /** `String` */
+  /** Jersey number of the away goaltender on the ice. `String` */
   away_goalie_jersey?: string | null;
-  /** `String` */
+  /** True when the play records a goaltender change. `String` */
   goalie_change?: string | null;
   /** `Int32` */
   penalty?: number | null;
-  /** `String` */
+  /** Strength situation on the ice for the play (e.g. even strength, power play). `String` */
   on_ice_situation?: string | null;
-  /** `String` */
+  /** Final score string. `String` */
   score?: string | null;
-  /** `Int32` */
+  /** Minute mark of the period when the event started. `Int32` */
   minute_start?: number | null;
-  /** `Int32` */
+  /** Second mark of the period when the event started. `Int32` */
   second_start?: number | null;
-  /** `String` */
+  /** Game clock time remaining (MM:SS). `String` */
   clock?: string | null;
-  /** `String` */
+  /** Team leading the game at this point in the play sequence. `String` */
   leader?: string | null;
-  /** `String` */
+  /** Away goals in the period. `String` */
   away_goals?: string | null;
-  /** `String` */
+  /** Home goals in the period. `String` */
   home_goals?: string | null;
-  /** `Int32` */
+  /** Seconds elapsed since the start of the game. `Int32` */
   sec_from_start?: number | null;
-  /** `Int32` */
+  /** Elapsed seconds of the power play at this play. `Int32` */
   power_play_seconds?: number | null;
   /** `String` */
   time_elapsed?: string | null;
   /** `String` */
   time_remaining?: string | null;
-  /** `String` */
+  /** Name of the player in slot 1 of the play's participant list. `String` */
   player_name_1?: string | null;
-  /** `String` */
+  /** Jersey number of the player in slot 1 of the play's participant list. `String` */
   player_jersey_1?: string | null;
-  /** `Int32` */
+  /** Number of home skaters on the ice. `Int32` */
   home_skaters?: number | null;
-  /** `Int32` */
+  /** Number of away skaters on the ice. `Int32` */
   away_skaters?: number | null;
-  /** `String` */
+  /** Name of the home goalie on the ice. `String` */
   home_goalie?: string | null;
-  /** `String` */
+  /** Jersey number of the home goaltender on the ice. `String` */
   home_goalie_jersey?: string | null;
-  /** `String` */
+  /** Name of the player in slot 2 of the play's participant list. `String` */
   player_name_2?: string | null;
-  /** `String` */
+  /** Jersey number of the player in slot 2 of the play's participant list. `String` */
   player_jersey_2?: string | null;
   /** `String` */
   shot_result?: string | null;
-  /** `String` */
+  /** Name of the goaltender involved in the play. `String` */
   goalie_involved?: string | null;
   /** `String` */
   penalty_type?: string | null;
-  /** `String` */
+  /** Severity classification of the penalty (e.g. minor, major). `String` */
   penalty_level?: string | null;
-  /** `String` */
+  /** Penalty length in minutes. `String` */
   penalty_length?: string | null;
-  /** `Int32` */
+  /** True on the play where a power play begins. `Int32` */
   start_power_play?: number | null;
-  /** `Int32` */
+  /** True on the play where a power play ends. `Int32` */
   end_power_play?: number | null;
-  /** `String` */
+  /** Name of the player in slot 3 of the play's participant list. `String` */
   player_name_3?: string | null;
-  /** `String` */
+  /** Jersey number of the player in slot 3 of the play's participant list. `String` */
   player_jersey_3?: string | null;
-  /** `String` */
+  /** Abbreviation of the team credited with the goal. `String` */
   scoring_team_abbrev?: string | null;
-  /** `String` */
+  /** Skaters the scoring team had on the ice for the goal. `String` */
   scoring_team_on_ice?: string | null;
-  /** `String` */
+  /** Name of the attacking team's skater in on-ice slot 1 for the play. `String` */
   offensive_player_name_1?: string | null;
-  /** `String` */
+  /** Name of the attacking team's skater in on-ice slot 2 for the play. `String` */
   offensive_player_name_2?: string | null;
-  /** `String` */
+  /** Name of the attacking team's skater in on-ice slot 3 for the play. `String` */
   offensive_player_name_3?: string | null;
-  /** `String` */
+  /** Name of the attacking team's skater in on-ice slot 4 for the play. `String` */
   offensive_player_name_4?: string | null;
-  /** `String` */
+  /** Name of the attacking team's skater in on-ice slot 5 for the play. `String` */
   offensive_player_name_5?: string | null;
-  /** `String` */
+  /** Abbreviation of the team defending on the play. `String` */
   defending_team_abbrev?: string | null;
-  /** `String` */
+  /** Jersey number of the attacking team's skater in on-ice slot 1 for the play. `String` */
   offensive_player_jersey_1?: string | null;
-  /** `String` */
+  /** Jersey number of the attacking team's skater in on-ice slot 2 for the play. `String` */
   offensive_player_jersey_2?: string | null;
-  /** `String` */
+  /** Jersey number of the attacking team's skater in on-ice slot 3 for the play. `String` */
   offensive_player_jersey_3?: string | null;
-  /** `String` */
+  /** Jersey number of the attacking team's skater in on-ice slot 4 for the play. `String` */
   offensive_player_jersey_4?: string | null;
-  /** `String` */
+  /** Jersey number of the attacking team's skater in on-ice slot 5 for the play. `String` */
   offensive_player_jersey_5?: string | null;
-  /** `String` */
+  /** Skaters the defending team had on the ice for the play. `String` */
   defending_team_on_ice?: string | null;
-  /** `String` */
+  /** Name of the defending team's skater in on-ice slot 1 for the play. `String` */
   defensive_player_name_1?: string | null;
-  /** `String` */
+  /** Name of the defending team's skater in on-ice slot 2 for the play. `String` */
   defensive_player_name_2?: string | null;
-  /** `String` */
+  /** Name of the defending team's skater in on-ice slot 3 for the play. `String` */
   defensive_player_name_3?: string | null;
-  /** `String` */
+  /** Name of the defending team's skater in on-ice slot 4 for the play. `String` */
   defensive_player_name_4?: string | null;
-  /** `String` */
+  /** Name of the defending team's skater in on-ice slot 5 for the play. `String` */
   defensive_player_name_5?: string | null;
-  /** `String` */
+  /** Jersey number of the defending team's skater in on-ice slot 1 for the play. `String` */
   defensive_player_jersey_1?: string | null;
-  /** `String` */
+  /** Jersey number of the defending team's skater in on-ice slot 2 for the play. `String` */
   defensive_player_jersey_2?: string | null;
-  /** `String` */
+  /** Jersey number of the defending team's skater in on-ice slot 3 for the play. `String` */
   defensive_player_jersey_3?: string | null;
-  /** `String` */
+  /** Jersey number of the defending team's skater in on-ice slot 4 for the play. `String` */
   defensive_player_jersey_4?: string | null;
-  /** `String` */
+  /** Jersey number of the defending team's skater in on-ice slot 5 for the play. `String` */
   defensive_player_jersey_5?: string | null;
-  /** `String` */
+  /** Name of the defending team's skater in on-ice slot 6 for the play. `String` */
   defensive_player_name_6?: string | null;
-  /** `String` */
+  /** Jersey number of the defending team's skater in on-ice slot 6 for the play. `String` */
   defensive_player_jersey_6?: string | null;
-  /** `String` */
+  /** Name of the attacking team's skater in on-ice slot 6 for the play. `String` */
   offensive_player_name_6?: string | null;
-  /** `String` */
+  /** Jersey number of the attacking team's skater in on-ice slot 6 for the play. `String` */
   offensive_player_jersey_6?: string | null;
-  /** `Int32` */
+  /** Season year (echoed from arg). `Int32` */
   season?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -171,67 +171,67 @@ export interface LoadPhfPbpRow {
 
 /** One row of `sdv.pwhl.loadPhfPlayerBoxscores` (`phf_player_boxscores`; sdv-py loader schema `load_phf_player_boxscores`). */
 export interface LoadPhfPlayerBoxscoresRow {
-  /** `Int32` */
+  /** Player's jersey number. `Int32` */
   player_jersey?: number | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `String` */
+  /** Player position. `String` */
   position?: string | null;
-  /** `Int32` */
+  /** Goals scored. `Int32` */
   goals?: number | null;
-  /** `Int32` */
+  /** Assists. `Int32` */
   assists?: number | null;
-  /** `Int32` */
+  /** Total points (goals + assists). `Int32` */
   points?: number | null;
-  /** `Int32` */
+  /** Penalty minutes. `Int32` */
   penalty_minutes?: number | null;
-  /** `Int32` */
+  /** Plus/minus rating. `Int32` */
   plus_minus?: number | null;
-  /** `Int32` */
+  /** Shots on goal. `Int32` */
   shots_on_goal?: number | null;
   /** `Int32` */
   blocks?: number | null;
-  /** `Int32` */
+  /** Giveaways. `Int32` */
   giveaways?: number | null;
-  /** `Int32` */
+  /** Takeaways. `Int32` */
   takeaways?: number | null;
-  /** `String` */
+  /** Faceoffs won and lost, as the league's combined won-lost string. `String` */
   faceoffs_won_lost?: string | null;
-  /** `Float64` */
+  /** Share of the player's faceoffs won. `Float64` */
   faceoffs_win_pct?: number | null;
-  /** `Int32` */
+  /** Goals the player scored on the power play. `Int32` */
   powerplay_goals?: number | null;
-  /** `Int32` */
+  /** Shorthanded goals. `Int32` */
   shorthanded_goals?: number | null;
-  /** `Int32` */
+  /** Shots on goal. `Int32` */
   shots?: number | null;
-  /** `Int32` */
+  /** Shots the player blocked. `Int32` */
   shots_blocked?: number | null;
-  /** `Int32` */
+  /** Faceoffs won in the season. `Int32` */
   faceoffs_won?: number | null;
-  /** `Int32` */
+  /** Faceoffs lost in the season. `Int32` */
   faceoffs_lost?: number | null;
-  /** `String` */
+  /** Team name. `String` */
   team?: string | null;
-  /** `String` */
+  /** Relative link to the league's skater table for this game. `String` */
   skaters_href?: string | null;
-  /** `String` (an id) */
+  /** Unique player identifier. `String` (an id) */
   player_id?: string | null;
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** Minutes played. `String` */
   minutes_played?: string | null;
-  /** `Int32` */
+  /** Shots faced. `Int32` */
   shots_against?: number | null;
-  /** `Int32` */
+  /** Goals against. `Int32` */
   goals_against?: number | null;
-  /** `Int32` */
+  /** Saves made. `Int32` */
   saves?: number | null;
-  /** `Float64` */
+  /** Share of shots faced that the goaltender saved. `Float64` */
   save_percent?: number | null;
-  /** `String` */
+  /** Relative link to the league's goaltender table for this game. `String` */
   goalies_href?: string | null;
-  /** `Int32` */
+  /** Season year (echoed from arg). `Int32` */
   season?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -239,141 +239,141 @@ export interface LoadPhfPlayerBoxscoresRow {
 
 /** One row of `sdv.pwhl.loadPhfSchedules` (`phf_schedules`; sdv-py loader schema `load_phf_schedules`). */
 export interface LoadPhfSchedulesRow {
-  /** `String` */
+  /** Competitor type (e.g. "team"). `String` */
   type?: string | null;
-  /** `String` (an id) */
+  /** Unique player identifier. `String` (an id) */
   id?: string | null;
-  /** `Int32` (an id) */
+  /** League identifier of the team. `Int32` (an id) */
   league_id?: string | null;
-  /** `Int32` (an id) */
+  /** Season identifier. `Int32` (an id) */
   season_id?: string | null;
-  /** `Boolean` (an id) */
+  /** ESPN tournament id parsed from the `$ref` URL. `Boolean` (an id) */
   tournament_id?: boolean | null;
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Week number as returned by the API. `Int32` */
   number?: number | null;
-  /** `Datetime(time_unit='us', time_zone='UTC')` */
+  /** Scheduled start of the game as a timestamp. `Datetime(time_unit='us', time_zone='UTC')` */
   datetime?: Date | null;
-  /** `Datetime(time_unit='us', time_zone='UTC')` */
+  /** Scheduled start of the game including its time-zone offset. `Datetime(time_unit='us', time_zone='UTC')` */
   datetime_tz?: Date | null;
-  /** `String` */
+  /** Time zone in which the game is played. `String` */
   time_zone?: string | null;
-  /** `String` */
+  /** Abbreviated form of the game's time zone. `String` */
   time_zone_abbr?: string | null;
-  /** `Datetime(time_unit='us', time_zone='UTC')` */
+  /** Timestamp at which the league last updated the game record. `Datetime(time_unit='us', time_zone='UTC')` */
   updated_at?: Date | null;
-  /** `Datetime(time_unit='us', time_zone='UTC')` */
+  /** Timestamp at which the league created the game record. `Datetime(time_unit='us', time_zone='UTC')` */
   created_at?: Date | null;
-  /** `Int32` (an id) */
+  /** Home team identifier. `Int32` (an id) */
   home_team_id?: string | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team?: string | null;
-  /** `String` */
+  /** Short display name of the home team. `String` */
   home_team_short?: string | null;
-  /** `String` */
+  /** URL of the home team's logo at the full rendition. `String` */
   home_team_logo_url_full?: string | null;
-  /** `String` */
+  /** URL of the home team's logo at the small rendition. `String` */
   home_team_logo_url_small?: string | null;
-  /** `String` */
+  /** URL of the home team's logo at the medium rendition. `String` */
   home_team_logo_url_medium?: string | null;
-  /** `String` */
+  /** URL of the home team's logo at the large rendition. `String` */
   home_team_logo_url_large?: string | null;
-  /** `String` */
+  /** URL of the home team's logo at the 50px rendition. `String` */
   home_team_logo_url_50?: string | null;
-  /** `String` */
+  /** URL of the home team's logo at the 100px rendition. `String` */
   home_team_logo_url_100?: string | null;
-  /** `String` */
+  /** URL of the home team's logo at the 200px rendition. `String` */
   home_team_logo_url_200?: string | null;
-  /** `Int32` (an id) */
+  /** Away team identifier. `Int32` (an id) */
   away_team_id?: string | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team?: string | null;
-  /** `String` */
+  /** Short display name of the away team. `String` */
   away_team_short?: string | null;
-  /** `String` */
+  /** URL of the away team's logo at the full rendition. `String` */
   away_team_logo_url_full?: string | null;
-  /** `String` */
+  /** URL of the away team's logo at the small rendition. `String` */
   away_team_logo_url_small?: string | null;
-  /** `String` */
+  /** URL of the away team's logo at the medium rendition. `String` */
   away_team_logo_url_medium?: string | null;
-  /** `String` */
+  /** URL of the away team's logo at the large rendition. `String` */
   away_team_logo_url_large?: string | null;
-  /** `String` */
+  /** URL of the away team's logo at the 50px rendition. `String` */
   away_team_logo_url_50?: string | null;
-  /** `String` */
+  /** URL of the away team's logo at the 100px rendition. `String` */
   away_team_logo_url_100?: string | null;
-  /** `String` */
+  /** URL of the away team's logo at the 200px rendition. `String` */
   away_team_logo_url_200?: string | null;
-  /** `Int32` (an id) */
+  /** League identifier for the home team's division. `Int32` (an id) */
   home_division_id?: string | null;
-  /** `String` */
+  /** Home team division. `String` */
   home_division?: string | null;
-  /** `Int32` (an id) */
+  /** League identifier for the away team's division. `Int32` (an id) */
   away_division_id?: string | null;
   /** `String` */
   away_division?: string | null;
-  /** `Int32` */
+  /** Home team final score. `Int32` */
   home_score?: number | null;
-  /** `Int32` */
+  /** Away team final score. `Int32` */
   away_score?: number | null;
-  /** `Int32` */
+  /** Home team shots in the period. `Int32` */
   home_shots?: number | null;
-  /** `Int32` */
+  /** Away team shots in the period. `Int32` */
   away_shots?: number | null;
-  /** `Int32` */
+  /** Penalty minutes assessed to the home team. `Int32` */
   home_penalty_minutes?: number | null;
-  /** `Int32` */
+  /** Penalty minutes assessed to the away team. `Int32` */
   away_penalty_minutes?: number | null;
-  /** `Int32` */
+  /** Number of players dressed for the home team. `Int32` */
   home_roster_count?: number | null;
-  /** `Int32` */
+  /** Number of players dressed for the away team. `Int32` */
   away_roster_count?: number | null;
-  /** `Int32` (an id) */
+  /** League identifier for the hosting facility. `Int32` (an id) */
   facility_id?: string | null;
-  /** `String` */
+  /** Name of the facility hosting the game. `String` */
   facility?: string | null;
-  /** `String` */
+  /** Street address of the hosting facility. `String` */
   facility_address?: string | null;
-  /** `Boolean` (an id) */
+  /** League identifier for the rink. `Boolean` (an id) */
   rink_id?: boolean | null;
-  /** `Boolean` */
+  /** Name of the rink within the facility. `Boolean` */
   rink?: boolean | null;
-  /** `String` */
+  /** Game type the row belongs to. `String` */
   game_type?: string | null;
-  /** `String` */
+  /** Notes flag for the pick. `String` */
   notes?: string | null;
-  /** `String` */
+  /** Status string (e.g. captain markers). `String` */
   status?: string | null;
   /** `Boolean` */
   overtime?: boolean | null;
-  /** `Boolean` */
+  /** Whether shootout data is available. `Boolean` */
   shootout?: boolean | null;
-  /** `Boolean` */
+  /** League flag for whether player-level detail is published for the game. `Boolean` */
   allow_players?: boolean | null;
-  /** `String` */
+  /** Link to purchase tickets for the game. `String` */
   tickets_url?: string | null;
-  /** `String` */
+  /** Link to the live broadcast of the game. `String` */
   watch_live_url?: string | null;
-  /** `Boolean` */
+  /** League-published external link for the game. `Boolean` */
   external_url?: boolean | null;
-  /** `Boolean` */
+  /** True when a play-by-play feed exists for the game. `Boolean` */
   has_play_by_play?: boolean | null;
-  /** `Boolean` */
+  /** Display colour the league uses for the game in its schedule UI. `Boolean` */
   highlight_color?: boolean | null;
-  /** `Int32` */
+  /** Game attendance. `Int32` */
   attendance?: number | null;
-  /** `Date` */
+  /** League grouping key for the game's date, used to bucket a slate. `Date` */
   date_group?: Date | null;
-  /** `String` */
+  /** Whether this competitor won the game. `String` */
   winner?: string | null;
-  /** `Int32` */
+  /** Season year (echoed from arg). `Int32` */
   season?: number | null;
-  /** `Boolean` */
+  /** Whether play-by-play data is available. `Boolean` */
   PBP?: boolean | null;
-  /** `Boolean` */
+  /** Whether team box score data is available. `Boolean` */
   team_box?: boolean | null;
-  /** `Boolean` */
+  /** Whether player box score data is available. `Boolean` */
   player_box?: boolean | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -381,57 +381,57 @@ export interface LoadPhfSchedulesRow {
 
 /** One row of `sdv.pwhl.loadPhfTeamBoxscores` (`phf_team_boxscores`; sdv-py loader schema `load_phf_team_boxscores`). */
 export interface LoadPhfTeamBoxscoresRow {
-  /** `String` */
+  /** Team name. `String` */
   team?: string | null;
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Boolean` */
+  /** Whether this competitor won the game. `Boolean` */
   winner?: boolean | null;
-  /** `Int32` */
+  /** Goals the team scored in the game. `Int32` */
   total_scoring?: number | null;
-  /** `Float64` */
+  /** Number of power plays on which the team scored. `Float64` */
   successful_power_play?: number | null;
-  /** `Float64` */
+  /** Power play opportunities. `Float64` */
   power_play_opportunities?: number | null;
-  /** `Float64` */
+  /** Share of the team's power plays that produced a goal. `Float64` */
   power_play_percent?: number | null;
-  /** `Float64` */
+  /** Penalty minutes. `Float64` */
   penalty_minutes?: number | null;
-  /** `Float64` */
+  /** Faceoff win percentage. `Float64` */
   faceoff_percent?: number | null;
-  /** `Float64` */
+  /** Opponent shots the team blocked. `Float64` */
   blocked_opponent_shots?: number | null;
-  /** `Float64` */
+  /** Takeaways. `Float64` */
   takeaways?: number | null;
-  /** `Float64` */
+  /** Giveaways. `Float64` */
   giveaways?: number | null;
-  /** `Int32` */
+  /** Shots the team took in period 1. `Int32` */
   period_1_shots?: number | null;
-  /** `Int32` */
+  /** Shots the team took in period 2. `Int32` */
   period_2_shots?: number | null;
-  /** `Int32` */
+  /** Shots the team took in period 3. `Int32` */
   period_3_shots?: number | null;
-  /** `Int32` */
+  /** Shots the team took in overtime. `Int32` */
   overtime_shots?: number | null;
-  /** `Int32` */
+  /** Shootout shots the team took that scored. `Int32` */
   shootout_made_shots?: number | null;
-  /** `Int32` */
+  /** Shootout shots the team took that did not score. `Int32` */
   shootout_missed_shots?: number | null;
-  /** `Int32` */
+  /** Shots the team took in the game. `Int32` */
   total_shots?: number | null;
-  /** `Int32` */
+  /** Goals the team scored in period 1. `Int32` */
   period_1_scoring?: number | null;
-  /** `Int32` */
+  /** Goals the team scored in period 2. `Int32` */
   period_2_scoring?: number | null;
-  /** `Int32` */
+  /** Goals the team scored in period 3. `Int32` */
   period_3_scoring?: number | null;
-  /** `Int32` */
+  /** Goals the team scored in overtime. `Int32` */
   overtime_scoring?: number | null;
-  /** `Float64` */
+  /** Shootout attempts the team converted. `Float64` */
   shootout_made_scoring?: number | null;
-  /** `Float64` */
+  /** Shootout attempts the team failed to convert. `Float64` */
   shootout_missed_scoring?: number | null;
-  /** `Int32` */
+  /** Season year (echoed from arg). `Int32` */
   season?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -439,53 +439,53 @@ export interface LoadPhfTeamBoxscoresRow {
 
 /** One row of `sdv.pwhl.loadPwhlGameInfo` (`pwhl_game_info`; sdv-py loader schema `load_pwhl_game_info`). */
 export interface LoadPwhlGameInfoRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** Game number within the schedule. `String` */
   game_number?: string | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
-  /** `String` */
+  /** ISO-8601 game start datetime. `String` */
   game_date_iso?: string | null;
-  /** `String` */
+  /** Shift start time (MM:SS countdown clock). `String` */
   start_time?: string | null;
-  /** `String` */
+  /** Shift end time (MM:SS countdown clock). `String` */
   end_time?: string | null;
-  /** `String` */
+  /** Game length (H:MM). `String` */
   game_duration?: string | null;
-  /** `String` */
+  /** Venue where the game was played. `String` */
   game_venue?: string | null;
-  /** `Int64` */
+  /** Game attendance. `Int64` */
   attendance?: number | bigint | null;
-  /** `String` */
+  /** Game status text. `String` */
   game_status?: string | null;
-  /** `Int64` (an id) */
+  /** HockeyTech season identifier. `Int64` (an id) */
   game_season_id?: string | null;
-  /** `Int64` */
+  /** Flag for whether the game has started. `Int64` */
   started?: number | bigint | null;
-  /** `Int64` */
+  /** Flag for whether the game is final. `Int64` */
   final?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Home team identifier. `Int64` (an id) */
   home_team_id?: string | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team?: string | null;
-  /** `String` */
+  /** Home team abbreviation. `String` */
   home_team_abbr?: string | null;
-  /** `Int64` */
+  /** Home team final score. `Int64` */
   home_score?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Away team identifier. `Int64` (an id) */
   away_team_id?: string | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team?: string | null;
-  /** `String` */
+  /** Away team abbreviation. `String` */
   away_team_abbr?: string | null;
-  /** `Int64` */
+  /** Away team final score. `Int64` */
   away_score?: number | bigint | null;
-  /** `Int64` */
+  /** Flag for whether the game went to shootout. `Int64` */
   has_shootout?: number | bigint | null;
-  /** `String` */
+  /** URL to the game report. `String` */
   game_report_url?: string | null;
-  /** `String` */
+  /** URL to the boxscore. `String` */
   boxscore_url?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -493,33 +493,33 @@ export interface LoadPwhlGameInfoRow {
 
 /** One row of `sdv.pwhl.loadPwhlGameRosters` (`pwhl_game_rosters`; sdv-py loader schema `load_pwhl_game_rosters`). */
 export interface LoadPwhlGameRostersRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team name. `String` */
   team?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbr?: string | null;
-  /** `String` */
+  /** Home or away indicator. `String` */
   team_side?: string | null;
-  /** `String` */
+  /** Player type (skater or goalie). `String` */
   player_type?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player last name. `String` */
   last_name?: string | null;
-  /** `Int64` */
+  /** Jersey number. `Int64` */
   jersey_number?: number | bigint | null;
-  /** `String` */
+  /** Player position. `String` */
   position?: string | null;
-  /** `String` */
+  /** Player birth date. `String` */
   birth_date?: string | null;
-  /** `Int64` */
+  /** Whether the player started the game. `Int64` */
   starting?: number | bigint | null;
-  /** `String` */
+  /** Status string (e.g. captain markers). `String` */
   status?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -527,33 +527,33 @@ export interface LoadPwhlGameRostersRow {
 
 /** One row of `sdv.pwhl.loadPwhlShifts` (`pwhl_shifts`; sdv-py loader schema `load_pwhl_shifts`). */
 export interface LoadPwhlShiftsRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Jersey number. `String` */
   jersey_number?: string | null;
-  /** `Int64` */
+  /** Whether the player's team was home. `Int64` */
   home?: number | bigint | null;
-  /** `Int64` */
+  /** Period number. `Int64` */
   period?: number | bigint | null;
-  /** `String` */
+  /** Shift start time (MM:SS countdown clock). `String` */
   start_time?: string | null;
-  /** `String` */
+  /** Shift end time (MM:SS countdown clock). `String` */
   end_time?: string | null;
-  /** `String` */
+  /** Length of the streak in games. `String` */
   length?: string | null;
-  /** `Int64` */
+  /** Shift start in countdown seconds. `Int64` */
   start_s?: number | bigint | null;
-  /** `Int64` */
+  /** Shift end in countdown seconds. `Int64` */
   end_s?: number | bigint | null;
-  /** `Int64` */
+  /** 1 if a goal occurred during this shift, else 0. `Int64` */
   goal_on_shift?: number | bigint | null;
-  /** `Int64` */
+  /** 1 if a penalty occurred during this shift, else 0. `Int64` */
   penalty_on_shift?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -561,47 +561,47 @@ export interface LoadPwhlShiftsRow {
 
 /** One row of `sdv.pwhl.loadPwhlGoalieBoxscores` (`pwhl_goalie_boxscores`; sdv-py loader schema `load_pwhl_goalie_boxscores`). */
 export interface LoadPwhlGoalieBoxscoresRow {
-  /** `String` (an id) */
+  /** Unique player identifier. `String` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Player position. `String` */
   position?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** League code. `String` */
   league?: string | null;
-  /** `String` */
+  /** Time on ice. `String` */
   toi?: string | null;
-  /** `Float64` */
+  /** Time on ice in seconds. `Float64` */
   time_on_ice?: number | null;
-  /** `Int64` */
+  /** Saves made. `Int64` */
   saves?: number | bigint | null;
-  /** `Int64` */
+  /** Goals against. `Int64` */
   goals_against?: number | bigint | null;
-  /** `Int64` */
+  /** Shots faced. `Int64` */
   shots_against?: number | bigint | null;
-  /** `Int64` */
+  /** Goals scored. `Int64` */
   goals?: number | bigint | null;
-  /** `Int64` */
+  /** Assists. `Int64` */
   assists?: number | bigint | null;
-  /** `Int64` */
+  /** Total points (goals + assists). `Int64` */
   points?: number | bigint | null;
-  /** `Int64` */
+  /** Penalty minutes. `Int64` */
   penalty_minutes?: number | bigint | null;
-  /** `Int64` */
+  /** Faceoff attempts. `Int64` */
   faceoff_attempts?: number | bigint | null;
-  /** `Int64` */
+  /** Faceoff wins. `Int64` */
   faceoff_wins?: number | bigint | null;
-  /** `Int64` */
+  /** Faceoff losses. `Int64` */
   faceoff_losses?: number | bigint | null;
-  /** `Null` */
+  /** Faceoff win percentage. `Null` */
   faceoff_pct?: unknown;
-  /** `Int64` */
+  /** Whether the player started the game. `Int64` */
   starting?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -609,17 +609,17 @@ export interface LoadPwhlGoalieBoxscoresRow {
 
 /** One row of `sdv.pwhl.loadPwhlOfficials` (`pwhl_officials`; sdv-py loader schema `load_pwhl_officials`). */
 export interface LoadPwhlOfficialsRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** Grouped official role (Referee/Linesperson). `String` */
   role?: string | null;
-  /** `String` */
+  /** Player first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player last name. `String` */
   last_name?: string | null;
-  /** `Int64` */
+  /** Jersey number. `Int64` */
   jersey_number?: number | bigint | null;
-  /** `String` */
+  /** Official's specific role. `String` */
   official_role?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -627,213 +627,213 @@ export interface LoadPwhlOfficialsRow {
 
 /** One row of `sdv.pwhl.loadPwhlPbp` (`pwhl_pbp`; sdv-py loader schema `load_pwhl_pbp`). */
 export interface LoadPwhlPbpRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** Event description label. `String` */
   event?: string | null;
-  /** `String` (an id) */
+  /** Unique team identifier. `String` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Period in which the event occurred. `String` */
   period_of_game?: string | null;
-  /** `String` */
+  /** Elapsed time within the period (MM:SS). `String` */
   time_of_period?: string | null;
-  /** `Float64` */
+  /** Transformed x-coordinate of the event (feet scale). `Float64` */
   x_coord?: number | null;
-  /** `Float64` */
+  /** Transformed y-coordinate of the event (feet scale). `Float64` */
   y_coord?: number | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Primary player first name. `String` */
   player_name_first?: string | null;
-  /** `String` */
+  /** Primary player last name. `String` */
   player_name_last?: string | null;
-  /** `String` */
+  /** Primary player position. `String` */
   player_position?: string | null;
-  /** `Boolean` */
+  /** Flag for whether the event was a goal. `Boolean` */
   goal?: boolean | null;
-  /** `Int64` (an id) */
+  /** Goalie identifier on the play. `Int64` (an id) */
   goalie_id?: string | null;
-  /** `String` */
+  /** Goalie first name. `String` */
   goalie_first?: string | null;
-  /** `String` */
+  /** Goalie last name. `String` */
   goalie_last?: string | null;
-  /** `String` */
+  /** Whether the home player won the faceoff. `String` */
   home_win?: string | null;
-  /** `String` (an id) */
+  /** Unique team identifier of the primary player. `String` (an id) */
   player_team_id?: string | null;
-  /** `String` */
+  /** Standardized event type code. `String` */
   event_type?: string | null;
-  /** `String` */
+  /** Shot quality descriptor. `String` */
   shot_quality?: string | null;
-  /** `String` */
+  /** Whether the net was empty. `String` */
   empty_net?: string | null;
-  /** `String` */
+  /** Whether the goal was the game-winning goal. `String` */
   game_winner?: string | null;
-  /** `String` */
+  /** Whether the goal came on a penalty shot. `String` */
   penalty_shot?: string | null;
-  /** `String` */
+  /** Whether the goal was an insurance goal. `String` */
   insurance?: string | null;
-  /** `String` */
+  /** Whether the event occurred while short-handed. `String` */
   short_handed?: string | null;
-  /** `String` */
+  /** Whether the event occurred on a power play. `String` */
   power_play?: string | null;
-  /** `Int64` (an id) */
+  /** Second player's unique identifier. `Int64` (an id) */
   player_two_id?: string | null;
-  /** `String` */
+  /** Second player first name. `String` */
   player_two_name_first?: string | null;
-  /** `String` */
+  /** Second player last name. `String` */
   player_two_name_last?: string | null;
-  /** `String` */
+  /** Second player position. `String` */
   player_two_position?: string | null;
-  /** `Int64` (an id) */
+  /** Third player's unique identifier. `Int64` (an id) */
   player_three_id?: string | null;
-  /** `String` */
+  /** Third player first name. `String` */
   player_three_name_first?: string | null;
-  /** `String` */
+  /** Third player last name. `String` */
   player_three_name_last?: string | null;
-  /** `String` */
+  /** Third player position. `String` */
   player_three_position?: string | null;
-  /** `Int64` (an id) */
+  /** On-ice plus player one unique identifier. `Int64` (an id) */
   plus_player_one_id?: string | null;
-  /** `String` */
+  /** On-ice plus player one first name. `String` */
   plus_player_one_first?: string | null;
-  /** `String` */
+  /** On-ice plus player one last name. `String` */
   plus_player_one_last?: string | null;
-  /** `String` */
+  /** On-ice plus player one position. `String` */
   plus_player_one_position?: string | null;
-  /** `Int64` (an id) */
+  /** On-ice plus player two unique identifier. `Int64` (an id) */
   plus_player_two_id?: string | null;
-  /** `String` */
+  /** On-ice plus player two first name. `String` */
   plus_player_two_first?: string | null;
-  /** `String` */
+  /** On-ice plus player two last name. `String` */
   plus_player_two_last?: string | null;
-  /** `String` */
+  /** On-ice plus player two position. `String` */
   plus_player_two_position?: string | null;
-  /** `Int64` (an id) */
+  /** On-ice plus player three unique identifier. `Int64` (an id) */
   plus_player_three_id?: string | null;
-  /** `String` */
+  /** On-ice plus player three first name. `String` */
   plus_player_three_first?: string | null;
-  /** `String` */
+  /** On-ice plus player three last name. `String` */
   plus_player_three_last?: string | null;
-  /** `String` */
+  /** On-ice plus player three position. `String` */
   plus_player_three_position?: string | null;
-  /** `Int64` (an id) */
+  /** On-ice plus player four unique identifier. `Int64` (an id) */
   plus_player_four_id?: string | null;
-  /** `String` */
+  /** On-ice plus player four first name. `String` */
   plus_player_four_first?: string | null;
-  /** `String` */
+  /** On-ice plus player four last name. `String` */
   plus_player_four_last?: string | null;
-  /** `String` */
+  /** On-ice plus player four position. `String` */
   plus_player_four_position?: string | null;
-  /** `Int64` (an id) */
+  /** On-ice plus player five unique identifier. `Int64` (an id) */
   plus_player_five_id?: string | null;
-  /** `String` */
+  /** On-ice plus player five first name. `String` */
   plus_player_five_first?: string | null;
-  /** `String` */
+  /** On-ice plus player five last name. `String` */
   plus_player_five_last?: string | null;
-  /** `String` */
+  /** On-ice plus player five position. `String` */
   plus_player_five_position?: string | null;
-  /** `Int64` (an id) */
+  /** On-ice minus player one unique identifier. `Int64` (an id) */
   minus_player_one_id?: string | null;
-  /** `String` */
+  /** On-ice minus player one first name. `String` */
   minus_player_one_first?: string | null;
-  /** `String` */
+  /** On-ice minus player one last name. `String` */
   minus_player_one_last?: string | null;
-  /** `String` */
+  /** On-ice minus player one position. `String` */
   minus_player_one_position?: string | null;
-  /** `Int64` (an id) */
+  /** On-ice minus player two unique identifier. `Int64` (an id) */
   minus_player_two_id?: string | null;
-  /** `String` */
+  /** On-ice minus player two first name. `String` */
   minus_player_two_first?: string | null;
-  /** `String` */
+  /** On-ice minus player two last name. `String` */
   minus_player_two_last?: string | null;
-  /** `String` */
+  /** On-ice minus player two position. `String` */
   minus_player_two_position?: string | null;
-  /** `Int64` (an id) */
+  /** On-ice minus player three unique identifier. `Int64` (an id) */
   minus_player_three_id?: string | null;
-  /** `String` */
+  /** On-ice minus player three first name. `String` */
   minus_player_three_first?: string | null;
-  /** `String` */
+  /** On-ice minus player three last name. `String` */
   minus_player_three_last?: string | null;
-  /** `String` */
+  /** On-ice minus player three position. `String` */
   minus_player_three_position?: string | null;
-  /** `Int64` (an id) */
+  /** On-ice minus player four unique identifier. `Int64` (an id) */
   minus_player_four_id?: string | null;
-  /** `String` */
+  /** On-ice minus player four first name. `String` */
   minus_player_four_first?: string | null;
-  /** `String` */
+  /** On-ice minus player four last name. `String` */
   minus_player_four_last?: string | null;
-  /** `String` */
+  /** On-ice minus player four position. `String` */
   minus_player_four_position?: string | null;
-  /** `Int64` (an id) */
+  /** On-ice minus player five unique identifier. `Int64` (an id) */
   minus_player_five_id?: string | null;
-  /** `String` */
+  /** On-ice minus player five first name. `String` */
   minus_player_five_first?: string | null;
-  /** `String` */
+  /** On-ice minus player five last name. `String` */
   minus_player_five_last?: string | null;
-  /** `String` */
+  /** On-ice minus player five position. `String` */
   minus_player_five_position?: string | null;
-  /** `String` */
+  /** Penalty length in minutes. `String` */
   penalty_length?: string | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
-  /** `Int64` */
+  /** Season (concluding year, YYYY). `Int64` */
   game_season?: number | bigint | null;
-  /** `String` (an id) */
+  /** HockeyTech season identifier. `String` (an id) */
   game_season_id?: string | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team?: string | null;
-  /** `String` (an id) */
+  /** Home team identifier. `String` (an id) */
   home_team_id?: string | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team?: string | null;
-  /** `String` (an id) */
+  /** Away team identifier. `String` (an id) */
   away_team_id?: string | null;
-  /** `Int64` */
+  /** Original raw x-coordinate from the feed. `Int64` */
   x_coord_original?: number | bigint | null;
-  /** `Int64` */
+  /** Original raw y-coordinate from the feed. `Int64` */
   y_coord_original?: number | bigint | null;
-  /** `Int64` */
+  /** Neutral-zone-centered x-coordinate. `Int64` */
   x_coord_neutral?: number | bigint | null;
-  /** `Int64` */
+  /** Neutral-zone-centered y-coordinate. `Int64` */
   y_coord_neutral?: number | bigint | null;
-  /** `Float64` */
+  /** Fixed-orientation x-coordinate. `Float64` */
   x_coord_fixed?: number | null;
-  /** `Float64` */
+  /** Fixed-orientation y-coordinate. `Float64` */
   y_coord_fixed?: number | null;
-  /** `Float64` */
+  /** Right-orientation x-coordinate. `Float64` */
   x_coord_right?: number | null;
-  /** `Float64` */
+  /** Right-orientation y-coordinate. `Float64` */
   y_coord_right?: number | null;
-  /** `Float64` */
+  /** Vertical-orientation x-coordinate. `Float64` */
   x_coord_vertical?: number | null;
-  /** `Float64` */
+  /** Vertical-orientation y-coordinate. `Float64` */
   y_coord_vertical?: number | null;
-  /** `Int64` */
+  /** Minute mark of the period when the event started. `Int64` */
   minute_start?: number | bigint | null;
-  /** `Int64` */
+  /** Second mark of the period when the event started. `Int64` */
   second_start?: number | bigint | null;
-  /** `String` */
+  /** Game clock time remaining (MM:SS). `String` */
   clock?: string | null;
-  /** `Int64` */
+  /** Seconds elapsed since the start of the game. `Int64` */
   sec_from_start?: number | bigint | null;
-  /** `Float64` */
+  /** Distance of the shot from the net. `Float64` */
   shot_distance?: number | null;
-  /** `Float64` */
+  /** Angle of the shot relative to the net. `Float64` */
   shot_angle?: number | null;
-  /** `Boolean` */
+  /** TRUE when event is a shot-type within 25 ft of the net. `Boolean` */
   scoring_chance?: boolean | null;
-  /** `String` */
+  /** Comma-joined sorted player_ids on ice for the home team. `String` */
   on_ice_home?: string | null;
-  /** `String` */
+  /** Comma-joined sorted player_ids on ice for the away team. `String` */
   on_ice_away?: string | null;
-  /** `Int64` */
+  /** Number of home skaters on the ice for the event, derived from HockeyTech shift data. `Int64` */
   skaters_home?: number | bigint | null;
-  /** `Int64` */
+  /** Number of away skaters on the ice for the event, derived from HockeyTech shift data. `Int64` */
   skaters_away?: number | bigint | null;
-  /** `String` */
+  /** Skater-strength state formatted home-first as skaters_home v skaters_away (5v4 = home has the extra skater), derived from shift data. `String` */
   strength_state?: string | null;
-  /** `Boolean` */
+  /** True when both shift-derived skater counts are between 3 and 6 inclusive; false when a count falls outside that range; null when a count is unavailable. `Boolean` */
   strength_state_valid?: boolean | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -841,47 +841,47 @@ export interface LoadPwhlPbpRow {
 
 /** One row of `sdv.pwhl.loadPwhlXgPbp` (`pwhl_xg_pbp`; sdv-py loader schema `load_pwhl_xg_pbp`). */
 export interface LoadPwhlXgPbpRow {
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season (concluding year, YYYY). `Int32` */
   game_season?: number | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `Int32` (an id) */
+  /** Unique player identifier. `Int32` (an id) */
   player_id?: string | null;
-  /** `Int32` (an id) */
+  /** Goalie identifier on the play. `Int32` (an id) */
   goalie_id?: string | null;
-  /** `String` */
+  /** Period in which the event occurred. `String` */
   period_of_game?: string | null;
-  /** `Int32` */
+  /** Seconds elapsed since the start of the game. `Int32` */
   sec_from_start?: number | null;
-  /** `String` */
+  /** Game clock time remaining (MM:SS). `String` */
   clock?: string | null;
-  /** `Float64` */
+  /** Transformed x-coordinate of the event (feet scale). `Float64` */
   x_coord?: number | null;
-  /** `Float64` */
+  /** Transformed y-coordinate of the event (feet scale). `Float64` */
   y_coord?: number | null;
-  /** `Float64` */
+  /** Distance of the shot from the net. `Float64` */
   shot_distance?: number | null;
-  /** `Float64` */
+  /** Angle of the shot relative to the net. `Float64` */
   shot_angle?: number | null;
-  /** `String` */
+  /** Standardized event type code. `String` */
   event_type?: string | null;
-  /** `String` */
+  /** Shot quality descriptor. `String` */
   shot_quality?: string | null;
-  /** `Int32` */
+  /** Whether the event occurred on a power play. `Int32` */
   power_play?: number | null;
-  /** `String` */
+  /** Whether the event occurred while short-handed. `String` */
   short_handed?: string | null;
-  /** `String` */
+  /** Whether the net was empty. `String` */
   empty_net?: string | null;
-  /** `String` */
+  /** Whether the goal came on a penalty shot. `String` */
   penalty_shot?: string | null;
-  /** `Boolean` */
+  /** Flag for whether the event was a goal. `Boolean` */
   goal?: boolean | null;
-  /** `Float64` */
+  /** Expected goals value for the shot event. `Float64` */
   xg?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -889,45 +889,45 @@ export interface LoadPwhlXgPbpRow {
 
 /** One row of `sdv.pwhl.loadPwhlPenaltySummary` (`pwhl_penalty_summary`; sdv-py loader schema `load_pwhl_penalty_summary`). */
 export interface LoadPwhlPenaltySummaryRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` (an id) */
+  /** Period identifier. `Int64` (an id) */
   period_id?: string | null;
-  /** `String` */
+  /** Period number. `String` */
   period?: string | null;
-  /** `String` */
+  /** Game clock at infraction (MM:SS). `String` */
   time?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team name. `String` */
   team?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbr?: string | null;
-  /** `Int64` (an id) */
+  /** Penalty identifier within the game. `Int64` (an id) */
   game_penalty_id?: string | null;
-  /** `Int64` */
+  /** Penalty length in minutes. `Int64` */
   minutes?: number | bigint | null;
-  /** `String` */
+  /** Full text description of the event. `String` */
   description?: string | null;
-  /** `String` */
+  /** Rulebook rule number. `String` */
   rule_number?: string | null;
-  /** `Int64` */
+  /** Power-play flag. `Int64` */
   is_power_play?: number | bigint | null;
-  /** `Int64` */
+  /** Bench-minor flag. `Int64` */
   is_bench?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Identifier of the player who took the penalty. `Int64` (an id) */
   taken_by_id?: string | null;
-  /** `String` */
+  /** Offender first name. `String` */
   taken_by_first?: string | null;
-  /** `String` */
+  /** Offender last name. `String` */
   taken_by_last?: string | null;
-  /** `String` */
+  /** Offender position. `String` */
   taken_by_position?: string | null;
-  /** `Int64` (an id) */
+  /** Identifier of the player serving the penalty. `Int64` (an id) */
   served_by_id?: string | null;
-  /** `String` */
+  /** First name of the player serving. `String` */
   served_by_first?: string | null;
-  /** `String` */
+  /** Last name of the player serving. `String` */
   served_by_last?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -935,57 +935,57 @@ export interface LoadPwhlPenaltySummaryRow {
 
 /** One row of `sdv.pwhl.loadPwhlPlayerBoxscores` (`pwhl_player_boxscores`; sdv-py loader schema `load_pwhl_player_boxscores`). */
 export interface LoadPwhlPlayerBoxscoresRow {
-  /** `String` (an id) */
+  /** Unique player identifier. `String` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Player position. `String` */
   position?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** League code. `String` */
   league?: string | null;
-  /** `String` */
+  /** Time on ice. `String` */
   toi?: string | null;
-  /** `Float64` */
+  /** Time on ice in seconds. `Float64` */
   time_on_ice?: number | null;
-  /** `Int64` */
+  /** Goals scored. `Int64` */
   goals?: number | bigint | null;
-  /** `Int64` */
+  /** Assists. `Int64` */
   assists?: number | bigint | null;
-  /** `Int64` */
+  /** Total points (goals + assists). `Int64` */
   points?: number | bigint | null;
-  /** `Int64` */
+  /** Shots on goal. `Int64` */
   shots?: number | bigint | null;
-  /** `Int64` */
+  /** Hits. `Int64` */
   hits?: number | bigint | null;
-  /** `Int64` */
+  /** Blocked shots. `Int64` */
   blocked_shots?: number | bigint | null;
-  /** `Int64` */
+  /** Penalty minutes. `Int64` */
   penalty_minutes?: number | bigint | null;
-  /** `Int64` */
+  /** Plus/minus rating. `Int64` */
   plus_minus?: number | bigint | null;
-  /** `Int64` */
+  /** Faceoff attempts. `Int64` */
   faceoff_attempts?: number | bigint | null;
-  /** `Int64` */
+  /** Faceoff wins. `Int64` */
   faceoff_wins?: number | bigint | null;
-  /** `Int64` */
+  /** Faceoff losses. `Int64` */
   faceoff_losses?: number | bigint | null;
-  /** `Float64` */
+  /** Faceoff win percentage. `Float64` */
   faceoff_pct?: number | null;
-  /** `Int64` */
+  /** Whether the player started the game. `Int64` */
   starting?: number | bigint | null;
-  /** `String` */
+  /** Player type (skater or goalie). `String` */
   player_type?: string | null;
-  /** `Int64` */
+  /** Saves made. `Int64` */
   saves?: number | bigint | null;
-  /** `Int64` */
+  /** Goals against. `Int64` */
   goals_against?: number | bigint | null;
-  /** `Int64` */
+  /** Shots faced. `Int64` */
   shots_against?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -993,29 +993,29 @@ export interface LoadPwhlPlayerBoxscoresRow {
 
 /** One row of `sdv.pwhl.loadPwhlRosters` (`pwhl_rosters`; sdv-py loader schema `load_pwhl_rosters`). */
 export interface LoadPwhlRostersRow {
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team name. `String` */
   team?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbr?: string | null;
-  /** `String` */
+  /** Home or away indicator. `String` */
   team_side?: string | null;
-  /** `String` */
+  /** Player type (skater or goalie). `String` */
   player_type?: string | null;
-  /** `Int32` (an id) */
+  /** Unique player identifier. `Int32` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player last name. `String` */
   last_name?: string | null;
-  /** `Int32` */
+  /** Jersey number. `Int32` */
   jersey_number?: number | null;
-  /** `String` */
+  /** Player position. `String` */
   position?: string | null;
-  /** `String` */
+  /** Player birth date. `String` */
   birth_date?: string | null;
-  /** `Int32` */
+  /** Season year (echoed from arg). `Int32` */
   season?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1023,63 +1023,63 @@ export interface LoadPwhlRostersRow {
 
 /** One row of `sdv.pwhl.loadPwhlSchedules` (`pwhl_schedules`; sdv-py loader schema `load_pwhl_schedules`). */
 export interface LoadPwhlSchedulesRow {
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season year (echoed from arg). `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Game status text. `String` */
   game_status?: string | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team?: string | null;
-  /** `String` (an id) */
+  /** Home team identifier. `String` (an id) */
   home_team_id?: string | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team?: string | null;
-  /** `String` (an id) */
+  /** Away team identifier. `String` (an id) */
   away_team_id?: string | null;
-  /** `String` */
+  /** Home team final score. `String` */
   home_score?: string | null;
-  /** `String` */
+  /** Away team final score. `String` */
   away_score?: string | null;
-  /** `String` */
+  /** Whether this competitor won the game. `String` */
   winner?: string | null;
-  /** `String` */
+  /** Venue where the game was played. `String` */
   venue?: string | null;
-  /** `String` */
+  /** URL for the venue. `String` */
   venue_url?: string | null;
-  /** `String` */
+  /** Game type the row belongs to. `String` */
   game_type?: string | null;
-  /** `Boolean` */
+  /** Whether processed game JSON is available. `Boolean` */
   game_json?: boolean | null;
-  /** `String` */
+  /** URL to the processed game JSON. `String` */
   game_json_url?: string | null;
-  /** `Boolean` */
+  /** Whether play-by-play data is available. `Boolean` */
   PBP?: boolean | null;
-  /** `Boolean` */
+  /** Whether player box score data is available. `Boolean` */
   player_box?: boolean | null;
-  /** `Boolean` */
+  /** Whether skater box data is available. `Boolean` */
   skater_box?: boolean | null;
-  /** `Boolean` */
+  /** Whether goalie box data is available. `Boolean` */
   goalie_box?: boolean | null;
-  /** `Boolean` */
+  /** Whether team box score data is available. `Boolean` */
   team_box?: boolean | null;
-  /** `Boolean` */
+  /** CONSTANT true: marks that the source game record carried a game-info block. `Boolean` */
   game_info?: boolean | null;
-  /** `Boolean` */
+  /** Whether game rosters data is available. `Boolean` */
   game_rosters?: boolean | null;
-  /** `Boolean` */
+  /** Whether scoring summary data is available. `Boolean` */
   scoring_summary?: boolean | null;
-  /** `Boolean` */
+  /** Whether penalty summary data is available. `Boolean` */
   penalty_summary?: boolean | null;
-  /** `Boolean` */
+  /** CONSTANT true: marks that the source game record carried a three-stars block. `Boolean` */
   three_stars?: boolean | null;
-  /** `Boolean` */
+  /** Whether officials data is available. `Boolean` */
   officials?: boolean | null;
-  /** `Boolean` */
+  /** Whether shots-by-period data is available. `Boolean` */
   shots_by_period?: boolean | null;
-  /** `Boolean` */
+  /** Whether shootout data is available. `Boolean` */
   shootout?: boolean | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1087,59 +1087,59 @@ export interface LoadPwhlSchedulesRow {
 
 /** One row of `sdv.pwhl.loadPwhlScoringSummary` (`pwhl_scoring_summary`; sdv-py loader schema `load_pwhl_scoring_summary`). */
 export interface LoadPwhlScoringSummaryRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` (an id) */
+  /** Period identifier. `Int64` (an id) */
   period_id?: string | null;
-  /** `String` */
+  /** Period number. `String` */
   period?: string | null;
-  /** `String` */
+  /** Game clock at infraction (MM:SS). `String` */
   time?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team name. `String` */
   team?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbr?: string | null;
-  /** `Int64` (an id) */
+  /** Goal identifier within the game. `Int64` (an id) */
   game_goal_id?: string | null;
-  /** `Int64` */
+  /** Scorer's season goal number. `Int64` */
   scorer_goal_number?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Identifier of the goal scorer. `Int64` (an id) */
   scorer_id?: string | null;
-  /** `String` */
+  /** Scorer first name. `String` */
   scorer_first?: string | null;
-  /** `String` */
+  /** Scorer last name. `String` */
   scorer_last?: string | null;
-  /** `String` */
+  /** Scorer position. `String` */
   scorer_position?: string | null;
-  /** `Int64` (an id) */
+  /** Primary assist player identifier. `Int64` (an id) */
   assist_1_id?: string | null;
-  /** `String` */
+  /** Primary assist first name. `String` */
   assist_1_first?: string | null;
-  /** `String` */
+  /** Primary assist last name. `String` */
   assist_1_last?: string | null;
-  /** `Int64` (an id) */
+  /** Secondary assist player identifier. `Int64` (an id) */
   assist_2_id?: string | null;
-  /** `String` */
+  /** Secondary assist first name. `String` */
   assist_2_first?: string | null;
-  /** `String` */
+  /** Secondary assist last name. `String` */
   assist_2_last?: string | null;
-  /** `Int64` */
+  /** Power-play flag. `Int64` */
   is_power_play?: number | bigint | null;
-  /** `Int64` */
+  /** Short-handed flag. `Int64` */
   is_short_handed?: number | bigint | null;
-  /** `Int64` */
+  /** Empty-net flag. `Int64` */
   is_empty_net?: number | bigint | null;
-  /** `Int64` */
+  /** Penalty-shot flag. `Int64` */
   is_penalty_shot?: number | bigint | null;
-  /** `Int64` */
+  /** Insurance-goal flag. `Int64` */
   is_insurance?: number | bigint | null;
-  /** `Int64` */
+  /** Game-winning-goal flag. `Int64` */
   is_game_winning?: number | bigint | null;
-  /** `Null` */
+  /** Goal x-coordinate on the ice. `Null` */
   x_location?: unknown;
-  /** `Null` */
+  /** Goal y-coordinate on the ice. `Null` */
   y_location?: unknown;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1147,25 +1147,25 @@ export interface LoadPwhlScoringSummaryRow {
 
 /** One row of `sdv.pwhl.loadPwhlShootout` (`pwhl_shootout`; sdv-py loader schema `load_pwhl_shootout`). */
 export interface LoadPwhlShootoutRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Shootout round number. `Int64` */
   round?: number | bigint | null;
-  /** `String` */
+  /** Home or away indicator. `String` */
   team_side?: string | null;
-  /** `Int64` (an id) */
+  /** Shooter player identifier. `Int64` (an id) */
   shooter_id?: string | null;
-  /** `String` */
+  /** Shooter first name. `String` */
   shooter_first?: string | null;
-  /** `String` */
+  /** Shooter last name. `String` */
   shooter_last?: string | null;
-  /** `Int64` (an id) */
+  /** Goalie identifier on the play. `Int64` (an id) */
   goalie_id?: string | null;
-  /** `String` */
+  /** Goalie first name. `String` */
   goalie_first?: string | null;
-  /** `String` */
+  /** Goalie last name. `String` */
   goalie_last?: string | null;
-  /** `Int64` */
+  /** Whether the attempt scored (1/0). `Int64` */
   is_goal?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1173,19 +1173,19 @@ export interface LoadPwhlShootoutRow {
 
 /** One row of `sdv.pwhl.loadPwhlShotsByPeriod` (`pwhl_shots_by_period`; sdv-py loader schema `load_pwhl_shots_by_period`). */
 export interface LoadPwhlShotsByPeriodRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` (an id) */
+  /** Period identifier. `Int64` (an id) */
   period_id?: string | null;
-  /** `String` */
+  /** Period number. `String` */
   period?: string | null;
-  /** `Int64` */
+  /** Home goals in the period. `Int64` */
   home_goals?: number | bigint | null;
-  /** `Int64` */
+  /** Home team shots in the period. `Int64` */
   home_shots?: number | bigint | null;
-  /** `Int64` */
+  /** Away goals in the period. `Int64` */
   away_goals?: number | bigint | null;
-  /** `Int64` */
+  /** Away team shots in the period. `Int64` */
   away_shots?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1193,49 +1193,49 @@ export interface LoadPwhlShotsByPeriodRow {
 
 /** One row of `sdv.pwhl.loadPwhlSkaterBoxscores` (`pwhl_skater_boxscores`; sdv-py loader schema `load_pwhl_skater_boxscores`). */
 export interface LoadPwhlSkaterBoxscoresRow {
-  /** `String` (an id) */
+  /** Unique player identifier. `String` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Player position. `String` */
   position?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** League code. `String` */
   league?: string | null;
-  /** `String` */
+  /** Time on ice. `String` */
   toi?: string | null;
-  /** `Float64` */
+  /** Time on ice in seconds. `Float64` */
   time_on_ice?: number | null;
-  /** `Int64` */
+  /** Goals scored. `Int64` */
   goals?: number | bigint | null;
-  /** `Int64` */
+  /** Assists. `Int64` */
   assists?: number | bigint | null;
-  /** `Int64` */
+  /** Total points (goals + assists). `Int64` */
   points?: number | bigint | null;
-  /** `Int64` */
+  /** Shots on goal. `Int64` */
   shots?: number | bigint | null;
-  /** `Int64` */
+  /** Hits. `Int64` */
   hits?: number | bigint | null;
-  /** `Int64` */
+  /** Blocked shots. `Int64` */
   blocked_shots?: number | bigint | null;
-  /** `Int64` */
+  /** Penalty minutes. `Int64` */
   penalty_minutes?: number | bigint | null;
-  /** `Int64` */
+  /** Plus/minus rating. `Int64` */
   plus_minus?: number | bigint | null;
-  /** `Int64` */
+  /** Faceoff attempts. `Int64` */
   faceoff_attempts?: number | bigint | null;
-  /** `Int64` */
+  /** Faceoff wins. `Int64` */
   faceoff_wins?: number | bigint | null;
-  /** `Int64` */
+  /** Faceoff losses. `Int64` */
   faceoff_losses?: number | bigint | null;
-  /** `Float64` */
+  /** Faceoff win percentage. `Float64` */
   faceoff_pct?: number | null;
-  /** `Int64` */
+  /** Whether the player started the game. `Int64` */
   starting?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1243,51 +1243,51 @@ export interface LoadPwhlSkaterBoxscoresRow {
 
 /** One row of `sdv.pwhl.loadPwhlTeamBoxscores` (`pwhl_team_boxscores`; sdv-py loader schema `load_pwhl_team_boxscores`). */
 export interface LoadPwhlTeamBoxscoresRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team name. `String` */
   team?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbr?: string | null;
-  /** `String` */
+  /** Home or away indicator. `String` */
   team_side?: string | null;
-  /** `Int64` */
+  /** Shots on goal. `Int64` */
   shots?: number | bigint | null;
-  /** `Int64` */
+  /** Goals scored. `Int64` */
   goals?: number | bigint | null;
-  /** `Int64` */
+  /** Hits. `Int64` */
   hits?: number | bigint | null;
-  /** `Int64` */
+  /** Power-play goals. `Int64` */
   pp_goals?: number | bigint | null;
-  /** `Int64` */
+  /** Power-play opportunities. `Int64` */
   pp_opportunities?: number | bigint | null;
-  /** `Int64` */
+  /** Total goals recorded. `Int64` */
   goal_count?: number | bigint | null;
-  /** `Int64` */
+  /** Total assists recorded. `Int64` */
   assist_count?: number | bigint | null;
-  /** `Int64` */
+  /** Penalty minutes. `Int64` */
   penalty_minutes?: number | bigint | null;
-  /** `Int64` */
+  /** Number of infractions. `Int64` */
   infraction_count?: number | bigint | null;
-  /** `Int64` */
+  /** Faceoff attempts. `Int64` */
   faceoff_attempts?: number | bigint | null;
-  /** `Int64` */
+  /** Faceoff wins. `Int64` */
   faceoff_wins?: number | bigint | null;
-  /** `Float64` */
+  /** Faceoff win percentage. `Float64` */
   faceoff_win_pct?: number | null;
-  /** `Int64` */
+  /** Season wins entering/after the game. `Int64` */
   season_wins?: number | bigint | null;
-  /** `Int64` */
+  /** Season losses entering/after the game. `Int64` */
   season_losses?: number | bigint | null;
-  /** `Int64` */
+  /** Season overtime wins. `Int64` */
   season_ot_wins?: number | bigint | null;
-  /** `Int64` */
+  /** Season overtime losses. `Int64` */
   season_ot_losses?: number | bigint | null;
-  /** `Int64` */
+  /** Season shootout losses. `Int64` */
   season_so_losses?: number | bigint | null;
-  /** `String` */
+  /** Season record after this game. `String` */
   season_record?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1295,45 +1295,45 @@ export interface LoadPwhlTeamBoxscoresRow {
 
 /** One row of `sdv.pwhl.loadPwhlThreeStars` (`pwhl_three_stars`; sdv-py loader schema `load_pwhl_three_stars`). */
 export interface LoadPwhlThreeStarsRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Star ranking (1, 2, or 3). `Int64` */
   star?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team name. `String` */
   team?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbr?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player last name. `String` */
   last_name?: string | null;
-  /** `Int64` */
+  /** Jersey number. `Int64` */
   jersey_number?: number | bigint | null;
-  /** `String` */
+  /** Player position. `String` */
   position?: string | null;
-  /** `Int64` */
+  /** Goalie flag. `Int64` */
   is_goalie?: number | bigint | null;
-  /** `Int64` */
+  /** Home-team flag. `Int64` */
   is_home?: number | bigint | null;
-  /** `Int64` */
+  /** Goals scored. `Int64` */
   goals?: number | bigint | null;
-  /** `Int64` */
+  /** Assists. `Int64` */
   assists?: number | bigint | null;
-  /** `Int64` */
+  /** Total points (goals + assists). `Int64` */
   points?: number | bigint | null;
-  /** `Int64` */
+  /** Shots on goal. `Int64` */
   shots?: number | bigint | null;
-  /** `Int64` */
+  /** Saves made. `Int64` */
   saves?: number | bigint | null;
-  /** `Int64` */
+  /** Shots faced. `Int64` */
   shots_against?: number | bigint | null;
-  /** `Int64` */
+  /** Goals against. `Int64` */
   goals_against?: number | bigint | null;
-  /** `String` */
+  /** Time on ice in seconds. `String` */
   time_on_ice?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;

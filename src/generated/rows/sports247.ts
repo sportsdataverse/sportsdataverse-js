@@ -10,41 +10,41 @@
  * One row of `sdv.sports247.sports247_coaches({ parsed: true })` (returns schema `native/sports247/sports247_coaches`, verified on a real sdv-py capture).
  */
 export interface Sports247Sports247CoachesRow {
-  /** Schema `integer`. */
+  /** 247Sports coach key. Schema `integer`. */
   key?: number | null;
-  /** Schema `integer`. */
+  /** Legacy CBS coach key. Schema `integer`. */
   cbs_key?: number | null;
-  /** Schema `character`. */
+  /** Given name of the coach. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Family (surname) of the coach. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** 247sports.com path to the coach's profile. Schema `character`. */
   profile_url?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the coach's headshot. Schema `character`. */
   default_asset_url?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Coach's composite recruiting rating (formula points). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   composite_rating?: unknown;
-  /** Schema `double`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Current-job program object when present; null (this scalar) otherwise (see current_job_* columns). Schema `double`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   current_job?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Coach's average composite recruit rating. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   average_composite_rating?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Coach's national recruiting rank. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   overall_rank?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Coach's rank within the division. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   division_rank?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Coach's rank within the conference. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   conference_rank?: unknown;
-  /** Schema `double`. */
+  /** 247Sports institution key of the coach's current program. Schema `double`. */
   current_job_institution_key?: number | null;
-  /** Schema `double`. */
+  /** 247Sports RDB team key of the coach's current program. Schema `double`. */
   current_job_team_key?: number | null;
-  /** Schema `double`. */
+  /** Legacy CBS key of the coach's current program. Schema `double`. */
   current_job_cbs_key?: number | null;
-  /** Schema `character`. */
+  /** Short name of the coach's current program. Schema `character`. */
   current_job_name?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the coach's current program. Schema `character`. */
   current_job_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Full name of the coach's current program. Schema `character`. */
   current_job_full_name?: string | null;
 }
 
@@ -52,53 +52,53 @@ export interface Sports247Sports247CoachesRow {
  * One row of `sdv.sports247.sports247_composite_team_ranking_feed({ parsed: true })` (returns schema `native/sports247/sports247_composite_team_ranking_feed`, verified on a real sdv-py capture).
  */
 export interface Sports247Sports247CompositeTeamRankingFeedRow {
-  /** Schema `character`. */
+  /** Short display name of the program. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** Full name of the program (school plus nickname). Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** Program's state abbreviation. Schema `character`. */
   state_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Name of the athletic conference the program competes in. Schema `character`. */
   conference_name?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports institution/team key. Schema `integer`. */
   key?: number | null;
-  /** Schema `character`. */
+  /** CDN URL of the program's logo. Schema `character`. */
   logo?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the program's alternate logo. Schema `character`. */
   alternate_logo?: string | null;
-  /** Schema `integer`. */
+  /** Row position in the feed. Schema `integer`. */
   position?: number | null;
-  /** Schema `integer`. */
+  /** Rank in the high-school team recruiting class. Schema `integer`. */
   team_ranking_position?: number | null;
-  /** Schema `integer`. */
+  /** Rank in the transfer-portal team class. Schema `integer`. */
   transfer_ranking_position?: number | null;
-  /** Schema `integer`. */
+  /** 247Sports overall national team-class rank. Schema `integer`. */
   overall_rank?: number | null;
-  /** Schema `integer`. */
+  /** Composite overall national team-class rank. Schema `integer`. */
   composite_overall_rank?: number | null;
-  /** Schema `integer`. */
+  /** 247Sports class rank within the conference. Schema `integer`. */
   conference_rank?: number | null;
-  /** Schema `integer`. */
+  /** Composite class rank within the conference. Schema `integer`. */
   composite_conference_rank?: number | null;
-  /** Schema `integer`. */
+  /** Count of 247Sports five-star commits. Schema `integer`. */
   five_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of composite five-star commits. Schema `integer`. */
   composite_five_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of 247Sports four-star commits. Schema `integer`. */
   four_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of composite four-star commits. Schema `integer`. */
   composite_four_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of 247Sports three-star commits. Schema `integer`. */
   three_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of composite three-star commits. Schema `integer`. */
   composite_three_stars?: number | null;
-  /** Schema `integer`. */
+  /** Average 247Sports commit rating. Schema `integer`. */
   average_rating?: number | null;
-  /** Schema `double`. */
+  /** Average composite commit rating. Schema `double`. */
   composite_average_rating?: number | null;
-  /** Schema `integer`. */
+  /** Total 247Sports class rating (formula points). Schema `integer`. */
   rating?: number | null;
-  /** Schema `double`. */
+  /** Total composite class rating (formula points). Schema `double`. */
   composite_rating?: number | null;
 }
 
@@ -106,69 +106,69 @@ export interface Sports247Sports247CompositeTeamRankingFeedRow {
  * One row of `sdv.sports247.sports247_institution_rankings({ parsed: true })` (returns schema `native/sports247/sports247_institution_rankings`, verified on a real sdv-py capture).
  */
 export interface Sports247Sports247InstitutionRankingsRow {
-  /** Schema `character`. */
+  /** Short display name of the institution as shown on the 247Sports class-ranking page (e.g. USC, Notre Dame). Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** Institution full name (school + nickname). Schema `character`. */
   full_name?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports class rank within the conference. Schema `integer`. */
   conference_rank?: number | null;
-  /** Schema `integer`. */
+  /** Composite class rank within the conference. Schema `integer`. */
   conference_composite_rank?: number | null;
-  /** Schema `integer`. */
+  /** 247Sports national team-class rank. Schema `integer`. */
   rank?: number | null;
-  /** Schema `integer`. */
+  /** Industry-composite national team-class rank. Schema `integer`. */
   composite_rank?: number | null;
-  /** Schema `integer`. */
+  /** 247Sports institution key (school-level). Schema `integer`. */
   institution_key?: number | null;
-  /** Schema `integer`. */
+  /** 247Sports RDB team key (per-sport). Schema `integer`. */
   team_key?: number | null;
-  /** Schema `double`. */
+  /** Average 247Sports rating of counted commits. Schema `double`. */
   average_rating?: number | null;
-  /** Schema `double`. */
+  /** Total 247Sports class rating (team-ranking formula points). Schema `double`. */
   rating?: number | null;
-  /** Schema `double`. */
+  /** Total composite class rating (formula points). Schema `double`. */
   composite_rating?: number | null;
-  /** Schema `double`. */
+  /** Average composite rating of counted commits. Schema `double`. */
   average_composite_rating?: number | null;
-  /** Schema `character`. */
+  /** CDN URL of the institution's default logo. Schema `character`. */
   default_asset?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the institution's alternate logo. Schema `character`. */
   alternate_asset?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the institution's light-background logo. Schema `character`. */
   light_asset?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Position of the class in the high-school-only ranking. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_ranking_position?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Transfer-portal points contributed to the class rating. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   transfer_points?: unknown;
-  /** Schema `integer`. */
+  /** Number of incoming transfers counted in the class. Schema `integer`. */
   transfer_number?: number | null;
-  /** Schema `integer`. */
+  /** Count of 247Sports five-star commits. Schema `integer`. */
   five_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of composite five-star commits. Schema `integer`. */
   composite_five_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of 247Sports four-star commits. Schema `integer`. */
   four_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of composite four-star commits. Schema `integer`. */
   composite_four_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of 247Sports three-star commits. Schema `integer`. */
   three_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of composite three-star commits. Schema `integer`. */
   composite_three_stars?: number | null;
-  /** Schema `integer`. */
+  /** Number of commits in the class. Schema `integer`. */
   commits?: number | null;
-  /** Schema `integer`. */
+  /** 247Sports team-site key. Schema `integer`. */
   site_key?: number | null;
-  /** Schema `character`. */
+  /** 247sports.com root path of the institution's team site. Schema `character`. */
   institution_root_path?: string | null;
-  /** Schema `character`. */
+  /** Timestamp the ranking row was last updated. Schema `character`. */
   ranking_date?: string | null;
-  /** Schema `character`. */
+  /** Institution city. Schema `character`. */
   city?: string | null;
-  /** Schema `character`. */
+  /** Full name of the U.S. state where the institution is located. Schema `character`. */
   state?: string | null;
-  /** Schema `character`. */
+  /** Institution state abbreviation. Schema `character`. */
   state_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** 247sports.com URL of the institution's class-ranking page. Schema `character`. */
   institution_ranking_url?: string | null;
 }
 
@@ -176,15 +176,15 @@ export interface Sports247Sports247InstitutionRankingsRow {
  * One row of `sdv.sports247.sports247_positions({ parsed: true })` (returns schema `native/sports247/sports247_positions`, verified on a real sdv-py capture).
  */
 export interface Sports247Sports247PositionsRow {
-  /** Schema `character`. */
+  /** Position group name (e.g. Quarterback, Running Back). Schema `character`. */
   group?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports position group key. Schema `integer`. */
   group_key?: number | null;
-  /** Schema `character`. */
+  /** Full position group name (e.g. Quarterback). Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** Position abbreviation label (e.g. QB, RB). Schema `character`. */
   label?: string | null;
-  /** Schema `character`. */
+  /** 247Sports position key (returned as a string). Schema `character`. */
   value?: string | null;
 }
 
@@ -192,71 +192,71 @@ export interface Sports247Sports247PositionsRow {
  * One row of `sdv.sports247.sports247_recruits({ parsed: true })` (returns schema `native/sports247/sports247_recruits`, verified on a real sdv-py capture).
  */
 export interface Sports247Sports247RecruitsRow {
-  /** Schema `integer`. */
+  /** 247Sports player key of the recruit. Schema `integer`. */
   key?: number | null;
-  /** Schema `integer`. */
+  /** Legacy CBS player key (0 when unmapped). Schema `integer`. */
   cbs_key?: number | null;
-  /** Schema `character`. */
+  /** Given name of the recruit. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Family (surname) of the recruit. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** 247sports.com path to the recruit's profile. Schema `character`. */
   profile_url?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the recruit's headshot. Schema `character`. */
   default_asset_url?: string | null;
-  /** Schema `character`. */
+  /** Recruit's primary position abbreviation. Schema `character`. */
   primary_position?: string | null;
-  /** Schema `double`. */
+  /** 247Sports Composite rating (industry-blended 0-1 scale). Schema `double`. */
   composite_rating?: number | null;
-  /** Schema `integer`. */
+  /** 247Sports Composite star rating (2-5). Schema `integer`. */
   composite_star_rating?: number | null;
-  /** Schema `integer`. */
+  /** Composite national rank. Schema `integer`. */
   composite_national_rank?: number | null;
-  /** Schema `integer`. */
+  /** Composite rank at the recruit's position. Schema `integer`. */
   composite_position_rank?: number | null;
-  /** Schema `integer`. */
+  /** Composite rank within the recruit's state. Schema `integer`. */
   composite_state_rank?: number | null;
-  /** Schema `double`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Signed-program object when present; null (this scalar) for unsigned recruits (see signed_institution_* columns). Schema `double`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   signed_institution?: unknown;
-  /** Schema `character`. */
+  /** Recruit's home-town city. Schema `character`. */
   home_town_city?: string | null;
-  /** Schema `character`. */
+  /** Recruit's home-town state. Schema `character`. */
   home_town_state?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports institution key of the program the recruit is committed to. Schema `integer`. */
   committed_institution_institution_key?: number | null;
-  /** Schema `integer`. */
+  /** 247Sports RDB team key of the program the recruit is committed to. Schema `integer`. */
   committed_institution_team_key?: number | null;
-  /** Schema `integer`. */
+  /** Legacy CBS key of the program the recruit is committed to. Schema `integer`. */
   committed_institution_cbs_key?: number | null;
-  /** Schema `character`. */
+  /** Short name of the program the recruit is committed to. Schema `character`. */
   committed_institution_name?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the program the recruit is committed to. Schema `character`. */
   committed_institution_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Full name of the program the recruit is committed to. Schema `character`. */
   committed_institution_full_name?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports institution key of the recruit's current program. Schema `integer`. */
   current_institution_institution_key?: number | null;
-  /** Schema `double`. */
+  /** 247Sports RDB team key of the recruit's current program. Schema `double`. */
   current_institution_team_key?: number | null;
-  /** Schema `double`. */
+  /** Legacy CBS key of the recruit's current program. Schema `double`. */
   current_institution_cbs_key?: number | null;
-  /** Schema `character`. */
+  /** Short name of the recruit's current program. Schema `character`. */
   current_institution_name?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the recruit's current program. Schema `character`. */
   current_institution_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Full name of the recruit's current program. Schema `character`. */
   current_institution_full_name?: string | null;
-  /** Schema `double`. */
+  /** 247Sports institution key of the program the recruit signed with. Schema `double`. */
   signed_institution_institution_key?: number | null;
-  /** Schema `double`. */
+  /** 247Sports RDB team key of the program the recruit signed with. Schema `double`. */
   signed_institution_team_key?: number | null;
-  /** Schema `double`. */
+  /** Legacy CBS key of the program the recruit signed with. Schema `double`. */
   signed_institution_cbs_key?: number | null;
-  /** Schema `character`. */
+  /** Short name of the program the recruit signed with. Schema `character`. */
   signed_institution_name?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the program the recruit signed with. Schema `character`. */
   signed_institution_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Full name of the program the recruit signed with. Schema `character`. */
   signed_institution_full_name?: string | null;
 }
 
@@ -264,7 +264,7 @@ export interface Sports247Sports247RecruitsRow {
  * One row of `sdv.sports247.sports247_sport_years({ parsed: true })` (returns schema `native/sports247/sports247_sport_years`, verified on a real sdv-py capture).
  */
 export interface Sports247Sports247SportYearsRow {
-  /** Schema `integer`. */
+  /** A class year for which the 247Sports RDB has data for the sport. Schema `integer`. */
   value?: number | null;
 }
 
@@ -272,13 +272,13 @@ export interface Sports247Sports247SportYearsRow {
  * One row of `sdv.sports247.sports247_tags_autocomplete({ parsed: true })` (returns schema `native/sports247/sports247_tags_autocomplete`, verified on a real sdv-py capture).
  */
 export interface Sports247Sports247TagsAutocompleteRow {
-  /** Schema `character` (an id). */
+  /** 247Sports tag id (prefixed key, e.g. Player_46151084). Schema `character` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Display name of the tagged entity. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** Tag entity type (Player, Team, Institution, ...). Schema `character`. */
   type?: string | null;
-  /** Schema `character`. */
+  /** Disambiguating annotation (e.g. class year, position, school). Schema `character`. */
   annotation?: string | null;
 }
 
@@ -286,59 +286,59 @@ export interface Sports247Sports247TagsAutocompleteRow {
  * One row of `sdv.sports247.sports247_target_predictions({ parsed: true })` (returns schema `native/sports247/sports247_target_predictions`, verified on a real sdv-py capture).
  */
 export interface Sports247Sports247TargetPredictionsRow {
-  /** Schema `integer`. */
+  /** 247Sports player key of the recruit the prediction is about. Schema `integer`. */
   player_key?: number | null;
-  /** Schema `integer`. */
+  /** 247Sports institution key predicted for the recruit. Schema `integer`. */
   player_institution_key?: number | null;
-  /** Schema `integer`. */
+  /** Numeric prediction-type discriminator. Schema `integer`. */
   prediction_type?: number | null;
-  /** Schema `double`. */
+  /** Recruit's 247Sports rating at prediction time. Schema `double`. */
   rating?: number | null;
-  /** Schema `integer`. */
+  /** Recruit's star rating (2-5). Schema `integer`. */
   star_rating?: number | null;
-  /** Schema `character`. */
+  /** Recruit's position abbreviation. Schema `character`. */
   position?: string | null;
-  /** Schema `double`. */
+  /** Recruit's weight in pounds. Schema `double`. */
   weight?: number | null;
-  /** Schema `character`. */
+  /** Recruit's height as a formatted string. Schema `character`. */
   height?: string | null;
-  /** Schema `character`. */
+  /** Predicted destination program name. Schema `character`. */
   prediction?: string | null;
-  /** Schema `integer`. */
+  /** Expert confidence level of the prediction. Schema `integer`. */
   prediction_level?: number | null;
-  /** Schema `character`. */
+  /** CDN URL of the predicted program's logo. Schema `character`. */
   image?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the predicted program's alternate logo. Schema `character`. */
   alt_image?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the predicted program's light-background logo. Schema `character`. */
   light_image?: string | null;
-  /** Schema `character`. */
+  /** Recruit's full name. Schema `character`. */
   player_name?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the recruit's headshot. Schema `character`. */
   player_image?: string | null;
-  /** Schema `character`. */
+  /** Timestamp the prediction was made. Schema `character`. */
   prediction_date?: string | null;
-  /** Schema `character`. */
+  /** Name of the expert who made the prediction. Schema `character`. */
   expert_name?: string | null;
-  /** Schema `character`. */
+  /** 247Sports handle of the expert. Schema `character`. */
   expert_alias?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports key of the expert. Schema `integer`. */
   expert_key?: number | null;
-  /** Schema `character`. */
+  /** Expert's role/title. Schema `character`. */
   expert_role?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the expert's avatar. Schema `character`. */
   expert_image?: string | null;
-  /** Schema `integer`. */
+  /** Class year the expert's accuracy stats cover. Schema `integer`. */
   expert_prediction_year?: number | null;
-  /** Schema `integer`. */
+  /** Expert's correct predictions this year. Schema `integer`. */
   expert_yearly_total_correct?: number | null;
-  /** Schema `integer`. */
+  /** Expert's total predictions made this year. Schema `integer`. */
   expert_yearly_total_made?: number | null;
-  /** Schema `integer`. */
+  /** Expert's correct predictions all-time. Schema `integer`. */
   expert_all_time_total_correct?: number | null;
-  /** Schema `integer`. */
+  /** Expert's total predictions made all-time. Schema `integer`. */
   expert_all_time_total_made?: number | null;
-  /** Schema `character`. */
+  /** 247sports.com path to the prediction detail. Schema `character`. */
   prediction_page_url?: string | null;
 }
 
@@ -346,19 +346,19 @@ export interface Sports247Sports247TargetPredictionsRow {
  * One row of `sdv.sports247.sports247_teams({ parsed: true })` (returns schema `native/sports247/sports247_teams`, verified on a real sdv-py capture).
  */
 export interface Sports247Sports247TeamsRow {
-  /** Schema `character`. */
+  /** Team display name (school + nickname). Schema `character`. */
   name?: string | null;
-  /** Schema `integer` (an id). */
+  /** 247Sports RDB team id (per-sport). Schema `integer` (an id). */
   team_id?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports institution key (school-level, sport-agnostic). Schema `integer`. */
   institution_key?: number | null;
-  /** Schema `character`. */
+  /** Full name of the athletic conference the team competes in (e.g. ACC, Big Ten). Schema `character`. */
   conference?: string | null;
-  /** Schema `character`. */
+  /** Conference abbreviation. Schema `character`. */
   conference_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Sport name (Football, Basketball, ...). Schema `character`. */
   sport?: string | null;
-  /** Schema `character`. */
+  /** Institution type (College, ...). Schema `character`. */
   type?: string | null;
 }
 
@@ -366,43 +366,43 @@ export interface Sports247Sports247TeamsRow {
  * One row of `sdv.sports247.sports247_transfer_portal_player_feed({ parsed: true })` (returns schema `native/sports247/sports247_transfer_portal_player_feed`, verified on a real sdv-py capture).
  */
 export interface Sports247Sports247TransferPortalPlayerFeedRow {
-  /** Schema `integer`. */
+  /** 247Sports player key. Schema `integer`. */
   key?: number | null;
-  /** Schema `character`. */
+  /** Name of the program the player is targeting / committed to. Schema `character`. */
   target_institution?: string | null;
-  /** Schema `character`. */
+  /** 247Sports institution key of the target program. Schema `character`. */
   target_institution_key?: string | null;
-  /** Schema `character`. */
+  /** Full name of the transfer player. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** Position abbreviation. Schema `character`. */
   position_abbr?: string | null;
-  /** Schema `character`. */
+  /** Name of the player's current program. Schema `character`. */
   current_institution?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports institution key of the current program. Schema `integer`. */
   current_institution_key?: number | null;
-  /** Schema `character`. */
+  /** State abbreviation of the current program. Schema `character`. */
   current_institution_state_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** City of the current program. Schema `character`. */
   current_institution_city?: string | null;
-  /** Schema `character`. */
+  /** Given name of the transfer player. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Family (surname) of the transfer player. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Player's state abbreviation. Schema `character`. */
   state_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the player's headshot. Schema `character`. */
   player_image?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports star rating (2-5). Schema `integer`. */
   star_rating?: number | null;
-  /** Schema `integer`. */
+  /** Rank within the transfer position group. Schema `integer`. */
   group_rank?: number | null;
-  /** Schema `integer`. */
+  /** Rank at the player's position among transfers. Schema `integer`. */
   position_rank?: number | null;
-  /** Schema `integer`. */
+  /** Rank within the player's state. Schema `integer`. */
   state_rank?: number | null;
-  /** Schema `character`. */
+  /** Height as a formatted string. Schema `character`. */
   formatted_height?: string | null;
-  /** Schema `double`. */
+  /** Weight in pounds. Schema `double`. */
   weight?: number | null;
 }
 
@@ -410,19 +410,19 @@ export interface Sports247Sports247TransferPortalPlayerFeedRow {
  * One row of `sdv.sports247.sports247_transfer_portal_team_feed({ parsed: true })` (returns schema `native/sports247/sports247_transfer_portal_team_feed`, verified on a real sdv-py capture).
  */
 export interface Sports247Sports247TransferPortalTeamFeedRow {
-  /** Schema `character`. */
+  /** Display name of the program. Schema `character`. */
   name?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports institution/team key. Schema `integer`. */
   key?: number | null;
-  /** Schema `character`. */
+  /** CDN URL of the program's logo. Schema `character`. */
   logo?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the program's alternate logo. Schema `character`. */
   alternate_logo?: string | null;
-  /** Schema `integer`. */
+  /** Rank in the transfer-portal team class. Schema `integer`. */
   position?: number | null;
-  /** Schema `integer`. */
+  /** Number of incoming transfers in the class. Schema `integer`. */
   number_of_transfers?: number | null;
-  /** Schema `double`. */
+  /** Total transfer-portal class rating points. Schema `double`. */
   transfer_points?: number | null;
 }
 
@@ -430,82 +430,82 @@ export interface Sports247Sports247TransferPortalTeamFeedRow {
  * One row of `sdv.sports247.sports247_transfers({ parsed: true })` (returns schema `native/sports247/sports247_transfers`, verified on a real sdv-py capture).
  */
 export interface Sports247Sports247TransfersRow {
-  /** Schema `integer`. */
+  /** 247Sports player key of the transfer. Schema `integer`. */
   player_key?: number | null;
-  /** Schema `character`. */
+  /** Given name of the transfer player. Schema `character`. */
   player_first_name?: string | null;
-  /** Schema `character`. */
+  /** Family (surname) of the transfer player. Schema `character`. */
   player_last_name?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the transfer's headshot. Schema `character`. */
   player_avatar?: string | null;
-  /** Schema `character`. */
+  /** Timestamp the player entered the transfer portal. Schema `character`. */
   player_transfer_date?: string | null;
-  /** Schema `double`. */
+  /** 247Sports transfer rating. Schema `double`. */
   player_transfer_rating?: number | null;
-  /** Schema `double`. */
+  /** The player's original high-school recruiting rating. Schema `double`. */
   player_high_school_rating?: number | null;
-  /** Schema `double`. */
+  /** 247Sports current rating. Schema `double`. */
   player_rating?: number | null;
-  /** Schema `double`. */
+  /** 247Sports star rating (2-5). Schema `double`. */
   player_star_rating?: number | null;
-  /** Schema `double`. */
+  /** National rank among transfers. Schema `double`. */
   player_transfer_rank?: number | null;
-  /** Schema `double`. */
+  /** The player's original high-school national rank. Schema `double`. */
   player_high_school_rank?: number | null;
-  /** Schema `double`. */
+  /** 247Sports current national rank. Schema `double`. */
   player_rank?: number | null;
-  /** Schema `double`. */
+  /** Change in rank since the previous update. Schema `double`. */
   player_rank_trend?: number | null;
-  /** Schema `character`. */
+  /** Transfer status relative to institutions (e.g. Entered, Committed). Schema `character`. */
   player_institution_status?: string | null;
-  /** Schema `character`. */
+  /** Position abbreviation. Schema `character`. */
   player_position?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports position key. Schema `integer`. */
   player_position_key?: number | null;
-  /** Schema `character`. */
+  /** Eligibility classification (e.g. Grad, Underclassman). Schema `character`. */
   player_eligibility_type?: string | null;
-  /** Schema `double`. */
+  /** Years of eligibility remaining. Schema `double`. */
   player_eligibility_years?: number | null;
-  /** Schema `double`. */
+  /** Rank within the player's state. Schema `double`. */
   player_state_rank?: number | null;
-  /** Schema `character`. */
+  /** Portal status label. Schema `character`. */
   player_status?: string | null;
-  /** Schema `character`. */
+  /** Timestamp of the latest status change. Schema `character`. */
   player_status_date?: string | null;
-  /** Schema `character`. */
+  /** Name of the program the player is transferring from. Schema `character`. */
   player_transfer_source_institution?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports institution key of the source program. Schema `integer`. */
   player_transfer_source_institution_key?: number | null;
-  /** Schema `character`. */
+  /** CDN URL of the source program's logo. Schema `character`. */
   player_transfer_source_logo?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the source program's default logo asset. Schema `character`. */
   player_transfer_source_default_asset?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the source program's alternate logo asset. Schema `character`. */
   player_transfer_source_alternate_asset?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the source program's light-background logo asset. Schema `character`. */
   player_transfer_source_light_asset?: string | null;
-  /** Schema `character`. */
+  /** 247sports.com root path of the source program's team site. Schema `character`. */
   player_transfer_source_institution_root_path?: string | null;
-  /** Schema `character`. */
+  /** Name of the program the player is transferring to (null if uncommitted). Schema `character`. */
   player_transfer_destination?: string | null;
-  /** Schema `integer`. */
+  /** 247Sports position-group key. Schema `integer`. */
   player_position_group_key?: number | null;
-  /** Schema `character`. */
+  /** Position-group name (e.g. Quarterback). Schema `character`. */
   player_position_group_name?: string | null;
-  /** Schema `double`. */
+  /** Rank at the player's position among transfers. Schema `double`. */
   player_position_rank?: number | null;
-  /** Schema `character`. */
+  /** Timestamp of the last record update. Schema `character`. */
   player_last_update_date?: string | null;
-  /** Schema `character`. */
+  /** Timestamp of the transfer commitment (null if uncommitted). Schema `character`. */
   player_transfer_commit_date_time?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   player_weight?: number | null;
-  /** Schema `character`. */
+  /** Height as a formatted string. Schema `character`. */
   player_height?: string | null;
-  /** Schema `character`. */
+  /** 247sports.com path to the player's profile. Schema `character`. */
   player_player_profile_url?: string | null;
-  /** Schema `character`. */
+  /** Start date of the transfer window record. Schema `character`. */
   player_start_date?: string | null;
-  /** Schema `character`. */
+  /** End date of the transfer window record. Schema `character`. */
   player_end_date?: string | null;
 }

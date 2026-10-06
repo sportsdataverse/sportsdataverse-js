@@ -10,99 +10,99 @@
  * One row of `sdv.mlb.mlb_all_star_ballot({ parsed: true })` (returns schema `native/mlb/all_star_ballot`, verified on a real sdv-py capture).
  */
 export interface MlbAllStarBallotRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Player's full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Player uniform number. Schema `character`. */
   primary_number?: string | null;
-  /** Schema `character`. */
+  /** Date of birth (YYYY-MM-DD). Schema `character`. */
   birth_date?: string | null;
-  /** Schema `integer`. */
+  /** Current age in years. Schema `integer`. */
   current_age?: number | null;
-  /** Schema `character`. */
+  /** City of birth. Schema `character`. */
   birth_city?: string | null;
-  /** Schema `character`. */
+  /** Country of birth. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `character`. */
+  /** Height (feet and inches). Schema `character`. */
   height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character`. */
+  /** Preferred first name. Schema `character`. */
   use_name?: string | null;
-  /** Schema `character`. */
+  /** Preferred last name. Schema `character`. */
   use_last_name?: string | null;
-  /** Schema `character`. */
+  /** Player middle name. Schema `character`. */
   middle_name?: string | null;
-  /** Schema `character`. */
+  /** Name as shown in box scores. Schema `character`. */
   boxscore_name?: string | null;
-  /** Schema `character`. */
+  /** Player nickname. Schema `character`. */
   nick_name?: string | null;
-  /** Schema `character`. */
+  /** Player gender. Schema `character`. */
   gender?: string | null;
-  /** Schema `character`. */
+  /** Maternal family name. Schema `character`. */
   name_matrilineal?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person is a player. Schema `logical`. */
   is_player?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the player profile is verified. Schema `logical`. */
   is_verified?: boolean | null;
-  /** Schema `character`. */
+  /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
-  /** Schema `character`. */
+  /** Date of last MLB game played. Schema `character`. */
   last_played_date?: string | null;
-  /** Schema `character`. */
+  /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
-  /** Schema `character`. */
+  /** Name in first-last order. Schema `character`. */
   name_first_last?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly name slug. Schema `character`. */
   name_slug?: string | null;
-  /** Schema `character`. */
+  /** First and last name. Schema `character`. */
   first_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name in last, first order. Schema `character`. */
   last_first_name?: string | null;
-  /** Schema `character`. */
+  /** Last name with first initial. Schema `character`. */
   last_init_name?: string | null;
-  /** Schema `character`. */
+  /** First initial with last name. Schema `character`. */
   init_last_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (first-middle-last). Schema `character`. */
   full_fml_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (last-first-middle). Schema `character`. */
   full_lfm_name?: string | null;
-  /** Schema `double`. */
+  /** Top of the player's strike zone (feet). Schema `double`. */
   strike_zone_top?: number | null;
-  /** Schema `double`. */
+  /** Bottom of the player's strike zone (feet). Schema `double`. */
   strike_zone_bottom?: number | null;
-  /** Schema `character`. */
+  /** Primary position code. Schema `character`. */
   primary_position_code?: string | null;
-  /** Schema `character`. */
+  /** Primary fielding position name. Schema `character`. */
   primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Primary position type (e.g. Infielder). Schema `character`. */
   primary_position_type?: string | null;
-  /** Schema `character`. */
+  /** Primary position abbreviation. Schema `character`. */
   primary_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Batting side code (L/R/S). Schema `character`. */
   bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** Batting side description. Schema `character`. */
   bat_side_description?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand code (L/R). Schema `character`. */
   pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand description. Schema `character`. */
   pitch_hand_description?: string | null;
-  /** Schema `character`. */
+  /** State or province of birth. Schema `character`. */
   birth_state_province?: string | null;
-  /** Schema `double`. */
+  /** Year the player was drafted. Schema `double`. */
   draft_year?: number | null;
-  /** Schema `character`. */
+  /** Name title. Schema `character`. */
   name_title?: string | null;
-  /** Schema `character`. */
+  /** Name suffix (e.g. Jr., Sr., III). Schema `character`. */
   name_suffix?: string | null;
 }
 
@@ -110,99 +110,99 @@ export interface MlbAllStarBallotRow {
  * One row of `sdv.mlb.mlb_all_star_final_vote({ parsed: true })` (returns schema `native/mlb/all_star_final_vote`, verified on a real sdv-py capture).
  */
 export interface MlbAllStarFinalVoteRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Player's full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Player uniform number. Schema `character`. */
   primary_number?: string | null;
-  /** Schema `character`. */
+  /** Date of birth (YYYY-MM-DD). Schema `character`. */
   birth_date?: string | null;
-  /** Schema `integer`. */
+  /** Current age in years. Schema `integer`. */
   current_age?: number | null;
-  /** Schema `character`. */
+  /** City of birth. Schema `character`. */
   birth_city?: string | null;
-  /** Schema `character`. */
+  /** Country of birth. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `character`. */
+  /** Height (feet and inches). Schema `character`. */
   height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character`. */
+  /** Preferred first name. Schema `character`. */
   use_name?: string | null;
-  /** Schema `character`. */
+  /** Preferred last name. Schema `character`. */
   use_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name as shown in box scores. Schema `character`. */
   boxscore_name?: string | null;
-  /** Schema `character`. */
+  /** Player nickname. Schema `character`. */
   nick_name?: string | null;
-  /** Schema `character`. */
+  /** Player gender. Schema `character`. */
   gender?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person is a player. Schema `logical`. */
   is_player?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the player profile is verified. Schema `logical`. */
   is_verified?: boolean | null;
-  /** Schema `character`. */
+  /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
-  /** Schema `character`. */
+  /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
-  /** Schema `character`. */
+  /** Name in first-last order. Schema `character`. */
   name_first_last?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly name slug. Schema `character`. */
   name_slug?: string | null;
-  /** Schema `character`. */
+  /** First and last name. Schema `character`. */
   first_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name in last, first order. Schema `character`. */
   last_first_name?: string | null;
-  /** Schema `character`. */
+  /** Last name with first initial. Schema `character`. */
   last_init_name?: string | null;
-  /** Schema `character`. */
+  /** First initial with last name. Schema `character`. */
   init_last_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (first-middle-last). Schema `character`. */
   full_fml_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (last-first-middle). Schema `character`. */
   full_lfm_name?: string | null;
-  /** Schema `double`. */
+  /** Top of the player's strike zone (feet). Schema `double`. */
   strike_zone_top?: number | null;
-  /** Schema `double`. */
+  /** Bottom of the player's strike zone (feet). Schema `double`. */
   strike_zone_bottom?: number | null;
-  /** Schema `character`. */
+  /** Primary position code. Schema `character`. */
   primary_position_code?: string | null;
-  /** Schema `character`. */
+  /** Primary fielding position name. Schema `character`. */
   primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Primary position type (e.g. Infielder). Schema `character`. */
   primary_position_type?: string | null;
-  /** Schema `character`. */
+  /** Primary position abbreviation. Schema `character`. */
   primary_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Batting side code (L/R/S). Schema `character`. */
   bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** Batting side description. Schema `character`. */
   bat_side_description?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand code (L/R). Schema `character`. */
   pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand description. Schema `character`. */
   pitch_hand_description?: string | null;
-  /** Schema `character`. */
+  /** Maternal family name. Schema `character`. */
   name_matrilineal?: string | null;
-  /** Schema `character`. */
+  /** State or province of birth. Schema `character`. */
   birth_state_province?: string | null;
-  /** Schema `character`. */
+  /** Name title. Schema `character`. */
   name_title?: string | null;
-  /** Schema `character`. */
+  /** Name suffix (e.g. Jr., Sr., III). Schema `character`. */
   name_suffix?: string | null;
-  /** Schema `character`. */
+  /** Player middle name. Schema `character`. */
   middle_name?: string | null;
-  /** Schema `double`. */
+  /** Year the player was drafted. Schema `double`. */
   draft_year?: number | null;
-  /** Schema `character`. */
+  /** Date of last MLB game played. Schema `character`. */
   last_played_date?: string | null;
 }
 
@@ -210,91 +210,91 @@ export interface MlbAllStarFinalVoteRow {
  * One row of `sdv.mlb.mlb_all_star_write_ins({ parsed: true })` (returns schema `native/mlb/all_star_write_ins`, verified on a real sdv-py capture).
  */
 export interface MlbAllStarWriteInsRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Player's full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Date of birth (YYYY-MM-DD). Schema `character`. */
   birth_date?: string | null;
-  /** Schema `integer`. */
+  /** Current age in years. Schema `integer`. */
   current_age?: number | null;
-  /** Schema `character`. */
+  /** City of birth. Schema `character`. */
   birth_city?: string | null;
-  /** Schema `character`. */
+  /** State or province of birth. Schema `character`. */
   birth_state_province?: string | null;
-  /** Schema `character`. */
+  /** Country of birth. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `character`. */
+  /** Height (feet and inches). Schema `character`. */
   height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character`. */
+  /** Preferred first name. Schema `character`. */
   use_name?: string | null;
-  /** Schema `character`. */
+  /** Preferred last name. Schema `character`. */
   use_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name as shown in box scores. Schema `character`. */
   boxscore_name?: string | null;
-  /** Schema `character`. */
+  /** Player gender. Schema `character`. */
   gender?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person is a player. Schema `logical`. */
   is_player?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the player profile is verified. Schema `logical`. */
   is_verified?: boolean | null;
-  /** Schema `character`. */
+  /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
-  /** Schema `character`. */
+  /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
-  /** Schema `character`. */
+  /** Name in first-last order. Schema `character`. */
   name_first_last?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly name slug. Schema `character`. */
   name_slug?: string | null;
-  /** Schema `character`. */
+  /** First and last name. Schema `character`. */
   first_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name in last, first order. Schema `character`. */
   last_first_name?: string | null;
-  /** Schema `character`. */
+  /** Last name with first initial. Schema `character`. */
   last_init_name?: string | null;
-  /** Schema `character`. */
+  /** First initial with last name. Schema `character`. */
   init_last_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (first-middle-last). Schema `character`. */
   full_fml_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (last-first-middle). Schema `character`. */
   full_lfm_name?: string | null;
-  /** Schema `double`. */
+  /** Top of the player's strike zone (feet). Schema `double`. */
   strike_zone_top?: number | null;
-  /** Schema `double`. */
+  /** Bottom of the player's strike zone (feet). Schema `double`. */
   strike_zone_bottom?: number | null;
-  /** Schema `character`. */
+  /** Batting side code (L/R/S). Schema `character`. */
   bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** Batting side description. Schema `character`. */
   bat_side_description?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand code (L/R). Schema `character`. */
   pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand description. Schema `character`. */
   pitch_hand_description?: string | null;
-  /** Schema `character`. */
+  /** Player uniform number. Schema `character`. */
   primary_number?: string | null;
-  /** Schema `double`. */
+  /** Year the player was drafted. Schema `double`. */
   draft_year?: number | null;
-  /** Schema `character`. */
+  /** Player middle name. Schema `character`. */
   middle_name?: string | null;
-  /** Schema `character`. */
+  /** Maternal family name. Schema `character`. */
   name_matrilineal?: string | null;
-  /** Schema `character`. */
+  /** Date of last MLB game played. Schema `character`. */
   last_played_date?: string | null;
-  /** Schema `character`. */
+  /** Player nickname. Schema `character`. */
   nick_name?: string | null;
-  /** Schema `character`. */
+  /** Name title. Schema `character`. */
   name_title?: string | null;
-  /** Schema `character`. */
+  /** Name suffix (e.g. Jr., Sr., III). Schema `character`. */
   name_suffix?: string | null;
 }
 
@@ -302,33 +302,33 @@ export interface MlbAllStarWriteInsRow {
  * One row of `sdv.mlb.mlb_award_recipients({ parsed: true })` (returns schema `native/mlb/award_recipients`, verified on a real sdv-py capture).
  */
 export interface MlbAwardRecipientsRow {
-  /** Schema `character` (an id). */
+  /** Id. Schema `character` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** Date in YYYY-MM-DD format. Schema `character`. */
   date?: string | null;
-  /** Schema `character`. */
+  /** Season year. Schema `character`. */
   season?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique ESPN team identifier. Schema `integer` (an id). */
   team_id?: string | null;
-  /** Schema `character`. */
+  /** API link to the team. Schema `character`. */
   team_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** stats.ncaa.org player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `character`. */
+  /** API relative link to the player. Schema `character`. */
   player_link?: string | null;
-  /** Schema `character`. */
+  /** Recipient primary fielding position code. Schema `character`. */
   player_primary_position_code?: string | null;
-  /** Schema `character`. */
+  /** Recipient primary fielding position name. Schema `character`. */
   player_primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Participant primary position type (e.g. 'Hitter'). Schema `character`. */
   player_primary_position_type?: string | null;
-  /** Schema `character`. */
+  /** Participant primary position abbreviation (e.g. 'DH'). Schema `character`. */
   player_primary_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Participant name in first-last order. Schema `character`. */
   player_name_first_last?: string | null;
-  /** Schema `double`. */
+  /** Number of votes received. Schema `double`. */
   votes?: number | null;
 }
 
@@ -336,25 +336,25 @@ export interface MlbAwardRecipientsRow {
  * One row of `sdv.mlb.mlb_awards({ parsed: true })` (returns schema `native/mlb/awards`, verified on a real sdv-py capture).
  */
 export interface MlbAwardsRow {
-  /** Schema `character` (an id). */
+  /** Id. Schema `character` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** Long-form description text. Schema `character`. */
   description?: string | null;
-  /** Schema `double`. */
+  /** Display sort order for the sport. Schema `double`. */
   sort_order?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `double` (an id). */
+  /** Sport MLBAM ID. Schema `double` (an id). */
   sport_id?: string | number | null;
-  /** Schema `character`. */
+  /** API link to the sport. Schema `character`. */
   sport_link?: string | null;
-  /** Schema `double` (an id). */
+  /** League MLBAM ID. Schema `double` (an id). */
   league_id?: string | number | null;
-  /** Schema `character`. */
+  /** API link to the league. Schema `character`. */
   league_link?: string | null;
-  /** Schema `character`. */
+  /** Notes. Schema `character`. */
   notes?: string | null;
 }
 
@@ -364,465 +364,465 @@ export interface MlbAwardsRow {
 export interface MlbBoxscoreRow {
   /** Schema `character`. */
   team_side?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique ESPN team identifier. Schema `integer` (an id). */
   team_id?: string | null;
-  /** Schema `character`. */
+  /** Team name. Schema `character`. */
   team_name?: string | null;
-  /** Schema `character`. */
+  /** Jersey number worn (often blank for non-uniformed roles). Schema `character`. */
   jersey_number?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB Stats API identifier for the player's parent (MLB-level) organization, useful for tracking players on optional assignment. Schema `integer` (an id). */
   parent_team_id?: string | null;
-  /** Schema `character`. */
+  /** Spot in the batting order (box-score row order). Schema `character`. */
   batting_order?: string | null;
-  /** Schema `character`. */
+  /** All fielding positions played by the player during the game, as a list of position codes. Schema `character`. */
   all_positions?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB player ID. Schema `integer` (an id). */
   person_id?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   person_full_name?: string | null;
-  /** Schema `character`. */
+  /** API relative link to the person. Schema `character`. */
   person_link?: string | null;
-  /** Schema `character`. */
+  /** Name as shown in box scores. Schema `character`. */
   person_boxscore_name?: string | null;
-  /** Schema `character`. */
+  /** Numeric scorekeeping position code. Schema `character`. */
   position_code?: string | null;
-  /** Schema `character`. */
+  /** Position name. Schema `character`. */
   position_name?: string | null;
-  /** Schema `character`. */
+  /** Position category (e.g. 'Pitcher', 'Infielder'). Schema `character`. */
   position_type?: string | null;
-  /** Schema `character`. */
+  /** Position abbreviation. Schema `character`. */
   position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Status code identifier (e.g. 'S', 'P', 'I', 'F'). Schema `character`. */
   status_code?: string | null;
-  /** Schema `character`. */
+  /** Roster status description (e.g. 'Active'). Schema `character`. */
   status_description?: string | null;
-  /** Schema `character`. */
+  /** Condensed text summary of the batter's performance line (e.g., '2-4, HR, 2 RBI') for display purposes. Schema `character`. */
   stats_batting_summary?: string | null;
-  /** Schema `double`. */
+  /** Number of games played indicator for this batter's boxscore row (typically 1 for a standard game appearance). Schema `double`. */
   stats_batting_games_played?: number | null;
-  /** Schema `double`. */
+  /** Number of outs recorded by the batter on fly balls in this game. Schema `double`. */
   stats_batting_fly_outs?: number | null;
-  /** Schema `double`. */
+  /** Number of outs recorded by the batter on ground balls in this game. Schema `double`. */
   stats_batting_ground_outs?: number | null;
-  /** Schema `double`. */
+  /** Number of outs recorded by the batter on balls hit in the air during this game. Schema `double`. */
   stats_batting_air_outs?: number | null;
-  /** Schema `double`. */
+  /** Number of runs scored by the batter in this game. Schema `double`. */
   stats_batting_runs?: number | null;
-  /** Schema `double`. */
+  /** Number of doubles hit by the batter in this game. Schema `double`. */
   stats_batting_doubles?: number | null;
-  /** Schema `double`. */
+  /** Number of triples hit by the batter in this game. Schema `double`. */
   stats_batting_triples?: number | null;
-  /** Schema `double`. */
+  /** Number of home runs hit by the batter in this game. Schema `double`. */
   stats_batting_home_runs?: number | null;
-  /** Schema `double`. */
+  /** Number of times the batter struck out in this game. Schema `double`. */
   stats_batting_strike_outs?: number | null;
-  /** Schema `double`. */
+  /** Number of walks (bases on balls) drawn by the batter in this game, including intentional walks. Schema `double`. */
   stats_batting_base_on_balls?: number | null;
-  /** Schema `double`. */
+  /** Number of intentional walks issued to the batter in this game. Schema `double`. */
   stats_batting_intentional_walks?: number | null;
-  /** Schema `double`. */
+  /** Total number of hits recorded by the batter in this game. Schema `double`. */
   stats_batting_hits?: number | null;
-  /** Schema `double`. */
+  /** Number of times the batter was hit by a pitch in this game. Schema `double`. */
   stats_batting_hit_by_pitch?: number | null;
-  /** Schema `double`. */
+  /** Number of official at-bats for the batter in this game. Schema `double`. */
   stats_batting_at_bats?: number | null;
-  /** Schema `double`. */
+  /** Number of times the batter was caught stealing in this game. Schema `double`. */
   stats_batting_caught_stealing?: number | null;
-  /** Schema `double`. */
+  /** Number of stolen bases recorded by the batter in this game. Schema `double`. */
   stats_batting_stolen_bases?: number | null;
-  /** Schema `character`. */
+  /** Percentage of stolen base attempts that were successful for the batter in this game. Schema `character`. */
   stats_batting_stolen_base_percentage?: string | null;
-  /** Schema `double`. */
+  /** Number of times the batter grounded into a double play in this game. Schema `double`. */
   stats_batting_ground_into_double_play?: number | null;
-  /** Schema `double`. */
+  /** Number of times the batter grounded into a triple play in this game. Schema `double`. */
   stats_batting_ground_into_triple_play?: number | null;
-  /** Schema `double`. */
+  /** Total number of plate appearances for the batter in this game. Schema `double`. */
   stats_batting_plate_appearances?: number | null;
-  /** Schema `double`. */
+  /** Total number of bases accumulated by the batter on hits in this game. Schema `double`. */
   stats_batting_total_bases?: number | null;
-  /** Schema `double`. */
+  /** Number of runs batted in (RBI) credited to the batter in this game. Schema `double`. */
   stats_batting_rbi?: number | null;
-  /** Schema `double`. */
+  /** Number of runners left on base when the batter made an out or the inning ended in this game. Schema `double`. */
   stats_batting_left_on_base?: number | null;
-  /** Schema `double`. */
+  /** Number of sacrifice bunts executed by the batter in this game. Schema `double`. */
   stats_batting_sac_bunts?: number | null;
-  /** Schema `double`. */
+  /** Number of sacrifice flies hit by the batter that scored a run in this game. Schema `double`. */
   stats_batting_sac_flies?: number | null;
-  /** Schema `double`. */
+  /** Number of times the batter reached base due to catcher's interference in this game. Schema `double`. */
   stats_batting_catchers_interference?: number | null;
-  /** Schema `double`. */
+  /** Number of times the batter was picked off base in this game. Schema `double`. */
   stats_batting_pickoffs?: number | null;
-  /** Schema `character`. */
+  /** At-bats per home run ratio for the batter in this game. Schema `character`. */
   stats_batting_at_bats_per_home_run?: string | null;
-  /** Schema `double`. */
+  /** Number of outs recorded by the batter on infield pop-ups in this game. Schema `double`. */
   stats_batting_pop_outs?: number | null;
-  /** Schema `double`. */
+  /** Number of outs recorded by the batter on line drives caught in this game. Schema `double`. */
   stats_batting_line_outs?: number | null;
-  /** Schema `double`. */
+  /** Number of baserunners caught stealing by the player (typically a catcher) in this game. Schema `double`. */
   stats_fielding_caught_stealing?: number | null;
-  /** Schema `double`. */
+  /** Number of stolen bases allowed by the player while fielding in this game. Schema `double`. */
   stats_fielding_stolen_bases?: number | null;
-  /** Schema `character`. */
+  /** Percentage of stolen base attempts against the player (catcher perspective) that were successful in this game. Schema `character`. */
   stats_fielding_stolen_base_percentage?: string | null;
-  /** Schema `character`. */
+  /** Percentage of stolen base attempts that the player threw out in this game. Schema `character`. */
   stats_fielding_caught_stealing_percentage?: string | null;
-  /** Schema `double`. */
+  /** Number of fielding assists recorded by the player in this game. Schema `double`. */
   stats_fielding_assists?: number | null;
-  /** Schema `double`. */
+  /** Number of putouts recorded by the player in this game. Schema `double`. */
   stats_fielding_put_outs?: number | null;
-  /** Schema `double`. */
+  /** Number of fielding errors committed by the player in this game. Schema `double`. */
   stats_fielding_errors?: number | null;
-  /** Schema `double`. */
+  /** Total fielding chances for the player in this game (putouts + assists + errors). Schema `double`. */
   stats_fielding_chances?: number | null;
-  /** Schema `character`. */
+  /** Fielding percentage for the player in this game, calculated as (putouts + assists) / total chances. Schema `character`. */
   stats_fielding_fielding?: string | null;
-  /** Schema `double`. */
+  /** Number of passed balls charged to the player (catcher-specific) in this game. Schema `double`. */
   stats_fielding_passed_ball?: number | null;
-  /** Schema `double`. */
+  /** Number of pickoffs credited to the player as a fielder in this game. Schema `double`. */
   stats_fielding_pickoffs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of games in which the batter appeared. Schema `integer`. */
   season_stats_batting_games_played?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of outs recorded by the batter on fly balls caught in the outfield. Schema `integer`. */
   season_stats_batting_fly_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of outs recorded by the batter on ground balls. Schema `integer`. */
   season_stats_batting_ground_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of outs recorded by the batter on balls hit in the air (fly balls and line drives caught). Schema `integer`. */
   season_stats_batting_air_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of runs scored by the batter. Schema `integer`. */
   season_stats_batting_runs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of doubles hit by the batter. Schema `integer`. */
   season_stats_batting_doubles?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of triples hit by the batter. Schema `integer`. */
   season_stats_batting_triples?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of home runs hit by the batter. Schema `integer`. */
   season_stats_batting_home_runs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of times the batter struck out. Schema `integer`. */
   season_stats_batting_strike_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date total walks (bases on balls) drawn by the batter, including intentional walks. Schema `integer`. */
   season_stats_batting_base_on_balls?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of intentional walks (IBB) issued to the batter. Schema `integer`. */
   season_stats_batting_intentional_walks?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date total number of hits recorded by the batter. Schema `integer`. */
   season_stats_batting_hits?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of times the batter was hit by a pitch. Schema `integer`. */
   season_stats_batting_hit_by_pitch?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date batting average (hits divided by at-bats) for the batter. Schema `character`. */
   season_stats_batting_avg?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of official at-bats accumulated by the batter. Schema `integer`. */
   season_stats_batting_at_bats?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date on-base percentage (OBP), measuring how often the batter reaches base per plate appearance. Schema `character`. */
   season_stats_batting_obp?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date slugging percentage (SLG), measuring total bases per at-bat. Schema `character`. */
   season_stats_batting_slg?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date on-base plus slugging percentage (OPS), a combined measure of a batter's ability to get on base and hit for power. Schema `character`. */
   season_stats_batting_ops?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of times the batter was caught stealing a base. Schema `integer`. */
   season_stats_batting_caught_stealing?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of bases stolen by the batter. Schema `integer`. */
   season_stats_batting_stolen_bases?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date percentage of stolen base attempts that were successful for the batter. Schema `character`. */
   season_stats_batting_stolen_base_percentage?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date percentage of stolen base attempts that resulted in the batter being caught stealing. Schema `character`. */
   season_stats_batting_caught_stealing_percentage?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of times the batter grounded into a double play. Schema `integer`. */
   season_stats_batting_ground_into_double_play?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of times the batter grounded into a triple play. Schema `integer`. */
   season_stats_batting_ground_into_triple_play?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date total number of plate appearances for the batter, including at-bats, walks, HBP, and sacrifices. Schema `integer`. */
   season_stats_batting_plate_appearances?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date total number of bases accumulated by the batter on hits. Schema `integer`. */
   season_stats_batting_total_bases?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of runs batted in (RBI) credited to the batter. Schema `integer`. */
   season_stats_batting_rbi?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of runners left on base when the batter made an out or the inning ended. Schema `integer`. */
   season_stats_batting_left_on_base?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of sacrifice bunts executed by the batter. Schema `integer`. */
   season_stats_batting_sac_bunts?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of sacrifice flies hit by the batter that scored a run. Schema `integer`. */
   season_stats_batting_sac_flies?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date Batting Average on Balls In Play (BABIP), measuring batting average excluding strikeouts and home runs. Schema `character`. */
   season_stats_batting_babip?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date ratio of ground outs to air outs, indicating the batter's tendency to hit the ball on the ground versus in the air. Schema `character`. */
   season_stats_batting_ground_outs_to_airouts?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of times the batter reached base due to catcher's interference. Schema `integer`. */
   season_stats_batting_catchers_interference?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of times the batter was picked off base by a pitcher or catcher. Schema `integer`. */
   season_stats_batting_pickoffs?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date ratio of at-bats per home run, reflecting the batter's home run frequency. Schema `character`. */
   season_stats_batting_at_bats_per_home_run?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of outs recorded by the batter on pop-ups caught in the infield. Schema `integer`. */
   season_stats_batting_pop_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of outs recorded by the batter on line drives caught. Schema `integer`. */
   season_stats_batting_line_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of games the pitcher was active on the roster (may include non-pitching appearances). Schema `integer`. */
   season_stats_pitching_games_played?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of games in which the pitcher was the starting pitcher. Schema `integer`. */
   season_stats_pitching_games_started?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of outs recorded by the pitcher on fly balls. Schema `integer`. */
   season_stats_pitching_fly_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of outs recorded by the pitcher on ground balls. Schema `integer`. */
   season_stats_pitching_ground_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of outs recorded by the pitcher on balls hit in the air. Schema `integer`. */
   season_stats_pitching_air_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date total runs (earned and unearned) allowed by the pitcher. Schema `integer`. */
   season_stats_pitching_runs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of doubles allowed by the pitcher. Schema `integer`. */
   season_stats_pitching_doubles?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of triples allowed by the pitcher. Schema `integer`. */
   season_stats_pitching_triples?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of home runs allowed by the pitcher. Schema `integer`. */
   season_stats_pitching_home_runs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of batters struck out by the pitcher. Schema `integer`. */
   season_stats_pitching_strike_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date total walks (bases on balls) issued by the pitcher, including intentional walks. Schema `integer`. */
   season_stats_pitching_base_on_balls?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of intentional walks (IBB) issued by the pitcher. Schema `integer`. */
   season_stats_pitching_intentional_walks?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of hits allowed by the pitcher. Schema `integer`. */
   season_stats_pitching_hits?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of hit-by-pitch events while the pitcher was pitching (alternate field name for hit_batsmen). Schema `integer`. */
   season_stats_pitching_hit_by_pitch?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of at-bats faced by the pitcher (excluding walks, HBP, and sacrifices). Schema `integer`. */
   season_stats_pitching_at_bats?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date on-base percentage allowed by the pitcher (opponents' OBP against this pitcher). Schema `character`. */
   season_stats_pitching_obp?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of baserunners caught stealing while the pitcher was on the mound. Schema `integer`. */
   season_stats_pitching_caught_stealing?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of stolen bases allowed while the pitcher was pitching. Schema `integer`. */
   season_stats_pitching_stolen_bases?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date percentage of stolen base attempts that were successful while the pitcher was on the mound. Schema `character`. */
   season_stats_pitching_stolen_base_percentage?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date percentage of stolen base attempts that were thrown out while the pitcher was pitching. Schema `character`. */
   season_stats_pitching_caught_stealing_percentage?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date total number of pitches thrown by the pitcher. Schema `integer`. */
   season_stats_pitching_number_of_pitches?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date Earned Run Average (ERA) for the pitcher, expressed as earned runs per nine innings. Schema `character`. */
   season_stats_pitching_era?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date total innings pitched, expressed as a decimal where each out is one-third of an inning. Schema `character`. */
   season_stats_pitching_innings_pitched?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of wins credited to the pitcher. Schema `integer`. */
   season_stats_pitching_wins?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of losses charged to the pitcher. Schema `integer`. */
   season_stats_pitching_losses?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of saves recorded by the pitcher. Schema `integer`. */
   season_stats_pitching_saves?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of save opportunities the pitcher entered (leads of three runs or fewer in the seventh inning or later, or entering with the tying run on base). Schema `integer`. */
   season_stats_pitching_save_opportunities?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of holds recorded by the pitcher (relief appearance maintaining a lead without a save situation). Schema `integer`. */
   season_stats_pitching_holds?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of blown save opportunities for the pitcher. Schema `integer`. */
   season_stats_pitching_blown_saves?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of earned runs allowed by the pitcher. Schema `integer`. */
   season_stats_pitching_earned_runs?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date Walks plus Hits per Inning Pitched (WHIP), measuring baserunners allowed per inning. Schema `character`. */
   season_stats_pitching_whip?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date total number of batters faced by the pitcher. Schema `integer`. */
   season_stats_pitching_batters_faced?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date total number of outs recorded by the pitcher. Schema `integer`. */
   season_stats_pitching_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of games in which the pitcher appeared. Schema `integer`. */
   season_stats_pitching_games_pitched?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of complete games pitched by the pitcher. Schema `integer`. */
   season_stats_pitching_complete_games?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of complete-game shutouts pitched. Schema `integer`. */
   season_stats_pitching_shutouts?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of ball calls recorded against the pitcher. Schema `integer`. */
   season_stats_pitching_balls?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date total number of strikes thrown by the pitcher. Schema `integer`. */
   season_stats_pitching_strikes?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date percentage of all pitches thrown that were strikes. Schema `character`. */
   season_stats_pitching_strike_percentage?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of batters hit by a pitch thrown by the pitcher. Schema `integer`. */
   season_stats_pitching_hit_batsmen?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of balks called against the pitcher. Schema `integer`. */
   season_stats_pitching_balks?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of wild pitches thrown by the pitcher. Schema `integer`. */
   season_stats_pitching_wild_pitches?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of pickoffs executed by the pitcher. Schema `integer`. */
   season_stats_pitching_pickoffs?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date ratio of ground ball outs to air ball outs allowed by the pitcher. Schema `character`. */
   season_stats_pitching_ground_outs_to_airouts?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of RBI allowed (runs batted in by opposing batters) while this pitcher was pitching. Schema `integer`. */
   season_stats_pitching_rbi?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date winning percentage for the pitcher (wins divided by decisions). Schema `character`. */
   season_stats_pitching_win_percentage?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date average number of pitches thrown per inning by the pitcher. Schema `character`. */
   season_stats_pitching_pitches_per_inning?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of games in which the pitcher was the last pitcher used by their team. Schema `integer`. */
   season_stats_pitching_games_finished?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date ratio of strikeouts to walks, measuring the pitcher's command and dominance. Schema `character`. */
   season_stats_pitching_strikeout_walk_ratio?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date strikeouts recorded per nine innings pitched (K/9), a rate measure of strikeout ability. Schema `character`. */
   season_stats_pitching_strikeouts_per9_inn?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date walks issued per nine innings pitched (BB/9), a rate measure of control. Schema `character`. */
   season_stats_pitching_walks_per9_inn?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date hits allowed per nine innings pitched, a rate stat measuring hit prevention. Schema `character`. */
   season_stats_pitching_hits_per9_inn?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date total runs (including unearned) allowed per nine innings pitched. Schema `character`. */
   season_stats_pitching_runs_scored_per9?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date home runs allowed per nine innings pitched. Schema `character`. */
   season_stats_pitching_home_runs_per9?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of baserunners already on base when the pitcher entered the game. Schema `integer`. */
   season_stats_pitching_inherited_runners?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of inherited runners who eventually scored while or after the pitcher was pitching. Schema `integer`. */
   season_stats_pitching_inherited_runners_scored?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of times the pitcher benefited from a catcher's interference call. Schema `integer`. */
   season_stats_pitching_catchers_interference?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of sacrifice bunts allowed by the pitcher. Schema `integer`. */
   season_stats_pitching_sac_bunts?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of sacrifice flies allowed by the pitcher. Schema `integer`. */
   season_stats_pitching_sac_flies?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of passed balls that occurred while the pitcher was pitching. Schema `integer`. */
   season_stats_pitching_passed_ball?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of outs recorded by the pitcher on pop-ups caught in the infield. Schema `integer`. */
   season_stats_pitching_pop_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of outs recorded by the pitcher on line drives caught. Schema `integer`. */
   season_stats_pitching_line_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of baserunners caught stealing by the player (typically a catcher stat). Schema `integer`. */
   season_stats_fielding_caught_stealing?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of stolen bases allowed by the player while fielding (typically catcher). Schema `integer`. */
   season_stats_fielding_stolen_bases?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date percentage of stolen base attempts against the player that were successful (catcher perspective). Schema `character`. */
   season_stats_fielding_stolen_base_percentage?: string | null;
-  /** Schema `character`. */
+  /** Season-to-date percentage of stolen base attempts that the player (usually a catcher) threw out. Schema `character`. */
   season_stats_fielding_caught_stealing_percentage?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of fielding assists recorded by the player (touching the ball before a putout by a teammate). Schema `integer`. */
   season_stats_fielding_assists?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of putouts recorded by the player (directly retiring a baserunner or batter). Schema `integer`. */
   season_stats_fielding_put_outs?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of fielding errors committed by the player. Schema `integer`. */
   season_stats_fielding_errors?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date total fielding chances for the player (putouts + assists + errors). Schema `integer`. */
   season_stats_fielding_chances?: number | null;
-  /** Schema `character`. */
+  /** Season-to-date fielding percentage for the player, calculated as (putouts + assists) / total chances. Schema `character`. */
   season_stats_fielding_fielding?: string | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of passed balls charged to the player (catcher-specific). Schema `integer`. */
   season_stats_fielding_passed_ball?: number | null;
-  /** Schema `integer`. */
+  /** Season-to-date number of pickoffs credited to the player as a fielder. Schema `integer`. */
   season_stats_fielding_pickoffs?: number | null;
-  /** Schema `logical`. */
+  /** Indicates whether the player is currently at bat at the moment the boxscore was captured. Schema `logical`. */
   game_status_is_current_batter?: boolean | null;
-  /** Schema `logical`. */
+  /** Indicates whether the player is currently pitching at the moment the boxscore was captured. Schema `logical`. */
   game_status_is_current_pitcher?: boolean | null;
-  /** Schema `logical`. */
+  /** Indicates whether the player is currently on the bench (not in the active lineup) at time of capture. Schema `logical`. */
   game_status_is_on_bench?: boolean | null;
-  /** Schema `logical`. */
+  /** Indicates whether the player entered the game as a substitute for another player. Schema `logical`. */
   game_status_is_substitute?: boolean | null;
-  /** Schema `double`. */
+  /** Indicator of whether the player started at a fielding position in this game. Schema `double`. */
   stats_fielding_games_started?: number | null;
-  /** Schema `double`. */
+  /** Season-to-date number of games in which the player started at a fielding position. Schema `double`. */
   season_stats_fielding_games_started?: number | null;
-  /** Schema `double`. */
+  /** Season-to-date total pitches thrown by the pitcher (may differ from number_of_pitches if strikes/balls are tracked separately). Schema `double`. */
   season_stats_pitching_pitches_thrown?: number | null;
-  /** Schema `character`. */
+  /** Condensed text summary of the pitcher's performance line (e.g., '6.0 IP, 2 ER, 8 K') for display purposes. Schema `character`. */
   stats_pitching_summary?: string | null;
-  /** Schema `double`. */
+  /** Number of games the pitcher appeared in for this boxscore row (typically 1). Schema `double`. */
   stats_pitching_games_played?: number | null;
-  /** Schema `double`. */
+  /** Indicator of whether the pitcher was the starting pitcher in this game. Schema `double`. */
   stats_pitching_games_started?: number | null;
-  /** Schema `double`. */
+  /** Number of outs recorded by the pitcher on fly balls in this game. Schema `double`. */
   stats_pitching_fly_outs?: number | null;
-  /** Schema `double`. */
+  /** Number of outs recorded by the pitcher on ground balls in this game. Schema `double`. */
   stats_pitching_ground_outs?: number | null;
-  /** Schema `double`. */
+  /** Number of outs recorded by the pitcher on balls hit in the air in this game. Schema `double`. */
   stats_pitching_air_outs?: number | null;
-  /** Schema `double`. */
+  /** Total runs (earned and unearned) allowed by the pitcher in this game. Schema `double`. */
   stats_pitching_runs?: number | null;
-  /** Schema `double`. */
+  /** Number of doubles allowed by the pitcher in this game. Schema `double`. */
   stats_pitching_doubles?: number | null;
-  /** Schema `double`. */
+  /** Number of triples allowed by the pitcher in this game. Schema `double`. */
   stats_pitching_triples?: number | null;
-  /** Schema `double`. */
+  /** Number of home runs allowed by the pitcher in this game. Schema `double`. */
   stats_pitching_home_runs?: number | null;
-  /** Schema `double`. */
+  /** Number of batters struck out by the pitcher in this game. Schema `double`. */
   stats_pitching_strike_outs?: number | null;
-  /** Schema `double`. */
+  /** Number of walks (bases on balls) issued by the pitcher in this game, including intentional walks. Schema `double`. */
   stats_pitching_base_on_balls?: number | null;
-  /** Schema `double`. */
+  /** Number of intentional walks (IBB) issued by the pitcher in this game. Schema `double`. */
   stats_pitching_intentional_walks?: number | null;
-  /** Schema `double`. */
+  /** Number of hits allowed by the pitcher in this game. Schema `double`. */
   stats_pitching_hits?: number | null;
-  /** Schema `double`. */
+  /** Number of hit-by-pitch events while the pitcher was pitching in this game (alternate field for hit_batsmen). Schema `double`. */
   stats_pitching_hit_by_pitch?: number | null;
-  /** Schema `double`. */
+  /** Number of at-bats faced by the pitcher (excluding walks, HBP, and sacrifices) in this game. Schema `double`. */
   stats_pitching_at_bats?: number | null;
-  /** Schema `double`. */
+  /** Number of baserunners caught stealing while the pitcher was on the mound in this game. Schema `double`. */
   stats_pitching_caught_stealing?: number | null;
-  /** Schema `double`. */
+  /** Number of stolen bases allowed while the pitcher was pitching in this game. Schema `double`. */
   stats_pitching_stolen_bases?: number | null;
-  /** Schema `character`. */
+  /** Percentage of stolen base attempts that were successful while the pitcher was on the mound in this game. Schema `character`. */
   stats_pitching_stolen_base_percentage?: string | null;
-  /** Schema `double`. */
+  /** Total number of pitches thrown by the pitcher in this game. Schema `double`. */
   stats_pitching_number_of_pitches?: number | null;
-  /** Schema `character`. */
+  /** Total innings pitched by the pitcher in this game, expressed as a decimal (each out counts as one-third of an inning). Schema `character`. */
   stats_pitching_innings_pitched?: string | null;
-  /** Schema `double`. */
+  /** Indicator of whether the pitcher was credited with the win in this game. Schema `double`. */
   stats_pitching_wins?: number | null;
-  /** Schema `double`. */
+  /** Indicator of whether the pitcher was charged with the loss in this game. Schema `double`. */
   stats_pitching_losses?: number | null;
-  /** Schema `double`. */
+  /** Indicator of whether the pitcher recorded a save in this game. Schema `double`. */
   stats_pitching_saves?: number | null;
-  /** Schema `double`. */
+  /** Number of save opportunities the pitcher entered in this game. Schema `double`. */
   stats_pitching_save_opportunities?: number | null;
-  /** Schema `double`. */
+  /** Number of holds recorded by the pitcher in this game. Schema `double`. */
   stats_pitching_holds?: number | null;
-  /** Schema `double`. */
+  /** Number of blown save opportunities for the pitcher in this game. Schema `double`. */
   stats_pitching_blown_saves?: number | null;
-  /** Schema `double`. */
+  /** Number of earned runs allowed by the pitcher in this game. Schema `double`. */
   stats_pitching_earned_runs?: number | null;
-  /** Schema `double`. */
+  /** Total number of batters faced by the pitcher in this game. Schema `double`. */
   stats_pitching_batters_faced?: number | null;
-  /** Schema `double`. */
+  /** Total number of outs recorded by the pitcher in this game. Schema `double`. */
   stats_pitching_outs?: number | null;
-  /** Schema `double`. */
+  /** Number of pitching appearances for the pitcher in this game (typically 1). Schema `double`. */
   stats_pitching_games_pitched?: number | null;
-  /** Schema `double`. */
+  /** Indicator of whether the pitcher threw a complete game in this appearance. Schema `double`. */
   stats_pitching_complete_games?: number | null;
-  /** Schema `double`. */
+  /** Indicator of whether the pitcher recorded a complete-game shutout in this game. Schema `double`. */
   stats_pitching_shutouts?: number | null;
-  /** Schema `double`. */
+  /** Total pitches thrown by the pitcher in this game (may differ from number_of_pitches depending on tracking method). Schema `double`. */
   stats_pitching_pitches_thrown?: number | null;
-  /** Schema `double`. */
+  /** Number of ball calls recorded against the pitcher in this game. Schema `double`. */
   stats_pitching_balls?: number | null;
-  /** Schema `double`. */
+  /** Total number of strikes thrown by the pitcher in this game. Schema `double`. */
   stats_pitching_strikes?: number | null;
-  /** Schema `character`. */
+  /** Percentage of all pitches thrown that were strikes in this game. Schema `character`. */
   stats_pitching_strike_percentage?: string | null;
-  /** Schema `double`. */
+  /** Number of batters hit by a pitch thrown by the pitcher in this game. Schema `double`. */
   stats_pitching_hit_batsmen?: number | null;
-  /** Schema `double`. */
+  /** Number of balks called against the pitcher in this game. Schema `double`. */
   stats_pitching_balks?: number | null;
-  /** Schema `double`. */
+  /** Number of wild pitches thrown by the pitcher in this game. Schema `double`. */
   stats_pitching_wild_pitches?: number | null;
-  /** Schema `double`. */
+  /** Number of pickoffs executed by the pitcher in this game. Schema `double`. */
   stats_pitching_pickoffs?: number | null;
-  /** Schema `double`. */
+  /** Number of RBI allowed (runs batted in by opposing batters off this pitcher) in this game. Schema `double`. */
   stats_pitching_rbi?: number | null;
-  /** Schema `double`. */
+  /** Indicator of whether the pitcher was the last pitcher used by their team in this game. Schema `double`. */
   stats_pitching_games_finished?: number | null;
-  /** Schema `character`. */
+  /** Total runs (including unearned) allowed per nine innings rate for the pitcher in this game. Schema `character`. */
   stats_pitching_runs_scored_per9?: string | null;
-  /** Schema `character`. */
+  /** Home runs allowed per nine innings rate for the pitcher in this game. Schema `character`. */
   stats_pitching_home_runs_per9?: string | null;
-  /** Schema `double`. */
+  /** Number of baserunners already on base when the pitcher entered the game. Schema `double`. */
   stats_pitching_inherited_runners?: number | null;
-  /** Schema `double`. */
+  /** Number of inherited runners who scored while or after the pitcher was pitching in this game. Schema `double`. */
   stats_pitching_inherited_runners_scored?: number | null;
-  /** Schema `double`. */
+  /** Number of catcher's interference calls that occurred while the pitcher was pitching in this game. Schema `double`. */
   stats_pitching_catchers_interference?: number | null;
-  /** Schema `double`. */
+  /** Number of sacrifice bunts allowed by the pitcher in this game. Schema `double`. */
   stats_pitching_sac_bunts?: number | null;
-  /** Schema `double`. */
+  /** Number of sacrifice flies allowed by the pitcher in this game. Schema `double`. */
   stats_pitching_sac_flies?: number | null;
-  /** Schema `double`. */
+  /** Number of passed balls that occurred while the pitcher was pitching in this game. Schema `double`. */
   stats_pitching_passed_ball?: number | null;
-  /** Schema `double`. */
+  /** Number of outs recorded by the pitcher on infield pop-ups in this game. Schema `double`. */
   stats_pitching_pop_outs?: number | null;
-  /** Schema `double`. */
+  /** Number of outs recorded by the pitcher on line drives caught in this game. Schema `double`. */
   stats_pitching_line_outs?: number | null;
-  /** Schema `character`. */
+  /** Supplementary note or annotation attached to the pitcher's boxscore line (e.g., indicating a special circumstance). Schema `character`. */
   stats_pitching_note?: string | null;
-  /** Schema `character`. */
+  /** Supplementary note or annotation attached to the batter's boxscore line (e.g., indicating a special circumstance). Schema `character`. */
   stats_batting_note?: string | null;
 }
 
@@ -830,25 +830,25 @@ export interface MlbBoxscoreRow {
  * One row of `sdv.mlb.mlb_conference({ parsed: true })` (returns schema `native/mlb/conference`, verified on a real sdv-py capture).
  */
 export interface MlbConferenceRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Short abbreviation. Schema `character`. */
   abbreviation?: string | null;
-  /** Schema `logical`. */
+  /** Whether the season has a wild card round. Schema `logical`. */
   has_wildcard?: boolean | null;
   /** Schema `character`. */
   name_short?: string | null;
-  /** Schema `integer` (an id). */
+  /** League MLBAM ID. Schema `integer` (an id). */
   league_id?: string | null;
-  /** Schema `character`. */
+  /** API link to the league. Schema `character`. */
   league_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** Sport MLBAM ID. Schema `integer` (an id). */
   sport_id?: string | null;
-  /** Schema `character`. */
+  /** API link to the sport. Schema `character`. */
   sport_link?: string | null;
 }
 
@@ -856,25 +856,25 @@ export interface MlbConferenceRow {
  * One row of `sdv.mlb.mlb_conferences({ parsed: true })` (returns schema `native/mlb/conferences`, verified on a real sdv-py capture).
  */
 export interface MlbConferencesRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Short abbreviation. Schema `character`. */
   abbreviation?: string | null;
-  /** Schema `logical`. */
+  /** Whether the season has a wild card round. Schema `logical`. */
   has_wildcard?: boolean | null;
   /** Schema `character`. */
   name_short?: string | null;
-  /** Schema `integer` (an id). */
+  /** League MLBAM ID. Schema `integer` (an id). */
   league_id?: string | null;
-  /** Schema `character`. */
+  /** API link to the league. Schema `character`. */
   league_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** Sport MLBAM ID. Schema `integer` (an id). */
   sport_id?: string | null;
-  /** Schema `character`. */
+  /** API link to the sport. Schema `character`. */
   sport_link?: string | null;
 }
 
@@ -882,19 +882,19 @@ export interface MlbConferencesRow {
  * One row of `sdv.mlb.mlb_datacasters({ parsed: true })` (returns schema `native/mlb/datacasters`, verified on a real sdv-py capture).
  */
 export interface MlbDatacastersRow {
-  /** Schema `character`. */
+  /** Jersey number worn (often blank for non-uniformed roles). Schema `character`. */
   jersey_number?: string | null;
-  /** Schema `character`. */
+  /** Job title (e.g. 'Umpire'). Schema `character`. */
   job?: string | null;
-  /** Schema `character` (an id). */
+  /** Job code identifier. Schema `character` (an id). */
   job_id?: string | null;
-  /** Schema `character`. */
+  /** Specific role title for the assignment. Schema `character`. */
   title?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB player ID. Schema `integer` (an id). */
   person_id?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   person_full_name?: string | null;
-  /** Schema `character`. */
+  /** API relative link to the person. Schema `character`. */
   person_link?: string | null;
 }
 
@@ -902,193 +902,193 @@ export interface MlbDatacastersRow {
  * One row of `sdv.mlb.mlb_draft_latest({ parsed: true })` (returns schema `native/mlb/draft_latest`, verified on a real sdv-py capture).
  */
 export interface MlbDraftLatestRow {
-  /** Schema `integer`. */
+  /** Jersey number. Schema `integer`. */
   number?: number | null;
-  /** Schema `character`. */
+  /** Indicates whether this draft slot is the next pick to be made in the current draft. Schema `character`. */
   next_up?: string | null;
-  /** Schema `character`. */
+  /** Draft round in which this pick was made (e.g., '1', '2', 'CB-A' for competitive balance). Schema `character`. */
   pick_pick_round?: string | null;
-  /** Schema `integer`. */
+  /** Overall pick number of this selection counting sequentially across all rounds of the draft. Schema `integer`. */
   pick_pick_number?: number | null;
-  /** Schema `integer`. */
+  /** The formatted overall pick number displayed publicly for this draft selection. Schema `integer`. */
   pick_display_pick_number?: number | null;
-  /** Schema `integer`. */
+  /** Pick number within the specific draft round (i.e., the Nth pick in that round). Schema `integer`. */
   pick_round_pick_number?: number | null;
-  /** Schema `character`. */
+  /** Reported or slotted signing bonus amount associated with this draft pick. Schema `character`. */
   pick_signing_bonus?: string | null;
-  /** Schema `character`. */
+  /** City of the draftee's listed home address at the time of the draft. Schema `character`. */
   pick_home_city?: string | null;
-  /** Schema `character`. */
+  /** State or province of the draftee's listed home address at the time of the draft. Schema `character`. */
   pick_home_state?: string | null;
-  /** Schema `character`. */
+  /** Country of the draftee's listed home address at the time of the draft. Schema `character`. */
   pick_home_country?: string | null;
-  /** Schema `character`. */
+  /** Name of the high school or college the draftee attended before being drafted. Schema `character`. */
   pick_school_name?: string | null;
-  /** Schema `character`. */
+  /** Academic class or level of the draftee at their school (e.g., High School, Junior, Senior). Schema `character`. */
   pick_school_school_class?: string | null;
-  /** Schema `character`. */
+  /** City of the high school or college the draftee attended before being drafted. Schema `character`. */
   pick_school_city?: string | null;
-  /** Schema `character`. */
+  /** Country of the school the draftee attended. Schema `character`. */
   pick_school_country?: string | null;
-  /** Schema `character`. */
+  /** State of the school the draftee attended. Schema `character`. */
   pick_school_state?: string | null;
-  /** Schema `character`. */
+  /** URL to the headshot image of the drafted player on the MLB Stats API CDN. Schema `character`. */
   pick_headshot_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique MLB Stats API (MLBAM) identifier for the drafted player. Schema `integer` (an id). */
   pick_person_id?: string | null;
-  /** Schema `character`. */
+  /** Player's complete display name as used throughout the MLB Stats API. Schema `character`. */
   pick_person_full_name?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the player's resource in the MLB Stats API. Schema `character`. */
   pick_person_link?: string | null;
-  /** Schema `character`. */
+  /** The player's legal or preferred first name. Schema `character`. */
   pick_person_first_name?: string | null;
-  /** Schema `character`. */
+  /** The player's legal or preferred last name. Schema `character`. */
   pick_person_last_name?: string | null;
-  /** Schema `character`. */
+  /** Date of birth of the drafted player in ISO 8601 format. Schema `character`. */
   pick_person_birth_date?: string | null;
-  /** Schema `integer`. */
+  /** Age of the drafted player in years at the time of the data retrieval. Schema `integer`. */
   pick_person_current_age?: number | null;
-  /** Schema `character`. */
+  /** City where the drafted player was born. Schema `character`. */
   pick_person_birth_city?: string | null;
-  /** Schema `character`. */
+  /** State or province where the drafted player was born. Schema `character`. */
   pick_person_birth_state_province?: string | null;
-  /** Schema `character`. */
+  /** Country where the drafted player was born. Schema `character`. */
   pick_person_birth_country?: string | null;
-  /** Schema `character`. */
+  /** Player's height in feet-and-inches notation (e.g., 6' 2"). Schema `character`. */
   pick_person_height?: string | null;
-  /** Schema `integer`. */
+  /** Player's weight in pounds as recorded by the MLB Stats API. Schema `integer`. */
   pick_person_weight?: number | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the drafted player is currently on an active MLB roster. Schema `logical`. */
   pick_person_active?: boolean | null;
-  /** Schema `character`. */
+  /** Numeric or short code identifying the player's primary fielding position. Schema `character`. */
   pick_person_primary_position_code?: string | null;
-  /** Schema `character`. */
+  /** Full name of the player's primary fielding position (e.g., Shortstop, Center Field). Schema `character`. */
   pick_person_primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Broad classification of the player's position role (e.g., Pitcher, Infielder, Outfielder). Schema `character`. */
   pick_person_primary_position_type?: string | null;
-  /** Schema `character`. */
+  /** Short abbreviation for the player's primary fielding position (e.g., SS, CF, SP). Schema `character`. */
   pick_person_primary_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** The first name or nickname the player prefers to use publicly. Schema `character`. */
   pick_person_use_name?: string | null;
-  /** Schema `character`. */
+  /** The last name the player prefers to use publicly, which may differ from the legal last name. Schema `character`. */
   pick_person_use_last_name?: string | null;
-  /** Schema `character`. */
+  /** The player's middle name as recorded by the MLB Stats API. Schema `character`. */
   pick_person_middle_name?: string | null;
-  /** Schema `character`. */
+  /** Abbreviated name format used for the player on official MLB box scores. Schema `character`. */
   pick_person_boxscore_name?: string | null;
-  /** Schema `character`. */
+  /** Recorded gender of the drafted player. Schema `character`. */
   pick_person_gender?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this person is classified as an active player in the MLB Stats API. Schema `logical`. */
   pick_person_is_player?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the player's profile has been verified by MLB. Schema `logical`. */
   pick_person_is_verified?: boolean | null;
-  /** Schema `integer`. */
+  /** The MLB draft year in which this player was originally selected. Schema `integer`. */
   pick_person_draft_year?: number | null;
-  /** Schema `character`. */
+  /** Single-letter code for the player's batting handedness (e.g., R, L, S for switch). Schema `character`. */
   pick_person_bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** Full description of the player's batting side (e.g., Right, Left, Switch). Schema `character`. */
   pick_person_bat_side_description?: string | null;
-  /** Schema `character`. */
+  /** Single-letter code for the player's pitching handedness (e.g., R, L, S). Schema `character`. */
   pick_person_pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** Full description of the player's pitching hand (e.g., Right, Left, Switch). Schema `character`. */
   pick_person_pitch_hand_description?: string | null;
-  /** Schema `character`. */
+  /** Player's display name in first-last format, typically matching the broadcast name. Schema `character`. */
   pick_person_name_first_last?: string | null;
-  /** Schema `character`. */
+  /** URL-safe slug derived from the player's name for use in web links. Schema `character`. */
   pick_person_name_slug?: string | null;
-  /** Schema `character`. */
+  /** Player's name formatted as first name followed by last name. Schema `character`. */
   pick_person_first_last_name?: string | null;
-  /** Schema `character`. */
+  /** Player's name formatted as last name followed by first name. Schema `character`. */
   pick_person_last_first_name?: string | null;
-  /** Schema `character`. */
+  /** Player's name formatted as last name followed by first initial. Schema `character`. */
   pick_person_last_init_name?: string | null;
-  /** Schema `character`. */
+  /** Player's name formatted as first initial followed by last name (e.g., J. Smith). Schema `character`. */
   pick_person_init_last_name?: string | null;
-  /** Schema `character`. */
+  /** Player's full name in first-middle-last order as recorded by the MLB Stats API. Schema `character`. */
   pick_person_full_fml_name?: string | null;
-  /** Schema `character`. */
+  /** Player's full name in last-first-middle order as recorded by the MLB Stats API. Schema `character`. */
   pick_person_full_lfm_name?: string | null;
-  /** Schema `double`. */
+  /** Upper boundary of the player's personalized strike zone in feet from the ground. Schema `double`. */
   pick_person_strike_zone_top?: number | null;
-  /** Schema `double`. */
+  /** Lower boundary of the player's personalized strike zone in feet from the ground. Schema `double`. */
   pick_person_strike_zone_bottom?: number | null;
-  /** Schema `character` (an id). */
+  /** Serialized cross-reference identifiers linking the player to external data systems. Schema `character` (an id). */
   pick_person_xref_ids?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB Stats API identifier for the team's spring training league. Schema `integer` (an id). */
   pick_team_spring_league_id?: string | null;
-  /** Schema `character`. */
+  /** Full name of the spring training league the team belongs to. Schema `character`. */
   pick_team_spring_league_name?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the spring training league resource in the MLB Stats API. Schema `character`. */
   pick_team_spring_league_link?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation for the spring training league the team participates in (e.g., Cactus, Grapefruit). Schema `character`. */
   pick_team_spring_league_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** All-Star game affiliation status of the team (e.g., American League, National League). Schema `character`. */
   pick_team_all_star_status?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique MLB Stats API identifier for the team that made this draft pick. Schema `integer` (an id). */
   pick_team_id?: string | null;
-  /** Schema `character`. */
+  /** Full official name of the MLB team that made this pick (e.g., New York Yankees). Schema `character`. */
   pick_team_name?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the team resource in the MLB Stats API. Schema `character`. */
   pick_team_link?: string | null;
-  /** Schema `integer`. */
+  /** MLB season year for which this team's metadata snapshot applies. Schema `integer`. */
   pick_team_season?: number | null;
-  /** Schema `integer` (an id). */
+  /** MLB Stats API identifier for the team's regular-season home ballpark. Schema `integer` (an id). */
   pick_team_venue_id?: string | null;
-  /** Schema `character`. */
+  /** Name of the team's regular-season home ballpark (e.g., Yankee Stadium). Schema `character`. */
   pick_team_venue_name?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the team's regular-season home venue in the MLB Stats API. Schema `character`. */
   pick_team_venue_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB Stats API identifier for the team's spring training ballpark. Schema `integer` (an id). */
   pick_team_spring_venue_id?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the spring training venue resource in the MLB Stats API. Schema `character`. */
   pick_team_spring_venue_link?: string | null;
-  /** Schema `character`. */
+  /** Short internal code used by MLB to identify the team in system contexts. Schema `character`. */
   pick_team_team_code?: string | null;
-  /** Schema `character`. */
+  /** Lowercase file-system-safe code used internally by MLB to identify the team. Schema `character`. */
   pick_team_file_code?: string | null;
-  /** Schema `character`. */
+  /** Standard two- or three-letter abbreviation for the MLB team that made this pick. Schema `character`. */
   pick_team_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** The nickname portion of the team's full name (e.g., Yankees, Dodgers). Schema `character`. */
   pick_team_team_name?: string | null;
-  /** Schema `character`. */
+  /** Geographic location name (city/metro) associated with the team (e.g., New York). Schema `character`. */
   pick_team_location_name?: string | null;
-  /** Schema `character`. */
+  /** Year in which the selecting franchise first played as an MLB team. Schema `character`. */
   pick_team_first_year_of_play?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB Stats API identifier for the league (American or National) of the selecting team. Schema `integer` (an id). */
   pick_team_league_id?: string | null;
-  /** Schema `character`. */
+  /** Full name of the league the selecting team belongs to (e.g., American League). Schema `character`. */
   pick_team_league_name?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the league resource in the MLB Stats API. Schema `character`. */
   pick_team_league_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB Stats API identifier for the division the selecting team belongs to. Schema `integer` (an id). */
   pick_team_division_id?: string | null;
-  /** Schema `character`. */
+  /** Full name of the division the selecting team belongs to (e.g., AL East). Schema `character`. */
   pick_team_division_name?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the division resource in the MLB Stats API. Schema `character`. */
   pick_team_division_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB Stats API identifier for the sport classification (MLB = 1). Schema `integer` (an id). */
   pick_team_sport_id?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the sport resource in the MLB Stats API. Schema `character`. */
   pick_team_sport_link?: string | null;
-  /** Schema `character`. */
+  /** Full name of the sport classification for the team (e.g., Major League Baseball). Schema `character`. */
   pick_team_sport_name?: string | null;
-  /** Schema `character`. */
+  /** Shortened version of the team name used in space-constrained display contexts. Schema `character`. */
   pick_team_short_name?: string | null;
-  /** Schema `character`. */
+  /** Historical franchise name that persists across any team relocations or renames. Schema `character`. */
   pick_team_franchise_name?: string | null;
-  /** Schema `character`. */
+  /** Informal club or nickname portion of the team's full name (e.g., Yankees, Red Sox). Schema `character`. */
   pick_team_club_name?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the selecting MLB franchise is currently active. Schema `logical`. */
   pick_team_active?: boolean | null;
-  /** Schema `character`. */
+  /** Short code identifying the type of draft (e.g., amateur, Rule 5) for this pick. Schema `character`. */
   pick_draft_type_code?: string | null;
-  /** Schema `character`. */
+  /** Human-readable description of the draft type associated with this pick. Schema `character`. */
   pick_draft_type_description?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this draft slot has been filled with an actual selection. Schema `logical`. */
   pick_is_drafted?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the selecting team passed on this pick rather than making a selection. Schema `logical`. */
   pick_is_pass?: boolean | null;
-  /** Schema `character`. */
+  /** MLB draft year for which this pick record applies. Schema `character`. */
   pick_year?: string | null;
 }
 
@@ -1096,39 +1096,39 @@ export interface MlbDraftLatestRow {
  * One row of `sdv.mlb.mlb_free_agents({ parsed: true })` (returns schema `native/mlb/free_agents`, verified on a real sdv-py capture).
  */
 export interface MlbFreeAgentsRow {
-  /** Schema `character`. */
+  /** Notes. Schema `character`. */
   notes?: string | null;
-  /** Schema `character`. */
+  /** Date the player declared free agency (YYYY-MM-DD). Schema `character`. */
   date_declared?: string | null;
-  /** Schema `integer` (an id). */
+  /** stats.ncaa.org player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   player_full_name?: string | null;
-  /** Schema `character`. */
+  /** API relative link to the player. Schema `character`. */
   player_link?: string | null;
-  /** Schema `double` (an id). */
+  /** Team id the player left. Schema `double` (an id). */
   original_team_id?: string | number | null;
-  /** Schema `character`. */
+  /** Name of the team the player left. Schema `character`. */
   original_team_name?: string | null;
-  /** Schema `character`. */
+  /** API relative link to the original team. Schema `character`. */
   original_team_link?: string | null;
-  /** Schema `character`. */
+  /** API relative link to the new team. Schema `character`. */
   new_team_link?: string | null;
-  /** Schema `character`. */
+  /** Numeric scorekeeping position code. Schema `character`. */
   position_code?: string | null;
-  /** Schema `character`. */
+  /** Position name. Schema `character`. */
   position_name?: string | null;
-  /** Schema `character`. */
+  /** Position category (e.g. 'Pitcher', 'Infielder'). Schema `character`. */
   position_type?: string | null;
-  /** Schema `character`. */
+  /** Position abbreviation. Schema `character`. */
   position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Date the player signed a new contract (YYYY-MM-DD). Schema `character`. */
   date_signed?: string | null;
-  /** Schema `double` (an id). */
+  /** Team id the player signed with. Schema `double` (an id). */
   new_team_id?: string | number | null;
-  /** Schema `character`. */
+  /** Name of the team the player signed with. Schema `character`. */
   new_team_name?: string | null;
-  /** Schema `double`. */
+  /** Display sort order for the sport. Schema `double`. */
   sort_order?: number | null;
 }
 
@@ -1136,133 +1136,133 @@ export interface MlbFreeAgentsRow {
  * One row of `sdv.mlb.mlb_game_changes({ parsed: true })` (returns schema `native/mlb/game_changes`, verified on a real sdv-py capture).
  */
 export interface MlbGameChangesRow {
-  /** Schema `character`. */
+  /** The calendar date for which schedule changes are being reported, identifying when rescheduled or suspended games occurred. Schema `character`. */
   schedule_date?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique game identifier. Schema `integer` (an id). */
   game_pk?: string | null;
-  /** Schema `character`. */
+  /** Globally unique game identifier (GUID). Schema `character`. */
   game_guid?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Game type code (R, P, etc.). Schema `character`. */
   game_type?: string | null;
-  /** Schema `character`. */
+  /** Season year. Schema `character`. */
   season?: string | null;
-  /** Schema `character`. */
+  /** Game date (YYYY-MM-DD). Schema `character`. */
   game_date?: string | null;
-  /** Schema `character`. */
+  /** Official game date (YYYY-MM-DD). Schema `character`. */
   official_date?: string | null;
-  /** Schema `logical`. */
+  /** Whether the game ended in a tie. Schema `logical`. */
   is_tie?: boolean | null;
-  /** Schema `integer`. */
+  /** Game number within a doubleheader. Schema `integer`. */
   game_number?: number | null;
-  /** Schema `logical`. */
+  /** Whether the game is public-facing. Schema `logical`. */
   public_facing?: boolean | null;
-  /** Schema `character`. */
+  /** Doubleheader indicator ('N', 'S', 'Y'). Schema `character`. */
   double_header?: string | null;
-  /** Schema `character`. */
+  /** Gameday data feed type. Schema `character`. */
   gameday_type?: string | null;
-  /** Schema `character`. */
+  /** Whether the game is a tiebreaker. Schema `character`. */
   tiebreaker?: string | null;
-  /** Schema `character` (an id). */
+  /** Calendar event identifier. Schema `character` (an id). */
   calendar_event_id?: string | null;
-  /** Schema `character`. */
+  /** Display string for the season. Schema `character`. */
   season_display?: string | null;
-  /** Schema `character`. */
+  /** Day or night game indicator. Schema `character`. */
   day_night?: string | null;
-  /** Schema `integer`. */
+  /** Scheduled number of innings. Schema `integer`. */
   scheduled_innings?: number | null;
-  /** Schema `logical`. */
+  /** Whether home/away teams are reversed. Schema `logical`. */
   reverse_home_away_status?: boolean | null;
-  /** Schema `integer`. */
+  /** Length of inning breaks in seconds. Schema `integer`. */
   inning_break_length?: number | null;
-  /** Schema `double`. */
+  /** Number of games in the series. Schema `double`. */
   games_in_series?: number | null;
-  /** Schema `double`. */
+  /** Game number within the series. Schema `double`. */
   series_game_number?: number | null;
-  /** Schema `character`. */
+  /** Description of the series. Schema `character`. */
   series_description?: string | null;
-  /** Schema `character`. */
+  /** Source of the schedule record. Schema `character`. */
   record_source?: string | null;
-  /** Schema `character`. */
+  /** Whether the game is played only if necessary. Schema `character`. */
   if_necessary?: string | null;
-  /** Schema `character`. */
+  /** Description of the if-necessary status. Schema `character`. */
   if_necessary_description?: string | null;
-  /** Schema `character`. */
+  /** Abstract game state (e.g. 'Final'). Schema `character`. */
   status_abstract_game_state?: string | null;
-  /** Schema `character`. */
+  /** Coded game state. Schema `character`. */
   status_coded_game_state?: string | null;
-  /** Schema `character`. */
+  /** Detailed game state. Schema `character`. */
   status_detailed_state?: string | null;
-  /** Schema `character`. */
+  /** Status code for the game. Schema `character`. */
   status_status_code?: string | null;
-  /** Schema `logical`. */
+  /** Whether the start time is TBD. Schema `logical`. */
   status_start_time_tbd?: boolean | null;
-  /** Schema `character`. */
+  /** Abstract game state code. Schema `character`. */
   status_abstract_game_code?: string | null;
-  /** Schema `integer` (an id). */
+  /** Away team MLBAM ID. Schema `integer` (an id). */
   teams_away_team_id?: string | null;
-  /** Schema `character`. */
+  /** Away team name. Schema `character`. */
   teams_away_team_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the away team. Schema `character`. */
   teams_away_team_link?: string | null;
-  /** Schema `integer`. */
+  /** Away team league-record wins. Schema `integer`. */
   teams_away_league_record_wins?: number | null;
-  /** Schema `integer`. */
+  /** Away team league-record losses. Schema `integer`. */
   teams_away_league_record_losses?: number | null;
-  /** Schema `integer`. */
+  /** Away team league-record ties. Schema `integer`. */
   teams_away_league_record_ties?: number | null;
-  /** Schema `character`. */
+  /** Away team winning percentage. Schema `character`. */
   teams_away_league_record_pct?: string | null;
-  /** Schema `integer`. */
+  /** Away team score. Schema `integer`. */
   teams_away_score?: number | null;
-  /** Schema `logical`. */
+  /** Whether the away team won. Schema `logical`. */
   teams_away_is_winner?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the away team is a split squad. Schema `logical`. */
   teams_away_split_squad?: boolean | null;
-  /** Schema `double`. */
+  /** Away team's series number. Schema `double`. */
   teams_away_series_number?: number | null;
-  /** Schema `integer` (an id). */
+  /** Home team MLBAM ID. Schema `integer` (an id). */
   teams_home_team_id?: string | null;
-  /** Schema `character`. */
+  /** Home team name. Schema `character`. */
   teams_home_team_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the home team. Schema `character`. */
   teams_home_team_link?: string | null;
-  /** Schema `integer`. */
+  /** Home team league-record wins. Schema `integer`. */
   teams_home_league_record_wins?: number | null;
-  /** Schema `integer`. */
+  /** Home team league-record losses. Schema `integer`. */
   teams_home_league_record_losses?: number | null;
-  /** Schema `integer`. */
+  /** Home team league-record ties. Schema `integer`. */
   teams_home_league_record_ties?: number | null;
-  /** Schema `character`. */
+  /** Home team winning percentage. Schema `character`. */
   teams_home_league_record_pct?: string | null;
-  /** Schema `integer`. */
+  /** Home team score. Schema `integer`. */
   teams_home_score?: number | null;
-  /** Schema `logical`. */
+  /** Whether the home team won. Schema `logical`. */
   teams_home_is_winner?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the home team is a split squad. Schema `logical`. */
   teams_home_split_squad?: boolean | null;
-  /** Schema `double`. */
+  /** Home team's series number. Schema `double`. */
   teams_home_series_number?: number | null;
-  /** Schema `integer` (an id). */
+  /** MLBAM venue ID. Schema `integer` (an id). */
   venue_id?: string | null;
-  /** Schema `character`. */
+  /** Venue name. Schema `character`. */
   venue_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the venue. Schema `character`. */
   venue_link?: string | null;
-  /** Schema `character`. */
+  /** API link to the game content. Schema `character`. */
   content_link?: string | null;
-  /** Schema `character`. */
+  /** Original date-time the game was rescheduled from. Schema `character`. */
   rescheduled_from?: string | null;
-  /** Schema `character`. */
+  /** Original date the game was rescheduled from. Schema `character`. */
   rescheduled_from_date?: string | null;
-  /** Schema `character`. */
+  /** Long-form description text. Schema `character`. */
   description?: string | null;
-  /** Schema `character`. */
+  /** Reason for the game status (e.g. 'Rain'). Schema `character`. */
   status_reason?: string | null;
-  /** Schema `character`. */
+  /** Original date-time if the game was resumed. Schema `character`. */
   resumed_from?: string | null;
-  /** Schema `character`. */
+  /** Original date if the game was resumed. Schema `character`. */
   resumed_from_date?: string | null;
 }
 
@@ -1270,103 +1270,103 @@ export interface MlbGameChangesRow {
  * One row of `sdv.mlb.mlb_game_pace({ parsed: true })` (returns schema `native/mlb/game_pace`, verified on a real sdv-py capture).
  */
 export interface MlbGamePaceRow {
-  /** Schema `double`. */
+  /** Average number of hits allowed per nine innings across all games in the sample period. Schema `double`. */
   hits_per9_inn?: number | null;
-  /** Schema `double`. */
+  /** Average number of runs scored per nine innings across all games in the sample period. Schema `double`. */
   runs_per9_inn?: number | null;
-  /** Schema `double`. */
+  /** Average number of pitches thrown per nine innings across all games in the sample period. Schema `double`. */
   pitches_per9_inn?: number | null;
-  /** Schema `double`. */
+  /** Average number of plate appearances occurring per nine innings across all games in the sample period. Schema `double`. */
   plate_appearances_per9_inn?: number | null;
-  /** Schema `double`. */
+  /** Hits per game. Schema `double`. */
   hits_per_game?: number | null;
-  /** Schema `double`. */
+  /** Runs per game. Schema `double`. */
   runs_per_game?: number | null;
-  /** Schema `double`. */
+  /** Innings played per game. Schema `double`. */
   innings_played_per_game?: number | null;
-  /** Schema `double`. */
+  /** Pitches per game. Schema `double`. */
   pitches_per_game?: number | null;
-  /** Schema `double`. */
+  /** Pitchers used per game. Schema `double`. */
   pitchers_per_game?: number | null;
-  /** Schema `double`. */
+  /** Plate appearances per game. Schema `double`. */
   plate_appearances_per_game?: number | null;
-  /** Schema `character`. */
+  /** Total game time (HHH:MM:SS). Schema `character`. */
   total_game_time?: string | null;
-  /** Schema `double`. */
+  /** Total innings played. Schema `double`. */
   total_innings_played?: number | null;
-  /** Schema `integer`. */
+  /** Total hits. Schema `integer`. */
   total_hits?: number | null;
-  /** Schema `integer`. */
+  /** Total runs. Schema `integer`. */
   total_runs?: number | null;
-  /** Schema `integer`. */
+  /** Total plate appearances. Schema `integer`. */
   total_plate_appearances?: number | null;
-  /** Schema `integer`. */
+  /** Total pitchers used. Schema `integer`. */
   total_pitchers?: number | null;
-  /** Schema `integer`. */
+  /** Total pitches thrown. Schema `integer`. */
   total_pitches?: number | null;
-  /** Schema `integer`. */
+  /** Total games on the date. Schema `integer`. */
   total_games?: number | null;
-  /** Schema `integer`. */
+  /** Total number of seven-inning games played (including doubleheader games). Schema `integer`. */
   total7_inn_games?: number | null;
-  /** Schema `double`. */
+  /** Total number of nine-inning games played in the sample period. Schema `double`. */
   total9_inn_games?: number | null;
-  /** Schema `integer`. */
+  /** Total extra-inning games. Schema `integer`. */
   total_extra_inn_games?: number | null;
-  /** Schema `character`. */
+  /** Average time per game (HH:MM:SS). Schema `character`. */
   time_per_game?: string | null;
-  /** Schema `character`. */
+  /** Average time per pitch (HH:MM:SS). Schema `character`. */
   time_per_pitch?: string | null;
-  /** Schema `character`. */
+  /** Average time per hit (HH:MM:SS). Schema `character`. */
   time_per_hit?: string | null;
-  /** Schema `character`. */
+  /** Average time per run (HH:MM:SS). Schema `character`. */
   time_per_run?: string | null;
-  /** Schema `character`. */
+  /** Average time per plate appearance (HH:MM:SS). Schema `character`. */
   time_per_plate_appearance?: string | null;
-  /** Schema `character`. */
+  /** Average elapsed clock time per nine-inning game formatted as hours and minutes. Schema `character`. */
   time_per9_inn?: string | null;
-  /** Schema `character`. */
+  /** Average time per 77 plate appearances, used as a normalized pace benchmark by MLB. Schema `character`. */
   time_per77_plate_appearances?: string | null;
-  /** Schema `character`. */
+  /** Total extra-inning time (HHH:MM:SS). Schema `character`. */
   total_extra_inn_time?: string | null;
-  /** Schema `character`. */
+  /** Average elapsed clock time per seven-inning game excluding games that went to extra innings. Schema `character`. */
   time_per7_inn_game_without_extra_inn?: string | null;
-  /** Schema `integer`. */
+  /** Number of nine-inning games that were called or suspended before completing nine full innings. Schema `integer`. */
   total9_inn_games_completed_early?: number | null;
-  /** Schema `double`. */
+  /** Number of nine-inning games completed without requiring extra innings. Schema `double`. */
   total9_inn_games_without_extra_inn?: number | null;
-  /** Schema `integer`. */
+  /** Total number of nine-inning games that were scheduled in the sample period. Schema `integer`. */
   total9_inn_games_scheduled?: number | null;
-  /** Schema `double`. */
+  /** Hits per run. Schema `double`. */
   hits_per_run?: number | null;
-  /** Schema `double`. */
+  /** Pitches per pitcher. Schema `double`. */
   pitches_per_pitcher?: number | null;
-  /** Schema `character`. */
+  /** Season year. Schema `character`. */
   season?: string | null;
-  /** Schema `integer` (an id). */
+  /** Sport MLBAM ID. Schema `integer` (an id). */
   sport_id?: string | null;
-  /** Schema `character`. */
+  /** Short sport code (e.g. 'mlb', 'aaa'). Schema `character`. */
   sport_code?: string | null;
-  /** Schema `character`. */
+  /** API link to the sport. Schema `character`. */
   sport_link?: string | null;
-  /** Schema `integer`. */
+  /** Calculated total count of seven-inning games as tallied by the MLB Stats API pace portal. Schema `integer`. */
   pr_portal_calculated_fields_total7_inn_games?: number | null;
-  /** Schema `double`. */
+  /** Calculated total count of nine-inning games as tallied by the MLB Stats API pace portal. Schema `double`. */
   pr_portal_calculated_fields_total9_inn_games?: number | null;
-  /** Schema `integer`. */
+  /** Portal-calculated total extra-inning games. Schema `integer`. */
   pr_portal_calculated_fields_total_extra_inn_games?: number | null;
-  /** Schema `character`. */
+  /** Calculated average game time per seven-inning game as produced by the MLB Stats API pace portal. Schema `character`. */
   pr_portal_calculated_fields_time_per7_inn_game?: string | null;
-  /** Schema `character`. */
+  /** Calculated average game time per nine-inning game as produced by the MLB Stats API pace portal. Schema `character`. */
   pr_portal_calculated_fields_time_per9_inn_game?: string | null;
-  /** Schema `character`. */
+  /** Portal-calculated time per extra-inning game. Schema `character`. */
   pr_portal_calculated_fields_time_per_extra_inn_game?: string | null;
-  /** Schema `character`. */
+  /** Average elapsed clock time per seven-inning game formatted as hours and minutes. Schema `character`. */
   time_per7_inn_game?: string | null;
-  /** Schema `double`. */
+  /** Total number of seven-inning games that were scheduled in the sample period. Schema `double`. */
   total7_inn_games_scheduled?: number | null;
-  /** Schema `double`. */
+  /** Number of seven-inning games completed without requiring extra innings. Schema `double`. */
   total7_inn_games_without_extra_inn?: number | null;
-  /** Schema `double`. */
+  /** Number of seven-inning games that were called or completed before the full seven innings were played. Schema `double`. */
   total7_inn_games_completed_early?: number | null;
 }
 
@@ -1374,7 +1374,7 @@ export interface MlbGamePaceRow {
  * One row of `sdv.mlb.mlb_game_timestamps({ parsed: true })` (returns schema `native/mlb/game_timestamps`, verified on a real sdv-py capture).
  */
 export interface MlbGameTimestampsRow {
-  /** Schema `character`. */
+  /** A timestamp string representing a specific point in time used to query the MLB Stats API for game state changes. Schema `character`. */
   timecode?: string | null;
 }
 
@@ -1382,41 +1382,41 @@ export interface MlbGameTimestampsRow {
  * One row of `sdv.mlb.mlb_high_low({ parsed: true })` (returns schema `native/mlb/high_low`, verified on a real sdv-py capture).
  */
 export interface MlbHighLowRow {
-  /** Schema `integer`. */
+  /** Total number of splits in the leaderboard. Schema `integer`. */
   total_splits?: number | null;
-  /** Schema `character`. */
+  /** Serialized list of exemption codes or player IDs excluded from the high/low statistical split calculation. Schema `character`. */
   exemptions?: string | null;
-  /** Schema `character`. */
+  /** Splits. Schema `character`. */
   splits?: string | null;
-  /** Schema `character`. */
+  /** Players tied at the offset boundary. Schema `character`. */
   splits_tied_with_offset?: string | null;
-  /** Schema `character`. */
+  /** Players tied at the limit boundary. Schema `character`. */
   splits_tied_with_limit?: string | null;
-  /** Schema `character`. */
+  /** Season year. Schema `character`. */
   season?: string | null;
-  /** Schema `logical`. */
+  /** Whether the stat combines multiple split sources. Schema `logical`. */
   combined_stats?: boolean | null;
-  /** Schema `character`. */
+  /** Stat group display name. Schema `character`. */
   group_display_name?: string | null;
-  /** Schema `character` (an id). */
+  /** Game type code (e.g., R for regular season). Schema `character` (an id). */
   game_type_id?: string | null;
-  /** Schema `character`. */
+  /** Game type description. Schema `character`. */
   game_type_description?: string | null;
-  /** Schema `character`. */
+  /** Snake-case name of the sorted statistic (e.g. 'at_bats'). Schema `character`. */
   sort_stat_name?: string | null;
-  /** Schema `character`. */
+  /** API lookup parameter for the sorted statistic (e.g. 'atBats'). Schema `character`. */
   sort_stat_lookup_param?: string | null;
-  /** Schema `logical`. */
+  /** Whether the sorted statistic is a counting stat. Schema `logical`. */
   sort_stat_is_counting?: boolean | null;
-  /** Schema `character`. */
+  /** Human-readable label of the sorted statistic (e.g. 'At bats'). Schema `character`. */
   sort_stat_label?: string | null;
-  /** Schema `character`. */
+  /** Serialized list of statistical group identifiers (e.g., hitting, pitching) used to filter this high/low query. Schema `character`. */
   sort_stat_stat_groups?: string | null;
-  /** Schema `character`. */
+  /** Serialized list of organization types (e.g., MLB, MiLB) in scope for this high/low stat sort. Schema `character`. */
   sort_stat_org_types?: string | null;
-  /** Schema `character`. */
+  /** Serialized list of high/low result type codes (e.g., high, low) applicable to this stat leader query. Schema `character`. */
   sort_stat_high_low_types?: string | null;
-  /** Schema `character`. */
+  /** Serialized list of streak level codes defining the streak lengths tracked in this high/low query. Schema `character`. */
   sort_stat_streak_levels?: string | null;
 }
 
@@ -1424,167 +1424,167 @@ export interface MlbHighLowRow {
  * One row of `sdv.mlb.mlb_home_run_derby({ parsed: true })` (returns schema `native/mlb/home_run_derby`, verified on a real sdv-py capture).
  */
 export interface MlbHomeRunDerbyRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Player's full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Player uniform number. Schema `character`. */
   primary_number?: string | null;
-  /** Schema `character`. */
+  /** Date of birth (YYYY-MM-DD). Schema `character`. */
   birth_date?: string | null;
-  /** Schema `integer`. */
+  /** Current age in years. Schema `integer`. */
   current_age?: number | null;
-  /** Schema `character`. */
+  /** City of birth. Schema `character`. */
   birth_city?: string | null;
-  /** Schema `character`. */
+  /** State or province of birth. Schema `character`. */
   birth_state_province?: string | null;
-  /** Schema `character`. */
+  /** Country of birth. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `character`. */
+  /** Height (feet and inches). Schema `character`. */
   height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character`. */
+  /** Preferred first name. Schema `character`. */
   use_name?: string | null;
-  /** Schema `character`. */
+  /** Preferred last name. Schema `character`. */
   use_last_name?: string | null;
-  /** Schema `character`. */
+  /** Player middle name. Schema `character`. */
   middle_name?: string | null;
-  /** Schema `character`. */
+  /** Name as shown in box scores. Schema `character`. */
   boxscore_name?: string | null;
-  /** Schema `character`. */
+  /** Player nickname. Schema `character`. */
   nick_name?: string | null;
-  /** Schema `character`. */
+  /** Player gender. Schema `character`. */
   gender?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person is a player. Schema `logical`. */
   is_player?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the player profile is verified. Schema `logical`. */
   is_verified?: boolean | null;
-  /** Schema `double`. */
+  /** Year the player was drafted. Schema `double`. */
   draft_year?: number | null;
-  /** Schema `character`. */
+  /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
   /** Schema `character`. */
   stats?: string | null;
-  /** Schema `character`. */
+  /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
-  /** Schema `character`. */
+  /** Name in first-last order. Schema `character`. */
   name_first_last?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly name slug. Schema `character`. */
   name_slug?: string | null;
-  /** Schema `character`. */
+  /** First and last name. Schema `character`. */
   first_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name in last, first order. Schema `character`. */
   last_first_name?: string | null;
-  /** Schema `character`. */
+  /** Last name with first initial. Schema `character`. */
   last_init_name?: string | null;
-  /** Schema `character`. */
+  /** First initial with last name. Schema `character`. */
   init_last_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (first-middle-last). Schema `character`. */
   full_fml_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (last-first-middle). Schema `character`. */
   full_lfm_name?: string | null;
-  /** Schema `double`. */
+  /** Top of the player's strike zone (feet). Schema `double`. */
   strike_zone_top?: number | null;
-  /** Schema `double`. */
+  /** Bottom of the player's strike zone (feet). Schema `double`. */
   strike_zone_bottom?: number | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API numeric identifier for the spring training league of the player's current team. Schema `double` (an id). */
   current_team_spring_league_id?: string | number | null;
-  /** Schema `character`. */
+  /** The full name of the spring training league (e.g., 'Cactus League') for the player's current team. Schema `character`. */
   current_team_spring_league_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the spring training league resource for the player's current team. Schema `character`. */
   current_team_spring_league_link?: string | null;
-  /** Schema `character`. */
+  /** The abbreviation for the Cactus League or Grapefruit League in which the player's current team participates during spring training. Schema `character`. */
   current_team_spring_league_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** The All-Star designation status of the player's current team (e.g., which league's All-Star pool the team belongs to). Schema `character`. */
   current_team_all_star_status?: string | null;
-  /** Schema `integer` (an id). */
+  /** Current team MLBAM ID. Schema `integer` (an id). */
   current_team_id?: string | null;
-  /** Schema `character`. */
+  /** Current team name. Schema `character`. */
   current_team_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the current team. Schema `character`. */
   current_team_link?: string | null;
-  /** Schema `integer`. */
+  /** The MLB season year for which the player's current team metadata is reported. Schema `integer`. */
   current_team_season?: number | null;
-  /** Schema `integer` (an id). */
+  /** The MLB Stats API numeric identifier for the regular-season home ballpark of the player's current team. Schema `integer` (an id). */
   current_team_venue_id?: string | null;
-  /** Schema `character`. */
+  /** The official name of the regular-season home ballpark for the player's current team. Schema `character`. */
   current_team_venue_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the regular-season venue resource for the player's current team. Schema `character`. */
   current_team_venue_link?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API numeric identifier for the spring training ballpark used by the player's current team. Schema `double` (an id). */
   current_team_spring_venue_id?: string | number | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the spring training venue resource for the player's current team. Schema `character`. */
   current_team_spring_venue_link?: string | null;
-  /** Schema `character`. */
+  /** The three-letter internal team code used by MLB in legacy data systems and some API references. Schema `character`. */
   current_team_team_code?: string | null;
-  /** Schema `character`. */
+  /** The lowercase alphabetic file code used by MLB for identifying the team in media and data assets. Schema `character`. */
   current_team_file_code?: string | null;
-  /** Schema `character`. */
+  /** The standard two- or three-letter abbreviation for the player's current MLB team (e.g., 'NYY', 'LAD'). Schema `character`. */
   current_team_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** The full official name of the player's current team, including both city and nickname. Schema `character`. */
   current_team_team_name?: string | null;
-  /** Schema `character`. */
+  /** The city or metropolitan area name associated with the player's current team. Schema `character`. */
   current_team_location_name?: string | null;
-  /** Schema `character`. */
+  /** The calendar year in which the player's current franchise first played MLB games. Schema `character`. */
   current_team_first_year_of_play?: string | null;
-  /** Schema `integer` (an id). */
+  /** The MLB Stats API numeric identifier for the league (American League or National League) of the player's current team. Schema `integer` (an id). */
   current_team_league_id?: string | null;
-  /** Schema `character`. */
+  /** The full name of the league (e.g., 'American League') in which the player's current team competes. Schema `character`. */
   current_team_league_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the league resource for the player's current team. Schema `character`. */
   current_team_league_link?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API numeric identifier for the division in which the player's current team competes. Schema `double` (an id). */
   current_team_division_id?: string | number | null;
-  /** Schema `character`. */
+  /** The full name of the division in which the player's current team competes (e.g., 'American League East'). Schema `character`. */
   current_team_division_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the division resource for the player's current team. Schema `character`. */
   current_team_division_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** The MLB Stats API numeric identifier for the sport classification (e.g., 1 for MLB) of the player's current team. Schema `integer` (an id). */
   current_team_sport_id?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the sport resource associated with the player's current team. Schema `character`. */
   current_team_sport_link?: string | null;
-  /** Schema `character`. */
+  /** The name of the sport classification for the player's current team (e.g., 'Major League Baseball'). Schema `character`. */
   current_team_sport_name?: string | null;
-  /** Schema `character`. */
+  /** A shortened display name for the player's current team, often used in space-constrained UI contexts. Schema `character`. */
   current_team_short_name?: string | null;
-  /** Schema `character`. */
+  /** The historical franchise name for the player's current team, which may differ from the current team name for relocated clubs. Schema `character`. */
   current_team_franchise_name?: string | null;
-  /** Schema `character`. */
+  /** The short club nickname for the player's current team, typically the city-less portion of the franchise name. Schema `character`. */
   current_team_club_name?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the player's current team is an active MLB franchise. Schema `logical`. */
   current_team_active?: boolean | null;
-  /** Schema `character`. */
+  /** Primary position code. Schema `character`. */
   primary_position_code?: string | null;
-  /** Schema `character`. */
+  /** Primary fielding position name. Schema `character`. */
   primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Primary position type (e.g. Infielder). Schema `character`. */
   primary_position_type?: string | null;
-  /** Schema `character`. */
+  /** Primary position abbreviation. Schema `character`. */
   primary_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Batting side code (L/R/S). Schema `character`. */
   bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** Batting side description. Schema `character`. */
   bat_side_description?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand code (L/R). Schema `character`. */
   pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand description. Schema `character`. */
   pitch_hand_description?: string | null;
-  /** Schema `character`. */
+  /** Date of last MLB game played. Schema `character`. */
   last_played_date?: string | null;
-  /** Schema `character`. */
+  /** Maternal family name. Schema `character`. */
   name_matrilineal?: string | null;
-  /** Schema `character`. */
+  /** The name of the parent major-league organization for the player's current team. Schema `character`. */
   current_team_parent_org_name?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API numeric identifier for the parent organization (major-league affiliate) of the player's current team. Schema `double` (an id). */
   current_team_parent_org_id?: string | number | null;
 }
 
@@ -1592,167 +1592,167 @@ export interface MlbHomeRunDerbyRow {
  * One row of `sdv.mlb.mlb_home_run_derby_bracket({ parsed: true })` (returns schema `native/mlb/home_run_derby_bracket`, verified on a real sdv-py capture).
  */
 export interface MlbHomeRunDerbyBracketRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Player's full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Player uniform number. Schema `character`. */
   primary_number?: string | null;
-  /** Schema `character`. */
+  /** Date of birth (YYYY-MM-DD). Schema `character`. */
   birth_date?: string | null;
-  /** Schema `integer`. */
+  /** Current age in years. Schema `integer`. */
   current_age?: number | null;
-  /** Schema `character`. */
+  /** City of birth. Schema `character`. */
   birth_city?: string | null;
-  /** Schema `character`. */
+  /** State or province of birth. Schema `character`. */
   birth_state_province?: string | null;
-  /** Schema `character`. */
+  /** Country of birth. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `character`. */
+  /** Height (feet and inches). Schema `character`. */
   height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character`. */
+  /** Preferred first name. Schema `character`. */
   use_name?: string | null;
-  /** Schema `character`. */
+  /** Preferred last name. Schema `character`. */
   use_last_name?: string | null;
-  /** Schema `character`. */
+  /** Player middle name. Schema `character`. */
   middle_name?: string | null;
-  /** Schema `character`. */
+  /** Name as shown in box scores. Schema `character`. */
   boxscore_name?: string | null;
-  /** Schema `character`. */
+  /** Player nickname. Schema `character`. */
   nick_name?: string | null;
-  /** Schema `character`. */
+  /** Player gender. Schema `character`. */
   gender?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person is a player. Schema `logical`. */
   is_player?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the player profile is verified. Schema `logical`. */
   is_verified?: boolean | null;
-  /** Schema `double`. */
+  /** Year the player was drafted. Schema `double`. */
   draft_year?: number | null;
-  /** Schema `character`. */
+  /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
   /** Schema `character`. */
   stats?: string | null;
-  /** Schema `character`. */
+  /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
-  /** Schema `character`. */
+  /** Name in first-last order. Schema `character`. */
   name_first_last?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly name slug. Schema `character`. */
   name_slug?: string | null;
-  /** Schema `character`. */
+  /** First and last name. Schema `character`. */
   first_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name in last, first order. Schema `character`. */
   last_first_name?: string | null;
-  /** Schema `character`. */
+  /** Last name with first initial. Schema `character`. */
   last_init_name?: string | null;
-  /** Schema `character`. */
+  /** First initial with last name. Schema `character`. */
   init_last_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (first-middle-last). Schema `character`. */
   full_fml_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (last-first-middle). Schema `character`. */
   full_lfm_name?: string | null;
-  /** Schema `double`. */
+  /** Top of the player's strike zone (feet). Schema `double`. */
   strike_zone_top?: number | null;
-  /** Schema `double`. */
+  /** Bottom of the player's strike zone (feet). Schema `double`. */
   strike_zone_bottom?: number | null;
-  /** Schema `double` (an id). */
+  /** MLB Stats API identifier for the spring training league of the participant's current team. Schema `double` (an id). */
   current_team_spring_league_id?: string | number | null;
-  /** Schema `character`. */
+  /** Full name of the spring training league the participant's team belongs to. Schema `character`. */
   current_team_spring_league_name?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the spring training league resource in the MLB Stats API. Schema `character`. */
   current_team_spring_league_link?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation for the spring training league the participant's team belongs to (e.g., Cactus, Grapefruit). Schema `character`. */
   current_team_spring_league_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** All-Star game league affiliation of the participant's current team (e.g., American League, National League). Schema `character`. */
   current_team_all_star_status?: string | null;
-  /** Schema `integer` (an id). */
+  /** Current team MLBAM ID. Schema `integer` (an id). */
   current_team_id?: string | null;
-  /** Schema `character`. */
+  /** Current team name. Schema `character`. */
   current_team_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the current team. Schema `character`. */
   current_team_link?: string | null;
-  /** Schema `integer`. */
+  /** MLB season year for which the participant's current team metadata snapshot applies. Schema `integer`. */
   current_team_season?: number | null;
-  /** Schema `integer` (an id). */
+  /** MLB Stats API identifier for the participant's current team's regular-season home ballpark. Schema `integer` (an id). */
   current_team_venue_id?: string | null;
-  /** Schema `character`. */
+  /** Name of the participant's current team's regular-season home ballpark. Schema `character`. */
   current_team_venue_name?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the current team's home venue resource in the MLB Stats API. Schema `character`. */
   current_team_venue_link?: string | null;
-  /** Schema `double` (an id). */
+  /** MLB Stats API identifier for the spring training ballpark used by the participant's team. Schema `double` (an id). */
   current_team_spring_venue_id?: string | number | null;
-  /** Schema `character`. */
+  /** Relative URL path to the spring training venue resource in the MLB Stats API. Schema `character`. */
   current_team_spring_venue_link?: string | null;
-  /** Schema `character`. */
+  /** Short internal code used by MLB to identify the participant's current team in system contexts. Schema `character`. */
   current_team_team_code?: string | null;
-  /** Schema `character`. */
+  /** Lowercase file-system-safe code used by MLB to identify the participant's current team. Schema `character`. */
   current_team_file_code?: string | null;
-  /** Schema `character`. */
+  /** Standard two- or three-letter abbreviation for the Home Run Derby participant's current MLB team. Schema `character`. */
   current_team_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** The nickname portion of the participant's current team name (e.g., Red Sox, Braves). Schema `character`. */
   current_team_team_name?: string | null;
-  /** Schema `character`. */
+  /** City or metropolitan area name associated with the participant's current team. Schema `character`. */
   current_team_location_name?: string | null;
-  /** Schema `character`. */
+  /** Year in which the participant's current franchise first played as an MLB team. Schema `character`. */
   current_team_first_year_of_play?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB Stats API identifier for the league (American or National) of the participant's current team. Schema `integer` (an id). */
   current_team_league_id?: string | null;
-  /** Schema `character`. */
+  /** Full name of the league the participant's current team belongs to (e.g., National League). Schema `character`. */
   current_team_league_name?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the league resource for the participant's current team in the MLB Stats API. Schema `character`. */
   current_team_league_link?: string | null;
-  /** Schema `double` (an id). */
+  /** MLB Stats API identifier for the division the participant's current team belongs to. Schema `double` (an id). */
   current_team_division_id?: string | number | null;
-  /** Schema `character`. */
+  /** Full name of the division the participant's current team belongs to (e.g., AL East). Schema `character`. */
   current_team_division_name?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the participant's current team's division resource in the MLB Stats API. Schema `character`. */
   current_team_division_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB Stats API identifier for the sport classification of the participant's current team (MLB = 1). Schema `integer` (an id). */
   current_team_sport_id?: string | null;
-  /** Schema `character`. */
+  /** Relative URL path to the sport resource for the participant's current team in the MLB Stats API. Schema `character`. */
   current_team_sport_link?: string | null;
-  /** Schema `character`. */
+  /** Full sport classification name for the participant's current team (e.g., Major League Baseball). Schema `character`. */
   current_team_sport_name?: string | null;
-  /** Schema `character`. */
+  /** Shortened display name of the participant's current team for space-constrained contexts. Schema `character`. */
   current_team_short_name?: string | null;
-  /** Schema `character`. */
+  /** Historical franchise name for the participant's team, persisting across relocations. Schema `character`. */
   current_team_franchise_name?: string | null;
-  /** Schema `character`. */
+  /** Informal nickname portion of the participant's current team name (e.g., Yankees, Dodgers). Schema `character`. */
   current_team_club_name?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the participant's current franchise is an active MLB organization. Schema `logical`. */
   current_team_active?: boolean | null;
-  /** Schema `character`. */
+  /** Primary position code. Schema `character`. */
   primary_position_code?: string | null;
-  /** Schema `character`. */
+  /** Primary fielding position name. Schema `character`. */
   primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Primary position type (e.g. Infielder). Schema `character`. */
   primary_position_type?: string | null;
-  /** Schema `character`. */
+  /** Primary position abbreviation. Schema `character`. */
   primary_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Batting side code (L/R/S). Schema `character`. */
   bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** Batting side description. Schema `character`. */
   bat_side_description?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand code (L/R). Schema `character`. */
   pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand description. Schema `character`. */
   pitch_hand_description?: string | null;
-  /** Schema `character`. */
+  /** Date of last MLB game played. Schema `character`. */
   last_played_date?: string | null;
-  /** Schema `character`. */
+  /** Maternal family name. Schema `character`. */
   name_matrilineal?: string | null;
-  /** Schema `character`. */
+  /** Name of the parent MLB organization for the participant's current team. Schema `character`. */
   current_team_parent_org_name?: string | null;
-  /** Schema `double` (an id). */
+  /** MLB Stats API identifier for the parent MLB organization of the participant's current team, relevant for minor league affiliates. Schema `double` (an id). */
   current_team_parent_org_id?: string | number | null;
 }
 
@@ -1760,167 +1760,167 @@ export interface MlbHomeRunDerbyBracketRow {
  * One row of `sdv.mlb.mlb_home_run_derby_pool({ parsed: true })` (returns schema `native/mlb/home_run_derby_pool`, verified on a real sdv-py capture).
  */
 export interface MlbHomeRunDerbyPoolRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Player's full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Player uniform number. Schema `character`. */
   primary_number?: string | null;
-  /** Schema `character`. */
+  /** Date of birth (YYYY-MM-DD). Schema `character`. */
   birth_date?: string | null;
-  /** Schema `integer`. */
+  /** Current age in years. Schema `integer`. */
   current_age?: number | null;
-  /** Schema `character`. */
+  /** City of birth. Schema `character`. */
   birth_city?: string | null;
-  /** Schema `character`. */
+  /** State or province of birth. Schema `character`. */
   birth_state_province?: string | null;
-  /** Schema `character`. */
+  /** Country of birth. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `character`. */
+  /** Height (feet and inches). Schema `character`. */
   height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character`. */
+  /** Preferred first name. Schema `character`. */
   use_name?: string | null;
-  /** Schema `character`. */
+  /** Preferred last name. Schema `character`. */
   use_last_name?: string | null;
-  /** Schema `character`. */
+  /** Player middle name. Schema `character`. */
   middle_name?: string | null;
-  /** Schema `character`. */
+  /** Name as shown in box scores. Schema `character`. */
   boxscore_name?: string | null;
-  /** Schema `character`. */
+  /** Player nickname. Schema `character`. */
   nick_name?: string | null;
-  /** Schema `character`. */
+  /** Player gender. Schema `character`. */
   gender?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person is a player. Schema `logical`. */
   is_player?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the player profile is verified. Schema `logical`. */
   is_verified?: boolean | null;
-  /** Schema `double`. */
+  /** Year the player was drafted. Schema `double`. */
   draft_year?: number | null;
-  /** Schema `character`. */
+  /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
   /** Schema `character`. */
   stats?: string | null;
-  /** Schema `character`. */
+  /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
-  /** Schema `character`. */
+  /** Name in first-last order. Schema `character`. */
   name_first_last?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly name slug. Schema `character`. */
   name_slug?: string | null;
-  /** Schema `character`. */
+  /** First and last name. Schema `character`. */
   first_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name in last, first order. Schema `character`. */
   last_first_name?: string | null;
-  /** Schema `character`. */
+  /** Last name with first initial. Schema `character`. */
   last_init_name?: string | null;
-  /** Schema `character`. */
+  /** First initial with last name. Schema `character`. */
   init_last_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (first-middle-last). Schema `character`. */
   full_fml_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (last-first-middle). Schema `character`. */
   full_lfm_name?: string | null;
-  /** Schema `double`. */
+  /** Top of the player's strike zone (feet). Schema `double`. */
   strike_zone_top?: number | null;
-  /** Schema `double`. */
+  /** Bottom of the player's strike zone (feet). Schema `double`. */
   strike_zone_bottom?: number | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API numeric identifier for the spring training league of the pool participant's current team. Schema `double` (an id). */
   current_team_spring_league_id?: string | number | null;
-  /** Schema `character`. */
+  /** The full name of the spring training league for the pool participant's current team. Schema `character`. */
   current_team_spring_league_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the spring training league resource for the pool participant's current team. Schema `character`. */
   current_team_spring_league_link?: string | null;
-  /** Schema `character`. */
+  /** The abbreviation for the spring training league in which the pool participant's current team plays during spring training. Schema `character`. */
   current_team_spring_league_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** The All-Star designation status of the pool participant's current team (e.g., which league's All-Star pool the team belongs to). Schema `character`. */
   current_team_all_star_status?: string | null;
-  /** Schema `integer` (an id). */
+  /** Current team MLBAM ID. Schema `integer` (an id). */
   current_team_id?: string | null;
-  /** Schema `character`. */
+  /** Current team name. Schema `character`. */
   current_team_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the current team. Schema `character`. */
   current_team_link?: string | null;
-  /** Schema `integer`. */
+  /** The MLB season year for which the pool participant's current team metadata is reported. Schema `integer`. */
   current_team_season?: number | null;
-  /** Schema `integer` (an id). */
+  /** The MLB Stats API numeric identifier for the regular-season home ballpark of the pool participant's current team. Schema `integer` (an id). */
   current_team_venue_id?: string | null;
-  /** Schema `character`. */
+  /** The official name of the regular-season home ballpark for the pool participant's current team. Schema `character`. */
   current_team_venue_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the regular-season venue resource for the pool participant's current team. Schema `character`. */
   current_team_venue_link?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API numeric identifier for the spring training ballpark used by the pool participant's current team. Schema `double` (an id). */
   current_team_spring_venue_id?: string | number | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the spring training venue resource for the pool participant's current team. Schema `character`. */
   current_team_spring_venue_link?: string | null;
-  /** Schema `character`. */
+  /** The three-letter internal team code used by MLB for the pool participant's team in legacy data systems. Schema `character`. */
   current_team_team_code?: string | null;
-  /** Schema `character`. */
+  /** The lowercase alphabetic file code used by MLB for identifying the pool participant's team in media and data assets. Schema `character`. */
   current_team_file_code?: string | null;
-  /** Schema `character`. */
+  /** The standard two- or three-letter abbreviation for the Home Run Derby pool participant's current MLB team. Schema `character`. */
   current_team_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** The full official name of the pool participant's current team, including both city and nickname. Schema `character`. */
   current_team_team_name?: string | null;
-  /** Schema `character`. */
+  /** The city or metropolitan area name associated with the pool participant's current team. Schema `character`. */
   current_team_location_name?: string | null;
-  /** Schema `character`. */
+  /** The calendar year in which the pool participant's current franchise first played MLB games. Schema `character`. */
   current_team_first_year_of_play?: string | null;
-  /** Schema `integer` (an id). */
+  /** The MLB Stats API numeric identifier for the league of the pool participant's current team. Schema `integer` (an id). */
   current_team_league_id?: string | null;
-  /** Schema `character`. */
+  /** The full name of the league (e.g., 'National League') in which the pool participant's current team competes. Schema `character`. */
   current_team_league_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the league resource for the pool participant's current team. Schema `character`. */
   current_team_league_link?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API numeric identifier for the division in which the pool participant's current team competes. Schema `double` (an id). */
   current_team_division_id?: string | number | null;
-  /** Schema `character`. */
+  /** The full name of the division in which the pool participant's current team competes (e.g., 'National League West'). Schema `character`. */
   current_team_division_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the division resource for the pool participant's current team. Schema `character`. */
   current_team_division_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** The MLB Stats API numeric identifier for the sport classification of the pool participant's current team. Schema `integer` (an id). */
   current_team_sport_id?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the sport resource associated with the pool participant's current team. Schema `character`. */
   current_team_sport_link?: string | null;
-  /** Schema `character`. */
+  /** The name of the sport classification for the pool participant's current team (e.g., 'Major League Baseball'). Schema `character`. */
   current_team_sport_name?: string | null;
-  /** Schema `character`. */
+  /** A shortened display name for the pool participant's current team, often used in space-constrained UI contexts. Schema `character`. */
   current_team_short_name?: string | null;
-  /** Schema `character`. */
+  /** The historical franchise name for the pool participant's current team, which may differ from the current team name for relocated clubs. Schema `character`. */
   current_team_franchise_name?: string | null;
-  /** Schema `character`. */
+  /** The short club nickname for the pool participant's current team, typically the city-less portion of the franchise name. Schema `character`. */
   current_team_club_name?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the pool participant's current team is an active MLB franchise. Schema `logical`. */
   current_team_active?: boolean | null;
-  /** Schema `character`. */
+  /** Primary position code. Schema `character`. */
   primary_position_code?: string | null;
-  /** Schema `character`. */
+  /** Primary fielding position name. Schema `character`. */
   primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Primary position type (e.g. Infielder). Schema `character`. */
   primary_position_type?: string | null;
-  /** Schema `character`. */
+  /** Primary position abbreviation. Schema `character`. */
   primary_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Batting side code (L/R/S). Schema `character`. */
   bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** Batting side description. Schema `character`. */
   bat_side_description?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand code (L/R). Schema `character`. */
   pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand description. Schema `character`. */
   pitch_hand_description?: string | null;
-  /** Schema `character`. */
+  /** Date of last MLB game played. Schema `character`. */
   last_played_date?: string | null;
-  /** Schema `character`. */
+  /** Maternal family name. Schema `character`. */
   name_matrilineal?: string | null;
-  /** Schema `character`. */
+  /** The name of the parent major-league organization for the pool participant's current team. Schema `character`. */
   current_team_parent_org_name?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API numeric identifier for the parent organization of the pool participant's current team. Schema `double` (an id). */
   current_team_parent_org_id?: string | number | null;
 }
 
@@ -1928,19 +1928,19 @@ export interface MlbHomeRunDerbyPoolRow {
  * One row of `sdv.mlb.mlb_jobs({ parsed: true })` (returns schema `native/mlb/jobs`, verified on a real sdv-py capture).
  */
 export interface MlbJobsRow {
-  /** Schema `character`. */
+  /** Jersey number worn (often blank for non-uniformed roles). Schema `character`. */
   jersey_number?: string | null;
-  /** Schema `character`. */
+  /** Job title (e.g. 'Umpire'). Schema `character`. */
   job?: string | null;
-  /** Schema `character` (an id). */
+  /** Job code identifier. Schema `character` (an id). */
   job_id?: string | null;
-  /** Schema `character`. */
+  /** Specific role title for the assignment. Schema `character`. */
   title?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB player ID. Schema `integer` (an id). */
   person_id?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   person_full_name?: string | null;
-  /** Schema `character`. */
+  /** API relative link to the person. Schema `character`. */
   person_link?: string | null;
 }
 
@@ -1948,85 +1948,85 @@ export interface MlbJobsRow {
  * One row of `sdv.mlb.mlb_leagues({ parsed: true })` (returns schema `native/mlb/leagues`, verified on a real sdv-py capture).
  */
 export interface MlbLeaguesRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Short abbreviation. Schema `character`. */
   abbreviation?: string | null;
   /** Schema `character`. */
   name_short?: string | null;
-  /** Schema `character`. */
+  /** A string describing the current phase of the league's season (e.g., 'inProgress', 'offseason', 'preseason'). Schema `character`. */
   season_state?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this league includes a wild card playoff format for postseason eligibility. Schema `logical`. */
   has_wild_card?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this league divides its season into two halves with separate standings (as used historically in some minor leagues). Schema `logical`. */
   has_split_season?: boolean | null;
-  /** Schema `double`. */
+  /** The total number of regular-season games scheduled per team in this league for the given season. Schema `double`. */
   num_games?: number | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this league uses a playoff points system to determine postseason seeding. Schema `logical`. */
   has_playoff_points?: boolean | null;
-  /** Schema `double`. */
+  /** Number of teams the player appeared for. Schema `double`. */
   num_teams?: number | null;
-  /** Schema `double`. */
+  /** The number of wild card berths available for postseason entry in this league for the given season. Schema `double`. */
   num_wildcard_teams?: number | null;
-  /** Schema `character`. */
+  /** Season year. Schema `character`. */
   season?: string | null;
-  /** Schema `character`. */
+  /** The organizational code identifying the parent body (e.g., 'MLB') governing this league within the MLB Stats API hierarchy. Schema `character`. */
   org_code?: string | null;
   /** Schema `logical`. */
   conferences_in_use?: boolean | null;
   /** Schema `logical`. */
   divisions_in_use?: boolean | null;
-  /** Schema `integer`. */
+  /** Display sort order for the sport. Schema `integer`. */
   sort_order?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character` (an id). */
+  /** Season identifier for the date info block. Schema `character` (an id). */
   season_date_info_season_id?: string | null;
-  /** Schema `character`. */
+  /** Preseason start date (YYYY-MM-DD). Schema `character`. */
   season_date_info_pre_season_start_date?: string | null;
-  /** Schema `character`. */
+  /** Preseason end date (YYYY-MM-DD). Schema `character`. */
   season_date_info_pre_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Season start date (YYYY-MM-DD). Schema `character`. */
   season_date_info_season_start_date?: string | null;
-  /** Schema `character`. */
+  /** Spring training start date (YYYY-MM-DD). Schema `character`. */
   season_date_info_spring_start_date?: string | null;
-  /** Schema `character`. */
+  /** Spring training end date (YYYY-MM-DD). Schema `character`. */
   season_date_info_spring_end_date?: string | null;
-  /** Schema `character`. */
+  /** Regular season start date (YYYY-MM-DD). Schema `character`. */
   season_date_info_regular_season_start_date?: string | null;
-  /** Schema `character`. */
+  /** Last date of the first half (YYYY-MM-DD). Schema `character`. */
   season_date_info_last_date1st_half?: string | null;
-  /** Schema `character`. */
+  /** All-Star Game date (YYYY-MM-DD). Schema `character`. */
   season_date_info_all_star_date?: string | null;
-  /** Schema `character`. */
+  /** First date of the second half (YYYY-MM-DD). Schema `character`. */
   season_date_info_first_date2nd_half?: string | null;
-  /** Schema `character`. */
+  /** Regular season end date (YYYY-MM-DD). Schema `character`. */
   season_date_info_regular_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Postseason start date (YYYY-MM-DD). Schema `character`. */
   season_date_info_post_season_start_date?: string | null;
-  /** Schema `character`. */
+  /** Postseason end date (YYYY-MM-DD). Schema `character`. */
   season_date_info_post_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Season end date (YYYY-MM-DD). Schema `character`. */
   season_date_info_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Offseason start date (YYYY-MM-DD). Schema `character`. */
   season_date_info_offseason_start_date?: string | null;
-  /** Schema `character`. */
+  /** Offseason end date (YYYY-MM-DD). Schema `character`. */
   season_date_info_off_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Season-level Gameday data type code. Schema `character`. */
   season_date_info_season_level_gameday_type?: string | null;
-  /** Schema `character`. */
+  /** Game-level Gameday data type code. Schema `character`. */
   season_date_info_game_level_gameday_type?: string | null;
-  /** Schema `double`. */
+  /** Plate appearances per game needed to qualify. Schema `double`. */
   season_date_info_qualifier_plate_appearances?: number | null;
-  /** Schema `double`. */
+  /** Outs pitched per game needed to qualify. Schema `double`. */
   season_date_info_qualifier_outs_pitched?: number | null;
-  /** Schema `double` (an id). */
+  /** Sport MLBAM ID. Schema `double` (an id). */
   sport_id?: string | number | null;
-  /** Schema `character`. */
+  /** API link to the sport. Schema `character`. */
   sport_link?: string | null;
 }
 
@@ -2034,25 +2034,25 @@ export interface MlbLeaguesRow {
  * One row of `sdv.mlb.mlb_linescore({ parsed: true })` (returns schema `native/mlb/linescore`, verified on a real sdv-py capture).
  */
 export interface MlbLinescoreRow {
-  /** Schema `integer`. */
+  /** Inning number. Schema `integer`. */
   num?: number | null;
-  /** Schema `character`. */
+  /** Inning ordinal label (e.g. 1st). Schema `character`. */
   ordinal_num?: string | null;
-  /** Schema `integer`. */
+  /** Home runs. Schema `integer`. */
   home_runs?: number | null;
-  /** Schema `integer`. */
+  /** Home hits in the inning. Schema `integer`. */
   home_hits?: number | null;
-  /** Schema `integer`. */
+  /** Home errors in the inning. Schema `integer`. */
   home_errors?: number | null;
-  /** Schema `integer`. */
+  /** Home runners left on base in the inning. Schema `integer`. */
   home_left_on_base?: number | null;
-  /** Schema `integer`. */
+  /** Away runs scored in the inning. Schema `integer`. */
   away_runs?: number | null;
-  /** Schema `integer`. */
+  /** Away hits in the inning. Schema `integer`. */
   away_hits?: number | null;
-  /** Schema `integer`. */
+  /** Away errors in the inning. Schema `integer`. */
   away_errors?: number | null;
-  /** Schema `integer`. */
+  /** Away runners left on base in the inning. Schema `integer`. */
   away_left_on_base?: number | null;
 }
 
@@ -2060,19 +2060,19 @@ export interface MlbLinescoreRow {
  * One row of `sdv.mlb.mlb_official_scorers({ parsed: true })` (returns schema `native/mlb/official_scorers`, verified on a real sdv-py capture).
  */
 export interface MlbOfficialScorersRow {
-  /** Schema `character`. */
+  /** Jersey number worn (often blank for non-uniformed roles). Schema `character`. */
   jersey_number?: string | null;
-  /** Schema `character`. */
+  /** Job title (e.g. 'Umpire'). Schema `character`. */
   job?: string | null;
-  /** Schema `character` (an id). */
+  /** Job code identifier. Schema `character` (an id). */
   job_id?: string | null;
-  /** Schema `character`. */
+  /** Specific role title for the assignment. Schema `character`. */
   title?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB player ID. Schema `integer` (an id). */
   person_id?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   person_full_name?: string | null;
-  /** Schema `character`. */
+  /** API relative link to the person. Schema `character`. */
   person_link?: string | null;
 }
 
@@ -2080,91 +2080,91 @@ export interface MlbOfficialScorersRow {
  * One row of `sdv.mlb.mlb_people({ parsed: true })` (returns schema `native/mlb/people`, verified on a real sdv-py capture).
  */
 export interface MlbPeopleRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Player's full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Player uniform number. Schema `character`. */
   primary_number?: string | null;
-  /** Schema `character`. */
+  /** Date of birth (YYYY-MM-DD). Schema `character`. */
   birth_date?: string | null;
-  /** Schema `integer`. */
+  /** Current age in years. Schema `integer`. */
   current_age?: number | null;
-  /** Schema `character`. */
+  /** City of birth. Schema `character`. */
   birth_city?: string | null;
-  /** Schema `character`. */
+  /** Country of birth. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `character`. */
+  /** Height (feet and inches). Schema `character`. */
   height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character`. */
+  /** Preferred first name. Schema `character`. */
   use_name?: string | null;
-  /** Schema `character`. */
+  /** Preferred last name. Schema `character`. */
   use_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name as shown in box scores. Schema `character`. */
   boxscore_name?: string | null;
-  /** Schema `character`. */
+  /** Player nickname. Schema `character`. */
   nick_name?: string | null;
-  /** Schema `character`. */
+  /** Player gender. Schema `character`. */
   gender?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person is a player. Schema `logical`. */
   is_player?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the player profile is verified. Schema `logical`. */
   is_verified?: boolean | null;
-  /** Schema `character`. */
+  /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
-  /** Schema `character`. */
+  /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
-  /** Schema `character`. */
+  /** Name in first-last order. Schema `character`. */
   name_first_last?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly name slug. Schema `character`. */
   name_slug?: string | null;
-  /** Schema `character`. */
+  /** First and last name. Schema `character`. */
   first_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name in last, first order. Schema `character`. */
   last_first_name?: string | null;
-  /** Schema `character`. */
+  /** Last name with first initial. Schema `character`. */
   last_init_name?: string | null;
-  /** Schema `character`. */
+  /** First initial with last name. Schema `character`. */
   init_last_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (first-middle-last). Schema `character`. */
   full_fml_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (last-first-middle). Schema `character`. */
   full_lfm_name?: string | null;
-  /** Schema `double`. */
+  /** Top of the player's strike zone (feet). Schema `double`. */
   strike_zone_top?: number | null;
-  /** Schema `double`. */
+  /** Bottom of the player's strike zone (feet). Schema `double`. */
   strike_zone_bottom?: number | null;
-  /** Schema `character`. */
+  /** Primary position code. Schema `character`. */
   primary_position_code?: string | null;
-  /** Schema `character`. */
+  /** Primary fielding position name. Schema `character`. */
   primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Primary position type (e.g. Infielder). Schema `character`. */
   primary_position_type?: string | null;
-  /** Schema `character`. */
+  /** Primary position abbreviation. Schema `character`. */
   primary_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Batting side code (L/R/S). Schema `character`. */
   bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** Batting side description. Schema `character`. */
   bat_side_description?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand code (L/R). Schema `character`. */
   pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand description. Schema `character`. */
   pitch_hand_description?: string | null;
-  /** Schema `character`. */
+  /** State or province of birth. Schema `character`. */
   birth_state_province?: string | null;
-  /** Schema `character`. */
+  /** Player middle name. Schema `character`. */
   middle_name?: string | null;
-  /** Schema `double`. */
+  /** Year the player was drafted. Schema `double`. */
   draft_year?: number | null;
 }
 
@@ -2172,85 +2172,85 @@ export interface MlbPeopleRow {
  * One row of `sdv.mlb.mlb_person({ parsed: true })` (returns schema `native/mlb/person`, verified on a real sdv-py capture).
  */
 export interface MlbPersonRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Player's full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Player uniform number. Schema `character`. */
   primary_number?: string | null;
-  /** Schema `character`. */
+  /** Date of birth (YYYY-MM-DD). Schema `character`. */
   birth_date?: string | null;
-  /** Schema `integer`. */
+  /** Current age in years. Schema `integer`. */
   current_age?: number | null;
-  /** Schema `character`. */
+  /** City of birth. Schema `character`. */
   birth_city?: string | null;
-  /** Schema `character`. */
+  /** Country of birth. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `character`. */
+  /** Height (feet and inches). Schema `character`. */
   height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character`. */
+  /** Preferred first name. Schema `character`. */
   use_name?: string | null;
-  /** Schema `character`. */
+  /** Preferred last name. Schema `character`. */
   use_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name as shown in box scores. Schema `character`. */
   boxscore_name?: string | null;
-  /** Schema `character`. */
+  /** Player nickname. Schema `character`. */
   nick_name?: string | null;
-  /** Schema `character`. */
+  /** Player gender. Schema `character`. */
   gender?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person is a player. Schema `logical`. */
   is_player?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the player profile is verified. Schema `logical`. */
   is_verified?: boolean | null;
-  /** Schema `character`. */
+  /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
-  /** Schema `character`. */
+  /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
-  /** Schema `character`. */
+  /** Name in first-last order. Schema `character`. */
   name_first_last?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly name slug. Schema `character`. */
   name_slug?: string | null;
-  /** Schema `character`. */
+  /** First and last name. Schema `character`. */
   first_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name in last, first order. Schema `character`. */
   last_first_name?: string | null;
-  /** Schema `character`. */
+  /** Last name with first initial. Schema `character`. */
   last_init_name?: string | null;
-  /** Schema `character`. */
+  /** First initial with last name. Schema `character`. */
   init_last_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (first-middle-last). Schema `character`. */
   full_fml_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (last-first-middle). Schema `character`. */
   full_lfm_name?: string | null;
-  /** Schema `double`. */
+  /** Top of the player's strike zone (feet). Schema `double`. */
   strike_zone_top?: number | null;
-  /** Schema `double`. */
+  /** Bottom of the player's strike zone (feet). Schema `double`. */
   strike_zone_bottom?: number | null;
-  /** Schema `character`. */
+  /** Primary position code. Schema `character`. */
   primary_position_code?: string | null;
-  /** Schema `character`. */
+  /** Primary fielding position name. Schema `character`. */
   primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Primary position type (e.g. Infielder). Schema `character`. */
   primary_position_type?: string | null;
-  /** Schema `character`. */
+  /** Primary position abbreviation. Schema `character`. */
   primary_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Batting side code (L/R/S). Schema `character`. */
   bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** Batting side description. Schema `character`. */
   bat_side_description?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand code (L/R). Schema `character`. */
   pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand description. Schema `character`. */
   pitch_hand_description?: string | null;
 }
 
@@ -2258,15 +2258,15 @@ export interface MlbPersonRow {
  * One row of `sdv.mlb.mlb_person_game_stats({ parsed: true })` (returns schema `native/mlb/person_game_stats`, verified on a real sdv-py capture).
  */
 export interface MlbPersonGameStatsRow {
-  /** Schema `double`. */
+  /** Total number of splits in the leaderboard. Schema `double`. */
   total_splits?: number | null;
-  /** Schema `character`. */
+  /** Serialized list of statistical exemptions or special-case flags applied to this player's game-log splits. Schema `character`. */
   exemptions?: string | null;
-  /** Schema `character`. */
+  /** Splits. Schema `character`. */
   splits?: string | null;
-  /** Schema `character`. */
+  /** Stat type display name. Schema `character`. */
   type_display_name?: string | null;
-  /** Schema `character`. */
+  /** Stat group display name. Schema `character`. */
   group_display_name?: string | null;
 }
 
@@ -2274,119 +2274,119 @@ export interface MlbPersonGameStatsRow {
  * One row of `sdv.mlb.mlb_play_by_play({ parsed: true })` (returns schema `native/mlb/play_by_play`, verified on a real sdv-py capture).
  */
 export interface MlbPlayByPlayRow {
-  /** Schema `character`. */
+  /** A serialized list of indices identifying individual pitch events that occurred within this at-bat. Schema `character`. */
   pitch_index?: string | null;
-  /** Schema `character`. */
+  /** A serialized list of indices identifying action-type events (e.g., stolen bases, pickoffs) that occurred within the at-bat. Schema `character`. */
   action_index?: string | null;
-  /** Schema `character`. */
+  /** A serialized list of indices identifying baserunner movement events that occurred during or after this play. Schema `character`. */
   runner_index?: string | null;
-  /** Schema `character`. */
+  /** A serialized representation of baserunner movement records for this play, including starting base, ending base, and relevant event types. Schema `character`. */
   runners?: string | null;
-  /** Schema `character`. */
+  /** A serialized representation of the sequence of individual pitch and action events comprising this at-bat. Schema `character`. */
   play_events?: string | null;
-  /** Schema `character`. */
+  /** The ISO 8601 timestamp marking the conclusion of the entire play (as distinct from a single pitch event) within the game feed. Schema `character`. */
   play_end_time?: string | null;
-  /** Schema `integer`. */
+  /** Zero-based index of the at-bat within the game. Schema `integer`. */
   at_bat_index?: number | null;
-  /** Schema `character`. */
+  /** The high-level category of the play result as classified by the MLB Stats API (e.g., 'atBat', 'action'). Schema `character`. */
   result_type?: string | null;
-  /** Schema `character`. */
+  /** The short categorical label for the play outcome as classified by the MLB Stats API (e.g., 'Strikeout', 'Home Run', 'Walk'). Schema `character`. */
   result_event?: string | null;
-  /** Schema `character`. */
+  /** The snake-cased type identifier for the play outcome used internally by the MLB Stats API (e.g., 'strikeout', 'home_run'). Schema `character`. */
   result_event_type?: string | null;
-  /** Schema `character`. */
+  /** A human-readable text description of the play result as reported by the MLB Stats API (e.g., 'Strikeout', 'Single to left field'). Schema `character`. */
   result_description?: string | null;
-  /** Schema `integer`. */
+  /** The number of runs batted in credited to the batter as a result of this play. Schema `integer`. */
   result_rbi?: number | null;
-  /** Schema `integer`. */
+  /** The away team's cumulative run total at the conclusion of this play. Schema `integer`. */
   result_away_score?: number | null;
-  /** Schema `integer`. */
+  /** The home team's cumulative run total at the conclusion of this play. Schema `integer`. */
   result_home_score?: number | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the play resulted in the batter being retired (i.e., an out was charged to the batter). Schema `logical`. */
   result_is_out?: boolean | null;
-  /** Schema `integer`. */
+  /** The sequential index of the at-bat within the game to which this play or pitch event belongs. Schema `integer`. */
   about_at_bat_index?: number | null;
-  /** Schema `character`. */
+  /** Indicates whether the play occurred in the top or bottom half of the inning (e.g., 'top' or 'bottom'). Schema `character`. */
   about_half_inning?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this play occurred in the top half of the inning (true) or bottom half (false). Schema `logical`. */
   about_is_top_inning?: boolean | null;
-  /** Schema `integer`. */
+  /** The inning number in which this play or pitch event occurred. Schema `integer`. */
   about_inning?: number | null;
-  /** Schema `character`. */
+  /** The ISO 8601 timestamp marking the start of the play event, used for temporal sequencing within the game feed. Schema `character`. */
   about_start_time?: string | null;
-  /** Schema `character`. */
+  /** The ISO 8601 timestamp marking the end of the play event, used for temporal sequencing within the game feed. Schema `character`. */
   about_end_time?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the at-bat or play event has concluded (i.e., reached a terminal result). Schema `logical`. */
   about_is_complete?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this play resulted in one or more runs being scored. Schema `logical`. */
   about_is_scoring_play?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this play was subject to a manager's challenge or umpire review. Schema `logical`. */
   about_has_review?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this play resulted in at least one out being recorded. Schema `logical`. */
   about_has_out?: boolean | null;
-  /** Schema `integer`. */
+  /** A numeric score assigned by the MLB Stats API reflecting how compelling or exciting a given play was, based on leverage and game context. Schema `integer`. */
   about_captivating_index?: number | null;
-  /** Schema `integer`. */
+  /** The ball count in the current at-bat at the time of this pitch or play event. Schema `integer`. */
   count_balls?: number | null;
-  /** Schema `integer`. */
+  /** The strike count in the current at-bat at the time of this pitch or play event. Schema `integer`. */
   count_strikes?: number | null;
-  /** Schema `integer`. */
+  /** The number of outs recorded in the current half-inning at the time of this pitch or play event. Schema `integer`. */
   count_outs?: number | null;
-  /** Schema `integer` (an id). */
+  /** The MLB Stats API (MLBAM) numeric identifier for the batter in this play's matchup. Schema `integer` (an id). */
   matchup_batter_id?: string | null;
-  /** Schema `character`. */
+  /** The full name of the batter involved in this plate appearance. Schema `character`. */
   matchup_batter_full_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the batter's player resource for this matchup. Schema `character`. */
   matchup_batter_link?: string | null;
-  /** Schema `character`. */
+  /** A single-character code indicating the batter's handedness for this matchup (e.g., 'L' for left, 'R' for right, 'S' for switch). Schema `character`. */
   matchup_bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** The human-readable description of the batter's hitting side for this matchup (e.g., 'Left', 'Right', 'Switch'). Schema `character`. */
   matchup_bat_side_description?: string | null;
-  /** Schema `integer` (an id). */
+  /** The MLB Stats API (MLBAM) numeric identifier for the pitcher in this play's matchup. Schema `integer` (an id). */
   matchup_pitcher_id?: string | null;
-  /** Schema `character`. */
+  /** The full name of the pitcher involved in this plate appearance. Schema `character`. */
   matchup_pitcher_full_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the pitcher's player resource for this matchup. Schema `character`. */
   matchup_pitcher_link?: string | null;
-  /** Schema `character`. */
+  /** A single-character code indicating the pitcher's throwing hand for this matchup (e.g., 'L' for left, 'R' for right). Schema `character`. */
   matchup_pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** The human-readable description of the pitcher's throwing arm for this matchup (e.g., 'Left', 'Right'). Schema `character`. */
   matchup_pitch_hand_description?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API (MLBAM) numeric identifier for the runner on first base after the play concluded. Schema `double` (an id). */
   matchup_post_on_first_id?: string | number | null;
-  /** Schema `character`. */
+  /** The full name of the baserunner on first base after the play concluded, if applicable. Schema `character`. */
   matchup_post_on_first_full_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the player resource of the runner on first base after the play. Schema `character`. */
   matchup_post_on_first_link?: string | null;
-  /** Schema `character`. */
+  /** A serialized representation of the batter's hot and cold zone effectiveness data for this matchup context. Schema `character`. */
   matchup_batter_hot_cold_zones?: string | null;
-  /** Schema `character`. */
+  /** A serialized representation of the pitcher's hot and cold zone effectiveness data for this matchup context. Schema `character`. */
   matchup_pitcher_hot_cold_zones?: string | null;
-  /** Schema `character`. */
+  /** A string describing the batter's situational split relevant to this matchup (e.g., 'vs. Right' or 'vs. Left'). Schema `character`. */
   matchup_splits_batter?: string | null;
-  /** Schema `character`. */
+  /** A string describing the pitcher's situational split relevant to this matchup (e.g., 'vs. Left' or 'vs. Right'). Schema `character`. */
   matchup_splits_pitcher?: string | null;
-  /** Schema `character`. */
+  /** A string describing the baserunner configuration applicable to the batter's situational split for this plate appearance. Schema `character`. */
   matchup_splits_men_on_base?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API (MLBAM) numeric identifier for the runner on second base after the play concluded. Schema `double` (an id). */
   matchup_post_on_second_id?: string | number | null;
-  /** Schema `character`. */
+  /** The full name of the baserunner on second base after the play concluded, if applicable. Schema `character`. */
   matchup_post_on_second_full_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the player resource of the runner on second base after the play. Schema `character`. */
   matchup_post_on_second_link?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API (MLBAM) numeric identifier for the runner on third base after the play concluded. Schema `double` (an id). */
   matchup_post_on_third_id?: string | number | null;
-  /** Schema `character`. */
+  /** The full name of the baserunner on third base after the play concluded, if applicable. Schema `character`. */
   matchup_post_on_third_full_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the player resource of the runner on third base after the play. Schema `character`. */
   matchup_post_on_third_link?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the original on-field call was reversed as a result of the replay review. Schema `logical`. */
   review_details_is_overturned?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the umpire review of this play was still ongoing at the time of data capture. Schema `logical`. */
   review_details_in_progress?: boolean | null;
-  /** Schema `character`. */
+  /** The type of review mechanism applied to this play (e.g., 'managerChallenge', 'umpireReview'). Schema `character`. */
   review_details_review_type?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API numeric identifier for the team that initiated the manager's challenge review on this play. Schema `double` (an id). */
   review_details_challenge_team_id?: string | number | null;
 }
 
@@ -2394,125 +2394,125 @@ export interface MlbPlayByPlayRow {
  * One row of `sdv.mlb.mlb_schedule_postseason({ parsed: true })` (returns schema `native/mlb/schedule_postseason`, verified on a real sdv-py capture).
  */
 export interface MlbSchedulePostseasonRow {
-  /** Schema `character`. */
+  /** The calendar date grouping postseason games in this response row, as returned by the MLB Stats API schedule endpoint. Schema `character`. */
   schedule_date?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique game identifier. Schema `integer` (an id). */
   game_pk?: string | null;
-  /** Schema `character`. */
+  /** Globally unique game identifier (GUID). Schema `character`. */
   game_guid?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Game type code (R, P, etc.). Schema `character`. */
   game_type?: string | null;
-  /** Schema `character`. */
+  /** Season year. Schema `character`. */
   season?: string | null;
-  /** Schema `character`. */
+  /** Game date (YYYY-MM-DD). Schema `character`. */
   game_date?: string | null;
-  /** Schema `character`. */
+  /** Official game date (YYYY-MM-DD). Schema `character`. */
   official_date?: string | null;
-  /** Schema `logical`. */
+  /** Whether the game ended in a tie. Schema `logical`. */
   is_tie?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the game is a featured game. Schema `logical`. */
   is_featured_game?: boolean | null;
-  /** Schema `integer`. */
+  /** Game number within a doubleheader. Schema `integer`. */
   game_number?: number | null;
-  /** Schema `logical`. */
+  /** Whether the game is public-facing. Schema `logical`. */
   public_facing?: boolean | null;
-  /** Schema `character`. */
+  /** Doubleheader indicator ('N', 'S', 'Y'). Schema `character`. */
   double_header?: string | null;
-  /** Schema `character`. */
+  /** Gameday data feed type. Schema `character`. */
   gameday_type?: string | null;
-  /** Schema `character`. */
+  /** Whether the game is a tiebreaker. Schema `character`. */
   tiebreaker?: string | null;
-  /** Schema `character` (an id). */
+  /** Calendar event identifier. Schema `character` (an id). */
   calendar_event_id?: string | null;
-  /** Schema `character`. */
+  /** Display string for the season. Schema `character`. */
   season_display?: string | null;
-  /** Schema `character`. */
+  /** Day or night game indicator. Schema `character`. */
   day_night?: string | null;
-  /** Schema `character`. */
+  /** Long-form description text. Schema `character`. */
   description?: string | null;
-  /** Schema `integer`. */
+  /** Scheduled number of innings. Schema `integer`. */
   scheduled_innings?: number | null;
-  /** Schema `logical`. */
+  /** Whether home/away teams are reversed. Schema `logical`. */
   reverse_home_away_status?: boolean | null;
-  /** Schema `integer`. */
+  /** Length of inning breaks in seconds. Schema `integer`. */
   inning_break_length?: number | null;
-  /** Schema `integer`. */
+  /** Number of games in the series. Schema `integer`. */
   games_in_series?: number | null;
-  /** Schema `integer`. */
+  /** Game number within the series. Schema `integer`. */
   series_game_number?: number | null;
-  /** Schema `character`. */
+  /** Description of the series. Schema `character`. */
   series_description?: string | null;
-  /** Schema `character`. */
+  /** Source of the schedule record. Schema `character`. */
   record_source?: string | null;
-  /** Schema `character`. */
+  /** Whether the game is played only if necessary. Schema `character`. */
   if_necessary?: string | null;
-  /** Schema `character`. */
+  /** Description of the if-necessary status. Schema `character`. */
   if_necessary_description?: string | null;
-  /** Schema `character`. */
+  /** Abstract game state (e.g. 'Final'). Schema `character`. */
   status_abstract_game_state?: string | null;
-  /** Schema `character`. */
+  /** Coded game state. Schema `character`. */
   status_coded_game_state?: string | null;
-  /** Schema `character`. */
+  /** Detailed game state. Schema `character`. */
   status_detailed_state?: string | null;
-  /** Schema `character`. */
+  /** Status code for the game. Schema `character`. */
   status_status_code?: string | null;
-  /** Schema `logical`. */
+  /** Whether the start time is TBD. Schema `logical`. */
   status_start_time_tbd?: boolean | null;
-  /** Schema `character`. */
+  /** Abstract game state code. Schema `character`. */
   status_abstract_game_code?: string | null;
-  /** Schema `integer` (an id). */
+  /** Away team MLBAM ID. Schema `integer` (an id). */
   teams_away_team_id?: string | null;
-  /** Schema `character`. */
+  /** Away team name. Schema `character`. */
   teams_away_team_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the away team. Schema `character`. */
   teams_away_team_link?: string | null;
-  /** Schema `integer`. */
+  /** Away team league-record wins. Schema `integer`. */
   teams_away_league_record_wins?: number | null;
-  /** Schema `integer`. */
+  /** Away team league-record losses. Schema `integer`. */
   teams_away_league_record_losses?: number | null;
-  /** Schema `integer`. */
+  /** Away team league-record ties. Schema `integer`. */
   teams_away_league_record_ties?: number | null;
-  /** Schema `character`. */
+  /** Away team winning percentage. Schema `character`. */
   teams_away_league_record_pct?: string | null;
-  /** Schema `integer`. */
+  /** Away team score. Schema `integer`. */
   teams_away_score?: number | null;
-  /** Schema `logical`. */
+  /** Whether the away team won. Schema `logical`. */
   teams_away_is_winner?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the away team is a split squad. Schema `logical`. */
   teams_away_split_squad?: boolean | null;
-  /** Schema `integer`. */
+  /** Away team's series number. Schema `integer`. */
   teams_away_series_number?: number | null;
-  /** Schema `integer` (an id). */
+  /** Home team MLBAM ID. Schema `integer` (an id). */
   teams_home_team_id?: string | null;
-  /** Schema `character`. */
+  /** Home team name. Schema `character`. */
   teams_home_team_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the home team. Schema `character`. */
   teams_home_team_link?: string | null;
-  /** Schema `integer`. */
+  /** Home team league-record wins. Schema `integer`. */
   teams_home_league_record_wins?: number | null;
-  /** Schema `integer`. */
+  /** Home team league-record losses. Schema `integer`. */
   teams_home_league_record_losses?: number | null;
-  /** Schema `integer`. */
+  /** Home team league-record ties. Schema `integer`. */
   teams_home_league_record_ties?: number | null;
-  /** Schema `character`. */
+  /** Home team winning percentage. Schema `character`. */
   teams_home_league_record_pct?: string | null;
-  /** Schema `integer`. */
+  /** Home team score. Schema `integer`. */
   teams_home_score?: number | null;
-  /** Schema `logical`. */
+  /** Whether the home team won. Schema `logical`. */
   teams_home_is_winner?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the home team is a split squad. Schema `logical`. */
   teams_home_split_squad?: boolean | null;
-  /** Schema `integer`. */
+  /** Home team's series number. Schema `integer`. */
   teams_home_series_number?: number | null;
-  /** Schema `integer` (an id). */
+  /** MLBAM venue ID. Schema `integer` (an id). */
   venue_id?: string | null;
-  /** Schema `character`. */
+  /** Venue name. Schema `character`. */
   venue_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the venue. Schema `character`. */
   venue_link?: string | null;
-  /** Schema `character`. */
+  /** API link to the game content. Schema `character`. */
   content_link?: string | null;
 }
 
@@ -2520,23 +2520,23 @@ export interface MlbSchedulePostseasonRow {
  * One row of `sdv.mlb.mlb_schedule_postseason_series({ parsed: true })` (returns schema `native/mlb/schedule_postseason_series`, verified on a real sdv-py capture).
  */
 export interface MlbSchedulePostseasonSeriesRow {
-  /** Schema `integer`. */
+  /** Total schedule items on the date. Schema `integer`. */
   total_items?: number | null;
-  /** Schema `integer`. */
+  /** Total games on the date. Schema `integer`. */
   total_games?: number | null;
-  /** Schema `integer`. */
+  /** Games currently in progress on the date. Schema `integer`. */
   total_games_in_progress?: number | null;
   /** Schema `character`. */
   games?: string | null;
-  /** Schema `integer`. */
+  /** Display sort order for the sport. Schema `integer`. */
   sort_order?: number | null;
-  /** Schema `character` (an id). */
+  /** Series identifier (e.g. 'W_1'). Schema `character` (an id). */
   series_id?: string | null;
-  /** Schema `integer`. */
+  /** Sort number for the series. Schema `integer`. */
   series_sort_number?: number | null;
-  /** Schema `logical`. */
+  /** Whether the series is the default series. Schema `logical`. */
   series_is_default?: boolean | null;
-  /** Schema `character`. */
+  /** Game type code for the series. Schema `character`. */
   series_game_type?: string | null;
 }
 
@@ -2544,119 +2544,119 @@ export interface MlbSchedulePostseasonSeriesRow {
  * One row of `sdv.mlb.mlb_schedule_tied({ parsed: true })` (returns schema `native/mlb/schedule_tied`, verified on a real sdv-py capture).
  */
 export interface MlbScheduleTiedRow {
-  /** Schema `character`. */
+  /** The calendar date grouping tied (suspended and resumed) games in this response row, as returned by the MLB Stats API schedule endpoint. Schema `character`. */
   schedule_date?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique game identifier. Schema `integer` (an id). */
   game_pk?: string | null;
-  /** Schema `character`. */
+  /** Globally unique game identifier (GUID). Schema `character`. */
   game_guid?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Game type code (R, P, etc.). Schema `character`. */
   game_type?: string | null;
-  /** Schema `character`. */
+  /** Season year. Schema `character`. */
   season?: string | null;
-  /** Schema `character`. */
+  /** Game date (YYYY-MM-DD). Schema `character`. */
   game_date?: string | null;
-  /** Schema `character`. */
+  /** Official game date (YYYY-MM-DD). Schema `character`. */
   official_date?: string | null;
-  /** Schema `logical`. */
+  /** Whether the game ended in a tie. Schema `logical`. */
   is_tie?: boolean | null;
-  /** Schema `integer`. */
+  /** Game number within a doubleheader. Schema `integer`. */
   game_number?: number | null;
-  /** Schema `logical`. */
+  /** Whether the game is public-facing. Schema `logical`. */
   public_facing?: boolean | null;
-  /** Schema `character`. */
+  /** Doubleheader indicator ('N', 'S', 'Y'). Schema `character`. */
   double_header?: string | null;
-  /** Schema `character`. */
+  /** Gameday data feed type. Schema `character`. */
   gameday_type?: string | null;
-  /** Schema `character`. */
+  /** Whether the game is a tiebreaker. Schema `character`. */
   tiebreaker?: string | null;
-  /** Schema `character` (an id). */
+  /** Calendar event identifier. Schema `character` (an id). */
   calendar_event_id?: string | null;
-  /** Schema `character`. */
+  /** Display string for the season. Schema `character`. */
   season_display?: string | null;
-  /** Schema `character`. */
+  /** Day or night game indicator. Schema `character`. */
   day_night?: string | null;
-  /** Schema `integer`. */
+  /** Scheduled number of innings. Schema `integer`. */
   scheduled_innings?: number | null;
-  /** Schema `logical`. */
+  /** Whether home/away teams are reversed. Schema `logical`. */
   reverse_home_away_status?: boolean | null;
-  /** Schema `integer`. */
+  /** Length of inning breaks in seconds. Schema `integer`. */
   inning_break_length?: number | null;
-  /** Schema `integer`. */
+  /** Number of games in the series. Schema `integer`. */
   games_in_series?: number | null;
-  /** Schema `integer`. */
+  /** Game number within the series. Schema `integer`. */
   series_game_number?: number | null;
-  /** Schema `character`. */
+  /** Description of the series. Schema `character`. */
   series_description?: string | null;
-  /** Schema `character`. */
+  /** Source of the schedule record. Schema `character`. */
   record_source?: string | null;
-  /** Schema `character`. */
+  /** Whether the game is played only if necessary. Schema `character`. */
   if_necessary?: string | null;
-  /** Schema `character`. */
+  /** Description of the if-necessary status. Schema `character`. */
   if_necessary_description?: string | null;
-  /** Schema `character`. */
+  /** Abstract game state (e.g. 'Final'). Schema `character`. */
   status_abstract_game_state?: string | null;
-  /** Schema `character`. */
+  /** Coded game state. Schema `character`. */
   status_coded_game_state?: string | null;
-  /** Schema `character`. */
+  /** Detailed game state. Schema `character`. */
   status_detailed_state?: string | null;
-  /** Schema `character`. */
+  /** Status code for the game. Schema `character`. */
   status_status_code?: string | null;
-  /** Schema `logical`. */
+  /** Whether the start time is TBD. Schema `logical`. */
   status_start_time_tbd?: boolean | null;
-  /** Schema `character`. */
+  /** Reason for the game status (e.g. 'Rain'). Schema `character`. */
   status_reason?: string | null;
-  /** Schema `character`. */
+  /** Abstract game state code. Schema `character`. */
   status_abstract_game_code?: string | null;
-  /** Schema `integer` (an id). */
+  /** Away team MLBAM ID. Schema `integer` (an id). */
   teams_away_team_id?: string | null;
-  /** Schema `character`. */
+  /** Away team name. Schema `character`. */
   teams_away_team_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the away team. Schema `character`. */
   teams_away_team_link?: string | null;
-  /** Schema `integer`. */
+  /** Away team league-record wins. Schema `integer`. */
   teams_away_league_record_wins?: number | null;
-  /** Schema `integer`. */
+  /** Away team league-record losses. Schema `integer`. */
   teams_away_league_record_losses?: number | null;
-  /** Schema `integer`. */
+  /** Away team league-record ties. Schema `integer`. */
   teams_away_league_record_ties?: number | null;
-  /** Schema `character`. */
+  /** Away team winning percentage. Schema `character`. */
   teams_away_league_record_pct?: string | null;
-  /** Schema `integer`. */
+  /** Away team score. Schema `integer`. */
   teams_away_score?: number | null;
-  /** Schema `logical`. */
+  /** Whether the away team is a split squad. Schema `logical`. */
   teams_away_split_squad?: boolean | null;
-  /** Schema `integer`. */
+  /** Away team's series number. Schema `integer`. */
   teams_away_series_number?: number | null;
-  /** Schema `integer` (an id). */
+  /** Home team MLBAM ID. Schema `integer` (an id). */
   teams_home_team_id?: string | null;
-  /** Schema `character`. */
+  /** Home team name. Schema `character`. */
   teams_home_team_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the home team. Schema `character`. */
   teams_home_team_link?: string | null;
-  /** Schema `integer`. */
+  /** Home team league-record wins. Schema `integer`. */
   teams_home_league_record_wins?: number | null;
-  /** Schema `integer`. */
+  /** Home team league-record losses. Schema `integer`. */
   teams_home_league_record_losses?: number | null;
-  /** Schema `integer`. */
+  /** Home team league-record ties. Schema `integer`. */
   teams_home_league_record_ties?: number | null;
-  /** Schema `character`. */
+  /** Home team winning percentage. Schema `character`. */
   teams_home_league_record_pct?: string | null;
-  /** Schema `integer`. */
+  /** Home team score. Schema `integer`. */
   teams_home_score?: number | null;
-  /** Schema `logical`. */
+  /** Whether the home team is a split squad. Schema `logical`. */
   teams_home_split_squad?: boolean | null;
-  /** Schema `integer`. */
+  /** Home team's series number. Schema `integer`. */
   teams_home_series_number?: number | null;
-  /** Schema `integer` (an id). */
+  /** MLBAM venue ID. Schema `integer` (an id). */
   venue_id?: string | null;
-  /** Schema `character`. */
+  /** Venue name. Schema `character`. */
   venue_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the venue. Schema `character`. */
   venue_link?: string | null;
-  /** Schema `character`. */
+  /** API link to the game content. Schema `character`. */
   content_link?: string | null;
 }
 
@@ -2664,47 +2664,47 @@ export interface MlbScheduleTiedRow {
  * One row of `sdv.mlb.mlb_season({ parsed: true })` (returns schema `native/mlb/season`, verified on a real sdv-py capture).
  */
 export interface MlbSeasonRow {
-  /** Schema `character` (an id). */
+  /** stats.ncaa.org season identifier. Schema `character` (an id). */
   season_id?: string | null;
-  /** Schema `logical`. */
+  /** Whether the season has a wild card round. Schema `logical`. */
   has_wildcard?: boolean | null;
-  /** Schema `character`. */
+  /** Pre-season start date. Schema `character`. */
   pre_season_start_date?: string | null;
-  /** Schema `character`. */
+  /** Pre-season end date. Schema `character`. */
   pre_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Season start date. Schema `character`. */
   season_start_date?: string | null;
-  /** Schema `character`. */
+  /** Spring training start date. Schema `character`. */
   spring_start_date?: string | null;
-  /** Schema `character`. */
+  /** Spring training end date. Schema `character`. */
   spring_end_date?: string | null;
-  /** Schema `character`. */
+  /** Regular season start date. Schema `character`. */
   regular_season_start_date?: string | null;
-  /** Schema `character`. */
+  /** Last date of the first half. Schema `character`. */
   last_date1st_half?: string | null;
-  /** Schema `character`. */
+  /** All-Star Game date. Schema `character`. */
   all_star_date?: string | null;
-  /** Schema `character`. */
+  /** First date of the second half. Schema `character`. */
   first_date2nd_half?: string | null;
-  /** Schema `character`. */
+  /** Regular season end date. Schema `character`. */
   regular_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Post-season start date. Schema `character`. */
   post_season_start_date?: string | null;
-  /** Schema `character`. */
+  /** Post-season end date. Schema `character`. */
   post_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Season end date. Schema `character`. */
   season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Off-season start date. Schema `character`. */
   offseason_start_date?: string | null;
-  /** Schema `character`. */
+  /** Off-season end date. Schema `character`. */
   off_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Season-level Gameday data feed type. Schema `character`. */
   season_level_gameday_type?: string | null;
-  /** Schema `character`. */
+  /** Game-level Gameday data feed type. Schema `character`. */
   game_level_gameday_type?: string | null;
-  /** Schema `double`. */
+  /** Plate appearances per team game to qualify. Schema `double`. */
   qualifier_plate_appearances?: number | null;
-  /** Schema `double`. */
+  /** Outs pitched per team game to qualify. Schema `double`. */
   qualifier_outs_pitched?: number | null;
 }
 
@@ -2712,47 +2712,47 @@ export interface MlbSeasonRow {
  * One row of `sdv.mlb.mlb_seasons_all({ parsed: true })` (returns schema `native/mlb/seasons_all`, verified on a real sdv-py capture).
  */
 export interface MlbSeasonsAllRow {
-  /** Schema `character` (an id). */
+  /** stats.ncaa.org season identifier. Schema `character` (an id). */
   season_id?: string | null;
-  /** Schema `logical`. */
+  /** Whether the season has a wild card round. Schema `logical`. */
   has_wildcard?: boolean | null;
-  /** Schema `character`. */
+  /** Pre-season start date. Schema `character`. */
   pre_season_start_date?: string | null;
-  /** Schema `character`. */
+  /** Season start date. Schema `character`. */
   season_start_date?: string | null;
-  /** Schema `character`. */
+  /** Regular season start date. Schema `character`. */
   regular_season_start_date?: string | null;
-  /** Schema `character`. */
+  /** Regular season end date. Schema `character`. */
   regular_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Season end date. Schema `character`. */
   season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Off-season start date. Schema `character`. */
   offseason_start_date?: string | null;
-  /** Schema `character`. */
+  /** Off-season end date. Schema `character`. */
   off_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Season-level Gameday data feed type. Schema `character`. */
   season_level_gameday_type?: string | null;
-  /** Schema `character`. */
+  /** Game-level Gameday data feed type. Schema `character`. */
   game_level_gameday_type?: string | null;
-  /** Schema `double`. */
+  /** Plate appearances per team game to qualify. Schema `double`. */
   qualifier_plate_appearances?: number | null;
-  /** Schema `double`. */
+  /** Outs pitched per team game to qualify. Schema `double`. */
   qualifier_outs_pitched?: number | null;
-  /** Schema `character`. */
+  /** Post-season start date. Schema `character`. */
   post_season_start_date?: string | null;
-  /** Schema `character`. */
+  /** Post-season end date. Schema `character`. */
   post_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Last date of the first half. Schema `character`. */
   last_date1st_half?: string | null;
-  /** Schema `character`. */
+  /** All-Star Game date. Schema `character`. */
   all_star_date?: string | null;
-  /** Schema `character`. */
+  /** First date of the second half. Schema `character`. */
   first_date2nd_half?: string | null;
-  /** Schema `character`. */
+  /** Pre-season end date. Schema `character`. */
   pre_season_end_date?: string | null;
-  /** Schema `character`. */
+  /** Spring training start date. Schema `character`. */
   spring_start_date?: string | null;
-  /** Schema `character`. */
+  /** Spring training end date. Schema `character`. */
   spring_end_date?: string | null;
 }
 
@@ -2760,19 +2760,19 @@ export interface MlbSeasonsAllRow {
  * One row of `sdv.mlb.mlb_sport({ parsed: true })` (returns schema `native/mlb/sport`, verified on a real sdv-py capture).
  */
 export interface MlbSportRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Fielder detail type code. Schema `character`. */
   code?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** Short abbreviation. Schema `character`. */
   abbreviation?: string | null;
-  /** Schema `integer`. */
+  /** Display sort order for the sport. Schema `integer`. */
   sort_order?: number | null;
-  /** Schema `logical`. */
+  /** Whether the sport/level is active. Schema `logical`. */
   active_status?: boolean | null;
 }
 
@@ -2780,105 +2780,105 @@ export interface MlbSportRow {
  * One row of `sdv.mlb.mlb_sport_players({ parsed: true })` (returns schema `native/mlb/sport_players`, verified on a real sdv-py capture).
  */
 export interface MlbSportPlayersRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Player's full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Player uniform number. Schema `character`. */
   primary_number?: string | null;
-  /** Schema `character`. */
+  /** Date of birth (YYYY-MM-DD). Schema `character`. */
   birth_date?: string | null;
-  /** Schema `integer`. */
+  /** Current age in years. Schema `integer`. */
   current_age?: number | null;
-  /** Schema `character`. */
+  /** City of birth. Schema `character`. */
   birth_city?: string | null;
-  /** Schema `character`. */
+  /** State or province of birth. Schema `character`. */
   birth_state_province?: string | null;
-  /** Schema `character`. */
+  /** Country of birth. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `character`. */
+  /** Height (feet and inches). Schema `character`. */
   height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character`. */
+  /** Preferred first name. Schema `character`. */
   use_name?: string | null;
-  /** Schema `character`. */
+  /** Preferred last name. Schema `character`. */
   use_last_name?: string | null;
-  /** Schema `character`. */
+  /** Player middle name. Schema `character`. */
   middle_name?: string | null;
-  /** Schema `character`. */
+  /** Name as shown in box scores. Schema `character`. */
   boxscore_name?: string | null;
-  /** Schema `character`. */
+  /** Player gender. Schema `character`. */
   gender?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person is a player. Schema `logical`. */
   is_player?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the player profile is verified. Schema `logical`. */
   is_verified?: boolean | null;
-  /** Schema `double`. */
+  /** Year the player was drafted. Schema `double`. */
   draft_year?: number | null;
-  /** Schema `character`. */
+  /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
-  /** Schema `character`. */
+  /** Name in first-last order. Schema `character`. */
   name_first_last?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly name slug. Schema `character`. */
   name_slug?: string | null;
-  /** Schema `character`. */
+  /** First and last name. Schema `character`. */
   first_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name in last, first order. Schema `character`. */
   last_first_name?: string | null;
-  /** Schema `character`. */
+  /** Last name with first initial. Schema `character`. */
   last_init_name?: string | null;
-  /** Schema `character`. */
+  /** First initial with last name. Schema `character`. */
   init_last_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (first-middle-last). Schema `character`. */
   full_fml_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (last-first-middle). Schema `character`. */
   full_lfm_name?: string | null;
-  /** Schema `double`. */
+  /** Top of the player's strike zone (feet). Schema `double`. */
   strike_zone_top?: number | null;
-  /** Schema `double`. */
+  /** Bottom of the player's strike zone (feet). Schema `double`. */
   strike_zone_bottom?: number | null;
-  /** Schema `integer` (an id). */
+  /** Current team MLBAM ID. Schema `integer` (an id). */
   current_team_id?: string | null;
-  /** Schema `character`. */
+  /** Current team name. Schema `character`. */
   current_team_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the current team. Schema `character`. */
   current_team_link?: string | null;
-  /** Schema `character`. */
+  /** Primary position code. Schema `character`. */
   primary_position_code?: string | null;
-  /** Schema `character`. */
+  /** Primary fielding position name. Schema `character`. */
   primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Primary position type (e.g. Infielder). Schema `character`. */
   primary_position_type?: string | null;
-  /** Schema `character`. */
+  /** Primary position abbreviation. Schema `character`. */
   primary_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Batting side code (L/R/S). Schema `character`. */
   bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** Batting side description. Schema `character`. */
   bat_side_description?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand code (L/R). Schema `character`. */
   pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand description. Schema `character`. */
   pitch_hand_description?: string | null;
-  /** Schema `character`. */
+  /** Maternal family name. Schema `character`. */
   name_matrilineal?: string | null;
-  /** Schema `character`. */
+  /** Player nickname. Schema `character`. */
   nick_name?: string | null;
-  /** Schema `character`. */
+  /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
-  /** Schema `character`. */
+  /** Date of last MLB game played. Schema `character`. */
   last_played_date?: string | null;
-  /** Schema `character`. */
+  /** Name title. Schema `character`. */
   name_title?: string | null;
-  /** Schema `character`. */
+  /** Name suffix (e.g. Jr., Sr., III). Schema `character`. */
   name_suffix?: string | null;
 }
 
@@ -2886,19 +2886,19 @@ export interface MlbSportPlayersRow {
  * One row of `sdv.mlb.mlb_sports({ parsed: true })` (returns schema `native/mlb/sports`, verified on a real sdv-py capture).
  */
 export interface MlbSportsRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Fielder detail type code. Schema `character`. */
   code?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** Short abbreviation. Schema `character`. */
   abbreviation?: string | null;
-  /** Schema `integer`. */
+  /** Display sort order for the sport. Schema `integer`. */
   sort_order?: number | null;
-  /** Schema `logical`. */
+  /** Whether the sport/level is active. Schema `logical`. */
   active_status?: boolean | null;
 }
 
@@ -2906,71 +2906,71 @@ export interface MlbSportsRow {
  * One row of `sdv.mlb.mlb_team({ parsed: true })` (returns schema `native/mlb/team`, verified on a real sdv-py capture).
  */
 export interface MlbTeamRow {
-  /** Schema `character`. */
+  /** All-star status flag. Schema `character`. */
   all_star_status?: string | null;
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `integer`. */
+  /** Season year. Schema `integer`. */
   season?: number | null;
-  /** Schema `character`. */
+  /** Internal team code. Schema `character`. */
   team_code?: string | null;
-  /** Schema `character`. */
+  /** File code abbreviation. Schema `character`. */
   file_code?: string | null;
-  /** Schema `character`. */
+  /** Short abbreviation. Schema `character`. */
   abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Team name. Schema `character`. */
   team_name?: string | null;
-  /** Schema `character`. */
+  /** Team location (city). Schema `character`. */
   location_name?: string | null;
-  /** Schema `character`. */
+  /** First year the franchise played. Schema `character`. */
   first_year_of_play?: string | null;
-  /** Schema `character`. */
+  /** Short display name. Schema `character`. */
   short_name?: string | null;
-  /** Schema `character`. */
+  /** Franchise name. Schema `character`. */
   franchise_name?: string | null;
-  /** Schema `character`. */
+  /** Club name. Schema `character`. */
   club_name?: string | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `integer` (an id). */
+  /** Spring league MLBAM ID. Schema `integer` (an id). */
   spring_league_id?: string | null;
-  /** Schema `character`. */
+  /** Spring league name. Schema `character`. */
   spring_league_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the spring league. Schema `character`. */
   spring_league_link?: string | null;
-  /** Schema `character`. */
+  /** Spring league abbreviation. Schema `character`. */
   spring_league_abbreviation?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLBAM venue ID. Schema `integer` (an id). */
   venue_id?: string | null;
-  /** Schema `character`. */
+  /** Venue name. Schema `character`. */
   venue_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the venue. Schema `character`. */
   venue_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** Spring training venue MLBAM ID. Schema `integer` (an id). */
   spring_venue_id?: string | null;
-  /** Schema `character`. */
+  /** API link to the spring venue. Schema `character`. */
   spring_venue_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** League MLBAM ID. Schema `integer` (an id). */
   league_id?: string | null;
-  /** Schema `character`. */
+  /** League name. Schema `character`. */
   league_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the league. Schema `character`. */
   league_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** Division MLBAM ID. Schema `integer` (an id). */
   division_id?: string | null;
-  /** Schema `character`. */
+  /** Division name. Schema `character`. */
   division_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the division. Schema `character`. */
   division_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** Sport MLBAM ID. Schema `integer` (an id). */
   sport_id?: string | null;
-  /** Schema `character`. */
+  /** API link to the sport. Schema `character`. */
   sport_link?: string | null;
-  /** Schema `character`. */
+  /** Sport name (e.g., Major League Baseball). Schema `character`. */
   sport_name?: string | null;
 }
 
@@ -2978,75 +2978,75 @@ export interface MlbTeamRow {
  * One row of `sdv.mlb.mlb_team_affiliates({ parsed: true })` (returns schema `native/mlb/team_affiliates`, verified on a real sdv-py capture).
  */
 export interface MlbTeamAffiliatesRow {
-  /** Schema `character`. */
+  /** All-star status flag. Schema `character`. */
   all_star_status?: string | null;
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `integer`. */
+  /** Season year. Schema `integer`. */
   season?: number | null;
-  /** Schema `character`. */
+  /** Internal team code. Schema `character`. */
   team_code?: string | null;
-  /** Schema `character`. */
+  /** File code abbreviation. Schema `character`. */
   file_code?: string | null;
-  /** Schema `character`. */
+  /** Short abbreviation. Schema `character`. */
   abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Team name. Schema `character`. */
   team_name?: string | null;
-  /** Schema `character`. */
+  /** Team location (city). Schema `character`. */
   location_name?: string | null;
-  /** Schema `character`. */
+  /** First year the franchise played. Schema `character`. */
   first_year_of_play?: string | null;
-  /** Schema `character`. */
+  /** Short display name. Schema `character`. */
   short_name?: string | null;
-  /** Schema `character`. */
+  /** Franchise name. Schema `character`. */
   franchise_name?: string | null;
-  /** Schema `character`. */
+  /** Club name. Schema `character`. */
   club_name?: string | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `double` (an id). */
+  /** Spring league MLBAM ID. Schema `double` (an id). */
   spring_league_id?: string | number | null;
-  /** Schema `character`. */
+  /** Spring league name. Schema `character`. */
   spring_league_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the spring league. Schema `character`. */
   spring_league_link?: string | null;
-  /** Schema `character`. */
+  /** Spring league abbreviation. Schema `character`. */
   spring_league_abbreviation?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLBAM venue ID. Schema `integer` (an id). */
   venue_id?: string | null;
-  /** Schema `character`. */
+  /** Venue name. Schema `character`. */
   venue_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the venue. Schema `character`. */
   venue_link?: string | null;
-  /** Schema `double` (an id). */
+  /** Spring training venue MLBAM ID. Schema `double` (an id). */
   spring_venue_id?: string | number | null;
-  /** Schema `character`. */
+  /** API link to the spring venue. Schema `character`. */
   spring_venue_link?: string | null;
-  /** Schema `double` (an id). */
+  /** League MLBAM ID. Schema `double` (an id). */
   league_id?: string | number | null;
-  /** Schema `character`. */
+  /** League name. Schema `character`. */
   league_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the league. Schema `character`. */
   league_link?: string | null;
-  /** Schema `double` (an id). */
+  /** Division MLBAM ID. Schema `double` (an id). */
   division_id?: string | number | null;
-  /** Schema `character`. */
+  /** Division name. Schema `character`. */
   division_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the division. Schema `character`. */
   division_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** Sport MLBAM ID. Schema `integer` (an id). */
   sport_id?: string | null;
-  /** Schema `character`. */
+  /** API link to the sport. Schema `character`. */
   sport_link?: string | null;
-  /** Schema `character`. */
+  /** Sport name (e.g., Major League Baseball). Schema `character`. */
   sport_name?: string | null;
-  /** Schema `character`. */
+  /** Parent organization name. Schema `character`. */
   parent_org_name?: string | null;
-  /** Schema `double` (an id). */
+  /** Parent organization MLBAM ID. Schema `double` (an id). */
   parent_org_id?: string | number | null;
 }
 
@@ -3054,97 +3054,97 @@ export interface MlbTeamAffiliatesRow {
  * One row of `sdv.mlb.mlb_team_alumni({ parsed: true })` (returns schema `native/mlb/team_alumni`, verified on a real sdv-py capture).
  */
 export interface MlbTeamAlumniRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Player's full name. Schema `character`. */
   full_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Player uniform number. Schema `character`. */
   primary_number?: string | null;
-  /** Schema `character`. */
+  /** Date of birth (YYYY-MM-DD). Schema `character`. */
   birth_date?: string | null;
-  /** Schema `integer`. */
+  /** Current age in years. Schema `integer`. */
   current_age?: number | null;
-  /** Schema `character`. */
+  /** City of birth. Schema `character`. */
   birth_city?: string | null;
-  /** Schema `character`. */
+  /** Country of birth. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `character`. */
+  /** Height (feet and inches). Schema `character`. */
   height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character`. */
+  /** Preferred first name. Schema `character`. */
   use_name?: string | null;
-  /** Schema `character`. */
+  /** Preferred last name. Schema `character`. */
   use_last_name?: string | null;
-  /** Schema `character`. */
+  /** Player middle name. Schema `character`. */
   middle_name?: string | null;
-  /** Schema `character`. */
+  /** Name as shown in box scores. Schema `character`. */
   boxscore_name?: string | null;
-  /** Schema `character`. */
+  /** Player nickname. Schema `character`. */
   nick_name?: string | null;
-  /** Schema `character`. */
+  /** Player gender. Schema `character`. */
   gender?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person is a player. Schema `logical`. */
   is_player?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the player profile is verified. Schema `logical`. */
   is_verified?: boolean | null;
-  /** Schema `character`. */
+  /** Phonetic name pronunciation. Schema `character`. */
   pronunciation?: string | null;
-  /** Schema `character`. */
+  /** MLB debut date (YYYY-MM-DD). Schema `character`. */
   mlb_debut_date?: string | null;
-  /** Schema `character`. */
+  /** Name in first-last order. Schema `character`. */
   name_first_last?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly name slug. Schema `character`. */
   name_slug?: string | null;
-  /** Schema `character`. */
+  /** First and last name. Schema `character`. */
   first_last_name?: string | null;
-  /** Schema `character`. */
+  /** Name in last, first order. Schema `character`. */
   last_first_name?: string | null;
-  /** Schema `character`. */
+  /** Last name with first initial. Schema `character`. */
   last_init_name?: string | null;
-  /** Schema `character`. */
+  /** First initial with last name. Schema `character`. */
   init_last_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (first-middle-last). Schema `character`. */
   full_fml_name?: string | null;
-  /** Schema `character`. */
+  /** Full name (last-first-middle). Schema `character`. */
   full_lfm_name?: string | null;
-  /** Schema `double`. */
+  /** Top of the player's strike zone (feet). Schema `double`. */
   strike_zone_top?: number | null;
-  /** Schema `double`. */
+  /** Bottom of the player's strike zone (feet). Schema `double`. */
   strike_zone_bottom?: number | null;
-  /** Schema `character`. */
+  /** Last season the player was with the team. Schema `character`. */
   alumni_last_season?: string | null;
-  /** Schema `character`. */
+  /** Primary position code. Schema `character`. */
   primary_position_code?: string | null;
-  /** Schema `character`. */
+  /** Primary fielding position name. Schema `character`. */
   primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Primary position type (e.g. Infielder). Schema `character`. */
   primary_position_type?: string | null;
-  /** Schema `character`. */
+  /** Primary position abbreviation. Schema `character`. */
   primary_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Batting side code (L/R/S). Schema `character`. */
   bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** Batting side description. Schema `character`. */
   bat_side_description?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand code (L/R). Schema `character`. */
   pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** Throwing hand description. Schema `character`. */
   pitch_hand_description?: string | null;
-  /** Schema `character`. */
+  /** State or province of birth. Schema `character`. */
   birth_state_province?: string | null;
-  /** Schema `double`. */
+  /** Year the player was drafted. Schema `double`. */
   draft_year?: number | null;
-  /** Schema `character`. */
+  /** Date of last MLB game played. Schema `character`. */
   last_played_date?: string | null;
-  /** Schema `character`. */
+  /** Maternal family name. Schema `character`. */
   name_matrilineal?: string | null;
 }
 
@@ -3152,19 +3152,19 @@ export interface MlbTeamAlumniRow {
  * One row of `sdv.mlb.mlb_team_coaches({ parsed: true })` (returns schema `native/mlb/team_coaches`, verified on a real sdv-py capture).
  */
 export interface MlbTeamCoachesRow {
-  /** Schema `character`. */
+  /** Jersey number worn (often blank for non-uniformed roles). Schema `character`. */
   jersey_number?: string | null;
-  /** Schema `character`. */
+  /** Job title (e.g. 'Umpire'). Schema `character`. */
   job?: string | null;
-  /** Schema `character` (an id). */
+  /** Job code identifier. Schema `character` (an id). */
   job_id?: string | null;
-  /** Schema `character`. */
+  /** Specific role title for the assignment. Schema `character`. */
   title?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB player ID. Schema `integer` (an id). */
   person_id?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   person_full_name?: string | null;
-  /** Schema `character`. */
+  /** API relative link to the person. Schema `character`. */
   person_link?: string | null;
 }
 
@@ -3172,19 +3172,19 @@ export interface MlbTeamCoachesRow {
  * One row of `sdv.mlb.mlb_team_personnel({ parsed: true })` (returns schema `native/mlb/team_personnel`, verified on a real sdv-py capture).
  */
 export interface MlbTeamPersonnelRow {
-  /** Schema `character`. */
+  /** Jersey number worn (often blank for non-uniformed roles). Schema `character`. */
   jersey_number?: string | null;
-  /** Schema `character`. */
+  /** Job title (e.g. 'Umpire'). Schema `character`. */
   job?: string | null;
-  /** Schema `character` (an id). */
+  /** Job code identifier. Schema `character` (an id). */
   job_id?: string | null;
-  /** Schema `character`. */
+  /** Specific role title for the assignment. Schema `character`. */
   title?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB player ID. Schema `integer` (an id). */
   person_id?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   person_full_name?: string | null;
-  /** Schema `character`. */
+  /** API relative link to the person. Schema `character`. */
   person_link?: string | null;
 }
 
@@ -3192,25 +3192,25 @@ export interface MlbTeamPersonnelRow {
  * One row of `sdv.mlb.mlb_team_roster({ parsed: true })` (returns schema `native/mlb/team_roster`, verified on a real sdv-py capture).
  */
 export interface MlbTeamRosterRow {
-  /** Schema `character`. */
+  /** Jersey number worn (often blank for non-uniformed roles). Schema `character`. */
   jersey_number?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB player ID. Schema `integer` (an id). */
   person_id?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   person_full_name?: string | null;
-  /** Schema `character`. */
+  /** API relative link to the person. Schema `character`. */
   person_link?: string | null;
-  /** Schema `character`. */
+  /** Numeric scorekeeping position code. Schema `character`. */
   position_code?: string | null;
-  /** Schema `character`. */
+  /** Full position name (e.g. 'Point Guard', 'Goalkeeper'). Schema `character`. */
   position_name?: string | null;
-  /** Schema `character`. */
+  /** Position category (e.g. 'Pitcher', 'Infielder'). Schema `character`. */
   position_type?: string | null;
-  /** Schema `character`. */
+  /** Position abbreviation. Schema `character`. */
   position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Status code identifier (e.g. 'S', 'P', 'I', 'F'). Schema `character`. */
   status_code?: string | null;
-  /** Schema `character`. */
+  /** Roster status description (e.g. 'Active'). Schema `character`. */
   status_description?: string | null;
 }
 
@@ -3218,57 +3218,57 @@ export interface MlbTeamRosterRow {
  * One row of `sdv.mlb.mlb_teams_history({ parsed: true })` (returns schema `native/mlb/teams_history`, verified on a real sdv-py capture).
  */
 export interface MlbTeamsHistoryRow {
-  /** Schema `character`. */
+  /** All-star status flag. Schema `character`. */
   all_star_status?: string | null;
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `integer`. */
+  /** Season year. Schema `integer`. */
   season?: number | null;
-  /** Schema `character`. */
+  /** Internal team code. Schema `character`. */
   team_code?: string | null;
-  /** Schema `character`. */
+  /** File code abbreviation. Schema `character`. */
   file_code?: string | null;
-  /** Schema `character`. */
+  /** Short abbreviation. Schema `character`. */
   abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Team name. Schema `character`. */
   team_name?: string | null;
-  /** Schema `character`. */
+  /** Team location (city). Schema `character`. */
   location_name?: string | null;
-  /** Schema `character`. */
+  /** First year the franchise played. Schema `character`. */
   first_year_of_play?: string | null;
-  /** Schema `character`. */
+  /** Short display name. Schema `character`. */
   short_name?: string | null;
-  /** Schema `character`. */
+  /** Franchise name. Schema `character`. */
   franchise_name?: string | null;
-  /** Schema `character`. */
+  /** Club name. Schema `character`. */
   club_name?: string | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `integer` (an id). */
+  /** MLBAM venue ID. Schema `integer` (an id). */
   venue_id?: string | null;
-  /** Schema `character`. */
+  /** Venue name. Schema `character`. */
   venue_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the venue. Schema `character`. */
   venue_link?: string | null;
-  /** Schema `double` (an id). */
+  /** Spring training venue MLBAM ID. Schema `double` (an id). */
   spring_venue_id?: string | number | null;
-  /** Schema `character`. */
+  /** API link to the spring venue. Schema `character`. */
   spring_venue_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** League MLBAM ID. Schema `integer` (an id). */
   league_id?: string | null;
-  /** Schema `character`. */
+  /** League name. Schema `character`. */
   league_name?: string | null;
-  /** Schema `character`. */
+  /** API link to the league. Schema `character`. */
   league_link?: string | null;
-  /** Schema `integer` (an id). */
+  /** Sport MLBAM ID. Schema `integer` (an id). */
   sport_id?: string | null;
-  /** Schema `character`. */
+  /** API link to the sport. Schema `character`. */
   sport_link?: string | null;
-  /** Schema `character`. */
+  /** Sport name (e.g., Major League Baseball). Schema `character`. */
   sport_name?: string | null;
 }
 
@@ -3276,19 +3276,19 @@ export interface MlbTeamsHistoryRow {
  * One row of `sdv.mlb.mlb_teams_stats_leaders({ parsed: true })` (returns schema `native/mlb/teams_stats_leaders`, verified on a real sdv-py capture).
  */
 export interface MlbTeamsStatsLeadersRow {
-  /** Schema `character`. */
+  /** Team leader category (e.g., homeRuns). Schema `character`. */
   leader_category?: string | null;
-  /** Schema `character`. */
+  /** Season year. Schema `character`. */
   season?: string | null;
-  /** Schema `character`. */
+  /** Serialized representation of the statistical leaders entries for the team stat category returned by the MLB Stats API. Schema `character`. */
   leaders?: string | null;
-  /** Schema `character`. */
+  /** Stat group (e.g., hitting). Schema `character`. */
   stat_group?: string | null;
-  /** Schema `integer`. */
+  /** Total number of splits in the leaderboard. Schema `integer`. */
   total_splits?: number | null;
-  /** Schema `character` (an id). */
+  /** Game type code (e.g., R for regular season). Schema `character` (an id). */
   game_type_id?: string | null;
-  /** Schema `character`. */
+  /** Game type description. Schema `character`. */
   game_type_description?: string | null;
 }
 
@@ -3296,19 +3296,19 @@ export interface MlbTeamsStatsLeadersRow {
  * One row of `sdv.mlb.mlb_umpires({ parsed: true })` (returns schema `native/mlb/umpires`, verified on a real sdv-py capture).
  */
 export interface MlbUmpiresRow {
-  /** Schema `character`. */
+  /** Jersey number worn (often blank for non-uniformed roles). Schema `character`. */
   jersey_number?: string | null;
-  /** Schema `character`. */
+  /** Job title (e.g. 'Umpire'). Schema `character`. */
   job?: string | null;
-  /** Schema `character` (an id). */
+  /** Job code identifier. Schema `character` (an id). */
   job_id?: string | null;
-  /** Schema `character`. */
+  /** Specific role title for the assignment. Schema `character`. */
   title?: string | null;
-  /** Schema `integer` (an id). */
+  /** MLB player ID. Schema `integer` (an id). */
   person_id?: string | null;
-  /** Schema `character`. */
+  /** Player full name. Schema `character`. */
   person_full_name?: string | null;
-  /** Schema `character`. */
+  /** API relative link to the person. Schema `character`. */
   person_link?: string | null;
 }
 
@@ -3316,15 +3316,15 @@ export interface MlbUmpiresRow {
  * One row of `sdv.mlb.mlb_venue({ parsed: true })` (returns schema `native/mlb/venue`, verified on a real sdv-py capture).
  */
 export interface MlbVenueRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character`. */
+  /** Season year. Schema `character`. */
   season?: string | null;
 }
 
@@ -3332,15 +3332,15 @@ export interface MlbVenueRow {
  * One row of `sdv.mlb.mlb_venues({ parsed: true })` (returns schema `native/mlb/venues`, verified on a real sdv-py capture).
  */
 export interface MlbVenuesRow {
-  /** Schema `integer` (an id). */
+  /** Id. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `logical`. */
+  /** Whether the player is currently active. Schema `logical`. */
   active?: boolean | null;
-  /** Schema `character`. */
+  /** Season year. Schema `character`. */
   season?: string | null;
 }
 
@@ -3348,132 +3348,132 @@ export interface MlbVenuesRow {
  * One row of `sdv.mlb.mlb_win_probability({ parsed: true })` (returns schema `native/mlb/win_probability`, verified on a real sdv-py capture).
  */
 export interface MlbWinProbabilityRow {
-  /** Schema `character`. */
+  /** A serialized list of indices identifying individual pitch events within the at-bat for this win-probability row. Schema `character`. */
   pitch_index?: string | null;
-  /** Schema `character`. */
+  /** A serialized list of indices identifying action-type events (stolen bases, pickoffs, etc.) within the at-bat for this win-probability row. Schema `character`. */
   action_index?: string | null;
-  /** Schema `character`. */
+  /** A serialized list of indices identifying baserunner movement events during the play in this win-probability row. Schema `character`. */
   runner_index?: string | null;
-  /** Schema `character`. */
+  /** A serialized representation of baserunner movement records for this play in the win-probability feed, capturing start/end base positions and event types. Schema `character`. */
   runners?: string | null;
-  /** Schema `character`. */
+  /** A serialized representation of the sequence of pitch and action events comprising the at-bat for this win-probability row. Schema `character`. */
   play_events?: string | null;
-  /** Schema `character`. */
+  /** A serialized list of player credit records for this play, linking fielding, pitching, or batting achievements to specific player identifiers. Schema `character`. */
   credits?: string | null;
-  /** Schema `character`. */
+  /** A serialized representation of situational boolean flags associated with this play (e.g., whether it was a big lead situation or a save opportunity). Schema `character`. */
   flags?: string | null;
-  /** Schema `double`. */
+  /** Home team win probability (percent) entering the at-bat. Schema `double`. */
   home_team_win_probability?: number | null;
-  /** Schema `double`. */
+  /** Away team win probability (percent) entering the at-bat. Schema `double`. */
   away_team_win_probability?: number | null;
-  /** Schema `double`. */
+  /** Change in home team win probability attributed to the at-bat. Schema `double`. */
   home_team_win_probability_added?: number | null;
-  /** Schema `character`. */
+  /** The ISO 8601 timestamp marking the conclusion of the play associated with this win-probability snapshot. Schema `character`. */
   play_end_time?: string | null;
-  /** Schema `integer`. */
+  /** Zero-based index of the at-bat within the game. Schema `integer`. */
   at_bat_index?: number | null;
-  /** Schema `character`. */
+  /** The high-level category of the play result in the win-probability feed (e.g., 'atBat', 'action'). Schema `character`. */
   result_type?: string | null;
-  /** Schema `character`. */
+  /** The short categorical label for the play outcome in the win-probability feed (e.g., 'Single', 'Home Run', 'Strikeout'). Schema `character`. */
   result_event?: string | null;
-  /** Schema `character`. */
+  /** The snake-cased type identifier for the play outcome in the win-probability feed (e.g., 'single', 'home_run'). Schema `character`. */
   result_event_type?: string | null;
-  /** Schema `character`. */
+  /** A human-readable text description of the play result as reported in the win-probability game feed. Schema `character`. */
   result_description?: string | null;
-  /** Schema `integer`. */
+  /** The number of runs batted in credited to the batter for the play in this win-probability row. Schema `integer`. */
   result_rbi?: number | null;
-  /** Schema `integer`. */
+  /** The away team's cumulative run total at the conclusion of the play in this win-probability row. Schema `integer`. */
   result_away_score?: number | null;
-  /** Schema `integer`. */
+  /** The home team's cumulative run total at the conclusion of the play in this win-probability row. Schema `integer`. */
   result_home_score?: number | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the batter was retired on the play recorded in this win-probability row. Schema `logical`. */
   result_is_out?: boolean | null;
-  /** Schema `integer`. */
+  /** The sequential index of the at-bat within the game to which this win-probability observation belongs. Schema `integer`. */
   about_at_bat_index?: number | null;
-  /** Schema `character`. */
+  /** Indicates whether the win-probability observation occurred in the top or bottom half of the inning. Schema `character`. */
   about_half_inning?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this win-probability observation occurred in the top half of the inning. Schema `logical`. */
   about_is_top_inning?: boolean | null;
-  /** Schema `integer`. */
+  /** The inning number in which this win-probability observation was recorded. Schema `integer`. */
   about_inning?: number | null;
-  /** Schema `character`. */
+  /** The ISO 8601 timestamp marking the start of the play event within the win-probability game feed. Schema `character`. */
   about_start_time?: string | null;
-  /** Schema `character`. */
+  /** The ISO 8601 timestamp marking the end of the play event within the win-probability game feed. Schema `character`. */
   about_end_time?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the at-bat associated with this win-probability row has concluded. Schema `logical`. */
   about_is_complete?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this play resulted in one or more runs being scored. Schema `logical`. */
   about_is_scoring_play?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this play was subject to a manager's challenge or umpire review. Schema `logical`. */
   about_has_review?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether this play resulted in at least one out being recorded. Schema `logical`. */
   about_has_out?: boolean | null;
-  /** Schema `integer`. */
+  /** A numeric score reflecting how compelling or exciting this plate appearance was, based on leverage and game-state context. Schema `integer`. */
   about_captivating_index?: number | null;
-  /** Schema `integer`. */
+  /** The ball count in the current at-bat at the time this win-probability snapshot was recorded. Schema `integer`. */
   count_balls?: number | null;
-  /** Schema `integer`. */
+  /** The strike count in the current at-bat at the time this win-probability snapshot was recorded. Schema `integer`. */
   count_strikes?: number | null;
-  /** Schema `integer`. */
+  /** The number of outs in the current half-inning at the time this win-probability snapshot was recorded. Schema `integer`. */
   count_outs?: number | null;
-  /** Schema `integer` (an id). */
+  /** The MLB Stats API (MLBAM) numeric identifier for the batter in this win-probability matchup row. Schema `integer` (an id). */
   matchup_batter_id?: string | null;
-  /** Schema `character`. */
+  /** The full name of the batter whose plate appearance generated this win-probability observation. Schema `character`. */
   matchup_batter_full_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the batter's player resource for this win-probability row. Schema `character`. */
   matchup_batter_link?: string | null;
-  /** Schema `character`. */
+  /** A single-character code indicating the batter's handedness for this matchup in the win-probability feed (e.g., 'L', 'R', 'S'). Schema `character`. */
   matchup_bat_side_code?: string | null;
-  /** Schema `character`. */
+  /** The human-readable description of the batter's hitting side for this win-probability matchup row. Schema `character`. */
   matchup_bat_side_description?: string | null;
-  /** Schema `integer` (an id). */
+  /** The MLB Stats API (MLBAM) numeric identifier for the pitcher in this win-probability matchup row. Schema `integer` (an id). */
   matchup_pitcher_id?: string | null;
-  /** Schema `character`. */
+  /** The full name of the pitcher who delivered pitches for this win-probability observation. Schema `character`. */
   matchup_pitcher_full_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the pitcher's player resource for this win-probability row. Schema `character`. */
   matchup_pitcher_link?: string | null;
-  /** Schema `character`. */
+  /** A single-character code indicating the pitcher's throwing hand for this win-probability matchup (e.g., 'L' or 'R'). Schema `character`. */
   matchup_pitch_hand_code?: string | null;
-  /** Schema `character`. */
+  /** The human-readable description of the pitcher's throwing arm for this win-probability matchup row. Schema `character`. */
   matchup_pitch_hand_description?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API (MLBAM) numeric identifier for the runner on first base after the play in this win-probability row. Schema `double` (an id). */
   matchup_post_on_first_id?: string | number | null;
-  /** Schema `character`. */
+  /** The full name of the runner occupying first base at the conclusion of the play in this win-probability row. Schema `character`. */
   matchup_post_on_first_full_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the player resource of the runner on first base after the play. Schema `character`. */
   matchup_post_on_first_link?: string | null;
-  /** Schema `character`. */
+  /** A serialized representation of the batter's hot and cold zone data applicable to this win-probability matchup. Schema `character`. */
   matchup_batter_hot_cold_zones?: string | null;
-  /** Schema `character`. */
+  /** A serialized representation of the pitcher's hot and cold zone data applicable to this win-probability matchup. Schema `character`. */
   matchup_pitcher_hot_cold_zones?: string | null;
-  /** Schema `character`. */
+  /** A string describing the batter's situational split for this win-probability matchup (e.g., 'vs. Right'). Schema `character`. */
   matchup_splits_batter?: string | null;
-  /** Schema `character`. */
+  /** A string describing the pitcher's situational split for this win-probability matchup (e.g., 'vs. Left'). Schema `character`. */
   matchup_splits_pitcher?: string | null;
-  /** Schema `character`. */
+  /** A string describing the baserunner configuration applicable to the batter's situational split in this win-probability row. Schema `character`. */
   matchup_splits_men_on_base?: string | null;
-  /** Schema `double`. */
+  /** Leverage index quantifying the importance of the at-bat situation. Schema `double`. */
   leverage_index?: number | null;
-  /** Schema `double`. */
+  /** A numeric score quantifying the dramatic significance of this play within the game, based on win-probability swing and game leverage. Schema `double`. */
   drama_index?: number | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API (MLBAM) numeric identifier for the runner on second base after the play in this win-probability row. Schema `double` (an id). */
   matchup_post_on_second_id?: string | number | null;
-  /** Schema `character`. */
+  /** The full name of the runner occupying second base at the conclusion of the play in this win-probability row. Schema `character`. */
   matchup_post_on_second_full_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the player resource of the runner on second base after the play. Schema `character`. */
   matchup_post_on_second_link?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API (MLBAM) numeric identifier for the runner on third base after the play in this win-probability row. Schema `double` (an id). */
   matchup_post_on_third_id?: string | number | null;
-  /** Schema `character`. */
+  /** The full name of the runner occupying third base at the conclusion of the play in this win-probability row. Schema `character`. */
   matchup_post_on_third_full_name?: string | null;
-  /** Schema `character`. */
+  /** The MLB Stats API relative URL linking to the player resource of the runner on third base after the play. Schema `character`. */
   matchup_post_on_third_link?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the original on-field ruling was reversed following the replay review for this play. Schema `logical`. */
   review_details_is_overturned?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether a replay review of this play was still underway at the time of data capture. Schema `logical`. */
   review_details_in_progress?: boolean | null;
-  /** Schema `character`. */
+  /** The type of review mechanism applied to this play in the win-probability feed (e.g., 'managerChallenge', 'umpireReview'). Schema `character`. */
   review_details_review_type?: string | null;
-  /** Schema `double` (an id). */
+  /** The MLB Stats API numeric identifier for the team that initiated a replay challenge on this win-probability play. Schema `double` (an id). */
   review_details_challenge_team_id?: string | number | null;
 }

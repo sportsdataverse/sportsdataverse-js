@@ -1,39 +1,41 @@
-# Fox Sports Bifrost returns schema — columns DERIVED from a captured live
-# response run through the registered parser (parse_fox_*). The Fox spec
-# left this response untyped (`object`), so the columns are enumerated here from
-# a representative capture. `type` is inferred from the captured JS value;
-# `description` is best-effort from the snake_cased key. Endpoints with no
-# capture remain `columns: []`.
+# fox returns schema (JS-owned): columns derived from the registered parser's rows on
+# the committed real capture(s) fox/trending_videos.json by
+# tools/codegen/regen-capture-schemas.mjs. Types are inferred from the captured values;
+# `description` is JS-owned text kept across regeneration (blanks fill at render time from
+# sdv-py's manual_column_descriptions.yaml). Do not hand-type columns: re-run the script.
 schema: trending_videos
 kind: dataframe
 columns:
-- name: data_existing_total
-  type: integer
-  description: "Bifrost field `data_existing_total`: data existing total."
-- name: data_results
+- name: id
   type: character
-  description: "Bifrost field `data_results`: data results."
-- name: data_request_type
+  description: ""
+- name: spark_id
   type: character
-  description: "Bifrost field `data_request_type`: data request type."
-- name: data_request_content_type
+  description: ""
+- name: title
   type: character
-  description: "Bifrost field `data_request_content_type`: data request content type."
-- name: data_request_internal
-  type: logical
-  description: "Bifrost field `data_request_internal`: data request internal."
-- name: data_request_platform
+  description: ""
+- name: description
   type: character
-  description: "Bifrost field `data_request_platform`: data request platform."
-- name: data_request_params
+  description: ""
+- name: content_type
   type: character
-  description: "Bifrost field `data_request_params`: data request params."
-- name: data_request_path_params_proxy
+  description: ""
+- name: component_type
   type: character
-  description: "Bifrost field `data_request_path_params_proxy`: data request path params proxy."
-- name: data_status_success
-  type: logical
-  description: "Bifrost field `data_status_success`: data status success."
-- name: data_status_code
-  type: integer
-  description: "Bifrost field `data_status_code`: data status code."
+  description: ""
+- name: publication_date
+  type: character
+  description: ""
+- name: last_published_date
+  type: character
+  description: ""
+- name: canonical_url
+  type: character
+  description: ""
+- name: thumbnail_url
+  type: character
+  description: ""
+- name: playback_url
+  type: character
+  description: ""

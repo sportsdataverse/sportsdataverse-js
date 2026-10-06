@@ -23,6 +23,10 @@
 //   * An EMPTY play-by-play: py's `enrich_pbp` raises (an empty polars frame has no
 //     `x_coord` column); this returns `[]`.
 
+/**
+ * One row of a frame: a plain object with every column of the frame as a key (missing cells are
+ * `null`). Re-exported from `../core/types.js` so callers can type the inputs and outputs here.
+ */
 export type { ParserRow as Row } from "../core/types.js";
 import type { ParserRow as Row } from "../core/types.js";
 
@@ -127,7 +131,22 @@ const hasCol = (rows: Row[], name: string): boolean => rows.length > 0 && name i
 // Parsers (py `_parsers.mmss_to_seconds` / `parse_shifts` / `parse_pbp`)
 // ---------------------------------------------------------------------------
 
-/** `'MM:SS'` -> total seconds, `null` for None / "" / unparseable (py `mmss_to_seconds`). */
+/**
+ * Convert a `'MM:SS'` clock string to total seconds (py `mmss_to_seconds`).
+ *
+ * @param value - The clock string (e.g. `'03:16'`); any non-string is stringified first.
+ *   `null` / `undefined` / `''` short-circuit to `null`.
+ * @returns `minutes * 60 + seconds`, or `null` when the value is empty, has no single `:`,
+ *   or either part is not an integer (`'3'`, `'a:b'`).
+ * @example
+ * ```ts
+ * import { mmss_to_seconds } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * mmss_to_seconds("03:16"); // 196
+ * mmss_to_seconds("a:b"); // null
+ * ```
+ * @remarks Pure and never throws; it is the clock parser behind `start_s` / `end_s` in
+ * {@link parse_shifts}.
+ */
 export function mmss_to_seconds(value: unknown): number | null {
   if (value === null || value === undefined || value === "") return null;
   const parts = String(value).split(":");
@@ -141,6 +160,26 @@ export function mmss_to_seconds(value: unknown): number | null {
  * Parse a `modulekit/gameshifts` payload (`SiteKit.Gameshifts`) into one row per
  * player-shift stint (py `parse_shifts`). The shift clock is a COUNTDOWN, so
  * `start_s >= end_s` for every row.
+ *
+ * @param payload - The raw feed body, `{ SiteKit: { Gameshifts: { home: [...], visitor: [...] } } }`.
+ *   Anything without that envelope (`null`, `{}`, a list) yields `[]`.
+ * @param game_id - Stamped verbatim into the `game_id` column of every row. Default `null`.
+ * @returns One row per shift with `game_id`, `player_id`, `first_name`, `last_name`,
+ *   `jersey_number`, `home` (1 / 0: the player's own `home` flag, else the side he was listed
+ *   under), `period` (integer or `null`), `start_time` / `end_time` / `length` (raw `'MM:SS'`
+ *   strings), `start_s` / `end_s` (seconds REMAINING, via {@link mmss_to_seconds}),
+ *   `goal_on_shift` and `penalty_on_shift` (integers, 0 when absent). Home players first, then
+ *   visitors, in feed order. `[]` for an empty game.
+ * @throws TypeError when `home`, `period`, `goal_on_shift` or `penalty_on_shift` is neither
+ *   a number nor an integer string (py `int()` semantics).
+ * @example
+ * ```ts
+ * import { parse_shifts } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const rows = parse_shifts(gameshiftsPayload, 42);
+ * rows[0].start_s >= rows[0].end_s; // true: the clock counts down
+ * ```
+ * @remarks Ids are passed through as the feed ships them (py-faithful); the network wrappers
+ * in `hockeytech_family.ts` convert id columns to decimal strings on the way out.
  */
 export function parse_shifts(payload: unknown, game_id: unknown = null): Row[] {
   const kit = isObj(payload) ? payload.SiteKit : undefined;
@@ -319,6 +358,29 @@ function parsePbpEvents(events: unknown[], game_id: unknown): Row[] {
  * Parse a `gameCenterPlayByPlay` payload (a list of `{event, details}`) into one row
  * per event (py `parse_pbp`). Dialects a/b share one wire format. The feed emits two
  * rows per goal (the `goal` event + a twin `shot` with `is_goal_twin = true`).
+ *
+ * @param payload - The raw feed body: an array of `{ event, details }` objects. A non-array
+ *   yields `[]`; non-object entries are skipped.
+ * @param pbp_style - Coordinate-canvas dialect, `'hockeytech_a'` (≈ 850x400, PWHL / AHL) or
+ *   `'hockeytech_b'` (≈ 600x300, OHL / WHL / ...). Default `'hockeytech_a'`. Accepted for
+ *   parity only: both dialects parse identically (py `_parse_pbp_b` delegates to `_parse_pbp_a`).
+ * @param game_id - Stamped verbatim into the `game_id` column. Default `null`.
+ * @returns One row per event. Every row carries `game_id`, `event`, `team_id` (string or
+ *   `null`), `period_of_game`, `time_of_period` (elapsed `'M:SS'`), raw `x_coord` / `y_coord`,
+ *   the `player_*` / `goalie_*` columns, `goal` and `is_goal_twin`. Event-specific columns are
+ *   added for `shot` / `blocked_shot` (`event_type`, `shot_quality`, `player_team_id`), `goal`
+ *   (`empty_net`, `game_winner`, `power_play`, assists as `player_two_*` / `player_three_*`,
+ *   `plus_player_<one..five>_*` / `minus_player_*`), `faceoff` (`home_win`), `penalty`
+ *   (`penalty_length`, `event_type`, `power_play` `'1'`/`'0'`, `player_two_*` = takenBy) and
+ *   `goalie_change`; a column absent on a row is `null`. Feed order is kept.
+ * @example
+ * ```ts
+ * import { parse_pbp } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const rows = parse_pbp(pbpPayload, "hockeytech_a", 42);
+ * const goals = rows.filter((r) => r.event === "goal");
+ * ```
+ * @remarks For a penalty, `servedBy` is the primary player (`player_id`) and `takenBy` the
+ * secondary (`player_two_*`), as in fastRhockey. Never throws.
  */
 export function parse_pbp(payload: unknown, pbp_style: string = "hockeytech_a", game_id: unknown = null): Row[] {
   void pbp_style; // dialect b == dialect a on the wire (py `_parse_pbp_b` delegates to `_parse_pbp_a`)
@@ -335,6 +397,24 @@ export function parse_pbp(payload: unknown, pbp_style: string = "hockeytech_a", 
  * `sec_from_start` (game seconds, +1200 per period) from `time_of_period` (elapsed
  * "M:SS") + `period_of_game`. Null / unparseable parts give null. A value without
  * a ":" throws, exactly as py's polars `list.get(1)` does.
+ *
+ * @param pbp - Parsed play-by-play rows (see {@link parse_pbp}) carrying `time_of_period` and
+ *   `period_of_game`.
+ * @returns A new array of copied rows with four columns appended: `minute_start` /
+ *   `second_start` (integers from the elapsed clock, `null` when a part is not an integer),
+ *   `clock` (time REMAINING in the period as `'M:SS'`; `'20:00'` at `0:00`), and
+ *   `sec_from_start` (elapsed game seconds: `minute_start * 60 + second_start` plus 1200 per
+ *   completed period for periods 2-5; no offset for an unknown period). Input order kept.
+ * @throws Error (`get index is out of bounds`) when a non-null `time_of_period` has no `':'`.
+ * @example
+ * ```ts
+ * import { add_clock_columns } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const [r] = add_clock_columns([{ time_of_period: "3:16", period_of_game: "2" }]);
+ * r.clock; // "16:44"
+ * r.sec_from_start; // 1396
+ * ```
+ * @remarks Copies rows (the input is untouched). Required before {@link backfill_power_play}.
+ * The remaining-clock formula assumes 20-minute periods.
  */
 export function add_clock_columns(pbp: Row[]): Row[] {
   const offset: Record<number, number> = { 2: 1200, 3: 2400, 4: 3600, 5: 4800 };
@@ -366,6 +446,26 @@ export function add_clock_columns(pbp: Row[]): Row[] {
  * `*_right`, `*_vertical`) from raw `x_coord` / `y_coord` (~850x400 canvas).
  * Without a `home_team_id` column every row is treated as an away event; a row with
  * a null `team_id` / `home_team_id` takes the away (passthrough) branch.
+ *
+ * @param pbp - Play-by-play rows with raw `x_coord` / `y_coord` (numbers or numeric strings;
+ *   anything else becomes `null`), `team_id`, and optionally `home_team_id` (added by
+ *   {@link enrich_pbp}).
+ * @returns A new array of copied rows with `x_coord_original` / `y_coord_original` (the raw
+ *   values as floats), `*_neutral` (origin moved to canvas centre: `x - 300`, `y - 150`),
+ *   `*_fixed` (the canvas-to-feet step `xT = x / 3 - 100`, `yT = 42.5 - y * 85 / 300` applied a
+ *   second time: `xT / 3` and `42.5 - (yT * 85 / 300 - 42.5)`), `*_right` (home-team
+ *   events mirrored so both teams attack the same end; away events pass through) and
+ *   `*_vertical` (the `*_right` frame rotated: `x_vertical` from `y_right`, `y_vertical` =
+ *   `x_right`). Null coordinates stay `null` in every derived column.
+ * @example
+ * ```ts
+ * import { add_coord_transforms } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const rows = add_coord_transforms(parsedPbp); // no home_team_id -> every row is "away"
+ * rows[0].x_coord_neutral; // x_coord - 300
+ * ```
+ * @remarks Home / away is decided by comparing `String(team_id)` to `String(home_team_id)`.
+ * Divisions by a float literal are computed as `a * (1 / c)` so the cells match sdv-py's polars
+ * output bit-for-bit. Ported from fastRhockey `R/pwhl_pbp.R`.
  */
 export function add_coord_transforms(pbp: Row[]): Row[] {
   const withHome = hasCol(pbp, "home_team_id");
@@ -404,11 +504,36 @@ export function add_coord_transforms(pbp: Row[]): Row[] {
 
 const SCORING_CHANCE_FT = 25.0;
 const SHOT_EVENTS: readonly unknown[] = ["shot", "blocked_shot", "goal"];
-/** Offensive goal-line x (feet) on an NHL-size rink; the PWHL plays on one. */
+/**
+ * Offensive goal-line x (feet) on an NHL-size rink; the PWHL plays on one.
+ *
+ * @remarks The default `goal_x` of {@link add_shot_distance_angle}. Coordinates must already be
+ * in rink feet (the `*_fixed` frame of {@link add_coord_transforms}), not raw canvas units.
+ */
 export const NHL_SIZE_RINK_GOAL_X = 89.0;
 const MAX_PLAUSIBLE_GOAL_X = 110.0;
 
-/** `shot_distance` / `shot_angle` (feet / degrees) for shot-type events, null elsewhere. */
+/**
+ * Add `shot_distance` / `shot_angle` (feet / degrees) for shot-type events, null elsewhere.
+ *
+ * @param pbp - Play-by-play rows whose `x_coord` / `y_coord` are in rink FEET (net near
+ *   `+goal_x`, centre ice at 0). Rows with `event` in `shot`, `blocked_shot`, `goal` get values.
+ * @param goal_x - Offensive goal-line x in feet, `0 < goal_x <= 110`. Default
+ *   {@link NHL_SIZE_RINK_GOAL_X} (89 ft).
+ * @returns A new array of copied rows with `shot_distance` (feet from the net:
+ *   `sqrt((goal_x - |x|)^2 + y^2)`) and `shot_angle` (degrees off the goal line's normal,
+ *   `|atan2(|y|, goal_x - |x|)|`); `null` for non-shot events and for null coordinates.
+ * @throws RangeError when `goal_x` is outside `(0, 110]` — the guard against passing raw
+ *   feed-scale coordinates.
+ * @example
+ * ```ts
+ * import { add_shot_distance_angle } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const rows = add_shot_distance_angle(rinkFeetPbp); // default 89 ft net
+ * const olympic = add_shot_distance_angle(rinkFeetPbp, 80); // custom goal line
+ * ```
+ * @remarks Uses `|x|`, so shots at either end measure to the nearer net. {@link enrich_pbp}
+ * calls this on the rink-feet frame it derives from `x_coord_original` / `y_coord_original`.
+ */
 export function add_shot_distance_angle(pbp: Row[], goal_x: number = NHL_SIZE_RINK_GOAL_X): Row[] {
   if (!(goal_x > 0 && goal_x <= MAX_PLAUSIBLE_GOAL_X)) {
     throw new RangeError(
@@ -431,7 +556,24 @@ export function add_shot_distance_angle(pbp: Row[], goal_x: number = NHL_SIZE_RI
   });
 }
 
-/** `scoring_chance` = shot-type event within `threshold_ft` of the net (false for non-shots). */
+/**
+ * Add `scoring_chance` = shot-type event within `threshold_ft` of the net (false for non-shots).
+ *
+ * @param pbp - Play-by-play rows. If the first row has no `shot_distance` column,
+ *   {@link add_shot_distance_angle} is run first with its default `goal_x`.
+ * @param threshold_ft - Maximum `shot_distance` (feet, inclusive) that counts as a chance.
+ *   Default 25.
+ * @returns A new array of copied rows with boolean `scoring_chance`: `true` when
+ *   `shot_distance` is non-null and `<= threshold_ft`, else `false` (never `null`).
+ * @example
+ * ```ts
+ * import { add_shot_distance_angle, scoring_chances } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const rows = scoring_chances(add_shot_distance_angle(rinkFeetPbp, 80), 15);
+ * rows.filter((r) => r.scoring_chance).length;
+ * ```
+ * @remarks Pass a custom `goal_x` by calling {@link add_shot_distance_angle} yourself first;
+ * the implicit call here always uses the NHL-size default.
+ */
 export function scoring_chances(pbp: Row[], threshold_ft: number = SCORING_CHANCE_FT): Row[] {
   const rows = pbp.length > 0 && !("shot_distance" in pbp[0]) ? add_shot_distance_angle(pbp) : pbp;
   return rows.map((r) => ({
@@ -444,7 +586,12 @@ export function scoring_chances(pbp: Row[], threshold_ft: number = SCORING_CHANC
 // On-ice tracking
 // ---------------------------------------------------------------------------
 
-/** Seconds BEFORE a goal instant at which on-ice personnel are evaluated. */
+/**
+ * Seconds BEFORE a goal instant at which on-ice personnel are evaluated.
+ *
+ * @remarks Default `goal_epsilon_s` of {@link build_on_ice}: the shift chart is often already
+ * rolled to the post-goal deployment at the goal's own timestamp.
+ */
 export const GOAL_EPSILON_S = 2;
 
 /**
@@ -457,6 +604,29 @@ export const GOAL_EPSILON_S = 2;
  * (the shift chart is often already rolled to the post-goal deployment). Ids are
  * the unique Int64s sorted AS STRINGS (so "10" < "9"), exactly as py. Returns the
  * rows with goal `time_s` shifted (py leaves that column modified).
+ *
+ * @param pbp - Event rows with integer `period_of_game` and `time_s` (seconds REMAINING in the
+ *   period) and, for the goal adjustment, `event`.
+ * @param shifts - Shift stints from {@link parse_shifts}: `period`, `start_s`, `end_s`
+ *   (countdown seconds), `player_id`, `home` (1 / 0). Stints with a null period or clock are
+ *   ignored.
+ * @param goal_epsilon_s - Seconds added to a goal's `time_s` (i.e. moved EARLIER on the
+ *   countdown clock) before the lookup, clamped to the period's latest shift start. `0` disables
+ *   the adjustment. Default {@link GOAL_EPSILON_S} (2).
+ * @returns A new array of copied rows with `on_ice_home` / `on_ice_away` appended:
+ *   comma-joined, string-sorted unique player ids, `null` when no shift of that side matches
+ *   (or when the event's period / time is unknown). Goal rows also carry the shifted `time_s`.
+ *   With an empty `pbp` or `shifts`, every row gets `null` for both columns.
+ * @example
+ * ```ts
+ * import { build_on_ice, parse_shifts } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const shifts = parse_shifts(gameshiftsPayload, 42);
+ * const rows = build_on_ice(eventsWithTimeS, shifts); // default 2 s goal epsilon
+ * const atGoal = build_on_ice(eventsWithTimeS, shifts, 0); // evaluate at the goal instant
+ * ```
+ * @remarks `on_ice_*` is `null` when NO stint of that side covers the instant; a side with
+ * covering stints whose ids are all unparseable gives `''`. The id strings are
+ * `String(toInt(player_id))`, so `'10'` sorts before `'9'`.
  */
 export function build_on_ice(pbp: Row[], shifts: Row[], goal_epsilon_s: number = GOAL_EPSILON_S): Row[] {
   if (pbp.length === 0 || shifts.length === 0) {
@@ -528,6 +698,23 @@ function kleeneAnd(a: boolean | null, b: boolean | null): boolean | null {
  * (`goalie_ids`, coerced to string, NOT de-duplicated) are stripped from the counts;
  * with none given each side is assumed to carry exactly one. No empty-net flag is
  * derived here (the shift feed does not carry goalie presence reliably).
+ *
+ * @param pbp - Rows carrying `on_ice_home` / `on_ice_away` (comma-joined ids from
+ *   {@link build_on_ice}). Without both columns every row gets `null` for all four outputs.
+ * @param goalie_ids - Goalie ids (any scalar; compared as strings) to subtract from the on-ice
+ *   counts. `null` / `undefined` / `[]` all mean "assume one goalie per side". Default `null`.
+ * @returns A new array of copied rows with `skaters_home` / `skaters_away` (on-ice count minus
+ *   goalies; `null` when that side's list is `null`), `strength_state` (`'<home>v<away>'`,
+ *   `null` if either count is null) and `strength_state_valid` (Kleene AND of "count in
+ *   3..6" per side: `false` if either is out of range, `null` if either is null, else `true`).
+ * @example
+ * ```ts
+ * import { add_strength_state } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const rows = add_strength_state(enrichedPbp, ["105", "212"]); // two goalie ids
+ * rows[0].strength_state; // e.g. "5v4"
+ * ```
+ * @remarks A goalie id listed twice is subtracted twice (NOT de-duplicated). `strength_state`
+ * is home-first regardless of which team the event belongs to.
  */
 export function add_strength_state(pbp: Row[], goalie_ids: Iterable<unknown> | null = null): Row[] {
   const gset = [...(goalie_ids ?? [])].map((g) => pyStr(g));
@@ -572,6 +759,22 @@ const FENWICK_EVENTS: readonly unknown[] = ["shot", "goal"];
 /**
  * Team-level shot-attempt counts, one row per non-null `team_id`: CF/CA/CF%,
  * FF/FA/FF% and `corsi_includes_missed = false`. Teams come out in first-seen order.
+ *
+ * @param pbp - Event rows with `event` and `team_id`. Corsi events are `shot`, `blocked_shot`,
+ *   `goal`; Fenwick events are `shot`, `goal`. Rows with a null `team_id` are ignored.
+ * @returns One row per distinct team: `team_id` (as found in the input), `corsi_for`,
+ *   `corsi_against`, `corsi_for_pct` (`null` when CF + CA is 0), `fenwick_for`,
+ *   `fenwick_against`, `fenwick_for_pct`, `corsi_includes_missed` (always `false`). `[]` for
+ *   an empty input.
+ * @example
+ * ```ts
+ * import { corsi_fenwick } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const teams = corsi_fenwick(enrichedPbp); // two rows for a normal game
+ * ```
+ * @remarks "Against" counts every other non-null team's attempts, so the two rows of a game
+ * mirror each other. The HockeyTech feed has no missed-shot event, so these are proxies.
+ * Note the `goal` + twin `shot` rows from {@link parse_pbp} both count unless you dedupe on
+ * `is_goal_twin` first. Py's output row order is undefined; here it is first-seen.
  */
 export function corsi_fenwick(pbp: Row[]): Row[] {
   if (pbp.length === 0) return [];
@@ -607,6 +810,21 @@ export function corsi_fenwick(pbp: Row[]): Row[] {
  * `home_team_id`, `on_ice_home`, `on_ice_away`). Home-team events credit the home
  * on-ice players "for" and the away ones "against" (and vice versa); `blocked_shot`
  * counts for Corsi only. `player_id` is a string; rows are in first-seen order.
+ *
+ * @param pbp - Enriched rows (see {@link enrich_pbp}). If the first row lacks any of the five
+ *   required columns the result is `[]`. Events with a null `team_id`, `home_team_id`,
+ *   `on_ice_home` or `on_ice_away` are skipped.
+ * @returns One row per player id seen in an on-ice list: `player_id` (trimmed string),
+ *   `corsi_for`, `corsi_against`, `corsi_for_pct` (`null` when CF + CA is 0), `fenwick_for`,
+ *   `fenwick_against`, `fenwick_for_pct`, `corsi_includes_missed` (always `false`).
+ * @example
+ * ```ts
+ * import { corsi_fenwick_on_ice } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const players = corsi_fenwick_on_ice(enrichedPbp);
+ * players.find((p) => p.player_id === "5121")?.corsi_for_pct;
+ * ```
+ * @remarks `player_id` here is the string split out of `on_ice_*`; {@link game_corsi_rows}
+ * joins it to {@link player_toi} on that string.
  */
 export function corsi_fenwick_on_ice(pbp: Row[]): Row[] {
   const required = ["event", "team_id", "home_team_id", "on_ice_home", "on_ice_away"];
@@ -667,6 +885,24 @@ export function corsi_fenwick_on_ice(pbp: Row[]): Row[] {
  * matching window wins; rows outside any window are untouched. Requires
  * `sec_from_start` (run {@link add_clock_columns} first). Quirk kept from py: the
  * "previous window" lookup uses the penalty's index into the (skipping) interval list.
+ *
+ * @param df - Event rows with `event`, `team_id`, `home_team_id`, `away_team_id`,
+ *   `sec_from_start` and, on penalties, `power_play` (`'1'` marks a PP penalty) and
+ *   `penalty_length` (minutes).
+ * @returns The rows with `power_play` / `short_handed` set to `'1'` / `'0'` on every `shot` or
+ *   `faceoff` inside a window (the advantaged team gets `power_play = '1'`, the other
+ *   `short_handed = '1'`). Both columns are added (as `null`) when missing. Rows outside every
+ *   window, and non-shot / non-faceoff rows, are returned as-is. `[]` in, `[]` out.
+ * @example
+ * ```ts
+ * import { add_clock_columns, backfill_power_play } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const rows = backfill_power_play(add_clock_columns(pbpWithTeams));
+ * rows.filter((r) => r.event === "shot" && r.power_play === "1").length;
+ * ```
+ * @remarks Row objects outside a window are the SAME objects as the input (not copied); rows
+ * inside a window are new objects. The advantaged team is `away_team_id` when the penalised
+ * `team_id` equals `home_team_id`, else `home_team_id`. A penalty without a parsable time or
+ * length is skipped, which is what makes the previous-window index lookup a quirk.
  */
 export function backfill_power_play(df: Row[]): Row[] {
   let rows = df;
@@ -725,6 +961,10 @@ export function backfill_power_play(df: Row[]): Row[] {
 // enrich_pbp
 // ---------------------------------------------------------------------------
 
+/**
+ * The two raw feed payloads {@link enrich_pbp} consumes instead of fetching them (the one
+ * deliberate deviation from py's `enrich_pbp`, which fetches both itself).
+ */
 export interface EnrichOptions {
   /** `gc/gamesummary` payload (game meta). Absent -> treated as `{}`. */
   meta_payload?: unknown;
@@ -737,6 +977,33 @@ export interface EnrichOptions {
  * coordinate transforms, clock columns, power-play back-fill, shot geometry and
  * on-ice tracking from the shift chart. Pure: pass the payloads in (see module
  * header for the no-fetch deviation).
+ *
+ * @param df - Rows from {@link parse_pbp}. `[]` returns `[]` (py raises here).
+ * @param league - League slug (e.g. `'pwhl'`). Accepted for py signature parity; unused.
+ * @param game_id - Stamped into the shift rows parsed from `shifts_payload` (the pbp rows
+ *   already carry theirs from {@link parse_pbp}).
+ * @param opts - The `gc/gamesummary` and `modulekit/gameshifts` payloads, see
+ *   {@link EnrichOptions}. Default `{}`: blank meta, null on-ice.
+ * @returns A new array of copied rows, in input order, with — in this order — the meta
+ *   columns `game_date`, `game_season` (year from the date, or `null`), `game_season_id`,
+ *   `home_team`, `home_team_id`, `away_team`, `away_team_id` (strings, `''` when the meta is
+ *   missing); the ten {@link add_coord_transforms} columns; the four
+ *   {@link add_clock_columns} columns; `power_play` / `short_handed` back-filled by
+ *   {@link backfill_power_play}; `shot_distance`, `shot_angle`, `scoring_chance` on the
+ *   rink-feet frame; and `on_ice_home` / `on_ice_away` from {@link build_on_ice} (`null` when
+ *   no shifts are given).
+ * @example
+ * ```ts
+ * import { enrich_pbp, parse_pbp } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const parsed = parse_pbp(pbpPayload, "hockeytech_a", 42);
+ * const rows = enrich_pbp(parsed, "pwhl", 42, { meta_payload: summary, shifts_payload: shifts });
+ * ```
+ * @remarks Meta fields resolve by first truthy value: team id from `meta.home_team`, then
+ * `home.id`, then `home.team_id`; date from `meta.date_played`, `game_date_iso_8601`,
+ * `game_date`. For on-ice lookup each period's length is the max shift `start_s` in that period
+ * (OT is shorter), default 1200, and `time_s = length - elapsed`. Propagates the `Error` of
+ * {@link add_clock_columns} when a `time_of_period` has no `':'`. Ids stay as the feeds ship
+ * them; the wrappers in `hockeytech_family.ts` convert them to decimal strings.
  */
 export function enrich_pbp(df: Row[], league: string, game_id: unknown, opts: EnrichOptions = {}): Row[] {
   void league;
@@ -822,7 +1089,19 @@ function pyStr2(v: unknown): string {
 // TOI + per-60
 // ---------------------------------------------------------------------------
 
-/** Per-60 rate: `value / toi_seconds * 3600` (py `per60`, as a plain function). */
+/**
+ * Per-60 rate: `value / toi_seconds * 3600` (py `per60`, as a plain function).
+ *
+ * @param value - The count to scale (e.g. `corsi_for`).
+ * @param toi_seconds - Time on ice in seconds. Not guarded: `0` gives `Infinity` / `NaN`.
+ * @returns `value` per 60 minutes of ice time.
+ * @example
+ * ```ts
+ * import { per60 } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * per60(20, 1131); // 63.66...
+ * ```
+ * @remarks {@link game_corsi_rows} only calls this when `toi_seconds > 0`.
+ */
 export function per60(value: number, toi_seconds: number): number {
   return (value / toi_seconds) * 3600;
 }
@@ -831,6 +1110,21 @@ export function per60(value: number, toi_seconds: number): number {
  * Per-player time on ice from a parsed shifts frame: `toi_seconds` (sum of
  * `start_s - end_s`, a countdown clock), `num_shifts` and `avg_shift_s`, sorted by
  * `toi_seconds` descending (ties keep first-seen order; py's tie order is undefined).
+ *
+ * @param shifts - Shift stints from {@link parse_shifts}; grouped on
+ *   (`player_id`, `first_name`, `last_name`).
+ * @returns One row per player: `player_id`, `first_name`, `last_name` (as in the input),
+ *   `toi_seconds` (sum over stints with both `start_s` and `end_s` non-null), `num_shifts`
+ *   (ALL stints, including ones with a null clock) and `avg_shift_s` (`toi_seconds` over the
+ *   counted stints; `null` if none). `[]` for an empty input.
+ * @example
+ * ```ts
+ * import { parse_shifts, player_toi } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const toi = player_toi(parse_shifts(gameshiftsPayload, 42));
+ * toi[0]; // the player with the most ice time
+ * ```
+ * @remarks `num_shifts` and the `avg_shift_s` denominator differ when a stint has an
+ * unparseable `start_time` / `end_time`.
  */
 export function player_toi(shifts: Row[]): Row[] {
   if (shifts.length === 0) return [];
@@ -863,6 +1157,21 @@ export function player_toi(shifts: Row[]): Row[] {
  * Player-level on-ice Corsi/Fenwick joined to time on ice (the body of py
  * `<lg>_game_corsi`): `corsi_fenwick_on_ice(pbp)` LEFT-joined to `toi_seconds`
  * on the string `player_id`, plus `corsi_for_per60` (null unless TOI > 0).
+ *
+ * @param enrichedPbp - Output of {@link enrich_pbp} (needs `event`, `team_id`,
+ *   `home_team_id`, `on_ice_home`, `on_ice_away`).
+ * @param shifts - Shift stints from {@link parse_shifts} for the same game.
+ * @returns The {@link corsi_fenwick_on_ice} rows (same order) with `toi_seconds` (`null` when
+ *   the player has no TOI row) and `corsi_for_per60` (`per60(corsi_for, toi_seconds)`, `null`
+ *   unless `toi_seconds > 0`). `[]` when the enriched pbp is empty or lacks the on-ice columns.
+ * @example
+ * ```ts
+ * import { game_corsi_rows, parse_shifts } from "sportsdataverse/dist/analytics/hockeytech.js";
+ * const rows = game_corsi_rows(enrichedPbp, parse_shifts(gameshiftsPayload, 42));
+ * ```
+ * @remarks The join key is the TOI side's `player_id` coerced through `toInt` then
+ * `String(...)`; a TOI row with a non-integer id never matches. A player with several TOI rows
+ * (same id, different name spelling) is emitted once per match, like a LEFT join.
  */
 export function game_corsi_rows(enrichedPbp: Row[], shifts: Row[]): Row[] {
   const corsi = corsi_fenwick_on_ice(enrichedPbp);

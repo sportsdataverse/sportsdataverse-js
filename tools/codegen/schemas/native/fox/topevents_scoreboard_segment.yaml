@@ -1,37 +1,71 @@
-# Fox Sports Bifrost — generated returns schema. Columns are derived from the
-# spec's captured `components.schemas` (the item props of the list the parser
-# flattens), snake_cased to match the parser's output. Untyped (`object`)
-# responses carry `columns: []` (the parser flattens whatever the payload ships).
+# fox returns schema (JS-owned): columns derived from the registered parser's rows on
+# the committed real capture(s) fox/topevents_segment.json by
+# tools/codegen/regen-capture-schemas.mjs. Types are inferred from the captured values;
+# `description` is JS-owned text kept across regeneration (blanks fill at render time from
+# sdv-py's manual_column_descriptions.yaml). Do not hand-type columns: re-run the script.
 schema: topevents_scoreboard_segment
 kind: dataframe
 columns:
-- name: id
+- name: segment_id
   type: character
-  description: Bifrost topevents_scoreboard_segment field `id`.
-- name: template
+  description: ""
+- name: section_id
   type: character
-  description: Bifrost topevents_scoreboard_segment field `template`.
-- name: title
+  description: ""
+- name: section_title
   type: character
-  description: Bifrost topevents_scoreboard_segment field `title`.
-- name: hide_league
-  type: logical
-  description: Bifrost topevents_scoreboard_segment field `hideLeague`.
-- name: image
-  type: list
-  description: Bifrost topevents_scoreboard_segment field `image`.
-- name: events
-  type: list
-  description: Bifrost topevents_scoreboard_segment field `events`.
-- name: uri
+  description: ""
+- name: game_id
   type: character
-  description: Bifrost topevents_scoreboard_segment field `uri`.
-- name: title_link
-  type: list
-  description: Bifrost topevents_scoreboard_segment field `titleLink`.
-- name: header_text
+  description: ""
+- name: chip_id
   type: character
-  description: Bifrost topevents_scoreboard_segment field `headerText`.
-- name: header_link
-  type: list
-  description: Bifrost topevents_scoreboard_segment field `headerLink`.
+  description: ""
+- name: league
+  type: character
+  description: ""
+- name: date
+  type: character
+  description: ""
+- name: event_status
+  type: integer
+  description: ""
+- name: status
+  type: character
+  description: ""
+- name: tv_station
+  type: character
+  description: ""
+- name: headline
+  type: character
+  description: ""
+- name: odds_line
+  type: character
+  description: ""
+- name: over_under_line
+  type: character
+  description: ""
+- name: home_team
+  type: character
+  description: ""
+- name: home_team_id
+  type: character
+  description: ""
+- name: home_score
+  type: character
+  description: ""
+- name: home_record
+  type: character
+  description: ""
+- name: away_team
+  type: character
+  description: ""
+- name: away_team_id
+  type: character
+  description: ""
+- name: away_score
+  type: character
+  description: ""
+- name: away_record
+  type: character
+  description: ""

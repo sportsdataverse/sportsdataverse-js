@@ -81,22 +81,23 @@ const DEFENSE_NEAREST_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/defense/nearest/season`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.qualified - query parameter (`qualifiedDefender`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.qualified - `boolean` — Restrict to players meeting the league qualifying threshold; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProDefenseNearestSeason({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProDefenseNearestSeason: Wrapper<Row[], NflProDefenseNearestSeasonParams> = (params: WrapperParams = {}) => callFlat(DEFENSE_NEAREST_SEASON_DEF, params);
 /** snake_case alias of {@link nflProDefenseNearestSeason} (py/R parity). */
@@ -162,23 +163,24 @@ const DEFENSE_NEAREST_WEEK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/defense/nearest/week`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.qualified - query parameter (`qualifiedDefender`) — default `null`.
- * @param params.nfl_id - query parameter (`nflId`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.qualified - `boolean` — Restrict to players meeting the league qualifying threshold; default `null`.
+ * @param params.nfl_id - `number | string` — Optional player filter; omit for the whole league-week table. Note `week` is a path scope here, not a query param; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProDefenseNearestWeek({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProDefenseNearestWeek: Wrapper<Row[], NflProDefenseNearestWeekParams> = (params: WrapperParams = {}) => callFlat(DEFENSE_NEAREST_WEEK_DEF, params);
 /** snake_case alias of {@link nflProDefenseNearestWeek} (py/R parity). */
@@ -239,22 +241,23 @@ const DEFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/defense/overview/season`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.qualified - query parameter (`qualifiedDefender`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.qualified - `boolean` — Restrict to players meeting the league qualifying threshold; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProDefenseOverviewSeason({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProDefenseOverviewSeason: Wrapper<Row[], NflProDefenseOverviewSeasonParams> = (params: WrapperParams = {}) => callFlat(DEFENSE_OVERVIEW_SEASON_DEF, params);
 /** snake_case alias of {@link nflProDefenseOverviewSeason} (py/R parity). */
@@ -320,23 +323,24 @@ const DEFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/defense/overview/week`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.qualified - query parameter (`qualifiedDefender`) — default `null`.
- * @param params.nfl_id - query parameter (`nflId`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.qualified - `boolean` — Restrict to players meeting the league qualifying threshold; default `null`.
+ * @param params.nfl_id - `number | string` — Optional player filter; omit for the whole league-week table. Note `week` is a path scope here, not a query param; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProDefenseOverviewWeek({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProDefenseOverviewWeek: Wrapper<Row[], NflProDefenseOverviewWeekParams> = (params: WrapperParams = {}) => callFlat(DEFENSE_OVERVIEW_WEEK_DEF, params);
 /** snake_case alias of {@link nflProDefenseOverviewWeek} (py/R parity). */
@@ -401,23 +405,24 @@ const FANTASY_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/fantasy/game`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.nfl_id - query parameter (`nflId`) — default `null`.
- * @param params.position_group - query parameter (`positionGroup`).
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.nfl_id - `number | string` — Optional player filter; default `null`.
+ * @param params.position_group - `number | string` — Position group, e.g. `QB`. **Required**: this scope returns HTTP 500 without it, so it is a required argument rather than an optional filter.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `fpHalfPPR`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProFantasyGame({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProFantasyGame: Wrapper<Row[], NflProFantasyGameParams> = (params: WrapperParams = {}) => callFlat(FANTASY_GAME_DEF, params);
 /** snake_case alias of {@link nflProFantasyGame} (py/R parity). */
@@ -483,23 +488,24 @@ const FANTASY_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/fantasy/season`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.nfl_id - query parameter (`nflId`) — default `null`.
- * @param params.position_group - query parameter (`positionGroup`) — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.nfl_id - `number | string` — Optional player filter; default `null`.
+ * @param params.position_group - `number | string` — Optional position-group filter, e.g. `QB`. Optional on this season scope — it is the `game` scope that requires it; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `fpHalfPPR`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProFantasySeason({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProFantasySeason: Wrapper<Row[], NflProFantasySeasonParams> = (params: WrapperParams = {}) => callFlat(FANTASY_SEASON_DEF, params);
 /** snake_case alias of {@link nflProFantasySeason} (py/R parity). */
@@ -560,22 +566,23 @@ const PLAYERS_OFFENSE_PASSING_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/players-offense/passing/season`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.qualified - query parameter (`qualifiedPasser`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.qualified - `boolean` — Restrict to players meeting the league qualifying threshold; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProPlayersOffensePassingSeason({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProPlayersOffensePassingSeason: Wrapper<Row[], NflProPlayersOffensePassingSeasonParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_PASSING_SEASON_DEF, params);
 /** snake_case alias of {@link nflProPlayersOffensePassingSeason} (py/R parity). */
@@ -641,23 +648,24 @@ const PLAYERS_OFFENSE_PASSING_WEEK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/players-offense/passing/week`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.qualified - query parameter (`qualifiedPasser`) — default `null`.
- * @param params.nfl_id - query parameter (`nflId`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.qualified - `boolean` — Restrict to players meeting the league qualifying threshold; default `null`.
+ * @param params.nfl_id - `number | string` — Optional player filter; omit for the whole league-week table. Note `week` is a path scope here, not a query param; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProPlayersOffensePassingWeek({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProPlayersOffensePassingWeek: Wrapper<Row[], NflProPlayersOffensePassingWeekParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_PASSING_WEEK_DEF, params);
 /** snake_case alias of {@link nflProPlayersOffensePassingWeek} (py/R parity). */
@@ -718,22 +726,23 @@ const PLAYERS_OFFENSE_RECEIVING_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/players-offense/receiving/season`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.qualified - query parameter (`qualifiedReceiver`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.qualified - `boolean` — Restrict to players meeting the league qualifying threshold; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProPlayersOffenseReceivingSeason({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProPlayersOffenseReceivingSeason: Wrapper<Row[], NflProPlayersOffenseReceivingSeasonParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_RECEIVING_SEASON_DEF, params);
 /** snake_case alias of {@link nflProPlayersOffenseReceivingSeason} (py/R parity). */
@@ -799,23 +808,24 @@ const PLAYERS_OFFENSE_RECEIVING_WEEK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/players-offense/receiving/week`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.qualified - query parameter (`qualifiedReceiver`) — default `null`.
- * @param params.nfl_id - query parameter (`nflId`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.qualified - `boolean` — Restrict to players meeting the league qualifying threshold; default `null`.
+ * @param params.nfl_id - `number | string` — Optional player filter; omit for the whole league-week table. Note `week` is a path scope here, not a query param; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProPlayersOffenseReceivingWeek({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProPlayersOffenseReceivingWeek: Wrapper<Row[], NflProPlayersOffenseReceivingWeekParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_RECEIVING_WEEK_DEF, params);
 /** snake_case alias of {@link nflProPlayersOffenseReceivingWeek} (py/R parity). */
@@ -876,22 +886,23 @@ const PLAYERS_OFFENSE_RUSHING_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/players-offense/rushing/season`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.qualified - query parameter (`qualifiedRusher`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.qualified - `boolean` — Restrict to players meeting the league qualifying threshold; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProPlayersOffenseRushingSeason({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProPlayersOffenseRushingSeason: Wrapper<Row[], NflProPlayersOffenseRushingSeasonParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_RUSHING_SEASON_DEF, params);
 /** snake_case alias of {@link nflProPlayersOffenseRushingSeason} (py/R parity). */
@@ -957,23 +968,24 @@ const PLAYERS_OFFENSE_RUSHING_WEEK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/players-offense/rushing/week`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.qualified - query parameter (`qualifiedRusher`) — default `null`.
- * @param params.nfl_id - query parameter (`nflId`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.qualified - `boolean` — Restrict to players meeting the league qualifying threshold; default `null`.
+ * @param params.nfl_id - `number | string` — Optional player filter; omit for the whole league-week table. Note `week` is a path scope here, not a query param; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProPlayersOffenseRushingWeek({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProPlayersOffenseRushingWeek: Wrapper<Row[], NflProPlayersOffenseRushingWeekParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_RUSHING_WEEK_DEF, params);
 /** snake_case alias of {@link nflProPlayersOffenseRushingWeek} (py/R parity). */
@@ -1029,21 +1041,22 @@ const TEAM_DEFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/team-defense/overview/season`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProTeamDefenseOverviewSeason({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProTeamDefenseOverviewSeason: Wrapper<Row[], NflProTeamDefenseOverviewSeasonParams> = (params: WrapperParams = {}) => callFlat(TEAM_DEFENSE_OVERVIEW_SEASON_DEF, params);
 /** snake_case alias of {@link nflProTeamDefenseOverviewSeason} (py/R parity). */
@@ -1099,21 +1112,22 @@ const TEAM_DEFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/team-defense/overview/week`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProTeamDefenseOverviewWeek({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProTeamDefenseOverviewWeek: Wrapper<Row[], NflProTeamDefenseOverviewWeekParams> = (params: WrapperParams = {}) => callFlat(TEAM_DEFENSE_OVERVIEW_WEEK_DEF, params);
 /** snake_case alias of {@link nflProTeamDefenseOverviewWeek} (py/R parity). */
@@ -1169,21 +1183,22 @@ const TEAM_OFFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/team-offense/overview/season`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProTeamOffenseOverviewSeason({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProTeamOffenseOverviewSeason: Wrapper<Row[], NflProTeamOffenseOverviewSeasonParams> = (params: WrapperParams = {}) => callFlat(TEAM_OFFENSE_OVERVIEW_SEASON_DEF, params);
 /** snake_case alias of {@link nflProTeamOffenseOverviewSeason} (py/R parity). */
@@ -1239,21 +1254,22 @@ const TEAM_OFFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://pro.nfl.com/api/secured/stats/team-offense/overview/week`
  *
- * @param params.season - query parameter — default `2024`.
- * @param params.season_type - query parameter (`seasonType`) — default `REG`.
- * @param params.limit - query parameter — default `500`.
- * @param params.offset - query parameter — default `null`.
- * @param params.sort_key - query parameter (`sortKey`) — default `null`.
- * @param params.sort_value - query parameter (`sortValue`) — default `null`.
- * @param params.headers - optional headers; an `Authorization` here wins over every other credential.
- * @param params.token - NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
- * @param params.email - NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
- * @param params.password - NFL account password for that login; falls back to `NFLPRO_PW`.
- * @param params.paginate - follow `offset` until the envelope's `total` is reached (default `true`).
- * @param params.max_pages - cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season, as the STARTING year (2024 = the 2024-25 NFL season); default `2024`.
+ * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; default `REG`.
+ * @param params.limit - `number | string` — Page size. Responses truncate silently at this many rows; the getter pages on `offset` until it has them all; default `500`.
+ * @param params.offset - `number | string` — Zero-based row offset. The getter pages on this automatically; set it only to fetch a specific slice; default `null`.
+ * @param params.sort_key - `number | string` — Field name to sort by, e.g. `epa`; default `null`.
+ * @param params.sort_value - `number | string` — Sort direction: `ASC` or `DESC`; default `null`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over every other credential.
+ * @param params.token - `string` — NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.
+ * @param params.email - `string` — NFL account e-mail for a browser login when no token resolves; falls back to `NFLPRO_EMAIL`.
+ * @param params.password - `string` — NFL account password for that login; falls back to `NFLPRO_PW`.
+ * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
+ * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProTeamOffenseOverviewWeek({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
 export const nflProTeamOffenseOverviewWeek: Wrapper<Row[], NflProTeamOffenseOverviewWeekParams> = (params: WrapperParams = {}) => callFlat(TEAM_OFFENSE_OVERVIEW_WEEK_DEF, params);
 /** snake_case alias of {@link nflProTeamOffenseOverviewWeek} (py/R parity). */

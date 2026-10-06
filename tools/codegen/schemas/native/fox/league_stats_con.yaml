@@ -6,6 +6,7 @@
 # capture remain `columns: []`.
 schema: league_stats_con
 kind: dataframe
+unverified: these columns were written for parse_fox_standings's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 columns:
 - name: id
   type: character

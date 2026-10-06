@@ -1,12 +1,31 @@
 {
-  "//": "Minimal TS program for the TypeDoc API sample. The docs plugin loads the WHOLE tsconfig program to resolve types; pointing it at the full ../tsconfig.json now pulls in all ~44 written ESPN+flat modules (~130k lines) and OOMs/slows the docs build. `files` (with `include: []` to nullify the inherited glob) limits the program to the 4 basketball sample modules — tsc still follows their imports to resolve core/* types, so it's a small, fast program. Expanding TypeDoc to all modules is not viable (measured: heap-exhaustion); the codegen Markdown per-function reference covers every league + family.",
+  "//": "Minimal TS program for the TypeDoc API docs: the 4 basketball sample modules + the hand-written modules of tools/codegen/utilities.yaml (`files`, with `include: []` to nullify the inherited glob). The docs plugin loads the WHOLE tsconfig program to resolve types; pointing it at the full ../tsconfig.json pulls in all ~44 written ESPN+flat modules (~130k lines) and OOMs/slows the docs build — tsc still follows these files' imports to resolve core/* types, so this stays a small, fast program. src/discover.ts is excluded: its dynamic import of src/index.ts makes tsc follow the whole index (13 -> 204 program files). Keep an eye on the file count (tsc --listFilesOnly -p docs/typedoc.tsconfig.json).",
   "extends": "../tsconfig.json",
-  "compilerOptions": { "noEmit": true },
+  "compilerOptions": {
+    "noEmit": true
+  },
   "include": [],
   "files": [
     "../src/generated/espn/nba.ts",
     "../src/generated/espn/wnba.ts",
     "../src/generated/espn/mbb.ts",
-    "../src/generated/espn/wbb.ts"
+    "../src/generated/espn/wbb.ts",
+    "../src/parsers/index.ts",
+    "../src/analytics/hockeytech.ts",
+    "../src/analytics/hockeytech_family.ts",
+    "../src/odds/math.ts",
+    "../src/models/cricket_wp.ts",
+    "../src/producers/espn_basketball_box.ts",
+    "../src/producers/espn_basketball_pbp.ts",
+    "../src/core/int64.ts",
+    "../src/core/id_columns.ts",
+    "../src/core/transforms.ts",
+    "../src/core/releases.ts",
+    "../src/core/errors.ts",
+    "../src/core/config.ts",
+    "../src/core/request.ts",
+    "../src/core/transport.ts",
+    "../src/core/auth.ts",
+    "../src/core/deprecation.ts"
   ]
 }

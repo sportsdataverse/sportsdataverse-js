@@ -78,6 +78,8 @@
     "docs": "typedoc",
     "codegen": "node tools/codegen/generate.mjs",
     "codegen:check": "node tools/codegen/generate.mjs --check",
+    "schemas:captures": "node tools/codegen/regen-capture-schemas.mjs",
+    "schemas:captures:check": "node tools/codegen/regen-capture-schemas.mjs --check",
     "vendor": "node tools/codegen/vendor.mjs",
     "vendor:check": "node tools/codegen/vendor.mjs --check",
     "api:report": "tsc && node tools/api-report.mjs",

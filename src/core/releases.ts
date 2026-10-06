@@ -36,6 +36,10 @@ import { request } from "./request.js";
  * gateway traffic, so it keeps the full default retry set, 403 included (as
  * sdv-py's `dl_utils.download`). Swap its transport with
  * `configure({ transport: { releases } })`.
+ *
+ * @remarks
+ * Registered with `registerFamilyDefaults` at module load, so importing this module is what
+ * gives the family its retry set.
  */
 export const RELEASES_FAMILY = "releases";
 registerFamilyDefaults(RELEASES_FAMILY, { retryStatuses: DEFAULT_RETRY_STATUSES });
@@ -47,6 +51,9 @@ registerFamilyDefaults(RELEASES_FAMILY, { retryStatuses: DEFAULT_RETRY_STATUSES 
  * body there. Other transports (fetch / impit) may bound the whole request, so
  * release downloads get a longer default than the 30 s global one. Override per
  * call with `timeoutMs`.
+ *
+ * @remarks
+ * 300 000 ms (5 minutes); the default for {@link ReleaseLoaderOptions.timeoutMs}.
  */
 export const RELEASE_TIMEOUT_MS = 300_000;
 
@@ -68,7 +75,13 @@ export const RELEASE_TIMEOUT_MS = 300_000;
  */
 const BYTES_PER_CELL = { rows: 100, columns: 30 } as const;
 
-/** One generated loader: everything the runtime needs from its manifest entry. */
+/**
+ * One generated loader: everything the runtime needs from its manifest entry.
+ *
+ * @remarks
+ * The argument of {@link seasonLoader} / {@link assetLoader}; the generated loaders pass the
+ * vendored `releases.yaml` entry.
+ */
 export interface ReleaseLoaderDef {
   /** sdv-py function name (`load_cfb_pbp`), used in warnings and errors. */
   fn: string;
@@ -86,7 +99,14 @@ export interface ReleaseLoaderDef {
   onMissing?: "raise";
 }
 
-/** A row of a loaded dataset (column name -> value). */
+/**
+ * A row of a loaded dataset (column name -> value).
+ *
+ * @remarks
+ * Cell types follow hyparquet's decode plus the INT64 policy: an id column of integers is
+ * decimal strings, a safe-integer INT64 column is `number`, an out-of-range one stays
+ * `bigint` (with one warning), DATE and TIMESTAMP both decode to `Date`.
+ */
 export type ReleaseRow = Record<string, unknown>;
 
 /**
@@ -95,7 +115,14 @@ export type ReleaseRow = Record<string, unknown>;
  */
 export type ReleaseColumns<R extends object = ReleaseRow> = { [K in keyof R]: Array<Exclude<R[K], undefined>> };
 
-/** Options every loader accepts. */
+/**
+ * Options every loader accepts.
+ *
+ * @remarks
+ * `columns` names top-level parquet columns; a requested column absent from every loaded
+ * season is still returned (all `null`) with one `SDV_RELEASE` warning, since that is usually
+ * a typo. A column absent from only some seasons is null-filled for those seasons.
+ */
 export interface ReleaseLoaderOptions {
   /** Read only these columns (the rest are not decoded). Default: all. */
   columns?: readonly string[];
@@ -116,7 +143,13 @@ export interface ReleaseLoaderOptions {
   timeoutMs?: number;
 }
 
-/** Options for a per-season loader. */
+/**
+ * Options for a per-season loader.
+ *
+ * @remarks
+ * `seasons` is validated before any fetch: a missing value, a non-integer, or a string that is
+ * not a 4-digit year rejects with `SdvError` (so `null`, `""` or `true` never become season 0 / 1).
+ */
 export interface SeasonLoaderOptions extends ReleaseLoaderOptions {
   /** One season or a list of seasons: integers or 4-digit year strings (`2024`, `"2024"`). */
   seasons: number | number[];
@@ -167,14 +200,34 @@ export const _warn = {
 /** sdv-py `spec.SEASON_TOKEN`: `{season}` or `{season + N}`. */
 const SEASON_TOKEN = /\{season(?:\s*\+\s*(\d+))?\}/g;
 
-/** Fill the asset URL for one season (sdv-py `spec.render_url`). */
+/**
+ * Fill the asset URL for one season (sdv-py `spec.render_url`).
+ *
+ * @param template - The manifest URL with `{season}` and / or `{season + N}` tokens (N a
+ *   non-negative integer; whitespace around `+` allowed). Every occurrence is replaced.
+ * @param season - The season year to substitute.
+ * @returns The URL with each token replaced by `season + N` (N = 0 for a bare `{season}`).
+ * @example
+ * releaseUrl("a/sched_{season + 1}.parquet", 2024); // "a/sched_2025.parquet"
+ */
 export function releaseUrl(template: string, season: number): string {
   return template.replace(SEASON_TOKEN, (_m, off: string | undefined) =>
     String(season + Number(off ?? 0))
   );
 }
 
-/** The default cell limit for a format on this process's heap. */
+/**
+ * The default cell limit for a format on this process's heap.
+ *
+ * @param format - `"rows"` (100 bytes budgeted per cell) or `"columns"` (30 bytes per cell).
+ * @returns `floor(v8 heap_size_limit / bytes-per-cell)`: about 45.0M cells for rows and
+ *   149.9M for columns on Node's default 4288 MB heap; scales with `--max-old-space-size`.
+ * @remarks
+ * The default for {@link ReleaseLoaderOptions.maxCells}. A measured heuristic (see
+ * `BYTES_PER_CELL`), not a bound: a selection of only long-string columns costs more per cell.
+ * @example
+ * const budget = defaultMaxCells("columns");
+ */
 export function defaultMaxCells(format: "rows" | "columns"): number {
   return Math.floor(getHeapStatistics().heap_size_limit / BYTES_PER_CELL[format]);
 }
@@ -610,12 +663,41 @@ function int64Column(label: string, col: string, c: Cells): void {
   }
 }
 
-/** {@link castIdColumn} over row objects (exported for tests). */
+/**
+ * {@link castIdColumn} over row objects (exported for tests).
+ *
+ * @param rows - The rows to update in place.
+ * @param col - The id column to cast (an `idInt64` column of a {@link ReleaseLoaderDef}).
+ * @returns Nothing; `rows` is mutated.
+ * @remarks
+ * sdv-py `_cast_ids_int64`: every number / string cell becomes a `bigint` only when EVERY
+ * non-null value is an exact in-range INT64 integer (an integer number, a bigint, or a
+ * canonical decimal string — `"007"`, `"1.5"`, `"abc"` leave the column untouched). Pairs with
+ * {@link applyInt64Policy}, which then turns those bigints into decimal strings.
+ * @example
+ * castIdInt64(rows, "id"); // rows[0].id: 123 -> 123n (then "123" after the INT64 policy)
+ */
 export function castIdInt64(rows: ReleaseRow[], col: string): void {
   castIdColumn(rowCells(rows, col));
 }
 
-/** The INT64 policy over every column of row objects. Mutates and returns `rows`. */
+/**
+ * The INT64 policy over every column of row objects. Mutates and returns `rows`.
+ *
+ * @param rows - The rows to update in place (the first row's keys define the column set).
+ * @param label - The loader name used in warnings (e.g. `"load_cfb_ratings"`).
+ * @returns The same `rows` array.
+ * @remarks
+ * Per column: an id column (`isIdColumn`) of exact integers becomes decimal strings, whatever
+ * the storage type (INT32, INT64 bigint, or a DOUBLE holding `39` -> `"39"`); an id column that
+ * is not exact integers is left as read with ONE `SDV_INT64` warning per (loader, column) per
+ * process and falls through to the non-id rule. Any other column: bigints (scalar, or nested in
+ * lists / structs) become `number` when every one is a safe integer, else the column keeps its
+ * exact bigints with ONE warning. The loaders run this only on id columns and on columns some
+ * season stores as INT64, not on every column; this export runs it on every column.
+ * @example
+ * applyInt64Policy(rows, "load_cfb_ratings"); // rows[0].team_id: 39 -> "39"
+ */
 export function applyInt64Policy(rows: ReleaseRow[], label: string): ReleaseRow[] {
   if (rows.length) for (const col of Object.keys(rows[0])) int64Column(label, col, rowCells(rows, col));
   return rows;
@@ -730,6 +812,33 @@ async function load(
  * raises `AssetFetchError`, and the seasons are concatenated (columns unioned,
  * gaps null-filled, drifted types cast to their supertype). Seasons below
  * `minSeason` raise {@link SeasonNotFoundError} before anything is fetched.
+ *
+ * @param def - The loader's manifest entry: `fn`, a `url` with a `{season}` token, optional
+ *   `minSeason`, `idInt64` and `onMissing`.
+ * @returns An async loader taking {@link SeasonLoaderOptions} (`seasons` required; `columns`,
+ *   `format`, `maxCells`, `timeoutMs` optional) and resolving to row objects, or to column
+ *   arrays with `format: "columns"`. Every error is a rejection, including a bad `seasons`.
+ * @throws SdvError (rejected) when `seasons` is missing, or a season is not an integer / 4-digit
+ *   year string; when `format` is neither `"rows"` nor `"columns"`; when a season's cells would
+ *   push the running total over `maxCells` (that season is not decoded; earlier ones already
+ *   were); or when an asset is not decodable parquet (`cause` set).
+ * @throws SeasonNotFoundError (rejected) when a season is below `def.minSeason` — before any
+ *   fetch.
+ * @throws NoDataError (rejected) with `onMissing: "raise"`, when a season has no published
+ *   asset (HTTP 404). Without it the season is skipped and named in one `SDV_RELEASE` warning.
+ * @throws AssetFetchError (rejected) for any failed download other than a 404 (propagated from
+ *   the transport) — a failed fetch is never reported as a missing season.
+ * @remarks
+ * Seasons are processed one at a time: download, read the footer, add its cells to the running
+ * total, refuse if over `maxCells`, else decode and drop the download. At most one compressed
+ * download is held at once. The concat matches polars `diagonal_relaxed` (columns unioned in
+ * first-seen order, gaps null-filled, a column whose type drifts between seasons cast to the
+ * supertype: anything + string -> string, boolean + number -> number). The INT64 policy then
+ * runs on id columns and INT64-stored columns ({@link applyInt64Policy}). A `Date` cast to
+ * string becomes its ISO timestamp, not polars' `YYYY-MM-DD` (known gap).
+ * @example
+ * const loadPbp = seasonLoader({ fn: "load_cfb_pbp", url: "https://x/pbp_{season}.parquet" });
+ * const rows = await loadPbp({ seasons: [2023, 2024], columns: ["game_id", "epa"] });
  */
 export function seasonLoader<R extends object = ReleaseRow>(def: ReleaseLoaderDef): SeasonLoader<R> {
   // async, so a bad `seasons` rejects like every other loader error.
@@ -740,6 +849,22 @@ export function seasonLoader<R extends object = ReleaseRow>(def: ReleaseLoaderDe
 /**
  * A single-asset loader (no season token in its URL). An absent asset returns
  * no rows with a warning; a failed fetch raises `AssetFetchError`.
+ *
+ * @param def - The loader's manifest entry; `def.url` is fetched as-is (no season token).
+ *   `minSeason` is not consulted.
+ * @returns An async loader taking optional {@link ReleaseLoaderOptions} and resolving to row
+ *   objects (`[]` when the asset is absent) or, with `format: "columns"`, column arrays.
+ * @throws SdvError (rejected) when `format` is neither `"rows"` nor `"columns"`, when the
+ *   asset's cells exceed `maxCells`, or when it is not decodable parquet (`cause` set).
+ * @throws NoDataError (rejected) with `onMissing: "raise"`, when the asset is absent (HTTP
+ *   404). Without it the loader resolves to no rows and emits one `SDV_RELEASE` warning.
+ * @throws AssetFetchError (rejected) for any failed download other than a 404 (propagated from
+ *   the transport).
+ * @remarks
+ * Same decode, size guard and INT64 policy as {@link seasonLoader}, over a single asset.
+ * @example
+ * const loadTeams = assetLoader({ fn: "load_nfl_teams", url: "https://x/teams.parquet" });
+ * const teams = await loadTeams({ columns: ["team_abbr", "team_name"] });
  */
 export function assetLoader<R extends object = ReleaseRow>(def: ReleaseLoaderDef): AssetLoader<R> {
   return (async (opts: ReleaseLoaderOptions = {}) => load(def, opts, [undefined])) as AssetLoader<R>;
@@ -751,6 +876,18 @@ const deprecationWarned = new Set<string>();
  * A loader whose release tag was retired: forwards to `target()` (a thunk, so
  * the replacement may be declared later in the module) with a one-time
  * `DeprecationWarning`.
+ *
+ * @param fn - The deprecated loader's name, as it appears in the warning and as the
+ *   once-per-process key.
+ * @param replacement - The name to recommend (`"<fn> is deprecated; use <replacement> instead."`).
+ * @param target - A thunk returning the replacement loader; called on every invocation, so it
+ *   may refer to a loader declared later in the module.
+ * @returns A function of the same type `L` that forwards its single argument to `target()`.
+ * @remarks
+ * The warning is emitted once per `fn` per process (module-level set); the forwarded call's
+ * own errors / rejections pass through unchanged. Only one positional argument is forwarded.
+ * @example
+ * export const loadNflPbpOld = deprecatedLoader("load_nfl_pbp_old", "load_nfl_pbp", () => loadNflPbp);
  */
 export function deprecatedLoader<L>(fn: string, replacement: string, target: () => L): L {
   return ((opts: unknown) => {

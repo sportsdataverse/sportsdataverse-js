@@ -11,9 +11,37 @@
  */
 import { PARSERS } from './parsers/_registry.js';
 import { NoDataError, SdvError } from './core/errors.js';
+import { UTILITY_CATEGORIES, type UtilityCategory } from './generated/utilities.js';
 
 type Fn = (...a: any[]) => any;
+/**
+ * The namespace map the discovery helpers run over: league / family key (`'nba'`, `'odds'`, …)
+ * -> that namespace's exports (wrappers, loaders, utilities).
+ *
+ * @remarks
+ * The package default export has this shape; every helper accepts one as its trailing `ns`
+ * argument so it can run offline over a stubbed map (the tests do). The `find*` helpers key
+ * their team-list cache on the map's identity, so a stub never shares a default's cache.
+ */
 export type Namespaces = Record<string, Record<string, any>>;
+
+/**
+ * One row of `listFunctions(…, { detail: true })`: a callable's name, whether it fetches
+ * data (`data`: an ESPN / native wrapper, a `load*` loader, a legacy `get*` method) or is a
+ * hand-written utility (`utility`: parsers, analytics, odds math, models, producers — the
+ * names tools/codegen/utilities.yaml catalogues), and the utility's category.
+ */
+export interface FunctionEntry {
+  name: string;
+  kind: 'data' | 'utility';
+  category?: UtilityCategory;
+}
+
+/** Label a callable: `utility` + its category when the utilities table lists it, else `data`. */
+function classify(name: string): FunctionEntry {
+  const category = UTILITY_CATEGORIES[name];
+  return category ? { name, kind: 'utility', category } : { name, kind: 'data' };
+}
 
 const toCamel = (s: string): string => s.replace(/_([a-z0-9])/g, (_m, c: string) => c.toUpperCase());
 
@@ -32,6 +60,12 @@ function listNamespace(mod: Record<string, any>): string[] {
   return keys.filter((k) => !twins.has(k) || k.includes('_')).sort();
 }
 
+/**
+ * Options for `listFunctions`.
+ *
+ * @remarks
+ * `parsersOnly` and `wrappersOnly` are mutually exclusive (both set throws). All default to off.
+ */
 export interface ListFunctionsOptions {
   /** Case-insensitive substring filter. */
   search?: string;
@@ -42,19 +76,44 @@ export interface ListFunctionsOptions {
   parsersOnly?: boolean;
   /** Exclude `parse_*` names. */
   wrappersOnly?: boolean;
+  /**
+   * Return {@link FunctionEntry} rows (`{ name, kind, category? }`) instead of bare names:
+   * `kind` is `utility` for a hand-written non-data export (tools/codegen/utilities.yaml),
+   * `data` for everything else.
+   */
+  detail?: boolean;
 }
 
 /**
  * Index of callable functions. With `league` returns a sorted name array;
- * without, an object keyed by namespace (empty namespaces omitted).
- * Throws on an unknown league or when `parsersOnly` and `wrappersOnly` are both set.
+ * without, an object keyed by namespace (empty namespaces omitted). With
+ * `detail: true` each name is a {@link FunctionEntry} (`kind: 'data' | 'utility'` + category).
+ *
+ * @param league - one namespace (`'nba'`, `'odds'`, …), or `null` / omitted for every namespace.
+ * @param opts - `search` (case-insensitive substring), `parsersOnly` / `wrappersOnly`, `detail`.
+ * @param ns - the namespace map to index (default: the package default export; injectable for tests).
+ * @returns Names (or entries) for one namespace, or an object keyed by namespace.
+ * @throws Error on an unknown league, or when `parsersOnly` and `wrappersOnly` are both set.
+ * @example
+ * const rosterFns = await listFunctions('nba', { search: 'roster' });
+ * const typed = await listFunctions('odds', { detail: true }); // [{ name: 'devig_shin', kind: 'utility', category: 'odds' }, …]
  */
+export async function listFunctions(
+  league: string | null | undefined,
+  opts: ListFunctionsOptions & { detail: true },
+  ns?: Namespaces,
+): Promise<FunctionEntry[] | Record<string, FunctionEntry[]>>;
+export async function listFunctions(
+  league?: string | null,
+  opts?: ListFunctionsOptions,
+  ns?: Namespaces,
+): Promise<string[] | Record<string, string[]>>;
 export async function listFunctions(
   league?: string | null,
   opts: ListFunctionsOptions = {},
   ns?: Namespaces,
-): Promise<string[] | Record<string, string[]>> {
-  const { search, parsersOnly = false, wrappersOnly = false } = opts;
+): Promise<string[] | Record<string, string[]> | FunctionEntry[] | Record<string, FunctionEntry[]>> {
+  const { search, parsersOnly = false, wrappersOnly = false, detail = false } = opts;
   if (parsersOnly && wrappersOnly) throw new Error('parsersOnly and wrappersOnly are mutually exclusive');
   const needle = (search ?? '').toLowerCase();
   const filter = (names: string[]): string[] => {
@@ -64,24 +123,38 @@ export async function listFunctions(
     if (wrappersOnly) out = out.filter((n) => !n.startsWith('parse_'));
     return out;
   };
-  if (parsersOnly) return filter(Object.keys(PARSERS).sort());
+  const shape = (names: string[]): string[] | FunctionEntry[] => (detail ? names.map(classify) : names);
+  if (parsersOnly) return shape(filter(Object.keys(PARSERS).sort()));
   const space = ns ?? (await defaultNs());
   if (league != null) {
     const key = league.toLowerCase();
     if (!(key in space)) {
       throw new Error(`Unknown league '${key}'. Choose one of ${Object.keys(space).sort().join(', ')}.`);
     }
-    return filter(listNamespace(space[key]));
+    return shape(filter(listNamespace(space[key])));
   }
-  const out: Record<string, string[]> = {};
+  const out: Record<string, string[] | FunctionEntry[]> = {};
   for (const [k, mod] of Object.entries(space)) {
     const names = filter(listNamespace(mod));
-    if (names.length) out[k] = names;
+    if (names.length) out[k] = shape(names);
   }
-  return out;
+  return out as Record<string, string[]> | Record<string, FunctionEntry[]>;
 }
 
-/** Count of callable functions per namespace, or in one namespace. */
+/**
+ * Count of callable functions per namespace, or in one namespace.
+ *
+ * @param league - One namespace (`'nba'`, `'odds'`, …; case-insensitive), or `null` / omitted
+ *   for every namespace.
+ * @param ns - The namespace map to count (default: the package default export; injectable for
+ *   tests).
+ * @returns A number for one namespace; otherwise an object keyed by namespace (namespaces with
+ *   no callables omitted). Counts match `listFunctions` with no filters.
+ * @throws Error on an unknown league (from `listFunctions`).
+ * @example
+ * const n = await functionCount('nba');
+ * const perNs = await functionCount(); // { nba: <count>, nfl: <count>, ... }
+ */
 export async function functionCount(
   league?: string | null,
   ns?: Namespaces,
@@ -142,7 +215,30 @@ async function listTeams(league: string, ns?: Namespaces): Promise<any[]> {
   return pending;
 }
 
-/** Resolve a team name/abbreviation (case-insensitive substring) to ESPN team metadata. `multi` returns all matches. */
+/**
+ * Resolve a team name/abbreviation (case-insensitive substring) to ESPN team metadata. `multi`
+ * returns all matches.
+ *
+ * @param name - The needle, matched as a trimmed, case-insensitive substring of the team's
+ *   `displayName`, `location`, `shortDisplayName`, `name`, `abbreviation` or `nickname`. An
+ *   empty / blank needle matches nothing.
+ * @param league - An ESPN league namespace that exposes `espn_<league>_teams_site`,
+ *   `espn_<league>_scoreboard` and `espn_<league>_team_roster` (case-insensitive).
+ * @param opts - `multi: true` returns every match (possibly `[]`); default `false` returns the
+ *   first match in ESPN's team order, or `null`.
+ * @param ns - The namespace map (default: the package default export; injectable for tests).
+ * @returns The raw ESPN `team` object (sdv-py `return_parsed=False`), `null`, or an array of
+ *   them with `multi`.
+ * @throws Error on an unknown league (one lacking the three ESPN wrappers), naming the valid
+ *   ones.
+ * @remarks
+ * The league's team list is fetched once per (namespace, league) and cached in-process for
+ * every later `find*` call: the cache holds the in-flight promise so concurrent first calls
+ * share one fetch, and a rejected fetch is evicted so the next call retries. A failed fetch
+ * (`AssetFetchError`, …) propagates. Reset with {@link clearTeamCache}.
+ * @example
+ * const lakers = await sdv.findTeam('Lakers', 'nba'); // { id: '13', displayName: 'Los Angeles Lakers', … }
+ */
 export async function findTeam(
   name: string,
   league: string,
@@ -156,7 +252,30 @@ export async function findTeam(
   return opts.multi ? hits : (hits[0] ?? null);
 }
 
-/** Resolve an athlete name via team rosters (pass `team` for one fast call). Entries gain `team_id` + `team_display_name`. */
+/**
+ * Resolve an athlete name via team rosters (pass `team` for one fast call). Entries gain
+ * `team_id` + `team_display_name`.
+ *
+ * @param name - The needle, matched as a trimmed, case-insensitive substring of the athlete's
+ *   `fullName`, `displayName`, `shortName`, `firstName` or `lastName`. An empty / blank needle
+ *   matches nothing.
+ * @param league - An ESPN league namespace (as for {@link findTeam}; case-insensitive).
+ * @param opts - `team`: a {@link findTeam} needle; when given only that team's roster is
+ *   fetched (no team match -> no candidates). Without it every team's roster is fetched in
+ *   turn, stopping at the first hit unless `multi`. `multi: true` returns every match.
+ * @param ns - The namespace map (default: the package default export; injectable for tests).
+ * @returns The raw ESPN athlete entry with `team_id` and `team_display_name` added (and
+ *   `position_group` when the roster groups athletes by position), `null` when nothing
+ *   matches, or an array with `multi`.
+ * @throws Error on an unknown league, naming the valid ones.
+ * @remarks
+ * A roster fetch that raises `NoDataError` (no roster for that team) skips the team; any other
+ * failure (403 / 429 / 5xx -> `AssetFetchError`) propagates rather than reading as "athlete
+ * not found". Without `team`, a full-league search is one roster request per team until a
+ * match. Uses the same team-list cache as {@link findTeam}.
+ * @example
+ * const ayton = await sdv.findAthlete('ayton', 'nba', { team: 'lakers' });
+ */
 export async function findAthlete(
   name: string,
   league: string,
@@ -200,7 +319,27 @@ export async function findAthlete(
   return opts.multi ? hits : (hits[0] ?? null);
 }
 
-/** Resolve a game on a date (`YYYYMMDD` or `YYYY-MM-DD`) to its ESPN event, optionally filtered by home/away team. */
+/**
+ * Resolve a game on a date (`YYYYMMDD` or `YYYY-MM-DD`) to its ESPN event, optionally filtered
+ * by home/away team.
+ *
+ * @param date - `YYYYMMDD` or `YYYY-MM-DD` (hyphens are stripped; anything but 8 digits is
+ *   rejected). Sent to the scoreboard as `dates`.
+ * @param league - An ESPN league namespace (as for {@link findTeam}; case-insensitive).
+ * @param opts - `home` / `away`: case-insensitive substring needles matched against that
+ *   competitor's `displayName`, `location`, `abbreviation` and `name` joined with spaces; an
+ *   event must satisfy every needle given. `multi: true` returns every matching event.
+ * @param ns - The namespace map (default: the package default export; injectable for tests).
+ * @returns The raw ESPN `events[]` entry (first match in scoreboard order), `null` when no
+ *   event matches, or an array with `multi` (every event of the day when no filter is given).
+ * @throws SdvError when `date` is not 8 digits after removing hyphens (`Invalid date '...'`).
+ * @throws Error on an unknown league, naming the valid ones.
+ * @remarks
+ * One scoreboard request per call (nothing cached); a failed fetch propagates. The date is
+ * not validated beyond its shape — `2025-13-01` passes the check and is left to ESPN.
+ * @example
+ * const game = await sdv.findEvent('2025-10-05', 'nba', { home: 'Brooklyn' });
+ */
 export async function findEvent(
   date: string,
   league: string,
@@ -227,7 +366,20 @@ export async function findEvent(
   return opts.multi ? hits : (hits[0] ?? null);
 }
 
-/** Reset the in-process team-list cache (one league, or all). */
+/**
+ * Reset the in-process team-list cache (one league, or all).
+ *
+ * @param league - The league to evict (case-insensitive); omitted / `null` clears every
+ *   league.
+ * @returns Nothing.
+ * @remarks
+ * Clears the cache of every namespace map still alive (the default export and any injected
+ * stub), since the cache is keyed by namespace identity; entries for garbage-collected maps
+ * are dropped as they are met. An in-flight fetch is evicted too — callers already awaiting
+ * it still get its result.
+ * @example
+ * clearTeamCache('nba');
+ */
 export function clearTeamCache(league?: string): void {
   for (const ref of TEAM_CACHE_MAPS) {
     const m = ref.deref();
@@ -238,9 +390,15 @@ export function clearTeamCache(league?: string): void {
 }
 
 // py snake_case names
+/** sdv-py name for `listFunctions` (the same function). */
 export const list_functions = listFunctions;
+/** sdv-py name for {@link functionCount} (the same function). */
 export const function_count = functionCount;
+/** sdv-py name for {@link findTeam} (the same function). */
 export const find_team = findTeam;
+/** sdv-py name for {@link findAthlete} (the same function). */
 export const find_athlete = findAthlete;
+/** sdv-py name for {@link findEvent} (the same function). */
 export const find_event = findEvent;
+/** sdv-py name for {@link clearTeamCache} (the same function). */
 export const clear_team_cache = clearTeamCache;

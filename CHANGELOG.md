@@ -42,6 +42,26 @@ _4.0.0 below is not yet published to npm (latest 3.0.0); these entries may be fo
   output, CI gate, how to change it, and a codegen-rewritten status block (counts + the sdv-py
   pin). Every generated docs page ends with a visible provenance footer linking its page
   (the hidden MDX comment is gone). (#107)
+- **Capture-derived returns schemas for fox / cbs / yahoo / yahoo_scores.** `tools/codegen/regen-capture-schemas.mjs`
+  (`npm run schemas:captures`, `--check` gate) rewrites the JS-owned returns schemas of the four
+  families from the registered parsers' rows on the committed real captures (the parity manifest's
+  cbs / fox / yahoo entries; yahoo_scores reads the editorial captures), so the tables describe the
+  4.0.0 per-entity row builders (fox 13 endpoints, cbs 7, yahoo `season_stats_football_passing_ncaaf`,
+  yahoo_scores `boxscore` 33 columns / `scoreboard` 104). The 18 fox and 24 yahoo schemas written for
+  the pre-port output with no capture are marked `unverified` (the docs render the note, not the
+  table). `test/parsers/capture-schema-agreement.test.js` holds every one to its parser: the column
+  set is the rows' key union, every value is of its column's type, ids are decimal strings, and a
+  capture-less endpoint publishes no table. (#107)
+- **Column descriptions are sport-strict.** The cross-sport `_merged` union of the R-package
+  descriptions is never read: a league resolves through its own sport's packages only (hoopR +
+  wehoop for basketball, cfbfastR for cfb, the NFL packages for nfl, baseballr for baseball,
+  fastRhockey for hockey); an unmapped namespace and the shared parsed-returns page get sdv-py's
+  manual text only; the NFL aggregate families (nfl_api / nfl_pro / pff_api) get no play-level
+  nflfastR text. Overall fill is 90.4% (honest; it read 95.8% with the leak), floor 0.90, with a
+  denylist of sport-specific phrases asserted over the generated docs. (#107)
+- **Breaking-change register:** the Baseball Savant `parsed: true` typing change is on record (19
+  entries); a family's vendored / JS-owned label in the docs footer comes from vendor.mjs's
+  `# VENDORED` header (kenpom is vendored; the yahoo page names both its families). (#107)
 - **Runnable examples.** `examples/` holds 16 ESM scripts (`NN_<topic>.mjs`), one per surface
   (ESPN scoreboard / pbp / standings / rankings, Torvik, Statcast + MLB Stats, NHL api-web + EDGE,
   HockeyTech Corsi, soccer, The Odds API + odds math, release loaders, discovery, and three

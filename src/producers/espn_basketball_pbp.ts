@@ -72,7 +72,20 @@ import { idColumnsToStrings } from "../core/int64.js";
 import { applyInt64Policy } from "../core/releases.js";
 import { isObj, or, pyEqTrue, PY_FLOAT, PY_INT, truthy, type Row } from "./espn_basketball_box.js";
 
+/**
+ * One play row of the `plays` frame: a plain object keyed by py's (dotted) column names in py's
+ * column order; a missing cell is `null`.
+ *
+ * @remarks The `id`, `game_id`, `homeTeamId` and `awayTeamId` columns are decimal strings (the
+ * id rule); every other column keeps its JSON / cast dtype. No column is a `Date`.
+ */
 export type { Row };
+/**
+ * The four ESPN basketball leagues these producers cover, as the `sdv.<lg>` namespace slugs.
+ *
+ * @remarks Selects the per-league facts (incoming keys, over/under default, id casts, feature
+ * variant, halves-era cutoff) inside `_playsFrame` / `_variant` / `_pbpFromSummary` / `_espnPbp`.
+ */
 export type League = "nba" | "wnba" | "mbb" | "wbb";
 
 // ---------------------------------------------------------------------------
@@ -208,9 +221,16 @@ const f32 = Math.fround;
 // A minimal polars frame: ordered columns + rows (with_columns replaces in place / appends)
 // ---------------------------------------------------------------------------
 
-/** @internal A frame: `cols` in order; `rows` keyed by column (missing key = null). */
+/**
+ * @internal A minimal polars frame: `cols` in order; `rows` keyed by column (missing key = null).
+ *
+ * @remarks Mutated in place by the feature stages (`with_columns` replaces a column in place or
+ * appends it). Convert to released rows with {@link _rows}.
+ */
 export interface Frame {
+  /** The column names in frame order. */
   cols: string[];
+  /** One object per play, keyed by column; a key absent from a row reads as `null`. */
   rows: Row[];
 }
 
@@ -289,7 +309,7 @@ interface Facts {
   lg: League;
   /** `espn_<lg>_pbp` incoming_keys_expected (kept, in order). */
   keys: readonly string[];
-  /** dict_keys_expected: an absent key defaults to {} (else []). */
+  /** dict_keys_expected: an absent key defaults to `{}` (else `[]`). */
   dictKeys: ReadonlySet<string>;
   /** pickcenter over/under default. */
   overUnder: number;
@@ -484,6 +504,27 @@ function normalizePlays(plays: unknown): Frame {
 /**
  * @internal Stage A of `helper_<lg>_pbp_features`: the plays frame + py's first two
  * `with_columns` (game / team / spread literals, `id` / `sequenceNumber` casts, `homeTeamSpread`).
+ *
+ * @param league - Which league's facts apply (NBA / WNBA cast `season` and the team ids to Int32;
+ *   MBB / WBB keep them as is).
+ * @param game_id - The ESPN event id; cast Int32 into the `game_id` column.
+ * @param pbp_txt - The game dict after `helper_<lg>_game_data`. Reads `header.season.{year,type}`
+ *   and `plays` (a list of play dicts, flattened to dotted columns; an empty dict counts as none).
+ * @param init - The `init` dict `helper_<lg>_game_data` returned. Reads `gameSpread`,
+ *   `homeFavorite`, `gameSpreadAvailable` and the `homeTeam*` / `awayTeam*` keys.
+ * @returns The {@link Frame} of plays with the flattened play columns followed by `game_id`, `id`
+ *   (Int64), `sequenceNumber` (Int32), `season`, `seasonType`, the ten team columns, `gameSpread`
+ *   (absolute), `homeFavorite`, `gameSpreadAvailable` and `homeTeamSpread`.
+ * @throws Error prefixed `KeyError:` / `IndexError:` when a read key is absent; `TypeError:` when
+ *   `plays` is not a list, a column mixes JSON types (pandas -> arrow), or `init.gameSpread` is
+ *   an empty list; `AttributeError:` when a play is not a dict; `ValueError:` when the spread is
+ *   not float-able; `InvalidOperationError:` when a strict Int32 / Int64 cast fails.
+ * @throws TypeError when a play `id` is a JS number beyond `Number.MAX_SAFE_INTEGER` (it has
+ *   already lost precision; pass 64-bit ids as decimal strings).
+ * @example
+ * const init = sdv.nba.helper_nba_pickcenter(pbp_txt);
+ * const [txt, init2] = sdv.nba.helper_nba_game_data(pbp_txt, init);
+ * const frame = _playsFrame("nba", 401360428, txt, init2);
  */
 export function _playsFrame(league: League, game_id: unknown, pbp_txt: any, init: any): Frame {
   const facts = FACTS[league];
@@ -577,7 +618,20 @@ interface Variant {
   halves: boolean;
 }
 
-/** @internal The variant `helper_<lg>_pbp_features` uses for this payload. */
+/**
+ * @internal The variant `helper_<lg>_pbp_features` uses for this payload: which feature chain
+ * runs (`nba` / `wnba` / `mbb`) and, for WNBA / WBB, whether the game is in the halves era.
+ *
+ * @param league - The league; `wbb` shares the `wnba` chain with a 2016 cutoff.
+ * @param pbp_txt - The game dict. For WNBA / WBB reads `format.regulation.periods` (2 = halves,
+ *   4 = quarters, authoritative) and, when that is silent, `header.season.year`.
+ * @returns `{ plays, halves }`; `halves` is always `true` for MBB and `false` for NBA.
+ * @throws Error prefixed `KeyError:` when `header.season.year` is needed and absent;
+ *   `ValueError:` when that year is not an int; `AttributeError:` when `format.regulation` is
+ *   not a dict.
+ * @example
+ * _variant("wbb", pbp_txt); // { plays: "wnba", halves: true } for a 2015 season game
+ */
 export function _variant(league: League, pbp_txt: any): Variant {
   const facts = FACTS[league];
   return { plays: facts.plays, halves: facts.plays === "wnba" ? halvesEra(pbp_txt, facts) : facts.plays === "mbb" };
@@ -710,14 +764,47 @@ function mbbFeatures(f: Frame, init: any): void {
   withColumns(f, [["end.period_seconds_remaining", endP], ["end.game_seconds_remaining", endG]]);
 }
 
-/** @internal Stage B of `helper_<lg>_pbp_features` (every op after stage A; per game). */
+/**
+ * @internal Stage B of `helper_<lg>_pbp_features` (every op after stage A; per game): the clock
+ * split, the timeout flags, the lag / lead columns, the seconds-remaining ladders and
+ * `game_play_number`.
+ *
+ * @param f - The stage-A {@link Frame} from {@link _playsFrame}; mutated in place. Reads
+ *   `period.number`, `clock.displayValue`, `type.text`, `text`, `team.id` (optional) and `game_id`.
+ * @param init - The `init` dict `helper_<lg>_game_data` returned; reads `homeTeamId` /
+ *   `awayTeamId` and the team name keys for the timeout fallback.
+ * @param v - The {@link _variant} result: `mbb` runs the halves / Int32-clock chain, anything
+ *   else the NBA / WNBA / WBB chain (quarters, or halves when `v.halves`).
+ * @returns The same frame `f`, with `game_play_number` prepended and the feature columns
+ *   appended in py's order.
+ * @throws Error prefixed `ColumnNotFoundError:` when a read column is absent;
+ *   `InvalidOperationError:` when `clock.displayValue` / `type.text` / `text` holds a non-string
+ *   or a clock part / `period.number` fails its strict cast; `DuplicateError:` when
+ *   `clock.minutes`, `clock.seconds` or `game_play_number` already exists.
+ * @throws TypeError when a `team.id` is a JS number beyond `Number.MAX_SAFE_INTEGER`.
+ * @example
+ * const v = _variant("nba", txt);
+ * const f = _features(_playsFrame("nba", 401360428, txt, init2), init2, v);
+ * @remarks Every lag / lead / row-number op is per `game_id`, so a concatenated multi-game frame
+ * never leaks across games. Float32 arithmetic is reproduced step by step with `Math.fround`.
+ */
 export function _features(f: Frame, init: any, v: Variant): Frame {
   if (v.plays === "mbb") mbbFeatures(f, init);
   else proFeatures(f, init, v);
   return f;
 }
 
-/** @internal The frame as py `to_dicts()` rows (column order; INT64 policy applied). */
+/**
+ * @internal The frame as py `to_dicts()` rows (column order; INT64 policy applied).
+ *
+ * @param f - A {@link Frame}; every row is re-keyed in `f.cols` order with `null` for a missing
+ *   cell.
+ * @param label - The producer name passed to `applyInt64Policy` (e.g. `helper_nba_pbp_features`).
+ * @returns `Row[]` with the id columns (`id`, `game_id`, `homeTeamId`, `awayTeamId`) as decimal
+ *   strings.
+ * @example
+ * const plays = _rows(frame, "helper_nba_pbp_features");
+ */
 export function _rows(f: Frame, label: string): Row[] {
   return applyInt64Policy(
     f.rows.map((r) => Object.fromEntries(f.cols.map((c) => [c, r[c] ?? null]))),
@@ -756,7 +843,17 @@ function pbpFeatures(league: League, game_id: unknown, pbp_txt: any, init: any):
 // helper_<lg>_pbp + espn_<lg>_pbp's summary trimming
 // ---------------------------------------------------------------------------
 
-/** The cleaned game dict `helper_<lg>_pbp` returns. */
+/**
+ * The cleaned game dict `helper_<lg>_pbp` returns: `gameId` (a decimal string), `plays`
+ * (`Row[]`, `[]` when the game has no play-by-play), `timeouts`
+ * (`{ [teamId]: { "1": playIds, "2": playIds } }` split by half) and the summary's own
+ * `winprobability`, `boxscore`, `header`, `format`, `broadcasts`, `videos`, `playByPlaySource`,
+ * `standings`, `article`, `leaders`, `pickcenter`, `againstTheSpread`, `odds`, `predictor`,
+ * `espnWP`, `gameInfo`, `teamInfo` and `season` (plus `seasonseries` for NBA / WNBA).
+ *
+ * @remarks `teamInfo` is `header.competitions[0]`, which gains `home` / `away` (the two `team`
+ * objects); the timeouts' play ids are the same decimal strings as the `plays` rows' `id`.
+ */
 export type PbpResult = Record<string, any> & { plays: Row[]; timeouts: Record<string, Record<string, unknown[]>> };
 
 function pbp(league: League, game_id: unknown, pbp_txt: any): PbpResult {
@@ -790,7 +887,24 @@ function pbp(league: League, game_id: unknown, pbp_txt: any): PbpResult {
 
 /**
  * @internal The pure core of `espn_<lg>_pbp` after its fetch: keep py's incoming keys (absent
- * ones default to {} / [] per league), then `helper_<lg>_pbp`; `raw` returns the trimmed payload.
+ * ones default to `{}` / `[]` per league), then `helper_<lg>_pbp`; `raw` returns the trimmed payload.
+ *
+ * @param league - The league; picks the incoming key list (NBA / WNBA keep `seasonseries`, MBB /
+ *   WBB do not) and which absent keys default to `{}` rather than `[]`.
+ * @param game_id - The ESPN event id, passed through to `helper_<lg>_pbp`.
+ * @param summary - The ESPN Site v2 summary payload (what `espn_<lg>_summary` returns).
+ * @param raw - `true` returns the trimmed summary (py's `raw=True`) without running the helper.
+ * @returns With `raw`, the trimmed payload keyed by py's `incoming_keys_expected` in order;
+ *   otherwise the {@link PbpResult}.
+ * @throws Error prefixed `AttributeError:` when `summary` is not a dict; with `raw = false`
+ *   everything `helper_<lg>_pbp` throws (see {@link helper_nba_pbp}).
+ * @example
+ * const summary = await sdv.nba.espnNbaSummary({ event_id: 401360428 });
+ * const game = _pbpFromSummary("nba", 401360428, summary);
+ * game.plays.length;
+ * @remarks For MBB / WBB the ARRAY keys (`plays`, `videos`, ...) default to `{}` and the dict keys
+ * to `[]` -- py's swapped `dict_keys_expected`, kept as is. The non-raw result also seeds
+ * `timeouts: {}` before the helper runs.
  */
 export function _pbpFromSummary(league: League, game_id: unknown, summary: any, raw = false): Record<string, any> {
   const facts = FACTS[league];
@@ -800,12 +914,30 @@ export function _pbpFromSummary(league: League, game_id: unknown, summary: any, 
   return raw ? trimmed : pbp(league, game_id, trimmed);
 }
 
-/** Options of `espn_<lg>_pbp`: `raw` (py's `raw=True`), the rest go to `espn_<lg>_summary`. */
+/**
+ * Options of `espn_<lg>_pbp`: `raw` (py's `raw=True`: return the trimmed summary instead of the
+ * cleaned game dict; default `false`); every other key is forwarded to `espn_<lg>_summary`
+ * alongside `event_id`.
+ *
+ * @example
+ * await sdv.mbb.espn_mbb_pbp(401638645, { raw: true });
+ */
 export type EspnPbpOptions = { raw?: boolean } & Record<string, unknown>;
 
 /**
  * @internal py `espn_<lg>_pbp(game_id, raw=False)` with the summary fetcher injected
  * (src/index.ts passes the generated `espn_<lg>_summary`, which takes `{ event_id }`).
+ *
+ * @param league - The league whose trimming and helper apply.
+ * @param fetchSummary - An async fetcher of the ESPN summary; called once per game with
+ *   `{ ...params, event_id: game_id }`.
+ * @returns The mounted `espn_<lg>_pbp(game_id, options?)`: an async function resolving to the
+ *   {@link PbpResult}, or to the trimmed summary when `options.raw` is `true`.
+ * @example
+ * const espn_nba_pbp = _espnPbp("nba", sdv.nba.espn_nba_summary);
+ * const game = await espn_nba_pbp(401360428);
+ * @remarks Throws nothing itself; the returned function rejects with whatever the fetcher or
+ * {@link _pbpFromSummary} throws.
  */
 export function _espnPbp(league: League, fetchSummary: (params: Record<string, unknown>) => Promise<unknown>) {
   return async (game_id: unknown, { raw = false, ...params }: EspnPbpOptions = {}): Promise<Record<string, any>> =>
@@ -834,67 +966,304 @@ const MBB = leagueHelpers("mbb");
 const WBB = leagueHelpers("wbb");
 
 /**
- * NBA pickcenter metadata (sdv-py `helper_nba_pickcenter(pbp_txt)`): spread / over-under (default
- * 215.5) / home favorite / availability as plain scalars, e.g. `gameSpread: -8.5`; the spread and the
- * favorite come from one provider row.
+ * NBA pickcenter metadata (sdv-py `helper_nba_pickcenter(pbp_txt)` ->
+ * `_espn_basketball_pbp.pickcenter_odds`): spread / over-under (default 215.5) / home favorite /
+ * availability as plain scalars, e.g. `gameSpread: -8.5`; the spread and the favorite come from
+ * one provider row.
+ *
+ * @param pbp_txt - The trimmed game dict (or any ESPN summary payload). Reads `pickcenter`: a list
+ *   of provider records (a single dict counts as one record), each flattened to dotted keys
+ *   (`spread`, `overUnder`, `provider.id`, `homeTeamOdds.favorite`).
+ * @returns `{ gameSpread, overUnder, homeFavorite, gameSpreadAvailable }` -- the `init` dict the
+ *   next stage (`helper_nba_game_data`) takes.
+ * @throws Error prefixed `AttributeError:` when `pbp_txt` is not a dict; `TypeError:` when
+ *   `pickcenter` is not a list of dicts; `ValueError:` when a `spread` / `overUnder` is not
+ *   float-able.
+ * @example
+ * const summary = await sdv.nba.espnNbaSummary({ event_id: 401360428 });
+ * const init = sdv.nba.helper_nba_pickcenter(summary);
+ * init.gameSpreadAvailable; // true when some provider carries a spread
+ * @remarks
+ * Shared by all four leagues (the others `@see` this block):
+ * - No provider carries a spread:
+ *   `{ gameSpread: 2.5, overUnder: <league default>, homeFavorite: true, gameSpreadAvailable: false }`.
+ *   Over/under defaults: NBA 215.5,
+ *   WNBA 165.5, MBB 142.0, WBB 130.5.
+ * - Providers are sorted by `str(provider.id)` (stable), so teamrankings `"1002"` sorts ahead of
+ *   consensus `"1004"` and Caesars `"45"`; an absent id sorts as `"nan"`, a null one as `"None"`.
+ *   Without any `provider.id` the payload order stands.
+ * - The spread is ESPN's home line: `homeFavorite = spread < 0`; a pick'em (`0`) takes that row's
+ *   own `homeTeamOdds.favorite` (home when unset). `overUnder` is the first non-null one in sorted
+ *   order, else the league default.
  */
 export const helper_nba_pickcenter = NBA.pickcenter;
 /**
  * NBA home / away identification (sdv-py `helper_nba_game_data(pbp_txt, init)`): `[pbp_txt, init]`.
  * `homeTeamSpread` follows `homeFavorite` (a one-element array in `init` stays one, as numpy).
+ *
+ * @param pbp_txt - The trimmed game dict. Reads `header.competitions[0]`
+ *   (`competitors[].{homeAway, team.{id,location,name,abbreviation}}`, `playByPlaySource`, `boxscoreSource`) and
+ *   `header.season`. Never mutated: the touched header path is copied.
+ * @param init - The pickcenter dict (`gameSpread`, `overUnder`, `homeFavorite`,
+ *   `gameSpreadAvailable`), all four keys required.
+ * @returns `[pbp_txt, init]`: the game dict with `timeouts: {}`, `teamInfo` (= the copied
+ *   `header.competitions[0]`, now carrying `home` / `away` team objects), `season`,
+ *   `playByPlaySource`, `boxscoreSource`, the four spread keys and `homeTeamSpread`
+ *   (`+|spread|` when home is favored, else `-|spread|`); and `init` extended with `homeTeamId`,
+ *   `homeTeamMascot`, `homeTeamName`, `homeTeamAbbrev`, `homeTeamNameAlt` and the five `awayTeam*`
+ *   twins.
+ * @throws Error prefixed `KeyError:` / `IndexError:` when a read key or competitor is absent;
+ *   `ValueError:` when a team id is not an int; `TypeError:` when `init.gameSpread` is not a
+ *   number (Python `abs`).
+ * @example
+ * const init = sdv.nba.helper_nba_pickcenter(summary);
+ * const [txt, init2] = sdv.nba.helper_nba_game_data(summary, init);
+ * init2.homeTeamAbbrev;
+ * @remarks
+ * Shared by all four leagues (the others `@see` this block): the team ids in `init` are py ints
+ * (JS numbers) here; they become decimal strings only in the `plays` rows. `homeTeamNameAlt` is
+ * the location with `Stat...` shortened to `St`. The first competitor's `homeAway` decides which
+ * side is home.
  */
 export const helper_nba_game_data = NBA.game_data;
-/** NBA play features + timeouts (sdv-py `helper_nba_pbp_features`): quarters, 720-second ladder. */
+/**
+ * NBA play features + timeouts (sdv-py `helper_nba_pbp_features(game_id, pbp_txt, init)`):
+ * quarters, 720-second ladder.
+ *
+ * @param game_id - The ESPN event id; becomes the Int32 `game_id` column.
+ * @param pbp_txt - The game dict after `helper_nba_game_data`. Reads `header.season` and `plays`.
+ * @param init - The `init` dict `helper_nba_game_data` returned.
+ * @returns `{ ...pbp_txt, plays, timeouts }`: `plays` as `Row[]` (py's columns, in order; ids as
+ *   decimal strings) and `timeouts` as
+ *   `{ [homeTeamId]: { "1": ids, "2": ids }, [awayTeamId]: {...} }` of timeout play ids split by half.
+ * @throws Error prefixed `KeyError:` when `init.homeTeamId` / `awayTeamId` is absent, plus
+ *   everything {@link _playsFrame} and {@link _features} throw.
+ * @throws TypeError when a play / team id is a JS number beyond `Number.MAX_SAFE_INTEGER`.
+ * @example
+ * const [txt, init2] = sdv.nba.helper_nba_game_data(summary, sdv.nba.helper_nba_pickcenter(summary));
+ * const done = sdv.nba.helper_nba_pbp_features(401360428, txt, init2);
+ * done.plays[0]["start.game_seconds_remaining"]; // 2880 for a first-quarter play at 12:00
+ * @remarks
+ * Shared by all four leagues (the others `@see` this block):
+ * - A team timeout (`RegularTimeOut`, `ShortTimeOut`, `Full` / `Short` / `No` / `Reset Timeout`;
+ *   official / TV timeouts excluded) is credited to the play's own `team.id`; a play without one
+ *   falls back to the side's abbreviation / location / mascot / alt name as a whole word in the
+ *   play text (case-insensitive).
+ * - Every lag / lead / `game_play_number` op is per `game_id`.
+ * - NBA: `period.number` / `qtr` / `period` Int32; `clock.displayValue` and `time` get a `"0:"`
+ *   prefix when the clock has no colon; `clock.minutes` / `clock.seconds` Float32; ladders
+ *   720 / 1440 / 2160 / 2880, OT 300; timeouts split at `period <= 2`.
+ * - Season and the team-id columns are cast Int32 for NBA / WNBA and left as is for MBB / WBB.
+ * - `timeouts` keys are strings here (py: ints); JS orders integer keys ascending.
+ */
 export const helper_nba_pbp_features = NBA.pbp_features;
-/** NBA cleaned game dict (sdv-py `helper_nba_pbp(game_id, pbp_txt)`): `plays`, `timeouts`, ... */
+/**
+ * NBA cleaned game dict (sdv-py `helper_nba_pbp(game_id, pbp_txt)`): pickcenter -> game data ->
+ * play features, then the result keys in py's order.
+ *
+ * @param game_id - The ESPN event id; the result's `gameId` (a decimal string) and the plays'
+ *   `game_id`.
+ * @param pbp_txt - The TRIMMED summary (what `espn_nba_pbp(id, { raw: true })` returns): every
+ *   output key must be present (`winprobability`, `boxscore`, `header`, `format`, `broadcasts`,
+ *   `videos`, `standings`, `article`, `leaders`, `seasonseries`, `pickcenter`, `againstTheSpread`,
+ *   `odds`, `predictor`, `espnWP`, `gameInfo`, `season`), plus `plays` when the game has
+ *   play-by-play.
+ * @returns The {@link PbpResult}. Without a `plays` key, or when
+ *   `header.competitions[0].playByPlaySource` is `"none"`, `plays` is `[]` and `timeouts` holds
+ *   the two empty `{ "1": [], "2": [] }` entries.
+ * @throws Error prefixed `KeyError:` when an output key is absent from `pbp_txt`; plus
+ *   everything {@link helper_nba_pickcenter},
+ *   {@link helper_nba_game_data} and {@link helper_nba_pbp_features} throw.
+ * @throws TypeError when a play / team id is a JS number beyond `Number.MAX_SAFE_INTEGER`.
+ * @example
+ * const trimmed = await sdv.nba.espn_nba_pbp(401360428, { raw: true });
+ * const game = sdv.nba.helper_nba_pbp(401360428, trimmed);
+ * game.timeouts[game.plays[0].homeTeamId]["2"]; // second-half home timeout play ids
+ * @remarks
+ * Shared by all four leagues (the others `@see` this block): `espn_<lg>_pbp` fetches the
+ * summary, trims it and calls this; use that unless you already hold a trimmed payload. NBA /
+ * WNBA keep `seasonseries`; MBB / WBB do not and coerce `gameId` with `int()` first (a
+ * non-integer id raises `ValueError:`).
+ */
 export const helper_nba_pbp = NBA.pbp;
 /**
- * WNBA pickcenter metadata (sdv-py `helper_wnba_pickcenter(pbp_txt)`): spread / over-under (default
- * 165.5) / home favorite / availability as plain scalars, e.g. `gameSpread: -8.5`; the spread and the
- * favorite come from one provider row.
+ * WNBA pickcenter metadata (sdv-py `helper_wnba_pickcenter(pbp_txt)`): spread / over-under
+ * (default 165.5) / home favorite / availability as plain scalars.
+ *
+ * @param pbp_txt - The trimmed game dict (or any ESPN summary payload); reads `pickcenter`.
+ * @returns `{ gameSpread, overUnder, homeFavorite, gameSpreadAvailable }`.
+ * @example
+ * const summary = await sdv.wnba.espnWnbaSummary({ event_id: 401320565 });
+ * const init = sdv.wnba.helper_wnba_pickcenter(summary);
+ * @see {@link helper_nba_pickcenter} for the provider order, favorite and default rules.
  */
 export const helper_wnba_pickcenter = WNBA.pickcenter;
 /**
- * WNBA home / away identification (sdv-py `helper_wnba_game_data(pbp_txt, init)`): `[pbp_txt, init]`.
- * `homeTeamSpread` follows `homeFavorite` (a one-element array in `init` stays one, as numpy).
+ * WNBA home / away identification (sdv-py `helper_wnba_game_data(pbp_txt, init)`):
+ * `[pbp_txt, init]`. `homeTeamSpread` follows `homeFavorite` (a one-element array in `init`
+ * stays one, as numpy).
+ *
+ * @param pbp_txt - The trimmed game dict; reads `header.competitions[0]` and `header.season`.
+ * @param init - The pickcenter dict (all four keys required).
+ * @returns `[pbp_txt, init]` with the team keys added (see the NBA helper).
+ * @example
+ * const [txt, init2] = sdv.wnba.helper_wnba_game_data(summary, init);
+ * @see {@link helper_nba_game_data} for the keys read / written and the errors.
  */
 export const helper_wnba_game_data = WNBA.game_data;
-/** WNBA play features + timeouts (sdv-py `helper_wnba_pbp_features`): halves before 2006, else quarters. */
+/**
+ * WNBA play features + timeouts (sdv-py `helper_wnba_pbp_features(game_id, pbp_txt, init)`):
+ * halves before 2006, else quarters.
+ *
+ * @param game_id - The ESPN event id.
+ * @param pbp_txt - The game dict after `helper_wnba_game_data`; also reads
+ *   `format.regulation.periods` for the era.
+ * @param init - The `init` dict `helper_wnba_game_data` returned.
+ * @returns `{ ...pbp_txt, plays, timeouts }`.
+ * @example
+ * const done = sdv.wnba.helper_wnba_pbp_features(401320565, txt, init2);
+ * @remarks Era-aware: `format.regulation.periods` (2 = halves, 4 = quarters) is authoritative,
+ * else season year < 2006 = halves. Quarters: ladders 600 / 1200 / 1800 / 2400, OT 300,
+ * arithmetic `K + (60m + s)`. Halves: ladders 1200 / 2400, OT 300 from period 3, `half` =
+ * period. Timeouts split at the first-half period count (1 or 2). Ids cast Int32.
+ * @see {@link helper_nba_pbp_features} for the shared timeout, clock and per-game rules.
+ */
 export const helper_wnba_pbp_features = WNBA.pbp_features;
-/** WNBA cleaned game dict (sdv-py `helper_wnba_pbp(game_id, pbp_txt)`): `plays`, `timeouts`, ... */
+/**
+ * WNBA cleaned game dict (sdv-py `helper_wnba_pbp(game_id, pbp_txt)`): `plays`, `timeouts`, ...
+ *
+ * @param game_id - The ESPN event id.
+ * @param pbp_txt - The TRIMMED summary (`espn_wnba_pbp(id, { raw: true })`); keeps `seasonseries`.
+ * @returns The {@link PbpResult}.
+ * @example
+ * const trimmed = await sdv.wnba.espn_wnba_pbp(401320565, { raw: true });
+ * const game = sdv.wnba.helper_wnba_pbp(401320565, trimmed);
+ * @see {@link helper_nba_pbp} for the required keys, the no-play-by-play case and the errors.
+ */
 export const helper_wnba_pbp = WNBA.pbp;
 /**
- * MBB pickcenter metadata (sdv-py `helper_mbb_pickcenter(pbp_txt)`): spread / over-under (default
- * 142.0) / home favorite / availability as plain scalars, e.g. `gameSpread: -8.5`; the spread and the
- * favorite come from one provider row.
+ * MBB pickcenter metadata (sdv-py `helper_mbb_pickcenter(pbp_txt)`): spread / over-under
+ * (default 142.0) / home favorite / availability as plain scalars.
+ *
+ * @param pbp_txt - The trimmed game dict (or any ESPN summary payload); reads `pickcenter`.
+ * @returns `{ gameSpread, overUnder, homeFavorite, gameSpreadAvailable }`.
+ * @example
+ * const summary = await sdv.mbb.espnMbbSummary({ event_id: 401638645 });
+ * const init = sdv.mbb.helper_mbb_pickcenter(summary);
+ * @see {@link helper_nba_pickcenter} for the provider order, favorite and default rules.
  */
 export const helper_mbb_pickcenter = MBB.pickcenter;
 /**
- * MBB home / away identification (sdv-py `helper_mbb_game_data(pbp_txt, init)`): `[pbp_txt, init]`.
- * `homeTeamSpread` follows `homeFavorite` (a one-element array in `init` stays one, as numpy).
+ * MBB home / away identification (sdv-py `helper_mbb_game_data(pbp_txt, init)`):
+ * `[pbp_txt, init]`. `homeTeamSpread` follows `homeFavorite` (a one-element array in `init`
+ * stays one, as numpy).
+ *
+ * @param pbp_txt - The trimmed game dict; reads `header.competitions[0]` and `header.season`.
+ * @param init - The pickcenter dict (all four keys required).
+ * @returns `[pbp_txt, init]` with the team keys added (see the NBA helper).
+ * @example
+ * const [txt, init2] = sdv.mbb.helper_mbb_game_data(summary, init);
+ * @see {@link helper_nba_game_data} for the keys read / written and the errors.
  */
 export const helper_mbb_game_data = MBB.game_data;
-/** MBB play features + timeouts (sdv-py `helper_mbb_pbp_features`): halves, Int32 clock. */
+/**
+ * MBB play features + timeouts (sdv-py `helper_mbb_pbp_features(game_id, pbp_txt, init)`):
+ * halves, Int32 clock.
+ *
+ * @param game_id - The ESPN event id.
+ * @param pbp_txt - The game dict after `helper_mbb_game_data`.
+ * @param init - The `init` dict `helper_mbb_game_data` returned.
+ * @returns `{ ...pbp_txt, plays, timeouts }`.
+ * @example
+ * const done = sdv.mbb.helper_mbb_pbp_features(401638645, txt, init2);
+ * done.plays[0]["start.period_seconds_remaining"];
+ * @remarks MBB's own column set: `half` = period, `lag_period` / `lead_period` (and `lag_half` /
+ * `lead_half`), `start.period_seconds_remaining` / `end.period_seconds_remaining` -- no `qtr`,
+ * `game_half`, `period` or quarter columns. `clock.displayValue` / `time` keep the display as is;
+ * only the split gets the `"0:"` prefix (`"23.4"` -> 0:23), then Float64 -> Int32 (truncating).
+ * Ladders 1200 / 2400, OT 300 (both `end.*` columns reset to 300 at every OT); timeouts split at
+ * `period <= 1`; season / team ids not cast.
+ * @see {@link helper_nba_pbp_features} for the shared timeout and per-game rules.
+ */
 export const helper_mbb_pbp_features = MBB.pbp_features;
-/** MBB cleaned game dict (sdv-py `helper_mbb_pbp(game_id, pbp_txt)`): `plays`, `timeouts`, ... */
+/**
+ * MBB cleaned game dict (sdv-py `helper_mbb_pbp(game_id, pbp_txt)`): `plays`, `timeouts`, ...
+ *
+ * @param game_id - The ESPN event id; coerced with `int()` for `gameId` (a decimal string).
+ * @param pbp_txt - The TRIMMED summary (`espn_mbb_pbp(id, { raw: true })`); no `seasonseries`.
+ * @returns The {@link PbpResult}.
+ * @example
+ * const trimmed = await sdv.mbb.espn_mbb_pbp(401638645, { raw: true });
+ * const game = sdv.mbb.helper_mbb_pbp(401638645, trimmed);
+ * game.gameId; // "401638645"
+ * @see {@link helper_nba_pbp} for the required keys, the no-play-by-play case and the errors.
+ */
 export const helper_mbb_pbp = MBB.pbp;
 /**
- * WBB pickcenter metadata (sdv-py `helper_wbb_pickcenter(pbp_txt)`): spread / over-under (default
- * 130.5) / home favorite / availability as plain scalars, e.g. `gameSpread: -8.5`; the spread and the
- * favorite come from one provider row.
+ * WBB pickcenter metadata (sdv-py `helper_wbb_pickcenter(pbp_txt)`): spread / over-under
+ * (default 130.5) / home favorite / availability as plain scalars.
+ *
+ * @param pbp_txt - The trimmed game dict (or any ESPN summary payload); reads `pickcenter`.
+ * @returns `{ gameSpread, overUnder, homeFavorite, gameSpreadAvailable }`.
+ * @example
+ * const summary = await sdv.wbb.espnWbbSummary({ event_id: 401587390 });
+ * const init = sdv.wbb.helper_wbb_pickcenter(summary);
+ * @see {@link helper_nba_pickcenter} for the provider order, favorite and default rules.
  */
 export const helper_wbb_pickcenter = WBB.pickcenter;
 /**
- * WBB home / away identification (sdv-py `helper_wbb_game_data(pbp_txt, init)`): `[pbp_txt, init]`.
- * `homeTeamSpread` follows `homeFavorite` (a one-element array in `init` stays one, as numpy).
+ * WBB home / away identification (sdv-py `helper_wbb_game_data(pbp_txt, init)`):
+ * `[pbp_txt, init]`. `homeTeamSpread` follows `homeFavorite` (a one-element array in `init`
+ * stays one, as numpy).
+ *
+ * @param pbp_txt - The trimmed game dict; reads `header.competitions[0]` and `header.season`.
+ * @param init - The pickcenter dict (all four keys required).
+ * @returns `[pbp_txt, init]` with the team keys added (see the NBA helper).
+ * @example
+ * const [txt, init2] = sdv.wbb.helper_wbb_game_data(summary, init);
+ * @see {@link helper_nba_game_data} for the keys read / written and the errors.
  */
 export const helper_wbb_game_data = WBB.game_data;
-/** WBB play features + timeouts (sdv-py `helper_wbb_pbp_features`): halves before 2016, else quarters. */
+/**
+ * WBB play features + timeouts (sdv-py `helper_wbb_pbp_features(game_id, pbp_txt, init)`):
+ * halves before 2016, else quarters.
+ *
+ * @param game_id - The ESPN event id.
+ * @param pbp_txt - The game dict after `helper_wbb_game_data`; also reads
+ *   `format.regulation.periods` for the era.
+ * @param init - The `init` dict `helper_wbb_game_data` returned.
+ * @returns `{ ...pbp_txt, plays, timeouts }`.
+ * @example
+ * const done = sdv.wbb.helper_wbb_pbp_features(401587390, txt, init2);
+ * @remarks WNBA's chain with a 2016 season-year cutoff (the `format` still wins when present) and
+ * the season / team-id columns NOT cast.
+ * @see {@link helper_wnba_pbp_features} for the era ladders; {@link helper_nba_pbp_features} for
+ * the shared timeout, clock and per-game rules.
+ */
 export const helper_wbb_pbp_features = WBB.pbp_features;
-/** WBB cleaned game dict (sdv-py `helper_wbb_pbp(game_id, pbp_txt)`): `plays`, `timeouts`, ... */
+/**
+ * WBB cleaned game dict (sdv-py `helper_wbb_pbp(game_id, pbp_txt)`): `plays`, `timeouts`, ...
+ *
+ * @param game_id - The ESPN event id; coerced with `int()` for `gameId` (a decimal string).
+ * @param pbp_txt - The TRIMMED summary (`espn_wbb_pbp(id, { raw: true })`); no `seasonseries`.
+ * @returns The {@link PbpResult}.
+ * @example
+ * const trimmed = await sdv.wbb.espn_wbb_pbp(401587390, { raw: true });
+ * const game = sdv.wbb.helper_wbb_pbp(401587390, trimmed);
+ * @see {@link helper_nba_pbp} for the required keys, the no-play-by-play case and the errors.
+ */
 export const helper_wbb_pbp = WBB.pbp;
 
-/** `{ league: { helper_<lg>_pbp, helper_<lg>_pickcenter, ... } }` for the `sdv.<lg>` merge. */
+/**
+ * `{ league: { helper_<lg>_pbp, helper_<lg>_pickcenter, helper_<lg>_game_data, helper_<lg>_pbp_features } }`:
+ * the PBP producers keyed by league, which `src/index.ts` merges
+ * onto `sdv.nba` / `sdv.wnba` / `sdv.mbb` / `sdv.wbb` under both the snake_case name and a
+ * camelCase alias (and mounts `espn_<lg>_pbp` beside them via {@link _espnPbp}).
+ *
+ * @remarks Every member is pure (no network); the map is the single registration point.
+ * @example
+ * BASKETBALL_PBP_PRODUCERS.wbb.helper_wbb_pickcenter(summary);
+ */
 export const BASKETBALL_PBP_PRODUCERS = {
   nba: { helper_nba_pbp, helper_nba_pickcenter, helper_nba_game_data, helper_nba_pbp_features },
   wnba: { helper_wnba_pbp, helper_wnba_pickcenter, helper_wnba_game_data, helper_wnba_pbp_features },

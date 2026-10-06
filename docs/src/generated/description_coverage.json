@@ -1,0 +1,147 @@
+{
+  "_generated": "tools/codegen/generate.mjs — do not edit by hand",
+  "_doc": "Returns-table column descriptions filled per family after resolving each cell through tools/codegen/descriptions.mjs (schema text -> manual_column_descriptions.yaml -> r_column_descriptions.yaml). One count per table and league.",
+  "families": {
+    "asa": {
+      "filled": 143,
+      "total": 143,
+      "rate": 1
+    },
+    "cbs": {
+      "filled": 178,
+      "total": 186,
+      "rate": 0.957
+    },
+    "espn": {
+      "filled": 4162,
+      "total": 7062,
+      "rate": 0.5894
+    },
+    "fox": {
+      "filled": 18,
+      "total": 193,
+      "rate": 0.0933
+    },
+    "hockeytech": {
+      "filled": 574,
+      "total": 574,
+      "rate": 1
+    },
+    "loaders": {
+      "filled": 15475,
+      "total": 15732,
+      "rate": 0.9837
+    },
+    "mlb": {
+      "filled": 1605,
+      "total": 1615,
+      "rate": 0.9938
+    },
+    "mlb_statcast": {
+      "filled": 1481,
+      "total": 1481,
+      "rate": 1
+    },
+    "mls_api": {
+      "filled": 384,
+      "total": 392,
+      "rate": 0.9796
+    },
+    "nba_stats": {
+      "filled": 10530,
+      "total": 10909,
+      "rate": 0.9653
+    },
+    "nfl_api": {
+      "filled": 304,
+      "total": 304,
+      "rate": 1
+    },
+    "nfl_pro": {
+      "filled": 0,
+      "total": 1036,
+      "rate": 0
+    },
+    "nhl_api_web": {
+      "filled": 768,
+      "total": 774,
+      "rate": 0.9922
+    },
+    "nhl_edge": {
+      "filled": 871,
+      "total": 883,
+      "rate": 0.9864
+    },
+    "nhl_records": {
+      "filled": 889,
+      "total": 908,
+      "rate": 0.9791
+    },
+    "nhl_stats_rest": {
+      "filled": 228,
+      "total": 230,
+      "rate": 0.9913
+    },
+    "nwsl_api": {
+      "filled": 264,
+      "total": 272,
+      "rate": 0.9706
+    },
+    "odds_api": {
+      "filled": 109,
+      "total": 109,
+      "rate": 1
+    },
+    "on3": {
+      "filled": 152,
+      "total": 1024,
+      "rate": 0.1484
+    },
+    "pff_api": {
+      "filled": 7887,
+      "total": 7905,
+      "rate": 0.9977
+    },
+    "recruiting": {
+      "filled": 298,
+      "total": 298,
+      "rate": 1
+    },
+    "sports247": {
+      "filled": 216,
+      "total": 216,
+      "rate": 1
+    },
+    "sports247_site_pages": {
+      "filled": 308,
+      "total": 373,
+      "rate": 0.8257
+    },
+    "torvik": {
+      "filled": 228,
+      "total": 228,
+      "rate": 1
+    },
+    "wnba_stats": {
+      "filled": 9792,
+      "total": 10097,
+      "rate": 0.9698
+    },
+    "yahoo": {
+      "filled": 545,
+      "total": 906,
+      "rate": 0.6015
+    },
+    "yahoo_scores": {
+      "filled": 111,
+      "total": 137,
+      "rate": 0.8102
+    }
+  },
+  "totals": {
+    "filled": 57520,
+    "total": 63987,
+    "rate": 0.8989
+  },
+  "breaking_pages": 213
+}

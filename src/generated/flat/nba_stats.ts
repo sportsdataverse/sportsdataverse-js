@@ -617,14 +617,15 @@ const ALLTIMELEADERSGRIDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/alltimeleadersgrids`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `PerGame`.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.topx - query parameter (`TopX`) — default `10`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GPLeaders`, `PTSLeaders`, `ASTLeaders`, `STLLeaders`, `OREBLeaders`, `DREBLeaders`, `REBLeaders`, `BLKLeaders`, `FGMLeaders`, `FGALeaders`, `FG_PCTLeaders`, `TOVLeaders`, `FG3MLeaders`, `FG3ALeaders`, `FG3_PCTLeaders`, `PFLeaders`, `FTMLeaders`, `FTALeaders`, `FT_PCTLeaders`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `PerGame`.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.topx - `number | string` — the `TopX` query parameter; default `10`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsAlltimeleadersgridsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GPLeaders`, `PTSLeaders`, `ASTLeaders`, `STLLeaders`, `OREBLeaders`, `DREBLeaders`, `REBLeaders`, `BLKLeaders`, `FGMLeaders`, `FGALeaders`, `FG_PCTLeaders`, `TOVLeaders`, `FG3MLeaders`, `FG3ALeaders`, `FG3_PCTLeaders`, `PFLeaders`, `FTMLeaders`, `FTALeaders`, `FT_PCTLeaders`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsAlltimeleadersgrids({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsAlltimeleadersgrids: SectionedWrapper<NbaStatsAlltimeleadersgridsTables | Row[], NbaStatsAlltimeleadersgridsTables, NbaStatsAlltimeleadersgridsParams> = (params: WrapperParams = {}) => callFlat(ALLTIMELEADERSGRIDS_DEF, params);
 /** snake_case alias of {@link nbaStatsAlltimeleadersgrids} (py/R parity). */
@@ -675,15 +676,16 @@ const ASSISTLEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/assistleaders`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `PerGame`.
- * @param params.player_or_team - query parameter (`PlayerOrTeam`) — default `Team`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `PerGame`.
+ * @param params.player_or_team - `number | string` — the `PlayerOrTeam` query parameter; default `Team`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsAssistleadersRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsAssistleaders({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsAssistleaders: SectionedWrapper<NbaStatsAssistleadersRow[] | ParsedTables, {}, NbaStatsAssistleadersParams> = (params: WrapperParams = {}) => callFlat(ASSISTLEADERS_DEF, params);
 /** snake_case alias of {@link nbaStatsAssistleaders} (py/R parity). */
@@ -849,38 +851,39 @@ const ASSISTTRACKER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/assisttracker`
  *
- * @param params.college_nullable - query parameter (`College`) — default `null`.
- * @param params.conference_nullable - query parameter (`Conference`) — default `null`.
- * @param params.country_nullable - query parameter (`Country`) — default `null`.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default `null`.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default `null`.
- * @param params.division_simple_nullable - query parameter (`Division`) — default `null`.
- * @param params.draft_pick_nullable - query parameter (`DraftPick`) — default `null`.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default `null`.
- * @param params.game_scope_simple_nullable - query parameter (`GameScope`) — default `null`.
- * @param params.height_nullable - query parameter (`Height`) — default `null`.
- * @param params.last_n_games_nullable - query parameter (`LastNGames`) — default `null`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default `null`.
- * @param params.month_nullable - query parameter (`Month`) — default `null`.
- * @param params.opponent_team_id_nullable - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default `null`.
- * @param params.po_round_nullable - query parameter (`PORound`) — default `null`.
- * @param params.per_mode_simple_nullable - query parameter (`PerMode`) — default `PerGame`.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default `null`.
- * @param params.player_position_abbreviation_nullable - query parameter (`PlayerPosition`) — default `null`.
- * @param params.season_nullable - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default `null`.
- * @param params.season_type_all_star_nullable - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default `null`.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default `null`.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default `null`.
- * @param params.weight_nullable - query parameter (`Weight`) — default `null`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.college_nullable - `number | string` — the `College` query parameter; default `null`.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default `null`.
+ * @param params.country_nullable - `number | string` — the `Country` query parameter; default `null`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default `null`.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default `null`.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default `null`.
+ * @param params.draft_pick_nullable - `number | string` — the `DraftPick` query parameter; default `null`.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default `null`.
+ * @param params.game_scope_simple_nullable - `number | string` — the `GameScope` query parameter; default `null`.
+ * @param params.height_nullable - `number | string` — the `Height` query parameter; default `null`.
+ * @param params.last_n_games_nullable - `number | string` — the `LastNGames` query parameter; default `null`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default `null`.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default `null`.
+ * @param params.opponent_team_id_nullable - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default `null`.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default `null`.
+ * @param params.per_mode_simple_nullable - `number | string` — the `PerMode` query parameter; default `PerGame`.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default `null`.
+ * @param params.player_position_abbreviation_nullable - `number | string` — the `PlayerPosition` query parameter; default `null`.
+ * @param params.season_nullable - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default `null`.
+ * @param params.season_type_all_star_nullable - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default `null`.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default `null`.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default `null`.
+ * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default `null`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsAssisttrackerRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsAssisttracker({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsAssisttracker: SectionedWrapper<NbaStatsAssisttrackerRow[] | ParsedTables, {}, NbaStatsAssisttrackerParams> = (params: WrapperParams = {}) => callFlat(ASSISTTRACKER_DEF, params);
 /** snake_case alias of {@link nbaStatsAssisttracker} (py/R parity). */
@@ -935,16 +938,17 @@ const BOXSCOREADVANCEDV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoreadvancedv3`
  *
- * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
- * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.range_type - query parameter (`RangeType`) — default `0`.
- * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
- * @param params.start_range - query parameter (`StartRange`) — default `0`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
+ * @param params.end_period - `number | string` — the `EndPeriod` query parameter; default `14`.
+ * @param params.end_range - `number | string` — the `EndRange` query parameter; default `0`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.range_type - `number | string` — the `RangeType` query parameter; default `0`.
+ * @param params.start_period - `number | string` — the `StartPeriod` query parameter; default `0`.
+ * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscoreadvancedv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscoreadvancedv3({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscoreadvancedv3: SectionedWrapper<NbaStatsBoxscoreadvancedv3Tables | Row[], NbaStatsBoxscoreadvancedv3Tables, NbaStatsBoxscoreadvancedv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREADVANCEDV3_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscoreadvancedv3} (py/R parity). */
@@ -974,11 +978,12 @@ const BOXSCOREDEFENSIVEV2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoredefensivev2`
  *
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscoredefensivev2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscoredefensivev2({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscoredefensivev2: SectionedWrapper<NbaStatsBoxscoredefensivev2Tables | Row[], NbaStatsBoxscoredefensivev2Tables, NbaStatsBoxscoredefensivev2Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREDEFENSIVEV2_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscoredefensivev2} (py/R parity). */
@@ -1033,16 +1038,17 @@ const BOXSCOREFOURFACTORSV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscorefourfactorsv3`
  *
- * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
- * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.range_type - query parameter (`RangeType`) — default `0`.
- * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
- * @param params.start_range - query parameter (`StartRange`) — default `0`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
+ * @param params.end_period - `number | string` — the `EndPeriod` query parameter; default `14`.
+ * @param params.end_range - `number | string` — the `EndRange` query parameter; default `0`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.range_type - `number | string` — the `RangeType` query parameter; default `0`.
+ * @param params.start_period - `number | string` — the `StartPeriod` query parameter; default `0`.
+ * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscorefourfactorsv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscorefourfactorsv3({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscorefourfactorsv3: SectionedWrapper<NbaStatsBoxscorefourfactorsv3Tables | Row[], NbaStatsBoxscorefourfactorsv3Tables, NbaStatsBoxscorefourfactorsv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREFOURFACTORSV3_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscorefourfactorsv3} (py/R parity). */
@@ -1072,11 +1078,12 @@ const BOXSCOREHUSTLEV2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscorehustlev2`
  *
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscorehustlev2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscorehustlev2({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscorehustlev2: SectionedWrapper<NbaStatsBoxscorehustlev2Tables | Row[], NbaStatsBoxscorehustlev2Tables, NbaStatsBoxscorehustlev2Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREHUSTLEV2_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscorehustlev2} (py/R parity). */
@@ -1106,11 +1113,12 @@ const BOXSCOREMATCHUPSV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscorematchupsv3`
  *
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscorematchupsv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscorematchupsv3({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscorematchupsv3: SectionedWrapper<NbaStatsBoxscorematchupsv3Tables | Row[], NbaStatsBoxscorematchupsv3Tables, NbaStatsBoxscorematchupsv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREMATCHUPSV3_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscorematchupsv3} (py/R parity). */
@@ -1165,16 +1173,17 @@ const BOXSCOREMISCV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoremiscv3`
  *
- * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
- * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.range_type - query parameter (`RangeType`) — default `0`.
- * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
- * @param params.start_range - query parameter (`StartRange`) — default `0`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
+ * @param params.end_period - `number | string` — the `EndPeriod` query parameter; default `14`.
+ * @param params.end_range - `number | string` — the `EndRange` query parameter; default `0`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.range_type - `number | string` — the `RangeType` query parameter; default `0`.
+ * @param params.start_period - `number | string` — the `StartPeriod` query parameter; default `0`.
+ * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscoremiscv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscoremiscv3({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscoremiscv3: SectionedWrapper<NbaStatsBoxscoremiscv3Tables | Row[], NbaStatsBoxscoremiscv3Tables, NbaStatsBoxscoremiscv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREMISCV3_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscoremiscv3} (py/R parity). */
@@ -1204,11 +1213,12 @@ const BOXSCOREPLAYERTRACKV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoreplayertrackv3`
  *
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscoreplayertrackv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscoreplayertrackv3({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscoreplayertrackv3: SectionedWrapper<NbaStatsBoxscoreplayertrackv3Tables | Row[], NbaStatsBoxscoreplayertrackv3Tables, NbaStatsBoxscoreplayertrackv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREPLAYERTRACKV3_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscoreplayertrackv3} (py/R parity). */
@@ -1263,16 +1273,17 @@ const BOXSCORESCORINGV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscorescoringv3`
  *
- * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
- * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.range_type - query parameter (`RangeType`) — default `0`.
- * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
- * @param params.start_range - query parameter (`StartRange`) — default `0`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
+ * @param params.end_period - `number | string` — the `EndPeriod` query parameter; default `14`.
+ * @param params.end_range - `number | string` — the `EndRange` query parameter; default `0`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.range_type - `number | string` — the `RangeType` query parameter; default `0`.
+ * @param params.start_period - `number | string` — the `StartPeriod` query parameter; default `0`.
+ * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscorescoringv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscorescoringv3({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscorescoringv3: SectionedWrapper<NbaStatsBoxscorescoringv3Tables | Row[], NbaStatsBoxscorescoringv3Tables, NbaStatsBoxscorescoringv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCORESCORINGV3_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscorescoringv3} (py/R parity). */
@@ -1302,11 +1313,12 @@ const BOXSCORESUMMARYV2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoresummaryv2`
  *
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameSummary`, `OtherStats`, `Officials`, `InactivePlayers`, `GameInfo`, `LineScore`, `LastMeeting`, `SeasonSeries`, `AvailableVideo`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscoresummaryv2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GameSummary`, `OtherStats`, `Officials`, `InactivePlayers`, `GameInfo`, `LineScore`, `LastMeeting`, `SeasonSeries`, `AvailableVideo`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscoresummaryv2({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscoresummaryv2: SectionedWrapper<NbaStatsBoxscoresummaryv2Tables | Row[], NbaStatsBoxscoresummaryv2Tables, NbaStatsBoxscoresummaryv2Params> = (params: WrapperParams = {}) => callFlat(BOXSCORESUMMARYV2_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscoresummaryv2} (py/R parity). */
@@ -1336,11 +1348,12 @@ const BOXSCORESUMMARYV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoresummaryv3`
  *
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `Officials`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscoresummaryv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `Officials`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscoresummaryv3({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscoresummaryv3: SectionedWrapper<NbaStatsBoxscoresummaryv3Tables | Row[], NbaStatsBoxscoresummaryv3Tables, NbaStatsBoxscoresummaryv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCORESUMMARYV3_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscoresummaryv3} (py/R parity). */
@@ -1395,16 +1408,17 @@ const BOXSCORETRADITIONALV2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoretraditionalv2`
  *
- * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
- * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.range_type - query parameter (`RangeType`) — default `0`.
- * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
- * @param params.start_range - query parameter (`StartRange`) — default `0`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `TeamStarterBenchStats`.
+ * @param params.end_period - `number | string` — the `EndPeriod` query parameter; default `14`.
+ * @param params.end_range - `number | string` — the `EndRange` query parameter; default `0`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.range_type - `number | string` — the `RangeType` query parameter; default `0`.
+ * @param params.start_period - `number | string` — the `StartPeriod` query parameter; default `0`.
+ * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscoretraditionalv2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `TeamStarterBenchStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscoretraditionalv2({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscoretraditionalv2: SectionedWrapper<NbaStatsBoxscoretraditionalv2Tables | Row[], NbaStatsBoxscoretraditionalv2Tables, NbaStatsBoxscoretraditionalv2Params> = (params: WrapperParams = {}) => callFlat(BOXSCORETRADITIONALV2_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscoretraditionalv2} (py/R parity). */
@@ -1459,16 +1473,17 @@ const BOXSCORETRADITIONALV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoretraditionalv3`
  *
- * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
- * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.range_type - query parameter (`RangeType`) — default `0`.
- * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
- * @param params.start_range - query parameter (`StartRange`) — default `0`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
+ * @param params.end_period - `number | string` — the `EndPeriod` query parameter; default `14`.
+ * @param params.end_range - `number | string` — the `EndRange` query parameter; default `0`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.range_type - `number | string` — the `RangeType` query parameter; default `0`.
+ * @param params.start_period - `number | string` — the `StartPeriod` query parameter; default `0`.
+ * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscoretraditionalv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscoretraditionalv3({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscoretraditionalv3: SectionedWrapper<NbaStatsBoxscoretraditionalv3Tables | Row[], NbaStatsBoxscoretraditionalv3Tables, NbaStatsBoxscoretraditionalv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCORETRADITIONALV3_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscoretraditionalv3} (py/R parity). */
@@ -1523,16 +1538,17 @@ const BOXSCOREUSAGEV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoreusagev3`
  *
- * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
- * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.range_type - query parameter (`RangeType`) — default `0`.
- * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
- * @param params.start_range - query parameter (`StartRange`) — default `0`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
+ * @param params.end_period - `number | string` — the `EndPeriod` query parameter; default `14`.
+ * @param params.end_range - `number | string` — the `EndRange` query parameter; default `0`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.range_type - `number | string` — the `RangeType` query parameter; default `0`.
+ * @param params.start_period - `number | string` — the `StartPeriod` query parameter; default `0`.
+ * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsBoxscoreusagev3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsBoxscoreusagev3({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsBoxscoreusagev3: SectionedWrapper<NbaStatsBoxscoreusagev3Tables | Row[], NbaStatsBoxscoreusagev3Tables, NbaStatsBoxscoreusagev3Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREUSAGEV3_DEF, params);
 /** snake_case alias of {@link nbaStatsBoxscoreusagev3} (py/R parity). */
@@ -1573,13 +1589,14 @@ const COMMONALLPLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/commonallplayers`
  *
- * @param params.is_only_current_season - query parameter (`IsOnlyCurrentSeason`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.is_only_current_season - `number | string` — the `IsOnlyCurrentSeason` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsCommonallplayersRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsCommonallplayers({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsCommonallplayers: SectionedWrapper<NbaStatsCommonallplayersRow[] | ParsedTables, {}, NbaStatsCommonallplayersParams> = (params: WrapperParams = {}) => callFlat(COMMONALLPLAYERS_DEF, params);
 /** snake_case alias of {@link nbaStatsCommonallplayers} (py/R parity). */
@@ -1614,12 +1631,13 @@ const COMMONPLAYERINFO_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/commonplayerinfo`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `CommonPlayerInfo`, `PlayerHeadlineStats`, `AvailableSeasons`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsCommonplayerinfoTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `CommonPlayerInfo`, `PlayerHeadlineStats`, `AvailableSeasons`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsCommonplayerinfo({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsCommonplayerinfo: SectionedWrapper<NbaStatsCommonplayerinfoTables | Row[], NbaStatsCommonplayerinfoTables, NbaStatsCommonplayerinfoParams> = (params: WrapperParams = {}) => callFlat(COMMONPLAYERINFO_DEF, params);
 /** snake_case alias of {@link nbaStatsCommonplayerinfo} (py/R parity). */
@@ -1660,13 +1678,14 @@ const COMMONPLAYOFFSERIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/commonplayoffseries`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.series_id_nullable - query parameter (`SeriesID`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.series_id_nullable - `number | string` — the `SeriesID` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsCommonplayoffseriesRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsCommonplayoffseries({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsCommonplayoffseries: SectionedWrapper<NbaStatsCommonplayoffseriesRow[] | ParsedTables, {}, NbaStatsCommonplayoffseriesParams> = (params: WrapperParams = {}) => callFlat(COMMONPLAYOFFSERIES_DEF, params);
 /** snake_case alias of {@link nbaStatsCommonplayoffseries} (py/R parity). */
@@ -1707,13 +1726,14 @@ const COMMONTEAMROSTER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/commonteamroster`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `CommonTeamRoster`, `Coaches`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612739`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsCommonteamrosterTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `CommonTeamRoster`, `Coaches`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsCommonteamroster({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsCommonteamroster: SectionedWrapper<NbaStatsCommonteamrosterTables | Row[], NbaStatsCommonteamrosterTables, NbaStatsCommonteamrosterParams> = (params: WrapperParams = {}) => callFlat(COMMONTEAMROSTER_DEF, params);
 /** snake_case alias of {@link nbaStatsCommonteamroster} (py/R parity). */
@@ -1743,11 +1763,12 @@ const COMMONTEAMYEARS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/commonteamyears`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsCommonteamyearsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsCommonteamyears({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsCommonteamyears: SectionedWrapper<NbaStatsCommonteamyearsRow[] | ParsedTables, {}, NbaStatsCommonteamyearsParams> = (params: WrapperParams = {}) => callFlat(COMMONTEAMYEARS_DEF, params);
 /** snake_case alias of {@link nbaStatsCommonteamyears} (py/R parity). */
@@ -1797,15 +1818,16 @@ const CUMESTATSPLAYER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/cumestatsplayer`
  *
- * @param params.game_ids - query parameter (`GameIDs`) — default `0022000756`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1629611`.
- * @param params.season - query parameter (`Season`) — default `2020-21`.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalPlayerStats`.
+ * @param params.game_ids - `number | string` — the `GameIDs` query parameter; default `0022000756`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `1629611`.
+ * @param params.season - `number | string` — the `Season` query parameter; default `2020-21`.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsCumestatsplayerTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalPlayerStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsCumestatsplayer({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsCumestatsplayer: SectionedWrapper<NbaStatsCumestatsplayerTables | Row[], NbaStatsCumestatsplayerTables, NbaStatsCumestatsplayerParams> = (params: WrapperParams = {}) => callFlat(CUMESTATSPLAYER_DEF, params);
 /** snake_case alias of {@link nbaStatsCumestatsplayer} (py/R parity). */
@@ -1876,19 +1898,20 @@ const CUMESTATSPLAYERGAMES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/cumestatsplayergames`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.vs_team_id_nullable - query parameter (`VsTeamID`) — default `0`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.vs_team_id_nullable - `number | string` — the `VsTeamID` query parameter; default `0`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsCumestatsplayergamesRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsCumestatsplayergames({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsCumestatsplayergames: SectionedWrapper<NbaStatsCumestatsplayergamesRow[] | ParsedTables, {}, NbaStatsCumestatsplayergamesParams> = (params: WrapperParams = {}) => callFlat(CUMESTATSPLAYERGAMES_DEF, params);
 /** snake_case alias of {@link nbaStatsCumestatsplayergames} (py/R parity). */
@@ -1939,15 +1962,16 @@ const CUMESTATSTEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/cumestatsteam`
  *
- * @param params.game_ids - query parameter (`GameIDs`) — default `22201094`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalTeamStats`.
+ * @param params.game_ids - `number | string` — the `GameIDs` query parameter; default `22201094`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612739`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsCumestatsteamTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalTeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsCumestatsteam({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsCumestatsteam: SectionedWrapper<NbaStatsCumestatsteamTables | Row[], NbaStatsCumestatsteamTables, NbaStatsCumestatsteamParams> = (params: WrapperParams = {}) => callFlat(CUMESTATSTEAM_DEF, params);
 /** snake_case alias of {@link nbaStatsCumestatsteam} (py/R parity). */
@@ -2023,20 +2047,21 @@ const CUMESTATSTEAMGAMES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/cumestatsteamgames`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_id_nullable - query parameter (`SeasonID`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.vs_team_id_nullable - query parameter (`VsTeamID`) — default `0`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_id_nullable - `number | string` — the `SeasonID` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612739`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.vs_team_id_nullable - `number | string` — the `VsTeamID` query parameter; default `0`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsCumestatsteamgamesRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsCumestatsteamgames({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsCumestatsteamgames: SectionedWrapper<NbaStatsCumestatsteamgamesRow[] | ParsedTables, {}, NbaStatsCumestatsteamgamesParams> = (params: WrapperParams = {}) => callFlat(CUMESTATSTEAMGAMES_DEF, params);
 /** snake_case alias of {@link nbaStatsCumestatsteamgames} (py/R parity). */
@@ -2072,12 +2097,13 @@ const DRAFTCOMBINEDRILLRESULTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/draftcombinedrillresults`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season_year - query parameter (`SeasonYear`) — default `null`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season_year - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsDraftcombinedrillresultsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsDraftcombinedrillresults({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsDraftcombinedrillresults: SectionedWrapper<NbaStatsDraftcombinedrillresultsRow[] | ParsedTables, {}, NbaStatsDraftcombinedrillresultsParams> = (params: WrapperParams = {}) => callFlat(DRAFTCOMBINEDRILLRESULTS_DEF, params);
 /** snake_case alias of {@link nbaStatsDraftcombinedrillresults} (py/R parity). */
@@ -2113,12 +2139,13 @@ const DRAFTCOMBINENONSTATIONARYSHOOTING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/draftcombinenonstationaryshooting`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season_year - query parameter (`SeasonYear`) — default `null`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season_year - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsDraftcombinenonstationaryshootingRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsDraftcombinenonstationaryshooting({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsDraftcombinenonstationaryshooting: SectionedWrapper<NbaStatsDraftcombinenonstationaryshootingRow[] | ParsedTables, {}, NbaStatsDraftcombinenonstationaryshootingParams> = (params: WrapperParams = {}) => callFlat(DRAFTCOMBINENONSTATIONARYSHOOTING_DEF, params);
 /** snake_case alias of {@link nbaStatsDraftcombinenonstationaryshooting} (py/R parity). */
@@ -2154,12 +2181,13 @@ const DRAFTCOMBINEPLAYERANTHRO_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/draftcombineplayeranthro`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season_year - query parameter (`SeasonYear`) — default `null`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season_year - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsDraftcombineplayeranthroRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsDraftcombineplayeranthro({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsDraftcombineplayeranthro: SectionedWrapper<NbaStatsDraftcombineplayeranthroRow[] | ParsedTables, {}, NbaStatsDraftcombineplayeranthroParams> = (params: WrapperParams = {}) => callFlat(DRAFTCOMBINEPLAYERANTHRO_DEF, params);
 /** snake_case alias of {@link nbaStatsDraftcombineplayeranthro} (py/R parity). */
@@ -2195,12 +2223,13 @@ const DRAFTCOMBINESPOTSHOOTING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/draftcombinespotshooting`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season_year - query parameter (`SeasonYear`) — default `null`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season_year - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsDraftcombinespotshootingRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsDraftcombinespotshooting({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsDraftcombinespotshooting: SectionedWrapper<NbaStatsDraftcombinespotshootingRow[] | ParsedTables, {}, NbaStatsDraftcombinespotshootingParams> = (params: WrapperParams = {}) => callFlat(DRAFTCOMBINESPOTSHOOTING_DEF, params);
 /** snake_case alias of {@link nbaStatsDraftcombinespotshooting} (py/R parity). */
@@ -2236,12 +2265,13 @@ const DRAFTCOMBINESTATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/draftcombinestats`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season_all_time - query parameter (`SeasonYear`) — default `null`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season_all_time - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsDraftcombinestatsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsDraftcombinestats({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsDraftcombinestats: SectionedWrapper<NbaStatsDraftcombinestatsRow[] | ParsedTables, {}, NbaStatsDraftcombinestatsParams> = (params: WrapperParams = {}) => callFlat(DRAFTCOMBINESTATS_DEF, params);
 /** snake_case alias of {@link nbaStatsDraftcombinestats} (py/R parity). */
@@ -2307,18 +2337,19 @@ const DRAFTHISTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/drafthistory`
  *
- * @param params.college_nullable - query parameter (`College`) — default ``.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.overall_pick_nullable - query parameter (`OverallPick`) — default ``.
- * @param params.round_num_nullable - query parameter (`RoundNum`) — default ``.
- * @param params.round_pick_nullable - query parameter (`RoundPick`) — default ``.
- * @param params.season_year_nullable - query parameter (`Season`) — default `null`.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.topx_nullable - query parameter (`TopX`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.college_nullable - `number | string` — the `College` query parameter; default ``.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.overall_pick_nullable - `number | string` — the `OverallPick` query parameter; default ``.
+ * @param params.round_num_nullable - `number | string` — the `RoundNum` query parameter; default ``.
+ * @param params.round_pick_nullable - `number | string` — the `RoundPick` query parameter; default ``.
+ * @param params.season_year_nullable - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.topx_nullable - `number | string` — the `TopX` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsDrafthistoryRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsDrafthistory({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsDrafthistory: SectionedWrapper<NbaStatsDrafthistoryRow[] | ParsedTables, {}, NbaStatsDrafthistoryParams> = (params: WrapperParams = {}) => callFlat(DRAFTHISTORY_DEF, params);
 /** snake_case alias of {@link nbaStatsDrafthistory} (py/R parity). */
@@ -2439,29 +2470,30 @@ const FANTASYWIDGET_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/fantasywidget`
  *
- * @param params.active_players - query parameter (`ActivePlayers`) — default `N`.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month_nullable - query parameter (`Month`) — default ``.
- * @param params.opponent_team_id_nullable - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.player_id_nullable - query parameter (`PlayerID`) — default ``.
- * @param params.position_nullable - query parameter (`Position`) — default ``.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.todays_opponent - query parameter (`TodaysOpponent`) — default `0`.
- * @param params.todays_players - query parameter (`TodaysPlayers`) — default `N`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.active_players - `number | string` — the `ActivePlayers` query parameter; default `N`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default ``.
+ * @param params.opponent_team_id_nullable - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.player_id_nullable - `number | string` — the `PlayerID` query parameter; default ``.
+ * @param params.position_nullable - `number | string` — the `Position` query parameter; default ``.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.todays_opponent - `number | string` — the `TodaysOpponent` query parameter; default `0`.
+ * @param params.todays_players - `number | string` — the `TodaysPlayers` query parameter; default `N`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsFantasywidgetRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsFantasywidget({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsFantasywidget: SectionedWrapper<NbaStatsFantasywidgetRow[] | ParsedTables, {}, NbaStatsFantasywidgetParams> = (params: WrapperParams = {}) => callFlat(FANTASYWIDGET_DEF, params);
 /** snake_case alias of {@link nbaStatsFantasywidget} (py/R parity). */
@@ -2491,11 +2523,12 @@ const FRANCHISEHISTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/franchisehistory`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `FranchiseHistory`, `DefunctTeams`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsFranchisehistoryTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `FranchiseHistory`, `DefunctTeams`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsFranchisehistory({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsFranchisehistory: SectionedWrapper<NbaStatsFranchisehistoryTables | Row[], NbaStatsFranchisehistoryTables, NbaStatsFranchisehistoryParams> = (params: WrapperParams = {}) => callFlat(FRANCHISEHISTORY_DEF, params);
 /** snake_case alias of {@link nbaStatsFranchisehistory} (py/R parity). */
@@ -2530,12 +2563,13 @@ const FRANCHISELEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/franchiseleaders`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612739`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsFranchiseleadersRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsFranchiseleaders({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsFranchiseleaders: SectionedWrapper<NbaStatsFranchiseleadersRow[] | ParsedTables, {}, NbaStatsFranchiseleadersParams> = (params: WrapperParams = {}) => callFlat(FRANCHISELEADERS_DEF, params);
 /** snake_case alias of {@link nbaStatsFranchiseleaders} (py/R parity). */
@@ -2580,14 +2614,15 @@ const FRANCHISELEADERSWRANK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/franchiseleaderswrank`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.per_mode - query parameter (`PerMode`) — default `Totals`.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.per_mode - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612739`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsFranchiseleaderswrankRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsFranchiseleaderswrank({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsFranchiseleaderswrank: SectionedWrapper<NbaStatsFranchiseleaderswrankRow[] | ParsedTables, {}, NbaStatsFranchiseleaderswrankParams> = (params: WrapperParams = {}) => callFlat(FRANCHISELEADERSWRANK_DEF, params);
 /** snake_case alias of {@link nbaStatsFranchiseleaderswrank} (py/R parity). */
@@ -2632,14 +2667,15 @@ const FRANCHISEPLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/franchiseplayers`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612739`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsFranchiseplayersRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsFranchiseplayers({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsFranchiseplayers: SectionedWrapper<NbaStatsFranchiseplayersRow[] | ParsedTables, {}, NbaStatsFranchiseplayersParams> = (params: WrapperParams = {}) => callFlat(FRANCHISEPLAYERS_DEF, params);
 /** snake_case alias of {@link nbaStatsFranchiseplayers} (py/R parity). */
@@ -2674,12 +2710,13 @@ const GAMEROTATION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/gamerotation`
  *
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `AwayTeam`, `HomeTeam`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsGamerotationTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `AwayTeam`, `HomeTeam`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsGamerotation({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsGamerotation: SectionedWrapper<NbaStatsGamerotationTables | Row[], NbaStatsGamerotationTables, NbaStatsGamerotationParams> = (params: WrapperParams = {}) => callFlat(GAMEROTATION_DEF, params);
 /** snake_case alias of {@link nbaStatsGamerotation} (py/R parity). */
@@ -2740,17 +2777,18 @@ const HOMEPAGELEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/homepageleaders`
  *
- * @param params.game_scope_detailed - query parameter (`GameScope`) — default `Season`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.player_or_team - query parameter (`PlayerOrTeam`) — default `Team`.
- * @param params.player_scope - query parameter (`PlayerScope`) — default `All Players`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.stat_category - query parameter (`StatCategory`) — default `Points`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HomePageLeaders`, `LeagueAverage`, `LeagueMax`.
+ * @param params.game_scope_detailed - `number | string` — the `GameScope` query parameter; default `Season`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.player_or_team - `number | string` — the `PlayerOrTeam` query parameter; default `Team`.
+ * @param params.player_scope - `number | string` — the `PlayerScope` query parameter; default `All Players`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.stat_category - `number | string` — the `StatCategory` query parameter; default `Points`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsHomepageleadersTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `HomePageLeaders`, `LeagueAverage`, `LeagueMax`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsHomepageleaders({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsHomepageleaders: SectionedWrapper<NbaStatsHomepageleadersTables | Row[], NbaStatsHomepageleadersTables, NbaStatsHomepageleadersParams> = (params: WrapperParams = {}) => callFlat(HOMEPAGELEADERS_DEF, params);
 /** snake_case alias of {@link nbaStatsHomepageleaders} (py/R parity). */
@@ -2811,17 +2849,18 @@ const HOMEPAGEV2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/homepagev2`
  *
- * @param params.game_scope_detailed - query parameter (`GameScope`) — default `Season`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.player_or_team - query parameter (`PlayerOrTeam`) — default `Team`.
- * @param params.player_scope - query parameter (`PlayerScope`) — default `All Players`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.stat_type - query parameter (`StatType`) — default `Traditional`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HomePageStat1`, `HomePageStat2`, `HomePageStat3`, `HomePageStat4`, `HomePageStat5`, `HomePageStat6`, `HomePageStat7`, `HomePageStat8`.
+ * @param params.game_scope_detailed - `number | string` — the `GameScope` query parameter; default `Season`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.player_or_team - `number | string` — the `PlayerOrTeam` query parameter; default `Team`.
+ * @param params.player_scope - `number | string` — the `PlayerScope` query parameter; default `All Players`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.stat_type - `number | string` — the `StatType` query parameter; default `Traditional`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsHomepagev2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `HomePageStat1`, `HomePageStat2`, `HomePageStat3`, `HomePageStat4`, `HomePageStat5`, `HomePageStat6`, `HomePageStat7`, `HomePageStat8`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsHomepagev2({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsHomepagev2: SectionedWrapper<NbaStatsHomepagev2Tables | Row[], NbaStatsHomepagev2Tables, NbaStatsHomepagev2Params> = (params: WrapperParams = {}) => callFlat(HOMEPAGEV2_DEF, params);
 /** snake_case alias of {@link nbaStatsHomepagev2} (py/R parity). */
@@ -2851,11 +2890,12 @@ const HUSTLESTATSBOXSCORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/hustlestatsboxscore`
  *
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HustleStatsAvailable`, `PlayerStats`, `TeamStats`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `0022200021`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsHustlestatsboxscoreTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `HustleStatsAvailable`, `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsHustlestatsboxscore({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsHustlestatsboxscore: SectionedWrapper<NbaStatsHustlestatsboxscoreTables | Row[], NbaStatsHustlestatsboxscoreTables, NbaStatsHustlestatsboxscoreParams> = (params: WrapperParams = {}) => callFlat(HUSTLESTATSBOXSCORE_DEF, params);
 /** snake_case alias of {@link nbaStatsHustlestatsboxscore} (py/R parity). */
@@ -2885,11 +2925,12 @@ const INFOGRAPHICFANDUELPLAYER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/infographicfanduelplayer`
  *
- * @param params.game_id - query parameter (`GameID`) — default `22201086`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `22201086`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsInfographicfanduelplayerRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsInfographicfanduelplayer({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsInfographicfanduelplayer: SectionedWrapper<NbaStatsInfographicfanduelplayerRow[] | ParsedTables, {}, NbaStatsInfographicfanduelplayerParams> = (params: WrapperParams = {}) => callFlat(INFOGRAPHICFANDUELPLAYER_DEF, params);
 /** snake_case alias of {@link nbaStatsInfographicfanduelplayer} (py/R parity). */
@@ -2950,17 +2991,18 @@ const LEADERSTILES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaderstiles`
  *
- * @param params.game_scope_detailed - query parameter (`GameScope`) — default `Season`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.player_or_team - query parameter (`PlayerOrTeam`) — default `Team`.
- * @param params.player_scope - query parameter (`PlayerScope`) — default `All Players`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.stat - query parameter (`Stat`) — default `PTS`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `LeadersTiles`, `AllTimeSeasonHigh`, `LastSeasonHigh`, `LowSeasonHigh`.
+ * @param params.game_scope_detailed - `number | string` — the `GameScope` query parameter; default `Season`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.player_or_team - `number | string` — the `PlayerOrTeam` query parameter; default `Team`.
+ * @param params.player_scope - `number | string` — the `PlayerScope` query parameter; default `All Players`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.stat - `number | string` — the `Stat` query parameter; default `PTS`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaderstilesTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `LeadersTiles`, `AllTimeSeasonHigh`, `LastSeasonHigh`, `LowSeasonHigh`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaderstiles({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaderstiles: SectionedWrapper<NbaStatsLeaderstilesTables | Row[], NbaStatsLeaderstilesTables, NbaStatsLeaderstilesParams> = (params: WrapperParams = {}) => callFlat(LEADERSTILES_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaderstiles} (py/R parity). */
@@ -3116,36 +3158,37 @@ const LEAGUEDASHLINEUPS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashlineups`
  *
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.group_quantity - query parameter (`GroupQuantity`) — default `5`.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.group_quantity - `number | string` — the `GroupQuantity` query parameter; default `5`.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashlineupsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashlineups({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashlineups: SectionedWrapper<NbaStatsLeaguedashlineupsRow[] | ParsedTables, {}, NbaStatsLeaguedashlineupsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHLINEUPS_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashlineups} (py/R parity). */
@@ -3301,36 +3344,37 @@ const LEAGUEDASHOPPPTSHOT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashoppptshot`
  *
- * @param params.close_def_dist_range_nullable - query parameter (`CloseDefDistRange`) — default ``.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_nullable - query parameter (`Division`) — default ``.
- * @param params.dribble_range_nullable - query parameter (`DribbleRange`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.general_range_nullable - query parameter (`GeneralRange`) — default ``.
- * @param params.last_n_games_nullable - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month_nullable - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id_nullable - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.period_nullable - query parameter (`Period`) — default `0`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.shot_dist_range_nullable - query parameter (`ShotDistRange`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.touch_time_range_nullable - query parameter (`TouchTimeRange`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.close_def_dist_range_nullable - `number | string` — the `CloseDefDistRange` query parameter; default ``.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.dribble_range_nullable - `number | string` — the `DribbleRange` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.general_range_nullable - `number | string` — the `GeneralRange` query parameter; default ``.
+ * @param params.last_n_games_nullable - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id_nullable - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period_nullable - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.shot_dist_range_nullable - `number | string` — the `ShotDistRange` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.touch_time_range_nullable - `number | string` — the `TouchTimeRange` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashoppptshotRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashoppptshot({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashoppptshot: SectionedWrapper<NbaStatsLeaguedashoppptshotRow[] | ParsedTables, {}, NbaStatsLeaguedashoppptshotParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHOPPPTSHOT_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashoppptshot} (py/R parity). */
@@ -3511,41 +3555,42 @@ const LEAGUEDASHPLAYERBIOSTATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashplayerbiostats`
  *
- * @param params.college_nullable - query parameter (`College`) — default ``.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.country_nullable - query parameter (`Country`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.draft_pick_nullable - query parameter (`DraftPick`) — default ``.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default ``.
- * @param params.game_scope_simple_nullable - query parameter (`GameScope`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.height_nullable - query parameter (`Height`) — default ``.
- * @param params.last_n_games_nullable - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month_nullable - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id_nullable - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.period_nullable - query parameter (`Period`) — default ``.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default ``.
- * @param params.player_position_abbreviation_nullable - query parameter (`PlayerPosition`) — default ``.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.weight_nullable - query parameter (`Weight`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.college_nullable - `number | string` — the `College` query parameter; default ``.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.country_nullable - `number | string` — the `Country` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.draft_pick_nullable - `number | string` — the `DraftPick` query parameter; default ``.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default ``.
+ * @param params.game_scope_simple_nullable - `number | string` — the `GameScope` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.height_nullable - `number | string` — the `Height` query parameter; default ``.
+ * @param params.last_n_games_nullable - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id_nullable - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period_nullable - `number | string` — the `Period` query parameter; default ``.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default ``.
+ * @param params.player_position_abbreviation_nullable - `number | string` — the `PlayerPosition` query parameter; default ``.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashplayerbiostatsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashplayerbiostats({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashplayerbiostats: SectionedWrapper<NbaStatsLeaguedashplayerbiostatsRow[] | ParsedTables, {}, NbaStatsLeaguedashplayerbiostatsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERBIOSTATS_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashplayerbiostats} (py/R parity). */
@@ -3761,48 +3806,49 @@ const LEAGUEDASHPLAYERCLUTCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashplayerclutch`
  *
- * @param params.ahead_behind - query parameter (`AheadBehind`) — default `Ahead or Behind`.
- * @param params.clutch_time - query parameter (`ClutchTime`) — default `Last 5 Minutes`.
- * @param params.college_nullable - query parameter (`College`) — default ``.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.country_nullable - query parameter (`Country`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.draft_pick_nullable - query parameter (`DraftPick`) — default ``.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default ``.
- * @param params.game_scope_simple_nullable - query parameter (`GameScope`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.height_nullable - query parameter (`Height`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default ``.
- * @param params.player_position_abbreviation_nullable - query parameter (`PlayerPosition`) — default ``.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.point_diff - query parameter (`PointDiff`) — default `5`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.weight_nullable - query parameter (`Weight`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.ahead_behind - `number | string` — the `AheadBehind` query parameter; default `Ahead or Behind`.
+ * @param params.clutch_time - `number | string` — the `ClutchTime` query parameter; default `Last 5 Minutes`.
+ * @param params.college_nullable - `number | string` — the `College` query parameter; default ``.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.country_nullable - `number | string` — the `Country` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.draft_pick_nullable - `number | string` — the `DraftPick` query parameter; default ``.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default ``.
+ * @param params.game_scope_simple_nullable - `number | string` — the `GameScope` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.height_nullable - `number | string` — the `Height` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default ``.
+ * @param params.player_position_abbreviation_nullable - `number | string` — the `PlayerPosition` query parameter; default ``.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.point_diff - `number | string` — the `PointDiff` query parameter; default `5`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashplayerclutchRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashplayerclutch({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashplayerclutch: SectionedWrapper<NbaStatsLeaguedashplayerclutchRow[] | ParsedTables, {}, NbaStatsLeaguedashplayerclutchParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERCLUTCH_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashplayerclutch} (py/R parity). */
@@ -4003,45 +4049,46 @@ const LEAGUEDASHPLAYERPTSHOT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashplayerptshot`
  *
- * @param params.close_def_dist_range_nullable - query parameter (`CloseDefDistRange`) — default ``.
- * @param params.college_nullable - query parameter (`College`) — default ``.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.country_nullable - query parameter (`Country`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_nullable - query parameter (`Division`) — default ``.
- * @param params.draft_pick_nullable - query parameter (`DraftPick`) — default ``.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default ``.
- * @param params.dribble_range_nullable - query parameter (`DribbleRange`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.general_range_nullable - query parameter (`GeneralRange`) — default ``.
- * @param params.height_nullable - query parameter (`Height`) — default ``.
- * @param params.last_n_games_nullable - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month_nullable - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id_nullable - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.period_nullable - query parameter (`Period`) — default `0`.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default ``.
- * @param params.player_position_nullable - query parameter (`PlayerPosition`) — default ``.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.shot_dist_range_nullable - query parameter (`ShotDistRange`) — default `null`.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.touch_time_range_nullable - query parameter (`TouchTimeRange`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.weight_nullable - query parameter (`Weight`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.close_def_dist_range_nullable - `number | string` — the `CloseDefDistRange` query parameter; default ``.
+ * @param params.college_nullable - `number | string` — the `College` query parameter; default ``.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.country_nullable - `number | string` — the `Country` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.draft_pick_nullable - `number | string` — the `DraftPick` query parameter; default ``.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default ``.
+ * @param params.dribble_range_nullable - `number | string` — the `DribbleRange` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.general_range_nullable - `number | string` — the `GeneralRange` query parameter; default ``.
+ * @param params.height_nullable - `number | string` — the `Height` query parameter; default ``.
+ * @param params.last_n_games_nullable - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id_nullable - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period_nullable - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default ``.
+ * @param params.player_position_nullable - `number | string` — the `PlayerPosition` query parameter; default ``.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.shot_dist_range_nullable - `number | string` — the `ShotDistRange` query parameter; default `null`.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.touch_time_range_nullable - `number | string` — the `TouchTimeRange` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashplayerptshotRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashplayerptshot({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashplayerptshot: SectionedWrapper<NbaStatsLeaguedashplayerptshotRow[] | ParsedTables, {}, NbaStatsLeaguedashplayerptshotParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERPTSHOT_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashplayerptshot} (py/R parity). */
@@ -4247,46 +4294,47 @@ const LEAGUEDASHPLAYERSHOTLOCATIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashplayershotlocations`
  *
- * @param params.college_nullable - query parameter (`College`) — default ``.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.country_nullable - query parameter (`Country`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.distance_range - query parameter (`DistanceRange`) — default `By Zone`.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.draft_pick_nullable - query parameter (`DraftPick`) — default ``.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default ``.
- * @param params.game_scope_simple_nullable - query parameter (`GameScope`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.height_nullable - query parameter (`Height`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_simple - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default ``.
- * @param params.player_position_abbreviation_nullable - query parameter (`PlayerPosition`) — default ``.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.weight_nullable - query parameter (`Weight`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.college_nullable - `number | string` — the `College` query parameter; default ``.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.country_nullable - `number | string` — the `Country` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.distance_range - `number | string` — the `DistanceRange` query parameter; default `By Zone`.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.draft_pick_nullable - `number | string` — the `DraftPick` query parameter; default ``.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default ``.
+ * @param params.game_scope_simple_nullable - `number | string` — the `GameScope` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.height_nullable - `number | string` — the `Height` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_simple - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default ``.
+ * @param params.player_position_abbreviation_nullable - `number | string` — the `PlayerPosition` query parameter; default ``.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashplayershotlocationsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashplayershotlocations({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashplayershotlocations: SectionedWrapper<NbaStatsLeaguedashplayershotlocationsRow[] | ParsedTables, {}, NbaStatsLeaguedashplayershotlocationsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERSHOTLOCATIONS_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashplayershotlocations} (py/R parity). */
@@ -4492,46 +4540,47 @@ const LEAGUEDASHPLAYERSTATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashplayerstats`
  *
- * @param params.college_nullable - query parameter (`College`) — default ``.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.country_nullable - query parameter (`Country`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.draft_pick_nullable - query parameter (`DraftPick`) — default ``.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default ``.
- * @param params.game_scope_simple_nullable - query parameter (`GameScope`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.height_nullable - query parameter (`Height`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default ``.
- * @param params.player_position_abbreviation_nullable - query parameter (`PlayerPosition`) — default ``.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.two_way_nullable - query parameter (`TwoWay`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.weight_nullable - query parameter (`Weight`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.college_nullable - `number | string` — the `College` query parameter; default ``.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.country_nullable - `number | string` — the `Country` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.draft_pick_nullable - `number | string` — the `DraftPick` query parameter; default ``.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default ``.
+ * @param params.game_scope_simple_nullable - `number | string` — the `GameScope` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.height_nullable - `number | string` — the `Height` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default ``.
+ * @param params.player_position_abbreviation_nullable - `number | string` — the `PlayerPosition` query parameter; default ``.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.two_way_nullable - `number | string` — the `TwoWay` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashplayerstatsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashplayerstats({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashplayerstats: SectionedWrapper<NbaStatsLeaguedashplayerstatsRow[] | ParsedTables, {}, NbaStatsLeaguedashplayerstatsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERSTATS_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashplayerstats} (py/R parity). */
@@ -4712,41 +4761,42 @@ const LEAGUEDASHPTDEFEND_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashptdefend`
  *
- * @param params.college_nullable - query parameter (`College`) — default ``.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.country_nullable - query parameter (`Country`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.defense_category - query parameter (`DefenseCategory`) — default `Overall`.
- * @param params.division_nullable - query parameter (`Division`) — default ``.
- * @param params.draft_pick_nullable - query parameter (`DraftPick`) — default ``.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.height_nullable - query parameter (`Height`) — default ``.
- * @param params.last_n_games_nullable - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month_nullable - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id_nullable - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.period_nullable - query parameter (`Period`) — default ``.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default ``.
- * @param params.player_id_nullable - query parameter (`PlayerID`) — default ``.
- * @param params.player_position_nullable - query parameter (`PlayerPosition`) — default ``.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.weight_nullable - query parameter (`Weight`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.college_nullable - `number | string` — the `College` query parameter; default ``.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.country_nullable - `number | string` — the `Country` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.defense_category - `number | string` — the `DefenseCategory` query parameter; default `Overall`.
+ * @param params.division_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.draft_pick_nullable - `number | string` — the `DraftPick` query parameter; default ``.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.height_nullable - `number | string` — the `Height` query parameter; default ``.
+ * @param params.last_n_games_nullable - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id_nullable - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period_nullable - `number | string` — the `Period` query parameter; default ``.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default ``.
+ * @param params.player_id_nullable - `number | string` — the `PlayerID` query parameter; default ``.
+ * @param params.player_position_nullable - `number | string` — the `PlayerPosition` query parameter; default ``.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashptdefendRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashptdefend({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashptdefend: SectionedWrapper<NbaStatsLeaguedashptdefendRow[] | ParsedTables, {}, NbaStatsLeaguedashptdefendParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPTDEFEND_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashptdefend} (py/R parity). */
@@ -4921,40 +4971,41 @@ const LEAGUEDASHPTSTATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashptstats`
  *
- * @param params.college_nullable - query parameter (`College`) — default ``.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.country_nullable - query parameter (`Country`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.draft_pick_nullable - query parameter (`DraftPick`) — default ``.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default ``.
- * @param params.game_scope_simple_nullable - query parameter (`GameScope`) — default ``.
- * @param params.height_nullable - query parameter (`Height`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `PerGame`.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default ``.
- * @param params.player_or_team - query parameter (`PlayerOrTeam`) — default `Player`.
- * @param params.player_position_abbreviation_nullable - query parameter (`PlayerPosition`) — default ``.
- * @param params.pt_measure_type - query parameter (`PtMeasureType`) — default `Drives`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.weight_nullable - query parameter (`Weight`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.college_nullable - `number | string` — the `College` query parameter; default ``.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.country_nullable - `number | string` — the `Country` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.draft_pick_nullable - `number | string` — the `DraftPick` query parameter; default ``.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default ``.
+ * @param params.game_scope_simple_nullable - `number | string` — the `GameScope` query parameter; default ``.
+ * @param params.height_nullable - `number | string` — the `Height` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `PerGame`.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default ``.
+ * @param params.player_or_team - `number | string` — the `PlayerOrTeam` query parameter; default `Player`.
+ * @param params.player_position_abbreviation_nullable - `number | string` — the `PlayerPosition` query parameter; default ``.
+ * @param params.pt_measure_type - `number | string` — the `PtMeasureType` query parameter; default `Drives`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashptstats({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashptstats: SectionedWrapper<Row[] | ParsedTables, {}, NbaStatsLeaguedashptstatsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPTSTATS_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashptstats} (py/R parity). */
@@ -5085,31 +5136,32 @@ const LEAGUEDASHPTTEAMDEFEND_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashptteamdefend`
  *
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.defense_category - query parameter (`DefenseCategory`) — default `Overall`.
- * @param params.division_nullable - query parameter (`Division`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games_nullable - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month_nullable - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id_nullable - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `PerGame`.
- * @param params.period_nullable - query parameter (`Period`) — default ``.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.defense_category - `number | string` — the `DefenseCategory` query parameter; default `Overall`.
+ * @param params.division_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games_nullable - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id_nullable - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `PerGame`.
+ * @param params.period_nullable - `number | string` — the `Period` query parameter; default ``.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashptteamdefendRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashptteamdefend({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashptteamdefend: SectionedWrapper<NbaStatsLeaguedashptteamdefendRow[] | ParsedTables, {}, NbaStatsLeaguedashptteamdefendParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPTTEAMDEFEND_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashptteamdefend} (py/R parity). */
@@ -5295,42 +5347,43 @@ const LEAGUEDASHTEAMCLUTCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashteamclutch`
  *
- * @param params.ahead_behind - query parameter (`AheadBehind`) — default `Ahead or Behind`.
- * @param params.clutch_time - query parameter (`ClutchTime`) — default `Last 5 Minutes`.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.game_scope_simple_nullable - query parameter (`GameScope`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default ``.
- * @param params.player_position_abbreviation_nullable - query parameter (`PlayerPosition`) — default ``.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.point_diff - query parameter (`PointDiff`) — default `5`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.ahead_behind - `number | string` — the `AheadBehind` query parameter; default `Ahead or Behind`.
+ * @param params.clutch_time - `number | string` — the `ClutchTime` query parameter; default `Last 5 Minutes`.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.game_scope_simple_nullable - `number | string` — the `GameScope` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default ``.
+ * @param params.player_position_abbreviation_nullable - `number | string` — the `PlayerPosition` query parameter; default ``.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.point_diff - `number | string` — the `PointDiff` query parameter; default `5`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashteamclutchRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashteamclutch({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashteamclutch: SectionedWrapper<NbaStatsLeaguedashteamclutchRow[] | ParsedTables, {}, NbaStatsLeaguedashteamclutchParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHTEAMCLUTCH_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashteamclutch} (py/R parity). */
@@ -5486,36 +5539,37 @@ const LEAGUEDASHTEAMPTSHOT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashteamptshot`
  *
- * @param params.close_def_dist_range_nullable - query parameter (`CloseDefDistRange`) — default ``.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_nullable - query parameter (`Division`) — default ``.
- * @param params.dribble_range_nullable - query parameter (`DribbleRange`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.general_range_nullable - query parameter (`GeneralRange`) — default ``.
- * @param params.last_n_games_nullable - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month_nullable - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id_nullable - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.period_nullable - query parameter (`Period`) — default `0`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.shot_dist_range_nullable - query parameter (`ShotDistRange`) — default `null`.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.touch_time_range_nullable - query parameter (`TouchTimeRange`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.close_def_dist_range_nullable - `number | string` — the `CloseDefDistRange` query parameter; default ``.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.dribble_range_nullable - `number | string` — the `DribbleRange` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.general_range_nullable - `number | string` — the `GeneralRange` query parameter; default ``.
+ * @param params.last_n_games_nullable - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id_nullable - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period_nullable - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.shot_dist_range_nullable - `number | string` — the `ShotDistRange` query parameter; default `null`.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.touch_time_range_nullable - `number | string` — the `TouchTimeRange` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashteamptshotRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashteamptshot({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashteamptshot: SectionedWrapper<NbaStatsLeaguedashteamptshotRow[] | ParsedTables, {}, NbaStatsLeaguedashteamptshotParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHTEAMPTSHOT_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashteamptshot} (py/R parity). */
@@ -5691,40 +5745,41 @@ const LEAGUEDASHTEAMSHOTLOCATIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashteamshotlocations`
  *
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.distance_range - query parameter (`DistanceRange`) — default `By Zone`.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.game_scope_simple_nullable - query parameter (`GameScope`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_simple - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default ``.
- * @param params.player_position_abbreviation_nullable - query parameter (`PlayerPosition`) — default ``.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.distance_range - `number | string` — the `DistanceRange` query parameter; default `By Zone`.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.game_scope_simple_nullable - `number | string` — the `GameScope` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_simple - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default ``.
+ * @param params.player_position_abbreviation_nullable - `number | string` — the `PlayerPosition` query parameter; default ``.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashteamshotlocationsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashteamshotlocations({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashteamshotlocations: SectionedWrapper<NbaStatsLeaguedashteamshotlocationsRow[] | ParsedTables, {}, NbaStatsLeaguedashteamshotlocationsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHTEAMSHOTLOCATIONS_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashteamshotlocations} (py/R parity). */
@@ -5900,40 +5955,41 @@ const LEAGUEDASHTEAMSTATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguedashteamstats`
  *
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.game_scope_simple_nullable - query parameter (`GameScope`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default `null`.
- * @param params.player_position_abbreviation_nullable - query parameter (`PlayerPosition`) — default `null`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.two_way_nullable - query parameter (`TwoWay`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.game_scope_simple_nullable - `number | string` — the `GameScope` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default `null`.
+ * @param params.player_position_abbreviation_nullable - `number | string` — the `PlayerPosition` query parameter; default `null`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.two_way_nullable - `number | string` — the `TwoWay` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguedashteamstatsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguedashteamstats({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguedashteamstats: SectionedWrapper<NbaStatsLeaguedashteamstatsRow[] | ParsedTables, {}, NbaStatsLeaguedashteamstatsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHTEAMSTATS_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguedashteamstats} (py/R parity). */
@@ -6399,98 +6455,99 @@ const LEAGUEGAMEFINDER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguegamefinder`
  *
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.draft_number_nullable - query parameter (`DraftNumber`) — default ``.
- * @param params.draft_round_nullable - query parameter (`DraftRound`) — default ``.
- * @param params.draft_team_id_nullable - query parameter (`DraftTeamID`) — default `0`.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default ``.
- * @param params.eq_ast_nullable - query parameter (`EqAST`) — default ``.
- * @param params.eq_blk_nullable - query parameter (`EqBLK`) — default ``.
- * @param params.eq_dd_nullable - query parameter (`EqDD`) — default ``.
- * @param params.eq_dreb_nullable - query parameter (`EqDREB`) — default ``.
- * @param params.eq_fg3a_nullable - query parameter (`EqFG3A`) — default ``.
- * @param params.eq_fg3m_nullable - query parameter (`EqFG3M`) — default ``.
- * @param params.eq_fg3_pct_nullable - query parameter (`EqFG3_PCT`) — default ``.
- * @param params.eq_fga_nullable - query parameter (`EqFGA`) — default ``.
- * @param params.eq_fgm_nullable - query parameter (`EqFGM`) — default ``.
- * @param params.eq_fg_pct_nullable - query parameter (`EqFG_PCT`) — default ``.
- * @param params.eq_fta_nullable - query parameter (`EqFTA`) — default ``.
- * @param params.eq_ftm_nullable - query parameter (`EqFTM`) — default ``.
- * @param params.eq_ft_pct_nullable - query parameter (`EqFT_PCT`) — default ``.
- * @param params.eq_minutes_nullable - query parameter (`EqMINUTES`) — default ``.
- * @param params.eq_oreb_nullable - query parameter (`EqOREB`) — default ``.
- * @param params.eq_pf_nullable - query parameter (`EqPF`) — default ``.
- * @param params.eq_pts_nullable - query parameter (`EqPTS`) — default ``.
- * @param params.eq_reb_nullable - query parameter (`EqREB`) — default ``.
- * @param params.eq_stl_nullable - query parameter (`EqSTL`) — default ``.
- * @param params.eq_td_nullable - query parameter (`EqTD`) — default ``.
- * @param params.eq_tov_nullable - query parameter (`EqTOV`) — default ``.
- * @param params.game_id_nullable - query parameter (`GameID`) — default ``.
- * @param params.gt_ast_nullable - query parameter (`GtAST`) — default ``.
- * @param params.gt_blk_nullable - query parameter (`GtBLK`) — default ``.
- * @param params.gt_dd_nullable - query parameter (`GtDD`) — default ``.
- * @param params.gt_dreb_nullable - query parameter (`GtDREB`) — default ``.
- * @param params.gt_fg3a_nullable - query parameter (`GtFG3A`) — default ``.
- * @param params.gt_fg3m_nullable - query parameter (`GtFG3M`) — default ``.
- * @param params.gt_fg3_pct_nullable - query parameter (`GtFG3_PCT`) — default ``.
- * @param params.gt_fga_nullable - query parameter (`GtFGA`) — default ``.
- * @param params.gt_fgm_nullable - query parameter (`GtFGM`) — default ``.
- * @param params.gt_fg_pct_nullable - query parameter (`GtFG_PCT`) — default ``.
- * @param params.gt_fta_nullable - query parameter (`GtFTA`) — default ``.
- * @param params.gt_ftm_nullable - query parameter (`GtFTM`) — default ``.
- * @param params.gt_ft_pct_nullable - query parameter (`GtFT_PCT`) — default ``.
- * @param params.gt_minutes_nullable - query parameter (`GtMINUTES`) — default ``.
- * @param params.gt_oreb_nullable - query parameter (`GtOREB`) — default ``.
- * @param params.gt_pf_nullable - query parameter (`GtPF`) — default ``.
- * @param params.gt_pts_nullable - query parameter (`GtPTS`) — default ``.
- * @param params.gt_reb_nullable - query parameter (`GtREB`) — default ``.
- * @param params.gt_stl_nullable - query parameter (`GtSTL`) — default ``.
- * @param params.gt_td_nullable - query parameter (`GtTD`) — default ``.
- * @param params.gt_tov_nullable - query parameter (`GtTOV`) — default ``.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.lt_ast_nullable - query parameter (`LtAST`) — default ``.
- * @param params.lt_blk_nullable - query parameter (`LtBLK`) — default ``.
- * @param params.lt_dd_nullable - query parameter (`LtDD`) — default ``.
- * @param params.lt_dreb_nullable - query parameter (`LtDREB`) — default ``.
- * @param params.lt_fg3a_nullable - query parameter (`LtFG3A`) — default ``.
- * @param params.lt_fg3m_nullable - query parameter (`LtFG3M`) — default ``.
- * @param params.lt_fg3_pct_nullable - query parameter (`LtFG3_PCT`) — default ``.
- * @param params.lt_fga_nullable - query parameter (`LtFGA`) — default ``.
- * @param params.lt_fgm_nullable - query parameter (`LtFGM`) — default ``.
- * @param params.lt_fg_pct_nullable - query parameter (`LtFG_PCT`) — default ``.
- * @param params.lt_fta_nullable - query parameter (`LtFTA`) — default ``.
- * @param params.lt_ftm_nullable - query parameter (`LtFTM`) — default ``.
- * @param params.lt_ft_pct_nullable - query parameter (`LtFT_PCT`) — default ``.
- * @param params.lt_minutes_nullable - query parameter (`LtMINUTES`) — default ``.
- * @param params.lt_oreb_nullable - query parameter (`LtOREB`) — default ``.
- * @param params.lt_pf_nullable - query parameter (`LtPF`) — default ``.
- * @param params.lt_pts_nullable - query parameter (`LtPTS`) — default ``.
- * @param params.lt_reb_nullable - query parameter (`LtREB`) — default ``.
- * @param params.lt_stl_nullable - query parameter (`LtSTL`) — default ``.
- * @param params.lt_td_nullable - query parameter (`LtTD`) — default ``.
- * @param params.lt_tov_nullable - query parameter (`LtTOV`) — default ``.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.player_id_nullable - query parameter (`PlayerID`) — default ``.
- * @param params.player_or_team_abbreviation - query parameter (`PlayerOrTeam`) — default `T`.
- * @param params.rookie_year_nullable - query parameter (`RookieYear`) — default ``.
- * @param params.season_nullable - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_nullable - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.vs_team_id_nullable - query parameter (`VsTeamID`) — default `0`.
- * @param params.years_experience_nullable - query parameter (`YearsExperience`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.draft_number_nullable - `number | string` — the `DraftNumber` query parameter; default ``.
+ * @param params.draft_round_nullable - `number | string` — the `DraftRound` query parameter; default ``.
+ * @param params.draft_team_id_nullable - `number | string` — the `DraftTeamID` query parameter; default `0`.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default ``.
+ * @param params.eq_ast_nullable - `number | string` — the `EqAST` query parameter; default ``.
+ * @param params.eq_blk_nullable - `number | string` — the `EqBLK` query parameter; default ``.
+ * @param params.eq_dd_nullable - `number | string` — the `EqDD` query parameter; default ``.
+ * @param params.eq_dreb_nullable - `number | string` — the `EqDREB` query parameter; default ``.
+ * @param params.eq_fg3a_nullable - `number | string` — the `EqFG3A` query parameter; default ``.
+ * @param params.eq_fg3m_nullable - `number | string` — the `EqFG3M` query parameter; default ``.
+ * @param params.eq_fg3_pct_nullable - `number | string` — the `EqFG3_PCT` query parameter; default ``.
+ * @param params.eq_fga_nullable - `number | string` — the `EqFGA` query parameter; default ``.
+ * @param params.eq_fgm_nullable - `number | string` — the `EqFGM` query parameter; default ``.
+ * @param params.eq_fg_pct_nullable - `number | string` — the `EqFG_PCT` query parameter; default ``.
+ * @param params.eq_fta_nullable - `number | string` — the `EqFTA` query parameter; default ``.
+ * @param params.eq_ftm_nullable - `number | string` — the `EqFTM` query parameter; default ``.
+ * @param params.eq_ft_pct_nullable - `number | string` — the `EqFT_PCT` query parameter; default ``.
+ * @param params.eq_minutes_nullable - `number | string` — the `EqMINUTES` query parameter; default ``.
+ * @param params.eq_oreb_nullable - `number | string` — the `EqOREB` query parameter; default ``.
+ * @param params.eq_pf_nullable - `number | string` — the `EqPF` query parameter; default ``.
+ * @param params.eq_pts_nullable - `number | string` — the `EqPTS` query parameter; default ``.
+ * @param params.eq_reb_nullable - `number | string` — the `EqREB` query parameter; default ``.
+ * @param params.eq_stl_nullable - `number | string` — the `EqSTL` query parameter; default ``.
+ * @param params.eq_td_nullable - `number | string` — the `EqTD` query parameter; default ``.
+ * @param params.eq_tov_nullable - `number | string` — the `EqTOV` query parameter; default ``.
+ * @param params.game_id_nullable - `number | string` — the `GameID` query parameter; default ``.
+ * @param params.gt_ast_nullable - `number | string` — the `GtAST` query parameter; default ``.
+ * @param params.gt_blk_nullable - `number | string` — the `GtBLK` query parameter; default ``.
+ * @param params.gt_dd_nullable - `number | string` — the `GtDD` query parameter; default ``.
+ * @param params.gt_dreb_nullable - `number | string` — the `GtDREB` query parameter; default ``.
+ * @param params.gt_fg3a_nullable - `number | string` — the `GtFG3A` query parameter; default ``.
+ * @param params.gt_fg3m_nullable - `number | string` — the `GtFG3M` query parameter; default ``.
+ * @param params.gt_fg3_pct_nullable - `number | string` — the `GtFG3_PCT` query parameter; default ``.
+ * @param params.gt_fga_nullable - `number | string` — the `GtFGA` query parameter; default ``.
+ * @param params.gt_fgm_nullable - `number | string` — the `GtFGM` query parameter; default ``.
+ * @param params.gt_fg_pct_nullable - `number | string` — the `GtFG_PCT` query parameter; default ``.
+ * @param params.gt_fta_nullable - `number | string` — the `GtFTA` query parameter; default ``.
+ * @param params.gt_ftm_nullable - `number | string` — the `GtFTM` query parameter; default ``.
+ * @param params.gt_ft_pct_nullable - `number | string` — the `GtFT_PCT` query parameter; default ``.
+ * @param params.gt_minutes_nullable - `number | string` — the `GtMINUTES` query parameter; default ``.
+ * @param params.gt_oreb_nullable - `number | string` — the `GtOREB` query parameter; default ``.
+ * @param params.gt_pf_nullable - `number | string` — the `GtPF` query parameter; default ``.
+ * @param params.gt_pts_nullable - `number | string` — the `GtPTS` query parameter; default ``.
+ * @param params.gt_reb_nullable - `number | string` — the `GtREB` query parameter; default ``.
+ * @param params.gt_stl_nullable - `number | string` — the `GtSTL` query parameter; default ``.
+ * @param params.gt_td_nullable - `number | string` — the `GtTD` query parameter; default ``.
+ * @param params.gt_tov_nullable - `number | string` — the `GtTOV` query parameter; default ``.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.lt_ast_nullable - `number | string` — the `LtAST` query parameter; default ``.
+ * @param params.lt_blk_nullable - `number | string` — the `LtBLK` query parameter; default ``.
+ * @param params.lt_dd_nullable - `number | string` — the `LtDD` query parameter; default ``.
+ * @param params.lt_dreb_nullable - `number | string` — the `LtDREB` query parameter; default ``.
+ * @param params.lt_fg3a_nullable - `number | string` — the `LtFG3A` query parameter; default ``.
+ * @param params.lt_fg3m_nullable - `number | string` — the `LtFG3M` query parameter; default ``.
+ * @param params.lt_fg3_pct_nullable - `number | string` — the `LtFG3_PCT` query parameter; default ``.
+ * @param params.lt_fga_nullable - `number | string` — the `LtFGA` query parameter; default ``.
+ * @param params.lt_fgm_nullable - `number | string` — the `LtFGM` query parameter; default ``.
+ * @param params.lt_fg_pct_nullable - `number | string` — the `LtFG_PCT` query parameter; default ``.
+ * @param params.lt_fta_nullable - `number | string` — the `LtFTA` query parameter; default ``.
+ * @param params.lt_ftm_nullable - `number | string` — the `LtFTM` query parameter; default ``.
+ * @param params.lt_ft_pct_nullable - `number | string` — the `LtFT_PCT` query parameter; default ``.
+ * @param params.lt_minutes_nullable - `number | string` — the `LtMINUTES` query parameter; default ``.
+ * @param params.lt_oreb_nullable - `number | string` — the `LtOREB` query parameter; default ``.
+ * @param params.lt_pf_nullable - `number | string` — the `LtPF` query parameter; default ``.
+ * @param params.lt_pts_nullable - `number | string` — the `LtPTS` query parameter; default ``.
+ * @param params.lt_reb_nullable - `number | string` — the `LtREB` query parameter; default ``.
+ * @param params.lt_stl_nullable - `number | string` — the `LtSTL` query parameter; default ``.
+ * @param params.lt_td_nullable - `number | string` — the `LtTD` query parameter; default ``.
+ * @param params.lt_tov_nullable - `number | string` — the `LtTOV` query parameter; default ``.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.player_id_nullable - `number | string` — the `PlayerID` query parameter; default ``.
+ * @param params.player_or_team_abbreviation - `number | string` — the `PlayerOrTeam` query parameter; default `T`.
+ * @param params.rookie_year_nullable - `number | string` — the `RookieYear` query parameter; default ``.
+ * @param params.season_nullable - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_nullable - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.vs_team_id_nullable - `number | string` — the `VsTeamID` query parameter; default `0`.
+ * @param params.years_experience_nullable - `number | string` — the `YearsExperience` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguegamefinderRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguegamefinder({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguegamefinder: SectionedWrapper<NbaStatsLeaguegamefinderRow[] | ParsedTables, {}, NbaStatsLeaguegamefinderParams> = (params: WrapperParams = {}) => callFlat(LEAGUEGAMEFINDER_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguegamefinder} (py/R parity). */
@@ -6561,19 +6618,20 @@ const LEAGUEGAMELOG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguegamelog`
  *
- * @param params.counter - query parameter (`Counter`) — default `0`.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.direction - query parameter (`Direction`) — default `ASC`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.player_or_team_abbreviation - query parameter (`PlayerOrTeam`) — default `T`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.sorter - query parameter (`Sorter`) — default `DATE`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.counter - `number | string` — the `Counter` query parameter; default `0`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.direction - `number | string` — the `Direction` query parameter; default `ASC`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.player_or_team_abbreviation - `number | string` — the `PlayerOrTeam` query parameter; default `T`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.sorter - `number | string` — the `Sorter` query parameter; default `DATE`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguegamelogRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguegamelog({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguegamelog: SectionedWrapper<NbaStatsLeaguegamelogRow[] | ParsedTables, {}, NbaStatsLeaguegamelogParams> = (params: WrapperParams = {}) => callFlat(LEAGUEGAMELOG_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguegamelog} (py/R parity). */
@@ -6724,35 +6782,36 @@ const LEAGUEHUSTLESTATSPLAYER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguehustlestatsplayer`
  *
- * @param params.college_nullable - query parameter (`College`) — default ``.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.country_nullable - query parameter (`Country`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.draft_pick_nullable - query parameter (`DraftPick`) — default ``.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default ``.
- * @param params.height_nullable - query parameter (`Height`) — default ``.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month_nullable - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id_nullable - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.per_mode_time - query parameter (`PerMode`) — default `Totals`.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default ``.
- * @param params.player_position_nullable - query parameter (`PlayerPosition`) — default ``.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.weight_nullable - query parameter (`Weight`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.college_nullable - `number | string` — the `College` query parameter; default ``.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.country_nullable - `number | string` — the `Country` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.draft_pick_nullable - `number | string` — the `DraftPick` query parameter; default ``.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default ``.
+ * @param params.height_nullable - `number | string` — the `Height` query parameter; default ``.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id_nullable - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.per_mode_time - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default ``.
+ * @param params.player_position_nullable - `number | string` — the `PlayerPosition` query parameter; default ``.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguehustlestatsplayerRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguehustlestatsplayer({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguehustlestatsplayer: SectionedWrapper<NbaStatsLeaguehustlestatsplayerRow[] | ParsedTables, {}, NbaStatsLeaguehustlestatsplayerParams> = (params: WrapperParams = {}) => callFlat(LEAGUEHUSTLESTATSPLAYER_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguehustlestatsplayer} (py/R parity). */
@@ -6903,35 +6962,36 @@ const LEAGUEHUSTLESTATSTEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguehustlestatsteam`
  *
- * @param params.college_nullable - query parameter (`College`) — default ``.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.country_nullable - query parameter (`Country`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.draft_pick_nullable - query parameter (`DraftPick`) — default ``.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default ``.
- * @param params.height_nullable - query parameter (`Height`) — default ``.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month_nullable - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id_nullable - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.per_mode_time - query parameter (`PerMode`) — default `Totals`.
- * @param params.player_experience_nullable - query parameter (`PlayerExperience`) — default ``.
- * @param params.player_position_nullable - query parameter (`PlayerPosition`) — default ``.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.weight_nullable - query parameter (`Weight`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.college_nullable - `number | string` — the `College` query parameter; default ``.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.country_nullable - `number | string` — the `Country` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.draft_pick_nullable - `number | string` — the `DraftPick` query parameter; default ``.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default ``.
+ * @param params.height_nullable - `number | string` — the `Height` query parameter; default ``.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id_nullable - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.per_mode_time - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.player_experience_nullable - `number | string` — the `PlayerExperience` query parameter; default ``.
+ * @param params.player_position_nullable - `number | string` — the `PlayerPosition` query parameter; default ``.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguehustlestatsteamRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguehustlestatsteam({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguehustlestatsteam: SectionedWrapper<NbaStatsLeaguehustlestatsteamRow[] | ParsedTables, {}, NbaStatsLeaguehustlestatsteamParams> = (params: WrapperParams = {}) => callFlat(LEAGUEHUSTLESTATSTEAM_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguehustlestatsteam} (py/R parity). */
@@ -6992,17 +7052,18 @@ const LEAGUELEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leagueleaders`
  *
- * @param params.active_flag_nullable - query parameter (`ActiveFlag`) — default ``.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.per_mode48 - query parameter (`PerMode`) — default `Totals`.
- * @param params.scope - query parameter (`Scope`) — default `S`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.stat_category_abbreviation - query parameter (`StatCategory`) — default `PTS`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.active_flag_nullable - `number | string` — the `ActiveFlag` query parameter; default ``.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.per_mode48 - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.scope - `number | string` — the `Scope` query parameter; default `S`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.stat_category_abbreviation - `number | string` — the `StatCategory` query parameter; default `PTS`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeagueleadersRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeagueleaders({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeagueleaders: SectionedWrapper<NbaStatsLeagueleadersRow[] | ParsedTables, {}, NbaStatsLeagueleadersParams> = (params: WrapperParams = {}) => callFlat(LEAGUELEADERS_DEF, params);
 /** snake_case alias of {@link nbaStatsLeagueleaders} (py/R parity). */
@@ -7163,37 +7224,38 @@ const LEAGUELINEUPVIZ_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguelineupviz`
  *
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.group_quantity - query parameter (`GroupQuantity`) — default `5`.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.minutes_min - query parameter (`MinutesMin`) — default `10`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.group_quantity - `number | string` — the `GroupQuantity` query parameter; default `5`.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.minutes_min - `number | string` — the `MinutesMin` query parameter; default `10`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguelineupvizRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguelineupviz({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguelineupviz: SectionedWrapper<NbaStatsLeaguelineupvizRow[] | ParsedTables, {}, NbaStatsLeaguelineupvizParams> = (params: WrapperParams = {}) => callFlat(LEAGUELINEUPVIZ_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguelineupviz} (py/R parity). */
@@ -7324,31 +7386,32 @@ const LEAGUEPLAYERONDETAILS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leagueplayerondetails`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeagueplayerondetailsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeagueplayerondetails({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeagueplayerondetails: SectionedWrapper<NbaStatsLeagueplayerondetailsRow[] | ParsedTables, {}, NbaStatsLeagueplayerondetailsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEPLAYERONDETAILS_DEF, params);
 /** snake_case alias of {@link nbaStatsLeagueplayerondetails} (py/R parity). */
@@ -7414,18 +7477,19 @@ const LEAGUESEASONMATCHUPS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leagueseasonmatchups`
  *
- * @param params.def_player_id_nullable - query parameter (`DefPlayerID`) — default ``.
- * @param params.def_team_id_nullable - query parameter (`DefTeamID`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.off_player_id_nullable - query parameter (`OffPlayerID`) — default ``.
- * @param params.off_team_id_nullable - query parameter (`OffTeamID`) — default `0`.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.def_player_id_nullable - `number | string` — the `DefPlayerID` query parameter; default ``.
+ * @param params.def_team_id_nullable - `number | string` — the `DefTeamID` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.off_player_id_nullable - `number | string` — the `OffPlayerID` query parameter; default ``.
+ * @param params.off_team_id_nullable - `number | string` — the `OffTeamID` query parameter; default `0`.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeagueseasonmatchupsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeagueseasonmatchups({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeagueseasonmatchups: SectionedWrapper<NbaStatsLeagueseasonmatchupsRow[] | ParsedTables, {}, NbaStatsLeagueseasonmatchupsParams> = (params: WrapperParams = {}) => callFlat(LEAGUESEASONMATCHUPS_DEF, params);
 /** snake_case alias of {@link nbaStatsLeagueseasonmatchups} (py/R parity). */
@@ -7471,14 +7535,15 @@ const LEAGUESTANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguestandings`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.season_nullable - query parameter (`SeasonYear`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.season_nullable - `number | string` — the `SeasonYear` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguestandingsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguestandings({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguestandings: SectionedWrapper<NbaStatsLeaguestandingsRow[] | ParsedTables, {}, NbaStatsLeaguestandingsParams> = (params: WrapperParams = {}) => callFlat(LEAGUESTANDINGS_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguestandings} (py/R parity). */
@@ -7524,14 +7589,15 @@ const LEAGUESTANDINGSV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/leaguestandingsv3`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.season_nullable - query parameter (`SeasonYear`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.season_nullable - `number | string` — the `SeasonYear` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsLeaguestandingsv3Row[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsLeaguestandingsv3({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsLeaguestandingsv3: SectionedWrapper<NbaStatsLeaguestandingsv3Row[] | ParsedTables, {}, NbaStatsLeaguestandingsv3Params> = (params: WrapperParams = {}) => callFlat(LEAGUESTANDINGSV3_DEF, params);
 /** snake_case alias of {@link nbaStatsLeaguestandingsv3} (py/R parity). */
@@ -7597,18 +7663,19 @@ const MATCHUPSROLLUP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/matchupsrollup`
  *
- * @param params.def_player_id_nullable - query parameter (`DefPlayerID`) — default ``.
- * @param params.def_team_id_nullable - query parameter (`DefTeamID`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.off_player_id_nullable - query parameter (`OffPlayerID`) — default ``.
- * @param params.off_team_id_nullable - query parameter (`OffTeamID`) — default `0`.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.def_player_id_nullable - `number | string` — the `DefPlayerID` query parameter; default ``.
+ * @param params.def_team_id_nullable - `number | string` — the `DefTeamID` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.off_player_id_nullable - `number | string` — the `OffPlayerID` query parameter; default ``.
+ * @param params.off_team_id_nullable - `number | string` — the `OffTeamID` query parameter; default `0`.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsMatchupsrollupRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsMatchupsrollup({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsMatchupsrollup: SectionedWrapper<NbaStatsMatchupsrollupRow[] | ParsedTables, {}, NbaStatsMatchupsrollupParams> = (params: WrapperParams = {}) => callFlat(MATCHUPSROLLUP_DEF, params);
 /** snake_case alias of {@link nbaStatsMatchupsrollup} (py/R parity). */
@@ -7648,13 +7715,14 @@ const PLAYBYPLAYV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playbyplayv3`
  *
- * @param params.end_period - query parameter (`EndPeriod`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `22201086`.
- * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.end_period - `number | string` — the `EndPeriod` query parameter; default `0`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `22201086`.
+ * @param params.start_period - `number | string` — the `StartPeriod` query parameter; default `0`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlaybyplayv3({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlaybyplayv3: SectionedWrapper<Row[] | ParsedTables, {}, NbaStatsPlaybyplayv3Params> = (params: WrapperParams = {}) => callFlat(PLAYBYPLAYV3_DEF, params);
 /** snake_case alias of {@link nbaStatsPlaybyplayv3} (py/R parity). */
@@ -7684,11 +7752,12 @@ const PLAYERAWARDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerawards`
  *
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerawardsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerawards({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerawards: SectionedWrapper<NbaStatsPlayerawardsRow[] | ParsedTables, {}, NbaStatsPlayerawardsParams> = (params: WrapperParams = {}) => callFlat(PLAYERAWARDS_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerawards} (py/R parity). */
@@ -7734,14 +7803,15 @@ const PLAYERCAREERBYCOLLEGEROLLUP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playercareerbycollegerollup`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.season_nullable - query parameter (`Season`) — default `null`.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `East`, `South`, `Midwest`, `West`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.season_nullable - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayercareerbycollegerollupTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `East`, `South`, `Midwest`, `West`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayercareerbycollegerollup({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayercareerbycollegerollup: SectionedWrapper<NbaStatsPlayercareerbycollegerollupTables | Row[], NbaStatsPlayercareerbycollegerollupTables, NbaStatsPlayercareerbycollegerollupParams> = (params: WrapperParams = {}) => callFlat(PLAYERCAREERBYCOLLEGEROLLUP_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayercareerbycollegerollup} (py/R parity). */
@@ -7781,13 +7851,14 @@ const PLAYERCAREERSTATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playercareerstats`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.per_mode36 - query parameter (`PerMode`) — default `Totals`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsShowcaseSeason`, `CareerTotalsShowcaseSeason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.per_mode36 - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayercareerstatsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsShowcaseSeason`, `CareerTotalsShowcaseSeason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayercareerstats({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayercareerstats: SectionedWrapper<NbaStatsPlayercareerstatsTables | Row[], NbaStatsPlayercareerstatsTables, NbaStatsPlayercareerstatsParams> = (params: WrapperParams = {}) => callFlat(PLAYERCAREERSTATS_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayercareerstats} (py/R parity). */
@@ -7937,35 +8008,36 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playercompare`
  *
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default `null`.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id_list - query parameter (`PlayerIDList`) — default `202681,203078,2544,201567,203954`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `2020-21`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.vs_player_id_list - query parameter (`VsPlayerIDList`) — default `201566,201939,201935,201142,203076`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallCompare`, `Individual`.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default `null`.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id_list - `number | string` — the `PlayerIDList` query parameter; default `202681,203078,2544,201567,203954`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — the `Season` query parameter; default `2020-21`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.vs_player_id_list - `number | string` — the `VsPlayerIDList` query parameter; default `201566,201939,201935,201142,203076`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayercompareTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallCompare`, `Individual`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayercompare({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayercompare: SectionedWrapper<NbaStatsPlayercompareTables | Row[], NbaStatsPlayercompareTables, NbaStatsPlayercompareParams> = (params: WrapperParams = {}) => callFlat(PLAYERCOMPARE_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayercompare} (py/R parity). */
@@ -8106,33 +8178,34 @@ const PLAYERDASHBOARDBYCLUTCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerdashboardbyclutch`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5Min5PointPlayerDashboard`, `Last3Min5PointPlayerDashboard`, `Last1Min5PointPlayerDashboard`, `Last30Sec3PointPlayerDashboard`, `Last10Sec3PointPlayerDashboard`, `Last5MinPlusMinus5PointPlayerDashboard`, `Last3MinPlusMinus5PointPlayerDashboard`, `Last1MinPlusMinus5PointPlayerDashboard`, `Last30Sec3Point2PlayerDashboard`, `Last10Sec3Point2PlayerDashboard`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerdashboardbyclutchTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5Min5PointPlayerDashboard`, `Last3Min5PointPlayerDashboard`, `Last1Min5PointPlayerDashboard`, `Last30Sec3PointPlayerDashboard`, `Last10Sec3PointPlayerDashboard`, `Last5MinPlusMinus5PointPlayerDashboard`, `Last3MinPlusMinus5PointPlayerDashboard`, `Last1MinPlusMinus5PointPlayerDashboard`, `Last30Sec3Point2PlayerDashboard`, `Last10Sec3Point2PlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyclutch({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerdashboardbyclutch: SectionedWrapper<NbaStatsPlayerdashboardbyclutchTables | Row[], NbaStatsPlayerdashboardbyclutchTables, NbaStatsPlayerdashboardbyclutchParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYCLUTCH_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerdashboardbyclutch} (py/R parity). */
@@ -8273,33 +8346,34 @@ const PLAYERDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerdashboardbygamesplits`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByHalfPlayerDashboard`, `ByPeriodPlayerDashboard`, `ByScoreMarginPlayerDashboard`, `ByActualMarginPlayerDashboard`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerdashboardbygamesplitsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByHalfPlayerDashboard`, `ByPeriodPlayerDashboard`, `ByScoreMarginPlayerDashboard`, `ByActualMarginPlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerdashboardbygamesplits({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerdashboardbygamesplits: SectionedWrapper<NbaStatsPlayerdashboardbygamesplitsTables | Row[], NbaStatsPlayerdashboardbygamesplitsTables, NbaStatsPlayerdashboardbygamesplitsParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYGAMESPLITS_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerdashboardbygamesplits} (py/R parity). */
@@ -8440,33 +8514,34 @@ const PLAYERDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerdashboardbygeneralsplits`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `LocationPlayerDashboard`, `WinsLossesPlayerDashboard`, `MonthPlayerDashboard`, `PrePostAllStarPlayerDashboard`, `StartingPosition`, `DaysRestPlayerDashboard`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerdashboardbygeneralsplitsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `LocationPlayerDashboard`, `WinsLossesPlayerDashboard`, `MonthPlayerDashboard`, `PrePostAllStarPlayerDashboard`, `StartingPosition`, `DaysRestPlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerdashboardbygeneralsplits({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerdashboardbygeneralsplits: SectionedWrapper<NbaStatsPlayerdashboardbygeneralsplitsTables | Row[], NbaStatsPlayerdashboardbygeneralsplitsTables, NbaStatsPlayerdashboardbygeneralsplitsParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYGENERALSPLITS_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerdashboardbygeneralsplits} (py/R parity). */
@@ -8607,33 +8682,34 @@ const PLAYERDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerdashboardbylastngames`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5PlayerDashboard`, `Last10PlayerDashboard`, `Last15PlayerDashboard`, `Last20PlayerDashboard`, `GameNumberPlayerDashboard`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerdashboardbylastngamesTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5PlayerDashboard`, `Last10PlayerDashboard`, `Last15PlayerDashboard`, `Last20PlayerDashboard`, `GameNumberPlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerdashboardbylastngames({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerdashboardbylastngames: SectionedWrapper<NbaStatsPlayerdashboardbylastngamesTables | Row[], NbaStatsPlayerdashboardbylastngamesTables, NbaStatsPlayerdashboardbylastngamesParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYLASTNGAMES_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerdashboardbylastngames} (py/R parity). */
@@ -8774,33 +8850,34 @@ const PLAYERDASHBOARDBYOPPONENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerdashboardbyopponent`
  *
- * @param params.date_from - query parameter (`DateFrom`) — default ``.
- * @param params.date_to - query parameter (`DateTo`) — default ``.
- * @param params.game_segment - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location - query parameter (`Location`) — default ``.
- * @param params.measure_type - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome - query parameter (`Outcome`) — default ``.
- * @param params.po_round - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.vs_conference - query parameter (`VsConference`) — default ``.
- * @param params.vs_division - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ConferencePlayerDashboard`, `DivisionPlayerDashboard`, `OpponentPlayerDashboard`.
+ * @param params.date_from - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.vs_conference - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerdashboardbyopponentTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ConferencePlayerDashboard`, `DivisionPlayerDashboard`, `OpponentPlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyopponent({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerdashboardbyopponent: SectionedWrapper<NbaStatsPlayerdashboardbyopponentTables | Row[], NbaStatsPlayerdashboardbyopponentTables, NbaStatsPlayerdashboardbyopponentParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYOPPONENT_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerdashboardbyopponent} (py/R parity). */
@@ -8941,33 +9018,34 @@ const PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerdashboardbyshootingsplits`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Shot5FTPlayerDashboard`, `Shot8FTPlayerDashboard`, `ShotAreaPlayerDashboard`, `AssitedShotPlayerDashboard`, `ShotTypeSummaryPlayerDashboard`, `ShotTypePlayerDashboard`, `AssistedBy`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerdashboardbyshootingsplitsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Shot5FTPlayerDashboard`, `Shot8FTPlayerDashboard`, `ShotAreaPlayerDashboard`, `AssitedShotPlayerDashboard`, `ShotTypeSummaryPlayerDashboard`, `ShotTypePlayerDashboard`, `AssistedBy`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyshootingsplits({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerdashboardbyshootingsplits: SectionedWrapper<NbaStatsPlayerdashboardbyshootingsplitsTables | Row[], NbaStatsPlayerdashboardbyshootingsplitsTables, NbaStatsPlayerdashboardbyshootingsplitsParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerdashboardbyshootingsplits} (py/R parity). */
@@ -9108,33 +9186,34 @@ const PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerdashboardbyteamperformance`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ScoreDifferentialPlayerDashboard`, `PointsScoredPlayerDashboard`, `PontsAgainstPlayerDashboard`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerdashboardbyteamperformanceTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ScoreDifferentialPlayerDashboard`, `PointsScoredPlayerDashboard`, `PontsAgainstPlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyteamperformance({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerdashboardbyteamperformance: SectionedWrapper<NbaStatsPlayerdashboardbyteamperformanceTables | Row[], NbaStatsPlayerdashboardbyteamperformanceTables, NbaStatsPlayerdashboardbyteamperformanceParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerdashboardbyteamperformance} (py/R parity). */
@@ -9275,33 +9354,34 @@ const PLAYERDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerdashboardbyyearoveryear`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByYearPlayerDashboard`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerdashboardbyyearoveryearTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByYearPlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyyearoveryear({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerdashboardbyyearoveryear: SectionedWrapper<NbaStatsPlayerdashboardbyyearoveryearTables | Row[], NbaStatsPlayerdashboardbyyearoveryearTables, NbaStatsPlayerdashboardbyyearoveryearParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYYEAROVERYEAR_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerdashboardbyyearoveryear} (py/R parity). */
@@ -9407,26 +9487,27 @@ const PLAYERDASHPTPASS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerdashptpass`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PassesMade`, `PassesReceived`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerdashptpassTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PassesMade`, `PassesReceived`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerdashptpass({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerdashptpass: SectionedWrapper<NbaStatsPlayerdashptpassTables | Row[], NbaStatsPlayerdashptpassTables, NbaStatsPlayerdashptpassParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHPTPASS_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerdashptpass} (py/R parity). */
@@ -9542,28 +9623,29 @@ const PLAYERDASHPTREB_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerdashptreb`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallRebounding`, `ShotTypeRebounding`, `NumContestedRebounding`, `ShotDistanceRebounding`, `RebDistanceRebounding`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerdashptrebTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallRebounding`, `ShotTypeRebounding`, `NumContestedRebounding`, `ShotDistanceRebounding`, `RebDistanceRebounding`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerdashptreb({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerdashptreb: SectionedWrapper<NbaStatsPlayerdashptrebTables | Row[], NbaStatsPlayerdashptrebTables, NbaStatsPlayerdashptrebParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHPTREB_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerdashptreb} (py/R parity). */
@@ -9679,28 +9761,29 @@ const PLAYERDASHPTSHOTDEFEND_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerdashptshotdefend`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerdashptshotdefendRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerdashptshotdefend({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerdashptshotdefend: SectionedWrapper<NbaStatsPlayerdashptshotdefendRow[] | ParsedTables, {}, NbaStatsPlayerdashptshotdefendParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHPTSHOTDEFEND_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerdashptshotdefend} (py/R parity). */
@@ -9816,28 +9899,29 @@ const PLAYERDASHPTSHOTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerdashptshots`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612747`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `GeneralShooting`, `ShotClockShooting`, `DribbleShooting`, `ClosestDefenderShooting`, `ClosestDefender10ftPlusShooting`, `TouchTimeShooting`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612747`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerdashptshotsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `GeneralShooting`, `ShotClockShooting`, `DribbleShooting`, `ClosestDefenderShooting`, `ClosestDefender10ftPlusShooting`, `TouchTimeShooting`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerdashptshots({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerdashptshots: SectionedWrapper<NbaStatsPlayerdashptshotsTables | Row[], NbaStatsPlayerdashptshotsTables, NbaStatsPlayerdashptshotsParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHPTSHOTS_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerdashptshots} (py/R parity). */
@@ -9878,13 +9962,14 @@ const PLAYERESTIMATEDMETRICS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerestimatedmetrics`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerestimatedmetricsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerestimatedmetrics({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerestimatedmetrics: SectionedWrapper<NbaStatsPlayerestimatedmetricsRow[] | ParsedTables, {}, NbaStatsPlayerestimatedmetricsParams> = (params: WrapperParams = {}) => callFlat(PLAYERESTIMATEDMETRICS_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerestimatedmetrics} (py/R parity). */
@@ -9955,19 +10040,20 @@ const PLAYERFANTASYPROFILE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerfantasyprofile`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.measure_type - query parameter (`MeasureType`) — default `Base`.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode - query parameter (`PerMode`) — default `Totals`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `Location`, `LastNGames`, `DaysRestModified`, `Opponent`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.measure_type - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerfantasyprofileTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `Location`, `LastNGames`, `DaysRestModified`, `Opponent`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerfantasyprofile({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerfantasyprofile: SectionedWrapper<NbaStatsPlayerfantasyprofileTables | Row[], NbaStatsPlayerfantasyprofileTables, NbaStatsPlayerfantasyprofileParams> = (params: WrapperParams = {}) => callFlat(PLAYERFANTASYPROFILE_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerfantasyprofile} (py/R parity). */
@@ -10013,14 +10099,15 @@ const PLAYERFANTASYPROFILEBARGRAPH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerfantasyprofilebargraph`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_all_star_nullable - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonAvg`, `LastFiveGamesAvg`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_all_star_nullable - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerfantasyprofilebargraphTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `SeasonAvg`, `LastFiveGamesAvg`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerfantasyprofilebargraph({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerfantasyprofilebargraph: SectionedWrapper<NbaStatsPlayerfantasyprofilebargraphTables | Row[], NbaStatsPlayerfantasyprofilebargraphTables, NbaStatsPlayerfantasyprofilebargraphParams> = (params: WrapperParams = {}) => callFlat(PLAYERFANTASYPROFILEBARGRAPH_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerfantasyprofilebargraph} (py/R parity). */
@@ -10076,16 +10163,17 @@ const PLAYERGAMELOG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playergamelog`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayergamelogRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayergamelog({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayergamelog: SectionedWrapper<NbaStatsPlayergamelogRow[] | ParsedTables, {}, NbaStatsPlayergamelogParams> = (params: WrapperParams = {}) => callFlat(PLAYERGAMELOG_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayergamelog} (py/R parity). */
@@ -10216,31 +10304,32 @@ const PLAYERGAMELOGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playergamelogs`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games_nullable - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_player_game_logs_nullable - query parameter (`MeasureType`) — default `Base`.
- * @param params.month_nullable - query parameter (`Month`) — default `0`.
- * @param params.oppteamid - query parameter (`OppTeamID`) — default `null`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.per_mode_simple_nullable - query parameter (`PerMode`) — default `Totals`.
- * @param params.period_nullable - query parameter (`Period`) — default `0`.
- * @param params.player_id_nullable - query parameter (`PlayerID`) — default ``.
- * @param params.season_nullable - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_nullable - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default `null`.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games_nullable - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_player_game_logs_nullable - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.oppteamid - `number | string` — the `OppTeamID` query parameter; default `null`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.per_mode_simple_nullable - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period_nullable - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id_nullable - `number | string` — the `PlayerID` query parameter; default ``.
+ * @param params.season_nullable - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_nullable - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default `null`.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayergamelogsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayergamelogs({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayergamelogs: SectionedWrapper<NbaStatsPlayergamelogsRow[] | ParsedTables, {}, NbaStatsPlayergamelogsParams> = (params: WrapperParams = {}) => callFlat(PLAYERGAMELOGS_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayergamelogs} (py/R parity). */
@@ -10711,99 +10800,100 @@ const PLAYERGAMESTREAKFINDER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playergamestreakfinder`
  *
- * @param params.active_streaks_only_nullable - query parameter (`ActiveStreaksOnly`) — default ``.
- * @param params.conference_nullable - query parameter (`Conference`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.division_simple_nullable - query parameter (`Division`) — default ``.
- * @param params.draft_number_nullable - query parameter (`DraftNumber`) — default ``.
- * @param params.draft_round_nullable - query parameter (`DraftRound`) — default ``.
- * @param params.draft_team_id_nullable - query parameter (`DraftTeamID`) — default `0`.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default ``.
- * @param params.eq_ast_nullable - query parameter (`EqAST`) — default ``.
- * @param params.eq_blk_nullable - query parameter (`EqBLK`) — default ``.
- * @param params.eq_dd_nullable - query parameter (`EqDD`) — default ``.
- * @param params.eq_dreb_nullable - query parameter (`EqDREB`) — default ``.
- * @param params.eq_fg3a_nullable - query parameter (`EqFG3A`) — default ``.
- * @param params.eq_fg3m_nullable - query parameter (`EqFG3M`) — default ``.
- * @param params.eq_fg3_pct_nullable - query parameter (`EqFG3_PCT`) — default ``.
- * @param params.eq_fga_nullable - query parameter (`EqFGA`) — default ``.
- * @param params.eq_fgm_nullable - query parameter (`EqFGM`) — default ``.
- * @param params.eq_fg_pct_nullable - query parameter (`EqFG_PCT`) — default ``.
- * @param params.eq_fta_nullable - query parameter (`EqFTA`) — default ``.
- * @param params.eq_ftm_nullable - query parameter (`EqFTM`) — default ``.
- * @param params.eq_ft_pct_nullable - query parameter (`EqFT_PCT`) — default ``.
- * @param params.eq_minutes_nullable - query parameter (`EqMINUTES`) — default ``.
- * @param params.eq_oreb_nullable - query parameter (`EqOREB`) — default ``.
- * @param params.eq_pf_nullable - query parameter (`EqPF`) — default ``.
- * @param params.eq_pts_nullable - query parameter (`EqPTS`) — default ``.
- * @param params.eq_reb_nullable - query parameter (`EqREB`) — default ``.
- * @param params.eq_stl_nullable - query parameter (`EqSTL`) — default ``.
- * @param params.eq_td_nullable - query parameter (`EqTD`) — default ``.
- * @param params.eq_tov_nullable - query parameter (`EqTOV`) — default ``.
- * @param params.game_id_nullable - query parameter (`GameID`) — default ``.
- * @param params.gt_ast_nullable - query parameter (`GtAST`) — default ``.
- * @param params.gt_blk_nullable - query parameter (`GtBLK`) — default ``.
- * @param params.gt_dd_nullable - query parameter (`GtDD`) — default ``.
- * @param params.gt_dreb_nullable - query parameter (`GtDREB`) — default ``.
- * @param params.gt_fg3a_nullable - query parameter (`GtFG3A`) — default ``.
- * @param params.gt_fg3m_nullable - query parameter (`GtFG3M`) — default ``.
- * @param params.gt_fg3_pct_nullable - query parameter (`GtFG3_PCT`) — default ``.
- * @param params.gt_fga_nullable - query parameter (`GtFGA`) — default ``.
- * @param params.gt_fgm_nullable - query parameter (`GtFGM`) — default ``.
- * @param params.gt_fg_pct_nullable - query parameter (`GtFG_PCT`) — default ``.
- * @param params.gt_fta_nullable - query parameter (`GtFTA`) — default ``.
- * @param params.gt_ftm_nullable - query parameter (`GtFTM`) — default ``.
- * @param params.gt_ft_pct_nullable - query parameter (`GtFT_PCT`) — default ``.
- * @param params.gt_minutes_nullable - query parameter (`GtMINUTES`) — default ``.
- * @param params.gt_oreb_nullable - query parameter (`GtOREB`) — default ``.
- * @param params.gt_pf_nullable - query parameter (`GtPF`) — default ``.
- * @param params.gt_pts_nullable - query parameter (`GtPTS`) — default ``.
- * @param params.gt_reb_nullable - query parameter (`GtREB`) — default ``.
- * @param params.gt_stl_nullable - query parameter (`GtSTL`) — default ``.
- * @param params.gt_td_nullable - query parameter (`GtTD`) — default ``.
- * @param params.gt_tov_nullable - query parameter (`GtTOV`) — default ``.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.lt_ast_nullable - query parameter (`LtAST`) — default ``.
- * @param params.lt_blk_nullable - query parameter (`LtBLK`) — default ``.
- * @param params.lt_dd_nullable - query parameter (`LtDD`) — default ``.
- * @param params.lt_dreb_nullable - query parameter (`LtDREB`) — default ``.
- * @param params.lt_fg3a_nullable - query parameter (`LtFG3A`) — default ``.
- * @param params.lt_fg3m_nullable - query parameter (`LtFG3M`) — default ``.
- * @param params.lt_fg3_pct_nullable - query parameter (`LtFG3_PCT`) — default ``.
- * @param params.lt_fga_nullable - query parameter (`LtFGA`) — default ``.
- * @param params.lt_fgm_nullable - query parameter (`LtFGM`) — default ``.
- * @param params.lt_fg_pct_nullable - query parameter (`LtFG_PCT`) — default ``.
- * @param params.lt_fta_nullable - query parameter (`LtFTA`) — default ``.
- * @param params.lt_ftm_nullable - query parameter (`LtFTM`) — default ``.
- * @param params.lt_ft_pct_nullable - query parameter (`LtFT_PCT`) — default ``.
- * @param params.lt_minutes_nullable - query parameter (`LtMINUTES`) — default ``.
- * @param params.lt_oreb_nullable - query parameter (`LtOREB`) — default ``.
- * @param params.lt_pf_nullable - query parameter (`LtPF`) — default ``.
- * @param params.lt_pts_nullable - query parameter (`LtPTS`) — default ``.
- * @param params.lt_reb_nullable - query parameter (`LtREB`) — default ``.
- * @param params.lt_stl_nullable - query parameter (`LtSTL`) — default ``.
- * @param params.lt_td_nullable - query parameter (`LtTD`) — default ``.
- * @param params.lt_tov_nullable - query parameter (`LtTOV`) — default ``.
- * @param params.min_games_nullable - query parameter (`MinGames`) — default ``.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.player_id_nullable - query parameter (`PlayerID`) — default ``.
- * @param params.rookie_year_nullable - query parameter (`RookieYear`) — default ``.
- * @param params.season_nullable - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_nullable - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.starter_bench_nullable - query parameter (`StarterBench`) — default ``.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.vs_team_id_nullable - query parameter (`VsTeamID`) — default `0`.
- * @param params.years_experience_nullable - query parameter (`YearsExperience`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.active_streaks_only_nullable - `number | string` — the `ActiveStreaksOnly` query parameter; default ``.
+ * @param params.conference_nullable - `number | string` — the `Conference` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.division_simple_nullable - `number | string` — the `Division` query parameter; default ``.
+ * @param params.draft_number_nullable - `number | string` — the `DraftNumber` query parameter; default ``.
+ * @param params.draft_round_nullable - `number | string` — the `DraftRound` query parameter; default ``.
+ * @param params.draft_team_id_nullable - `number | string` — the `DraftTeamID` query parameter; default `0`.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default ``.
+ * @param params.eq_ast_nullable - `number | string` — the `EqAST` query parameter; default ``.
+ * @param params.eq_blk_nullable - `number | string` — the `EqBLK` query parameter; default ``.
+ * @param params.eq_dd_nullable - `number | string` — the `EqDD` query parameter; default ``.
+ * @param params.eq_dreb_nullable - `number | string` — the `EqDREB` query parameter; default ``.
+ * @param params.eq_fg3a_nullable - `number | string` — the `EqFG3A` query parameter; default ``.
+ * @param params.eq_fg3m_nullable - `number | string` — the `EqFG3M` query parameter; default ``.
+ * @param params.eq_fg3_pct_nullable - `number | string` — the `EqFG3_PCT` query parameter; default ``.
+ * @param params.eq_fga_nullable - `number | string` — the `EqFGA` query parameter; default ``.
+ * @param params.eq_fgm_nullable - `number | string` — the `EqFGM` query parameter; default ``.
+ * @param params.eq_fg_pct_nullable - `number | string` — the `EqFG_PCT` query parameter; default ``.
+ * @param params.eq_fta_nullable - `number | string` — the `EqFTA` query parameter; default ``.
+ * @param params.eq_ftm_nullable - `number | string` — the `EqFTM` query parameter; default ``.
+ * @param params.eq_ft_pct_nullable - `number | string` — the `EqFT_PCT` query parameter; default ``.
+ * @param params.eq_minutes_nullable - `number | string` — the `EqMINUTES` query parameter; default ``.
+ * @param params.eq_oreb_nullable - `number | string` — the `EqOREB` query parameter; default ``.
+ * @param params.eq_pf_nullable - `number | string` — the `EqPF` query parameter; default ``.
+ * @param params.eq_pts_nullable - `number | string` — the `EqPTS` query parameter; default ``.
+ * @param params.eq_reb_nullable - `number | string` — the `EqREB` query parameter; default ``.
+ * @param params.eq_stl_nullable - `number | string` — the `EqSTL` query parameter; default ``.
+ * @param params.eq_td_nullable - `number | string` — the `EqTD` query parameter; default ``.
+ * @param params.eq_tov_nullable - `number | string` — the `EqTOV` query parameter; default ``.
+ * @param params.game_id_nullable - `number | string` — the `GameID` query parameter; default ``.
+ * @param params.gt_ast_nullable - `number | string` — the `GtAST` query parameter; default ``.
+ * @param params.gt_blk_nullable - `number | string` — the `GtBLK` query parameter; default ``.
+ * @param params.gt_dd_nullable - `number | string` — the `GtDD` query parameter; default ``.
+ * @param params.gt_dreb_nullable - `number | string` — the `GtDREB` query parameter; default ``.
+ * @param params.gt_fg3a_nullable - `number | string` — the `GtFG3A` query parameter; default ``.
+ * @param params.gt_fg3m_nullable - `number | string` — the `GtFG3M` query parameter; default ``.
+ * @param params.gt_fg3_pct_nullable - `number | string` — the `GtFG3_PCT` query parameter; default ``.
+ * @param params.gt_fga_nullable - `number | string` — the `GtFGA` query parameter; default ``.
+ * @param params.gt_fgm_nullable - `number | string` — the `GtFGM` query parameter; default ``.
+ * @param params.gt_fg_pct_nullable - `number | string` — the `GtFG_PCT` query parameter; default ``.
+ * @param params.gt_fta_nullable - `number | string` — the `GtFTA` query parameter; default ``.
+ * @param params.gt_ftm_nullable - `number | string` — the `GtFTM` query parameter; default ``.
+ * @param params.gt_ft_pct_nullable - `number | string` — the `GtFT_PCT` query parameter; default ``.
+ * @param params.gt_minutes_nullable - `number | string` — the `GtMINUTES` query parameter; default ``.
+ * @param params.gt_oreb_nullable - `number | string` — the `GtOREB` query parameter; default ``.
+ * @param params.gt_pf_nullable - `number | string` — the `GtPF` query parameter; default ``.
+ * @param params.gt_pts_nullable - `number | string` — the `GtPTS` query parameter; default ``.
+ * @param params.gt_reb_nullable - `number | string` — the `GtREB` query parameter; default ``.
+ * @param params.gt_stl_nullable - `number | string` — the `GtSTL` query parameter; default ``.
+ * @param params.gt_td_nullable - `number | string` — the `GtTD` query parameter; default ``.
+ * @param params.gt_tov_nullable - `number | string` — the `GtTOV` query parameter; default ``.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.lt_ast_nullable - `number | string` — the `LtAST` query parameter; default ``.
+ * @param params.lt_blk_nullable - `number | string` — the `LtBLK` query parameter; default ``.
+ * @param params.lt_dd_nullable - `number | string` — the `LtDD` query parameter; default ``.
+ * @param params.lt_dreb_nullable - `number | string` — the `LtDREB` query parameter; default ``.
+ * @param params.lt_fg3a_nullable - `number | string` — the `LtFG3A` query parameter; default ``.
+ * @param params.lt_fg3m_nullable - `number | string` — the `LtFG3M` query parameter; default ``.
+ * @param params.lt_fg3_pct_nullable - `number | string` — the `LtFG3_PCT` query parameter; default ``.
+ * @param params.lt_fga_nullable - `number | string` — the `LtFGA` query parameter; default ``.
+ * @param params.lt_fgm_nullable - `number | string` — the `LtFGM` query parameter; default ``.
+ * @param params.lt_fg_pct_nullable - `number | string` — the `LtFG_PCT` query parameter; default ``.
+ * @param params.lt_fta_nullable - `number | string` — the `LtFTA` query parameter; default ``.
+ * @param params.lt_ftm_nullable - `number | string` — the `LtFTM` query parameter; default ``.
+ * @param params.lt_ft_pct_nullable - `number | string` — the `LtFT_PCT` query parameter; default ``.
+ * @param params.lt_minutes_nullable - `number | string` — the `LtMINUTES` query parameter; default ``.
+ * @param params.lt_oreb_nullable - `number | string` — the `LtOREB` query parameter; default ``.
+ * @param params.lt_pf_nullable - `number | string` — the `LtPF` query parameter; default ``.
+ * @param params.lt_pts_nullable - `number | string` — the `LtPTS` query parameter; default ``.
+ * @param params.lt_reb_nullable - `number | string` — the `LtREB` query parameter; default ``.
+ * @param params.lt_stl_nullable - `number | string` — the `LtSTL` query parameter; default ``.
+ * @param params.lt_td_nullable - `number | string` — the `LtTD` query parameter; default ``.
+ * @param params.lt_tov_nullable - `number | string` — the `LtTOV` query parameter; default ``.
+ * @param params.min_games_nullable - `number | string` — the `MinGames` query parameter; default ``.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.player_id_nullable - `number | string` — the `PlayerID` query parameter; default ``.
+ * @param params.rookie_year_nullable - `number | string` — the `RookieYear` query parameter; default ``.
+ * @param params.season_nullable - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_nullable - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.starter_bench_nullable - `number | string` — the `StarterBench` query parameter; default ``.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.vs_team_id_nullable - `number | string` — the `VsTeamID` query parameter; default `0`.
+ * @param params.years_experience_nullable - `number | string` — the `YearsExperience` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayergamestreakfinderRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayergamestreakfinder({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayergamestreakfinder: SectionedWrapper<NbaStatsPlayergamestreakfinderRow[] | ParsedTables, {}, NbaStatsPlayergamestreakfinderParams> = (params: WrapperParams = {}) => callFlat(PLAYERGAMESTREAKFINDER_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayergamestreakfinder} (py/R parity). */
@@ -10894,23 +10984,24 @@ const PLAYERINDEX_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerindex`
  *
- * @param params.active_nullable - query parameter (`Active`) — default `null`.
- * @param params.allstar_nullable - query parameter (`AllStar`) — default `null`.
- * @param params.college_nullable - query parameter (`College`) — default ``.
- * @param params.country_nullable - query parameter (`Country`) — default ``.
- * @param params.draft_pick_nullable - query parameter (`DraftPick`) — default ``.
- * @param params.draft_round_nullable - query parameter (`DraftRound`) — default ``.
- * @param params.draft_year_nullable - query parameter (`DraftYear`) — default ``.
- * @param params.height_nullable - query parameter (`Height`) — default ``.
- * @param params.historical_nullable - query parameter (`Historical`) — default `1`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.weight_nullable - query parameter (`Weight`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.active_nullable - `number | string` — the `Active` query parameter; default `null`.
+ * @param params.allstar_nullable - `number | string` — the `AllStar` query parameter; default `null`.
+ * @param params.college_nullable - `number | string` — the `College` query parameter; default ``.
+ * @param params.country_nullable - `number | string` — the `Country` query parameter; default ``.
+ * @param params.draft_pick_nullable - `number | string` — the `DraftPick` query parameter; default ``.
+ * @param params.draft_round_nullable - `number | string` — the `DraftRound` query parameter; default ``.
+ * @param params.draft_year_nullable - `number | string` — the `DraftYear` query parameter; default ``.
+ * @param params.height_nullable - `number | string` — the `Height` query parameter; default ``.
+ * @param params.historical_nullable - `number | string` — the `Historical` query parameter; default `1`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerindexRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerindex({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerindex: SectionedWrapper<NbaStatsPlayerindexRow[] | ParsedTables, {}, NbaStatsPlayerindexParams> = (params: WrapperParams = {}) => callFlat(PLAYERINDEX_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerindex} (py/R parity). */
@@ -10950,13 +11041,14 @@ const PLAYERPROFILEV2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerprofilev2`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.per_mode36 - query parameter (`PerMode`) — default `Totals`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsPreseason`, `CareerTotalsPreseason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`, `NextGame`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.per_mode36 - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayerprofilev2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsPreseason`, `CareerTotalsPreseason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`, `NextGame`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayerprofilev2({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayerprofilev2: SectionedWrapper<NbaStatsPlayerprofilev2Tables | Row[], NbaStatsPlayerprofilev2Tables, NbaStatsPlayerprofilev2Params> = (params: WrapperParams = {}) => callFlat(PLAYERPROFILEV2_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayerprofilev2} (py/R parity). */
@@ -11092,32 +11184,33 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playervsplayer`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.vs_player_id - query parameter (`VsPlayerID`) — default `203076`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`, `PlayerInfo`, `VsPlayerInfo`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.vs_player_id - `number | string` — the `VsPlayerID` query parameter; default `203076`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayervsplayerTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`, `PlayerInfo`, `VsPlayerInfo`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayervsplayer({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayervsplayer: SectionedWrapper<NbaStatsPlayervsplayerTables | Row[], NbaStatsPlayervsplayerTables, NbaStatsPlayervsplayerParams> = (params: WrapperParams = {}) => callFlat(PLAYERVSPLAYER_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayervsplayer} (py/R parity). */
@@ -11152,12 +11245,13 @@ const PLAYOFFPICTURE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playoffpicture`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season_id - query parameter (`SeasonID`) — default `22022`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `EastConfPlayoffPicture`, `WestConfPlayoffPicture`, `EastConfStandings`, `WestConfStandings`, `EastConfRemainingGames`, `WestConfRemainingGames`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season_id - `number | string` — the `SeasonID` query parameter; default `22022`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsPlayoffpictureTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `EastConfPlayoffPicture`, `WestConfPlayoffPicture`, `EastConfStandings`, `WestConfStandings`, `EastConfRemainingGames`, `WestConfRemainingGames`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsPlayoffpicture({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsPlayoffpicture: SectionedWrapper<NbaStatsPlayoffpictureTables | Row[], NbaStatsPlayoffpictureTables, NbaStatsPlayoffpictureParams> = (params: WrapperParams = {}) => callFlat(PLAYOFFPICTURE_DEF, params);
 /** snake_case alias of {@link nbaStatsPlayoffpicture} (py/R parity). */
@@ -11193,12 +11287,13 @@ const SCHEDULELEAGUEV2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/scheduleleaguev2`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsScheduleleaguev2Row[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsScheduleleaguev2({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsScheduleleaguev2: SectionedWrapper<NbaStatsScheduleleaguev2Row[] | ParsedTables, {}, NbaStatsScheduleleaguev2Params> = (params: WrapperParams = {}) => callFlat(SCHEDULELEAGUEV2_DEF, params);
 /** snake_case alias of {@link nbaStatsScheduleleaguev2} (py/R parity). */
@@ -11234,12 +11329,13 @@ const SCHEDULELEAGUEV2INT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/scheduleleaguev2int`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsScheduleleaguev2intRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsScheduleleaguev2int({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsScheduleleaguev2int: SectionedWrapper<NbaStatsScheduleleaguev2intRow[] | ParsedTables, {}, NbaStatsScheduleleaguev2intParams> = (params: WrapperParams = {}) => callFlat(SCHEDULELEAGUEV2INT_DEF, params);
 /** snake_case alias of {@link nbaStatsScheduleleaguev2int} (py/R parity). */
@@ -11279,13 +11375,14 @@ const SCOREBOARDV2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/scoreboardv2`
  *
- * @param params.day_offset - query parameter (`DayOffset`) — default `0`.
- * @param params.game_date - query parameter (`GameDate`) — default `2021-07-20`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameHeader`, `LineScore`, `SeriesStandings`, `LastMeeting`, `EastConfStandingsByDay`, `WestConfStandingsByDay`, `Available`, `TeamLeaders`, `TicketLinks`.
+ * @param params.day_offset - `number | string` — the `DayOffset` query parameter; default `0`.
+ * @param params.game_date - `number | string` — the `GameDate` query parameter; default `2021-07-20`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsScoreboardv2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GameHeader`, `LineScore`, `SeriesStandings`, `LastMeeting`, `EastConfStandingsByDay`, `WestConfStandingsByDay`, `Available`, `TeamLeaders`, `TicketLinks`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsScoreboardv2({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsScoreboardv2: SectionedWrapper<NbaStatsScoreboardv2Tables | Row[], NbaStatsScoreboardv2Tables, NbaStatsScoreboardv2Params> = (params: WrapperParams = {}) => callFlat(SCOREBOARDV2_DEF, params);
 /** snake_case alias of {@link nbaStatsScoreboardv2} (py/R parity). */
@@ -11320,12 +11417,13 @@ const SCOREBOARDV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/scoreboardv3`
  *
- * @param params.game_date - query parameter (`GameDate`) — default `2023-03-26`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_date - `number | string` — the `GameDate` query parameter; default `2023-03-26`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsScoreboardv3Row[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsScoreboardv3({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsScoreboardv3: SectionedWrapper<NbaStatsScoreboardv3Row[] | ParsedTables, {}, NbaStatsScoreboardv3Params> = (params: WrapperParams = {}) => callFlat(SCOREBOARDV3_DEF, params);
 /** snake_case alias of {@link nbaStatsScoreboardv3} (py/R parity). */
@@ -11506,41 +11604,42 @@ const SHOTCHARTDETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/shotchartdetail`
  *
- * @param params.ahead_behind_nullable - query parameter (`AheadBehind`) — default `null`.
- * @param params.clutch_time_nullable - query parameter (`ClutchTime`) — default `null`.
- * @param params.context_filter_nullable - query parameter (`ContextFilter`) — default `null`.
- * @param params.context_measure_simple - query parameter (`ContextMeasure`) — default `FGA`.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.end_period_nullable - query parameter (`EndPeriod`) — default `null`.
- * @param params.end_range_nullable - query parameter (`EndRange`) — default `null`.
- * @param params.game_id_nullable - query parameter (`GameID`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `202696`.
- * @param params.player_position_nullable - query parameter (`PlayerPosition`) — default ``.
- * @param params.point_diff_nullable - query parameter (`PointDiff`) — default `null`.
- * @param params.position_nullable - query parameter (`Position`) — default `null`.
- * @param params.range_type_nullable - query parameter (`RangeType`) — default `null`.
- * @param params.rookie_year_nullable - query parameter (`RookieYear`) — default ``.
- * @param params.season_nullable - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.start_period_nullable - query parameter (`StartPeriod`) — default `null`.
- * @param params.start_range_nullable - query parameter (`StartRange`) — default `null`.
- * @param params.team_id - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Shot_Chart_Detail`, `LeagueAverages`.
+ * @param params.ahead_behind_nullable - `number | string` — the `AheadBehind` query parameter; default `null`.
+ * @param params.clutch_time_nullable - `number | string` — the `ClutchTime` query parameter; default `null`.
+ * @param params.context_filter_nullable - `number | string` — the `ContextFilter` query parameter; default `null`.
+ * @param params.context_measure_simple - `number | string` — the `ContextMeasure` query parameter; default `FGA`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.end_period_nullable - `number | string` — the `EndPeriod` query parameter; default `null`.
+ * @param params.end_range_nullable - `number | string` — the `EndRange` query parameter; default `null`.
+ * @param params.game_id_nullable - `number | string` — the `GameID` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `202696`.
+ * @param params.player_position_nullable - `number | string` — the `PlayerPosition` query parameter; default ``.
+ * @param params.point_diff_nullable - `number | string` — the `PointDiff` query parameter; default `null`.
+ * @param params.position_nullable - `number | string` — the `Position` query parameter; default `null`.
+ * @param params.range_type_nullable - `number | string` — the `RangeType` query parameter; default `null`.
+ * @param params.rookie_year_nullable - `number | string` — the `RookieYear` query parameter; default ``.
+ * @param params.season_nullable - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.start_period_nullable - `number | string` — the `StartPeriod` query parameter; default `null`.
+ * @param params.start_range_nullable - `number | string` — the `StartRange` query parameter; default `null`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsShotchartdetailTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Shot_Chart_Detail`, `LeagueAverages`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsShotchartdetail({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsShotchartdetail: SectionedWrapper<NbaStatsShotchartdetailTables | Row[], NbaStatsShotchartdetailTables, NbaStatsShotchartdetailParams> = (params: WrapperParams = {}) => callFlat(SHOTCHARTDETAIL_DEF, params);
 /** snake_case alias of {@link nbaStatsShotchartdetail} (py/R parity). */
@@ -11576,12 +11675,13 @@ const SHOTCHARTLEAGUEWIDE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/shotchartleaguewide`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsShotchartleaguewideRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsShotchartleaguewide({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsShotchartleaguewide: SectionedWrapper<NbaStatsShotchartleaguewideRow[] | ParsedTables, {}, NbaStatsShotchartleaguewideParams> = (params: WrapperParams = {}) => callFlat(SHOTCHARTLEAGUEWIDE_DEF, params);
 /** snake_case alias of {@link nbaStatsShotchartleaguewide} (py/R parity). */
@@ -11707,30 +11807,31 @@ const SHOTCHARTLINEUPDETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/shotchartlineupdetail`
  *
- * @param params.context_filter_nullable - query parameter (`ContextFilter`) — default ``.
- * @param params.context_measure_detailed - query parameter (`ContextMeasure`) — default `FGA`.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.group_id - query parameter (`GROUP_ID`) — default `-202689-203493-203501-1626174-1627827-`.
- * @param params.game_id_nullable - query parameter (`GameID`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games_nullable - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month_nullable - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id_nullable - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `ShotChartLineupDetail`, `ShotChartLineupLeagueAverage`.
+ * @param params.context_filter_nullable - `number | string` — the `ContextFilter` query parameter; default ``.
+ * @param params.context_measure_detailed - `number | string` — the `ContextMeasure` query parameter; default `FGA`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.group_id - `number | string` — the `GROUP_ID` query parameter; default `-202689-203493-203501-1626174-1627827-`.
+ * @param params.game_id_nullable - `number | string` — the `GameID` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games_nullable - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id_nullable - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsShotchartlineupdetailTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `ShotChartLineupDetail`, `ShotChartLineupLeagueAverage`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsShotchartlineupdetail({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsShotchartlineupdetail: SectionedWrapper<NbaStatsShotchartlineupdetailTables | Row[], NbaStatsShotchartlineupdetailTables, NbaStatsShotchartlineupdetailParams> = (params: WrapperParams = {}) => callFlat(SHOTCHARTLINEUPDETAIL_DEF, params);
 /** snake_case alias of {@link nbaStatsShotchartlineupdetail} (py/R parity). */
@@ -11791,17 +11892,18 @@ const SYNERGYPLAYTYPES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/synergyplaytypes`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `PerGame`.
- * @param params.play_type_nullable - query parameter (`PlayType`) — default `Isolation`.
- * @param params.player_or_team_abbreviation - query parameter (`PlayerOrTeam`) — default `P`.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.season - query parameter (`SeasonYear`) — default `null`.
- * @param params.type_grouping_nullable - query parameter (`TypeGrouping`) — default `Offensive`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `PerGame`.
+ * @param params.play_type_nullable - `number | string` — the `PlayType` query parameter; default `Isolation`.
+ * @param params.player_or_team_abbreviation - `number | string` — the `PlayerOrTeam` query parameter; default `P`.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.type_grouping_nullable - `number | string` — the `TypeGrouping` query parameter; default `Offensive`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsSynergyplaytypesRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsSynergyplaytypes({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsSynergyplaytypes: SectionedWrapper<NbaStatsSynergyplaytypesRow[] | ParsedTables, {}, NbaStatsSynergyplaytypesParams> = (params: WrapperParams = {}) => callFlat(SYNERGYPLAYTYPES_DEF, params);
 /** snake_case alias of {@link nbaStatsSynergyplaytypes} (py/R parity). */
@@ -11942,33 +12044,34 @@ const TEAMDASHBOARDBYCLUTCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdashboardbyclutch`
  *
- * @param params.date_from - query parameter (`DateFrom`) — default ``.
- * @param params.date_to - query parameter (`DateTo`) — default ``.
- * @param params.game_segment - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location - query parameter (`Location`) — default ``.
- * @param params.measure_type - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome - query parameter (`Outcome`) — default ``.
- * @param params.po_round - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference - query parameter (`VsConference`) — default ``.
- * @param params.vs_division - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5Min5PointTeamDashboard`, `Last3Min5PointTeamDashboard`, `Last1Min5PointTeamDashboard`, `Last30Sec3PointTeamDashboard`, `Last10Sec3PointTeamDashboard`, `Last5MinPlusMinus5PointTeamDashboard`, `Last3MinPlusMinus5PointTeamDashboard`, `Last1MinPlusMinus5PointTeamDashboard`, `Last30Sec3Point2TeamDashboard`, `Last10Sec3Point2TeamDashboard`.
+ * @param params.date_from - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdashboardbyclutchTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5Min5PointTeamDashboard`, `Last3Min5PointTeamDashboard`, `Last1Min5PointTeamDashboard`, `Last30Sec3PointTeamDashboard`, `Last10Sec3PointTeamDashboard`, `Last5MinPlusMinus5PointTeamDashboard`, `Last3MinPlusMinus5PointTeamDashboard`, `Last1MinPlusMinus5PointTeamDashboard`, `Last30Sec3Point2TeamDashboard`, `Last10Sec3Point2TeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdashboardbyclutch({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdashboardbyclutch: SectionedWrapper<NbaStatsTeamdashboardbyclutchTables | Row[], NbaStatsTeamdashboardbyclutchTables, NbaStatsTeamdashboardbyclutchParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYCLUTCH_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdashboardbyclutch} (py/R parity). */
@@ -12109,33 +12212,34 @@ const TEAMDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdashboardbygamesplits`
  *
- * @param params.date_from - query parameter (`DateFrom`) — default ``.
- * @param params.date_to - query parameter (`DateTo`) — default ``.
- * @param params.game_segment - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location - query parameter (`Location`) — default ``.
- * @param params.measure_type - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome - query parameter (`Outcome`) — default ``.
- * @param params.po_round - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference - query parameter (`VsConference`) — default ``.
- * @param params.vs_division - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByHalfTeamDashboard`, `ByPeriodTeamDashboard`, `ByScoreMarginTeamDashboard`, `ByActualMarginTeamDashboard`.
+ * @param params.date_from - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdashboardbygamesplitsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByHalfTeamDashboard`, `ByPeriodTeamDashboard`, `ByScoreMarginTeamDashboard`, `ByActualMarginTeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdashboardbygamesplits({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdashboardbygamesplits: SectionedWrapper<NbaStatsTeamdashboardbygamesplitsTables | Row[], NbaStatsTeamdashboardbygamesplitsTables, NbaStatsTeamdashboardbygamesplitsParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYGAMESPLITS_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdashboardbygamesplits} (py/R parity). */
@@ -12276,33 +12380,34 @@ const TEAMDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdashboardbygeneralsplits`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `LocationTeamDashboard`, `WinsLossesTeamDashboard`, `MonthTeamDashboard`, `PrePostAllStarTeamDashboard`, `DaysRestTeamDashboard`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdashboardbygeneralsplitsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `LocationTeamDashboard`, `WinsLossesTeamDashboard`, `MonthTeamDashboard`, `PrePostAllStarTeamDashboard`, `DaysRestTeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdashboardbygeneralsplits({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdashboardbygeneralsplits: SectionedWrapper<NbaStatsTeamdashboardbygeneralsplitsTables | Row[], NbaStatsTeamdashboardbygeneralsplitsTables, NbaStatsTeamdashboardbygeneralsplitsParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYGENERALSPLITS_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdashboardbygeneralsplits} (py/R parity). */
@@ -12443,33 +12548,34 @@ const TEAMDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdashboardbylastngames`
  *
- * @param params.date_from - query parameter (`DateFrom`) — default ``.
- * @param params.date_to - query parameter (`DateTo`) — default ``.
- * @param params.game_segment - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location - query parameter (`Location`) — default ``.
- * @param params.measure_type - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome - query parameter (`Outcome`) — default ``.
- * @param params.po_round - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference - query parameter (`VsConference`) — default ``.
- * @param params.vs_division - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5TeamDashboard`, `Last10TeamDashboard`, `Last15TeamDashboard`, `Last20TeamDashboard`, `GameNumberTeamDashboard`.
+ * @param params.date_from - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdashboardbylastngamesTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5TeamDashboard`, `Last10TeamDashboard`, `Last15TeamDashboard`, `Last20TeamDashboard`, `GameNumberTeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdashboardbylastngames({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdashboardbylastngames: SectionedWrapper<NbaStatsTeamdashboardbylastngamesTables | Row[], NbaStatsTeamdashboardbylastngamesTables, NbaStatsTeamdashboardbylastngamesParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYLASTNGAMES_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdashboardbylastngames} (py/R parity). */
@@ -12610,33 +12716,34 @@ const TEAMDASHBOARDBYOPPONENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdashboardbyopponent`
  *
- * @param params.date_from - query parameter (`DateFrom`) — default ``.
- * @param params.date_to - query parameter (`DateTo`) — default ``.
- * @param params.game_segment - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location - query parameter (`Location`) — default ``.
- * @param params.measure_type - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome - query parameter (`Outcome`) — default ``.
- * @param params.po_round - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference - query parameter (`VsConference`) — default ``.
- * @param params.vs_division - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ConferenceTeamDashboard`, `DivisionTeamDashboard`, `OpponentTeamDashboard`.
+ * @param params.date_from - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdashboardbyopponentTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ConferenceTeamDashboard`, `DivisionTeamDashboard`, `OpponentTeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdashboardbyopponent({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdashboardbyopponent: SectionedWrapper<NbaStatsTeamdashboardbyopponentTables | Row[], NbaStatsTeamdashboardbyopponentTables, NbaStatsTeamdashboardbyopponentParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYOPPONENT_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdashboardbyopponent} (py/R parity). */
@@ -12777,33 +12884,34 @@ const TEAMDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdashboardbyshootingsplits`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Shot5FTTeamDashboard`, `Shot8FTTeamDashboard`, `ShotAreaTeamDashboard`, `AssitedShotTeamDashboard`, `ShotTypeTeamDashboard`, `AssistedBy`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdashboardbyshootingsplitsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Shot5FTTeamDashboard`, `Shot8FTTeamDashboard`, `ShotAreaTeamDashboard`, `AssitedShotTeamDashboard`, `ShotTypeTeamDashboard`, `AssistedBy`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdashboardbyshootingsplits({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdashboardbyshootingsplits: SectionedWrapper<NbaStatsTeamdashboardbyshootingsplitsTables | Row[], NbaStatsTeamdashboardbyshootingsplitsTables, NbaStatsTeamdashboardbyshootingsplitsParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYSHOOTINGSPLITS_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdashboardbyshootingsplits} (py/R parity). */
@@ -12944,33 +13052,34 @@ const TEAMDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdashboardbyteamperformance`
  *
- * @param params.date_from - query parameter (`DateFrom`) — default ``.
- * @param params.date_to - query parameter (`DateTo`) — default ``.
- * @param params.game_segment - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location - query parameter (`Location`) — default ``.
- * @param params.measure_type - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome - query parameter (`Outcome`) — default ``.
- * @param params.po_round - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference - query parameter (`VsConference`) — default ``.
- * @param params.vs_division - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ScoreDifferentialTeamDashboard`, `PointsScoredTeamDashboard`, `PontsAgainstTeamDashboard`.
+ * @param params.date_from - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdashboardbyteamperformanceTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ScoreDifferentialTeamDashboard`, `PointsScoredTeamDashboard`, `PontsAgainstTeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdashboardbyteamperformance({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdashboardbyteamperformance: SectionedWrapper<NbaStatsTeamdashboardbyteamperformanceTables | Row[], NbaStatsTeamdashboardbyteamperformanceTables, NbaStatsTeamdashboardbyteamperformanceParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYTEAMPERFORMANCE_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdashboardbyteamperformance} (py/R parity). */
@@ -13111,33 +13220,34 @@ const TEAMDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdashboardbyyearoveryear`
  *
- * @param params.date_from - query parameter (`DateFrom`) — default ``.
- * @param params.date_to - query parameter (`DateTo`) — default ``.
- * @param params.game_segment - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location - query parameter (`Location`) — default ``.
- * @param params.measure_type - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome - query parameter (`Outcome`) — default ``.
- * @param params.po_round - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference - query parameter (`VsConference`) — default ``.
- * @param params.vs_division - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByYearTeamDashboard`.
+ * @param params.date_from - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdashboardbyyearoveryearTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByYearTeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdashboardbyyearoveryear({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdashboardbyyearoveryear: SectionedWrapper<NbaStatsTeamdashboardbyyearoveryearTables | Row[], NbaStatsTeamdashboardbyyearoveryearTables, NbaStatsTeamdashboardbyyearoveryearParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYYEAROVERYEAR_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdashboardbyyearoveryear} (py/R parity). */
@@ -13288,35 +13398,36 @@ const TEAMDASHLINEUPS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdashlineups`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_id_nullable - query parameter (`GameID`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.group_quantity - query parameter (`GroupQuantity`) — default `5`.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `Lineups`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_id_nullable - `number | string` — the `GameID` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.group_quantity - `number | string` — the `GroupQuantity` query parameter; default `5`.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdashlineupsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `Lineups`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdashlineups({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdashlineups: SectionedWrapper<NbaStatsTeamdashlineupsTables | Row[], NbaStatsTeamdashlineupsTables, NbaStatsTeamdashlineupsParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHLINEUPS_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdashlineups} (py/R parity). */
@@ -13417,25 +13528,26 @@ const TEAMDASHPTPASS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdashptpass`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PassesMade`, `PassesReceived`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdashptpassTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PassesMade`, `PassesReceived`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdashptpass({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdashptpass: SectionedWrapper<NbaStatsTeamdashptpassTables | Row[], NbaStatsTeamdashptpassTables, NbaStatsTeamdashptpassParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHPTPASS_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdashptpass} (py/R parity). */
@@ -13546,27 +13658,28 @@ const TEAMDASHPTREB_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdashptreb`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallRebounding`, `ShotTypeRebounding`, `NumContestedRebounding`, `ShotDistanceRebounding`, `RebDistanceRebounding`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdashptrebTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallRebounding`, `ShotTypeRebounding`, `NumContestedRebounding`, `ShotDistanceRebounding`, `RebDistanceRebounding`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdashptreb({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdashptreb: SectionedWrapper<NbaStatsTeamdashptrebTables | Row[], NbaStatsTeamdashptrebTables, NbaStatsTeamdashptrebParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHPTREB_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdashptreb} (py/R parity). */
@@ -13677,27 +13790,28 @@ const TEAMDASHPTSHOTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdashptshots`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GeneralShooting`, `ShotClockShooting`, `DribbleShooting`, `ClosestDefenderShooting`, `ClosestDefender10ftPlusShooting`, `TouchTimeShooting`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdashptshotsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GeneralShooting`, `ShotClockShooting`, `DribbleShooting`, `ClosestDefenderShooting`, `ClosestDefender10ftPlusShooting`, `TouchTimeShooting`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdashptshots({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdashptshots: SectionedWrapper<NbaStatsTeamdashptshotsTables | Row[], NbaStatsTeamdashptshotsTables, NbaStatsTeamdashptshotsParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHPTSHOTS_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdashptshots} (py/R parity). */
@@ -13727,11 +13841,12 @@ const TEAMDETAILS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdetails`
  *
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamBackground`, `TeamHistory`, `TeamSocialSites`, `TeamAwardsChampionships`, `TeamAwardsConf`, `TeamAwardsDiv`, `TeamHof`, `TeamRetired`, `TeamAwardsCommCup`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamdetailsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `TeamBackground`, `TeamHistory`, `TeamSocialSites`, `TeamAwardsChampionships`, `TeamAwardsConf`, `TeamAwardsDiv`, `TeamHof`, `TeamRetired`, `TeamAwardsCommCup`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamdetails({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamdetails: SectionedWrapper<NbaStatsTeamdetailsTables | Row[], NbaStatsTeamdetailsTables, NbaStatsTeamdetailsParams> = (params: WrapperParams = {}) => callFlat(TEAMDETAILS_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamdetails} (py/R parity). */
@@ -13772,13 +13887,14 @@ const TEAMESTIMATEDMETRICS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamestimatedmetrics`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamestimatedmetricsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamestimatedmetrics({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamestimatedmetrics: SectionedWrapper<NbaStatsTeamestimatedmetricsRow[] | ParsedTables, {}, NbaStatsTeamestimatedmetricsParams> = (params: WrapperParams = {}) => callFlat(TEAMESTIMATEDMETRICS_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamestimatedmetrics} (py/R parity). */
@@ -13834,16 +13950,17 @@ const TEAMGAMELOG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamgamelog`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamgamelogRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamgamelog({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamgamelog: SectionedWrapper<NbaStatsTeamgamelogRow[] | ParsedTables, {}, NbaStatsTeamgamelogParams> = (params: WrapperParams = {}) => callFlat(TEAMGAMELOG_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamgamelog} (py/R parity). */
@@ -13974,31 +14091,32 @@ const TEAMGAMELOGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamgamelogs`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games_nullable - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_player_game_logs_nullable - query parameter (`MeasureType`) — default `Base`.
- * @param params.month_nullable - query parameter (`Month`) — default `0`.
- * @param params.opp_team_id_nullable - query parameter (`OppTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.per_mode_simple_nullable - query parameter (`PerMode`) — default `Totals`.
- * @param params.period_nullable - query parameter (`Period`) — default `0`.
- * @param params.player_id_nullable - query parameter (`PlayerID`) — default ``.
- * @param params.season_nullable - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_nullable - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default `null`.
- * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games_nullable - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_player_game_logs_nullable - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month_nullable - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opp_team_id_nullable - `number | string` — the `OppTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.per_mode_simple_nullable - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period_nullable - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id_nullable - `number | string` — the `PlayerID` query parameter; default ``.
+ * @param params.season_nullable - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_nullable - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default `null`.
+ * @param params.team_id_nullable - `number | string` — the `TeamID` query parameter; default `0`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamgamelogsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamgamelogs({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamgamelogs: SectionedWrapper<NbaStatsTeamgamelogsRow[] | ParsedTables, {}, NbaStatsTeamgamelogsParams> = (params: WrapperParams = {}) => callFlat(TEAMGAMELOGS_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamgamelogs} (py/R parity). */
@@ -14044,14 +14162,15 @@ const TEAMINFOCOMMON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teaminfocommon`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season_nullable - query parameter (`Season`) — default `null`.
- * @param params.season_type_nullable - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamInfoCommon`, `TeamSeasonRanks`, `AvailableSeasons`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.season_nullable - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_nullable - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeaminfocommonTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `TeamInfoCommon`, `TeamSeasonRanks`, `AvailableSeasons`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeaminfocommon({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeaminfocommon: SectionedWrapper<NbaStatsTeaminfocommonTables | Row[], NbaStatsTeaminfocommonTables, NbaStatsTeaminfocommonParams> = (params: WrapperParams = {}) => callFlat(TEAMINFOCOMMON_DEF, params);
 /** snake_case alias of {@link nbaStatsTeaminfocommon} (py/R parity). */
@@ -14192,33 +14311,34 @@ const TEAMPLAYERDASHBOARD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamplayerdashboard`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.po_round_nullable - query parameter (`PORound`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamOverall`, `PlayersSeasonTotals`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.po_round_nullable - `number | string` — the `PORound` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.shot_clock_range_nullable - `number | string` — the `ShotClockRange` query parameter; default ``.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamplayerdashboardTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `TeamOverall`, `PlayersSeasonTotals`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamplayerdashboard({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamplayerdashboard: SectionedWrapper<NbaStatsTeamplayerdashboardTables | Row[], NbaStatsTeamplayerdashboardTables, NbaStatsTeamplayerdashboardParams> = (params: WrapperParams = {}) => callFlat(TEAMPLAYERDASHBOARD_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamplayerdashboard} (py/R parity). */
@@ -14349,31 +14469,32 @@ const TEAMPLAYERONOFFDETAILS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamplayeronoffdetails`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffDetails`, `PlayersOnCourtTeamPlayerOnOffDetails`, `PlayersOffCourtTeamPlayerOnOffDetails`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamplayeronoffdetailsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffDetails`, `PlayersOnCourtTeamPlayerOnOffDetails`, `PlayersOffCourtTeamPlayerOnOffDetails`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamplayeronoffdetails({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamplayeronoffdetails: SectionedWrapper<NbaStatsTeamplayeronoffdetailsTables | Row[], NbaStatsTeamplayeronoffdetailsTables, NbaStatsTeamplayeronoffdetailsParams> = (params: WrapperParams = {}) => callFlat(TEAMPLAYERONOFFDETAILS_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamplayeronoffdetails} (py/R parity). */
@@ -14504,31 +14625,32 @@ const TEAMPLAYERONOFFSUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamplayeronoffsummary`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffSummary`, `PlayersOnCourtTeamPlayerOnOffSummary`, `PlayersOffCourtTeamPlayerOnOffSummary`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamplayeronoffsummaryTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffSummary`, `PlayersOnCourtTeamPlayerOnOffSummary`, `PlayersOffCourtTeamPlayerOnOffSummary`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamplayeronoffsummary({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamplayeronoffsummary: SectionedWrapper<NbaStatsTeamplayeronoffsummaryTables | Row[], NbaStatsTeamplayeronoffsummaryTables, NbaStatsTeamplayeronoffsummaryParams> = (params: WrapperParams = {}) => callFlat(TEAMPLAYERONOFFSUMMARY_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamplayeronoffsummary} (py/R parity). */
@@ -14669,33 +14791,34 @@ const TEAMVSPLAYER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamvsplayer`
  *
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.measure_type_detailed_defense - query parameter (`MeasureType`) — default `Base`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
- * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id_nullable - query parameter (`PlayerID`) — default ``.
- * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
- * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.vs_player_id - query parameter (`VsPlayerID`) — default `2544`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `vsPlayerOverall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.measure_type_detailed_defense - `number | string` — the `MeasureType` query parameter; default `Base`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.pace_adjust - `number | string` — the `PaceAdjust` query parameter; default `N`.
+ * @param params.per_mode_detailed - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id_nullable - `number | string` — the `PlayerID` query parameter; default ``.
+ * @param params.plus_minus - `number | string` — the `PlusMinus` query parameter; default `N`.
+ * @param params.rank - `number | string` — the `Rank` query parameter; default `N`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.vs_player_id - `number | string` — the `VsPlayerID` query parameter; default `2544`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamvsplayerTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `vsPlayerOverall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamvsplayer({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamvsplayer: SectionedWrapper<NbaStatsTeamvsplayerTables | Row[], NbaStatsTeamvsplayerTables, NbaStatsTeamvsplayerParams> = (params: WrapperParams = {}) => callFlat(TEAMVSPLAYER_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamvsplayer} (py/R parity). */
@@ -14740,14 +14863,15 @@ const TEAMYEARBYYEARSTATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamyearbyyearstats`
  *
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.per_mode_simple - `number | string` — the `PerMode` query parameter; default `Totals`.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612749`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsTeamyearbyyearstatsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsTeamyearbyyearstats({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsTeamyearbyyearstats: SectionedWrapper<NbaStatsTeamyearbyyearstatsRow[] | ParsedTables, {}, NbaStatsTeamyearbyyearstatsParams> = (params: WrapperParams = {}) => callFlat(TEAMYEARBYYEARSTATS_DEF, params);
 /** snake_case alias of {@link nbaStatsTeamyearbyyearstats} (py/R parity). */
@@ -14923,40 +15047,41 @@ const VIDEODETAILSASSET_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/videodetailsasset`
  *
- * @param params.context_measure_detailed - query parameter (`ContextMeasure`) — default `FGA`.
- * @param params.last_n_games - query parameter (`LastNGames`) — default `0`.
- * @param params.month - query parameter (`Month`) — default `0`.
- * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
- * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1610612747`.
- * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
- * @param params.start_range_nullable - query parameter (`StartRange`) — default ``.
- * @param params.start_period_nullable - query parameter (`StartPeriod`) — default ``.
- * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
- * @param params.rookie_year_nullable - query parameter (`RookieYear`) — default ``.
- * @param params.range_type_nullable - query parameter (`RangeType`) — default ``.
- * @param params.position_nullable - query parameter (`Position`) — default ``.
- * @param params.point_diff_nullable - query parameter (`PointDiff`) — default ``.
- * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.location_nullable - query parameter (`Location`) — default ``.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
- * @param params.game_id_nullable - query parameter (`GameID`) — default ``.
- * @param params.end_range_nullable - query parameter (`EndRange`) — default ``.
- * @param params.end_period_nullable - query parameter (`EndPeriod`) — default ``.
- * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
- * @param params.context_filter_nullable - query parameter (`ContextFilter`) — default ``.
- * @param params.clutch_time_nullable - query parameter (`ClutchTime`) — default ``.
- * @param params.ahead_behind_nullable - query parameter (`AheadBehind`) — default ``.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`.
+ * @param params.context_measure_detailed - `number | string` — the `ContextMeasure` query parameter; default `FGA`.
+ * @param params.last_n_games - `number | string` — the `LastNGames` query parameter; default `0`.
+ * @param params.month - `number | string` — the `Month` query parameter; default `0`.
+ * @param params.opponent_team_id - `number | string` — the `OpponentTeamID` query parameter; default `0`.
+ * @param params.period - `number | string` — the `Period` query parameter; default `0`.
+ * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `2544`.
+ * @param params.season - `number | string` — Season label, e.g. `2024-25`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. An NBA season tips off in late October and becomes the default in November (`2025-26` through October 2026, `2026-27` from November 2026); a G League season (regular season from late December) in January; a Summer League (played in July, which stats.nba.com labels `2026-27` in 2026) in August; a draft combine (May) in June; a draft (`drafthistory`, a year; late June) in July. With season type `Playoffs` / `PlayIn` (or `commonplayoffseries`) the NBA and the G League roll over in May, after their playoffs start; with `All Star` the NBA rolls over in March, after the February game (the G League has no All-Star rows and keeps its own rule). A month table cannot follow a lockout or pandemic calendar (1998-99, 2011-12, 2020-21): pass a season then. Without one stats.nba.com answers an empty HTTP 500 or every season summed; default `null`.
+ * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs`, `PlayIn` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` / `PlayIn` roll over in May (NBA, G League), `All Star` in March (NBA); default `Regular Season`.
+ * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1610612747`.
+ * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
+ * @param params.vs_conference_nullable - `number | string` — the `VsConference` query parameter; default ``.
+ * @param params.start_range_nullable - `number | string` — the `StartRange` query parameter; default ``.
+ * @param params.start_period_nullable - `number | string` — the `StartPeriod` query parameter; default ``.
+ * @param params.season_segment_nullable - `number | string` — the `SeasonSegment` query parameter; default ``.
+ * @param params.rookie_year_nullable - `number | string` — the `RookieYear` query parameter; default ``.
+ * @param params.range_type_nullable - `number | string` — the `RangeType` query parameter; default ``.
+ * @param params.position_nullable - `number | string` — the `Position` query parameter; default ``.
+ * @param params.point_diff_nullable - `number | string` — the `PointDiff` query parameter; default ``.
+ * @param params.outcome_nullable - `number | string` — the `Outcome` query parameter; default ``.
+ * @param params.location_nullable - `number | string` — the `Location` query parameter; default ``.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.game_segment_nullable - `number | string` — the `GameSegment` query parameter; default ``.
+ * @param params.game_id_nullable - `number | string` — the `GameID` query parameter; default ``.
+ * @param params.end_range_nullable - `number | string` — the `EndRange` query parameter; default ``.
+ * @param params.end_period_nullable - `number | string` — the `EndPeriod` query parameter; default ``.
+ * @param params.date_to_nullable - `number | string` — the `DateTo` query parameter; default ``.
+ * @param params.date_from_nullable - `number | string` — the `DateFrom` query parameter; default ``.
+ * @param params.context_filter_nullable - `number | string` — the `ContextFilter` query parameter; default ``.
+ * @param params.clutch_time_nullable - `number | string` — the `ClutchTime` query parameter; default ``.
+ * @param params.ahead_behind_nullable - `number | string` — the `AheadBehind` query parameter; default ``.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsVideodetailsassetTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsVideodetailsasset({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsVideodetailsasset: SectionedWrapper<NbaStatsVideodetailsassetTables | Row[], NbaStatsVideodetailsassetTables, NbaStatsVideodetailsassetParams> = (params: WrapperParams = {}) => callFlat(VIDEODETAILSASSET_DEF, params);
 /** snake_case alias of {@link nbaStatsVideodetailsasset} (py/R parity). */
@@ -14991,12 +15116,13 @@ const VIDEOEVENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/videoevents`
  *
- * @param params.game_event_id - query parameter (`GameEventID`) — default `10`.
- * @param params.game_id - query parameter (`GameID`) — default `21700807`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`.
+ * @param params.game_event_id - `number | string` — the `GameEventID` query parameter; default `10`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `21700807`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsVideoeventsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsVideoevents({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsVideoevents: SectionedWrapper<NbaStatsVideoeventsTables | Row[], NbaStatsVideoeventsTables, NbaStatsVideoeventsParams> = (params: WrapperParams = {}) => callFlat(VIDEOEVENTS_DEF, params);
 /** snake_case alias of {@link nbaStatsVideoevents} (py/R parity). */
@@ -15031,12 +15157,13 @@ const VIDEOEVENTSASSET_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/videoeventsasset`
  *
- * @param params.game_event_id - query parameter (`GameEventID`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `21700807`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`.
+ * @param params.game_event_id - `number | string` — the `GameEventID` query parameter; default `0`.
+ * @param params.game_id - `number | string` — the `GameID` query parameter; default `21700807`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsVideoeventsassetTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsVideoeventsasset({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsVideoeventsasset: SectionedWrapper<NbaStatsVideoeventsassetTables | Row[], NbaStatsVideoeventsassetTables, NbaStatsVideoeventsassetParams> = (params: WrapperParams = {}) => callFlat(VIDEOEVENTSASSET_DEF, params);
 /** snake_case alias of {@link nbaStatsVideoeventsasset} (py/R parity). */
@@ -15071,12 +15198,13 @@ const VIDEOSTATUS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/videostatus`
  *
- * @param params.game_date - query parameter (`GameDate`) — default `2023-03-10`.
- * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_date - `number | string` — the `GameDate` query parameter; default `2023-03-10`.
+ * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `00`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
+ * @returns `Promise<NbaStatsVideostatusRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nba.nbaStatsVideostatus({});
+ * @see https://js.sportsdataverse.org/docs/nba/reference/native#native-api--nba-stats-api-statsnbacom
  */
 export const nbaStatsVideostatus: SectionedWrapper<NbaStatsVideostatusRow[] | ParsedTables, {}, NbaStatsVideostatusParams> = (params: WrapperParams = {}) => callFlat(VIDEOSTATUS_DEF, params);
 /** snake_case alias of {@link nbaStatsVideostatus} (py/R parity). */

@@ -67,10 +67,11 @@ const COACH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Coach/{key}.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesCoach({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesCoach: Wrapper<Row[], Sports247SitePagesCoachParams> = (params: WrapperParams = {}) => callFlat(COACH_DEF, params);
 /** snake_case alias of {@link sports247SitePagesCoach} (py/R parity). */
@@ -98,10 +99,11 @@ const COACH_ALMA_MATER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Coach/{key}/AlmaMater.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesCoachAlmaMater({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesCoachAlmaMater: Wrapper<Row[], Sports247SitePagesCoachAlmaMaterParams> = (params: WrapperParams = {}) => callFlat(COACH_ALMA_MATER_DEF, params);
 /** snake_case alias of {@link sports247SitePagesCoachAlmaMater} (py/R parity). */
@@ -129,10 +131,11 @@ const COACH_HOMETOWN_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Coach/{key}/Hometown.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesCoachHometown({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesCoachHometown: Wrapper<Row[], Sports247SitePagesCoachHometownParams> = (params: WrapperParams = {}) => callFlat(COACH_HOMETOWN_DEF, params);
 /** snake_case alias of {@link sports247SitePagesCoachHometown} (py/R parity). */
@@ -160,10 +163,11 @@ const COACH_RANKING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/CoachRanking/{key}.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesCoachRanking({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesCoachRanking: Wrapper<Row[], Sports247SitePagesCoachRankingParams> = (params: WrapperParams = {}) => callFlat(COACH_RANKING_DEF, params);
 /** snake_case alias of {@link sports247SitePagesCoachRanking} (py/R parity). */
@@ -191,10 +195,11 @@ const COACH_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Coach/{key}/CoachRankings.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesCoachRankings({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesCoachRankings: Wrapper<Row[], Sports247SitePagesCoachRankingsParams> = (params: WrapperParams = {}) => callFlat(COACH_RANKINGS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesCoachRankings} (py/R parity). */
@@ -222,10 +227,11 @@ const EVENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Event/{slug}.json`
  *
- * @param params.slug - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.slug - `number | string` — the `{slug}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesEvent({ slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesEvent: Wrapper<Row[], Sports247SitePagesEventParams> = (params: WrapperParams = {}) => callFlat(EVENT_DEF, params);
 /** snake_case alias of {@link sports247SitePagesEvent} (py/R parity). */
@@ -253,10 +259,11 @@ const INSTITUTION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Institution/{key}.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesInstitution({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesInstitution: Wrapper<Row[], Sports247SitePagesInstitutionParams> = (params: WrapperParams = {}) => callFlat(INSTITUTION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesInstitution} (py/R parity). */
@@ -285,10 +292,11 @@ const INSTITUTION_LIST_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Institution.json`
  *
- * @param params.items - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.items - `number | string` — the `items` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesInstitutionList({});
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesInstitutionList: Wrapper<Row[], Sports247SitePagesInstitutionListParams> = (params: WrapperParams = {}) => callFlat(INSTITUTION_LIST_DEF, params);
 /** snake_case alias of {@link sports247SitePagesInstitutionList} (py/R parity). */
@@ -316,10 +324,11 @@ const INSTITUTION_LOCATION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Institution/{key}/Location.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesInstitutionLocation({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesInstitutionLocation: Wrapper<Row[], Sports247SitePagesInstitutionLocationParams> = (params: WrapperParams = {}) => callFlat(INSTITUTION_LOCATION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesInstitutionLocation} (py/R parity). */
@@ -350,11 +359,12 @@ const INSTITUTION_TIMELINE_EVENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/college/{school_slug}/Institution/{key}/TimelineEvents.json`
  *
- * @param params.school_slug - path parameter.
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.school_slug - `number | string` — the `{school_slug}` path segment.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesInstitutionTimelineEvents({ school_slug: '…', key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesInstitutionTimelineEvents: Wrapper<Row[], Sports247SitePagesInstitutionTimelineEventsParams> = (params: WrapperParams = {}) => callFlat(INSTITUTION_TIMELINE_EVENTS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesInstitutionTimelineEvents} (py/R parity). */
@@ -391,12 +401,13 @@ const LEAGUE_DRAFT_PICKS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/League/{league_slug}/DraftPicks/ConfigureEmbed/.json`
  *
- * @param params.league_slug - path parameter.
- * @param params.year - query parameter.
- * @param params.round - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.round - `number | string` — the `round` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesLeagueDraftPicks({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesLeagueDraftPicks: Wrapper<Row[], Sports247SitePagesLeagueDraftPicksParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_DRAFT_PICKS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesLeagueDraftPicks} (py/R parity). */
@@ -429,11 +440,12 @@ const LEAGUE_INSTITUTIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/League/{league_id}/Institutions.json`
  *
- * @param params.league_id - path parameter.
- * @param params.items - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `{league_id}` path segment.
+ * @param params.items - `number | string` — the `items` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesLeagueInstitutions({ league_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesLeagueInstitutions: Wrapper<Row[], Sports247SitePagesLeagueInstitutionsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_INSTITUTIONS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesLeagueInstitutions} (py/R parity). */
@@ -461,10 +473,11 @@ const PAGE_FEEDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Page/{page_id}/Feeds.json`
  *
- * @param params.page_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.page_id - `number | string` — the `{page_id}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPageFeeds({ page_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesPageFeeds: Wrapper<Row[], Sports247SitePagesPageFeedsParams> = (params: WrapperParams = {}) => callFlat(PAGE_FEEDS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPageFeeds} (py/R parity). */
@@ -492,10 +505,11 @@ const PLAYER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Player/{key}.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayer({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesPlayer: Wrapper<Row[], Sports247SitePagesPlayerParams> = (params: WrapperParams = {}) => callFlat(PLAYER_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayer} (py/R parity). */
@@ -523,10 +537,11 @@ const PLAYER_CURRENT_INSTITUTION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Player/{key}/CurrentPlayerInstitution.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayerCurrentInstitution({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesPlayerCurrentInstitution: Wrapper<Row[], Sports247SitePagesPlayerCurrentInstitutionParams> = (params: WrapperParams = {}) => callFlat(PLAYER_CURRENT_INSTITUTION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayerCurrentInstitution} (py/R parity). */
@@ -554,10 +569,11 @@ const PLAYER_HIGH_SCHOOL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Player/{key}/PlayerHighSchool.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayerHighSchool({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesPlayerHighSchool: Wrapper<Row[], Sports247SitePagesPlayerHighSchoolParams> = (params: WrapperParams = {}) => callFlat(PLAYER_HIGH_SCHOOL_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayerHighSchool} (py/R parity). */
@@ -585,10 +601,11 @@ const PLAYER_INSTITUTION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/PlayerInstitution/{key}.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayerInstitution({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesPlayerInstitution: Wrapper<Row[], Sports247SitePagesPlayerInstitutionParams> = (params: WrapperParams = {}) => callFlat(PLAYER_INSTITUTION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayerInstitution} (py/R parity). */
@@ -616,10 +633,11 @@ const PLAYER_INSTITUTION_EVALUATION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/PlayerInstitutionEvaluation/{key}.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayerInstitutionEvaluation({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesPlayerInstitutionEvaluation: Wrapper<Row[], Sports247SitePagesPlayerInstitutionEvaluationParams> = (params: WrapperParams = {}) => callFlat(PLAYER_INSTITUTION_EVALUATION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayerInstitutionEvaluation} (py/R parity). */
@@ -647,10 +665,11 @@ const PLAYER_PRIMARY_SPORT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Player/{key}/PrimaryPlayerSport.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayerPrimarySport({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesPlayerPrimarySport: Wrapper<Row[], Sports247SitePagesPlayerPrimarySportParams> = (params: WrapperParams = {}) => callFlat(PLAYER_PRIMARY_SPORT_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayerPrimarySport} (py/R parity). */
@@ -683,11 +702,12 @@ const PLAYER_SEARCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Player.json`
  *
- * @param params.first_name - query parameter (`FirstName`).
- * @param params.last_name - query parameter (`LastName`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.first_name - `number | string` — the `FirstName` query parameter.
+ * @param params.last_name - `number | string` — the `LastName` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayerSearch({});
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesPlayerSearch: Wrapper<Row[], Sports247SitePagesPlayerSearchParams> = (params: WrapperParams = {}) => callFlat(PLAYER_SEARCH_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayerSearch} (py/R parity). */
@@ -715,10 +735,11 @@ const PLAYERSPORT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/playersport/{key}.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayersport({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesPlayersport: Wrapper<Row[], Sports247SitePagesPlayersportParams> = (params: WrapperParams = {}) => callFlat(PLAYERSPORT_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayersport} (py/R parity). */
@@ -746,10 +767,11 @@ const PLAYERSPORT_INSTITUTION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/PlayerSport/{key}/PlayerInstitution.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayersportInstitution({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesPlayersportInstitution: Wrapper<Row[], Sports247SitePagesPlayersportInstitutionParams> = (params: WrapperParams = {}) => callFlat(PLAYERSPORT_INSTITUTION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayersportInstitution} (py/R parity). */
@@ -777,10 +799,11 @@ const PLAYERSPORT_RANK_HISTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/PlayerSport/{key}/RecruitRankHistory.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayersportRankHistory({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesPlayersportRankHistory: Wrapper<Row[], Sports247SitePagesPlayersportRankHistoryParams> = (params: WrapperParams = {}) => callFlat(PLAYERSPORT_RANK_HISTORY_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPlayersportRankHistory} (py/R parity). */
@@ -808,10 +831,11 @@ const POSITION_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Position/{key}/playersportrankings.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPositionRankings({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesPositionRankings: Wrapper<Row[], Sports247SitePagesPositionRankingsParams> = (params: WrapperParams = {}) => callFlat(POSITION_RANKINGS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesPositionRankings} (py/R parity). */
@@ -839,10 +863,11 @@ const RECRUIT_INTEREST_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/RecruitInterest/{key}.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesRecruitInterest({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesRecruitInterest: Wrapper<Row[], Sports247SitePagesRecruitInterestParams> = (params: WrapperParams = {}) => callFlat(RECRUIT_INTEREST_DEF, params);
 /** snake_case alias of {@link sports247SitePagesRecruitInterest} (py/R parity). */
@@ -870,10 +895,11 @@ const RECRUITMENT_FINAL_CHOICE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Recruitment/{key}/FinalChoice.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesRecruitmentFinalChoice({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesRecruitmentFinalChoice: Wrapper<Row[], Sports247SitePagesRecruitmentFinalChoiceParams> = (params: WrapperParams = {}) => callFlat(RECRUITMENT_FINAL_CHOICE_DEF, params);
 /** snake_case alias of {@link sports247SitePagesRecruitmentFinalChoice} (py/R parity). */
@@ -901,10 +927,11 @@ const RECRUITMENT_INSTITUTION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Recruitment/{key}/Institution.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesRecruitmentInstitution({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesRecruitmentInstitution: Wrapper<Row[], Sports247SitePagesRecruitmentInstitutionParams> = (params: WrapperParams = {}) => callFlat(RECRUITMENT_INSTITUTION_DEF, params);
 /** snake_case alias of {@link sports247SitePagesRecruitmentInstitution} (py/R parity). */
@@ -932,10 +959,11 @@ const RECRUITMENT_INTERESTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Recruitment/{key}/Interests.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesRecruitmentInterests({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesRecruitmentInterests: Wrapper<Row[], Sports247SitePagesRecruitmentInterestsParams> = (params: WrapperParams = {}) => callFlat(RECRUITMENT_INTERESTS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesRecruitmentInterests} (py/R parity). */
@@ -963,10 +991,11 @@ const RECRUITMENT_OFFERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Recruitment/{key}/Offers.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesRecruitmentOffers({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesRecruitmentOffers: Wrapper<Row[], Sports247SitePagesRecruitmentOffersParams> = (params: WrapperParams = {}) => callFlat(RECRUITMENT_OFFERS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesRecruitmentOffers} (py/R parity). */
@@ -994,10 +1023,11 @@ const RECRUITMENT_PLAYER_SPORT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Recruitment/{key}/PlayerSport.json`
  *
- * @param params.key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesRecruitmentPlayerSport({ key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesRecruitmentPlayerSport: Wrapper<Row[], Sports247SitePagesRecruitmentPlayerSportParams> = (params: WrapperParams = {}) => callFlat(RECRUITMENT_PLAYER_SPORT_DEF, params);
 /** snake_case alias of {@link sports247SitePagesRecruitmentPlayerSport} (py/R parity). */
@@ -1025,10 +1055,11 @@ const SEASON_CURRENT_EXPERT_PREDICTIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Season/{season}/CurrentExpertPredictions.json`
  *
- * @param params.season - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season path segment in `{year}-{Sport}` form, e.g. `2026-Football`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesSeasonCurrentExpertPredictions({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesSeasonCurrentExpertPredictions: Wrapper<Row[], Sports247SitePagesSeasonCurrentExpertPredictionsParams> = (params: WrapperParams = {}) => callFlat(SEASON_CURRENT_EXPERT_PREDICTIONS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesSeasonCurrentExpertPredictions} (py/R parity). */
@@ -1056,10 +1087,11 @@ const SEASON_RECRUIT_INTEREST_EVENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Season/{season}/RecruitInterestEvents.json`
  *
- * @param params.season - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season path segment in `{year}-{Sport}` form, e.g. `2026-Football`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesSeasonRecruitInterestEvents({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesSeasonRecruitInterestEvents: Wrapper<Row[], Sports247SitePagesSeasonRecruitInterestEventsParams> = (params: WrapperParams = {}) => callFlat(SEASON_RECRUIT_INTEREST_EVENTS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesSeasonRecruitInterestEvents} (py/R parity). */
@@ -1087,10 +1119,11 @@ const SEASON_RECRUIT_INTERESTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Season/{season}/RecruitInterests.json`
  *
- * @param params.season - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season path segment in `{year}-{Sport}` form, e.g. `2026-Football`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesSeasonRecruitInterests({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesSeasonRecruitInterests: Wrapper<Row[], Sports247SitePagesSeasonRecruitInterestsParams> = (params: WrapperParams = {}) => callFlat(SEASON_RECRUIT_INTERESTS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesSeasonRecruitInterests} (py/R parity). */
@@ -1135,14 +1168,15 @@ const SEASON_RECRUITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Season/{season}/Recruits.json`
  *
- * @param params.season - path parameter.
- * @param params.items - query parameter (`Items`).
- * @param params.page - query parameter (`Page`).
- * @param params.player_full_name - query parameter (`Player.FullName`).
- * @param params.institution - query parameter (`Institution`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season path segment in `{year}-{Sport}` form, e.g. `2026-Football`.
+ * @param params.items - `number | string` — the `Items` query parameter.
+ * @param params.page - `number | string` — the `Page` query parameter.
+ * @param params.player_full_name - `number | string` — the `Player.FullName` query parameter.
+ * @param params.institution - `number | string` — the `Institution` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesSeasonRecruits({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesSeasonRecruits: Wrapper<Row[], Sports247SitePagesSeasonRecruitsParams> = (params: WrapperParams = {}) => callFlat(SEASON_RECRUITS_DEF, params);
 /** snake_case alias of {@link sports247SitePagesSeasonRecruits} (py/R parity). */
@@ -1170,10 +1204,11 @@ const SEASON_ROSTER_EMBED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://247sports.com/Season/{season}/Roster/Embed.json`
  *
- * @param params.season - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — Season path segment in `{year}-{Sport}` form, e.g. `2026-Football`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesSeasonRosterEmbed({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
 export const sports247SitePagesSeasonRosterEmbed: Wrapper<Row[], Sports247SitePagesSeasonRosterEmbedParams> = (params: WrapperParams = {}) => callFlat(SEASON_ROSTER_EMBED_DEF, params);
 /** snake_case alias of {@link sports247SitePagesSeasonRosterEmbed} (py/R parity). */

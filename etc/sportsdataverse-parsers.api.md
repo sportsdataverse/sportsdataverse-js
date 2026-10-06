@@ -10,7 +10,7 @@ export const ESPN_ENDPOINT_PARSERS: Record<string, ParserFn | typeof parse_summa
 // @public
 export type FlatParserFn = (raw: unknown, section?: string) => ParserRow[] | ParsedTables;
 
-// @public (undocumented)
+// @public
 export const MULTI_TABLE_SECTIONS: Record<string, SectionSpec>;
 
 // @public

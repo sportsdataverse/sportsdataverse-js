@@ -102,12 +102,13 @@ const CAT_GOALIE_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/cat/edge/goalie-detail/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeCatGoalieDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeCatGoalieDetail({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeCatGoalieDetail: Wrapper<NhlEdgeCatGoalieDetailRow[], NhlEdgeCatGoalieDetailParams> = (params: WrapperParams = {}) => callFlat(CAT_GOALIE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeCatGoalieDetail} (py/R parity). */
@@ -147,12 +148,13 @@ const CAT_SKATER_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/cat/edge/skater-detail/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeCatSkaterDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeCatSkaterDetail({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeCatSkaterDetail: Wrapper<NhlEdgeCatSkaterDetailRow[], NhlEdgeCatSkaterDetailParams> = (params: WrapperParams = {}) => callFlat(CAT_SKATER_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeCatSkaterDetail} (py/R parity). */
@@ -192,12 +194,13 @@ const GOALIE_5V5_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/goalie-5v5-detail/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeGoalie5v5DetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeGoalie5v5Detail({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeGoalie5v5Detail: Wrapper<NhlEdgeGoalie5v5DetailRow[], NhlEdgeGoalie5v5DetailParams> = (params: WrapperParams = {}) => callFlat(GOALIE_5V5_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalie5v5Detail} (py/R parity). */
@@ -236,12 +239,13 @@ const GOALIE_5V5_TOP_10_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/goalie-5v5-top-10/{sort_by}/{season}/{game_type}`
  *
- * @param params.sort_by - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sort_by - `number | string` — the `{sort_by}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeGoalie5v5Top10({ sort_by: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeGoalie5v5Top10: Wrapper<Row[], NhlEdgeGoalie5v5Top10Params> = (params: WrapperParams = {}) => callFlat(GOALIE_5V5_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalie5v5Top10} (py/R parity). */
@@ -281,12 +285,13 @@ const GOALIE_COMPARISON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/goalie-comparison/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeGoalieComparisonRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeGoalieComparison({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeGoalieComparison: Wrapper<NhlEdgeGoalieComparisonRow[], NhlEdgeGoalieComparisonParams> = (params: WrapperParams = {}) => callFlat(GOALIE_COMPARISON_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieComparison} (py/R parity). */
@@ -326,12 +331,13 @@ const GOALIE_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/goalie-detail/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeGoalieDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeGoalieDetail({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeGoalieDetail: Wrapper<NhlEdgeGoalieDetailRow[], NhlEdgeGoalieDetailParams> = (params: WrapperParams = {}) => callFlat(GOALIE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieDetail} (py/R parity). */
@@ -370,12 +376,13 @@ const GOALIE_EDGE_SAVE_PCTG_TOP_10_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/goalie-edge-save-pctg-top-10/{sort_by}/{season}/{game_type}`
  *
- * @param params.sort_by - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sort_by - `number | string` — the `{sort_by}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeGoalieEdgeSavePctgTop10({ sort_by: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeGoalieEdgeSavePctgTop10: Wrapper<Row[], NhlEdgeGoalieEdgeSavePctgTop10Params> = (params: WrapperParams = {}) => callFlat(GOALIE_EDGE_SAVE_PCTG_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieEdgeSavePctgTop10} (py/R parity). */
@@ -412,11 +419,12 @@ const GOALIE_LANDING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/goalie-landing/{season}/{game_type}`
  *
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeGoalieLandingRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeGoalieLanding({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeGoalieLanding: Wrapper<NhlEdgeGoalieLandingRow[], NhlEdgeGoalieLandingParams> = (params: WrapperParams = {}) => callFlat(GOALIE_LANDING_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieLanding} (py/R parity). */
@@ -456,12 +464,13 @@ const GOALIE_SAVE_PERCENTAGE_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/goalie-save-percentage-detail/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeGoalieSavePercentageDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeGoalieSavePercentageDetail({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeGoalieSavePercentageDetail: Wrapper<NhlEdgeGoalieSavePercentageDetailRow[], NhlEdgeGoalieSavePercentageDetailParams> = (params: WrapperParams = {}) => callFlat(GOALIE_SAVE_PERCENTAGE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieSavePercentageDetail} (py/R parity). */
@@ -501,12 +510,13 @@ const GOALIE_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/goalie-shot-location-detail/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeGoalieShotLocationDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeGoalieShotLocationDetail({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeGoalieShotLocationDetail: Wrapper<NhlEdgeGoalieShotLocationDetailRow[], NhlEdgeGoalieShotLocationDetailParams> = (params: WrapperParams = {}) => callFlat(GOALIE_SHOT_LOCATION_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieShotLocationDetail} (py/R parity). */
@@ -548,13 +558,14 @@ const GOALIE_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/goalie-shot-location-top-10/{category}/{sort_by}/{season}/{game_type}`
  *
- * @param params.category - path parameter.
- * @param params.sort_by - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.category - `number | string` — the `{category}` path segment.
+ * @param params.sort_by - `number | string` — the `{sort_by}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeGoalieShotLocationTop10({ category: '…', sort_by: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeGoalieShotLocationTop10: Wrapper<Row[], NhlEdgeGoalieShotLocationTop10Params> = (params: WrapperParams = {}) => callFlat(GOALIE_SHOT_LOCATION_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieShotLocationTop10} (py/R parity). */
@@ -594,12 +605,13 @@ const SKATER_COMPARISON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-comparison/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeSkaterComparisonRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterComparison({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterComparison: Wrapper<NhlEdgeSkaterComparisonRow[], NhlEdgeSkaterComparisonParams> = (params: WrapperParams = {}) => callFlat(SKATER_COMPARISON_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterComparison} (py/R parity). */
@@ -639,12 +651,13 @@ const SKATER_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-detail/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeSkaterDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterDetail({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterDetail: Wrapper<NhlEdgeSkaterDetailRow[], NhlEdgeSkaterDetailParams> = (params: WrapperParams = {}) => callFlat(SKATER_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterDetail} (py/R parity). */
@@ -689,14 +702,15 @@ const SKATER_DISTANCE_TOP_10_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-distance-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}`
  *
- * @param params.positions - path parameter.
- * @param params.strength - path parameter.
- * @param params.sort_by - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.positions - `number | string` — the `{positions}` path segment.
+ * @param params.strength - `number | string` — the `{strength}` path segment.
+ * @param params.sort_by - `number | string` — the `{sort_by}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterDistanceTop10({ positions: '…', strength: '…', sort_by: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterDistanceTop10: Wrapper<Row[], NhlEdgeSkaterDistanceTop10Params> = (params: WrapperParams = {}) => callFlat(SKATER_DISTANCE_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterDistanceTop10} (py/R parity). */
@@ -733,11 +747,12 @@ const SKATER_LANDING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-landing/{season}/{game_type}`
  *
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeSkaterLandingRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterLanding({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterLanding: Wrapper<NhlEdgeSkaterLandingRow[], NhlEdgeSkaterLandingParams> = (params: WrapperParams = {}) => callFlat(SKATER_LANDING_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterLanding} (py/R parity). */
@@ -777,12 +792,13 @@ const SKATER_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-shot-location-detail/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeSkaterShotLocationDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterShotLocationDetail({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterShotLocationDetail: Wrapper<NhlEdgeSkaterShotLocationDetailRow[], NhlEdgeSkaterShotLocationDetailParams> = (params: WrapperParams = {}) => callFlat(SKATER_SHOT_LOCATION_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterShotLocationDetail} (py/R parity). */
@@ -827,14 +843,15 @@ const SKATER_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-shot-location-top-10/{position}/{category}/{sort_by}/{season}/{game_type}`
  *
- * @param params.position - path parameter.
- * @param params.category - path parameter.
- * @param params.sort_by - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.position - `number | string` — the `{position}` path segment.
+ * @param params.category - `number | string` — the `{category}` path segment.
+ * @param params.sort_by - `number | string` — the `{sort_by}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterShotLocationTop10({ position: '…', category: '…', sort_by: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterShotLocationTop10: Wrapper<Row[], NhlEdgeSkaterShotLocationTop10Params> = (params: WrapperParams = {}) => callFlat(SKATER_SHOT_LOCATION_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterShotLocationTop10} (py/R parity). */
@@ -874,12 +891,13 @@ const SKATER_SHOT_SPEED_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-shot-speed-detail/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeSkaterShotSpeedDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterShotSpeedDetail({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterShotSpeedDetail: Wrapper<NhlEdgeSkaterShotSpeedDetailRow[], NhlEdgeSkaterShotSpeedDetailParams> = (params: WrapperParams = {}) => callFlat(SKATER_SHOT_SPEED_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterShotSpeedDetail} (py/R parity). */
@@ -921,13 +939,14 @@ const SKATER_SHOT_SPEED_TOP_10_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-shot-speed-top-10/{positions}/{sort_by}/{season}/{game_type}`
  *
- * @param params.positions - path parameter.
- * @param params.sort_by - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.positions - `number | string` — the `{positions}` path segment.
+ * @param params.sort_by - `number | string` — the `{sort_by}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterShotSpeedTop10({ positions: '…', sort_by: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterShotSpeedTop10: Wrapper<Row[], NhlEdgeSkaterShotSpeedTop10Params> = (params: WrapperParams = {}) => callFlat(SKATER_SHOT_SPEED_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterShotSpeedTop10} (py/R parity). */
@@ -967,12 +986,13 @@ const SKATER_SKATING_DISTANCE_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-skating-distance-detail/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeSkaterSkatingDistanceDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterSkatingDistanceDetail({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterSkatingDistanceDetail: Wrapper<NhlEdgeSkaterSkatingDistanceDetailRow[], NhlEdgeSkaterSkatingDistanceDetailParams> = (params: WrapperParams = {}) => callFlat(SKATER_SKATING_DISTANCE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterSkatingDistanceDetail} (py/R parity). */
@@ -1012,12 +1032,13 @@ const SKATER_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-skating-speed-detail/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeSkaterSkatingSpeedDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterSkatingSpeedDetail({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterSkatingSpeedDetail: Wrapper<NhlEdgeSkaterSkatingSpeedDetailRow[], NhlEdgeSkaterSkatingSpeedDetailParams> = (params: WrapperParams = {}) => callFlat(SKATER_SKATING_SPEED_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterSkatingSpeedDetail} (py/R parity). */
@@ -1059,13 +1080,14 @@ const SKATER_SPEED_TOP_10_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-speed-top-10/{positions}/{sort_by}/{season}/{game_type}`
  *
- * @param params.positions - path parameter.
- * @param params.sort_by - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.positions - `number | string` — the `{positions}` path segment.
+ * @param params.sort_by - `number | string` — the `{sort_by}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterSpeedTop10({ positions: '…', sort_by: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterSpeedTop10: Wrapper<Row[], NhlEdgeSkaterSpeedTop10Params> = (params: WrapperParams = {}) => callFlat(SKATER_SPEED_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterSpeedTop10} (py/R parity). */
@@ -1105,12 +1127,13 @@ const SKATER_ZONE_TIME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-zone-time/{player_id}/{season}/{game_type}`
  *
- * @param params.player_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `{player_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeSkaterZoneTimeRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterZoneTime({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterZoneTime: Wrapper<NhlEdgeSkaterZoneTimeRow[], NhlEdgeSkaterZoneTimeParams> = (params: WrapperParams = {}) => callFlat(SKATER_ZONE_TIME_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterZoneTime} (py/R parity). */
@@ -1155,14 +1178,15 @@ const SKATER_ZONE_TIME_TOP_10_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/skater-zone-time-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}`
  *
- * @param params.positions - path parameter.
- * @param params.strength - path parameter.
- * @param params.sort_by - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.positions - `number | string` — the `{positions}` path segment.
+ * @param params.strength - `number | string` — the `{strength}` path segment.
+ * @param params.sort_by - `number | string` — the `{sort_by}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeSkaterZoneTimeTop10({ positions: '…', strength: '…', sort_by: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeSkaterZoneTimeTop10: Wrapper<Row[], NhlEdgeSkaterZoneTimeTop10Params> = (params: WrapperParams = {}) => callFlat(SKATER_ZONE_TIME_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterZoneTimeTop10} (py/R parity). */
@@ -1202,12 +1226,13 @@ const TEAM_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/team-detail/{team_id}/{season}/{game_type}`
  *
- * @param params.team_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeTeamDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeTeamDetail({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeTeamDetail: Wrapper<NhlEdgeTeamDetailRow[], NhlEdgeTeamDetailParams> = (params: WrapperParams = {}) => callFlat(TEAM_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamDetail} (py/R parity). */
@@ -1244,11 +1269,12 @@ const TEAM_LANDING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/team-landing/{season}/{game_type}`
  *
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeTeamLandingRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeTeamLanding({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeTeamLanding: Wrapper<NhlEdgeTeamLandingRow[], NhlEdgeTeamLandingParams> = (params: WrapperParams = {}) => callFlat(TEAM_LANDING_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamLanding} (py/R parity). */
@@ -1288,12 +1314,13 @@ const TEAM_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/team-shot-location-detail/{team_id}/{season}/{game_type}`
  *
- * @param params.team_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeTeamShotLocationDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeTeamShotLocationDetail({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeTeamShotLocationDetail: Wrapper<NhlEdgeTeamShotLocationDetailRow[], NhlEdgeTeamShotLocationDetailParams> = (params: WrapperParams = {}) => callFlat(TEAM_SHOT_LOCATION_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamShotLocationDetail} (py/R parity). */
@@ -1338,14 +1365,15 @@ const TEAM_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/team-shot-location-top-10/{position}/{category}/{sort_by}/{season}/{game_type}`
  *
- * @param params.position - path parameter.
- * @param params.category - path parameter.
- * @param params.sort_by - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.position - `number | string` — the `{position}` path segment.
+ * @param params.category - `number | string` — the `{category}` path segment.
+ * @param params.sort_by - `number | string` — the `{sort_by}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeTeamShotLocationTop10({ position: '…', category: '…', sort_by: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeTeamShotLocationTop10: Wrapper<Row[], NhlEdgeTeamShotLocationTop10Params> = (params: WrapperParams = {}) => callFlat(TEAM_SHOT_LOCATION_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamShotLocationTop10} (py/R parity). */
@@ -1385,12 +1413,13 @@ const TEAM_SHOT_SPEED_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/team-shot-speed-detail/{team_id}/{season}/{game_type}`
  *
- * @param params.team_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeTeamShotSpeedDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeTeamShotSpeedDetail({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeTeamShotSpeedDetail: Wrapper<NhlEdgeTeamShotSpeedDetailRow[], NhlEdgeTeamShotSpeedDetailParams> = (params: WrapperParams = {}) => callFlat(TEAM_SHOT_SPEED_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamShotSpeedDetail} (py/R parity). */
@@ -1428,12 +1457,13 @@ const TEAM_SKATING_DISTANCE_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/team-skating-distance-detail/{team_id}/{season}/{game_type}`
  *
- * @param params.team_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
- * @returns The raw response (this endpoint has no parser).
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
+ * @returns `Promise<unknown>`: the raw response (this endpoint has no parser).
  * @example await sdv.nhl.nhlEdgeTeamSkatingDistanceDetail({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeTeamSkatingDistanceDetail: Wrapper<unknown, NhlEdgeTeamSkatingDistanceDetailParams> = (params: WrapperParams = {}) => callFlat(TEAM_SKATING_DISTANCE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamSkatingDistanceDetail} (py/R parity). */
@@ -1478,14 +1508,15 @@ const TEAM_SKATING_DISTANCE_TOP_10_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/team-skating-distance-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}`
  *
- * @param params.positions - path parameter.
- * @param params.strength - path parameter.
- * @param params.sort_by - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.positions - `number | string` — the `{positions}` path segment.
+ * @param params.strength - `number | string` — the `{strength}` path segment.
+ * @param params.sort_by - `number | string` — the `{sort_by}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeTeamSkatingDistanceTop10({ positions: '…', strength: '…', sort_by: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeTeamSkatingDistanceTop10: Wrapper<Row[], NhlEdgeTeamSkatingDistanceTop10Params> = (params: WrapperParams = {}) => callFlat(TEAM_SKATING_DISTANCE_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamSkatingDistanceTop10} (py/R parity). */
@@ -1523,12 +1554,13 @@ const TEAM_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/team-skating-speed-detail/{team_id}/{season}/{game_type}`
  *
- * @param params.team_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
- * @returns The raw response (this endpoint has no parser).
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
+ * @returns `Promise<unknown>`: the raw response (this endpoint has no parser).
  * @example await sdv.nhl.nhlEdgeTeamSkatingSpeedDetail({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeTeamSkatingSpeedDetail: Wrapper<unknown, NhlEdgeTeamSkatingSpeedDetailParams> = (params: WrapperParams = {}) => callFlat(TEAM_SKATING_SPEED_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamSkatingSpeedDetail} (py/R parity). */
@@ -1570,13 +1602,14 @@ const TEAM_SKATING_SPEED_TOP_10_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/team-skating-speed-top-10/{positions}/{sort_by}/{season}/{game_type}`
  *
- * @param params.positions - path parameter.
- * @param params.sort_by - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.positions - `number | string` — the `{positions}` path segment.
+ * @param params.sort_by - `number | string` — the `{sort_by}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeTeamSkatingSpeedTop10({ positions: '…', sort_by: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeTeamSkatingSpeedTop10: Wrapper<Row[], NhlEdgeTeamSkatingSpeedTop10Params> = (params: WrapperParams = {}) => callFlat(TEAM_SKATING_SPEED_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamSkatingSpeedTop10} (py/R parity). */
@@ -1616,12 +1649,13 @@ const TEAM_ZONE_TIME_DETAILS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/team-zone-time-details/{team_id}/{season}/{game_type}`
  *
- * @param params.team_id - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<NhlEdgeTeamZoneTimeDetailsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeTeamZoneTimeDetails({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeTeamZoneTimeDetails: Wrapper<NhlEdgeTeamZoneTimeDetailsRow[], NhlEdgeTeamZoneTimeDetailsParams> = (params: WrapperParams = {}) => callFlat(TEAM_ZONE_TIME_DETAILS_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamZoneTimeDetails} (py/R parity). */
@@ -1663,13 +1697,14 @@ const TEAM_ZONE_TIME_TOP_10_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-web.nhle.com/v1/edge/team-zone-time-top-10/{strength}/{sort_by}/{season}/{game_type}`
  *
- * @param params.strength - path parameter.
- * @param params.sort_by - path parameter.
- * @param params.season - path parameter *(optional)*.
- * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.strength - `number | string` — the `{strength}` path segment.
+ * @param params.sort_by - `number | string` — the `{sort_by}` path segment.
+ * @param params.season - `number | string` — the `{season}` path segment; optional.
+ * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlEdgeTeamZoneTimeTop10({ strength: '…', sort_by: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-edge-player-tracking
  */
 export const nhlEdgeTeamZoneTimeTop10: Wrapper<Row[], NhlEdgeTeamZoneTimeTop10Params> = (params: WrapperParams = {}) => callFlat(TEAM_ZONE_TIME_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamZoneTimeTop10} (py/R parity). */

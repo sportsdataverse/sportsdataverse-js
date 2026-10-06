@@ -63,13 +63,14 @@ const GAME_SHIFTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.game_id - query parameter.
- * @param params.feed - query parameter — default `modulekit`.
- * @param params.view - query parameter — default `gameshifts`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.game_id - `number | string` — the `game_id` query parameter.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
+ * @param params.view - `number | string` — the `view` query parameter; default `gameshifts`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechGameShifts({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechGameShifts: Wrapper<Row[], HockeytechGameShiftsParams> = (params: WrapperParams = {}) => callFlat(GAME_SHIFTS_DEF, params);
 /** snake_case alias of {@link hockeytechGameShifts} (py/R parity). */
@@ -112,13 +113,14 @@ const GAME_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.game_id - query parameter.
- * @param params.feed - query parameter — default `gc`.
- * @param params.view - query parameter — default `gamesummary`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.game_id - `number | string` — the `game_id` query parameter.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `gc`.
+ * @param params.view - `number | string` — the `view` query parameter; default `gamesummary`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechGameSummary({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechGameSummary: Wrapper<Row[], HockeytechGameSummaryParams> = (params: WrapperParams = {}) => callFlat(GAME_SUMMARY_DEF, params);
 /** snake_case alias of {@link hockeytechGameSummary} (py/R parity). */
@@ -181,17 +183,18 @@ const LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.season_id - query parameter.
- * @param params.team_id - query parameter — default `0`.
- * @param params.player_types - query parameter (`playerTypes`) — default `skaters`.
- * @param params.skater_stat_types - query parameter (`skaterStatTypes`) — default `points,goals`.
- * @param params.active_only - query parameter (`activeOnly`) — default `0`.
- * @param params.feed - query parameter — default `statviewfeed`.
- * @param params.view - query parameter — default `leadersExtended`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season_id - `number | string` — the `season_id` query parameter.
+ * @param params.team_id - `number | string` — the `team_id` query parameter; default `0`.
+ * @param params.player_types - `number | string` — the `playerTypes` query parameter; default `skaters`.
+ * @param params.skater_stat_types - `number | string` — the `skaterStatTypes` query parameter; default `points,goals`.
+ * @param params.active_only - `number | string` — the `activeOnly` query parameter; default `0`.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `statviewfeed`.
+ * @param params.view - `number | string` — the `view` query parameter; default `leadersExtended`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechLeaders({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechLeaders: Wrapper<Row[], HockeytechLeadersParams> = (params: WrapperParams = {}) => callFlat(LEADERS_DEF, params);
 /** snake_case alias of {@link hockeytechLeaders} (py/R parity). */
@@ -234,13 +237,14 @@ const PBP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.game_id - query parameter.
- * @param params.feed - query parameter — default `statviewfeed`.
- * @param params.view - query parameter — default `gameCenterPlayByPlay`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.game_id - `number | string` — the `game_id` query parameter.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `statviewfeed`.
+ * @param params.view - `number | string` — the `view` query parameter; default `gameCenterPlayByPlay`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechPbp({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechPbp: Wrapper<Row[], HockeytechPbpParams> = (params: WrapperParams = {}) => callFlat(PBP_DEF, params);
 /** snake_case alias of {@link hockeytechPbp} (py/R parity). */
@@ -292,15 +296,16 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.player_id - query parameter.
- * @param params.season_id - query parameter.
- * @param params.category - query parameter — default `gamebygame`.
- * @param params.feed - query parameter — default `modulekit`.
- * @param params.view - query parameter — default `player`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.player_id - `number | string` — the `player_id` query parameter.
+ * @param params.season_id - `number | string` — the `season_id` query parameter.
+ * @param params.category - `number | string` — the `category` query parameter; default `gamebygame`.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
+ * @param params.view - `number | string` — the `view` query parameter; default `player`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechPlayerGameLog({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechPlayerGameLog: Wrapper<Row[], HockeytechPlayerGameLogParams> = (params: WrapperParams = {}) => callFlat(PLAYER_GAME_LOG_DEF, params);
 /** snake_case alias of {@link hockeytechPlayerGameLog} (py/R parity). */
@@ -343,13 +348,14 @@ const PLAYER_SEARCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.search_term - query parameter.
- * @param params.feed - query parameter — default `modulekit`.
- * @param params.view - query parameter — default `searchplayers`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.search_term - `number | string` — the `search_term` query parameter.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
+ * @param params.view - `number | string` — the `view` query parameter; default `searchplayers`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechPlayerSearch({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechPlayerSearch: Wrapper<Row[], HockeytechPlayerSearchParams> = (params: WrapperParams = {}) => callFlat(PLAYER_SEARCH_DEF, params);
 /** snake_case alias of {@link hockeytechPlayerSearch} (py/R parity). */
@@ -397,14 +403,15 @@ const PLAYER_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.player_id - query parameter.
- * @param params.category - query parameter — default `seasonstats`.
- * @param params.feed - query parameter — default `modulekit`.
- * @param params.view - query parameter — default `player`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.player_id - `number | string` — the `player_id` query parameter.
+ * @param params.category - `number | string` — the `category` query parameter; default `seasonstats`.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
+ * @param params.view - `number | string` — the `view` query parameter; default `player`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechPlayerStats({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechPlayerStats: Wrapper<Row[], HockeytechPlayerStatsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link hockeytechPlayerStats} (py/R parity). */
@@ -451,14 +458,15 @@ const PLAYOFF_BRACKET_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.season_id - query parameter.
- * @param params.feed - query parameter — default `modulekit`.
- * @param params.league_id - query parameter.
- * @param params.view - query parameter — default `brackets`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season_id - `number | string` — the `season_id` query parameter.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
+ * @param params.league_id - `number | string` — the `league_id` query parameter.
+ * @param params.view - `number | string` — the `view` query parameter; default `brackets`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechPlayoffBracket({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechPlayoffBracket: Wrapper<Row[], HockeytechPlayoffBracketParams> = (params: WrapperParams = {}) => callFlat(PLAYOFF_BRACKET_DEF, params);
 /** snake_case alias of {@link hockeytechPlayoffBracket} (py/R parity). */
@@ -520,17 +528,18 @@ const SCHEDULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.season_id - query parameter.
- * @param params.number_of_days_back - query parameter (`numberofdaysback`) — default `10000`.
- * @param params.number_of_days_ahead - query parameter (`numberofdaysahead`) — default `10000`.
- * @param params.limit - query parameter — default `10000`.
- * @param params.feed - query parameter — default `modulekit`.
- * @param params.league_id - query parameter.
- * @param params.view - query parameter — default `scorebar`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season_id - `number | string` — the `season_id` query parameter.
+ * @param params.number_of_days_back - `number | string` — the `numberofdaysback` query parameter; default `10000`.
+ * @param params.number_of_days_ahead - `number | string` — the `numberofdaysahead` query parameter; default `10000`.
+ * @param params.limit - `number | string` — the `limit` query parameter; default `10000`.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
+ * @param params.league_id - `number | string` — the `league_id` query parameter.
+ * @param params.view - `number | string` — the `view` query parameter; default `scorebar`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechSchedule({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechSchedule: Wrapper<Row[], HockeytechScheduleParams> = (params: WrapperParams = {}) => callFlat(SCHEDULE_DEF, params);
 /** snake_case alias of {@link hockeytechSchedule} (py/R parity). */
@@ -588,16 +597,17 @@ const SCOREBAR_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.number_of_days_back - query parameter (`numberofdaysback`) — default `3`.
- * @param params.number_of_days_ahead - query parameter (`numberofdaysahead`) — default `3`.
- * @param params.limit - query parameter — default `100`.
- * @param params.feed - query parameter — default `modulekit`.
- * @param params.league_id - query parameter.
- * @param params.view - query parameter — default `scorebar`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.number_of_days_back - `number | string` — the `numberofdaysback` query parameter; default `3`.
+ * @param params.number_of_days_ahead - `number | string` — the `numberofdaysahead` query parameter; default `3`.
+ * @param params.limit - `number | string` — the `limit` query parameter; default `100`.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
+ * @param params.league_id - `number | string` — the `league_id` query parameter.
+ * @param params.view - `number | string` — the `view` query parameter; default `scorebar`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechScorebar({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechScorebar: Wrapper<Row[], HockeytechScorebarParams> = (params: WrapperParams = {}) => callFlat(SCOREBAR_DEF, params);
 /** snake_case alias of {@link hockeytechScorebar} (py/R parity). */
@@ -636,12 +646,13 @@ const SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.feed - query parameter — default `modulekit`.
- * @param params.view - query parameter — default `seasons`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
+ * @param params.view - `number | string` — the `view` query parameter; default `seasons`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechSeasons({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechSeasons: Wrapper<Row[], HockeytechSeasonsParams> = (params: WrapperParams = {}) => callFlat(SEASONS_DEF, params);
 /** snake_case alias of {@link hockeytechSeasons} (py/R parity). */
@@ -708,18 +719,19 @@ const STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.season_id - query parameter (`season`).
- * @param params.feed - query parameter — default `statviewfeed`.
- * @param params.league_id - query parameter.
- * @param params.view - query parameter — default `teams`.
- * @param params.group_teams_by - query parameter (`groupTeamsBy`) — default `division`.
- * @param params.context - query parameter — default `overall`.
- * @param params.special - query parameter — default `false`.
- * @param params.sort - query parameter — default `points`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season_id - `number | string` — the `season` query parameter.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `statviewfeed`.
+ * @param params.league_id - `number | string` — the `league_id` query parameter.
+ * @param params.view - `number | string` — the `view` query parameter; default `teams`.
+ * @param params.group_teams_by - `number | string` — the `groupTeamsBy` query parameter; default `division`.
+ * @param params.context - `number | string` — the `context` query parameter; default `overall`.
+ * @param params.special - `number | string` — the `special` query parameter; default `false`.
+ * @param params.sort - `number | string` — the `sort` query parameter; default `points`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechStandings({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechStandings: Wrapper<Row[], HockeytechStandingsParams> = (params: WrapperParams = {}) => callFlat(STANDINGS_DEF, params);
 /** snake_case alias of {@link hockeytechStandings} (py/R parity). */
@@ -767,14 +779,15 @@ const STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.season_id - query parameter.
- * @param params.type - query parameter — default `skaters`.
- * @param params.feed - query parameter — default `modulekit`.
- * @param params.view - query parameter — default `statviewtype`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season_id - `number | string` — the `season_id` query parameter.
+ * @param params.type - `number | string` — the `type` query parameter; default `skaters`.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
+ * @param params.view - `number | string` — the `view` query parameter; default `statviewtype`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechStats({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechStats: Wrapper<Row[], HockeytechStatsParams> = (params: WrapperParams = {}) => callFlat(STATS_DEF, params);
 /** snake_case alias of {@link hockeytechStats} (py/R parity). */
@@ -821,14 +834,15 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.team_id - query parameter.
- * @param params.season_id - query parameter.
- * @param params.feed - query parameter — default `modulekit`.
- * @param params.view - query parameter — default `roster`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.team_id - `number | string` — the `team_id` query parameter.
+ * @param params.season_id - `number | string` — the `season_id` query parameter.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
+ * @param params.view - `number | string` — the `view` query parameter; default `roster`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechTeamRoster({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechTeamRoster: Wrapper<Row[], HockeytechTeamRosterParams> = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_DEF, params);
 /** snake_case alias of {@link hockeytechTeamRoster} (py/R parity). */
@@ -871,13 +885,14 @@ const TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.season_id - query parameter (`season`).
- * @param params.feed - query parameter — default `modulekit`.
- * @param params.view - query parameter — default `teamsbyseason`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season_id - `number | string` — the `season` query parameter.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
+ * @param params.view - `number | string` — the `view` query parameter; default `teamsbyseason`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechTeams({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechTeams: Wrapper<Row[], HockeytechTeamsParams> = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
 /** snake_case alias of {@link hockeytechTeams} (py/R parity). */
@@ -920,13 +935,14 @@ const TRANSACTIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
  *
- * @param params.league - query parameter.
- * @param params.feed - query parameter — default `modulekit`.
- * @param params.league_id - query parameter.
- * @param params.view - query parameter — default `transactions`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
+ * @param params.league_id - `number | string` — the `league_id` query parameter.
+ * @param params.view - `number | string` — the `view` query parameter; default `transactions`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechTransactions({});
+ * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
 export const hockeytechTransactions: Wrapper<Row[], HockeytechTransactionsParams> = (params: WrapperParams = {}) => callFlat(TRANSACTIONS_DEF, params);
 /** snake_case alias of {@link hockeytechTransactions} (py/R parity). */
