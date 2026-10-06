@@ -18,7 +18,7 @@ import { isPlainObject, underscore } from "./_normalize.js";
 import { MULTI_TABLE_SECTIONS, sectionError } from "./_frames.js";
 import { registerParser } from "./_registry.js";
 
-type Row = Record<string, any>;
+import type { ParserRow as Row } from "../core/types.js";
 type Cell = string | number | null;
 /** A column-ordered table (rows keyed by column name). */
 interface Frame {

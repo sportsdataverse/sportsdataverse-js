@@ -6,7 +6,21 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  Sports247Sports247CoachesRow,
+  Sports247Sports247CompositeTeamRankingFeedRow,
+  Sports247Sports247InstitutionRankingsRow,
+  Sports247Sports247PositionsRow,
+  Sports247Sports247RecruitsRow,
+  Sports247Sports247SportYearsRow,
+  Sports247Sports247TagsAutocompleteRow,
+  Sports247Sports247TargetPredictionsRow,
+  Sports247Sports247TeamsRow,
+  Sports247Sports247TransferPortalPlayerFeedRow,
+  Sports247Sports247TransferPortalTeamFeedRow,
+  Sports247Sports247TransfersRow,
+} from "../rows/sports247.js";
 
 const COACHES_DEF: WrapperDef = {
   "short": "coaches",
@@ -56,7 +70,7 @@ const COACHES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247Coaches({});
  */
-export const sports247Coaches: WrapperFn = (params = {}) => callFlat(COACHES_DEF, params);
+export const sports247Coaches: Wrapper<Sports247Sports247CoachesRow[]> = (params: WrapperParams = {}) => callFlat(COACHES_DEF, params);
 /** snake_case alias of {@link sports247Coaches} (py/R parity). */
 export const sports247_coaches = sports247Coaches;
 
@@ -102,7 +116,7 @@ const COMPOSITE_TEAM_RANKING_FEED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247CompositeTeamRankingFeed({ year: '…' });
  */
-export const sports247CompositeTeamRankingFeed: WrapperFn = (params = {}) => callFlat(COMPOSITE_TEAM_RANKING_FEED_DEF, params);
+export const sports247CompositeTeamRankingFeed: Wrapper<Sports247Sports247CompositeTeamRankingFeedRow[]> = (params: WrapperParams = {}) => callFlat(COMPOSITE_TEAM_RANKING_FEED_DEF, params);
 /** snake_case alias of {@link sports247CompositeTeamRankingFeed} (py/R parity). */
 export const sports247_composite_team_ranking_feed = sports247CompositeTeamRankingFeed;
 
@@ -168,7 +182,7 @@ const INSTITUTION_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247InstitutionRankings({ year: '…' });
  */
-export const sports247InstitutionRankings: WrapperFn = (params = {}) => callFlat(INSTITUTION_RANKINGS_DEF, params);
+export const sports247InstitutionRankings: Wrapper<Sports247Sports247InstitutionRankingsRow[]> = (params: WrapperParams = {}) => callFlat(INSTITUTION_RANKINGS_DEF, params);
 /** snake_case alias of {@link sports247InstitutionRankings} (py/R parity). */
 export const sports247_institution_rankings = sports247InstitutionRankings;
 
@@ -213,7 +227,7 @@ const POSITIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247Positions({});
  */
-export const sports247Positions: WrapperFn = (params = {}) => callFlat(POSITIONS_DEF, params);
+export const sports247Positions: Wrapper<Sports247Sports247PositionsRow[]> = (params: WrapperParams = {}) => callFlat(POSITIONS_DEF, params);
 /** snake_case alias of {@link sports247Positions} (py/R parity). */
 export const sports247_positions = sports247Positions;
 
@@ -275,7 +289,7 @@ const RECRUITS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247Recruits({});
  */
-export const sports247Recruits: WrapperFn = (params = {}) => callFlat(RECRUITS_DEF, params);
+export const sports247Recruits: Wrapper<Sports247Sports247RecruitsRow[]> = (params: WrapperParams = {}) => callFlat(RECRUITS_DEF, params);
 /** snake_case alias of {@link sports247Recruits} (py/R parity). */
 export const sports247_recruits = sports247Recruits;
 
@@ -310,7 +324,7 @@ const SPORT_YEARS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247SportYears({});
  */
-export const sports247SportYears: WrapperFn = (params = {}) => callFlat(SPORT_YEARS_DEF, params);
+export const sports247SportYears: Wrapper<Sports247Sports247SportYearsRow[]> = (params: WrapperParams = {}) => callFlat(SPORT_YEARS_DEF, params);
 /** snake_case alias of {@link sports247SportYears} (py/R parity). */
 export const sports247_sport_years = sports247SportYears;
 
@@ -350,7 +364,7 @@ const TAGS_AUTOCOMPLETE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247TagsAutocomplete({});
  */
-export const sports247TagsAutocomplete: WrapperFn = (params = {}) => callFlat(TAGS_AUTOCOMPLETE_DEF, params);
+export const sports247TagsAutocomplete: Wrapper<Sports247Sports247TagsAutocompleteRow[]> = (params: WrapperParams = {}) => callFlat(TAGS_AUTOCOMPLETE_DEF, params);
 /** snake_case alias of {@link sports247TagsAutocomplete} (py/R parity). */
 export const sports247_tags_autocomplete = sports247TagsAutocomplete;
 
@@ -400,7 +414,7 @@ const TARGET_PREDICTIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247TargetPredictions({ site_key: '…', year: '…' });
  */
-export const sports247TargetPredictions: WrapperFn = (params = {}) => callFlat(TARGET_PREDICTIONS_DEF, params);
+export const sports247TargetPredictions: Wrapper<Sports247Sports247TargetPredictionsRow[]> = (params: WrapperParams = {}) => callFlat(TARGET_PREDICTIONS_DEF, params);
 /** snake_case alias of {@link sports247TargetPredictions} (py/R parity). */
 export const sports247_target_predictions = sports247TargetPredictions;
 
@@ -445,7 +459,7 @@ const TEAMS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247Teams({});
  */
-export const sports247Teams: WrapperFn = (params = {}) => callFlat(TEAMS_DEF, params);
+export const sports247Teams: Wrapper<Sports247Sports247TeamsRow[]> = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
 /** snake_case alias of {@link sports247Teams} (py/R parity). */
 export const sports247_teams = sports247Teams;
 
@@ -491,7 +505,7 @@ const TRANSFER_PORTAL_PLAYER_FEED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247TransferPortalPlayerFeed({ year: '…' });
  */
-export const sports247TransferPortalPlayerFeed: WrapperFn = (params = {}) => callFlat(TRANSFER_PORTAL_PLAYER_FEED_DEF, params);
+export const sports247TransferPortalPlayerFeed: Wrapper<Sports247Sports247TransferPortalPlayerFeedRow[]> = (params: WrapperParams = {}) => callFlat(TRANSFER_PORTAL_PLAYER_FEED_DEF, params);
 /** snake_case alias of {@link sports247TransferPortalPlayerFeed} (py/R parity). */
 export const sports247_transfer_portal_player_feed = sports247TransferPortalPlayerFeed;
 
@@ -537,7 +551,7 @@ const TRANSFER_PORTAL_TEAM_FEED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247TransferPortalTeamFeed({ year: '…' });
  */
-export const sports247TransferPortalTeamFeed: WrapperFn = (params = {}) => callFlat(TRANSFER_PORTAL_TEAM_FEED_DEF, params);
+export const sports247TransferPortalTeamFeed: Wrapper<Sports247Sports247TransferPortalTeamFeedRow[]> = (params: WrapperParams = {}) => callFlat(TRANSFER_PORTAL_TEAM_FEED_DEF, params);
 /** snake_case alias of {@link sports247TransferPortalTeamFeed} (py/R parity). */
 export const sports247_transfer_portal_team_feed = sports247TransferPortalTeamFeed;
 
@@ -589,6 +603,6 @@ const TRANSFERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.sports247.sports247Transfers({});
  */
-export const sports247Transfers: WrapperFn = (params = {}) => callFlat(TRANSFERS_DEF, params);
+export const sports247Transfers: Wrapper<Sports247Sports247TransfersRow[]> = (params: WrapperParams = {}) => callFlat(TRANSFERS_DEF, params);
 /** snake_case alias of {@link sports247Transfers} (py/R parity). */
 export const sports247_transfers = sports247Transfers;

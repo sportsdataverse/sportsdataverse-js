@@ -13,7 +13,7 @@
 
 import { idColumnsToStrings } from "../core/int64.js";
 
-type Row = Record<string, any>;
+import type { ParserRow as Row } from "../core/types.js";
 type ResultSet = { name?: string; headers?: any; rowSet?: any };
 
 /** sdv-py `dl_utils.underscore` (keeps spaces/dots, unlike `snakeCase`). */

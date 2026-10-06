@@ -26,7 +26,7 @@ export default {
      */
     getPlayByPlay: async function (id) {
         // via espn_cfb_cdn_playbyplay (https; core request layer + error vocabulary)
-        const res = { data: await espnCfbCdnPlaybyplay({ game_id: id }) };
+        const res = { data: (await espnCfbCdnPlaybyplay({ game_id: id })) as any };
 
         return {
             teams: res.data.gamepackageJSON.header.competitions[0].competitors,
@@ -52,7 +52,7 @@ export default {
      */
     getBoxScore: async function (id) {
         // via espn_cfb_cdn_boxscore (https; core request layer + error vocabulary)
-        const res = { data: await espnCfbCdnBoxscore({ game_id: id }) };
+        const res = { data: (await espnCfbCdnBoxscore({ game_id: id })) as any };
 
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
@@ -315,7 +315,7 @@ export default {
      */
     getRankings: async function ({ year, week }) {
         // via espn_cfb_cdn_rankings (https; core request layer + error vocabulary)
-        const res = { data: await espnCfbCdnRankings({ season: year || undefined, week: week || undefined }) };
+        const res = { data: (await espnCfbCdnRankings({ season: year || undefined, week: week || undefined })) as any };
         return res.data;
     },
     /**
@@ -338,9 +338,9 @@ export default {
     getSchedule: async function ({ year, month, day, groups = 80, seasontype = 2, week = null }) {
         // The CDN ignores a date for football: select the week (espn_cfb_cdn_schedule).
         if (week == null && cdnDate(year, month, day)) warnFootballDate("cfb");
-        const res = await espnCfbCdnSchedule(
+        const res = (await espnCfbCdnSchedule(
             week != null ? { week, season: year, season_type: seasontype } : { date: cdnDate(year, month, day) }
-        );
+        )) as any;
         return res.content.schedule;
     },
     /**

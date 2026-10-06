@@ -6,7 +6,10 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  MlbStatcastScheduleRow,
+} from "../rows/mlb_statcast.js";
 
 const GAMEFEED_DEF: WrapperDef = {
   "short": "gamefeed",
@@ -40,7 +43,7 @@ const GAMEFEED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastGamefeed({});
  */
-export const mlbStatcastGamefeed: WrapperFn = (params = {}) => callFlat(GAMEFEED_DEF, params);
+export const mlbStatcastGamefeed: Wrapper = (params: WrapperParams = {}) => callFlat(GAMEFEED_DEF, params);
 /** snake_case alias of {@link mlbStatcastGamefeed} (py/R parity). */
 export const mlb_statcast_gamefeed = mlbStatcastGamefeed;
 
@@ -88,7 +91,7 @@ const LEADERBOARD_ACTIVE_SPIN_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardActiveSpin({});
  */
-export const mlbStatcastLeaderboardActiveSpin: WrapperFn = (params = {}) => callFlat(LEADERBOARD_ACTIVE_SPIN_DEF, params);
+export const mlbStatcastLeaderboardActiveSpin: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_ACTIVE_SPIN_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardActiveSpin} (py/R parity). */
 export const mlb_statcast_leaderboard_active_spin = mlbStatcastLeaderboardActiveSpin;
 
@@ -136,7 +139,7 @@ const LEADERBOARD_ARM_ANGLES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardArmAngles({});
  */
-export const mlbStatcastLeaderboardArmAngles: WrapperFn = (params = {}) => callFlat(LEADERBOARD_ARM_ANGLES_DEF, params);
+export const mlbStatcastLeaderboardArmAngles: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_ARM_ANGLES_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardArmAngles} (py/R parity). */
 export const mlb_statcast_leaderboard_arm_angles = mlbStatcastLeaderboardArmAngles;
 
@@ -184,7 +187,7 @@ const LEADERBOARD_ARM_STRENGTH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardArmStrength({});
  */
-export const mlbStatcastLeaderboardArmStrength: WrapperFn = (params = {}) => callFlat(LEADERBOARD_ARM_STRENGTH_DEF, params);
+export const mlbStatcastLeaderboardArmStrength: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_ARM_STRENGTH_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardArmStrength} (py/R parity). */
 export const mlb_statcast_leaderboard_arm_strength = mlbStatcastLeaderboardArmStrength;
 
@@ -232,7 +235,7 @@ const LEADERBOARD_BASERUNNING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardBaserunning({});
  */
-export const mlbStatcastLeaderboardBaserunning: WrapperFn = (params = {}) => callFlat(LEADERBOARD_BASERUNNING_DEF, params);
+export const mlbStatcastLeaderboardBaserunning: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_BASERUNNING_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardBaserunning} (py/R parity). */
 export const mlb_statcast_leaderboard_baserunning = mlbStatcastLeaderboardBaserunning;
 
@@ -280,7 +283,7 @@ const LEADERBOARD_BASERUNNING_RUN_VALUE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardBaserunningRunValue({});
  */
-export const mlbStatcastLeaderboardBaserunningRunValue: WrapperFn = (params = {}) => callFlat(LEADERBOARD_BASERUNNING_RUN_VALUE_DEF, params);
+export const mlbStatcastLeaderboardBaserunningRunValue: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_BASERUNNING_RUN_VALUE_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardBaserunningRunValue} (py/R parity). */
 export const mlb_statcast_leaderboard_baserunning_run_value = mlbStatcastLeaderboardBaserunningRunValue;
 
@@ -328,7 +331,7 @@ const LEADERBOARD_BASESTEALING_RUN_VALUE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardBasestealingRunValue({});
  */
-export const mlbStatcastLeaderboardBasestealingRunValue: WrapperFn = (params = {}) => callFlat(LEADERBOARD_BASESTEALING_RUN_VALUE_DEF, params);
+export const mlbStatcastLeaderboardBasestealingRunValue: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_BASESTEALING_RUN_VALUE_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardBasestealingRunValue} (py/R parity). */
 export const mlb_statcast_leaderboard_basestealing_run_value = mlbStatcastLeaderboardBasestealingRunValue;
 
@@ -376,7 +379,7 @@ const LEADERBOARD_BAT_TRACKING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardBatTracking({});
  */
-export const mlbStatcastLeaderboardBatTracking: WrapperFn = (params = {}) => callFlat(LEADERBOARD_BAT_TRACKING_DEF, params);
+export const mlbStatcastLeaderboardBatTracking: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_BAT_TRACKING_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardBatTracking} (py/R parity). */
 export const mlb_statcast_leaderboard_bat_tracking = mlbStatcastLeaderboardBatTracking;
 
@@ -424,7 +427,7 @@ const LEADERBOARD_BATTED_BALL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardBattedBall({});
  */
-export const mlbStatcastLeaderboardBattedBall: WrapperFn = (params = {}) => callFlat(LEADERBOARD_BATTED_BALL_DEF, params);
+export const mlbStatcastLeaderboardBattedBall: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_BATTED_BALL_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardBattedBall} (py/R parity). */
 export const mlb_statcast_leaderboard_batted_ball = mlbStatcastLeaderboardBattedBall;
 
@@ -472,7 +475,7 @@ const LEADERBOARD_CATCH_PROBABILITY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatchProbability({});
  */
-export const mlbStatcastLeaderboardCatchProbability: WrapperFn = (params = {}) => callFlat(LEADERBOARD_CATCH_PROBABILITY_DEF, params);
+export const mlbStatcastLeaderboardCatchProbability: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_CATCH_PROBABILITY_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardCatchProbability} (py/R parity). */
 export const mlb_statcast_leaderboard_catch_probability = mlbStatcastLeaderboardCatchProbability;
 
@@ -520,7 +523,7 @@ const LEADERBOARD_CATCHER_BLOCKING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherBlocking({});
  */
-export const mlbStatcastLeaderboardCatcherBlocking: WrapperFn = (params = {}) => callFlat(LEADERBOARD_CATCHER_BLOCKING_DEF, params);
+export const mlbStatcastLeaderboardCatcherBlocking: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_CATCHER_BLOCKING_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardCatcherBlocking} (py/R parity). */
 export const mlb_statcast_leaderboard_catcher_blocking = mlbStatcastLeaderboardCatcherBlocking;
 
@@ -568,7 +571,7 @@ const LEADERBOARD_CATCHER_FRAMING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherFraming({});
  */
-export const mlbStatcastLeaderboardCatcherFraming: WrapperFn = (params = {}) => callFlat(LEADERBOARD_CATCHER_FRAMING_DEF, params);
+export const mlbStatcastLeaderboardCatcherFraming: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_CATCHER_FRAMING_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardCatcherFraming} (py/R parity). */
 export const mlb_statcast_leaderboard_catcher_framing = mlbStatcastLeaderboardCatcherFraming;
 
@@ -615,7 +618,7 @@ const LEADERBOARD_CATCHER_STANCE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherStance({});
  */
-export const mlbStatcastLeaderboardCatcherStance: WrapperFn = (params = {}) => callFlat(LEADERBOARD_CATCHER_STANCE_DEF, params);
+export const mlbStatcastLeaderboardCatcherStance: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_CATCHER_STANCE_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardCatcherStance} (py/R parity). */
 export const mlb_statcast_leaderboard_catcher_stance = mlbStatcastLeaderboardCatcherStance;
 
@@ -663,7 +666,7 @@ const LEADERBOARD_CATCHER_THROWING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherThrowing({});
  */
-export const mlbStatcastLeaderboardCatcherThrowing: WrapperFn = (params = {}) => callFlat(LEADERBOARD_CATCHER_THROWING_DEF, params);
+export const mlbStatcastLeaderboardCatcherThrowing: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_CATCHER_THROWING_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardCatcherThrowing} (py/R parity). */
 export const mlb_statcast_leaderboard_catcher_throwing = mlbStatcastLeaderboardCatcherThrowing;
 
@@ -731,7 +734,7 @@ const LEADERBOARD_CUSTOM_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardCustom({});
  */
-export const mlbStatcastLeaderboardCustom: WrapperFn = (params = {}) => callFlat(LEADERBOARD_CUSTOM_DEF, params);
+export const mlbStatcastLeaderboardCustom: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_CUSTOM_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardCustom} (py/R parity). */
 export const mlb_statcast_leaderboard_custom = mlbStatcastLeaderboardCustom;
 
@@ -779,7 +782,7 @@ const LEADERBOARD_EXIT_VELOCITY_BARRELS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardExitVelocityBarrels({});
  */
-export const mlbStatcastLeaderboardExitVelocityBarrels: WrapperFn = (params = {}) => callFlat(LEADERBOARD_EXIT_VELOCITY_BARRELS_DEF, params);
+export const mlbStatcastLeaderboardExitVelocityBarrels: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_EXIT_VELOCITY_BARRELS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardExitVelocityBarrels} (py/R parity). */
 export const mlb_statcast_leaderboard_exit_velocity_barrels = mlbStatcastLeaderboardExitVelocityBarrels;
 
@@ -827,7 +830,7 @@ const LEADERBOARD_EXPECTED_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardExpectedStats({});
  */
-export const mlbStatcastLeaderboardExpectedStats: WrapperFn = (params = {}) => callFlat(LEADERBOARD_EXPECTED_STATS_DEF, params);
+export const mlbStatcastLeaderboardExpectedStats: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_EXPECTED_STATS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardExpectedStats} (py/R parity). */
 export const mlb_statcast_leaderboard_expected_stats = mlbStatcastLeaderboardExpectedStats;
 
@@ -869,7 +872,7 @@ const LEADERBOARD_FIELDING_RUN_VALUE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardFieldingRunValue({});
  */
-export const mlbStatcastLeaderboardFieldingRunValue: WrapperFn = (params = {}) => callFlat(LEADERBOARD_FIELDING_RUN_VALUE_DEF, params);
+export const mlbStatcastLeaderboardFieldingRunValue: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_FIELDING_RUN_VALUE_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardFieldingRunValue} (py/R parity). */
 export const mlb_statcast_leaderboard_fielding_run_value = mlbStatcastLeaderboardFieldingRunValue;
 
@@ -917,7 +920,7 @@ const LEADERBOARD_HOME_RUNS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardHomeRuns({});
  */
-export const mlbStatcastLeaderboardHomeRuns: WrapperFn = (params = {}) => callFlat(LEADERBOARD_HOME_RUNS_DEF, params);
+export const mlbStatcastLeaderboardHomeRuns: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_HOME_RUNS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardHomeRuns} (py/R parity). */
 export const mlb_statcast_leaderboard_home_runs = mlbStatcastLeaderboardHomeRuns;
 
@@ -965,7 +968,7 @@ const LEADERBOARD_OUTFIELD_DIRECTIONAL_OAA_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardOutfieldDirectionalOaa({});
  */
-export const mlbStatcastLeaderboardOutfieldDirectionalOaa: WrapperFn = (params = {}) => callFlat(LEADERBOARD_OUTFIELD_DIRECTIONAL_OAA_DEF, params);
+export const mlbStatcastLeaderboardOutfieldDirectionalOaa: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_OUTFIELD_DIRECTIONAL_OAA_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardOutfieldDirectionalOaa} (py/R parity). */
 export const mlb_statcast_leaderboard_outfield_directional_oaa = mlbStatcastLeaderboardOutfieldDirectionalOaa;
 
@@ -1013,7 +1016,7 @@ const LEADERBOARD_OUTFIELD_JUMP_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardOutfieldJump({});
  */
-export const mlbStatcastLeaderboardOutfieldJump: WrapperFn = (params = {}) => callFlat(LEADERBOARD_OUTFIELD_JUMP_DEF, params);
+export const mlbStatcastLeaderboardOutfieldJump: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_OUTFIELD_JUMP_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardOutfieldJump} (py/R parity). */
 export const mlb_statcast_leaderboard_outfield_jump = mlbStatcastLeaderboardOutfieldJump;
 
@@ -1061,7 +1064,7 @@ const LEADERBOARD_OUTS_ABOVE_AVERAGE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardOutsAboveAverage({});
  */
-export const mlbStatcastLeaderboardOutsAboveAverage: WrapperFn = (params = {}) => callFlat(LEADERBOARD_OUTS_ABOVE_AVERAGE_DEF, params);
+export const mlbStatcastLeaderboardOutsAboveAverage: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_OUTS_ABOVE_AVERAGE_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardOutsAboveAverage} (py/R parity). */
 export const mlb_statcast_leaderboard_outs_above_average = mlbStatcastLeaderboardOutsAboveAverage;
 
@@ -1103,7 +1106,7 @@ const LEADERBOARD_PARK_FACTORS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardParkFactors({});
  */
-export const mlbStatcastLeaderboardParkFactors: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PARK_FACTORS_DEF, params);
+export const mlbStatcastLeaderboardParkFactors: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PARK_FACTORS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardParkFactors} (py/R parity). */
 export const mlb_statcast_leaderboard_park_factors = mlbStatcastLeaderboardParkFactors;
 
@@ -1151,7 +1154,7 @@ const LEADERBOARD_PERCENTILE_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPercentileRankings({});
  */
-export const mlbStatcastLeaderboardPercentileRankings: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PERCENTILE_RANKINGS_DEF, params);
+export const mlbStatcastLeaderboardPercentileRankings: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PERCENTILE_RANKINGS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPercentileRankings} (py/R parity). */
 export const mlb_statcast_leaderboard_percentile_rankings = mlbStatcastLeaderboardPercentileRankings;
 
@@ -1199,7 +1202,7 @@ const LEADERBOARD_PITCH_ARSENAL_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchArsenalStats({});
  */
-export const mlbStatcastLeaderboardPitchArsenalStats: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PITCH_ARSENAL_STATS_DEF, params);
+export const mlbStatcastLeaderboardPitchArsenalStats: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PITCH_ARSENAL_STATS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPitchArsenalStats} (py/R parity). */
 export const mlb_statcast_leaderboard_pitch_arsenal_stats = mlbStatcastLeaderboardPitchArsenalStats;
 
@@ -1247,7 +1250,7 @@ const LEADERBOARD_PITCH_ARSENALS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchArsenals({});
  */
-export const mlbStatcastLeaderboardPitchArsenals: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PITCH_ARSENALS_DEF, params);
+export const mlbStatcastLeaderboardPitchArsenals: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PITCH_ARSENALS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPitchArsenals} (py/R parity). */
 export const mlb_statcast_leaderboard_pitch_arsenals = mlbStatcastLeaderboardPitchArsenals;
 
@@ -1295,7 +1298,7 @@ const LEADERBOARD_PITCH_MOVEMENT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchMovement({});
  */
-export const mlbStatcastLeaderboardPitchMovement: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PITCH_MOVEMENT_DEF, params);
+export const mlbStatcastLeaderboardPitchMovement: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PITCH_MOVEMENT_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPitchMovement} (py/R parity). */
 export const mlb_statcast_leaderboard_pitch_movement = mlbStatcastLeaderboardPitchMovement;
 
@@ -1343,7 +1346,7 @@ const LEADERBOARD_PITCH_TEMPO_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchTempo({});
  */
-export const mlbStatcastLeaderboardPitchTempo: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PITCH_TEMPO_DEF, params);
+export const mlbStatcastLeaderboardPitchTempo: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PITCH_TEMPO_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPitchTempo} (py/R parity). */
 export const mlb_statcast_leaderboard_pitch_tempo = mlbStatcastLeaderboardPitchTempo;
 
@@ -1391,7 +1394,7 @@ const LEADERBOARD_PITCHER_RUNNING_GAME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitcherRunningGame({});
  */
-export const mlbStatcastLeaderboardPitcherRunningGame: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PITCHER_RUNNING_GAME_DEF, params);
+export const mlbStatcastLeaderboardPitcherRunningGame: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PITCHER_RUNNING_GAME_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPitcherRunningGame} (py/R parity). */
 export const mlb_statcast_leaderboard_pitcher_running_game = mlbStatcastLeaderboardPitcherRunningGame;
 
@@ -1439,7 +1442,7 @@ const LEADERBOARD_POPTIME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPoptime({});
  */
-export const mlbStatcastLeaderboardPoptime: WrapperFn = (params = {}) => callFlat(LEADERBOARD_POPTIME_DEF, params);
+export const mlbStatcastLeaderboardPoptime: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_POPTIME_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPoptime} (py/R parity). */
 export const mlb_statcast_leaderboard_poptime = mlbStatcastLeaderboardPoptime;
 
@@ -1487,7 +1490,7 @@ const LEADERBOARD_RUNNING_SPLITS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardRunningSplits({});
  */
-export const mlbStatcastLeaderboardRunningSplits: WrapperFn = (params = {}) => callFlat(LEADERBOARD_RUNNING_SPLITS_DEF, params);
+export const mlbStatcastLeaderboardRunningSplits: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_RUNNING_SPLITS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardRunningSplits} (py/R parity). */
 export const mlb_statcast_leaderboard_running_splits = mlbStatcastLeaderboardRunningSplits;
 
@@ -1535,7 +1538,7 @@ const LEADERBOARD_SPIN_DIRECTION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardSpinDirection({});
  */
-export const mlbStatcastLeaderboardSpinDirection: WrapperFn = (params = {}) => callFlat(LEADERBOARD_SPIN_DIRECTION_DEF, params);
+export const mlbStatcastLeaderboardSpinDirection: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_SPIN_DIRECTION_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardSpinDirection} (py/R parity). */
 export const mlb_statcast_leaderboard_spin_direction = mlbStatcastLeaderboardSpinDirection;
 
@@ -1583,7 +1586,7 @@ const LEADERBOARD_SPRINT_SPEED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardSprintSpeed({});
  */
-export const mlbStatcastLeaderboardSprintSpeed: WrapperFn = (params = {}) => callFlat(LEADERBOARD_SPRINT_SPEED_DEF, params);
+export const mlbStatcastLeaderboardSprintSpeed: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_SPRINT_SPEED_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardSprintSpeed} (py/R parity). */
 export const mlb_statcast_leaderboard_sprint_speed = mlbStatcastLeaderboardSprintSpeed;
 
@@ -1631,7 +1634,7 @@ const LEADERBOARD_SWING_PATH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardSwingPath({});
  */
-export const mlbStatcastLeaderboardSwingPath: WrapperFn = (params = {}) => callFlat(LEADERBOARD_SWING_PATH_DEF, params);
+export const mlbStatcastLeaderboardSwingPath: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_SWING_PATH_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardSwingPath} (py/R parity). */
 export const mlb_statcast_leaderboard_swing_path = mlbStatcastLeaderboardSwingPath;
 
@@ -1679,7 +1682,7 @@ const LEADERBOARD_SWING_TAKE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardSwingTake({});
  */
-export const mlbStatcastLeaderboardSwingTake: WrapperFn = (params = {}) => callFlat(LEADERBOARD_SWING_TAKE_DEF, params);
+export const mlbStatcastLeaderboardSwingTake: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_SWING_TAKE_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardSwingTake} (py/R parity). */
 export const mlb_statcast_leaderboard_swing_take = mlbStatcastLeaderboardSwingTake;
 
@@ -1727,7 +1730,7 @@ const LEADERBOARD_SWING_TIMING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardSwingTiming({});
  */
-export const mlbStatcastLeaderboardSwingTiming: WrapperFn = (params = {}) => callFlat(LEADERBOARD_SWING_TIMING_DEF, params);
+export const mlbStatcastLeaderboardSwingTiming: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_SWING_TIMING_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardSwingTiming} (py/R parity). */
 export const mlb_statcast_leaderboard_swing_timing = mlbStatcastLeaderboardSwingTiming;
 
@@ -1775,7 +1778,7 @@ const LEADERBOARD_TIMER_INFRACTIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardTimerInfractions({});
  */
-export const mlbStatcastLeaderboardTimerInfractions: WrapperFn = (params = {}) => callFlat(LEADERBOARD_TIMER_INFRACTIONS_DEF, params);
+export const mlbStatcastLeaderboardTimerInfractions: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_TIMER_INFRACTIONS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardTimerInfractions} (py/R parity). */
 export const mlb_statcast_leaderboard_timer_infractions = mlbStatcastLeaderboardTimerInfractions;
 
@@ -1823,7 +1826,7 @@ const LEADERBOARD_YEAR_TO_YEAR_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardYearToYear({});
  */
-export const mlbStatcastLeaderboardYearToYear: WrapperFn = (params = {}) => callFlat(LEADERBOARD_YEAR_TO_YEAR_DEF, params);
+export const mlbStatcastLeaderboardYearToYear: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERBOARD_YEAR_TO_YEAR_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardYearToYear} (py/R parity). */
 export const mlb_statcast_leaderboard_year_to_year = mlbStatcastLeaderboardYearToYear;
 
@@ -1855,6 +1858,6 @@ const SCHEDULE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastSchedule({});
  */
-export const mlbStatcastSchedule: WrapperFn = (params = {}) => callFlat(SCHEDULE_DEF, params);
+export const mlbStatcastSchedule: Wrapper<MlbStatcastScheduleRow[]> = (params: WrapperParams = {}) => callFlat(SCHEDULE_DEF, params);
 /** snake_case alias of {@link mlbStatcastSchedule} (py/R parity). */
 export const mlb_statcast_schedule = mlbStatcastSchedule;

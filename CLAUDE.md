@@ -106,9 +106,16 @@ npm run pack:check      # npm pack, then attw + publint --strict against that ta
 ```
 
 - The API reports cover the two entry points (`etc/sportsdataverse.api.md`,
-  `etc/sportsdataverse-parsers.api.md`). Generated wrappers are not listed one by one:
-  the default export is typed `Record<string, Record<string, any>>`, and the wrapper
-  surface is reviewed through `src/generated/**` + the codegen drift gate.
+  `etc/sportsdataverse-parsers.api.md`). The default export is typed `Sdv`: one
+  generated interface per namespace (`src/generated/namespaces.ts`) lists every wrapper
+  and `@deprecated` pre-v4 alias, so a new wrapper changes the report; the generated row
+  types (`src/generated/rows/`, `tools/codegen/row-types.mjs`) are listed too.
+- Generated row types exist only for the parity-verified endpoints
+  (`test/fixtures/py/parity_coverage.json`); the column rule is in
+  `tools/codegen/row-types.mjs`, which classifies ids with the runtime's own
+  `src/core/id_columns.ts`. `test/types/agreement.test.js` checks every parsed value of
+  every committed capture against the GENERATED TypeScript; `test/types/surface.check.ts`
+  holds the overloads (compiled against `dist/*.d.ts` by `test/types/namespaces.test.js`).
 
 - `test` runs Mocha against `test/**/*.test.js` with no network access.
 - `prepare` / `prepublishOnly` build `dist/`; only `dist/` is published (`files:

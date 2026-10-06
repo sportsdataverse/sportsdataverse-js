@@ -6,7 +6,32 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  On3CollectiveGroupsRow,
+  On3DraftsByStarsRow,
+  On3FiltersDraftRoundsRow,
+  On3FiltersStatusRow,
+  On3Nil100V2Row,
+  On3NilRankingsRow,
+  On3OrganizationsRosterHeaderRow,
+  On3PeopleLatestValuationRow,
+  On3PeopleMeasurementsRow,
+  On3PeopleSocialRow,
+  On3PeopleSocialPostSummaryRow,
+  On3PeopleValuationGrowthRow,
+  On3PlayerAllRankingsRow,
+  On3PlayerDatabaseUpdatesRow,
+  On3PlayerImagesRow,
+  On3PlayerPersonRankingsRow,
+  On3PlayerProfileRow,
+  On3PlayerVideosRow,
+  On3PlayersIndustryComparisionRow,
+  On3QuotesRow,
+  On3RecruitmentsProfileRow,
+  On3RecruitmentsRpmSummaryRow,
+  On3TeamRankingTeamRankingsRow,
+} from "../rows/on3.js";
 
 const COACHES_HISTORY_DEF: WrapperDef = {
   "short": "coaches_history",
@@ -46,7 +71,7 @@ const COACHES_HISTORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3CoachesHistory({ person_key: '…' });
  */
-export const on3CoachesHistory: WrapperFn = (params = {}) => callFlat(COACHES_HISTORY_DEF, params);
+export const on3CoachesHistory: Wrapper = (params: WrapperParams = {}) => callFlat(COACHES_HISTORY_DEF, params);
 /** snake_case alias of {@link on3CoachesHistory} (py/R parity). */
 export const on3_coaches_history = on3CoachesHistory;
 
@@ -77,7 +102,7 @@ const COACHES_PROFILE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3CoachesProfile({ person_key: '…' });
  */
-export const on3CoachesProfile: WrapperFn = (params = {}) => callFlat(COACHES_PROFILE_DEF, params);
+export const on3CoachesProfile: Wrapper = (params: WrapperParams = {}) => callFlat(COACHES_PROFILE_DEF, params);
 /** snake_case alias of {@link on3CoachesProfile} (py/R parity). */
 export const on3_coaches_profile = on3CoachesProfile;
 
@@ -129,7 +154,7 @@ const COLLECTIVE_GROUPS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3CollectiveGroups({});
  */
-export const on3CollectiveGroups: WrapperFn = (params = {}) => callFlat(COLLECTIVE_GROUPS_DEF, params);
+export const on3CollectiveGroups: Wrapper<On3CollectiveGroupsRow[]> = (params: WrapperParams = {}) => callFlat(COLLECTIVE_GROUPS_DEF, params);
 /** snake_case alias of {@link on3CollectiveGroups} (py/R parity). */
 export const on3_collective_groups = on3CollectiveGroups;
 
@@ -171,7 +196,7 @@ const COLLECTIVE_GROUPS_DEALS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3CollectiveGroupsDeals({ key: '…' });
  */
-export const on3CollectiveGroupsDeals: WrapperFn = (params = {}) => callFlat(COLLECTIVE_GROUPS_DEALS_DEF, params);
+export const on3CollectiveGroupsDeals: Wrapper = (params: WrapperParams = {}) => callFlat(COLLECTIVE_GROUPS_DEALS_DEF, params);
 /** snake_case alias of {@link on3CollectiveGroupsDeals} (py/R parity). */
 export const on3_collective_groups_deals = on3CollectiveGroupsDeals;
 
@@ -202,7 +227,7 @@ const COLLECTIVE_GROUPS_KEY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3CollectiveGroupsKey({ key: '…' });
  */
-export const on3CollectiveGroupsKey: WrapperFn = (params = {}) => callFlat(COLLECTIVE_GROUPS_KEY_DEF, params);
+export const on3CollectiveGroupsKey: Wrapper = (params: WrapperParams = {}) => callFlat(COLLECTIVE_GROUPS_KEY_DEF, params);
 /** snake_case alias of {@link on3CollectiveGroupsKey} (py/R parity). */
 export const on3_collective_groups_key = on3CollectiveGroupsKey;
 
@@ -243,7 +268,7 @@ const COMMITS_LATEST_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3CommitsLatest({});
  */
-export const on3CommitsLatest: WrapperFn = (params = {}) => callFlat(COMMITS_LATEST_DEF, params);
+export const on3CommitsLatest: Wrapper = (params: WrapperParams = {}) => callFlat(COMMITS_LATEST_DEF, params);
 /** snake_case alias of {@link on3CommitsLatest} (py/R parity). */
 export const on3_commits_latest = on3CommitsLatest;
 
@@ -274,7 +299,7 @@ const COMMITS_ORGANIZATIONS_LATEST_COMMITS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3CommitsOrganizationsLatestCommits({ org_key: '…' });
  */
-export const on3CommitsOrganizationsLatestCommits: WrapperFn = (params = {}) => callFlat(COMMITS_ORGANIZATIONS_LATEST_COMMITS_DEF, params);
+export const on3CommitsOrganizationsLatestCommits: Wrapper = (params: WrapperParams = {}) => callFlat(COMMITS_ORGANIZATIONS_LATEST_COMMITS_DEF, params);
 /** snake_case alias of {@link on3CommitsOrganizationsLatestCommits} (py/R parity). */
 export const on3_commits_organizations_latest_commits = on3CommitsOrganizationsLatestCommits;
 
@@ -305,7 +330,7 @@ const COMMITS_ORGANIZATIONS_ORG_KEY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3CommitsOrganizationsOrgKey({ org_key: '…' });
  */
-export const on3CommitsOrganizationsOrgKey: WrapperFn = (params = {}) => callFlat(COMMITS_ORGANIZATIONS_ORG_KEY_DEF, params);
+export const on3CommitsOrganizationsOrgKey: Wrapper = (params: WrapperParams = {}) => callFlat(COMMITS_ORGANIZATIONS_ORG_KEY_DEF, params);
 /** snake_case alias of {@link on3CommitsOrganizationsOrgKey} (py/R parity). */
 export const on3_commits_organizations_org_key = on3CommitsOrganizationsOrgKey;
 
@@ -352,7 +377,7 @@ const DRAFT_ORGANIZATION_RANK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3DraftOrganizationRank({});
  */
-export const on3DraftOrganizationRank: WrapperFn = (params = {}) => callFlat(DRAFT_ORGANIZATION_RANK_DEF, params);
+export const on3DraftOrganizationRank: Wrapper = (params: WrapperParams = {}) => callFlat(DRAFT_ORGANIZATION_RANK_DEF, params);
 /** snake_case alias of {@link on3DraftOrganizationRank} (py/R parity). */
 export const on3_draft_organization_rank = on3DraftOrganizationRank;
 
@@ -399,7 +424,7 @@ const DRAFT_PICK_ORGANIZATION_RANK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3DraftPickOrganizationRank({});
  */
-export const on3DraftPickOrganizationRank: WrapperFn = (params = {}) => callFlat(DRAFT_PICK_ORGANIZATION_RANK_DEF, params);
+export const on3DraftPickOrganizationRank: Wrapper = (params: WrapperParams = {}) => callFlat(DRAFT_PICK_ORGANIZATION_RANK_DEF, params);
 /** snake_case alias of {@link on3DraftPickOrganizationRank} (py/R parity). */
 export const on3_draft_pick_organization_rank = on3DraftPickOrganizationRank;
 
@@ -441,7 +466,7 @@ const DRAFTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3Drafts({});
  */
-export const on3Drafts: WrapperFn = (params = {}) => callFlat(DRAFTS_DEF, params);
+export const on3Drafts: Wrapper = (params: WrapperParams = {}) => callFlat(DRAFTS_DEF, params);
 /** snake_case alias of {@link on3Drafts} (py/R parity). */
 export const on3_drafts = on3Drafts;
 
@@ -483,7 +508,7 @@ const DRAFTS_BY_STARS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3DraftsByStars({});
  */
-export const on3DraftsByStars: WrapperFn = (params = {}) => callFlat(DRAFTS_BY_STARS_DEF, params);
+export const on3DraftsByStars: Wrapper<On3DraftsByStarsRow[]> = (params: WrapperParams = {}) => callFlat(DRAFTS_BY_STARS_DEF, params);
 /** snake_case alias of {@link on3DraftsByStars} (py/R parity). */
 export const on3_drafts_by_stars = on3DraftsByStars;
 
@@ -520,7 +545,7 @@ const DRAFTS_BY_STARS_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3DraftsByStarsSummary({});
  */
-export const on3DraftsByStarsSummary: WrapperFn = (params = {}) => callFlat(DRAFTS_BY_STARS_SUMMARY_DEF, params);
+export const on3DraftsByStarsSummary: Wrapper = (params: WrapperParams = {}) => callFlat(DRAFTS_BY_STARS_SUMMARY_DEF, params);
 /** snake_case alias of {@link on3DraftsByStarsSummary} (py/R parity). */
 export const on3_drafts_by_stars_summary = on3DraftsByStarsSummary;
 
@@ -557,7 +582,7 @@ const DRAFTS_PLAYERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3DraftsPlayers({ org_key: '…' });
  */
-export const on3DraftsPlayers: WrapperFn = (params = {}) => callFlat(DRAFTS_PLAYERS_DEF, params);
+export const on3DraftsPlayers: Wrapper = (params: WrapperParams = {}) => callFlat(DRAFTS_PLAYERS_DEF, params);
 /** snake_case alias of {@link on3DraftsPlayers} (py/R parity). */
 export const on3_drafts_players = on3DraftsPlayers;
 
@@ -594,7 +619,7 @@ const FILTERS_CONFERENCES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3FiltersConferences({});
  */
-export const on3FiltersConferences: WrapperFn = (params = {}) => callFlat(FILTERS_CONFERENCES_DEF, params);
+export const on3FiltersConferences: Wrapper = (params: WrapperParams = {}) => callFlat(FILTERS_CONFERENCES_DEF, params);
 /** snake_case alias of {@link on3FiltersConferences} (py/R parity). */
 export const on3_filters_conferences = on3FiltersConferences;
 
@@ -631,7 +656,7 @@ const FILTERS_DRAFT_ROUNDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3FiltersDraftRounds({});
  */
-export const on3FiltersDraftRounds: WrapperFn = (params = {}) => callFlat(FILTERS_DRAFT_ROUNDS_DEF, params);
+export const on3FiltersDraftRounds: Wrapper<On3FiltersDraftRoundsRow[]> = (params: WrapperParams = {}) => callFlat(FILTERS_DRAFT_ROUNDS_DEF, params);
 /** snake_case alias of {@link on3FiltersDraftRounds} (py/R parity). */
 export const on3_filters_draft_rounds = on3FiltersDraftRounds;
 
@@ -668,7 +693,7 @@ const FILTERS_POSITIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3FiltersPositions({});
  */
-export const on3FiltersPositions: WrapperFn = (params = {}) => callFlat(FILTERS_POSITIONS_DEF, params);
+export const on3FiltersPositions: Wrapper = (params: WrapperParams = {}) => callFlat(FILTERS_POSITIONS_DEF, params);
 /** snake_case alias of {@link on3FiltersPositions} (py/R parity). */
 export const on3_filters_positions = on3FiltersPositions;
 
@@ -694,7 +719,7 @@ const FILTERS_SPORTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3FiltersSports({});
  */
-export const on3FiltersSports: WrapperFn = (params = {}) => callFlat(FILTERS_SPORTS_DEF, params);
+export const on3FiltersSports: Wrapper = (params: WrapperParams = {}) => callFlat(FILTERS_SPORTS_DEF, params);
 /** snake_case alias of {@link on3FiltersSports} (py/R parity). */
 export const on3_filters_sports = on3FiltersSports;
 
@@ -720,7 +745,7 @@ const FILTERS_STATUS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3FiltersStatus({});
  */
-export const on3FiltersStatus: WrapperFn = (params = {}) => callFlat(FILTERS_STATUS_DEF, params);
+export const on3FiltersStatus: Wrapper<On3FiltersStatusRow[]> = (params: WrapperParams = {}) => callFlat(FILTERS_STATUS_DEF, params);
 /** snake_case alias of {@link on3FiltersStatus} (py/R parity). */
 export const on3_filters_status = on3FiltersStatus;
 
@@ -762,7 +787,7 @@ const FILTERS_TEAMS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3FiltersTeams({});
  */
-export const on3FiltersTeams: WrapperFn = (params = {}) => callFlat(FILTERS_TEAMS_DEF, params);
+export const on3FiltersTeams: Wrapper = (params: WrapperParams = {}) => callFlat(FILTERS_TEAMS_DEF, params);
 /** snake_case alias of {@link on3FiltersTeams} (py/R parity). */
 export const on3_filters_teams = on3FiltersTeams;
 
@@ -788,7 +813,7 @@ const FILTERS_YEARS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3FiltersYears({});
  */
-export const on3FiltersYears: WrapperFn = (params = {}) => callFlat(FILTERS_YEARS_DEF, params);
+export const on3FiltersYears: Wrapper = (params: WrapperParams = {}) => callFlat(FILTERS_YEARS_DEF, params);
 /** snake_case alias of {@link on3FiltersYears} (py/R parity). */
 export const on3_filters_years = on3FiltersYears;
 
@@ -820,7 +845,7 @@ const NIL_100_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3Nil100({});
  */
-export const on3Nil100: WrapperFn = (params = {}) => callFlat(NIL_100_DEF, params);
+export const on3Nil100: Wrapper = (params: WrapperParams = {}) => callFlat(NIL_100_DEF, params);
 /** snake_case alias of {@link on3Nil100} (py/R parity). */
 export const on3_nil_100 = on3Nil100;
 
@@ -867,7 +892,7 @@ const NIL_100_V2_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3Nil100V2({});
  */
-export const on3Nil100V2: WrapperFn = (params = {}) => callFlat(NIL_100_V2_DEF, params);
+export const on3Nil100V2: Wrapper<On3Nil100V2Row[]> = (params: WrapperParams = {}) => callFlat(NIL_100_V2_DEF, params);
 /** snake_case alias of {@link on3Nil100V2} (py/R parity). */
 export const on3_nil_100_v2 = on3Nil100V2;
 
@@ -899,7 +924,7 @@ const NIL_COMPLIANCES_STATE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3NilCompliancesState({});
  */
-export const on3NilCompliancesState: WrapperFn = (params = {}) => callFlat(NIL_COMPLIANCES_STATE_DEF, params);
+export const on3NilCompliancesState: Wrapper = (params: WrapperParams = {}) => callFlat(NIL_COMPLIANCES_STATE_DEF, params);
 /** snake_case alias of {@link on3NilCompliancesState} (py/R parity). */
 export const on3_nil_compliances_state = on3NilCompliancesState;
 
@@ -956,7 +981,7 @@ const NIL_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3NilRankings({});
  */
-export const on3NilRankings: WrapperFn = (params = {}) => callFlat(NIL_RANKINGS_DEF, params);
+export const on3NilRankings: Wrapper<On3NilRankingsRow[]> = (params: WrapperParams = {}) => callFlat(NIL_RANKINGS_DEF, params);
 /** snake_case alias of {@link on3NilRankings} (py/R parity). */
 export const on3_nil_rankings = on3NilRankings;
 
@@ -998,7 +1023,7 @@ const ORGANIZATIONS_DRAFT_CLASS_BY_STATE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3OrganizationsDraftClassByState({ organization_key: '…' });
  */
-export const on3OrganizationsDraftClassByState: WrapperFn = (params = {}) => callFlat(ORGANIZATIONS_DRAFT_CLASS_BY_STATE_DEF, params);
+export const on3OrganizationsDraftClassByState: Wrapper = (params: WrapperParams = {}) => callFlat(ORGANIZATIONS_DRAFT_CLASS_BY_STATE_DEF, params);
 /** snake_case alias of {@link on3OrganizationsDraftClassByState} (py/R parity). */
 export const on3_organizations_draft_class_by_state = on3OrganizationsDraftClassByState;
 
@@ -1040,7 +1065,7 @@ const ORGANIZATIONS_DRAFT_CLASS_BY_YEAR_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3OrganizationsDraftClassByYear({ organization_key: '…' });
  */
-export const on3OrganizationsDraftClassByYear: WrapperFn = (params = {}) => callFlat(ORGANIZATIONS_DRAFT_CLASS_BY_YEAR_DEF, params);
+export const on3OrganizationsDraftClassByYear: Wrapper = (params: WrapperParams = {}) => callFlat(ORGANIZATIONS_DRAFT_CLASS_BY_YEAR_DEF, params);
 /** snake_case alias of {@link on3OrganizationsDraftClassByYear} (py/R parity). */
 export const on3_organizations_draft_class_by_year = on3OrganizationsDraftClassByYear;
 
@@ -1071,7 +1096,7 @@ const ORGANIZATIONS_DRAFT_COUNT_BY_STARS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3OrganizationsDraftCountByStars({ organization_key: '…' });
  */
-export const on3OrganizationsDraftCountByStars: WrapperFn = (params = {}) => callFlat(ORGANIZATIONS_DRAFT_COUNT_BY_STARS_DEF, params);
+export const on3OrganizationsDraftCountByStars: Wrapper = (params: WrapperParams = {}) => callFlat(ORGANIZATIONS_DRAFT_COUNT_BY_STARS_DEF, params);
 /** snake_case alias of {@link on3OrganizationsDraftCountByStars} (py/R parity). */
 export const on3_organizations_draft_count_by_stars = on3OrganizationsDraftCountByStars;
 
@@ -1113,7 +1138,7 @@ const ORGANIZATIONS_DRAFT_COUNT_BY_YEAR_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3OrganizationsDraftCountByYear({ organization_key: '…' });
  */
-export const on3OrganizationsDraftCountByYear: WrapperFn = (params = {}) => callFlat(ORGANIZATIONS_DRAFT_COUNT_BY_YEAR_DEF, params);
+export const on3OrganizationsDraftCountByYear: Wrapper = (params: WrapperParams = {}) => callFlat(ORGANIZATIONS_DRAFT_COUNT_BY_YEAR_DEF, params);
 /** snake_case alias of {@link on3OrganizationsDraftCountByYear} (py/R parity). */
 export const on3_organizations_draft_count_by_year = on3OrganizationsDraftCountByYear;
 
@@ -1150,7 +1175,7 @@ const ORGANIZATIONS_DRAFT_RANKING_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3OrganizationsDraftRankingSummary({ organization_key: '…' });
  */
-export const on3OrganizationsDraftRankingSummary: WrapperFn = (params = {}) => callFlat(ORGANIZATIONS_DRAFT_RANKING_SUMMARY_DEF, params);
+export const on3OrganizationsDraftRankingSummary: Wrapper = (params: WrapperParams = {}) => callFlat(ORGANIZATIONS_DRAFT_RANKING_SUMMARY_DEF, params);
 /** snake_case alias of {@link on3OrganizationsDraftRankingSummary} (py/R parity). */
 export const on3_organizations_draft_ranking_summary = on3OrganizationsDraftRankingSummary;
 
@@ -1192,7 +1217,7 @@ const ORGANIZATIONS_DRAFTED_PLAYERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3OrganizationsDraftedPlayers({ organization_key: '…' });
  */
-export const on3OrganizationsDraftedPlayers: WrapperFn = (params = {}) => callFlat(ORGANIZATIONS_DRAFTED_PLAYERS_DEF, params);
+export const on3OrganizationsDraftedPlayers: Wrapper = (params: WrapperParams = {}) => callFlat(ORGANIZATIONS_DRAFTED_PLAYERS_DEF, params);
 /** snake_case alias of {@link on3OrganizationsDraftedPlayers} (py/R parity). */
 export const on3_organizations_drafted_players = on3OrganizationsDraftedPlayers;
 
@@ -1229,7 +1254,7 @@ const ORGANIZATIONS_DRAFTS_BY_STARS_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3OrganizationsDraftsByStarsSummary({ organization_key: '…' });
  */
-export const on3OrganizationsDraftsByStarsSummary: WrapperFn = (params = {}) => callFlat(ORGANIZATIONS_DRAFTS_BY_STARS_SUMMARY_DEF, params);
+export const on3OrganizationsDraftsByStarsSummary: Wrapper = (params: WrapperParams = {}) => callFlat(ORGANIZATIONS_DRAFTS_BY_STARS_SUMMARY_DEF, params);
 /** snake_case alias of {@link on3OrganizationsDraftsByStarsSummary} (py/R parity). */
 export const on3_organizations_drafts_by_stars_summary = on3OrganizationsDraftsByStarsSummary;
 
@@ -1280,7 +1305,7 @@ const ORGANIZATIONS_ROSTER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3OrganizationsRoster({ organization_key: '…' });
  */
-export const on3OrganizationsRoster: WrapperFn = (params = {}) => callFlat(ORGANIZATIONS_ROSTER_DEF, params);
+export const on3OrganizationsRoster: Wrapper = (params: WrapperParams = {}) => callFlat(ORGANIZATIONS_ROSTER_DEF, params);
 /** snake_case alias of {@link on3OrganizationsRoster} (py/R parity). */
 export const on3_organizations_roster = on3OrganizationsRoster;
 
@@ -1322,7 +1347,7 @@ const ORGANIZATIONS_ROSTER_HEADER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3OrganizationsRosterHeader({ organization_key: '…' });
  */
-export const on3OrganizationsRosterHeader: WrapperFn = (params = {}) => callFlat(ORGANIZATIONS_ROSTER_HEADER_DEF, params);
+export const on3OrganizationsRosterHeader: Wrapper<On3OrganizationsRosterHeaderRow[]> = (params: WrapperParams = {}) => callFlat(ORGANIZATIONS_ROSTER_HEADER_DEF, params);
 /** snake_case alias of {@link on3OrganizationsRosterHeader} (py/R parity). */
 export const on3_organizations_roster_header = on3OrganizationsRosterHeader;
 
@@ -1353,7 +1378,7 @@ const PEOPLE_COMBINE_MEASUREMENTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PeopleCombineMeasurements({ person_key: '…' });
  */
-export const on3PeopleCombineMeasurements: WrapperFn = (params = {}) => callFlat(PEOPLE_COMBINE_MEASUREMENTS_DEF, params);
+export const on3PeopleCombineMeasurements: Wrapper = (params: WrapperParams = {}) => callFlat(PEOPLE_COMBINE_MEASUREMENTS_DEF, params);
 /** snake_case alias of {@link on3PeopleCombineMeasurements} (py/R parity). */
 export const on3_people_combine_measurements = on3PeopleCombineMeasurements;
 
@@ -1384,7 +1409,7 @@ const PEOPLE_LATEST_VALUATION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PeopleLatestValuation({ person_key: '…' });
  */
-export const on3PeopleLatestValuation: WrapperFn = (params = {}) => callFlat(PEOPLE_LATEST_VALUATION_DEF, params);
+export const on3PeopleLatestValuation: Wrapper<On3PeopleLatestValuationRow[]> = (params: WrapperParams = {}) => callFlat(PEOPLE_LATEST_VALUATION_DEF, params);
 /** snake_case alias of {@link on3PeopleLatestValuation} (py/R parity). */
 export const on3_people_latest_valuation = on3PeopleLatestValuation;
 
@@ -1415,7 +1440,7 @@ const PEOPLE_MEASUREMENTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PeopleMeasurements({ person_key: '…' });
  */
-export const on3PeopleMeasurements: WrapperFn = (params = {}) => callFlat(PEOPLE_MEASUREMENTS_DEF, params);
+export const on3PeopleMeasurements: Wrapper<On3PeopleMeasurementsRow[]> = (params: WrapperParams = {}) => callFlat(PEOPLE_MEASUREMENTS_DEF, params);
 /** snake_case alias of {@link on3PeopleMeasurements} (py/R parity). */
 export const on3_people_measurements = on3PeopleMeasurements;
 
@@ -1456,7 +1481,7 @@ const PEOPLE_MEASUREMENTS_AVERAGES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PeopleMeasurementsAverages({ person_key: '…' });
  */
-export const on3PeopleMeasurementsAverages: WrapperFn = (params = {}) => callFlat(PEOPLE_MEASUREMENTS_AVERAGES_DEF, params);
+export const on3PeopleMeasurementsAverages: Wrapper = (params: WrapperParams = {}) => callFlat(PEOPLE_MEASUREMENTS_AVERAGES_DEF, params);
 /** snake_case alias of {@link on3PeopleMeasurementsAverages} (py/R parity). */
 export const on3_people_measurements_averages = on3PeopleMeasurementsAverages;
 
@@ -1498,7 +1523,7 @@ const PEOPLE_PERSON_CONNECTIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PeoplePersonConnections({ person_key: '…' });
  */
-export const on3PeoplePersonConnections: WrapperFn = (params = {}) => callFlat(PEOPLE_PERSON_CONNECTIONS_DEF, params);
+export const on3PeoplePersonConnections: Wrapper = (params: WrapperParams = {}) => callFlat(PEOPLE_PERSON_CONNECTIONS_DEF, params);
 /** snake_case alias of {@link on3PeoplePersonConnections} (py/R parity). */
 export const on3_people_person_connections = on3PeoplePersonConnections;
 
@@ -1529,7 +1554,7 @@ const PEOPLE_SOCIAL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PeopleSocial({ person_key: '…' });
  */
-export const on3PeopleSocial: WrapperFn = (params = {}) => callFlat(PEOPLE_SOCIAL_DEF, params);
+export const on3PeopleSocial: Wrapper<On3PeopleSocialRow[]> = (params: WrapperParams = {}) => callFlat(PEOPLE_SOCIAL_DEF, params);
 /** snake_case alias of {@link on3PeopleSocial} (py/R parity). */
 export const on3_people_social = on3PeopleSocial;
 
@@ -1560,7 +1585,7 @@ const PEOPLE_SOCIAL_POST_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PeopleSocialPostSummary({ person_key: '…' });
  */
-export const on3PeopleSocialPostSummary: WrapperFn = (params = {}) => callFlat(PEOPLE_SOCIAL_POST_SUMMARY_DEF, params);
+export const on3PeopleSocialPostSummary: Wrapper<On3PeopleSocialPostSummaryRow[]> = (params: WrapperParams = {}) => callFlat(PEOPLE_SOCIAL_POST_SUMMARY_DEF, params);
 /** snake_case alias of {@link on3PeopleSocialPostSummary} (py/R parity). */
 export const on3_people_social_post_summary = on3PeopleSocialPostSummary;
 
@@ -1591,7 +1616,7 @@ const PEOPLE_TRACK_AND_FIELD_MEASUREMENTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PeopleTrackAndFieldMeasurements({ person_key: '…' });
  */
-export const on3PeopleTrackAndFieldMeasurements: WrapperFn = (params = {}) => callFlat(PEOPLE_TRACK_AND_FIELD_MEASUREMENTS_DEF, params);
+export const on3PeopleTrackAndFieldMeasurements: Wrapper = (params: WrapperParams = {}) => callFlat(PEOPLE_TRACK_AND_FIELD_MEASUREMENTS_DEF, params);
 /** snake_case alias of {@link on3PeopleTrackAndFieldMeasurements} (py/R parity). */
 export const on3_people_track_and_field_measurements = on3PeopleTrackAndFieldMeasurements;
 
@@ -1622,7 +1647,7 @@ const PEOPLE_VALUATION_GROWTH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PeopleValuationGrowth({ person_key: '…' });
  */
-export const on3PeopleValuationGrowth: WrapperFn = (params = {}) => callFlat(PEOPLE_VALUATION_GROWTH_DEF, params);
+export const on3PeopleValuationGrowth: Wrapper<On3PeopleValuationGrowthRow[]> = (params: WrapperParams = {}) => callFlat(PEOPLE_VALUATION_GROWTH_DEF, params);
 /** snake_case alias of {@link on3PeopleValuationGrowth} (py/R parity). */
 export const on3_people_valuation_growth = on3PeopleValuationGrowth;
 
@@ -1653,7 +1678,7 @@ const PERSON_CONNECTIONS_CONNECTION_KEY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PersonConnectionsConnectionKey({ connection_key: '…' });
  */
-export const on3PersonConnectionsConnectionKey: WrapperFn = (params = {}) => callFlat(PERSON_CONNECTIONS_CONNECTION_KEY_DEF, params);
+export const on3PersonConnectionsConnectionKey: Wrapper = (params: WrapperParams = {}) => callFlat(PERSON_CONNECTIONS_CONNECTION_KEY_DEF, params);
 /** snake_case alias of {@link on3PersonConnectionsConnectionKey} (py/R parity). */
 export const on3_person_connections_connection_key = on3PersonConnectionsConnectionKey;
 
@@ -1684,7 +1709,7 @@ const PERSON_PRIMARY_RECRUITMENT_EVALUATION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PersonPrimaryRecruitmentEvaluation({ person_key: '…' });
  */
-export const on3PersonPrimaryRecruitmentEvaluation: WrapperFn = (params = {}) => callFlat(PERSON_PRIMARY_RECRUITMENT_EVALUATION_DEF, params);
+export const on3PersonPrimaryRecruitmentEvaluation: Wrapper = (params: WrapperParams = {}) => callFlat(PERSON_PRIMARY_RECRUITMENT_EVALUATION_DEF, params);
 /** snake_case alias of {@link on3PersonPrimaryRecruitmentEvaluation} (py/R parity). */
 export const on3_person_primary_recruitment_evaluation = on3PersonPrimaryRecruitmentEvaluation;
 
@@ -1715,7 +1740,7 @@ const PERSON_RECRUITMENT_EVALUATIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PersonRecruitmentEvaluations({ person_key: '…' });
  */
-export const on3PersonRecruitmentEvaluations: WrapperFn = (params = {}) => callFlat(PERSON_RECRUITMENT_EVALUATIONS_DEF, params);
+export const on3PersonRecruitmentEvaluations: Wrapper = (params: WrapperParams = {}) => callFlat(PERSON_RECRUITMENT_EVALUATIONS_DEF, params);
 /** snake_case alias of {@link on3PersonRecruitmentEvaluations} (py/R parity). */
 export const on3_person_recruitment_evaluations = on3PersonRecruitmentEvaluations;
 
@@ -1746,7 +1771,7 @@ const PERSON_SPORT_PROFILE_RECRUIT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PersonSportProfileRecruit({ ps_key: '…' });
  */
-export const on3PersonSportProfileRecruit: WrapperFn = (params = {}) => callFlat(PERSON_SPORT_PROFILE_RECRUIT_DEF, params);
+export const on3PersonSportProfileRecruit: Wrapper = (params: WrapperParams = {}) => callFlat(PERSON_SPORT_PROFILE_RECRUIT_DEF, params);
 /** snake_case alias of {@link on3PersonSportProfileRecruit} (py/R parity). */
 export const on3_person_sport_profile_recruit = on3PersonSportProfileRecruit;
 
@@ -1793,7 +1818,7 @@ const PERSON_SPORT_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PersonSportRankings({});
  */
-export const on3PersonSportRankings: WrapperFn = (params = {}) => callFlat(PERSON_SPORT_RANKINGS_DEF, params);
+export const on3PersonSportRankings: Wrapper = (params: WrapperParams = {}) => callFlat(PERSON_SPORT_RANKINGS_DEF, params);
 /** snake_case alias of {@link on3PersonSportRankings} (py/R parity). */
 export const on3_person_sport_rankings = on3PersonSportRankings;
 
@@ -1824,7 +1849,7 @@ const PLAYER_ALL_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayerAllRankings({ person_key: '…' });
  */
-export const on3PlayerAllRankings: WrapperFn = (params = {}) => callFlat(PLAYER_ALL_RANKINGS_DEF, params);
+export const on3PlayerAllRankings: Wrapper<On3PlayerAllRankingsRow[]> = (params: WrapperParams = {}) => callFlat(PLAYER_ALL_RANKINGS_DEF, params);
 /** snake_case alias of {@link on3PlayerAllRankings} (py/R parity). */
 export const on3_player_all_rankings = on3PlayerAllRankings;
 
@@ -1855,7 +1880,7 @@ const PLAYER_DATABASE_UPDATES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayerDatabaseUpdates({ person_key: '…' });
  */
-export const on3PlayerDatabaseUpdates: WrapperFn = (params = {}) => callFlat(PLAYER_DATABASE_UPDATES_DEF, params);
+export const on3PlayerDatabaseUpdates: Wrapper<On3PlayerDatabaseUpdatesRow[]> = (params: WrapperParams = {}) => callFlat(PLAYER_DATABASE_UPDATES_DEF, params);
 /** snake_case alias of {@link on3PlayerDatabaseUpdates} (py/R parity). */
 export const on3_player_database_updates = on3PlayerDatabaseUpdates;
 
@@ -1886,7 +1911,7 @@ const PLAYER_IMAGES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayerImages({ person_key: '…' });
  */
-export const on3PlayerImages: WrapperFn = (params = {}) => callFlat(PLAYER_IMAGES_DEF, params);
+export const on3PlayerImages: Wrapper<On3PlayerImagesRow[]> = (params: WrapperParams = {}) => callFlat(PLAYER_IMAGES_DEF, params);
 /** snake_case alias of {@link on3PlayerImages} (py/R parity). */
 export const on3_player_images = on3PlayerImages;
 
@@ -1917,7 +1942,7 @@ const PLAYER_ORGANIZATIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayerOrganizations({ person_key: '…' });
  */
-export const on3PlayerOrganizations: WrapperFn = (params = {}) => callFlat(PLAYER_ORGANIZATIONS_DEF, params);
+export const on3PlayerOrganizations: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_ORGANIZATIONS_DEF, params);
 /** snake_case alias of {@link on3PlayerOrganizations} (py/R parity). */
 export const on3_player_organizations = on3PlayerOrganizations;
 
@@ -1952,7 +1977,7 @@ const PLAYER_ORGANIZATIONS_ORG_KEY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayerOrganizationsOrgKey({ player_key: '…', org_key: '…' });
  */
-export const on3PlayerOrganizationsOrgKey: WrapperFn = (params = {}) => callFlat(PLAYER_ORGANIZATIONS_ORG_KEY_DEF, params);
+export const on3PlayerOrganizationsOrgKey: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_ORGANIZATIONS_ORG_KEY_DEF, params);
 /** snake_case alias of {@link on3PlayerOrganizationsOrgKey} (py/R parity). */
 export const on3_player_organizations_org_key = on3PlayerOrganizationsOrgKey;
 
@@ -1983,7 +2008,7 @@ const PLAYER_PERSON_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayerPersonRankings({ person_key: '…' });
  */
-export const on3PlayerPersonRankings: WrapperFn = (params = {}) => callFlat(PLAYER_PERSON_RANKINGS_DEF, params);
+export const on3PlayerPersonRankings: Wrapper<On3PlayerPersonRankingsRow[]> = (params: WrapperParams = {}) => callFlat(PLAYER_PERSON_RANKINGS_DEF, params);
 /** snake_case alias of {@link on3PlayerPersonRankings} (py/R parity). */
 export const on3_player_person_rankings = on3PlayerPersonRankings;
 
@@ -2014,7 +2039,7 @@ const PLAYER_PROFILE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayerProfile({ person_key: '…' });
  */
-export const on3PlayerProfile: WrapperFn = (params = {}) => callFlat(PLAYER_PROFILE_DEF, params);
+export const on3PlayerProfile: Wrapper<On3PlayerProfileRow[]> = (params: WrapperParams = {}) => callFlat(PLAYER_PROFILE_DEF, params);
 /** snake_case alias of {@link on3PlayerProfile} (py/R parity). */
 export const on3_player_profile = on3PlayerProfile;
 
@@ -2045,7 +2070,7 @@ const PLAYER_TEAM_TARGETS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayerTeamTargets({ player_key: '…' });
  */
-export const on3PlayerTeamTargets: WrapperFn = (params = {}) => callFlat(PLAYER_TEAM_TARGETS_DEF, params);
+export const on3PlayerTeamTargets: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_TEAM_TARGETS_DEF, params);
 /** snake_case alias of {@link on3PlayerTeamTargets} (py/R parity). */
 export const on3_player_team_targets = on3PlayerTeamTargets;
 
@@ -2086,7 +2111,7 @@ const PLAYER_VERIFIED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayerVerified({});
  */
-export const on3PlayerVerified: WrapperFn = (params = {}) => callFlat(PLAYER_VERIFIED_DEF, params);
+export const on3PlayerVerified: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_VERIFIED_DEF, params);
 /** snake_case alias of {@link on3PlayerVerified} (py/R parity). */
 export const on3_player_verified = on3PlayerVerified;
 
@@ -2117,7 +2142,7 @@ const PLAYER_VIDEOS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayerVideos({ person_key: '…' });
  */
-export const on3PlayerVideos: WrapperFn = (params = {}) => callFlat(PLAYER_VIDEOS_DEF, params);
+export const on3PlayerVideos: Wrapper<On3PlayerVideosRow[]> = (params: WrapperParams = {}) => callFlat(PLAYER_VIDEOS_DEF, params);
 /** snake_case alias of {@link on3PlayerVideos} (py/R parity). */
 export const on3_player_videos = on3PlayerVideos;
 
@@ -2148,7 +2173,7 @@ const PLAYER_VISIT_CENTER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayerVisitCenter({ player_key: '…' });
  */
-export const on3PlayerVisitCenter: WrapperFn = (params = {}) => callFlat(PLAYER_VISIT_CENTER_DEF, params);
+export const on3PlayerVisitCenter: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_VISIT_CENTER_DEF, params);
 /** snake_case alias of {@link on3PlayerVisitCenter} (py/R parity). */
 export const on3_player_visit_center = on3PlayerVisitCenter;
 
@@ -2205,7 +2230,7 @@ const PLAYERS_INDUSTRY_COMPARISION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayersIndustryComparision({});
  */
-export const on3PlayersIndustryComparision: WrapperFn = (params = {}) => callFlat(PLAYERS_INDUSTRY_COMPARISION_DEF, params);
+export const on3PlayersIndustryComparision: Wrapper<On3PlayersIndustryComparisionRow[]> = (params: WrapperParams = {}) => callFlat(PLAYERS_INDUSTRY_COMPARISION_DEF, params);
 /** snake_case alias of {@link on3PlayersIndustryComparision} (py/R parity). */
 export const on3_players_industry_comparision = on3PlayersIndustryComparision;
 
@@ -2252,7 +2277,7 @@ const PLAYERS_INDUSTRY_COMPARISION_LIST_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PlayersIndustryComparisionList({});
  */
-export const on3PlayersIndustryComparisionList: WrapperFn = (params = {}) => callFlat(PLAYERS_INDUSTRY_COMPARISION_LIST_DEF, params);
+export const on3PlayersIndustryComparisionList: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYERS_INDUSTRY_COMPARISION_LIST_DEF, params);
 /** snake_case alias of {@link on3PlayersIndustryComparisionList} (py/R parity). */
 export const on3_players_industry_comparision_list = on3PlayersIndustryComparisionList;
 
@@ -2294,7 +2319,7 @@ const PREDICTIONS_USER_KEY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3PredictionsUserKey({ user_key: '…' });
  */
-export const on3PredictionsUserKey: WrapperFn = (params = {}) => callFlat(PREDICTIONS_USER_KEY_DEF, params);
+export const on3PredictionsUserKey: Wrapper = (params: WrapperParams = {}) => callFlat(PREDICTIONS_USER_KEY_DEF, params);
 /** snake_case alias of {@link on3PredictionsUserKey} (py/R parity). */
 export const on3_predictions_user_key = on3PredictionsUserKey;
 
@@ -2331,7 +2356,7 @@ const QUOTES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3Quotes({});
  */
-export const on3Quotes: WrapperFn = (params = {}) => callFlat(QUOTES_DEF, params);
+export const on3Quotes: Wrapper<On3QuotesRow[]> = (params: WrapperParams = {}) => callFlat(QUOTES_DEF, params);
 /** snake_case alias of {@link on3Quotes} (py/R parity). */
 export const on3_quotes = on3Quotes;
 
@@ -2362,7 +2387,7 @@ const QUOTES_KEY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3QuotesKey({ key: '…' });
  */
-export const on3QuotesKey: WrapperFn = (params = {}) => callFlat(QUOTES_KEY_DEF, params);
+export const on3QuotesKey: Wrapper = (params: WrapperParams = {}) => callFlat(QUOTES_KEY_DEF, params);
 /** snake_case alias of {@link on3QuotesKey} (py/R parity). */
 export const on3_quotes_key = on3QuotesKey;
 
@@ -2393,7 +2418,7 @@ const RECRUITMENT_PRIMARY_RECRUITMENT_EVALUATION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3RecruitmentPrimaryRecruitmentEvaluation({ recruitment_key: '…' });
  */
-export const on3RecruitmentPrimaryRecruitmentEvaluation: WrapperFn = (params = {}) => callFlat(RECRUITMENT_PRIMARY_RECRUITMENT_EVALUATION_DEF, params);
+export const on3RecruitmentPrimaryRecruitmentEvaluation: Wrapper = (params: WrapperParams = {}) => callFlat(RECRUITMENT_PRIMARY_RECRUITMENT_EVALUATION_DEF, params);
 /** snake_case alias of {@link on3RecruitmentPrimaryRecruitmentEvaluation} (py/R parity). */
 export const on3_recruitment_primary_recruitment_evaluation = on3RecruitmentPrimaryRecruitmentEvaluation;
 
@@ -2424,7 +2449,7 @@ const RECRUITMENT_RECRUITMENT_EVALUATIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3RecruitmentRecruitmentEvaluations({ recruitment_key: '…' });
  */
-export const on3RecruitmentRecruitmentEvaluations: WrapperFn = (params = {}) => callFlat(RECRUITMENT_RECRUITMENT_EVALUATIONS_DEF, params);
+export const on3RecruitmentRecruitmentEvaluations: Wrapper = (params: WrapperParams = {}) => callFlat(RECRUITMENT_RECRUITMENT_EVALUATIONS_DEF, params);
 /** snake_case alias of {@link on3RecruitmentRecruitmentEvaluations} (py/R parity). */
 export const on3_recruitment_recruitment_evaluations = on3RecruitmentRecruitmentEvaluations;
 
@@ -2470,7 +2495,7 @@ const RECRUITMENTS_LATEST_RPM_PICKS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3RecruitmentsLatestRpmPicks({});
  */
-export const on3RecruitmentsLatestRpmPicks: WrapperFn = (params = {}) => callFlat(RECRUITMENTS_LATEST_RPM_PICKS_DEF, params);
+export const on3RecruitmentsLatestRpmPicks: Wrapper = (params: WrapperParams = {}) => callFlat(RECRUITMENTS_LATEST_RPM_PICKS_DEF, params);
 /** snake_case alias of {@link on3RecruitmentsLatestRpmPicks} (py/R parity). */
 export const on3_recruitments_latest_rpm_picks = on3RecruitmentsLatestRpmPicks;
 
@@ -2501,7 +2526,7 @@ const RECRUITMENTS_PROFILE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3RecruitmentsProfile({ rec_key: '…' });
  */
-export const on3RecruitmentsProfile: WrapperFn = (params = {}) => callFlat(RECRUITMENTS_PROFILE_DEF, params);
+export const on3RecruitmentsProfile: Wrapper<On3RecruitmentsProfileRow[]> = (params: WrapperParams = {}) => callFlat(RECRUITMENTS_PROFILE_DEF, params);
 /** snake_case alias of {@link on3RecruitmentsProfile} (py/R parity). */
 export const on3_recruitments_profile = on3RecruitmentsProfile;
 
@@ -2532,7 +2557,7 @@ const RECRUITMENTS_RPM_PICKS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3RecruitmentsRpmPicks({ rec_key: '…' });
  */
-export const on3RecruitmentsRpmPicks: WrapperFn = (params = {}) => callFlat(RECRUITMENTS_RPM_PICKS_DEF, params);
+export const on3RecruitmentsRpmPicks: Wrapper = (params: WrapperParams = {}) => callFlat(RECRUITMENTS_RPM_PICKS_DEF, params);
 /** snake_case alias of {@link on3RecruitmentsRpmPicks} (py/R parity). */
 export const on3_recruitments_rpm_picks = on3RecruitmentsRpmPicks;
 
@@ -2563,7 +2588,7 @@ const RECRUITMENTS_RPM_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3RecruitmentsRpmSummary({ rec_key: '…' });
  */
-export const on3RecruitmentsRpmSummary: WrapperFn = (params = {}) => callFlat(RECRUITMENTS_RPM_SUMMARY_DEF, params);
+export const on3RecruitmentsRpmSummary: Wrapper<On3RecruitmentsRpmSummaryRow[]> = (params: WrapperParams = {}) => callFlat(RECRUITMENTS_RPM_SUMMARY_DEF, params);
 /** snake_case alias of {@link on3RecruitmentsRpmSummary} (py/R parity). */
 export const on3_recruitments_rpm_summary = on3RecruitmentsRpmSummary;
 
@@ -2610,7 +2635,7 @@ const TEAM_RANKING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3TeamRanking({});
  */
-export const on3TeamRanking: WrapperFn = (params = {}) => callFlat(TEAM_RANKING_DEF, params);
+export const on3TeamRanking: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_RANKING_DEF, params);
 /** snake_case alias of {@link on3TeamRanking} (py/R parity). */
 export const on3_team_ranking = on3TeamRanking;
 
@@ -2645,7 +2670,7 @@ const TEAM_RANKING_BLUECHIPS_TEAM_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3TeamRankingBluechipsTeamRankings({ sport_slug: '…', year: '…' });
  */
-export const on3TeamRankingBluechipsTeamRankings: WrapperFn = (params = {}) => callFlat(TEAM_RANKING_BLUECHIPS_TEAM_RANKINGS_DEF, params);
+export const on3TeamRankingBluechipsTeamRankings: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_RANKING_BLUECHIPS_TEAM_RANKINGS_DEF, params);
 /** snake_case alias of {@link on3TeamRankingBluechipsTeamRankings} (py/R parity). */
 export const on3_team_ranking_bluechips_team_rankings = on3TeamRankingBluechipsTeamRankings;
 
@@ -2680,7 +2705,7 @@ const TEAM_RANKING_CONSENSUS_TEAM_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3TeamRankingConsensusTeamRankings({ sport_slug: '…', year: '…' });
  */
-export const on3TeamRankingConsensusTeamRankings: WrapperFn = (params = {}) => callFlat(TEAM_RANKING_CONSENSUS_TEAM_RANKINGS_DEF, params);
+export const on3TeamRankingConsensusTeamRankings: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_RANKING_CONSENSUS_TEAM_RANKINGS_DEF, params);
 /** snake_case alias of {@link on3TeamRankingConsensusTeamRankings} (py/R parity). */
 export const on3_team_ranking_consensus_team_rankings = on3TeamRankingConsensusTeamRankings;
 
@@ -2711,7 +2736,7 @@ const TEAM_RANKING_ORGANIZATIONS_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3TeamRankingOrganizationsSummary({ org_key: '…' });
  */
-export const on3TeamRankingOrganizationsSummary: WrapperFn = (params = {}) => callFlat(TEAM_RANKING_ORGANIZATIONS_SUMMARY_DEF, params);
+export const on3TeamRankingOrganizationsSummary: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_RANKING_ORGANIZATIONS_SUMMARY_DEF, params);
 /** snake_case alias of {@link on3TeamRankingOrganizationsSummary} (py/R parity). */
 export const on3_team_ranking_organizations_summary = on3TeamRankingOrganizationsSummary;
 
@@ -2746,7 +2771,7 @@ const TEAM_RANKING_TEAM_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3TeamRankingTeamRankings({ sport_slug: '…', year: '…' });
  */
-export const on3TeamRankingTeamRankings: WrapperFn = (params = {}) => callFlat(TEAM_RANKING_TEAM_RANKINGS_DEF, params);
+export const on3TeamRankingTeamRankings: Wrapper<On3TeamRankingTeamRankingsRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_RANKING_TEAM_RANKINGS_DEF, params);
 /** snake_case alias of {@link on3TeamRankingTeamRankings} (py/R parity). */
 export const on3_team_ranking_team_rankings = on3TeamRankingTeamRankings;
 
@@ -2812,7 +2837,7 @@ const TRANSFERS_BEST_AVAILABLE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3TransfersBestAvailable({});
  */
-export const on3TransfersBestAvailable: WrapperFn = (params = {}) => callFlat(TRANSFERS_BEST_AVAILABLE_DEF, params);
+export const on3TransfersBestAvailable: Wrapper = (params: WrapperParams = {}) => callFlat(TRANSFERS_BEST_AVAILABLE_DEF, params);
 /** snake_case alias of {@link on3TransfersBestAvailable} (py/R parity). */
 export const on3_transfers_best_available = on3TransfersBestAvailable;
 
@@ -2868,7 +2893,7 @@ const TRANSFERS_LATEST_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3TransfersLatest({});
  */
-export const on3TransfersLatest: WrapperFn = (params = {}) => callFlat(TRANSFERS_LATEST_DEF, params);
+export const on3TransfersLatest: Wrapper = (params: WrapperParams = {}) => callFlat(TRANSFERS_LATEST_DEF, params);
 /** snake_case alias of {@link on3TransfersLatest} (py/R parity). */
 export const on3_transfers_latest = on3TransfersLatest;
 
@@ -2899,6 +2924,6 @@ const VIDEOS_VIDEO_KEY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.on3.on3VideosVideoKey({ video_key: '…' });
  */
-export const on3VideosVideoKey: WrapperFn = (params = {}) => callFlat(VIDEOS_VIDEO_KEY_DEF, params);
+export const on3VideosVideoKey: Wrapper = (params: WrapperParams = {}) => callFlat(VIDEOS_VIDEO_KEY_DEF, params);
 /** snake_case alias of {@link on3VideosVideoKey} (py/R parity). */
 export const on3_videos_video_key = on3VideosVideoKey;

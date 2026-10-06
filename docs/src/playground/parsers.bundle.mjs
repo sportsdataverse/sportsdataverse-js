@@ -444,7 +444,7 @@ var require_papaparse_min = __commonJS({
   }
 });
 
-// src/core/int64.ts
+// src/core/id_columns.ts
 var MLBAM_ID_COLUMNS = [
   "batter",
   "pitcher",
@@ -459,6 +459,8 @@ var ID_SEGMENT = /^id$|_ids?$|_id\d+$|_id_(\d+|started|ended)$|^id_(play|drive)$
 function isIdColumn(name) {
   return ID_SEGMENT.test(name.slice(name.lastIndexOf(".") + 1)) || EXACT_IDS.has(name);
 }
+
+// src/core/int64.ts
 var INT64_WARNING_CODE = "SDV_INT64";
 function rowCells(rows, col) {
   return {

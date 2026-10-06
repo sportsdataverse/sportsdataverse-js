@@ -43,7 +43,7 @@ const LEAGUESTAT = "https://cluster.leaguestat.com/feed/index.php";
  * turn from maxtixador/scrapernhl). Each league's `key` can be overridden at
  * runtime with the `SDV_<LEAGUE>_API_KEY` environment variable.
  */
-export const HOCKEYTECH_LEAGUES: Record<string, HockeytechLeague> = {
+const LEAGUE_TABLE = {
   // ushl: PBP ships goals/penalties/goalie changes only (no coordinates).
   // mjhl: its public key has no gamecenter access — gc/gamesummary answers `Feed type access
   // denied.` (-> empty); pbp ships goals/penalties/goalie changes only (live 2026-10-05).
@@ -68,7 +68,13 @@ export const HOCKEYTECH_LEAGUES: Record<string, HockeytechLeague> = {
   vijhl: { name: "VIJHL", clientCode: "vijhl", apiKey: "4f1a61df18906b61", leagueId: 1, siteId: 0, baseUrl: LSCLUSTER, pbpStyle: "hockeytech_b", otPeriodLength: 300 },
   kijhl: { name: "KIJHL", clientCode: "kijhl", apiKey: "2589e0f644b1bb71", leagueId: 1, siteId: 0, baseUrl: LSCLUSTER, pbpStyle: "hockeytech_b", otPeriodLength: 300 },
   mjhl: { name: "MJHL", clientCode: "mjhl", apiKey: "f894c324fe5fd8f0", leagueId: 1, siteId: 0, baseUrl: LSCLUSTER, pbpStyle: "hockeytech_b", otPeriodLength: 300 },
-};
+} satisfies Record<string, HockeytechLeague>;
+
+/** A HockeyTech league slug (`pwhl`, `ahl`, `ohl`, ...): a key of {@link HOCKEYTECH_LEAGUES}. */
+export type HockeytechLeagueSlug = keyof typeof LEAGUE_TABLE;
+
+/** The league registry (see above), keyed by {@link HockeytechLeagueSlug}. */
+export const HOCKEYTECH_LEAGUES: Record<string, HockeytechLeague> = LEAGUE_TABLE;
 
 /**
  * `gameCenterPlayByPlay` uses a distinct key for PWHL on the statviewfeed PBP
