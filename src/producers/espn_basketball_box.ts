@@ -513,9 +513,9 @@ export const helper_mbb_team_box = (final: any): Row[] => basketballTeamBox(fina
 export const helper_wbb_team_box = (final: any): Row[] => basketballTeamBox(final);
 
 /** `{ league: { helper_<lg>_player_box, helper_<lg>_team_box } }` for the `sdv.<lg>` merge. */
-export const BASKETBALL_BOX_PRODUCERS: Record<string, Record<string, (final: any) => Row[]>> = {
+export const BASKETBALL_BOX_PRODUCERS = {
   nba: { helper_nba_player_box, helper_nba_team_box },
   wnba: { helper_wnba_player_box, helper_wnba_team_box },
   mbb: { helper_mbb_player_box, helper_mbb_team_box },
   wbb: { helper_wbb_player_box, helper_wbb_team_box },
-};
+} satisfies Record<string, Record<string, (final: any) => Row[]>>;

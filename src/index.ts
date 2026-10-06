@@ -22,6 +22,8 @@ import * as cricketWp from './models/cricket_wp.js';
 import { BASKETBALL_BOX_PRODUCERS } from './producers/espn_basketball_box.js';
 import { BASKETBALL_PBP_PRODUCERS, _espnPbp } from './producers/espn_basketball_pbp.js';
 import { oddsMath, oddsErrors } from './odds/math.js';
+import type { GeneratedNamespaces } from './generated/namespaces.js';
+import type { WithCamelAliases } from './core/types.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
 // documented `export const` wrappers in src/generated/espn/<prefix>.ts, exposed
@@ -43,12 +45,12 @@ const legacy: Record<string, Record<string, any>> = {
 // only a fallback if a module is somehow missing. v4: wrappers carry sdv-py's
 // names, and every pre-v4 name a rename replaced is added as a deprecated alias
 // (one DeprecationWarning per name per process; src/generated/aliases.ts).
-const sdv: Record<string, Record<string, any>> = { ...legacy };
+const surface: Record<string, Record<string, any>> = { ...legacy };
 for (const cfg of LEAGUES) {
   const espn = WRITTEN_ESPN[cfg.prefix]
     ? withDeprecatedAliases(WRITTEN_ESPN[cfg.prefix], ESPN_DEPRECATED_ALIASES[cfg.prefix])
     : makeLeagueModule(cfg);
-  sdv[cfg.prefix] = { ...(sdv[cfg.prefix] ?? {}), ...espn };
+  surface[cfg.prefix] = { ...(surface[cfg.prefix] ?? {}), ...espn };
 }
 
 // Merge the non-ESPN "flat API" wrappers onto their target league namespace,
@@ -123,14 +125,14 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
 // the same `callFlat` core, so they resolve identically.
 for (const [api, mod] of Object.entries(WRITTEN_FLAT)) {
   const prefix = FLAT_API_NAMESPACES[api] ?? api;
-  sdv[prefix] = { ...(sdv[prefix] ?? {}), ...withDeprecatedAliases(mod, FLAT_DEPRECATED_ALIASES[api]) };
+  surface[prefix] = { ...(surface[prefix] ?? {}), ...withDeprecatedAliases(mod, FLAT_DEPRECATED_ALIASES[api]) };
 }
 
 // Release dataset loaders (`load*` + snake alias, generated from the vendored
 // sdv-py releases.yaml) merged onto their league namespace — additive, after
 // ESPN + flat. A loader-only namespace (`pwhl`) is created here.
 for (const [prefix, mod] of Object.entries(WRITTEN_LOADERS)) {
-  sdv[prefix] = { ...(sdv[prefix] ?? {}), ...mod };
+  surface[prefix] = { ...(surface[prefix] ?? {}), ...mod };
 }
 
 // Hand-written Baseball Savant / Statcast wrappers (date-chunked search +
@@ -141,8 +143,8 @@ const toCamel = (s: string): string =>
   s.replace(/_([a-z0-9])/g, (_m, c: string) => c.toUpperCase());
 for (const [name, fn] of Object.entries(mlbStatcastExtra)) {
   if (typeof fn !== 'function') continue; // skip exported types/interfaces
-  sdv.mlb[name] = fn;
-  sdv.mlb[toCamel(name)] = fn;
+  surface.mlb[name] = fn;
+  surface.mlb[toCamel(name)] = fn;
 }
 
 // HockeyTech season-id helpers (py `<lg>_season_id` / `most_recent_<lg>_season` /
@@ -170,18 +172,18 @@ const hockeytechAnalytics = {
 // Never silently overwrite an existing sdv.hockeytech key (the flat raw-feed wrappers share the namespace).
 for (const name of Object.keys(hockeytechAnalytics)) {
   for (const n of [name, toCamel(name)]) {
-    if (n in sdv.hockeytech || n in hockeytechSeasonExtra) throw new Error(`sdv.hockeytech.${n} already exists`);
+    if (n in surface.hockeytech || n in hockeytechSeasonExtra) throw new Error(`sdv.hockeytech.${n} already exists`);
   }
 }
 Object.assign(hockeytechSeasonExtra, hockeytechAnalytics);
 for (const [name, fn] of Object.entries(hockeytechSeasonExtra)) {
-  sdv.hockeytech[name] = fn;
-  sdv.hockeytech[toCamel(name)] = fn;
+  surface.hockeytech[name] = fn;
+  surface.hockeytech[toCamel(name)] = fn;
 }
 
 // Cricket in-play win probability (pure, offline) merged onto `sdv.cricket`
 // under py's snake_case names and camelCase aliases.
-const cricketWpExports: Record<string, any> = {
+const cricketWpExports = {
   cricket_match_state: cricketWp.cricket_match_state,
   cricket_win_probability: cricketWp.cricket_win_probability,
   cricket_expected_runs: cricketWp.cricket_expected_runs,
@@ -190,8 +192,8 @@ const cricketWpExports: Record<string, any> = {
   cricket_get_format: cricketWp.get_format,
 };
 for (const [name, fn] of Object.entries(cricketWpExports)) {
-  sdv.cricket[name] = fn;
-  sdv.cricket[toCamel(name)] = fn;
+  surface.cricket[name] = fn;
+  surface.cricket[toCamel(name)] = fn;
 }
 
 // ESPN basketball box + PBP producers (py `helper_<lg>_player_box` / `helper_<lg>_team_box`,
@@ -201,7 +203,7 @@ for (const [name, fn] of Object.entries(cricketWpExports)) {
 const espnPbp = Object.fromEntries(
   Object.keys(BASKETBALL_PBP_PRODUCERS).map((lg) => [
     lg,
-    { [`espn_${lg}_pbp`]: _espnPbp(lg as keyof typeof BASKETBALL_PBP_PRODUCERS, sdv[lg][`espn_${lg}_summary`]) },
+    { [`espn_${lg}_pbp`]: _espnPbp(lg as keyof typeof BASKETBALL_PBP_PRODUCERS, surface[lg][`espn_${lg}_summary`]) },
   ])
 );
 for (const [lg, fns] of [
@@ -211,16 +213,63 @@ for (const [lg, fns] of [
 ]) {
   for (const [name, fn] of Object.entries(fns)) {
     for (const n of [name, toCamel(name)]) {
-      if (n in sdv[lg]) throw new Error(`sdv.${lg}.${n} already exists`);
-      sdv[lg][n] = fn;
+      if (n in surface[lg]) throw new Error(`sdv.${lg}.${n} already exists`);
+      surface[lg][n] = fn;
     }
   }
 }
 
 // Odds / market math (py wexp.market) merged onto sdv.odds under py + camelCase names.
-sdv.odds = { ...(sdv.odds ?? {}), ...oddsMath, errors: oddsErrors };
+surface.odds = { ...(surface.odds ?? {}), ...oddsMath, errors: oddsErrors };
 
+/**
+ * The default export: every namespace (`sdv.nba`, `sdv.odds`, ...) with the type of each
+ * member ({@link Sdv}). Assembled untyped above; test/types/namespaces.test.js holds the
+ * runtime keys of every namespace equal to this type's.
+ */
+const sdv = surface as unknown as Sdv;
 export default sdv;
+
+/** The legacy hand-written services (pre-3.0 convenience methods such as `sdv.nba.getPlayByPlay`). */
+type LegacyNamespaces = {
+  cfb: typeof cfb;
+  mbb: typeof mbb;
+  mlb: typeof mlb;
+  nba: typeof nba;
+  ncaa: typeof ncaa;
+  nfl: typeof nfl;
+  nhl: typeof nhl;
+  tennis: typeof tennis;
+  wbb: typeof wbb;
+  wnba: typeof wnba;
+};
+/** A basketball league's box + PBP producers and its `espn_<lg>_pbp`. */
+type BasketballProducers<L extends keyof typeof BASKETBALL_PBP_PRODUCERS> = WithCamelAliases<
+  (typeof BASKETBALL_BOX_PRODUCERS)[L] &
+    (typeof BASKETBALL_PBP_PRODUCERS)[L] &
+    Record<`espn_${L}_pbp`, ReturnType<typeof _espnPbp>>
+>;
+/** The hand-written members merged onto namespaces above (snake_case + camelCase). */
+type HandWrittenNamespaces = {
+  mlb: WithCamelAliases<typeof mlbStatcastExtra>;
+  hockeytech: WithCamelAliases<typeof hockeytechSeasonExtra & typeof hockeytechAnalytics>;
+  cricket: WithCamelAliases<typeof cricketWpExports>;
+  nba: BasketballProducers<"nba">;
+  wnba: BasketballProducers<"wnba">;
+  mbb: BasketballProducers<"mbb">;
+  wbb: BasketballProducers<"wbb">;
+  odds: typeof oddsMath & { errors: typeof oddsErrors };
+};
+/** `A` and `B` merged key by key (a key in both: both member sets). */
+type MergeNamespaces<A, B> = {
+  [K in keyof A | keyof B]: (K extends keyof A ? A[K] : unknown) & (K extends keyof B ? B[K] : unknown);
+};
+/**
+ * The type of the default export: every namespace's generated members (ESPN wrappers,
+ * flat-API families, release loaders, deprecated aliases: src/generated/namespaces.ts),
+ * legacy service methods and hand-written members.
+ */
+export type Sdv = MergeNamespaces<MergeNamespaces<GeneratedNamespaces, LegacyNamespaces>, HandWrittenNamespaces>;
 
 export { OddsValueError, OddsZeroDivisionError, OddsOverflowError, OddsRuntimeError } from './odds/math.js';
 
@@ -316,3 +365,5 @@ export type {
 // Generated row types of the parity-verified endpoints' `{ parsed: true }` returns
 // (src/generated/rows/, tools/codegen/row-types.mjs). Type-only: the module is empty at runtime.
 export * from './generated/rows/index.js';
+// Each namespace's generated members (type-only; src/generated/namespaces.ts), the parts of `Sdv`.
+export * from './generated/namespaces.js';

@@ -895,9 +895,9 @@ export const helper_wbb_pbp_features = WBB.pbp_features;
 export const helper_wbb_pbp = WBB.pbp;
 
 /** `{ league: { helper_<lg>_pbp, helper_<lg>_pickcenter, ... } }` for the `sdv.<lg>` merge. */
-export const BASKETBALL_PBP_PRODUCERS: Record<League, Record<string, (...args: any[]) => unknown>> = {
+export const BASKETBALL_PBP_PRODUCERS = {
   nba: { helper_nba_pbp, helper_nba_pickcenter, helper_nba_game_data, helper_nba_pbp_features },
   wnba: { helper_wnba_pbp, helper_wnba_pickcenter, helper_wnba_game_data, helper_wnba_pbp_features },
   mbb: { helper_mbb_pbp, helper_mbb_pickcenter, helper_mbb_game_data, helper_mbb_pbp_features },
   wbb: { helper_wbb_pbp, helper_wbb_pickcenter, helper_wbb_game_data, helper_wbb_pbp_features },
-};
+} satisfies Record<League, Record<string, (...args: any[]) => unknown>>;

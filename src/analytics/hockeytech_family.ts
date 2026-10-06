@@ -14,7 +14,8 @@
 
 import { AssetFetchError } from "../core/errors.js";
 import { idColumnsToStrings } from "../core/int64.js";
-import { HOCKEYTECH_LEAGUES, hockeytechFetch } from "../core/hockeytech_runtime.js";
+import { HOCKEYTECH_LEAGUES, hockeytechFetch, type HockeytechLeagueSlug } from "../core/hockeytech_runtime.js";
+import type { SnakeToCamel } from "../core/types.js";
 import {
   enrich_pbp,
   game_corsi_rows,
@@ -122,8 +123,16 @@ export function buildHockeytechAnalytics(league: string): Record<string, (gameId
   };
 }
 
+/** The analytics member names: `<lg>_game_shifts`, `<lg>_pbp`, `<lg>_player_toi`, `<lg>_game_corsi` for every league. */
+type AnalyticsName = `${HockeytechLeagueSlug}_${"game_shifts" | "pbp" | "player_toi" | "game_corsi"}`;
+
+/** Every league's analytics callables, under snake_case and camelCase names. */
+export type HockeytechAnalytics = {
+  [K in AnalyticsName as K | SnakeToCamel<K>]: (gameId: GameId) => Promise<Row[]>;
+};
+
 /** Every league's analytics callables (snake_case + camelCase aliases), for merging onto `sdv.hockeytech`. */
-export function allHockeytechAnalytics(): Record<string, (gameId: GameId) => Promise<Row[]>> {
+export function allHockeytechAnalytics(): HockeytechAnalytics {
   const out: Record<string, (gameId: GameId) => Promise<Row[]>> = {};
   for (const lg of Object.keys(HOCKEYTECH_LEAGUES)) {
     for (const [name, fn] of Object.entries(buildHockeytechAnalytics(lg))) {
@@ -131,5 +140,5 @@ export function allHockeytechAnalytics(): Record<string, (gameId: GameId) => Pro
       out[toCamel(name)] = fn;
     }
   }
-  return out;
+  return out as HockeytechAnalytics;
 }

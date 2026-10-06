@@ -134,6 +134,14 @@ export interface WrapperDef {
   deprecated?: string;
 }
 
+/** A snake_case name as the camelCase alias the namespaces also register (`espn_nba_pbp` -> `espnNbaPbp`). */
+export type SnakeToCamel<S extends string> = S extends `${infer H}_${infer C}${infer T}`
+  ? `${H}${Uppercase<C>}${SnakeToCamel<T>}`
+  : S;
+
+/** `T` plus every member again under its camelCase name. */
+export type WithCamelAliases<T> = T & { [K in keyof T & string as SnakeToCamel<K>]: T[K] };
+
 /** A generated cross-league wrapper: `(params?) => Promise<raw ESPN JSON>`. */
 export type WrapperFn = (params?: Record<string, any>) => Promise<any>;
 
