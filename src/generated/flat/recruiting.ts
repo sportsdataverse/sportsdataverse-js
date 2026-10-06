@@ -7,6 +7,33 @@
 
 import { callFlat } from "../../leagues/_make_flat.js";
 import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  RecruitingArchivedPlayerRankingsParams,
+  RecruitingBiggestMoversParams,
+  RecruitingCoachesParams,
+  RecruitingCurrentTargetPredictionsParams,
+  RecruitingInstitutionGroupsParams,
+  RecruitingInstitutionRankingsParams,
+  RecruitingPlayerSportRankingsParams,
+  RecruitingPlayersUnderSpecialEvaluationParams,
+  RecruitingPositionsParams,
+  RecruitingRankingsCompositeTeamFeedParams,
+  RecruitingRankingsParams,
+  RecruitingRankingsTransferPortalPlayerFeedParams,
+  RecruitingRankingsTransferPortalTeamFeedParams,
+  RecruitingRecruitsParams,
+  RecruitingSportYearsParams,
+  RecruitingSportsParams,
+  RecruitingTagsAutocompleteParams,
+  RecruitingTagsPhotosByKeyParams,
+  RecruitingTagsPhotosByTypeParams,
+  RecruitingTeamsParams,
+  RecruitingTransferPlayerSportRankingsParams,
+  RecruitingTransfersParams,
+  RecruitingUnrankedRecruitsParams,
+  RecruitingUnrankedTransfersParams,
+  RecruitingYearParams,
+} from "../params/recruiting.js";
 
 const ARCHIVED_PLAYER_RANKINGS_DEF: WrapperDef = {
   "short": "archived_player_rankings",
@@ -50,7 +77,7 @@ const ARCHIVED_PLAYER_RANKINGS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingArchivedPlayerRankings({ ranking_key: '…' });
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingArchivedPlayerRankings: Wrapper = (params: WrapperParams = {}) => callFlat(ARCHIVED_PLAYER_RANKINGS_DEF, params);
+export const recruitingArchivedPlayerRankings: Wrapper<Row[], RecruitingArchivedPlayerRankingsParams> = (params: WrapperParams = {}) => callFlat(ARCHIVED_PLAYER_RANKINGS_DEF, params);
 /**
  * snake_case alias of {@link recruitingArchivedPlayerRankings} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -93,7 +120,7 @@ const BIGGEST_MOVERS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingBiggestMovers({ ranking_key: '…' });
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingBiggestMovers: Wrapper = (params: WrapperParams = {}) => callFlat(BIGGEST_MOVERS_DEF, params);
+export const recruitingBiggestMovers: Wrapper<Row[], RecruitingBiggestMoversParams> = (params: WrapperParams = {}) => callFlat(BIGGEST_MOVERS_DEF, params);
 /**
  * snake_case alias of {@link recruitingBiggestMovers} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -147,7 +174,7 @@ const COACHES_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingCoaches({});
  * @deprecated use sdv.sports247.sports247_coaches() instead (api.247sports.com answers HTTP 500).
  */
-export const recruitingCoaches: Wrapper = (params: WrapperParams = {}) => callFlat(COACHES_DEF, params);
+export const recruitingCoaches: Wrapper<Row[], RecruitingCoachesParams> = (params: WrapperParams = {}) => callFlat(COACHES_DEF, params);
 /**
  * snake_case alias of {@link recruitingCoaches} (py/R parity).
  * @deprecated use sdv.sports247.sports247_coaches() instead (api.247sports.com answers HTTP 500).
@@ -204,7 +231,7 @@ const CURRENT_TARGET_PREDICTIONS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingCurrentTargetPredictions({ site_key: '…', year: '…', sport_key: '…' });
  * @deprecated use sdv.sports247.sports247_target_predictions() instead (api.247sports.com answers HTTP 500).
  */
-export const recruitingCurrentTargetPredictions: Wrapper = (params: WrapperParams = {}) => callFlat(CURRENT_TARGET_PREDICTIONS_DEF, params);
+export const recruitingCurrentTargetPredictions: Wrapper<Row[], RecruitingCurrentTargetPredictionsParams> = (params: WrapperParams = {}) => callFlat(CURRENT_TARGET_PREDICTIONS_DEF, params);
 /**
  * snake_case alias of {@link recruitingCurrentTargetPredictions} (py/R parity).
  * @deprecated use sdv.sports247.sports247_target_predictions() instead (api.247sports.com answers HTTP 500).
@@ -235,7 +262,7 @@ const INSTITUTION_GROUPS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingInstitutionGroups({});
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingInstitutionGroups: Wrapper = (params: WrapperParams = {}) => callFlat(INSTITUTION_GROUPS_DEF, params);
+export const recruitingInstitutionGroups: Wrapper<Row[], RecruitingInstitutionGroupsParams> = (params: WrapperParams = {}) => callFlat(INSTITUTION_GROUPS_DEF, params);
 /**
  * snake_case alias of {@link recruitingInstitutionGroups} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -314,7 +341,7 @@ const INSTITUTION_RANKINGS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingInstitutionRankings({ sport_key: '…', year: '…' });
  * @deprecated use sdv.sports247.sports247_institution_rankings() instead (api.247sports.com answers HTTP 500).
  */
-export const recruitingInstitutionRankings: Wrapper = (params: WrapperParams = {}) => callFlat(INSTITUTION_RANKINGS_DEF, params);
+export const recruitingInstitutionRankings: Wrapper<Row[], RecruitingInstitutionRankingsParams> = (params: WrapperParams = {}) => callFlat(INSTITUTION_RANKINGS_DEF, params);
 /**
  * snake_case alias of {@link recruitingInstitutionRankings} (py/R parity).
  * @deprecated use sdv.sports247.sports247_institution_rankings() instead (api.247sports.com answers HTTP 500).
@@ -391,7 +418,7 @@ const PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingPlayerSportRankings({});
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingPlayerSportRankings: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_SPORT_RANKINGS_DEF, params);
+export const recruitingPlayerSportRankings: Wrapper<Row[], RecruitingPlayerSportRankingsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_SPORT_RANKINGS_DEF, params);
 /**
  * snake_case alias of {@link recruitingPlayerSportRankings} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -427,7 +454,7 @@ const PLAYERS_UNDER_SPECIAL_EVALUATION_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingPlayersUnderSpecialEvaluation({ ranking_key: '…' });
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingPlayersUnderSpecialEvaluation: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYERS_UNDER_SPECIAL_EVALUATION_DEF, params);
+export const recruitingPlayersUnderSpecialEvaluation: Wrapper<Row[], RecruitingPlayersUnderSpecialEvaluationParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_UNDER_SPECIAL_EVALUATION_DEF, params);
 /**
  * snake_case alias of {@link recruitingPlayersUnderSpecialEvaluation} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -474,7 +501,7 @@ const POSITIONS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingPositions({});
  * @deprecated use sdv.sports247.sports247_positions() instead (api.247sports.com answers HTTP 500).
  */
-export const recruitingPositions: Wrapper = (params: WrapperParams = {}) => callFlat(POSITIONS_DEF, params);
+export const recruitingPositions: Wrapper<Row[], RecruitingPositionsParams> = (params: WrapperParams = {}) => callFlat(POSITIONS_DEF, params);
 /**
  * snake_case alias of {@link recruitingPositions} (py/R parity).
  * @deprecated use sdv.sports247.sports247_positions() instead (api.247sports.com answers HTTP 500).
@@ -526,7 +553,7 @@ const RANKINGS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingRankings({});
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingRankings: Wrapper = (params: WrapperParams = {}) => callFlat(RANKINGS_DEF, params);
+export const recruitingRankings: Wrapper<Row[], RecruitingRankingsParams> = (params: WrapperParams = {}) => callFlat(RANKINGS_DEF, params);
 /**
  * snake_case alias of {@link recruitingRankings} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -573,7 +600,7 @@ const RANKINGS_COMPOSITE_TEAM_FEED_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingRankingsCompositeTeamFeed({ sport_key: '…', year: '…' });
  * @deprecated use sdv.sports247.sports247_composite_team_ranking_feed() instead (api.247sports.com answers HTTP 500).
  */
-export const recruitingRankingsCompositeTeamFeed: Wrapper = (params: WrapperParams = {}) => callFlat(RANKINGS_COMPOSITE_TEAM_FEED_DEF, params);
+export const recruitingRankingsCompositeTeamFeed: Wrapper<Row[], RecruitingRankingsCompositeTeamFeedParams> = (params: WrapperParams = {}) => callFlat(RANKINGS_COMPOSITE_TEAM_FEED_DEF, params);
 /**
  * snake_case alias of {@link recruitingRankingsCompositeTeamFeed} (py/R parity).
  * @deprecated use sdv.sports247.sports247_composite_team_ranking_feed() instead (api.247sports.com answers HTTP 500).
@@ -620,7 +647,7 @@ const RANKINGS_TRANSFER_PORTAL_PLAYER_FEED_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingRankingsTransferPortalPlayerFeed({ sport_key: '…', year: '…' });
  * @deprecated use sdv.sports247.sports247_transfer_portal_player_feed() instead (api.247sports.com answers HTTP 500).
  */
-export const recruitingRankingsTransferPortalPlayerFeed: Wrapper = (params: WrapperParams = {}) => callFlat(RANKINGS_TRANSFER_PORTAL_PLAYER_FEED_DEF, params);
+export const recruitingRankingsTransferPortalPlayerFeed: Wrapper<Row[], RecruitingRankingsTransferPortalPlayerFeedParams> = (params: WrapperParams = {}) => callFlat(RANKINGS_TRANSFER_PORTAL_PLAYER_FEED_DEF, params);
 /**
  * snake_case alias of {@link recruitingRankingsTransferPortalPlayerFeed} (py/R parity).
  * @deprecated use sdv.sports247.sports247_transfer_portal_player_feed() instead (api.247sports.com answers HTTP 500).
@@ -667,7 +694,7 @@ const RANKINGS_TRANSFER_PORTAL_TEAM_FEED_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingRankingsTransferPortalTeamFeed({ sport_key: '…', year: '…' });
  * @deprecated use sdv.sports247.sports247_transfer_portal_team_feed() instead (api.247sports.com answers HTTP 500).
  */
-export const recruitingRankingsTransferPortalTeamFeed: Wrapper = (params: WrapperParams = {}) => callFlat(RANKINGS_TRANSFER_PORTAL_TEAM_FEED_DEF, params);
+export const recruitingRankingsTransferPortalTeamFeed: Wrapper<Row[], RecruitingRankingsTransferPortalTeamFeedParams> = (params: WrapperParams = {}) => callFlat(RANKINGS_TRANSFER_PORTAL_TEAM_FEED_DEF, params);
 /**
  * snake_case alias of {@link recruitingRankingsTransferPortalTeamFeed} (py/R parity).
  * @deprecated use sdv.sports247.sports247_transfer_portal_team_feed() instead (api.247sports.com answers HTTP 500).
@@ -726,7 +753,7 @@ const RECRUITS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingRecruits({});
  * @deprecated use sdv.sports247.sports247_recruits() instead (api.247sports.com answers HTTP 500).
  */
-export const recruitingRecruits: Wrapper = (params: WrapperParams = {}) => callFlat(RECRUITS_DEF, params);
+export const recruitingRecruits: Wrapper<Row[], RecruitingRecruitsParams> = (params: WrapperParams = {}) => callFlat(RECRUITS_DEF, params);
 /**
  * snake_case alias of {@link recruitingRecruits} (py/R parity).
  * @deprecated use sdv.sports247.sports247_recruits() instead (api.247sports.com answers HTTP 500).
@@ -762,7 +789,7 @@ const SPORT_YEARS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingSportYears({ sport_key: '…' });
  * @deprecated use sdv.sports247.sports247_sport_years() instead (api.247sports.com answers HTTP 500).
  */
-export const recruitingSportYears: Wrapper = (params: WrapperParams = {}) => callFlat(SPORT_YEARS_DEF, params);
+export const recruitingSportYears: Wrapper<Row[], RecruitingSportYearsParams> = (params: WrapperParams = {}) => callFlat(SPORT_YEARS_DEF, params);
 /**
  * snake_case alias of {@link recruitingSportYears} (py/R parity).
  * @deprecated use sdv.sports247.sports247_sport_years() instead (api.247sports.com answers HTTP 500).
@@ -799,7 +826,7 @@ const SPORTS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingSports({});
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingSports: Wrapper = (params: WrapperParams = {}) => callFlat(SPORTS_DEF, params);
+export const recruitingSports: Wrapper<Row[], RecruitingSportsParams> = (params: WrapperParams = {}) => callFlat(SPORTS_DEF, params);
 /**
  * snake_case alias of {@link recruitingSports} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -842,7 +869,7 @@ const TAGS_AUTOCOMPLETE_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingTagsAutocomplete({});
  * @deprecated use sdv.sports247.sports247_tags_autocomplete() instead (api.247sports.com answers HTTP 500).
  */
-export const recruitingTagsAutocomplete: Wrapper = (params: WrapperParams = {}) => callFlat(TAGS_AUTOCOMPLETE_DEF, params);
+export const recruitingTagsAutocomplete: Wrapper<Row[], RecruitingTagsAutocompleteParams> = (params: WrapperParams = {}) => callFlat(TAGS_AUTOCOMPLETE_DEF, params);
 /**
  * snake_case alias of {@link recruitingTagsAutocomplete} (py/R parity).
  * @deprecated use sdv.sports247.sports247_tags_autocomplete() instead (api.247sports.com answers HTTP 500).
@@ -891,7 +918,7 @@ const TAGS_PHOTOS_BY_KEY_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingTagsPhotosByKey({ prefixed_key: '…' });
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingTagsPhotosByKey: Wrapper = (params: WrapperParams = {}) => callFlat(TAGS_PHOTOS_BY_KEY_DEF, params);
+export const recruitingTagsPhotosByKey: Wrapper<Row[], RecruitingTagsPhotosByKeyParams> = (params: WrapperParams = {}) => callFlat(TAGS_PHOTOS_BY_KEY_DEF, params);
 /**
  * snake_case alias of {@link recruitingTagsPhotosByKey} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -944,7 +971,7 @@ const TAGS_PHOTOS_BY_TYPE_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingTagsPhotosByType({ type: '…', key: '…' });
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingTagsPhotosByType: Wrapper = (params: WrapperParams = {}) => callFlat(TAGS_PHOTOS_BY_TYPE_DEF, params);
+export const recruitingTagsPhotosByType: Wrapper<Row[], RecruitingTagsPhotosByTypeParams> = (params: WrapperParams = {}) => callFlat(TAGS_PHOTOS_BY_TYPE_DEF, params);
 /**
  * snake_case alias of {@link recruitingTagsPhotosByType} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -991,7 +1018,7 @@ const TEAMS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingTeams({});
  * @deprecated use sdv.sports247.sports247_teams() instead (api.247sports.com answers HTTP 500).
  */
-export const recruitingTeams: Wrapper = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
+export const recruitingTeams: Wrapper<Row[], RecruitingTeamsParams> = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
 /**
  * snake_case alias of {@link recruitingTeams} (py/R parity).
  * @deprecated use sdv.sports247.sports247_teams() instead (api.247sports.com answers HTTP 500).
@@ -1068,7 +1095,7 @@ const TRANSFER_PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingTransferPlayerSportRankings({});
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingTransferPlayerSportRankings: Wrapper = (params: WrapperParams = {}) => callFlat(TRANSFER_PLAYER_SPORT_RANKINGS_DEF, params);
+export const recruitingTransferPlayerSportRankings: Wrapper<Row[], RecruitingTransferPlayerSportRankingsParams> = (params: WrapperParams = {}) => callFlat(TRANSFER_PLAYER_SPORT_RANKINGS_DEF, params);
 /**
  * snake_case alias of {@link recruitingTransferPlayerSportRankings} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -1150,7 +1177,7 @@ const TRANSFERS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingTransfers({});
  * @deprecated use sdv.sports247.sports247_transfers() instead (api.247sports.com answers HTTP 500).
  */
-export const recruitingTransfers: Wrapper = (params: WrapperParams = {}) => callFlat(TRANSFERS_DEF, params);
+export const recruitingTransfers: Wrapper<Row[], RecruitingTransfersParams> = (params: WrapperParams = {}) => callFlat(TRANSFERS_DEF, params);
 /**
  * snake_case alias of {@link recruitingTransfers} (py/R parity).
  * @deprecated use sdv.sports247.sports247_transfers() instead (api.247sports.com answers HTTP 500).
@@ -1232,7 +1259,7 @@ const UNRANKED_RECRUITS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingUnrankedRecruits({});
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingUnrankedRecruits: Wrapper = (params: WrapperParams = {}) => callFlat(UNRANKED_RECRUITS_DEF, params);
+export const recruitingUnrankedRecruits: Wrapper<Row[], RecruitingUnrankedRecruitsParams> = (params: WrapperParams = {}) => callFlat(UNRANKED_RECRUITS_DEF, params);
 /**
  * snake_case alias of {@link recruitingUnrankedRecruits} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -1290,7 +1317,7 @@ const UNRANKED_TRANSFERS_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingUnrankedTransfers({ ranking_key: '…' });
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingUnrankedTransfers: Wrapper = (params: WrapperParams = {}) => callFlat(UNRANKED_TRANSFERS_DEF, params);
+export const recruitingUnrankedTransfers: Wrapper<Row[], RecruitingUnrankedTransfersParams> = (params: WrapperParams = {}) => callFlat(UNRANKED_TRANSFERS_DEF, params);
 /**
  * snake_case alias of {@link recruitingUnrankedTransfers} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -1327,7 +1354,7 @@ const YEAR_DEF: WrapperDef = {
  * @example await sdv.recruiting.recruitingYear({});
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
-export const recruitingYear: Wrapper = (params: WrapperParams = {}) => callFlat(YEAR_DEF, params);
+export const recruitingYear: Wrapper<Row[], RecruitingYearParams> = (params: WrapperParams = {}) => callFlat(YEAR_DEF, params);
 /**
  * snake_case alias of {@link recruitingYear} (py/R parity).
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.

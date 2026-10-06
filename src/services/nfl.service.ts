@@ -1,6 +1,7 @@
 import { get } from '../core/client.js';
 import { espnNflCdnBoxscore, espnNflCdnPlaybyplay, espnNflCdnSchedule } from '../generated/espn/nfl.js';
-import { cdnDate, warnFootballDate } from './_cdn.js';
+import { cdnDate, scoreboardDates, warnFootballDate } from './_cdn.js';
+import type { CdnGamePage, CdnSchedulePage, DateArgs } from './_cdn.js';
 /**
  * Operations for NFL.
  *
@@ -23,9 +24,9 @@ export default {
      * @example
      * const result = await sdv.nfl.getPlayByPlay(401220403);
      */
-    getPlayByPlay: async function (id) {
+    getPlayByPlay: async function (id: number | string) {
         // via espn_nfl_cdn_playbyplay (https; core request layer + error vocabulary)
-        const res = { data: (await espnNflCdnPlaybyplay({ game_id: id })) as any };
+        const res = { data: (await espnNflCdnPlaybyplay({ game_id: id })) as CdnGamePage };
         return {
             teams: res.data.gamepackageJSON.header.competitions[0].competitors,
             id: res.data.gameId,
@@ -48,9 +49,9 @@ export default {
      * @example
      * const result = await sdv.nfl.getBoxScore(401220403);
      */
-    getBoxScore: async function (id) {
+    getBoxScore: async function (id: number | string) {
         // via espn_nfl_cdn_boxscore (https; core request layer + error vocabulary)
-        const res = { data: (await espnNflCdnBoxscore({ game_id: id })) as any };
+        const res = { data: (await espnNflCdnBoxscore({ game_id: id })) as CdnGamePage };
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
         return game;
@@ -65,7 +66,7 @@ export default {
      * @example
      * const result = await sdv.nfl.getSummary(401220403);
      */
-    getSummary: async function (id) {
+    getSummary: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary';
         const params: Record<string, any> = {
             event: id
@@ -99,7 +100,7 @@ export default {
      * @example
      * const result = await sdv.nfl.getPicks(401220403);
      */
-    getPicks: async function (id) {
+    getPicks: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary';
         const params: Record<string, any> = {
             event: id
@@ -137,12 +138,12 @@ export default {
      * @example
      * const result = await sdv.nfl.getSchedule({ year: 2024, week: 5, seasontype: 2 })
      */
-    getSchedule: async function ({ year = null, month = null, day = null, week = null, seasontype = 2 }) {
+    getSchedule: async function ({ year = null, month = null, day = null, week = null, seasontype = 2 }: DateArgs & { week?: number | string | null; seasontype?: number }) {
         // The CDN ignores a date for football: select the week (espn_nfl_cdn_schedule).
         if (week == null && cdnDate(year, month, day)) warnFootballDate("nfl");
         const res = (await espnNflCdnSchedule(
             week != null ? { week, season: year, season_type: seasontype } : { date: cdnDate(year, month, day) }
-        )) as any;
+        )) as CdnSchedulePage;
         return res.content.schedule;
     },
 
@@ -161,10 +162,10 @@ export default {
      * week = 1, year = 2023, seasonType = 2
      * )
      */
-    getWeeklySchedule: async function ({ week = 1, year = null, seasonType = 2 }) {
+    getWeeklySchedule: async function ({ week = 1, year = null, seasonType = 2 }: { week?: number | string; year?: number | string | null; seasonType?: number }) {
         if(!year) year = new Date().getFullYear();
         // via espn_nfl_cdn_schedule (https; core request layer + error vocabulary)
-        const res = (await espnNflCdnSchedule({ week, season: year, season_type: seasonType })) as any;
+        const res = (await espnNflCdnSchedule({ week, season: year, season_type: seasonType })) as CdnSchedulePage;
         return res.content.schedule;
     },
     /**
@@ -182,14 +183,14 @@ export default {
      * year = 2019, month = 11, day = 17
      * )
      */
-    getScoreboard: async function ({ year, month, day, limit = 300 }) {
+    getScoreboard: async function ({ year, month, day, limit = 300 }: DateArgs & { limit?: number }) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard`;
 
         const params: Record<string, any> = {
             limit
         };
         if (year && month && day) {
-            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+            params.dates = scoreboardDates(year, month, day);
         }
         const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
         return res.data;
@@ -247,7 +248,7 @@ export default {
      * const teamId = 16;
      * const result = await sdv.nfl.getTeamInfo(teamId);
      */
-    getTeamInfo: async function ({ id }) {
+    getTeamInfo: async function ({ id }: { id: number | string }) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/${id}`;
         const res = { data: await get(baseUrl, { family: 'site_v2' }) };
         return res.data;
@@ -263,7 +264,7 @@ export default {
      * const teamId = 16;
      * const result = await sdv.nfl.getTeamPlayers(teamId);
      */
-    getTeamPlayers: async function ({ id }) {
+    getTeamPlayers: async function ({ id }: { id: number | string }) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/${id}`;
         const params: Record<string, any> = {
             enable: "roster"

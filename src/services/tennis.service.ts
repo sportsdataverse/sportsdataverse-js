@@ -1,4 +1,6 @@
 import { get } from '../core/client.js';
+import { scoreboardDates } from './_cdn.js';
+import type { DateArgs } from './_cdn.js';
 /**
  * Operations for Tennis.
  *
@@ -21,11 +23,11 @@ export default {
      * league = 'wta', year = 2023, month = 06, day = 20
      * })
      */
-    getScoreboard: async function ({ league = 'atp', year, month, day }) {
+    getScoreboard: async function ({ league = 'atp', year, month, day }: DateArgs & { league?: string }) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/tennis/${league}/scoreboard`;
         const params: Record<string, any> = {};
         if (year && month && day) {
-            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+            params.dates = scoreboardDates(year, month, day);
         }
         const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
         return res.data;

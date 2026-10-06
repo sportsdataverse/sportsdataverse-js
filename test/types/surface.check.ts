@@ -5,12 +5,16 @@
 import sdv from "../../dist/index.js";
 import type {
   AsaPlayersGoalsAddedRow,
+  EspnTeamRosterParams,
+  LoadNflPbpRow,
+  LoadNhlGroupsRow,
   MlbAwardsRow,
   NbaStatsBoxscoredefensivev2Tables,
   NbaStatsBoxscoredefensivev2TeamStatsRow,
   NbaStatsLeaguedashplayerstatsRow,
   NhlRecordsAllTimeRecordVsFranchiseRow,
   ParsedTables,
+  ReleaseColumns,
   Row,
 } from "../../dist/index.js";
 
@@ -22,7 +26,7 @@ declare const p: <T>(x: Promise<T>) => T;
 
 // A verified endpoint: `parsed: true` -> its generated rows; raw -> unknown.
 const records = p(sdv.nhl.nhlRecordsAllTimeRecordVsFranchise({ parsed: true }));
-const recordsRaw = p(sdv.nhl.nhlRecordsAllTimeRecordVsFranchise({ season: 2024 }));
+const recordsRaw = p(sdv.nhl.nhlRecordsAllTimeRecordVsFranchise());
 const recordsSnake = p(sdv.nhl.nhl_records_all_time_record_vs_franchise({ parsed: true }));
 type _records = [
   Expect<Equal<typeof records, NhlRecordsAllTimeRecordVsFranchiseRow[]>>,
@@ -53,9 +57,9 @@ const dash = p(sdv.nba.nbaStatsLeaguedashplayerstats({ parsed: true }));
 type _dash = Expect<Equal<typeof dash, NbaStatsLeaguedashplayerstatsRow[] | ParsedTables>>;
 
 // A fixed-default multi-table parser: the default table is typed by name.
-const ga = p(sdv.asa.asaPlayersGoalsAdded({ parsed: true }));
-const gaSummary = p(sdv.asa.asaPlayersGoalsAdded({ parsed: true, section: "summary" }));
-const gaActions = p(sdv.asa.asaPlayersGoalsAdded({ parsed: true, section: "actions" }));
+const ga = p(sdv.asa.asaPlayersGoalsAdded({ league_slug: "mls", parsed: true }));
+const gaSummary = p(sdv.asa.asaPlayersGoalsAdded({ league_slug: "mls", parsed: true, section: "summary" }));
+const gaActions = p(sdv.asa.asaPlayersGoalsAdded({ leagueSlug: "mls", parsed: true, section: "actions" }));
 type _ga = [
   Expect<Equal<typeof ga, AsaPlayersGoalsAddedRow[]>>,
   Expect<Equal<typeof gaSummary, AsaPlayersGoalsAddedRow[]>>,
@@ -80,8 +84,29 @@ type _alias = [
 ];
 
 // Loaders, legacy services and hand-written members are on their namespaces, typed.
+// Loaders return their generated row type (sdv-py's loader schema); `columns` narrows it
+// (`Pick`), `format: "columns"` gives column arrays, both together the picked arrays.
 const pbp = p(sdv.nfl.loadNflPbp({ seasons: 2024, format: "columns" }));
-type _loader = Expect<Equal<typeof pbp, Record<string, unknown[]>>>;
+const pbpRows = p(sdv.nfl.loadNflPbp({ seasons: [2023, 2024] }));
+const pbpPick = p(sdv.nfl.loadNflPbp({ seasons: 2024, columns: ["game_id", "epa"] }));
+const pbpPickCols = p(sdv.nfl.loadNflPbp({ seasons: 2024, columns: ["game_id", "epa"], format: "columns" }));
+const groups = p(sdv.nhl.loadNhlGroups());
+type _loader = [
+  Expect<Equal<typeof pbp, ReleaseColumns<LoadNflPbpRow>>>,
+  Expect<Equal<typeof pbpRows, LoadNflPbpRow[]>>,
+  Expect<Equal<typeof pbpPick, Pick<LoadNflPbpRow, "game_id" | "epa">[]>>,
+  Expect<Equal<typeof pbpPickCols, ReleaseColumns<Pick<LoadNflPbpRow, "game_id" | "epa">>>>,
+  Expect<Equal<NonNullable<typeof pbpPickCols.epa>, (number | null)[]>>,
+  // an id is a decimal string (a DOUBLE one: or the number past 2^53); a column the schema lacks: unknown
+  Expect<Equal<LoadNflPbpRow["game_id"], string | null | undefined>>,
+  Expect<Equal<LoadNflPbpRow["play_id"], string | number | null | undefined>>,
+  Expect<Equal<LoadNflPbpRow["no_such_column"], unknown>>,
+  Expect<Equal<typeof groups, LoadNhlGroupsRow[]>>,
+  // a deprecated loader has its replacement's type
+  Expect<Equal<typeof sdv.nba.loadNbaStatsPbpV3, typeof sdv.nba.loadNbaStatsPbp>>,
+];
+// @ts-expect-error a per-season loader needs `seasons`
+sdv.nfl.loadNflPbp({ columns: ["game_id"] });
 sdv.nba.getPlayByPlay;
 sdv.hockeytech.pwhlGameShifts;
 sdv.hockeytech.pwhl_game_corsi;
@@ -96,3 +121,37 @@ sdv.wbb.espnWbbPbp;
 sdv.nba.no_such_wrapper;
 // @ts-expect-error a namespace that does not exist
 sdv.no_such_namespace;
+
+// Params (T18b-2): every wrapper takes its endpoint's own params type. A required path
+// param must be passed (by its snake_case name or camelCase alias), an unknown param is
+// an error, `int` / `str` params take a number or a string (ids come back as strings),
+// `bool` ones a boolean, and an optional one `null` for unset.
+sdv.nba.espnNbaTeamRoster({ team_id: 13 });
+sdv.nba.espnNbaTeamRoster({ teamId: "13", limit: null });
+// @ts-expect-error the required path param is missing
+sdv.nba.espnNbaTeamRoster({ limit: 5 });
+// @ts-expect-error a wrapper with a required param needs its params
+sdv.nba.espnNbaTeamRoster();
+sdv.nba.espnNbaScoreboard();
+sdv.nba.espnNbaScoreboard({ dates: 20240115, seasonType: 2 });
+// @ts-expect-error a param the endpoint does not have
+sdv.nba.espnNbaScoreboard({ datez: "20240115" });
+// @ts-expect-error a `bool` param is a boolean
+sdv.mlb.mlbAnalyticsGames({ is_non_statcast: "yes" });
+sdv.mlb.mlbLeagues({ sport_id: 1, league_ids: [103, "104"] });
+// Family controls ride on the params: PFF's api_key / strict, NFL Pro's token; headers everywhere.
+sdv.nfl.pffApiPlayerDefenseSummary({ league: "nfl", player_id: 1, api_key: "ak_live_x", strict: true });
+// @ts-expect-error PFF player summaries need the player
+sdv.nfl.pffApiPlayerDefenseSummary({ league: "nfl", api_key: "ak_live_x" });
+sdv.nfl.nflProDefenseNearestSeason({ token: "t", max_pages: 2, headers: { Authorization: "Bearer t" } });
+// A soccer / cricket league takes an ESPN `league` slug override; a fixed league does not.
+sdv.soccer.espnSoccerScoreboard({ league: "esp.1" });
+// @ts-expect-error epl's league is fixed
+sdv.epl.espnEplScoreboard({ league: "esp.1" });
+// `parsed` with params still picks the parsed overload; the params type is exported by name.
+const roster = p(sdv.nba.espnNbaTeamRoster({ team_id: 13, parsed: true }));
+type _params = [
+  Expect<Equal<typeof roster, Row[]>>,
+  // (the last overload, the raw call)
+  Expect<Equal<Parameters<typeof sdv.nba.espnNbaTeamRoster>[0], EspnTeamRosterParams & { parsed?: boolean }>>,
+];

@@ -1,6 +1,7 @@
 import { get } from '../core/client.js';
 import { espnWbbCdnBoxscore, espnWbbCdnPlaybyplay, espnWbbCdnSchedule } from '../generated/espn/wbb.js';
-import { cdnDate } from './_cdn.js';
+import { cdnDate, scoreboardDates } from './_cdn.js';
+import type { CdnGamePage, CdnSchedulePage, DateArgs } from './_cdn.js';
 /**
  * Operations for WBB.
  *
@@ -23,9 +24,9 @@ export default {
      * @example
      * const result = await sdv.wbb.getPlayByPlay(401260565);
      */
-    getPlayByPlay: async function (id) {
+    getPlayByPlay: async function (id: number | string) {
         // via espn_wbb_cdn_playbyplay (https; core request layer + error vocabulary)
-        const res = { data: (await espnWbbCdnPlaybyplay({ game_id: id })) as any };
+        const res = { data: (await espnWbbCdnPlaybyplay({ game_id: id })) as CdnGamePage };
 
         return {
             id: res.data.gamepackageJSON.header.id,
@@ -46,9 +47,9 @@ export default {
      * @example
      * const result = await sdv.wbb.getBoxScore(401260565);
      */
-    getBoxScore: async function (id) {
+    getBoxScore: async function (id: number | string) {
         // via espn_wbb_cdn_boxscore (https; core request layer + error vocabulary)
-        const res = { data: (await espnWbbCdnBoxscore({ game_id: id })) as any };
+        const res = { data: (await espnWbbCdnBoxscore({ game_id: id })) as CdnGamePage };
 
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
@@ -65,7 +66,7 @@ export default {
      * @example
      * const result = await sdv.wbb.getSummary(401260565);
      */
-    getSummary: async function (id) {
+    getSummary: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/summary';
         const params: Record<string, any> = {
             event: id
@@ -108,9 +109,9 @@ export default {
         groups = 50,
         seasontype = 2,
         limit = 300
-    }) {
+    }: DateArgs & { groups?: number; seasontype?: number; limit?: number }) {
         // espn_wbb_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
-        const res = (await espnWbbCdnSchedule({ date: cdnDate(year, month, day) })) as any;
+        const res = (await espnWbbCdnSchedule({ date: cdnDate(year, month, day) })) as CdnSchedulePage;
         return res.content.schedule;
     },
     /**
@@ -137,7 +138,7 @@ export default {
         group = 50,
         seasontype = 2,
         limit = 300
-    }) {
+    }: DateArgs & { group?: number; seasontype?: number; limit?: number }) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/scoreboard`;
         const params: Record<string, any> = {
             groups: group,
@@ -145,7 +146,7 @@ export default {
             limit
         };
         if (year && month && day) {
-            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+            params.dates = scoreboardDates(year, month, day);
         }
         const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
@@ -233,7 +234,7 @@ export default {
      * const teamId = 52;
      * const result = await sdv.wbb.getTeamInfo(teamId);
      */
-    getTeamInfo: async function (id) {
+    getTeamInfo: async function (id: number | string) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/${id}`;
 
         const res = { data: await get(baseUrl, { family: 'site_v2' }) };
@@ -250,7 +251,7 @@ export default {
      * const teamId = 52;
      * const result = await sdv.wbb.getTeamPlayers(teamId);
      */
-    getTeamPlayers: async function (id) {
+    getTeamPlayers: async function (id: number | string) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/${id}`;
         const params: Record<string, any> = {
             enable: "roster"

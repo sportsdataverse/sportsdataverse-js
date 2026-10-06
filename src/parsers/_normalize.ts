@@ -13,9 +13,10 @@
 // surprises; downstream parsers may compose tidy verbs on the rectangular rows.
 
 import { idColumnsToStrings } from "../core/int64.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array, not a Date)? */
-export function isPlainObject(v: any): boolean {
+export function isPlainObject(v: unknown): v is Record<string, unknown> {
   return (
     v !== null &&
     typeof v === "object" &&
@@ -83,7 +84,7 @@ function flattenRow(
  * cells are stringified; an id column of integers becomes decimal strings.
  * Non-array / empty input returns `[]`.
  */
-export function normalize(rows: any[]): Record<string, any>[] {
+export function normalize(rows: any[]): ParserRow[] {
   if (!Array.isArray(rows) || rows.length === 0) return [];
   const flat = rows.map((row) => {
     const out: Record<string, any> = {};

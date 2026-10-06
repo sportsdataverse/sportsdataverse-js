@@ -10,6 +10,79 @@ import {
   seasonLoader,
   type ReleaseLoaderDef,
 } from "../../core/releases.js";
+import type {
+  LoadCfbPbpRow,
+  LoadCfbRatingsRow,
+  LoadCfbRecruitingProjRow,
+  LoadCfbRecruitsRow,
+  LoadCfbReturningProductionRow,
+  LoadCfbRostersRow,
+  LoadCfbRostersCfbdRow,
+  LoadCfbScheduleRow,
+  LoadCfbTeamInfoRow,
+  LoadCfbTeamsRow,
+  LoadCfbTeamPortalRow,
+  LoadCfbTeamTalentRow,
+  LoadCfbTeamsCrosswalkRow,
+  LoadCfbScheduleCrosswalkRow,
+  LoadCfbTeamBoxRow,
+  LoadCfbPlayerBoxRow,
+  LoadCfbDrivesRow,
+  LoadCfbPlayParticipantsRow,
+  LoadCfbGameRostersRow,
+  LoadCfbLinescoresRow,
+  LoadCfbBettingRow,
+  LoadCfbFpiWeeklyRow,
+  LoadCfbPowerIndexRow,
+  LoadCfbAdvTeamRow,
+  LoadCfbAdvPassingRow,
+  LoadCfbAdvRushingRow,
+  LoadCfbAdvReceivingRow,
+  LoadCfbAdvDefensiveRow,
+  LoadCfbAdvDefensivePlayersRow,
+  LoadCfbAdvDrivesRow,
+  LoadCfbAdvSituationalRow,
+  LoadCfbAdvSpecialistsRow,
+  LoadCfbAdvTurnoverRow,
+  LoadCfbModelPbpRow,
+  LoadCfbPassingRow,
+  LoadCfbPercentilesRow,
+  LoadCfbReceivingRow,
+  LoadCfbRushingRow,
+  LoadCfbTeamSummariesRow,
+  LoadCfbAdvTeamGamelogRow,
+  LoadCfbRatingsWeeklyRow,
+  LoadCfbTeamSummariesWeeklyRow,
+  LoadCfbUsagePlayersRow,
+  LoadCfbUsagePositionGroupsRow,
+  LoadCfbUsageTacklesRow,
+  LoadCfbUsagePositionGroupTacklesRow,
+  LoadCfbUsageTeamsRow,
+  LoadCfbUsageDriveScriptingRow,
+  LoadCfbUsageStKickersRow,
+  LoadCfbUsageStPuntersRow,
+  LoadCfbUsageStReturnersRow,
+  LoadCfbUsageStBlocksRow,
+  LoadCfbUsageStTeamRow,
+  LoadCfbTeamTendenciesRow,
+  LoadCfbCoachTendenciesRow,
+  LoadCfbCoachCareersRow,
+  LoadCfbPbpRRow,
+  LoadNcaaMfbPbpRow,
+  LoadNcaaMfbPbpCfbfastrRow,
+  LoadNcaaMfbDrivesRow,
+  LoadNcaaMfbScheduleRow,
+  LoadNcaaMfbRostersRow,
+  LoadNcaaMfbTeamsRow,
+  LoadNcaaMfbTeamStatsRow,
+  LoadNcaaMfbPlayerStatsRow,
+  LoadNcaaMfbOfficialsRow,
+  LoadNcaaMfbLinescoreRow,
+  LoadCfbGroupsRow,
+  LoadCfbGroupSeasonsRow,
+  LoadCfbGroupAliasesRow,
+  LoadCfbTeamGroupSeasonsRow,
+} from "../loader_rows/cfb.js";
 
 const LOAD_CFB_PBP: ReleaseLoaderDef = {"fn":"load_cfb_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_cfb_pbp/play_by_play_{season}.parquet","minSeason":2004};
 
@@ -29,7 +102,7 @@ const LOAD_CFB_PBP: ReleaseLoaderDef = {"fn":"load_cfb_pbp","url":"https://githu
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'period', 'text', 'EPA', 'home_wp_before'] });
  */
-export const loadCfbPbp = seasonLoader(LOAD_CFB_PBP);
+export const loadCfbPbp = seasonLoader<LoadCfbPbpRow>(LOAD_CFB_PBP);
 /** snake_case alias of {@link loadCfbPbp} (py/R parity). */
 export const load_cfb_pbp = loadCfbPbp;
 
@@ -51,7 +124,7 @@ const LOAD_CFB_RATINGS: ReleaseLoaderDef = {"fn":"load_cfb_ratings","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbRatings({ seasons: 2024 });
  */
-export const loadCfbRatings = seasonLoader(LOAD_CFB_RATINGS);
+export const loadCfbRatings = seasonLoader<LoadCfbRatingsRow>(LOAD_CFB_RATINGS);
 /** snake_case alias of {@link loadCfbRatings} (py/R parity). */
 export const load_cfb_ratings = loadCfbRatings;
 
@@ -73,7 +146,7 @@ const LOAD_CFB_RECRUITING_PROJ: ReleaseLoaderDef = {"fn":"load_cfb_recruiting_pr
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbRecruitingProj({ seasons: 2024 });
  */
-export const loadCfbRecruitingProj = seasonLoader(LOAD_CFB_RECRUITING_PROJ);
+export const loadCfbRecruitingProj = seasonLoader<LoadCfbRecruitingProjRow>(LOAD_CFB_RECRUITING_PROJ);
 /** snake_case alias of {@link loadCfbRecruitingProj} (py/R parity). */
 export const load_cfb_recruiting_proj = loadCfbRecruitingProj;
 
@@ -95,7 +168,7 @@ const LOAD_CFB_RECRUITS: ReleaseLoaderDef = {"fn":"load_cfb_recruits","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbRecruits({ seasons: 2024 });
  */
-export const loadCfbRecruits = seasonLoader(LOAD_CFB_RECRUITS);
+export const loadCfbRecruits = seasonLoader<LoadCfbRecruitsRow>(LOAD_CFB_RECRUITS);
 /** snake_case alias of {@link loadCfbRecruits} (py/R parity). */
 export const load_cfb_recruits = loadCfbRecruits;
 
@@ -117,7 +190,7 @@ const LOAD_CFB_RETURNING_PRODUCTION: ReleaseLoaderDef = {"fn":"load_cfb_returnin
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbReturningProduction({ seasons: 2024 });
  */
-export const loadCfbReturningProduction = seasonLoader(LOAD_CFB_RETURNING_PRODUCTION);
+export const loadCfbReturningProduction = seasonLoader<LoadCfbReturningProductionRow>(LOAD_CFB_RETURNING_PRODUCTION);
 /** snake_case alias of {@link loadCfbReturningProduction} (py/R parity). */
 export const load_cfb_returning_production = loadCfbReturningProduction;
 
@@ -139,7 +212,7 @@ const LOAD_CFB_ROSTERS: ReleaseLoaderDef = {"fn":"load_cfb_rosters","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbRosters({ seasons: 2024 });
  */
-export const loadCfbRosters = seasonLoader(LOAD_CFB_ROSTERS);
+export const loadCfbRosters = seasonLoader<LoadCfbRostersRow>(LOAD_CFB_ROSTERS);
 /** snake_case alias of {@link loadCfbRosters} (py/R parity). */
 export const load_cfb_rosters = loadCfbRosters;
 
@@ -161,7 +234,7 @@ const LOAD_CFB_ROSTERS_CFBD: ReleaseLoaderDef = {"fn":"load_cfb_rosters_cfbd","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbRostersCfbd({ seasons: 2024 });
  */
-export const loadCfbRostersCfbd = seasonLoader(LOAD_CFB_ROSTERS_CFBD);
+export const loadCfbRostersCfbd = seasonLoader<LoadCfbRostersCfbdRow>(LOAD_CFB_ROSTERS_CFBD);
 /** snake_case alias of {@link loadCfbRostersCfbd} (py/R parity). */
 export const load_cfb_rosters_cfbd = loadCfbRostersCfbd;
 
@@ -183,7 +256,7 @@ const LOAD_CFB_SCHEDULE: ReleaseLoaderDef = {"fn":"load_cfb_schedule","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbSchedule({ seasons: 2024 });
  */
-export const loadCfbSchedule = seasonLoader(LOAD_CFB_SCHEDULE);
+export const loadCfbSchedule = seasonLoader<LoadCfbScheduleRow>(LOAD_CFB_SCHEDULE);
 /** snake_case alias of {@link loadCfbSchedule} (py/R parity). */
 export const load_cfb_schedule = loadCfbSchedule;
 
@@ -205,7 +278,7 @@ const LOAD_CFB_TEAM_INFO: ReleaseLoaderDef = {"fn":"load_cfb_team_info","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbTeamInfo({ seasons: 2024 });
  */
-export const loadCfbTeamInfo = seasonLoader(LOAD_CFB_TEAM_INFO);
+export const loadCfbTeamInfo = seasonLoader<LoadCfbTeamInfoRow>(LOAD_CFB_TEAM_INFO);
 /** snake_case alias of {@link loadCfbTeamInfo} (py/R parity). */
 export const load_cfb_team_info = loadCfbTeamInfo;
 
@@ -227,7 +300,7 @@ const LOAD_CFB_TEAMS: ReleaseLoaderDef = {"fn":"load_cfb_teams","url":"https://g
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbTeams({ seasons: 2024 });
  */
-export const loadCfbTeams = seasonLoader(LOAD_CFB_TEAMS);
+export const loadCfbTeams = seasonLoader<LoadCfbTeamsRow>(LOAD_CFB_TEAMS);
 /** snake_case alias of {@link loadCfbTeams} (py/R parity). */
 export const load_cfb_teams = loadCfbTeams;
 
@@ -251,7 +324,7 @@ const LOAD_CFB_TEAM_PORTAL: ReleaseLoaderDef = {"fn":"load_cfb_team_portal","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbTeamPortal({ seasons: 2024 });
  */
-export const loadCfbTeamPortal = seasonLoader(LOAD_CFB_TEAM_PORTAL);
+export const loadCfbTeamPortal = seasonLoader<LoadCfbTeamPortalRow>(LOAD_CFB_TEAM_PORTAL);
 /** snake_case alias of {@link loadCfbTeamPortal} (py/R parity). */
 export const load_cfb_team_portal = loadCfbTeamPortal;
 
@@ -273,7 +346,7 @@ const LOAD_CFB_TEAM_TALENT: ReleaseLoaderDef = {"fn":"load_cfb_team_talent","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbTeamTalent({ seasons: 2024 });
  */
-export const loadCfbTeamTalent = seasonLoader(LOAD_CFB_TEAM_TALENT);
+export const loadCfbTeamTalent = seasonLoader<LoadCfbTeamTalentRow>(LOAD_CFB_TEAM_TALENT);
 /** snake_case alias of {@link loadCfbTeamTalent} (py/R parity). */
 export const load_cfb_team_talent = loadCfbTeamTalent;
 
@@ -295,7 +368,7 @@ const LOAD_CFB_TEAMS_CROSSWALK: ReleaseLoaderDef = {"fn":"load_cfb_teams_crosswa
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbTeamsCrosswalk({ seasons: 2024 });
  */
-export const loadCfbTeamsCrosswalk = seasonLoader(LOAD_CFB_TEAMS_CROSSWALK);
+export const loadCfbTeamsCrosswalk = seasonLoader<LoadCfbTeamsCrosswalkRow>(LOAD_CFB_TEAMS_CROSSWALK);
 /** snake_case alias of {@link loadCfbTeamsCrosswalk} (py/R parity). */
 export const load_cfb_teams_crosswalk = loadCfbTeamsCrosswalk;
 
@@ -317,7 +390,7 @@ const LOAD_CFB_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_cfb_schedule_c
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbScheduleCrosswalk({ seasons: 2024 });
  */
-export const loadCfbScheduleCrosswalk = seasonLoader(LOAD_CFB_SCHEDULE_CROSSWALK);
+export const loadCfbScheduleCrosswalk = seasonLoader<LoadCfbScheduleCrosswalkRow>(LOAD_CFB_SCHEDULE_CROSSWALK);
 /** snake_case alias of {@link loadCfbScheduleCrosswalk} (py/R parity). */
 export const load_cfb_schedule_crosswalk = loadCfbScheduleCrosswalk;
 
@@ -339,7 +412,7 @@ const LOAD_CFB_TEAM_BOX: ReleaseLoaderDef = {"fn":"load_cfb_team_box","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbTeamBox({ seasons: 2024 });
  */
-export const loadCfbTeamBox = seasonLoader(LOAD_CFB_TEAM_BOX);
+export const loadCfbTeamBox = seasonLoader<LoadCfbTeamBoxRow>(LOAD_CFB_TEAM_BOX);
 /** snake_case alias of {@link loadCfbTeamBox} (py/R parity). */
 export const load_cfb_team_box = loadCfbTeamBox;
 
@@ -361,7 +434,7 @@ const LOAD_CFB_PLAYER_BOX: ReleaseLoaderDef = {"fn":"load_cfb_player_box","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbPlayerBox({ seasons: 2024 });
  */
-export const loadCfbPlayerBox = seasonLoader(LOAD_CFB_PLAYER_BOX);
+export const loadCfbPlayerBox = seasonLoader<LoadCfbPlayerBoxRow>(LOAD_CFB_PLAYER_BOX);
 /** snake_case alias of {@link loadCfbPlayerBox} (py/R parity). */
 export const load_cfb_player_box = loadCfbPlayerBox;
 
@@ -383,7 +456,7 @@ const LOAD_CFB_DRIVES: ReleaseLoaderDef = {"fn":"load_cfb_drives","url":"https:/
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbDrives({ seasons: 2024 });
  */
-export const loadCfbDrives = seasonLoader(LOAD_CFB_DRIVES);
+export const loadCfbDrives = seasonLoader<LoadCfbDrivesRow>(LOAD_CFB_DRIVES);
 /** snake_case alias of {@link loadCfbDrives} (py/R parity). */
 export const load_cfb_drives = loadCfbDrives;
 
@@ -405,7 +478,7 @@ const LOAD_CFB_PLAY_PARTICIPANTS: ReleaseLoaderDef = {"fn":"load_cfb_play_partic
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbPlayParticipants({ seasons: 2024 });
  */
-export const loadCfbPlayParticipants = seasonLoader(LOAD_CFB_PLAY_PARTICIPANTS);
+export const loadCfbPlayParticipants = seasonLoader<LoadCfbPlayParticipantsRow>(LOAD_CFB_PLAY_PARTICIPANTS);
 /** snake_case alias of {@link loadCfbPlayParticipants} (py/R parity). */
 export const load_cfb_play_participants = loadCfbPlayParticipants;
 
@@ -427,7 +500,7 @@ const LOAD_CFB_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_cfb_game_rosters","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbGameRosters({ seasons: 2024 });
  */
-export const loadCfbGameRosters = seasonLoader(LOAD_CFB_GAME_ROSTERS);
+export const loadCfbGameRosters = seasonLoader<LoadCfbGameRostersRow>(LOAD_CFB_GAME_ROSTERS);
 /** snake_case alias of {@link loadCfbGameRosters} (py/R parity). */
 export const load_cfb_game_rosters = loadCfbGameRosters;
 
@@ -449,7 +522,7 @@ const LOAD_CFB_LINESCORES: ReleaseLoaderDef = {"fn":"load_cfb_linescores","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbLinescores({ seasons: 2024 });
  */
-export const loadCfbLinescores = seasonLoader(LOAD_CFB_LINESCORES);
+export const loadCfbLinescores = seasonLoader<LoadCfbLinescoresRow>(LOAD_CFB_LINESCORES);
 /** snake_case alias of {@link loadCfbLinescores} (py/R parity). */
 export const load_cfb_linescores = loadCfbLinescores;
 
@@ -471,7 +544,7 @@ const LOAD_CFB_BETTING: ReleaseLoaderDef = {"fn":"load_cfb_betting","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbBetting({ seasons: 2024 });
  */
-export const loadCfbBetting = seasonLoader(LOAD_CFB_BETTING);
+export const loadCfbBetting = seasonLoader<LoadCfbBettingRow>(LOAD_CFB_BETTING);
 /** snake_case alias of {@link loadCfbBetting} (py/R parity). */
 export const load_cfb_betting = loadCfbBetting;
 
@@ -493,7 +566,7 @@ const LOAD_CFB_FPI_WEEKLY: ReleaseLoaderDef = {"fn":"load_cfb_fpi_weekly","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbFpiWeekly({ seasons: 2024 });
  */
-export const loadCfbFpiWeekly = seasonLoader(LOAD_CFB_FPI_WEEKLY);
+export const loadCfbFpiWeekly = seasonLoader<LoadCfbFpiWeeklyRow>(LOAD_CFB_FPI_WEEKLY);
 /** snake_case alias of {@link loadCfbFpiWeekly} (py/R parity). */
 export const load_cfb_fpi_weekly = loadCfbFpiWeekly;
 
@@ -515,7 +588,7 @@ const LOAD_CFB_POWER_INDEX: ReleaseLoaderDef = {"fn":"load_cfb_power_index","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbPowerIndex({ seasons: 2024 });
  */
-export const loadCfbPowerIndex = seasonLoader(LOAD_CFB_POWER_INDEX);
+export const loadCfbPowerIndex = seasonLoader<LoadCfbPowerIndexRow>(LOAD_CFB_POWER_INDEX);
 /** snake_case alias of {@link loadCfbPowerIndex} (py/R parity). */
 export const load_cfb_power_index = loadCfbPowerIndex;
 
@@ -537,7 +610,7 @@ const LOAD_CFB_ADV_TEAM: ReleaseLoaderDef = {"fn":"load_cfb_adv_team","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbAdvTeam({ seasons: 2024 });
  */
-export const loadCfbAdvTeam = seasonLoader(LOAD_CFB_ADV_TEAM);
+export const loadCfbAdvTeam = seasonLoader<LoadCfbAdvTeamRow>(LOAD_CFB_ADV_TEAM);
 /** snake_case alias of {@link loadCfbAdvTeam} (py/R parity). */
 export const load_cfb_adv_team = loadCfbAdvTeam;
 
@@ -559,7 +632,7 @@ const LOAD_CFB_ADV_PASSING: ReleaseLoaderDef = {"fn":"load_cfb_adv_passing","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbAdvPassing({ seasons: 2024 });
  */
-export const loadCfbAdvPassing = seasonLoader(LOAD_CFB_ADV_PASSING);
+export const loadCfbAdvPassing = seasonLoader<LoadCfbAdvPassingRow>(LOAD_CFB_ADV_PASSING);
 /** snake_case alias of {@link loadCfbAdvPassing} (py/R parity). */
 export const load_cfb_adv_passing = loadCfbAdvPassing;
 
@@ -581,7 +654,7 @@ const LOAD_CFB_ADV_RUSHING: ReleaseLoaderDef = {"fn":"load_cfb_adv_rushing","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbAdvRushing({ seasons: 2024 });
  */
-export const loadCfbAdvRushing = seasonLoader(LOAD_CFB_ADV_RUSHING);
+export const loadCfbAdvRushing = seasonLoader<LoadCfbAdvRushingRow>(LOAD_CFB_ADV_RUSHING);
 /** snake_case alias of {@link loadCfbAdvRushing} (py/R parity). */
 export const load_cfb_adv_rushing = loadCfbAdvRushing;
 
@@ -603,7 +676,7 @@ const LOAD_CFB_ADV_RECEIVING: ReleaseLoaderDef = {"fn":"load_cfb_adv_receiving",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbAdvReceiving({ seasons: 2024 });
  */
-export const loadCfbAdvReceiving = seasonLoader(LOAD_CFB_ADV_RECEIVING);
+export const loadCfbAdvReceiving = seasonLoader<LoadCfbAdvReceivingRow>(LOAD_CFB_ADV_RECEIVING);
 /** snake_case alias of {@link loadCfbAdvReceiving} (py/R parity). */
 export const load_cfb_adv_receiving = loadCfbAdvReceiving;
 
@@ -625,7 +698,7 @@ const LOAD_CFB_ADV_DEFENSIVE: ReleaseLoaderDef = {"fn":"load_cfb_adv_defensive",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbAdvDefensive({ seasons: 2024 });
  */
-export const loadCfbAdvDefensive = seasonLoader(LOAD_CFB_ADV_DEFENSIVE);
+export const loadCfbAdvDefensive = seasonLoader<LoadCfbAdvDefensiveRow>(LOAD_CFB_ADV_DEFENSIVE);
 /** snake_case alias of {@link loadCfbAdvDefensive} (py/R parity). */
 export const load_cfb_adv_defensive = loadCfbAdvDefensive;
 
@@ -647,7 +720,7 @@ const LOAD_CFB_ADV_DEFENSIVE_PLAYERS: ReleaseLoaderDef = {"fn":"load_cfb_adv_def
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbAdvDefensivePlayers({ seasons: 2024 });
  */
-export const loadCfbAdvDefensivePlayers = seasonLoader(LOAD_CFB_ADV_DEFENSIVE_PLAYERS);
+export const loadCfbAdvDefensivePlayers = seasonLoader<LoadCfbAdvDefensivePlayersRow>(LOAD_CFB_ADV_DEFENSIVE_PLAYERS);
 /** snake_case alias of {@link loadCfbAdvDefensivePlayers} (py/R parity). */
 export const load_cfb_adv_defensive_players = loadCfbAdvDefensivePlayers;
 
@@ -669,7 +742,7 @@ const LOAD_CFB_ADV_DRIVES: ReleaseLoaderDef = {"fn":"load_cfb_adv_drives","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbAdvDrives({ seasons: 2024 });
  */
-export const loadCfbAdvDrives = seasonLoader(LOAD_CFB_ADV_DRIVES);
+export const loadCfbAdvDrives = seasonLoader<LoadCfbAdvDrivesRow>(LOAD_CFB_ADV_DRIVES);
 /** snake_case alias of {@link loadCfbAdvDrives} (py/R parity). */
 export const load_cfb_adv_drives = loadCfbAdvDrives;
 
@@ -691,7 +764,7 @@ const LOAD_CFB_ADV_SITUATIONAL: ReleaseLoaderDef = {"fn":"load_cfb_adv_situation
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbAdvSituational({ seasons: 2024 });
  */
-export const loadCfbAdvSituational = seasonLoader(LOAD_CFB_ADV_SITUATIONAL);
+export const loadCfbAdvSituational = seasonLoader<LoadCfbAdvSituationalRow>(LOAD_CFB_ADV_SITUATIONAL);
 /** snake_case alias of {@link loadCfbAdvSituational} (py/R parity). */
 export const load_cfb_adv_situational = loadCfbAdvSituational;
 
@@ -713,7 +786,7 @@ const LOAD_CFB_ADV_SPECIALISTS: ReleaseLoaderDef = {"fn":"load_cfb_adv_specialis
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbAdvSpecialists({ seasons: 2024 });
  */
-export const loadCfbAdvSpecialists = seasonLoader(LOAD_CFB_ADV_SPECIALISTS);
+export const loadCfbAdvSpecialists = seasonLoader<LoadCfbAdvSpecialistsRow>(LOAD_CFB_ADV_SPECIALISTS);
 /** snake_case alias of {@link loadCfbAdvSpecialists} (py/R parity). */
 export const load_cfb_adv_specialists = loadCfbAdvSpecialists;
 
@@ -735,7 +808,7 @@ const LOAD_CFB_ADV_TURNOVER: ReleaseLoaderDef = {"fn":"load_cfb_adv_turnover","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbAdvTurnover({ seasons: 2024 });
  */
-export const loadCfbAdvTurnover = seasonLoader(LOAD_CFB_ADV_TURNOVER);
+export const loadCfbAdvTurnover = seasonLoader<LoadCfbAdvTurnoverRow>(LOAD_CFB_ADV_TURNOVER);
 /** snake_case alias of {@link loadCfbAdvTurnover} (py/R parity). */
 export const load_cfb_adv_turnover = loadCfbAdvTurnover;
 
@@ -757,7 +830,7 @@ const LOAD_CFB_MODEL_PBP: ReleaseLoaderDef = {"fn":"load_cfb_model_pbp","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbModelPbp({ seasons: 2024, columns: ['game_id', 'period', 'text', 'epa', 'wpa'] });
  */
-export const loadCfbModelPbp = seasonLoader(LOAD_CFB_MODEL_PBP);
+export const loadCfbModelPbp = seasonLoader<LoadCfbModelPbpRow>(LOAD_CFB_MODEL_PBP);
 /** snake_case alias of {@link loadCfbModelPbp} (py/R parity). */
 export const load_cfb_model_pbp = loadCfbModelPbp;
 
@@ -779,7 +852,7 @@ const LOAD_CFB_PASSING: ReleaseLoaderDef = {"fn":"load_cfb_passing","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbPassing({ seasons: 2024 });
  */
-export const loadCfbPassing = seasonLoader(LOAD_CFB_PASSING);
+export const loadCfbPassing = seasonLoader<LoadCfbPassingRow>(LOAD_CFB_PASSING);
 /** snake_case alias of {@link loadCfbPassing} (py/R parity). */
 export const load_cfb_passing = loadCfbPassing;
 
@@ -801,7 +874,7 @@ const LOAD_CFB_PERCENTILES: ReleaseLoaderDef = {"fn":"load_cfb_percentiles","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbPercentiles({ seasons: 2024 });
  */
-export const loadCfbPercentiles = seasonLoader(LOAD_CFB_PERCENTILES);
+export const loadCfbPercentiles = seasonLoader<LoadCfbPercentilesRow>(LOAD_CFB_PERCENTILES);
 /** snake_case alias of {@link loadCfbPercentiles} (py/R parity). */
 export const load_cfb_percentiles = loadCfbPercentiles;
 
@@ -823,7 +896,7 @@ const LOAD_CFB_RECEIVING: ReleaseLoaderDef = {"fn":"load_cfb_receiving","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbReceiving({ seasons: 2024 });
  */
-export const loadCfbReceiving = seasonLoader(LOAD_CFB_RECEIVING);
+export const loadCfbReceiving = seasonLoader<LoadCfbReceivingRow>(LOAD_CFB_RECEIVING);
 /** snake_case alias of {@link loadCfbReceiving} (py/R parity). */
 export const load_cfb_receiving = loadCfbReceiving;
 
@@ -845,7 +918,7 @@ const LOAD_CFB_RUSHING: ReleaseLoaderDef = {"fn":"load_cfb_rushing","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbRushing({ seasons: 2024 });
  */
-export const loadCfbRushing = seasonLoader(LOAD_CFB_RUSHING);
+export const loadCfbRushing = seasonLoader<LoadCfbRushingRow>(LOAD_CFB_RUSHING);
 /** snake_case alias of {@link loadCfbRushing} (py/R parity). */
 export const load_cfb_rushing = loadCfbRushing;
 
@@ -867,7 +940,7 @@ const LOAD_CFB_TEAM_SUMMARIES: ReleaseLoaderDef = {"fn":"load_cfb_team_summaries
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbTeamSummaries({ seasons: 2024 });
  */
-export const loadCfbTeamSummaries = seasonLoader(LOAD_CFB_TEAM_SUMMARIES);
+export const loadCfbTeamSummaries = seasonLoader<LoadCfbTeamSummariesRow>(LOAD_CFB_TEAM_SUMMARIES);
 /** snake_case alias of {@link loadCfbTeamSummaries} (py/R parity). */
 export const load_cfb_team_summaries = loadCfbTeamSummaries;
 
@@ -889,7 +962,7 @@ const LOAD_CFB_ADV_TEAM_GAMELOG: ReleaseLoaderDef = {"fn":"load_cfb_adv_team_gam
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbAdvTeamGamelog({ seasons: 2024 });
  */
-export const loadCfbAdvTeamGamelog = seasonLoader(LOAD_CFB_ADV_TEAM_GAMELOG);
+export const loadCfbAdvTeamGamelog = seasonLoader<LoadCfbAdvTeamGamelogRow>(LOAD_CFB_ADV_TEAM_GAMELOG);
 /** snake_case alias of {@link loadCfbAdvTeamGamelog} (py/R parity). */
 export const load_cfb_adv_team_gamelog = loadCfbAdvTeamGamelog;
 
@@ -911,7 +984,7 @@ const LOAD_CFB_RATINGS_WEEKLY: ReleaseLoaderDef = {"fn":"load_cfb_ratings_weekly
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbRatingsWeekly({ seasons: 2024 });
  */
-export const loadCfbRatingsWeekly = seasonLoader(LOAD_CFB_RATINGS_WEEKLY);
+export const loadCfbRatingsWeekly = seasonLoader<LoadCfbRatingsWeeklyRow>(LOAD_CFB_RATINGS_WEEKLY);
 /** snake_case alias of {@link loadCfbRatingsWeekly} (py/R parity). */
 export const load_cfb_ratings_weekly = loadCfbRatingsWeekly;
 
@@ -933,7 +1006,7 @@ const LOAD_CFB_TEAM_SUMMARIES_WEEKLY: ReleaseLoaderDef = {"fn":"load_cfb_team_su
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbTeamSummariesWeekly({ seasons: 2024 });
  */
-export const loadCfbTeamSummariesWeekly = seasonLoader(LOAD_CFB_TEAM_SUMMARIES_WEEKLY);
+export const loadCfbTeamSummariesWeekly = seasonLoader<LoadCfbTeamSummariesWeeklyRow>(LOAD_CFB_TEAM_SUMMARIES_WEEKLY);
 /** snake_case alias of {@link loadCfbTeamSummariesWeekly} (py/R parity). */
 export const load_cfb_team_summaries_weekly = loadCfbTeamSummariesWeekly;
 
@@ -957,7 +1030,7 @@ const LOAD_CFB_USAGE_PLAYERS: ReleaseLoaderDef = {"fn":"load_cfb_usage_players",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbUsagePlayers({ seasons: 2024 });
  */
-export const loadCfbUsagePlayers = seasonLoader(LOAD_CFB_USAGE_PLAYERS);
+export const loadCfbUsagePlayers = seasonLoader<LoadCfbUsagePlayersRow>(LOAD_CFB_USAGE_PLAYERS);
 /** snake_case alias of {@link loadCfbUsagePlayers} (py/R parity). */
 export const load_cfb_usage_players = loadCfbUsagePlayers;
 
@@ -981,7 +1054,7 @@ const LOAD_CFB_USAGE_POSITION_GROUPS: ReleaseLoaderDef = {"fn":"load_cfb_usage_p
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbUsagePositionGroups({ seasons: 2024 });
  */
-export const loadCfbUsagePositionGroups = seasonLoader(LOAD_CFB_USAGE_POSITION_GROUPS);
+export const loadCfbUsagePositionGroups = seasonLoader<LoadCfbUsagePositionGroupsRow>(LOAD_CFB_USAGE_POSITION_GROUPS);
 /** snake_case alias of {@link loadCfbUsagePositionGroups} (py/R parity). */
 export const load_cfb_usage_position_groups = loadCfbUsagePositionGroups;
 
@@ -1005,7 +1078,7 @@ const LOAD_CFB_USAGE_TACKLES: ReleaseLoaderDef = {"fn":"load_cfb_usage_tackles",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbUsageTackles({ seasons: 2024 });
  */
-export const loadCfbUsageTackles = seasonLoader(LOAD_CFB_USAGE_TACKLES);
+export const loadCfbUsageTackles = seasonLoader<LoadCfbUsageTacklesRow>(LOAD_CFB_USAGE_TACKLES);
 /** snake_case alias of {@link loadCfbUsageTackles} (py/R parity). */
 export const load_cfb_usage_tackles = loadCfbUsageTackles;
 
@@ -1029,7 +1102,7 @@ const LOAD_CFB_USAGE_POSITION_GROUP_TACKLES: ReleaseLoaderDef = {"fn":"load_cfb_
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbUsagePositionGroupTackles({ seasons: 2024 });
  */
-export const loadCfbUsagePositionGroupTackles = seasonLoader(LOAD_CFB_USAGE_POSITION_GROUP_TACKLES);
+export const loadCfbUsagePositionGroupTackles = seasonLoader<LoadCfbUsagePositionGroupTacklesRow>(LOAD_CFB_USAGE_POSITION_GROUP_TACKLES);
 /** snake_case alias of {@link loadCfbUsagePositionGroupTackles} (py/R parity). */
 export const load_cfb_usage_position_group_tackles = loadCfbUsagePositionGroupTackles;
 
@@ -1051,7 +1124,7 @@ const LOAD_CFB_USAGE_TEAMS: ReleaseLoaderDef = {"fn":"load_cfb_usage_teams","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbUsageTeams({ seasons: 2024 });
  */
-export const loadCfbUsageTeams = seasonLoader(LOAD_CFB_USAGE_TEAMS);
+export const loadCfbUsageTeams = seasonLoader<LoadCfbUsageTeamsRow>(LOAD_CFB_USAGE_TEAMS);
 /** snake_case alias of {@link loadCfbUsageTeams} (py/R parity). */
 export const load_cfb_usage_teams = loadCfbUsageTeams;
 
@@ -1073,7 +1146,7 @@ const LOAD_CFB_USAGE_DRIVE_SCRIPTING: ReleaseLoaderDef = {"fn":"load_cfb_usage_d
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbUsageDriveScripting({ seasons: 2024 });
  */
-export const loadCfbUsageDriveScripting = seasonLoader(LOAD_CFB_USAGE_DRIVE_SCRIPTING);
+export const loadCfbUsageDriveScripting = seasonLoader<LoadCfbUsageDriveScriptingRow>(LOAD_CFB_USAGE_DRIVE_SCRIPTING);
 /** snake_case alias of {@link loadCfbUsageDriveScripting} (py/R parity). */
 export const load_cfb_usage_drive_scripting = loadCfbUsageDriveScripting;
 
@@ -1095,7 +1168,7 @@ const LOAD_CFB_USAGE_ST_KICKERS: ReleaseLoaderDef = {"fn":"load_cfb_usage_st_kic
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbUsageStKickers({ seasons: 2024 });
  */
-export const loadCfbUsageStKickers = seasonLoader(LOAD_CFB_USAGE_ST_KICKERS);
+export const loadCfbUsageStKickers = seasonLoader<LoadCfbUsageStKickersRow>(LOAD_CFB_USAGE_ST_KICKERS);
 /** snake_case alias of {@link loadCfbUsageStKickers} (py/R parity). */
 export const load_cfb_usage_st_kickers = loadCfbUsageStKickers;
 
@@ -1117,7 +1190,7 @@ const LOAD_CFB_USAGE_ST_PUNTERS: ReleaseLoaderDef = {"fn":"load_cfb_usage_st_pun
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbUsageStPunters({ seasons: 2024 });
  */
-export const loadCfbUsageStPunters = seasonLoader(LOAD_CFB_USAGE_ST_PUNTERS);
+export const loadCfbUsageStPunters = seasonLoader<LoadCfbUsageStPuntersRow>(LOAD_CFB_USAGE_ST_PUNTERS);
 /** snake_case alias of {@link loadCfbUsageStPunters} (py/R parity). */
 export const load_cfb_usage_st_punters = loadCfbUsageStPunters;
 
@@ -1139,7 +1212,7 @@ const LOAD_CFB_USAGE_ST_RETURNERS: ReleaseLoaderDef = {"fn":"load_cfb_usage_st_r
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbUsageStReturners({ seasons: 2024 });
  */
-export const loadCfbUsageStReturners = seasonLoader(LOAD_CFB_USAGE_ST_RETURNERS);
+export const loadCfbUsageStReturners = seasonLoader<LoadCfbUsageStReturnersRow>(LOAD_CFB_USAGE_ST_RETURNERS);
 /** snake_case alias of {@link loadCfbUsageStReturners} (py/R parity). */
 export const load_cfb_usage_st_returners = loadCfbUsageStReturners;
 
@@ -1161,7 +1234,7 @@ const LOAD_CFB_USAGE_ST_BLOCKS: ReleaseLoaderDef = {"fn":"load_cfb_usage_st_bloc
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbUsageStBlocks({ seasons: 2024 });
  */
-export const loadCfbUsageStBlocks = seasonLoader(LOAD_CFB_USAGE_ST_BLOCKS);
+export const loadCfbUsageStBlocks = seasonLoader<LoadCfbUsageStBlocksRow>(LOAD_CFB_USAGE_ST_BLOCKS);
 /** snake_case alias of {@link loadCfbUsageStBlocks} (py/R parity). */
 export const load_cfb_usage_st_blocks = loadCfbUsageStBlocks;
 
@@ -1183,7 +1256,7 @@ const LOAD_CFB_USAGE_ST_TEAM: ReleaseLoaderDef = {"fn":"load_cfb_usage_st_team",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbUsageStTeam({ seasons: 2024 });
  */
-export const loadCfbUsageStTeam = seasonLoader(LOAD_CFB_USAGE_ST_TEAM);
+export const loadCfbUsageStTeam = seasonLoader<LoadCfbUsageStTeamRow>(LOAD_CFB_USAGE_ST_TEAM);
 /** snake_case alias of {@link loadCfbUsageStTeam} (py/R parity). */
 export const load_cfb_usage_st_team = loadCfbUsageStTeam;
 
@@ -1205,7 +1278,7 @@ const LOAD_CFB_TEAM_TENDENCIES: ReleaseLoaderDef = {"fn":"load_cfb_team_tendenci
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbTeamTendencies({ seasons: 2024 });
  */
-export const loadCfbTeamTendencies = seasonLoader(LOAD_CFB_TEAM_TENDENCIES);
+export const loadCfbTeamTendencies = seasonLoader<LoadCfbTeamTendenciesRow>(LOAD_CFB_TEAM_TENDENCIES);
 /** snake_case alias of {@link loadCfbTeamTendencies} (py/R parity). */
 export const load_cfb_team_tendencies = loadCfbTeamTendencies;
 
@@ -1229,7 +1302,7 @@ const LOAD_CFB_COACH_TENDENCIES: ReleaseLoaderDef = {"fn":"load_cfb_coach_tenden
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbCoachTendencies({ seasons: 2024 });
  */
-export const loadCfbCoachTendencies = seasonLoader(LOAD_CFB_COACH_TENDENCIES);
+export const loadCfbCoachTendencies = seasonLoader<LoadCfbCoachTendenciesRow>(LOAD_CFB_COACH_TENDENCIES);
 /** snake_case alias of {@link loadCfbCoachTendencies} (py/R parity). */
 export const load_cfb_coach_tendencies = loadCfbCoachTendencies;
 
@@ -1252,7 +1325,7 @@ const LOAD_CFB_COACH_CAREERS: ReleaseLoaderDef = {"fn":"load_cfb_coach_careers",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbCoachCareers();
  */
-export const loadCfbCoachCareers = assetLoader(LOAD_CFB_COACH_CAREERS);
+export const loadCfbCoachCareers = assetLoader<LoadCfbCoachCareersRow>(LOAD_CFB_COACH_CAREERS);
 /** snake_case alias of {@link loadCfbCoachCareers} (py/R parity). */
 export const load_cfb_coach_careers = loadCfbCoachCareers;
 
@@ -1274,7 +1347,7 @@ const LOAD_CFB_PBP_R: ReleaseLoaderDef = {"fn":"load_cfb_pbp_r","url":"https://g
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbPbpR({ seasons: 2024, columns: ['game_id', 'play_type', 'play_text', 'EPA', 'wpa'] });
  */
-export const loadCfbPbpR = seasonLoader(LOAD_CFB_PBP_R);
+export const loadCfbPbpR = seasonLoader<LoadCfbPbpRRow>(LOAD_CFB_PBP_R);
 /** snake_case alias of {@link loadCfbPbpR} (py/R parity). */
 export const load_cfb_pbp_r = loadCfbPbpR;
 
@@ -1296,7 +1369,7 @@ const LOAD_NCAA_MFB_PBP: ReleaseLoaderDef = {"fn":"load_ncaa_mfb_pbp","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadNcaaMfbPbp({ seasons: 2024, columns: ['contest_id', 'drive_number', 'play_number', 'play_type', 'play_text'] });
  */
-export const loadNcaaMfbPbp = seasonLoader(LOAD_NCAA_MFB_PBP);
+export const loadNcaaMfbPbp = seasonLoader<LoadNcaaMfbPbpRow>(LOAD_NCAA_MFB_PBP);
 /** snake_case alias of {@link loadNcaaMfbPbp} (py/R parity). */
 export const load_ncaa_mfb_pbp = loadNcaaMfbPbp;
 
@@ -1318,7 +1391,7 @@ const LOAD_NCAA_MFB_PBP_CFBFASTR: ReleaseLoaderDef = {"fn":"load_ncaa_mfb_pbp_cf
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadNcaaMfbPbpCfbfastr({ seasons: 2024, columns: ['game_id', 'id_play', 'play_type', 'play_text', 'yards_gained'] });
  */
-export const loadNcaaMfbPbpCfbfastr = seasonLoader(LOAD_NCAA_MFB_PBP_CFBFASTR);
+export const loadNcaaMfbPbpCfbfastr = seasonLoader<LoadNcaaMfbPbpCfbfastrRow>(LOAD_NCAA_MFB_PBP_CFBFASTR);
 /** snake_case alias of {@link loadNcaaMfbPbpCfbfastr} (py/R parity). */
 export const load_ncaa_mfb_pbp_cfbfastr = loadNcaaMfbPbpCfbfastr;
 
@@ -1340,7 +1413,7 @@ const LOAD_NCAA_MFB_DRIVES: ReleaseLoaderDef = {"fn":"load_ncaa_mfb_drives","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadNcaaMfbDrives({ seasons: 2024 });
  */
-export const loadNcaaMfbDrives = seasonLoader(LOAD_NCAA_MFB_DRIVES);
+export const loadNcaaMfbDrives = seasonLoader<LoadNcaaMfbDrivesRow>(LOAD_NCAA_MFB_DRIVES);
 /** snake_case alias of {@link loadNcaaMfbDrives} (py/R parity). */
 export const load_ncaa_mfb_drives = loadNcaaMfbDrives;
 
@@ -1362,7 +1435,7 @@ const LOAD_NCAA_MFB_SCHEDULE: ReleaseLoaderDef = {"fn":"load_ncaa_mfb_schedule",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadNcaaMfbSchedule({ seasons: 2024 });
  */
-export const loadNcaaMfbSchedule = seasonLoader(LOAD_NCAA_MFB_SCHEDULE);
+export const loadNcaaMfbSchedule = seasonLoader<LoadNcaaMfbScheduleRow>(LOAD_NCAA_MFB_SCHEDULE);
 /** snake_case alias of {@link loadNcaaMfbSchedule} (py/R parity). */
 export const load_ncaa_mfb_schedule = loadNcaaMfbSchedule;
 
@@ -1384,7 +1457,7 @@ const LOAD_NCAA_MFB_ROSTERS: ReleaseLoaderDef = {"fn":"load_ncaa_mfb_rosters","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadNcaaMfbRosters({ seasons: 2024 });
  */
-export const loadNcaaMfbRosters = seasonLoader(LOAD_NCAA_MFB_ROSTERS);
+export const loadNcaaMfbRosters = seasonLoader<LoadNcaaMfbRostersRow>(LOAD_NCAA_MFB_ROSTERS);
 /** snake_case alias of {@link loadNcaaMfbRosters} (py/R parity). */
 export const load_ncaa_mfb_rosters = loadNcaaMfbRosters;
 
@@ -1408,7 +1481,7 @@ const LOAD_NCAA_MFB_TEAMS: ReleaseLoaderDef = {"fn":"load_ncaa_mfb_teams","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadNcaaMfbTeams({ seasons: 2024 });
  */
-export const loadNcaaMfbTeams = seasonLoader(LOAD_NCAA_MFB_TEAMS);
+export const loadNcaaMfbTeams = seasonLoader<LoadNcaaMfbTeamsRow>(LOAD_NCAA_MFB_TEAMS);
 /** snake_case alias of {@link loadNcaaMfbTeams} (py/R parity). */
 export const load_ncaa_mfb_teams = loadNcaaMfbTeams;
 
@@ -1430,7 +1503,7 @@ const LOAD_NCAA_MFB_TEAM_STATS: ReleaseLoaderDef = {"fn":"load_ncaa_mfb_team_sta
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadNcaaMfbTeamStats({ seasons: 2024 });
  */
-export const loadNcaaMfbTeamStats = seasonLoader(LOAD_NCAA_MFB_TEAM_STATS);
+export const loadNcaaMfbTeamStats = seasonLoader<LoadNcaaMfbTeamStatsRow>(LOAD_NCAA_MFB_TEAM_STATS);
 /** snake_case alias of {@link loadNcaaMfbTeamStats} (py/R parity). */
 export const load_ncaa_mfb_team_stats = loadNcaaMfbTeamStats;
 
@@ -1452,7 +1525,7 @@ const LOAD_NCAA_MFB_PLAYER_STATS: ReleaseLoaderDef = {"fn":"load_ncaa_mfb_player
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadNcaaMfbPlayerStats({ seasons: 2024 });
  */
-export const loadNcaaMfbPlayerStats = seasonLoader(LOAD_NCAA_MFB_PLAYER_STATS);
+export const loadNcaaMfbPlayerStats = seasonLoader<LoadNcaaMfbPlayerStatsRow>(LOAD_NCAA_MFB_PLAYER_STATS);
 /** snake_case alias of {@link loadNcaaMfbPlayerStats} (py/R parity). */
 export const load_ncaa_mfb_player_stats = loadNcaaMfbPlayerStats;
 
@@ -1474,7 +1547,7 @@ const LOAD_NCAA_MFB_OFFICIALS: ReleaseLoaderDef = {"fn":"load_ncaa_mfb_officials
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadNcaaMfbOfficials({ seasons: 2024 });
  */
-export const loadNcaaMfbOfficials = seasonLoader(LOAD_NCAA_MFB_OFFICIALS);
+export const loadNcaaMfbOfficials = seasonLoader<LoadNcaaMfbOfficialsRow>(LOAD_NCAA_MFB_OFFICIALS);
 /** snake_case alias of {@link loadNcaaMfbOfficials} (py/R parity). */
 export const load_ncaa_mfb_officials = loadNcaaMfbOfficials;
 
@@ -1496,7 +1569,7 @@ const LOAD_NCAA_MFB_LINESCORE: ReleaseLoaderDef = {"fn":"load_ncaa_mfb_linescore
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadNcaaMfbLinescore({ seasons: 2024 });
  */
-export const loadNcaaMfbLinescore = seasonLoader(LOAD_NCAA_MFB_LINESCORE);
+export const loadNcaaMfbLinescore = seasonLoader<LoadNcaaMfbLinescoreRow>(LOAD_NCAA_MFB_LINESCORE);
 /** snake_case alias of {@link loadNcaaMfbLinescore} (py/R parity). */
 export const load_ncaa_mfb_linescore = loadNcaaMfbLinescore;
 
@@ -1519,7 +1592,7 @@ const LOAD_CFB_GROUPS: ReleaseLoaderDef = {"fn":"load_cfb_groups","url":"https:/
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbGroups();
  */
-export const loadCfbGroups = assetLoader(LOAD_CFB_GROUPS);
+export const loadCfbGroups = assetLoader<LoadCfbGroupsRow>(LOAD_CFB_GROUPS);
 /** snake_case alias of {@link loadCfbGroups} (py/R parity). */
 export const load_cfb_groups = loadCfbGroups;
 
@@ -1542,7 +1615,7 @@ const LOAD_CFB_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_cfb_group_seasons",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbGroupSeasons();
  */
-export const loadCfbGroupSeasons = assetLoader(LOAD_CFB_GROUP_SEASONS);
+export const loadCfbGroupSeasons = assetLoader<LoadCfbGroupSeasonsRow>(LOAD_CFB_GROUP_SEASONS);
 /** snake_case alias of {@link loadCfbGroupSeasons} (py/R parity). */
 export const load_cfb_group_seasons = loadCfbGroupSeasons;
 
@@ -1565,7 +1638,7 @@ const LOAD_CFB_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_cfb_group_aliases",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbGroupAliases();
  */
-export const loadCfbGroupAliases = assetLoader(LOAD_CFB_GROUP_ALIASES);
+export const loadCfbGroupAliases = assetLoader<LoadCfbGroupAliasesRow>(LOAD_CFB_GROUP_ALIASES);
 /** snake_case alias of {@link loadCfbGroupAliases} (py/R parity). */
 export const load_cfb_group_aliases = loadCfbGroupAliases;
 
@@ -1589,6 +1662,6 @@ const LOAD_CFB_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_cfb_team_group
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbTeamGroupSeasons({ seasons: 2024 });
  */
-export const loadCfbTeamGroupSeasons = seasonLoader(LOAD_CFB_TEAM_GROUP_SEASONS);
+export const loadCfbTeamGroupSeasons = seasonLoader<LoadCfbTeamGroupSeasonsRow>(LOAD_CFB_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadCfbTeamGroupSeasons} (py/R parity). */
 export const load_cfb_team_group_seasons = loadCfbTeamGroupSeasons;

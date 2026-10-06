@@ -14,7 +14,8 @@
 import { idColumnsToStrings } from "../core/int64.js";
 
 import type { ParserRow as Row } from "../core/types.js";
-type ResultSet = { name?: string; headers?: any; rowSet?: any };
+/** One `{ name, headers, rowSet }` result set, as the payload carries it (unchecked JSON). */
+type ResultSet = Row;
 
 /** sdv-py `dl_utils.underscore` (keeps spaces/dots, unlike `snakeCase`). */
 export function underscore(word: string): string {
@@ -25,11 +26,11 @@ export function underscore(word: string): string {
     .toLowerCase();
 }
 
-const isObj = (v: any): boolean => v !== null && typeof v === "object" && !Array.isArray(v);
-const isNested = (v: any): boolean => isObj(v) || Array.isArray(v);
+const isObj = (v: unknown): v is Row => v !== null && typeof v === "object" && !Array.isArray(v);
+const isNested = (v: unknown): boolean => isObj(v) || Array.isArray(v);
 
 /** Python `json.dumps` (", " / ": " separators, ASCII-escaped) so stringified cells match py. */
-function pyJson(v: any): string {
+function pyJson(v: unknown): string {
   if (v === null || v === undefined) return "null";
   if (typeof v === "string") {
     return JSON.stringify(v).replace(/[\u007f-￿]/g, (c) =>
@@ -69,7 +70,7 @@ function videoResultSets(rs: Row): ResultSet[] {
 function boxscoreV3ResultSets(box: Row): ResultSet[] {
   const gameMeta: Row = {};
   for (const [k, v] of Object.entries(box)) if (!isNested(v)) gameMeta[k] = v;
-  const teams = ["homeTeam", "awayTeam"].filter((s) => isObj(box[s])).map((s) => box[s]);
+  const teams = ["homeTeam", "awayTeam"].map((s) => box[s]).filter(isObj);
   if (!teams.length) {
     const row: Row = {};
     for (const [k, v] of Object.entries(box)) row[k] = isNested(v) ? pyJson(v) : v;
@@ -123,7 +124,7 @@ function flattenGame(record: Row, prefix = ""): Row {
 function scoreboardResultSet(sb: Row): ResultSet {
   const base: Row = {};
   for (const [k, v] of Object.entries(sb)) if (k !== "games" && !isNested(v)) base[k] = v;
-  const rows = (sb.games as any[])
+  const rows = (sb.games as unknown[])
     .filter(isObj)
     .map((g) => {
       const merged: Row = { ...base };
@@ -149,7 +150,7 @@ const nestedName = (outer: string, inner: string): string =>
 
 function leagueScheduleResultSet(ls: Row): ResultSet {
   const rows: Row[] = [];
-  for (const gd of ls.gameDates as any[]) {
+  for (const gd of ls.gameDates as unknown[]) {
     if (!isObj(gd)) continue;
     const day: Row = {};
     for (const [k, v] of Object.entries(gd)) if (k !== "games" && !isNested(v)) day[underscore(k)] = v;
@@ -193,15 +194,16 @@ function resultSets(raw: Row): ResultSet[] {
 }
 
 /** Flatten the shot-location endpoints' `[group, flat]` header pair into composite names. */
-function flattenHeaders(headers: any): string[] {
+function flattenHeaders(headers: unknown): string[] {
   if (!Array.isArray(headers) || !headers.length || !isObj(headers[0])) return Array.isArray(headers) ? [...headers] : [];
   const [group, flatHdr] = headers;
   const flat: string[] = [...(flatHdr?.columnNames ?? [])];
-  const skip = group.columnsToSkip ?? 0;
-  const span = group.columnSpan ?? 1;
+  // the group header's counts are numbers on every shot-location payload (unchecked, as in py)
+  const skip = (group.columnsToSkip ?? 0) as number;
+  const span = (group.columnSpan ?? 1) as number;
   const out = flat.slice(0, skip);
   let idx = skip;
-  for (const grp of group.columnNames ?? []) {
+  for (const grp of (group.columnNames ?? []) as unknown[]) {
     const prefix = String(grp).replace(/\./g, "").trim().replace(/ /g, "_");
     for (let i = 0; i < span; i++) if (idx < flat.length) out.push(`${prefix}_${flat[idx++]}`);
   }
@@ -235,9 +237,9 @@ function toRows(rs: ResultSet): Row[] {
  *   py's zero-row schema, so read `resultSets[i].headers` from the raw body for the column list); `{ [setName]: rows }` for several sets.
  */
 export function parse_nba_stats_result_sets(
-  raw: any,
+  raw: unknown,
   resultSet?: string
-): Record<string, any>[] | Record<string, Record<string, any>[]> {
+): Row[] | Record<string, Row[]> {
   if (!isObj(raw)) return [];
   let sets: ResultSet[];
   try {
@@ -249,7 +251,8 @@ export function parse_nba_stats_result_sets(
   sets.forEach((rs, i) => {
     // An own data property even for a set named `__proto__` (plain assignment would hit
     // the inherited setter and drop the frame); sdv-py's dict keeps every name.
-    Object.defineProperty(frames, rs.name ?? `set_${i}`, {
+    // String(): the property key a JSON name converts to anyway
+    Object.defineProperty(frames, String(rs.name ?? `set_${i}`), {
       value: toRows(rs),
       enumerable: true,
       writable: true,

@@ -114,6 +114,13 @@ function toFrame(records: Row[]): Row[] {
  */
 const divc = (a: number, c: number): number => a * (1 / c);
 
+/**
+ * A numeric cell of a frame this module built (`period`, `start_s`, `time_s`,
+ * `toi_seconds`, ...: a number, or null where the caller checks first), read as the
+ * number it is. Unchecked, as the py frame's Int64 / Float64 column is.
+ */
+const num = (v: unknown): number => v as number;
+
 const hasCol = (rows: Row[], name: string): boolean => rows.length > 0 && name in rows[0];
 
 // ---------------------------------------------------------------------------
@@ -396,7 +403,7 @@ export function add_coord_transforms(pbp: Row[]): Row[] {
 // ---------------------------------------------------------------------------
 
 const SCORING_CHANCE_FT = 25.0;
-const SHOT_EVENTS = ["shot", "blocked_shot", "goal"];
+const SHOT_EVENTS: readonly unknown[] = ["shot", "blocked_shot", "goal"];
 /** Offensive goal-line x (feet) on an NHL-size rink; the PWHL plays on one. */
 export const NHL_SIZE_RINK_GOAL_X = 89.0;
 const MAX_PLAUSIBLE_GOAL_X = 110.0;
@@ -429,7 +436,7 @@ export function scoring_chances(pbp: Row[], threshold_ft: number = SCORING_CHANC
   const rows = pbp.length > 0 && !("shot_distance" in pbp[0]) ? add_shot_distance_angle(pbp) : pbp;
   return rows.map((r) => ({
     ...r,
-    scoring_chance: r.shot_distance !== null && r.shot_distance !== undefined && r.shot_distance <= threshold_ft,
+    scoring_chance: r.shot_distance !== null && r.shot_distance !== undefined && num(r.shot_distance) <= threshold_ft,
   }));
 }
 
@@ -460,14 +467,14 @@ export function build_on_ice(pbp: Row[], shifts: Row[], goal_epsilon_s: number =
     const periodStart = new Map<number, number>();
     for (const s of shifts) {
       if (s.period === null || s.period === undefined || s.start_s === null || s.start_s === undefined) continue;
-      const cur = periodStart.get(s.period);
-      if (cur === undefined || s.start_s > cur) periodStart.set(s.period, s.start_s);
+      const cur = periodStart.get(num(s.period));
+      if (cur === undefined || num(s.start_s) > cur) periodStart.set(num(s.period), num(s.start_s));
     }
     rows = rows.map((r) => {
       if (r.event !== "goal") return r;
-      const t: number | null = r.time_s ?? null;
+      const t: number | null = r.time_s === undefined || r.time_s === null ? null : num(r.time_s);
       const c1 = t === null ? null : t + goal_epsilon_s;
-      const ps = periodStart.get(r.period_of_game);
+      const ps = periodStart.get(num(r.period_of_game));
       const c2 = ps === undefined ? c1 : ps;
       // min_horizontal skips nulls
       const vals = [c1, c2].filter((v): v is number => v !== null);
@@ -477,14 +484,14 @@ export function build_on_ice(pbp: Row[], shifts: Row[], goal_epsilon_s: number =
   const byPeriod = new Map<number, Row[]>();
   for (const s of shifts) {
     if (s.period === null || s.period === undefined) continue;
-    const arr = byPeriod.get(s.period);
+    const arr = byPeriod.get(num(s.period));
     if (arr) arr.push(s);
-    else byPeriod.set(s.period, [s]);
+    else byPeriod.set(num(s.period), [s]);
   }
   return rows.map((r) => {
     const out: Row = { ...r, on_ice_home: null, on_ice_away: null };
-    const t: number | null = r.time_s ?? null;
-    const cand = byPeriod.get(r.period_of_game);
+    const t: number | null = r.time_s === undefined || r.time_s === null ? null : num(r.time_s);
+    const cand = byPeriod.get(num(r.period_of_game));
     if (!cand || t === null) return out;
     const home = new Set<string>();
     const away = new Set<string>();
@@ -492,7 +499,7 @@ export function build_on_ice(pbp: Row[], shifts: Row[], goal_epsilon_s: number =
     let hasAway = false;
     for (const s of cand) {
       if (s.start_s === null || s.start_s === undefined || s.end_s === null || s.end_s === undefined) continue;
-      if (!(s.start_s >= t && t > s.end_s)) continue;
+      if (!(num(s.start_s) >= t && t > num(s.end_s))) continue;
       const pid = toInt(s.player_id);
       if (s.home === 1) {
         hasHome = true;
@@ -559,8 +566,8 @@ export function add_strength_state(pbp: Row[], goalie_ids: Iterable<unknown> | n
 // Corsi / Fenwick
 // ---------------------------------------------------------------------------
 
-const CORSI_EVENTS = ["shot", "blocked_shot", "goal"];
-const FENWICK_EVENTS = ["shot", "goal"];
+const CORSI_EVENTS: readonly unknown[] = ["shot", "blocked_shot", "goal"];
+const FENWICK_EVENTS: readonly unknown[] = ["shot", "goal"];
 
 /**
  * Team-level shot-attempt counts, one row per non-null `team_id`: CF/CA/CF%,
@@ -769,8 +776,8 @@ export function enrich_pbp(df: Row[], league: string, game_id: unknown, opts: En
     add_shot_distance_angle(
       rows.map((r) => ({
         ...r,
-        x_coord: r.x_coord_original === null ? null : divc(r.x_coord_original, 3.0) - 100.0,
-        y_coord: r.y_coord_original === null ? null : 42.5 - divc(r.y_coord_original * 85.0, 300.0),
+        x_coord: r.x_coord_original === null ? null : divc(num(r.x_coord_original), 3.0) - 100.0,
+        y_coord: r.y_coord_original === null ? null : 42.5 - divc(num(r.y_coord_original) * 85.0, 300.0),
       }))
     )
   );
@@ -788,14 +795,14 @@ export function enrich_pbp(df: Row[], league: string, game_id: unknown, opts: En
     const plen = new Map<number, number>();
     for (const s of shifts) {
       if (s.period === null || s.start_s === null) continue;
-      const cur = plen.get(s.period);
-      if (cur === undefined || s.start_s > cur) plen.set(s.period, s.start_s);
+      const cur = plen.get(num(s.period));
+      if (cur === undefined || num(s.start_s) > cur) plen.set(num(s.period), num(s.start_s));
     }
     const copy = rows.map((r) => {
       const p = toInt(r.period_of_game);
       const len = p !== null && plen.has(p) ? (plen.get(p) as number) : 1200;
       const elapsed =
-        r.minute_start === null || r.second_start === null ? null : r.minute_start * 60 + r.second_start;
+        r.minute_start === null || r.second_start === null ? null : num(r.minute_start) * 60 + num(r.second_start);
       return { ...r, period_of_game: p, time_s: elapsed === null ? null : len - elapsed };
     });
     const res = build_on_ice(copy, shifts);
@@ -836,7 +843,7 @@ export function player_toi(shifts: Row[]): Row[] {
       groups.set(key, g);
     }
     g.n++;
-    if (s.start_s !== null && s.start_s !== undefined && s.end_s !== null && s.end_s !== undefined) g.vals.push(s.start_s - s.end_s);
+    if (s.start_s !== null && s.start_s !== undefined && s.end_s !== null && s.end_s !== undefined) g.vals.push(num(s.start_s) - num(s.end_s));
   }
   const out = [...groups.values()].map((g) => {
     const sum = g.vals.reduce((a, b) => a + b, 0);
@@ -849,7 +856,7 @@ export function player_toi(shifts: Row[]): Row[] {
       avg_shift_s: g.vals.length ? sum / g.vals.length : null,
     } as Row;
   });
-  return out.sort((a, b) => b.toi_seconds - a.toi_seconds);
+  return out.sort((a, b) => num(b.toi_seconds) - num(a.toi_seconds));
 }
 
 /**
@@ -871,13 +878,14 @@ export function game_corsi_rows(enrichedPbp: Row[], shifts: Row[]): Row[] {
   }
   const out: Row[] = [];
   for (const c of corsi) {
-    const matches = byId.get(c.player_id) ?? [null];
+    // corsi_fenwick_on_ice's player_id is a string and corsi_for a count
+    const matches = byId.get(c.player_id as string) ?? [null];
     for (const m of matches) {
       const toiSeconds = m ? m.toi_seconds : null;
       out.push({
         ...c,
         toi_seconds: toiSeconds,
-        corsi_for_per60: toiSeconds !== null && toiSeconds > 0 ? per60(c.corsi_for, toiSeconds) : null,
+        corsi_for_per60: toiSeconds !== null && num(toiSeconds) > 0 ? per60(num(c.corsi_for), num(toiSeconds)) : null,
       });
     }
   }

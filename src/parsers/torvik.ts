@@ -17,6 +17,7 @@
 //     stringified, matching R's `paste(unlist(x), collapse=";")`).
 
 import Papa from "papaparse";
+import type { ParserRow } from "../core/types.js";
 
 /**
  * Clean a Torvik CSV header into a snake_case column name — a faithful port of
@@ -181,12 +182,12 @@ const GAME_SCHEDULE_COLS = [
 ];
 
 /** Parse `torvik_ratings()` — one row per team (CSV with header, T-Rank). */
-export function parse_torvik_ratings(text: any): Record<string, any>[] {
+export function parse_torvik_ratings(text: any): ParserRow[] {
   return parseHeaderCsv(text);
 }
 
 /** Parse `torvik_team_factors()` — one row per team (CSV with header). */
-export function parse_torvik_team_factors(text: any): Record<string, any>[] {
+export function parse_torvik_team_factors(text: any): ParserRow[] {
   return parseHeaderCsv(text);
 }
 
@@ -194,7 +195,7 @@ export function parse_torvik_team_factors(text: any): Record<string, any>[] {
  * Parse `torvik_game_stats()` — one row per team-game. Headerless JSON
  * (`getgamestats.php?json=1`); the 31 positional columns are hardcoded.
  */
-export function parse_torvik_game_stats(input: any): Record<string, any>[] {
+export function parse_torvik_game_stats(input: any): ParserRow[] {
   return parsePositionalJson(input, GAME_STATS_COLS);
 }
 
@@ -202,7 +203,7 @@ export function parse_torvik_game_stats(input: any): Record<string, any>[] {
  * Parse `torvik_player_stats()` — one row per player. Headerless CSV
  * (`getadvstats.php?csv=1`); the 67 positional columns are hardcoded.
  */
-export function parse_torvik_player_stats(text: any): Record<string, any>[] {
+export function parse_torvik_player_stats(text: any): ParserRow[] {
   return parsePositionalCsv(text, PLAYER_STATS_COLS);
 }
 
@@ -210,6 +211,6 @@ export function parse_torvik_player_stats(text: any): Record<string, any>[] {
  * Parse `torvik_game_schedule()` — one row per game. Headerless JSON
  * (`{year}_super_sked.json`); the 55 positional columns are hardcoded.
  */
-export function parse_torvik_game_schedule(input: any): Record<string, any>[] {
+export function parse_torvik_game_schedule(input: any): ParserRow[] {
   return parsePositionalJson(input, GAME_SCHEDULE_COLS);
 }

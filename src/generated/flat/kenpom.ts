@@ -7,6 +7,38 @@
 
 import { callFlat } from "../../leagues/_make_flat.js";
 import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  KenpomArchiveRatingsParams,
+  KenpomArenasParams,
+  KenpomBoxParams,
+  KenpomCoachHistoryParams,
+  KenpomConferenceHistoryParams,
+  KenpomConferenceParams,
+  KenpomConferenceStatsParams,
+  KenpomEfficiencyParams,
+  KenpomFanMatchParams,
+  KenpomFoulTroubleParams,
+  KenpomFourFactorsParams,
+  KenpomGameAttributesParams,
+  KenpomGamePlanParams,
+  KenpomHeightParams,
+  KenpomHomeCourtAdvantageParams,
+  KenpomKpoyParams,
+  KenpomOfficialsParams,
+  KenpomOpponentTrackerParams,
+  KenpomPlayerCareerParams,
+  KenpomPlayerStatsParams,
+  KenpomPointDistributionParams,
+  KenpomProgramRatingsParams,
+  KenpomRatingsParams,
+  KenpomRefereeParams,
+  KenpomTeamHistoryParams,
+  KenpomTeamParams,
+  KenpomTeamPlayersExpandedParams,
+  KenpomTeamStatsParams,
+  KenpomTrendsParams,
+  KenpomWinProbabilityParams,
+} from "../params/kenpom.js";
 
 const ARCHIVE_RATINGS_DEF: WrapperDef = {
   "short": "archive_ratings",
@@ -39,7 +71,7 @@ const ARCHIVE_RATINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomArchiveRatings({});
  */
-export const kenpomArchiveRatings: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(ARCHIVE_RATINGS_DEF, params);
+export const kenpomArchiveRatings: SectionedWrapper<Row[] | ParsedTables, {}, KenpomArchiveRatingsParams> = (params: WrapperParams = {}) => callFlat(ARCHIVE_RATINGS_DEF, params);
 /** snake_case alias of {@link kenpomArchiveRatings} (py/R parity). */
 export const kenpom_archive_ratings = kenpomArchiveRatings;
 
@@ -74,7 +106,7 @@ const ARENAS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomArenas({});
  */
-export const kenpomArenas: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(ARENAS_DEF, params);
+export const kenpomArenas: SectionedWrapper<Row[] | ParsedTables, {}, KenpomArenasParams> = (params: WrapperParams = {}) => callFlat(ARENAS_DEF, params);
 /** snake_case alias of {@link kenpomArenas} (py/R parity). */
 export const kenpom_arenas = kenpomArenas;
 
@@ -114,7 +146,7 @@ const BOX_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomBox({});
  */
-export const kenpomBox: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(BOX_DEF, params);
+export const kenpomBox: SectionedWrapper<Row[] | ParsedTables, {}, KenpomBoxParams> = (params: WrapperParams = {}) => callFlat(BOX_DEF, params);
 /** snake_case alias of {@link kenpomBox} (py/R parity). */
 export const kenpom_box = kenpomBox;
 
@@ -149,7 +181,7 @@ const COACH_HISTORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomCoachHistory({});
  */
-export const kenpomCoachHistory: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(COACH_HISTORY_DEF, params);
+export const kenpomCoachHistory: SectionedWrapper<Row[] | ParsedTables, {}, KenpomCoachHistoryParams> = (params: WrapperParams = {}) => callFlat(COACH_HISTORY_DEF, params);
 /** snake_case alias of {@link kenpomCoachHistory} (py/R parity). */
 export const kenpom_coach_history = kenpomCoachHistory;
 
@@ -189,7 +221,7 @@ const CONFERENCE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomConference({});
  */
-export const kenpomConference: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(CONFERENCE_DEF, params);
+export const kenpomConference: SectionedWrapper<Row[] | ParsedTables, {}, KenpomConferenceParams> = (params: WrapperParams = {}) => callFlat(CONFERENCE_DEF, params);
 /** snake_case alias of {@link kenpomConference} (py/R parity). */
 export const kenpom_conference = kenpomConference;
 
@@ -224,7 +256,7 @@ const CONFERENCE_HISTORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomConferenceHistory({});
  */
-export const kenpomConferenceHistory: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(CONFERENCE_HISTORY_DEF, params);
+export const kenpomConferenceHistory: SectionedWrapper<Row[] | ParsedTables, {}, KenpomConferenceHistoryParams> = (params: WrapperParams = {}) => callFlat(CONFERENCE_HISTORY_DEF, params);
 /** snake_case alias of {@link kenpomConferenceHistory} (py/R parity). */
 export const kenpom_conference_history = kenpomConferenceHistory;
 
@@ -259,7 +291,7 @@ const CONFERENCE_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomConferenceStats({});
  */
-export const kenpomConferenceStats: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(CONFERENCE_STATS_DEF, params);
+export const kenpomConferenceStats: SectionedWrapper<Row[] | ParsedTables, {}, KenpomConferenceStatsParams> = (params: WrapperParams = {}) => callFlat(CONFERENCE_STATS_DEF, params);
 /** snake_case alias of {@link kenpomConferenceStats} (py/R parity). */
 export const kenpom_conference_stats = kenpomConferenceStats;
 
@@ -294,7 +326,7 @@ const EFFICIENCY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomEfficiency({});
  */
-export const kenpomEfficiency: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(EFFICIENCY_DEF, params);
+export const kenpomEfficiency: SectionedWrapper<Row[] | ParsedTables, {}, KenpomEfficiencyParams> = (params: WrapperParams = {}) => callFlat(EFFICIENCY_DEF, params);
 /** snake_case alias of {@link kenpomEfficiency} (py/R parity). */
 export const kenpom_efficiency = kenpomEfficiency;
 
@@ -329,7 +361,7 @@ const FAN_MATCH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomFanMatch({});
  */
-export const kenpomFanMatch: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FAN_MATCH_DEF, params);
+export const kenpomFanMatch: SectionedWrapper<Row[] | ParsedTables, {}, KenpomFanMatchParams> = (params: WrapperParams = {}) => callFlat(FAN_MATCH_DEF, params);
 /** snake_case alias of {@link kenpomFanMatch} (py/R parity). */
 export const kenpom_fan_match = kenpomFanMatch;
 
@@ -364,7 +396,7 @@ const FOUL_TROUBLE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomFoulTrouble({});
  */
-export const kenpomFoulTrouble: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FOUL_TROUBLE_DEF, params);
+export const kenpomFoulTrouble: SectionedWrapper<Row[] | ParsedTables, {}, KenpomFoulTroubleParams> = (params: WrapperParams = {}) => callFlat(FOUL_TROUBLE_DEF, params);
 /** snake_case alias of {@link kenpomFoulTrouble} (py/R parity). */
 export const kenpom_foul_trouble = kenpomFoulTrouble;
 
@@ -399,7 +431,7 @@ const FOUR_FACTORS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomFourFactors({});
  */
-export const kenpomFourFactors: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FOUR_FACTORS_DEF, params);
+export const kenpomFourFactors: SectionedWrapper<Row[] | ParsedTables, {}, KenpomFourFactorsParams> = (params: WrapperParams = {}) => callFlat(FOUR_FACTORS_DEF, params);
 /** snake_case alias of {@link kenpomFourFactors} (py/R parity). */
 export const kenpom_four_factors = kenpomFourFactors;
 
@@ -439,7 +471,7 @@ const GAME_ATTRIBUTES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomGameAttributes({});
  */
-export const kenpomGameAttributes: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(GAME_ATTRIBUTES_DEF, params);
+export const kenpomGameAttributes: SectionedWrapper<Row[] | ParsedTables, {}, KenpomGameAttributesParams> = (params: WrapperParams = {}) => callFlat(GAME_ATTRIBUTES_DEF, params);
 /** snake_case alias of {@link kenpomGameAttributes} (py/R parity). */
 export const kenpom_game_attributes = kenpomGameAttributes;
 
@@ -479,7 +511,7 @@ const GAME_PLAN_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomGamePlan({});
  */
-export const kenpomGamePlan: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(GAME_PLAN_DEF, params);
+export const kenpomGamePlan: SectionedWrapper<Row[] | ParsedTables, {}, KenpomGamePlanParams> = (params: WrapperParams = {}) => callFlat(GAME_PLAN_DEF, params);
 /** snake_case alias of {@link kenpomGamePlan} (py/R parity). */
 export const kenpom_game_plan = kenpomGamePlan;
 
@@ -514,7 +546,7 @@ const HEIGHT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomHeight({});
  */
-export const kenpomHeight: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(HEIGHT_DEF, params);
+export const kenpomHeight: SectionedWrapper<Row[] | ParsedTables, {}, KenpomHeightParams> = (params: WrapperParams = {}) => callFlat(HEIGHT_DEF, params);
 /** snake_case alias of {@link kenpomHeight} (py/R parity). */
 export const kenpom_height = kenpomHeight;
 
@@ -543,7 +575,7 @@ const HOME_COURT_ADVANTAGE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomHomeCourtAdvantage({});
  */
-export const kenpomHomeCourtAdvantage: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(HOME_COURT_ADVANTAGE_DEF, params);
+export const kenpomHomeCourtAdvantage: SectionedWrapper<Row[] | ParsedTables, {}, KenpomHomeCourtAdvantageParams> = (params: WrapperParams = {}) => callFlat(HOME_COURT_ADVANTAGE_DEF, params);
 /** snake_case alias of {@link kenpomHomeCourtAdvantage} (py/R parity). */
 export const kenpom_home_court_advantage = kenpomHomeCourtAdvantage;
 
@@ -578,7 +610,7 @@ const KPOY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomKpoy({});
  */
-export const kenpomKpoy: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(KPOY_DEF, params);
+export const kenpomKpoy: SectionedWrapper<Row[] | ParsedTables, {}, KenpomKpoyParams> = (params: WrapperParams = {}) => callFlat(KPOY_DEF, params);
 /** snake_case alias of {@link kenpomKpoy} (py/R parity). */
 export const kenpom_kpoy = kenpomKpoy;
 
@@ -613,7 +645,7 @@ const OFFICIALS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomOfficials({});
  */
-export const kenpomOfficials: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(OFFICIALS_DEF, params);
+export const kenpomOfficials: SectionedWrapper<Row[] | ParsedTables, {}, KenpomOfficialsParams> = (params: WrapperParams = {}) => callFlat(OFFICIALS_DEF, params);
 /** snake_case alias of {@link kenpomOfficials} (py/R parity). */
 export const kenpom_officials = kenpomOfficials;
 
@@ -658,7 +690,7 @@ const OPPONENT_TRACKER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomOpponentTracker({});
  */
-export const kenpomOpponentTracker: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(OPPONENT_TRACKER_DEF, params);
+export const kenpomOpponentTracker: SectionedWrapper<Row[] | ParsedTables, {}, KenpomOpponentTrackerParams> = (params: WrapperParams = {}) => callFlat(OPPONENT_TRACKER_DEF, params);
 /** snake_case alias of {@link kenpomOpponentTracker} (py/R parity). */
 export const kenpom_opponent_tracker = kenpomOpponentTracker;
 
@@ -693,7 +725,7 @@ const PLAYER_CAREER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomPlayerCareer({});
  */
-export const kenpomPlayerCareer: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYER_CAREER_DEF, params);
+export const kenpomPlayerCareer: SectionedWrapper<Row[] | ParsedTables, {}, KenpomPlayerCareerParams> = (params: WrapperParams = {}) => callFlat(PLAYER_CAREER_DEF, params);
 /** snake_case alias of {@link kenpomPlayerCareer} (py/R parity). */
 export const kenpom_player_career = kenpomPlayerCareer;
 
@@ -743,7 +775,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomPlayerStats({});
  */
-export const kenpomPlayerStats: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
+export const kenpomPlayerStats: SectionedWrapper<Row[] | ParsedTables, {}, KenpomPlayerStatsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link kenpomPlayerStats} (py/R parity). */
 export const kenpom_player_stats = kenpomPlayerStats;
 
@@ -778,7 +810,7 @@ const POINT_DISTRIBUTION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomPointDistribution({});
  */
-export const kenpomPointDistribution: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(POINT_DISTRIBUTION_DEF, params);
+export const kenpomPointDistribution: SectionedWrapper<Row[] | ParsedTables, {}, KenpomPointDistributionParams> = (params: WrapperParams = {}) => callFlat(POINT_DISTRIBUTION_DEF, params);
 /** snake_case alias of {@link kenpomPointDistribution} (py/R parity). */
 export const kenpom_point_distribution = kenpomPointDistribution;
 
@@ -807,7 +839,7 @@ const PROGRAM_RATINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomProgramRatings({});
  */
-export const kenpomProgramRatings: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PROGRAM_RATINGS_DEF, params);
+export const kenpomProgramRatings: SectionedWrapper<Row[] | ParsedTables, {}, KenpomProgramRatingsParams> = (params: WrapperParams = {}) => callFlat(PROGRAM_RATINGS_DEF, params);
 /** snake_case alias of {@link kenpomProgramRatings} (py/R parity). */
 export const kenpom_program_ratings = kenpomProgramRatings;
 
@@ -842,7 +874,7 @@ const RATINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomRatings({});
  */
-export const kenpomRatings: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(RATINGS_DEF, params);
+export const kenpomRatings: SectionedWrapper<Row[] | ParsedTables, {}, KenpomRatingsParams> = (params: WrapperParams = {}) => callFlat(RATINGS_DEF, params);
 /** snake_case alias of {@link kenpomRatings} (py/R parity). */
 export const kenpom_ratings = kenpomRatings;
 
@@ -882,7 +914,7 @@ const REFEREE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomReferee({});
  */
-export const kenpomReferee: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(REFEREE_DEF, params);
+export const kenpomReferee: SectionedWrapper<Row[] | ParsedTables, {}, KenpomRefereeParams> = (params: WrapperParams = {}) => callFlat(REFEREE_DEF, params);
 /** snake_case alias of {@link kenpomReferee} (py/R parity). */
 export const kenpom_referee = kenpomReferee;
 
@@ -922,7 +954,7 @@ const TEAM_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomTeam({});
  */
-export const kenpomTeam: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(TEAM_DEF, params);
+export const kenpomTeam: SectionedWrapper<Row[] | ParsedTables, {}, KenpomTeamParams> = (params: WrapperParams = {}) => callFlat(TEAM_DEF, params);
 /** snake_case alias of {@link kenpomTeam} (py/R parity). */
 export const kenpom_team = kenpomTeam;
 
@@ -957,7 +989,7 @@ const TEAM_HISTORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomTeamHistory({});
  */
-export const kenpomTeamHistory: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(TEAM_HISTORY_DEF, params);
+export const kenpomTeamHistory: SectionedWrapper<Row[] | ParsedTables, {}, KenpomTeamHistoryParams> = (params: WrapperParams = {}) => callFlat(TEAM_HISTORY_DEF, params);
 /** snake_case alias of {@link kenpomTeamHistory} (py/R parity). */
 export const kenpom_team_history = kenpomTeamHistory;
 
@@ -997,7 +1029,7 @@ const TEAM_PLAYERS_EXPANDED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomTeamPlayersExpanded({});
  */
-export const kenpomTeamPlayersExpanded: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(TEAM_PLAYERS_EXPANDED_DEF, params);
+export const kenpomTeamPlayersExpanded: SectionedWrapper<Row[] | ParsedTables, {}, KenpomTeamPlayersExpandedParams> = (params: WrapperParams = {}) => callFlat(TEAM_PLAYERS_EXPANDED_DEF, params);
 /** snake_case alias of {@link kenpomTeamPlayersExpanded} (py/R parity). */
 export const kenpom_team_players_expanded = kenpomTeamPlayersExpanded;
 
@@ -1037,7 +1069,7 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomTeamStats({});
  */
-export const kenpomTeamStats: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
+export const kenpomTeamStats: SectionedWrapper<Row[] | ParsedTables, {}, KenpomTeamStatsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link kenpomTeamStats} (py/R parity). */
 export const kenpom_team_stats = kenpomTeamStats;
 
@@ -1066,7 +1098,7 @@ const TRENDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomTrends({});
  */
-export const kenpomTrends: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(TRENDS_DEF, params);
+export const kenpomTrends: SectionedWrapper<Row[] | ParsedTables, {}, KenpomTrendsParams> = (params: WrapperParams = {}) => callFlat(TRENDS_DEF, params);
 /** snake_case alias of {@link kenpomTrends} (py/R parity). */
 export const kenpom_trends = kenpomTrends;
 
@@ -1106,6 +1138,6 @@ const WIN_PROBABILITY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mbb.kenpomWinProbability({});
  */
-export const kenpomWinProbability: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(WIN_PROBABILITY_DEF, params);
+export const kenpomWinProbability: SectionedWrapper<Row[] | ParsedTables, {}, KenpomWinProbabilityParams> = (params: WrapperParams = {}) => callFlat(WIN_PROBABILITY_DEF, params);
 /** snake_case alias of {@link kenpomWinProbability} (py/R parity). */
 export const kenpom_win_probability = kenpomWinProbability;

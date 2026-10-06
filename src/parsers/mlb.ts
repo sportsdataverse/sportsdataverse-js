@@ -14,6 +14,7 @@
 // stats[].splits[], the boxscore players-by-id dict, etc.).
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -56,7 +57,7 @@ const LIST_KEYS = [
  * Use a dedicated parser (`parse_mlb_schedule`, `parse_mlb_standings`,
  * `parse_mlb_person_stats`, …) for endpoints that need extra unrolling.
  */
-export function parse_mlb_list(raw: any): Record<string, any>[] {
+export function parse_mlb_list(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   for (const key of LIST_KEYS) {
     const candidate = raw[key];
@@ -68,7 +69,7 @@ export function parse_mlb_list(raw: any): Record<string, any>[] {
 }
 
 /** Parse `mlb_teams()` into one row per team (from `teams[]`). */
-export function parse_mlb_teams(raw: any): Record<string, any>[] {
+export function parse_mlb_teams(raw: any): ParserRow[] {
   return normalize(raw?.teams ?? []);
 }
 
@@ -79,7 +80,7 @@ export function parse_mlb_teams(raw: any): Record<string, any>[] {
  * this walks every `dates[].games[]`, prefixes the schedule `date` onto each
  * game row, and flattens the nested `teams.*` / `venue.*` / `status.*` fields.
  */
-export function parse_mlb_schedule(raw: any): Record<string, any>[] {
+export function parse_mlb_schedule(raw: any): ParserRow[] {
   const dates = raw?.dates;
   if (!Array.isArray(dates) || dates.length === 0) return [];
   const rows = dates.flatMap((d: any) =>
@@ -95,7 +96,7 @@ export function parse_mlb_schedule(raw: any): Record<string, any>[] {
  * `person` / `position` / `status` sub-dicts flatten to `person_id`,
  * `position_abbreviation`, `status_code`, etc.
  */
-export function parse_mlb_team_roster(raw: any): Record<string, any>[] {
+export function parse_mlb_team_roster(raw: any): ParserRow[] {
   return normalize(raw?.roster ?? []);
 }
 
@@ -107,7 +108,7 @@ export function parse_mlb_team_roster(raw: any): Record<string, any>[] {
  * division identifiers onto each team row so a single output row carries both
  * the division context and the team's full standing stats.
  */
-export function parse_mlb_standings(raw: any): Record<string, any>[] {
+export function parse_mlb_standings(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const records = raw.records;
   if (!Array.isArray(records) || records.length === 0) return [];
@@ -141,7 +142,7 @@ export function parse_mlb_standings(raw: any): Record<string, any>[] {
  * each `splits[]` row is one sliced view. Flattens each `splits[]` row and
  * prefixes `stats_type` / `stats_group` from the parent.
  */
-export function parse_mlb_person_stats(raw: any): Record<string, any>[] {
+export function parse_mlb_person_stats(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const stats = raw.stats;
   if (!Array.isArray(stats) || stats.length === 0) return [];
@@ -167,7 +168,7 @@ export function parse_mlb_person_stats(raw: any): Record<string, any>[] {
  * walks each side's players, prefixes `team_side` / `team_id` / `team_name`,
  * and flattens the nested `person` / `position` / `stats.*` sub-dicts.
  */
-export function parse_mlb_boxscore(raw: any): Record<string, any>[] {
+export function parse_mlb_boxscore(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const teams = raw.teams ?? {};
   const rows: Record<string, any>[] = [];
@@ -190,7 +191,7 @@ export function parse_mlb_boxscore(raw: any): Record<string, any>[] {
  * {...}}, ...]}`. Each inning flattens so home/away become `home_runs` /
  * `away_hits` columns.
  */
-export function parse_mlb_linescore(raw: any): Record<string, any>[] {
+export function parse_mlb_linescore(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   return normalize(raw.innings ?? []);
 }
@@ -202,7 +203,7 @@ export function parse_mlb_linescore(raw: any): Record<string, any>[] {
  * flattens: nested `result.*` / `about.*` / `count.*` / `matchup.*` dicts
  * become columns, list fields are stringified.
  */
-export function parse_mlb_play_by_play(raw: any): Record<string, any>[] {
+export function parse_mlb_play_by_play(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   return normalize(raw.allPlays ?? []);
 }
@@ -214,7 +215,7 @@ export function parse_mlb_play_by_play(raw: any): Record<string, any>[] {
  * JSON array* of play objects carrying win-probability series fields. Flattened
  * directly.
  */
-export function parse_mlb_win_probability(raw: any): Record<string, any>[] {
+export function parse_mlb_win_probability(raw: any): ParserRow[] {
   if (!Array.isArray(raw)) return [];
   return normalize(raw);
 }
@@ -227,7 +228,7 @@ export function parse_mlb_win_probability(raw: any): Record<string, any>[] {
  * `copyright` boilerplate dropped). The nested `pick` sub-dict unrolls into
  * `pick_*` columns.
  */
-export function parse_mlb_draft_latest(raw: any): Record<string, any>[] {
+export function parse_mlb_draft_latest(raw: any): ParserRow[] {
   if (!isPlainObject(raw) || Object.keys(raw).length === 0) return [];
   const { copyright, ...row } = raw;
   return normalize([row]);
@@ -240,7 +241,7 @@ export function parse_mlb_draft_latest(raw: any): Record<string, any>[] {
  * bare JSON array of timecode strings (e.g. `"20230929_215457"`). Shaped into a
  * single `timecode` column, one row per timestamp.
  */
-export function parse_mlb_timecodes(raw: any): Record<string, any>[] {
+export function parse_mlb_timecodes(raw: any): ParserRow[] {
   if (!Array.isArray(raw) || raw.length === 0) return [];
   return normalize(raw.map((t: any) => ({ timecode: t })));
 }

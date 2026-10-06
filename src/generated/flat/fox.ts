@@ -7,6 +7,46 @@
 
 import { callFlat } from "../../leagues/_make_flat.js";
 import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  FoxApiEventDataParams,
+  FoxApiEventMatchupParams,
+  FoxApiEventOddsParams,
+  FoxApiEventRecapParams,
+  FoxApiEventStandingsParams,
+  FoxApiExploreBrowseParams,
+  FoxApiExploreOddsParams,
+  FoxApiFoxpollsParams,
+  FoxApiLeagueConferencesParams,
+  FoxApiLeagueHeaderParams,
+  FoxApiLeagueOddsParams,
+  FoxApiLeaguePlayernewsParams,
+  FoxApiLeaguePollsParams,
+  FoxApiLeagueScheduleParams,
+  FoxApiLeagueScoresParams,
+  FoxApiLeagueScoresSegmentParams,
+  FoxApiLeagueStandingsParams,
+  FoxApiLeagueStatsConParams,
+  FoxApiLeagueStatsParams,
+  FoxApiLeagueTeamnavParams,
+  FoxApiScoreboardParams,
+  FoxApiScorechipParams,
+  FoxApiSearchContentParams,
+  FoxApiSearchEntitiesParams,
+  FoxApiSearchPopularParams,
+  FoxApiTeamGamelogParams,
+  FoxApiTeamHeaderParams,
+  FoxApiTeamRosterParams,
+  FoxApiTeamStandingsParams,
+  FoxApiTeamStatsParams,
+  FoxApiTopeventsScoreboardSegmentParams,
+  FoxApiTrendingArticlesParams,
+  FoxApiTrendingVideosParams,
+  FoxExploreFavoriteParams,
+  FoxFsFeedParams,
+  FoxFsImagesParams,
+  FoxFsLayoutsParams,
+  FoxFsVideosParams,
+} from "../params/fox.js";
 
 const EVENT_DATA_DEF: WrapperDef = {
   "short": "event_data",
@@ -53,7 +93,7 @@ const EVENT_DATA_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiEventData({ sport: '…', event_id: '…' });
  */
-export const foxApiEventData: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_DATA_DEF, params);
+export const foxApiEventData: Wrapper<Row[], FoxApiEventDataParams> = (params: WrapperParams = {}) => callFlat(EVENT_DATA_DEF, params);
 /** snake_case alias of {@link foxApiEventData} (py/R parity). */
 export const fox_api_event_data = foxApiEventData;
 
@@ -102,7 +142,7 @@ const EVENT_MATCHUP_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiEventMatchup({ sport: '…', event_id: '…' });
  */
-export const foxApiEventMatchup: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_MATCHUP_DEF, params);
+export const foxApiEventMatchup: Wrapper<Row[], FoxApiEventMatchupParams> = (params: WrapperParams = {}) => callFlat(EVENT_MATCHUP_DEF, params);
 /** snake_case alias of {@link foxApiEventMatchup} (py/R parity). */
 export const fox_api_event_matchup = foxApiEventMatchup;
 
@@ -151,7 +191,7 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiEventOdds({ sport: '…', event_id: '…' });
  */
-export const foxApiEventOdds: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_ODDS_DEF, params);
+export const foxApiEventOdds: Wrapper<Row[], FoxApiEventOddsParams> = (params: WrapperParams = {}) => callFlat(EVENT_ODDS_DEF, params);
 /** snake_case alias of {@link foxApiEventOdds} (py/R parity). */
 export const fox_api_event_odds = foxApiEventOdds;
 
@@ -200,7 +240,7 @@ const EVENT_RECAP_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiEventRecap({ sport: '…', event_id: '…' });
  */
-export const foxApiEventRecap: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_RECAP_DEF, params);
+export const foxApiEventRecap: Wrapper<Row[], FoxApiEventRecapParams> = (params: WrapperParams = {}) => callFlat(EVENT_RECAP_DEF, params);
 /** snake_case alias of {@link foxApiEventRecap} (py/R parity). */
 export const fox_api_event_recap = foxApiEventRecap;
 
@@ -249,7 +289,7 @@ const EVENT_STANDINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiEventStandings({ sport: '…', event_id: '…' });
  */
-export const foxApiEventStandings: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_STANDINGS_DEF, params);
+export const foxApiEventStandings: Wrapper<Row[], FoxApiEventStandingsParams> = (params: WrapperParams = {}) => callFlat(EVENT_STANDINGS_DEF, params);
 /** snake_case alias of {@link foxApiEventStandings} (py/R parity). */
 export const fox_api_event_standings = foxApiEventStandings;
 
@@ -294,7 +334,7 @@ const EXPLORE_BROWSE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiExploreBrowse({ section: '…' });
  */
-export const foxApiExploreBrowse: Wrapper = (params: WrapperParams = {}) => callFlat(EXPLORE_BROWSE_DEF, params);
+export const foxApiExploreBrowse: Wrapper<Row[], FoxApiExploreBrowseParams> = (params: WrapperParams = {}) => callFlat(EXPLORE_BROWSE_DEF, params);
 /** snake_case alias of {@link foxApiExploreBrowse} (py/R parity). */
 export const fox_api_explore_browse = foxApiExploreBrowse;
 
@@ -340,7 +380,7 @@ const EXPLORE_FAVORITE_DEF: WrapperDef = {
  * @example await sdv.fox.foxExploreFavorite({ section: '…' });
  * @deprecated Fox never returned data for this route (sdv-py probe 2026-10-05: 400 for sports/players, 404 for nfl/cfb/teams, with ids/sections taken from a live explore/browse payload); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml). Use fox_api_explore_browse().
  */
-export const foxExploreFavorite: Wrapper = (params: WrapperParams = {}) => callFlat(EXPLORE_FAVORITE_DEF, params);
+export const foxExploreFavorite: Wrapper<Row[], FoxExploreFavoriteParams> = (params: WrapperParams = {}) => callFlat(EXPLORE_FAVORITE_DEF, params);
 /**
  * snake_case alias of {@link foxExploreFavorite} (py/R parity).
  * @deprecated Fox never returned data for this route (sdv-py probe 2026-10-05: 400 for sports/players, 404 for nfl/cfb/teams, with ids/sections taken from a live explore/browse payload); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml). Use fox_api_explore_browse().
@@ -383,7 +423,7 @@ const EXPLORE_ODDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiExploreOdds({});
  */
-export const foxApiExploreOdds: Wrapper = (params: WrapperParams = {}) => callFlat(EXPLORE_ODDS_DEF, params);
+export const foxApiExploreOdds: Wrapper<Row[], FoxApiExploreOddsParams> = (params: WrapperParams = {}) => callFlat(EXPLORE_ODDS_DEF, params);
 /** snake_case alias of {@link foxApiExploreOdds} (py/R parity). */
 export const fox_api_explore_odds = foxApiExploreOdds;
 
@@ -429,7 +469,7 @@ const FOXPOLLS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiFoxpolls({});
  */
-export const foxApiFoxpolls: Wrapper = (params: WrapperParams = {}) => callFlat(FOXPOLLS_DEF, params);
+export const foxApiFoxpolls: Wrapper<Row[], FoxApiFoxpollsParams> = (params: WrapperParams = {}) => callFlat(FOXPOLLS_DEF, params);
 /** snake_case alias of {@link foxApiFoxpolls} (py/R parity). */
 export const fox_api_foxpolls = foxApiFoxpolls;
 
@@ -470,7 +510,7 @@ const FS_FEED_DEF: WrapperDef = {
  * @example await sdv.fox.foxFsFeed({});
  * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/feed with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
  */
-export const foxFsFeed: Wrapper = (params: WrapperParams = {}) => callFlat(FS_FEED_DEF, params);
+export const foxFsFeed: Wrapper<Row[], FoxFsFeedParams> = (params: WrapperParams = {}) => callFlat(FS_FEED_DEF, params);
 /**
  * snake_case alias of {@link foxFsFeed} (py/R parity).
  * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/feed with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
@@ -514,7 +554,7 @@ const FS_IMAGES_DEF: WrapperDef = {
  * @example await sdv.fox.foxFsImages({});
  * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/images with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
  */
-export const foxFsImages: Wrapper = (params: WrapperParams = {}) => callFlat(FS_IMAGES_DEF, params);
+export const foxFsImages: Wrapper<Row[], FoxFsImagesParams> = (params: WrapperParams = {}) => callFlat(FS_IMAGES_DEF, params);
 /**
  * snake_case alias of {@link foxFsImages} (py/R parity).
  * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/images with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
@@ -558,7 +598,7 @@ const FS_LAYOUTS_DEF: WrapperDef = {
  * @example await sdv.fox.foxFsLayouts({});
  * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/layouts with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
  */
-export const foxFsLayouts: Wrapper = (params: WrapperParams = {}) => callFlat(FS_LAYOUTS_DEF, params);
+export const foxFsLayouts: Wrapper<Row[], FoxFsLayoutsParams> = (params: WrapperParams = {}) => callFlat(FS_LAYOUTS_DEF, params);
 /**
  * snake_case alias of {@link foxFsLayouts} (py/R parity).
  * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/layouts with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
@@ -602,7 +642,7 @@ const FS_VIDEOS_DEF: WrapperDef = {
  * @example await sdv.fox.foxFsVideos({});
  * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/videos with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
  */
-export const foxFsVideos: Wrapper = (params: WrapperParams = {}) => callFlat(FS_VIDEOS_DEF, params);
+export const foxFsVideos: Wrapper<Row[], FoxFsVideosParams> = (params: WrapperParams = {}) => callFlat(FS_VIDEOS_DEF, params);
 /**
  * snake_case alias of {@link foxFsVideos} (py/R parity).
  * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/videos with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
@@ -650,7 +690,7 @@ const LEAGUE_CONFERENCES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiLeagueConferences({ sport: '…' });
  */
-export const foxApiLeagueConferences: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_CONFERENCES_DEF, params);
+export const foxApiLeagueConferences: Wrapper<Row[], FoxApiLeagueConferencesParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_CONFERENCES_DEF, params);
 /** snake_case alias of {@link foxApiLeagueConferences} (py/R parity). */
 export const fox_api_league_conferences = foxApiLeagueConferences;
 
@@ -695,7 +735,7 @@ const LEAGUE_HEADER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiLeagueHeader({ sport: '…' });
  */
-export const foxApiLeagueHeader: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_HEADER_DEF, params);
+export const foxApiLeagueHeader: Wrapper<Row[], FoxApiLeagueHeaderParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_HEADER_DEF, params);
 /** snake_case alias of {@link foxApiLeagueHeader} (py/R parity). */
 export const fox_api_league_header = foxApiLeagueHeader;
 
@@ -745,7 +785,7 @@ const LEAGUE_ODDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiLeagueOdds({ sport: '…' });
  */
-export const foxApiLeagueOdds: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_ODDS_DEF, params);
+export const foxApiLeagueOdds: Wrapper<Row[], FoxApiLeagueOddsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_ODDS_DEF, params);
 /** snake_case alias of {@link foxApiLeagueOdds} (py/R parity). */
 export const fox_api_league_odds = foxApiLeagueOdds;
 
@@ -790,7 +830,7 @@ const LEAGUE_PLAYERNEWS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiLeaguePlayernews({ sport: '…' });
  */
-export const foxApiLeaguePlayernews: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_PLAYERNEWS_DEF, params);
+export const foxApiLeaguePlayernews: Wrapper<Row[], FoxApiLeaguePlayernewsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_PLAYERNEWS_DEF, params);
 /** snake_case alias of {@link foxApiLeaguePlayernews} (py/R parity). */
 export const fox_api_league_playernews = foxApiLeaguePlayernews;
 
@@ -835,7 +875,7 @@ const LEAGUE_POLLS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiLeaguePolls({ sport: '…' });
  */
-export const foxApiLeaguePolls: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_POLLS_DEF, params);
+export const foxApiLeaguePolls: Wrapper<Row[], FoxApiLeaguePollsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_POLLS_DEF, params);
 /** snake_case alias of {@link foxApiLeaguePolls} (py/R parity). */
 export const fox_api_league_polls = foxApiLeaguePolls;
 
@@ -880,7 +920,7 @@ const LEAGUE_SCHEDULE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiLeagueSchedule({ sport: '…' });
  */
-export const foxApiLeagueSchedule: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_SCHEDULE_DEF, params);
+export const foxApiLeagueSchedule: Wrapper<Row[], FoxApiLeagueScheduleParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_SCHEDULE_DEF, params);
 /** snake_case alias of {@link foxApiLeagueSchedule} (py/R parity). */
 export const fox_api_league_schedule = foxApiLeagueSchedule;
 
@@ -925,7 +965,7 @@ const LEAGUE_SCORES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiLeagueScores({ sport: '…' });
  */
-export const foxApiLeagueScores: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_SCORES_DEF, params);
+export const foxApiLeagueScores: Wrapper<Row[], FoxApiLeagueScoresParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_SCORES_DEF, params);
 /** snake_case alias of {@link foxApiLeagueScores} (py/R parity). */
 export const fox_api_league_scores = foxApiLeagueScores;
 
@@ -979,7 +1019,7 @@ const LEAGUE_SCORES_SEGMENT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiLeagueScoresSegment({ sport: '…', segment_id: '…' });
  */
-export const foxApiLeagueScoresSegment: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_SCORES_SEGMENT_DEF, params);
+export const foxApiLeagueScoresSegment: Wrapper<Row[], FoxApiLeagueScoresSegmentParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_SCORES_SEGMENT_DEF, params);
 /** snake_case alias of {@link foxApiLeagueScoresSegment} (py/R parity). */
 export const fox_api_league_scores_segment = foxApiLeagueScoresSegment;
 
@@ -1024,7 +1064,7 @@ const LEAGUE_STANDINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiLeagueStandings({ sport: '…' });
  */
-export const foxApiLeagueStandings: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_STANDINGS_DEF, params);
+export const foxApiLeagueStandings: Wrapper<Row[], FoxApiLeagueStandingsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_STANDINGS_DEF, params);
 /** snake_case alias of {@link foxApiLeagueStandings} (py/R parity). */
 export const fox_api_league_standings = foxApiLeagueStandings;
 
@@ -1069,7 +1109,7 @@ const LEAGUE_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiLeagueStats({ sport: '…' });
  */
-export const foxApiLeagueStats: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_DEF, params);
+export const foxApiLeagueStats: Wrapper<Row[], FoxApiLeagueStatsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_DEF, params);
 /** snake_case alias of {@link foxApiLeagueStats} (py/R parity). */
 export const fox_api_league_stats = foxApiLeagueStats;
 
@@ -1131,7 +1171,7 @@ const LEAGUE_STATS_CON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiLeagueStatsCon({ sport: '…', who: '…', category: '…', page: '…' });
  */
-export const foxApiLeagueStatsCon: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_CON_DEF, params);
+export const foxApiLeagueStatsCon: Wrapper<Row[], FoxApiLeagueStatsConParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_CON_DEF, params);
 /** snake_case alias of {@link foxApiLeagueStatsCon} (py/R parity). */
 export const fox_api_league_stats_con = foxApiLeagueStatsCon;
 
@@ -1176,7 +1216,7 @@ const LEAGUE_TEAMNAV_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiLeagueTeamnav({ sport: '…' });
  */
-export const foxApiLeagueTeamnav: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_TEAMNAV_DEF, params);
+export const foxApiLeagueTeamnav: Wrapper<Row[], FoxApiLeagueTeamnavParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_TEAMNAV_DEF, params);
 /** snake_case alias of {@link foxApiLeagueTeamnav} (py/R parity). */
 export const fox_api_league_teamnav = foxApiLeagueTeamnav;
 
@@ -1226,7 +1266,7 @@ const SCOREBOARD_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiScoreboard({ sport: '…' });
  */
-export const foxApiScoreboard: Wrapper = (params: WrapperParams = {}) => callFlat(SCOREBOARD_DEF, params);
+export const foxApiScoreboard: Wrapper<Row[], FoxApiScoreboardParams> = (params: WrapperParams = {}) => callFlat(SCOREBOARD_DEF, params);
 /** snake_case alias of {@link foxApiScoreboard} (py/R parity). */
 export const fox_api_scoreboard = foxApiScoreboard;
 
@@ -1269,7 +1309,7 @@ const SCORECHIP_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiScorechip({ sport: '…', chip_id: '…' });
  */
-export const foxApiScorechip: Wrapper = (params: WrapperParams = {}) => callFlat(SCORECHIP_DEF, params);
+export const foxApiScorechip: Wrapper<Row[], FoxApiScorechipParams> = (params: WrapperParams = {}) => callFlat(SCORECHIP_DEF, params);
 /** snake_case alias of {@link foxApiScorechip} (py/R parity). */
 export const fox_api_scorechip = foxApiScorechip;
 
@@ -1314,7 +1354,7 @@ const SEARCH_CONTENT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiSearchContent({});
  */
-export const foxApiSearchContent: Wrapper = (params: WrapperParams = {}) => callFlat(SEARCH_CONTENT_DEF, params);
+export const foxApiSearchContent: Wrapper<Row[], FoxApiSearchContentParams> = (params: WrapperParams = {}) => callFlat(SEARCH_CONTENT_DEF, params);
 /** snake_case alias of {@link foxApiSearchContent} (py/R parity). */
 export const fox_api_search_content = foxApiSearchContent;
 
@@ -1359,7 +1399,7 @@ const SEARCH_ENTITIES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiSearchEntities({});
  */
-export const foxApiSearchEntities: Wrapper = (params: WrapperParams = {}) => callFlat(SEARCH_ENTITIES_DEF, params);
+export const foxApiSearchEntities: Wrapper<Row[], FoxApiSearchEntitiesParams> = (params: WrapperParams = {}) => callFlat(SEARCH_ENTITIES_DEF, params);
 /** snake_case alias of {@link foxApiSearchEntities} (py/R parity). */
 export const fox_api_search_entities = foxApiSearchEntities;
 
@@ -1399,7 +1439,7 @@ const SEARCH_POPULAR_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiSearchPopular({});
  */
-export const foxApiSearchPopular: Wrapper = (params: WrapperParams = {}) => callFlat(SEARCH_POPULAR_DEF, params);
+export const foxApiSearchPopular: Wrapper<Row[], FoxApiSearchPopularParams> = (params: WrapperParams = {}) => callFlat(SEARCH_POPULAR_DEF, params);
 /** snake_case alias of {@link foxApiSearchPopular} (py/R parity). */
 export const fox_api_search_popular = foxApiSearchPopular;
 
@@ -1448,7 +1488,7 @@ const TEAM_GAMELOG_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiTeamGamelog({ sport: '…', team_id: '…' });
  */
-export const foxApiTeamGamelog: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_GAMELOG_DEF, params);
+export const foxApiTeamGamelog: Wrapper<Row[], FoxApiTeamGamelogParams> = (params: WrapperParams = {}) => callFlat(TEAM_GAMELOG_DEF, params);
 /** snake_case alias of {@link foxApiTeamGamelog} (py/R parity). */
 export const fox_api_team_gamelog = foxApiTeamGamelog;
 
@@ -1497,7 +1537,7 @@ const TEAM_HEADER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiTeamHeader({ sport: '…', team_id: '…' });
  */
-export const foxApiTeamHeader: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_HEADER_DEF, params);
+export const foxApiTeamHeader: Wrapper<Row[], FoxApiTeamHeaderParams> = (params: WrapperParams = {}) => callFlat(TEAM_HEADER_DEF, params);
 /** snake_case alias of {@link foxApiTeamHeader} (py/R parity). */
 export const fox_api_team_header = foxApiTeamHeader;
 
@@ -1546,7 +1586,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiTeamRoster({ sport: '…', team_id: '…' });
  */
-export const foxApiTeamRoster: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_DEF, params);
+export const foxApiTeamRoster: Wrapper<Row[], FoxApiTeamRosterParams> = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_DEF, params);
 /** snake_case alias of {@link foxApiTeamRoster} (py/R parity). */
 export const fox_api_team_roster = foxApiTeamRoster;
 
@@ -1595,7 +1635,7 @@ const TEAM_STANDINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiTeamStandings({ sport: '…', team_id: '…' });
  */
-export const foxApiTeamStandings: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_STANDINGS_DEF, params);
+export const foxApiTeamStandings: Wrapper<Row[], FoxApiTeamStandingsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STANDINGS_DEF, params);
 /** snake_case alias of {@link foxApiTeamStandings} (py/R parity). */
 export const fox_api_team_standings = foxApiTeamStandings;
 
@@ -1644,7 +1684,7 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiTeamStats({ sport: '…', team_id: '…' });
  */
-export const foxApiTeamStats: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
+export const foxApiTeamStats: Wrapper<Row[], FoxApiTeamStatsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link foxApiTeamStats} (py/R parity). */
 export const fox_api_team_stats = foxApiTeamStats;
 
@@ -1689,7 +1729,7 @@ const TOPEVENTS_SCOREBOARD_SEGMENT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiTopeventsScoreboardSegment({ segment: '…' });
  */
-export const foxApiTopeventsScoreboardSegment: Wrapper = (params: WrapperParams = {}) => callFlat(TOPEVENTS_SCOREBOARD_SEGMENT_DEF, params);
+export const foxApiTopeventsScoreboardSegment: Wrapper<Row[], FoxApiTopeventsScoreboardSegmentParams> = (params: WrapperParams = {}) => callFlat(TOPEVENTS_SCOREBOARD_SEGMENT_DEF, params);
 /** snake_case alias of {@link foxApiTopeventsScoreboardSegment} (py/R parity). */
 export const fox_api_topevents_scoreboard_segment = foxApiTopeventsScoreboardSegment;
 
@@ -1740,7 +1780,7 @@ const TRENDING_ARTICLES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiTrendingArticles({});
  */
-export const foxApiTrendingArticles: Wrapper = (params: WrapperParams = {}) => callFlat(TRENDING_ARTICLES_DEF, params);
+export const foxApiTrendingArticles: Wrapper<Row[], FoxApiTrendingArticlesParams> = (params: WrapperParams = {}) => callFlat(TRENDING_ARTICLES_DEF, params);
 /** snake_case alias of {@link foxApiTrendingArticles} (py/R parity). */
 export const fox_api_trending_articles = foxApiTrendingArticles;
 
@@ -1792,6 +1832,6 @@ const TRENDING_VIDEOS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxApiTrendingVideos({});
  */
-export const foxApiTrendingVideos: Wrapper = (params: WrapperParams = {}) => callFlat(TRENDING_VIDEOS_DEF, params);
+export const foxApiTrendingVideos: Wrapper<Row[], FoxApiTrendingVideosParams> = (params: WrapperParams = {}) => callFlat(TRENDING_VIDEOS_DEF, params);
 /** snake_case alias of {@link foxApiTrendingVideos} (py/R parity). */
 export const fox_api_trending_videos = foxApiTrendingVideos;

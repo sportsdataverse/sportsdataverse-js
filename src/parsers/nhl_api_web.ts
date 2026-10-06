@@ -16,6 +16,7 @@
 // (right_rail -> season_series, club_stats -> skaters).
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -33,7 +34,7 @@ function isPlainObject(v: any): boolean {
  * `periodDescriptor` / `details` sub-dicts. Plays are identified by `eventId` +
  * `sortOrder` and typed via `typeCode` / `typeDescKey`.
  */
-export function parse_nhl_web_pbp(raw: any): Record<string, any>[] {
+export function parse_nhl_web_pbp(raw: any): ParserRow[] {
   return normalize((raw ?? {})?.plays ?? []);
 }
 
@@ -45,7 +46,7 @@ export function parse_nhl_web_pbp(raw: any): Record<string, any>[] {
  * each row with `home_away` ("home"/"away") and `position_group`
  * ("forwards"/"defense"/"goalies") so the output is one tidy long-form frame.
  */
-export function parse_nhl_web_boxscore(raw: any): Record<string, any>[] {
+export function parse_nhl_web_boxscore(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const byTeam = raw.playerByGameStats ?? {};
   const rows: Record<string, any>[] = [];
@@ -66,7 +67,7 @@ export function parse_nhl_web_boxscore(raw: any): Record<string, any>[] {
  * `summary` sub-dict (scoring / threeStars / penalties) is stringified to keep
  * the output one row per call.
  */
-export function parse_nhl_web_landing(raw: any): Record<string, any>[] {
+export function parse_nhl_web_landing(raw: any): ParserRow[] {
   if (!isPlainObject(raw) || Object.keys(raw).length === 0) return [];
   return normalize([raw]);
 }
@@ -80,7 +81,7 @@ export function parse_nhl_web_landing(raw: any): Record<string, any>[] {
  * that returns all of them keyed by section; in the flat-API single-frame
  * contract this returns the PRIMARY sub-frame, `seasonSeries`.
  */
-export function parse_nhl_web_right_rail(raw: any): Record<string, any>[] {
+export function parse_nhl_web_right_rail(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   return normalize(raw.seasonSeries ?? []);
 }
@@ -97,7 +98,7 @@ export function parse_nhl_web_right_rail(raw: any): Record<string, any>[] {
  * Walks every `gameWeek[].games[]` and prefixes the day's `date` onto each game
  * row as `schedule_date`.
  */
-export function parse_nhl_web_schedule(raw: any): Record<string, any>[] {
+export function parse_nhl_web_schedule(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const week = raw.gameWeek ?? [];
   const rows: Record<string, any>[] = [];
@@ -114,7 +115,7 @@ export function parse_nhl_web_schedule(raw: any): Record<string, any>[] {
  * Parse `nhl_api_web_score()` into one row per game for the date. Shape:
  * `{currentDate, games: [...], gameWeek: [...]}` — the `games` array flattened.
  */
-export function parse_nhl_web_score(raw: any): Record<string, any>[] {
+export function parse_nhl_web_score(raw: any): ParserRow[] {
   return normalize((raw ?? {})?.games ?? []);
 }
 
@@ -126,7 +127,7 @@ export function parse_nhl_web_score(raw: any): Record<string, any>[] {
  * plus a few context fields (`currentSeason`, `previousSeason`, `nextSeason`,
  * `clubTimezone`). The context fields are prefixed onto each row as `club_*`.
  */
-export function parse_nhl_web_club_schedule(raw: any): Record<string, any>[] {
+export function parse_nhl_web_club_schedule(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const ctx = {
     club_previous_season: raw.previousSeason,
@@ -143,12 +144,12 @@ export function parse_nhl_web_club_schedule(raw: any): Record<string, any>[] {
 // ---------------------------------------------------------------------------
 
 /** Parse `nhl_api_web_standings()` into one row per team. */
-export function parse_nhl_web_standings(raw: any): Record<string, any>[] {
+export function parse_nhl_web_standings(raw: any): ParserRow[] {
   return normalize((raw ?? {})?.standings ?? []);
 }
 
 /** Parse `nhl_api_web_standings_season()` into one row per season. */
-export function parse_nhl_web_standings_season(raw: any): Record<string, any>[] {
+export function parse_nhl_web_standings_season(raw: any): ParserRow[] {
   return normalize((raw ?? {})?.seasons ?? []);
 }
 
@@ -164,7 +165,7 @@ export function parse_nhl_web_standings_season(raw: any): Record<string, any>[] 
  * dispatcher returning both keyed by section; in the flat-API single-frame
  * contract this returns the PRIMARY sub-frame, `skaters`.
  */
-export function parse_nhl_web_club_stats(raw: any): Record<string, any>[] {
+export function parse_nhl_web_club_stats(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   return normalize(raw.skaters ?? []);
 }
@@ -176,7 +177,7 @@ export function parse_nhl_web_club_stats(raw: any): Record<string, any>[] {
  * three position groups with a `position_group` column so the output is one
  * long-form frame instead of three.
  */
-export function parse_nhl_web_roster(raw: any): Record<string, any>[] {
+export function parse_nhl_web_roster(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const rows: Record<string, any>[] = [];
   for (const posGroup of ["forwards", "defensemen", "goalies"]) {
@@ -191,7 +192,7 @@ export function parse_nhl_web_roster(raw: any): Record<string, any>[] {
  * Parse `nhl_api_web_player_landing()` into a single-row player profile. Nested
  * `featuredStats` / `careerTotals` / `last5Games` sub-frames are stringified.
  */
-export function parse_nhl_web_player_landing(raw: any): Record<string, any>[] {
+export function parse_nhl_web_player_landing(raw: any): ParserRow[] {
   if (!isPlainObject(raw) || Object.keys(raw).length === 0) return [];
   return normalize([raw]);
 }
@@ -200,7 +201,7 @@ export function parse_nhl_web_player_landing(raw: any): Record<string, any>[] {
  * Parse `nhl_api_web_player_game_log()` into one row per game. Walks
  * `payload.gameLog` (~76 games/season for a regular skater).
  */
-export function parse_nhl_web_player_game_log(raw: any): Record<string, any>[] {
+export function parse_nhl_web_player_game_log(raw: any): ParserRow[] {
   return normalize((raw ?? {})?.gameLog ?? []);
 }
 
@@ -217,7 +218,7 @@ export function parse_nhl_web_player_game_log(raw: any): Record<string, any>[] {
  * savePctg: [...]}` for goalies. Walks every top-level list-valued key, tags
  * each row with the `category` it came from, and concatenates.
  */
-export function parse_nhl_web_leaders(raw: any): Record<string, any>[] {
+export function parse_nhl_web_leaders(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const rows: Record<string, any>[] = [];
   for (const [category, players] of Object.entries(raw)) {
@@ -231,7 +232,7 @@ export function parse_nhl_web_leaders(raw: any): Record<string, any>[] {
 }
 
 /** Parse `nhl_api_web_draft_picks()` (and `_now` variants) into one row per pick. */
-export function parse_nhl_web_draft_picks(raw: any): Record<string, any>[] {
+export function parse_nhl_web_draft_picks(raw: any): ParserRow[] {
   return normalize((raw ?? {})?.picks ?? []);
 }
 
@@ -239,7 +240,7 @@ export function parse_nhl_web_draft_picks(raw: any): Record<string, any>[] {
  * Parse `nhl_api_web_player_spotlight()` into one row per featured player. The
  * `/v1/player-spotlight` endpoint returns a bare top-level JSON array.
  */
-export function parse_nhl_web_player_spotlight(raw: any): Record<string, any>[] {
+export function parse_nhl_web_player_spotlight(raw: any): ParserRow[] {
   if (!Array.isArray(raw)) return [];
   return normalize(raw);
 }
@@ -251,7 +252,7 @@ export function parse_nhl_web_player_spotlight(raw: any): Record<string, any>[] 
  * `rankings[]` row is flattened and prefixed with the draft-year / category
  * context so a row carries both the prospect and which board it came from.
  */
-export function parse_nhl_web_draft_rankings(raw: any): Record<string, any>[] {
+export function parse_nhl_web_draft_rankings(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const base = {
     draft_year: raw.draftYear,
@@ -269,7 +270,7 @@ export function parse_nhl_web_draft_rankings(raw: any): Record<string, any>[] {
  * Emits one row per game prefixed with series context (round, series letter,
  * top/bottom seed team ids + abbrevs).
  */
-export function parse_nhl_web_playoff_series(raw: any): Record<string, any>[] {
+export function parse_nhl_web_playoff_series(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const top = raw.topSeedTeam ?? {};
   const bottom = raw.bottomSeedTeam ?? {};

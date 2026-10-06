@@ -7,6 +7,90 @@
 
 import { callFlat } from "../../leagues/_make_flat.js";
 import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  CbsBulkParams,
+  CbsClientConfigParams,
+  CbsCoachRankingsParams,
+  CbsCoachTeamAssociationsParams,
+  CbsDivisionSubdivisionsParams,
+  CbsEndpointRegistryParams,
+  CbsEventEntrantsParams,
+  CbsEventLeaderboardParams,
+  CbsEventParams,
+  CbsEventSeasonsParams,
+  CbsEventVenuesParams,
+  CbsGameBettingSplitsParams,
+  CbsGameBoxscoreParams,
+  CbsGameContentPreviewParams,
+  CbsGameContentRecapParams,
+  CbsGameContentStoryParams,
+  CbsGameFeaturedParams,
+  CbsGameLineupParams,
+  CbsGameOddsHqParams,
+  CbsGameOddsParams,
+  CbsGameOutcomesParams,
+  CbsGameParams,
+  CbsGameProbablePlayersParams,
+  CbsGamePropsParams,
+  CbsGameRtwpParams,
+  CbsGameRuwtHighlightsParams,
+  CbsGameScoringBoxscoresParams,
+  CbsGameScoringDrivesParams,
+  CbsGameScoringLeadersParams,
+  CbsGameScoringPlayerStatsParams,
+  CbsGameScoringPlaysParams,
+  CbsGameScoringRostersParams,
+  CbsGameScoringScoreboardParams,
+  CbsGameScoringScoresParams,
+  CbsGameScoringTeamStatsParams,
+  CbsGameScoringWinprobParams,
+  CbsGameScoringYtdPlayerStatsParams,
+  CbsGameScoringYtdTeamStatsParams,
+  CbsGameTicketParams,
+  CbsGameWeatherParams,
+  CbsGolfEventMarketsParams,
+  CbsGolfPlayerMarketsParams,
+  CbsGolferResultsParams,
+  CbsLeagueParams,
+  CbsLeagueTeamsParams,
+  CbsOddsParams,
+  CbsPlayerCombineDataParams,
+  CbsPlayerDepthChartsParams,
+  CbsPlayerDraftInfoParams,
+  CbsPlayerEncyclopediaParams,
+  CbsPlayerFuturesParams,
+  CbsPlayerGameStatsParams,
+  CbsPlayerHockeyMetaParams,
+  CbsPlayerInjuriesParams,
+  CbsPlayerMetaBaseballParams,
+  CbsPlayerMetaGolfParams,
+  CbsPlayerOutlookParams,
+  CbsPlayerParams,
+  CbsPlayerPositionRankingsParams,
+  CbsPlayerRankingsParams,
+  CbsPlayerRecruitAssociationsParams,
+  CbsPlayerStandingsParams,
+  CbsPlayerStatsParams,
+  CbsPlayerTeamAssociationsParams,
+  CbsPlayerTransactionsParams,
+  CbsRecruitRankingsParams,
+  CbsSeasonParams,
+  CbsSeasonTeamsParams,
+  CbsSportLeaguesParams,
+  CbsSportParams,
+  CbsTeamFuturesParams,
+  CbsTeamMetadataParams,
+  CbsTeamPlayersParams,
+  CbsTeamPollsParams,
+  CbsTeamRankingsParams,
+  CbsTeamRankingsSportslineParams,
+  CbsTeamSeasonsParams,
+  CbsTeamStandingsParams,
+  CbsTeamStandingsSportslineParams,
+  CbsTeamStatsParams,
+  CbsVenueMetadataParams,
+  CbsVenueParams,
+} from "../params/cbs.js";
 
 const BULK_DEF: WrapperDef = {
   "short": "bulk",
@@ -66,7 +150,7 @@ const BULK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsBulk({});
  */
-export const cbsBulk: Wrapper = (params: WrapperParams = {}) => callFlat(BULK_DEF, params);
+export const cbsBulk: Wrapper<Row[], CbsBulkParams> = (params: WrapperParams = {}) => callFlat(BULK_DEF, params);
 /** snake_case alias of {@link cbsBulk} (py/R parity). */
 export const cbs_bulk = cbsBulk;
 
@@ -119,7 +203,7 @@ const CLIENT_CONFIG_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsClientConfig({ client_name: '…' });
  */
-export const cbsClientConfig: Wrapper = (params: WrapperParams = {}) => callFlat(CLIENT_CONFIG_DEF, params);
+export const cbsClientConfig: Wrapper<Row[], CbsClientConfigParams> = (params: WrapperParams = {}) => callFlat(CLIENT_CONFIG_DEF, params);
 /** snake_case alias of {@link cbsClientConfig} (py/R parity). */
 export const cbs_client_config = cbsClientConfig;
 
@@ -150,7 +234,7 @@ const COACH_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsCoachRankings({ coach_id: '…' });
  */
-export const cbsCoachRankings: Wrapper = (params: WrapperParams = {}) => callFlat(COACH_RANKINGS_DEF, params);
+export const cbsCoachRankings: Wrapper<Row[], CbsCoachRankingsParams> = (params: WrapperParams = {}) => callFlat(COACH_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsCoachRankings} (py/R parity). */
 export const cbs_coach_rankings = cbsCoachRankings;
 
@@ -187,7 +271,7 @@ const COACH_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsCoachTeamAssociations({ coach_id: '…' });
  */
-export const cbsCoachTeamAssociations: Wrapper = (params: WrapperParams = {}) => callFlat(COACH_TEAM_ASSOCIATIONS_DEF, params);
+export const cbsCoachTeamAssociations: Wrapper<Row[], CbsCoachTeamAssociationsParams> = (params: WrapperParams = {}) => callFlat(COACH_TEAM_ASSOCIATIONS_DEF, params);
 /** snake_case alias of {@link cbsCoachTeamAssociations} (py/R parity). */
 export const cbs_coach_team_associations = cbsCoachTeamAssociations;
 
@@ -230,7 +314,7 @@ const DIVISION_SUBDIVISIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsDivisionSubdivisions({ division_id: '…' });
  */
-export const cbsDivisionSubdivisions: Wrapper = (params: WrapperParams = {}) => callFlat(DIVISION_SUBDIVISIONS_DEF, params);
+export const cbsDivisionSubdivisions: Wrapper<Row[], CbsDivisionSubdivisionsParams> = (params: WrapperParams = {}) => callFlat(DIVISION_SUBDIVISIONS_DEF, params);
 /** snake_case alias of {@link cbsDivisionSubdivisions} (py/R parity). */
 export const cbs_division_subdivisions = cbsDivisionSubdivisions;
 
@@ -256,7 +340,7 @@ const ENDPOINT_REGISTRY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsEndpointRegistry({});
  */
-export const cbsEndpointRegistry: Wrapper = (params: WrapperParams = {}) => callFlat(ENDPOINT_REGISTRY_DEF, params);
+export const cbsEndpointRegistry: Wrapper<Row[], CbsEndpointRegistryParams> = (params: WrapperParams = {}) => callFlat(ENDPOINT_REGISTRY_DEF, params);
 /** snake_case alias of {@link cbsEndpointRegistry} (py/R parity). */
 export const cbs_endpoint_registry = cbsEndpointRegistry;
 
@@ -298,7 +382,7 @@ const EVENT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsEvent({ event_id: '…' });
  */
-export const cbsEvent: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_DEF, params);
+export const cbsEvent: Wrapper<Row[], CbsEventParams> = (params: WrapperParams = {}) => callFlat(EVENT_DEF, params);
 /** snake_case alias of {@link cbsEvent} (py/R parity). */
 export const cbs_event = cbsEvent;
 
@@ -329,7 +413,7 @@ const EVENT_ENTRANTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsEventEntrants({ event_id: '…' });
  */
-export const cbsEventEntrants: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_ENTRANTS_DEF, params);
+export const cbsEventEntrants: Wrapper<Row[], CbsEventEntrantsParams> = (params: WrapperParams = {}) => callFlat(EVENT_ENTRANTS_DEF, params);
 /** snake_case alias of {@link cbsEventEntrants} (py/R parity). */
 export const cbs_event_entrants = cbsEventEntrants;
 
@@ -360,7 +444,7 @@ const EVENT_LEADERBOARD_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsEventLeaderboard({ event_id: '…' });
  */
-export const cbsEventLeaderboard: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_LEADERBOARD_DEF, params);
+export const cbsEventLeaderboard: Wrapper<Row[], CbsEventLeaderboardParams> = (params: WrapperParams = {}) => callFlat(EVENT_LEADERBOARD_DEF, params);
 /** snake_case alias of {@link cbsEventLeaderboard} (py/R parity). */
 export const cbs_event_leaderboard = cbsEventLeaderboard;
 
@@ -391,7 +475,7 @@ const EVENT_SEASONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsEventSeasons({ event_id: '…' });
  */
-export const cbsEventSeasons: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_SEASONS_DEF, params);
+export const cbsEventSeasons: Wrapper<Row[], CbsEventSeasonsParams> = (params: WrapperParams = {}) => callFlat(EVENT_SEASONS_DEF, params);
 /** snake_case alias of {@link cbsEventSeasons} (py/R parity). */
 export const cbs_event_seasons = cbsEventSeasons;
 
@@ -422,7 +506,7 @@ const EVENT_VENUES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsEventVenues({ event_id: '…' });
  */
-export const cbsEventVenues: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_VENUES_DEF, params);
+export const cbsEventVenues: Wrapper<Row[], CbsEventVenuesParams> = (params: WrapperParams = {}) => callFlat(EVENT_VENUES_DEF, params);
 /** snake_case alias of {@link cbsEventVenues} (py/R parity). */
 export const cbs_event_venues = cbsEventVenues;
 
@@ -464,7 +548,7 @@ const GAME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGame({ game_id: '…' });
  */
-export const cbsGame: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_DEF, params);
+export const cbsGame: Wrapper<Row[], CbsGameParams> = (params: WrapperParams = {}) => callFlat(GAME_DEF, params);
 /** snake_case alias of {@link cbsGame} (py/R parity). */
 export const cbs_game = cbsGame;
 
@@ -495,7 +579,7 @@ const GAME_BETTING_SPLITS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameBettingSplits({ game_id: '…' });
  */
-export const cbsGameBettingSplits: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_BETTING_SPLITS_DEF, params);
+export const cbsGameBettingSplits: Wrapper<Row[], CbsGameBettingSplitsParams> = (params: WrapperParams = {}) => callFlat(GAME_BETTING_SPLITS_DEF, params);
 /** snake_case alias of {@link cbsGameBettingSplits} (py/R parity). */
 export const cbs_game_betting_splits = cbsGameBettingSplits;
 
@@ -527,7 +611,7 @@ const GAME_BOXSCORE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameBoxscore({ game_id: '…' });
  */
-export const cbsGameBoxscore: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_BOXSCORE_DEF, params);
+export const cbsGameBoxscore: Wrapper<Row[], CbsGameBoxscoreParams> = (params: WrapperParams = {}) => callFlat(GAME_BOXSCORE_DEF, params);
 /** snake_case alias of {@link cbsGameBoxscore} (py/R parity). */
 export const cbs_game_boxscore = cbsGameBoxscore;
 
@@ -558,7 +642,7 @@ const GAME_CONTENT_PREVIEW_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameContentPreview({ game_id: '…' });
  */
-export const cbsGameContentPreview: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_CONTENT_PREVIEW_DEF, params);
+export const cbsGameContentPreview: Wrapper<Row[], CbsGameContentPreviewParams> = (params: WrapperParams = {}) => callFlat(GAME_CONTENT_PREVIEW_DEF, params);
 /** snake_case alias of {@link cbsGameContentPreview} (py/R parity). */
 export const cbs_game_content_preview = cbsGameContentPreview;
 
@@ -589,7 +673,7 @@ const GAME_CONTENT_RECAP_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameContentRecap({ game_id: '…' });
  */
-export const cbsGameContentRecap: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_CONTENT_RECAP_DEF, params);
+export const cbsGameContentRecap: Wrapper<Row[], CbsGameContentRecapParams> = (params: WrapperParams = {}) => callFlat(GAME_CONTENT_RECAP_DEF, params);
 /** snake_case alias of {@link cbsGameContentRecap} (py/R parity). */
 export const cbs_game_content_recap = cbsGameContentRecap;
 
@@ -626,7 +710,7 @@ const GAME_CONTENT_STORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameContentStory({ game_id: '…' });
  */
-export const cbsGameContentStory: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_CONTENT_STORY_DEF, params);
+export const cbsGameContentStory: Wrapper<Row[], CbsGameContentStoryParams> = (params: WrapperParams = {}) => callFlat(GAME_CONTENT_STORY_DEF, params);
 /** snake_case alias of {@link cbsGameContentStory} (py/R parity). */
 export const cbs_game_content_story = cbsGameContentStory;
 
@@ -658,7 +742,7 @@ const GAME_FEATURED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameFeatured({ game_id: '…' });
  */
-export const cbsGameFeatured: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_FEATURED_DEF, params);
+export const cbsGameFeatured: Wrapper<Row[], CbsGameFeaturedParams> = (params: WrapperParams = {}) => callFlat(GAME_FEATURED_DEF, params);
 /** snake_case alias of {@link cbsGameFeatured} (py/R parity). */
 export const cbs_game_featured = cbsGameFeatured;
 
@@ -695,7 +779,7 @@ const GAME_LINEUP_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameLineup({ game_id: '…' });
  */
-export const cbsGameLineup: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_LINEUP_DEF, params);
+export const cbsGameLineup: Wrapper<Row[], CbsGameLineupParams> = (params: WrapperParams = {}) => callFlat(GAME_LINEUP_DEF, params);
 /** snake_case alias of {@link cbsGameLineup} (py/R parity). */
 export const cbs_game_lineup = cbsGameLineup;
 
@@ -752,7 +836,7 @@ const GAME_ODDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameOdds({ game_id: '…' });
  */
-export const cbsGameOdds: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_ODDS_DEF, params);
+export const cbsGameOdds: Wrapper<Row[], CbsGameOddsParams> = (params: WrapperParams = {}) => callFlat(GAME_ODDS_DEF, params);
 /** snake_case alias of {@link cbsGameOdds} (py/R parity). */
 export const cbs_game_odds = cbsGameOdds;
 
@@ -784,7 +868,7 @@ const GAME_ODDS_HQ_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameOddsHq({ game_id: '…' });
  */
-export const cbsGameOddsHq: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_ODDS_HQ_DEF, params);
+export const cbsGameOddsHq: Wrapper<Row[], CbsGameOddsHqParams> = (params: WrapperParams = {}) => callFlat(GAME_ODDS_HQ_DEF, params);
 /** snake_case alias of {@link cbsGameOddsHq} (py/R parity). */
 export const cbs_game_odds_hq = cbsGameOddsHq;
 
@@ -815,7 +899,7 @@ const GAME_OUTCOMES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameOutcomes({ game_id: '…' });
  */
-export const cbsGameOutcomes: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_OUTCOMES_DEF, params);
+export const cbsGameOutcomes: Wrapper<Row[], CbsGameOutcomesParams> = (params: WrapperParams = {}) => callFlat(GAME_OUTCOMES_DEF, params);
 /** snake_case alias of {@link cbsGameOutcomes} (py/R parity). */
 export const cbs_game_outcomes = cbsGameOutcomes;
 
@@ -858,7 +942,7 @@ const GAME_PROBABLE_PLAYERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameProbablePlayers({ game_id: '…' });
  */
-export const cbsGameProbablePlayers: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_PROBABLE_PLAYERS_DEF, params);
+export const cbsGameProbablePlayers: Wrapper<Row[], CbsGameProbablePlayersParams> = (params: WrapperParams = {}) => callFlat(GAME_PROBABLE_PLAYERS_DEF, params);
 /** snake_case alias of {@link cbsGameProbablePlayers} (py/R parity). */
 export const cbs_game_probable_players = cbsGameProbablePlayers;
 
@@ -915,7 +999,7 @@ const GAME_PROPS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameProps({ game_id: '…' });
  */
-export const cbsGameProps: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_PROPS_DEF, params);
+export const cbsGameProps: Wrapper<Row[], CbsGamePropsParams> = (params: WrapperParams = {}) => callFlat(GAME_PROPS_DEF, params);
 /** snake_case alias of {@link cbsGameProps} (py/R parity). */
 export const cbs_game_props = cbsGameProps;
 
@@ -946,7 +1030,7 @@ const GAME_RTWP_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameRtwp({ game_id: '…' });
  */
-export const cbsGameRtwp: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_RTWP_DEF, params);
+export const cbsGameRtwp: Wrapper<Row[], CbsGameRtwpParams> = (params: WrapperParams = {}) => callFlat(GAME_RTWP_DEF, params);
 /** snake_case alias of {@link cbsGameRtwp} (py/R parity). */
 export const cbs_game_rtwp = cbsGameRtwp;
 
@@ -978,7 +1062,7 @@ const GAME_RUWT_HIGHLIGHTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameRuwtHighlights({ game_id: '…' });
  */
-export const cbsGameRuwtHighlights: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_RUWT_HIGHLIGHTS_DEF, params);
+export const cbsGameRuwtHighlights: Wrapper<Row[], CbsGameRuwtHighlightsParams> = (params: WrapperParams = {}) => callFlat(GAME_RUWT_HIGHLIGHTS_DEF, params);
 /** snake_case alias of {@link cbsGameRuwtHighlights} (py/R parity). */
 export const cbs_game_ruwt_highlights = cbsGameRuwtHighlights;
 
@@ -1009,7 +1093,7 @@ const GAME_SCORING_BOXSCORES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameScoringBoxscores({ game_id: '…' });
  */
-export const cbsGameScoringBoxscores: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCORING_BOXSCORES_DEF, params);
+export const cbsGameScoringBoxscores: Wrapper<Row[], CbsGameScoringBoxscoresParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_BOXSCORES_DEF, params);
 /** snake_case alias of {@link cbsGameScoringBoxscores} (py/R parity). */
 export const cbs_game_scoring_boxscores = cbsGameScoringBoxscores;
 
@@ -1040,7 +1124,7 @@ const GAME_SCORING_DRIVES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameScoringDrives({ game_id: '…' });
  */
-export const cbsGameScoringDrives: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCORING_DRIVES_DEF, params);
+export const cbsGameScoringDrives: Wrapper<Row[], CbsGameScoringDrivesParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_DRIVES_DEF, params);
 /** snake_case alias of {@link cbsGameScoringDrives} (py/R parity). */
 export const cbs_game_scoring_drives = cbsGameScoringDrives;
 
@@ -1071,7 +1155,7 @@ const GAME_SCORING_LEADERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameScoringLeaders({ game_id: '…' });
  */
-export const cbsGameScoringLeaders: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCORING_LEADERS_DEF, params);
+export const cbsGameScoringLeaders: Wrapper<Row[], CbsGameScoringLeadersParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_LEADERS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringLeaders} (py/R parity). */
 export const cbs_game_scoring_leaders = cbsGameScoringLeaders;
 
@@ -1102,7 +1186,7 @@ const GAME_SCORING_PLAYER_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameScoringPlayerStats({ game_id: '…' });
  */
-export const cbsGameScoringPlayerStats: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCORING_PLAYER_STATS_DEF, params);
+export const cbsGameScoringPlayerStats: Wrapper<Row[], CbsGameScoringPlayerStatsParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringPlayerStats} (py/R parity). */
 export const cbs_game_scoring_player_stats = cbsGameScoringPlayerStats;
 
@@ -1133,7 +1217,7 @@ const GAME_SCORING_PLAYS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameScoringPlays({ game_id: '…' });
  */
-export const cbsGameScoringPlays: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCORING_PLAYS_DEF, params);
+export const cbsGameScoringPlays: Wrapper<Row[], CbsGameScoringPlaysParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_PLAYS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringPlays} (py/R parity). */
 export const cbs_game_scoring_plays = cbsGameScoringPlays;
 
@@ -1164,7 +1248,7 @@ const GAME_SCORING_ROSTERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameScoringRosters({ game_id: '…' });
  */
-export const cbsGameScoringRosters: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCORING_ROSTERS_DEF, params);
+export const cbsGameScoringRosters: Wrapper<Row[], CbsGameScoringRostersParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_ROSTERS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringRosters} (py/R parity). */
 export const cbs_game_scoring_rosters = cbsGameScoringRosters;
 
@@ -1195,7 +1279,7 @@ const GAME_SCORING_SCOREBOARD_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameScoringScoreboard({ game_id: '…' });
  */
-export const cbsGameScoringScoreboard: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCORING_SCOREBOARD_DEF, params);
+export const cbsGameScoringScoreboard: Wrapper<Row[], CbsGameScoringScoreboardParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_SCOREBOARD_DEF, params);
 /** snake_case alias of {@link cbsGameScoringScoreboard} (py/R parity). */
 export const cbs_game_scoring_scoreboard = cbsGameScoringScoreboard;
 
@@ -1226,7 +1310,7 @@ const GAME_SCORING_SCORES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameScoringScores({ game_id: '…' });
  */
-export const cbsGameScoringScores: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCORING_SCORES_DEF, params);
+export const cbsGameScoringScores: Wrapper<Row[], CbsGameScoringScoresParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_SCORES_DEF, params);
 /** snake_case alias of {@link cbsGameScoringScores} (py/R parity). */
 export const cbs_game_scoring_scores = cbsGameScoringScores;
 
@@ -1257,7 +1341,7 @@ const GAME_SCORING_TEAM_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameScoringTeamStats({ game_id: '…' });
  */
-export const cbsGameScoringTeamStats: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCORING_TEAM_STATS_DEF, params);
+export const cbsGameScoringTeamStats: Wrapper<Row[], CbsGameScoringTeamStatsParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_TEAM_STATS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringTeamStats} (py/R parity). */
 export const cbs_game_scoring_team_stats = cbsGameScoringTeamStats;
 
@@ -1288,7 +1372,7 @@ const GAME_SCORING_WINPROB_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameScoringWinprob({ game_id: '…' });
  */
-export const cbsGameScoringWinprob: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCORING_WINPROB_DEF, params);
+export const cbsGameScoringWinprob: Wrapper<Row[], CbsGameScoringWinprobParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_WINPROB_DEF, params);
 /** snake_case alias of {@link cbsGameScoringWinprob} (py/R parity). */
 export const cbs_game_scoring_winprob = cbsGameScoringWinprob;
 
@@ -1319,7 +1403,7 @@ const GAME_SCORING_YTD_PLAYER_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameScoringYtdPlayerStats({ game_id: '…' });
  */
-export const cbsGameScoringYtdPlayerStats: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCORING_YTD_PLAYER_STATS_DEF, params);
+export const cbsGameScoringYtdPlayerStats: Wrapper<Row[], CbsGameScoringYtdPlayerStatsParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_YTD_PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringYtdPlayerStats} (py/R parity). */
 export const cbs_game_scoring_ytd_player_stats = cbsGameScoringYtdPlayerStats;
 
@@ -1350,7 +1434,7 @@ const GAME_SCORING_YTD_TEAM_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameScoringYtdTeamStats({ game_id: '…' });
  */
-export const cbsGameScoringYtdTeamStats: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SCORING_YTD_TEAM_STATS_DEF, params);
+export const cbsGameScoringYtdTeamStats: Wrapper<Row[], CbsGameScoringYtdTeamStatsParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_YTD_TEAM_STATS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringYtdTeamStats} (py/R parity). */
 export const cbs_game_scoring_ytd_team_stats = cbsGameScoringYtdTeamStats;
 
@@ -1381,7 +1465,7 @@ const GAME_TICKET_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameTicket({ game_id: '…' });
  */
-export const cbsGameTicket: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_TICKET_DEF, params);
+export const cbsGameTicket: Wrapper<Row[], CbsGameTicketParams> = (params: WrapperParams = {}) => callFlat(GAME_TICKET_DEF, params);
 /** snake_case alias of {@link cbsGameTicket} (py/R parity). */
 export const cbs_game_ticket = cbsGameTicket;
 
@@ -1413,7 +1497,7 @@ const GAME_WEATHER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGameWeather({ game_id: '…' });
  */
-export const cbsGameWeather: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_WEATHER_DEF, params);
+export const cbsGameWeather: Wrapper<Row[], CbsGameWeatherParams> = (params: WrapperParams = {}) => callFlat(GAME_WEATHER_DEF, params);
 /** snake_case alias of {@link cbsGameWeather} (py/R parity). */
 export const cbs_game_weather = cbsGameWeather;
 
@@ -1444,7 +1528,7 @@ const GOLF_EVENT_MARKETS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGolfEventMarkets({ event_id: '…' });
  */
-export const cbsGolfEventMarkets: Wrapper = (params: WrapperParams = {}) => callFlat(GOLF_EVENT_MARKETS_DEF, params);
+export const cbsGolfEventMarkets: Wrapper<Row[], CbsGolfEventMarketsParams> = (params: WrapperParams = {}) => callFlat(GOLF_EVENT_MARKETS_DEF, params);
 /** snake_case alias of {@link cbsGolfEventMarkets} (py/R parity). */
 export const cbs_golf_event_markets = cbsGolfEventMarkets;
 
@@ -1481,7 +1565,7 @@ const GOLF_PLAYER_MARKETS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGolfPlayerMarkets({ player_id: '…' });
  */
-export const cbsGolfPlayerMarkets: Wrapper = (params: WrapperParams = {}) => callFlat(GOLF_PLAYER_MARKETS_DEF, params);
+export const cbsGolfPlayerMarkets: Wrapper<Row[], CbsGolfPlayerMarketsParams> = (params: WrapperParams = {}) => callFlat(GOLF_PLAYER_MARKETS_DEF, params);
 /** snake_case alias of {@link cbsGolfPlayerMarkets} (py/R parity). */
 export const cbs_golf_player_markets = cbsGolfPlayerMarkets;
 
@@ -1523,7 +1607,7 @@ const GOLFER_RESULTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsGolferResults({ player_id: '…' });
  */
-export const cbsGolferResults: Wrapper = (params: WrapperParams = {}) => callFlat(GOLFER_RESULTS_DEF, params);
+export const cbsGolferResults: Wrapper<Row[], CbsGolferResultsParams> = (params: WrapperParams = {}) => callFlat(GOLFER_RESULTS_DEF, params);
 /** snake_case alias of {@link cbsGolferResults} (py/R parity). */
 export const cbs_golfer_results = cbsGolferResults;
 
@@ -1560,7 +1644,7 @@ const LEAGUE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsLeague({ league_id: '…' });
  */
-export const cbsLeague: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_DEF, params);
+export const cbsLeague: Wrapper<Row[], CbsLeagueParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_DEF, params);
 /** snake_case alias of {@link cbsLeague} (py/R parity). */
 export const cbs_league = cbsLeague;
 
@@ -1597,7 +1681,7 @@ const LEAGUE_TEAMS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsLeagueTeams({ league_id: '…' });
  */
-export const cbsLeagueTeams: Wrapper = (params: WrapperParams = {}) => callFlat(LEAGUE_TEAMS_DEF, params);
+export const cbsLeagueTeams: Wrapper<Row[], CbsLeagueTeamsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_TEAMS_DEF, params);
 /** snake_case alias of {@link cbsLeagueTeams} (py/R parity). */
 export const cbs_league_teams = cbsLeagueTeams;
 
@@ -1628,7 +1712,7 @@ const ODDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsOdds({ game_id: '…' });
  */
-export const cbsOdds: Wrapper = (params: WrapperParams = {}) => callFlat(ODDS_DEF, params);
+export const cbsOdds: Wrapper<Row[], CbsOddsParams> = (params: WrapperParams = {}) => callFlat(ODDS_DEF, params);
 /** snake_case alias of {@link cbsOdds} (py/R parity). */
 export const cbs_odds = cbsOdds;
 
@@ -1675,7 +1759,7 @@ const PLAYER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayer({ player_id: '…' });
  */
-export const cbsPlayer: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_DEF, params);
+export const cbsPlayer: Wrapper<Row[], CbsPlayerParams> = (params: WrapperParams = {}) => callFlat(PLAYER_DEF, params);
 /** snake_case alias of {@link cbsPlayer} (py/R parity). */
 export const cbs_player = cbsPlayer;
 
@@ -1706,7 +1790,7 @@ const PLAYER_COMBINE_DATA_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerCombineData({ player_id: '…' });
  */
-export const cbsPlayerCombineData: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_COMBINE_DATA_DEF, params);
+export const cbsPlayerCombineData: Wrapper<Row[], CbsPlayerCombineDataParams> = (params: WrapperParams = {}) => callFlat(PLAYER_COMBINE_DATA_DEF, params);
 /** snake_case alias of {@link cbsPlayerCombineData} (py/R parity). */
 export const cbs_player_combine_data = cbsPlayerCombineData;
 
@@ -1749,7 +1833,7 @@ const PLAYER_DEPTH_CHARTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerDepthCharts({ player_id: '…' });
  */
-export const cbsPlayerDepthCharts: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_DEPTH_CHARTS_DEF, params);
+export const cbsPlayerDepthCharts: Wrapper<Row[], CbsPlayerDepthChartsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_DEPTH_CHARTS_DEF, params);
 /** snake_case alias of {@link cbsPlayerDepthCharts} (py/R parity). */
 export const cbs_player_depth_charts = cbsPlayerDepthCharts;
 
@@ -1796,7 +1880,7 @@ const PLAYER_DRAFT_INFO_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerDraftInfo({ player_id: '…' });
  */
-export const cbsPlayerDraftInfo: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_DRAFT_INFO_DEF, params);
+export const cbsPlayerDraftInfo: Wrapper<Row[], CbsPlayerDraftInfoParams> = (params: WrapperParams = {}) => callFlat(PLAYER_DRAFT_INFO_DEF, params);
 /** snake_case alias of {@link cbsPlayerDraftInfo} (py/R parity). */
 export const cbs_player_draft_info = cbsPlayerDraftInfo;
 
@@ -1838,7 +1922,7 @@ const PLAYER_ENCYCLOPEDIA_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerEncyclopedia({ player_id: '…' });
  */
-export const cbsPlayerEncyclopedia: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_ENCYCLOPEDIA_DEF, params);
+export const cbsPlayerEncyclopedia: Wrapper<Row[], CbsPlayerEncyclopediaParams> = (params: WrapperParams = {}) => callFlat(PLAYER_ENCYCLOPEDIA_DEF, params);
 /** snake_case alias of {@link cbsPlayerEncyclopedia} (py/R parity). */
 export const cbs_player_encyclopedia = cbsPlayerEncyclopedia;
 
@@ -1869,7 +1953,7 @@ const PLAYER_FUTURES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerFutures({ player_id: '…' });
  */
-export const cbsPlayerFutures: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_FUTURES_DEF, params);
+export const cbsPlayerFutures: Wrapper<Row[], CbsPlayerFuturesParams> = (params: WrapperParams = {}) => callFlat(PLAYER_FUTURES_DEF, params);
 /** snake_case alias of {@link cbsPlayerFutures} (py/R parity). */
 export const cbs_player_futures = cbsPlayerFutures;
 
@@ -1916,7 +2000,7 @@ const PLAYER_GAME_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerGameStats({ player_id: '…' });
  */
-export const cbsPlayerGameStats: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_GAME_STATS_DEF, params);
+export const cbsPlayerGameStats: Wrapper<Row[], CbsPlayerGameStatsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_GAME_STATS_DEF, params);
 /** snake_case alias of {@link cbsPlayerGameStats} (py/R parity). */
 export const cbs_player_game_stats = cbsPlayerGameStats;
 
@@ -1948,7 +2032,7 @@ const PLAYER_HOCKEY_META_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerHockeyMeta({ player_id: '…' });
  */
-export const cbsPlayerHockeyMeta: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_HOCKEY_META_DEF, params);
+export const cbsPlayerHockeyMeta: Wrapper<Row[], CbsPlayerHockeyMetaParams> = (params: WrapperParams = {}) => callFlat(PLAYER_HOCKEY_META_DEF, params);
 /** snake_case alias of {@link cbsPlayerHockeyMeta} (py/R parity). */
 export const cbs_player_hockey_meta = cbsPlayerHockeyMeta;
 
@@ -1985,7 +2069,7 @@ const PLAYER_INJURIES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerInjuries({ player_id: '…' });
  */
-export const cbsPlayerInjuries: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_INJURIES_DEF, params);
+export const cbsPlayerInjuries: Wrapper<Row[], CbsPlayerInjuriesParams> = (params: WrapperParams = {}) => callFlat(PLAYER_INJURIES_DEF, params);
 /** snake_case alias of {@link cbsPlayerInjuries} (py/R parity). */
 export const cbs_player_injuries = cbsPlayerInjuries;
 
@@ -2017,7 +2101,7 @@ const PLAYER_META_BASEBALL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerMetaBaseball({ player_id: '…' });
  */
-export const cbsPlayerMetaBaseball: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_META_BASEBALL_DEF, params);
+export const cbsPlayerMetaBaseball: Wrapper<Row[], CbsPlayerMetaBaseballParams> = (params: WrapperParams = {}) => callFlat(PLAYER_META_BASEBALL_DEF, params);
 /** snake_case alias of {@link cbsPlayerMetaBaseball} (py/R parity). */
 export const cbs_player_meta_baseball = cbsPlayerMetaBaseball;
 
@@ -2049,7 +2133,7 @@ const PLAYER_META_GOLF_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerMetaGolf({ player_id: '…' });
  */
-export const cbsPlayerMetaGolf: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_META_GOLF_DEF, params);
+export const cbsPlayerMetaGolf: Wrapper<Row[], CbsPlayerMetaGolfParams> = (params: WrapperParams = {}) => callFlat(PLAYER_META_GOLF_DEF, params);
 /** snake_case alias of {@link cbsPlayerMetaGolf} (py/R parity). */
 export const cbs_player_meta_golf = cbsPlayerMetaGolf;
 
@@ -2086,7 +2170,7 @@ const PLAYER_OUTLOOK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerOutlook({ player_id: '…' });
  */
-export const cbsPlayerOutlook: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_OUTLOOK_DEF, params);
+export const cbsPlayerOutlook: Wrapper<Row[], CbsPlayerOutlookParams> = (params: WrapperParams = {}) => callFlat(PLAYER_OUTLOOK_DEF, params);
 /** snake_case alias of {@link cbsPlayerOutlook} (py/R parity). */
 export const cbs_player_outlook = cbsPlayerOutlook;
 
@@ -2124,7 +2208,7 @@ const PLAYER_POSITION_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerPositionRankings({ player_id: '…' });
  */
-export const cbsPlayerPositionRankings: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_POSITION_RANKINGS_DEF, params);
+export const cbsPlayerPositionRankings: Wrapper<Row[], CbsPlayerPositionRankingsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_POSITION_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsPlayerPositionRankings} (py/R parity). */
 export const cbs_player_position_rankings = cbsPlayerPositionRankings;
 
@@ -2181,7 +2265,7 @@ const PLAYER_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerRankings({ player_id: '…' });
  */
-export const cbsPlayerRankings: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_RANKINGS_DEF, params);
+export const cbsPlayerRankings: Wrapper<Row[], CbsPlayerRankingsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsPlayerRankings} (py/R parity). */
 export const cbs_player_rankings = cbsPlayerRankings;
 
@@ -2219,7 +2303,7 @@ const PLAYER_RECRUIT_ASSOCIATIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerRecruitAssociations({ player_id: '…' });
  */
-export const cbsPlayerRecruitAssociations: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_RECRUIT_ASSOCIATIONS_DEF, params);
+export const cbsPlayerRecruitAssociations: Wrapper<Row[], CbsPlayerRecruitAssociationsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_RECRUIT_ASSOCIATIONS_DEF, params);
 /** snake_case alias of {@link cbsPlayerRecruitAssociations} (py/R parity). */
 export const cbs_player_recruit_associations = cbsPlayerRecruitAssociations;
 
@@ -2276,7 +2360,7 @@ const PLAYER_STANDINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerStandings({ player_id: '…' });
  */
-export const cbsPlayerStandings: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_STANDINGS_DEF, params);
+export const cbsPlayerStandings: Wrapper<Row[], CbsPlayerStandingsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_STANDINGS_DEF, params);
 /** snake_case alias of {@link cbsPlayerStandings} (py/R parity). */
 export const cbs_player_standings = cbsPlayerStandings;
 
@@ -2343,7 +2427,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerStats({ player_id: '…' });
  */
-export const cbsPlayerStats: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
+export const cbsPlayerStats: Wrapper<Row[], CbsPlayerStatsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link cbsPlayerStats} (py/R parity). */
 export const cbs_player_stats = cbsPlayerStats;
 
@@ -2390,7 +2474,7 @@ const PLAYER_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerTeamAssociations({ player_id: '…' });
  */
-export const cbsPlayerTeamAssociations: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_TEAM_ASSOCIATIONS_DEF, params);
+export const cbsPlayerTeamAssociations: Wrapper<Row[], CbsPlayerTeamAssociationsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_TEAM_ASSOCIATIONS_DEF, params);
 /** snake_case alias of {@link cbsPlayerTeamAssociations} (py/R parity). */
 export const cbs_player_team_associations = cbsPlayerTeamAssociations;
 
@@ -2447,7 +2531,7 @@ const PLAYER_TRANSACTIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsPlayerTransactions({ player_id: '…' });
  */
-export const cbsPlayerTransactions: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_TRANSACTIONS_DEF, params);
+export const cbsPlayerTransactions: Wrapper<Row[], CbsPlayerTransactionsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_TRANSACTIONS_DEF, params);
 /** snake_case alias of {@link cbsPlayerTransactions} (py/R parity). */
 export const cbs_player_transactions = cbsPlayerTransactions;
 
@@ -2478,7 +2562,7 @@ const RECRUIT_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsRecruitRankings({ player_id: '…' });
  */
-export const cbsRecruitRankings: Wrapper = (params: WrapperParams = {}) => callFlat(RECRUIT_RANKINGS_DEF, params);
+export const cbsRecruitRankings: Wrapper<Row[], CbsRecruitRankingsParams> = (params: WrapperParams = {}) => callFlat(RECRUIT_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsRecruitRankings} (py/R parity). */
 export const cbs_recruit_rankings = cbsRecruitRankings;
 
@@ -2520,7 +2604,7 @@ const SEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsSeason({ season_id: '…' });
  */
-export const cbsSeason: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_DEF, params);
+export const cbsSeason: Wrapper<Row[], CbsSeasonParams> = (params: WrapperParams = {}) => callFlat(SEASON_DEF, params);
 /** snake_case alias of {@link cbsSeason} (py/R parity). */
 export const cbs_season = cbsSeason;
 
@@ -2557,7 +2641,7 @@ const SEASON_TEAMS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsSeasonTeams({ season_id: '…' });
  */
-export const cbsSeasonTeams: Wrapper = (params: WrapperParams = {}) => callFlat(SEASON_TEAMS_DEF, params);
+export const cbsSeasonTeams: Wrapper<Row[], CbsSeasonTeamsParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAMS_DEF, params);
 /** snake_case alias of {@link cbsSeasonTeams} (py/R parity). */
 export const cbs_season_teams = cbsSeasonTeams;
 
@@ -2594,7 +2678,7 @@ const SPORT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsSport({ sport_id: '…' });
  */
-export const cbsSport: Wrapper = (params: WrapperParams = {}) => callFlat(SPORT_DEF, params);
+export const cbsSport: Wrapper<Row[], CbsSportParams> = (params: WrapperParams = {}) => callFlat(SPORT_DEF, params);
 /** snake_case alias of {@link cbsSport} (py/R parity). */
 export const cbs_sport = cbsSport;
 
@@ -2625,7 +2709,7 @@ const SPORT_LEAGUES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsSportLeagues({ sport_id: '…' });
  */
-export const cbsSportLeagues: Wrapper = (params: WrapperParams = {}) => callFlat(SPORT_LEAGUES_DEF, params);
+export const cbsSportLeagues: Wrapper<Row[], CbsSportLeaguesParams> = (params: WrapperParams = {}) => callFlat(SPORT_LEAGUES_DEF, params);
 /** snake_case alias of {@link cbsSportLeagues} (py/R parity). */
 export const cbs_sport_leagues = cbsSportLeagues;
 
@@ -2656,7 +2740,7 @@ const TEAM_FUTURES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsTeamFutures({ team_id: '…' });
  */
-export const cbsTeamFutures: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_FUTURES_DEF, params);
+export const cbsTeamFutures: Wrapper<Row[], CbsTeamFuturesParams> = (params: WrapperParams = {}) => callFlat(TEAM_FUTURES_DEF, params);
 /** snake_case alias of {@link cbsTeamFutures} (py/R parity). */
 export const cbs_team_futures = cbsTeamFutures;
 
@@ -2693,7 +2777,7 @@ const TEAM_METADATA_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsTeamMetadata({ team_id: '…' });
  */
-export const cbsTeamMetadata: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_METADATA_DEF, params);
+export const cbsTeamMetadata: Wrapper<Row[], CbsTeamMetadataParams> = (params: WrapperParams = {}) => callFlat(TEAM_METADATA_DEF, params);
 /** snake_case alias of {@link cbsTeamMetadata} (py/R parity). */
 export const cbs_team_metadata = cbsTeamMetadata;
 
@@ -2730,7 +2814,7 @@ const TEAM_PLAYERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsTeamPlayers({ team_id: '…' });
  */
-export const cbsTeamPlayers: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_PLAYERS_DEF, params);
+export const cbsTeamPlayers: Wrapper<Row[], CbsTeamPlayersParams> = (params: WrapperParams = {}) => callFlat(TEAM_PLAYERS_DEF, params);
 /** snake_case alias of {@link cbsTeamPlayers} (py/R parity). */
 export const cbs_team_players = cbsTeamPlayers;
 
@@ -2772,7 +2856,7 @@ const TEAM_POLLS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsTeamPolls({ team_id: '…' });
  */
-export const cbsTeamPolls: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_POLLS_DEF, params);
+export const cbsTeamPolls: Wrapper<Row[], CbsTeamPollsParams> = (params: WrapperParams = {}) => callFlat(TEAM_POLLS_DEF, params);
 /** snake_case alias of {@link cbsTeamPolls} (py/R parity). */
 export const cbs_team_polls = cbsTeamPolls;
 
@@ -2819,7 +2903,7 @@ const TEAM_RANKINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsTeamRankings({ team_id: '…' });
  */
-export const cbsTeamRankings: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_RANKINGS_DEF, params);
+export const cbsTeamRankings: Wrapper<Row[], CbsTeamRankingsParams> = (params: WrapperParams = {}) => callFlat(TEAM_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsTeamRankings} (py/R parity). */
 export const cbs_team_rankings = cbsTeamRankings;
 
@@ -2851,7 +2935,7 @@ const TEAM_RANKINGS_SPORTSLINE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsTeamRankingsSportsline({ team_id: '…' });
  */
-export const cbsTeamRankingsSportsline: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_RANKINGS_SPORTSLINE_DEF, params);
+export const cbsTeamRankingsSportsline: Wrapper<Row[], CbsTeamRankingsSportslineParams> = (params: WrapperParams = {}) => callFlat(TEAM_RANKINGS_SPORTSLINE_DEF, params);
 /** snake_case alias of {@link cbsTeamRankingsSportsline} (py/R parity). */
 export const cbs_team_rankings_sportsline = cbsTeamRankingsSportsline;
 
@@ -2908,7 +2992,7 @@ const TEAM_SEASONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsTeamSeasons({ team_id: '…' });
  */
-export const cbsTeamSeasons: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_SEASONS_DEF, params);
+export const cbsTeamSeasons: Wrapper<Row[], CbsTeamSeasonsParams> = (params: WrapperParams = {}) => callFlat(TEAM_SEASONS_DEF, params);
 /** snake_case alias of {@link cbsTeamSeasons} (py/R parity). */
 export const cbs_team_seasons = cbsTeamSeasons;
 
@@ -2955,7 +3039,7 @@ const TEAM_STANDINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsTeamStandings({ team_id: '…' });
  */
-export const cbsTeamStandings: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_STANDINGS_DEF, params);
+export const cbsTeamStandings: Wrapper<Row[], CbsTeamStandingsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STANDINGS_DEF, params);
 /** snake_case alias of {@link cbsTeamStandings} (py/R parity). */
 export const cbs_team_standings = cbsTeamStandings;
 
@@ -2993,7 +3077,7 @@ const TEAM_STANDINGS_SPORTSLINE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsTeamStandingsSportsline({ team_id: '…' });
  */
-export const cbsTeamStandingsSportsline: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_STANDINGS_SPORTSLINE_DEF, params);
+export const cbsTeamStandingsSportsline: Wrapper<Row[], CbsTeamStandingsSportslineParams> = (params: WrapperParams = {}) => callFlat(TEAM_STANDINGS_SPORTSLINE_DEF, params);
 /** snake_case alias of {@link cbsTeamStandingsSportsline} (py/R parity). */
 export const cbs_team_standings_sportsline = cbsTeamStandingsSportsline;
 
@@ -3045,7 +3129,7 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsTeamStats({ team_id: '…' });
  */
-export const cbsTeamStats: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
+export const cbsTeamStats: Wrapper<Row[], CbsTeamStatsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link cbsTeamStats} (py/R parity). */
 export const cbs_team_stats = cbsTeamStats;
 
@@ -3082,7 +3166,7 @@ const VENUE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsVenue({ venue_id: '…' });
  */
-export const cbsVenue: Wrapper = (params: WrapperParams = {}) => callFlat(VENUE_DEF, params);
+export const cbsVenue: Wrapper<Row[], CbsVenueParams> = (params: WrapperParams = {}) => callFlat(VENUE_DEF, params);
 /** snake_case alias of {@link cbsVenue} (py/R parity). */
 export const cbs_venue = cbsVenue;
 
@@ -3113,6 +3197,6 @@ const VENUE_METADATA_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsVenueMetadata({ venue_id: '…' });
  */
-export const cbsVenueMetadata: Wrapper = (params: WrapperParams = {}) => callFlat(VENUE_METADATA_DEF, params);
+export const cbsVenueMetadata: Wrapper<Row[], CbsVenueMetadataParams> = (params: WrapperParams = {}) => callFlat(VENUE_METADATA_DEF, params);
 /** snake_case alias of {@link cbsVenueMetadata} (py/R parity). */
 export const cbs_venue_metadata = cbsVenueMetadata;

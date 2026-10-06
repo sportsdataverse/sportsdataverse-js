@@ -11,6 +11,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
+import { loadLoaderSchemas, renderLoaderRows } from "./loader-types.mjs";
 
 /** sdv-py `spec.SEASON_TOKEN`. */
 const SEASON_TOKEN = /\{season(?:\s*\+\s*(\d+))?\}/;
@@ -151,7 +152,7 @@ function seasonNote(ld) {
   );
 }
 
-function renderLoaderTs(ns, ld) {
+function renderLoaderTs(ns, ld, row) {
   const defConst = ld.fn.toUpperCase();
   const def = { fn: ld.fn, url: ld.url };
   if (ld.minSeason !== undefined) def.minSeason = ld.minSeason;
@@ -203,24 +204,23 @@ function renderLoaderTs(ns, ld) {
 
   if (ld.deprecatedFor) {
     out +=
-      `export const ${ld.camel} = deprecatedLoader<${loaderType}>(\n` +
+      `export const ${ld.camel} = deprecatedLoader<typeof ${toCamel(ld.deprecatedFor)}>(\n` +
       `  ${JSON.stringify(ld.fn)},\n  ${JSON.stringify(ld.deprecatedFor)},\n` +
       `  () => ${toCamel(ld.deprecatedFor)}\n);\n`;
   } else {
-    out += `export const ${ld.camel} = ${ld.single ? "assetLoader" : "seasonLoader"}(${defConst});\n`;
+    out += `export const ${ld.camel} = ${ld.single ? "assetLoader" : "seasonLoader"}<${row}>(${defConst});\n`;
   }
   out += `/** snake_case alias of {@link ${ld.camel}} (py/R parity). */\nexport const ${ld.fn} = ${ld.camel};\n`;
   return out;
 }
 
 /** One `src/generated/loaders/<league>.ts` module. */
-function renderLeagueModule(ns, loaders) {
+function renderLeagueModule(ns, loaders, rows) {
   const used = new Set();
   const fns = new Set();
   for (const ld of loaders) {
     if (ld.deprecatedFor) {
       fns.add("deprecatedLoader");
-      used.add(ld.single ? "AssetLoader" : "SeasonLoader");
     } else {
       used.add("ReleaseLoaderDef");
       fns.add(ld.single ? "assetLoader" : "seasonLoader");
@@ -232,8 +232,9 @@ function renderLeagueModule(ns, loaders) {
     "//\n" +
     `// ${loaders.length} dataset loaders for \`sdv.${ns}\`: each reads a published\n` +
     "// SportsDataverse release asset (parquet) through src/core/releases.ts.\n\n" +
-    `import {\n${imports.map((i) => `  ${i},`).join("\n")}\n} from "../../core/releases.js";\n`;
-  for (const ld of loaders) body += renderLoaderTs(ns, ld);
+    `import {\n${imports.map((i) => `  ${i},`).join("\n")}\n} from "../../core/releases.js";\n` +
+    `import type {\n${rows.names.map((n) => `  ${n},`).join("\n")}\n} from "../loader_rows/${ns}.js";\n`;
+  for (const ld of loaders) body += renderLoaderTs(ns, ld, rows.rowOf(ld.fn));
   return body;
 }
 
@@ -361,10 +362,22 @@ export function renderLoaderOnlyIndex(ns, loaders, note = "") {
  * Register the generated loader TS modules into `outputs` (path -> content).
  * Docs pages are registered by generate.mjs, which owns the docs layout.
  */
-export function registerLoaderModules(outputs, generatedDir, byLeague) {
+export function registerLoaderModules(outputs, generatedDir, byLeague, schemasDir) {
   const dir = join(generatedDir, "loaders");
+  const rowsDir = join(generatedDir, "loader_rows");
+  const schemas = loadLoaderSchemas(schemasDir);
+  const names = new Map();
   for (const [ns, loaders] of byLeague) {
-    outputs[join(dir, `${ns}.ts`)] = renderLeagueModule(ns, loaders);
+    const rows = renderLoaderRows(ns, loaders, schemas);
+    outputs[join(rowsDir, `${ns}.ts`)] = rows.source;
+    names.set(ns, rows.names);
+    outputs[join(dir, `${ns}.ts`)] = renderLeagueModule(ns, loaders, rows);
   }
   outputs[join(dir, "index.ts")] = renderBarrel(byLeague.keys());
+  // Every loader row type, re-exported from the package root.
+  let barrel = TS_HEADER + "//\n// Every release loader's row type (tools/codegen/loader-types.mjs), re-exported from the package root.\n";
+  for (const ns of [...names.keys()].sort()) {
+    barrel += `\nexport type {\n${names.get(ns).map((n) => `  ${n},\n`).join("")}} from "./${ns}.js";\n`;
+  }
+  outputs[join(rowsDir, "index.ts")] = barrel;
 }

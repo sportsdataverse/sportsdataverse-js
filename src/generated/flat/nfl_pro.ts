@@ -7,6 +7,24 @@
 
 import { callFlat } from "../../leagues/_make_flat.js";
 import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  NflProDefenseNearestSeasonParams,
+  NflProDefenseNearestWeekParams,
+  NflProDefenseOverviewSeasonParams,
+  NflProDefenseOverviewWeekParams,
+  NflProFantasyGameParams,
+  NflProFantasySeasonParams,
+  NflProPlayersOffensePassingSeasonParams,
+  NflProPlayersOffensePassingWeekParams,
+  NflProPlayersOffenseReceivingSeasonParams,
+  NflProPlayersOffenseReceivingWeekParams,
+  NflProPlayersOffenseRushingSeasonParams,
+  NflProPlayersOffenseRushingWeekParams,
+  NflProTeamDefenseOverviewSeasonParams,
+  NflProTeamDefenseOverviewWeekParams,
+  NflProTeamOffenseOverviewSeasonParams,
+  NflProTeamOffenseOverviewWeekParams,
+} from "../params/nfl_pro.js";
 
 const DEFENSE_NEAREST_SEASON_DEF: WrapperDef = {
   "short": "defense_nearest_season",
@@ -80,7 +98,7 @@ const DEFENSE_NEAREST_SEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProDefenseNearestSeason({});
  */
-export const nflProDefenseNearestSeason: Wrapper = (params: WrapperParams = {}) => callFlat(DEFENSE_NEAREST_SEASON_DEF, params);
+export const nflProDefenseNearestSeason: Wrapper<Row[], NflProDefenseNearestSeasonParams> = (params: WrapperParams = {}) => callFlat(DEFENSE_NEAREST_SEASON_DEF, params);
 /** snake_case alias of {@link nflProDefenseNearestSeason} (py/R parity). */
 export const nfl_pro_defense_nearest_season = nflProDefenseNearestSeason;
 
@@ -162,7 +180,7 @@ const DEFENSE_NEAREST_WEEK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProDefenseNearestWeek({});
  */
-export const nflProDefenseNearestWeek: Wrapper = (params: WrapperParams = {}) => callFlat(DEFENSE_NEAREST_WEEK_DEF, params);
+export const nflProDefenseNearestWeek: Wrapper<Row[], NflProDefenseNearestWeekParams> = (params: WrapperParams = {}) => callFlat(DEFENSE_NEAREST_WEEK_DEF, params);
 /** snake_case alias of {@link nflProDefenseNearestWeek} (py/R parity). */
 export const nfl_pro_defense_nearest_week = nflProDefenseNearestWeek;
 
@@ -238,7 +256,7 @@ const DEFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProDefenseOverviewSeason({});
  */
-export const nflProDefenseOverviewSeason: Wrapper = (params: WrapperParams = {}) => callFlat(DEFENSE_OVERVIEW_SEASON_DEF, params);
+export const nflProDefenseOverviewSeason: Wrapper<Row[], NflProDefenseOverviewSeasonParams> = (params: WrapperParams = {}) => callFlat(DEFENSE_OVERVIEW_SEASON_DEF, params);
 /** snake_case alias of {@link nflProDefenseOverviewSeason} (py/R parity). */
 export const nfl_pro_defense_overview_season = nflProDefenseOverviewSeason;
 
@@ -320,7 +338,7 @@ const DEFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProDefenseOverviewWeek({});
  */
-export const nflProDefenseOverviewWeek: Wrapper = (params: WrapperParams = {}) => callFlat(DEFENSE_OVERVIEW_WEEK_DEF, params);
+export const nflProDefenseOverviewWeek: Wrapper<Row[], NflProDefenseOverviewWeekParams> = (params: WrapperParams = {}) => callFlat(DEFENSE_OVERVIEW_WEEK_DEF, params);
 /** snake_case alias of {@link nflProDefenseOverviewWeek} (py/R parity). */
 export const nfl_pro_defense_overview_week = nflProDefenseOverviewWeek;
 
@@ -401,7 +419,7 @@ const FANTASY_GAME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProFantasyGame({});
  */
-export const nflProFantasyGame: Wrapper = (params: WrapperParams = {}) => callFlat(FANTASY_GAME_DEF, params);
+export const nflProFantasyGame: Wrapper<Row[], NflProFantasyGameParams> = (params: WrapperParams = {}) => callFlat(FANTASY_GAME_DEF, params);
 /** snake_case alias of {@link nflProFantasyGame} (py/R parity). */
 export const nfl_pro_fantasy_game = nflProFantasyGame;
 
@@ -483,7 +501,7 @@ const FANTASY_SEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProFantasySeason({});
  */
-export const nflProFantasySeason: Wrapper = (params: WrapperParams = {}) => callFlat(FANTASY_SEASON_DEF, params);
+export const nflProFantasySeason: Wrapper<Row[], NflProFantasySeasonParams> = (params: WrapperParams = {}) => callFlat(FANTASY_SEASON_DEF, params);
 /** snake_case alias of {@link nflProFantasySeason} (py/R parity). */
 export const nfl_pro_fantasy_season = nflProFantasySeason;
 
@@ -559,7 +577,7 @@ const PLAYERS_OFFENSE_PASSING_SEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProPlayersOffensePassingSeason({});
  */
-export const nflProPlayersOffensePassingSeason: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_PASSING_SEASON_DEF, params);
+export const nflProPlayersOffensePassingSeason: Wrapper<Row[], NflProPlayersOffensePassingSeasonParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_PASSING_SEASON_DEF, params);
 /** snake_case alias of {@link nflProPlayersOffensePassingSeason} (py/R parity). */
 export const nfl_pro_players_offense_passing_season = nflProPlayersOffensePassingSeason;
 
@@ -641,7 +659,7 @@ const PLAYERS_OFFENSE_PASSING_WEEK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProPlayersOffensePassingWeek({});
  */
-export const nflProPlayersOffensePassingWeek: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_PASSING_WEEK_DEF, params);
+export const nflProPlayersOffensePassingWeek: Wrapper<Row[], NflProPlayersOffensePassingWeekParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_PASSING_WEEK_DEF, params);
 /** snake_case alias of {@link nflProPlayersOffensePassingWeek} (py/R parity). */
 export const nfl_pro_players_offense_passing_week = nflProPlayersOffensePassingWeek;
 
@@ -717,7 +735,7 @@ const PLAYERS_OFFENSE_RECEIVING_SEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProPlayersOffenseReceivingSeason({});
  */
-export const nflProPlayersOffenseReceivingSeason: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_RECEIVING_SEASON_DEF, params);
+export const nflProPlayersOffenseReceivingSeason: Wrapper<Row[], NflProPlayersOffenseReceivingSeasonParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_RECEIVING_SEASON_DEF, params);
 /** snake_case alias of {@link nflProPlayersOffenseReceivingSeason} (py/R parity). */
 export const nfl_pro_players_offense_receiving_season = nflProPlayersOffenseReceivingSeason;
 
@@ -799,7 +817,7 @@ const PLAYERS_OFFENSE_RECEIVING_WEEK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProPlayersOffenseReceivingWeek({});
  */
-export const nflProPlayersOffenseReceivingWeek: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_RECEIVING_WEEK_DEF, params);
+export const nflProPlayersOffenseReceivingWeek: Wrapper<Row[], NflProPlayersOffenseReceivingWeekParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_RECEIVING_WEEK_DEF, params);
 /** snake_case alias of {@link nflProPlayersOffenseReceivingWeek} (py/R parity). */
 export const nfl_pro_players_offense_receiving_week = nflProPlayersOffenseReceivingWeek;
 
@@ -875,7 +893,7 @@ const PLAYERS_OFFENSE_RUSHING_SEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProPlayersOffenseRushingSeason({});
  */
-export const nflProPlayersOffenseRushingSeason: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_RUSHING_SEASON_DEF, params);
+export const nflProPlayersOffenseRushingSeason: Wrapper<Row[], NflProPlayersOffenseRushingSeasonParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_RUSHING_SEASON_DEF, params);
 /** snake_case alias of {@link nflProPlayersOffenseRushingSeason} (py/R parity). */
 export const nfl_pro_players_offense_rushing_season = nflProPlayersOffenseRushingSeason;
 
@@ -957,7 +975,7 @@ const PLAYERS_OFFENSE_RUSHING_WEEK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProPlayersOffenseRushingWeek({});
  */
-export const nflProPlayersOffenseRushingWeek: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_RUSHING_WEEK_DEF, params);
+export const nflProPlayersOffenseRushingWeek: Wrapper<Row[], NflProPlayersOffenseRushingWeekParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_OFFENSE_RUSHING_WEEK_DEF, params);
 /** snake_case alias of {@link nflProPlayersOffenseRushingWeek} (py/R parity). */
 export const nfl_pro_players_offense_rushing_week = nflProPlayersOffenseRushingWeek;
 
@@ -1027,7 +1045,7 @@ const TEAM_DEFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProTeamDefenseOverviewSeason({});
  */
-export const nflProTeamDefenseOverviewSeason: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_DEFENSE_OVERVIEW_SEASON_DEF, params);
+export const nflProTeamDefenseOverviewSeason: Wrapper<Row[], NflProTeamDefenseOverviewSeasonParams> = (params: WrapperParams = {}) => callFlat(TEAM_DEFENSE_OVERVIEW_SEASON_DEF, params);
 /** snake_case alias of {@link nflProTeamDefenseOverviewSeason} (py/R parity). */
 export const nfl_pro_team_defense_overview_season = nflProTeamDefenseOverviewSeason;
 
@@ -1097,7 +1115,7 @@ const TEAM_DEFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProTeamDefenseOverviewWeek({});
  */
-export const nflProTeamDefenseOverviewWeek: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_DEFENSE_OVERVIEW_WEEK_DEF, params);
+export const nflProTeamDefenseOverviewWeek: Wrapper<Row[], NflProTeamDefenseOverviewWeekParams> = (params: WrapperParams = {}) => callFlat(TEAM_DEFENSE_OVERVIEW_WEEK_DEF, params);
 /** snake_case alias of {@link nflProTeamDefenseOverviewWeek} (py/R parity). */
 export const nfl_pro_team_defense_overview_week = nflProTeamDefenseOverviewWeek;
 
@@ -1167,7 +1185,7 @@ const TEAM_OFFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProTeamOffenseOverviewSeason({});
  */
-export const nflProTeamOffenseOverviewSeason: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_OFFENSE_OVERVIEW_SEASON_DEF, params);
+export const nflProTeamOffenseOverviewSeason: Wrapper<Row[], NflProTeamOffenseOverviewSeasonParams> = (params: WrapperParams = {}) => callFlat(TEAM_OFFENSE_OVERVIEW_SEASON_DEF, params);
 /** snake_case alias of {@link nflProTeamOffenseOverviewSeason} (py/R parity). */
 export const nfl_pro_team_offense_overview_season = nflProTeamOffenseOverviewSeason;
 
@@ -1237,6 +1255,6 @@ const TEAM_OFFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflProTeamOffenseOverviewWeek({});
  */
-export const nflProTeamOffenseOverviewWeek: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_OFFENSE_OVERVIEW_WEEK_DEF, params);
+export const nflProTeamOffenseOverviewWeek: Wrapper<Row[], NflProTeamOffenseOverviewWeekParams> = (params: WrapperParams = {}) => callFlat(TEAM_OFFENSE_OVERVIEW_WEEK_DEF, params);
 /** snake_case alias of {@link nflProTeamOffenseOverviewWeek} (py/R parity). */
 export const nfl_pro_team_offense_overview_week = nflProTeamOffenseOverviewWeek;

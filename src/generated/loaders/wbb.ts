@@ -10,6 +10,42 @@ import {
   seasonLoader,
   type ReleaseLoaderDef,
 } from "../../core/releases.js";
+import type {
+  LoadWbbPbpRow,
+  LoadWbbPlayerBoxscoreRow,
+  LoadWbbScheduleRow,
+  LoadWbbTeamBoxscoreRow,
+  LoadWbbRatingsRow,
+  LoadWbbPlayerValueRow,
+  LoadWbbGameRostersRow,
+  LoadWbbOfficialsRow,
+  LoadWbbPlayerSeasonStatsRow,
+  LoadWbbRostersRow,
+  LoadWbbShotsRow,
+  LoadWbbStandingsRow,
+  LoadWbbTeamSeasonStatsRow,
+  LoadWbbPlayerCrosswalkRow,
+  LoadWbbScheduleCrosswalkRow,
+  LoadWbbTeamCrosswalkRow,
+  LoadWbbPlayerCoreRow,
+  LoadNcaaWbbRapmRow,
+  LoadNcaaWbbPbpRow,
+  LoadNcaaWbbScheduleRow,
+  LoadNcaaWbbPlayerBoxRow,
+  LoadNcaaWbbTeamBoxRow,
+  LoadNcaaWbbRostersRow,
+  LoadNcaaWbbTeamRostersRow,
+  LoadNcaaWbbTeamIdsRow,
+  LoadNcaaWbbPossessionsRow,
+  LoadNcaaWbbLineupsRow,
+  LoadNcaaWbbMatchupStintsRow,
+  LoadNcaaWbbShotsRow,
+  LoadNcaaWbbRapmWithinTeamRow,
+  LoadWbbGroupsRow,
+  LoadWbbGroupSeasonsRow,
+  LoadWbbGroupAliasesRow,
+  LoadWbbTeamGroupSeasonsRow,
+} from "../loader_rows/wbb.js";
 
 const LOAD_WBB_PBP: ReleaseLoaderDef = {"fn":"load_wbb_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_pbp/play_by_play_{season}.parquet","minSeason":2002};
 
@@ -29,7 +65,7 @@ const LOAD_WBB_PBP: ReleaseLoaderDef = {"fn":"load_wbb_pbp","url":"https://githu
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbPbp({ seasons: 2024, columns: ['game_id', 'sequence_number', 'type_text', 'text', 'score_value'] });
  */
-export const loadWbbPbp = seasonLoader(LOAD_WBB_PBP);
+export const loadWbbPbp = seasonLoader<LoadWbbPbpRow>(LOAD_WBB_PBP);
 /** snake_case alias of {@link loadWbbPbp} (py/R parity). */
 export const load_wbb_pbp = loadWbbPbp;
 
@@ -51,7 +87,7 @@ const LOAD_WBB_PLAYER_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wbb_player_boxsco
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbPlayerBoxscore({ seasons: 2024 });
  */
-export const loadWbbPlayerBoxscore = seasonLoader(LOAD_WBB_PLAYER_BOXSCORE);
+export const loadWbbPlayerBoxscore = seasonLoader<LoadWbbPlayerBoxscoreRow>(LOAD_WBB_PLAYER_BOXSCORE);
 /** snake_case alias of {@link loadWbbPlayerBoxscore} (py/R parity). */
 export const load_wbb_player_boxscore = loadWbbPlayerBoxscore;
 
@@ -73,7 +109,7 @@ const LOAD_WBB_SCHEDULE: ReleaseLoaderDef = {"fn":"load_wbb_schedule","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbSchedule({ seasons: 2024 });
  */
-export const loadWbbSchedule = seasonLoader(LOAD_WBB_SCHEDULE);
+export const loadWbbSchedule = seasonLoader<LoadWbbScheduleRow>(LOAD_WBB_SCHEDULE);
 /** snake_case alias of {@link loadWbbSchedule} (py/R parity). */
 export const load_wbb_schedule = loadWbbSchedule;
 
@@ -95,7 +131,7 @@ const LOAD_WBB_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wbb_team_boxscore",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbTeamBoxscore({ seasons: 2024 });
  */
-export const loadWbbTeamBoxscore = seasonLoader(LOAD_WBB_TEAM_BOXSCORE);
+export const loadWbbTeamBoxscore = seasonLoader<LoadWbbTeamBoxscoreRow>(LOAD_WBB_TEAM_BOXSCORE);
 /** snake_case alias of {@link loadWbbTeamBoxscore} (py/R parity). */
 export const load_wbb_team_boxscore = loadWbbTeamBoxscore;
 
@@ -117,7 +153,7 @@ const LOAD_WBB_RATINGS: ReleaseLoaderDef = {"fn":"load_wbb_ratings","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbRatings({ seasons: 2025 });
  */
-export const loadWbbRatings = seasonLoader(LOAD_WBB_RATINGS);
+export const loadWbbRatings = seasonLoader<LoadWbbRatingsRow>(LOAD_WBB_RATINGS);
 /** snake_case alias of {@link loadWbbRatings} (py/R parity). */
 export const load_wbb_ratings = loadWbbRatings;
 
@@ -139,7 +175,7 @@ const LOAD_WBB_PLAYER_VALUE: ReleaseLoaderDef = {"fn":"load_wbb_player_value","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbPlayerValue({ seasons: 2025 });
  */
-export const loadWbbPlayerValue = seasonLoader(LOAD_WBB_PLAYER_VALUE);
+export const loadWbbPlayerValue = seasonLoader<LoadWbbPlayerValueRow>(LOAD_WBB_PLAYER_VALUE);
 /** snake_case alias of {@link loadWbbPlayerValue} (py/R parity). */
 export const load_wbb_player_value = loadWbbPlayerValue;
 
@@ -161,7 +197,7 @@ const LOAD_WBB_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_wbb_game_rosters","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbGameRosters({ seasons: 2026 });
  */
-export const loadWbbGameRosters = seasonLoader(LOAD_WBB_GAME_ROSTERS);
+export const loadWbbGameRosters = seasonLoader<LoadWbbGameRostersRow>(LOAD_WBB_GAME_ROSTERS);
 /** snake_case alias of {@link loadWbbGameRosters} (py/R parity). */
 export const load_wbb_game_rosters = loadWbbGameRosters;
 
@@ -183,7 +219,7 @@ const LOAD_WBB_OFFICIALS: ReleaseLoaderDef = {"fn":"load_wbb_officials","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbOfficials({ seasons: 2026 });
  */
-export const loadWbbOfficials = seasonLoader(LOAD_WBB_OFFICIALS);
+export const loadWbbOfficials = seasonLoader<LoadWbbOfficialsRow>(LOAD_WBB_OFFICIALS);
 /** snake_case alias of {@link loadWbbOfficials} (py/R parity). */
 export const load_wbb_officials = loadWbbOfficials;
 
@@ -205,7 +241,7 @@ const LOAD_WBB_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wbb_player_se
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbPlayerSeasonStats({ seasons: 2026 });
  */
-export const loadWbbPlayerSeasonStats = seasonLoader(LOAD_WBB_PLAYER_SEASON_STATS);
+export const loadWbbPlayerSeasonStats = seasonLoader<LoadWbbPlayerSeasonStatsRow>(LOAD_WBB_PLAYER_SEASON_STATS);
 /** snake_case alias of {@link loadWbbPlayerSeasonStats} (py/R parity). */
 export const load_wbb_player_season_stats = loadWbbPlayerSeasonStats;
 
@@ -227,7 +263,7 @@ const LOAD_WBB_ROSTERS: ReleaseLoaderDef = {"fn":"load_wbb_rosters","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbRosters({ seasons: 2026 });
  */
-export const loadWbbRosters = seasonLoader(LOAD_WBB_ROSTERS);
+export const loadWbbRosters = seasonLoader<LoadWbbRostersRow>(LOAD_WBB_ROSTERS);
 /** snake_case alias of {@link loadWbbRosters} (py/R parity). */
 export const load_wbb_rosters = loadWbbRosters;
 
@@ -249,7 +285,7 @@ const LOAD_WBB_SHOTS: ReleaseLoaderDef = {"fn":"load_wbb_shots","url":"https://g
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbShots({ seasons: 2026 });
  */
-export const loadWbbShots = seasonLoader(LOAD_WBB_SHOTS);
+export const loadWbbShots = seasonLoader<LoadWbbShotsRow>(LOAD_WBB_SHOTS);
 /** snake_case alias of {@link loadWbbShots} (py/R parity). */
 export const load_wbb_shots = loadWbbShots;
 
@@ -271,7 +307,7 @@ const LOAD_WBB_STANDINGS: ReleaseLoaderDef = {"fn":"load_wbb_standings","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbStandings({ seasons: 2026 });
  */
-export const loadWbbStandings = seasonLoader(LOAD_WBB_STANDINGS);
+export const loadWbbStandings = seasonLoader<LoadWbbStandingsRow>(LOAD_WBB_STANDINGS);
 /** snake_case alias of {@link loadWbbStandings} (py/R parity). */
 export const load_wbb_standings = loadWbbStandings;
 
@@ -293,7 +329,7 @@ const LOAD_WBB_TEAM_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wbb_team_season
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbTeamSeasonStats({ seasons: 2026 });
  */
-export const loadWbbTeamSeasonStats = seasonLoader(LOAD_WBB_TEAM_SEASON_STATS);
+export const loadWbbTeamSeasonStats = seasonLoader<LoadWbbTeamSeasonStatsRow>(LOAD_WBB_TEAM_SEASON_STATS);
 /** snake_case alias of {@link loadWbbTeamSeasonStats} (py/R parity). */
 export const load_wbb_team_season_stats = loadWbbTeamSeasonStats;
 
@@ -315,7 +351,7 @@ const LOAD_WBB_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wbb_player_cross
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbPlayerCrosswalk({ seasons: 2026 });
  */
-export const loadWbbPlayerCrosswalk = seasonLoader(LOAD_WBB_PLAYER_CROSSWALK);
+export const loadWbbPlayerCrosswalk = seasonLoader<LoadWbbPlayerCrosswalkRow>(LOAD_WBB_PLAYER_CROSSWALK);
 /** snake_case alias of {@link loadWbbPlayerCrosswalk} (py/R parity). */
 export const load_wbb_player_crosswalk = loadWbbPlayerCrosswalk;
 
@@ -337,7 +373,7 @@ const LOAD_WBB_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wbb_schedule_c
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbScheduleCrosswalk({ seasons: 2026 });
  */
-export const loadWbbScheduleCrosswalk = seasonLoader(LOAD_WBB_SCHEDULE_CROSSWALK);
+export const loadWbbScheduleCrosswalk = seasonLoader<LoadWbbScheduleCrosswalkRow>(LOAD_WBB_SCHEDULE_CROSSWALK);
 /** snake_case alias of {@link loadWbbScheduleCrosswalk} (py/R parity). */
 export const load_wbb_schedule_crosswalk = loadWbbScheduleCrosswalk;
 
@@ -359,7 +395,7 @@ const LOAD_WBB_TEAM_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wbb_team_crosswalk
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbTeamCrosswalk({ seasons: 2026 });
  */
-export const loadWbbTeamCrosswalk = seasonLoader(LOAD_WBB_TEAM_CROSSWALK);
+export const loadWbbTeamCrosswalk = seasonLoader<LoadWbbTeamCrosswalkRow>(LOAD_WBB_TEAM_CROSSWALK);
 /** snake_case alias of {@link loadWbbTeamCrosswalk} (py/R parity). */
 export const load_wbb_team_crosswalk = loadWbbTeamCrosswalk;
 
@@ -381,7 +417,7 @@ const LOAD_WBB_PLAYER_CORE: ReleaseLoaderDef = {"fn":"load_wbb_player_core","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbPlayerCore({ seasons: 2025 });
  */
-export const loadWbbPlayerCore = seasonLoader(LOAD_WBB_PLAYER_CORE);
+export const loadWbbPlayerCore = seasonLoader<LoadWbbPlayerCoreRow>(LOAD_WBB_PLAYER_CORE);
 /** snake_case alias of {@link loadWbbPlayerCore} (py/R parity). */
 export const load_wbb_player_core = loadWbbPlayerCore;
 
@@ -403,7 +439,7 @@ const LOAD_NCAA_WBB_RAPM: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_rapm","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbRapm({ seasons: 2024 });
  */
-export const loadNcaaWbbRapm = seasonLoader(LOAD_NCAA_WBB_RAPM);
+export const loadNcaaWbbRapm = seasonLoader<LoadNcaaWbbRapmRow>(LOAD_NCAA_WBB_RAPM);
 /** snake_case alias of {@link loadNcaaWbbRapm} (py/R parity). */
 export const load_ncaa_wbb_rapm = loadNcaaWbbRapm;
 
@@ -425,7 +461,7 @@ const LOAD_NCAA_WBB_PBP: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_pbp","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbPbp({ seasons: 2024, columns: ['game_date', 'home', 'away', 'period', 'event_type', 'shot_value'] });
  */
-export const loadNcaaWbbPbp = seasonLoader(LOAD_NCAA_WBB_PBP);
+export const loadNcaaWbbPbp = seasonLoader<LoadNcaaWbbPbpRow>(LOAD_NCAA_WBB_PBP);
 /** snake_case alias of {@link loadNcaaWbbPbp} (py/R parity). */
 export const load_ncaa_wbb_pbp = loadNcaaWbbPbp;
 
@@ -447,7 +483,7 @@ const LOAD_NCAA_WBB_SCHEDULE: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_schedule",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbSchedule({ seasons: 2024 });
  */
-export const loadNcaaWbbSchedule = seasonLoader(LOAD_NCAA_WBB_SCHEDULE);
+export const loadNcaaWbbSchedule = seasonLoader<LoadNcaaWbbScheduleRow>(LOAD_NCAA_WBB_SCHEDULE);
 /** snake_case alias of {@link loadNcaaWbbSchedule} (py/R parity). */
 export const load_ncaa_wbb_schedule = loadNcaaWbbSchedule;
 
@@ -469,7 +505,7 @@ const LOAD_NCAA_WBB_PLAYER_BOX: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_player_b
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbPlayerBox({ seasons: 2024 });
  */
-export const loadNcaaWbbPlayerBox = seasonLoader(LOAD_NCAA_WBB_PLAYER_BOX);
+export const loadNcaaWbbPlayerBox = seasonLoader<LoadNcaaWbbPlayerBoxRow>(LOAD_NCAA_WBB_PLAYER_BOX);
 /** snake_case alias of {@link loadNcaaWbbPlayerBox} (py/R parity). */
 export const load_ncaa_wbb_player_box = loadNcaaWbbPlayerBox;
 
@@ -491,7 +527,7 @@ const LOAD_NCAA_WBB_TEAM_BOX: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_team_box",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbTeamBox({ seasons: 2024 });
  */
-export const loadNcaaWbbTeamBox = seasonLoader(LOAD_NCAA_WBB_TEAM_BOX);
+export const loadNcaaWbbTeamBox = seasonLoader<LoadNcaaWbbTeamBoxRow>(LOAD_NCAA_WBB_TEAM_BOX);
 /** snake_case alias of {@link loadNcaaWbbTeamBox} (py/R parity). */
 export const load_ncaa_wbb_team_box = loadNcaaWbbTeamBox;
 
@@ -513,7 +549,7 @@ const LOAD_NCAA_WBB_ROSTERS: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_rosters","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbRosters({ seasons: 2024 });
  */
-export const loadNcaaWbbRosters = seasonLoader(LOAD_NCAA_WBB_ROSTERS);
+export const loadNcaaWbbRosters = seasonLoader<LoadNcaaWbbRostersRow>(LOAD_NCAA_WBB_ROSTERS);
 /** snake_case alias of {@link loadNcaaWbbRosters} (py/R parity). */
 export const load_ncaa_wbb_rosters = loadNcaaWbbRosters;
 
@@ -535,7 +571,7 @@ const LOAD_NCAA_WBB_TEAM_ROSTERS: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_team_r
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbTeamRosters({ seasons: 2024 });
  */
-export const loadNcaaWbbTeamRosters = seasonLoader(LOAD_NCAA_WBB_TEAM_ROSTERS);
+export const loadNcaaWbbTeamRosters = seasonLoader<LoadNcaaWbbTeamRostersRow>(LOAD_NCAA_WBB_TEAM_ROSTERS);
 /** snake_case alias of {@link loadNcaaWbbTeamRosters} (py/R parity). */
 export const load_ncaa_wbb_team_rosters = loadNcaaWbbTeamRosters;
 
@@ -557,7 +593,7 @@ const LOAD_NCAA_WBB_TEAM_IDS: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_team_ids",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbTeamIds({ seasons: 2024 });
  */
-export const loadNcaaWbbTeamIds = seasonLoader(LOAD_NCAA_WBB_TEAM_IDS);
+export const loadNcaaWbbTeamIds = seasonLoader<LoadNcaaWbbTeamIdsRow>(LOAD_NCAA_WBB_TEAM_IDS);
 /** snake_case alias of {@link loadNcaaWbbTeamIds} (py/R parity). */
 export const load_ncaa_wbb_team_ids = loadNcaaWbbTeamIds;
 
@@ -579,7 +615,7 @@ const LOAD_NCAA_WBB_POSSESSIONS: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_possess
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbPossessions({ seasons: 2024, columns: ['game_date', 'home', 'away', 'poss_num', 'poss_team'] });
  */
-export const loadNcaaWbbPossessions = seasonLoader(LOAD_NCAA_WBB_POSSESSIONS);
+export const loadNcaaWbbPossessions = seasonLoader<LoadNcaaWbbPossessionsRow>(LOAD_NCAA_WBB_POSSESSIONS);
 /** snake_case alias of {@link loadNcaaWbbPossessions} (py/R parity). */
 export const load_ncaa_wbb_possessions = loadNcaaWbbPossessions;
 
@@ -601,7 +637,7 @@ const LOAD_NCAA_WBB_LINEUPS: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_lineups","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbLineups({ seasons: 2024 });
  */
-export const loadNcaaWbbLineups = seasonLoader(LOAD_NCAA_WBB_LINEUPS);
+export const loadNcaaWbbLineups = seasonLoader<LoadNcaaWbbLineupsRow>(LOAD_NCAA_WBB_LINEUPS);
 /** snake_case alias of {@link loadNcaaWbbLineups} (py/R parity). */
 export const load_ncaa_wbb_lineups = loadNcaaWbbLineups;
 
@@ -623,7 +659,7 @@ const LOAD_NCAA_WBB_MATCHUP_STINTS: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_matc
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbMatchupStints({ seasons: 2024 });
  */
-export const loadNcaaWbbMatchupStints = seasonLoader(LOAD_NCAA_WBB_MATCHUP_STINTS);
+export const loadNcaaWbbMatchupStints = seasonLoader<LoadNcaaWbbMatchupStintsRow>(LOAD_NCAA_WBB_MATCHUP_STINTS);
 /** snake_case alias of {@link loadNcaaWbbMatchupStints} (py/R parity). */
 export const load_ncaa_wbb_matchup_stints = loadNcaaWbbMatchupStints;
 
@@ -645,7 +681,7 @@ const LOAD_NCAA_WBB_SHOTS: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_shots","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbShots({ seasons: 2024 });
  */
-export const loadNcaaWbbShots = seasonLoader(LOAD_NCAA_WBB_SHOTS);
+export const loadNcaaWbbShots = seasonLoader<LoadNcaaWbbShotsRow>(LOAD_NCAA_WBB_SHOTS);
 /** snake_case alias of {@link loadNcaaWbbShots} (py/R parity). */
 export const load_ncaa_wbb_shots = loadNcaaWbbShots;
 
@@ -667,7 +703,7 @@ const LOAD_NCAA_WBB_RAPM_WITHIN_TEAM: ReleaseLoaderDef = {"fn":"load_ncaa_wbb_ra
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadNcaaWbbRapmWithinTeam({ seasons: 2024 });
  */
-export const loadNcaaWbbRapmWithinTeam = seasonLoader(LOAD_NCAA_WBB_RAPM_WITHIN_TEAM);
+export const loadNcaaWbbRapmWithinTeam = seasonLoader<LoadNcaaWbbRapmWithinTeamRow>(LOAD_NCAA_WBB_RAPM_WITHIN_TEAM);
 /** snake_case alias of {@link loadNcaaWbbRapmWithinTeam} (py/R parity). */
 export const load_ncaa_wbb_rapm_within_team = loadNcaaWbbRapmWithinTeam;
 
@@ -690,7 +726,7 @@ const LOAD_WBB_GROUPS: ReleaseLoaderDef = {"fn":"load_wbb_groups","url":"https:/
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbGroups();
  */
-export const loadWbbGroups = assetLoader(LOAD_WBB_GROUPS);
+export const loadWbbGroups = assetLoader<LoadWbbGroupsRow>(LOAD_WBB_GROUPS);
 /** snake_case alias of {@link loadWbbGroups} (py/R parity). */
 export const load_wbb_groups = loadWbbGroups;
 
@@ -713,7 +749,7 @@ const LOAD_WBB_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_wbb_group_seasons",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbGroupSeasons();
  */
-export const loadWbbGroupSeasons = assetLoader(LOAD_WBB_GROUP_SEASONS);
+export const loadWbbGroupSeasons = assetLoader<LoadWbbGroupSeasonsRow>(LOAD_WBB_GROUP_SEASONS);
 /** snake_case alias of {@link loadWbbGroupSeasons} (py/R parity). */
 export const load_wbb_group_seasons = loadWbbGroupSeasons;
 
@@ -736,7 +772,7 @@ const LOAD_WBB_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_wbb_group_aliases",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbGroupAliases();
  */
-export const loadWbbGroupAliases = assetLoader(LOAD_WBB_GROUP_ALIASES);
+export const loadWbbGroupAliases = assetLoader<LoadWbbGroupAliasesRow>(LOAD_WBB_GROUP_ALIASES);
 /** snake_case alias of {@link loadWbbGroupAliases} (py/R parity). */
 export const load_wbb_group_aliases = loadWbbGroupAliases;
 
@@ -760,6 +796,6 @@ const LOAD_WBB_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_wbb_team_group
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbTeamGroupSeasons({ seasons: 2024 });
  */
-export const loadWbbTeamGroupSeasons = seasonLoader(LOAD_WBB_TEAM_GROUP_SEASONS);
+export const loadWbbTeamGroupSeasons = seasonLoader<LoadWbbTeamGroupSeasonsRow>(LOAD_WBB_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadWbbTeamGroupSeasons} (py/R parity). */
 export const load_wbb_team_group_seasons = loadWbbTeamGroupSeasons;

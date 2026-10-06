@@ -14,6 +14,7 @@
 // list endpoints (sports / events / scores / participants) flatten directly.
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -73,7 +74,7 @@ function unrollOutcomes(
  * array from `/v4/sports`). Columns: key, group, title, description, active,
  * has_outrights.
  */
-export function parse_odds_api_sports(raw: any): Record<string, any>[] {
+export function parse_odds_api_sports(raw: any): ParserRow[] {
   if (!Array.isArray(raw)) return [];
   return normalize(raw);
 }
@@ -85,7 +86,7 @@ export function parse_odds_api_sports(raw: any): Record<string, any>[] {
  * `{..., bookmakers: [{..., markets: [{..., outcomes: [...]}]}]}`. Unrolled to
  * one row per outcome (`outcomes_name` / `outcomes_price` / `outcomes_point`).
  */
-export function parse_odds_api_sports_odds(raw: any): Record<string, any>[] {
+export function parse_odds_api_sports_odds(raw: any): ParserRow[] {
   return unrollOutcomes(raw);
 }
 
@@ -94,7 +95,7 @@ export function parse_odds_api_sports_odds(raw: any): Record<string, any>[] {
  * `{id, sport_key, sport_title, commence_time, completed, home_team, away_team,
  * scores, last_update}`). The `scores` list cell is stringified by `normalize`.
  */
-export function parse_odds_api_sports_scores(raw: any): Record<string, any>[] {
+export function parse_odds_api_sports_scores(raw: any): ParserRow[] {
   if (!Array.isArray(raw)) return [];
   return normalize(raw);
 }
@@ -104,7 +105,7 @@ export function parse_odds_api_sports_scores(raw: any): Record<string, any>[] {
  * `{id, sport_key, sport_title, commence_time, home_team, away_team}`, plus
  * `home_rotation`/`away_rotation` when requested).
  */
-export function parse_odds_api_sports_events(raw: any): Record<string, any>[] {
+export function parse_odds_api_sports_events(raw: any): ParserRow[] {
   if (!Array.isArray(raw)) return [];
   return normalize(raw);
 }
@@ -116,7 +117,7 @@ export function parse_odds_api_sports_events(raw: any): Record<string, any>[] {
  * `{id, full_name}`. The R wrapper echoes the queried `sport_key`; here the
  * caller has it, so the raw `{id, full_name}` rows are flattened directly.
  */
-export function parse_odds_api_sports_participants(raw: any): Record<string, any>[] {
+export function parse_odds_api_sports_participants(raw: any): ParserRow[] {
   if (!Array.isArray(raw)) return [];
   return normalize(raw);
 }
@@ -128,7 +129,7 @@ export function parse_odds_api_sports_participants(raw: any): Record<string, any
  * (not an array) `{id, ..., bookmakers: [...]}`. Wrapped in a one-element array
  * and unrolled to one row per outcome (props add `outcomes_description`).
  */
-export function parse_odds_api_event_odds(raw: any): Record<string, any>[] {
+export function parse_odds_api_event_odds(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   return unrollOutcomes([raw]);
 }
@@ -140,7 +141,7 @@ export function parse_odds_api_event_odds(raw: any): Record<string, any>[] {
  * object `{id, ..., bookmakers: [{..., markets: [{key, last_update}]}]}`. Each
  * available market is a row (no `outcomes` to unroll for this endpoint).
  */
-export function parse_odds_api_event_markets(raw: any): Record<string, any>[] {
+export function parse_odds_api_event_markets(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const { bookmakers, ...eventCols } = raw;
   const rows: Record<string, any>[] = [];
@@ -170,7 +171,7 @@ export function parse_odds_api_event_markets(raw: any): Record<string, any>[] {
  * `{timestamp, previous_timestamp, next_timestamp, data: [events...]}`. The
  * three snapshot timestamps are prefixed onto every emitted outcome row.
  */
-export function parse_odds_api_sports_odds_history(raw: any): Record<string, any>[] {
+export function parse_odds_api_sports_odds_history(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const extra = {
     timestamp: raw.timestamp,
@@ -187,7 +188,7 @@ export function parse_odds_api_sports_odds_history(raw: any): Record<string, any
  * `{timestamp, previous_timestamp, next_timestamp, data: [events...]}` (no
  * bookmakers to unroll). The snapshot timestamps are prefixed onto each event.
  */
-export function parse_odds_api_sports_events_history(raw: any): Record<string, any>[] {
+export function parse_odds_api_sports_events_history(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const data = raw.data;
   if (!Array.isArray(data)) return [];
@@ -208,7 +209,7 @@ export function parse_odds_api_sports_events_history(raw: any): Record<string, a
  * The event is unrolled to one row per outcome, with snapshot timestamps
  * prefixed onto every row.
  */
-export function parse_odds_api_event_odds_history(raw: any): Record<string, any>[] {
+export function parse_odds_api_event_odds_history(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   const extra = {
     timestamp: raw.timestamp,

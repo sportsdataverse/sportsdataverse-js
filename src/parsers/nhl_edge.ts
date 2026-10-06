@@ -14,6 +14,7 @@
 //   - parse_edge_payload      — generic best-effort flatten (the fallback)
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -48,7 +49,7 @@ const TOP10_LIST_KEYS = [
  * list is the row source; otherwise falls back to the first list-of-dicts found
  * anywhere in the payload. Returns `[]` when nothing resolves.
  */
-export function parse_edge_top10(raw: any): Record<string, any>[] {
+export function parse_edge_top10(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   let rows: any[] | null = null;
   for (const key of TOP10_LIST_KEYS) {
@@ -80,7 +81,7 @@ export function parse_edge_top10(raw: any): Record<string, any>[] {
  * remains one row per detail call. Use `parse_edge_shot_location` /
  * `parse_edge_zone_time` to unroll the nested structures.
  */
-export function parse_edge_detail(raw: any): Record<string, any>[] {
+export function parse_edge_detail(raw: any): ParserRow[] {
   if (!isPlainObject(raw) || Object.keys(raw).length === 0) return [];
   return normalize([raw]);
 }
@@ -106,7 +107,7 @@ const SHOT_LOCATION_KEYS = [
  * becomes one row. Falls back to a dict-of-sections shape (each section
  * carrying one of the zone keys), tagging each row with its `section`.
  */
-export function parse_edge_shot_location(raw: any): Record<string, any>[] {
+export function parse_edge_shot_location(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
 
   // Direct shape: one of SHOT_LOCATION_KEYS resolves to the zone list.
@@ -156,7 +157,7 @@ const ZONE_TIME_KEYS = [
  * state row becomes one output row. Falls back to a single-row flatten
  * (`parse_edge_detail`) when no recognized zone key is found.
  */
-export function parse_edge_zone_time(raw: any): Record<string, any>[] {
+export function parse_edge_zone_time(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   for (const key of ZONE_TIME_KEYS) {
     const candidate = raw[key];
@@ -182,7 +183,7 @@ export function parse_edge_zone_time(raw: any): Record<string, any>[] {
  * for `sogDetails` (skater/team detail) or `shotLocationDetails` (goalie /
  * `*-shot-location-detail`). One row per zone cell, else `[]`.
  */
-export function parse_edge_sog_details(raw: any): Record<string, any>[] {
+export function parse_edge_sog_details(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   for (const key of ["sogDetails", "shotLocationDetails"]) {
     if (isNonEmptyArray(raw[key])) return normalize(raw[key]);
@@ -196,7 +197,7 @@ export function parse_edge_sog_details(raw: any): Record<string, any>[] {
  * detail), or `shotLocationTotals` (`*-shot-location-detail`). One row per
  * location code, else `[]`.
  */
-export function parse_edge_sog_summary(raw: any): Record<string, any>[] {
+export function parse_edge_sog_summary(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   for (const key of ["sogSummary", "shotLocationSummary", "shotLocationTotals"]) {
     if (isNonEmptyArray(raw[key])) return normalize(raw[key]);
@@ -209,7 +210,7 @@ export function parse_edge_sog_summary(raw: any): Record<string, any>[] {
  * ships `hardestShots: list[10]` with per-shot metadata; returns those rows
  * tidied, else `[]`.
  */
-export function parse_edge_hardest_shots(raw: any): Record<string, any>[] {
+export function parse_edge_hardest_shots(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   if (!isNonEmptyArray(raw.hardestShots)) return [];
   return normalize(raw.hardestShots);
@@ -224,7 +225,7 @@ export function parse_edge_hardest_shots(raw: any): Record<string, any>[] {
  * list-of-dicts inside the payload (most likely the "interesting" row source)
  * and flattens it; falls back to flattening the payload itself as a single row.
  */
-export function parse_edge_payload(raw: any): Record<string, any>[] {
+export function parse_edge_payload(raw: any): ParserRow[] {
   if (!isPlainObject(raw)) return [];
   let bestKey: string | null = null;
   let bestLen = 0;

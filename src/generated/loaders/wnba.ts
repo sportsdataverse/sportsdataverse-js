@@ -10,6 +10,42 @@ import {
   seasonLoader,
   type ReleaseLoaderDef,
 } from "../../core/releases.js";
+import type {
+  LoadWnbaPbpRow,
+  LoadWnbaPlayerBoxscoreRow,
+  LoadWnbaScheduleRow,
+  LoadWnbaTeamBoxscoreRow,
+  LoadWnbaDraftRow,
+  LoadWnbaGameRostersRow,
+  LoadWnbaOfficialsRow,
+  LoadWnbaPlayerSeasonStatsRow,
+  LoadWnbaRostersRow,
+  LoadWnbaShotsRow,
+  LoadWnbaStandingsRow,
+  LoadWnbaTeamSeasonStatsRow,
+  LoadWnbaPlayerCrosswalkRow,
+  LoadWnbaScheduleCrosswalkRow,
+  LoadWnbaTeamCrosswalkRow,
+  LoadWnbaPlayerCoreRow,
+  LoadWnbaPlayerImpactRow,
+  LoadWnbaStatsCoachesRow,
+  LoadWnbaStatsDraftRow,
+  LoadWnbaStatsGameRostersRow,
+  LoadWnbaStatsOfficialsRow,
+  LoadWnbaStatsPbpRow,
+  LoadWnbaStatsPossessionsRow,
+  LoadWnbaStatsGameLineupsRow,
+  LoadWnbaStatsPlayerBoxscoresRow,
+  LoadWnbaStatsPlayerGameLogsRow,
+  LoadWnbaStatsRostersRow,
+  LoadWnbaStatsSchedulesRow,
+  LoadWnbaStatsShotsRow,
+  LoadWnbaStatsTeamBoxscoresRow,
+  LoadWnbaGroupsRow,
+  LoadWnbaGroupSeasonsRow,
+  LoadWnbaGroupAliasesRow,
+  LoadWnbaTeamGroupSeasonsRow,
+} from "../loader_rows/wnba.js";
 
 const LOAD_WNBA_PBP: ReleaseLoaderDef = {"fn":"load_wnba_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_pbp/play_by_play_{season}.parquet","minSeason":2002};
 
@@ -29,7 +65,7 @@ const LOAD_WNBA_PBP: ReleaseLoaderDef = {"fn":"load_wnba_pbp","url":"https://git
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPbp({ seasons: 2024, columns: ['game_id', 'sequence_number', 'type_text', 'text', 'score_value'] });
  */
-export const loadWnbaPbp = seasonLoader(LOAD_WNBA_PBP);
+export const loadWnbaPbp = seasonLoader<LoadWnbaPbpRow>(LOAD_WNBA_PBP);
 /** snake_case alias of {@link loadWnbaPbp} (py/R parity). */
 export const load_wnba_pbp = loadWnbaPbp;
 
@@ -51,7 +87,7 @@ const LOAD_WNBA_PLAYER_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wnba_player_boxs
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPlayerBoxscore({ seasons: 2024 });
  */
-export const loadWnbaPlayerBoxscore = seasonLoader(LOAD_WNBA_PLAYER_BOXSCORE);
+export const loadWnbaPlayerBoxscore = seasonLoader<LoadWnbaPlayerBoxscoreRow>(LOAD_WNBA_PLAYER_BOXSCORE);
 /** snake_case alias of {@link loadWnbaPlayerBoxscore} (py/R parity). */
 export const load_wnba_player_boxscore = loadWnbaPlayerBoxscore;
 
@@ -73,7 +109,7 @@ const LOAD_WNBA_SCHEDULE: ReleaseLoaderDef = {"fn":"load_wnba_schedule","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaSchedule({ seasons: 2024 });
  */
-export const loadWnbaSchedule = seasonLoader(LOAD_WNBA_SCHEDULE);
+export const loadWnbaSchedule = seasonLoader<LoadWnbaScheduleRow>(LOAD_WNBA_SCHEDULE);
 /** snake_case alias of {@link loadWnbaSchedule} (py/R parity). */
 export const load_wnba_schedule = loadWnbaSchedule;
 
@@ -95,7 +131,7 @@ const LOAD_WNBA_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wnba_team_boxscore
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaTeamBoxscore({ seasons: 2024 });
  */
-export const loadWnbaTeamBoxscore = seasonLoader(LOAD_WNBA_TEAM_BOXSCORE);
+export const loadWnbaTeamBoxscore = seasonLoader<LoadWnbaTeamBoxscoreRow>(LOAD_WNBA_TEAM_BOXSCORE);
 /** snake_case alias of {@link loadWnbaTeamBoxscore} (py/R parity). */
 export const load_wnba_team_boxscore = loadWnbaTeamBoxscore;
 
@@ -117,7 +153,7 @@ const LOAD_WNBA_DRAFT: ReleaseLoaderDef = {"fn":"load_wnba_draft","url":"https:/
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaDraft({ seasons: 2026 });
  */
-export const loadWnbaDraft = seasonLoader(LOAD_WNBA_DRAFT);
+export const loadWnbaDraft = seasonLoader<LoadWnbaDraftRow>(LOAD_WNBA_DRAFT);
 /** snake_case alias of {@link loadWnbaDraft} (py/R parity). */
 export const load_wnba_draft = loadWnbaDraft;
 
@@ -139,7 +175,7 @@ const LOAD_WNBA_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_game_rosters",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaGameRosters({ seasons: 2024 });
  */
-export const loadWnbaGameRosters = seasonLoader(LOAD_WNBA_GAME_ROSTERS);
+export const loadWnbaGameRosters = seasonLoader<LoadWnbaGameRostersRow>(LOAD_WNBA_GAME_ROSTERS);
 /** snake_case alias of {@link loadWnbaGameRosters} (py/R parity). */
 export const load_wnba_game_rosters = loadWnbaGameRosters;
 
@@ -161,7 +197,7 @@ const LOAD_WNBA_OFFICIALS: ReleaseLoaderDef = {"fn":"load_wnba_officials","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaOfficials({ seasons: 2024 });
  */
-export const loadWnbaOfficials = seasonLoader(LOAD_WNBA_OFFICIALS);
+export const loadWnbaOfficials = seasonLoader<LoadWnbaOfficialsRow>(LOAD_WNBA_OFFICIALS);
 /** snake_case alias of {@link loadWnbaOfficials} (py/R parity). */
 export const load_wnba_officials = loadWnbaOfficials;
 
@@ -183,7 +219,7 @@ const LOAD_WNBA_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wnba_player_
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPlayerSeasonStats({ seasons: 2024 });
  */
-export const loadWnbaPlayerSeasonStats = seasonLoader(LOAD_WNBA_PLAYER_SEASON_STATS);
+export const loadWnbaPlayerSeasonStats = seasonLoader<LoadWnbaPlayerSeasonStatsRow>(LOAD_WNBA_PLAYER_SEASON_STATS);
 /** snake_case alias of {@link loadWnbaPlayerSeasonStats} (py/R parity). */
 export const load_wnba_player_season_stats = loadWnbaPlayerSeasonStats;
 
@@ -205,7 +241,7 @@ const LOAD_WNBA_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_rosters","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaRosters({ seasons: 2024 });
  */
-export const loadWnbaRosters = seasonLoader(LOAD_WNBA_ROSTERS);
+export const loadWnbaRosters = seasonLoader<LoadWnbaRostersRow>(LOAD_WNBA_ROSTERS);
 /** snake_case alias of {@link loadWnbaRosters} (py/R parity). */
 export const load_wnba_rosters = loadWnbaRosters;
 
@@ -227,7 +263,7 @@ const LOAD_WNBA_SHOTS: ReleaseLoaderDef = {"fn":"load_wnba_shots","url":"https:/
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaShots({ seasons: 2024 });
  */
-export const loadWnbaShots = seasonLoader(LOAD_WNBA_SHOTS);
+export const loadWnbaShots = seasonLoader<LoadWnbaShotsRow>(LOAD_WNBA_SHOTS);
 /** snake_case alias of {@link loadWnbaShots} (py/R parity). */
 export const load_wnba_shots = loadWnbaShots;
 
@@ -249,7 +285,7 @@ const LOAD_WNBA_STANDINGS: ReleaseLoaderDef = {"fn":"load_wnba_standings","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStandings({ seasons: 2024 });
  */
-export const loadWnbaStandings = seasonLoader(LOAD_WNBA_STANDINGS);
+export const loadWnbaStandings = seasonLoader<LoadWnbaStandingsRow>(LOAD_WNBA_STANDINGS);
 /** snake_case alias of {@link loadWnbaStandings} (py/R parity). */
 export const load_wnba_standings = loadWnbaStandings;
 
@@ -271,7 +307,7 @@ const LOAD_WNBA_TEAM_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wnba_team_seas
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaTeamSeasonStats({ seasons: 2024 });
  */
-export const loadWnbaTeamSeasonStats = seasonLoader(LOAD_WNBA_TEAM_SEASON_STATS);
+export const loadWnbaTeamSeasonStats = seasonLoader<LoadWnbaTeamSeasonStatsRow>(LOAD_WNBA_TEAM_SEASON_STATS);
 /** snake_case alias of {@link loadWnbaTeamSeasonStats} (py/R parity). */
 export const load_wnba_team_season_stats = loadWnbaTeamSeasonStats;
 
@@ -293,7 +329,7 @@ const LOAD_WNBA_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_player_cro
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPlayerCrosswalk({ seasons: 2026 });
  */
-export const loadWnbaPlayerCrosswalk = seasonLoader(LOAD_WNBA_PLAYER_CROSSWALK);
+export const loadWnbaPlayerCrosswalk = seasonLoader<LoadWnbaPlayerCrosswalkRow>(LOAD_WNBA_PLAYER_CROSSWALK);
 /** snake_case alias of {@link loadWnbaPlayerCrosswalk} (py/R parity). */
 export const load_wnba_player_crosswalk = loadWnbaPlayerCrosswalk;
 
@@ -315,7 +351,7 @@ const LOAD_WNBA_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_schedule
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaScheduleCrosswalk({ seasons: 2026 });
  */
-export const loadWnbaScheduleCrosswalk = seasonLoader(LOAD_WNBA_SCHEDULE_CROSSWALK);
+export const loadWnbaScheduleCrosswalk = seasonLoader<LoadWnbaScheduleCrosswalkRow>(LOAD_WNBA_SCHEDULE_CROSSWALK);
 /** snake_case alias of {@link loadWnbaScheduleCrosswalk} (py/R parity). */
 export const load_wnba_schedule_crosswalk = loadWnbaScheduleCrosswalk;
 
@@ -337,7 +373,7 @@ const LOAD_WNBA_TEAM_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_team_crosswa
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaTeamCrosswalk({ seasons: 2026 });
  */
-export const loadWnbaTeamCrosswalk = seasonLoader(LOAD_WNBA_TEAM_CROSSWALK);
+export const loadWnbaTeamCrosswalk = seasonLoader<LoadWnbaTeamCrosswalkRow>(LOAD_WNBA_TEAM_CROSSWALK);
 /** snake_case alias of {@link loadWnbaTeamCrosswalk} (py/R parity). */
 export const load_wnba_team_crosswalk = loadWnbaTeamCrosswalk;
 
@@ -359,7 +395,7 @@ const LOAD_WNBA_PLAYER_CORE: ReleaseLoaderDef = {"fn":"load_wnba_player_core","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPlayerCore({ seasons: 2025 });
  */
-export const loadWnbaPlayerCore = seasonLoader(LOAD_WNBA_PLAYER_CORE);
+export const loadWnbaPlayerCore = seasonLoader<LoadWnbaPlayerCoreRow>(LOAD_WNBA_PLAYER_CORE);
 /** snake_case alias of {@link loadWnbaPlayerCore} (py/R parity). */
 export const load_wnba_player_core = loadWnbaPlayerCore;
 
@@ -381,7 +417,7 @@ const LOAD_WNBA_PLAYER_IMPACT: ReleaseLoaderDef = {"fn":"load_wnba_player_impact
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPlayerImpact({ seasons: 2024 });
  */
-export const loadWnbaPlayerImpact = seasonLoader(LOAD_WNBA_PLAYER_IMPACT);
+export const loadWnbaPlayerImpact = seasonLoader<LoadWnbaPlayerImpactRow>(LOAD_WNBA_PLAYER_IMPACT);
 /** snake_case alias of {@link loadWnbaPlayerImpact} (py/R parity). */
 export const load_wnba_player_impact = loadWnbaPlayerImpact;
 
@@ -403,7 +439,7 @@ const LOAD_WNBA_STATS_COACHES: ReleaseLoaderDef = {"fn":"load_wnba_stats_coaches
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsCoaches({ seasons: 2026 });
  */
-export const loadWnbaStatsCoaches = seasonLoader(LOAD_WNBA_STATS_COACHES);
+export const loadWnbaStatsCoaches = seasonLoader<LoadWnbaStatsCoachesRow>(LOAD_WNBA_STATS_COACHES);
 /** snake_case alias of {@link loadWnbaStatsCoaches} (py/R parity). */
 export const load_wnba_stats_coaches = loadWnbaStatsCoaches;
 
@@ -425,7 +461,7 @@ const LOAD_WNBA_STATS_DRAFT: ReleaseLoaderDef = {"fn":"load_wnba_stats_draft","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsDraft({ seasons: 2025 });
  */
-export const loadWnbaStatsDraft = seasonLoader(LOAD_WNBA_STATS_DRAFT);
+export const loadWnbaStatsDraft = seasonLoader<LoadWnbaStatsDraftRow>(LOAD_WNBA_STATS_DRAFT);
 /** snake_case alias of {@link loadWnbaStatsDraft} (py/R parity). */
 export const load_wnba_stats_draft = loadWnbaStatsDraft;
 
@@ -447,7 +483,7 @@ const LOAD_WNBA_STATS_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_stats_ga
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsGameRosters({ seasons: 2026 });
  */
-export const loadWnbaStatsGameRosters = seasonLoader(LOAD_WNBA_STATS_GAME_ROSTERS);
+export const loadWnbaStatsGameRosters = seasonLoader<LoadWnbaStatsGameRostersRow>(LOAD_WNBA_STATS_GAME_ROSTERS);
 /** snake_case alias of {@link loadWnbaStatsGameRosters} (py/R parity). */
 export const load_wnba_stats_game_rosters = loadWnbaStatsGameRosters;
 
@@ -469,7 +505,7 @@ const LOAD_WNBA_STATS_OFFICIALS: ReleaseLoaderDef = {"fn":"load_wnba_stats_offic
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsOfficials({ seasons: 2026 });
  */
-export const loadWnbaStatsOfficials = seasonLoader(LOAD_WNBA_STATS_OFFICIALS);
+export const loadWnbaStatsOfficials = seasonLoader<LoadWnbaStatsOfficialsRow>(LOAD_WNBA_STATS_OFFICIALS);
 /** snake_case alias of {@link loadWnbaStatsOfficials} (py/R parity). */
 export const load_wnba_stats_officials = loadWnbaStatsOfficials;
 
@@ -491,7 +527,7 @@ const LOAD_WNBA_STATS_PBP: ReleaseLoaderDef = {"fn":"load_wnba_stats_pbp","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsPbp({ seasons: 2025, columns: ['game_id', 'period', 'clock', 'event_type', 'description'] });
  */
-export const loadWnbaStatsPbp = seasonLoader(LOAD_WNBA_STATS_PBP);
+export const loadWnbaStatsPbp = seasonLoader<LoadWnbaStatsPbpRow>(LOAD_WNBA_STATS_PBP);
 /** snake_case alias of {@link loadWnbaStatsPbp} (py/R parity). */
 export const load_wnba_stats_pbp = loadWnbaStatsPbp;
 
@@ -513,7 +549,7 @@ const LOAD_WNBA_STATS_POSSESSIONS: ReleaseLoaderDef = {"fn":"load_wnba_stats_pos
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsPossessions({ seasons: 2025 });
  */
-export const loadWnbaStatsPossessions = seasonLoader(LOAD_WNBA_STATS_POSSESSIONS);
+export const loadWnbaStatsPossessions = seasonLoader<LoadWnbaStatsPossessionsRow>(LOAD_WNBA_STATS_POSSESSIONS);
 /** snake_case alias of {@link loadWnbaStatsPossessions} (py/R parity). */
 export const load_wnba_stats_possessions = loadWnbaStatsPossessions;
 
@@ -535,7 +571,7 @@ const LOAD_WNBA_STATS_GAME_LINEUPS: ReleaseLoaderDef = {"fn":"load_wnba_stats_ga
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsGameLineups({ seasons: 2025 });
  */
-export const loadWnbaStatsGameLineups = seasonLoader(LOAD_WNBA_STATS_GAME_LINEUPS);
+export const loadWnbaStatsGameLineups = seasonLoader<LoadWnbaStatsGameLineupsRow>(LOAD_WNBA_STATS_GAME_LINEUPS);
 /** snake_case alias of {@link loadWnbaStatsGameLineups} (py/R parity). */
 export const load_wnba_stats_game_lineups = loadWnbaStatsGameLineups;
 
@@ -557,7 +593,7 @@ const LOAD_WNBA_STATS_PLAYER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_wnba_stat
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsPlayerBoxscores({ seasons: 2026 });
  */
-export const loadWnbaStatsPlayerBoxscores = seasonLoader(LOAD_WNBA_STATS_PLAYER_BOXSCORES);
+export const loadWnbaStatsPlayerBoxscores = seasonLoader<LoadWnbaStatsPlayerBoxscoresRow>(LOAD_WNBA_STATS_PLAYER_BOXSCORES);
 /** snake_case alias of {@link loadWnbaStatsPlayerBoxscores} (py/R parity). */
 export const load_wnba_stats_player_boxscores = loadWnbaStatsPlayerBoxscores;
 
@@ -579,7 +615,7 @@ const LOAD_WNBA_STATS_PLAYER_GAME_LOGS: ReleaseLoaderDef = {"fn":"load_wnba_stat
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsPlayerGameLogs({ seasons: 2025 });
  */
-export const loadWnbaStatsPlayerGameLogs = seasonLoader(LOAD_WNBA_STATS_PLAYER_GAME_LOGS);
+export const loadWnbaStatsPlayerGameLogs = seasonLoader<LoadWnbaStatsPlayerGameLogsRow>(LOAD_WNBA_STATS_PLAYER_GAME_LOGS);
 /** snake_case alias of {@link loadWnbaStatsPlayerGameLogs} (py/R parity). */
 export const load_wnba_stats_player_game_logs = loadWnbaStatsPlayerGameLogs;
 
@@ -601,7 +637,7 @@ const LOAD_WNBA_STATS_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_stats_rosters
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsRosters({ seasons: 2026 });
  */
-export const loadWnbaStatsRosters = seasonLoader(LOAD_WNBA_STATS_ROSTERS);
+export const loadWnbaStatsRosters = seasonLoader<LoadWnbaStatsRostersRow>(LOAD_WNBA_STATS_ROSTERS);
 /** snake_case alias of {@link loadWnbaStatsRosters} (py/R parity). */
 export const load_wnba_stats_rosters = loadWnbaStatsRosters;
 
@@ -623,7 +659,7 @@ const LOAD_WNBA_STATS_SCHEDULES: ReleaseLoaderDef = {"fn":"load_wnba_stats_sched
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsSchedules({ seasons: 2025 });
  */
-export const loadWnbaStatsSchedules = seasonLoader(LOAD_WNBA_STATS_SCHEDULES);
+export const loadWnbaStatsSchedules = seasonLoader<LoadWnbaStatsSchedulesRow>(LOAD_WNBA_STATS_SCHEDULES);
 /** snake_case alias of {@link loadWnbaStatsSchedules} (py/R parity). */
 export const load_wnba_stats_schedules = loadWnbaStatsSchedules;
 
@@ -645,7 +681,7 @@ const LOAD_WNBA_STATS_SHOTS: ReleaseLoaderDef = {"fn":"load_wnba_stats_shots","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsShots({ seasons: 2026 });
  */
-export const loadWnbaStatsShots = seasonLoader(LOAD_WNBA_STATS_SHOTS);
+export const loadWnbaStatsShots = seasonLoader<LoadWnbaStatsShotsRow>(LOAD_WNBA_STATS_SHOTS);
 /** snake_case alias of {@link loadWnbaStatsShots} (py/R parity). */
 export const load_wnba_stats_shots = loadWnbaStatsShots;
 
@@ -667,7 +703,7 @@ const LOAD_WNBA_STATS_TEAM_BOXSCORES: ReleaseLoaderDef = {"fn":"load_wnba_stats_
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsTeamBoxscores({ seasons: 2026 });
  */
-export const loadWnbaStatsTeamBoxscores = seasonLoader(LOAD_WNBA_STATS_TEAM_BOXSCORES);
+export const loadWnbaStatsTeamBoxscores = seasonLoader<LoadWnbaStatsTeamBoxscoresRow>(LOAD_WNBA_STATS_TEAM_BOXSCORES);
 /** snake_case alias of {@link loadWnbaStatsTeamBoxscores} (py/R parity). */
 export const load_wnba_stats_team_boxscores = loadWnbaStatsTeamBoxscores;
 
@@ -690,7 +726,7 @@ const LOAD_WNBA_GROUPS: ReleaseLoaderDef = {"fn":"load_wnba_groups","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaGroups();
  */
-export const loadWnbaGroups = assetLoader(LOAD_WNBA_GROUPS);
+export const loadWnbaGroups = assetLoader<LoadWnbaGroupsRow>(LOAD_WNBA_GROUPS);
 /** snake_case alias of {@link loadWnbaGroups} (py/R parity). */
 export const load_wnba_groups = loadWnbaGroups;
 
@@ -713,7 +749,7 @@ const LOAD_WNBA_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_wnba_group_seasons
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaGroupSeasons();
  */
-export const loadWnbaGroupSeasons = assetLoader(LOAD_WNBA_GROUP_SEASONS);
+export const loadWnbaGroupSeasons = assetLoader<LoadWnbaGroupSeasonsRow>(LOAD_WNBA_GROUP_SEASONS);
 /** snake_case alias of {@link loadWnbaGroupSeasons} (py/R parity). */
 export const load_wnba_group_seasons = loadWnbaGroupSeasons;
 
@@ -736,7 +772,7 @@ const LOAD_WNBA_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_wnba_group_aliases
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaGroupAliases();
  */
-export const loadWnbaGroupAliases = assetLoader(LOAD_WNBA_GROUP_ALIASES);
+export const loadWnbaGroupAliases = assetLoader<LoadWnbaGroupAliasesRow>(LOAD_WNBA_GROUP_ALIASES);
 /** snake_case alias of {@link loadWnbaGroupAliases} (py/R parity). */
 export const load_wnba_group_aliases = loadWnbaGroupAliases;
 
@@ -760,6 +796,6 @@ const LOAD_WNBA_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_wnba_team_gro
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaTeamGroupSeasons({ seasons: 2024 });
  */
-export const loadWnbaTeamGroupSeasons = seasonLoader(LOAD_WNBA_TEAM_GROUP_SEASONS);
+export const loadWnbaTeamGroupSeasons = seasonLoader<LoadWnbaTeamGroupSeasonsRow>(LOAD_WNBA_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadWnbaTeamGroupSeasons} (py/R parity). */
 export const load_wnba_team_group_seasons = loadWnbaTeamGroupSeasons;

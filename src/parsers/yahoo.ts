@@ -18,6 +18,7 @@
 // leader stat arrays (`leagues[].{footballStats|leaders|…}[]`) into one row each.
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -79,7 +80,7 @@ const STAT_ARRAY_KEYS = [
  *
  * Returns `[]` for empty / malformed payloads.
  */
-export function parse_yahoo_list(raw: any): Record<string, any>[] {
+export function parse_yahoo_list(raw: any): ParserRow[] {
   const data = unwrapData(raw);
   if (Array.isArray(data)) return normalize(data);
   if (!isPlainObject(data)) return [];
@@ -102,7 +103,7 @@ export function parse_yahoo_list(raw: any): Record<string, any>[] {
  * When no root entry carries a nested stat array, falls back to the generic
  * list flattener. Returns `[]` when empty / malformed.
  */
-export function parse_yahoo_stats(raw: any): Record<string, any>[] {
+export function parse_yahoo_stats(raw: any): ParserRow[] {
   const data = unwrapData(raw);
   if (!isPlainObject(data)) return [];
   const rootList = firstRootList(data);

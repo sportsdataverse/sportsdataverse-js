@@ -21,6 +21,7 @@
 // parser), matching how nhl_api_web.ts collapses its dispatchers.
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -103,7 +104,7 @@ const TWO_YEAR_NAME_RE = /\d{2}\s*[-/]\s*\d{2}/;
  * It is shifted only when the name spans no two years and the row starts in the year the
  * name gives; PWHL's "2024 Preseason" started 2023-11-01 and stays 2024, the season it opened.
  */
-export function parse_hockeytech_seasons(payload: any): Record<string, any>[] {
+export function parse_hockeytech_seasons(payload: any): ParserRow[] {
   const rows = siteKitRows(payload).map((r) => {
     if (!isPlainObject(r)) return r;
     const name = String(r.season_name ?? "");
@@ -123,17 +124,17 @@ export function parse_hockeytech_seasons(payload: any): Record<string, any>[] {
 }
 
 /** Parse `hockeytech_schedule()` — one row per game (`SiteKit.Scorebar`). */
-export function parse_hockeytech_schedule(payload: any): Record<string, any>[] {
+export function parse_hockeytech_schedule(payload: any): ParserRow[] {
   return normalize(siteKitRows(payload));
 }
 
 /** Parse `hockeytech_teams()` — one row per team (`SiteKit.Teamsbyseason`). */
-export function parse_hockeytech_teams(payload: any): Record<string, any>[] {
+export function parse_hockeytech_teams(payload: any): ParserRow[] {
   return normalize(siteKitRows(payload));
 }
 
 /** Parse `hockeytech_team_roster()` — one row per player (`SiteKit.Roster`). */
-export function parse_hockeytech_team_roster(payload: any): Record<string, any>[] {
+export function parse_hockeytech_team_roster(payload: any): ParserRow[] {
   return normalize(siteKitRows(payload));
 }
 
@@ -145,7 +146,7 @@ export function parse_hockeytech_team_roster(payload: any): Record<string, any>[
  * of season-stat rows. This concatenates every class's rows, tagging each with
  * its `stat_class`, so a single frame carries all of a player's season lines.
  */
-export function parse_hockeytech_player_stats(payload: any): Record<string, any>[] {
+export function parse_hockeytech_player_stats(payload: any): ParserRow[] {
   const kit = isPlainObject(payload) ? payload.SiteKit : undefined;
   const player = isPlainObject(kit) ? kit.Player : undefined;
   if (!isPlainObject(player)) return normalize(siteKitRows(payload));
@@ -165,7 +166,7 @@ export function parse_hockeytech_player_stats(payload: any): Record<string, any>
  * `SiteKit.Gameshifts` is `{home: [...], visitor: [...]}`; this concatenates the
  * two sides, tagging each row with its `side`. Empty sides yield no rows.
  */
-export function parse_hockeytech_game_shifts(payload: any): Record<string, any>[] {
+export function parse_hockeytech_game_shifts(payload: any): ParserRow[] {
   const kit = isPlainObject(payload) ? payload.SiteKit : undefined;
   const gs = isPlainObject(kit) ? kit.Gameshifts : undefined;
   if (!isPlainObject(gs)) return [];
@@ -185,7 +186,7 @@ export function parse_hockeytech_game_shifts(payload: any): Record<string, any>[
  * statviewfeed `teams` returns `[{sections: [{headers, data: [{prop, row}]}]}]`;
  * the per-team stat object is `data[].row`. Walks every section's data rows.
  */
-export function parse_hockeytech_standings(payload: any): Record<string, any>[] {
+export function parse_hockeytech_standings(payload: any): ParserRow[] {
   if (!Array.isArray(payload) || payload.length === 0) return [];
   const rows: any[] = [];
   for (const block of payload) {
@@ -211,7 +212,7 @@ export function parse_hockeytech_standings(payload: any): Record<string, any>[] 
  * every player-type group and every category, tagging each row with its
  * `player_type` + `category`.
  */
-export function parse_hockeytech_leaders(payload: any): Record<string, any>[] {
+export function parse_hockeytech_leaders(payload: any): ParserRow[] {
   if (!isPlainObject(payload)) return [];
   const rows: any[] = [];
   for (const [playerType, group] of Object.entries(payload)) {
@@ -234,7 +235,7 @@ export function parse_hockeytech_leaders(payload: any): Record<string, any>[] {
  * `[{event, details}, ...]` array. This lifts each event's `details` to the top
  * level alongside the `event` type so every play is one flat row.
  */
-export function parse_hockeytech_pbp(payload: any): Record<string, any>[] {
+export function parse_hockeytech_pbp(payload: any): ParserRow[] {
   if (!Array.isArray(payload) || payload.length === 0) return [];
   const rows = payload.map((p) => {
     if (!isPlainObject(p)) return { value: p };
@@ -253,7 +254,7 @@ export function parse_hockeytech_pbp(payload: any): Record<string, any>[] {
  * dispatchers), this returns the `goals` array — the most useful single frame.
  * Callers wanting the full object pass `{ parsed: false }` (the raw payload).
  */
-export function parse_hockeytech_game_summary(payload: any): Record<string, any>[] {
+export function parse_hockeytech_game_summary(payload: any): ParserRow[] {
   const gc = isPlainObject(payload) ? payload.GC : undefined;
   const summary = isPlainObject(gc) ? gc.Gamesummary : undefined;
   const goals = isPlainObject(summary) ? summary.goals : undefined;
@@ -265,22 +266,22 @@ export function parse_hockeytech_game_summary(payload: any): Record<string, any>
  * Parse `hockeytech_scorebar()` — one row per game in the live window. Same `SiteKit.Scorebar`
  * payload as the schedule view, so it shares {@link parse_hockeytech_schedule}.
  */
-export function parse_hockeytech_scorebar(payload: any): Record<string, any>[] {
+export function parse_hockeytech_scorebar(payload: any): ParserRow[] {
   return parse_hockeytech_schedule(payload);
 }
 
 /** Parse `hockeytech_player_search()` — one row per match (`SiteKit.Searchplayers`). */
-export function parse_hockeytech_player_search(payload: any): Record<string, any>[] {
+export function parse_hockeytech_player_search(payload: any): ParserRow[] {
   return normalize(siteKitRows(payload));
 }
 
 /** Parse `hockeytech_stats()` — one row per player-season (`SiteKit.Statviewtype`). */
-export function parse_hockeytech_stats(payload: any): Record<string, any>[] {
+export function parse_hockeytech_stats(payload: any): ParserRow[] {
   return normalize(siteKitRows(payload));
 }
 
 /** Parse `hockeytech_player_game_log()` — one row per game (`SiteKit.Player.games`). */
-export function parse_hockeytech_player_game_log(payload: any): Record<string, any>[] {
+export function parse_hockeytech_player_game_log(payload: any): ParserRow[] {
   const kit = isPlainObject(payload) ? payload.SiteKit : undefined;
   const player = isPlainObject(kit) ? kit.Player : undefined;
   const games = isPlainObject(player) ? player.games : undefined;
@@ -288,7 +289,7 @@ export function parse_hockeytech_player_game_log(payload: any): Record<string, a
 }
 
 /** Parse `hockeytech_transactions()` — one row per transaction (`SiteKit.Transactions.transactions`). */
-export function parse_hockeytech_transactions(payload: any): Record<string, any>[] {
+export function parse_hockeytech_transactions(payload: any): ParserRow[] {
   const kit = isPlainObject(payload) ? payload.SiteKit : undefined;
   const tx = isPlainObject(kit) ? kit.Transactions : undefined;
   const rows = isPlainObject(tx) ? tx.transactions : undefined;
@@ -300,7 +301,7 @@ export function parse_hockeytech_transactions(payload: any): Record<string, any>
  * carrying its round's fields as `round_*` columns. The per-series `games`
  * array is stringified by `normalize`; team lookups live in the raw payload.
  */
-export function parse_hockeytech_playoff_bracket(payload: any): Record<string, any>[] {
+export function parse_hockeytech_playoff_bracket(payload: any): ParserRow[] {
   const kit = isPlainObject(payload) ? payload.SiteKit : undefined;
   const br = isPlainObject(kit) ? kit.Brackets : undefined;
   const rounds = isPlainObject(br) ? br.rounds : undefined;

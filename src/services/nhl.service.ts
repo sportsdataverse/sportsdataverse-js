@@ -1,6 +1,7 @@
 import { get } from '../core/client.js';
 import { espnNhlCdnSchedule } from '../generated/espn/nhl.js';
-import { cdnDate } from './_cdn.js';
+import { cdnDate, scoreboardDates } from './_cdn.js';
+import type { CdnSchedulePage, DateArgs } from './_cdn.js';
 /**
  * Operations for NHL.
  *
@@ -23,7 +24,7 @@ export default {
      * @example
      * const result = await sdv.nhl.getPlayByPlay(401272446);
      */
-    getPlayByPlay: async function (id) {
+    getPlayByPlay: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary';
         const params: Record<string, any> = {
             event: id
@@ -53,7 +54,7 @@ export default {
      * @example
      * const result = await sdv.nhl.getBoxScore(401272446);
      */
-    getBoxScore: async function (id) {
+    getBoxScore: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary';
         const params: Record<string, any> = {
             event: id
@@ -76,7 +77,7 @@ export default {
      * @example
      * const result = await sdv.nhl.getSummary(401272446);
      */
-    getSummary: async function (id) {
+    getSummary: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary';
         const params: Record<string, any> = {
             event: id
@@ -109,7 +110,7 @@ export default {
      * @example
      * const result = await sdv.nhl.getPicks(401272446);
      */
-    getPicks: async function (id) {
+    getPicks: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary';
         const params: Record<string, any> = {
             event: id
@@ -146,9 +147,9 @@ export default {
      * year = 2019, month = 11, day = 17
      * )
      */
-    getSchedule: async function ({ year = null, month = null, day = null }) {
+    getSchedule: async function ({ year = null, month = null, day = null }: DateArgs) {
         // espn_nhl_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
-        const res = (await espnNhlCdnSchedule({ date: cdnDate(year, month, day) })) as any;
+        const res = (await espnNhlCdnSchedule({ date: cdnDate(year, month, day) })) as CdnSchedulePage;
         return res.content.schedule;
     },
     /**
@@ -166,13 +167,13 @@ export default {
      * year = 2019, month = 11, day = 16
      * )
      */
-    getScoreboard: async function ({ year, month, day, limit = 300 }) {
+    getScoreboard: async function ({ year, month, day, limit = 300 }: DateArgs & { limit?: number }) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard`;
         const params: Record<string, any> = {
             limit
         };
         if (year && month && day) {
-            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+            params.dates = scoreboardDates(year, month, day);
         }
 
         const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
@@ -235,7 +236,7 @@ export default {
      * const teamId = 16;
      * const result = await sdv.nhl.getTeamInfo(teamId);
      */
-    getTeamInfo: async function (id) {
+    getTeamInfo: async function (id: number | string) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams/${id}`;
 
         const res = { data: await get(baseUrl, { family: 'site_v2' }) };
@@ -252,7 +253,7 @@ export default {
      * const teamId = 16;
      * const result = await sdv.nhl.getTeamPlayers(teamId);
      */
-    getTeamPlayers: async function (id) {
+    getTeamPlayers: async function (id: number | string) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams/${id}`;
         const params: Record<string, any> = {
             enable: "roster"

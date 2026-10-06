@@ -10,6 +10,40 @@ import {
   seasonLoader,
   type ReleaseLoaderDef,
 } from "../../core/releases.js";
+import type {
+  LoadMlbRe24MatrixRow,
+  LoadMlbWeTableRow,
+  LoadMlbWpaRow,
+  LoadMlbPbpRow,
+  LoadMlbPitchesRow,
+  LoadMlbRunnersRow,
+  LoadMlbExpectedStatsRow,
+  LoadMlbExpectedHrRow,
+  LoadMlbBatterProjectionRow,
+  LoadMlbOaaRow,
+  LoadMlbCatcherFramingRow,
+  LoadMlbXeraRow,
+  LoadMlbStuffPlusRow,
+  LoadMlbCommandPlusRow,
+  LoadNcaaBaseballPbpRow,
+  LoadNcaaBaseballScheduleRow,
+  LoadNcaaBaseballTeamsRow,
+  LoadNcaaBaseballRostersRow,
+  LoadNcaaBaseballLinescoreRow,
+  LoadNcaaBaseballTeamStatsRow,
+  LoadNcaaBaseballPlayerStatsRow,
+  LoadNcaaBaseballSituationalStatsRow,
+  LoadNcaaBaseballGamesRow,
+  LoadMlbGroupsRow,
+  LoadMlbGroupSeasonsRow,
+  LoadMlbGroupAliasesRow,
+  LoadMlbTeamGroupSeasonsRow,
+  LoadNcaaBaseballGroupsRow,
+  LoadNcaaBaseballGroupSeasonsRow,
+  LoadNcaaBaseballGroupAliasesRow,
+  LoadNcaaBaseballTeamGroupSeasonsRow,
+  LoadMlbParkDimensionsRow,
+} from "../loader_rows/mlb.js";
 
 const LOAD_MLB_RE24_MATRIX: ReleaseLoaderDef = {"fn":"load_mlb_re24_matrix","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/mlb_game_state/mlb_re24_matrix_{season}.parquet","minSeason":2015};
 
@@ -29,7 +63,7 @@ const LOAD_MLB_RE24_MATRIX: ReleaseLoaderDef = {"fn":"load_mlb_re24_matrix","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbRe24Matrix({ seasons: 2024 });
  */
-export const loadMlbRe24Matrix = seasonLoader(LOAD_MLB_RE24_MATRIX);
+export const loadMlbRe24Matrix = seasonLoader<LoadMlbRe24MatrixRow>(LOAD_MLB_RE24_MATRIX);
 /** snake_case alias of {@link loadMlbRe24Matrix} (py/R parity). */
 export const load_mlb_re24_matrix = loadMlbRe24Matrix;
 
@@ -51,7 +85,7 @@ const LOAD_MLB_WE_TABLE: ReleaseLoaderDef = {"fn":"load_mlb_we_table","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbWeTable({ seasons: 2024 });
  */
-export const loadMlbWeTable = seasonLoader(LOAD_MLB_WE_TABLE);
+export const loadMlbWeTable = seasonLoader<LoadMlbWeTableRow>(LOAD_MLB_WE_TABLE);
 /** snake_case alias of {@link loadMlbWeTable} (py/R parity). */
 export const load_mlb_we_table = loadMlbWeTable;
 
@@ -73,7 +107,7 @@ const LOAD_MLB_WPA: ReleaseLoaderDef = {"fn":"load_mlb_wpa","url":"https://githu
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbWpa({ seasons: 2024 });
  */
-export const loadMlbWpa = seasonLoader(LOAD_MLB_WPA);
+export const loadMlbWpa = seasonLoader<LoadMlbWpaRow>(LOAD_MLB_WPA);
 /** snake_case alias of {@link loadMlbWpa} (py/R parity). */
 export const load_mlb_wpa = loadMlbWpa;
 
@@ -95,7 +129,7 @@ const LOAD_MLB_PBP: ReleaseLoaderDef = {"fn":"load_mlb_pbp","url":"https://githu
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbPbp({ seasons: 2024, columns: ['game_pk', 'inning', 'event_type', 'description'] });
  */
-export const loadMlbPbp = seasonLoader(LOAD_MLB_PBP);
+export const loadMlbPbp = seasonLoader<LoadMlbPbpRow>(LOAD_MLB_PBP);
 /** snake_case alias of {@link loadMlbPbp} (py/R parity). */
 export const load_mlb_pbp = loadMlbPbp;
 
@@ -117,7 +151,7 @@ const LOAD_MLB_PITCHES: ReleaseLoaderDef = {"fn":"load_mlb_pitches","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbPitches({ seasons: 2024 });
  */
-export const loadMlbPitches = seasonLoader(LOAD_MLB_PITCHES);
+export const loadMlbPitches = seasonLoader<LoadMlbPitchesRow>(LOAD_MLB_PITCHES);
 /** snake_case alias of {@link loadMlbPitches} (py/R parity). */
 export const load_mlb_pitches = loadMlbPitches;
 
@@ -139,7 +173,7 @@ const LOAD_MLB_RUNNERS: ReleaseLoaderDef = {"fn":"load_mlb_runners","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbRunners({ seasons: 2024 });
  */
-export const loadMlbRunners = seasonLoader(LOAD_MLB_RUNNERS);
+export const loadMlbRunners = seasonLoader<LoadMlbRunnersRow>(LOAD_MLB_RUNNERS);
 /** snake_case alias of {@link loadMlbRunners} (py/R parity). */
 export const load_mlb_runners = loadMlbRunners;
 
@@ -161,7 +195,7 @@ const LOAD_MLB_EXPECTED_STATS: ReleaseLoaderDef = {"fn":"load_mlb_expected_stats
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbExpectedStats({ seasons: 2024 });
  */
-export const loadMlbExpectedStats = seasonLoader(LOAD_MLB_EXPECTED_STATS);
+export const loadMlbExpectedStats = seasonLoader<LoadMlbExpectedStatsRow>(LOAD_MLB_EXPECTED_STATS);
 /** snake_case alias of {@link loadMlbExpectedStats} (py/R parity). */
 export const load_mlb_expected_stats = loadMlbExpectedStats;
 
@@ -183,7 +217,7 @@ const LOAD_MLB_EXPECTED_HR: ReleaseLoaderDef = {"fn":"load_mlb_expected_hr","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbExpectedHr({ seasons: 2024 });
  */
-export const loadMlbExpectedHr = seasonLoader(LOAD_MLB_EXPECTED_HR);
+export const loadMlbExpectedHr = seasonLoader<LoadMlbExpectedHrRow>(LOAD_MLB_EXPECTED_HR);
 /** snake_case alias of {@link loadMlbExpectedHr} (py/R parity). */
 export const load_mlb_expected_hr = loadMlbExpectedHr;
 
@@ -205,7 +239,7 @@ const LOAD_MLB_BATTER_PROJECTION: ReleaseLoaderDef = {"fn":"load_mlb_batter_proj
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbBatterProjection({ seasons: 2024 });
  */
-export const loadMlbBatterProjection = seasonLoader(LOAD_MLB_BATTER_PROJECTION);
+export const loadMlbBatterProjection = seasonLoader<LoadMlbBatterProjectionRow>(LOAD_MLB_BATTER_PROJECTION);
 /** snake_case alias of {@link loadMlbBatterProjection} (py/R parity). */
 export const load_mlb_batter_projection = loadMlbBatterProjection;
 
@@ -227,7 +261,7 @@ const LOAD_MLB_OAA: ReleaseLoaderDef = {"fn":"load_mlb_oaa","url":"https://githu
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbOaa({ seasons: 2024 });
  */
-export const loadMlbOaa = seasonLoader(LOAD_MLB_OAA);
+export const loadMlbOaa = seasonLoader<LoadMlbOaaRow>(LOAD_MLB_OAA);
 /** snake_case alias of {@link loadMlbOaa} (py/R parity). */
 export const load_mlb_oaa = loadMlbOaa;
 
@@ -249,7 +283,7 @@ const LOAD_MLB_CATCHER_FRAMING: ReleaseLoaderDef = {"fn":"load_mlb_catcher_frami
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbCatcherFraming({ seasons: 2024 });
  */
-export const loadMlbCatcherFraming = seasonLoader(LOAD_MLB_CATCHER_FRAMING);
+export const loadMlbCatcherFraming = seasonLoader<LoadMlbCatcherFramingRow>(LOAD_MLB_CATCHER_FRAMING);
 /** snake_case alias of {@link loadMlbCatcherFraming} (py/R parity). */
 export const load_mlb_catcher_framing = loadMlbCatcherFraming;
 
@@ -271,7 +305,7 @@ const LOAD_MLB_XERA: ReleaseLoaderDef = {"fn":"load_mlb_xera","url":"https://git
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbXera({ seasons: 2024 });
  */
-export const loadMlbXera = seasonLoader(LOAD_MLB_XERA);
+export const loadMlbXera = seasonLoader<LoadMlbXeraRow>(LOAD_MLB_XERA);
 /** snake_case alias of {@link loadMlbXera} (py/R parity). */
 export const load_mlb_xera = loadMlbXera;
 
@@ -293,7 +327,7 @@ const LOAD_MLB_STUFF_PLUS: ReleaseLoaderDef = {"fn":"load_mlb_stuff_plus","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbStuffPlus({ seasons: 2024 });
  */
-export const loadMlbStuffPlus = seasonLoader(LOAD_MLB_STUFF_PLUS);
+export const loadMlbStuffPlus = seasonLoader<LoadMlbStuffPlusRow>(LOAD_MLB_STUFF_PLUS);
 /** snake_case alias of {@link loadMlbStuffPlus} (py/R parity). */
 export const load_mlb_stuff_plus = loadMlbStuffPlus;
 
@@ -315,7 +349,7 @@ const LOAD_MLB_COMMAND_PLUS: ReleaseLoaderDef = {"fn":"load_mlb_command_plus","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbCommandPlus({ seasons: 2024 });
  */
-export const loadMlbCommandPlus = seasonLoader(LOAD_MLB_COMMAND_PLUS);
+export const loadMlbCommandPlus = seasonLoader<LoadMlbCommandPlusRow>(LOAD_MLB_COMMAND_PLUS);
 /** snake_case alias of {@link loadMlbCommandPlus} (py/R parity). */
 export const load_mlb_command_plus = loadMlbCommandPlus;
 
@@ -337,7 +371,7 @@ const LOAD_NCAA_BASEBALL_PBP: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_pbp",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballPbp({ seasons: 2023, columns: ['contest_id', 'inning', 'play_type', 'description'] });
  */
-export const loadNcaaBaseballPbp = seasonLoader(LOAD_NCAA_BASEBALL_PBP);
+export const loadNcaaBaseballPbp = seasonLoader<LoadNcaaBaseballPbpRow>(LOAD_NCAA_BASEBALL_PBP);
 /** snake_case alias of {@link loadNcaaBaseballPbp} (py/R parity). */
 export const load_ncaa_baseball_pbp = loadNcaaBaseballPbp;
 
@@ -359,7 +393,7 @@ const LOAD_NCAA_BASEBALL_SCHEDULE: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballSchedule({ seasons: 2023 });
  */
-export const loadNcaaBaseballSchedule = seasonLoader(LOAD_NCAA_BASEBALL_SCHEDULE);
+export const loadNcaaBaseballSchedule = seasonLoader<LoadNcaaBaseballScheduleRow>(LOAD_NCAA_BASEBALL_SCHEDULE);
 /** snake_case alias of {@link loadNcaaBaseballSchedule} (py/R parity). */
 export const load_ncaa_baseball_schedule = loadNcaaBaseballSchedule;
 
@@ -381,7 +415,7 @@ const LOAD_NCAA_BASEBALL_TEAMS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_tea
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballTeams({ seasons: 2025 });
  */
-export const loadNcaaBaseballTeams = seasonLoader(LOAD_NCAA_BASEBALL_TEAMS);
+export const loadNcaaBaseballTeams = seasonLoader<LoadNcaaBaseballTeamsRow>(LOAD_NCAA_BASEBALL_TEAMS);
 /** snake_case alias of {@link loadNcaaBaseballTeams} (py/R parity). */
 export const load_ncaa_baseball_teams = loadNcaaBaseballTeams;
 
@@ -403,7 +437,7 @@ const LOAD_NCAA_BASEBALL_ROSTERS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_r
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballRosters({ seasons: 2025 });
  */
-export const loadNcaaBaseballRosters = seasonLoader(LOAD_NCAA_BASEBALL_ROSTERS);
+export const loadNcaaBaseballRosters = seasonLoader<LoadNcaaBaseballRostersRow>(LOAD_NCAA_BASEBALL_ROSTERS);
 /** snake_case alias of {@link loadNcaaBaseballRosters} (py/R parity). */
 export const load_ncaa_baseball_rosters = loadNcaaBaseballRosters;
 
@@ -425,7 +459,7 @@ const LOAD_NCAA_BASEBALL_LINESCORE: ReleaseLoaderDef = {"fn":"load_ncaa_baseball
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballLinescore({ seasons: 2025 });
  */
-export const loadNcaaBaseballLinescore = seasonLoader(LOAD_NCAA_BASEBALL_LINESCORE);
+export const loadNcaaBaseballLinescore = seasonLoader<LoadNcaaBaseballLinescoreRow>(LOAD_NCAA_BASEBALL_LINESCORE);
 /** snake_case alias of {@link loadNcaaBaseballLinescore} (py/R parity). */
 export const load_ncaa_baseball_linescore = loadNcaaBaseballLinescore;
 
@@ -447,7 +481,7 @@ const LOAD_NCAA_BASEBALL_TEAM_STATS: ReleaseLoaderDef = {"fn":"load_ncaa_basebal
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballTeamStats({ seasons: 2025, columns: ['contest_id', 'category', 'stat', 'away_value', 'home_value'] });
  */
-export const loadNcaaBaseballTeamStats = seasonLoader(LOAD_NCAA_BASEBALL_TEAM_STATS);
+export const loadNcaaBaseballTeamStats = seasonLoader<LoadNcaaBaseballTeamStatsRow>(LOAD_NCAA_BASEBALL_TEAM_STATS);
 /** snake_case alias of {@link loadNcaaBaseballTeamStats} (py/R parity). */
 export const load_ncaa_baseball_team_stats = loadNcaaBaseballTeamStats;
 
@@ -469,7 +503,7 @@ const LOAD_NCAA_BASEBALL_PLAYER_STATS: ReleaseLoaderDef = {"fn":"load_ncaa_baseb
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballPlayerStats({ seasons: 2025 });
  */
-export const loadNcaaBaseballPlayerStats = seasonLoader(LOAD_NCAA_BASEBALL_PLAYER_STATS);
+export const loadNcaaBaseballPlayerStats = seasonLoader<LoadNcaaBaseballPlayerStatsRow>(LOAD_NCAA_BASEBALL_PLAYER_STATS);
 /** snake_case alias of {@link loadNcaaBaseballPlayerStats} (py/R parity). */
 export const load_ncaa_baseball_player_stats = loadNcaaBaseballPlayerStats;
 
@@ -491,7 +525,7 @@ const LOAD_NCAA_BASEBALL_SITUATIONAL_STATS: ReleaseLoaderDef = {"fn":"load_ncaa_
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballSituationalStats({ seasons: 2025 });
  */
-export const loadNcaaBaseballSituationalStats = seasonLoader(LOAD_NCAA_BASEBALL_SITUATIONAL_STATS);
+export const loadNcaaBaseballSituationalStats = seasonLoader<LoadNcaaBaseballSituationalStatsRow>(LOAD_NCAA_BASEBALL_SITUATIONAL_STATS);
 /** snake_case alias of {@link loadNcaaBaseballSituationalStats} (py/R parity). */
 export const load_ncaa_baseball_situational_stats = loadNcaaBaseballSituationalStats;
 
@@ -513,7 +547,7 @@ const LOAD_NCAA_BASEBALL_GAMES: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_gam
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballGames({ seasons: 2024 });
  */
-export const loadNcaaBaseballGames = seasonLoader(LOAD_NCAA_BASEBALL_GAMES);
+export const loadNcaaBaseballGames = seasonLoader<LoadNcaaBaseballGamesRow>(LOAD_NCAA_BASEBALL_GAMES);
 /** snake_case alias of {@link loadNcaaBaseballGames} (py/R parity). */
 export const load_ncaa_baseball_games = loadNcaaBaseballGames;
 
@@ -536,7 +570,7 @@ const LOAD_MLB_GROUPS: ReleaseLoaderDef = {"fn":"load_mlb_groups","url":"https:/
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbGroups();
  */
-export const loadMlbGroups = assetLoader(LOAD_MLB_GROUPS);
+export const loadMlbGroups = assetLoader<LoadMlbGroupsRow>(LOAD_MLB_GROUPS);
 /** snake_case alias of {@link loadMlbGroups} (py/R parity). */
 export const load_mlb_groups = loadMlbGroups;
 
@@ -559,7 +593,7 @@ const LOAD_MLB_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_mlb_group_seasons",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbGroupSeasons();
  */
-export const loadMlbGroupSeasons = assetLoader(LOAD_MLB_GROUP_SEASONS);
+export const loadMlbGroupSeasons = assetLoader<LoadMlbGroupSeasonsRow>(LOAD_MLB_GROUP_SEASONS);
 /** snake_case alias of {@link loadMlbGroupSeasons} (py/R parity). */
 export const load_mlb_group_seasons = loadMlbGroupSeasons;
 
@@ -582,7 +616,7 @@ const LOAD_MLB_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_mlb_group_aliases",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbGroupAliases();
  */
-export const loadMlbGroupAliases = assetLoader(LOAD_MLB_GROUP_ALIASES);
+export const loadMlbGroupAliases = assetLoader<LoadMlbGroupAliasesRow>(LOAD_MLB_GROUP_ALIASES);
 /** snake_case alias of {@link loadMlbGroupAliases} (py/R parity). */
 export const load_mlb_group_aliases = loadMlbGroupAliases;
 
@@ -606,7 +640,7 @@ const LOAD_MLB_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_mlb_team_group
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbTeamGroupSeasons({ seasons: 2024 });
  */
-export const loadMlbTeamGroupSeasons = seasonLoader(LOAD_MLB_TEAM_GROUP_SEASONS);
+export const loadMlbTeamGroupSeasons = seasonLoader<LoadMlbTeamGroupSeasonsRow>(LOAD_MLB_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadMlbTeamGroupSeasons} (py/R parity). */
 export const load_mlb_team_group_seasons = loadMlbTeamGroupSeasons;
 
@@ -629,7 +663,7 @@ const LOAD_NCAA_BASEBALL_GROUPS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_gr
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballGroups();
  */
-export const loadNcaaBaseballGroups = assetLoader(LOAD_NCAA_BASEBALL_GROUPS);
+export const loadNcaaBaseballGroups = assetLoader<LoadNcaaBaseballGroupsRow>(LOAD_NCAA_BASEBALL_GROUPS);
 /** snake_case alias of {@link loadNcaaBaseballGroups} (py/R parity). */
 export const load_ncaa_baseball_groups = loadNcaaBaseballGroups;
 
@@ -652,7 +686,7 @@ const LOAD_NCAA_BASEBALL_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_ncaa_base
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballGroupSeasons();
  */
-export const loadNcaaBaseballGroupSeasons = assetLoader(LOAD_NCAA_BASEBALL_GROUP_SEASONS);
+export const loadNcaaBaseballGroupSeasons = assetLoader<LoadNcaaBaseballGroupSeasonsRow>(LOAD_NCAA_BASEBALL_GROUP_SEASONS);
 /** snake_case alias of {@link loadNcaaBaseballGroupSeasons} (py/R parity). */
 export const load_ncaa_baseball_group_seasons = loadNcaaBaseballGroupSeasons;
 
@@ -675,7 +709,7 @@ const LOAD_NCAA_BASEBALL_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_ncaa_base
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballGroupAliases();
  */
-export const loadNcaaBaseballGroupAliases = assetLoader(LOAD_NCAA_BASEBALL_GROUP_ALIASES);
+export const loadNcaaBaseballGroupAliases = assetLoader<LoadNcaaBaseballGroupAliasesRow>(LOAD_NCAA_BASEBALL_GROUP_ALIASES);
 /** snake_case alias of {@link loadNcaaBaseballGroupAliases} (py/R parity). */
 export const load_ncaa_baseball_group_aliases = loadNcaaBaseballGroupAliases;
 
@@ -699,7 +733,7 @@ const LOAD_NCAA_BASEBALL_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_ncaa
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballTeamGroupSeasons({ seasons: 2024 });
  */
-export const loadNcaaBaseballTeamGroupSeasons = seasonLoader(LOAD_NCAA_BASEBALL_TEAM_GROUP_SEASONS);
+export const loadNcaaBaseballTeamGroupSeasons = seasonLoader<LoadNcaaBaseballTeamGroupSeasonsRow>(LOAD_NCAA_BASEBALL_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadNcaaBaseballTeamGroupSeasons} (py/R parity). */
 export const load_ncaa_baseball_team_group_seasons = loadNcaaBaseballTeamGroupSeasons;
 
@@ -722,6 +756,6 @@ const LOAD_MLB_PARK_DIMENSIONS: ReleaseLoaderDef = {"fn":"load_mlb_park_dimensio
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadMlbParkDimensions();
  */
-export const loadMlbParkDimensions = assetLoader(LOAD_MLB_PARK_DIMENSIONS);
+export const loadMlbParkDimensions = assetLoader<LoadMlbParkDimensionsRow>(LOAD_MLB_PARK_DIMENSIONS);
 /** snake_case alias of {@link loadMlbParkDimensions} (py/R parity). */
 export const load_mlb_park_dimensions = loadMlbParkDimensions;

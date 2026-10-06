@@ -89,13 +89,16 @@ export interface ReleaseLoaderDef {
 /** A row of a loaded dataset (column name -> value). */
 export type ReleaseRow = Record<string, unknown>;
 
-/** A loaded dataset in column form (`format: "columns"`): column name -> values. */
-export type ReleaseColumns = Record<string, unknown[]>;
+/**
+ * A loaded dataset in column form (`format: "columns"`): column name -> values, for
+ * rows of type `R` (each column an array of its values; nulls fill a column a season lacks).
+ */
+export type ReleaseColumns<R extends object = ReleaseRow> = { [K in keyof R]: Array<Exclude<R[K], undefined>> };
 
 /** Options every loader accepts. */
 export interface ReleaseLoaderOptions {
   /** Read only these columns (the rest are not decoded). Default: all. */
-  columns?: string[];
+  columns?: readonly string[];
   /**
    * `"rows"` (default): an array of row objects. `"columns"`: one array per
    * column (`{ [column]: values[] }`) — about 4x lighter on the heap.
@@ -119,16 +122,35 @@ export interface SeasonLoaderOptions extends ReleaseLoaderOptions {
   seasons: number | number[];
 }
 
-/** A per-season loader: row objects by default, column arrays with `format: "columns"`. */
-export interface SeasonLoader {
-  (opts: SeasonLoaderOptions & { format: "columns" }): Promise<ReleaseColumns>;
-  (opts: SeasonLoaderOptions): Promise<ReleaseRow[]>;
+/**
+ * A per-season loader of rows `R` (a generated loader row type): row objects by default,
+ * column arrays with `format: "columns"`; `columns` narrows either to those columns (`Pick`).
+ */
+export interface SeasonLoader<R extends object = ReleaseRow> {
+  /** `columns` + `format: "columns"`: those columns' arrays. */
+  <K extends keyof R & string>(
+    opts: SeasonLoaderOptions & { columns: readonly K[]; format: "columns" }
+  ): Promise<ReleaseColumns<Pick<R, K>>>;
+  /** `format: "columns"`: every column's array. */
+  (opts: SeasonLoaderOptions & { format: "columns" }): Promise<ReleaseColumns<R>>;
+  /** `columns`: rows of those columns. */
+  <K extends keyof R & string>(opts: SeasonLoaderOptions & { columns: readonly K[] }): Promise<Array<Pick<R, K>>>;
+  /** Rows of every column. */
+  (opts: SeasonLoaderOptions): Promise<R[]>;
 }
 
-/** A single-asset loader (no season token in its URL). */
-export interface AssetLoader {
-  (opts: ReleaseLoaderOptions & { format: "columns" }): Promise<ReleaseColumns>;
-  (opts?: ReleaseLoaderOptions): Promise<ReleaseRow[]>;
+/** A single-asset loader (no season token in its URL) of rows `R`: as {@link SeasonLoader}, without `seasons`. */
+export interface AssetLoader<R extends object = ReleaseRow> {
+  /** `columns` + `format: "columns"`: those columns' arrays. */
+  <K extends keyof R & string>(
+    opts: ReleaseLoaderOptions & { columns: readonly K[]; format: "columns" }
+  ): Promise<ReleaseColumns<Pick<R, K>>>;
+  /** `format: "columns"`: every column's array. */
+  (opts: ReleaseLoaderOptions & { format: "columns" }): Promise<ReleaseColumns<R>>;
+  /** `columns`: rows of those columns. */
+  <K extends keyof R & string>(opts: ReleaseLoaderOptions & { columns: readonly K[] }): Promise<Array<Pick<R, K>>>;
+  /** Rows of every column. */
+  (opts?: ReleaseLoaderOptions): Promise<R[]>;
 }
 
 /**
@@ -336,7 +358,7 @@ interface ColumnFrame {
 function unionNames(
   label: string,
   perFrame: string[][],
-  requested: string[] | undefined,
+  requested: readonly string[] | undefined,
   anyRows: boolean
 ): string[] {
   const names: string[] = [];
@@ -412,7 +434,7 @@ function firstNonNull(n: number, get: (i: number) => unknown): unknown {
  * does: union of columns, missing ones null-filled (in place), drifted types
  * cast to their supertype.
  */
-function concatRows(label: string, frames: ReleaseRow[][], requested?: string[]): ReleaseRow[] {
+function concatRows(label: string, frames: ReleaseRow[][], requested?: readonly string[]): ReleaseRow[] {
   const keys = frames.map((f) => (f.length ? Object.keys(f[0]) : []));
   const names = unionNames(label, keys, requested, frames.some((f) => f.length > 0));
   if (frames.length > 1) {
@@ -436,7 +458,7 @@ function concatRows(label: string, frames: ReleaseRow[][], requested?: string[])
 }
 
 /** The column-form twin of {@link concatRows}. */
-function concatColumns(label: string, frames: ColumnFrame[], requested?: string[]): ReleaseColumns {
+function concatColumns(label: string, frames: ColumnFrame[], requested?: readonly string[]): ReleaseColumns {
   const names = unionNames(
     label,
     frames.map((f) => Object.keys(f.cols)),
@@ -709,18 +731,18 @@ async function load(
  * gaps null-filled, drifted types cast to their supertype). Seasons below
  * `minSeason` raise {@link SeasonNotFoundError} before anything is fetched.
  */
-export function seasonLoader(def: ReleaseLoaderDef): SeasonLoader {
+export function seasonLoader<R extends object = ReleaseRow>(def: ReleaseLoaderDef): SeasonLoader<R> {
   // async, so a bad `seasons` rejects like every other loader error.
   return (async (opts: SeasonLoaderOptions) =>
-    load(def, opts ?? {}, seasonList(def, opts?.seasons))) as SeasonLoader;
+    load(def, opts ?? {}, seasonList(def, opts?.seasons))) as SeasonLoader<R>;
 }
 
 /**
  * A single-asset loader (no season token in its URL). An absent asset returns
  * no rows with a warning; a failed fetch raises `AssetFetchError`.
  */
-export function assetLoader(def: ReleaseLoaderDef): AssetLoader {
-  return (async (opts: ReleaseLoaderOptions = {}) => load(def, opts, [undefined])) as AssetLoader;
+export function assetLoader<R extends object = ReleaseRow>(def: ReleaseLoaderDef): AssetLoader<R> {
+  return (async (opts: ReleaseLoaderOptions = {}) => load(def, opts, [undefined])) as AssetLoader<R>;
 }
 
 const deprecationWarned = new Set<string>();

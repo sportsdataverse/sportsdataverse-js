@@ -6,6 +6,7 @@ import { warnOnce } from '../core/deprecation.js';
 import { AssetFetchError } from '../core/errors.js';
 import { request, requestResponse } from '../core/request.js';
 import { getHtml } from './_cdn.js';
+import type { DateArgs } from './_cdn.js';
 
 /** Request-layer family for ncaa.com and its data.ncaa.com casablanca JSON. */
 const NCAA_COM = 'ncaa_com';
@@ -24,17 +25,34 @@ async function casablanca(url: string): Promise<any> {
     return data;
 }
 
-/** Internal helper: scrape an HTML `<select>` (by id) into {value, name} pairs. */
-function extractSelectList($: any, array: any[], id: string) {
+/**
+ * Internal helper: scrape an HTML `<select>` (by id) into {value, name} pairs. `doc` is a
+ * `cheerio.load` document, typed `unknown` so cheerio's types stay out of the package's declarations.
+ */
+function extractSelectList(doc: unknown, array: SelectList, id: string): undefined {
+    const $ = doc as cheerio.CheerioAPI; // every caller passes cheerio.load(html)
     const selector = '#' + id + ' option';
-    $(selector).each(function (this: any) {
-        const value = $(this).prop('value');
-        const name = decode($(this).html());
+    $(selector).each((_i, el) => {
+        const value = $(el).prop('value');
+        // an <option> it just matched: never null
+        const name = decode($(el).html()!);
         if (value) {
             array.push({ value: value, name: name });
         }
     });
 }
+
+/** One `<option>` of a stats.ncaa.org select list. */
+interface SelectOption {
+    value: string;
+    name: string;
+}
+
+/**
+ * A select list as the deprecated stats.ncaa.org methods return it: its options, then the
+ * `undefined` they push after them (extractSelectList's return value; kept as it always was).
+ */
+type SelectList = Array<SelectOption | undefined>;
 
 /** One-time DeprecationWarning per stats.ncaa.org scraper (Akamai 403s plain clients). */
 function warnDeprecated(name: string) {
@@ -66,7 +84,7 @@ export default {
      * const urlGame = result["games"][16]["game"]["url"]
      * const gameId = await sdv.ncaa.getRedirectUrl(url=urlGame);
      */
-    getRedirectUrl: async function (url) {
+    getRedirectUrl: async function (url: string) {
         const baseUrl = `https://ncaa.com/${url}`;
         // the game page's final URL, after ncaa.com's redirects
         const { url: gameUrl } = await requestResponse(NCAA_COM, { method: 'GET', url: baseUrl, responseType: 'text' });
@@ -93,7 +111,7 @@ export default {
      * @example
      * const result = await sdv.ncaa.getInfo(5764053);
      */
-    getInfo: async function (game) {
+    getInfo: async function (game: number | string) {
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/gameInfo.json`;
         return casablanca(baseUrl);
     },
@@ -112,7 +130,7 @@ export default {
      * @example
      * const result = await sdv.ncaa.getBoxScore(5764053);
      */
-    getBoxScore: async function (game) {
+    getBoxScore: async function (game: number | string) {
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/boxscore.json`;
         return casablanca(baseUrl);
     },
@@ -131,7 +149,7 @@ export default {
      * @example
      * const result = await sdv.ncaa.getPlayByPlay(5764053);
      */
-    getPlayByPlay: async function (game) {
+    getPlayByPlay: async function (game: number | string) {
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/pbp.json`;
         return casablanca(baseUrl);
     },
@@ -159,8 +177,8 @@ export default {
      * sport = 'basketball-men', division = 'd3', year = 2019, month = 02, day = 15
      * )
      */
-    getScoreboard: async function ({ sport, division, year, month, day }) {
-        const baseUrl = `https://data.ncaa.com/casablanca/scoreboard/${sport}/${division}/${year}/${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}/${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}/scoreboard.json`;
+    getScoreboard: async function ({ sport, division, year, month, day }: DateArgs & { sport: string; division: string }) {
+        const baseUrl = `https://data.ncaa.com/casablanca/scoreboard/${sport}/${division}/${year}/${parseInt(String(month)) <= 9 ? "0" + parseInt(String(month)) : parseInt(String(month))}/${parseInt(String(day)) <= 9 ? "0" + parseInt(String(day)) : parseInt(String(day))}/scoreboard.json`;
         return casablanca(baseUrl);
     },
     extractSelectList,
@@ -179,7 +197,7 @@ export default {
 
         const res = { data: await getHtml(STATS_NCAA, baseUrl) };
         let data = {
-            sports: []
+            sports: [] as SelectList
         };
 
         let $ = cheerio.load(res.data);
@@ -208,7 +226,7 @@ export default {
      * const result = sdv.ncaa.getSeasons(sport='MBB');
      * @deprecated stats.ncaa.org blocks plain HTTP clients (Akamai 403); this scraper no longer works.
      */
-    getSeasons: async function (sport) {
+    getSeasons: async function (sport: string) {
         warnDeprecated('getSeasons');
         if (!sport) {
             return;
@@ -232,7 +250,7 @@ export default {
         };
         const res = { data: await getHtml(STATS_NCAA, baseUrl, params) };
         let data = {
-            seasons: []
+            seasons: [] as SelectList
         };
 
         let $ = cheerio.load(res.data);
@@ -263,7 +281,7 @@ export default {
      * const result = sdv.ncaa.getDivisions(sport='MBB', season='2017');
      * @deprecated stats.ncaa.org blocks plain HTTP clients (Akamai 403); this scraper no longer works.
      */
-    getDivisions: async function (sport, season) {
+    getDivisions: async function (sport: string, season: number | string) {
         warnDeprecated('getDivisions');
         if (!sport || !season) {
             return;
@@ -287,7 +305,7 @@ export default {
         };
         const res = { data: await getHtml(STATS_NCAA, baseUrl, params) };
         let data = {
-            divisions: []
+            divisions: [] as SelectList
         };
 
         let $ = cheerio.load(res.data);
@@ -324,7 +342,7 @@ export default {
      * const sportDivisionData = sdv.ncaa.getSportDivisionData(sport='MFB',season='2016',division=12,type='team',gameHigh=true);
      * @deprecated stats.ncaa.org blocks plain HTTP clients (Akamai 403); this scraper no longer works.
      */
-    getSportDivisionData: async function (sport, season, division, type, gameHigh) {
+    getSportDivisionData: async function (sport: string, season: number | string, division: number | string, type?: string, gameHigh?: boolean | string) {
         warnDeprecated('getSportDivisionData');
         if (!sport || !season || !division) {
             return;
@@ -358,8 +376,8 @@ export default {
             division: division,
             type: type,
             gameHigh: gameHigh,
-            rankingsPeriods: [],
-            categories: []
+            rankingsPeriods: [] as SelectList,
+            categories: [] as SelectList
         };
         let $ = cheerio.load(res.data);
         data.rankingsPeriods.push(extractSelectList($, data.rankingsPeriods, 'rp'));
@@ -395,7 +413,7 @@ export default {
      * const players =  await sdv.ncaa.getPlayerData(sport = 'MFB', year = '2017', division = '11',rankingPeriod = '52', gameHigh='N', category = '20')
      * @deprecated stats.ncaa.org blocks plain HTTP clients (Akamai 403); this scraper no longer works.
      */
-    getPlayerData: async function (sport, season, division, rankingPeriod, gameHigh, category) {
+    getPlayerData: async function (sport: string, season?: number | string, division?: number | string, rankingPeriod?: number | string, gameHigh?: string, category?: number | string) {
         warnDeprecated('getPlayerData');
         const baseUrl = 'https://stats.ncaa.org/rankings/change_sport_year_div';
         const params: Record<string, any> = {
@@ -448,7 +466,7 @@ export default {
      * const teams =  await sdv.ncaa.getTeamData(sport = 'MFB', year = '2017', division = '11', rankingPeriod = '52', gameHigh='N', category = '20')
      * @deprecated stats.ncaa.org blocks plain HTTP clients (Akamai 403); this scraper no longer works.
      */
-    getTeamData: async function (sport, season, division, rankingPeriod, gameHigh, category) {
+    getTeamData: async function (sport: string, season?: number | string, division?: number | string, rankingPeriod?: number | string, gameHigh?: string, category?: number | string) {
         warnDeprecated('getTeamData');
         const baseUrl = 'https://stats.ncaa.org/rankings/change_sport_year_div';
         const params: Record<string, any> = {

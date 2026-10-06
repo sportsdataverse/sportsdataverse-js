@@ -10,8 +10,47 @@ import {
   deprecatedLoader,
   seasonLoader,
   type ReleaseLoaderDef,
-  type SeasonLoader,
 } from "../../core/releases.js";
+import type {
+  LoadNbaPbpRow,
+  LoadNbaPlayerBoxscoreRow,
+  LoadNbaScheduleRow,
+  LoadNbaTeamBoxscoreRow,
+  LoadNbaGameRostersRow,
+  LoadNbaOfficialsRow,
+  LoadNbaShotsRow,
+  LoadNbaStandingsRow,
+  LoadNbaPlayerSeasonStatsRow,
+  LoadNbaTeamSeasonStatsRow,
+  LoadNbaDraftRow,
+  LoadNbaRostersRow,
+  LoadNbaStatsSchedulesRow,
+  LoadNbaStatsCoachesRow,
+  LoadNbaStatsGameRostersRow,
+  LoadNbaStatsLineupsRow,
+  LoadNbaStatsOfficialsRow,
+  LoadNbaStatsPbpRow,
+  LoadNbaStatsPossessionsRow,
+  LoadNbaStatsGameLineupsRow,
+  LoadNbaStatsGameMatchupsRow,
+  LoadNbaStatsPlayerBoxscoresRow,
+  LoadNbaStatsPlayerGameLogsRow,
+  LoadNbaStatsPlayerSeasonStatsRow,
+  LoadNbaStatsRostersRow,
+  LoadNbaStatsShotsRow,
+  LoadNbaStatsStandingsRow,
+  LoadNbaStatsTeamBoxscoresRow,
+  LoadNbaStatsTeamSeasonStatsRow,
+  LoadNbaPlayerCrosswalkRow,
+  LoadNbaScheduleCrosswalkRow,
+  LoadNbaTeamCrosswalkRow,
+  LoadNbaPlayerCoreRow,
+  LoadNbaPlayerImpactRow,
+  LoadNbaGroupsRow,
+  LoadNbaGroupSeasonsRow,
+  LoadNbaGroupAliasesRow,
+  LoadNbaTeamGroupSeasonsRow,
+} from "../loader_rows/nba.js";
 
 const LOAD_NBA_PBP: ReleaseLoaderDef = {"fn":"load_nba_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_{season}.parquet","minSeason":2002};
 
@@ -31,7 +70,7 @@ const LOAD_NBA_PBP: ReleaseLoaderDef = {"fn":"load_nba_pbp","url":"https://githu
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaPbp({ seasons: 2024, columns: ['game_id', 'sequence_number', 'type_text', 'text', 'score_value'] });
  */
-export const loadNbaPbp = seasonLoader(LOAD_NBA_PBP);
+export const loadNbaPbp = seasonLoader<LoadNbaPbpRow>(LOAD_NBA_PBP);
 /** snake_case alias of {@link loadNbaPbp} (py/R parity). */
 export const load_nba_pbp = loadNbaPbp;
 
@@ -53,7 +92,7 @@ const LOAD_NBA_PLAYER_BOXSCORE: ReleaseLoaderDef = {"fn":"load_nba_player_boxsco
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaPlayerBoxscore({ seasons: 2024 });
  */
-export const loadNbaPlayerBoxscore = seasonLoader(LOAD_NBA_PLAYER_BOXSCORE);
+export const loadNbaPlayerBoxscore = seasonLoader<LoadNbaPlayerBoxscoreRow>(LOAD_NBA_PLAYER_BOXSCORE);
 /** snake_case alias of {@link loadNbaPlayerBoxscore} (py/R parity). */
 export const load_nba_player_boxscore = loadNbaPlayerBoxscore;
 
@@ -75,7 +114,7 @@ const LOAD_NBA_SCHEDULE: ReleaseLoaderDef = {"fn":"load_nba_schedule","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaSchedule({ seasons: 2024 });
  */
-export const loadNbaSchedule = seasonLoader(LOAD_NBA_SCHEDULE);
+export const loadNbaSchedule = seasonLoader<LoadNbaScheduleRow>(LOAD_NBA_SCHEDULE);
 /** snake_case alias of {@link loadNbaSchedule} (py/R parity). */
 export const load_nba_schedule = loadNbaSchedule;
 
@@ -97,7 +136,7 @@ const LOAD_NBA_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_nba_team_boxscore",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaTeamBoxscore({ seasons: 2024 });
  */
-export const loadNbaTeamBoxscore = seasonLoader(LOAD_NBA_TEAM_BOXSCORE);
+export const loadNbaTeamBoxscore = seasonLoader<LoadNbaTeamBoxscoreRow>(LOAD_NBA_TEAM_BOXSCORE);
 /** snake_case alias of {@link loadNbaTeamBoxscore} (py/R parity). */
 export const load_nba_team_boxscore = loadNbaTeamBoxscore;
 
@@ -119,7 +158,7 @@ const LOAD_NBA_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_nba_game_rosters","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaGameRosters({ seasons: 2002 });
  */
-export const loadNbaGameRosters = seasonLoader(LOAD_NBA_GAME_ROSTERS);
+export const loadNbaGameRosters = seasonLoader<LoadNbaGameRostersRow>(LOAD_NBA_GAME_ROSTERS);
 /** snake_case alias of {@link loadNbaGameRosters} (py/R parity). */
 export const load_nba_game_rosters = loadNbaGameRosters;
 
@@ -141,7 +180,7 @@ const LOAD_NBA_OFFICIALS: ReleaseLoaderDef = {"fn":"load_nba_officials","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaOfficials({ seasons: 2002 });
  */
-export const loadNbaOfficials = seasonLoader(LOAD_NBA_OFFICIALS);
+export const loadNbaOfficials = seasonLoader<LoadNbaOfficialsRow>(LOAD_NBA_OFFICIALS);
 /** snake_case alias of {@link loadNbaOfficials} (py/R parity). */
 export const load_nba_officials = loadNbaOfficials;
 
@@ -163,7 +202,7 @@ const LOAD_NBA_SHOTS: ReleaseLoaderDef = {"fn":"load_nba_shots","url":"https://g
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaShots({ seasons: 2002 });
  */
-export const loadNbaShots = seasonLoader(LOAD_NBA_SHOTS);
+export const loadNbaShots = seasonLoader<LoadNbaShotsRow>(LOAD_NBA_SHOTS);
 /** snake_case alias of {@link loadNbaShots} (py/R parity). */
 export const load_nba_shots = loadNbaShots;
 
@@ -185,7 +224,7 @@ const LOAD_NBA_STANDINGS: ReleaseLoaderDef = {"fn":"load_nba_standings","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStandings({ seasons: 2002 });
  */
-export const loadNbaStandings = seasonLoader(LOAD_NBA_STANDINGS);
+export const loadNbaStandings = seasonLoader<LoadNbaStandingsRow>(LOAD_NBA_STANDINGS);
 /** snake_case alias of {@link loadNbaStandings} (py/R parity). */
 export const load_nba_standings = loadNbaStandings;
 
@@ -207,7 +246,7 @@ const LOAD_NBA_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_nba_player_se
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaPlayerSeasonStats({ seasons: 2025 });
  */
-export const loadNbaPlayerSeasonStats = seasonLoader(LOAD_NBA_PLAYER_SEASON_STATS);
+export const loadNbaPlayerSeasonStats = seasonLoader<LoadNbaPlayerSeasonStatsRow>(LOAD_NBA_PLAYER_SEASON_STATS);
 /** snake_case alias of {@link loadNbaPlayerSeasonStats} (py/R parity). */
 export const load_nba_player_season_stats = loadNbaPlayerSeasonStats;
 
@@ -229,7 +268,7 @@ const LOAD_NBA_TEAM_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_nba_team_season
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaTeamSeasonStats({ seasons: 2025 });
  */
-export const loadNbaTeamSeasonStats = seasonLoader(LOAD_NBA_TEAM_SEASON_STATS);
+export const loadNbaTeamSeasonStats = seasonLoader<LoadNbaTeamSeasonStatsRow>(LOAD_NBA_TEAM_SEASON_STATS);
 /** snake_case alias of {@link loadNbaTeamSeasonStats} (py/R parity). */
 export const load_nba_team_season_stats = loadNbaTeamSeasonStats;
 
@@ -251,7 +290,7 @@ const LOAD_NBA_DRAFT: ReleaseLoaderDef = {"fn":"load_nba_draft","url":"https://g
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaDraft({ seasons: 2025 });
  */
-export const loadNbaDraft = seasonLoader(LOAD_NBA_DRAFT);
+export const loadNbaDraft = seasonLoader<LoadNbaDraftRow>(LOAD_NBA_DRAFT);
 /** snake_case alias of {@link loadNbaDraft} (py/R parity). */
 export const load_nba_draft = loadNbaDraft;
 
@@ -273,7 +312,7 @@ const LOAD_NBA_ROSTERS: ReleaseLoaderDef = {"fn":"load_nba_rosters","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaRosters({ seasons: 2025 });
  */
-export const loadNbaRosters = seasonLoader(LOAD_NBA_ROSTERS);
+export const loadNbaRosters = seasonLoader<LoadNbaRostersRow>(LOAD_NBA_ROSTERS);
 /** snake_case alias of {@link loadNbaRosters} (py/R parity). */
 export const load_nba_rosters = loadNbaRosters;
 
@@ -297,7 +336,7 @@ const LOAD_NBA_STATS_SCHEDULES: ReleaseLoaderDef = {"fn":"load_nba_stats_schedul
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsSchedules({ seasons: 2025 });
  */
-export const loadNbaStatsSchedules = seasonLoader(LOAD_NBA_STATS_SCHEDULES);
+export const loadNbaStatsSchedules = seasonLoader<LoadNbaStatsSchedulesRow>(LOAD_NBA_STATS_SCHEDULES);
 /** snake_case alias of {@link loadNbaStatsSchedules} (py/R parity). */
 export const load_nba_stats_schedules = loadNbaStatsSchedules;
 
@@ -321,7 +360,7 @@ const LOAD_NBA_STATS_COACHES: ReleaseLoaderDef = {"fn":"load_nba_stats_coaches",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsCoaches({ seasons: 2025 });
  */
-export const loadNbaStatsCoaches = seasonLoader(LOAD_NBA_STATS_COACHES);
+export const loadNbaStatsCoaches = seasonLoader<LoadNbaStatsCoachesRow>(LOAD_NBA_STATS_COACHES);
 /** snake_case alias of {@link loadNbaStatsCoaches} (py/R parity). */
 export const load_nba_stats_coaches = loadNbaStatsCoaches;
 
@@ -345,7 +384,7 @@ const LOAD_NBA_STATS_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_nba_stats_game
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsGameRosters({ seasons: 2025 });
  */
-export const loadNbaStatsGameRosters = seasonLoader(LOAD_NBA_STATS_GAME_ROSTERS);
+export const loadNbaStatsGameRosters = seasonLoader<LoadNbaStatsGameRostersRow>(LOAD_NBA_STATS_GAME_ROSTERS);
 /** snake_case alias of {@link loadNbaStatsGameRosters} (py/R parity). */
 export const load_nba_stats_game_rosters = loadNbaStatsGameRosters;
 
@@ -369,7 +408,7 @@ const LOAD_NBA_STATS_LINEUPS: ReleaseLoaderDef = {"fn":"load_nba_stats_lineups",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsLineups({ seasons: 2025 });
  */
-export const loadNbaStatsLineups = seasonLoader(LOAD_NBA_STATS_LINEUPS);
+export const loadNbaStatsLineups = seasonLoader<LoadNbaStatsLineupsRow>(LOAD_NBA_STATS_LINEUPS);
 /** snake_case alias of {@link loadNbaStatsLineups} (py/R parity). */
 export const load_nba_stats_lineups = loadNbaStatsLineups;
 
@@ -392,7 +431,7 @@ export const load_nba_stats_lineups = loadNbaStatsLineups;
  * @deprecated Use {@link loadNbaStatsGameLineups}; same `seasons` convention.
  * @example await sdv.nba.loadNbaStatsLineupsV3({ seasons: 2025 });
  */
-export const loadNbaStatsLineupsV3 = deprecatedLoader<SeasonLoader>(
+export const loadNbaStatsLineupsV3 = deprecatedLoader<typeof loadNbaStatsGameLineups>(
   "load_nba_stats_lineups_v3",
   "load_nba_stats_game_lineups",
   () => loadNbaStatsGameLineups
@@ -420,7 +459,7 @@ const LOAD_NBA_STATS_OFFICIALS: ReleaseLoaderDef = {"fn":"load_nba_stats_officia
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsOfficials({ seasons: 2025 });
  */
-export const loadNbaStatsOfficials = seasonLoader(LOAD_NBA_STATS_OFFICIALS);
+export const loadNbaStatsOfficials = seasonLoader<LoadNbaStatsOfficialsRow>(LOAD_NBA_STATS_OFFICIALS);
 /** snake_case alias of {@link loadNbaStatsOfficials} (py/R parity). */
 export const load_nba_stats_officials = loadNbaStatsOfficials;
 
@@ -444,7 +483,7 @@ const LOAD_NBA_STATS_PBP: ReleaseLoaderDef = {"fn":"load_nba_stats_pbp","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsPbp({ seasons: 2025, columns: ['game_id', 'period', 'clock', 'event_type', 'description'] });
  */
-export const loadNbaStatsPbp = seasonLoader(LOAD_NBA_STATS_PBP);
+export const loadNbaStatsPbp = seasonLoader<LoadNbaStatsPbpRow>(LOAD_NBA_STATS_PBP);
 /** snake_case alias of {@link loadNbaStatsPbp} (py/R parity). */
 export const load_nba_stats_pbp = loadNbaStatsPbp;
 
@@ -468,7 +507,7 @@ const LOAD_NBA_STATS_POSSESSIONS: ReleaseLoaderDef = {"fn":"load_nba_stats_posse
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsPossessions({ seasons: 2025 });
  */
-export const loadNbaStatsPossessions = seasonLoader(LOAD_NBA_STATS_POSSESSIONS);
+export const loadNbaStatsPossessions = seasonLoader<LoadNbaStatsPossessionsRow>(LOAD_NBA_STATS_POSSESSIONS);
 /** snake_case alias of {@link loadNbaStatsPossessions} (py/R parity). */
 export const load_nba_stats_possessions = loadNbaStatsPossessions;
 
@@ -492,7 +531,7 @@ const LOAD_NBA_STATS_GAME_LINEUPS: ReleaseLoaderDef = {"fn":"load_nba_stats_game
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsGameLineups({ seasons: 2025 });
  */
-export const loadNbaStatsGameLineups = seasonLoader(LOAD_NBA_STATS_GAME_LINEUPS);
+export const loadNbaStatsGameLineups = seasonLoader<LoadNbaStatsGameLineupsRow>(LOAD_NBA_STATS_GAME_LINEUPS);
 /** snake_case alias of {@link loadNbaStatsGameLineups} (py/R parity). */
 export const load_nba_stats_game_lineups = loadNbaStatsGameLineups;
 
@@ -516,7 +555,7 @@ const LOAD_NBA_STATS_GAME_MATCHUPS: ReleaseLoaderDef = {"fn":"load_nba_stats_gam
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsGameMatchups({ seasons: 2025 });
  */
-export const loadNbaStatsGameMatchups = seasonLoader(LOAD_NBA_STATS_GAME_MATCHUPS);
+export const loadNbaStatsGameMatchups = seasonLoader<LoadNbaStatsGameMatchupsRow>(LOAD_NBA_STATS_GAME_MATCHUPS);
 /** snake_case alias of {@link loadNbaStatsGameMatchups} (py/R parity). */
 export const load_nba_stats_game_matchups = loadNbaStatsGameMatchups;
 
@@ -539,7 +578,7 @@ export const load_nba_stats_game_matchups = loadNbaStatsGameMatchups;
  * @deprecated Use {@link loadNbaStatsPbp}; same `seasons` convention.
  * @example await sdv.nba.loadNbaStatsPbpV3({ seasons: 2025, columns: ['game_id', 'period', 'clock', 'event_type', 'description'] });
  */
-export const loadNbaStatsPbpV3 = deprecatedLoader<SeasonLoader>(
+export const loadNbaStatsPbpV3 = deprecatedLoader<typeof loadNbaStatsPbp>(
   "load_nba_stats_pbp_v3",
   "load_nba_stats_pbp",
   () => loadNbaStatsPbp
@@ -567,7 +606,7 @@ const LOAD_NBA_STATS_PLAYER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_nba_stats_
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsPlayerBoxscores({ seasons: 2025 });
  */
-export const loadNbaStatsPlayerBoxscores = seasonLoader(LOAD_NBA_STATS_PLAYER_BOXSCORES);
+export const loadNbaStatsPlayerBoxscores = seasonLoader<LoadNbaStatsPlayerBoxscoresRow>(LOAD_NBA_STATS_PLAYER_BOXSCORES);
 /** snake_case alias of {@link loadNbaStatsPlayerBoxscores} (py/R parity). */
 export const load_nba_stats_player_boxscores = loadNbaStatsPlayerBoxscores;
 
@@ -591,7 +630,7 @@ const LOAD_NBA_STATS_PLAYER_GAME_LOGS: ReleaseLoaderDef = {"fn":"load_nba_stats_
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsPlayerGameLogs({ seasons: 2025 });
  */
-export const loadNbaStatsPlayerGameLogs = seasonLoader(LOAD_NBA_STATS_PLAYER_GAME_LOGS);
+export const loadNbaStatsPlayerGameLogs = seasonLoader<LoadNbaStatsPlayerGameLogsRow>(LOAD_NBA_STATS_PLAYER_GAME_LOGS);
 /** snake_case alias of {@link loadNbaStatsPlayerGameLogs} (py/R parity). */
 export const load_nba_stats_player_game_logs = loadNbaStatsPlayerGameLogs;
 
@@ -615,7 +654,7 @@ const LOAD_NBA_STATS_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_nba_sta
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsPlayerSeasonStats({ seasons: 2025 });
  */
-export const loadNbaStatsPlayerSeasonStats = seasonLoader(LOAD_NBA_STATS_PLAYER_SEASON_STATS);
+export const loadNbaStatsPlayerSeasonStats = seasonLoader<LoadNbaStatsPlayerSeasonStatsRow>(LOAD_NBA_STATS_PLAYER_SEASON_STATS);
 /** snake_case alias of {@link loadNbaStatsPlayerSeasonStats} (py/R parity). */
 export const load_nba_stats_player_season_stats = loadNbaStatsPlayerSeasonStats;
 
@@ -638,7 +677,7 @@ export const load_nba_stats_player_season_stats = loadNbaStatsPlayerSeasonStats;
  * @deprecated Use {@link loadNbaStatsPossessions}; same `seasons` convention.
  * @example await sdv.nba.loadNbaStatsPossessionsV3({ seasons: 2025 });
  */
-export const loadNbaStatsPossessionsV3 = deprecatedLoader<SeasonLoader>(
+export const loadNbaStatsPossessionsV3 = deprecatedLoader<typeof loadNbaStatsPossessions>(
   "load_nba_stats_possessions_v3",
   "load_nba_stats_possessions",
   () => loadNbaStatsPossessions
@@ -666,7 +705,7 @@ const LOAD_NBA_STATS_ROSTERS: ReleaseLoaderDef = {"fn":"load_nba_stats_rosters",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsRosters({ seasons: 2025 });
  */
-export const loadNbaStatsRosters = seasonLoader(LOAD_NBA_STATS_ROSTERS);
+export const loadNbaStatsRosters = seasonLoader<LoadNbaStatsRostersRow>(LOAD_NBA_STATS_ROSTERS);
 /** snake_case alias of {@link loadNbaStatsRosters} (py/R parity). */
 export const load_nba_stats_rosters = loadNbaStatsRosters;
 
@@ -690,7 +729,7 @@ const LOAD_NBA_STATS_SHOTS: ReleaseLoaderDef = {"fn":"load_nba_stats_shots","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsShots({ seasons: 2025 });
  */
-export const loadNbaStatsShots = seasonLoader(LOAD_NBA_STATS_SHOTS);
+export const loadNbaStatsShots = seasonLoader<LoadNbaStatsShotsRow>(LOAD_NBA_STATS_SHOTS);
 /** snake_case alias of {@link loadNbaStatsShots} (py/R parity). */
 export const load_nba_stats_shots = loadNbaStatsShots;
 
@@ -714,7 +753,7 @@ const LOAD_NBA_STATS_STANDINGS: ReleaseLoaderDef = {"fn":"load_nba_stats_standin
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsStandings({ seasons: 2025 });
  */
-export const loadNbaStatsStandings = seasonLoader(LOAD_NBA_STATS_STANDINGS);
+export const loadNbaStatsStandings = seasonLoader<LoadNbaStatsStandingsRow>(LOAD_NBA_STATS_STANDINGS);
 /** snake_case alias of {@link loadNbaStatsStandings} (py/R parity). */
 export const load_nba_stats_standings = loadNbaStatsStandings;
 
@@ -738,7 +777,7 @@ const LOAD_NBA_STATS_TEAM_BOXSCORES: ReleaseLoaderDef = {"fn":"load_nba_stats_te
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsTeamBoxscores({ seasons: 2025 });
  */
-export const loadNbaStatsTeamBoxscores = seasonLoader(LOAD_NBA_STATS_TEAM_BOXSCORES);
+export const loadNbaStatsTeamBoxscores = seasonLoader<LoadNbaStatsTeamBoxscoresRow>(LOAD_NBA_STATS_TEAM_BOXSCORES);
 /** snake_case alias of {@link loadNbaStatsTeamBoxscores} (py/R parity). */
 export const load_nba_stats_team_boxscores = loadNbaStatsTeamBoxscores;
 
@@ -762,7 +801,7 @@ const LOAD_NBA_STATS_TEAM_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_nba_stats
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaStatsTeamSeasonStats({ seasons: 2025 });
  */
-export const loadNbaStatsTeamSeasonStats = seasonLoader(LOAD_NBA_STATS_TEAM_SEASON_STATS);
+export const loadNbaStatsTeamSeasonStats = seasonLoader<LoadNbaStatsTeamSeasonStatsRow>(LOAD_NBA_STATS_TEAM_SEASON_STATS);
 /** snake_case alias of {@link loadNbaStatsTeamSeasonStats} (py/R parity). */
 export const load_nba_stats_team_season_stats = loadNbaStatsTeamSeasonStats;
 
@@ -784,7 +823,7 @@ const LOAD_NBA_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_nba_player_cross
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaPlayerCrosswalk({ seasons: 2026 });
  */
-export const loadNbaPlayerCrosswalk = seasonLoader(LOAD_NBA_PLAYER_CROSSWALK);
+export const loadNbaPlayerCrosswalk = seasonLoader<LoadNbaPlayerCrosswalkRow>(LOAD_NBA_PLAYER_CROSSWALK);
 /** snake_case alias of {@link loadNbaPlayerCrosswalk} (py/R parity). */
 export const load_nba_player_crosswalk = loadNbaPlayerCrosswalk;
 
@@ -806,7 +845,7 @@ const LOAD_NBA_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_nba_schedule_c
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaScheduleCrosswalk({ seasons: 2026 });
  */
-export const loadNbaScheduleCrosswalk = seasonLoader(LOAD_NBA_SCHEDULE_CROSSWALK);
+export const loadNbaScheduleCrosswalk = seasonLoader<LoadNbaScheduleCrosswalkRow>(LOAD_NBA_SCHEDULE_CROSSWALK);
 /** snake_case alias of {@link loadNbaScheduleCrosswalk} (py/R parity). */
 export const load_nba_schedule_crosswalk = loadNbaScheduleCrosswalk;
 
@@ -828,7 +867,7 @@ const LOAD_NBA_TEAM_CROSSWALK: ReleaseLoaderDef = {"fn":"load_nba_team_crosswalk
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaTeamCrosswalk({ seasons: 2026 });
  */
-export const loadNbaTeamCrosswalk = seasonLoader(LOAD_NBA_TEAM_CROSSWALK);
+export const loadNbaTeamCrosswalk = seasonLoader<LoadNbaTeamCrosswalkRow>(LOAD_NBA_TEAM_CROSSWALK);
 /** snake_case alias of {@link loadNbaTeamCrosswalk} (py/R parity). */
 export const load_nba_team_crosswalk = loadNbaTeamCrosswalk;
 
@@ -850,7 +889,7 @@ const LOAD_NBA_PLAYER_CORE: ReleaseLoaderDef = {"fn":"load_nba_player_core","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaPlayerCore({ seasons: 2025 });
  */
-export const loadNbaPlayerCore = seasonLoader(LOAD_NBA_PLAYER_CORE);
+export const loadNbaPlayerCore = seasonLoader<LoadNbaPlayerCoreRow>(LOAD_NBA_PLAYER_CORE);
 /** snake_case alias of {@link loadNbaPlayerCore} (py/R parity). */
 export const load_nba_player_core = loadNbaPlayerCore;
 
@@ -872,7 +911,7 @@ const LOAD_NBA_PLAYER_IMPACT: ReleaseLoaderDef = {"fn":"load_nba_player_impact",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaPlayerImpact({ seasons: 2024 });
  */
-export const loadNbaPlayerImpact = seasonLoader(LOAD_NBA_PLAYER_IMPACT);
+export const loadNbaPlayerImpact = seasonLoader<LoadNbaPlayerImpactRow>(LOAD_NBA_PLAYER_IMPACT);
 /** snake_case alias of {@link loadNbaPlayerImpact} (py/R parity). */
 export const load_nba_player_impact = loadNbaPlayerImpact;
 
@@ -895,7 +934,7 @@ const LOAD_NBA_GROUPS: ReleaseLoaderDef = {"fn":"load_nba_groups","url":"https:/
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaGroups();
  */
-export const loadNbaGroups = assetLoader(LOAD_NBA_GROUPS);
+export const loadNbaGroups = assetLoader<LoadNbaGroupsRow>(LOAD_NBA_GROUPS);
 /** snake_case alias of {@link loadNbaGroups} (py/R parity). */
 export const load_nba_groups = loadNbaGroups;
 
@@ -918,7 +957,7 @@ const LOAD_NBA_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nba_group_seasons",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaGroupSeasons();
  */
-export const loadNbaGroupSeasons = assetLoader(LOAD_NBA_GROUP_SEASONS);
+export const loadNbaGroupSeasons = assetLoader<LoadNbaGroupSeasonsRow>(LOAD_NBA_GROUP_SEASONS);
 /** snake_case alias of {@link loadNbaGroupSeasons} (py/R parity). */
 export const load_nba_group_seasons = loadNbaGroupSeasons;
 
@@ -941,7 +980,7 @@ const LOAD_NBA_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_nba_group_aliases",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaGroupAliases();
  */
-export const loadNbaGroupAliases = assetLoader(LOAD_NBA_GROUP_ALIASES);
+export const loadNbaGroupAliases = assetLoader<LoadNbaGroupAliasesRow>(LOAD_NBA_GROUP_ALIASES);
 /** snake_case alias of {@link loadNbaGroupAliases} (py/R parity). */
 export const load_nba_group_aliases = loadNbaGroupAliases;
 
@@ -965,6 +1004,6 @@ const LOAD_NBA_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nba_team_group
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaTeamGroupSeasons({ seasons: 2024 });
  */
-export const loadNbaTeamGroupSeasons = seasonLoader(LOAD_NBA_TEAM_GROUP_SEASONS);
+export const loadNbaTeamGroupSeasons = seasonLoader<LoadNbaTeamGroupSeasonsRow>(LOAD_NBA_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadNbaTeamGroupSeasons} (py/R parity). */
 export const load_nba_team_group_seasons = loadNbaTeamGroupSeasons;

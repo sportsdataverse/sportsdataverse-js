@@ -147,7 +147,10 @@ function check(value, m, at, stats) {
   }
 }
 
-/** A flat wrapper's declared `{ parsed: true }` type `P` and section map `S` (src/generated/flat/<api>.ts). */
+/**
+ * A flat wrapper's declared `{ parsed: true }` type `P` and section map `S` (src/generated/flat/<api>.ts):
+ * `Wrapper<P, Params>` / `SectionedWrapper<P, S, Params>`, where an `S` of `{}` names no table.
+ */
 function wrapperType(api, camel, ifaces) {
   let found;
   ts.forEachChild(source(join(GEN, 'flat', `${api}.ts`)), (n) => {
@@ -155,12 +158,14 @@ function wrapperType(api, camel, ifaces) {
     for (const d of n.declarationList.declarations) if (d.name.getText() === camel) found = d.type;
   });
   if (!found || !ts.isTypeReferenceNode(found)) throw new Error(`${api}.${camel}: no wrapper type annotation`);
+  const kind = found.typeName.getText();
   const [p, s] = found.typeArguments ?? [];
+  const sections = kind === 'SectionedWrapper' && s && !(ts.isTypeLiteralNode(s) && !s.members.length) ? s : null;
   return {
-    kind: found.typeName.getText(),
+    kind,
     text: found.getText(),
     P: p ? model(p, ifaces) : { k: 'array', of: { k: 'row', props: null } },
-    S: s ? model(s, ifaces) : null,
+    S: sections ? model(sections, ifaces) : null,
   };
 }
 

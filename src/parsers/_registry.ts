@@ -154,10 +154,10 @@ import { parse_asa, parse_asa_goals_added } from "./asa.js";
 import { parse_mls_api, parse_mls_entity, parse_mls_standings, parse_mls_match } from "./mls_api.js";
 import { parse_nwsl_sdp, parse_nwsl_standings, parse_nwsl_stats, parse_nwsl_lineups } from "./nwsl_api.js";
 import { parse_nba_stats_result_sets } from "./nba_stats.js";
-import type { ParsedTables } from "../core/types.js";
+import type { ParsedTables, ParserRow } from "../core/types.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
-export type ParserFn = (raw: any, section?: string) => Record<string, any>[];
+export type ParserFn = (raw: unknown, section?: string) => ParserRow[];
 
 /** Named tables from one payload (a multi-table page, e.g. KenPom or PFF `/v1/teams`): the shared type. */
 export type { ParsedTables };
@@ -166,7 +166,7 @@ export type { ParsedTables };
  * A registered flat-API parser: tidy rows, or — for a payload that carries
  * several tables (sdv-py returns a dict of frames there) — a dict of row arrays.
  */
-export type FlatParserFn = (raw: any, section?: string) => Record<string, any>[] | ParsedTables;
+export type FlatParserFn = (raw: unknown, section?: string) => ParserRow[] | ParsedTables;
 
 /** Registered parsers, keyed by the `parser` name on a flat `WrapperDef`. */
 export const PARSERS: Record<string, FlatParserFn> = {

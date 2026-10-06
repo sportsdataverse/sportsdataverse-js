@@ -1,34 +1,9 @@
 {
+  /* The strict ratchet (T18b-2) is done: the root tsconfig.json is `strict: true`
+     over all of src/, so this equals `npm run typecheck`. Kept so `typecheck:strict`
+     (CI) still holds the two equal. */
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "strict": true,
-    "noImplicitAny": true,
     "noEmit": true
-  },
-  "include": [],
-  "files": [
-    "src/core/errors.ts",
-    "src/core/id_columns.ts",
-    "src/core/transport.ts",
-    "src/core/auth.ts",
-    "src/core/config.ts",
-    "src/core/request.ts",
-    "src/core/transforms.ts",
-    "src/core/pff_api_runtime.ts",
-    "src/core/nfl_pro_runtime.ts",
-    "src/core/kenpom_runtime.ts",
-    "src/parsers/pff_api.ts",
-    "src/parsers/nfl_pro.ts",
-    "src/parsers/kenpom.ts",
-    "src/core/releases.ts",
-    "src/core/sports247_runtime.ts",
-    "src/parsers/sports247.ts",
-    "src/core/deprecation.ts",
-    "src/core/nba_stats_runtime.ts",
-    "src/analytics/hockeytech.ts",
-    "src/models/cricket_wp.ts",
-    "src/odds/math.ts",
-    "src/producers/espn_basketball_box.ts",
-    "src/producers/espn_basketball_pbp.ts"
-  ]
+  }
 }

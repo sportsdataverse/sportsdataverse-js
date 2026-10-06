@@ -18,6 +18,7 @@
 // default, but registered so any future scores endpoint can default to it).
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -89,7 +90,7 @@ function unrollKeyedMap(map: any): Record<string, any>[] {
  * handles a bare list, an object wrapping records under a list-bearing key, or a
  * single resource object (emitted as one row). Returns `[]` when empty.
  */
-export function parse_yahoo_scores_list(raw: any): Record<string, any>[] {
+export function parse_yahoo_scores_list(raw: any): ParserRow[] {
   const svc = unwrapService(raw);
   if (Array.isArray(svc)) return normalize(svc);
   if (!isPlainObject(svc)) return [];
@@ -109,7 +110,7 @@ export function parse_yahoo_scores_list(raw: any): Record<string, any>[] {
  * columns). Falls back to the generic list flattener for un-keyed shapes.
  * Returns `[]` when empty / malformed.
  */
-export function parse_yahoo_scores_scoreboard(raw: any): Record<string, any>[] {
+export function parse_yahoo_scores_scoreboard(raw: any): ParserRow[] {
   const svc = unwrapService(raw);
   if (!isPlainObject(svc)) return [];
   const games = (svc as Record<string, any>).scoreboard?.games ?? (svc as Record<string, any>).games;
@@ -128,7 +129,7 @@ export function parse_yahoo_scores_scoreboard(raw: any): Record<string, any>[] {
  * into one row per player (the map key becomes the `id` column). Falls back to
  * the generic list flattener. Returns `[]` when empty / malformed.
  */
-export function parse_yahoo_scores_boxscore(raw: any): Record<string, any>[] {
+export function parse_yahoo_scores_boxscore(raw: any): ParserRow[] {
   const svc = unwrapService(raw);
   if (!isPlainObject(svc)) return [];
   const playerStats =

@@ -8,7 +8,134 @@
 // runtime-factory path. The non-basketball leagues still use the factory.
 
 import { callWrapper } from "../../core/espn.js";
-import type { LeagueConfig, ParsedTables, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type { LeagueConfig, ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  EspnAthleteAwardsParams,
+  EspnAthleteBioParams,
+  EspnAthleteCareerStatsParams,
+  EspnAthleteContractsParams,
+  EspnAthleteCoreParams,
+  EspnAthleteEventlogParams,
+  EspnAthleteGamelogParams,
+  EspnAthleteInfoParams,
+  EspnAthleteInjuriesParams,
+  EspnAthleteNewsParams,
+  EspnAthleteNotesParams,
+  EspnAthleteOverviewParams,
+  EspnAthleteRecordsParams,
+  EspnAthleteSeasonsParams,
+  EspnAthleteSplitsParams,
+  EspnAthleteStatisticslogParams,
+  EspnAthleteStatsParams,
+  EspnAthleteVsAthleteParams,
+  EspnAthletesIndexParams,
+  EspnAwardParams,
+  EspnAwardsParams,
+  EspnCalendarParams,
+  EspnCdnBoxscoreParams,
+  EspnCdnPlaybyplayParams,
+  EspnCdnRankingsParams,
+  EspnCdnScheduleParams,
+  EspnCdnScoreboardParams,
+  EspnCoachParams,
+  EspnCoachRecordParams,
+  EspnCoachSeasonParams,
+  EspnConferencesParams,
+  EspnDraftParams,
+  EspnEventBroadcastsParams,
+  EspnEventCompetitionParams,
+  EspnEventCompetitorLeadersParams,
+  EspnEventCompetitorLinescoresParams,
+  EspnEventCompetitorParams,
+  EspnEventCompetitorRecordParams,
+  EspnEventCompetitorRosterParams,
+  EspnEventCompetitorStatisticsParams,
+  EspnEventCompetitorsParams,
+  EspnEventLeadersParams,
+  EspnEventOddsParams,
+  EspnEventOfficialDetailParams,
+  EspnEventOfficialsParams,
+  EspnEventParams,
+  EspnEventPlayParams,
+  EspnEventPlayPersonnelParams,
+  EspnEventPlaysParams,
+  EspnEventPowerindexParams,
+  EspnEventPredictorParams,
+  EspnEventProbabilitiesParams,
+  EspnEventPropbetsParams,
+  EspnEventScoringplaysParams,
+  EspnEventSituationParams,
+  EspnEventStatusParams,
+  EspnEventsParams,
+  EspnFpiParams,
+  EspnFranchiseParams,
+  EspnFranchisesParams,
+  EspnInjuriesParams,
+  EspnLeadersCoreParams,
+  EspnLeadersParams,
+  EspnLeagueNotesParams,
+  EspnLeagueRootParams,
+  EspnNewsParams,
+  EspnPositionParams,
+  EspnPositionsParams,
+  EspnRankingsParams,
+  EspnRecruitingAthletesParams,
+  EspnRecruitingRankingsParams,
+  EspnRecruitingYearsParams,
+  EspnScoreboardParams,
+  EspnSeasonAthletesParams,
+  EspnSeasonAwardsParams,
+  EspnSeasonCoachesParams,
+  EspnSeasonDraftParams,
+  EspnSeasonDraftRoundPicksParams,
+  EspnSeasonFreeagentsParams,
+  EspnSeasonFuturesParams,
+  EspnSeasonGroupChildrenParams,
+  EspnSeasonGroupParams,
+  EspnSeasonGroupTeamsParams,
+  EspnSeasonGroupsParams,
+  EspnSeasonInfoParams,
+  EspnSeasonPointerParams,
+  EspnSeasonPowerindexLeadersParams,
+  EspnSeasonPowerindexParams,
+  EspnSeasonQbrParams,
+  EspnSeasonQbrWeekParams,
+  EspnSeasonRecruitsParams,
+  EspnSeasonTeamParams,
+  EspnSeasonTeamsParams,
+  EspnSeasonTypeCorrectionsParams,
+  EspnSeasonTypeLeadersParams,
+  EspnSeasonTypeParams,
+  EspnSeasonTypesParams,
+  EspnSeasonWeekEventsParams,
+  EspnSeasonWeekParams,
+  EspnSeasonWeekPowerindexParams,
+  EspnSeasonWeekRankingsParams,
+  EspnSeasonWeeksParams,
+  EspnSeasonsParams,
+  EspnStandingsCoreParams,
+  EspnStandingsParams,
+  EspnStatisticsLeagueParams,
+  EspnSummaryParams,
+  EspnTalentpicksParams,
+  EspnTeamCoreParams,
+  EspnTeamDepthchartsParams,
+  EspnTeamHistoryParams,
+  EspnTeamInjuriesParams,
+  EspnTeamLeadersParams,
+  EspnTeamNewsParams,
+  EspnTeamParams,
+  EspnTeamRecordParams,
+  EspnTeamRosterParams,
+  EspnTeamScheduleParams,
+  EspnTeamTransactionsParams,
+  EspnTeamsCoreParams,
+  EspnTeamsSiteParams,
+  EspnTournamentsParams,
+  EspnTransactionsParams,
+  EspnVenueParams,
+  EspnVenuesParams,
+} from "../params/espn.js";
 
 /** Module-private league binding for `cfb` (not exported). */
 const CFG: LeagueConfig = {
@@ -52,7 +179,7 @@ const ATHLETE_AWARDS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerAwards({ athlete_id: '…' });
  */
-export const espnCfbPlayerAwards: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_AWARDS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerAwards} (py/R parity). */
 export const espn_cfb_player_awards = espnCfbPlayerAwards;
@@ -79,7 +206,7 @@ const ATHLETE_BIO_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerBio({ athlete_id: '…' });
  */
-export const espnCfbPlayerBio: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerBio: Wrapper<Row[], EspnAthleteBioParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_BIO_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerBio} (py/R parity). */
 export const espn_cfb_player_bio = espnCfbPlayerBio;
@@ -111,7 +238,7 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerCareerStats({ athlete_id: '…' });
  */
-export const espnCfbPlayerCareerStats: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_CAREER_STATS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerCareerStats} (py/R parity). */
 export const espn_cfb_player_career_stats = espnCfbPlayerCareerStats;
@@ -138,7 +265,7 @@ const ATHLETE_CONTRACTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerContracts({ athlete_id: '…' });
  */
-export const espnCfbPlayerContracts: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_CONTRACTS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerContracts} (py/R parity). */
 export const espn_cfb_player_contracts = espnCfbPlayerContracts;
@@ -165,7 +292,7 @@ const ATHLETE_CORE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerCore({ athlete_id: '…' });
  */
-export const espnCfbPlayerCore: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerCore: Wrapper<Row[], EspnAthleteCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerCore} (py/R parity). */
 export const espn_cfb_player_core = espnCfbPlayerCore;
@@ -192,7 +319,7 @@ const ATHLETE_EVENTLOG_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerEventlog({ athlete_id: '…' });
  */
-export const espnCfbPlayerEventlog: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_EVENTLOG_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerEventlog} (py/R parity). */
 export const espn_cfb_player_eventlog = espnCfbPlayerEventlog;
@@ -225,7 +352,7 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerGamelog({ athlete_id: '…' });
  */
-export const espnCfbPlayerGamelog: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_GAMELOG_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerGamelog} (py/R parity). */
 export const espn_cfb_player_gamelog = espnCfbPlayerGamelog;
@@ -252,7 +379,7 @@ const ATHLETE_INFO_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerInfo({ athlete_id: '…' });
  */
-export const espnCfbPlayerInfo: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_INFO_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerInfo} (py/R parity). */
 export const espn_cfb_player_info = espnCfbPlayerInfo;
@@ -279,7 +406,7 @@ const ATHLETE_INJURIES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerInjuries({ athlete_id: '…' });
  */
-export const espnCfbPlayerInjuries: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_INJURIES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerInjuries} (py/R parity). */
 export const espn_cfb_player_injuries = espnCfbPlayerInjuries;
@@ -306,7 +433,7 @@ const ATHLETE_NEWS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerNews({ athlete_id: '…' });
  */
-export const espnCfbPlayerNews: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerNews: Wrapper<Row[], EspnAthleteNewsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_NEWS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerNews} (py/R parity). */
 export const espn_cfb_player_news = espnCfbPlayerNews;
@@ -333,7 +460,7 @@ const ATHLETE_NOTES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerNotes({ athlete_id: '…' });
  */
-export const espnCfbPlayerNotes: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_NOTES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerNotes} (py/R parity). */
 export const espn_cfb_player_notes = espnCfbPlayerNotes;
@@ -360,7 +487,7 @@ const ATHLETE_OVERVIEW_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerOverview({ athlete_id: '…' });
  */
-export const espnCfbPlayerOverview: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_OVERVIEW_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerOverview} (py/R parity). */
 export const espn_cfb_player_overview = espnCfbPlayerOverview;
@@ -387,7 +514,7 @@ const ATHLETE_RECORDS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerRecords({ athlete_id: '…' });
  */
-export const espnCfbPlayerRecords: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_RECORDS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerRecords} (py/R parity). */
 export const espn_cfb_player_records = espnCfbPlayerRecords;
@@ -414,7 +541,7 @@ const ATHLETE_SEASONS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerSeasons({ athlete_id: '…' });
  */
-export const espnCfbPlayerSeasons: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_SEASONS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerSeasons} (py/R parity). */
 export const espn_cfb_player_seasons = espnCfbPlayerSeasons;
@@ -447,7 +574,7 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerSplits({ athlete_id: '…' });
  */
-export const espnCfbPlayerSplits: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_SPLITS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerSplits} (py/R parity). */
 export const espn_cfb_player_splits = espnCfbPlayerSplits;
@@ -474,7 +601,7 @@ const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerStatisticslog({ athlete_id: '…' });
  */
-export const espnCfbPlayerStatisticslog: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_STATISTICSLOG_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerStatisticslog} (py/R parity). */
 export const espn_cfb_player_statisticslog = espnCfbPlayerStatisticslog;
@@ -507,7 +634,7 @@ const ATHLETE_STATS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerStatsV3({ athlete_id: '…' });
  */
-export const espnCfbPlayerStatsV3: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerStatsV3: Wrapper<Row[], EspnAthleteStatsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_STATS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerStatsV3} (py/R parity). */
 export const espn_cfb_player_stats_v3 = espnCfbPlayerStatsV3;
@@ -538,7 +665,7 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
  */
-export const espnCfbPlayerVsPlayer: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_VS_ATHLETE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayerVsPlayer} (py/R parity). */
 export const espn_cfb_player_vs_player = espnCfbPlayerVsPlayer;
@@ -580,7 +707,7 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPlayersIndex({});
  */
-export const espnCfbPlayersIndex: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETES_INDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPlayersIndex} (py/R parity). */
 export const espn_cfb_players_index = espnCfbPlayersIndex;
@@ -607,7 +734,7 @@ const AWARD_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbAward({ award_id: '…' });
  */
-export const espnCfbAward: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbAward: Wrapper<Row[], EspnAwardParams> = (params: WrapperParams = {}) =>
   callWrapper(AWARD_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbAward} (py/R parity). */
 export const espn_cfb_award = espnCfbAward;
@@ -636,7 +763,7 @@ const AWARDS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbAwards({});
  */
-export const espnCfbAwards: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbAwards: Wrapper<Row[], EspnAwardsParams> = (params: WrapperParams = {}) =>
   callWrapper(AWARDS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbAwards} (py/R parity). */
 export const espn_cfb_awards = espnCfbAwards;
@@ -658,7 +785,7 @@ const CALENDAR_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbCalendar({});
  */
-export const espnCfbCalendar: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbCalendar: Wrapper<Row[], EspnCalendarParams> = (params: WrapperParams = {}) =>
   callWrapper(CALENDAR_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbCalendar} (py/R parity). */
 export const espn_cfb_calendar = espnCfbCalendar;
@@ -690,7 +817,7 @@ const CDN_BOXSCORE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
  * @example await sdv.cfb.espnCfbCdnBoxscore({});
  */
-export const espnCfbCdnBoxscore: SectionedWrapper<ParsedTables> = (params: WrapperParams = {}) =>
+export const espnCfbCdnBoxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams> = (params: WrapperParams = {}) =>
   callWrapper(CDN_BOXSCORE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbCdnBoxscore} (py/R parity). */
 export const espn_cfb_cdn_boxscore = espnCfbCdnBoxscore;
@@ -722,7 +849,7 @@ const CDN_PLAYBYPLAY_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
  * @example await sdv.cfb.espnCfbCdnPlaybyplay({});
  */
-export const espnCfbCdnPlaybyplay: SectionedWrapper<ParsedTables> = (params: WrapperParams = {}) =>
+export const espnCfbCdnPlaybyplay: SectionedWrapper<ParsedTables, {}, EspnCdnPlaybyplayParams> = (params: WrapperParams = {}) =>
   callWrapper(CDN_PLAYBYPLAY_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbCdnPlaybyplay} (py/R parity). */
 export const espn_cfb_cdn_playbyplay = espnCfbCdnPlaybyplay;
@@ -763,7 +890,7 @@ const CDN_RANKINGS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbCdnRankings({});
  */
-export const espnCfbCdnRankings: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbCdnRankings: Wrapper<Row[], EspnCdnRankingsParams> = (params: WrapperParams = {}) =>
   callWrapper(CDN_RANKINGS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbCdnRankings} (py/R parity). */
 export const espn_cfb_cdn_rankings = espnCfbCdnRankings;
@@ -809,7 +936,7 @@ const CDN_SCHEDULE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbCdnSchedule({});
  */
-export const espnCfbCdnSchedule: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbCdnSchedule: Wrapper<Row[], EspnCdnScheduleParams> = (params: WrapperParams = {}) =>
   callWrapper(CDN_SCHEDULE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbCdnSchedule} (py/R parity). */
 export const espn_cfb_cdn_schedule = espnCfbCdnSchedule;
@@ -855,7 +982,7 @@ const CDN_SCOREBOARD_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbCdnScoreboard({});
  */
-export const espnCfbCdnScoreboard: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbCdnScoreboard: Wrapper<Row[], EspnCdnScoreboardParams> = (params: WrapperParams = {}) =>
   callWrapper(CDN_SCOREBOARD_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbCdnScoreboard} (py/R parity). */
 export const espn_cfb_cdn_scoreboard = espnCfbCdnScoreboard;
@@ -882,7 +1009,7 @@ const COACH_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbCoach({ coach_id: '…' });
  */
-export const espnCfbCoach: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbCoach: Wrapper<Row[], EspnCoachParams> = (params: WrapperParams = {}) =>
   callWrapper(COACH_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbCoach} (py/R parity). */
 export const espn_cfb_coach = espnCfbCoach;
@@ -915,7 +1042,7 @@ const COACH_RECORD_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbCoachRecord({ coach_id: '…' });
  */
-export const espnCfbCoachRecord: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbCoachRecord: Wrapper<Row[], EspnCoachRecordParams> = (params: WrapperParams = {}) =>
   callWrapper(COACH_RECORD_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbCoachRecord} (py/R parity). */
 export const espn_cfb_coach_record = espnCfbCoachRecord;
@@ -946,7 +1073,7 @@ const COACH_SEASON_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbCoachSeason({ coach_id: '…', season: '…' });
  */
-export const espnCfbCoachSeason: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbCoachSeason: Wrapper<Row[], EspnCoachSeasonParams> = (params: WrapperParams = {}) =>
   callWrapper(COACH_SEASON_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbCoachSeason} (py/R parity). */
 export const espn_cfb_coach_season = espnCfbCoachSeason;
@@ -968,7 +1095,7 @@ const CONFERENCES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbConferences({});
  */
-export const espnCfbConferences: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbConferences: Wrapper<Row[], EspnConferencesParams> = (params: WrapperParams = {}) =>
   callWrapper(CONFERENCES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbConferences} (py/R parity). */
 export const espn_cfb_conferences = espnCfbConferences;
@@ -990,7 +1117,7 @@ const DRAFT_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbDraft({});
  */
-export const espnCfbDraft: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbDraft: Wrapper<Row[], EspnDraftParams> = (params: WrapperParams = {}) =>
   callWrapper(DRAFT_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbDraft} (py/R parity). */
 export const espn_cfb_draft = espnCfbDraft;
@@ -1017,7 +1144,7 @@ const EVENT_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGame({ event_id: '…' });
  */
-export const espnCfbGame: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGame: Wrapper<Row[], EspnEventParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGame} (py/R parity). */
 export const espn_cfb_game = espnCfbGame;
@@ -1050,7 +1177,7 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameBroadcasts({ event_id: '…' });
  */
-export const espnCfbGameBroadcasts: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_BROADCASTS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameBroadcasts} (py/R parity). */
 export const espn_cfb_game_broadcasts = espnCfbGameBroadcasts;
@@ -1083,7 +1210,7 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameCompetition({ event_id: '…' });
  */
-export const espnCfbGameCompetition: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameCompetition: Wrapper<Row[], EspnEventCompetitionParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITION_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameCompetition} (py/R parity). */
 export const espn_cfb_game_competition = espnCfbGameCompetition;
@@ -1120,7 +1247,7 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameTeam({ event_id: '…', team_id: '…' });
  */
-export const espnCfbGameTeam: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameTeam: Wrapper<Row[], EspnEventCompetitorParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameTeam} (py/R parity). */
 export const espn_cfb_game_team = espnCfbGameTeam;
@@ -1157,7 +1284,7 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameTeamLeaders({ event_id: '…', team_id: '…' });
  */
-export const espnCfbGameTeamLeaders: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameTeamLeaders} (py/R parity). */
 export const espn_cfb_game_team_leaders = espnCfbGameTeamLeaders;
@@ -1194,7 +1321,7 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameTeamLinescores({ event_id: '…', team_id: '…' });
  */
-export const espnCfbGameTeamLinescores: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_LINESCORES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameTeamLinescores} (py/R parity). */
 export const espn_cfb_game_team_linescores = espnCfbGameTeamLinescores;
@@ -1231,7 +1358,7 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameTeamRecord({ event_id: '…', team_id: '…' });
  */
-export const espnCfbGameTeamRecord: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_RECORD_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameTeamRecord} (py/R parity). */
 export const espn_cfb_game_team_record = espnCfbGameTeamRecord;
@@ -1268,7 +1395,7 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameTeamRoster({ event_id: '…', team_id: '…' });
  */
-export const espnCfbGameTeamRoster: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_ROSTER_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameTeamRoster} (py/R parity). */
 export const espn_cfb_game_team_roster = espnCfbGameTeamRoster;
@@ -1305,7 +1432,7 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameTeamStatistics({ event_id: '…', team_id: '…' });
  */
-export const espnCfbGameTeamStatistics: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_STATISTICS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameTeamStatistics} (py/R parity). */
 export const espn_cfb_game_team_statistics = espnCfbGameTeamStatistics;
@@ -1338,7 +1465,7 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameTeams({ event_id: '…' });
  */
-export const espnCfbGameTeams: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameTeams: Wrapper<Row[], EspnEventCompetitorsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITORS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameTeams} (py/R parity). */
 export const espn_cfb_game_teams = espnCfbGameTeams;
@@ -1371,7 +1498,7 @@ const EVENT_LEADERS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameLeaders({ event_id: '…' });
  */
-export const espnCfbGameLeaders: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameLeaders: Wrapper<Row[], EspnEventLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameLeaders} (py/R parity). */
 export const espn_cfb_game_leaders = espnCfbGameLeaders;
@@ -1404,7 +1531,7 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameOdds({ event_id: '…' });
  */
-export const espnCfbGameOdds: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameOdds: Wrapper<Row[], EspnEventOddsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_ODDS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameOdds} (py/R parity). */
 export const espn_cfb_game_odds = espnCfbGameOdds;
@@ -1441,7 +1568,7 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameOfficialDetail({ event_id: '…', official_id: '…' });
  */
-export const espnCfbGameOfficialDetail: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_OFFICIAL_DETAIL_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameOfficialDetail} (py/R parity). */
 export const espn_cfb_game_official_detail = espnCfbGameOfficialDetail;
@@ -1474,7 +1601,7 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameOfficials({ event_id: '…' });
  */
-export const espnCfbGameOfficials: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameOfficials: Wrapper<Row[], EspnEventOfficialsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_OFFICIALS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameOfficials} (py/R parity). */
 export const espn_cfb_game_officials = espnCfbGameOfficials;
@@ -1511,7 +1638,7 @@ const EVENT_PLAY_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGamePlay({ event_id: '…', play_id: '…' });
  */
-export const espnCfbGamePlay: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGamePlay: Wrapper<Row[], EspnEventPlayParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PLAY_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGamePlay} (py/R parity). */
 export const espn_cfb_game_play = espnCfbGamePlay;
@@ -1548,7 +1675,7 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGamePlayPersonnel({ event_id: '…', play_id: '…' });
  */
-export const espnCfbGamePlayPersonnel: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PLAY_PERSONNEL_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGamePlayPersonnel} (py/R parity). */
 export const espn_cfb_game_play_personnel = espnCfbGamePlayPersonnel;
@@ -1588,7 +1715,7 @@ const EVENT_PLAYS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGamePlays({ event_id: '…' });
  */
-export const espnCfbGamePlays: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGamePlays: Wrapper<Row[], EspnEventPlaysParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PLAYS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGamePlays} (py/R parity). */
 export const espn_cfb_game_plays = espnCfbGamePlays;
@@ -1621,7 +1748,7 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGamePowerindex({ event_id: '…' });
  */
-export const espnCfbGamePowerindex: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_POWERINDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGamePowerindex} (py/R parity). */
 export const espn_cfb_game_powerindex = espnCfbGamePowerindex;
@@ -1654,7 +1781,7 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGamePredictor({ event_id: '…' });
  */
-export const espnCfbGamePredictor: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGamePredictor: Wrapper<Row[], EspnEventPredictorParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PREDICTOR_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGamePredictor} (py/R parity). */
 export const espn_cfb_game_predictor = espnCfbGamePredictor;
@@ -1694,7 +1821,7 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameProbabilities({ event_id: '…' });
  */
-export const espnCfbGameProbabilities: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PROBABILITIES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameProbabilities} (py/R parity). */
 export const espn_cfb_game_probabilities = espnCfbGameProbabilities;
@@ -1727,7 +1854,7 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGamePropbets({ event_id: '…' });
  */
-export const espnCfbGamePropbets: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGamePropbets: Wrapper<Row[], EspnEventPropbetsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PROPBETS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGamePropbets} (py/R parity). */
 export const espn_cfb_game_propbets = espnCfbGamePropbets;
@@ -1760,7 +1887,7 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameScoringplays({ event_id: '…' });
  */
-export const espnCfbGameScoringplays: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_SCORINGPLAYS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameScoringplays} (py/R parity). */
 export const espn_cfb_game_scoringplays = espnCfbGameScoringplays;
@@ -1793,7 +1920,7 @@ const EVENT_SITUATION_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameSituation({ event_id: '…' });
  */
-export const espnCfbGameSituation: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameSituation: Wrapper<Row[], EspnEventSituationParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_SITUATION_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameSituation} (py/R parity). */
 export const espn_cfb_game_situation = espnCfbGameSituation;
@@ -1826,7 +1953,7 @@ const EVENT_STATUS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGameStatus({ event_id: '…' });
  */
-export const espnCfbGameStatus: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGameStatus: Wrapper<Row[], EspnEventStatusParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_STATUS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGameStatus} (py/R parity). */
 export const espn_cfb_game_status = espnCfbGameStatus;
@@ -1860,7 +1987,7 @@ const EVENTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGames({});
  */
-export const espnCfbGames: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGames: Wrapper<Row[], EspnEventsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGames} (py/R parity). */
 export const espn_cfb_games = espnCfbGames;
@@ -1898,7 +2025,7 @@ const FPI_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbFpi({});
  */
-export const espnCfbFpi: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbFpi: Wrapper<Row[], EspnFpiParams> = (params: WrapperParams = {}) =>
   callWrapper(FPI_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbFpi} (py/R parity). */
 export const espn_cfb_fpi = espnCfbFpi;
@@ -1925,7 +2052,7 @@ const FRANCHISE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbFranchise({ franchise_id: '…' });
  */
-export const espnCfbFranchise: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbFranchise: Wrapper<Row[], EspnFranchiseParams> = (params: WrapperParams = {}) =>
   callWrapper(FRANCHISE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbFranchise} (py/R parity). */
 export const espn_cfb_franchise = espnCfbFranchise;
@@ -1954,7 +2081,7 @@ const FRANCHISES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbFranchises({});
  */
-export const espnCfbFranchises: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbFranchises: Wrapper<Row[], EspnFranchisesParams> = (params: WrapperParams = {}) =>
   callWrapper(FRANCHISES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbFranchises} (py/R parity). */
 export const espn_cfb_franchises = espnCfbFranchises;
@@ -1976,7 +2103,7 @@ const INJURIES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbInjuries({});
  */
-export const espnCfbInjuries: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbInjuries: Wrapper<Row[], EspnInjuriesParams> = (params: WrapperParams = {}) =>
   callWrapper(INJURIES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbInjuries} (py/R parity). */
 export const espn_cfb_injuries = espnCfbInjuries;
@@ -2031,7 +2158,7 @@ const LEADERS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbLeaders({});
  */
-export const espnCfbLeaders: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbLeaders: Wrapper<Row[], EspnLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbLeaders} (py/R parity). */
 export const espn_cfb_leaders = espnCfbLeaders;
@@ -2053,7 +2180,7 @@ const LEADERS_CORE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbLeadersCore({});
  */
-export const espnCfbLeadersCore: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbLeadersCore: Wrapper<Row[], EspnLeadersCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(LEADERS_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbLeadersCore} (py/R parity). */
 export const espn_cfb_leaders_core = espnCfbLeadersCore;
@@ -2075,7 +2202,7 @@ const LEAGUE_NOTES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbLeagueNotes({});
  */
-export const espnCfbLeagueNotes: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams> = (params: WrapperParams = {}) =>
   callWrapper(LEAGUE_NOTES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbLeagueNotes} (py/R parity). */
 export const espn_cfb_league_notes = espnCfbLeagueNotes;
@@ -2097,7 +2224,7 @@ const LEAGUE_ROOT_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbLeagueRoot({});
  */
-export const espnCfbLeagueRoot: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbLeagueRoot: Wrapper<Row[], EspnLeagueRootParams> = (params: WrapperParams = {}) =>
   callWrapper(LEAGUE_ROOT_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbLeagueRoot} (py/R parity). */
 export const espn_cfb_league_root = espnCfbLeagueRoot;
@@ -2126,7 +2253,7 @@ const NEWS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbNews({});
  */
-export const espnCfbNews: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbNews: Wrapper<Row[], EspnNewsParams> = (params: WrapperParams = {}) =>
   callWrapper(NEWS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbNews} (py/R parity). */
 export const espn_cfb_news = espnCfbNews;
@@ -2153,7 +2280,7 @@ const POSITION_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPosition({ position_id: '…' });
  */
-export const espnCfbPosition: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPosition: Wrapper<Row[], EspnPositionParams> = (params: WrapperParams = {}) =>
   callWrapper(POSITION_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPosition} (py/R parity). */
 export const espn_cfb_position = espnCfbPosition;
@@ -2182,7 +2309,7 @@ const POSITIONS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbPositions({});
  */
-export const espnCfbPositions: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbPositions: Wrapper<Row[], EspnPositionsParams> = (params: WrapperParams = {}) =>
   callWrapper(POSITIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbPositions} (py/R parity). */
 export const espn_cfb_positions = espnCfbPositions;
@@ -2204,7 +2331,7 @@ const RANKINGS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbRankings({});
  */
-export const espnCfbRankings: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbRankings: Wrapper<Row[], EspnRankingsParams> = (params: WrapperParams = {}) =>
   callWrapper(RANKINGS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbRankings} (py/R parity). */
 export const espn_cfb_rankings = espnCfbRankings;
@@ -2244,7 +2371,7 @@ const RECRUITING_ATHLETES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbRecruitingPlayers({ year: '…' });
  */
-export const espnCfbRecruitingPlayers: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbRecruitingPlayers: Wrapper<Row[], EspnRecruitingAthletesParams> = (params: WrapperParams = {}) =>
   callWrapper(RECRUITING_ATHLETES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbRecruitingPlayers} (py/R parity). */
 export const espn_cfb_recruiting_players = espnCfbRecruitingPlayers;
@@ -2271,7 +2398,7 @@ const RECRUITING_RANKINGS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbRecruitingRankings({ year: '…' });
  */
-export const espnCfbRecruitingRankings: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbRecruitingRankings: Wrapper<Row[], EspnRecruitingRankingsParams> = (params: WrapperParams = {}) =>
   callWrapper(RECRUITING_RANKINGS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbRecruitingRankings} (py/R parity). */
 export const espn_cfb_recruiting_rankings = espnCfbRecruitingRankings;
@@ -2293,7 +2420,7 @@ const RECRUITING_YEARS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbRecruitingYears({});
  */
-export const espnCfbRecruitingYears: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbRecruitingYears: Wrapper<Row[], EspnRecruitingYearsParams> = (params: WrapperParams = {}) =>
   callWrapper(RECRUITING_YEARS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbRecruitingYears} (py/R parity). */
 export const espn_cfb_recruiting_years = espnCfbRecruitingYears;
@@ -2342,7 +2469,7 @@ const SCOREBOARD_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbScoreboard({});
  */
-export const espnCfbScoreboard: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbScoreboard: Wrapper<Row[], EspnScoreboardParams> = (params: WrapperParams = {}) =>
   callWrapper(SCOREBOARD_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbScoreboard} (py/R parity). */
 export const espn_cfb_scoreboard = espnCfbScoreboard;
@@ -2382,7 +2509,7 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonPlayers({ season: '…' });
  */
-export const espnCfbSeasonPlayers: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_ATHLETES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonPlayers} (py/R parity). */
 export const espn_cfb_season_players = espnCfbSeasonPlayers;
@@ -2416,7 +2543,7 @@ const SEASON_AWARDS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonAwards({ season: '…' });
  */
-export const espnCfbSeasonAwards: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_AWARDS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonAwards} (py/R parity). */
 export const espn_cfb_season_awards = espnCfbSeasonAwards;
@@ -2450,7 +2577,7 @@ const SEASON_COACHES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonCoaches({ season: '…' });
  */
-export const espnCfbSeasonCoaches: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_COACHES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonCoaches} (py/R parity). */
 export const espn_cfb_season_coaches = espnCfbSeasonCoaches;
@@ -2477,7 +2604,7 @@ const SEASON_DRAFT_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonDraft({ season: '…' });
  */
-export const espnCfbSeasonDraft: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_DRAFT_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonDraft} (py/R parity). */
 export const espn_cfb_season_draft = espnCfbSeasonDraft;
@@ -2508,7 +2635,7 @@ const SEASON_DRAFT_ROUND_PICKS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonDraftRoundPicks({ season: '…', round_num: '…' });
  */
-export const espnCfbSeasonDraftRoundPicks: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_DRAFT_ROUND_PICKS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonDraftRoundPicks} (py/R parity). */
 export const espn_cfb_season_draft_round_picks = espnCfbSeasonDraftRoundPicks;
@@ -2535,7 +2662,7 @@ const SEASON_FREEAGENTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonFreeagents({ season: '…' });
  */
-export const espnCfbSeasonFreeagents: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_FREEAGENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonFreeagents} (py/R parity). */
 export const espn_cfb_season_freeagents = espnCfbSeasonFreeagents;
@@ -2562,7 +2689,7 @@ const SEASON_FUTURES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbFutures({ season: '…' });
  */
-export const espnCfbFutures: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbFutures: Wrapper<Row[], EspnSeasonFuturesParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_FUTURES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbFutures} (py/R parity). */
 export const espn_cfb_futures = espnCfbFutures;
@@ -2597,7 +2724,7 @@ const SEASON_GROUP_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonGroup({ season: '…', season_type: '…', group_id: '…' });
  */
-export const espnCfbSeasonGroup: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_GROUP_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonGroup} (py/R parity). */
 export const espn_cfb_season_group = espnCfbSeasonGroup;
@@ -2639,7 +2766,7 @@ const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonGroupChildren({ season: '…', season_type: '…', group_id: '…' });
  */
-export const espnCfbSeasonGroupChildren: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_GROUP_CHILDREN_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonGroupChildren} (py/R parity). */
 export const espn_cfb_season_group_children = espnCfbSeasonGroupChildren;
@@ -2681,7 +2808,7 @@ const SEASON_GROUP_TEAMS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonGroupTeams({ season: '…', season_type: '…', group_id: '…' });
  */
-export const espnCfbSeasonGroupTeams: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_GROUP_TEAMS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonGroupTeams} (py/R parity). */
 export const espn_cfb_season_group_teams = espnCfbSeasonGroupTeams;
@@ -2712,7 +2839,7 @@ const SEASON_GROUPS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbGroups({ season: '…', season_type: '…' });
  */
-export const espnCfbGroups: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbGroups: Wrapper<Row[], EspnSeasonGroupsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_GROUPS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbGroups} (py/R parity). */
 export const espn_cfb_groups = espnCfbGroups;
@@ -2739,7 +2866,7 @@ const SEASON_INFO_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonInfo({ season: '…' });
  */
-export const espnCfbSeasonInfo: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_INFO_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonInfo} (py/R parity). */
 export const espn_cfb_season_info = espnCfbSeasonInfo;
@@ -2761,7 +2888,7 @@ const SEASON_POINTER_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonPointer({});
  */
-export const espnCfbSeasonPointer: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_POINTER_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonPointer} (py/R parity). */
 export const espn_cfb_season_pointer = espnCfbSeasonPointer;
@@ -2793,7 +2920,7 @@ const SEASON_POWERINDEX_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamPowerindex({ season: '…' });
  */
-export const espnCfbTeamPowerindex: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_POWERINDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamPowerindex} (py/R parity). */
 export const espn_cfb_team_powerindex = espnCfbTeamPowerindex;
@@ -2820,7 +2947,7 @@ const SEASON_POWERINDEX_LEADERS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonPowerindexLeaders({ season: '…' });
  */
-export const espnCfbSeasonPowerindexLeaders: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_POWERINDEX_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonPowerindexLeaders} (py/R parity). */
 export const espn_cfb_season_powerindex_leaders = espnCfbSeasonPowerindexLeaders;
@@ -2864,7 +2991,7 @@ const SEASON_QBR_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonQbr({ season: '…' });
  */
-export const espnCfbSeasonQbr: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonQbr: Wrapper<Row[], EspnSeasonQbrParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_QBR_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonQbr} (py/R parity). */
 export const espn_cfb_season_qbr = espnCfbSeasonQbr;
@@ -2907,7 +3034,7 @@ const SEASON_QBR_WEEK_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonQbrWeek({ season: '…', week: '…' });
  */
-export const espnCfbSeasonQbrWeek: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonQbrWeek: Wrapper<Row[], EspnSeasonQbrWeekParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_QBR_WEEK_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonQbrWeek} (py/R parity). */
 export const espn_cfb_season_qbr_week = espnCfbSeasonQbrWeek;
@@ -2947,7 +3074,7 @@ const SEASON_RECRUITS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbRecruits({ season: '…' });
  */
-export const espnCfbRecruits: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbRecruits: Wrapper<Row[], EspnSeasonRecruitsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_RECRUITS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbRecruits} (py/R parity). */
 export const espn_cfb_recruits = espnCfbRecruits;
@@ -2978,7 +3105,7 @@ const SEASON_TEAM_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonTeam({ season: '…', team_id: '…' });
  */
-export const espnCfbSeasonTeam: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TEAM_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonTeam} (py/R parity). */
 export const espn_cfb_season_team = espnCfbSeasonTeam;
@@ -3018,7 +3145,7 @@ const SEASON_TEAMS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonTeams({ season: '…' });
  */
-export const espnCfbSeasonTeams: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TEAMS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonTeams} (py/R parity). */
 export const espn_cfb_season_teams = espnCfbSeasonTeams;
@@ -3049,7 +3176,7 @@ const SEASON_TYPE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonType({ season: '…', season_type: '…' });
  */
-export const espnCfbSeasonType: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonType: Wrapper<Row[], EspnSeasonTypeParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TYPE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonType} (py/R parity). */
 export const espn_cfb_season_type = espnCfbSeasonType;
@@ -3080,7 +3207,7 @@ const SEASON_TYPE_CORRECTIONS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonTypeCorrections({ season: '…', season_type: '…' });
  */
-export const espnCfbSeasonTypeCorrections: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TYPE_CORRECTIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonTypeCorrections} (py/R parity). */
 export const espn_cfb_season_type_corrections = espnCfbSeasonTypeCorrections;
@@ -3111,7 +3238,7 @@ const SEASON_TYPE_LEADERS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonTypeLeaders({ season: '…', season_type: '…' });
  */
-export const espnCfbSeasonTypeLeaders: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TYPE_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonTypeLeaders} (py/R parity). */
 export const espn_cfb_season_type_leaders = espnCfbSeasonTypeLeaders;
@@ -3138,7 +3265,7 @@ const SEASON_TYPES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonTypes({ season: '…' });
  */
-export const espnCfbSeasonTypes: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TYPES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonTypes} (py/R parity). */
 export const espn_cfb_season_types = espnCfbSeasonTypes;
@@ -3173,7 +3300,7 @@ const SEASON_WEEK_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonWeek({ season: '…', season_type: '…', week: '…' });
  */
-export const espnCfbSeasonWeek: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEK_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonWeek} (py/R parity). */
 export const espn_cfb_season_week = espnCfbSeasonWeek;
@@ -3215,7 +3342,7 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
  */
-export const espnCfbSeasonWeekGames: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEK_EVENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonWeekGames} (py/R parity). */
 export const espn_cfb_season_week_games = espnCfbSeasonWeekGames;
@@ -3256,7 +3383,7 @@ const SEASON_WEEK_POWERINDEX_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonWeekPowerindex({ season: '…', season_type: '…', week: '…' });
  */
-export const espnCfbSeasonWeekPowerindex: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEK_POWERINDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonWeekPowerindex} (py/R parity). */
 export const espn_cfb_season_week_powerindex = espnCfbSeasonWeekPowerindex;
@@ -3291,7 +3418,7 @@ const SEASON_WEEK_RANKINGS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbWeekRankings({ season: '…', season_type: '…', week: '…' });
  */
-export const espnCfbWeekRankings: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbWeekRankings: Wrapper<Row[], EspnSeasonWeekRankingsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEK_RANKINGS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbWeekRankings} (py/R parity). */
 export const espn_cfb_week_rankings = espnCfbWeekRankings;
@@ -3322,7 +3449,7 @@ const SEASON_WEEKS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasonWeeks({ season: '…', season_type: '…' });
  */
-export const espnCfbSeasonWeeks: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEKS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasonWeeks} (py/R parity). */
 export const espn_cfb_season_weeks = espnCfbSeasonWeeks;
@@ -3351,7 +3478,7 @@ const SEASONS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbSeasons({});
  */
-export const espnCfbSeasons: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbSeasons: Wrapper<Row[], EspnSeasonsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASONS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSeasons} (py/R parity). */
 export const espn_cfb_seasons = espnCfbSeasons;
@@ -3389,7 +3516,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbStandings({});
  */
-export const espnCfbStandings: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbStandings: Wrapper<Row[], EspnStandingsParams> = (params: WrapperParams = {}) =>
   callWrapper(STANDINGS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbStandings} (py/R parity). */
 export const espn_cfb_standings = espnCfbStandings;
@@ -3411,7 +3538,7 @@ const STANDINGS_CORE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbStandingsCore({});
  */
-export const espnCfbStandingsCore: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbStandingsCore: Wrapper<Row[], EspnStandingsCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(STANDINGS_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbStandingsCore} (py/R parity). */
 export const espn_cfb_standings_core = espnCfbStandingsCore;
@@ -3433,7 +3560,7 @@ const STATISTICS_LEAGUE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbStatisticsLeague({});
  */
-export const espnCfbStatisticsLeague: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams> = (params: WrapperParams = {}) =>
   callWrapper(STATISTICS_LEAGUE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbStatisticsLeague} (py/R parity). */
 export const espn_cfb_statistics_league = espnCfbStatisticsLeague;
@@ -3462,7 +3589,7 @@ const SUMMARY_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
  * @example await sdv.cfb.espnCfbSummary({});
  */
-export const espnCfbSummary: SectionedWrapper<ParsedTables> = (params: WrapperParams = {}) =>
+export const espnCfbSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams> = (params: WrapperParams = {}) =>
   callWrapper(SUMMARY_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbSummary} (py/R parity). */
 export const espn_cfb_summary = espnCfbSummary;
@@ -3484,7 +3611,7 @@ const TALENTPICKS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTalentpicks({});
  */
-export const espnCfbTalentpicks: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTalentpicks: Wrapper<Row[], EspnTalentpicksParams> = (params: WrapperParams = {}) =>
   callWrapper(TALENTPICKS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTalentpicks} (py/R parity). */
 export const espn_cfb_talentpicks = espnCfbTalentpicks;
@@ -3511,7 +3638,7 @@ const TEAM_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeam({ team_id: '…' });
  */
-export const espnCfbTeam: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeam: Wrapper<Row[], EspnTeamParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeam} (py/R parity). */
 export const espn_cfb_team = espnCfbTeam;
@@ -3538,7 +3665,7 @@ const TEAM_CORE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamCore({ team_id: '…' });
  */
-export const espnCfbTeamCore: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamCore: Wrapper<Row[], EspnTeamCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamCore} (py/R parity). */
 export const espn_cfb_team_core = espnCfbTeamCore;
@@ -3565,7 +3692,7 @@ const TEAM_DEPTHCHARTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamDepthcharts({ team_id: '…' });
  */
-export const espnCfbTeamDepthcharts: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_DEPTHCHARTS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamDepthcharts} (py/R parity). */
 export const espn_cfb_team_depthcharts = espnCfbTeamDepthcharts;
@@ -3592,7 +3719,7 @@ const TEAM_HISTORY_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamHistory({ team_id: '…' });
  */
-export const espnCfbTeamHistory: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamHistory: Wrapper<Row[], EspnTeamHistoryParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_HISTORY_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamHistory} (py/R parity). */
 export const espn_cfb_team_history = espnCfbTeamHistory;
@@ -3619,7 +3746,7 @@ const TEAM_INJURIES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamInjuries({ team_id: '…' });
  */
-export const espnCfbTeamInjuries: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_INJURIES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamInjuries} (py/R parity). */
 export const espn_cfb_team_injuries = espnCfbTeamInjuries;
@@ -3646,7 +3773,7 @@ const TEAM_LEADERS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamLeaders({ team_id: '…' });
  */
-export const espnCfbTeamLeaders: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamLeaders} (py/R parity). */
 export const espn_cfb_team_leaders = espnCfbTeamLeaders;
@@ -3680,7 +3807,7 @@ const TEAM_NEWS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamNews({ team_id: '…' });
  */
-export const espnCfbTeamNews: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamNews: Wrapper<Row[], EspnTeamNewsParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_NEWS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamNews} (py/R parity). */
 export const espn_cfb_team_news = espnCfbTeamNews;
@@ -3707,7 +3834,7 @@ const TEAM_RECORD_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamRecord({ team_id: '…' });
  */
-export const espnCfbTeamRecord: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamRecord: Wrapper<Row[], EspnTeamRecordParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_RECORD_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamRecord} (py/R parity). */
 export const espn_cfb_team_record = espnCfbTeamRecord;
@@ -3741,7 +3868,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamRoster({ team_id: '…' });
  */
-export const espnCfbTeamRoster: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamRoster: Wrapper<Row[], EspnTeamRosterParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_ROSTER_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamRoster} (py/R parity). */
 export const espn_cfb_team_roster = espnCfbTeamRoster;
@@ -3774,7 +3901,7 @@ const TEAM_SCHEDULE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamSchedule({ team_id: '…' });
  */
-export const espnCfbTeamSchedule: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_SCHEDULE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamSchedule} (py/R parity). */
 export const espn_cfb_team_schedule = espnCfbTeamSchedule;
@@ -3801,7 +3928,7 @@ const TEAM_TRANSACTIONS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamTransactions({ team_id: '…' });
  */
-export const espnCfbTeamTransactions: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_TRANSACTIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamTransactions} (py/R parity). */
 export const espn_cfb_team_transactions = espnCfbTeamTransactions;
@@ -3836,7 +3963,7 @@ const TEAMS_CORE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamsCore({});
  */
-export const espnCfbTeamsCore: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamsCore: Wrapper<Row[], EspnTeamsCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAMS_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamsCore} (py/R parity). */
 export const espn_cfb_teams_core = espnCfbTeamsCore;
@@ -3865,7 +3992,7 @@ const TEAMS_SITE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTeamsSite({});
  */
-export const espnCfbTeamsSite: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTeamsSite: Wrapper<Row[], EspnTeamsSiteParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAMS_SITE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTeamsSite} (py/R parity). */
 export const espn_cfb_teams_site = espnCfbTeamsSite;
@@ -3894,7 +4021,7 @@ const TOURNAMENTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTournaments({});
  */
-export const espnCfbTournaments: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTournaments: Wrapper<Row[], EspnTournamentsParams> = (params: WrapperParams = {}) =>
   callWrapper(TOURNAMENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTournaments} (py/R parity). */
 export const espn_cfb_tournaments = espnCfbTournaments;
@@ -3923,7 +4050,7 @@ const TRANSACTIONS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbTransactions({});
  */
-export const espnCfbTransactions: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbTransactions: Wrapper<Row[], EspnTransactionsParams> = (params: WrapperParams = {}) =>
   callWrapper(TRANSACTIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbTransactions} (py/R parity). */
 export const espn_cfb_transactions = espnCfbTransactions;
@@ -3950,7 +4077,7 @@ const VENUE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbVenue({ venue_id: '…' });
  */
-export const espnCfbVenue: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbVenue: Wrapper<Row[], EspnVenueParams> = (params: WrapperParams = {}) =>
   callWrapper(VENUE_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbVenue} (py/R parity). */
 export const espn_cfb_venue = espnCfbVenue;
@@ -3979,7 +4106,7 @@ const VENUES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cfb.espnCfbVenues({});
  */
-export const espnCfbVenues: Wrapper = (params: WrapperParams = {}) =>
+export const espnCfbVenues: Wrapper<Row[], EspnVenuesParams> = (params: WrapperParams = {}) =>
   callWrapper(VENUES_DEF, CFG, params);
 /** snake_case alias of {@link espnCfbVenues} (py/R parity). */
 export const espn_cfb_venues = espnCfbVenues;

@@ -31,11 +31,90 @@ export function getHtml(
   return request(family, { method: 'GET', url, query, headers, responseType: 'text' }) as Promise<string>;
 }
 
+/** One of the legacy `{ year, month, day }` args: a number or a numeric string. */
+export type DatePart = number | string | null | undefined;
+
+/** The legacy `{ year, month, day }` args. */
+export interface DateArgs {
+  year?: DatePart;
+  month?: DatePart;
+  day?: DatePart;
+}
+
 /** `YYYYMMDD` from the legacy `{ year, month, day }` args, or `undefined` (today's page). */
-export function cdnDate(year: any, month: any, day: any): string | undefined {
+export function cdnDate(year: DatePart, month: DatePart, day: DatePart): string | undefined {
   if (!year || !month || !day) return undefined;
-  const pad = (v: any) => String(parseInt(v, 10)).padStart(2, "0");
+  const pad = (v: number | string) => String(parseInt(String(v), 10)).padStart(2, "0");
   return `${year}${pad(month)}${pad(day)}`;
+}
+
+/** The `dates` (`YYYYMMDD`) the legacy `getScoreboard` methods send, built as they always have. */
+export function scoreboardDates(year: DatePart, month: DatePart, day: DatePart): string {
+  const pad = (v: DatePart) => {
+    const n = parseInt(String(v));
+    return n <= 9 ? "0" + n : n;
+  };
+  return `${year}${pad(month)}${pad(day)}`;
+}
+
+/** A JSON object of an ESPN payload whose other fields the legacy methods pass through as they come. */
+type EspnObject = { [field: string]: unknown };
+
+/**
+ * An espn.com CDN game page (`espn_<league>_cdn_playbyplay` / `_boxscore`), typed as
+ * far as the legacy `getPlayByPlay` / `getBoxScore` methods read it. Not checked at
+ * runtime: a page without these fields throws the same TypeError it always did.
+ */
+export interface CdnGamePage extends EspnObject {
+  gameId?: string;
+  gamepackageJSON: EspnObject & {
+    header: EspnObject & { id: string; competitions: EspnObject[] };
+    boxscore: EspnObject;
+  };
+}
+
+/** An espn.com CDN schedule page (`espn_<league>_cdn_schedule`), as the legacy `getSchedule` methods read it. */
+export interface CdnSchedulePage extends EspnObject {
+  content: EspnObject & { schedule: unknown };
+}
+
+/** A recruit row of the deprecated 247sports.com composite / 247 rankings scrapers. */
+export interface Sports247Recruit {
+  ranking: number;
+  name: string;
+  highSchool: string;
+  position: string;
+  height: string;
+  weight: string;
+  stars: number;
+  rating: string;
+  college: string;
+}
+
+/** A school row of the deprecated 247sports.com team-rankings scrapers. */
+export interface Sports247School {
+  rank: string;
+  school: string;
+  totalCommits: string;
+  fiveStars: string;
+  fourStars: string;
+  threeStars: string;
+  averageRating: string;
+  points: string;
+}
+
+/** A commit row of the deprecated 247sports.com school-commits scrapers. */
+export interface Sports247Commit {
+  name: string;
+  highSchool: string;
+  position: string;
+  height: string;
+  weight: string;
+  stars: number;
+  rating: string;
+  nationalRank: string;
+  stateRank: string;
+  positionRank: string;
 }
 
 /**

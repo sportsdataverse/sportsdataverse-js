@@ -15,6 +15,17 @@ import type {
   NwslApiTeamStatsRow,
   NwslApiTeamsRow,
 } from "../rows/nwsl_api.js";
+import type {
+  NwslCompetitionsParams,
+  NwslMatchLineupsParams,
+  NwslMatchdaysParams,
+  NwslPlayerStatsParams,
+  NwslSeasonMatchesParams,
+  NwslStagesParams,
+  NwslStandingsParams,
+  NwslTeamStatsParams,
+  NwslTeamsParams,
+} from "../params/nwsl_api.js";
 
 const COMPETITIONS_DEF: WrapperDef = {
   "short": "competitions",
@@ -46,7 +57,7 @@ const COMPETITIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nwsl.nwslCompetitions({});
  */
-export const nwslCompetitions: Wrapper<NwslApiCompetitionsRow[]> = (params: WrapperParams = {}) => callFlat(COMPETITIONS_DEF, params);
+export const nwslCompetitions: Wrapper<NwslApiCompetitionsRow[], NwslCompetitionsParams> = (params: WrapperParams = {}) => callFlat(COMPETITIONS_DEF, params);
 /** snake_case alias of {@link nwslCompetitions} (py/R parity). */
 export const nwsl_competitions = nwslCompetitions;
 
@@ -90,7 +101,7 @@ const MATCH_LINEUPS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nwsl.nwslMatchLineups({ season_id: '…', match_id: '…' });
  */
-export const nwslMatchLineups: SectionedWrapper<NwslApiMatchLineupsRow[], { players: NwslApiMatchLineupsRow[] }> = (params: WrapperParams = {}) => callFlat(MATCH_LINEUPS_DEF, params);
+export const nwslMatchLineups: SectionedWrapper<NwslApiMatchLineupsRow[], { players: NwslApiMatchLineupsRow[] }, NwslMatchLineupsParams> = (params: WrapperParams = {}) => callFlat(MATCH_LINEUPS_DEF, params);
 /** snake_case alias of {@link nwslMatchLineups} (py/R parity). */
 export const nwsl_match_lineups = nwslMatchLineups;
 
@@ -129,7 +140,7 @@ const MATCHDAYS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nwsl.nwslMatchdays({ season_id: '…' });
  */
-export const nwslMatchdays: Wrapper = (params: WrapperParams = {}) => callFlat(MATCHDAYS_DEF, params);
+export const nwslMatchdays: Wrapper<Row[], NwslMatchdaysParams> = (params: WrapperParams = {}) => callFlat(MATCHDAYS_DEF, params);
 /** snake_case alias of {@link nwslMatchdays} (py/R parity). */
 export const nwsl_matchdays = nwslMatchdays;
 
@@ -193,7 +204,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nwsl.nwslPlayerStats({ season_id: '…' });
  */
-export const nwslPlayerStats: Wrapper<NwslApiPlayerStatsRow[]> = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
+export const nwslPlayerStats: Wrapper<NwslApiPlayerStatsRow[], NwslPlayerStatsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link nwslPlayerStats} (py/R parity). */
 export const nwsl_player_stats = nwslPlayerStats;
 
@@ -242,7 +253,7 @@ const SEASON_MATCHES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nwsl.nwslSeasonMatches({});
  */
-export const nwslSeasonMatches: Wrapper<NwslApiSeasonMatchesRow[]> = (params: WrapperParams = {}) => callFlat(SEASON_MATCHES_DEF, params);
+export const nwslSeasonMatches: Wrapper<NwslApiSeasonMatchesRow[], NwslSeasonMatchesParams> = (params: WrapperParams = {}) => callFlat(SEASON_MATCHES_DEF, params);
 /** snake_case alias of {@link nwslSeasonMatches} (py/R parity). */
 export const nwsl_season_matches = nwslSeasonMatches;
 
@@ -281,7 +292,7 @@ const STAGES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nwsl.nwslStages({ season_id: '…' });
  */
-export const nwslStages: Wrapper = (params: WrapperParams = {}) => callFlat(STAGES_DEF, params);
+export const nwslStages: Wrapper<Row[], NwslStagesParams> = (params: WrapperParams = {}) => callFlat(STAGES_DEF, params);
 /** snake_case alias of {@link nwslStages} (py/R parity). */
 export const nwsl_stages = nwslStages;
 
@@ -329,7 +340,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nwsl.nwslStandings({ season_id: '…' });
  */
-export const nwslStandings: Wrapper = (params: WrapperParams = {}) => callFlat(STANDINGS_DEF, params);
+export const nwslStandings: Wrapper<Row[], NwslStandingsParams> = (params: WrapperParams = {}) => callFlat(STANDINGS_DEF, params);
 /** snake_case alias of {@link nwslStandings} (py/R parity). */
 export const nwsl_standings = nwslStandings;
 
@@ -373,7 +384,7 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nwsl.nwslTeamStats({ season_id: '…' });
  */
-export const nwslTeamStats: Wrapper<NwslApiTeamStatsRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
+export const nwslTeamStats: Wrapper<NwslApiTeamStatsRow[], NwslTeamStatsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link nwslTeamStats} (py/R parity). */
 export const nwsl_team_stats = nwslTeamStats;
 
@@ -412,6 +423,6 @@ const TEAMS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nwsl.nwslTeams({ season_id: '…' });
  */
-export const nwslTeams: Wrapper<NwslApiTeamsRow[]> = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
+export const nwslTeams: Wrapper<NwslApiTeamsRow[], NwslTeamsParams> = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
 /** snake_case alias of {@link nwslTeams} (py/R parity). */
 export const nwsl_teams = nwslTeams;

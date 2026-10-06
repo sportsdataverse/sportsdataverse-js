@@ -21,6 +21,7 @@
 // cover the envelope shapes that need real unrolling.
 
 import { normalize } from "./_normalize.js";
+import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -44,7 +45,7 @@ const LIST_KEYS = ["list", "rankings", "items", "results", "data"];
  * each row (`parse_recruiting_institution_rankings`,
  * `parse_recruiting_ranking_feed`).
  */
-export function parse_recruiting_list(raw: any): Record<string, any>[] {
+export function parse_recruiting_list(raw: any): ParserRow[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject(raw)) return [];
   for (const key of LIST_KEYS) {
@@ -62,7 +63,7 @@ export function parse_recruiting_list(raw: any): Record<string, any>[] {
  * NOT prefixed — use `parse_recruiting_institution_rankings` when you want the
  * pagination context joined onto every row.
  */
-export function parse_recruiting_paged_list(raw: any): Record<string, any>[] {
+export function parse_recruiting_paged_list(raw: any): ParserRow[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject(raw)) return [];
   return normalize(raw.list ?? []);
@@ -77,7 +78,7 @@ export function parse_recruiting_paged_list(raw: any): Record<string, any>[] {
  * prefixed onto it so a single row carries both the institution standing and
  * its paging context.
  */
-export function parse_recruiting_institution_rankings(raw: any): Record<string, any>[] {
+export function parse_recruiting_institution_rankings(raw: any): ParserRow[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject(raw)) return [];
   const list = raw.list;
@@ -97,7 +98,7 @@ export function parse_recruiting_institution_rankings(raw: any): Record<string, 
  * institution). Flattens `rankings[]` directly; returns `[]` when the feed is
  * empty / malformed.
  */
-export function parse_recruiting_ranking_feed(raw: any): Record<string, any>[] {
+export function parse_recruiting_ranking_feed(raw: any): ParserRow[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject(raw)) return [];
   return normalize(raw.rankings ?? []);

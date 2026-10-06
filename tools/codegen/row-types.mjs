@@ -19,8 +19,8 @@
 //     column the payload did not carry.
 // Dates: no verified returns schema has a date type; parsers return dates as the
 // payload's ISO strings (`character` -> `string`). Release loaders decode DATE /
-// TIMESTAMP to `Date`, but no loader row type is generated (no verified loader
-// schema): loader rows stay `Record<string, unknown>`.
+// TIMESTAMP to `Date`; their row types come from sdv-py's loader schemas instead
+// (tools/codegen/loader-types.mjs).
 //
 // test/types/agreement.test.js parses the GENERATED TypeScript (not this module)
 // and checks every value the parsers return on the committed captures against it.
@@ -148,15 +148,16 @@ export function renderRowsModule(api, defs, { coverage, schemasDir, sectionsOf, 
 }
 
 /**
- * The TypeScript of one flat wrapper's type: `Wrapper<P>` for a one-table parser,
- * `SectionedWrapper<P, S>` for a multi-table one (`section`), `Wrapper<unknown>`
- * when the endpoint has no parser (`parsed` returns the raw payload).
+ * The TypeScript of one flat wrapper's type: `Wrapper<P, A>` for a one-table parser,
+ * `SectionedWrapper<P, S, A>` for a multi-table one (`section`), `Wrapper<unknown, A>`
+ * when the endpoint has no parser (`parsed` returns the raw payload). `params` is the
+ * name of its generated params type `A` (tools/codegen/param-types.mjs).
  */
-export function flatWrapperType(def, sec, typed) {
-  if (!def.parser) return "Wrapper<unknown>";
-  if (!sec) return typed ? `Wrapper<${typed.parsed}>` : "Wrapper";
+export function flatWrapperType(def, sec, typed, params) {
+  if (!def.parser) return `Wrapper<unknown, ${params}>`;
+  if (!sec) return `Wrapper<${typed ? typed.parsed : "Row[]"}, ${params}>`;
   const parsed = typed?.parsed ?? (sec.default === null ? "Row[] | ParsedTables" : "Row[]");
-  return typed?.sections ? `SectionedWrapper<${parsed}, ${typed.sections}>` : `SectionedWrapper<${parsed}>`;
+  return `SectionedWrapper<${parsed}, ${typed?.sections ?? "{}"}, ${params}>`;
 }
 
 /** The barrel of every generated row type (re-exported by src/index.ts). */

@@ -1,6 +1,7 @@
 import { get } from '../core/client.js';
 import { espnWnbaCdnBoxscore, espnWnbaCdnPlaybyplay, espnWnbaCdnSchedule } from '../generated/espn/wnba.js';
-import { cdnDate } from './_cdn.js';
+import { cdnDate, scoreboardDates } from './_cdn.js';
+import type { CdnGamePage, CdnSchedulePage, DateArgs } from './_cdn.js';
 /**
  * Operations for WNBA.
  *
@@ -23,9 +24,9 @@ export default {
      * @example
      * const result = await sdv.wnba.getPlayByPlay(401244185);
      */
-    getPlayByPlay: async function (id) {
+    getPlayByPlay: async function (id: number | string) {
         // via espn_wnba_cdn_playbyplay (https; core request layer + error vocabulary)
-        const res = { data: (await espnWnbaCdnPlaybyplay({ game_id: id })) as any };
+        const res = { data: (await espnWnbaCdnPlaybyplay({ game_id: id })) as CdnGamePage };
 
         return {
             teams: res.data.gamepackageJSON.header.competitions[0].competitors,
@@ -48,9 +49,9 @@ export default {
      * @example
      * const result = await sdv.wnba.getBoxScore(401244185);
      */
-    getBoxScore: async function (id) {
+    getBoxScore: async function (id: number | string) {
         // via espn_wnba_cdn_boxscore (https; core request layer + error vocabulary)
-        const res = { data: (await espnWnbaCdnBoxscore({ game_id: id })) as any };
+        const res = { data: (await espnWnbaCdnBoxscore({ game_id: id })) as CdnGamePage };
 
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
@@ -67,7 +68,7 @@ export default {
      * @example
      * const result = await sdv.wnba.getSummary(401244185);
      */
-    getSummary: async function (id) {
+    getSummary: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/summary';
         const params: Record<string, any> = {
             event: id
@@ -103,9 +104,9 @@ export default {
      * year = 2019, month = 07, day = 15
      * )
      */
-    getSchedule: async function ({ year = null, month = null, day = null }) {
+    getSchedule: async function ({ year = null, month = null, day = null }: DateArgs) {
         // espn_wnba_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
-        const res = (await espnWnbaCdnSchedule({ date: cdnDate(year, month, day) })) as any;
+        const res = (await espnWnbaCdnSchedule({ date: cdnDate(year, month, day) })) as CdnSchedulePage;
         return res.content.schedule;
     },
 
@@ -124,13 +125,13 @@ export default {
      * year = 2019, month = 07, day = 15
      * )
      */
-    getScoreboard: async function ({ year, month, day, limit = 300 }) {
+    getScoreboard: async function ({ year, month, day, limit = 300 }: DateArgs & { limit?: number }) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard`;
         const params: Record<string, any> = {
             limit
         };
         if (year && month && day) {
-            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+            params.dates = scoreboardDates(year, month, day);
         }
         const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
         return res.data;
@@ -189,7 +190,7 @@ export default {
      * const teamId = 16;
      * const result = await sdv.wnba.getTeamInfo(teamId);
      */
-    getTeamInfo: async function (id) {
+    getTeamInfo: async function (id: number | string) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/${id}`;
 
         const res = { data: await get(baseUrl, { family: 'site_v2' }) };
@@ -206,7 +207,7 @@ export default {
      * const teamId = 16;
      * const result = await sdv.wnba.getTeamPlayers(teamId);
      */
-    getTeamPlayers: async function (id) {
+    getTeamPlayers: async function (id: number | string) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/${id}`;
         const params: Record<string, any> = {
             enable: "roster"

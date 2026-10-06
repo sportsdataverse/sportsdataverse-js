@@ -21,6 +21,7 @@
 
 import Papa from "papaparse";
 import { idColumnsToStrings, MLBAM_ID_COLUMNS, warnBigint } from "../core/int64.js";
+import type { ParserRow } from "../core/types.js";
 
 /**
  * Faithful port of `sportsdataverse.dl_utils.underscore` (+ the parser's
@@ -94,7 +95,7 @@ function jsonRows(rows: any[]): Record<string, any>[] {
  * returns `[]`. Headers go through `underscore` (a near no-op on Savant's
  * already-snake headers).
  */
-export function csvToRowsRaw(text: any): Record<string, any>[] {
+export function csvToRowsRaw(text: any): ParserRow[] {
   if (typeof text !== "string" || !text.trim()) return [];
   let parsed;
   try {
@@ -218,7 +219,7 @@ function pinIdColumns(rows: Record<string, any>[]): Record<string, any>[] {
  * (the v4 id rule). An integer column left BigInt is named in one warning per
  * column per process (code `SDV_INT64`). Mutates the raw rows' cells.
  */
-export function typedCsvRows(rows: Record<string, any>[]): Record<string, any>[] {
+export function typedCsvRows(rows: ParserRow[]): ParserRow[] {
   const out = idColumnsToStrings(pinIdColumns(inferCsvTypes(rows).map((row) => underscoreKeys(row))));
   for (const col of out.length ? Object.keys(out[0]) : []) {
     if (out.some((r) => typeof r[col] === "bigint")) warnBigint("Savant CSV", col);
@@ -311,7 +312,7 @@ function htmlScriptJson(html: string, varName: string): Record<string, any> {
  * Parse a Statcast search CSV payload (`/statcast_search/csv`) into tidy rows,
  * one row per search result. Non-string / empty input returns `[]`.
  */
-export function parse_mlb_statcast_search(payload: any): Record<string, any>[] {
+export function parse_mlb_statcast_search(payload: any): ParserRow[] {
   return csvToRows(payload);
 }
 
@@ -321,7 +322,7 @@ export function parse_mlb_statcast_search(payload: any): Record<string, any>[] {
  * returns `[]`. The first column header (`"last_name, first_name"`) is kept
  * verbatim, matching the Python parser.
  */
-export function parse_mlb_statcast_leaderboard(payload: any): Record<string, any>[] {
+export function parse_mlb_statcast_leaderboard(payload: any): ParserRow[] {
   return csvToRows(payload);
 }
 
@@ -333,7 +334,7 @@ export function parse_mlb_statcast_leaderboard(payload: any): Record<string, any
  * concatenates both sides into one frame, one row per pitch. When neither side
  * is present it falls back to the `exit_velocity` array (batted-ball events).
  */
-export function parse_mlb_statcast_gamefeed(payload: any): Record<string, any>[] {
+export function parse_mlb_statcast_gamefeed(payload: any): ParserRow[] {
   if (!isPlainObject(payload)) return [];
   let rows: any[] = [];
   for (const side of ["team_home", "team_away"]) {
@@ -354,7 +355,7 @@ export function parse_mlb_statcast_gamefeed(payload: any): Record<string, any>[]
  * `schedule.dates[].games[]`. This flattens every game across all dates into
  * one row, snake-cased. Missing / empty input returns `[]`.
  */
-export function parse_mlb_statcast_schedule(payload: any): Record<string, any>[] {
+export function parse_mlb_statcast_schedule(payload: any): ParserRow[] {
   const sched = isPlainObject(payload) ? payload.schedule : null;
   const dates = isPlainObject(sched) ? sched.dates : null;
   if (!Array.isArray(dates)) return [];
@@ -372,7 +373,7 @@ export function parse_mlb_statcast_schedule(payload: any): Record<string, any>[]
  * return `text/html` even with `csv=true`; the rows live in an embedded
  * `const data = [...]` `<script>` array. This extracts and flattens that array.
  */
-export function parse_mlb_statcast_html_leaderboard(payload: any): Record<string, any>[] {
+export function parse_mlb_statcast_html_leaderboard(payload: any): ParserRow[] {
   const rows = htmlDecodeVar(typeof payload === "string" ? payload : "", "data");
   if (!Array.isArray(rows)) return [];
   return jsonRows(rows);
@@ -393,7 +394,7 @@ export function parse_mlb_statcast_html_leaderboard(payload: any): Record<string
 export function parse_mlb_statcast_player(
   payload: any,
   section = "statcast"
-): Record<string, any>[] {
+): ParserRow[] {
   const rows = htmlScriptJson(typeof payload === "string" ? payload : "", "serverVals")[section];
   if (!Array.isArray(rows)) return [];
   return jsonRows(rows);

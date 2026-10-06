@@ -361,9 +361,19 @@ export type {
   Wrapper,
   SectionedWrapper,
   WrapperParams,
+  NoParams,
+  OptionalParams,
+  RequiredParam,
+  LeagueParam,
+  ParamsArg,
+  SnakeToCamel,
 } from './core/types.js';
 // Generated row types of the parity-verified endpoints' `{ parsed: true }` returns
 // (src/generated/rows/, tools/codegen/row-types.mjs). Type-only: the module is empty at runtime.
 export * from './generated/rows/index.js';
 // Each namespace's generated members (type-only; src/generated/namespaces.ts), the parts of `Sdv`.
 export * from './generated/namespaces.js';
+// Every wrapper's params type (src/generated/params/, tools/codegen/param-types.mjs). Type-only.
+export * from './generated/params/index.js';
+// Every release loader's row type (src/generated/loader_rows/, tools/codegen/loader-types.mjs). Type-only.
+export * from './generated/loader_rows/index.js';
