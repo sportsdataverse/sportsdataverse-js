@@ -5,6 +5,8 @@ sidebar_position: 3
 description: The raw ESPN scoreboard next to its parsed form, and a derived margin-of-victory table — the pattern every other tutorial builds on.
 ---
 
+import OpenInStackBlitz from '@site/src/components/OpenInStackBlitz';
+
 # From scoreboard to a tidy table
 
 **What you'll build:** a script that fetches the NBA scoreboard twice — raw and
@@ -111,6 +113,8 @@ printTable(finals, ['short_name', 'winner', 'margin', 'venue'], 5, 'Biggest marg
 ```
 
 <!-- /inject -->
+
+<OpenInStackBlitz src="examples/01_nba_scoreboard_to_table.mjs" title="From scoreboard to a table" />
 
 ## Output
 

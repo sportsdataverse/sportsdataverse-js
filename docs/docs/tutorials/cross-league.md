@@ -5,6 +5,8 @@ sidebar_position: 2
 description: One API across 30 leagues and 10 provider namespaces — and how to discover it at runtime with listFunctions, findTeam and the parser registry.
 ---
 
+import OpenInStackBlitz from '@site/src/components/OpenInStackBlitz';
+
 # The cross-league surface
 
 **What you'll build:** a short script that maps the package from the inside —
@@ -150,6 +152,8 @@ printTable(
 ```
 
 <!-- /inject -->
+
+<OpenInStackBlitz src="examples/13_discover_and_utilities.mjs" title="The cross-league surface" />
 
 ## Output
 

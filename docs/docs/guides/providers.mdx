@@ -4,7 +4,7 @@ sidebar_label: Providers
 sidebar_position: 10
 ---
 
-import RunKit from '@site/src/components/RunKit';
+import OpenInStackBlitz from '@site/src/components/OpenInStackBlitz';
 import RunCell from '@site/src/components/RunCell';
 
 # Provider recipes
@@ -154,24 +154,20 @@ console.table(teams.slice(0, 10));
 The older `sdv.recruiting` methods (`api.247sports.com`) are deprecated because
 that host answers HTTP 500.
 
-## Run it live
+## Run it yourself
 
-This cell pulls the current CFB scoreboard from Fox's public Bifrost API:
+The current CFB scoreboard from Fox's public Bifrost API, as a ready-to-run Node
+sandbox (it installs the **published npm package**; Fox needs no key):
 
-<RunKit
+<OpenInStackBlitz
   title="Fox Bifrost: CFB scoreboard"
-  source={`const sdv = (await import('sportsdataverse')).default;
+  code={`import sdv from 'sportsdataverse';
 
 const board = await sdv.fox.foxApiScoreboard({ sport: 'cfb', parsed: true });
 
-board.slice(0, 5);`}
+console.table(board.slice(0, 5));
+`}
 />
-
-:::note
-RunKit cells run the **published npm package** (`sportsdataverse@^3`). The v3
-provider namespaces (`sdv.odds`, `sdv.fox`, …) activate once v3 is on npm; until
-then the embed may load v2. Copy any snippet into Node to run it locally.
-:::
 
 :::tip
 Per-provider method tables: **[odds](/docs/reference/odds)**,

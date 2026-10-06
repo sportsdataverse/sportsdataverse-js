@@ -4,7 +4,7 @@ sidebar_label: Quickstart
 sidebar_position: 1
 ---
 
-import RunKit from '@site/src/components/RunKit';
+import OpenInStackBlitz from '@site/src/components/OpenInStackBlitz';
 
 # Quickstart
 
@@ -78,14 +78,14 @@ The `summary` endpoint returns 21 sub-frames (`boxscore_team`, `boxscore_player`
 `plays`, `leaders`, …); pass `section` to pick one, or omit it to get the whole
 dict.
 
-## Run it live
+## Run it yourself
 
-The cell below runs the **published npm package** end to end — scoreboard, then a
-summary drill-down — right in your browser:
+The two-step script above, as a ready-to-run Node sandbox (it installs the
+**published npm package** and hits ESPN live — no API key needed):
 
-<RunKit
+<OpenInStackBlitz
   title="NBA: scoreboard → team boxscore"
-  source={`const sdv = (await import('sportsdataverse')).default;
+  code={`import sdv from 'sportsdataverse';
 
 // 1) today's NBA slate
 const sb = await sdv.nba.espnNbaScoreboard({});
@@ -98,15 +98,13 @@ const teamBox = await sdv.nba.espnNbaSummary({
   section: 'boxscore_team',
 });
 
-teamBox;`}
+console.table(teamBox);
+`}
 />
 
-:::note
-RunKit cells install `sportsdataverse` from npm, so the v3 method names above
-(`espnNbaScoreboard`, provider namespaces, the `parsed`/`section` options) light
-up once **v3 is published**. Until then the embed may resolve v2, whose surface
-differs. Copy any snippet into Node to run it against your installed version.
-:::
+Every [tutorial](/docs/tutorials/) carries the same button under its script. To
+run a snippet in the page itself, see [live code blocks](./live-blocks); for any
+single endpoint with editable params, the [Playground](/playground).
 
 ## Real parsed output (frozen at build)
 

@@ -4,7 +4,7 @@ sidebar_label: NHL
 sidebar_position: 7
 ---
 
-import RunKit from '@site/src/components/RunKit';
+import OpenInStackBlitz from '@site/src/components/OpenInStackBlitz';
 import RunCell from '@site/src/components/RunCell';
 
 # NHL recipes
@@ -213,28 +213,25 @@ calls won't resolve. Full method + column tables:
 **[HockeyTech reference](/docs/reference/hockeytech)**.
 :::
 
-## Run it live
+## Run it yourself
 
-The cell below runs the **published npm package** end to end against the native
-api-web family — the game feed, parsed to plays right in your browser:
+The game feed, parsed to plays, as a ready-to-run Node sandbox (it installs the
+**published npm package** and hits api-web live — no API key needed):
 
-<RunKit
+<OpenInStackBlitz
   title="NHL: api-web game feed → parsed plays"
-  source={`const sdv = (await import('sportsdataverse')).default;
+  code={`import sdv from 'sportsdataverse';
 
 // 2023030417 = a 2023 Stanley Cup Final game
 const plays = await sdv.nhl.nhlWebPbp({ game_id: '2023030417', parsed: true });
 
 // first ten parsed play rows
-plays.slice(0, 10);`}
+console.table(plays.slice(0, 10));
+`}
 />
 
-:::note
-RunKit cells install `sportsdataverse` from npm, so the v3 method names above
-(`nhlWebPbp`, `nhlEdge*`, the `parsed` option) light up once **v3 is
-published**. Until then the embed may resolve v2, whose surface differs. Copy any
-snippet into Node to run it against your installed version.
-:::
+The [NHL tutorial](/docs/tutorials/nhl-api-web-edge) walks the same feed plus EDGE,
+with the output frozen into the page.
 
 :::tip
 Full method + parameter tables: **[NHL reference](/docs/nhl/)** (ESPN,

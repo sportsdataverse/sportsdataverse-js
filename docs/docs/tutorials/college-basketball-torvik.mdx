@@ -5,6 +5,8 @@ sidebar_position: 8
 description: BartTorvik's CSV ratings behind the same parsed contract, then ESPN's boxscore_player and boxscore_team sub-frames for one game.
 ---
 
+import OpenInStackBlitz from '@site/src/components/OpenInStackBlitz';
+
 # College basketball: BartTorvik ratings and an ESPN box score
 
 **What you'll build:** the top of BartTorvik's T-Rank table, a game's top
@@ -122,6 +124,8 @@ printTable([...byStat.values()], ['stat', ...abbrs], 8, 'Team totals (boxscore_t
 ```
 
 <!-- /inject -->
+
+<OpenInStackBlitz src="examples/06_college_basketball_torvik_and_espn.mjs" title="College basketball: T-Rank and box scores" />
 
 ## Output
 

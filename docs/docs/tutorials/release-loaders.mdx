@@ -5,6 +5,8 @@ sidebar_position: 14
 description: The generated load* functions read SportsDataverse / nflverse parquet releases straight from GitHub, with the integer-id rule that makes cross-dataset joins work.
 ---
 
+import OpenInStackBlitz from '@site/src/components/OpenInStackBlitz';
+
 # Release-dataset loaders: parquet to rows, ids as strings
 
 **What you'll build:** the 2024 college-football ratings table, a join of that
@@ -111,6 +113,8 @@ printTable(groups, ['group_id', 'level', 'first_season', 'last_season'], 8, 'nhl
 ```
 
 <!-- /inject -->
+
+<OpenInStackBlitz src="examples/12_release_loaders.mjs" title="Release-dataset loaders" />
 
 ## Output
 
