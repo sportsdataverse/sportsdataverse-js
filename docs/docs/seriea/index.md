@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.seriea` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.seriea`
+
+<SourcesCovered league="seriea" />
+
 - **namespace:** `sdv.seriea`
 - **sport slug:** `soccer`
 - **league slug:** `ita.1`

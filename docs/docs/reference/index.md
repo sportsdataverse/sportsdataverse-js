@@ -18,7 +18,7 @@ Every league below exposes the same generated `espn<League><Endpoint>` surface (
 
 Every endpoint also accepts `{ parsed: true }` to return tidy rows instead of raw JSON — see [**ESPN parsed returns**](./espn-parsed-returns) for the column reference (116 endpoints across 22 parsers).
 
-Some leagues additionally ship **native (non-ESPN) API** wrappers — the MLB Stats API + Baseball Savant/Statcast (`mlb`), the four NHL native APIs (`nhl`), and the NFL.com Shield API (`nfl`). They're listed in the **Native API** sections of each league page; the `native` column below counts them.
+Some leagues additionally ship **native (non-ESPN) API** wrappers — NBA Stats API (stats.nba.com) (`nba`), WNBA Stats API (stats.wnba.com) (`wnba`), KenPom (`mbb`), NFL.com Shield API + PFF Developer API + NFL Pro (Next Gen Stats) (`nfl`), MLB Stats API + Baseball Savant / Statcast (`mlb`), NHL api-web (game feed) + NHL EDGE (player tracking) + NHL Stats REST + NHL Records (`nhl`), MLS web API (`mls`), NWSL (StatsPerform SDP) (`nwsl`). They're listed in the **Native API** sections of each league page; the `native` column below counts them. The [Sources & coverage](/docs/sources) page lists every upstream source with its auth, ownership and parity.
 
 | League | sport | ESPN slug | scopes | wrappers | native |
 |---|---|---|---|---:|---:|

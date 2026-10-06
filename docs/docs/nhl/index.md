@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.nhl` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.nhl`
+
+<SourcesCovered league="nhl" />
+
 - **namespace:** `sdv.nhl`
 - **sport slug:** `hockey`
 - **league slug:** `nhl`

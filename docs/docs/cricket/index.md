@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.cricket` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.cricket`
+
+<SourcesCovered league="cricket" />
+
 - **namespace:** `sdv.cricket`
 - **sport slug:** `cricket`
 - **league slug:** `eng.1`

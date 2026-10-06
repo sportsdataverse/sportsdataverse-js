@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.laliga` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.laliga`
+
+<SourcesCovered league="laliga" />
+
 - **namespace:** `sdv.laliga`
 - **sport slug:** `soccer`
 - **league slug:** `esp.1`

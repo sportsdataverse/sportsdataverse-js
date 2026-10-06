@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.wnba` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.wnba`
+
+<SourcesCovered league="wnba" />
+
 - **namespace:** `sdv.wnba`
 - **sport slug:** `basketball`
 - **league slug:** `wnba`

@@ -14,6 +14,12 @@ sidebar_position: 0
 
 # `sdv.pwhl`
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.pwhl`
+
+<SourcesCovered league="pwhl" />
+
 `sdv.pwhl` has no ESPN surface; it carries the PWHL dataset loaders (published SportsDataverse release assets). Live PWHL feeds are on [`sdv.hockeytech`](../reference/hockeytech.md) with `league: 'pwhl'`.
 
 ```js

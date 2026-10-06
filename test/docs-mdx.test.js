@@ -54,6 +54,8 @@ function mdxUnsafeLines(text) {
     const open = s.indexOf('<!--');
     if (open >= 0) [s, comment] = [s.slice(0, open), true];
     s = s.replace(/(`+)[\s\S]*?\1/g, '').replace(/\\[{}<]/g, '');
+    // `{sources.totals.x}`: a member expression on an imported binding renders (intro.mdx)
+    s = s.replace(/\{([A-Za-z_$][\w$]*)(?:\.[\w$]+)*\}/g, (m, n) => (components.has(n) ? '' : m));
     if (/^#{1,6}\s/.test(t)) s = s.replace(/\s\{#[\w-]+\}\s*$/, ''); // `## Title {#id}`
     const tags = [...s.matchAll(/<\/?([A-Za-z][\w.:-]*)[^>]*>?/g)];
     const badTag = tags.some(([whole, name]) => !HTML_OK.has(name) || (VOID.has(name) && !whole.endsWith('/>')));
@@ -105,11 +107,13 @@ describe('docs: every page Docusaurus compiles is MDX-safe', () => {
       "import Tabs from '@theme/Tabs';\n\n<Tabs>\n\nprose\n\n</Tabs>",
       '<table><tr><td>a</td></tr></table> a <code>x</code> b <ins>x</ins>',
       '## Heading {#custom-id}',
+      "import sources from '@site/src/generated/sources.json';\n**{sources.totals.espnShorts} endpoints** × {sources.totals.espnLeagues}",
     ]) {
       unsafe(ok).should.be.false(ok);
     }
     const cells = "import RunCell from 'r';\n<RunCell\n  params={{ year: 2024 }}\n/>\n<RunCell a=\"b\" />\ntext {x y}";
     mdxUnsafeLines(cells).should.eql(['6: text {x y}']);
+    mdxUnsafeLines('not imported {sources.totals.x}').should.have.length(1);
   });
 
   it('docs/docs, docs/src pages and the CHANGELOG copied to the site are clean (file:line)', () => {

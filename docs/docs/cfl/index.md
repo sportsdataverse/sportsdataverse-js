@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.cfl` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.cfl`
+
+<SourcesCovered league="cfl" />
+
 - **namespace:** `sdv.cfl`
 - **sport slug:** `football`
 - **league slug:** `cfl`

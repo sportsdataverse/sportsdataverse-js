@@ -1,0 +1,880 @@
+{
+  "_generated": "tools/codegen/generate.mjs (tools/codegen/sources.mjs) — do not edit by hand",
+  "totals": {
+    "sources": 23,
+    "espnShorts": 126,
+    "espnLeagues": 30,
+    "flatWrappers": 1059,
+    "flatFamilies": 27,
+    "loaders": 323
+  },
+  "sources": [
+    {
+      "id": "espn",
+      "label": "ESPN",
+      "host": "site.api.espn.com, sports.core.api.espn.com, site.web.api.espn.com, site.web.api.espn.com (FPI), cdn.espn.com",
+      "families": [
+        {
+          "api": "espn_site_v2",
+          "label": "ESPN site v2",
+          "host": "site.api.espn.com",
+          "count": 25,
+          "ownership": "vendored"
+        },
+        {
+          "api": "espn_core_v2",
+          "label": "ESPN core v2",
+          "host": "sports.core.api.espn.com",
+          "count": 90,
+          "ownership": "vendored"
+        },
+        {
+          "api": "espn_web_v3",
+          "label": "ESPN web v3",
+          "host": "site.web.api.espn.com",
+          "count": 5,
+          "ownership": "vendored"
+        },
+        {
+          "api": "espn_fitt_v3",
+          "label": "ESPN fitt v3",
+          "host": "site.web.api.espn.com (FPI)",
+          "count": 1,
+          "ownership": "vendored"
+        },
+        {
+          "api": "espn_cdn",
+          "label": "ESPN cdn",
+          "host": "cdn.espn.com",
+          "count": 5,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [
+        "nba",
+        "wnba",
+        "nbagl",
+        "mbb",
+        "wbb",
+        "cfb",
+        "nfl",
+        "mlb",
+        "nhl",
+        "mch",
+        "wch",
+        "college_baseball",
+        "college_softball",
+        "ufl",
+        "xfl",
+        "cfl",
+        "soccer",
+        "epl",
+        "laliga",
+        "bundesliga",
+        "seriea",
+        "ligue1",
+        "mls",
+        "ligamx",
+        "ucl",
+        "uel",
+        "nwsl",
+        "wwc",
+        "wc",
+        "cricket"
+      ],
+      "namespaces": [
+        "<league>"
+      ],
+      "wrapperCount": 126,
+      "auth": "none",
+      "ownership": "vendored",
+      "parity": null,
+      "descriptionFill": {
+        "filled": 4162,
+        "total": 7062
+      },
+      "docsPath": "/docs/reference/",
+      "note": "Site v2 / Core v2 / Web v3 / FPI / CDN, one wrapper set bound on every league."
+    },
+    {
+      "id": "nba_stats",
+      "label": "stats.nba.com",
+      "host": "stats.nba.com",
+      "families": [
+        {
+          "api": "nba_stats",
+          "label": "NBA Stats API (stats.nba.com)",
+          "host": "stats.nba.com",
+          "count": 128,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [
+        "nba"
+      ],
+      "namespaces": [
+        "nba"
+      ],
+      "wrapperCount": 128,
+      "auth": "impersonation",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 126,
+        "total": 126
+      },
+      "descriptionFill": {
+        "filled": 10530,
+        "total": 10909
+      },
+      "docsPath": "/docs/nba/reference/native",
+      "note": "NBA, G League and Summer League by `league_id`; TLS-impersonating transport, residential IP."
+    },
+    {
+      "id": "wnba_stats",
+      "label": "stats.wnba.com",
+      "host": "stats.wnba.com",
+      "families": [
+        {
+          "api": "wnba_stats",
+          "label": "WNBA Stats API (stats.wnba.com)",
+          "host": "stats.wnba.com",
+          "count": 111,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [
+        "wnba"
+      ],
+      "namespaces": [
+        "wnba"
+      ],
+      "wrapperCount": 111,
+      "auth": "impersonation",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 110,
+        "total": 110
+      },
+      "descriptionFill": {
+        "filled": 9792,
+        "total": 10097
+      },
+      "docsPath": "/docs/wnba/reference/native",
+      "note": "Same transport as stats.nba.com."
+    },
+    {
+      "id": "mlb",
+      "label": "MLB Stats API",
+      "host": "statsapi.mlb.com",
+      "families": [
+        {
+          "api": "mlb",
+          "label": "MLB Stats API",
+          "host": "statsapi.mlb.com",
+          "count": 78,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [
+        "mlb"
+      ],
+      "namespaces": [
+        "mlb"
+      ],
+      "wrapperCount": 78,
+      "auth": "none",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 46,
+        "total": 46
+      },
+      "descriptionFill": {
+        "filled": 1605,
+        "total": 1615
+      },
+      "docsPath": "/docs/mlb/reference/native"
+    },
+    {
+      "id": "mlb_statcast",
+      "label": "Baseball Savant (Statcast)",
+      "host": "baseballsavant.mlb.com",
+      "families": [
+        {
+          "api": "mlb_statcast",
+          "label": "Baseball Savant / Statcast",
+          "host": "baseballsavant.mlb.com",
+          "count": 39,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [
+        "mlb"
+      ],
+      "namespaces": [
+        "mlb"
+      ],
+      "wrapperCount": 39,
+      "auth": "none",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 1,
+        "total": 37
+      },
+      "descriptionFill": {
+        "filled": 1481,
+        "total": 1481
+      },
+      "docsPath": "/docs/mlb/reference/native",
+      "note": "CSV / JSON / HTML leaderboards, search and game feeds."
+    },
+    {
+      "id": "nhl",
+      "label": "NHL APIs",
+      "host": "api-web.nhle.com, api.nhle.com, records.nhl.com",
+      "families": [
+        {
+          "api": "nhl_api_web",
+          "label": "NHL api-web (game feed)",
+          "host": "api-web.nhle.com",
+          "count": 27,
+          "ownership": "vendored"
+        },
+        {
+          "api": "nhl_edge",
+          "label": "NHL EDGE (player tracking)",
+          "host": "api-web.nhle.com",
+          "count": 35,
+          "ownership": "vendored"
+        },
+        {
+          "api": "nhl_stats_rest",
+          "label": "NHL Stats REST",
+          "host": "api.nhle.com",
+          "count": 21,
+          "ownership": "vendored"
+        },
+        {
+          "api": "nhl_records",
+          "label": "NHL Records",
+          "host": "records.nhl.com",
+          "count": 44,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [
+        "nhl"
+      ],
+      "namespaces": [
+        "nhl"
+      ],
+      "wrapperCount": 127,
+      "auth": "none",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 98,
+        "total": 98
+      },
+      "descriptionFill": {
+        "filled": 2756,
+        "total": 2795
+      },
+      "docsPath": "/docs/nhl/reference/native",
+      "note": "api-web game feed, EDGE tracking, Stats REST and Records."
+    },
+    {
+      "id": "nfl_api",
+      "label": "NFL.com Shield",
+      "host": "api.nfl.com",
+      "families": [
+        {
+          "api": "nfl_api",
+          "label": "NFL.com Shield API",
+          "host": "api.nfl.com",
+          "count": 15,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [
+        "nfl"
+      ],
+      "namespaces": [
+        "nfl"
+      ],
+      "wrapperCount": 15,
+      "auth": "none",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 0,
+        "total": 11
+      },
+      "descriptionFill": {
+        "filled": 304,
+        "total": 304
+      },
+      "docsPath": "/docs/nfl/reference/native",
+      "note": "Bearer token minted by the runtime; nothing to configure."
+    },
+    {
+      "id": "nfl_pro",
+      "label": "NFL Pro (Next Gen Stats)",
+      "host": "pro.nfl.com",
+      "families": [
+        {
+          "api": "nfl_pro",
+          "label": "NFL Pro (Next Gen Stats)",
+          "host": "pro.nfl.com",
+          "count": 16,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [
+        "nfl"
+      ],
+      "namespaces": [
+        "nfl"
+      ],
+      "wrapperCount": 16,
+      "auth": "subscription",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 0,
+        "total": 16
+      },
+      "descriptionFill": {
+        "filled": 0,
+        "total": 1036
+      },
+      "docsPath": "/docs/nfl/reference/native"
+    },
+    {
+      "id": "pff_api",
+      "label": "PFF Developer API",
+      "host": "api.pff.com",
+      "families": [
+        {
+          "api": "pff_api",
+          "label": "PFF Developer API",
+          "host": "api.pff.com",
+          "count": 68,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [
+        "nfl"
+      ],
+      "namespaces": [
+        "nfl"
+      ],
+      "wrapperCount": 68,
+      "auth": "subscription",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 0,
+        "total": 67
+      },
+      "descriptionFill": {
+        "filled": 7887,
+        "total": 7905
+      },
+      "docsPath": "/docs/nfl/reference/native"
+    },
+    {
+      "id": "kenpom",
+      "label": "KenPom",
+      "host": "kenpom.com",
+      "families": [
+        {
+          "api": "kenpom",
+          "label": "KenPom",
+          "host": "kenpom.com",
+          "count": 30,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [
+        "mbb"
+      ],
+      "namespaces": [
+        "mbb"
+      ],
+      "wrapperCount": 30,
+      "auth": "subscription",
+      "ownership": "vendored",
+      "parity": null,
+      "descriptionFill": null,
+      "docsPath": "/docs/mbb/reference/native"
+    },
+    {
+      "id": "torvik",
+      "label": "BartTorvik (T-Rank)",
+      "host": "barttorvik.com",
+      "families": [
+        {
+          "api": "torvik",
+          "label": "BartTorvik (T-Rank)",
+          "host": "barttorvik.com",
+          "count": 5,
+          "ownership": "vendored"
+        },
+        {
+          "api": "bart_wbb",
+          "label": "BartTorvik women's (T-Rank)",
+          "host": "barttorvik.com",
+          "count": 1,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [],
+      "namespaces": [
+        "torvik"
+      ],
+      "wrapperCount": 6,
+      "auth": "none",
+      "ownership": "vendored",
+      "parity": null,
+      "descriptionFill": {
+        "filled": 228,
+        "total": 228
+      },
+      "docsPath": "/docs/reference/torvik",
+      "note": "Men's and women's T-Rank."
+    },
+    {
+      "id": "on3",
+      "label": "On3 Recruit Database",
+      "host": "api.on3.com",
+      "families": [
+        {
+          "api": "on3",
+          "label": "On3 Recruit Database",
+          "host": "api.on3.com",
+          "count": 78,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [],
+      "namespaces": [
+        "on3"
+      ],
+      "wrapperCount": 78,
+      "auth": "none",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 23,
+        "total": 23
+      },
+      "descriptionFill": {
+        "filled": 152,
+        "total": 1024
+      },
+      "docsPath": "/docs/reference/on3"
+    },
+    {
+      "id": "sports247",
+      "label": "247Sports",
+      "host": "ipa.247sports.com, 247sports.com",
+      "families": [
+        {
+          "api": "sports247",
+          "label": "247Sports RDB",
+          "host": "ipa.247sports.com",
+          "count": 12,
+          "ownership": "vendored"
+        },
+        {
+          "api": "sports247_site_pages",
+          "label": "247Sports site pages",
+          "host": "247sports.com",
+          "count": 35,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [],
+      "namespaces": [
+        "sports247"
+      ],
+      "wrapperCount": 47,
+      "auth": "impersonation",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 12,
+        "total": 47
+      },
+      "descriptionFill": {
+        "filled": 524,
+        "total": 589
+      },
+      "docsPath": "/docs/reference/sports247",
+      "note": "Guest JWT minted by the runtime; browser-impersonating transport (`npm install impit`)."
+    },
+    {
+      "id": "cbs",
+      "label": "CBS Sports",
+      "host": "api.cbssports.com",
+      "families": [
+        {
+          "api": "cbs",
+          "label": "CBS Sports",
+          "host": "api.cbssports.com",
+          "count": 82,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [],
+      "namespaces": [
+        "cbs"
+      ],
+      "wrapperCount": 82,
+      "auth": "none",
+      "ownership": "vendored",
+      "parity": null,
+      "descriptionFill": {
+        "filled": 178,
+        "total": 186
+      },
+      "docsPath": "/docs/reference/cbs"
+    },
+    {
+      "id": "fox",
+      "label": "Fox Sports",
+      "host": "api.foxsports.com",
+      "families": [
+        {
+          "api": "fox",
+          "label": "Fox Sports",
+          "host": "api.foxsports.com",
+          "count": 38,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [],
+      "namespaces": [
+        "fox"
+      ],
+      "wrapperCount": 38,
+      "auth": "none",
+      "ownership": "vendored",
+      "parity": null,
+      "descriptionFill": {
+        "filled": 18,
+        "total": 193
+      },
+      "docsPath": "/docs/reference/fox"
+    },
+    {
+      "id": "yahoo",
+      "label": "Yahoo Sports",
+      "host": "graphite-secure.sports.yahoo.com, api-secure.sports.yahoo.com",
+      "families": [
+        {
+          "api": "yahoo",
+          "label": "Yahoo Sports",
+          "host": "graphite-secure.sports.yahoo.com",
+          "count": 107,
+          "ownership": "vendored"
+        },
+        {
+          "api": "yahoo_scores",
+          "label": "Yahoo Sports (scores)",
+          "host": "api-secure.sports.yahoo.com",
+          "count": 2,
+          "ownership": "js-owned"
+        }
+      ],
+      "leagues": [],
+      "namespaces": [
+        "yahoo"
+      ],
+      "wrapperCount": 109,
+      "auth": "none",
+      "ownership": "mixed",
+      "parity": null,
+      "descriptionFill": {
+        "filled": 656,
+        "total": 1043
+      },
+      "docsPath": "/docs/reference/yahoo",
+      "note": "Stats graph + scores."
+    },
+    {
+      "id": "odds_api",
+      "label": "The Odds API",
+      "host": "api.the-odds-api.com",
+      "families": [
+        {
+          "api": "odds_api",
+          "label": "The Odds API",
+          "host": "api.the-odds-api.com",
+          "count": 10,
+          "ownership": "js-owned"
+        }
+      ],
+      "leagues": [],
+      "namespaces": [
+        "odds"
+      ],
+      "wrapperCount": 10,
+      "auth": "key",
+      "ownership": "js-owned",
+      "parity": null,
+      "descriptionFill": {
+        "filled": 109,
+        "total": 109
+      },
+      "docsPath": "/docs/reference/odds"
+    },
+    {
+      "id": "hockeytech",
+      "label": "HockeyTech / LeagueStat",
+      "host": "lscluster.hockeytech.com",
+      "families": [
+        {
+          "api": "hockeytech",
+          "label": "HockeyTech / LeagueStat",
+          "host": "lscluster.hockeytech.com",
+          "count": 16,
+          "ownership": "js-owned"
+        }
+      ],
+      "leagues": [],
+      "namespaces": [
+        "hockeytech"
+      ],
+      "wrapperCount": 16,
+      "auth": "none",
+      "ownership": "js-owned",
+      "parity": null,
+      "descriptionFill": {
+        "filled": 574,
+        "total": 574
+      },
+      "docsPath": "/docs/reference/hockeytech",
+      "note": "PWHL + 19 junior / minor leagues by `league`; public per-league keys are built in."
+    },
+    {
+      "id": "asa",
+      "label": "American Soccer Analysis",
+      "host": "app.americansocceranalysis.com",
+      "families": [
+        {
+          "api": "asa",
+          "label": "American Soccer Analysis",
+          "host": "app.americansocceranalysis.com",
+          "count": 15,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [],
+      "namespaces": [
+        "asa"
+      ],
+      "wrapperCount": 15,
+      "auth": "none",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 7,
+        "total": 15
+      },
+      "descriptionFill": {
+        "filled": 143,
+        "total": 143
+      },
+      "docsPath": "/docs/reference/asa"
+    },
+    {
+      "id": "mls_api",
+      "label": "MLS web API",
+      "host": "stats-api.mlssoccer.com",
+      "families": [
+        {
+          "api": "mls_api",
+          "label": "MLS web API",
+          "host": "stats-api.mlssoccer.com",
+          "count": 12,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [
+        "mls"
+      ],
+      "namespaces": [
+        "mls"
+      ],
+      "wrapperCount": 12,
+      "auth": "none",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 9,
+        "total": 12
+      },
+      "descriptionFill": {
+        "filled": 384,
+        "total": 392
+      },
+      "docsPath": "/docs/mls/reference/native"
+    },
+    {
+      "id": "nwsl_api",
+      "label": "NWSL (StatsPerform SDP)",
+      "host": "api-sdp.nwslsoccer.com",
+      "families": [
+        {
+          "api": "nwsl_api",
+          "label": "NWSL (StatsPerform SDP)",
+          "host": "api-sdp.nwslsoccer.com",
+          "count": 9,
+          "ownership": "vendored"
+        }
+      ],
+      "leagues": [
+        "nwsl"
+      ],
+      "namespaces": [
+        "nwsl"
+      ],
+      "wrapperCount": 9,
+      "auth": "none",
+      "ownership": "vendored",
+      "parity": {
+        "verified": 6,
+        "total": 8
+      },
+      "descriptionFill": {
+        "filled": 264,
+        "total": 272
+      },
+      "docsPath": "/docs/nwsl/reference/native"
+    },
+    {
+      "id": "recruiting",
+      "label": "247Sports (legacy API)",
+      "host": "api.247sports.com",
+      "families": [
+        {
+          "api": "recruiting",
+          "label": "247Sports",
+          "host": "api.247sports.com",
+          "count": 25,
+          "ownership": "js-owned"
+        }
+      ],
+      "leagues": [],
+      "namespaces": [
+        "recruiting"
+      ],
+      "wrapperCount": 25,
+      "auth": "none",
+      "ownership": "js-owned",
+      "parity": null,
+      "descriptionFill": {
+        "filled": 298,
+        "total": 298
+      },
+      "docsPath": "/docs/reference/recruiting",
+      "deprecated": true,
+      "note": "`api.247sports.com` answers HTTP 500; every method is deprecated in favour of 247Sports."
+    },
+    {
+      "id": "releases",
+      "label": "sportsdataverse-data releases",
+      "host": "github.com/sportsdataverse/sportsdataverse-data",
+      "families": [
+        {
+          "api": "loaders:cfb",
+          "label": "sdv.cfb loaders",
+          "host": "github.com",
+          "count": 71,
+          "ownership": "loaders"
+        },
+        {
+          "api": "loaders:mbb",
+          "label": "sdv.mbb loaders",
+          "host": "github.com",
+          "count": 34,
+          "ownership": "loaders"
+        },
+        {
+          "api": "loaders:mlb",
+          "label": "sdv.mlb loaders",
+          "host": "github.com",
+          "count": 32,
+          "ownership": "loaders"
+        },
+        {
+          "api": "loaders:nba",
+          "label": "sdv.nba loaders",
+          "host": "github.com",
+          "count": 41,
+          "ownership": "loaders"
+        },
+        {
+          "api": "loaders:nfl",
+          "label": "sdv.nfl loaders",
+          "host": "github.com",
+          "count": 29,
+          "ownership": "loaders"
+        },
+        {
+          "api": "loaders:nhl",
+          "label": "sdv.nhl loaders",
+          "host": "github.com",
+          "count": 27,
+          "ownership": "loaders"
+        },
+        {
+          "api": "loaders:pwhl",
+          "label": "sdv.pwhl loaders",
+          "host": "github.com",
+          "count": 21,
+          "ownership": "loaders"
+        },
+        {
+          "api": "loaders:wbb",
+          "label": "sdv.wbb loaders",
+          "host": "github.com",
+          "count": 34,
+          "ownership": "loaders"
+        },
+        {
+          "api": "loaders:wnba",
+          "label": "sdv.wnba loaders",
+          "host": "github.com",
+          "count": 34,
+          "ownership": "loaders"
+        }
+      ],
+      "leagues": [
+        "cfb",
+        "mbb",
+        "mlb",
+        "nba",
+        "nfl",
+        "nhl",
+        "pwhl",
+        "wbb",
+        "wnba"
+      ],
+      "namespaces": [
+        "cfb",
+        "mbb",
+        "mlb",
+        "nba",
+        "nfl",
+        "nhl",
+        "pwhl",
+        "wbb",
+        "wnba"
+      ],
+      "wrapperCount": 323,
+      "auth": "none",
+      "ownership": "loaders",
+      "parity": null,
+      "descriptionFill": {
+        "filled": 15475,
+        "total": 15732
+      },
+      "docsPath": "/docs/reference/#dataset-loaders",
+      "note": "Pre-built parquet datasets (`load*`) published as GitHub release assets."
+    }
+  ]
+}

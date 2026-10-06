@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.wwc` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.wwc`
+
+<SourcesCovered league="wwc" />
+
 - **namespace:** `sdv.wwc`
 - **sport slug:** `soccer`
 - **league slug:** `fifa.wwc`

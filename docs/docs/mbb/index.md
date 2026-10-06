@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.mbb` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.mbb`
+
+<SourcesCovered league="mbb" />
+
 - **namespace:** `sdv.mbb`
 - **sport slug:** `basketball`
 - **league slug:** `mens-college-basketball`

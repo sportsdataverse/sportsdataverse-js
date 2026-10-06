@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.nbagl` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.nbagl`
+
+<SourcesCovered league="nbagl" />
+
 - **namespace:** `sdv.nbagl`
 - **sport slug:** `basketball`
 - **league slug:** `nba-development`

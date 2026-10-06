@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.wch` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.wch`
+
+<SourcesCovered league="wch" />
+
 - **namespace:** `sdv.wch`
 - **sport slug:** `hockey`
 - **league slug:** `womens-college-hockey`

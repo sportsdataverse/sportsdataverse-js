@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.college_softball` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.college_softball`
+
+<SourcesCovered league="college_softball" />
+
 - **namespace:** `sdv.college_softball`
 - **sport slug:** `baseball`
 - **league slug:** `college-softball`

@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.college_baseball` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.college_baseball`
+
+<SourcesCovered league="college_baseball" />
+
 - **namespace:** `sdv.college_baseball`
 - **sport slug:** `baseball`
 - **league slug:** `college-baseball`

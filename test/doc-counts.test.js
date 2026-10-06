@@ -14,7 +14,9 @@ import { WRITTEN_FLAT } from '../dist/generated/flat/index.js';
 // phrasing is simply not checked until a pattern is added below.
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-const DOCS = ['README.md', 'CLAUDE.md', 'CONTRIBUTING.md', 'docs/docs/intro.md'];
+// docs/docs/intro.mdx quotes the counts from docs/src/generated/sources.json instead
+// (test/docs-sources.test.js holds that file to the registries).
+const DOCS = ['README.md', 'CLAUDE.md', 'CONTRIBUTING.md'];
 
 const leaguePrefixes = new Set(LEAGUES.map((l) => l.prefix));
 const families = [...new Set(FLAT_WRAPPERS.map((w) => w.api))];

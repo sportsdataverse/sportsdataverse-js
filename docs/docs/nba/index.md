@@ -18,6 +18,12 @@ sidebar_position: 0
 
 # `sdv.nba` — ESPN reference
 
+import SourcesCovered from '@site/src/components/SourcesCovered';
+
+## Sources for `sdv.nba`
+
+<SourcesCovered league="nba" />
+
 - **namespace:** `sdv.nba`
 - **sport slug:** `basketball`
 - **league slug:** `nba`
