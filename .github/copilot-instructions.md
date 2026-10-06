@@ -1,8 +1,8 @@
 # GitHub Copilot instructions — `sportsdataverse` (Node.js)
 
 A TypeScript, ESM-only Node.js client (Node ≥ 20.18.1; developing needs ^20.19 / ≥ 22.12
-for mocha 12 + c8 12) for sports data: 126 ESPN endpoints on 30 leagues, 1,059 native
-wrappers across 27 families (14 on league namespaces, 13 provider namespaces), 323
+for mocha 12 + c8 12) for sports data: 126 ESPN endpoints on 30 leagues, 1059 flat-API
+wrappers across 27 families (14 league families, 13 provider families), 323
 release-dataset loaders, one parser layer, one error vocabulary. Public names are
 sportsdataverse-py's. `CLAUDE.md` is the deep-dive; this file is the short version.
 

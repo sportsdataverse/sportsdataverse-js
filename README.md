@@ -11,8 +11,9 @@ providers, and the published SportsDataverse / nflverse release datasets — wit
 parser layer, one error vocabulary and TypeScript types for every call.
 
 - **126 ESPN endpoints** on **30 leagues**, identical on every league.
-- **1,059 native wrappers across 27 families** (MLB Stats, Statcast, NHL ×4, NFL.com,
-  stats.nba.com, HockeyTech, The Odds API, CBS, Fox, Yahoo, 247Sports, On3, PFF, …).
+- **1059 flat-API wrappers across 27 families** — 14 league families on their league
+  namespace (MLB Stats, Statcast, NHL ×4, NFL.com, stats.nba.com, …) and 13 provider
+  families on their own (HockeyTech, The Odds API, CBS, Fox, Yahoo, 247Sports, On3, …).
 - **323 dataset loaders** (`load*`) that read the release parquet directly.
 - `{ parsed: true }` on any wrapper → tidy, snake_cased rows, typed where verified.
 
