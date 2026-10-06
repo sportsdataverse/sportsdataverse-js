@@ -1861,6 +1861,170 @@ export interface CbsWrappers {
   cbs_league: Wrapper;
   /** CBS Sports — league teams. `GET https://api.cbssports.com/napi/resource/league/teams/{league_id}` */
   cbs_league_teams: Wrapper;
+  /** Pre-v4 name of `cbs_player_meta_baseball`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_meta_baseball` in v4. */
+  cbs_napi_baseball_player_meta: Wrapper;
+  /** Pre-v4 name of `cbs_game_boxscore`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_boxscore` in v4. */
+  cbs_napi_boxscore: Wrapper;
+  /** Pre-v4 name of `cbs_bulk`: forwards to it and warns once per process. @deprecated Renamed `cbs_bulk` in v4. */
+  cbs_napi_bulk: Wrapper;
+  /** Pre-v4 name of `cbs_client_config`: forwards to it and warns once per process. @deprecated Renamed `cbs_client_config` in v4. */
+  cbs_napi_client_configuration: Wrapper;
+  /** Pre-v4 name of `cbs_coach_rankings`: forwards to it and warns once per process. @deprecated Renamed `cbs_coach_rankings` in v4. */
+  cbs_napi_coach_rankings: Wrapper;
+  /** Pre-v4 name of `cbs_coach_team_associations`: forwards to it and warns once per process. @deprecated Renamed `cbs_coach_team_associations` in v4. */
+  cbs_napi_coach_team_associations: Wrapper;
+  /** Pre-v4 name of `cbs_player_depth_charts`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_depth_charts` in v4. */
+  cbs_napi_depth_charts: Wrapper;
+  /** Pre-v4 name of `cbs_endpoint_registry`: forwards to it and warns once per process. @deprecated Renamed `cbs_endpoint_registry` in v4. */
+  cbs_napi_endpoint_registry: Wrapper;
+  /** Pre-v4 name of `cbs_event`: forwards to it and warns once per process. @deprecated Renamed `cbs_event` in v4. */
+  cbs_napi_event: Wrapper;
+  /** Pre-v4 name of `cbs_event_entrants`: forwards to it and warns once per process. @deprecated Renamed `cbs_event_entrants` in v4. */
+  cbs_napi_event_entrants: Wrapper;
+  /** Pre-v4 name of `cbs_event_leaderboard`: forwards to it and warns once per process. @deprecated Renamed `cbs_event_leaderboard` in v4. */
+  cbs_napi_event_leaderboard: Wrapper;
+  /** Pre-v4 name of `cbs_event_seasons`: forwards to it and warns once per process. @deprecated Renamed `cbs_event_seasons` in v4. */
+  cbs_napi_event_seasons: Wrapper;
+  /** Pre-v4 name of `cbs_event_venues`: forwards to it and warns once per process. @deprecated Renamed `cbs_event_venues` in v4. */
+  cbs_napi_event_venues: Wrapper;
+  /** Pre-v4 name of `cbs_game_featured`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_featured` in v4. */
+  cbs_napi_featured_game: Wrapper;
+  /** Pre-v4 name of `cbs_game`: forwards to it and warns once per process. @deprecated Renamed `cbs_game` in v4. */
+  cbs_napi_game: Wrapper;
+  /** Pre-v4 name of `cbs_game_betting_splits`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_betting_splits` in v4. */
+  cbs_napi_game_betting_splits: Wrapper;
+  /** Pre-v4 name of `cbs_game_content_preview`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_content_preview` in v4. */
+  cbs_napi_game_content_preview: Wrapper;
+  /** Pre-v4 name of `cbs_game_content_recap`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_content_recap` in v4. */
+  cbs_napi_game_content_recap: Wrapper;
+  /** Pre-v4 name of `cbs_game_content_story`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_content_story` in v4. */
+  cbs_napi_game_content_story: Wrapper;
+  /** Pre-v4 name of `cbs_game_odds_hq`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_odds_hq` in v4. */
+  cbs_napi_game_hq_odds: Wrapper;
+  /** Pre-v4 name of `cbs_game_lineup`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_lineup` in v4. */
+  cbs_napi_game_lineup: Wrapper;
+  /** Pre-v4 name of `cbs_game_odds`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_odds` in v4. */
+  cbs_napi_game_odds: Wrapper;
+  /** Pre-v4 name of `cbs_game_outcomes`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_outcomes` in v4. */
+  cbs_napi_game_outcomes: Wrapper;
+  /** Pre-v4 name of `cbs_game_props`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_props` in v4. */
+  cbs_napi_game_props: Wrapper;
+  /** Pre-v4 name of `cbs_game_rtwp`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_rtwp` in v4. */
+  cbs_napi_game_rtwp: Wrapper;
+  /** Pre-v4 name of `cbs_game_scoring_boxscores`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_scoring_boxscores` in v4. */
+  cbs_napi_game_scoring_boxscores: Wrapper;
+  /** Pre-v4 name of `cbs_game_scoring_drives`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_scoring_drives` in v4. */
+  cbs_napi_game_scoring_drives: Wrapper;
+  /** Pre-v4 name of `cbs_game_scoring_leaders`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_scoring_leaders` in v4. */
+  cbs_napi_game_scoring_leaders: Wrapper;
+  /** Pre-v4 name of `cbs_game_scoring_player_stats`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_scoring_player_stats` in v4. */
+  cbs_napi_game_scoring_player_stats: Wrapper;
+  /** Pre-v4 name of `cbs_game_scoring_plays`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_scoring_plays` in v4. */
+  cbs_napi_game_scoring_plays: Wrapper;
+  /** Pre-v4 name of `cbs_game_scoring_rosters`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_scoring_rosters` in v4. */
+  cbs_napi_game_scoring_rosters: Wrapper;
+  /** Pre-v4 name of `cbs_game_scoring_scoreboard`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_scoring_scoreboard` in v4. */
+  cbs_napi_game_scoring_scoreboard: Wrapper;
+  /** Pre-v4 name of `cbs_game_scoring_scores`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_scoring_scores` in v4. */
+  cbs_napi_game_scoring_scores: Wrapper;
+  /** Pre-v4 name of `cbs_game_scoring_team_stats`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_scoring_team_stats` in v4. */
+  cbs_napi_game_scoring_team_stats: Wrapper;
+  /** Pre-v4 name of `cbs_game_scoring_winprob`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_scoring_winprob` in v4. */
+  cbs_napi_game_scoring_winprob: Wrapper;
+  /** Pre-v4 name of `cbs_game_scoring_ytd_player_stats`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_scoring_ytd_player_stats` in v4. */
+  cbs_napi_game_scoring_ytd_player_stats: Wrapper;
+  /** Pre-v4 name of `cbs_game_scoring_ytd_team_stats`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_scoring_ytd_team_stats` in v4. */
+  cbs_napi_game_scoring_ytd_team_stats: Wrapper;
+  /** Pre-v4 name of `cbs_game_ticket`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_ticket` in v4. */
+  cbs_napi_game_ticket: Wrapper;
+  /** Pre-v4 name of `cbs_golf_event_markets`: forwards to it and warns once per process. @deprecated Renamed `cbs_golf_event_markets` in v4. */
+  cbs_napi_golf_event_markets: Wrapper;
+  /** Pre-v4 name of `cbs_golf_player_markets`: forwards to it and warns once per process. @deprecated Renamed `cbs_golf_player_markets` in v4. */
+  cbs_napi_golf_player_markets: Wrapper;
+  /** Pre-v4 name of `cbs_golfer_results`: forwards to it and warns once per process. @deprecated Renamed `cbs_golfer_results` in v4. */
+  cbs_napi_golfer_results: Wrapper;
+  /** Pre-v4 name of `cbs_player_hockey_meta`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_hockey_meta` in v4. */
+  cbs_napi_hockey_player_meta: Wrapper;
+  /** Pre-v4 name of `cbs_league`: forwards to it and warns once per process. @deprecated Renamed `cbs_league` in v4. */
+  cbs_napi_league: Wrapper;
+  /** Pre-v4 name of `cbs_league_teams`: forwards to it and warns once per process. @deprecated Renamed `cbs_league_teams` in v4. */
+  cbs_napi_league_teams: Wrapper;
+  /** Pre-v4 name of `cbs_odds`: forwards to it and warns once per process. @deprecated Renamed `cbs_odds` in v4. */
+  cbs_napi_odds: Wrapper;
+  /** Pre-v4 name of `cbs_player`: forwards to it and warns once per process. @deprecated Renamed `cbs_player` in v4. */
+  cbs_napi_player: Wrapper;
+  /** Pre-v4 name of `cbs_player_combine_data`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_combine_data` in v4. */
+  cbs_napi_player_combine_data: Wrapper;
+  /** Pre-v4 name of `cbs_player_draft_info`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_draft_info` in v4. */
+  cbs_napi_player_draft_info: Wrapper;
+  /** Pre-v4 name of `cbs_player_encyclopedia`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_encyclopedia` in v4. */
+  cbs_napi_player_encyclopedia: Wrapper;
+  /** Pre-v4 name of `cbs_player_futures`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_futures` in v4. */
+  cbs_napi_player_futures: Wrapper;
+  /** Pre-v4 name of `cbs_player_game_stats`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_game_stats` in v4. */
+  cbs_napi_player_game_stats: Wrapper;
+  /** Pre-v4 name of `cbs_player_meta_golf`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_meta_golf` in v4. */
+  cbs_napi_player_golf_metadata: Wrapper;
+  /** Pre-v4 name of `cbs_player_injuries`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_injuries` in v4. */
+  cbs_napi_player_injuries: Wrapper;
+  /** Pre-v4 name of `cbs_player_outlook`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_outlook` in v4. */
+  cbs_napi_player_outlook: Wrapper;
+  /** Pre-v4 name of `cbs_player_rankings`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_rankings` in v4. */
+  cbs_napi_player_rankings: Wrapper;
+  /** Pre-v4 name of `cbs_player_standings`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_standings` in v4. */
+  cbs_napi_player_standings: Wrapper;
+  /** Pre-v4 name of `cbs_player_stats`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_stats` in v4. */
+  cbs_napi_player_stats: Wrapper;
+  /** Pre-v4 name of `cbs_player_team_associations`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_team_associations` in v4. */
+  cbs_napi_player_team_associations: Wrapper;
+  /** Pre-v4 name of `cbs_player_transactions`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_transactions` in v4. */
+  cbs_napi_player_transactions: Wrapper;
+  /** Pre-v4 name of `cbs_player_position_rankings`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_position_rankings` in v4. */
+  cbs_napi_position_rankings: Wrapper;
+  /** Pre-v4 name of `cbs_game_probable_players`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_probable_players` in v4. */
+  cbs_napi_probable_players: Wrapper;
+  /** Pre-v4 name of `cbs_recruit_rankings`: forwards to it and warns once per process. @deprecated Renamed `cbs_recruit_rankings` in v4. */
+  cbs_napi_recruit_rankings: Wrapper;
+  /** Pre-v4 name of `cbs_player_recruit_associations`: forwards to it and warns once per process. @deprecated Renamed `cbs_player_recruit_associations` in v4. */
+  cbs_napi_recruit_team_associations: Wrapper;
+  /** Pre-v4 name of `cbs_game_ruwt_highlights`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_ruwt_highlights` in v4. */
+  cbs_napi_ruwt_highlights: Wrapper;
+  /** Pre-v4 name of `cbs_season`: forwards to it and warns once per process. @deprecated Renamed `cbs_season` in v4. */
+  cbs_napi_season: Wrapper;
+  /** Pre-v4 name of `cbs_season_teams`: forwards to it and warns once per process. @deprecated Renamed `cbs_season_teams` in v4. */
+  cbs_napi_season_teams: Wrapper;
+  /** Pre-v4 name of `cbs_sport`: forwards to it and warns once per process. @deprecated Renamed `cbs_sport` in v4. */
+  cbs_napi_sport: Wrapper;
+  /** Pre-v4 name of `cbs_sport_leagues`: forwards to it and warns once per process. @deprecated Renamed `cbs_sport_leagues` in v4. */
+  cbs_napi_sport_leagues: Wrapper;
+  /** Pre-v4 name of `cbs_team_rankings_sportsline`: forwards to it and warns once per process. @deprecated Renamed `cbs_team_rankings_sportsline` in v4. */
+  cbs_napi_sports_line_team_rankings: Wrapper;
+  /** Pre-v4 name of `cbs_team_standings_sportsline`: forwards to it and warns once per process. @deprecated Renamed `cbs_team_standings_sportsline` in v4. */
+  cbs_napi_sports_line_team_standings: Wrapper;
+  /** Pre-v4 name of `cbs_division_subdivisions`: forwards to it and warns once per process. @deprecated Renamed `cbs_division_subdivisions` in v4. */
+  cbs_napi_sub_divisions: Wrapper;
+  /** Pre-v4 name of `cbs_team_futures`: forwards to it and warns once per process. @deprecated Renamed `cbs_team_futures` in v4. */
+  cbs_napi_team_futures: Wrapper;
+  /** Pre-v4 name of `cbs_team_metadata`: forwards to it and warns once per process. @deprecated Renamed `cbs_team_metadata` in v4. */
+  cbs_napi_team_metadata: Wrapper;
+  /** Pre-v4 name of `cbs_team_players`: forwards to it and warns once per process. @deprecated Renamed `cbs_team_players` in v4. */
+  cbs_napi_team_players: Wrapper;
+  /** Pre-v4 name of `cbs_team_polls`: forwards to it and warns once per process. @deprecated Renamed `cbs_team_polls` in v4. */
+  cbs_napi_team_polls: Wrapper;
+  /** Pre-v4 name of `cbs_team_rankings`: forwards to it and warns once per process. @deprecated Renamed `cbs_team_rankings` in v4. */
+  cbs_napi_team_rankings: Wrapper;
+  /** Pre-v4 name of `cbs_team_seasons`: forwards to it and warns once per process. @deprecated Renamed `cbs_team_seasons` in v4. */
+  cbs_napi_team_seasons: Wrapper;
+  /** Pre-v4 name of `cbs_team_standings`: forwards to it and warns once per process. @deprecated Renamed `cbs_team_standings` in v4. */
+  cbs_napi_team_standings: Wrapper;
+  /** Pre-v4 name of `cbs_team_stats`: forwards to it and warns once per process. @deprecated Renamed `cbs_team_stats` in v4. */
+  cbs_napi_team_stats: Wrapper;
+  /** Pre-v4 name of `cbs_venue`: forwards to it and warns once per process. @deprecated Renamed `cbs_venue` in v4. */
+  cbs_napi_venue: Wrapper;
+  /** Pre-v4 name of `cbs_venue_metadata`: forwards to it and warns once per process. @deprecated Renamed `cbs_venue_metadata` in v4. */
+  cbs_napi_venue_metadata: Wrapper;
+  /** Pre-v4 name of `cbs_game_weather`: forwards to it and warns once per process. @deprecated Renamed `cbs_game_weather` in v4. */
+  cbs_napi_weather: Wrapper;
   /** CBS Sports — odds. `GET https://api.cbssports.com/napi/resource/odds/{game_id}` */
   cbs_odds: Wrapper;
   /** CBS Sports — player. `GET https://api.cbssports.com/napi/resource/player/{player_id}` */
@@ -2057,6 +2221,170 @@ export interface CbsWrappers {
   cbsLeague: Wrapper;
   /** CBS Sports — league teams. `GET https://api.cbssports.com/napi/resource/league/teams/{league_id}` */
   cbsLeagueTeams: Wrapper;
+  /** Pre-v4 name of `cbsPlayerMetaBaseball`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerMetaBaseball` in v4. */
+  cbsNapiBaseballPlayerMeta: Wrapper;
+  /** Pre-v4 name of `cbsGameBoxscore`: forwards to it and warns once per process. @deprecated Renamed `cbsGameBoxscore` in v4. */
+  cbsNapiBoxscore: Wrapper;
+  /** Pre-v4 name of `cbsBulk`: forwards to it and warns once per process. @deprecated Renamed `cbsBulk` in v4. */
+  cbsNapiBulk: Wrapper;
+  /** Pre-v4 name of `cbsClientConfig`: forwards to it and warns once per process. @deprecated Renamed `cbsClientConfig` in v4. */
+  cbsNapiClientConfiguration: Wrapper;
+  /** Pre-v4 name of `cbsCoachRankings`: forwards to it and warns once per process. @deprecated Renamed `cbsCoachRankings` in v4. */
+  cbsNapiCoachRankings: Wrapper;
+  /** Pre-v4 name of `cbsCoachTeamAssociations`: forwards to it and warns once per process. @deprecated Renamed `cbsCoachTeamAssociations` in v4. */
+  cbsNapiCoachTeamAssociations: Wrapper;
+  /** Pre-v4 name of `cbsPlayerDepthCharts`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerDepthCharts` in v4. */
+  cbsNapiDepthCharts: Wrapper;
+  /** Pre-v4 name of `cbsEndpointRegistry`: forwards to it and warns once per process. @deprecated Renamed `cbsEndpointRegistry` in v4. */
+  cbsNapiEndpointRegistry: Wrapper;
+  /** Pre-v4 name of `cbsEvent`: forwards to it and warns once per process. @deprecated Renamed `cbsEvent` in v4. */
+  cbsNapiEvent: Wrapper;
+  /** Pre-v4 name of `cbsEventEntrants`: forwards to it and warns once per process. @deprecated Renamed `cbsEventEntrants` in v4. */
+  cbsNapiEventEntrants: Wrapper;
+  /** Pre-v4 name of `cbsEventLeaderboard`: forwards to it and warns once per process. @deprecated Renamed `cbsEventLeaderboard` in v4. */
+  cbsNapiEventLeaderboard: Wrapper;
+  /** Pre-v4 name of `cbsEventSeasons`: forwards to it and warns once per process. @deprecated Renamed `cbsEventSeasons` in v4. */
+  cbsNapiEventSeasons: Wrapper;
+  /** Pre-v4 name of `cbsEventVenues`: forwards to it and warns once per process. @deprecated Renamed `cbsEventVenues` in v4. */
+  cbsNapiEventVenues: Wrapper;
+  /** Pre-v4 name of `cbsGameFeatured`: forwards to it and warns once per process. @deprecated Renamed `cbsGameFeatured` in v4. */
+  cbsNapiFeaturedGame: Wrapper;
+  /** Pre-v4 name of `cbsGame`: forwards to it and warns once per process. @deprecated Renamed `cbsGame` in v4. */
+  cbsNapiGame: Wrapper;
+  /** Pre-v4 name of `cbsGameBettingSplits`: forwards to it and warns once per process. @deprecated Renamed `cbsGameBettingSplits` in v4. */
+  cbsNapiGameBettingSplits: Wrapper;
+  /** Pre-v4 name of `cbsGameContentPreview`: forwards to it and warns once per process. @deprecated Renamed `cbsGameContentPreview` in v4. */
+  cbsNapiGameContentPreview: Wrapper;
+  /** Pre-v4 name of `cbsGameContentRecap`: forwards to it and warns once per process. @deprecated Renamed `cbsGameContentRecap` in v4. */
+  cbsNapiGameContentRecap: Wrapper;
+  /** Pre-v4 name of `cbsGameContentStory`: forwards to it and warns once per process. @deprecated Renamed `cbsGameContentStory` in v4. */
+  cbsNapiGameContentStory: Wrapper;
+  /** Pre-v4 name of `cbsGameOddsHq`: forwards to it and warns once per process. @deprecated Renamed `cbsGameOddsHq` in v4. */
+  cbsNapiGameHqOdds: Wrapper;
+  /** Pre-v4 name of `cbsGameLineup`: forwards to it and warns once per process. @deprecated Renamed `cbsGameLineup` in v4. */
+  cbsNapiGameLineup: Wrapper;
+  /** Pre-v4 name of `cbsGameOdds`: forwards to it and warns once per process. @deprecated Renamed `cbsGameOdds` in v4. */
+  cbsNapiGameOdds: Wrapper;
+  /** Pre-v4 name of `cbsGameOutcomes`: forwards to it and warns once per process. @deprecated Renamed `cbsGameOutcomes` in v4. */
+  cbsNapiGameOutcomes: Wrapper;
+  /** Pre-v4 name of `cbsGameProps`: forwards to it and warns once per process. @deprecated Renamed `cbsGameProps` in v4. */
+  cbsNapiGameProps: Wrapper;
+  /** Pre-v4 name of `cbsGameRtwp`: forwards to it and warns once per process. @deprecated Renamed `cbsGameRtwp` in v4. */
+  cbsNapiGameRtwp: Wrapper;
+  /** Pre-v4 name of `cbsGameScoringBoxscores`: forwards to it and warns once per process. @deprecated Renamed `cbsGameScoringBoxscores` in v4. */
+  cbsNapiGameScoringBoxscores: Wrapper;
+  /** Pre-v4 name of `cbsGameScoringDrives`: forwards to it and warns once per process. @deprecated Renamed `cbsGameScoringDrives` in v4. */
+  cbsNapiGameScoringDrives: Wrapper;
+  /** Pre-v4 name of `cbsGameScoringLeaders`: forwards to it and warns once per process. @deprecated Renamed `cbsGameScoringLeaders` in v4. */
+  cbsNapiGameScoringLeaders: Wrapper;
+  /** Pre-v4 name of `cbsGameScoringPlayerStats`: forwards to it and warns once per process. @deprecated Renamed `cbsGameScoringPlayerStats` in v4. */
+  cbsNapiGameScoringPlayerStats: Wrapper;
+  /** Pre-v4 name of `cbsGameScoringPlays`: forwards to it and warns once per process. @deprecated Renamed `cbsGameScoringPlays` in v4. */
+  cbsNapiGameScoringPlays: Wrapper;
+  /** Pre-v4 name of `cbsGameScoringRosters`: forwards to it and warns once per process. @deprecated Renamed `cbsGameScoringRosters` in v4. */
+  cbsNapiGameScoringRosters: Wrapper;
+  /** Pre-v4 name of `cbsGameScoringScoreboard`: forwards to it and warns once per process. @deprecated Renamed `cbsGameScoringScoreboard` in v4. */
+  cbsNapiGameScoringScoreboard: Wrapper;
+  /** Pre-v4 name of `cbsGameScoringScores`: forwards to it and warns once per process. @deprecated Renamed `cbsGameScoringScores` in v4. */
+  cbsNapiGameScoringScores: Wrapper;
+  /** Pre-v4 name of `cbsGameScoringTeamStats`: forwards to it and warns once per process. @deprecated Renamed `cbsGameScoringTeamStats` in v4. */
+  cbsNapiGameScoringTeamStats: Wrapper;
+  /** Pre-v4 name of `cbsGameScoringWinprob`: forwards to it and warns once per process. @deprecated Renamed `cbsGameScoringWinprob` in v4. */
+  cbsNapiGameScoringWinprob: Wrapper;
+  /** Pre-v4 name of `cbsGameScoringYtdPlayerStats`: forwards to it and warns once per process. @deprecated Renamed `cbsGameScoringYtdPlayerStats` in v4. */
+  cbsNapiGameScoringYtdPlayerStats: Wrapper;
+  /** Pre-v4 name of `cbsGameScoringYtdTeamStats`: forwards to it and warns once per process. @deprecated Renamed `cbsGameScoringYtdTeamStats` in v4. */
+  cbsNapiGameScoringYtdTeamStats: Wrapper;
+  /** Pre-v4 name of `cbsGameTicket`: forwards to it and warns once per process. @deprecated Renamed `cbsGameTicket` in v4. */
+  cbsNapiGameTicket: Wrapper;
+  /** Pre-v4 name of `cbsGolferResults`: forwards to it and warns once per process. @deprecated Renamed `cbsGolferResults` in v4. */
+  cbsNapiGolferResults: Wrapper;
+  /** Pre-v4 name of `cbsGolfEventMarkets`: forwards to it and warns once per process. @deprecated Renamed `cbsGolfEventMarkets` in v4. */
+  cbsNapiGolfEventMarkets: Wrapper;
+  /** Pre-v4 name of `cbsGolfPlayerMarkets`: forwards to it and warns once per process. @deprecated Renamed `cbsGolfPlayerMarkets` in v4. */
+  cbsNapiGolfPlayerMarkets: Wrapper;
+  /** Pre-v4 name of `cbsPlayerHockeyMeta`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerHockeyMeta` in v4. */
+  cbsNapiHockeyPlayerMeta: Wrapper;
+  /** Pre-v4 name of `cbsLeague`: forwards to it and warns once per process. @deprecated Renamed `cbsLeague` in v4. */
+  cbsNapiLeague: Wrapper;
+  /** Pre-v4 name of `cbsLeagueTeams`: forwards to it and warns once per process. @deprecated Renamed `cbsLeagueTeams` in v4. */
+  cbsNapiLeagueTeams: Wrapper;
+  /** Pre-v4 name of `cbsOdds`: forwards to it and warns once per process. @deprecated Renamed `cbsOdds` in v4. */
+  cbsNapiOdds: Wrapper;
+  /** Pre-v4 name of `cbsPlayer`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayer` in v4. */
+  cbsNapiPlayer: Wrapper;
+  /** Pre-v4 name of `cbsPlayerCombineData`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerCombineData` in v4. */
+  cbsNapiPlayerCombineData: Wrapper;
+  /** Pre-v4 name of `cbsPlayerDraftInfo`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerDraftInfo` in v4. */
+  cbsNapiPlayerDraftInfo: Wrapper;
+  /** Pre-v4 name of `cbsPlayerEncyclopedia`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerEncyclopedia` in v4. */
+  cbsNapiPlayerEncyclopedia: Wrapper;
+  /** Pre-v4 name of `cbsPlayerFutures`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerFutures` in v4. */
+  cbsNapiPlayerFutures: Wrapper;
+  /** Pre-v4 name of `cbsPlayerGameStats`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerGameStats` in v4. */
+  cbsNapiPlayerGameStats: Wrapper;
+  /** Pre-v4 name of `cbsPlayerMetaGolf`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerMetaGolf` in v4. */
+  cbsNapiPlayerGolfMetadata: Wrapper;
+  /** Pre-v4 name of `cbsPlayerInjuries`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerInjuries` in v4. */
+  cbsNapiPlayerInjuries: Wrapper;
+  /** Pre-v4 name of `cbsPlayerOutlook`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerOutlook` in v4. */
+  cbsNapiPlayerOutlook: Wrapper;
+  /** Pre-v4 name of `cbsPlayerRankings`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerRankings` in v4. */
+  cbsNapiPlayerRankings: Wrapper;
+  /** Pre-v4 name of `cbsPlayerStandings`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerStandings` in v4. */
+  cbsNapiPlayerStandings: Wrapper;
+  /** Pre-v4 name of `cbsPlayerStats`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerStats` in v4. */
+  cbsNapiPlayerStats: Wrapper;
+  /** Pre-v4 name of `cbsPlayerTeamAssociations`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerTeamAssociations` in v4. */
+  cbsNapiPlayerTeamAssociations: Wrapper;
+  /** Pre-v4 name of `cbsPlayerTransactions`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerTransactions` in v4. */
+  cbsNapiPlayerTransactions: Wrapper;
+  /** Pre-v4 name of `cbsPlayerPositionRankings`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerPositionRankings` in v4. */
+  cbsNapiPositionRankings: Wrapper;
+  /** Pre-v4 name of `cbsGameProbablePlayers`: forwards to it and warns once per process. @deprecated Renamed `cbsGameProbablePlayers` in v4. */
+  cbsNapiProbablePlayers: Wrapper;
+  /** Pre-v4 name of `cbsRecruitRankings`: forwards to it and warns once per process. @deprecated Renamed `cbsRecruitRankings` in v4. */
+  cbsNapiRecruitRankings: Wrapper;
+  /** Pre-v4 name of `cbsPlayerRecruitAssociations`: forwards to it and warns once per process. @deprecated Renamed `cbsPlayerRecruitAssociations` in v4. */
+  cbsNapiRecruitTeamAssociations: Wrapper;
+  /** Pre-v4 name of `cbsGameRuwtHighlights`: forwards to it and warns once per process. @deprecated Renamed `cbsGameRuwtHighlights` in v4. */
+  cbsNapiRuwtHighlights: Wrapper;
+  /** Pre-v4 name of `cbsSeason`: forwards to it and warns once per process. @deprecated Renamed `cbsSeason` in v4. */
+  cbsNapiSeason: Wrapper;
+  /** Pre-v4 name of `cbsSeasonTeams`: forwards to it and warns once per process. @deprecated Renamed `cbsSeasonTeams` in v4. */
+  cbsNapiSeasonTeams: Wrapper;
+  /** Pre-v4 name of `cbsSport`: forwards to it and warns once per process. @deprecated Renamed `cbsSport` in v4. */
+  cbsNapiSport: Wrapper;
+  /** Pre-v4 name of `cbsSportLeagues`: forwards to it and warns once per process. @deprecated Renamed `cbsSportLeagues` in v4. */
+  cbsNapiSportLeagues: Wrapper;
+  /** Pre-v4 name of `cbsTeamRankingsSportsline`: forwards to it and warns once per process. @deprecated Renamed `cbsTeamRankingsSportsline` in v4. */
+  cbsNapiSportsLineTeamRankings: Wrapper;
+  /** Pre-v4 name of `cbsTeamStandingsSportsline`: forwards to it and warns once per process. @deprecated Renamed `cbsTeamStandingsSportsline` in v4. */
+  cbsNapiSportsLineTeamStandings: Wrapper;
+  /** Pre-v4 name of `cbsDivisionSubdivisions`: forwards to it and warns once per process. @deprecated Renamed `cbsDivisionSubdivisions` in v4. */
+  cbsNapiSubDivisions: Wrapper;
+  /** Pre-v4 name of `cbsTeamFutures`: forwards to it and warns once per process. @deprecated Renamed `cbsTeamFutures` in v4. */
+  cbsNapiTeamFutures: Wrapper;
+  /** Pre-v4 name of `cbsTeamMetadata`: forwards to it and warns once per process. @deprecated Renamed `cbsTeamMetadata` in v4. */
+  cbsNapiTeamMetadata: Wrapper;
+  /** Pre-v4 name of `cbsTeamPlayers`: forwards to it and warns once per process. @deprecated Renamed `cbsTeamPlayers` in v4. */
+  cbsNapiTeamPlayers: Wrapper;
+  /** Pre-v4 name of `cbsTeamPolls`: forwards to it and warns once per process. @deprecated Renamed `cbsTeamPolls` in v4. */
+  cbsNapiTeamPolls: Wrapper;
+  /** Pre-v4 name of `cbsTeamRankings`: forwards to it and warns once per process. @deprecated Renamed `cbsTeamRankings` in v4. */
+  cbsNapiTeamRankings: Wrapper;
+  /** Pre-v4 name of `cbsTeamSeasons`: forwards to it and warns once per process. @deprecated Renamed `cbsTeamSeasons` in v4. */
+  cbsNapiTeamSeasons: Wrapper;
+  /** Pre-v4 name of `cbsTeamStandings`: forwards to it and warns once per process. @deprecated Renamed `cbsTeamStandings` in v4. */
+  cbsNapiTeamStandings: Wrapper;
+  /** Pre-v4 name of `cbsTeamStats`: forwards to it and warns once per process. @deprecated Renamed `cbsTeamStats` in v4. */
+  cbsNapiTeamStats: Wrapper;
+  /** Pre-v4 name of `cbsVenue`: forwards to it and warns once per process. @deprecated Renamed `cbsVenue` in v4. */
+  cbsNapiVenue: Wrapper;
+  /** Pre-v4 name of `cbsVenueMetadata`: forwards to it and warns once per process. @deprecated Renamed `cbsVenueMetadata` in v4. */
+  cbsNapiVenueMetadata: Wrapper;
+  /** Pre-v4 name of `cbsGameWeather`: forwards to it and warns once per process. @deprecated Renamed `cbsGameWeather` in v4. */
+  cbsNapiWeather: Wrapper;
   /** CBS Sports — odds. `GET https://api.cbssports.com/napi/resource/odds/{game_id}` */
   cbsOdds: Wrapper;
   /** CBS Sports — player. `GET https://api.cbssports.com/napi/resource/player/{player_id}` */
@@ -6200,6 +6528,82 @@ export interface FoxWrappers {
   /** Fox Sports — trending videos. `GET https://api.foxsports.com/bifrost/v1/general/trending/videos` */
   fox_api_trending_videos: Wrapper;
   /** Pre-v4 name of `fox_api_event_data`: forwards to it and warns once per process. @deprecated Renamed `fox_api_event_data` in v4. */
+  fox_bifrost_event_data: Wrapper;
+  /** Pre-v4 name of `fox_api_event_matchup`: forwards to it and warns once per process. @deprecated Renamed `fox_api_event_matchup` in v4. */
+  fox_bifrost_event_matchup: Wrapper;
+  /** Pre-v4 name of `fox_api_event_odds`: forwards to it and warns once per process. @deprecated Renamed `fox_api_event_odds` in v4. */
+  fox_bifrost_event_odds: Wrapper;
+  /** Pre-v4 name of `fox_api_event_recap`: forwards to it and warns once per process. @deprecated Renamed `fox_api_event_recap` in v4. */
+  fox_bifrost_event_recap: Wrapper;
+  /** Pre-v4 name of `fox_api_event_standings`: forwards to it and warns once per process. @deprecated Renamed `fox_api_event_standings` in v4. */
+  fox_bifrost_event_standings: Wrapper;
+  /** Pre-v4 name of `fox_api_explore_browse`: forwards to it and warns once per process. @deprecated Renamed `fox_api_explore_browse` in v4. */
+  fox_bifrost_explore_browse: Wrapper;
+  /** Pre-v4 name of `fox_explore_favorite`: forwards to it and warns once per process. @deprecated Renamed `fox_explore_favorite` in v4. */
+  fox_bifrost_explore_favorite: Wrapper;
+  /** Pre-v4 name of `fox_api_explore_odds`: forwards to it and warns once per process. @deprecated Renamed `fox_api_explore_odds` in v4. */
+  fox_bifrost_explore_odds: Wrapper;
+  /** Pre-v4 name of `fox_api_foxpolls`: forwards to it and warns once per process. @deprecated Renamed `fox_api_foxpolls` in v4. */
+  fox_bifrost_foxpolls: Wrapper;
+  /** Pre-v4 name of `fox_fs_feed`: forwards to it and warns once per process. @deprecated Renamed `fox_fs_feed` in v4. */
+  fox_bifrost_fs_feed: Wrapper;
+  /** Pre-v4 name of `fox_fs_images`: forwards to it and warns once per process. @deprecated Renamed `fox_fs_images` in v4. */
+  fox_bifrost_fs_images: Wrapper;
+  /** Pre-v4 name of `fox_fs_layouts`: forwards to it and warns once per process. @deprecated Renamed `fox_fs_layouts` in v4. */
+  fox_bifrost_fs_layouts: Wrapper;
+  /** Pre-v4 name of `fox_fs_videos`: forwards to it and warns once per process. @deprecated Renamed `fox_fs_videos` in v4. */
+  fox_bifrost_fs_videos: Wrapper;
+  /** Pre-v4 name of `fox_api_league_conferences`: forwards to it and warns once per process. @deprecated Renamed `fox_api_league_conferences` in v4. */
+  fox_bifrost_league_conferences: Wrapper;
+  /** Pre-v4 name of `fox_api_league_header`: forwards to it and warns once per process. @deprecated Renamed `fox_api_league_header` in v4. */
+  fox_bifrost_league_header: Wrapper;
+  /** Pre-v4 name of `fox_api_league_odds`: forwards to it and warns once per process. @deprecated Renamed `fox_api_league_odds` in v4. */
+  fox_bifrost_league_odds: Wrapper;
+  /** Pre-v4 name of `fox_api_league_playernews`: forwards to it and warns once per process. @deprecated Renamed `fox_api_league_playernews` in v4. */
+  fox_bifrost_league_playernews: Wrapper;
+  /** Pre-v4 name of `fox_api_league_polls`: forwards to it and warns once per process. @deprecated Renamed `fox_api_league_polls` in v4. */
+  fox_bifrost_league_polls: Wrapper;
+  /** Pre-v4 name of `fox_api_league_schedule`: forwards to it and warns once per process. @deprecated Renamed `fox_api_league_schedule` in v4. */
+  fox_bifrost_league_schedule: Wrapper;
+  /** Pre-v4 name of `fox_api_league_scores`: forwards to it and warns once per process. @deprecated Renamed `fox_api_league_scores` in v4. */
+  fox_bifrost_league_scores: Wrapper;
+  /** Pre-v4 name of `fox_api_league_scores_segment`: forwards to it and warns once per process. @deprecated Renamed `fox_api_league_scores_segment` in v4. */
+  fox_bifrost_league_scores_segment: Wrapper;
+  /** Pre-v4 name of `fox_api_league_standings`: forwards to it and warns once per process. @deprecated Renamed `fox_api_league_standings` in v4. */
+  fox_bifrost_league_standings: Wrapper;
+  /** Pre-v4 name of `fox_api_league_stats`: forwards to it and warns once per process. @deprecated Renamed `fox_api_league_stats` in v4. */
+  fox_bifrost_league_stats: Wrapper;
+  /** Pre-v4 name of `fox_api_league_stats_con`: forwards to it and warns once per process. @deprecated Renamed `fox_api_league_stats_con` in v4. */
+  fox_bifrost_league_stats_con: Wrapper;
+  /** Pre-v4 name of `fox_api_league_teamnav`: forwards to it and warns once per process. @deprecated Renamed `fox_api_league_teamnav` in v4. */
+  fox_bifrost_league_teamnav: Wrapper;
+  /** Pre-v4 name of `fox_api_scoreboard`: forwards to it and warns once per process. @deprecated Renamed `fox_api_scoreboard` in v4. */
+  fox_bifrost_scoreboard: Wrapper;
+  /** Pre-v4 name of `fox_api_scorechip`: forwards to it and warns once per process. @deprecated Renamed `fox_api_scorechip` in v4. */
+  fox_bifrost_scorechip: Wrapper;
+  /** Pre-v4 name of `fox_api_search_content`: forwards to it and warns once per process. @deprecated Renamed `fox_api_search_content` in v4. */
+  fox_bifrost_search_content: Wrapper;
+  /** Pre-v4 name of `fox_api_search_entities`: forwards to it and warns once per process. @deprecated Renamed `fox_api_search_entities` in v4. */
+  fox_bifrost_search_entities: Wrapper;
+  /** Pre-v4 name of `fox_api_search_popular`: forwards to it and warns once per process. @deprecated Renamed `fox_api_search_popular` in v4. */
+  fox_bifrost_search_popular: Wrapper;
+  /** Pre-v4 name of `fox_api_team_gamelog`: forwards to it and warns once per process. @deprecated Renamed `fox_api_team_gamelog` in v4. */
+  fox_bifrost_team_gamelog: Wrapper;
+  /** Pre-v4 name of `fox_api_team_header`: forwards to it and warns once per process. @deprecated Renamed `fox_api_team_header` in v4. */
+  fox_bifrost_team_header: Wrapper;
+  /** Pre-v4 name of `fox_api_team_roster`: forwards to it and warns once per process. @deprecated Renamed `fox_api_team_roster` in v4. */
+  fox_bifrost_team_roster: Wrapper;
+  /** Pre-v4 name of `fox_api_team_standings`: forwards to it and warns once per process. @deprecated Renamed `fox_api_team_standings` in v4. */
+  fox_bifrost_team_standings: Wrapper;
+  /** Pre-v4 name of `fox_api_team_stats`: forwards to it and warns once per process. @deprecated Renamed `fox_api_team_stats` in v4. */
+  fox_bifrost_team_stats: Wrapper;
+  /** Pre-v4 name of `fox_api_topevents_scoreboard_segment`: forwards to it and warns once per process. @deprecated Renamed `fox_api_topevents_scoreboard_segment` in v4. */
+  fox_bifrost_topevents_scoreboard_segment: Wrapper;
+  /** Pre-v4 name of `fox_api_trending_articles`: forwards to it and warns once per process. @deprecated Renamed `fox_api_trending_articles` in v4. */
+  fox_bifrost_trending_articles: Wrapper;
+  /** Pre-v4 name of `fox_api_trending_videos`: forwards to it and warns once per process. @deprecated Renamed `fox_api_trending_videos` in v4. */
+  fox_bifrost_trending_videos: Wrapper;
+  /** Pre-v4 name of `fox_api_event_data`: forwards to it and warns once per process. @deprecated Renamed `fox_api_event_data` in v4. */
   fox_event_data: Wrapper;
   /** Pre-v4 name of `fox_api_event_matchup`: forwards to it and warns once per process. @deprecated Renamed `fox_api_event_matchup` in v4. */
   fox_event_matchup: Wrapper;
@@ -6341,6 +6745,82 @@ export interface FoxWrappers {
   foxApiTrendingArticles: Wrapper;
   /** Fox Sports — trending videos. `GET https://api.foxsports.com/bifrost/v1/general/trending/videos` */
   foxApiTrendingVideos: Wrapper;
+  /** Pre-v4 name of `foxApiEventData`: forwards to it and warns once per process. @deprecated Renamed `foxApiEventData` in v4. */
+  foxBifrostEventData: Wrapper;
+  /** Pre-v4 name of `foxApiEventMatchup`: forwards to it and warns once per process. @deprecated Renamed `foxApiEventMatchup` in v4. */
+  foxBifrostEventMatchup: Wrapper;
+  /** Pre-v4 name of `foxApiEventOdds`: forwards to it and warns once per process. @deprecated Renamed `foxApiEventOdds` in v4. */
+  foxBifrostEventOdds: Wrapper;
+  /** Pre-v4 name of `foxApiEventRecap`: forwards to it and warns once per process. @deprecated Renamed `foxApiEventRecap` in v4. */
+  foxBifrostEventRecap: Wrapper;
+  /** Pre-v4 name of `foxApiEventStandings`: forwards to it and warns once per process. @deprecated Renamed `foxApiEventStandings` in v4. */
+  foxBifrostEventStandings: Wrapper;
+  /** Pre-v4 name of `foxApiExploreBrowse`: forwards to it and warns once per process. @deprecated Renamed `foxApiExploreBrowse` in v4. */
+  foxBifrostExploreBrowse: Wrapper;
+  /** Pre-v4 name of `foxExploreFavorite`: forwards to it and warns once per process. @deprecated Renamed `foxExploreFavorite` in v4. */
+  foxBifrostExploreFavorite: Wrapper;
+  /** Pre-v4 name of `foxApiExploreOdds`: forwards to it and warns once per process. @deprecated Renamed `foxApiExploreOdds` in v4. */
+  foxBifrostExploreOdds: Wrapper;
+  /** Pre-v4 name of `foxApiFoxpolls`: forwards to it and warns once per process. @deprecated Renamed `foxApiFoxpolls` in v4. */
+  foxBifrostFoxpolls: Wrapper;
+  /** Pre-v4 name of `foxFsFeed`: forwards to it and warns once per process. @deprecated Renamed `foxFsFeed` in v4. */
+  foxBifrostFsFeed: Wrapper;
+  /** Pre-v4 name of `foxFsImages`: forwards to it and warns once per process. @deprecated Renamed `foxFsImages` in v4. */
+  foxBifrostFsImages: Wrapper;
+  /** Pre-v4 name of `foxFsLayouts`: forwards to it and warns once per process. @deprecated Renamed `foxFsLayouts` in v4. */
+  foxBifrostFsLayouts: Wrapper;
+  /** Pre-v4 name of `foxFsVideos`: forwards to it and warns once per process. @deprecated Renamed `foxFsVideos` in v4. */
+  foxBifrostFsVideos: Wrapper;
+  /** Pre-v4 name of `foxApiLeagueConferences`: forwards to it and warns once per process. @deprecated Renamed `foxApiLeagueConferences` in v4. */
+  foxBifrostLeagueConferences: Wrapper;
+  /** Pre-v4 name of `foxApiLeagueHeader`: forwards to it and warns once per process. @deprecated Renamed `foxApiLeagueHeader` in v4. */
+  foxBifrostLeagueHeader: Wrapper;
+  /** Pre-v4 name of `foxApiLeagueOdds`: forwards to it and warns once per process. @deprecated Renamed `foxApiLeagueOdds` in v4. */
+  foxBifrostLeagueOdds: Wrapper;
+  /** Pre-v4 name of `foxApiLeaguePlayernews`: forwards to it and warns once per process. @deprecated Renamed `foxApiLeaguePlayernews` in v4. */
+  foxBifrostLeaguePlayernews: Wrapper;
+  /** Pre-v4 name of `foxApiLeaguePolls`: forwards to it and warns once per process. @deprecated Renamed `foxApiLeaguePolls` in v4. */
+  foxBifrostLeaguePolls: Wrapper;
+  /** Pre-v4 name of `foxApiLeagueSchedule`: forwards to it and warns once per process. @deprecated Renamed `foxApiLeagueSchedule` in v4. */
+  foxBifrostLeagueSchedule: Wrapper;
+  /** Pre-v4 name of `foxApiLeagueScores`: forwards to it and warns once per process. @deprecated Renamed `foxApiLeagueScores` in v4. */
+  foxBifrostLeagueScores: Wrapper;
+  /** Pre-v4 name of `foxApiLeagueScoresSegment`: forwards to it and warns once per process. @deprecated Renamed `foxApiLeagueScoresSegment` in v4. */
+  foxBifrostLeagueScoresSegment: Wrapper;
+  /** Pre-v4 name of `foxApiLeagueStandings`: forwards to it and warns once per process. @deprecated Renamed `foxApiLeagueStandings` in v4. */
+  foxBifrostLeagueStandings: Wrapper;
+  /** Pre-v4 name of `foxApiLeagueStats`: forwards to it and warns once per process. @deprecated Renamed `foxApiLeagueStats` in v4. */
+  foxBifrostLeagueStats: Wrapper;
+  /** Pre-v4 name of `foxApiLeagueStatsCon`: forwards to it and warns once per process. @deprecated Renamed `foxApiLeagueStatsCon` in v4. */
+  foxBifrostLeagueStatsCon: Wrapper;
+  /** Pre-v4 name of `foxApiLeagueTeamnav`: forwards to it and warns once per process. @deprecated Renamed `foxApiLeagueTeamnav` in v4. */
+  foxBifrostLeagueTeamnav: Wrapper;
+  /** Pre-v4 name of `foxApiScoreboard`: forwards to it and warns once per process. @deprecated Renamed `foxApiScoreboard` in v4. */
+  foxBifrostScoreboard: Wrapper;
+  /** Pre-v4 name of `foxApiScorechip`: forwards to it and warns once per process. @deprecated Renamed `foxApiScorechip` in v4. */
+  foxBifrostScorechip: Wrapper;
+  /** Pre-v4 name of `foxApiSearchContent`: forwards to it and warns once per process. @deprecated Renamed `foxApiSearchContent` in v4. */
+  foxBifrostSearchContent: Wrapper;
+  /** Pre-v4 name of `foxApiSearchEntities`: forwards to it and warns once per process. @deprecated Renamed `foxApiSearchEntities` in v4. */
+  foxBifrostSearchEntities: Wrapper;
+  /** Pre-v4 name of `foxApiSearchPopular`: forwards to it and warns once per process. @deprecated Renamed `foxApiSearchPopular` in v4. */
+  foxBifrostSearchPopular: Wrapper;
+  /** Pre-v4 name of `foxApiTeamGamelog`: forwards to it and warns once per process. @deprecated Renamed `foxApiTeamGamelog` in v4. */
+  foxBifrostTeamGamelog: Wrapper;
+  /** Pre-v4 name of `foxApiTeamHeader`: forwards to it and warns once per process. @deprecated Renamed `foxApiTeamHeader` in v4. */
+  foxBifrostTeamHeader: Wrapper;
+  /** Pre-v4 name of `foxApiTeamRoster`: forwards to it and warns once per process. @deprecated Renamed `foxApiTeamRoster` in v4. */
+  foxBifrostTeamRoster: Wrapper;
+  /** Pre-v4 name of `foxApiTeamStandings`: forwards to it and warns once per process. @deprecated Renamed `foxApiTeamStandings` in v4. */
+  foxBifrostTeamStandings: Wrapper;
+  /** Pre-v4 name of `foxApiTeamStats`: forwards to it and warns once per process. @deprecated Renamed `foxApiTeamStats` in v4. */
+  foxBifrostTeamStats: Wrapper;
+  /** Pre-v4 name of `foxApiTopeventsScoreboardSegment`: forwards to it and warns once per process. @deprecated Renamed `foxApiTopeventsScoreboardSegment` in v4. */
+  foxBifrostTopeventsScoreboardSegment: Wrapper;
+  /** Pre-v4 name of `foxApiTrendingArticles`: forwards to it and warns once per process. @deprecated Renamed `foxApiTrendingArticles` in v4. */
+  foxBifrostTrendingArticles: Wrapper;
+  /** Pre-v4 name of `foxApiTrendingVideos`: forwards to it and warns once per process. @deprecated Renamed `foxApiTrendingVideos` in v4. */
+  foxBifrostTrendingVideos: Wrapper;
   /** Pre-v4 name of `foxApiEventData`: forwards to it and warns once per process. @deprecated Renamed `foxApiEventData` in v4. */
   foxEventData: Wrapper;
   /** Pre-v4 name of `foxApiEventMatchup`: forwards to it and warns once per process. @deprecated Renamed `foxApiEventMatchup` in v4. */
@@ -10527,6 +11007,162 @@ export interface MlbWrappers {
   mlb_analytics_games: Wrapper;
   /** MLB Stats API — analytics guids. `GET https://statsapi.mlb.com/api/v1/game/analytics/guids` */
   mlb_analytics_guids: Wrapper;
+  /** Pre-v4 name of `mlb_all_star_ballot`: forwards to it and warns once per process. @deprecated Renamed `mlb_all_star_ballot` in v4. */
+  mlb_api_all_star_ballot: Wrapper<MlbAllStarBallotRow[]>;
+  /** Pre-v4 name of `mlb_all_star_final_vote`: forwards to it and warns once per process. @deprecated Renamed `mlb_all_star_final_vote` in v4. */
+  mlb_api_all_star_final_vote: Wrapper<MlbAllStarFinalVoteRow[]>;
+  /** Pre-v4 name of `mlb_all_star_write_ins`: forwards to it and warns once per process. @deprecated Renamed `mlb_all_star_write_ins` in v4. */
+  mlb_api_all_star_write_ins: Wrapper<MlbAllStarWriteInsRow[]>;
+  /** Pre-v4 name of `mlb_analytics_games`: forwards to it and warns once per process. @deprecated Renamed `mlb_analytics_games` in v4. */
+  mlb_api_analytics_games: Wrapper;
+  /** Pre-v4 name of `mlb_analytics_guids`: forwards to it and warns once per process. @deprecated Renamed `mlb_analytics_guids` in v4. */
+  mlb_api_analytics_guids: Wrapper;
+  /** Pre-v4 name of `mlb_attendance`: forwards to it and warns once per process. @deprecated Renamed `mlb_attendance` in v4. */
+  mlb_api_attendance: Wrapper;
+  /** Pre-v4 name of `mlb_award_recipients`: forwards to it and warns once per process. @deprecated Renamed `mlb_award_recipients` in v4. */
+  mlb_api_award_recipients: Wrapper<MlbAwardRecipientsRow[]>;
+  /** Pre-v4 name of `mlb_awards`: forwards to it and warns once per process. @deprecated Renamed `mlb_awards` in v4. */
+  mlb_api_awards: Wrapper<MlbAwardsRow[]>;
+  /** Pre-v4 name of `mlb_boxscore`: forwards to it and warns once per process. @deprecated Renamed `mlb_boxscore` in v4. */
+  mlb_api_boxscore: Wrapper<MlbBoxscoreRow[]>;
+  /** Pre-v4 name of `mlb_conference`: forwards to it and warns once per process. @deprecated Renamed `mlb_conference` in v4. */
+  mlb_api_conference: Wrapper<MlbConferenceRow[]>;
+  /** Pre-v4 name of `mlb_conferences`: forwards to it and warns once per process. @deprecated Renamed `mlb_conferences` in v4. */
+  mlb_api_conferences: Wrapper<MlbConferencesRow[]>;
+  /** Pre-v4 name of `mlb_datacasters`: forwards to it and warns once per process. @deprecated Renamed `mlb_datacasters` in v4. */
+  mlb_api_datacasters: Wrapper<MlbDatacastersRow[]>;
+  /** Pre-v4 name of `mlb_divisions`: forwards to it and warns once per process. @deprecated Renamed `mlb_divisions` in v4. */
+  mlb_api_divisions: Wrapper;
+  /** Pre-v4 name of `mlb_draft`: forwards to it and warns once per process. @deprecated Renamed `mlb_draft` in v4. */
+  mlb_api_draft: Wrapper;
+  /** Pre-v4 name of `mlb_draft_latest`: forwards to it and warns once per process. @deprecated Renamed `mlb_draft_latest` in v4. */
+  mlb_api_draft_latest: Wrapper<MlbDraftLatestRow[]>;
+  /** Pre-v4 name of `mlb_draft_prospects`: forwards to it and warns once per process. @deprecated Renamed `mlb_draft_prospects` in v4. */
+  mlb_api_draft_prospects: Wrapper;
+  /** Pre-v4 name of `mlb_free_agents`: forwards to it and warns once per process. @deprecated Renamed `mlb_free_agents` in v4. */
+  mlb_api_free_agents: Wrapper<MlbFreeAgentsRow[]>;
+  /** Pre-v4 name of `mlb_game_changes`: forwards to it and warns once per process. @deprecated Renamed `mlb_game_changes` in v4. */
+  mlb_api_game_changes: Wrapper<MlbGameChangesRow[]>;
+  /** Pre-v4 name of `mlb_game_color`: forwards to it and warns once per process. @deprecated Renamed `mlb_game_color` in v4. */
+  mlb_api_game_color: Wrapper;
+  /** Pre-v4 name of `mlb_game_color_diff`: forwards to it and warns once per process. @deprecated Renamed `mlb_game_color_diff` in v4. */
+  mlb_api_game_color_diff: Wrapper;
+  /** Pre-v4 name of `mlb_game_color_timestamps`: forwards to it and warns once per process. @deprecated Renamed `mlb_game_color_timestamps` in v4. */
+  mlb_api_game_color_timestamps: Wrapper;
+  /** Pre-v4 name of `mlb_game_content`: forwards to it and warns once per process. @deprecated Renamed `mlb_game_content` in v4. */
+  mlb_api_game_content: Wrapper;
+  /** Pre-v4 name of `mlb_game_context_metrics`: forwards to it and warns once per process. @deprecated Renamed `mlb_game_context_metrics` in v4. */
+  mlb_api_game_context_metrics: Wrapper;
+  /** Pre-v4 name of `mlb_game_guids`: forwards to it and warns once per process. @deprecated Renamed `mlb_game_guids` in v4. */
+  mlb_api_game_guids: Wrapper;
+  /** Pre-v4 name of `mlb_game_pace`: forwards to it and warns once per process. @deprecated Renamed `mlb_game_pace` in v4. */
+  mlb_api_game_pace: Wrapper<MlbGamePaceRow[]>;
+  /** Pre-v4 name of `mlb_game_timestamps`: forwards to it and warns once per process. @deprecated Renamed `mlb_game_timestamps` in v4. */
+  mlb_api_game_timestamps: Wrapper<MlbGameTimestampsRow[]>;
+  /** Pre-v4 name of `mlb_high_low`: forwards to it and warns once per process. @deprecated Renamed `mlb_high_low` in v4. */
+  mlb_api_high_low: Wrapper<MlbHighLowRow[]>;
+  /** Pre-v4 name of `mlb_home_run_derby`: forwards to it and warns once per process. @deprecated Renamed `mlb_home_run_derby` in v4. */
+  mlb_api_home_run_derby: Wrapper<MlbHomeRunDerbyRow[]>;
+  /** Pre-v4 name of `mlb_home_run_derby_bracket`: forwards to it and warns once per process. @deprecated Renamed `mlb_home_run_derby_bracket` in v4. */
+  mlb_api_home_run_derby_bracket: Wrapper<MlbHomeRunDerbyBracketRow[]>;
+  /** Pre-v4 name of `mlb_home_run_derby_pool`: forwards to it and warns once per process. @deprecated Renamed `mlb_home_run_derby_pool` in v4. */
+  mlb_api_home_run_derby_pool: Wrapper<MlbHomeRunDerbyPoolRow[]>;
+  /** Pre-v4 name of `mlb_jobs`: forwards to it and warns once per process. @deprecated Renamed `mlb_jobs` in v4. */
+  mlb_api_jobs: Wrapper<MlbJobsRow[]>;
+  /** Pre-v4 name of `mlb_leagues`: forwards to it and warns once per process. @deprecated Renamed `mlb_leagues` in v4. */
+  mlb_api_leagues: Wrapper<MlbLeaguesRow[]>;
+  /** Pre-v4 name of `mlb_linescore`: forwards to it and warns once per process. @deprecated Renamed `mlb_linescore` in v4. */
+  mlb_api_linescore: Wrapper<MlbLinescoreRow[]>;
+  /** Pre-v4 name of `mlb_meta`: forwards to it and warns once per process. @deprecated Renamed `mlb_meta` in v4. */
+  mlb_api_meta: Wrapper;
+  /** Pre-v4 name of `mlb_official_scorers`: forwards to it and warns once per process. @deprecated Renamed `mlb_official_scorers` in v4. */
+  mlb_api_official_scorers: Wrapper<MlbOfficialScorersRow[]>;
+  /** Pre-v4 name of `mlb_pbp`: forwards to it and warns once per process. @deprecated Renamed `mlb_pbp` in v4. */
+  mlb_api_pbp: Wrapper;
+  /** Pre-v4 name of `mlb_pbp_diff`: forwards to it and warns once per process. @deprecated Renamed `mlb_pbp_diff` in v4. */
+  mlb_api_pbp_diff: Wrapper;
+  /** Pre-v4 name of `mlb_people`: forwards to it and warns once per process. @deprecated Renamed `mlb_people` in v4. */
+  mlb_api_people: Wrapper<MlbPeopleRow[]>;
+  /** Pre-v4 name of `mlb_person`: forwards to it and warns once per process. @deprecated Renamed `mlb_person` in v4. */
+  mlb_api_person: Wrapper<MlbPersonRow[]>;
+  /** Pre-v4 name of `mlb_person_game_stats`: forwards to it and warns once per process. @deprecated Renamed `mlb_person_game_stats` in v4. */
+  mlb_api_person_game_stats: Wrapper<MlbPersonGameStatsRow[]>;
+  /** Pre-v4 name of `mlb_person_stats`: forwards to it and warns once per process. @deprecated Renamed `mlb_person_stats` in v4. */
+  mlb_api_person_stats: Wrapper;
+  /** Pre-v4 name of `mlb_play_analytics`: forwards to it and warns once per process. @deprecated Renamed `mlb_play_analytics` in v4. */
+  mlb_api_play_analytics: Wrapper;
+  /** Pre-v4 name of `mlb_play_by_play`: forwards to it and warns once per process. @deprecated Renamed `mlb_play_by_play` in v4. */
+  mlb_api_play_by_play: Wrapper<MlbPlayByPlayRow[]>;
+  /** Pre-v4 name of `mlb_play_context_metrics_averages`: forwards to it and warns once per process. @deprecated Renamed `mlb_play_context_metrics_averages` in v4. */
+  mlb_api_play_context_metrics_averages: Wrapper;
+  /** Pre-v4 name of `mlb_schedule`: forwards to it and warns once per process. @deprecated Renamed `mlb_schedule` in v4. */
+  mlb_api_schedule: Wrapper;
+  /** Pre-v4 name of `mlb_schedule_postseason`: forwards to it and warns once per process. @deprecated Renamed `mlb_schedule_postseason` in v4. */
+  mlb_api_schedule_postseason: Wrapper<MlbSchedulePostseasonRow[]>;
+  /** Pre-v4 name of `mlb_schedule_postseason_series`: forwards to it and warns once per process. @deprecated Renamed `mlb_schedule_postseason_series` in v4. */
+  mlb_api_schedule_postseason_series: Wrapper<MlbSchedulePostseasonSeriesRow[]>;
+  /** Pre-v4 name of `mlb_schedule_postseason_tunein`: forwards to it and warns once per process. @deprecated Renamed `mlb_schedule_postseason_tunein` in v4. */
+  mlb_api_schedule_postseason_tunein: Wrapper;
+  /** Pre-v4 name of `mlb_schedule_tied`: forwards to it and warns once per process. @deprecated Renamed `mlb_schedule_tied` in v4. */
+  mlb_api_schedule_tied: Wrapper<MlbScheduleTiedRow[]>;
+  /** Pre-v4 name of `mlb_season`: forwards to it and warns once per process. @deprecated Renamed `mlb_season` in v4. */
+  mlb_api_season: Wrapper<MlbSeasonRow[]>;
+  /** Pre-v4 name of `mlb_seasons`: forwards to it and warns once per process. @deprecated Renamed `mlb_seasons` in v4. */
+  mlb_api_seasons: Wrapper;
+  /** Pre-v4 name of `mlb_seasons_all`: forwards to it and warns once per process. @deprecated Renamed `mlb_seasons_all` in v4. */
+  mlb_api_seasons_all: Wrapper<MlbSeasonsAllRow[]>;
+  /** Pre-v4 name of `mlb_sport`: forwards to it and warns once per process. @deprecated Renamed `mlb_sport` in v4. */
+  mlb_api_sport: Wrapper<MlbSportRow[]>;
+  /** Pre-v4 name of `mlb_sport_players`: forwards to it and warns once per process. @deprecated Renamed `mlb_sport_players` in v4. */
+  mlb_api_sport_players: Wrapper<MlbSportPlayersRow[]>;
+  /** Pre-v4 name of `mlb_sports`: forwards to it and warns once per process. @deprecated Renamed `mlb_sports` in v4. */
+  mlb_api_sports: Wrapper<MlbSportsRow[]>;
+  /** Pre-v4 name of `mlb_standings`: forwards to it and warns once per process. @deprecated Renamed `mlb_standings` in v4. */
+  mlb_api_standings: Wrapper;
+  /** Pre-v4 name of `mlb_stats`: forwards to it and warns once per process. @deprecated Renamed `mlb_stats` in v4. */
+  mlb_api_stats: Wrapper;
+  /** Pre-v4 name of `mlb_stats_leaders`: forwards to it and warns once per process. @deprecated Renamed `mlb_stats_leaders` in v4. */
+  mlb_api_stats_leaders: Wrapper;
+  /** Pre-v4 name of `mlb_stats_metrics`: forwards to it and warns once per process. @deprecated Renamed `mlb_stats_metrics` in v4. */
+  mlb_api_stats_metrics: Wrapper;
+  /** Pre-v4 name of `mlb_stats_streaks`: forwards to it and warns once per process. @deprecated Renamed `mlb_stats_streaks` in v4. */
+  mlb_api_stats_streaks: Wrapper;
+  /** Pre-v4 name of `mlb_team`: forwards to it and warns once per process. @deprecated Renamed `mlb_team` in v4. */
+  mlb_api_team: Wrapper<MlbTeamRow[]>;
+  /** Pre-v4 name of `mlb_team_affiliates`: forwards to it and warns once per process. @deprecated Renamed `mlb_team_affiliates` in v4. */
+  mlb_api_team_affiliates: Wrapper<MlbTeamAffiliatesRow[]>;
+  /** Pre-v4 name of `mlb_team_alumni`: forwards to it and warns once per process. @deprecated Renamed `mlb_team_alumni` in v4. */
+  mlb_api_team_alumni: Wrapper<MlbTeamAlumniRow[]>;
+  /** Pre-v4 name of `mlb_team_coaches`: forwards to it and warns once per process. @deprecated Renamed `mlb_team_coaches` in v4. */
+  mlb_api_team_coaches: Wrapper<MlbTeamCoachesRow[]>;
+  /** Pre-v4 name of `mlb_team_leaders`: forwards to it and warns once per process. @deprecated Renamed `mlb_team_leaders` in v4. */
+  mlb_api_team_leaders: Wrapper;
+  /** Pre-v4 name of `mlb_team_personnel`: forwards to it and warns once per process. @deprecated Renamed `mlb_team_personnel` in v4. */
+  mlb_api_team_personnel: Wrapper<MlbTeamPersonnelRow[]>;
+  /** Pre-v4 name of `mlb_team_roster`: forwards to it and warns once per process. @deprecated Renamed `mlb_team_roster` in v4. */
+  mlb_api_team_roster: Wrapper<MlbTeamRosterRow[]>;
+  /** Pre-v4 name of `mlb_team_roster_type`: forwards to it and warns once per process. @deprecated Renamed `mlb_team_roster_type` in v4. */
+  mlb_api_team_roster_type: Wrapper;
+  /** Pre-v4 name of `mlb_team_stats`: forwards to it and warns once per process. @deprecated Renamed `mlb_team_stats` in v4. */
+  mlb_api_team_stats: Wrapper;
+  /** Pre-v4 name of `mlb_teams`: forwards to it and warns once per process. @deprecated Renamed `mlb_teams` in v4. */
+  mlb_api_teams: Wrapper;
+  /** Pre-v4 name of `mlb_teams_history`: forwards to it and warns once per process. @deprecated Renamed `mlb_teams_history` in v4. */
+  mlb_api_teams_history: Wrapper<MlbTeamsHistoryRow[]>;
+  /** Pre-v4 name of `mlb_teams_stats`: forwards to it and warns once per process. @deprecated Renamed `mlb_teams_stats` in v4. */
+  mlb_api_teams_stats: Wrapper;
+  /** Pre-v4 name of `mlb_teams_stats_leaders`: forwards to it and warns once per process. @deprecated Renamed `mlb_teams_stats_leaders` in v4. */
+  mlb_api_teams_stats_leaders: Wrapper<MlbTeamsStatsLeadersRow[]>;
+  /** Pre-v4 name of `mlb_umpire_games`: forwards to it and warns once per process. @deprecated Renamed `mlb_umpire_games` in v4. */
+  mlb_api_umpire_games: Wrapper;
+  /** Pre-v4 name of `mlb_umpires`: forwards to it and warns once per process. @deprecated Renamed `mlb_umpires` in v4. */
+  mlb_api_umpires: Wrapper<MlbUmpiresRow[]>;
+  /** Pre-v4 name of `mlb_venue`: forwards to it and warns once per process. @deprecated Renamed `mlb_venue` in v4. */
+  mlb_api_venue: Wrapper<MlbVenueRow[]>;
+  /** Pre-v4 name of `mlb_venues`: forwards to it and warns once per process. @deprecated Renamed `mlb_venues` in v4. */
+  mlb_api_venues: Wrapper<MlbVenuesRow[]>;
+  /** Pre-v4 name of `mlb_win_probability`: forwards to it and warns once per process. @deprecated Renamed `mlb_win_probability` in v4. */
+  mlb_api_win_probability: Wrapper<MlbWinProbabilityRow[]>;
   /** MLB Stats API — attendance. `GET https://statsapi.mlb.com/api/v1/attendance` */
   mlb_attendance: Wrapper;
   /** MLB Stats API — award recipients. `GET https://statsapi.mlb.com/api/v1/awards/{award_id}/recipients` */
@@ -10761,6 +11397,162 @@ export interface MlbWrappers {
   mlbAnalyticsGames: Wrapper;
   /** MLB Stats API — analytics guids. `GET https://statsapi.mlb.com/api/v1/game/analytics/guids` */
   mlbAnalyticsGuids: Wrapper;
+  /** Pre-v4 name of `mlbAllStarBallot`: forwards to it and warns once per process. @deprecated Renamed `mlbAllStarBallot` in v4. */
+  mlbApiAllStarBallot: Wrapper<MlbAllStarBallotRow[]>;
+  /** Pre-v4 name of `mlbAllStarFinalVote`: forwards to it and warns once per process. @deprecated Renamed `mlbAllStarFinalVote` in v4. */
+  mlbApiAllStarFinalVote: Wrapper<MlbAllStarFinalVoteRow[]>;
+  /** Pre-v4 name of `mlbAllStarWriteIns`: forwards to it and warns once per process. @deprecated Renamed `mlbAllStarWriteIns` in v4. */
+  mlbApiAllStarWriteIns: Wrapper<MlbAllStarWriteInsRow[]>;
+  /** Pre-v4 name of `mlbAnalyticsGames`: forwards to it and warns once per process. @deprecated Renamed `mlbAnalyticsGames` in v4. */
+  mlbApiAnalyticsGames: Wrapper;
+  /** Pre-v4 name of `mlbAnalyticsGuids`: forwards to it and warns once per process. @deprecated Renamed `mlbAnalyticsGuids` in v4. */
+  mlbApiAnalyticsGuids: Wrapper;
+  /** Pre-v4 name of `mlbAttendance`: forwards to it and warns once per process. @deprecated Renamed `mlbAttendance` in v4. */
+  mlbApiAttendance: Wrapper;
+  /** Pre-v4 name of `mlbAwardRecipients`: forwards to it and warns once per process. @deprecated Renamed `mlbAwardRecipients` in v4. */
+  mlbApiAwardRecipients: Wrapper<MlbAwardRecipientsRow[]>;
+  /** Pre-v4 name of `mlbAwards`: forwards to it and warns once per process. @deprecated Renamed `mlbAwards` in v4. */
+  mlbApiAwards: Wrapper<MlbAwardsRow[]>;
+  /** Pre-v4 name of `mlbBoxscore`: forwards to it and warns once per process. @deprecated Renamed `mlbBoxscore` in v4. */
+  mlbApiBoxscore: Wrapper<MlbBoxscoreRow[]>;
+  /** Pre-v4 name of `mlbConference`: forwards to it and warns once per process. @deprecated Renamed `mlbConference` in v4. */
+  mlbApiConference: Wrapper<MlbConferenceRow[]>;
+  /** Pre-v4 name of `mlbConferences`: forwards to it and warns once per process. @deprecated Renamed `mlbConferences` in v4. */
+  mlbApiConferences: Wrapper<MlbConferencesRow[]>;
+  /** Pre-v4 name of `mlbDatacasters`: forwards to it and warns once per process. @deprecated Renamed `mlbDatacasters` in v4. */
+  mlbApiDatacasters: Wrapper<MlbDatacastersRow[]>;
+  /** Pre-v4 name of `mlbDivisions`: forwards to it and warns once per process. @deprecated Renamed `mlbDivisions` in v4. */
+  mlbApiDivisions: Wrapper;
+  /** Pre-v4 name of `mlbDraft`: forwards to it and warns once per process. @deprecated Renamed `mlbDraft` in v4. */
+  mlbApiDraft: Wrapper;
+  /** Pre-v4 name of `mlbDraftLatest`: forwards to it and warns once per process. @deprecated Renamed `mlbDraftLatest` in v4. */
+  mlbApiDraftLatest: Wrapper<MlbDraftLatestRow[]>;
+  /** Pre-v4 name of `mlbDraftProspects`: forwards to it and warns once per process. @deprecated Renamed `mlbDraftProspects` in v4. */
+  mlbApiDraftProspects: Wrapper;
+  /** Pre-v4 name of `mlbFreeAgents`: forwards to it and warns once per process. @deprecated Renamed `mlbFreeAgents` in v4. */
+  mlbApiFreeAgents: Wrapper<MlbFreeAgentsRow[]>;
+  /** Pre-v4 name of `mlbGameChanges`: forwards to it and warns once per process. @deprecated Renamed `mlbGameChanges` in v4. */
+  mlbApiGameChanges: Wrapper<MlbGameChangesRow[]>;
+  /** Pre-v4 name of `mlbGameColor`: forwards to it and warns once per process. @deprecated Renamed `mlbGameColor` in v4. */
+  mlbApiGameColor: Wrapper;
+  /** Pre-v4 name of `mlbGameColorDiff`: forwards to it and warns once per process. @deprecated Renamed `mlbGameColorDiff` in v4. */
+  mlbApiGameColorDiff: Wrapper;
+  /** Pre-v4 name of `mlbGameColorTimestamps`: forwards to it and warns once per process. @deprecated Renamed `mlbGameColorTimestamps` in v4. */
+  mlbApiGameColorTimestamps: Wrapper;
+  /** Pre-v4 name of `mlbGameContent`: forwards to it and warns once per process. @deprecated Renamed `mlbGameContent` in v4. */
+  mlbApiGameContent: Wrapper;
+  /** Pre-v4 name of `mlbGameContextMetrics`: forwards to it and warns once per process. @deprecated Renamed `mlbGameContextMetrics` in v4. */
+  mlbApiGameContextMetrics: Wrapper;
+  /** Pre-v4 name of `mlbGameGuids`: forwards to it and warns once per process. @deprecated Renamed `mlbGameGuids` in v4. */
+  mlbApiGameGuids: Wrapper;
+  /** Pre-v4 name of `mlbGamePace`: forwards to it and warns once per process. @deprecated Renamed `mlbGamePace` in v4. */
+  mlbApiGamePace: Wrapper<MlbGamePaceRow[]>;
+  /** Pre-v4 name of `mlbGameTimestamps`: forwards to it and warns once per process. @deprecated Renamed `mlbGameTimestamps` in v4. */
+  mlbApiGameTimestamps: Wrapper<MlbGameTimestampsRow[]>;
+  /** Pre-v4 name of `mlbHighLow`: forwards to it and warns once per process. @deprecated Renamed `mlbHighLow` in v4. */
+  mlbApiHighLow: Wrapper<MlbHighLowRow[]>;
+  /** Pre-v4 name of `mlbHomeRunDerby`: forwards to it and warns once per process. @deprecated Renamed `mlbHomeRunDerby` in v4. */
+  mlbApiHomeRunDerby: Wrapper<MlbHomeRunDerbyRow[]>;
+  /** Pre-v4 name of `mlbHomeRunDerbyBracket`: forwards to it and warns once per process. @deprecated Renamed `mlbHomeRunDerbyBracket` in v4. */
+  mlbApiHomeRunDerbyBracket: Wrapper<MlbHomeRunDerbyBracketRow[]>;
+  /** Pre-v4 name of `mlbHomeRunDerbyPool`: forwards to it and warns once per process. @deprecated Renamed `mlbHomeRunDerbyPool` in v4. */
+  mlbApiHomeRunDerbyPool: Wrapper<MlbHomeRunDerbyPoolRow[]>;
+  /** Pre-v4 name of `mlbJobs`: forwards to it and warns once per process. @deprecated Renamed `mlbJobs` in v4. */
+  mlbApiJobs: Wrapper<MlbJobsRow[]>;
+  /** Pre-v4 name of `mlbLeagues`: forwards to it and warns once per process. @deprecated Renamed `mlbLeagues` in v4. */
+  mlbApiLeagues: Wrapper<MlbLeaguesRow[]>;
+  /** Pre-v4 name of `mlbLinescore`: forwards to it and warns once per process. @deprecated Renamed `mlbLinescore` in v4. */
+  mlbApiLinescore: Wrapper<MlbLinescoreRow[]>;
+  /** Pre-v4 name of `mlbMeta`: forwards to it and warns once per process. @deprecated Renamed `mlbMeta` in v4. */
+  mlbApiMeta: Wrapper;
+  /** Pre-v4 name of `mlbOfficialScorers`: forwards to it and warns once per process. @deprecated Renamed `mlbOfficialScorers` in v4. */
+  mlbApiOfficialScorers: Wrapper<MlbOfficialScorersRow[]>;
+  /** Pre-v4 name of `mlbPbp`: forwards to it and warns once per process. @deprecated Renamed `mlbPbp` in v4. */
+  mlbApiPbp: Wrapper;
+  /** Pre-v4 name of `mlbPbpDiff`: forwards to it and warns once per process. @deprecated Renamed `mlbPbpDiff` in v4. */
+  mlbApiPbpDiff: Wrapper;
+  /** Pre-v4 name of `mlbPeople`: forwards to it and warns once per process. @deprecated Renamed `mlbPeople` in v4. */
+  mlbApiPeople: Wrapper<MlbPeopleRow[]>;
+  /** Pre-v4 name of `mlbPerson`: forwards to it and warns once per process. @deprecated Renamed `mlbPerson` in v4. */
+  mlbApiPerson: Wrapper<MlbPersonRow[]>;
+  /** Pre-v4 name of `mlbPersonGameStats`: forwards to it and warns once per process. @deprecated Renamed `mlbPersonGameStats` in v4. */
+  mlbApiPersonGameStats: Wrapper<MlbPersonGameStatsRow[]>;
+  /** Pre-v4 name of `mlbPersonStats`: forwards to it and warns once per process. @deprecated Renamed `mlbPersonStats` in v4. */
+  mlbApiPersonStats: Wrapper;
+  /** Pre-v4 name of `mlbPlayAnalytics`: forwards to it and warns once per process. @deprecated Renamed `mlbPlayAnalytics` in v4. */
+  mlbApiPlayAnalytics: Wrapper;
+  /** Pre-v4 name of `mlbPlayByPlay`: forwards to it and warns once per process. @deprecated Renamed `mlbPlayByPlay` in v4. */
+  mlbApiPlayByPlay: Wrapper<MlbPlayByPlayRow[]>;
+  /** Pre-v4 name of `mlbPlayContextMetricsAverages`: forwards to it and warns once per process. @deprecated Renamed `mlbPlayContextMetricsAverages` in v4. */
+  mlbApiPlayContextMetricsAverages: Wrapper;
+  /** Pre-v4 name of `mlbSchedule`: forwards to it and warns once per process. @deprecated Renamed `mlbSchedule` in v4. */
+  mlbApiSchedule: Wrapper;
+  /** Pre-v4 name of `mlbSchedulePostseason`: forwards to it and warns once per process. @deprecated Renamed `mlbSchedulePostseason` in v4. */
+  mlbApiSchedulePostseason: Wrapper<MlbSchedulePostseasonRow[]>;
+  /** Pre-v4 name of `mlbSchedulePostseasonSeries`: forwards to it and warns once per process. @deprecated Renamed `mlbSchedulePostseasonSeries` in v4. */
+  mlbApiSchedulePostseasonSeries: Wrapper<MlbSchedulePostseasonSeriesRow[]>;
+  /** Pre-v4 name of `mlbSchedulePostseasonTunein`: forwards to it and warns once per process. @deprecated Renamed `mlbSchedulePostseasonTunein` in v4. */
+  mlbApiSchedulePostseasonTunein: Wrapper;
+  /** Pre-v4 name of `mlbScheduleTied`: forwards to it and warns once per process. @deprecated Renamed `mlbScheduleTied` in v4. */
+  mlbApiScheduleTied: Wrapper<MlbScheduleTiedRow[]>;
+  /** Pre-v4 name of `mlbSeason`: forwards to it and warns once per process. @deprecated Renamed `mlbSeason` in v4. */
+  mlbApiSeason: Wrapper<MlbSeasonRow[]>;
+  /** Pre-v4 name of `mlbSeasons`: forwards to it and warns once per process. @deprecated Renamed `mlbSeasons` in v4. */
+  mlbApiSeasons: Wrapper;
+  /** Pre-v4 name of `mlbSeasonsAll`: forwards to it and warns once per process. @deprecated Renamed `mlbSeasonsAll` in v4. */
+  mlbApiSeasonsAll: Wrapper<MlbSeasonsAllRow[]>;
+  /** Pre-v4 name of `mlbSport`: forwards to it and warns once per process. @deprecated Renamed `mlbSport` in v4. */
+  mlbApiSport: Wrapper<MlbSportRow[]>;
+  /** Pre-v4 name of `mlbSportPlayers`: forwards to it and warns once per process. @deprecated Renamed `mlbSportPlayers` in v4. */
+  mlbApiSportPlayers: Wrapper<MlbSportPlayersRow[]>;
+  /** Pre-v4 name of `mlbSports`: forwards to it and warns once per process. @deprecated Renamed `mlbSports` in v4. */
+  mlbApiSports: Wrapper<MlbSportsRow[]>;
+  /** Pre-v4 name of `mlbStandings`: forwards to it and warns once per process. @deprecated Renamed `mlbStandings` in v4. */
+  mlbApiStandings: Wrapper;
+  /** Pre-v4 name of `mlbStats`: forwards to it and warns once per process. @deprecated Renamed `mlbStats` in v4. */
+  mlbApiStats: Wrapper;
+  /** Pre-v4 name of `mlbStatsLeaders`: forwards to it and warns once per process. @deprecated Renamed `mlbStatsLeaders` in v4. */
+  mlbApiStatsLeaders: Wrapper;
+  /** Pre-v4 name of `mlbStatsMetrics`: forwards to it and warns once per process. @deprecated Renamed `mlbStatsMetrics` in v4. */
+  mlbApiStatsMetrics: Wrapper;
+  /** Pre-v4 name of `mlbStatsStreaks`: forwards to it and warns once per process. @deprecated Renamed `mlbStatsStreaks` in v4. */
+  mlbApiStatsStreaks: Wrapper;
+  /** Pre-v4 name of `mlbTeam`: forwards to it and warns once per process. @deprecated Renamed `mlbTeam` in v4. */
+  mlbApiTeam: Wrapper<MlbTeamRow[]>;
+  /** Pre-v4 name of `mlbTeamAffiliates`: forwards to it and warns once per process. @deprecated Renamed `mlbTeamAffiliates` in v4. */
+  mlbApiTeamAffiliates: Wrapper<MlbTeamAffiliatesRow[]>;
+  /** Pre-v4 name of `mlbTeamAlumni`: forwards to it and warns once per process. @deprecated Renamed `mlbTeamAlumni` in v4. */
+  mlbApiTeamAlumni: Wrapper<MlbTeamAlumniRow[]>;
+  /** Pre-v4 name of `mlbTeamCoaches`: forwards to it and warns once per process. @deprecated Renamed `mlbTeamCoaches` in v4. */
+  mlbApiTeamCoaches: Wrapper<MlbTeamCoachesRow[]>;
+  /** Pre-v4 name of `mlbTeamLeaders`: forwards to it and warns once per process. @deprecated Renamed `mlbTeamLeaders` in v4. */
+  mlbApiTeamLeaders: Wrapper;
+  /** Pre-v4 name of `mlbTeamPersonnel`: forwards to it and warns once per process. @deprecated Renamed `mlbTeamPersonnel` in v4. */
+  mlbApiTeamPersonnel: Wrapper<MlbTeamPersonnelRow[]>;
+  /** Pre-v4 name of `mlbTeamRoster`: forwards to it and warns once per process. @deprecated Renamed `mlbTeamRoster` in v4. */
+  mlbApiTeamRoster: Wrapper<MlbTeamRosterRow[]>;
+  /** Pre-v4 name of `mlbTeamRosterType`: forwards to it and warns once per process. @deprecated Renamed `mlbTeamRosterType` in v4. */
+  mlbApiTeamRosterType: Wrapper;
+  /** Pre-v4 name of `mlbTeams`: forwards to it and warns once per process. @deprecated Renamed `mlbTeams` in v4. */
+  mlbApiTeams: Wrapper;
+  /** Pre-v4 name of `mlbTeamsHistory`: forwards to it and warns once per process. @deprecated Renamed `mlbTeamsHistory` in v4. */
+  mlbApiTeamsHistory: Wrapper<MlbTeamsHistoryRow[]>;
+  /** Pre-v4 name of `mlbTeamsStats`: forwards to it and warns once per process. @deprecated Renamed `mlbTeamsStats` in v4. */
+  mlbApiTeamsStats: Wrapper;
+  /** Pre-v4 name of `mlbTeamsStatsLeaders`: forwards to it and warns once per process. @deprecated Renamed `mlbTeamsStatsLeaders` in v4. */
+  mlbApiTeamsStatsLeaders: Wrapper<MlbTeamsStatsLeadersRow[]>;
+  /** Pre-v4 name of `mlbTeamStats`: forwards to it and warns once per process. @deprecated Renamed `mlbTeamStats` in v4. */
+  mlbApiTeamStats: Wrapper;
+  /** Pre-v4 name of `mlbUmpireGames`: forwards to it and warns once per process. @deprecated Renamed `mlbUmpireGames` in v4. */
+  mlbApiUmpireGames: Wrapper;
+  /** Pre-v4 name of `mlbUmpires`: forwards to it and warns once per process. @deprecated Renamed `mlbUmpires` in v4. */
+  mlbApiUmpires: Wrapper<MlbUmpiresRow[]>;
+  /** Pre-v4 name of `mlbVenue`: forwards to it and warns once per process. @deprecated Renamed `mlbVenue` in v4. */
+  mlbApiVenue: Wrapper<MlbVenueRow[]>;
+  /** Pre-v4 name of `mlbVenues`: forwards to it and warns once per process. @deprecated Renamed `mlbVenues` in v4. */
+  mlbApiVenues: Wrapper<MlbVenuesRow[]>;
+  /** Pre-v4 name of `mlbWinProbability`: forwards to it and warns once per process. @deprecated Renamed `mlbWinProbability` in v4. */
+  mlbApiWinProbability: Wrapper<MlbWinProbabilityRow[]>;
   /** MLB Stats API — attendance. `GET https://statsapi.mlb.com/api/v1/attendance` */
   mlbAttendance: Wrapper;
   /** MLB Stats API — award recipients. `GET https://statsapi.mlb.com/api/v1/awards/{award_id}/recipients` */
@@ -16801,6 +17593,106 @@ export interface RecruitingWrappers {
   recruitingUnrankedTransfers: Wrapper;
   /** 247Sports — year. `GET https://api.247sports.com/rdb/v1/year` @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500. */
   recruitingYear: Wrapper;
+  /** Pre-v4 name of `recruiting_archived_player_rankings`: forwards to it and warns once per process. @deprecated Renamed `recruiting_archived_player_rankings` in v4. */
+  sports247_archived_player_rankings: Wrapper;
+  /** Pre-v4 name of `recruiting_biggest_movers`: forwards to it and warns once per process. @deprecated Renamed `recruiting_biggest_movers` in v4. */
+  sports247_biggest_movers: Wrapper;
+  /** Pre-v4 name of `recruiting_coaches`: forwards to it and warns once per process. @deprecated Renamed `recruiting_coaches` in v4. */
+  sports247_coaches: Wrapper;
+  /** Pre-v4 name of `recruiting_current_target_predictions`: forwards to it and warns once per process. @deprecated Renamed `recruiting_current_target_predictions` in v4. */
+  sports247_current_target_predictions: Wrapper;
+  /** Pre-v4 name of `recruiting_institution_groups`: forwards to it and warns once per process. @deprecated Renamed `recruiting_institution_groups` in v4. */
+  sports247_institution_groups: Wrapper;
+  /** Pre-v4 name of `recruiting_institution_rankings`: forwards to it and warns once per process. @deprecated Renamed `recruiting_institution_rankings` in v4. */
+  sports247_institution_rankings: Wrapper;
+  /** Pre-v4 name of `recruiting_player_sport_rankings`: forwards to it and warns once per process. @deprecated Renamed `recruiting_player_sport_rankings` in v4. */
+  sports247_player_sport_rankings: Wrapper;
+  /** Pre-v4 name of `recruiting_players_under_special_evaluation`: forwards to it and warns once per process. @deprecated Renamed `recruiting_players_under_special_evaluation` in v4. */
+  sports247_players_under_special_evaluation: Wrapper;
+  /** Pre-v4 name of `recruiting_positions`: forwards to it and warns once per process. @deprecated Renamed `recruiting_positions` in v4. */
+  sports247_positions: Wrapper;
+  /** Pre-v4 name of `recruiting_rankings`: forwards to it and warns once per process. @deprecated Renamed `recruiting_rankings` in v4. */
+  sports247_rankings: Wrapper;
+  /** Pre-v4 name of `recruiting_rankings_composite_team_feed`: forwards to it and warns once per process. @deprecated Renamed `recruiting_rankings_composite_team_feed` in v4. */
+  sports247_rankings_composite_team_feed: Wrapper;
+  /** Pre-v4 name of `recruiting_rankings_transfer_portal_player_feed`: forwards to it and warns once per process. @deprecated Renamed `recruiting_rankings_transfer_portal_player_feed` in v4. */
+  sports247_rankings_transfer_portal_player_feed: Wrapper;
+  /** Pre-v4 name of `recruiting_rankings_transfer_portal_team_feed`: forwards to it and warns once per process. @deprecated Renamed `recruiting_rankings_transfer_portal_team_feed` in v4. */
+  sports247_rankings_transfer_portal_team_feed: Wrapper;
+  /** Pre-v4 name of `recruiting_recruits`: forwards to it and warns once per process. @deprecated Renamed `recruiting_recruits` in v4. */
+  sports247_recruits: Wrapper;
+  /** Pre-v4 name of `recruiting_sport_years`: forwards to it and warns once per process. @deprecated Renamed `recruiting_sport_years` in v4. */
+  sports247_sport_years: Wrapper;
+  /** Pre-v4 name of `recruiting_sports`: forwards to it and warns once per process. @deprecated Renamed `recruiting_sports` in v4. */
+  sports247_sports: Wrapper;
+  /** Pre-v4 name of `recruiting_tags_autocomplete`: forwards to it and warns once per process. @deprecated Renamed `recruiting_tags_autocomplete` in v4. */
+  sports247_tags_autocomplete: Wrapper;
+  /** Pre-v4 name of `recruiting_tags_photos_by_key`: forwards to it and warns once per process. @deprecated Renamed `recruiting_tags_photos_by_key` in v4. */
+  sports247_tags_photos_by_key: Wrapper;
+  /** Pre-v4 name of `recruiting_tags_photos_by_type`: forwards to it and warns once per process. @deprecated Renamed `recruiting_tags_photos_by_type` in v4. */
+  sports247_tags_photos_by_type: Wrapper;
+  /** Pre-v4 name of `recruiting_teams`: forwards to it and warns once per process. @deprecated Renamed `recruiting_teams` in v4. */
+  sports247_teams: Wrapper;
+  /** Pre-v4 name of `recruiting_transfer_player_sport_rankings`: forwards to it and warns once per process. @deprecated Renamed `recruiting_transfer_player_sport_rankings` in v4. */
+  sports247_transfer_player_sport_rankings: Wrapper;
+  /** Pre-v4 name of `recruiting_transfers`: forwards to it and warns once per process. @deprecated Renamed `recruiting_transfers` in v4. */
+  sports247_transfers: Wrapper;
+  /** Pre-v4 name of `recruiting_unranked_recruits`: forwards to it and warns once per process. @deprecated Renamed `recruiting_unranked_recruits` in v4. */
+  sports247_unranked_recruits: Wrapper;
+  /** Pre-v4 name of `recruiting_unranked_transfers`: forwards to it and warns once per process. @deprecated Renamed `recruiting_unranked_transfers` in v4. */
+  sports247_unranked_transfers: Wrapper;
+  /** Pre-v4 name of `recruiting_year`: forwards to it and warns once per process. @deprecated Renamed `recruiting_year` in v4. */
+  sports247_year: Wrapper;
+  /** Pre-v4 name of `recruitingArchivedPlayerRankings`: forwards to it and warns once per process. @deprecated Renamed `recruitingArchivedPlayerRankings` in v4. */
+  sports247ArchivedPlayerRankings: Wrapper;
+  /** Pre-v4 name of `recruitingBiggestMovers`: forwards to it and warns once per process. @deprecated Renamed `recruitingBiggestMovers` in v4. */
+  sports247BiggestMovers: Wrapper;
+  /** Pre-v4 name of `recruitingCoaches`: forwards to it and warns once per process. @deprecated Renamed `recruitingCoaches` in v4. */
+  sports247Coaches: Wrapper;
+  /** Pre-v4 name of `recruitingCurrentTargetPredictions`: forwards to it and warns once per process. @deprecated Renamed `recruitingCurrentTargetPredictions` in v4. */
+  sports247CurrentTargetPredictions: Wrapper;
+  /** Pre-v4 name of `recruitingInstitutionGroups`: forwards to it and warns once per process. @deprecated Renamed `recruitingInstitutionGroups` in v4. */
+  sports247InstitutionGroups: Wrapper;
+  /** Pre-v4 name of `recruitingInstitutionRankings`: forwards to it and warns once per process. @deprecated Renamed `recruitingInstitutionRankings` in v4. */
+  sports247InstitutionRankings: Wrapper;
+  /** Pre-v4 name of `recruitingPlayerSportRankings`: forwards to it and warns once per process. @deprecated Renamed `recruitingPlayerSportRankings` in v4. */
+  sports247PlayerSportRankings: Wrapper;
+  /** Pre-v4 name of `recruitingPlayersUnderSpecialEvaluation`: forwards to it and warns once per process. @deprecated Renamed `recruitingPlayersUnderSpecialEvaluation` in v4. */
+  sports247PlayersUnderSpecialEvaluation: Wrapper;
+  /** Pre-v4 name of `recruitingPositions`: forwards to it and warns once per process. @deprecated Renamed `recruitingPositions` in v4. */
+  sports247Positions: Wrapper;
+  /** Pre-v4 name of `recruitingRankings`: forwards to it and warns once per process. @deprecated Renamed `recruitingRankings` in v4. */
+  sports247Rankings: Wrapper;
+  /** Pre-v4 name of `recruitingRankingsCompositeTeamFeed`: forwards to it and warns once per process. @deprecated Renamed `recruitingRankingsCompositeTeamFeed` in v4. */
+  sports247RankingsCompositeTeamFeed: Wrapper;
+  /** Pre-v4 name of `recruitingRankingsTransferPortalPlayerFeed`: forwards to it and warns once per process. @deprecated Renamed `recruitingRankingsTransferPortalPlayerFeed` in v4. */
+  sports247RankingsTransferPortalPlayerFeed: Wrapper;
+  /** Pre-v4 name of `recruitingRankingsTransferPortalTeamFeed`: forwards to it and warns once per process. @deprecated Renamed `recruitingRankingsTransferPortalTeamFeed` in v4. */
+  sports247RankingsTransferPortalTeamFeed: Wrapper;
+  /** Pre-v4 name of `recruitingRecruits`: forwards to it and warns once per process. @deprecated Renamed `recruitingRecruits` in v4. */
+  sports247Recruits: Wrapper;
+  /** Pre-v4 name of `recruitingSports`: forwards to it and warns once per process. @deprecated Renamed `recruitingSports` in v4. */
+  sports247Sports: Wrapper;
+  /** Pre-v4 name of `recruitingSportYears`: forwards to it and warns once per process. @deprecated Renamed `recruitingSportYears` in v4. */
+  sports247SportYears: Wrapper;
+  /** Pre-v4 name of `recruitingTagsAutocomplete`: forwards to it and warns once per process. @deprecated Renamed `recruitingTagsAutocomplete` in v4. */
+  sports247TagsAutocomplete: Wrapper;
+  /** Pre-v4 name of `recruitingTagsPhotosByKey`: forwards to it and warns once per process. @deprecated Renamed `recruitingTagsPhotosByKey` in v4. */
+  sports247TagsPhotosByKey: Wrapper;
+  /** Pre-v4 name of `recruitingTagsPhotosByType`: forwards to it and warns once per process. @deprecated Renamed `recruitingTagsPhotosByType` in v4. */
+  sports247TagsPhotosByType: Wrapper;
+  /** Pre-v4 name of `recruitingTeams`: forwards to it and warns once per process. @deprecated Renamed `recruitingTeams` in v4. */
+  sports247Teams: Wrapper;
+  /** Pre-v4 name of `recruitingTransferPlayerSportRankings`: forwards to it and warns once per process. @deprecated Renamed `recruitingTransferPlayerSportRankings` in v4. */
+  sports247TransferPlayerSportRankings: Wrapper;
+  /** Pre-v4 name of `recruitingTransfers`: forwards to it and warns once per process. @deprecated Renamed `recruitingTransfers` in v4. */
+  sports247Transfers: Wrapper;
+  /** Pre-v4 name of `recruitingUnrankedRecruits`: forwards to it and warns once per process. @deprecated Renamed `recruitingUnrankedRecruits` in v4. */
+  sports247UnrankedRecruits: Wrapper;
+  /** Pre-v4 name of `recruitingUnrankedTransfers`: forwards to it and warns once per process. @deprecated Renamed `recruitingUnrankedTransfers` in v4. */
+  sports247UnrankedTransfers: Wrapper;
+  /** Pre-v4 name of `recruitingYear`: forwards to it and warns once per process. @deprecated Renamed `recruitingYear` in v4. */
+  sports247Year: Wrapper;
 }
 
 /** The generated wrappers of `sdv.seriea` (and their deprecated pre-v4 names). */
@@ -24751,6 +25643,216 @@ export interface YahooWrappers {
   yahoo_season_team_stats_football_rushing: Wrapper;
   /** Yahoo Sports — season team stats football rushing defense. `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballRushingDefense` */
   yahoo_season_team_stats_football_rushing_defense: Wrapper;
+  /** Pre-v4 name of `yahoo_alias`: forwards to it and warns once per process. @deprecated Renamed `yahoo_alias` in v4. */
+  yahoo_shangrila_alias: Wrapper;
+  /** Pre-v4 name of `yahoo_article_list_card_players`: forwards to it and warns once per process. @deprecated Renamed `yahoo_article_list_card_players` in v4. */
+  yahoo_shangrila_article_list_card_players: Wrapper;
+  /** Pre-v4 name of `yahoo_article_list_card_teams`: forwards to it and warns once per process. @deprecated Renamed `yahoo_article_list_card_teams` in v4. */
+  yahoo_shangrila_article_list_card_teams: Wrapper;
+  /** Pre-v4 name of `yahoo_basic_players`: forwards to it and warns once per process. @deprecated Renamed `yahoo_basic_players` in v4. */
+  yahoo_shangrila_basic_players: Wrapper;
+  /** Pre-v4 name of `yahoo_betting_disclaimer`: forwards to it and warns once per process. @deprecated Renamed `yahoo_betting_disclaimer` in v4. */
+  yahoo_shangrila_betting_disclaimer: Wrapper;
+  /** Pre-v4 name of `yahoo_combat_event_fights`: forwards to it and warns once per process. @deprecated Renamed `yahoo_combat_event_fights` in v4. */
+  yahoo_shangrila_combat_event_fights: Wrapper;
+  /** Pre-v4 name of `yahoo_combat_schedule`: forwards to it and warns once per process. @deprecated Renamed `yahoo_combat_schedule` in v4. */
+  yahoo_shangrila_combat_schedule: Wrapper;
+  /** Pre-v4 name of `yahoo_common_pills`: forwards to it and warns once per process. @deprecated Renamed `yahoo_common_pills` in v4. */
+  yahoo_shangrila_common_pills: Wrapper;
+  /** Pre-v4 name of `yahoo_consensus_rankings_php`: forwards to it and warns once per process. @deprecated Renamed `yahoo_consensus_rankings_php` in v4. */
+  yahoo_shangrila_consensus_rankings_php: Wrapper;
+  /** Pre-v4 name of `yahoo_draft`: forwards to it and warns once per process. @deprecated Renamed `yahoo_draft` in v4. */
+  yahoo_shangrila_draft: Wrapper;
+  /** Pre-v4 name of `yahoo_draft_prospects`: forwards to it and warns once per process. @deprecated Renamed `yahoo_draft_prospects` in v4. */
+  yahoo_shangrila_draft_prospects: Wrapper;
+  /** Pre-v4 name of `yahoo_driver_results`: forwards to it and warns once per process. @deprecated Renamed `yahoo_driver_results` in v4. */
+  yahoo_shangrila_driver_results: Wrapper;
+  /** Pre-v4 name of `yahoo_driver_splits`: forwards to it and warns once per process. @deprecated Renamed `yahoo_driver_splits` in v4. */
+  yahoo_shangrila_driver_splits: Wrapper;
+  /** Pre-v4 name of `yahoo_featured_game_ids`: forwards to it and warns once per process. @deprecated Renamed `yahoo_featured_game_ids` in v4. */
+  yahoo_shangrila_featured_game_ids: Wrapper;
+  /** Pre-v4 name of `yahoo_game_prop_bets`: forwards to it and warns once per process. @deprecated Renamed `yahoo_game_prop_bets` in v4. */
+  yahoo_shangrila_game_prop_bets: Wrapper;
+  /** Pre-v4 name of `yahoo_game_stats_leaders`: forwards to it and warns once per process. @deprecated Renamed `yahoo_game_stats_leaders` in v4. */
+  yahoo_shangrila_game_stats_leaders: Wrapper;
+  /** Pre-v4 name of `yahoo_gametime_game`: forwards to it and warns once per process. @deprecated Renamed `yahoo_gametime_game` in v4. */
+  yahoo_shangrila_gametime_game: Wrapper;
+  /** Pre-v4 name of `yahoo_gametime_team`: forwards to it and warns once per process. @deprecated Renamed `yahoo_gametime_team` in v4. */
+  yahoo_shangrila_gametime_team: Wrapper;
+  /** Pre-v4 name of `yahoo_golf_tournament_seasons`: forwards to it and warns once per process. @deprecated Renamed `yahoo_golf_tournament_seasons` in v4. */
+  yahoo_shangrila_golf_tournament_seasons: Wrapper;
+  /** Pre-v4 name of `yahoo_golf_tournaments`: forwards to it and warns once per process. @deprecated Renamed `yahoo_golf_tournaments` in v4. */
+  yahoo_shangrila_golf_tournaments: Wrapper;
+  /** Pre-v4 name of `yahoo_golf_tournaments_basic`: forwards to it and warns once per process. @deprecated Renamed `yahoo_golf_tournaments_basic` in v4. */
+  yahoo_shangrila_golf_tournaments_basic: Wrapper;
+  /** Pre-v4 name of `yahoo_league_conferences`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_conferences` in v4. */
+  yahoo_shangrila_league_conferences: Wrapper;
+  /** Pre-v4 name of `yahoo_league_filters_data`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_filters_data` in v4. */
+  yahoo_shangrila_league_filters_data: Wrapper;
+  /** Pre-v4 name of `yahoo_league_future_odds`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_future_odds` in v4. */
+  yahoo_shangrila_league_future_odds: Wrapper;
+  /** Pre-v4 name of `yahoo_league_game_ids`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_game_ids` in v4. */
+  yahoo_shangrila_league_game_ids: Wrapper;
+  /** Pre-v4 name of `yahoo_league_game_ids_by_date`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_game_ids_by_date` in v4. */
+  yahoo_shangrila_league_game_ids_by_date: Wrapper;
+  /** Pre-v4 name of `yahoo_league_games_by_round`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_games_by_round` in v4. */
+  yahoo_shangrila_league_games_by_round: Wrapper;
+  /** Pre-v4 name of `yahoo_league_info`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_info` in v4. */
+  yahoo_shangrila_league_info: Wrapper;
+  /** Pre-v4 name of `yahoo_league_injuries`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_injuries` in v4. */
+  yahoo_shangrila_league_injuries: Wrapper;
+  /** Pre-v4 name of `yahoo_league_names`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_names` in v4. */
+  yahoo_shangrila_league_names: Wrapper;
+  /** Pre-v4 name of `yahoo_league_prop_odds`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_prop_odds` in v4. */
+  yahoo_shangrila_league_prop_odds: Wrapper;
+  /** Pre-v4 name of `yahoo_league_standings`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_standings` in v4. */
+  yahoo_shangrila_league_standings: Wrapper;
+  /** Pre-v4 name of `yahoo_league_stats_by_team`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_stats_by_team` in v4. */
+  yahoo_shangrila_league_stats_by_team: Wrapper;
+  /** Pre-v4 name of `yahoo_league_stats_individual`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_stats_individual` in v4. */
+  yahoo_shangrila_league_stats_individual: Wrapper;
+  /** Pre-v4 name of `yahoo_league_stats_overview`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_stats_overview` in v4. */
+  yahoo_shangrila_league_stats_overview: Wrapper;
+  /** Pre-v4 name of `yahoo_league_stats_weekly`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_stats_weekly` in v4. */
+  yahoo_shangrila_league_stats_weekly: Wrapper;
+  /** Pre-v4 name of `yahoo_league_team_ids`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_team_ids` in v4. */
+  yahoo_shangrila_league_team_ids: Wrapper;
+  /** Pre-v4 name of `yahoo_league_teams`: forwards to it and warns once per process. @deprecated Renamed `yahoo_league_teams` in v4. */
+  yahoo_shangrila_league_teams: Wrapper;
+  /** Pre-v4 name of `yahoo_leagues_season_states`: forwards to it and warns once per process. @deprecated Renamed `yahoo_leagues_season_states` in v4. */
+  yahoo_shangrila_leagues_season_states: Wrapper;
+  /** Pre-v4 name of `yahoo_module_game`: forwards to it and warns once per process. @deprecated Renamed `yahoo_module_game` in v4. */
+  yahoo_shangrila_module_game: Wrapper;
+  /** Pre-v4 name of `yahoo_motorsport_standings`: forwards to it and warns once per process. @deprecated Renamed `yahoo_motorsport_standings` in v4. */
+  yahoo_shangrila_motorsport_standings: Wrapper;
+  /** Pre-v4 name of `yahoo_nascar_drivers`: forwards to it and warns once per process. @deprecated Renamed `yahoo_nascar_drivers` in v4. */
+  yahoo_shangrila_nascar_drivers: Wrapper;
+  /** Pre-v4 name of `yahoo_nav_dropdown_tray`: forwards to it and warns once per process. @deprecated Renamed `yahoo_nav_dropdown_tray` in v4. */
+  yahoo_shangrila_nav_dropdown_tray: Wrapper;
+  /** Pre-v4 name of `yahoo_oly_medal_count`: forwards to it and warns once per process. @deprecated Renamed `yahoo_oly_medal_count` in v4. */
+  yahoo_shangrila_oly_medal_count: Wrapper;
+  /** Pre-v4 name of `yahoo_oly_seasons`: forwards to it and warns once per process. @deprecated Renamed `yahoo_oly_seasons` in v4. */
+  yahoo_shangrila_oly_seasons: Wrapper;
+  /** Pre-v4 name of `yahoo_pick_distribution`: forwards to it and warns once per process. @deprecated Renamed `yahoo_pick_distribution` in v4. */
+  yahoo_shangrila_pick_distribution: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_boxscore`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_boxscore` in v4. */
+  yahoo_shangrila_playbook_boxscore: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_boxscore_poll`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_boxscore_poll` in v4. */
+  yahoo_shangrila_playbook_boxscore_poll: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_boxscore_social_share`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_boxscore_social_share` in v4. */
+  yahoo_shangrila_playbook_boxscore_social_share: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_combat_match`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_combat_match` in v4. */
+  yahoo_shangrila_playbook_combat_match: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_game`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_game` in v4. */
+  yahoo_shangrila_playbook_game: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_game_odds_poll`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_game_odds_poll` in v4. */
+  yahoo_shangrila_playbook_game_odds_poll: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_golf_tournament`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_golf_tournament` in v4. */
+  yahoo_shangrila_playbook_golf_tournament: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_league_odds`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_league_odds` in v4. */
+  yahoo_shangrila_playbook_league_odds: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_player`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_player` in v4. */
+  yahoo_shangrila_playbook_player: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_player_social_share`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_player_social_share` in v4. */
+  yahoo_shangrila_playbook_player_social_share: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_race`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_race` in v4. */
+  yahoo_shangrila_playbook_race: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_team`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_team` in v4. */
+  yahoo_shangrila_playbook_team: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_team_basic`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_team_basic` in v4. */
+  yahoo_shangrila_playbook_team_basic: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_team_social_share`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_team_social_share` in v4. */
+  yahoo_shangrila_playbook_team_social_share: Wrapper;
+  /** Pre-v4 name of `yahoo_playbook_tennis_match`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playbook_tennis_match` in v4. */
+  yahoo_shangrila_playbook_tennis_match: Wrapper;
+  /** Pre-v4 name of `yahoo_player_basic`: forwards to it and warns once per process. @deprecated Renamed `yahoo_player_basic` in v4. */
+  yahoo_shangrila_player_basic: Wrapper;
+  /** Pre-v4 name of `yahoo_player_career_stats`: forwards to it and warns once per process. @deprecated Renamed `yahoo_player_career_stats` in v4. */
+  yahoo_shangrila_player_career_stats: Wrapper;
+  /** Pre-v4 name of `yahoo_player_game_log`: forwards to it and warns once per process. @deprecated Renamed `yahoo_player_game_log` in v4. */
+  yahoo_shangrila_player_game_log: Wrapper;
+  /** Pre-v4 name of `yahoo_player_props`: forwards to it and warns once per process. @deprecated Renamed `yahoo_player_props` in v4. */
+  yahoo_shangrila_player_props: Wrapper;
+  /** Pre-v4 name of `yahoo_player_search`: forwards to it and warns once per process. @deprecated Renamed `yahoo_player_search` in v4. */
+  yahoo_shangrila_player_search: Wrapper;
+  /** Pre-v4 name of `yahoo_player_season_stats`: forwards to it and warns once per process. @deprecated Renamed `yahoo_player_season_stats` in v4. */
+  yahoo_shangrila_player_season_stats: Wrapper;
+  /** Pre-v4 name of `yahoo_playoff_bracket`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playoff_bracket` in v4. */
+  yahoo_shangrila_playoff_bracket: Wrapper;
+  /** Pre-v4 name of `yahoo_playoff_series_game`: forwards to it and warns once per process. @deprecated Renamed `yahoo_playoff_series_game` in v4. */
+  yahoo_shangrila_playoff_series_game: Wrapper;
+  /** Pre-v4 name of `yahoo_polymarket_game`: forwards to it and warns once per process. @deprecated Renamed `yahoo_polymarket_game` in v4. */
+  yahoo_shangrila_polymarket_game: Wrapper;
+  /** Pre-v4 name of `yahoo_racing_schedule`: forwards to it and warns once per process. @deprecated Renamed `yahoo_racing_schedule` in v4. */
+  yahoo_shangrila_racing_schedule: Wrapper;
+  /** Pre-v4 name of `yahoo_scoreboard_game`: forwards to it and warns once per process. @deprecated Renamed `yahoo_scoreboard_game` in v4. */
+  yahoo_shangrila_scoreboard_game: Wrapper;
+  /** Pre-v4 name of `yahoo_season_stats_football_defense_ncaaf`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_stats_football_defense_ncaaf` in v4. */
+  yahoo_shangrila_season_stats_football_defense_ncaaf: Wrapper;
+  /** Pre-v4 name of `yahoo_season_stats_football_kicking_ncaaf`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_stats_football_kicking_ncaaf` in v4. */
+  yahoo_shangrila_season_stats_football_kicking_ncaaf: Wrapper;
+  /** Pre-v4 name of `yahoo_season_stats_football_passing_ncaaf`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_stats_football_passing_ncaaf` in v4. */
+  yahoo_shangrila_season_stats_football_passing_ncaaf: Wrapper;
+  /** Pre-v4 name of `yahoo_season_stats_football_punting_ncaaf`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_stats_football_punting_ncaaf` in v4. */
+  yahoo_shangrila_season_stats_football_punting_ncaaf: Wrapper;
+  /** Pre-v4 name of `yahoo_season_stats_football_receiving_ncaaf`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_stats_football_receiving_ncaaf` in v4. */
+  yahoo_shangrila_season_stats_football_receiving_ncaaf: Wrapper;
+  /** Pre-v4 name of `yahoo_season_stats_football_returns_ncaaf`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_stats_football_returns_ncaaf` in v4. */
+  yahoo_shangrila_season_stats_football_returns_ncaaf: Wrapper;
+  /** Pre-v4 name of `yahoo_season_stats_football_rushing_ncaaf`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_stats_football_rushing_ncaaf` in v4. */
+  yahoo_shangrila_season_stats_football_rushing_ncaaf: Wrapper;
+  /** Pre-v4 name of `yahoo_season_team_stats_football_defense`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_team_stats_football_defense` in v4. */
+  yahoo_shangrila_season_team_stats_football_defense: Wrapper;
+  /** Pre-v4 name of `yahoo_season_team_stats_football_kicking`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_team_stats_football_kicking` in v4. */
+  yahoo_shangrila_season_team_stats_football_kicking: Wrapper;
+  /** Pre-v4 name of `yahoo_season_team_stats_football_kickoffs`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_team_stats_football_kickoffs` in v4. */
+  yahoo_shangrila_season_team_stats_football_kickoffs: Wrapper;
+  /** Pre-v4 name of `yahoo_season_team_stats_football_offense`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_team_stats_football_offense` in v4. */
+  yahoo_shangrila_season_team_stats_football_offense: Wrapper;
+  /** Pre-v4 name of `yahoo_season_team_stats_football_passing`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_team_stats_football_passing` in v4. */
+  yahoo_shangrila_season_team_stats_football_passing: Wrapper;
+  /** Pre-v4 name of `yahoo_season_team_stats_football_passing_defense`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_team_stats_football_passing_defense` in v4. */
+  yahoo_shangrila_season_team_stats_football_passing_defense: Wrapper;
+  /** Pre-v4 name of `yahoo_season_team_stats_football_punting`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_team_stats_football_punting` in v4. */
+  yahoo_shangrila_season_team_stats_football_punting: Wrapper;
+  /** Pre-v4 name of `yahoo_season_team_stats_football_receiving`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_team_stats_football_receiving` in v4. */
+  yahoo_shangrila_season_team_stats_football_receiving: Wrapper;
+  /** Pre-v4 name of `yahoo_season_team_stats_football_receiving_defense`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_team_stats_football_receiving_defense` in v4. */
+  yahoo_shangrila_season_team_stats_football_receiving_defense: Wrapper;
+  /** Pre-v4 name of `yahoo_season_team_stats_football_returns`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_team_stats_football_returns` in v4. */
+  yahoo_shangrila_season_team_stats_football_returns: Wrapper;
+  /** Pre-v4 name of `yahoo_season_team_stats_football_rushing`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_team_stats_football_rushing` in v4. */
+  yahoo_shangrila_season_team_stats_football_rushing: Wrapper;
+  /** Pre-v4 name of `yahoo_season_team_stats_football_rushing_defense`: forwards to it and warns once per process. @deprecated Renamed `yahoo_season_team_stats_football_rushing_defense` in v4. */
+  yahoo_shangrila_season_team_stats_football_rushing_defense: Wrapper;
+  /** Pre-v4 name of `yahoo_team_injuries`: forwards to it and warns once per process. @deprecated Renamed `yahoo_team_injuries` in v4. */
+  yahoo_shangrila_team_injuries: Wrapper;
+  /** Pre-v4 name of `yahoo_team_playoff_series`: forwards to it and warns once per process. @deprecated Renamed `yahoo_team_playoff_series` in v4. */
+  yahoo_shangrila_team_playoff_series: Wrapper;
+  /** Pre-v4 name of `yahoo_team_roster`: forwards to it and warns once per process. @deprecated Renamed `yahoo_team_roster` in v4. */
+  yahoo_shangrila_team_roster: Wrapper;
+  /** Pre-v4 name of `yahoo_team_schedule_by_season`: forwards to it and warns once per process. @deprecated Renamed `yahoo_team_schedule_by_season` in v4. */
+  yahoo_shangrila_team_schedule_by_season: Wrapper;
+  /** Pre-v4 name of `yahoo_team_search`: forwards to it and warns once per process. @deprecated Renamed `yahoo_team_search` in v4. */
+  yahoo_shangrila_team_search: Wrapper;
+  /** Pre-v4 name of `yahoo_team_stats_leaders_v2`: forwards to it and warns once per process. @deprecated Renamed `yahoo_team_stats_leaders_v2` in v4. */
+  yahoo_shangrila_team_stats_leaders_v2: Wrapper;
+  /** Pre-v4 name of `yahoo_team_transactions`: forwards to it and warns once per process. @deprecated Renamed `yahoo_team_transactions` in v4. */
+  yahoo_shangrila_team_transactions: Wrapper;
+  /** Pre-v4 name of `yahoo_teams_basic`: forwards to it and warns once per process. @deprecated Renamed `yahoo_teams_basic` in v4. */
+  yahoo_shangrila_teams_basic: Wrapper;
+  /** Pre-v4 name of `yahoo_tennis_matches_by_date`: forwards to it and warns once per process. @deprecated Renamed `yahoo_tennis_matches_by_date` in v4. */
+  yahoo_shangrila_tennis_matches_by_date: Wrapper;
+  /** Pre-v4 name of `yahoo_tennis_tournament`: forwards to it and warns once per process. @deprecated Renamed `yahoo_tennis_tournament` in v4. */
+  yahoo_shangrila_tennis_tournament: Wrapper;
+  /** Pre-v4 name of `yahoo_tennis_tournaments`: forwards to it and warns once per process. @deprecated Renamed `yahoo_tennis_tournaments` in v4. */
+  yahoo_shangrila_tennis_tournaments: Wrapper;
+  /** Pre-v4 name of `yahoo_tennis_tournaments_by_date`: forwards to it and warns once per process. @deprecated Renamed `yahoo_tennis_tournaments_by_date` in v4. */
+  yahoo_shangrila_tennis_tournaments_by_date: Wrapper;
+  /** Pre-v4 name of `yahoo_trending_event_ids`: forwards to it and warns once per process. @deprecated Renamed `yahoo_trending_event_ids` in v4. */
+  yahoo_shangrila_trending_event_ids: Wrapper;
+  /** Pre-v4 name of `yahoo_trending_game_ids`: forwards to it and warns once per process. @deprecated Renamed `yahoo_trending_game_ids` in v4. */
+  yahoo_shangrila_trending_game_ids: Wrapper;
   /** Yahoo Sports — team injuries. `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamInjuries` */
   yahoo_team_injuries: Wrapper;
   /** Yahoo Sports — team playoff series. `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamPlayoffSeries` */
@@ -24969,6 +26071,216 @@ export interface YahooWrappers {
   yahooSeasonTeamStatsFootballRushing: Wrapper;
   /** Yahoo Sports — season team stats football rushing defense. `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballRushingDefense` */
   yahooSeasonTeamStatsFootballRushingDefense: Wrapper;
+  /** Pre-v4 name of `yahooAlias`: forwards to it and warns once per process. @deprecated Renamed `yahooAlias` in v4. */
+  yahooShangrilaAlias: Wrapper;
+  /** Pre-v4 name of `yahooArticleListCardPlayers`: forwards to it and warns once per process. @deprecated Renamed `yahooArticleListCardPlayers` in v4. */
+  yahooShangrilaArticleListCardPlayers: Wrapper;
+  /** Pre-v4 name of `yahooArticleListCardTeams`: forwards to it and warns once per process. @deprecated Renamed `yahooArticleListCardTeams` in v4. */
+  yahooShangrilaArticleListCardTeams: Wrapper;
+  /** Pre-v4 name of `yahooBasicPlayers`: forwards to it and warns once per process. @deprecated Renamed `yahooBasicPlayers` in v4. */
+  yahooShangrilaBasicPlayers: Wrapper;
+  /** Pre-v4 name of `yahooBettingDisclaimer`: forwards to it and warns once per process. @deprecated Renamed `yahooBettingDisclaimer` in v4. */
+  yahooShangrilaBettingDisclaimer: Wrapper;
+  /** Pre-v4 name of `yahooCombatEventFights`: forwards to it and warns once per process. @deprecated Renamed `yahooCombatEventFights` in v4. */
+  yahooShangrilaCombatEventFights: Wrapper;
+  /** Pre-v4 name of `yahooCombatSchedule`: forwards to it and warns once per process. @deprecated Renamed `yahooCombatSchedule` in v4. */
+  yahooShangrilaCombatSchedule: Wrapper;
+  /** Pre-v4 name of `yahooCommonPills`: forwards to it and warns once per process. @deprecated Renamed `yahooCommonPills` in v4. */
+  yahooShangrilaCommonPills: Wrapper;
+  /** Pre-v4 name of `yahooConsensusRankingsPhp`: forwards to it and warns once per process. @deprecated Renamed `yahooConsensusRankingsPhp` in v4. */
+  yahooShangrilaConsensusRankingsPhp: Wrapper;
+  /** Pre-v4 name of `yahooDraft`: forwards to it and warns once per process. @deprecated Renamed `yahooDraft` in v4. */
+  yahooShangrilaDraft: Wrapper;
+  /** Pre-v4 name of `yahooDraftProspects`: forwards to it and warns once per process. @deprecated Renamed `yahooDraftProspects` in v4. */
+  yahooShangrilaDraftProspects: Wrapper;
+  /** Pre-v4 name of `yahooDriverResults`: forwards to it and warns once per process. @deprecated Renamed `yahooDriverResults` in v4. */
+  yahooShangrilaDriverResults: Wrapper;
+  /** Pre-v4 name of `yahooDriverSplits`: forwards to it and warns once per process. @deprecated Renamed `yahooDriverSplits` in v4. */
+  yahooShangrilaDriverSplits: Wrapper;
+  /** Pre-v4 name of `yahooFeaturedGameIds`: forwards to it and warns once per process. @deprecated Renamed `yahooFeaturedGameIds` in v4. */
+  yahooShangrilaFeaturedGameIds: Wrapper;
+  /** Pre-v4 name of `yahooGamePropBets`: forwards to it and warns once per process. @deprecated Renamed `yahooGamePropBets` in v4. */
+  yahooShangrilaGamePropBets: Wrapper;
+  /** Pre-v4 name of `yahooGameStatsLeaders`: forwards to it and warns once per process. @deprecated Renamed `yahooGameStatsLeaders` in v4. */
+  yahooShangrilaGameStatsLeaders: Wrapper;
+  /** Pre-v4 name of `yahooGametimeGame`: forwards to it and warns once per process. @deprecated Renamed `yahooGametimeGame` in v4. */
+  yahooShangrilaGametimeGame: Wrapper;
+  /** Pre-v4 name of `yahooGametimeTeam`: forwards to it and warns once per process. @deprecated Renamed `yahooGametimeTeam` in v4. */
+  yahooShangrilaGametimeTeam: Wrapper;
+  /** Pre-v4 name of `yahooGolfTournaments`: forwards to it and warns once per process. @deprecated Renamed `yahooGolfTournaments` in v4. */
+  yahooShangrilaGolfTournaments: Wrapper;
+  /** Pre-v4 name of `yahooGolfTournamentsBasic`: forwards to it and warns once per process. @deprecated Renamed `yahooGolfTournamentsBasic` in v4. */
+  yahooShangrilaGolfTournamentsBasic: Wrapper;
+  /** Pre-v4 name of `yahooGolfTournamentSeasons`: forwards to it and warns once per process. @deprecated Renamed `yahooGolfTournamentSeasons` in v4. */
+  yahooShangrilaGolfTournamentSeasons: Wrapper;
+  /** Pre-v4 name of `yahooLeagueConferences`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueConferences` in v4. */
+  yahooShangrilaLeagueConferences: Wrapper;
+  /** Pre-v4 name of `yahooLeagueFiltersData`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueFiltersData` in v4. */
+  yahooShangrilaLeagueFiltersData: Wrapper;
+  /** Pre-v4 name of `yahooLeagueFutureOdds`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueFutureOdds` in v4. */
+  yahooShangrilaLeagueFutureOdds: Wrapper;
+  /** Pre-v4 name of `yahooLeagueGameIds`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueGameIds` in v4. */
+  yahooShangrilaLeagueGameIds: Wrapper;
+  /** Pre-v4 name of `yahooLeagueGameIdsByDate`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueGameIdsByDate` in v4. */
+  yahooShangrilaLeagueGameIdsByDate: Wrapper;
+  /** Pre-v4 name of `yahooLeagueGamesByRound`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueGamesByRound` in v4. */
+  yahooShangrilaLeagueGamesByRound: Wrapper;
+  /** Pre-v4 name of `yahooLeagueInfo`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueInfo` in v4. */
+  yahooShangrilaLeagueInfo: Wrapper;
+  /** Pre-v4 name of `yahooLeagueInjuries`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueInjuries` in v4. */
+  yahooShangrilaLeagueInjuries: Wrapper;
+  /** Pre-v4 name of `yahooLeagueNames`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueNames` in v4. */
+  yahooShangrilaLeagueNames: Wrapper;
+  /** Pre-v4 name of `yahooLeaguePropOdds`: forwards to it and warns once per process. @deprecated Renamed `yahooLeaguePropOdds` in v4. */
+  yahooShangrilaLeaguePropOdds: Wrapper;
+  /** Pre-v4 name of `yahooLeaguesSeasonStates`: forwards to it and warns once per process. @deprecated Renamed `yahooLeaguesSeasonStates` in v4. */
+  yahooShangrilaLeaguesSeasonStates: Wrapper;
+  /** Pre-v4 name of `yahooLeagueStandings`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueStandings` in v4. */
+  yahooShangrilaLeagueStandings: Wrapper;
+  /** Pre-v4 name of `yahooLeagueStatsByTeam`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueStatsByTeam` in v4. */
+  yahooShangrilaLeagueStatsByTeam: Wrapper;
+  /** Pre-v4 name of `yahooLeagueStatsIndividual`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueStatsIndividual` in v4. */
+  yahooShangrilaLeagueStatsIndividual: Wrapper;
+  /** Pre-v4 name of `yahooLeagueStatsOverview`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueStatsOverview` in v4. */
+  yahooShangrilaLeagueStatsOverview: Wrapper;
+  /** Pre-v4 name of `yahooLeagueStatsWeekly`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueStatsWeekly` in v4. */
+  yahooShangrilaLeagueStatsWeekly: Wrapper;
+  /** Pre-v4 name of `yahooLeagueTeamIds`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueTeamIds` in v4. */
+  yahooShangrilaLeagueTeamIds: Wrapper;
+  /** Pre-v4 name of `yahooLeagueTeams`: forwards to it and warns once per process. @deprecated Renamed `yahooLeagueTeams` in v4. */
+  yahooShangrilaLeagueTeams: Wrapper;
+  /** Pre-v4 name of `yahooModuleGame`: forwards to it and warns once per process. @deprecated Renamed `yahooModuleGame` in v4. */
+  yahooShangrilaModuleGame: Wrapper;
+  /** Pre-v4 name of `yahooMotorsportStandings`: forwards to it and warns once per process. @deprecated Renamed `yahooMotorsportStandings` in v4. */
+  yahooShangrilaMotorsportStandings: Wrapper;
+  /** Pre-v4 name of `yahooNascarDrivers`: forwards to it and warns once per process. @deprecated Renamed `yahooNascarDrivers` in v4. */
+  yahooShangrilaNascarDrivers: Wrapper;
+  /** Pre-v4 name of `yahooNavDropdownTray`: forwards to it and warns once per process. @deprecated Renamed `yahooNavDropdownTray` in v4. */
+  yahooShangrilaNavDropdownTray: Wrapper;
+  /** Pre-v4 name of `yahooOlyMedalCount`: forwards to it and warns once per process. @deprecated Renamed `yahooOlyMedalCount` in v4. */
+  yahooShangrilaOlyMedalCount: Wrapper;
+  /** Pre-v4 name of `yahooOlySeasons`: forwards to it and warns once per process. @deprecated Renamed `yahooOlySeasons` in v4. */
+  yahooShangrilaOlySeasons: Wrapper;
+  /** Pre-v4 name of `yahooPickDistribution`: forwards to it and warns once per process. @deprecated Renamed `yahooPickDistribution` in v4. */
+  yahooShangrilaPickDistribution: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookBoxscore`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookBoxscore` in v4. */
+  yahooShangrilaPlaybookBoxscore: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookBoxscorePoll`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookBoxscorePoll` in v4. */
+  yahooShangrilaPlaybookBoxscorePoll: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookBoxscoreSocialShare`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookBoxscoreSocialShare` in v4. */
+  yahooShangrilaPlaybookBoxscoreSocialShare: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookCombatMatch`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookCombatMatch` in v4. */
+  yahooShangrilaPlaybookCombatMatch: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookGame`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookGame` in v4. */
+  yahooShangrilaPlaybookGame: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookGameOddsPoll`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookGameOddsPoll` in v4. */
+  yahooShangrilaPlaybookGameOddsPoll: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookGolfTournament`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookGolfTournament` in v4. */
+  yahooShangrilaPlaybookGolfTournament: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookLeagueOdds`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookLeagueOdds` in v4. */
+  yahooShangrilaPlaybookLeagueOdds: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookPlayer`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookPlayer` in v4. */
+  yahooShangrilaPlaybookPlayer: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookPlayerSocialShare`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookPlayerSocialShare` in v4. */
+  yahooShangrilaPlaybookPlayerSocialShare: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookRace`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookRace` in v4. */
+  yahooShangrilaPlaybookRace: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookTeam`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookTeam` in v4. */
+  yahooShangrilaPlaybookTeam: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookTeamBasic`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookTeamBasic` in v4. */
+  yahooShangrilaPlaybookTeamBasic: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookTeamSocialShare`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookTeamSocialShare` in v4. */
+  yahooShangrilaPlaybookTeamSocialShare: Wrapper;
+  /** Pre-v4 name of `yahooPlaybookTennisMatch`: forwards to it and warns once per process. @deprecated Renamed `yahooPlaybookTennisMatch` in v4. */
+  yahooShangrilaPlaybookTennisMatch: Wrapper;
+  /** Pre-v4 name of `yahooPlayerBasic`: forwards to it and warns once per process. @deprecated Renamed `yahooPlayerBasic` in v4. */
+  yahooShangrilaPlayerBasic: Wrapper;
+  /** Pre-v4 name of `yahooPlayerCareerStats`: forwards to it and warns once per process. @deprecated Renamed `yahooPlayerCareerStats` in v4. */
+  yahooShangrilaPlayerCareerStats: Wrapper;
+  /** Pre-v4 name of `yahooPlayerGameLog`: forwards to it and warns once per process. @deprecated Renamed `yahooPlayerGameLog` in v4. */
+  yahooShangrilaPlayerGameLog: Wrapper;
+  /** Pre-v4 name of `yahooPlayerProps`: forwards to it and warns once per process. @deprecated Renamed `yahooPlayerProps` in v4. */
+  yahooShangrilaPlayerProps: Wrapper;
+  /** Pre-v4 name of `yahooPlayerSearch`: forwards to it and warns once per process. @deprecated Renamed `yahooPlayerSearch` in v4. */
+  yahooShangrilaPlayerSearch: Wrapper;
+  /** Pre-v4 name of `yahooPlayerSeasonStats`: forwards to it and warns once per process. @deprecated Renamed `yahooPlayerSeasonStats` in v4. */
+  yahooShangrilaPlayerSeasonStats: Wrapper;
+  /** Pre-v4 name of `yahooPlayoffBracket`: forwards to it and warns once per process. @deprecated Renamed `yahooPlayoffBracket` in v4. */
+  yahooShangrilaPlayoffBracket: Wrapper;
+  /** Pre-v4 name of `yahooPlayoffSeriesGame`: forwards to it and warns once per process. @deprecated Renamed `yahooPlayoffSeriesGame` in v4. */
+  yahooShangrilaPlayoffSeriesGame: Wrapper;
+  /** Pre-v4 name of `yahooPolymarketGame`: forwards to it and warns once per process. @deprecated Renamed `yahooPolymarketGame` in v4. */
+  yahooShangrilaPolymarketGame: Wrapper;
+  /** Pre-v4 name of `yahooRacingSchedule`: forwards to it and warns once per process. @deprecated Renamed `yahooRacingSchedule` in v4. */
+  yahooShangrilaRacingSchedule: Wrapper;
+  /** Pre-v4 name of `yahooScoreboardGame`: forwards to it and warns once per process. @deprecated Renamed `yahooScoreboardGame` in v4. */
+  yahooShangrilaScoreboardGame: Wrapper;
+  /** Pre-v4 name of `yahooSeasonStatsFootballDefenseNcaaf`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonStatsFootballDefenseNcaaf` in v4. */
+  yahooShangrilaSeasonStatsFootballDefenseNcaaf: Wrapper;
+  /** Pre-v4 name of `yahooSeasonStatsFootballKickingNcaaf`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonStatsFootballKickingNcaaf` in v4. */
+  yahooShangrilaSeasonStatsFootballKickingNcaaf: Wrapper;
+  /** Pre-v4 name of `yahooSeasonStatsFootballPassingNcaaf`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonStatsFootballPassingNcaaf` in v4. */
+  yahooShangrilaSeasonStatsFootballPassingNcaaf: Wrapper;
+  /** Pre-v4 name of `yahooSeasonStatsFootballPuntingNcaaf`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonStatsFootballPuntingNcaaf` in v4. */
+  yahooShangrilaSeasonStatsFootballPuntingNcaaf: Wrapper;
+  /** Pre-v4 name of `yahooSeasonStatsFootballReceivingNcaaf`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonStatsFootballReceivingNcaaf` in v4. */
+  yahooShangrilaSeasonStatsFootballReceivingNcaaf: Wrapper;
+  /** Pre-v4 name of `yahooSeasonStatsFootballReturnsNcaaf`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonStatsFootballReturnsNcaaf` in v4. */
+  yahooShangrilaSeasonStatsFootballReturnsNcaaf: Wrapper;
+  /** Pre-v4 name of `yahooSeasonStatsFootballRushingNcaaf`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonStatsFootballRushingNcaaf` in v4. */
+  yahooShangrilaSeasonStatsFootballRushingNcaaf: Wrapper;
+  /** Pre-v4 name of `yahooSeasonTeamStatsFootballDefense`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonTeamStatsFootballDefense` in v4. */
+  yahooShangrilaSeasonTeamStatsFootballDefense: Wrapper;
+  /** Pre-v4 name of `yahooSeasonTeamStatsFootballKicking`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonTeamStatsFootballKicking` in v4. */
+  yahooShangrilaSeasonTeamStatsFootballKicking: Wrapper;
+  /** Pre-v4 name of `yahooSeasonTeamStatsFootballKickoffs`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonTeamStatsFootballKickoffs` in v4. */
+  yahooShangrilaSeasonTeamStatsFootballKickoffs: Wrapper;
+  /** Pre-v4 name of `yahooSeasonTeamStatsFootballOffense`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonTeamStatsFootballOffense` in v4. */
+  yahooShangrilaSeasonTeamStatsFootballOffense: Wrapper;
+  /** Pre-v4 name of `yahooSeasonTeamStatsFootballPassing`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonTeamStatsFootballPassing` in v4. */
+  yahooShangrilaSeasonTeamStatsFootballPassing: Wrapper;
+  /** Pre-v4 name of `yahooSeasonTeamStatsFootballPassingDefense`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonTeamStatsFootballPassingDefense` in v4. */
+  yahooShangrilaSeasonTeamStatsFootballPassingDefense: Wrapper;
+  /** Pre-v4 name of `yahooSeasonTeamStatsFootballPunting`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonTeamStatsFootballPunting` in v4. */
+  yahooShangrilaSeasonTeamStatsFootballPunting: Wrapper;
+  /** Pre-v4 name of `yahooSeasonTeamStatsFootballReceiving`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonTeamStatsFootballReceiving` in v4. */
+  yahooShangrilaSeasonTeamStatsFootballReceiving: Wrapper;
+  /** Pre-v4 name of `yahooSeasonTeamStatsFootballReceivingDefense`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonTeamStatsFootballReceivingDefense` in v4. */
+  yahooShangrilaSeasonTeamStatsFootballReceivingDefense: Wrapper;
+  /** Pre-v4 name of `yahooSeasonTeamStatsFootballReturns`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonTeamStatsFootballReturns` in v4. */
+  yahooShangrilaSeasonTeamStatsFootballReturns: Wrapper;
+  /** Pre-v4 name of `yahooSeasonTeamStatsFootballRushing`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonTeamStatsFootballRushing` in v4. */
+  yahooShangrilaSeasonTeamStatsFootballRushing: Wrapper;
+  /** Pre-v4 name of `yahooSeasonTeamStatsFootballRushingDefense`: forwards to it and warns once per process. @deprecated Renamed `yahooSeasonTeamStatsFootballRushingDefense` in v4. */
+  yahooShangrilaSeasonTeamStatsFootballRushingDefense: Wrapper;
+  /** Pre-v4 name of `yahooTeamInjuries`: forwards to it and warns once per process. @deprecated Renamed `yahooTeamInjuries` in v4. */
+  yahooShangrilaTeamInjuries: Wrapper;
+  /** Pre-v4 name of `yahooTeamPlayoffSeries`: forwards to it and warns once per process. @deprecated Renamed `yahooTeamPlayoffSeries` in v4. */
+  yahooShangrilaTeamPlayoffSeries: Wrapper;
+  /** Pre-v4 name of `yahooTeamRoster`: forwards to it and warns once per process. @deprecated Renamed `yahooTeamRoster` in v4. */
+  yahooShangrilaTeamRoster: Wrapper;
+  /** Pre-v4 name of `yahooTeamsBasic`: forwards to it and warns once per process. @deprecated Renamed `yahooTeamsBasic` in v4. */
+  yahooShangrilaTeamsBasic: Wrapper;
+  /** Pre-v4 name of `yahooTeamScheduleBySeason`: forwards to it and warns once per process. @deprecated Renamed `yahooTeamScheduleBySeason` in v4. */
+  yahooShangrilaTeamScheduleBySeason: Wrapper;
+  /** Pre-v4 name of `yahooTeamSearch`: forwards to it and warns once per process. @deprecated Renamed `yahooTeamSearch` in v4. */
+  yahooShangrilaTeamSearch: Wrapper;
+  /** Pre-v4 name of `yahooTeamStatsLeadersV2`: forwards to it and warns once per process. @deprecated Renamed `yahooTeamStatsLeadersV2` in v4. */
+  yahooShangrilaTeamStatsLeadersV2: Wrapper;
+  /** Pre-v4 name of `yahooTeamTransactions`: forwards to it and warns once per process. @deprecated Renamed `yahooTeamTransactions` in v4. */
+  yahooShangrilaTeamTransactions: Wrapper;
+  /** Pre-v4 name of `yahooTennisMatchesByDate`: forwards to it and warns once per process. @deprecated Renamed `yahooTennisMatchesByDate` in v4. */
+  yahooShangrilaTennisMatchesByDate: Wrapper;
+  /** Pre-v4 name of `yahooTennisTournament`: forwards to it and warns once per process. @deprecated Renamed `yahooTennisTournament` in v4. */
+  yahooShangrilaTennisTournament: Wrapper;
+  /** Pre-v4 name of `yahooTennisTournaments`: forwards to it and warns once per process. @deprecated Renamed `yahooTennisTournaments` in v4. */
+  yahooShangrilaTennisTournaments: Wrapper;
+  /** Pre-v4 name of `yahooTennisTournamentsByDate`: forwards to it and warns once per process. @deprecated Renamed `yahooTennisTournamentsByDate` in v4. */
+  yahooShangrilaTennisTournamentsByDate: Wrapper;
+  /** Pre-v4 name of `yahooTrendingEventIds`: forwards to it and warns once per process. @deprecated Renamed `yahooTrendingEventIds` in v4. */
+  yahooShangrilaTrendingEventIds: Wrapper;
+  /** Pre-v4 name of `yahooTrendingGameIds`: forwards to it and warns once per process. @deprecated Renamed `yahooTrendingGameIds` in v4. */
+  yahooShangrilaTrendingGameIds: Wrapper;
   /** Yahoo Sports — team injuries. `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamInjuries` */
   yahooTeamInjuries: Wrapper;
   /** Yahoo Sports — team playoff series. `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamPlayoffSeries` */
