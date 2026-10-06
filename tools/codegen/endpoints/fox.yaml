@@ -781,7 +781,7 @@ endpoints:
 - short: search_popular
   summary: GET /bifrost/v1/search/popular -- Fox Sports API search popular.
   path: /bifrost/v1/search/popular
-  parser: parse_fox_list
+  parser: parse_fox_search
   extra_params:
   - name: apikey
     query_key: apikey

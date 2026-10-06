@@ -500,3 +500,21 @@ sports247:
   sports247/sports247_sports_year_fb.json: sport_years
   sports247/sports247_tags_autocomplete.json: tags_autocomplete
   sports247/sports247_positions_fb_2026.json: positions
+# Provider families whose JS parsers were written independently of sdv-py's
+# (schema_compatible: false): no py returns table, so these are parity-only —
+# the JS parser must emit what sdv-py's does on the same bytes. The captures
+# live beside their family's README (test/fixtures/{cbs,fox,yahoo}/).
+fox:
+  fox/nfl_league_scores_segment.json: league_scores_segment
+  fox/topevents_segment.json: topevents_scoreboard_segment
+  fox/nfl_league_standings.json: league_standings
+  fox/cbk_league_polls.json: league_polls
+  fox/cbk_league_conferences.json: league_conferences
+  fox/nfl_league_header.json: league_header
+  fox/search_content.json: search_content
+  fox/search_entities.json: search_entities
+  fox/search_popular.json: search_popular
+  fox/trending_videos.json: trending_videos
+  fox/nfl_team_roster.json: team_roster
+  fox/nfl_event_matchup.json: event_matchup
+  fox/cbk_event_data_pbp_first_half.json: event_data
