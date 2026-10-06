@@ -33,19 +33,22 @@ after the play, `period_number`, `clock_display_value`, `team_id`, the flags
 `scoring_play` / `shooting_play`, `points_attempted`, and the two columns this
 tutorial is about: `coordinate_x` and `coordinate_y`.
 
-## What the coordinates mean (measured, not assumed)
+## What the coordinates mean (fitted, not assumed)
 
 ESPN does not document its shot frame, so the script's header records what was
-measured. Every shooting play's text carries the distance ESPN itself computed
+fitted. Every shooting play's text carries the distance ESPN itself computed
 ("misses 23-foot three point jumper"). Fitting the hoop position that best
 reproduces those distances from the integer coordinates, on four captured
 games (three NBA, one WNBA; 96–124 shots each), gives the same answer each
-time, with a mean absolute error of 0.3 ft:
+time, with a mean absolute error of 0.3 ft. Only the first game is committed
+(`test/fixtures/espn/summary_nba.json`); `test/examples-shot-frame.test.js`
+asserts the fit on it:
 
 - **`coordinate_x` is feet across the court, 0–50; the hoop is at x = 25.**
 - **`coordinate_y` is feet from the hoop toward half court**, roughly −1 to 31.
-  The hoop fits at y ≈ 0–1 — *not* 5.25, so y is not measured from the
-  baseline. A corner three sits at (2, 2); a layup at (25, 2).
+  The hoop fits at y = 1 on the committed game (0–1 across the four) — *not*
+  5.25, so y is not measured from the baseline. A corner three sits at (2, 2);
+  a layup at (25, 2).
 - **Both teams are normalised onto one basket in every period.** There is no
   side flip to undo per quarter; a team's shots all live in the same half.
 - **Free throws carry a sentinel**, (−214748340, −214748365), the ESPN
@@ -71,14 +74,18 @@ When you want to draw these on a court, the
 // 02 — NBA play-by-play → shots with court coordinates.
 //
 // Shows: the `summary` dispatcher's `plays` sub-frame, and how ESPN encodes shot
-// location. Measured on four ESPN basketball captures (NBA 401585607, 401430219,
-// 401360428; WNBA 400927398), fitting the hoop position against the "N-foot"
-// distance ESPN writes into each play's text (MAE 0.3 ft, integer coordinates):
+// location. The frame below was FITTED on four ESPN basketball captures (NBA
+// 401585607, 401430219, 401360428; WNBA 400927398; only the first is committed,
+// as test/fixtures/espn/summary_nba.json) by placing the hoop where it best
+// reproduces the "N-foot" distance ESPN writes into each play's text (MAE 0.3 ft,
+// integer coordinates). test/examples-shot-frame.test.js asserts it on the
+// committed capture:
 //
 //   - coordinate_x: feet ACROSS the court, 0..50; the hoop is at x = 25.
-//   - coordinate_y: feet from the HOOP toward half court, -1..~31; the hoop is at
-//     y ≈ 0–1 (not the baseline, which would put it at 5.25). A "23-foot three"
-//     from the corner sits at (2, 2); a layup at (25, 2).
+//   - coordinate_y: feet from the HOOP toward half court, -1..~31; the hoop fits
+//     at y = 1 on the committed capture (0–1 across the four; not the baseline,
+//     which would put it at 5.25). A "23-foot three" from the corner sits at
+//     (2, 2); a layup at (25, 2).
 //   - BOTH teams are normalised onto the same basket in every period — there is
 //     no per-period side flip to undo.
 //   - Free throws carry the ESPN "unknown" sentinel (-214748340, -214748365);
@@ -94,7 +101,7 @@ import { printTable, round } from './_util.mjs';
 setup();
 
 const EVENT_ID = 401585607;
-const HOOP = { x: 25, y: 0 };
+const HOOP = { x: 25, y: 1 }; // the fitted position (MAE 0.32 ft on this capture)
 
 const plays = await sdv.nba.espnNbaSummary({ event_id: EVENT_ID, parsed: true, section: 'plays' });
 console.log(`${plays.length} plays in the summary`);
@@ -149,22 +156,22 @@ Output of `node examples/02_nba_pbp_shots.mjs` (offline, against the committed f
 ## Field-goal attempts with coordinates
 | period | clock | team_id | made  | pts | x  | y  | dist_ft | text                       |
 | ------ | ----- | ------- | ----- | --- | -- | -- | ------- | -------------------------- |
-| 1      | 11:42 | 19      | true  | 2   | 25 | 3  | 3       | Franz Wagner makes drivin… |
-| 1      | 11:21 | 28      | true  | 2   | 26 | 2  | 2.2     | Kelly Olynyk makes drivin… |
-| 1      | 11:11 | 19      | false | 3   | 2  | 2  | 23.1    | Gary Harris misses 23-foo… |
-| 1      | 10:44 | 19      | true  | 2   | 27 | 2  | 2.8     | Paolo Banchero makes 2-fo… |
-| 1      | 10:29 | 28      | false | 2   | 23 | 3  | 3.6     | Gary Trent Jr. misses dri… |
-| 1      | 10:27 | 28      | false | 2   | 24 | 2  | 2.2     | Kelly Olynyk misses two p… |
-| 1      | 10:05 | 19      | true  | 3   | 9  | 21 | 26.4    | Wendell Carter Jr. makes … |
-| 1      | 9:47  | 28      | true  | 2   | 24 | 3  | 3.2     | Gradey Dick makes 3-foot … |
+| 1      | 11:42 | 19      | true  | 2   | 25 | 3  | 2       | Franz Wagner makes drivin… |
+| 1      | 11:21 | 28      | true  | 2   | 26 | 2  | 1.4     | Kelly Olynyk makes drivin… |
+| 1      | 11:11 | 19      | false | 3   | 2  | 2  | 23      | Gary Harris misses 23-foo… |
+| 1      | 10:44 | 19      | true  | 2   | 27 | 2  | 2.2     | Paolo Banchero makes 2-fo… |
+| 1      | 10:29 | 28      | false | 2   | 23 | 3  | 2.8     | Gary Trent Jr. misses dri… |
+| 1      | 10:27 | 28      | false | 2   | 24 | 2  | 1.4     | Kelly Olynyk misses two p… |
+| 1      | 10:05 | 19      | true  | 3   | 9  | 21 | 25.6    | Wendell Carter Jr. makes … |
+| 1      | 9:47  | 28      | true  | 2   | 24 | 3  | 2.2     | Gradey Dick makes 3-foot … |
 (169 rows, first 8 shown)
 
 ## Distance from the hoop at (25, 0), by shot type
 | shot_type                    | n  | min_ft | median_ft | max_ft |
 | ---------------------------- | -- | ------ | --------- | ------ |
-| three (points_attempted = 3) | 67 | 23     | 25.6      | 30.8   |
-| rim (dunk / layup / tip)     | 42 | 0      | 3.2       | 7.8    |
-| other two                    | 60 | 1      | 5.8       | 21.5   |
+| three (points_attempted = 3) | 67 | 23     | 25        | 30     |
+| rim (dunk / layup / tip)     | 42 | 0      | 2.2       | 7.2    |
+| other two                    | 60 | 0      | 5.4       | 21.2   |
 (3 rows, all shown)
 ```
 

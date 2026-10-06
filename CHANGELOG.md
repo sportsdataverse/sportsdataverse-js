@@ -75,9 +75,10 @@ _4.0.0 below is not yet published to npm (latest 3.0.0); these entries may be fo
   per example script: the script's source and its frozen output are injected by the output
   injector's new `script` family (`inject:source` / `inject:example` markers; artifacts copied to
   `docs/static/examples/`) and drift-gated by `npm run docs:examples:check`. The ESPN basketball
-  shot-coordinate frame used by the shot-chart tutorial was measured on four captures
-  (`coordinate_x` = feet across, hoop at 25; `coordinate_y` = feet from the hoop; both teams on one
-  basket; free throws carry a sentinel). New fixtures with provenance READMEs: WNBA 2025 / NFL 2024 /
+  shot-coordinate frame used by the shot-chart tutorial was fitted on four captures, one of them
+  committed and held to it by `test/examples-shot-frame.test.js` (`coordinate_x` = feet across, hoop
+  at 25; `coordinate_y` = feet from the hoop, which fits at y ≈ 0–1; both teams on one basket; free
+  throws carry a sentinel). New fixtures with provenance READMEs: WNBA 2025 / NFL 2024 /
   LaLiga 2024 standings, NFL 2024 week-1 scoreboard, one verbatim Odds API historical snapshot. (#108)
 - **llms.txt.** `docusaurus-plugin-llms` emits `llms.txt`, `llms-full.txt` and a `.md` copy beside
   every docs page (TypeDoc's `docs/api/**` excluded from all three; `test/docs-llms.test.js` pins

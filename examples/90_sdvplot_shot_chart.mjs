@@ -5,16 +5,17 @@
 // team's shots coloured by @sportsdataverse/sdvplot `teamColors`. Written to
 // examples/out/shot_chart.svg. Both packages are UNPUBLISHED (see README.md).
 //
-// Coordinate mapping (MEASURED, not assumed — see 02_nba_pbp_shots.mjs): fitting
-// the hoop against the "N-foot" distance in each play's text on four ESPN
-// basketball captures gives hoop = (25, 0..1) with MAE 0.3 ft, so ESPN's frame is
+// Coordinate mapping (fitted, not assumed — see 02_nba_pbp_shots.mjs and
+// test/examples-shot-frame.test.js): fitting the hoop against the "N-foot"
+// distance in each play's text on four ESPN basketball captures (one committed)
+// gives hoop = (25, 1) with MAE 0.3 ft, so ESPN's frame is
 //   x: feet across the court, 0..50, hoop at 25
-//   y: feet from the hoop toward half court, -1..~31
+//   y: feet from the hoop toward half court, -1..~31 (hoop at y = 1)
 //   both teams on ONE basket in every period (no side flip)
 //   free throws = sentinel (-214748340, -214748365) → dropped
 // sporty's NBA court is centre-origin feet: x along the length (-47..47), y across
 // (-25..25); `displayRange: "offense"` shows x in 0..47 with the hoop at x = 41.75
-// (47 - 5.25). So:  surface_x = 41.75 - coordinate_y,  surface_y = coordinate_x - 25.
+// (47 - 5.25). So:  surface_x = 41.75 - (coordinate_y - 1),  surface_y = coordinate_x - 25.
 // sporty has no built-in ESPN basketball frame (its `nba-legacy` frame is for
 // stats.nba.com LOC_X/LOC_Y, tenths of a foot); we pass the mapping as `from`.
 //
@@ -33,7 +34,7 @@ setup();
 
 const EVENT_ID = 401585607;
 const ESPN_NBA_FRAME = {
-  x: (r) => (r.y == null || r.y < -100 ? null : 41.75 - r.y),
+  x: (r) => (r.y == null || r.y < -100 ? null : 41.75 - (r.y - 1)),
   y: (r) => (r.x == null || r.x < -100 ? null : r.x - 25),
   description: 'ESPN basketball plays: x across (0-50, hoop 25), y from the hoop toward half court → sporty offense half',
 };

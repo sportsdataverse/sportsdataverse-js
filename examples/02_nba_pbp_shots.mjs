@@ -1,14 +1,18 @@
 // 02 — NBA play-by-play → shots with court coordinates.
 //
 // Shows: the `summary` dispatcher's `plays` sub-frame, and how ESPN encodes shot
-// location. Measured on four ESPN basketball captures (NBA 401585607, 401430219,
-// 401360428; WNBA 400927398), fitting the hoop position against the "N-foot"
-// distance ESPN writes into each play's text (MAE 0.3 ft, integer coordinates):
+// location. The frame below was FITTED on four ESPN basketball captures (NBA
+// 401585607, 401430219, 401360428; WNBA 400927398; only the first is committed,
+// as test/fixtures/espn/summary_nba.json) by placing the hoop where it best
+// reproduces the "N-foot" distance ESPN writes into each play's text (MAE 0.3 ft,
+// integer coordinates). test/examples-shot-frame.test.js asserts it on the
+// committed capture:
 //
 //   - coordinate_x: feet ACROSS the court, 0..50; the hoop is at x = 25.
-//   - coordinate_y: feet from the HOOP toward half court, -1..~31; the hoop is at
-//     y ≈ 0–1 (not the baseline, which would put it at 5.25). A "23-foot three"
-//     from the corner sits at (2, 2); a layup at (25, 2).
+//   - coordinate_y: feet from the HOOP toward half court, -1..~31; the hoop fits
+//     at y = 1 on the committed capture (0–1 across the four; not the baseline,
+//     which would put it at 5.25). A "23-foot three" from the corner sits at
+//     (2, 2); a layup at (25, 2).
 //   - BOTH teams are normalised onto the same basket in every period — there is
 //     no per-period side flip to undo.
 //   - Free throws carry the ESPN "unknown" sentinel (-214748340, -214748365);
@@ -24,7 +28,7 @@ import { printTable, round } from './_util.mjs';
 setup();
 
 const EVENT_ID = 401585607;
-const HOOP = { x: 25, y: 0 };
+const HOOP = { x: 25, y: 1 }; // the fitted position (MAE 0.32 ft on this capture)
 
 const plays = await sdv.nba.espnNbaSummary({ event_id: EVENT_ID, parsed: true, section: 'plays' });
 console.log(`${plays.length} plays in the summary`);

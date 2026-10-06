@@ -46,13 +46,14 @@ node 90_sdvplot_shot_chart.mjs            # writes examples/out/shot_chart.svg
 elsewhere). Both packages are ESM-only, Node ≥ 20.18.1, no runtime
 dependencies; sdvplot's team index is bundled, so colours resolve offline.
 
-## The coordinate mapping, measured
+## The coordinate mapping, fitted
 
 ESPN's shot frame was established empirically in the
 [play-by-play tutorial](./nba-pbp-shots) by fitting the hoop against the
-"N-foot" distances ESPN writes into each play (four games, MAE 0.3 ft):
+"N-foot" distances ESPN writes into each play (four games, one committed and
+asserted by `test/examples-shot-frame.test.js`, MAE 0.3 ft):
 `coordinate_x` is feet across the court (0–50, hoop at 25), `coordinate_y` is
-feet from the **hoop** toward half court (hoop at y ≈ 0–1), both teams are
+feet from the **hoop** toward half court (hoop at y = 1), both teams are
 normalised onto one basket in every period, and free throws carry a
 `−214748340 / −214748365` sentinel.
 
@@ -99,16 +100,17 @@ canonical `team_id` *is* the ESPN id) to `#0150b5` (Orlando) and `#d91244`
 // team's shots coloured by @sportsdataverse/sdvplot `teamColors`. Written to
 // examples/out/shot_chart.svg. Both packages are UNPUBLISHED (see README.md).
 //
-// Coordinate mapping (MEASURED, not assumed — see 02_nba_pbp_shots.mjs): fitting
-// the hoop against the "N-foot" distance in each play's text on four ESPN
-// basketball captures gives hoop = (25, 0..1) with MAE 0.3 ft, so ESPN's frame is
+// Coordinate mapping (fitted, not assumed — see 02_nba_pbp_shots.mjs and
+// test/examples-shot-frame.test.js): fitting the hoop against the "N-foot"
+// distance in each play's text on four ESPN basketball captures (one committed)
+// gives hoop = (25, 1) with MAE 0.3 ft, so ESPN's frame is
 //   x: feet across the court, 0..50, hoop at 25
-//   y: feet from the hoop toward half court, -1..~31
+//   y: feet from the hoop toward half court, -1..~31 (hoop at y = 1)
 //   both teams on ONE basket in every period (no side flip)
 //   free throws = sentinel (-214748340, -214748365) → dropped
 // sporty's NBA court is centre-origin feet: x along the length (-47..47), y across
 // (-25..25); `displayRange: "offense"` shows x in 0..47 with the hoop at x = 41.75
-// (47 - 5.25). So:  surface_x = 41.75 - coordinate_y,  surface_y = coordinate_x - 25.
+// (47 - 5.25). So:  surface_x = 41.75 - (coordinate_y - 1),  surface_y = coordinate_x - 25.
 // sporty has no built-in ESPN basketball frame (its `nba-legacy` frame is for
 // stats.nba.com LOC_X/LOC_Y, tenths of a foot); we pass the mapping as `from`.
 //
@@ -127,7 +129,7 @@ setup();
 
 const EVENT_ID = 401585607;
 const ESPN_NBA_FRAME = {
-  x: (r) => (r.y == null || r.y < -100 ? null : 41.75 - r.y),
+  x: (r) => (r.y == null || r.y < -100 ? null : 41.75 - (r.y - 1)),
   y: (r) => (r.x == null || r.x < -100 ? null : r.x - 25),
   description: 'ESPN basketball plays: x across (0-50, hoop 25), y from the hoop toward half court → sporty offense half',
 };
@@ -190,12 +192,12 @@ Output of `node examples/90_sdvplot_shot_chart.mjs` (offline, against the commit
 ## Shots mapped onto the sporty court
 | team | made  | x_espn | y_espn | surface_x | surface_y | text                       |
 | ---- | ----- | ------ | ------ | --------- | --------- | -------------------------- |
-| ORL  | true  | 25     | 3      | 38.75     | 0         | Franz Wagner makes drivin… |
-| TOR  | true  | 26     | 2      | 39.75     | 1         | Kelly Olynyk makes drivin… |
-| ORL  | false | 2      | 2      | 39.75     | -23       | Gary Harris misses 23-foo… |
-| ORL  | true  | 27     | 2      | 39.75     | 2         | Paolo Banchero makes 2-fo… |
-| TOR  | false | 23     | 3      | 38.75     | -2        | Gary Trent Jr. misses dri… |
-| TOR  | false | 24     | 2      | 39.75     | -1        | Kelly Olynyk misses two p… |
+| ORL  | true  | 25     | 3      | 39.75     | 0         | Franz Wagner makes drivin… |
+| TOR  | true  | 26     | 2      | 40.75     | 1         | Kelly Olynyk makes drivin… |
+| ORL  | false | 2      | 2      | 40.75     | -23       | Gary Harris misses 23-foo… |
+| ORL  | true  | 27     | 2      | 40.75     | 2         | Paolo Banchero makes 2-fo… |
+| TOR  | false | 23     | 3      | 39.75     | -2        | Gary Trent Jr. misses dri… |
+| TOR  | false | 24     | 2      | 40.75     | -1        | Kelly Olynyk misses two p… |
 (169 rows, first 6 shown)
 
 ## Legend (filled = made, hollow = missed) → examples/out/shot_chart.svg
