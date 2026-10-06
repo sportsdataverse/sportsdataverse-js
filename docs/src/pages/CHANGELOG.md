@@ -2,6 +2,9 @@
 
 ## **Unreleased**
 
+_The next release is **4.0.0**. The last published release is 3.0.0: 3.1.0 was never
+published, and its entries are folded in below._
+
 ### Changed (breaking) — stats.nba.com / stats.wnba.com default season: the latest season with data (sdv-py #693)
 
 - **BREAKING: an unset season is now the latest season that has rows**, not the previous season. sdv-py #693 replaced `season_or_previous` with `season_latest_with_data`, and JS follows (`season_or_previous` is retired). The season is resolved per call, then dated for the request's league (`LeagueID`, else the host's), endpoint and `SeasonType`, in local time as sdv-py's `date.today()`. The NBA rolls over in November (`2025-26` until October 2026, `2026-27` from November). The G League (`league_id: "20"`) rolls over in January, the Summer League (`"15"`) in August (July 2026's is `2026-27`) and the WNBA in June. The draft combine (`SeasonYear`) rolls over in June, whichever league asks. `drafthistory` sends a year: July for the NBA, May for the WNBA. `commonplayoffseries` and a `SeasonType` of `Playoffs` or `PlayIn` roll over in the league's playoff month: May for the NBA and the G League, October for the WNBA. `All Star` rolls over in March for the NBA and August for the WNBA; the G League has no All-Star rows and keeps its regular rule. A fixed month table cannot follow a lockout or a pandemic calendar, so pass `season` for those years.
@@ -237,17 +240,25 @@ sdv-py's emit-time rename layer (`tools/codegen/generate.py` at the vendor pin):
   playground (share links `?e=flat:cbs:boxscore`, `RunCell`) and `/api/run`
   (`{ api: 'cbs', endpoint: 'boxscore' }`) still accept it. Code that matches
   `FLAT_WRAPPERS` by `short` should also match `legacyShort`.
-- Families already named like sdv-py (MLB, Statcast, NHL edge / stats-rest /
-  records, nba_stats, wnba_stats, Torvik, Yahoo) are unchanged.
+- **3.0.0's file-stem names** for five native families take the v4 name of the same
+  endpoint: `mlbApi*` → `mlb*` (`mlbApiSchedule` → `mlbSchedule`), `cbsNapi*` →
+  `cbs*` (`cbsNapiBoxscore` → `cbsGameBoxscore`), `foxBifrost*` → `foxApi*`
+  (`foxBifrostScoreboard` → `foxApiScoreboard`), `yahooShangrila*` → `yahoo*`, and
+  `sdv.recruiting.sports247*` → `recruiting*` (itself deprecated, see above).
+- Families already named like sdv-py (Statcast, NHL edge / stats-rest / records,
+  nba_stats, wnba_stats, Torvik) are unchanged.
 
-**Nothing is removed.** All 1,405 renamed pre-v4 names (2,810 counting both
-snake_case and camelCase) stay callable as deprecated aliases: each forwards to the
-new wrapper (its `.name` is the old name) and emits one `DeprecationWarning` per
-name per process, with `code: 'SDV_DEPRECATED_NAME'` so it can be filtered. The full
-mapping is the new [Deprecated names (v4)](https://js.sportsdataverse.org/docs/reference/deprecations)
-reference page; `test/naming.test.js` asserts every pre-v4 public name (frozen in
-`tools/codegen/pre_v4_names.json`) still resolves, and that the v4 names equal
-sdv-py's generated names at the pin. The raw-JSON default and `{ parsed: true }`
+**Nothing is removed.** Every public name of the published **3.0.0** (the
+`sportsdataverse@3.0.0` tarball on npm) is still callable. All 1,766 renamed pre-v4
+names (3,532 counting both snake_case and camelCase) are kept as deprecated aliases:
+each forwards to the new wrapper (its `.name` is the old name) and emits one
+`DeprecationWarning` per name per process, with `code: 'SDV_DEPRECATED_NAME'` so it
+can be filtered. The full mapping is the new [Deprecated names (v4)](https://js.sportsdataverse.org/docs/reference/deprecations)
+reference page. `tools/codegen/pre_v4_names.json` freezes the 3.0.0 tarball's names
+(7,579 namespace members, plus the exports of both entry points) and the later
+pre-v4 development names. `test/naming.test.js` asserts every one still resolves,
+that each renamed 3.0.0 name forwards to its v4 wrapper and warns once, and that
+the v4 names equal sdv-py's generated names at the pin. The raw-JSON default and `{ parsed: true }`
 are unchanged. Wrapper defs gain `publicShort` (ESPN) / `publicName` (flat) and
 `LeagueConfig` gains `publicShorts`; `makeLeagueModule` / `makeFlatModule` build
 the v4 names and register the same aliases.
@@ -367,17 +378,16 @@ retry → classification.
 - New guide: [Transport, auth & errors](/docs/guides/transport-and-auth).
 
 
-### Changed (breaking) — provider method naming
+### Changed — provider method naming (every 3.0.0 name still works)
 
-Dropped internal vendor API codenames (and redundant `_api` stems) from provider
-method names + labels (the `sdv.fox`/`cbs`/`yahoo`/`mlb`/`recruiting` namespaces
-are unchanged):
+The provider methods no longer carry internal vendor API codenames (the
+`sdv.fox`/`cbs`/`yahoo`/`mlb`/`recruiting` namespaces are unchanged). The prefixes
+`foxBifrost*`, `cbsNapi*`, `yahooShangrila*`, `mlbApi*` and `sports247*` (on
+`sdv.recruiting`) take their v4 names, listed in the 4.0.0 naming entry above. Each
+3.0.0 name is kept as a deprecated alias of the same endpoint, so this is not a
+removal. `yahooEditorial*` keeps its 3.0.0 name.
 
-- `foxBifrost*` → `fox*`, `cbsNapi*` → `cbs*`, `yahooShangrila*` → `yahoo*`,
-  `yahooEditorial*` → `yahooScores*`, `mlbApi*` → `mlb*`,
-  `sports247*` → `recruiting*` (label kept as "247Sports").
-
-The rename flows through the codegen stems, returns-schema paths, parser names,
+The new names flow through the codegen stems, returns-schema paths, parser names,
 playground ids, and docs. Real upstream URL paths that contain the vendor
 codename (Fox `/bifrost/v1/…`, Yahoo `/v1/query/shangrila/…`) are unchanged.
 
@@ -423,16 +433,11 @@ drifted since the 2026-06 fork:
   Yahoo, torvik, ESPN and the endpoints on a different or fallback parser keep JS's
   own schema or show none.
 
-## **V3.1.0**
+### Added — HockeyTech and BartTorvik families (planned as 3.1.0)
 
-A minor, additive release: two new flat-API families (no breaking changes), plus
-the docs-site overhaul.
+3.1.0 was never published to npm; its changes ship in 4.0.0.
 
-
-### New flat-API families
-
-Two standalone provider namespaces join the flat-API surface — **532 flat-API
-wrappers across 15 families** now (was 517 across 13). Both expose dual-case names
+Two standalone provider namespaces join the flat-API surface. Both expose dual-case names
 (snake_case + camelCase), accept `{ parsed: true }`, and ship fully
 column-described returns tables.
 
@@ -467,7 +472,7 @@ column-described returns tables.
   for QMJHL.
 
 
-### Docs
+### Changed — docs-site overhaul (planned as 3.1.0)
 
 A docs-site overhaul that makes the guides literate and the navigation
 data-driven:
