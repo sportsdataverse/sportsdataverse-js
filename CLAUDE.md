@@ -32,7 +32,7 @@ and the SportsDataverse R packages (`hoopR`, `wehoop`, `cfbfastR`, `fastRhockey`
 `baseballr`, …). It provides tidy access to play-by-play, box score, schedule,
 roster, standings, odds, and many other surfaces across the major leagues.
 
-As of **v3.0.0** the package is a **cross-league ESPN client _plus_ a native
+As of **v4.0.0** the package is a **cross-league ESPN client _plus_ a native
 (non-ESPN) live-API client** with a tidy parser layer:
 
 - **126 ESPN endpoint short names** generated for **30 leagues**,
