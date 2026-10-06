@@ -125,6 +125,11 @@ function runParser(def, raw) {
 const PRIMARY_FRAME = {
   parse_nhl_web_right_rail: 'season_series',
   parse_nhl_web_club_stats: 'skaters',
+  // sdv-py's yahoo parsers return one frame per `data` collection / editorial
+  // collection; the JS parser returns the one its endpoint is about.
+  parse_yahoo_stats: 'leagues',
+  parse_yahoo_scores_scoreboard: 'games',
+  parse_yahoo_scores_boxscore: 'player_stats',
 };
 
 const columnsOf = (rows) => [...new Set(rows.flatMap((r) => Object.keys(r)))];

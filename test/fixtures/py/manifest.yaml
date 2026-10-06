@@ -529,3 +529,8 @@ fox:
   fox/nfl_team_roster.json: team_roster
   fox/nfl_event_matchup.json: event_matchup
   fox/cbk_event_data_pbp_first_half.json: event_data
+yahoo:
+  yahoo/shangrila_season_stats_football_passing_ncaaf.json: season_stats_football_passing_ncaaf
+  yahoo/editorial_boxscore_ncaaf.json: editorial_boxscore
+  yahoo/editorial_boxscore_ncaaf_ala_at_uk.json: editorial_boxscore
+  yahoo/editorial_scoreboard_ncaaf.json: editorial_scoreboard
