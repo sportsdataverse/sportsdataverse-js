@@ -1,7 +1,7 @@
 ---
 title: The cross-league surface
-sidebar_label: 2. Cross-league surface
-sidebar_position: 2
+sidebar_label: 1. Cross-league surface
+sidebar_position: 1
 description: One API across 30 leagues and 10 provider namespaces — and how to discover it at runtime with listFunctions, findTeam and the parser registry.
 ---
 

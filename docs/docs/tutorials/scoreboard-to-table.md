@@ -1,7 +1,7 @@
 ---
 title: From scoreboard to a table
-sidebar_label: 3. Scoreboard to a table
-sidebar_position: 3
+sidebar_label: 2. Scoreboard to a table
+sidebar_position: 2
 description: The raw ESPN scoreboard next to its parsed form, and a derived margin-of-victory table — the pattern every other tutorial builds on.
 ---
 

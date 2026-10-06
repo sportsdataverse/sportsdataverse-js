@@ -26,6 +26,17 @@ module.exports = {
   organizationName: 'SportsDataverse', // Usually your GitHub org/user name.
   projectName: 'sportsdataverse', // Usually your repo name.
   plugins: [
+    // Old URLs that moved: the numbered guide stem Docusaurus strips, and the
+    // tutorials' duplicate quickstart (the guide is the one quickstart).
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          { from: '/docs/guides/01-quickstart', to: '/docs/guides/quickstart' },
+          { from: '/docs/tutorials/quickstart', to: '/docs/guides/quickstart' },
+        ],
+      },
+    ],
     // Generate the TypeScript API reference (TypeDoc -> Markdown) into the docs
     // content tree at build time, so it ships with the deployed site. The old
     // root `npm run docs` HTML output was local-only and never reached the web.
@@ -112,7 +123,8 @@ module.exports = {
         generateMarkdownFiles: true,
         ignoreFiles: ['api/**'],
         includeOrder: [
-          'intro.md',
+          'intro.mdx',
+          'sources.mdx',
           'guides/**',
           'tutorials/**',
           'reference/**',
@@ -165,7 +177,7 @@ module.exports = {
         },
         {
           label: 'Tutorials',
-          to: '/docs/tutorials/quickstart',
+          to: '/docs/tutorials/',
           position: 'left',
         },
         {
@@ -350,7 +362,7 @@ module.exports = {
             },
             {
               label: 'Tutorials',
-              to: '/docs/tutorials/quickstart',
+              to: '/docs/tutorials/',
             },
             {
               label: 'Playground',
