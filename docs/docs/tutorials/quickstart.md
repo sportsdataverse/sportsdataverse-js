@@ -2,12 +2,20 @@
 title: Quickstart
 sidebar_label: 1. Quickstart
 sidebar_position: 1
+description: From an empty folder to your first ESPN call, raw and parsed, in a couple of minutes.
 ---
 
 # Quickstart
 
-This walks you from an empty folder to your first live ESPN calls in a couple of
-minutes.
+**What you'll build:** a one-file Node script that fetches today's NBA board,
+first as ESPN's raw JSON and then as a tidy table. This is the setup every
+other tutorial assumes.
+
+## Sources used
+
+| Source | Host | Calls |
+| --- | --- | --- |
+| ESPN Site API v2 | `site.api.espn.com` | `sdv.nba.espnNbaScoreboard`, `sdv.nfl.espnNflSummary`, `sdv.nhl.espnNhlTeamRoster` |
 
 ## 1. Install
 
@@ -35,13 +43,27 @@ console.log(`${board.events?.length ?? 0} NBA games on the board today`);
 node demo.js
 ```
 
-Every wrapper returns the **raw ESPN JSON** as a plain object, so you can navigate
-it however you like (or hand it straight to your own parser).
+Every wrapper returns the **raw provider JSON** as a plain object by default, so
+you can navigate it however you like (or hand it straight to your own parser).
 
-## 3. The one naming rule
+## 3. The one switch: `{ parsed: true }`
 
-Cross-league endpoints are always **`espn<League><Endpoint>`** (camelCase) on the
-league's namespace:
+Pass `parsed: true` and the same call returns an array of flat, snake_cased row
+objects instead — one row per game here:
+
+```js
+const rows = await sdv.nba.espnNbaScoreboard({ parsed: true });
+console.table(rows.map((r) => ({ game: r.short_name, home: r.home_score, away: r.away_score })));
+```
+
+The flag is additive: the raw default never changes, and it works on every
+method across every league and provider. The
+[scoreboard tutorial](./scoreboard-to-table) shows the two side by side.
+
+## 4. The naming rule
+
+Cross-league ESPN endpoints are always **`espn<League><Endpoint>`** (camelCase)
+on the league's namespace:
 
 ```js
 await sdv.nba.espnNbaScoreboard({});
@@ -50,11 +72,13 @@ await sdv.nhl.espnNhlTeamRoster({ team_id: 10 });
 ```
 
 `<League>` is the namespace (`nba`, `nfl`, `nhl`, `mlb`, `wnba`, `mbb`, `wbb`,
-`cfb`, plus soccer/cricket/UFL and more). `<Endpoint>` is the data you want
+`cfb`, plus soccer / cricket / UFL and more). `<Endpoint>` is the data you want
 (`Scoreboard`, `Summary`, `TeamRoster`, `Standings`, …). Every method also has a
-snake_case alias (`espn_nfl_summary`) for parity with the Python / R packages.
+snake_case twin (`espn_nfl_summary`) for parity with the Python / R packages.
+Non-ESPN families follow the same idea without the `espn` prefix
+(`sdv.nhl.nhlStandings`, `sdv.mlb.mlbLinescore`, `sdv.odds.oddsApiSports`).
 
-## 4. Parameters
+## 5. Parameters
 
 Pass parameters as a single object. Both **snake_case and camelCase** work:
 
@@ -66,7 +90,14 @@ await sdv.nfl.espnNflTeamSchedule({ teamId: 12, season: 2024 });  // identical
 Required path parameters (like `team_id` above) throw a clear error if missing;
 optional query parameters are simply omitted when you don't pass them.
 
-## 5. Legacy methods still work
+## 6. Ids are strings
+
+Every id column a parser or loader emits (`team_id`, `game_id`, `athlete_id`,
+…) is a decimal **string**, whatever the provider sent, so ids compare with
+`===` and join across endpoints and across seasons. The
+[release-loader tutorial](./release-loaders) shows why that matters.
+
+## 7. Legacy methods still work
 
 If you used `sportsdataverse` before v3.0.0, your code keeps working — the legacy
 convenience methods are merged alongside the new wrappers:
@@ -76,9 +107,17 @@ const pbp = await sdv.nba.getPlayByPlay(401584793);
 const box = await sdv.cfb.getBoxScore(401628319);
 ```
 
+## Running the tutorials offline
+
+Each tutorial after this one is a script in the repo's `examples/` directory.
+They run **without network** against the captured fixtures the test suite uses
+(an `examples/_offline.mjs` helper routes every request to a committed file),
+and `SDV_LIVE=1` switches them to the real hosts. That is also how the output
+tables on these pages are produced — see [all tutorials](./).
+
 ## Next steps
 
 - **[The cross-league surface](./cross-league)** — one API across 30 leagues.
-- **[From scoreboard to a table](./scoreboard-to-table)** — a real analysis.
+- **[From scoreboard to a table](./scoreboard-to-table)** — raw vs parsed, for real.
 - **[Playground](/playground)** — try any endpoint live in your browser.
 - **[Reference](../reference/)** — every wrapper, by league.

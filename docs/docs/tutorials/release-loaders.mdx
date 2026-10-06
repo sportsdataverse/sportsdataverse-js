@@ -1,0 +1,182 @@
+---
+title: Release-dataset loaders
+sidebar_label: 14. Release loaders
+sidebar_position: 14
+description: The generated load* functions read SportsDataverse / nflverse parquet releases straight from GitHub, with the integer-id rule that makes cross-dataset joins work.
+---
+
+# Release-dataset loaders: parquet to rows, ids as strings
+
+**What you'll build:** the 2024 college-football ratings table, a join of that
+table to the transfer-portal dataset on `team_id` (one stores the id as a
+string, the other as INT64 — and the join still matches every row), and the
+single-asset `nhl_groups` lookup.
+
+## Sources used
+
+| Source | Host | Call |
+| --- | --- | --- |
+| GitHub Releases (sportsdataverse-data) | `github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_ratings/cfb_ratings_2024.parquet` | `sdv.cfb.loadCfbRatings({ seasons: [2024] })` |
+| GitHub Releases (sportsdataverse-data) | `…/cfb_team_portal/cfb_team_portal_2024.parquet` | `sdv.cfb.loadCfbTeamPortal({ seasons: [2024] })` |
+| GitHub Releases (sportsdataverse-data) | `…/nhl_groups/nhl_groups.parquet` | `sdv.nhl.loadNhlGroups()` |
+
+Offline fixtures: `test/fixtures/releases/*.parquet` — the real release assets,
+byte for byte (sha256 in that directory's README).
+
+## What a loader is
+
+Beyond the live APIs, the SportsDataverse publishes season-scale datasets as
+parquet assets on GitHub Releases (play-by-play with EPA / WPA, box scores,
+rosters, schedules, ratings, betting lines, …), and nflverse does the same for
+the NFL. The package generates one `load*` function per asset from the same
+manifest sdv-py uses (`releases.yaml`, 300+ loaders), so
+`sdv.cfb.loadCfbPbp({ seasons: [2023, 2024] })` is the JS twin of sdv-py's
+`load_cfb_pbp([2023, 2024])`. A loader downloads each season's asset, decodes
+the parquet in-process (hyparquet, ZSTD and SNAPPY), and returns rows. Pass
+`columns: [...]` to decode only what you need. A season whose asset does not
+exist is skipped with a warning (sdv-py's behaviour) unless the manifest says
+it must raise; a failed download raises `AssetFetchError` and is never
+recorded as an empty season.
+
+## The integer-id rule
+
+Parquet carries types, and across releases the same id is stored different
+ways — `cfb_ratings` writes `team_id` as a STRING, `cfb_team_portal` as INT64,
+and pandas-written assets sometimes store an id column with nulls as DOUBLE.
+In JavaScript an INT64 decodes to `BigInt`, a DOUBLE to `number`, a STRING to
+`string`, and none of those compare equal to each other. The v4 rule removes
+the problem at the boundary: **a column whose name marks it as an id
+(`team_id`, `game_id`, `athlete_id`, `player_id`, …) is always a decimal
+string, in every loader, parser and season.** Non-id integer columns are
+plain `number`s unless a value exceeds 2^53, in which case the column is
+`BigInt` and one `SDV_INT64` warning is emitted per column.
+
+The script prints `typeof team_id` for both datasets (`string`, `string`) and
+then joins them with a `Map` — 134 of 134 rated teams match. The same rule is
+why ESPN's `team_id` from a parsed scoreboard joins to these release rows
+directly.
+
+## The script
+
+<!-- inject:source:ex12 -->
+
+```js title="examples/12_release_loaders.mjs"
+// 12 — Release-dataset loaders: parquet assets → rows, with the id rule.
+//
+// Shows: the generated `load*` loaders (one per sportsdataverse-data /
+// nflverse release asset, `tools/codegen/endpoints/releases.yaml`). They stream
+// the parquet from GitHub Releases (hyparquet) and apply the v4 integer-id rule:
+// a column whose NAME marks an id (`team_id`, `game_id`, `athlete_id`, …) is
+// ALWAYS a decimal string, whatever width it was stored with — so
+// `cfb_ratings` (stores team_id as a STRING) and `cfb_team_portal` (stores it
+// as INT64) join on `===`. Non-id integers are `number`, or `BigInt` past 2^53.
+//
+// Sources: GitHub Releases — github.com/sportsdataverse/sportsdataverse-data/releases/download/
+//   cfb_ratings/cfb_ratings_2024.parquet, cfb_team_portal/cfb_team_portal_2024.parquet, nhl_groups/nhl_groups.parquet
+// Offline fixtures: test/fixtures/releases/*.parquet (verbatim release assets, 2026-10-05).
+
+import sdv from 'sportsdataverse';
+import { setup } from './_offline.mjs';
+import { printTable, round } from './_util.mjs';
+
+setup();
+
+const ratings = await sdv.cfb.loadCfbRatings({ seasons: [2024] });
+const portal = await sdv.cfb.loadCfbTeamPortal({ seasons: [2024] });
+console.log(`cfb_ratings: ${ratings.length} rows; cfb_team_portal: ${portal.length} rows`);
+console.log(`typeof team_id — ratings: ${typeof ratings[0].team_id} (parquet STRING), portal: ${typeof portal[0].team_id} (parquet INT64) → both "${ratings[0].team_id}"-style strings`);
+
+printTable(
+  ratings
+    .sort((a, b) => a.net_rank - b.net_rank)
+    .map((r) => ({ net_rank: r.net_rank, team_id: r.team_id, games: r.games, adj_off_epa: round(r.adj_off_epa, 3), adj_def_epa: round(r.adj_def_epa, 3), adj_net: round(r.adj_net, 3), fei_net: round(r.fei_net, 3) })),
+  ['net_rank', 'team_id', 'games', 'adj_off_epa', 'adj_def_epa', 'adj_net', 'fei_net'],
+  8,
+  'cfb_ratings 2024, top of the net-EPA table'
+);
+
+// Join across the two releases on the (string) team_id.
+const portalById = new Map(portal.map((p) => [p.team_id, p]));
+const joined = ratings
+  .map((r) => ({ r, p: portalById.get(r.team_id) }))
+  .filter(({ p }) => p)
+  .map(({ r, p }) => ({ team_id: r.team_id, net_rank: r.net_rank, roster_n: p.roster_n, transfers_in: p.transfers_in_n, transfers_out: p.transfers_out_n, net_transfer_talent: p.net_transfer_talent, portal_share: round(p.portal_share, 3) }))
+  .sort((a, b) => b.net_transfer_talent - a.net_transfer_talent);
+console.log(`${joined.length} of ${ratings.length} rated teams matched a portal row (string === string)`);
+printTable(joined, ['team_id', 'net_rank', 'roster_n', 'transfers_in', 'transfers_out', 'net_transfer_talent', 'portal_share'], 8, 'Ratings ⋈ transfer portal, by net transfer talent');
+
+// A single-asset loader (no season token).
+const groups = await sdv.nhl.loadNhlGroups({});
+printTable(groups, ['group_id', 'level', 'first_season', 'last_season'], 8, 'nhl_groups (single-asset loader)');
+```
+
+<!-- /inject -->
+
+## Output
+
+<!-- inject:example:ex12 -->
+
+Output of `node examples/12_release_loaders.mjs` (offline, against the committed fixtures):
+
+```text
+cfb_ratings: 134 rows; cfb_team_portal: 236 rows
+typeof team_id — ratings: string (parquet STRING), portal: string (parquet INT64) → both "2306"-style strings
+
+## cfb_ratings 2024, top of the net-EPA table
+| net_rank | team_id | games | adj_off_epa | adj_def_epa | adj_net | fei_net |
+| -------- | ------- | ----- | ----------- | ----------- | ------- | ------- |
+| 1        | 194     | 14    | 0.254       | -0.256      | 0.51    | 1.964   |
+| 2        | 87      | 16    | 0.234       | -0.244      | 0.479   | 2.022   |
+| 3        | 213     | 16    | 0.225       | -0.215      | 0.44    | 1.815   |
+| 4        | 2483    | 13    | 0.304       | -0.134      | 0.438   | 1.91    |
+| 5        | 84      | 12    | 0.233       | -0.199      | 0.431   | 1.515   |
+| 6        | 251     | 16    | 0.18        | -0.24       | 0.421   | 1.824   |
+| 7        | 2390    | 12    | 0.318       | -0.033      | 0.351   | 1.646   |
+| 8        | 145     | 12    | 0.178       | -0.137      | 0.315   | 1.931   |
+(134 rows, first 8 shown)
+134 of 134 rated teams matched a portal row (string === string)
+
+## Ratings ⋈ transfer portal, by net transfer talent
+| team_id | net_rank | roster_n | transfers_in | transfers_out | net_transfer_talent | portal_share |
+| ------- | -------- | -------- | ------------ | ------------- | ------------------- | ------------ |
+| 326     | 75       | 121      | 37           | 21            | 520                 | 0.306        |
+| 2567    | 20       | 125      | 25           | 13            | 415                 | 0.2          |
+| 2247    | 109      | 118      | 28           | 18            | 405                 | 0.237        |
+| 2534    | 98       | 119      | 17           | 7             | 350                 | 0.143        |
+| 9       | 26       | 119      | 30           | 24            | 310                 | 0.252        |
+| 6       | 60       | 121      | 15           | 10            | 295                 | 0.124        |
+| 12      | 85       | 112      | 27           | 23            | 280                 | 0.241        |
+| 41      | 68       | 114      | 28           | 20            | 260                 | 0.246        |
+(134 rows, first 8 shown)
+
+## nhl_groups (single-asset loader)
+| group_id            | level    | first_season | last_season |
+| ------------------- | -------- | ------------ | ----------- |
+| nhl:adams-northeast | division | 1975         | 2013        |
+| nhl:american        | division | 1927         | 1938        |
+| nhl:atlantic        | division | 2014         | 2026        |
+| nhl:canadian        | division | 1927         | 1938        |
+| nhl:central         | division | 2014         | 2026        |
+| nhl:central-2021    | division | 2021         | 2021        |
+| nhl:east-1968       | division | 1968         | 1974        |
+| nhl:east-2021       | division | 2021         | 2021        |
+(21 rows, first 8 shown)
+```
+
+<!-- /inject -->
+
+## Variations
+
+- `sdv.nfl.loadNflPbp({ seasons: [2024] })` reads nflverse's play-by-play
+  (nflreadpy parity); `loadNflSchedules`, `loadNflRosters`,
+  `loadNflFtnCharting` and friends follow.
+- Every league's loaders are listed on its reference page under "Dataset
+  loaders", with the columns each asset carries.
+- `configure({ transport: { releases: myTransport } })` swaps the download
+  transport for the `releases` family only — that is how the examples serve
+  the committed parquet offline.
+
+## Next steps
+
+- **[College football rankings and drives](./cfb-rankings-pbp)** — the live-API side of CFB.
+- **[The cross-league surface](./cross-league)** — `listFunctions('cfb', { search: 'load' })` lists them all.

@@ -1,0 +1,182 @@
+---
+title: NBA play-by-play shots
+sidebar_label: 4. NBA play-by-play shots
+sidebar_position: 4
+description: The summary dispatcher's plays sub-frame, and the measured meaning of ESPN's shot coordinates (origin, axes, units, which basket).
+---
+
+# NBA play-by-play: shots with coordinates
+
+**What you'll build:** a table of every field-goal attempt in one NBA game with
+its ESPN court coordinates and its distance from the hoop, plus a sanity table
+that proves the coordinate convention: threes land 23+ feet out, layups and
+dunks within a few feet.
+
+## Sources used
+
+| Source | Host | Call |
+| --- | --- | --- |
+| ESPN Site API v2 | `site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401585607` | `sdv.nba.espnNbaSummary({ section: 'plays' })` |
+
+Offline fixture: `test/fixtures/espn/summary_nba.json` (Toronto at Orlando,
+2024-03-17, 450 plays).
+
+## The `summary` dispatcher
+
+`summary` is ESPN's richest per-game payload (700 KB to 1.8 MB). The parser
+splits it into 21 sub-frames — `boxscore_player`, `boxscore_team`, `plays`,
+`winprobability`, `leaders`, `header`, `officials`, `odds`, … — and `section`
+picks one. `plays` is one row per event with `type_text`, `text`, the score
+after the play, `period_number`, `clock_display_value`, `team_id`, the flags
+`scoring_play` / `shooting_play`, `points_attempted`, and the two columns this
+tutorial is about: `coordinate_x` and `coordinate_y`.
+
+## What the coordinates mean (measured, not assumed)
+
+ESPN does not document its shot frame, so the script's header records what was
+measured. Every shooting play's text carries the distance ESPN itself computed
+("misses 23-foot three point jumper"). Fitting the hoop position that best
+reproduces those distances from the integer coordinates, on four captured
+games (three NBA, one WNBA; 96–124 shots each), gives the same answer each
+time, with a mean absolute error of 0.3 ft:
+
+- **`coordinate_x` is feet across the court, 0–50; the hoop is at x = 25.**
+- **`coordinate_y` is feet from the hoop toward half court**, roughly −1 to 31.
+  The hoop fits at y ≈ 0–1 — *not* 5.25, so y is not measured from the
+  baseline. A corner three sits at (2, 2); a layup at (25, 2).
+- **Both teams are normalised onto one basket in every period.** There is no
+  side flip to undo per quarter; a team's shots all live in the same half.
+- **Free throws carry a sentinel**, (−214748340, −214748365), the ESPN
+  "unknown" value. Drop any coordinate below −100 before using it; the script
+  also excludes free throws by text because they are not location data.
+
+The distance-by-shot-type table at the end of the output is the check: with
+the hoop at (25, 0), `points_attempted = 3` shots have a minimum distance of
+23 ft (the corner, where the NBA line is 22 ft from the hoop centre plus the
+integer rounding) and a median around 25–26; dunks, layups and tips have a
+median of about 3 ft. If you port this to another game and those numbers
+move, the convention has changed.
+
+When you want to draw these on a court, the
+[shot chart tutorial](./sdvplot-shot-chart) maps this frame onto a
+`@sportsdataverse/sporty` surface.
+
+## The script
+
+<!-- inject:source:ex02 -->
+
+```js title="examples/02_nba_pbp_shots.mjs"
+// 02 — NBA play-by-play → shots with court coordinates.
+//
+// Shows: the `summary` dispatcher's `plays` sub-frame, and how ESPN encodes shot
+// location. Measured on four ESPN basketball captures (NBA 401585607, 401430219,
+// 401360428; WNBA 400927398), fitting the hoop position against the "N-foot"
+// distance ESPN writes into each play's text (MAE 0.3 ft, integer coordinates):
+//
+//   - coordinate_x: feet ACROSS the court, 0..50; the hoop is at x = 25.
+//   - coordinate_y: feet from the HOOP toward half court, -1..~31; the hoop is at
+//     y ≈ 0–1 (not the baseline, which would put it at 5.25). A "23-foot three"
+//     from the corner sits at (2, 2); a layup at (25, 2).
+//   - BOTH teams are normalised onto the same basket in every period — there is
+//     no per-period side flip to undo.
+//   - Free throws carry the ESPN "unknown" sentinel (-214748340, -214748365);
+//     drop any coordinate < -100 before plotting.
+//
+// Sources: ESPN Site API v2 — site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=…
+// Offline fixture: test/fixtures/espn/summary_nba.json (ORL vs TOR, 2024-03-17).
+
+import sdv from 'sportsdataverse';
+import { setup } from './_offline.mjs';
+import { printTable, round } from './_util.mjs';
+
+setup();
+
+const EVENT_ID = 401585607;
+const HOOP = { x: 25, y: 0 };
+
+const plays = await sdv.nba.espnNbaSummary({ event_id: EVENT_ID, parsed: true, section: 'plays' });
+console.log(`${plays.length} plays in the summary`);
+
+const shots = plays
+  .filter((p) => p.shooting_play && p.coordinate_x > -100 && !/free throw/i.test(p.text))
+  .map((p) => ({
+    period: p.period_number,
+    clock: p.clock_display_value,
+    team_id: p.team_id,
+    made: p.scoring_play,
+    pts: p.points_attempted,
+    x: p.coordinate_x,
+    y: p.coordinate_y,
+    dist_ft: round(Math.hypot(p.coordinate_x - HOOP.x, p.coordinate_y - HOOP.y), 1),
+    text: p.text,
+  }));
+
+printTable(shots, ['period', 'clock', 'team_id', 'made', 'pts', 'x', 'y', 'dist_ft', 'text'], 8, 'Field-goal attempts with coordinates');
+
+// Sanity check of the convention: threes should be ≥ ~22 ft from the hoop, rim
+// attempts (dunks / layups / tips) within a few feet.
+const bucket = (label, pred) => {
+  const d = shots.filter(pred).map((s) => s.dist_ft).sort((a, b) => a - b);
+  return { shot_type: label, n: d.length, min_ft: d[0], median_ft: d[d.length >> 1], max_ft: d[d.length - 1] };
+};
+printTable(
+  [
+    bucket('three (points_attempted = 3)', (s) => s.pts === 3),
+    bucket('rim (dunk / layup / tip)', (s) => /dunk|layup|tip/i.test(s.text)),
+    bucket('other two', (s) => s.pts === 2 && !/dunk|layup|tip/i.test(s.text)),
+  ],
+  ['shot_type', 'n', 'min_ft', 'median_ft', 'max_ft'],
+  3,
+  'Distance from the hoop at (25, 0), by shot type'
+);
+```
+
+<!-- /inject -->
+
+## Output
+
+<!-- inject:example:ex02 -->
+
+Output of `node examples/02_nba_pbp_shots.mjs` (offline, against the committed fixtures):
+
+```text
+450 plays in the summary
+
+## Field-goal attempts with coordinates
+| period | clock | team_id | made  | pts | x  | y  | dist_ft | text                       |
+| ------ | ----- | ------- | ----- | --- | -- | -- | ------- | -------------------------- |
+| 1      | 11:42 | 19      | true  | 2   | 25 | 3  | 3       | Franz Wagner makes drivin… |
+| 1      | 11:21 | 28      | true  | 2   | 26 | 2  | 2.2     | Kelly Olynyk makes drivin… |
+| 1      | 11:11 | 19      | false | 3   | 2  | 2  | 23.1    | Gary Harris misses 23-foo… |
+| 1      | 10:44 | 19      | true  | 2   | 27 | 2  | 2.8     | Paolo Banchero makes 2-fo… |
+| 1      | 10:29 | 28      | false | 2   | 23 | 3  | 3.6     | Gary Trent Jr. misses dri… |
+| 1      | 10:27 | 28      | false | 2   | 24 | 2  | 2.2     | Kelly Olynyk misses two p… |
+| 1      | 10:05 | 19      | true  | 3   | 9  | 21 | 26.4    | Wendell Carter Jr. makes … |
+| 1      | 9:47  | 28      | true  | 2   | 24 | 3  | 3.2     | Gradey Dick makes 3-foot … |
+(169 rows, first 8 shown)
+
+## Distance from the hoop at (25, 0), by shot type
+| shot_type                    | n  | min_ft | median_ft | max_ft |
+| ---------------------------- | -- | ------ | --------- | ------ |
+| three (points_attempted = 3) | 67 | 23     | 25.6      | 30.8   |
+| rim (dunk / layup / tip)     | 42 | 0      | 3.2       | 7.8    |
+| other two                    | 60 | 1      | 5.8       | 21.5   |
+(3 rows, all shown)
+```
+
+<!-- /inject -->
+
+## Variations
+
+- `section: 'winprobability'` gives one row per play with `home_win_percentage`
+  — join it to `plays` on `play_id` for a win-probability-aware shot log.
+- The same code runs on `sdv.wnba` / `sdv.mbb` / `sdv.wbb` (the WNBA capture
+  fitted the same hoop); college games sometimes ship fewer coordinates.
+- Raw `plays` (`parsed: false`) keep `participants[]` as objects, which the
+  parsed frame stringifies into the `participants` column — parse it back with
+  `JSON.parse` when you need the athlete ids.
+
+## Next steps
+
+- **[Shot chart with sdvplot + sporty](./sdvplot-shot-chart)** — draw it.
+- **[College basketball](./college-basketball-torvik)** — the box-score sub-frames.

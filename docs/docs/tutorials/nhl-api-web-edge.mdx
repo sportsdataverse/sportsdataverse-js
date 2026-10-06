@@ -1,0 +1,208 @@
+---
+title: "NHL: api-web and EDGE"
+sidebar_label: 10. NHL api-web + EDGE
+sidebar_position: 10
+description: NHL's modern game feed (standings, play-by-play) and the EDGE tracking leaderboard, with a wide-to-long reshape.
+---
+
+# NHL: standings, a Cup Final game 7, and EDGE leaders
+
+**What you'll build:** the league table sorted by points, the event mix and
+goals of 2024 Stanley Cup Final game 7, and the EDGE skater leaders reshaped
+from one wide row into a tidy long table.
+
+## Sources used
+
+| Source | Host | Call |
+| --- | --- | --- |
+| NHL api-web | `api-web.nhle.com/v1/standings/now` | `sdv.nhl.nhlStandings()` |
+| NHL api-web | `api-web.nhle.com/v1/gamecenter/2023030417/play-by-play` | `sdv.nhl.nhlWebPbp({ game_id: 2023030417 })` |
+| NHL EDGE | `api-web.nhle.com/v1/edge/skater-landing/now` | `sdv.nhl.nhlEdgeSkaterLanding()` |
+
+Offline fixtures: `test/fixtures/py/nhl_api_web/standings_now.json.gz`,
+`pbp_2024_scf_g7.json.gz`, `test/fixtures/py/nhl_edge/skater_landing.json`
+(sdv-py captures; the parsers are verified against sdv-py's output on the same
+bytes).
+
+## Four NHL families on one namespace
+
+`sdv.nhl` carries ESPN (`espnNhl*`) plus four native families: `nhl*` is
+api-web, the feed nhl.com itself uses (standings, schedules, gamecenter
+play-by-play, boxscores, rosters, player landing pages); `nhlEdge*` is the
+EDGE player-tracking surface; `nhlStatsRest*` is the older stats REST API;
+`nhlRecords*` is records.nhl.com. Where api-web and ESPN would collide on a
+name, api-web gets the `nhlWeb` prefix — hence `nhlWebPbp`.
+
+Game ids are NHL's own: `2023030417` is season 2023 (the 2023-24 season),
+game type `03` (playoffs), round 4, series 1, game 7.
+
+## Standings and play-by-play
+
+`nhlStandings` is one row per team with ~70 columns: `points`, `wins`,
+`losses`, `ot_losses`, `goal_differential`, the `l10_*` last-ten split,
+`home_*` / `road_*` splits, `conference_sequence` / `division_sequence`
+rankings, and `clinch_indicator`. Team names are nested i18n objects in the
+payload; the parser flattens them to `team_abbrev_default`,
+`team_name_default`, and so on.
+
+`nhlWebPbp` is one row per event (331 in this game). The common columns are
+`type_desc_key` (`faceoff`, `hit`, `shot-on-goal`, `goal`, …),
+`period_descriptor_number`, `time_in_period`, `situation_code` (a four-digit
+strength code: `1551` is 5-on-5 with both goalies in), and the event's
+`details_*` fields — for goals, `details_scoring_player_id`,
+`details_x_coord` / `details_y_coord` on the NHL's 200×85 rink frame
+(centre-ice origin), and the score after the goal.
+
+## Wide to long
+
+EDGE "landing" pages are a dashboard, not a table: one object with the leader
+of each category under `leaders.<category>.player` plus a value whose key is
+the metric (`shotSpeedImperial`, `distanceSkatedImperial`, `sog`, `zoneTime`).
+The parser returns that as **one wide row**. The script walks the keys, finds
+each `leaders_<cat>_player_id`, and picks up the sibling value key — a small
+reshape that turns 70 columns into a seven-row table.
+
+## The script
+
+<!-- inject:source:ex08 -->
+
+```js title="examples/08_nhl_api_web_and_edge.mjs"
+// 08 — NHL: api-web standings + a game's play-by-play, and an EDGE leaderboard.
+//
+// Shows: the three NHL families on sdv.nhl — `nhl*` (api-web.nhle.com/v1, the
+// modern game feed), `nhlEdge*` (api-web.nhle.com/v1/edge, player tracking) and
+// their py-parity parsers. `nhlWebPbp` returns one row per event; EDGE "landing"
+// payloads are one wide row of leaders, so we reshape it into a long table.
+//
+// Sources: NHL api-web — api-web.nhle.com/v1/standings/now, /v1/gamecenter/2023030417/play-by-play
+//          NHL EDGE — api-web.nhle.com/v1/edge/skater-landing/now
+// Offline fixtures: test/fixtures/py/nhl_api_web/standings_now.json.gz, pbp_2024_scf_g7.json.gz
+//                   (2024 Stanley Cup Final game 7), test/fixtures/py/nhl_edge/skater_landing.json.
+
+import sdv from 'sportsdataverse';
+import { setup } from './_offline.mjs';
+import { printTable, round } from './_util.mjs';
+
+setup();
+
+const standings = await sdv.nhl.nhlStandings({ parsed: true });
+printTable(
+  standings
+    .sort((a, b) => b.points - a.points)
+    .map((s) => ({ team: s.team_abbrev_default, div: s.division_abbrev, gp: s.games_played, w: s.wins, l: s.losses, otl: s.ot_losses, pts: s.points, gd: s.goal_differential, l10: `${s.l10_wins}-${s.l10_losses}-${s.l10_ot_losses}` })),
+  ['team', 'div', 'gp', 'w', 'l', 'otl', 'pts', 'gd', 'l10'],
+  8,
+  'League standings by points'
+);
+
+const GAME_ID = 2023030417;
+const pbp = await sdv.nhl.nhlWebPbp({ game_id: GAME_ID, parsed: true });
+const counts = new Map();
+for (const p of pbp) counts.set(p.type_desc_key, (counts.get(p.type_desc_key) ?? 0) + 1);
+printTable(
+  [...counts].map(([type, n]) => ({ event_type: type, n })).sort((a, b) => b.n - a.n),
+  ['event_type', 'n'],
+  8,
+  `Event mix, game ${GAME_ID} (${pbp.length} events)`
+);
+printTable(
+  pbp.filter((p) => p.type_desc_key === 'goal').map((p) => ({ period: p.period_descriptor_number, time: p.time_in_period, situation: p.situation_code, scorer_id: p.details_scoring_player_id, score: `${p.details_away_score}-${p.details_home_score}`, x: p.details_x_coord, y: p.details_y_coord })),
+  ['period', 'time', 'situation', 'scorer_id', 'score', 'x', 'y'],
+  8,
+  'Goals'
+);
+
+// EDGE landing: one wide row → long (leader category, player, value).
+const [edge] = await sdv.nhl.nhlEdgeSkaterLanding({ parsed: true });
+// Each category is `leaders_<cat>_player_*` + one value key whose name is the
+// metric (`..._shot_speed_imperial`, `..._distance_imperial`, …).
+const leaders = [];
+for (const k of Object.keys(edge)) {
+  const m = k.match(/^leaders_(\w+)_player_id$/);
+  if (!m) continue;
+  const cat = m[1];
+  const prefix = `leaders_${cat}_`;
+  const valueKey = Object.keys(edge).find((x) => x.startsWith(prefix) && !x.startsWith(`${prefix}player_`) && !x.startsWith(`${prefix}overlay_`));
+  leaders.push({
+    category: cat,
+    player: `${edge[`${prefix}player_first_name_default`]} ${edge[`${prefix}player_last_name_default`]}`,
+    team: edge[`${prefix}player_team_abbrev`],
+    metric: valueKey?.slice(prefix.length),
+    value: round(edge[valueKey], 2),
+  });
+}
+printTable(leaders, ['category', 'player', 'team', 'metric', 'value'], 8, 'EDGE skater leaders (reshaped from the wide landing row)');
+```
+
+<!-- /inject -->
+
+## Output
+
+<!-- inject:example:ex08 -->
+
+Output of `node examples/08_nhl_api_web_and_edge.mjs` (offline, against the committed fixtures):
+
+```text
+
+## League standings by points
+| team | div | gp | w  | l  | otl | pts | gd | l10   |
+| ---- | --- | -- | -- | -- | --- | --- | -- | ----- |
+| COL  | C   | 82 | 55 | 16 | 11  | 121 | 99 | 7-2-1 |
+| CAR  | M   | 82 | 53 | 22 | 7   | 113 | 56 | 7-2-1 |
+| DAL  | C   | 82 | 50 | 20 | 12  | 112 | 53 | 7-2-1 |
+| BUF  | A   | 82 | 50 | 23 | 9   | 109 | 47 | 6-3-1 |
+| TBL  | A   | 82 | 50 | 26 | 6   | 106 | 59 | 5-5-0 |
+| MTL  | A   | 82 | 48 | 24 | 10  | 106 | 27 | 7-3-0 |
+| MIN  | C   | 82 | 46 | 24 | 12  | 104 | 32 | 6-4-0 |
+| BOS  | A   | 82 | 45 | 27 | 10  | 100 | 22 | 5-3-2 |
+(32 rows, first 8 shown)
+
+## Event mix, game 2023030417 (331 events)
+| event_type   | n  |
+| ------------ | -- |
+| faceoff      | 59 |
+| hit          | 53 |
+| stoppage     | 52 |
+| shot-on-goal | 42 |
+| missed-shot  | 36 |
+| blocked-shot | 32 |
+| giveaway     | 22 |
+| takeaway     | 19 |
+(14 rows, first 8 shown)
+
+## Goals
+| period | time  | situation | scorer_id | score | x   | y   |
+| ------ | ----- | --------- | --------- | ----- | --- | --- |
+| 1      | 04:27 | 1551      | 8477409   | 0-1   | -83 | -6  |
+| 1      | 06:44 | 1551      | 8477406   | 1-1   | 77  | -2  |
+| 2      | 15:11 | 1551      | 8477933   | 1-2   | 61  | -25 |
+(3 rows, all shown)
+
+## EDGE skater leaders (reshaped from the wide landing row)
+| category              | player              | team | metric                   | value  |
+| --------------------- | ------------------- | ---- | ------------------------ | ------ |
+| hardest_shot          | John Carlson        | ANA  | shot_speed_imperial      | 102.72 |
+| max_skating_speed     | Cale Makar          | COL  | skating_speed_imperial   | 23.92  |
+| total_distance_skated | Shea Theodore       | VGK  | distance_skated_imperial | 84.79  |
+| distance_max_game     | Quinn Hughes        | MIN  | distance_skated_imperial | 6.35   |
+| high_danger_sog       | Taylor Hall         | CAR  | sog                      | 25     |
+| offensive_zone_time   | Shayne Gostisbehere | CAR  | zone_time                | 0.52   |
+| defensive_zone_time   | Alexander Nikishin  | CAR  | zone_time                | 0.31   |
+(7 rows, all shown)
+```
+
+<!-- /inject -->
+
+## Variations
+
+- `sdv.nhl.nhlEdgeSkaterDetail({ player_id })` and the `*Top10` endpoints give
+  per-player EDGE detail; `nhlEdgeTeamLanding` the team side.
+- `sdv.nhl.nhlBoxscore({ game_id })`, `nhlShiftCharts`, `nhlClubSchedule`
+  complete the game feed.
+- For seasons of enriched play-by-play use `sdv.nhl.loadNhlPbp` — see
+  [release loaders](./release-loaders).
+
+## Next steps
+
+- **[PWHL Corsi from HockeyTech](./pwhl-hockeytech-corsi)** — hockey analytics on a different feed.
+- **[Release-dataset loaders](./release-loaders)** — `loadNhlGroups` appears there.

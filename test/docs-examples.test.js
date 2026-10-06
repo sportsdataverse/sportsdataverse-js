@@ -17,7 +17,11 @@ const FIXTURE_DIRS = {
   espn: join(REPO, 'test', 'fixtures', 'espn'),
   tools: join(REPO, 'tools', 'docs', 'fixtures'),
 };
-const GUIDES = join(REPO, 'docs', 'docs', 'guides');
+const DOC_DIRS = {
+  guides: join(REPO, 'docs', 'docs', 'guides'),
+  tutorials: join(REPO, 'docs', 'docs', 'tutorials'),
+};
+const pageOf = (ex) => join(DOC_DIRS[ex.dir ?? 'guides'], ex.target);
 
 describe('docs output-injector manifest is internally consistent', () => {
   it('has at least one example per supported family', () => {
@@ -25,9 +29,35 @@ describe('docs output-injector manifest is internally consistent', () => {
     families.has('espn').should.equal(true);
     families.has('flat').should.equal(true);
     families.has('espn-summary').should.equal(true);
+    families.has('script').should.equal(true);
   });
 
-  for (const ex of EXAMPLES) {
+  // The "script" family runs examples/<script> (test/examples.test.js covers the
+  // run itself); here only the static wiring is checked.
+  for (const ex of EXAMPLES.filter((e) => e.family === 'script')) {
+    describe(`script example "${ex.id}" (${ex.script} → ${ex.dir}/${ex.target})`, () => {
+      it('points at a script that exists and targets the tutorials dir', () => {
+        existsSync(join(REPO, 'examples', ex.script)).should.equal(true);
+        ex.dir.should.equal('tutorials');
+      });
+      it('has example + source inject markers in its target page', () => {
+        const doc = readFileSync(pageOf(ex), 'utf8');
+        for (const kind of ['example', 'source']) {
+          const open = `<!-- inject:${kind}:${ex.id} -->`;
+          const start = doc.indexOf(open);
+          start.should.be.above(-1, `${open} missing in ${ex.target}`);
+          doc.indexOf('<!-- /inject -->', start).should.be.above(start);
+        }
+      });
+      it('every declared artifact is committed under docs/static/examples/', () => {
+        for (const f of ex.artifacts ?? []) {
+          existsSync(join(REPO, 'docs', 'static', 'examples', f)).should.equal(true, f);
+        }
+      });
+    });
+  }
+
+  for (const ex of EXAMPLES.filter((e) => e.family !== 'script')) {
     describe(`example "${ex.id}" (${ex.family} → ${ex.target})`, () => {
       it('points at a fixture that exists', () => {
         const dir = FIXTURE_DIRS[ex.fixtureDir];
@@ -56,7 +86,7 @@ describe('docs output-injector manifest is internally consistent', () => {
       });
 
       it('has matching inject markers in its target guide', () => {
-        const doc = readFileSync(join(GUIDES, ex.target), 'utf8');
+        const doc = readFileSync(pageOf(ex), 'utf8');
         const open = `<!-- inject:example:${ex.id} -->`;
         const close = '<!-- /inject -->';
         const start = doc.indexOf(open);

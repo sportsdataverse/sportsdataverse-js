@@ -1,0 +1,177 @@
+---
+title: Soccer across leagues
+sidebar_label: 12. Soccer across leagues
+sidebar_position: 12
+description: ESPN soccer is league-parameterised — the league slug, the pinned convenience namespaces, and the CDN scoreboard by date.
+---
+
+# Soccer: one namespace, many competitions
+
+**What you'll build:** the LaLiga table fetched two ways (the `league`
+parameter and the pinned `sdv.laliga` namespace, shown to be the same request),
+a Premier League matchday from the CDN scoreboard, and the list of soccer
+namespaces with the slug each one pins.
+
+## Sources used
+
+| Source | Host | Call |
+| --- | --- | --- |
+| ESPN Site API (v2 standings) | `site.api.espn.com/apis/v2/sports/soccer/esp.1/standings?season=2024` | `sdv.soccer.espnSoccerStandings({ league: 'esp.1', season: 2024 })` and `sdv.laliga.espnLaligaStandings({ season: 2024 })` |
+| ESPN CDN | `cdn.espn.com/core/eng.1/scoreboard?xhr=1&date=20250201` | `sdv.epl.espnEplCdnScoreboard({ date: 20250201 })` |
+
+Offline fixtures: `test/fixtures/espn/standings_laliga_2024.json` (captured
+2026-10-06) and `test/fixtures/espn/cdn/scoreboard_epl.json.gz` (sdv-py capture).
+
+## The `league` parameter
+
+Most ESPN namespaces map to exactly one `(sport, league)` pair. Soccer maps to
+hundreds of competitions, so `sdv.soccer.*` takes a `league` slug — `eng.1`
+(Premier League), `esp.1` (LaLiga), `ger.1`, `ita.1`, `fra.1`, `usa.1` (MLS),
+`uefa.champions`, `usa.nwsl`, `fifa.world`, … — which becomes the path
+segment in `…/sports/soccer/<league>/standings`. The same slug works on every
+soccer endpoint: scoreboard, standings, teams, team roster, summary, news.
+
+For the competitions people reach for most, convenience namespaces pin the
+slug: `sdv.epl`, `sdv.laliga`, `sdv.bundesliga`, `sdv.seriea`, `sdv.ligue1`,
+`sdv.mls`, `sdv.ligamx`, `sdv.ucl`, `sdv.uel`, `sdv.nwsl`, `sdv.wwc`, and so on.
+They are generated from the same table (`LEAGUES`, filtered to `sport: soccer`
+in the script's last output), so the two forms build byte-identical requests —
+the script asserts that by comparing the two parsed tables. Cricket works the
+same way (`sdv.cricket.*` with `league: 'ipl'`, …).
+
+## The standings and the scoreboard
+
+Soccer standings add `games_played`, `ties`, `rank`, `rank_change`, `ppg`,
+`deductions` and the `advanced` flag to the common columns, with
+`points_for` / `points_against` holding goals. The `group_name` is the season
+label for a single-table league and the group or conference for MLS.
+
+`cdn_scoreboard` takes a `date` (`YYYYMMDD`) and returns one row per match
+through the same scoreboard parser as the site API: `status_type_description`
+is `Full Time` here rather than `Final`, and `season_type` is the competition
+id ESPN uses for that season.
+
+## The script
+
+<!-- inject:source:ex10 -->
+
+```js title="examples/10_soccer_cross_league.mjs"
+// 10 — Soccer: one namespace, many competitions (the `league` parameter).
+//
+// Shows: ESPN soccer is league-parameterised — `sdv.soccer.*` takes a `league`
+// slug (eng.1, esp.1, ger.1, usa.1, …), and the convenience namespaces
+// (`sdv.epl`, `sdv.laliga`, `sdv.bundesliga`, `sdv.mls`, …) pin the slug. The
+// same function on `sdv.soccer` with `{ league }` and on `sdv.laliga` without
+// it are the same request. Also the ESPN CDN scoreboard, which takes a date.
+//
+// Sources: ESPN Site API v2 — site.api.espn.com/apis/v2/sports/soccer/esp.1/standings?season=2024
+//          ESPN CDN — cdn.espn.com/core/eng.1/scoreboard?xhr=1&date=20250201
+// Offline fixtures: test/fixtures/espn/standings_laliga_2024.json (captured 2026-10-06),
+//                   test/fixtures/espn/cdn/scoreboard_epl.json.gz (sdv-py capture).
+
+import sdv from 'sportsdataverse';
+import { setup } from './_offline.mjs';
+import { printTable } from './_util.mjs';
+
+setup();
+
+// The two spellings resolve to the same request.
+const viaParam = await sdv.soccer.espnSoccerStandings({ league: 'esp.1', season: 2024, parsed: true });
+const viaNamespace = await sdv.laliga.espnLaligaStandings({ season: 2024, parsed: true });
+console.log(`sdv.soccer + { league: 'esp.1' } → ${viaParam.length} rows; sdv.laliga → ${viaNamespace.length} rows; same table: ${JSON.stringify(viaParam) === JSON.stringify(viaNamespace)}`);
+
+printTable(
+  viaParam
+    .sort((a, b) => a.rank - b.rank)
+    .map((t) => ({ rank: t.rank, team: t.team_display_name, gp: t.games_played, w: t.wins, d: t.ties, l: t.losses, gf: t.points_for, ga: t.points_against, gd: t.point_differential, pts: t.points })),
+  ['rank', 'team', 'gp', 'w', 'd', 'l', 'gf', 'ga', 'gd', 'pts'],
+  8,
+  'LaLiga 2024-25 (espnSoccerStandings, league = esp.1)'
+);
+
+const epl = await sdv.epl.espnEplCdnScoreboard({ date: 20250201, parsed: true });
+printTable(
+  epl.map((g) => ({ game_id: g.game_id, date: g.date.slice(0, 16), match: g.short_name, status: g.status_type_description, home: g.home_abbreviation, hs: g.home_score, away: g.away_abbreviation, as: g.away_score })),
+  ['game_id', 'date', 'match', 'status', 'home', 'hs', 'away', 'as'],
+  6,
+  'Premier League, 2025-02-01 (espnEplCdnScoreboard)'
+);
+
+// Which soccer namespaces exist, and the slug each one pins.
+import { LEAGUES } from 'sportsdataverse';
+printTable(
+  LEAGUES.filter((l) => l.sport === 'soccer').map((l) => ({ namespace: `sdv.${l.prefix}`, slug: l.league, league_param: l.league_param ? 'yes' : '' })),
+  ['namespace', 'slug', 'league_param'],
+  12,
+  'Soccer namespaces (LEAGUES)'
+);
+```
+
+<!-- /inject -->
+
+## Output
+
+<!-- inject:example:ex10 -->
+
+Output of `node examples/10_soccer_cross_league.mjs` (offline, against the committed fixtures):
+
+```text
+sdv.soccer + { league: 'esp.1' } → 20 rows; sdv.laliga → 20 rows; same table: true
+
+## LaLiga 2024-25 (espnSoccerStandings, league = esp.1)
+| rank | team            | gp | w  | d  | l  | gf  | ga | gd | pts |
+| ---- | --------------- | -- | -- | -- | -- | --- | -- | -- | --- |
+| 1    | Barcelona       | 38 | 28 | 4  | 6  | 102 | 39 | 63 | 88  |
+| 2    | Real Madrid     | 38 | 26 | 6  | 6  | 78  | 38 | 40 | 84  |
+| 3    | Atlético Madrid | 38 | 22 | 10 | 6  | 68  | 30 | 38 | 76  |
+| 4    | Athletic Club   | 38 | 19 | 13 | 6  | 54  | 29 | 25 | 70  |
+| 5    | Villarreal      | 38 | 20 | 10 | 8  | 71  | 51 | 20 | 70  |
+| 6    | Real Betis      | 38 | 16 | 12 | 10 | 57  | 50 | 7  | 60  |
+| 7    | Celta Vigo      | 38 | 16 | 7  | 15 | 59  | 57 | 2  | 55  |
+| 8    | Rayo Vallecano  | 38 | 13 | 13 | 12 | 41  | 45 | -4 | 52  |
+(20 rows, first 8 shown)
+
+## Premier League, 2025-02-01 (espnEplCdnScoreboard)
+| game_id | date             | match     | status    | home | hs | away | as |
+| ------- | ---------------- | --------- | --------- | ---- | -- | ---- | -- |
+| 704518  | 2025-02-01T12:30 | BHA @ NFO | Full Time | NFO  | 7  | BHA  | 0  |
+| 704511  | 2025-02-01T15:00 | LIV @ BOU | Full Time | BOU  | 0  | LIV  | 2  |
+| 704509  | 2025-02-01T15:00 | LEI @ EVE | Full Time | EVE  | 4  | LEI  | 0  |
+| 704510  | 2025-02-01T15:00 | SOU @ IPS | Full Time | IPS  | 1  | SOU  | 2  |
+| 704517  | 2025-02-01T15:00 | FUL @ NEW | Full Time | NEW  | 1  | FUL  | 2  |
+| 704514  | 2025-02-01T17:30 | AVL @ WOL | Full Time | WOL  | 2  | AVL  | 0  |
+(6 rows, all shown)
+
+## Soccer namespaces (LEAGUES)
+| namespace      | slug           | league_param |
+| -------------- | -------------- | ------------ |
+| sdv.soccer     | eng.1          |              |
+| sdv.epl        | eng.1          |              |
+| sdv.laliga     | esp.1          |              |
+| sdv.bundesliga | ger.1          |              |
+| sdv.seriea     | ita.1          |              |
+| sdv.ligue1     | fra.1          |              |
+| sdv.mls        | usa.1          |              |
+| sdv.ligamx     | mex.1          |              |
+| sdv.ucl        | uefa.champions |              |
+| sdv.uel        | uefa.europa    |              |
+| sdv.nwsl       | usa.nwsl       |              |
+| sdv.wwc        | fifa.wwc       |              |
+(13 rows, first 12 shown)
+```
+
+<!-- /inject -->
+
+## Variations
+
+- `sdv.soccer.espnSoccerSummary({ league: 'eng.1', event_id })` gives match
+  details with `plays` (key events) and `boxscore_*`.
+- Beyond ESPN: `sdv.mls.mls*` wraps MLS's stats API, `sdv.nwsl.nwsl*` the
+  NWSL's, and `sdv.asa.*` American Soccer Analysis (xG, goals added).
+- `LEAGUES.filter((l) => l.league_param)` lists the namespaces that take a
+  slug (`soccer`, `cricket`).
+
+## Next steps
+
+- **[The cross-league surface](./cross-league)** — the scope rules behind this.
+- **[The Odds API and market math](./odds-api-math)** — a provider namespace.

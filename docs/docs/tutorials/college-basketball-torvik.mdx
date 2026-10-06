@@ -1,0 +1,185 @@
+---
+title: "College basketball: T-Rank and box scores"
+sidebar_label: 8. College basketball
+sidebar_position: 8
+description: BartTorvik's CSV ratings behind the same parsed contract, then ESPN's boxscore_player and boxscore_team sub-frames for one game.
+---
+
+# College basketball: BartTorvik ratings and an ESPN box score
+
+**What you'll build:** the top of BartTorvik's T-Rank table, a game's top
+scorers from ESPN's player box score, and the team totals pivoted into a
+side-by-side table.
+
+## Sources used
+
+| Source | Host | Call |
+| --- | --- | --- |
+| BartTorvik / T-Rank | `barttorvik.com/2024_team_results.csv` | `sdv.torvik.torvikRatings({ year: 2024 })` |
+| ESPN Site API v2 | `site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary?event=401600379` | `sdv.mbb.espnMbbSummary({ section: 'boxscore_player' \| 'boxscore_team' })` |
+
+Offline fixtures: `test/fixtures/torvik/torvik_ratings.csv` (3 rows of the
+2023-24 results CSV, captured 2026-06-18) and
+`test/fixtures/espn/basketball_pbp/mbb_summary_401600379.json.gz` (Maryland at
+Ohio State, 2024-02-10).
+
+## A provider that serves CSV
+
+Not every source is JSON. BartTorvik publishes CSVs (some with headers, some
+positional) and a couple of headerless JSON arrays, and rejects default
+programmatic user agents. The `torvik` family's runtime sends a browser-like
+UA and hands the raw body to a parser that knows each endpoint's format —
+`torvikRatings` reads the headed CSV, `torvikPlayerStats` the 67-column
+positional one (column names ported from hoopR). From the outside it is the
+same `{ parsed: true }` call as everything else, returning rows keyed
+`rank`, `team`, `conf`, `record`, `adjoe`, `adjde`, `barthag`, `adjt`, `wab`,
+and ~40 more.
+
+Values come back as **strings** (CSV has no types); the script casts the
+handful it prints. The "Duplicate headers found and renamed" line in the
+output is papaparse noting that Torvik's CSV repeats a `rank` header — the
+second becomes `rank_1`.
+
+## Two box-score sub-frames
+
+`summary` gives the box score two ways:
+
+- `boxscore_player` — one row per player with `athlete_display_name`,
+  `athlete_position`, `starter`, `did_not_play`, and the stat columns named
+  after ESPN's labels (`minutes`, `points`, `rebounds`, `assists`,
+  `field_goals_made_field_goals_attempted` as the `4-6` display string, …).
+- `boxscore_team` — **long form**: one row per team × stat with `stat_label`,
+  `stat_display_value` and `home_away`. Long form is the honest shape (ESPN's
+  stat list differs by sport), and pivoting it to one row per stat with a
+  column per team is six lines of JavaScript, which the script shows.
+
+Box-score numbers are also strings here (`"26"`), so sort after `Number()`.
+
+## The script
+
+<!-- inject:source:ex06 -->
+
+```js title="examples/06_college_basketball_torvik_and_espn.mjs"
+// 06 — Men's college basketball: BartTorvik ratings + an ESPN box score.
+//
+// Shows: a non-ESPN provider on the same `{ parsed: true }` contract. BartTorvik
+// serves CSV (with a header for team results) behind a browser-UA check — the
+// `torvik` runtime handles both, so the wrapper returns rows like any other. Then
+// the ESPN `summary` dispatcher's `boxscore_player` / `boxscore_team` sub-frames
+// for one game (team stats are long-form: one row per team × stat).
+//
+// Sources: BartTorvik — barttorvik.com/2024_team_results.csv
+//          ESPN Site API v2 — site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary?event=401600379
+// Offline fixtures: test/fixtures/torvik/torvik_ratings.csv (2026-06-18, 3 rows),
+//                   test/fixtures/espn/basketball_pbp/mbb_summary_401600379.json.gz (Maryland at Illinois, 2024-02-10).
+
+import sdv from 'sportsdataverse';
+import { setup } from './_offline.mjs';
+import { printTable, round } from './_util.mjs';
+
+setup();
+
+const ratings = await sdv.torvik.torvikRatings({ year: 2024, parsed: true });
+printTable(
+  ratings.map((r) => ({
+    rank: Number(r.rank),
+    team: r.team,
+    conf: r.conf,
+    record: r.record,
+    adj_oe: round(Number(r.adjoe), 1),
+    adj_de: round(Number(r.adjde), 1),
+    barthag: round(Number(r.barthag), 3),
+    adj_t: round(Number(r.adjt), 1),
+  })),
+  ['rank', 'team', 'conf', 'record', 'adj_oe', 'adj_de', 'barthag', 'adj_t'],
+  5,
+  'T-Rank 2023-24 (torvik_ratings)'
+);
+
+const EVENT_ID = 401600379;
+const players = await sdv.mbb.espnMbbSummary({ event_id: EVENT_ID, parsed: true, section: 'boxscore_player' });
+const teams = await sdv.mbb.espnMbbSummary({ event_id: EVENT_ID, parsed: true, section: 'boxscore_team' });
+console.log(`${players.length} player rows, ${teams.length} team-stat rows`);
+
+printTable(
+  players
+    .filter((p) => !p.did_not_play)
+    .map((p) => ({ team: p.team_abbreviation, player: p.athlete_short_name, pos: p.athlete_position, min: Number(p.minutes), pts: Number(p.points), fg: p.field_goals_made_field_goals_attempted, reb: Number(p.rebounds), ast: Number(p.assists) }))
+    .sort((a, b) => b.pts - a.pts),
+  ['team', 'player', 'pos', 'min', 'pts', 'fg', 'reb', 'ast'],
+  8,
+  'Top scorers (boxscore_player)'
+);
+
+// Pivot the long team frame to one row per stat with a column per team.
+const abbrs = [...new Set(teams.map((t) => t.team_abbreviation))];
+const byStat = new Map();
+for (const t of teams) {
+  if (!byStat.has(t.stat_label)) byStat.set(t.stat_label, { stat: t.stat_label });
+  byStat.get(t.stat_label)[t.team_abbreviation] = t.stat_display_value;
+}
+printTable([...byStat.values()], ['stat', ...abbrs], 8, 'Team totals (boxscore_team, pivoted)');
+```
+
+<!-- /inject -->
+
+## Output
+
+<!-- inject:example:ex06 -->
+
+Output of `node examples/06_college_basketball_torvik_and_espn.mjs` (offline, against the committed fixtures):
+
+```text
+
+## T-Rank 2023-24 (torvik_ratings)
+| rank | team        | conf | record | adj_oe | adj_de | barthag | adj_t |
+| ---- | ----------- | ---- | ------ | ------ | ------ | ------- | ----- |
+| 1    | Connecticut | BE   | 37-3   | 128    | 91.3   | 0.98    | 64.6  |
+| 2    | Houston     | B12  | 32-5   | 119.6  | 86.5   | 0.977   | 63.4  |
+| 3    | Purdue      | B10  | 34-5   | 126    | 94.5   | 0.965   | 67.1  |
+(3 rows, all shown)
+30 player rows, 46 team-stat rows
+
+## Top scorers (boxscore_player)
+| team | player       | pos | min | pts | fg    | reb | ast |
+| ---- | ------------ | --- | --- | --- | ----- | --- | --- |
+| MD   | J. Young     | G   | 48  | 26  | 8-22  | 7   | 4   |
+| OSU  | B. Thornton  | G   | 43  | 24  | 10-20 | 7   | 4   |
+| MD   | D. Scott     | F   | 47  | 19  | 5-9   | 7   | 1   |
+| OSU  | R. Gayle Jr. | G   | 37  | 17  | 4-12  | 2   | 3   |
+| MD   | J. Reese     | F   | 49  | 13  | 4-15  | 13  | 2   |
+| MD   | M. Traore    | F   | 20  | 8   | 4-6   | 5   | 0   |
+| OSU  | J. Battle    | F   | 44  | 8   | 4-11  | 6   | 0   |
+| OSU  | F. Okpara    | F   | 33  | 7   | 2-3   | 6   | 0   |
+(19 rows, first 8 shown)
+
+## Team totals (boxscore_team, pivoted)
+| stat               | MD    | OSU   |
+| ------------------ | ----- | ----- |
+| FG                 | 24-62 | 29-66 |
+| Field Goal %       | 39    | 44    |
+| 3PT                | 7-17  | 4-17  |
+| Three Point %      | 41    | 24    |
+| FT                 | 20-30 | 17-20 |
+| Free Throw %       | 67    | 85    |
+| Rebounds           | 42    | 39    |
+| Offensive Rebounds | 11    | 6     |
+(23 rows, first 8 shown)
+```
+
+<!-- /inject -->
+
+## Variations
+
+- `sdv.torvik.torvikTeamFactors`, `torvikGameStats`, `torvikGameSchedule`,
+  `torvikPlayerStats` cover the rest of the site; women's T-Rank is
+  `sdv.torvik.bartWbb*`.
+- `sdv.mbb.kenpom*` wraps KenPom for subscribers (login via `KENPOM_EMAIL` /
+  `KENPOM_PW`).
+- The stats.ncaa.org-derived season releases (`sdv.mbb.loadMbbPbp`, …) are the
+  bulk path; see [release loaders](./release-loaders).
+
+## Next steps
+
+- **[NBA play-by-play shots](./nba-pbp-shots)** — the `plays` sub-frame.
+- **[MLB: Statcast and the Stats API](./mlb-statcast-stats-api)** — another CSV-and-JSON pair.

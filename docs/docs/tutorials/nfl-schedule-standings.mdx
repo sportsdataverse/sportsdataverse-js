@@ -1,0 +1,176 @@
+---
+title: NFL schedule and standings
+sidebar_label: 6. NFL schedule + standings
+sidebar_position: 6
+description: Two ESPN calls on one namespace joined on team_id — week-1 games annotated with each team's end-of-season record and seed.
+---
+
+# NFL: a week's schedule joined to the season standings
+
+**What you'll build:** the 2024 week-1 slate, a join that annotates each game
+with both teams' final records and playoff seeds, and an AFC table — three
+tables from two calls, joined on the string `team_id` both parsers emit.
+
+## Sources used
+
+| Source | Host | Call |
+| --- | --- | --- |
+| ESPN Site API v2 | `site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=2024&week=1&seasontype=2` | `sdv.nfl.espnNflScoreboard({ dates: 2024, week: 1, season_type: 2 })` |
+| ESPN Site API (v2 standings) | `site.api.espn.com/apis/v2/sports/football/nfl/standings?season=2024` | `sdv.nfl.espnNflStandings({ season: 2024 })` |
+
+Offline fixtures: `test/fixtures/espn/scoreboard_nfl_2024_w1.json`,
+`standings_nfl_2024.json` (both captured 2026-10-06).
+
+## Selecting a week
+
+The NFL scoreboard takes `dates` (a season year or a `YYYYMMDD` day), `week`,
+and `season_type` (`1` preseason, `2` regular season, `3` postseason). Pass all
+three to pin one week; ESPN returns the 16 games of 2024 week 1 including the
+Brazil game (`GB VS PHI`, a neutral site — note the `VS` in `short_name` where
+home games say `@`).
+
+## Joining on `team_id`
+
+Every id column is a decimal string in v4, so the scoreboard's `home_id` /
+`away_id` and the standings' `team_id` compare with `===` and a `Map` keyed by
+id is all the join needs. The script builds `byId` from the standings and looks
+up both sides of each game. If you have ever lost rows to an int-vs-string
+mismatch when joining ESPN payloads by hand (the raw scoreboard sends
+`competitors[].id` as a string but `team.id` elsewhere as a number), this is
+the rule that prevents it.
+
+The join output is the fun one: KC and PHI, who opened the season against each
+other's eventual conference rivals, finished 15-2 and 14-3.
+
+## The standings columns
+
+The NFL standings add `ties`, `division_record`, `division_wins` /
+`division_losses` and `locked_div_rank` to the common set (`wins`, `losses`,
+`win_percent`, `points_for`, `points_against`, `point_differential`,
+`playoff_seed`, `streak`, `clincher`). `group_abbreviation` is the conference
+(`AFC` / `NFC`), which the script filters on for the third table.
+
+## The script
+
+<!-- inject:source:ex04 -->
+
+```js title="examples/04_nfl_schedule_and_standings.mjs"
+// 04 — NFL week-1 schedule + season standings, joined on team_id.
+//
+// Shows: two ESPN calls on the same namespace and a join on the string
+// `team_id` that both parsers emit (ids are ALWAYS decimal strings in v4, so a
+// Map keyed by id works across endpoints).
+//
+// Sources: ESPN Site API v2 —
+//   site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=2024&week=1&seasontype=2
+//   site.api.espn.com/apis/v2/sports/football/nfl/standings?season=2024
+// Offline fixtures: test/fixtures/espn/scoreboard_nfl_2024_w1.json, standings_nfl_2024.json
+// (both captured 2026-10-06).
+
+import sdv from 'sportsdataverse';
+import { setup } from './_offline.mjs';
+import { printTable, round } from './_util.mjs';
+
+setup();
+
+const games = await sdv.nfl.espnNflScoreboard({ dates: 2024, week: 1, season_type: 2, parsed: true });
+const standings = await sdv.nfl.espnNflStandings({ season: 2024, parsed: true });
+console.log(`${games.length} week-1 games; ${standings.length} teams in the standings`);
+
+printTable(
+  games,
+  ['game_id', 'date', 'short_name', 'home_score', 'away_score', 'venue_full_name'],
+  6,
+  'Week 1, 2024 (parsed scoreboard)'
+);
+
+// Join: final-season record for both teams of each week-1 game.
+const byId = new Map(standings.map((s) => [s.team_id, s]));
+const joined = games.map((g) => {
+  const h = byId.get(g.home_id);
+  const a = byId.get(g.away_id);
+  return {
+    short_name: g.short_name,
+    home_final: h ? `${h.wins}-${h.losses}${h.ties ? `-${h.ties}` : ''}` : '',
+    away_final: a ? `${a.wins}-${a.losses}${a.ties ? `-${a.ties}` : ''}` : '',
+    home_seed: h?.playoff_seed || '',
+    away_seed: a?.playoff_seed || '',
+  };
+});
+printTable(joined, ['short_name', 'home_final', 'away_final', 'home_seed', 'away_seed'], 6, 'Week-1 matchups with end-of-season records');
+
+// Division table from the standings frame.
+printTable(
+  standings
+    .filter((s) => s.group_abbreviation === 'AFC')
+    .sort((a, b) => b.win_percent - a.win_percent)
+    .map((s) => ({ team: s.team_abbreviation, w: s.wins, l: s.losses, pct: round(s.win_percent, 3), pf: s.points_for, pa: s.points_against, diff: s.point_differential })),
+  ['team', 'w', 'l', 'pct', 'pf', 'pa', 'diff'],
+  8,
+  'AFC by win percentage'
+);
+```
+
+<!-- /inject -->
+
+## Output
+
+<!-- inject:example:ex04 -->
+
+Output of `node examples/04_nfl_schedule_and_standings.mjs` (offline, against the committed fixtures):
+
+```text
+16 week-1 games; 32 teams in the standings
+
+## Week 1, 2024 (parsed scoreboard)
+| game_id   | date              | short_name | home_score | away_score | venue_full_name        |
+| --------- | ----------------- | ---------- | ---------- | ---------- | ---------------------- |
+| 401671789 | 2024-09-06T00:40Z | BAL @ KC   | 27         | 20         | Arrowhead Stadium      |
+| 401671805 | 2024-09-07T00:15Z | GB VS PHI  | 34         | 29         | Corinthians Arena      |
+| 401671744 | 2024-09-08T17:00Z | PIT @ ATL  | 10         | 18         | Mercedes-Benz Stadium  |
+| 401671617 | 2024-09-08T17:00Z | ARI @ BUF  | 34         | 28         | Highmark Stadium (Old) |
+| 401671719 | 2024-09-08T17:00Z | TEN @ CHI  | 24         | 17         | Soldier Field          |
+| 401671628 | 2024-09-08T17:00Z | NE @ CIN   | 10         | 16         | Paycor Stadium         |
+(16 rows, first 6 shown)
+
+## Week-1 matchups with end-of-season records
+| short_name | home_final | away_final | home_seed | away_seed |
+| ---------- | ---------- | ---------- | --------- | --------- |
+| BAL @ KC   | 15-2       | 12-5       | 1         | 3         |
+| GB VS PHI  | 14-3       | 11-6       | 2         | 7         |
+| PIT @ ATL  | 8-9        | 10-7       | 9         | 6         |
+| ARI @ BUF  | 13-4       | 8-9        | 2         | 10        |
+| TEN @ CHI  | 5-12       | 3-14       | 13        | 16        |
+| NE @ CIN   | 9-8        | 4-13       | 8         | 13        |
+(16 rows, first 6 shown)
+
+## AFC by win percentage
+| team | w  | l | pct   | pf  | pa  | diff |
+| ---- | -- | - | ----- | --- | --- | ---- |
+| KC   | 15 | 2 | 0.882 | 385 | 326 | 59   |
+| BUF  | 13 | 4 | 0.765 | 525 | 368 | 157  |
+| BAL  | 12 | 5 | 0.706 | 518 | 361 | 157  |
+| LAC  | 11 | 6 | 0.647 | 402 | 301 | 101  |
+| HOU  | 10 | 7 | 0.588 | 372 | 372 | 0    |
+| PIT  | 10 | 7 | 0.588 | 380 | 347 | 33   |
+| DEN  | 10 | 7 | 0.588 | 425 | 311 | 114  |
+| CIN  | 9  | 8 | 0.529 | 472 | 434 | 38   |
+(16 rows, first 8 shown)
+```
+
+<!-- /inject -->
+
+## Variations
+
+- The native NFL.com family (`sdv.nfl.nflStandings`, `sdv.nfl.nflSchedule`, …)
+  covers the same ground from `api.nfl.com` with an auto-minted token; the
+  [NFL guide](../guides/nfl) shows it.
+- To fan out across a season, loop `week` 1–18 with a small delay — ESPN's
+  site API is forgiving, but keep it sequential.
+- `sdv.nfl.loadNflSchedules` reads the nflverse release instead of calling
+  ESPN at all; see [release loaders](./release-loaders).
+
+## Next steps
+
+- **[College football rankings and drives](./cfb-rankings-pbp)** — the football play-by-play shape.
+- **[Release-dataset loaders](./release-loaders)** — season-scale data without the per-game calls.
