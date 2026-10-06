@@ -68,7 +68,7 @@ const GAME_SHIFTS_DEF: WrapperDef = {
  * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
  * @param params.view - `number | string` — the `view` query parameter; default `gameshifts`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechGameShifts({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -118,7 +118,7 @@ const GAME_SUMMARY_DEF: WrapperDef = {
  * @param params.feed - `number | string` — the `feed` query parameter; default `gc`.
  * @param params.view - `number | string` — the `view` query parameter; default `gamesummary`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechGameSummary({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -192,7 +192,7 @@ const LEADERS_DEF: WrapperDef = {
  * @param params.feed - `number | string` — the `feed` query parameter; default `statviewfeed`.
  * @param params.view - `number | string` — the `view` query parameter; default `leadersExtended`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechLeaders({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -242,7 +242,7 @@ const PBP_DEF: WrapperDef = {
  * @param params.feed - `number | string` — the `feed` query parameter; default `statviewfeed`.
  * @param params.view - `number | string` — the `view` query parameter; default `gameCenterPlayByPlay`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechPbp({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -303,7 +303,7 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
  * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
  * @param params.view - `number | string` — the `view` query parameter; default `player`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechPlayerGameLog({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -353,7 +353,7 @@ const PLAYER_SEARCH_DEF: WrapperDef = {
  * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
  * @param params.view - `number | string` — the `view` query parameter; default `searchplayers`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechPlayerSearch({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -409,7 +409,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
  * @param params.view - `number | string` — the `view` query parameter; default `player`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechPlayerStats({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -464,7 +464,7 @@ const PLAYOFF_BRACKET_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — the `league_id` query parameter.
  * @param params.view - `number | string` — the `view` query parameter; default `brackets`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechPlayoffBracket({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -537,7 +537,7 @@ const SCHEDULE_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — the `league_id` query parameter.
  * @param params.view - `number | string` — the `view` query parameter; default `scorebar`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechSchedule({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -605,7 +605,7 @@ const SCOREBAR_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — the `league_id` query parameter.
  * @param params.view - `number | string` — the `view` query parameter; default `scorebar`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechScorebar({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -650,7 +650,7 @@ const SEASONS_DEF: WrapperDef = {
  * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
  * @param params.view - `number | string` — the `view` query parameter; default `seasons`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechSeasons({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -729,7 +729,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.special - `number | string` — the `special` query parameter; default `false`.
  * @param params.sort - `number | string` — the `sort` query parameter; default `points`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechStandings({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -785,7 +785,7 @@ const STATS_DEF: WrapperDef = {
  * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
  * @param params.view - `number | string` — the `view` query parameter; default `statviewtype`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechStats({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -840,7 +840,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
  * @param params.view - `number | string` — the `view` query parameter; default `roster`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechTeamRoster({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -890,7 +890,7 @@ const TEAMS_DEF: WrapperDef = {
  * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
  * @param params.view - `number | string` — the `view` query parameter; default `teamsbyseason`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechTeams({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */
@@ -940,7 +940,7 @@ const TRANSACTIONS_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — the `league_id` query parameter.
  * @param params.view - `number | string` — the `view` query parameter; default `transactions`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechTransactions({});
  * @see https://js.sportsdataverse.org/docs/reference/hockeytech#native-api--hockeytech--leaguestat
  */

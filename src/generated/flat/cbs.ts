@@ -147,7 +147,7 @@ const BULK_DEF: WrapperDef = {
  * @param params.featured_game_resource - `number | string` — CSV list of game IDs to retrieve.
  * @param params.golf_event_markets_resource - `number | string` — CSV list of golf event markets IDs to retrieve.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsBulk({});
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -201,7 +201,7 @@ const CLIENT_CONFIG_DEF: WrapperDef = {
  * @param params.classifier - `number | string` — View option. Filter by a certain classifier.
  * @param params.key_name - `number | string` — View option. Filter by a custom key name.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsClientConfig({ client_name: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -233,7 +233,7 @@ const COACH_RANKINGS_DEF: WrapperDef = {
  *
  * @param params.coach_id - `number | string` — Numerical player ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsCoachRankings({ coach_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -271,7 +271,7 @@ const COACH_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
  * @param params.coach_id - `number | string` — Numerical player ID.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: team.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsCoachTeamAssociations({ coach_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -315,7 +315,7 @@ const DIVISION_SUBDIVISIONS_DEF: WrapperDef = {
  * @param params.sub_division_id - `number | string` — View option for rendering only a certain subdivision.
  * @param params.name - `number | string` — View option for a csv of subdivsion names to render.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsDivisionSubdivisions({ division_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -342,7 +342,7 @@ const ENDPOINT_REGISTRY_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/endpoint/registry`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsEndpointRegistry({});
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -385,7 +385,7 @@ const EVENT_DEF: WrapperDef = {
  * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: entrants, venues, leaderboard, weather, markets.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsEvent({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -417,7 +417,7 @@ const EVENT_ENTRANTS_DEF: WrapperDef = {
  *
  * @param params.event_id - `number | string` — Numerical event ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsEventEntrants({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -449,7 +449,7 @@ const EVENT_LEADERBOARD_DEF: WrapperDef = {
  *
  * @param params.event_id - `number | string` — Numerical event ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsEventLeaderboard({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -481,7 +481,7 @@ const EVENT_SEASONS_DEF: WrapperDef = {
  *
  * @param params.event_id - `number | string` — Numerical event ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsEventSeasons({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -513,7 +513,7 @@ const EVENT_VENUES_DEF: WrapperDef = {
  *
  * @param params.event_id - `number | string` — Numerical event ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsEventVenues({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -556,7 +556,7 @@ const GAME_DEF: WrapperDef = {
  * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: homeTeam, awayTeam, league, lineup, odds, players, standings, conference, division, probablePlayers, player, playerTeamAssociations, injuries, transactions, depthCharts, metaData, boxscore, venue, scoringLeaders, scoringPlayerStats, scoringScoreboard, scoringScores, scoringYtdPlayerStats, scoringYtdTeamStats, scoringRosters, scoringPlays, scoringTeamStats, scoringBoxscores, gameOdds, gameOutcomes, ticket, scoringDrives, scoringWinProb, gameHqOdds, weather, featured, gameProps, bettingSplits, gameRTWP.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGame({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -588,7 +588,7 @@ const GAME_BETTING_SPLITS_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameBettingSplits({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -621,7 +621,7 @@ const GAME_BOXSCORE_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameBoxscore({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -653,7 +653,7 @@ const GAME_CONTENT_PREVIEW_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameContentPreview({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -685,7 +685,7 @@ const GAME_CONTENT_RECAP_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameContentRecap({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -723,7 +723,7 @@ const GAME_CONTENT_STORY_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.game_ids_story_tags - `number | string` — The tags used to retrieve stories.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameContentStory({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -756,7 +756,7 @@ const GAME_FEATURED_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameFeatured({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -794,7 +794,7 @@ const GAME_LINEUP_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: playerTeamAssociations, injuries, metaData, playerStats.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameLineup({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -852,7 +852,7 @@ const GAME_ODDS_DEF: WrapperDef = {
  * @param params.model - `number | string` — This value can be used set the model to be used.
  * @param params.show_hidden_odds - `number | string` — If set to 1, show the odds that has been hidden within the market and/or consensus nodes.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameOdds({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -885,7 +885,7 @@ const GAME_ODDS_HQ_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameOddsHq({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -917,7 +917,7 @@ const GAME_OUTCOMES_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameOutcomes({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -961,7 +961,7 @@ const GAME_PROBABLE_PLAYERS_DEF: WrapperDef = {
  * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: player, playerTeamAssociations, injuries, transactions, depthCharts, metaData.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameProbablePlayers({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1019,7 +1019,7 @@ const GAME_PROPS_DEF: WrapperDef = {
  * @param params.state - `number | string` — This value can be used to specify a state.
  * @param params.include_inactive_markets - `number | string` — This value can be used to filter out inactive markets.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameProps({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1051,7 +1051,7 @@ const GAME_RTWP_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameRtwp({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1084,7 +1084,7 @@ const GAME_RUWT_HIGHLIGHTS_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameRuwtHighlights({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1116,7 +1116,7 @@ const GAME_SCORING_BOXSCORES_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringBoxscores({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1148,7 +1148,7 @@ const GAME_SCORING_DRIVES_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringDrives({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1180,7 +1180,7 @@ const GAME_SCORING_LEADERS_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringLeaders({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1212,7 +1212,7 @@ const GAME_SCORING_PLAYER_STATS_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringPlayerStats({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1244,7 +1244,7 @@ const GAME_SCORING_PLAYS_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringPlays({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1276,7 +1276,7 @@ const GAME_SCORING_ROSTERS_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringRosters({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1308,7 +1308,7 @@ const GAME_SCORING_SCOREBOARD_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringScoreboard({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1340,7 +1340,7 @@ const GAME_SCORING_SCORES_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringScores({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1372,7 +1372,7 @@ const GAME_SCORING_TEAM_STATS_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringTeamStats({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1404,7 +1404,7 @@ const GAME_SCORING_WINPROB_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringWinprob({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1436,7 +1436,7 @@ const GAME_SCORING_YTD_PLAYER_STATS_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringYtdPlayerStats({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1468,7 +1468,7 @@ const GAME_SCORING_YTD_TEAM_STATS_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringYtdTeamStats({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1500,7 +1500,7 @@ const GAME_TICKET_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameTicket({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1533,7 +1533,7 @@ const GAME_WEATHER_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameWeather({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1565,7 +1565,7 @@ const GOLF_EVENT_MARKETS_DEF: WrapperDef = {
  *
  * @param params.event_id - `number | string` — Numerical event ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGolfEventMarkets({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1603,7 +1603,7 @@ const GOLF_PLAYER_MARKETS_DEF: WrapperDef = {
  * @param params.player_id - `number | string` — Numerical player ID.
  * @param params.event_id - `number | string` — View option. Filter by eventId.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGolfPlayerMarkets({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1646,7 +1646,7 @@ const GOLFER_RESULTS_DEF: WrapperDef = {
  * @param params.season_year - `number | string` — View option. Filter by seasonType.
  * @param params.season_id - `number | string` — View option. Filter by seasonId.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGolferResults({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1684,7 +1684,7 @@ const LEAGUE_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — Numerical league ID.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: teams, players, standings, conference, division, polls, teamSeasons.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsLeague({ league_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1722,7 +1722,7 @@ const LEAGUE_TEAMS_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — Numerical league Id - gets team from team table not teams for season.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: players, standings, conference, division, playerTeamAssociations, injuries, transactions, depthCharts, polls, teamSeasons, sportsLineStandings.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsLeagueTeams({ league_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1754,7 +1754,7 @@ const ODDS_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — Numerical game ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsOdds({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1802,7 +1802,7 @@ const PLAYER_DEF: WrapperDef = {
  * @param params.year - `number | string` — Optional year in YYYY format (for Transactions only).
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: playerTeamAssociations, injuries, transactions, depthCharts, metaData, playerStats, standings, rankings, playerOutlook, draftInfo, combineData, positionRankings, gameStats, encyclopedia, golferResults, playerGolfMetadata, playerFutures, golferMarkets, recruitTeamAssociations, coachTeamAssociations, recruitRankings, coachRankings.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayer({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1834,7 +1834,7 @@ const PLAYER_COMBINE_DATA_DEF: WrapperDef = {
  *
  * @param params.player_id - `number | string` — Numerical player ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerCombineData({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1878,7 +1878,7 @@ const PLAYER_DEPTH_CHARTS_DEF: WrapperDef = {
  * @param params.position - `number | string` — A csv of positions to filter with.
  * @param params.pitch_pos - `number | string` — A csv of pitch positions to filter with (baseball only).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerDepthCharts({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1926,7 +1926,7 @@ const PLAYER_DRAFT_INFO_DEF: WrapperDef = {
  * @param params.season_type - `number | string` — View option, filter by seasonType Allowed: regular, pre, post.
  * @param params.season_id - `number | string` — View option, filter by seasonId.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerDraftInfo({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -1969,7 +1969,7 @@ const PLAYER_ENCYCLOPEDIA_DEF: WrapperDef = {
  * @param params.season_year - `number | string` — View option. Filter by seasonType.
  * @param params.season_id - `number | string` — View option. Filter by seasonId.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerEncyclopedia({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2001,7 +2001,7 @@ const PLAYER_FUTURES_DEF: WrapperDef = {
  *
  * @param params.player_id - `number | string` — Numerical player ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerFutures({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2049,7 +2049,7 @@ const PLAYER_GAME_STATS_DEF: WrapperDef = {
  * @param params.season_year - `number | string` — Season Year in YYYY format.
  * @param params.season_type - `number | string` — Csv list of pre, regular, or post Allowed: pre, regular, post.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerGameStats({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2082,7 +2082,7 @@ const PLAYER_HOCKEY_META_DEF: WrapperDef = {
  *
  * @param params.player_id - `number | string` — Numerical player ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerHockeyMeta({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2120,7 +2120,7 @@ const PLAYER_INJURIES_DEF: WrapperDef = {
  * @param params.player_id - `number | string` — Numerical player ID.
  * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerInjuries({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2153,7 +2153,7 @@ const PLAYER_META_BASEBALL_DEF: WrapperDef = {
  *
  * @param params.player_id - `number | string` — Numerical player ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerMetaBaseball({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2186,7 +2186,7 @@ const PLAYER_META_GOLF_DEF: WrapperDef = {
  *
  * @param params.player_id - `number | string` — Numerical player ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerMetaGolf({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2224,7 +2224,7 @@ const PLAYER_OUTLOOK_DEF: WrapperDef = {
  * @param params.player_id - `number | string` — Numerical player ID.
  * @param params.date_format - `number | string` — Optional format for dateCreated field. Available options here: http://momentjs.com/docs/#/displaying/format/.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerOutlook({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2263,7 +2263,7 @@ const PLAYER_POSITION_RANKINGS_DEF: WrapperDef = {
  * @param params.player_id - `number | string` — Numerical player ID.
  * @param params.position - `number | string` — Filter by position.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerPositionRankings({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2321,7 +2321,7 @@ const PLAYER_RANKINGS_DEF: WrapperDef = {
  * @param params.is_current - `number | string` — View option. Only show stats for seasons where isCurrent is true. Allowed: 1.
  * @param params.categories - `number | string` — View option. Only return the specified rankings categories.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerRankings({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2360,7 +2360,7 @@ const PLAYER_RECRUIT_ASSOCIATIONS_DEF: WrapperDef = {
  * @param params.player_id - `number | string` — Numerical player ID.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: team.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerRecruitAssociations({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2418,7 +2418,7 @@ const PLAYER_STANDINGS_DEF: WrapperDef = {
  * @param params.is_current - `number | string` — View option. Only show standings for seasons where isCurrent is true. Allowed: 1.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: league.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerStandings({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2486,7 +2486,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @param params.team_abbr - `number | string` — View option. Filter by a specific team abbreviation.
  * @param params.is_total - `number | string` — View option. Filter only the isTotal record for players who played for multiple teams. Allowed: 1.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerStats({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2534,7 +2534,7 @@ const PLAYER_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
  * @param params.roster_status - `number | string` — Filter associations by roster status Allowed: ACT, NWT, MIN, MNR, RET, DEV, CUT, DIS, DL, IR, UFA, UDF, EXE, TRA, SUS, PUP, FA, RFA, KIA, INA.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: team.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerTeamAssociations({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2592,7 +2592,7 @@ const PLAYER_TRANSACTIONS_DEF: WrapperDef = {
  * @param params.season_id - `number | string` — View option. Filter by seasonId.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: targetTeam, currentTeam, fromTeam.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerTransactions({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2624,7 +2624,7 @@ const RECRUIT_RANKINGS_DEF: WrapperDef = {
  *
  * @param params.player_id - `number | string` — Numerical player ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsRecruitRankings({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2667,7 +2667,7 @@ const SEASON_DEF: WrapperDef = {
  * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: sport, league, teams.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsSeason({ season_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2705,7 +2705,7 @@ const SEASON_TEAMS_DEF: WrapperDef = {
  * @param params.season_id - `number | string` — Optional seasonYear for leagues that change teams each year.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: players, standings, conference, division, playerTeamAssociations, injuries, transactions, depthCharts, polls, teamSeasons, sportsLineStandings, league.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsSeasonTeams({ season_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2743,7 +2743,7 @@ const SPORT_DEF: WrapperDef = {
  * @param params.sport_id - `number | string` — Numerical sport ID.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: leagues.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsSport({ sport_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2775,7 +2775,7 @@ const SPORT_LEAGUES_DEF: WrapperDef = {
  *
  * @param params.sport_id - `number | string` — Numerical league ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsSportLeagues({ sport_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2807,7 +2807,7 @@ const TEAM_FUTURES_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — Numerical team ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamFutures({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2845,7 +2845,7 @@ const TEAM_METADATA_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — Numerical team ID.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: team.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamMetadata({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2883,7 +2883,7 @@ const TEAM_PLAYERS_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — Numerical team ID.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: playerTeamAssociations, injuries, transactions, depthCharts.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamPlayers({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2926,7 +2926,7 @@ const TEAM_POLLS_DEF: WrapperDef = {
  * @param params.polls - `number | string` — View option. Filter by a certain poll name. Allowed: coaches, ap, fcscoachespoll, statstsnfcspoll, rpi, playoffselectioncommitteepoll, net.
  * @param params.season_id - `number | string` — View option. Filter by seasonId.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamPolls({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -2974,7 +2974,7 @@ const TEAM_RANKINGS_DEF: WrapperDef = {
  * @param params.season_type - `number | string` — View option. Filter by seasonType. Allowed: regular, pre, post.
  * @param params.season_id - `number | string` — View option. Filter by seasonId.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamRankings({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -3007,7 +3007,7 @@ const TEAM_RANKINGS_SPORTSLINE_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — Numerical team id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamRankingsSportsline({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -3065,7 +3065,7 @@ const TEAM_SEASONS_DEF: WrapperDef = {
  * @param params.season_id - `number | string` — View option. Filter by seasonId.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: league.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamSeasons({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -3113,7 +3113,7 @@ const TEAM_STANDINGS_DEF: WrapperDef = {
  * @param params.season_type - `number | string` — View option. Filter by seasonType. v3 only! Allowed: regular, pre, post.
  * @param params.season_id - `number | string` — View option. Filter by seasonId. v3 only!.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamStandings({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -3152,7 +3152,7 @@ const TEAM_STANDINGS_SPORTSLINE_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — Numerical team ID.
  * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamStandingsSportsline({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -3205,7 +3205,7 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @param params.season_id - `number | string` — View option. Filter by seasonId.
  * @param params.is_current - `number | string` — View option. Only show stats for seasons where isCurrent is true. Allowed: 1.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamStats({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -3243,7 +3243,7 @@ const VENUE_DEF: WrapperDef = {
  * @param params.venue_id - `number | string` — Numerical venue ID.
  * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: metaData.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsVenue({ venue_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
@@ -3275,7 +3275,7 @@ const VENUE_METADATA_DEF: WrapperDef = {
  *
  * @param params.venue_id - `number | string` — Numerical venue ID.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsVenueMetadata({ venue_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */

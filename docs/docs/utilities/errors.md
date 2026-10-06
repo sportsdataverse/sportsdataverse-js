@@ -82,7 +82,7 @@ export class InvalidParameterError extends SdvError
 A season below a loader's floor, raised before anything is fetched.
 
 ```ts
-export class SeasonNotFoundError extends SdvError {} /** * An optional transport dependency (e.g. `impit`) is not installed. * * @example * ```ts * import sdv, { configure, createImpersonatingTransport, TransportUnavailableError } from 'sportsdataverse';
+export class SeasonNotFoundError extends SdvError {}
 ```
 
 ### `TransportUnavailableError`
@@ -90,7 +90,7 @@ export class SeasonNotFoundError extends SdvError {} /** * An optional transport
 An optional transport dependency (`impit`) is not installed.
 
 ```ts
-export class TransportUnavailableError extends SdvError {} /** * Back-compat alias of {@link NoDataError}: the error was ESPN-only when it was named. * * @remarks * The same class object, not a subclass: `err instanceof NoESPNDataError` and * `err instanceof NoDataError` are always equal. Prefer `NoDataError` in new code. */ export const NoESPNDataError
+export class TransportUnavailableError extends SdvError {}
 ```
 
 ### `NoESPNDataError`

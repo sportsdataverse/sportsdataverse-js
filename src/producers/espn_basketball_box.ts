@@ -37,6 +37,14 @@
 
 import { idColumnsToStrings } from "../core/int64.js";
 
+/**
+ * One produced row: a plain object keyed by the released column names (snake_case), in the
+ * released column order.
+ *
+ * @remarks
+ * Id columns (`game_id`, `team_id`, `athlete_id`, `opponent_team_id`) are decimal strings;
+ * the two date columns (`game_date`, `game_date_time`) are JS `Date`s; a missing cell is `null`.
+ */
 export type { ParserRow as Row } from "../core/types.js";
 import type { ParserRow as Row } from "../core/types.js";
 
@@ -44,10 +52,27 @@ import type { ParserRow as Row } from "../core/types.js";
 // Python / polars semantics (the exported ones are shared with espn_basketball_pbp.ts)
 // ---------------------------------------------------------------------------
 
+/**
+ * Is `v` a plain JSON object (a Python `dict`)? `null` and arrays are not.
+ *
+ * @param v - Any JSON value.
+ * @returns `true` for a non-null, non-array object; narrows `v` to `Record<string, any>`.
+ * @example
+ * isObj({ a: 1 }); // true
+ * isObj([1, 2]);   // false
+ */
 export const isObj = (v: unknown): v is Record<string, any> =>
   v !== null && typeof v === "object" && !Array.isArray(v);
 
-/** Python truthiness for JSON values (NaN is truthy in Python). */
+/**
+ * Python truthiness for JSON values (NaN is truthy in Python).
+ *
+ * @param v - Any JSON value.
+ * @returns `false` for `null` / `undefined` / `false` / `0` / `""` / `[]` / `{}`; `true` otherwise.
+ * @example
+ * truthy([]);  // false
+ * truthy(NaN); // true (as in Python)
+ */
 export function truthy(v: unknown): boolean {
   if (v === null || v === undefined || v === false || v === 0 || v === "") return false;
   if (Array.isArray(v)) return v.length > 0;
@@ -55,11 +80,28 @@ export function truthy(v: unknown): boolean {
   return true;
 }
 
-/** `x or {}` / `x or []`. */
+/**
+ * Python `x or dflt` (`x or {}` / `x or []`): `v` when it is truthy, else the default.
+ *
+ * @param v - Any JSON value.
+ * @param dflt - The value returned when `v` is falsy (see {@link truthy}).
+ * @returns `v` or `dflt`.
+ * @example
+ * const teams = or(summary.boxscore, {}).teams;
+ */
 export const or = <T>(v: any, dflt: T): any => (truthy(v) ? v : dflt);
 
 /** Python `x == False` / `x == True` (0 == False, 1 == True). */
 const pyEqFalse = (v: unknown): boolean => v === false || v === 0;
+/**
+ * Python `x == True`: only `true` and `1` compare equal (`"1"` / `1.5` do not).
+ *
+ * @param v - Any JSON value.
+ * @returns `v === true || v === 1`.
+ * @example
+ * pyEqTrue(1);    // true
+ * pyEqTrue("1");  // false
+ */
 export const pyEqTrue = (v: unknown): boolean => v === true || v === 1;
 
 /** sdv-py `dl_utils.underscore` (identical to `src/parsers/_normalize.ts`). */
@@ -71,7 +113,25 @@ function underscore(word: string): string {
     .toLowerCase();
 }
 
+/**
+ * The strings Python `int(s)` accepts after stripping whitespace: an optional sign, digits,
+ * `_` digit-group separators.
+ *
+ * @remarks Test against `s.trim()`; the pattern itself allows no surrounding whitespace.
+ * @example
+ * PY_INT.test("1_000"); // true
+ * PY_INT.test("1.0");   // false
+ */
 export const PY_INT = /^[+-]?\d+(?:_\d+)*$/;
+/**
+ * The strings Python `float(s)` accepts after stripping whitespace: decimal / exponent forms
+ * with `_` digit groups, plus `inf` / `infinity` / `nan` (case-insensitive).
+ *
+ * @remarks Test against `s.trim()`; the pattern itself allows no surrounding whitespace.
+ * @example
+ * PY_FLOAT.test("1e3"); // true
+ * PY_FLOAT.test("NaN"); // true
+ */
 export const PY_FLOAT = /^[+-]?(?:(?:\d+(?:_\d+)*)?\.?\d+(?:_\d+)*(?:[eE][+-]?\d+(?:_\d+)*)?|\d+(?:_\d+)*\.(?:[eE][+-]?\d+(?:_\d+)*)?|inf|infinity|nan)$/i;
 
 /** Python `float(v)` succeeds (it strips whitespace and allows `_` digit groups). */
@@ -495,25 +555,162 @@ function basketballPlayerBox(final: any, finalOrder: readonly string[], requireB
 // Public per-league helpers (sdv-py names)
 // ---------------------------------------------------------------------------
 
-/** NBA player box (hoopR `helper_espn_nba_player_box`): has `plus_minus`; lax gate. */
+/**
+ * NBA player box (sdv-py `nba_player_box.helper_nba_player_box`, hoopR
+ * `helper_espn_nba_player_box`): one row per athlete from an ESPN Site v2 summary payload;
+ * has `plus_minus`; lax gate.
+ *
+ * @param final - The ESPN summary payload (`final.json`) of one game. Reads `header.id`,
+ *   `header.season.{year,type}`, `header.competitions[0].{date,competitors}` and
+ *   `boxscore.players[].{team,statistics[0].{keys,athletes}}`.
+ * @returns `Row[]`: one row per athlete, played athletes (with stats) then did-not-play ones,
+ *   sorted by `home_away` (`"away"` before `"home"`, `null` last); `[]` when the payload has no
+ *   usable boxscore.
+ * @throws TypeError when `header.competitions[0].date` is not a string.
+ * @throws Error when that date does not parse as `%Y-%m-%dT%H:%M[:%S]` (a trailing `Z` is
+ *   stripped first).
+ * @throws RangeError when an id or score is a float `inf` string (Python `int(float("inf"))`).
+ * @example
+ * const summary = await sdv.nba.espnNbaSummary({ event_id: 401360428 });
+ * const box = sdv.nba.helper_nba_player_box(summary);
+ * typeof box[0].athlete_id; // "string" (ids are decimal strings)
+ * @remarks
+ * Shared by all four leagues (the others `@see` this block):
+ * - Column order is WBB's canonical `dplyr::select` order; NBA / WNBA insert `plus_minus` right
+ *   after `fouls` (kept a string such as `"+16"`); MBB moves `active` LAST. Only the columns
+ *   present in the payload are emitted.
+ * - Id columns are decimal strings; Int32 stat columns parse only an ASCII `[+-]digits` string
+ *   in range (anything else is `null`); `minutes` and the `*_pct` columns are numbers;
+ *   `game_date` / `game_date_time` are `Date`s (see the module header).
+ * - Gate: the first team's first athlete must have a stats vector longer than 6 whose 7th entry
+ *   parses as a float; a stats / athletes count mismatch, a ragged stats vector or missing
+ *   `keys` returns `[]` (R's `tryCatch` skip). The STRICT gate (MBB, WBB) also requires the
+ *   second team to ship athletes; the LAX gate (NBA, WNBA) publishes the first team's rows
+ *   regardless.
+ * - `"M-A"` pair stats (`fieldGoalsMade-fieldGoalsAttempted` etc.) are split in place.
+ * - `reason` is emitted only when some athlete entry carries that key.
+ */
 export const helper_nba_player_box = (final: any): Row[] => basketballPlayerBox(final, WNBA_PLAYER_ORDER, false);
-/** WNBA player box (wehoop `helper_espn_wnba_player_box`): has `plus_minus`; lax gate. */
+/**
+ * WNBA player box (sdv-py `wnba_player_box.helper_wnba_player_box`, wehoop
+ * `helper_espn_wnba_player_box`): has `plus_minus`; lax gate.
+ *
+ * @param final - The ESPN summary payload of one WNBA game (same keys as the NBA helper).
+ * @returns `Row[]`, one row per athlete, in the NBA / WNBA column order; `[]` when unusable.
+ * @example
+ * const summary = await sdv.wnba.espnWnbaSummary({ event_id: 401320565 });
+ * const box = sdv.wnba.helper_wnba_player_box(summary);
+ * @see {@link helper_nba_player_box} for the shared column, dtype, gate and error rules.
+ */
 export const helper_wnba_player_box = (final: any): Row[] => basketballPlayerBox(final, WNBA_PLAYER_ORDER, false);
-/** MBB player box (hoopR `helper_espn_mbb_player_box`): no `plus_minus`; strict gate; `active` last. */
+/**
+ * MBB player box (sdv-py `mbb_player_box.helper_mbb_player_box`, hoopR
+ * `helper_espn_mbb_player_box`): no `plus_minus`; strict gate; `active` last.
+ *
+ * @param final - The ESPN summary payload of one men's college game (same keys as the NBA helper).
+ * @returns `Row[]`, one row per athlete, with `active` as the last column; `[]` when unusable or
+ *   when the second team ships no athletes.
+ * @example
+ * const summary = await sdv.mbb.espnMbbSummary({ event_id: 401638645 });
+ * const box = sdv.mbb.helper_mbb_player_box(summary);
+ * @see {@link helper_nba_player_box} for the shared column, dtype, gate and error rules.
+ */
 export const helper_mbb_player_box = (final: any): Row[] => basketballPlayerBox(final, MBB_PLAYER_ORDER, true);
-/** WBB player box (wehoop `helper_espn_wbb_player_box`): no `plus_minus`; strict gate. */
+/**
+ * WBB player box (sdv-py `wbb_player_box.helper_wbb_player_box`, wehoop
+ * `helper_espn_wbb_player_box`): no `plus_minus`; strict gate.
+ *
+ * @param final - The ESPN summary payload of one women's college game (same keys as the NBA
+ *   helper).
+ * @returns `Row[]`, one row per athlete, in WBB's canonical column order; `[]` when unusable or
+ *   when the second team ships no athletes.
+ * @example
+ * const summary = await sdv.wbb.espnWbbSummary({ event_id: 401587390 });
+ * const box = sdv.wbb.helper_wbb_player_box(summary);
+ * @see {@link helper_nba_player_box} for the shared column, dtype, gate and error rules.
+ */
 export const helper_wbb_player_box = (final: any): Row[] => basketballPlayerBox(final, WBB_PLAYER_ORDER, true);
 
-/** NBA team box (hoopR `helper_espn_nba_team_box`; shared basketball core). */
+/**
+ * NBA team box (sdv-py `helper_nba_team_box`, which delegates to the shared
+ * `wbb_team_box.helper_wbb_team_box`; hoopR `helper_espn_nba_team_box`): one row per team from
+ * an ESPN Site v2 summary payload.
+ *
+ * @param final - The ESPN summary payload (`final.json`) of one game. Reads `header.id`,
+ *   `header.season.{year,type}`, `header.competitions[0].{date,competitors}` and
+ *   `boxscore.teams[].{team,statistics}`.
+ * @returns `Row[]` of exactly two rows (team 0 then team 1): the game columns, `team_*` meta,
+ *   `team_home_away` / `team_score` / `team_winner`, the stat columns, then `opponent_team_*`;
+ *   `[]` when the payload has no usable boxscore.
+ * @throws TypeError when `header.competitions[0].date` is not a string, or a competitor is
+ *   `null` (Python `in` on `None`).
+ * @throws Error when that date does not parse as `%Y-%m-%dT%H:%M[:%S]`.
+ * @throws RangeError when a team id or score is a float `inf` string.
+ * @example
+ * const summary = await sdv.nba.espnNbaSummary({ event_id: 401360428 });
+ * const teams = sdv.nba.helper_nba_team_box(summary);
+ * teams.length; // 2
+ * @remarks
+ * Shared by all four leagues (the others `@see` this block):
+ * - The same core runs for every league; there is no per-league column divergence.
+ * - Stat columns are ordered alphabetically by their ESPN name (R `tidyr::spread`), with the
+ *   `"M-A"` pairs split in place; the column set is the union of both rows (row-1 order first).
+ * - Returns `[]` (R's `tryCatch` skip) when either team's `statistics` is empty, a team repeats
+ *   a stat name, `winner` is absent from BOTH competitors, or a split `"M-A"` stat is missing for
+ *   both teams.
+ * - Each team's competitor is the index-aligned one when the ids match, else the other; an
+ *   unparseable id on either side leaves `team_home_away` / `team_score` / `team_winner` null.
+ * - Id columns are decimal strings; the `*_pct` columns are numbers; the rest of the dtype rules
+ *   are those of {@link helper_nba_player_box}.
+ */
 export const helper_nba_team_box = (final: any): Row[] => basketballTeamBox(final);
-/** WNBA team box (wehoop `helper_espn_wnba_team_box`; shared basketball core). */
+/**
+ * WNBA team box (sdv-py `helper_wnba_team_box`; wehoop `helper_espn_wnba_team_box`; shared
+ * basketball core).
+ *
+ * @param final - The ESPN summary payload of one WNBA game (same keys as the NBA helper).
+ * @returns `Row[]` of two team rows; `[]` when unusable.
+ * @example
+ * const summary = await sdv.wnba.espnWnbaSummary({ event_id: 401320565 });
+ * const teams = sdv.wnba.helper_wnba_team_box(summary);
+ * @see {@link helper_nba_team_box} for the shared column, gate and error rules.
+ */
 export const helper_wnba_team_box = (final: any): Row[] => basketballTeamBox(final);
-/** MBB team box (hoopR `helper_espn_mbb_team_box`; shared basketball core). */
+/**
+ * MBB team box (sdv-py `helper_mbb_team_box`; hoopR `helper_espn_mbb_team_box`; shared
+ * basketball core).
+ *
+ * @param final - The ESPN summary payload of one men's college game (same keys as the NBA helper).
+ * @returns `Row[]` of two team rows; `[]` when unusable.
+ * @example
+ * const summary = await sdv.mbb.espnMbbSummary({ event_id: 401638645 });
+ * const teams = sdv.mbb.helper_mbb_team_box(summary);
+ * @see {@link helper_nba_team_box} for the shared column, gate and error rules.
+ */
 export const helper_mbb_team_box = (final: any): Row[] => basketballTeamBox(final);
-/** WBB team box (wehoop `helper_espn_wbb_team_box`; shared basketball core). */
+/**
+ * WBB team box (sdv-py `wbb_team_box.helper_wbb_team_box`, the shared core itself; wehoop
+ * `helper_espn_wbb_team_box`).
+ *
+ * @param final - The ESPN summary payload of one women's college game (same keys as the NBA
+ *   helper).
+ * @returns `Row[]` of two team rows; `[]` when unusable.
+ * @example
+ * const summary = await sdv.wbb.espnWbbSummary({ event_id: 401587390 });
+ * const teams = sdv.wbb.helper_wbb_team_box(summary);
+ * @see {@link helper_nba_team_box} for the shared column, gate and error rules.
+ */
 export const helper_wbb_team_box = (final: any): Row[] => basketballTeamBox(final);
 
-/** `{ league: { helper_<lg>_player_box, helper_<lg>_team_box } }` for the `sdv.<lg>` merge. */
+/**
+ * `{ league: { helper_<lg>_player_box, helper_<lg>_team_box } }`: the box producers keyed by
+ * league, which `src/index.ts` merges onto `sdv.nba` / `sdv.wnba` / `sdv.mbb` / `sdv.wbb` under
+ * both the snake_case name and a camelCase alias.
+ *
+ * @remarks Every member is a pure `(final) => Row[]`; the map is the single registration point.
+ * @example
+ * BASKETBALL_BOX_PRODUCERS.mbb.helper_mbb_team_box(summary);
+ */
 export const BASKETBALL_BOX_PRODUCERS = {
   nba: { helper_nba_player_box, helper_nba_team_box },
   wnba: { helper_wnba_player_box, helper_wnba_team_box },

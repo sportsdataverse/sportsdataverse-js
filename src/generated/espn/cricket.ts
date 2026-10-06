@@ -155,7 +155,7 @@ const ATHLETE_AWARDS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerAwards({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketplayerawards
  */
@@ -184,7 +184,7 @@ const ATHLETE_BIO_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerBio({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketplayerbio
  */
@@ -218,7 +218,7 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.stat_type - `number | string` — the `{stat_type}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerCareerStats({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketplayercareerstats
  */
@@ -247,7 +247,7 @@ const ATHLETE_CONTRACTS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerContracts({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketplayercontracts
  */
@@ -276,7 +276,7 @@ const ATHLETE_CORE_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerCore({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketplayercore
  */
@@ -305,7 +305,7 @@ const ATHLETE_EVENTLOG_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerEventlog({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketplayereventlog
  */
@@ -340,7 +340,7 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerGamelog({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/web#espncricketplayergamelog
  */
@@ -369,7 +369,7 @@ const ATHLETE_INFO_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerInfo({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketplayerinfo
  */
@@ -398,7 +398,7 @@ const ATHLETE_INJURIES_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerInjuries({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketplayerinjuries
  */
@@ -427,7 +427,7 @@ const ATHLETE_NEWS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerNews({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketplayernews
  */
@@ -456,7 +456,7 @@ const ATHLETE_NOTES_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerNotes({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketplayernotes
  */
@@ -485,7 +485,7 @@ const ATHLETE_OVERVIEW_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerOverview({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/web#espncricketplayeroverview
  */
@@ -514,7 +514,7 @@ const ATHLETE_RECORDS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerRecords({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketplayerrecords
  */
@@ -543,7 +543,7 @@ const ATHLETE_SEASONS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerSeasons({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketplayerseasons
  */
@@ -578,7 +578,7 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerSplits({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/web#espncricketplayersplits
  */
@@ -607,7 +607,7 @@ const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerStatisticslog({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketplayerstatisticslog
  */
@@ -642,7 +642,7 @@ const ATHLETE_STATS_DEF: WrapperDef = {
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerStats({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/web#espncricketplayerstats
  */
@@ -675,7 +675,7 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.opp_id - `number | string` — the `{opp_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketplayervsplayer
  */
@@ -719,7 +719,7 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the maximum number of items to return; default `100`.
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPlayersIndex({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketplayersindex
  */
@@ -748,7 +748,7 @@ const AWARD_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.award_id - `number | string` — the ESPN award id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketAward({ award_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketaward
  */
@@ -779,7 +779,7 @@ const AWARDS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketAwards({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketawards
  */
@@ -803,7 +803,7 @@ const CALENDAR_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketCalendar({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketcalendar
  */
@@ -832,7 +832,7 @@ const COACH_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.coach_id - `number | string` — the ESPN coach id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketCoach({ coach_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketcoach
  */
@@ -867,7 +867,7 @@ const COACH_RECORD_DEF: WrapperDef = {
  * @param params.coach_id - `number | string` — the ESPN coach id.
  * @param params.record_type - `number | string` — the `{record_type}` path segment; optional; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketCoachRecord({ coach_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketcoachrecord
  */
@@ -900,7 +900,7 @@ const COACH_SEASON_DEF: WrapperDef = {
  * @param params.coach_id - `number | string` — the ESPN coach id.
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketCoachSeason({ coach_id: '…', season: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketcoachseason
  */
@@ -924,7 +924,7 @@ const CONFERENCES_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketConferences({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketconferences
  */
@@ -948,7 +948,7 @@ const DRAFT_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketDraft({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketdraft
  */
@@ -977,7 +977,7 @@ const EVENT_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGame({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgame
  */
@@ -1012,7 +1012,7 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameBroadcasts({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgamebroadcasts
  */
@@ -1047,7 +1047,7 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameCompetition({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgamecompetition
  */
@@ -1086,7 +1086,7 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameTeam({ event_id: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameteam
  */
@@ -1125,7 +1125,7 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameTeamLeaders({ event_id: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameteamleaders
  */
@@ -1164,7 +1164,7 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameTeamLinescores({ event_id: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameteamlinescores
  */
@@ -1203,7 +1203,7 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameTeamRecord({ event_id: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameteamrecord
  */
@@ -1242,7 +1242,7 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameTeamRoster({ event_id: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameteamroster
  */
@@ -1281,7 +1281,7 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameTeamStatistics({ event_id: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameteamstatistics
  */
@@ -1316,7 +1316,7 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameTeams({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameteams
  */
@@ -1351,7 +1351,7 @@ const EVENT_LEADERS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameLeaders({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameleaders
  */
@@ -1386,7 +1386,7 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameOdds({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameodds
  */
@@ -1425,7 +1425,7 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
  * @param params.official_id - `number | string` — the `{official_id}` path segment.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameOfficialDetail({ event_id: '…', official_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameofficialdetail
  */
@@ -1460,7 +1460,7 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameOfficials({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameofficials
  */
@@ -1499,7 +1499,7 @@ const EVENT_PLAY_DEF: WrapperDef = {
  * @param params.play_id - `number | string` — the `{play_id}` path segment.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGamePlay({ event_id: '…', play_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameplay
  */
@@ -1538,7 +1538,7 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
  * @param params.play_id - `number | string` — the `{play_id}` path segment.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGamePlayPersonnel({ event_id: '…', play_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameplaypersonnel
  */
@@ -1580,7 +1580,7 @@ const EVENT_PLAYS_DEF: WrapperDef = {
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGamePlays({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameplays
  */
@@ -1615,7 +1615,7 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGamePowerindex({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgamepowerindex
  */
@@ -1650,7 +1650,7 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGamePredictor({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgamepredictor
  */
@@ -1692,7 +1692,7 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.limit - `number | string` — the maximum number of items to return; default `300`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameProbabilities({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgameprobabilities
  */
@@ -1727,7 +1727,7 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGamePropbets({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgamepropbets
  */
@@ -1762,7 +1762,7 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameScoringplays({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgamescoringplays
  */
@@ -1797,7 +1797,7 @@ const EVENT_SITUATION_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameSituation({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgamesituation
  */
@@ -1832,7 +1832,7 @@ const EVENT_STATUS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGameStatus({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgamestatus
  */
@@ -1868,7 +1868,7 @@ const EVENTS_DEF: WrapperDef = {
  * @param params.dates - `number | string` — a date `YYYYMMDD`, a range `YYYYMMDD-YYYYMMDD` or a season year `YYYY`.
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketGames({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketgames
  */
@@ -1908,7 +1908,7 @@ const FPI_DEF: WrapperDef = {
  * @param params.limit - `number | string` — Page size. The response is a single page for every league observed, so the default suffices.
  * @param params.page - `number | string` — Page number, for the paginated envelope.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketFpi({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/fitt#espncricketfpi
  */
@@ -1937,7 +1937,7 @@ const FRANCHISE_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.franchise_id - `number | string` — the ESPN franchise id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketFranchise({ franchise_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketfranchise
  */
@@ -1968,7 +1968,7 @@ const FRANCHISES_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketFranchises({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketfranchises
  */
@@ -1992,7 +1992,7 @@ const INJURIES_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketInjuries({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketinjuries
  */
@@ -2049,7 +2049,7 @@ const LEADERS_DEF: WrapperDef = {
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
  * @param params.sort - `number | string` — the sort key and direction, e.g. `offensive.avgPoints:desc`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketLeaders({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/web#espncricketleaders
  */
@@ -2073,7 +2073,7 @@ const LEADERS_CORE_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketLeadersCore({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketleaderscore
  */
@@ -2097,7 +2097,7 @@ const LEAGUE_NOTES_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketLeagueNotes({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketleaguenotes
  */
@@ -2121,7 +2121,7 @@ const LEAGUE_ROOT_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketLeagueRoot({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketleagueroot
  */
@@ -2152,7 +2152,7 @@ const NEWS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `50`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketNews({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketnews
  */
@@ -2181,7 +2181,7 @@ const POSITION_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.position_id - `number | string` — the ESPN position id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPosition({ position_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketposition
  */
@@ -2212,7 +2212,7 @@ const POSITIONS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketPositions({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketpositions
  */
@@ -2263,7 +2263,7 @@ const SCOREBOARD_DEF: WrapperDef = {
  * @param params.groups - `number | string` — an ESPN group (conference / division) id, e.g. `50` for all of men's college basketball.
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketScoreboard({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketscoreboard
  */
@@ -2305,7 +2305,7 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the maximum number of items to return; default `100`.
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonPlayers({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonplayers
  */
@@ -2341,7 +2341,7 @@ const SEASON_AWARDS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonAwards({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonawards
  */
@@ -2377,7 +2377,7 @@ const SEASON_COACHES_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonCoaches({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasoncoaches
  */
@@ -2406,7 +2406,7 @@ const SEASON_DRAFT_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonDraft({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasondraft
  */
@@ -2439,7 +2439,7 @@ const SEASON_DRAFT_ROUND_PICKS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.round_num - `number | string` — the `{round_num}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonDraftRoundPicks({ season: '…', round_num: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasondraftroundpicks
  */
@@ -2468,7 +2468,7 @@ const SEASON_FREEAGENTS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonFreeagents({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonfreeagents
  */
@@ -2497,7 +2497,7 @@ const SEASON_FUTURES_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonFutures({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonfutures
  */
@@ -2534,7 +2534,7 @@ const SEASON_GROUP_DEF: WrapperDef = {
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.group_id - `number | string` — the `{group_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonGroup({ season: '…', season_type: '…', group_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasongroup
  */
@@ -2578,7 +2578,7 @@ const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
  * @param params.group_id - `number | string` — the `{group_id}` path segment.
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonGroupChildren({ season: '…', season_type: '…', group_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasongroupchildren
  */
@@ -2622,7 +2622,7 @@ const SEASON_GROUP_TEAMS_DEF: WrapperDef = {
  * @param params.group_id - `number | string` — the `{group_id}` path segment.
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonGroupTeams({ season: '…', season_type: '…', group_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasongroupteams
  */
@@ -2655,7 +2655,7 @@ const SEASON_GROUPS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonGroups({ season: '…', season_type: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasongroups
  */
@@ -2684,7 +2684,7 @@ const SEASON_INFO_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonInfo({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasoninfo
  */
@@ -2708,7 +2708,7 @@ const SEASON_POINTER_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonPointer({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonpointer
  */
@@ -2742,7 +2742,7 @@ const SEASON_POWERINDEX_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`); optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonPowerindex({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonpowerindex
  */
@@ -2771,7 +2771,7 @@ const SEASON_POWERINDEX_LEADERS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonPowerindexLeaders({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonpowerindexleaders
  */
@@ -2804,7 +2804,7 @@ const SEASON_TEAM_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonTeam({ season: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonteam
  */
@@ -2846,7 +2846,7 @@ const SEASON_TEAMS_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonTeams({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonteams
  */
@@ -2879,7 +2879,7 @@ const SEASON_TYPE_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonType({ season: '…', season_type: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasontype
  */
@@ -2912,7 +2912,7 @@ const SEASON_TYPE_CORRECTIONS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonTypeCorrections({ season: '…', season_type: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasontypecorrections
  */
@@ -2945,7 +2945,7 @@ const SEASON_TYPE_LEADERS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonTypeLeaders({ season: '…', season_type: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasontypeleaders
  */
@@ -2974,7 +2974,7 @@ const SEASON_TYPES_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonTypes({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasontypes
  */
@@ -3011,7 +3011,7 @@ const SEASON_WEEK_DEF: WrapperDef = {
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.week - `number | string` — the week of the season (football).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonWeek({ season: '…', season_type: '…', week: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonweek
  */
@@ -3055,7 +3055,7 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
  * @param params.week - `number | string` — the week of the season (football).
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonweekgames
  */
@@ -3098,7 +3098,7 @@ const SEASON_WEEK_POWERINDEX_DEF: WrapperDef = {
  * @param params.week - `number | string` — the week of the season (football).
  * @param params.limit - `number | string` — Page size for this weekly power-index table; pass a limit large enough to avoid paging (table size varies by sport/league -- CFB's FBS table alone is ~134 rows).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonWeekPowerindex({ season: '…', season_type: '…', week: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonweekpowerindex
  */
@@ -3131,7 +3131,7 @@ const SEASON_WEEKS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasonWeeks({ season: '…', season_type: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasonweeks
  */
@@ -3162,7 +3162,7 @@ const SEASONS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSeasons({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketseasons
  */
@@ -3202,7 +3202,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.group - `number | string` — an ESPN group (conference / division) id.
  * @param params.standings_type - `number | string` — the `type` ESPN query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketStandings({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketstandings
  */
@@ -3226,7 +3226,7 @@ const STANDINGS_CORE_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketStandingsCore({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketstandingscore
  */
@@ -3250,7 +3250,7 @@ const STATISTICS_LEAGUE_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketStatisticsLeague({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketstatisticsleague
  */
@@ -3281,7 +3281,7 @@ const SUMMARY_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @param params.section - `string` — (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
- * @returns Promise<`ParsedTables`> with `{ parsed: true }` (an object of sub-frames, or the chosen `section`'s `Row[]`); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<ParsedTables>` with `{ parsed: true }` (an object of sub-frames, or the chosen `section`'s `Row[]`); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketSummary({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketsummary
  */
@@ -3305,7 +3305,7 @@ const TALENTPICKS_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTalentpicks({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncrickettalentpicks
  */
@@ -3334,7 +3334,7 @@ const TEAM_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeam({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketteam
  */
@@ -3363,7 +3363,7 @@ const TEAM_CORE_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeamCore({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketteamcore
  */
@@ -3392,7 +3392,7 @@ const TEAM_DEPTHCHARTS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeamDepthcharts({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketteamdepthcharts
  */
@@ -3421,7 +3421,7 @@ const TEAM_HISTORY_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeamHistory({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketteamhistory
  */
@@ -3450,7 +3450,7 @@ const TEAM_INJURIES_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeamInjuries({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketteaminjuries
  */
@@ -3479,7 +3479,7 @@ const TEAM_LEADERS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeamLeaders({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketteamleaders
  */
@@ -3515,7 +3515,7 @@ const TEAM_NEWS_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `50`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeamNews({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketteamnews
  */
@@ -3544,7 +3544,7 @@ const TEAM_RECORD_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeamRecord({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketteamrecord
  */
@@ -3580,7 +3580,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeamRoster({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketteamroster
  */
@@ -3615,7 +3615,7 @@ const TEAM_SCHEDULE_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeamSchedule({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketteamschedule
  */
@@ -3644,7 +3644,7 @@ const TEAM_TRANSACTIONS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeamTransactions({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketteamtransactions
  */
@@ -3681,7 +3681,7 @@ const TEAMS_CORE_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeamsCore({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketteamscore
  */
@@ -3712,7 +3712,7 @@ const TEAMS_SITE_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTeamsSite({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncricketteamssite
  */
@@ -3743,7 +3743,7 @@ const TOURNAMENTS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTournaments({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncrickettournaments
  */
@@ -3774,7 +3774,7 @@ const TRANSACTIONS_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketTransactions({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/site#espncrickettransactions
  */
@@ -3803,7 +3803,7 @@ const VENUE_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.venue_id - `number | string` — the ESPN venue id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketVenue({ venue_id: '…' });
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketvenue
  */
@@ -3834,7 +3834,7 @@ const VENUES_DEF: WrapperDef = {
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.cricket.espnCricketVenues({});
  * @see https://js.sportsdataverse.org/docs/cricket/reference/core#espncricketvenues
  */

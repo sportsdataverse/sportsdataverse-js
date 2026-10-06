@@ -60,7 +60,7 @@ const COMBINE_PROFILES_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the `limit` query parameter; default `40`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflCombineProfiles({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -103,7 +103,7 @@ const DRAFT_PICKS_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the `limit` query parameter; default `40`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflDraftPicks({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -145,7 +145,7 @@ const GAME_DETAILS_BY_SLUG_DEF: WrapperDef = {
  * @param params.include_replays - `boolean` — the `includeReplays` query parameter; default `false`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflGameDetailsBySlug({ slug: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -208,7 +208,7 @@ const GAME_DETAILS_V2_DEF: WrapperDef = {
  * @param params.include_tagged_videos - `boolean` — the `includeTaggedVideos` query parameter; default `false`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflGameDetailsV2({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -257,7 +257,7 @@ const GAME_SUMMARIES_DEF: WrapperDef = {
  * @param params.week - `number | string` — the `week` query parameter; default `1`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflGameSummaries({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -306,7 +306,7 @@ const INJURIES_DEF: WrapperDef = {
  * @param params.week - `number | string` — the `week` query parameter; default `1`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflInjuries({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -340,7 +340,7 @@ const LIVE_PLAYER_STATISTICS_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — Shield uuid game id -- the `id` column of the week games and weekly game details listings.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflLivePlayerStatistics({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -374,7 +374,7 @@ const LIVE_TEAM_STATISTICS_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — Shield uuid game id -- the `id` column of the week games and weekly game details listings.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflLiveTeamStatistics({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -423,7 +423,7 @@ const ROSTERS_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — Shield team uuid (the `id` of a team in the teams history listing). Returns just that team's roster -- one roster (~37 KB) instead of all 32 (~1.2 MB); default `null`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflRosters({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -478,7 +478,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the `limit` query parameter; default `40`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflStandings({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -513,7 +513,7 @@ const TEAM_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the `{team_id}` path segment.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflTeam({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -556,7 +556,7 @@ const TEAMS_HISTORY_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the `limit` query parameter; default `40`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflTeamsHistory({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -633,7 +633,7 @@ const WEEKLY_GAME_DETAILS_DEF: WrapperDef = {
  * @param params.include_tagged_videos - `boolean` — the `includeTaggedVideos` query parameter; default `false`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflWeeklyGameDetails({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -676,7 +676,7 @@ const WEEKS_DEF: WrapperDef = {
  * @param params.season_type - `number | string` — Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3; optional; default `REG`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflWeeks({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */
@@ -711,7 +711,7 @@ const WEEKS_BY_DATE_DEF: WrapperDef = {
  * @param params.date - `number | string` — the `{date}` path segment.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflWeeksByDate({ date: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nflcom-shield-api
  */

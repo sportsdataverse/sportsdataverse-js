@@ -153,7 +153,7 @@ const ATHLETE_AWARDS_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerAwards({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxplayerawards
  */
@@ -181,7 +181,7 @@ const ATHLETE_BIO_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerBio({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxplayerbio
  */
@@ -214,7 +214,7 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.stat_type - `number | string` — the `{stat_type}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerCareerStats({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxplayercareerstats
  */
@@ -242,7 +242,7 @@ const ATHLETE_CONTRACTS_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerContracts({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxplayercontracts
  */
@@ -270,7 +270,7 @@ const ATHLETE_CORE_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerCore({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxplayercore
  */
@@ -298,7 +298,7 @@ const ATHLETE_EVENTLOG_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerEventlog({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxplayereventlog
  */
@@ -332,7 +332,7 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerGamelog({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/web#espnligamxplayergamelog
  */
@@ -360,7 +360,7 @@ const ATHLETE_INFO_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerInfo({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxplayerinfo
  */
@@ -388,7 +388,7 @@ const ATHLETE_INJURIES_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerInjuries({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxplayerinjuries
  */
@@ -416,7 +416,7 @@ const ATHLETE_NEWS_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerNews({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxplayernews
  */
@@ -444,7 +444,7 @@ const ATHLETE_NOTES_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerNotes({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxplayernotes
  */
@@ -472,7 +472,7 @@ const ATHLETE_OVERVIEW_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerOverview({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/web#espnligamxplayeroverview
  */
@@ -500,7 +500,7 @@ const ATHLETE_RECORDS_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerRecords({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxplayerrecords
  */
@@ -528,7 +528,7 @@ const ATHLETE_SEASONS_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerSeasons({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxplayerseasons
  */
@@ -562,7 +562,7 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerSplits({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/web#espnligamxplayersplits
  */
@@ -590,7 +590,7 @@ const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
  *
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerStatisticslog({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxplayerstatisticslog
  */
@@ -624,7 +624,7 @@ const ATHLETE_STATS_DEF: WrapperDef = {
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerStats({ athlete_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/web#espnligamxplayerstats
  */
@@ -656,7 +656,7 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
  * @param params.athlete_id - `number | string` — the ESPN athlete id.
  * @param params.opp_id - `number | string` — the `{opp_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxplayervsplayer
  */
@@ -699,7 +699,7 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the maximum number of items to return; default `100`.
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPlayersIndex({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxplayersindex
  */
@@ -727,7 +727,7 @@ const AWARD_DEF: WrapperDef = {
  *
  * @param params.award_id - `number | string` — the ESPN award id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxAward({ award_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxaward
  */
@@ -757,7 +757,7 @@ const AWARDS_DEF: WrapperDef = {
  *
  * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxAwards({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxawards
  */
@@ -780,7 +780,7 @@ const CALENDAR_DEF: WrapperDef = {
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/calendar`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxCalendar({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxcalendar
  */
@@ -808,7 +808,7 @@ const COACH_DEF: WrapperDef = {
  *
  * @param params.coach_id - `number | string` — the ESPN coach id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxCoach({ coach_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxcoach
  */
@@ -842,7 +842,7 @@ const COACH_RECORD_DEF: WrapperDef = {
  * @param params.coach_id - `number | string` — the ESPN coach id.
  * @param params.record_type - `number | string` — the `{record_type}` path segment; optional; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxCoachRecord({ coach_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxcoachrecord
  */
@@ -874,7 +874,7 @@ const COACH_SEASON_DEF: WrapperDef = {
  * @param params.coach_id - `number | string` — the ESPN coach id.
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxCoachSeason({ coach_id: '…', season: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxcoachseason
  */
@@ -897,7 +897,7 @@ const CONFERENCES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/groups`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxConferences({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxconferences
  */
@@ -920,7 +920,7 @@ const DRAFT_DEF: WrapperDef = {
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/draft`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxDraft({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxdraft
  */
@@ -948,7 +948,7 @@ const EVENT_DEF: WrapperDef = {
  *
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGame({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgame
  */
@@ -982,7 +982,7 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameBroadcasts({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgamebroadcasts
  */
@@ -1016,7 +1016,7 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameCompetition({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgamecompetition
  */
@@ -1054,7 +1054,7 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameTeam({ event_id: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameteam
  */
@@ -1092,7 +1092,7 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameTeamLeaders({ event_id: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameteamleaders
  */
@@ -1130,7 +1130,7 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameTeamLinescores({ event_id: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameteamlinescores
  */
@@ -1168,7 +1168,7 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameTeamRecord({ event_id: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameteamrecord
  */
@@ -1206,7 +1206,7 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameTeamRoster({ event_id: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameteamroster
  */
@@ -1244,7 +1244,7 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameTeamStatistics({ event_id: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameteamstatistics
  */
@@ -1278,7 +1278,7 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameTeams({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameteams
  */
@@ -1312,7 +1312,7 @@ const EVENT_LEADERS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameLeaders({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameleaders
  */
@@ -1346,7 +1346,7 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameOdds({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameodds
  */
@@ -1384,7 +1384,7 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
  * @param params.official_id - `number | string` — the `{official_id}` path segment.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameOfficialDetail({ event_id: '…', official_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameofficialdetail
  */
@@ -1418,7 +1418,7 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameOfficials({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameofficials
  */
@@ -1456,7 +1456,7 @@ const EVENT_PLAY_DEF: WrapperDef = {
  * @param params.play_id - `number | string` — the `{play_id}` path segment.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGamePlay({ event_id: '…', play_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameplay
  */
@@ -1494,7 +1494,7 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
  * @param params.play_id - `number | string` — the `{play_id}` path segment.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGamePlayPersonnel({ event_id: '…', play_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameplaypersonnel
  */
@@ -1535,7 +1535,7 @@ const EVENT_PLAYS_DEF: WrapperDef = {
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGamePlays({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameplays
  */
@@ -1569,7 +1569,7 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGamePowerindex({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgamepowerindex
  */
@@ -1603,7 +1603,7 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGamePredictor({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgamepredictor
  */
@@ -1644,7 +1644,7 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.limit - `number | string` — the maximum number of items to return; default `300`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameProbabilities({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgameprobabilities
  */
@@ -1678,7 +1678,7 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGamePropbets({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgamepropbets
  */
@@ -1712,7 +1712,7 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameScoringplays({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgamescoringplays
  */
@@ -1746,7 +1746,7 @@ const EVENT_SITUATION_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameSituation({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgamesituation
  */
@@ -1780,7 +1780,7 @@ const EVENT_STATUS_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGameStatus({ event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgamestatus
  */
@@ -1815,7 +1815,7 @@ const EVENTS_DEF: WrapperDef = {
  * @param params.dates - `number | string` — a date `YYYYMMDD`, a range `YYYYMMDD-YYYYMMDD` or a season year `YYYY`.
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxGames({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxgames
  */
@@ -1854,7 +1854,7 @@ const FPI_DEF: WrapperDef = {
  * @param params.limit - `number | string` — Page size. The response is a single page for every league observed, so the default suffices.
  * @param params.page - `number | string` — Page number, for the paginated envelope.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxFpi({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/fitt#espnligamxfpi
  */
@@ -1882,7 +1882,7 @@ const FRANCHISE_DEF: WrapperDef = {
  *
  * @param params.franchise_id - `number | string` — the ESPN franchise id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxFranchise({ franchise_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxfranchise
  */
@@ -1912,7 +1912,7 @@ const FRANCHISES_DEF: WrapperDef = {
  *
  * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxFranchises({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxfranchises
  */
@@ -1935,7 +1935,7 @@ const INJURIES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/injuries`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxInjuries({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxinjuries
  */
@@ -1991,7 +1991,7 @@ const LEADERS_DEF: WrapperDef = {
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
  * @param params.sort - `number | string` — the sort key and direction, e.g. `offensive.avgPoints:desc`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxLeaders({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/web#espnligamxleaders
  */
@@ -2014,7 +2014,7 @@ const LEADERS_CORE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/leaders`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxLeadersCore({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxleaderscore
  */
@@ -2037,7 +2037,7 @@ const LEAGUE_NOTES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/notes`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxLeagueNotes({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxleaguenotes
  */
@@ -2060,7 +2060,7 @@ const LEAGUE_ROOT_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxLeagueRoot({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxleagueroot
  */
@@ -2090,7 +2090,7 @@ const NEWS_DEF: WrapperDef = {
  *
  * @param params.limit - `number | string` — the maximum number of items to return; default `50`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxNews({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxnews
  */
@@ -2118,7 +2118,7 @@ const POSITION_DEF: WrapperDef = {
  *
  * @param params.position_id - `number | string` — the ESPN position id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPosition({ position_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxposition
  */
@@ -2148,7 +2148,7 @@ const POSITIONS_DEF: WrapperDef = {
  *
  * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxPositions({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxpositions
  */
@@ -2198,7 +2198,7 @@ const SCOREBOARD_DEF: WrapperDef = {
  * @param params.groups - `number | string` — an ESPN group (conference / division) id, e.g. `50` for all of men's college basketball.
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxScoreboard({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxscoreboard
  */
@@ -2239,7 +2239,7 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the maximum number of items to return; default `100`.
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonPlayers({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonplayers
  */
@@ -2274,7 +2274,7 @@ const SEASON_AWARDS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonAwards({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonawards
  */
@@ -2309,7 +2309,7 @@ const SEASON_COACHES_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonCoaches({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasoncoaches
  */
@@ -2337,7 +2337,7 @@ const SEASON_DRAFT_DEF: WrapperDef = {
  *
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonDraft({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasondraft
  */
@@ -2369,7 +2369,7 @@ const SEASON_DRAFT_ROUND_PICKS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.round_num - `number | string` — the `{round_num}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonDraftRoundPicks({ season: '…', round_num: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasondraftroundpicks
  */
@@ -2397,7 +2397,7 @@ const SEASON_FREEAGENTS_DEF: WrapperDef = {
  *
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonFreeagents({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonfreeagents
  */
@@ -2425,7 +2425,7 @@ const SEASON_FUTURES_DEF: WrapperDef = {
  *
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonFutures({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonfutures
  */
@@ -2461,7 +2461,7 @@ const SEASON_GROUP_DEF: WrapperDef = {
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.group_id - `number | string` — the `{group_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonGroup({ season: '…', season_type: '…', group_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasongroup
  */
@@ -2504,7 +2504,7 @@ const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
  * @param params.group_id - `number | string` — the `{group_id}` path segment.
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonGroupChildren({ season: '…', season_type: '…', group_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasongroupchildren
  */
@@ -2547,7 +2547,7 @@ const SEASON_GROUP_TEAMS_DEF: WrapperDef = {
  * @param params.group_id - `number | string` — the `{group_id}` path segment.
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonGroupTeams({ season: '…', season_type: '…', group_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasongroupteams
  */
@@ -2579,7 +2579,7 @@ const SEASON_GROUPS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonGroups({ season: '…', season_type: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasongroups
  */
@@ -2607,7 +2607,7 @@ const SEASON_INFO_DEF: WrapperDef = {
  *
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonInfo({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasoninfo
  */
@@ -2630,7 +2630,7 @@ const SEASON_POINTER_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/season`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonPointer({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonpointer
  */
@@ -2663,7 +2663,7 @@ const SEASON_POWERINDEX_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`); optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonPowerindex({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonpowerindex
  */
@@ -2691,7 +2691,7 @@ const SEASON_POWERINDEX_LEADERS_DEF: WrapperDef = {
  *
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonPowerindexLeaders({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonpowerindexleaders
  */
@@ -2723,7 +2723,7 @@ const SEASON_TEAM_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonTeam({ season: '…', team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonteam
  */
@@ -2764,7 +2764,7 @@ const SEASON_TEAMS_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonTeams({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonteams
  */
@@ -2796,7 +2796,7 @@ const SEASON_TYPE_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonType({ season: '…', season_type: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasontype
  */
@@ -2828,7 +2828,7 @@ const SEASON_TYPE_CORRECTIONS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonTypeCorrections({ season: '…', season_type: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasontypecorrections
  */
@@ -2860,7 +2860,7 @@ const SEASON_TYPE_LEADERS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonTypeLeaders({ season: '…', season_type: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasontypeleaders
  */
@@ -2888,7 +2888,7 @@ const SEASON_TYPES_DEF: WrapperDef = {
  *
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonTypes({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasontypes
  */
@@ -2924,7 +2924,7 @@ const SEASON_WEEK_DEF: WrapperDef = {
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.week - `number | string` — the week of the season (football).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonWeek({ season: '…', season_type: '…', week: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonweek
  */
@@ -2967,7 +2967,7 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
  * @param params.week - `number | string` — the week of the season (football).
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonweekgames
  */
@@ -3009,7 +3009,7 @@ const SEASON_WEEK_POWERINDEX_DEF: WrapperDef = {
  * @param params.week - `number | string` — the week of the season (football).
  * @param params.limit - `number | string` — Page size for this weekly power-index table; pass a limit large enough to avoid paging (table size varies by sport/league -- CFB's FBS table alone is ~134 rows).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonWeekPowerindex({ season: '…', season_type: '…', week: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonweekpowerindex
  */
@@ -3041,7 +3041,7 @@ const SEASON_WEEKS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasonWeeks({ season: '…', season_type: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasonweeks
  */
@@ -3071,7 +3071,7 @@ const SEASONS_DEF: WrapperDef = {
  *
  * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSeasons({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxseasons
  */
@@ -3110,7 +3110,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.group - `number | string` — an ESPN group (conference / division) id.
  * @param params.standings_type - `number | string` — the `type` ESPN query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxStandings({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxstandings
  */
@@ -3133,7 +3133,7 @@ const STANDINGS_CORE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/standings`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxStandingsCore({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxstandingscore
  */
@@ -3156,7 +3156,7 @@ const STATISTICS_LEAGUE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/statistics`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxStatisticsLeague({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxstatisticsleague
  */
@@ -3186,7 +3186,7 @@ const SUMMARY_DEF: WrapperDef = {
  * @param params.event_id - `number | string` — the ESPN event (game) id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @param params.section - `string` — (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
- * @returns Promise<`ParsedTables`> with `{ parsed: true }` (an object of sub-frames, or the chosen `section`'s `Row[]`); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<ParsedTables>` with `{ parsed: true }` (an object of sub-frames, or the chosen `section`'s `Row[]`); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxSummary({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxsummary
  */
@@ -3209,7 +3209,7 @@ const TALENTPICKS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/talentpicks`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTalentpicks({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxtalentpicks
  */
@@ -3237,7 +3237,7 @@ const TEAM_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeam({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxteam
  */
@@ -3265,7 +3265,7 @@ const TEAM_CORE_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeamCore({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxteamcore
  */
@@ -3293,7 +3293,7 @@ const TEAM_DEPTHCHARTS_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeamDepthcharts({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxteamdepthcharts
  */
@@ -3321,7 +3321,7 @@ const TEAM_HISTORY_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeamHistory({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxteamhistory
  */
@@ -3349,7 +3349,7 @@ const TEAM_INJURIES_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeamInjuries({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxteaminjuries
  */
@@ -3377,7 +3377,7 @@ const TEAM_LEADERS_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeamLeaders({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxteamleaders
  */
@@ -3412,7 +3412,7 @@ const TEAM_NEWS_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `50`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeamNews({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxteamnews
  */
@@ -3440,7 +3440,7 @@ const TEAM_RECORD_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeamRecord({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxteamrecord
  */
@@ -3475,7 +3475,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeamRoster({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxteamroster
  */
@@ -3509,7 +3509,7 @@ const TEAM_SCHEDULE_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeamSchedule({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxteamschedule
  */
@@ -3537,7 +3537,7 @@ const TEAM_TRANSACTIONS_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeamTransactions({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxteamtransactions
  */
@@ -3573,7 +3573,7 @@ const TEAMS_CORE_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeamsCore({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxteamscore
  */
@@ -3603,7 +3603,7 @@ const TEAMS_SITE_DEF: WrapperDef = {
  *
  * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTeamsSite({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxteamssite
  */
@@ -3633,7 +3633,7 @@ const TOURNAMENTS_DEF: WrapperDef = {
  *
  * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTournaments({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxtournaments
  */
@@ -3663,7 +3663,7 @@ const TRANSACTIONS_DEF: WrapperDef = {
  *
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxTransactions({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/site#espnligamxtransactions
  */
@@ -3691,7 +3691,7 @@ const VENUE_DEF: WrapperDef = {
  *
  * @param params.venue_id - `number | string` — the ESPN venue id.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxVenue({ venue_id: '…' });
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxvenue
  */
@@ -3721,7 +3721,7 @@ const VENUES_DEF: WrapperDef = {
  *
  * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxVenues({});
  * @see https://js.sportsdataverse.org/docs/ligamx/reference/core#espnligamxvenues
  */

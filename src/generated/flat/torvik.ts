@@ -39,7 +39,7 @@ const GAME_SCHEDULE_DEF: WrapperDef = {
  *
  * @param params.year - `number | string` — the `{year}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.torvik.torvikGameSchedule({ year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/torvik#native-api--barttorvik-t-rank
  */
@@ -78,7 +78,7 @@ const GAME_STATS_DEF: WrapperDef = {
  * @param params.year - `number | string` — 4-digit season ending year (2025 = the 2024-25 season).
  * @param params.json - `number | string` — Response format switch; leave at 1 (the parser expects the headerless JSON array); default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.torvik.torvikGameStats({});
  * @see https://js.sportsdataverse.org/docs/reference/torvik#native-api--barttorvik-t-rank
  */
@@ -117,7 +117,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @param params.year - `number | string` — 4-digit season ending year (2025 = the 2024-25 season).
  * @param params.csv - `number | string` — Response format switch; leave at 1 (the parser expects the headerless CSV); default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.torvik.torvikPlayerStats({});
  * @see https://js.sportsdataverse.org/docs/reference/torvik#native-api--barttorvik-t-rank
  */
@@ -149,7 +149,7 @@ const RATINGS_DEF: WrapperDef = {
  *
  * @param params.year - `number | string` — the `{year}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.torvik.torvikRatings({ year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/torvik#native-api--barttorvik-t-rank
  */
@@ -181,7 +181,7 @@ const TEAM_FACTORS_DEF: WrapperDef = {
  *
  * @param params.year - `number | string` — the `{year}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.torvik.torvikTeamFactors({ year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/torvik#native-api--barttorvik-t-rank
  */

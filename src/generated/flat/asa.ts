@@ -58,7 +58,7 @@ const GAMES_DEF: WrapperDef = {
  *
  * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`AsaGamesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<AsaGamesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaGames({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -136,7 +136,7 @@ const GAMES_XGOALS_DEF: WrapperDef = {
  * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaGamesXgoals({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -215,7 +215,7 @@ const GOALKEEPERS_GOALS_ADDED_DEF: WrapperDef = {
  * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `summary`, `actions`. Default: `summary`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaGoalkeepersGoalsAdded({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -293,7 +293,7 @@ const GOALKEEPERS_XGOALS_DEF: WrapperDef = {
  * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaGoalkeepersXgoals({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -325,7 +325,7 @@ const MANAGERS_DEF: WrapperDef = {
  *
  * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaManagers({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -357,7 +357,7 @@ const PLAYERS_DEF: WrapperDef = {
  *
  * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`AsaPlayersRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<AsaPlayersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaPlayers({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -436,7 +436,7 @@ const PLAYERS_GOALS_ADDED_DEF: WrapperDef = {
  * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `summary`, `actions`. Default: `summary`; an unknown name throws, listing the valid ones.
- * @returns Promise<`AsaPlayersGoalsAddedRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<AsaPlayersGoalsAddedRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaPlayersGoalsAdded({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -514,7 +514,7 @@ const PLAYERS_SALARIES_DEF: WrapperDef = {
  * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`AsaPlayersSalariesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<AsaPlayersSalariesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaPlayersSalaries({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -592,7 +592,7 @@ const PLAYERS_XGOALS_DEF: WrapperDef = {
  * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`AsaPlayersXgoalsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<AsaPlayersXgoalsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaPlayersXgoals({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -624,7 +624,7 @@ const REFEREES_DEF: WrapperDef = {
  *
  * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaReferees({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -656,7 +656,7 @@ const STADIA_DEF: WrapperDef = {
  *
  * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaStadia({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -688,7 +688,7 @@ const TEAMS_DEF: WrapperDef = {
  *
  * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`AsaTeamsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<AsaTeamsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaTeams({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -767,7 +767,7 @@ const TEAMS_GOALS_ADDED_DEF: WrapperDef = {
  * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `summary`, `actions`. Default: `summary`; an unknown name throws, listing the valid ones.
- * @returns Promise<`AsaTeamsGoalsAddedRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<AsaTeamsGoalsAddedRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaTeamsGoalsAdded({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -845,7 +845,7 @@ const TEAMS_XGOALS_DEF: WrapperDef = {
  * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaTeamsXgoals({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
@@ -923,7 +923,7 @@ const TEAMS_XPASS_DEF: WrapperDef = {
  * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaTeamsXpass({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */

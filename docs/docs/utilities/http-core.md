@@ -625,7 +625,7 @@ export function nflProClearTokenCache(): void
 NFL Pro could not authenticate (no token, no plan, a failed browser login).
 
 ```ts
-export class NflProAuthError extends SdvError {} /** A JWT's payload claims (no signature check — we only read our own token). */ function claims(token: string): Record<string, any>
+export class NflProAuthError extends SdvError {}
 ```
 
 ### `PlaywrightLike`

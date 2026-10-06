@@ -156,7 +156,13 @@ import { parse_nwsl_sdp, parse_nwsl_standings, parse_nwsl_stats, parse_nwsl_line
 import { parse_nba_stats_result_sets } from "./nba_stats.js";
 import type { ParsedTables, ParserRow } from "../core/types.js";
 
-/** A flat-API parser: raw JSON -> tidy rectangular rows. */
+/**
+ * A flat-API parser: raw JSON -> tidy rectangular rows.
+ *
+ * @remarks
+ * `section` is only meaningful for a multi-table parser (see `MULTI_TABLE_SECTIONS` in
+ * `_frames.ts`); single-table parsers ignore it.
+ */
 export type ParserFn = (raw: unknown, section?: string) => ParserRow[];
 
 /** Named tables from one payload (a multi-table page, e.g. KenPom or PFF `/v1/teams`): the shared type. */
@@ -165,10 +171,23 @@ export type { ParsedTables };
 /**
  * A registered flat-API parser: tidy rows, or — for a payload that carries
  * several tables (sdv-py returns a dict of frames there) — a dict of row arrays.
+ *
+ * @remarks
+ * The dict shape is returned only by a dict-default multi-table parser called without a
+ * `section` (`parse_pff_report`, `parse_kenpom_page`, `parse_nba_stats_result_sets`).
  */
 export type FlatParserFn = (raw: unknown, section?: string) => ParserRow[] | ParsedTables;
 
-/** Registered parsers, keyed by the `parser` name on a flat `WrapperDef`. */
+/**
+ * Registered parsers, keyed by the `parser` name on a flat `WrapperDef`.
+ *
+ * @remarks
+ * Mirrors sdv-py's `ENDPOINT_PARSERS` / `MLB_ENDPOINT_PARSERS`. Node-only parsers (KenPom's
+ * cheerio-backed HTML parser) are not listed here; they are added at import time through
+ * {@link registerParser} and tracked in {@link NODE_ONLY_PARSERS}. The object is mutable: a
+ * `registerParser` call adds a key in place. `parse_nba_stats_result_sets` is cast to
+ * {@link ParserFn} because its multi-set payloads return a dict of row arrays.
+ */
 export const PARSERS: Record<string, FlatParserFn> = {
   // ---- MLB Stats API ----
   // Generic list flattener (the default for most endpoints).
@@ -347,10 +366,26 @@ export const PARSERS: Record<string, FlatParserFn> = {
  * never reaches that family. Importing the package root (or the
  * `sportsdataverse/parsers` entry, src/parsers/index.ts) registers them; the
  * browser bundle is built from src/parsers/browser.ts, which leaves them out.
+ *
+ * @remarks
+ * Empty until a node-side runtime calls {@link registerParser}; in the browser parser
+ * bundle it stays empty. Membership answers "is this parser absent from the browser bundle?".
  */
 export const NODE_ONLY_PARSERS = new Set<string>();
 
-/** Register a node-only parser (see {@link NODE_ONLY_PARSERS}). */
+/**
+ * Register a node-only parser (see {@link NODE_ONLY_PARSERS}).
+ *
+ * @param name - The parser name a flat `WrapperDef` refers to (e.g. `"parse_kenpom_page"`).
+ * @param fn - The parser; it is stored in {@link PARSERS} under `name`.
+ * @returns Nothing.
+ * @remarks
+ * Mutates {@link PARSERS} and {@link NODE_ONLY_PARSERS} in place; an existing entry under
+ * `name` is overwritten without warning.
+ * @example
+ * registerParser("parse_kenpom_page", parse_kenpom_page);
+ * parserFor("parse_kenpom_page"); // the function just registered
+ */
 export function registerParser(name: string, fn: FlatParserFn): void {
   PARSERS[name] = fn;
   NODE_ONLY_PARSERS.add(name);
@@ -359,6 +394,12 @@ export function registerParser(name: string, fn: FlatParserFn): void {
 /**
  * Look up a parser by name. Returns `undefined` when `name` is missing or not
  * registered, so the caller falls back to returning the raw payload.
+ *
+ * @param name - A key of {@link PARSERS} (a flat wrapper's `parser`); `undefined` or `""`
+ *   resolves to no parser.
+ * @returns The registered parser, or `undefined`.
+ * @example
+ * const rows = parserFor("parse_nhl_web_pbp")?.(payload) ?? payload;
  */
 export function parserFor(name?: string): FlatParserFn | undefined {
   return name ? PARSERS[name] : undefined;

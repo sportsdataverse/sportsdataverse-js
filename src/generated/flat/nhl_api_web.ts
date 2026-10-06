@@ -84,7 +84,7 @@ const BOXSCORE_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — the `{game_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebBoxscoreRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebBoxscoreRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlBoxscore({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -124,7 +124,7 @@ const CLUB_SCHEDULE_MONTH_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `{team}` path segment.
  * @param params.month - `number | string` — the `{month}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlClubScheduleMonth({ team: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -165,7 +165,7 @@ const CLUB_SCHEDULE_SEASON_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `{team}` path segment.
  * @param params.season - `number | string` — the `{season}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebClubScheduleSeasonRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebClubScheduleSeasonRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlClubScheduleSeason({ team: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -205,7 +205,7 @@ const CLUB_SCHEDULE_WEEK_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `{team}` path segment.
  * @param params.date - `number | string` — the `{date}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlClubScheduleWeek({ team: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -252,7 +252,7 @@ const CLUB_STATS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `{season}` path segment; optional.
  * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlClubStats({ team: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -285,7 +285,7 @@ const CLUB_STATS_SEASON_DEF: WrapperDef = {
  *
  * @param params.team - `number | string` — the `{team}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlClubStatsSeason({ team: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -324,7 +324,7 @@ const DRAFT_PICKS_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `{year}` path segment.
  * @param params.round_ - `number | string` — the `{round_}` path segment; optional; default `all`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebDraftPicksRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebDraftPicksRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlDraftPicks({ year: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -352,7 +352,7 @@ const DRAFT_PICKS_NOW_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api-web.nhle.com/v1/draft/picks/now`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebDraftPicksNowRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebDraftPicksNowRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlDraftPicksNow({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -391,7 +391,7 @@ const DRAFT_RANKINGS_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `{year}` path segment.
  * @param params.category - `number | string` — the `{category}` path segment; optional; default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebDraftRankingsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebDraftRankingsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlDraftRankings({ year: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -419,7 +419,7 @@ const DRAFT_RANKINGS_NOW_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api-web.nhle.com/v1/draft/rankings/now`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebDraftRankingsNowRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebDraftRankingsNowRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlDraftRankingsNow({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -447,7 +447,7 @@ const DRAFT_TRACKER_PICKS_NOW_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api-web.nhle.com/v1/draft-tracker/picks/now`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebDraftTrackerPicksNowRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebDraftTrackerPicksNowRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlDraftTrackerPicksNow({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -490,7 +490,7 @@ const GOALIE_LEADERS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `{season}` path segment; optional.
  * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebGoalieLeadersRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebGoalieLeadersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlGoalieLeaders({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -523,7 +523,7 @@ const LANDING_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — the `{game_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebLandingRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebLandingRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlLanding({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -556,7 +556,7 @@ const PBP_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — the `{game_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebPbpRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebPbpRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlWebPbp({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -603,7 +603,7 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `{season}` path segment; optional.
  * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebPlayerGameLogRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebPlayerGameLogRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlPlayerGameLog({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -636,7 +636,7 @@ const PLAYER_LANDING_DEF: WrapperDef = {
  *
  * @param params.player_id - `number | string` — the `{player_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebPlayerLandingRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebPlayerLandingRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlPlayerLanding({ player_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -664,7 +664,7 @@ const PLAYER_SPOTLIGHT_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api-web.nhle.com/v1/player-spotlight`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebPlayerSpotlightRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebPlayerSpotlightRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlPlayerSpotlight({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -702,7 +702,7 @@ const PLAYOFF_SERIES_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `{season}` path segment.
  * @param params.series_letter - `number | string` — the `{series_letter}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebPlayoffSeriesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebPlayoffSeriesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlPlayoffSeries({ season: '…', series_letter: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -735,7 +735,7 @@ const RIGHT_RAIL_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — the `{game_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRightRail({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -776,7 +776,7 @@ const ROSTER_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `{team}` path segment.
  * @param params.season - `number | string` — the `{season}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebRosterRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebRosterRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRoster({ team: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -809,7 +809,7 @@ const ROSTER_SEASON_DEF: WrapperDef = {
  *
  * @param params.team - `number | string` — the `{team}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRosterSeason({ team: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -845,7 +845,7 @@ const SCHEDULE_DEF: WrapperDef = {
  *
  * @param params.date - `number | string` — the `{date}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebScheduleRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebScheduleRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlWebSchedule({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -881,7 +881,7 @@ const SCHEDULE_CALENDAR_DEF: WrapperDef = {
  *
  * @param params.date - `number | string` — the `{date}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlScheduleCalendar({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -917,7 +917,7 @@ const SCORE_DEF: WrapperDef = {
  *
  * @param params.date - `number | string` — the `{date}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebScoreRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebScoreRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlScore({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -960,7 +960,7 @@ const SKATER_LEADERS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `{season}` path segment; optional.
  * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebSkaterLeadersRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebSkaterLeadersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlSkaterLeaders({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -996,7 +996,7 @@ const STANDINGS_DEF: WrapperDef = {
  *
  * @param params.date - `number | string` — the `{date}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebStandingsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebStandingsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStandings({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -1024,7 +1024,7 @@ const STANDINGS_SEASON_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api-web.nhle.com/v1/standings-season`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlApiWebStandingsSeasonRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlApiWebStandingsSeasonRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStandingsSeason({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */

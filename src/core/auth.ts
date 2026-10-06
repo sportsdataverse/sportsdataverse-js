@@ -26,6 +26,21 @@ const CREDENTIAL_KEY = randomBytes(32);
  * The cache key for a set of credentials (e.g. e-mail + password): an HMAC
  * under a random per-process key, so neither the plaintext nor an unsalted
  * hash of a password is held for the life of the process.
+ *
+ * @param parts - The credential parts (e.g. e-mail, password); each is length-prefixed
+ *   before hashing, so `("a", "bc")` and `("ab", "c")` differ.
+ * @returns A 64-character hex HMAC-SHA256 digest, stable within this process only.
+ * @example
+ * ```ts
+ * import { credentialKey } from './core/auth.js'; // not re-exported from the package root
+ *
+ * const sessions = new Map<string, Session>();
+ * const key = credentialKey(email, password);
+ * if (!sessions.has(key)) sessions.set(key, await login(email, password));
+ * ```
+ * @remarks
+ * The HMAC key is 32 random bytes drawn at module load, so a key is useless outside the
+ * process and cannot be used to recover or confirm a password from a dump.
  * @internal
  */
 export function credentialKey(...parts: string[]): string {
@@ -41,6 +56,13 @@ function missingCredential(family: string, what: string): SdvError {
   );
 }
 
+/**
+ * What `request()` passes to {@link AuthProvider.apply} and {@link AuthProvider.refresh}.
+ *
+ * @remarks
+ * `transport` is the family's resolved transport, so a provider's own login / mint call
+ * goes through the same user-configured transport without re-entering auth.
+ */
 export interface AuthContext {
   /** Family stem the request belongs to (e.g. `"nfl_api"`). */
   family: string;
@@ -62,6 +84,23 @@ export interface AuthContext {
  * so a provider that wants to ride out transient errors retries internally.
  * An `SdvError` thrown here reaches the caller unchanged; anything else becomes
  * `AssetFetchError("<family>: auth failed (apply|refresh)")`.
+ *
+ * @example
+ * ```ts
+ * import { configure, type AuthProvider } from 'sportsdataverse';
+ *
+ * const myAuth: AuthProvider = {
+ *   async apply(req, ctx) {
+ *     return { ...req, headers: { 'X-Api-Key': process.env.MY_KEY ?? '', ...req.headers } };
+ *   },
+ * };
+ * configure({ auth: { my_api: myAuth } });
+ * ```
+ * @remarks
+ * The built-ins — {@link bearerAuth}, {@link headerAuth}, {@link queryAuth},
+ * {@link tokenAuth}, {@link sessionAuth} — cover the usual shapes; install one per family
+ * with `configure({ auth })` or `registerFamilyDefaults`. `refresh` is called at most once
+ * per request, after a 401, and the request is then re-sent once.
  */
 export interface AuthProvider {
   /** The request with credentials added (values the caller set win). Throws on failure. */
@@ -77,6 +116,24 @@ export interface AuthProvider {
  * `Authorization: Bearer <token>`; `token` may be a (possibly async) getter.
  * An empty / undefined token throws an SdvError naming the family — the request
  * is never sent with `Bearer undefined`.
+ *
+ * @param token - The bearer token, or a sync / async getter for it (read on every request,
+ *   so a rotated token is picked up). `undefined` / `""` means "no credential".
+ * @returns An {@link AuthProvider} whose `apply` sets `Authorization: Bearer <token>` unless
+ *   the request already carries an `Authorization` header (any casing). It has no `refresh`.
+ * @throws SdvError (from `apply`) when the token is empty / undefined:
+ *   `"<family>: no credential — the bearerAuth token is empty. …"`; no request is made.
+ * @example
+ * ```ts
+ * import { configure, bearerAuth } from 'sportsdataverse';
+ *
+ * configure({ auth: { pff_api: bearerAuth(process.env.PFF_API_KEY) } });
+ * // or a getter, evaluated per request:
+ * configure({ auth: { pff_api: bearerAuth(async () => readKeyFromVault()) } });
+ * ```
+ * @remarks
+ * A getter that throws is not retried by `request()`; a non-SdvError becomes
+ * `AssetFetchError("<family>: auth failed (apply)")`.
  */
 export function bearerAuth(
   token: string | undefined | (() => string | undefined | Promise<string | undefined>)
@@ -91,7 +148,24 @@ export function bearerAuth(
   };
 }
 
-/** Static headers (e.g. an API-key header); `undefined` / empty values are dropped. */
+/**
+ * Static headers (e.g. an API-key header); `undefined` / empty values are dropped.
+ *
+ * @param headers - Header map; an `undefined` / `null` / `""` value (an unset env var) is
+ *   never sent.
+ * @returns An {@link AuthProvider} whose `apply` merges `headers` under the request's own
+ *   (case-insensitively; a header the caller set wins). It has no `refresh`.
+ * @example
+ * ```ts
+ * import { configure, headerAuth } from 'sportsdataverse';
+ *
+ * configure({ auth: { odds_api: headerAuth({ 'X-Api-Key': process.env.ODDS_API_KEY }) } });
+ * ```
+ * @remarks
+ * Unlike {@link bearerAuth} it never throws for a missing value: with every value empty it
+ * sends the request without credentials. The values are read once, when the provider is
+ * built.
+ */
 export function headerAuth(headers: Record<string, string | undefined>): AuthProvider {
   return {
     async apply(req) {
@@ -100,7 +174,22 @@ export function headerAuth(headers: Record<string, string | undefined>): AuthPro
   };
 }
 
-/** Static query params (e.g. `{ apiKey: "…" }`); `undefined` / empty values are dropped. */
+/**
+ * Static query params (e.g. `{ apiKey: "…" }`); `undefined` / empty values are dropped.
+ *
+ * @param params - Query map; an `undefined` / `null` / `""` value is never sent.
+ * @returns An {@link AuthProvider} whose `apply` adds `params` under the request's own
+ *   `query` (a key the caller set wins). It has no `refresh`.
+ * @example
+ * ```ts
+ * import { configure, queryAuth } from 'sportsdataverse';
+ *
+ * configure({ auth: { odds_api: queryAuth({ apiKey: process.env.ODDS_API_KEY }) } });
+ * ```
+ * @remarks
+ * A key sent this way rides in the query string, which `request()` keeps out of every
+ * error message (`url` is query-free) and `redactSecrets` strips from any text.
+ */
 export function queryAuth(params: Record<string, unknown>): AuthProvider {
   return {
     async apply(req) {
@@ -115,8 +204,41 @@ export function queryAuth(params: Record<string, unknown>): AuthProvider {
  * Concurrent requests share one in-flight mint. `refresh` forces a re-mint.
  * `mint` throws on failure (and retries internally if it wants to); an empty
  * token throws an SdvError naming the family.
+ *
+ * @param opts - Minting options.
+ * @param opts.mint - Mints a token (`ctx.transport` is the family's transport for the mint call).
+ *   `expiresAt` in unix epoch seconds; omitted means the token is kept until a 401. The other
+ *   options (`header`, `scheme`, `skewSeconds`) are documented on the parameter type below.
+ * @returns An {@link AuthProvider}. `apply` sets `<header>: <scheme> <token>` unless the request
+ *   already carries that header; `refresh` drops the cache and mints again — unless the 401
+ *   was for a header the caller set themselves, in which case it does nothing.
+ * @throws SdvError (from `apply` / `refresh`) when `mint` resolves without a `token`:
+ *   `"<family>: no credential — the token returned by tokenAuth mint() is empty. …"`.
+ * @example
+ * ```ts
+ * import { configure, tokenAuth } from 'sportsdataverse';
+ *
+ * configure({
+ *   auth: {
+ *     nfl_api: tokenAuth({
+ *       mint: async (ctx) => {
+ *         const url = 'https://api.nfl.com/identity/v3/token';
+ *         const res = await ctx.transport({ method: 'POST', url, body });
+ *         const { accessToken, expiresIn } = res.data as { accessToken: string; expiresIn: number };
+ *         return { token: accessToken, expiresAt: Date.now() / 1000 + expiresIn };
+ *       },
+ *     }),
+ *   },
+ * });
+ * ```
+ * @remarks
+ * Concurrent requests share one in-flight mint; the cache is per provider instance, not per
+ * process. A `mint` that throws is not retried by `request()`; a non-SdvError becomes
+ * `AssetFetchError("<family>: auth failed (apply|refresh)")`. The `nfl_api` family already
+ * registers a provider of this shape (`nflTokenGen`); this example is the pattern only.
  */
 export function tokenAuth(opts: {
+  /** Mint a token; `expiresAt` is unix epoch seconds (omit for "until a 401"). Throws on failure. */
   mint(ctx: AuthContext): Promise<{ token: string; expiresAt?: number }>;
   /** Header to set (default `"Authorization"`). */
   header?: string;
@@ -167,8 +289,37 @@ export function tokenAuth(opts: {
  * epoch seconds); its headers and cookies ride on every request. `refresh`
  * logs in again. `login` throws on failure (and retries internally if it
  * wants to) — `request()` calls it once per need, never in a retry loop.
+ *
+ * @param opts - Login options.
+ * @param opts.login - Performs the login (`ctx.transport` is the family's transport). Returns the
+ *   `headers` and `cookies` to ride on every request and an optional `expiresAt` (unix epoch
+ *   seconds; omitted means the session lasts until a 401).
+ * @returns An {@link AuthProvider}. `apply` merges the session headers under the request's own
+ *   and appends the cookies to any `Cookie` header the caller set (`name=value; …`); `refresh`
+ *   drops the session and logs in again.
+ * @example
+ * ```ts
+ * import { configure, sessionAuth } from 'sportsdataverse';
+ *
+ * configure({
+ *   auth: {
+ *     kenpom: sessionAuth({
+ *       login: async (ctx) => {
+ *         const res = await ctx.transport({ method: 'POST', url: loginUrl, body: form, responseType: 'text' });
+ *         return { cookies: parseSetCookie(res.headers['set-cookie']), expiresAt: Date.now() / 1000 + 3600 };
+ *       },
+ *     }),
+ *   },
+ * });
+ * ```
+ * @remarks
+ * Concurrent requests share one in-flight login. A `login` that throws is not retried by
+ * `request()`; a non-SdvError becomes `AssetFetchError("<family>: auth failed (apply|refresh)")`
+ * and the thrown message never carries the password (it goes through `safeCause`). Unlike
+ * {@link tokenAuth}, `refresh` always logs in again, even when the caller set the header.
  */
 export function sessionAuth(opts: {
+  /** Log in; returns the headers / cookies for every request and an optional `expiresAt`. Throws on failure. */
   login(ctx: AuthContext): Promise<{
     headers?: Record<string, string>;
     cookies?: Record<string, string>;

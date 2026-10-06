@@ -564,7 +564,7 @@ const ALLTIMELEADERSGRIDS_DEF: WrapperDef = {
  * @param params.topx - `number | string` — the `TopX` query parameter; default `10`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsAlltimeleadersgridsTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GPLeaders`, `PTSLeaders`, `ASTLeaders`, `STLLeaders`, `OREBLeaders`, `DREBLeaders`, `REBLeaders`, `BLKLeaders`, `FGMLeaders`, `FGALeaders`, `FG_PCTLeaders`, `TOVLeaders`, `FG3MLeaders`, `FG3ALeaders`, `FG3_PCTLeaders`, `PFLeaders`, `FTMLeaders`, `FTALeaders`, `FT_PCTLeaders`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsAlltimeleadersgridsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GPLeaders`, `PTSLeaders`, `ASTLeaders`, `STLLeaders`, `OREBLeaders`, `DREBLeaders`, `REBLeaders`, `BLKLeaders`, `FGMLeaders`, `FGALeaders`, `FG_PCTLeaders`, `TOVLeaders`, `FG3MLeaders`, `FG3ALeaders`, `FG3_PCTLeaders`, `PFLeaders`, `FTMLeaders`, `FTALeaders`, `FT_PCTLeaders`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsAlltimeleadersgrids({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -624,7 +624,7 @@ const ASSISTLEADERS_DEF: WrapperDef = {
  * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` rolls over in October, `All Star` in August; default `Regular Season`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsAssistleadersRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsAssistleadersRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsAssistleaders({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -822,7 +822,7 @@ const ASSISTTRACKER_DEF: WrapperDef = {
  * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default `null`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsAssisttrackerRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsAssisttrackerRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsAssisttracker({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -887,7 +887,7 @@ const BOXSCOREADVANCEDV2_DEF: WrapperDef = {
  * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscoreadvancedv2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscoreadvancedv2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscoreadvancedv2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -952,7 +952,7 @@ const BOXSCOREADVANCEDV3_DEF: WrapperDef = {
  * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscoreadvancedv3Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscoreadvancedv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscoreadvancedv3({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -987,7 +987,7 @@ const BOXSCOREDEFENSIVEV2_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — the `GameID` query parameter; default `1022200034`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscoredefensivev2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscoredefensivev2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscoredefensivev2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1052,7 +1052,7 @@ const BOXSCOREFOURFACTORSV2_DEF: WrapperDef = {
  * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscorefourfactorsv2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `sqlPlayersFourFactors`, `sqlTeamsFourFactors`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscorefourfactorsv2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `sqlPlayersFourFactors`, `sqlTeamsFourFactors`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscorefourfactorsv2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1117,7 +1117,7 @@ const BOXSCOREFOURFACTORSV3_DEF: WrapperDef = {
  * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscorefourfactorsv3Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscorefourfactorsv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscorefourfactorsv3({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1152,7 +1152,7 @@ const BOXSCOREHUSTLEV2_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — the `GameID` query parameter; default `null`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscorehustlev2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscorehustlev2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscorehustlev2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1187,7 +1187,7 @@ const BOXSCOREMATCHUPSV3_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — the `GameID` query parameter; default `1022200034`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscorematchupsv3Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscorematchupsv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscorematchupsv3({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1252,7 +1252,7 @@ const BOXSCOREMISCV2_DEF: WrapperDef = {
  * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscoremiscv2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `sqlPlayersMisc`, `sqlTeamsMisc`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscoremiscv2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `sqlPlayersMisc`, `sqlTeamsMisc`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscoremiscv2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1317,7 +1317,7 @@ const BOXSCOREMISCV3_DEF: WrapperDef = {
  * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscoremiscv3Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscoremiscv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscoremiscv3({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1352,7 +1352,7 @@ const BOXSCOREPLAYERTRACKV3_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — the `GameID` query parameter; default `1022200034`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscoreplayertrackv3Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscoreplayertrackv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscoreplayertrackv3({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1417,7 +1417,7 @@ const BOXSCORESCORINGV2_DEF: WrapperDef = {
  * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscorescoringv2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `sqlPlayersScoring`, `sqlTeamsScoring`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscorescoringv2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `sqlPlayersScoring`, `sqlTeamsScoring`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscorescoringv2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1482,7 +1482,7 @@ const BOXSCORESCORINGV3_DEF: WrapperDef = {
  * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscorescoringv3Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscorescoringv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscorescoringv3({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1517,7 +1517,7 @@ const BOXSCORESUMMARYV2_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — the `GameID` query parameter; default `1022200034`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscoresummaryv2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GameSummary`, `OtherStats`, `Officials`, `InactivePlayers`, `GameInfo`, `LineScore`, `LastMeeting`, `SeasonSeries`, `AvailableVideo`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscoresummaryv2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GameSummary`, `OtherStats`, `Officials`, `InactivePlayers`, `GameInfo`, `LineScore`, `LastMeeting`, `SeasonSeries`, `AvailableVideo`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscoresummaryv2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1552,7 +1552,7 @@ const BOXSCORESUMMARYV3_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — the `GameID` query parameter; default `1022200034`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscoresummaryv3Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `Officials`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscoresummaryv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `Officials`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscoresummaryv3({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1617,7 +1617,7 @@ const BOXSCORETRADITIONALV2_DEF: WrapperDef = {
  * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscoretraditionalv2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `TeamStarterBenchStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscoretraditionalv2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `TeamStarterBenchStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscoretraditionalv2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1682,7 +1682,7 @@ const BOXSCORETRADITIONALV3_DEF: WrapperDef = {
  * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscoretraditionalv3Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscoretraditionalv3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscoretraditionalv3({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1747,7 +1747,7 @@ const BOXSCOREUSAGEV2_DEF: WrapperDef = {
  * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscoreusagev2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `sqlPlayersUsage`, `sqlTeamsUsage`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscoreusagev2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `sqlPlayersUsage`, `sqlTeamsUsage`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscoreusagev2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1812,7 +1812,7 @@ const BOXSCOREUSAGEV3_DEF: WrapperDef = {
  * @param params.start_range - `number | string` — the `StartRange` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsBoxscoreusagev3Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsBoxscoreusagev3Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsBoxscoreusagev3({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1860,7 +1860,7 @@ const COMMONALLPLAYERS_DEF: WrapperDef = {
  * @param params.season - `number | string` — Season year, e.g. `2024`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. A WNBA season tips off in mid-May and becomes the default in June (`2025` through May 2026, `2026` from June 2026); a draft (`drafthistory`, mid-April) in May. With season type `Playoffs` (or `commonplayoffseries`) the WNBA rolls over in October, after its mid-September playoffs start; with `All Star` in August, after the July game. A month table cannot follow a lockout or pandemic calendar: pass a season then. Without one stats.wnba.com answers an empty HTTP 500 or every season summed; default `null`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsCommonallplayersRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsCommonallplayersRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsCommonallplayers({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1901,7 +1901,7 @@ const COMMONPLAYERINFO_DEF: WrapperDef = {
  * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `1628932`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsCommonplayerinfoTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `CommonPlayerInfo`, `PlayerHeadlineStats`, `AvailableSeasons`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsCommonplayerinfoTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `CommonPlayerInfo`, `PlayerHeadlineStats`, `AvailableSeasons`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsCommonplayerinfo({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1949,7 +1949,7 @@ const COMMONPLAYOFFSERIES_DEF: WrapperDef = {
  * @param params.series_id_nullable - `number | string` — the `SeriesID` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsCommonplayoffseriesRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsCommonplayoffseriesRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsCommonplayoffseries({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -1997,7 +1997,7 @@ const COMMONTEAMROSTER_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1611661317`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsCommonteamrosterTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `CommonTeamRoster`, `Coaches`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsCommonteamrosterTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `CommonTeamRoster`, `Coaches`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsCommonteamroster({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2032,7 +2032,7 @@ const COMMONTEAMYEARS_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `10`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsCommonteamyearsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsCommonteamyearsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsCommonteamyears({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2091,7 +2091,7 @@ const CUMESTATSPLAYER_DEF: WrapperDef = {
  * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` rolls over in October, `All Star` in August; default `Regular Season`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsCumestatsplayerTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalPlayerStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsCumestatsplayerTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalPlayerStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsCumestatsplayer({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2174,7 +2174,7 @@ const CUMESTATSPLAYERGAMES_DEF: WrapperDef = {
  * @param params.vs_team_id_nullable - `number | string` — the `VsTeamID` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsCumestatsplayergamesRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsCumestatsplayergamesRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsCumestatsplayergames({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2233,7 +2233,7 @@ const CUMESTATSTEAM_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1611661317`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsCumestatsteamTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalTeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsCumestatsteamTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalTeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsCumestatsteam({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2322,7 +2322,7 @@ const CUMESTATSTEAMGAMES_DEF: WrapperDef = {
  * @param params.vs_team_id_nullable - `number | string` — the `VsTeamID` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsCumestatsteamgamesRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsCumestatsteamgamesRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsCumestatsteamgames({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2364,7 +2364,7 @@ const DRAFTCOMBINESTATS_DEF: WrapperDef = {
  * @param params.season_all_time - `number | string` — Season year, e.g. `2024`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. A WNBA season tips off in mid-May and becomes the default in June (`2025` through May 2026, `2026` from June 2026); a draft (`drafthistory`, mid-April) in May. With season type `Playoffs` (or `commonplayoffseries`) the WNBA rolls over in October, after its mid-September playoffs start; with `All Star` in August, after the July game. A month table cannot follow a lockout or pandemic calendar: pass a season then. Without one stats.wnba.com answers an empty HTTP 500 or every season summed; default `null`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsDraftcombinestatsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsDraftcombinestatsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsDraftcombinestats({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2442,7 +2442,7 @@ const DRAFTHISTORY_DEF: WrapperDef = {
  * @param params.topx_nullable - `number | string` — the `TopX` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsDrafthistoryRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsDrafthistoryRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsDrafthistory({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2586,7 +2586,7 @@ const FANTASYWIDGET_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsFantasywidgetRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsFantasywidgetRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsFantasywidget({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2621,7 +2621,7 @@ const FRANCHISEHISTORY_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `10`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsFranchisehistoryTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `FranchiseHistory`, `DefunctTeams`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsFranchisehistoryTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `FranchiseHistory`, `DefunctTeams`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsFranchisehistory({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2662,7 +2662,7 @@ const FRANCHISELEADERS_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1611661324`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsFranchiseleadersRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsFranchiseleadersRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsFranchiseleaders({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2715,7 +2715,7 @@ const FRANCHISELEADERSWRANK_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1611661324`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsFranchiseleaderswrankRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsFranchiseleaderswrankRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsFranchiseleaderswrank({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2768,7 +2768,7 @@ const FRANCHISEPLAYERS_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1611661319`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsFranchiseplayersRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsFranchiseplayersRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsFranchiseplayers({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2809,7 +2809,7 @@ const GAMEROTATION_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `10`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsGamerotationTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `AwayTeam`, `HomeTeam`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsGamerotationTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `AwayTeam`, `HomeTeam`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsGamerotation({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2881,7 +2881,7 @@ const HOMEPAGELEADERS_DEF: WrapperDef = {
  * @param params.stat_category - `number | string` — the `StatCategory` query parameter; default `Points`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsHomepageleadersTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `HomePageLeaders`, `LeagueAverage`, `LeagueMax`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsHomepageleadersTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `HomePageLeaders`, `LeagueAverage`, `LeagueMax`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsHomepageleaders({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2953,7 +2953,7 @@ const HOMEPAGEV2_DEF: WrapperDef = {
  * @param params.stat_type - `number | string` — the `StatType` query parameter; default `Traditional`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsHomepagev2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `HomePageStat1`, `HomePageStat2`, `HomePageStat3`, `HomePageStat4`, `HomePageStat5`, `HomePageStat6`, `HomePageStat7`, `HomePageStat8`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsHomepagev2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `HomePageStat1`, `HomePageStat2`, `HomePageStat3`, `HomePageStat4`, `HomePageStat5`, `HomePageStat6`, `HomePageStat7`, `HomePageStat8`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsHomepagev2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -2988,7 +2988,7 @@ const HUSTLESTATSBOXSCORE_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — the `GameID` query parameter; default `null`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsHustlestatsboxscoreTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `HustleStatsAvailable`, `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsHustlestatsboxscoreTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `HustleStatsAvailable`, `PlayerStats`, `TeamStats`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsHustlestatsboxscore({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -3023,7 +3023,7 @@ const INFOGRAPHICFANDUELPLAYER_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — the `GameID` query parameter; default `1022200034`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsInfographicfanduelplayerRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsInfographicfanduelplayerRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsInfographicfanduelplayer({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -3095,7 +3095,7 @@ const LEADERSTILES_DEF: WrapperDef = {
  * @param params.stat - `number | string` — the `Stat` query parameter; default `PTS`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaderstilesTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `LeadersTiles`, `AllTimeSeasonHigh`, `LastSeasonHigh`, `LowSeasonHigh`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaderstilesTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `LeadersTiles`, `AllTimeSeasonHigh`, `LastSeasonHigh`, `LowSeasonHigh`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaderstiles({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -3281,7 +3281,7 @@ const LEAGUEDASHLINEUPS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguedashlineupsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguedashlineupsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguedashlineups({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -3497,7 +3497,7 @@ const LEAGUEDASHPLAYERBIOSTATS_DEF: WrapperDef = {
  * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguedashplayerbiostatsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguedashplayerbiostatsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguedashplayerbiostats({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -3755,7 +3755,7 @@ const LEAGUEDASHPLAYERCLUTCH_DEF: WrapperDef = {
  * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguedashplayerclutchRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguedashplayerclutchRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguedashplayerclutch({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -4001,7 +4001,7 @@ const LEAGUEDASHPLAYERSHOTLOCATIONS_DEF: WrapperDef = {
  * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguedashplayershotlocationsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguedashplayershotlocationsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguedashplayershotlocations({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -4247,7 +4247,7 @@ const LEAGUEDASHPLAYERSTATS_DEF: WrapperDef = {
  * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguedashplayerstatsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguedashplayerstatsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguedashplayerstats({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -4463,7 +4463,7 @@ const LEAGUEDASHPTDEFEND_DEF: WrapperDef = {
  * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguedashptdefendRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguedashptdefendRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguedashptdefend({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -4685,7 +4685,7 @@ const LEAGUEDASHTEAMCLUTCH_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguedashteamclutchRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguedashteamclutchRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguedashteamclutch({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -4895,7 +4895,7 @@ const LEAGUEDASHTEAMSHOTLOCATIONS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguedashteamshotlocationsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguedashteamshotlocationsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguedashteamshotlocations({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -5105,7 +5105,7 @@ const LEAGUEDASHTEAMSTATS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguedashteamstatsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguedashteamstatsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguedashteamstats({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -5663,7 +5663,7 @@ const LEAGUEGAMEFINDER_DEF: WrapperDef = {
  * @param params.years_experience_nullable - `number | string` — the `YearsExperience` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguegamefinderRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguegamefinderRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguegamefinder({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -5747,7 +5747,7 @@ const LEAGUEGAMELOG_DEF: WrapperDef = {
  * @param params.sorter - `number | string` — the `Sorter` query parameter; default `DATE`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguegamelogRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguegamelogRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguegamelog({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -5819,7 +5819,7 @@ const LEAGUELEADERS_DEF: WrapperDef = {
  * @param params.stat_category_abbreviation - `number | string` — the `StatCategory` query parameter; default `PTS`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeagueleadersRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeagueleadersRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeagueleaders({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -6011,7 +6011,7 @@ const LEAGUELINEUPVIZ_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguelineupvizRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguelineupvizRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguelineupviz({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -6167,7 +6167,7 @@ const LEAGUEPLAYERONDETAILS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeagueplayerondetailsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeagueplayerondetailsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeagueplayerondetails({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -6245,7 +6245,7 @@ const LEAGUESEASONMATCHUPS_DEF: WrapperDef = {
  * @param params.season_type_playoffs - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` rolls over in October, `All Star` in August; default `Regular Season`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeagueseasonmatchupsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeagueseasonmatchupsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeagueseasonmatchups({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -6299,7 +6299,7 @@ const LEAGUESTANDINGSV3_DEF: WrapperDef = {
  * @param params.season_nullable - `number | string` — the `SeasonYear` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsLeaguestandingsv3Row[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsLeaguestandingsv3Row[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsLeaguestandingsv3({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -6346,7 +6346,7 @@ const PLAYBYPLAYV2_DEF: WrapperDef = {
  * @param params.start_period - `number | string` — the `StartPeriod` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlaybyplayv2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayByPlay`, `AvailableVideo`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlaybyplayv2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `PlayByPlay`, `AvailableVideo`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlaybyplayv2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -6393,7 +6393,7 @@ const PLAYBYPLAYV3_DEF: WrapperDef = {
  * @param params.start_period - `number | string` — the `StartPeriod` query parameter; default `0`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlaybyplayv3({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -6428,7 +6428,7 @@ const PLAYERAWARDS_DEF: WrapperDef = {
  * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `1628932`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerawardsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerawardsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerawards({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -6482,7 +6482,7 @@ const PLAYERCAREERBYCOLLEGEROLLUP_DEF: WrapperDef = {
  * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` rolls over in October, `All Star` in August; default `Regular Season`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayercareerbycollegerollupTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `East`, `South`, `Midwest`, `West`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayercareerbycollegerollupTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `East`, `South`, `Midwest`, `West`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayercareerbycollegerollup({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -6529,7 +6529,7 @@ const PLAYERCAREERSTATS_DEF: WrapperDef = {
  * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `1628932`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayercareerstatsTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsShowcaseSeason`, `CareerTotalsShowcaseSeason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayercareerstatsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsShowcaseSeason`, `CareerTotalsShowcaseSeason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayercareerstats({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -6709,7 +6709,7 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
  * @param params.vs_player_id_list - `number | string` — the `VsPlayerIDList` query parameter; default `202252,203399,1631022,1628878,204333`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayercompareTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallCompare`, `Individual`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayercompareTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallCompare`, `Individual`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayercompare({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -6877,7 +6877,7 @@ const PLAYERDASHBOARDBYCLUTCH_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerdashboardbyclutchTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5Min5PointPlayerDashboard`, `Last3Min5PointPlayerDashboard`, `Last1Min5PointPlayerDashboard`, `Last30Sec3PointPlayerDashboard`, `Last10Sec3PointPlayerDashboard`, `Last5MinPlusMinus5PointPlayerDashboard`, `Last3MinPlusMinus5PointPlayerDashboard`, `Last1MinPlusMinus5PointPlayerDashboard`, `Last30Sec3Point2PlayerDashboard`, `Last10Sec3Point2PlayerDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerdashboardbyclutchTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5Min5PointPlayerDashboard`, `Last3Min5PointPlayerDashboard`, `Last1Min5PointPlayerDashboard`, `Last30Sec3PointPlayerDashboard`, `Last10Sec3PointPlayerDashboard`, `Last5MinPlusMinus5PointPlayerDashboard`, `Last3MinPlusMinus5PointPlayerDashboard`, `Last1MinPlusMinus5PointPlayerDashboard`, `Last30Sec3Point2PlayerDashboard`, `Last10Sec3Point2PlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbyclutch({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -7045,7 +7045,7 @@ const PLAYERDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerdashboardbygamesplitsTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByHalfPlayerDashboard`, `ByPeriodPlayerDashboard`, `ByScoreMarginPlayerDashboard`, `ByActualMarginPlayerDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerdashboardbygamesplitsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByHalfPlayerDashboard`, `ByPeriodPlayerDashboard`, `ByScoreMarginPlayerDashboard`, `ByActualMarginPlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbygamesplits({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -7213,7 +7213,7 @@ const PLAYERDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerdashboardbygeneralsplitsTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `LocationPlayerDashboard`, `WinsLossesPlayerDashboard`, `MonthPlayerDashboard`, `PrePostAllStarPlayerDashboard`, `StartingPosition`, `DaysRestPlayerDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerdashboardbygeneralsplitsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `LocationPlayerDashboard`, `WinsLossesPlayerDashboard`, `MonthPlayerDashboard`, `PrePostAllStarPlayerDashboard`, `StartingPosition`, `DaysRestPlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbygeneralsplits({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -7381,7 +7381,7 @@ const PLAYERDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerdashboardbylastngamesTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5PlayerDashboard`, `Last10PlayerDashboard`, `Last15PlayerDashboard`, `Last20PlayerDashboard`, `GameNumberPlayerDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerdashboardbylastngamesTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5PlayerDashboard`, `Last10PlayerDashboard`, `Last15PlayerDashboard`, `Last20PlayerDashboard`, `GameNumberPlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbylastngames({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -7549,7 +7549,7 @@ const PLAYERDASHBOARDBYOPPONENT_DEF: WrapperDef = {
  * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerdashboardbyopponentTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ConferencePlayerDashboard`, `DivisionPlayerDashboard`, `OpponentPlayerDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerdashboardbyopponentTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ConferencePlayerDashboard`, `DivisionPlayerDashboard`, `OpponentPlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbyopponent({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -7717,7 +7717,7 @@ const PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerdashboardbyshootingsplitsTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Shot5FTPlayerDashboard`, `Shot8FTPlayerDashboard`, `ShotAreaPlayerDashboard`, `AssitedShotPlayerDashboard`, `ShotTypeSummaryPlayerDashboard`, `ShotTypePlayerDashboard`, `AssistedBy`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerdashboardbyshootingsplitsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Shot5FTPlayerDashboard`, `Shot8FTPlayerDashboard`, `ShotAreaPlayerDashboard`, `AssitedShotPlayerDashboard`, `ShotTypeSummaryPlayerDashboard`, `ShotTypePlayerDashboard`, `AssistedBy`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbyshootingsplits({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -7885,7 +7885,7 @@ const PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerdashboardbyteamperformanceTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ScoreDifferentialPlayerDashboard`, `PointsScoredPlayerDashboard`, `PontsAgainstPlayerDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerdashboardbyteamperformanceTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ScoreDifferentialPlayerDashboard`, `PointsScoredPlayerDashboard`, `PontsAgainstPlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbyteamperformance({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -8053,7 +8053,7 @@ const PLAYERDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerdashboardbyyearoveryearTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByYearPlayerDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerdashboardbyyearoveryearTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByYearPlayerDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbyyearoveryear({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -8191,7 +8191,7 @@ const PLAYERDASHPTSHOTDEFEND_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerdashptshotdefendRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerdashptshotdefendRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerdashptshotdefend({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -8239,7 +8239,7 @@ const PLAYERESTIMATEDMETRICS_DEF: WrapperDef = {
  * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` rolls over in October, `All Star` in August; default `Regular Season`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerestimatedmetricsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerestimatedmetricsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerestimatedmetrics({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -8323,7 +8323,7 @@ const PLAYERFANTASYPROFILE_DEF: WrapperDef = {
  * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` rolls over in October, `All Star` in August; default `Regular Season`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerfantasyprofileTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `Location`, `LastNGames`, `DaysRestModified`, `Opponent`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerfantasyprofileTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `Location`, `LastNGames`, `DaysRestModified`, `Opponent`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerfantasyprofile({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -8377,7 +8377,7 @@ const PLAYERFANTASYPROFILEBARGRAPH_DEF: WrapperDef = {
  * @param params.season_type_all_star_nullable - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` rolls over in October, `All Star` in August; default `Regular Season`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerfantasyprofilebargraphTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `SeasonAvg`, `LastFiveGamesAvg`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerfantasyprofilebargraphTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `SeasonAvg`, `LastFiveGamesAvg`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerfantasyprofilebargraph({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -8443,7 +8443,7 @@ const PLAYERGAMELOG_DEF: WrapperDef = {
  * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` rolls over in October, `All Star` in August; default `Regular Season`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayergamelogRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayergamelogRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayergamelog({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -8599,7 +8599,7 @@ const PLAYERGAMELOGS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayergamelogsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayergamelogsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayergamelogs({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -9163,7 +9163,7 @@ const PLAYERGAMESTREAKFINDER_DEF: WrapperDef = {
  * @param params.years_experience_nullable - `number | string` — the `YearsExperience` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayergamestreakfinderRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayergamestreakfinderRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayergamestreakfinder({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -9271,7 +9271,7 @@ const PLAYERINDEX_DEF: WrapperDef = {
  * @param params.weight_nullable - `number | string` — the `Weight` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerindexRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerindexRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerindex({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -9331,7 +9331,7 @@ const PLAYERNEXTNGAMES_DEF: WrapperDef = {
  * @param params.season_type_all_star - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` rolls over in October, `All Star` in August; default `Regular Season`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayernextngamesRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayernextngamesRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayernextngames({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -9378,7 +9378,7 @@ const PLAYERPROFILEV2_DEF: WrapperDef = {
  * @param params.player_id - `number | string` — the `PlayerID` query parameter; default `1628932`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayerprofilev2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsPreseason`, `CareerTotalsPreseason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`, `NextGame`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayerprofilev2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsPreseason`, `CareerTotalsPreseason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`, `NextGame`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayerprofilev2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -9540,7 +9540,7 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
  * @param params.vs_player_id - `number | string` — the `VsPlayerID` query parameter; default `1629488`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsPlayervsplayerTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`, `PlayerInfo`, `VsPlayerInfo`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsPlayervsplayerTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`, `PlayerInfo`, `VsPlayerInfo`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsPlayervsplayer({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -9582,7 +9582,7 @@ const SCHEDULELEAGUEV2_DEF: WrapperDef = {
  * @param params.season - `number | string` — Season year, e.g. `2024`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. A WNBA season tips off in mid-May and becomes the default in June (`2025` through May 2026, `2026` from June 2026); a draft (`drafthistory`, mid-April) in May. With season type `Playoffs` (or `commonplayoffseries`) the WNBA rolls over in October, after its mid-September playoffs start; with `All Star` in August, after the July game. A month table cannot follow a lockout or pandemic calendar: pass a season then. Without one stats.wnba.com answers an empty HTTP 500 or every season summed; default `null`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsScheduleleaguev2Row[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsScheduleleaguev2Row[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsScheduleleaguev2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -9624,7 +9624,7 @@ const SCHEDULELEAGUEV2INT_DEF: WrapperDef = {
  * @param params.season - `number | string` — Season year, e.g. `2024`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. A WNBA season tips off in mid-May and becomes the default in June (`2025` through May 2026, `2026` from June 2026); a draft (`drafthistory`, mid-April) in May. With season type `Playoffs` (or `commonplayoffseries`) the WNBA rolls over in October, after its mid-September playoffs start; with `All Star` in August, after the July game. A month table cannot follow a lockout or pandemic calendar: pass a season then. Without one stats.wnba.com answers an empty HTTP 500 or every season summed; default `null`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsScheduleleaguev2intRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsScheduleleaguev2intRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsScheduleleaguev2int({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -9671,7 +9671,7 @@ const SCOREBOARDV2_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `10`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsScoreboardv2Tables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GameHeader`, `LineScore`, `SeriesStandings`, `LastMeeting`, `EastConfStandingsByDay`, `WestConfStandingsByDay`, `Available`, `TeamLeaders`, `TicketLinks`, `WinProbability`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsScoreboardv2Tables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `GameHeader`, `LineScore`, `SeriesStandings`, `LastMeeting`, `EastConfStandingsByDay`, `WestConfStandingsByDay`, `Available`, `TeamLeaders`, `TicketLinks`, `WinProbability`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsScoreboardv2({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -9712,7 +9712,7 @@ const SCOREBOARDV3_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `10`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsScoreboardv3Row[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsScoreboardv3Row[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsScoreboardv3({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -9928,7 +9928,7 @@ const SHOTCHARTDETAIL_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsShotchartdetailTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Shot_Chart_Detail`, `LeagueAverages`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsShotchartdetailTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Shot_Chart_Detail`, `LeagueAverages`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsShotchartdetail({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -9970,7 +9970,7 @@ const SHOTCHARTLEAGUEWIDE_DEF: WrapperDef = {
  * @param params.season - `number | string` — Season year, e.g. `2024`. Defaults at call time by a calendar cutoff, the month after a season's first games, so it can lag the newest rows by a few weeks. A WNBA season tips off in mid-May and becomes the default in June (`2025` through May 2026, `2026` from June 2026); a draft (`drafthistory`, mid-April) in May. With season type `Playoffs` (or `commonplayoffseries`) the WNBA rolls over in October, after its mid-September playoffs start; with `All Star` in August, after the July game. A month table cannot follow a lockout or pandemic calendar: pass a season then. Without one stats.wnba.com answers an empty HTTP 500 or every season summed; default `null`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsShotchartleaguewideRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsShotchartleaguewideRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsShotchartleaguewide({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -10120,7 +10120,7 @@ const SHOTCHARTLINEUPDETAIL_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsShotchartlineupdetailTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `ShotChartLineupDetail`, `ShotChartLineupLeagueAverage`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsShotchartlineupdetailTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `ShotChartLineupDetail`, `ShotChartLineupLeagueAverage`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsShotchartlineupdetail({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -10288,7 +10288,7 @@ const TEAMDASHBOARDBYCLUTCH_DEF: WrapperDef = {
  * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamdashboardbyclutchTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5Min5PointTeamDashboard`, `Last3Min5PointTeamDashboard`, `Last1Min5PointTeamDashboard`, `Last30Sec3PointTeamDashboard`, `Last10Sec3PointTeamDashboard`, `Last5MinPlusMinus5PointTeamDashboard`, `Last3MinPlusMinus5PointTeamDashboard`, `Last1MinPlusMinus5PointTeamDashboard`, `Last30Sec3Point2TeamDashboard`, `Last10Sec3Point2TeamDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamdashboardbyclutchTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5Min5PointTeamDashboard`, `Last3Min5PointTeamDashboard`, `Last1Min5PointTeamDashboard`, `Last30Sec3PointTeamDashboard`, `Last10Sec3PointTeamDashboard`, `Last5MinPlusMinus5PointTeamDashboard`, `Last3MinPlusMinus5PointTeamDashboard`, `Last1MinPlusMinus5PointTeamDashboard`, `Last30Sec3Point2TeamDashboard`, `Last10Sec3Point2TeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbyclutch({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -10456,7 +10456,7 @@ const TEAMDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
  * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamdashboardbygamesplitsTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByHalfTeamDashboard`, `ByPeriodTeamDashboard`, `ByScoreMarginTeamDashboard`, `ByActualMarginTeamDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamdashboardbygamesplitsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByHalfTeamDashboard`, `ByPeriodTeamDashboard`, `ByScoreMarginTeamDashboard`, `ByActualMarginTeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbygamesplits({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -10624,7 +10624,7 @@ const TEAMDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamdashboardbygeneralsplitsTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `LocationTeamDashboard`, `WinsLossesTeamDashboard`, `MonthTeamDashboard`, `PrePostAllStarTeamDashboard`, `DaysRestTeamDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamdashboardbygeneralsplitsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `LocationTeamDashboard`, `WinsLossesTeamDashboard`, `MonthTeamDashboard`, `PrePostAllStarTeamDashboard`, `DaysRestTeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbygeneralsplits({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -10792,7 +10792,7 @@ const TEAMDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
  * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamdashboardbylastngamesTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5TeamDashboard`, `Last10TeamDashboard`, `Last15TeamDashboard`, `Last20TeamDashboard`, `GameNumberTeamDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamdashboardbylastngamesTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5TeamDashboard`, `Last10TeamDashboard`, `Last15TeamDashboard`, `Last20TeamDashboard`, `GameNumberTeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbylastngames({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -10960,7 +10960,7 @@ const TEAMDASHBOARDBYOPPONENT_DEF: WrapperDef = {
  * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamdashboardbyopponentTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ConferenceTeamDashboard`, `DivisionTeamDashboard`, `OpponentTeamDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamdashboardbyopponentTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ConferenceTeamDashboard`, `DivisionTeamDashboard`, `OpponentTeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbyopponent({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -11128,7 +11128,7 @@ const TEAMDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamdashboardbyshootingsplitsTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Shot5FTTeamDashboard`, `Shot8FTTeamDashboard`, `ShotAreaTeamDashboard`, `AssitedShotTeamDashboard`, `ShotTypeTeamDashboard`, `AssistedBy`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamdashboardbyshootingsplitsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Shot5FTTeamDashboard`, `Shot8FTTeamDashboard`, `ShotAreaTeamDashboard`, `AssitedShotTeamDashboard`, `ShotTypeTeamDashboard`, `AssistedBy`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbyshootingsplits({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -11296,7 +11296,7 @@ const TEAMDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
  * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamdashboardbyteamperformanceTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ScoreDifferentialTeamDashboard`, `PointsScoredTeamDashboard`, `PontsAgainstTeamDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamdashboardbyteamperformanceTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ScoreDifferentialTeamDashboard`, `PointsScoredTeamDashboard`, `PontsAgainstTeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbyteamperformance({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -11464,7 +11464,7 @@ const TEAMDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
  * @param params.vs_division - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamdashboardbyyearoveryearTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByYearTeamDashboard`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamdashboardbyyearoveryearTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByYearTeamDashboard`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbyyearoveryear({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -11644,7 +11644,7 @@ const TEAMDASHLINEUPS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamdashlineupsTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `Lineups`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamdashlineupsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `Lineups`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamdashlineups({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -11679,7 +11679,7 @@ const TEAMDETAILS_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1611661328`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamdetailsTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `TeamBackground`, `TeamHistory`, `TeamSocialSites`, `TeamAwardsChampionships`, `TeamAwardsConf`, `TeamAwardsDiv`, `TeamHof`, `TeamRetired`, `TeamAwardsCommCup`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamdetailsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `TeamBackground`, `TeamHistory`, `TeamSocialSites`, `TeamAwardsChampionships`, `TeamAwardsConf`, `TeamAwardsDiv`, `TeamHof`, `TeamRetired`, `TeamAwardsCommCup`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamdetails({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -11727,7 +11727,7 @@ const TEAMESTIMATEDMETRICS_DEF: WrapperDef = {
  * @param params.season_type - `number | string` — Season type, a label: `Regular Season`, `Pre Season`, `Playoffs` or `All Star` (each endpoint takes a subset). Not ESPN's numeric code: `3` is HTTP 400. A default season follows it: `Playoffs` rolls over in October, `All Star` in August; default `Regular Season`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamestimatedmetricsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamestimatedmetricsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamestimatedmetrics({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -11793,7 +11793,7 @@ const TEAMGAMELOG_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1611661328`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamgamelogRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamgamelogRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamgamelog({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -11949,7 +11949,7 @@ const TEAMGAMELOGS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamgamelogsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamgamelogsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamgamelogs({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -12003,7 +12003,7 @@ const TEAMINFOCOMMON_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1611661328`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeaminfocommonTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `TeamInfoCommon`, `TeamSeasonRanks`, `AvailableSeasons`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeaminfocommonTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `TeamInfoCommon`, `TeamSeasonRanks`, `AvailableSeasons`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeaminfocommon({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -12171,7 +12171,7 @@ const TEAMPLAYERDASHBOARD_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamplayerdashboardTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `TeamOverall`, `PlayersSeasonTotals`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamplayerdashboardTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `TeamOverall`, `PlayersSeasonTotals`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamplayerdashboard({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -12327,7 +12327,7 @@ const TEAMPLAYERONOFFDETAILS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamplayeronoffdetailsTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffDetails`, `PlayersOnCourtTeamPlayerOnOffDetails`, `PlayersOffCourtTeamPlayerOnOffDetails`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamplayeronoffdetailsTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffDetails`, `PlayersOnCourtTeamPlayerOnOffDetails`, `PlayersOffCourtTeamPlayerOnOffDetails`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamplayeronoffdetails({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -12483,7 +12483,7 @@ const TEAMPLAYERONOFFSUMMARY_DEF: WrapperDef = {
  * @param params.vs_division_nullable - `number | string` — the `VsDivision` query parameter; default ``.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamplayeronoffsummaryTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffSummary`, `PlayersOnCourtTeamPlayerOnOffSummary`, `PlayersOffCourtTeamPlayerOnOffSummary`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamplayeronoffsummaryTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffSummary`, `PlayersOnCourtTeamPlayerOnOffSummary`, `PlayersOffCourtTeamPlayerOnOffSummary`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamplayeronoffsummary({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -12651,7 +12651,7 @@ const TEAMVSPLAYER_DEF: WrapperDef = {
  * @param params.vs_player_id - `number | string` — the `VsPlayerID` query parameter; default `1628932`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamvsplayerTables | Row[]`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `vsPlayerOverall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamvsplayerTables | Row[]>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `Overall`, `vsPlayerOverall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamvsplayer({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -12704,7 +12704,7 @@ const TEAMYEARBYYEARSTATS_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the `TeamID` query parameter; default `1611661328`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsTeamyearbyyearstatsRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsTeamyearbyyearstatsRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsTeamyearbyyearstats({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */
@@ -12745,7 +12745,7 @@ const VIDEOSTATUS_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — the `LeagueID` query parameter; default `10`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
- * @returns Promise<`WnbaStatsVideostatusRow[] | ParsedTables`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<WnbaStatsVideostatusRow[] | ParsedTables>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.wnba.wnbaStatsVideostatus({});
  * @see https://js.sportsdataverse.org/docs/wnba/reference/native#native-api--wnba-stats-api-statswnbacom
  */

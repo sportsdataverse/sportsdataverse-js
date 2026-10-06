@@ -70,7 +70,7 @@ const EVENT_MARKETS_DEF: WrapperDef = {
  * @param params.bookmakers - `number | string` — the `bookmakers` query parameter.
  * @param params.date_format - `number | string` — the `dateFormat` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiEventMarkets({ sport_key: '…', event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
@@ -139,7 +139,7 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @param params.date_format - `number | string` — the `dateFormat` query parameter.
  * @param params.bookmakers - `number | string` — the `bookmakers` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiEventOdds({ sport_key: '…', event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
@@ -213,7 +213,7 @@ const EVENT_ODDS_HISTORY_DEF: WrapperDef = {
  * @param params.date_format - `number | string` — the `dateFormat` query parameter.
  * @param params.bookmakers - `number | string` — the `bookmakers` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiEventOddsHistory({ sport_key: '…', event_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
@@ -251,7 +251,7 @@ const SPORTS_DEF: WrapperDef = {
  * @param params.api_key - `number | string` — the `apiKey` query parameter.
  * @param params.all - `number | string` — the `all` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSports({});
  * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
@@ -309,7 +309,7 @@ const SPORTS_EVENTS_DEF: WrapperDef = {
  * @param params.commence_time_from - `number | string` — the `commenceTimeFrom` query parameter.
  * @param params.commence_time_to - `number | string` — the `commenceTimeTo` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSportsEvents({ sport_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
@@ -372,7 +372,7 @@ const SPORTS_EVENTS_HISTORY_DEF: WrapperDef = {
  * @param params.commence_time_from - `number | string` — the `commenceTimeFrom` query parameter.
  * @param params.commence_time_to - `number | string` — the `commenceTimeTo` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSportsEventsHistory({ sport_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
@@ -452,7 +452,7 @@ const SPORTS_ODDS_DEF: WrapperDef = {
  * @param params.commence_time_from - `number | string` — the `commenceTimeFrom` query parameter.
  * @param params.commence_time_to - `number | string` — the `commenceTimeTo` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSportsOdds({ sport_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
@@ -527,7 +527,7 @@ const SPORTS_ODDS_HISTORY_DEF: WrapperDef = {
  * @param params.event_ids - `number | string` — the `eventIds` query parameter.
  * @param params.bookmakers - `number | string` — the `bookmakers` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSportsOddsHistory({ sport_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
@@ -565,7 +565,7 @@ const SPORTS_PARTICIPANTS_DEF: WrapperDef = {
  * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
  * @param params.api_key - `number | string` — the `apiKey` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSportsParticipants({ sport_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
@@ -618,7 +618,7 @@ const SPORTS_SCORES_DEF: WrapperDef = {
  * @param params.date_format - `number | string` — the `dateFormat` query parameter.
  * @param params.event_ids - `number | string` — the `eventIds` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSportsScores({ sport_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */

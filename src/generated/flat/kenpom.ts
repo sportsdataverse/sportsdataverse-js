@@ -68,7 +68,7 @@ const ARCHIVE_RATINGS_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomArchiveRatings({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -104,7 +104,7 @@ const ARENAS_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomArenas({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -145,7 +145,7 @@ const BOX_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomBox({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -181,7 +181,7 @@ const COACH_HISTORY_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomCoachHistory({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -222,7 +222,7 @@ const CONFERENCE_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomConference({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -258,7 +258,7 @@ const CONFERENCE_HISTORY_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomConferenceHistory({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -294,7 +294,7 @@ const CONFERENCE_STATS_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomConferenceStats({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -330,7 +330,7 @@ const EFFICIENCY_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomEfficiency({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -366,7 +366,7 @@ const FAN_MATCH_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomFanMatch({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -402,7 +402,7 @@ const FOUL_TROUBLE_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomFoulTrouble({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -438,7 +438,7 @@ const FOUR_FACTORS_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomFourFactors({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -479,7 +479,7 @@ const GAME_ATTRIBUTES_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomGameAttributes({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -520,7 +520,7 @@ const GAME_PLAN_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomGamePlan({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -556,7 +556,7 @@ const HEIGHT_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomHeight({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -586,7 +586,7 @@ const HOME_COURT_ADVANTAGE_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomHomeCourtAdvantage({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -622,7 +622,7 @@ const KPOY_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomKpoy({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -658,7 +658,7 @@ const OFFICIALS_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomOfficials({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -704,7 +704,7 @@ const OPPONENT_TRACKER_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomOpponentTracker({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -740,7 +740,7 @@ const PLAYER_CAREER_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomPlayerCareer({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -791,7 +791,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomPlayerStats({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -827,7 +827,7 @@ const POINT_DISTRIBUTION_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomPointDistribution({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -857,7 +857,7 @@ const PROGRAM_RATINGS_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomProgramRatings({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -893,7 +893,7 @@ const RATINGS_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomRatings({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -934,7 +934,7 @@ const REFEREE_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomReferee({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -975,7 +975,7 @@ const TEAM_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomTeam({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -1011,7 +1011,7 @@ const TEAM_HISTORY_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomTeamHistory({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -1052,7 +1052,7 @@ const TEAM_PLAYERS_EXPANDED_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomTeamPlayersExpanded({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -1093,7 +1093,7 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomTeamStats({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -1123,7 +1123,7 @@ const TRENDS_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomTrends({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
@@ -1164,7 +1164,7 @@ const WIN_PROBABILITY_DEF: WrapperDef = {
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomWinProbability({});
  * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */

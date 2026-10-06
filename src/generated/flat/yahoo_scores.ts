@@ -66,7 +66,7 @@ const BOXSCORE_DEF: WrapperDef = {
  * @param params.v - `number | string` — the `v` query parameter; default `4`.
  * @param params.polling - `number | string` — the `polling` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooScoresBoxscore({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports-scores
  */
@@ -144,7 +144,7 @@ const SCOREBOARD_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter; default `500`.
  * @param params.v - `number | string` — the `v` query parameter; default `2`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooScoresScoreboard({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports-scores
  */

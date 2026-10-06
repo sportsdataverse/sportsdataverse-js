@@ -81,7 +81,7 @@ const COACHES_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Sports247Sports247CoachesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<Sports247Sports247CoachesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247Coaches({});
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
@@ -128,7 +128,7 @@ const COMPOSITE_TEAM_RANKING_FEED_DEF: WrapperDef = {
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `50`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Sports247Sports247CompositeTeamRankingFeedRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<Sports247Sports247CompositeTeamRankingFeedRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247CompositeTeamRankingFeed({ year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
@@ -195,7 +195,7 @@ const INSTITUTION_RANKINGS_DEF: WrapperDef = {
  * @param params.institution_key - `number | string` — the `institutionKey` query parameter.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Sports247Sports247InstitutionRankingsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<Sports247Sports247InstitutionRankingsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247InstitutionRankings({ year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
@@ -241,7 +241,7 @@ const POSITIONS_DEF: WrapperDef = {
  * @param params.ranking_key - `number | string` — the `rankingKey` query parameter.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Sports247Sports247PositionsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<Sports247Sports247PositionsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247Positions({});
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
@@ -304,7 +304,7 @@ const RECRUITS_DEF: WrapperDef = {
  * @param params.state_abbreviation - `number | string` — the `stateAbbreviation` query parameter.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Sports247Sports247RecruitsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<Sports247Sports247RecruitsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247Recruits({});
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
@@ -340,7 +340,7 @@ const SPORT_YEARS_DEF: WrapperDef = {
  * @param params.sport_key - `number | string` — 247Sports sport key (1 = football, 2 = basketball); optional; default `1`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Sports247Sports247SportYearsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<Sports247Sports247SportYearsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SportYears({});
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
@@ -381,7 +381,7 @@ const TAGS_AUTOCOMPLETE_DEF: WrapperDef = {
  * @param params.items - `number | string` — the `items` query parameter; default `10`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Sports247Sports247TagsAutocompleteRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<Sports247Sports247TagsAutocompleteRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247TagsAutocomplete({});
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
@@ -432,7 +432,7 @@ const TARGET_PREDICTIONS_DEF: WrapperDef = {
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `50`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Sports247Sports247TargetPredictionsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<Sports247Sports247TargetPredictionsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247TargetPredictions({ site_key: '…', year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
@@ -478,7 +478,7 @@ const TEAMS_DEF: WrapperDef = {
  * @param params.institution_type - `number | string` — the `institutionType` query parameter.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Sports247Sports247TeamsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<Sports247Sports247TeamsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247Teams({});
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
@@ -525,7 +525,7 @@ const TRANSFER_PORTAL_PLAYER_FEED_DEF: WrapperDef = {
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `50`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Sports247Sports247TransferPortalPlayerFeedRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<Sports247Sports247TransferPortalPlayerFeedRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247TransferPortalPlayerFeed({ year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
@@ -572,7 +572,7 @@ const TRANSFER_PORTAL_TEAM_FEED_DEF: WrapperDef = {
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `50`.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Sports247Sports247TransferPortalTeamFeedRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<Sports247Sports247TransferPortalTeamFeedRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247TransferPortalTeamFeed({ year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */
@@ -625,7 +625,7 @@ const TRANSFERS_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.headers - `Record<string, string>` — optional bearer headers (auto-minted if omitted).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Sports247Sports247TransfersRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<Sports247Sports247TransfersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247Transfers({});
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-rdb
  */

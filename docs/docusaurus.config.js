@@ -71,6 +71,11 @@ module.exports = {
         out: 'docs/api',
         readme: 'none',
         skipErrorChecking: true,
+        // Docusaurus compiles TypeDoc's Markdown as MDX, where a bare `<Type>` or `{...}`
+        // in comment prose is JSX / an expression and breaks the build. The generator keeps
+        // every type in a code span and test/tsdoc-mdx.test.js scans the hand-written
+        // modules; this escapes whatever slips through.
+        sanitizeComments: true,
         excludePrivate: true,
         excludeInternal: true,
         // Don't document re-exported external deps (e.g. `export * as tidy from

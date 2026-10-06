@@ -116,7 +116,7 @@ const ALL_TIME_RECORD_VS_FRANCHISE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/all-time-record-vs-franchise`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsAllTimeRecordVsFranchiseRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsAllTimeRecordVsFranchiseRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsAllTimeRecordVsFranchise({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -143,7 +143,7 @@ const ALLSTAR_COACH_CAREER_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/all-star-coach-career-stats`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsAllstarCoachCareerRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsAllstarCoachCareerRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsAllstarCoachCareer({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -170,7 +170,7 @@ const ALLSTAR_GOALIE_CAREER_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/all-star-goaltender-career-stats`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsAllstarGoalieCareerRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsAllstarGoalieCareerRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsAllstarGoalieCareer({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -197,7 +197,7 @@ const ALLSTAR_GOALIE_GAME_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/all-star-goaltender-game-stats`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsAllstarGoalieGameRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsAllstarGoalieGameRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsAllstarGoalieGame({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -224,7 +224,7 @@ const ALLSTAR_SKATER_CAREER_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/all-star-skater-career-stats`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsAllstarSkaterCareerRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsAllstarSkaterCareerRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsAllstarSkaterCareer({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -251,7 +251,7 @@ const ALLSTAR_SKATER_GAME_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/all-star-skater-game-stats`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsAllstarSkaterGameRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsAllstarSkaterGameRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsAllstarSkaterGame({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -278,7 +278,7 @@ const ATTENDANCE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/attendance`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsAttendanceRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsAttendanceRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsAttendance({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -305,7 +305,7 @@ const AWARDS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/award-details`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsAwardsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsAwardsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsAwards({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -337,7 +337,7 @@ const AWARDS_BY_FRANCHISE_DEF: WrapperDef = {
  *
  * @param params.franchise_id - `number | string` — the `{franchise_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsAwardsByFranchise({ franchise_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -373,7 +373,7 @@ const AWARDS_TROPHY_SEASON_DEF: WrapperDef = {
  * @param params.trophy_id - `number | string` — the `{trophy_id}` path segment.
  * @param params.season_id - `number | string` — the `{season_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsAwardsTrophySeasonRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsAwardsTrophySeasonRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsAwardsTrophySeason({ trophy_id: '…', season_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -400,7 +400,7 @@ const AWAY_TEAM_RECORD_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/away-team-record`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsAwayTeamRecordRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsAwayTeamRecordRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsAwayTeamRecord({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -432,7 +432,7 @@ const COACH_DEF: WrapperDef = {
  *
  * @param params.coach_id - `number | string` — the `{coach_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsCoachRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsCoachRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsCoach({ coach_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -467,7 +467,7 @@ const COACH_CAREER_DEF: WrapperDef = {
  *
  * @param params.coach_id - `number | string` — the `{coach_id}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsCoachCareerRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsCoachCareerRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsCoachCareer({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -494,7 +494,7 @@ const COACH_CAREER_WITH_PLAYOFFS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/coach-career-records-regular-plus-playoffs`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsCoachCareerWithPlayoffsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsCoachCareerWithPlayoffsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsCoachCareerWithPlayoffs({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -529,7 +529,7 @@ const COACH_FRANCHISE_DEF: WrapperDef = {
  *
  * @param params.coach_id - `number | string` — the `{coach_id}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsCoachFranchiseRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsCoachFranchiseRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsCoachFranchise({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -556,7 +556,7 @@ const COACH_STANLEY_CUP_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/coach-stanley-cup-streak`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsCoachStanleyCupRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsCoachStanleyCupRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsCoachStanleyCup({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -583,7 +583,7 @@ const COACHES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/coach`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsCoachesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsCoachesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsCoaches({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -610,7 +610,7 @@ const CONSECUTIVE_100PT_SEASONS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/consecutive-100-point-seasons`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsConsecutive100ptSeasonsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsConsecutive100ptSeasonsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsConsecutive100ptSeasons({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -645,7 +645,7 @@ const DRAFT_DEF: WrapperDef = {
  *
  * @param params.draft_id - `number | string` — the `{draft_id}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsDraftRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsDraftRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsDraft({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -677,7 +677,7 @@ const DRAFT_BY_TEAM_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the `{team_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsDraftByTeamRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsDraftByTeamRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsDraftByTeam({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -704,7 +704,7 @@ const DRAFT_LOTTERY_ODDS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/draft-lottery-odds`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsDraftLotteryOddsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsDraftLotteryOddsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsDraftLotteryOdds({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -739,7 +739,7 @@ const DRAFT_PROSPECT_DEF: WrapperDef = {
  *
  * @param params.prospect_id - `number | string` — the `{prospect_id}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsDraftProspectRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsDraftProspectRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsDraftProspect({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -766,7 +766,7 @@ const EXPANSION_DRAFT_PICKS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/expansion-draft-picks`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsExpansionDraftPicksRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsExpansionDraftPicksRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsExpansionDraftPicks({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -793,7 +793,7 @@ const FRANCHISE_DETAIL_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/franchise-detail`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsFranchiseDetailRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsFranchiseDetailRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsFranchiseDetail({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -820,7 +820,7 @@ const FRANCHISE_PLAYOFF_APPEARANCES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/franchise-playoff-appearances`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsFranchisePlayoffAppearancesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsFranchisePlayoffAppearancesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsFranchisePlayoffAppearances({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -847,7 +847,7 @@ const FRANCHISE_SEASON_RESULTS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/franchise-season-results`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsFranchiseSeasonResultsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsFranchiseSeasonResultsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsFranchiseSeasonResults({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -874,7 +874,7 @@ const FRANCHISE_TEAM_TOTALS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/franchise-team-totals`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsFranchiseTeamTotalsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsFranchiseTeamTotalsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsFranchiseTeamTotals({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -901,7 +901,7 @@ const FRANCHISE_TOTALS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/franchise-totals`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsFranchiseTotalsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsFranchiseTotalsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsFranchiseTotals({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -928,7 +928,7 @@ const FRANCHISES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/franchise`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsFranchisesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsFranchisesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsFranchises({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -963,7 +963,7 @@ const GM_CAREER_DEF: WrapperDef = {
  *
  * @param params.gm_id - `number | string` — the `{gm_id}` path segment; optional.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsGmCareerRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsGmCareerRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsGmCareer({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -990,7 +990,7 @@ const GM_FRANCHISE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/general-manager-franchise-records`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsGmFranchiseRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsGmFranchiseRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsGmFranchise({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1017,7 +1017,7 @@ const GOALIE_CAREER_STATS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-career-stats`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsGoalieCareerStatsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsGoalieCareerStatsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsGoalieCareerStats({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1044,7 +1044,7 @@ const GOALIE_CAREER_STATS_WITH_PLAYOFFS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie_career_stats_incl_playoffs`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsGoalieCareerStatsWithPlayoffsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsGoalieCareerStatsWithPlayoffsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsGoalieCareerStatsWithPlayoffs({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1071,7 +1071,7 @@ const GOALIE_PLAYOFF_STREAK_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-playoff-streak`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsGoaliePlayoffStreakRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsGoaliePlayoffStreakRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsGoaliePlayoffStreak({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1098,7 +1098,7 @@ const GOALIE_SEASON_STATS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-season-stats`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsGoalieSeasonStatsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsGoalieSeasonStatsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsGoalieSeasonStats({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1125,7 +1125,7 @@ const GOALIE_SHUTOUT_STREAK_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-shutout-streak`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsGoalieShutoutStreakRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsGoalieShutoutStreakRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsGoalieShutoutStreak({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1152,7 +1152,7 @@ const GOALIE_UNDEFEATED_STREAK_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-undefeated-streak`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsGoalieUndefeatedStreakRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsGoalieUndefeatedStreakRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsGoalieUndefeatedStreak({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1179,7 +1179,7 @@ const GOALIE_WIN_PLATEAUS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-win-plateaus`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsGoalieWinPlateausRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsGoalieWinPlateausRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsGoalieWinPlateaus({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1206,7 +1206,7 @@ const GOALIE_WIN_STREAK_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-win-streak`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsGoalieWinStreakRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsGoalieWinStreakRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsGoalieWinStreak({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1233,7 +1233,7 @@ const HOF_PLAYERS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/hof/players`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsHofPlayersRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsHofPlayersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsHofPlayers({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1265,7 +1265,7 @@ const HOF_PLAYERS_BY_OFFICE_DEF: WrapperDef = {
  *
  * @param params.office_id - `number | string` — the `{office_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsHofPlayersByOfficeRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsHofPlayersByOfficeRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsHofPlayersByOffice({ office_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1292,7 +1292,7 @@ const HOME_TEAM_RECORD_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/home-team-record`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlRecordsHomeTeamRecordRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlRecordsHomeTeamRecordRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsHomeTeamRecord({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1318,7 +1318,7 @@ const SKATER_CAREER_LEADERS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/skater-career-leaders`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsSkaterCareerLeaders({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */
@@ -1344,7 +1344,7 @@ const SKATER_CAREER_STATS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/skater-career-statistics`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRecordsSkaterCareerStats({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-records
  */

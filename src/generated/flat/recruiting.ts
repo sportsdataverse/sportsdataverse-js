@@ -73,7 +73,7 @@ const ARCHIVED_PLAYER_RANKINGS_DEF: WrapperDef = {
  * @param params.page_size - `number | string` — the `pagesize` query parameter; default `3`.
  * @param params.page - `number | string` — the `page` query parameter; default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingArchivedPlayerRankings({ ranking_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -117,7 +117,7 @@ const BIGGEST_MOVERS_DEF: WrapperDef = {
  * @param params.ranking_key - `number | string` — the `{ranking_key}` path segment.
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `10`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingBiggestMovers({ ranking_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -172,7 +172,7 @@ const COACHES_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter; default `1`.
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `25`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingCoaches({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_coaches() instead (api.247sports.com answers HTTP 500).
@@ -230,7 +230,7 @@ const CURRENT_TARGET_PREDICTIONS_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter; default `1`.
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `10`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingCurrentTargetPredictions({ site_key: '…', year: '…', sport_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_target_predictions() instead (api.247sports.com answers HTTP 500).
@@ -262,7 +262,7 @@ const INSTITUTION_GROUPS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/institutionGroups`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingInstitutionGroups({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -342,7 +342,7 @@ const INSTITUTION_RANKINGS_DEF: WrapperDef = {
  * @param params.page_size - `number | string` — the `pagesize` query parameter; default `10`.
  * @param params.page - `number | string` — the `page` query parameter; default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingInstitutionRankings({ sport_key: '…', year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_institution_rankings() instead (api.247sports.com answers HTTP 500).
@@ -420,7 +420,7 @@ const PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
  * @param params.page_size - `number | string` — the `pagesize` query parameter.
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingPlayerSportRankings({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -457,7 +457,7 @@ const PLAYERS_UNDER_SPECIAL_EVALUATION_DEF: WrapperDef = {
  *
  * @param params.ranking_key - `number | string` — the `{ranking_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingPlayersUnderSpecialEvaluation({ ranking_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -505,7 +505,7 @@ const POSITIONS_DEF: WrapperDef = {
  * @param params.sport_key - `number | string` — the `sportKey` query parameter.
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingPositions({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_positions() instead (api.247sports.com answers HTTP 500).
@@ -558,7 +558,7 @@ const RANKINGS_DEF: WrapperDef = {
  * @param params.ranking_type - `number | string` — the `rankingType` query parameter.
  * @param params.ranking_version - `number | string` — the `rankingVersion` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingRankings({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -606,7 +606,7 @@ const RANKINGS_COMPOSITE_TEAM_FEED_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `{year}` path segment.
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `9`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingRankingsCompositeTeamFeed({ sport_key: '…', year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_composite_team_ranking_feed() instead (api.247sports.com answers HTTP 500).
@@ -654,7 +654,7 @@ const RANKINGS_TRANSFER_PORTAL_PLAYER_FEED_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `{year}` path segment.
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `9`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingRankingsTransferPortalPlayerFeed({ sport_key: '…', year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_transfer_portal_player_feed() instead (api.247sports.com answers HTTP 500).
@@ -702,7 +702,7 @@ const RANKINGS_TRANSFER_PORTAL_TEAM_FEED_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `{year}` path segment.
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `9`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingRankingsTransferPortalTeamFeed({ sport_key: '…', year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_transfer_portal_team_feed() instead (api.247sports.com answers HTTP 500).
@@ -762,7 +762,7 @@ const RECRUITS_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter; default `1`.
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `25`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingRecruits({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_recruits() instead (api.247sports.com answers HTTP 500).
@@ -799,7 +799,7 @@ const SPORT_YEARS_DEF: WrapperDef = {
  *
  * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingSportYears({ sport_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_sport_years() instead (api.247sports.com answers HTTP 500).
@@ -837,7 +837,7 @@ const SPORTS_DEF: WrapperDef = {
  *
  * @param params.ranking_key - `number | string` — the `rankingKey` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingSports({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -881,7 +881,7 @@ const TAGS_AUTOCOMPLETE_DEF: WrapperDef = {
  * @param params.default_name - `number | string` — the `defaultName` query parameter.
  * @param params.items - `number | string` — the `items` query parameter; default `100`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingTagsAutocomplete({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_tags_autocomplete() instead (api.247sports.com answers HTTP 500).
@@ -931,7 +931,7 @@ const TAGS_PHOTOS_BY_KEY_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter; default `1`.
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `25`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingTagsPhotosByKey({ prefixed_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -985,7 +985,7 @@ const TAGS_PHOTOS_BY_TYPE_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter; default `1`.
  * @param params.page_size - `number | string` — the `pageSize` query parameter; default `25`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingTagsPhotosByType({ type: '…', key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -1033,7 +1033,7 @@ const TEAMS_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.institution_type - `number | string` — the `institutionType` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingTeams({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_teams() instead (api.247sports.com answers HTTP 500).
@@ -1111,7 +1111,7 @@ const TRANSFER_PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
  * @param params.page_size - `number | string` — the `pagesize` query parameter.
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingTransferPlayerSportRankings({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -1194,7 +1194,7 @@ const TRANSFERS_DEF: WrapperDef = {
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingTransfers({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_transfers() instead (api.247sports.com answers HTTP 500).
@@ -1277,7 +1277,7 @@ const UNRANKED_RECRUITS_DEF: WrapperDef = {
  * @param params.page_size - `number | string` — the `pagesize` query parameter.
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingUnrankedRecruits({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -1336,7 +1336,7 @@ const UNRANKED_TRANSFERS_DEF: WrapperDef = {
  * @param params.page_size - `number | string` — the `pagesize` query parameter.
  * @param params.page - `number | string` — the `page` query parameter; default `1`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingUnrankedTransfers({ ranking_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
@@ -1374,7 +1374,7 @@ const YEAR_DEF: WrapperDef = {
  *
  * @param params.ranking_key - `number | string` — the `rankingKey` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingYear({});
  * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.

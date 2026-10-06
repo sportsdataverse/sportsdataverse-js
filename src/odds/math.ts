@@ -18,15 +18,41 @@ import { SdvError } from '../core/errors.js';
 
 // Python-named errors (`name` stays 'ValueError' etc. so py error types can be compared);
 // the classes carry an `Odds` prefix to avoid generic-name collisions and extend SdvError.
+/**
+ * Python `ValueError` raised by the odds math (a zero American price, a decimal price
+ * `<= 1`, a log of a non-positive odds ratio, an unknown devig method, a non-bracketing
+ * Shin solver).
+ *
+ * @remarks `name` is `'ValueError'` so it compares equal to the sdv-py error type;
+ * the class extends {@link SdvError}. Also exposed as `oddsErrors.ValueError`.
+ */
 export class OddsValueError extends SdvError {
   override name = 'ValueError';
 }
+/**
+ * Python `ZeroDivisionError` raised by the odds math (raw probabilities summing to 0,
+ * `sigma` of 0, a probability of exactly 1 in {@link logit_blend}).
+ *
+ * @remarks `name` is `'ZeroDivisionError'`; also exposed as `oddsErrors.ZeroDivisionError`.
+ */
 export class OddsZeroDivisionError extends SdvError {
   override name = 'ZeroDivisionError';
 }
+/**
+ * Python `OverflowError` raised when `exp(-logit)` overflows to Infinity from a finite
+ * logit in {@link logit_blend}.
+ *
+ * @remarks `name` is `'OverflowError'`; also exposed as `oddsErrors.OverflowError`.
+ */
 export class OddsOverflowError extends SdvError {
   override name = 'OverflowError';
 }
+/**
+ * Python `RuntimeError` raised when the Shin root solver (a port of scipy's `brentq`)
+ * fails to converge within 100 iterations.
+ *
+ * @remarks `name` is `'RuntimeError'`; also exposed as `oddsErrors.RuntimeError`.
+ */
 export class OddsRuntimeError extends SdvError {
   override name = 'RuntimeError';
 }
@@ -45,20 +71,62 @@ const sum = (xs: readonly number[]): number => {
   return c !== 0 && Number.isFinite(c) ? result + c : result;
 };
 
-/** Raw implied probability of an American price. Raises ValueError on 0. */
+/**
+ * Raw (vig-included) implied probability of an American moneyline price (py `prob_from_american`).
+ *
+ * @param price - American price: negative for a favourite (`-150` -> 0.6), positive for an
+ *   underdog (`+130` -> 100 / 230). Must not be `0`.
+ * @returns The implied probability in (0, 1): `-p / (-p + 100)` for `p < 0`, else `100 / (p + 100)`.
+ * @throws OddsValueError When `price` is `0`.
+ * @remarks Not devigged; pass the raw pair through {@link devig_multiplicative} /
+ *   {@link devig_shin} or use {@link moneyline_pair_prob}. A NaN price propagates NaN.
+ * @example
+ * ```ts
+ * import sdv from 'sportsdataverse';
+ * sdv.odds.prob_from_american(-150); // 0.6
+ * sdv.odds.probFromAmerican(130);    // 0.4347826...
+ * ```
+ */
 export function prob_from_american(price: number): number {
   if (price === 0) throw new OddsValueError('American price cannot be 0');
   const p = Number(price);
   return p < 0 ? -p / (-p + 100) : 100 / (p + 100);
 }
 
-/** Raw implied probability of a decimal price (> 1). Raises ValueError otherwise. */
+/**
+ * Raw (vig-included) implied probability of a decimal price (py `prob_from_decimal`).
+ *
+ * @param price - Decimal (European) price; must be strictly greater than `1`.
+ * @returns `1 / price`.
+ * @throws OddsValueError When `price <= 1`.
+ * @remarks A NaN price is not rejected by the `<= 1` check and yields NaN.
+ * @example
+ * ```ts
+ * import sdv from 'sportsdataverse';
+ * sdv.odds.prob_from_decimal(2.5); // 0.4
+ * ```
+ */
 export function prob_from_decimal(price: number): number {
   if (price <= 1) throw new OddsValueError('Decimal price must be > 1');
   return 1.0 / Number(price);
 }
 
-/** Vig removal by normalizing raw implied probabilities to sum to 1 (order preserved). */
+/**
+ * Vig removal by normalizing raw implied probabilities to sum to 1, order preserved
+ * (py `devig_multiplicative`).
+ *
+ * @param p_raw - Raw implied probabilities of every outcome of one market (e.g. from
+ *   {@link prob_from_american}). An empty array returns an empty array.
+ * @returns A new array, `p_raw[i] / sum(p_raw)` for each outcome.
+ * @throws OddsZeroDivisionError When `p_raw` is non-empty and sums to `0`.
+ * @remarks The sum is Python 3.12+ compensated (Neumaier) summation, so results match
+ *   sdv-py's `sum()` to ~1e-12. NaN inputs propagate NaN.
+ * @example
+ * ```ts
+ * import sdv from 'sportsdataverse';
+ * sdv.odds.devig_multiplicative([0.6, 0.4347826086956522]); // [0.5798..., 0.4201...]
+ * ```
+ */
 export function devig_multiplicative(p_raw: readonly number[]): number[] {
   const total = sum(p_raw);
   if (p_raw.length > 0 && total === 0) throw new OddsZeroDivisionError('float division by zero');
@@ -144,9 +212,26 @@ function brentq(f0: (x: number) => number, xa: number, xb: number, xtol: number)
 }
 
 /**
- * Vig removal with Shin's method (insider-trading model). With overround <= 0
- * it reduces to the multiplicative method. If the solver cannot bracket a root
- * it emits a process warning and falls back to multiplicative (as Python warns).
+ * Vig removal with Shin's (1993) insider-trading method (py `devig_shin`).
+ *
+ * Solves for the insider share `z` at which the Shin probabilities sum to 1 (a port of
+ * scipy's `brentq` on `[0, 1 - 1e-9]`, `xtol = 1e-12`), then renormalizes.
+ *
+ * @param p_raw - Raw implied probabilities of every outcome of one market.
+ * @returns A new array of devigged probabilities in `p_raw` order, summing to 1.
+ * @throws OddsZeroDivisionError When the booksum is `<= 1` and the multiplicative fallback
+ *   divides by a zero sum (non-empty `p_raw`).
+ * @throws OddsRuntimeError When the root solver does not converge in 100 iterations.
+ * @remarks With booksum (overround) `<= 1` this reduces to {@link devig_multiplicative}.
+ *   If the solver cannot bracket a root (or hits a NaN) it warns
+ *   `Shin solver failed to bracket (...)` (a Node process warning named `SdvWarning`,
+ *   `console.warn` elsewhere) **once per distinct message per process** and falls back to
+ *   the multiplicative method, as sdv-py warns.
+ * @example
+ * ```ts
+ * import sdv from 'sportsdataverse';
+ * sdv.odds.devig_shin([0.6, 0.4347826086956522]); // [0.58..., 0.41...], sums to 1
+ * ```
  */
 export function devig_shin(p_raw: readonly number[]): number[] {
   const booksum = sum(p_raw);
@@ -206,7 +291,22 @@ function normCdf(x: number): number {
   return x > 0 ? 1 - c : c;
 }
 
-/** P(home win) = Phi(spread / sigma). Raises ZeroDivisionError when sigma is 0. */
+/**
+ * Home win probability from a point spread: `Phi(spread / sigma)` (py `spread_to_prob`).
+ *
+ * @param spread - Expected HOME margin in points; positive = home favoured (the negative of
+ *   the quoted home line).
+ * @param sigma - Standard deviation of the margin in points; must not be `0`.
+ * @returns The standard-normal CDF of `spread / sigma`, a HOME win probability in [0, 1].
+ * @throws OddsZeroDivisionError When `sigma` is `0`.
+ * @remarks The CDF is the Hart 1968 / West 2005 double-precision algorithm (~1e-15).
+ *   NaN propagates; `|x| > 37` saturates to exactly 0 / 1.
+ * @example
+ * ```ts
+ * import sdv from 'sportsdataverse';
+ * sdv.odds.spread_to_prob(3, 13.5); // 0.5878...
+ * ```
+ */
 export function spread_to_prob(spread: number, sigma: number): number {
   if (sigma === 0) throw new OddsZeroDivisionError('float division by zero');
   return normCdf(spread / sigma);
@@ -217,7 +317,26 @@ const pyLog = (x: number): number => {
   return Math.log(x);
 };
 
-/** Blend two probabilities in logit space (nfelo's 70/30 practice). */
+/**
+ * Blend two probabilities in logit space, nfelo's 70/30 practice (py `logit_blend`).
+ *
+ * @param p_a - First probability, strictly inside (0, 1).
+ * @param p_b - Second probability, strictly inside (0, 1).
+ * @param weight_a - Weight on `p_a`'s logit; `p_b` gets `1 - weight_a`. Default `0.7`.
+ * @returns `sigmoid(weight_a * logit(p_a) + (1 - weight_a) * logit(p_b))`.
+ * @throws OddsZeroDivisionError When `p_a` or `p_b` is exactly `1` (odds ratio divides by 0).
+ * @throws OddsValueError When an odds ratio is `<= 0` (a probability `<= 0` or `> 1`),
+ *   Python's `math domain error`.
+ * @throws OddsOverflowError When `exp(-logit)` overflows to Infinity from a finite blended
+ *   logit, Python's `math range error`.
+ * @remarks Error triggers mirror CPython's `math.log` / `math.exp`; NaN propagates.
+ * @example
+ * ```ts
+ * import sdv from 'sportsdataverse';
+ * sdv.odds.logit_blend(0.6, 0.5);       // 0.5705...
+ * sdv.odds.logit_blend(0.6, 0.5, 0.5);  // equal weights
+ * ```
+ */
 export function logit_blend(p_a: number, p_b: number, weight_a = 0.7): number {
   const ratio = (p: number): number => {
     if (1 - p === 0) throw new OddsZeroDivisionError('float division by zero');
@@ -231,7 +350,26 @@ export function logit_blend(p_a: number, p_b: number, weight_a = 0.7): number {
   return 1 / (1 + ex);
 }
 
-/** Vig-removed HOME win probability from a two-way American moneyline pair. */
+/**
+ * Vig-removed HOME win probability from a two-way American moneyline pair
+ * (py `moneyline_pair_prob`).
+ *
+ * @param home_price - Home American price (non-zero).
+ * @param away_price - Away American price (non-zero).
+ * @param method - Devig method: `'multiplicative'` (default, {@link devig_multiplicative})
+ *   or `'shin'` ({@link devig_shin}).
+ * @returns The home outcome's devigged probability (element 0 of the devigged pair).
+ * @throws OddsValueError When either price is `0`, or `method` is not one of the two names.
+ * @throws OddsZeroDivisionError When the raw pair sums to `0` (via the devig).
+ * @throws OddsRuntimeError When `method === 'shin'` and the solver fails to converge.
+ * @remarks `'shin'` may emit the once-per-process Shin fallback warning (see {@link devig_shin}).
+ * @example
+ * ```ts
+ * import sdv from 'sportsdataverse';
+ * sdv.odds.moneyline_pair_prob(-150, 130);         // 0.5798...
+ * sdv.odds.moneyline_pair_prob(-150, 130, 'shin'); // Shin-devigged
+ * ```
+ */
 export function moneyline_pair_prob(
   home_price: number,
   away_price: number,
@@ -243,8 +381,21 @@ export function moneyline_pair_prob(
   throw new OddsValueError(`unknown devig method: '${method}'`);
 }
 
+/**
+ * The odds error classes keyed by their Python names, mounted as `sdv.odds.errors`.
+ *
+ * @remarks Lets callers write `e instanceof sdv.odds.errors.ValueError` without importing
+ *   the `Odds*` classes from the package root.
+ */
 export const oddsErrors = { ValueError: OddsValueError, ZeroDivisionError: OddsZeroDivisionError, OverflowError: OddsOverflowError, RuntimeError: OddsRuntimeError };
 
+/**
+ * Every odds math function under both its sdv-py snake_case name and a camelCase alias;
+ * spread onto `sdv.odds` by `src/index.ts`.
+ *
+ * @remarks Pure functions, no I/O; each alias is the same function object as its
+ *   snake_case original.
+ */
 export const oddsMath = {
   prob_from_american, probFromAmerican: prob_from_american,
   prob_from_decimal, probFromDecimal: prob_from_decimal,

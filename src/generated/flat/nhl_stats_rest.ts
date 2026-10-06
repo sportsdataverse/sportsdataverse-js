@@ -73,7 +73,7 @@ const COMPONENT_SEASON_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
- * @returns Promise<`unknown`>: the raw response (this endpoint has no parser).
+ * @returns `Promise<unknown>`: the raw response (this endpoint has no parser).
  * @example await sdv.nhl.nhlStatsRestComponentSeason({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -105,7 +105,7 @@ const CONFIG_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
- * @returns Promise<`unknown`>: the raw response (this endpoint has no parser).
+ * @returns `Promise<unknown>`: the raw response (this endpoint has no parser).
  * @example await sdv.nhl.nhlStatsRestConfig({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -141,7 +141,7 @@ const CONTENT_MODULE_DEF: WrapperDef = {
  * @param params.template_key - `number | string` — the `{template_key}` path segment.
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
- * @returns Promise<`unknown`>: the raw response (this endpoint has no parser).
+ * @returns `Promise<unknown>`: the raw response (this endpoint has no parser).
  * @example await sdv.nhl.nhlStatsRestContentModule({ template_key: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -175,7 +175,7 @@ const COUNTRY_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestCountryRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestCountryRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestCountry({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -209,7 +209,7 @@ const DRAFT_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestDraftRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestDraftRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestDraft({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -243,7 +243,7 @@ const FRANCHISE_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestFranchiseRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestFranchiseRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestFranchise({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -277,7 +277,7 @@ const GAME_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestGameRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestGameRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestGame({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -311,7 +311,7 @@ const GLOSSARY_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestGlossaryRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestGlossaryRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestGlossary({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -349,7 +349,7 @@ const GOALIE_REPORT_DEF: WrapperDef = {
  * @param params.report - `number | string` — the `{report}` path segment.
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestGoalieReportRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestGoalieReportRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestGoalieReport({ report: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -387,7 +387,7 @@ const LEADERS_GOALIES_DEF: WrapperDef = {
  * @param params.attribute - `number | string` — the `{attribute}` path segment.
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestLeadersGoaliesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestLeadersGoaliesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestLeadersGoalies({ attribute: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -425,7 +425,7 @@ const LEADERS_SKATERS_DEF: WrapperDef = {
  * @param params.attribute - `number | string` — the `{attribute}` path segment.
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestLeadersSkatersRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestLeadersSkatersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestLeadersSkaters({ attribute: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -459,7 +459,7 @@ const MILESTONES_GOALIES_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestMilestonesGoaliesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestMilestonesGoaliesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestMilestonesGoalies({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -493,7 +493,7 @@ const MILESTONES_SKATERS_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestMilestonesSkatersRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestMilestonesSkatersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestMilestonesSkaters({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -518,7 +518,7 @@ const PING_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/ping`
  *
  * @param params.parsed - `boolean` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
- * @returns Promise<`unknown`>: the raw response (this endpoint has no parser).
+ * @returns `Promise<unknown>`: the raw response (this endpoint has no parser).
  * @example await sdv.nhl.nhlStatsRestPing({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -552,7 +552,7 @@ const PLAYERS_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestPlayers({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -586,7 +586,7 @@ const SEASON_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestSeasonRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestSeasonRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestSeason({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -620,7 +620,7 @@ const SHIFTCHARTS_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestShiftchartsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestShiftchartsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestShiftcharts({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -658,7 +658,7 @@ const SKATER_REPORT_DEF: WrapperDef = {
  * @param params.report - `number | string` — the `{report}` path segment.
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestSkaterReportRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestSkaterReportRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestSkaterReport({ report: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -692,7 +692,7 @@ const TEAM_DEF: WrapperDef = {
  *
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestTeamRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestTeamRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestTeam({});
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -730,7 +730,7 @@ const TEAM_BY_ID_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the `{team_id}` path segment.
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestTeamByIdRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestTeamByIdRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestTeamById({ team_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
@@ -768,7 +768,7 @@ const TEAM_REPORT_DEF: WrapperDef = {
  * @param params.report - `number | string` — the `{report}` path segment.
  * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NhlStatsRestTeamReportRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NhlStatsRestTeamReportRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestTeamReport({ report: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */

@@ -81,7 +81,7 @@ const GAMEFEED_DEF: WrapperDef = {
  * @param params.game_pk - `number | string` — the `game_pk` query parameter.
  * @param params.at_bat_number - `number | string` — the `at_bat_number` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastGamefeed({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -130,7 +130,7 @@ const LEADERBOARD_ACTIVE_SPIN_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardActiveSpin({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -179,7 +179,7 @@ const LEADERBOARD_ARM_ANGLES_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardArmAngles({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -228,7 +228,7 @@ const LEADERBOARD_ARM_STRENGTH_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardArmStrength({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -277,7 +277,7 @@ const LEADERBOARD_BASERUNNING_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardBaserunning({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -326,7 +326,7 @@ const LEADERBOARD_BASERUNNING_RUN_VALUE_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardBaserunningRunValue({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -375,7 +375,7 @@ const LEADERBOARD_BASESTEALING_RUN_VALUE_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardBasestealingRunValue({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -424,7 +424,7 @@ const LEADERBOARD_BAT_TRACKING_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardBatTracking({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -473,7 +473,7 @@ const LEADERBOARD_BATTED_BALL_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardBattedBall({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -522,7 +522,7 @@ const LEADERBOARD_CATCH_PROBABILITY_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatchProbability({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -571,7 +571,7 @@ const LEADERBOARD_CATCHER_BLOCKING_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherBlocking({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -620,7 +620,7 @@ const LEADERBOARD_CATCHER_FRAMING_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherFraming({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -668,7 +668,7 @@ const LEADERBOARD_CATCHER_STANCE_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherStance({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -717,7 +717,7 @@ const LEADERBOARD_CATCHER_THROWING_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherThrowing({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -786,7 +786,7 @@ const LEADERBOARD_CUSTOM_DEF: WrapperDef = {
  * @param params.sort_dir - `number | string` — the `sortDir` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardCustom({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -835,7 +835,7 @@ const LEADERBOARD_EXIT_VELOCITY_BARRELS_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardExitVelocityBarrels({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -884,7 +884,7 @@ const LEADERBOARD_EXPECTED_STATS_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardExpectedStats({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -927,7 +927,7 @@ const LEADERBOARD_FIELDING_RUN_VALUE_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardFieldingRunValue({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -976,7 +976,7 @@ const LEADERBOARD_HOME_RUNS_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardHomeRuns({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1025,7 +1025,7 @@ const LEADERBOARD_OUTFIELD_DIRECTIONAL_OAA_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardOutfieldDirectionalOaa({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1074,7 +1074,7 @@ const LEADERBOARD_OUTFIELD_JUMP_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardOutfieldJump({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1123,7 +1123,7 @@ const LEADERBOARD_OUTS_ABOVE_AVERAGE_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardOutsAboveAverage({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1166,7 +1166,7 @@ const LEADERBOARD_PARK_FACTORS_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardParkFactors({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1215,7 +1215,7 @@ const LEADERBOARD_PERCENTILE_RANKINGS_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPercentileRankings({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1264,7 +1264,7 @@ const LEADERBOARD_PITCH_ARSENAL_STATS_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchArsenalStats({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1313,7 +1313,7 @@ const LEADERBOARD_PITCH_ARSENALS_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchArsenals({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1362,7 +1362,7 @@ const LEADERBOARD_PITCH_MOVEMENT_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchMovement({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1411,7 +1411,7 @@ const LEADERBOARD_PITCH_TEMPO_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchTempo({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1460,7 +1460,7 @@ const LEADERBOARD_PITCHER_RUNNING_GAME_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitcherRunningGame({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1509,7 +1509,7 @@ const LEADERBOARD_POPTIME_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPoptime({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1558,7 +1558,7 @@ const LEADERBOARD_RUNNING_SPLITS_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardRunningSplits({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1607,7 +1607,7 @@ const LEADERBOARD_SPIN_DIRECTION_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardSpinDirection({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1656,7 +1656,7 @@ const LEADERBOARD_SPRINT_SPEED_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardSprintSpeed({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1705,7 +1705,7 @@ const LEADERBOARD_SWING_PATH_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardSwingPath({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1754,7 +1754,7 @@ const LEADERBOARD_SWING_TAKE_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardSwingTake({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1803,7 +1803,7 @@ const LEADERBOARD_SWING_TIMING_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardSwingTiming({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1852,7 +1852,7 @@ const LEADERBOARD_TIMER_INFRACTIONS_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardTimerInfractions({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1901,7 +1901,7 @@ const LEADERBOARD_YEAR_TO_YEAR_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `team` query parameter.
  * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardYearToYear({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
@@ -1934,7 +1934,7 @@ const SCHEDULE_DEF: WrapperDef = {
  *
  * @param params.date - `number | string` — the `date` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`MlbStatcastScheduleRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<MlbStatcastScheduleRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastSchedule({});
  * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */

@@ -95,7 +95,7 @@ const DEFENSE_NEAREST_SEASON_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProDefenseNearestSeason({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -178,7 +178,7 @@ const DEFENSE_NEAREST_WEEK_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProDefenseNearestWeek({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -255,7 +255,7 @@ const DEFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProDefenseOverviewSeason({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -338,7 +338,7 @@ const DEFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProDefenseOverviewWeek({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -420,7 +420,7 @@ const FANTASY_GAME_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProFantasyGame({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -503,7 +503,7 @@ const FANTASY_SEASON_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProFantasySeason({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -580,7 +580,7 @@ const PLAYERS_OFFENSE_PASSING_SEASON_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProPlayersOffensePassingSeason({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -663,7 +663,7 @@ const PLAYERS_OFFENSE_PASSING_WEEK_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProPlayersOffensePassingWeek({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -740,7 +740,7 @@ const PLAYERS_OFFENSE_RECEIVING_SEASON_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProPlayersOffenseReceivingSeason({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -823,7 +823,7 @@ const PLAYERS_OFFENSE_RECEIVING_WEEK_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProPlayersOffenseReceivingWeek({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -900,7 +900,7 @@ const PLAYERS_OFFENSE_RUSHING_SEASON_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProPlayersOffenseRushingSeason({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -983,7 +983,7 @@ const PLAYERS_OFFENSE_RUSHING_WEEK_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProPlayersOffenseRushingWeek({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -1054,7 +1054,7 @@ const TEAM_DEFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProTeamDefenseOverviewSeason({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -1125,7 +1125,7 @@ const TEAM_DEFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProTeamDefenseOverviewWeek({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -1196,7 +1196,7 @@ const TEAM_OFFENSE_OVERVIEW_SEASON_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProTeamOffenseOverviewSeason({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */
@@ -1267,7 +1267,7 @@ const TEAM_OFFENSE_OVERVIEW_WEEK_DEF: WrapperDef = {
  * @param params.paginate - `boolean` — follow `offset` until the envelope's `total` is reached (default `true`).
  * @param params.max_pages - `number` — cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.nflProTeamOffenseOverviewWeek({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--nfl-pro-next-gen-stats
  */

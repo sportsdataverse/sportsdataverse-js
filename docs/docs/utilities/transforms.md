@@ -95,7 +95,7 @@ export function redateDefaultSeasons( def: { host?: string; path?: string }, que
 A season the wrapper filled in (not the caller's) — what `redateDefaultSeasons` re-dates.
 
 ```ts
-export class DefaultSeason extends String {} /** * `sportsdataverse.{nba,wnba}.*_stats_runtime.season_latest_with_data`: the season * unchanged (an explicit `""` too: every season), or, when unset, the latest season * that has data. Resolved per call, so a long-running process rolls over too; the * flat resolver re-dates it per league, endpoint and SeasonType (`redateDefaultSeasons`). */ export function season_latest_with_data(season: unknown, def?: { api?: string }): unknown
+export class DefaultSeason extends String {}
 ```
 
 ### `TRANSFORMS`

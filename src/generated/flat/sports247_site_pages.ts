@@ -69,7 +69,7 @@ const COACH_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesCoach({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -101,7 +101,7 @@ const COACH_ALMA_MATER_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesCoachAlmaMater({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -133,7 +133,7 @@ const COACH_HOMETOWN_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesCoachHometown({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -165,7 +165,7 @@ const COACH_RANKING_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesCoachRanking({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -197,7 +197,7 @@ const COACH_RANKINGS_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesCoachRankings({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -229,7 +229,7 @@ const EVENT_DEF: WrapperDef = {
  *
  * @param params.slug - `number | string` — the `{slug}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesEvent({ slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -261,7 +261,7 @@ const INSTITUTION_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesInstitution({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -294,7 +294,7 @@ const INSTITUTION_LIST_DEF: WrapperDef = {
  *
  * @param params.items - `number | string` — the `items` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesInstitutionList({});
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -326,7 +326,7 @@ const INSTITUTION_LOCATION_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesInstitutionLocation({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -362,7 +362,7 @@ const INSTITUTION_TIMELINE_EVENTS_DEF: WrapperDef = {
  * @param params.school_slug - `number | string` — the `{school_slug}` path segment.
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesInstitutionTimelineEvents({ school_slug: '…', key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -405,7 +405,7 @@ const LEAGUE_DRAFT_PICKS_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.round - `number | string` — the `round` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesLeagueDraftPicks({ league_slug: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -443,7 +443,7 @@ const LEAGUE_INSTITUTIONS_DEF: WrapperDef = {
  * @param params.league_id - `number | string` — the `{league_id}` path segment.
  * @param params.items - `number | string` — the `items` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesLeagueInstitutions({ league_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -475,7 +475,7 @@ const PAGE_FEEDS_DEF: WrapperDef = {
  *
  * @param params.page_id - `number | string` — the `{page_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPageFeeds({ page_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -507,7 +507,7 @@ const PLAYER_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayer({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -539,7 +539,7 @@ const PLAYER_CURRENT_INSTITUTION_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayerCurrentInstitution({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -571,7 +571,7 @@ const PLAYER_HIGH_SCHOOL_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayerHighSchool({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -603,7 +603,7 @@ const PLAYER_INSTITUTION_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayerInstitution({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -635,7 +635,7 @@ const PLAYER_INSTITUTION_EVALUATION_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayerInstitutionEvaluation({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -667,7 +667,7 @@ const PLAYER_PRIMARY_SPORT_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayerPrimarySport({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -705,7 +705,7 @@ const PLAYER_SEARCH_DEF: WrapperDef = {
  * @param params.first_name - `number | string` — the `FirstName` query parameter.
  * @param params.last_name - `number | string` — the `LastName` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayerSearch({});
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -737,7 +737,7 @@ const PLAYERSPORT_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayersport({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -769,7 +769,7 @@ const PLAYERSPORT_INSTITUTION_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayersportInstitution({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -801,7 +801,7 @@ const PLAYERSPORT_RANK_HISTORY_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPlayersportRankHistory({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -833,7 +833,7 @@ const POSITION_RANKINGS_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesPositionRankings({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -865,7 +865,7 @@ const RECRUIT_INTEREST_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesRecruitInterest({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -897,7 +897,7 @@ const RECRUITMENT_FINAL_CHOICE_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesRecruitmentFinalChoice({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -929,7 +929,7 @@ const RECRUITMENT_INSTITUTION_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesRecruitmentInstitution({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -961,7 +961,7 @@ const RECRUITMENT_INTERESTS_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesRecruitmentInterests({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -993,7 +993,7 @@ const RECRUITMENT_OFFERS_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesRecruitmentOffers({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -1025,7 +1025,7 @@ const RECRUITMENT_PLAYER_SPORT_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesRecruitmentPlayerSport({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -1057,7 +1057,7 @@ const SEASON_CURRENT_EXPERT_PREDICTIONS_DEF: WrapperDef = {
  *
  * @param params.season - `number | string` — Season path segment in `{year}-{Sport}` form, e.g. `2026-Football`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesSeasonCurrentExpertPredictions({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -1089,7 +1089,7 @@ const SEASON_RECRUIT_INTEREST_EVENTS_DEF: WrapperDef = {
  *
  * @param params.season - `number | string` — Season path segment in `{year}-{Sport}` form, e.g. `2026-Football`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesSeasonRecruitInterestEvents({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -1121,7 +1121,7 @@ const SEASON_RECRUIT_INTERESTS_DEF: WrapperDef = {
  *
  * @param params.season - `number | string` — Season path segment in `{year}-{Sport}` form, e.g. `2026-Football`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesSeasonRecruitInterests({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -1174,7 +1174,7 @@ const SEASON_RECRUITS_DEF: WrapperDef = {
  * @param params.player_full_name - `number | string` — the `Player.FullName` query parameter.
  * @param params.institution - `number | string` — the `Institution` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesSeasonRecruits({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */
@@ -1206,7 +1206,7 @@ const SEASON_ROSTER_EMBED_DEF: WrapperDef = {
  *
  * @param params.season - `number | string` — Season path segment in `{year}-{Sport}` form, e.g. `2026-Football`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.sports247.sports247SitePagesSeasonRosterEmbed({ season: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/sports247#native-api--247sports-site-pages
  */

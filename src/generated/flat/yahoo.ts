@@ -142,7 +142,7 @@ const ALIAS_DEF: WrapperDef = {
  *
  * @param params.alias - `number | string` — the `alias` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooAlias({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -175,7 +175,7 @@ const ARTICLE_LIST_CARD_PLAYERS_DEF: WrapperDef = {
  *
  * @param params.player_ids - `number | string` — the `playerIds` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooArticleListCardPlayers({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -208,7 +208,7 @@ const ARTICLE_LIST_CARD_TEAMS_DEF: WrapperDef = {
  *
  * @param params.team_ids - `number | string` — the `teamIds` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooArticleListCardTeams({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -241,7 +241,7 @@ const BASIC_PLAYERS_DEF: WrapperDef = {
  *
  * @param params.players - `number | string` — the `players` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooBasicPlayers({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -274,7 +274,7 @@ const BETTING_DISCLAIMER_DEF: WrapperDef = {
  *
  * @param params.betting_disclaimer_id - `number | string` — the `bettingDisclaimerId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooBettingDisclaimer({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -317,7 +317,7 @@ const COMBAT_EVENT_FIGHTS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.league - `number | string` — the `league` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooCombatEventFights({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -355,7 +355,7 @@ const COMBAT_SCHEDULE_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.league - `number | string` — the `league` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooCombatSchedule({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -398,7 +398,7 @@ const COMMON_PILLS_DEF: WrapperDef = {
  * @param params.date - `number | string` — the `date` query parameter.
  * @param params.team_ids - `number | string` — the `teamIds` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooCommonPills({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -456,7 +456,7 @@ const CONSENSUS_RANKINGS_PHP_DEF: WrapperDef = {
  * @param params.scoring - `number | string` — the `scoring` query parameter.
  * @param params.type - `number | string` — the `type` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooConsensusRankingsPhp({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -494,7 +494,7 @@ const DRAFT_DEF: WrapperDef = {
  * @param params.league - `number | string` — the `league` query parameter.
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooDraft({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -542,7 +542,7 @@ const DRAFT_PROSPECTS_DEF: WrapperDef = {
  * @param params.image_height - `number | string` — the `imageHeight` query parameter.
  * @param params.image_width - `number | string` — the `imageWidth` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooDraftProspects({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -580,7 +580,7 @@ const DRIVER_RESULTS_DEF: WrapperDef = {
  * @param params.player_id - `number | string` — the `playerId` query parameter.
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooDriverResults({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -613,7 +613,7 @@ const DRIVER_SPLITS_DEF: WrapperDef = {
  *
  * @param params.player_id - `number | string` — the `playerId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooDriverSplits({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -656,7 +656,7 @@ const EDITORIAL_BOXSCORE_DEF: WrapperDef = {
  * @param params.v - `number | string` — the `v` query parameter.
  * @param params.polling - `number | string` — the `polling` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooEditorialBoxscore({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -714,7 +714,7 @@ const EDITORIAL_SCOREBOARD_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.v - `number | string` — the `v` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooEditorialScoreboard({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -741,7 +741,7 @@ const FEATURED_GAME_IDS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/featuredGameIds`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooFeaturedGameIds({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -774,7 +774,7 @@ const GAME_PROP_BETS_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — the `gameId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGamePropBets({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -1597,7 +1597,7 @@ const GAME_STATS_LEADERS_DEF: WrapperDef = {
  * @param params.soccer_team_stat_ids4 - `number | string` — the `soccerTeamStatIds4` query parameter.
  * @param params.soccer_team_stat_ids5 - `number | string` — the `soccerTeamStatIds5` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGameStatsLeaders({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -1630,7 +1630,7 @@ const GAMETIME_GAME_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — the `gameId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGametimeGame({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -1663,7 +1663,7 @@ const GAMETIME_TEAM_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the `teamId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGametimeTeam({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -1696,7 +1696,7 @@ const GOLF_TOURNAMENT_SEASONS_DEF: WrapperDef = {
  *
  * @param params.event_group_id - `number | string` — the `eventGroupId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGolfTournamentSeasons({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -1739,7 +1739,7 @@ const GOLF_TOURNAMENTS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.show_defending_champs - `number | string` — the `showDefendingChamps` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGolfTournaments({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -1782,7 +1782,7 @@ const GOLF_TOURNAMENTS_BASIC_DEF: WrapperDef = {
  * @param params.association - `number | string` — the `association` query parameter.
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGolfTournamentsBasic({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -1820,7 +1820,7 @@ const LEAGUE_CONFERENCES_DEF: WrapperDef = {
  * @param params.league - `number | string` — the `league` query parameter.
  * @param params.division_ids - `number | string` — the `divisionIds` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueConferences({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -1868,7 +1868,7 @@ const LEAGUE_FILTERS_DATA_DEF: WrapperDef = {
  * @param params.view_type - `number | string` — the `viewType` query parameter.
  * @param params.include_pos_and_splits_data - `number | string` — the `includePosAndSplitsData` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueFiltersData({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -1906,7 +1906,7 @@ const LEAGUE_FUTURE_ODDS_DEF: WrapperDef = {
  * @param params.league - `number | string` — the `league` query parameter.
  * @param params.bet_categories - `number | string` — the `betCategories` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueFutureOdds({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -1994,7 +1994,7 @@ const LEAGUE_GAME_IDS_DEF: WrapperDef = {
  * @param params.top25 - `number | string` — the `top25` query parameter.
  * @param params.game_day_query_type - `number | string` — the `gameDayQueryType` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueGameIds({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2082,7 +2082,7 @@ const LEAGUE_GAME_IDS_BY_DATE_DEF: WrapperDef = {
  * @param params.tournament_ids - `number | string` — the `tournamentIds` query parameter.
  * @param params.is_tennis - `number | string` — the `isTennis` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueGameIdsByDate({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2125,7 +2125,7 @@ const LEAGUE_GAMES_BY_ROUND_DEF: WrapperDef = {
  * @param params.tournament_round_ids - `number | string` — the `tournamentRoundIds` query parameter.
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueGamesByRound({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2158,7 +2158,7 @@ const LEAGUE_INFO_DEF: WrapperDef = {
  *
  * @param params.league - `number | string` — the `league` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueInfo({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2191,7 +2191,7 @@ const LEAGUE_INJURIES_DEF: WrapperDef = {
  *
  * @param params.league_id - `number | string` — the `leagueId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueInjuries({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2224,7 +2224,7 @@ const LEAGUE_NAMES_DEF: WrapperDef = {
  *
  * @param params.leagues - `number | string` — the `leagues` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueNames({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2262,7 +2262,7 @@ const LEAGUE_PROP_ODDS_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.league - `number | string` — the `league` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeaguePropOdds({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2305,7 +2305,7 @@ const LEAGUE_STANDINGS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.season_phase - `number | string` — the `seasonPhase` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueStandings({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2373,7 +2373,7 @@ const LEAGUE_STATS_BY_TEAM_DEF: WrapperDef = {
  * @param params.football_cut_type - `number | string` — the `footballCutType` query parameter.
  * @param params.hockey_cut_type - `number | string` — the `hockeyCutType` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueStatsByTeam({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2481,7 +2481,7 @@ const LEAGUE_STATS_INDIVIDUAL_DEF: WrapperDef = {
  * @param params.motorsports_sort_stat - `number | string` — the `motorsportsSortStat` query parameter.
  * @param params.motorsports_stat_ids - `number | string` — the `motorsportsStatIds` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueStatsIndividual({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2559,7 +2559,7 @@ const LEAGUE_STATS_OVERVIEW_DEF: WrapperDef = {
  * @param params.motorsports_sort_stat - `number | string` — the `motorsportsSortStat` query parameter.
  * @param params.motorsports_stat_ids - `number | string` — the `motorsportsStatIds` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueStatsOverview({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2612,7 +2612,7 @@ const LEAGUE_STATS_WEEKLY_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.season_phase - `number | string` — the `seasonPhase` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueStatsWeekly({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2655,7 +2655,7 @@ const LEAGUE_TEAM_IDS_DEF: WrapperDef = {
  * @param params.division_ids - `number | string` — the `divisionIds` query parameter.
  * @param params.get_teams_by_division - `number | string` — the `getTeamsByDivision` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueTeamIds({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2703,7 +2703,7 @@ const LEAGUE_TEAMS_DEF: WrapperDef = {
  * @param params.division_ids - `number | string` — the `divisionIds` query parameter.
  * @param params.get_teams_by_division - `number | string` — the `getTeamsByDivision` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueTeams({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2736,7 +2736,7 @@ const LEAGUES_SEASON_STATES_DEF: WrapperDef = {
  *
  * @param params.leagues - `number | string` — the `leagues` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeaguesSeasonStates({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2779,7 +2779,7 @@ const MODULE_GAME_DEF: WrapperDef = {
  * @param params.image_height - `number | string` — the `imageHeight` query parameter.
  * @param params.image_width - `number | string` — the `imageWidth` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooModuleGame({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2817,7 +2817,7 @@ const MOTORSPORT_STANDINGS_DEF: WrapperDef = {
  * @param params.league - `number | string` — the `league` query parameter.
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooMotorsportStandings({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2850,7 +2850,7 @@ const NASCAR_DRIVERS_DEF: WrapperDef = {
  *
  * @param params.league - `number | string` — the `league` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooNascarDrivers({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2893,7 +2893,7 @@ const NAV_DROPDOWN_TRAY_DEF: WrapperDef = {
  * @param params.soccer_league_ids - `number | string` — the `soccerLeagueIds` query parameter.
  * @param params.soccer_team_ids - `number | string` — the `soccerTeamIds` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooNavDropdownTray({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2931,7 +2931,7 @@ const OLY_MEDAL_COUNT_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.sort_method - `number | string` — the `sortMethod` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooOlyMedalCount({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -2964,7 +2964,7 @@ const OLY_SEASONS_DEF: WrapperDef = {
  *
  * @param params.seasons - `number | string` — the `seasons` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooOlySeasons({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3007,7 +3007,7 @@ const PICK_DISTRIBUTION_DEF: WrapperDef = {
  * @param params.dates - `number | string` — the `dates` query parameter.
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPickDistribution({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3090,7 +3090,7 @@ const PLAYBOOK_BOXSCORE_DEF: WrapperDef = {
  * @param params.is_soccer - `number | string` — the `isSoccer` query parameter.
  * @param params.event_state - `number | string` — the `eventState` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookBoxscore({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3163,7 +3163,7 @@ const PLAYBOOK_BOXSCORE_POLL_DEF: WrapperDef = {
  * @param params.is_soccer - `number | string` — the `isSoccer` query parameter.
  * @param params.event_state - `number | string` — the `eventState` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookBoxscorePoll({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3196,7 +3196,7 @@ const PLAYBOOK_BOXSCORE_SOCIAL_SHARE_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — the `gameId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookBoxscoreSocialShare({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3249,7 +3249,7 @@ const PLAYBOOK_COMBAT_MATCH_DEF: WrapperDef = {
  * @param params.headshot_height - `number | string` — the `headshotHeight` query parameter.
  * @param params.headshot_width - `number | string` — the `headshotWidth` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookCombatMatch({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3292,7 +3292,7 @@ const PLAYBOOK_GAME_DEF: WrapperDef = {
  * @param params.image_height - `number | string` — the `imageHeight` query parameter.
  * @param params.image_width - `number | string` — the `imageWidth` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookGame({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3330,7 +3330,7 @@ const PLAYBOOK_GAME_ODDS_POLL_DEF: WrapperDef = {
  * @param params.game_id - `number | string` — the `gameId` query parameter.
  * @param params.event_state - `number | string` — the `eventState` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookGameOddsPoll({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3383,7 +3383,7 @@ const PLAYBOOK_GOLF_TOURNAMENT_DEF: WrapperDef = {
  * @param params.stat_ids - `number | string` — the `statIds` query parameter.
  * @param params.show_hole_results - `number | string` — the `showHoleResults` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookGolfTournament({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3441,7 +3441,7 @@ const PLAYBOOK_LEAGUE_ODDS_DEF: WrapperDef = {
  * @param params.range_start_date - `number | string` — the `rangeStartDate` query parameter.
  * @param params.range_end_date - `number | string` — the `rangeEndDate` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookLeagueOdds({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3479,7 +3479,7 @@ const PLAYBOOK_PLAYER_DEF: WrapperDef = {
  * @param params.player_id - `number | string` — the `playerId` query parameter.
  * @param params.season_phases - `number | string` — the `seasonPhases` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookPlayer({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3512,7 +3512,7 @@ const PLAYBOOK_PLAYER_SOCIAL_SHARE_DEF: WrapperDef = {
  *
  * @param params.player_id - `number | string` — the `playerId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookPlayerSocialShare({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3555,7 +3555,7 @@ const PLAYBOOK_RACE_DEF: WrapperDef = {
  * @param params.player_image_height - `number | string` — the `playerImageHeight` query parameter.
  * @param params.player_image_width - `number | string` — the `playerImageWidth` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookRace({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3613,7 +3613,7 @@ const PLAYBOOK_TEAM_DEF: WrapperDef = {
  * @param params.disable_conference - `number | string` — the `disableConference` query parameter.
  * @param params.disable_division - `number | string` — the `disableDivision` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookTeam({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3656,7 +3656,7 @@ const PLAYBOOK_TEAM_BASIC_DEF: WrapperDef = {
  * @param params.image_height - `number | string` — the `imageHeight` query parameter.
  * @param params.image_width - `number | string` — the `imageWidth` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookTeamBasic({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3689,7 +3689,7 @@ const PLAYBOOK_TEAM_SOCIAL_SHARE_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the `teamId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookTeamSocialShare({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3722,7 +3722,7 @@ const PLAYBOOK_TENNIS_MATCH_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — the `gameId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookTennisMatch({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3760,7 +3760,7 @@ const PLAYER_BASIC_DEF: WrapperDef = {
  * @param params.league - `number | string` — the `league` query parameter.
  * @param params.player_id - `number | string` — the `playerId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayerBasic({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3823,7 +3823,7 @@ const PLAYER_CAREER_STATS_DEF: WrapperDef = {
  * @param params.hockey_stat_ids - `number | string` — the `hockeyStatIds` query parameter.
  * @param params.soccer_stat_ids - `number | string` — the `soccerStatIds` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayerCareerStats({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3896,7 +3896,7 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
  * @param params.hockey_stat_ids - `number | string` — the `hockeyStatIds` query parameter.
  * @param params.soccer_stat_ids - `number | string` — the `soccerStatIds` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayerGameLog({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3929,7 +3929,7 @@ const PLAYER_PROPS_DEF: WrapperDef = {
  *
  * @param params.player_id - `number | string` — the `playerId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayerProps({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -3992,7 +3992,7 @@ const PLAYER_SEARCH_DEF: WrapperDef = {
  * @param params.mlb_position_id - `number | string` — the `mlbPositionId` query parameter.
  * @param params.nhl_position_id - `number | string` — the `nhlPositionId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayerSearch({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4085,7 +4085,7 @@ const PLAYER_SEASON_STATS_DEF: WrapperDef = {
  * @param params.group_by_season_phase - `number | string` — the `groupBySeasonPhase` query parameter.
  * @param params.use_player_unique_id - `number | string` — the `usePlayerUniqueId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayerSeasonStats({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4138,7 +4138,7 @@ const PLAYOFF_BRACKET_DEF: WrapperDef = {
  * @param params.type - `number | string` — the `type` query parameter.
  * @param params.playoff_rounds - `number | string` — the `playoffRounds` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayoffBracket({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4171,7 +4171,7 @@ const PLAYOFF_SERIES_GAME_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — the `gameId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayoffSeriesGame({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4204,7 +4204,7 @@ const POLYMARKET_GAME_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — the `gameId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPolymarketGame({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4252,7 +4252,7 @@ const RACING_SCHEDULE_DEF: WrapperDef = {
  * @param params.today - `number | string` — the `today` query parameter.
  * @param params.has_series - `number | string` — the `hasSeries` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooRacingSchedule({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4310,7 +4310,7 @@ const SCOREBOARD_GAME_DEF: WrapperDef = {
  * @param params.single_stat_leader - `number | string` — the `singleStatLeader` query parameter.
  * @param params.bet_event_state - `number | string` — the `betEventState` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooScoreboardGame({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4363,7 +4363,7 @@ const SEASON_STATS_FOOTBALL_DEFENSE_NCAAF_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballDefenseNcaaf({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4416,7 +4416,7 @@ const SEASON_STATS_FOOTBALL_KICKING_NCAAF_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballKickingNcaaf({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4469,7 +4469,7 @@ const SEASON_STATS_FOOTBALL_PASSING_NCAAF_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballPassingNcaaf({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4522,7 +4522,7 @@ const SEASON_STATS_FOOTBALL_PUNTING_NCAAF_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballPuntingNcaaf({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4575,7 +4575,7 @@ const SEASON_STATS_FOOTBALL_RECEIVING_NCAAF_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballReceivingNcaaf({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4628,7 +4628,7 @@ const SEASON_STATS_FOOTBALL_RETURNS_NCAAF_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballReturnsNcaaf({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4681,7 +4681,7 @@ const SEASON_STATS_FOOTBALL_RUSHING_NCAAF_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballRushingNcaaf({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4734,7 +4734,7 @@ const SEASON_TEAM_STATS_FOOTBALL_DEFENSE_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballDefense({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4787,7 +4787,7 @@ const SEASON_TEAM_STATS_FOOTBALL_KICKING_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballKicking({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4840,7 +4840,7 @@ const SEASON_TEAM_STATS_FOOTBALL_KICKOFFS_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballKickoffs({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4893,7 +4893,7 @@ const SEASON_TEAM_STATS_FOOTBALL_OFFENSE_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballOffense({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4946,7 +4946,7 @@ const SEASON_TEAM_STATS_FOOTBALL_PASSING_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballPassing({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -4999,7 +4999,7 @@ const SEASON_TEAM_STATS_FOOTBALL_PASSING_DEFENSE_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballPassingDefense({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5052,7 +5052,7 @@ const SEASON_TEAM_STATS_FOOTBALL_PUNTING_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballPunting({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5105,7 +5105,7 @@ const SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballReceiving({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5158,7 +5158,7 @@ const SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEFENSE_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballReceivingDefense({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5211,7 +5211,7 @@ const SEASON_TEAM_STATS_FOOTBALL_RETURNS_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballReturns({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5264,7 +5264,7 @@ const SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballRushing({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5317,7 +5317,7 @@ const SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEFENSE_DEF: WrapperDef = {
  * @param params.count - `number | string` — the `count` query parameter.
  * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballRushingDefense({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5350,7 +5350,7 @@ const TEAM_INJURIES_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the `teamId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamInjuries({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5388,7 +5388,7 @@ const TEAM_PLAYOFF_SERIES_DEF: WrapperDef = {
  * @param params.team_id - `number | string` — the `teamId` query parameter.
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamPlayoffSeries({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5431,7 +5431,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @param params.player_image_height - `number | string` — the `playerImageHeight` query parameter.
  * @param params.player_image_width - `number | string` — the `playerImageWidth` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamRoster({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5469,7 +5469,7 @@ const TEAM_SCHEDULE_BY_SEASON_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.team_id - `number | string` — the `teamId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamScheduleBySeason({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5512,7 +5512,7 @@ const TEAM_SEARCH_DEF: WrapperDef = {
  * @param params.image_height - `number | string` — the `imageHeight` query parameter.
  * @param params.image_width - `number | string` — the `imageWidth` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamSearch({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5585,7 +5585,7 @@ const TEAM_STATS_LEADERS_V2_DEF: WrapperDef = {
  * @param params.include_player_stats - `number | string` — the `includePlayerStats` query parameter.
  * @param params.is_baseball - `number | string` — the `isBaseball` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamStatsLeadersV2({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5618,7 +5618,7 @@ const TEAM_TRANSACTIONS_DEF: WrapperDef = {
  *
  * @param params.team_id - `number | string` — the `teamId` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamTransactions({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5661,7 +5661,7 @@ const TEAMS_BASIC_DEF: WrapperDef = {
  * @param params.image_height - `number | string` — the `imageHeight` query parameter.
  * @param params.image_width - `number | string` — the `imageWidth` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamsBasic({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5704,7 +5704,7 @@ const TENNIS_MATCHES_BY_DATE_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.date - `number | string` — the `date` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTennisMatchesByDate({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5742,7 +5742,7 @@ const TENNIS_TOURNAMENT_DEF: WrapperDef = {
  * @param params.tournament_id - `number | string` — the `tournamentId` query parameter.
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTennisTournament({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5785,7 +5785,7 @@ const TENNIS_TOURNAMENTS_DEF: WrapperDef = {
  * @param params.match_type - `number | string` — the `matchType` query parameter.
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTennisTournaments({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5823,7 +5823,7 @@ const TENNIS_TOURNAMENTS_BY_DATE_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `season` query parameter.
  * @param params.date - `number | string` — the `date` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTennisTournamentsByDate({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5866,7 +5866,7 @@ const TRENDING_EVENT_IDS_DEF: WrapperDef = {
  * @param params.league - `number | string` — the `league` query parameter.
  * @param params.date_flip_offset - `number | string` — the `dateFlipOffset` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTrendingEventIds({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
@@ -5914,7 +5914,7 @@ const TRENDING_GAME_IDS_DEF: WrapperDef = {
  * @param params.date_flip_offset - `number | string` — the `dateFlipOffset` query parameter.
  * @param params.dates - `number | string` — the `dates` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTrendingGameIds({});
  * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */

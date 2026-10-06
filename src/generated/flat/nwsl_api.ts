@@ -54,7 +54,7 @@ const COMPETITIONS_DEF: WrapperDef = {
  *
  * @param params.locale - `number | string` — UI locale, always `en-US`; default `en-US`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NwslApiCompetitionsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NwslApiCompetitionsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nwsl.nwslCompetitions({});
  * @see https://js.sportsdataverse.org/docs/nwsl/reference/native#native-api--nwsl-statsperform-sdp
  */
@@ -99,7 +99,7 @@ const MATCH_LINEUPS_DEF: WrapperDef = {
  * @param params.locale - `number | string` — UI locale, always `en-US`; default `en-US`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `teams`, `players`, `staff`. Default: `players`; an unknown name throws, listing the valid ones.
- * @returns Promise<`NwslApiMatchLineupsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NwslApiMatchLineupsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nwsl.nwslMatchLineups({ season_id: '…', match_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nwsl/reference/native#native-api--nwsl-statsperform-sdp
  */
@@ -139,7 +139,7 @@ const MATCHDAYS_DEF: WrapperDef = {
  * @param params.season_id - `number | string` — the `{season_id}` path segment.
  * @param params.locale - `number | string` — UI locale, always `en-US`; default `en-US`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nwsl.nwslMatchdays({ season_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nwsl/reference/native#native-api--nwsl-statsperform-sdp
  */
@@ -204,7 +204,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @param params.page - `number | string` — 1-based page number.
  * @param params.page_num_element - `number | string` — Page size (e.g. 400).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NwslApiPlayerStatsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NwslApiPlayerStatsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nwsl.nwslPlayerStats({ season_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nwsl/reference/native#native-api--nwsl-statsperform-sdp
  */
@@ -254,7 +254,7 @@ const SEASON_MATCHES_DEF: WrapperDef = {
  * @param params.start_date - `number | string` — Window start, `MM/DD/YYYY` (US format).
  * @param params.end_date - `number | string` — Window end, `MM/DD/YYYY` (US format).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NwslApiSeasonMatchesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NwslApiSeasonMatchesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nwsl.nwslSeasonMatches({});
  * @see https://js.sportsdataverse.org/docs/nwsl/reference/native#native-api--nwsl-statsperform-sdp
  */
@@ -294,7 +294,7 @@ const STAGES_DEF: WrapperDef = {
  * @param params.season_id - `number | string` — the `{season_id}` path segment.
  * @param params.locale - `number | string` — UI locale, always `en-US`; default `en-US`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nwsl.nwslStages({ season_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nwsl/reference/native#native-api--nwsl-statsperform-sdp
  */
@@ -343,7 +343,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.order_by - `number | string` — Sort field, e.g. `rank`.
  * @param params.direction - `number | string` — `asc` or `desc`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nwsl.nwslStandings({ season_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nwsl/reference/native#native-api--nwsl-statsperform-sdp
  */
@@ -388,7 +388,7 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @param params.locale - `number | string` — UI locale, always `en-US`; default `en-US`.
  * @param params.category - `number | string` — Stat family: `general` (default), `attack`, `defence`, etc.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NwslApiTeamStatsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NwslApiTeamStatsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nwsl.nwslTeamStats({ season_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nwsl/reference/native#native-api--nwsl-statsperform-sdp
  */
@@ -428,7 +428,7 @@ const TEAMS_DEF: WrapperDef = {
  * @param params.season_id - `number | string` — the `{season_id}` path segment.
  * @param params.locale - `number | string` — UI locale, always `en-US`; default `en-US`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`NwslApiTeamsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<NwslApiTeamsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nwsl.nwslTeams({ season_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nwsl/reference/native#native-api--nwsl-statsperform-sdp
  */

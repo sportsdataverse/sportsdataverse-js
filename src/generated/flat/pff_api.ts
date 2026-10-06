@@ -133,7 +133,7 @@ const FACET_DEFENSE_COVERAGE_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetDefenseCoverage({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -196,7 +196,7 @@ const FACET_DEFENSE_COVERAGE_MATCHUP_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`ParsedTables`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `defenders`, `receivers`, `versus` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<ParsedTables>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `defenders`, `receivers`, `versus` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetDefenseCoverageMatchup({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -259,7 +259,7 @@ const FACET_DEFENSE_COVERAGE_SCHEME_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetDefenseCoverageScheme({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -322,7 +322,7 @@ const FACET_DEFENSE_PASS_RUSH_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetDefensePassRush({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -385,7 +385,7 @@ const FACET_DEFENSE_RUN_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetDefenseRun({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -448,7 +448,7 @@ const FACET_DEFENSE_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetDefenseSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -511,7 +511,7 @@ const FACET_FIELD_GOAL_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetFieldGoalSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -574,7 +574,7 @@ const FACET_KICKOFF_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetKickoffSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -637,7 +637,7 @@ const FACET_OFFENSE_BLOCKING_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetOffenseBlocking({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -700,7 +700,7 @@ const FACET_OFFENSE_PASS_BLOCKING_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetOffensePassBlocking({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -763,7 +763,7 @@ const FACET_OFFENSE_RUN_BLOCKING_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetOffenseRunBlocking({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -826,7 +826,7 @@ const FACET_OFFENSE_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetOffenseSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -889,7 +889,7 @@ const FACET_PASSING_ALLOWED_PRESSURE_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPassingAllowedPressure({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -952,7 +952,7 @@ const FACET_PASSING_CONCEPT_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPassingConcept({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1015,7 +1015,7 @@ const FACET_PASSING_DEPTH_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPassingDepth({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1078,7 +1078,7 @@ const FACET_PASSING_DETAIL_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPassingDetail({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1141,7 +1141,7 @@ const FACET_PASSING_PRESSURE_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPassingPressure({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1204,7 +1204,7 @@ const FACET_PASSING_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPassingSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1267,7 +1267,7 @@ const FACET_PUNTING_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPuntingSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1330,7 +1330,7 @@ const FACET_RECEIVING_CONCEPT_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetReceivingConcept({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1393,7 +1393,7 @@ const FACET_RECEIVING_COVERAGE_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`ParsedTables`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `defenders`, `receivers`, `versus` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<ParsedTables>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `defenders`, `receivers`, `versus` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetReceivingCoverage({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1456,7 +1456,7 @@ const FACET_RECEIVING_DEPTH_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetReceivingDepth({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1519,7 +1519,7 @@ const FACET_RECEIVING_SCHEME_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetReceivingScheme({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1582,7 +1582,7 @@ const FACET_RECEIVING_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetReceivingSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1645,7 +1645,7 @@ const FACET_RETURN_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetReturnSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1708,7 +1708,7 @@ const FACET_RUSHING_DIRECTION_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetRushingDirection({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1771,7 +1771,7 @@ const FACET_RUSHING_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetRushingSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1834,7 +1834,7 @@ const FACET_SPECIAL_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetSpecialSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1892,7 +1892,7 @@ const PLAYER_DEFENSE_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerDefenseSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -1950,7 +1950,7 @@ const PLAYER_FIELD_GOAL_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerFieldGoalSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2008,7 +2008,7 @@ const PLAYER_KICKOFF_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerKickoffSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2066,7 +2066,7 @@ const PLAYER_OFFENSE_BLOCKING_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerOffenseBlocking({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2124,7 +2124,7 @@ const PLAYER_OFFENSE_PASS_BLOCKING_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerOffensePassBlocking({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2182,7 +2182,7 @@ const PLAYER_OFFENSE_RUN_BLOCKING_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerOffenseRunBlocking({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2240,7 +2240,7 @@ const PLAYER_OFFENSE_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerOffenseSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2298,7 +2298,7 @@ const PLAYER_PASSING_CONCEPT_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerPassingConcept({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2356,7 +2356,7 @@ const PLAYER_PASSING_DEPTH_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerPassingDepth({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2414,7 +2414,7 @@ const PLAYER_PASSING_PRESSURE_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerPassingPressure({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2472,7 +2472,7 @@ const PLAYER_PASSING_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerPassingSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2525,7 +2525,7 @@ const PLAYER_POSITION_PIVOT_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerPositionPivot({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2583,7 +2583,7 @@ const PLAYER_PUNTING_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerPuntingSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2641,7 +2641,7 @@ const PLAYER_RECEIVING_DEPTH_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerReceivingDepth({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2699,7 +2699,7 @@ const PLAYER_RECEIVING_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerReceivingSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2757,7 +2757,7 @@ const PLAYER_RETURN_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerReturnSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2815,7 +2815,7 @@ const PLAYER_RUSHING_DIRECTION_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerRushingDirection({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2873,7 +2873,7 @@ const PLAYER_RUSHING_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerRushingSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2926,7 +2926,7 @@ const PLAYER_SEASONS_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerSeasons({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -2979,7 +2979,7 @@ const PLAYER_SNAPS_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerSnapsSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3037,7 +3037,7 @@ const PLAYER_SPECIAL_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerSpecialSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3099,7 +3099,7 @@ const POSITION_REPORT_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (its columns depend on `report`) (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (its columns depend on `report`) (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPositionReport({ league: '…', report: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3152,7 +3152,7 @@ const REF_GAMES_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiRefGames({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3184,7 +3184,7 @@ const REF_LEAGUES_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiRefLeagues({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3232,7 +3232,7 @@ const REF_PLAYERS_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiRefPlayers({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3280,7 +3280,7 @@ const SIGNATURE_DEFENSE_OUTSIDE_PASS_RUSH_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiSignatureDefenseOutsidePassRush({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3328,7 +3328,7 @@ const SIGNATURE_DEFENSE_SLOT_COVERAGE_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiSignatureDefenseSlotCoverage({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3376,7 +3376,7 @@ const SIGNATURE_PASS_BLOCKING_EFFICIENCY_LINE_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiSignaturePassBlockingEfficiencyLine({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3424,7 +3424,7 @@ const SIGNATURE_PASSING_TIME_IN_POCKET_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiSignaturePassingTimeInPocket({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3467,7 +3467,7 @@ const TEAM_DIRECTORY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamDirectory({ league: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3524,7 +3524,7 @@ const TEAM_LEADERS_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (its columns depend on `group`) (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (its columns depend on `group`) (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamLeaders({ league: '…', team: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3577,7 +3577,7 @@ const TEAM_LIST_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamList({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3630,7 +3630,7 @@ const TEAM_OVERVIEW_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamOverview({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3696,7 +3696,7 @@ const TEAM_REPORT_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (its columns depend on `report`) (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (its columns depend on `report`) (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamReport({ league: '…', team: '…', report: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3743,7 +3743,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamRoster({ league: '…', team: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3795,7 +3795,7 @@ const TEAM_RUSHING_DIRECTION_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamRushingDirection({ league: '…', team: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3842,7 +3842,7 @@ const TEAM_SCHEDULE_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamSchedule({ league: '…', team: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3905,7 +3905,7 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (its columns depend on `category`) (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (its columns depend on `category`) (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamStats({ league: '…' });
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3958,7 +3958,7 @@ const TEAM_SUMMARY_DEF: WrapperDef = {
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamSummary({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
@@ -3987,7 +3987,7 @@ const WHOAMI_DEF: WrapperDef = {
  * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
  * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - `boolean` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
- * @returns Promise<`unknown`>: the raw response (this endpoint has no parser).
+ * @returns `Promise<unknown>`: the raw response (this endpoint has no parser).
  * @example await sdv.nfl.pffApiWhoami({});
  * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */

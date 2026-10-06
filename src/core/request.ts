@@ -24,7 +24,10 @@ const MAX_RETRY_AFTER_SECONDS = 120;
 const MAX_STATUS_RETRIES = 4;
 
 /**
- * Test seam for the backoff sleep.
+ * Test seam for the backoff sleep: `request()` awaits `_timer.sleep(ms)` between attempts.
+ *
+ * @remarks
+ * Replace `sleep` in a test to make retries instant; `request.test.js` stubs it.
  * @internal
  */
 export const _timer = {
@@ -44,6 +47,22 @@ function parseRetryAfter(value: string | undefined): number | undefined {
  * Milliseconds to wait before retry number `attempt + 1`: the server's
  * `Retry-After` (capped at 120s) when present, else exponential backoff
  * 0.5s * 2^attempt capped at 4s, with 50-100% jitter.
+ *
+ * @param attempt - Zero-based index of the attempt that just failed: 0 → 0.5 s, 1 → 1 s,
+ *   2 → 2 s, 3+ → 4 s (before jitter).
+ * @param retryAfter - The response's `Retry-After` header: seconds or an HTTP-date. Blank or
+ *   unparseable falls back to the backoff schedule; a date in the past counts as 0.
+ * @returns Milliseconds to sleep. From `Retry-After`: exactly `min(120, seconds) * 1000`, no
+ *   jitter. Otherwise the backoff delay scaled by a random factor in [0.5, 1).
+ * @example
+ * ```ts
+ * import { retryDelayMs } from './core/request.js'; // not re-exported from the package root
+ *
+ * retryDelayMs(0);               // 250..500 ms
+ * retryDelayMs(5);               // 2000..4000 ms (capped at 4 s)
+ * retryDelayMs(0, '3');          // 3000 ms
+ * retryDelayMs(0, '600');        // 120000 ms (capped at 120 s)
+ * ```
  */
 export function retryDelayMs(attempt: number, retryAfter?: string): number {
   const secs = parseRetryAfter(retryAfter);
@@ -102,6 +121,22 @@ function failedBody(family: string, url: string, status: number, what: string): 
  * that does not decode is a failed fetch, never text for a parser. A blank body
  * is a 204 / 205 (`request()` already raised on every other empty 2xx) → `{}`.
  * Used by the text getters that branch on content-type (statcast, torvik).
+ *
+ * @param family - Family stem, for the error message.
+ * @param res - The {@link TransportResponse} from {@link requestResponse}; only `data` and
+ *   `status` are read.
+ * @param url - Request URL, for the error (reduced to host / path in the message).
+ * @returns `res.data` unchanged when it is not a string (the transport already parsed it);
+ *   `{}` for a blank string body; otherwise the parsed JSON.
+ * @throws AssetFetchError when the string body does not parse as JSON; the message carries
+ *   a bounded, redacted excerpt of the body.
+ * @example
+ * ```ts
+ * import { jsonBody, requestResponse } from './core/request.js';
+ *
+ * const res = await requestResponse('mlb_statcast', { method: 'GET', url, responseType: 'text' });
+ * const data = /json/.test(res.headers['content-type'] ?? '') ? jsonBody('mlb_statcast', res, url) : res.data;
+ * ```
  * @internal
  */
 export function jsonBody(family: string, res: TransportResponse, url: string): unknown {
@@ -117,6 +152,42 @@ export function jsonBody(family: string, res: TransportResponse, url: string): u
 /**
  * Like {@link request} but resolves with the whole response (status, headers,
  * data) — for runtimes that branch on response headers (e.g. content-type).
+ *
+ * @param family - Family stem (`"site_v2"`, `"mlb"`, `"nfl_api"`, …): selects the transport,
+ *   auth, retry statuses, retry budget, timeout and `classifyError` via `resolveFamily`.
+ * @param req - The {@link TransportRequest}. `timeoutMs` defaults to the family's; the family
+ *   `User-Agent` is added unless the request or the auth provider already sets one.
+ * @returns The final 2xx {@link TransportResponse}. A 204 / 205 resolves with `data` `{}`
+ *   (`""` when `req.responseType` is `"text"`).
+ * @throws NoDataError on HTTP 404, or an ESPN-family (`site_v2`, `site_v2_alt`, `web_v3`,
+ *   `core_v2`, `fitt_v3`, `cdn`) 2xx body `{ code: 404 }`.
+ * @throws InvalidParameterError on HTTP 400 / 422 (never retried).
+ * @throws AssetFetchError when the answer is unknown: a network error that outlived
+ *   `retries`, a non-2xx that outlived the retries, an empty 2xx body (204 / 205 aside), a JSON
+ *   request whose 2xx body is a string (did not decode), an ESPN-family 2xx body that is not an
+ *   object, or a throwing `auth.apply` / `auth.refresh` (`"<family>: auth failed (apply|refresh)"`).
+ *   A family's `classifyError` may replace it with its own SdvError.
+ * @throws SdvError any SdvError thrown by the transport or the auth provider passes through
+ *   unchanged and is never retried (e.g. `TransportUnavailableError`).
+ * @example
+ * ```ts
+ * import { requestResponse } from './core/request.js'; // not re-exported from the package root
+ *
+ * const res = await requestResponse('mlb_statcast', {
+ *   method: 'GET',
+ *   url: 'https://baseballsavant.mlb.com/leaderboard/custom',
+ *   query: { year: 2024, csv: true },
+ *   responseType: 'text',
+ * });
+ * const isCsv = /csv/.test(res.headers['content-type'] ?? '');
+ * ```
+ * @remarks
+ * Retry accounting: `retries` (default 3) attempts after the first, of which at most
+ * `min(retries, 4)` may be spent on the family's retry statuses (default
+ * {@link DEFAULT_RETRY_STATUSES}); network errors may use the whole budget. The sleep between
+ * attempts is {@link retryDelayMs} (`Retry-After` honoured, capped at 120 s). A 401 triggers one
+ * `auth.refresh` and one re-send, outside the retry budget. Error messages name the host, path
+ * and status, never the query string, and go through `redactSecrets`.
  */
 export async function requestResponse(
   family: string,
@@ -257,7 +328,36 @@ export async function requestResponse(
  * A failed fetch never comes back as empty data. Error messages name the host,
  * path and status, never the query string, and are redacted.
  *
- * @param family Family stem (`"site_v2"`, `"mlb"`, `"nfl_api"`, …) — selects transport + auth.
+ * @param family - Family stem (`"site_v2"`, `"mlb"`, `"nfl_api"`, …) — selects transport + auth.
+ * @param req - The {@link TransportRequest}: `method`, query-free `url`, `query`, `headers`,
+ *   `body`, `timeoutMs` (default: the family's), `responseType` (default `"json"`).
+ * @returns The response body: parsed JSON for a `"json"` request whose body was JSON, the text
+ *   for `"text"`, an `ArrayBuffer` for `"arraybuffer"`; `{}` (or `""` for `"text"`) on 204 / 205.
+ * @throws NoDataError on HTTP 404, or an ESPN-family 2xx body `{ code: 404 }`.
+ * @throws InvalidParameterError on HTTP 400 / 422.
+ * @throws AssetFetchError on every other failure (non-2xx after the retries, an empty or
+ *   non-JSON 2xx body, a network error after the retries, a failing auth step), unless the
+ *   family's `classifyError` names a more specific SdvError.
+ * @throws SdvError any SdvError from the transport or auth provider passes through unchanged.
+ * @example
+ * ```ts
+ * import { request } from './core/request.js'; // not re-exported from the package root
+ * import { NoDataError } from 'sportsdataverse';
+ *
+ * try {
+ *   const data = await request('site_v2', {
+ *     method: 'GET',
+ *     url: 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary',
+ *     query: { event: 401671789 },
+ *   });
+ * } catch (err) {
+ *   if (err instanceof NoDataError) return undefined; // nothing there; a failed fetch still throws
+ *   throw err;
+ * }
+ * ```
+ * @remarks
+ * This is `(await requestResponse(family, req)).data`; see {@link requestResponse} for the
+ * retry accounting and the headers / status of the final response.
  */
 export async function request(family: string, req: TransportRequest): Promise<unknown> {
   return (await requestResponse(family, req)).data;

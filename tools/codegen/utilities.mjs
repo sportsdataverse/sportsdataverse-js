@@ -60,14 +60,21 @@ function findSignature(repoRoot, files, name, where) {
       let sig = lines[i].trim();
       let depth = paren(sig);
       let j = i;
-      // a declaration ends at its body `{`, at `;`, or at `=` for a const (keep the type annotation)
-      while (!/[{;]\s*$/.test(sig) && !/=\s*\S/.test(sig.replace(/=>/g, "")) && j < i + 12 && j < lines.length - 1) {
+      // a declaration ends at its body `{` (or an empty `{}`), at `;`, or at `=` for a const
+      // (keep the type annotation); anything after a trailing `/**` is the next declaration's doc.
+      const ends = (s) => /[{};]\s*$/.test(s.replace(/\/\*\*.*$/, "").trimEnd());
+      while (!ends(sig) && !/=\s*\S/.test(sig.replace(/=>/g, "")) && j < i + 12 && j < lines.length - 1) {
         j++;
         sig += " " + lines[j].trim();
         depth += paren(lines[j]);
-        if (depth <= 0 && /[{;]\s*$/.test(sig)) break;
+        if (depth <= 0 && ends(sig)) break;
       }
-      sig = sig.replace(/\s*\{\s*$/, "").replace(/\s*=\s*(?:async\s*)?\([^)]*\)\s*=>.*$/, "").replace(/\s+=\s*[^=].*$/, "");
+      sig = sig
+        .replace(/\/\*\*.*$/, "")
+        .replace(/\s*\{\s*\}\s*$/, " {}")
+        .replace(/\s*\{\s*$/, "")
+        .replace(/\s*=\s*(?:async\s*)?\([^)]*\)\s*=>.*$/, "")
+        .replace(/\s+=\s*[^=].*$/, "");
       return sig.replace(/\s+/g, " ").trim();
     }
     // a re-export (`export { x } from`) resolves through the barrel's own sources, so a

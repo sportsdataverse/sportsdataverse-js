@@ -148,7 +148,7 @@ const COACHES_HISTORY_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3CoachesHistory({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -180,7 +180,7 @@ const COACHES_PROFILE_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3CoachesProfile({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -233,7 +233,7 @@ const COLLECTIVE_GROUPS_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3CollectiveGroupsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3CollectiveGroupsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3CollectiveGroups({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -276,7 +276,7 @@ const COLLECTIVE_GROUPS_DEALS_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3CollectiveGroupsDeals({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -308,7 +308,7 @@ const COLLECTIVE_GROUPS_KEY_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3CollectiveGroupsKey({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -350,7 +350,7 @@ const COMMITS_LATEST_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3CommitsLatest({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -382,7 +382,7 @@ const COMMITS_ORGANIZATIONS_LATEST_COMMITS_DEF: WrapperDef = {
  *
  * @param params.org_key - `number | string` — the `{org_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3CommitsOrganizationsLatestCommits({ org_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -414,7 +414,7 @@ const COMMITS_ORGANIZATIONS_ORG_KEY_DEF: WrapperDef = {
  *
  * @param params.org_key - `number | string` — the `{org_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3CommitsOrganizationsOrgKey({ org_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -462,7 +462,7 @@ const DRAFT_ORGANIZATION_RANK_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3DraftOrganizationRank({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -510,7 +510,7 @@ const DRAFT_PICK_ORGANIZATION_RANK_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3DraftPickOrganizationRank({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -553,7 +553,7 @@ const DRAFTS_DEF: WrapperDef = {
  * @param params.round - `number | string` — the `round` query parameter.
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3Drafts({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -596,7 +596,7 @@ const DRAFTS_BY_STARS_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.year_span - `number | string` — the `yearSpan` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3DraftsByStarsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3DraftsByStarsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3DraftsByStars({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -634,7 +634,7 @@ const DRAFTS_BY_STARS_SUMMARY_DEF: WrapperDef = {
  * @param params.sport_key - `number | string` — the `sportKey` query parameter.
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3DraftsByStarsSummary({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -672,7 +672,7 @@ const DRAFTS_PLAYERS_DEF: WrapperDef = {
  * @param params.org_key - `number | string` — the `{org_key}` path segment.
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3DraftsPlayers({ org_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -710,7 +710,7 @@ const FILTERS_CONFERENCES_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.sport_key - `number | string` — the `sportKey` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3FiltersConferences({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -748,7 +748,7 @@ const FILTERS_DRAFT_ROUNDS_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.sport_key - `number | string` — the `sportKey` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3FiltersDraftRoundsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3FiltersDraftRoundsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3FiltersDraftRounds({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -786,7 +786,7 @@ const FILTERS_POSITIONS_DEF: WrapperDef = {
  * @param params.sport_key - `number | string` — the `sportKey` query parameter.
  * @param params.position_type - `number | string` — the `positionType` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3FiltersPositions({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -813,7 +813,7 @@ const FILTERS_SPORTS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.on3.com/public/rdb/v1/filters/sports`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3FiltersSports({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -840,7 +840,7 @@ const FILTERS_STATUS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.on3.com/public/rdb/v1/filters/status`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3FiltersStatusRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3FiltersStatusRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3FiltersStatus({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -883,7 +883,7 @@ const FILTERS_TEAMS_DEF: WrapperDef = {
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.sport_key - `number | string` — the `sportKey` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3FiltersTeams({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -910,7 +910,7 @@ const FILTERS_YEARS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.on3.com/public/rdb/v1/filters/years`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3FiltersYears({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -943,7 +943,7 @@ const NIL_100_DEF: WrapperDef = {
  *
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3Nil100({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -991,7 +991,7 @@ const NIL_100_V2_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the `limit` query parameter.
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3Nil100V2Row[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3Nil100V2Row[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3Nil100V2({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1024,7 +1024,7 @@ const NIL_COMPLIANCES_STATE_DEF: WrapperDef = {
  *
  * @param params.state_key - `number | string` — the `stateKey` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3NilCompliancesState({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1082,7 +1082,7 @@ const NIL_RANKINGS_DEF: WrapperDef = {
  * @param params.position_abbr - `number | string` — the `positionAbbr` query parameter.
  * @param params.state_abbr - `number | string` — the `stateAbbr` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3NilRankingsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3NilRankingsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3NilRankings({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1125,7 +1125,7 @@ const ORGANIZATIONS_DRAFT_CLASS_BY_STATE_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3OrganizationsDraftClassByState({ organization_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1168,7 +1168,7 @@ const ORGANIZATIONS_DRAFT_CLASS_BY_YEAR_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3OrganizationsDraftClassByYear({ organization_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1200,7 +1200,7 @@ const ORGANIZATIONS_DRAFT_COUNT_BY_STARS_DEF: WrapperDef = {
  *
  * @param params.organization_key - `number | string` — the `{organization_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3OrganizationsDraftCountByStars({ organization_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1243,7 +1243,7 @@ const ORGANIZATIONS_DRAFT_COUNT_BY_YEAR_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3OrganizationsDraftCountByYear({ organization_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1281,7 +1281,7 @@ const ORGANIZATIONS_DRAFT_RANKING_SUMMARY_DEF: WrapperDef = {
  * @param params.organization_key - `number | string` — the `{organization_key}` path segment.
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3OrganizationsDraftRankingSummary({ organization_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1324,7 +1324,7 @@ const ORGANIZATIONS_DRAFTED_PLAYERS_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3OrganizationsDraftedPlayers({ organization_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1362,7 +1362,7 @@ const ORGANIZATIONS_DRAFTS_BY_STARS_SUMMARY_DEF: WrapperDef = {
  * @param params.organization_key - `number | string` — the `{organization_key}` path segment.
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3OrganizationsDraftsByStarsSummary({ organization_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1414,7 +1414,7 @@ const ORGANIZATIONS_ROSTER_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3OrganizationsRoster({ organization_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1457,7 +1457,7 @@ const ORGANIZATIONS_ROSTER_HEADER_DEF: WrapperDef = {
  * @param params.sport_key - `number | string` — the `sportKey` query parameter.
  * @param params.year - `number | string` — the `year` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3OrganizationsRosterHeaderRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3OrganizationsRosterHeaderRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3OrganizationsRosterHeader({ organization_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1489,7 +1489,7 @@ const PEOPLE_COMBINE_MEASUREMENTS_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PeopleCombineMeasurements({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1521,7 +1521,7 @@ const PEOPLE_LATEST_VALUATION_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3PeopleLatestValuationRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3PeopleLatestValuationRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PeopleLatestValuation({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1553,7 +1553,7 @@ const PEOPLE_MEASUREMENTS_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3PeopleMeasurementsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3PeopleMeasurementsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PeopleMeasurements({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1595,7 +1595,7 @@ const PEOPLE_MEASUREMENTS_AVERAGES_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PeopleMeasurementsAverages({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1638,7 +1638,7 @@ const PEOPLE_PERSON_CONNECTIONS_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PeoplePersonConnections({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1670,7 +1670,7 @@ const PEOPLE_SOCIAL_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3PeopleSocialRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3PeopleSocialRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PeopleSocial({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1702,7 +1702,7 @@ const PEOPLE_SOCIAL_POST_SUMMARY_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3PeopleSocialPostSummaryRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3PeopleSocialPostSummaryRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PeopleSocialPostSummary({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1734,7 +1734,7 @@ const PEOPLE_TRACK_AND_FIELD_MEASUREMENTS_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PeopleTrackAndFieldMeasurements({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1766,7 +1766,7 @@ const PEOPLE_VALUATION_GROWTH_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3PeopleValuationGrowthRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3PeopleValuationGrowthRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PeopleValuationGrowth({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1798,7 +1798,7 @@ const PERSON_CONNECTIONS_CONNECTION_KEY_DEF: WrapperDef = {
  *
  * @param params.connection_key - `number | string` — the `{connection_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PersonConnectionsConnectionKey({ connection_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1830,7 +1830,7 @@ const PERSON_PRIMARY_RECRUITMENT_EVALUATION_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PersonPrimaryRecruitmentEvaluation({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1862,7 +1862,7 @@ const PERSON_RECRUITMENT_EVALUATIONS_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PersonRecruitmentEvaluations({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1894,7 +1894,7 @@ const PERSON_SPORT_PROFILE_RECRUIT_DEF: WrapperDef = {
  *
  * @param params.ps_key - `number | string` — the `{ps_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PersonSportProfileRecruit({ ps_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1942,7 +1942,7 @@ const PERSON_SPORT_RANKINGS_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PersonSportRankings({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -1974,7 +1974,7 @@ const PLAYER_ALL_RANKINGS_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3PlayerAllRankingsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3PlayerAllRankingsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayerAllRankings({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2006,7 +2006,7 @@ const PLAYER_DATABASE_UPDATES_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3PlayerDatabaseUpdatesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3PlayerDatabaseUpdatesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayerDatabaseUpdates({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2038,7 +2038,7 @@ const PLAYER_IMAGES_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3PlayerImagesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3PlayerImagesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayerImages({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2070,7 +2070,7 @@ const PLAYER_ORGANIZATIONS_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayerOrganizations({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2106,7 +2106,7 @@ const PLAYER_ORGANIZATIONS_ORG_KEY_DEF: WrapperDef = {
  * @param params.player_key - `number | string` — the `{player_key}` path segment.
  * @param params.org_key - `number | string` — the `{org_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayerOrganizationsOrgKey({ player_key: '…', org_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2138,7 +2138,7 @@ const PLAYER_PERSON_RANKINGS_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3PlayerPersonRankingsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3PlayerPersonRankingsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayerPersonRankings({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2170,7 +2170,7 @@ const PLAYER_PROFILE_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3PlayerProfileRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3PlayerProfileRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayerProfile({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2202,7 +2202,7 @@ const PLAYER_TEAM_TARGETS_DEF: WrapperDef = {
  *
  * @param params.player_key - `number | string` — the `{player_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayerTeamTargets({ player_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2244,7 +2244,7 @@ const PLAYER_VERIFIED_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayerVerified({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2276,7 +2276,7 @@ const PLAYER_VIDEOS_DEF: WrapperDef = {
  *
  * @param params.person_key - `number | string` — the `{person_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3PlayerVideosRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3PlayerVideosRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayerVideos({ person_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2308,7 +2308,7 @@ const PLAYER_VISIT_CENTER_DEF: WrapperDef = {
  *
  * @param params.player_key - `number | string` — the `{player_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayerVisitCenter({ player_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2366,7 +2366,7 @@ const PLAYERS_INDUSTRY_COMPARISION_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.sort_by_industry - `number | string` — the `sortByIndustry` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3PlayersIndustryComparisionRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3PlayersIndustryComparisionRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayersIndustryComparision({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2414,7 +2414,7 @@ const PLAYERS_INDUSTRY_COMPARISION_LIST_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PlayersIndustryComparisionList({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2457,7 +2457,7 @@ const PREDICTIONS_USER_KEY_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3PredictionsUserKey({ user_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2495,7 +2495,7 @@ const QUOTES_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3QuotesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3QuotesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3Quotes({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2527,7 +2527,7 @@ const QUOTES_KEY_DEF: WrapperDef = {
  *
  * @param params.key - `number | string` — the `{key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3QuotesKey({ key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2559,7 +2559,7 @@ const RECRUITMENT_PRIMARY_RECRUITMENT_EVALUATION_DEF: WrapperDef = {
  *
  * @param params.recruitment_key - `number | string` — the `{recruitment_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3RecruitmentPrimaryRecruitmentEvaluation({ recruitment_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2591,7 +2591,7 @@ const RECRUITMENT_RECRUITMENT_EVALUATIONS_DEF: WrapperDef = {
  *
  * @param params.recruitment_key - `number | string` — the `{recruitment_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3RecruitmentRecruitmentEvaluations({ recruitment_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2638,7 +2638,7 @@ const RECRUITMENTS_LATEST_RPM_PICKS_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3RecruitmentsLatestRpmPicks({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2670,7 +2670,7 @@ const RECRUITMENTS_PROFILE_DEF: WrapperDef = {
  *
  * @param params.rec_key - `number | string` — the `{rec_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3RecruitmentsProfileRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3RecruitmentsProfileRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3RecruitmentsProfile({ rec_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2702,7 +2702,7 @@ const RECRUITMENTS_RPM_PICKS_DEF: WrapperDef = {
  *
  * @param params.rec_key - `number | string` — the `{rec_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3RecruitmentsRpmPicks({ rec_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2734,7 +2734,7 @@ const RECRUITMENTS_RPM_SUMMARY_DEF: WrapperDef = {
  *
  * @param params.rec_key - `number | string` — the `{rec_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3RecruitmentsRpmSummaryRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3RecruitmentsRpmSummaryRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3RecruitmentsRpmSummary({ rec_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2782,7 +2782,7 @@ const TEAM_RANKING_DEF: WrapperDef = {
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.page_size - `number | string` — the `pageSize` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3TeamRanking({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2818,7 +2818,7 @@ const TEAM_RANKING_BLUECHIPS_TEAM_RANKINGS_DEF: WrapperDef = {
  * @param params.sport_slug - `number | string` — the `{sport_slug}` path segment.
  * @param params.year - `number | string` — the `{year}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3TeamRankingBluechipsTeamRankings({ sport_slug: '…', year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2854,7 +2854,7 @@ const TEAM_RANKING_CONSENSUS_TEAM_RANKINGS_DEF: WrapperDef = {
  * @param params.sport_slug - `number | string` — the `{sport_slug}` path segment.
  * @param params.year - `number | string` — the `{year}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3TeamRankingConsensusTeamRankings({ sport_slug: '…', year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2886,7 +2886,7 @@ const TEAM_RANKING_ORGANIZATIONS_SUMMARY_DEF: WrapperDef = {
  *
  * @param params.org_key - `number | string` — the `{org_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3TeamRankingOrganizationsSummary({ org_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2922,7 +2922,7 @@ const TEAM_RANKING_TEAM_RANKINGS_DEF: WrapperDef = {
  * @param params.sport_slug - `number | string` — the `{sport_slug}` path segment.
  * @param params.year - `number | string` — the `{year}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`On3TeamRankingTeamRankingsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
+ * @returns `Promise<On3TeamRankingTeamRankingsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3TeamRankingTeamRankings({ sport_slug: '…', year: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -2989,7 +2989,7 @@ const TRANSFERS_BEST_AVAILABLE_DEF: WrapperDef = {
  * @param params.cutoff - `number | string` — the `cutoff` query parameter.
  * @param params.order_by - `number | string` — the `orderBy` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3TransfersBestAvailable({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -3046,7 +3046,7 @@ const TRANSFERS_LATEST_DEF: WrapperDef = {
  * @param params.status - `number | string` — the `status` query parameter.
  * @param params.page - `number | string` — the `page` query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3TransfersLatest({});
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */
@@ -3078,7 +3078,7 @@ const VIDEOS_VIDEO_KEY_DEF: WrapperDef = {
  *
  * @param params.video_key - `number | string` — the `{video_key}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.on3.on3VideosVideoKey({ video_key: '…' });
  * @see https://js.sportsdataverse.org/docs/reference/on3#native-api--on3-recruit-database
  */

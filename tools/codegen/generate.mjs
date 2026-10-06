@@ -921,8 +921,8 @@ function renderWrittenEspnModule(league, wrappers) {
         `object of all summary sub-frames.\n`;
     }
     jsdoc += isSummary
-      ? ` * @returns Promise<\`ParsedTables\`> with \`{ parsed: true }\` (an object of sub-frames, or the chosen \`section\`'s \`Row[]\`); the raw ESPN payload (\`unknown\`) otherwise.\n`
-      : ` * @returns Promise<\`Row[]\`> with \`{ parsed: true }\` (rows are untyped: not parity-verified yet); the raw ESPN payload (\`unknown\`) otherwise.\n`;
+      ? ` * @returns \`Promise<ParsedTables>\` with \`{ parsed: true }\` (an object of sub-frames, or the chosen \`section\`'s \`Row[]\`); the raw ESPN payload (\`unknown\`) otherwise.\n`
+      : ` * @returns \`Promise<Row[]>\` with \`{ parsed: true }\` (rows are untyped: not parity-verified yet); the raw ESPN payload (\`unknown\`) otherwise.\n`;
     const exampleArgs = w.pathParams.length
       ? `{ ${w.pathParams
           .filter((p) => p.required !== false)
@@ -2643,11 +2643,11 @@ function renderWrittenFlatModule(api, defs, rowTypes = new Map()) {
       const verified = typed ? "" : " (rows are untyped: not parity-verified yet)";
       jsdoc +=
         objectOfTables
-          ? ` * @returns Promise<\`${parsedType}\`> with \`{ parsed: true }\`: an object of tables (arrays of row objects) keyed by result set: ${frames.map((f) => `\`${f.section}\``).join(", ")}${verified}; the raw response (\`unknown\`) otherwise.\n`
-          : ` * @returns Promise<\`${parsedType}\`> with \`{ parsed: true }\`${framesBy ? ` (its columns depend on \`${framesBy}\`)` : ""}${verified}; the raw response (\`unknown\`) otherwise.\n`;
+          ? ` * @returns \`Promise<${parsedType}>\` with \`{ parsed: true }\`: an object of tables (arrays of row objects) keyed by result set: ${frames.map((f) => `\`${f.section}\``).join(", ")}${verified}; the raw response (\`unknown\`) otherwise.\n`
+          : ` * @returns \`Promise<${parsedType}>\` with \`{ parsed: true }\`${framesBy ? ` (its columns depend on \`${framesBy}\`)` : ""}${verified}; the raw response (\`unknown\`) otherwise.\n`;
     } else {
       jsdoc += ` * @param params.parsed - \`boolean\` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.\n`;
-      jsdoc += ` * @returns Promise<\`unknown\`>: the raw response (this endpoint has no parser).\n`;
+      jsdoc += ` * @returns \`Promise<unknown>\`: the raw response (this endpoint has no parser).\n`;
     }
     const reqPath = (def.pathParams ?? []).filter((p) => p.required !== false);
     const flatExampleArgs = reqPath.length
