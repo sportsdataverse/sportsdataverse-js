@@ -3,6 +3,10 @@ import { normalize, snakeCase } from '../../dist/parsers/_normalize.js';
 
 // Unit tests for the json_normalize-equivalent used by the flat-API parsers:
 // deep flatten (`_` separator), snake_case keys, stringify array cells, empty -> [].
+//
+// SYNTHETIC INPUTS BY DESIGN: `normalize` is a pure helper with no upstream
+// payload of its own; the shapes below are the contract, not a capture. Every
+// provider parser that calls it is tested on real captures in its own suite.
 
 describe('parsers/_normalize: snakeCase', () => {
   it('lowercases and underscores camelCase / PascalCase / dotted keys', () => {
