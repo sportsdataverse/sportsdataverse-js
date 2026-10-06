@@ -405,6 +405,119 @@ import type {
   WnbaStatsTeamyearbyyearstatsRow,
   WnbaStatsVideostatusRow,
 } from "../rows/wnba_stats.js";
+import type {
+  WnbaStatsAlltimeleadersgridsParams,
+  WnbaStatsAssistleadersParams,
+  WnbaStatsAssisttrackerParams,
+  WnbaStatsBoxscoreadvancedv2Params,
+  WnbaStatsBoxscoreadvancedv3Params,
+  WnbaStatsBoxscoredefensivev2Params,
+  WnbaStatsBoxscorefourfactorsv2Params,
+  WnbaStatsBoxscorefourfactorsv3Params,
+  WnbaStatsBoxscorehustlev2Params,
+  WnbaStatsBoxscorematchupsv3Params,
+  WnbaStatsBoxscoremiscv2Params,
+  WnbaStatsBoxscoremiscv3Params,
+  WnbaStatsBoxscoreplayertrackv3Params,
+  WnbaStatsBoxscorescoringv2Params,
+  WnbaStatsBoxscorescoringv3Params,
+  WnbaStatsBoxscoresummaryv2Params,
+  WnbaStatsBoxscoresummaryv3Params,
+  WnbaStatsBoxscoretraditionalv2Params,
+  WnbaStatsBoxscoretraditionalv3Params,
+  WnbaStatsBoxscoreusagev2Params,
+  WnbaStatsBoxscoreusagev3Params,
+  WnbaStatsCommonallplayersParams,
+  WnbaStatsCommonplayerinfoParams,
+  WnbaStatsCommonplayoffseriesParams,
+  WnbaStatsCommonteamrosterParams,
+  WnbaStatsCommonteamyearsParams,
+  WnbaStatsCumestatsplayerParams,
+  WnbaStatsCumestatsplayergamesParams,
+  WnbaStatsCumestatsteamParams,
+  WnbaStatsCumestatsteamgamesParams,
+  WnbaStatsDraftcombinestatsParams,
+  WnbaStatsDrafthistoryParams,
+  WnbaStatsFantasywidgetParams,
+  WnbaStatsFranchisehistoryParams,
+  WnbaStatsFranchiseleadersParams,
+  WnbaStatsFranchiseleaderswrankParams,
+  WnbaStatsFranchiseplayersParams,
+  WnbaStatsGamerotationParams,
+  WnbaStatsHomepageleadersParams,
+  WnbaStatsHomepagev2Params,
+  WnbaStatsHustlestatsboxscoreParams,
+  WnbaStatsInfographicfanduelplayerParams,
+  WnbaStatsLeaderstilesParams,
+  WnbaStatsLeaguedashlineupsParams,
+  WnbaStatsLeaguedashplayerbiostatsParams,
+  WnbaStatsLeaguedashplayerclutchParams,
+  WnbaStatsLeaguedashplayershotlocationsParams,
+  WnbaStatsLeaguedashplayerstatsParams,
+  WnbaStatsLeaguedashptdefendParams,
+  WnbaStatsLeaguedashteamclutchParams,
+  WnbaStatsLeaguedashteamshotlocationsParams,
+  WnbaStatsLeaguedashteamstatsParams,
+  WnbaStatsLeaguegamefinderParams,
+  WnbaStatsLeaguegamelogParams,
+  WnbaStatsLeagueleadersParams,
+  WnbaStatsLeaguelineupvizParams,
+  WnbaStatsLeagueplayerondetailsParams,
+  WnbaStatsLeagueseasonmatchupsParams,
+  WnbaStatsLeaguestandingsv3Params,
+  WnbaStatsPlaybyplayv2Params,
+  WnbaStatsPlaybyplayv3Params,
+  WnbaStatsPlayerawardsParams,
+  WnbaStatsPlayercareerbycollegerollupParams,
+  WnbaStatsPlayercareerstatsParams,
+  WnbaStatsPlayercompareParams,
+  WnbaStatsPlayerdashboardbyclutchParams,
+  WnbaStatsPlayerdashboardbygamesplitsParams,
+  WnbaStatsPlayerdashboardbygeneralsplitsParams,
+  WnbaStatsPlayerdashboardbylastngamesParams,
+  WnbaStatsPlayerdashboardbyopponentParams,
+  WnbaStatsPlayerdashboardbyshootingsplitsParams,
+  WnbaStatsPlayerdashboardbyteamperformanceParams,
+  WnbaStatsPlayerdashboardbyyearoveryearParams,
+  WnbaStatsPlayerdashptshotdefendParams,
+  WnbaStatsPlayerestimatedmetricsParams,
+  WnbaStatsPlayerfantasyprofileParams,
+  WnbaStatsPlayerfantasyprofilebargraphParams,
+  WnbaStatsPlayergamelogParams,
+  WnbaStatsPlayergamelogsParams,
+  WnbaStatsPlayergamestreakfinderParams,
+  WnbaStatsPlayerindexParams,
+  WnbaStatsPlayernextngamesParams,
+  WnbaStatsPlayerprofilev2Params,
+  WnbaStatsPlayervsplayerParams,
+  WnbaStatsScheduleleaguev2Params,
+  WnbaStatsScheduleleaguev2intParams,
+  WnbaStatsScoreboardv2Params,
+  WnbaStatsScoreboardv3Params,
+  WnbaStatsShotchartdetailParams,
+  WnbaStatsShotchartleaguewideParams,
+  WnbaStatsShotchartlineupdetailParams,
+  WnbaStatsTeamdashboardbyclutchParams,
+  WnbaStatsTeamdashboardbygamesplitsParams,
+  WnbaStatsTeamdashboardbygeneralsplitsParams,
+  WnbaStatsTeamdashboardbylastngamesParams,
+  WnbaStatsTeamdashboardbyopponentParams,
+  WnbaStatsTeamdashboardbyshootingsplitsParams,
+  WnbaStatsTeamdashboardbyteamperformanceParams,
+  WnbaStatsTeamdashboardbyyearoveryearParams,
+  WnbaStatsTeamdashlineupsParams,
+  WnbaStatsTeamdetailsParams,
+  WnbaStatsTeamestimatedmetricsParams,
+  WnbaStatsTeamgamelogParams,
+  WnbaStatsTeamgamelogsParams,
+  WnbaStatsTeaminfocommonParams,
+  WnbaStatsTeamplayerdashboardParams,
+  WnbaStatsTeamplayeronoffdetailsParams,
+  WnbaStatsTeamplayeronoffsummaryParams,
+  WnbaStatsTeamvsplayerParams,
+  WnbaStatsTeamyearbyyearstatsParams,
+  WnbaStatsVideostatusParams,
+} from "../params/wnba_stats.js";
 
 const ALLTIMELEADERSGRIDS_DEF: WrapperDef = {
   "short": "alltimeleadersgrids",
@@ -454,7 +567,7 @@ const ALLTIMELEADERSGRIDS_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GPLeaders`, `PTSLeaders`, `ASTLeaders`, `STLLeaders`, `OREBLeaders`, `DREBLeaders`, `REBLeaders`, `BLKLeaders`, `FGMLeaders`, `FGALeaders`, `FG_PCTLeaders`, `TOVLeaders`, `FG3MLeaders`, `FG3ALeaders`, `FG3_PCTLeaders`, `PFLeaders`, `FTMLeaders`, `FTALeaders`, `FT_PCTLeaders`.
  * @example await sdv.wnba.wnbaStatsAlltimeleadersgrids({});
  */
-export const wnbaStatsAlltimeleadersgrids: SectionedWrapper<WnbaStatsAlltimeleadersgridsTables | Row[], WnbaStatsAlltimeleadersgridsTables> = (params: WrapperParams = {}) => callFlat(ALLTIMELEADERSGRIDS_DEF, params);
+export const wnbaStatsAlltimeleadersgrids: SectionedWrapper<WnbaStatsAlltimeleadersgridsTables | Row[], WnbaStatsAlltimeleadersgridsTables, WnbaStatsAlltimeleadersgridsParams> = (params: WrapperParams = {}) => callFlat(ALLTIMELEADERSGRIDS_DEF, params);
 /** snake_case alias of {@link wnbaStatsAlltimeleadersgrids} (py/R parity). */
 export const wnba_stats_alltimeleadersgrids = wnbaStatsAlltimeleadersgrids;
 
@@ -513,7 +626,7 @@ const ASSISTLEADERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsAssistleaders({});
  */
-export const wnbaStatsAssistleaders: SectionedWrapper<WnbaStatsAssistleadersRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(ASSISTLEADERS_DEF, params);
+export const wnbaStatsAssistleaders: SectionedWrapper<WnbaStatsAssistleadersRow[] | ParsedTables, {}, WnbaStatsAssistleadersParams> = (params: WrapperParams = {}) => callFlat(ASSISTLEADERS_DEF, params);
 /** snake_case alias of {@link wnbaStatsAssistleaders} (py/R parity). */
 export const wnba_stats_assistleaders = wnbaStatsAssistleaders;
 
@@ -710,7 +823,7 @@ const ASSISTTRACKER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsAssisttracker({});
  */
-export const wnbaStatsAssisttracker: SectionedWrapper<WnbaStatsAssisttrackerRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(ASSISTTRACKER_DEF, params);
+export const wnbaStatsAssisttracker: SectionedWrapper<WnbaStatsAssisttrackerRow[] | ParsedTables, {}, WnbaStatsAssisttrackerParams> = (params: WrapperParams = {}) => callFlat(ASSISTTRACKER_DEF, params);
 /** snake_case alias of {@link wnbaStatsAssisttracker} (py/R parity). */
 export const wnba_stats_assisttracker = wnbaStatsAssisttracker;
 
@@ -774,7 +887,7 @@ const BOXSCOREADVANCEDV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.wnba.wnbaStatsBoxscoreadvancedv2({});
  */
-export const wnbaStatsBoxscoreadvancedv2: SectionedWrapper<WnbaStatsBoxscoreadvancedv2Tables | Row[], WnbaStatsBoxscoreadvancedv2Tables> = (params: WrapperParams = {}) => callFlat(BOXSCOREADVANCEDV2_DEF, params);
+export const wnbaStatsBoxscoreadvancedv2: SectionedWrapper<WnbaStatsBoxscoreadvancedv2Tables | Row[], WnbaStatsBoxscoreadvancedv2Tables, WnbaStatsBoxscoreadvancedv2Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREADVANCEDV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscoreadvancedv2} (py/R parity). */
 export const wnba_stats_boxscoreadvancedv2 = wnbaStatsBoxscoreadvancedv2;
 
@@ -838,7 +951,7 @@ const BOXSCOREADVANCEDV3_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.wnba.wnbaStatsBoxscoreadvancedv3({});
  */
-export const wnbaStatsBoxscoreadvancedv3: SectionedWrapper<WnbaStatsBoxscoreadvancedv3Tables | Row[], WnbaStatsBoxscoreadvancedv3Tables> = (params: WrapperParams = {}) => callFlat(BOXSCOREADVANCEDV3_DEF, params);
+export const wnbaStatsBoxscoreadvancedv3: SectionedWrapper<WnbaStatsBoxscoreadvancedv3Tables | Row[], WnbaStatsBoxscoreadvancedv3Tables, WnbaStatsBoxscoreadvancedv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREADVANCEDV3_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscoreadvancedv3} (py/R parity). */
 export const wnba_stats_boxscoreadvancedv3 = wnbaStatsBoxscoreadvancedv3;
 
@@ -872,7 +985,7 @@ const BOXSCOREDEFENSIVEV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.wnba.wnbaStatsBoxscoredefensivev2({});
  */
-export const wnbaStatsBoxscoredefensivev2: SectionedWrapper<WnbaStatsBoxscoredefensivev2Tables | Row[], WnbaStatsBoxscoredefensivev2Tables> = (params: WrapperParams = {}) => callFlat(BOXSCOREDEFENSIVEV2_DEF, params);
+export const wnbaStatsBoxscoredefensivev2: SectionedWrapper<WnbaStatsBoxscoredefensivev2Tables | Row[], WnbaStatsBoxscoredefensivev2Tables, WnbaStatsBoxscoredefensivev2Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREDEFENSIVEV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscoredefensivev2} (py/R parity). */
 export const wnba_stats_boxscoredefensivev2 = wnbaStatsBoxscoredefensivev2;
 
@@ -936,7 +1049,7 @@ const BOXSCOREFOURFACTORSV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `sqlPlayersFourFactors`, `sqlTeamsFourFactors`.
  * @example await sdv.wnba.wnbaStatsBoxscorefourfactorsv2({});
  */
-export const wnbaStatsBoxscorefourfactorsv2: SectionedWrapper<WnbaStatsBoxscorefourfactorsv2Tables | Row[], WnbaStatsBoxscorefourfactorsv2Tables> = (params: WrapperParams = {}) => callFlat(BOXSCOREFOURFACTORSV2_DEF, params);
+export const wnbaStatsBoxscorefourfactorsv2: SectionedWrapper<WnbaStatsBoxscorefourfactorsv2Tables | Row[], WnbaStatsBoxscorefourfactorsv2Tables, WnbaStatsBoxscorefourfactorsv2Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREFOURFACTORSV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscorefourfactorsv2} (py/R parity). */
 export const wnba_stats_boxscorefourfactorsv2 = wnbaStatsBoxscorefourfactorsv2;
 
@@ -1000,7 +1113,7 @@ const BOXSCOREFOURFACTORSV3_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.wnba.wnbaStatsBoxscorefourfactorsv3({});
  */
-export const wnbaStatsBoxscorefourfactorsv3: SectionedWrapper<WnbaStatsBoxscorefourfactorsv3Tables | Row[], WnbaStatsBoxscorefourfactorsv3Tables> = (params: WrapperParams = {}) => callFlat(BOXSCOREFOURFACTORSV3_DEF, params);
+export const wnbaStatsBoxscorefourfactorsv3: SectionedWrapper<WnbaStatsBoxscorefourfactorsv3Tables | Row[], WnbaStatsBoxscorefourfactorsv3Tables, WnbaStatsBoxscorefourfactorsv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREFOURFACTORSV3_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscorefourfactorsv3} (py/R parity). */
 export const wnba_stats_boxscorefourfactorsv3 = wnbaStatsBoxscorefourfactorsv3;
 
@@ -1034,7 +1147,7 @@ const BOXSCOREHUSTLEV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.wnba.wnbaStatsBoxscorehustlev2({});
  */
-export const wnbaStatsBoxscorehustlev2: SectionedWrapper<WnbaStatsBoxscorehustlev2Tables | Row[], WnbaStatsBoxscorehustlev2Tables> = (params: WrapperParams = {}) => callFlat(BOXSCOREHUSTLEV2_DEF, params);
+export const wnbaStatsBoxscorehustlev2: SectionedWrapper<WnbaStatsBoxscorehustlev2Tables | Row[], WnbaStatsBoxscorehustlev2Tables, WnbaStatsBoxscorehustlev2Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREHUSTLEV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscorehustlev2} (py/R parity). */
 export const wnba_stats_boxscorehustlev2 = wnbaStatsBoxscorehustlev2;
 
@@ -1068,7 +1181,7 @@ const BOXSCOREMATCHUPSV3_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.wnba.wnbaStatsBoxscorematchupsv3({});
  */
-export const wnbaStatsBoxscorematchupsv3: SectionedWrapper<WnbaStatsBoxscorematchupsv3Tables | Row[], WnbaStatsBoxscorematchupsv3Tables> = (params: WrapperParams = {}) => callFlat(BOXSCOREMATCHUPSV3_DEF, params);
+export const wnbaStatsBoxscorematchupsv3: SectionedWrapper<WnbaStatsBoxscorematchupsv3Tables | Row[], WnbaStatsBoxscorematchupsv3Tables, WnbaStatsBoxscorematchupsv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREMATCHUPSV3_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscorematchupsv3} (py/R parity). */
 export const wnba_stats_boxscorematchupsv3 = wnbaStatsBoxscorematchupsv3;
 
@@ -1132,7 +1245,7 @@ const BOXSCOREMISCV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `sqlPlayersMisc`, `sqlTeamsMisc`.
  * @example await sdv.wnba.wnbaStatsBoxscoremiscv2({});
  */
-export const wnbaStatsBoxscoremiscv2: SectionedWrapper<WnbaStatsBoxscoremiscv2Tables | Row[], WnbaStatsBoxscoremiscv2Tables> = (params: WrapperParams = {}) => callFlat(BOXSCOREMISCV2_DEF, params);
+export const wnbaStatsBoxscoremiscv2: SectionedWrapper<WnbaStatsBoxscoremiscv2Tables | Row[], WnbaStatsBoxscoremiscv2Tables, WnbaStatsBoxscoremiscv2Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREMISCV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscoremiscv2} (py/R parity). */
 export const wnba_stats_boxscoremiscv2 = wnbaStatsBoxscoremiscv2;
 
@@ -1196,7 +1309,7 @@ const BOXSCOREMISCV3_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.wnba.wnbaStatsBoxscoremiscv3({});
  */
-export const wnbaStatsBoxscoremiscv3: SectionedWrapper<WnbaStatsBoxscoremiscv3Tables | Row[], WnbaStatsBoxscoremiscv3Tables> = (params: WrapperParams = {}) => callFlat(BOXSCOREMISCV3_DEF, params);
+export const wnbaStatsBoxscoremiscv3: SectionedWrapper<WnbaStatsBoxscoremiscv3Tables | Row[], WnbaStatsBoxscoremiscv3Tables, WnbaStatsBoxscoremiscv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREMISCV3_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscoremiscv3} (py/R parity). */
 export const wnba_stats_boxscoremiscv3 = wnbaStatsBoxscoremiscv3;
 
@@ -1230,7 +1343,7 @@ const BOXSCOREPLAYERTRACKV3_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.wnba.wnbaStatsBoxscoreplayertrackv3({});
  */
-export const wnbaStatsBoxscoreplayertrackv3: SectionedWrapper<WnbaStatsBoxscoreplayertrackv3Tables | Row[], WnbaStatsBoxscoreplayertrackv3Tables> = (params: WrapperParams = {}) => callFlat(BOXSCOREPLAYERTRACKV3_DEF, params);
+export const wnbaStatsBoxscoreplayertrackv3: SectionedWrapper<WnbaStatsBoxscoreplayertrackv3Tables | Row[], WnbaStatsBoxscoreplayertrackv3Tables, WnbaStatsBoxscoreplayertrackv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREPLAYERTRACKV3_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscoreplayertrackv3} (py/R parity). */
 export const wnba_stats_boxscoreplayertrackv3 = wnbaStatsBoxscoreplayertrackv3;
 
@@ -1294,7 +1407,7 @@ const BOXSCORESCORINGV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `sqlPlayersScoring`, `sqlTeamsScoring`.
  * @example await sdv.wnba.wnbaStatsBoxscorescoringv2({});
  */
-export const wnbaStatsBoxscorescoringv2: SectionedWrapper<WnbaStatsBoxscorescoringv2Tables | Row[], WnbaStatsBoxscorescoringv2Tables> = (params: WrapperParams = {}) => callFlat(BOXSCORESCORINGV2_DEF, params);
+export const wnbaStatsBoxscorescoringv2: SectionedWrapper<WnbaStatsBoxscorescoringv2Tables | Row[], WnbaStatsBoxscorescoringv2Tables, WnbaStatsBoxscorescoringv2Params> = (params: WrapperParams = {}) => callFlat(BOXSCORESCORINGV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscorescoringv2} (py/R parity). */
 export const wnba_stats_boxscorescoringv2 = wnbaStatsBoxscorescoringv2;
 
@@ -1358,7 +1471,7 @@ const BOXSCORESCORINGV3_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.wnba.wnbaStatsBoxscorescoringv3({});
  */
-export const wnbaStatsBoxscorescoringv3: SectionedWrapper<WnbaStatsBoxscorescoringv3Tables | Row[], WnbaStatsBoxscorescoringv3Tables> = (params: WrapperParams = {}) => callFlat(BOXSCORESCORINGV3_DEF, params);
+export const wnbaStatsBoxscorescoringv3: SectionedWrapper<WnbaStatsBoxscorescoringv3Tables | Row[], WnbaStatsBoxscorescoringv3Tables, WnbaStatsBoxscorescoringv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCORESCORINGV3_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscorescoringv3} (py/R parity). */
 export const wnba_stats_boxscorescoringv3 = wnbaStatsBoxscorescoringv3;
 
@@ -1392,7 +1505,7 @@ const BOXSCORESUMMARYV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameSummary`, `OtherStats`, `Officials`, `InactivePlayers`, `GameInfo`, `LineScore`, `LastMeeting`, `SeasonSeries`, `AvailableVideo`.
  * @example await sdv.wnba.wnbaStatsBoxscoresummaryv2({});
  */
-export const wnbaStatsBoxscoresummaryv2: SectionedWrapper<WnbaStatsBoxscoresummaryv2Tables | Row[], WnbaStatsBoxscoresummaryv2Tables> = (params: WrapperParams = {}) => callFlat(BOXSCORESUMMARYV2_DEF, params);
+export const wnbaStatsBoxscoresummaryv2: SectionedWrapper<WnbaStatsBoxscoresummaryv2Tables | Row[], WnbaStatsBoxscoresummaryv2Tables, WnbaStatsBoxscoresummaryv2Params> = (params: WrapperParams = {}) => callFlat(BOXSCORESUMMARYV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscoresummaryv2} (py/R parity). */
 export const wnba_stats_boxscoresummaryv2 = wnbaStatsBoxscoresummaryv2;
 
@@ -1426,7 +1539,7 @@ const BOXSCORESUMMARYV3_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `Officials`.
  * @example await sdv.wnba.wnbaStatsBoxscoresummaryv3({});
  */
-export const wnbaStatsBoxscoresummaryv3: SectionedWrapper<WnbaStatsBoxscoresummaryv3Tables | Row[], WnbaStatsBoxscoresummaryv3Tables> = (params: WrapperParams = {}) => callFlat(BOXSCORESUMMARYV3_DEF, params);
+export const wnbaStatsBoxscoresummaryv3: SectionedWrapper<WnbaStatsBoxscoresummaryv3Tables | Row[], WnbaStatsBoxscoresummaryv3Tables, WnbaStatsBoxscoresummaryv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCORESUMMARYV3_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscoresummaryv3} (py/R parity). */
 export const wnba_stats_boxscoresummaryv3 = wnbaStatsBoxscoresummaryv3;
 
@@ -1490,7 +1603,7 @@ const BOXSCORETRADITIONALV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `TeamStarterBenchStats`.
  * @example await sdv.wnba.wnbaStatsBoxscoretraditionalv2({});
  */
-export const wnbaStatsBoxscoretraditionalv2: SectionedWrapper<WnbaStatsBoxscoretraditionalv2Tables | Row[], WnbaStatsBoxscoretraditionalv2Tables> = (params: WrapperParams = {}) => callFlat(BOXSCORETRADITIONALV2_DEF, params);
+export const wnbaStatsBoxscoretraditionalv2: SectionedWrapper<WnbaStatsBoxscoretraditionalv2Tables | Row[], WnbaStatsBoxscoretraditionalv2Tables, WnbaStatsBoxscoretraditionalv2Params> = (params: WrapperParams = {}) => callFlat(BOXSCORETRADITIONALV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscoretraditionalv2} (py/R parity). */
 export const wnba_stats_boxscoretraditionalv2 = wnbaStatsBoxscoretraditionalv2;
 
@@ -1554,7 +1667,7 @@ const BOXSCORETRADITIONALV3_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.wnba.wnbaStatsBoxscoretraditionalv3({});
  */
-export const wnbaStatsBoxscoretraditionalv3: SectionedWrapper<WnbaStatsBoxscoretraditionalv3Tables | Row[], WnbaStatsBoxscoretraditionalv3Tables> = (params: WrapperParams = {}) => callFlat(BOXSCORETRADITIONALV3_DEF, params);
+export const wnbaStatsBoxscoretraditionalv3: SectionedWrapper<WnbaStatsBoxscoretraditionalv3Tables | Row[], WnbaStatsBoxscoretraditionalv3Tables, WnbaStatsBoxscoretraditionalv3Params> = (params: WrapperParams = {}) => callFlat(BOXSCORETRADITIONALV3_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscoretraditionalv3} (py/R parity). */
 export const wnba_stats_boxscoretraditionalv3 = wnbaStatsBoxscoretraditionalv3;
 
@@ -1618,7 +1731,7 @@ const BOXSCOREUSAGEV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `sqlPlayersUsage`, `sqlTeamsUsage`.
  * @example await sdv.wnba.wnbaStatsBoxscoreusagev2({});
  */
-export const wnbaStatsBoxscoreusagev2: SectionedWrapper<WnbaStatsBoxscoreusagev2Tables | Row[], WnbaStatsBoxscoreusagev2Tables> = (params: WrapperParams = {}) => callFlat(BOXSCOREUSAGEV2_DEF, params);
+export const wnbaStatsBoxscoreusagev2: SectionedWrapper<WnbaStatsBoxscoreusagev2Tables | Row[], WnbaStatsBoxscoreusagev2Tables, WnbaStatsBoxscoreusagev2Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREUSAGEV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscoreusagev2} (py/R parity). */
 export const wnba_stats_boxscoreusagev2 = wnbaStatsBoxscoreusagev2;
 
@@ -1682,7 +1795,7 @@ const BOXSCOREUSAGEV3_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.wnba.wnbaStatsBoxscoreusagev3({});
  */
-export const wnbaStatsBoxscoreusagev3: SectionedWrapper<WnbaStatsBoxscoreusagev3Tables | Row[], WnbaStatsBoxscoreusagev3Tables> = (params: WrapperParams = {}) => callFlat(BOXSCOREUSAGEV3_DEF, params);
+export const wnbaStatsBoxscoreusagev3: SectionedWrapper<WnbaStatsBoxscoreusagev3Tables | Row[], WnbaStatsBoxscoreusagev3Tables, WnbaStatsBoxscoreusagev3Params> = (params: WrapperParams = {}) => callFlat(BOXSCOREUSAGEV3_DEF, params);
 /** snake_case alias of {@link wnbaStatsBoxscoreusagev3} (py/R parity). */
 export const wnba_stats_boxscoreusagev3 = wnbaStatsBoxscoreusagev3;
 
@@ -1729,7 +1842,7 @@ const COMMONALLPLAYERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsCommonallplayers({});
  */
-export const wnbaStatsCommonallplayers: SectionedWrapper<WnbaStatsCommonallplayersRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(COMMONALLPLAYERS_DEF, params);
+export const wnbaStatsCommonallplayers: SectionedWrapper<WnbaStatsCommonallplayersRow[] | ParsedTables, {}, WnbaStatsCommonallplayersParams> = (params: WrapperParams = {}) => callFlat(COMMONALLPLAYERS_DEF, params);
 /** snake_case alias of {@link wnbaStatsCommonallplayers} (py/R parity). */
 export const wnba_stats_commonallplayers = wnbaStatsCommonallplayers;
 
@@ -1769,7 +1882,7 @@ const COMMONPLAYERINFO_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `CommonPlayerInfo`, `PlayerHeadlineStats`, `AvailableSeasons`.
  * @example await sdv.wnba.wnbaStatsCommonplayerinfo({});
  */
-export const wnbaStatsCommonplayerinfo: SectionedWrapper<WnbaStatsCommonplayerinfoTables | Row[], WnbaStatsCommonplayerinfoTables> = (params: WrapperParams = {}) => callFlat(COMMONPLAYERINFO_DEF, params);
+export const wnbaStatsCommonplayerinfo: SectionedWrapper<WnbaStatsCommonplayerinfoTables | Row[], WnbaStatsCommonplayerinfoTables, WnbaStatsCommonplayerinfoParams> = (params: WrapperParams = {}) => callFlat(COMMONPLAYERINFO_DEF, params);
 /** snake_case alias of {@link wnbaStatsCommonplayerinfo} (py/R parity). */
 export const wnba_stats_commonplayerinfo = wnbaStatsCommonplayerinfo;
 
@@ -1816,7 +1929,7 @@ const COMMONPLAYOFFSERIES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsCommonplayoffseries({});
  */
-export const wnbaStatsCommonplayoffseries: SectionedWrapper<WnbaStatsCommonplayoffseriesRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(COMMONPLAYOFFSERIES_DEF, params);
+export const wnbaStatsCommonplayoffseries: SectionedWrapper<WnbaStatsCommonplayoffseriesRow[] | ParsedTables, {}, WnbaStatsCommonplayoffseriesParams> = (params: WrapperParams = {}) => callFlat(COMMONPLAYOFFSERIES_DEF, params);
 /** snake_case alias of {@link wnbaStatsCommonplayoffseries} (py/R parity). */
 export const wnba_stats_commonplayoffseries = wnbaStatsCommonplayoffseries;
 
@@ -1863,7 +1976,7 @@ const COMMONTEAMROSTER_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `CommonTeamRoster`, `Coaches`.
  * @example await sdv.wnba.wnbaStatsCommonteamroster({});
  */
-export const wnbaStatsCommonteamroster: SectionedWrapper<WnbaStatsCommonteamrosterTables | Row[], WnbaStatsCommonteamrosterTables> = (params: WrapperParams = {}) => callFlat(COMMONTEAMROSTER_DEF, params);
+export const wnbaStatsCommonteamroster: SectionedWrapper<WnbaStatsCommonteamrosterTables | Row[], WnbaStatsCommonteamrosterTables, WnbaStatsCommonteamrosterParams> = (params: WrapperParams = {}) => callFlat(COMMONTEAMROSTER_DEF, params);
 /** snake_case alias of {@link wnbaStatsCommonteamroster} (py/R parity). */
 export const wnba_stats_commonteamroster = wnbaStatsCommonteamroster;
 
@@ -1897,7 +2010,7 @@ const COMMONTEAMYEARS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsCommonteamyears({});
  */
-export const wnbaStatsCommonteamyears: SectionedWrapper<WnbaStatsCommonteamyearsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(COMMONTEAMYEARS_DEF, params);
+export const wnbaStatsCommonteamyears: SectionedWrapper<WnbaStatsCommonteamyearsRow[] | ParsedTables, {}, WnbaStatsCommonteamyearsParams> = (params: WrapperParams = {}) => callFlat(COMMONTEAMYEARS_DEF, params);
 /** snake_case alias of {@link wnbaStatsCommonteamyears} (py/R parity). */
 export const wnba_stats_commonteamyears = wnbaStatsCommonteamyears;
 
@@ -1955,7 +2068,7 @@ const CUMESTATSPLAYER_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalPlayerStats`.
  * @example await sdv.wnba.wnbaStatsCumestatsplayer({});
  */
-export const wnbaStatsCumestatsplayer: SectionedWrapper<WnbaStatsCumestatsplayerTables | Row[], WnbaStatsCumestatsplayerTables> = (params: WrapperParams = {}) => callFlat(CUMESTATSPLAYER_DEF, params);
+export const wnbaStatsCumestatsplayer: SectionedWrapper<WnbaStatsCumestatsplayerTables | Row[], WnbaStatsCumestatsplayerTables, WnbaStatsCumestatsplayerParams> = (params: WrapperParams = {}) => callFlat(CUMESTATSPLAYER_DEF, params);
 /** snake_case alias of {@link wnbaStatsCumestatsplayer} (py/R parity). */
 export const wnba_stats_cumestatsplayer = wnbaStatsCumestatsplayer;
 
@@ -2037,7 +2150,7 @@ const CUMESTATSPLAYERGAMES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsCumestatsplayergames({});
  */
-export const wnbaStatsCumestatsplayergames: SectionedWrapper<WnbaStatsCumestatsplayergamesRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(CUMESTATSPLAYERGAMES_DEF, params);
+export const wnbaStatsCumestatsplayergames: SectionedWrapper<WnbaStatsCumestatsplayergamesRow[] | ParsedTables, {}, WnbaStatsCumestatsplayergamesParams> = (params: WrapperParams = {}) => callFlat(CUMESTATSPLAYERGAMES_DEF, params);
 /** snake_case alias of {@link wnbaStatsCumestatsplayergames} (py/R parity). */
 export const wnba_stats_cumestatsplayergames = wnbaStatsCumestatsplayergames;
 
@@ -2095,7 +2208,7 @@ const CUMESTATSTEAM_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalTeamStats`.
  * @example await sdv.wnba.wnbaStatsCumestatsteam({});
  */
-export const wnbaStatsCumestatsteam: SectionedWrapper<WnbaStatsCumestatsteamTables | Row[], WnbaStatsCumestatsteamTables> = (params: WrapperParams = {}) => callFlat(CUMESTATSTEAM_DEF, params);
+export const wnbaStatsCumestatsteam: SectionedWrapper<WnbaStatsCumestatsteamTables | Row[], WnbaStatsCumestatsteamTables, WnbaStatsCumestatsteamParams> = (params: WrapperParams = {}) => callFlat(CUMESTATSTEAM_DEF, params);
 /** snake_case alias of {@link wnbaStatsCumestatsteam} (py/R parity). */
 export const wnba_stats_cumestatsteam = wnbaStatsCumestatsteam;
 
@@ -2183,7 +2296,7 @@ const CUMESTATSTEAMGAMES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsCumestatsteamgames({});
  */
-export const wnbaStatsCumestatsteamgames: SectionedWrapper<WnbaStatsCumestatsteamgamesRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(CUMESTATSTEAMGAMES_DEF, params);
+export const wnbaStatsCumestatsteamgames: SectionedWrapper<WnbaStatsCumestatsteamgamesRow[] | ParsedTables, {}, WnbaStatsCumestatsteamgamesParams> = (params: WrapperParams = {}) => callFlat(CUMESTATSTEAMGAMES_DEF, params);
 /** snake_case alias of {@link wnbaStatsCumestatsteamgames} (py/R parity). */
 export const wnba_stats_cumestatsteamgames = wnbaStatsCumestatsteamgames;
 
@@ -2224,7 +2337,7 @@ const DRAFTCOMBINESTATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsDraftcombinestats({});
  */
-export const wnbaStatsDraftcombinestats: SectionedWrapper<WnbaStatsDraftcombinestatsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(DRAFTCOMBINESTATS_DEF, params);
+export const wnbaStatsDraftcombinestats: SectionedWrapper<WnbaStatsDraftcombinestatsRow[] | ParsedTables, {}, WnbaStatsDraftcombinestatsParams> = (params: WrapperParams = {}) => callFlat(DRAFTCOMBINESTATS_DEF, params);
 /** snake_case alias of {@link wnbaStatsDraftcombinestats} (py/R parity). */
 export const wnba_stats_draftcombinestats = wnbaStatsDraftcombinestats;
 
@@ -2301,7 +2414,7 @@ const DRAFTHISTORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsDrafthistory({});
  */
-export const wnbaStatsDrafthistory: SectionedWrapper<WnbaStatsDrafthistoryRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(DRAFTHISTORY_DEF, params);
+export const wnbaStatsDrafthistory: SectionedWrapper<WnbaStatsDrafthistoryRow[] | ParsedTables, {}, WnbaStatsDrafthistoryParams> = (params: WrapperParams = {}) => callFlat(DRAFTHISTORY_DEF, params);
 /** snake_case alias of {@link wnbaStatsDrafthistory} (py/R parity). */
 export const wnba_stats_drafthistory = wnbaStatsDrafthistory;
 
@@ -2444,7 +2557,7 @@ const FANTASYWIDGET_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsFantasywidget({});
  */
-export const wnbaStatsFantasywidget: SectionedWrapper<WnbaStatsFantasywidgetRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FANTASYWIDGET_DEF, params);
+export const wnbaStatsFantasywidget: SectionedWrapper<WnbaStatsFantasywidgetRow[] | ParsedTables, {}, WnbaStatsFantasywidgetParams> = (params: WrapperParams = {}) => callFlat(FANTASYWIDGET_DEF, params);
 /** snake_case alias of {@link wnbaStatsFantasywidget} (py/R parity). */
 export const wnba_stats_fantasywidget = wnbaStatsFantasywidget;
 
@@ -2478,7 +2591,7 @@ const FRANCHISEHISTORY_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `FranchiseHistory`, `DefunctTeams`.
  * @example await sdv.wnba.wnbaStatsFranchisehistory({});
  */
-export const wnbaStatsFranchisehistory: SectionedWrapper<WnbaStatsFranchisehistoryTables | Row[], WnbaStatsFranchisehistoryTables> = (params: WrapperParams = {}) => callFlat(FRANCHISEHISTORY_DEF, params);
+export const wnbaStatsFranchisehistory: SectionedWrapper<WnbaStatsFranchisehistoryTables | Row[], WnbaStatsFranchisehistoryTables, WnbaStatsFranchisehistoryParams> = (params: WrapperParams = {}) => callFlat(FRANCHISEHISTORY_DEF, params);
 /** snake_case alias of {@link wnbaStatsFranchisehistory} (py/R parity). */
 export const wnba_stats_franchisehistory = wnbaStatsFranchisehistory;
 
@@ -2518,7 +2631,7 @@ const FRANCHISELEADERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsFranchiseleaders({});
  */
-export const wnbaStatsFranchiseleaders: SectionedWrapper<WnbaStatsFranchiseleadersRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FRANCHISELEADERS_DEF, params);
+export const wnbaStatsFranchiseleaders: SectionedWrapper<WnbaStatsFranchiseleadersRow[] | ParsedTables, {}, WnbaStatsFranchiseleadersParams> = (params: WrapperParams = {}) => callFlat(FRANCHISELEADERS_DEF, params);
 /** snake_case alias of {@link wnbaStatsFranchiseleaders} (py/R parity). */
 export const wnba_stats_franchiseleaders = wnbaStatsFranchiseleaders;
 
@@ -2570,7 +2683,7 @@ const FRANCHISELEADERSWRANK_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsFranchiseleaderswrank({});
  */
-export const wnbaStatsFranchiseleaderswrank: SectionedWrapper<WnbaStatsFranchiseleaderswrankRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FRANCHISELEADERSWRANK_DEF, params);
+export const wnbaStatsFranchiseleaderswrank: SectionedWrapper<WnbaStatsFranchiseleaderswrankRow[] | ParsedTables, {}, WnbaStatsFranchiseleaderswrankParams> = (params: WrapperParams = {}) => callFlat(FRANCHISELEADERSWRANK_DEF, params);
 /** snake_case alias of {@link wnbaStatsFranchiseleaderswrank} (py/R parity). */
 export const wnba_stats_franchiseleaderswrank = wnbaStatsFranchiseleaderswrank;
 
@@ -2622,7 +2735,7 @@ const FRANCHISEPLAYERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsFranchiseplayers({});
  */
-export const wnbaStatsFranchiseplayers: SectionedWrapper<WnbaStatsFranchiseplayersRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FRANCHISEPLAYERS_DEF, params);
+export const wnbaStatsFranchiseplayers: SectionedWrapper<WnbaStatsFranchiseplayersRow[] | ParsedTables, {}, WnbaStatsFranchiseplayersParams> = (params: WrapperParams = {}) => callFlat(FRANCHISEPLAYERS_DEF, params);
 /** snake_case alias of {@link wnbaStatsFranchiseplayers} (py/R parity). */
 export const wnba_stats_franchiseplayers = wnbaStatsFranchiseplayers;
 
@@ -2662,7 +2775,7 @@ const GAMEROTATION_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `AwayTeam`, `HomeTeam`.
  * @example await sdv.wnba.wnbaStatsGamerotation({});
  */
-export const wnbaStatsGamerotation: SectionedWrapper<WnbaStatsGamerotationTables | Row[], WnbaStatsGamerotationTables> = (params: WrapperParams = {}) => callFlat(GAMEROTATION_DEF, params);
+export const wnbaStatsGamerotation: SectionedWrapper<WnbaStatsGamerotationTables | Row[], WnbaStatsGamerotationTables, WnbaStatsGamerotationParams> = (params: WrapperParams = {}) => callFlat(GAMEROTATION_DEF, params);
 /** snake_case alias of {@link wnbaStatsGamerotation} (py/R parity). */
 export const wnba_stats_gamerotation = wnbaStatsGamerotation;
 
@@ -2733,7 +2846,7 @@ const HOMEPAGELEADERS_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HomePageLeaders`, `LeagueAverage`, `LeagueMax`.
  * @example await sdv.wnba.wnbaStatsHomepageleaders({});
  */
-export const wnbaStatsHomepageleaders: SectionedWrapper<WnbaStatsHomepageleadersTables | Row[], WnbaStatsHomepageleadersTables> = (params: WrapperParams = {}) => callFlat(HOMEPAGELEADERS_DEF, params);
+export const wnbaStatsHomepageleaders: SectionedWrapper<WnbaStatsHomepageleadersTables | Row[], WnbaStatsHomepageleadersTables, WnbaStatsHomepageleadersParams> = (params: WrapperParams = {}) => callFlat(HOMEPAGELEADERS_DEF, params);
 /** snake_case alias of {@link wnbaStatsHomepageleaders} (py/R parity). */
 export const wnba_stats_homepageleaders = wnbaStatsHomepageleaders;
 
@@ -2804,7 +2917,7 @@ const HOMEPAGEV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HomePageStat1`, `HomePageStat2`, `HomePageStat3`, `HomePageStat4`, `HomePageStat5`, `HomePageStat6`, `HomePageStat7`, `HomePageStat8`.
  * @example await sdv.wnba.wnbaStatsHomepagev2({});
  */
-export const wnbaStatsHomepagev2: SectionedWrapper<WnbaStatsHomepagev2Tables | Row[], WnbaStatsHomepagev2Tables> = (params: WrapperParams = {}) => callFlat(HOMEPAGEV2_DEF, params);
+export const wnbaStatsHomepagev2: SectionedWrapper<WnbaStatsHomepagev2Tables | Row[], WnbaStatsHomepagev2Tables, WnbaStatsHomepagev2Params> = (params: WrapperParams = {}) => callFlat(HOMEPAGEV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsHomepagev2} (py/R parity). */
 export const wnba_stats_homepagev2 = wnbaStatsHomepagev2;
 
@@ -2838,7 +2951,7 @@ const HUSTLESTATSBOXSCORE_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HustleStatsAvailable`, `PlayerStats`, `TeamStats`.
  * @example await sdv.wnba.wnbaStatsHustlestatsboxscore({});
  */
-export const wnbaStatsHustlestatsboxscore: SectionedWrapper<WnbaStatsHustlestatsboxscoreTables | Row[], WnbaStatsHustlestatsboxscoreTables> = (params: WrapperParams = {}) => callFlat(HUSTLESTATSBOXSCORE_DEF, params);
+export const wnbaStatsHustlestatsboxscore: SectionedWrapper<WnbaStatsHustlestatsboxscoreTables | Row[], WnbaStatsHustlestatsboxscoreTables, WnbaStatsHustlestatsboxscoreParams> = (params: WrapperParams = {}) => callFlat(HUSTLESTATSBOXSCORE_DEF, params);
 /** snake_case alias of {@link wnbaStatsHustlestatsboxscore} (py/R parity). */
 export const wnba_stats_hustlestatsboxscore = wnbaStatsHustlestatsboxscore;
 
@@ -2872,7 +2985,7 @@ const INFOGRAPHICFANDUELPLAYER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsInfographicfanduelplayer({});
  */
-export const wnbaStatsInfographicfanduelplayer: SectionedWrapper<WnbaStatsInfographicfanduelplayerRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(INFOGRAPHICFANDUELPLAYER_DEF, params);
+export const wnbaStatsInfographicfanduelplayer: SectionedWrapper<WnbaStatsInfographicfanduelplayerRow[] | ParsedTables, {}, WnbaStatsInfographicfanduelplayerParams> = (params: WrapperParams = {}) => callFlat(INFOGRAPHICFANDUELPLAYER_DEF, params);
 /** snake_case alias of {@link wnbaStatsInfographicfanduelplayer} (py/R parity). */
 export const wnba_stats_infographicfanduelplayer = wnbaStatsInfographicfanduelplayer;
 
@@ -2943,7 +3056,7 @@ const LEADERSTILES_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `LeadersTiles`, `AllTimeSeasonHigh`, `LastSeasonHigh`, `LowSeasonHigh`.
  * @example await sdv.wnba.wnbaStatsLeaderstiles({});
  */
-export const wnbaStatsLeaderstiles: SectionedWrapper<WnbaStatsLeaderstilesTables | Row[], WnbaStatsLeaderstilesTables> = (params: WrapperParams = {}) => callFlat(LEADERSTILES_DEF, params);
+export const wnbaStatsLeaderstiles: SectionedWrapper<WnbaStatsLeaderstilesTables | Row[], WnbaStatsLeaderstilesTables, WnbaStatsLeaderstilesParams> = (params: WrapperParams = {}) => callFlat(LEADERSTILES_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaderstiles} (py/R parity). */
 export const wnba_stats_leaderstiles = wnbaStatsLeaderstiles;
 
@@ -3128,7 +3241,7 @@ const LEAGUEDASHLINEUPS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguedashlineups({});
  */
-export const wnbaStatsLeaguedashlineups: SectionedWrapper<WnbaStatsLeaguedashlineupsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHLINEUPS_DEF, params);
+export const wnbaStatsLeaguedashlineups: SectionedWrapper<WnbaStatsLeaguedashlineupsRow[] | ParsedTables, {}, WnbaStatsLeaguedashlineupsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHLINEUPS_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguedashlineups} (py/R parity). */
 export const wnba_stats_leaguedashlineups = wnbaStatsLeaguedashlineups;
 
@@ -3343,7 +3456,7 @@ const LEAGUEDASHPLAYERBIOSTATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguedashplayerbiostats({});
  */
-export const wnbaStatsLeaguedashplayerbiostats: SectionedWrapper<WnbaStatsLeaguedashplayerbiostatsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERBIOSTATS_DEF, params);
+export const wnbaStatsLeaguedashplayerbiostats: SectionedWrapper<WnbaStatsLeaguedashplayerbiostatsRow[] | ParsedTables, {}, WnbaStatsLeaguedashplayerbiostatsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERBIOSTATS_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguedashplayerbiostats} (py/R parity). */
 export const wnba_stats_leaguedashplayerbiostats = wnbaStatsLeaguedashplayerbiostats;
 
@@ -3600,7 +3713,7 @@ const LEAGUEDASHPLAYERCLUTCH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguedashplayerclutch({});
  */
-export const wnbaStatsLeaguedashplayerclutch: SectionedWrapper<WnbaStatsLeaguedashplayerclutchRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERCLUTCH_DEF, params);
+export const wnbaStatsLeaguedashplayerclutch: SectionedWrapper<WnbaStatsLeaguedashplayerclutchRow[] | ParsedTables, {}, WnbaStatsLeaguedashplayerclutchParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERCLUTCH_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguedashplayerclutch} (py/R parity). */
 export const wnba_stats_leaguedashplayerclutch = wnbaStatsLeaguedashplayerclutch;
 
@@ -3845,7 +3958,7 @@ const LEAGUEDASHPLAYERSHOTLOCATIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguedashplayershotlocations({});
  */
-export const wnbaStatsLeaguedashplayershotlocations: SectionedWrapper<WnbaStatsLeaguedashplayershotlocationsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERSHOTLOCATIONS_DEF, params);
+export const wnbaStatsLeaguedashplayershotlocations: SectionedWrapper<WnbaStatsLeaguedashplayershotlocationsRow[] | ParsedTables, {}, WnbaStatsLeaguedashplayershotlocationsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERSHOTLOCATIONS_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguedashplayershotlocations} (py/R parity). */
 export const wnba_stats_leaguedashplayershotlocations = wnbaStatsLeaguedashplayershotlocations;
 
@@ -4090,7 +4203,7 @@ const LEAGUEDASHPLAYERSTATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguedashplayerstats({});
  */
-export const wnbaStatsLeaguedashplayerstats: SectionedWrapper<WnbaStatsLeaguedashplayerstatsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERSTATS_DEF, params);
+export const wnbaStatsLeaguedashplayerstats: SectionedWrapper<WnbaStatsLeaguedashplayerstatsRow[] | ParsedTables, {}, WnbaStatsLeaguedashplayerstatsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPLAYERSTATS_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguedashplayerstats} (py/R parity). */
 export const wnba_stats_leaguedashplayerstats = wnbaStatsLeaguedashplayerstats;
 
@@ -4305,7 +4418,7 @@ const LEAGUEDASHPTDEFEND_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguedashptdefend({});
  */
-export const wnbaStatsLeaguedashptdefend: SectionedWrapper<WnbaStatsLeaguedashptdefendRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPTDEFEND_DEF, params);
+export const wnbaStatsLeaguedashptdefend: SectionedWrapper<WnbaStatsLeaguedashptdefendRow[] | ParsedTables, {}, WnbaStatsLeaguedashptdefendParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHPTDEFEND_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguedashptdefend} (py/R parity). */
 export const wnba_stats_leaguedashptdefend = wnbaStatsLeaguedashptdefend;
 
@@ -4526,7 +4639,7 @@ const LEAGUEDASHTEAMCLUTCH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguedashteamclutch({});
  */
-export const wnbaStatsLeaguedashteamclutch: SectionedWrapper<WnbaStatsLeaguedashteamclutchRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHTEAMCLUTCH_DEF, params);
+export const wnbaStatsLeaguedashteamclutch: SectionedWrapper<WnbaStatsLeaguedashteamclutchRow[] | ParsedTables, {}, WnbaStatsLeaguedashteamclutchParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHTEAMCLUTCH_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguedashteamclutch} (py/R parity). */
 export const wnba_stats_leaguedashteamclutch = wnbaStatsLeaguedashteamclutch;
 
@@ -4735,7 +4848,7 @@ const LEAGUEDASHTEAMSHOTLOCATIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguedashteamshotlocations({});
  */
-export const wnbaStatsLeaguedashteamshotlocations: SectionedWrapper<WnbaStatsLeaguedashteamshotlocationsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHTEAMSHOTLOCATIONS_DEF, params);
+export const wnbaStatsLeaguedashteamshotlocations: SectionedWrapper<WnbaStatsLeaguedashteamshotlocationsRow[] | ParsedTables, {}, WnbaStatsLeaguedashteamshotlocationsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHTEAMSHOTLOCATIONS_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguedashteamshotlocations} (py/R parity). */
 export const wnba_stats_leaguedashteamshotlocations = wnbaStatsLeaguedashteamshotlocations;
 
@@ -4944,7 +5057,7 @@ const LEAGUEDASHTEAMSTATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguedashteamstats({});
  */
-export const wnbaStatsLeaguedashteamstats: SectionedWrapper<WnbaStatsLeaguedashteamstatsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHTEAMSTATS_DEF, params);
+export const wnbaStatsLeaguedashteamstats: SectionedWrapper<WnbaStatsLeaguedashteamstatsRow[] | ParsedTables, {}, WnbaStatsLeaguedashteamstatsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEDASHTEAMSTATS_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguedashteamstats} (py/R parity). */
 export const wnba_stats_leaguedashteamstats = wnbaStatsLeaguedashteamstats;
 
@@ -5501,7 +5614,7 @@ const LEAGUEGAMEFINDER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguegamefinder({});
  */
-export const wnbaStatsLeaguegamefinder: SectionedWrapper<WnbaStatsLeaguegamefinderRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUEGAMEFINDER_DEF, params);
+export const wnbaStatsLeaguegamefinder: SectionedWrapper<WnbaStatsLeaguegamefinderRow[] | ParsedTables, {}, WnbaStatsLeaguegamefinderParams> = (params: WrapperParams = {}) => callFlat(LEAGUEGAMEFINDER_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguegamefinder} (py/R parity). */
 export const wnba_stats_leaguegamefinder = wnbaStatsLeaguegamefinder;
 
@@ -5584,7 +5697,7 @@ const LEAGUEGAMELOG_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguegamelog({});
  */
-export const wnbaStatsLeaguegamelog: SectionedWrapper<WnbaStatsLeaguegamelogRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUEGAMELOG_DEF, params);
+export const wnbaStatsLeaguegamelog: SectionedWrapper<WnbaStatsLeaguegamelogRow[] | ParsedTables, {}, WnbaStatsLeaguegamelogParams> = (params: WrapperParams = {}) => callFlat(LEAGUEGAMELOG_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguegamelog} (py/R parity). */
 export const wnba_stats_leaguegamelog = wnbaStatsLeaguegamelog;
 
@@ -5655,7 +5768,7 @@ const LEAGUELEADERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeagueleaders({});
  */
-export const wnbaStatsLeagueleaders: SectionedWrapper<WnbaStatsLeagueleadersRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUELEADERS_DEF, params);
+export const wnbaStatsLeagueleaders: SectionedWrapper<WnbaStatsLeagueleadersRow[] | ParsedTables, {}, WnbaStatsLeagueleadersParams> = (params: WrapperParams = {}) => callFlat(LEAGUELEADERS_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeagueleaders} (py/R parity). */
 export const wnba_stats_leagueleaders = wnbaStatsLeagueleaders;
 
@@ -5846,7 +5959,7 @@ const LEAGUELINEUPVIZ_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguelineupviz({});
  */
-export const wnbaStatsLeaguelineupviz: SectionedWrapper<WnbaStatsLeaguelineupvizRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUELINEUPVIZ_DEF, params);
+export const wnbaStatsLeaguelineupviz: SectionedWrapper<WnbaStatsLeaguelineupvizRow[] | ParsedTables, {}, WnbaStatsLeaguelineupvizParams> = (params: WrapperParams = {}) => callFlat(LEAGUELINEUPVIZ_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguelineupviz} (py/R parity). */
 export const wnba_stats_leaguelineupviz = wnbaStatsLeaguelineupviz;
 
@@ -6001,7 +6114,7 @@ const LEAGUEPLAYERONDETAILS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeagueplayerondetails({});
  */
-export const wnbaStatsLeagueplayerondetails: SectionedWrapper<WnbaStatsLeagueplayerondetailsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUEPLAYERONDETAILS_DEF, params);
+export const wnbaStatsLeagueplayerondetails: SectionedWrapper<WnbaStatsLeagueplayerondetailsRow[] | ParsedTables, {}, WnbaStatsLeagueplayerondetailsParams> = (params: WrapperParams = {}) => callFlat(LEAGUEPLAYERONDETAILS_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeagueplayerondetails} (py/R parity). */
 export const wnba_stats_leagueplayerondetails = wnbaStatsLeagueplayerondetails;
 
@@ -6078,7 +6191,7 @@ const LEAGUESEASONMATCHUPS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeagueseasonmatchups({});
  */
-export const wnbaStatsLeagueseasonmatchups: SectionedWrapper<WnbaStatsLeagueseasonmatchupsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUESEASONMATCHUPS_DEF, params);
+export const wnbaStatsLeagueseasonmatchups: SectionedWrapper<WnbaStatsLeagueseasonmatchupsRow[] | ParsedTables, {}, WnbaStatsLeagueseasonmatchupsParams> = (params: WrapperParams = {}) => callFlat(LEAGUESEASONMATCHUPS_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeagueseasonmatchups} (py/R parity). */
 export const wnba_stats_leagueseasonmatchups = wnbaStatsLeagueseasonmatchups;
 
@@ -6131,7 +6244,7 @@ const LEAGUESTANDINGSV3_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsLeaguestandingsv3({});
  */
-export const wnbaStatsLeaguestandingsv3: SectionedWrapper<WnbaStatsLeaguestandingsv3Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(LEAGUESTANDINGSV3_DEF, params);
+export const wnbaStatsLeaguestandingsv3: SectionedWrapper<WnbaStatsLeaguestandingsv3Row[] | ParsedTables, {}, WnbaStatsLeaguestandingsv3Params> = (params: WrapperParams = {}) => callFlat(LEAGUESTANDINGSV3_DEF, params);
 /** snake_case alias of {@link wnbaStatsLeaguestandingsv3} (py/R parity). */
 export const wnba_stats_leaguestandingsv3 = wnbaStatsLeaguestandingsv3;
 
@@ -6177,7 +6290,7 @@ const PLAYBYPLAYV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayByPlay`, `AvailableVideo`.
  * @example await sdv.wnba.wnbaStatsPlaybyplayv2({});
  */
-export const wnbaStatsPlaybyplayv2: SectionedWrapper<WnbaStatsPlaybyplayv2Tables | Row[], WnbaStatsPlaybyplayv2Tables> = (params: WrapperParams = {}) => callFlat(PLAYBYPLAYV2_DEF, params);
+export const wnbaStatsPlaybyplayv2: SectionedWrapper<WnbaStatsPlaybyplayv2Tables | Row[], WnbaStatsPlaybyplayv2Tables, WnbaStatsPlaybyplayv2Params> = (params: WrapperParams = {}) => callFlat(PLAYBYPLAYV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlaybyplayv2} (py/R parity). */
 export const wnba_stats_playbyplayv2 = wnbaStatsPlaybyplayv2;
 
@@ -6223,7 +6336,7 @@ const PLAYBYPLAYV3_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsPlaybyplayv3({});
  */
-export const wnbaStatsPlaybyplayv3: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYBYPLAYV3_DEF, params);
+export const wnbaStatsPlaybyplayv3: SectionedWrapper<Row[] | ParsedTables, {}, WnbaStatsPlaybyplayv3Params> = (params: WrapperParams = {}) => callFlat(PLAYBYPLAYV3_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlaybyplayv3} (py/R parity). */
 export const wnba_stats_playbyplayv3 = wnbaStatsPlaybyplayv3;
 
@@ -6257,7 +6370,7 @@ const PLAYERAWARDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsPlayerawards({});
  */
-export const wnbaStatsPlayerawards: SectionedWrapper<WnbaStatsPlayerawardsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYERAWARDS_DEF, params);
+export const wnbaStatsPlayerawards: SectionedWrapper<WnbaStatsPlayerawardsRow[] | ParsedTables, {}, WnbaStatsPlayerawardsParams> = (params: WrapperParams = {}) => callFlat(PLAYERAWARDS_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerawards} (py/R parity). */
 export const wnba_stats_playerawards = wnbaStatsPlayerawards;
 
@@ -6310,7 +6423,7 @@ const PLAYERCAREERBYCOLLEGEROLLUP_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `East`, `South`, `Midwest`, `West`.
  * @example await sdv.wnba.wnbaStatsPlayercareerbycollegerollup({});
  */
-export const wnbaStatsPlayercareerbycollegerollup: SectionedWrapper<WnbaStatsPlayercareerbycollegerollupTables | Row[], WnbaStatsPlayercareerbycollegerollupTables> = (params: WrapperParams = {}) => callFlat(PLAYERCAREERBYCOLLEGEROLLUP_DEF, params);
+export const wnbaStatsPlayercareerbycollegerollup: SectionedWrapper<WnbaStatsPlayercareerbycollegerollupTables | Row[], WnbaStatsPlayercareerbycollegerollupTables, WnbaStatsPlayercareerbycollegerollupParams> = (params: WrapperParams = {}) => callFlat(PLAYERCAREERBYCOLLEGEROLLUP_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayercareerbycollegerollup} (py/R parity). */
 export const wnba_stats_playercareerbycollegerollup = wnbaStatsPlayercareerbycollegerollup;
 
@@ -6356,7 +6469,7 @@ const PLAYERCAREERSTATS_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsShowcaseSeason`, `CareerTotalsShowcaseSeason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`.
  * @example await sdv.wnba.wnbaStatsPlayercareerstats({});
  */
-export const wnbaStatsPlayercareerstats: SectionedWrapper<WnbaStatsPlayercareerstatsTables | Row[], WnbaStatsPlayercareerstatsTables> = (params: WrapperParams = {}) => callFlat(PLAYERCAREERSTATS_DEF, params);
+export const wnbaStatsPlayercareerstats: SectionedWrapper<WnbaStatsPlayercareerstatsTables | Row[], WnbaStatsPlayercareerstatsTables, WnbaStatsPlayercareerstatsParams> = (params: WrapperParams = {}) => callFlat(PLAYERCAREERSTATS_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayercareerstats} (py/R parity). */
 export const wnba_stats_playercareerstats = wnbaStatsPlayercareerstats;
 
@@ -6535,7 +6648,7 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallCompare`, `Individual`.
  * @example await sdv.wnba.wnbaStatsPlayercompare({});
  */
-export const wnbaStatsPlayercompare: SectionedWrapper<WnbaStatsPlayercompareTables | Row[], WnbaStatsPlayercompareTables> = (params: WrapperParams = {}) => callFlat(PLAYERCOMPARE_DEF, params);
+export const wnbaStatsPlayercompare: SectionedWrapper<WnbaStatsPlayercompareTables | Row[], WnbaStatsPlayercompareTables, WnbaStatsPlayercompareParams> = (params: WrapperParams = {}) => callFlat(PLAYERCOMPARE_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayercompare} (py/R parity). */
 export const wnba_stats_playercompare = wnbaStatsPlayercompare;
 
@@ -6702,7 +6815,7 @@ const PLAYERDASHBOARDBYCLUTCH_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5Min5PointPlayerDashboard`, `Last3Min5PointPlayerDashboard`, `Last1Min5PointPlayerDashboard`, `Last30Sec3PointPlayerDashboard`, `Last10Sec3PointPlayerDashboard`, `Last5MinPlusMinus5PointPlayerDashboard`, `Last3MinPlusMinus5PointPlayerDashboard`, `Last1MinPlusMinus5PointPlayerDashboard`, `Last30Sec3Point2PlayerDashboard`, `Last10Sec3Point2PlayerDashboard`.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbyclutch({});
  */
-export const wnbaStatsPlayerdashboardbyclutch: SectionedWrapper<WnbaStatsPlayerdashboardbyclutchTables | Row[], WnbaStatsPlayerdashboardbyclutchTables> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYCLUTCH_DEF, params);
+export const wnbaStatsPlayerdashboardbyclutch: SectionedWrapper<WnbaStatsPlayerdashboardbyclutchTables | Row[], WnbaStatsPlayerdashboardbyclutchTables, WnbaStatsPlayerdashboardbyclutchParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYCLUTCH_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerdashboardbyclutch} (py/R parity). */
 export const wnba_stats_playerdashboardbyclutch = wnbaStatsPlayerdashboardbyclutch;
 
@@ -6869,7 +6982,7 @@ const PLAYERDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByHalfPlayerDashboard`, `ByPeriodPlayerDashboard`, `ByScoreMarginPlayerDashboard`, `ByActualMarginPlayerDashboard`.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbygamesplits({});
  */
-export const wnbaStatsPlayerdashboardbygamesplits: SectionedWrapper<WnbaStatsPlayerdashboardbygamesplitsTables | Row[], WnbaStatsPlayerdashboardbygamesplitsTables> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYGAMESPLITS_DEF, params);
+export const wnbaStatsPlayerdashboardbygamesplits: SectionedWrapper<WnbaStatsPlayerdashboardbygamesplitsTables | Row[], WnbaStatsPlayerdashboardbygamesplitsTables, WnbaStatsPlayerdashboardbygamesplitsParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYGAMESPLITS_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerdashboardbygamesplits} (py/R parity). */
 export const wnba_stats_playerdashboardbygamesplits = wnbaStatsPlayerdashboardbygamesplits;
 
@@ -7036,7 +7149,7 @@ const PLAYERDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `LocationPlayerDashboard`, `WinsLossesPlayerDashboard`, `MonthPlayerDashboard`, `PrePostAllStarPlayerDashboard`, `StartingPosition`, `DaysRestPlayerDashboard`.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbygeneralsplits({});
  */
-export const wnbaStatsPlayerdashboardbygeneralsplits: SectionedWrapper<WnbaStatsPlayerdashboardbygeneralsplitsTables | Row[], WnbaStatsPlayerdashboardbygeneralsplitsTables> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYGENERALSPLITS_DEF, params);
+export const wnbaStatsPlayerdashboardbygeneralsplits: SectionedWrapper<WnbaStatsPlayerdashboardbygeneralsplitsTables | Row[], WnbaStatsPlayerdashboardbygeneralsplitsTables, WnbaStatsPlayerdashboardbygeneralsplitsParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYGENERALSPLITS_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerdashboardbygeneralsplits} (py/R parity). */
 export const wnba_stats_playerdashboardbygeneralsplits = wnbaStatsPlayerdashboardbygeneralsplits;
 
@@ -7203,7 +7316,7 @@ const PLAYERDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5PlayerDashboard`, `Last10PlayerDashboard`, `Last15PlayerDashboard`, `Last20PlayerDashboard`, `GameNumberPlayerDashboard`.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbylastngames({});
  */
-export const wnbaStatsPlayerdashboardbylastngames: SectionedWrapper<WnbaStatsPlayerdashboardbylastngamesTables | Row[], WnbaStatsPlayerdashboardbylastngamesTables> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYLASTNGAMES_DEF, params);
+export const wnbaStatsPlayerdashboardbylastngames: SectionedWrapper<WnbaStatsPlayerdashboardbylastngamesTables | Row[], WnbaStatsPlayerdashboardbylastngamesTables, WnbaStatsPlayerdashboardbylastngamesParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYLASTNGAMES_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerdashboardbylastngames} (py/R parity). */
 export const wnba_stats_playerdashboardbylastngames = wnbaStatsPlayerdashboardbylastngames;
 
@@ -7370,7 +7483,7 @@ const PLAYERDASHBOARDBYOPPONENT_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ConferencePlayerDashboard`, `DivisionPlayerDashboard`, `OpponentPlayerDashboard`.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbyopponent({});
  */
-export const wnbaStatsPlayerdashboardbyopponent: SectionedWrapper<WnbaStatsPlayerdashboardbyopponentTables | Row[], WnbaStatsPlayerdashboardbyopponentTables> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYOPPONENT_DEF, params);
+export const wnbaStatsPlayerdashboardbyopponent: SectionedWrapper<WnbaStatsPlayerdashboardbyopponentTables | Row[], WnbaStatsPlayerdashboardbyopponentTables, WnbaStatsPlayerdashboardbyopponentParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYOPPONENT_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerdashboardbyopponent} (py/R parity). */
 export const wnba_stats_playerdashboardbyopponent = wnbaStatsPlayerdashboardbyopponent;
 
@@ -7537,7 +7650,7 @@ const PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Shot5FTPlayerDashboard`, `Shot8FTPlayerDashboard`, `ShotAreaPlayerDashboard`, `AssitedShotPlayerDashboard`, `ShotTypeSummaryPlayerDashboard`, `ShotTypePlayerDashboard`, `AssistedBy`.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbyshootingsplits({});
  */
-export const wnbaStatsPlayerdashboardbyshootingsplits: SectionedWrapper<WnbaStatsPlayerdashboardbyshootingsplitsTables | Row[], WnbaStatsPlayerdashboardbyshootingsplitsTables> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF, params);
+export const wnbaStatsPlayerdashboardbyshootingsplits: SectionedWrapper<WnbaStatsPlayerdashboardbyshootingsplitsTables | Row[], WnbaStatsPlayerdashboardbyshootingsplitsTables, WnbaStatsPlayerdashboardbyshootingsplitsParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerdashboardbyshootingsplits} (py/R parity). */
 export const wnba_stats_playerdashboardbyshootingsplits = wnbaStatsPlayerdashboardbyshootingsplits;
 
@@ -7704,7 +7817,7 @@ const PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ScoreDifferentialPlayerDashboard`, `PointsScoredPlayerDashboard`, `PontsAgainstPlayerDashboard`.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbyteamperformance({});
  */
-export const wnbaStatsPlayerdashboardbyteamperformance: SectionedWrapper<WnbaStatsPlayerdashboardbyteamperformanceTables | Row[], WnbaStatsPlayerdashboardbyteamperformanceTables> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF, params);
+export const wnbaStatsPlayerdashboardbyteamperformance: SectionedWrapper<WnbaStatsPlayerdashboardbyteamperformanceTables | Row[], WnbaStatsPlayerdashboardbyteamperformanceTables, WnbaStatsPlayerdashboardbyteamperformanceParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerdashboardbyteamperformance} (py/R parity). */
 export const wnba_stats_playerdashboardbyteamperformance = wnbaStatsPlayerdashboardbyteamperformance;
 
@@ -7871,7 +7984,7 @@ const PLAYERDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByYearPlayerDashboard`.
  * @example await sdv.wnba.wnbaStatsPlayerdashboardbyyearoveryear({});
  */
-export const wnbaStatsPlayerdashboardbyyearoveryear: SectionedWrapper<WnbaStatsPlayerdashboardbyyearoveryearTables | Row[], WnbaStatsPlayerdashboardbyyearoveryearTables> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYYEAROVERYEAR_DEF, params);
+export const wnbaStatsPlayerdashboardbyyearoveryear: SectionedWrapper<WnbaStatsPlayerdashboardbyyearoveryearTables | Row[], WnbaStatsPlayerdashboardbyyearoveryearTables, WnbaStatsPlayerdashboardbyyearoveryearParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHBOARDBYYEAROVERYEAR_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerdashboardbyyearoveryear} (py/R parity). */
 export const wnba_stats_playerdashboardbyyearoveryear = wnbaStatsPlayerdashboardbyyearoveryear;
 
@@ -8008,7 +8121,7 @@ const PLAYERDASHPTSHOTDEFEND_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsPlayerdashptshotdefend({});
  */
-export const wnbaStatsPlayerdashptshotdefend: SectionedWrapper<WnbaStatsPlayerdashptshotdefendRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYERDASHPTSHOTDEFEND_DEF, params);
+export const wnbaStatsPlayerdashptshotdefend: SectionedWrapper<WnbaStatsPlayerdashptshotdefendRow[] | ParsedTables, {}, WnbaStatsPlayerdashptshotdefendParams> = (params: WrapperParams = {}) => callFlat(PLAYERDASHPTSHOTDEFEND_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerdashptshotdefend} (py/R parity). */
 export const wnba_stats_playerdashptshotdefend = wnbaStatsPlayerdashptshotdefend;
 
@@ -8055,7 +8168,7 @@ const PLAYERESTIMATEDMETRICS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsPlayerestimatedmetrics({});
  */
-export const wnbaStatsPlayerestimatedmetrics: SectionedWrapper<WnbaStatsPlayerestimatedmetricsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYERESTIMATEDMETRICS_DEF, params);
+export const wnbaStatsPlayerestimatedmetrics: SectionedWrapper<WnbaStatsPlayerestimatedmetricsRow[] | ParsedTables, {}, WnbaStatsPlayerestimatedmetricsParams> = (params: WrapperParams = {}) => callFlat(PLAYERESTIMATEDMETRICS_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerestimatedmetrics} (py/R parity). */
 export const wnba_stats_playerestimatedmetrics = wnbaStatsPlayerestimatedmetrics;
 
@@ -8138,7 +8251,7 @@ const PLAYERFANTASYPROFILE_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `Location`, `LastNGames`, `DaysRestModified`, `Opponent`.
  * @example await sdv.wnba.wnbaStatsPlayerfantasyprofile({});
  */
-export const wnbaStatsPlayerfantasyprofile: SectionedWrapper<WnbaStatsPlayerfantasyprofileTables | Row[], WnbaStatsPlayerfantasyprofileTables> = (params: WrapperParams = {}) => callFlat(PLAYERFANTASYPROFILE_DEF, params);
+export const wnbaStatsPlayerfantasyprofile: SectionedWrapper<WnbaStatsPlayerfantasyprofileTables | Row[], WnbaStatsPlayerfantasyprofileTables, WnbaStatsPlayerfantasyprofileParams> = (params: WrapperParams = {}) => callFlat(PLAYERFANTASYPROFILE_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerfantasyprofile} (py/R parity). */
 export const wnba_stats_playerfantasyprofile = wnbaStatsPlayerfantasyprofile;
 
@@ -8191,7 +8304,7 @@ const PLAYERFANTASYPROFILEBARGRAPH_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonAvg`, `LastFiveGamesAvg`.
  * @example await sdv.wnba.wnbaStatsPlayerfantasyprofilebargraph({});
  */
-export const wnbaStatsPlayerfantasyprofilebargraph: SectionedWrapper<WnbaStatsPlayerfantasyprofilebargraphTables | Row[], WnbaStatsPlayerfantasyprofilebargraphTables> = (params: WrapperParams = {}) => callFlat(PLAYERFANTASYPROFILEBARGRAPH_DEF, params);
+export const wnbaStatsPlayerfantasyprofilebargraph: SectionedWrapper<WnbaStatsPlayerfantasyprofilebargraphTables | Row[], WnbaStatsPlayerfantasyprofilebargraphTables, WnbaStatsPlayerfantasyprofilebargraphParams> = (params: WrapperParams = {}) => callFlat(PLAYERFANTASYPROFILEBARGRAPH_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerfantasyprofilebargraph} (py/R parity). */
 export const wnba_stats_playerfantasyprofilebargraph = wnbaStatsPlayerfantasyprofilebargraph;
 
@@ -8256,7 +8369,7 @@ const PLAYERGAMELOG_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsPlayergamelog({});
  */
-export const wnbaStatsPlayergamelog: SectionedWrapper<WnbaStatsPlayergamelogRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYERGAMELOG_DEF, params);
+export const wnbaStatsPlayergamelog: SectionedWrapper<WnbaStatsPlayergamelogRow[] | ParsedTables, {}, WnbaStatsPlayergamelogParams> = (params: WrapperParams = {}) => callFlat(PLAYERGAMELOG_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayergamelog} (py/R parity). */
 export const wnba_stats_playergamelog = wnbaStatsPlayergamelog;
 
@@ -8411,7 +8524,7 @@ const PLAYERGAMELOGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsPlayergamelogs({});
  */
-export const wnbaStatsPlayergamelogs: SectionedWrapper<WnbaStatsPlayergamelogsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYERGAMELOGS_DEF, params);
+export const wnbaStatsPlayergamelogs: SectionedWrapper<WnbaStatsPlayergamelogsRow[] | ParsedTables, {}, WnbaStatsPlayergamelogsParams> = (params: WrapperParams = {}) => callFlat(PLAYERGAMELOGS_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayergamelogs} (py/R parity). */
 export const wnba_stats_playergamelogs = wnbaStatsPlayergamelogs;
 
@@ -8974,7 +9087,7 @@ const PLAYERGAMESTREAKFINDER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsPlayergamestreakfinder({});
  */
-export const wnbaStatsPlayergamestreakfinder: SectionedWrapper<WnbaStatsPlayergamestreakfinderRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYERGAMESTREAKFINDER_DEF, params);
+export const wnbaStatsPlayergamestreakfinder: SectionedWrapper<WnbaStatsPlayergamestreakfinderRow[] | ParsedTables, {}, WnbaStatsPlayergamestreakfinderParams> = (params: WrapperParams = {}) => callFlat(PLAYERGAMESTREAKFINDER_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayergamestreakfinder} (py/R parity). */
 export const wnba_stats_playergamestreakfinder = wnbaStatsPlayergamestreakfinder;
 
@@ -9081,7 +9194,7 @@ const PLAYERINDEX_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsPlayerindex({});
  */
-export const wnbaStatsPlayerindex: SectionedWrapper<WnbaStatsPlayerindexRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYERINDEX_DEF, params);
+export const wnbaStatsPlayerindex: SectionedWrapper<WnbaStatsPlayerindexRow[] | ParsedTables, {}, WnbaStatsPlayerindexParams> = (params: WrapperParams = {}) => callFlat(PLAYERINDEX_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerindex} (py/R parity). */
 export const wnba_stats_playerindex = wnbaStatsPlayerindex;
 
@@ -9140,7 +9253,7 @@ const PLAYERNEXTNGAMES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsPlayernextngames({});
  */
-export const wnbaStatsPlayernextngames: SectionedWrapper<WnbaStatsPlayernextngamesRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYERNEXTNGAMES_DEF, params);
+export const wnbaStatsPlayernextngames: SectionedWrapper<WnbaStatsPlayernextngamesRow[] | ParsedTables, {}, WnbaStatsPlayernextngamesParams> = (params: WrapperParams = {}) => callFlat(PLAYERNEXTNGAMES_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayernextngames} (py/R parity). */
 export const wnba_stats_playernextngames = wnbaStatsPlayernextngames;
 
@@ -9186,7 +9299,7 @@ const PLAYERPROFILEV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsPreseason`, `CareerTotalsPreseason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`, `NextGame`.
  * @example await sdv.wnba.wnbaStatsPlayerprofilev2({});
  */
-export const wnbaStatsPlayerprofilev2: SectionedWrapper<WnbaStatsPlayerprofilev2Tables | Row[], WnbaStatsPlayerprofilev2Tables> = (params: WrapperParams = {}) => callFlat(PLAYERPROFILEV2_DEF, params);
+export const wnbaStatsPlayerprofilev2: SectionedWrapper<WnbaStatsPlayerprofilev2Tables | Row[], WnbaStatsPlayerprofilev2Tables, WnbaStatsPlayerprofilev2Params> = (params: WrapperParams = {}) => callFlat(PLAYERPROFILEV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayerprofilev2} (py/R parity). */
 export const wnba_stats_playerprofilev2 = wnbaStatsPlayerprofilev2;
 
@@ -9347,7 +9460,7 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`, `PlayerInfo`, `VsPlayerInfo`.
  * @example await sdv.wnba.wnbaStatsPlayervsplayer({});
  */
-export const wnbaStatsPlayervsplayer: SectionedWrapper<WnbaStatsPlayervsplayerTables | Row[], WnbaStatsPlayervsplayerTables> = (params: WrapperParams = {}) => callFlat(PLAYERVSPLAYER_DEF, params);
+export const wnbaStatsPlayervsplayer: SectionedWrapper<WnbaStatsPlayervsplayerTables | Row[], WnbaStatsPlayervsplayerTables, WnbaStatsPlayervsplayerParams> = (params: WrapperParams = {}) => callFlat(PLAYERVSPLAYER_DEF, params);
 /** snake_case alias of {@link wnbaStatsPlayervsplayer} (py/R parity). */
 export const wnba_stats_playervsplayer = wnbaStatsPlayervsplayer;
 
@@ -9388,7 +9501,7 @@ const SCHEDULELEAGUEV2_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsScheduleleaguev2({});
  */
-export const wnbaStatsScheduleleaguev2: SectionedWrapper<WnbaStatsScheduleleaguev2Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(SCHEDULELEAGUEV2_DEF, params);
+export const wnbaStatsScheduleleaguev2: SectionedWrapper<WnbaStatsScheduleleaguev2Row[] | ParsedTables, {}, WnbaStatsScheduleleaguev2Params> = (params: WrapperParams = {}) => callFlat(SCHEDULELEAGUEV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsScheduleleaguev2} (py/R parity). */
 export const wnba_stats_scheduleleaguev2 = wnbaStatsScheduleleaguev2;
 
@@ -9429,7 +9542,7 @@ const SCHEDULELEAGUEV2INT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsScheduleleaguev2int({});
  */
-export const wnbaStatsScheduleleaguev2int: SectionedWrapper<WnbaStatsScheduleleaguev2intRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(SCHEDULELEAGUEV2INT_DEF, params);
+export const wnbaStatsScheduleleaguev2int: SectionedWrapper<WnbaStatsScheduleleaguev2intRow[] | ParsedTables, {}, WnbaStatsScheduleleaguev2intParams> = (params: WrapperParams = {}) => callFlat(SCHEDULELEAGUEV2INT_DEF, params);
 /** snake_case alias of {@link wnbaStatsScheduleleaguev2int} (py/R parity). */
 export const wnba_stats_scheduleleaguev2int = wnbaStatsScheduleleaguev2int;
 
@@ -9475,7 +9588,7 @@ const SCOREBOARDV2_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameHeader`, `LineScore`, `SeriesStandings`, `LastMeeting`, `EastConfStandingsByDay`, `WestConfStandingsByDay`, `Available`, `TeamLeaders`, `TicketLinks`, `WinProbability`.
  * @example await sdv.wnba.wnbaStatsScoreboardv2({});
  */
-export const wnbaStatsScoreboardv2: SectionedWrapper<WnbaStatsScoreboardv2Tables | Row[], WnbaStatsScoreboardv2Tables> = (params: WrapperParams = {}) => callFlat(SCOREBOARDV2_DEF, params);
+export const wnbaStatsScoreboardv2: SectionedWrapper<WnbaStatsScoreboardv2Tables | Row[], WnbaStatsScoreboardv2Tables, WnbaStatsScoreboardv2Params> = (params: WrapperParams = {}) => callFlat(SCOREBOARDV2_DEF, params);
 /** snake_case alias of {@link wnbaStatsScoreboardv2} (py/R parity). */
 export const wnba_stats_scoreboardv2 = wnbaStatsScoreboardv2;
 
@@ -9515,7 +9628,7 @@ const SCOREBOARDV3_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsScoreboardv3({});
  */
-export const wnbaStatsScoreboardv3: SectionedWrapper<WnbaStatsScoreboardv3Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(SCOREBOARDV3_DEF, params);
+export const wnbaStatsScoreboardv3: SectionedWrapper<WnbaStatsScoreboardv3Row[] | ParsedTables, {}, WnbaStatsScoreboardv3Params> = (params: WrapperParams = {}) => callFlat(SCOREBOARDV3_DEF, params);
 /** snake_case alias of {@link wnbaStatsScoreboardv3} (py/R parity). */
 export const wnba_stats_scoreboardv3 = wnbaStatsScoreboardv3;
 
@@ -9730,7 +9843,7 @@ const SHOTCHARTDETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Shot_Chart_Detail`, `LeagueAverages`.
  * @example await sdv.wnba.wnbaStatsShotchartdetail({});
  */
-export const wnbaStatsShotchartdetail: SectionedWrapper<WnbaStatsShotchartdetailTables | Row[], WnbaStatsShotchartdetailTables> = (params: WrapperParams = {}) => callFlat(SHOTCHARTDETAIL_DEF, params);
+export const wnbaStatsShotchartdetail: SectionedWrapper<WnbaStatsShotchartdetailTables | Row[], WnbaStatsShotchartdetailTables, WnbaStatsShotchartdetailParams> = (params: WrapperParams = {}) => callFlat(SHOTCHARTDETAIL_DEF, params);
 /** snake_case alias of {@link wnbaStatsShotchartdetail} (py/R parity). */
 export const wnba_stats_shotchartdetail = wnbaStatsShotchartdetail;
 
@@ -9771,7 +9884,7 @@ const SHOTCHARTLEAGUEWIDE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsShotchartleaguewide({});
  */
-export const wnbaStatsShotchartleaguewide: SectionedWrapper<WnbaStatsShotchartleaguewideRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(SHOTCHARTLEAGUEWIDE_DEF, params);
+export const wnbaStatsShotchartleaguewide: SectionedWrapper<WnbaStatsShotchartleaguewideRow[] | ParsedTables, {}, WnbaStatsShotchartleaguewideParams> = (params: WrapperParams = {}) => callFlat(SHOTCHARTLEAGUEWIDE_DEF, params);
 /** snake_case alias of {@link wnbaStatsShotchartleaguewide} (py/R parity). */
 export const wnba_stats_shotchartleaguewide = wnbaStatsShotchartleaguewide;
 
@@ -9920,7 +10033,7 @@ const SHOTCHARTLINEUPDETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `ShotChartLineupDetail`, `ShotChartLineupLeagueAverage`.
  * @example await sdv.wnba.wnbaStatsShotchartlineupdetail({});
  */
-export const wnbaStatsShotchartlineupdetail: SectionedWrapper<WnbaStatsShotchartlineupdetailTables | Row[], WnbaStatsShotchartlineupdetailTables> = (params: WrapperParams = {}) => callFlat(SHOTCHARTLINEUPDETAIL_DEF, params);
+export const wnbaStatsShotchartlineupdetail: SectionedWrapper<WnbaStatsShotchartlineupdetailTables | Row[], WnbaStatsShotchartlineupdetailTables, WnbaStatsShotchartlineupdetailParams> = (params: WrapperParams = {}) => callFlat(SHOTCHARTLINEUPDETAIL_DEF, params);
 /** snake_case alias of {@link wnbaStatsShotchartlineupdetail} (py/R parity). */
 export const wnba_stats_shotchartlineupdetail = wnbaStatsShotchartlineupdetail;
 
@@ -10087,7 +10200,7 @@ const TEAMDASHBOARDBYCLUTCH_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5Min5PointTeamDashboard`, `Last3Min5PointTeamDashboard`, `Last1Min5PointTeamDashboard`, `Last30Sec3PointTeamDashboard`, `Last10Sec3PointTeamDashboard`, `Last5MinPlusMinus5PointTeamDashboard`, `Last3MinPlusMinus5PointTeamDashboard`, `Last1MinPlusMinus5PointTeamDashboard`, `Last30Sec3Point2TeamDashboard`, `Last10Sec3Point2TeamDashboard`.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbyclutch({});
  */
-export const wnbaStatsTeamdashboardbyclutch: SectionedWrapper<WnbaStatsTeamdashboardbyclutchTables | Row[], WnbaStatsTeamdashboardbyclutchTables> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYCLUTCH_DEF, params);
+export const wnbaStatsTeamdashboardbyclutch: SectionedWrapper<WnbaStatsTeamdashboardbyclutchTables | Row[], WnbaStatsTeamdashboardbyclutchTables, WnbaStatsTeamdashboardbyclutchParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYCLUTCH_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamdashboardbyclutch} (py/R parity). */
 export const wnba_stats_teamdashboardbyclutch = wnbaStatsTeamdashboardbyclutch;
 
@@ -10254,7 +10367,7 @@ const TEAMDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByHalfTeamDashboard`, `ByPeriodTeamDashboard`, `ByScoreMarginTeamDashboard`, `ByActualMarginTeamDashboard`.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbygamesplits({});
  */
-export const wnbaStatsTeamdashboardbygamesplits: SectionedWrapper<WnbaStatsTeamdashboardbygamesplitsTables | Row[], WnbaStatsTeamdashboardbygamesplitsTables> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYGAMESPLITS_DEF, params);
+export const wnbaStatsTeamdashboardbygamesplits: SectionedWrapper<WnbaStatsTeamdashboardbygamesplitsTables | Row[], WnbaStatsTeamdashboardbygamesplitsTables, WnbaStatsTeamdashboardbygamesplitsParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYGAMESPLITS_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamdashboardbygamesplits} (py/R parity). */
 export const wnba_stats_teamdashboardbygamesplits = wnbaStatsTeamdashboardbygamesplits;
 
@@ -10421,7 +10534,7 @@ const TEAMDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `LocationTeamDashboard`, `WinsLossesTeamDashboard`, `MonthTeamDashboard`, `PrePostAllStarTeamDashboard`, `DaysRestTeamDashboard`.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbygeneralsplits({});
  */
-export const wnbaStatsTeamdashboardbygeneralsplits: SectionedWrapper<WnbaStatsTeamdashboardbygeneralsplitsTables | Row[], WnbaStatsTeamdashboardbygeneralsplitsTables> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYGENERALSPLITS_DEF, params);
+export const wnbaStatsTeamdashboardbygeneralsplits: SectionedWrapper<WnbaStatsTeamdashboardbygeneralsplitsTables | Row[], WnbaStatsTeamdashboardbygeneralsplitsTables, WnbaStatsTeamdashboardbygeneralsplitsParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYGENERALSPLITS_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamdashboardbygeneralsplits} (py/R parity). */
 export const wnba_stats_teamdashboardbygeneralsplits = wnbaStatsTeamdashboardbygeneralsplits;
 
@@ -10588,7 +10701,7 @@ const TEAMDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5TeamDashboard`, `Last10TeamDashboard`, `Last15TeamDashboard`, `Last20TeamDashboard`, `GameNumberTeamDashboard`.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbylastngames({});
  */
-export const wnbaStatsTeamdashboardbylastngames: SectionedWrapper<WnbaStatsTeamdashboardbylastngamesTables | Row[], WnbaStatsTeamdashboardbylastngamesTables> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYLASTNGAMES_DEF, params);
+export const wnbaStatsTeamdashboardbylastngames: SectionedWrapper<WnbaStatsTeamdashboardbylastngamesTables | Row[], WnbaStatsTeamdashboardbylastngamesTables, WnbaStatsTeamdashboardbylastngamesParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYLASTNGAMES_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamdashboardbylastngames} (py/R parity). */
 export const wnba_stats_teamdashboardbylastngames = wnbaStatsTeamdashboardbylastngames;
 
@@ -10755,7 +10868,7 @@ const TEAMDASHBOARDBYOPPONENT_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ConferenceTeamDashboard`, `DivisionTeamDashboard`, `OpponentTeamDashboard`.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbyopponent({});
  */
-export const wnbaStatsTeamdashboardbyopponent: SectionedWrapper<WnbaStatsTeamdashboardbyopponentTables | Row[], WnbaStatsTeamdashboardbyopponentTables> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYOPPONENT_DEF, params);
+export const wnbaStatsTeamdashboardbyopponent: SectionedWrapper<WnbaStatsTeamdashboardbyopponentTables | Row[], WnbaStatsTeamdashboardbyopponentTables, WnbaStatsTeamdashboardbyopponentParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYOPPONENT_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamdashboardbyopponent} (py/R parity). */
 export const wnba_stats_teamdashboardbyopponent = wnbaStatsTeamdashboardbyopponent;
 
@@ -10922,7 +11035,7 @@ const TEAMDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Shot5FTTeamDashboard`, `Shot8FTTeamDashboard`, `ShotAreaTeamDashboard`, `AssitedShotTeamDashboard`, `ShotTypeTeamDashboard`, `AssistedBy`.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbyshootingsplits({});
  */
-export const wnbaStatsTeamdashboardbyshootingsplits: SectionedWrapper<WnbaStatsTeamdashboardbyshootingsplitsTables | Row[], WnbaStatsTeamdashboardbyshootingsplitsTables> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYSHOOTINGSPLITS_DEF, params);
+export const wnbaStatsTeamdashboardbyshootingsplits: SectionedWrapper<WnbaStatsTeamdashboardbyshootingsplitsTables | Row[], WnbaStatsTeamdashboardbyshootingsplitsTables, WnbaStatsTeamdashboardbyshootingsplitsParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYSHOOTINGSPLITS_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamdashboardbyshootingsplits} (py/R parity). */
 export const wnba_stats_teamdashboardbyshootingsplits = wnbaStatsTeamdashboardbyshootingsplits;
 
@@ -11089,7 +11202,7 @@ const TEAMDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ScoreDifferentialTeamDashboard`, `PointsScoredTeamDashboard`, `PontsAgainstTeamDashboard`.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbyteamperformance({});
  */
-export const wnbaStatsTeamdashboardbyteamperformance: SectionedWrapper<WnbaStatsTeamdashboardbyteamperformanceTables | Row[], WnbaStatsTeamdashboardbyteamperformanceTables> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYTEAMPERFORMANCE_DEF, params);
+export const wnbaStatsTeamdashboardbyteamperformance: SectionedWrapper<WnbaStatsTeamdashboardbyteamperformanceTables | Row[], WnbaStatsTeamdashboardbyteamperformanceTables, WnbaStatsTeamdashboardbyteamperformanceParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYTEAMPERFORMANCE_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamdashboardbyteamperformance} (py/R parity). */
 export const wnba_stats_teamdashboardbyteamperformance = wnbaStatsTeamdashboardbyteamperformance;
 
@@ -11256,7 +11369,7 @@ const TEAMDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByYearTeamDashboard`.
  * @example await sdv.wnba.wnbaStatsTeamdashboardbyyearoveryear({});
  */
-export const wnbaStatsTeamdashboardbyyearoveryear: SectionedWrapper<WnbaStatsTeamdashboardbyyearoveryearTables | Row[], WnbaStatsTeamdashboardbyyearoveryearTables> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYYEAROVERYEAR_DEF, params);
+export const wnbaStatsTeamdashboardbyyearoveryear: SectionedWrapper<WnbaStatsTeamdashboardbyyearoveryearTables | Row[], WnbaStatsTeamdashboardbyyearoveryearTables, WnbaStatsTeamdashboardbyyearoveryearParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHBOARDBYYEAROVERYEAR_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamdashboardbyyearoveryear} (py/R parity). */
 export const wnba_stats_teamdashboardbyyearoveryear = wnbaStatsTeamdashboardbyyearoveryear;
 
@@ -11435,7 +11548,7 @@ const TEAMDASHLINEUPS_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `Lineups`.
  * @example await sdv.wnba.wnbaStatsTeamdashlineups({});
  */
-export const wnbaStatsTeamdashlineups: SectionedWrapper<WnbaStatsTeamdashlineupsTables | Row[], WnbaStatsTeamdashlineupsTables> = (params: WrapperParams = {}) => callFlat(TEAMDASHLINEUPS_DEF, params);
+export const wnbaStatsTeamdashlineups: SectionedWrapper<WnbaStatsTeamdashlineupsTables | Row[], WnbaStatsTeamdashlineupsTables, WnbaStatsTeamdashlineupsParams> = (params: WrapperParams = {}) => callFlat(TEAMDASHLINEUPS_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamdashlineups} (py/R parity). */
 export const wnba_stats_teamdashlineups = wnbaStatsTeamdashlineups;
 
@@ -11469,7 +11582,7 @@ const TEAMDETAILS_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamBackground`, `TeamHistory`, `TeamSocialSites`, `TeamAwardsChampionships`, `TeamAwardsConf`, `TeamAwardsDiv`, `TeamHof`, `TeamRetired`, `TeamAwardsCommCup`.
  * @example await sdv.wnba.wnbaStatsTeamdetails({});
  */
-export const wnbaStatsTeamdetails: SectionedWrapper<WnbaStatsTeamdetailsTables | Row[], WnbaStatsTeamdetailsTables> = (params: WrapperParams = {}) => callFlat(TEAMDETAILS_DEF, params);
+export const wnbaStatsTeamdetails: SectionedWrapper<WnbaStatsTeamdetailsTables | Row[], WnbaStatsTeamdetailsTables, WnbaStatsTeamdetailsParams> = (params: WrapperParams = {}) => callFlat(TEAMDETAILS_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamdetails} (py/R parity). */
 export const wnba_stats_teamdetails = wnbaStatsTeamdetails;
 
@@ -11516,7 +11629,7 @@ const TEAMESTIMATEDMETRICS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsTeamestimatedmetrics({});
  */
-export const wnbaStatsTeamestimatedmetrics: SectionedWrapper<WnbaStatsTeamestimatedmetricsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(TEAMESTIMATEDMETRICS_DEF, params);
+export const wnbaStatsTeamestimatedmetrics: SectionedWrapper<WnbaStatsTeamestimatedmetricsRow[] | ParsedTables, {}, WnbaStatsTeamestimatedmetricsParams> = (params: WrapperParams = {}) => callFlat(TEAMESTIMATEDMETRICS_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamestimatedmetrics} (py/R parity). */
 export const wnba_stats_teamestimatedmetrics = wnbaStatsTeamestimatedmetrics;
 
@@ -11581,7 +11694,7 @@ const TEAMGAMELOG_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsTeamgamelog({});
  */
-export const wnbaStatsTeamgamelog: SectionedWrapper<WnbaStatsTeamgamelogRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(TEAMGAMELOG_DEF, params);
+export const wnbaStatsTeamgamelog: SectionedWrapper<WnbaStatsTeamgamelogRow[] | ParsedTables, {}, WnbaStatsTeamgamelogParams> = (params: WrapperParams = {}) => callFlat(TEAMGAMELOG_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamgamelog} (py/R parity). */
 export const wnba_stats_teamgamelog = wnbaStatsTeamgamelog;
 
@@ -11736,7 +11849,7 @@ const TEAMGAMELOGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsTeamgamelogs({});
  */
-export const wnbaStatsTeamgamelogs: SectionedWrapper<WnbaStatsTeamgamelogsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(TEAMGAMELOGS_DEF, params);
+export const wnbaStatsTeamgamelogs: SectionedWrapper<WnbaStatsTeamgamelogsRow[] | ParsedTables, {}, WnbaStatsTeamgamelogsParams> = (params: WrapperParams = {}) => callFlat(TEAMGAMELOGS_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamgamelogs} (py/R parity). */
 export const wnba_stats_teamgamelogs = wnbaStatsTeamgamelogs;
 
@@ -11789,7 +11902,7 @@ const TEAMINFOCOMMON_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamInfoCommon`, `TeamSeasonRanks`, `AvailableSeasons`.
  * @example await sdv.wnba.wnbaStatsTeaminfocommon({});
  */
-export const wnbaStatsTeaminfocommon: SectionedWrapper<WnbaStatsTeaminfocommonTables | Row[], WnbaStatsTeaminfocommonTables> = (params: WrapperParams = {}) => callFlat(TEAMINFOCOMMON_DEF, params);
+export const wnbaStatsTeaminfocommon: SectionedWrapper<WnbaStatsTeaminfocommonTables | Row[], WnbaStatsTeaminfocommonTables, WnbaStatsTeaminfocommonParams> = (params: WrapperParams = {}) => callFlat(TEAMINFOCOMMON_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeaminfocommon} (py/R parity). */
 export const wnba_stats_teaminfocommon = wnbaStatsTeaminfocommon;
 
@@ -11956,7 +12069,7 @@ const TEAMPLAYERDASHBOARD_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamOverall`, `PlayersSeasonTotals`.
  * @example await sdv.wnba.wnbaStatsTeamplayerdashboard({});
  */
-export const wnbaStatsTeamplayerdashboard: SectionedWrapper<WnbaStatsTeamplayerdashboardTables | Row[], WnbaStatsTeamplayerdashboardTables> = (params: WrapperParams = {}) => callFlat(TEAMPLAYERDASHBOARD_DEF, params);
+export const wnbaStatsTeamplayerdashboard: SectionedWrapper<WnbaStatsTeamplayerdashboardTables | Row[], WnbaStatsTeamplayerdashboardTables, WnbaStatsTeamplayerdashboardParams> = (params: WrapperParams = {}) => callFlat(TEAMPLAYERDASHBOARD_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamplayerdashboard} (py/R parity). */
 export const wnba_stats_teamplayerdashboard = wnbaStatsTeamplayerdashboard;
 
@@ -12111,7 +12224,7 @@ const TEAMPLAYERONOFFDETAILS_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffDetails`, `PlayersOnCourtTeamPlayerOnOffDetails`, `PlayersOffCourtTeamPlayerOnOffDetails`.
  * @example await sdv.wnba.wnbaStatsTeamplayeronoffdetails({});
  */
-export const wnbaStatsTeamplayeronoffdetails: SectionedWrapper<WnbaStatsTeamplayeronoffdetailsTables | Row[], WnbaStatsTeamplayeronoffdetailsTables> = (params: WrapperParams = {}) => callFlat(TEAMPLAYERONOFFDETAILS_DEF, params);
+export const wnbaStatsTeamplayeronoffdetails: SectionedWrapper<WnbaStatsTeamplayeronoffdetailsTables | Row[], WnbaStatsTeamplayeronoffdetailsTables, WnbaStatsTeamplayeronoffdetailsParams> = (params: WrapperParams = {}) => callFlat(TEAMPLAYERONOFFDETAILS_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamplayeronoffdetails} (py/R parity). */
 export const wnba_stats_teamplayeronoffdetails = wnbaStatsTeamplayeronoffdetails;
 
@@ -12266,7 +12379,7 @@ const TEAMPLAYERONOFFSUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffSummary`, `PlayersOnCourtTeamPlayerOnOffSummary`, `PlayersOffCourtTeamPlayerOnOffSummary`.
  * @example await sdv.wnba.wnbaStatsTeamplayeronoffsummary({});
  */
-export const wnbaStatsTeamplayeronoffsummary: SectionedWrapper<WnbaStatsTeamplayeronoffsummaryTables | Row[], WnbaStatsTeamplayeronoffsummaryTables> = (params: WrapperParams = {}) => callFlat(TEAMPLAYERONOFFSUMMARY_DEF, params);
+export const wnbaStatsTeamplayeronoffsummary: SectionedWrapper<WnbaStatsTeamplayeronoffsummaryTables | Row[], WnbaStatsTeamplayeronoffsummaryTables, WnbaStatsTeamplayeronoffsummaryParams> = (params: WrapperParams = {}) => callFlat(TEAMPLAYERONOFFSUMMARY_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamplayeronoffsummary} (py/R parity). */
 export const wnba_stats_teamplayeronoffsummary = wnbaStatsTeamplayeronoffsummary;
 
@@ -12433,7 +12546,7 @@ const TEAMVSPLAYER_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `vsPlayerOverall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`.
  * @example await sdv.wnba.wnbaStatsTeamvsplayer({});
  */
-export const wnbaStatsTeamvsplayer: SectionedWrapper<WnbaStatsTeamvsplayerTables | Row[], WnbaStatsTeamvsplayerTables> = (params: WrapperParams = {}) => callFlat(TEAMVSPLAYER_DEF, params);
+export const wnbaStatsTeamvsplayer: SectionedWrapper<WnbaStatsTeamvsplayerTables | Row[], WnbaStatsTeamvsplayerTables, WnbaStatsTeamvsplayerParams> = (params: WrapperParams = {}) => callFlat(TEAMVSPLAYER_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamvsplayer} (py/R parity). */
 export const wnba_stats_teamvsplayer = wnbaStatsTeamvsplayer;
 
@@ -12485,7 +12598,7 @@ const TEAMYEARBYYEARSTATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsTeamyearbyyearstats({});
  */
-export const wnbaStatsTeamyearbyyearstats: SectionedWrapper<WnbaStatsTeamyearbyyearstatsRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(TEAMYEARBYYEARSTATS_DEF, params);
+export const wnbaStatsTeamyearbyyearstats: SectionedWrapper<WnbaStatsTeamyearbyyearstatsRow[] | ParsedTables, {}, WnbaStatsTeamyearbyyearstatsParams> = (params: WrapperParams = {}) => callFlat(TEAMYEARBYYEARSTATS_DEF, params);
 /** snake_case alias of {@link wnbaStatsTeamyearbyyearstats} (py/R parity). */
 export const wnba_stats_teamyearbyyearstats = wnbaStatsTeamyearbyyearstats;
 
@@ -12525,6 +12638,6 @@ const VIDEOSTATUS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.wnba.wnbaStatsVideostatus({});
  */
-export const wnbaStatsVideostatus: SectionedWrapper<WnbaStatsVideostatusRow[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(VIDEOSTATUS_DEF, params);
+export const wnbaStatsVideostatus: SectionedWrapper<WnbaStatsVideostatusRow[] | ParsedTables, {}, WnbaStatsVideostatusParams> = (params: WrapperParams = {}) => callFlat(VIDEOSTATUS_DEF, params);
 /** snake_case alias of {@link wnbaStatsVideostatus} (py/R parity). */
 export const wnba_stats_videostatus = wnbaStatsVideostatus;

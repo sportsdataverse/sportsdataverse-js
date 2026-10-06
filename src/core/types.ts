@@ -145,8 +145,12 @@ export type SnakeToCamel<S extends string> = S extends `${infer H}_${infer C}${i
 /** `T` plus every member again under its camelCase name. */
 export type WithCamelAliases<T> = T & { [K in keyof T & string as SnakeToCamel<K>]: T[K] };
 
-/** A generated cross-league wrapper: `(params?) => Promise<raw ESPN JSON>`. */
-export type WrapperFn = (params?: Record<string, any>) => Promise<any>;
+/**
+ * Any generated wrapper, untyped: what the runtime surface assembles (registries,
+ * deprecated aliases) holds. Its `params` is `any` so that every wrapper, whatever its
+ * own params type, is one; call a namespace member for the typed signature.
+ */
+export type WrapperFn = (params?: any) => Promise<any>;
 
 /**
  * One parsed row (column name -> value) whose columns no verified returns schema
@@ -167,22 +171,46 @@ export type ParsedTables = Record<string, Row[]>;
 export type ParserRow = Row;
 
 /**
- * The params of a generated wrapper call: the endpoint's path / query params plus
- * the controls `parsed`, `section`, `headers` and any family control (`api_key`, ...).
+ * Untyped wrapper params: any path / query param plus the controls `parsed`,
+ * `section`, `headers` and any family control (`api_key`, ...). Every generated
+ * wrapper has its own params type instead (src/generated/params/).
  */
 export type WrapperParams = { [param: string]: unknown };
 
+/** An endpoint with no params. */
+export type NoParams = Record<never, never>;
+
 /**
- * A generated wrapper. Without `parsed: true` it resolves to the raw payload
- * (`unknown`: narrow it yourself); with `{ parsed: true }` to the endpoint parser's
- * output `P`: rows of a generated row type for a verified endpoint, else {@link Row}`[]`.
- * An endpoint with no parser has `P = unknown` (`parsed` returns the raw payload).
+ * Optional params `T`: each by its snake_case name or its camelCase alias (the
+ * resolvers accept either), and `null` for unset.
  */
-export interface Wrapper<P = Row[]> {
+export type OptionalParams<T> = { [K in keyof T]?: T[K] | null } & {
+  [K in keyof T & string as SnakeToCamel<K>]?: T[K] | null;
+};
+
+/** A required param `K` of type `V`, under its snake_case name or its camelCase alias. */
+export type RequiredParam<K extends string, V> = K extends SnakeToCamel<K>
+  ? { [P in K]: V }
+  : ({ [P in K]: V } & { [P in SnakeToCamel<K>]?: V }) | ({ [P in K]?: V } & { [P in SnakeToCamel<K>]: V });
+
+/** The ESPN league slug override of a soccer / cricket wrapper (default: the namespace's league). */
+export type LeagueParam = { league?: string | null };
+
+/** A wrapper's params argument: optional exactly when every param is. */
+export type ParamsArg<A> = {} extends A ? [params?: A] : [params: A];
+
+/**
+ * A generated wrapper, called with its params `A`. Without `parsed: true` it resolves
+ * to the raw payload (`unknown`: narrow it yourself); with `{ parsed: true }` to the
+ * endpoint parser's output `P`: rows of a generated row type for a verified endpoint,
+ * else {@link Row}`[]`. An endpoint with no parser has `P = unknown` (`parsed` returns
+ * the raw payload).
+ */
+export interface Wrapper<P = Row[], A extends object = WrapperParams> {
   /** `{ parsed: true }`: the parser's tidy output. */
-  (params: WrapperParams & { parsed: true }): Promise<P>;
+  (params: A & { parsed: true }): Promise<P>;
   /** The raw payload. */
-  (params?: WrapperParams): Promise<unknown>;
+  (...params: ParamsArg<A & { parsed?: boolean }>): Promise<unknown>;
 }
 
 /**
@@ -190,13 +218,13 @@ export interface Wrapper<P = Row[]> {
  * as {@link Wrapper}, plus `{ parsed: true, section }`, which returns one table:
  * `S[section]` for a table the verified schema names, else {@link Row}`[]`.
  */
-export interface SectionedWrapper<P = Row[], S extends object = {}> {
+export interface SectionedWrapper<P = Row[], S extends object = {}, A extends object = WrapperParams> {
   /** `{ parsed: true, section }` naming a table the verified schema types. */
-  <K extends keyof S & string>(params: WrapperParams & { parsed: true; section: K }): Promise<S[K]>;
+  <K extends keyof S & string>(params: A & { parsed: true; section: K }): Promise<S[K]>;
   /** `{ parsed: true, section }`: any other table (an unknown name throws, or is `[]` for stats.nba.com). */
-  (params: WrapperParams & { parsed: true; section: string }): Promise<Row[]>;
+  (params: A & { parsed: true; section: string }): Promise<Row[]>;
   /** `{ parsed: true }`: the parser's default output. */
-  (params: WrapperParams & { parsed: true }): Promise<P>;
+  (params: A & { parsed: true }): Promise<P>;
   /** The raw payload. */
-  (params?: WrapperParams): Promise<unknown>;
+  (...params: ParamsArg<A & { parsed?: boolean; section?: string }>): Promise<unknown>;
 }

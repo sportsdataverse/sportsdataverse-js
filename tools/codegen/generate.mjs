@@ -29,6 +29,14 @@ import {
   renderLoaderOnlyIndex,
 } from "./render-loaders.mjs";
 import { flatWrapperType, loadParityCoverage, renderRowsBarrel, renderRowsModule } from "./row-types.mjs";
+import {
+  espnParamsName,
+  flatParamsName,
+  loadParamSpecs,
+  renderEspnParams,
+  renderFlatParams,
+  renderParamsBarrel,
+} from "./param-types.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const endpointsDir = join(here, "endpoints");
@@ -769,7 +777,8 @@ function renderWrittenEspnModule(league, wrappers) {
     "// core with the module-private `CFG` below, so URLs resolve identically to the\n" +
     "// runtime-factory path. The non-basketball leagues still use the factory.\n\n" +
     'import { callWrapper } from "../../core/espn.js";\n' +
-    'import type { LeagueConfig, ParsedTables, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";\n\n' +
+    `import type { ${league.leagueParam ? "LeagueParam, " : ""}LeagueConfig, ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";\n` +
+    `import type {\n${[...new Set(applicable.map((w) => espnParamsName(w.short)))].sort().map((n) => `  ${n},\n`).join("")}} from "../params/espn.js";\n\n` +
     `/** Module-private league binding for \`${league.prefix}\` (not exported). */\n` +
     `const CFG: LeagueConfig = ${cfgLiteral};\n`;
 
@@ -849,7 +858,8 @@ function renderWrittenEspnModule(league, wrappers) {
     body += `\nconst ${defConst}: WrapperDef = ${defLiteral};\n`;
     body += jsdoc;
     // The summary dispatcher's parsed result is every sub-frame as a dict; `section` picks one.
-    const espnType = isSummary ? "SectionedWrapper<ParsedTables>" : "Wrapper";
+    const params = `${espnParamsName(w.short)}${league.leagueParam ? " & LeagueParam" : ""}`;
+    const espnType = isSummary ? `SectionedWrapper<ParsedTables, {}, ${params}>` : `Wrapper<Row[], ${params}>`;
     const memberDoc = `${summary} \`GET ${host}${httpPath}${fixedQuery(w)}\``;
     nsMember(league.prefix, camel, espnType, memberDoc);
     nsMember(league.prefix, snake, espnType, memberDoc);
@@ -2060,7 +2070,7 @@ function nsMember(ns, name, type, doc) {
  * src/index.ts types the default export with it, so the API report lists every
  * wrapper and a new one shows up there.
  */
-function renderNamespacesTs(rowNames, loaderPrefixes) {
+function renderNamespacesTs(rowNames, loaderPrefixes, paramNames) {
   const pascal = (s) => s.split("_").map((w) => w[0].toUpperCase() + w.slice(1)).join("");
   const members = new Map([...NS_MEMBERS].map(([n, ms]) => [n, [...ms]]));
   for (const n of loaderPrefixes) if (!members.has(n)) members.set(n, []);
@@ -2085,8 +2095,9 @@ function renderNamespacesTs(rowNames, loaderPrefixes) {
     "// the ESPN wrappers, the flat-API families merged onto it, every deprecated pre-v4\n" +
     "// alias (`@deprecated`) and its release loaders. src/index.ts types the default export\n" +
     "// with them, so etc/sportsdataverse.api.md lists every wrapper.\n\n" +
-    'import type { ParsedTables, Row, SectionedWrapper, Wrapper } from "../core/types.js";\n' +
-    `import type {\n${[...rowNames].sort().map((r) => `  ${r},\n`).join("")}} from "./rows/index.js";\n`;
+    'import type { LeagueParam, ParsedTables, Row, SectionedWrapper, Wrapper } from "../core/types.js";\n' +
+    `import type {\n${[...rowNames].sort().map((r) => `  ${r},\n`).join("")}} from "./rows/index.js";\n` +
+    `import type {\n${[...paramNames].sort().map((r) => `  ${r},\n`).join("")}} from "./params/index.js";\n`;
   for (const p of [...loaderPrefixes].sort()) body += `import type * as loaders_${p} from "./loaders/${p}.js";\n`;
   for (const n of names) {
     const ms = members.get(n).slice().sort((a, b) => a.name.localeCompare(b.name));
@@ -2308,6 +2319,14 @@ const generatedFlatDir = join(generatedDir, "flat");
 const PARITY_COVERAGE = loadParityCoverage(repoRoot);
 // api -> the row / tables interfaces its rows module exports (for the barrel).
 const rowTypeNames = new Map();
+// Params types (tools/codegen/param-types.mjs): module -> the names it exports.
+const PARAM_SPECS = loadParamSpecs(endpointsDir, FAMILY_FILES, FLAT_API_FILES);
+const paramTypeNames = new Map();
+{
+  const espnParams = renderEspnParams(wrappers, PARAM_SPECS);
+  outputs[join(generatedDir, "params", "espn.ts")] = espnParams.source;
+  paramTypeNames.set("espn", espnParams.names);
+}
 const writtenFlatApis = [];
 for (const api of FLAT_API_FILES) {
   const defs = flatWrappers.filter((w) => w.api === api);
@@ -2324,15 +2343,23 @@ for (const api of FLAT_API_FILES) {
     rowTypeNames.set(api, rows.exports);
   }
   outputs[join(generatedFlatDir, `${api}.ts`)] = renderWrittenFlatModule(api, defs, rows.types);
+  const params = renderFlatParams(api, defs, PARAM_SPECS, FLAT_API_META[api]?.controls, flatSnake);
+  outputs[join(generatedDir, "params", `${api}.ts`)] = params.source;
+  paramTypeNames.set(api, params.names);
   writtenFlatApis.push(api);
 }
 outputs[join(generatedFlatDir, "index.ts")] = renderWrittenFlatBarrel(writtenFlatApis);
 outputs[join(generatedDir, "rows", "index.ts")] = renderRowsBarrel(rowTypeNames);
+outputs[join(generatedDir, "params", "index.ts")] = renderParamsBarrel(paramTypeNames);
 
 // Release loader modules (src/generated/loaders/) + the docs dir of each
 // loader-only namespace (written leagues got their loaders page above).
 registerLoaderModules(outputs, generatedDir, releaseLoaders);
-outputs[join(generatedDir, "namespaces.ts")] = renderNamespacesTs([...rowTypeNames.values()].flat(), [...releaseLoaders.keys()]);
+outputs[join(generatedDir, "namespaces.ts")] = renderNamespacesTs(
+  [...rowTypeNames.values()].flat(),
+  [...releaseLoaders.keys()],
+  [...paramTypeNames.values()].flat()
+);
 loaderOnly.forEach(([ns], i) => {
   const dir = join(referenceRootDir, ns);
   const loaders = releaseLoaders.get(ns);
@@ -2369,6 +2396,8 @@ function renderWrittenFlatModule(api, defs, rowTypes = new Map()) {
     'import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";\n';
   const rowNames = [...rowTypes.values()].flatMap((t) => t.names);
   if (rowNames.length) body += `import type {\n${rowNames.map((n) => `  ${n},\n`).join("")}} from "../rows/${api}.js";\n`;
+  const paramNames = defs.map((d) => flatParamsName(flatSnake(d))).sort();
+  body += `import type {\n${paramNames.map((n) => `  ${n},\n`).join("")}} from "../params/${api}.js";\n`;
   const sorted = defs.slice().sort((a, b) => a.short.localeCompare(b.short));
   for (const def of sorted) {
     const snake = flatSnake(def);
@@ -2421,7 +2450,12 @@ function renderWrittenFlatModule(api, defs, rowTypes = new Map()) {
     jsdoc += ` */\n`;
     body += `\nconst ${defConst}: WrapperDef = ${defLiteral};\n`;
     body += jsdoc;
-    const wrapperType = flatWrapperType(def, def.parser ? FLAT_PARSER_SECTIONS[def.parser] : undefined, rowTypes.get(def.short));
+    const wrapperType = flatWrapperType(
+      def,
+      def.parser ? FLAT_PARSER_SECTIONS[def.parser] : undefined,
+      rowTypes.get(def.short),
+      flatParamsName(flatSnake(def))
+    );
     const memberDoc = `${meta.label} — ${humanizeShort(def.short)}. \`GET ${def.host}${def.path}\`${def.deprecated ? ` @deprecated ${def.deprecated}` : ""}`;
     nsMember(ns, camel, wrapperType, memberDoc);
     nsMember(ns, snake, wrapperType, memberDoc);

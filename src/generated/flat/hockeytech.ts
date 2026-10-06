@@ -7,6 +7,24 @@
 
 import { callFlat } from "../../leagues/_make_flat.js";
 import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  HockeytechGameShiftsParams,
+  HockeytechGameSummaryParams,
+  HockeytechLeadersParams,
+  HockeytechPbpParams,
+  HockeytechPlayerGameLogParams,
+  HockeytechPlayerSearchParams,
+  HockeytechPlayerStatsParams,
+  HockeytechPlayoffBracketParams,
+  HockeytechScheduleParams,
+  HockeytechScorebarParams,
+  HockeytechSeasonsParams,
+  HockeytechStandingsParams,
+  HockeytechStatsParams,
+  HockeytechTeamRosterParams,
+  HockeytechTeamsParams,
+  HockeytechTransactionsParams,
+} from "../params/hockeytech.js";
 
 const GAME_SHIFTS_DEF: WrapperDef = {
   "short": "game_shifts",
@@ -53,7 +71,7 @@ const GAME_SHIFTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechGameShifts({});
  */
-export const hockeytechGameShifts: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SHIFTS_DEF, params);
+export const hockeytechGameShifts: Wrapper<Row[], HockeytechGameShiftsParams> = (params: WrapperParams = {}) => callFlat(GAME_SHIFTS_DEF, params);
 /** snake_case alias of {@link hockeytechGameShifts} (py/R parity). */
 export const hockeytech_game_shifts = hockeytechGameShifts;
 
@@ -102,7 +120,7 @@ const GAME_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechGameSummary({});
  */
-export const hockeytechGameSummary: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SUMMARY_DEF, params);
+export const hockeytechGameSummary: Wrapper<Row[], HockeytechGameSummaryParams> = (params: WrapperParams = {}) => callFlat(GAME_SUMMARY_DEF, params);
 /** snake_case alias of {@link hockeytechGameSummary} (py/R parity). */
 export const hockeytech_game_summary = hockeytechGameSummary;
 
@@ -175,7 +193,7 @@ const LEADERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechLeaders({});
  */
-export const hockeytechLeaders: Wrapper = (params: WrapperParams = {}) => callFlat(LEADERS_DEF, params);
+export const hockeytechLeaders: Wrapper<Row[], HockeytechLeadersParams> = (params: WrapperParams = {}) => callFlat(LEADERS_DEF, params);
 /** snake_case alias of {@link hockeytechLeaders} (py/R parity). */
 export const hockeytech_leaders = hockeytechLeaders;
 
@@ -224,7 +242,7 @@ const PBP_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechPbp({});
  */
-export const hockeytechPbp: Wrapper = (params: WrapperParams = {}) => callFlat(PBP_DEF, params);
+export const hockeytechPbp: Wrapper<Row[], HockeytechPbpParams> = (params: WrapperParams = {}) => callFlat(PBP_DEF, params);
 /** snake_case alias of {@link hockeytechPbp} (py/R parity). */
 export const hockeytech_pbp = hockeytechPbp;
 
@@ -284,7 +302,7 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechPlayerGameLog({});
  */
-export const hockeytechPlayerGameLog: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_GAME_LOG_DEF, params);
+export const hockeytechPlayerGameLog: Wrapper<Row[], HockeytechPlayerGameLogParams> = (params: WrapperParams = {}) => callFlat(PLAYER_GAME_LOG_DEF, params);
 /** snake_case alias of {@link hockeytechPlayerGameLog} (py/R parity). */
 export const hockeytech_player_game_log = hockeytechPlayerGameLog;
 
@@ -333,7 +351,7 @@ const PLAYER_SEARCH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechPlayerSearch({});
  */
-export const hockeytechPlayerSearch: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_SEARCH_DEF, params);
+export const hockeytechPlayerSearch: Wrapper<Row[], HockeytechPlayerSearchParams> = (params: WrapperParams = {}) => callFlat(PLAYER_SEARCH_DEF, params);
 /** snake_case alias of {@link hockeytechPlayerSearch} (py/R parity). */
 export const hockeytech_player_search = hockeytechPlayerSearch;
 
@@ -388,7 +406,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechPlayerStats({});
  */
-export const hockeytechPlayerStats: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
+export const hockeytechPlayerStats: Wrapper<Row[], HockeytechPlayerStatsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link hockeytechPlayerStats} (py/R parity). */
 export const hockeytech_player_stats = hockeytechPlayerStats;
 
@@ -442,7 +460,7 @@ const PLAYOFF_BRACKET_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechPlayoffBracket({});
  */
-export const hockeytechPlayoffBracket: Wrapper = (params: WrapperParams = {}) => callFlat(PLAYOFF_BRACKET_DEF, params);
+export const hockeytechPlayoffBracket: Wrapper<Row[], HockeytechPlayoffBracketParams> = (params: WrapperParams = {}) => callFlat(PLAYOFF_BRACKET_DEF, params);
 /** snake_case alias of {@link hockeytechPlayoffBracket} (py/R parity). */
 export const hockeytech_playoff_bracket = hockeytechPlayoffBracket;
 
@@ -514,7 +532,7 @@ const SCHEDULE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechSchedule({});
  */
-export const hockeytechSchedule: Wrapper = (params: WrapperParams = {}) => callFlat(SCHEDULE_DEF, params);
+export const hockeytechSchedule: Wrapper<Row[], HockeytechScheduleParams> = (params: WrapperParams = {}) => callFlat(SCHEDULE_DEF, params);
 /** snake_case alias of {@link hockeytechSchedule} (py/R parity). */
 export const hockeytech_schedule = hockeytechSchedule;
 
@@ -581,7 +599,7 @@ const SCOREBAR_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechScorebar({});
  */
-export const hockeytechScorebar: Wrapper = (params: WrapperParams = {}) => callFlat(SCOREBAR_DEF, params);
+export const hockeytechScorebar: Wrapper<Row[], HockeytechScorebarParams> = (params: WrapperParams = {}) => callFlat(SCOREBAR_DEF, params);
 /** snake_case alias of {@link hockeytechScorebar} (py/R parity). */
 export const hockeytech_scorebar = hockeytechScorebar;
 
@@ -625,7 +643,7 @@ const SEASONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechSeasons({});
  */
-export const hockeytechSeasons: Wrapper = (params: WrapperParams = {}) => callFlat(SEASONS_DEF, params);
+export const hockeytechSeasons: Wrapper<Row[], HockeytechSeasonsParams> = (params: WrapperParams = {}) => callFlat(SEASONS_DEF, params);
 /** snake_case alias of {@link hockeytechSeasons} (py/R parity). */
 export const hockeytech_seasons = hockeytechSeasons;
 
@@ -703,7 +721,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechStandings({});
  */
-export const hockeytechStandings: Wrapper = (params: WrapperParams = {}) => callFlat(STANDINGS_DEF, params);
+export const hockeytechStandings: Wrapper<Row[], HockeytechStandingsParams> = (params: WrapperParams = {}) => callFlat(STANDINGS_DEF, params);
 /** snake_case alias of {@link hockeytechStandings} (py/R parity). */
 export const hockeytech_standings = hockeytechStandings;
 
@@ -758,7 +776,7 @@ const STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechStats({});
  */
-export const hockeytechStats: Wrapper = (params: WrapperParams = {}) => callFlat(STATS_DEF, params);
+export const hockeytechStats: Wrapper<Row[], HockeytechStatsParams> = (params: WrapperParams = {}) => callFlat(STATS_DEF, params);
 /** snake_case alias of {@link hockeytechStats} (py/R parity). */
 export const hockeytech_stats = hockeytechStats;
 
@@ -812,7 +830,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechTeamRoster({});
  */
-export const hockeytechTeamRoster: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_DEF, params);
+export const hockeytechTeamRoster: Wrapper<Row[], HockeytechTeamRosterParams> = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_DEF, params);
 /** snake_case alias of {@link hockeytechTeamRoster} (py/R parity). */
 export const hockeytech_team_roster = hockeytechTeamRoster;
 
@@ -861,7 +879,7 @@ const TEAMS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechTeams({});
  */
-export const hockeytechTeams: Wrapper = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
+export const hockeytechTeams: Wrapper<Row[], HockeytechTeamsParams> = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
 /** snake_case alias of {@link hockeytechTeams} (py/R parity). */
 export const hockeytech_teams = hockeytechTeams;
 
@@ -910,6 +928,6 @@ const TRANSACTIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechTransactions({});
  */
-export const hockeytechTransactions: Wrapper = (params: WrapperParams = {}) => callFlat(TRANSACTIONS_DEF, params);
+export const hockeytechTransactions: Wrapper<Row[], HockeytechTransactionsParams> = (params: WrapperParams = {}) => callFlat(TRANSACTIONS_DEF, params);
 /** snake_case alias of {@link hockeytechTransactions} (py/R parity). */
 export const hockeytech_transactions = hockeytechTransactions;

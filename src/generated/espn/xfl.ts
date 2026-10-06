@@ -8,7 +8,121 @@
 // runtime-factory path. The non-basketball leagues still use the factory.
 
 import { callWrapper } from "../../core/espn.js";
-import type { LeagueConfig, ParsedTables, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type { LeagueConfig, ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  EspnAthleteAwardsParams,
+  EspnAthleteBioParams,
+  EspnAthleteCareerStatsParams,
+  EspnAthleteContractsParams,
+  EspnAthleteCoreParams,
+  EspnAthleteEventlogParams,
+  EspnAthleteGamelogParams,
+  EspnAthleteInfoParams,
+  EspnAthleteInjuriesParams,
+  EspnAthleteNewsParams,
+  EspnAthleteNotesParams,
+  EspnAthleteOverviewParams,
+  EspnAthleteRecordsParams,
+  EspnAthleteSeasonsParams,
+  EspnAthleteSplitsParams,
+  EspnAthleteStatisticslogParams,
+  EspnAthleteStatsParams,
+  EspnAthleteVsAthleteParams,
+  EspnAthletesIndexParams,
+  EspnAwardParams,
+  EspnAwardsParams,
+  EspnCalendarParams,
+  EspnCoachParams,
+  EspnCoachRecordParams,
+  EspnCoachSeasonParams,
+  EspnConferencesParams,
+  EspnDraftParams,
+  EspnEventBroadcastsParams,
+  EspnEventCompetitionParams,
+  EspnEventCompetitorLeadersParams,
+  EspnEventCompetitorLinescoresParams,
+  EspnEventCompetitorParams,
+  EspnEventCompetitorRecordParams,
+  EspnEventCompetitorRosterParams,
+  EspnEventCompetitorStatisticsParams,
+  EspnEventCompetitorsParams,
+  EspnEventLeadersParams,
+  EspnEventOddsParams,
+  EspnEventOfficialDetailParams,
+  EspnEventOfficialsParams,
+  EspnEventParams,
+  EspnEventPlayParams,
+  EspnEventPlayPersonnelParams,
+  EspnEventPlaysParams,
+  EspnEventPowerindexParams,
+  EspnEventPredictorParams,
+  EspnEventProbabilitiesParams,
+  EspnEventPropbetsParams,
+  EspnEventScoringplaysParams,
+  EspnEventSituationParams,
+  EspnEventStatusParams,
+  EspnEventsParams,
+  EspnFpiParams,
+  EspnFranchiseParams,
+  EspnFranchisesParams,
+  EspnInjuriesParams,
+  EspnLeadersCoreParams,
+  EspnLeadersParams,
+  EspnLeagueNotesParams,
+  EspnLeagueRootParams,
+  EspnNewsParams,
+  EspnPositionParams,
+  EspnPositionsParams,
+  EspnScoreboardParams,
+  EspnSeasonAthletesParams,
+  EspnSeasonAwardsParams,
+  EspnSeasonCoachesParams,
+  EspnSeasonDraftParams,
+  EspnSeasonDraftRoundPicksParams,
+  EspnSeasonFreeagentsParams,
+  EspnSeasonFuturesParams,
+  EspnSeasonGroupChildrenParams,
+  EspnSeasonGroupParams,
+  EspnSeasonGroupTeamsParams,
+  EspnSeasonGroupsParams,
+  EspnSeasonInfoParams,
+  EspnSeasonPointerParams,
+  EspnSeasonPowerindexLeadersParams,
+  EspnSeasonPowerindexParams,
+  EspnSeasonTeamParams,
+  EspnSeasonTeamsParams,
+  EspnSeasonTypeCorrectionsParams,
+  EspnSeasonTypeLeadersParams,
+  EspnSeasonTypeParams,
+  EspnSeasonTypesParams,
+  EspnSeasonWeekEventsParams,
+  EspnSeasonWeekParams,
+  EspnSeasonWeekPowerindexParams,
+  EspnSeasonWeeksParams,
+  EspnSeasonsParams,
+  EspnStandingsCoreParams,
+  EspnStandingsParams,
+  EspnStatisticsLeagueParams,
+  EspnSummaryParams,
+  EspnTalentpicksParams,
+  EspnTeamCoreParams,
+  EspnTeamDepthchartsParams,
+  EspnTeamHistoryParams,
+  EspnTeamInjuriesParams,
+  EspnTeamLeadersParams,
+  EspnTeamNewsParams,
+  EspnTeamParams,
+  EspnTeamRecordParams,
+  EspnTeamRosterParams,
+  EspnTeamScheduleParams,
+  EspnTeamTransactionsParams,
+  EspnTeamsCoreParams,
+  EspnTeamsSiteParams,
+  EspnTournamentsParams,
+  EspnTransactionsParams,
+  EspnVenueParams,
+  EspnVenuesParams,
+} from "../params/espn.js";
 
 /** Module-private league binding for `xfl` (not exported). */
 const CFG: LeagueConfig = {
@@ -42,7 +156,7 @@ const ATHLETE_AWARDS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerAwards({ athlete_id: '…' });
  */
-export const espnXflPlayerAwards: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_AWARDS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerAwards} (py/R parity). */
 export const espn_xfl_player_awards = espnXflPlayerAwards;
@@ -69,7 +183,7 @@ const ATHLETE_BIO_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerBio({ athlete_id: '…' });
  */
-export const espnXflPlayerBio: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerBio: Wrapper<Row[], EspnAthleteBioParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_BIO_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerBio} (py/R parity). */
 export const espn_xfl_player_bio = espnXflPlayerBio;
@@ -101,7 +215,7 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerCareerStats({ athlete_id: '…' });
  */
-export const espnXflPlayerCareerStats: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_CAREER_STATS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerCareerStats} (py/R parity). */
 export const espn_xfl_player_career_stats = espnXflPlayerCareerStats;
@@ -128,7 +242,7 @@ const ATHLETE_CONTRACTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerContracts({ athlete_id: '…' });
  */
-export const espnXflPlayerContracts: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_CONTRACTS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerContracts} (py/R parity). */
 export const espn_xfl_player_contracts = espnXflPlayerContracts;
@@ -155,7 +269,7 @@ const ATHLETE_CORE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerCore({ athlete_id: '…' });
  */
-export const espnXflPlayerCore: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerCore: Wrapper<Row[], EspnAthleteCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerCore} (py/R parity). */
 export const espn_xfl_player_core = espnXflPlayerCore;
@@ -182,7 +296,7 @@ const ATHLETE_EVENTLOG_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerEventlog({ athlete_id: '…' });
  */
-export const espnXflPlayerEventlog: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_EVENTLOG_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerEventlog} (py/R parity). */
 export const espn_xfl_player_eventlog = espnXflPlayerEventlog;
@@ -215,7 +329,7 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerGamelog({ athlete_id: '…' });
  */
-export const espnXflPlayerGamelog: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_GAMELOG_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerGamelog} (py/R parity). */
 export const espn_xfl_player_gamelog = espnXflPlayerGamelog;
@@ -242,7 +356,7 @@ const ATHLETE_INFO_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerInfo({ athlete_id: '…' });
  */
-export const espnXflPlayerInfo: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_INFO_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerInfo} (py/R parity). */
 export const espn_xfl_player_info = espnXflPlayerInfo;
@@ -269,7 +383,7 @@ const ATHLETE_INJURIES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerInjuries({ athlete_id: '…' });
  */
-export const espnXflPlayerInjuries: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_INJURIES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerInjuries} (py/R parity). */
 export const espn_xfl_player_injuries = espnXflPlayerInjuries;
@@ -296,7 +410,7 @@ const ATHLETE_NEWS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerNews({ athlete_id: '…' });
  */
-export const espnXflPlayerNews: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerNews: Wrapper<Row[], EspnAthleteNewsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_NEWS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerNews} (py/R parity). */
 export const espn_xfl_player_news = espnXflPlayerNews;
@@ -323,7 +437,7 @@ const ATHLETE_NOTES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerNotes({ athlete_id: '…' });
  */
-export const espnXflPlayerNotes: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_NOTES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerNotes} (py/R parity). */
 export const espn_xfl_player_notes = espnXflPlayerNotes;
@@ -350,7 +464,7 @@ const ATHLETE_OVERVIEW_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerOverview({ athlete_id: '…' });
  */
-export const espnXflPlayerOverview: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_OVERVIEW_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerOverview} (py/R parity). */
 export const espn_xfl_player_overview = espnXflPlayerOverview;
@@ -377,7 +491,7 @@ const ATHLETE_RECORDS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerRecords({ athlete_id: '…' });
  */
-export const espnXflPlayerRecords: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_RECORDS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerRecords} (py/R parity). */
 export const espn_xfl_player_records = espnXflPlayerRecords;
@@ -404,7 +518,7 @@ const ATHLETE_SEASONS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerSeasons({ athlete_id: '…' });
  */
-export const espnXflPlayerSeasons: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_SEASONS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerSeasons} (py/R parity). */
 export const espn_xfl_player_seasons = espnXflPlayerSeasons;
@@ -437,7 +551,7 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerSplits({ athlete_id: '…' });
  */
-export const espnXflPlayerSplits: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_SPLITS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerSplits} (py/R parity). */
 export const espn_xfl_player_splits = espnXflPlayerSplits;
@@ -464,7 +578,7 @@ const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerStatisticslog({ athlete_id: '…' });
  */
-export const espnXflPlayerStatisticslog: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_STATISTICSLOG_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerStatisticslog} (py/R parity). */
 export const espn_xfl_player_statisticslog = espnXflPlayerStatisticslog;
@@ -497,7 +611,7 @@ const ATHLETE_STATS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerStats({ athlete_id: '…' });
  */
-export const espnXflPlayerStats: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerStats: Wrapper<Row[], EspnAthleteStatsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_STATS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerStats} (py/R parity). */
 export const espn_xfl_player_stats = espnXflPlayerStats;
@@ -528,7 +642,7 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
  */
-export const espnXflPlayerVsPlayer: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_VS_ATHLETE_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayerVsPlayer} (py/R parity). */
 export const espn_xfl_player_vs_player = espnXflPlayerVsPlayer;
@@ -570,7 +684,7 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPlayersIndex({});
  */
-export const espnXflPlayersIndex: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETES_INDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPlayersIndex} (py/R parity). */
 export const espn_xfl_players_index = espnXflPlayersIndex;
@@ -597,7 +711,7 @@ const AWARD_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflAward({ award_id: '…' });
  */
-export const espnXflAward: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflAward: Wrapper<Row[], EspnAwardParams> = (params: WrapperParams = {}) =>
   callWrapper(AWARD_DEF, CFG, params);
 /** snake_case alias of {@link espnXflAward} (py/R parity). */
 export const espn_xfl_award = espnXflAward;
@@ -626,7 +740,7 @@ const AWARDS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflAwards({});
  */
-export const espnXflAwards: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflAwards: Wrapper<Row[], EspnAwardsParams> = (params: WrapperParams = {}) =>
   callWrapper(AWARDS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflAwards} (py/R parity). */
 export const espn_xfl_awards = espnXflAwards;
@@ -648,7 +762,7 @@ const CALENDAR_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflCalendar({});
  */
-export const espnXflCalendar: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflCalendar: Wrapper<Row[], EspnCalendarParams> = (params: WrapperParams = {}) =>
   callWrapper(CALENDAR_DEF, CFG, params);
 /** snake_case alias of {@link espnXflCalendar} (py/R parity). */
 export const espn_xfl_calendar = espnXflCalendar;
@@ -675,7 +789,7 @@ const COACH_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflCoach({ coach_id: '…' });
  */
-export const espnXflCoach: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflCoach: Wrapper<Row[], EspnCoachParams> = (params: WrapperParams = {}) =>
   callWrapper(COACH_DEF, CFG, params);
 /** snake_case alias of {@link espnXflCoach} (py/R parity). */
 export const espn_xfl_coach = espnXflCoach;
@@ -708,7 +822,7 @@ const COACH_RECORD_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflCoachRecord({ coach_id: '…' });
  */
-export const espnXflCoachRecord: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflCoachRecord: Wrapper<Row[], EspnCoachRecordParams> = (params: WrapperParams = {}) =>
   callWrapper(COACH_RECORD_DEF, CFG, params);
 /** snake_case alias of {@link espnXflCoachRecord} (py/R parity). */
 export const espn_xfl_coach_record = espnXflCoachRecord;
@@ -739,7 +853,7 @@ const COACH_SEASON_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflCoachSeason({ coach_id: '…', season: '…' });
  */
-export const espnXflCoachSeason: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflCoachSeason: Wrapper<Row[], EspnCoachSeasonParams> = (params: WrapperParams = {}) =>
   callWrapper(COACH_SEASON_DEF, CFG, params);
 /** snake_case alias of {@link espnXflCoachSeason} (py/R parity). */
 export const espn_xfl_coach_season = espnXflCoachSeason;
@@ -761,7 +875,7 @@ const CONFERENCES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflConferences({});
  */
-export const espnXflConferences: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflConferences: Wrapper<Row[], EspnConferencesParams> = (params: WrapperParams = {}) =>
   callWrapper(CONFERENCES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflConferences} (py/R parity). */
 export const espn_xfl_conferences = espnXflConferences;
@@ -783,7 +897,7 @@ const DRAFT_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflDraft({});
  */
-export const espnXflDraft: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflDraft: Wrapper<Row[], EspnDraftParams> = (params: WrapperParams = {}) =>
   callWrapper(DRAFT_DEF, CFG, params);
 /** snake_case alias of {@link espnXflDraft} (py/R parity). */
 export const espn_xfl_draft = espnXflDraft;
@@ -810,7 +924,7 @@ const EVENT_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGame({ event_id: '…' });
  */
-export const espnXflGame: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGame: Wrapper<Row[], EspnEventParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGame} (py/R parity). */
 export const espn_xfl_game = espnXflGame;
@@ -843,7 +957,7 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameBroadcasts({ event_id: '…' });
  */
-export const espnXflGameBroadcasts: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_BROADCASTS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameBroadcasts} (py/R parity). */
 export const espn_xfl_game_broadcasts = espnXflGameBroadcasts;
@@ -876,7 +990,7 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameCompetition({ event_id: '…' });
  */
-export const espnXflGameCompetition: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameCompetition: Wrapper<Row[], EspnEventCompetitionParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITION_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameCompetition} (py/R parity). */
 export const espn_xfl_game_competition = espnXflGameCompetition;
@@ -913,7 +1027,7 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameTeam({ event_id: '…', team_id: '…' });
  */
-export const espnXflGameTeam: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameTeam: Wrapper<Row[], EspnEventCompetitorParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameTeam} (py/R parity). */
 export const espn_xfl_game_team = espnXflGameTeam;
@@ -950,7 +1064,7 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameTeamLeaders({ event_id: '…', team_id: '…' });
  */
-export const espnXflGameTeamLeaders: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameTeamLeaders} (py/R parity). */
 export const espn_xfl_game_team_leaders = espnXflGameTeamLeaders;
@@ -987,7 +1101,7 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameTeamLinescores({ event_id: '…', team_id: '…' });
  */
-export const espnXflGameTeamLinescores: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_LINESCORES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameTeamLinescores} (py/R parity). */
 export const espn_xfl_game_team_linescores = espnXflGameTeamLinescores;
@@ -1024,7 +1138,7 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameTeamRecord({ event_id: '…', team_id: '…' });
  */
-export const espnXflGameTeamRecord: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_RECORD_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameTeamRecord} (py/R parity). */
 export const espn_xfl_game_team_record = espnXflGameTeamRecord;
@@ -1061,7 +1175,7 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameTeamRoster({ event_id: '…', team_id: '…' });
  */
-export const espnXflGameTeamRoster: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_ROSTER_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameTeamRoster} (py/R parity). */
 export const espn_xfl_game_team_roster = espnXflGameTeamRoster;
@@ -1098,7 +1212,7 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameTeamStatistics({ event_id: '…', team_id: '…' });
  */
-export const espnXflGameTeamStatistics: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_STATISTICS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameTeamStatistics} (py/R parity). */
 export const espn_xfl_game_team_statistics = espnXflGameTeamStatistics;
@@ -1131,7 +1245,7 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameTeams({ event_id: '…' });
  */
-export const espnXflGameTeams: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameTeams: Wrapper<Row[], EspnEventCompetitorsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITORS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameTeams} (py/R parity). */
 export const espn_xfl_game_teams = espnXflGameTeams;
@@ -1164,7 +1278,7 @@ const EVENT_LEADERS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameLeaders({ event_id: '…' });
  */
-export const espnXflGameLeaders: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameLeaders: Wrapper<Row[], EspnEventLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameLeaders} (py/R parity). */
 export const espn_xfl_game_leaders = espnXflGameLeaders;
@@ -1197,7 +1311,7 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameOdds({ event_id: '…' });
  */
-export const espnXflGameOdds: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameOdds: Wrapper<Row[], EspnEventOddsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_ODDS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameOdds} (py/R parity). */
 export const espn_xfl_game_odds = espnXflGameOdds;
@@ -1234,7 +1348,7 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameOfficialDetail({ event_id: '…', official_id: '…' });
  */
-export const espnXflGameOfficialDetail: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_OFFICIAL_DETAIL_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameOfficialDetail} (py/R parity). */
 export const espn_xfl_game_official_detail = espnXflGameOfficialDetail;
@@ -1267,7 +1381,7 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameOfficials({ event_id: '…' });
  */
-export const espnXflGameOfficials: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameOfficials: Wrapper<Row[], EspnEventOfficialsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_OFFICIALS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameOfficials} (py/R parity). */
 export const espn_xfl_game_officials = espnXflGameOfficials;
@@ -1304,7 +1418,7 @@ const EVENT_PLAY_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGamePlay({ event_id: '…', play_id: '…' });
  */
-export const espnXflGamePlay: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGamePlay: Wrapper<Row[], EspnEventPlayParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PLAY_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGamePlay} (py/R parity). */
 export const espn_xfl_game_play = espnXflGamePlay;
@@ -1341,7 +1455,7 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGamePlayPersonnel({ event_id: '…', play_id: '…' });
  */
-export const espnXflGamePlayPersonnel: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PLAY_PERSONNEL_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGamePlayPersonnel} (py/R parity). */
 export const espn_xfl_game_play_personnel = espnXflGamePlayPersonnel;
@@ -1381,7 +1495,7 @@ const EVENT_PLAYS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGamePlays({ event_id: '…' });
  */
-export const espnXflGamePlays: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGamePlays: Wrapper<Row[], EspnEventPlaysParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PLAYS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGamePlays} (py/R parity). */
 export const espn_xfl_game_plays = espnXflGamePlays;
@@ -1414,7 +1528,7 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGamePowerindex({ event_id: '…' });
  */
-export const espnXflGamePowerindex: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_POWERINDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGamePowerindex} (py/R parity). */
 export const espn_xfl_game_powerindex = espnXflGamePowerindex;
@@ -1447,7 +1561,7 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGamePredictor({ event_id: '…' });
  */
-export const espnXflGamePredictor: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGamePredictor: Wrapper<Row[], EspnEventPredictorParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PREDICTOR_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGamePredictor} (py/R parity). */
 export const espn_xfl_game_predictor = espnXflGamePredictor;
@@ -1487,7 +1601,7 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameProbabilities({ event_id: '…' });
  */
-export const espnXflGameProbabilities: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PROBABILITIES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameProbabilities} (py/R parity). */
 export const espn_xfl_game_probabilities = espnXflGameProbabilities;
@@ -1520,7 +1634,7 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGamePropbets({ event_id: '…' });
  */
-export const espnXflGamePropbets: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGamePropbets: Wrapper<Row[], EspnEventPropbetsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PROPBETS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGamePropbets} (py/R parity). */
 export const espn_xfl_game_propbets = espnXflGamePropbets;
@@ -1553,7 +1667,7 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameScoringplays({ event_id: '…' });
  */
-export const espnXflGameScoringplays: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_SCORINGPLAYS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameScoringplays} (py/R parity). */
 export const espn_xfl_game_scoringplays = espnXflGameScoringplays;
@@ -1586,7 +1700,7 @@ const EVENT_SITUATION_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameSituation({ event_id: '…' });
  */
-export const espnXflGameSituation: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameSituation: Wrapper<Row[], EspnEventSituationParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_SITUATION_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameSituation} (py/R parity). */
 export const espn_xfl_game_situation = espnXflGameSituation;
@@ -1619,7 +1733,7 @@ const EVENT_STATUS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGameStatus({ event_id: '…' });
  */
-export const espnXflGameStatus: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGameStatus: Wrapper<Row[], EspnEventStatusParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_STATUS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGameStatus} (py/R parity). */
 export const espn_xfl_game_status = espnXflGameStatus;
@@ -1653,7 +1767,7 @@ const EVENTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflGames({});
  */
-export const espnXflGames: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflGames: Wrapper<Row[], EspnEventsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflGames} (py/R parity). */
 export const espn_xfl_games = espnXflGames;
@@ -1691,7 +1805,7 @@ const FPI_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflFpi({});
  */
-export const espnXflFpi: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflFpi: Wrapper<Row[], EspnFpiParams> = (params: WrapperParams = {}) =>
   callWrapper(FPI_DEF, CFG, params);
 /** snake_case alias of {@link espnXflFpi} (py/R parity). */
 export const espn_xfl_fpi = espnXflFpi;
@@ -1718,7 +1832,7 @@ const FRANCHISE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflFranchise({ franchise_id: '…' });
  */
-export const espnXflFranchise: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflFranchise: Wrapper<Row[], EspnFranchiseParams> = (params: WrapperParams = {}) =>
   callWrapper(FRANCHISE_DEF, CFG, params);
 /** snake_case alias of {@link espnXflFranchise} (py/R parity). */
 export const espn_xfl_franchise = espnXflFranchise;
@@ -1747,7 +1861,7 @@ const FRANCHISES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflFranchises({});
  */
-export const espnXflFranchises: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflFranchises: Wrapper<Row[], EspnFranchisesParams> = (params: WrapperParams = {}) =>
   callWrapper(FRANCHISES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflFranchises} (py/R parity). */
 export const espn_xfl_franchises = espnXflFranchises;
@@ -1769,7 +1883,7 @@ const INJURIES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflInjuries({});
  */
-export const espnXflInjuries: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflInjuries: Wrapper<Row[], EspnInjuriesParams> = (params: WrapperParams = {}) =>
   callWrapper(INJURIES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflInjuries} (py/R parity). */
 export const espn_xfl_injuries = espnXflInjuries;
@@ -1824,7 +1938,7 @@ const LEADERS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflLeaders({});
  */
-export const espnXflLeaders: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflLeaders: Wrapper<Row[], EspnLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflLeaders} (py/R parity). */
 export const espn_xfl_leaders = espnXflLeaders;
@@ -1846,7 +1960,7 @@ const LEADERS_CORE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflLeadersCore({});
  */
-export const espnXflLeadersCore: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflLeadersCore: Wrapper<Row[], EspnLeadersCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(LEADERS_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnXflLeadersCore} (py/R parity). */
 export const espn_xfl_leaders_core = espnXflLeadersCore;
@@ -1868,7 +1982,7 @@ const LEAGUE_NOTES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflLeagueNotes({});
  */
-export const espnXflLeagueNotes: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams> = (params: WrapperParams = {}) =>
   callWrapper(LEAGUE_NOTES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflLeagueNotes} (py/R parity). */
 export const espn_xfl_league_notes = espnXflLeagueNotes;
@@ -1890,7 +2004,7 @@ const LEAGUE_ROOT_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflLeagueRoot({});
  */
-export const espnXflLeagueRoot: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflLeagueRoot: Wrapper<Row[], EspnLeagueRootParams> = (params: WrapperParams = {}) =>
   callWrapper(LEAGUE_ROOT_DEF, CFG, params);
 /** snake_case alias of {@link espnXflLeagueRoot} (py/R parity). */
 export const espn_xfl_league_root = espnXflLeagueRoot;
@@ -1919,7 +2033,7 @@ const NEWS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflNews({});
  */
-export const espnXflNews: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflNews: Wrapper<Row[], EspnNewsParams> = (params: WrapperParams = {}) =>
   callWrapper(NEWS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflNews} (py/R parity). */
 export const espn_xfl_news = espnXflNews;
@@ -1946,7 +2060,7 @@ const POSITION_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPosition({ position_id: '…' });
  */
-export const espnXflPosition: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPosition: Wrapper<Row[], EspnPositionParams> = (params: WrapperParams = {}) =>
   callWrapper(POSITION_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPosition} (py/R parity). */
 export const espn_xfl_position = espnXflPosition;
@@ -1975,7 +2089,7 @@ const POSITIONS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflPositions({});
  */
-export const espnXflPositions: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflPositions: Wrapper<Row[], EspnPositionsParams> = (params: WrapperParams = {}) =>
   callWrapper(POSITIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflPositions} (py/R parity). */
 export const espn_xfl_positions = espnXflPositions;
@@ -2024,7 +2138,7 @@ const SCOREBOARD_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflScoreboard({});
  */
-export const espnXflScoreboard: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflScoreboard: Wrapper<Row[], EspnScoreboardParams> = (params: WrapperParams = {}) =>
   callWrapper(SCOREBOARD_DEF, CFG, params);
 /** snake_case alias of {@link espnXflScoreboard} (py/R parity). */
 export const espn_xfl_scoreboard = espnXflScoreboard;
@@ -2064,7 +2178,7 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonPlayers({ season: '…' });
  */
-export const espnXflSeasonPlayers: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_ATHLETES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonPlayers} (py/R parity). */
 export const espn_xfl_season_players = espnXflSeasonPlayers;
@@ -2098,7 +2212,7 @@ const SEASON_AWARDS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonAwards({ season: '…' });
  */
-export const espnXflSeasonAwards: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_AWARDS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonAwards} (py/R parity). */
 export const espn_xfl_season_awards = espnXflSeasonAwards;
@@ -2132,7 +2246,7 @@ const SEASON_COACHES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonCoaches({ season: '…' });
  */
-export const espnXflSeasonCoaches: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_COACHES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonCoaches} (py/R parity). */
 export const espn_xfl_season_coaches = espnXflSeasonCoaches;
@@ -2159,7 +2273,7 @@ const SEASON_DRAFT_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonDraft({ season: '…' });
  */
-export const espnXflSeasonDraft: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_DRAFT_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonDraft} (py/R parity). */
 export const espn_xfl_season_draft = espnXflSeasonDraft;
@@ -2190,7 +2304,7 @@ const SEASON_DRAFT_ROUND_PICKS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonDraftRoundPicks({ season: '…', round_num: '…' });
  */
-export const espnXflSeasonDraftRoundPicks: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_DRAFT_ROUND_PICKS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonDraftRoundPicks} (py/R parity). */
 export const espn_xfl_season_draft_round_picks = espnXflSeasonDraftRoundPicks;
@@ -2217,7 +2331,7 @@ const SEASON_FREEAGENTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonFreeagents({ season: '…' });
  */
-export const espnXflSeasonFreeagents: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_FREEAGENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonFreeagents} (py/R parity). */
 export const espn_xfl_season_freeagents = espnXflSeasonFreeagents;
@@ -2244,7 +2358,7 @@ const SEASON_FUTURES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonFutures({ season: '…' });
  */
-export const espnXflSeasonFutures: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonFutures: Wrapper<Row[], EspnSeasonFuturesParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_FUTURES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonFutures} (py/R parity). */
 export const espn_xfl_season_futures = espnXflSeasonFutures;
@@ -2279,7 +2393,7 @@ const SEASON_GROUP_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonGroup({ season: '…', season_type: '…', group_id: '…' });
  */
-export const espnXflSeasonGroup: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_GROUP_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonGroup} (py/R parity). */
 export const espn_xfl_season_group = espnXflSeasonGroup;
@@ -2321,7 +2435,7 @@ const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonGroupChildren({ season: '…', season_type: '…', group_id: '…' });
  */
-export const espnXflSeasonGroupChildren: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_GROUP_CHILDREN_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonGroupChildren} (py/R parity). */
 export const espn_xfl_season_group_children = espnXflSeasonGroupChildren;
@@ -2363,7 +2477,7 @@ const SEASON_GROUP_TEAMS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonGroupTeams({ season: '…', season_type: '…', group_id: '…' });
  */
-export const espnXflSeasonGroupTeams: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_GROUP_TEAMS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonGroupTeams} (py/R parity). */
 export const espn_xfl_season_group_teams = espnXflSeasonGroupTeams;
@@ -2394,7 +2508,7 @@ const SEASON_GROUPS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonGroups({ season: '…', season_type: '…' });
  */
-export const espnXflSeasonGroups: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonGroups: Wrapper<Row[], EspnSeasonGroupsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_GROUPS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonGroups} (py/R parity). */
 export const espn_xfl_season_groups = espnXflSeasonGroups;
@@ -2421,7 +2535,7 @@ const SEASON_INFO_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonInfo({ season: '…' });
  */
-export const espnXflSeasonInfo: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_INFO_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonInfo} (py/R parity). */
 export const espn_xfl_season_info = espnXflSeasonInfo;
@@ -2443,7 +2557,7 @@ const SEASON_POINTER_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonPointer({});
  */
-export const espnXflSeasonPointer: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_POINTER_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonPointer} (py/R parity). */
 export const espn_xfl_season_pointer = espnXflSeasonPointer;
@@ -2475,7 +2589,7 @@ const SEASON_POWERINDEX_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonPowerindex({ season: '…' });
  */
-export const espnXflSeasonPowerindex: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_POWERINDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonPowerindex} (py/R parity). */
 export const espn_xfl_season_powerindex = espnXflSeasonPowerindex;
@@ -2502,7 +2616,7 @@ const SEASON_POWERINDEX_LEADERS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonPowerindexLeaders({ season: '…' });
  */
-export const espnXflSeasonPowerindexLeaders: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_POWERINDEX_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonPowerindexLeaders} (py/R parity). */
 export const espn_xfl_season_powerindex_leaders = espnXflSeasonPowerindexLeaders;
@@ -2533,7 +2647,7 @@ const SEASON_TEAM_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonTeam({ season: '…', team_id: '…' });
  */
-export const espnXflSeasonTeam: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TEAM_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonTeam} (py/R parity). */
 export const espn_xfl_season_team = espnXflSeasonTeam;
@@ -2573,7 +2687,7 @@ const SEASON_TEAMS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonTeams({ season: '…' });
  */
-export const espnXflSeasonTeams: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TEAMS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonTeams} (py/R parity). */
 export const espn_xfl_season_teams = espnXflSeasonTeams;
@@ -2604,7 +2718,7 @@ const SEASON_TYPE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonType({ season: '…', season_type: '…' });
  */
-export const espnXflSeasonType: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonType: Wrapper<Row[], EspnSeasonTypeParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TYPE_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonType} (py/R parity). */
 export const espn_xfl_season_type = espnXflSeasonType;
@@ -2635,7 +2749,7 @@ const SEASON_TYPE_CORRECTIONS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonTypeCorrections({ season: '…', season_type: '…' });
  */
-export const espnXflSeasonTypeCorrections: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TYPE_CORRECTIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonTypeCorrections} (py/R parity). */
 export const espn_xfl_season_type_corrections = espnXflSeasonTypeCorrections;
@@ -2666,7 +2780,7 @@ const SEASON_TYPE_LEADERS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonTypeLeaders({ season: '…', season_type: '…' });
  */
-export const espnXflSeasonTypeLeaders: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TYPE_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonTypeLeaders} (py/R parity). */
 export const espn_xfl_season_type_leaders = espnXflSeasonTypeLeaders;
@@ -2693,7 +2807,7 @@ const SEASON_TYPES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonTypes({ season: '…' });
  */
-export const espnXflSeasonTypes: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TYPES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonTypes} (py/R parity). */
 export const espn_xfl_season_types = espnXflSeasonTypes;
@@ -2728,7 +2842,7 @@ const SEASON_WEEK_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonWeek({ season: '…', season_type: '…', week: '…' });
  */
-export const espnXflSeasonWeek: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEK_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonWeek} (py/R parity). */
 export const espn_xfl_season_week = espnXflSeasonWeek;
@@ -2770,7 +2884,7 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
  */
-export const espnXflSeasonWeekGames: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEK_EVENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonWeekGames} (py/R parity). */
 export const espn_xfl_season_week_games = espnXflSeasonWeekGames;
@@ -2811,7 +2925,7 @@ const SEASON_WEEK_POWERINDEX_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonWeekPowerindex({ season: '…', season_type: '…', week: '…' });
  */
-export const espnXflSeasonWeekPowerindex: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEK_POWERINDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonWeekPowerindex} (py/R parity). */
 export const espn_xfl_season_week_powerindex = espnXflSeasonWeekPowerindex;
@@ -2842,7 +2956,7 @@ const SEASON_WEEKS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasonWeeks({ season: '…', season_type: '…' });
  */
-export const espnXflSeasonWeeks: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEKS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasonWeeks} (py/R parity). */
 export const espn_xfl_season_weeks = espnXflSeasonWeeks;
@@ -2871,7 +2985,7 @@ const SEASONS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflSeasons({});
  */
-export const espnXflSeasons: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflSeasons: Wrapper<Row[], EspnSeasonsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASONS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSeasons} (py/R parity). */
 export const espn_xfl_seasons = espnXflSeasons;
@@ -2909,7 +3023,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflStandings({});
  */
-export const espnXflStandings: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflStandings: Wrapper<Row[], EspnStandingsParams> = (params: WrapperParams = {}) =>
   callWrapper(STANDINGS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflStandings} (py/R parity). */
 export const espn_xfl_standings = espnXflStandings;
@@ -2931,7 +3045,7 @@ const STANDINGS_CORE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflStandingsCore({});
  */
-export const espnXflStandingsCore: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflStandingsCore: Wrapper<Row[], EspnStandingsCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(STANDINGS_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnXflStandingsCore} (py/R parity). */
 export const espn_xfl_standings_core = espnXflStandingsCore;
@@ -2953,7 +3067,7 @@ const STATISTICS_LEAGUE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflStatisticsLeague({});
  */
-export const espnXflStatisticsLeague: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams> = (params: WrapperParams = {}) =>
   callWrapper(STATISTICS_LEAGUE_DEF, CFG, params);
 /** snake_case alias of {@link espnXflStatisticsLeague} (py/R parity). */
 export const espn_xfl_statistics_league = espnXflStatisticsLeague;
@@ -2982,7 +3096,7 @@ const SUMMARY_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
  * @example await sdv.xfl.espnXflSummary({});
  */
-export const espnXflSummary: SectionedWrapper<ParsedTables> = (params: WrapperParams = {}) =>
+export const espnXflSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams> = (params: WrapperParams = {}) =>
   callWrapper(SUMMARY_DEF, CFG, params);
 /** snake_case alias of {@link espnXflSummary} (py/R parity). */
 export const espn_xfl_summary = espnXflSummary;
@@ -3004,7 +3118,7 @@ const TALENTPICKS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTalentpicks({});
  */
-export const espnXflTalentpicks: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTalentpicks: Wrapper<Row[], EspnTalentpicksParams> = (params: WrapperParams = {}) =>
   callWrapper(TALENTPICKS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTalentpicks} (py/R parity). */
 export const espn_xfl_talentpicks = espnXflTalentpicks;
@@ -3031,7 +3145,7 @@ const TEAM_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeam({ team_id: '…' });
  */
-export const espnXflTeam: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeam: Wrapper<Row[], EspnTeamParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeam} (py/R parity). */
 export const espn_xfl_team = espnXflTeam;
@@ -3058,7 +3172,7 @@ const TEAM_CORE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeamCore({ team_id: '…' });
  */
-export const espnXflTeamCore: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeamCore: Wrapper<Row[], EspnTeamCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeamCore} (py/R parity). */
 export const espn_xfl_team_core = espnXflTeamCore;
@@ -3085,7 +3199,7 @@ const TEAM_DEPTHCHARTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeamDepthcharts({ team_id: '…' });
  */
-export const espnXflTeamDepthcharts: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_DEPTHCHARTS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeamDepthcharts} (py/R parity). */
 export const espn_xfl_team_depthcharts = espnXflTeamDepthcharts;
@@ -3112,7 +3226,7 @@ const TEAM_HISTORY_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeamHistory({ team_id: '…' });
  */
-export const espnXflTeamHistory: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeamHistory: Wrapper<Row[], EspnTeamHistoryParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_HISTORY_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeamHistory} (py/R parity). */
 export const espn_xfl_team_history = espnXflTeamHistory;
@@ -3139,7 +3253,7 @@ const TEAM_INJURIES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeamInjuries({ team_id: '…' });
  */
-export const espnXflTeamInjuries: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_INJURIES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeamInjuries} (py/R parity). */
 export const espn_xfl_team_injuries = espnXflTeamInjuries;
@@ -3166,7 +3280,7 @@ const TEAM_LEADERS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeamLeaders({ team_id: '…' });
  */
-export const espnXflTeamLeaders: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeamLeaders} (py/R parity). */
 export const espn_xfl_team_leaders = espnXflTeamLeaders;
@@ -3200,7 +3314,7 @@ const TEAM_NEWS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeamNews({ team_id: '…' });
  */
-export const espnXflTeamNews: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeamNews: Wrapper<Row[], EspnTeamNewsParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_NEWS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeamNews} (py/R parity). */
 export const espn_xfl_team_news = espnXflTeamNews;
@@ -3227,7 +3341,7 @@ const TEAM_RECORD_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeamRecord({ team_id: '…' });
  */
-export const espnXflTeamRecord: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeamRecord: Wrapper<Row[], EspnTeamRecordParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_RECORD_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeamRecord} (py/R parity). */
 export const espn_xfl_team_record = espnXflTeamRecord;
@@ -3261,7 +3375,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeamRoster({ team_id: '…' });
  */
-export const espnXflTeamRoster: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeamRoster: Wrapper<Row[], EspnTeamRosterParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_ROSTER_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeamRoster} (py/R parity). */
 export const espn_xfl_team_roster = espnXflTeamRoster;
@@ -3294,7 +3408,7 @@ const TEAM_SCHEDULE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeamSchedule({ team_id: '…' });
  */
-export const espnXflTeamSchedule: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_SCHEDULE_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeamSchedule} (py/R parity). */
 export const espn_xfl_team_schedule = espnXflTeamSchedule;
@@ -3321,7 +3435,7 @@ const TEAM_TRANSACTIONS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeamTransactions({ team_id: '…' });
  */
-export const espnXflTeamTransactions: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_TRANSACTIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeamTransactions} (py/R parity). */
 export const espn_xfl_team_transactions = espnXflTeamTransactions;
@@ -3356,7 +3470,7 @@ const TEAMS_CORE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeamsCore({});
  */
-export const espnXflTeamsCore: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeamsCore: Wrapper<Row[], EspnTeamsCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAMS_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeamsCore} (py/R parity). */
 export const espn_xfl_teams_core = espnXflTeamsCore;
@@ -3385,7 +3499,7 @@ const TEAMS_SITE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTeamsSite({});
  */
-export const espnXflTeamsSite: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTeamsSite: Wrapper<Row[], EspnTeamsSiteParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAMS_SITE_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTeamsSite} (py/R parity). */
 export const espn_xfl_teams_site = espnXflTeamsSite;
@@ -3414,7 +3528,7 @@ const TOURNAMENTS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTournaments({});
  */
-export const espnXflTournaments: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTournaments: Wrapper<Row[], EspnTournamentsParams> = (params: WrapperParams = {}) =>
   callWrapper(TOURNAMENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTournaments} (py/R parity). */
 export const espn_xfl_tournaments = espnXflTournaments;
@@ -3443,7 +3557,7 @@ const TRANSACTIONS_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflTransactions({});
  */
-export const espnXflTransactions: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflTransactions: Wrapper<Row[], EspnTransactionsParams> = (params: WrapperParams = {}) =>
   callWrapper(TRANSACTIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnXflTransactions} (py/R parity). */
 export const espn_xfl_transactions = espnXflTransactions;
@@ -3470,7 +3584,7 @@ const VENUE_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflVenue({ venue_id: '…' });
  */
-export const espnXflVenue: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflVenue: Wrapper<Row[], EspnVenueParams> = (params: WrapperParams = {}) =>
   callWrapper(VENUE_DEF, CFG, params);
 /** snake_case alias of {@link espnXflVenue} (py/R parity). */
 export const espn_xfl_venue = espnXflVenue;
@@ -3499,7 +3613,7 @@ const VENUES_DEF: WrapperDef = {
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.xfl.espnXflVenues({});
  */
-export const espnXflVenues: Wrapper = (params: WrapperParams = {}) =>
+export const espnXflVenues: Wrapper<Row[], EspnVenuesParams> = (params: WrapperParams = {}) =>
   callWrapper(VENUES_DEF, CFG, params);
 /** snake_case alias of {@link espnXflVenues} (py/R parity). */
 export const espn_xfl_venues = espnXflVenues;

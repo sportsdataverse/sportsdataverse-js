@@ -7,6 +7,9 @@
 
 import { callFlat } from "../../leagues/_make_flat.js";
 import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  BartWbbRatingsParams,
+} from "../params/bart_wbb.js";
 
 const RATINGS_DEF: WrapperDef = {
   "short": "ratings",
@@ -34,6 +37,6 @@ const RATINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.torvik.bartWbbRatings({ year: '…' });
  */
-export const bartWbbRatings: Wrapper = (params: WrapperParams = {}) => callFlat(RATINGS_DEF, params);
+export const bartWbbRatings: Wrapper<Row[], BartWbbRatingsParams> = (params: WrapperParams = {}) => callFlat(RATINGS_DEF, params);
 /** snake_case alias of {@link bartWbbRatings} (py/R parity). */
 export const bart_wbb_ratings = bartWbbRatings;
