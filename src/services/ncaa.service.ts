@@ -25,8 +25,12 @@ async function casablanca(url: string): Promise<any> {
     return data;
 }
 
-/** Internal helper: scrape an HTML `<select>` (by id) into {value, name} pairs. */
-function extractSelectList($: cheerio.CheerioAPI, array: SelectList, id: string): undefined {
+/**
+ * Internal helper: scrape an HTML `<select>` (by id) into {value, name} pairs. `doc` is a
+ * `cheerio.load` document, typed `unknown` so cheerio's types stay out of the package's declarations.
+ */
+function extractSelectList(doc: unknown, array: SelectList, id: string): undefined {
+    const $ = doc as cheerio.CheerioAPI; // every caller passes cheerio.load(html)
     const selector = '#' + id + ' option';
     $(selector).each((_i, el) => {
         const value = $(el).prop('value');
