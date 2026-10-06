@@ -59,9 +59,16 @@ export async function resolve(specifier, context, next) {
 if (isMainThread) {
   // --import preload: runs on the main thread before the entry script.
   const entry = process.argv[1];
-  const needsSdvplot = entry && /from\s+['"]@sportsdataverse\//.test(readFileSync(entry, 'utf8'));
-  if (needsSdvplot && !existsSync(new URL('packages/sporty/dist/index.js', SDVPLOT_JS))) {
-    console.log('skipped: build sdvplot-js first (see examples/README.md)');
+  // every `@sportsdataverse/<pkg>[/sub]` the script imports must resolve to a built file
+  const specifiers = entry
+    ? [...readFileSync(entry, 'utf8').matchAll(/from\s+['"](@sportsdataverse\/[^'"]+)['"]/g)].map((m) => m[1])
+    : [];
+  const missing = specifiers.filter((s) => {
+    const file = sdvplotEntry(s);
+    return !file || !existsSync(file);
+  });
+  if (missing.length) {
+    console.log(`skipped: build sdvplot-js first (see examples/README.md) — missing ${missing.join(', ')}`);
     process.exit(0);
   }
   if (!existsSync(LOCAL.sportsdataverse)) {

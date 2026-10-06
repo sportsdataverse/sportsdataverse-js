@@ -626,6 +626,11 @@ The docs site grew a literate-docs / live-runner layer. Five pieces, each
   `tools/docs/examples-source.mjs` writes `docs/src/generated/examples-source.json` for the
   StackBlitz button. `test/examples.test.js` runs every script; `docs:examples:check` gates
   the frozen output. A new tutorial = a script + a manifest entry + a page with the markers.
+  **CI never exercises the three `examples/9x_sdvplot_*.mjs` scripts or their artifacts:**
+  without `SDVPLOT_JS_DIR` they print `skipped:` and the injector keeps the committed output,
+  so the gate stays green on stale pages. A change to a `9x_*` script, to
+  `docs/docs/tutorials/sdvplot-*.mdx` or to `docs/static/examples/{shot_chart.svg,standings.svg,roster.html}`
+  needs a manual `SDVPLOT_JS_DIR=<built sdvplot-js> npm run docs:examples` before pushing.
 
 - **llms.txt.** `docusaurus-plugin-llms` emits `llms.txt`, `llms-full.txt` and a `.md` beside
   every page at build; TypeDoc's `docs/api/**` is ignored in all three (the codegen reference

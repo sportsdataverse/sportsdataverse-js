@@ -424,6 +424,11 @@ for the wire cases the tests replay.
   (the unpublished sdvplot-js packages) from `SDVPLOT_JS_DIR` (default `../../sdvplot-js`,
   a sibling clone; see `examples/README.md` for the build steps). A script that needs an
   unbuilt sdvplot-js prints `skipped:` and exits 0, so CI stays green without it.
+  **That means CI never runs the three `9x_sdvplot_*.mjs` scripts**: the injector keeps
+  their committed source / output / artifacts, so a change to one of them, to
+  `docs/docs/tutorials/sdvplot-*.mdx` or to `docs/static/examples/*` must be followed by a
+  manual `SDVPLOT_JS_DIR=<built sdvplot-js> npm run docs:examples` before pushing (CI cannot
+  catch a stale page there).
 - **Tutorial pages** (`docs/docs/tutorials/<topic>.mdx`) carry a `script` entry in
   `tools/docs/examples.mjs`; `npm run docs:examples` runs the script offline and freezes
   its source (`<!-- inject:source:ex<NN> -->`) and stdout (`<!-- inject:example:ex<NN> -->`)

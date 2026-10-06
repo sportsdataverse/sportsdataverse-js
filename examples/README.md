@@ -59,6 +59,15 @@ node --import ./_resolve.mjs 90_sdvplot_shot_chart.mjs   # writes out/shot_chart
 SDVPLOT_JS_DIR=/path/to/sdvplot-js node --import ./_resolve.mjs 90_sdvplot_shot_chart.mjs  # elsewhere
 ```
 
+Give `SDVPLOT_JS_DIR` an **absolute** path when going through `npm run docs:examples` or
+`npm test`: a relative one resolves against each spawned script's cwd (`examples/`), the
+preload then finds no dist and the three scripts are skipped (the injector keeps their
+committed output, so the gate stays green on a stale page). CI never sets it — after
+changing a `9x_*` script or its tutorial, run the injector with it set and commit the result.
+
+```sh
+```
+
 Without that build, a `9x` script prints `skipped: build sdvplot-js first` and
 exits 0: `test/examples.test.js` skips it and the docs injector keeps the
 committed output for its tutorial. Colours and URLs come from sdvplot's bundled
