@@ -3,17 +3,14 @@
 // for MLS / NWSL) and `bart_wbb` (women's T-Rank; same raw-text contract as
 // `torvik_runtime.ts`). None needs a key. Each fetches through `request()` under
 // its own family stem, so the configured transport, retry and error vocabulary
-// apply (a 404 is `NoDataError`, any other failed fetch `AssetFetchError`).
-//
-// sdv-py's `_get` returns `{}` on a missing / non-JSON body; here a 2xx body that
-// is not JSON comes back as the raw string, and the parsers map non-object input
-// to `[]`.
+// apply (a 404 is `NoDataError`, a 400 / 422 `InvalidParameterError`, and any
+// other failed fetch `AssetFetchError` — an empty or non-JSON 2xx body included,
+// as in sdv-py's `_get`).
 //
 // NWSL composite ids (`nwsl::Football_Season::<hex>`) must reach the host with the
 // `::` literal. They are substituted into the URL path by `resolveFlat` and the
 // transport sends the absolute URL as given, so nothing percent-encodes them.
 
-import { AssetFetchError } from "./errors.js";
 import { request } from "./request.js";
 import { mergeHeaders } from "./transport.js";
 
@@ -35,14 +32,8 @@ function makeGetter(family: string, defaults: Record<string, string>) {
       // caller headers win key-by-key
       headers: mergeHeaders(defaults, config.headers),
     });
-    // These are JSON APIs. A 2xx body that is not JSON (an HTML bot-block / error page
-    // arrives as a string) is a failed fetch, never an empty result; a genuinely empty
-    // JSON body ([] / {}) is data and passes through.
-    if (typeof data === "string") {
-      throw new AssetFetchError(`${family}: expected JSON but received a non-JSON body: ${url}`, {
-        url,
-      });
-    }
+    // request() raised on a non-JSON 2xx body (an HTML bot-block / error page); a
+    // genuinely empty JSON body ([] / {}) is data and passes through.
     return data ?? {};
   };
 }

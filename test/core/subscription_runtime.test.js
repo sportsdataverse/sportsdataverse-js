@@ -170,7 +170,7 @@ describe('pff_api runtime', () => {
 
   const ERR = (code, message) => ({ error: { code, message, request_id: 'req-1', details: { param: 'season' } } });
 
-  it('400 / 422 -> InvalidParameterError carrying PFF\'s error message (not retried)', async () => {
+  it('400 / 422 -> InvalidParameterError carrying PFF\'s error body (not retried; the shared request() rule)', async () => {
     process.env.PFF_API_KEY = 'ak_x';
     for (const status of [400, 422]) {
       const t = fakeTransport({ status, data: ERR('invalid_parameter', 'season must be a valid year') });
@@ -180,7 +180,8 @@ describe('pff_api runtime', () => {
       err.should.not.be.instanceOf(AssetFetchError);
       err.status.should.equal(status);
       err.message.should.equal(
-        'pff_api: PFF rejected https://api.pff.com/v1/games: invalid_parameter: season must be a valid year {"param": "season"} [request_id req-1]'
+        `pff_api: api.pff.com/v1/games rejected the request: HTTP ${status}: ` +
+          '{"error":{"code":"invalid_parameter","message":"season must be a valid year","request_id":"req-1","details":{"param":"season"}}}'
       );
       t.calls.length.should.equal(1);
     }
@@ -966,10 +967,10 @@ describe('core: registerFamilyDefaults classifyError hook', () => {
       configure({ transport: { test_classify: fakeTransport({ status, data: null }) }, retries: 1 });
       return request('test_classify', { method: 'GET', url: 'https://x.test/a', query: { k: 'secret' } }).then(() => null, (e) => e);
     };
-    (await run(400)).should.be.instanceOf(InvalidParameterError);
+    (await run(400)).should.be.instanceOf(InvalidParameterError); // request() classifies 400 / 422 itself
     (await run(404)).should.be.instanceOf(NoDataError);
     (await run(503)).should.be.instanceOf(AssetFetchError); // retried once, then classified (undefined)
-    seen.should.eql([[400, 'https://x.test/a'], [503, 'https://x.test/a']]);
+    seen.should.eql([[503, 'https://x.test/a']]); // 400 and 404 never reach the hook
   });
 });
 

@@ -117,7 +117,8 @@ export const FLAT_HOSTS: Record<string, string> = {
  * families — there is no fallback family, so a user's `default` entries are
  * never applied by accident.
  *
- * @throws NoDataError on 404 (or an ESPN `{ code: 404 }` body); AssetFetchError on any other failure.
+ * @throws NoDataError on 404 (or an ESPN `{ code: 404 }` body); InvalidParameterError on 400 / 422;
+ *   AssetFetchError on any other failure, an empty 2xx body or a non-JSON one included. A 204 / 205 returns `{}`.
  */
 export async function get(
   url: string,

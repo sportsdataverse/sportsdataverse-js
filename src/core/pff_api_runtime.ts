@@ -9,7 +9,7 @@
 // Keys never appear in an error message or a URL.
 //
 // Errors (PFF's error body is `{ error: { code, message, request_id, details } }`):
-//   404 -> NoDataError (core); 400 / 422 -> InvalidParameterError; 401 / 403 /
+//   404 -> NoDataError, 400 / 422 -> InvalidParameterError (both core); 401 / 403 /
 //   429 / 5xx that outlive the retries -> AssetFetchError. 403 is an entitlement
 //   answer and is never retried. A 200 whose body is not a JSON object is an
 //   unknown answer -> AssetFetchError.
@@ -23,7 +23,7 @@
 
 import { bearerAuth } from "./auth.js";
 import { registerFamilyDefaults } from "./config.js";
-import { AssetFetchError, InvalidParameterError, SdvError } from "./errors.js";
+import { AssetFetchError, SdvError } from "./errors.js";
 import { request } from "./request.js";
 import { pyJsonDumps } from "../parsers/pff_api.js";
 import { headerValue, mergeHeaders } from "./transport.js";
@@ -124,9 +124,6 @@ registerFamilyDefaults(FAMILY, {
   retries: 4,
   classifyError: (res, url) => {
     const detail = pffErrorDetail(res.data);
-    if (res.status === 400 || res.status === 422) {
-      return new InvalidParameterError(`${FAMILY}: PFF rejected ${url}: ${detail}`, { url, status: res.status });
-    }
     return new AssetFetchError(`${FAMILY}: HTTP ${res.status}: ${url}: ${detail}`, { url, status: res.status });
   },
 });
