@@ -1,6 +1,7 @@
 import { get } from '../core/client.js';
 import { espnMbbCdnBoxscore, espnMbbCdnPlaybyplay, espnMbbCdnSchedule } from '../generated/espn/mbb.js';
-import { cdnDate, getHtml } from './_cdn.js';
+import { cdnDate, getHtml, scoreboardDates } from './_cdn.js';
+import type { CdnGamePage, CdnSchedulePage, DateArgs, Sports247Commit, Sports247Recruit, Sports247School } from './_cdn.js';
 import * as cheerio from 'cheerio';
 /**
  * Operations for Men's College Basketball.
@@ -24,9 +25,9 @@ export default {
      * @example
      * const result = await sdv.mbb.getPlayByPlay(401260281);
      */
-    getPlayByPlay: async function (id) {
+    getPlayByPlay: async function (id: number | string) {
         // via espn_mbb_cdn_playbyplay (https; core request layer + error vocabulary)
-        const res = { data: (await espnMbbCdnPlaybyplay({ game_id: id })) as any };
+        const res = { data: (await espnMbbCdnPlaybyplay({ game_id: id })) as CdnGamePage };
 
         return {
             teams: res.data.gamepackageJSON.header.competitions[0].competitors,
@@ -47,9 +48,9 @@ export default {
      * @example
      * const result = await sdv.mbb.getBoxScore(401260281);
      */
-    getBoxScore: async function (id) {
+    getBoxScore: async function (id: number | string) {
         // via espn_mbb_cdn_boxscore (https; core request layer + error vocabulary)
-        const res = { data: (await espnMbbCdnBoxscore({ game_id: id })) as any };
+        const res = { data: (await espnMbbCdnBoxscore({ game_id: id })) as CdnGamePage };
 
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
@@ -66,7 +67,7 @@ export default {
      * @example
      * const result = await sdv.mbb.getSummary(401260281);
      */
-    getSummary: async function (id) {
+    getSummary: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
         const params: Record<string, any> = {
             event: id
@@ -94,7 +95,7 @@ export default {
      * @example
      * const result = await sdv.mbb.getPicks(401260281);
      */
-    getPicks: async function (id) {
+    getPicks: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
         const params: Record<string, any> = {
             event: id
@@ -139,7 +140,7 @@ export default {
         group = "HighSchool",
         position = null,
         state = null
-    }) {
+    }: { year: number | string; page?: number; group?: string; position?: string | null; state?: string | null }) {
         const baseUrl = `https://247sports.com/Season/${year}-Basketball/CompositeRecruitRankings`;
         const params: Record<string, any> = {
             InstitutionGroup: group,
@@ -151,7 +152,7 @@ export default {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
             }) };
         let $ = cheerio.load(res.data);
-        let players = [];
+        let players: Sports247Recruit[] = [];
         // Couldn't grab the rank correctly with JQuery so it's manually calculated
         let rank = 1 + 50 * (page - 1);
         $('ul.rankings-page__list > li.rankings-page__list-item:not(.rankings-page__list-item--header)').each(function (index) {
@@ -189,13 +190,13 @@ export default {
      * @example
      * const result = await sdv.mbb.getSchoolRankings({year: 2016});
      */
-    getSchoolRankings: async function (year, page = 1) {
+    getSchoolRankings: async function (year: number | string, page = 1) {
         const baseUrl = `https://247sports.com/Season/${year}-Basketball/CompositeTeamRankings`;
         const res = { data: await getHtml('sports247_html', baseUrl, { Page: page }, {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
             }) };
         let $ = cheerio.load(res.data);
-        let schools = [];
+        let schools: Sports247School[] = [];
         $('.rankings-page__list-item').each(function (index) {
             let html = $(this);
             let school = {
@@ -227,13 +228,13 @@ export default {
      * @example
      * const result = await sdv.mbb.getSchoolCommits({school: 'Clemson', year: 2016});
      */
-    getSchoolCommits: async function (school, year) {
+    getSchoolCommits: async function (school: string, year: number | string) {
         const baseUrl = `https://${school}.247sports.com/Season/${year}-Basketball/Commits`;
         const res = { data: await getHtml('sports247_html', baseUrl, undefined, {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
             }) };
         let $ = cheerio.load(res.data);
-        let players = [];
+        let players: Sports247Commit[] = [];
         $('.ri-page__list-item').each(function (index) {
             let html = $(this);
             let metrics = html.find('.metrics').text().split('/');
@@ -280,9 +281,9 @@ export default {
         day = null,
         group = 50,
         seasontype = 2
-    }) {
+    }: DateArgs & { group?: number; seasontype?: number }) {
         // espn_mbb_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
-        const res = (await espnMbbCdnSchedule({ date: cdnDate(year, month, day) })) as any;
+        const res = (await espnMbbCdnSchedule({ date: cdnDate(year, month, day) })) as CdnSchedulePage;
         return res.content.schedule;
     },
     /**
@@ -308,7 +309,7 @@ export default {
         day,
         group = 50,
         seasontype = 2,
-        limit = 1000 }) {
+        limit = 1000 }: DateArgs & { group?: number; seasontype?: number; limit?: number }) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard`;
         const params: Record<string, any> = {
             groups: group,
@@ -316,7 +317,7 @@ export default {
             limit
         };
         if (year && month && day) {
-            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+            params.dates = scoreboardDates(year, month, day);
         }
         const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
@@ -408,7 +409,7 @@ export default {
      * const teamId = 52;
      * const result = await sdv.mbb.getTeamInfo(teamId);
      */
-    getTeamInfo: async function (id) {
+    getTeamInfo: async function (id: number | string) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
 
         const res = { data: await get(baseUrl, { family: 'site_v2' }) };
@@ -425,7 +426,7 @@ export default {
      * const teamId = 52;
      * const result = await sdv.mbb.getTeamPlayers(teamId);
      */
-    getTeamPlayers: async function (id) {
+    getTeamPlayers: async function (id: number | string) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
         const params: Record<string, any> = {
             enable: "roster"

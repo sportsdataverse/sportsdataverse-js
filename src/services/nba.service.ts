@@ -1,6 +1,7 @@
 import { get } from '../core/client.js';
 import { espnNbaCdnBoxscore, espnNbaCdnPlaybyplay, espnNbaCdnSchedule } from '../generated/espn/nba.js';
-import { cdnDate } from './_cdn.js';
+import { cdnDate, scoreboardDates } from './_cdn.js';
+import type { CdnGamePage, CdnSchedulePage, DateArgs } from './_cdn.js';
 /**
  * Operations for NBA.
  *
@@ -23,9 +24,9 @@ export default {
      * @example
      * const result = await sdv.nba.getPlayByPlay(401283399);
      */
-    getPlayByPlay: async function (id) {
+    getPlayByPlay: async function (id: number | string) {
         // via espn_nba_cdn_playbyplay (https; core request layer + error vocabulary)
-        const res = { data: (await espnNbaCdnPlaybyplay({ game_id: id })) as any };
+        const res = { data: (await espnNbaCdnPlaybyplay({ game_id: id })) as CdnGamePage };
         return {
             teams: res.data.gamepackageJSON.header.competitions[0].competitors,
             id: res.data.gamepackageJSON.header.id,
@@ -47,9 +48,9 @@ export default {
      * @example
      * const result = await sdv.nba.getBoxScore(401283399);
      */
-    getBoxScore: async function (id) {
+    getBoxScore: async function (id: number | string) {
         // via espn_nba_cdn_boxscore (https; core request layer + error vocabulary)
-        const res = { data: (await espnNbaCdnBoxscore({ game_id: id })) as any };
+        const res = { data: (await espnNbaCdnBoxscore({ game_id: id })) as CdnGamePage };
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
         return game;
@@ -64,7 +65,7 @@ export default {
      * @example
      * const result = await sdv.nba.getSummary(401283399);
      */
-    getSummary: async function (id) {
+    getSummary: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary';
         const params: Record<string, any> = {
             event: id
@@ -96,7 +97,7 @@ export default {
      * @example
      * const result = await sdv.nba.getPicks(401283399);
      */
-    getPicks: async function (id) {
+    getPicks: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary';
         const params: Record<string, any> = {
             event: id
@@ -132,9 +133,9 @@ export default {
      * year = 2016, month = 04, day = 15
      * )
      */
-    getSchedule: async function ({ year = null, month = null, day = null }) {
+    getSchedule: async function ({ year = null, month = null, day = null }: DateArgs) {
         // espn_nba_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
-        const res = (await espnNbaCdnSchedule({ date: cdnDate(year, month, day) })) as any;
+        const res = (await espnNbaCdnSchedule({ date: cdnDate(year, month, day) })) as CdnSchedulePage;
         return res.content.schedule;
     },
     /**
@@ -152,13 +153,13 @@ export default {
      * year = 2019, month = 11, day = 16
      * )
      */
-    getScoreboard: async function ({ year, month, day, limit = 300 }) {
+    getScoreboard: async function ({ year, month, day, limit = 300 }: DateArgs & { limit?: number }) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard`;
         const params: Record<string, any> = {
             limit
         };
         if (year && month && day) {
-            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+            params.dates = scoreboardDates(year, month, day);
         }
         const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
         return res.data;
@@ -219,7 +220,7 @@ export default {
      * const teamId = 16;
      * const result = await sdv.nba.getTeamInfo(teamId);
      */
-    getTeamInfo: async function (id) {
+    getTeamInfo: async function (id: number | string) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/${id}`;
 
         const res = { data: await get(baseUrl, { family: 'site_v2' }) };
@@ -236,7 +237,7 @@ export default {
      * const teamId = 16;
      * const result = await sdv.nba.getTeamPlayers(teamId);
      */
-    getTeamPlayers: async function (id) {
+    getTeamPlayers: async function (id: number | string) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/${id}`;
         const params: Record<string, any> = {
             enable: "roster"

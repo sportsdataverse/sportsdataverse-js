@@ -1,6 +1,7 @@
 import { get } from '../core/client.js';
 import { espnMlbCdnBoxscore, espnMlbCdnPlaybyplay, espnMlbCdnSchedule } from '../generated/espn/mlb.js';
-import { cdnDate } from './_cdn.js';
+import { cdnDate, scoreboardDates } from './_cdn.js';
+import type { CdnGamePage, CdnSchedulePage, DateArgs } from './_cdn.js';
 /**
  * Operations for MLB.
  *
@@ -23,9 +24,9 @@ export default {
    * @example
    * const result = await sdv.mlb.getPlayByPlay(401472105);
    */
-  getPlayByPlay: async function (id) {
+  getPlayByPlay: async function (id: number | string) {
     // via espn_mlb_cdn_playbyplay (https; core request layer + error vocabulary)
-    const res = { data: (await espnMlbCdnPlaybyplay({ game_id: id })) as any };
+    const res = { data: (await espnMlbCdnPlaybyplay({ game_id: id })) as CdnGamePage };
     return {
       teams: res.data.gamepackageJSON.header.competitions[0].competitors,
       id: res.data.gamepackageJSON.header.id,
@@ -47,9 +48,9 @@ export default {
    * @example
    * const result = await sdv.mlb.getBoxScore(401472105);
    */
-  getBoxScore: async function (id) {
+  getBoxScore: async function (id: number | string) {
     // via espn_mlb_cdn_boxscore (https; core request layer + error vocabulary)
-    const res = { data: (await espnMlbCdnBoxscore({ game_id: id })) as any };
+    const res = { data: (await espnMlbCdnBoxscore({ game_id: id })) as CdnGamePage };
     const game = res.data.gamepackageJSON.boxscore;
     game.id = res.data.gameId;
     return game;
@@ -64,7 +65,7 @@ export default {
    * @example
    * const result = await sdv.mlb.getSummary(401472105);
    */
-  getSummary: async function (id) {
+  getSummary: async function (id: number | string) {
     const baseUrl =
       "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/summary";
     const params: Record<string, any> = {
@@ -97,7 +98,7 @@ export default {
    * @example
    * const result = await sdv.mlb.getPicks(401472105);
    */
-  getPicks: async function (id) {
+  getPicks: async function (id: number | string) {
     const baseUrl =
       "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/summary";
     const params: Record<string, any> = {
@@ -134,9 +135,9 @@ export default {
    * year = 2016, month = 04, day = 15
    * )
    */
-  getSchedule: async function ({ year, month, day }) {
+  getSchedule: async function ({ year, month, day }: DateArgs) {
     // espn_mlb_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
-    const res = (await espnMlbCdnSchedule({ date: cdnDate(year, month, day) })) as any;
+    const res = (await espnMlbCdnSchedule({ date: cdnDate(year, month, day) })) as CdnSchedulePage;
     return res.content.schedule;
   },
   /**
@@ -159,13 +160,13 @@ export default {
     month,
     day,
     limit = 300,
-  }) {
+  }: DateArgs & { limit?: number }) {
     const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard`;
     const params: Record<string, any> = {
       limit,
     };
     if (year && month && day) {
-      params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+      params.dates = scoreboardDates(year, month, day);
     }
     const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
     return res.data;
@@ -230,7 +231,7 @@ export default {
    * const teamId = 16;
    * const result = await sdv.mlb.getTeamInfo(teamId);
    */
-  getTeamInfo: async function (id) {
+  getTeamInfo: async function (id: number | string) {
     const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/${id}`;
 
     const res = { data: await get(baseUrl, { family: 'site_v2' }) };
@@ -247,7 +248,7 @@ export default {
    * const teamId = 16;
    * const result = await sdv.mlb.getTeamPlayers(teamId);
    */
-  getTeamPlayers: async function (id) {
+  getTeamPlayers: async function (id: number | string) {
     const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/${id}`;
     const params: Record<string, any> = {
       enable: "roster",

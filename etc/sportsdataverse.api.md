@@ -4,6 +4,7 @@
 
 ```ts
 
+import * as cheerio from 'cheerio';
 import * as tidy from '@tidyjs/tidy';
 
 // @public
@@ -30897,7 +30898,7 @@ export function queryAuth(params: Record<string, unknown>): AuthProvider;
 // @public
 export interface QueryParam {
     // (undocumented)
-    default?: string | number | boolean;
+    default?: string | number | boolean | null;
     // (undocumented)
     name: string;
     // (undocumented)

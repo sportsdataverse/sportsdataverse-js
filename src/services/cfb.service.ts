@@ -1,6 +1,7 @@
 import { get } from '../core/client.js';
 import { espnCfbCdnBoxscore, espnCfbCdnPlaybyplay, espnCfbCdnRankings, espnCfbCdnSchedule } from '../generated/espn/cfb.js';
-import { cdnDate, warnFootballDate, getHtml } from './_cdn.js';
+import { cdnDate, getHtml, scoreboardDates, warnFootballDate } from './_cdn.js';
+import type { CdnGamePage, CdnSchedulePage, DateArgs, Sports247Commit, Sports247Recruit, Sports247School } from './_cdn.js';
 import * as cheerio from 'cheerio';
 /**
  * Operations for College Football.
@@ -24,9 +25,9 @@ export default {
      * @example
      * const result = await sdv.cfb.getPlayByPlay(401256194);
      */
-    getPlayByPlay: async function (id) {
+    getPlayByPlay: async function (id: number | string) {
         // via espn_cfb_cdn_playbyplay (https; core request layer + error vocabulary)
-        const res = { data: (await espnCfbCdnPlaybyplay({ game_id: id })) as any };
+        const res = { data: (await espnCfbCdnPlaybyplay({ game_id: id })) as CdnGamePage };
 
         return {
             teams: res.data.gamepackageJSON.header.competitions[0].competitors,
@@ -50,9 +51,9 @@ export default {
      * @example
      * const result = await sdv.cfb.getBoxScore(401256194);
      */
-    getBoxScore: async function (id) {
+    getBoxScore: async function (id: number | string) {
         // via espn_cfb_cdn_boxscore (https; core request layer + error vocabulary)
-        const res = { data: (await espnCfbCdnBoxscore({ game_id: id })) as any };
+        const res = { data: (await espnCfbCdnBoxscore({ game_id: id })) as CdnGamePage };
 
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
@@ -69,7 +70,7 @@ export default {
      * @example
      * const result = await sdv.cfb.getSummary(401256194);
      */
-    getSummary: async function (id) {
+    getSummary: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary';
         const params: Record<string, any> = {
             event: id
@@ -103,7 +104,7 @@ export default {
      * @example
      * const result = await sdv.cfb.getPicks(401256194);
      */
-    getPicks: async function (id) {
+    getPicks: async function (id: number | string) {
         const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary';
         const params: Record<string, any> = {
             event: id
@@ -153,7 +154,7 @@ export default {
         position = null,
         state = null,
         rankingsType = "Composite"
-    }) {
+    }: { year: number | string; page?: number; group?: string; position?: string | null; state?: string | null; rankingsType?: string }) {
         const params: Record<string, any> = {
             InstitutionGroup: group,
             Page: page,
@@ -176,7 +177,7 @@ export default {
 
         let $ = cheerio.load(res.data);
 
-        let players = [];
+        let players: Sports247Recruit[] = [];
 
         // Couldn't grab the rank correctly with JQuery so it's manually calculated
         let rank = 1 + 50 * (page - 1);
@@ -219,7 +220,7 @@ export default {
      * @example
      * const result = await sdv.cfb.getSchoolRankings({year: 2016});
      */
-    getSchoolRankings: async function (year, page = 1) {
+    getSchoolRankings: async function (year: number | string, page = 1) {
         const baseUrl = `https://247sports.com/Season/${year}-Football/CompositeTeamRankings`;
 
         const res = { data: await getHtml('sports247_html', baseUrl, { Page: page }, {
@@ -227,7 +228,7 @@ export default {
             }) };
 
         let $ = cheerio.load(res.data);
-        let schools = [];
+        let schools: Sports247School[] = [];
 
         $('.rankings-page__list-item').each(function (index) {
             let html = $(this);
@@ -263,7 +264,7 @@ export default {
      * @example
      * const result = await sdv.cfb.getSchoolCommits({school: 'Florida State', year: 2021});
      */
-    getSchoolCommits: async function (school, year) {
+    getSchoolCommits: async function (school: string, year: number | string) {
         const baseUrl = `https://${school}.247sports.com/Season/${year}-Football/Commits`;
 
         const res = { data: await getHtml('sports247_html', baseUrl, undefined, {
@@ -272,7 +273,7 @@ export default {
 
         let $ = cheerio.load(res.data);
 
-        let players = [];
+        let players: Sports247Commit[] = [];
 
         $('.ri-page__list-item').each(function (index) {
             let html = $(this);
@@ -313,9 +314,9 @@ export default {
      * @example
      * const result = await sdv.cfb.getRankings(year = 2020, week = 4)
      */
-    getRankings: async function ({ year, week }) {
+    getRankings: async function ({ year, week }: { year?: number | string | null; week?: number | string | null }) {
         // via espn_cfb_cdn_rankings (https; core request layer + error vocabulary)
-        const res = { data: (await espnCfbCdnRankings({ season: year || undefined, week: week || undefined })) as any };
+        const res = { data: (await espnCfbCdnRankings({ season: year || undefined, week: week || undefined })) };
         return res.data;
     },
     /**
@@ -335,12 +336,12 @@ export default {
      * @example
      * const result = await sdv.cfb.getSchedule({ year: 2024, week: 12, seasontype: 2 })
      */
-    getSchedule: async function ({ year, month, day, groups = 80, seasontype = 2, week = null }) {
+    getSchedule: async function ({ year, month, day, groups = 80, seasontype = 2, week = null }: DateArgs & { groups?: number; seasontype?: number; week?: number | string | null }) {
         // The CDN ignores a date for football: select the week (espn_cfb_cdn_schedule).
         if (week == null && cdnDate(year, month, day)) warnFootballDate("cfb");
         const res = (await espnCfbCdnSchedule(
             week != null ? { week, season: year, season_type: seasontype } : { date: cdnDate(year, month, day) }
-        )) as any;
+        )) as CdnSchedulePage;
         return res.content.schedule;
     },
     /**
@@ -360,7 +361,7 @@ export default {
      * year = 2019, month = 11, day = 16, group=80
      * )
      */
-    getScoreboard: async function ({ year, month, day, groups = 80, seasontype = 2, limit = 300 }) {
+    getScoreboard: async function ({ year, month, day, groups = 80, seasontype = 2, limit = 300 }: DateArgs & { groups?: number; seasontype?: number; limit?: number }) {
 
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard`;
         const params: Record<string, any> = {
@@ -369,7 +370,7 @@ export default {
             limit
         };
         if (year && month && day) {
-            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+            params.dates = scoreboardDates(year, month, day);
         }
 
         const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
@@ -459,7 +460,7 @@ export default {
      * const teamId = 52;
      * const result = await sdv.cfb.getTeamInfo(teamId);
      */
-    getTeamInfo: async function (id) {
+    getTeamInfo: async function (id: number | string) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/${id}`;
 
         const res = { data: await get(baseUrl, { family: 'site_v2' }) };
@@ -475,7 +476,7 @@ export default {
      * const teamId = 52;
      * const result = await sdv.cfb.getTeamPlayers(teamId);
      */
-    getTeamPlayers: async function (id) {
+    getTeamPlayers: async function (id: number | string) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/${id}`;
         const params: Record<string, any> = {
             enable: "roster"

@@ -5,18 +5,9 @@
     "noImplicitAny": true,
     "noEmit": true
   },
-  /* Strict ratchet (T18b-2), one directory at a time. A root file pulls in
-     everything it imports, so a directory is listed only once its whole import
-     graph passes. Still out: src/services/* (legacy hand-written ESPN methods)
-     and src/index.ts + src/discover.ts, which import them. */
-  "include": [
-    "src/analytics",
-    "src/core",
-    "src/generated",
-    "src/leagues",
-    "src/models",
-    "src/odds",
-    "src/parsers",
-    "src/producers"
-  ]
+  /* Strict ratchet (T18b-2): every src/ directory passes, legacy src/services/*
+     included. Next: flip the root tsconfig.json to `strict: true` once JS-13's
+     request / errors / client / torvik / statcast changes are in (the five files
+     already pass, as part of this program). */
+  "include": ["src"]
 }
