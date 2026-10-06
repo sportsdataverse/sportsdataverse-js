@@ -1,0 +1,904 @@
+# Utilities catalogue (JS-owned; not vendored). Every hand-written, non-data public
+# export of the package: the functions that never fetch a provider payload by
+# themselves (parsers, analytics, odds math, models, producers, discovery, param
+# transforms, the HTTP core, errors, configuration). tools/codegen/utilities.mjs renders
+# docs/docs/utilities/ (one page per category), src/generated/utilities.ts (the table
+# `discover.listFunctions` labels utilities with) and the sidebar group.
+#
+# test/utilities-catalogue.test.js holds this file to src/index.ts: every public export
+# that is not a league / provider namespace, not a `load*` loader and not re-exported
+# from src/generated/ must be listed here, and every listed name must exist.
+#
+# Per module: `module` (the source file the signatures are read from), `category`,
+# `summary`, optional `namespace` (where the members are mounted, e.g. `sdv.odds`) or
+# `import` (the import specifier; default `sportsdataverse`), `sources` (extra files to
+# read signatures from, for a barrel), `exports: [{ name, kind, summary, example?, aliases? }]`
+# with `kind` one of function | class | const | type.
+
+categories:
+  parsers:
+    label: Parsers
+    summary: "Turn a raw provider payload (ESPN, MLB, NHL, stats.nba.com, …) into tidy rows — the same functions `{ parsed: true }` runs."
+  analytics:
+    label: Analytics
+    summary: Pure frame-to-frame hockey analytics (shifts, on-ice, strength state, Corsi/Fenwick) and their league-parameterised fetch-and-enrich wrappers.
+  odds:
+    label: Odds math
+    summary: Implied probabilities, vig removal and market blends — ports of sdv-py `wexp.market`.
+  models:
+    label: Models
+    summary: Offline models shipped with the package — cricket in-play win probability.
+  producers:
+    label: Producers
+    summary: The ESPN basketball box-score and play-by-play producers — one summary payload in, the release-shaped rows out.
+  discovery:
+    label: Discovery
+    summary: Index the callable surface and resolve team / athlete / game names to ESPN ids.
+  transforms:
+    label: Transforms
+    summary: Parameter transforms the wrappers apply before a request, and the tidy.js toolkit for the rows after it.
+  http-core:
+    label: HTTP core
+    summary: Request pipeline, transports, auth providers, family auth helpers and the wrapper / loader type vocabulary.
+  errors:
+    label: Errors
+    summary: The error vocabulary — `NoDataError` (nothing there) is never `AssetFetchError` (the fetch failed).
+  config:
+    label: Configuration
+    summary: Per-family transport / auth / retry / timeout configuration and the deprecation-warning codes.
+
+modules:
+  - module: src/parsers/index.ts
+    category: parsers
+    import: sportsdataverse/parsers
+    summary: >-
+      The parser layer: every registered parser, the ESPN endpoint -> parser map and the
+      summary dispatcher. Browser-safe except `parse_kenpom_page` (cheerio).
+    sources:
+      - src/parsers/_registry.ts
+      - src/parsers/_normalize.ts
+      - src/parsers/_frames.ts
+      - src/parsers/browser.ts
+      - src/parsers/espn.ts
+      - src/parsers/kenpom.ts
+      - src/parsers/asa.ts
+      - src/parsers/mls_api.ts
+      - src/parsers/nwsl_api.ts
+      - src/parsers/pff_api.ts
+      - src/parsers/nfl_pro.ts
+    exports:
+      - name: parseEndpoint
+        kind: function
+        summary: Run the parser registered for an endpoint over its raw payload — tidy rows, a dict of sub-frames (the ESPN `summary` dispatcher, a dict-default multi-table parser), or `null` when no parser is registered.
+        example: |
+          import { parseEndpoint } from 'sportsdataverse/parsers';
+          const rows = parseEndpoint('scoreboard', raw);
+      - name: normalize
+        kind: function
+        summary: json_normalize equivalent — flatten nested row objects into rectangular rows with `_`-joined, snake_cased keys; integer id columns become decimal strings.
+      - name: snakeCase
+        kind: function
+        summary: Convert a key to snake_case (camelCase, PascalCase, `dot.separated`, runs of capitals).
+      - name: PARSERS
+        kind: const
+        summary: The flat parser registry — parser name -> function.
+      - name: parserFor
+        kind: function
+        summary: Look up a parser by name; `undefined` when missing, so the caller falls back to the raw payload.
+      - name: NODE_ONLY_PARSERS
+        kind: const
+        summary: Names of the parsers registered by a node-side family runtime (not in the browser bundle).
+      - name: MULTI_TABLE_SECTIONS
+        kind: const
+        summary: The sub-frame names of every multi-table parser and the one it returns by default.
+      - name: ESPN_ENDPOINT_PARSERS
+        kind: const
+        summary: ESPN endpoint short -> parser function.
+      - name: parserForEndpoint
+        kind: function
+        summary: The parser registered for an ESPN endpoint short.
+      - name: parse_summary
+        kind: function
+        summary: The ESPN Site v2 summary dispatcher — 21 sub-frames keyed by section, or one with `section`.
+      - name: SECTIONED_ENDPOINTS
+        kind: const
+        summary: The ESPN endpoint shorts whose parsed result is the summary dispatcher's (they take `section`).
+      - name: SUMMARY_SECTION_PARSERS
+        kind: const
+        summary: The summary dispatcher's section -> sub-frame parser table.
+      - name: parse_kenpom_page
+        kind: function
+        summary: Every table of a KenPom HTML page keyed by its HTML id (node only — cheerio).
+        import: sportsdataverse
+      - name: parse_asa_goals_added_tables
+        kind: function
+        summary: American Soccer Analysis goals-added payload -> its tables.
+      - name: parse_mls_standings_tables
+        kind: function
+        summary: MLS standings payload -> its tables.
+      - name: parse_mls_match_tables
+        kind: function
+        summary: MLS match payload -> its tables.
+      - name: parse_nwsl_lineups_tables
+        kind: function
+        summary: NWSL (StatsPerform) lineups payload -> its tables.
+      - name: parse_pff_report
+        kind: function
+        summary: A PFF Developer API `/v1` report envelope -> rows (the `restricted` block is metadata, skipped).
+      - name: parse_pff_player_detail
+        kind: function
+        summary: A PFF Developer API player-detail envelope -> rows.
+      - name: parse_pff_v2_table
+        kind: function
+        summary: A PFF Developer API `/v2` table body -> rows typed from the body's own `columns`.
+      - name: parse_pff_matrix
+        kind: function
+        summary: A PFF matrix body -> rows.
+      - name: parse_nfl_pro_stats
+        kind: function
+        summary: An NFL Pro (Next Gen Stats) stats envelope -> rows.
+      - name: ParserFn
+        kind: type
+        summary: A one-table parser — `(raw, section?) => ParserRow[]`.
+      - name: FlatParserFn
+        kind: type
+        summary: A registered flat-API parser — rows, or a dict of row arrays for a multi-table payload.
+      - name: ParsedTables
+        kind: type
+        summary: A dict of tables — section name -> rows.
+      - name: ParsedResult
+        kind: type
+        summary: What `parseEndpoint` returns — rows, a dict of sub-frames, or `null`.
+
+  - module: src/analytics/hockeytech.ts
+    category: analytics
+    import: sportsdataverse/dist/analytics/hockeytech.js
+    summary: >-
+      Pure HockeyTech frame functions (ports of sdv-py `hockeytech/_analytics.py`): parse shifts and
+      play-by-play, attach clocks, coordinates, on-ice players, strength state, Corsi/Fenwick and
+      time on ice. No fetching — every function takes rows and returns rows.
+    exports:
+      - name: parse_shifts
+        kind: function
+        summary: A `modulekit/gameshifts` payload -> one row per player-shift stint (the shift clock counts down).
+      - name: parse_pbp
+        kind: function
+        summary: A `gameCenterPlayByPlay` payload -> one row per event, in the `hockeytech_a` (850x400) or `hockeytech_b` (600x300) coordinate dialect.
+      - name: mmss_to_seconds
+        kind: function
+        summary: '`"M:SS"` -> seconds, or `null`.'
+      - name: add_clock_columns
+        kind: function
+        summary: Add `minute_start` / `second_start` / `clock` / `sec_from_start` from `time_of_period`.
+      - name: add_coord_transforms
+        kind: function
+        summary: Add the ten normalised coordinate columns (`*_original`, `*_neutral`, `*_fixed`, `*_right`, `*_vertical`) from `x_coord` / `y_coord`.
+      - name: add_shot_distance_angle
+        kind: function
+        summary: Add shot distance (ft) and angle from the fixed coordinates, against a goal line at `goal_x`.
+      - name: NHL_SIZE_RINK_GOAL_X
+        kind: const
+        summary: The goal line's x on an NHL-sized rink (89 ft).
+      - name: scoring_chances
+        kind: function
+        summary: Flag scoring chances — shot attempts within `threshold_ft` of the goal.
+      - name: build_on_ice
+        kind: function
+        summary: Attach `on_ice_home` / `on_ice_away` (comma-joined player ids) to every event from the shift stints.
+      - name: GOAL_EPSILON_S
+        kind: const
+        summary: The seconds of slack a goal gets when matched to a shift boundary (2).
+      - name: add_strength_state
+        kind: function
+        summary: '`skaters_home` / `skaters_away`, `strength_state` ("5v4", home first) and `strength_state_valid` from the on-ice lists.'
+      - name: corsi_fenwick
+        kind: function
+        summary: Team-level CF/CA/CF%, FF/FA/FF% — one row per team.
+      - name: corsi_fenwick_on_ice
+        kind: function
+        summary: Player-level on-ice CF/CA/FF/FA from an enriched play-by-play.
+      - name: backfill_power_play
+        kind: function
+        summary: Back-fill `power_play` / `short_handed` on shot and faceoff events inside a power-play window.
+      - name: enrich_pbp
+        kind: function
+        summary: The whole enrichment — game-meta columns, coordinates, clocks, power-play back-fill, shot geometry, on-ice and strength state (sdv-py `enrich_pbp`).
+      - name: EnrichOptions
+        kind: type
+        summary: Options of `enrich_pbp` — shifts, goalie ids, coordinate dialect.
+      - name: per60
+        kind: function
+        summary: A rate per 60 minutes from a count and seconds of ice time.
+      - name: player_toi
+        kind: function
+        summary: Per-player `toi_seconds`, `num_shifts`, `avg_shift_s` from a shifts frame.
+      - name: game_corsi_rows
+        kind: function
+        summary: Player-level on-ice Corsi/Fenwick joined to time on ice (the body of `<lg>_game_corsi`).
+
+  - module: src/analytics/hockeytech_family.ts
+    category: analytics
+    namespace: sdv.hockeytech
+    summary: >-
+      The league-parameterised HockeyTech analytics — fetch a game's shifts and play-by-play,
+      then run the pure frame functions. Mounted on `sdv.hockeytech` as `hockeytech_shift_stints` /
+      `hockeytech_player_toi` / `hockeytech_enriched_pbp` / `hockeytech_game_corsi` and, per
+      league, `<lg>_game_shifts` / `<lg>_player_toi` / `<lg>_pbp` / `<lg>_game_corsi`.
+    exports:
+      - name: hockeytechShiftStints
+        kind: function
+        summary: A game's shift stints (sdv-py `<lg>_game_shifts`).
+        aliases: [hockeytech_shift_stints]
+        example: |
+          const stints = await sdv.hockeytech.hockeytech_shift_stints({ league: 'pwhl', game_id: 42 });
+      - name: hockeytechPlayerToi
+        kind: function
+        summary: A game's per-player time on ice (sdv-py `<lg>_player_toi`).
+        aliases: [hockeytech_player_toi]
+      - name: hockeytechEnrichedPbp
+        kind: function
+        summary: A game's enriched play-by-play (sdv-py `<lg>_pbp`).
+        aliases: [hockeytech_enriched_pbp]
+      - name: hockeytechGameCorsi
+        kind: function
+        summary: A game's player-level on-ice Corsi/Fenwick with time on ice (sdv-py `<lg>_game_corsi`).
+        aliases: [hockeytech_game_corsi]
+      - name: buildHockeytechAnalytics
+        kind: function
+        summary: The three per-league callables (`<lg>_game_shifts`, `<lg>_player_toi`, `<lg>_game_corsi`) for one league slug.
+      - name: allHockeytechAnalytics
+        kind: function
+        summary: Every league's analytics callables, keyed by name — what `sdv.hockeytech` mounts.
+      - name: HockeytechAnalytics
+        kind: type
+        summary: The type of `allHockeytechAnalytics()`.
+
+  - module: src/odds/math.ts
+    category: odds
+    namespace: sdv.odds
+    summary: >-
+      Market math (ports of sdv-py `wexp.market`): implied probability from a price, vig removal
+      (multiplicative, Shin), spread -> probability, logit blending. Mounted on `sdv.odds` under
+      the py names and camelCase aliases; the Python-named errors under `sdv.odds.errors`.
+    exports:
+      - name: prob_from_american
+        kind: function
+        summary: Implied probability of an American price (`-110` -> 0.5238).
+        example: |
+          sdv.odds.prob_from_american(-110); // 0.5238…
+      - name: prob_from_decimal
+        kind: function
+        summary: Implied probability of a decimal price (`1.91` -> 0.5236).
+      - name: devig_multiplicative
+        kind: function
+        summary: Remove the vig by scaling the raw probabilities to sum to 1.
+      - name: devig_shin
+        kind: function
+        summary: Remove the vig with Shin's insider-trading model (falls back to multiplicative at overround <= 0).
+      - name: spread_to_prob
+        kind: function
+        summary: Cover probability of a point spread under a normal margin with standard deviation `sigma`.
+      - name: logit_blend
+        kind: function
+        summary: Blend two probabilities on the logit scale with weight `weight_a` on the first.
+      - name: moneyline_pair_prob
+        kind: function
+        summary: The home win probability from a home / away moneyline pair after vig removal (`multiplicative` or `shin`).
+      - name: oddsMath
+        kind: const
+        summary: The functions above as one object (what `sdv.odds` spreads in).
+      - name: oddsErrors
+        kind: const
+        summary: The errors below keyed by their Python names (`ValueError`, …) — `sdv.odds.errors`.
+      - name: OddsValueError
+        kind: class
+        summary: A bad price or probability (py `ValueError`).
+      - name: OddsZeroDivisionError
+        kind: class
+        summary: A division by zero in the market math (py `ZeroDivisionError`).
+      - name: OddsOverflowError
+        kind: class
+        summary: An overflow in the market math (py `OverflowError`).
+      - name: OddsRuntimeError
+        kind: class
+        summary: The Shin solver could not bracket a root (py `RuntimeError`).
+
+  - module: src/models/cricket_wp.ts
+    category: models
+    namespace: sdv.cricket
+    summary: >-
+      Cricket in-play win probability (port of sdv-py `cricket/cricket_wp.py` + `cricket_wpa.py`):
+      match state from an ESPN summary, a resource-based projection fitted on Cricsheet T20I / ODI
+      2002-2026, expected runs and win-probability added. Pure and offline; mounted on
+      `sdv.cricket` as `cricket_*` with camelCase aliases.
+    exports:
+      - name: cricket_match_state
+        kind: function
+        summary: Over-level match state from an ESPN cricket summary / scoreboard event — one row per innings with a parseable score.
+        aliases: [cricketMatchState]
+        example: |
+          const state = sdv.cricket.cricket_match_state(summary, { fmt: 't20' });
+          const wp = sdv.cricket.cricket_win_probability(state);
+      - name: cricket_win_probability
+        kind: function
+        summary: In-play win probability of the batting / chasing team from match-state rows.
+        aliases: [cricketWinProbability]
+      - name: cricket_expected_runs
+        kind: function
+        summary: Expected final runs from the projection (`proj_final`) and overs left.
+        aliases: [cricketExpectedRuns]
+      - name: cricket_wpa
+        kind: function
+        summary: Batting / bowling win-probability added — the change in `win_prob` within an innings.
+        aliases: [cricketWpa]
+      - name: parse_score_string
+        kind: function
+        summary: '`"185/4 (18.3 ov)"` -> `[runs, wickets, balls, target]`, or `null`.'
+        aliases: [parseScoreString, cricket_parse_score_string]
+      - name: get_format
+        kind: function
+        summary: The fitted resource constants of a format (`t20`, `odi`).
+        aliases: [getFormat, cricket_get_format]
+      - name: norm_cdf
+        kind: function
+        summary: The standard normal CDF.
+      - name: FORMAT_TABLE
+        kind: const
+        summary: The fitted constants per format.
+      - name: FormatConstants
+        kind: type
+        summary: A format's fitted constants.
+      - name: CricketState
+        kind: type
+        summary: One match-state row.
+      - name: CricketWinProb
+        kind: type
+        summary: A match-state row with `win_prob` and the projection.
+      - name: CricketExpectedRuns
+        kind: type
+        summary: A win-probability row with `exp_runs`.
+      - name: CricketWpa
+        kind: type
+        summary: A win-probability row with `wpa_batting` / `wpa_bowling`.
+
+  - module: src/producers/espn_basketball_box.ts
+    category: producers
+    namespace: sdv.<nba|wnba|mbb|wbb>
+    summary: >-
+      ESPN basketball box-score producers (ports of sdv-py `helper_<lg>_player_box` /
+      `helper_<lg>_team_box`): one ESPN summary payload in, the release-shaped player and team
+      box rows out. Pure; mounted on `sdv.nba` / `sdv.wnba` / `sdv.mbb` / `sdv.wbb`.
+    exports:
+      - name: helper_nba_player_box
+        kind: function
+        summary: NBA player box rows from a summary payload.
+        aliases: [helperNbaPlayerBox]
+        example: |
+          const summary = await sdv.nba.espnNbaSummary({ event_id: 401585601 });
+          const box = sdv.nba.helper_nba_player_box(summary);
+      - name: helper_wnba_player_box
+        kind: function
+        summary: WNBA player box rows from a summary payload.
+        aliases: [helperWnbaPlayerBox]
+      - name: helper_mbb_player_box
+        kind: function
+        summary: Men's college basketball player box rows from a summary payload.
+        aliases: [helperMbbPlayerBox]
+      - name: helper_wbb_player_box
+        kind: function
+        summary: Women's college basketball player box rows from a summary payload.
+        aliases: [helperWbbPlayerBox]
+      - name: helper_nba_team_box
+        kind: function
+        summary: NBA team box rows from a summary payload.
+        aliases: [helperNbaTeamBox]
+      - name: helper_wnba_team_box
+        kind: function
+        summary: WNBA team box rows from a summary payload.
+        aliases: [helperWnbaTeamBox]
+      - name: helper_mbb_team_box
+        kind: function
+        summary: Men's college basketball team box rows from a summary payload.
+        aliases: [helperMbbTeamBox]
+      - name: helper_wbb_team_box
+        kind: function
+        summary: Women's college basketball team box rows from a summary payload.
+        aliases: [helperWbbTeamBox]
+      - name: BASKETBALL_BOX_PRODUCERS
+        kind: const
+        summary: The producers above keyed by league then name — what src/index.ts mounts.
+
+  - module: src/producers/espn_basketball_pbp.ts
+    category: producers
+    namespace: sdv.<nba|wnba|mbb|wbb>
+    summary: >-
+      ESPN basketball play-by-play producers (ports of sdv-py `helper_<lg>_pickcenter` /
+      `helper_<lg>_game_data` / `helper_<lg>_pbp_features` / `helper_<lg>_pbp`) and the
+      `espn_<lg>_pbp` fetch-and-build. Mounted on `sdv.nba` / `sdv.wnba` / `sdv.mbb` / `sdv.wbb`.
+    exports:
+      - name: helper_nba_pickcenter
+        kind: function
+        summary: NBA pickcenter metadata — spread, over/under, home favorite — as plain scalars.
+        aliases: [helperNbaPickcenter]
+      - name: helper_nba_game_data
+        kind: function
+        summary: NBA home / away identification — `[pbp_txt, init]`.
+        aliases: [helperNbaGameData]
+      - name: helper_nba_pbp_features
+        kind: function
+        summary: The NBA play-by-play feature frame (clock, score, lineups, timeouts) from a summary payload.
+        aliases: [helperNbaPbpFeatures]
+      - name: helper_nba_pbp
+        kind: function
+        summary: The NBA play-by-play result — `{ plays, timeouts, … }` — from a summary payload.
+        aliases: [helperNbaPbp]
+        example: |
+          const pbp = await sdv.nba.espn_nba_pbp({ game_id: 401585601 });
+          pbp.plays.length;
+      - name: helper_wnba_pickcenter
+        kind: function
+        summary: WNBA pickcenter metadata as plain scalars.
+        aliases: [helperWnbaPickcenter]
+      - name: helper_wnba_game_data
+        kind: function
+        summary: WNBA home / away identification.
+        aliases: [helperWnbaGameData]
+      - name: helper_wnba_pbp_features
+        kind: function
+        summary: The WNBA play-by-play feature frame.
+        aliases: [helperWnbaPbpFeatures]
+      - name: helper_wnba_pbp
+        kind: function
+        summary: The WNBA play-by-play result from a summary payload.
+        aliases: [helperWnbaPbp]
+      - name: helper_mbb_pickcenter
+        kind: function
+        summary: Men's college basketball pickcenter metadata as plain scalars.
+        aliases: [helperMbbPickcenter]
+      - name: helper_mbb_game_data
+        kind: function
+        summary: Men's college basketball home / away identification.
+        aliases: [helperMbbGameData]
+      - name: helper_mbb_pbp_features
+        kind: function
+        summary: The men's college basketball play-by-play feature frame.
+        aliases: [helperMbbPbpFeatures]
+      - name: helper_mbb_pbp
+        kind: function
+        summary: The men's college basketball play-by-play result from a summary payload.
+        aliases: [helperMbbPbp]
+      - name: helper_wbb_pickcenter
+        kind: function
+        summary: Women's college basketball pickcenter metadata as plain scalars.
+        aliases: [helperWbbPickcenter]
+      - name: helper_wbb_game_data
+        kind: function
+        summary: Women's college basketball home / away identification.
+        aliases: [helperWbbGameData]
+      - name: helper_wbb_pbp_features
+        kind: function
+        summary: The women's college basketball play-by-play feature frame.
+        aliases: [helperWbbPbpFeatures]
+      - name: helper_wbb_pbp
+        kind: function
+        summary: The women's college basketball play-by-play result from a summary payload.
+        aliases: [helperWbbPbp]
+      - name: BASKETBALL_PBP_PRODUCERS
+        kind: const
+        summary: The producers above keyed by league then name — what src/index.ts mounts.
+      - name: PbpResult
+        kind: type
+        summary: The play-by-play result — `plays` rows plus the `timeouts` id lists and py's scalar keys.
+      - name: EspnPbpOptions
+        kind: type
+        summary: Options of `espn_<lg>_pbp` (`raw` keeps the whole dict).
+      - name: League
+        kind: type
+        summary: '`"nba" | "wnba" | "mbb" | "wbb"`.'
+
+  - module: src/discover.ts
+    category: discovery
+    summary: >-
+      Discovery and name -> id lookup (port of sdv-py `discover.py` / `find.py`), built over the
+      live registries so renamed or new wrappers appear with no edit.
+    exports:
+      - name: listFunctions
+        kind: function
+        summary: "Index of callable functions — a sorted name array for one namespace, or an object keyed by namespace; `search` filters, `parsersOnly` / `wrappersOnly` narrow; each entry is labelled `data` or `utility` (with its category) through `listFunctions(ns, { detail: true })`."
+        aliases: [list_functions]
+        example: |
+          const fns = await sdv.listFunctions('nba', { search: 'roster' });
+      - name: functionCount
+        kind: function
+        summary: Number of callable functions per namespace, or in one.
+        aliases: [function_count]
+      - name: findTeam
+        kind: function
+        summary: Resolve a team name / abbreviation (case-insensitive substring) to ESPN team metadata.
+        aliases: [find_team]
+      - name: findAthlete
+        kind: function
+        summary: Resolve an athlete name through team rosters (`team` narrows to one roster).
+        aliases: [find_athlete]
+      - name: findEvent
+        kind: function
+        summary: Resolve a game on a date to its ESPN event, optionally by home / away team.
+        aliases: [find_event]
+      - name: clearTeamCache
+        kind: function
+        summary: Reset the in-process team-list cache (one league, or all).
+        aliases: [clear_team_cache]
+      - name: ListFunctionsOptions
+        kind: type
+        summary: Options of `listFunctions`.
+      - name: Namespaces
+        kind: type
+        summary: The namespace map `listFunctions` indexes (default - the package default export).
+      - name: FunctionEntry
+        kind: type
+        summary: A detailed `listFunctions` row — `{ name, kind, category? }`.
+
+  - module: src/core/transforms.ts
+    category: transforms
+    import: sportsdataverse/dist/core/transforms.js
+    summary: >-
+      Parameter transforms named in the endpoint YAML (`transform:`), applied to a resolved
+      argument before the request — ports of the sdv-py runtime functions of the same names.
+    exports:
+      - name: bool_str
+        kind: function
+        summary: '`sportsdataverse._codegen_runtime.bool_str` — a truthy value sends `"true"`, a falsy one `"false"`.'
+      - name: _bool_str
+        kind: function
+        summary: '`nfl_api_runtime._bool_str` — `str(value).lower()`.'
+      - name: format_nhl_season
+        kind: function
+        summary: A 4-digit end year -> the 8-digit NHL api-web season (`2025` -> `"20242025"`); 8 digits pass through.
+      - name: season_latest_with_data
+        kind: function
+        summary: 'The stats.nba.com / stats.wnba.com season default: the season unchanged, or, when unset, the latest season with rows (re-dated per request).'
+      - name: latestSeason
+        kind: function
+        summary: The latest season with rows on a date for a league id, endpoint and season type (sdv-py `_latest_season`).
+      - name: redateDefaultSeasons
+        kind: function
+        summary: Re-date every wrapper-filled `Season` / `SeasonYear` of a query for the request's league, endpoint and `SeasonType`.
+      - name: DefaultSeason
+        kind: class
+        summary: A season the wrapper filled in (not the caller's) — what `redateDefaultSeasons` re-dates.
+      - name: TRANSFORMS
+        kind: const
+        summary: The transform registry — YAML name -> function.
+      - name: applyTransform
+        kind: function
+        summary: Apply a named transform to a value (unknown name throws).
+      - name: ParamTransform
+        kind: type
+        summary: A transform — resolved value -> wire value.
+
+  - module: src/index.ts
+    category: transforms
+    summary: The tidy.js toolkit, re-exported so parsed rows can be piped through grammar-of-data verbs.
+    sources: []
+    exports:
+      - name: tidy
+        kind: const
+        summary: '`@tidyjs/tidy` as a namespace object — `tidy.tidy(rows, tidy.groupBy(…), tidy.summarize(…))`.'
+        example: |
+          import { tidy } from 'sportsdataverse';
+          tidy.tidy(rows, tidy.groupBy('team', tidy.summarize({ n: tidy.n() })));
+      - name: Sdv
+        kind: type
+        summary: The type of the default export — every namespace's generated, legacy and hand-written members.
+
+  - module: src/core/request.ts
+    category: http-core
+    import: sportsdataverse/dist/core/request.js
+    summary: >-
+      The one request pipeline every wrapper and loader goes through: family config -> auth ->
+      transport -> retry / backoff -> error classification.
+    exports:
+      - name: request
+        kind: function
+        summary: Fetch through the family's transport + auth and return the body; a non-2xx after retries throws the family's error.
+      - name: requestResponse
+        kind: function
+        summary: Like `request` but resolves with the whole response (status, headers, data).
+      - name: retryDelayMs
+        kind: function
+        summary: The wait before retry `attempt + 1` — `Retry-After` (capped at 120s) or exponential backoff (0.5s doubling, capped at 4s, jittered).
+      - name: jsonBody
+        kind: function
+        summary: Decode a JSON-labelled body (sdv-py `_json_body`) — a body that does not decode is a failed fetch.
+
+  - module: src/core/transport.ts
+    category: http-core
+    summary: Transports — the axios default and the browser-impersonating one — plus the query serialiser.
+    exports:
+      - name: axiosTransport
+        kind: const
+        summary: The default transport (axios); never throws on an HTTP status, only on a network failure.
+      - name: createImpersonatingTransport
+        kind: function
+        summary: A transport that impersonates a browser's TLS / HTTP-2 fingerprint (optional peer `impit`) for hosts that stall non-browser clients (stats.nba.com).
+        example: |
+          import { configure, createImpersonatingTransport } from 'sportsdataverse';
+          configure({ transport: { nba_stats: createImpersonatingTransport() } });
+      - name: encodeQuery
+        kind: function
+        summary: Serialise a query map — `null` / `undefined` dropped, arrays as repeated keys, a `Date` as ISO-8601 UTC.
+      - name: Transport
+        kind: type
+        summary: '`(req: TransportRequest) => Promise<TransportResponse>`.'
+      - name: TransportRequest
+        kind: type
+        summary: What a transport receives — method, url, query, headers, body, timeout.
+      - name: TransportResponse
+        kind: type
+        summary: What a transport resolves — status, headers, data.
+
+  - module: src/core/auth.ts
+    category: http-core
+    summary: Auth providers that decorate a request with credentials — static headers / query, a minted token, a logged-in session.
+    exports:
+      - name: bearerAuth
+        kind: function
+        summary: '`Authorization: Bearer <token>`; `token` may be an (async) getter.'
+      - name: headerAuth
+        kind: function
+        summary: Fixed headers on every request.
+      - name: queryAuth
+        kind: function
+        summary: Fixed query params on every request (e.g. an `apiKey`).
+      - name: tokenAuth
+        kind: function
+        summary: A minted token, cached in-process and re-minted before `expiresAt`; concurrent requests share one mint.
+      - name: sessionAuth
+        kind: function
+        summary: A logged-in session whose headers and cookies ride on every request; `refresh` logs in again.
+      - name: AuthProvider
+        kind: type
+        summary: '`apply` decorates a request, `refresh` re-authenticates after a 401; both throw on failure.'
+      - name: AuthContext
+        kind: type
+        summary: What a provider sees — the family, the request and the previous response.
+
+  - module: src/core/releases.ts
+    category: http-core
+    summary: The release-asset loader core behind every generated `load*` — parquet download, size guard, decode, the integer-id policy.
+    exports:
+      - name: RELEASES_FAMILY
+        kind: const
+        summary: The transport family of release downloads (`"releases"`).
+      - name: ReleaseRow
+        kind: type
+        summary: A loaded row — `Record<string, unknown>`.
+      - name: ReleaseColumns
+        kind: type
+        summary: "A dataset in column form (`format: \"columns\"`) for rows of type `R`."
+      - name: ReleaseLoaderOptions
+        kind: type
+        summary: '`columns`, `format`, `maxCells`, `timeoutMs`.'
+      - name: SeasonLoaderOptions
+        kind: type
+        summary: The options of a per-season loader — `seasons` plus `ReleaseLoaderOptions`.
+      - name: SeasonLoader
+        kind: type
+        summary: "A per-season loader of rows `R` (rows by default, column arrays with `format: \"columns\"`)."
+      - name: AssetLoader
+        kind: type
+        summary: A single-asset loader of rows `R`.
+
+  - module: src/core/types.ts
+    category: http-core
+    summary: The wrapper type vocabulary — league / wrapper defs, the `Wrapper` / `SectionedWrapper` call signatures, params helpers and row types.
+    exports:
+      - name: LeagueConfig
+        kind: type
+        summary: One ESPN league's config — sport / league slugs, prefix, scopes, public shorts.
+      - name: EspnFamily
+        kind: type
+        summary: The ESPN host families — `site_v2` | `site_v2_alt` | `web_v3` | `core_v2` | `fitt_v3` | `cdn`.
+      - name: Scope
+        kind: type
+        summary: An endpoint's league scope — `universal` | `ncaa` | `football` | `mlb`.
+      - name: WrapperFn
+        kind: type
+        summary: Any wrapper — `(params?) => Promise<any>`.
+      - name: WrapperDef
+        kind: type
+        summary: A generated endpoint definition — family / host / path / params / parser.
+      - name: QueryParam
+        kind: type
+        summary: A query param def — name, query key, default, transform.
+      - name: PathParam
+        kind: type
+        summary: A path param def — name, required, default.
+      - name: Row
+        kind: type
+        summary: A parsed row — `Record<string, unknown>`.
+      - name: ParserRow
+        kind: type
+        summary: Alias of `Row` (what every parser returns).
+      - name: Wrapper
+        kind: type
+        summary: "A one-table wrapper — the raw payload, or `P` with `parsed: true`."
+      - name: SectionedWrapper
+        kind: type
+        summary: "A multi-table wrapper — the raw payload, `P` with `parsed: true`, or one table with `section`."
+      - name: WrapperParams
+        kind: type
+        summary: The untyped params bag.
+      - name: NoParams
+        kind: type
+        summary: An endpoint with no params.
+      - name: OptionalParams
+        kind: type
+        summary: Optional params, each also under its camelCase alias.
+      - name: RequiredParam
+        kind: type
+        summary: One required param, under its snake or camelCase name.
+      - name: LeagueParam
+        kind: type
+        summary: '`{ league?: string | null }` — the soccer / cricket league override.'
+      - name: ParamsArg
+        kind: type
+        summary: The params argument tuple — optional when every param is.
+      - name: SnakeToCamel
+        kind: type
+        summary: '`"team_id"` -> `"teamId"` at the type level.'
+
+  - module: src/core/client.ts
+    category: http-core
+    summary: ESPN host roots and the flat-family base URLs.
+    sources: [src/core/client.ts, src/core/flat.ts, src/leagues/_make.ts, src/leagues/_make_flat.ts]
+    exports:
+      - name: FLAT_HOSTS
+        kind: const
+        summary: Flat family api stem -> host root.
+      - name: resolveFlat
+        kind: function
+        summary: Resolve a flat wrapper def + params to the URL and query it sends.
+      - name: makeLeagueModule
+        kind: function
+        summary: Build an ESPN league's wrapper module from a `LeagueConfig` at runtime (the written modules under src/generated/espn/ replace this for the shipped leagues).
+      - name: makeFlatModule
+        kind: function
+        summary: Build a flat family's wrapper module from its defs at runtime.
+
+  - module: src/core/nfl_auth.ts
+    category: http-core
+    summary: NFL.com Shield API auth — the token mint behind the `nfl_api` family.
+    exports:
+      - name: nflTokenGen
+        kind: function
+        summary: Mint (or reuse) an NFL.com access token.
+      - name: nflHeadersGen
+        kind: function
+        summary: The authenticated request headers for the NFL.com Shield API.
+      - name: nflClearTokenCache
+        kind: function
+        summary: Forget the cached NFL.com token.
+      - name: jwtExp
+        kind: function
+        summary: The `exp` claim of a JWT (unix seconds), or `undefined`.
+      - name: NFL_API_HOST
+        kind: const
+        summary: The NFL.com Shield API host.
+      - name: NflTokenOptions
+        kind: type
+        summary: Options of `nflTokenGen`.
+
+  - module: src/core/pff_api_runtime.ts
+    category: http-core
+    summary: Subscription-family helpers beyond the generated wrappers — PFF Developer API, KenPom, NFL Pro, 247Sports.
+    sources:
+      - src/core/pff_api_runtime.ts
+      - src/core/kenpom_runtime.ts
+      - src/core/nfl_pro_runtime.ts
+      - src/core/sports247_runtime.ts
+    exports:
+      - name: resolvePffApiKey
+        kind: function
+        summary: The PFF API key a call will use — `api_key`, an `Authorization` header, `SDV_PFF_API_KEY`, `PFF_API_KEY`.
+      - name: hasKenpomLogin
+        kind: function
+        summary: Whether KenPom credentials are available (call args or environment).
+      - name: kenpomLogin
+        kind: function
+        summary: Log in to kenpom.com once and cache the session.
+      - name: kenpomClearSessionCache
+        kind: function
+        summary: Forget the cached KenPom session.
+      - name: nflProToken
+        kind: function
+        summary: The NFL Pro bearer token a call will use (argument, `NFLPRO_TOKEN`, or a browser login).
+      - name: nflProBrowserLogin
+        kind: function
+        summary: Log in to NFL Pro with a headless browser (optional `playwright`) and return the token.
+      - name: nflProClearTokenCache
+        kind: function
+        summary: Forget the cached NFL Pro token.
+      - name: NflProAuthError
+        kind: class
+        summary: NFL Pro could not authenticate (no token, no plan, a failed browser login).
+      - name: PlaywrightLike
+        kind: type
+        summary: The minimal `playwright` surface `nflProBrowserLogin` needs.
+      - name: sports247ClearTokenCache
+        kind: function
+        summary: Forget the cached 247Sports guest token.
+
+  - module: src/core/errors.ts
+    category: errors
+    summary: >-
+      The error vocabulary. `NoDataError` means the fetch worked and nothing is there (404, ESPN's
+      `{ code: 404 }`); `AssetFetchError` means the fetch failed and the answer is unknown (403 /
+      429 / 5xx after retries, a network error, an empty or non-JSON 2xx). They are never collapsed.
+    exports:
+      - name: SdvError
+        kind: class
+        summary: Base class of every error the package raises; `cause` is always redacted.
+      - name: NoDataError
+        kind: class
+        summary: "The fetch succeeded and there is nothing there (HTTP 404, ESPN `{ code: 404 }`)."
+        example: |
+          try { await sdv.nba.espnNbaSummary({ event_id: 1 }); }
+          catch (e) { if (e instanceof NoDataError) console.log('no such game'); else throw e; }
+      - name: AssetFetchError
+        kind: class
+        summary: The fetch failed (403 / 429 / 5xx after retries, network, an unusable 2xx body); carries `status`, `url`, `cause`.
+      - name: InvalidParameterError
+        kind: class
+        summary: The server rejected the request's parameters (HTTP 400 / 422); never retried.
+      - name: SeasonNotFoundError
+        kind: class
+        summary: A season below a loader's floor, raised before anything is fetched.
+      - name: TransportUnavailableError
+        kind: class
+        summary: An optional transport dependency (`impit`) is not installed.
+      - name: NoESPNDataError
+        kind: class
+        summary: Back-compat alias of `NoDataError` (the error was ESPN-only when it was named).
+      - name: FetchErrorDetails
+        kind: type
+        summary: The `status` / `url` / `cause` an `AssetFetchError` carries.
+
+  - module: src/core/config.ts
+    category: config
+    summary: Per-family transport, auth, retry budget, timeout and User-Agent; family runtimes register their defaults here.
+    sources: [src/core/config.ts, src/core/deprecation.ts]
+    exports:
+      - name: configure
+        kind: function
+        summary: Set the transport, auth, retries, timeout or User-Agent (per family or `default`); calls merge.
+        example: |
+          import { configure, bearerAuth } from 'sportsdataverse';
+          configure({ auth: { pff_api: bearerAuth(process.env.PFF_API_KEY) }, retries: 2 });
+      - name: getConfig
+        kind: function
+        summary: The current configuration.
+      - name: resetConfig
+        kind: function
+        summary: Back to the defaults (registered family defaults stay).
+      - name: registerFamilyDefaults
+        kind: function
+        summary: For family runtimes — install the transport / auth / retry statuses a family needs by default; a user `configure` entry wins.
+      - name: DEFAULT_RETRY_STATUSES
+        kind: const
+        summary: The statuses retried by default — 403, 408, 429, 500, 502, 503, 504 (sdv-py `_RETRYABLE_STATUS`).
+      - name: ConfigureOptions
+        kind: type
+        summary: The argument of `configure`.
+      - name: SdvConfig
+        kind: type
+        summary: What `getConfig` returns.
+      - name: FamilyDefaults
+        kind: type
+        summary: What a family runtime registers.
+      - name: DEPRECATED_NAME_CODE
+        kind: const
+        summary: '`code` of the DeprecationWarning a pre-v4 name emits (`SDV_DEPRECATED_NAME`), to filter on.'
+      - name: DEPRECATED_ENDPOINT_CODE
+        kind: const
+        summary: '`code` of the DeprecationWarning a deprecated endpoint emits (`SDV_DEPRECATED_ENDPOINT`).'

@@ -11,9 +11,28 @@
  */
 import { PARSERS } from './parsers/_registry.js';
 import { NoDataError, SdvError } from './core/errors.js';
+import { UTILITY_CATEGORIES, type UtilityCategory } from './generated/utilities.js';
 
 type Fn = (...a: any[]) => any;
 export type Namespaces = Record<string, Record<string, any>>;
+
+/**
+ * One row of `listFunctions(…, { detail: true })`: a callable's name, whether it fetches
+ * data (`data`: an ESPN / native wrapper, a `load*` loader, a legacy `get*` method) or is a
+ * hand-written utility (`utility`: parsers, analytics, odds math, models, producers — the
+ * names tools/codegen/utilities.yaml catalogues), and the utility's category.
+ */
+export interface FunctionEntry {
+  name: string;
+  kind: 'data' | 'utility';
+  category?: UtilityCategory;
+}
+
+/** Label a callable: `utility` + its category when the utilities table lists it, else `data`. */
+function classify(name: string): FunctionEntry {
+  const category = UTILITY_CATEGORIES[name];
+  return category ? { name, kind: 'utility', category } : { name, kind: 'data' };
+}
 
 const toCamel = (s: string): string => s.replace(/_([a-z0-9])/g, (_m, c: string) => c.toUpperCase());
 
@@ -42,19 +61,44 @@ export interface ListFunctionsOptions {
   parsersOnly?: boolean;
   /** Exclude `parse_*` names. */
   wrappersOnly?: boolean;
+  /**
+   * Return {@link FunctionEntry} rows (`{ name, kind, category? }`) instead of bare names:
+   * `kind` is `utility` for a hand-written non-data export (tools/codegen/utilities.yaml),
+   * `data` for everything else.
+   */
+  detail?: boolean;
 }
 
 /**
  * Index of callable functions. With `league` returns a sorted name array;
- * without, an object keyed by namespace (empty namespaces omitted).
- * Throws on an unknown league or when `parsersOnly` and `wrappersOnly` are both set.
+ * without, an object keyed by namespace (empty namespaces omitted). With
+ * `detail: true` each name is a {@link FunctionEntry} (`kind: 'data' | 'utility'` + category).
+ *
+ * @param league - one namespace (`'nba'`, `'odds'`, …), or `null` / omitted for every namespace.
+ * @param opts - `search` (case-insensitive substring), `parsersOnly` / `wrappersOnly`, `detail`.
+ * @param ns - the namespace map to index (default: the package default export; injectable for tests).
+ * @returns Names (or entries) for one namespace, or an object keyed by namespace.
+ * @throws Error on an unknown league, or when `parsersOnly` and `wrappersOnly` are both set.
+ * @example
+ * const rosterFns = await listFunctions('nba', { search: 'roster' });
+ * const typed = await listFunctions('odds', { detail: true }); // [{ name: 'devig_shin', kind: 'utility', category: 'odds' }, …]
  */
+export async function listFunctions(
+  league: string | null | undefined,
+  opts: ListFunctionsOptions & { detail: true },
+  ns?: Namespaces,
+): Promise<FunctionEntry[] | Record<string, FunctionEntry[]>>;
+export async function listFunctions(
+  league?: string | null,
+  opts?: ListFunctionsOptions,
+  ns?: Namespaces,
+): Promise<string[] | Record<string, string[]>>;
 export async function listFunctions(
   league?: string | null,
   opts: ListFunctionsOptions = {},
   ns?: Namespaces,
-): Promise<string[] | Record<string, string[]>> {
-  const { search, parsersOnly = false, wrappersOnly = false } = opts;
+): Promise<string[] | Record<string, string[]> | FunctionEntry[] | Record<string, FunctionEntry[]>> {
+  const { search, parsersOnly = false, wrappersOnly = false, detail = false } = opts;
   if (parsersOnly && wrappersOnly) throw new Error('parsersOnly and wrappersOnly are mutually exclusive');
   const needle = (search ?? '').toLowerCase();
   const filter = (names: string[]): string[] => {
@@ -64,21 +108,22 @@ export async function listFunctions(
     if (wrappersOnly) out = out.filter((n) => !n.startsWith('parse_'));
     return out;
   };
-  if (parsersOnly) return filter(Object.keys(PARSERS).sort());
+  const shape = (names: string[]): string[] | FunctionEntry[] => (detail ? names.map(classify) : names);
+  if (parsersOnly) return shape(filter(Object.keys(PARSERS).sort()));
   const space = ns ?? (await defaultNs());
   if (league != null) {
     const key = league.toLowerCase();
     if (!(key in space)) {
       throw new Error(`Unknown league '${key}'. Choose one of ${Object.keys(space).sort().join(', ')}.`);
     }
-    return filter(listNamespace(space[key]));
+    return shape(filter(listNamespace(space[key])));
   }
-  const out: Record<string, string[]> = {};
+  const out: Record<string, string[] | FunctionEntry[]> = {};
   for (const [k, mod] of Object.entries(space)) {
     const names = filter(listNamespace(mod));
-    if (names.length) out[k] = names;
+    if (names.length) out[k] = shape(names);
   }
-  return out;
+  return out as Record<string, string[]> | Record<string, FunctionEntry[]>;
 }
 
 /** Count of callable functions per namespace, or in one namespace. */

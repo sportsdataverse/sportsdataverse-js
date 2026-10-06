@@ -59,15 +59,16 @@ const BOXSCORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-secure.sports.yahoo.com/v1/editorial/s/boxscore/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
- * @param params.v - query parameter — default `4`.
- * @param params.polling - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `{game_id}` path segment.
+ * @param params.lang - `number | string` — the `lang` query parameter; default `en-US`.
+ * @param params.region - `number | string` — the `region` query parameter; default `US`.
+ * @param params.tz - `number | string` — the `tz` query parameter; default `America/Chicago`.
+ * @param params.v - `number | string` — the `v` query parameter; default `4`.
+ * @param params.polling - `number | string` — the `polling` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooScoresBoxscore({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports-scores
  */
 export const yahooScoresBoxscore: Wrapper<Row[], YahooScoresBoxscoreParams> = (params: WrapperParams = {}) => callFlat(BOXSCORE_DEF, params);
 /** snake_case alias of {@link yahooScoresBoxscore} (py/R parity). */
@@ -133,18 +134,19 @@ const SCOREBOARD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-secure.sports.yahoo.com/v1/editorial/s/scoreboard`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
- * @param params.leagues - query parameter.
- * @param params.week - query parameter.
- * @param params.season - query parameter.
- * @param params.conferences - query parameter.
- * @param params.count - query parameter — default `500`.
- * @param params.v - query parameter — default `2`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.lang - `number | string` — the `lang` query parameter; default `en-US`.
+ * @param params.region - `number | string` — the `region` query parameter; default `US`.
+ * @param params.tz - `number | string` — the `tz` query parameter; default `America/Chicago`.
+ * @param params.leagues - `number | string` — the `leagues` query parameter.
+ * @param params.week - `number | string` — the `week` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.conferences - `number | string` — the `conferences` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter; default `500`.
+ * @param params.v - `number | string` — the `v` query parameter; default `2`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooScoresScoreboard({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports-scores
  */
 export const yahooScoresScoreboard: Wrapper<Row[], YahooScoresScoreboardParams> = (params: WrapperParams = {}) => callFlat(SCOREBOARD_DEF, params);
 /** snake_case alias of {@link yahooScoresScoreboard} (py/R parity). */

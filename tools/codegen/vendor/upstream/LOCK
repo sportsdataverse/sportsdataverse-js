@@ -29,6 +29,7 @@ b2b250211ad6f78e961cfcd056fbef8021e06717  endpoints/sports247.yaml
 15bfb1cc8d2e9f5a0885d64996c54b466993c9e9  endpoints/wnba_stats.yaml
 f80d67c88c673b523cf5d921eba3a563b457fa24  endpoints/yahoo_shangrila.yaml
 27e776b2c23a4dc875141df8f9050c2ddec8280d  espn_rename_map.yaml
+b01d35151bac4f0b58e164353bdf56c5563b5571  manual_column_descriptions.yaml
 2fd9ea7a2f1616aecc16eaa34cdfd3d6f4740f10  py/sportsdataverse/baseball/college_baseball/college_baseball_espn_ext.py
 a197f9cf605b1f66f6e942b7c5e0a0a52bc8ad65  py/sportsdataverse/baseball/college_softball/college_softball_espn_ext.py
 39ecfa762c288504376c1964c537991a19dd7351  py/sportsdataverse/cbs/cbs_napi.py
@@ -82,6 +83,7 @@ c62e9d531ece8efd756bddee1019b1bc5efbace6  py/sportsdataverse/wbb/wbb_espn_ext.py
 4ed8f13beb7a764bdf28b2dc7242f3e125e5d76c  py/sportsdataverse/wnba/wnba_espn_ext.py
 44333d1b4b814fa854854dc1f8236984254d22d1  py/sportsdataverse/wnba/wnba_stats.py
 21c45f0378c0a1f2ac6f5aadd23712f44ab323f1  py/sportsdataverse/yahoo/yahoo_shangrila.py
+ecc27e473ab05520dbca9202e0ea00a427715077  r_column_descriptions.yaml
 16578a94080620466beb4e82c59b1303ec44507a  schemas/cdn_rankings/cfb.yaml
 cf2969a6cecd2f1f4291cde4445489408eff99e4  schemas/cdn_scoreboard.yaml
 66d9c63013519ef9f8f41db3ab38d8c5f534b3ea  schemas/injuries.yaml

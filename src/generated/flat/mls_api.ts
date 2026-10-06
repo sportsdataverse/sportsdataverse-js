@@ -56,10 +56,11 @@ const CLUB_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats-api.mlssoccer.com/clubs/{club_id}`
  *
- * @param params.club_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.club_id - `number | string` — the `{club_id}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`MlsApiClubRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mls.mlsClub({ club_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mls/reference/native#native-api--mls-web-api
  */
 export const mlsClub: Wrapper<MlsApiClubRow[], MlsClubParams> = (params: WrapperParams = {}) => callFlat(CLUB_DEF, params);
 /** snake_case alias of {@link mlsClub} (py/R parity). */
@@ -88,10 +89,11 @@ const COMPETITION_SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats-api.mlssoccer.com/competitions/{competition_id}/seasons`
  *
- * @param params.competition_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.competition_id - `number | string` — the `{competition_id}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`MlsApiCompetitionSeasonsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mls.mlsCompetitionSeasons({ competition_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mls/reference/native#native-api--mls-web-api
  */
 export const mlsCompetitionSeasons: Wrapper<MlsApiCompetitionSeasonsRow[], MlsCompetitionSeasonsParams> = (params: WrapperParams = {}) => callFlat(COMPETITION_SEASONS_DEF, params);
 /** snake_case alias of {@link mlsCompetitionSeasons} (py/R parity). */
@@ -116,9 +118,10 @@ const COMPETITIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats-api.mlssoccer.com/competitions`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`MlsApiCompetitionsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mls.mlsCompetitions({});
+ * @see https://js.sportsdataverse.org/docs/mls/reference/native#native-api--mls-web-api
  */
 export const mlsCompetitions: Wrapper<MlsApiCompetitionsRow[], MlsCompetitionsParams> = (params: WrapperParams = {}) => callFlat(COMPETITIONS_DEF, params);
 /** snake_case alias of {@link mlsCompetitions} (py/R parity). */
@@ -147,10 +150,11 @@ const CONTENT_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://dapi.mlssoccer.com/v2/content/en-us/seasons/{slug}`
  *
- * @param params.slug - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.slug - `number | string` — the `{slug}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mls.mlsContentSeason({ slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/mls/reference/native#native-api--mls-web-api
  */
 export const mlsContentSeason: Wrapper<Row[], MlsContentSeasonParams> = (params: WrapperParams = {}) => callFlat(CONTENT_SEASON_DEF, params);
 /** snake_case alias of {@link mlsContentSeason} (py/R parity). */
@@ -184,11 +188,12 @@ const CONTENT_SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://dapi.mlssoccer.com/v2/content/en-us/seasons`
  *
- * @param params.competition_sportec_id - query parameter (`fields.competitionSportecId`).
- * @param params.sportec_id - query parameter (`fields.sportecId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.competition_sportec_id - `number | string` — Filter by competition Sportec id (indexed field).
+ * @param params.sportec_id - `number | string` — Filter by season Sportec id (indexed field).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`MlsApiContentSeasonsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mls.mlsContentSeasons({});
+ * @see https://js.sportsdataverse.org/docs/mls/reference/native#native-api--mls-web-api
  */
 export const mlsContentSeasons: Wrapper<MlsApiContentSeasonsRow[], MlsContentSeasonsParams> = (params: WrapperParams = {}) => callFlat(CONTENT_SEASONS_DEF, params);
 /** snake_case alias of {@link mlsContentSeasons} (py/R parity). */
@@ -217,11 +222,12 @@ const MATCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats-api.mlssoccer.com/matches/{match_id}`
  *
- * @param params.match_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `match_information`, `environment`, `teams`, `players`, `staff`, `referees`, `last_matches`. Default: `match_information`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.match_id - `number | string` — the `{match_id}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `match_information`, `environment`, `teams`, `players`, `staff`, `referees`, `last_matches`. Default: `match_information`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`MlsApiMatchRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mls.mlsMatch({ match_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mls/reference/native#native-api--mls-web-api
  */
 export const mlsMatch: SectionedWrapper<MlsApiMatchRow[], { match_information: MlsApiMatchRow[] }, MlsMatchParams> = (params: WrapperParams = {}) => callFlat(MATCH_DEF, params);
 /** snake_case alias of {@link mlsMatch} (py/R parity). */
@@ -275,16 +281,17 @@ const SEASON_MATCHES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats-api.mlssoccer.com/matches/seasons/{season_id}`
  *
- * @param params.season_id - path parameter.
- * @param params.match_date_gte - query parameter (`match_date[gte]`).
- * @param params.match_date_lte - query parameter (`match_date[lte]`).
- * @param params.competition_id - query parameter.
- * @param params.per_page - query parameter.
- * @param params.sort - query parameter.
- * @param params.series_name - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season_id - `number | string` — the `{season_id}` path segment.
+ * @param params.match_date_gte - `number | string` — Window start date (YYYY-MM-DD).
+ * @param params.match_date_lte - `number | string` — Window end date (YYYY-MM-DD).
+ * @param params.competition_id - `number | string` — Filter by competition id.
+ * @param params.per_page - `number | string` — Page size.
+ * @param params.sort - `number | string` — Sort spec, e.g. planned_kickoff_time:asc,home_team_name:asc.
+ * @param params.series_name - `number | string` — Filter by series/round name.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`MlsApiSeasonMatchesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mls.mlsSeasonMatches({ season_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mls/reference/native#native-api--mls-web-api
  */
 export const mlsSeasonMatches: Wrapper<MlsApiSeasonMatchesRow[], MlsSeasonMatchesParams> = (params: WrapperParams = {}) => callFlat(SEASON_MATCHES_DEF, params);
 /** snake_case alias of {@link mlsSeasonMatches} (py/R parity). */
@@ -318,11 +325,12 @@ const SPORTAPI_CLUB_PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sportapi.mlssoccer.com/api/players/byClub/{club_id}`
  *
- * @param params.club_id - path parameter.
- * @param params.culture - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.club_id - `number | string` — the `{club_id}` path segment.
+ * @param params.culture - `number | string` — Locale, e.g. en-us.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`MlsApiSportapiClubPlayersRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mls.mlsSportapiClubPlayers({ club_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mls/reference/native#native-api--mls-web-api
  */
 export const mlsSportapiClubPlayers: Wrapper<MlsApiSportapiClubPlayersRow[], MlsSportapiClubPlayersParams> = (params: WrapperParams = {}) => callFlat(SPORTAPI_CLUB_PLAYERS_DEF, params);
 /** snake_case alias of {@link mlsSportapiClubPlayers} (py/R parity). */
@@ -351,10 +359,11 @@ const SPORTAPI_CLUBS_BY_SPORTEC_IDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sportapi.mlssoccer.com/api/clubs/bySportecIds/{ids}`
  *
- * @param params.ids - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.ids - `number | string` — the `{ids}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mls.mlsSportapiClubsBySportecIds({ ids: '…' });
+ * @see https://js.sportsdataverse.org/docs/mls/reference/native#native-api--mls-web-api
  */
 export const mlsSportapiClubsBySportecIds: Wrapper<Row[], MlsSportapiClubsBySportecIdsParams> = (params: WrapperParams = {}) => callFlat(SPORTAPI_CLUBS_BY_SPORTEC_IDS_DEF, params);
 /** snake_case alias of {@link mlsSportapiClubsBySportecIds} (py/R parity). */
@@ -383,10 +392,11 @@ const SPORTAPI_MATCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sportapi.mlssoccer.com/api/matches/{match_id}`
  *
- * @param params.match_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.match_id - `number | string` — the `{match_id}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`MlsApiSportapiMatchRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mls.mlsSportapiMatch({ match_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mls/reference/native#native-api--mls-web-api
  */
 export const mlsSportapiMatch: Wrapper<MlsApiSportapiMatchRow[], MlsSportapiMatchParams> = (params: WrapperParams = {}) => callFlat(SPORTAPI_MATCH_DEF, params);
 /** snake_case alias of {@link mlsSportapiMatch} (py/R parity). */
@@ -415,10 +425,11 @@ const SPORTAPI_MATCHES_BY_SPORTEC_IDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sportapi.mlssoccer.com/api/matches/bySportecIds/{ids}`
  *
- * @param params.ids - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.ids - `number | string` — the `{ids}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mls.mlsSportapiMatchesBySportecIds({ ids: '…' });
+ * @see https://js.sportsdataverse.org/docs/mls/reference/native#native-api--mls-web-api
  */
 export const mlsSportapiMatchesBySportecIds: Wrapper<Row[], MlsSportapiMatchesBySportecIdsParams> = (params: WrapperParams = {}) => callFlat(SPORTAPI_MATCHES_BY_SPORTEC_IDS_DEF, params);
 /** snake_case alias of {@link mlsSportapiMatchesBySportecIds} (py/R parity). */
@@ -464,15 +475,16 @@ const STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats-api.mlssoccer.com/competitions/{competition_id}/seasons/{season_id}/standings`
  *
- * @param params.competition_id - path parameter.
- * @param params.season_id - path parameter.
- * @param params.category - query parameter.
- * @param params.standings_type - query parameter (`type`).
- * @param params.is_live - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `tables`, `entries`. Default: `entries`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.competition_id - `number | string` — the `{competition_id}` path segment.
+ * @param params.season_id - `number | string` — the `{season_id}` path segment.
+ * @param params.category - `number | string` — Standings grouping: conference | overall.
+ * @param params.standings_type - `number | string` — home | away split (optional).
+ * @param params.is_live - `boolean` — Include live in-progress results.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `tables`, `entries`. Default: `entries`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`MlsApiStandingsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mls.mlsStandings({ competition_id: '…', season_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mls/reference/native#native-api--mls-web-api
  */
 export const mlsStandings: SectionedWrapper<MlsApiStandingsRow[], { entries: MlsApiStandingsRow[] }, MlsStandingsParams> = (params: WrapperParams = {}) => callFlat(STANDINGS_DEF, params);
 /** snake_case alias of {@link mlsStandings} (py/R parity). */

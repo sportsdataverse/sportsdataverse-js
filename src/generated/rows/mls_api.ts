@@ -426,7 +426,7 @@ export interface MlsApiSportapiMatchRow {
   home_club_rank?: string | null;
   /** Away club: club's standings rank at the time of the request. Schema `character`. */
   away_club_rank?: string | null;
-  /** Schema `integer`. */
+  /** Draft round number. Schema `integer`. */
   round_number?: number | null;
   /** Group label within the round (tournaments). Schema `character`. */
   round_group?: string | null;
@@ -450,7 +450,7 @@ export interface MlsApiSportapiMatchRow {
   home_slug?: string | null;
   /** Home club: short name Schema `character`. */
   home_short_name?: string | null;
-  /** Schema `character`. */
+  /** Home team's abbreviation. Schema `character`. */
   home_abbreviation?: string | null;
   /** Home club: brand background colour (hex). Schema `character`. */
   home_background_color?: string | null;
@@ -474,7 +474,7 @@ export interface MlsApiSportapiMatchRow {
   away_slug?: string | null;
   /** Away club: short name Schema `character`. */
   away_short_name?: string | null;
-  /** Schema `character`. */
+  /** Away team's abbreviation. Schema `character`. */
   away_abbreviation?: string | null;
   /** Away club: brand background colour (hex). Schema `character`. */
   away_background_color?: string | null;
@@ -556,7 +556,7 @@ export interface MlsApiStandingsRow {
   season_id?: string | null;
   /** Group name (tournaments) Schema `character`. */
   group?: string | null;
-  /** Schema `character`. */
+  /** Category label. Schema `character`. */
   category?: string | null;
   /** Type discriminator for the record. Schema `character`. */
   type?: string | null;

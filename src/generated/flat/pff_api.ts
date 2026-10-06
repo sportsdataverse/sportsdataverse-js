@@ -122,19 +122,20 @@ const FACET_DEFENSE_COVERAGE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/defense/coverage`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetDefenseCoverage({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetDefenseCoverage: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetDefenseCoverageParams> = (params: WrapperParams = {}) => callFlat(FACET_DEFENSE_COVERAGE_DEF, params);
 /** snake_case alias of {@link pffApiFacetDefenseCoverage} (py/R parity). */
@@ -184,19 +185,20 @@ const FACET_DEFENSE_COVERAGE_MATCHUP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/defense/coverage_matchup`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `defenders`, `receivers`, `versus`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`ParsedTables`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `defenders`, `receivers`, `versus` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetDefenseCoverageMatchup({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetDefenseCoverageMatchup: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetDefenseCoverageMatchupParams> = (params: WrapperParams = {}) => callFlat(FACET_DEFENSE_COVERAGE_MATCHUP_DEF, params);
 /** snake_case alias of {@link pffApiFacetDefenseCoverageMatchup} (py/R parity). */
@@ -246,19 +248,20 @@ const FACET_DEFENSE_COVERAGE_SCHEME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/defense/coverage_scheme`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetDefenseCoverageScheme({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetDefenseCoverageScheme: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetDefenseCoverageSchemeParams> = (params: WrapperParams = {}) => callFlat(FACET_DEFENSE_COVERAGE_SCHEME_DEF, params);
 /** snake_case alias of {@link pffApiFacetDefenseCoverageScheme} (py/R parity). */
@@ -308,19 +311,20 @@ const FACET_DEFENSE_PASS_RUSH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/defense/pass_rush`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetDefensePassRush({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetDefensePassRush: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetDefensePassRushParams> = (params: WrapperParams = {}) => callFlat(FACET_DEFENSE_PASS_RUSH_DEF, params);
 /** snake_case alias of {@link pffApiFacetDefensePassRush} (py/R parity). */
@@ -370,19 +374,20 @@ const FACET_DEFENSE_RUN_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/defense/run`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetDefenseRun({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetDefenseRun: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetDefenseRunParams> = (params: WrapperParams = {}) => callFlat(FACET_DEFENSE_RUN_DEF, params);
 /** snake_case alias of {@link pffApiFacetDefenseRun} (py/R parity). */
@@ -432,19 +437,20 @@ const FACET_DEFENSE_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/defense/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetDefenseSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetDefenseSummary: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetDefenseSummaryParams> = (params: WrapperParams = {}) => callFlat(FACET_DEFENSE_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetDefenseSummary} (py/R parity). */
@@ -494,19 +500,20 @@ const FACET_FIELD_GOAL_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/field_goal/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetFieldGoalSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetFieldGoalSummary: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetFieldGoalSummaryParams> = (params: WrapperParams = {}) => callFlat(FACET_FIELD_GOAL_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetFieldGoalSummary} (py/R parity). */
@@ -556,19 +563,20 @@ const FACET_KICKOFF_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/kickoff/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetKickoffSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetKickoffSummary: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetKickoffSummaryParams> = (params: WrapperParams = {}) => callFlat(FACET_KICKOFF_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetKickoffSummary} (py/R parity). */
@@ -618,19 +626,20 @@ const FACET_OFFENSE_BLOCKING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/offense/blocking`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetOffenseBlocking({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetOffenseBlocking: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetOffenseBlockingParams> = (params: WrapperParams = {}) => callFlat(FACET_OFFENSE_BLOCKING_DEF, params);
 /** snake_case alias of {@link pffApiFacetOffenseBlocking} (py/R parity). */
@@ -680,19 +689,20 @@ const FACET_OFFENSE_PASS_BLOCKING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/offense/pass_blocking`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetOffensePassBlocking({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetOffensePassBlocking: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetOffensePassBlockingParams> = (params: WrapperParams = {}) => callFlat(FACET_OFFENSE_PASS_BLOCKING_DEF, params);
 /** snake_case alias of {@link pffApiFacetOffensePassBlocking} (py/R parity). */
@@ -742,19 +752,20 @@ const FACET_OFFENSE_RUN_BLOCKING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/offense/run_blocking`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetOffenseRunBlocking({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetOffenseRunBlocking: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetOffenseRunBlockingParams> = (params: WrapperParams = {}) => callFlat(FACET_OFFENSE_RUN_BLOCKING_DEF, params);
 /** snake_case alias of {@link pffApiFacetOffenseRunBlocking} (py/R parity). */
@@ -804,19 +815,20 @@ const FACET_OFFENSE_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/offense/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetOffenseSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetOffenseSummary: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetOffenseSummaryParams> = (params: WrapperParams = {}) => callFlat(FACET_OFFENSE_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetOffenseSummary} (py/R parity). */
@@ -866,19 +878,20 @@ const FACET_PASSING_ALLOWED_PRESSURE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/passing/allowed_pressure`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPassingAllowedPressure({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetPassingAllowedPressure: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetPassingAllowedPressureParams> = (params: WrapperParams = {}) => callFlat(FACET_PASSING_ALLOWED_PRESSURE_DEF, params);
 /** snake_case alias of {@link pffApiFacetPassingAllowedPressure} (py/R parity). */
@@ -928,19 +941,20 @@ const FACET_PASSING_CONCEPT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/passing/concept`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPassingConcept({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetPassingConcept: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetPassingConceptParams> = (params: WrapperParams = {}) => callFlat(FACET_PASSING_CONCEPT_DEF, params);
 /** snake_case alias of {@link pffApiFacetPassingConcept} (py/R parity). */
@@ -990,19 +1004,20 @@ const FACET_PASSING_DEPTH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/passing/depth`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPassingDepth({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetPassingDepth: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetPassingDepthParams> = (params: WrapperParams = {}) => callFlat(FACET_PASSING_DEPTH_DEF, params);
 /** snake_case alias of {@link pffApiFacetPassingDepth} (py/R parity). */
@@ -1052,19 +1067,20 @@ const FACET_PASSING_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/passing/detail`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPassingDetail({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetPassingDetail: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetPassingDetailParams> = (params: WrapperParams = {}) => callFlat(FACET_PASSING_DETAIL_DEF, params);
 /** snake_case alias of {@link pffApiFacetPassingDetail} (py/R parity). */
@@ -1114,19 +1130,20 @@ const FACET_PASSING_PRESSURE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/passing/pressure`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPassingPressure({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetPassingPressure: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetPassingPressureParams> = (params: WrapperParams = {}) => callFlat(FACET_PASSING_PRESSURE_DEF, params);
 /** snake_case alias of {@link pffApiFacetPassingPressure} (py/R parity). */
@@ -1176,19 +1193,20 @@ const FACET_PASSING_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/passing/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPassingSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetPassingSummary: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetPassingSummaryParams> = (params: WrapperParams = {}) => callFlat(FACET_PASSING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetPassingSummary} (py/R parity). */
@@ -1238,19 +1256,20 @@ const FACET_PUNTING_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/punting/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetPuntingSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetPuntingSummary: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetPuntingSummaryParams> = (params: WrapperParams = {}) => callFlat(FACET_PUNTING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetPuntingSummary} (py/R parity). */
@@ -1300,19 +1319,20 @@ const FACET_RECEIVING_CONCEPT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/receiving/concept`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetReceivingConcept({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetReceivingConcept: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetReceivingConceptParams> = (params: WrapperParams = {}) => callFlat(FACET_RECEIVING_CONCEPT_DEF, params);
 /** snake_case alias of {@link pffApiFacetReceivingConcept} (py/R parity). */
@@ -1362,19 +1382,20 @@ const FACET_RECEIVING_COVERAGE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/receiving/coverage`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `defenders`, `receivers`, `versus`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`ParsedTables`> with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `defenders`, `receivers`, `versus` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetReceivingCoverage({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetReceivingCoverage: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetReceivingCoverageParams> = (params: WrapperParams = {}) => callFlat(FACET_RECEIVING_COVERAGE_DEF, params);
 /** snake_case alias of {@link pffApiFacetReceivingCoverage} (py/R parity). */
@@ -1424,19 +1445,20 @@ const FACET_RECEIVING_DEPTH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/receiving/depth`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetReceivingDepth({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetReceivingDepth: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetReceivingDepthParams> = (params: WrapperParams = {}) => callFlat(FACET_RECEIVING_DEPTH_DEF, params);
 /** snake_case alias of {@link pffApiFacetReceivingDepth} (py/R parity). */
@@ -1486,19 +1508,20 @@ const FACET_RECEIVING_SCHEME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/receiving/scheme`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetReceivingScheme({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetReceivingScheme: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetReceivingSchemeParams> = (params: WrapperParams = {}) => callFlat(FACET_RECEIVING_SCHEME_DEF, params);
 /** snake_case alias of {@link pffApiFacetReceivingScheme} (py/R parity). */
@@ -1548,19 +1571,20 @@ const FACET_RECEIVING_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/receiving/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetReceivingSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetReceivingSummary: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetReceivingSummaryParams> = (params: WrapperParams = {}) => callFlat(FACET_RECEIVING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetReceivingSummary} (py/R parity). */
@@ -1610,19 +1634,20 @@ const FACET_RETURN_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/return/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetReturnSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetReturnSummary: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetReturnSummaryParams> = (params: WrapperParams = {}) => callFlat(FACET_RETURN_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetReturnSummary} (py/R parity). */
@@ -1672,19 +1697,20 @@ const FACET_RUSHING_DIRECTION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/rushing/direction`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetRushingDirection({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetRushingDirection: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetRushingDirectionParams> = (params: WrapperParams = {}) => callFlat(FACET_RUSHING_DIRECTION_DEF, params);
 /** snake_case alias of {@link pffApiFacetRushingDirection} (py/R parity). */
@@ -1734,19 +1760,20 @@ const FACET_RUSHING_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/rushing/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetRushingSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetRushingSummary: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetRushingSummaryParams> = (params: WrapperParams = {}) => callFlat(FACET_RUSHING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetRushingSummary} (py/R parity). */
@@ -1796,19 +1823,20 @@ const FACET_SPECIAL_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/special/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.game_id - query parameter.
- * @param params.division - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug for the leaderboard commands — exactly nfl, ncaa, hs, aaf and ufl are recognised; anything else is rejected.
+ * @param params.season - `number | string` — Season for the leaderboard commands.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.game_id - `number | string` — Single-game filter, facet family only, forwarded uncoerced.
+ * @param params.division - `number | string` — NCAA division fan-out, facet family only, and **only honoured when league=ncaa** — for any other league it is ignored entirely.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiFacetSpecialSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiFacetSpecialSummary: SectionedWrapper<Row[] | ParsedTables, {}, PffApiFacetSpecialSummaryParams> = (params: WrapperParams = {}) => callFlat(FACET_SPECIAL_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetSpecialSummary} (py/R parity). */
@@ -1854,18 +1882,19 @@ const PLAYER_DEFENSE_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/defense/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerDefenseSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerDefenseSummary: SectionedWrapper<Row[], {}, PffApiPlayerDefenseSummaryParams> = (params: WrapperParams = {}) => callFlat(PLAYER_DEFENSE_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerDefenseSummary} (py/R parity). */
@@ -1911,18 +1940,19 @@ const PLAYER_FIELD_GOAL_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/field_goal/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerFieldGoalSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerFieldGoalSummary: SectionedWrapper<Row[], {}, PffApiPlayerFieldGoalSummaryParams> = (params: WrapperParams = {}) => callFlat(PLAYER_FIELD_GOAL_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerFieldGoalSummary} (py/R parity). */
@@ -1968,18 +1998,19 @@ const PLAYER_KICKOFF_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/kickoff/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerKickoffSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerKickoffSummary: SectionedWrapper<Row[], {}, PffApiPlayerKickoffSummaryParams> = (params: WrapperParams = {}) => callFlat(PLAYER_KICKOFF_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerKickoffSummary} (py/R parity). */
@@ -2025,18 +2056,19 @@ const PLAYER_OFFENSE_BLOCKING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/offense/blocking`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerOffenseBlocking({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerOffenseBlocking: SectionedWrapper<Row[], {}, PffApiPlayerOffenseBlockingParams> = (params: WrapperParams = {}) => callFlat(PLAYER_OFFENSE_BLOCKING_DEF, params);
 /** snake_case alias of {@link pffApiPlayerOffenseBlocking} (py/R parity). */
@@ -2082,18 +2114,19 @@ const PLAYER_OFFENSE_PASS_BLOCKING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/offense/pass_blocking`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerOffensePassBlocking({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerOffensePassBlocking: SectionedWrapper<Row[], {}, PffApiPlayerOffensePassBlockingParams> = (params: WrapperParams = {}) => callFlat(PLAYER_OFFENSE_PASS_BLOCKING_DEF, params);
 /** snake_case alias of {@link pffApiPlayerOffensePassBlocking} (py/R parity). */
@@ -2139,18 +2172,19 @@ const PLAYER_OFFENSE_RUN_BLOCKING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/offense/run_blocking`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerOffenseRunBlocking({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerOffenseRunBlocking: SectionedWrapper<Row[], {}, PffApiPlayerOffenseRunBlockingParams> = (params: WrapperParams = {}) => callFlat(PLAYER_OFFENSE_RUN_BLOCKING_DEF, params);
 /** snake_case alias of {@link pffApiPlayerOffenseRunBlocking} (py/R parity). */
@@ -2196,18 +2230,19 @@ const PLAYER_OFFENSE_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/offense/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerOffenseSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerOffenseSummary: SectionedWrapper<Row[], {}, PffApiPlayerOffenseSummaryParams> = (params: WrapperParams = {}) => callFlat(PLAYER_OFFENSE_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerOffenseSummary} (py/R parity). */
@@ -2253,18 +2288,19 @@ const PLAYER_PASSING_CONCEPT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/passing/concept`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year, taken as a positional argument.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerPassingConcept({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerPassingConcept: SectionedWrapper<Row[] | ParsedTables, {}, PffApiPlayerPassingConceptParams> = (params: WrapperParams = {}) => callFlat(PLAYER_PASSING_CONCEPT_DEF, params);
 /** snake_case alias of {@link pffApiPlayerPassingConcept} (py/R parity). */
@@ -2310,18 +2346,19 @@ const PLAYER_PASSING_DEPTH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/passing/depth`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year, taken as a positional argument.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerPassingDepth({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerPassingDepth: SectionedWrapper<Row[] | ParsedTables, {}, PffApiPlayerPassingDepthParams> = (params: WrapperParams = {}) => callFlat(PLAYER_PASSING_DEPTH_DEF, params);
 /** snake_case alias of {@link pffApiPlayerPassingDepth} (py/R parity). */
@@ -2367,18 +2404,19 @@ const PLAYER_PASSING_PRESSURE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/passing/pressure`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year, taken as a positional argument.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerPassingPressure({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerPassingPressure: SectionedWrapper<Row[] | ParsedTables, {}, PffApiPlayerPassingPressureParams> = (params: WrapperParams = {}) => callFlat(PLAYER_PASSING_PRESSURE_DEF, params);
 /** snake_case alias of {@link pffApiPlayerPassingPressure} (py/R parity). */
@@ -2424,18 +2462,19 @@ const PLAYER_PASSING_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/passing/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerPassingSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerPassingSummary: SectionedWrapper<Row[], {}, PffApiPlayerPassingSummaryParams> = (params: WrapperParams = {}) => callFlat(PLAYER_PASSING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerPassingSummary} (py/R parity). */
@@ -2477,17 +2516,18 @@ const PLAYER_POSITION_PIVOT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/position/pivot`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year, taken as a positional argument.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerPositionPivot({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerPositionPivot: SectionedWrapper<Row[] | ParsedTables, {}, PffApiPlayerPositionPivotParams> = (params: WrapperParams = {}) => callFlat(PLAYER_POSITION_PIVOT_DEF, params);
 /** snake_case alias of {@link pffApiPlayerPositionPivot} (py/R parity). */
@@ -2533,18 +2573,19 @@ const PLAYER_PUNTING_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/punting/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerPuntingSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerPuntingSummary: SectionedWrapper<Row[], {}, PffApiPlayerPuntingSummaryParams> = (params: WrapperParams = {}) => callFlat(PLAYER_PUNTING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerPuntingSummary} (py/R parity). */
@@ -2590,18 +2631,19 @@ const PLAYER_RECEIVING_DEPTH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/receiving/depth`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year, taken as a positional argument.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerReceivingDepth({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerReceivingDepth: SectionedWrapper<Row[] | ParsedTables, {}, PffApiPlayerReceivingDepthParams> = (params: WrapperParams = {}) => callFlat(PLAYER_RECEIVING_DEPTH_DEF, params);
 /** snake_case alias of {@link pffApiPlayerReceivingDepth} (py/R parity). */
@@ -2647,18 +2689,19 @@ const PLAYER_RECEIVING_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/receiving/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerReceivingSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerReceivingSummary: SectionedWrapper<Row[], {}, PffApiPlayerReceivingSummaryParams> = (params: WrapperParams = {}) => callFlat(PLAYER_RECEIVING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerReceivingSummary} (py/R parity). */
@@ -2704,18 +2747,19 @@ const PLAYER_RETURN_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/return/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerReturnSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerReturnSummary: SectionedWrapper<Row[], {}, PffApiPlayerReturnSummaryParams> = (params: WrapperParams = {}) => callFlat(PLAYER_RETURN_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerReturnSummary} (py/R parity). */
@@ -2761,18 +2805,19 @@ const PLAYER_RUSHING_DIRECTION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/rushing/direction`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year, taken as a positional argument.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerRushingDirection({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerRushingDirection: SectionedWrapper<Row[] | ParsedTables, {}, PffApiPlayerRushingDirectionParams> = (params: WrapperParams = {}) => callFlat(PLAYER_RUSHING_DIRECTION_DEF, params);
 /** snake_case alias of {@link pffApiPlayerRushingDirection} (py/R parity). */
@@ -2818,18 +2863,19 @@ const PLAYER_RUSHING_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/rushing/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerRushingSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerRushingSummary: SectionedWrapper<Row[], {}, PffApiPlayerRushingSummaryParams> = (params: WrapperParams = {}) => callFlat(PLAYER_RUSHING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerRushingSummary} (py/R parity). */
@@ -2871,17 +2917,18 @@ const PLAYER_SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/seasons`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerSeasons({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerSeasons: SectionedWrapper<Row[] | ParsedTables, {}, PffApiPlayerSeasonsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_SEASONS_DEF, params);
 /** snake_case alias of {@link pffApiPlayerSeasons} (py/R parity). */
@@ -2923,17 +2970,18 @@ const PLAYER_SNAPS_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/snaps/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year, taken as a positional argument.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerSnapsSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerSnapsSummary: SectionedWrapper<Row[] | ParsedTables, {}, PffApiPlayerSnapsSummaryParams> = (params: WrapperParams = {}) => callFlat(PLAYER_SNAPS_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerSnapsSummary} (py/R parity). */
@@ -2979,18 +3027,19 @@ const PLAYER_SPECIAL_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/player/special/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.player_id - query parameter.
- * @param params.career - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.player_id - `number | string` — Player id, taken as a positional argument.
+ * @param params.career - `number | string` — Career-aggregate toggle, on the player report operations only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `weeks`, `career`. Default: `weeks`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPlayerSpecialSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPlayerSpecialSummary: SectionedWrapper<Row[], {}, PffApiPlayerSpecialSummaryParams> = (params: WrapperParams = {}) => callFlat(PLAYER_SPECIAL_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerSpecialSummary} (py/R parity). */
@@ -3039,19 +3088,20 @@ const POSITION_REPORT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v2/{league}/positions/reports/{report}`
  *
- * @param params.league - path parameter.
- * @param params.report - path parameter.
- * @param params.season - query parameter.
- * @param params.week_group - query parameter (`weekGroup`).
- * @param params.week - query parameter.
- * @param params.week_to - query parameter (`weekTo`).
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }` (its columns depend on `report`).
+ * @param params.league - `number | string` — League slug: nfl or ncaa.
+ * @param params.report - `number | string` — Which report: offense, passing, passing-depth, passing-pressure, receiving, receiving-depth, rushing, blocking, pass-blocking, run-blocking, defense, run-defense, pass-rush, coverage, special-teams, kick-returns, field-goals, punting, kickoffs — the same vocabulary as team-report.
+ * @param params.season - `number | string` — Season, as a four-digit year: 2006 or later, and at most one year past the current season.
+ * @param params.week_group - `number | string` — Which part of the season to cover: REG (regular season), PO (playoffs) or REGPO (both, the default).
+ * @param params.week - `number | string` — Narrow the report to one week of the weekGroup — or, with weekTo, to a span of weeks.
+ * @param params.week_to - `number | string` — The last week of a span that starts at week; requires week.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (its columns depend on `report`) (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiPositionReport({ league: '…', report: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiPositionReport: SectionedWrapper<Row[], {}, PffApiPositionReportParams> = (params: WrapperParams = {}) => callFlat(POSITION_REPORT_DEF, params);
 /** snake_case alias of {@link pffApiPositionReport} (py/R parity). */
@@ -3093,17 +3143,18 @@ const REF_GAMES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/games`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year, taken as a positional argument.
+ * @param params.week - `number | string` — Week, and the THIRD positional argument of games — the one command that takes a single week number rather than a comma-separated list.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiRefGames({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiRefGames: SectionedWrapper<Row[] | ParsedTables, {}, PffApiRefGamesParams> = (params: WrapperParams = {}) => callFlat(REF_GAMES_DEF, params);
 /** snake_case alias of {@link pffApiRefGames} (py/R parity). */
@@ -3128,13 +3179,14 @@ const REF_LEAGUES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/leagues`
  *
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiRefLeagues({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiRefLeagues: SectionedWrapper<Row[] | ParsedTables, {}, PffApiRefLeaguesParams> = (params: WrapperParams = {}) => callFlat(REF_LEAGUES_DEF, params);
 /** snake_case alias of {@link pffApiRefLeagues} (py/R parity). */
@@ -3172,16 +3224,17 @@ const REF_PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/players`
  *
- * @param params.league - query parameter.
- * @param params.id - query parameter.
- * @param params.name - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.id - `number | string` — Exact player-id lookup, ref-players only.
+ * @param params.name - `number | string` — Free-text player-name search, ref-players only.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiRefPlayers({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiRefPlayers: SectionedWrapper<Row[] | ParsedTables, {}, PffApiRefPlayersParams> = (params: WrapperParams = {}) => callFlat(REF_PLAYERS_DEF, params);
 /** snake_case alias of {@link pffApiRefPlayers} (py/R parity). */
@@ -3219,16 +3272,17 @@ const SIGNATURE_DEFENSE_OUTSIDE_PASS_RUSH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/signature/defense/outside_pass_rush`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, and the SECOND positional argument of the four signature commands.
+ * @param params.week - `number | string` — Week, and the THIRD positional argument of the four signature commands.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiSignatureDefenseOutsidePassRush({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiSignatureDefenseOutsidePassRush: SectionedWrapper<Row[] | ParsedTables, {}, PffApiSignatureDefenseOutsidePassRushParams> = (params: WrapperParams = {}) => callFlat(SIGNATURE_DEFENSE_OUTSIDE_PASS_RUSH_DEF, params);
 /** snake_case alias of {@link pffApiSignatureDefenseOutsidePassRush} (py/R parity). */
@@ -3266,16 +3320,17 @@ const SIGNATURE_DEFENSE_SLOT_COVERAGE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/signature/defense/slot_coverage`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, and the SECOND positional argument of the four signature commands.
+ * @param params.week - `number | string` — Week, and the THIRD positional argument of the four signature commands.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiSignatureDefenseSlotCoverage({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiSignatureDefenseSlotCoverage: SectionedWrapper<Row[] | ParsedTables, {}, PffApiSignatureDefenseSlotCoverageParams> = (params: WrapperParams = {}) => callFlat(SIGNATURE_DEFENSE_SLOT_COVERAGE_DEF, params);
 /** snake_case alias of {@link pffApiSignatureDefenseSlotCoverage} (py/R parity). */
@@ -3313,16 +3368,17 @@ const SIGNATURE_PASS_BLOCKING_EFFICIENCY_LINE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/signature/pass-blocking/efficiency/line`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, and the SECOND positional argument of the four signature commands.
+ * @param params.week - `number | string` — Week, and the THIRD positional argument of the four signature commands.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiSignaturePassBlockingEfficiencyLine({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiSignaturePassBlockingEfficiencyLine: SectionedWrapper<Row[] | ParsedTables, {}, PffApiSignaturePassBlockingEfficiencyLineParams> = (params: WrapperParams = {}) => callFlat(SIGNATURE_PASS_BLOCKING_EFFICIENCY_LINE_DEF, params);
 /** snake_case alias of {@link pffApiSignaturePassBlockingEfficiencyLine} (py/R parity). */
@@ -3360,16 +3416,17 @@ const SIGNATURE_PASSING_TIME_IN_POCKET_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/facet/signature/passing/time_in_pocket`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, and the SECOND positional argument of the four signature commands.
+ * @param params.week - `number | string` — Week, and the THIRD positional argument of the four signature commands.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiSignaturePassingTimeInPocket({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiSignaturePassingTimeInPocket: SectionedWrapper<Row[] | ParsedTables, {}, PffApiSignaturePassingTimeInPocketParams> = (params: WrapperParams = {}) => callFlat(SIGNATURE_PASSING_TIME_IN_POCKET_DEF, params);
 /** snake_case alias of {@link pffApiSignaturePassingTimeInPocket} (py/R parity). */
@@ -3403,15 +3460,16 @@ const TEAM_DIRECTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v2/{league}/teams`
  *
- * @param params.league - path parameter.
- * @param params.season - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug: nfl or ncaa.
+ * @param params.season - `number | string` — Season, as a four-digit year: 2006 or later, and at most one year past the current season.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamDirectory({ league: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiTeamDirectory: SectionedWrapper<Row[], {}, PffApiTeamDirectoryParams> = (params: WrapperParams = {}) => callFlat(TEAM_DIRECTORY_DEF, params);
 /** snake_case alias of {@link pffApiTeamDirectory} (py/R parity). */
@@ -3456,18 +3514,19 @@ const TEAM_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v2/{league}/teams/{team}/leaders`
  *
- * @param params.league - path parameter.
- * @param params.team - path parameter.
- * @param params.season - query parameter.
- * @param params.week_group - query parameter (`weekGroup`).
- * @param params.group - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }` (its columns depend on `group`).
+ * @param params.league - `number | string` — League slug: nfl or ncaa.
+ * @param params.team - `number | string` — The team, as its slug (los-angeles-rams) or its numeric franchise id (26) — both resolve through the league's team directory for the season, and both produce the same answer.
+ * @param params.season - `number | string` — Season, as a four-digit year: 2006 or later, and at most one year past the current season.
+ * @param params.week_group - `number | string` — Which part of the season to cover: REG (regular season), PO (playoffs) or REGPO (both, the default).
+ * @param params.group - `number | string` — Which position group the leaders come from — receiving (the default), passing, rushing or defense.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (its columns depend on `group`) (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamLeaders({ league: '…', team: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiTeamLeaders: SectionedWrapper<Row[], {}, PffApiTeamLeadersParams> = (params: WrapperParams = {}) => callFlat(TEAM_LEADERS_DEF, params);
 /** snake_case alias of {@link pffApiTeamLeaders} (py/R parity). */
@@ -3509,17 +3568,18 @@ const TEAM_LIST_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/teams`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamList({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiTeamList: SectionedWrapper<Row[] | ParsedTables, {}, PffApiTeamListParams> = (params: WrapperParams = {}) => callFlat(TEAM_LIST_DEF, params);
 /** snake_case alias of {@link pffApiTeamList} (py/R parity). */
@@ -3561,17 +3621,18 @@ const TEAM_OVERVIEW_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/teams/overview`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year, taken as a positional argument.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamOverview({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiTeamOverview: SectionedWrapper<Row[] | ParsedTables, {}, PffApiTeamOverviewParams> = (params: WrapperParams = {}) => callFlat(TEAM_OVERVIEW_DEF, params);
 /** snake_case alias of {@link pffApiTeamOverview} (py/R parity). */
@@ -3623,20 +3684,21 @@ const TEAM_REPORT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v2/{league}/teams/{team}/reports/{report}`
  *
- * @param params.league - path parameter.
- * @param params.team - path parameter.
- * @param params.report - path parameter.
- * @param params.season - query parameter.
- * @param params.week_group - query parameter (`weekGroup`).
- * @param params.week - query parameter.
- * @param params.week_to - query parameter (`weekTo`).
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }` (its columns depend on `report`).
+ * @param params.league - `number | string` — League slug: nfl or ncaa.
+ * @param params.team - `number | string` — The team, as its slug (los-angeles-rams) or its numeric franchise id (26) — both resolve through the league's team directory for the season, and both produce the same answer.
+ * @param params.report - `number | string` — Which report: offense, passing, passing-depth, passing-pressure, receiving, receiving-depth, rushing, blocking, pass-blocking, run-blocking, defense, run-defense, pass-rush, coverage, special-teams, kick-returns, field-goals, punting, kickoffs.
+ * @param params.season - `number | string` — Season, as a four-digit year: 2006 or later, and at most one year past the current season.
+ * @param params.week_group - `number | string` — Which part of the season to cover: REG (regular season), PO (playoffs) or REGPO (both, the default).
+ * @param params.week - `number | string` — Narrow the report to one week of the weekGroup — or, with weekTo, to a span of weeks.
+ * @param params.week_to - `number | string` — The last week of a span that starts at week; requires week.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (its columns depend on `report`) (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamReport({ league: '…', team: '…', report: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiTeamReport: SectionedWrapper<Row[], {}, PffApiTeamReportParams> = (params: WrapperParams = {}) => callFlat(TEAM_REPORT_DEF, params);
 /** snake_case alias of {@link pffApiTeamReport} (py/R parity). */
@@ -3673,16 +3735,17 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v2/{league}/teams/{team}/roster`
  *
- * @param params.league - path parameter.
- * @param params.team - path parameter.
- * @param params.season - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug: nfl or ncaa.
+ * @param params.team - `number | string` — The team, as its slug (los-angeles-rams) or its numeric franchise id (26) — both resolve through the league's team directory for the season, and both produce the same answer.
+ * @param params.season - `number | string` — Season, as a four-digit year: 2006 or later, and at most one year past the current season.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamRoster({ league: '…', team: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiTeamRoster: SectionedWrapper<Row[], {}, PffApiTeamRosterParams> = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_DEF, params);
 /** snake_case alias of {@link pffApiTeamRoster} (py/R parity). */
@@ -3723,17 +3786,18 @@ const TEAM_RUSHING_DIRECTION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v2/{league}/teams/{team}/reports/rushing-direction`
  *
- * @param params.league - path parameter.
- * @param params.team - path parameter.
- * @param params.season - query parameter.
- * @param params.week_group - query parameter (`weekGroup`).
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug: nfl or ncaa.
+ * @param params.team - `number | string` — The team, as its slug (los-angeles-rams) or its numeric franchise id (26) — both resolve through the league's team directory for the season, and both produce the same answer.
+ * @param params.season - `number | string` — Season, as a four-digit year: 2006 or later, and at most one year past the current season.
+ * @param params.week_group - `number | string` — Which part of the season to cover: REG (regular season), PO (playoffs) or REGPO (both, the default).
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamRushingDirection({ league: '…', team: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiTeamRushingDirection: SectionedWrapper<Row[], {}, PffApiTeamRushingDirectionParams> = (params: WrapperParams = {}) => callFlat(TEAM_RUSHING_DIRECTION_DEF, params);
 /** snake_case alias of {@link pffApiTeamRushingDirection} (py/R parity). */
@@ -3770,16 +3834,17 @@ const TEAM_SCHEDULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v2/{league}/teams/{team}/schedule`
  *
- * @param params.league - path parameter.
- * @param params.team - path parameter.
- * @param params.season - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug: nfl or ncaa.
+ * @param params.team - `number | string` — The team, as its slug (los-angeles-rams) or its numeric franchise id (26) — both resolve through the league's team directory for the season, and both produce the same answer.
+ * @param params.season - `number | string` — Season, as a four-digit year: 2006 or later, and at most one year past the current season.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamSchedule({ league: '…', team: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiTeamSchedule: SectionedWrapper<Row[], {}, PffApiTeamScheduleParams> = (params: WrapperParams = {}) => callFlat(TEAM_SCHEDULE_DEF, params);
 /** snake_case alias of {@link pffApiTeamSchedule} (py/R parity). */
@@ -3829,19 +3894,20 @@ const TEAM_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v2/{league}/teams/stats`
  *
- * @param params.league - path parameter.
- * @param params.season - query parameter.
- * @param params.week_group - query parameter (`weekGroup`).
- * @param params.week_ids - query parameter (`weekIds`).
- * @param params.category - query parameter.
- * @param params.scope - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }` (its columns depend on `category`).
+ * @param params.league - `number | string` — League slug: nfl or ncaa.
+ * @param params.season - `number | string` — Season, as a four-digit year: 2006 or later, and at most one year past the current season.
+ * @param params.week_group - `number | string` — Which part of the season to cover: REG (regular season), PO (playoffs) or REGPO (both, the default).
+ * @param params.week_ids - `number | string` — Comma-separated week ids to cover instead of a whole weekGroup — 1,2,3 is the first three regular-season weeks.
+ * @param params.category - `number | string` — Which stat category the table covers.
+ * @param params.scope - `number | string` — Which teams the ranks are computed against — and which rows come back: league (every team, the default), a conference (afc, nfc) or a division (afc-east … nfc-west).
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (its columns depend on `category`) (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamStats({ league: '…' });
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiTeamStats: SectionedWrapper<Row[], {}, PffApiTeamStatsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link pffApiTeamStats} (py/R parity). */
@@ -3883,17 +3949,18 @@ const TEAM_SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/teams/summary`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.week - query parameter.
- * @param params.franchise_id - query parameter.
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — League slug, and the FIRST positional argument of every command that takes one — every command except the facet leaderboards, where --league stays a flag because --game alone is a complete request.
+ * @param params.season - `number | string` — Season, as a four-digit year, taken as a positional argument.
+ * @param params.week - `number | string` — Week filter.
+ * @param params.franchise_id - `number | string` — Franchise (team) id, and the THIRD positional argument of team-summary — the report is franchise-scoped, so there is no all-teams form of it.
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nfl.pffApiTeamSummary({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiTeamSummary: SectionedWrapper<Row[] | ParsedTables, {}, PffApiTeamSummaryParams> = (params: WrapperParams = {}) => callFlat(TEAM_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiTeamSummary} (py/R parity). */
@@ -3916,12 +3983,13 @@ const WHOAMI_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.pff.com/v1/auth/whoami`
  *
- * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
- * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
- * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
- * @returns The raw response (this endpoint has no parser).
+ * @param params.headers - `Record<string, string>` — optional headers; an `Authorization` here wins over `api_key` and the environment.
+ * @param params.api_key - `string` — PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
+ * @param params.strict - `boolean` — throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
+ * @param params.parsed - `boolean` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
+ * @returns Promise<`unknown`>: the raw response (this endpoint has no parser).
  * @example await sdv.nfl.pffApiWhoami({});
+ * @see https://js.sportsdataverse.org/docs/nfl/reference/native#native-api--pff-developer-api
  */
 export const pffApiWhoami: Wrapper<unknown, PffApiWhoamiParams> = (params: WrapperParams = {}) => callFlat(WHOAMI_DEF, params);
 /** snake_case alias of {@link pffApiWhoami} (py/R parity). */

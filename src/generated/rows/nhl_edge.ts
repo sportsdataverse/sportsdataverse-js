@@ -10,81 +10,81 @@
  * One row of `sdv.nhl.nhl_edge_cat_goalie_detail({ parsed: true })` (returns schema `native/nhl_edge/cat_goalie_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeCatGoalieDetailRow {
-  /** Schema `character`. */
+  /** JSON-serialized list of NHL season identifiers for which EDGE puck-and-player tracking data is available for this goalie. Schema `character`. */
   seasons_with_edge_stats?: string | null;
-  /** Schema `character`. */
+  /** JSON-serialized summary of shot-location tracking data aggregated across all zones for the goalie. Schema `character`. */
   shot_location_summary?: string | null;
-  /** Schema `character`. */
+  /** JSON-serialized per-zone shot-location tracking breakdown showing where shots were attempted against the goalie. Schema `character`. */
   shot_location_details?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Participant birth date (YYYY-MM-DD). Schema `character`. */
   player_birth_date?: string | null;
-  /** Schema `character`. */
+  /** Side on which the goalie catches — L (left) or R (right). Schema `character`. */
   player_shoots_catches?: string | null;
-  /** Schema `integer`. */
+  /** Player jersey number. Schema `integer`. */
   player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** URL slug for the player. Schema `character`. */
   player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL to the player headshot image. Schema `character`. */
   player_headshot?: string | null;
-  /** Schema `integer`. */
+  /** Number of regulation and overtime wins credited to the goalie during the tracking period. Schema `integer`. */
   player_wins?: number | null;
-  /** Schema `integer`. */
+  /** Number of regulation losses credited to the goalie during the tracking period. Schema `integer`. */
   player_losses?: number | null;
-  /** Schema `integer`. */
+  /** Number of overtime or shootout losses credited to the goalie during the tracking period. Schema `integer`. */
   player_overtime_losses?: number | null;
-  /** Schema `double`. */
+  /** Goalie's goals-against average — goals allowed per 60 minutes of ice time — for the tracking period. Schema `double`. */
   player_goals_against_avg?: number | null;
-  /** Schema `double`. */
+  /** Goalie's save percentage, expressed as the proportion of shots on goal stopped. Schema `double`. */
   player_save_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Number of games in which the goalie appeared during the relevant tracking period. Schema `integer`. */
   player_games_played?: number | null;
-  /** Schema `character`. */
+  /** Player team common name (default locale). Schema `character`. */
   player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player team place name with preposition (default locale). Schema `character`. */
   player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Player team place name with preposition (French locale). Schema `character`. */
   player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Player team abbreviation. Schema `character`. */
   player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Player team light-mode logo URL. Schema `character`. */
   player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** Player team dark-mode logo URL. Schema `character`. */
   player_team_team_logo_dark?: string | null;
-  /** Schema `double`. */
+  /** Goalie's goals-against average for the tracking period. Schema `double`. */
   stats_goals_against_avg_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL goalies for goals-against average (lower GAA = higher percentile). Schema `double`. */
   stats_goals_against_avg_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average goals-against average used as the baseline for this goalie's GAA percentile calculation. Schema `double`. */
   stats_goals_against_avg_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Number of games the goalie posted a save percentage above .900 during the tracking period. Schema `double`. */
   stats_games_above900_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL goalies for games played in which the goalie posted a save percentage above .900. Schema `double`. */
   stats_games_above900_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average games-above-.900-save-percentage rate used as the baseline for this goalie's percentile calculation. Schema `double`. */
   stats_games_above900_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Goalie's goals-saved-above-expected per 60 minutes, measuring performance relative to shot quality faced. Schema `double`. */
   stats_goal_differential_per60_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL goalies for goals-saved-above-expected per 60 minutes of ice time. Schema `double`. */
   stats_goal_differential_per60_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average goals-saved-above-expected per 60 minutes used as the baseline for this goalie's percentile. Schema `double`. */
   stats_goal_differential_per60_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Average number of goals scored for the goalie per game started during the tracking period. Schema `double`. */
   stats_goal_support_avg_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL goalies for average offensive goal support received per game started. Schema `double`. */
   stats_goal_support_avg_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average goal support (goals scored for the goalie per game) used as the baseline for percentile calculation. Schema `double`. */
   stats_goal_support_avg_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Fraction of available standings points the goalie's team earned in games the goalie started. Schema `double`. */
   stats_point_pctg_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL goalies for team point percentage in games the goalie started. Schema `double`. */
   stats_point_pctg_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average team point percentage in games the goalie started, used as the baseline for percentile calculation. Schema `double`. */
   stats_point_pctg_league_avg?: number | null;
 }
 
@@ -92,109 +92,109 @@ export interface NhlEdgeCatGoalieDetailRow {
  * One row of `sdv.nhl.nhl_edge_cat_skater_detail({ parsed: true })` (returns schema `native/nhl_edge/cat_skater_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeCatSkaterDetailRow {
-  /** Schema `character`. */
+  /** JSON-serialized list of NHL season identifiers for which EDGE puck-and-player tracking data is available for this skater. Schema `character`. */
   seasons_with_edge_stats?: string | null;
-  /** Schema `character`. */
+  /** JSON-serialized summary of shot-on-goal tracking data aggregated over the tracking period for the skater. Schema `character`. */
   sog_summary?: string | null;
-  /** Schema `character`. */
+  /** JSON-serialized per-game shot-on-goal tracking details for the skater across the tracking period. Schema `character`. */
   sog_details?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Participant birth date (YYYY-MM-DD). Schema `character`. */
   player_birth_date?: string | null;
-  /** Schema `character`. */
+  /** Side on which the skater shoots — L (left) or R (right). Schema `character`. */
   player_shoots_catches?: string | null;
-  /** Schema `integer`. */
+  /** Player jersey number. Schema `integer`. */
   player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Primary player position. Schema `character`. */
   player_position?: string | null;
-  /** Schema `character`. */
+  /** URL slug for the player. Schema `character`. */
   player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL to the player headshot image. Schema `character`. */
   player_headshot?: string | null;
-  /** Schema `integer`. */
+  /** Number of goals scored by the skater during the relevant tracking period. Schema `integer`. */
   player_goals?: number | null;
-  /** Schema `integer`. */
+  /** Number of assists credited to the skater during the relevant tracking period. Schema `integer`. */
   player_assists?: number | null;
-  /** Schema `integer`. */
+  /** Player points. Schema `integer`. */
   player_points?: number | null;
-  /** Schema `integer`. */
+  /** Number of games in which the skater appeared during the relevant tracking period. Schema `integer`. */
   player_games_played?: number | null;
-  /** Schema `character`. */
+  /** Player team common name (default locale). Schema `character`. */
   player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player team place name with preposition (default locale). Schema `character`. */
   player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Player team place name with preposition (French locale). Schema `character`. */
   player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Player team abbreviation. Schema `character`. */
   player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Player team light-mode logo URL. Schema `character`. */
   player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** Player team dark-mode logo URL. Schema `character`. */
   player_team_team_logo_dark?: string | null;
-  /** Schema `double`. */
+  /** Skater's highest recorded shot speed in miles per hour during the tracking period. Schema `double`. */
   top_shot_speed_imperial?: number | null;
-  /** Schema `double`. */
+  /** Skater's highest recorded shot speed in kilometers per hour during the tracking period. Schema `double`. */
   top_shot_speed_metric?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL skaters for highest recorded shot speed during the tracking period. Schema `double`. */
   top_shot_speed_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average top shot speed in miles per hour, used as the baseline for this skater's shot-speed percentile. Schema `double`. */
   top_shot_speed_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average top shot speed in kilometers per hour, used as the baseline for this skater's shot-speed percentile. Schema `double`. */
   top_shot_speed_league_avg_metric?: number | null;
-  /** Schema `double`. */
+  /** Skater's maximum recorded skating speed in miles per hour during the tracking period. Schema `double`. */
   skating_speed_speed_max_imperial?: number | null;
-  /** Schema `double`. */
+  /** Skater's maximum recorded skating speed in kilometers per hour during the tracking period. Schema `double`. */
   skating_speed_speed_max_metric?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL skaters for maximum skating speed recorded during the tracking period. Schema `double`. */
   skating_speed_speed_max_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average maximum skating speed in miles per hour, used as the baseline for this skater's percentile. Schema `double`. */
   skating_speed_speed_max_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average maximum skating speed in kilometers per hour, used as the baseline for this skater's percentile. Schema `double`. */
   skating_speed_speed_max_league_avg_metric?: number | null;
-  /** Schema `character`. */
+  /** First name of the skater who achieved the maximum skating speed in the context of the overlay comparison play. Schema `character`. */
   skating_speed_speed_max_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the skater who achieved the maximum skating speed in the context of the overlay comparison play. Schema `character`. */
   skating_speed_speed_max_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Elapsed time within the period (mm:ss) at which the skater's maximum skating speed was recorded. Schema `character`. */
   skating_speed_speed_max_overlay_time_in_period?: string | null;
-  /** Schema `integer`. */
+  /** Number of skating bursts the skater reached or exceeded 20 mph per game on average during the tracking period. Schema `integer`. */
   skating_speed_bursts_over20_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL skaters for frequency of skating speed bursts exceeding 20 mph per game. Schema `double`. */
   skating_speed_bursts_over20_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average number of skating speed bursts exceeding 20 mph per game, used as the baseline for this skater's percentile. Schema `double`. */
   skating_speed_bursts_over20_league_avg_value?: number | null;
-  /** Schema `double`. */
+  /** Total cumulative distance skated by the player in miles during the tracking period. Schema `double`. */
   total_distance_skated_imperial?: number | null;
-  /** Schema `double`. */
+  /** Total cumulative distance skated by the player in kilometers during the tracking period. Schema `double`. */
   total_distance_skated_metric?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL skaters for total distance skated per game during the tracking period. Schema `double`. */
   total_distance_skated_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average total distance skated in miles per game, used as the baseline for this skater's distance percentile. Schema `double`. */
   total_distance_skated_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average total distance skated in kilometers per game, used as the baseline for this skater's distance percentile. Schema `double`. */
   total_distance_skated_league_avg_metric?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the skater's total on-ice time spent in the offensive zone during the tracking period. Schema `double`. */
   zone_time_details_offensive_zone_pctg?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL skaters for percentage of ice time spent in the offensive zone. Schema `double`. */
   zone_time_details_offensive_zone_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of on-ice time skaters spend in the offensive zone, used as the baseline for this player's percentile. Schema `double`. */
   zone_time_details_offensive_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the skater's total on-ice time spent in the neutral zone during the tracking period. Schema `double`. */
   zone_time_details_neutral_zone_pctg?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL skaters for percentage of ice time spent in the neutral zone. Schema `double`. */
   zone_time_details_neutral_zone_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of on-ice time skaters spend in the neutral zone, used as the baseline for this player's percentile. Schema `double`. */
   zone_time_details_neutral_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the skater's total on-ice time spent in the defensive zone during the tracking period. Schema `double`. */
   zone_time_details_defensive_zone_pctg?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL skaters for percentage of ice time spent in the defensive zone. Schema `double`. */
   zone_time_details_defensive_zone_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of on-ice time skaters spend in the defensive zone, used as the baseline for this player's percentile. Schema `double`. */
   zone_time_details_defensive_zone_league_avg?: number | null;
 }
 
@@ -202,31 +202,31 @@ export interface NhlEdgeCatSkaterDetailRow {
  * One row of `sdv.nhl.nhl_edge_goalie_5v5_detail({ parsed: true })` (returns schema `native/nhl_edge/goalie_5v5_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeGoalie5v5DetailRow {
-  /** Schema `character`. */
+  /** Serialized last-10-game 5-on-5 save percentage trend data for the goalie. Schema `character`. */
   save_pctg5v5_last10?: string | null;
-  /** Schema `double`. */
+  /** Goalie's overall 5-on-5 save percentage (saves divided by shots faced at even strength). Schema `double`. */
   save_pctg5v5_details_save_pctg_value?: number | null;
-  /** Schema `double`. */
+  /** League-average 5-on-5 save percentage across all NHL goalies for the current period. Schema `double`. */
   save_pctg5v5_details_save_pctg_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the goalie's overall 5-on-5 save percentage relative to all qualifying NHL goalies. Schema `double`. */
   save_pctg5v5_details_save_pctg_percentile?: number | null;
-  /** Schema `double`. */
+  /** Goalie's 5-on-5 save percentage recorded specifically in close-score situations. Schema `double`. */
   save_pctg5v5_details_save_pctg_close_value?: number | null;
-  /** Schema `double`. */
+  /** League-average 5-on-5 save percentage in close-score situations (one-goal games in the third period or overtime) for the current period. Schema `double`. */
   save_pctg5v5_details_save_pctg_close_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the goalie's 5-on-5 save percentage in close-score situations relative to all qualifying NHL goalies. Schema `double`. */
   save_pctg5v5_details_save_pctg_close_percentile?: number | null;
-  /** Schema `integer`. */
+  /** Total number of 5-on-5 shots the goalie faced during the current period. Schema `integer`. */
   save_pctg5v5_details_shots_value?: number | null;
-  /** Schema `integer`. */
+  /** League-average number of 5-on-5 shots faced per game by NHL goalies for the current period. Schema `integer`. */
   save_pctg5v5_details_shots_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the goalie's 5-on-5 shots-faced count relative to all qualifying NHL goalies. Schema `double`. */
   save_pctg5v5_details_shots_percentile?: number | null;
-  /** Schema `double`. */
+  /** Goalie's rate of 5-on-5 shots faced per 60 minutes of even-strength ice time. Schema `double`. */
   save_pctg5v5_details_shots_per60_value?: number | null;
-  /** Schema `double`. */
+  /** League-average rate of 5-on-5 shots faced per 60 minutes of even-strength ice time. Schema `double`. */
   save_pctg5v5_details_shots_per60_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the goalie's 5-on-5 shots-faced-per-60-minutes rate relative to all qualifying NHL goalies. Schema `double`. */
   save_pctg5v5_details_shots_per60_percentile?: number | null;
 }
 
@@ -234,73 +234,73 @@ export interface NhlEdgeGoalie5v5DetailRow {
  * One row of `sdv.nhl.nhl_edge_goalie_comparison({ parsed: true })` (returns schema `native/nhl_edge/goalie_comparison`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeGoalieComparisonRow {
-  /** Schema `character`. */
+  /** Serialized list of season identifiers for which EDGE player-tracking data is available for this goalie. Schema `character`. */
   seasons_with_edge_stats?: string | null;
-  /** Schema `character`. */
+  /** High-level serialized summary of the goalie's save percentages grouped by shot location zone. Schema `character`. */
   shot_location_summary?: string | null;
-  /** Schema `character`. */
+  /** Serialized shot-zone breakdown detailing save rates from each ice region (slot, off-wing, etc.). Schema `character`. */
   shot_location_details?: string | null;
-  /** Schema `character`. */
+  /** Serialized breakdown of the goalie's 5-on-5 save percentage across their last 10 games. Schema `character`. */
   save_pctg5v5_last10?: string | null;
-  /** Schema `character`. */
+  /** Serialized summary of the goalie's save percentage across their most recent 10 games. Schema `character`. */
   save_pctg_last10?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Participant birth date (YYYY-MM-DD). Schema `character`. */
   player_birth_date?: string | null;
-  /** Schema `character`. */
+  /** Handedness indicator showing which side the goalie catches (L = left-catch, R = right-catch). Schema `character`. */
   player_shoots_catches?: string | null;
-  /** Schema `integer`. */
+  /** Player jersey number. Schema `integer`. */
   player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** URL slug for the player. Schema `character`. */
   player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL to the player headshot image. Schema `character`. */
   player_headshot?: string | null;
-  /** Schema `integer`. */
+  /** Number of decisions recorded as wins for the goalie during the comparison period. Schema `integer`. */
   player_wins?: number | null;
-  /** Schema `integer`. */
+  /** Number of decisions recorded as losses for the goalie during the comparison period. Schema `integer`. */
   player_losses?: number | null;
-  /** Schema `integer`. */
+  /** Number of losses the goalie suffered after regulation time, counting as an overtime loss in the standings. Schema `integer`. */
   player_overtime_losses?: number | null;
-  /** Schema `double`. */
+  /** Goalie's goals-against average — average goals allowed per 60 minutes of ice time. Schema `double`. */
   player_goals_against_avg?: number | null;
-  /** Schema `double`. */
+  /** Overall save percentage for the goalie — proportion of shots faced that were stopped. Schema `double`. */
   player_save_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Total number of regular-season or playoff games the goalie appeared in during the comparison period. Schema `integer`. */
   player_games_played?: number | null;
-  /** Schema `character`. */
+  /** Player team common name (default locale). Schema `character`. */
   player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player team place name with preposition (default locale). Schema `character`. */
   player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Player team place name with preposition (French locale). Schema `character`. */
   player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Player team abbreviation. Schema `character`. */
   player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Player team light-mode logo URL. Schema `character`. */
   player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** Player team dark-mode logo URL. Schema `character`. */
   player_team_team_logo_dark?: string | null;
-  /** Schema `double`. */
+  /** Goalie's save percentage in 5-on-5 even-strength situations only. Schema `double`. */
   save_pctg5v5_details_save_pctg?: number | null;
-  /** Schema `double`. */
+  /** Save percentage in 5-on-5 situations where the game score was within one goal (close-game situations). Schema `double`. */
   save_pctg5v5_details_save_pctg_close?: number | null;
-  /** Schema `integer`. */
+  /** Total number of shots the goalie faced in 5-on-5 situations during the comparison period. Schema `integer`. */
   save_pctg5v5_details_shots?: number | null;
-  /** Schema `double`. */
+  /** Rate of shots faced per 60 minutes of 5-on-5 ice time, reflecting workload intensity. Schema `double`. */
   save_pctg5v5_details_shots_per60?: number | null;
-  /** Schema `integer`. */
+  /** Number of games in which the goalie posted a save percentage above .900 during the comparison period. Schema `integer`. */
   save_pctg_details_games_above900?: number | null;
-  /** Schema `double`. */
+  /** Proportion of the goalie's games (as a percentage) in which they achieved a save percentage above .900. Schema `double`. */
   save_pctg_details_pctg_games_above900?: number | null;
-  /** Schema `double`. */
+  /** Team points percentage in games started by this goalie, reflecting their contribution to standings. Schema `double`. */
   save_pctg_details_point_pctg?: number | null;
-  /** Schema `double`. */
+  /** Goals-against average from the detailed save-percentage breakdown dataset for this goalie. Schema `double`. */
   save_pctg_details_goals_against_avg?: number | null;
-  /** Schema `double`. */
+  /** Overall save percentage from the detailed breakdown dataset, capturing all situations. Schema `double`. */
   save_pctg_details_save_pctg?: number | null;
 }
 
@@ -308,81 +308,81 @@ export interface NhlEdgeGoalieComparisonRow {
  * One row of `sdv.nhl.nhl_edge_goalie_detail({ parsed: true })` (returns schema `native/nhl_edge/goalie_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeGoalieDetailRow {
-  /** Schema `character`. */
+  /** Serialized list of seasons for which NHL EDGE player-tracking data is available for this goalie. Schema `character`. */
   seasons_with_edge_stats?: string | null;
-  /** Schema `character`. */
+  /** Serialized summary of shot-location zones faced by the goalie, aggregated from NHL EDGE tracking data. Schema `character`. */
   shot_location_summary?: string | null;
-  /** Schema `character`. */
+  /** Serialized detailed breakdown of shot locations faced by the goalie, derived from NHL EDGE tracking data. Schema `character`. */
   shot_location_details?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Participant birth date (YYYY-MM-DD). Schema `character`. */
   player_birth_date?: string | null;
-  /** Schema `character`. */
+  /** Hand on which the goalie catches (glove side), typically 'L' for left or 'R' for right. Schema `character`. */
   player_shoots_catches?: string | null;
-  /** Schema `integer`. */
+  /** Player jersey number. Schema `integer`. */
   player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** URL slug for the player. Schema `character`. */
   player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL to the player headshot image. Schema `character`. */
   player_headshot?: string | null;
-  /** Schema `integer`. */
+  /** Number of wins credited to the goalie for the season in this NHL EDGE detail record. Schema `integer`. */
   player_wins?: number | null;
-  /** Schema `integer`. */
+  /** Number of regulation losses credited to the goalie for the season in this NHL EDGE detail record. Schema `integer`. */
   player_losses?: number | null;
-  /** Schema `integer`. */
+  /** Number of overtime or shootout losses (OTL) credited to the goalie during the season. Schema `integer`. */
   player_overtime_losses?: number | null;
-  /** Schema `double`. */
+  /** Goals-against average (GAA) for the goalie during the season, reflecting the average number of goals allowed per 60 minutes played. Schema `double`. */
   player_goals_against_avg?: number | null;
-  /** Schema `double`. */
+  /** Save percentage (SV%) for the goalie during the season, expressed as a decimal ratio of saves to shots faced. Schema `double`. */
   player_save_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Total number of regular-season games the goalie appeared in for the season covered by this NHL EDGE detail record. Schema `integer`. */
   player_games_played?: number | null;
-  /** Schema `character`. */
+  /** Player team common name (default locale). Schema `character`. */
   player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player team place name with preposition (default locale). Schema `character`. */
   player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Player team place name with preposition (French locale). Schema `character`. */
   player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Player team abbreviation. Schema `character`. */
   player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Player team light-mode logo URL. Schema `character`. */
   player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** Player team dark-mode logo URL. Schema `character`. */
   player_team_team_logo_dark?: string | null;
-  /** Schema `double`. */
+  /** Goalie's goals-against average value as reported in the NHL EDGE detail stat block (mirrors player_goals_against_avg at the EDGE layer). Schema `double`. */
   stats_goals_against_avg_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL goalies for goals-against average as reported in the NHL EDGE detail. Schema `double`. */
   stats_goals_against_avg_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average GAA value used as the EDGE comparative baseline for this goalie's goals-against-average metric. Schema `double`. */
   stats_goals_against_avg_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Goalie's own count of games in which save percentage exceeded .900, as tracked by the NHL EDGE system. Schema `double`. */
   stats_games_above900_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL goalies for the 'games above .900 save percentage' EDGE metric during the season. Schema `double`. */
   stats_games_above900_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average value for the 'games above .900 save percentage' EDGE metric, used as a comparative baseline for the goalie. Schema `double`. */
   stats_games_above900_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Goalie's net goal differential (team goals scored minus goals allowed while in net) per 60 minutes of play, as tracked by the NHL EDGE system. Schema `double`. */
   stats_goal_differential_per60_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL goalies for the goals-differential-per-60 EDGE metric during the season. Schema `double`. */
   stats_goal_differential_per60_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average net goal differential (team goals scored minus goals allowed while in net) per 60 minutes, the EDGE baseline comparator for the goalie. Schema `double`. */
   stats_goal_differential_per60_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Average number of goals scored by the goalie's team per game while this goalie was in net, as tracked by NHL EDGE. Schema `double`. */
   stats_goal_support_avg_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL goalies for average goal support received while the goalie was in net. Schema `double`. */
   stats_goal_support_avg_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average goal-support value (average goals scored for the goalie while in net), used as the EDGE baseline comparator. Schema `double`. */
   stats_goal_support_avg_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Team points percentage in games started by this goalie during the season, as tracked by the NHL EDGE system. Schema `double`. */
   stats_point_pctg_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL goalies for team points percentage in games the goalie started, per NHL EDGE. Schema `double`. */
   stats_point_pctg_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average points percentage (team winning percentage when the goalie starts) used as the EDGE comparative baseline. Schema `double`. */
   stats_point_pctg_league_avg?: number | null;
 }
 
@@ -390,161 +390,161 @@ export interface NhlEdgeGoalieDetailRow {
  * One row of `sdv.nhl.nhl_edge_goalie_landing({ parsed: true })` (returns schema `native/nhl_edge/goalie_landing`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeGoalieLandingRow {
-  /** Schema `character`. */
+  /** Serialized list of season identifiers for which EDGE player-tracking data is available on this landing page. Schema `character`. */
   seasons_with_edge_stats?: string | null;
-  /** Schema `integer`. */
+  /** Minimum minutes-played threshold a goalie must meet to qualify for the EDGE leaderboards. Schema `integer`. */
   minimum_minutes_played?: number | null;
-  /** Schema `integer` (an id). */
+  /** NHL player identifier for the goalie leading the high-danger save-percentage leaderboard. Schema `integer` (an id). */
   leaders_high_danger_save_pctg_player_id?: string | null;
-  /** Schema `character`. */
+  /** First name of the goalie leading the high-danger save-percentage leaderboard (default locale). Schema `character`. */
   leaders_high_danger_save_pctg_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the goalie leading the high-danger save-percentage leaderboard (default locale). Schema `character`. */
   leaders_high_danger_save_pctg_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the high-danger save-percentage leader rendered in Czech locale. Schema `character`. */
   leaders_high_danger_save_pctg_player_last_name_cs?: string | null;
-  /** Schema `character`. */
+  /** Last name of the high-danger save-percentage leader rendered in Slovak locale. Schema `character`. */
   leaders_high_danger_save_pctg_player_last_name_sk?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number worn by the goalie leading the high-danger save-percentage leaderboard. Schema `integer`. */
   leaders_high_danger_save_pctg_player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Position code for the goalie leading the high-danger save-percentage leaderboard (always G). Schema `character`. */
   leaders_high_danger_save_pctg_player_position?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly slug for the high-danger save-percentage leader, used in NHL.com profile links. Schema `character`. */
   leaders_high_danger_save_pctg_player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL pointing to the headshot image of the goalie leading the high-danger save-percentage leaderboard. Schema `character`. */
   leaders_high_danger_save_pctg_player_headshot?: string | null;
-  /** Schema `character`. */
+  /** Common team name for the club of the leader in the high-danger save-percentage category. Schema `character`. */
   leaders_high_danger_save_pctg_player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** City/place name with grammatical preposition for the high-danger save-percentage leader's team, default locale. Schema `character`. */
   leaders_high_danger_save_pctg_player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** City/place name with grammatical preposition for the high-danger save-percentage leader's team in the French locale. Schema `character`. */
   leaders_high_danger_save_pctg_player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter team abbreviation for the club of the goalie leading the high-danger save-percentage leaderboard. Schema `character`. */
   leaders_high_danger_save_pctg_player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL for the light-background team logo for the high-danger save-percentage leaderboard leader. Schema `character`. */
   leaders_high_danger_save_pctg_player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL for the dark-background team logo for the high-danger save-percentage leaderboard leader. Schema `character`. */
   leaders_high_danger_save_pctg_player_team_team_logo_dark?: string | null;
-  /** Schema `double`. */
+  /** Save percentage value for the leader of the high-danger save-percentage leaderboard. Schema `double`. */
   leaders_high_danger_save_pctg_save_pctg?: number | null;
-  /** Schema `character`. */
+  /** Serialized shot-zone breakdown for the high-danger save-percentage leaderboard leader. Schema `character`. */
   leaders_high_danger_save_pctg_shot_location_details?: string | null;
-  /** Schema `integer` (an id). */
+  /** NHL player identifier for the goalie leading the high-danger saves leaderboard. Schema `integer` (an id). */
   leaders_high_danger_saves_player_id?: string | null;
-  /** Schema `character`. */
+  /** First name of the goalie leading the high-danger saves leaderboard (default locale). Schema `character`. */
   leaders_high_danger_saves_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the goalie leading the high-danger saves leaderboard (default locale). Schema `character`. */
   leaders_high_danger_saves_player_last_name_default?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number worn by the goalie leading the high-danger saves leaderboard. Schema `integer`. */
   leaders_high_danger_saves_player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Position code for the goalie leading the high-danger saves leaderboard (always G). Schema `character`. */
   leaders_high_danger_saves_player_position?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly slug for the high-danger saves leaderboard leader, used in NHL.com profile links. Schema `character`. */
   leaders_high_danger_saves_player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL pointing to the headshot image of the goalie leading the high-danger saves leaderboard. Schema `character`. */
   leaders_high_danger_saves_player_headshot?: string | null;
-  /** Schema `character`. */
+  /** Common team name for the club of the leader in the high-danger saves category. Schema `character`. */
   leaders_high_danger_saves_player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** City/place name with grammatical preposition for the high-danger saves leader's team, default locale. Schema `character`. */
   leaders_high_danger_saves_player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** City/place name with grammatical preposition for the high-danger saves leader's team in the French locale. Schema `character`. */
   leaders_high_danger_saves_player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter team abbreviation for the club of the goalie leading the high-danger saves leaderboard. Schema `character`. */
   leaders_high_danger_saves_player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL for the light-background team logo for the high-danger saves leaderboard leader. Schema `character`. */
   leaders_high_danger_saves_player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL for the dark-background team logo for the high-danger saves leaderboard leader. Schema `character`. */
   leaders_high_danger_saves_player_team_team_logo_dark?: string | null;
-  /** Schema `integer`. */
+  /** Total high-danger saves made by the goalie leading the high-danger saves leaderboard. Schema `integer`. */
   leaders_high_danger_saves_saves?: number | null;
-  /** Schema `character`. */
+  /** Serialized shot-zone breakdown for the high-danger saves leaderboard leader. Schema `character`. */
   leaders_high_danger_saves_shot_location_details?: string | null;
-  /** Schema `integer` (an id). */
+  /** NHL player identifier for the goalie leading the high-danger goals-against leaderboard. Schema `integer` (an id). */
   leaders_high_danger_goals_against_player_id?: string | null;
-  /** Schema `character`. */
+  /** First name of the goalie leading the high-danger goals-against leaderboard (default locale). Schema `character`. */
   leaders_high_danger_goals_against_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the goalie leading the high-danger goals-against leaderboard (default locale). Schema `character`. */
   leaders_high_danger_goals_against_player_last_name_default?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number worn by the goalie leading the high-danger goals-against leaderboard. Schema `integer`. */
   leaders_high_danger_goals_against_player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Position code for the goalie leading the high-danger goals-against leaderboard (always G). Schema `character`. */
   leaders_high_danger_goals_against_player_position?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly slug for the goalie leading the high-danger goals-against leaderboard, used in NHL.com profile links. Schema `character`. */
   leaders_high_danger_goals_against_player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL pointing to the headshot image of the goalie leading the high-danger goals-against leaderboard. Schema `character`. */
   leaders_high_danger_goals_against_player_headshot?: string | null;
-  /** Schema `character`. */
+  /** Common team name for the club of the leader in the high-danger goals-against category. Schema `character`. */
   leaders_high_danger_goals_against_player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** City/place name with grammatical preposition for the high-danger goals-against leader's team, default locale. Schema `character`. */
   leaders_high_danger_goals_against_player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** City/place name with grammatical preposition for the high-danger goals-against leader's team in the French locale. Schema `character`. */
   leaders_high_danger_goals_against_player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter team abbreviation for the club of the goalie leading the high-danger goals-against leaderboard. Schema `character`. */
   leaders_high_danger_goals_against_player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL for the light-background team logo for the high-danger goals-against leaderboard leader. Schema `character`. */
   leaders_high_danger_goals_against_player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL for the dark-background team logo for the high-danger goals-against leaderboard leader. Schema `character`. */
   leaders_high_danger_goals_against_player_team_team_logo_dark?: string | null;
-  /** Schema `integer`. */
+  /** Number of high-danger goals allowed by the goalie leading the high-danger goals-against leaderboard. Schema `integer`. */
   leaders_high_danger_goals_against_goals_against?: number | null;
-  /** Schema `integer` (an id). */
+  /** NHL player identifier for the goalie leading the 5-on-5 save-percentage leaderboard. Schema `integer` (an id). */
   leaders_save_pctg5v5_player_id?: string | null;
-  /** Schema `character`. */
+  /** First name of the goalie leading the 5-on-5 save-percentage leaderboard (default locale). Schema `character`. */
   leaders_save_pctg5v5_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the goalie leading the 5-on-5 save-percentage leaderboard (default locale). Schema `character`. */
   leaders_save_pctg5v5_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the 5-on-5 save-percentage leader rendered in Czech locale. Schema `character`. */
   leaders_save_pctg5v5_player_last_name_cs?: string | null;
-  /** Schema `character`. */
+  /** Last name of the 5-on-5 save-percentage leader rendered in Slovak locale. Schema `character`. */
   leaders_save_pctg5v5_player_last_name_sk?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number worn by the goalie leading the 5-on-5 save-percentage leaderboard. Schema `integer`. */
   leaders_save_pctg5v5_player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Position code for the goalie leading the 5-on-5 save-percentage leaderboard (always G). Schema `character`. */
   leaders_save_pctg5v5_player_position?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly slug for the 5-on-5 save-percentage leaderboard leader, used in NHL.com profile links. Schema `character`. */
   leaders_save_pctg5v5_player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL pointing to the headshot image of the goalie leading the 5-on-5 save-percentage leaderboard. Schema `character`. */
   leaders_save_pctg5v5_player_headshot?: string | null;
-  /** Schema `character`. */
+  /** Common team name for the club of the leader in the 5-on-5 save-percentage category. Schema `character`. */
   leaders_save_pctg5v5_player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** City/place name with grammatical preposition for the 5-on-5 save-percentage leader's team, default locale. Schema `character`. */
   leaders_save_pctg5v5_player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** City/place name with grammatical preposition for the 5-on-5 save-percentage leader's team in the French locale. Schema `character`. */
   leaders_save_pctg5v5_player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter team abbreviation for the club of the goalie leading the 5-on-5 save-percentage leaderboard. Schema `character`. */
   leaders_save_pctg5v5_player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL for the light-background team logo for the 5-on-5 save-percentage leaderboard leader. Schema `character`. */
   leaders_save_pctg5v5_player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL for the dark-background team logo for the 5-on-5 save-percentage leaderboard leader. Schema `character`. */
   leaders_save_pctg5v5_player_team_team_logo_dark?: string | null;
-  /** Schema `double`. */
+  /** Save percentage value for the leader of the 5-on-5 save-percentage leaderboard. Schema `double`. */
   leaders_save_pctg5v5_save_pctg?: number | null;
-  /** Schema `integer` (an id). */
+  /** NHL player identifier for the goalie leading the games-above-.900 leaderboard. Schema `integer` (an id). */
   leaders_games_above900_player_id?: string | null;
-  /** Schema `character`. */
+  /** First name of the goalie leading the games-above-.900 leaderboard (default locale). Schema `character`. */
   leaders_games_above900_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the goalie leading the games-above-.900 leaderboard (default locale). Schema `character`. */
   leaders_games_above900_player_last_name_default?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number worn by the goalie leading the games-above-.900 leaderboard. Schema `integer`. */
   leaders_games_above900_player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Position code for the goalie leading the games-above-.900 leaderboard (always G). Schema `character`. */
   leaders_games_above900_player_position?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly slug for the goalie leading the games-above-.900 leaderboard, used in NHL.com profile links. Schema `character`. */
   leaders_games_above900_player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL pointing to the headshot image of the goalie leading the games-above-.900 leaderboard. Schema `character`. */
   leaders_games_above900_player_headshot?: string | null;
-  /** Schema `character`. */
+  /** Common team name (e.g., Maple Leafs) for the club of the leader in the games-above-.900 category. Schema `character`. */
   leaders_games_above900_player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** City/place name with grammatical preposition (e.g., in Toronto) for the leader's team, in the default locale. Schema `character`. */
   leaders_games_above900_player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** City/place name with grammatical preposition for the leader's team in the French locale. Schema `character`. */
   leaders_games_above900_player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter team abbreviation for the club of the goalie leading the games-above-.900 leaderboard. Schema `character`. */
   leaders_games_above900_player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL for the light-background version of the team logo for the games-above-.900 leaderboard leader. Schema `character`. */
   leaders_games_above900_player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL for the dark-background version of the team logo for the games-above-.900 leaderboard leader. Schema `character`. */
   leaders_games_above900_player_team_team_logo_dark?: string | null;
-  /** Schema `integer`. */
+  /** Number of games above a .900 save percentage for the top-ranked goalie in that leaderboard category. Schema `integer`. */
   leaders_games_above900_games?: number | null;
 }
 
@@ -552,19 +552,19 @@ export interface NhlEdgeGoalieLandingRow {
  * One row of `sdv.nhl.nhl_edge_goalie_save_percentage_detail({ parsed: true })` (returns schema `native/nhl_edge/goalie_save_percentage_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeGoalieSavePercentageDetailRow {
-  /** Schema `character`. */
+  /** Serialized summary of the goalie's save percentage across their most recent 10 games. Schema `character`. */
   save_pctg_last10?: string | null;
-  /** Schema `integer`. */
+  /** Actual count of games in which this goalie achieved a save percentage above .900. Schema `integer`. */
   save_pctg_details_games_above900_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of this goalie's games-above-.900 count relative to all qualifying goalies. Schema `double`. */
   save_pctg_details_games_above900_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average number of games in which goalies posted a save percentage above .900, used as a comparison baseline. Schema `double`. */
   save_pctg_details_games_above900_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Proportion (as a decimal fraction) of the goalie's games in which they exceeded a .900 save percentage. Schema `double`. */
   save_pctg_details_pctg_games_above900_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of this goalie's proportion of games above .900 relative to all qualifying goalies. Schema `double`. */
   save_pctg_details_pctg_games_above900_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of games with a save percentage above .900, used as the baseline comparison. Schema `double`. */
   save_pctg_details_pctg_games_above900_league_avg?: number | null;
 }
 
@@ -572,23 +572,23 @@ export interface NhlEdgeGoalieSavePercentageDetailRow {
  * One row of `sdv.nhl.nhl_edge_goalie_shot_location_detail({ parsed: true })` (returns schema `native/nhl_edge/goalie_shot_location_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeGoalieShotLocationDetailRow {
-  /** Schema `character`. */
+  /** Net/ice zone the shots were taken from. Schema `character`. */
   area?: string | null;
-  /** Schema `integer`. */
+  /** Shots faced. Schema `integer`. */
   shots_against?: number | null;
-  /** Schema `integer`. */
+  /** Saves made. Schema `integer`. */
   saves?: number | null;
-  /** Schema `integer`. */
+  /** Goals against. Schema `integer`. */
   goals_against?: number | null;
-  /** Schema `double`. */
+  /** Save percentage. Schema `double`. */
   save_pctg?: number | null;
-  /** Schema `double`. */
+  /** League percentile rank for shots against. Schema `double`. */
   shots_against_percentile?: number | null;
-  /** Schema `double`. */
+  /** League percentile rank for saves. Schema `double`. */
   saves_percentile?: number | null;
-  /** Schema `double`. */
+  /** League percentile rank for goals against. Schema `double`. */
   goals_against_percentile?: number | null;
-  /** Schema `double`. */
+  /** League percentile rank for save percentage. Schema `double`. */
   save_pctg_percentile?: number | null;
 }
 
@@ -596,215 +596,215 @@ export interface NhlEdgeGoalieShotLocationDetailRow {
  * One row of `sdv.nhl.nhl_edge_skater_comparison({ parsed: true })` (returns schema `native/nhl_edge/skater_comparison`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeSkaterComparisonRow {
-  /** Schema `character`. */
+  /** Serialized list of seasons for which NHL EDGE player-tracking data is available for the skater. Schema `character`. */
   seasons_with_edge_stats?: string | null;
-  /** Schema `character`. */
+  /** Serialized skating-distance trend data for the skater's most recent 10 games. Schema `character`. */
   skating_distance_last10?: string | null;
-  /** Schema `character`. */
+  /** Serialized shot-location breakdown object containing zone-based shot attempt counts and percentages. Schema `character`. */
   shot_location_details?: string | null;
-  /** Schema `character`. */
+  /** Serialized aggregate shot-location totals across all zones for the skater. Schema `character`. */
   shot_location_totals?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Participant birth date (YYYY-MM-DD). Schema `character`. */
   player_birth_date?: string | null;
-  /** Schema `character`. */
+  /** Handedness of the skater's shot or, for goalies, their catching hand (L or R). Schema `character`. */
   player_shoots_catches?: string | null;
-  /** Schema `integer`. */
+  /** Player jersey number. Schema `integer`. */
   player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Primary player position. Schema `character`. */
   player_position?: string | null;
-  /** Schema `character`. */
+  /** URL slug for the player. Schema `character`. */
   player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL to the player headshot image. Schema `character`. */
   player_headshot?: string | null;
-  /** Schema `integer`. */
+  /** Total regular-season goals scored by the skater in the current season. Schema `integer`. */
   player_goals?: number | null;
-  /** Schema `integer`. */
+  /** Total regular-season assists recorded by the skater in the current season. Schema `integer`. */
   player_assists?: number | null;
-  /** Schema `integer`. */
+  /** Player points. Schema `integer`. */
   player_points?: number | null;
-  /** Schema `integer`. */
+  /** Number of regular-season games the skater appeared in during the current season. Schema `integer`. */
   player_games_played?: number | null;
-  /** Schema `character`. */
+  /** Player team common name (default locale). Schema `character`. */
   player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player team place name with preposition (default locale). Schema `character`. */
   player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Player team place name with preposition (French locale). Schema `character`. */
   player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Player team abbreviation. Schema `character`. */
   player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Player team light-mode logo URL. Schema `character`. */
   player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** Player team dark-mode logo URL. Schema `character`. */
   player_team_team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** Player team URL-friendly slug. Schema `character`. */
   player_team_slug?: string | null;
-  /** Schema `double`. */
+  /** Skater's single highest recorded shot speed in miles per hour for the season. Schema `double`. */
   shot_speed_details_top_shot_speed_imperial?: number | null;
-  /** Schema `double`. */
+  /** Skater's single highest recorded shot speed in kilometres per hour for the season. Schema `double`. */
   shot_speed_details_top_shot_speed_metric?: number | null;
-  /** Schema `character`. */
+  /** Skater's first name as displayed in the top-shot-speed overlay. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Skater's last name as displayed in the top-shot-speed overlay. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Calendar date of the game in which the skater recorded their top shot speed. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the away team in the game where the skater recorded their top shot speed. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Away team's final score in the game where the skater recorded their top shot speed. Schema `integer`. */
   shot_speed_details_top_shot_speed_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Abbreviation of the home team in the game where the skater recorded their top shot speed. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Home team's final score in the game where the skater recorded their top shot speed. Schema `integer`. */
   shot_speed_details_top_shot_speed_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Period type (REG, OT, or SO) of the final period in the game where the skater's top shot speed was recorded. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods played in the top-shot-speed game (typically 3). Schema `integer`. */
   shot_speed_details_top_shot_speed_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number in which the skater recorded their top shot speed. Schema `integer`. */
   shot_speed_details_top_shot_speed_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type label (REG, OT, or SO) of the period in which the skater's top shot speed occurred. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `character`. */
+  /** Elapsed time within the period (mm:ss) when the skater's top shot speed was recorded. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_time_in_period?: string | null;
-  /** Schema `integer`. */
+  /** Numeric game-type code (e.g. 2 for regular season, 3 for playoffs) for the top-shot-speed game. Schema `integer`. */
   shot_speed_details_top_shot_speed_overlay_game_type?: number | null;
-  /** Schema `double`. */
+  /** Skater's average shot speed in miles per hour, measured by NHL EDGE puck-tracking. Schema `double`. */
   shot_speed_details_avg_shot_speed_imperial?: number | null;
-  /** Schema `double`. */
+  /** Skater's average shot speed in kilometres per hour, measured by NHL EDGE puck-tracking. Schema `double`. */
   shot_speed_details_avg_shot_speed_metric?: number | null;
-  /** Schema `integer`. */
+  /** Number of shot attempts the skater recorded at speeds exceeding 100 mph. Schema `integer`. */
   shot_speed_details_shot_attempts_over100?: number | null;
-  /** Schema `integer`. */
+  /** Number of shot attempts the skater recorded at speeds between 90 and 100 mph. Schema `integer`. */
   shot_speed_details_shot_attempts90_to100?: number | null;
-  /** Schema `integer`. */
+  /** Number of shot attempts the skater recorded at speeds between 80 and 90 mph. Schema `integer`. */
   shot_speed_details_shot_attempts80_to90?: number | null;
-  /** Schema `integer`. */
+  /** Number of shot attempts the skater recorded at speeds between 70 and 80 mph. Schema `integer`. */
   shot_speed_details_shot_attempts70_to80?: number | null;
-  /** Schema `double`. */
+  /** Skater's single highest skating speed recorded during the season, in miles per hour. Schema `double`. */
   skating_speed_details_max_skating_speed_imperial?: number | null;
-  /** Schema `double`. */
+  /** Skater's single highest skating speed recorded during the season, in kilometres per hour. Schema `double`. */
   skating_speed_details_max_skating_speed_metric?: number | null;
-  /** Schema `character`. */
+  /** Skater's first name as displayed in the top-skating-speed overlay. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Skater's last name as displayed in the top-skating-speed overlay. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Calendar date of the game in which the skater reached their maximum skating speed. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the away team in the game where the skater recorded their top skating speed. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Away team's final score in the game where the skater recorded their top skating speed. Schema `integer`. */
   skating_speed_details_max_skating_speed_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Abbreviation of the home team in the game where the skater recorded their top skating speed. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Home team's final score in the game where the skater recorded their top skating speed. Schema `integer`. */
   skating_speed_details_max_skating_speed_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Period type (REG, OT, or SO) of the final period in the game where the skater's top speed was recorded. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods in the game where the skater reached their top skating speed (typically 3). Schema `integer`. */
   skating_speed_details_max_skating_speed_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number in which the skater reached their maximum skating speed. Schema `integer`. */
   skating_speed_details_max_skating_speed_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type label (REG or OT) for the period in which the skater's top speed occurred. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `character`. */
+  /** Elapsed time within the period (mm:ss) when the skater reached their maximum skating speed. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_time_in_period?: string | null;
-  /** Schema `integer`. */
+  /** Numeric game-type code for the game in which the skater recorded their maximum skating speed. Schema `integer`. */
   skating_speed_details_max_skating_speed_overlay_game_type?: number | null;
-  /** Schema `integer`. */
+  /** Number of skating speed bursts the skater recorded exceeding 22 mph during the season. Schema `integer`. */
   skating_speed_details_bursts_over22?: number | null;
-  /** Schema `integer`. */
+  /** Number of skating speed bursts the skater recorded between 20 and 22 mph during the season. Schema `integer`. */
   skating_speed_details_bursts20_to22?: number | null;
-  /** Schema `integer`. */
+  /** Number of skating speed bursts the skater recorded between 18 and 20 mph during the season. Schema `integer`. */
   skating_speed_details_bursts18_to20?: number | null;
-  /** Schema `double`. */
+  /** Total cumulative skating distance the skater covered across all games in the season, in miles. Schema `double`. */
   skating_distance_details_distance_total_imperial?: number | null;
-  /** Schema `double`. */
+  /** Total cumulative skating distance the skater covered across all games in the season, in kilometres. Schema `double`. */
   skating_distance_details_distance_total_metric?: number | null;
-  /** Schema `double`. */
+  /** Skater's average skating distance per 60 minutes of ice time during the season, in miles. Schema `double`. */
   skating_distance_details_distance_per60_imperial?: number | null;
-  /** Schema `double`. */
+  /** Skater's average skating distance per 60 minutes of ice time during the season, in kilometres. Schema `double`. */
   skating_distance_details_distance_per60_metric?: number | null;
-  /** Schema `double`. */
+  /** Greatest total distance the skater covered in any single game during the season, in miles. Schema `double`. */
   skating_distance_details_distance_max_game_imperial?: number | null;
-  /** Schema `double`. */
+  /** Greatest total distance the skater covered in any single game during the season, in kilometres. Schema `double`. */
   skating_distance_details_distance_max_game_metric?: number | null;
-  /** Schema `character`. */
+  /** Skater's first name as displayed in the single-game maximum distance overlay. Schema `character`. */
   skating_distance_details_distance_max_game_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Skater's last name as displayed in the single-game maximum distance overlay. Schema `character`. */
   skating_distance_details_distance_max_game_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Calendar date of the game in which the skater covered their maximum single-game distance. Schema `character`. */
   skating_distance_details_distance_max_game_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the away team in the game where the skater set their single-game distance record. Schema `character`. */
   skating_distance_details_distance_max_game_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Away team's final score in the game where the skater set their single-game distance record. Schema `integer`. */
   skating_distance_details_distance_max_game_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Abbreviation of the home team in the game where the skater set their single-game distance record. Schema `character`. */
   skating_distance_details_distance_max_game_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Home team's final score in the game where the skater set their single-game distance record. Schema `integer`. */
   skating_distance_details_distance_max_game_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Period type (REG, OT, or SO) of the final period in the skater's maximum single-game distance game. Schema `character`. */
   skating_distance_details_distance_max_game_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Number of overtime periods played in the game where the skater set their single-game distance record. Schema `integer`. */
   skating_distance_details_distance_max_game_overlay_game_outcome_ot_periods?: number | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods in the game where the skater covered their greatest single-game distance. Schema `integer`. */
   skating_distance_details_distance_max_game_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number being referenced in the skater's maximum single-game distance overlay context. Schema `integer`. */
   skating_distance_details_distance_max_game_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type label for the period referenced in the skater's maximum single-game distance overlay. Schema `character`. */
   skating_distance_details_distance_max_game_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Numeric game-type code for the game in which the skater covered their maximum single-game distance. Schema `integer`. */
   skating_distance_details_distance_max_game_overlay_game_type?: number | null;
-  /** Schema `double`. */
+  /** Greatest distance the skater covered in any single period during the season, in miles. Schema `double`. */
   skating_distance_details_distance_max_period_imperial?: number | null;
-  /** Schema `double`. */
+  /** Greatest distance the skater covered in any single period during the season, in kilometres. Schema `double`. */
   skating_distance_details_distance_max_period_metric?: number | null;
-  /** Schema `character`. */
+  /** Skater's first name as displayed in the single-period maximum distance overlay. Schema `character`. */
   skating_distance_details_distance_max_period_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Skater's last name as displayed in the single-period maximum distance overlay. Schema `character`. */
   skating_distance_details_distance_max_period_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Calendar date of the game in which the skater covered their maximum single-period distance. Schema `character`. */
   skating_distance_details_distance_max_period_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the away team in the game where the skater set their single-period distance record. Schema `character`. */
   skating_distance_details_distance_max_period_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Away team's final score in the game where the skater set their single-period distance record. Schema `integer`. */
   skating_distance_details_distance_max_period_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Abbreviation of the home team in the game where the skater set their single-period distance record. Schema `character`. */
   skating_distance_details_distance_max_period_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Home team's final score in the game where the skater set their single-period distance record. Schema `integer`. */
   skating_distance_details_distance_max_period_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Period type (REG, OT, or SO) of the final period in the skater's maximum single-period distance game. Schema `character`. */
   skating_distance_details_distance_max_period_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods in the game where the skater covered their greatest single-period distance. Schema `integer`. */
   skating_distance_details_distance_max_period_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number in which the skater covered their maximum single-period skating distance. Schema `integer`. */
   skating_distance_details_distance_max_period_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type label (REG, OT) for the period in which the skater's single-period distance record was set. Schema `character`. */
   skating_distance_details_distance_max_period_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Numeric game-type code for the game in which the skater covered their maximum single-period distance. Schema `integer`. */
   skating_distance_details_distance_max_period_overlay_game_type?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the skater's total ice time spent in the offensive zone, per EDGE tracking. Schema `double`. */
   zone_time_details_offensive_zone_pctg?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of ice time that skaters spend in the offensive zone. Schema `double`. */
   zone_time_details_offensive_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the skater's total ice time spent in the neutral zone, per EDGE tracking. Schema `double`. */
   zone_time_details_neutral_zone_pctg?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of ice time that skaters spend in the neutral zone. Schema `double`. */
   zone_time_details_neutral_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the skater's total ice time spent in the defensive zone, per EDGE tracking. Schema `double`. */
   zone_time_details_defensive_zone_pctg?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of ice time that skaters spend in the defensive zone. Schema `double`. */
   zone_time_details_defensive_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the skater's on-ice faceoffs that were taken in the offensive zone. Schema `double`. */
   zone_starts_offensive_zone_starts?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the skater's on-ice faceoffs that were taken in the neutral zone. Schema `double`. */
   zone_starts_neutral_zone_starts?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the skater's on-ice faceoffs that were taken in the defensive zone. Schema `double`. */
   zone_starts_defensive_zone_starts?: number | null;
 }
 
@@ -812,197 +812,197 @@ export interface NhlEdgeSkaterComparisonRow {
  * One row of `sdv.nhl.nhl_edge_skater_detail({ parsed: true })` (returns schema `native/nhl_edge/skater_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeSkaterDetailRow {
-  /** Schema `character`. */
+  /** Comma-separated list or serialized array of seasons for which NHL EDGE player-tracking data is available for this skater. Schema `character`. */
   seasons_with_edge_stats?: string | null;
-  /** Schema `character`. */
+  /** Serialized summary-level shots-on-goal statistics for the skater, as returned in the NHL EDGE skater detail payload. Schema `character`. */
   sog_summary?: string | null;
-  /** Schema `character`. */
+  /** Serialized detail breakdown of shots on goal by game or other sub-category, as returned in the NHL EDGE skater detail payload. Schema `character`. */
   sog_details?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Participant birth date (YYYY-MM-DD). Schema `character`. */
   player_birth_date?: string | null;
-  /** Schema `character`. */
+  /** Handedness indicator for the skater showing the side they shoot from ('L' for left, 'R' for right). Schema `character`. */
   player_shoots_catches?: string | null;
-  /** Schema `integer`. */
+  /** Player jersey number. Schema `integer`. */
   player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Primary player position. Schema `character`. */
   player_position?: string | null;
-  /** Schema `character`. */
+  /** URL slug for the player. Schema `character`. */
   player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL to the player headshot image. Schema `character`. */
   player_headshot?: string | null;
-  /** Schema `integer`. */
+  /** Total regular-season goals scored by the skater in the current NHL season, as returned in the EDGE skater detail. Schema `integer`. */
   player_goals?: number | null;
-  /** Schema `integer`. */
+  /** Total regular-season assists recorded by the skater in the current NHL season, as returned in the EDGE skater detail. Schema `integer`. */
   player_assists?: number | null;
-  /** Schema `integer`. */
+  /** Player points. Schema `integer`. */
   player_points?: number | null;
-  /** Schema `integer`. */
+  /** Total number of regular-season games played by the skater in the current NHL season, as returned in the EDGE skater detail. Schema `integer`. */
   player_games_played?: number | null;
-  /** Schema `character`. */
+  /** Player team common name (default locale). Schema `character`. */
   player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player team place name with preposition (default locale). Schema `character`. */
   player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Player team place name with preposition (French locale). Schema `character`. */
   player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Player team abbreviation. Schema `character`. */
   player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Player team light-mode logo URL. Schema `character`. */
   player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** Player team dark-mode logo URL. Schema `character`. */
   player_team_team_logo_dark?: string | null;
-  /** Schema `double`. */
+  /** Player's highest recorded shot speed for the season measured in miles per hour (imperial), as captured by NHL EDGE puck-tracking. Schema `double`. */
   top_shot_speed_imperial?: number | null;
-  /** Schema `double`. */
+  /** Player's highest recorded shot speed for the season measured in kilometers per hour (metric), as captured by NHL EDGE puck-tracking. Schema `double`. */
   top_shot_speed_metric?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's top shot speed relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   top_shot_speed_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average top shot speed among qualifying skaters for the season, measured in miles per hour (imperial). Schema `double`. */
   top_shot_speed_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average top shot speed among qualifying skaters for the season, measured in kilometers per hour (metric). Schema `double`. */
   top_shot_speed_league_avg_metric?: number | null;
-  /** Schema `character`. */
+  /** Player's first name as stored in the NHL api-web system, included in the overlay for the top-shot-speed game. Schema `character`. */
   top_shot_speed_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player's last name as stored in the NHL api-web system, included in the overlay for the top-shot-speed game. Schema `character`. */
   top_shot_speed_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Date (YYYY-MM-DD) of the game in which the player recorded their top shot speed for the season. Schema `character`. */
   top_shot_speed_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the away team in the game where the player recorded their top shot speed this season. Schema `character`. */
   top_shot_speed_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Away team's final score in the game where the player recorded their season-high shot speed. Schema `integer`. */
   top_shot_speed_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the home team in the game where the player achieved their top shot speed this season. Schema `character`. */
   top_shot_speed_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Home team's final score in the game where the player recorded their season-high shot speed. Schema `integer`. */
   top_shot_speed_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Type of period that ended the game where the player set their top shot speed (e.g., 'REG', 'OT', 'SO'). Schema `character`. */
   top_shot_speed_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods defined for the game type in which the player recorded their top shot speed. Schema `integer`. */
   top_shot_speed_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number in which the player recorded their top shot speed during the referenced game. Schema `integer`. */
   top_shot_speed_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type label (e.g., 'REG', 'OT') for the period in which the player hit their top shot speed. Schema `character`. */
   top_shot_speed_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `character`. */
+  /** Time elapsed within the period (MM:SS) when the player released their top-speed shot for the season. Schema `character`. */
   top_shot_speed_overlay_time_in_period?: string | null;
-  /** Schema `integer`. */
+  /** Numeric code for the game type of the game in which the player recorded their top shot speed (e.g., 2 = regular season). Schema `integer`. */
   top_shot_speed_overlay_game_type?: number | null;
-  /** Schema `double`. */
+  /** Player's top recorded skating speed for the season measured in miles per hour (imperial), as captured by NHL EDGE player tracking. Schema `double`. */
   skating_speed_speed_max_imperial?: number | null;
-  /** Schema `double`. */
+  /** Player's top recorded skating speed for the season measured in kilometers per hour (metric), as captured by NHL EDGE player tracking. Schema `double`. */
   skating_speed_speed_max_metric?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's top skating speed relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   skating_speed_speed_max_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average top skating speed among qualifying skaters for the season, measured in miles per hour (imperial). Schema `double`. */
   skating_speed_speed_max_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average top skating speed among qualifying skaters for the season, measured in kilometers per hour (metric). Schema `double`. */
   skating_speed_speed_max_league_avg_metric?: number | null;
-  /** Schema `character`. */
+  /** Player's first name as stored in the NHL api-web system, included in the overlay for the top-skating-speed game. Schema `character`. */
   skating_speed_speed_max_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player's last name as stored in the NHL api-web system, included in the overlay for the top-skating-speed game. Schema `character`. */
   skating_speed_speed_max_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Date (YYYY-MM-DD) of the game in which the player recorded their top skating speed for the season. Schema `character`. */
   skating_speed_speed_max_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the away team in the game where the player achieved their top skating speed this season. Schema `character`. */
   skating_speed_speed_max_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Away team's final score in the game where the player achieved their season-high skating speed. Schema `integer`. */
   skating_speed_speed_max_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the home team in the game where the player achieved their top skating speed this season. Schema `character`. */
   skating_speed_speed_max_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Home team's final score in the game where the player achieved their season-high skating speed. Schema `integer`. */
   skating_speed_speed_max_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Type of period that ended the game where the player set their top skating speed (e.g., 'REG', 'OT', 'SO'). Schema `character`. */
   skating_speed_speed_max_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods defined for the game type in which the player set their top skating speed. Schema `integer`. */
   skating_speed_speed_max_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number in which the player recorded their top skating speed during the referenced game. Schema `integer`. */
   skating_speed_speed_max_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type label (e.g., 'REG', 'OT') for the period in which the player hit their top skating speed. Schema `character`. */
   skating_speed_speed_max_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `character`. */
+  /** Time elapsed within the period (MM:SS) when the player recorded their top skating speed for the season. Schema `character`. */
   skating_speed_speed_max_overlay_time_in_period?: string | null;
-  /** Schema `integer`. */
+  /** Numeric code for the game type of the game in which the player recorded their top skating speed (e.g., 2 = regular season). Schema `integer`. */
   skating_speed_speed_max_overlay_game_type?: number | null;
-  /** Schema `integer`. */
+  /** Number of distinct skating speed bursts exceeding 20 mph recorded for the player across the season in NHL EDGE tracking data. Schema `integer`. */
   skating_speed_bursts_over20_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's count of skating speed bursts exceeding 20 mph relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   skating_speed_bursts_over20_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average season total of skating speed bursts exceeding 20 mph among qualifying skaters, the EDGE baseline comparator. Schema `double`. */
   skating_speed_bursts_over20_league_avg_value?: number | null;
-  /** Schema `double`. */
+  /** Total cumulative distance skated by the player across all tracked games in the season, measured in miles (imperial). Schema `double`. */
   total_distance_skated_imperial?: number | null;
-  /** Schema `double`. */
+  /** Total cumulative distance skated by the player across all tracked games in the season, measured in kilometers (metric). Schema `double`. */
   total_distance_skated_metric?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's total season skating distance relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   total_distance_skated_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average total season skating distance among qualifying skaters, measured in miles (imperial). Schema `double`. */
   total_distance_skated_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average total season skating distance among qualifying skaters, measured in kilometers (metric). Schema `double`. */
   total_distance_skated_league_avg_metric?: number | null;
-  /** Schema `double`. */
+  /** Maximum distance skated by the player in their single best game of the season, measured in miles (imperial). Schema `double`. */
   distance_max_game_imperial?: number | null;
-  /** Schema `double`. */
+  /** Maximum distance skated by the player in their single best game of the season, measured in kilometers (metric). Schema `double`. */
   distance_max_game_metric?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's maximum single-game skating distance relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   distance_max_game_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average maximum single-game distance skated among all qualifying skaters, measured in miles (imperial). Schema `double`. */
   distance_max_game_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average maximum single-game distance skated among all qualifying skaters, measured in kilometers (metric). Schema `double`. */
   distance_max_game_league_avg_metric?: number | null;
-  /** Schema `character`. */
+  /** Player's first name as stored in the NHL api-web system, included in the overlay context for the max-distance game. Schema `character`. */
   distance_max_game_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player's last name as stored in the NHL api-web system, included in the overlay context for the max-distance game. Schema `character`. */
   distance_max_game_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Date (YYYY-MM-DD) of the game where the player achieved their maximum single-game skating distance. Schema `character`. */
   distance_max_game_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the away team in the game where the player achieved their maximum single-game skating distance. Schema `character`. */
   distance_max_game_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Away team's final score in the game where the player achieved their maximum single-game skating distance. Schema `integer`. */
   distance_max_game_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the home team in the game where the player achieved their maximum single-game skating distance. Schema `character`. */
   distance_max_game_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Home team's final score in the game where the player achieved their maximum single-game skating distance. Schema `integer`. */
   distance_max_game_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Type of period that ended the game where the player set their maximum single-game skating distance (e.g., 'REG', 'OT', 'SO'). Schema `character`. */
   distance_max_game_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Number of overtime periods played in the game where the player achieved their maximum single-game skating distance. Schema `integer`. */
   distance_max_game_overlay_game_outcome_ot_periods?: number | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods defined for the game type in which the player set their max-distance performance. Schema `integer`. */
   distance_max_game_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number during which the player's max-distance game context is anchored in the NHL EDGE overlay data. Schema `integer`. */
   distance_max_game_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type label (e.g., 'REG', 'OT') for the period referenced in the max-distance game overlay. Schema `character`. */
   distance_max_game_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Numeric code for the game type (e.g., 2 = regular season, 3 = playoffs) of the max-distance game. Schema `integer`. */
   distance_max_game_overlay_game_type?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the player's total tracked ice time spent in the offensive zone across all situations, as measured by NHL EDGE zone-time tracking. Schema `double`. */
   zone_time_details_offensive_zone_pctg?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's overall offensive zone time percentage relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   zone_time_details_offensive_zone_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of all-situation ice time spent in the offensive zone among qualifying skaters, used as a comparison baseline. Schema `double`. */
   zone_time_details_offensive_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the player's even-strength ice time spent in the offensive zone, as measured by NHL EDGE zone-time tracking. Schema `double`. */
   zone_time_details_offensive_zone_ev_pctg?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's even-strength offensive zone time percentage relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   zone_time_details_offensive_zone_ev_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of even-strength ice time spent in the offensive zone among qualifying skaters, used as a comparison baseline. Schema `double`. */
   zone_time_details_offensive_zone_ev_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the player's total tracked ice time spent in the neutral zone, as measured by NHL EDGE zone-time tracking. Schema `double`. */
   zone_time_details_neutral_zone_pctg?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's neutral zone time percentage relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   zone_time_details_neutral_zone_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of ice time spent in the neutral zone among qualifying skaters, used as a comparison baseline. Schema `double`. */
   zone_time_details_neutral_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of the player's total tracked ice time spent in the defensive zone, as measured by NHL EDGE zone-time tracking. Schema `double`. */
   zone_time_details_defensive_zone_pctg?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's defensive zone time percentage relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   zone_time_details_defensive_zone_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of ice time spent in the defensive zone among qualifying skaters, used as a comparison baseline. Schema `double`. */
   zone_time_details_defensive_zone_league_avg?: number | null;
 }
 
@@ -1010,295 +1010,295 @@ export interface NhlEdgeSkaterDetailRow {
  * One row of `sdv.nhl.nhl_edge_skater_landing({ parsed: true })` (returns schema `native/nhl_edge/skater_landing`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeSkaterLandingRow {
-  /** Schema `character`. */
+  /** List of NHL seasons for which this skater has NHL EDGE player-tracking statistics available. Schema `character`. */
   seasons_with_edge_stats?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique NHL identifier for the skater atop the hardest shot speed leaderboard. Schema `integer` (an id). */
   leaders_hardest_shot_player_id?: string | null;
-  /** Schema `character`. */
+  /** First name of the skater leading the hardest shot speed leaderboard, in the default display language. Schema `character`. */
   leaders_hardest_shot_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the skater leading the hardest shot speed leaderboard, in the default display language. Schema `character`. */
   leaders_hardest_shot_player_last_name_default?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number worn by the skater leading the hardest shot speed leaderboard. Schema `integer`. */
   leaders_hardest_shot_player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Ice position (e.g., C, LW, RW, D) of the hardest shot speed leaderboard leader. Schema `character`. */
   leaders_hardest_shot_player_position?: string | null;
-  /** Schema `character`. */
+  /** URL-safe slug identifying the hardest shot leaderboard leader on the NHL website. Schema `character`. */
   leaders_hardest_shot_player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL of the headshot image for the hardest shot leaderboard leader. Schema `character`. */
   leaders_hardest_shot_player_headshot?: string | null;
-  /** Schema `character`. */
+  /** Common team name of the hardest shot leaderboard leader's club, in the default language. Schema `character`. */
   leaders_hardest_shot_player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in the default language for the hardest shot leader's team. Schema `character`. */
   leaders_hardest_shot_player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in French for the hardest shot leader's team. Schema `character`. */
   leaders_hardest_shot_player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the team the hardest shot leaderboard leader plays for. Schema `character`. */
   leaders_hardest_shot_player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background version of the team logo for the hardest shot leaderboard leader's club. Schema `character`. */
   leaders_hardest_shot_player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background version of the team logo for the hardest shot leaderboard leader's club. Schema `character`. */
   leaders_hardest_shot_player_team_team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** First name of the skater shown in the hardest shot game overlay, in the default language. Schema `character`. */
   leaders_hardest_shot_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the skater shown in the hardest shot game overlay, in the default language. Schema `character`. */
   leaders_hardest_shot_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Calendar date of the game in which the hardest shot leader recorded their fastest shot speed. Schema `character`. */
   leaders_hardest_shot_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the away team in the game where the hardest shot leader recorded their top shot speed. Schema `character`. */
   leaders_hardest_shot_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Final score of the away team in the game where the hardest shot leader recorded their top shot speed. Schema `integer`. */
   leaders_hardest_shot_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the home team in the game where the hardest shot leader recorded their top shot speed. Schema `character`. */
   leaders_hardest_shot_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Final score of the home team in the game where the hardest shot leader recorded their top shot speed. Schema `integer`. */
   leaders_hardest_shot_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Period type (REG, OT, SO) that decided the outcome of the game where the hardest shot leader set their mark. Schema `character`. */
   leaders_hardest_shot_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Number of overtime periods played in the game where the hardest shot leader recorded their top speed. Schema `integer`. */
   leaders_hardest_shot_overlay_game_outcome_ot_periods?: number | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods in the game where the hardest shot leader set their record (typically 3). Schema `integer`. */
   leaders_hardest_shot_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number in which the hardest shot leader's fastest shot was recorded. Schema `integer`. */
   leaders_hardest_shot_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type label (e.g., REG, OT) for the period in which the hardest shot was recorded. Schema `character`. */
   leaders_hardest_shot_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `character`. */
+  /** Elapsed time within the period when the hardest shot leader's fastest recorded shot occurred. Schema `character`. */
   leaders_hardest_shot_overlay_time_in_period?: string | null;
-  /** Schema `integer`. */
+  /** Game type code (e.g., regular season, playoffs) for the game where the hardest shot leader set their record. Schema `integer`. */
   leaders_hardest_shot_overlay_game_type?: number | null;
-  /** Schema `double`. */
+  /** Fastest NHL EDGE-tracked shot speed (in mph) recorded by the hardest shot leaderboard leader. Schema `double`. */
   leaders_hardest_shot_shot_speed_imperial?: number | null;
-  /** Schema `double`. */
+  /** Fastest NHL EDGE-tracked shot speed (in km/h) recorded by the hardest shot leaderboard leader. Schema `double`. */
   leaders_hardest_shot_shot_speed_metric?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique NHL identifier for the skater atop the maximum skating speed leaderboard. Schema `integer` (an id). */
   leaders_max_skating_speed_player_id?: string | null;
-  /** Schema `character`. */
+  /** First name of the skater leading the maximum skating speed leaderboard, in the default display language. Schema `character`. */
   leaders_max_skating_speed_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the skater leading the maximum skating speed leaderboard, in the default display language. Schema `character`. */
   leaders_max_skating_speed_player_last_name_default?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number worn by the skater leading the maximum skating speed leaderboard. Schema `integer`. */
   leaders_max_skating_speed_player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Ice position (e.g., C, LW, RW, D) of the maximum skating speed leaderboard leader. Schema `character`. */
   leaders_max_skating_speed_player_position?: string | null;
-  /** Schema `character`. */
+  /** URL-safe slug identifying the maximum skating speed leaderboard leader on the NHL website. Schema `character`. */
   leaders_max_skating_speed_player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL of the headshot image for the maximum skating speed leaderboard leader. Schema `character`. */
   leaders_max_skating_speed_player_headshot?: string | null;
-  /** Schema `character`. */
+  /** Common team name of the maximum skating speed leaderboard leader's club, in the default language. Schema `character`. */
   leaders_max_skating_speed_player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in the default language for the max skating speed leader's team. Schema `character`. */
   leaders_max_skating_speed_player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in French for the max skating speed leader's team. Schema `character`. */
   leaders_max_skating_speed_player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the team the maximum skating speed leaderboard leader plays for. Schema `character`. */
   leaders_max_skating_speed_player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background version of the team logo for the maximum skating speed leaderboard leader's club. Schema `character`. */
   leaders_max_skating_speed_player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background version of the team logo for the maximum skating speed leaderboard leader's club. Schema `character`. */
   leaders_max_skating_speed_player_team_team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** First name of the skater shown in the max skating speed game overlay, in the default language. Schema `character`. */
   leaders_max_skating_speed_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the skater shown in the max skating speed game overlay, in the default language. Schema `character`. */
   leaders_max_skating_speed_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Calendar date of the game in which the max skating speed leader recorded their fastest burst speed. Schema `character`. */
   leaders_max_skating_speed_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the away team in the game where the max skating speed leader recorded their top speed. Schema `character`. */
   leaders_max_skating_speed_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Final score of the away team in the game where the max skating speed leader set their top burst speed. Schema `integer`. */
   leaders_max_skating_speed_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the home team in the game where the max skating speed leader recorded their top speed. Schema `character`. */
   leaders_max_skating_speed_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Final score of the home team in the game where the max skating speed leader set their top burst speed. Schema `integer`. */
   leaders_max_skating_speed_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Period type (REG, OT, SO) that decided the game where the max skating speed leader set their top mark. Schema `character`. */
   leaders_max_skating_speed_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Number of overtime periods played in the game where the max skating speed leader recorded their fastest speed. Schema `integer`. */
   leaders_max_skating_speed_overlay_game_outcome_ot_periods?: number | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods in the game where the max skating speed leader set their record (typically 3). Schema `integer`. */
   leaders_max_skating_speed_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number in which the max skating speed leader's fastest burst was recorded. Schema `integer`. */
   leaders_max_skating_speed_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type label (e.g., REG, OT) for the period in which the max skating speed was recorded. Schema `character`. */
   leaders_max_skating_speed_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `character`. */
+  /** Elapsed time within the period when the max skating speed leader's fastest burst was recorded. Schema `character`. */
   leaders_max_skating_speed_overlay_time_in_period?: string | null;
-  /** Schema `integer`. */
+  /** Game type code (e.g., regular season, playoffs) for the game where the max skating speed leader set their record. Schema `integer`. */
   leaders_max_skating_speed_overlay_game_type?: number | null;
-  /** Schema `double`. */
+  /** Peak skating burst speed (in mph) recorded by the maximum skating speed leaderboard leader, per NHL EDGE tracking. Schema `double`. */
   leaders_max_skating_speed_skating_speed_imperial?: number | null;
-  /** Schema `double`. */
+  /** Peak skating burst speed (in km/h) recorded by the maximum skating speed leaderboard leader, per NHL EDGE tracking. Schema `double`. */
   leaders_max_skating_speed_skating_speed_metric?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique NHL identifier for the skater atop the total distance skated leaderboard. Schema `integer` (an id). */
   leaders_total_distance_skated_player_id?: string | null;
-  /** Schema `character`. */
+  /** First name of the skater leading the total distance skated leaderboard, in the default display language. Schema `character`. */
   leaders_total_distance_skated_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the skater leading the total distance skated leaderboard, in the default display language. Schema `character`. */
   leaders_total_distance_skated_player_last_name_default?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number worn by the skater leading the total distance skated leaderboard. Schema `integer`. */
   leaders_total_distance_skated_player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Ice position (e.g., C, LW, RW, D) of the total distance skated leaderboard leader. Schema `character`. */
   leaders_total_distance_skated_player_position?: string | null;
-  /** Schema `character`. */
+  /** URL-safe slug identifying the total distance skated leaderboard leader on the NHL website. Schema `character`. */
   leaders_total_distance_skated_player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL of the headshot image for the total distance skated leaderboard leader. Schema `character`. */
   leaders_total_distance_skated_player_headshot?: string | null;
-  /** Schema `character`. */
+  /** Common team name of the total distance skated leaderboard leader's club, in the default language. Schema `character`. */
   leaders_total_distance_skated_player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in the default language for the total distance skated leader's team. Schema `character`. */
   leaders_total_distance_skated_player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in French for the total distance skated leader's team. Schema `character`. */
   leaders_total_distance_skated_player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the team the total distance skated leaderboard leader plays for. Schema `character`. */
   leaders_total_distance_skated_player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background version of the team logo for the total distance skated leaderboard leader's club. Schema `character`. */
   leaders_total_distance_skated_player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background version of the team logo for the total distance skated leaderboard leader's club. Schema `character`. */
   leaders_total_distance_skated_player_team_team_logo_dark?: string | null;
-  /** Schema `double`. */
+  /** Cumulative skating distance (in miles) recorded by the total distance skated leaderboard leader, per NHL EDGE tracking. Schema `double`. */
   leaders_total_distance_skated_distance_skated_imperial?: number | null;
-  /** Schema `double`. */
+  /** Cumulative skating distance (in kilometres) recorded by the total distance skated leaderboard leader, per NHL EDGE tracking. Schema `double`. */
   leaders_total_distance_skated_distance_skated_metric?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique NHL identifier for the skater who recorded the highest single-game skating distance. Schema `integer` (an id). */
   leaders_distance_max_game_player_id?: string | null;
-  /** Schema `character`. */
+  /** First name of the skater who skated the farthest distance in a single game, in the default display language. Schema `character`. */
   leaders_distance_max_game_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the skater who skated the farthest distance in a single game, in the default display language. Schema `character`. */
   leaders_distance_max_game_player_last_name_default?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number worn by the skater who recorded the highest single-game skating distance. Schema `integer`. */
   leaders_distance_max_game_player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Ice position (e.g., C, LW, RW, D) of the single-game distance skating leader. Schema `character`. */
   leaders_distance_max_game_player_position?: string | null;
-  /** Schema `character`. */
+  /** URL-safe slug identifying the single-game distance skating leader on the NHL website. Schema `character`. */
   leaders_distance_max_game_player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL of the headshot image for the skater atop the single-game distance leaderboard. Schema `character`. */
   leaders_distance_max_game_player_headshot?: string | null;
-  /** Schema `character`. */
+  /** Common team name of the single-game distance skating leader's club, in the default language. Schema `character`. */
   leaders_distance_max_game_player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in the default language for the single-game distance leader's team. Schema `character`. */
   leaders_distance_max_game_player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in French for the single-game distance leader's team. Schema `character`. */
   leaders_distance_max_game_player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the team the single-game distance skating leader plays for. Schema `character`. */
   leaders_distance_max_game_player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background version of the team logo for the single-game distance skating leader's club. Schema `character`. */
   leaders_distance_max_game_player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background version of the team logo for the single-game distance skating leader's club. Schema `character`. */
   leaders_distance_max_game_player_team_team_logo_dark?: string | null;
-  /** Schema `double`. */
+  /** Farthest single-game skating distance (in miles) recorded by the distance-max-game leaderboard leader, per NHL EDGE tracking. Schema `double`. */
   leaders_distance_max_game_distance_skated_imperial?: number | null;
-  /** Schema `double`. */
+  /** Farthest single-game skating distance (in kilometres) recorded by the distance-max-game leaderboard leader, per NHL EDGE tracking. Schema `double`. */
   leaders_distance_max_game_distance_skated_metric?: number | null;
-  /** Schema `character`. */
+  /** First name of the skater displayed in the distance-max-game game overlay, in the default language. Schema `character`. */
   leaders_distance_max_game_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the skater displayed in the distance-max-game game overlay, in the default language. Schema `character`. */
   leaders_distance_max_game_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Calendar date of the game in which the distance-max-game leader skated their record single-game distance. Schema `character`. */
   leaders_distance_max_game_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the away team in the game where the distance-max-game leader set their top mark. Schema `character`. */
   leaders_distance_max_game_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Final score of the away team in the game where the distance-max-game leader set their single-game distance record. Schema `integer`. */
   leaders_distance_max_game_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the home team in the game where the distance-max-game leader set their top mark. Schema `character`. */
   leaders_distance_max_game_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Final score of the home team in the game where the distance-max-game leader set their single-game distance record. Schema `integer`. */
   leaders_distance_max_game_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Period type (REG, OT, SO) that decided the outcome of the game where the distance-max-game leader set their record. Schema `character`. */
   leaders_distance_max_game_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Number of overtime periods played in the game where the distance-max-game leader set their single-game distance record. Schema `integer`. */
   leaders_distance_max_game_overlay_game_outcome_ot_periods?: number | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods in the game where the distance-max-game leader set their record (typically 3). Schema `integer`. */
   leaders_distance_max_game_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number in which the distance-max-game leader's record tracking event was most notable. Schema `integer`. */
   leaders_distance_max_game_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type label (e.g., REG, OT) for the period highlighted in the distance-max-game overlay. Schema `character`. */
   leaders_distance_max_game_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Game type code (e.g., regular season, playoffs) for the game where the distance-max-game leader set their record. Schema `integer`. */
   leaders_distance_max_game_overlay_game_type?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique NHL identifier for the skater atop the high-danger shots-on-goal leaderboard. Schema `integer` (an id). */
   leaders_high_danger_sog_player_id?: string | null;
-  /** Schema `character`. */
+  /** First name of the skater leading the high-danger shots-on-goal leaderboard, in the default display language. Schema `character`. */
   leaders_high_danger_sog_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the skater leading the high-danger shots-on-goal leaderboard, in the default display language. Schema `character`. */
   leaders_high_danger_sog_player_last_name_default?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number worn by the skater leading the high-danger shots-on-goal leaderboard. Schema `integer`. */
   leaders_high_danger_sog_player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Ice position (e.g., C, LW, RW, D) of the high-danger shots-on-goal leaderboard leader. Schema `character`. */
   leaders_high_danger_sog_player_position?: string | null;
-  /** Schema `character`. */
+  /** URL-safe slug identifying the high-danger shots-on-goal leaderboard leader on the NHL website. Schema `character`. */
   leaders_high_danger_sog_player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL of the headshot image for the high-danger shots-on-goal leaderboard leader. Schema `character`. */
   leaders_high_danger_sog_player_headshot?: string | null;
-  /** Schema `character`. */
+  /** Common team name of the high-danger shots-on-goal leaderboard leader's club, in the default language. Schema `character`. */
   leaders_high_danger_sog_player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in the default language for the high-danger shots-on-goal leader's team. Schema `character`. */
   leaders_high_danger_sog_player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in French for the high-danger shots-on-goal leader's team. Schema `character`. */
   leaders_high_danger_sog_player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the team the high-danger shots-on-goal leader plays for. Schema `character`. */
   leaders_high_danger_sog_player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background version of the team logo for the high-danger shots-on-goal leader's club. Schema `character`. */
   leaders_high_danger_sog_player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background version of the team logo for the high-danger shots-on-goal leader's club. Schema `character`. */
   leaders_high_danger_sog_player_team_team_logo_dark?: string | null;
-  /** Schema `integer`. */
+  /** Total number of high-danger shots on goal recorded by the leaderboard leader, as tracked by NHL EDGE puck tracking. Schema `integer`. */
   leaders_high_danger_sog_sog?: number | null;
-  /** Schema `character`. */
+  /** Structured details describing the ice zones or slot locations from which the high-danger shots-on-goal leader's tracked shots originated. Schema `character`. */
   leaders_high_danger_sog_shot_location_details?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique NHL identifier for the skater atop the offensive zone time leaderboard. Schema `integer` (an id). */
   leaders_offensive_zone_time_player_id?: string | null;
-  /** Schema `character`. */
+  /** First name of the skater leading the offensive zone time leaderboard, in the default display language. Schema `character`. */
   leaders_offensive_zone_time_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the skater leading the offensive zone time leaderboard, in the default display language. Schema `character`. */
   leaders_offensive_zone_time_player_last_name_default?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number worn by the skater leading the offensive zone time leaderboard. Schema `integer`. */
   leaders_offensive_zone_time_player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Ice position (e.g., C, LW, RW, D) of the offensive zone time leaderboard leader. Schema `character`. */
   leaders_offensive_zone_time_player_position?: string | null;
-  /** Schema `character`. */
+  /** URL-safe slug identifying the offensive zone time leaderboard leader on the NHL website. Schema `character`. */
   leaders_offensive_zone_time_player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL of the headshot image for the offensive zone time leaderboard leader. Schema `character`. */
   leaders_offensive_zone_time_player_headshot?: string | null;
-  /** Schema `character`. */
+  /** Common team name of the offensive zone time leaderboard leader's club, in the default language. Schema `character`. */
   leaders_offensive_zone_time_player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in the default language for the offensive zone time leader's team. Schema `character`. */
   leaders_offensive_zone_time_player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in French for the offensive zone time leader's team. Schema `character`. */
   leaders_offensive_zone_time_player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the team the offensive zone time leaderboard leader plays for. Schema `character`. */
   leaders_offensive_zone_time_player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background version of the team logo for the offensive zone time leaderboard leader's club. Schema `character`. */
   leaders_offensive_zone_time_player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background version of the team logo for the offensive zone time leaderboard leader's club. Schema `character`. */
   leaders_offensive_zone_time_player_team_team_logo_dark?: string | null;
-  /** Schema `double`. */
+  /** Total time the offensive zone time leaderboard leader spent in the offensive zone, as tracked by NHL EDGE player tracking. Schema `double`. */
   leaders_offensive_zone_time_zone_time?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique NHL identifier for the skater atop the defensive zone time leaderboard. Schema `integer` (an id). */
   leaders_defensive_zone_time_player_id?: string | null;
-  /** Schema `character`. */
+  /** First name of the skater leading the defensive zone time leaderboard, in the default display language. Schema `character`. */
   leaders_defensive_zone_time_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the skater leading the defensive zone time leaderboard, in the default display language. Schema `character`. */
   leaders_defensive_zone_time_player_last_name_default?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number worn by the skater leading the defensive zone time leaderboard. Schema `integer`. */
   leaders_defensive_zone_time_player_sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Ice position (e.g., C, LW, RW, D) of the defensive zone time leaderboard leader. Schema `character`. */
   leaders_defensive_zone_time_player_position?: string | null;
-  /** Schema `character`. */
+  /** URL-safe slug identifying the defensive zone time leaderboard leader on the NHL website. Schema `character`. */
   leaders_defensive_zone_time_player_slug?: string | null;
-  /** Schema `character`. */
+  /** URL of the headshot image for the defensive zone time leaderboard leader. Schema `character`. */
   leaders_defensive_zone_time_player_headshot?: string | null;
-  /** Schema `character`. */
+  /** Common team name (e.g., Maple Leafs) of the defensive zone time leaderboard leader's club, in the default language. Schema `character`. */
   leaders_defensive_zone_time_player_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in the default language (e.g., "in Toronto") for the defensive zone time leader's team. Schema `character`. */
   leaders_defensive_zone_time_player_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with grammatical preposition in French for the defensive zone time leader's team. Schema `character`. */
   leaders_defensive_zone_time_player_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the team the defensive zone time leader plays for. Schema `character`. */
   leaders_defensive_zone_time_player_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background version of the team logo for the defensive zone time leaderboard leader's club. Schema `character`. */
   leaders_defensive_zone_time_player_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background version of the team logo for the defensive zone time leaderboard leader's club. Schema `character`. */
   leaders_defensive_zone_time_player_team_team_logo_dark?: string | null;
-  /** Schema `double`. */
+  /** Total time the defensive zone time leaderboard leader spent in the defensive zone, as tracked by NHL EDGE player tracking. Schema `double`. */
   leaders_defensive_zone_time_zone_time?: number | null;
 }
 
@@ -1306,19 +1306,19 @@ export interface NhlEdgeSkaterLandingRow {
  * One row of `sdv.nhl.nhl_edge_skater_shot_location_detail({ parsed: true })` (returns schema `native/nhl_edge/skater_shot_location_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeSkaterShotLocationDetailRow {
-  /** Schema `character`. */
+  /** Net/ice zone the shots were taken from. Schema `character`. */
   area?: string | null;
-  /** Schema `integer`. */
+  /** Shots on goal from the area. Schema `integer`. */
   sog?: number | null;
-  /** Schema `integer`. */
+  /** Goals scored. Schema `integer`. */
   goals?: number | null;
-  /** Schema `double`. */
+  /** Shooting percentage from the area. Schema `double`. */
   shooting_pctg?: number | null;
-  /** Schema `double`. */
+  /** League percentile rank for shots on goal. Schema `double`. */
   sog_percentile?: number | null;
-  /** Schema `double`. */
+  /** League percentile rank for goals. Schema `double`. */
   goals_percentile?: number | null;
-  /** Schema `double`. */
+  /** League percentile rank for shooting percentage. Schema `double`. */
   shooting_pctg_percentile?: number | null;
 }
 
@@ -1326,77 +1326,77 @@ export interface NhlEdgeSkaterShotLocationDetailRow {
  * One row of `sdv.nhl.nhl_edge_skater_shot_speed_detail({ parsed: true })` (returns schema `native/nhl_edge/skater_shot_speed_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeSkaterShotSpeedDetailRow {
-  /** Schema `character`. */
+  /** Serialized list or JSON array of the player's hardest individual shot efforts, including speed and context metadata from NHL EDGE puck tracking. Schema `character`. */
   hardest_shots?: string | null;
-  /** Schema `double`. */
+  /** Player's single highest recorded shot speed for the season measured in miles per hour (imperial), from NHL EDGE puck-tracking. Schema `double`. */
   shot_speed_details_top_shot_speed_imperial?: number | null;
-  /** Schema `double`. */
+  /** Player's single highest recorded shot speed for the season measured in kilometers per hour (metric), from NHL EDGE puck-tracking. Schema `double`. */
   shot_speed_details_top_shot_speed_metric?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's top shot speed relative to all qualifying skaters in the NHL EDGE shot-speed dataset. Schema `double`. */
   shot_speed_details_top_shot_speed_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average highest shot speed among qualifying skaters for the season, measured in miles per hour (imperial). Schema `double`. */
   shot_speed_details_top_shot_speed_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average highest shot speed among qualifying skaters for the season, measured in kilometers per hour (metric). Schema `double`. */
   shot_speed_details_top_shot_speed_league_avg_metric?: number | null;
-  /** Schema `character`. */
+  /** Player's first name as stored in the NHL api-web system, included in the overlay for the top-shot-speed event. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player's last name as stored in the NHL api-web system, included in the overlay for the top-shot-speed event. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Date (YYYY-MM-DD) of the game in which the player recorded their top shot speed for the season. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the away team in the game where the player recorded their top shot speed this season. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Away team's final score in the game where the player recorded their season-high shot speed. Schema `integer`. */
   shot_speed_details_top_shot_speed_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the home team in the game where the player achieved their top shot speed this season. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Home team's final score in the game where the player recorded their season-high shot speed. Schema `integer`. */
   shot_speed_details_top_shot_speed_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Type of period that ended the game where the player set their top shot speed (e.g., 'REG', 'OT', 'SO'). Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods defined for the game type in which the player recorded their top shot speed. Schema `integer`. */
   shot_speed_details_top_shot_speed_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number in which the player released their top-speed shot during the referenced game. Schema `integer`. */
   shot_speed_details_top_shot_speed_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type label (e.g., 'REG', 'OT') for the period in which the player recorded their top shot speed. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `character`. */
+  /** Time elapsed within the period (MM:SS) when the player released their top-speed shot for the season. Schema `character`. */
   shot_speed_details_top_shot_speed_overlay_time_in_period?: string | null;
-  /** Schema `integer`. */
+  /** Numeric code for the game type of the game in which the player recorded their top shot speed (e.g., 2 = regular season). Schema `integer`. */
   shot_speed_details_top_shot_speed_overlay_game_type?: number | null;
-  /** Schema `double`. */
+  /** Player's average shot speed across all tracked shot attempts for the season, measured in miles per hour (imperial). Schema `double`. */
   shot_speed_details_avg_shot_speed_imperial?: number | null;
-  /** Schema `double`. */
+  /** Player's average shot speed across all tracked shot attempts for the season, measured in kilometers per hour (metric). Schema `double`. */
   shot_speed_details_avg_shot_speed_metric?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's average shot speed relative to all qualifying skaters in the NHL EDGE shot-speed dataset. Schema `double`. */
   shot_speed_details_avg_shot_speed_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average shot speed across all qualifying skaters' tracked attempts for the season, measured in miles per hour (imperial). Schema `double`. */
   shot_speed_details_avg_shot_speed_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average shot speed across all qualifying skaters' tracked attempts for the season, measured in kilometers per hour (metric). Schema `double`. */
   shot_speed_details_avg_shot_speed_league_avg_metric?: number | null;
-  /** Schema `integer`. */
+  /** Number of the player's tracked shot attempts for the season with a recorded speed exceeding 100 mph. Schema `integer`. */
   shot_speed_details_shot_attempts_over100_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's count of shot attempts exceeding 100 mph relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   shot_speed_details_shot_attempts_over100_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average number of shot attempts with a recorded speed above 100 mph among qualifying skaters for the season. Schema `double`. */
   shot_speed_details_shot_attempts_over100_league_avg?: number | null;
-  /** Schema `integer`. */
+  /** Number of the player's tracked shot attempts for the season with a recorded speed between 90 and 100 mph. Schema `integer`. */
   shot_speed_details_shot_attempts90_to100_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's count of shot attempts in the 90–100 mph speed band relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   shot_speed_details_shot_attempts90_to100_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average number of shot attempts falling in the 90–100 mph speed band among qualifying skaters for the season. Schema `double`. */
   shot_speed_details_shot_attempts90_to100_league_avg?: number | null;
-  /** Schema `integer`. */
+  /** Number of the player's tracked shot attempts for the season with a recorded speed between 80 and 90 mph. Schema `integer`. */
   shot_speed_details_shot_attempts80_to90_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's count of shot attempts in the 80–90 mph speed band relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   shot_speed_details_shot_attempts80_to90_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average number of shot attempts falling in the 80–90 mph speed band among qualifying skaters for the season. Schema `double`. */
   shot_speed_details_shot_attempts80_to90_league_avg?: number | null;
-  /** Schema `integer`. */
+  /** Number of the player's tracked shot attempts for the season with a recorded speed between 70 and 80 mph. Schema `integer`. */
   shot_speed_details_shot_attempts70_to80_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank of the player's count of shot attempts in the 70–80 mph speed band relative to all qualifying skaters in the NHL EDGE dataset. Schema `double`. */
   shot_speed_details_shot_attempts70_to80_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average number of shot attempts falling in the 70–80 mph speed band among qualifying skaters for the season. Schema `double`. */
   shot_speed_details_shot_attempts70_to80_league_avg?: number | null;
 }
 
@@ -1404,9 +1404,9 @@ export interface NhlEdgeSkaterShotSpeedDetailRow {
  * One row of `sdv.nhl.nhl_edge_skater_skating_distance_detail({ parsed: true })` (returns schema `native/nhl_edge/skater_skating_distance_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeSkaterSkatingDistanceDetailRow {
-  /** Schema `character`. */
+  /** JSON-serialized rolling summary of total distance skated by the player across the last 10 games. Schema `character`. */
   skating_distance_last10?: string | null;
-  /** Schema `character`. */
+  /** JSON-serialized per-game breakdown of total distance skated by the player during the tracking period. Schema `character`. */
   skating_distance_details?: string | null;
 }
 
@@ -1414,61 +1414,61 @@ export interface NhlEdgeSkaterSkatingDistanceDetailRow {
  * One row of `sdv.nhl.nhl_edge_skater_skating_speed_detail({ parsed: true })` (returns schema `native/nhl_edge/skater_skating_speed_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeSkaterSkatingSpeedDetailRow {
-  /** Schema `character`. */
+  /** JSON-serialized list of the skater's top individual speed bursts, typically the ten highest speed readings recorded during the tracking period. Schema `character`. */
   top_skating_speeds?: string | null;
-  /** Schema `double`. */
+  /** Skater's maximum recorded skating speed in miles per hour captured by EDGE tracking during the tracking period. Schema `double`. */
   skating_speed_details_max_skating_speed_imperial?: number | null;
-  /** Schema `double`. */
+  /** Skater's maximum recorded skating speed in kilometers per hour captured by EDGE tracking during the tracking period. Schema `double`. */
   skating_speed_details_max_skating_speed_metric?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL skaters for maximum skating speed recorded during the tracking period. Schema `double`. */
   skating_speed_details_max_skating_speed_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average maximum skating speed in miles per hour, used as the baseline for this skater's max-speed percentile. Schema `double`. */
   skating_speed_details_max_skating_speed_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average maximum skating speed in kilometers per hour, used as the baseline for this skater's max-speed percentile. Schema `double`. */
   skating_speed_details_max_skating_speed_league_avg_metric?: number | null;
-  /** Schema `character`. */
+  /** First name of the skater for whom the maximum skating speed overlay data is displayed. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Last name of the skater for whom the maximum skating speed overlay data is displayed. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Date on which the game occurred where the skater's maximum skating speed was recorded. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the away team in the game where the skater's maximum skating speed was recorded. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Score of the away team at the conclusion of the game in which the skater's maximum skating speed was recorded. Schema `integer`. */
   skating_speed_details_max_skating_speed_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Abbreviation of the home team in the game where the skater's maximum skating speed was recorded. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Score of the home team at the conclusion of the game in which the skater's maximum skating speed was recorded. Schema `integer`. */
   skating_speed_details_max_skating_speed_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Type of the final period that determined the outcome of the game where the max speed was recorded (REG, OT, or SO). Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Number of regulation periods in the game format where the skater's maximum skating speed was recorded. Schema `integer`. */
   skating_speed_details_max_skating_speed_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number within the game in which the skater's maximum skating speed was recorded. Schema `integer`. */
   skating_speed_details_max_skating_speed_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type (REG, OT) identifying the phase of the game when the skater's maximum skating speed was recorded. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `character`. */
+  /** Elapsed time within the period (mm:ss) at which the skater's career or season maximum skating speed was recorded. Schema `character`. */
   skating_speed_details_max_skating_speed_overlay_time_in_period?: string | null;
-  /** Schema `integer`. */
+  /** NHL game type code (e.g., 2 = regular season, 3 = playoffs) for the game where the skater's maximum speed was recorded. Schema `integer`. */
   skating_speed_details_max_skating_speed_overlay_game_type?: number | null;
-  /** Schema `integer`. */
+  /** Average number of skating bursts per game in which the skater reached or exceeded 22 mph during the tracking period. Schema `integer`. */
   skating_speed_details_bursts_over22_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL skaters for frequency of skating speed bursts exceeding 22 mph per game. Schema `double`. */
   skating_speed_details_bursts_over22_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average number of skating speed bursts exceeding 22 mph per game, used as the baseline for this skater's percentile. Schema `double`. */
   skating_speed_details_bursts_over22_league_avg?: number | null;
-  /** Schema `integer`. */
+  /** Average number of skating bursts per game in which the skater's speed fell in the 20-22 mph range. Schema `integer`. */
   skating_speed_details_bursts20_to22_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL skaters for frequency of skating speed bursts in the 20-22 mph speed band. Schema `double`. */
   skating_speed_details_bursts20_to22_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average number of skating speed bursts in the 20-22 mph band per game, used as the baseline for percentile calculation. Schema `double`. */
   skating_speed_details_bursts20_to22_league_avg?: number | null;
-  /** Schema `integer`. */
+  /** Average number of skating bursts per game in which the skater's speed fell in the 18-20 mph range. Schema `integer`. */
   skating_speed_details_bursts18_to20_value?: number | null;
-  /** Schema `double`. */
+  /** Percentile rank among all NHL skaters for frequency of skating speed bursts in the 18-20 mph speed band. Schema `double`. */
   skating_speed_details_bursts18_to20_percentile?: number | null;
-  /** Schema `double`. */
+  /** League-average number of skating speed bursts in the 18-20 mph band per game, used as the baseline for percentile calculation. Schema `double`. */
   skating_speed_details_bursts18_to20_league_avg?: number | null;
 }
 
@@ -1476,25 +1476,25 @@ export interface NhlEdgeSkaterSkatingSpeedDetailRow {
  * One row of `sdv.nhl.nhl_edge_skater_zone_time({ parsed: true })` (returns schema `native/nhl_edge/skater_zone_time`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeSkaterZoneTimeRow {
-  /** Schema `character`. */
+  /** Strength state code (e.g., all, even, pp, pk). Schema `character`. */
   strength_code?: string | null;
-  /** Schema `double`. */
+  /** Percentage of time spent in the offensive zone. Schema `double`. */
   offensive_zone_pctg?: number | null;
-  /** Schema `double`. */
+  /** League percentile rank for offensive-zone time. Schema `double`. */
   offensive_zone_percentile?: number | null;
-  /** Schema `double`. */
+  /** League average offensive-zone time percentage. Schema `double`. */
   offensive_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of time spent in the neutral zone. Schema `double`. */
   neutral_zone_pctg?: number | null;
-  /** Schema `double`. */
+  /** League percentile rank for neutral-zone time. Schema `double`. */
   neutral_zone_percentile?: number | null;
-  /** Schema `double`. */
+  /** League average neutral-zone time percentage. Schema `double`. */
   neutral_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of time spent in the defensive zone. Schema `double`. */
   defensive_zone_pctg?: number | null;
-  /** Schema `double`. */
+  /** League percentile rank for defensive-zone time. Schema `double`. */
   defensive_zone_percentile?: number | null;
-  /** Schema `double`. */
+  /** League average defensive-zone time percentage. Schema `double`. */
   defensive_zone_league_avg?: number | null;
 }
 
@@ -1502,163 +1502,163 @@ export interface NhlEdgeSkaterZoneTimeRow {
  * One row of `sdv.nhl.nhl_edge_team_detail({ parsed: true })` (returns schema `native/nhl_edge/team_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeTeamDetailRow {
-  /** Schema `character`. */
+  /** Comma-separated list of season identifiers for which NHL EDGE player-tracking statistics are available for this team. Schema `character`. */
   seasons_with_edge_stats?: string | null;
-  /** Schema `character`. */
+  /** Serialized summary string of total shots-on-goal across all periods for this team, flattened from the NHL api-web team detail payload. Schema `character`. */
   sog_summary?: string | null;
-  /** Schema `character`. */
+  /** Serialized JSON-like string containing per-period or per-game shots-on-goal detail for this team, flattened from the NHL api-web team detail payload. Schema `character`. */
   sog_details?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
-  /** Schema `character`. */
+  /** Team common name (default language). Schema `character`. */
   team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with preposition (default). Schema `character`. */
   team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with preposition (French). Schema `character`. */
   team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Team abbreviation. Schema `character`. */
   team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL to the team light logo. Schema `character`. */
   team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL to the team dark logo. Schema `character`. */
   team_team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** Team URL slug. Schema `character`. */
   team_slug?: string | null;
-  /** Schema `character`. */
+  /** Name of the NHL conference (e.g., Eastern, Western) to which this team belongs, as returned by the NHL api-web team detail endpoint. Schema `character`. */
   team_conference?: string | null;
-  /** Schema `character`. */
+  /** Name of the NHL division (e.g., Atlantic, Metro, Central, Pacific) to which this team belongs, as returned by the NHL api-web team detail endpoint. Schema `character`. */
   team_division?: string | null;
-  /** Schema `integer`. */
+  /** Team wins. Schema `integer`. */
   team_wins?: number | null;
-  /** Schema `integer`. */
+  /** Team losses. Schema `integer`. */
   team_losses?: number | null;
-  /** Schema `integer`. */
+  /** Total number of games this team has lost in overtime or a shootout (earning one standings point each) in the current season. Schema `integer`. */
   team_ot_losses?: number | null;
-  /** Schema `integer`. */
+  /** Total number of regular-season or playoff games this team has played in the current season, from the NHL api-web team detail endpoint. Schema `integer`. */
   team_games_played?: number | null;
-  /** Schema `integer`. */
+  /** Total points scored by the player's team in this game. Schema `integer`. */
   team_points?: number | null;
-  /** Schema `integer`. */
+  /** Total count of shot attempts recorded at a speed exceeding 90 mph by this team's players during the season, from NHL EDGE tracking data. Schema `integer`. */
   shot_speed_shot_attempts_over90_value?: number | null;
-  /** Schema `integer`. */
+  /** Team's league rank by number of shot attempts exceeding 90 mph in shot speed, with rank 1 indicating the highest count, from NHL EDGE tracking data. Schema `integer`. */
   shot_speed_shot_attempts_over90_rank?: number | null;
-  /** Schema `double`. */
+  /** Fastest recorded shot speed by any player on this team during the season, expressed in miles per hour, from NHL EDGE tracking data. Schema `double`. */
   shot_speed_top_shot_speed_imperial?: number | null;
-  /** Schema `double`. */
+  /** Fastest recorded shot speed by any player on this team during the season, expressed in kilometers per hour, from NHL EDGE tracking data. Schema `double`. */
   shot_speed_top_shot_speed_metric?: number | null;
-  /** Schema `integer`. */
+  /** Team's league rank by top shot speed for the season, where rank 1 indicates the team whose fastest shot was the quickest in the league. Schema `integer`. */
   shot_speed_top_shot_speed_rank?: number | null;
-  /** Schema `double`. */
+  /** League-average of the top shot speed across all teams for the same period, expressed in miles per hour, from NHL EDGE tracking data. Schema `double`. */
   shot_speed_top_shot_speed_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average of the top shot speed across all teams for the same period, expressed in kilometers per hour, from NHL EDGE tracking data. Schema `double`. */
   shot_speed_top_shot_speed_league_avg_metric?: number | null;
-  /** Schema `character`. */
+  /** Default-language first name of the player who recorded this team's top shot speed, from the NHL EDGE overlay context. Schema `character`. */
   shot_speed_top_shot_speed_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Default-language last name of the player who recorded this team's top shot speed, from the NHL EDGE overlay context. Schema `character`. */
   shot_speed_top_shot_speed_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Calendar date of the game in which this team's top shot speed was recorded, from the NHL EDGE overlay context. Schema `character`. */
   shot_speed_top_shot_speed_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the away team in the game where this team's top shot speed was recorded, from the NHL EDGE overlay context. Schema `character`. */
   shot_speed_top_shot_speed_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Away team's final score in the game where this team's top shot speed was recorded, from the NHL EDGE overlay context. Schema `integer`. */
   shot_speed_top_shot_speed_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the home team in the game where this team's top shot speed was recorded, from the NHL EDGE overlay context. Schema `character`. */
   shot_speed_top_shot_speed_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Home team's final score in the game where this team's top shot speed was recorded, from the NHL EDGE overlay context. Schema `integer`. */
   shot_speed_top_shot_speed_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Type of the final period played (e.g., REG, OT, SO) in the game where this team's top shot speed was recorded. Schema `character`. */
   shot_speed_top_shot_speed_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Number of overtime periods played in the game where this team's top shot speed was recorded, or zero if decided in regulation. Schema `integer`. */
   shot_speed_top_shot_speed_overlay_game_outcome_ot_periods?: number | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods in the game format where this team's top shot speed was recorded (typically 3 for NHL). Schema `integer`. */
   shot_speed_top_shot_speed_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number within the game during which this team's top shot speed was recorded, from the NHL EDGE overlay context. Schema `integer`. */
   shot_speed_top_shot_speed_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Type label for the period (e.g., REG, OT) during which this team's top shot speed was recorded, from the NHL EDGE overlay context. Schema `character`. */
   shot_speed_top_shot_speed_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `character`. */
+  /** Elapsed time within the period (MM:SS format) at which this team's top shot speed was recorded, from the NHL EDGE overlay context. Schema `character`. */
   shot_speed_top_shot_speed_overlay_time_in_period?: string | null;
-  /** Schema `integer`. */
+  /** Numeric game-type code (e.g., 2 = regular season, 3 = playoffs) for the game in which this team's top shot speed was recorded. Schema `integer`. */
   shot_speed_top_shot_speed_overlay_game_type?: number | null;
-  /** Schema `integer`. */
+  /** Total count of skating speed bursts exceeding 22 mph recorded by this team's skaters during the season, from NHL EDGE tracking data. Schema `integer`. */
   skating_speed_bursts_over22_value?: number | null;
-  /** Schema `integer`. */
+  /** Team's league rank by total count of skating speed bursts exceeding 22 mph, where rank 1 indicates the most elite-speed bursts, from NHL EDGE tracking data. Schema `integer`. */
   skating_speed_bursts_over22_rank?: number | null;
-  /** Schema `integer`. */
+  /** Total count of skating speed bursts exceeding 20 mph recorded by this team's skaters during the season, from NHL EDGE tracking data. Schema `integer`. */
   skating_speed_bursts_over20_value?: number | null;
-  /** Schema `integer`. */
+  /** Team's league rank by total count of skating speed bursts exceeding 20 mph, where rank 1 indicates the most such bursts, from NHL EDGE tracking data. Schema `integer`. */
   skating_speed_bursts_over20_rank?: number | null;
-  /** Schema `integer`. */
+  /** League-average number of skating speed bursts exceeding 20 mph recorded per team over the same season window, from NHL EDGE tracking data. Schema `integer`. */
   skating_speed_bursts_over20_league_avg_value?: number | null;
-  /** Schema `double`. */
+  /** Fastest skating speed reached by any player on this team during the season, expressed in miles per hour, from NHL EDGE tracking data. Schema `double`. */
   skating_speed_speed_max_imperial?: number | null;
-  /** Schema `double`. */
+  /** Fastest skating speed reached by any player on this team during the season, expressed in kilometers per hour, from NHL EDGE tracking data. Schema `double`. */
   skating_speed_speed_max_metric?: number | null;
-  /** Schema `integer`. */
+  /** Team's league rank by maximum skating speed for the season, where rank 1 indicates the team whose fastest skater reached the highest speed in the league. Schema `integer`. */
   skating_speed_speed_max_rank?: number | null;
-  /** Schema `double`. */
+  /** League-average of the maximum skating speed across all teams for the same period, expressed in miles per hour, from NHL EDGE tracking data. Schema `double`. */
   skating_speed_speed_max_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average of the maximum skating speed across all teams for the same period, expressed in kilometers per hour, from NHL EDGE tracking data. Schema `double`. */
   skating_speed_speed_max_league_avg_metric?: number | null;
-  /** Schema `character`. */
+  /** Default-language first name of the player who recorded this team's top skating speed, from the NHL EDGE overlay context. Schema `character`. */
   skating_speed_speed_max_overlay_player_first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Default-language last name of the player who recorded this team's top skating speed, from the NHL EDGE overlay context. Schema `character`. */
   skating_speed_speed_max_overlay_player_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Calendar date of the game in which this team's top skating speed was recorded, from the NHL EDGE overlay context. Schema `character`. */
   skating_speed_speed_max_overlay_game_date?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the away team in the game where this team's top skating speed was recorded, from the NHL EDGE overlay context. Schema `character`. */
   skating_speed_speed_max_overlay_away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Away team's final score in the game where this team's top skating speed was recorded, from the NHL EDGE overlay context. Schema `integer`. */
   skating_speed_speed_max_overlay_away_team_score?: number | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the home team in the game where this team's top skating speed was recorded, from the NHL EDGE overlay context. Schema `character`. */
   skating_speed_speed_max_overlay_home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Home team's final score in the game where this team's top skating speed was recorded, from the NHL EDGE overlay context. Schema `integer`. */
   skating_speed_speed_max_overlay_home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Type of the final period played (e.g., REG, OT, SO) in the game where this team's top skating speed was recorded. Schema `character`. */
   skating_speed_speed_max_overlay_game_outcome_last_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods in the game format where this team's top skating speed was recorded (typically 3 for NHL). Schema `integer`. */
   skating_speed_speed_max_overlay_period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Period number within the game during which this team's top skating speed was recorded, from the NHL EDGE overlay context. Schema `integer`. */
   skating_speed_speed_max_overlay_period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Type label for the period (e.g., REG, OT) during which this team's top skating speed was recorded, from the NHL EDGE overlay context. Schema `character`. */
   skating_speed_speed_max_overlay_period_descriptor_period_type?: string | null;
-  /** Schema `character`. */
+  /** Elapsed time within the period (MM:SS format) at which this team's top skating speed was recorded, from the NHL EDGE overlay context. Schema `character`. */
   skating_speed_speed_max_overlay_time_in_period?: string | null;
-  /** Schema `integer`. */
+  /** Numeric game-type code (e.g., 2 = regular season, 3 = playoffs) for the game in which this team's top skating speed was recorded. Schema `integer`. */
   skating_speed_speed_max_overlay_game_type?: number | null;
-  /** Schema `double`. */
+  /** Total cumulative skating distance logged by all skaters on this team across the season, expressed in miles (imperial), from NHL EDGE tracking data. Schema `double`. */
   distance_skated_total_imperial?: number | null;
-  /** Schema `double`. */
+  /** Total cumulative skating distance logged by all skaters on this team across the season, expressed in kilometers (metric), from NHL EDGE tracking data. Schema `double`. */
   distance_skated_total_metric?: number | null;
-  /** Schema `integer`. */
+  /** Team's league rank by total cumulative skating distance for the season, where rank 1 indicates the team with the most distance skated. Schema `integer`. */
   distance_skated_total_rank?: number | null;
-  /** Schema `double`. */
+  /** League-average cumulative skating distance for all teams over the same period as this team's totals, expressed in miles (imperial), from NHL EDGE tracking data. Schema `double`. */
   distance_skated_total_league_avg_imperial?: number | null;
-  /** Schema `double`. */
+  /** League-average cumulative skating distance for all teams over the same period as this team's totals, expressed in kilometers (metric), from NHL EDGE tracking data. Schema `double`. */
   distance_skated_total_league_avg_metric?: number | null;
-  /** Schema `double`. */
+  /** Percentage of all-situation ice time this team spends in the offensive zone, as measured by NHL EDGE player-tracking data. Schema `double`. */
   zone_time_details_offensive_zone_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Team's league rank by overall offensive-zone time percentage (all situations), where rank 1 indicates the team with the most offensive-zone presence. Schema `integer`. */
   zone_time_details_offensive_zone_rank?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of all-situation ice time that teams spend in the offensive zone, from NHL EDGE zone-time tracking data. Schema `double`. */
   zone_time_details_offensive_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of even-strength ice time this team spends in the offensive zone, as measured by NHL EDGE player-tracking data. Schema `double`. */
   zone_time_details_offensive_zone_ev_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Team's league rank by even-strength offensive-zone time percentage, where rank 1 indicates the team spending the most time in the offensive zone at even strength. Schema `integer`. */
   zone_time_details_offensive_zone_ev_rank?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of even-strength ice time that teams spend in the offensive zone, from NHL EDGE zone-time tracking data. Schema `double`. */
   zone_time_details_offensive_zone_ev_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of five-on-five ice time this team spends in the neutral zone, as measured by NHL EDGE player-tracking data. Schema `double`. */
   zone_time_details_neutral_zone_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Team's league rank by neutral-zone time percentage, where rank 1 indicates the team that spends the most time in the neutral zone during five-on-five play. Schema `integer`. */
   zone_time_details_neutral_zone_rank?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of time that teams spend in the neutral zone during five-on-five play, from NHL EDGE zone-time tracking data. Schema `double`. */
   zone_time_details_neutral_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of five-on-five ice time this team spends in its own defensive zone, as measured by NHL EDGE player-tracking data. Schema `double`. */
   zone_time_details_defensive_zone_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Team's league rank by defensive-zone time percentage, where rank 1 indicates the team that spends the most time in its own zone during five-on-five play. Schema `integer`. */
   zone_time_details_defensive_zone_rank?: number | null;
-  /** Schema `double`. */
+  /** League-average percentage of time that teams spend in the defensive zone during five-on-five play, from NHL EDGE zone-time tracking data. Schema `double`. */
   zone_time_details_defensive_zone_league_avg?: number | null;
 }
 
@@ -1666,179 +1666,179 @@ export interface NhlEdgeTeamDetailRow {
  * One row of `sdv.nhl.nhl_edge_team_landing({ parsed: true })` (returns schema `native/nhl_edge/team_landing`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeTeamLandingRow {
-  /** Schema `character`. */
+  /** Serialized list of NHL seasons for which EDGE player-tracking data is available for this team. Schema `character`. */
   seasons_with_edge_stats?: string | null;
-  /** Schema `integer` (an id). */
+  /** NHL identifier for the team leading the EDGE shot-attempts-over-90-mph category. Schema `integer` (an id). */
   leaders_shot_attempts_over90_team_id?: string | null;
-  /** Schema `character`. */
+  /** Common team name for the leader in the EDGE shot-attempts-over-90-mph category. Schema `character`. */
   leaders_shot_attempts_over90_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Default-language place name with preposition for the team leading the EDGE shot-attempts-over-90-mph category. Schema `character`. */
   leaders_shot_attempts_over90_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** French-language place name with preposition for the team leading the EDGE shot-attempts-over-90-mph category. Schema `character`. */
   leaders_shot_attempts_over90_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the team leading the EDGE shot-attempts-over-90-mph category. Schema `character`. */
   leaders_shot_attempts_over90_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background logo for the team leading the EDGE shot-attempts-over-90-mph category. Schema `character`. */
   leaders_shot_attempts_over90_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background logo for the team leading the EDGE shot-attempts-over-90-mph category. Schema `character`. */
   leaders_shot_attempts_over90_team_team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly slug identifier for the team leading the EDGE shot-attempts-over-90-mph category. Schema `character`. */
   leaders_shot_attempts_over90_team_slug?: string | null;
-  /** Schema `integer`. */
+  /** Regular-season wins for the team leading the EDGE shot-attempts-over-90-mph category. Schema `integer`. */
   leaders_shot_attempts_over90_team_wins?: number | null;
-  /** Schema `integer`. */
+  /** Regular-season losses for the team leading the EDGE shot-attempts-over-90-mph category. Schema `integer`. */
   leaders_shot_attempts_over90_team_losses?: number | null;
-  /** Schema `integer`. */
+  /** Overtime losses for the team leading the EDGE shot-attempts-over-90-mph category. Schema `integer`. */
   leaders_shot_attempts_over90_team_ot_losses?: number | null;
-  /** Schema `integer`. */
+  /** Number of shot attempts above the 90-mph threshold recorded by the leading team in the EDGE shot-speed leaderboard period. Schema `integer`. */
   leaders_shot_attempts_over90_attempts?: number | null;
-  /** Schema `integer` (an id). */
+  /** NHL identifier for the team leading the speed-bursts-over-22-mph EDGE tracking category. Schema `integer` (an id). */
   leaders_bursts_over22_team_id?: string | null;
-  /** Schema `character`. */
+  /** Common team name (e.g., 'Maple Leafs') for the leader in the speed-bursts-over-22-mph EDGE tracking category. Schema `character`. */
   leaders_bursts_over22_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Default-language place name with preposition (e.g., 'in Toronto') for the team leading the speed-bursts-over-22-mph EDGE category. Schema `character`. */
   leaders_bursts_over22_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** French-language place name with preposition for the team leading the speed-bursts-over-22-mph EDGE category. Schema `character`. */
   leaders_bursts_over22_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the team leading the speed-bursts-over-22-mph EDGE tracking category. Schema `character`. */
   leaders_bursts_over22_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background logo for the team leading the speed-bursts-over-22-mph EDGE category. Schema `character`. */
   leaders_bursts_over22_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background logo for the team leading the speed-bursts-over-22-mph EDGE category. Schema `character`. */
   leaders_bursts_over22_team_team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly slug identifier for the team leading the speed-bursts-over-22-mph EDGE tracking category. Schema `character`. */
   leaders_bursts_over22_team_slug?: string | null;
-  /** Schema `integer`. */
+  /** Regular-season wins for the team leading the speed-bursts-over-22-mph EDGE tracking category. Schema `integer`. */
   leaders_bursts_over22_team_wins?: number | null;
-  /** Schema `integer`. */
+  /** Regular-season losses for the team leading the speed-bursts-over-22-mph EDGE tracking category. Schema `integer`. */
   leaders_bursts_over22_team_losses?: number | null;
-  /** Schema `integer`. */
+  /** Overtime losses for the team leading the speed-bursts-over-22-mph EDGE tracking category. Schema `integer`. */
   leaders_bursts_over22_team_ot_losses?: number | null;
-  /** Schema `integer`. */
+  /** Number of speed bursts above 22 mph recorded by skaters on the team in the EDGE tracking leaderboard period. Schema `integer`. */
   leaders_bursts_over22_bursts?: number | null;
-  /** Schema `integer` (an id). */
+  /** NHL identifier for the team leading the EDGE distance-skated-per-60 category. Schema `integer` (an id). */
   leaders_distance_per60_team_id?: string | null;
-  /** Schema `character`. */
+  /** Common team name for the leader in the EDGE distance-skated-per-60 category. Schema `character`. */
   leaders_distance_per60_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Default-language place name with preposition for the team leading the EDGE distance-skated-per-60 category. Schema `character`. */
   leaders_distance_per60_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** French-language place name with preposition for the team leading the EDGE distance-skated-per-60 category. Schema `character`. */
   leaders_distance_per60_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the team leading the EDGE distance-skated-per-60 category. Schema `character`. */
   leaders_distance_per60_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background logo for the team leading the EDGE distance-skated-per-60 category. Schema `character`. */
   leaders_distance_per60_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background logo for the team leading the EDGE distance-skated-per-60 category. Schema `character`. */
   leaders_distance_per60_team_team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly slug identifier for the team leading the EDGE distance-skated-per-60 category. Schema `character`. */
   leaders_distance_per60_team_slug?: string | null;
-  /** Schema `integer`. */
+  /** Regular-season wins for the team leading the EDGE distance-skated-per-60 category. Schema `integer`. */
   leaders_distance_per60_team_wins?: number | null;
-  /** Schema `integer`. */
+  /** Regular-season losses for the team leading the EDGE distance-skated-per-60 category. Schema `integer`. */
   leaders_distance_per60_team_losses?: number | null;
-  /** Schema `integer`. */
+  /** Overtime losses for the team leading the EDGE distance-skated-per-60 category. Schema `integer`. */
   leaders_distance_per60_team_ot_losses?: number | null;
-  /** Schema `double`. */
+  /** Average distance skated per 60 minutes of ice time by the leading team's skaters, measured in miles. Schema `double`. */
   leaders_distance_per60_distance_skated_imperial?: number | null;
-  /** Schema `double`. */
+  /** Average distance skated per 60 minutes of ice time by the leading team's skaters, measured in kilometers. Schema `double`. */
   leaders_distance_per60_distance_skated_metric?: number | null;
-  /** Schema `integer` (an id). */
+  /** NHL identifier for the team leading the EDGE high-danger shots-on-goal category. Schema `integer` (an id). */
   leaders_high_danger_sog_team_id?: string | null;
-  /** Schema `character`. */
+  /** Common team name for the leader in the EDGE high-danger shots-on-goal category. Schema `character`. */
   leaders_high_danger_sog_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Default-language place name with preposition for the team leading the EDGE high-danger shots-on-goal category. Schema `character`. */
   leaders_high_danger_sog_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** French-language place name with preposition for the team leading the EDGE high-danger shots-on-goal category. Schema `character`. */
   leaders_high_danger_sog_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the team leading the EDGE high-danger shots-on-goal category. Schema `character`. */
   leaders_high_danger_sog_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background logo for the team leading the EDGE high-danger shots-on-goal category. Schema `character`. */
   leaders_high_danger_sog_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background logo for the team leading the EDGE high-danger shots-on-goal category. Schema `character`. */
   leaders_high_danger_sog_team_team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly slug identifier for the team leading the EDGE high-danger shots-on-goal category. Schema `character`. */
   leaders_high_danger_sog_team_slug?: string | null;
-  /** Schema `integer`. */
+  /** Regular-season wins for the team leading the EDGE high-danger shots-on-goal category. Schema `integer`. */
   leaders_high_danger_sog_team_wins?: number | null;
-  /** Schema `integer`. */
+  /** Regular-season losses for the team leading the EDGE high-danger shots-on-goal category. Schema `integer`. */
   leaders_high_danger_sog_team_losses?: number | null;
-  /** Schema `integer`. */
+  /** Overtime losses for the team leading the EDGE high-danger shots-on-goal category. Schema `integer`. */
   leaders_high_danger_sog_team_ot_losses?: number | null;
-  /** Schema `integer`. */
+  /** Number of high-danger shots on goal recorded by the leading team in the EDGE tracking leaderboard period. Schema `integer`. */
   leaders_high_danger_sog_sog?: number | null;
-  /** Schema `character`. */
+  /** Serialized details describing the high-danger shot locations used to define this EDGE tracking leaderboard category. Schema `character`. */
   leaders_high_danger_sog_shot_location_details?: string | null;
-  /** Schema `integer` (an id). */
+  /** NHL identifier for the team leading the EDGE offensive-zone time category. Schema `integer` (an id). */
   leaders_offensive_zone_time_team_id?: string | null;
-  /** Schema `character`. */
+  /** Common team name for the leader in the EDGE offensive-zone time category. Schema `character`. */
   leaders_offensive_zone_time_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Default-language place name with preposition for the team leading the EDGE offensive-zone time category. Schema `character`. */
   leaders_offensive_zone_time_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** French-language place name with preposition for the team leading the EDGE offensive-zone time category. Schema `character`. */
   leaders_offensive_zone_time_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the team leading the EDGE offensive-zone time category. Schema `character`. */
   leaders_offensive_zone_time_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background logo for the team leading the EDGE offensive-zone time category. Schema `character`. */
   leaders_offensive_zone_time_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background logo for the team leading the EDGE offensive-zone time category. Schema `character`. */
   leaders_offensive_zone_time_team_team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly slug identifier for the team leading the EDGE offensive-zone time category. Schema `character`. */
   leaders_offensive_zone_time_team_slug?: string | null;
-  /** Schema `integer`. */
+  /** Regular-season wins for the team leading the EDGE offensive-zone time category. Schema `integer`. */
   leaders_offensive_zone_time_team_wins?: number | null;
-  /** Schema `integer`. */
+  /** Regular-season losses for the team leading the EDGE offensive-zone time category. Schema `integer`. */
   leaders_offensive_zone_time_team_losses?: number | null;
-  /** Schema `integer`. */
+  /** Overtime losses for the team leading the EDGE offensive-zone time category. Schema `integer`. */
   leaders_offensive_zone_time_team_ot_losses?: number | null;
-  /** Schema `double`. */
+  /** Total time spent in the offensive zone by the leading team in the EDGE tracking leaderboard period. Schema `double`. */
   leaders_offensive_zone_time_zone_time?: number | null;
-  /** Schema `integer` (an id). */
+  /** NHL identifier for the team leading the EDGE neutral-zone time category. Schema `integer` (an id). */
   leaders_neutral_zone_time_team_id?: string | null;
-  /** Schema `character`. */
+  /** Common team name for the leader in the EDGE neutral-zone time category. Schema `character`. */
   leaders_neutral_zone_time_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Default-language place name with preposition for the team leading the EDGE neutral-zone time category. Schema `character`. */
   leaders_neutral_zone_time_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** French-language place name with preposition for the team leading the EDGE neutral-zone time category. Schema `character`. */
   leaders_neutral_zone_time_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the team leading the EDGE neutral-zone time category. Schema `character`. */
   leaders_neutral_zone_time_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background logo for the team leading the EDGE neutral-zone time category. Schema `character`. */
   leaders_neutral_zone_time_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background logo for the team leading the EDGE neutral-zone time category. Schema `character`. */
   leaders_neutral_zone_time_team_team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly slug identifier for the team leading the EDGE neutral-zone time category. Schema `character`. */
   leaders_neutral_zone_time_team_slug?: string | null;
-  /** Schema `integer`. */
+  /** Regular-season wins for the team leading the EDGE neutral-zone time category. Schema `integer`. */
   leaders_neutral_zone_time_team_wins?: number | null;
-  /** Schema `integer`. */
+  /** Regular-season losses for the team leading the EDGE neutral-zone time category. Schema `integer`. */
   leaders_neutral_zone_time_team_losses?: number | null;
-  /** Schema `integer`. */
+  /** Overtime losses for the team leading the EDGE neutral-zone time category. Schema `integer`. */
   leaders_neutral_zone_time_team_ot_losses?: number | null;
-  /** Schema `double`. */
+  /** Total time spent in the neutral zone by the leading team in the EDGE tracking leaderboard period. Schema `double`. */
   leaders_neutral_zone_time_zone_time?: number | null;
-  /** Schema `integer` (an id). */
+  /** NHL identifier for the team leading the EDGE defensive-zone time category. Schema `integer` (an id). */
   leaders_defensive_zone_time_team_id?: string | null;
-  /** Schema `character`. */
+  /** Common team name for the leader in the EDGE defensive-zone time category. Schema `character`. */
   leaders_defensive_zone_time_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Default-language place name with preposition for the team leading the EDGE defensive-zone time category. Schema `character`. */
   leaders_defensive_zone_time_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** French-language place name with preposition for the team leading the EDGE defensive-zone time category. Schema `character`. */
   leaders_defensive_zone_time_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the team leading the EDGE defensive-zone time category. Schema `character`. */
   leaders_defensive_zone_time_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL of the light-background logo for the team leading the EDGE defensive-zone time category. Schema `character`. */
   leaders_defensive_zone_time_team_team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL of the dark-background logo for the team leading the EDGE defensive-zone time category. Schema `character`. */
   leaders_defensive_zone_time_team_team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** URL-friendly slug identifier for the team leading the EDGE defensive-zone time category. Schema `character`. */
   leaders_defensive_zone_time_team_slug?: string | null;
-  /** Schema `integer`. */
+  /** Regular-season wins for the team leading the EDGE defensive-zone time category. Schema `integer`. */
   leaders_defensive_zone_time_team_wins?: number | null;
-  /** Schema `integer`. */
+  /** Regular-season losses for the team leading the EDGE defensive-zone time category. Schema `integer`. */
   leaders_defensive_zone_time_team_losses?: number | null;
-  /** Schema `integer`. */
+  /** Overtime losses for the team leading the EDGE defensive-zone time category. Schema `integer`. */
   leaders_defensive_zone_time_team_ot_losses?: number | null;
-  /** Schema `double`. */
+  /** Total time spent in the defensive zone by the leading team in the EDGE tracking leaderboard period. Schema `double`. */
   leaders_defensive_zone_time_zone_time?: number | null;
 }
 
@@ -1846,19 +1846,19 @@ export interface NhlEdgeTeamLandingRow {
  * One row of `sdv.nhl.nhl_edge_team_shot_location_detail({ parsed: true })` (returns schema `native/nhl_edge/team_shot_location_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeTeamShotLocationDetailRow {
-  /** Schema `character`. */
+  /** Net/ice zone the shots were taken from. Schema `character`. */
   area?: string | null;
-  /** Schema `integer`. */
+  /** Shots on goal from the area. Schema `integer`. */
   sog?: number | null;
-  /** Schema `integer`. */
+  /** League rank for shots on goal from the area. Schema `integer`. */
   sog_rank?: number | null;
-  /** Schema `integer`. */
+  /** Goals scored. Schema `integer`. */
   goals?: number | null;
-  /** Schema `integer`. */
+  /** League rank for goals scored from the area. Schema `integer`. */
   goals_rank?: number | null;
-  /** Schema `double`. */
+  /** Shooting percentage from the area. Schema `double`. */
   shooting_pctg?: number | null;
-  /** Schema `integer`. */
+  /** League rank for shooting percentage from the area. Schema `integer`. */
   shooting_pctg_rank?: number | null;
 }
 
@@ -1866,9 +1866,9 @@ export interface NhlEdgeTeamShotLocationDetailRow {
  * One row of `sdv.nhl.nhl_edge_team_shot_speed_detail({ parsed: true })` (returns schema `native/nhl_edge/team_shot_speed_detail`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeTeamShotSpeedDetailRow {
-  /** Schema `character`. */
+  /** Serialized list of the hardest individual shot records associated with the team's players. Schema `character`. */
   hardest_shots?: string | null;
-  /** Schema `character`. */
+  /** Serialized shot-speed breakdown object containing aggregate and top-speed metrics for the team. Schema `character`. */
   shot_speed_details?: string | null;
 }
 
@@ -1876,24 +1876,24 @@ export interface NhlEdgeTeamShotSpeedDetailRow {
  * One row of `sdv.nhl.nhl_edge_team_zone_time_details({ parsed: true })` (returns schema `native/nhl_edge/team_zone_time_details`, verified on a real sdv-py capture).
  */
 export interface NhlEdgeTeamZoneTimeDetailsRow {
-  /** Schema `character`. */
+  /** Strength state code (e.g., all, even, pp, pk). Schema `character`. */
   strength_code?: string | null;
-  /** Schema `double`. */
+  /** Percentage of time spent in the offensive zone. Schema `double`. */
   offensive_zone_pctg?: number | null;
-  /** Schema `integer`. */
+  /** League rank for offensive zone time. Schema `integer`. */
   offensive_zone_rank?: number | null;
-  /** Schema `double`. */
+  /** League average offensive-zone time percentage. Schema `double`. */
   offensive_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of time spent in the neutral zone. Schema `double`. */
   neutral_zone_pctg?: number | null;
-  /** Schema `integer`. */
+  /** League rank for neutral zone time. Schema `integer`. */
   neutral_zone_rank?: number | null;
-  /** Schema `double`. */
+  /** League average neutral-zone time percentage. Schema `double`. */
   neutral_zone_league_avg?: number | null;
-  /** Schema `double`. */
+  /** Percentage of time spent in the defensive zone. Schema `double`. */
   defensive_zone_pctg?: number | null;
-  /** Schema `integer`. */
+  /** League rank for defensive zone time. Schema `integer`. */
   defensive_zone_rank?: number | null;
-  /** Schema `double`. */
+  /** League average defensive-zone time percentage. Schema `double`. */
   defensive_zone_league_avg?: number | null;
 }

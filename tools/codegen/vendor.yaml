@@ -52,10 +52,18 @@ source:
 # espn_rename_map.yaml: sdv-py's curated ESPN renames, read by generate.mjs.
 # schemas/loader_schemas.yaml: the polars dtype of every column of every load_*
 # frame, the source of the generated loader row types (tools/codegen/loader-types.mjs).
+# manual_column_descriptions.yaml: sdv-py's hand-curated returns-table column
+# descriptions ({<schema key>: {col: desc}, _global: {col: desc}}); r_column_descriptions.yaml:
+# the column descriptions mined from the SDV R packages ({<package>: {col: desc}, _merged:
+# {col: desc}}). tools/codegen/descriptions.mjs resolves every returns-table cell through
+# them (JS schema text -> manual schema key -> manual _global -> the league's R package ->
+# _merged), as sdv-py's generate.py does.
 copy:
   - endpoints/releases.yaml
   - espn_rename_map.yaml
   - schemas/loader_schemas.yaml
+  - manual_column_descriptions.yaml
+  - r_column_descriptions.yaml
 
 # sdv-py public names, written by hand in sdv-py at `source.ref`, that its
 # emit-time rename layer treats as taken: py reads them off its own package

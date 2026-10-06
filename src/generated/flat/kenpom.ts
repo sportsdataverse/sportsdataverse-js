@@ -63,13 +63,14 @@ const ARCHIVE_RATINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/archive.php`
  *
- * @param params.date - query parameter (`d`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.date - `number | string` — Snapshot date as YYYY-MM-DD.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomArchiveRatings({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomArchiveRatings: SectionedWrapper<Row[] | ParsedTables, {}, KenpomArchiveRatingsParams> = (params: WrapperParams = {}) => callFlat(ARCHIVE_RATINGS_DEF, params);
 /** snake_case alias of {@link kenpomArchiveRatings} (py/R parity). */
@@ -98,13 +99,14 @@ const ARENAS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/arenas.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomArenas({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomArenas: SectionedWrapper<Row[] | ParsedTables, {}, KenpomArenasParams> = (params: WrapperParams = {}) => callFlat(ARENAS_DEF, params);
 /** snake_case alias of {@link kenpomArenas} (py/R parity). */
@@ -137,14 +139,15 @@ const BOX_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/box.php`
  *
- * @param params.game_id - query parameter (`g`).
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — KenPom game id - the `g=` value on a FanMatch game link.
+ * @param params.year - `number | string` — Season (4-digit ENDING year) the game belongs to.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomBox({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomBox: SectionedWrapper<Row[] | ParsedTables, {}, KenpomBoxParams> = (params: WrapperParams = {}) => callFlat(BOX_DEF, params);
 /** snake_case alias of {@link kenpomBox} (py/R parity). */
@@ -173,13 +176,14 @@ const COACH_HISTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/history.php`
  *
- * @param params.coach - query parameter (`c`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.coach - `number | string` — Coach name as KenPom spells it (e.g. 'Jon Scheyer').
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomCoachHistory({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomCoachHistory: SectionedWrapper<Row[] | ParsedTables, {}, KenpomCoachHistoryParams> = (params: WrapperParams = {}) => callFlat(COACH_HISTORY_DEF, params);
 /** snake_case alias of {@link kenpomCoachHistory} (py/R parity). */
@@ -212,14 +216,15 @@ const CONFERENCE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/conf.php`
  *
- * @param params.conf - query parameter (`c`).
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.conf - `number | string` — KenPom conference abbreviation (e.g. 'ACC', 'B10', 'SEC').
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomConference({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomConference: SectionedWrapper<Row[] | ParsedTables, {}, KenpomConferenceParams> = (params: WrapperParams = {}) => callFlat(CONFERENCE_DEF, params);
 /** snake_case alias of {@link kenpomConference} (py/R parity). */
@@ -248,13 +253,14 @@ const CONFERENCE_HISTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/confhistory.php`
  *
- * @param params.conf - query parameter (`c`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.conf - `number | string` — KenPom conference abbreviation.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomConferenceHistory({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomConferenceHistory: SectionedWrapper<Row[] | ParsedTables, {}, KenpomConferenceHistoryParams> = (params: WrapperParams = {}) => callFlat(CONFERENCE_HISTORY_DEF, params);
 /** snake_case alias of {@link kenpomConferenceHistory} (py/R parity). */
@@ -283,13 +289,14 @@ const CONFERENCE_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/confstats.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomConferenceStats({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomConferenceStats: SectionedWrapper<Row[] | ParsedTables, {}, KenpomConferenceStatsParams> = (params: WrapperParams = {}) => callFlat(CONFERENCE_STATS_DEF, params);
 /** snake_case alias of {@link kenpomConferenceStats} (py/R parity). */
@@ -318,13 +325,14 @@ const EFFICIENCY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/summary.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year. Columns are narrower before 2010.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomEfficiency({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomEfficiency: SectionedWrapper<Row[] | ParsedTables, {}, KenpomEfficiencyParams> = (params: WrapperParams = {}) => callFlat(EFFICIENCY_DEF, params);
 /** snake_case alias of {@link kenpomEfficiency} (py/R parity). */
@@ -353,13 +361,14 @@ const FAN_MATCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/fanmatch.php`
  *
- * @param params.date - query parameter (`d`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.date - `number | string` — Slate date as YYYY-MM-DD.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomFanMatch({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomFanMatch: SectionedWrapper<Row[] | ParsedTables, {}, KenpomFanMatchParams> = (params: WrapperParams = {}) => callFlat(FAN_MATCH_DEF, params);
 /** snake_case alias of {@link kenpomFanMatch} (py/R parity). */
@@ -388,13 +397,14 @@ const FOUL_TROUBLE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/foul_trouble.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomFoulTrouble({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomFoulTrouble: SectionedWrapper<Row[] | ParsedTables, {}, KenpomFoulTroubleParams> = (params: WrapperParams = {}) => callFlat(FOUL_TROUBLE_DEF, params);
 /** snake_case alias of {@link kenpomFoulTrouble} (py/R parity). */
@@ -423,13 +433,14 @@ const FOUR_FACTORS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/stats.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomFourFactors({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomFourFactors: SectionedWrapper<Row[] | ParsedTables, {}, KenpomFourFactorsParams> = (params: WrapperParams = {}) => callFlat(FOUR_FACTORS_DEF, params);
 /** snake_case alias of {@link kenpomFourFactors} (py/R parity). */
@@ -462,14 +473,15 @@ const GAME_ATTRIBUTES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/game_attrs.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.attribute - query parameter (`s`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year.
+ * @param params.attribute - `number | string` — Attribute slug, e.g. ThrillScore, Comeback, FanMatch, Upsets, Busts, MinutesPlayed, PossessionLength, LeadChanges.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomGameAttributes({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomGameAttributes: SectionedWrapper<Row[] | ParsedTables, {}, KenpomGameAttributesParams> = (params: WrapperParams = {}) => callFlat(GAME_ATTRIBUTES_DEF, params);
 /** snake_case alias of {@link kenpomGameAttributes} (py/R parity). */
@@ -502,14 +514,15 @@ const GAME_PLAN_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/gameplan.php`
  *
- * @param params.team - query parameter.
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team - `number | string` — KenPom team name, spelled as the site does.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomGamePlan({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomGamePlan: SectionedWrapper<Row[] | ParsedTables, {}, KenpomGamePlanParams> = (params: WrapperParams = {}) => callFlat(GAME_PLAN_DEF, params);
 /** snake_case alias of {@link kenpomGamePlan} (py/R parity). */
@@ -538,13 +551,14 @@ const HEIGHT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/height.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year. Columns are narrower before 2008.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomHeight({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomHeight: SectionedWrapper<Row[] | ParsedTables, {}, KenpomHeightParams> = (params: WrapperParams = {}) => callFlat(HEIGHT_DEF, params);
 /** snake_case alias of {@link kenpomHeight} (py/R parity). */
@@ -568,12 +582,13 @@ const HOME_COURT_ADVANTAGE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/hca.php`
  *
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomHomeCourtAdvantage({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomHomeCourtAdvantage: SectionedWrapper<Row[] | ParsedTables, {}, KenpomHomeCourtAdvantageParams> = (params: WrapperParams = {}) => callFlat(HOME_COURT_ADVANTAGE_DEF, params);
 /** snake_case alias of {@link kenpomHomeCourtAdvantage} (py/R parity). */
@@ -602,13 +617,14 @@ const KPOY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/kpoy.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomKpoy({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomKpoy: SectionedWrapper<Row[] | ParsedTables, {}, KenpomKpoyParams> = (params: WrapperParams = {}) => callFlat(KPOY_DEF, params);
 /** snake_case alias of {@link kenpomKpoy} (py/R parity). */
@@ -637,13 +653,14 @@ const OFFICIALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/officials.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomOfficials({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomOfficials: SectionedWrapper<Row[] | ParsedTables, {}, KenpomOfficialsParams> = (params: WrapperParams = {}) => callFlat(OFFICIALS_DEF, params);
 /** snake_case alias of {@link kenpomOfficials} (py/R parity). */
@@ -680,15 +697,16 @@ const OPPONENT_TRACKER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/opptracker.php`
  *
- * @param params.team - query parameter.
- * @param params.year - query parameter (`y`).
- * @param params.side - query parameter (`t`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team - `number | string` — KenPom team name, spelled as the site does.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year. Columns are narrower before 2010.
+ * @param params.side - `number | string` — Side of the ball: 'o' (offense) or 'd' (defense).
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomOpponentTracker({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomOpponentTracker: SectionedWrapper<Row[] | ParsedTables, {}, KenpomOpponentTrackerParams> = (params: WrapperParams = {}) => callFlat(OPPONENT_TRACKER_DEF, params);
 /** snake_case alias of {@link kenpomOpponentTracker} (py/R parity). */
@@ -717,13 +735,14 @@ const PLAYER_CAREER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/player.php`
  *
- * @param params.player_id - query parameter (`p`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — KenPom player id - the `p=` value on a player-page URL.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomPlayerCareer({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomPlayerCareer: SectionedWrapper<Row[] | ParsedTables, {}, KenpomPlayerCareerParams> = (params: WrapperParams = {}) => callFlat(PLAYER_CAREER_DEF, params);
 /** snake_case alias of {@link kenpomPlayerCareer} (py/R parity). */
@@ -764,16 +783,17 @@ const PLAYER_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/playerstats.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.metric - query parameter (`s`).
- * @param params.conf - query parameter (`f`).
- * @param params.conf_only - query parameter (`c`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year. Data begins at 2004.
+ * @param params.metric - `number | string` — Metric slug as KenPom spells it on the wire - one of ORtg, PctMin, eFG, PctPoss, PctShots, ORPct, DRPct, TORate, ARate, PctBlocks, FTRate, PctStls, TS, FCper40, FDper40, FG2Pct, FG3Pct, FTPct. (hoopR's kp_playerstats() takes the display labels - ORtg, Min, eFG, Poss, Shots, OR, DR, TO, ARate, Blk, FTRate, Stl, TS, FC40, FD40, 2P, 3P, FT - and maps them to these.).
+ * @param params.conf - `number | string` — Conference filter (KenPom abbreviation, e.g. 'ACC', 'B10'); omit for all of Division I.
+ * @param params.conf_only - `number | string` — Conference-games-only toggle: 'c' restricts the leaderboard to conference play.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomPlayerStats({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomPlayerStats: SectionedWrapper<Row[] | ParsedTables, {}, KenpomPlayerStatsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link kenpomPlayerStats} (py/R parity). */
@@ -802,13 +822,14 @@ const POINT_DISTRIBUTION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/pointdist.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomPointDistribution({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomPointDistribution: SectionedWrapper<Row[] | ParsedTables, {}, KenpomPointDistributionParams> = (params: WrapperParams = {}) => callFlat(POINT_DISTRIBUTION_DEF, params);
 /** snake_case alias of {@link kenpomPointDistribution} (py/R parity). */
@@ -832,12 +853,13 @@ const PROGRAM_RATINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/programs.php`
  *
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomProgramRatings({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomProgramRatings: SectionedWrapper<Row[] | ParsedTables, {}, KenpomProgramRatingsParams> = (params: WrapperParams = {}) => callFlat(PROGRAM_RATINGS_DEF, params);
 /** snake_case alias of {@link kenpomProgramRatings} (py/R parity). */
@@ -866,13 +888,14 @@ const RATINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/index.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year (2025 = the 2024-25 season). Data begins at 2002.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomRatings({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomRatings: SectionedWrapper<Row[] | ParsedTables, {}, KenpomRatingsParams> = (params: WrapperParams = {}) => callFlat(RATINGS_DEF, params);
 /** snake_case alias of {@link kenpomRatings} (py/R parity). */
@@ -905,14 +928,15 @@ const REFEREE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/referee.php`
  *
- * @param params.referee - query parameter (`r`).
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.referee - `number | string` — Referee name as KenPom spells it (take it from the officials table).
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomReferee({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomReferee: SectionedWrapper<Row[] | ParsedTables, {}, KenpomRefereeParams> = (params: WrapperParams = {}) => callFlat(REFEREE_DEF, params);
 /** snake_case alias of {@link kenpomReferee} (py/R parity). */
@@ -945,14 +969,15 @@ const TEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/team.php`
  *
- * @param params.team - query parameter.
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team - `number | string` — KenPom team name, spelled as the site does (e.g. 'Duke', 'Michigan St.').
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year. Lineup tables begin at 2011.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomTeam({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomTeam: SectionedWrapper<Row[] | ParsedTables, {}, KenpomTeamParams> = (params: WrapperParams = {}) => callFlat(TEAM_DEF, params);
 /** snake_case alias of {@link kenpomTeam} (py/R parity). */
@@ -981,13 +1006,14 @@ const TEAM_HISTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/history.php`
  *
- * @param params.team - query parameter (`t`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team - `number | string` — KenPom team name, spelled as the site does.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomTeamHistory({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomTeamHistory: SectionedWrapper<Row[] | ParsedTables, {}, KenpomTeamHistoryParams> = (params: WrapperParams = {}) => callFlat(TEAM_HISTORY_DEF, params);
 /** snake_case alias of {@link kenpomTeamHistory} (py/R parity). */
@@ -1020,14 +1046,15 @@ const TEAM_PLAYERS_EXPANDED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/player-expanded.php`
  *
- * @param params.team - query parameter.
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team - `number | string` — KenPom team name, spelled as the site does.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year. Starts ('S') are available from 2014.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomTeamPlayersExpanded({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomTeamPlayersExpanded: SectionedWrapper<Row[] | ParsedTables, {}, KenpomTeamPlayersExpandedParams> = (params: WrapperParams = {}) => callFlat(TEAM_PLAYERS_EXPANDED_DEF, params);
 /** snake_case alias of {@link kenpomTeamPlayersExpanded} (py/R parity). */
@@ -1060,14 +1087,15 @@ const TEAM_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/teamstats.php`
  *
- * @param params.year - query parameter (`y`).
- * @param params.side - query parameter (`od`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — Season as a 4-digit ENDING year.
+ * @param params.side - `number | string` — Side of the ball: 'o' (offense, hoopR's default) or 'd' (defense).
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomTeamStats({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomTeamStats: SectionedWrapper<Row[] | ParsedTables, {}, KenpomTeamStatsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link kenpomTeamStats} (py/R parity). */
@@ -1091,12 +1119,13 @@ const TRENDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/trends.php`
  *
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomTrends({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomTrends: SectionedWrapper<Row[] | ParsedTables, {}, KenpomTrendsParams> = (params: WrapperParams = {}) => callFlat(TRENDS_DEF, params);
 /** snake_case alias of {@link kenpomTrends} (py/R parity). */
@@ -1129,14 +1158,15 @@ const WIN_PROBABILITY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/winprob.php`
  *
- * @param params.game_id - query parameter (`g`).
- * @param params.year - query parameter (`y`).
- * @param params.email - KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
- * @param params.password - KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — KenPom game id.
+ * @param params.year - `number | string` — Season (4-digit ENDING year) the game belongs to.
+ * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
+ * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mbb.kenpomWinProbability({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/native#native-api--kenpom
  */
 export const kenpomWinProbability: SectionedWrapper<Row[] | ParsedTables, {}, KenpomWinProbabilityParams> = (params: WrapperParams = {}) => callFlat(WIN_PROBABILITY_DEF, params);
 /** snake_case alias of {@link kenpomWinProbability} (py/R parity). */

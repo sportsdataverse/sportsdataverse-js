@@ -71,10 +71,11 @@ const COMPONENT_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/componentSeason`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
- * @returns The raw response (this endpoint has no parser).
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
+ * @returns Promise<`unknown`>: the raw response (this endpoint has no parser).
  * @example await sdv.nhl.nhlStatsRestComponentSeason({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestComponentSeason: Wrapper<unknown, NhlStatsRestComponentSeasonParams> = (params: WrapperParams = {}) => callFlat(COMPONENT_SEASON_DEF, params);
 /** snake_case alias of {@link nhlStatsRestComponentSeason} (py/R parity). */
@@ -102,10 +103,11 @@ const CONFIG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/config`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
- * @returns The raw response (this endpoint has no parser).
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
+ * @returns Promise<`unknown`>: the raw response (this endpoint has no parser).
  * @example await sdv.nhl.nhlStatsRestConfig({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestConfig: Wrapper<unknown, NhlStatsRestConfigParams> = (params: WrapperParams = {}) => callFlat(CONFIG_DEF, params);
 /** snake_case alias of {@link nhlStatsRestConfig} (py/R parity). */
@@ -136,11 +138,12 @@ const CONTENT_MODULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/content/module/{template_key}`
  *
- * @param params.template_key - path parameter.
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
- * @returns The raw response (this endpoint has no parser).
+ * @param params.template_key - `number | string` — the `{template_key}` path segment.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
+ * @returns Promise<`unknown`>: the raw response (this endpoint has no parser).
  * @example await sdv.nhl.nhlStatsRestContentModule({ template_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestContentModule: Wrapper<unknown, NhlStatsRestContentModuleParams> = (params: WrapperParams = {}) => callFlat(CONTENT_MODULE_DEF, params);
 /** snake_case alias of {@link nhlStatsRestContentModule} (py/R parity). */
@@ -170,10 +173,11 @@ const COUNTRY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/country`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestCountryRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestCountry({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestCountry: Wrapper<NhlStatsRestCountryRow[], NhlStatsRestCountryParams> = (params: WrapperParams = {}) => callFlat(COUNTRY_DEF, params);
 /** snake_case alias of {@link nhlStatsRestCountry} (py/R parity). */
@@ -203,10 +207,11 @@ const DRAFT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/draft`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestDraftRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestDraft({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestDraft: Wrapper<NhlStatsRestDraftRow[], NhlStatsRestDraftParams> = (params: WrapperParams = {}) => callFlat(DRAFT_DEF, params);
 /** snake_case alias of {@link nhlStatsRestDraft} (py/R parity). */
@@ -236,10 +241,11 @@ const FRANCHISE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/franchise`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestFranchiseRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestFranchise({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestFranchise: Wrapper<NhlStatsRestFranchiseRow[], NhlStatsRestFranchiseParams> = (params: WrapperParams = {}) => callFlat(FRANCHISE_DEF, params);
 /** snake_case alias of {@link nhlStatsRestFranchise} (py/R parity). */
@@ -269,10 +275,11 @@ const GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/game`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestGameRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestGame({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestGame: Wrapper<NhlStatsRestGameRow[], NhlStatsRestGameParams> = (params: WrapperParams = {}) => callFlat(GAME_DEF, params);
 /** snake_case alias of {@link nhlStatsRestGame} (py/R parity). */
@@ -302,10 +309,11 @@ const GLOSSARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/glossary`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestGlossaryRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestGlossary({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestGlossary: Wrapper<NhlStatsRestGlossaryRow[], NhlStatsRestGlossaryParams> = (params: WrapperParams = {}) => callFlat(GLOSSARY_DEF, params);
 /** snake_case alias of {@link nhlStatsRestGlossary} (py/R parity). */
@@ -338,11 +346,12 @@ const GOALIE_REPORT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/goalie/{report}`
  *
- * @param params.report - path parameter.
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.report - `number | string` — the `{report}` path segment.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestGoalieReportRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestGoalieReport({ report: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestGoalieReport: Wrapper<NhlStatsRestGoalieReportRow[], NhlStatsRestGoalieReportParams> = (params: WrapperParams = {}) => callFlat(GOALIE_REPORT_DEF, params);
 /** snake_case alias of {@link nhlStatsRestGoalieReport} (py/R parity). */
@@ -375,11 +384,12 @@ const LEADERS_GOALIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/leaders/goalies/{attribute}`
  *
- * @param params.attribute - path parameter.
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.attribute - `number | string` — the `{attribute}` path segment.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestLeadersGoaliesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestLeadersGoalies({ attribute: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestLeadersGoalies: Wrapper<NhlStatsRestLeadersGoaliesRow[], NhlStatsRestLeadersGoaliesParams> = (params: WrapperParams = {}) => callFlat(LEADERS_GOALIES_DEF, params);
 /** snake_case alias of {@link nhlStatsRestLeadersGoalies} (py/R parity). */
@@ -412,11 +422,12 @@ const LEADERS_SKATERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/leaders/skaters/{attribute}`
  *
- * @param params.attribute - path parameter.
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.attribute - `number | string` — the `{attribute}` path segment.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestLeadersSkatersRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestLeadersSkaters({ attribute: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestLeadersSkaters: Wrapper<NhlStatsRestLeadersSkatersRow[], NhlStatsRestLeadersSkatersParams> = (params: WrapperParams = {}) => callFlat(LEADERS_SKATERS_DEF, params);
 /** snake_case alias of {@link nhlStatsRestLeadersSkaters} (py/R parity). */
@@ -446,10 +457,11 @@ const MILESTONES_GOALIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/milestones/goalies`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestMilestonesGoaliesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestMilestonesGoalies({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestMilestonesGoalies: Wrapper<NhlStatsRestMilestonesGoaliesRow[], NhlStatsRestMilestonesGoaliesParams> = (params: WrapperParams = {}) => callFlat(MILESTONES_GOALIES_DEF, params);
 /** snake_case alias of {@link nhlStatsRestMilestonesGoalies} (py/R parity). */
@@ -479,10 +491,11 @@ const MILESTONES_SKATERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/milestones/skaters`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestMilestonesSkatersRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestMilestonesSkaters({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestMilestonesSkaters: Wrapper<NhlStatsRestMilestonesSkatersRow[], NhlStatsRestMilestonesSkatersParams> = (params: WrapperParams = {}) => callFlat(MILESTONES_SKATERS_DEF, params);
 /** snake_case alias of {@link nhlStatsRestMilestonesSkaters} (py/R parity). */
@@ -504,9 +517,10 @@ const PING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/ping`
  *
- * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
- * @returns The raw response (this endpoint has no parser).
+ * @param params.parsed - `boolean` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
+ * @returns Promise<`unknown`>: the raw response (this endpoint has no parser).
  * @example await sdv.nhl.nhlStatsRestPing({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestPing: Wrapper<unknown, NhlStatsRestPingParams> = (params: WrapperParams = {}) => callFlat(PING_DEF, params);
 /** snake_case alias of {@link nhlStatsRestPing} (py/R parity). */
@@ -536,10 +550,11 @@ const PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/players`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestPlayers({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestPlayers: Wrapper<Row[], NhlStatsRestPlayersParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_DEF, params);
 /** snake_case alias of {@link nhlStatsRestPlayers} (py/R parity). */
@@ -569,10 +584,11 @@ const SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/season`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestSeasonRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestSeason({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestSeason: Wrapper<NhlStatsRestSeasonRow[], NhlStatsRestSeasonParams> = (params: WrapperParams = {}) => callFlat(SEASON_DEF, params);
 /** snake_case alias of {@link nhlStatsRestSeason} (py/R parity). */
@@ -602,10 +618,11 @@ const SHIFTCHARTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/shiftcharts`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestShiftchartsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestShiftcharts({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestShiftcharts: Wrapper<NhlStatsRestShiftchartsRow[], NhlStatsRestShiftchartsParams> = (params: WrapperParams = {}) => callFlat(SHIFTCHARTS_DEF, params);
 /** snake_case alias of {@link nhlStatsRestShiftcharts} (py/R parity). */
@@ -638,11 +655,12 @@ const SKATER_REPORT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/skater/{report}`
  *
- * @param params.report - path parameter.
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.report - `number | string` — the `{report}` path segment.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestSkaterReportRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestSkaterReport({ report: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestSkaterReport: Wrapper<NhlStatsRestSkaterReportRow[], NhlStatsRestSkaterReportParams> = (params: WrapperParams = {}) => callFlat(SKATER_REPORT_DEF, params);
 /** snake_case alias of {@link nhlStatsRestSkaterReport} (py/R parity). */
@@ -672,10 +690,11 @@ const TEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/team`
  *
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestTeamRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestTeam({});
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestTeam: Wrapper<NhlStatsRestTeamRow[], NhlStatsRestTeamParams> = (params: WrapperParams = {}) => callFlat(TEAM_DEF, params);
 /** snake_case alias of {@link nhlStatsRestTeam} (py/R parity). */
@@ -708,11 +727,12 @@ const TEAM_BY_ID_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/team/id/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestTeamByIdRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestTeamById({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestTeamById: Wrapper<NhlStatsRestTeamByIdRow[], NhlStatsRestTeamByIdParams> = (params: WrapperParams = {}) => callFlat(TEAM_BY_ID_DEF, params);
 /** snake_case alias of {@link nhlStatsRestTeamById} (py/R parity). */
@@ -745,11 +765,12 @@ const TEAM_REPORT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.nhle.com/stats/rest/{lang}/team/{report}`
  *
- * @param params.report - path parameter.
- * @param params.lang - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.report - `number | string` — the `{report}` path segment.
+ * @param params.lang - `number | string` — the `{lang}` path segment; optional; default `en`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`NhlStatsRestTeamReportRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlStatsRestTeamReport({ report: '…' });
+ * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-stats-rest
  */
 export const nhlStatsRestTeamReport: Wrapper<NhlStatsRestTeamReportRow[], NhlStatsRestTeamReportParams> = (params: WrapperParams = {}) => callFlat(TEAM_REPORT_DEF, params);
 /** snake_case alias of {@link nhlStatsRestTeamReport} (py/R parity). */

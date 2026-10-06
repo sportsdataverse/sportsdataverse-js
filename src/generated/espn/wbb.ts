@@ -165,10 +165,11 @@ const ATHLETE_AWARDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/awards`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerAwards({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbplayerawards
  */
 export const espnWbbPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_AWARDS_DEF, CFG, params);
@@ -192,10 +193,11 @@ const ATHLETE_BIO_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/athletes/{athlete_id}/bio`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerBio({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbplayerbio
  */
 export const espnWbbPlayerBio: Wrapper<Row[], EspnAthleteBioParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_BIO_DEF, CFG, params);
@@ -223,11 +225,12 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/statistics[/{stat_type}]`
  *
- * @param params.athlete_id - path parameter.
- * @param params.stat_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.stat_type - `number | string` — the `{stat_type}` path segment; optional.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerCareerStats({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbplayercareerstats
  */
 export const espnWbbPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_CAREER_STATS_DEF, CFG, params);
@@ -251,10 +254,11 @@ const ATHLETE_CONTRACTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/contracts`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerContracts({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbplayercontracts
  */
 export const espnWbbPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_CONTRACTS_DEF, CFG, params);
@@ -278,10 +282,11 @@ const ATHLETE_CORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/athletes/{athlete_id}`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerCore({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbplayercore
  */
 export const espnWbbPlayerCore: Wrapper<Row[], EspnAthleteCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_CORE_DEF, CFG, params);
@@ -305,10 +310,11 @@ const ATHLETE_EVENTLOG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/eventlog`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerEventlog({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbplayereventlog
  */
 export const espnWbbPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_EVENTLOG_DEF, CFG, params);
@@ -337,11 +343,12 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-college-basketball/athletes/{athlete_id}/gamelog`
  *
- * @param params.athlete_id - path parameter.
- * @param params.season - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerGamelog({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/web#espnwbbplayergamelog
  */
 export const espnWbbPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_GAMELOG_DEF, CFG, params);
@@ -365,10 +372,11 @@ const ATHLETE_INFO_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/athletes/{athlete_id}`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerInfo({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbplayerinfo
  */
 export const espnWbbPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_INFO_DEF, CFG, params);
@@ -392,10 +400,11 @@ const ATHLETE_INJURIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/injuries`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerInjuries({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbplayerinjuries
  */
 export const espnWbbPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_INJURIES_DEF, CFG, params);
@@ -419,10 +428,11 @@ const ATHLETE_NEWS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/athletes/{athlete_id}/news`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerNews({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbplayernews
  */
 export const espnWbbPlayerNews: Wrapper<Row[], EspnAthleteNewsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_NEWS_DEF, CFG, params);
@@ -446,10 +456,11 @@ const ATHLETE_NOTES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/notes`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerNotes({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbplayernotes
  */
 export const espnWbbPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_NOTES_DEF, CFG, params);
@@ -473,10 +484,11 @@ const ATHLETE_OVERVIEW_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-college-basketball/athletes/{athlete_id}/overview`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerOverview({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/web#espnwbbplayeroverview
  */
 export const espnWbbPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_OVERVIEW_DEF, CFG, params);
@@ -500,10 +512,11 @@ const ATHLETE_RECORDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/records`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerRecords({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbplayerrecords
  */
 export const espnWbbPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_RECORDS_DEF, CFG, params);
@@ -527,10 +540,11 @@ const ATHLETE_SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/seasons`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerSeasons({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbplayerseasons
  */
 export const espnWbbPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_SEASONS_DEF, CFG, params);
@@ -559,11 +573,12 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-college-basketball/athletes/{athlete_id}/splits`
  *
- * @param params.athlete_id - path parameter.
- * @param params.season - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerSplits({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/web#espnwbbplayersplits
  */
 export const espnWbbPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_SPLITS_DEF, CFG, params);
@@ -587,10 +602,11 @@ const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/statisticslog`
  *
- * @param params.athlete_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerStatisticslog({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbplayerstatisticslog
  */
 export const espnWbbPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_STATISTICSLOG_DEF, CFG, params);
@@ -619,11 +635,12 @@ const ATHLETE_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-college-basketball/athletes/{athlete_id}/stats`
  *
- * @param params.athlete_id - path parameter.
- * @param params.season - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerStatsV3({ athlete_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/web#espnwbbplayerstatsv3
  */
 export const espnWbbPlayerStatsV3: Wrapper<Row[], EspnAthleteStatsParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_STATS_DEF, CFG, params);
@@ -650,11 +667,12 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/vsathlete/{opp_id}`
  *
- * @param params.athlete_id - path parameter.
- * @param params.opp_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.athlete_id - `number | string` — the ESPN athlete id.
+ * @param params.opp_id - `number | string` — the `{opp_id}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbplayervsplayer
  */
 export const espnWbbPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETE_VS_ATHLETE_DEF, CFG, params);
@@ -691,12 +709,13 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/athletes`
  *
- * @param params.active - query parameter — default `true`.
- * @param params.limit - query parameter — default `100`.
- * @param params.page - query parameter — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.active - `boolean` — the `active` ESPN query parameter; default `true`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `100`.
+ * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPlayersIndex({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbplayersindex
  */
 export const espnWbbPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams> = (params: WrapperParams = {}) =>
   callWrapper(ATHLETES_INDEX_DEF, CFG, params);
@@ -720,10 +739,11 @@ const AWARD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/awards/{award_id}`
  *
- * @param params.award_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.award_id - `number | string` — the ESPN award id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbAward({ award_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbaward
  */
 export const espnWbbAward: Wrapper<Row[], EspnAwardParams> = (params: WrapperParams = {}) =>
   callWrapper(AWARD_DEF, CFG, params);
@@ -749,10 +769,11 @@ const AWARDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/awards`
  *
- * @param params.limit - query parameter — default `200`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbAwards({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbawards
  */
 export const espnWbbAwards: Wrapper<Row[], EspnAwardsParams> = (params: WrapperParams = {}) =>
   callWrapper(AWARDS_DEF, CFG, params);
@@ -772,9 +793,10 @@ const CALENDAR_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/calendar`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbCalendar({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbcalendar
  */
 export const espnWbbCalendar: Wrapper<Row[], EspnCalendarParams> = (params: WrapperParams = {}) =>
   callWrapper(CALENDAR_DEF, CFG, params);
@@ -802,11 +824,12 @@ const CDN_BOXSCORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://cdn.espn.com/core/womens-college-basketball/boxscore?xhr=1`
  *
- * @param params.game_id - query parameter (ESPN `gameId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @param params.section - (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
+ * @param params.game_id - `number | string` — ESPN game (event) id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @param params.section - `string` — (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
+ * @returns Promise<`ParsedTables`> with `{ parsed: true }` (an object of sub-frames, or the chosen `section`'s `Row[]`); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbCdnBoxscore({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/cdn#espnwbbcdnboxscore
  */
 export const espnWbbCdnBoxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams> = (params: WrapperParams = {}) =>
   callWrapper(CDN_BOXSCORE_DEF, CFG, params);
@@ -834,11 +857,12 @@ const CDN_PLAYBYPLAY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://cdn.espn.com/core/womens-college-basketball/playbyplay?xhr=1`
  *
- * @param params.game_id - query parameter (ESPN `gameId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @param params.section - (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
+ * @param params.game_id - `number | string` — ESPN game (event) id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @param params.section - `string` — (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
+ * @returns Promise<`ParsedTables`> with `{ parsed: true }` (an object of sub-frames, or the chosen `section`'s `Row[]`); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbCdnPlaybyplay({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/cdn#espnwbbcdnplaybyplay
  */
 export const espnWbbCdnPlaybyplay: SectionedWrapper<ParsedTables, {}, EspnCdnPlaybyplayParams> = (params: WrapperParams = {}) =>
   callWrapper(CDN_PLAYBYPLAY_DEF, CFG, params);
@@ -878,13 +902,14 @@ const CDN_SCHEDULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://cdn.espn.com/core/womens-college-basketball/schedule?xhr=1`
  *
- * @param params.date - query parameter.
- * @param params.week - query parameter.
- * @param params.season - query parameter (ESPN `year`).
- * @param params.season_type - query parameter (ESPN `seasontype`).
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.date - `number | string` — Single date (YYYYMMDD). Ignored by cfb and nfl, which are week-oriented. Defaults to today.
+ * @param params.week - `number | string` — Week number (cfb and nfl).
+ * @param params.season - `number | string` — Season year that `week` belongs to (cfb and nfl).
+ * @param params.season_type - `number | string` — Season phase for `week`: 1=preseason, 2=regular season, 3=postseason (cfb and nfl).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbCdnSchedule({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/cdn#espnwbbcdnschedule
  */
 export const espnWbbCdnSchedule: Wrapper<Row[], EspnCdnScheduleParams> = (params: WrapperParams = {}) =>
   callWrapper(CDN_SCHEDULE_DEF, CFG, params);
@@ -924,13 +949,14 @@ const CDN_SCOREBOARD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://cdn.espn.com/core/womens-college-basketball/scoreboard?xhr=1`
  *
- * @param params.date - query parameter.
- * @param params.week - query parameter.
- * @param params.season - query parameter (ESPN `year`).
- * @param params.season_type - query parameter (ESPN `seasontype`).
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.date - `number | string` — Single date (YYYYMMDD). Ignored by cfb and nfl, which are week-oriented. Defaults to today.
+ * @param params.week - `number | string` — Week number (cfb and nfl).
+ * @param params.season - `number | string` — Season year that `week` belongs to (cfb and nfl).
+ * @param params.season_type - `number | string` — Season phase for `week`: 1=preseason, 2=regular season, 3=postseason (cfb and nfl).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbCdnScoreboard({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/cdn#espnwbbcdnscoreboard
  */
 export const espnWbbCdnScoreboard: Wrapper<Row[], EspnCdnScoreboardParams> = (params: WrapperParams = {}) =>
   callWrapper(CDN_SCOREBOARD_DEF, CFG, params);
@@ -954,10 +980,11 @@ const COACH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/coaches/{coach_id}`
  *
- * @param params.coach_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.coach_id - `number | string` — the ESPN coach id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbCoach({ coach_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbcoach
  */
 export const espnWbbCoach: Wrapper<Row[], EspnCoachParams> = (params: WrapperParams = {}) =>
   callWrapper(COACH_DEF, CFG, params);
@@ -986,11 +1013,12 @@ const COACH_RECORD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/coaches/{coach_id}/record/{record_type}`
  *
- * @param params.coach_id - path parameter.
- * @param params.record_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.coach_id - `number | string` — the ESPN coach id.
+ * @param params.record_type - `number | string` — the `{record_type}` path segment; optional; default `0`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbCoachRecord({ coach_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbcoachrecord
  */
 export const espnWbbCoachRecord: Wrapper<Row[], EspnCoachRecordParams> = (params: WrapperParams = {}) =>
   callWrapper(COACH_RECORD_DEF, CFG, params);
@@ -1017,11 +1045,12 @@ const COACH_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/coaches/{coach_id}/seasons/{season}`
  *
- * @param params.coach_id - path parameter.
- * @param params.season - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.coach_id - `number | string` — the ESPN coach id.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbCoachSeason({ coach_id: '…', season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbcoachseason
  */
 export const espnWbbCoachSeason: Wrapper<Row[], EspnCoachSeasonParams> = (params: WrapperParams = {}) =>
   callWrapper(COACH_SEASON_DEF, CFG, params);
@@ -1041,9 +1070,10 @@ const CONFERENCES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/groups`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbConferences({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbconferences
  */
 export const espnWbbConferences: Wrapper<Row[], EspnConferencesParams> = (params: WrapperParams = {}) =>
   callWrapper(CONFERENCES_DEF, CFG, params);
@@ -1063,9 +1093,10 @@ const DRAFT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/draft`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbDraft({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbdraft
  */
 export const espnWbbDraft: Wrapper<Row[], EspnDraftParams> = (params: WrapperParams = {}) =>
   callWrapper(DRAFT_DEF, CFG, params);
@@ -1089,10 +1120,11 @@ const EVENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}`
  *
- * @param params.event_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGame({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgame
  */
 export const espnWbbGame: Wrapper<Row[], EspnEventParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_DEF, CFG, params);
@@ -1121,11 +1153,12 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/broadcasts`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameBroadcasts({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgamebroadcasts
  */
 export const espnWbbGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_BROADCASTS_DEF, CFG, params);
@@ -1154,11 +1187,12 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameCompetition({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgamecompetition
  */
 export const espnWbbGameCompetition: Wrapper<Row[], EspnEventCompetitionParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITION_DEF, CFG, params);
@@ -1190,12 +1224,13 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}`
  *
- * @param params.event_id - path parameter.
- * @param params.team_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameTeam({ event_id: '…', team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameteam
  */
 export const espnWbbGameTeam: Wrapper<Row[], EspnEventCompetitorParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_DEF, CFG, params);
@@ -1227,12 +1262,13 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
  *
- * @param params.event_id - path parameter.
- * @param params.team_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameTeamLeaders({ event_id: '…', team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameteamleaders
  */
 export const espnWbbGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_LEADERS_DEF, CFG, params);
@@ -1264,12 +1300,13 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
  *
- * @param params.event_id - path parameter.
- * @param params.team_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameTeamLinescores({ event_id: '…', team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameteamlinescores
  */
 export const espnWbbGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_LINESCORES_DEF, CFG, params);
@@ -1301,12 +1338,13 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
  *
- * @param params.event_id - path parameter.
- * @param params.team_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameTeamRecord({ event_id: '…', team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameteamrecord
  */
 export const espnWbbGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_RECORD_DEF, CFG, params);
@@ -1338,12 +1376,13 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
  *
- * @param params.event_id - path parameter.
- * @param params.team_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameTeamRoster({ event_id: '…', team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameteamroster
  */
 export const espnWbbGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_ROSTER_DEF, CFG, params);
@@ -1375,12 +1414,13 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
  *
- * @param params.event_id - path parameter.
- * @param params.team_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameTeamStatistics({ event_id: '…', team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameteamstatistics
  */
 export const espnWbbGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITOR_STATISTICS_DEF, CFG, params);
@@ -1409,11 +1449,12 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameTeams({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameteams
  */
 export const espnWbbGameTeams: Wrapper<Row[], EspnEventCompetitorsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_COMPETITORS_DEF, CFG, params);
@@ -1442,11 +1483,12 @@ const EVENT_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/leaders`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameLeaders({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameleaders
  */
 export const espnWbbGameLeaders: Wrapper<Row[], EspnEventLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_LEADERS_DEF, CFG, params);
@@ -1475,11 +1517,12 @@ const EVENT_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/odds`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameOdds({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameodds
  */
 export const espnWbbGameOdds: Wrapper<Row[], EspnEventOddsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_ODDS_DEF, CFG, params);
@@ -1511,12 +1554,13 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/officials/{official_id}`
  *
- * @param params.event_id - path parameter.
- * @param params.official_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.official_id - `number | string` — the `{official_id}` path segment.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameOfficialDetail({ event_id: '…', official_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameofficialdetail
  */
 export const espnWbbGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_OFFICIAL_DETAIL_DEF, CFG, params);
@@ -1547,11 +1591,12 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
  *
  * Note: sdv-py's `espn_wbb_game_officials` is a hand-written function (its own params, a parsed frame); this is the generated raw ESPN wrapper for the same endpoint, so params and output differ.
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameOfficials({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameofficials
  */
 export const espnWbbGameOfficials: Wrapper<Row[], EspnEventOfficialsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_OFFICIALS_DEF, CFG, params);
@@ -1583,12 +1628,13 @@ const EVENT_PLAY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}`
  *
- * @param params.event_id - path parameter.
- * @param params.play_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.play_id - `number | string` — the `{play_id}` path segment.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGamePlay({ event_id: '…', play_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameplay
  */
 export const espnWbbGamePlay: Wrapper<Row[], EspnEventPlayParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PLAY_DEF, CFG, params);
@@ -1620,12 +1666,13 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
  *
- * @param params.event_id - path parameter.
- * @param params.play_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.play_id - `number | string` — the `{play_id}` path segment.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGamePlayPersonnel({ event_id: '…', play_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameplaypersonnel
  */
 export const espnWbbGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PLAY_PERSONNEL_DEF, CFG, params);
@@ -1660,12 +1707,13 @@ const EVENT_PLAYS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/plays`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.limit - query parameter — default `1000`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGamePlays({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameplays
  */
 export const espnWbbGamePlays: Wrapper<Row[], EspnEventPlaysParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PLAYS_DEF, CFG, params);
@@ -1694,11 +1742,12 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/powerindex`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGamePowerindex({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgamepowerindex
  */
 export const espnWbbGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_POWERINDEX_DEF, CFG, params);
@@ -1727,11 +1776,12 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/predictor`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGamePredictor({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgamepredictor
  */
 export const espnWbbGamePredictor: Wrapper<Row[], EspnEventPredictorParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PREDICTOR_DEF, CFG, params);
@@ -1766,12 +1816,13 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/probabilities`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.limit - query parameter — default `300`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `300`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameProbabilities({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgameprobabilities
  */
 export const espnWbbGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PROBABILITIES_DEF, CFG, params);
@@ -1800,11 +1851,12 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/propbets`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGamePropbets({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgamepropbets
  */
 export const espnWbbGamePropbets: Wrapper<Row[], EspnEventPropbetsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_PROPBETS_DEF, CFG, params);
@@ -1833,11 +1885,12 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/scoringplays`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameScoringplays({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgamescoringplays
  */
 export const espnWbbGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_SCORINGPLAYS_DEF, CFG, params);
@@ -1866,11 +1919,12 @@ const EVENT_SITUATION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/situation`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameSituation({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgamesituation
  */
 export const espnWbbGameSituation: Wrapper<Row[], EspnEventSituationParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_SITUATION_DEF, CFG, params);
@@ -1899,11 +1953,12 @@ const EVENT_STATUS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/status`
  *
- * @param params.event_id - path parameter.
- * @param params.cid - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.cid - `number | string` — the `{cid}` path segment; optional; default from `event_id`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGameStatus({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgamestatus
  */
 export const espnWbbGameStatus: Wrapper<Row[], EspnEventStatusParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENT_STATUS_DEF, CFG, params);
@@ -1933,11 +1988,12 @@ const EVENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/events`
  *
- * @param params.dates - query parameter.
- * @param params.limit - query parameter — default `500`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.dates - `number | string` — a date `YYYYMMDD`, a range `YYYYMMDD-YYYYMMDD` or a season year `YYYY`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbGames({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbgames
  */
 export const espnWbbGames: Wrapper<Row[], EspnEventsParams> = (params: WrapperParams = {}) =>
   callWrapper(EVENTS_DEF, CFG, params);
@@ -1970,12 +2026,13 @@ const FPI_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/womens-college-basketball/powerindex`
  *
- * @param params.season - query parameter.
- * @param params.limit - query parameter.
- * @param params.page - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — Season (4-digit year) whose FPI table to return; defaults to the current season.
+ * @param params.limit - `number | string` — Page size. The response is a single page for every league observed, so the default suffices.
+ * @param params.page - `number | string` — Page number, for the paginated envelope.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbFpi({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/fitt#espnwbbfpi
  */
 export const espnWbbFpi: Wrapper<Row[], EspnFpiParams> = (params: WrapperParams = {}) =>
   callWrapper(FPI_DEF, CFG, params);
@@ -1999,10 +2056,11 @@ const FRANCHISE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/franchises/{franchise_id}`
  *
- * @param params.franchise_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.franchise_id - `number | string` — the ESPN franchise id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbFranchise({ franchise_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbfranchise
  */
 export const espnWbbFranchise: Wrapper<Row[], EspnFranchiseParams> = (params: WrapperParams = {}) =>
   callWrapper(FRANCHISE_DEF, CFG, params);
@@ -2028,10 +2086,11 @@ const FRANCHISES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/franchises`
  *
- * @param params.limit - query parameter — default `200`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbFranchises({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbfranchises
  */
 export const espnWbbFranchises: Wrapper<Row[], EspnFranchisesParams> = (params: WrapperParams = {}) =>
   callWrapper(FRANCHISES_DEF, CFG, params);
@@ -2051,9 +2110,10 @@ const INJURIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/injuries`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbInjuries({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbinjuries
  */
 export const espnWbbInjuries: Wrapper<Row[], EspnInjuriesParams> = (params: WrapperParams = {}) =>
   callWrapper(INJURIES_DEF, CFG, params);
@@ -2100,15 +2160,16 @@ const LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-college-basketball/statistics/byathlete`
  *
- * @param params.category - query parameter.
- * @param params.season - query parameter.
- * @param params.season_type - query parameter (ESPN `seasontype`).
- * @param params.limit - query parameter — default `50`.
- * @param params.page - query parameter — default `1`.
- * @param params.sort - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.category - `number | string` — the statistics category.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `50`.
+ * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
+ * @param params.sort - `number | string` — the sort key and direction, e.g. `offensive.avgPoints:desc`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbLeaders({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/web#espnwbbleaders
  */
 export const espnWbbLeaders: Wrapper<Row[], EspnLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(LEADERS_DEF, CFG, params);
@@ -2128,9 +2189,10 @@ const LEADERS_CORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/leaders`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbLeadersCore({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbleaderscore
  */
 export const espnWbbLeadersCore: Wrapper<Row[], EspnLeadersCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(LEADERS_CORE_DEF, CFG, params);
@@ -2150,9 +2212,10 @@ const LEAGUE_NOTES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/notes`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbLeagueNotes({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbleaguenotes
  */
 export const espnWbbLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams> = (params: WrapperParams = {}) =>
   callWrapper(LEAGUE_NOTES_DEF, CFG, params);
@@ -2172,9 +2235,10 @@ const LEAGUE_ROOT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbLeagueRoot({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbleagueroot
  */
 export const espnWbbLeagueRoot: Wrapper<Row[], EspnLeagueRootParams> = (params: WrapperParams = {}) =>
   callWrapper(LEAGUE_ROOT_DEF, CFG, params);
@@ -2200,10 +2264,11 @@ const NEWS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/news`
  *
- * @param params.limit - query parameter — default `50`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `50`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbNews({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbnews
  */
 export const espnWbbNews: Wrapper<Row[], EspnNewsParams> = (params: WrapperParams = {}) =>
   callWrapper(NEWS_DEF, CFG, params);
@@ -2227,10 +2292,11 @@ const POSITION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/positions/{position_id}`
  *
- * @param params.position_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.position_id - `number | string` — the ESPN position id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPosition({ position_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbposition
  */
 export const espnWbbPosition: Wrapper<Row[], EspnPositionParams> = (params: WrapperParams = {}) =>
   callWrapper(POSITION_DEF, CFG, params);
@@ -2256,10 +2322,11 @@ const POSITIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/positions`
  *
- * @param params.limit - query parameter — default `200`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbPositions({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbpositions
  */
 export const espnWbbPositions: Wrapper<Row[], EspnPositionsParams> = (params: WrapperParams = {}) =>
   callWrapper(POSITIONS_DEF, CFG, params);
@@ -2279,9 +2346,10 @@ const RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/rankings`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbRankings({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/additional#espnwbbrankings
  */
 export const espnWbbRankings: Wrapper<Row[], EspnRankingsParams> = (params: WrapperParams = {}) =>
   callWrapper(RANKINGS_DEF, CFG, params);
@@ -2316,12 +2384,13 @@ const RECRUITING_ATHLETES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/recruiting/{year}/athletes`
  *
- * @param params.year - path parameter.
- * @param params.limit - query parameter — default `1000`.
- * @param params.page - query parameter — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.year - `number | string` — the season year.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
+ * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbRecruitingPlayers({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/additional#espnwbbrecruitingplayers
  */
 export const espnWbbRecruitingPlayers: Wrapper<Row[], EspnRecruitingAthletesParams> = (params: WrapperParams = {}) =>
   callWrapper(RECRUITING_ATHLETES_DEF, CFG, params);
@@ -2345,10 +2414,11 @@ const RECRUITING_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/recruiting/{year}/rankings`
  *
- * @param params.year - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.year - `number | string` — the season year.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbRecruitingRankings({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/additional#espnwbbrecruitingrankings
  */
 export const espnWbbRecruitingRankings: Wrapper<Row[], EspnRecruitingRankingsParams> = (params: WrapperParams = {}) =>
   callWrapper(RECRUITING_RANKINGS_DEF, CFG, params);
@@ -2368,9 +2438,10 @@ const RECRUITING_YEARS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/recruiting`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbRecruitingYears({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/additional#espnwbbrecruitingyears
  */
 export const espnWbbRecruitingYears: Wrapper<Row[], EspnRecruitingYearsParams> = (params: WrapperParams = {}) =>
   callWrapper(RECRUITING_YEARS_DEF, CFG, params);
@@ -2412,14 +2483,15 @@ const SCOREBOARD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/scoreboard`
  *
- * @param params.dates - query parameter.
- * @param params.week - query parameter.
- * @param params.season_type - query parameter (ESPN `seasontype`).
- * @param params.groups - query parameter.
- * @param params.limit - query parameter — default `500`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.dates - `number | string` — a date `YYYYMMDD`, a range `YYYYMMDD-YYYYMMDD` or a season year `YYYY`.
+ * @param params.week - `number | string` — the week of the season (football).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.groups - `number | string` — an ESPN group (conference / division) id, e.g. `50` for all of men's college basketball.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbScoreboard({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbscoreboard
  */
 export const espnWbbScoreboard: Wrapper<Row[], EspnScoreboardParams> = (params: WrapperParams = {}) =>
   callWrapper(SCOREBOARD_DEF, CFG, params);
@@ -2454,12 +2526,13 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/athletes`
  *
- * @param params.season - path parameter.
- * @param params.limit - query parameter — default `100`.
- * @param params.page - query parameter — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.limit - `number | string` — the maximum number of items to return; default `100`.
+ * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonPlayers({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonplayers
  */
 export const espnWbbSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_ATHLETES_DEF, CFG, params);
@@ -2489,11 +2562,12 @@ const SEASON_AWARDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/awards`
  *
- * @param params.season - path parameter.
- * @param params.limit - query parameter — default `200`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonAwards({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonawards
  */
 export const espnWbbSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_AWARDS_DEF, CFG, params);
@@ -2523,11 +2597,12 @@ const SEASON_COACHES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/coaches`
  *
- * @param params.season - path parameter.
- * @param params.limit - query parameter — default `500`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonCoaches({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasoncoaches
  */
 export const espnWbbSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_COACHES_DEF, CFG, params);
@@ -2551,10 +2626,11 @@ const SEASON_DRAFT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/draft`
  *
- * @param params.season - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonDraft({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasondraft
  */
 export const espnWbbSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_DRAFT_DEF, CFG, params);
@@ -2581,11 +2657,12 @@ const SEASON_DRAFT_ROUND_PICKS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/draft/rounds/{round_num}/picks`
  *
- * @param params.season - path parameter.
- * @param params.round_num - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.round_num - `number | string` — the `{round_num}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonDraftRoundPicks({ season: '…', round_num: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasondraftroundpicks
  */
 export const espnWbbSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_DRAFT_ROUND_PICKS_DEF, CFG, params);
@@ -2609,10 +2686,11 @@ const SEASON_FREEAGENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/freeagents`
  *
- * @param params.season - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonFreeagents({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonfreeagents
  */
 export const espnWbbSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_FREEAGENTS_DEF, CFG, params);
@@ -2636,10 +2714,11 @@ const SEASON_FUTURES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/futures`
  *
- * @param params.season - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonFutures({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonfutures
  */
 export const espnWbbSeasonFutures: Wrapper<Row[], EspnSeasonFuturesParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_FUTURES_DEF, CFG, params);
@@ -2669,12 +2748,13 @@ const SEASON_GROUP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}`
  *
- * @param params.season - path parameter.
- * @param params.season_type - path parameter.
- * @param params.group_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.group_id - `number | string` — the `{group_id}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonGroup({ season: '…', season_type: '…', group_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasongroup
  */
 export const espnWbbSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_GROUP_DEF, CFG, params);
@@ -2710,13 +2790,14 @@ const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/children`
  *
- * @param params.season - path parameter.
- * @param params.season_type - path parameter.
- * @param params.group_id - path parameter.
- * @param params.limit - query parameter — default `500`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.group_id - `number | string` — the `{group_id}` path segment.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonGroupChildren({ season: '…', season_type: '…', group_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasongroupchildren
  */
 export const espnWbbSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_GROUP_CHILDREN_DEF, CFG, params);
@@ -2752,13 +2833,14 @@ const SEASON_GROUP_TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/teams`
  *
- * @param params.season - path parameter.
- * @param params.season_type - path parameter.
- * @param params.group_id - path parameter.
- * @param params.limit - query parameter — default `500`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.group_id - `number | string` — the `{group_id}` path segment.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonGroupTeams({ season: '…', season_type: '…', group_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasongroupteams
  */
 export const espnWbbSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_GROUP_TEAMS_DEF, CFG, params);
@@ -2785,11 +2867,12 @@ const SEASON_GROUPS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/groups`
  *
- * @param params.season - path parameter.
- * @param params.season_type - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonGroups({ season: '…', season_type: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasongroups
  */
 export const espnWbbSeasonGroups: Wrapper<Row[], EspnSeasonGroupsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_GROUPS_DEF, CFG, params);
@@ -2813,10 +2896,11 @@ const SEASON_INFO_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}`
  *
- * @param params.season - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonInfo({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasoninfo
  */
 export const espnWbbSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_INFO_DEF, CFG, params);
@@ -2836,9 +2920,10 @@ const SEASON_POINTER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/season`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonPointer({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonpointer
  */
 export const espnWbbSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_POINTER_DEF, CFG, params);
@@ -2866,11 +2951,12 @@ const SEASON_POWERINDEX_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/powerindex[/{team_id}]`
  *
- * @param params.season - path parameter.
- * @param params.team_id - path parameter *(optional)*.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`); optional.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonPowerindex({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonpowerindex
  */
 export const espnWbbSeasonPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_POWERINDEX_DEF, CFG, params);
@@ -2894,10 +2980,11 @@ const SEASON_POWERINDEX_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/powerindex/leaders`
  *
- * @param params.season - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonPowerindexLeaders({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonpowerindexleaders
  */
 export const espnWbbSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_POWERINDEX_LEADERS_DEF, CFG, params);
@@ -2932,12 +3019,13 @@ const SEASON_RECRUITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/recruits`
  *
- * @param params.season - path parameter.
- * @param params.limit - query parameter — default `1000`.
- * @param params.page - query parameter — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
+ * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonRecruits({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/additional#espnwbbseasonrecruits
  */
 export const espnWbbSeasonRecruits: Wrapper<Row[], EspnSeasonRecruitsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_RECRUITS_DEF, CFG, params);
@@ -2964,11 +3052,12 @@ const SEASON_TEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/teams/{team_id}`
  *
- * @param params.season - path parameter.
- * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonTeam({ season: '…', team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonteam
  */
 export const espnWbbSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TEAM_DEF, CFG, params);
@@ -3003,12 +3092,13 @@ const SEASON_TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/teams`
  *
- * @param params.season - path parameter.
- * @param params.limit - query parameter — default `1000`.
- * @param params.page - query parameter — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
+ * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonTeams({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonteams
  */
 export const espnWbbSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TEAMS_DEF, CFG, params);
@@ -3035,11 +3125,12 @@ const SEASON_TYPE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}`
  *
- * @param params.season - path parameter.
- * @param params.season_type - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonType({ season: '…', season_type: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasontype
  */
 export const espnWbbSeasonType: Wrapper<Row[], EspnSeasonTypeParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TYPE_DEF, CFG, params);
@@ -3066,11 +3157,12 @@ const SEASON_TYPE_CORRECTIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/corrections`
  *
- * @param params.season - path parameter.
- * @param params.season_type - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonTypeCorrections({ season: '…', season_type: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasontypecorrections
  */
 export const espnWbbSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TYPE_CORRECTIONS_DEF, CFG, params);
@@ -3097,11 +3189,12 @@ const SEASON_TYPE_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/leaders`
  *
- * @param params.season - path parameter.
- * @param params.season_type - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonTypeLeaders({ season: '…', season_type: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasontypeleaders
  */
 export const espnWbbSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TYPE_LEADERS_DEF, CFG, params);
@@ -3125,10 +3218,11 @@ const SEASON_TYPES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types`
  *
- * @param params.season - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonTypes({ season: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasontypes
  */
 export const espnWbbSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_TYPES_DEF, CFG, params);
@@ -3158,12 +3252,13 @@ const SEASON_WEEK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}`
  *
- * @param params.season - path parameter.
- * @param params.season_type - path parameter.
- * @param params.week - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.week - `number | string` — the week of the season (football).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonWeek({ season: '…', season_type: '…', week: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonweek
  */
 export const espnWbbSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEK_DEF, CFG, params);
@@ -3199,13 +3294,14 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/events`
  *
- * @param params.season - path parameter.
- * @param params.season_type - path parameter.
- * @param params.week - path parameter.
- * @param params.limit - query parameter — default `500`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.week - `number | string` — the week of the season (football).
+ * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonweekgames
  */
 export const espnWbbSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEK_EVENTS_DEF, CFG, params);
@@ -3240,13 +3336,14 @@ const SEASON_WEEK_POWERINDEX_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/powerindex`
  *
- * @param params.season - path parameter.
- * @param params.season_type - path parameter.
- * @param params.week - path parameter.
- * @param params.limit - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.week - `number | string` — the week of the season (football).
+ * @param params.limit - `number | string` — Page size for this weekly power-index table; pass a limit large enough to avoid paging (table size varies by sport/league -- CFB's FBS table alone is ~134 rows).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonWeekPowerindex({ season: '…', season_type: '…', week: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonweekpowerindex
  */
 export const espnWbbSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEK_POWERINDEX_DEF, CFG, params);
@@ -3276,12 +3373,13 @@ const SEASON_WEEK_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/rankings`
  *
- * @param params.season - path parameter.
- * @param params.season_type - path parameter.
- * @param params.week - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.week - `number | string` — the week of the season (football).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonWeekRankings({ season: '…', season_type: '…', week: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/additional#espnwbbseasonweekrankings
  */
 export const espnWbbSeasonWeekRankings: Wrapper<Row[], EspnSeasonWeekRankingsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEK_RANKINGS_DEF, CFG, params);
@@ -3308,11 +3406,12 @@ const SEASON_WEEKS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks`
  *
- * @param params.season - path parameter.
- * @param params.season_type - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasonWeeks({ season: '…', season_type: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasonweeks
  */
 export const espnWbbSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASON_WEEKS_DEF, CFG, params);
@@ -3338,10 +3437,11 @@ const SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons`
  *
- * @param params.limit - query parameter — default `200`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSeasons({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbseasons
  */
 export const espnWbbSeasons: Wrapper<Row[], EspnSeasonsParams> = (params: WrapperParams = {}) =>
   callWrapper(SEASONS_DEF, CFG, params);
@@ -3374,12 +3474,13 @@ const STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/v2/sports/basketball/womens-college-basketball/standings`
  *
- * @param params.season - query parameter.
- * @param params.group - query parameter.
- * @param params.standings_type - query parameter (ESPN `type`).
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.group - `number | string` — an ESPN group (conference / division) id.
+ * @param params.standings_type - `number | string` — the `type` ESPN query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbStandings({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbstandings
  */
 export const espnWbbStandings: Wrapper<Row[], EspnStandingsParams> = (params: WrapperParams = {}) =>
   callWrapper(STANDINGS_DEF, CFG, params);
@@ -3399,9 +3500,10 @@ const STANDINGS_CORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/standings`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbStandingsCore({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbstandingscore
  */
 export const espnWbbStandingsCore: Wrapper<Row[], EspnStandingsCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(STANDINGS_CORE_DEF, CFG, params);
@@ -3421,9 +3523,10 @@ const STATISTICS_LEAGUE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/statistics`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbStatisticsLeague({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbstatisticsleague
  */
 export const espnWbbStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams> = (params: WrapperParams = {}) =>
   callWrapper(STATISTICS_LEAGUE_DEF, CFG, params);
@@ -3448,11 +3551,12 @@ const SUMMARY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/summary`
  *
- * @param params.event_id - query parameter (ESPN `event`).
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @param params.section - (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
+ * @param params.event_id - `number | string` — the ESPN event (game) id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @param params.section - `string` — (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
+ * @returns Promise<`ParsedTables`> with `{ parsed: true }` (an object of sub-frames, or the chosen `section`'s `Row[]`); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbSummary({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbsummary
  */
 export const espnWbbSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams> = (params: WrapperParams = {}) =>
   callWrapper(SUMMARY_DEF, CFG, params);
@@ -3472,9 +3576,10 @@ const TALENTPICKS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/talentpicks`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTalentpicks({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbtalentpicks
  */
 export const espnWbbTalentpicks: Wrapper<Row[], EspnTalentpicksParams> = (params: WrapperParams = {}) =>
   callWrapper(TALENTPICKS_DEF, CFG, params);
@@ -3498,10 +3603,11 @@ const TEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeam({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbteam
  */
 export const espnWbbTeam: Wrapper<Row[], EspnTeamParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_DEF, CFG, params);
@@ -3525,10 +3631,11 @@ const TEAM_CORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/teams/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeamCore({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbteamcore
  */
 export const espnWbbTeamCore: Wrapper<Row[], EspnTeamCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_CORE_DEF, CFG, params);
@@ -3552,10 +3659,11 @@ const TEAM_DEPTHCHARTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/depthcharts`
  *
- * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeamDepthcharts({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbteamdepthcharts
  */
 export const espnWbbTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_DEPTHCHARTS_DEF, CFG, params);
@@ -3579,10 +3687,11 @@ const TEAM_HISTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/history`
  *
- * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeamHistory({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbteamhistory
  */
 export const espnWbbTeamHistory: Wrapper<Row[], EspnTeamHistoryParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_HISTORY_DEF, CFG, params);
@@ -3606,10 +3715,11 @@ const TEAM_INJURIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/injuries`
  *
- * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeamInjuries({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbteaminjuries
  */
 export const espnWbbTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_INJURIES_DEF, CFG, params);
@@ -3633,10 +3743,11 @@ const TEAM_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/leaders`
  *
- * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeamLeaders({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbteamleaders
  */
 export const espnWbbTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_LEADERS_DEF, CFG, params);
@@ -3666,11 +3777,12 @@ const TEAM_NEWS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/news`
  *
- * @param params.team_id - path parameter.
- * @param params.limit - query parameter — default `50`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.limit - `number | string` — the maximum number of items to return; default `50`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeamNews({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbteamnews
  */
 export const espnWbbTeamNews: Wrapper<Row[], EspnTeamNewsParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_NEWS_DEF, CFG, params);
@@ -3694,10 +3806,11 @@ const TEAM_RECORD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/record`
  *
- * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeamRecord({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbteamrecord
  */
 export const espnWbbTeamRecord: Wrapper<Row[], EspnTeamRecordParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_RECORD_DEF, CFG, params);
@@ -3727,11 +3840,12 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/roster`
  *
- * @param params.team_id - path parameter.
- * @param params.limit - query parameter — default `500`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeamRoster({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbteamroster
  */
 export const espnWbbTeamRoster: Wrapper<Row[], EspnTeamRosterParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_ROSTER_DEF, CFG, params);
@@ -3760,11 +3874,12 @@ const TEAM_SCHEDULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/schedule`
  *
- * @param params.team_id - path parameter.
- * @param params.season - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeamSchedule({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbteamschedule
  */
 export const espnWbbTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_SCHEDULE_DEF, CFG, params);
@@ -3788,10 +3903,11 @@ const TEAM_TRANSACTIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/transactions`
  *
- * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the ESPN team id (see `espn_<league>_teams`).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeamTransactions({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbteamtransactions
  */
 export const espnWbbTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_TRANSACTIONS_DEF, CFG, params);
@@ -3822,11 +3938,12 @@ const TEAMS_CORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/teams`
  *
- * @param params.limit - query parameter — default `1000`.
- * @param params.page - query parameter — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
+ * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeamsCore({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbteamscore
  */
 export const espnWbbTeamsCore: Wrapper<Row[], EspnTeamsCoreParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAMS_CORE_DEF, CFG, params);
@@ -3852,10 +3969,11 @@ const TEAMS_SITE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams`
  *
- * @param params.limit - query parameter — default `1000`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTeamsSite({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbteamssite
  */
 export const espnWbbTeamsSite: Wrapper<Row[], EspnTeamsSiteParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAMS_SITE_DEF, CFG, params);
@@ -3881,10 +3999,11 @@ const TOURNAMENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/tournaments`
  *
- * @param params.limit - query parameter — default `200`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `200`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTournaments({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbtournaments
  */
 export const espnWbbTournaments: Wrapper<Row[], EspnTournamentsParams> = (params: WrapperParams = {}) =>
   callWrapper(TOURNAMENTS_DEF, CFG, params);
@@ -3910,10 +4029,11 @@ const TRANSACTIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/transactions`
  *
- * @param params.limit - query parameter — default `500`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbTransactions({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/site#espnwbbtransactions
  */
 export const espnWbbTransactions: Wrapper<Row[], EspnTransactionsParams> = (params: WrapperParams = {}) =>
   callWrapper(TRANSACTIONS_DEF, CFG, params);
@@ -3937,10 +4057,11 @@ const VENUE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/venues/{venue_id}`
  *
- * @param params.venue_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.venue_id - `number | string` — the ESPN venue id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbVenue({ venue_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbvenue
  */
 export const espnWbbVenue: Wrapper<Row[], EspnVenueParams> = (params: WrapperParams = {}) =>
   callWrapper(VENUE_DEF, CFG, params);
@@ -3966,10 +4087,11 @@ const VENUES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/venues`
  *
- * @param params.limit - query parameter — default `1000`.
- * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.limit - `number | string` — the maximum number of items to return; default `1000`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wbb.espnWbbVenues({});
+ * @see https://js.sportsdataverse.org/docs/wbb/reference/core#espnwbbvenues
  */
 export const espnWbbVenues: Wrapper<Row[], EspnVenuesParams> = (params: WrapperParams = {}) =>
   callWrapper(VENUES_DEF, CFG, params);

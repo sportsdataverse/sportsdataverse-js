@@ -7,749 +7,749 @@
 
 /** One row of `sdv.nfl.loadNflPbp` (`pbp`; sdv-py loader schema `load_nfl_pbp`). */
 export interface LoadNflPbpRow {
-  /** `Float64` (an id) */
+  /** Numeric play id that when used with game_id and drive provides the unique identifier for a single play. `Float64` (an id) */
   play_id?: string | number | null;
-  /** `String` (an id) */
+  /** Ten digit identifier for NFL game. `String` (an id) */
   game_id?: string | null;
-  /** `String` (an id) */
+  /** Legacy NFL game ID. `String` (an id) */
   old_game_id?: string | null;
-  /** `String` */
+  /** The home team. Note that this contains the designated home team for games which no team is playing at home such as Super Bowls or NFL International games. `String` */
   home_team?: string | null;
-  /** `String` */
+  /** String abbreviation for the away team. `String` */
   away_team?: string | null;
-  /** `String` */
+  /** REG or POST indicating if the timeframe belongs to regular or post season. `String` */
   season_type?: string | null;
-  /** `Int32` */
+  /** Season week. `Int32` */
   week?: number | null;
-  /** `String` */
+  /** String abbreviation for the team with possession. `String` */
   posteam?: string | null;
-  /** `String` */
+  /** String indicating whether the posteam team is home or away. `String` */
   posteam_type?: string | null;
-  /** `String` */
+  /** String abbreviation for the team on defense. `String` */
   defteam?: string | null;
-  /** `String` */
+  /** String abbreviation for which team's side of the field the team with possession is currently on. `String` */
   side_of_field?: string | null;
-  /** `Float64` */
+  /** Numeric distance in the number of yards from the opponent's endzone for the posteam. `Float64` */
   yardline_100?: number | null;
-  /** `String` */
+  /** Date of the game. `String` */
   game_date?: string | null;
-  /** `Float64` */
+  /** Numeric seconds remaining in the quarter. `Float64` */
   quarter_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Numeric seconds remaining in the half. `Float64` */
   half_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Numeric seconds remaining in the game. `Float64` */
   game_seconds_remaining?: number | null;
-  /** `String` */
+  /** String indicating which half the play is in, either Half1, Half2, or Overtime. `String` */
   game_half?: string | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not the row of the data is marking the end of a quarter. `Float64` */
   quarter_end?: number | null;
-  /** `Float64` */
+  /** Numeric drive number in the game. `Float64` */
   drive?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not a score occurred on the play. `Float64` */
   sp?: number | null;
-  /** `Float64` */
+  /** Quarter of the game (5 is overtime). `Float64` */
   qtr?: number | null;
-  /** `Float64` */
+  /** The down for the given play. `Float64` */
   down?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not the posteam is in a goal down situation. `Float64` */
   goal_to_go?: number | null;
-  /** `String` */
+  /** Time at start of play provided in string format as minutes:seconds remaining in the quarter. `String` */
   time?: string | null;
-  /** `String` */
+  /** String indicating the current field position for a given play. `String` */
   yrdln?: string | null;
-  /** `Float64` */
+  /** Numeric yards in distance from either the first down marker or the endzone in goal down situations. `Float64` */
   ydstogo?: number | null;
-  /** `Float64` */
+  /** Numeric value for total yards gained on the given drive. `Float64` */
   ydsnet?: number | null;
-  /** `String` */
+  /** Detailed string description for the given play. `String` */
   desc?: string | null;
-  /** `String` */
+  /** String indicating the type of play: pass (includes sacks), run (includes scrambles), punt, field_goal, kickoff, extra_point, qb_kneel, qb_spike, no_play (timeouts and penalties), and missing for rows indicating end of play. `String` */
   play_type?: string | null;
-  /** `Float64` */
+  /** Numeric yards gained (or lost) by the possessing team, excluding yards gained via fumble recoveries and laterals. `Float64` */
   yards_gained?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not the play was in shotgun formation. `Float64` */
   shotgun?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not the play was in no_huddle formation. `Float64` */
   no_huddle?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not the QB dropped back on the play (pass attempt, sack, or scrambled). `Float64` */
   qb_dropback?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not the QB took a knee. `Float64` */
   qb_kneel?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not the QB spiked the ball. `Float64` */
   qb_spike?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not the QB scrambled. `Float64` */
   qb_scramble?: number | null;
-  /** `String` */
+  /** String indicator for pass length: short or deep. `String` */
   pass_length?: string | null;
-  /** `String` */
+  /** String indicator for pass location: left, middle, or right. `String` */
   pass_location?: string | null;
-  /** `Float64` */
+  /** Numeric value for distance in yards perpendicular to the line of scrimmage at where the targeted receiver either caught or didn't catch the ball. `Float64` */
   air_yards?: number | null;
-  /** `Float64` */
+  /** Numeric value for distance in yards perpendicular to the yard line where the receiver made the reception to where the play ended. `Float64` */
   yards_after_catch?: number | null;
-  /** `String` */
+  /** String indicator for location of run: left, middle, or right. `String` */
   run_location?: string | null;
-  /** `String` */
+  /** String indicator for line gap of run: end, guard, or tackle `String` */
   run_gap?: string | null;
-  /** `String` */
+  /** String indicator for result of field goal attempt: made, missed, or blocked. `String` */
   field_goal_result?: string | null;
-  /** `Float64` */
+  /** Numeric distance in yards for kickoffs, field goals, and punts. `Float64` */
   kick_distance?: number | null;
-  /** `String` */
+  /** String indicator for the result of the extra point attempt: good, failed, blocked, safety (touchback in defensive endzone is 1 point apparently), or aborted. `String` */
   extra_point_result?: string | null;
-  /** `String` */
+  /** String indicator for result of two point conversion attempt: success, failure, safety (touchback in defensive endzone is 1 point apparently), or return. `String` */
   two_point_conv_result?: string | null;
-  /** `Float64` */
+  /** Numeric timeouts remaining in the half for the home team. `Float64` */
   home_timeouts_remaining?: number | null;
-  /** `Float64` */
+  /** Numeric timeouts remaining in the half for the away team. `Float64` */
   away_timeouts_remaining?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not a timeout was called by either team. `Float64` */
   timeout?: number | null;
-  /** `String` */
+  /** String abbreviation for which team called the timeout. `String` */
   timeout_team?: string | null;
-  /** `String` */
+  /** String abbreviation for which team scored the touchdown. `String` */
   td_team?: string | null;
-  /** `String` */
+  /** String name of the player who scored a touchdown. `String` */
   td_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of the player who scored a touchdown. `String` (an id) */
   td_player_id?: string | null;
-  /** `Float64` */
+  /** Number of timeouts remaining for the possession team. `Float64` */
   posteam_timeouts_remaining?: number | null;
-  /** `Float64` */
+  /** Number of timeouts remaining for the team on defense. `Float64` */
   defteam_timeouts_remaining?: number | null;
-  /** `Float64` */
+  /** Score for the home team at the start of the play. `Float64` */
   total_home_score?: number | null;
-  /** `Float64` */
+  /** Score for the away team at the start of the play. `Float64` */
   total_away_score?: number | null;
-  /** `Float64` */
+  /** Score the posteam at the start of the play. `Float64` */
   posteam_score?: number | null;
-  /** `Float64` */
+  /** Score the defteam at the start of the play. `Float64` */
   defteam_score?: number | null;
-  /** `Float64` */
+  /** Score differential between the posteam and defteam at the start of the play. `Float64` */
   score_differential?: number | null;
-  /** `Float64` */
+  /** Score for the posteam at the end of the play. `Float64` */
   posteam_score_post?: number | null;
-  /** `Float64` */
+  /** Score for the defteam at the end of the play. `Float64` */
   defteam_score_post?: number | null;
-  /** `Float64` */
+  /** Score differential between the posteam and defteam at the end of the play. `Float64` */
   score_differential_post?: number | null;
-  /** `Float64` */
+  /** Predicted probability of no score occurring for the rest of the half based on the expected points model. `Float64` */
   no_score_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the defteam scoring a FG next. 'Next' in this context means the next score in the same game half. `Float64` */
   opp_fg_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the defteam scoring a safety next. 'Next' in this context means the next score in the same game half. `Float64` */
   opp_safety_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the defteam scoring a TD next. 'Next' in this context means the next score in the same game half. `Float64` */
   opp_td_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the posteam scoring a FG next. 'Next' in this context means the next score in the same game half. `Float64` */
   fg_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the posteam scoring a safety next. 'Next' in this context means the next score in the same game half. `Float64` */
   safety_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the posteam scoring a TD next. 'Next' in this context means the next score in the same game half. `Float64` */
   td_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the posteam scoring an extra point. `Float64` */
   extra_point_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the posteam scoring the two point conversion. `Float64` */
   two_point_conversion_prob?: number | null;
-  /** `Float64` */
+  /** Using the scoring event probabilities, the estimated expected points with respect to the possession team for the given play. `Float64` */
   ep?: number | null;
-  /** `Float64` */
+  /** Expected points added (EPA) by the posteam for the given play. `Float64` */
   epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total EPA for the home team in the game so far. `Float64` */
   total_home_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total EPA for the away team in the game so far. `Float64` */
   total_away_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total rushing EPA for the home team in the game so far. `Float64` */
   total_home_rush_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total rushing EPA for the away team in the game so far. `Float64` */
   total_away_rush_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total passing EPA for the home team in the game so far. `Float64` */
   total_home_pass_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total passing EPA for the away team in the game so far. `Float64` */
   total_away_pass_epa?: number | null;
-  /** `Float64` */
+  /** EPA from the air yards alone. For completions this represents the actual value provided through the air. For incompletions this represents the hypothetical value that could've been added through the air if the pass was completed. `Float64` */
   air_epa?: number | null;
-  /** `Float64` */
+  /** EPA from the yards after catch alone. For completions this represents the actual value provided after the catch. For incompletions this represents the difference between the hypothetical air_epa and the play's raw observed EPA (how much the incomplete pass cost the posteam). `Float64` */
   yac_epa?: number | null;
-  /** `Float64` */
+  /** EPA from the air yards alone only for completions. `Float64` */
   comp_air_epa?: number | null;
-  /** `Float64` */
+  /** EPA from the yards after catch alone only for completions. `Float64` */
   comp_yac_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions air EPA for the home team in the game so far. `Float64` */
   total_home_comp_air_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions air EPA for the away team in the game so far. `Float64` */
   total_away_comp_air_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions yac EPA for the home team in the game so far. `Float64` */
   total_home_comp_yac_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions yac EPA for the away team in the game so far. `Float64` */
   total_away_comp_yac_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw air EPA for the home team in the game so far. `Float64` */
   total_home_raw_air_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw air EPA for the away team in the game so far. `Float64` */
   total_away_raw_air_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw yac EPA for the home team in the game so far. `Float64` */
   total_home_raw_yac_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw yac EPA for the away team in the game so far. `Float64` */
   total_away_raw_yac_epa?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the posteam given the current situation at the start of the given play. `Float64` */
   wp?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the defteam. `Float64` */
   def_wp?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the home team. `Float64` */
   home_wp?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the away team. `Float64` */
   away_wp?: number | null;
-  /** `Float64` */
+  /** Win probability added (WPA) for the posteam. `Float64` */
   wpa?: number | null;
-  /** `Float64` */
+  /** Win probability added (WPA) for the posteam: spread_adjusted model. `Float64` */
   vegas_wpa?: number | null;
-  /** `Float64` */
+  /** Win probability added (WPA) for the home team: spread_adjusted model. `Float64` */
   vegas_home_wpa?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the home team at the end of the play. `Float64` */
   home_wp_post?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the away team at the end of the play. `Float64` */
   away_wp_post?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the posteam given the current situation at the start of the given play, incorporating pre-game Vegas line. `Float64` */
   vegas_wp?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the home team incorporating pre-game Vegas line. `Float64` */
   vegas_home_wp?: number | null;
-  /** `Float64` */
+  /** Cumulative total rushing WPA for the home team in the game so far. `Float64` */
   total_home_rush_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total rushing WPA for the away team in the game so far. `Float64` */
   total_away_rush_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total passing WPA for the home team in the game so far. `Float64` */
   total_home_pass_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total passing WPA for the away team in the game so far. `Float64` */
   total_away_pass_wpa?: number | null;
-  /** `Float64` */
+  /** WPA through the air (same logic as air_epa). `Float64` */
   air_wpa?: number | null;
-  /** `Float64` */
+  /** WPA from yards after the catch (same logic as yac_epa). `Float64` */
   yac_wpa?: number | null;
-  /** `Float64` */
+  /** The air_wpa for completions only. `Float64` */
   comp_air_wpa?: number | null;
-  /** `Float64` */
+  /** The yac_wpa for completions only. `Float64` */
   comp_yac_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions air WPA for the home team in the game so far. `Float64` */
   total_home_comp_air_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions air WPA for the away team in the game so far. `Float64` */
   total_away_comp_air_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions yac WPA for the home team in the game so far. `Float64` */
   total_home_comp_yac_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions yac WPA for the away team in the game so far. `Float64` */
   total_away_comp_yac_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw air WPA for the home team in the game so far. `Float64` */
   total_home_raw_air_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw air WPA for the away team in the game so far. `Float64` */
   total_away_raw_air_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw yac WPA for the home team in the game so far. `Float64` */
   total_home_raw_yac_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw yac WPA for the away team in the game so far. `Float64` */
   total_away_raw_yac_wpa?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the punt was blocked. `Float64` */
   punt_blocked?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if a running play converted the first down. `Float64` */
   first_down_rush?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if a passing play converted the first down. `Float64` */
   first_down_pass?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if a penalty converted the first down. `Float64` */
   first_down_penalty?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the first down was converted on third down. `Float64` */
   third_down_converted?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the posteam failed to convert first down on third down. `Float64` */
   third_down_failed?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the first down was converted on fourth down. `Float64` */
   fourth_down_converted?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the posteam failed to convert first down on fourth down. `Float64` */
   fourth_down_failed?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the pass was incomplete. `Float64` */
   incomplete_pass?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if a touchback occurred on the play. `Float64` */
   touchback?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the pass was intercepted. `Float64` */
   interception?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the punt ended inside the twenty yard line. `Float64` */
   punt_inside_twenty?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the punt was in the endzone. `Float64` */
   punt_in_endzone?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the punt went out of bounds. `Float64` */
   punt_out_of_bounds?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the punt was downed. `Float64` */
   punt_downed?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the punt was caught with a fair catch. `Float64` */
   punt_fair_catch?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the kickoff ended inside the twenty yard line. `Float64` */
   kickoff_inside_twenty?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the kickoff was in the endzone. `Float64` */
   kickoff_in_endzone?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the kickoff went out of bounds. `Float64` */
   kickoff_out_of_bounds?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the kickoff was downed. `Float64` */
   kickoff_downed?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the kickoff was caught with a fair catch. `Float64` */
   kickoff_fair_catch?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the fumble was forced. `Float64` */
   fumble_forced?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the fumble was not forced. `Float64` */
   fumble_not_forced?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the fumble went out of bounds. `Float64` */
   fumble_out_of_bounds?: number | null;
-  /** `Float64` */
+  /** Binary indicator if the play had a solo tackle (could be multiple due to fumbles). `Float64` */
   solo_tackle?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not a safety occurred. `Float64` */
   safety?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not a penalty occurred. `Float64` */
   penalty?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not a tackle for loss on a run play occurred. `Float64` */
   tackled_for_loss?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the fumble was lost. `Float64` */
   fumble_lost?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the kicking team recovered the kickoff. `Float64` */
   own_kickoff_recovery?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the kicking team recovered the kickoff and scored a TD. `Float64` */
   own_kickoff_recovery_td?: number | null;
-  /** `Float64` */
+  /** Binary indicator if the QB was hit on the play. `Float64` */
   qb_hit?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the play was a run. `Float64` */
   rush_attempt?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the play was a pass attempt (includes sacks). `Float64` */
   pass_attempt?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the play ended in a sack. `Float64` */
   sack?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the play resulted in a TD. `Float64` */
   touchdown?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the play resulted in a passing TD. `Float64` */
   pass_touchdown?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the play resulted in a rushing TD. `Float64` */
   rush_touchdown?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the play resulted in a return TD. Returns may occur on any of: interception, fumble, kickoff, punt, or blocked kicks. `Float64` */
   return_touchdown?: number | null;
-  /** `Float64` */
+  /** Binary indicator for extra point attempt. `Float64` */
   extra_point_attempt?: number | null;
-  /** `Float64` */
+  /** Binary indicator for two point conversion attempt. `Float64` */
   two_point_attempt?: number | null;
-  /** `Float64` */
+  /** Binary indicator for field goal attempt. `Float64` */
   field_goal_attempt?: number | null;
-  /** `Float64` */
+  /** Binary indicator for kickoff. `Float64` */
   kickoff_attempt?: number | null;
-  /** `Float64` */
+  /** Binary indicator for punts. `Float64` */
   punt_attempt?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if a fumble occurred. `Float64` */
   fumble?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if the pass was completed. `Float64` */
   complete_pass?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if an assist tackle occurred. `Float64` */
   assist_tackle?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if a lateral occurred on the reception. `Float64` */
   lateral_reception?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if a lateral occurred on a run. `Float64` */
   lateral_rush?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if a lateral occurred on a return. Returns may occur on any of: interception, fumble, kickoff, punt, or blocked kicks. `Float64` */
   lateral_return?: number | null;
-  /** `Float64` */
+  /** Binary indicator for if a lateral occurred on a fumble recovery. `Float64` */
   lateral_recovery?: number | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that attempted the pass. `String` (an id) */
   passer_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that attempted the pass. `String` */
   passer_player_name?: string | null;
-  /** `Float64` */
+  /** Numeric yards by the passer_player_name, including yards gained in pass plays with laterals. This should equal official passing statistics. `Float64` */
   passing_yards?: number | null;
-  /** `String` (an id) */
+  /** Unique identifier for the receiver that was targeted on the pass. `String` (an id) */
   receiver_player_id?: string | null;
-  /** `String` */
+  /** String name for the targeted receiver. `String` */
   receiver_player_name?: string | null;
-  /** `Float64` */
+  /** Numeric yards by the receiver_player_name, excluding yards gained in pass plays with laterals. This should equal official receiving statistics but could miss yards gained in pass plays with laterals. Please see the description of `lateral_receiver_player_name` for further information. `Float64` */
   receiving_yards?: number | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that attempted the run. `String` (an id) */
   rusher_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that attempted the run. `String` */
   rusher_player_name?: string | null;
-  /** `Float64` */
+  /** Numeric yards by the rusher_player_name, excluding yards gained in rush plays with laterals. This should equal official rushing statistics but could miss yards gained in rush plays with laterals. Please see the description of `lateral_rusher_player_name` for further information. `Float64` */
   rushing_yards?: number | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that received the last(!) lateral on a pass play. `String` (an id) */
   lateral_receiver_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that received the last(!) lateral on a pass play. If there were multiple laterals in the same play, this will only be the last player who received a lateral. Please see <https://github.com/mrcaseb/nfl-data/tree/master/data/lateral_yards> for a list of plays where multiple players recorded lateral receiving yards. `String` */
   lateral_receiver_player_name?: string | null;
-  /** `Float64` */
+  /** Numeric yards by the `lateral_receiver_player_name` in pass plays with laterals. Please see the description of `lateral_receiver_player_name` for further information. `Float64` */
   lateral_receiving_yards?: number | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that received the last(!) lateral on a run play. `String` (an id) */
   lateral_rusher_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that received the last(!) lateral on a run play. If there were multiple laterals in the same play, this will only be the last player who received a lateral. Please see <https://github.com/mrcaseb/nfl-data/tree/master/data/lateral_yards> for a list of plays where multiple players recorded lateral rushing yards. `String` */
   lateral_rusher_player_name?: string | null;
-  /** `Float64` */
+  /** Numeric yards by the `lateral_rusher_player_name` in run plays with laterals. Please see the description of `lateral_rusher_player_name` for further information. `Float64` */
   lateral_rushing_yards?: number | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that received the lateral on a sack. `String` (an id) */
   lateral_sack_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that received the lateral on a sack. `String` */
   lateral_sack_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that intercepted the pass. `String` (an id) */
   interception_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that intercepted the pass. `String` */
   interception_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that received the lateral on an interception. `String` (an id) */
   lateral_interception_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that received the lateral on an interception. `String` */
   lateral_interception_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the punt returner. `String` (an id) */
   punt_returner_player_id?: string | null;
-  /** `String` */
+  /** String name for the punt returner. `String` */
   punt_returner_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that received the lateral on a punt return. `String` (an id) */
   lateral_punt_returner_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that received the lateral on a punt return. `String` */
   lateral_punt_returner_player_name?: string | null;
-  /** `String` */
+  /** String name for the kickoff returner. `String` */
   kickoff_returner_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the kickoff returner. `String` (an id) */
   kickoff_returner_player_id?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that received the lateral on a kickoff return. `String` (an id) */
   lateral_kickoff_returner_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that received the lateral on a kickoff return. `String` */
   lateral_kickoff_returner_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the punter. `String` (an id) */
   punter_player_id?: string | null;
-  /** `String` */
+  /** String name for the punter. `String` */
   punter_player_name?: string | null;
-  /** `String` */
+  /** String name for the kicker on FG or kickoff. `String` */
   kicker_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the kicker on FG or kickoff. `String` (an id) */
   kicker_player_id?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that recovered their own kickoff. `String` (an id) */
   own_kickoff_recovery_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that recovered their own kickoff. `String` */
   own_kickoff_recovery_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that blocked the punt or FG. `String` (an id) */
   blocked_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that blocked the punt or FG. `String` */
   blocked_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for one of the potential players with the tackle for loss. `String` (an id) */
   tackle_for_loss_1_player_id?: string | null;
-  /** `String` */
+  /** String name for one of the potential players with the tackle for loss. `String` */
   tackle_for_loss_1_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for one of the potential players with the tackle for loss. `String` (an id) */
   tackle_for_loss_2_player_id?: string | null;
-  /** `String` */
+  /** String name for one of the potential players with the tackle for loss. `String` */
   tackle_for_loss_2_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for one of the potential players that hit the QB. No sack as the QB was not the ball carrier. For sacks please see `sack_player` or `half_sack_*_player`. `String` (an id) */
   qb_hit_1_player_id?: string | null;
-  /** `String` */
+  /** String name for one of the potential players that hit the QB. No sack as the QB was not the ball carrier. For sacks please see `sack_player` or `half_sack_*_player`. `String` */
   qb_hit_1_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for one of the potential players that hit the QB. No sack as the QB was not the ball carrier. For sacks please see `sack_player` or `half_sack_*_player`. `String` (an id) */
   qb_hit_2_player_id?: string | null;
-  /** `String` */
+  /** String name for one of the potential players that hit the QB. No sack as the QB was not the ball carrier. For sacks please see `sack_player` or `half_sack_*_player`. `String` */
   qb_hit_2_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a forced fumble. `String` */
   forced_fumble_player_1_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a forced fumble. `String` (an id) */
   forced_fumble_player_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a forced fumble. `String` */
   forced_fumble_player_1_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a forced fumble. `String` */
   forced_fumble_player_2_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a forced fumble. `String` (an id) */
   forced_fumble_player_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a forced fumble. `String` */
   forced_fumble_player_2_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a solo tackle. `String` */
   solo_tackle_1_team?: string | null;
-  /** `String` */
+  /** Team of one of the players with a solo tackle. `String` */
   solo_tackle_2_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a solo tackle. `String` (an id) */
   solo_tackle_1_player_id?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a solo tackle. `String` (an id) */
   solo_tackle_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a solo tackle. `String` */
   solo_tackle_1_player_name?: string | null;
-  /** `String` */
+  /** String name of one of the players with a solo tackle. `String` */
   solo_tackle_2_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a tackle assist. `String` (an id) */
   assist_tackle_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a tackle assist. `String` */
   assist_tackle_1_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a tackle assist. `String` */
   assist_tackle_1_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a tackle assist. `String` (an id) */
   assist_tackle_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a tackle assist. `String` */
   assist_tackle_2_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a tackle assist. `String` */
   assist_tackle_2_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a tackle assist. `String` (an id) */
   assist_tackle_3_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a tackle assist. `String` */
   assist_tackle_3_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a tackle assist. `String` */
   assist_tackle_3_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a tackle assist. `String` (an id) */
   assist_tackle_4_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a tackle assist. `String` */
   assist_tackle_4_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a tackle assist. `String` */
   assist_tackle_4_team?: string | null;
-  /** `Float64` */
+  /** Binary indicator for if there has been a tackle with assist. `Float64` */
   tackle_with_assist?: number | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a tackle with assist. `String` (an id) */
   tackle_with_assist_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a tackle with assist. `String` */
   tackle_with_assist_1_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a tackle with assist. `String` */
   tackle_with_assist_1_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a tackle with assist. `String` (an id) */
   tackle_with_assist_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a tackle with assist. `String` */
   tackle_with_assist_2_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a tackle with assist. `String` */
   tackle_with_assist_2_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a pass defense. `String` (an id) */
   pass_defense_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a pass defense. `String` */
   pass_defense_1_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a pass defense. `String` (an id) */
   pass_defense_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a pass defense. `String` */
   pass_defense_2_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the first player with a fumble. `String` */
   fumbled_1_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of the first player who fumbled on the play. `String` (an id) */
   fumbled_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the first player who fumbled on the play. `String` */
   fumbled_1_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of the second player who fumbled on the play. `String` (an id) */
   fumbled_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the second player who fumbled on the play. `String` */
   fumbled_2_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the second player with a fumble. `String` */
   fumbled_2_team?: string | null;
-  /** `String` */
+  /** Team of one of the players with a fumble recovery. `String` */
   fumble_recovery_1_team?: string | null;
-  /** `Float64` */
+  /** Yards gained by one of the players with a fumble recovery. `Float64` */
   fumble_recovery_1_yards?: number | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a fumble recovery. `String` (an id) */
   fumble_recovery_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a fumble recovery. `String` */
   fumble_recovery_1_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a fumble recovery. `String` */
   fumble_recovery_2_team?: string | null;
-  /** `Float64` */
+  /** Yards gained by one of the players with a fumble recovery. `Float64` */
   fumble_recovery_2_yards?: number | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a fumble recovery. `String` (an id) */
   fumble_recovery_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a fumble recovery. `String` */
   fumble_recovery_2_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of the player who recorded a solo sack. `String` (an id) */
   sack_player_id?: string | null;
-  /** `String` */
+  /** String name of the player who recorded a solo sack. `String` */
   sack_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of the first player who recorded half a sack. `String` (an id) */
   half_sack_1_player_id?: string | null;
-  /** `String` */
+  /** String name of the first player who recorded half a sack. `String` */
   half_sack_1_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of the second player who recorded half a sack. `String` (an id) */
   half_sack_2_player_id?: string | null;
-  /** `String` */
+  /** String name of the second player who recorded half a sack. `String` */
   half_sack_2_player_name?: string | null;
-  /** `String` */
+  /** String abbreviation of the return team. Returns may occur on any of: interception, fumble, kickoff, punt, or blocked kicks. `String` */
   return_team?: string | null;
-  /** `Float64` */
+  /** Yards gained by the return team. Returns may occur on any of: interception, fumble, kickoff, punt, or blocked kicks. `Float64` */
   return_yards?: number | null;
-  /** `String` */
+  /** String abbreviation of the team with the penalty. `String` */
   penalty_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player with the penalty. `String` (an id) */
   penalty_player_id?: string | null;
-  /** `String` */
+  /** String name for the player with the penalty. `String` */
   penalty_player_name?: string | null;
-  /** `Float64` */
+  /** Yards gained (or lost) by the posteam from the penalty. `Float64` */
   penalty_yards?: number | null;
-  /** `Float64` */
+  /** Binary indicator for whether or not a replay or challenge. `Float64` */
   replay_or_challenge?: number | null;
-  /** `String` */
+  /** String indicating the result of the replay or challenge. `String` */
   replay_or_challenge_result?: string | null;
-  /** `String` */
+  /** String indicating the penalty type of the first penalty in the given play. Will be `NA` if `desc` is missing the type. `String` */
   penalty_type?: string | null;
-  /** `Float64` */
+  /** Binary indicator whether or not the defense was able to have an attempt on a two point conversion, this results following a turnover. `Float64` */
   defensive_two_point_attempt?: number | null;
-  /** `Float64` */
+  /** Binary indicator whether or not the defense successfully scored on the two point conversion. `Float64` */
   defensive_two_point_conv?: number | null;
-  /** `Float64` */
+  /** Binary indicator whether or not the defense was able to have an attempt on an extra point attempt, this results following a blocked attempt that the defense recovers the ball. `Float64` */
   defensive_extra_point_attempt?: number | null;
-  /** `Float64` */
+  /** Binary indicator whether or not the defense successfully scored on an extra point attempt. `Float64` */
   defensive_extra_point_conv?: number | null;
-  /** `String` */
+  /** String name for the player who scored a safety. `String` */
   safety_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player who scored a safety. `String` (an id) */
   safety_player_id?: string | null;
-  /** `Int32` */
+  /** 4 digit number indicating to which season(s) the specified timeframe belongs to. `Int32` */
   season?: number | null;
-  /** `Float64` */
+  /** Numeric value indicating the probability for a complete pass based on comparable game situations. `Float64` */
   cp?: number | null;
-  /** `Float64` */
+  /** Completion percentage over expected in PERCENTAGE POINTS, not a 0-1 rate -- 100 * (complete_pass - cp) per pass play, so a completed pass with cp 0.368 scores +63.2 and the same pass falling incomplete scores -36.8. Averaged over a passer's attempts it is the familiar CPOE of a few points either way; divide by 100 before combining it with 0-1 probabilities such as cp. Null on non-pass rows. `Float64` */
   cpoe?: number | null;
-  /** `Float64` */
+  /** Starts at 1, each new first down increments, numbers shared across both teams NA: kickoffs, extra point/two point conversion attempts, non-plays, no posteam `Float64` */
   series?: number | null;
-  /** `Float64` */
+  /** 1: scored touchdown, gained enough yards for first down. `Float64` */
   series_success?: number | null;
-  /** `String` */
+  /** Possible values: First down, Touchdown, Opp touchdown, Field goal, Missed field goal, Safety, Turnover, Punt, Turnover on downs, QB kneel, End of half `String` */
   series_result?: string | null;
-  /** `Float64` */
+  /** Column provided by NFL to fix out-of-order plays. Available 2011 and beyond with source "nfl". `Float64` */
   order_sequence?: number | null;
-  /** `String` */
+  /** Kickoff time in eastern time zone. `String` */
   start_time?: string | null;
-  /** `String` */
+  /** Time of day of play in UTC "HH:MM:SS" format. Available 2011 and beyond with source "nfl". `String` */
   time_of_day?: string | null;
-  /** `String` */
+  /** Name of the stadium `String` */
   stadium?: string | null;
-  /** `String` */
+  /** String describing the weather including temperature, humidity and wind (direction and speed). Doesn't change during the game! `String` */
   weather?: string | null;
-  /** `String` (an id) */
+  /** UUID of the game in the new NFL API. `String` (an id) */
   nfl_api_id?: string | null;
-  /** `String` */
+  /** Time on the playclock when the ball was snapped. `String` */
   play_clock?: string | null;
-  /** `Float64` */
+  /** Binary indicator for deleted plays. `Float64` */
   play_deleted?: number | null;
-  /** `String` */
+  /** Play type as listed in the NFL source. Slightly different to the regular play_type variable. `String` */
   play_type_nfl?: string | null;
-  /** `Float64` */
+  /** Binary indicator for whether play is special teams play from NFL source. Available 2011 and beyond with source "nfl". `Float64` */
   special_teams_play?: number | null;
-  /** `String` */
+  /** Type of special teams play from NFL source. Available 2011 and beyond with source "nfl". `String` */
   st_play_type?: string | null;
-  /** `String` */
+  /** Game time at the end of a given play. `String` */
   end_clock_time?: string | null;
-  /** `String` */
+  /** String indicating the yardline at the end of the given play consisting of team half and yard line number. `String` */
   end_yard_line?: string | null;
-  /** `Float64` */
+  /** Manually created drive number in a game. `Float64` */
   fixed_drive?: number | null;
-  /** `String` */
+  /** Manually created drive result. `String` */
   fixed_drive_result?: string | null;
-  /** `String` */
+  /** Local day time when the drive started (currently not used by the NFL and therefore mostly 'NA'). `String` */
   drive_real_start_time?: string | null;
-  /** `Float64` */
+  /** Numeric value of how many regular plays happened in a given drive. `Float64` */
   drive_play_count?: number | null;
-  /** `String` */
+  /** Time of possession in a given drive. `String` */
   drive_time_of_possession?: string | null;
-  /** `Float64` */
+  /** Number of first downs in a given drive. `Float64` */
   drive_first_downs?: number | null;
-  /** `Float64` */
+  /** Binary indicator if the offense was able to get inside the opponents 20 yard line. `Float64` */
   drive_inside20?: number | null;
-  /** `Float64` */
+  /** Binary indicator the drive ended with a score. `Float64` */
   drive_ended_with_score?: number | null;
-  /** `Float64` */
+  /** Numeric value indicating in which quarter the given drive has started. `Float64` */
   drive_quarter_start?: number | null;
-  /** `Float64` */
+  /** Numeric value indicating in which quarter the given drive has ended. `Float64` */
   drive_quarter_end?: number | null;
-  /** `Float64` */
+  /** Numeric value of how many yards the offense gained or lost through penalties in the given drive. `Float64` */
   drive_yards_penalized?: number | null;
-  /** `String` */
+  /** String indicating how the offense got the ball. `String` */
   drive_start_transition?: string | null;
-  /** `String` */
+  /** String indicating how the offense lost the ball. `String` */
   drive_end_transition?: string | null;
-  /** `String` */
+  /** Game time at the beginning of a given drive. `String` */
   drive_game_clock_start?: string | null;
-  /** `String` */
+  /** Game time at the end of a given drive. `String` */
   drive_game_clock_end?: string | null;
-  /** `String` */
+  /** String indicating where a given drive started consisting of team half and yard line number. `String` */
   drive_start_yard_line?: string | null;
-  /** `String` */
+  /** String indicating where a given drive ended consisting of team half and yard line number. `String` */
   drive_end_yard_line?: string | null;
-  /** `Float64` (an id) */
+  /** Play_id of the first play in the given drive. `Float64` (an id) */
   drive_play_id_started?: string | number | null;
-  /** `Float64` (an id) */
+  /** Play_id of the last play in the given drive. `Float64` (an id) */
   drive_play_id_ended?: string | number | null;
-  /** `Int32` */
+  /** The number of points the away team scored. Is NA for games which haven't yet been played. `Int32` */
   away_score?: number | null;
-  /** `Int32` */
+  /** The number of points the home team scored. Is NA for games which haven't yet been played. `Int32` */
   home_score?: number | null;
-  /** `String` */
+  /** Either Home if the home team is playing in their home stadium, or Neutral if the game is being played at a neutral location. This still shows as Home for games between the Giants and Jets even though they share the same home stadium. `String` */
   location?: string | null;
-  /** `Int32` */
+  /** The number of points the home team scored minus the number of points the visiting team scored. Equals h_score - v_score. Is NA for games which haven't yet been played. Convenient for evaluating against the spread bets. `Int32` */
   result?: number | null;
-  /** `Int32` */
+  /** The sum of each team's score in the game. Equals h_score + v_score. Is NA for games which haven't yet been played. Convenient for evaluating over/under total bets. `Int32` */
   total?: number | null;
-  /** `Float64` */
+  /** The closing spread line for the game. A positive number means the home team was favored by that many points, a negative number means the away team was favored by that many points. (Source: Pro-Football-Reference) `Float64` */
   spread_line?: number | null;
-  /** `Float64` */
+  /** The closing total line for the game. (Source: Pro-Football-Reference) `Float64` */
   total_line?: number | null;
-  /** `Int32` */
+  /** Binary indicator of whether or not game was played by 2 teams in the same division. `Int32` */
   div_game?: number | null;
-  /** `String` */
+  /** One of 'dome', 'outdoors', 'closed', 'open' indicating indicating the roof status of the stadium the game was played in. (Source: Pro-Football-Reference) `String` */
   roof?: string | null;
-  /** `String` */
+  /** What type of ground the game was played on. (Source: Pro-Football-Reference) `String` */
   surface?: string | null;
-  /** `Int32` */
+  /** The temperature at the stadium only for 'roof' = 'outdoors' or 'open'.(Source: Pro-Football-Reference) `Int32` */
   temp?: number | null;
-  /** `Int32` */
+  /** The speed of the wind in miles/hour only for 'roof' = 'outdoors' or 'open'. (Source: Pro-Football-Reference) `Int32` */
   wind?: number | null;
-  /** `String` */
+  /** First and last name of the home team coach. (Source: Pro-Football-Reference) `String` */
   home_coach?: string | null;
-  /** `String` */
+  /** First and last name of the away team coach. (Source: Pro-Football-Reference) `String` */
   away_coach?: string | null;
-  /** `String` (an id) */
+  /** ID of the stadium the game was played in. (Source: Pro-Football-Reference) `String` (an id) */
   stadium_id?: string | null;
-  /** `String` */
+  /** Name of the stadium the game was played in. (Source: Pro-Football-Reference) `String` */
   game_stadium?: string | null;
-  /** `Float64` */
+  /** Binary indicator if the play description indicates "Aborted". `Float64` */
   aborted_play?: number | null;
-  /** `Float64` */
+  /** Binary indicator whether epa > 0 in the given play. `Float64` */
   success?: number | null;
-  /** `String` */
+  /** Name of the dropback player (scrambles included) including plays with penalties. `String` */
   passer?: string | null;
-  /** `Int32` */
+  /** Jersey number of the passer. `Int32` */
   passer_jersey_number?: number | null;
-  /** `String` */
+  /** Name of the rusher (no scrambles) including plays with penalties. `String` */
   rusher?: string | null;
-  /** `Int32` */
+  /** Jersey number of the rusher. `Int32` */
   rusher_jersey_number?: number | null;
-  /** `String` */
+  /** Name of the receiver including plays with penalties. `String` */
   receiver?: string | null;
-  /** `Int32` */
+  /** Jersey number of the receiver. `Int32` */
   receiver_jersey_number?: number | null;
-  /** `Float64` */
+  /** Binary indicator if the play was a pass play (sacks and scrambles included). `Float64` */
   pass?: number | null;
-  /** `Float64` */
+  /** Binary indicator if the play was a rushing play. `Float64` */
   rush?: number | null;
-  /** `Float64` */
+  /** Binary indicator if the play ended in a first down. `Float64` */
   first_down?: number | null;
-  /** `Float64` */
+  /** Binary indicator if "play_type" is one of "extra_point", "field_goal", "kickoff", or "punt". `Float64` */
   special?: number | null;
-  /** `Float64` */
+  /** Binary indicator: 1 if the play was a 'normal' play (including penalties), 0 otherwise. `Float64` */
   play?: number | null;
-  /** `String` (an id) */
+  /** ID of the player in the 'passer' column. `String` (an id) */
   passer_id?: string | null;
-  /** `String` (an id) */
+  /** ID of the player in the 'rusher' column. `String` (an id) */
   rusher_id?: string | null;
-  /** `String` (an id) */
+  /** ID of the player in the 'receiver' column. `String` (an id) */
   receiver_id?: string | null;
-  /** `String` */
+  /** Name, as reported by MFL but reordered into FirstName LastName instead of Last, First `String` */
   name?: string | null;
-  /** `Int32` */
+  /** Jersey number. Often useful for joins by name/team/jersey. `Int32` */
   jersey_number?: number | null;
-  /** `String` (an id) */
+  /** ID of the player in the 'name' column. `String` (an id) */
   id?: string | null;
-  /** `String` */
+  /** Name of the rusher on rush plays or receiver on pass plays (from official stats). `String` */
   fantasy_player_name?: string | null;
-  /** `String` (an id) */
+  /** ID of the rusher on rush plays or receiver on pass plays (from official stats). `String` (an id) */
   fantasy_player_id?: string | null;
-  /** `String` */
+  /** Name of the rusher on rush plays or receiver on pass plays. `String` */
   fantasy?: string | null;
-  /** `String` (an id) */
+  /** ID of the rusher on rush plays or receiver on pass plays. `String` (an id) */
   fantasy_id?: string | null;
-  /** `Float64` */
+  /** 1 if play description contains ran ob, pushed ob, or sacked ob; 0 otherwise. `Float64` */
   out_of_bounds?: number | null;
-  /** `Float64` */
+  /** 1 if the home team received the opening kickoff, 0 otherwise. `Float64` */
   home_opening_kickoff?: number | null;
-  /** `Float64` */
+  /** Gives QB credit for EPA for up to the point where a receiver lost a fumble after a completed catch and makes EPA work more like passing yards on plays with fumbles. `Float64` */
   qb_epa?: number | null;
-  /** `Float64` */
+  /** Expected value of EPA gained after the catch, starting from where the catch was made. Zero yards after the catch would be listed as zero EPA. `Float64` */
   xyac_epa?: number | null;
-  /** `Float64` */
+  /** Average expected yards after the catch based on where the ball was caught. `Float64` */
   xyac_mean_yardage?: number | null;
-  /** `Int32` */
+  /** Median expected yards after the catch based on where the ball was caught. `Int32` */
   xyac_median_yardage?: number | null;
-  /** `Float64` */
+  /** Probability play earns positive EPA (relative to where play started) based on where ball was caught. `Float64` */
   xyac_success?: number | null;
-  /** `Float64` */
+  /** Probability play earns a first down based on where the ball was caught. `Float64` */
   xyac_fd?: number | null;
-  /** `Float64` */
+  /** Probability of dropback scaled from 0 to 1. `Float64` */
   xpass?: number | null;
-  /** `Float64` */
+  /** Dropback percent over expected on a given play scaled from 0 to 100. `Float64` */
   pass_oe?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -757,657 +757,657 @@ export interface LoadNflPbpRow {
 
 /** One row of `sdv.nfl.loadNflModelPbp` (`nfl_model_pbp`; sdv-py loader schema `load_nfl_model_pbp`). */
 export interface LoadNflModelPbpRow {
-  /** `String` (an id) */
+  /** Ten digit identifier for NFL game. `String` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** 4 digit number indicating to which season(s) the specified timeframe belongs to. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` */
+  /** Season week. `Int64` */
   week?: number | bigint | null;
-  /** `String` */
+  /** REG or POST indicating if the timeframe belongs to regular or post season. `String` */
   season_type?: string | null;
-  /** `Int64` (an id) */
+  /** Numeric play id that when used with game_id and drive provides the unique identifier for a single play. `Int64` (an id) */
   play_id?: string | null;
-  /** `Float64` */
+  /** Game-global sequential play order from the NFL.com Shield feed; ordering key within a game (game_id + play_seq is unique). `Float64` */
   play_seq?: number | null;
-  /** `String` */
+  /** String abbreviation for the team with possession. `String` */
   posteam?: string | null;
-  /** `String` */
+  /** String abbreviation for the team on defense. `String` */
   defteam?: string | null;
-  /** `String` */
+  /** The home team. Note that this contains the designated home team for games which no team is playing at home such as Super Bowls or NFL International games. `String` */
   home_team?: string | null;
-  /** `String` */
+  /** String abbreviation for the away team. `String` */
   away_team?: string | null;
-  /** `Int64` */
+  /** Home team name. `Int64` */
   home?: number | bigint | null;
-  /** `Int64` */
+  /** Quarter of the game (5 is overtime). `Int64` */
   qtr?: number | bigint | null;
-  /** `String` */
+  /** String indicating which half the play is in, either Half1, Half2, or Overtime. `String` */
   game_half?: string | null;
-  /** `Int64` */
+  /** The down for the given play. `Int64` */
   down?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric yards in distance from either the first down marker or the endzone in goal down situations. `Int64` */
   ydstogo?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric distance in the number of yards from the opponent's endzone for the posteam. `Int64` */
   yardline_100?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for whether or not the posteam is in a goal down situation. `Int64` */
   goal_to_go?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric seconds remaining in the quarter. `Int64` */
   quarter_seconds_remaining?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric seconds remaining in the half. `Int64` */
   half_seconds_remaining?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric seconds remaining in the game. `Int64` */
   game_seconds_remaining?: number | bigint | null;
-  /** `String` */
+  /** String indicating the type of play: pass (includes sacks), run (includes scrambles), punt, field_goal, kickoff, extra_point, qb_kneel, qb_spike, no_play (timeouts and penalties), and missing for rows indicating end of play. `String` */
   play_type?: string | null;
-  /** `Int64` */
+  /** Numeric yards gained (or lost) by the possessing team, excluding yards gained via fumble recoveries and laterals. `Int64` */
   yards_gained?: number | bigint | null;
-  /** `String` */
+  /** Detailed string description for the given play. `String` */
   desc?: string | null;
-  /** `String` */
+  /** Raw NFL.com Shield play-type enum for the play (e.g. RUSH, PASS, FIELD_GOAL, KICK_OFF, PENALTY, END_QUARTER, GAME_START, COMMENT) -- the unmapped upstream value behind the nflfastR-style play_type. `String` */
   shield_play_type?: string | null;
-  /** `String` */
+  /** Shield special-teams sub-type qualifier; UNSPECIFIED on ordinary plays and PENALTY when the special-teams play resolved to a penalty. `String` */
   special_teams_play_type?: string | null;
-  /** `Int64` */
+  /** Binary indicator for whether or not a score occurred on the play. `Int64` */
   sp?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the play was a pass attempt (includes sacks). `Int64` */
   pass_attempt?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the pass was completed. `Int64` */
   complete_pass?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the pass was incomplete. `Int64` */
   incomplete_pass?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the pass was intercepted. `Int64` */
   interception?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the play was a run. `Int64` */
   rush_attempt?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the play ended in a sack. `Int64` */
   sack?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the play resulted in a TD. `Int64` */
   touchdown?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the play resulted in a passing TD. `Int64` */
   pass_touchdown?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the play resulted in a rushing TD. `Int64` */
   rush_touchdown?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the play resulted in a return TD. Returns may occur on any of: interception, fumble, kickoff, punt, or blocked kicks. `Int64` */
   return_touchdown?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for field goal attempt. `Int64` */
   field_goal_attempt?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the field-goal attempt on this play was good. `Int64` */
   field_goal_made?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the field-goal attempt on this play was missed (not blocked). `Int64` */
   field_goal_missed?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the field-goal attempt on this play was blocked. `Int64` */
   field_goal_blocked?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for extra point attempt. `Int64` */
   extra_point_attempt?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for two point conversion attempt. `Int64` */
   two_point_attempt?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for punts. `Int64` */
   punt_attempt?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for kickoff. `Int64` */
   kickoff_attempt?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for whether or not a penalty occurred. `Int64` */
   penalty?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if a fumble occurred. `Int64` */
   fumble?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the fumble was lost. `Int64` */
   fumble_lost?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator if the QB was hit on the play. `Int64` */
   qb_hit?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for whether or not a safety occurred. `Int64` */
   safety?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for whether or not a timeout was called by either team. `Int64` */
   timeout?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if a running play converted the first down. `Int64` */
   first_down_rush?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if a passing play converted the first down. `Int64` */
   first_down_pass?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if a penalty converted the first down. `Int64` */
   first_down_penalty?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator if the play had a solo tackle (could be multiple due to fumbles). `Int64` */
   solo_tackle?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if an assist tackle occurred. `Int64` */
   assist_tackle?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if there has been a tackle with assist. `Int64` */
   tackle_with_assist?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for whether or not a tackle for loss on a run play occurred. `Int64` */
   tackled_for_loss?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the fumble was forced. `Int64` */
   fumble_forced?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the fumble was not forced. `Int64` */
   fumble_not_forced?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the fumble went out of bounds. `Int64` */
   fumble_out_of_bounds?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the punt was caught with a fair catch. `Int64` */
   punt_fair_catch?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the punt was downed. `Int64` */
   punt_downed?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the punt went out of bounds. `Int64` */
   punt_out_of_bounds?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the kickoff was caught with a fair catch. `Int64` */
   kickoff_fair_catch?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for if the kickoff went out of bounds. `Int64` */
   kickoff_out_of_bounds?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the extra-point kick on this play was good. `Int64` */
   extra_point_good?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the extra-point kick on this play was missed (not blocked or aborted). `Int64` */
   extra_point_failed?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the extra-point kick on this play was blocked. `Int64` */
   extra_point_blocked?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the extra-point attempt on this play resulted in a defensive safety (one point for the defense). `Int64` */
   extra_point_safety?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the extra-point attempt on this play was aborted (botched snap or hold, no kick attempted). `Int64` */
   extra_point_aborted?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the two-point conversion attempt was a rush that converted. `Int64` */
   two_point_rush_good?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the two-point conversion attempt was a rush that failed. `Int64` */
   two_point_rush_failed?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that a rushing two-point conversion attempt ended in a safety for the defense. `Int64` */
   two_point_rush_safety?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the two-point conversion attempt was a pass that converted. `Int64` */
   two_point_pass_good?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the two-point conversion attempt was a pass that failed. `Int64` */
   two_point_pass_failed?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that a passing two-point conversion attempt ended in a safety for the defense. `Int64` */
   two_point_pass_safety?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the two-point conversion was completed and credited as a reception. `Int64` */
   two_point_pass_reception_good?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the two-point conversion pass was thrown but not completed for the conversion. `Int64` */
   two_point_pass_reception_failed?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator (1/0) that the defense returned a failed conversion attempt for two points. `Int64` */
   two_point_return?: number | bigint | null;
-  /** `Int64` */
+  /** Number of tackles for loss (TFL) for this player `Int64` */
   def_tackles_for_loss?: number | bigint | null;
-  /** `Int64` */
+  /** Yards lost from TFLs involving this player `Int64` */
   def_tackles_for_loss_yards?: number | bigint | null;
-  /** `Int64` */
+  /** Count of touchdowns credited on the play from the Shield scoring-participant ids (2 on the rare multi-score bookkeeping rows). `Int64` */
   td_ids_touchdown?: number | bigint | null;
-  /** `Int64` */
+  /** Yards gained or lost on the play that are not attributed to a rush, pass, or return (miscellaneous Shield yardage bucket). `Int64` */
   misc_yards?: number | bigint | null;
-  /** `Int64` */
+  /** Yards gained or lost after an own-team fumble recovery that came via a lateral. `Int64` */
   fumble_recovery_own_lateral_yards?: number | bigint | null;
-  /** `Int64` */
+  /** Yards gained or lost after an opponent fumble recovery that came via a lateral. `Int64` */
   fumble_recovery_opp_lateral_yards?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric value for distance in yards perpendicular to the line of scrimmage at where the targeted receiver either caught or didn't catch the ball. `Int64` */
   air_yards?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric value for distance in yards perpendicular to the yard line where the receiver made the reception to where the play ended. `Int64` */
   yards_after_catch?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric yards by the passer_player_name, including yards gained in pass plays with laterals. This should equal official passing statistics. `Int64` */
   passing_yards?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric yards by the rusher_player_name, excluding yards gained in rush plays with laterals. This should equal official rushing statistics but could miss yards gained in rush plays with laterals. Please see the description of `lateral_rusher_player_name` for further information. `Int64` */
   rushing_yards?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric yards by the receiver_player_name, excluding yards gained in pass plays with laterals. This should equal official receiving statistics but could miss yards gained in pass plays with laterals. Please see the description of `lateral_receiver_player_name` for further information. `Int64` */
   receiving_yards?: number | bigint | null;
-  /** `Int64` */
+  /** Yards gained (or lost) by the posteam from the penalty. `Int64` */
   penalty_yards?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric distance in yards for kickoffs, field goals, and punts. `Int64` */
   kick_distance?: number | bigint | null;
-  /** `Int64` */
+  /** Yards gained by the return team. Returns may occur on any of: interception, fumble, kickoff, punt, or blocked kicks. `Int64` */
   return_yards?: number | bigint | null;
-  /** `Null` */
+  /** Numeric yards by the `lateral_rusher_player_name` in run plays with laterals. Please see the description of `lateral_rusher_player_name` for further information. `Null` */
   lateral_rushing_yards?: unknown;
-  /** `Int64` */
+  /** Numeric yards by the `lateral_receiver_player_name` in pass plays with laterals. Please see the description of `lateral_receiver_player_name` for further information. `Int64` */
   lateral_receiving_yards?: number | bigint | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that attempted the pass. `String` (an id) */
   passer_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that attempted the pass. `String` */
   passer_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that attempted the run. `String` (an id) */
   rusher_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that attempted the run. `String` */
   rusher_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the receiver that was targeted on the pass. `String` (an id) */
   receiver_player_id?: string | null;
-  /** `String` */
+  /** String name for the targeted receiver. `String` */
   receiver_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of the player who scored a touchdown. `String` (an id) */
   td_player_id?: string | null;
-  /** `String` */
+  /** String name of the player who scored a touchdown. `String` */
   td_player_name?: string | null;
-  /** `String` */
+  /** String abbreviation for which team scored the touchdown. `String` */
   td_team?: string | null;
-  /** `String` */
+  /** String abbreviation of the team with the penalty. `String` */
   penalty_team?: string | null;
-  /** `String` */
+  /** String abbreviation for which team called the timeout. `String` */
   timeout_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the kicker on FG or kickoff. `String` (an id) */
   kicker_player_id?: string | null;
-  /** `String` */
+  /** String name for the kicker on FG or kickoff. `String` */
   kicker_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the punter. `String` (an id) */
   punter_player_id?: string | null;
-  /** `String` */
+  /** String name for the punter. `String` */
   punter_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the punt returner. `String` (an id) */
   punt_returner_player_id?: string | null;
-  /** `String` */
+  /** String name for the punt returner. `String` */
   punt_returner_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the kickoff returner. `String` (an id) */
   kickoff_returner_player_id?: string | null;
-  /** `String` */
+  /** String name for the kickoff returner. `String` */
   kickoff_returner_player_name?: string | null;
-  /** `String` */
+  /** String abbreviation of the return team. Returns may occur on any of: interception, fumble, kickoff, punt, or blocked kicks. `String` */
   return_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player that intercepted the pass. `String` (an id) */
   interception_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that intercepted the pass. `String` */
   interception_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of the player who recorded a solo sack. `String` (an id) */
   sack_player_id?: string | null;
-  /** `String` */
+  /** String name of the player who recorded a solo sack. `String` */
   sack_player_name?: string | null;
-  /** `Null` (an id) */
+  /** Unique identifier for the player who scored a safety. `Null` (an id) */
   safety_player_id?: unknown;
-  /** `Null` */
+  /** String name for the player who scored a safety. `Null` */
   safety_player_name?: unknown;
-  /** `String` (an id) */
+  /** Unique identifier for the player that blocked the punt or FG. `String` (an id) */
   blocked_player_id?: string | null;
-  /** `String` */
+  /** String name for the player that blocked the punt or FG. `String` */
   blocked_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for the player with the penalty. `String` (an id) */
   penalty_player_id?: string | null;
-  /** `String` */
+  /** String name for the player with the penalty. `String` */
   penalty_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a solo tackle. `String` (an id) */
   solo_tackle_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a solo tackle. `String` */
   solo_tackle_1_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a solo tackle. `String` */
   solo_tackle_1_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a solo tackle. `String` (an id) */
   solo_tackle_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a solo tackle. `String` */
   solo_tackle_2_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a solo tackle. `String` */
   solo_tackle_2_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a tackle assist. `String` (an id) */
   assist_tackle_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a tackle assist. `String` */
   assist_tackle_1_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a tackle assist. `String` */
   assist_tackle_1_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a tackle assist. `String` (an id) */
   assist_tackle_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a tackle assist. `String` */
   assist_tackle_2_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a tackle assist. `String` */
   assist_tackle_2_team?: string | null;
-  /** `Null` (an id) */
+  /** Unique identifier of one of the players with a tackle assist. `Null` (an id) */
   assist_tackle_3_player_id?: unknown;
-  /** `Null` */
+  /** String name of one of the players with a tackle assist. `Null` */
   assist_tackle_3_player_name?: unknown;
-  /** `Null` */
+  /** Team of one of the players with a tackle assist. `Null` */
   assist_tackle_3_team?: unknown;
-  /** `Null` (an id) */
+  /** Unique identifier of one of the players with a tackle assist. `Null` (an id) */
   assist_tackle_4_player_id?: unknown;
-  /** `Null` */
+  /** String name of one of the players with a tackle assist. `Null` */
   assist_tackle_4_player_name?: unknown;
-  /** `Null` */
+  /** Team of one of the players with a tackle assist. `Null` */
   assist_tackle_4_team?: unknown;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a tackle with assist. `String` (an id) */
   tackle_with_assist_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a tackle with assist. `String` */
   tackle_with_assist_1_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a tackle with assist. `String` */
   tackle_with_assist_1_team?: string | null;
-  /** `Null` (an id) */
+  /** Unique identifier of one of the players with a tackle with assist. `Null` (an id) */
   tackle_with_assist_2_player_id?: unknown;
-  /** `Null` */
+  /** String name of one of the players with a tackle with assist. `Null` */
   tackle_with_assist_2_player_name?: unknown;
-  /** `Null` */
+  /** Team of one of the players with a tackle with assist. `Null` */
   tackle_with_assist_2_team?: unknown;
-  /** `String` (an id) */
+  /** Unique identifier for one of the potential players with the tackle for loss. `String` (an id) */
   tackle_for_loss_1_player_id?: string | null;
-  /** `String` */
+  /** String name for one of the potential players with the tackle for loss. `String` */
   tackle_for_loss_1_player_name?: string | null;
-  /** `Null` (an id) */
+  /** Unique identifier for one of the potential players with the tackle for loss. `Null` (an id) */
   tackle_for_loss_2_player_id?: unknown;
-  /** `Null` */
+  /** String name for one of the potential players with the tackle for loss. `Null` */
   tackle_for_loss_2_player_name?: unknown;
-  /** `String` (an id) */
+  /** Unique identifier of the first player who recorded half a sack. `String` (an id) */
   half_sack_1_player_id?: string | null;
-  /** `String` */
+  /** String name of the first player who recorded half a sack. `String` */
   half_sack_1_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of the second player who recorded half a sack. `String` (an id) */
   half_sack_2_player_id?: string | null;
-  /** `String` */
+  /** String name of the second player who recorded half a sack. `String` */
   half_sack_2_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for one of the potential players that hit the QB. No sack as the QB was not the ball carrier. For sacks please see `sack_player` or `half_sack_*_player`. `String` (an id) */
   qb_hit_1_player_id?: string | null;
-  /** `String` */
+  /** String name for one of the potential players that hit the QB. No sack as the QB was not the ball carrier. For sacks please see `sack_player` or `half_sack_*_player`. `String` */
   qb_hit_1_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier for one of the potential players that hit the QB. No sack as the QB was not the ball carrier. For sacks please see `sack_player` or `half_sack_*_player`. `String` (an id) */
   qb_hit_2_player_id?: string | null;
-  /** `String` */
+  /** String name for one of the potential players that hit the QB. No sack as the QB was not the ball carrier. For sacks please see `sack_player` or `half_sack_*_player`. `String` */
   qb_hit_2_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a pass defense. `String` (an id) */
   pass_defense_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a pass defense. `String` */
   pass_defense_1_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a pass defense. `String` (an id) */
   pass_defense_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a pass defense. `String` */
   pass_defense_2_player_name?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a forced fumble. `String` (an id) */
   forced_fumble_player_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a forced fumble. `String` */
   forced_fumble_player_1_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a forced fumble. `String` */
   forced_fumble_player_1_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a forced fumble. `String` (an id) */
   forced_fumble_player_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a forced fumble. `String` */
   forced_fumble_player_2_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a forced fumble. `String` */
   forced_fumble_player_2_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of the first player who fumbled on the play. `String` (an id) */
   fumbled_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the first player who fumbled on the play. `String` */
   fumbled_1_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the first player with a fumble. `String` */
   fumbled_1_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of the second player who fumbled on the play. `String` (an id) */
   fumbled_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the second player who fumbled on the play. `String` */
   fumbled_2_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the second player with a fumble. `String` */
   fumbled_2_team?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a fumble recovery. `String` (an id) */
   fumble_recovery_1_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a fumble recovery. `String` */
   fumble_recovery_1_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a fumble recovery. `String` */
   fumble_recovery_1_team?: string | null;
-  /** `Int64` */
+  /** Yards gained by one of the players with a fumble recovery. `Int64` */
   fumble_recovery_1_yards?: number | bigint | null;
-  /** `String` (an id) */
+  /** Unique identifier of one of the players with a fumble recovery. `String` (an id) */
   fumble_recovery_2_player_id?: string | null;
-  /** `String` */
+  /** String name of one of the players with a fumble recovery. `String` */
   fumble_recovery_2_player_name?: string | null;
-  /** `String` */
+  /** Team of one of the players with a fumble recovery. `String` */
   fumble_recovery_2_team?: string | null;
-  /** `Int64` */
+  /** Yards gained by one of the players with a fumble recovery. `Int64` */
   fumble_recovery_2_yards?: number | bigint | null;
-  /** `String` */
+  /** String indicator for result of two point conversion attempt: success, failure, safety (touchback in defensive endzone is 1 point apparently), or return. `String` */
   two_point_conv_result?: string | null;
-  /** `String` */
+  /** String indicator for the result of the extra point attempt: good, failed, blocked, safety (touchback in defensive endzone is 1 point apparently), or aborted. `String` */
   extra_point_result?: string | null;
-  /** `Int64` */
+  /** Binary indicator if "play_type" is one of "extra_point", "field_goal", "kickoff", or "punt". `Int64` */
   special?: number | bigint | null;
-  /** `String` */
+  /** String indicator for pass length: short or deep. `String` */
   pass_length?: string | null;
-  /** `String` */
+  /** String indicator for pass location: left, middle, or right. `String` */
   pass_location?: string | null;
-  /** `Int64` */
+  /** Binary indicator for whether or not the QB took a knee. `Int64` */
   qb_kneel?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for whether or not the QB spiked the ball. `Int64` */
   qb_spike?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for whether or not the QB scrambled. `Int64` */
   qb_scramble?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for whether or not the play was in shotgun formation. `Int64` */
   shotgun?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator for whether or not the play was in no_huddle formation. `Int64` */
   no_huddle?: number | bigint | null;
-  /** `String` */
+  /** String indicator for location of run: left, middle, or right. `String` */
   run_location?: string | null;
-  /** `String` */
+  /** String indicator for line gap of run: end, guard, or tackle `String` */
   run_gap?: string | null;
-  /** `Int64` */
+  /** Binary indicator if the play was a pass play (sacks and scrambles included). `Int64` */
   pass?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator if the play was a rushing play. `Int64` */
   rush?: number | bigint | null;
-  /** `Int32` */
+  /** Binary indicator for whether or not the QB dropped back on the play (pass attempt, sack, or scrambled). `Int32` */
   qb_dropback?: number | null;
-  /** `Int64` */
+  /** Score the posteam at the start of the play. `Int64` */
   posteam_score?: number | bigint | null;
-  /** `Int64` */
+  /** Score the defteam at the start of the play. `Int64` */
   defteam_score?: number | bigint | null;
-  /** `Int64` */
+  /** Score differential between the posteam and defteam at the start of the play. `Int64` */
   score_differential?: number | bigint | null;
-  /** `Int64` */
+  /** Number of timeouts remaining for the possession team. `Int64` */
   posteam_timeouts_remaining?: number | bigint | null;
-  /** `Int64` */
+  /** Number of timeouts remaining for the team on defense. `Int64` */
   defteam_timeouts_remaining?: number | bigint | null;
-  /** `String` */
+  /** One of 'dome', 'outdoors', 'closed', 'open' indicating indicating the roof status of the stadium the game was played in. (Source: Pro-Football-Reference) `String` */
   roof?: string | null;
-  /** `Float64` */
+  /** The closing spread line for the game. A positive number means the home team was favored by that many points, a negative number means the away team was favored by that many points. (Source: Pro-Football-Reference) `Float64` */
   spread_line?: number | null;
-  /** `Float64` */
+  /** The closing total line for the game. (Source: Pro-Football-Reference) `Float64` */
   total_line?: number | null;
-  /** `String` */
+  /** String indicator for result of field goal attempt: made, missed, or blocked. `String` */
   field_goal_result?: string | null;
-  /** `Int64` */
+  /** The number of points the home team scored. Is NA for games which haven't yet been played. `Int64` */
   home_score?: number | bigint | null;
-  /** `Int64` */
+  /** The number of points the away team scored. Is NA for games which haven't yet been played. `Int64` */
   away_score?: number | bigint | null;
-  /** `Int64` */
+  /** The number of points the home team scored minus the number of points the visiting team scored. Equals h_score - v_score. Is NA for games which haven't yet been played. Convenient for evaluating against the spread bets. `Int64` */
   result?: number | bigint | null;
-  /** `Int64` */
+  /** Manually created drive number in a game. `Int64` */
   fixed_drive?: number | bigint | null;
-  /** `String` */
+  /** Manually created drive result. `String` */
   fixed_drive_result?: string | null;
-  /** `Int64` */
+  /** Numeric value of how many regular plays happened in a given drive. `Int64` */
   drive_play_count?: number | bigint | null;
-  /** `Int64` */
+  /** Number of first downs in a given drive. `Int64` */
   drive_first_downs?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator if the offense was able to get inside the opponents 20 yard line. `Int64` */
   drive_inside20?: number | bigint | null;
-  /** `Int64` */
+  /** Binary indicator the drive ended with a score. `Int64` */
   drive_ended_with_score?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric value indicating in which quarter the given drive has started. `Int64` */
   drive_quarter_start?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric value indicating in which quarter the given drive has ended. `Int64` */
   drive_quarter_end?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric value of how many yards the offense gained or lost through penalties in the given drive. `Int64` */
   drive_yards_penalized?: number | bigint | null;
-  /** `String` */
+  /** String indicating how the offense got the ball. `String` */
   drive_start_transition?: string | null;
-  /** `String` */
+  /** String indicating how the offense lost the ball. `String` */
   drive_end_transition?: string | null;
-  /** `String` */
+  /** Game time at the beginning of a given drive. `String` */
   drive_game_clock_start?: string | null;
-  /** `String` */
+  /** Game time at the end of a given drive. `String` */
   drive_game_clock_end?: string | null;
-  /** `Int64` */
+  /** Yards from the offense's line of scrimmage to the opponent's end zone (yardline_100) on the drive's first play, 1-99; the model-pbp parquet stores the numeric spot, not the 'OWN 20' text load_nfl_pbp carries. `Int64` */
   drive_start_yard_line?: number | bigint | null;
-  /** `Int64` */
+  /** Yards from the offense's line of scrimmage to the opponent's end zone (yardline_100) on the drive's last play; the model-pbp parquet stores the numeric spot, not the 'OPP 45' text load_nfl_pbp carries. `Int64` */
   drive_end_yard_line?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Play_id of the first play in the given drive. `Int64` (an id) */
   drive_play_id_started?: string | null;
-  /** `Int64` (an id) */
+  /** Play_id of the last play in the given drive. `Int64` (an id) */
   drive_play_id_ended?: string | null;
-  /** `String` */
+  /** Time of possession in a given drive. `String` */
   drive_time_of_possession?: string | null;
-  /** `Int32` */
+  /** Starts at 1, each new first down increments, numbers shared across both teams NA: kickoffs, extra point/two point conversion attempts, non-plays, no posteam `Int32` */
   series?: number | null;
-  /** `String` */
+  /** Possible values: First down, Touchdown, Opp touchdown, Field goal, Missed field goal, Safety, Turnover, Punt, Turnover on downs, QB kneel, End of half `String` */
   series_result?: string | null;
-  /** `Int32` */
+  /** 1: scored touchdown, gained enough yards for first down. `Int32` */
   series_success?: number | null;
-  /** `Float64` */
+  /** Using the scoring event probabilities, the estimated expected points with respect to the possession team for the given play. `Float64` */
   ep?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the posteam scoring a TD next. 'Next' in this context means the next score in the same game half. `Float64` */
   td_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the defteam scoring a TD next. 'Next' in this context means the next score in the same game half. `Float64` */
   opp_td_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the posteam scoring a FG next. 'Next' in this context means the next score in the same game half. `Float64` */
   fg_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the defteam scoring a FG next. 'Next' in this context means the next score in the same game half. `Float64` */
   opp_fg_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the posteam scoring a safety next. 'Next' in this context means the next score in the same game half. `Float64` */
   safety_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of the defteam scoring a safety next. 'Next' in this context means the next score in the same game half. `Float64` */
   opp_safety_prob?: number | null;
-  /** `Float64` */
+  /** Predicted probability of no score occurring for the rest of the half based on the expected points model. `Float64` */
   no_score_prob?: number | null;
-  /** `Float64` */
+  /** Expected points added (EPA) by the posteam for the given play. `Float64` */
   epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total EPA for the home team in the game so far. `Float64` */
   total_home_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total EPA for the away team in the game so far. `Float64` */
   total_away_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total rushing EPA for the home team in the game so far. `Float64` */
   total_home_rush_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total rushing EPA for the away team in the game so far. `Float64` */
   total_away_rush_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total passing EPA for the home team in the game so far. `Float64` */
   total_home_pass_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total passing EPA for the away team in the game so far. `Float64` */
   total_away_pass_epa?: number | null;
-  /** `Float64` */
+  /** Gives QB credit for EPA for up to the point where a receiver lost a fumble after a completed catch and makes EPA work more like passing yards on plays with fumbles. `Float64` */
   qb_epa?: number | null;
-  /** `Float64` */
+  /** EPA from the air yards alone. For completions this represents the actual value provided through the air. For incompletions this represents the hypothetical value that could've been added through the air if the pass was completed. `Float64` */
   air_epa?: number | null;
-  /** `Float64` */
+  /** EPA from the yards after catch alone. For completions this represents the actual value provided after the catch. For incompletions this represents the difference between the hypothetical air_epa and the play's raw observed EPA (how much the incomplete pass cost the posteam). `Float64` */
   yac_epa?: number | null;
-  /** `Float64` */
+  /** EPA from the air yards alone only for completions. `Float64` */
   comp_air_epa?: number | null;
-  /** `Float64` */
+  /** EPA from the yards after catch alone only for completions. `Float64` */
   comp_yac_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions air EPA for the home team in the game so far. `Float64` */
   total_home_comp_air_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions air EPA for the away team in the game so far. `Float64` */
   total_away_comp_air_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions yac EPA for the home team in the game so far. `Float64` */
   total_home_comp_yac_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions yac EPA for the away team in the game so far. `Float64` */
   total_away_comp_yac_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw air EPA for the home team in the game so far. `Float64` */
   total_home_raw_air_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw air EPA for the away team in the game so far. `Float64` */
   total_away_raw_air_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw yac EPA for the home team in the game so far. `Float64` */
   total_home_raw_yac_epa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw yac EPA for the away team in the game so far. `Float64` */
   total_away_raw_yac_epa?: number | null;
-  /** `Int32` */
+  /** Binary indicator (1/0) that the play is in the first half and the possession team is the team receiving the second-half kickoff (the game's opening defense); mirrors nflfastR helper_add_ep_wp.R. `Int32` */
   receive_2h_ko?: number | null;
-  /** `Float64` */
+  /** Vegas point spread from the possession team's perspective (spread_line when the posteam is home, negated when it is away). `Float64` */
   posteam_spread?: number | null;
-  /** `Float64` */
+  /** Share of regulation elapsed at the start of the play, (3600 - game_seconds_remaining) / 3600, clipped to [0, 1]. `Float64` */
   elapsed_share?: number | null;
-  /** `Float64` */
+  /** WP-model feature: posteam_spread decayed by elapsed time, posteam_spread * exp(SPREAD_TIME_DECAY_EXPONENT * elapsed_share); set to 0 when no spread is available (use the naive WP model instead). `Float64` */
   spread_time?: number | null;
-  /** `Float64` */
+  /** WP-model feature: score_differential inflated by elapsed time, score_differential / exp(SPREAD_TIME_DECAY_EXPONENT * elapsed_share). `Float64` */
   Diff_Time_Ratio?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the posteam given the current situation at the start of the given play. `Float64` */
   wp?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the posteam given the current situation at the start of the given play, incorporating pre-game Vegas line. `Float64` */
   vegas_wp?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the home team. `Float64` */
   home_wp?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the away team. `Float64` */
   away_wp?: number | null;
-  /** `Float64` */
+  /** Estimated win probability for the defteam. `Float64` */
   def_wp?: number | null;
-  /** `Float64` */
+  /** Win probability added (WPA) for the home team: spread_adjusted model. `Float64` */
   vegas_home_wpa?: number | null;
-  /** `Float64` */
+  /** Win probability added (WPA) for the posteam: spread_adjusted model. `Float64` */
   vegas_wpa?: number | null;
-  /** `Float64` */
+  /** Win probability added (WPA) for the posteam. `Float64` */
   wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total rushing WPA for the home team in the game so far. `Float64` */
   total_home_rush_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total rushing WPA for the away team in the game so far. `Float64` */
   total_away_rush_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total passing WPA for the home team in the game so far. `Float64` */
   total_home_pass_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total passing WPA for the away team in the game so far. `Float64` */
   total_away_pass_wpa?: number | null;
-  /** `Float64` */
+  /** WPA through the air (same logic as air_epa). `Float64` */
   air_wpa?: number | null;
-  /** `Float64` */
+  /** WPA from yards after the catch (same logic as yac_epa). `Float64` */
   yac_wpa?: number | null;
-  /** `Float64` */
+  /** The air_wpa for completions only. `Float64` */
   comp_air_wpa?: number | null;
-  /** `Float64` */
+  /** The yac_wpa for completions only. `Float64` */
   comp_yac_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions air WPA for the home team in the game so far. `Float64` */
   total_home_comp_air_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions air WPA for the away team in the game so far. `Float64` */
   total_away_comp_air_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions yac WPA for the home team in the game so far. `Float64` */
   total_home_comp_yac_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total completions yac WPA for the away team in the game so far. `Float64` */
   total_away_comp_yac_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw air WPA for the home team in the game so far. `Float64` */
   total_home_raw_air_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw air WPA for the away team in the game so far. `Float64` */
   total_away_raw_air_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw yac WPA for the home team in the game so far. `Float64` */
   total_home_raw_yac_wpa?: number | null;
-  /** `Float64` */
+  /** Cumulative total raw yac WPA for the away team in the game so far. `Float64` */
   total_away_raw_yac_wpa?: number | null;
-  /** `Float64` */
+  /** Numeric value indicating the probability for a complete pass based on comparable game situations. `Float64` */
   cp?: number | null;
-  /** `Float64` */
+  /** For a single pass play this is 1 - cp when the pass was completed or 0 - cp when the pass was incomplete. Analyzed for a whole game or season an indicator for the passer how much over or under expectation his completion percentage was. `Float64` */
   cpoe?: number | null;
-  /** `Float64` */
+  /** Probability of dropback scaled from 0 to 1. `Float64` */
   xpass?: number | null;
-  /** `Float64` */
+  /** Dropback percent over expected on a given play scaled from 0 to 100. `Float64` */
   pass_oe?: number | null;
-  /** `Float64` */
+  /** Expected value of EPA gained after the catch, starting from where the catch was made. Zero yards after the catch would be listed as zero EPA. `Float64` */
   xyac_epa?: number | null;
-  /** `Float64` */
+  /** Average expected yards after the catch based on where the ball was caught. `Float64` */
   xyac_mean_yardage?: number | null;
-  /** `Float64` */
+  /** Median expected yards after the catch based on where the ball was caught. `Float64` */
   xyac_median_yardage?: number | null;
-  /** `Float64` */
+  /** Probability play earns positive EPA (relative to where play started) based on where ball was caught. `Float64` */
   xyac_success?: number | null;
-  /** `Float64` */
+  /** Probability play earns a first down based on where the ball was caught. `Float64` */
   xyac_fd?: number | null;
-  /** `Float64` */
+  /** EPA input used by the QBR calculation for the play (clipped at -5). `Float64` */
   qbr_epa?: number | null;
-  /** `Float64` */
+  /** Official weight, in pounds `Float64` */
   weight?: number | null;
-  /** `Boolean` */
+  /** Whether the play was a sack that did not involve a fumble. `Boolean` */
   non_fumble_sack?: boolean | null;
-  /** `Float64` */
+  /** EPA credited to the play's sack component (clipped at -5). `Float64` */
   sack_epa?: number | null;
-  /** `Float64` */
+  /** EPA credited to the play's passing component (clipped at -5). `Float64` */
   pass_epa?: number | null;
-  /** `Float64` */
+  /** EPA credited to the play's rushing component (clipped at -5). `Float64` */
   rush_epa?: number | null;
-  /** `Float64` */
+  /** EPA credited to the play's penalty component (clipped at -5). `Float64` */
   pen_epa?: number | null;
-  /** `Float64` */
+  /** Weight applied to the paired EPA term when aggregating (observed 0.6, 0.9, 1.0). `Float64` */
   sack_weight?: number | null;
-  /** `Float64` */
+  /** Weight applied to the paired EPA term when aggregating (observed 0.6, 0.9, 1.0). `Float64` */
   pass_weight?: number | null;
-  /** `Float64` */
+  /** Weight applied to the paired EPA term when aggregating (observed 0.6, 0.9, 1.0). `Float64` */
   rush_weight?: number | null;
-  /** `Float64` */
+  /** Weight applied to the paired EPA term when aggregating (observed 0.6, 0.9, 1.0). `Float64` */
   pen_weight?: number | null;
-  /** `Boolean` */
+  /** Whether the row is an action play -- a live-ball play rather than a timeout, penalty-only or administrative row. `Boolean` */
   action_play?: boolean | null;
-  /** `Float64` */
+  /** 1 if the home team received the opening kickoff, 0 otherwise. `Float64` */
   home_opening_kickoff?: number | null;
-  /** `Float64` */
+  /** Probability-weighted win probability of going for it on fourth down, first_down_prob * wp_succeed + (1 - first_down_prob) * wp_fail. `Float64` */
   go_wp?: number | null;
-  /** `Float32` */
+  /** Modeled probability of converting the fourth down if the offense goes for it. `Float32` */
   first_down_prob?: number | null;
-  /** `Float64` */
+  /** Mean win probability across the conversion outcomes, i.e. the WP conditional on converting the fourth down. `Float64` */
   wp_succeed?: number | null;
-  /** `Float64` */
+  /** Mean win probability across the failure outcomes, i.e. the WP conditional on failing to convert. `Float64` */
   wp_fail?: number | null;
-  /** `Float64` */
+  /** Predicted probability of making the field goal (cfbfastR FG model, 0-1). `Float64` */
   fg_make_prob?: number | null;
-  /** `Float64` */
+  /** Win probability conditional on the field-goal attempt being good. `Float64` */
   make_fg_wp?: number | null;
-  /** `Float64` */
+  /** Win probability conditional on the field-goal attempt being missed (opponent takes over at the spot). `Float64` */
   miss_fg_wp?: number | null;
-  /** `Float64` */
+  /** Probability-weighted win probability of attempting the field goal, from the kicking team's perspective. `Float64` */
   fg_wp?: number | null;
-  /** `Float64` */
+  /** Probability-weighted win probability of punting, integrated over the modeled punt-landing distribution. `Float64` */
   punt_wp?: number | null;
-  /** `Float64` */
+  /** nfl4th's headline number: 100 * (go_wp - max(fg_wp, punt_wp)), in win-probability percentage points. Positive means going for it is the higher-WP choice. `Float64` */
   go_boost?: number | null;
-  /** `Float64` */
+  /** go_wp minus the best available option's WP, in win-probability units. 0 when going for it is the recommendation and <= 0 otherwise. `Float64` */
   go_wp_diff?: number | null;
-  /** `Float64` */
+  /** punt_wp minus the best available option's WP, in win-probability units. 0 when punting is the recommendation and <= 0 otherwise. `Float64` */
   punt_wp_diff?: number | null;
-  /** `Float64` */
+  /** fg_wp minus the best available option's WP, in win-probability units. 0 when kicking is the recommendation and <= 0 otherwise. `Float64` */
   fg_wp_diff?: number | null;
-  /** `String` */
+  /** The max-WP choice among go / punt / field_goal for the fourth-down state; null when the fourth-down or WP models are unavailable. `String` */
   fourth_down_recommendation?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1415,29 +1415,29 @@ export interface LoadNflModelPbpRow {
 
 /** One row of `sdv.nfl.loadNflRatingsWeekly` (`nfl_ratings_weekly`; sdv-py loader schema `load_nfl_ratings_weekly`). */
 export interface LoadNflRatingsWeeklyRow {
-  /** `Int64` */
+  /** 4 digit number indicating to which season(s) the specified timeframe belongs to. `Int64` */
   season?: number | bigint | null;
-  /** `String` (an id) */
+  /** ESPN team id. `String` (an id) */
   team_id?: string | null;
-  /** `Float64` */
+  /** Opponent-adjusted offensive EPA per play for the team as of this week. `Float64` */
   adj_off_epa?: number | null;
-  /** `Float64` */
+  /** Opponent-adjusted defensive EPA per play for the team as of this week (negative is better for the defense). `Float64` */
   adj_def_epa?: number | null;
-  /** `Float64` */
+  /** Opponent-adjusted special-teams EPA per play for the team as of this week. `Float64` */
   adj_st_epa?: number | null;
-  /** `Float64` */
+  /** Opponent-adjusted net EPA per play -- the team's offensive rating less its defensive rating. `Float64` */
   adj_net?: number | null;
-  /** `Int64` */
+  /** Games the team played in the fitted window: those with a gameday strictly before as_of_week's first kickoff, the only games the rating for that week saw. `Int64` */
   games?: number | bigint | null;
-  /** `Int64` */
+  /** Team's rank (1-32) on adjusted offensive EPA as of this week. `Int64` */
   off_rank?: number | bigint | null;
-  /** `Int64` */
+  /** Team's rank (1-32) on adjusted defensive EPA as of this week. `Int64` */
   def_rank?: number | bigint | null;
-  /** `Int64` */
+  /** Team's rank (1-32) on adjusted net EPA as of this week. `Int64` */
   net_rank?: number | bigint | null;
-  /** `Float64` */
+  /** Adjusted net rating expressed as a z-score across the league that week. `Float64` */
   net_z?: number | null;
-  /** `Int32` */
+  /** Week through which the rating was computed; the row is the team's standing at that point in the season. `Int32` */
   as_of_week?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1445,101 +1445,101 @@ export interface LoadNflRatingsWeeklyRow {
 
 /** One row of `sdv.nfl.loadNflNgs` (`nfl_ngs_passing`; sdv-py loader schema `load_nfl_ngs`). */
 export interface LoadNflNgsRow {
-  /** `Int64` */
+  /** 4 digit number indicating to which season(s) the specified timeframe belongs to. `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** REG or POST indicating if the timeframe belongs to regular or post season. `String` */
   season_type?: string | null;
-  /** `Int64` */
+  /** Season week. `Int64` */
   week?: number | bigint | null;
-  /** `String` */
+  /** Aggregation scope of the row -- "season" for the season-to-date aggregate (always week 0) or "week" for a single week's statboard (week 0 is preseason week 0). `String` */
   scope?: string | null;
-  /** `Int64` */
+  /** Minimum-attempts qualifying threshold NGS applied to the statboard the row came from (differs between weekly and season scopes). `Int64` */
   threshold?: number | bigint | null;
-  /** `Int64` */
+  /** Games played. `Int64` */
   games_played?: number | bigint | null;
-  /** `String` */
+  /** Full name of player `String` */
   player_name?: string | null;
-  /** `String` */
+  /** Primary position as reported by NFL.com `String` */
   position?: string | null;
-  /** `String` (an id) */
+  /** ESPN team id. `String` (an id) */
   team_id?: string | null;
-  /** `String` (an id) */
+  /** Unique identifier of the player `String` (an id) */
   player_gsis_id?: string | null;
-  /** `String` */
+  /** Full name of the player `String` */
   player_display_name?: string | null;
-  /** `String` */
+  /** Short version of player's name `String` */
   player_short_name?: string | null;
-  /** `String` (an id) */
+  /** NFL Elias Sports Bureau (ESB) player id, a letter-digit key such as "MAH047439" shared across NFL data products. `String` (an id) */
   player_esb_id?: string | null;
-  /** `String` */
+  /** Roster position group the player is listed under (e.g. "QB", "WR", "RB"). `String` */
   player_position_group?: string | null;
-  /** `String` */
+  /** Position of the player accordinng to NGS `String` */
   player_position?: string | null;
-  /** `Int64` */
+  /** Player's jersey number `Int64` */
   player_jersey_number?: number | bigint | null;
-  /** `String` (an id) */
+  /** Player's current team identifier. `String` (an id) */
   player_current_team_id?: string | null;
-  /** `Int64` */
+  /** Season the embedded player record was resolved against; mirrors season. `Int64` */
   player_season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Integer NFL GSIS "IT" player id used by the league's internal tracking systems; a second id alongside the string player_gsis_id. `Int64` (an id) */
   player_gsis_it_id?: string | null;
-  /** `String` (an id) */
+  /** NFL "smart id", a UUID-style player identifier shared across NFL data products. `String` (an id) */
   player_smart_id?: string | null;
-  /** `String` */
+  /** Player's first name `String` */
   player_first_name?: string | null;
-  /** `String` */
+  /** Player's last name `String` */
   player_last_name?: string | null;
-  /** `String` */
+  /** Name the player goes by on the field and in broadcasts (e.g. "Patrick"), which can differ from the legal first name. `String` */
   player_football_name?: string | null;
-  /** `String` */
+  /** Position as classified by the Next Gen Stats tracking model, which can differ from the roster position. `String` */
   player_ngs_position?: string | null;
-  /** `String` */
+  /** Position group the Next Gen Stats tracking model assigns the player to (e.g. "QB", "WR"). `String` */
   player_ngs_position_group?: string | null;
-  /** `String` */
+  /** Jersey number as the zero-padded string NGS lists it (e.g. "07"). `String` */
   player_uniform_number?: string | null;
-  /** `String` */
+  /** Roster status code of the player at capture time (e.g. "ACT" active, "RES" reserve, "CUT", "DEV" practice squad). `String` */
   player_status?: string | null;
-  /** `String` */
+  /** URL to the player headshot image. `String` */
   player_headshot?: string | null;
-  /** `Int64` */
+  /** The number of pass attempts as defined by the NFL. `Int64` */
   attempts?: number | bigint | null;
-  /** `Int64` */
+  /** The number of completed passes. `Int64` */
   completions?: number | bigint | null;
-  /** `Int64` */
+  /** The number of interceptions thrown. `Int64` */
   interceptions?: number | bigint | null;
-  /** `Float64` */
+  /** Percentage of completed passes `Float64` */
   completion_percentage?: number | null;
-  /** `Float64` */
+  /** Using a passer's Completion Probability on every play, determine what a passer's completion percentage is expected to be. `Float64` */
   expected_completion_percentage?: number | null;
-  /** `Float64` */
+  /** A passer's actual completion percentage compared to their Expected Completion Percentage. `Float64` */
   completion_percentage_above_expectation?: number | null;
-  /** `Int64` */
+  /** Number of yards gained on pass plays `Int64` */
   pass_yards?: number | bigint | null;
-  /** `Int64` */
+  /** Number of touchdowns scored on pass plays `Int64` */
   pass_touchdowns?: number | bigint | null;
-  /** `Float64` */
+  /** Overall NFL passer rating `Float64` */
   passer_rating?: number | null;
-  /** `Float64` */
+  /** Average time elapsed from the time of snap to throw on every pass attempt for a passer (sacks excluded). `Float64` */
   avg_time_to_throw?: number | null;
-  /** `Float64` */
+  /** Average air yards on all attempted passes `Float64` */
   avg_intended_air_yards?: number | null;
-  /** `Float64` */
+  /** Average air yards on completed passes `Float64` */
   avg_completed_air_yards?: number | null;
-  /** `Float64` */
+  /** Air Yards Differential is calculated by subtracting the passer's average Intended Air Yards from his average Completed Air Yards. This stat indicates if he is on average attempting deep passes than he on average completes. `Float64` */
   avg_air_yards_differential?: number | null;
-  /** `Float64` */
+  /** A receiver's average depth of target `Float64` */
   avg_air_distance?: number | null;
-  /** `Float64` */
+  /** A receiver's maximum depth of target `Float64` */
   max_air_distance?: number | null;
-  /** `Float64` */
+  /** Air Distance is the amount of yards the ball has traveled on a pass, from the point of release to the point of reception (as the crow flies). Unlike Air Yards, Air Distance measures the actual distance the passer throws the ball. `Float64` */
   max_completed_air_distance?: number | null;
-  /** `Float64` */
+  /** Air Yards to the Sticks shows the amount of Air Yards ahead or behind the first down marker on all attempts for a passer. The metric indicates if the passer is attempting his passes past the 1st down marker, or if he is relying on his skill position players to make yards after catch. `Float64` */
   avg_air_yards_to_sticks?: number | null;
-  /** `Float64` */
+  /** Aggressiveness tracks the amount of passing attempts a quarterback makes that are into tight coverage, where there is a defender within 1 yard or less of the receiver at the time of completion or incompletion. AGG is shown as a % of attempts into tight windows over all passing attempts. `Float64` */
   aggressiveness?: number | null;
-  /** `String` */
+  /** Season type (PRE, REG, POST) of the embedded player record; mirrors season_type. `String` */
   player_season_type?: string | null;
-  /** `Int64` */
+  /** Week of the embedded player record; mirrors week. `Int64` */
   player_week?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1547,77 +1547,77 @@ export interface LoadNflNgsRow {
 
 /** One row of `sdv.nfl.loadNflRosters` (`rosters`; sdv-py loader schema `load_nfl_rosters`). */
 export interface LoadNflRostersRow {
-  /** `Int32` */
+  /** NFL season (year) the roster entry applies to. `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Team abbreviation in the nflverse standard (relocations folded, e.g. 'OAK' -> 'LV', 'SD' -> 'LAC', 'STL' -> 'LA'). `String` */
   team?: string | null;
-  /** `String` */
+  /** Position the player is listed at on the roster (e.g. 'QB', 'WR', 'CB'). `String` */
   position?: string | null;
-  /** `String` */
+  /** Fine-grained depth-chart position label, which may differ from the broader position group. `String` */
   depth_chart_position?: string | null;
-  /** `Int32` */
+  /** Uniform (jersey) number the player wears. `Int32` */
   jersey_number?: number | null;
-  /** `String` */
+  /** Roster status code for the player (e.g. 'ACT' active, 'INA' inactive, 'RES' reserve/injured). `String` */
   status?: string | null;
-  /** `String` */
+  /** Player's full display name. `String` */
   full_name?: string | null;
-  /** `String` */
+  /** Player's first (given) name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's last (family) name. `String` */
   last_name?: string | null;
-  /** `Date` */
+  /** Player's date of birth (YYYY-MM-DD). `Date` */
   birth_date?: Date | null;
-  /** `Int32` */
+  /** Player's height in inches. `Int32` */
   height?: number | null;
-  /** `Int32` */
+  /** Player's listed weight in pounds. `Int32` */
   weight?: number | null;
-  /** `String` */
+  /** College or university the player attended. `String` */
   college?: string | null;
-  /** `String` (an id) */
+  /** NFL GSIS player identifier — the canonical nflverse player key used to join across datasets. `String` (an id) */
   gsis_id?: string | null;
-  /** `String` (an id) */
+  /** ESPN player identifier for cross-system joins. `String` (an id) */
   espn_id?: string | null;
-  /** `String` (an id) */
+  /** Sportradar player identifier for cross-system joins. `String` (an id) */
   sportradar_id?: string | null;
-  /** `String` (an id) */
+  /** Yahoo Sports player identifier for cross-system joins. `String` (an id) */
   yahoo_id?: string | null;
-  /** `String` (an id) */
+  /** RotoWire player identifier for cross-system joins. `String` (an id) */
   rotowire_id?: string | null;
-  /** `String` (an id) */
+  /** Pro Football Focus (PFF) player identifier for cross-system joins. `String` (an id) */
   pff_id?: string | null;
-  /** `String` (an id) */
+  /** Pro Football Reference (PFR) player identifier for cross-system joins. `String` (an id) */
   pfr_id?: string | null;
-  /** `String` (an id) */
+  /** FantasyData player identifier for cross-system joins. `String` (an id) */
   fantasy_data_id?: string | null;
-  /** `String` (an id) */
+  /** Sleeper player identifier for cross-system joins. `String` (an id) */
   sleeper_id?: string | null;
-  /** `Int32` */
+  /** Number of accrued NFL seasons of experience for the player. `Int32` */
   years_exp?: number | null;
-  /** `String` */
+  /** URL of the player's headshot image. `String` */
   headshot_url?: string | null;
-  /** `String` */
+  /** Player's position as classified by NFL Next Gen Stats. `String` */
   ngs_position?: string | null;
-  /** `Int32` */
+  /** Week of the season the roster snapshot applies to (weekly rosters only). `Int32` */
   week?: number | null;
-  /** `String` */
+  /** Type of game the roster snapshot applies to (e.g. 'REG', 'POST'). `String` */
   game_type?: string | null;
-  /** `String` */
+  /** Abbreviated roster status description code from the source feed. `String` */
   status_description_abbr?: string | null;
-  /** `String` */
+  /** Player's preferred football (commonly used) first name. `String` */
   football_name?: string | null;
-  /** `String` (an id) */
+  /** Elias Sports Bureau (ESB) player identifier used for official NFL record-keeping. `String` (an id) */
   esb_id?: string | null;
-  /** `String` (an id) */
+  /** NFL GSIS internal tracking identifier for the player. `String` (an id) */
   gsis_it_id?: string | null;
-  /** `String` (an id) */
+  /** NFL SMART player identifier (GUID) used across modern NFL data feeds. `String` (an id) */
   smart_id?: string | null;
-  /** `Int32` */
+  /** Calendar year the player first entered the NFL. `Int32` */
   entry_year?: number | null;
-  /** `Int32` */
+  /** Calendar year of the player's rookie season. `Int32` */
   rookie_year?: number | null;
-  /** `String` */
+  /** Team abbreviation of the club that drafted the player. `String` */
   draft_club?: string | null;
-  /** `Int32` */
+  /** Overall pick number at which the player was selected in the NFL draft. `Int32` */
   draft_number?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1625,77 +1625,77 @@ export interface LoadNflRostersRow {
 
 /** One row of `sdv.nfl.loadNflWeeklyRosters` (`weekly_rosters`; sdv-py loader schema `load_nfl_weekly_rosters`). */
 export interface LoadNflWeeklyRostersRow {
-  /** `Int32` */
+  /** NFL season (year) the weekly roster snapshot applies to. `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Team abbreviation in the nflverse standard (relocations folded, e.g. 'OAK' -> 'LV', 'SD' -> 'LAC', 'STL' -> 'LA'). `String` */
   team?: string | null;
-  /** `String` */
+  /** Position the player is listed at on the roster (e.g. 'QB', 'WR', 'CB'). `String` */
   position?: string | null;
-  /** `String` */
+  /** Fine-grained depth-chart position label, which may differ from the broader position group. `String` */
   depth_chart_position?: string | null;
-  /** `Int32` */
+  /** Uniform (jersey) number the player wears. `Int32` */
   jersey_number?: number | null;
-  /** `String` */
+  /** Roster status code for the player (e.g. 'ACT' active, 'INA' inactive, 'RES' reserve/injured). `String` */
   status?: string | null;
-  /** `String` */
+  /** Player's full display name. `String` */
   full_name?: string | null;
-  /** `String` */
+  /** Player's first (given) name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's last (family) name. `String` */
   last_name?: string | null;
-  /** `Date` */
+  /** Player's date of birth (YYYY-MM-DD). `Date` */
   birth_date?: Date | null;
-  /** `Int32` */
+  /** Player's height in inches. `Int32` */
   height?: number | null;
-  /** `Int32` */
+  /** Player's listed weight in pounds. `Int32` */
   weight?: number | null;
-  /** `String` */
+  /** College or university the player attended. `String` */
   college?: string | null;
-  /** `String` (an id) */
+  /** NFL GSIS player identifier — the canonical nflverse player key used to join across datasets. `String` (an id) */
   gsis_id?: string | null;
-  /** `String` (an id) */
+  /** ESPN player identifier for cross-system joins. `String` (an id) */
   espn_id?: string | null;
-  /** `String` (an id) */
+  /** Sportradar player identifier for cross-system joins. `String` (an id) */
   sportradar_id?: string | null;
-  /** `String` (an id) */
+  /** Yahoo Sports player identifier for cross-system joins. `String` (an id) */
   yahoo_id?: string | null;
-  /** `String` (an id) */
+  /** RotoWire player identifier for cross-system joins. `String` (an id) */
   rotowire_id?: string | null;
-  /** `String` (an id) */
+  /** Pro Football Focus (PFF) player identifier for cross-system joins. `String` (an id) */
   pff_id?: string | null;
-  /** `String` (an id) */
+  /** Pro Football Reference (PFR) player identifier for cross-system joins. `String` (an id) */
   pfr_id?: string | null;
-  /** `String` (an id) */
+  /** FantasyData player identifier for cross-system joins. `String` (an id) */
   fantasy_data_id?: string | null;
-  /** `String` (an id) */
+  /** Sleeper player identifier for cross-system joins. `String` (an id) */
   sleeper_id?: string | null;
-  /** `Int32` */
+  /** Number of accrued NFL seasons of experience for the player. `Int32` */
   years_exp?: number | null;
-  /** `String` */
+  /** URL of the player's headshot image. `String` */
   headshot_url?: string | null;
-  /** `String` */
+  /** Player's position as classified by NFL Next Gen Stats. `String` */
   ngs_position?: string | null;
-  /** `Int32` */
+  /** Week of the season the weekly roster snapshot applies to. `Int32` */
   week?: number | null;
-  /** `String` */
+  /** Type of game the weekly roster snapshot applies to (e.g. 'REG', 'POST'). `String` */
   game_type?: string | null;
-  /** `String` */
+  /** Abbreviated roster status description code from the source feed. `String` */
   status_description_abbr?: string | null;
-  /** `String` */
+  /** Player's preferred football (commonly used) first name. `String` */
   football_name?: string | null;
-  /** `String` (an id) */
+  /** Elias Sports Bureau (ESB) player identifier used for official NFL record-keeping. `String` (an id) */
   esb_id?: string | null;
-  /** `String` (an id) */
+  /** NFL GSIS internal tracking identifier for the player. `String` (an id) */
   gsis_it_id?: string | null;
-  /** `String` (an id) */
+  /** NFL SMART player identifier (GUID) used across modern NFL data feeds. `String` (an id) */
   smart_id?: string | null;
-  /** `Int32` */
+  /** Calendar year the player first entered the NFL. `Int32` */
   entry_year?: number | null;
-  /** `Int32` */
+  /** Calendar year of the player's rookie season. `Int32` */
   rookie_year?: number | null;
-  /** `String` */
+  /** Team abbreviation of the club that drafted the player. `String` */
   draft_club?: string | null;
-  /** `Int32` */
+  /** Overall pick number at which the player was selected in the NFL draft. `Int32` */
   draft_number?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1703,29 +1703,29 @@ export interface LoadNflWeeklyRostersRow {
 
 /** One row of `sdv.nfl.loadNflDepthCharts` (`depth_charts`; sdv-py loader schema `load_nfl_depth_charts`). */
 export interface LoadNflDepthChartsRow {
-  /** `String` */
+  /** The timestamp (ISO8601-formatted text) indicating when the data record was loaded. Can be used to assign the data set to a specific point in time during the season. `String` */
   dt?: string | null;
-  /** `String` */
+  /** NFL team. Uses official abbreviations as per NFL.com `String` */
   team?: string | null;
-  /** `String` */
+  /** Full name of player `String` */
   player_name?: string | null;
-  /** `String` (an id) */
+  /** ESPN ID - usual format is an integer with ~5 digits `String` (an id) */
   espn_id?: string | null;
-  /** `String` (an id) */
+  /** Game Stats and Info Service ID: the primary ID for play-by-play data. `String` (an id) */
   gsis_id?: string | null;
-  /** `String` (an id) */
+  /** Player position group identifier `String` (an id) */
   pos_grp_id?: string | null;
-  /** `String` */
+  /** Player position group: formation of offense, defense, or special teams `String` */
   pos_grp?: string | null;
-  /** `String` (an id) */
+  /** Player position identifier `String` (an id) */
   pos_id?: string | null;
-  /** `String` */
+  /** Player position name `String` */
   pos_name?: string | null;
-  /** `String` */
+  /** Player position abbreviation `String` */
   pos_abb?: string | null;
-  /** `Int32` */
+  /** A number assigned to each position in a formation `Int32` */
   pos_slot?: number | null;
-  /** `Int32` */
+  /** Player's rank on depth chart grouped by pos_slot `Int32` */
   pos_rank?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1733,37 +1733,37 @@ export interface LoadNflDepthChartsRow {
 
 /** One row of `sdv.nfl.loadNflInjuries` (`injuries`; sdv-py loader schema `load_nfl_injuries`). */
 export interface LoadNflInjuriesRow {
-  /** `Int32` */
+  /** 4 digit number indicating to which season(s) the specified timeframe belongs to. `Int32` */
   season?: number | null;
-  /** `String` */
+  /** REG or POST indicating if the timeframe belongs to regular or post season. `String` */
   season_type?: string | null;
-  /** `String` */
+  /** The most recent game type of that season that a player appeared on the roster. `String` */
   game_type?: string | null;
-  /** `String` */
+  /** NFL team. Uses official abbreviations as per NFL.com `String` */
   team?: string | null;
-  /** `Int32` */
+  /** Season week. `Int32` */
   week?: number | null;
-  /** `String` (an id) */
+  /** Game Stats and Info Service ID: the primary ID for play-by-play data. `String` (an id) */
   gsis_id?: string | null;
-  /** `String` */
+  /** Primary position as reported by NFL.com `String` */
   position?: string | null;
-  /** `String` */
+  /** Full name as per NFL.com `String` */
   full_name?: string | null;
-  /** `String` */
+  /** First name of player `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Last name of player `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Primary injury listed on official injury report `String` */
   report_primary_injury?: string | null;
-  /** `String` */
+  /** Secondary injury listed on official injury report `String` */
   report_secondary_injury?: string | null;
-  /** `String` */
+  /** Player's status for game on official injury report `String` */
   report_status?: string | null;
-  /** `String` */
+  /** Primary injury listed on practice injury report `String` */
   practice_primary_injury?: string | null;
-  /** `String` */
+  /** Secondary injury listed on practice injury report `String` */
   practice_secondary_injury?: string | null;
-  /** `String` */
+  /** Player's participation in practice `String` */
   practice_status?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1771,37 +1771,37 @@ export interface LoadNflInjuriesRow {
 
 /** One row of `sdv.nfl.loadNflSnapCounts` (`snap_counts`; sdv-py loader schema `load_nfl_snap_counts`). */
 export interface LoadNflSnapCountsRow {
-  /** `String` (an id) */
+  /** Ten digit identifier for NFL game. `String` (an id) */
   game_id?: string | null;
-  /** `String` (an id) */
+  /** PFR game ID `String` (an id) */
   pfr_game_id?: string | null;
-  /** `Int32` */
+  /** 4 digit number indicating to which season(s) the specified timeframe belongs to. `Int32` */
   season?: number | null;
-  /** `String` */
+  /** The most recent game type of that season that a player appeared on the roster. `String` */
   game_type?: string | null;
-  /** `Int32` */
+  /** Season week. `Int32` */
   week?: number | null;
-  /** `String` */
+  /** Player name `String` */
   player?: string | null;
-  /** `String` (an id) */
+  /** ID from Pro Football Reference `String` (an id) */
   pfr_player_id?: string | null;
-  /** `String` */
+  /** Primary position as reported by NFL.com `String` */
   position?: string | null;
-  /** `String` */
+  /** NFL team. Uses official abbreviations as per NFL.com `String` */
   team?: string | null;
-  /** `String` */
+  /** Opposing team of player `String` */
   opponent?: string | null;
-  /** `Float64` */
+  /** Number of snaps on offense `Float64` */
   offense_snaps?: number | null;
-  /** `Float64` */
+  /** Percent of offensive snaps taken `Float64` */
   offense_pct?: number | null;
-  /** `Float64` */
+  /** Number of snaps on defense `Float64` */
   defense_snaps?: number | null;
-  /** `Float64` */
+  /** Percent of defensive snaps taken `Float64` */
   defense_pct?: number | null;
-  /** `Float64` */
+  /** Number of snaps on special teams `Float64` */
   st_snaps?: number | null;
-  /** `Float64` */
+  /** Percent of special teams snaps taken `Float64` */
   st_pct?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1809,57 +1809,57 @@ export interface LoadNflSnapCountsRow {
 
 /** One row of `sdv.nfl.loadNflPbpParticipation` (`pbp_participation`; sdv-py loader schema `load_nfl_pbp_participation`). */
 export interface LoadNflPbpParticipationRow {
-  /** `String` (an id) */
+  /** nflverse identifier for games. Format is season, week, away_team, home_team `String` (an id) */
   nflverse_game_id?: string | null;
-  /** `String` (an id) */
+  /** Legacy NFL game ID. `String` (an id) */
   old_game_id?: string | null;
-  /** `Float64` (an id) */
+  /** Numeric play id that when used with game_id and drive provides the unique identifier for a single play. `Float64` (an id) */
   play_id?: string | number | null;
-  /** `String` */
+  /** String abbreviation for the team with possession. `String` */
   possession_team?: string | null;
-  /** `String` */
+  /** Formation the offense lines up in to snap the ball. `String` */
   offense_formation?: string | null;
-  /** `String` */
+  /** The positions of the offensive personnel lined up on the field for a play. `String` */
   offense_personnel?: string | null;
-  /** `Int32` */
+  /** Number of defensive players lined up in the box at the snap. `Int32` */
   defenders_in_box?: number | null;
-  /** `String` */
+  /** The positions of the defensive personnel lined up on the field for a play. `String` */
   defense_personnel?: string | null;
-  /** `Int32` */
+  /** Number of defensive player who rushed the passer. `Int32` */
   number_of_pass_rushers?: number | null;
-  /** `String` */
+  /** A list of every player on the field for the play, by gsis_id `String` */
   players_on_play?: string | null;
-  /** `String` */
+  /** A list of every offensive player on the field for the play, by gsis_id `String` */
   offense_players?: string | null;
-  /** `String` */
+  /** A list of every defensive player on the field for the play, by gsis_id `String` */
   defense_players?: string | null;
-  /** `Int32` */
+  /** Number of offensive players on the field for the play `Int32` */
   n_offense?: number | null;
-  /** `Int32` */
+  /** Number of defensive players on the field for the play `Int32` */
   n_defense?: number | null;
-  /** `Float64` */
+  /** Legacy column. For 2023 and prior years, reflects the distance (in yards) that the ball traveled in the air on a given passing play as tracked by NGS. Is NA for 2024 on--we advise instead using the air_yards column from nflreadr::load_pbp() moving forward. `Float64` */
   ngs_air_yards?: number | null;
-  /** `Float64` */
+  /** Duration (in seconds) between the time of the ball being snapped and the time of release of a pass attempt `Float64` */
   time_to_throw?: number | null;
-  /** `Boolean` */
+  /** A boolean indicating whether or not the QB was pressured on a play `Boolean` */
   was_pressure?: boolean | null;
-  /** `String` */
+  /** A string indicating the route the primary receiver on a play took. Has the following possible values: "CORNER", "DEEP OUT", "GO", "HITCH/CURL", "IN/DIG", "POST", "QUICK OUT", "SCREEN", "SHALLOW CROSS/DRAG", "SLANT", "SWING", "TEXAS/ANGLE", "WHEEL". `String` */
   route?: string | null;
-  /** `String` */
+  /** A string indicating whether the defense was in man or zone coverage on a play `String` */
   defense_man_zone_type?: string | null;
-  /** `String` */
+  /** A string indicating what type of cover the defense was in on a play. Has one of the following values: "COVER_0", "COVER_1", "COVER_2", "2_MAN", "COVER_3", "COVER_4", "COVER_6", "COVER_9", "COMBO", "BLOWN". `String` */
   defense_coverage_type?: string | null;
-  /** `String` */
+  /** A string listing all of the names of offensive players in the order of their gsis_ids in offense_players. `String` */
   offense_names?: string | null;
-  /** `String` */
+  /** A string listing all of the names of defensive players in the order of their gsis_ids in defense_players. `String` */
   defense_names?: string | null;
-  /** `String` */
+  /** A string listing all of the positions of offensive players in the order of their gsis_ids in offense_players. `String` */
   offense_positions?: string | null;
-  /** `String` */
+  /** A string listing all of the positions of defensive players in the order of their gsis_ids in defense_players. `String` */
   defense_positions?: string | null;
-  /** `String` */
+  /** A string listing all of the numbers of offensive players in the order of their gsis_ids in offense_players. `String` */
   offense_numbers?: string | null;
-  /** `String` */
+  /** A string listing all of the numbers of defensive players in the order of their gsis_ids in defense_players. `String` */
   defense_numbers?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1867,63 +1867,63 @@ export interface LoadNflPbpParticipationRow {
 
 /** One row of `sdv.nfl.loadNflFtnCharting` (`ftn_charting`; sdv-py loader schema `load_nfl_ftn_charting`). */
 export interface LoadNflFtnChartingRow {
-  /** `Int32` (an id) */
+  /** FTN game ID `Int32` (an id) */
   ftn_game_id?: string | null;
-  /** `String` (an id) */
+  /** nflverse identifier for games. Format is season, week, away_team, home_team `String` (an id) */
   nflverse_game_id?: string | null;
-  /** `Int32` */
+  /** 4 digit number indicating to which season(s) the specified timeframe belongs to. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Season week. `Int32` */
   week?: number | null;
-  /** `Int32` (an id) */
+  /** FTN play ID `Int32` (an id) */
   ftn_play_id?: string | null;
-  /** `Int32` (an id) */
+  /** Play ID used by nflverse, corresponds to GSIS play ID `Int32` (an id) */
   nflverse_play_id?: string | null;
-  /** `String` */
+  /** hash the ball was place(L = left, M = middle, R = right) `String` */
   starting_hash?: string | null;
-  /** `String` */
+  /** pre-snap position of quarterback(U = under center, S = shotgun, P = pistol) `String` */
   qb_location?: string | null;
-  /** `Int32` */
+  /** number of players in the backfield at the snap `Int32` */
   n_offense_backfield?: number | null;
-  /** `Int32` */
+  /** Number of defenders aligned in the box at the time of the snap, as charted by FTN Data. `Int32` */
   n_defense_box?: number | null;
-  /** `Boolean` */
+  /** no huddle `Boolean` */
   is_no_huddle?: boolean | null;
-  /** `Boolean` */
+  /** motion occurred on the play before or at the time of the snap `Boolean` */
   is_motion?: boolean | null;
-  /** `Boolean` */
+  /** play-action pass `Boolean` */
   is_play_action?: boolean | null;
-  /** `Boolean` */
+  /** screen pass `Boolean` */
   is_screen_pass?: boolean | null;
-  /** `Boolean` */
+  /** play is considered run-pass option `Boolean` */
   is_rpo?: boolean | null;
-  /** `Boolean` */
+  /** trick play `Boolean` */
   is_trick_play?: boolean | null;
-  /** `Boolean` */
+  /** quarterback moved out of pocket `Boolean` */
   is_qb_out_of_pocket?: boolean | null;
-  /** `Boolean` */
+  /** interception worthy pass `Boolean` */
   is_interception_worthy?: boolean | null;
-  /** `Boolean` */
+  /** quarterback thrown away `Boolean` */
   is_throw_away?: boolean | null;
-  /** `String` */
+  /** read the ball was thrown `String` */
   read_thrown?: string | null;
-  /** `Boolean` */
+  /** catchable ball(defined by throws that are generally on target that are not defended away) `Boolean` */
   is_catchable_ball?: boolean | null;
-  /** `Boolean` */
+  /** contested ball(defined by whether or not the receiver is facing physical contact at the time of the catch) `Boolean` */
   is_contested_ball?: boolean | null;
-  /** `Boolean` */
+  /** created reception(defined by a reception that only occurs due to an exceptional play by the receiver) `Boolean` */
   is_created_reception?: boolean | null;
-  /** `Boolean` */
+  /** receiver drop `Boolean` */
   is_drop?: boolean | null;
-  /** `Boolean` */
+  /** quarterback sneak `Boolean` */
   is_qb_sneak?: boolean | null;
-  /** `Int32` */
+  /** number of blitzers `Int32` */
   n_blitzers?: number | null;
-  /** `Int32` */
+  /** number of pass rushers `Int32` */
   n_pass_rushers?: number | null;
-  /** `Boolean` */
+  /** sack that is the fault of the quarterback `Boolean` */
   is_qb_fault_sack?: boolean | null;
-  /** `Datetime(time_unit='us', time_zone='UTC')` */
+  /** Date the data was retrieved from the FTN Data API by nflverse jobs `Datetime(time_unit='us', time_zone='UTC')` */
   date_pulled?: Date | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1931,95 +1931,95 @@ export interface LoadNflFtnChartingRow {
 
 /** One row of `sdv.nfl.loadNflUsagePlayers` (`espn_nfl_usage_players`; sdv-py loader schema `load_nfl_usage_players`). */
 export interface LoadNflUsagePlayersRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the possession team (offense); joins to the ESPN teams and schedule datasets on team_id. `Int64` (an id) */
   pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the possession team (offense), as carried on the released play-by-play (e.g. "Kansas City Chiefs", "Georgia Bulldogs"). `String` */
   pos_team?: string | null;
-  /** `String` (an id) */
+  /** ESPN athlete id of the player, as a string; null when the play-by-play named the player without an id (the row is then keyed on the name). `String` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player display name, as carried on the play-by-play participants; the season row carries the most frequent non-null name over his games, so a renamed player with a player_id keeps one row per team (a row with no player_id is keyed on its name, so a rename there splits it). `String` */
   player_name?: string | null;
-  /** `String` */
+  /** Position group of the player (QB, RB, WR, TE, OL, DL, LB, DB, K, P, ...) resolved from the play participants' ESPN position ids; null when no participant row carried a position for the player; the season row carries his most frequent non-null group, so a game with no group does not split his season. `String` */
   position_group?: string | null;
-  /** `Int64` */
+  /** Rushing attempts on which the player was the rusher, on standing scrimmage plays (plays nullified by penalty are excluded). `Int64` */
   rushes?: number | bigint | null;
-  /** `Int64` */
+  /** Pass targets on which the player was the receiver, complete or not, on standing scrimmage plays. `Int64` */
   targets?: number | bigint | null;
-  /** `Int64` */
+  /** Targets the player caught (completed passes). `Int64` */
   receptions?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes plus receptions. `Int64` */
   touches?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes plus targets -- the denominator of the per-opportunity rates. `Int64` */
   opportunities?: number | bigint | null;
-  /** `Float64` */
+  /** Yards gained on the player's rushes (yds_rushed, falling back to the play's statYardage). `Float64` */
   rush_yards?: number | null;
-  /** `Float64` */
+  /** Yards gained on the player's receptions (yds_receiving, falling back to statYardage); an incomplete target adds 0. `Float64` */
   receiving_yards?: number | null;
-  /** `Int64` */
+  /** Rushes and targets of the player that created a first down (first_down_created). `Int64` */
   first_downs?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes and targets of the player that scored an offensive touchdown. `Int64` */
   touchdowns?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes and targets of the player that produced a first down or an offensive touchdown (a play counts once even when both flags are set). `Int64` */
   fd_or_td?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes and targets of the player flagged EPA_explosive on the play-by-play. `Int64` */
   explosive_plays?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes and targets of the player flagged EPA_success (positive EPA) on the play-by-play. `Int64` */
   successful_plays?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the player's rushes and targets. `Float64` */
   epa?: number | null;
-  /** `Int64` */
+  /** Rushes by the player snapped in the red zone (rz_play: 20 or fewer yards to the end zone at the snap). `Int64` */
   rz_rushes?: number | bigint | null;
-  /** `Int64` */
+  /** Targets of the player snapped in the red zone. `Int64` */
   rz_targets?: number | bigint | null;
-  /** `Int64` */
+  /** Touches (rushes plus receptions) by the player snapped in the red zone. `Int64` */
   rz_touches?: number | bigint | null;
-  /** `Int64` */
+  /** Red-zone rushes and targets of the player that scored an offensive touchdown. `Int64` */
   rz_touchdowns?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes by the player snapped in scoring-opportunity territory (scoring_opp: 40 or fewer yards to the end zone at the snap). `Int64` */
   so_rushes?: number | bigint | null;
-  /** `Int64` */
+  /** Targets of the player snapped in scoring-opportunity territory. `Int64` */
   so_targets?: number | bigint | null;
-  /** `Int64` */
+  /** Touches (rushes plus receptions) by the player snapped in scoring-opportunity territory. `Int64` */
   so_touches?: number | bigint | null;
-  /** `Int64` */
+  /** Scoring-opportunity rushes and targets of the player that scored an offensive touchdown. `Int64` */
   so_touchdowns?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes and targets of the player that came on third down. `Int64` */
   third_down_opportunities?: number | bigint | null;
-  /** `Int64` */
+  /** Third-down rushes and targets of the player that converted (a first down or an offensive touchdown). `Int64` */
   third_down_conversions?: number | bigint | null;
-  /** `Float64` */
+  /** Expected third-down conversions for the player: the league's bundled third-down yards-to-go conversion curve summed over the third-down opportunities; null when no curve was available. `Float64` */
   third_down_expected?: number | null;
-  /** `Int64` */
+  /** The team's targets over the same games, counting every standing scrimmage target whether or not a receiver was attributed -- the denominator of target_share. `Int64` */
   team_targets?: number | bigint | null;
-  /** `Int64` */
+  /** The team's first downs created on standing scrimmage plays over the same games -- the denominator of first_down_share. `Int64` */
   team_first_downs?: number | bigint | null;
-  /** `Int64` */
+  /** The team's rushes plus completions over the same games -- the denominator of touch_share. `Int64` */
   team_touches?: number | bigint | null;
-  /** `UInt32` */
+  /** Per-game rows summed into this season row -- the games in which this key appeared in the section -- so it counts games with activity, not games played. `UInt32` */
   games?: number | null;
-  /** `Float64` */
+  /** fd_or_td / opportunities: the share of opportunities that produced a first down or an offensive touchdown; null with no opportunities. `Float64` */
   fd_td_rate?: number | null;
-  /** `Float64` */
+  /** explosive_plays / opportunities; null with no opportunities. `Float64` */
   explosive_rate?: number | null;
-  /** `Float64` */
+  /** successful_plays / opportunities; null with no opportunities. `Float64` */
   success_rate?: number | null;
-  /** `Float64` */
+  /** epa / opportunities; null with no opportunities. `Float64` */
   epa_per_opportunity?: number | null;
-  /** `Float64` */
+  /** rz_touchdowns / rz_touches; null with no red-zone touches. `Float64` */
   rz_touchdown_rate?: number | null;
-  /** `Float64` */
+  /** so_touchdowns / so_touches; null with no scoring-opportunity touches. `Float64` */
   so_touchdown_rate?: number | null;
-  /** `Float64` */
+  /** third_down_conversions / third_down_opportunities; null with no third downs. `Float64` */
   third_down_rate?: number | null;
-  /** `Float64` */
+  /** third_down_conversions minus third_down_expected: conversions above the distance-adjusted expectation; null when no curve was available. `Float64` */
   third_down_over_expected?: number | null;
-  /** `Float64` */
+  /** targets / team_targets: the player's share of the team's targets over the same games. `Float64` */
   target_share?: number | null;
-  /** `Float64` */
+  /** first_downs / team_first_downs: the player's share of the team's first downs. `Float64` */
   first_down_share?: number | null;
-  /** `Float64` */
+  /** touches / team_touches: the player's share of the team's touches. `Float64` */
   touch_share?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2027,91 +2027,91 @@ export interface LoadNflUsagePlayersRow {
 
 /** One row of `sdv.nfl.loadNflUsagePositionGroups` (`espn_nfl_usage_position_groups`; sdv-py loader schema `load_nfl_usage_position_groups`). */
 export interface LoadNflUsagePositionGroupsRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the possession team (offense); joins to the ESPN teams and schedule datasets on team_id. `Int64` (an id) */
   pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the possession team (offense), as carried on the released play-by-play (e.g. "Kansas City Chiefs", "Georgia Bulldogs"). `String` */
   pos_team?: string | null;
-  /** `String` */
+  /** Position group of the player (QB, RB, WR, TE, OL, DL, LB, DB, K, P, ...) resolved from the play participants' ESPN position ids; null when no participant row carried a position for the player. `String` */
   position_group?: string | null;
-  /** `Int64` */
+  /** Rushing attempts on which the position group was the rusher, on standing scrimmage plays (plays nullified by penalty are excluded). `Int64` */
   rushes?: number | bigint | null;
-  /** `Int64` */
+  /** Pass targets on which the position group was the receiver, complete or not, on standing scrimmage plays. `Int64` */
   targets?: number | bigint | null;
-  /** `Int64` */
+  /** Targets the position group caught (completed passes). `Int64` */
   receptions?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes plus receptions. `Int64` */
   touches?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes plus targets -- the denominator of the per-opportunity rates. `Int64` */
   opportunities?: number | bigint | null;
-  /** `Float64` */
+  /** Yards gained on the position group's rushes (yds_rushed, falling back to the play's statYardage). `Float64` */
   rush_yards?: number | null;
-  /** `Float64` */
+  /** Yards gained on the position group's receptions (yds_receiving, falling back to statYardage); an incomplete target adds 0. `Float64` */
   receiving_yards?: number | null;
-  /** `Int64` */
+  /** Rushes and targets of the position group that created a first down (first_down_created). `Int64` */
   first_downs?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes and targets of the position group that scored an offensive touchdown. `Int64` */
   touchdowns?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes and targets of the position group that produced a first down or an offensive touchdown (a play counts once even when both flags are set). `Int64` */
   fd_or_td?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes and targets of the position group flagged EPA_explosive on the play-by-play. `Int64` */
   explosive_plays?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes and targets of the position group flagged EPA_success (positive EPA) on the play-by-play. `Int64` */
   successful_plays?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the position group's rushes and targets. `Float64` */
   epa?: number | null;
-  /** `Int64` */
+  /** Rushes by the position group snapped in the red zone (rz_play: 20 or fewer yards to the end zone at the snap). `Int64` */
   rz_rushes?: number | bigint | null;
-  /** `Int64` */
+  /** Targets of the position group snapped in the red zone. `Int64` */
   rz_targets?: number | bigint | null;
-  /** `Int64` */
+  /** Touches (rushes plus receptions) by the position group snapped in the red zone. `Int64` */
   rz_touches?: number | bigint | null;
-  /** `Int64` */
+  /** Red-zone rushes and targets of the position group that scored an offensive touchdown. `Int64` */
   rz_touchdowns?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes by the position group snapped in scoring-opportunity territory (scoring_opp: 40 or fewer yards to the end zone at the snap). `Int64` */
   so_rushes?: number | bigint | null;
-  /** `Int64` */
+  /** Targets of the position group snapped in scoring-opportunity territory. `Int64` */
   so_targets?: number | bigint | null;
-  /** `Int64` */
+  /** Touches (rushes plus receptions) by the position group snapped in scoring-opportunity territory. `Int64` */
   so_touches?: number | bigint | null;
-  /** `Int64` */
+  /** Scoring-opportunity rushes and targets of the position group that scored an offensive touchdown. `Int64` */
   so_touchdowns?: number | bigint | null;
-  /** `Int64` */
+  /** Rushes and targets of the position group that came on third down. `Int64` */
   third_down_opportunities?: number | bigint | null;
-  /** `Int64` */
+  /** Third-down rushes and targets of the position group that converted (a first down or an offensive touchdown). `Int64` */
   third_down_conversions?: number | bigint | null;
-  /** `Float64` */
+  /** Expected third-down conversions for the position group: the league's bundled third-down yards-to-go conversion curve summed over the third-down opportunities; null when no curve was available. `Float64` */
   third_down_expected?: number | null;
-  /** `Int64` */
+  /** The team's targets over the same games, counting every standing scrimmage target whether or not a receiver was attributed -- the denominator of target_share. `Int64` */
   team_targets?: number | bigint | null;
-  /** `Int64` */
+  /** The team's first downs created on standing scrimmage plays over the same games -- the denominator of first_down_share. `Int64` */
   team_first_downs?: number | bigint | null;
-  /** `Int64` */
+  /** The team's rushes plus completions over the same games -- the denominator of touch_share. `Int64` */
   team_touches?: number | bigint | null;
-  /** `UInt32` */
+  /** Per-game rows summed into this season row -- the games in which this key appeared in the section -- so it counts games with activity, not games played. `UInt32` */
   games?: number | null;
-  /** `Float64` */
+  /** fd_or_td / opportunities: the share of opportunities that produced a first down or an offensive touchdown; null with no opportunities. `Float64` */
   fd_td_rate?: number | null;
-  /** `Float64` */
+  /** explosive_plays / opportunities; null with no opportunities. `Float64` */
   explosive_rate?: number | null;
-  /** `Float64` */
+  /** successful_plays / opportunities; null with no opportunities. `Float64` */
   success_rate?: number | null;
-  /** `Float64` */
+  /** epa / opportunities; null with no opportunities. `Float64` */
   epa_per_opportunity?: number | null;
-  /** `Float64` */
+  /** rz_touchdowns / rz_touches; null with no red-zone touches. `Float64` */
   rz_touchdown_rate?: number | null;
-  /** `Float64` */
+  /** so_touchdowns / so_touches; null with no scoring-opportunity touches. `Float64` */
   so_touchdown_rate?: number | null;
-  /** `Float64` */
+  /** third_down_conversions / third_down_opportunities; null with no third downs. `Float64` */
   third_down_rate?: number | null;
-  /** `Float64` */
+  /** third_down_conversions minus third_down_expected: conversions above the distance-adjusted expectation; null when no curve was available. `Float64` */
   third_down_over_expected?: number | null;
-  /** `Float64` */
+  /** targets / team_targets: the position group's share of the team's targets over the same games. `Float64` */
   target_share?: number | null;
-  /** `Float64` */
+  /** first_downs / team_first_downs: the position group's share of the team's first downs. `Float64` */
   first_down_share?: number | null;
-  /** `Float64` */
+  /** touches / team_touches: the position group's share of the team's touches. `Float64` */
   touch_share?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2119,33 +2119,33 @@ export interface LoadNflUsagePositionGroupsRow {
 
 /** One row of `sdv.nfl.loadNflUsageTackles` (`espn_nfl_usage_tackles`; sdv-py loader schema `load_nfl_usage_tackles`). */
 export interface LoadNflUsageTacklesRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the play's defense (the NFL build passes no game roster, so a tackle is not moved to the tackler's own team); joins to the ESPN teams dataset on team_id. `Int64` (an id) */
   def_pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the play's defense. The NFL build passes no game roster, so every tackle stays with the play's defense, including kickoff / punt coverage tackles and tackles after a turnover. `String` */
   def_pos_team?: string | null;
-  /** `String` (an id) */
+  /** ESPN athlete id of the player, as a string; null when the play-by-play named the player without an id (the row is then keyed on the name). `String` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player display name, as carried on the play-by-play participants; the season row carries the most frequent non-null name over his games, so a renamed player with a player_id keeps one row per team (a row with no player_id is keyed on its name, so a rename there splits it). `String` */
   player_name?: string | null;
-  /** `String` */
+  /** Position group of the player (QB, RB, WR, TE, OL, DL, LB, DB, K, P, ...) resolved from the play participants' ESPN position ids; null when no participant row carried a position for the player; the season row carries his most frequent non-null group, so a game with no group does not split his season. `String` */
   position_group?: string | null;
-  /** `Int64` */
+  /** Solo tackles credited to the player in the play participants (tackler_player_ids). `Int64` */
   tackles?: number | bigint | null;
-  /** `Int64` */
+  /** Assisted tackles credited to the player in the play participants (assisted_by_player_ids). `Int64` */
   assists?: number | bigint | null;
-  /** `Float64` */
+  /** tackle_points (tackles plus 0.5 times assists) earned on the defense's own standing scrimmage snaps only -- kickoff, punt and field-goal coverage, plays a penalty wiped out and tackles after a turnover are excluded; tackle_share's numerator. `Float64` */
   scrimmage_tackle_points?: number | null;
-  /** `Float64` */
+  /** tackles plus 0.5 times assists. `Float64` */
   tackle_points?: number | null;
-  /** `UInt32` */
+  /** Per-game rows summed into this season row -- the games in which this key appeared in the section -- so it counts games with activity, not games played. `UInt32` */
   games?: number | null;
-  /** `Float64` */
+  /** tackle_points summed over every player credited to the defense for the season, special-teams tackles included; tackle_share's denominator is the scrimmage-only total. `Float64` */
   team_tackle_points?: number | null;
-  /** `Float64` */
+  /** scrimmage_tackle_points summed over every player credited to the defense for the season; tackle_share's denominator. `Float64` */
   team_scrimmage_tackle_points?: number | null;
-  /** `Float64` */
+  /** scrimmage_tackle_points / team_scrimmage_tackle_points: the player's share of the defense's tackle points on its own standing scrimmage snaps -- kickoff, punt and field-goal coverage and plays a penalty wiped out are left out (the NFL build passes no game roster, so a tackle after a turnover stays with the play's defense and is shared); null when the defense has none. `Float64` */
   tackle_share?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2153,29 +2153,29 @@ export interface LoadNflUsageTacklesRow {
 
 /** One row of `sdv.nfl.loadNflUsagePositionGroupTackles` (`espn_nfl_usage_position_group_tackles`; sdv-py loader schema `load_nfl_usage_position_group_tackles`). */
 export interface LoadNflUsagePositionGroupTacklesRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the play's defense (the NFL build passes no game roster, so a tackle is not moved to the tackler's own team); joins to the ESPN teams dataset on team_id. `Int64` (an id) */
   def_pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the play's defense. The NFL build passes no game roster, so every tackle stays with the play's defense, including kickoff / punt coverage tackles and tackles after a turnover. `String` */
   def_pos_team?: string | null;
-  /** `String` */
+  /** Position group of the player (QB, RB, WR, TE, OL, DL, LB, DB, K, P, ...) resolved from the play participants' ESPN position ids; null when no participant row carried a position for the player. `String` */
   position_group?: string | null;
-  /** `Int64` */
+  /** Solo tackles credited to the position group in the play participants (tackler_player_ids). `Int64` */
   tackles?: number | bigint | null;
-  /** `Int64` */
+  /** Assisted tackles credited to the position group in the play participants (assisted_by_player_ids). `Int64` */
   assists?: number | bigint | null;
-  /** `Float64` */
+  /** tackle_points (tackles plus 0.5 times assists) earned by the position group on the defense's own standing scrimmage snaps only -- kickoff, punt and field-goal coverage, plays a penalty wiped out and tackles after a turnover are excluded; tackle_share's numerator. `Float64` */
   scrimmage_tackle_points?: number | null;
-  /** `Float64` */
+  /** tackles plus 0.5 times assists. `Float64` */
   tackle_points?: number | null;
-  /** `UInt32` */
+  /** Per-game rows summed into this season row -- the games in which this key appeared in the section -- so it counts games with activity, not games played. `UInt32` */
   games?: number | null;
-  /** `Float64` */
+  /** tackle_points summed over every player credited to the defense for the season, special-teams tackles included; tackle_share's denominator is the scrimmage-only total. `Float64` */
   team_tackle_points?: number | null;
-  /** `Float64` */
+  /** scrimmage_tackle_points summed over every position group credited to the defense for the season; tackle_share's denominator. `Float64` */
   team_scrimmage_tackle_points?: number | null;
-  /** `Float64` */
+  /** scrimmage_tackle_points / team_scrimmage_tackle_points: the position group's share of the defense's tackle points on its own standing scrimmage snaps -- kickoff, punt and field-goal coverage and plays a penalty wiped out are left out (the NFL build passes no game roster, so a tackle after a turnover stays with the play's defense and is shared); null when the defense has none. `Float64` */
   tackle_share?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2183,95 +2183,95 @@ export interface LoadNflUsagePositionGroupTacklesRow {
 
 /** One row of `sdv.nfl.loadNflUsageTeams` (`espn_nfl_usage_teams`; sdv-py loader schema `load_nfl_usage_teams`). */
 export interface LoadNflUsageTeamsRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the possession team (offense); joins to the ESPN teams and schedule datasets on team_id. `Int64` (an id) */
   pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the possession team (offense), as carried on the released play-by-play (e.g. "Kansas City Chiefs", "Georgia Bulldogs"). `String` */
   pos_team?: string | null;
-  /** `Int64` */
+  /** Standing scrimmage plays the offense ran (plays nullified by penalty are excluded). `Int64` */
   plays?: number | bigint | null;
-  /** `Int64` */
+  /** Rushing plays among the standing scrimmage plays. `Int64` */
   rushes?: number | bigint | null;
-  /** `Int64` */
+  /** Pass plays with a targeted receiver (the target flag). `Int64` */
   targets?: number | bigint | null;
-  /** `Int64` */
+  /** Completed passes among the standing scrimmage plays. `Int64` */
   completions?: number | bigint | null;
-  /** `Int64` */
+  /** Scrimmage plays that created a first down (first_down_created). `Int64` */
   first_downs?: number | bigint | null;
-  /** `Int64` */
+  /** Scrimmage plays that scored an offensive touchdown. `Int64` */
   touchdowns?: number | bigint | null;
-  /** `Int64` */
+  /** Scrimmage plays flagged EPA_explosive on the play-by-play. `Int64` */
   explosive_plays?: number | bigint | null;
-  /** `Int64` */
+  /** Scrimmage plays flagged EPA_success (positive EPA) on the play-by-play. `Int64` */
   successful_plays?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the standing scrimmage plays. `Float64` */
   epa?: number | null;
-  /** `Int64` */
+  /** Third-down scrimmage plays with a known distance. `Int64` */
   third_down_opportunities?: number | bigint | null;
-  /** `Int64` */
+  /** Third-down plays that produced a first down or an offensive touchdown. `Int64` */
   third_down_conversions?: number | bigint | null;
-  /** `Float64` */
+  /** Expected third-down conversions: the league's bundled third-down yards-to-go conversion curve summed over the third-down plays; null when no curve was available. `Float64` */
   third_down_expected?: number | null;
-  /** `Int64` */
+  /** Scrimmage plays snapped in the red zone (rz_play: 20 or fewer yards to the end zone at the snap). `Int64` */
   rz_plays?: number | bigint | null;
-  /** `Int64` */
+  /** Red-zone plays flagged EPA_success. `Int64` */
   rz_successes?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the red-zone plays. `Float64` */
   rz_epa?: number | null;
-  /** `Int64` */
+  /** Red-zone plays that scored an offensive touchdown. `Int64` */
   rz_touchdowns?: number | bigint | null;
-  /** `Int64` */
+  /** Red-zone pass plays with a targeted receiver. `Int64` */
   rz_targets?: number | bigint | null;
-  /** `Int64` */
+  /** Red-zone rushing plays. `Int64` */
   rz_rushes?: number | bigint | null;
-  /** `Int64` */
+  /** Drives with at least one red-zone play. `Int64` */
   rz_trips?: number | bigint | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3, from drive.result) summed over the drives that reached the red zone. `Float64` */
   rz_points?: number | null;
-  /** `Int64` */
+  /** Scrimmage plays snapped in scoring-opportunity territory (scoring_opp: 40 or fewer yards to the end zone at the snap). `Int64` */
   so_plays?: number | bigint | null;
-  /** `Int64` */
+  /** Scoring-opportunity plays flagged EPA_success. `Int64` */
   so_successes?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the scoring-opportunity plays. `Float64` */
   so_epa?: number | null;
-  /** `Int64` */
+  /** Scoring-opportunity plays that scored an offensive touchdown. `Int64` */
   so_touchdowns?: number | bigint | null;
-  /** `Int64` */
+  /** Scoring-opportunity pass plays with a targeted receiver. `Int64` */
   so_targets?: number | bigint | null;
-  /** `Int64` */
+  /** Scoring-opportunity rushing plays. `Int64` */
   so_rushes?: number | bigint | null;
-  /** `Int64` */
+  /** Drives with at least one play snapped in scoring-opportunity territory (the opponent's 40). `Int64` */
   so_trips?: number | bigint | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3, from drive.result) summed over the drives that reached the opponent's 40. `Float64` */
   so_points?: number | null;
-  /** `UInt32` */
+  /** Per-game rows summed into this season row -- the games in which this key appeared in the section -- so it counts games with activity, not games played. `UInt32` */
   games?: number | null;
-  /** `Float64` */
+  /** successful_plays / plays; null with no plays. `Float64` */
   success_rate?: number | null;
-  /** `Float64` */
+  /** explosive_plays / plays; null with no plays. `Float64` */
   explosive_rate?: number | null;
-  /** `Float64` */
+  /** epa / plays; null with no plays. `Float64` */
   epa_per_play?: number | null;
-  /** `Float64` */
+  /** third_down_conversions / third_down_opportunities; null with no third downs. `Float64` */
   third_down_rate?: number | null;
-  /** `Float64` */
+  /** third_down_conversions minus third_down_expected: conversions above the distance-adjusted expectation; null when no curve was available. `Float64` */
   third_down_over_expected?: number | null;
-  /** `Float64` */
+  /** rz_touchdowns / rz_trips: touchdowns per red-zone trip; null with no trips. `Float64` */
   rz_touchdown_rate?: number | null;
-  /** `Float64` */
+  /** rz_points / rz_trips; null with no trips. `Float64` */
   rz_points_per_trip?: number | null;
-  /** `Float64` */
+  /** rz_successes / rz_plays; null with no red-zone plays. `Float64` */
   rz_success_rate?: number | null;
-  /** `Float64` */
+  /** rz_epa / rz_plays; null with no red-zone plays. `Float64` */
   rz_epa_per_play?: number | null;
-  /** `Float64` */
+  /** so_touchdowns / so_trips: touchdowns per scoring-opportunity trip; null with no trips. `Float64` */
   so_touchdown_rate?: number | null;
-  /** `Float64` */
+  /** so_points / so_trips; null with no trips. `Float64` */
   so_points_per_trip?: number | null;
-  /** `Float64` */
+  /** so_successes / so_plays; null with no scoring-opportunity plays. `Float64` */
   so_success_rate?: number | null;
-  /** `Float64` */
+  /** so_epa / so_plays; null with no scoring-opportunity plays. `Float64` */
   so_epa_per_play?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2279,43 +2279,43 @@ export interface LoadNflUsageTeamsRow {
 
 /** One row of `sdv.nfl.loadNflUsageDriveScripting` (`espn_nfl_usage_drive_scripting`; sdv-py loader schema `load_nfl_usage_drive_scripting`). */
 export interface LoadNflUsageDriveScriptingRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the possession team (offense); joins to the ESPN teams and schedule datasets on team_id. `Int64` (an id) */
   pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the possession team (offense), as carried on the released play-by-play (e.g. "Kansas City Chiefs", "Georgia Bulldogs"). `String` */
   pos_team?: string | null;
-  /** `String` */
+  /** "scripted" for the offense's first two drives of each half, "non_scripted" for every other drive. `String` */
   script?: string | null;
-  /** `Int64` */
+  /** Drives of this script type (distinct drive.id values with at least one standing scrimmage play). `Int64` */
   drives?: number | bigint | null;
-  /** `Int64` */
+  /** Standing scrimmage plays on those drives. `Int64` */
   plays?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over those drives. `Float64` */
   epa?: number | null;
-  /** `Int64` */
+  /** Plays flagged EPA_success on those drives. `Int64` */
   successes?: number | bigint | null;
-  /** `Float64` */
+  /** statYardage summed over the plays on those drives. `Float64` */
   yards?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3, from drive.result) summed over those drives. `Float64` */
   points?: number | null;
-  /** `Int64` */
+  /** Drives that included an offensive touchdown play. `Int64` */
   touchdowns?: number | bigint | null;
-  /** `Int64` */
+  /** Drives that reached scoring-opportunity territory (a play snapped 40 or fewer yards from the end zone). `Int64` */
   scoring_opps?: number | bigint | null;
-  /** `UInt32` */
+  /** Per-game rows summed into this season row -- the games in which this key appeared in the section -- so it counts games with activity, not games played. `UInt32` */
   games?: number | null;
-  /** `Float64` */
+  /** epa / plays; null with no plays. `Float64` */
   epa_per_play?: number | null;
-  /** `Float64` */
+  /** successes / plays; null with no plays. `Float64` */
   success_rate?: number | null;
-  /** `Float64` */
+  /** yards / plays; null with no plays. `Float64` */
   yards_per_play?: number | null;
-  /** `Float64` */
+  /** points / drives; null with no drives. `Float64` */
   points_per_drive?: number | null;
-  /** `Float64` */
+  /** touchdowns / drives: the share of drives that scored a touchdown; null with no drives. `Float64` */
   touchdown_rate?: number | null;
-  /** `Float64` */
+  /** scoring_opps / drives: the share of drives that reached the opponent's 40; null with no drives. `Float64` */
   scoring_opp_rate?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2323,71 +2323,71 @@ export interface LoadNflUsageDriveScriptingRow {
 
 /** One row of `sdv.nfl.loadNflUsageStKickers` (`espn_nfl_usage_st_kickers`; sdv-py loader schema `load_nfl_usage_st_kickers`). */
 export interface LoadNflUsageStKickersRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the kicking team (the kicker's own team); joins to the ESPN teams and schedule datasets on team_id. `Int64` (an id) */
   pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the kicking team (the kicker's own team), as carried on the released play-by-play (e.g. "Kansas City Chiefs", "Georgia Bulldogs"). `String` */
   pos_team?: string | null;
-  /** `String` (an id) */
+  /** ESPN athlete id of the player, as a string; null when the play-by-play named the player without an id (the row is then keyed on the name). `String` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player display name, as carried on the play-by-play participants; the season row carries the most frequent non-null name over his games, so a renamed player with a player_id keeps one row per team (a row with no player_id is keyed on its name, so a rename there splits it). `String` */
   player_name?: string | null;
-  /** `Int64` */
+  /** Kickoffs by the kicker that stood (kicks nullified by penalty are excluded). `Int64` */
   kickoffs?: number | bigint | null;
-  /** `Float64` */
+  /** Kickoff distance summed over the kickoffs (yds_kickoff). `Float64` */
   kickoff_yards?: number | null;
-  /** `Int64` */
+  /** Kickoffs that resulted in a touchback. `Int64` */
   kickoff_touchbacks?: number | bigint | null;
-  /** `Int64` */
+  /** Onside kicks attempted by the kicker. `Int64` */
   kickoff_onside?: number | bigint | null;
-  /** `Int64` */
+  /** Kickoffs that went out of bounds. `Int64` */
   kickoff_out_of_bounds?: number | bigint | null;
-  /** `Int64` */
+  /** Kickoffs that were returned: not a touchback, onside, out of bounds or fair catch, and with a named returner. `Int64` */
   kickoff_returns_allowed?: number | bigint | null;
-  /** `Float64` */
+  /** Return yards allowed on the returned kickoffs. `Float64` */
   kickoff_return_yards_allowed?: number | null;
-  /** `Int64` */
+  /** Returned kickoffs that were taken back for a touchdown. `Int64` */
   kickoff_return_tds_allowed?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the kickoffs from the kicking side (the play EPA negated, because the receiving team is the possession team on a kickoff). `Float64` */
   kickoff_epa?: number | null;
-  /** `Int64` */
+  /** Field-goal attempts by the kicker that stood (attempts nullified by penalty are excluded). `Int64` */
   fg_attempts?: number | bigint | null;
-  /** `Int64` */
+  /** Field goals made by the kicker. `Int64` */
   fg_made?: number | bigint | null;
-  /** `Int64` */
+  /** Field-goal attempts on which a blocker was credited. `Int64` */
   fg_blocked?: number | bigint | null;
-  /** `Int64` */
+  /** Field-goal attempts from under 40 yards. `Int64` */
   fg_0_39_attempts?: number | bigint | null;
-  /** `Int64` */
+  /** Field goals made from under 40 yards. `Int64` */
   fg_0_39_made?: number | bigint | null;
-  /** `Int64` */
+  /** Field-goal attempts from 40 to 49 yards. `Int64` */
   fg_40_49_attempts?: number | bigint | null;
-  /** `Int64` */
+  /** Field goals made from 40 to 49 yards. `Int64` */
   fg_40_49_made?: number | bigint | null;
-  /** `Int64` */
+  /** Field-goal attempts from 50 yards or more. `Int64` */
   fg_50_plus_attempts?: number | bigint | null;
-  /** `Int64` */
+  /** Field goals made from 50 yards or more. `Int64` */
   fg_50_plus_made?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the field-goal attempts. `Float64` */
   fg_epa?: number | null;
-  /** `Int64` */
+  /** Extra-point kick attempts by the kicker that stood. `Int64` */
   xp_attempts?: number | bigint | null;
-  /** `Int64` */
+  /** Extra-point kicks made by the kicker. `Int64` */
   xp_made?: number | bigint | null;
-  /** `Float64` */
+  /** Longest field goal made, in yards (a season maximum, not a sum). `Float64` */
   fg_long?: number | null;
-  /** `UInt32` */
+  /** Per-game rows summed into this season row -- the games in which this key appeared in the section -- so it counts games with activity, not games played. `UInt32` */
   games?: number | null;
-  /** `Float64` */
+  /** kickoff_yards / kickoffs; null with no kickoffs. `Float64` */
   kickoff_avg?: number | null;
-  /** `Float64` */
+  /** kickoff_touchbacks / kickoffs; null with no kickoffs. `Float64` */
   kickoff_touchback_rate?: number | null;
-  /** `Float64` */
+  /** kickoff_return_yards_allowed / kickoff_returns_allowed; null with no returns allowed. `Float64` */
   kickoff_return_avg_allowed?: number | null;
-  /** `Float64` */
+  /** fg_made / fg_attempts; null with no attempts. `Float64` */
   fg_pct?: number | null;
-  /** `Float64` */
+  /** xp_made / xp_attempts; null with no attempts. `Float64` */
   xp_pct?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2395,53 +2395,53 @@ export interface LoadNflUsageStKickersRow {
 
 /** One row of `sdv.nfl.loadNflUsageStPunters` (`espn_nfl_usage_st_punters`; sdv-py loader schema `load_nfl_usage_st_punters`). */
 export interface LoadNflUsageStPuntersRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the punting team (the punter's own team); joins to the ESPN teams and schedule datasets on team_id. `Int64` (an id) */
   pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the punting team (the punter's own team), as carried on the released play-by-play (e.g. "Kansas City Chiefs", "Georgia Bulldogs"). `String` */
   pos_team?: string | null;
-  /** `String` (an id) */
+  /** ESPN athlete id of the player, as a string; null when the play-by-play named the player without an id (the row is then keyed on the name). `String` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player display name, as carried on the play-by-play participants; the season row carries the most frequent non-null name over his games, so a renamed player with a player_id keeps one row per team (a row with no player_id is keyed on its name, so a rename there splits it). `String` */
   player_name?: string | null;
-  /** `Int64` */
+  /** Punts by the punter that stood (punts nullified by penalty are excluded). `Int64` */
   punts?: number | bigint | null;
-  /** `Float64` */
+  /** Gross punt distance summed over the punts (yds_punted). `Float64` */
   punt_yards?: number | null;
-  /** `Int64` */
+  /** Punts that resulted in a touchback. `Int64` */
   punt_touchbacks?: number | bigint | null;
-  /** `Int64` */
+  /** Punts that landed inside the receiving team's 20: yards to the end zone at the snap minus punt distance between 0 and 20, touchbacks excluded. `Int64` */
   punt_inside_20?: number | bigint | null;
-  /** `Int64` */
+  /** Punts that were fair caught. `Int64` */
   punt_fair_catches?: number | bigint | null;
-  /** `Int64` */
+  /** Punts downed by the coverage team. `Int64` */
   punt_downed?: number | bigint | null;
-  /** `Int64` */
+  /** Punts that went out of bounds. `Int64` */
   punt_out_of_bounds?: number | bigint | null;
-  /** `Int64` */
+  /** Punts by the punter that were blocked. `Int64` */
   punt_blocked?: number | bigint | null;
-  /** `Int64` */
+  /** Punts that were returned: not a touchback, fair catch, downed, out of bounds or blocked, and with a named returner. `Int64` */
   punt_returns_allowed?: number | bigint | null;
-  /** `Float64` */
+  /** Return yards allowed on the returned punts. `Float64` */
   punt_return_yards_allowed?: number | null;
-  /** `Int64` */
+  /** Returned punts that were taken back for a touchdown. `Int64` */
   punt_return_tds_allowed?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the punts (the punting team is the possession team on a punt, so this already reads from the punter's side). `Float64` */
   punt_epa?: number | null;
-  /** `Float64` */
+  /** Longest punt, in yards (a season maximum, not a sum). `Float64` */
   punt_long?: number | null;
-  /** `UInt32` */
+  /** Per-game rows summed into this season row -- the games in which this key appeared in the section -- so it counts games with activity, not games played. `UInt32` */
   games?: number | null;
-  /** `Float64` */
+  /** punt_yards minus punt_return_yards_allowed minus 20 yards per touchback. `Float64` */
   punt_net_yards?: number | null;
-  /** `Float64` */
+  /** punt_yards / punts: gross punting average; null with no punts. `Float64` */
   punt_avg?: number | null;
-  /** `Float64` */
+  /** punt_net_yards / punts: net punting average; null with no punts. `Float64` */
   punt_net_avg?: number | null;
-  /** `Float64` */
+  /** punt_inside_20 / punts; null with no punts. `Float64` */
   punt_inside_20_rate?: number | null;
-  /** `Float64` */
+  /** punt_return_yards_allowed / punt_returns_allowed; null with no returns allowed. `Float64` */
   punt_return_avg_allowed?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2449,41 +2449,41 @@ export interface LoadNflUsageStPuntersRow {
 
 /** One row of `sdv.nfl.loadNflUsageStReturners` (`espn_nfl_usage_st_returners`; sdv-py loader schema `load_nfl_usage_st_returners`). */
 export interface LoadNflUsageStReturnersRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the returning team (the returner's own team); joins to the ESPN teams and schedule datasets on team_id. `Int64` (an id) */
   pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the returning team (the returner's own team), as carried on the released play-by-play (e.g. "Kansas City Chiefs", "Georgia Bulldogs"). `String` */
   pos_team?: string | null;
-  /** `String` (an id) */
+  /** ESPN athlete id of the player, as a string; null when the play-by-play named the player without an id (the row is then keyed on the name). `String` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player display name, as carried on the play-by-play participants; the season row carries the most frequent non-null name over his games, so a renamed player with a player_id keeps one row per team (a row with no player_id is keyed on its name, so a rename there splits it). `String` */
   player_name?: string | null;
-  /** `Int64` */
+  /** Kickoff returns by the returner (kickoffs that were neither a touchback, onside, out of bounds nor fair caught). `Int64` */
   kick_returns?: number | bigint | null;
-  /** `Float64` */
+  /** Kickoff return yards summed over the returns (yds_kickoff_return). `Float64` */
   kick_return_yards?: number | null;
-  /** `Int64` */
+  /** Kickoff returns that scored a touchdown. `Int64` */
   kick_return_tds?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the kickoff returns (the returning team is the possession team on a kickoff, so this reads from the returner's side). `Float64` */
   kick_return_epa?: number | null;
-  /** `Int64` */
+  /** Punt returns by the returner (punts that were neither a touchback, fair catch, downed, out of bounds nor blocked). `Int64` */
   punt_returns?: number | bigint | null;
-  /** `Float64` */
+  /** Punt return yards summed over the returns (yds_punt_return). `Float64` */
   punt_return_yards?: number | null;
-  /** `Int64` */
+  /** Punt returns that scored a touchdown. `Int64` */
   punt_return_tds?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the punt returns, negated so it reads from the return team's side (the punting team is the possession team on a punt). `Float64` */
   punt_return_epa?: number | null;
-  /** `Float64` */
+  /** Longest kickoff return, in yards (a season maximum, not a sum). `Float64` */
   kick_return_long?: number | null;
-  /** `Float64` */
+  /** Longest punt return, in yards (a season maximum, not a sum). `Float64` */
   punt_return_long?: number | null;
-  /** `UInt32` */
+  /** Per-game rows summed into this season row -- the games in which this key appeared in the section -- so it counts games with activity, not games played. `UInt32` */
   games?: number | null;
-  /** `Float64` */
+  /** kick_return_yards / kick_returns; null with no kickoff returns. `Float64` */
   kick_return_avg?: number | null;
-  /** `Float64` */
+  /** punt_return_yards / punt_returns; null with no punt returns. `Float64` */
   punt_return_avg?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2491,23 +2491,23 @@ export interface LoadNflUsageStReturnersRow {
 
 /** One row of `sdv.nfl.loadNflUsageStBlocks` (`espn_nfl_usage_st_blocks`; sdv-py loader schema `load_nfl_usage_st_blocks`). */
 export interface LoadNflUsageStBlocksRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the team that made the block (the defense on the kick). `Int64` (an id) */
   def_pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the team that made the block (the defense on the kick). `String` */
   def_pos_team?: string | null;
-  /** `String` (an id) */
+  /** ESPN athlete id of the player, as a string; null when the play-by-play named the player without an id (the row is then keyed on the name). `String` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player display name, as carried on the play-by-play participants; the season row carries the most frequent non-null name over his games, so a renamed player with a player_id keeps one row per team (a row with no player_id is keyed on its name, so a rename there splits it). `String` */
   player_name?: string | null;
-  /** `Int64` */
+  /** Punts the player blocked (credited as the punt_block_player on the play). `Int64` */
   punt_blocks?: number | bigint | null;
-  /** `Int64` */
+  /** Field-goal attempts the player blocked (credited as the fg_block_player on the play). `Int64` */
   fg_blocks?: number | bigint | null;
-  /** `Int64` */
+  /** punt_blocks plus fg_blocks. `Int64` */
   blocks?: number | bigint | null;
-  /** `UInt32` */
+  /** Per-game rows summed into this season row -- the games in which this key appeared in the section -- so it counts games with activity, not games played. `UInt32` */
   games?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2515,87 +2515,87 @@ export interface LoadNflUsageStBlocksRow {
 
 /** One row of `sdv.nfl.loadNflUsageStTeam` (`espn_nfl_usage_st_team`; sdv-py loader schema `load_nfl_usage_st_team`). */
 export interface LoadNflUsageStTeamRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the team (its own kicking, punting and returns, plus what it allowed); joins to the ESPN teams and schedule datasets on team_id. `Int64` (an id) */
   pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the team (its own kicking, punting and returns, plus what it allowed), as carried on the released play-by-play (e.g. "Kansas City Chiefs", "Georgia Bulldogs"). `String` */
   pos_team?: string | null;
-  /** `Int64` */
+  /** Kickoffs by the team that stood (kicks nullified by penalty are excluded). `Int64` */
   kickoffs?: number | bigint | null;
-  /** `Int64` */
+  /** The team's kickoffs that resulted in a touchback. `Int64` */
   kickoff_touchbacks?: number | bigint | null;
-  /** `Int64` */
+  /** Kickoffs that were returned: not a touchback, onside, out of bounds or fair catch, and with a named returner. `Int64` */
   kickoff_returns_allowed?: number | bigint | null;
-  /** `Float64` */
+  /** Return yards allowed on the team's returned kickoffs. `Float64` */
   kickoff_return_yards_allowed?: number | null;
-  /** `Int64` */
+  /** The team's kickoffs that were returned for a touchdown. `Int64` */
   kickoff_return_tds_allowed?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the kickoffs from the kicking side (the play EPA negated, because the receiving team is the possession team on a kickoff). `Float64` */
   kickoff_epa?: number | null;
-  /** `Int64` */
+  /** Kickoff returns by the team (kickoffs received that were neither a touchback, onside, out of bounds nor fair caught). `Int64` */
   kick_returns?: number | bigint | null;
-  /** `Float64` */
+  /** Kickoff return yards summed over the team's returns (yds_kickoff_return). `Float64` */
   kick_return_yards?: number | null;
-  /** `Int64` */
+  /** The team's kickoff returns that scored a touchdown. `Int64` */
   kick_return_tds?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the team's kickoff returns (the returning team is the possession team on a kickoff). `Float64` */
   kick_return_epa?: number | null;
-  /** `Int64` */
+  /** Punts by the team that stood (punts nullified by penalty are excluded). `Int64` */
   punts?: number | bigint | null;
-  /** `Float64` */
+  /** Gross punt distance summed over the team's punts (yds_punted). `Float64` */
   punt_yards?: number | null;
-  /** `Int64` */
+  /** The team's punts that resulted in a touchback. `Int64` */
   punt_touchbacks?: number | bigint | null;
-  /** `Int64` */
+  /** The team's punts that were blocked. `Int64` */
   punts_blocked?: number | bigint | null;
-  /** `Int64` */
+  /** Punts that were returned: not a touchback, fair catch, downed, out of bounds or blocked, and with a named returner. `Int64` */
   punt_returns_allowed?: number | bigint | null;
-  /** `Float64` */
+  /** Return yards allowed on the team's returned punts. `Float64` */
   punt_return_yards_allowed?: number | null;
-  /** `Int64` */
+  /** The team's punts that were returned for a touchdown. `Int64` */
   punt_return_tds_allowed?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the team's punts (the punting team is the possession team on a punt). `Float64` */
   punt_epa?: number | null;
-  /** `Int64` */
+  /** Punt returns by the team (punts received that were neither a touchback, fair catch, downed, out of bounds nor blocked). `Int64` */
   punt_returns?: number | bigint | null;
-  /** `Float64` */
+  /** Punt return yards summed over the team's returns (yds_punt_return). `Float64` */
   punt_return_yards?: number | null;
-  /** `Int64` */
+  /** The team's punt returns that scored a touchdown. `Int64` */
   punt_return_tds?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the team's punt returns, negated so it reads from the return team's side. `Float64` */
   punt_return_epa?: number | null;
-  /** `Int64` */
+  /** The team's field-goal attempts that stood. `Int64` */
   fg_attempts?: number | bigint | null;
-  /** `Int64` */
+  /** The team's field goals made. `Int64` */
   fg_made?: number | bigint | null;
-  /** `Int64` */
+  /** The team's field-goal attempts that were blocked. `Int64` */
   fgs_blocked?: number | bigint | null;
-  /** `Float64` */
+  /** Play EPA summed over the team's field-goal attempts. `Float64` */
   fg_epa?: number | null;
-  /** `Int64` */
+  /** Opponent punts the team blocked. `Int64` */
   punt_blocks_by?: number | bigint | null;
-  /** `Int64` */
+  /** Opponent field-goal attempts the team blocked. `Int64` */
   fg_blocks_by?: number | bigint | null;
-  /** `UInt32` */
+  /** Per-game rows summed into this season row -- the games in which this key appeared in the section -- so it counts games with activity, not games played. `UInt32` */
   games?: number | null;
-  /** `Float64` */
+  /** punt_yards minus punt_return_yards_allowed minus 20 yards per touchback. `Float64` */
   punt_net_yards?: number | null;
-  /** `Float64` */
+  /** kickoff_touchbacks / kickoffs; null with no kickoffs. `Float64` */
   kickoff_touchback_rate?: number | null;
-  /** `Float64` */
+  /** kickoff_return_yards_allowed / kickoff_returns_allowed; null with no returns allowed. `Float64` */
   kickoff_return_avg_allowed?: number | null;
-  /** `Float64` */
+  /** fg_made / fg_attempts; null with no attempts. `Float64` */
   fg_pct?: number | null;
-  /** `Float64` */
+  /** punt_yards / punts: gross punting average; null with no punts. `Float64` */
   punt_avg?: number | null;
-  /** `Float64` */
+  /** punt_net_yards / punts: net punting average; null with no punts. `Float64` */
   punt_net_avg?: number | null;
-  /** `Float64` */
+  /** punt_return_yards_allowed / punt_returns_allowed; null with no returns allowed. `Float64` */
   punt_return_avg_allowed?: number | null;
-  /** `Float64` */
+  /** kick_return_yards / kick_returns; null with no kickoff returns. `Float64` */
   kick_return_avg?: number | null;
-  /** `Float64` */
+  /** punt_return_yards / punt_returns; null with no punt returns. `Float64` */
   punt_return_avg?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2603,1161 +2603,1161 @@ export interface LoadNflUsageStTeamRow {
 
 /** One row of `sdv.nfl.loadNflTeamTendencies` (`espn_nfl_team_tendencies`; sdv-py loader schema `load_nfl_team_tendencies`). */
 export interface LoadNflTeamTendenciesRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the team whose offense the row describes (the def_ columns are its defense); joins to the ESPN teams and schedule datasets on team_id. `Int64` (an id) */
   pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the team whose offense the row describes (the def_ columns are its defense), as carried on the released play-by-play (e.g. "Kansas City Chiefs", "Georgia Bulldogs"). `String` */
   pos_team?: string | null;
-  /** `UInt32` */
+  /** Distinct games in which the offense ran at least one standing scrimmage play. `UInt32` */
   games?: number | null;
-  /** `UInt32` */
+  /** Standing scrimmage plays run by the offense (scrimmage_play rows not nullified by penalty). `UInt32` */
   plays?: number | null;
-  /** `UInt32` */
+  /** Rushing plays among the standing scrimmage plays. `UInt32` */
   rushes?: number | null;
-  /** `UInt32` */
+  /** Pass plays among the standing scrimmage plays. `UInt32` */
   passes?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the standing scrimmage plays. `Float64` */
   epa?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the rushing plays. `Float64` */
   epa_rush?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the pass plays. `Float64` */
   epa_pass?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on the play-by-play. `UInt32` */
   successes?: number | null;
-  /** `UInt32` */
+  /** Rushing plays flagged EPA_success. `UInt32` */
   successes_rush?: number | null;
-  /** `UInt32` */
+  /** Pass plays flagged EPA_success. `UInt32` */
   successes_pass?: number | null;
-  /** `Float64` */
+  /** statYardage summed over the standing scrimmage plays. `Float64` */
   yards?: number | null;
-  /** `Float64` */
+  /** statYardage summed over the rushing plays. `Float64` */
   yards_rush?: number | null;
-  /** `Float64` */
+  /** statYardage summed over the pass plays. `Float64` */
   yards_pass?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_explosive on the play-by-play. `UInt32` */
   explosives?: number | null;
-  /** `UInt32` */
+  /** Rushing plays flagged EPA_explosive. `UInt32` */
   explosives_rush?: number | null;
-  /** `UInt32` */
+  /** Pass plays flagged EPA_explosive. `UInt32` */
   explosives_pass?: number | null;
-  /** `UInt32` */
+  /** Third-down scrimmage plays. `UInt32` */
   third_down_opportunities?: number | null;
-  /** `UInt32` */
+  /** Third-down plays that produced a first down or an offensive touchdown. `UInt32` */
   third_down_conversions?: number | null;
-  /** `Float64` */
+  /** Expected third-down conversions: the league's bundled third-down yards-to-go conversion curve summed over the third-down plays; null when no curve was available. `Float64` */
   third_down_expected?: number | null;
-  /** `UInt32` */
+  /** Plays in situation-neutral plays: score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half. `UInt32` */
   plays_neutral?: number | null;
-  /** `UInt32` */
+  /** Pass plays in situation-neutral situations (see plays_neutral). `UInt32` */
   passes_neutral?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over situation-neutral plays: score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half. `Float64` */
   epa_neutral?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in situation-neutral situations (score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half). `UInt32` */
   successes_neutral?: number | null;
-  /** `UInt32` */
+  /** Plays on first down. `UInt32` */
   plays_d1?: number | null;
-  /** `UInt32` */
+  /** Pass plays on first down. `UInt32` */
   passes_d1?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on first down. `Float64` */
   epa_d1?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on first down. `UInt32` */
   successes_d1?: number | null;
-  /** `UInt32` */
+  /** Plays on second down. `UInt32` */
   plays_d2?: number | null;
-  /** `UInt32` */
+  /** Pass plays on second down. `UInt32` */
   passes_d2?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on second down. `Float64` */
   epa_d2?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on second down. `UInt32` */
   successes_d2?: number | null;
-  /** `UInt32` */
+  /** Plays on third down. `UInt32` */
   plays_d3?: number | null;
-  /** `UInt32` */
+  /** Pass plays on third down. `UInt32` */
   passes_d3?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on third down. `Float64` */
   epa_d3?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on third down. `UInt32` */
   successes_d3?: number | null;
-  /** `UInt32` */
+  /** Plays on fourth down. `UInt32` */
   plays_d4?: number | null;
-  /** `UInt32` */
+  /** Pass plays on fourth down. `UInt32` */
   passes_d4?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on fourth down. `Float64` */
   epa_d4?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on fourth down. `UInt32` */
   successes_d4?: number | null;
-  /** `UInt32` */
+  /** Plays on first or second down. `UInt32` */
   plays_early_down?: number | null;
-  /** `UInt32` */
+  /** Pass plays on first or second down. `UInt32` */
   passes_early_down?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the first- and second-down plays. `Float64` */
   epa_early_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on first or second down. `UInt32` */
   successes_early_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged standard_down on the play-by-play: first down, second down with fewer than 8 to go, or third / fourth down with fewer than 5 to go. `UInt32` */
   plays_standard_down?: number | null;
-  /** `UInt32` */
+  /** Pass plays on standard downs (see plays_standard_down). `UInt32` */
   passes_standard_down?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on standard downs (the play-by-play standard_down flag). `Float64` */
   epa_standard_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on standard downs (the play-by-play standard_down flag). `UInt32` */
   successes_standard_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged passing_down on the play-by-play: second down with 8 or more to go, or third / fourth down with 5 or more to go. `UInt32` */
   plays_passing_down?: number | null;
-  /** `UInt32` */
+  /** Pass plays on passing downs (see plays_passing_down). `UInt32` */
   passes_passing_down?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on passing downs (the play-by-play passing_down flag). `Float64` */
   epa_passing_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on passing downs (the play-by-play passing_down flag). `UInt32` */
   successes_passing_down?: number | null;
-  /** `UInt32` */
+  /** Plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   plays_leading?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   passes_leading?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   epa_leading?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   successes_leading?: number | null;
-  /** `UInt32` */
+  /** Plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   plays_tied?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   passes_tied?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   epa_tied?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   successes_tied?: number | null;
-  /** `UInt32` */
+  /** Plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   plays_trailing?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   passes_trailing?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   epa_trailing?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   successes_trailing?: number | null;
-  /** `UInt32` */
+  /** Plays in the first two quarters. `UInt32` */
   plays_first_half?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the first two quarters. `UInt32` */
   passes_first_half?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the first two quarters. `Float64` */
   epa_first_half?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the first two quarters. `UInt32` */
   successes_first_half?: number | null;
-  /** `UInt32` */
+  /** Plays in the third and fourth quarters (overtime belongs to neither half). `UInt32` */
   plays_second_half?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the third and fourth quarters. `UInt32` */
   passes_second_half?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the third and fourth quarters (overtime belongs to neither half). `Float64` */
   epa_second_half?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the third and fourth quarters (overtime belongs to neither half). `UInt32` */
   successes_second_half?: number | null;
-  /** `UInt32` */
+  /** Plays on third down with 3 or fewer yards to go. `UInt32` */
   plays_d3_short?: number | null;
-  /** `UInt32` */
+  /** Pass plays on third down with 3 or fewer yards to go. `UInt32` */
   passes_d3_short?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on third down with 3 or fewer yards to go. `Float64` */
   epa_d3_short?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on third down with 3 or fewer yards to go. `UInt32` */
   successes_d3_short?: number | null;
-  /** `UInt32` */
+  /** Plays on third down with 4 to 6 yards to go. `UInt32` */
   plays_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Pass plays on third down with 4 to 6 yards to go. `UInt32` */
   passes_d3_medium?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on third down with 4 to 6 yards to go. `Float64` */
   epa_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on third down with 4 to 6 yards to go. `UInt32` */
   successes_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Plays on third down with 7 or more yards to go. `UInt32` */
   plays_d3_long?: number | null;
-  /** `UInt32` */
+  /** Pass plays on third down with 7 or more yards to go. `UInt32` */
   passes_d3_long?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on third down with 7 or more yards to go. `Float64` */
   epa_d3_long?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on third down with 7 or more yards to go. `UInt32` */
   successes_d3_long?: number | null;
-  /** `UInt32` */
+  /** Plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   plays_red_zone?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   passes_red_zone?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `Float64` */
   epa_red_zone?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   successes_red_zone?: number | null;
-  /** `UInt32` */
+  /** Plays snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   plays_own_half?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   passes_own_half?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped in the offense's own half (50 or more yards from the opponent end zone). `Float64` */
   epa_own_half?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   successes_own_half?: number | null;
-  /** `UInt32` */
+  /** Plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   plays_opp_half?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   passes_opp_half?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `Float64` */
   epa_opp_half?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   successes_opp_half?: number | null;
-  /** `UInt32` */
+  /** Plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   plays_one_score?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   passes_one_score?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   epa_one_score?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   successes_one_score?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's home games. `UInt32` */
   plays_home?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's home games. `UInt32` */
   passes_home?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's home games. `Float64` */
   epa_home?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's home games. `UInt32` */
   successes_home?: number | null;
-  /** `UInt32` */
+  /** Distinct home games in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_home?: number | null;
-  /** `UInt32` */
+  /** Of games_home, the home games the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_home?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's away games. `UInt32` */
   plays_away?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's away games. `UInt32` */
   passes_away?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's away games. `Float64` */
   epa_away?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's away games. `UInt32` */
   successes_away?: number | null;
-  /** `UInt32` */
+  /** Distinct away games in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_away?: number | null;
-  /** `UInt32` */
+  /** Of games_away, the away games the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_away?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's neutral-site games. `UInt32` */
   plays_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's neutral-site games. `UInt32` */
   passes_neutral_site?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's neutral-site games. `Float64` */
   epa_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's neutral-site games. `UInt32` */
   successes_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Distinct neutral-site games in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Of games_neutral_site, the neutral-site games the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's games played 13 or more days after the team's previous game. `UInt32` */
   plays_after_bye?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's games played 13 or more days after the team's previous game. `UInt32` */
   passes_after_bye?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's games played 13 or more days after the team's previous game. `Float64` */
   epa_after_bye?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's games played 13 or more days after the team's previous game. `UInt32` */
   successes_after_bye?: number | null;
-  /** `UInt32` */
+  /** Distinct games played 13 or more days after the team's previous game in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_after_bye?: number | null;
-  /** `UInt32` */
+  /** Of games_after_bye, the games played 13 or more days after the team's previous game the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_after_bye?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's regular-season openers. `UInt32` */
   plays_opener?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's regular-season openers. `UInt32` */
   passes_opener?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's regular-season openers. `Float64` */
   epa_opener?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's regular-season openers. `UInt32` */
   successes_opener?: number | null;
-  /** `UInt32` */
+  /** Distinct regular-season openers in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_opener?: number | null;
-  /** `UInt32` */
+  /** Of games_opener, the regular-season openers the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_opener?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's games decided by 8 points or fewer. `UInt32` */
   plays_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's games decided by 8 points or fewer. `UInt32` */
   passes_one_score_game?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's games decided by 8 points or fewer. `Float64` */
   epa_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's games decided by 8 points or fewer. `UInt32` */
   successes_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Distinct games decided by 8 points or fewer in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Of games_one_score_game, the games decided by 8 points or fewer the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Fourth-down plays on which the offense ran, passed, punted or attempted a field goal and the play stood (timeouts and nullified plays are not decisions). `UInt32` */
   fourth_decisions?: number | null;
-  /** `UInt32` */
+  /** Fourth-down decisions that were a rush or a pass (the offense went for it). `UInt32` */
   fourth_went?: number | null;
-  /** `UInt32` */
+  /** Fourth-down go attempts that produced a first down or an offensive touchdown. `UInt32` */
   fourth_converted?: number | null;
-  /** `UInt32` */
+  /** Decisions on which the fourth-down model recommended going for it (fourth_down_recommendation == "go"). `UInt32` */
   fourth_model_go?: number | null;
-  /** `UInt32` */
+  /** Decisions on which the fourth-down model recommended a punt or a field goal. `UInt32` */
   fourth_model_kick?: number | null;
-  /** `UInt32` */
+  /** Decisions on which the offense went for it when the model also said go. `UInt32` */
   fourth_went_when_go?: number | null;
-  /** `UInt32` */
+  /** Decisions on which the offense went for it when the model said kick. `UInt32` */
   fourth_went_when_kick?: number | null;
-  /** `UInt32` */
+  /** Decisions that matched the model's recommendation (went when it said go, kicked when it said kick). `UInt32` */
   fourth_agreed?: number | null;
-  /** `Float64` */
+  /** Win probability left on the table, summed over the decisions that went against the model: go_boost when the offense kicked against a go recommendation, minus go_boost when it went against a kick recommendation, floored at zero. `Float64` */
   fourth_wp_left?: number | null;
-  /** `UInt32` */
+  /** Offensive drives: distinct drive.id values with at least one standing scrimmage play. `UInt32` */
   drives?: number | null;
-  /** `UInt32` */
+  /** Drives with a usable ESPN drive clock (a parseable drive.timeElapsed and a positive drive.offensivePlays), in regulation (overtime has no game clock) and owned by this offense (an ESPN drive id that holds snaps by both offenses counts once, for ESPN's drive team when it matches an offense in the drive, else the offense with the most standing snaps, the first snap breaking a tie). `UInt32` */
   drives_with_clock?: number | null;
-  /** `Float64` */
+  /** ESPN elapsed drive time in seconds, summed over the drives with a usable clock. `Float64` */
   drive_seconds?: number | null;
-  /** `Float64` */
+  /** ESPN drive.offensivePlays summed over the drives with a usable clock -- the pace denominator. `Float64` */
   drive_plays?: number | null;
-  /** `Float64` */
+  /** ESPN elapsed drive seconds summed over the clocked drives whose first play was situation-neutral. `Float64` */
   drive_seconds_neutral?: number | null;
-  /** `Float64` */
+  /** ESPN drive.offensivePlays summed over the clocked drives whose first play was situation-neutral. `Float64` */
   drive_plays_neutral?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3, from drive.result) summed over the drives. `Float64` */
   drive_points?: number | null;
-  /** `UInt32` */
+  /** Drives with at least one play snapped in the red zone (20 or fewer yards to the end zone). `UInt32` */
   rz_trips?: number | null;
-  /** `UInt32` */
+  /** Red-zone drives that included an offensive touchdown play. `UInt32` */
   rz_tds?: number | null;
-  /** `UInt32` */
+  /** Red-zone drives that scored (a touchdown or a field goal). `UInt32` */
   rz_scores?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3) summed over the red-zone drives. `Float64` */
   rz_points?: number | null;
-  /** `UInt32` */
+  /** Drives with at least one play snapped in scoring-opportunity territory (40 or fewer yards to the end zone). `UInt32` */
   so_trips?: number | null;
-  /** `UInt32` */
+  /** Scoring-opportunity drives that included an offensive touchdown play. `UInt32` */
   so_tds?: number | null;
-  /** `UInt32` */
+  /** Scoring-opportunity drives that scored (a touchdown or a field goal). `UInt32` */
   so_scores?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3) summed over the scoring-opportunity drives. `Float64` */
   so_points?: number | null;
-  /** `UInt32` */
+  /** The offense's first two drives of each half. `UInt32` */
   scripted_drives?: number | null;
-  /** `UInt32` */
+  /** Standing scrimmage plays on the scripted drives. `UInt32` */
   scripted_plays?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the scripted drives. `Float64` */
   scripted_epa?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success on the scripted drives. `UInt32` */
   scripted_successes?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3) summed over the scripted drives. `Float64` */
   scripted_points?: number | null;
-  /** `UInt32` */
+  /** Every drive after the offense's first two of each half. `UInt32` */
   non_scripted_drives?: number | null;
-  /** `UInt32` */
+  /** Standing scrimmage plays on the non-scripted drives. `UInt32` */
   non_scripted_plays?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the non-scripted drives. `Float64` */
   non_scripted_epa?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success on the non-scripted drives. `UInt32` */
   non_scripted_successes?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3) summed over the non-scripted drives. `Float64` */
   non_scripted_points?: number | null;
-  /** `Float64` */
+  /** plays / games. Null when the denominator is 0. `Float64` */
   plays_per_game?: number | null;
-  /** `Float64` */
+  /** plays / drives. Null when the denominator is 0. `Float64` */
   plays_per_drive?: number | null;
-  /** `Float64` */
+  /** drives / games. Null when the denominator is 0. `Float64` */
   drives_per_game?: number | null;
-  /** `Float64` */
+  /** drive_seconds / drive_plays: seconds of game clock per offensive play from ESPN's own drive clock (pace; lower is faster). Null when the denominator is 0. `Float64` */
   sec_per_play?: number | null;
-  /** `Float64` */
+  /** drive_seconds_neutral / drive_plays_neutral: the same pace measure on drives that started situation-neutral. Null when the denominator is 0. `Float64` */
   sec_per_play_neutral?: number | null;
-  /** `Float64` */
+  /** drives_with_clock / drives: the share of drives with a usable clock; treat sec_per_play with caution when this is low. Null when the denominator is 0. `Float64` */
   pace_coverage?: number | null;
-  /** `Float64` */
+  /** passes / plays. Null when the denominator is 0. `Float64` */
   pass_rate?: number | null;
-  /** `Float64` */
+  /** epa / plays. Null when the denominator is 0. `Float64` */
   epa_per_play?: number | null;
-  /** `Float64` */
+  /** epa_rush / rushes. Null when the denominator is 0. `Float64` */
   epa_per_rush?: number | null;
-  /** `Float64` */
+  /** epa_pass / passes. Null when the denominator is 0. `Float64` */
   epa_per_pass?: number | null;
-  /** `Float64` */
+  /** successes / plays. Null when the denominator is 0. `Float64` */
   success_rate?: number | null;
-  /** `Float64` */
+  /** successes_rush / rushes. Null when the denominator is 0. `Float64` */
   success_rate_rush?: number | null;
-  /** `Float64` */
+  /** successes_pass / passes. Null when the denominator is 0. `Float64` */
   success_rate_pass?: number | null;
-  /** `Float64` */
+  /** passes_neutral / plays_neutral: pass rate in situation-neutral situations. Null when the denominator is 0. `Float64` */
   pass_rate_neutral?: number | null;
-  /** `Float64` */
+  /** epa_neutral / plays_neutral. Null when the denominator is 0. `Float64` */
   epa_per_play_neutral?: number | null;
-  /** `Float64` */
+  /** successes_neutral / plays_neutral: success rate in situation-neutral situations (score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half). Null when the denominator is 0. `Float64` */
   success_rate_neutral?: number | null;
-  /** `Float64` */
+  /** passes_d1 / plays_d1: pass rate on first down. Null when the denominator is 0. `Float64` */
   pass_rate_d1?: number | null;
-  /** `Float64` */
+  /** epa_d1 / plays_d1: EPA per play on first down. Null when the denominator is 0. `Float64` */
   epa_per_play_d1?: number | null;
-  /** `Float64` */
+  /** successes_d1 / plays_d1: success rate on first down. Null when the denominator is 0. `Float64` */
   success_rate_d1?: number | null;
-  /** `Float64` */
+  /** passes_d2 / plays_d2: pass rate on second down. Null when the denominator is 0. `Float64` */
   pass_rate_d2?: number | null;
-  /** `Float64` */
+  /** epa_d2 / plays_d2: EPA per play on second down. Null when the denominator is 0. `Float64` */
   epa_per_play_d2?: number | null;
-  /** `Float64` */
+  /** successes_d2 / plays_d2: success rate on second down. Null when the denominator is 0. `Float64` */
   success_rate_d2?: number | null;
-  /** `Float64` */
+  /** passes_d3 / plays_d3: pass rate on third down. Null when the denominator is 0. `Float64` */
   pass_rate_d3?: number | null;
-  /** `Float64` */
+  /** epa_d3 / plays_d3: EPA per play on third down. Null when the denominator is 0. `Float64` */
   epa_per_play_d3?: number | null;
-  /** `Float64` */
+  /** successes_d3 / plays_d3: success rate on third down. Null when the denominator is 0. `Float64` */
   success_rate_d3?: number | null;
-  /** `Float64` */
+  /** passes_d4 / plays_d4: pass rate on fourth down. Null when the denominator is 0. `Float64` */
   pass_rate_d4?: number | null;
-  /** `Float64` */
+  /** epa_d4 / plays_d4: EPA per play on fourth down. Null when the denominator is 0. `Float64` */
   epa_per_play_d4?: number | null;
-  /** `Float64` */
+  /** successes_d4 / plays_d4: success rate on fourth down. Null when the denominator is 0. `Float64` */
   success_rate_d4?: number | null;
-  /** `Float64` */
+  /** passes_early_down / plays_early_down. Null when the denominator is 0. `Float64` */
   pass_rate_early_down?: number | null;
-  /** `Float64` */
+  /** epa_early_down / plays_early_down. Null when the denominator is 0. `Float64` */
   epa_per_play_early_down?: number | null;
-  /** `Float64` */
+  /** successes_early_down / plays_early_down: success rate on first or second down. Null when the denominator is 0. `Float64` */
   success_rate_early_down?: number | null;
-  /** `Float64` */
+  /** passes_standard_down / plays_standard_down. Null when the denominator is 0. `Float64` */
   pass_rate_standard_down?: number | null;
-  /** `Float64` */
+  /** epa_standard_down / plays_standard_down: EPA per play on standard downs (the play-by-play standard_down flag). Null when the denominator is 0. `Float64` */
   epa_per_play_standard_down?: number | null;
-  /** `Float64` */
+  /** successes_standard_down / plays_standard_down: success rate on standard downs (the play-by-play standard_down flag). Null when the denominator is 0. `Float64` */
   success_rate_standard_down?: number | null;
-  /** `Float64` */
+  /** passes_passing_down / plays_passing_down. Null when the denominator is 0. `Float64` */
   pass_rate_passing_down?: number | null;
-  /** `Float64` */
+  /** epa_passing_down / plays_passing_down: EPA per play on passing downs (the play-by-play passing_down flag). Null when the denominator is 0. `Float64` */
   epa_per_play_passing_down?: number | null;
-  /** `Float64` */
+  /** successes_passing_down / plays_passing_down: success rate on passing downs (the play-by-play passing_down flag). Null when the denominator is 0. `Float64` */
   success_rate_passing_down?: number | null;
-  /** `Float64` */
+  /** passes_leading / plays_leading: pass rate snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   pass_rate_leading?: number | null;
-  /** `Float64` */
+  /** epa_leading / plays_leading: EPA per play snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_leading?: number | null;
-  /** `Float64` */
+  /** successes_leading / plays_leading: success rate snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   success_rate_leading?: number | null;
-  /** `Float64` */
+  /** passes_tied / plays_tied: pass rate snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   pass_rate_tied?: number | null;
-  /** `Float64` */
+  /** epa_tied / plays_tied: EPA per play snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_tied?: number | null;
-  /** `Float64` */
+  /** successes_tied / plays_tied: success rate snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   success_rate_tied?: number | null;
-  /** `Float64` */
+  /** passes_trailing / plays_trailing: pass rate snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   pass_rate_trailing?: number | null;
-  /** `Float64` */
+  /** epa_trailing / plays_trailing: EPA per play snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_trailing?: number | null;
-  /** `Float64` */
+  /** successes_trailing / plays_trailing: success rate snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   success_rate_trailing?: number | null;
-  /** `Float64` */
+  /** passes_first_half / plays_first_half. Null when the denominator is 0. `Float64` */
   pass_rate_first_half?: number | null;
-  /** `Float64` */
+  /** epa_first_half / plays_first_half: EPA per play in the first two quarters. Null when the denominator is 0. `Float64` */
   epa_per_play_first_half?: number | null;
-  /** `Float64` */
+  /** successes_first_half / plays_first_half: success rate in the first two quarters. Null when the denominator is 0. `Float64` */
   success_rate_first_half?: number | null;
-  /** `Float64` */
+  /** passes_second_half / plays_second_half. Null when the denominator is 0. `Float64` */
   pass_rate_second_half?: number | null;
-  /** `Float64` */
+  /** epa_second_half / plays_second_half: EPA per play in the third and fourth quarters (overtime belongs to neither half). Null when the denominator is 0. `Float64` */
   epa_per_play_second_half?: number | null;
-  /** `Float64` */
+  /** successes_second_half / plays_second_half: success rate in the third and fourth quarters (overtime belongs to neither half). Null when the denominator is 0. `Float64` */
   success_rate_second_half?: number | null;
-  /** `Float64` */
+  /** passes_d3_short / plays_d3_short: pass rate on third down with 3 or fewer yards to go. Null when the denominator is 0. `Float64` */
   pass_rate_d3_short?: number | null;
-  /** `Float64` */
+  /** epa_d3_short / plays_d3_short: EPA per play on third down with 3 or fewer yards to go. Null when the denominator is 0. `Float64` */
   epa_per_play_d3_short?: number | null;
-  /** `Float64` */
+  /** successes_d3_short / plays_d3_short: success rate on third down with 3 or fewer yards to go. Null when the denominator is 0. `Float64` */
   success_rate_d3_short?: number | null;
-  /** `Float64` */
+  /** passes_d3_medium / plays_d3_medium: pass rate on third down with 4 to 6 yards to go. Null when the denominator is 0. `Float64` */
   pass_rate_d3_medium?: number | null;
-  /** `Float64` */
+  /** epa_d3_medium / plays_d3_medium: EPA per play on third down with 4 to 6 yards to go. Null when the denominator is 0. `Float64` */
   epa_per_play_d3_medium?: number | null;
-  /** `Float64` */
+  /** successes_d3_medium / plays_d3_medium: success rate on third down with 4 to 6 yards to go. Null when the denominator is 0. `Float64` */
   success_rate_d3_medium?: number | null;
-  /** `Float64` */
+  /** passes_d3_long / plays_d3_long: pass rate on third down with 7 or more yards to go. Null when the denominator is 0. `Float64` */
   pass_rate_d3_long?: number | null;
-  /** `Float64` */
+  /** epa_d3_long / plays_d3_long: EPA per play on third down with 7 or more yards to go. Null when the denominator is 0. `Float64` */
   epa_per_play_d3_long?: number | null;
-  /** `Float64` */
+  /** successes_d3_long / plays_d3_long: success rate on third down with 7 or more yards to go. Null when the denominator is 0. `Float64` */
   success_rate_d3_long?: number | null;
-  /** `Float64` */
+  /** passes_red_zone / plays_red_zone: pass rate in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Null when the denominator is 0. `Float64` */
   pass_rate_red_zone?: number | null;
-  /** `Float64` */
+  /** epa_red_zone / plays_red_zone: EPA per play in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_red_zone?: number | null;
-  /** `Float64` */
+  /** successes_red_zone / plays_red_zone: success rate in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Null when the denominator is 0. `Float64` */
   success_rate_red_zone?: number | null;
-  /** `Float64` */
+  /** passes_own_half / plays_own_half: pass rate snapped in the offense's own half (50 or more yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   pass_rate_own_half?: number | null;
-  /** `Float64` */
+  /** epa_own_half / plays_own_half: EPA per play snapped in the offense's own half (50 or more yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   epa_per_play_own_half?: number | null;
-  /** `Float64` */
+  /** successes_own_half / plays_own_half: success rate snapped in the offense's own half (50 or more yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   success_rate_own_half?: number | null;
-  /** `Float64` */
+  /** passes_opp_half / plays_opp_half: pass rate snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   pass_rate_opp_half?: number | null;
-  /** `Float64` */
+  /** epa_opp_half / plays_opp_half: EPA per play snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   epa_per_play_opp_half?: number | null;
-  /** `Float64` */
+  /** successes_opp_half / plays_opp_half: success rate snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   success_rate_opp_half?: number | null;
-  /** `Float64` */
+  /** passes_one_score / plays_one_score: pass rate snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   pass_rate_one_score?: number | null;
-  /** `Float64` */
+  /** epa_one_score / plays_one_score: EPA per play snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_one_score?: number | null;
-  /** `Float64` */
+  /** successes_one_score / plays_one_score: success rate snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   success_rate_one_score?: number | null;
-  /** `Float64` */
+  /** passes_home / plays_home: pass rate in the team's home games. Null when the denominator is 0. `Float64` */
   pass_rate_home?: number | null;
-  /** `Float64` */
+  /** epa_home / plays_home: EPA per play in the team's home games. Null when the denominator is 0. `Float64` */
   epa_per_play_home?: number | null;
-  /** `Float64` */
+  /** successes_home / plays_home: success rate in the team's home games. Null when the denominator is 0. `Float64` */
   success_rate_home?: number | null;
-  /** `Float64` */
+  /** wins_home / games_home: win rate in the team's home games. Null when the denominator is 0. `Float64` */
   win_rate_home?: number | null;
-  /** `Float64` */
+  /** passes_away / plays_away: pass rate in the team's away games. Null when the denominator is 0. `Float64` */
   pass_rate_away?: number | null;
-  /** `Float64` */
+  /** epa_away / plays_away: EPA per play in the team's away games. Null when the denominator is 0. `Float64` */
   epa_per_play_away?: number | null;
-  /** `Float64` */
+  /** successes_away / plays_away: success rate in the team's away games. Null when the denominator is 0. `Float64` */
   success_rate_away?: number | null;
-  /** `Float64` */
+  /** wins_away / games_away: win rate in the team's away games. Null when the denominator is 0. `Float64` */
   win_rate_away?: number | null;
-  /** `Float64` */
+  /** passes_neutral_site / plays_neutral_site: pass rate in the team's neutral-site games. Null when the denominator is 0. `Float64` */
   pass_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** epa_neutral_site / plays_neutral_site: EPA per play in the team's neutral-site games. Null when the denominator is 0. `Float64` */
   epa_per_play_neutral_site?: number | null;
-  /** `Float64` */
+  /** successes_neutral_site / plays_neutral_site: success rate in the team's neutral-site games. Null when the denominator is 0. `Float64` */
   success_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** wins_neutral_site / games_neutral_site: win rate in the team's neutral-site games. Null when the denominator is 0. `Float64` */
   win_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** passes_after_bye / plays_after_bye: pass rate in the team's games played 13 or more days after the team's previous game. Null when the denominator is 0. `Float64` */
   pass_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** epa_after_bye / plays_after_bye: EPA per play in the team's games played 13 or more days after the team's previous game. Null when the denominator is 0. `Float64` */
   epa_per_play_after_bye?: number | null;
-  /** `Float64` */
+  /** successes_after_bye / plays_after_bye: success rate in the team's games played 13 or more days after the team's previous game. Null when the denominator is 0. `Float64` */
   success_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** wins_after_bye / games_after_bye: win rate in the team's games played 13 or more days after the team's previous game. Null when the denominator is 0. `Float64` */
   win_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** passes_opener / plays_opener: pass rate in the team's regular-season openers. Null when the denominator is 0. `Float64` */
   pass_rate_opener?: number | null;
-  /** `Float64` */
+  /** epa_opener / plays_opener: EPA per play in the team's regular-season openers. Null when the denominator is 0. `Float64` */
   epa_per_play_opener?: number | null;
-  /** `Float64` */
+  /** successes_opener / plays_opener: success rate in the team's regular-season openers. Null when the denominator is 0. `Float64` */
   success_rate_opener?: number | null;
-  /** `Float64` */
+  /** wins_opener / games_opener: win rate in the team's regular-season openers. Null when the denominator is 0. `Float64` */
   win_rate_opener?: number | null;
-  /** `Float64` */
+  /** passes_one_score_game / plays_one_score_game: pass rate in the team's games decided by 8 points or fewer. Null when the denominator is 0. `Float64` */
   pass_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** epa_one_score_game / plays_one_score_game: EPA per play in the team's games decided by 8 points or fewer. Null when the denominator is 0. `Float64` */
   epa_per_play_one_score_game?: number | null;
-  /** `Float64` */
+  /** successes_one_score_game / plays_one_score_game: success rate in the team's games decided by 8 points or fewer. Null when the denominator is 0. `Float64` */
   success_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** wins_one_score_game / games_one_score_game: win rate in the team's games decided by 8 points or fewer. Null when the denominator is 0. `Float64` */
   win_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** yards / plays: yards per play. Null when the denominator is 0. `Float64` */
   ypp?: number | null;
-  /** `Float64` */
+  /** yards_rush / rushes: yards per rush. Null when the denominator is 0. `Float64` */
   ypp_rush?: number | null;
-  /** `Float64` */
+  /** yards_pass / passes: yards per pass play. Null when the denominator is 0. `Float64` */
   ypp_pass?: number | null;
-  /** `Float64` */
+  /** explosives / plays. Null when the denominator is 0. `Float64` */
   explosive_rate?: number | null;
-  /** `Float64` */
+  /** explosives_rush / rushes. Null when the denominator is 0. `Float64` */
   explosive_rate_rush?: number | null;
-  /** `Float64` */
+  /** explosives_pass / passes. Null when the denominator is 0. `Float64` */
   explosive_rate_pass?: number | null;
-  /** `Float64` */
+  /** third_down_conversions / third_down_opportunities. Null when the denominator is 0. `Float64` */
   third_down_rate?: number | null;
-  /** `Float64` */
+  /** rz_trips / drives: the share of drives that reached the red zone. Null when the denominator is 0. `Float64` */
   rz_trip_rate?: number | null;
-  /** `Float64` */
+  /** rz_tds / rz_trips: touchdowns per red-zone trip. Null when the denominator is 0. `Float64` */
   rz_td_rate?: number | null;
-  /** `Float64` */
+  /** rz_scores / rz_trips: the share of red-zone trips that scored (touchdown or field goal). Null when the denominator is 0. `Float64` */
   rz_conversion_rate?: number | null;
-  /** `Float64` */
+  /** rz_points / rz_trips: points per red-zone trip. Null when the denominator is 0. `Float64` */
   rz_pts_per_trip?: number | null;
-  /** `Float64` */
+  /** so_trips / drives: the share of drives that reached the opponent's 40. Null when the denominator is 0. `Float64` */
   so_trip_rate?: number | null;
-  /** `Float64` */
+  /** so_tds / so_trips: touchdowns per scoring-opportunity trip. Null when the denominator is 0. `Float64` */
   so_td_rate?: number | null;
-  /** `Float64` */
+  /** so_scores / so_trips: the share of scoring-opportunity trips that scored. Null when the denominator is 0. `Float64` */
   so_conversion_rate?: number | null;
-  /** `Float64` */
+  /** so_points / so_trips: points per scoring-opportunity trip. Null when the denominator is 0. `Float64` */
   so_pts_per_trip?: number | null;
-  /** `Float64` */
+  /** drive_points / drives: points per drive. Null when the denominator is 0. `Float64` */
   pts_per_drive?: number | null;
-  /** `Float64` */
+  /** scripted_epa / scripted_plays. Null when the denominator is 0. `Float64` */
   scripted_epa_per_play?: number | null;
-  /** `Float64` */
+  /** scripted_successes / scripted_plays. Null when the denominator is 0. `Float64` */
   scripted_success_rate?: number | null;
-  /** `Float64` */
+  /** scripted_points / scripted_drives. Null when the denominator is 0. `Float64` */
   scripted_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** non_scripted_epa / non_scripted_plays. Null when the denominator is 0. `Float64` */
   non_scripted_epa_per_play?: number | null;
-  /** `Float64` */
+  /** non_scripted_successes / non_scripted_plays. Null when the denominator is 0. `Float64` */
   non_scripted_success_rate?: number | null;
-  /** `Float64` */
+  /** non_scripted_points / non_scripted_drives. Null when the denominator is 0. `Float64` */
   non_scripted_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** fourth_went / fourth_decisions: the share of fourth-down decisions on which the offense went for it. Null when the denominator is 0. `Float64` */
   go_rate?: number | null;
-  /** `Float64` */
+  /** fourth_went_when_go / fourth_model_go: go rate on the decisions where the fourth-down model said go. Null when the denominator is 0. `Float64` */
   go_rate_when_model_says_go?: number | null;
-  /** `Float64` */
+  /** fourth_went_when_kick / fourth_model_kick: go rate on the decisions where the model said punt or kick. Null when the denominator is 0. `Float64` */
   go_rate_when_model_says_kick?: number | null;
-  /** `Float64` */
+  /** fourth_agreed / fourth_decisions: the share of decisions that matched the model. Null when the denominator is 0. `Float64` */
   fourth_agreement_rate?: number | null;
-  /** `Float64` */
+  /** fourth_wp_left / fourth_decisions: win probability left on the table per fourth-down decision. Null when the denominator is 0. `Float64` */
   fourth_wp_left_per_decision?: number | null;
-  /** `Float64` */
+  /** fourth_converted / fourth_went: conversion rate when going for it. Null when the denominator is 0. `Float64` */
   fourth_conversion_rate?: number | null;
-  /** `Float64` */
+  /** third_down_conversions minus third_down_expected: conversions above the distance-adjusted expectation; null when no curve was available. `Float64` */
   third_down_over_expected?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games -- the same measure over the opposing offenses' plays while this team's defense was on the field: distinct games in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays -- the same measure over the opposing offenses' plays while this team's defense was on the field: standing scrimmage plays run by the offense (scrimmage_play rows not nullified by penalty). `UInt32` */
   def_plays?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of rushes -- the same measure over the opposing offenses' plays while this team's defense was on the field: rushing plays among the standing scrimmage plays. `UInt32` */
   def_rushes?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays among the standing scrimmage plays. `UInt32` */
   def_passes?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the standing scrimmage plays. `Float64` */
   def_epa?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_rush -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the rushing plays. `Float64` */
   def_epa_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_pass -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the pass plays. `Float64` */
   def_epa_pass?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) on the play-by-play. `UInt32` */
   def_successes?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_rush -- the same measure over the opposing offenses' plays while this team's defense was on the field: rushing plays flagged EPA_success. `UInt32` */
   def_successes_rush?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_pass -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays flagged EPA_success. `UInt32` */
   def_successes_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of yards -- the same measure over the opposing offenses' plays while this team's defense was on the field: statYardage summed over the standing scrimmage plays. `Float64` */
   def_yards?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of yards_rush -- the same measure over the opposing offenses' plays while this team's defense was on the field: statYardage summed over the rushing plays. `Float64` */
   def_yards_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of yards_pass -- the same measure over the opposing offenses' plays while this team's defense was on the field: statYardage summed over the pass plays. `Float64` */
   def_yards_pass?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of explosives -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_explosive on the play-by-play. `UInt32` */
   def_explosives?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of explosives_rush -- the same measure over the opposing offenses' plays while this team's defense was on the field: rushing plays flagged EPA_explosive. `UInt32` */
   def_explosives_rush?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of explosives_pass -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays flagged EPA_explosive. `UInt32` */
   def_explosives_pass?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of third_down_opportunities -- the same measure over the opposing offenses' plays while this team's defense was on the field: third-down scrimmage plays. `UInt32` */
   def_third_down_opportunities?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of third_down_conversions -- the same measure over the opposing offenses' plays while this team's defense was on the field: third-down plays that produced a first down or an offensive touchdown. `UInt32` */
   def_third_down_conversions?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of third_down_expected -- the same measure over the opposing offenses' plays while this team's defense was on the field: expected third-down conversions: the league's bundled third-down yards-to-go conversion curve summed over the third-down plays; null when no curve was available. `Float64` */
   def_third_down_expected?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_neutral -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays in situation-neutral plays: score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half. `UInt32` */
   def_plays_neutral?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_neutral -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays in situation-neutral situations (see plays_neutral). `UInt32` */
   def_passes_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_neutral -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over situation-neutral plays: score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half. `Float64` */
   def_epa_neutral?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_neutral -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) in situation-neutral situations (score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half). `UInt32` */
   def_successes_neutral?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d1 -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays on first down. `UInt32` */
   def_plays_d1?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d1 -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays on first down. `UInt32` */
   def_passes_d1?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d1 -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays on first down. `Float64` */
   def_epa_d1?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d1 -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) on first down. `UInt32` */
   def_successes_d1?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d2 -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays on second down. `UInt32` */
   def_plays_d2?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d2 -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays on second down. `UInt32` */
   def_passes_d2?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d2 -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays on second down. `Float64` */
   def_epa_d2?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d2 -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) on second down. `UInt32` */
   def_successes_d2?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d3 -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays on third down. `UInt32` */
   def_plays_d3?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d3 -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays on third down. `UInt32` */
   def_passes_d3?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d3 -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays on third down. `Float64` */
   def_epa_d3?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d3 -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) on third down. `UInt32` */
   def_successes_d3?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d4 -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays on fourth down. `UInt32` */
   def_plays_d4?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d4 -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays on fourth down. `UInt32` */
   def_passes_d4?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d4 -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays on fourth down. `Float64` */
   def_epa_d4?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d4 -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) on fourth down. `UInt32` */
   def_successes_d4?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_early_down -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays on first or second down. `UInt32` */
   def_plays_early_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_early_down -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays on first or second down. `UInt32` */
   def_passes_early_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_early_down -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the first- and second-down plays. `Float64` */
   def_epa_early_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_early_down -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) on first or second down. `UInt32` */
   def_successes_early_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_standard_down -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged standard_down on the play-by-play: first down, second down with fewer than 8 to go, or third / fourth down with fewer than 5 to go. `UInt32` */
   def_plays_standard_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_standard_down -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays on standard downs (see plays_standard_down). `UInt32` */
   def_passes_standard_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_standard_down -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays on standard downs (the play-by-play standard_down flag). `Float64` */
   def_epa_standard_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_standard_down -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) on standard downs (the play-by-play standard_down flag). `UInt32` */
   def_successes_standard_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_passing_down -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged passing_down on the play-by-play: second down with 8 or more to go, or third / fourth down with 5 or more to go. `UInt32` */
   def_plays_passing_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_passing_down -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays on passing downs (see plays_passing_down). `UInt32` */
   def_passes_passing_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_passing_down -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays on passing downs (the play-by-play passing_down flag). `Float64` */
   def_epa_passing_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_passing_down -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) on passing downs (the play-by-play passing_down flag). `UInt32` */
   def_successes_passing_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_leading -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_plays_leading?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_leading -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_passes_leading?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_leading -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   def_epa_leading?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_leading -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_successes_leading?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_tied -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_plays_tied?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_tied -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_passes_tied?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_tied -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   def_epa_tied?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_tied -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_successes_tied?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_trailing -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_plays_trailing?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_trailing -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_passes_trailing?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_trailing -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   def_epa_trailing?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_trailing -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_successes_trailing?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_first_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays in the first two quarters. `UInt32` */
   def_plays_first_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_first_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays in the first two quarters. `UInt32` */
   def_passes_first_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_first_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays in the first two quarters. `Float64` */
   def_epa_first_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_first_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) in the first two quarters. `UInt32` */
   def_successes_first_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_second_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays in the third and fourth quarters (overtime belongs to neither half). `UInt32` */
   def_plays_second_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_second_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays in the third and fourth quarters. `UInt32` */
   def_passes_second_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_second_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays in the third and fourth quarters (overtime belongs to neither half). `Float64` */
   def_epa_second_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_second_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) in the third and fourth quarters (overtime belongs to neither half). `UInt32` */
   def_successes_second_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d3_short -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays on third down with 3 or fewer yards to go. `UInt32` */
   def_plays_d3_short?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d3_short -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays on third down with 3 or fewer yards to go. `UInt32` */
   def_passes_d3_short?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d3_short -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays on third down with 3 or fewer yards to go. `Float64` */
   def_epa_d3_short?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d3_short -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) on third down with 3 or fewer yards to go. `UInt32` */
   def_successes_d3_short?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d3_medium -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays on third down with 4 to 6 yards to go. `UInt32` */
   def_plays_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d3_medium -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays on third down with 4 to 6 yards to go. `UInt32` */
   def_passes_d3_medium?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d3_medium -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays on third down with 4 to 6 yards to go. `Float64` */
   def_epa_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d3_medium -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) on third down with 4 to 6 yards to go. `UInt32` */
   def_successes_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d3_long -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays on third down with 7 or more yards to go. `UInt32` */
   def_plays_d3_long?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d3_long -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays on third down with 7 or more yards to go. `UInt32` */
   def_passes_d3_long?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d3_long -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays on third down with 7 or more yards to go. `Float64` */
   def_epa_d3_long?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d3_long -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) on third down with 7 or more yards to go. `UInt32` */
   def_successes_d3_long?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_red_zone -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   def_plays_red_zone?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_red_zone -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   def_passes_red_zone?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_red_zone -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `Float64` */
   def_epa_red_zone?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_red_zone -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   def_successes_red_zone?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_own_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   def_plays_own_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_own_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   def_passes_own_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_own_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays snapped in the offense's own half (50 or more yards from the opponent end zone). `Float64` */
   def_epa_own_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_own_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   def_successes_own_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_opp_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   def_plays_opp_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_opp_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   def_passes_opp_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_opp_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `Float64` */
   def_epa_opp_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_opp_half -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   def_successes_opp_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_one_score -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_plays_one_score?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_one_score -- the same measure over the opposing offenses' plays while this team's defense was on the field: pass plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_passes_one_score?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_one_score -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   def_epa_one_score?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_one_score -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success (positive EPA) snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_successes_one_score?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_home -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's home games. `UInt32` */
   def_plays_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_home -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's home games. `UInt32` */
   def_passes_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_home -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's home games. `Float64` */
   def_epa_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_home -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's home games. `UInt32` */
   def_successes_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_home -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct home games in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_home -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_home, the home games the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_away -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's away games. `UInt32` */
   def_plays_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_away -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's away games. `UInt32` */
   def_passes_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_away -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's away games. `Float64` */
   def_epa_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_away -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's away games. `UInt32` */
   def_successes_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_away -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct away games in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_away -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_away, the away games the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_neutral_site -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's neutral-site games. `UInt32` */
   def_plays_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_neutral_site -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's neutral-site games. `UInt32` */
   def_passes_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_neutral_site -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's neutral-site games. `Float64` */
   def_epa_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_neutral_site -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's neutral-site games. `UInt32` */
   def_successes_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_neutral_site -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct neutral-site games in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_neutral_site -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_neutral_site, the neutral-site games the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_after_bye -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's games played 13 or more days after the team's previous game. `UInt32` */
   def_plays_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_after_bye -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's games played 13 or more days after the team's previous game. `UInt32` */
   def_passes_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_after_bye -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's games played 13 or more days after the team's previous game. `Float64` */
   def_epa_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_after_bye -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's games played 13 or more days after the team's previous game. `UInt32` */
   def_successes_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_after_bye -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct games played 13 or more days after the team's previous game in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_after_bye -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_after_bye, the games played 13 or more days after the team's previous game the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_opener -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's regular-season openers. `UInt32` */
   def_plays_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_opener -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's regular-season openers. `UInt32` */
   def_passes_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_opener -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's regular-season openers. `Float64` */
   def_epa_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_opener -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's regular-season openers. `UInt32` */
   def_successes_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_opener -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct regular-season openers in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_opener -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_opener, the regular-season openers the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_one_score_game -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's games decided by 8 points or fewer. `UInt32` */
   def_plays_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_one_score_game -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's games decided by 8 points or fewer. `UInt32` */
   def_passes_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_one_score_game -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's games decided by 8 points or fewer. `Float64` */
   def_epa_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_one_score_game -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's games decided by 8 points or fewer. `UInt32` */
   def_successes_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_one_score_game -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct games decided by 8 points or fewer in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_one_score_game -- the same measure over the opposing offenses' plays while this team's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_one_score_game, the games decided by 8 points or fewer the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of drives -- the same measure over the opposing offenses' plays while this team's defense was on the field: offensive drives: distinct drive.id values with at least one standing scrimmage play. `UInt32` */
   def_drives?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of drives_with_clock -- the same measure over the opposing offenses' plays while this team's defense was on the field: drives with a usable ESPN drive clock (a parseable drive.timeElapsed and a positive drive.offensivePlays). `UInt32` */
   def_drives_with_clock?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_seconds -- the same measure over the opposing offenses' plays while this team's defense was on the field: eSPN elapsed drive time in seconds, summed over the drives with a usable clock. `Float64` */
   def_drive_seconds?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_plays -- the same measure over the opposing offenses' plays while this team's defense was on the field: eSPN drive.offensivePlays summed over the drives with a usable clock -- the pace denominator. `Float64` */
   def_drive_plays?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_seconds_neutral -- the same measure over the opposing offenses' plays while this team's defense was on the field: eSPN elapsed drive seconds summed over the clocked drives whose first play was situation-neutral. `Float64` */
   def_drive_seconds_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_plays_neutral -- the same measure over the opposing offenses' plays while this team's defense was on the field: eSPN drive.offensivePlays summed over the clocked drives whose first play was situation-neutral. `Float64` */
   def_drive_plays_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_points -- the same measure over the opposing offenses' plays while this team's defense was on the field: drive points (touchdown 7, field goal 3, from drive.result) summed over the drives. `Float64` */
   def_drive_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of rz_trips -- the same measure over the opposing offenses' plays while this team's defense was on the field: drives with at least one play snapped in the red zone (20 or fewer yards to the end zone). `UInt32` */
   def_rz_trips?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of rz_tds -- the same measure over the opposing offenses' plays while this team's defense was on the field: red-zone drives that included an offensive touchdown play. `UInt32` */
   def_rz_tds?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of rz_scores -- the same measure over the opposing offenses' plays while this team's defense was on the field: red-zone drives that scored (a touchdown or a field goal). `UInt32` */
   def_rz_scores?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_points -- the same measure over the opposing offenses' plays while this team's defense was on the field: drive points (touchdown 7, field goal 3) summed over the red-zone drives. `Float64` */
   def_rz_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of so_trips -- the same measure over the opposing offenses' plays while this team's defense was on the field: drives with at least one play snapped in scoring-opportunity territory (40 or fewer yards to the end zone). `UInt32` */
   def_so_trips?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of so_tds -- the same measure over the opposing offenses' plays while this team's defense was on the field: scoring-opportunity drives that included an offensive touchdown play. `UInt32` */
   def_so_tds?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of so_scores -- the same measure over the opposing offenses' plays while this team's defense was on the field: scoring-opportunity drives that scored (a touchdown or a field goal). `UInt32` */
   def_so_scores?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_points -- the same measure over the opposing offenses' plays while this team's defense was on the field: drive points (touchdown 7, field goal 3) summed over the scoring-opportunity drives. `Float64` */
   def_so_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of scripted_drives -- the same measure over the opposing offenses' plays while this team's defense was on the field: the offense's first two drives of each half. `UInt32` */
   def_scripted_drives?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of scripted_plays -- the same measure over the opposing offenses' plays while this team's defense was on the field: standing scrimmage plays on the scripted drives. `UInt32` */
   def_scripted_plays?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_epa -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the scripted drives. `Float64` */
   def_scripted_epa?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of scripted_successes -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success on the scripted drives. `UInt32` */
   def_scripted_successes?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_points -- the same measure over the opposing offenses' plays while this team's defense was on the field: drive points (touchdown 7, field goal 3) summed over the scripted drives. `Float64` */
   def_scripted_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of non_scripted_drives -- the same measure over the opposing offenses' plays while this team's defense was on the field: every drive after the offense's first two of each half. `UInt32` */
   def_non_scripted_drives?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of non_scripted_plays -- the same measure over the opposing offenses' plays while this team's defense was on the field: standing scrimmage plays on the non-scripted drives. `UInt32` */
   def_non_scripted_plays?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_epa -- the same measure over the opposing offenses' plays while this team's defense was on the field: play EPA summed over the non-scripted drives. `Float64` */
   def_non_scripted_epa?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of non_scripted_successes -- the same measure over the opposing offenses' plays while this team's defense was on the field: plays flagged EPA_success on the non-scripted drives. `UInt32` */
   def_non_scripted_successes?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_points -- the same measure over the opposing offenses' plays while this team's defense was on the field: drive points (touchdown 7, field goal 3) summed over the non-scripted drives. `Float64` */
   def_non_scripted_points?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of plays_per_game: plays / games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_plays_per_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of plays_per_drive: plays / drives. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_plays_per_drive?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drives_per_game: drives / games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_drives_per_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of sec_per_play: drive_seconds / drive_plays: seconds of game clock per offensive play from ESPN's own drive clock (pace; lower is faster). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_sec_per_play?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of sec_per_play_neutral: drive_seconds_neutral / drive_plays_neutral: the same pace measure on drives that started situation-neutral. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_sec_per_play_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pace_coverage: drives_with_clock / drives: the share of drives with a usable clock; treat sec_per_play with caution when this is low. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pace_coverage?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate: passes / plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play: epa / plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_rush: epa_rush / rushes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_pass: epa_pass / passes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate: successes / plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_rush: successes_rush / rushes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_pass: successes_pass / passes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_neutral: passes_neutral / plays_neutral: pass rate in situation-neutral situations. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_neutral: epa_neutral / plays_neutral. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_neutral: successes_neutral / plays_neutral: success rate in situation-neutral situations (score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d1: passes_d1 / plays_d1: pass rate on first down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d1?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d1: epa_d1 / plays_d1: EPA per play on first down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d1?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d1: successes_d1 / plays_d1: success rate on first down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d1?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d2: passes_d2 / plays_d2: pass rate on second down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d2?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d2: epa_d2 / plays_d2: EPA per play on second down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d2?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d2: successes_d2 / plays_d2: success rate on second down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d2?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d3: passes_d3 / plays_d3: pass rate on third down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d3?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d3: epa_d3 / plays_d3: EPA per play on third down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d3?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d3: successes_d3 / plays_d3: success rate on third down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d3?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d4: passes_d4 / plays_d4: pass rate on fourth down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d4?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d4: epa_d4 / plays_d4: EPA per play on fourth down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d4?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d4: successes_d4 / plays_d4: success rate on fourth down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d4?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_early_down: passes_early_down / plays_early_down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_early_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_early_down: epa_early_down / plays_early_down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_early_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_early_down: successes_early_down / plays_early_down: success rate on first or second down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_early_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_standard_down: passes_standard_down / plays_standard_down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_standard_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_standard_down: epa_standard_down / plays_standard_down: EPA per play on standard downs (the play-by-play standard_down flag). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_standard_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_standard_down: successes_standard_down / plays_standard_down: success rate on standard downs (the play-by-play standard_down flag). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_standard_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_passing_down: passes_passing_down / plays_passing_down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_passing_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_passing_down: epa_passing_down / plays_passing_down: EPA per play on passing downs (the play-by-play passing_down flag). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_passing_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_passing_down: successes_passing_down / plays_passing_down: success rate on passing downs (the play-by-play passing_down flag). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_passing_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_leading: passes_leading / plays_leading: pass rate snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_leading?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_leading: epa_leading / plays_leading: EPA per play snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_leading?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_leading: successes_leading / plays_leading: success rate snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_leading?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_tied: passes_tied / plays_tied: pass rate snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_tied?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_tied: epa_tied / plays_tied: EPA per play snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_tied?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_tied: successes_tied / plays_tied: success rate snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_tied?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_trailing: passes_trailing / plays_trailing: pass rate snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_trailing?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_trailing: epa_trailing / plays_trailing: EPA per play snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_trailing?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_trailing: successes_trailing / plays_trailing: success rate snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_trailing?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_first_half: passes_first_half / plays_first_half. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_first_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_first_half: epa_first_half / plays_first_half: EPA per play in the first two quarters. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_first_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_first_half: successes_first_half / plays_first_half: success rate in the first two quarters. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_first_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_second_half: passes_second_half / plays_second_half. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_second_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_second_half: epa_second_half / plays_second_half: EPA per play in the third and fourth quarters (overtime belongs to neither half). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_second_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_second_half: successes_second_half / plays_second_half: success rate in the third and fourth quarters (overtime belongs to neither half). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_second_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d3_short: passes_d3_short / plays_d3_short: pass rate on third down with 3 or fewer yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d3_short?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d3_short: epa_d3_short / plays_d3_short: EPA per play on third down with 3 or fewer yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d3_short?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d3_short: successes_d3_short / plays_d3_short: success rate on third down with 3 or fewer yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d3_short?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d3_medium: passes_d3_medium / plays_d3_medium: pass rate on third down with 4 to 6 yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d3_medium?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d3_medium: epa_d3_medium / plays_d3_medium: EPA per play on third down with 4 to 6 yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d3_medium?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d3_medium: successes_d3_medium / plays_d3_medium: success rate on third down with 4 to 6 yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d3_medium?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d3_long: passes_d3_long / plays_d3_long: pass rate on third down with 7 or more yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d3_long?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d3_long: epa_d3_long / plays_d3_long: EPA per play on third down with 7 or more yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d3_long?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d3_long: successes_d3_long / plays_d3_long: success rate on third down with 7 or more yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d3_long?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_red_zone: passes_red_zone / plays_red_zone: pass rate in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_red_zone?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_red_zone: epa_red_zone / plays_red_zone: EPA per play in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_red_zone?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_red_zone: successes_red_zone / plays_red_zone: success rate in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_red_zone?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_own_half: passes_own_half / plays_own_half: pass rate snapped in the offense's own half (50 or more yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_own_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_own_half: epa_own_half / plays_own_half: EPA per play snapped in the offense's own half (50 or more yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_own_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_own_half: successes_own_half / plays_own_half: success rate snapped in the offense's own half (50 or more yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_own_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_opp_half: passes_opp_half / plays_opp_half: pass rate snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_opp_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_opp_half: epa_opp_half / plays_opp_half: EPA per play snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_opp_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_opp_half: successes_opp_half / plays_opp_half: success rate snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_opp_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_one_score: passes_one_score / plays_one_score: pass rate snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_one_score?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_one_score: epa_one_score / plays_one_score: EPA per play snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_one_score?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_one_score: successes_one_score / plays_one_score: success rate snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_one_score?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_home: passes_home / plays_home: pass rate in the team's home games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_home: epa_home / plays_home: EPA per play in the team's home games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_home: successes_home / plays_home: success rate in the team's home games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_home: wins_home / games_home: win rate in the team's home games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_away: passes_away / plays_away: pass rate in the team's away games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_away: epa_away / plays_away: EPA per play in the team's away games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_away: successes_away / plays_away: success rate in the team's away games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_away: wins_away / games_away: win rate in the team's away games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_neutral_site: passes_neutral_site / plays_neutral_site: pass rate in the team's neutral-site games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_neutral_site: epa_neutral_site / plays_neutral_site: EPA per play in the team's neutral-site games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_neutral_site: successes_neutral_site / plays_neutral_site: success rate in the team's neutral-site games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_neutral_site: wins_neutral_site / games_neutral_site: win rate in the team's neutral-site games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_after_bye: passes_after_bye / plays_after_bye: pass rate in the team's games played 13 or more days after the team's previous game. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_after_bye: epa_after_bye / plays_after_bye: EPA per play in the team's games played 13 or more days after the team's previous game. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_after_bye: successes_after_bye / plays_after_bye: success rate in the team's games played 13 or more days after the team's previous game. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_after_bye: wins_after_bye / games_after_bye: win rate in the team's games played 13 or more days after the team's previous game. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_opener: passes_opener / plays_opener: pass rate in the team's regular-season openers. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_opener: epa_opener / plays_opener: EPA per play in the team's regular-season openers. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_opener: successes_opener / plays_opener: success rate in the team's regular-season openers. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_opener: wins_opener / games_opener: win rate in the team's regular-season openers. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_one_score_game: passes_one_score_game / plays_one_score_game: pass rate in the team's games decided by 8 points or fewer. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_one_score_game: epa_one_score_game / plays_one_score_game: EPA per play in the team's games decided by 8 points or fewer. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_one_score_game: successes_one_score_game / plays_one_score_game: success rate in the team's games decided by 8 points or fewer. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_one_score_game: wins_one_score_game / games_one_score_game: win rate in the team's games decided by 8 points or fewer. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of ypp: yards / plays: yards per play. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_ypp?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of ypp_rush: yards_rush / rushes: yards per rush. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_ypp_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of ypp_pass: yards_pass / passes: yards per pass play. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_ypp_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of explosive_rate: explosives / plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_explosive_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of explosive_rate_rush: explosives_rush / rushes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_explosive_rate_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of explosive_rate_pass: explosives_pass / passes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_explosive_rate_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of third_down_rate: third_down_conversions / third_down_opportunities. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_third_down_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_trip_rate: rz_trips / drives: the share of drives that reached the red zone. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_rz_trip_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_td_rate: rz_tds / rz_trips: touchdowns per red-zone trip. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_rz_td_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_conversion_rate: rz_scores / rz_trips: the share of red-zone trips that scored (touchdown or field goal). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_rz_conversion_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_pts_per_trip: rz_points / rz_trips: points per red-zone trip. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_rz_pts_per_trip?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_trip_rate: so_trips / drives: the share of drives that reached the opponent's 40. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_so_trip_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_td_rate: so_tds / so_trips: touchdowns per scoring-opportunity trip. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_so_td_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_conversion_rate: so_scores / so_trips: the share of scoring-opportunity trips that scored. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_so_conversion_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_pts_per_trip: so_points / so_trips: points per scoring-opportunity trip. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_so_pts_per_trip?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pts_per_drive: drive_points / drives: points per drive. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_epa_per_play: scripted_epa / scripted_plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_scripted_epa_per_play?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_success_rate: scripted_successes / scripted_plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_scripted_success_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_pts_per_drive: scripted_points / scripted_drives. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_scripted_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_epa_per_play: non_scripted_epa / non_scripted_plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_non_scripted_epa_per_play?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_success_rate: non_scripted_successes / non_scripted_plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_non_scripted_success_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_pts_per_drive: non_scripted_points / non_scripted_drives. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_non_scripted_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of third_down_over_expected: def_third_down_conversions minus def_third_down_expected; null when no curve was available. `Float64` */
   def_third_down_over_expected?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -3765,1165 +3765,1165 @@ export interface LoadNflTeamTendenciesRow {
 
 /** One row of `sdv.nfl.loadNflCoachTendencies` (`espn_nfl_coach_tendencies`; sdv-py loader schema `load_nfl_coach_tendencies`). */
 export interface LoadNflCoachTendenciesRow {
-  /** `Int64` */
+  /** Season the rows were summed over, keyed by the season's starting calendar year -- the same season stamp the released play-by-play carries. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN team id of the team the coach's plays were attributed to; joins to the ESPN teams and schedule datasets on team_id. `Int64` (an id) */
   pos_team_id?: string | null;
-  /** `String` */
+  /** Display name of the team the coach's plays were attributed to, as carried on the released play-by-play (e.g. "Kansas City Chiefs", "Georgia Bulldogs"). `String` */
   pos_team?: string | null;
-  /** `String` */
+  /** Head coach the plays were attributed to -- per game from the nflverse schedule (home_coach / away_coach) for the NFL, per team-season from the producer's CFBD coach roster for CFB. `String` */
   coach?: string | null;
-  /** `String` */
+  /** Coaching role the row is keyed on; always "HC" (head coach) in the published assets, reserved for later coordinator rows. `String` */
   role?: string | null;
-  /** `UInt32` */
+  /** Distinct games in which the offense ran at least one standing scrimmage play. `UInt32` */
   games?: number | null;
-  /** `UInt32` */
+  /** Standing scrimmage plays run by the offense (scrimmage_play rows not nullified by penalty). `UInt32` */
   plays?: number | null;
-  /** `UInt32` */
+  /** Rushing plays among the standing scrimmage plays. `UInt32` */
   rushes?: number | null;
-  /** `UInt32` */
+  /** Pass plays among the standing scrimmage plays. `UInt32` */
   passes?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the standing scrimmage plays. `Float64` */
   epa?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the rushing plays. `Float64` */
   epa_rush?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the pass plays. `Float64` */
   epa_pass?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on the play-by-play. `UInt32` */
   successes?: number | null;
-  /** `UInt32` */
+  /** Rushing plays flagged EPA_success. `UInt32` */
   successes_rush?: number | null;
-  /** `UInt32` */
+  /** Pass plays flagged EPA_success. `UInt32` */
   successes_pass?: number | null;
-  /** `Float64` */
+  /** statYardage summed over the standing scrimmage plays. `Float64` */
   yards?: number | null;
-  /** `Float64` */
+  /** statYardage summed over the rushing plays. `Float64` */
   yards_rush?: number | null;
-  /** `Float64` */
+  /** statYardage summed over the pass plays. `Float64` */
   yards_pass?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_explosive on the play-by-play. `UInt32` */
   explosives?: number | null;
-  /** `UInt32` */
+  /** Rushing plays flagged EPA_explosive. `UInt32` */
   explosives_rush?: number | null;
-  /** `UInt32` */
+  /** Pass plays flagged EPA_explosive. `UInt32` */
   explosives_pass?: number | null;
-  /** `UInt32` */
+  /** Third-down scrimmage plays. `UInt32` */
   third_down_opportunities?: number | null;
-  /** `UInt32` */
+  /** Third-down plays that produced a first down or an offensive touchdown. `UInt32` */
   third_down_conversions?: number | null;
-  /** `Float64` */
+  /** Expected third-down conversions: the league's bundled third-down yards-to-go conversion curve summed over the third-down plays; null when no curve was available. `Float64` */
   third_down_expected?: number | null;
-  /** `UInt32` */
+  /** Plays in situation-neutral plays: score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half. `UInt32` */
   plays_neutral?: number | null;
-  /** `UInt32` */
+  /** Pass plays in situation-neutral situations (see plays_neutral). `UInt32` */
   passes_neutral?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over situation-neutral plays: score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half. `Float64` */
   epa_neutral?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in situation-neutral situations (score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half). `UInt32` */
   successes_neutral?: number | null;
-  /** `UInt32` */
+  /** Plays on first down. `UInt32` */
   plays_d1?: number | null;
-  /** `UInt32` */
+  /** Pass plays on first down. `UInt32` */
   passes_d1?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on first down. `Float64` */
   epa_d1?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on first down. `UInt32` */
   successes_d1?: number | null;
-  /** `UInt32` */
+  /** Plays on second down. `UInt32` */
   plays_d2?: number | null;
-  /** `UInt32` */
+  /** Pass plays on second down. `UInt32` */
   passes_d2?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on second down. `Float64` */
   epa_d2?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on second down. `UInt32` */
   successes_d2?: number | null;
-  /** `UInt32` */
+  /** Plays on third down. `UInt32` */
   plays_d3?: number | null;
-  /** `UInt32` */
+  /** Pass plays on third down. `UInt32` */
   passes_d3?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on third down. `Float64` */
   epa_d3?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on third down. `UInt32` */
   successes_d3?: number | null;
-  /** `UInt32` */
+  /** Plays on fourth down. `UInt32` */
   plays_d4?: number | null;
-  /** `UInt32` */
+  /** Pass plays on fourth down. `UInt32` */
   passes_d4?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on fourth down. `Float64` */
   epa_d4?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on fourth down. `UInt32` */
   successes_d4?: number | null;
-  /** `UInt32` */
+  /** Plays on first or second down. `UInt32` */
   plays_early_down?: number | null;
-  /** `UInt32` */
+  /** Pass plays on first or second down. `UInt32` */
   passes_early_down?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the first- and second-down plays. `Float64` */
   epa_early_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on first or second down. `UInt32` */
   successes_early_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged standard_down on the play-by-play: first down, second down with fewer than 8 to go, or third / fourth down with fewer than 5 to go. `UInt32` */
   plays_standard_down?: number | null;
-  /** `UInt32` */
+  /** Pass plays on standard downs (see plays_standard_down). `UInt32` */
   passes_standard_down?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on standard downs (the play-by-play standard_down flag). `Float64` */
   epa_standard_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on standard downs (the play-by-play standard_down flag). `UInt32` */
   successes_standard_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged passing_down on the play-by-play: second down with 8 or more to go, or third / fourth down with 5 or more to go. `UInt32` */
   plays_passing_down?: number | null;
-  /** `UInt32` */
+  /** Pass plays on passing downs (see plays_passing_down). `UInt32` */
   passes_passing_down?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on passing downs (the play-by-play passing_down flag). `Float64` */
   epa_passing_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on passing downs (the play-by-play passing_down flag). `UInt32` */
   successes_passing_down?: number | null;
-  /** `UInt32` */
+  /** Plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   plays_leading?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   passes_leading?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   epa_leading?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   successes_leading?: number | null;
-  /** `UInt32` */
+  /** Plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   plays_tied?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   passes_tied?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   epa_tied?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   successes_tied?: number | null;
-  /** `UInt32` */
+  /** Plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   plays_trailing?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   passes_trailing?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   epa_trailing?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   successes_trailing?: number | null;
-  /** `UInt32` */
+  /** Plays in the first two quarters. `UInt32` */
   plays_first_half?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the first two quarters. `UInt32` */
   passes_first_half?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the first two quarters. `Float64` */
   epa_first_half?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the first two quarters. `UInt32` */
   successes_first_half?: number | null;
-  /** `UInt32` */
+  /** Plays in the third and fourth quarters (overtime belongs to neither half). `UInt32` */
   plays_second_half?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the third and fourth quarters. `UInt32` */
   passes_second_half?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the third and fourth quarters (overtime belongs to neither half). `Float64` */
   epa_second_half?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the third and fourth quarters (overtime belongs to neither half). `UInt32` */
   successes_second_half?: number | null;
-  /** `UInt32` */
+  /** Plays on third down with 3 or fewer yards to go. `UInt32` */
   plays_d3_short?: number | null;
-  /** `UInt32` */
+  /** Pass plays on third down with 3 or fewer yards to go. `UInt32` */
   passes_d3_short?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on third down with 3 or fewer yards to go. `Float64` */
   epa_d3_short?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on third down with 3 or fewer yards to go. `UInt32` */
   successes_d3_short?: number | null;
-  /** `UInt32` */
+  /** Plays on third down with 4 to 6 yards to go. `UInt32` */
   plays_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Pass plays on third down with 4 to 6 yards to go. `UInt32` */
   passes_d3_medium?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on third down with 4 to 6 yards to go. `Float64` */
   epa_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on third down with 4 to 6 yards to go. `UInt32` */
   successes_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Plays on third down with 7 or more yards to go. `UInt32` */
   plays_d3_long?: number | null;
-  /** `UInt32` */
+  /** Pass plays on third down with 7 or more yards to go. `UInt32` */
   passes_d3_long?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on third down with 7 or more yards to go. `Float64` */
   epa_d3_long?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on third down with 7 or more yards to go. `UInt32` */
   successes_d3_long?: number | null;
-  /** `UInt32` */
+  /** Plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   plays_red_zone?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   passes_red_zone?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `Float64` */
   epa_red_zone?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   successes_red_zone?: number | null;
-  /** `UInt32` */
+  /** Plays snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   plays_own_half?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   passes_own_half?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped in the offense's own half (50 or more yards from the opponent end zone). `Float64` */
   epa_own_half?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   successes_own_half?: number | null;
-  /** `UInt32` */
+  /** Plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   plays_opp_half?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   passes_opp_half?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `Float64` */
   epa_opp_half?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   successes_opp_half?: number | null;
-  /** `UInt32` */
+  /** Plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   plays_one_score?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   passes_one_score?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   epa_one_score?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   successes_one_score?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's home games. `UInt32` */
   plays_home?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's home games. `UInt32` */
   passes_home?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's home games. `Float64` */
   epa_home?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's home games. `UInt32` */
   successes_home?: number | null;
-  /** `UInt32` */
+  /** Distinct home games in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_home?: number | null;
-  /** `UInt32` */
+  /** Of games_home, the home games the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_home?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's away games. `UInt32` */
   plays_away?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's away games. `UInt32` */
   passes_away?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's away games. `Float64` */
   epa_away?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's away games. `UInt32` */
   successes_away?: number | null;
-  /** `UInt32` */
+  /** Distinct away games in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_away?: number | null;
-  /** `UInt32` */
+  /** Of games_away, the away games the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_away?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's neutral-site games. `UInt32` */
   plays_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's neutral-site games. `UInt32` */
   passes_neutral_site?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's neutral-site games. `Float64` */
   epa_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's neutral-site games. `UInt32` */
   successes_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Distinct neutral-site games in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Of games_neutral_site, the neutral-site games the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's games played 13 or more days after the team's previous game. `UInt32` */
   plays_after_bye?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's games played 13 or more days after the team's previous game. `UInt32` */
   passes_after_bye?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's games played 13 or more days after the team's previous game. `Float64` */
   epa_after_bye?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's games played 13 or more days after the team's previous game. `UInt32` */
   successes_after_bye?: number | null;
-  /** `UInt32` */
+  /** Distinct games played 13 or more days after the team's previous game in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_after_bye?: number | null;
-  /** `UInt32` */
+  /** Of games_after_bye, the games played 13 or more days after the team's previous game the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_after_bye?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's regular-season openers. `UInt32` */
   plays_opener?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's regular-season openers. `UInt32` */
   passes_opener?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's regular-season openers. `Float64` */
   epa_opener?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's regular-season openers. `UInt32` */
   successes_opener?: number | null;
-  /** `UInt32` */
+  /** Distinct regular-season openers in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_opener?: number | null;
-  /** `UInt32` */
+  /** Of games_opener, the regular-season openers the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_opener?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's games decided by 8 points or fewer. `UInt32` */
   plays_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's games decided by 8 points or fewer. `UInt32` */
   passes_one_score_game?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's games decided by 8 points or fewer. `Float64` */
   epa_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's games decided by 8 points or fewer. `UInt32` */
   successes_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Distinct games decided by 8 points or fewer in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Of games_one_score_game, the games decided by 8 points or fewer the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Fourth-down plays on which the offense ran, passed, punted or attempted a field goal and the play stood (timeouts and nullified plays are not decisions). `UInt32` */
   fourth_decisions?: number | null;
-  /** `UInt32` */
+  /** Fourth-down decisions that were a rush or a pass (the offense went for it). `UInt32` */
   fourth_went?: number | null;
-  /** `UInt32` */
+  /** Fourth-down go attempts that produced a first down or an offensive touchdown. `UInt32` */
   fourth_converted?: number | null;
-  /** `UInt32` */
+  /** Decisions on which the fourth-down model recommended going for it (fourth_down_recommendation == "go"). `UInt32` */
   fourth_model_go?: number | null;
-  /** `UInt32` */
+  /** Decisions on which the fourth-down model recommended a punt or a field goal. `UInt32` */
   fourth_model_kick?: number | null;
-  /** `UInt32` */
+  /** Decisions on which the offense went for it when the model also said go. `UInt32` */
   fourth_went_when_go?: number | null;
-  /** `UInt32` */
+  /** Decisions on which the offense went for it when the model said kick. `UInt32` */
   fourth_went_when_kick?: number | null;
-  /** `UInt32` */
+  /** Decisions that matched the model's recommendation (went when it said go, kicked when it said kick). `UInt32` */
   fourth_agreed?: number | null;
-  /** `Float64` */
+  /** Win probability left on the table, summed over the decisions that went against the model: go_boost when the offense kicked against a go recommendation, minus go_boost when it went against a kick recommendation, floored at zero. `Float64` */
   fourth_wp_left?: number | null;
-  /** `UInt32` */
+  /** Offensive drives: distinct drive.id values with at least one standing scrimmage play. `UInt32` */
   drives?: number | null;
-  /** `UInt32` */
+  /** Drives with a usable ESPN drive clock (a parseable drive.timeElapsed and a positive drive.offensivePlays), in regulation (overtime has no game clock) and owned by this offense (an ESPN drive id that holds snaps by both offenses counts once, for ESPN's drive team when it matches an offense in the drive, else the offense with the most standing snaps, the first snap breaking a tie). `UInt32` */
   drives_with_clock?: number | null;
-  /** `Float64` */
+  /** ESPN elapsed drive time in seconds, summed over the drives with a usable clock. `Float64` */
   drive_seconds?: number | null;
-  /** `Float64` */
+  /** ESPN drive.offensivePlays summed over the drives with a usable clock -- the pace denominator. `Float64` */
   drive_plays?: number | null;
-  /** `Float64` */
+  /** ESPN elapsed drive seconds summed over the clocked drives whose first play was situation-neutral. `Float64` */
   drive_seconds_neutral?: number | null;
-  /** `Float64` */
+  /** ESPN drive.offensivePlays summed over the clocked drives whose first play was situation-neutral. `Float64` */
   drive_plays_neutral?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3, from drive.result) summed over the drives. `Float64` */
   drive_points?: number | null;
-  /** `UInt32` */
+  /** Drives with at least one play snapped in the red zone (20 or fewer yards to the end zone). `UInt32` */
   rz_trips?: number | null;
-  /** `UInt32` */
+  /** Red-zone drives that included an offensive touchdown play. `UInt32` */
   rz_tds?: number | null;
-  /** `UInt32` */
+  /** Red-zone drives that scored (a touchdown or a field goal). `UInt32` */
   rz_scores?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3) summed over the red-zone drives. `Float64` */
   rz_points?: number | null;
-  /** `UInt32` */
+  /** Drives with at least one play snapped in scoring-opportunity territory (40 or fewer yards to the end zone). `UInt32` */
   so_trips?: number | null;
-  /** `UInt32` */
+  /** Scoring-opportunity drives that included an offensive touchdown play. `UInt32` */
   so_tds?: number | null;
-  /** `UInt32` */
+  /** Scoring-opportunity drives that scored (a touchdown or a field goal). `UInt32` */
   so_scores?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3) summed over the scoring-opportunity drives. `Float64` */
   so_points?: number | null;
-  /** `UInt32` */
+  /** The offense's first two drives of each half. `UInt32` */
   scripted_drives?: number | null;
-  /** `UInt32` */
+  /** Standing scrimmage plays on the scripted drives. `UInt32` */
   scripted_plays?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the scripted drives. `Float64` */
   scripted_epa?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success on the scripted drives. `UInt32` */
   scripted_successes?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3) summed over the scripted drives. `Float64` */
   scripted_points?: number | null;
-  /** `UInt32` */
+  /** Every drive after the offense's first two of each half. `UInt32` */
   non_scripted_drives?: number | null;
-  /** `UInt32` */
+  /** Standing scrimmage plays on the non-scripted drives. `UInt32` */
   non_scripted_plays?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the non-scripted drives. `Float64` */
   non_scripted_epa?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success on the non-scripted drives. `UInt32` */
   non_scripted_successes?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3) summed over the non-scripted drives. `Float64` */
   non_scripted_points?: number | null;
-  /** `Float64` */
+  /** plays / games. Null when the denominator is 0. `Float64` */
   plays_per_game?: number | null;
-  /** `Float64` */
+  /** plays / drives. Null when the denominator is 0. `Float64` */
   plays_per_drive?: number | null;
-  /** `Float64` */
+  /** drives / games. Null when the denominator is 0. `Float64` */
   drives_per_game?: number | null;
-  /** `Float64` */
+  /** drive_seconds / drive_plays: seconds of game clock per offensive play from ESPN's own drive clock (pace; lower is faster). Null when the denominator is 0. `Float64` */
   sec_per_play?: number | null;
-  /** `Float64` */
+  /** drive_seconds_neutral / drive_plays_neutral: the same pace measure on drives that started situation-neutral. Null when the denominator is 0. `Float64` */
   sec_per_play_neutral?: number | null;
-  /** `Float64` */
+  /** drives_with_clock / drives: the share of drives with a usable clock; treat sec_per_play with caution when this is low. Null when the denominator is 0. `Float64` */
   pace_coverage?: number | null;
-  /** `Float64` */
+  /** passes / plays. Null when the denominator is 0. `Float64` */
   pass_rate?: number | null;
-  /** `Float64` */
+  /** epa / plays. Null when the denominator is 0. `Float64` */
   epa_per_play?: number | null;
-  /** `Float64` */
+  /** epa_rush / rushes. Null when the denominator is 0. `Float64` */
   epa_per_rush?: number | null;
-  /** `Float64` */
+  /** epa_pass / passes. Null when the denominator is 0. `Float64` */
   epa_per_pass?: number | null;
-  /** `Float64` */
+  /** successes / plays. Null when the denominator is 0. `Float64` */
   success_rate?: number | null;
-  /** `Float64` */
+  /** successes_rush / rushes. Null when the denominator is 0. `Float64` */
   success_rate_rush?: number | null;
-  /** `Float64` */
+  /** successes_pass / passes. Null when the denominator is 0. `Float64` */
   success_rate_pass?: number | null;
-  /** `Float64` */
+  /** passes_neutral / plays_neutral: pass rate in situation-neutral situations. Null when the denominator is 0. `Float64` */
   pass_rate_neutral?: number | null;
-  /** `Float64` */
+  /** epa_neutral / plays_neutral. Null when the denominator is 0. `Float64` */
   epa_per_play_neutral?: number | null;
-  /** `Float64` */
+  /** successes_neutral / plays_neutral: success rate in situation-neutral situations (score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half). Null when the denominator is 0. `Float64` */
   success_rate_neutral?: number | null;
-  /** `Float64` */
+  /** passes_d1 / plays_d1: pass rate on first down. Null when the denominator is 0. `Float64` */
   pass_rate_d1?: number | null;
-  /** `Float64` */
+  /** epa_d1 / plays_d1: EPA per play on first down. Null when the denominator is 0. `Float64` */
   epa_per_play_d1?: number | null;
-  /** `Float64` */
+  /** successes_d1 / plays_d1: success rate on first down. Null when the denominator is 0. `Float64` */
   success_rate_d1?: number | null;
-  /** `Float64` */
+  /** passes_d2 / plays_d2: pass rate on second down. Null when the denominator is 0. `Float64` */
   pass_rate_d2?: number | null;
-  /** `Float64` */
+  /** epa_d2 / plays_d2: EPA per play on second down. Null when the denominator is 0. `Float64` */
   epa_per_play_d2?: number | null;
-  /** `Float64` */
+  /** successes_d2 / plays_d2: success rate on second down. Null when the denominator is 0. `Float64` */
   success_rate_d2?: number | null;
-  /** `Float64` */
+  /** passes_d3 / plays_d3: pass rate on third down. Null when the denominator is 0. `Float64` */
   pass_rate_d3?: number | null;
-  /** `Float64` */
+  /** epa_d3 / plays_d3: EPA per play on third down. Null when the denominator is 0. `Float64` */
   epa_per_play_d3?: number | null;
-  /** `Float64` */
+  /** successes_d3 / plays_d3: success rate on third down. Null when the denominator is 0. `Float64` */
   success_rate_d3?: number | null;
-  /** `Float64` */
+  /** passes_d4 / plays_d4: pass rate on fourth down. Null when the denominator is 0. `Float64` */
   pass_rate_d4?: number | null;
-  /** `Float64` */
+  /** epa_d4 / plays_d4: EPA per play on fourth down. Null when the denominator is 0. `Float64` */
   epa_per_play_d4?: number | null;
-  /** `Float64` */
+  /** successes_d4 / plays_d4: success rate on fourth down. Null when the denominator is 0. `Float64` */
   success_rate_d4?: number | null;
-  /** `Float64` */
+  /** passes_early_down / plays_early_down. Null when the denominator is 0. `Float64` */
   pass_rate_early_down?: number | null;
-  /** `Float64` */
+  /** epa_early_down / plays_early_down. Null when the denominator is 0. `Float64` */
   epa_per_play_early_down?: number | null;
-  /** `Float64` */
+  /** successes_early_down / plays_early_down: success rate on first or second down. Null when the denominator is 0. `Float64` */
   success_rate_early_down?: number | null;
-  /** `Float64` */
+  /** passes_standard_down / plays_standard_down. Null when the denominator is 0. `Float64` */
   pass_rate_standard_down?: number | null;
-  /** `Float64` */
+  /** epa_standard_down / plays_standard_down: EPA per play on standard downs (the play-by-play standard_down flag). Null when the denominator is 0. `Float64` */
   epa_per_play_standard_down?: number | null;
-  /** `Float64` */
+  /** successes_standard_down / plays_standard_down: success rate on standard downs (the play-by-play standard_down flag). Null when the denominator is 0. `Float64` */
   success_rate_standard_down?: number | null;
-  /** `Float64` */
+  /** passes_passing_down / plays_passing_down. Null when the denominator is 0. `Float64` */
   pass_rate_passing_down?: number | null;
-  /** `Float64` */
+  /** epa_passing_down / plays_passing_down: EPA per play on passing downs (the play-by-play passing_down flag). Null when the denominator is 0. `Float64` */
   epa_per_play_passing_down?: number | null;
-  /** `Float64` */
+  /** successes_passing_down / plays_passing_down: success rate on passing downs (the play-by-play passing_down flag). Null when the denominator is 0. `Float64` */
   success_rate_passing_down?: number | null;
-  /** `Float64` */
+  /** passes_leading / plays_leading: pass rate snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   pass_rate_leading?: number | null;
-  /** `Float64` */
+  /** epa_leading / plays_leading: EPA per play snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_leading?: number | null;
-  /** `Float64` */
+  /** successes_leading / plays_leading: success rate snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   success_rate_leading?: number | null;
-  /** `Float64` */
+  /** passes_tied / plays_tied: pass rate snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   pass_rate_tied?: number | null;
-  /** `Float64` */
+  /** epa_tied / plays_tied: EPA per play snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_tied?: number | null;
-  /** `Float64` */
+  /** successes_tied / plays_tied: success rate snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   success_rate_tied?: number | null;
-  /** `Float64` */
+  /** passes_trailing / plays_trailing: pass rate snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   pass_rate_trailing?: number | null;
-  /** `Float64` */
+  /** epa_trailing / plays_trailing: EPA per play snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_trailing?: number | null;
-  /** `Float64` */
+  /** successes_trailing / plays_trailing: success rate snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   success_rate_trailing?: number | null;
-  /** `Float64` */
+  /** passes_first_half / plays_first_half. Null when the denominator is 0. `Float64` */
   pass_rate_first_half?: number | null;
-  /** `Float64` */
+  /** epa_first_half / plays_first_half: EPA per play in the first two quarters. Null when the denominator is 0. `Float64` */
   epa_per_play_first_half?: number | null;
-  /** `Float64` */
+  /** successes_first_half / plays_first_half: success rate in the first two quarters. Null when the denominator is 0. `Float64` */
   success_rate_first_half?: number | null;
-  /** `Float64` */
+  /** passes_second_half / plays_second_half. Null when the denominator is 0. `Float64` */
   pass_rate_second_half?: number | null;
-  /** `Float64` */
+  /** epa_second_half / plays_second_half: EPA per play in the third and fourth quarters (overtime belongs to neither half). Null when the denominator is 0. `Float64` */
   epa_per_play_second_half?: number | null;
-  /** `Float64` */
+  /** successes_second_half / plays_second_half: success rate in the third and fourth quarters (overtime belongs to neither half). Null when the denominator is 0. `Float64` */
   success_rate_second_half?: number | null;
-  /** `Float64` */
+  /** passes_d3_short / plays_d3_short: pass rate on third down with 3 or fewer yards to go. Null when the denominator is 0. `Float64` */
   pass_rate_d3_short?: number | null;
-  /** `Float64` */
+  /** epa_d3_short / plays_d3_short: EPA per play on third down with 3 or fewer yards to go. Null when the denominator is 0. `Float64` */
   epa_per_play_d3_short?: number | null;
-  /** `Float64` */
+  /** successes_d3_short / plays_d3_short: success rate on third down with 3 or fewer yards to go. Null when the denominator is 0. `Float64` */
   success_rate_d3_short?: number | null;
-  /** `Float64` */
+  /** passes_d3_medium / plays_d3_medium: pass rate on third down with 4 to 6 yards to go. Null when the denominator is 0. `Float64` */
   pass_rate_d3_medium?: number | null;
-  /** `Float64` */
+  /** epa_d3_medium / plays_d3_medium: EPA per play on third down with 4 to 6 yards to go. Null when the denominator is 0. `Float64` */
   epa_per_play_d3_medium?: number | null;
-  /** `Float64` */
+  /** successes_d3_medium / plays_d3_medium: success rate on third down with 4 to 6 yards to go. Null when the denominator is 0. `Float64` */
   success_rate_d3_medium?: number | null;
-  /** `Float64` */
+  /** passes_d3_long / plays_d3_long: pass rate on third down with 7 or more yards to go. Null when the denominator is 0. `Float64` */
   pass_rate_d3_long?: number | null;
-  /** `Float64` */
+  /** epa_d3_long / plays_d3_long: EPA per play on third down with 7 or more yards to go. Null when the denominator is 0. `Float64` */
   epa_per_play_d3_long?: number | null;
-  /** `Float64` */
+  /** successes_d3_long / plays_d3_long: success rate on third down with 7 or more yards to go. Null when the denominator is 0. `Float64` */
   success_rate_d3_long?: number | null;
-  /** `Float64` */
+  /** passes_red_zone / plays_red_zone: pass rate in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Null when the denominator is 0. `Float64` */
   pass_rate_red_zone?: number | null;
-  /** `Float64` */
+  /** epa_red_zone / plays_red_zone: EPA per play in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_red_zone?: number | null;
-  /** `Float64` */
+  /** successes_red_zone / plays_red_zone: success rate in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Null when the denominator is 0. `Float64` */
   success_rate_red_zone?: number | null;
-  /** `Float64` */
+  /** passes_own_half / plays_own_half: pass rate snapped in the offense's own half (50 or more yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   pass_rate_own_half?: number | null;
-  /** `Float64` */
+  /** epa_own_half / plays_own_half: EPA per play snapped in the offense's own half (50 or more yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   epa_per_play_own_half?: number | null;
-  /** `Float64` */
+  /** successes_own_half / plays_own_half: success rate snapped in the offense's own half (50 or more yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   success_rate_own_half?: number | null;
-  /** `Float64` */
+  /** passes_opp_half / plays_opp_half: pass rate snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   pass_rate_opp_half?: number | null;
-  /** `Float64` */
+  /** epa_opp_half / plays_opp_half: EPA per play snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   epa_per_play_opp_half?: number | null;
-  /** `Float64` */
+  /** successes_opp_half / plays_opp_half: success rate snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   success_rate_opp_half?: number | null;
-  /** `Float64` */
+  /** passes_one_score / plays_one_score: pass rate snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   pass_rate_one_score?: number | null;
-  /** `Float64` */
+  /** epa_one_score / plays_one_score: EPA per play snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_one_score?: number | null;
-  /** `Float64` */
+  /** successes_one_score / plays_one_score: success rate snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   success_rate_one_score?: number | null;
-  /** `Float64` */
+  /** passes_home / plays_home: pass rate in the team's home games. Null when the denominator is 0. `Float64` */
   pass_rate_home?: number | null;
-  /** `Float64` */
+  /** epa_home / plays_home: EPA per play in the team's home games. Null when the denominator is 0. `Float64` */
   epa_per_play_home?: number | null;
-  /** `Float64` */
+  /** successes_home / plays_home: success rate in the team's home games. Null when the denominator is 0. `Float64` */
   success_rate_home?: number | null;
-  /** `Float64` */
+  /** wins_home / games_home: win rate in the team's home games. Null when the denominator is 0. `Float64` */
   win_rate_home?: number | null;
-  /** `Float64` */
+  /** passes_away / plays_away: pass rate in the team's away games. Null when the denominator is 0. `Float64` */
   pass_rate_away?: number | null;
-  /** `Float64` */
+  /** epa_away / plays_away: EPA per play in the team's away games. Null when the denominator is 0. `Float64` */
   epa_per_play_away?: number | null;
-  /** `Float64` */
+  /** successes_away / plays_away: success rate in the team's away games. Null when the denominator is 0. `Float64` */
   success_rate_away?: number | null;
-  /** `Float64` */
+  /** wins_away / games_away: win rate in the team's away games. Null when the denominator is 0. `Float64` */
   win_rate_away?: number | null;
-  /** `Float64` */
+  /** passes_neutral_site / plays_neutral_site: pass rate in the team's neutral-site games. Null when the denominator is 0. `Float64` */
   pass_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** epa_neutral_site / plays_neutral_site: EPA per play in the team's neutral-site games. Null when the denominator is 0. `Float64` */
   epa_per_play_neutral_site?: number | null;
-  /** `Float64` */
+  /** successes_neutral_site / plays_neutral_site: success rate in the team's neutral-site games. Null when the denominator is 0. `Float64` */
   success_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** wins_neutral_site / games_neutral_site: win rate in the team's neutral-site games. Null when the denominator is 0. `Float64` */
   win_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** passes_after_bye / plays_after_bye: pass rate in the team's games played 13 or more days after the team's previous game. Null when the denominator is 0. `Float64` */
   pass_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** epa_after_bye / plays_after_bye: EPA per play in the team's games played 13 or more days after the team's previous game. Null when the denominator is 0. `Float64` */
   epa_per_play_after_bye?: number | null;
-  /** `Float64` */
+  /** successes_after_bye / plays_after_bye: success rate in the team's games played 13 or more days after the team's previous game. Null when the denominator is 0. `Float64` */
   success_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** wins_after_bye / games_after_bye: win rate in the team's games played 13 or more days after the team's previous game. Null when the denominator is 0. `Float64` */
   win_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** passes_opener / plays_opener: pass rate in the team's regular-season openers. Null when the denominator is 0. `Float64` */
   pass_rate_opener?: number | null;
-  /** `Float64` */
+  /** epa_opener / plays_opener: EPA per play in the team's regular-season openers. Null when the denominator is 0. `Float64` */
   epa_per_play_opener?: number | null;
-  /** `Float64` */
+  /** successes_opener / plays_opener: success rate in the team's regular-season openers. Null when the denominator is 0. `Float64` */
   success_rate_opener?: number | null;
-  /** `Float64` */
+  /** wins_opener / games_opener: win rate in the team's regular-season openers. Null when the denominator is 0. `Float64` */
   win_rate_opener?: number | null;
-  /** `Float64` */
+  /** passes_one_score_game / plays_one_score_game: pass rate in the team's games decided by 8 points or fewer. Null when the denominator is 0. `Float64` */
   pass_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** epa_one_score_game / plays_one_score_game: EPA per play in the team's games decided by 8 points or fewer. Null when the denominator is 0. `Float64` */
   epa_per_play_one_score_game?: number | null;
-  /** `Float64` */
+  /** successes_one_score_game / plays_one_score_game: success rate in the team's games decided by 8 points or fewer. Null when the denominator is 0. `Float64` */
   success_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** wins_one_score_game / games_one_score_game: win rate in the team's games decided by 8 points or fewer. Null when the denominator is 0. `Float64` */
   win_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** yards / plays: yards per play. Null when the denominator is 0. `Float64` */
   ypp?: number | null;
-  /** `Float64` */
+  /** yards_rush / rushes: yards per rush. Null when the denominator is 0. `Float64` */
   ypp_rush?: number | null;
-  /** `Float64` */
+  /** yards_pass / passes: yards per pass play. Null when the denominator is 0. `Float64` */
   ypp_pass?: number | null;
-  /** `Float64` */
+  /** explosives / plays. Null when the denominator is 0. `Float64` */
   explosive_rate?: number | null;
-  /** `Float64` */
+  /** explosives_rush / rushes. Null when the denominator is 0. `Float64` */
   explosive_rate_rush?: number | null;
-  /** `Float64` */
+  /** explosives_pass / passes. Null when the denominator is 0. `Float64` */
   explosive_rate_pass?: number | null;
-  /** `Float64` */
+  /** third_down_conversions / third_down_opportunities. Null when the denominator is 0. `Float64` */
   third_down_rate?: number | null;
-  /** `Float64` */
+  /** rz_trips / drives: the share of drives that reached the red zone. Null when the denominator is 0. `Float64` */
   rz_trip_rate?: number | null;
-  /** `Float64` */
+  /** rz_tds / rz_trips: touchdowns per red-zone trip. Null when the denominator is 0. `Float64` */
   rz_td_rate?: number | null;
-  /** `Float64` */
+  /** rz_scores / rz_trips: the share of red-zone trips that scored (touchdown or field goal). Null when the denominator is 0. `Float64` */
   rz_conversion_rate?: number | null;
-  /** `Float64` */
+  /** rz_points / rz_trips: points per red-zone trip. Null when the denominator is 0. `Float64` */
   rz_pts_per_trip?: number | null;
-  /** `Float64` */
+  /** so_trips / drives: the share of drives that reached the opponent's 40. Null when the denominator is 0. `Float64` */
   so_trip_rate?: number | null;
-  /** `Float64` */
+  /** so_tds / so_trips: touchdowns per scoring-opportunity trip. Null when the denominator is 0. `Float64` */
   so_td_rate?: number | null;
-  /** `Float64` */
+  /** so_scores / so_trips: the share of scoring-opportunity trips that scored. Null when the denominator is 0. `Float64` */
   so_conversion_rate?: number | null;
-  /** `Float64` */
+  /** so_points / so_trips: points per scoring-opportunity trip. Null when the denominator is 0. `Float64` */
   so_pts_per_trip?: number | null;
-  /** `Float64` */
+  /** drive_points / drives: points per drive. Null when the denominator is 0. `Float64` */
   pts_per_drive?: number | null;
-  /** `Float64` */
+  /** scripted_epa / scripted_plays. Null when the denominator is 0. `Float64` */
   scripted_epa_per_play?: number | null;
-  /** `Float64` */
+  /** scripted_successes / scripted_plays. Null when the denominator is 0. `Float64` */
   scripted_success_rate?: number | null;
-  /** `Float64` */
+  /** scripted_points / scripted_drives. Null when the denominator is 0. `Float64` */
   scripted_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** non_scripted_epa / non_scripted_plays. Null when the denominator is 0. `Float64` */
   non_scripted_epa_per_play?: number | null;
-  /** `Float64` */
+  /** non_scripted_successes / non_scripted_plays. Null when the denominator is 0. `Float64` */
   non_scripted_success_rate?: number | null;
-  /** `Float64` */
+  /** non_scripted_points / non_scripted_drives. Null when the denominator is 0. `Float64` */
   non_scripted_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** fourth_went / fourth_decisions: the share of fourth-down decisions on which the offense went for it. Null when the denominator is 0. `Float64` */
   go_rate?: number | null;
-  /** `Float64` */
+  /** fourth_went_when_go / fourth_model_go: go rate on the decisions where the fourth-down model said go. Null when the denominator is 0. `Float64` */
   go_rate_when_model_says_go?: number | null;
-  /** `Float64` */
+  /** fourth_went_when_kick / fourth_model_kick: go rate on the decisions where the model said punt or kick. Null when the denominator is 0. `Float64` */
   go_rate_when_model_says_kick?: number | null;
-  /** `Float64` */
+  /** fourth_agreed / fourth_decisions: the share of decisions that matched the model. Null when the denominator is 0. `Float64` */
   fourth_agreement_rate?: number | null;
-  /** `Float64` */
+  /** fourth_wp_left / fourth_decisions: win probability left on the table per fourth-down decision. Null when the denominator is 0. `Float64` */
   fourth_wp_left_per_decision?: number | null;
-  /** `Float64` */
+  /** fourth_converted / fourth_went: conversion rate when going for it. Null when the denominator is 0. `Float64` */
   fourth_conversion_rate?: number | null;
-  /** `Float64` */
+  /** third_down_conversions minus third_down_expected: conversions above the distance-adjusted expectation; null when no curve was available. `Float64` */
   third_down_over_expected?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games -- the same measure over the opposing offenses' plays while this coach's defense was on the field: distinct games in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays -- the same measure over the opposing offenses' plays while this coach's defense was on the field: standing scrimmage plays run by the offense (scrimmage_play rows not nullified by penalty). `UInt32` */
   def_plays?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of rushes -- the same measure over the opposing offenses' plays while this coach's defense was on the field: rushing plays among the standing scrimmage plays. `UInt32` */
   def_rushes?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays among the standing scrimmage plays. `UInt32` */
   def_passes?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the standing scrimmage plays. `Float64` */
   def_epa?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_rush -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the rushing plays. `Float64` */
   def_epa_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_pass -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the pass plays. `Float64` */
   def_epa_pass?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on the play-by-play. `UInt32` */
   def_successes?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_rush -- the same measure over the opposing offenses' plays while this coach's defense was on the field: rushing plays flagged EPA_success. `UInt32` */
   def_successes_rush?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_pass -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays flagged EPA_success. `UInt32` */
   def_successes_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of yards -- the same measure over the opposing offenses' plays while this coach's defense was on the field: statYardage summed over the standing scrimmage plays. `Float64` */
   def_yards?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of yards_rush -- the same measure over the opposing offenses' plays while this coach's defense was on the field: statYardage summed over the rushing plays. `Float64` */
   def_yards_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of yards_pass -- the same measure over the opposing offenses' plays while this coach's defense was on the field: statYardage summed over the pass plays. `Float64` */
   def_yards_pass?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of explosives -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_explosive on the play-by-play. `UInt32` */
   def_explosives?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of explosives_rush -- the same measure over the opposing offenses' plays while this coach's defense was on the field: rushing plays flagged EPA_explosive. `UInt32` */
   def_explosives_rush?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of explosives_pass -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays flagged EPA_explosive. `UInt32` */
   def_explosives_pass?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of third_down_opportunities -- the same measure over the opposing offenses' plays while this coach's defense was on the field: third-down scrimmage plays. `UInt32` */
   def_third_down_opportunities?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of third_down_conversions -- the same measure over the opposing offenses' plays while this coach's defense was on the field: third-down plays that produced a first down or an offensive touchdown. `UInt32` */
   def_third_down_conversions?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of third_down_expected -- the same measure over the opposing offenses' plays while this coach's defense was on the field: expected third-down conversions: the league's bundled third-down yards-to-go conversion curve summed over the third-down plays; null when no curve was available. `Float64` */
   def_third_down_expected?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_neutral -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays in situation-neutral plays: score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half. `UInt32` */
   def_plays_neutral?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_neutral -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays in situation-neutral situations (see plays_neutral). `UInt32` */
   def_passes_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_neutral -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over situation-neutral plays: score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half. `Float64` */
   def_epa_neutral?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_neutral -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) in situation-neutral situations (score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half). `UInt32` */
   def_successes_neutral?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d1 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on first down. `UInt32` */
   def_plays_d1?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d1 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on first down. `UInt32` */
   def_passes_d1?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d1 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on first down. `Float64` */
   def_epa_d1?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d1 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on first down. `UInt32` */
   def_successes_d1?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d2 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on second down. `UInt32` */
   def_plays_d2?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d2 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on second down. `UInt32` */
   def_passes_d2?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d2 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on second down. `Float64` */
   def_epa_d2?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d2 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on second down. `UInt32` */
   def_successes_d2?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d3 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on third down. `UInt32` */
   def_plays_d3?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d3 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on third down. `UInt32` */
   def_passes_d3?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d3 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on third down. `Float64` */
   def_epa_d3?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d3 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on third down. `UInt32` */
   def_successes_d3?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d4 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on fourth down. `UInt32` */
   def_plays_d4?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d4 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on fourth down. `UInt32` */
   def_passes_d4?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d4 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on fourth down. `Float64` */
   def_epa_d4?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d4 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on fourth down. `UInt32` */
   def_successes_d4?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_early_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on first or second down. `UInt32` */
   def_plays_early_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_early_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on first or second down. `UInt32` */
   def_passes_early_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_early_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the first- and second-down plays. `Float64` */
   def_epa_early_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_early_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on first or second down. `UInt32` */
   def_successes_early_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_standard_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged standard_down on the play-by-play: first down, second down with fewer than 8 to go, or third / fourth down with fewer than 5 to go. `UInt32` */
   def_plays_standard_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_standard_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on standard downs (see plays_standard_down). `UInt32` */
   def_passes_standard_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_standard_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on standard downs (the play-by-play standard_down flag). `Float64` */
   def_epa_standard_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_standard_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on standard downs (the play-by-play standard_down flag). `UInt32` */
   def_successes_standard_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_passing_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged passing_down on the play-by-play: second down with 8 or more to go, or third / fourth down with 5 or more to go. `UInt32` */
   def_plays_passing_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_passing_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on passing downs (see plays_passing_down). `UInt32` */
   def_passes_passing_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_passing_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on passing downs (the play-by-play passing_down flag). `Float64` */
   def_epa_passing_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_passing_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on passing downs (the play-by-play passing_down flag). `UInt32` */
   def_successes_passing_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_leading -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_plays_leading?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_leading -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_passes_leading?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_leading -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   def_epa_leading?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_leading -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_successes_leading?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_tied -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_plays_tied?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_tied -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_passes_tied?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_tied -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   def_epa_tied?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_tied -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_successes_tied?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_trailing -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_plays_trailing?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_trailing -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_passes_trailing?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_trailing -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   def_epa_trailing?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_trailing -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_successes_trailing?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_first_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays in the first two quarters. `UInt32` */
   def_plays_first_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_first_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays in the first two quarters. `UInt32` */
   def_passes_first_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_first_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays in the first two quarters. `Float64` */
   def_epa_first_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_first_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) in the first two quarters. `UInt32` */
   def_successes_first_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_second_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays in the third and fourth quarters (overtime belongs to neither half). `UInt32` */
   def_plays_second_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_second_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays in the third and fourth quarters. `UInt32` */
   def_passes_second_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_second_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays in the third and fourth quarters (overtime belongs to neither half). `Float64` */
   def_epa_second_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_second_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) in the third and fourth quarters (overtime belongs to neither half). `UInt32` */
   def_successes_second_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d3_short -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on third down with 3 or fewer yards to go. `UInt32` */
   def_plays_d3_short?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d3_short -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on third down with 3 or fewer yards to go. `UInt32` */
   def_passes_d3_short?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d3_short -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on third down with 3 or fewer yards to go. `Float64` */
   def_epa_d3_short?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d3_short -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on third down with 3 or fewer yards to go. `UInt32` */
   def_successes_d3_short?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d3_medium -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on third down with 4 to 6 yards to go. `UInt32` */
   def_plays_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d3_medium -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on third down with 4 to 6 yards to go. `UInt32` */
   def_passes_d3_medium?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d3_medium -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on third down with 4 to 6 yards to go. `Float64` */
   def_epa_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d3_medium -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on third down with 4 to 6 yards to go. `UInt32` */
   def_successes_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d3_long -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on third down with 7 or more yards to go. `UInt32` */
   def_plays_d3_long?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d3_long -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on third down with 7 or more yards to go. `UInt32` */
   def_passes_d3_long?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d3_long -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on third down with 7 or more yards to go. `Float64` */
   def_epa_d3_long?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d3_long -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on third down with 7 or more yards to go. `UInt32` */
   def_successes_d3_long?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_red_zone -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   def_plays_red_zone?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_red_zone -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   def_passes_red_zone?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_red_zone -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `Float64` */
   def_epa_red_zone?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_red_zone -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   def_successes_red_zone?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_own_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   def_plays_own_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_own_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   def_passes_own_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_own_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays snapped in the offense's own half (50 or more yards from the opponent end zone). `Float64` */
   def_epa_own_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_own_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   def_successes_own_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_opp_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   def_plays_opp_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_opp_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   def_passes_opp_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_opp_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `Float64` */
   def_epa_opp_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_opp_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   def_successes_opp_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_one_score -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_plays_one_score?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_one_score -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_passes_one_score?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_one_score -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   def_epa_one_score?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_one_score -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_successes_one_score?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_home -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's home games. `UInt32` */
   def_plays_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_home -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's home games. `UInt32` */
   def_passes_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_home -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's home games. `Float64` */
   def_epa_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_home -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's home games. `UInt32` */
   def_successes_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_home -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct home games in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_home -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_home, the home games the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_away -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's away games. `UInt32` */
   def_plays_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_away -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's away games. `UInt32` */
   def_passes_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_away -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's away games. `Float64` */
   def_epa_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_away -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's away games. `UInt32` */
   def_successes_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_away -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct away games in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_away -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_away, the away games the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_neutral_site -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's neutral-site games. `UInt32` */
   def_plays_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_neutral_site -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's neutral-site games. `UInt32` */
   def_passes_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_neutral_site -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's neutral-site games. `Float64` */
   def_epa_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_neutral_site -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's neutral-site games. `UInt32` */
   def_successes_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_neutral_site -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct neutral-site games in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_neutral_site -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_neutral_site, the neutral-site games the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_after_bye -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's games played 13 or more days after the team's previous game. `UInt32` */
   def_plays_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_after_bye -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's games played 13 or more days after the team's previous game. `UInt32` */
   def_passes_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_after_bye -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's games played 13 or more days after the team's previous game. `Float64` */
   def_epa_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_after_bye -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's games played 13 or more days after the team's previous game. `UInt32` */
   def_successes_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_after_bye -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct games played 13 or more days after the team's previous game in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_after_bye -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_after_bye, the games played 13 or more days after the team's previous game the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_opener -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's regular-season openers. `UInt32` */
   def_plays_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_opener -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's regular-season openers. `UInt32` */
   def_passes_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_opener -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's regular-season openers. `Float64` */
   def_epa_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_opener -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's regular-season openers. `UInt32` */
   def_successes_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_opener -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct regular-season openers in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_opener -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_opener, the regular-season openers the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_one_score_game -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's games decided by 8 points or fewer. `UInt32` */
   def_plays_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_one_score_game -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's games decided by 8 points or fewer. `UInt32` */
   def_passes_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_one_score_game -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's games decided by 8 points or fewer. `Float64` */
   def_epa_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_one_score_game -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's games decided by 8 points or fewer. `UInt32` */
   def_successes_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_one_score_game -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct games decided by 8 points or fewer in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_one_score_game -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_one_score_game, the games decided by 8 points or fewer the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of drives -- the same measure over the opposing offenses' plays while this coach's defense was on the field: offensive drives: distinct drive.id values with at least one standing scrimmage play. `UInt32` */
   def_drives?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of drives_with_clock -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drives with a usable ESPN drive clock (a parseable drive.timeElapsed and a positive drive.offensivePlays). `UInt32` */
   def_drives_with_clock?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_seconds -- the same measure over the opposing offenses' plays while this coach's defense was on the field: eSPN elapsed drive time in seconds, summed over the drives with a usable clock. `Float64` */
   def_drive_seconds?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_plays -- the same measure over the opposing offenses' plays while this coach's defense was on the field: eSPN drive.offensivePlays summed over the drives with a usable clock -- the pace denominator. `Float64` */
   def_drive_plays?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_seconds_neutral -- the same measure over the opposing offenses' plays while this coach's defense was on the field: eSPN elapsed drive seconds summed over the clocked drives whose first play was situation-neutral. `Float64` */
   def_drive_seconds_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_plays_neutral -- the same measure over the opposing offenses' plays while this coach's defense was on the field: eSPN drive.offensivePlays summed over the clocked drives whose first play was situation-neutral. `Float64` */
   def_drive_plays_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_points -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drive points (touchdown 7, field goal 3, from drive.result) summed over the drives. `Float64` */
   def_drive_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of rz_trips -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drives with at least one play snapped in the red zone (20 or fewer yards to the end zone). `UInt32` */
   def_rz_trips?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of rz_tds -- the same measure over the opposing offenses' plays while this coach's defense was on the field: red-zone drives that included an offensive touchdown play. `UInt32` */
   def_rz_tds?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of rz_scores -- the same measure over the opposing offenses' plays while this coach's defense was on the field: red-zone drives that scored (a touchdown or a field goal). `UInt32` */
   def_rz_scores?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_points -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drive points (touchdown 7, field goal 3) summed over the red-zone drives. `Float64` */
   def_rz_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of so_trips -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drives with at least one play snapped in scoring-opportunity territory (40 or fewer yards to the end zone). `UInt32` */
   def_so_trips?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of so_tds -- the same measure over the opposing offenses' plays while this coach's defense was on the field: scoring-opportunity drives that included an offensive touchdown play. `UInt32` */
   def_so_tds?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of so_scores -- the same measure over the opposing offenses' plays while this coach's defense was on the field: scoring-opportunity drives that scored (a touchdown or a field goal). `UInt32` */
   def_so_scores?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_points -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drive points (touchdown 7, field goal 3) summed over the scoring-opportunity drives. `Float64` */
   def_so_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of scripted_drives -- the same measure over the opposing offenses' plays while this coach's defense was on the field: the offense's first two drives of each half. `UInt32` */
   def_scripted_drives?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of scripted_plays -- the same measure over the opposing offenses' plays while this coach's defense was on the field: standing scrimmage plays on the scripted drives. `UInt32` */
   def_scripted_plays?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_epa -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the scripted drives. `Float64` */
   def_scripted_epa?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of scripted_successes -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success on the scripted drives. `UInt32` */
   def_scripted_successes?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_points -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drive points (touchdown 7, field goal 3) summed over the scripted drives. `Float64` */
   def_scripted_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of non_scripted_drives -- the same measure over the opposing offenses' plays while this coach's defense was on the field: every drive after the offense's first two of each half. `UInt32` */
   def_non_scripted_drives?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of non_scripted_plays -- the same measure over the opposing offenses' plays while this coach's defense was on the field: standing scrimmage plays on the non-scripted drives. `UInt32` */
   def_non_scripted_plays?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_epa -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the non-scripted drives. `Float64` */
   def_non_scripted_epa?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of non_scripted_successes -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success on the non-scripted drives. `UInt32` */
   def_non_scripted_successes?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_points -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drive points (touchdown 7, field goal 3) summed over the non-scripted drives. `Float64` */
   def_non_scripted_points?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of plays_per_game: plays / games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_plays_per_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of plays_per_drive: plays / drives. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_plays_per_drive?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drives_per_game: drives / games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_drives_per_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of sec_per_play: drive_seconds / drive_plays: seconds of game clock per offensive play from ESPN's own drive clock (pace; lower is faster). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_sec_per_play?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of sec_per_play_neutral: drive_seconds_neutral / drive_plays_neutral: the same pace measure on drives that started situation-neutral. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_sec_per_play_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pace_coverage: drives_with_clock / drives: the share of drives with a usable clock; treat sec_per_play with caution when this is low. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pace_coverage?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate: passes / plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play: epa / plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_rush: epa_rush / rushes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_pass: epa_pass / passes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate: successes / plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_rush: successes_rush / rushes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_pass: successes_pass / passes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_neutral: passes_neutral / plays_neutral: pass rate in situation-neutral situations. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_neutral: epa_neutral / plays_neutral. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_neutral: successes_neutral / plays_neutral: success rate in situation-neutral situations (score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d1: passes_d1 / plays_d1: pass rate on first down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d1?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d1: epa_d1 / plays_d1: EPA per play on first down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d1?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d1: successes_d1 / plays_d1: success rate on first down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d1?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d2: passes_d2 / plays_d2: pass rate on second down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d2?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d2: epa_d2 / plays_d2: EPA per play on second down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d2?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d2: successes_d2 / plays_d2: success rate on second down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d2?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d3: passes_d3 / plays_d3: pass rate on third down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d3?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d3: epa_d3 / plays_d3: EPA per play on third down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d3?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d3: successes_d3 / plays_d3: success rate on third down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d3?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d4: passes_d4 / plays_d4: pass rate on fourth down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d4?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d4: epa_d4 / plays_d4: EPA per play on fourth down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d4?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d4: successes_d4 / plays_d4: success rate on fourth down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d4?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_early_down: passes_early_down / plays_early_down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_early_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_early_down: epa_early_down / plays_early_down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_early_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_early_down: successes_early_down / plays_early_down: success rate on first or second down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_early_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_standard_down: passes_standard_down / plays_standard_down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_standard_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_standard_down: epa_standard_down / plays_standard_down: EPA per play on standard downs (the play-by-play standard_down flag). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_standard_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_standard_down: successes_standard_down / plays_standard_down: success rate on standard downs (the play-by-play standard_down flag). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_standard_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_passing_down: passes_passing_down / plays_passing_down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_passing_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_passing_down: epa_passing_down / plays_passing_down: EPA per play on passing downs (the play-by-play passing_down flag). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_passing_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_passing_down: successes_passing_down / plays_passing_down: success rate on passing downs (the play-by-play passing_down flag). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_passing_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_leading: passes_leading / plays_leading: pass rate snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_leading?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_leading: epa_leading / plays_leading: EPA per play snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_leading?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_leading: successes_leading / plays_leading: success rate snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_leading?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_tied: passes_tied / plays_tied: pass rate snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_tied?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_tied: epa_tied / plays_tied: EPA per play snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_tied?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_tied: successes_tied / plays_tied: success rate snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_tied?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_trailing: passes_trailing / plays_trailing: pass rate snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_trailing?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_trailing: epa_trailing / plays_trailing: EPA per play snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_trailing?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_trailing: successes_trailing / plays_trailing: success rate snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_trailing?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_first_half: passes_first_half / plays_first_half. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_first_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_first_half: epa_first_half / plays_first_half: EPA per play in the first two quarters. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_first_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_first_half: successes_first_half / plays_first_half: success rate in the first two quarters. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_first_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_second_half: passes_second_half / plays_second_half. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_second_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_second_half: epa_second_half / plays_second_half: EPA per play in the third and fourth quarters (overtime belongs to neither half). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_second_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_second_half: successes_second_half / plays_second_half: success rate in the third and fourth quarters (overtime belongs to neither half). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_second_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d3_short: passes_d3_short / plays_d3_short: pass rate on third down with 3 or fewer yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d3_short?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d3_short: epa_d3_short / plays_d3_short: EPA per play on third down with 3 or fewer yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d3_short?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d3_short: successes_d3_short / plays_d3_short: success rate on third down with 3 or fewer yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d3_short?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d3_medium: passes_d3_medium / plays_d3_medium: pass rate on third down with 4 to 6 yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d3_medium?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d3_medium: epa_d3_medium / plays_d3_medium: EPA per play on third down with 4 to 6 yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d3_medium?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d3_medium: successes_d3_medium / plays_d3_medium: success rate on third down with 4 to 6 yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d3_medium?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d3_long: passes_d3_long / plays_d3_long: pass rate on third down with 7 or more yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d3_long?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d3_long: epa_d3_long / plays_d3_long: EPA per play on third down with 7 or more yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d3_long?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d3_long: successes_d3_long / plays_d3_long: success rate on third down with 7 or more yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d3_long?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_red_zone: passes_red_zone / plays_red_zone: pass rate in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_red_zone?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_red_zone: epa_red_zone / plays_red_zone: EPA per play in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_red_zone?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_red_zone: successes_red_zone / plays_red_zone: success rate in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_red_zone?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_own_half: passes_own_half / plays_own_half: pass rate snapped in the offense's own half (50 or more yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_own_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_own_half: epa_own_half / plays_own_half: EPA per play snapped in the offense's own half (50 or more yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_own_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_own_half: successes_own_half / plays_own_half: success rate snapped in the offense's own half (50 or more yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_own_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_opp_half: passes_opp_half / plays_opp_half: pass rate snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_opp_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_opp_half: epa_opp_half / plays_opp_half: EPA per play snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_opp_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_opp_half: successes_opp_half / plays_opp_half: success rate snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_opp_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_one_score: passes_one_score / plays_one_score: pass rate snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_one_score?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_one_score: epa_one_score / plays_one_score: EPA per play snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_one_score?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_one_score: successes_one_score / plays_one_score: success rate snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_one_score?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_home: passes_home / plays_home: pass rate in the team's home games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_home: epa_home / plays_home: EPA per play in the team's home games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_home: successes_home / plays_home: success rate in the team's home games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_home: wins_home / games_home: win rate in the team's home games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_away: passes_away / plays_away: pass rate in the team's away games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_away: epa_away / plays_away: EPA per play in the team's away games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_away: successes_away / plays_away: success rate in the team's away games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_away: wins_away / games_away: win rate in the team's away games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_neutral_site: passes_neutral_site / plays_neutral_site: pass rate in the team's neutral-site games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_neutral_site: epa_neutral_site / plays_neutral_site: EPA per play in the team's neutral-site games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_neutral_site: successes_neutral_site / plays_neutral_site: success rate in the team's neutral-site games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_neutral_site: wins_neutral_site / games_neutral_site: win rate in the team's neutral-site games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_after_bye: passes_after_bye / plays_after_bye: pass rate in the team's games played 13 or more days after the team's previous game. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_after_bye: epa_after_bye / plays_after_bye: EPA per play in the team's games played 13 or more days after the team's previous game. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_after_bye: successes_after_bye / plays_after_bye: success rate in the team's games played 13 or more days after the team's previous game. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_after_bye: wins_after_bye / games_after_bye: win rate in the team's games played 13 or more days after the team's previous game. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_opener: passes_opener / plays_opener: pass rate in the team's regular-season openers. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_opener: epa_opener / plays_opener: EPA per play in the team's regular-season openers. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_opener: successes_opener / plays_opener: success rate in the team's regular-season openers. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_opener: wins_opener / games_opener: win rate in the team's regular-season openers. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_one_score_game: passes_one_score_game / plays_one_score_game: pass rate in the team's games decided by 8 points or fewer. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_one_score_game: epa_one_score_game / plays_one_score_game: EPA per play in the team's games decided by 8 points or fewer. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_one_score_game: successes_one_score_game / plays_one_score_game: success rate in the team's games decided by 8 points or fewer. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_one_score_game: wins_one_score_game / games_one_score_game: win rate in the team's games decided by 8 points or fewer. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of ypp: yards / plays: yards per play. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_ypp?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of ypp_rush: yards_rush / rushes: yards per rush. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_ypp_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of ypp_pass: yards_pass / passes: yards per pass play. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_ypp_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of explosive_rate: explosives / plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_explosive_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of explosive_rate_rush: explosives_rush / rushes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_explosive_rate_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of explosive_rate_pass: explosives_pass / passes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_explosive_rate_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of third_down_rate: third_down_conversions / third_down_opportunities. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_third_down_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_trip_rate: rz_trips / drives: the share of drives that reached the red zone. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_rz_trip_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_td_rate: rz_tds / rz_trips: touchdowns per red-zone trip. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_rz_td_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_conversion_rate: rz_scores / rz_trips: the share of red-zone trips that scored (touchdown or field goal). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_rz_conversion_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_pts_per_trip: rz_points / rz_trips: points per red-zone trip. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_rz_pts_per_trip?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_trip_rate: so_trips / drives: the share of drives that reached the opponent's 40. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_so_trip_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_td_rate: so_tds / so_trips: touchdowns per scoring-opportunity trip. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_so_td_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_conversion_rate: so_scores / so_trips: the share of scoring-opportunity trips that scored. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_so_conversion_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_pts_per_trip: so_points / so_trips: points per scoring-opportunity trip. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_so_pts_per_trip?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pts_per_drive: drive_points / drives: points per drive. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_epa_per_play: scripted_epa / scripted_plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_scripted_epa_per_play?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_success_rate: scripted_successes / scripted_plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_scripted_success_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_pts_per_drive: scripted_points / scripted_drives. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_scripted_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_epa_per_play: non_scripted_epa / non_scripted_plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_non_scripted_epa_per_play?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_success_rate: non_scripted_successes / non_scripted_plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_non_scripted_success_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_pts_per_drive: non_scripted_points / non_scripted_drives. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_non_scripted_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of third_down_over_expected: def_third_down_conversions minus def_third_down_expected; null when no curve was available. `Float64` */
   def_third_down_over_expected?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -4931,1167 +4931,1167 @@ export interface LoadNflCoachTendenciesRow {
 
 /** One row of `sdv.nfl.loadNflCoachCareers` (`espn_nfl_coach_careers`; sdv-py loader schema `load_nfl_coach_careers`). */
 export interface LoadNflCoachCareersRow {
-  /** `String` */
+  /** Head coach the plays were attributed to -- per game from the nflverse schedule (home_coach / away_coach) for the NFL, per team-season from the producer's CFBD coach roster for CFB. `String` */
   coach?: string | null;
-  /** `String` */
+  /** Coaching role the row is keyed on; always "HC" (head coach) in the published assets, reserved for later coordinator rows. `String` */
   role?: string | null;
-  /** `String` */
+  /** Comma-separated teams the coach's attributed seasons were with, in first-to-last season order. `String` */
   teams?: string | null;
-  /** `UInt32` */
+  /** Number of distinct seasons summed into the career row. `UInt32` */
   seasons?: number | null;
-  /** `Int64` */
+  /** Earliest season summed into the career row. `Int64` */
   first_season?: number | bigint | null;
-  /** `Int64` */
+  /** Latest season summed into the career row. `Int64` */
   last_season?: number | bigint | null;
-  /** `UInt32` */
+  /** Distinct games in which the offense ran at least one standing scrimmage play. Summed over the coach's published seasons, like every count here. `UInt32` */
   games?: number | null;
-  /** `UInt32` */
+  /** Standing scrimmage plays run by the offense (scrimmage_play rows not nullified by penalty). `UInt32` */
   plays?: number | null;
-  /** `UInt32` */
+  /** Rushing plays among the standing scrimmage plays. `UInt32` */
   rushes?: number | null;
-  /** `UInt32` */
+  /** Pass plays among the standing scrimmage plays. `UInt32` */
   passes?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the standing scrimmage plays. `Float64` */
   epa?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the rushing plays. `Float64` */
   epa_rush?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the pass plays. `Float64` */
   epa_pass?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on the play-by-play. `UInt32` */
   successes?: number | null;
-  /** `UInt32` */
+  /** Rushing plays flagged EPA_success. `UInt32` */
   successes_rush?: number | null;
-  /** `UInt32` */
+  /** Pass plays flagged EPA_success. `UInt32` */
   successes_pass?: number | null;
-  /** `Float64` */
+  /** statYardage summed over the standing scrimmage plays. `Float64` */
   yards?: number | null;
-  /** `Float64` */
+  /** statYardage summed over the rushing plays. `Float64` */
   yards_rush?: number | null;
-  /** `Float64` */
+  /** statYardage summed over the pass plays. `Float64` */
   yards_pass?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_explosive on the play-by-play. `UInt32` */
   explosives?: number | null;
-  /** `UInt32` */
+  /** Rushing plays flagged EPA_explosive. `UInt32` */
   explosives_rush?: number | null;
-  /** `UInt32` */
+  /** Pass plays flagged EPA_explosive. `UInt32` */
   explosives_pass?: number | null;
-  /** `UInt32` */
+  /** Third-down scrimmage plays. `UInt32` */
   third_down_opportunities?: number | null;
-  /** `UInt32` */
+  /** Third-down plays that produced a first down or an offensive touchdown. `UInt32` */
   third_down_conversions?: number | null;
-  /** `Float64` */
+  /** Expected third-down conversions: the league's bundled third-down yards-to-go conversion curve summed over the third-down plays; null when no curve was available. `Float64` */
   third_down_expected?: number | null;
-  /** `UInt32` */
+  /** Plays in situation-neutral plays: score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half. `UInt32` */
   plays_neutral?: number | null;
-  /** `UInt32` */
+  /** Pass plays in situation-neutral situations (see plays_neutral). `UInt32` */
   passes_neutral?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over situation-neutral plays: score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half. `Float64` */
   epa_neutral?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in situation-neutral situations (score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half). `UInt32` */
   successes_neutral?: number | null;
-  /** `UInt32` */
+  /** Plays on first down. `UInt32` */
   plays_d1?: number | null;
-  /** `UInt32` */
+  /** Pass plays on first down. `UInt32` */
   passes_d1?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on first down. `Float64` */
   epa_d1?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on first down. `UInt32` */
   successes_d1?: number | null;
-  /** `UInt32` */
+  /** Plays on second down. `UInt32` */
   plays_d2?: number | null;
-  /** `UInt32` */
+  /** Pass plays on second down. `UInt32` */
   passes_d2?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on second down. `Float64` */
   epa_d2?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on second down. `UInt32` */
   successes_d2?: number | null;
-  /** `UInt32` */
+  /** Plays on third down. `UInt32` */
   plays_d3?: number | null;
-  /** `UInt32` */
+  /** Pass plays on third down. `UInt32` */
   passes_d3?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on third down. `Float64` */
   epa_d3?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on third down. `UInt32` */
   successes_d3?: number | null;
-  /** `UInt32` */
+  /** Plays on fourth down. `UInt32` */
   plays_d4?: number | null;
-  /** `UInt32` */
+  /** Pass plays on fourth down. `UInt32` */
   passes_d4?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on fourth down. `Float64` */
   epa_d4?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on fourth down. `UInt32` */
   successes_d4?: number | null;
-  /** `UInt32` */
+  /** Plays on first or second down. `UInt32` */
   plays_early_down?: number | null;
-  /** `UInt32` */
+  /** Pass plays on first or second down. `UInt32` */
   passes_early_down?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the first- and second-down plays. `Float64` */
   epa_early_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on first or second down. `UInt32` */
   successes_early_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged standard_down on the play-by-play: first down, second down with fewer than 8 to go, or third / fourth down with fewer than 5 to go. `UInt32` */
   plays_standard_down?: number | null;
-  /** `UInt32` */
+  /** Pass plays on standard downs (see plays_standard_down). `UInt32` */
   passes_standard_down?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on standard downs (the play-by-play standard_down flag). `Float64` */
   epa_standard_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on standard downs (the play-by-play standard_down flag). `UInt32` */
   successes_standard_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged passing_down on the play-by-play: second down with 8 or more to go, or third / fourth down with 5 or more to go. `UInt32` */
   plays_passing_down?: number | null;
-  /** `UInt32` */
+  /** Pass plays on passing downs (see plays_passing_down). `UInt32` */
   passes_passing_down?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on passing downs (the play-by-play passing_down flag). `Float64` */
   epa_passing_down?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on passing downs (the play-by-play passing_down flag). `UInt32` */
   successes_passing_down?: number | null;
-  /** `UInt32` */
+  /** Plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   plays_leading?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   passes_leading?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   epa_leading?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   successes_leading?: number | null;
-  /** `UInt32` */
+  /** Plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   plays_tied?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   passes_tied?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   epa_tied?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   successes_tied?: number | null;
-  /** `UInt32` */
+  /** Plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   plays_trailing?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   passes_trailing?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   epa_trailing?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   successes_trailing?: number | null;
-  /** `UInt32` */
+  /** Plays in the first two quarters. `UInt32` */
   plays_first_half?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the first two quarters. `UInt32` */
   passes_first_half?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the first two quarters. `Float64` */
   epa_first_half?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the first two quarters. `UInt32` */
   successes_first_half?: number | null;
-  /** `UInt32` */
+  /** Plays in the third and fourth quarters (overtime belongs to neither half). `UInt32` */
   plays_second_half?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the third and fourth quarters. `UInt32` */
   passes_second_half?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the third and fourth quarters (overtime belongs to neither half). `Float64` */
   epa_second_half?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the third and fourth quarters (overtime belongs to neither half). `UInt32` */
   successes_second_half?: number | null;
-  /** `UInt32` */
+  /** Plays on third down with 3 or fewer yards to go. `UInt32` */
   plays_d3_short?: number | null;
-  /** `UInt32` */
+  /** Pass plays on third down with 3 or fewer yards to go. `UInt32` */
   passes_d3_short?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on third down with 3 or fewer yards to go. `Float64` */
   epa_d3_short?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on third down with 3 or fewer yards to go. `UInt32` */
   successes_d3_short?: number | null;
-  /** `UInt32` */
+  /** Plays on third down with 4 to 6 yards to go. `UInt32` */
   plays_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Pass plays on third down with 4 to 6 yards to go. `UInt32` */
   passes_d3_medium?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on third down with 4 to 6 yards to go. `Float64` */
   epa_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on third down with 4 to 6 yards to go. `UInt32` */
   successes_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Plays on third down with 7 or more yards to go. `UInt32` */
   plays_d3_long?: number | null;
-  /** `UInt32` */
+  /** Pass plays on third down with 7 or more yards to go. `UInt32` */
   passes_d3_long?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays on third down with 7 or more yards to go. `Float64` */
   epa_d3_long?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) on third down with 7 or more yards to go. `UInt32` */
   successes_d3_long?: number | null;
-  /** `UInt32` */
+  /** Plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   plays_red_zone?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   passes_red_zone?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `Float64` */
   epa_red_zone?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   successes_red_zone?: number | null;
-  /** `UInt32` */
+  /** Plays snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   plays_own_half?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   passes_own_half?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped in the offense's own half (50 or more yards from the opponent end zone). `Float64` */
   epa_own_half?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   successes_own_half?: number | null;
-  /** `UInt32` */
+  /** Plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   plays_opp_half?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   passes_opp_half?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `Float64` */
   epa_opp_half?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   successes_opp_half?: number | null;
-  /** `UInt32` */
+  /** Plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   plays_one_score?: number | null;
-  /** `UInt32` */
+  /** Pass plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   passes_one_score?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   epa_one_score?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   successes_one_score?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's home games. `UInt32` */
   plays_home?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's home games. `UInt32` */
   passes_home?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's home games. `Float64` */
   epa_home?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's home games. `UInt32` */
   successes_home?: number | null;
-  /** `UInt32` */
+  /** Distinct home games in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_home?: number | null;
-  /** `UInt32` */
+  /** Of games_home, the home games the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_home?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's away games. `UInt32` */
   plays_away?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's away games. `UInt32` */
   passes_away?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's away games. `Float64` */
   epa_away?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's away games. `UInt32` */
   successes_away?: number | null;
-  /** `UInt32` */
+  /** Distinct away games in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_away?: number | null;
-  /** `UInt32` */
+  /** Of games_away, the away games the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_away?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's neutral-site games. `UInt32` */
   plays_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's neutral-site games. `UInt32` */
   passes_neutral_site?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's neutral-site games. `Float64` */
   epa_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's neutral-site games. `UInt32` */
   successes_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Distinct neutral-site games in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Of games_neutral_site, the neutral-site games the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's games played 13 or more days after the team's previous game. `UInt32` */
   plays_after_bye?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's games played 13 or more days after the team's previous game. `UInt32` */
   passes_after_bye?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's games played 13 or more days after the team's previous game. `Float64` */
   epa_after_bye?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's games played 13 or more days after the team's previous game. `UInt32` */
   successes_after_bye?: number | null;
-  /** `UInt32` */
+  /** Distinct games played 13 or more days after the team's previous game in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_after_bye?: number | null;
-  /** `UInt32` */
+  /** Of games_after_bye, the games played 13 or more days after the team's previous game the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_after_bye?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's regular-season openers. `UInt32` */
   plays_opener?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's regular-season openers. `UInt32` */
   passes_opener?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's regular-season openers. `Float64` */
   epa_opener?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's regular-season openers. `UInt32` */
   successes_opener?: number | null;
-  /** `UInt32` */
+  /** Distinct regular-season openers in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_opener?: number | null;
-  /** `UInt32` */
+  /** Of games_opener, the regular-season openers the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_opener?: number | null;
-  /** `UInt32` */
+  /** Plays in the team's games decided by 8 points or fewer. `UInt32` */
   plays_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Pass plays in the team's games decided by 8 points or fewer. `UInt32` */
   passes_one_score_game?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the plays in the team's games decided by 8 points or fewer. `Float64` */
   epa_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success (positive EPA) in the team's games decided by 8 points or fewer. `UInt32` */
   successes_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Distinct games decided by 8 points or fewer in which the offense ran at least one standing scrimmage play. `UInt32` */
   games_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Of games_one_score_game, the games decided by 8 points or fewer the team won (points for above points against, so a tie is not a win). `UInt32` */
   wins_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Fourth-down plays on which the offense ran, passed, punted or attempted a field goal and the play stood (timeouts and nullified plays are not decisions). `UInt32` */
   fourth_decisions?: number | null;
-  /** `UInt32` */
+  /** Fourth-down decisions that were a rush or a pass (the offense went for it). `UInt32` */
   fourth_went?: number | null;
-  /** `UInt32` */
+  /** Fourth-down go attempts that produced a first down or an offensive touchdown. `UInt32` */
   fourth_converted?: number | null;
-  /** `UInt32` */
+  /** Decisions on which the fourth-down model recommended going for it (fourth_down_recommendation == "go"). `UInt32` */
   fourth_model_go?: number | null;
-  /** `UInt32` */
+  /** Decisions on which the fourth-down model recommended a punt or a field goal. `UInt32` */
   fourth_model_kick?: number | null;
-  /** `UInt32` */
+  /** Decisions on which the offense went for it when the model also said go. `UInt32` */
   fourth_went_when_go?: number | null;
-  /** `UInt32` */
+  /** Decisions on which the offense went for it when the model said kick. `UInt32` */
   fourth_went_when_kick?: number | null;
-  /** `UInt32` */
+  /** Decisions that matched the model's recommendation (went when it said go, kicked when it said kick). `UInt32` */
   fourth_agreed?: number | null;
-  /** `Float64` */
+  /** Win probability left on the table, summed over the decisions that went against the model: go_boost when the offense kicked against a go recommendation, minus go_boost when it went against a kick recommendation, floored at zero. `Float64` */
   fourth_wp_left?: number | null;
-  /** `UInt32` */
+  /** Offensive drives: distinct drive.id values with at least one standing scrimmage play. `UInt32` */
   drives?: number | null;
-  /** `UInt32` */
+  /** Drives with a usable ESPN drive clock (a parseable drive.timeElapsed and a positive drive.offensivePlays), in regulation (overtime has no game clock) and owned by this offense (an ESPN drive id that holds snaps by both offenses counts once, for ESPN's drive team when it matches an offense in the drive, else the offense with the most standing snaps, the first snap breaking a tie). `UInt32` */
   drives_with_clock?: number | null;
-  /** `Float64` */
+  /** ESPN elapsed drive time in seconds, summed over the drives with a usable clock. `Float64` */
   drive_seconds?: number | null;
-  /** `Float64` */
+  /** ESPN drive.offensivePlays summed over the drives with a usable clock -- the pace denominator. `Float64` */
   drive_plays?: number | null;
-  /** `Float64` */
+  /** ESPN elapsed drive seconds summed over the clocked drives whose first play was situation-neutral. `Float64` */
   drive_seconds_neutral?: number | null;
-  /** `Float64` */
+  /** ESPN drive.offensivePlays summed over the clocked drives whose first play was situation-neutral. `Float64` */
   drive_plays_neutral?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3, from drive.result) summed over the drives. `Float64` */
   drive_points?: number | null;
-  /** `UInt32` */
+  /** Drives with at least one play snapped in the red zone (20 or fewer yards to the end zone). `UInt32` */
   rz_trips?: number | null;
-  /** `UInt32` */
+  /** Red-zone drives that included an offensive touchdown play. `UInt32` */
   rz_tds?: number | null;
-  /** `UInt32` */
+  /** Red-zone drives that scored (a touchdown or a field goal). `UInt32` */
   rz_scores?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3) summed over the red-zone drives. `Float64` */
   rz_points?: number | null;
-  /** `UInt32` */
+  /** Drives with at least one play snapped in scoring-opportunity territory (40 or fewer yards to the end zone). `UInt32` */
   so_trips?: number | null;
-  /** `UInt32` */
+  /** Scoring-opportunity drives that included an offensive touchdown play. `UInt32` */
   so_tds?: number | null;
-  /** `UInt32` */
+  /** Scoring-opportunity drives that scored (a touchdown or a field goal). `UInt32` */
   so_scores?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3) summed over the scoring-opportunity drives. `Float64` */
   so_points?: number | null;
-  /** `UInt32` */
+  /** The offense's first two drives of each half. `UInt32` */
   scripted_drives?: number | null;
-  /** `UInt32` */
+  /** Standing scrimmage plays on the scripted drives. `UInt32` */
   scripted_plays?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the scripted drives. `Float64` */
   scripted_epa?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success on the scripted drives. `UInt32` */
   scripted_successes?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3) summed over the scripted drives. `Float64` */
   scripted_points?: number | null;
-  /** `UInt32` */
+  /** Every drive after the offense's first two of each half. `UInt32` */
   non_scripted_drives?: number | null;
-  /** `UInt32` */
+  /** Standing scrimmage plays on the non-scripted drives. `UInt32` */
   non_scripted_plays?: number | null;
-  /** `Float64` */
+  /** Play EPA summed over the non-scripted drives. `Float64` */
   non_scripted_epa?: number | null;
-  /** `UInt32` */
+  /** Plays flagged EPA_success on the non-scripted drives. `UInt32` */
   non_scripted_successes?: number | null;
-  /** `Float64` */
+  /** Drive points (touchdown 7, field goal 3) summed over the non-scripted drives. `Float64` */
   non_scripted_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games -- the same measure over the opposing offenses' plays while this coach's defense was on the field: distinct games in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays -- the same measure over the opposing offenses' plays while this coach's defense was on the field: standing scrimmage plays run by the offense (scrimmage_play rows not nullified by penalty). `UInt32` */
   def_plays?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of rushes -- the same measure over the opposing offenses' plays while this coach's defense was on the field: rushing plays among the standing scrimmage plays. `UInt32` */
   def_rushes?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays among the standing scrimmage plays. `UInt32` */
   def_passes?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the standing scrimmage plays. `Float64` */
   def_epa?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_rush -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the rushing plays. `Float64` */
   def_epa_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_pass -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the pass plays. `Float64` */
   def_epa_pass?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on the play-by-play. `UInt32` */
   def_successes?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_rush -- the same measure over the opposing offenses' plays while this coach's defense was on the field: rushing plays flagged EPA_success. `UInt32` */
   def_successes_rush?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_pass -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays flagged EPA_success. `UInt32` */
   def_successes_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of yards -- the same measure over the opposing offenses' plays while this coach's defense was on the field: statYardage summed over the standing scrimmage plays. `Float64` */
   def_yards?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of yards_rush -- the same measure over the opposing offenses' plays while this coach's defense was on the field: statYardage summed over the rushing plays. `Float64` */
   def_yards_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of yards_pass -- the same measure over the opposing offenses' plays while this coach's defense was on the field: statYardage summed over the pass plays. `Float64` */
   def_yards_pass?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of explosives -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_explosive on the play-by-play. `UInt32` */
   def_explosives?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of explosives_rush -- the same measure over the opposing offenses' plays while this coach's defense was on the field: rushing plays flagged EPA_explosive. `UInt32` */
   def_explosives_rush?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of explosives_pass -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays flagged EPA_explosive. `UInt32` */
   def_explosives_pass?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of third_down_opportunities -- the same measure over the opposing offenses' plays while this coach's defense was on the field: third-down scrimmage plays. `UInt32` */
   def_third_down_opportunities?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of third_down_conversions -- the same measure over the opposing offenses' plays while this coach's defense was on the field: third-down plays that produced a first down or an offensive touchdown. `UInt32` */
   def_third_down_conversions?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of third_down_expected -- the same measure over the opposing offenses' plays while this coach's defense was on the field: expected third-down conversions: the league's bundled third-down yards-to-go conversion curve summed over the third-down plays; null when no curve was available. `Float64` */
   def_third_down_expected?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_neutral -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays in situation-neutral plays: score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half. `UInt32` */
   def_plays_neutral?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_neutral -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays in situation-neutral situations (see plays_neutral). `UInt32` */
   def_passes_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_neutral -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over situation-neutral plays: score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half. `Float64` */
   def_epa_neutral?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_neutral -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) in situation-neutral situations (score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half). `UInt32` */
   def_successes_neutral?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d1 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on first down. `UInt32` */
   def_plays_d1?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d1 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on first down. `UInt32` */
   def_passes_d1?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d1 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on first down. `Float64` */
   def_epa_d1?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d1 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on first down. `UInt32` */
   def_successes_d1?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d2 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on second down. `UInt32` */
   def_plays_d2?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d2 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on second down. `UInt32` */
   def_passes_d2?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d2 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on second down. `Float64` */
   def_epa_d2?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d2 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on second down. `UInt32` */
   def_successes_d2?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d3 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on third down. `UInt32` */
   def_plays_d3?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d3 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on third down. `UInt32` */
   def_passes_d3?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d3 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on third down. `Float64` */
   def_epa_d3?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d3 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on third down. `UInt32` */
   def_successes_d3?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d4 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on fourth down. `UInt32` */
   def_plays_d4?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d4 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on fourth down. `UInt32` */
   def_passes_d4?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d4 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on fourth down. `Float64` */
   def_epa_d4?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d4 -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on fourth down. `UInt32` */
   def_successes_d4?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_early_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on first or second down. `UInt32` */
   def_plays_early_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_early_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on first or second down. `UInt32` */
   def_passes_early_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_early_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the first- and second-down plays. `Float64` */
   def_epa_early_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_early_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on first or second down. `UInt32` */
   def_successes_early_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_standard_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged standard_down on the play-by-play: first down, second down with fewer than 8 to go, or third / fourth down with fewer than 5 to go. `UInt32` */
   def_plays_standard_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_standard_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on standard downs (see plays_standard_down). `UInt32` */
   def_passes_standard_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_standard_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on standard downs (the play-by-play standard_down flag). `Float64` */
   def_epa_standard_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_standard_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on standard downs (the play-by-play standard_down flag). `UInt32` */
   def_successes_standard_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_passing_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged passing_down on the play-by-play: second down with 8 or more to go, or third / fourth down with 5 or more to go. `UInt32` */
   def_plays_passing_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_passing_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on passing downs (see plays_passing_down). `UInt32` */
   def_passes_passing_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_passing_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on passing downs (the play-by-play passing_down flag). `Float64` */
   def_epa_passing_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_passing_down -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on passing downs (the play-by-play passing_down flag). `UInt32` */
   def_successes_passing_down?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_leading -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_plays_leading?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_leading -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_passes_leading?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_leading -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   def_epa_leading?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_leading -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_successes_leading?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_tied -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_plays_tied?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_tied -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_passes_tied?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_tied -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   def_epa_tied?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_tied -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_successes_tied?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_trailing -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_plays_trailing?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_trailing -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_passes_trailing?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_trailing -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   def_epa_trailing?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_trailing -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_successes_trailing?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_first_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays in the first two quarters. `UInt32` */
   def_plays_first_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_first_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays in the first two quarters. `UInt32` */
   def_passes_first_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_first_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays in the first two quarters. `Float64` */
   def_epa_first_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_first_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) in the first two quarters. `UInt32` */
   def_successes_first_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_second_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays in the third and fourth quarters (overtime belongs to neither half). `UInt32` */
   def_plays_second_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_second_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays in the third and fourth quarters. `UInt32` */
   def_passes_second_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_second_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays in the third and fourth quarters (overtime belongs to neither half). `Float64` */
   def_epa_second_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_second_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) in the third and fourth quarters (overtime belongs to neither half). `UInt32` */
   def_successes_second_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d3_short -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on third down with 3 or fewer yards to go. `UInt32` */
   def_plays_d3_short?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d3_short -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on third down with 3 or fewer yards to go. `UInt32` */
   def_passes_d3_short?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d3_short -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on third down with 3 or fewer yards to go. `Float64` */
   def_epa_d3_short?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d3_short -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on third down with 3 or fewer yards to go. `UInt32` */
   def_successes_d3_short?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d3_medium -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on third down with 4 to 6 yards to go. `UInt32` */
   def_plays_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d3_medium -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on third down with 4 to 6 yards to go. `UInt32` */
   def_passes_d3_medium?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d3_medium -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on third down with 4 to 6 yards to go. `Float64` */
   def_epa_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d3_medium -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on third down with 4 to 6 yards to go. `UInt32` */
   def_successes_d3_medium?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_d3_long -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays on third down with 7 or more yards to go. `UInt32` */
   def_plays_d3_long?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_d3_long -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays on third down with 7 or more yards to go. `UInt32` */
   def_passes_d3_long?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_d3_long -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays on third down with 7 or more yards to go. `Float64` */
   def_epa_d3_long?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_d3_long -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) on third down with 7 or more yards to go. `UInt32` */
   def_successes_d3_long?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_red_zone -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   def_plays_red_zone?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_red_zone -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   def_passes_red_zone?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_red_zone -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `Float64` */
   def_epa_red_zone?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_red_zone -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). `UInt32` */
   def_successes_red_zone?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_own_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   def_plays_own_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_own_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   def_passes_own_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_own_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays snapped in the offense's own half (50 or more yards from the opponent end zone). `Float64` */
   def_epa_own_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_own_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) snapped in the offense's own half (50 or more yards from the opponent end zone). `UInt32` */
   def_successes_own_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_opp_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   def_plays_opp_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_opp_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   def_passes_opp_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_opp_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `Float64` */
   def_epa_opp_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_opp_half -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) snapped in the opponent's half (fewer than 50 yards from the opponent end zone). `UInt32` */
   def_successes_opp_half?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_one_score -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_plays_one_score?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_one_score -- the same measure over the opposing offenses' plays while this coach's defense was on the field: pass plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_passes_one_score?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_one_score -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the plays snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `Float64` */
   def_epa_one_score?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_one_score -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success (positive EPA) snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). `UInt32` */
   def_successes_one_score?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_home -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's home games. `UInt32` */
   def_plays_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_home -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's home games. `UInt32` */
   def_passes_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_home -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's home games. `Float64` */
   def_epa_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_home -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's home games. `UInt32` */
   def_successes_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_home -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct home games in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_home -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_home, the home games the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_home?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_away -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's away games. `UInt32` */
   def_plays_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_away -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's away games. `UInt32` */
   def_passes_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_away -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's away games. `Float64` */
   def_epa_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_away -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's away games. `UInt32` */
   def_successes_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_away -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct away games in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_away -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_away, the away games the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_away?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_neutral_site -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's neutral-site games. `UInt32` */
   def_plays_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_neutral_site -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's neutral-site games. `UInt32` */
   def_passes_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_neutral_site -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's neutral-site games. `Float64` */
   def_epa_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_neutral_site -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's neutral-site games. `UInt32` */
   def_successes_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_neutral_site -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct neutral-site games in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_neutral_site -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_neutral_site, the neutral-site games the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_neutral_site?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_after_bye -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's games played 13 or more days after the team's previous game. `UInt32` */
   def_plays_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_after_bye -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's games played 13 or more days after the team's previous game. `UInt32` */
   def_passes_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_after_bye -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's games played 13 or more days after the team's previous game. `Float64` */
   def_epa_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_after_bye -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's games played 13 or more days after the team's previous game. `UInt32` */
   def_successes_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_after_bye -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct games played 13 or more days after the team's previous game in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_after_bye -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_after_bye, the games played 13 or more days after the team's previous game the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_after_bye?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_opener -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's regular-season openers. `UInt32` */
   def_plays_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_opener -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's regular-season openers. `UInt32` */
   def_passes_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_opener -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's regular-season openers. `Float64` */
   def_epa_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_opener -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's regular-season openers. `UInt32` */
   def_successes_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_opener -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct regular-season openers in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_opener -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_opener, the regular-season openers the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_opener?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of plays_one_score_game -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays in the team's games decided by 8 points or fewer. `UInt32` */
   def_plays_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of passes_one_score_game -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): pass plays in the team's games decided by 8 points or fewer. `UInt32` */
   def_passes_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_one_score_game -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): play EPA summed over the plays in the team's games decided by 8 points or fewer. `Float64` */
   def_epa_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of successes_one_score_game -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): plays flagged EPA_success (positive EPA) in the team's games decided by 8 points or fewer. `UInt32` */
   def_successes_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of games_one_score_game -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): distinct games decided by 8 points or fewer in which the offense ran at least one standing scrimmage play. `UInt32` */
   def_games_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of wins_one_score_game -- the same measure over the opposing offenses' plays while this coach's defense was on the field, with the game context read from the defending team's side (def_ctx_*): of games_one_score_game, the games decided by 8 points or fewer the team won (points for above points against, so a tie is not a win). `UInt32` */
   def_wins_one_score_game?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of drives -- the same measure over the opposing offenses' plays while this coach's defense was on the field: offensive drives: distinct drive.id values with at least one standing scrimmage play. `UInt32` */
   def_drives?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of drives_with_clock -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drives with a usable ESPN drive clock (a parseable drive.timeElapsed and a positive drive.offensivePlays). `UInt32` */
   def_drives_with_clock?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_seconds -- the same measure over the opposing offenses' plays while this coach's defense was on the field: eSPN elapsed drive time in seconds, summed over the drives with a usable clock. `Float64` */
   def_drive_seconds?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_plays -- the same measure over the opposing offenses' plays while this coach's defense was on the field: eSPN drive.offensivePlays summed over the drives with a usable clock -- the pace denominator. `Float64` */
   def_drive_plays?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_seconds_neutral -- the same measure over the opposing offenses' plays while this coach's defense was on the field: eSPN elapsed drive seconds summed over the clocked drives whose first play was situation-neutral. `Float64` */
   def_drive_seconds_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_plays_neutral -- the same measure over the opposing offenses' plays while this coach's defense was on the field: eSPN drive.offensivePlays summed over the clocked drives whose first play was situation-neutral. `Float64` */
   def_drive_plays_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drive_points -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drive points (touchdown 7, field goal 3, from drive.result) summed over the drives. `Float64` */
   def_drive_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of rz_trips -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drives with at least one play snapped in the red zone (20 or fewer yards to the end zone). `UInt32` */
   def_rz_trips?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of rz_tds -- the same measure over the opposing offenses' plays while this coach's defense was on the field: red-zone drives that included an offensive touchdown play. `UInt32` */
   def_rz_tds?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of rz_scores -- the same measure over the opposing offenses' plays while this coach's defense was on the field: red-zone drives that scored (a touchdown or a field goal). `UInt32` */
   def_rz_scores?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_points -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drive points (touchdown 7, field goal 3) summed over the red-zone drives. `Float64` */
   def_rz_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of so_trips -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drives with at least one play snapped in scoring-opportunity territory (40 or fewer yards to the end zone). `UInt32` */
   def_so_trips?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of so_tds -- the same measure over the opposing offenses' plays while this coach's defense was on the field: scoring-opportunity drives that included an offensive touchdown play. `UInt32` */
   def_so_tds?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of so_scores -- the same measure over the opposing offenses' plays while this coach's defense was on the field: scoring-opportunity drives that scored (a touchdown or a field goal). `UInt32` */
   def_so_scores?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_points -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drive points (touchdown 7, field goal 3) summed over the scoring-opportunity drives. `Float64` */
   def_so_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of scripted_drives -- the same measure over the opposing offenses' plays while this coach's defense was on the field: the offense's first two drives of each half. `UInt32` */
   def_scripted_drives?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of scripted_plays -- the same measure over the opposing offenses' plays while this coach's defense was on the field: standing scrimmage plays on the scripted drives. `UInt32` */
   def_scripted_plays?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_epa -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the scripted drives. `Float64` */
   def_scripted_epa?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of scripted_successes -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success on the scripted drives. `UInt32` */
   def_scripted_successes?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_points -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drive points (touchdown 7, field goal 3) summed over the scripted drives. `Float64` */
   def_scripted_points?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of non_scripted_drives -- the same measure over the opposing offenses' plays while this coach's defense was on the field: every drive after the offense's first two of each half. `UInt32` */
   def_non_scripted_drives?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of non_scripted_plays -- the same measure over the opposing offenses' plays while this coach's defense was on the field: standing scrimmage plays on the non-scripted drives. `UInt32` */
   def_non_scripted_plays?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_epa -- the same measure over the opposing offenses' plays while this coach's defense was on the field: play EPA summed over the non-scripted drives. `Float64` */
   def_non_scripted_epa?: number | null;
-  /** `UInt32` */
+  /** Defense-allowed twin of non_scripted_successes -- the same measure over the opposing offenses' plays while this coach's defense was on the field: plays flagged EPA_success on the non-scripted drives. `UInt32` */
   def_non_scripted_successes?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_points -- the same measure over the opposing offenses' plays while this coach's defense was on the field: drive points (touchdown 7, field goal 3) summed over the non-scripted drives. `Float64` */
   def_non_scripted_points?: number | null;
-  /** `Float64` */
+  /** plays / games. Null when the denominator is 0. `Float64` */
   plays_per_game?: number | null;
-  /** `Float64` */
+  /** plays / drives. Null when the denominator is 0. `Float64` */
   plays_per_drive?: number | null;
-  /** `Float64` */
+  /** drives / games. Null when the denominator is 0. `Float64` */
   drives_per_game?: number | null;
-  /** `Float64` */
+  /** drive_seconds / drive_plays: seconds of game clock per offensive play from ESPN's own drive clock (pace; lower is faster). Null when the denominator is 0. `Float64` */
   sec_per_play?: number | null;
-  /** `Float64` */
+  /** drive_seconds_neutral / drive_plays_neutral: the same pace measure on drives that started situation-neutral. Null when the denominator is 0. `Float64` */
   sec_per_play_neutral?: number | null;
-  /** `Float64` */
+  /** drives_with_clock / drives: the share of drives with a usable clock; treat sec_per_play with caution when this is low. Null when the denominator is 0. `Float64` */
   pace_coverage?: number | null;
-  /** `Float64` */
+  /** passes / plays. Null when the denominator is 0. `Float64` */
   pass_rate?: number | null;
-  /** `Float64` */
+  /** epa / plays. Null when the denominator is 0. `Float64` */
   epa_per_play?: number | null;
-  /** `Float64` */
+  /** epa_rush / rushes. Null when the denominator is 0. `Float64` */
   epa_per_rush?: number | null;
-  /** `Float64` */
+  /** epa_pass / passes. Null when the denominator is 0. `Float64` */
   epa_per_pass?: number | null;
-  /** `Float64` */
+  /** successes / plays. Null when the denominator is 0. `Float64` */
   success_rate?: number | null;
-  /** `Float64` */
+  /** successes_rush / rushes. Null when the denominator is 0. `Float64` */
   success_rate_rush?: number | null;
-  /** `Float64` */
+  /** successes_pass / passes. Null when the denominator is 0. `Float64` */
   success_rate_pass?: number | null;
-  /** `Float64` */
+  /** passes_neutral / plays_neutral: pass rate in situation-neutral situations. Null when the denominator is 0. `Float64` */
   pass_rate_neutral?: number | null;
-  /** `Float64` */
+  /** epa_neutral / plays_neutral. Null when the denominator is 0. `Float64` */
   epa_per_play_neutral?: number | null;
-  /** `Float64` */
+  /** successes_neutral / plays_neutral: success rate in situation-neutral situations (score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half). Null when the denominator is 0. `Float64` */
   success_rate_neutral?: number | null;
-  /** `Float64` */
+  /** passes_d1 / plays_d1: pass rate on first down. Null when the denominator is 0. `Float64` */
   pass_rate_d1?: number | null;
-  /** `Float64` */
+  /** epa_d1 / plays_d1: EPA per play on first down. Null when the denominator is 0. `Float64` */
   epa_per_play_d1?: number | null;
-  /** `Float64` */
+  /** successes_d1 / plays_d1: success rate on first down. Null when the denominator is 0. `Float64` */
   success_rate_d1?: number | null;
-  /** `Float64` */
+  /** passes_d2 / plays_d2: pass rate on second down. Null when the denominator is 0. `Float64` */
   pass_rate_d2?: number | null;
-  /** `Float64` */
+  /** epa_d2 / plays_d2: EPA per play on second down. Null when the denominator is 0. `Float64` */
   epa_per_play_d2?: number | null;
-  /** `Float64` */
+  /** successes_d2 / plays_d2: success rate on second down. Null when the denominator is 0. `Float64` */
   success_rate_d2?: number | null;
-  /** `Float64` */
+  /** passes_d3 / plays_d3: pass rate on third down. Null when the denominator is 0. `Float64` */
   pass_rate_d3?: number | null;
-  /** `Float64` */
+  /** epa_d3 / plays_d3: EPA per play on third down. Null when the denominator is 0. `Float64` */
   epa_per_play_d3?: number | null;
-  /** `Float64` */
+  /** successes_d3 / plays_d3: success rate on third down. Null when the denominator is 0. `Float64` */
   success_rate_d3?: number | null;
-  /** `Float64` */
+  /** passes_d4 / plays_d4: pass rate on fourth down. Null when the denominator is 0. `Float64` */
   pass_rate_d4?: number | null;
-  /** `Float64` */
+  /** epa_d4 / plays_d4: EPA per play on fourth down. Null when the denominator is 0. `Float64` */
   epa_per_play_d4?: number | null;
-  /** `Float64` */
+  /** successes_d4 / plays_d4: success rate on fourth down. Null when the denominator is 0. `Float64` */
   success_rate_d4?: number | null;
-  /** `Float64` */
+  /** passes_early_down / plays_early_down. Null when the denominator is 0. `Float64` */
   pass_rate_early_down?: number | null;
-  /** `Float64` */
+  /** epa_early_down / plays_early_down. Null when the denominator is 0. `Float64` */
   epa_per_play_early_down?: number | null;
-  /** `Float64` */
+  /** successes_early_down / plays_early_down: success rate on first or second down. Null when the denominator is 0. `Float64` */
   success_rate_early_down?: number | null;
-  /** `Float64` */
+  /** passes_standard_down / plays_standard_down. Null when the denominator is 0. `Float64` */
   pass_rate_standard_down?: number | null;
-  /** `Float64` */
+  /** epa_standard_down / plays_standard_down: EPA per play on standard downs (the play-by-play standard_down flag). Null when the denominator is 0. `Float64` */
   epa_per_play_standard_down?: number | null;
-  /** `Float64` */
+  /** successes_standard_down / plays_standard_down: success rate on standard downs (the play-by-play standard_down flag). Null when the denominator is 0. `Float64` */
   success_rate_standard_down?: number | null;
-  /** `Float64` */
+  /** passes_passing_down / plays_passing_down. Null when the denominator is 0. `Float64` */
   pass_rate_passing_down?: number | null;
-  /** `Float64` */
+  /** epa_passing_down / plays_passing_down: EPA per play on passing downs (the play-by-play passing_down flag). Null when the denominator is 0. `Float64` */
   epa_per_play_passing_down?: number | null;
-  /** `Float64` */
+  /** successes_passing_down / plays_passing_down: success rate on passing downs (the play-by-play passing_down flag). Null when the denominator is 0. `Float64` */
   success_rate_passing_down?: number | null;
-  /** `Float64` */
+  /** passes_leading / plays_leading: pass rate snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   pass_rate_leading?: number | null;
-  /** `Float64` */
+  /** epa_leading / plays_leading: EPA per play snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_leading?: number | null;
-  /** `Float64` */
+  /** successes_leading / plays_leading: success rate snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   success_rate_leading?: number | null;
-  /** `Float64` */
+  /** passes_tied / plays_tied: pass rate snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   pass_rate_tied?: number | null;
-  /** `Float64` */
+  /** epa_tied / plays_tied: EPA per play snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_tied?: number | null;
-  /** `Float64` */
+  /** successes_tied / plays_tied: success rate snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   success_rate_tied?: number | null;
-  /** `Float64` */
+  /** passes_trailing / plays_trailing: pass rate snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   pass_rate_trailing?: number | null;
-  /** `Float64` */
+  /** epa_trailing / plays_trailing: EPA per play snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_trailing?: number | null;
-  /** `Float64` */
+  /** successes_trailing / plays_trailing: success rate snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   success_rate_trailing?: number | null;
-  /** `Float64` */
+  /** passes_first_half / plays_first_half. Null when the denominator is 0. `Float64` */
   pass_rate_first_half?: number | null;
-  /** `Float64` */
+  /** epa_first_half / plays_first_half: EPA per play in the first two quarters. Null when the denominator is 0. `Float64` */
   epa_per_play_first_half?: number | null;
-  /** `Float64` */
+  /** successes_first_half / plays_first_half: success rate in the first two quarters. Null when the denominator is 0. `Float64` */
   success_rate_first_half?: number | null;
-  /** `Float64` */
+  /** passes_second_half / plays_second_half. Null when the denominator is 0. `Float64` */
   pass_rate_second_half?: number | null;
-  /** `Float64` */
+  /** epa_second_half / plays_second_half: EPA per play in the third and fourth quarters (overtime belongs to neither half). Null when the denominator is 0. `Float64` */
   epa_per_play_second_half?: number | null;
-  /** `Float64` */
+  /** successes_second_half / plays_second_half: success rate in the third and fourth quarters (overtime belongs to neither half). Null when the denominator is 0. `Float64` */
   success_rate_second_half?: number | null;
-  /** `Float64` */
+  /** passes_d3_short / plays_d3_short: pass rate on third down with 3 or fewer yards to go. Null when the denominator is 0. `Float64` */
   pass_rate_d3_short?: number | null;
-  /** `Float64` */
+  /** epa_d3_short / plays_d3_short: EPA per play on third down with 3 or fewer yards to go. Null when the denominator is 0. `Float64` */
   epa_per_play_d3_short?: number | null;
-  /** `Float64` */
+  /** successes_d3_short / plays_d3_short: success rate on third down with 3 or fewer yards to go. Null when the denominator is 0. `Float64` */
   success_rate_d3_short?: number | null;
-  /** `Float64` */
+  /** passes_d3_medium / plays_d3_medium: pass rate on third down with 4 to 6 yards to go. Null when the denominator is 0. `Float64` */
   pass_rate_d3_medium?: number | null;
-  /** `Float64` */
+  /** epa_d3_medium / plays_d3_medium: EPA per play on third down with 4 to 6 yards to go. Null when the denominator is 0. `Float64` */
   epa_per_play_d3_medium?: number | null;
-  /** `Float64` */
+  /** successes_d3_medium / plays_d3_medium: success rate on third down with 4 to 6 yards to go. Null when the denominator is 0. `Float64` */
   success_rate_d3_medium?: number | null;
-  /** `Float64` */
+  /** passes_d3_long / plays_d3_long: pass rate on third down with 7 or more yards to go. Null when the denominator is 0. `Float64` */
   pass_rate_d3_long?: number | null;
-  /** `Float64` */
+  /** epa_d3_long / plays_d3_long: EPA per play on third down with 7 or more yards to go. Null when the denominator is 0. `Float64` */
   epa_per_play_d3_long?: number | null;
-  /** `Float64` */
+  /** successes_d3_long / plays_d3_long: success rate on third down with 7 or more yards to go. Null when the denominator is 0. `Float64` */
   success_rate_d3_long?: number | null;
-  /** `Float64` */
+  /** passes_red_zone / plays_red_zone: pass rate in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Null when the denominator is 0. `Float64` */
   pass_rate_red_zone?: number | null;
-  /** `Float64` */
+  /** epa_red_zone / plays_red_zone: EPA per play in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_red_zone?: number | null;
-  /** `Float64` */
+  /** successes_red_zone / plays_red_zone: success rate in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Null when the denominator is 0. `Float64` */
   success_rate_red_zone?: number | null;
-  /** `Float64` */
+  /** passes_own_half / plays_own_half: pass rate snapped in the offense's own half (50 or more yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   pass_rate_own_half?: number | null;
-  /** `Float64` */
+  /** epa_own_half / plays_own_half: EPA per play snapped in the offense's own half (50 or more yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   epa_per_play_own_half?: number | null;
-  /** `Float64` */
+  /** successes_own_half / plays_own_half: success rate snapped in the offense's own half (50 or more yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   success_rate_own_half?: number | null;
-  /** `Float64` */
+  /** passes_opp_half / plays_opp_half: pass rate snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   pass_rate_opp_half?: number | null;
-  /** `Float64` */
+  /** epa_opp_half / plays_opp_half: EPA per play snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   epa_per_play_opp_half?: number | null;
-  /** `Float64` */
+  /** successes_opp_half / plays_opp_half: success rate snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Null when the denominator is 0. `Float64` */
   success_rate_opp_half?: number | null;
-  /** `Float64` */
+  /** passes_one_score / plays_one_score: pass rate snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   pass_rate_one_score?: number | null;
-  /** `Float64` */
+  /** epa_one_score / plays_one_score: EPA per play snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   epa_per_play_one_score?: number | null;
-  /** `Float64` */
+  /** successes_one_score / plays_one_score: success rate snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Null when the denominator is 0. `Float64` */
   success_rate_one_score?: number | null;
-  /** `Float64` */
+  /** passes_home / plays_home: pass rate in the team's home games. Null when the denominator is 0. `Float64` */
   pass_rate_home?: number | null;
-  /** `Float64` */
+  /** epa_home / plays_home: EPA per play in the team's home games. Null when the denominator is 0. `Float64` */
   epa_per_play_home?: number | null;
-  /** `Float64` */
+  /** successes_home / plays_home: success rate in the team's home games. Null when the denominator is 0. `Float64` */
   success_rate_home?: number | null;
-  /** `Float64` */
+  /** wins_home / games_home: win rate in the team's home games. Null when the denominator is 0. `Float64` */
   win_rate_home?: number | null;
-  /** `Float64` */
+  /** passes_away / plays_away: pass rate in the team's away games. Null when the denominator is 0. `Float64` */
   pass_rate_away?: number | null;
-  /** `Float64` */
+  /** epa_away / plays_away: EPA per play in the team's away games. Null when the denominator is 0. `Float64` */
   epa_per_play_away?: number | null;
-  /** `Float64` */
+  /** successes_away / plays_away: success rate in the team's away games. Null when the denominator is 0. `Float64` */
   success_rate_away?: number | null;
-  /** `Float64` */
+  /** wins_away / games_away: win rate in the team's away games. Null when the denominator is 0. `Float64` */
   win_rate_away?: number | null;
-  /** `Float64` */
+  /** passes_neutral_site / plays_neutral_site: pass rate in the team's neutral-site games. Null when the denominator is 0. `Float64` */
   pass_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** epa_neutral_site / plays_neutral_site: EPA per play in the team's neutral-site games. Null when the denominator is 0. `Float64` */
   epa_per_play_neutral_site?: number | null;
-  /** `Float64` */
+  /** successes_neutral_site / plays_neutral_site: success rate in the team's neutral-site games. Null when the denominator is 0. `Float64` */
   success_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** wins_neutral_site / games_neutral_site: win rate in the team's neutral-site games. Null when the denominator is 0. `Float64` */
   win_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** passes_after_bye / plays_after_bye: pass rate in the team's games played 13 or more days after the team's previous game. Null when the denominator is 0. `Float64` */
   pass_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** epa_after_bye / plays_after_bye: EPA per play in the team's games played 13 or more days after the team's previous game. Null when the denominator is 0. `Float64` */
   epa_per_play_after_bye?: number | null;
-  /** `Float64` */
+  /** successes_after_bye / plays_after_bye: success rate in the team's games played 13 or more days after the team's previous game. Null when the denominator is 0. `Float64` */
   success_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** wins_after_bye / games_after_bye: win rate in the team's games played 13 or more days after the team's previous game. Null when the denominator is 0. `Float64` */
   win_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** passes_opener / plays_opener: pass rate in the team's regular-season openers. Null when the denominator is 0. `Float64` */
   pass_rate_opener?: number | null;
-  /** `Float64` */
+  /** epa_opener / plays_opener: EPA per play in the team's regular-season openers. Null when the denominator is 0. `Float64` */
   epa_per_play_opener?: number | null;
-  /** `Float64` */
+  /** successes_opener / plays_opener: success rate in the team's regular-season openers. Null when the denominator is 0. `Float64` */
   success_rate_opener?: number | null;
-  /** `Float64` */
+  /** wins_opener / games_opener: win rate in the team's regular-season openers. Null when the denominator is 0. `Float64` */
   win_rate_opener?: number | null;
-  /** `Float64` */
+  /** passes_one_score_game / plays_one_score_game: pass rate in the team's games decided by 8 points or fewer. Null when the denominator is 0. `Float64` */
   pass_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** epa_one_score_game / plays_one_score_game: EPA per play in the team's games decided by 8 points or fewer. Null when the denominator is 0. `Float64` */
   epa_per_play_one_score_game?: number | null;
-  /** `Float64` */
+  /** successes_one_score_game / plays_one_score_game: success rate in the team's games decided by 8 points or fewer. Null when the denominator is 0. `Float64` */
   success_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** wins_one_score_game / games_one_score_game: win rate in the team's games decided by 8 points or fewer. Null when the denominator is 0. `Float64` */
   win_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** yards / plays: yards per play. Null when the denominator is 0. `Float64` */
   ypp?: number | null;
-  /** `Float64` */
+  /** yards_rush / rushes: yards per rush. Null when the denominator is 0. `Float64` */
   ypp_rush?: number | null;
-  /** `Float64` */
+  /** yards_pass / passes: yards per pass play. Null when the denominator is 0. `Float64` */
   ypp_pass?: number | null;
-  /** `Float64` */
+  /** explosives / plays. Null when the denominator is 0. `Float64` */
   explosive_rate?: number | null;
-  /** `Float64` */
+  /** explosives_rush / rushes. Null when the denominator is 0. `Float64` */
   explosive_rate_rush?: number | null;
-  /** `Float64` */
+  /** explosives_pass / passes. Null when the denominator is 0. `Float64` */
   explosive_rate_pass?: number | null;
-  /** `Float64` */
+  /** third_down_conversions / third_down_opportunities. Null when the denominator is 0. `Float64` */
   third_down_rate?: number | null;
-  /** `Float64` */
+  /** rz_trips / drives: the share of drives that reached the red zone. Null when the denominator is 0. `Float64` */
   rz_trip_rate?: number | null;
-  /** `Float64` */
+  /** rz_tds / rz_trips: touchdowns per red-zone trip. Null when the denominator is 0. `Float64` */
   rz_td_rate?: number | null;
-  /** `Float64` */
+  /** rz_scores / rz_trips: the share of red-zone trips that scored (touchdown or field goal). Null when the denominator is 0. `Float64` */
   rz_conversion_rate?: number | null;
-  /** `Float64` */
+  /** rz_points / rz_trips: points per red-zone trip. Null when the denominator is 0. `Float64` */
   rz_pts_per_trip?: number | null;
-  /** `Float64` */
+  /** so_trips / drives: the share of drives that reached the opponent's 40. Null when the denominator is 0. `Float64` */
   so_trip_rate?: number | null;
-  /** `Float64` */
+  /** so_tds / so_trips: touchdowns per scoring-opportunity trip. Null when the denominator is 0. `Float64` */
   so_td_rate?: number | null;
-  /** `Float64` */
+  /** so_scores / so_trips: the share of scoring-opportunity trips that scored. Null when the denominator is 0. `Float64` */
   so_conversion_rate?: number | null;
-  /** `Float64` */
+  /** so_points / so_trips: points per scoring-opportunity trip. Null when the denominator is 0. `Float64` */
   so_pts_per_trip?: number | null;
-  /** `Float64` */
+  /** drive_points / drives: points per drive. Null when the denominator is 0. `Float64` */
   pts_per_drive?: number | null;
-  /** `Float64` */
+  /** scripted_epa / scripted_plays. Null when the denominator is 0. `Float64` */
   scripted_epa_per_play?: number | null;
-  /** `Float64` */
+  /** scripted_successes / scripted_plays. Null when the denominator is 0. `Float64` */
   scripted_success_rate?: number | null;
-  /** `Float64` */
+  /** scripted_points / scripted_drives. Null when the denominator is 0. `Float64` */
   scripted_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** non_scripted_epa / non_scripted_plays. Null when the denominator is 0. `Float64` */
   non_scripted_epa_per_play?: number | null;
-  /** `Float64` */
+  /** non_scripted_successes / non_scripted_plays. Null when the denominator is 0. `Float64` */
   non_scripted_success_rate?: number | null;
-  /** `Float64` */
+  /** non_scripted_points / non_scripted_drives. Null when the denominator is 0. `Float64` */
   non_scripted_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** fourth_went / fourth_decisions: the share of fourth-down decisions on which the offense went for it. Null when the denominator is 0. `Float64` */
   go_rate?: number | null;
-  /** `Float64` */
+  /** fourth_went_when_go / fourth_model_go: go rate on the decisions where the fourth-down model said go. Null when the denominator is 0. `Float64` */
   go_rate_when_model_says_go?: number | null;
-  /** `Float64` */
+  /** fourth_went_when_kick / fourth_model_kick: go rate on the decisions where the model said punt or kick. Null when the denominator is 0. `Float64` */
   go_rate_when_model_says_kick?: number | null;
-  /** `Float64` */
+  /** fourth_agreed / fourth_decisions: the share of decisions that matched the model. Null when the denominator is 0. `Float64` */
   fourth_agreement_rate?: number | null;
-  /** `Float64` */
+  /** fourth_wp_left / fourth_decisions: win probability left on the table per fourth-down decision. Null when the denominator is 0. `Float64` */
   fourth_wp_left_per_decision?: number | null;
-  /** `Float64` */
+  /** fourth_converted / fourth_went: conversion rate when going for it. Null when the denominator is 0. `Float64` */
   fourth_conversion_rate?: number | null;
-  /** `Float64` */
+  /** third_down_conversions minus third_down_expected: conversions above the distance-adjusted expectation; null when no curve was available. `Float64` */
   third_down_over_expected?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of plays_per_game: plays / games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_plays_per_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of plays_per_drive: plays / drives. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_plays_per_drive?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of drives_per_game: drives / games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_drives_per_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of sec_per_play: drive_seconds / drive_plays: seconds of game clock per offensive play from ESPN's own drive clock (pace; lower is faster). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_sec_per_play?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of sec_per_play_neutral: drive_seconds_neutral / drive_plays_neutral: the same pace measure on drives that started situation-neutral. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_sec_per_play_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pace_coverage: drives_with_clock / drives: the share of drives with a usable clock; treat sec_per_play with caution when this is low. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pace_coverage?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate: passes / plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play: epa / plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_rush: epa_rush / rushes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_pass: epa_pass / passes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate: successes / plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_rush: successes_rush / rushes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_pass: successes_pass / passes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_neutral: passes_neutral / plays_neutral: pass rate in situation-neutral situations. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_neutral: epa_neutral / plays_neutral. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_neutral: successes_neutral / plays_neutral: success rate in situation-neutral situations (score-and-clock win probability (wp_before_naive, no pregame line) between 20% and 80%, in the first four quarters, outside the final two minutes of a half). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_neutral?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d1: passes_d1 / plays_d1: pass rate on first down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d1?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d1: epa_d1 / plays_d1: EPA per play on first down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d1?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d1: successes_d1 / plays_d1: success rate on first down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d1?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d2: passes_d2 / plays_d2: pass rate on second down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d2?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d2: epa_d2 / plays_d2: EPA per play on second down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d2?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d2: successes_d2 / plays_d2: success rate on second down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d2?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d3: passes_d3 / plays_d3: pass rate on third down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d3?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d3: epa_d3 / plays_d3: EPA per play on third down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d3?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d3: successes_d3 / plays_d3: success rate on third down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d3?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d4: passes_d4 / plays_d4: pass rate on fourth down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d4?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d4: epa_d4 / plays_d4: EPA per play on fourth down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d4?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d4: successes_d4 / plays_d4: success rate on fourth down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d4?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_early_down: passes_early_down / plays_early_down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_early_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_early_down: epa_early_down / plays_early_down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_early_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_early_down: successes_early_down / plays_early_down: success rate on first or second down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_early_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_standard_down: passes_standard_down / plays_standard_down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_standard_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_standard_down: epa_standard_down / plays_standard_down: EPA per play on standard downs (the play-by-play standard_down flag). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_standard_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_standard_down: successes_standard_down / plays_standard_down: success rate on standard downs (the play-by-play standard_down flag). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_standard_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_passing_down: passes_passing_down / plays_passing_down. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_passing_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_passing_down: epa_passing_down / plays_passing_down: EPA per play on passing downs (the play-by-play passing_down flag). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_passing_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_passing_down: successes_passing_down / plays_passing_down: success rate on passing downs (the play-by-play passing_down flag). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_passing_down?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_leading: passes_leading / plays_leading: pass rate snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_leading?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_leading: epa_leading / plays_leading: EPA per play snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_leading?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_leading: successes_leading / plays_leading: success rate snapped with the offense ahead on the scoreboard (pos_score_diff_start > 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_leading?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_tied: passes_tied / plays_tied: pass rate snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_tied?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_tied: epa_tied / plays_tied: EPA per play snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_tied?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_tied: successes_tied / plays_tied: success rate snapped with the score tied (pos_score_diff_start == 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_tied?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_trailing: passes_trailing / plays_trailing: pass rate snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_trailing?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_trailing: epa_trailing / plays_trailing: EPA per play snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_trailing?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_trailing: successes_trailing / plays_trailing: success rate snapped with the offense behind on the scoreboard (pos_score_diff_start < 0, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_trailing?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_first_half: passes_first_half / plays_first_half. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_first_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_first_half: epa_first_half / plays_first_half: EPA per play in the first two quarters. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_first_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_first_half: successes_first_half / plays_first_half: success rate in the first two quarters. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_first_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_second_half: passes_second_half / plays_second_half. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_second_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_second_half: epa_second_half / plays_second_half: EPA per play in the third and fourth quarters (overtime belongs to neither half). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_second_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_second_half: successes_second_half / plays_second_half: success rate in the third and fourth quarters (overtime belongs to neither half). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_second_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d3_short: passes_d3_short / plays_d3_short: pass rate on third down with 3 or fewer yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d3_short?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d3_short: epa_d3_short / plays_d3_short: EPA per play on third down with 3 or fewer yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d3_short?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d3_short: successes_d3_short / plays_d3_short: success rate on third down with 3 or fewer yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d3_short?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d3_medium: passes_d3_medium / plays_d3_medium: pass rate on third down with 4 to 6 yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d3_medium?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d3_medium: epa_d3_medium / plays_d3_medium: EPA per play on third down with 4 to 6 yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d3_medium?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d3_medium: successes_d3_medium / plays_d3_medium: success rate on third down with 4 to 6 yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d3_medium?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_d3_long: passes_d3_long / plays_d3_long: pass rate on third down with 7 or more yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_d3_long?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_d3_long: epa_d3_long / plays_d3_long: EPA per play on third down with 7 or more yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_d3_long?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_d3_long: successes_d3_long / plays_d3_long: success rate on third down with 7 or more yards to go. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_d3_long?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_red_zone: passes_red_zone / plays_red_zone: pass rate in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_red_zone?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_red_zone: epa_red_zone / plays_red_zone: EPA per play in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_red_zone?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_red_zone: successes_red_zone / plays_red_zone: success rate in the red zone (20 or fewer yards from the opponent end zone, read from yards to goal rather than the absolute yard line; the play-by-play rz_play flag only when that distance is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_red_zone?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_own_half: passes_own_half / plays_own_half: pass rate snapped in the offense's own half (50 or more yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_own_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_own_half: epa_own_half / plays_own_half: EPA per play snapped in the offense's own half (50 or more yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_own_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_own_half: successes_own_half / plays_own_half: success rate snapped in the offense's own half (50 or more yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_own_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_opp_half: passes_opp_half / plays_opp_half: pass rate snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_opp_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_opp_half: epa_opp_half / plays_opp_half: EPA per play snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_opp_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_opp_half: successes_opp_half / plays_opp_half: success rate snapped in the opponent's half (fewer than 50 yards from the opponent end zone). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_opp_half?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_one_score: passes_one_score / plays_one_score: pass rate snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_one_score?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_one_score: epa_one_score / plays_one_score: EPA per play snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_one_score?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_one_score: successes_one_score / plays_one_score: success rate snapped with the offense within 8 points either way (|pos_score_diff_start| <= 8, the score at the snap, before the play; pos_score_diff where the start score is missing). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_one_score?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_home: passes_home / plays_home: pass rate in the team's home games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_home: epa_home / plays_home: EPA per play in the team's home games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_home: successes_home / plays_home: success rate in the team's home games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_home: wins_home / games_home: win rate in the team's home games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_home?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_away: passes_away / plays_away: pass rate in the team's away games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_away: epa_away / plays_away: EPA per play in the team's away games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_away: successes_away / plays_away: success rate in the team's away games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_away: wins_away / games_away: win rate in the team's away games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_away?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_neutral_site: passes_neutral_site / plays_neutral_site: pass rate in the team's neutral-site games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_neutral_site: epa_neutral_site / plays_neutral_site: EPA per play in the team's neutral-site games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_neutral_site: successes_neutral_site / plays_neutral_site: success rate in the team's neutral-site games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_neutral_site: wins_neutral_site / games_neutral_site: win rate in the team's neutral-site games. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_neutral_site?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_after_bye: passes_after_bye / plays_after_bye: pass rate in the team's games played 13 or more days after the team's previous game. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_after_bye: epa_after_bye / plays_after_bye: EPA per play in the team's games played 13 or more days after the team's previous game. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_after_bye: successes_after_bye / plays_after_bye: success rate in the team's games played 13 or more days after the team's previous game. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_after_bye: wins_after_bye / games_after_bye: win rate in the team's games played 13 or more days after the team's previous game. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_after_bye?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_opener: passes_opener / plays_opener: pass rate in the team's regular-season openers. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_opener: epa_opener / plays_opener: EPA per play in the team's regular-season openers. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_opener: successes_opener / plays_opener: success rate in the team's regular-season openers. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_opener: wins_opener / games_opener: win rate in the team's regular-season openers. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_opener?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pass_rate_one_score_game: passes_one_score_game / plays_one_score_game: pass rate in the team's games decided by 8 points or fewer. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pass_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of epa_per_play_one_score_game: epa_one_score_game / plays_one_score_game: EPA per play in the team's games decided by 8 points or fewer. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_epa_per_play_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of success_rate_one_score_game: successes_one_score_game / plays_one_score_game: success rate in the team's games decided by 8 points or fewer. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_success_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of win_rate_one_score_game: wins_one_score_game / games_one_score_game: win rate in the team's games decided by 8 points or fewer. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_win_rate_one_score_game?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of ypp: yards / plays: yards per play. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_ypp?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of ypp_rush: yards_rush / rushes: yards per rush. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_ypp_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of ypp_pass: yards_pass / passes: yards per pass play. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_ypp_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of explosive_rate: explosives / plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_explosive_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of explosive_rate_rush: explosives_rush / rushes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_explosive_rate_rush?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of explosive_rate_pass: explosives_pass / passes. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_explosive_rate_pass?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of third_down_rate: third_down_conversions / third_down_opportunities. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_third_down_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_trip_rate: rz_trips / drives: the share of drives that reached the red zone. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_rz_trip_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_td_rate: rz_tds / rz_trips: touchdowns per red-zone trip. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_rz_td_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_conversion_rate: rz_scores / rz_trips: the share of red-zone trips that scored (touchdown or field goal). Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_rz_conversion_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of rz_pts_per_trip: rz_points / rz_trips: points per red-zone trip. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_rz_pts_per_trip?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_trip_rate: so_trips / drives: the share of drives that reached the opponent's 40. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_so_trip_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_td_rate: so_tds / so_trips: touchdowns per scoring-opportunity trip. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_so_td_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_conversion_rate: so_scores / so_trips: the share of scoring-opportunity trips that scored. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_so_conversion_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of so_pts_per_trip: so_points / so_trips: points per scoring-opportunity trip. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_so_pts_per_trip?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of pts_per_drive: drive_points / drives: points per drive. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_epa_per_play: scripted_epa / scripted_plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_scripted_epa_per_play?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_success_rate: scripted_successes / scripted_plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_scripted_success_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of scripted_pts_per_drive: scripted_points / scripted_drives. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_scripted_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_epa_per_play: non_scripted_epa / non_scripted_plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_non_scripted_epa_per_play?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_success_rate: non_scripted_successes / non_scripted_plays. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_non_scripted_success_rate?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of non_scripted_pts_per_drive: non_scripted_points / non_scripted_drives. Computed from the def_ counts; null when the denominator is 0. `Float64` */
   def_non_scripted_pts_per_drive?: number | null;
-  /** `Float64` */
+  /** Defense-allowed twin of third_down_over_expected: def_third_down_conversions minus def_third_down_expected; null when no curve was available. `Float64` */
   def_third_down_over_expected?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -6099,17 +6099,17 @@ export interface LoadNflCoachCareersRow {
 
 /** One row of `sdv.nfl.loadNflGroups` (`nfl_groups`; sdv-py loader schema `load_nfl_groups`). */
 export interface LoadNflGroupsRow {
-  /** `String` */
+  /** League code of the table ("nfl"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `String` */
+  /** Hierarchy level of the group: "league", "subdivision", "conference" or "division". `String` */
   level?: string | null;
-  /** `Int32` */
+  /** First season in which the group had at least one member (STARTING year: 2025 = the 2025-26 season). `Int32` */
   first_season?: number | null;
-  /** `Int32` */
+  /** Last season in which the group had at least one member (STARTING year: 2025 = the 2025-26 season). `Int32` */
   last_season?: number | null;
-  /** `String` */
+  /** Builder notes on the group: the lineage decisions behind its group_id and any source caveats. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -6117,23 +6117,23 @@ export interface LoadNflGroupsRow {
 
 /** One row of `sdv.nfl.loadNflGroupSeasons` (`nfl_groups`; sdv-py loader schema `load_nfl_group_seasons`). */
 export interface LoadNflGroupSeasonsRow {
-  /** `String` */
+  /** League code of the table ("nfl"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `Int32` */
+  /** Season the row describes (STARTING year: 2025 = the 2025-26 season). `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Hierarchy level of the group: "league", "subdivision", "conference" or "division". `String` */
   level?: string | null;
-  /** `String` */
+  /** Full name of the group as of that season -- the label in use then, not today's name. `String` */
   name?: string | null;
-  /** `String` */
+  /** Short display name of the group as of that season. `String` */
   short_name?: string | null;
-  /** `String` */
+  /** Abbreviation of the group as of that season. `String` */
   abbreviation?: string | null;
-  /** `String` (an id) */
+  /** group_id one level up as of that season (division -> conference -> subdivision -> league); null at the top level or where no higher group applied that season. `String` (an id) */
   parent_group_id?: string | null;
-  /** `Int32` */
+  /** Number of member teams in the group that season. `Int32` */
   n_teams?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -6141,21 +6141,21 @@ export interface LoadNflGroupSeasonsRow {
 
 /** One row of `sdv.nfl.loadNflGroupAliases` (`nfl_groups`; sdv-py loader schema `load_nfl_group_aliases`). */
 export interface LoadNflGroupAliasesRow {
-  /** `String` */
+  /** League code of the table ("nfl"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `String` */
+  /** Source that uses this label or id (in this table: espn, nflverse, sdv); "sdv" marks SDV's own labels. `String` */
   source?: string | null;
-  /** `String` (an id) */
+  /** The source's own id for the group (ESPN group id, NCAA conf_id, CFBD id, MLB division id) when it has one; null otherwise. `String` (an id) */
   source_id?: string | null;
-  /** `String` */
+  /** Kind of label in value: "name", "short_name", "abbreviation", "slug" or "code". `String` */
   name_kind?: string | null;
-  /** `String` */
+  /** The label exactly as the source writes it; match a source's conference or division label against it to reach group_id. `String` */
   value?: string | null;
-  /** `Int32` */
+  /** First season the alias is valid for, inclusive (STARTING year: 2025 = the 2025-26 season); null = unbounded. `Int32` */
   valid_from?: number | null;
-  /** `Int32` */
+  /** Last season the alias is valid for, inclusive (STARTING year: 2025 = the 2025-26 season); null = unbounded (still in use). `Int32` */
   valid_to?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -6163,27 +6163,27 @@ export interface LoadNflGroupAliasesRow {
 
 /** One row of `sdv.nfl.loadNflTeamGroupSeasons` (`nfl_groups`; sdv-py loader schema `load_nfl_team_group_seasons`). */
 export interface LoadNflTeamGroupSeasonsRow {
-  /** `String` */
+  /** League code of the table ("nfl"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `Int32` */
+  /** Season of the membership (STARTING year: 2025 = the 2025-26 season). `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Team id as a string: the ESPN team id where ESPN covers the team, otherwise the league's own id; team_id_source says which. `String` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Id space of team_id (in this table: espn). `String` */
   team_id_source?: string | null;
-  /** `String` */
+  /** Team name as of that season, not today's. `String` */
   team_name?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's subdivision that season (e.g. FBS / FCS, Division I); null where the league has no subdivision level. `String` (an id) */
   subdivision_id?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's conference that season; null where the team had no conference (an independent, or a season played without conferences). `String` (an id) */
   conference_id?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's division that season; null where the level does not apply. `String` (an id) */
   division_id?: string | null;
-  /** `String` */
+  /** Source the membership was taken from -- the most reliable per-season source for that era. `String` */
   source?: string | null;
-  /** `Boolean` */
+  /** Whether a second source agreed on the membership; null when only one source covers the season. `Boolean` */
   sources_agree?: boolean | null;
-  /** `String` */
+  /** Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;

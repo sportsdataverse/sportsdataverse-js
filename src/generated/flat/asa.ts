@@ -56,10 +56,11 @@ const GAMES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/games`
  *
- * @param params.league_slug - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`AsaGamesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaGames({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaGames: Wrapper<AsaGamesRow[], AsaGamesParams> = (params: WrapperParams = {}) => callFlat(GAMES_DEF, params);
 /** snake_case alias of {@link asaGames} (py/R parity). */
@@ -124,19 +125,20 @@ const GAMES_XGOALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/games/xgoals`
  *
- * @param params.league_slug - path parameter.
- * @param params.season_name - query parameter.
- * @param params.stage_name - query parameter.
- * @param params.minimum_minutes - query parameter.
- * @param params.general_position - query parameter.
- * @param params.split_by_teams - query parameter.
- * @param params.split_by_seasons - query parameter.
- * @param params.split_by_games - query parameter.
- * @param params.start_date - query parameter.
- * @param params.end_date - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
+ * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
+ * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
+ * @param params.general_position - `number | string` — Filter by general position code: GK, CB, FB, DM, CM, AM, W, ST (player/GK routes).
+ * @param params.split_by_teams - `number | string` — `true` => one row per entity per team (splits traded players).
+ * @param params.split_by_seasons - `number | string` — `true` => one row per entity per season.
+ * @param params.split_by_games - `number | string` — `true` => one row per entity per game.
+ * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaGamesXgoals({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaGamesXgoals: Wrapper<Row[], AsaGamesXgoalsParams> = (params: WrapperParams = {}) => callFlat(GAMES_XGOALS_DEF, params);
 /** snake_case alias of {@link asaGamesXgoals} (py/R parity). */
@@ -201,20 +203,21 @@ const GOALKEEPERS_GOALS_ADDED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/goalkeepers/goals-added`
  *
- * @param params.league_slug - path parameter.
- * @param params.season_name - query parameter.
- * @param params.stage_name - query parameter.
- * @param params.minimum_minutes - query parameter.
- * @param params.general_position - query parameter.
- * @param params.split_by_teams - query parameter.
- * @param params.split_by_seasons - query parameter.
- * @param params.split_by_games - query parameter.
- * @param params.start_date - query parameter.
- * @param params.end_date - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `summary`, `actions`. Default: `summary`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
+ * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
+ * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
+ * @param params.general_position - `number | string` — Filter by general position code: GK, CB, FB, DM, CM, AM, W, ST (player/GK routes).
+ * @param params.split_by_teams - `number | string` — `true` => one row per entity per team (splits traded players).
+ * @param params.split_by_seasons - `number | string` — `true` => one row per entity per season.
+ * @param params.split_by_games - `number | string` — `true` => one row per entity per game.
+ * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `summary`, `actions`. Default: `summary`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaGoalkeepersGoalsAdded({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaGoalkeepersGoalsAdded: SectionedWrapper<Row[], {}, AsaGoalkeepersGoalsAddedParams> = (params: WrapperParams = {}) => callFlat(GOALKEEPERS_GOALS_ADDED_DEF, params);
 /** snake_case alias of {@link asaGoalkeepersGoalsAdded} (py/R parity). */
@@ -279,19 +282,20 @@ const GOALKEEPERS_XGOALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/goalkeepers/xgoals`
  *
- * @param params.league_slug - path parameter.
- * @param params.season_name - query parameter.
- * @param params.stage_name - query parameter.
- * @param params.minimum_minutes - query parameter.
- * @param params.general_position - query parameter.
- * @param params.split_by_teams - query parameter.
- * @param params.split_by_seasons - query parameter.
- * @param params.split_by_games - query parameter.
- * @param params.start_date - query parameter.
- * @param params.end_date - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
+ * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
+ * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
+ * @param params.general_position - `number | string` — Filter by general position code: GK, CB, FB, DM, CM, AM, W, ST (player/GK routes).
+ * @param params.split_by_teams - `number | string` — `true` => one row per entity per team (splits traded players).
+ * @param params.split_by_seasons - `number | string` — `true` => one row per entity per season.
+ * @param params.split_by_games - `number | string` — `true` => one row per entity per game.
+ * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaGoalkeepersXgoals({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaGoalkeepersXgoals: Wrapper<Row[], AsaGoalkeepersXgoalsParams> = (params: WrapperParams = {}) => callFlat(GOALKEEPERS_XGOALS_DEF, params);
 /** snake_case alias of {@link asaGoalkeepersXgoals} (py/R parity). */
@@ -319,10 +323,11 @@ const MANAGERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/managers`
  *
- * @param params.league_slug - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaManagers({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaManagers: Wrapper<Row[], AsaManagersParams> = (params: WrapperParams = {}) => callFlat(MANAGERS_DEF, params);
 /** snake_case alias of {@link asaManagers} (py/R parity). */
@@ -350,10 +355,11 @@ const PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players`
  *
- * @param params.league_slug - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`AsaPlayersRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaPlayers({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaPlayers: Wrapper<AsaPlayersRow[], AsaPlayersParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_DEF, params);
 /** snake_case alias of {@link asaPlayers} (py/R parity). */
@@ -418,20 +424,21 @@ const PLAYERS_GOALS_ADDED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/goals-added`
  *
- * @param params.league_slug - path parameter.
- * @param params.season_name - query parameter.
- * @param params.stage_name - query parameter.
- * @param params.minimum_minutes - query parameter.
- * @param params.general_position - query parameter.
- * @param params.split_by_teams - query parameter.
- * @param params.split_by_seasons - query parameter.
- * @param params.split_by_games - query parameter.
- * @param params.start_date - query parameter.
- * @param params.end_date - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `summary`, `actions`. Default: `summary`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
+ * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
+ * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
+ * @param params.general_position - `number | string` — Filter by general position code: GK, CB, FB, DM, CM, AM, W, ST (player/GK routes).
+ * @param params.split_by_teams - `number | string` — `true` => one row per entity per team (splits traded players).
+ * @param params.split_by_seasons - `number | string` — `true` => one row per entity per season.
+ * @param params.split_by_games - `number | string` — `true` => one row per entity per game.
+ * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `summary`, `actions`. Default: `summary`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`AsaPlayersGoalsAddedRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaPlayersGoalsAdded({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaPlayersGoalsAdded: SectionedWrapper<AsaPlayersGoalsAddedRow[], { summary: AsaPlayersGoalsAddedRow[] }, AsaPlayersGoalsAddedParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_GOALS_ADDED_DEF, params);
 /** snake_case alias of {@link asaPlayersGoalsAdded} (py/R parity). */
@@ -496,19 +503,20 @@ const PLAYERS_SALARIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/salaries`
  *
- * @param params.league_slug - path parameter.
- * @param params.season_name - query parameter.
- * @param params.stage_name - query parameter.
- * @param params.minimum_minutes - query parameter.
- * @param params.general_position - query parameter.
- * @param params.split_by_teams - query parameter.
- * @param params.split_by_seasons - query parameter.
- * @param params.split_by_games - query parameter.
- * @param params.start_date - query parameter.
- * @param params.end_date - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
+ * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
+ * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
+ * @param params.general_position - `number | string` — Filter by general position code: GK, CB, FB, DM, CM, AM, W, ST (player/GK routes).
+ * @param params.split_by_teams - `number | string` — `true` => one row per entity per team (splits traded players).
+ * @param params.split_by_seasons - `number | string` — `true` => one row per entity per season.
+ * @param params.split_by_games - `number | string` — `true` => one row per entity per game.
+ * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`AsaPlayersSalariesRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaPlayersSalaries({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaPlayersSalaries: Wrapper<AsaPlayersSalariesRow[], AsaPlayersSalariesParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_SALARIES_DEF, params);
 /** snake_case alias of {@link asaPlayersSalaries} (py/R parity). */
@@ -573,19 +581,20 @@ const PLAYERS_XGOALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/xgoals`
  *
- * @param params.league_slug - path parameter.
- * @param params.season_name - query parameter.
- * @param params.stage_name - query parameter.
- * @param params.minimum_minutes - query parameter.
- * @param params.general_position - query parameter.
- * @param params.split_by_teams - query parameter.
- * @param params.split_by_seasons - query parameter.
- * @param params.split_by_games - query parameter.
- * @param params.start_date - query parameter.
- * @param params.end_date - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
+ * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
+ * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
+ * @param params.general_position - `number | string` — Filter by general position code: GK, CB, FB, DM, CM, AM, W, ST (player/GK routes).
+ * @param params.split_by_teams - `number | string` — `true` => one row per entity per team (splits traded players).
+ * @param params.split_by_seasons - `number | string` — `true` => one row per entity per season.
+ * @param params.split_by_games - `number | string` — `true` => one row per entity per game.
+ * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`AsaPlayersXgoalsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaPlayersXgoals({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaPlayersXgoals: Wrapper<AsaPlayersXgoalsRow[], AsaPlayersXgoalsParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_XGOALS_DEF, params);
 /** snake_case alias of {@link asaPlayersXgoals} (py/R parity). */
@@ -613,10 +622,11 @@ const REFEREES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/referees`
  *
- * @param params.league_slug - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaReferees({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaReferees: Wrapper<Row[], AsaRefereesParams> = (params: WrapperParams = {}) => callFlat(REFEREES_DEF, params);
 /** snake_case alias of {@link asaReferees} (py/R parity). */
@@ -644,10 +654,11 @@ const STADIA_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/stadia`
  *
- * @param params.league_slug - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaStadia({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaStadia: Wrapper<Row[], AsaStadiaParams> = (params: WrapperParams = {}) => callFlat(STADIA_DEF, params);
 /** snake_case alias of {@link asaStadia} (py/R parity). */
@@ -675,10 +686,11 @@ const TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/teams`
  *
- * @param params.league_slug - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`AsaTeamsRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaTeams({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaTeams: Wrapper<AsaTeamsRow[], AsaTeamsParams> = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
 /** snake_case alias of {@link asaTeams} (py/R parity). */
@@ -743,20 +755,21 @@ const TEAMS_GOALS_ADDED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/teams/goals-added`
  *
- * @param params.league_slug - path parameter.
- * @param params.season_name - query parameter.
- * @param params.stage_name - query parameter.
- * @param params.minimum_minutes - query parameter.
- * @param params.general_position - query parameter.
- * @param params.split_by_teams - query parameter.
- * @param params.split_by_seasons - query parameter.
- * @param params.split_by_games - query parameter.
- * @param params.start_date - query parameter.
- * @param params.end_date - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: `summary`, `actions`. Default: `summary`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
+ * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
+ * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
+ * @param params.general_position - `number | string` — Filter by general position code: GK, CB, FB, DM, CM, AM, W, ST (player/GK routes).
+ * @param params.split_by_teams - `number | string` — `true` => one row per entity per team (splits traded players).
+ * @param params.split_by_seasons - `number | string` — `true` => one row per entity per season.
+ * @param params.split_by_games - `number | string` — `true` => one row per entity per game.
+ * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `summary`, `actions`. Default: `summary`; an unknown name throws, listing the valid ones.
+ * @returns Promise<`AsaTeamsGoalsAddedRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaTeamsGoalsAdded({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaTeamsGoalsAdded: SectionedWrapper<AsaTeamsGoalsAddedRow[], { summary: AsaTeamsGoalsAddedRow[] }, AsaTeamsGoalsAddedParams> = (params: WrapperParams = {}) => callFlat(TEAMS_GOALS_ADDED_DEF, params);
 /** snake_case alias of {@link asaTeamsGoalsAdded} (py/R parity). */
@@ -821,19 +834,20 @@ const TEAMS_XGOALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/teams/xgoals`
  *
- * @param params.league_slug - path parameter.
- * @param params.season_name - query parameter.
- * @param params.stage_name - query parameter.
- * @param params.minimum_minutes - query parameter.
- * @param params.general_position - query parameter.
- * @param params.split_by_teams - query parameter.
- * @param params.split_by_seasons - query parameter.
- * @param params.split_by_games - query parameter.
- * @param params.start_date - query parameter.
- * @param params.end_date - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
+ * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
+ * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
+ * @param params.general_position - `number | string` — Filter by general position code: GK, CB, FB, DM, CM, AM, W, ST (player/GK routes).
+ * @param params.split_by_teams - `number | string` — `true` => one row per entity per team (splits traded players).
+ * @param params.split_by_seasons - `number | string` — `true` => one row per entity per season.
+ * @param params.split_by_games - `number | string` — `true` => one row per entity per game.
+ * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaTeamsXgoals({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaTeamsXgoals: Wrapper<Row[], AsaTeamsXgoalsParams> = (params: WrapperParams = {}) => callFlat(TEAMS_XGOALS_DEF, params);
 /** snake_case alias of {@link asaTeamsXgoals} (py/R parity). */
@@ -898,19 +912,20 @@ const TEAMS_XPASS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/teams/xpass`
  *
- * @param params.league_slug - path parameter.
- * @param params.season_name - query parameter.
- * @param params.stage_name - query parameter.
- * @param params.minimum_minutes - query parameter.
- * @param params.general_position - query parameter.
- * @param params.split_by_teams - query parameter.
- * @param params.split_by_seasons - query parameter.
- * @param params.split_by_games - query parameter.
- * @param params.start_date - query parameter.
- * @param params.end_date - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
+ * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
+ * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
+ * @param params.general_position - `number | string` — Filter by general position code: GK, CB, FB, DM, CM, AM, W, ST (player/GK routes).
+ * @param params.split_by_teams - `number | string` — `true` => one row per entity per team (splits traded players).
+ * @param params.split_by_seasons - `number | string` — `true` => one row per entity per season.
+ * @param params.split_by_games - `number | string` — `true` => one row per entity per game.
+ * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaTeamsXpass({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
  */
 export const asaTeamsXpass: Wrapper<Row[], AsaTeamsXpassParams> = (params: WrapperParams = {}) => callFlat(TEAMS_XPASS_DEF, params);
 /** snake_case alias of {@link asaTeamsXpass} (py/R parity). */

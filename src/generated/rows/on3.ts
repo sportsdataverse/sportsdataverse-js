@@ -10,51 +10,51 @@
  * One row of `sdv.on3.on3_collective_groups({ parsed: true })` (returns schema `native/on3/collective_groups`, verified on a real sdv-py capture).
  */
 export interface On3CollectiveGroupsRow {
-  /** Schema `integer`. */
+  /** On3 RDB key for the NIL collective group. Schema `integer`. */
   key?: number | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key for the collective's primary logo image. Schema `integer`. */
   default_asset_key?: number | null;
-  /** Schema `integer`. */
+  /** On3 asset key for the collective's social-media image. Schema `integer`. */
   social_asset_key?: number | null;
-  /** Schema `integer`. */
+  /** On3 organization key of the school the collective supports. Schema `integer`. */
   organization_key?: number | null;
-  /** Schema `character`. */
+  /** Date the NIL collective launched. Schema `character`. */
   launch_date?: string | null;
-  /** Schema `character`. */
+  /** Organization type. Schema `character`. */
   organization_type?: string | null;
-  /** Schema `character`. */
+  /** Collective's Twitter/X account handle. Schema `character`. */
   twitter_handle?: string | null;
-  /** Schema `character`. */
+  /** Collective's Instagram account handle. Schema `character`. */
   instagram_handle?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Collective's TikTok account handle. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   tik_tok_handle?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Collective's YouTube channel handle. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   youtube_handle?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Collective's LinkedIn account handle. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   linked_in_handle?: unknown;
-  /** Schema `character`. */
+  /** Display name of the collective's website. Schema `character`. */
   website_name?: string | null;
-  /** Schema `character`. */
+  /** URL of the collective's website. Schema `character`. */
   website_url?: string | null;
-  /** Schema `character`. */
+  /** Collective's stated mission, as published to On3. Schema `character`. */
   mission_statement?: string | null;
-  /** Schema `character`. */
+  /** Long-form description text. Schema `character`. */
   description?: string | null;
-  /** Schema `numeric`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Collective's annual fundraising goal in dollars, as reported to On3. Schema `numeric`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   annual_goal_amount?: unknown;
-  /** Schema `numeric`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Dollar amount the collective has confirmed raising, per On3. Schema `numeric`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   confirmed_raised_amount?: unknown;
-  /** Schema `integer`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** On3 key of the collective this group merged into, when applicable. Schema `integer`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   merged_into_group_key?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested On3 record for the collective this group merged into (stringified). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   merged_into_group?: unknown;
-  /** Schema `character`. */
+  /** URL-safe identifier. Schema `character`. */
   slug?: string | null;
-  /** Schema `character`. */
+  /** Founders of the collective, as a stringified list. Schema `character`. */
   founders?: string | null;
-  /** Schema `character`. */
+  /** Sports the collective funds, as a stringified list. Schema `character`. */
   sports?: string | null;
   /** Schema `integer`. */
   default_asset_key_2?: number | null;
@@ -204,21 +204,21 @@ export interface On3CollectiveGroupsRow {
  * One row of `sdv.on3.on3_drafts_by_stars({ parsed: true })` (returns schema `native/on3/drafts_by_stars`, verified on a real sdv-py capture).
  */
 export interface On3DraftsByStarsRow {
-  /** Schema `numeric`. */
+  /** Percent of the drafted group who were blue-chip (four- or five-star) recruits. Schema `numeric`. */
   blue_chip_percent?: number | null;
-  /** Schema `numeric`. */
+  /** Percent of the overall recruit population holding this star rating. Schema `numeric`. */
   population_percent?: number | null;
-  /** Schema `numeric`. */
+  /** Ratio of the star tier's draft share to its population share (On3's talent ratio). Schema `numeric`. */
   talent_ratio?: number | null;
-  /** Schema `integer`. */
+  /** Number of drafted players who were five-star recruits. Schema `integer`. */
   five_stars?: number | null;
-  /** Schema `integer`. */
+  /** Number of drafted players who were four-star recruits. Schema `integer`. */
   four_stars?: number | null;
-  /** Schema `integer`. */
+  /** Number of drafted players who were three-star recruits. Schema `integer`. */
   three_stars?: number | null;
-  /** Schema `integer`. */
+  /** Number of drafted players who were unrated (zero-star) recruits. Schema `integer`. */
   zero_stars?: number | null;
-  /** Schema `integer`. */
+  /** Total. Schema `integer`. */
   total?: number | null;
   /** Schema `integer`. */
   state_key?: number | null;
@@ -234,7 +234,7 @@ export interface On3DraftsByStarsRow {
  * One row of `sdv.on3.on3_filters_draft_rounds({ parsed: true })` (returns schema `native/on3/filters_draft_rounds`, verified on a real sdv-py capture).
  */
 export interface On3FiltersDraftRoundsRow {
-  /** Schema `integer`. */
+  /** Tournament / playoff round. Schema `integer`. */
   round?: number | null;
 }
 
@@ -242,7 +242,7 @@ export interface On3FiltersDraftRoundsRow {
  * One row of `sdv.on3.on3_filters_status({ parsed: true })` (returns schema `native/on3/filters_status`, verified on a real sdv-py capture).
  */
 export interface On3FiltersStatusRow {
-  /** Schema `character`. */
+  /** Numeric or string value field. Schema `character`. */
   value?: string | null;
 }
 
@@ -420,9 +420,9 @@ export interface On3Nil100V2Row {
   person_default_asset_mime_type?: string | null;
   /** Schema `character`. */
   person_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Height (feet and inches). Schema `character`. */
   person_height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   person_weight?: number | null;
   /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_roster_rating?: unknown;
@@ -800,11 +800,11 @@ export interface On3NilRankingsRow {
   person_early_enrollee?: boolean | null;
   /** Schema `character`. */
   person_position_abbreviation?: string | null;
-  /** Schema `numeric`. */
+  /** Height (feet and inches). Schema `numeric`. */
   person_height?: number | null;
   /** Schema `character`. */
   person_formatted_height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   person_weight?: number | null;
   /** Schema `integer`. */
   person_class_year?: number | null;
@@ -854,21 +854,21 @@ export interface On3NilRankingsRow {
  * One row of `sdv.on3.on3_organizations_roster_header({ parsed: true })` (returns schema `native/on3/organizations_roster_header`, verified on a real sdv-py capture).
  */
 export interface On3OrganizationsRosterHeaderRow {
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Program's current national roster-talent rank per On3. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   talent_rank?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Program's roster-talent rank in the previous cycle. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   prev_talent_rank?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Program's roster-talent rank within its conference. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   conference_rank?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Program's conference roster-talent rank in the previous cycle. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   prev_conference_rank?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Average On3 rating across the roster. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   average_rating?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Average On3 roster rating in the previous cycle. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   prev_average_rating?: unknown;
-  /** Schema `numeric`. */
+  /** Average On3 NIL valuation across the roster, in dollars. Schema `numeric`. */
   average_nil_value?: number | null;
-  /** Schema `integer`. */
+  /** Total On3 NIL valuation across the roster, in dollars. Schema `integer`. */
   total_nil_value?: number | null;
   /** Schema `integer`. */
   head_coach_key?: number | null;
@@ -1004,27 +1004,27 @@ export interface On3OrganizationsRosterHeaderRow {
  * One row of `sdv.on3.on3_people_latest_valuation({ parsed: true })` (returns schema `native/on3/people_latest_valuation`, verified on a real sdv-py capture).
  */
 export interface On3PeopleLatestValuationRow {
-  /** Schema `character`. */
+  /** Status of the athlete's On3 NIL valuation (e.g. active, inactive). Schema `character`. */
   nil_status?: string | null;
-  /** Schema `integer`. */
+  /** Athlete's latest On3 NIL valuation in dollars. Schema `integer`. */
   valuation?: number | null;
-  /** Schema `integer`. */
+  /** Change in the NIL valuation since the previous update, in dollars. Schema `integer`. */
   valuation_change?: number | null;
-  /** Schema `integer`. */
+  /** Total social-media followers counted toward the valuation. Schema `integer`. */
   followers?: number | null;
-  /** Schema `integer`. */
+  /** Position of the school within the poll for the given week (1 = top-ranked). Schema `integer`. */
   rank?: number | null;
-  /** Schema `integer`. */
+  /** Last-updated timestamp. Schema `integer`. */
   last_updated?: number | null;
   /** Schema `numeric`. */
   whisper?: number | null;
   /** Schema `numeric`. */
   whisper_change?: number | null;
-  /** Schema `character`. */
+  /** Per-platform breakdown of the social components of the valuation (stringified list). Schema `character`. */
   social_valuations?: string | null;
-  /** Schema `integer`. */
+  /** League/season rank for group. Schema `integer`. */
   group_rank?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Group name (conference / division). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   group_name?: unknown;
   /** Schema `character`. */
   tags?: string | null;
@@ -1046,11 +1046,11 @@ export interface On3PeopleMeasurementsRow {
  * One row of `sdv.on3.on3_people_social({ parsed: true })` (returns schema `native/on3/people_social`, verified on a real sdv-py capture).
  */
 export interface On3PeopleSocialRow {
-  /** Schema `character`. */
+  /** Record type / category. Schema `character`. */
   type?: string | null;
-  /** Schema `character`. */
+  /** Athlete's account handle on the social platform. Schema `character`. */
   handle?: string | null;
-  /** Schema `logical`. */
+  /** On3 RDB handshake field on the social-account record (platform link/verification metadata). Schema `logical`. */
   handshake?: boolean | null;
 }
 
@@ -1058,11 +1058,11 @@ export interface On3PeopleSocialRow {
  * One row of `sdv.on3.on3_people_social_post_summary({ parsed: true })` (returns schema `native/on3/people_social_post_summary`, verified on a real sdv-py capture).
  */
 export interface On3PeopleSocialPostSummaryRow {
-  /** Schema `character`. */
+  /** Social platform the post summary covers (e.g. Twitter/X, Instagram). Schema `character`. */
   social_type?: string | null;
-  /** Schema `character`. */
+  /** Record type / category. Schema `character`. */
   type?: string | null;
-  /** Schema `integer`. */
+  /** Athlete's follower count on the platform. Schema `integer`. */
   followers?: number | null;
 }
 
@@ -1070,15 +1070,15 @@ export interface On3PeopleSocialPostSummaryRow {
  * One row of `sdv.on3.on3_people_valuation_growth({ parsed: true })` (returns schema `native/on3/people_valuation_growth`, verified on a real sdv-py capture).
  */
 export interface On3PeopleValuationGrowthRow {
-  /** Schema `character`. */
+  /** Status of the athlete's On3 NIL valuation at the snapshot (e.g. active, inactive). Schema `character`. */
   nil_status?: string | null;
-  /** Schema `integer`. */
+  /** Athlete's On3 NIL valuation in dollars at the snapshot. Schema `integer`. */
   valuation?: number | null;
-  /** Schema `numeric`. */
+  /** Change in the NIL valuation versus the previous snapshot, in dollars. Schema `numeric`. */
   valuation_change?: number | null;
-  /** Schema `character`. */
+  /** Date of the On3 NIL valuation snapshot. Schema `character`. */
   date?: string | null;
-  /** Schema `integer`. */
+  /** Unix timestamp of the valuation snapshot. Schema `integer`. */
   date_unix?: number | null;
 }
 
@@ -1086,37 +1086,37 @@ export interface On3PeopleValuationGrowthRow {
  * One row of `sdv.on3.on3_player_all_rankings({ parsed: true })` (returns schema `native/on3/player_all_rankings`, verified on a real sdv-py capture).
  */
 export interface On3PlayerAllRankingsRow {
-  /** Schema `character`. */
+  /** Record type / category. Schema `character`. */
   type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** API link to the game feed. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   link?: unknown;
-  /** Schema `integer`. */
+  /** On3 key of the ranking cycle the row belongs to. Schema `integer`. */
   ranking_key?: number | null;
   /** Schema `integer`. */
   ranking_year?: number | null;
-  /** Schema `character`. */
+  /** Poll type code (e.g. `ap`, `coaches`, `cfp`). Schema `character`. */
   ranking_type?: string | null;
-  /** Schema `numeric`. */
+  /** Overall SP+ rating (Bill Connelly methodology, in points per game). Schema `numeric`. */
   rating?: number | null;
-  /** Schema `character`. */
+  /** Nested On3 sport object for the ranking row (stringified). Schema `character`. */
   sport?: string | null;
-  /** Schema `integer`. */
+  /** Recruiting class year the ranking covers. Schema `integer`. */
   class_year?: number | null;
-  /** Schema `integer`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** State ranking. Schema `integer`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   state_rank?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Two-letter abbreviation of the player's home state. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   state_abbr?: unknown;
-  /** Schema `integer`. */
+  /** Pre-draft position rank. Schema `integer`. */
   position_rank?: number | null;
-  /** Schema `character`. */
+  /** Position abbreviation. Schema `character`. */
   position_abbr?: string | null;
-  /** Schema `integer`. */
+  /** Overall recruit ranking (top recruits only; may be `NA`). Schema `integer`. */
   overall_rank?: number | null;
-  /** Schema `integer`. */
+  /** Recruit star rating on the 247Sports scale (2-5). Schema `integer`. */
   stars?: number | null;
-  /** Schema `logical`. */
+  /** Whether On3 designates the player a Five-Star Plus+ prospect. Schema `logical`. */
   five_star_plus?: boolean | null;
-  /** Schema `logical`. */
+  /** On3 flag that the player narrowly missed the Five-Star Plus+ designation. Schema `logical`. */
   nearly_five_star_plus?: boolean | null;
   /** Schema `character`. */
   change_1?: string | null;
@@ -1126,27 +1126,27 @@ export interface On3PlayerAllRankingsRow {
  * One row of `sdv.on3.on3_player_database_updates({ parsed: true })` (returns schema `native/on3/player_database_updates`, verified on a real sdv-py capture).
  */
 export interface On3PlayerDatabaseUpdatesRow {
-  /** Schema `integer`. */
+  /** On3 RDB key for the database-update entry. Schema `integer`. */
   key?: number | null;
-  /** Schema `character`. */
+  /** Record type / category. Schema `character`. */
   type?: string | null;
-  /** Schema `character`. */
+  /** Text description of the play / record. Schema `character`. */
   text?: string | null;
-  /** Schema `character`. */
+  /** Rendered text of the update entry (with references substituted in). Schema `character`. */
   replacement_text?: string | null;
-  /** Schema `character`. */
+  /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Schema `integer`. */
+  /** Date the update entry was logged. Schema `integer`. */
   date_added?: number | null;
-  /** Schema `integer`. */
+  /** Date the underlying event occurred. Schema `integer`. */
   date_occurred?: number | null;
-  /** Schema `integer`. */
+  /** On3 key of the object the update refers to. Schema `integer`. */
   object_key?: number | null;
-  /** Schema `integer`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** On3 sport key the update is scoped to. Schema `integer`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   sport_key?: unknown;
-  /** Schema `integer`. */
+  /** On3 person key of the player the update concerns. Schema `integer`. */
   person_key?: number | null;
-  /** Schema `integer`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** On3 organization key involved in the update, when any. Schema `integer`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_key?: unknown;
 }
 
@@ -1154,43 +1154,43 @@ export interface On3PlayerDatabaseUpdatesRow {
  * One row of `sdv.on3.on3_player_images({ parsed: true })` (returns schema `native/on3/player_images`, verified on a real sdv-py capture).
  */
 export interface On3PlayerImagesRow {
-  /** Schema `integer`. */
+  /** On3 asset key for the image. Schema `integer`. */
   key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Override CDN domain for serving the image, when set. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain the image is served from. Schema `character`. */
   domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Override source attribution for the image, when set. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   source_override?: unknown;
-  /** Schema `character`. */
+  /** News source. Schema `character`. */
   source?: string | null;
-  /** Schema `character`. */
+  /** Specific role title for the assignment. Schema `character`. */
   title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Long-form description text. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Caption text for the image. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Category label. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Alt text for the image. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Player height (string e.g. '6-2' or inches). Schema `integer`. */
   height?: number | null;
-  /** Schema `integer`. */
+  /** Image width in pixels. Schema `integer`. */
   width?: number | null;
-  /** Schema `character`. */
+  /** Type of the asset (e.g. image) in On3's asset system. Schema `character`. */
   asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file system the asset lives on (On3 asset metadata). Schema `character`. */
   file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the image file. Schema `character`. */
   path?: string | null;
-  /** Schema `character`. */
+  /** Record type / category. Schema `character`. */
   type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** URL or path of the image's thumbnail rendition. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration. Schema `integer`. */
   duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the image file (e.g. image/jpeg). Schema `character`. */
   mime_type?: string | null;
 }
 
@@ -1198,39 +1198,39 @@ export interface On3PlayerImagesRow {
  * One row of `sdv.on3.on3_player_person_rankings({ parsed: true })` (returns schema `native/on3/player_person_rankings`, verified on a real sdv-py capture).
  */
 export interface On3PlayerPersonRankingsRow {
-  /** Schema `integer`. */
+  /** On3 RDB key for the player's ranking row. Schema `integer`. */
   key?: number | null;
-  /** Schema `integer`. */
+  /** On3 key of the ranking cycle the row belongs to. Schema `integer`. */
   ranking_key?: number | null;
-  /** Schema `integer`. */
+  /** Overall SP+ rating (Bill Connelly methodology, in points per game). Schema `integer`. */
   rating?: number | null;
-  /** Schema `integer`. */
+  /** State ranking. Schema `integer`. */
   state_rank?: number | null;
-  /** Schema `character`. */
+  /** Two-letter abbreviation of the player's home state. Schema `character`. */
   state_abbr?: string | null;
-  /** Schema `integer`. */
+  /** Pre-draft position rank. Schema `integer`. */
   position_rank?: number | null;
-  /** Schema `character`. */
+  /** Position abbreviation. Schema `character`. */
   position_abbr?: string | null;
-  /** Schema `integer`. */
+  /** Overall recruit ranking (top recruits only; may be `NA`). Schema `integer`. */
   overall_rank?: number | null;
-  /** Schema `integer`. */
+  /** Recruit star rating on the 247Sports scale (2-5). Schema `integer`. */
   stars?: number | null;
-  /** Schema `numeric`. */
+  /** Player's industry-consensus rating (blend of the major recruiting services). Schema `numeric`. */
   consensus_rating?: number | null;
-  /** Schema `integer`. */
+  /** Player's consensus rank within their home state. Schema `integer`. */
   consensus_state_rank?: number | null;
-  /** Schema `integer`. */
+  /** Player's consensus rank at their position. Schema `integer`. */
   consensus_position_rank?: number | null;
-  /** Schema `integer`. */
+  /** Player's national consensus rank. Schema `integer`. */
   consensus_overall_rank?: number | null;
-  /** Schema `integer`. */
+  /** Player's star rating under the industry consensus. Schema `integer`. */
   consensus_stars?: number | null;
-  /** Schema `integer`. */
+  /** Strength label (Even, Power Play, Shorthanded). Schema `integer`. */
   strength?: number | null;
-  /** Schema `logical`. */
+  /** Whether On3 designates the player a Five-Star Plus+ prospect. Schema `logical`. */
   five_star_plus?: boolean | null;
-  /** Schema `character`. */
+  /** Poll type code (e.g. `ap`, `coaches`, `cfp`). Schema `character`. */
   ranking_type?: string | null;
   /** Schema `integer`. */
   ranking_key_2?: number | null;
@@ -1252,83 +1252,83 @@ export interface On3PlayerPersonRankingsRow {
  * One row of `sdv.on3.on3_player_profile({ parsed: true })` (returns schema `native/on3/player_profile`, verified on a real sdv-py capture).
  */
 export interface On3PlayerProfileRow {
-  /** Schema `integer`. */
+  /** On3 RDB key for the player profile. Schema `integer`. */
   key?: number | null;
-  /** Schema `integer`. */
+  /** On3 recruitment key for the player's recruiting-class cycle. Schema `integer`. */
   class_year_recruitment_key?: number | null;
-  /** Schema `integer`. */
+  /** On3 key of the player's active recruitment record. Schema `integer`. */
   recruitment_key?: number | null;
-  /** Schema `logical`. */
+  /** Whether the athlete can self-manage the recruitment on On3. Schema `logical`. */
   person_can_manage_recruitment?: boolean | null;
-  /** Schema `integer`. */
+  /** On3 key of the ranking cycle the profile's rating belongs to. Schema `integer`. */
   ranking_key?: number | null;
-  /** Schema `integer`. */
+  /** On3 key of the athlete-sport profile (person x sport). Schema `integer`. */
   person_sport_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** On3's internal oracle identifier for the player record. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   oracle_key?: unknown;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** URL-safe identifier. Schema `character`. */
   slug?: string | null;
-  /** Schema `character`. */
+  /** Recruit high-school name. Schema `character`. */
   high_school_name?: string | null;
-  /** Schema `character`. */
+  /** Player's hometown, as listed by On3. Schema `character`. */
   hometown_name?: string | null;
-  /** Schema `character`. */
+  /** Position abbreviation ('G' / 'F' / 'C'). Schema `character`. */
   position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Player's rank within their recruiting class. Schema `character`. */
   class_rank?: string | null;
-  /** Schema `character`. */
+  /** Player height (string e.g. '6-2' or inches). Schema `character`. */
   height?: string | null;
-  /** Schema `integer`. */
+  /** Player weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `integer`. */
+  /** Player's recruiting class year. Schema `integer`. */
   class_year?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Degree the player earned or is pursuing, when listed. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   degree?: unknown;
-  /** Schema `integer`. */
+  /** Player age (in years). Schema `integer`. */
   age?: number | null;
-  /** Schema `character`. */
+  /** Sports the player is profiled in, as a stringified list. Schema `character`. */
   sports?: string | null;
-  /** Schema `character`. */
+  /** Long-form description text. Schema `character`. */
   description?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Bio text framing the player as a pro prospect (On3 RDB). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   bio_pro_prospect?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Bio text framing the player as a college recruit (On3 RDB). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   bio_college_recruit?: unknown;
-  /** Schema `character`. */
+  /** Level of the player's current organization (e.g. high school, college, professional). Schema `character`. */
   organization_level?: string | null;
-  /** Schema `integer`. */
+  /** On3 organization key of the player's high school. Schema `integer`. */
   high_school_org_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** On3 organization key of the player's prep school, when attended. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   prep_school_org_key?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** On3 organization key of the player's junior college, when attended. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   junior_college_org_key?: unknown;
-  /** Schema `integer`. */
+  /** On3 organization key of the player's college. Schema `integer`. */
   college_org_key?: number | null;
-  /** Schema `integer`. */
+  /** Player's On3 NIL valuation in dollars. Schema `integer`. */
   nil_value?: number | null;
-  /** Schema `logical`. */
+  /** Whether the athlete has verified their own On3 profile. Schema `logical`. */
   athlete_verified?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether On3 has verified the prospect's profile information. Schema `logical`. */
   prospect_verified?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the person record is a coach. Schema `logical`. */
   is_coach?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the person record is an athlete. Schema `logical`. */
   is_athlete?: boolean | null;
-  /** Schema `character`. */
+  /** Profile visibility setting on On3. Schema `character`. */
   visibility?: string | null;
-  /** Schema `character`. */
+  /** On3 profile tier classification for the player. Schema `character`. */
   tier?: string | null;
-  /** Schema `character`. */
+  /** Editorial review status of the profile in the On3 database. Schema `character`. */
   review_status?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number. Schema `integer`. */
   jersey_number?: number | null;
-  /** Schema `character`. */
+  /** Profile badge assigned by On3, when any. Schema `character`. */
   badge?: string | null;
-  /** Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Player's NCAA identifier, when known to On3. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   ncaa_id?: unknown;
-  /** Schema `logical`. */
+  /** On3 user account that manages the player's profile, when claimed. Schema `logical`. */
   managed_by_user?: boolean | null;
   /** Schema `integer`. */
   ranking_key_2?: number | null;
@@ -1418,7 +1418,7 @@ export interface On3PlayerProfileRow {
   hometown_state_key?: number | null;
   /** Schema `character`. */
   hometown_state_name?: string | null;
-  /** Schema `character`. */
+  /** Recruit hometown state abbreviation. Schema `character`. */
   hometown_state_abbreviation?: string | null;
   /** Schema `integer`. */
   hometown_state_country_key?: number | null;
@@ -1470,9 +1470,9 @@ export interface On3PlayerProfileRow {
   default_asset_mime_type?: string | null;
   /** Schema `integer`. */
   primary_position_key?: number | null;
-  /** Schema `character`. */
+  /** Primary fielding position name. Schema `character`. */
   primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Primary position abbreviation. Schema `character`. */
   primary_position_abbreviation?: string | null;
   /** Schema `integer`. */
   primary_position_sport_key?: number | null;
@@ -1672,23 +1672,23 @@ export interface On3PlayerProfileRow {
  * One row of `sdv.on3.on3_player_videos({ parsed: true })` (returns schema `native/on3/player_videos`, verified on a real sdv-py capture).
  */
 export interface On3PlayerVideosRow {
-  /** Schema `integer`. */
+  /** On3 RDB key for the video record. Schema `integer`. */
   key?: number | null;
-  /** Schema `character`. */
+  /** Source URL of the hosted video. Schema `character`. */
   source_url?: string | null;
-  /** Schema `character`. */
+  /** Specific role title for the assignment. Schema `character`. */
   title?: string | null;
-  /** Schema `character`. */
+  /** URL of the video's thumbnail image. Schema `character`. */
   thumbnail?: string | null;
-  /** Schema `character`. */
+  /** Long-form description text. Schema `character`. */
   description?: string | null;
-  /** Schema `integer`. */
+  /** Publication date of the video, per On3. Schema `integer`. */
   date?: number | null;
-  /** Schema `integer`. */
+  /** On3 person key of the featured athlete. Schema `integer`. */
   person_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested athlete-sport profile the video is attached to (stringified). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_sport?: unknown;
-  /** Schema `logical`. */
+  /** Whether the video is featured on the player's On3 profile. Schema `logical`. */
   is_featured?: boolean | null;
   /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   featured_order?: unknown;
@@ -1702,9 +1702,9 @@ export interface On3PlayerVideosRow {
  * One row of `sdv.on3.on3_players_industry_comparision({ parsed: true })` (returns schema `native/on3/players_industry_comparision`, verified on a real sdv-py capture).
  */
 export interface On3PlayersIndustryComparisionRow {
-  /** Schema `character`. */
+  /** List of per-service rating entries (On3, Rivals, 247, ESPN) composing the industry comparison. Schema `character`. */
   ratings?: string | null;
-  /** Schema `integer`. */
+  /** On3 NIL valuation for the player (US dollars). Schema `integer`. */
   nil_value?: number | null;
   /** Schema `integer`. */
   person_key?: number | null;
@@ -1828,11 +1828,11 @@ export interface On3PlayersIndustryComparisionRow {
   person_early_enrollee?: boolean | null;
   /** Schema `character`. */
   person_position_abbreviation?: string | null;
-  /** Schema `numeric`. */
+  /** Height (feet and inches). Schema `numeric`. */
   person_height?: number | null;
   /** Schema `character`. */
   person_formatted_height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   person_weight?: number | null;
   /** Schema `integer`. */
   person_class_year?: number | null;
@@ -1852,25 +1852,25 @@ export interface On3PlayersIndustryComparisionRow {
  * One row of `sdv.on3.on3_quotes({ parsed: true })` (returns schema `native/on3/quotes`, verified on a real sdv-py capture).
  */
 export interface On3QuotesRow {
-  /** Schema `integer`. */
+  /** On3 RDB key for the quote record. Schema `integer`. */
   key?: number | null;
-  /** Schema `character`. */
+  /** Full text of the quote. Schema `character`. */
   body?: string | null;
-  /** Schema `character`. */
+  /** Category label. Schema `character`. */
   category?: string | null;
-  /** Schema `integer`. */
+  /** On3 person key of the person quoted or quoted about. Schema `integer`. */
   person_key?: number | null;
-  /** Schema `character`. */
+  /** Date the quote was added to the On3 database. Schema `character`. */
   date_added?: string | null;
-  /** Schema `character`. */
+  /** Date the quote was last updated. Schema `character`. */
   date_updated?: string | null;
   /** Schema `integer`. */
   person_key_2?: number | null;
   /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_known_as_name?: unknown;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   person_first_name?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   person_last_name?: string | null;
   /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_twitter_handle?: unknown;
@@ -1892,11 +1892,11 @@ export interface On3QuotesRow {
  * One row of `sdv.on3.on3_recruitments_profile({ parsed: true })` (returns schema `native/on3/recruitments_profile`, verified on a real sdv-py capture).
  */
 export interface On3RecruitmentsProfileRow {
-  /** Schema `integer`. */
+  /** Recruiting class year of the recruitment. Schema `integer`. */
   class_year?: number | null;
-  /** Schema `character`. */
+  /** High school Schema `character`. */
   high_school?: string | null;
-  /** Schema `character`. */
+  /** Home town of the player. Schema `character`. */
   home_town?: string | null;
   /** Schema `integer`. */
   rating_key?: number | null;
@@ -2080,9 +2080,9 @@ export interface On3RecruitmentsProfileRow {
  * One row of `sdv.on3.on3_recruitments_rpm_summary({ parsed: true })` (returns schema `native/on3/recruitments_rpm_summary`, verified on a real sdv-py capture).
  */
 export interface On3RecruitmentsRpmSummaryRow {
-  /** Schema `character`. */
+  /** Per-team RPM prediction percentages for the recruitment, as a stringified list. Schema `character`. */
   predictions?: string | null;
-  /** Schema `logical`. */
+  /** Whether the RPM prediction for the recruitment is locked (no longer updating). Schema `logical`. */
   locked?: boolean | null;
 }
 
@@ -2090,51 +2090,51 @@ export interface On3RecruitmentsRpmSummaryRow {
  * One row of `sdv.on3.on3_team_ranking_team_rankings({ parsed: true })` (returns schema `native/on3/team_ranking_team_rankings`, verified on a real sdv-py capture).
  */
 export interface On3TeamRankingTeamRankingsRow {
-  /** Schema `integer`. */
+  /** On3 organization-ranking key for the class row. Schema `integer`. */
   key?: number | null;
-  /** Schema `integer`. */
+  /** 4-digit year. Schema `integer`. */
   year?: number | null;
-  /** Schema `numeric`. */
+  /** Total On3 rating applied to the class after deductions. Schema `numeric`. */
   applied_total_rating?: number | null;
-  /** Schema `numeric`. */
+  /** Total consensus rating applied to the class after deductions. Schema `numeric`. */
   applied_total_consensus_rating?: number | null;
-  /** Schema `numeric`. */
+  /** Average On3 rating applied to the class after deductions. Schema `numeric`. */
   applied_average_rating?: number | null;
-  /** Schema `numeric`. */
+  /** Average consensus rating applied to the class after deductions. Schema `numeric`. */
   applied_average_consensus_rating?: number | null;
-  /** Schema `integer`. */
+  /** Number of commits in the recruiting class. Schema `integer`. */
   commits?: number | null;
-  /** Schema `integer`. */
+  /** Number of commits counted toward the applied class rating. Schema `integer`. */
   applied_commits?: number | null;
-  /** Schema `numeric`. */
+  /** Rating deductions applied to the class (e.g. for roster limits). Schema `numeric`. */
   deductions?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Human-readable explanation of any applied deductions. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   deductions_description?: unknown;
-  /** Schema `integer`. */
+  /** Count of On3 five-star commits in the class. Schema `integer`. */
   five_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of consensus five-star commits in the class. Schema `integer`. */
   consensus_five_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of On3 four-star commits in the class. Schema `integer`. */
   four_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of consensus four-star commits in the class. Schema `integer`. */
   consensus_four_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of On3 three-star commits in the class. Schema `integer`. */
   three_stars?: number | null;
-  /** Schema `integer`. */
+  /** Count of consensus three-star commits in the class. Schema `integer`. */
   consensus_three_stars?: number | null;
-  /** Schema `integer`. */
+  /** National rank of the class by On3 score. Schema `integer`. */
   overall_rank?: number | null;
-  /** Schema `integer`. */
+  /** National rank of the class by consensus score. Schema `integer`. */
   overall_consensus_rank?: number | null;
-  /** Schema `numeric`. */
+  /** Display consensus score for the class (On3 sic spelling of "display"). Schema `numeric`. */
   dispay_consensus_score?: number | null;
-  /** Schema `numeric`. */
+  /** Display On3 score for the class (On3 sic spelling of "display"). Schema `numeric`. */
   dispay_on3_score?: number | null;
-  /** Schema `numeric`. */
+  /** Average On3 NIL valuation across the class's commits (US dollars). Schema `numeric`. */
   average_nil_value?: number | null;
-  /** Schema `integer`. */
+  /** Rank of the class within its conference by On3 score. Schema `integer`. */
   conference_rank?: number | null;
-  /** Schema `integer`. */
+  /** Rank of the class within its conference by consensus score. Schema `integer`. */
   conference_consensus_rank?: number | null;
   /** Schema `integer`. */
   organization_key?: number | null;

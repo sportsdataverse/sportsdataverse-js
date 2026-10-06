@@ -7,193 +7,193 @@
 
 /** One row of `sdv.nhl.loadNhlPbp` (`nhl_pbp_full`; sdv-py loader schema `load_nhl_pbp`). */
 export interface LoadNhlPbpRow {
-  /** `String` */
+  /** Standardized event type code. `String` */
   event_type?: string | null;
-  /** `String` */
+  /** Event description label. `String` */
   event?: string | null;
-  /** `String` */
+  /** Secondary event type (e.g. shot type). `String` */
   secondary_type?: string | null;
-  /** `String` */
+  /** Abbreviation of the team credited with the event. `String` */
   event_team_abbr?: string | null;
-  /** `String` */
+  /** Whether the event team is home or away. `String` */
   event_team_type?: string | null;
-  /** `String` */
+  /** Full text description of the event. `String` */
   description?: string | null;
-  /** `Int64` */
+  /** Period number. `Int64` */
   period?: number | bigint | null;
-  /** `String` */
+  /** Period type (REG/OT/SO). `String` */
   period_type?: string | null;
-  /** `String` */
+  /** Elapsed time in the period (MM:SS). `String` */
   period_time?: string | null;
-  /** `Int64` */
+  /** Elapsed seconds in the period. `Int64` */
   period_seconds?: number | bigint | null;
-  /** `Int64` */
+  /** Seconds remaining in the period. `Int64` */
   period_seconds_remaining?: number | bigint | null;
-  /** `String` */
+  /** Time remaining in the period (MM:SS). `String` */
   period_time_remaining?: string | null;
-  /** `Int64` */
+  /** Elapsed seconds in the game. `Int64` */
   game_seconds?: number | bigint | null;
-  /** `Int64` */
+  /** Seconds remaining in regulation. `Int64` */
   game_seconds_remaining?: number | bigint | null;
-  /** `Int64` */
+  /** Home team final score. `Int64` */
   home_score?: number | bigint | null;
-  /** `Int64` */
+  /** Away team final score. `Int64` */
   away_score?: number | bigint | null;
-  /** `String` */
+  /** Name of the primary event player. `String` */
   event_player_1_name?: string | null;
-  /** `String` */
+  /** Role of the primary event player. `String` */
   event_player_1_type?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of the primary event player. `Int64` (an id) */
   event_player_1_id?: string | null;
-  /** `String` */
+  /** Name of the secondary event player. `String` */
   event_player_2_name?: string | null;
-  /** `String` */
+  /** Role of the secondary event player. `String` */
   event_player_2_type?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of the secondary event player. `Int64` (an id) */
   event_player_2_id?: string | null;
-  /** `String` */
+  /** Name of the tertiary event player. `String` */
   event_player_3_name?: string | null;
-  /** `String` */
+  /** Role of the tertiary event player. `String` */
   event_player_3_type?: string | null;
-  /** `Int64` (an id) */
+  /** Player ID of the tertiary event player. `Int64` (an id) */
   event_player_3_id?: string | null;
-  /** `String` */
+  /** Name of the goalie on the event. `String` */
   event_goalie_name?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of the goalie on the event. `Int64` (an id) */
   event_goalie_id?: string | null;
-  /** `String` */
+  /** Severity of the penalty. `String` */
   penalty_severity?: string | null;
-  /** `Int64` */
+  /** Penalty minutes. `Int64` */
   penalty_minutes?: number | bigint | null;
-  /** `String` */
+  /** Strength state (e.g. 5v5, 5v4). `String` */
   strength_state?: string | null;
-  /** `String` */
+  /** Strength state code (e.g., all, even, pp, pk). `String` */
   strength_code?: string | null;
-  /** `String` */
+  /** Strength label (Even, Power Play, Shorthanded). `String` */
   strength?: string | null;
-  /** `Boolean` */
+  /** Whether the net was empty. `Boolean` */
   empty_net?: boolean | null;
-  /** `Boolean` */
+  /** Whether an extra attacker was on the ice. `Boolean` */
   extra_attacker?: boolean | null;
-  /** `Int64` */
+  /** Raw x-coordinate of the event. `Int64` */
   x?: number | bigint | null;
-  /** `Int64` */
+  /** Raw y-coordinate of the event. `Int64` */
   y?: number | bigint | null;
-  /** `Int64` */
+  /** Normalized x coordinate (home shoots right). `Int64` */
   x_fixed?: number | bigint | null;
-  /** `Int64` */
+  /** Normalized y coordinate (home shoots right). `Int64` */
   y_fixed?: number | bigint | null;
-  /** `Float64` */
+  /** Distance of the shot from the net. `Float64` */
   shot_distance?: number | null;
-  /** `Float64` */
+  /** Angle of the shot relative to the net. `Float64` */
   shot_angle?: number | null;
-  /** `Int64` */
+  /** Number of home skaters on the ice. `Int64` */
   home_skaters?: number | bigint | null;
-  /** `Int64` */
+  /** Number of away skaters on the ice. `Int64` */
   away_skaters?: number | bigint | null;
-  /** `String` */
+  /** Name of home skater 1 on the ice. `String` */
   home_on_1?: string | null;
-  /** `String` */
+  /** Name of home skater 2 on the ice. `String` */
   home_on_2?: string | null;
-  /** `String` */
+  /** Name of home skater 3 on the ice. `String` */
   home_on_3?: string | null;
-  /** `String` */
+  /** Name of home skater 4 on the ice. `String` */
   home_on_4?: string | null;
-  /** `String` */
+  /** Name of home skater 5 on the ice. `String` */
   home_on_5?: string | null;
-  /** `String` */
+  /** Name of home skater 6 on the ice. `String` */
   home_on_6?: string | null;
-  /** `String` */
+  /** Name of home skater 7 on the ice. `String` */
   home_on_7?: string | null;
-  /** `String` */
+  /** Name of away skater 1 on the ice. `String` */
   away_on_1?: string | null;
-  /** `String` */
+  /** Name of away skater 2 on the ice. `String` */
   away_on_2?: string | null;
-  /** `String` */
+  /** Name of away skater 3 on the ice. `String` */
   away_on_3?: string | null;
-  /** `String` */
+  /** Name of away skater 4 on the ice. `String` */
   away_on_4?: string | null;
-  /** `String` */
+  /** Name of away skater 5 on the ice. `String` */
   away_on_5?: string | null;
-  /** `String` */
+  /** Name of away skater 6 on the ice. `String` */
   away_on_6?: string | null;
-  /** `String` */
+  /** Name of away skater 7 on the ice. `String` */
   away_on_7?: string | null;
-  /** `String` */
+  /** Name of the home goalie on the ice. `String` */
   home_goalie?: string | null;
-  /** `String` */
+  /** Name of the away goalie on the ice. `String` */
   away_goalie?: string | null;
-  /** `Int64` */
+  /** Number of players coming on (line change). `Int64` */
   num_on?: number | bigint | null;
-  /** `String` */
+  /** Names of players coming on. `String` */
   players_on?: string | null;
-  /** `Int64` */
+  /** Number of players going off (line change). `Int64` */
   num_off?: number | bigint | null;
-  /** `String` */
+  /** Names of players going off. `String` */
   players_off?: string | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** Season year (echoed from arg). `String` */
   season?: string | null;
-  /** `String` */
+  /** Season type code (echoed from arg). `String` */
   season_type?: string | null;
-  /** `String` */
+  /** Home team abbreviation. `String` */
   home_abbr?: string | null;
-  /** `String` */
+  /** Away team abbreviation. `String` */
   away_abbr?: string | null;
-  /** `Int64` */
+  /** Sequential event index within the game. `Int64` */
   event_idx?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN event id (echoed from arg). `Int64` (an id) */
   event_id?: string | null;
-  /** `String` */
+  /** URL to the play replay, if available. `String` */
   pptReplayUrl?: string | null;
-  /** `Int64` */
+  /** Whether the away goalie is on the ice (1/0). `Int64` */
   away_goalie_in?: number | bigint | null;
-  /** `Int64` */
+  /** Whether the home goalie is on the ice (1/0). `Int64` */
   home_goalie_in?: number | bigint | null;
-  /** `String` */
+  /** Reason for the event (e.g. stoppage reason). `String` */
   reason?: string | null;
-  /** `String` */
+  /** Secondary reason for a stoppage. `String` */
   secondaryReason?: string | null;
-  /** `String` */
+  /** Player ids coming on. `String` */
   ids_on?: string | null;
-  /** `String` */
+  /** Player ids going off. `String` */
   ids_off?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 1 on the ice. `Int64` (an id) */
   home_on_1_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 1 on the ice. `Int64` (an id) */
   away_on_1_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 2 on the ice. `Int64` (an id) */
   home_on_2_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 2 on the ice. `Int64` (an id) */
   away_on_2_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 3 on the ice. `Int64` (an id) */
   home_on_3_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 3 on the ice. `Int64` (an id) */
   away_on_3_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 4 on the ice. `Int64` (an id) */
   home_on_4_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 4 on the ice. `Int64` (an id) */
   away_on_4_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 5 on the ice. `Int64` (an id) */
   home_on_5_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 5 on the ice. `Int64` (an id) */
   away_on_5_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 6 on the ice. `Int64` (an id) */
   home_on_6_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 6 on the ice. `Int64` (an id) */
   away_on_6_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 7 on the ice. `Int64` (an id) */
   home_on_7_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 7 on the ice. `Int64` (an id) */
   away_on_7_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player ID of the home goalie on the ice. `Int64` (an id) */
   home_goalie_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player ID of the away goalie on the ice. `Int64` (an id) */
   away_goalie_id?: string | null;
-  /** `Float64` */
+  /** Expected goals value for the shot event. `Float64` */
   xg?: number | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -201,79 +201,79 @@ export interface LoadNhlPbpRow {
 
 /** One row of `sdv.nhl.loadNhlPlayerBoxscore` (`nhl_player_boxscores`; sdv-py loader schema `load_nhl_player_boxscore`). */
 export interface LoadNhlPlayerBoxscoreRow {
-  /** `String` */
+  /** Home or away indicator. `String` */
   home_away?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbrev?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `Int64` */
+  /** Jersey number. `Int64` */
   sweater_number?: number | bigint | null;
-  /** `String` */
+  /** Player position. `String` */
   position?: string | null;
-  /** `Int64` */
+  /** Goals scored. `Int64` */
   goals?: number | bigint | null;
-  /** `Int64` */
+  /** Assists. `Int64` */
   assists?: number | bigint | null;
-  /** `Int64` */
+  /** Total points (goals + assists). `Int64` */
   points?: number | bigint | null;
-  /** `Int64` */
+  /** Plus/minus rating. `Int64` */
   plus_minus?: number | bigint | null;
-  /** `Int64` */
+  /** Penalty minutes. `Int64` */
   pim?: number | bigint | null;
-  /** `Int64` */
+  /** Hits. `Int64` */
   hits?: number | bigint | null;
-  /** `Int64` */
+  /** Power-play goals. `Int64` */
   power_play_goals?: number | bigint | null;
-  /** `Int64` */
+  /** Shots on goal. `Int64` */
   shots_on_goal?: number | bigint | null;
-  /** `Float64` */
+  /** Faceoff win percentage. `Float64` */
   faceoff_winning_pctg?: number | null;
-  /** `String` */
+  /** Time on ice. `String` */
   toi?: string | null;
-  /** `Int64` */
+  /** Blocked shots. `Int64` */
   blocked_shots?: number | bigint | null;
-  /** `Int64` */
+  /** CONSTANT false in every published row: the shift-chart block is not carried on this asset. An availability flag, not a shift count. `Int64` */
   shifts?: number | bigint | null;
-  /** `Int64` */
+  /** Giveaways. `Int64` */
   giveaways?: number | bigint | null;
-  /** `Int64` */
+  /** Takeaways. `Int64` */
   takeaways?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year (echoed from arg). `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Even-strength shots against (saves/total). `String` */
   even_strength_shots_against?: string | null;
-  /** `String` */
+  /** Power-play shots against (saves/total). `String` */
   power_play_shots_against?: string | null;
-  /** `String` */
+  /** Shorthanded shots against (saves/total). `String` */
   shorthanded_shots_against?: string | null;
-  /** `String` */
+  /** Total shots against (saves/total). `String` */
   save_shots_against?: string | null;
-  /** `Float64` */
+  /** Save percentage. `Float64` */
   save_pctg?: number | null;
-  /** `Int64` */
+  /** Even-strength goals against. `Int64` */
   even_strength_goals_against?: number | bigint | null;
-  /** `Int64` */
+  /** Power-play goals against. `Int64` */
   power_play_goals_against?: number | bigint | null;
-  /** `Int64` */
+  /** Shorthanded goals against. `Int64` */
   shorthanded_goals_against?: number | bigint | null;
-  /** `Int64` */
+  /** Goals against. `Int64` */
   goals_against?: number | bigint | null;
-  /** `Boolean` */
+  /** Whether the goalie started the game. `Boolean` */
   starter?: boolean | null;
-  /** `String` */
+  /** Goalie decision (W/L/O). `String` */
   decision?: string | null;
-  /** `Int64` */
+  /** Shots faced. `Int64` */
   shots_against?: number | bigint | null;
-  /** `Int64` */
+  /** Saves made. `Int64` */
   saves?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -281,75 +281,75 @@ export interface LoadNhlPlayerBoxscoreRow {
 
 /** One row of `sdv.nhl.loadNhlSchedule` (`nhl_schedules`; sdv-py loader schema `load_nhl_schedule`). */
 export interface LoadNhlScheduleRow {
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** Full season label (e.g. 20212022). `String` */
   season_full?: string | null;
-  /** `String` */
+  /** Game type the row belongs to. `String` */
   game_type?: string | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Scheduled start time of the game. `String` */
   game_time?: string | null;
-  /** `String` */
+  /** Home team abbreviation. `String` */
   home_team_abbr?: string | null;
-  /** `String` */
+  /** Away team abbreviation. `String` */
   away_team_abbr?: string | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team_name?: string | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team_name?: string | null;
-  /** `Int32` */
+  /** Home team final score. `Int32` */
   home_score?: number | null;
-  /** `Int32` */
+  /** Away team final score. `Int32` */
   away_score?: number | null;
-  /** `String` */
+  /** Game state (e.g., FINAL, LIVE). `String` */
   game_state?: string | null;
-  /** `String` */
+  /** Venue where the game was played. `String` */
   venue?: string | null;
-  /** `String` */
+  /** Playoff series identifier letter, populated only for postseason games (88 of 1,400 rows in 2024) and null for the regular season. `String` */
   series_letter?: string | null;
-  /** `Int32` */
+  /** Playoff round identifier. `Int32` */
   playoff_round?: number | null;
-  /** `Int32` */
+  /** Series game number. `Int32` */
   series_game_number?: number | null;
-  /** `Int32` */
+  /** Season year (echoed from arg). `Int32` */
   season?: number | null;
-  /** `Boolean` */
+  /** Whether processed game JSON is available. `Boolean` */
   game_json?: boolean | null;
-  /** `String` */
+  /** URL to the processed game JSON. `String` */
   game_json_url?: string | null;
-  /** `Boolean` */
+  /** Whether play-by-play data is available. `Boolean` */
   PBP?: boolean | null;
-  /** `Boolean` */
+  /** Whether team box score data is available. `Boolean` */
   team_box?: boolean | null;
-  /** `Boolean` */
+  /** Whether player box score data is available. `Boolean` */
   player_box?: boolean | null;
-  /** `Boolean` */
+  /** Whether skater box data is available. `Boolean` */
   skater_box?: boolean | null;
-  /** `Boolean` */
+  /** Whether goalie box data is available. `Boolean` */
   goalie_box?: boolean | null;
-  /** `Boolean` */
+  /** CONSTANT true: marks that the source game record carried a game-info block. `Boolean` */
   game_info?: boolean | null;
-  /** `Boolean` */
+  /** Whether game rosters data is available. `Boolean` */
   game_rosters?: boolean | null;
-  /** `Boolean` */
+  /** CONSTANT true: marks that the source game record carried a scoring-summary block. It is an availability flag, not a count or a scoring event. `Boolean` */
   scoring?: boolean | null;
-  /** `Boolean` */
+  /** CONSTANT true: marks that the source game record carried a penalty-summary block. It is an availability flag, not a penalty count. `Boolean` */
   penalties?: boolean | null;
-  /** `Boolean` */
+  /** True when the source game record carried a scratches block for the game. `Boolean` */
   scratches?: boolean | null;
-  /** `Boolean` */
+  /** CONSTANT: true on every published row, so it carries no information as shipped. It marks that a linescore block existed on the source game record. `Boolean` */
   linescore?: boolean | null;
-  /** `Boolean` */
+  /** CONSTANT true: marks that the source game record carried a three-stars block. `Boolean` */
   three_stars?: boolean | null;
-  /** `Boolean` */
+  /** CONSTANT false in every published row: the shift-chart block is not carried on this asset. An availability flag, not a shift count. `Boolean` */
   shifts?: boolean | null;
-  /** `Boolean` */
+  /** Whether officials data is available. `Boolean` */
   officials?: boolean | null;
-  /** `Boolean` */
+  /** Whether shots-by-period data is available. `Boolean` */
   shots_by_period?: boolean | null;
-  /** `Boolean` */
+  /** Whether shootout data is available. `Boolean` */
   shootout?: boolean | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -357,43 +357,43 @@ export interface LoadNhlScheduleRow {
 
 /** One row of `sdv.nhl.loadNhlTeamBoxscore` (`nhl_team_boxscores`; sdv-py loader schema `load_nhl_team_boxscore`). */
 export interface LoadNhlTeamBoxscoreRow {
-  /** `String` */
+  /** Home or away indicator. `String` */
   home_away?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbrev?: string | null;
-  /** `String` */
+  /** Team name. `String` */
   team_name?: string | null;
-  /** `Int64` */
+  /** Goals scored. `Int64` */
   goals?: number | bigint | null;
-  /** `Int64` */
+  /** Shots on goal. `Int64` */
   shots_on_goal?: number | bigint | null;
-  /** `Int64` */
+  /** Penalty minutes. `Int64` */
   pim?: number | bigint | null;
-  /** `Int64` */
+  /** Hits. `Int64` */
   hits?: number | bigint | null;
-  /** `Int64` */
+  /** Blocked shots. `Int64` */
   blocked_shots?: number | bigint | null;
-  /** `Int64` */
+  /** Giveaways. `Int64` */
   giveaways?: number | bigint | null;
-  /** `Int64` */
+  /** Takeaways. `Int64` */
   takeaways?: number | bigint | null;
-  /** `Int64` */
+  /** Power-play goals. `Int64` */
   power_play_goals?: number | bigint | null;
-  /** `Float64` */
+  /** Faceoff win percentage. `Float64` */
   faceoff_win_pctg?: number | null;
-  /** `Int64` */
+  /** Saves made. `Int64` */
   saves?: number | bigint | null;
-  /** `Float64` */
+  /** Save percentage. `Float64` */
   save_pctg?: number | null;
-  /** `Int64` */
+  /** Goals against. `Int64` */
   goals_against?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year (echoed from arg). `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -401,25 +401,25 @@ export interface LoadNhlTeamBoxscoreRow {
 
 /** One row of `sdv.nhl.loadNhlGameInfo` (`nhl_game_info`; sdv-py loader schema `load_nhl_game_info`). */
 export interface LoadNhlGameInfoRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year (echoed from arg). `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Game type the row belongs to. `String` */
   game_type?: string | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Venue where the game was played. `String` */
   venue?: string | null;
-  /** `String` */
+  /** Home team abbreviation. `String` */
   home_team_abbr?: string | null;
-  /** `String` */
+  /** Away team abbreviation. `String` */
   away_team_abbr?: string | null;
-  /** `Int64` */
+  /** Home team final score. `Int64` */
   home_score?: number | bigint | null;
-  /** `Int64` */
+  /** Away team final score. `Int64` */
   away_score?: number | bigint | null;
-  /** `String` */
+  /** Game state (e.g., FINAL, LIVE). `String` */
   game_state?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -427,29 +427,29 @@ export interface LoadNhlGameInfoRow {
 
 /** One row of `sdv.nhl.loadNhlGameRosters` (`nhl_game_rosters`; sdv-py loader schema `load_nhl_game_rosters`). */
 export interface LoadNhlGameRostersRow {
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player full name. `String` */
   full_name?: string | null;
-  /** `String` */
+  /** Player first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbr?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Player position code. `String` */
   position_code?: string | null;
-  /** `Int64` */
+  /** Jersey number. `Int64` */
   sweater_number?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year (echoed from arg). `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Handedness (shoots/catches). `String` */
   shoots_catches?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -457,53 +457,53 @@ export interface LoadNhlGameRostersRow {
 
 /** One row of `sdv.nhl.loadNhlGoalieBoxscores` (`nhl_goalie_boxscores`; sdv-py loader schema `load_nhl_goalie_boxscores`). */
 export interface LoadNhlGoalieBoxscoresRow {
-  /** `String` */
+  /** Home or away indicator. `String` */
   home_away?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbrev?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `Int64` */
+  /** Jersey number. `Int64` */
   sweater_number?: number | bigint | null;
-  /** `String` */
+  /** Even-strength shots against (saves/total). `String` */
   even_strength_shots_against?: string | null;
-  /** `String` */
+  /** Power-play shots against (saves/total). `String` */
   power_play_shots_against?: string | null;
-  /** `String` */
+  /** Shorthanded shots against (saves/total). `String` */
   shorthanded_shots_against?: string | null;
-  /** `String` */
+  /** Total shots against (saves/total). `String` */
   save_shots_against?: string | null;
-  /** `Float64` */
+  /** Save percentage. `Float64` */
   save_pctg?: number | null;
-  /** `Int64` */
+  /** Even-strength goals against. `Int64` */
   even_strength_goals_against?: number | bigint | null;
-  /** `Int64` */
+  /** Power-play goals against. `Int64` */
   power_play_goals_against?: number | bigint | null;
-  /** `Int64` */
+  /** Shorthanded goals against. `Int64` */
   shorthanded_goals_against?: number | bigint | null;
-  /** `Int64` */
+  /** Penalty minutes. `Int64` */
   pim?: number | bigint | null;
-  /** `Int64` */
+  /** Goals against. `Int64` */
   goals_against?: number | bigint | null;
-  /** `String` */
+  /** Time on ice. `String` */
   toi?: string | null;
-  /** `Boolean` */
+  /** Whether the goalie started the game. `Boolean` */
   starter?: boolean | null;
-  /** `String` */
+  /** Goalie decision (W/L/O). `String` */
   decision?: string | null;
-  /** `Int64` */
+  /** Shots faced. `Int64` */
   shots_against?: number | bigint | null;
-  /** `Int64` */
+  /** Saves made. `Int64` */
   saves?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year (echoed from arg). `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -511,25 +511,25 @@ export interface LoadNhlGoalieBoxscoresRow {
 
 /** One row of `sdv.nhl.loadNhlLinescore` (`nhl_linescore`; sdv-py loader schema `load_nhl_linescore`). */
 export interface LoadNhlLinescoreRow {
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` (an id) */
+  /** Home team identifier. `Int64` (an id) */
   home_team_id?: string | null;
-  /** `String` */
+  /** Home team abbreviation. `String` */
   home_team_abbr?: string | null;
-  /** `Int64` */
+  /** Home goals in the period. `Int64` */
   home_goals?: number | bigint | null;
-  /** `Int64` */
+  /** Home team shots in the period. `Int64` */
   home_shots?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Away team identifier. `Int64` (an id) */
   away_team_id?: string | null;
-  /** `String` */
+  /** Away team abbreviation. `String` */
   away_team_abbr?: string | null;
-  /** `Int64` */
+  /** Away goals in the period. `Int64` */
   away_goals?: number | bigint | null;
-  /** `Int64` */
+  /** Away team shots in the period. `Int64` */
   away_shots?: number | bigint | null;
-  /** `Boolean` */
+  /** Flag for whether the game went to shootout. `Boolean` */
   has_shootout?: boolean | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -537,15 +537,15 @@ export interface LoadNhlLinescoreRow {
 
 /** One row of `sdv.nhl.loadNhlOfficials` (`nhl_officials`; sdv-py loader schema `load_nhl_officials`). */
 export interface LoadNhlOfficialsRow {
-  /** `String` */
+  /** Grouped official role (Referee/Linesperson). `String` */
   role?: string | null;
-  /** `String` */
+  /** Team mascot name. `String` */
   name?: string | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year (echoed from arg). `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -553,193 +553,193 @@ export interface LoadNhlOfficialsRow {
 
 /** One row of `sdv.nhl.loadNhlPbpFull` (`nhl_pbp_full`; sdv-py loader schema `load_nhl_pbp_full`). */
 export interface LoadNhlPbpFullRow {
-  /** `String` */
+  /** Standardized event type code. `String` */
   event_type?: string | null;
-  /** `String` */
+  /** Event description label. `String` */
   event?: string | null;
-  /** `String` */
+  /** Secondary event type (e.g. shot type). `String` */
   secondary_type?: string | null;
-  /** `String` */
+  /** Abbreviation of the team credited with the event. `String` */
   event_team_abbr?: string | null;
-  /** `String` */
+  /** Whether the event team is home or away. `String` */
   event_team_type?: string | null;
-  /** `String` */
+  /** Full text description of the event. `String` */
   description?: string | null;
-  /** `Int64` */
+  /** Period number. `Int64` */
   period?: number | bigint | null;
-  /** `String` */
+  /** Period type (REG/OT/SO). `String` */
   period_type?: string | null;
-  /** `String` */
+  /** Elapsed time in the period (MM:SS). `String` */
   period_time?: string | null;
-  /** `Int64` */
+  /** Elapsed seconds in the period. `Int64` */
   period_seconds?: number | bigint | null;
-  /** `Int64` */
+  /** Seconds remaining in the period. `Int64` */
   period_seconds_remaining?: number | bigint | null;
-  /** `String` */
+  /** Time remaining in the period (MM:SS). `String` */
   period_time_remaining?: string | null;
-  /** `Int64` */
+  /** Elapsed seconds in the game. `Int64` */
   game_seconds?: number | bigint | null;
-  /** `Int64` */
+  /** Seconds remaining in regulation. `Int64` */
   game_seconds_remaining?: number | bigint | null;
-  /** `Int64` */
+  /** Home team final score. `Int64` */
   home_score?: number | bigint | null;
-  /** `Int64` */
+  /** Away team final score. `Int64` */
   away_score?: number | bigint | null;
-  /** `String` */
+  /** Name of the primary event player. `String` */
   event_player_1_name?: string | null;
-  /** `String` */
+  /** Role of the primary event player. `String` */
   event_player_1_type?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of the primary event player. `Int64` (an id) */
   event_player_1_id?: string | null;
-  /** `String` */
+  /** Name of the secondary event player. `String` */
   event_player_2_name?: string | null;
-  /** `String` */
+  /** Role of the secondary event player. `String` */
   event_player_2_type?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of the secondary event player. `Int64` (an id) */
   event_player_2_id?: string | null;
-  /** `String` */
+  /** Name of the tertiary event player. `String` */
   event_player_3_name?: string | null;
-  /** `String` */
+  /** Role of the tertiary event player. `String` */
   event_player_3_type?: string | null;
-  /** `Int64` (an id) */
+  /** Player ID of the tertiary event player. `Int64` (an id) */
   event_player_3_id?: string | null;
-  /** `String` */
+  /** Name of the goalie on the event. `String` */
   event_goalie_name?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of the goalie on the event. `Int64` (an id) */
   event_goalie_id?: string | null;
-  /** `String` */
+  /** Severity of the penalty. `String` */
   penalty_severity?: string | null;
-  /** `Int64` */
+  /** Penalty minutes. `Int64` */
   penalty_minutes?: number | bigint | null;
-  /** `String` */
+  /** Strength state (e.g. 5v5, 5v4). `String` */
   strength_state?: string | null;
-  /** `String` */
+  /** Strength state code (e.g., all, even, pp, pk). `String` */
   strength_code?: string | null;
-  /** `String` */
+  /** Strength label (Even, Power Play, Shorthanded). `String` */
   strength?: string | null;
-  /** `Boolean` */
+  /** Whether the net was empty. `Boolean` */
   empty_net?: boolean | null;
-  /** `Boolean` */
+  /** Whether an extra attacker was on the ice. `Boolean` */
   extra_attacker?: boolean | null;
-  /** `Int64` */
+  /** Raw x-coordinate of the event. `Int64` */
   x?: number | bigint | null;
-  /** `Int64` */
+  /** Raw y-coordinate of the event. `Int64` */
   y?: number | bigint | null;
-  /** `Int64` */
+  /** Normalized x coordinate (home shoots right). `Int64` */
   x_fixed?: number | bigint | null;
-  /** `Int64` */
+  /** Normalized y coordinate (home shoots right). `Int64` */
   y_fixed?: number | bigint | null;
-  /** `Float64` */
+  /** Distance of the shot from the net. `Float64` */
   shot_distance?: number | null;
-  /** `Float64` */
+  /** Angle of the shot relative to the net. `Float64` */
   shot_angle?: number | null;
-  /** `Int64` */
+  /** Number of home skaters on the ice. `Int64` */
   home_skaters?: number | bigint | null;
-  /** `Int64` */
+  /** Number of away skaters on the ice. `Int64` */
   away_skaters?: number | bigint | null;
-  /** `String` */
+  /** Name of home skater 1 on the ice. `String` */
   home_on_1?: string | null;
-  /** `String` */
+  /** Name of home skater 2 on the ice. `String` */
   home_on_2?: string | null;
-  /** `String` */
+  /** Name of home skater 3 on the ice. `String` */
   home_on_3?: string | null;
-  /** `String` */
+  /** Name of home skater 4 on the ice. `String` */
   home_on_4?: string | null;
-  /** `String` */
+  /** Name of home skater 5 on the ice. `String` */
   home_on_5?: string | null;
-  /** `String` */
+  /** Name of home skater 6 on the ice. `String` */
   home_on_6?: string | null;
-  /** `String` */
+  /** Name of home skater 7 on the ice. `String` */
   home_on_7?: string | null;
-  /** `String` */
+  /** Name of away skater 1 on the ice. `String` */
   away_on_1?: string | null;
-  /** `String` */
+  /** Name of away skater 2 on the ice. `String` */
   away_on_2?: string | null;
-  /** `String` */
+  /** Name of away skater 3 on the ice. `String` */
   away_on_3?: string | null;
-  /** `String` */
+  /** Name of away skater 4 on the ice. `String` */
   away_on_4?: string | null;
-  /** `String` */
+  /** Name of away skater 5 on the ice. `String` */
   away_on_5?: string | null;
-  /** `String` */
+  /** Name of away skater 6 on the ice. `String` */
   away_on_6?: string | null;
-  /** `String` */
+  /** Name of away skater 7 on the ice. `String` */
   away_on_7?: string | null;
-  /** `String` */
+  /** Name of the home goalie on the ice. `String` */
   home_goalie?: string | null;
-  /** `String` */
+  /** Name of the away goalie on the ice. `String` */
   away_goalie?: string | null;
-  /** `Int64` */
+  /** Number of players coming on (line change). `Int64` */
   num_on?: number | bigint | null;
-  /** `String` */
+  /** Names of players coming on. `String` */
   players_on?: string | null;
-  /** `Int64` */
+  /** Number of players going off (line change). `Int64` */
   num_off?: number | bigint | null;
-  /** `String` */
+  /** Names of players going off. `String` */
   players_off?: string | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** Season year (echoed from arg). `String` */
   season?: string | null;
-  /** `String` */
+  /** Season type code (echoed from arg). `String` */
   season_type?: string | null;
-  /** `String` */
+  /** Home team abbreviation. `String` */
   home_abbr?: string | null;
-  /** `String` */
+  /** Away team abbreviation. `String` */
   away_abbr?: string | null;
-  /** `Int64` */
+  /** Sequential event index within the game. `Int64` */
   event_idx?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** ESPN event id (echoed from arg). `Int64` (an id) */
   event_id?: string | null;
-  /** `String` */
+  /** URL to the play replay, if available. `String` */
   pptReplayUrl?: string | null;
-  /** `Int64` */
+  /** Whether the away goalie is on the ice (1/0). `Int64` */
   away_goalie_in?: number | bigint | null;
-  /** `Int64` */
+  /** Whether the home goalie is on the ice (1/0). `Int64` */
   home_goalie_in?: number | bigint | null;
-  /** `String` */
+  /** Reason for the event (e.g. stoppage reason). `String` */
   reason?: string | null;
-  /** `String` */
+  /** Secondary reason for a stoppage. `String` */
   secondaryReason?: string | null;
-  /** `String` */
+  /** Player ids coming on. `String` */
   ids_on?: string | null;
-  /** `String` */
+  /** Player ids going off. `String` */
   ids_off?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 1 on the ice. `Int64` (an id) */
   home_on_1_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 1 on the ice. `Int64` (an id) */
   away_on_1_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 2 on the ice. `Int64` (an id) */
   home_on_2_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 2 on the ice. `Int64` (an id) */
   away_on_2_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 3 on the ice. `Int64` (an id) */
   home_on_3_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 3 on the ice. `Int64` (an id) */
   away_on_3_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 4 on the ice. `Int64` (an id) */
   home_on_4_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 4 on the ice. `Int64` (an id) */
   away_on_4_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 5 on the ice. `Int64` (an id) */
   home_on_5_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 5 on the ice. `Int64` (an id) */
   away_on_5_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 6 on the ice. `Int64` (an id) */
   home_on_6_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 6 on the ice. `Int64` (an id) */
   away_on_6_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of home skater 7 on the ice. `Int64` (an id) */
   home_on_7_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of away skater 7 on the ice. `Int64` (an id) */
   away_on_7_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player ID of the home goalie on the ice. `Int64` (an id) */
   home_goalie_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player ID of the away goalie on the ice. `Int64` (an id) */
   away_goalie_id?: string | null;
-  /** `Float64` */
+  /** Expected goals value for the shot event. `Float64` */
   xg?: number | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -747,191 +747,191 @@ export interface LoadNhlPbpFullRow {
 
 /** One row of `sdv.nhl.loadNhlPbpLite` (`nhl_pbp_lite`; sdv-py loader schema `load_nhl_pbp_lite`). */
 export interface LoadNhlPbpLiteRow {
-  /** `String` */
+  /** Standardized event type code. `String` */
   event_type?: string | null;
-  /** `String` */
+  /** Event description label. `String` */
   event?: string | null;
-  /** `String` */
+  /** Secondary event type (e.g. shot type). `String` */
   secondary_type?: string | null;
-  /** `String` */
+  /** Abbreviation of the team credited with the event. `String` */
   event_team_abbr?: string | null;
-  /** `String` */
+  /** Whether the event team is home or away. `String` */
   event_team_type?: string | null;
-  /** `String` */
+  /** Full text description of the event. `String` */
   description?: string | null;
-  /** `Int32` */
+  /** Period number. `Int32` */
   period?: number | null;
-  /** `String` */
+  /** Period type (REG/OT/SO). `String` */
   period_type?: string | null;
-  /** `String` */
+  /** Elapsed time in the period (MM:SS). `String` */
   period_time?: string | null;
-  /** `Int32` */
+  /** Elapsed seconds in the period. `Int32` */
   period_seconds?: number | null;
-  /** `Int32` */
+  /** Seconds remaining in the period. `Int32` */
   period_seconds_remaining?: number | null;
-  /** `String` */
+  /** Time remaining in the period (MM:SS). `String` */
   period_time_remaining?: string | null;
-  /** `Int32` */
+  /** Elapsed seconds in the game. `Int32` */
   game_seconds?: number | null;
-  /** `Int32` */
+  /** Seconds remaining in regulation. `Int32` */
   game_seconds_remaining?: number | null;
-  /** `Int32` */
+  /** Home team final score. `Int32` */
   home_score?: number | null;
-  /** `Int32` */
+  /** Away team final score. `Int32` */
   away_score?: number | null;
-  /** `String` */
+  /** Name of the primary event player. `String` */
   event_player_1_name?: string | null;
-  /** `String` */
+  /** Role of the primary event player. `String` */
   event_player_1_type?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of the primary event player. `Int32` (an id) */
   event_player_1_id?: string | null;
-  /** `String` */
+  /** Name of the secondary event player. `String` */
   event_player_2_name?: string | null;
-  /** `String` */
+  /** Role of the secondary event player. `String` */
   event_player_2_type?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of the secondary event player. `Int32` (an id) */
   event_player_2_id?: string | null;
-  /** `String` */
+  /** Name of the tertiary event player. `String` */
   event_player_3_name?: string | null;
-  /** `String` */
+  /** Role of the tertiary event player. `String` */
   event_player_3_type?: string | null;
-  /** `Int32` (an id) */
+  /** Player ID of the tertiary event player. `Int32` (an id) */
   event_player_3_id?: string | null;
-  /** `String` */
+  /** Name of the goalie on the event. `String` */
   event_goalie_name?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of the goalie on the event. `Int32` (an id) */
   event_goalie_id?: string | null;
-  /** `String` */
+  /** Severity of the penalty. `String` */
   penalty_severity?: string | null;
-  /** `Int32` */
+  /** Penalty minutes. `Int32` */
   penalty_minutes?: number | null;
-  /** `String` */
+  /** Strength state (e.g. 5v5, 5v4). `String` */
   strength_state?: string | null;
-  /** `String` */
+  /** Strength state code (e.g., all, even, pp, pk). `String` */
   strength_code?: string | null;
-  /** `String` */
+  /** Strength label (Even, Power Play, Shorthanded). `String` */
   strength?: string | null;
-  /** `Boolean` */
+  /** Whether the net was empty. `Boolean` */
   empty_net?: boolean | null;
-  /** `Boolean` */
+  /** Whether an extra attacker was on the ice. `Boolean` */
   extra_attacker?: boolean | null;
-  /** `Int32` */
+  /** Raw x-coordinate of the event. `Int32` */
   x?: number | null;
-  /** `Int32` */
+  /** Raw y-coordinate of the event. `Int32` */
   y?: number | null;
-  /** `Int32` */
+  /** Normalized x coordinate (home shoots right). `Int32` */
   x_fixed?: number | null;
-  /** `Int32` */
+  /** Normalized y coordinate (home shoots right). `Int32` */
   y_fixed?: number | null;
-  /** `Float64` */
+  /** Distance of the shot from the net. `Float64` */
   shot_distance?: number | null;
-  /** `Float64` */
+  /** Angle of the shot relative to the net. `Float64` */
   shot_angle?: number | null;
-  /** `Int32` */
+  /** Number of home skaters on the ice. `Int32` */
   home_skaters?: number | null;
-  /** `Int32` */
+  /** Number of away skaters on the ice. `Int32` */
   away_skaters?: number | null;
-  /** `String` */
+  /** Name of home skater 1 on the ice. `String` */
   home_on_1?: string | null;
-  /** `String` */
+  /** Name of home skater 2 on the ice. `String` */
   home_on_2?: string | null;
-  /** `String` */
+  /** Name of home skater 3 on the ice. `String` */
   home_on_3?: string | null;
-  /** `String` */
+  /** Name of home skater 4 on the ice. `String` */
   home_on_4?: string | null;
-  /** `String` */
+  /** Name of home skater 5 on the ice. `String` */
   home_on_5?: string | null;
-  /** `String` */
+  /** Name of home skater 6 on the ice. `String` */
   home_on_6?: string | null;
-  /** `String` */
+  /** Name of home skater 7 on the ice. `String` */
   home_on_7?: string | null;
-  /** `String` */
+  /** Name of away skater 1 on the ice. `String` */
   away_on_1?: string | null;
-  /** `String` */
+  /** Name of away skater 2 on the ice. `String` */
   away_on_2?: string | null;
-  /** `String` */
+  /** Name of away skater 3 on the ice. `String` */
   away_on_3?: string | null;
-  /** `String` */
+  /** Name of away skater 4 on the ice. `String` */
   away_on_4?: string | null;
-  /** `String` */
+  /** Name of away skater 5 on the ice. `String` */
   away_on_5?: string | null;
-  /** `String` */
+  /** Name of away skater 6 on the ice. `String` */
   away_on_6?: string | null;
-  /** `String` */
+  /** Name of away skater 7 on the ice. `String` */
   away_on_7?: string | null;
-  /** `String` */
+  /** Name of the home goalie on the ice. `String` */
   home_goalie?: string | null;
-  /** `String` */
+  /** Name of the away goalie on the ice. `String` */
   away_goalie?: string | null;
-  /** `Int32` */
+  /** Number of players coming on (line change). `Int32` */
   num_on?: number | null;
-  /** `String` */
+  /** Names of players coming on. `String` */
   players_on?: string | null;
-  /** `Int32` */
+  /** Number of players going off (line change). `Int32` */
   num_off?: number | null;
-  /** `String` */
+  /** Names of players going off. `String` */
   players_off?: string | null;
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season year (echoed from arg). `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Season type code (echoed from arg). `String` */
   season_type?: string | null;
-  /** `String` */
+  /** Home team abbreviation. `String` */
   home_abbr?: string | null;
-  /** `String` */
+  /** Away team abbreviation. `String` */
   away_abbr?: string | null;
-  /** `Int32` */
+  /** Sequential event index within the game. `Int32` */
   event_idx?: number | null;
-  /** `Int32` (an id) */
+  /** ESPN event id (echoed from arg). `Int32` (an id) */
   event_id?: string | null;
-  /** `String` */
+  /** URL to the play replay, if available. `String` */
   pptReplayUrl?: string | null;
-  /** `Int32` */
+  /** Whether the away goalie is on the ice (1/0). `Int32` */
   away_goalie_in?: number | null;
-  /** `Int32` */
+  /** Whether the home goalie is on the ice (1/0). `Int32` */
   home_goalie_in?: number | null;
-  /** `String` */
+  /** Reason for the event (e.g. stoppage reason). `String` */
   reason?: string | null;
-  /** `String` */
+  /** Secondary reason for a stoppage. `String` */
   secondaryReason?: string | null;
-  /** `String` */
+  /** Player ids coming on. `String` */
   ids_on?: string | null;
-  /** `String` */
+  /** Player ids going off. `String` */
   ids_off?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of home skater 1 on the ice. `Int32` (an id) */
   home_on_1_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of away skater 1 on the ice. `Int32` (an id) */
   away_on_1_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of home skater 2 on the ice. `Int32` (an id) */
   home_on_2_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of away skater 2 on the ice. `Int32` (an id) */
   away_on_2_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of home skater 3 on the ice. `Int32` (an id) */
   home_on_3_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of away skater 3 on the ice. `Int32` (an id) */
   away_on_3_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of home skater 4 on the ice. `Int32` (an id) */
   home_on_4_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of away skater 4 on the ice. `Int32` (an id) */
   away_on_4_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of home skater 5 on the ice. `Int32` (an id) */
   home_on_5_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of away skater 5 on the ice. `Int32` (an id) */
   away_on_5_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of home skater 6 on the ice. `Int32` (an id) */
   home_on_6_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of away skater 6 on the ice. `Int32` (an id) */
   away_on_6_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of home skater 7 on the ice. `Int32` (an id) */
   home_on_7_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player id of away skater 7 on the ice. `Int32` (an id) */
   away_on_7_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player ID of the home goalie on the ice. `Int32` (an id) */
   home_goalie_id?: string | null;
-  /** `Int32` (an id) */
+  /** Player ID of the away goalie on the ice. `Int32` (an id) */
   away_goalie_id?: string | null;
-  /** `Float64` */
+  /** Expected goals value for the shot event. `Float64` */
   xg?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -939,103 +939,103 @@ export interface LoadNhlPbpLiteRow {
 
 /** One row of `sdv.nhl.loadNhlPenalties` (`nhl_penalties`; sdv-py loader schema `load_nhl_penalties`). */
 export interface LoadNhlPenaltiesRow {
-  /** `String` */
+  /** Time within the period the penalty occurred. `String` */
   timeInPeriod?: string | null;
-  /** `String` */
+  /** Competitor type (e.g. "team"). `String` */
   type?: string | null;
-  /** `Int64` */
+  /** Penalty duration in minutes. `Int64` */
   duration?: number | bigint | null;
-  /** `String` */
+  /** Given name of the penalized player as published in the NHL feed's default English locale. `String` */
   "committedByPlayer.firstName.default"?: string | null;
-  /** `String` */
+  /** Alternate given name for the penalized player under the NHL feed's Czech key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "committedByPlayer.firstName.cs"?: string | null;
-  /** `String` */
+  /** Alternate given name for the penalized player under the NHL feed's German key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "committedByPlayer.firstName.de"?: string | null;
-  /** `String` */
+  /** Alternate given name for the penalized player under the NHL feed's Spanish key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "committedByPlayer.firstName.es"?: string | null;
-  /** `String` */
+  /** Alternate given name for the penalized player under the NHL feed's Finnish key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "committedByPlayer.firstName.fi"?: string | null;
-  /** `String` */
+  /** Alternate given name for the penalized player under the NHL feed's Slovak key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "committedByPlayer.firstName.sk"?: string | null;
-  /** `String` */
+  /** Alternate given name for the penalized player under the NHL feed's Swedish key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "committedByPlayer.firstName.sv"?: string | null;
-  /** `String` */
+  /** Alternate given name for the penalized player under the NHL feed's French key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "committedByPlayer.firstName.fr"?: string | null;
-  /** `String` */
+  /** Family name of the penalized player as published in the NHL feed's default English locale. `String` */
   "committedByPlayer.lastName.default"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Czech key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "committedByPlayer.lastName.cs"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the penalized player's family name under the NHL feed's German key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "committedByPlayer.lastName.de"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the penalized player's family name under the NHL feed's Spanish key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "committedByPlayer.lastName.es"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Finnish key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "committedByPlayer.lastName.fi"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Slovak key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "committedByPlayer.lastName.sk"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Swedish key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "committedByPlayer.lastName.sv"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's French key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "committedByPlayer.lastName.fr"?: string | null;
-  /** `Int64` */
+  /** Jersey number of the penalized player on the play. `Int64` */
   "committedByPlayer.sweaterNumber"?: number | bigint | null;
-  /** `String` */
+  /** Three-letter code of the team charged with the penalty, matching the committing player's boxscore team rather than the team that drew it. `String` */
   "teamAbbrev.default"?: string | null;
-  /** `String` */
+  /** Given name, in the feed's default English locale, of the opposing player credited with drawing the penalty. `String` */
   "drawnBy.firstName.default"?: string | null;
-  /** `String` */
+  /** Alternate given name for the opposing player credited with drawing the penalty under the NHL feed's Czech key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "drawnBy.firstName.cs"?: string | null;
-  /** `String` */
+  /** Alternate given name for the opposing player credited with drawing the penalty under the NHL feed's German key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "drawnBy.firstName.de"?: string | null;
-  /** `String` */
+  /** Alternate given name for the opposing player credited with drawing the penalty under the NHL feed's Spanish key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "drawnBy.firstName.es"?: string | null;
-  /** `String` */
+  /** Alternate given name for the opposing player credited with drawing the penalty under the NHL feed's Finnish key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "drawnBy.firstName.fi"?: string | null;
-  /** `String` */
+  /** Alternate given name for the opposing player credited with drawing the penalty under the NHL feed's Slovak key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "drawnBy.firstName.sk"?: string | null;
-  /** `String` */
+  /** Alternate given name for the opposing player credited with drawing the penalty under the NHL feed's Swedish key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "drawnBy.firstName.sv"?: string | null;
-  /** `String` */
+  /** Alternate given name for the opposing player credited with drawing the penalty under the NHL feed's French key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "drawnBy.firstName.fr"?: string | null;
-  /** `String` */
+  /** Family name, in the feed's default English locale, of the opposing player credited with drawing the penalty. `String` */
   "drawnBy.lastName.default"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Czech key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "drawnBy.lastName.cs"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the opposing player credited with drawing the penalty's family name under the NHL feed's German key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "drawnBy.lastName.de"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the opposing player credited with drawing the penalty's family name under the NHL feed's Spanish key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "drawnBy.lastName.es"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Finnish key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "drawnBy.lastName.fi"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Slovak key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "drawnBy.lastName.sk"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Swedish key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "drawnBy.lastName.sv"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's French key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "drawnBy.lastName.fr"?: string | null;
-  /** `Int64` */
+  /** Jersey number of the opposing player credited with drawing the infraction; null whenever no victim is credited, as on all bench and game-misconduct penalties. `Int64` */
   "drawnBy.sweaterNumber"?: number | bigint | null;
-  /** `String` */
+  /** Penalty description key. `String` */
   descKey?: string | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Period number (1-3 regulation, 4+ OT). `Int64` */
   period_number?: number | bigint | null;
-  /** `String` */
+  /** Period type (REG/OT/SO). `String` */
   period_type?: string | null;
-  /** `String` */
+  /** Abbreviated name, in the feed's default English locale, of the player serving the penalty. `String` */
   "servedBy.default"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Czech key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "servedBy.cs"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's German key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "servedBy.de"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Spanish key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "servedBy.es"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Finnish key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "servedBy.fi"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Slovak key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "servedBy.sk"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Swedish key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "servedBy.sv"?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1043,79 +1043,79 @@ export interface LoadNhlPenaltiesRow {
 
 /** One row of `sdv.nhl.loadNhlPlayerBoxscores` (`nhl_player_boxscores`; sdv-py loader schema `load_nhl_player_boxscores`). */
 export interface LoadNhlPlayerBoxscoresRow {
-  /** `String` */
+  /** Home or away indicator. `String` */
   home_away?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbrev?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `Int64` */
+  /** Jersey number. `Int64` */
   sweater_number?: number | bigint | null;
-  /** `String` */
+  /** Player position. `String` */
   position?: string | null;
-  /** `Int64` */
+  /** Goals scored. `Int64` */
   goals?: number | bigint | null;
-  /** `Int64` */
+  /** Assists. `Int64` */
   assists?: number | bigint | null;
-  /** `Int64` */
+  /** Total points (goals + assists). `Int64` */
   points?: number | bigint | null;
-  /** `Int64` */
+  /** Plus/minus rating. `Int64` */
   plus_minus?: number | bigint | null;
-  /** `Int64` */
+  /** Penalty minutes. `Int64` */
   pim?: number | bigint | null;
-  /** `Int64` */
+  /** Hits. `Int64` */
   hits?: number | bigint | null;
-  /** `Int64` */
+  /** Power-play goals. `Int64` */
   power_play_goals?: number | bigint | null;
-  /** `Int64` */
+  /** Shots on goal. `Int64` */
   shots_on_goal?: number | bigint | null;
-  /** `Float64` */
+  /** Faceoff win percentage. `Float64` */
   faceoff_winning_pctg?: number | null;
-  /** `String` */
+  /** Time on ice. `String` */
   toi?: string | null;
-  /** `Int64` */
+  /** Blocked shots. `Int64` */
   blocked_shots?: number | bigint | null;
-  /** `Int64` */
+  /** CONSTANT false in every published row: the shift-chart block is not carried on this asset. An availability flag, not a shift count. `Int64` */
   shifts?: number | bigint | null;
-  /** `Int64` */
+  /** Giveaways. `Int64` */
   giveaways?: number | bigint | null;
-  /** `Int64` */
+  /** Takeaways. `Int64` */
   takeaways?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year (echoed from arg). `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Even-strength shots against (saves/total). `String` */
   even_strength_shots_against?: string | null;
-  /** `String` */
+  /** Power-play shots against (saves/total). `String` */
   power_play_shots_against?: string | null;
-  /** `String` */
+  /** Shorthanded shots against (saves/total). `String` */
   shorthanded_shots_against?: string | null;
-  /** `String` */
+  /** Total shots against (saves/total). `String` */
   save_shots_against?: string | null;
-  /** `Float64` */
+  /** Save percentage. `Float64` */
   save_pctg?: number | null;
-  /** `Int64` */
+  /** Even-strength goals against. `Int64` */
   even_strength_goals_against?: number | bigint | null;
-  /** `Int64` */
+  /** Power-play goals against. `Int64` */
   power_play_goals_against?: number | bigint | null;
-  /** `Int64` */
+  /** Shorthanded goals against. `Int64` */
   shorthanded_goals_against?: number | bigint | null;
-  /** `Int64` */
+  /** Goals against. `Int64` */
   goals_against?: number | bigint | null;
-  /** `Boolean` */
+  /** Whether the goalie started the game. `Boolean` */
   starter?: boolean | null;
-  /** `String` */
+  /** Goalie decision (W/L/O). `String` */
   decision?: string | null;
-  /** `Int64` */
+  /** Shots faced. `Int64` */
   shots_against?: number | bigint | null;
-  /** `Int64` */
+  /** Saves made. `Int64` */
   saves?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1123,25 +1123,25 @@ export interface LoadNhlPlayerBoxscoresRow {
 
 /** One row of `sdv.nhl.loadNhlRosters` (`nhl_rosters`; sdv-py loader schema `load_nhl_rosters`). */
 export interface LoadNhlRostersRow {
-  /** `Int32` (an id) */
+  /** Unique player identifier. `Int32` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player full name. `String` */
   full_name?: string | null;
-  /** `String` */
+  /** Player first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbr?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Player position code. `String` */
   position_code?: string | null;
-  /** `Int32` */
+  /** Jersey number. `Int32` */
   sweater_number?: number | null;
-  /** `Int32` */
+  /** Season year (echoed from arg). `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1149,75 +1149,75 @@ export interface LoadNhlRostersRow {
 
 /** One row of `sdv.nhl.loadNhlSchedules` (`nhl_schedules`; sdv-py loader schema `load_nhl_schedules`). */
 export interface LoadNhlSchedulesRow {
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** Full season label (e.g. 20212022). `String` */
   season_full?: string | null;
-  /** `String` */
+  /** Game type the row belongs to. `String` */
   game_type?: string | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Scheduled start time of the game. `String` */
   game_time?: string | null;
-  /** `String` */
+  /** Home team abbreviation. `String` */
   home_team_abbr?: string | null;
-  /** `String` */
+  /** Away team abbreviation. `String` */
   away_team_abbr?: string | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team_name?: string | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team_name?: string | null;
-  /** `Int32` */
+  /** Home team final score. `Int32` */
   home_score?: number | null;
-  /** `Int32` */
+  /** Away team final score. `Int32` */
   away_score?: number | null;
-  /** `String` */
+  /** Game state (e.g., FINAL, LIVE). `String` */
   game_state?: string | null;
-  /** `String` */
+  /** Venue where the game was played. `String` */
   venue?: string | null;
-  /** `String` */
+  /** NHL API letter code identifying the playoff series the game belongs to (null for regular-season games). `String` */
   series_letter?: string | null;
-  /** `Int32` */
+  /** Playoff round identifier. `Int32` */
   playoff_round?: number | null;
-  /** `Int32` */
+  /** Series game number. `Int32` */
   series_game_number?: number | null;
-  /** `Int32` */
+  /** Season year (echoed from arg). `Int32` */
   season?: number | null;
-  /** `Boolean` */
+  /** Whether processed game JSON is available. `Boolean` */
   game_json?: boolean | null;
-  /** `String` */
+  /** URL to the processed game JSON. `String` */
   game_json_url?: string | null;
-  /** `Boolean` */
+  /** Whether play-by-play data is available. `Boolean` */
   PBP?: boolean | null;
-  /** `Boolean` */
+  /** Whether team box score data is available. `Boolean` */
   team_box?: boolean | null;
-  /** `Boolean` */
+  /** Whether player box score data is available. `Boolean` */
   player_box?: boolean | null;
-  /** `Boolean` */
+  /** Whether skater box data is available. `Boolean` */
   skater_box?: boolean | null;
-  /** `Boolean` */
+  /** Whether goalie box data is available. `Boolean` */
   goalie_box?: boolean | null;
-  /** `Boolean` */
+  /** Whether game info data is available. `Boolean` */
   game_info?: boolean | null;
-  /** `Boolean` */
+  /** Whether game rosters data is available. `Boolean` */
   game_rosters?: boolean | null;
-  /** `Boolean` */
+  /** TRUE when the play results in a score (TD, FG, safety, two-point conversion). `Boolean` */
   scoring?: boolean | null;
-  /** `Boolean` */
+  /** Penalty count. `Boolean` */
   penalties?: boolean | null;
-  /** `Boolean` */
+  /** Flag indicating a scratches payload was captured for this game in the NHL raw store. `Boolean` */
   scratches?: boolean | null;
-  /** `Boolean` */
+  /** Flag indicating a period-by-period linescore payload was captured for this game in the NHL raw store. `Boolean` */
   linescore?: boolean | null;
-  /** `Boolean` */
+  /** Whether three stars data is available. `Boolean` */
   three_stars?: boolean | null;
-  /** `Boolean` */
+  /** Number of shifts. `Boolean` */
   shifts?: boolean | null;
-  /** `Boolean` */
+  /** Whether officials data is available. `Boolean` */
   officials?: boolean | null;
-  /** `Boolean` */
+  /** Whether shots-by-period data is available. `Boolean` */
   shots_by_period?: boolean | null;
-  /** `Boolean` */
+  /** Whether shootout data is available. `Boolean` */
   shootout?: boolean | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1225,107 +1225,107 @@ export interface LoadNhlSchedulesRow {
 
 /** One row of `sdv.nhl.loadNhlScoring` (`nhl_scoring`; sdv-py loader schema `load_nhl_scoring`). */
 export interface LoadNhlScoringRow {
-  /** `String` */
+  /** Strength/situation code for the goal. `String` */
   situationCode?: string | null;
-  /** `Int64` (an id) */
+  /** Event identifier within the game. `Int64` (an id) */
   eventId?: string | null;
-  /** `String` */
+  /** Strength label (Even, Power Play, Shorthanded). `String` */
   strength?: string | null;
-  /** `Int64` (an id) */
+  /** Player identifier involved in the event. `Int64` (an id) */
   playerId?: string | null;
-  /** `String` */
+  /** Given name of the goal scorer as rendered in the NHL feed's default English locale. `String` */
   "firstName.default"?: string | null;
-  /** `String` */
+  /** Alternate given name for the player under the NHL feed's Czech key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.cs"?: string | null;
-  /** `String` */
+  /** Alternate given name for the player under the NHL feed's German key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.de"?: string | null;
-  /** `String` */
+  /** Alternate given name for the player under the NHL feed's Spanish key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.es"?: string | null;
-  /** `String` */
+  /** Alternate given name for the player under the NHL feed's Finnish key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.fi"?: string | null;
-  /** `String` */
+  /** Alternate given name for the player under the NHL feed's Slovak key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.sk"?: string | null;
-  /** `String` */
+  /** Alternate given name for the player under the NHL feed's Swedish key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.sv"?: string | null;
-  /** `String` */
+  /** Alternate given name for the player under the NHL feed's French key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.fr"?: string | null;
-  /** `String` */
+  /** Family name of the goal scorer as rendered in the NHL feed's default English locale. `String` */
   "lastName.default"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Czech key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "lastName.cs"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Finnish key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "lastName.fi"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Slovak key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "lastName.sk"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Swedish key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "lastName.sv"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the player's family name under the NHL feed's German key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "lastName.de"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the player's family name under the NHL feed's Spanish key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "lastName.es"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's French key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "lastName.fr"?: string | null;
-  /** `String` */
+  /** Abbreviated name of the player as published in the NHL feed's default English locale. `String` */
   "name.default"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Czech key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.cs"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's German key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.de"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Spanish key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.es"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Finnish key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.fi"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Slovak key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.sk"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Swedish key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.sv"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's French key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.fr"?: string | null;
-  /** `String` */
+  /** Three-letter code of the team that scored the goal, resolving to the home club exactly when isHome is true and to the visitor otherwise. `String` */
   "teamAbbrev.default"?: string | null;
-  /** `String` */
+  /** URL to the player headshot image. `String` */
   headshot?: string | null;
-  /** `String` */
+  /** Shareable URL for the goal highlight clip. `String` */
   highlightClipSharingUrl?: string | null;
-  /** `Int64` */
+  /** Highlight clip identifier. `Int64` */
   highlightClip?: number | bigint | null;
-  /** `Int64` */
+  /** Discrete clip identifier. `Int64` */
   discreteClip?: number | bigint | null;
-  /** `Int64` */
+  /** Scorer goal total to date in the season. `Int64` */
   goalsToDate?: number | bigint | null;
-  /** `Int64` */
+  /** Away team score after the goal. `Int64` */
   awayScore?: number | bigint | null;
-  /** `Int64` */
+  /** Home team score after the goal. `Int64` */
   homeScore?: number | bigint | null;
-  /** `String` */
+  /** Three-letter code of the team ahead on the scoreboard immediately after this goal, null exactly when the goal tied the game and not always the scoring team. `String` */
   "leadingTeamAbbrev.default"?: string | null;
-  /** `String` */
+  /** Time within the period the penalty occurred. `String` */
   timeInPeriod?: string | null;
-  /** `String` */
+  /** Type of shot on the goal. `String` */
   shotType?: string | null;
-  /** `String` */
+  /** Goal modifier (e.g. empty-net, power-play). `String` */
   goalModifier?: string | null;
-  /** `String` */
+  /** Assists. `String` */
   assists?: string | null;
-  /** `String` */
+  /** URL to the play replay, if available. `String` */
   pptReplayUrl?: string | null;
-  /** `String` */
+  /** Side of the ice the home team is defending. `String` */
   homeTeamDefendingSide?: string | null;
-  /** `Boolean` */
+  /** Whether the scoring team is the home team. `Boolean` */
   isHome?: boolean | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Period number (1-3 regulation, 4+ OT). `Int64` */
   period_number?: number | bigint | null;
-  /** `String` */
+  /** Period type (REG/OT/SO). `String` */
   period_type?: string | null;
-  /** `Int64` */
+  /** Running goal count credited to the scorer within this game at the time of the goal. `Int64` */
   goalInGame?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric NHL video identifier of the French-language standalone clip of the goal, always a different asset id from discreteClip. `Int64` */
   discreteClipFr?: number | bigint | null;
-  /** `String` */
+  /** Shareable nhl.com URL for the French-language highlight clip; its trailing numeric segment is the same id carried in highlightClipFr. `String` */
   highlightClipSharingUrlFr?: string | null;
-  /** `Int64` */
+  /** NHL video id of the French-language highlight clip for the goal. Stored as Float64 even though it is a whole 13-digit identifier, so cast before using it as a key. `Int64` */
   highlightClipFr?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1333,13 +1333,13 @@ export interface LoadNhlScoringRow {
 
 /** One row of `sdv.nhl.loadNhlScratches` (`nhl_scratches`; sdv-py loader schema `load_nhl_scratches`). */
 export interface LoadNhlScratchesRow {
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   id?: string | null;
-  /** `String` */
+  /** Scorer first name (localized list). `String` */
   firstName?: string | null;
-  /** `String` */
+  /** Scorer last name (localized list). `String` */
   lastName?: string | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1347,39 +1347,39 @@ export interface LoadNhlScratchesRow {
 
 /** One row of `sdv.nhl.loadNhlShifts` (`nhl_shifts`; sdv-py loader schema `load_nhl_shifts`). */
 export interface LoadNhlShiftsRow {
-  /** `String` */
+  /** Team associated with the shift change. `String` */
   event_team?: string | null;
-  /** `Int64` */
+  /** Period number. `Int64` */
   period?: number | bigint | null;
-  /** `String` */
+  /** Elapsed time in the period (MM:SS). `String` */
   period_time?: string | null;
-  /** `Int64` */
+  /** Elapsed seconds in the period. `Int64` */
   period_seconds?: number | bigint | null;
-  /** `Int64` */
+  /** Elapsed seconds in the game. `Int64` */
   game_seconds?: number | bigint | null;
-  /** `Int64` */
+  /** Number of players coming on (line change). `Int64` */
   num_on?: number | bigint | null;
-  /** `String` */
+  /** Names of players coming on. `String` */
   players_on?: string | null;
-  /** `String` */
+  /** Player ids coming on. `String` */
   ids_on?: string | null;
-  /** `Int64` */
+  /** Number of players going off (line change). `Int64` */
   num_off?: number | bigint | null;
-  /** `String` */
+  /** Names of players going off. `String` */
   players_off?: string | null;
-  /** `String` */
+  /** Player ids going off. `String` */
   ids_off?: string | null;
-  /** `String` */
+  /** Event description label. `String` */
   event?: string | null;
-  /** `String` */
+  /** Standardized event type code. `String` */
   event_type?: string | null;
-  /** `Int64` */
+  /** Seconds remaining in regulation. `Int64` */
   game_seconds_remaining?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year (echoed from arg). `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1387,69 +1387,69 @@ export interface LoadNhlShiftsRow {
 
 /** One row of `sdv.nhl.loadNhlShootout` (`nhl_shootout`; sdv-py loader schema `load_nhl_shootout`). */
 export interface LoadNhlShootoutRow {
-  /** `Int64` */
+  /** Whether the player's team was home. `Int64` */
   home?: number | bigint | null;
-  /** `Int64` */
+  /** Away team shots in the period. `Int64` */
   away?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year (echoed from arg). `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
-  /** `Int64` */
+  /** Sequence order of the season row. `Int64` */
   sequence?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Player identifier involved in the event. `Int64` (an id) */
   playerId?: string | null;
-  /** `String` */
+  /** Three-letter code of the shooting player's team; null on the per-game summary row that instead carries the home and away shootout goal totals. `String` */
   "teamAbbrev.default"?: string | null;
-  /** `String` */
+  /** Given name of the shooter in the feed's default English locale; null on the per-game summary row. `String` */
   "firstName.default"?: string | null;
-  /** `String` */
+  /** Alternate given name published under the NHL feed's Czech key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.cs"?: string | null;
-  /** `String` */
+  /** Alternate given name published under the NHL feed's German key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.de"?: string | null;
-  /** `String` */
+  /** Alternate given name published under the NHL feed's Spanish key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.es"?: string | null;
-  /** `String` */
+  /** Alternate given name published under the NHL feed's Finnish key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.fi"?: string | null;
-  /** `String` */
+  /** Alternate given name published under the NHL feed's Slovak key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.sk"?: string | null;
-  /** `String` */
+  /** Alternate given name published under the NHL feed's Swedish key. Verified against the data it is frequently a different name form rather than a re-spelling (Joshua published as Josh, Aliaksei as Alexei), so it is not a reliable transliteration of the default. `String` */
   "firstName.sv"?: string | null;
-  /** `String` */
+  /** Family name of the shooter in the feed's default English locale; null on the per-game summary row. `String` */
   "lastName.default"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Czech key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "lastName.cs"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Finnish key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "lastName.fi"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Slovak key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "lastName.sk"?: string | null;
-  /** `String` */
+  /** Alternate rendering of the family name published under the NHL feed's Swedish key. It differs from the default in orthography -- usually restoring diacritics the default folds to ASCII, though for some names it strips them instead -- so treat it as an alternate spelling, not a canonical one. `String` */
   "lastName.sv"?: string | null;
-  /** `String` */
+  /** Type of shot on the goal. `String` */
   shotType?: string | null;
-  /** `String` */
+  /** Attempt result (goal/save/miss). `String` */
   result?: string | null;
-  /** `String` */
+  /** URL to the player headshot image. `String` */
   headshot?: string | null;
-  /** `Boolean` */
+  /** True on the single attempt per shootout credited as the game-deciding goal, false on every other attempt and null on the per-game summary row. `Boolean` */
   gameWinner?: boolean | null;
-  /** `Int64` */
+  /** Home team score after the goal. `Int64` */
   homeScore?: number | bigint | null;
-  /** `Int64` */
+  /** Away team score after the goal. `Int64` */
   awayScore?: number | bigint | null;
-  /** `Int64` */
+  /** Discrete clip identifier. `Int64` */
   discreteClip?: number | bigint | null;
-  /** `Int64` */
+  /** Numeric NHL video identifier of the French-language clip of the shootout attempt, distinct from the id in discreteClip. `Int64` */
   discreteClipFr?: number | bigint | null;
-  /** `String` */
+  /** Shareable URL for the goal highlight clip. `String` */
   highlightClipSharingUrl?: string | null;
-  /** `String` */
+  /** Shareable URL of the French-language broadcast highlight clip for the shootout attempt. `String` */
   highlightClipSharingUrlFr?: string | null;
-  /** `Int64` */
+  /** Highlight clip identifier. `Int64` */
   highlightClip?: number | bigint | null;
-  /** `Int64` */
+  /** NHL video identifier of the French-language highlight clip for the shootout attempt. `Int64` */
   highlightClipFr?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1457,23 +1457,23 @@ export interface LoadNhlShootoutRow {
 
 /** One row of `sdv.nhl.loadNhlShotsByPeriod` (`nhl_shots_by_period`; sdv-py loader schema `load_nhl_shots_by_period`). */
 export interface LoadNhlShotsByPeriodRow {
-  /** `Int64` */
+  /** Period number. `Int64` */
   period?: number | bigint | null;
-  /** `String` */
+  /** Period type (REG/OT/SO). `String` */
   period_type?: string | null;
-  /** `Int64` */
+  /** Number of regulation periods the game format defines before overtime, constant at 3 for every row in the published seasons. `Int64` */
   max_regulation_periods?: number | bigint | null;
-  /** `Int64` */
+  /** Overtime period ordinal taken from the NHL period descriptor, populated only from the second overtime onward so period 5 rows carry 2 and all other rows are null. `Int64` */
   ot_periods?: number | bigint | null;
-  /** `Int64` */
+  /** Away team shots in the period. `Int64` */
   away?: number | bigint | null;
-  /** `Int64` */
+  /** Whether the player's team was home. `Int64` */
   home?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year (echoed from arg). `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1481,53 +1481,53 @@ export interface LoadNhlShotsByPeriodRow {
 
 /** One row of `sdv.nhl.loadNhlSkaterBoxscores` (`nhl_skater_boxscores`; sdv-py loader schema `load_nhl_skater_boxscores`). */
 export interface LoadNhlSkaterBoxscoresRow {
-  /** `String` */
+  /** Home or away indicator. `String` */
   home_away?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbrev?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `Int64` */
+  /** Jersey number. `Int64` */
   sweater_number?: number | bigint | null;
-  /** `String` */
+  /** Player position. `String` */
   position?: string | null;
-  /** `Int64` */
+  /** Goals scored. `Int64` */
   goals?: number | bigint | null;
-  /** `Int64` */
+  /** Assists. `Int64` */
   assists?: number | bigint | null;
-  /** `Int64` */
+  /** Total points (goals + assists). `Int64` */
   points?: number | bigint | null;
-  /** `Int64` */
+  /** Plus/minus rating. `Int64` */
   plus_minus?: number | bigint | null;
-  /** `Int64` */
+  /** Penalty minutes. `Int64` */
   pim?: number | bigint | null;
-  /** `Int64` */
+  /** Hits. `Int64` */
   hits?: number | bigint | null;
-  /** `Int64` */
+  /** Power-play goals. `Int64` */
   power_play_goals?: number | bigint | null;
-  /** `Int64` */
+  /** Shots on goal. `Int64` */
   shots_on_goal?: number | bigint | null;
-  /** `Float64` */
+  /** Faceoff win percentage. `Float64` */
   faceoff_winning_pctg?: number | null;
-  /** `String` */
+  /** Time on ice. `String` */
   toi?: string | null;
-  /** `Int64` */
+  /** Blocked shots. `Int64` */
   blocked_shots?: number | bigint | null;
-  /** `Int64` */
+  /** CONSTANT false in every published row: the shift-chart block is not carried on this asset. An availability flag, not a shift count. `Int64` */
   shifts?: number | bigint | null;
-  /** `Int64` */
+  /** Giveaways. `Int64` */
   giveaways?: number | bigint | null;
-  /** `Int64` */
+  /** Takeaways. `Int64` */
   takeaways?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year (echoed from arg). `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1535,43 +1535,43 @@ export interface LoadNhlSkaterBoxscoresRow {
 
 /** One row of `sdv.nhl.loadNhlTeamBoxscores` (`nhl_team_boxscores`; sdv-py loader schema `load_nhl_team_boxscores`). */
 export interface LoadNhlTeamBoxscoresRow {
-  /** `String` */
+  /** Home or away indicator. `String` */
   home_away?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team abbreviation. `String` */
   team_abbrev?: string | null;
-  /** `String` */
+  /** Team name. `String` */
   team_name?: string | null;
-  /** `Int64` */
+  /** Goals scored. `Int64` */
   goals?: number | bigint | null;
-  /** `Int64` */
+  /** Shots on goal. `Int64` */
   shots_on_goal?: number | bigint | null;
-  /** `Int64` */
+  /** Penalty minutes. `Int64` */
   pim?: number | bigint | null;
-  /** `Int64` */
+  /** Hits. `Int64` */
   hits?: number | bigint | null;
-  /** `Int64` */
+  /** Blocked shots. `Int64` */
   blocked_shots?: number | bigint | null;
-  /** `Int64` */
+  /** Giveaways. `Int64` */
   giveaways?: number | bigint | null;
-  /** `Int64` */
+  /** Takeaways. `Int64` */
   takeaways?: number | bigint | null;
-  /** `Int64` */
+  /** Power-play goals. `Int64` */
   power_play_goals?: number | bigint | null;
-  /** `Float64` */
+  /** Faceoff win percentage. `Float64` */
   faceoff_win_pctg?: number | null;
-  /** `Int64` */
+  /** Saves made. `Int64` */
   saves?: number | bigint | null;
-  /** `Float64` */
+  /** Save percentage. `Float64` */
   save_pctg?: number | null;
-  /** `Int64` */
+  /** Goals against. `Int64` */
   goals_against?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year (echoed from arg). `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Game date. `String` */
   game_date?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1579,53 +1579,53 @@ export interface LoadNhlTeamBoxscoresRow {
 
 /** One row of `sdv.nhl.loadNhlThreeStars` (`nhl_three_stars`; sdv-py loader schema `load_nhl_three_stars`). */
 export interface LoadNhlThreeStarsRow {
-  /** `Int64` */
+  /** Star ranking (1, 2, or 3). `Int64` */
   star?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Player identifier involved in the event. `Int64` (an id) */
   playerId?: string | null;
-  /** `String` */
+  /** Penalized team abbreviation (localized list). `String` */
   teamAbbrev?: string | null;
-  /** `String` */
+  /** URL to the player headshot image. `String` */
   headshot?: string | null;
-  /** `String` */
+  /** Abbreviated name of the player as published in the NHL feed's default English locale. `String` */
   "name.default"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Czech key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.cs"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Slovak key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.sk"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Finnish key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.fi"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Swedish key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.sv"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's German key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.de"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's Spanish key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.es"?: string | null;
-  /** `String` */
+  /** Alternate abbreviated name (first initial plus family name) published under the NHL feed's French key, differing from the default by diacritics or by an alternate given-name form. `String` */
   "name.fr"?: string | null;
-  /** `Int64` */
+  /** Jersey number. `Int64` */
   sweaterNo?: number | bigint | null;
-  /** `String` */
+  /** Player position. `String` */
   position?: string | null;
-  /** `Int64` */
+  /** Goals scored. `Int64` */
   goals?: number | bigint | null;
-  /** `Int64` */
+  /** Assists. `Int64` */
   assists?: number | bigint | null;
-  /** `Int64` */
+  /** Total points (goals + assists). `Int64` */
   points?: number | bigint | null;
-  /** `Float64` */
+  /** Goals-against average (goalies). `Float64` */
   goalsAgainstAverage?: number | null;
-  /** `Float64` */
+  /** Save percentage (goalies). `Float64` */
   savePctg?: number | null;
-  /** `Int64` (an id) */
+  /** Unique game identifier. `Int64` (an id) */
   game_id?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of the winning goalie. `Int64` (an id) */
   winner_id?: string | null;
-  /** `String` */
+  /** Name of the winning goalie. `String` */
   winner_name?: string | null;
-  /** `Int64` (an id) */
+  /** Player id of the losing goalie. `Int64` (an id) */
   loser_id?: string | null;
-  /** `String` */
+  /** Name of the losing goalie. `String` */
   loser_name?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1633,17 +1633,17 @@ export interface LoadNhlThreeStarsRow {
 
 /** One row of `sdv.nhl.loadNhlGroups` (`nhl_groups`; sdv-py loader schema `load_nhl_groups`). */
 export interface LoadNhlGroupsRow {
-  /** `String` */
+  /** League code of the table ("nhl"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `String` */
+  /** Hierarchy level of the group: "league", "subdivision", "conference" or "division". `String` */
   level?: string | null;
-  /** `Int32` */
+  /** First season in which the group had at least one member (ENDING year: 2025 = the 2024-25 season). `Int32` */
   first_season?: number | null;
-  /** `Int32` */
+  /** Last season in which the group had at least one member (ENDING year: 2025 = the 2024-25 season). `Int32` */
   last_season?: number | null;
-  /** `String` */
+  /** Builder notes on the group: the lineage decisions behind its group_id and any source caveats. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1651,23 +1651,23 @@ export interface LoadNhlGroupsRow {
 
 /** One row of `sdv.nhl.loadNhlGroupSeasons` (`nhl_groups`; sdv-py loader schema `load_nhl_group_seasons`). */
 export interface LoadNhlGroupSeasonsRow {
-  /** `String` */
+  /** League code of the table ("nhl"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `Int32` */
+  /** Season the row describes (ENDING year: 2025 = the 2024-25 season). `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Hierarchy level of the group: "league", "subdivision", "conference" or "division". `String` */
   level?: string | null;
-  /** `String` */
+  /** Full name of the group as of that season -- the label in use then, not today's name. `String` */
   name?: string | null;
-  /** `String` */
+  /** Short display name of the group as of that season. `String` */
   short_name?: string | null;
-  /** `String` */
+  /** Abbreviation of the group as of that season. `String` */
   abbreviation?: string | null;
-  /** `String` (an id) */
+  /** group_id one level up as of that season (division -> conference -> subdivision -> league); null at the top level or where no higher group applied that season. `String` (an id) */
   parent_group_id?: string | null;
-  /** `Int32` */
+  /** Number of member teams in the group that season. `Int32` */
   n_teams?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1675,21 +1675,21 @@ export interface LoadNhlGroupSeasonsRow {
 
 /** One row of `sdv.nhl.loadNhlGroupAliases` (`nhl_groups`; sdv-py loader schema `load_nhl_group_aliases`). */
 export interface LoadNhlGroupAliasesRow {
-  /** `String` */
+  /** League code of the table ("nhl"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `String` */
+  /** Source that uses this label or id (in this table: espn, nhl); "sdv" marks SDV's own labels. `String` */
   source?: string | null;
-  /** `String` (an id) */
+  /** The source's own id for the group (ESPN group id, NCAA conf_id, CFBD id, MLB division id) when it has one; null otherwise. `String` (an id) */
   source_id?: string | null;
-  /** `String` */
+  /** Kind of label in value: "name", "short_name", "abbreviation", "slug" or "code". `String` */
   name_kind?: string | null;
-  /** `String` */
+  /** The label exactly as the source writes it; match a source's conference or division label against it to reach group_id. `String` */
   value?: string | null;
-  /** `Int32` */
+  /** First season the alias is valid for, inclusive (ENDING year: 2025 = the 2024-25 season); null = unbounded. `Int32` */
   valid_from?: number | null;
-  /** `Int32` */
+  /** Last season the alias is valid for, inclusive (ENDING year: 2025 = the 2024-25 season); null = unbounded (still in use). `Int32` */
   valid_to?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1697,27 +1697,27 @@ export interface LoadNhlGroupAliasesRow {
 
 /** One row of `sdv.nhl.loadNhlTeamGroupSeasons` (`nhl_groups`; sdv-py loader schema `load_nhl_team_group_seasons`). */
 export interface LoadNhlTeamGroupSeasonsRow {
-  /** `String` */
+  /** League code of the table ("nhl"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `Int32` */
+  /** Season of the membership (ENDING year: 2025 = the 2024-25 season). `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Team id as a string: the ESPN team id where ESPN covers the team, otherwise the league's own id; team_id_source says which. `String` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Id space of team_id (in this table: espn, nhl). `String` */
   team_id_source?: string | null;
-  /** `String` */
+  /** Team name as of that season, not today's. `String` */
   team_name?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's subdivision that season (e.g. FBS / FCS, Division I); null where the league has no subdivision level. `String` (an id) */
   subdivision_id?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's conference that season; null where the team had no conference (an independent, or a season played without conferences). `String` (an id) */
   conference_id?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's division that season; null where the level does not apply. `String` (an id) */
   division_id?: string | null;
-  /** `String` */
+  /** Source the membership was taken from -- the most reliable per-season source for that era. `String` */
   source?: string | null;
-  /** `Boolean` */
+  /** Whether a second source agreed on the membership; null when only one source covers the season. `Boolean` */
   sources_agree?: boolean | null;
-  /** `String` */
+  /** Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;

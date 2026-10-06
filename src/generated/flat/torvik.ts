@@ -37,10 +37,11 @@ const GAME_SCHEDULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://barttorvik.com/{year}_super_sked.json`
  *
- * @param params.year - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.torvik.torvikGameSchedule({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/torvik#native-api--barttorvik-t-rank
  */
 export const torvikGameSchedule: Wrapper<Row[], TorvikGameScheduleParams> = (params: WrapperParams = {}) => callFlat(GAME_SCHEDULE_DEF, params);
 /** snake_case alias of {@link torvikGameSchedule} (py/R parity). */
@@ -74,11 +75,12 @@ const GAME_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://barttorvik.com/getgamestats.php`
  *
- * @param params.year - query parameter.
- * @param params.json - query parameter — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — 4-digit season ending year (2025 = the 2024-25 season).
+ * @param params.json - `number | string` — Response format switch; leave at 1 (the parser expects the headerless JSON array); default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.torvik.torvikGameStats({});
+ * @see https://js.sportsdataverse.org/docs/reference/torvik#native-api--barttorvik-t-rank
  */
 export const torvikGameStats: Wrapper<Row[], TorvikGameStatsParams> = (params: WrapperParams = {}) => callFlat(GAME_STATS_DEF, params);
 /** snake_case alias of {@link torvikGameStats} (py/R parity). */
@@ -112,11 +114,12 @@ const PLAYER_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://barttorvik.com/getadvstats.php`
  *
- * @param params.year - query parameter.
- * @param params.csv - query parameter — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — 4-digit season ending year (2025 = the 2024-25 season).
+ * @param params.csv - `number | string` — Response format switch; leave at 1 (the parser expects the headerless CSV); default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.torvik.torvikPlayerStats({});
+ * @see https://js.sportsdataverse.org/docs/reference/torvik#native-api--barttorvik-t-rank
  */
 export const torvikPlayerStats: Wrapper<Row[], TorvikPlayerStatsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link torvikPlayerStats} (py/R parity). */
@@ -144,10 +147,11 @@ const RATINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://barttorvik.com/{year}_team_results.csv`
  *
- * @param params.year - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.torvik.torvikRatings({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/torvik#native-api--barttorvik-t-rank
  */
 export const torvikRatings: Wrapper<Row[], TorvikRatingsParams> = (params: WrapperParams = {}) => callFlat(RATINGS_DEF, params);
 /** snake_case alias of {@link torvikRatings} (py/R parity). */
@@ -175,10 +179,11 @@ const TEAM_FACTORS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://barttorvik.com/{year}_fffinal.csv`
  *
- * @param params.year - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.torvik.torvikTeamFactors({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/torvik#native-api--barttorvik-t-rank
  */
 export const torvikTeamFactors: Wrapper<Row[], TorvikTeamFactorsParams> = (params: WrapperParams = {}) => callFlat(TEAM_FACTORS_DEF, params);
 /** snake_case alias of {@link torvikTeamFactors} (py/R parity). */

@@ -75,8 +75,11 @@ const doc = (text) => text.replace(/\*\//g, "*\\/").replace(/\s+/g, " ").trim();
  *
  * `sec` is the parser's `flat_parser_sections.yaml` spec (or undefined).
  */
-export function renderRowsModule(api, defs, { coverage, schemasDir, sectionsOf, snakeOf, nsOf }) {
+export function renderRowsModule(api, defs, { coverage, schemasDir, sectionsOf, snakeOf, nsOf, describe }) {
   const verified = coverage.families[api]?.verified_endpoints ?? {};
+  // `describe(def, ref, columns, section?)`: the columns with their descriptions
+  // resolved (tools/codegen/descriptions.mjs) for the per-column doc comments.
+  const described = (def, ref, columns, section) => (describe ? describe(def, ref, columns, section) : columns);
   const types = new Map();
   const seen = new Map(); // interface name -> schema ref (collision guard)
   let source = "";
@@ -119,7 +122,7 @@ export function renderRowsModule(api, defs, { coverage, schemasDir, sectionsOf, 
       const members = [];
       for (const f of schema.frames) {
         const row = `${base}${pascal(f.section)}Row`;
-        iface(row, `${ref}#${f.section}`, `One row of the \`${f.section}\` table of ${call} (${where}).`, f.columns, unexercised, `${f.section}.`);
+        iface(row, `${ref}#${f.section}`, `One row of the \`${f.section}\` table of ${call} (${where}).`, described(def, ref, f.columns, f.section), unexercised, `${f.section}.`);
         names.push(row);
         members.push(`  /** The \`${f.section}\` result set. */\n  ${tsKey(f.section)}: ${row}[];\n`);
       }
@@ -128,7 +131,7 @@ export function renderRowsModule(api, defs, { coverage, schemasDir, sectionsOf, 
       types.set(def.short, { parsed: `${tables} | Row[]`, sections: tables, names });
     } else {
       const row = `${base}Row`;
-      iface(row, ref, `One row of ${call} (${where}).`, schema.columns, unexercised, "");
+      iface(row, ref, `One row of ${call} (${where}).`, described(def, ref, schema.columns), unexercised, "");
       // A result-set parser returns a one-set payload's table, or every table as a dict.
       const parsed = sec?.resultSet ? `${row}[] | ParsedTables` : `${row}[]`;
       const sections = sec && sec.default !== null ? `{ ${tsKey(sec.default)}: ${row}[] }` : null;

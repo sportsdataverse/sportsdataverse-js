@@ -1,5 +1,42 @@
 # ChangeLog
 
+## Unreleased
+
+### Added
+
+- **Returns-table column descriptions.** Every returns table (ESPN, native families, loaders)
+  resolves its blank `description` cells the way sdv-py's generator does: the schema's own text,
+  then sdv-py's hand-curated `manual_column_descriptions.yaml` (by schema key, then `_global`),
+  then the column descriptions mined from the SDV R packages (`r_column_descriptions.yaml`: the
+  league's package, its sport's siblings, the merged union). Both files are vendored verbatim at
+  the sdv-py pin (`vendor.yaml` `copy:`, in the LOCK). `npm run codegen` prints
+  `descriptions <family>: <filled>/<total>` and writes `docs/src/generated/description_coverage.json`;
+  overall fill went from 26% to 95.8% (stats.nba.com / stats.wnba.com / MLB / the four NHL
+  families from 0%). The generated row interfaces carry the descriptions as doc comments.
+- **Loader returns tables + row types in the docs.** Every `load*` block documents its columns
+  (`col_name | type | description`, the type being its generated row type's) and names its
+  `Load<Name>Row`; ESPN and native blocks name their verified row interface, or say
+  _Rows are untyped `Row[]` (not parity-verified yet)._ ESPN endpoints with no fixed table list
+  the leagues that expose them and link the parser's section of the parsed-returns page.
+- **Utilities catalogue.** `tools/codegen/utilities.yaml` labels every hand-written non-data export
+  (parsers, analytics, odds, models, producers, discovery, transforms, HTTP core, errors, config);
+  codegen renders `docs/docs/utilities/`, `src/generated/utilities.ts` and a "Utilities" sidebar
+  group. `listFunctions(…, { detail: true })` returns `{ name, kind: 'data' | 'utility', category }`
+  rows (`FunctionEntry`); `UTILITY_CATEGORIES` / `UtilityCategory` are exported.
+- **Typed TSDoc on every generated wrapper:** every `@param params.x` carries its TypeScript type and a description
+  (the YAML description where sdv-py wrote one, else what the param is), `@returns Promise<…>`
+  naming the row interface, and `@see` linking the docs page. The TypeDoc API pages now cover the
+  hand-written modules (parsers, analytics, odds, models, producers, HTTP core) besides the four
+  basketball ESPN samples.
+- **Breaking-change callouts.** `tools/codegen/breaking.yaml` records every 4.0.0 breaking change
+  by surface; each affected generated page opens with a `:::danger Breaking in 4.0.0` admonition
+  linking the changelog, and `reference/deprecations.md` carries the "Breaking changes by version" table.
+- **"How this library is built"** (`docs/docs/architecture/`): per surface (ESPN vendored,
+  native vendored, native JS-owned, loaders, hand-written) — source of truth, generator step,
+  output, CI gate, how to change it, and a codegen-rewritten status block (counts + the sdv-py
+  pin). Every generated docs page ends with a visible provenance footer linking its page
+  (the hidden MDX comment is gone).
+
 ## 4.0.0 (2026-10-06)
 
 _The first release after 3.0.0: 3.1.0 was never published, and its entries are folded in

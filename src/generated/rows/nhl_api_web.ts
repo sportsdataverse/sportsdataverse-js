@@ -10,77 +10,77 @@
  * One row of `sdv.nhl.nhl_boxscore({ parsed: true })` (returns schema `native/nhl_api_web/boxscore`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebBoxscoreRow {
-  /** Schema `character`. */
+  /** Home or away indicator. Schema `character`. */
   home_away?: string | null;
-  /** Schema `character`. */
+  /** Position group name (e.g. Centers). Schema `character`. */
   position_group?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number. Schema `integer`. */
   sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Player position. Schema `character`. */
   position?: string | null;
-  /** Schema `double`. */
+  /** Goals scored. Schema `double`. */
   goals?: number | null;
-  /** Schema `double`. */
+  /** Assists. Schema `double`. */
   assists?: number | null;
-  /** Schema `double`. */
+  /** Total points (goals + assists). Schema `double`. */
   points?: number | null;
-  /** Schema `double`. */
+  /** Plus/minus rating. Schema `double`. */
   plus_minus?: number | null;
-  /** Schema `integer`. */
+  /** Penalty minutes. Schema `integer`. */
   pim?: number | null;
-  /** Schema `double`. */
+  /** Hits. Schema `double`. */
   hits?: number | null;
-  /** Schema `double`. */
+  /** Power-play goals. Schema `double`. */
   power_play_goals?: number | null;
-  /** Schema `double`. */
+  /** Shots on goal from the area. Schema `double`. */
   sog?: number | null;
-  /** Schema `double`. */
+  /** Faceoff win percentage. Schema `double`. */
   faceoff_winning_pctg?: number | null;
-  /** Schema `character`. */
+  /** Time on ice. Schema `character`. */
   toi?: string | null;
-  /** Schema `double`. */
+  /** Blocked shots. Schema `double`. */
   blocked_shots?: number | null;
-  /** Schema `double`. */
+  /** Number of shifts. Schema `double`. */
   shifts?: number | null;
-  /** Schema `double`. */
+  /** Giveaways. Schema `double`. */
   giveaways?: number | null;
-  /** Schema `double`. */
+  /** Takeaways. Schema `double`. */
   takeaways?: number | null;
-  /** Schema `character`. */
+  /** Player name (default localization). Schema `character`. */
   name_default?: string | null;
-  /** Schema `character`. */
+  /** Even-strength shots against (saves/total). Schema `character`. */
   even_strength_shots_against?: string | null;
-  /** Schema `character`. */
+  /** Power-play shots against (saves/total). Schema `character`. */
   power_play_shots_against?: string | null;
-  /** Schema `character`. */
+  /** Shorthanded shots against (saves/total). Schema `character`. */
   shorthanded_shots_against?: string | null;
-  /** Schema `character`. */
+  /** Total shots against (saves/total). Schema `character`. */
   save_shots_against?: string | null;
-  /** Schema `double`. */
+  /** Even-strength goals against. Schema `double`. */
   even_strength_goals_against?: number | null;
-  /** Schema `double`. */
+  /** Power-play goals against. Schema `double`. */
   power_play_goals_against?: number | null;
-  /** Schema `double`. */
+  /** Shorthanded goals against. Schema `double`. */
   shorthanded_goals_against?: number | null;
-  /** Schema `double`. */
+  /** Goals against. Schema `double`. */
   goals_against?: number | null;
-  /** Schema `logical`. */
+  /** Whether the goalie started the game. Schema `logical`. */
   starter?: boolean | null;
-  /** Schema `double`. */
+  /** Shots faced. Schema `double`. */
   shots_against?: number | null;
-  /** Schema `double`. */
+  /** Saves made. Schema `double`. */
   saves?: number | null;
-  /** Schema `double`. */
+  /** Save percentage. Schema `double`. */
   save_pctg?: number | null;
-  /** Schema `character`. */
+  /** Goalie decision (W/L/O). Schema `character`. */
   decision?: string | null;
-  /** Schema `character`. */
+  /** Player name (Czech localization). Schema `character`. */
   name_cs?: string | null;
-  /** Schema `character`. */
+  /** Player name (Finnish localization). Schema `character`. */
   name_fi?: string | null;
-  /** Schema `character`. */
+  /** Player name (Slovak localization). Schema `character`. */
   name_sk?: string | null;
 }
 
@@ -88,163 +88,163 @@ export interface NhlApiWebBoxscoreRow {
  * One row of `sdv.nhl.nhl_club_schedule_season({ parsed: true })` (returns schema `native/nhl_api_web/club_schedule_season`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebClubScheduleSeasonRow {
-  /** Schema `integer`. */
+  /** Indicator for whether the game belongs to the club's prior completed season (1 = previous season, 0 otherwise). Schema `integer`. */
   club_previous_season?: number | null;
-  /** Schema `integer`. */
+  /** Indicator for whether the game falls within the current season for the requesting club (1 = current season, 0 otherwise). Schema `integer`. */
   club_current_season?: number | null;
-  /** Schema `integer`. */
+  /** Indicator for whether the game belongs to the club's next upcoming season (1 = next season, 0 otherwise). Schema `integer`. */
   club_next_season?: number | null;
-  /** Schema `character`. */
+  /** IANA timezone identifier for the home club's arena, used to localise game start times in the schedule. Schema `character`. */
   club_timezone?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer`. */
+  /** Season year (echoed from arg). Schema `integer`. */
   season?: number | null;
-  /** Schema `integer`. */
+  /** Game type the row belongs to. Schema `integer`. */
   game_type?: number | null;
-  /** Schema `character`. */
+  /** Game date. Schema `character`. */
   game_date?: string | null;
-  /** Schema `logical`. */
+  /** Whether the game is at a neutral site. Schema `logical`. */
   neutral_site?: boolean | null;
-  /** Schema `character`. */
+  /** Scheduled start time in UTC. Schema `character`. */
   start_time_utc?: string | null;
-  /** Schema `character`. */
+  /** Eastern time UTC offset. Schema `character`. */
   eastern_utc_offset?: string | null;
-  /** Schema `character`. */
+  /** Venue UTC offset. Schema `character`. */
   venue_utc_offset?: string | null;
-  /** Schema `character`. */
+  /** Venue time zone. Schema `character`. */
   venue_timezone?: string | null;
-  /** Schema `character`. */
+  /** Game state (e.g., FINAL, LIVE). Schema `character`. */
   game_state?: string | null;
-  /** Schema `character`. */
+  /** Schedule state of the game. Schema `character`. */
   game_schedule_state?: string | null;
-  /** Schema `character`. */
+  /** Nested list of TV broadcast details. Schema `character`. */
   tv_broadcasts?: string | null;
-  /** Schema `character`. */
+  /** Link to the NHL game center page. Schema `character`. */
   game_center_link?: string | null;
-  /** Schema `character`. */
+  /** Venue name (default language). Schema `character`. */
   venue_default?: string | null;
-  /** Schema `integer` (an id). */
+  /** Away team identifier. Schema `integer` (an id). */
   away_team_id?: string | null;
-  /** Schema `character`. */
+  /** Away team common name (default language). Schema `character`. */
   away_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Away team place name (default language). Schema `character`. */
   away_team_place_name_default?: string | null;
-  /** Schema `character`. */
+  /** Away team place name with preposition (default). Schema `character`. */
   away_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Away team place name with preposition (French). Schema `character`. */
   away_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Away team abbreviation. Schema `character`. */
   away_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL to the away team logo. Schema `character`. */
   away_team_logo?: string | null;
-  /** Schema `character`. */
+  /** URL to the away team dark logo. Schema `character`. */
   away_team_dark_logo?: string | null;
-  /** Schema `logical`. */
+  /** Whether the away team is a split squad. Schema `logical`. */
   away_team_away_split_squad?: boolean | null;
-  /** Schema `integer`. */
+  /** Away team final score. Schema `integer`. */
   away_team_score?: number | null;
-  /** Schema `integer` (an id). */
+  /** Home team identifier. Schema `integer` (an id). */
   home_team_id?: string | null;
-  /** Schema `character`. */
+  /** Home team common name (default language). Schema `character`. */
   home_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Home team place name (default language). Schema `character`. */
   home_team_place_name_default?: string | null;
-  /** Schema `character`. */
+  /** Home team place name with preposition (default). Schema `character`. */
   home_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Home team place name with preposition (French). Schema `character`. */
   home_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Home team abbreviation. Schema `character`. */
   home_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL to the home team logo. Schema `character`. */
   home_team_logo?: string | null;
-  /** Schema `character`. */
+  /** URL to the home team dark logo. Schema `character`. */
   home_team_dark_logo?: string | null;
-  /** Schema `logical`. */
+  /** Whether the home team is a split squad. Schema `logical`. */
   home_team_home_split_squad?: boolean | null;
-  /** Schema `character`. */
+  /** Link to home team airline info. Schema `character`. */
   home_team_airline_link?: string | null;
-  /** Schema `character`. */
+  /** Home team airline description. Schema `character`. */
   home_team_airline_desc?: string | null;
-  /** Schema `character`. */
+  /** Link to home team hotel info. Schema `character`. */
   home_team_hotel_link?: string | null;
-  /** Schema `character`. */
+  /** Home team hotel description. Schema `character`. */
   home_team_hotel_desc?: string | null;
-  /** Schema `integer`. */
+  /** Home team final score. Schema `integer`. */
   home_team_score?: number | null;
-  /** Schema `character`. */
+  /** Period type (e.g., REG, OT). Schema `character`. */
   period_descriptor_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods. Schema `integer`. */
   period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `character`. */
+  /** Period type in which the game ended. Schema `character`. */
   game_outcome_last_period_type?: string | null;
-  /** Schema `integer` (an id). */
+  /** Winning goalie player identifier. Schema `integer` (an id). */
   winning_goalie_player_id?: string | null;
-  /** Schema `character`. */
+  /** Winning goalie first initial (default language). Schema `character`. */
   winning_goalie_first_initial_default?: string | null;
-  /** Schema `character`. */
+  /** Winning goalie last name (default language). Schema `character`. */
   winning_goalie_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Link to away team airline info. Schema `character`. */
   away_team_airline_link?: string | null;
-  /** Schema `character`. */
+  /** Away team airline description. Schema `character`. */
   away_team_airline_desc?: string | null;
-  /** Schema `double` (an id). */
+  /** Winning goal scorer player identifier. Schema `double` (an id). */
   winning_goal_scorer_player_id?: string | number | null;
-  /** Schema `character`. */
+  /** Winning goal scorer first initial (default). Schema `character`. */
   winning_goal_scorer_first_initial_default?: string | null;
-  /** Schema `character`. */
+  /** Winning goal scorer last name (default language). Schema `character`. */
   winning_goal_scorer_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Link to the three-minute recap. Schema `character`. */
   three_min_recap?: string | null;
-  /** Schema `character`. */
+  /** Home team place name (French). Schema `character`. */
   home_team_place_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Link to the condensed game video. Schema `character`. */
   condensed_game?: string | null;
-  /** Schema `character`. */
+  /** Venue name (Spanish). Schema `character`. */
   venue_es?: string | null;
-  /** Schema `character`. */
+  /** Venue name (French). Schema `character`. */
   venue_fr?: string | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web identifier for the parent special-event record grouping multiple games under the same marquee event umbrella. Schema `double` (an id). */
   special_event_parent_id?: string | number | null;
-  /** Schema `character`. */
+  /** English display name for a special promotional or marquee event designation attached to the game (e.g., 'Winter Classic', 'Heritage Classic'). Schema `character`. */
   special_event_name_default?: string | null;
-  /** Schema `character`. */
+  /** French display name for a special promotional or marquee event designation attached to the game, used in bilingual NHL communications. Schema `character`. */
   special_event_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Link to away team hotel info. Schema `character`. */
   away_team_hotel_link?: string | null;
-  /** Schema `character`. */
+  /** Away team hotel description. Schema `character`. */
   away_team_hotel_desc?: string | null;
-  /** Schema `character`. */
+  /** Link to the French three-minute recap. Schema `character`. */
   three_min_recap_fr?: string | null;
-  /** Schema `character`. */
+  /** Winning goalie last name (Czech). Schema `character`. */
   winning_goalie_last_name_cs?: string | null;
-  /** Schema `character`. */
+  /** Winning goalie last name (Finnish). Schema `character`. */
   winning_goalie_last_name_fi?: string | null;
-  /** Schema `character`. */
+  /** Winning goalie last name (Slovak). Schema `character`. */
   winning_goalie_last_name_sk?: string | null;
-  /** Schema `character`. */
+  /** Away team place name (French). Schema `character`. */
   away_team_place_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Away team common name (French). Schema `character`. */
   away_team_common_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Home team common name (French). Schema `character`. */
   home_team_common_name_fr?: string | null;
-  /** Schema `character`. */
+  /** NHL api-web URL path to the dedicated page for the current playoff series associated with this scheduled game. Schema `character`. */
   series_url?: string | null;
-  /** Schema `double`. */
+  /** Playoff round number to which the current series belongs (1 = first round, 4 = Stanley Cup Final). Schema `double`. */
   series_status_round?: number | null;
-  /** Schema `character`. */
+  /** Short abbreviation identifying the specific playoff series slot (e.g., 'A', 'B') within the bracket for this game. Schema `character`. */
   series_status_series_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Human-readable display title for the playoff series (e.g., 'Eastern Conference First Round'). Schema `character`. */
   series_status_series_title?: string | null;
-  /** Schema `character`. */
+  /** Single-letter label assigned to the playoff series in the bracket structure, used to pair teams across rounds. Schema `character`. */
   series_status_series_letter?: string | null;
-  /** Schema `double`. */
+  /** Wins still required by the leading team to clinch and advance in the current playoff series. Schema `double`. */
   series_status_needed_to_win?: number | null;
-  /** Schema `double`. */
+  /** Number of wins accumulated by the higher-seeded team in the current playoff series as of this scheduled game. Schema `double`. */
   series_status_top_seed_wins?: number | null;
-  /** Schema `double`. */
+  /** Number of wins accumulated by the lower-seeded team in the current playoff series as of this scheduled game. Schema `double`. */
   series_status_bottom_seed_wins?: number | null;
-  /** Schema `double`. */
+  /** Sequential game number within the playoff series (e.g., 1 through 7 for a best-of-seven). Schema `double`. */
   series_status_game_number_of_series?: number | null;
 }
 
@@ -252,51 +252,51 @@ export interface NhlApiWebClubScheduleSeasonRow {
  * One row of `sdv.nhl.nhl_draft_picks({ parsed: true })` (returns schema `native/nhl_api_web/draft_picks`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebDraftPicksRow {
-  /** Schema `integer`. */
+  /** Shootout round number. Schema `integer`. */
   round?: number | null;
-  /** Schema `integer`. */
+  /** Pick number within the round. Schema `integer`. */
   pick_in_round?: number | null;
-  /** Schema `integer`. */
+  /** Overall pick number in the draft. Schema `integer`. */
   overall_pick?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
-  /** Schema `character`. */
+  /** Team abbreviation. Schema `character`. */
   team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL to the team logo (light variant). Schema `character`. */
   team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL to the team logo (dark variant). Schema `character`. */
   team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** History of the team's picks at this slot. Schema `character`. */
   team_pick_history?: string | null;
-  /** Schema `character`. */
+  /** Player position code. Schema `character`. */
   position_code?: string | null;
-  /** Schema `character`. */
+  /** Player country code. Schema `character`. */
   country_code?: string | null;
-  /** Schema `integer`. */
+  /** Player height in inches. Schema `integer`. */
   height?: number | null;
-  /** Schema `integer`. */
+  /** Player weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `character`. */
+  /** Amateur league the player played in. Schema `character`. */
   amateur_league?: string | null;
-  /** Schema `character`. */
+  /** Amateur club the player played for. Schema `character`. */
   amateur_club_name?: string | null;
-  /** Schema `character`. */
+  /** Team name (default locale). Schema `character`. */
   team_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team name (French locale). Schema `character`. */
   team_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Team common name (default language). Schema `character`. */
   team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with preposition (default). Schema `character`. */
   team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with preposition (French). Schema `character`. */
   team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Short display abbreviation for the selected player's nationality or amateur league affiliation shown in the NHL draft picks listing. Schema `character`. */
   display_abbrev_default?: string | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team common name (French localization). Schema `character`. */
   team_common_name_fr?: string | null;
 }
 
@@ -304,49 +304,49 @@ export interface NhlApiWebDraftPicksRow {
  * One row of `sdv.nhl.nhl_draft_picks_now({ parsed: true })` (returns schema `native/nhl_api_web/draft_picks_now`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebDraftPicksNowRow {
-  /** Schema `integer`. */
+  /** Shootout round number. Schema `integer`. */
   round?: number | null;
-  /** Schema `integer`. */
+  /** Pick number within the round. Schema `integer`. */
   pick_in_round?: number | null;
-  /** Schema `integer`. */
+  /** Overall pick number in the draft. Schema `integer`. */
   overall_pick?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
-  /** Schema `character`. */
+  /** Team abbreviation. Schema `character`. */
   team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL to the team logo (light variant). Schema `character`. */
   team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL to the team logo (dark variant). Schema `character`. */
   team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** History of the team's picks at this slot. Schema `character`. */
   team_pick_history?: string | null;
-  /** Schema `character`. */
+  /** Player position code. Schema `character`. */
   position_code?: string | null;
-  /** Schema `character`. */
+  /** Player country code. Schema `character`. */
   country_code?: string | null;
-  /** Schema `integer`. */
+  /** Player height in inches. Schema `integer`. */
   height?: number | null;
-  /** Schema `integer`. */
+  /** Player weight in pounds. Schema `integer`. */
   weight?: number | null;
-  /** Schema `character`. */
+  /** Amateur league the player played in. Schema `character`. */
   amateur_league?: string | null;
-  /** Schema `character`. */
+  /** Amateur club the player played for. Schema `character`. */
   amateur_club_name?: string | null;
-  /** Schema `character`. */
+  /** Team name (default locale). Schema `character`. */
   team_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team name (French locale). Schema `character`. */
   team_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Team common name (default language). Schema `character`. */
   team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with preposition (default). Schema `character`. */
   team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with preposition (French). Schema `character`. */
   team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Default-language display abbreviation for the team that currently holds this draft pick. Schema `character`. */
   display_abbrev_default?: string | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   last_name_default?: string | null;
 }
 
@@ -354,39 +354,39 @@ export interface NhlApiWebDraftPicksNowRow {
  * One row of `sdv.nhl.nhl_draft_rankings({ parsed: true })` (returns schema `native/nhl_api_web/draft_rankings`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebDraftRankingsRow {
-  /** Schema `integer`. */
+  /** Draft year the lottery applies to. Schema `integer`. */
   draft_year?: number | null;
-  /** Schema `integer` (an id). */
+  /** Prospect category identifier. Schema `integer` (an id). */
   category_id?: string | null;
-  /** Schema `character`. */
+  /** Machine-readable slug identifying the scouting or ranking category (e.g., 'north-american-skater', 'international-skater') that the prospect belongs to in the NHL draft rankings. Schema `character`. */
   category_key?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Player position code. Schema `character`. */
   position_code?: string | null;
-  /** Schema `character`. */
+  /** Handedness (shoots/catches). Schema `character`. */
   shoots_catches?: string | null;
-  /** Schema `integer`. */
+  /** Height in inches. Schema `integer`. */
   height_in_inches?: number | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight_in_pounds?: number | null;
-  /** Schema `character`. */
+  /** Prospect's most recent amateur club. Schema `character`. */
   last_amateur_club?: string | null;
-  /** Schema `character`. */
+  /** Prospect's most recent amateur league. Schema `character`. */
   last_amateur_league?: string | null;
-  /** Schema `character`. */
+  /** Player birth date. Schema `character`. */
   birth_date?: string | null;
-  /** Schema `character`. */
+  /** Birth city. Schema `character`. */
   birth_city?: string | null;
-  /** Schema `character`. */
+  /** Birth state or province of the player. Schema `character`. */
   birth_state_province?: string | null;
-  /** Schema `character`. */
+  /** Player birth country. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `double`. */
+  /** Prospect's midterm draft ranking. Schema `double`. */
   midterm_rank?: number | null;
-  /** Schema `double`. */
+  /** Prospect's final draft ranking. Schema `double`. */
   final_rank?: number | null;
 }
 
@@ -394,39 +394,39 @@ export interface NhlApiWebDraftRankingsRow {
  * One row of `sdv.nhl.nhl_draft_rankings_now({ parsed: true })` (returns schema `native/nhl_api_web/draft_rankings_now`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebDraftRankingsNowRow {
-  /** Schema `integer`. */
+  /** Draft year the lottery applies to. Schema `integer`. */
   draft_year?: number | null;
-  /** Schema `integer` (an id). */
+  /** Prospect category identifier. Schema `integer` (an id). */
   category_id?: string | null;
-  /** Schema `character`. */
+  /** Short identifier string for the scouting category or ranking list under which the prospect is evaluated (e.g., 'NA-SKATER', 'GOALIE'). Schema `character`. */
   category_key?: string | null;
-  /** Schema `character`. */
+  /** Player last name. Schema `character`. */
   last_name?: string | null;
-  /** Schema `character`. */
+  /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Schema `character`. */
+  /** Player position code. Schema `character`. */
   position_code?: string | null;
-  /** Schema `character`. */
+  /** Handedness (shoots/catches). Schema `character`. */
   shoots_catches?: string | null;
-  /** Schema `integer`. */
+  /** Height in inches. Schema `integer`. */
   height_in_inches?: number | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight_in_pounds?: number | null;
-  /** Schema `character`. */
+  /** Prospect's most recent amateur club. Schema `character`. */
   last_amateur_club?: string | null;
-  /** Schema `character`. */
+  /** Prospect's most recent amateur league. Schema `character`. */
   last_amateur_league?: string | null;
-  /** Schema `character`. */
+  /** Player birth date. Schema `character`. */
   birth_date?: string | null;
-  /** Schema `character`. */
+  /** Birth city. Schema `character`. */
   birth_city?: string | null;
-  /** Schema `character`. */
+  /** Birth state or province of the player. Schema `character`. */
   birth_state_province?: string | null;
-  /** Schema `character`. */
+  /** Player birth country. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `double`. */
+  /** Prospect's midterm draft ranking. Schema `double`. */
   midterm_rank?: number | null;
-  /** Schema `double`. */
+  /** Prospect's final draft ranking. Schema `double`. */
   final_rank?: number | null;
 }
 
@@ -434,35 +434,35 @@ export interface NhlApiWebDraftRankingsNowRow {
  * One row of `sdv.nhl.nhl_draft_tracker_picks_now({ parsed: true })` (returns schema `native/nhl_api_web/draft_tracker_picks_now`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebDraftTrackerPicksNowRow {
-  /** Schema `integer`. */
+  /** Pick number within the round. Schema `integer`. */
   pick_in_round?: number | null;
-  /** Schema `integer`. */
+  /** Overall pick number in the draft. Schema `integer`. */
   overall_pick?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
-  /** Schema `character`. */
+  /** Team abbreviation. Schema `character`. */
   team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL to the team logo (light variant). Schema `character`. */
   team_logo_light?: string | null;
-  /** Schema `character`. */
+  /** URL to the team logo (dark variant). Schema `character`. */
   team_logo_dark?: string | null;
-  /** Schema `character`. */
+  /** Pick state (e.g., on the clock, complete). Schema `character`. */
   state?: string | null;
-  /** Schema `character`. */
+  /** Player position code. Schema `character`. */
   position_code?: string | null;
-  /** Schema `character`. */
+  /** Team full name (default language). Schema `character`. */
   team_full_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team full name (French). Schema `character`. */
   team_full_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Team common name (default language). Schema `character`. */
   team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with preposition (default). Schema `character`. */
   team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with preposition (French). Schema `character`. */
   team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   first_name_default?: string | null;
 }
 
@@ -470,37 +470,37 @@ export interface NhlApiWebDraftTrackerPicksNowRow {
  * One row of `sdv.nhl.nhl_goalie_leaders({ parsed: true })` (returns schema `native/nhl_api_web/goalie_leaders`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebGoalieLeadersRow {
-  /** Schema `character`. */
+  /** Stat leader category. Schema `character`. */
   category?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number. Schema `integer`. */
   sweater_number?: number | null;
-  /** Schema `character`. */
+  /** URL to the player headshot image. Schema `character`. */
   headshot?: string | null;
-  /** Schema `character`. */
+  /** Team abbreviation. Schema `character`. */
   team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL to the team logo image. Schema `character`. */
   team_logo?: string | null;
-  /** Schema `character`. */
+  /** Player position. Schema `character`. */
   position?: string | null;
-  /** Schema `integer`. */
+  /** Leader stat numeric value. Schema `integer`. */
   value?: number | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team name (default locale). Schema `character`. */
   team_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player first name (Czech localization). Schema `character`. */
   first_name_cs?: string | null;
-  /** Schema `character`. */
+  /** Player first name (Slovak localization). Schema `character`. */
   first_name_sk?: string | null;
-  /** Schema `character`. */
+  /** Player last name (Czech localization). Schema `character`. */
   last_name_cs?: string | null;
-  /** Schema `character`. */
+  /** Player last name (Slovak localization). Schema `character`. */
   last_name_sk?: string | null;
-  /** Schema `character`. */
+  /** Player last name (Finnish localization). Schema `character`. */
   last_name_fi?: string | null;
 }
 
@@ -508,103 +508,103 @@ export interface NhlApiWebGoalieLeadersRow {
  * One row of `sdv.nhl.nhl_landing({ parsed: true })` (returns schema `native/nhl_api_web/landing`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebLandingRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer`. */
+  /** Season year (echoed from arg). Schema `integer`. */
   season?: number | null;
-  /** Schema `integer`. */
+  /** Game type the row belongs to. Schema `integer`. */
   game_type?: number | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the game is subject to a limited-scoring designation (e.g., a low-scoring or shootout-resolved game) per NHL api-web metadata. Schema `logical`. */
   limited_scoring?: boolean | null;
-  /** Schema `character`. */
+  /** Game date. Schema `character`. */
   game_date?: string | null;
-  /** Schema `character`. */
+  /** Scheduled start time in UTC. Schema `character`. */
   start_time_utc?: string | null;
-  /** Schema `character`. */
+  /** Eastern time UTC offset. Schema `character`. */
   eastern_utc_offset?: string | null;
-  /** Schema `character`. */
+  /** Venue UTC offset. Schema `character`. */
   venue_utc_offset?: string | null;
-  /** Schema `character`. */
+  /** Venue time zone. Schema `character`. */
   venue_timezone?: string | null;
-  /** Schema `character`. */
+  /** Nested list of TV broadcast details. Schema `character`. */
   tv_broadcasts?: string | null;
-  /** Schema `character`. */
+  /** Game state (e.g., FINAL, LIVE). Schema `character`. */
   game_state?: string | null;
-  /** Schema `character`. */
+  /** Schedule state of the game. Schema `character`. */
   game_schedule_state?: string | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether a shootout is in use as the tiebreaker format for this game per NHL api-web game landing metadata. Schema `logical`. */
   shootout_in_use?: boolean | null;
-  /** Schema `integer`. */
+  /** Number of regulation periods scheduled for this game (typically 3 for NHL, may differ for special-format games). Schema `integer`. */
   reg_periods?: number | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether overtime rules are in effect for this game, as determined by the NHL api-web game landing endpoint. Schema `logical`. */
   ot_in_use?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether ties were in use that season. Schema `logical`. */
   ties_in_use?: boolean | null;
-  /** Schema `character`. */
+  /** Venue name (default language). Schema `character`. */
   venue_default?: string | null;
-  /** Schema `character`. */
+  /** Default-language display string for the city or location associated with the game's venue, as provided by the NHL api-web landing endpoint. Schema `character`. */
   venue_location_default?: string | null;
-  /** Schema `integer`. */
+  /** Period number. Schema `integer`. */
   period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type (e.g., REG, OT). Schema `character`. */
   period_descriptor_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods. Schema `integer`. */
   period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer` (an id). */
+  /** Away team identifier. Schema `integer` (an id). */
   away_team_id?: string | null;
-  /** Schema `character`. */
+  /** Away team common name (default language). Schema `character`. */
   away_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Away team abbreviation. Schema `character`. */
   away_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Away team place name (default language). Schema `character`. */
   away_team_place_name_default?: string | null;
-  /** Schema `character`. */
+  /** Away team place name with preposition (default). Schema `character`. */
   away_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Away team place name with preposition (French). Schema `character`. */
   away_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `integer`. */
+  /** Away team final score. Schema `integer`. */
   away_team_score?: number | null;
-  /** Schema `integer`. */
+  /** Away team shots on goal. Schema `integer`. */
   away_team_sog?: number | null;
-  /** Schema `character`. */
+  /** URL to the away team logo. Schema `character`. */
   away_team_logo?: string | null;
-  /** Schema `character`. */
+  /** URL to the away team dark logo. Schema `character`. */
   away_team_dark_logo?: string | null;
-  /** Schema `integer` (an id). */
+  /** Home team identifier. Schema `integer` (an id). */
   home_team_id?: string | null;
-  /** Schema `character`. */
+  /** Home team common name (default language). Schema `character`. */
   home_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Home team abbreviation. Schema `character`. */
   home_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Home team place name (default language). Schema `character`. */
   home_team_place_name_default?: string | null;
-  /** Schema `character`. */
+  /** Home team place name (French). Schema `character`. */
   home_team_place_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Home team place name with preposition (default). Schema `character`. */
   home_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Home team place name with preposition (French). Schema `character`. */
   home_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `integer`. */
+  /** Home team final score. Schema `integer`. */
   home_team_score?: number | null;
-  /** Schema `integer`. */
+  /** Home team shots on goal. Schema `integer`. */
   home_team_sog?: number | null;
-  /** Schema `character`. */
+  /** URL to the home team logo. Schema `character`. */
   home_team_logo?: string | null;
-  /** Schema `character`. */
+  /** URL to the home team dark logo. Schema `character`. */
   home_team_dark_logo?: string | null;
-  /** Schema `character`. */
+  /** Serialized summary of scoring events for the game, flattened from the nested NHL api-web landing payload scoring sub-object. Schema `character`. */
   summary_scoring?: string | null;
-  /** Schema `character`. */
+  /** Serialized representation of the three-star selections for the game, flattened from the nested NHL api-web landing payload. Schema `character`. */
   summary_three_stars?: string | null;
-  /** Schema `character`. */
+  /** Serialized summary of penalty events for the game, flattened from the nested NHL api-web landing payload penalties sub-object. Schema `character`. */
   summary_penalties?: string | null;
-  /** Schema `character`. */
+  /** Remaining time in the current period formatted as MM:SS, as provided by the NHL api-web game landing endpoint. Schema `character`. */
   clock_time_remaining?: string | null;
-  /** Schema `integer`. */
+  /** Integer count of seconds remaining in the current period at the time the NHL api-web landing payload was captured. Schema `integer`. */
   clock_seconds_remaining?: number | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the game clock is actively counting down at the time the NHL api-web landing payload was captured. Schema `logical`. */
   clock_running?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the game clock is currently paused during an intermission period between regulation periods. Schema `logical`. */
   clock_in_intermission?: boolean | null;
 }
 
@@ -612,101 +612,101 @@ export interface NhlApiWebLandingRow {
  * One row of `sdv.nhl.nhl_web_pbp({ parsed: true })` (returns schema `native/nhl_api_web/pbp`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebPbpRow {
-  /** Schema `integer` (an id). */
+  /** ESPN event id (echoed from arg). Schema `integer` (an id). */
   event_id?: string | null;
-  /** Schema `character`. */
+  /** Time elapsed in the period when the shot occurred. Schema `character`. */
   time_in_period?: string | null;
-  /** Schema `character`. */
+  /** Time remaining. Schema `character`. */
   time_remaining?: string | null;
-  /** Schema `character`. */
+  /** Code identifying the game situation. Schema `character`. */
   situation_code?: string | null;
-  /** Schema `character`. */
+  /** Ice end ('left' or 'right') that the home team is defending in the current period, used to orient x/y coordinates in the NHL api-web play-by-play feed. Schema `character`. */
   home_team_defending_side?: string | null;
-  /** Schema `integer`. */
+  /** Numeric event-type code identifying the category of play (e.g., goal, shot, hit, penalty, faceoff) in the NHL api-web play-by-play feed. Schema `integer`. */
   type_code?: number | null;
-  /** Schema `character`. */
+  /** String key describing the event type category (e.g., 'goal', 'shot-on-goal', 'hit', 'faceoff') in the NHL api-web play-by-play feed. Schema `character`. */
   type_desc_key?: string | null;
-  /** Schema `integer`. */
+  /** Display sort order for the sport. Schema `integer`. */
   sort_order?: number | null;
-  /** Schema `integer`. */
+  /** Period number. Schema `integer`. */
   period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type (e.g., REG, OT). Schema `character`. */
   period_descriptor_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods. Schema `integer`. */
   period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web team identifier for the team credited with or responsible for the play event in the play-by-play feed. Schema `double` (an id). */
   details_event_owner_team_id?: string | number | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the skater who lost the faceoff on a faceoff event in the play-by-play feed. Schema `double` (an id). */
   details_losing_player_id?: string | number | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the skater who won the faceoff on a faceoff event in the play-by-play feed. Schema `double` (an id). */
   details_winning_player_id?: string | number | null;
-  /** Schema `double`. */
+  /** Horizontal rink coordinate (feet from centre ice, positive toward right side) of the play event location in the NHL api-web play-by-play feed. Schema `double`. */
   details_x_coord?: number | null;
-  /** Schema `double`. */
+  /** Vertical rink coordinate (feet from centre ice, positive toward one end) of the play event location in the NHL api-web play-by-play feed. Schema `double`. */
   details_y_coord?: number | null;
-  /** Schema `character`. */
+  /** Ice zone where the play event occurred, coded as 'O' (offensive), 'D' (defensive), or 'N' (neutral) relative to the event owner team in the play-by-play feed. Schema `character`. */
   details_zone_code?: string | null;
-  /** Schema `character`. */
+  /** Classification of the shot attempt (e.g., wrist shot, slap shot, backhand, deflection) as provided in the NHL api-web play-by-play details. Schema `character`. */
   details_shot_type?: string | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the skater who took the shot on a shot-on-goal, missed-shot, or blocked-shot event in the play-by-play feed. Schema `double` (an id). */
   details_shooting_player_id?: string | number | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the goaltender who was in the net at the time of the shot, goal, or missed-shot event in the play-by-play feed. Schema `double` (an id). */
   details_goalie_in_net_id?: string | number | null;
-  /** Schema `double`. */
+  /** Cumulative shots on goal by the away team at the moment of the play event in the NHL api-web play-by-play feed. Schema `double`. */
   details_away_sog?: number | null;
-  /** Schema `double`. */
+  /** Cumulative shots on goal by the home team at the moment of the play event in the NHL api-web play-by-play feed. Schema `double`. */
   details_home_sog?: number | null;
-  /** Schema `character`. */
+  /** Primary reason or description for the play event (e.g., specific penalty infraction name) as provided in the NHL api-web play-by-play details. Schema `character`. */
   details_reason?: string | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the skater who blocked a shot on the blocked-shot event in the play-by-play feed. Schema `double` (an id). */
   details_blocking_player_id?: string | number | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the skater who delivered the body check on a hit event in the play-by-play feed. Schema `double` (an id). */
   details_hitting_player_id?: string | number | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the skater who received the body check on a hit event in the play-by-play feed. Schema `double` (an id). */
   details_hittee_player_id?: string | number | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the primary player involved in the play event (used on giveaway, takeaway, and similar single-player events). Schema `double` (an id). */
   details_player_id?: string | number | null;
-  /** Schema `character`. */
+  /** Structured sub-type code providing additional classification within the play event category in the NHL api-web play-by-play feed. Schema `character`. */
   details_type_code?: string | null;
-  /** Schema `character`. */
+  /** Short descriptor key providing additional classification of the play event (e.g., penalty type or shot outcome) in the NHL api-web play-by-play feed. Schema `character`. */
   details_desc_key?: string | null;
-  /** Schema `double`. */
+  /** Duration of the penalty in minutes as specified in the play event details of the NHL api-web play-by-play feed. Schema `double`. */
   details_duration?: number | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the player who committed the infraction on a penalty event in the play-by-play feed. Schema `double` (an id). */
   details_committed_by_player_id?: string | number | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the player who drew (was the victim of) the penalty on a penalty event in the play-by-play feed. Schema `double` (an id). */
   details_drawn_by_player_id?: string | number | null;
-  /** Schema `character`. */
+  /** URL to the power-play tracking replay video associated with this play event in the NHL api-web play-by-play feed. Schema `character`. */
   ppt_replay_url?: string | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the skater who scored the goal on a goal event in the play-by-play feed. Schema `double` (an id). */
   details_scoring_player_id?: string | number | null;
-  /** Schema `double`. */
+  /** Running season goal total for the scoring player at the time of the goal event in the NHL api-web play-by-play feed. Schema `double`. */
   details_scoring_player_total?: number | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the primary (first) assist credited on a goal event in the play-by-play feed. Schema `double` (an id). */
   details_assist1_player_id?: string | number | null;
-  /** Schema `double`. */
+  /** Running season assist total for the primary assist player at the time of the goal event in the play-by-play feed. Schema `double`. */
   details_assist1_player_total?: number | null;
-  /** Schema `double` (an id). */
+  /** NHL api-web player identifier for the secondary (second) assist credited on a goal event in the play-by-play feed. Schema `double` (an id). */
   details_assist2_player_id?: string | number | null;
-  /** Schema `double`. */
+  /** Running season assist total for the secondary assist player at the time of the goal event in the play-by-play feed. Schema `double`. */
   details_assist2_player_total?: number | null;
-  /** Schema `double`. */
+  /** Cumulative away-team score at the moment of the play event in the NHL api-web play-by-play feed. Schema `double`. */
   details_away_score?: number | null;
-  /** Schema `double`. */
+  /** Cumulative home-team score at the moment of the play event in the NHL api-web play-by-play feed. Schema `double`. */
   details_home_score?: number | null;
-  /** Schema `character`. */
+  /** Public sharing URL for the English-language broadcast highlight clip of this play event from the NHL api-web play-by-play feed. Schema `character`. */
   details_highlight_clip_sharing_url?: string | null;
-  /** Schema `double`. */
+  /** NHL api-web identifier for the broadcast highlight clip associated with this play event in the play-by-play feed (English feed). Schema `double`. */
   details_highlight_clip?: number | null;
-  /** Schema `double`. */
+  /** NHL api-web clip identifier for the discrete video clip of this play event in the play-by-play feed (English feed). Schema `double`. */
   details_discrete_clip?: number | null;
-  /** Schema `double`. */
+  /** NHL api-web clip identifier for the discrete video clip of this play event in the play-by-play feed (French feed). Schema `double`. */
   details_discrete_clip_fr?: number | null;
-  /** Schema `character`. */
+  /** Public sharing URL for the French-language broadcast highlight clip of this play event from the NHL api-web play-by-play feed. Schema `character`. */
   details_highlight_clip_sharing_url_fr?: string | null;
-  /** Schema `double`. */
+  /** NHL api-web identifier for the broadcast highlight clip associated with this play event in the play-by-play feed (French feed). Schema `double`. */
   details_highlight_clip_fr?: number | null;
-  /** Schema `character`. */
+  /** Secondary descriptive reason or sub-classification for the play event as provided in the NHL api-web play-by-play details (e.g., penalty sub-type). Schema `character`. */
   details_secondary_reason?: string | null;
 }
 
@@ -714,49 +714,49 @@ export interface NhlApiWebPbpRow {
  * One row of `sdv.nhl.nhl_player_game_log({ parsed: true })` (returns schema `native/nhl_api_web/player_game_log`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebPlayerGameLogRow {
-  /** Schema `integer` (an id). */
+  /** Unique game identifier. Schema `integer` (an id). */
   game_id?: string | null;
-  /** Schema `character`. */
+  /** Team abbreviation. Schema `character`. */
   team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Home or road indicator. Schema `character`. */
   home_road_flag?: string | null;
-  /** Schema `character`. */
+  /** Game date. Schema `character`. */
   game_date?: string | null;
-  /** Schema `integer`. */
+  /** Goals scored. Schema `integer`. */
   goals?: number | null;
-  /** Schema `integer`. */
+  /** Assists. Schema `integer`. */
   assists?: number | null;
-  /** Schema `integer`. */
+  /** Total points (goals + assists). Schema `integer`. */
   points?: number | null;
-  /** Schema `integer`. */
+  /** Plus/minus rating. Schema `integer`. */
   plus_minus?: number | null;
-  /** Schema `integer`. */
+  /** Power-play goals. Schema `integer`. */
   power_play_goals?: number | null;
-  /** Schema `integer`. */
+  /** Power play points. Schema `integer`. */
   power_play_points?: number | null;
-  /** Schema `integer`. */
+  /** Game-winning goals. Schema `integer`. */
   game_winning_goals?: number | null;
-  /** Schema `integer`. */
+  /** Overtime goals. Schema `integer`. */
   ot_goals?: number | null;
-  /** Schema `integer`. */
+  /** Shots on goal. Schema `integer`. */
   shots?: number | null;
-  /** Schema `integer`. */
+  /** Number of shifts. Schema `integer`. */
   shifts?: number | null;
-  /** Schema `integer`. */
+  /** Shorthanded goals. Schema `integer`. */
   shorthanded_goals?: number | null;
-  /** Schema `integer`. */
+  /** Shorthanded points. Schema `integer`. */
   shorthanded_points?: number | null;
-  /** Schema `character`. */
+  /** Opponent team abbreviation. Schema `character`. */
   opponent_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Penalty minutes. Schema `integer`. */
   pim?: number | null;
-  /** Schema `character`. */
+  /** Time on ice. Schema `character`. */
   toi?: string | null;
-  /** Schema `character`. */
+  /** Player's team common name. Schema `character`. */
   common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Opponent team common name. Schema `character`. */
   opponent_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** French-language common name of the opposing team in the player's individual game log entry from the NHL api-web feed. Schema `character`. */
   opponent_common_name_fr?: string | null;
 }
 
@@ -764,265 +764,265 @@ export interface NhlApiWebPlayerGameLogRow {
  * One row of `sdv.nhl.nhl_player_landing({ parsed: true })` (returns schema `native/nhl_api_web/player_landing`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebPlayerLandingRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `logical`. */
+  /** Whether the team is active. Schema `logical`. */
   is_active?: boolean | null;
-  /** Schema `integer` (an id). */
+  /** Player's current team identifier. Schema `integer` (an id). */
   current_team_id?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the NHL team the player is currently rostered on (e.g., 'TOR', 'BOS'). Schema `character`. */
   current_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Serialized list of achievement or milestone badges displayed on the player's NHL api-web profile page. Schema `character`. */
   badges?: string | null;
-  /** Schema `character`. */
+  /** URL to the team logo image. Schema `character`. */
   team_logo?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number. Schema `integer`. */
   sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Player position. Schema `character`. */
   position?: string | null;
-  /** Schema `character`. */
+  /** URL to the player headshot image. Schema `character`. */
   headshot?: string | null;
-  /** Schema `character`. */
+  /** URL to the large hero/banner image of the player displayed at the top of their NHL api-web profile page. Schema `character`. */
   hero_image?: string | null;
-  /** Schema `integer`. */
+  /** Height in inches. Schema `integer`. */
   height_in_inches?: number | null;
-  /** Schema `integer`. */
+  /** Height in centimeters. Schema `integer`. */
   height_in_centimeters?: number | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight_in_pounds?: number | null;
-  /** Schema `integer`. */
+  /** Weight in kilograms. Schema `integer`. */
   weight_in_kilograms?: number | null;
-  /** Schema `character`. */
+  /** Player birth date. Schema `character`. */
   birth_date?: string | null;
-  /** Schema `character`. */
+  /** Player birth country. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `character`. */
+  /** Handedness (shoots/catches). Schema `character`. */
   shoots_catches?: string | null;
-  /** Schema `character`. */
+  /** URL slug for the player. Schema `character`. */
   player_slug?: string | null;
-  /** Schema `integer`. */
+  /** Flag (1/0) indicating whether the player is recognized among the NHL's Top 100 all-time greatest players. Schema `integer`. */
   in_top100_all_time?: number | null;
-  /** Schema `integer`. */
+  /** Flag (1/0) indicating whether the player has been inducted into the Hockey Hall of Fame. Schema `integer`. */
   in_hhof?: number | null;
-  /** Schema `character`. */
+  /** URL to the NHL shop page where merchandise for this player (e.g., jerseys) can be purchased. Schema `character`. */
   shop_link?: string | null;
-  /** Schema `character`. */
+  /** URL to the player's official Twitter/X account as listed on their NHL api-web profile. Schema `character`. */
   twitter_link?: string | null;
-  /** Schema `character`. */
+  /** URL to the NHL.tv or league streaming page where the player's games can be watched. Schema `character`. */
   watch_link?: string | null;
-  /** Schema `character`. */
+  /** Serialized array of stat lines for the player's five most recent NHL games, as returned by the player landing endpoint. Schema `character`. */
   last5_games?: string | null;
-  /** Schema `character`. */
+  /** Serialized array of per-season stat totals for the player across all regular seasons and playoffs in their NHL career. Schema `character`. */
   season_totals?: string | null;
-  /** Schema `character`. */
+  /** Serialized list of NHL awards and honors the player has received, as returned by the NHL api-web player landing endpoint. Schema `character`. */
   awards?: string | null;
-  /** Schema `character`. */
+  /** Serialized roster-position metadata for the player's current NHL team assignment, as returned by the player landing endpoint. Schema `character`. */
   current_team_roster?: string | null;
-  /** Schema `character`. */
+  /** Full English name of the player's current NHL team (e.g., 'Toronto Maple Leafs'), as returned by the player landing endpoint. Schema `character`. */
   full_team_name_default?: string | null;
-  /** Schema `character`. */
+  /** Full French-language name of the player's current NHL team, as returned by the player landing endpoint. Schema `character`. */
   full_team_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Team common name (default language). Schema `character`. */
   team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with preposition (default). Schema `character`. */
   team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Team place name with preposition (French). Schema `character`. */
   team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Birth city (default localization). Schema `character`. */
   birth_city_default?: string | null;
-  /** Schema `character`. */
+  /** Birth state/province (default localization). Schema `character`. */
   birth_state_province_default?: string | null;
-  /** Schema `integer`. */
+  /** Calendar year in which the player was selected in the NHL Entry Draft. Schema `integer`. */
   draft_details_year?: number | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the NHL team that drafted the player in the Entry Draft. Schema `character`. */
   draft_details_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Round number in which the player was selected during the NHL Entry Draft. Schema `integer`. */
   draft_details_round?: number | null;
-  /** Schema `integer`. */
+  /** Pick number within the player's draft round in the NHL Entry Draft. Schema `integer`. */
   draft_details_pick_in_round?: number | null;
-  /** Schema `integer`. */
+  /** Overall pick number at which the player was selected in the NHL Entry Draft. Schema `integer`. */
   draft_details_overall_pick?: number | null;
-  /** Schema `integer`. */
+  /** Eight-digit NHL season identifier (e.g., 20232024) indicating which season the featured stats on the player's profile correspond to. Schema `integer`. */
   featured_stats_season?: number | null;
-  /** Schema `integer`. */
+  /** Assists recorded by the player in the featured regular-season sub-season (typically the current or most recent season) on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_assists?: number | null;
-  /** Schema `integer`. */
+  /** Game-winning goals recorded by the player in the featured regular-season sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_game_winning_goals?: number | null;
-  /** Schema `integer`. */
+  /** Games played by the player in the featured regular-season sub-season (typically the current or most recent season) on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_games_played?: number | null;
-  /** Schema `integer`. */
+  /** Goals scored by the player in the featured regular-season sub-season (typically the current or most recent season) on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_goals?: number | null;
-  /** Schema `integer`. */
+  /** Overtime goals scored by the player in the featured regular-season sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_ot_goals?: number | null;
-  /** Schema `integer`. */
+  /** Penalty minutes accumulated by the player in the featured regular-season sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_pim?: number | null;
-  /** Schema `integer`. */
+  /** Plus/minus rating for the player in the featured regular-season sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_plus_minus?: number | null;
-  /** Schema `integer`. */
+  /** Points (goals + assists) recorded by the player in the featured regular-season sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_points?: number | null;
-  /** Schema `integer`. */
+  /** Power-play goals scored by the player in the featured regular-season sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_power_play_goals?: number | null;
-  /** Schema `integer`. */
+  /** Power-play points accumulated by the player in the featured regular-season sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_power_play_points?: number | null;
-  /** Schema `double`. */
+  /** Shooting percentage for the player in the featured regular-season sub-season on their NHL api-web profile, expressed as a decimal. Schema `double`. */
   featured_stats_regular_season_sub_season_shooting_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Shorthanded goals scored by the player in the featured regular-season sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_shorthanded_goals?: number | null;
-  /** Schema `integer`. */
+  /** Shorthanded points accumulated by the player in the featured regular-season sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_shorthanded_points?: number | null;
-  /** Schema `integer`. */
+  /** Shots on goal taken by the player in the featured regular-season sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_regular_season_sub_season_shots?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season assists highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_assists?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season game-winning goals highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_game_winning_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season games played highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_games_played?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season goals highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season overtime goals highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_ot_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season penalty minutes highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_pim?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season plus/minus rating highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_plus_minus?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season points highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_points?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season power-play goals highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_power_play_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season power-play points highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_power_play_points?: number | null;
-  /** Schema `double`. */
+  /** Career regular-season shooting percentage highlighted on the player's NHL api-web profile, expressed as a decimal. Schema `double`. */
   featured_stats_regular_season_career_shooting_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season shorthanded goals highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_shorthanded_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season shorthanded points highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_shorthanded_points?: number | null;
-  /** Schema `integer`. */
+  /** Career regular-season shots on goal highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_regular_season_career_shots?: number | null;
-  /** Schema `integer`. */
+  /** Assists recorded by the player in the featured playoff sub-season (typically the most recent postseason) on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_assists?: number | null;
-  /** Schema `integer`. */
+  /** Game-winning goals recorded by the player in the featured playoff sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_game_winning_goals?: number | null;
-  /** Schema `integer`. */
+  /** Games played by the player in the featured playoff sub-season (typically the most recent postseason) on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_games_played?: number | null;
-  /** Schema `integer`. */
+  /** Goals scored by the player in the featured playoff sub-season (typically the most recent postseason) on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_goals?: number | null;
-  /** Schema `integer`. */
+  /** Overtime goals scored by the player in the featured playoff sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_ot_goals?: number | null;
-  /** Schema `integer`. */
+  /** Penalty minutes accumulated by the player in the featured playoff sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_pim?: number | null;
-  /** Schema `integer`. */
+  /** Plus/minus rating for the player in the featured playoff sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_plus_minus?: number | null;
-  /** Schema `integer`. */
+  /** Points (goals + assists) recorded by the player in the featured playoff sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_points?: number | null;
-  /** Schema `integer`. */
+  /** Power-play goals scored by the player in the featured playoff sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_power_play_goals?: number | null;
-  /** Schema `integer`. */
+  /** Power-play points accumulated by the player in the featured playoff sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_power_play_points?: number | null;
-  /** Schema `double`. */
+  /** Shooting percentage for the player in the featured playoff sub-season on their NHL api-web profile, expressed as a decimal. Schema `double`. */
   featured_stats_playoffs_sub_season_shooting_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Shorthanded goals scored by the player in the featured playoff sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_shorthanded_goals?: number | null;
-  /** Schema `integer`. */
+  /** Shorthanded points accumulated by the player in the featured playoff sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_shorthanded_points?: number | null;
-  /** Schema `integer`. */
+  /** Shots on goal taken by the player in the featured playoff sub-season on their NHL api-web profile. Schema `integer`. */
   featured_stats_playoffs_sub_season_shots?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff assists highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_assists?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff game-winning goals highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_game_winning_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff games played highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_games_played?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff goals highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff overtime goals highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_ot_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff penalty minutes highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_pim?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff plus/minus rating highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_plus_minus?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff points highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_points?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff power-play goals highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_power_play_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff power-play points highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_power_play_points?: number | null;
-  /** Schema `double`. */
+  /** Career playoff shooting percentage highlighted on the player's NHL api-web profile, expressed as a decimal. Schema `double`. */
   featured_stats_playoffs_career_shooting_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff shorthanded goals highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_shorthanded_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff shorthanded points highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_shorthanded_points?: number | null;
-  /** Schema `integer`. */
+  /** Career playoff shots on goal highlighted on the player's NHL api-web profile for the featured season context. Schema `integer`. */
   featured_stats_playoffs_career_shots?: number | null;
-  /** Schema `integer`. */
+  /** Career cumulative assists recorded by the player across all NHL regular-season games. Schema `integer`. */
   career_totals_regular_season_assists?: number | null;
-  /** Schema `character`. */
+  /** Career average time on ice per game in the NHL regular season, expressed as an MM:SS string. Schema `character`. */
   career_totals_regular_season_avg_toi?: string | null;
-  /** Schema `double`. */
+  /** Career faceoff win percentage for the player across all NHL regular-season games. Schema `double`. */
   career_totals_regular_season_faceoff_winning_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Career total of game-winning goals the player has scored in NHL regular-season games. Schema `integer`. */
   career_totals_regular_season_game_winning_goals?: number | null;
-  /** Schema `integer`. */
+  /** Total number of NHL regular-season games the player has appeared in across their career. Schema `integer`. */
   career_totals_regular_season_games_played?: number | null;
-  /** Schema `integer`. */
+  /** Career total goals scored by the player in NHL regular-season games. Schema `integer`. */
   career_totals_regular_season_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career total overtime goals scored by the player in NHL regular-season games. Schema `integer`. */
   career_totals_regular_season_ot_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career total penalty minutes accumulated by the player in NHL regular-season games. Schema `integer`. */
   career_totals_regular_season_pim?: number | null;
-  /** Schema `integer`. */
+  /** Career plus/minus rating accumulated by the player across all NHL regular-season games. Schema `integer`. */
   career_totals_regular_season_plus_minus?: number | null;
-  /** Schema `integer`. */
+  /** Career total points (goals + assists) accumulated by the player in NHL regular-season games. Schema `integer`. */
   career_totals_regular_season_points?: number | null;
-  /** Schema `integer`. */
+  /** Career total power-play goals scored by the player in NHL regular-season games. Schema `integer`. */
   career_totals_regular_season_power_play_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career total power-play points (goals + assists on the power play) in NHL regular-season games. Schema `integer`. */
   career_totals_regular_season_power_play_points?: number | null;
-  /** Schema `double`. */
+  /** Career shooting percentage for the player in NHL regular-season games, expressed as a decimal. Schema `double`. */
   career_totals_regular_season_shooting_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Career total shorthanded goals scored by the player in NHL regular-season games. Schema `integer`. */
   career_totals_regular_season_shorthanded_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career total shorthanded points (goals + assists while shorthanded) in NHL regular-season games. Schema `integer`. */
   career_totals_regular_season_shorthanded_points?: number | null;
-  /** Schema `integer`. */
+  /** Career total shots on goal taken by the player in NHL regular-season games. Schema `integer`. */
   career_totals_regular_season_shots?: number | null;
-  /** Schema `integer`. */
+  /** Career cumulative assists recorded by the player across all NHL playoff appearances. Schema `integer`. */
   career_totals_playoffs_assists?: number | null;
-  /** Schema `character`. */
+  /** Career average time on ice per game in NHL playoff play, expressed as an MM:SS string. Schema `character`. */
   career_totals_playoffs_avg_toi?: string | null;
-  /** Schema `double`. */
+  /** Career faceoff win percentage for the player across all NHL playoff games. Schema `double`. */
   career_totals_playoffs_faceoff_winning_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Career total of game-winning goals the player has scored in NHL playoff games. Schema `integer`. */
   career_totals_playoffs_game_winning_goals?: number | null;
-  /** Schema `integer`. */
+  /** Total number of NHL playoff games the player has appeared in across their career. Schema `integer`. */
   career_totals_playoffs_games_played?: number | null;
-  /** Schema `integer`. */
+  /** Career total goals scored by the player in NHL playoff games. Schema `integer`. */
   career_totals_playoffs_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career total overtime goals scored by the player in NHL playoff games. Schema `integer`. */
   career_totals_playoffs_ot_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career total penalty minutes accumulated by the player in NHL playoff games. Schema `integer`. */
   career_totals_playoffs_pim?: number | null;
-  /** Schema `integer`. */
+  /** Career plus/minus rating accumulated by the player across all NHL playoff games. Schema `integer`. */
   career_totals_playoffs_plus_minus?: number | null;
-  /** Schema `integer`. */
+  /** Career total points (goals + assists) accumulated by the player in NHL playoff games. Schema `integer`. */
   career_totals_playoffs_points?: number | null;
-  /** Schema `integer`. */
+  /** Career total power-play goals scored by the player in NHL playoff games. Schema `integer`. */
   career_totals_playoffs_power_play_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career total power-play points (goals + assists on the power play) in NHL playoff games. Schema `integer`. */
   career_totals_playoffs_power_play_points?: number | null;
-  /** Schema `double`. */
+  /** Career shooting percentage for the player in NHL playoff games, expressed as a decimal. Schema `double`. */
   career_totals_playoffs_shooting_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Career total shorthanded goals scored by the player in NHL playoff games. Schema `integer`. */
   career_totals_playoffs_shorthanded_goals?: number | null;
-  /** Schema `integer`. */
+  /** Career total shorthanded points (goals + assists while shorthanded) in NHL playoff games. Schema `integer`. */
   career_totals_playoffs_shorthanded_points?: number | null;
-  /** Schema `integer`. */
+  /** Career total shots on goal taken by the player in NHL playoff games. Schema `integer`. */
   career_totals_playoffs_shots?: number | null;
 }
 
@@ -1030,31 +1030,31 @@ export interface NhlApiWebPlayerLandingRow {
  * One row of `sdv.nhl.nhl_player_spotlight({ parsed: true })` (returns schema `native/nhl_api_web/player_spotlight`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebPlayerSpotlightRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Schema `character`. */
+  /** URL slug for the player. Schema `character`. */
   player_slug?: string | null;
-  /** Schema `character`. */
+  /** Player position. Schema `character`. */
   position?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number. Schema `integer`. */
   sweater_number?: number | null;
-  /** Schema `integer` (an id). */
+  /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
-  /** Schema `character`. */
+  /** URL to the player headshot image. Schema `character`. */
   headshot?: string | null;
-  /** Schema `character`. */
+  /** Team tri-code abbreviation. Schema `character`. */
   team_tri_code?: string | null;
-  /** Schema `character`. */
+  /** URL to the team logo image. Schema `character`. */
   team_logo?: string | null;
-  /** Schema `integer` (an id). */
+  /** Sort order identifier for the spotlight. Schema `integer` (an id). */
   sort_id?: string | null;
-  /** Schema `character`. */
+  /** Player name (default localization). Schema `character`. */
   name_default?: string | null;
-  /** Schema `character`. */
+  /** Player name (Czech localization). Schema `character`. */
   name_cs?: string | null;
-  /** Schema `character`. */
+  /** Player name (Finnish localization). Schema `character`. */
   name_fi?: string | null;
-  /** Schema `character`. */
+  /** Player name (Slovak localization). Schema `character`. */
   name_sk?: string | null;
 }
 
@@ -1062,93 +1062,93 @@ export interface NhlApiWebPlayerSpotlightRow {
  * One row of `sdv.nhl.nhl_playoff_series({ parsed: true })` (returns schema `native/nhl_api_web/playoff_series`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebPlayoffSeriesRow {
-  /** Schema `integer`. */
+  /** Shootout round number. Schema `integer`. */
   round?: number | null;
-  /** Schema `character`. */
+  /** Single-letter label identifying this series within its playoff round (e.g., 'A', 'B'), as used by the NHL api-web. Schema `character`. */
   series_letter?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique NHL api-web identifier for the higher-seeded team in this playoff series. Schema `integer` (an id). */
   top_seed_team_id?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the higher-seeded team in this NHL playoff series (e.g., 'TOR'). Schema `character`. */
   top_seed_team_abbrev?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique NHL api-web identifier for the lower-seeded team in this playoff series. Schema `integer` (an id). */
   bottom_seed_team_id?: string | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation of the lower-seeded team in this NHL playoff series (e.g., 'BOS'). Schema `character`. */
   bottom_seed_team_abbrev?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer`. */
+  /** Season year (echoed from arg). Schema `integer`. */
   season?: number | null;
-  /** Schema `integer`. */
+  /** Game type the row belongs to. Schema `integer`. */
   game_type?: number | null;
-  /** Schema `integer`. */
+  /** Game number within the schedule. Schema `integer`. */
   game_number?: number | null;
-  /** Schema `logical`. */
+  /** If necessary. Schema `logical`. */
   if_necessary?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the game is at a neutral site. Schema `logical`. */
   neutral_site?: boolean | null;
-  /** Schema `character`. */
+  /** Scheduled start time in UTC. Schema `character`. */
   start_time_utc?: string | null;
-  /** Schema `character`. */
+  /** Eastern time UTC offset. Schema `character`. */
   eastern_utc_offset?: string | null;
-  /** Schema `character`. */
+  /** Venue UTC offset. Schema `character`. */
   venue_utc_offset?: string | null;
-  /** Schema `character`. */
+  /** Venue time zone. Schema `character`. */
   venue_timezone?: string | null;
-  /** Schema `character`. */
+  /** Game state (e.g., FINAL, LIVE). Schema `character`. */
   game_state?: string | null;
-  /** Schema `character`. */
+  /** Schedule state of the game. Schema `character`. */
   game_schedule_state?: string | null;
-  /** Schema `character`. */
+  /** Nested list of TV broadcast details. Schema `character`. */
   tv_broadcasts?: string | null;
-  /** Schema `character`. */
+  /** Link to the NHL game center page. Schema `character`. */
   game_center_link?: string | null;
-  /** Schema `character`. */
+  /** Venue name (default language). Schema `character`. */
   venue_default?: string | null;
-  /** Schema `integer` (an id). */
+  /** Away team identifier. Schema `integer` (an id). */
   away_team_id?: string | null;
-  /** Schema `character`. */
+  /** Away team common name (default language). Schema `character`. */
   away_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Away team place name (default language). Schema `character`. */
   away_team_place_name_default?: string | null;
-  /** Schema `character`. */
+  /** Away team place name with preposition (default). Schema `character`. */
   away_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Away team place name with preposition (French). Schema `character`. */
   away_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Away team abbreviation. Schema `character`. */
   away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Away team final score. Schema `integer`. */
   away_team_score?: number | null;
-  /** Schema `integer` (an id). */
+  /** Home team identifier. Schema `integer` (an id). */
   home_team_id?: string | null;
-  /** Schema `character`. */
+  /** Home team common name (default language). Schema `character`. */
   home_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Home team place name (default language). Schema `character`. */
   home_team_place_name_default?: string | null;
-  /** Schema `character`. */
+  /** Home team place name (French). Schema `character`. */
   home_team_place_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Home team place name with preposition (default). Schema `character`. */
   home_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Home team place name with preposition (French). Schema `character`. */
   home_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Home team abbreviation. Schema `character`. */
   home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Home team final score. Schema `integer`. */
   home_team_score?: number | null;
-  /** Schema `integer`. */
+  /** Period number. Schema `integer`. */
   period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type (e.g., REG, OT). Schema `character`. */
   period_descriptor_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods. Schema `integer`. */
   period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `integer`. */
+  /** Number of wins accumulated by the higher-seeded team in this NHL playoff series to date. Schema `integer`. */
   series_status_top_seed_wins?: number | null;
-  /** Schema `integer`. */
+  /** Number of wins accumulated by the lower-seeded team in this NHL playoff series to date. Schema `integer`. */
   series_status_bottom_seed_wins?: number | null;
-  /** Schema `character`. */
+  /** Period type in which the game ended. Schema `character`. */
   game_outcome_last_period_type?: string | null;
-  /** Schema `double`. */
+  /** Number of overtime periods played in the game that concluded this series or scheduled game, where applicable. Schema `double`. */
   game_outcome_ot_periods?: number | null;
-  /** Schema `character`. */
+  /** Away team place name (French). Schema `character`. */
   away_team_place_name_fr?: string | null;
 }
 
@@ -1156,47 +1156,47 @@ export interface NhlApiWebPlayoffSeriesRow {
  * One row of `sdv.nhl.nhl_roster({ parsed: true })` (returns schema `native/nhl_api_web/roster`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebRosterRow {
-  /** Schema `character`. */
+  /** Position group name (e.g. Centers). Schema `character`. */
   position_group?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `character`. */
+  /** URL to the player headshot image. Schema `character`. */
   headshot?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number. Schema `integer`. */
   sweater_number?: number | null;
-  /** Schema `character`. */
+  /** Player position code. Schema `character`. */
   position_code?: string | null;
-  /** Schema `character`. */
+  /** Handedness (shoots/catches). Schema `character`. */
   shoots_catches?: string | null;
-  /** Schema `integer`. */
+  /** Height in inches. Schema `integer`. */
   height_in_inches?: number | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight_in_pounds?: number | null;
-  /** Schema `integer`. */
+  /** Height in centimeters. Schema `integer`. */
   height_in_centimeters?: number | null;
-  /** Schema `integer`. */
+  /** Weight in kilograms. Schema `integer`. */
   weight_in_kilograms?: number | null;
-  /** Schema `character`. */
+  /** Player birth date. Schema `character`. */
   birth_date?: string | null;
-  /** Schema `character`. */
+  /** Player birth country. Schema `character`. */
   birth_country?: string | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Birth city (default localization). Schema `character`. */
   birth_city_default?: string | null;
-  /** Schema `character`. */
+  /** Birth state/province (default localization). Schema `character`. */
   birth_state_province_default?: string | null;
-  /** Schema `character`. */
+  /** Birth city (Czech localization). Schema `character`. */
   birth_city_cs?: string | null;
-  /** Schema `character`. */
+  /** Birth city (German localization). Schema `character`. */
   birth_city_de?: string | null;
-  /** Schema `character`. */
+  /** Birth city (Finnish localization). Schema `character`. */
   birth_city_fi?: string | null;
-  /** Schema `character`. */
+  /** Birth city (Slovak localization). Schema `character`. */
   birth_city_sk?: string | null;
-  /** Schema `character`. */
+  /** Birth city (Swedish localization). Schema `character`. */
   birth_city_sv?: string | null;
 }
 
@@ -1204,125 +1204,125 @@ export interface NhlApiWebRosterRow {
  * One row of `sdv.nhl.nhl_web_schedule({ parsed: true })` (returns schema `native/nhl_api_web/schedule`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebScheduleRow {
-  /** Schema `character`. */
+  /** Calendar date of the game in YYYY-MM-DD format as returned by the NHL api-web schedule endpoint. Schema `character`. */
   schedule_date?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer`. */
+  /** Season year (echoed from arg). Schema `integer`. */
   season?: number | null;
-  /** Schema `integer`. */
+  /** Game type the row belongs to. Schema `integer`. */
   game_type?: number | null;
-  /** Schema `logical`. */
+  /** Whether the game is at a neutral site. Schema `logical`. */
   neutral_site?: boolean | null;
-  /** Schema `character`. */
+  /** Scheduled start time in UTC. Schema `character`. */
   start_time_utc?: string | null;
-  /** Schema `character`. */
+  /** Eastern time UTC offset. Schema `character`. */
   eastern_utc_offset?: string | null;
-  /** Schema `character`. */
+  /** Venue UTC offset. Schema `character`. */
   venue_utc_offset?: string | null;
-  /** Schema `character`. */
+  /** Venue time zone. Schema `character`. */
   venue_timezone?: string | null;
-  /** Schema `character`. */
+  /** Game state (e.g., FINAL, LIVE). Schema `character`. */
   game_state?: string | null;
-  /** Schema `character`. */
+  /** Schedule state of the game. Schema `character`. */
   game_schedule_state?: string | null;
-  /** Schema `character`. */
+  /** Nested list of TV broadcast details. Schema `character`. */
   tv_broadcasts?: string | null;
-  /** Schema `character`. */
+  /** NHL api-web URL path to the dedicated page for the playoff series associated with this scheduled game. Schema `character`. */
   series_url?: string | null;
-  /** Schema `character`. */
+  /** Link to the three-minute recap. Schema `character`. */
   three_min_recap?: string | null;
-  /** Schema `character`. */
+  /** Link to the NHL game center page. Schema `character`. */
   game_center_link?: string | null;
-  /** Schema `character`. */
+  /** Venue name (default language). Schema `character`. */
   venue_default?: string | null;
-  /** Schema `integer` (an id). */
+  /** Away team identifier. Schema `integer` (an id). */
   away_team_id?: string | null;
-  /** Schema `character`. */
+  /** Away team common name (default language). Schema `character`. */
   away_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Away team place name (default language). Schema `character`. */
   away_team_place_name_default?: string | null;
-  /** Schema `character`. */
+  /** Away team place name with preposition (default). Schema `character`. */
   away_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Away team place name with preposition (French). Schema `character`. */
   away_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Away team abbreviation. Schema `character`. */
   away_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL to the away team logo. Schema `character`. */
   away_team_logo?: string | null;
-  /** Schema `character`. */
+  /** URL to the away team dark logo. Schema `character`. */
   away_team_dark_logo?: string | null;
-  /** Schema `logical`. */
+  /** Whether the away team is a split squad. Schema `logical`. */
   away_team_away_split_squad?: boolean | null;
-  /** Schema `integer`. */
+  /** Away team final score. Schema `integer`. */
   away_team_score?: number | null;
-  /** Schema `integer` (an id). */
+  /** Home team identifier. Schema `integer` (an id). */
   home_team_id?: string | null;
-  /** Schema `character`. */
+  /** Home team common name (default language). Schema `character`. */
   home_team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Home team place name (default language). Schema `character`. */
   home_team_place_name_default?: string | null;
-  /** Schema `character`. */
+  /** Home team place name (French). Schema `character`. */
   home_team_place_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Home team place name with preposition (default). Schema `character`. */
   home_team_place_name_with_preposition_default?: string | null;
-  /** Schema `character`. */
+  /** Home team place name with preposition (French). Schema `character`. */
   home_team_place_name_with_preposition_fr?: string | null;
-  /** Schema `character`. */
+  /** Home team abbreviation. Schema `character`. */
   home_team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL to the home team logo. Schema `character`. */
   home_team_logo?: string | null;
-  /** Schema `character`. */
+  /** URL to the home team dark logo. Schema `character`. */
   home_team_dark_logo?: string | null;
-  /** Schema `logical`. */
+  /** Whether the home team is a split squad. Schema `logical`. */
   home_team_home_split_squad?: boolean | null;
-  /** Schema `integer`. */
+  /** Home team final score. Schema `integer`. */
   home_team_score?: number | null;
-  /** Schema `integer`. */
+  /** Period number. Schema `integer`. */
   period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type (e.g., REG, OT). Schema `character`. */
   period_descriptor_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods. Schema `integer`. */
   period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `character`. */
+  /** Period type in which the game ended. Schema `character`. */
   game_outcome_last_period_type?: string | null;
-  /** Schema `integer` (an id). */
+  /** Winning goalie player identifier. Schema `integer` (an id). */
   winning_goalie_player_id?: string | null;
-  /** Schema `character`. */
+  /** Winning goalie first initial (default language). Schema `character`. */
   winning_goalie_first_initial_default?: string | null;
-  /** Schema `character`. */
+  /** Winning goalie last name (default language). Schema `character`. */
   winning_goalie_last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Winning goalie last name (Czech). Schema `character`. */
   winning_goalie_last_name_cs?: string | null;
-  /** Schema `character`. */
+  /** Winning goalie last name (Finnish). Schema `character`. */
   winning_goalie_last_name_fi?: string | null;
-  /** Schema `character`. */
+  /** Winning goalie last name (Slovak). Schema `character`. */
   winning_goalie_last_name_sk?: string | null;
-  /** Schema `integer` (an id). */
+  /** Winning goal scorer player identifier. Schema `integer` (an id). */
   winning_goal_scorer_player_id?: string | null;
-  /** Schema `character`. */
+  /** Winning goal scorer first initial (default). Schema `character`. */
   winning_goal_scorer_first_initial_default?: string | null;
-  /** Schema `character`. */
+  /** Winning goal scorer last name (default language). Schema `character`. */
   winning_goal_scorer_last_name_default?: string | null;
-  /** Schema `integer`. */
+  /** Playoff round number (1 through 4) for the series containing this scheduled game from the NHL api-web schedule endpoint. Schema `integer`. */
   series_status_round?: number | null;
-  /** Schema `character`. */
+  /** Short abbreviation identifying the specific playoff series slot within the bracket for this scheduled game from the NHL api-web schedule endpoint. Schema `character`. */
   series_status_series_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Human-readable display title for the playoff series containing this scheduled game (e.g., 'Eastern Conference Second Round'). Schema `character`. */
   series_status_series_title?: string | null;
-  /** Schema `character`. */
+  /** Single-letter label assigned to the playoff series in the bracket structure for this scheduled game from the NHL api-web schedule endpoint. Schema `character`. */
   series_status_series_letter?: string | null;
-  /** Schema `integer`. */
+  /** Number of additional wins needed by the series leader to clinch and advance at the time of this scheduled game from the NHL api-web schedule endpoint. Schema `integer`. */
   series_status_needed_to_win?: number | null;
-  /** Schema `character`. */
+  /** Three-letter team abbreviation for the higher-seeded team in the playoff series associated with this scheduled game. Schema `character`. */
   series_status_top_seed_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Number of wins accumulated by the higher-seeded team in the playoff series as of this scheduled game from the NHL api-web schedule endpoint. Schema `integer`. */
   series_status_top_seed_wins?: number | null;
-  /** Schema `character`. */
+  /** Three-letter team abbreviation for the lower-seeded team in the playoff series associated with this scheduled game. Schema `character`. */
   series_status_bottom_seed_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Number of wins accumulated by the lower-seeded team in the playoff series as of this scheduled game from the NHL api-web schedule endpoint. Schema `integer`. */
   series_status_bottom_seed_wins?: number | null;
-  /** Schema `integer`. */
+  /** Sequential game number within the playoff series for this scheduled game (e.g., 1 through 7 for a best-of-seven) from the NHL api-web schedule endpoint. Schema `integer`. */
   series_status_game_number_of_series?: number | null;
 }
 
@@ -1330,101 +1330,101 @@ export interface NhlApiWebScheduleRow {
  * One row of `sdv.nhl.nhl_score({ parsed: true })` (returns schema `native/nhl_api_web/score`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebScoreRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer`. */
+  /** Season year (echoed from arg). Schema `integer`. */
   season?: number | null;
-  /** Schema `integer`. */
+  /** Game type the row belongs to. Schema `integer`. */
   game_type?: number | null;
-  /** Schema `character`. */
+  /** Game date. Schema `character`. */
   game_date?: string | null;
-  /** Schema `character`. */
+  /** Scheduled start time in UTC. Schema `character`. */
   start_time_utc?: string | null;
-  /** Schema `character`. */
+  /** Eastern time UTC offset. Schema `character`. */
   eastern_utc_offset?: string | null;
-  /** Schema `character`. */
+  /** Venue UTC offset. Schema `character`. */
   venue_utc_offset?: string | null;
-  /** Schema `character`. */
+  /** Nested list of TV broadcast details. Schema `character`. */
   tv_broadcasts?: string | null;
-  /** Schema `character`. */
+  /** Game state (e.g., FINAL, LIVE). Schema `character`. */
   game_state?: string | null;
-  /** Schema `character`. */
+  /** Schedule state of the game. Schema `character`. */
   game_schedule_state?: string | null;
-  /** Schema `character`. */
+  /** Link to the NHL game center page. Schema `character`. */
   game_center_link?: string | null;
-  /** Schema `character`. */
+  /** URL path to the NHL api-web series landing page providing full details about this playoff series matchup. Schema `character`. */
   series_url?: string | null;
-  /** Schema `character`. */
+  /** Link to the three-minute recap. Schema `character`. */
   three_min_recap?: string | null;
-  /** Schema `logical`. */
+  /** Whether the game is at a neutral site. Schema `logical`. */
   neutral_site?: boolean | null;
-  /** Schema `character`. */
+  /** Venue time zone. Schema `character`. */
   venue_timezone?: string | null;
-  /** Schema `integer`. */
+  /** Period number. Schema `integer`. */
   period?: number | null;
-  /** Schema `character`. */
+  /** Goals scored. Schema `character`. */
   goals?: string | null;
-  /** Schema `character`. */
+  /** Venue name (default language). Schema `character`. */
   venue_default?: string | null;
-  /** Schema `integer` (an id). */
+  /** Away team identifier. Schema `integer` (an id). */
   away_team_id?: string | null;
-  /** Schema `character`. */
+  /** Default-language full team name for the away team in this game, as provided by the NHL api-web scoreboard endpoint. Schema `character`. */
   away_team_name_default?: string | null;
-  /** Schema `character`. */
+  /** Away team abbreviation. Schema `character`. */
   away_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Away team final score. Schema `integer`. */
   away_team_score?: number | null;
-  /** Schema `integer`. */
+  /** Away team shots on goal. Schema `integer`. */
   away_team_sog?: number | null;
-  /** Schema `character`. */
+  /** URL to the away team logo. Schema `character`. */
   away_team_logo?: string | null;
-  /** Schema `integer` (an id). */
+  /** Home team identifier. Schema `integer` (an id). */
   home_team_id?: string | null;
-  /** Schema `character`. */
+  /** Default-language full team name for the home team in this game, as provided by the NHL api-web scoreboard endpoint. Schema `character`. */
   home_team_name_default?: string | null;
-  /** Schema `character`. */
+  /** Home team abbreviation. Schema `character`. */
   home_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Home team final score. Schema `integer`. */
   home_team_score?: number | null;
-  /** Schema `integer`. */
+  /** Home team shots on goal. Schema `integer`. */
   home_team_sog?: number | null;
-  /** Schema `character`. */
+  /** URL to the home team logo. Schema `character`. */
   home_team_logo?: string | null;
-  /** Schema `integer`. */
+  /** Numeric identifier for the playoff round (e.g., 1 = First Round, 2 = Second Round) in which this game is being played. Schema `integer`. */
   series_status_round?: number | null;
-  /** Schema `character`. */
+  /** Short abbreviation code identifying the specific playoff series matchup, as provided by the NHL api-web score endpoint. Schema `character`. */
   series_status_series_abbrev?: string | null;
-  /** Schema `character`. */
+  /** Human-readable title describing the playoff series matchup (e.g., team abbreviations and round name), as returned by the NHL api-web score endpoint. Schema `character`. */
   series_status_series_title?: string | null;
-  /** Schema `character`. */
+  /** Single-letter label (e.g., 'A', 'B') assigned to the playoff series by the NHL api-web score endpoint to distinguish simultaneous matchups within a round. Schema `character`. */
   series_status_series_letter?: string | null;
-  /** Schema `integer`. */
+  /** Number of additional wins required by the series leader to clinch the playoff round at the time of this game. Schema `integer`. */
   series_status_needed_to_win?: number | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the higher-seeded team in this playoff series, as reported by the NHL api-web score endpoint. Schema `character`. */
   series_status_top_seed_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Number of wins accumulated by the higher-seeded team in the current playoff series as of this game. Schema `integer`. */
   series_status_top_seed_wins?: number | null;
-  /** Schema `character`. */
+  /** Three-letter abbreviation for the lower-seeded team in this playoff series, as reported by the NHL api-web score endpoint. Schema `character`. */
   series_status_bottom_seed_team_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Number of wins accumulated by the lower-seeded team in the current playoff series as of this game. Schema `integer`. */
   series_status_bottom_seed_wins?: number | null;
-  /** Schema `integer`. */
+  /** Sequential game number within the playoff series (e.g., 1 through 7 for a best-of-seven round). Schema `integer`. */
   series_status_game_number_of_series?: number | null;
-  /** Schema `character`. */
+  /** Remaining time in the current period in MM:SS format, as provided by the NHL api-web score endpoint. Schema `character`. */
   clock_time_remaining?: string | null;
-  /** Schema `integer`. */
+  /** Integer count of seconds remaining in the current period as reported by the NHL api-web score endpoint. Schema `integer`. */
   clock_seconds_remaining?: number | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the game clock is actively running at the time the NHL api-web score payload was captured. Schema `logical`. */
   clock_running?: boolean | null;
-  /** Schema `logical`. */
+  /** Boolean flag indicating whether the game clock is paused during an intermission at the time the NHL api-web score payload was captured. Schema `logical`. */
   clock_in_intermission?: boolean | null;
-  /** Schema `integer`. */
+  /** Period number. Schema `integer`. */
   period_descriptor_number?: number | null;
-  /** Schema `character`. */
+  /** Period type (e.g., REG, OT). Schema `character`. */
   period_descriptor_period_type?: string | null;
-  /** Schema `integer`. */
+  /** Maximum number of regulation periods. Schema `integer`. */
   period_descriptor_max_regulation_periods?: number | null;
-  /** Schema `character`. */
+  /** Period type in which the game ended. Schema `character`. */
   game_outcome_last_period_type?: string | null;
 }
 
@@ -1432,45 +1432,45 @@ export interface NhlApiWebScoreRow {
  * One row of `sdv.nhl.nhl_skater_leaders({ parsed: true })` (returns schema `native/nhl_api_web/skater_leaders`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebSkaterLeadersRow {
-  /** Schema `character`. */
+  /** Stat leader category. Schema `character`. */
   category?: string | null;
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number. Schema `integer`. */
   sweater_number?: number | null;
-  /** Schema `character`. */
+  /** URL to the player headshot image. Schema `character`. */
   headshot?: string | null;
-  /** Schema `character`. */
+  /** Team abbreviation. Schema `character`. */
   team_abbrev?: string | null;
-  /** Schema `character`. */
+  /** URL to the team logo image. Schema `character`. */
   team_logo?: string | null;
-  /** Schema `character`. */
+  /** Player position. Schema `character`. */
   position?: string | null;
-  /** Schema `integer`. */
+  /** Leader stat numeric value. Schema `integer`. */
   value?: number | null;
-  /** Schema `character`. */
+  /** Player first name (default language). Schema `character`. */
   first_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player first name (Czech localization). Schema `character`. */
   first_name_cs?: string | null;
-  /** Schema `character`. */
+  /** Player first name (German). Schema `character`. */
   first_name_de?: string | null;
-  /** Schema `character`. */
+  /** Player first name (Spanish). Schema `character`. */
   first_name_es?: string | null;
-  /** Schema `character`. */
+  /** Player first name (Finnish). Schema `character`. */
   first_name_fi?: string | null;
-  /** Schema `character`. */
+  /** Player first name (Slovak localization). Schema `character`. */
   first_name_sk?: string | null;
-  /** Schema `character`. */
+  /** Player first name (Swedish). Schema `character`. */
   first_name_sv?: string | null;
-  /** Schema `character`. */
+  /** Player last name (default language). Schema `character`. */
   last_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team name (default locale). Schema `character`. */
   team_name_default?: string | null;
-  /** Schema `character`. */
+  /** Player last name (Czech localization). Schema `character`. */
   last_name_cs?: string | null;
-  /** Schema `character`. */
+  /** Player last name (Finnish localization). Schema `character`. */
   last_name_fi?: string | null;
-  /** Schema `character`. */
+  /** Player last name (Slovak localization). Schema `character`. */
   last_name_sk?: string | null;
 }
 
@@ -1478,173 +1478,173 @@ export interface NhlApiWebSkaterLeadersRow {
  * One row of `sdv.nhl.nhl_standings({ parsed: true })` (returns schema `native/nhl_api_web/standings`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebStandingsRow {
-  /** Schema `character`. */
+  /** Playoff clinch indicator (e.g. 'x' clinched playoff, 'e' eliminated). Schema `character`. */
   clinch_indicator?: string | null;
-  /** Schema `character`. */
+  /** Conference abbreviation. Schema `character`. */
   conference_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Team's rank within its conference based solely on home-game results in the NHL api-web standings. Schema `integer`. */
   conference_home_sequence?: number | null;
-  /** Schema `integer`. */
+  /** Team's rank within its conference based on performance in the last 10 games played, as reported by the NHL api-web standings endpoint. Schema `integer`. */
   conference_l10_sequence?: number | null;
-  /** Schema `character`. */
+  /** Conference name. Schema `character`. */
   conference_name?: string | null;
-  /** Schema `integer`. */
+  /** Team's rank within its conference based solely on road-game results in the NHL api-web standings. Schema `integer`. */
   conference_road_sequence?: number | null;
-  /** Schema `integer`. */
+  /** Team's seeding position within the conference. Schema `integer`. */
   conference_sequence?: number | null;
-  /** Schema `character`. */
+  /** Game date (ISO 8601 datetime string). Schema `character`. */
   date?: string | null;
-  /** Schema `character`. */
+  /** Division abbreviation. Schema `character`. */
   division_abbrev?: string | null;
-  /** Schema `integer`. */
+  /** Team's rank within its division based solely on home-game results in the NHL api-web standings. Schema `integer`. */
   division_home_sequence?: number | null;
-  /** Schema `integer`. */
+  /** Team's rank within its division based on performance in the last 10 games played, as reported by the NHL api-web standings endpoint. Schema `integer`. */
   division_l10_sequence?: number | null;
-  /** Schema `character`. */
+  /** Division name. Schema `character`. */
   division_name?: string | null;
-  /** Schema `integer`. */
+  /** Team's rank within its division based solely on road-game results in the NHL api-web standings. Schema `integer`. */
   division_road_sequence?: number | null;
-  /** Schema `integer`. */
+  /** Team's seeding position within the division. Schema `integer`. */
   division_sequence?: number | null;
-  /** Schema `integer` (an id). */
+  /** Game type identifier (regular/playoffs). Schema `integer` (an id). */
   game_type_id?: string | null;
-  /** Schema `integer`. */
+  /** Matches played. Schema `integer`. */
   games_played?: number | null;
-  /** Schema `integer`. */
+  /** Goal differential. Schema `integer`. */
   goal_differential?: number | null;
-  /** Schema `double`. */
+  /** Team's goal differential normalized to a per-game (or percentage) basis, as published in the NHL standings feed. Schema `double`. */
   goal_differential_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Total number of goals allowed by the team across all games played in the current standings snapshot. Schema `integer`. */
   goal_against?: number | null;
-  /** Schema `integer`. */
+  /** Total number of goals scored by the team across all games played in the current standings snapshot. Schema `integer`. */
   goal_for?: number | null;
-  /** Schema `double`. */
+  /** Team's share of total goals scored in all games involving this team, calculated as goals-for divided by (goals-for + goals-against). Schema `double`. */
   goals_for_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Number of home games the team has completed in the current season as of this standings snapshot. Schema `integer`. */
   home_games_played?: number | null;
-  /** Schema `integer`. */
+  /** Net goal differential (goals-for minus goals-against) accumulated across all home games played in the current season. Schema `integer`. */
   home_goal_differential?: number | null;
-  /** Schema `integer`. */
+  /** Total number of goals allowed by the team in home games during the current season. Schema `integer`. */
   home_goals_against?: number | null;
-  /** Schema `integer`. */
+  /** Total number of goals scored by the team in home games during the current season. Schema `integer`. */
   home_goals_for?: number | null;
-  /** Schema `integer`. */
+  /** Losses at home. Schema `integer`. */
   home_losses?: number | null;
-  /** Schema `integer`. */
+  /** Home overtime losses. Schema `integer`. */
   home_ot_losses?: number | null;
-  /** Schema `integer`. */
+  /** Home team total points scored in the game so far. Schema `integer`. */
   home_points?: number | null;
-  /** Schema `integer`. */
+  /** Number of home wins achieved in regulation or overtime (excluding shootout decisions) in the current season. Schema `integer`. */
   home_regulation_plus_ot_wins?: number | null;
-  /** Schema `integer`. */
+  /** Number of home wins achieved in regulation time (within 60 minutes) in the current season. Schema `integer`. */
   home_regulation_wins?: number | null;
-  /** Schema `integer`. */
+  /** Ties at home. Schema `integer`. */
   home_ties?: number | null;
-  /** Schema `integer`. */
+  /** Wins at home. Schema `integer`. */
   home_wins?: number | null;
-  /** Schema `integer`. */
+  /** Number of games included in the team's last-10-games performance window (typically 10, may be lower early in the season). Schema `integer`. */
   l10_games_played?: number | null;
-  /** Schema `integer`. */
+  /** Net goal differential (goals-for minus goals-against) across the team's most recent 10 games. Schema `integer`. */
   l10_goal_differential?: number | null;
-  /** Schema `integer`. */
+  /** Total goals allowed by the team across its most recent 10 games. Schema `integer`. */
   l10_goals_against?: number | null;
-  /** Schema `integer`. */
+  /** Total goals scored by the team across its most recent 10 games. Schema `integer`. */
   l10_goals_for?: number | null;
-  /** Schema `integer`. */
+  /** Losses in the last ten games. Schema `integer`. */
   l10_losses?: number | null;
-  /** Schema `integer`. */
+  /** Overtime losses in the last ten games. Schema `integer`. */
   l10_ot_losses?: number | null;
-  /** Schema `integer`. */
+  /** Total standings points earned by the team across its most recent 10 games. Schema `integer`. */
   l10_points?: number | null;
-  /** Schema `integer`. */
+  /** Number of wins in regulation or overtime (excluding shootouts) within the team's most recent 10 games. Schema `integer`. */
   l10_regulation_plus_ot_wins?: number | null;
-  /** Schema `integer`. */
+  /** Number of regulation-time wins within the team's most recent 10 games. Schema `integer`. */
   l10_regulation_wins?: number | null;
-  /** Schema `integer`. */
+  /** Number of tied results recorded within the team's most recent 10 games (applicable to seasons using tie rules). Schema `integer`. */
   l10_ties?: number | null;
-  /** Schema `integer`. */
+  /** Wins in the last ten games. Schema `integer`. */
   l10_wins?: number | null;
-  /** Schema `integer`. */
+  /** Team's rank league-wide based solely on home-game results in the NHL api-web standings. Schema `integer`. */
   league_home_sequence?: number | null;
-  /** Schema `integer`. */
+  /** Team's rank league-wide based on performance in the last 10 games played, as reported by the NHL api-web standings endpoint. Schema `integer`. */
   league_l10_sequence?: number | null;
-  /** Schema `integer`. */
+  /** Team's rank league-wide based solely on road-game results in the NHL api-web standings. Schema `integer`. */
   league_road_sequence?: number | null;
-  /** Schema `integer`. */
+  /** Team's seeding position within the league. Schema `integer`. */
   league_sequence?: number | null;
-  /** Schema `integer`. */
+  /** Number of matches the team has lost. Schema `integer`. */
   losses?: number | null;
-  /** Schema `integer`. */
+  /** Overtime losses. Schema `integer`. */
   ot_losses?: number | null;
-  /** Schema `double`. */
+  /** Points percentage. Schema `double`. */
   point_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Competition points. Schema `integer`. */
   points?: number | null;
-  /** Schema `double`. */
+  /** Fraction of games won in regulation or overtime (excluding shootout decisions), used as a tiebreaker metric in NHL standings. Schema `double`. */
   regulation_plus_ot_win_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Wins in regulation plus overtime. Schema `integer`. */
   regulation_plus_ot_wins?: number | null;
-  /** Schema `double`. */
+  /** Fraction of games won in regulation time only, used as a secondary tiebreaker in NHL standings. Schema `double`. */
   regulation_win_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Wins in regulation. Schema `integer`. */
   regulation_wins?: number | null;
-  /** Schema `integer`. */
+  /** Number of road games the team has completed in the current season as of this standings snapshot. Schema `integer`. */
   road_games_played?: number | null;
-  /** Schema `integer`. */
+  /** Net goal differential (goals-for minus goals-against) accumulated across all road games played in the current season. Schema `integer`. */
   road_goal_differential?: number | null;
-  /** Schema `integer`. */
+  /** Total number of goals allowed by the team in road games during the current season. Schema `integer`. */
   road_goals_against?: number | null;
-  /** Schema `integer`. */
+  /** Total number of goals scored by the team in road games during the current season. Schema `integer`. */
   road_goals_for?: number | null;
-  /** Schema `integer`. */
+  /** Losses on the road. Schema `integer`. */
   road_losses?: number | null;
-  /** Schema `integer`. */
+  /** Road overtime losses. Schema `integer`. */
   road_ot_losses?: number | null;
-  /** Schema `integer`. */
+  /** Total standings points earned by the team in road games during the current season. Schema `integer`. */
   road_points?: number | null;
-  /** Schema `integer`. */
+  /** Number of road wins achieved in regulation or overtime (excluding shootout decisions) in the current season. Schema `integer`. */
   road_regulation_plus_ot_wins?: number | null;
-  /** Schema `integer`. */
+  /** Number of road wins achieved in regulation time (within 60 minutes) in the current season. Schema `integer`. */
   road_regulation_wins?: number | null;
-  /** Schema `integer`. */
+  /** Ties on the road. Schema `integer`. */
   road_ties?: number | null;
-  /** Schema `integer`. */
+  /** Wins on the road. Schema `integer`. */
   road_wins?: number | null;
-  /** Schema `integer` (an id). */
+  /** Season identifier. Schema `integer` (an id). */
   season_id?: string | null;
-  /** Schema `integer`. */
+  /** Shootout losses. Schema `integer`. */
   shootout_losses?: number | null;
-  /** Schema `integer`. */
+  /** Shootout wins. Schema `integer`. */
   shootout_wins?: number | null;
-  /** Schema `character`. */
+  /** Current streak code (W/L/OT). Schema `character`. */
   streak_code?: string | null;
-  /** Schema `integer`. */
+  /** Length of the current streak. Schema `integer`. */
   streak_count?: number | null;
-  /** Schema `character`. */
+  /** URL to the team logo image. Schema `character`. */
   team_logo?: string | null;
-  /** Schema `integer`. */
+  /** Number of matches the team has drawn. Schema `integer`. */
   ties?: number | null;
-  /** Schema `integer`. */
+  /** Team's position in the NHL waiver-claim priority order for the current season, determined by reverse standings order. Schema `integer`. */
   waivers_sequence?: number | null;
-  /** Schema `integer`. */
+  /** Team's wild card seeding position. Schema `integer`. */
   wildcard_sequence?: number | null;
-  /** Schema `double`. */
+  /** Team's overall win percentage (wins divided by games played), as reported by the NHL api-web standings endpoint. Schema `double`. */
   win_pctg?: number | null;
-  /** Schema `integer`. */
+  /** Number of matches the team has won. Schema `integer`. */
   wins?: number | null;
-  /** Schema `character`. */
+  /** Default-language city or place name associated with the team's market (e.g., "Toronto"), as returned by the NHL api-web standings endpoint. Schema `character`. */
   place_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team name (default locale). Schema `character`. */
   team_name_default?: string | null;
-  /** Schema `character`. */
+  /** Team name (French locale). Schema `character`. */
   team_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Team common name (default language). Schema `character`. */
   team_common_name_default?: string | null;
-  /** Schema `character`. */
+  /** Default three-letter abbreviation for the team (e.g., "TOR"), as provided by the NHL api-web standings endpoint. Schema `character`. */
   team_abbrev_default?: string | null;
-  /** Schema `character`. */
+  /** French-language city or place name associated with the team's market, as returned by the NHL api-web standings endpoint. Schema `character`. */
   place_name_fr?: string | null;
-  /** Schema `character`. */
+  /** Team common name (French localization). Schema `character`. */
   team_common_name_fr?: string | null;
 }
 
@@ -1652,24 +1652,24 @@ export interface NhlApiWebStandingsRow {
  * One row of `sdv.nhl.nhl_standings_season({ parsed: true })` (returns schema `native/nhl_api_web/standings_season`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebStandingsSeasonRow {
-  /** Schema `integer` (an id). */
+  /** Unique player identifier. Schema `integer` (an id). */
   id?: string | null;
-  /** Schema `logical`. */
+  /** Whether conferences were in use that season. Schema `logical`. */
   conferences_in_use?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether divisions were in use that season. Schema `logical`. */
   divisions_in_use?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether a point for overtime losses was in use. Schema `logical`. */
   point_for_o_tloss_in_use?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether regulation wins were tracked. Schema `logical`. */
   regulation_wins_in_use?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the regulation/overtime/shootout format was in use. Schema `logical`. */
   row_in_use?: boolean | null;
-  /** Schema `character`. */
+  /** End date of the standings period. Schema `character`. */
   standings_end?: string | null;
-  /** Schema `character`. */
+  /** Start date of the standings period. Schema `character`. */
   standings_start?: string | null;
-  /** Schema `logical`. */
+  /** Whether ties were in use that season. Schema `logical`. */
   ties_in_use?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the wild-card playoff format was in use this season. Schema `logical`. */
   wildcard_in_use?: boolean | null;
 }

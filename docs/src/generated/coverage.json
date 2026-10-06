@@ -108,5 +108,51 @@
       "ns": "yahoo",
       "count": 109
     }
-  ]
+  ],
+  "utilities": {
+    "modules": 20,
+    "exports": 208,
+    "categories": {
+      "parsers": {
+        "modules": 1,
+        "exports": 26
+      },
+      "analytics": {
+        "modules": 2,
+        "exports": 26
+      },
+      "odds": {
+        "modules": 1,
+        "exports": 13
+      },
+      "models": {
+        "modules": 1,
+        "exports": 13
+      },
+      "producers": {
+        "modules": 2,
+        "exports": 29
+      },
+      "discovery": {
+        "modules": 1,
+        "exports": 9
+      },
+      "transforms": {
+        "modules": 2,
+        "exports": 12
+      },
+      "http-core": {
+        "modules": 8,
+        "exports": 62
+      },
+      "errors": {
+        "modules": 1,
+        "exports": 8
+      },
+      "config": {
+        "modules": 1,
+        "exports": 10
+      }
+    }
+  }
 }

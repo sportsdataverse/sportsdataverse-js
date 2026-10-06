@@ -140,10 +140,11 @@ const ALIAS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/alias`
  *
- * @param params.alias - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.alias - `number | string` — the `alias` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooAlias({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooAlias: Wrapper<Row[], YahooAliasParams> = (params: WrapperParams = {}) => callFlat(ALIAS_DEF, params);
 /** snake_case alias of {@link yahooAlias} (py/R parity). */
@@ -172,10 +173,11 @@ const ARTICLE_LIST_CARD_PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/articleListCardPlayers`
  *
- * @param params.player_ids - query parameter (`playerIds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_ids - `number | string` — the `playerIds` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooArticleListCardPlayers({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooArticleListCardPlayers: Wrapper<Row[], YahooArticleListCardPlayersParams> = (params: WrapperParams = {}) => callFlat(ARTICLE_LIST_CARD_PLAYERS_DEF, params);
 /** snake_case alias of {@link yahooArticleListCardPlayers} (py/R parity). */
@@ -204,10 +206,11 @@ const ARTICLE_LIST_CARD_TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/articleListCardTeams`
  *
- * @param params.team_ids - query parameter (`teamIds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_ids - `number | string` — the `teamIds` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooArticleListCardTeams({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooArticleListCardTeams: Wrapper<Row[], YahooArticleListCardTeamsParams> = (params: WrapperParams = {}) => callFlat(ARTICLE_LIST_CARD_TEAMS_DEF, params);
 /** snake_case alias of {@link yahooArticleListCardTeams} (py/R parity). */
@@ -236,10 +239,11 @@ const BASIC_PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/basicPlayers`
  *
- * @param params.players - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.players - `number | string` — the `players` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooBasicPlayers({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooBasicPlayers: Wrapper<Row[], YahooBasicPlayersParams> = (params: WrapperParams = {}) => callFlat(BASIC_PLAYERS_DEF, params);
 /** snake_case alias of {@link yahooBasicPlayers} (py/R parity). */
@@ -268,10 +272,11 @@ const BETTING_DISCLAIMER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/bettingDisclaimer`
  *
- * @param params.betting_disclaimer_id - query parameter (`bettingDisclaimerId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.betting_disclaimer_id - `number | string` — the `bettingDisclaimerId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooBettingDisclaimer({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooBettingDisclaimer: Wrapper<Row[], YahooBettingDisclaimerParams> = (params: WrapperParams = {}) => callFlat(BETTING_DISCLAIMER_DEF, params);
 /** snake_case alias of {@link yahooBettingDisclaimer} (py/R parity). */
@@ -308,12 +313,13 @@ const COMBAT_EVENT_FIGHTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/combatEventFights`
  *
- * @param params.event_group_id - query parameter (`eventGroupId`).
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.event_group_id - `number | string` — the `eventGroupId` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooCombatEventFights({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooCombatEventFights: Wrapper<Row[], YahooCombatEventFightsParams> = (params: WrapperParams = {}) => callFlat(COMBAT_EVENT_FIGHTS_DEF, params);
 /** snake_case alias of {@link yahooCombatEventFights} (py/R parity). */
@@ -346,11 +352,12 @@ const COMBAT_SCHEDULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/combatSchedule`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooCombatSchedule({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooCombatSchedule: Wrapper<Row[], YahooCombatScheduleParams> = (params: WrapperParams = {}) => callFlat(COMBAT_SCHEDULE_DEF, params);
 /** snake_case alias of {@link yahooCombatSchedule} (py/R parity). */
@@ -387,12 +394,13 @@ const COMMON_PILLS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/common/pills`
  *
- * @param params.add_team_logos - query parameter (`addTeamLogos`).
- * @param params.date - query parameter.
- * @param params.team_ids - query parameter (`teamIds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.add_team_logos - `number | string` — the `addTeamLogos` query parameter.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.team_ids - `number | string` — the `teamIds` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooCommonPills({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooCommonPills: Wrapper<Row[], YahooCommonPillsParams> = (params: WrapperParams = {}) => callFlat(COMMON_PILLS_DEF, params);
 /** snake_case alias of {@link yahooCommonPills} (py/R parity). */
@@ -441,15 +449,16 @@ const CONSENSUS_RANKINGS_PHP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/consensus-rankings.php`
  *
- * @param params.sport - query parameter.
- * @param params.position - query parameter.
- * @param params.filters - query parameter.
- * @param params.experts - query parameter.
- * @param params.scoring - query parameter.
- * @param params.type - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — the `sport` query parameter.
+ * @param params.position - `number | string` — the `position` query parameter.
+ * @param params.filters - `number | string` — the `filters` query parameter.
+ * @param params.experts - `number | string` — the `experts` query parameter.
+ * @param params.scoring - `number | string` — the `scoring` query parameter.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooConsensusRankingsPhp({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooConsensusRankingsPhp: Wrapper<Row[], YahooConsensusRankingsPhpParams> = (params: WrapperParams = {}) => callFlat(CONSENSUS_RANKINGS_PHP_DEF, params);
 /** snake_case alias of {@link yahooConsensusRankingsPhp} (py/R parity). */
@@ -482,11 +491,12 @@ const DRAFT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/draft`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooDraft({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooDraft: Wrapper<Row[], YahooDraftParams> = (params: WrapperParams = {}) => callFlat(DRAFT_DEF, params);
 /** snake_case alias of {@link yahooDraft} (py/R parity). */
@@ -527,13 +537,14 @@ const DRAFT_PROSPECTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/draftProspects`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.image_height - query parameter (`imageHeight`).
- * @param params.image_width - query parameter (`imageWidth`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.image_height - `number | string` — the `imageHeight` query parameter.
+ * @param params.image_width - `number | string` — the `imageWidth` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooDraftProspects({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooDraftProspects: Wrapper<Row[], YahooDraftProspectsParams> = (params: WrapperParams = {}) => callFlat(DRAFT_PROSPECTS_DEF, params);
 /** snake_case alias of {@link yahooDraftProspects} (py/R parity). */
@@ -566,11 +577,12 @@ const DRIVER_RESULTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/driverResults`
  *
- * @param params.player_id - query parameter (`playerId`).
- * @param params.season - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `playerId` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooDriverResults({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooDriverResults: Wrapper<Row[], YahooDriverResultsParams> = (params: WrapperParams = {}) => callFlat(DRIVER_RESULTS_DEF, params);
 /** snake_case alias of {@link yahooDriverResults} (py/R parity). */
@@ -599,10 +611,11 @@ const DRIVER_SPLITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/driverSplits`
  *
- * @param params.player_id - query parameter (`playerId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `playerId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooDriverSplits({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooDriverSplits: Wrapper<Row[], YahooDriverSplitsParams> = (params: WrapperParams = {}) => callFlat(DRIVER_SPLITS_DEF, params);
 /** snake_case alias of {@link yahooDriverSplits} (py/R parity). */
@@ -639,12 +652,13 @@ const EDITORIAL_BOXSCORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-secure.sports.yahoo.com/v1/editorial/s/boxscore/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.v - query parameter.
- * @param params.polling - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `{game_id}` path segment.
+ * @param params.v - `number | string` — the `v` query parameter.
+ * @param params.polling - `number | string` — the `polling` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooEditorialBoxscore({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooEditorialBoxscore: Wrapper<Row[], YahooEditorialBoxscoreParams> = (params: WrapperParams = {}) => callFlat(EDITORIAL_BOXSCORE_DEF, params);
 /** snake_case alias of {@link yahooEditorialBoxscore} (py/R parity). */
@@ -693,15 +707,16 @@ const EDITORIAL_SCOREBOARD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api-secure.sports.yahoo.com/v1/editorial/s/scoreboard`
  *
- * @param params.leagues - query parameter.
- * @param params.week - query parameter.
- * @param params.season - query parameter.
- * @param params.conferences - query parameter.
- * @param params.count - query parameter.
- * @param params.v - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.leagues - `number | string` — the `leagues` query parameter.
+ * @param params.week - `number | string` — the `week` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.conferences - `number | string` — the `conferences` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.v - `number | string` — the `v` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooEditorialScoreboard({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooEditorialScoreboard: Wrapper<Row[], YahooEditorialScoreboardParams> = (params: WrapperParams = {}) => callFlat(EDITORIAL_SCOREBOARD_DEF, params);
 /** snake_case alias of {@link yahooEditorialScoreboard} (py/R parity). */
@@ -725,9 +740,10 @@ const FEATURED_GAME_IDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/featuredGameIds`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooFeaturedGameIds({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooFeaturedGameIds: Wrapper<Row[], YahooFeaturedGameIdsParams> = (params: WrapperParams = {}) => callFlat(FEATURED_GAME_IDS_DEF, params);
 /** snake_case alias of {@link yahooFeaturedGameIds} (py/R parity). */
@@ -756,10 +772,11 @@ const GAME_PROP_BETS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gamePropBets`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGamePropBets({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooGamePropBets: Wrapper<Row[], YahooGamePropBetsParams> = (params: WrapperParams = {}) => callFlat(GAME_PROP_BETS_DEF, params);
 /** snake_case alias of {@link yahooGamePropBets} (py/R parity). */
@@ -1420,168 +1437,169 @@ const GAME_STATS_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gameStatsLeaders`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.season - query parameter.
- * @param params.season_phases - query parameter (`seasonPhases`).
- * @param params.qualified - query parameter.
- * @param params.count - query parameter.
- * @param params.is_pregame - query parameter (`isPregame`).
- * @param params.team_image_height - query parameter (`teamImageHeight`).
- * @param params.team_image_width - query parameter (`teamImageWidth`).
- * @param params.player_image_height - query parameter (`playerImageHeight`).
- * @param params.player_image_width - query parameter (`playerImageWidth`).
- * @param params.baseball_leader_sort_stat0 - query parameter (`baseballLeaderSortStat0`).
- * @param params.baseball_leader_sort_stat1 - query parameter (`baseballLeaderSortStat1`).
- * @param params.baseball_leader_sort_stat2 - query parameter (`baseballLeaderSortStat2`).
- * @param params.baseball_leader_sort_stat3 - query parameter (`baseballLeaderSortStat3`).
- * @param params.baseball_leader_sort_stat4 - query parameter (`baseballLeaderSortStat4`).
- * @param params.baseball_leader_stat_ids0 - query parameter (`baseballLeaderStatIds0`).
- * @param params.baseball_leader_stat_ids1 - query parameter (`baseballLeaderStatIds1`).
- * @param params.baseball_leader_stat_ids2 - query parameter (`baseballLeaderStatIds2`).
- * @param params.baseball_leader_stat_ids3 - query parameter (`baseballLeaderStatIds3`).
- * @param params.baseball_leader_stat_ids4 - query parameter (`baseballLeaderStatIds4`).
- * @param params.baseball_player_stat_ids0 - query parameter (`baseballPlayerStatIds0`).
- * @param params.baseball_player_stat_ids1 - query parameter (`baseballPlayerStatIds1`).
- * @param params.baseball_team_sort_stat0 - query parameter (`baseballTeamSortStat0`).
- * @param params.baseball_team_sort_stat1 - query parameter (`baseballTeamSortStat1`).
- * @param params.baseball_team_sort_stat2 - query parameter (`baseballTeamSortStat2`).
- * @param params.baseball_team_sort_stat3 - query parameter (`baseballTeamSortStat3`).
- * @param params.baseball_team_sort_stat4 - query parameter (`baseballTeamSortStat4`).
- * @param params.baseball_team_sort_stat5 - query parameter (`baseballTeamSortStat5`).
- * @param params.baseball_team_sort_stat6 - query parameter (`baseballTeamSortStat6`).
- * @param params.baseball_team_sort_stat7 - query parameter (`baseballTeamSortStat7`).
- * @param params.baseball_team_sort_stat8 - query parameter (`baseballTeamSortStat8`).
- * @param params.baseball_team_sort_stat9 - query parameter (`baseballTeamSortStat9`).
- * @param params.baseball_team_sort_stat10 - query parameter (`baseballTeamSortStat10`).
- * @param params.baseball_team_sort_stat11 - query parameter (`baseballTeamSortStat11`).
- * @param params.baseball_team_stat_ids0 - query parameter (`baseballTeamStatIds0`).
- * @param params.baseball_team_stat_ids1 - query parameter (`baseballTeamStatIds1`).
- * @param params.baseball_team_stat_ids2 - query parameter (`baseballTeamStatIds2`).
- * @param params.baseball_team_stat_ids3 - query parameter (`baseballTeamStatIds3`).
- * @param params.baseball_team_stat_ids4 - query parameter (`baseballTeamStatIds4`).
- * @param params.baseball_team_stat_ids5 - query parameter (`baseballTeamStatIds5`).
- * @param params.baseball_team_stat_ids6 - query parameter (`baseballTeamStatIds6`).
- * @param params.baseball_team_stat_ids7 - query parameter (`baseballTeamStatIds7`).
- * @param params.baseball_team_stat_ids8 - query parameter (`baseballTeamStatIds8`).
- * @param params.baseball_team_stat_ids9 - query parameter (`baseballTeamStatIds9`).
- * @param params.baseball_team_stat_ids10 - query parameter (`baseballTeamStatIds10`).
- * @param params.baseball_team_stat_ids11 - query parameter (`baseballTeamStatIds11`).
- * @param params.basketball_leader_sort_stat0 - query parameter (`basketballLeaderSortStat0`).
- * @param params.basketball_leader_sort_stat1 - query parameter (`basketballLeaderSortStat1`).
- * @param params.basketball_leader_sort_stat2 - query parameter (`basketballLeaderSortStat2`).
- * @param params.basketball_leader_sort_stat3 - query parameter (`basketballLeaderSortStat3`).
- * @param params.basketball_leader_sort_stat4 - query parameter (`basketballLeaderSortStat4`).
- * @param params.basketball_leader_stat_ids0 - query parameter (`basketballLeaderStatIds0`).
- * @param params.basketball_leader_stat_ids1 - query parameter (`basketballLeaderStatIds1`).
- * @param params.basketball_leader_stat_ids2 - query parameter (`basketballLeaderStatIds2`).
- * @param params.basketball_leader_stat_ids3 - query parameter (`basketballLeaderStatIds3`).
- * @param params.basketball_leader_stat_ids4 - query parameter (`basketballLeaderStatIds4`).
- * @param params.basketball_player_stat_ids0 - query parameter (`basketballPlayerStatIds0`).
- * @param params.basketball_team_sort_stat0 - query parameter (`basketballTeamSortStat0`).
- * @param params.basketball_team_sort_stat1 - query parameter (`basketballTeamSortStat1`).
- * @param params.basketball_team_sort_stat2 - query parameter (`basketballTeamSortStat2`).
- * @param params.basketball_team_sort_stat3 - query parameter (`basketballTeamSortStat3`).
- * @param params.basketball_team_sort_stat4 - query parameter (`basketballTeamSortStat4`).
- * @param params.basketball_team_sort_stat5 - query parameter (`basketballTeamSortStat5`).
- * @param params.basketball_team_sort_stat6 - query parameter (`basketballTeamSortStat6`).
- * @param params.basketball_team_sort_stat7 - query parameter (`basketballTeamSortStat7`).
- * @param params.basketball_team_sort_stat8 - query parameter (`basketballTeamSortStat8`).
- * @param params.basketball_team_sort_stat9 - query parameter (`basketballTeamSortStat9`).
- * @param params.basketball_team_stat_ids0 - query parameter (`basketballTeamStatIds0`).
- * @param params.basketball_team_stat_ids1 - query parameter (`basketballTeamStatIds1`).
- * @param params.basketball_team_stat_ids2 - query parameter (`basketballTeamStatIds2`).
- * @param params.basketball_team_stat_ids3 - query parameter (`basketballTeamStatIds3`).
- * @param params.basketball_team_stat_ids4 - query parameter (`basketballTeamStatIds4`).
- * @param params.basketball_team_stat_ids5 - query parameter (`basketballTeamStatIds5`).
- * @param params.basketball_team_stat_ids6 - query parameter (`basketballTeamStatIds6`).
- * @param params.basketball_team_stat_ids7 - query parameter (`basketballTeamStatIds7`).
- * @param params.basketball_team_stat_ids8 - query parameter (`basketballTeamStatIds8`).
- * @param params.basketball_team_stat_ids9 - query parameter (`basketballTeamStatIds9`).
- * @param params.football_leader_sort_stat0 - query parameter (`footballLeaderSortStat0`).
- * @param params.football_leader_sort_stat1 - query parameter (`footballLeaderSortStat1`).
- * @param params.football_leader_sort_stat2 - query parameter (`footballLeaderSortStat2`).
- * @param params.football_leader_sort_stat3 - query parameter (`footballLeaderSortStat3`).
- * @param params.football_leader_stat_ids0 - query parameter (`footballLeaderStatIds0`).
- * @param params.football_leader_stat_ids1 - query parameter (`footballLeaderStatIds1`).
- * @param params.football_leader_stat_ids2 - query parameter (`footballLeaderStatIds2`).
- * @param params.football_leader_stat_ids3 - query parameter (`footballLeaderStatIds3`).
- * @param params.football_player_stat_ids0 - query parameter (`footballPlayerStatIds0`).
- * @param params.football_player_stat_ids1 - query parameter (`footballPlayerStatIds1`).
- * @param params.football_player_stat_ids2 - query parameter (`footballPlayerStatIds2`).
- * @param params.football_player_stat_ids3 - query parameter (`footballPlayerStatIds3`).
- * @param params.football_player_stat_ids4 - query parameter (`footballPlayerStatIds4`).
- * @param params.football_player_stat_ids5 - query parameter (`footballPlayerStatIds5`).
- * @param params.football_player_stat_ids6 - query parameter (`footballPlayerStatIds6`).
- * @param params.football_player_stat_ids7 - query parameter (`footballPlayerStatIds7`).
- * @param params.football_team_sort_stat0 - query parameter (`footballTeamSortStat0`).
- * @param params.football_team_sort_stat1 - query parameter (`footballTeamSortStat1`).
- * @param params.football_team_sort_stat2 - query parameter (`footballTeamSortStat2`).
- * @param params.football_team_sort_stat3 - query parameter (`footballTeamSortStat3`).
- * @param params.football_team_sort_stat4 - query parameter (`footballTeamSortStat4`).
- * @param params.football_team_sort_stat5 - query parameter (`footballTeamSortStat5`).
- * @param params.football_team_sort_stat6 - query parameter (`footballTeamSortStat6`).
- * @param params.football_team_sort_stat7 - query parameter (`footballTeamSortStat7`).
- * @param params.football_team_sort_stat8 - query parameter (`footballTeamSortStat8`).
- * @param params.football_team_sort_stat9 - query parameter (`footballTeamSortStat9`).
- * @param params.football_team_sort_stat10 - query parameter (`footballTeamSortStat10`).
- * @param params.football_team_sort_stat11 - query parameter (`footballTeamSortStat11`).
- * @param params.football_team_stat_ids0 - query parameter (`footballTeamStatIds0`).
- * @param params.football_team_stat_ids1 - query parameter (`footballTeamStatIds1`).
- * @param params.football_team_stat_ids2 - query parameter (`footballTeamStatIds2`).
- * @param params.football_team_stat_ids3 - query parameter (`footballTeamStatIds3`).
- * @param params.football_team_stat_ids4 - query parameter (`footballTeamStatIds4`).
- * @param params.football_team_stat_ids5 - query parameter (`footballTeamStatIds5`).
- * @param params.football_team_stat_ids6 - query parameter (`footballTeamStatIds6`).
- * @param params.football_team_stat_ids7 - query parameter (`footballTeamStatIds7`).
- * @param params.football_team_stat_ids8 - query parameter (`footballTeamStatIds8`).
- * @param params.football_team_stat_ids9 - query parameter (`footballTeamStatIds9`).
- * @param params.football_team_stat_ids10 - query parameter (`footballTeamStatIds10`).
- * @param params.football_team_stat_ids11 - query parameter (`footballTeamStatIds11`).
- * @param params.hockey_leader_sort_stat0 - query parameter (`hockeyLeaderSortStat0`).
- * @param params.hockey_leader_sort_stat1 - query parameter (`hockeyLeaderSortStat1`).
- * @param params.hockey_leader_sort_stat2 - query parameter (`hockeyLeaderSortStat2`).
- * @param params.hockey_leader_sort_stat3 - query parameter (`hockeyLeaderSortStat3`).
- * @param params.hockey_leader_stat_ids0 - query parameter (`hockeyLeaderStatIds0`).
- * @param params.hockey_leader_stat_ids1 - query parameter (`hockeyLeaderStatIds1`).
- * @param params.hockey_leader_stat_ids2 - query parameter (`hockeyLeaderStatIds2`).
- * @param params.hockey_leader_stat_ids3 - query parameter (`hockeyLeaderStatIds3`).
- * @param params.hockey_player_stat_ids0 - query parameter (`hockeyPlayerStatIds0`).
- * @param params.hockey_player_stat_ids1 - query parameter (`hockeyPlayerStatIds1`).
- * @param params.hockey_player_stat_ids2 - query parameter (`hockeyPlayerStatIds2`).
- * @param params.hockey_team_sort_stat0 - query parameter (`hockeyTeamSortStat0`).
- * @param params.hockey_team_sort_stat1 - query parameter (`hockeyTeamSortStat1`).
- * @param params.hockey_team_sort_stat2 - query parameter (`hockeyTeamSortStat2`).
- * @param params.hockey_team_sort_stat3 - query parameter (`hockeyTeamSortStat3`).
- * @param params.hockey_team_sort_stat4 - query parameter (`hockeyTeamSortStat4`).
- * @param params.hockey_team_sort_stat5 - query parameter (`hockeyTeamSortStat5`).
- * @param params.hockey_team_sort_stat6 - query parameter (`hockeyTeamSortStat6`).
- * @param params.hockey_team_stat_ids0 - query parameter (`hockeyTeamStatIds0`).
- * @param params.hockey_team_stat_ids1 - query parameter (`hockeyTeamStatIds1`).
- * @param params.hockey_team_stat_ids2 - query parameter (`hockeyTeamStatIds2`).
- * @param params.hockey_team_stat_ids3 - query parameter (`hockeyTeamStatIds3`).
- * @param params.hockey_team_stat_ids4 - query parameter (`hockeyTeamStatIds4`).
- * @param params.hockey_team_stat_ids5 - query parameter (`hockeyTeamStatIds5`).
- * @param params.hockey_team_stat_ids6 - query parameter (`hockeyTeamStatIds6`).
- * @param params.soccer_player_stat_ids0 - query parameter (`soccerPlayerStatIds0`).
- * @param params.soccer_player_stat_ids1 - query parameter (`soccerPlayerStatIds1`).
- * @param params.soccer_player_stat_ids2 - query parameter (`soccerPlayerStatIds2`).
- * @param params.soccer_player_stat_ids3 - query parameter (`soccerPlayerStatIds3`).
- * @param params.soccer_player_stat_ids4 - query parameter (`soccerPlayerStatIds4`).
- * @param params.soccer_team_sort_stat0 - query parameter (`soccerTeamSortStat0`).
- * @param params.soccer_team_sort_stat1 - query parameter (`soccerTeamSortStat1`).
- * @param params.soccer_team_sort_stat2 - query parameter (`soccerTeamSortStat2`).
- * @param params.soccer_team_sort_stat3 - query parameter (`soccerTeamSortStat3`).
- * @param params.soccer_team_sort_stat4 - query parameter (`soccerTeamSortStat4`).
- * @param params.soccer_team_sort_stat5 - query parameter (`soccerTeamSortStat5`).
- * @param params.soccer_team_stat_ids0 - query parameter (`soccerTeamStatIds0`).
- * @param params.soccer_team_stat_ids1 - query parameter (`soccerTeamStatIds1`).
- * @param params.soccer_team_stat_ids2 - query parameter (`soccerTeamStatIds2`).
- * @param params.soccer_team_stat_ids3 - query parameter (`soccerTeamStatIds3`).
- * @param params.soccer_team_stat_ids4 - query parameter (`soccerTeamStatIds4`).
- * @param params.soccer_team_stat_ids5 - query parameter (`soccerTeamStatIds5`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.season_phases - `number | string` — the `seasonPhases` query parameter.
+ * @param params.qualified - `number | string` — the `qualified` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.is_pregame - `number | string` — the `isPregame` query parameter.
+ * @param params.team_image_height - `number | string` — the `teamImageHeight` query parameter.
+ * @param params.team_image_width - `number | string` — the `teamImageWidth` query parameter.
+ * @param params.player_image_height - `number | string` — the `playerImageHeight` query parameter.
+ * @param params.player_image_width - `number | string` — the `playerImageWidth` query parameter.
+ * @param params.baseball_leader_sort_stat0 - `number | string` — the `baseballLeaderSortStat0` query parameter.
+ * @param params.baseball_leader_sort_stat1 - `number | string` — the `baseballLeaderSortStat1` query parameter.
+ * @param params.baseball_leader_sort_stat2 - `number | string` — the `baseballLeaderSortStat2` query parameter.
+ * @param params.baseball_leader_sort_stat3 - `number | string` — the `baseballLeaderSortStat3` query parameter.
+ * @param params.baseball_leader_sort_stat4 - `number | string` — the `baseballLeaderSortStat4` query parameter.
+ * @param params.baseball_leader_stat_ids0 - `number | string` — the `baseballLeaderStatIds0` query parameter.
+ * @param params.baseball_leader_stat_ids1 - `number | string` — the `baseballLeaderStatIds1` query parameter.
+ * @param params.baseball_leader_stat_ids2 - `number | string` — the `baseballLeaderStatIds2` query parameter.
+ * @param params.baseball_leader_stat_ids3 - `number | string` — the `baseballLeaderStatIds3` query parameter.
+ * @param params.baseball_leader_stat_ids4 - `number | string` — the `baseballLeaderStatIds4` query parameter.
+ * @param params.baseball_player_stat_ids0 - `number | string` — the `baseballPlayerStatIds0` query parameter.
+ * @param params.baseball_player_stat_ids1 - `number | string` — the `baseballPlayerStatIds1` query parameter.
+ * @param params.baseball_team_sort_stat0 - `number | string` — the `baseballTeamSortStat0` query parameter.
+ * @param params.baseball_team_sort_stat1 - `number | string` — the `baseballTeamSortStat1` query parameter.
+ * @param params.baseball_team_sort_stat2 - `number | string` — the `baseballTeamSortStat2` query parameter.
+ * @param params.baseball_team_sort_stat3 - `number | string` — the `baseballTeamSortStat3` query parameter.
+ * @param params.baseball_team_sort_stat4 - `number | string` — the `baseballTeamSortStat4` query parameter.
+ * @param params.baseball_team_sort_stat5 - `number | string` — the `baseballTeamSortStat5` query parameter.
+ * @param params.baseball_team_sort_stat6 - `number | string` — the `baseballTeamSortStat6` query parameter.
+ * @param params.baseball_team_sort_stat7 - `number | string` — the `baseballTeamSortStat7` query parameter.
+ * @param params.baseball_team_sort_stat8 - `number | string` — the `baseballTeamSortStat8` query parameter.
+ * @param params.baseball_team_sort_stat9 - `number | string` — the `baseballTeamSortStat9` query parameter.
+ * @param params.baseball_team_sort_stat10 - `number | string` — the `baseballTeamSortStat10` query parameter.
+ * @param params.baseball_team_sort_stat11 - `number | string` — the `baseballTeamSortStat11` query parameter.
+ * @param params.baseball_team_stat_ids0 - `number | string` — the `baseballTeamStatIds0` query parameter.
+ * @param params.baseball_team_stat_ids1 - `number | string` — the `baseballTeamStatIds1` query parameter.
+ * @param params.baseball_team_stat_ids2 - `number | string` — the `baseballTeamStatIds2` query parameter.
+ * @param params.baseball_team_stat_ids3 - `number | string` — the `baseballTeamStatIds3` query parameter.
+ * @param params.baseball_team_stat_ids4 - `number | string` — the `baseballTeamStatIds4` query parameter.
+ * @param params.baseball_team_stat_ids5 - `number | string` — the `baseballTeamStatIds5` query parameter.
+ * @param params.baseball_team_stat_ids6 - `number | string` — the `baseballTeamStatIds6` query parameter.
+ * @param params.baseball_team_stat_ids7 - `number | string` — the `baseballTeamStatIds7` query parameter.
+ * @param params.baseball_team_stat_ids8 - `number | string` — the `baseballTeamStatIds8` query parameter.
+ * @param params.baseball_team_stat_ids9 - `number | string` — the `baseballTeamStatIds9` query parameter.
+ * @param params.baseball_team_stat_ids10 - `number | string` — the `baseballTeamStatIds10` query parameter.
+ * @param params.baseball_team_stat_ids11 - `number | string` — the `baseballTeamStatIds11` query parameter.
+ * @param params.basketball_leader_sort_stat0 - `number | string` — the `basketballLeaderSortStat0` query parameter.
+ * @param params.basketball_leader_sort_stat1 - `number | string` — the `basketballLeaderSortStat1` query parameter.
+ * @param params.basketball_leader_sort_stat2 - `number | string` — the `basketballLeaderSortStat2` query parameter.
+ * @param params.basketball_leader_sort_stat3 - `number | string` — the `basketballLeaderSortStat3` query parameter.
+ * @param params.basketball_leader_sort_stat4 - `number | string` — the `basketballLeaderSortStat4` query parameter.
+ * @param params.basketball_leader_stat_ids0 - `number | string` — the `basketballLeaderStatIds0` query parameter.
+ * @param params.basketball_leader_stat_ids1 - `number | string` — the `basketballLeaderStatIds1` query parameter.
+ * @param params.basketball_leader_stat_ids2 - `number | string` — the `basketballLeaderStatIds2` query parameter.
+ * @param params.basketball_leader_stat_ids3 - `number | string` — the `basketballLeaderStatIds3` query parameter.
+ * @param params.basketball_leader_stat_ids4 - `number | string` — the `basketballLeaderStatIds4` query parameter.
+ * @param params.basketball_player_stat_ids0 - `number | string` — the `basketballPlayerStatIds0` query parameter.
+ * @param params.basketball_team_sort_stat0 - `number | string` — the `basketballTeamSortStat0` query parameter.
+ * @param params.basketball_team_sort_stat1 - `number | string` — the `basketballTeamSortStat1` query parameter.
+ * @param params.basketball_team_sort_stat2 - `number | string` — the `basketballTeamSortStat2` query parameter.
+ * @param params.basketball_team_sort_stat3 - `number | string` — the `basketballTeamSortStat3` query parameter.
+ * @param params.basketball_team_sort_stat4 - `number | string` — the `basketballTeamSortStat4` query parameter.
+ * @param params.basketball_team_sort_stat5 - `number | string` — the `basketballTeamSortStat5` query parameter.
+ * @param params.basketball_team_sort_stat6 - `number | string` — the `basketballTeamSortStat6` query parameter.
+ * @param params.basketball_team_sort_stat7 - `number | string` — the `basketballTeamSortStat7` query parameter.
+ * @param params.basketball_team_sort_stat8 - `number | string` — the `basketballTeamSortStat8` query parameter.
+ * @param params.basketball_team_sort_stat9 - `number | string` — the `basketballTeamSortStat9` query parameter.
+ * @param params.basketball_team_stat_ids0 - `number | string` — the `basketballTeamStatIds0` query parameter.
+ * @param params.basketball_team_stat_ids1 - `number | string` — the `basketballTeamStatIds1` query parameter.
+ * @param params.basketball_team_stat_ids2 - `number | string` — the `basketballTeamStatIds2` query parameter.
+ * @param params.basketball_team_stat_ids3 - `number | string` — the `basketballTeamStatIds3` query parameter.
+ * @param params.basketball_team_stat_ids4 - `number | string` — the `basketballTeamStatIds4` query parameter.
+ * @param params.basketball_team_stat_ids5 - `number | string` — the `basketballTeamStatIds5` query parameter.
+ * @param params.basketball_team_stat_ids6 - `number | string` — the `basketballTeamStatIds6` query parameter.
+ * @param params.basketball_team_stat_ids7 - `number | string` — the `basketballTeamStatIds7` query parameter.
+ * @param params.basketball_team_stat_ids8 - `number | string` — the `basketballTeamStatIds8` query parameter.
+ * @param params.basketball_team_stat_ids9 - `number | string` — the `basketballTeamStatIds9` query parameter.
+ * @param params.football_leader_sort_stat0 - `number | string` — the `footballLeaderSortStat0` query parameter.
+ * @param params.football_leader_sort_stat1 - `number | string` — the `footballLeaderSortStat1` query parameter.
+ * @param params.football_leader_sort_stat2 - `number | string` — the `footballLeaderSortStat2` query parameter.
+ * @param params.football_leader_sort_stat3 - `number | string` — the `footballLeaderSortStat3` query parameter.
+ * @param params.football_leader_stat_ids0 - `number | string` — the `footballLeaderStatIds0` query parameter.
+ * @param params.football_leader_stat_ids1 - `number | string` — the `footballLeaderStatIds1` query parameter.
+ * @param params.football_leader_stat_ids2 - `number | string` — the `footballLeaderStatIds2` query parameter.
+ * @param params.football_leader_stat_ids3 - `number | string` — the `footballLeaderStatIds3` query parameter.
+ * @param params.football_player_stat_ids0 - `number | string` — the `footballPlayerStatIds0` query parameter.
+ * @param params.football_player_stat_ids1 - `number | string` — the `footballPlayerStatIds1` query parameter.
+ * @param params.football_player_stat_ids2 - `number | string` — the `footballPlayerStatIds2` query parameter.
+ * @param params.football_player_stat_ids3 - `number | string` — the `footballPlayerStatIds3` query parameter.
+ * @param params.football_player_stat_ids4 - `number | string` — the `footballPlayerStatIds4` query parameter.
+ * @param params.football_player_stat_ids5 - `number | string` — the `footballPlayerStatIds5` query parameter.
+ * @param params.football_player_stat_ids6 - `number | string` — the `footballPlayerStatIds6` query parameter.
+ * @param params.football_player_stat_ids7 - `number | string` — the `footballPlayerStatIds7` query parameter.
+ * @param params.football_team_sort_stat0 - `number | string` — the `footballTeamSortStat0` query parameter.
+ * @param params.football_team_sort_stat1 - `number | string` — the `footballTeamSortStat1` query parameter.
+ * @param params.football_team_sort_stat2 - `number | string` — the `footballTeamSortStat2` query parameter.
+ * @param params.football_team_sort_stat3 - `number | string` — the `footballTeamSortStat3` query parameter.
+ * @param params.football_team_sort_stat4 - `number | string` — the `footballTeamSortStat4` query parameter.
+ * @param params.football_team_sort_stat5 - `number | string` — the `footballTeamSortStat5` query parameter.
+ * @param params.football_team_sort_stat6 - `number | string` — the `footballTeamSortStat6` query parameter.
+ * @param params.football_team_sort_stat7 - `number | string` — the `footballTeamSortStat7` query parameter.
+ * @param params.football_team_sort_stat8 - `number | string` — the `footballTeamSortStat8` query parameter.
+ * @param params.football_team_sort_stat9 - `number | string` — the `footballTeamSortStat9` query parameter.
+ * @param params.football_team_sort_stat10 - `number | string` — the `footballTeamSortStat10` query parameter.
+ * @param params.football_team_sort_stat11 - `number | string` — the `footballTeamSortStat11` query parameter.
+ * @param params.football_team_stat_ids0 - `number | string` — the `footballTeamStatIds0` query parameter.
+ * @param params.football_team_stat_ids1 - `number | string` — the `footballTeamStatIds1` query parameter.
+ * @param params.football_team_stat_ids2 - `number | string` — the `footballTeamStatIds2` query parameter.
+ * @param params.football_team_stat_ids3 - `number | string` — the `footballTeamStatIds3` query parameter.
+ * @param params.football_team_stat_ids4 - `number | string` — the `footballTeamStatIds4` query parameter.
+ * @param params.football_team_stat_ids5 - `number | string` — the `footballTeamStatIds5` query parameter.
+ * @param params.football_team_stat_ids6 - `number | string` — the `footballTeamStatIds6` query parameter.
+ * @param params.football_team_stat_ids7 - `number | string` — the `footballTeamStatIds7` query parameter.
+ * @param params.football_team_stat_ids8 - `number | string` — the `footballTeamStatIds8` query parameter.
+ * @param params.football_team_stat_ids9 - `number | string` — the `footballTeamStatIds9` query parameter.
+ * @param params.football_team_stat_ids10 - `number | string` — the `footballTeamStatIds10` query parameter.
+ * @param params.football_team_stat_ids11 - `number | string` — the `footballTeamStatIds11` query parameter.
+ * @param params.hockey_leader_sort_stat0 - `number | string` — the `hockeyLeaderSortStat0` query parameter.
+ * @param params.hockey_leader_sort_stat1 - `number | string` — the `hockeyLeaderSortStat1` query parameter.
+ * @param params.hockey_leader_sort_stat2 - `number | string` — the `hockeyLeaderSortStat2` query parameter.
+ * @param params.hockey_leader_sort_stat3 - `number | string` — the `hockeyLeaderSortStat3` query parameter.
+ * @param params.hockey_leader_stat_ids0 - `number | string` — the `hockeyLeaderStatIds0` query parameter.
+ * @param params.hockey_leader_stat_ids1 - `number | string` — the `hockeyLeaderStatIds1` query parameter.
+ * @param params.hockey_leader_stat_ids2 - `number | string` — the `hockeyLeaderStatIds2` query parameter.
+ * @param params.hockey_leader_stat_ids3 - `number | string` — the `hockeyLeaderStatIds3` query parameter.
+ * @param params.hockey_player_stat_ids0 - `number | string` — the `hockeyPlayerStatIds0` query parameter.
+ * @param params.hockey_player_stat_ids1 - `number | string` — the `hockeyPlayerStatIds1` query parameter.
+ * @param params.hockey_player_stat_ids2 - `number | string` — the `hockeyPlayerStatIds2` query parameter.
+ * @param params.hockey_team_sort_stat0 - `number | string` — the `hockeyTeamSortStat0` query parameter.
+ * @param params.hockey_team_sort_stat1 - `number | string` — the `hockeyTeamSortStat1` query parameter.
+ * @param params.hockey_team_sort_stat2 - `number | string` — the `hockeyTeamSortStat2` query parameter.
+ * @param params.hockey_team_sort_stat3 - `number | string` — the `hockeyTeamSortStat3` query parameter.
+ * @param params.hockey_team_sort_stat4 - `number | string` — the `hockeyTeamSortStat4` query parameter.
+ * @param params.hockey_team_sort_stat5 - `number | string` — the `hockeyTeamSortStat5` query parameter.
+ * @param params.hockey_team_sort_stat6 - `number | string` — the `hockeyTeamSortStat6` query parameter.
+ * @param params.hockey_team_stat_ids0 - `number | string` — the `hockeyTeamStatIds0` query parameter.
+ * @param params.hockey_team_stat_ids1 - `number | string` — the `hockeyTeamStatIds1` query parameter.
+ * @param params.hockey_team_stat_ids2 - `number | string` — the `hockeyTeamStatIds2` query parameter.
+ * @param params.hockey_team_stat_ids3 - `number | string` — the `hockeyTeamStatIds3` query parameter.
+ * @param params.hockey_team_stat_ids4 - `number | string` — the `hockeyTeamStatIds4` query parameter.
+ * @param params.hockey_team_stat_ids5 - `number | string` — the `hockeyTeamStatIds5` query parameter.
+ * @param params.hockey_team_stat_ids6 - `number | string` — the `hockeyTeamStatIds6` query parameter.
+ * @param params.soccer_player_stat_ids0 - `number | string` — the `soccerPlayerStatIds0` query parameter.
+ * @param params.soccer_player_stat_ids1 - `number | string` — the `soccerPlayerStatIds1` query parameter.
+ * @param params.soccer_player_stat_ids2 - `number | string` — the `soccerPlayerStatIds2` query parameter.
+ * @param params.soccer_player_stat_ids3 - `number | string` — the `soccerPlayerStatIds3` query parameter.
+ * @param params.soccer_player_stat_ids4 - `number | string` — the `soccerPlayerStatIds4` query parameter.
+ * @param params.soccer_team_sort_stat0 - `number | string` — the `soccerTeamSortStat0` query parameter.
+ * @param params.soccer_team_sort_stat1 - `number | string` — the `soccerTeamSortStat1` query parameter.
+ * @param params.soccer_team_sort_stat2 - `number | string` — the `soccerTeamSortStat2` query parameter.
+ * @param params.soccer_team_sort_stat3 - `number | string` — the `soccerTeamSortStat3` query parameter.
+ * @param params.soccer_team_sort_stat4 - `number | string` — the `soccerTeamSortStat4` query parameter.
+ * @param params.soccer_team_sort_stat5 - `number | string` — the `soccerTeamSortStat5` query parameter.
+ * @param params.soccer_team_stat_ids0 - `number | string` — the `soccerTeamStatIds0` query parameter.
+ * @param params.soccer_team_stat_ids1 - `number | string` — the `soccerTeamStatIds1` query parameter.
+ * @param params.soccer_team_stat_ids2 - `number | string` — the `soccerTeamStatIds2` query parameter.
+ * @param params.soccer_team_stat_ids3 - `number | string` — the `soccerTeamStatIds3` query parameter.
+ * @param params.soccer_team_stat_ids4 - `number | string` — the `soccerTeamStatIds4` query parameter.
+ * @param params.soccer_team_stat_ids5 - `number | string` — the `soccerTeamStatIds5` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGameStatsLeaders({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooGameStatsLeaders: Wrapper<Row[], YahooGameStatsLeadersParams> = (params: WrapperParams = {}) => callFlat(GAME_STATS_LEADERS_DEF, params);
 /** snake_case alias of {@link yahooGameStatsLeaders} (py/R parity). */
@@ -1610,10 +1628,11 @@ const GAMETIME_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gametimeGame`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGametimeGame({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooGametimeGame: Wrapper<Row[], YahooGametimeGameParams> = (params: WrapperParams = {}) => callFlat(GAMETIME_GAME_DEF, params);
 /** snake_case alias of {@link yahooGametimeGame} (py/R parity). */
@@ -1642,10 +1661,11 @@ const GAMETIME_TEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gametimeTeam`
  *
- * @param params.team_id - query parameter (`teamId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGametimeTeam({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooGametimeTeam: Wrapper<Row[], YahooGametimeTeamParams> = (params: WrapperParams = {}) => callFlat(GAMETIME_TEAM_DEF, params);
 /** snake_case alias of {@link yahooGametimeTeam} (py/R parity). */
@@ -1674,10 +1694,11 @@ const GOLF_TOURNAMENT_SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/golfTournamentSeasons`
  *
- * @param params.event_group_id - query parameter (`eventGroupId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.event_group_id - `number | string` — the `eventGroupId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGolfTournamentSeasons({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooGolfTournamentSeasons: Wrapper<Row[], YahooGolfTournamentSeasonsParams> = (params: WrapperParams = {}) => callFlat(GOLF_TOURNAMENT_SEASONS_DEF, params);
 /** snake_case alias of {@link yahooGolfTournamentSeasons} (py/R parity). */
@@ -1714,12 +1735,13 @@ const GOLF_TOURNAMENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/golfTournaments`
  *
- * @param params.association - query parameter.
- * @param params.season - query parameter.
- * @param params.show_defending_champs - query parameter (`showDefendingChamps`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.association - `number | string` — the `association` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.show_defending_champs - `number | string` — the `showDefendingChamps` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGolfTournaments({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooGolfTournaments: Wrapper<Row[], YahooGolfTournamentsParams> = (params: WrapperParams = {}) => callFlat(GOLF_TOURNAMENTS_DEF, params);
 /** snake_case alias of {@link yahooGolfTournaments} (py/R parity). */
@@ -1756,12 +1778,13 @@ const GOLF_TOURNAMENTS_BASIC_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/golfTournamentsBasic`
  *
- * @param params.event_group_id - query parameter (`eventGroupId`).
- * @param params.association - query parameter.
- * @param params.season - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.event_group_id - `number | string` — the `eventGroupId` query parameter.
+ * @param params.association - `number | string` — the `association` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooGolfTournamentsBasic({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooGolfTournamentsBasic: Wrapper<Row[], YahooGolfTournamentsBasicParams> = (params: WrapperParams = {}) => callFlat(GOLF_TOURNAMENTS_BASIC_DEF, params);
 /** snake_case alias of {@link yahooGolfTournamentsBasic} (py/R parity). */
@@ -1794,11 +1817,12 @@ const LEAGUE_CONFERENCES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueConferences`
  *
- * @param params.league - query parameter.
- * @param params.division_ids - query parameter (`divisionIds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.division_ids - `number | string` — the `divisionIds` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueConferences({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueConferences: Wrapper<Row[], YahooLeagueConferencesParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_CONFERENCES_DEF, params);
 /** snake_case alias of {@link yahooLeagueConferences} (py/R parity). */
@@ -1839,13 +1863,14 @@ const LEAGUE_FILTERS_DATA_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueFiltersData`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.view_type - query parameter (`viewType`).
- * @param params.include_pos_and_splits_data - query parameter (`includePosAndSplitsData`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.view_type - `number | string` — the `viewType` query parameter.
+ * @param params.include_pos_and_splits_data - `number | string` — the `includePosAndSplitsData` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueFiltersData({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueFiltersData: Wrapper<Row[], YahooLeagueFiltersDataParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_FILTERS_DATA_DEF, params);
 /** snake_case alias of {@link yahooLeagueFiltersData} (py/R parity). */
@@ -1878,11 +1903,12 @@ const LEAGUE_FUTURE_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueFutureOdds`
  *
- * @param params.league - query parameter.
- * @param params.bet_categories - query parameter (`betCategories`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.bet_categories - `number | string` — the `betCategories` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueFutureOdds({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueFutureOdds: Wrapper<Row[], YahooLeagueFutureOddsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_FUTURE_ODDS_DEF, params);
 /** snake_case alias of {@link yahooLeagueFutureOdds} (py/R parity). */
@@ -1955,21 +1981,22 @@ const LEAGUE_GAME_IDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueGameIds`
  *
- * @param params.count - query parameter.
- * @param params.league - query parameter.
- * @param params.week - query parameter.
- * @param params.date - query parameter.
- * @param params.season - query parameter.
- * @param params.game_status_order - query parameter (`gameStatusOrder`).
- * @param params.start_time_order - query parameter (`startTimeOrder`).
- * @param params.date_flip_offset - query parameter (`dateFlipOffset`).
- * @param params.season_phase - query parameter (`seasonPhase`).
- * @param params.conference_ids - query parameter (`conferenceIds`).
- * @param params.top25 - query parameter.
- * @param params.game_day_query_type - query parameter (`gameDayQueryType`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.week - `number | string` — the `week` query parameter.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.game_status_order - `number | string` — the `gameStatusOrder` query parameter.
+ * @param params.start_time_order - `number | string` — the `startTimeOrder` query parameter.
+ * @param params.date_flip_offset - `number | string` — the `dateFlipOffset` query parameter.
+ * @param params.season_phase - `number | string` — the `seasonPhase` query parameter.
+ * @param params.conference_ids - `number | string` — the `conferenceIds` query parameter.
+ * @param params.top25 - `number | string` — the `top25` query parameter.
+ * @param params.game_day_query_type - `number | string` — the `gameDayQueryType` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueGameIds({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueGameIds: Wrapper<Row[], YahooLeagueGameIdsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_GAME_IDS_DEF, params);
 /** snake_case alias of {@link yahooLeagueGameIds} (py/R parity). */
@@ -2042,21 +2069,22 @@ const LEAGUE_GAME_IDS_BY_DATE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueGameIdsByDate`
  *
- * @param params.leagues - query parameter.
- * @param params.week - query parameter.
- * @param params.dates - query parameter.
- * @param params.start_range - query parameter (`startRange`).
- * @param params.end_range - query parameter (`endRange`).
- * @param params.season - query parameter.
- * @param params.season_phases - query parameter (`seasonPhases`).
- * @param params.conference_ids - query parameter (`conferenceIds`).
- * @param params.division_ids - query parameter (`divisionIds`).
- * @param params.top25 - query parameter.
- * @param params.tournament_ids - query parameter (`tournamentIds`).
- * @param params.is_tennis - query parameter (`isTennis`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.leagues - `number | string` — the `leagues` query parameter.
+ * @param params.week - `number | string` — the `week` query parameter.
+ * @param params.dates - `number | string` — the `dates` query parameter.
+ * @param params.start_range - `number | string` — the `startRange` query parameter.
+ * @param params.end_range - `number | string` — the `endRange` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.season_phases - `number | string` — the `seasonPhases` query parameter.
+ * @param params.conference_ids - `number | string` — the `conferenceIds` query parameter.
+ * @param params.division_ids - `number | string` — the `divisionIds` query parameter.
+ * @param params.top25 - `number | string` — the `top25` query parameter.
+ * @param params.tournament_ids - `number | string` — the `tournamentIds` query parameter.
+ * @param params.is_tennis - `number | string` — the `isTennis` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueGameIdsByDate({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueGameIdsByDate: Wrapper<Row[], YahooLeagueGameIdsByDateParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_GAME_IDS_BY_DATE_DEF, params);
 /** snake_case alias of {@link yahooLeagueGameIdsByDate} (py/R parity). */
@@ -2093,12 +2121,13 @@ const LEAGUE_GAMES_BY_ROUND_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueGamesByRound`
  *
- * @param params.league - query parameter.
- * @param params.tournament_round_ids - query parameter (`tournamentRoundIds`).
- * @param params.season - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.tournament_round_ids - `number | string` — the `tournamentRoundIds` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueGamesByRound({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueGamesByRound: Wrapper<Row[], YahooLeagueGamesByRoundParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_GAMES_BY_ROUND_DEF, params);
 /** snake_case alias of {@link yahooLeagueGamesByRound} (py/R parity). */
@@ -2127,10 +2156,11 @@ const LEAGUE_INFO_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueInfo`
  *
- * @param params.league - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueInfo({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueInfo: Wrapper<Row[], YahooLeagueInfoParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_INFO_DEF, params);
 /** snake_case alias of {@link yahooLeagueInfo} (py/R parity). */
@@ -2159,10 +2189,11 @@ const LEAGUE_INJURIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueInjuries`
  *
- * @param params.league_id - query parameter (`leagueId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `leagueId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueInjuries({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueInjuries: Wrapper<Row[], YahooLeagueInjuriesParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_INJURIES_DEF, params);
 /** snake_case alias of {@link yahooLeagueInjuries} (py/R parity). */
@@ -2191,10 +2222,11 @@ const LEAGUE_NAMES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueNames`
  *
- * @param params.leagues - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.leagues - `number | string` — the `leagues` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueNames({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueNames: Wrapper<Row[], YahooLeagueNamesParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_NAMES_DEF, params);
 /** snake_case alias of {@link yahooLeagueNames} (py/R parity). */
@@ -2227,11 +2259,12 @@ const LEAGUE_PROP_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leaguePropOdds`
  *
- * @param params.count - query parameter.
- * @param params.league - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeaguePropOdds({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeaguePropOdds: Wrapper<Row[], YahooLeaguePropOddsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_PROP_ODDS_DEF, params);
 /** snake_case alias of {@link yahooLeaguePropOdds} (py/R parity). */
@@ -2268,12 +2301,13 @@ const LEAGUE_STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStandings`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.season_phase - query parameter (`seasonPhase`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.season_phase - `number | string` — the `seasonPhase` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueStandings({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueStandings: Wrapper<Row[], YahooLeagueStandingsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_STANDINGS_DEF, params);
 /** snake_case alias of {@link yahooLeagueStandings} (py/R parity). */
@@ -2330,17 +2364,18 @@ const LEAGUE_STATS_BY_TEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsByTeam`
  *
- * @param params.leagues - query parameter.
- * @param params.count - query parameter.
- * @param params.season - query parameter.
- * @param params.league_structure_id - query parameter (`leagueStructureId`).
- * @param params.baseball_cut_type - query parameter (`baseballCutType`).
- * @param params.basketball_cut_type - query parameter (`basketballCutType`).
- * @param params.football_cut_type - query parameter (`footballCutType`).
- * @param params.hockey_cut_type - query parameter (`hockeyCutType`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.leagues - `number | string` — the `leagues` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league_structure_id - `number | string` — the `leagueStructureId` query parameter.
+ * @param params.baseball_cut_type - `number | string` — the `baseballCutType` query parameter.
+ * @param params.basketball_cut_type - `number | string` — the `basketballCutType` query parameter.
+ * @param params.football_cut_type - `number | string` — the `footballCutType` query parameter.
+ * @param params.hockey_cut_type - `number | string` — the `hockeyCutType` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueStatsByTeam({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueStatsByTeam: Wrapper<Row[], YahooLeagueStatsByTeamParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_BY_TEAM_DEF, params);
 /** snake_case alias of {@link yahooLeagueStatsByTeam} (py/R parity). */
@@ -2429,25 +2464,26 @@ const LEAGUE_STATS_INDIVIDUAL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsIndividual`
  *
- * @param params.leagues - query parameter.
- * @param params.count - query parameter.
- * @param params.season - query parameter.
- * @param params.qualified - query parameter.
- * @param params.league_structure_id - query parameter (`leagueStructureId`).
- * @param params.baseball_cut_type - query parameter (`baseballCutType`).
- * @param params.baseball_position - query parameter (`baseballPosition`).
- * @param params.basketball_cut_type - query parameter (`basketballCutType`).
- * @param params.basketball_position - query parameter (`basketballPosition`).
- * @param params.football_cut_type - query parameter (`footballCutType`).
- * @param params.hockey_cut_type - query parameter (`hockeyCutType`).
- * @param params.hockey_position - query parameter (`hockeyPosition`).
- * @param params.golf_sort_stat - query parameter (`golfSortStat`).
- * @param params.golf_stat_ids - query parameter (`golfStatIds`).
- * @param params.motorsports_sort_stat - query parameter (`motorsportsSortStat`).
- * @param params.motorsports_stat_ids - query parameter (`motorsportsStatIds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.leagues - `number | string` — the `leagues` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.qualified - `number | string` — the `qualified` query parameter.
+ * @param params.league_structure_id - `number | string` — the `leagueStructureId` query parameter.
+ * @param params.baseball_cut_type - `number | string` — the `baseballCutType` query parameter.
+ * @param params.baseball_position - `number | string` — the `baseballPosition` query parameter.
+ * @param params.basketball_cut_type - `number | string` — the `basketballCutType` query parameter.
+ * @param params.basketball_position - `number | string` — the `basketballPosition` query parameter.
+ * @param params.football_cut_type - `number | string` — the `footballCutType` query parameter.
+ * @param params.hockey_cut_type - `number | string` — the `hockeyCutType` query parameter.
+ * @param params.hockey_position - `number | string` — the `hockeyPosition` query parameter.
+ * @param params.golf_sort_stat - `number | string` — the `golfSortStat` query parameter.
+ * @param params.golf_stat_ids - `number | string` — the `golfStatIds` query parameter.
+ * @param params.motorsports_sort_stat - `number | string` — the `motorsportsSortStat` query parameter.
+ * @param params.motorsports_stat_ids - `number | string` — the `motorsportsStatIds` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueStatsIndividual({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueStatsIndividual: Wrapper<Row[], YahooLeagueStatsIndividualParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_INDIVIDUAL_DEF, params);
 /** snake_case alias of {@link yahooLeagueStatsIndividual} (py/R parity). */
@@ -2512,19 +2548,20 @@ const LEAGUE_STATS_OVERVIEW_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsOverview`
  *
- * @param params.leagues - query parameter.
- * @param params.count - query parameter.
- * @param params.week - query parameter.
- * @param params.week_season_phase - query parameter (`weekSeasonPhase`).
- * @param params.season_phase - query parameter (`seasonPhase`).
- * @param params.league_structure_id - query parameter (`leagueStructureId`).
- * @param params.golf_sort_stat - query parameter (`golfSortStat`).
- * @param params.golf_stat_ids - query parameter (`golfStatIds`).
- * @param params.motorsports_sort_stat - query parameter (`motorsportsSortStat`).
- * @param params.motorsports_stat_ids - query parameter (`motorsportsStatIds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.leagues - `number | string` — the `leagues` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.week - `number | string` — the `week` query parameter.
+ * @param params.week_season_phase - `number | string` — the `weekSeasonPhase` query parameter.
+ * @param params.season_phase - `number | string` — the `seasonPhase` query parameter.
+ * @param params.league_structure_id - `number | string` — the `leagueStructureId` query parameter.
+ * @param params.golf_sort_stat - `number | string` — the `golfSortStat` query parameter.
+ * @param params.golf_stat_ids - `number | string` — the `golfStatIds` query parameter.
+ * @param params.motorsports_sort_stat - `number | string` — the `motorsportsSortStat` query parameter.
+ * @param params.motorsports_stat_ids - `number | string` — the `motorsportsStatIds` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueStatsOverview({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueStatsOverview: Wrapper<Row[], YahooLeagueStatsOverviewParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_OVERVIEW_DEF, params);
 /** snake_case alias of {@link yahooLeagueStatsOverview} (py/R parity). */
@@ -2569,14 +2606,15 @@ const LEAGUE_STATS_WEEKLY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsWeekly`
  *
- * @param params.leagues - query parameter.
- * @param params.count - query parameter.
- * @param params.week - query parameter.
- * @param params.season - query parameter.
- * @param params.season_phase - query parameter (`seasonPhase`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.leagues - `number | string` — the `leagues` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.week - `number | string` — the `week` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.season_phase - `number | string` — the `seasonPhase` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueStatsWeekly({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueStatsWeekly: Wrapper<Row[], YahooLeagueStatsWeeklyParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_WEEKLY_DEF, params);
 /** snake_case alias of {@link yahooLeagueStatsWeekly} (py/R parity). */
@@ -2613,12 +2651,13 @@ const LEAGUE_TEAM_IDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueTeamIds`
  *
- * @param params.league - query parameter.
- * @param params.division_ids - query parameter (`divisionIds`).
- * @param params.get_teams_by_division - query parameter (`getTeamsByDivision`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.division_ids - `number | string` — the `divisionIds` query parameter.
+ * @param params.get_teams_by_division - `number | string` — the `getTeamsByDivision` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueTeamIds({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueTeamIds: Wrapper<Row[], YahooLeagueTeamIdsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_TEAM_IDS_DEF, params);
 /** snake_case alias of {@link yahooLeagueTeamIds} (py/R parity). */
@@ -2659,13 +2698,14 @@ const LEAGUE_TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueTeams`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.division_ids - query parameter (`divisionIds`).
- * @param params.get_teams_by_division - query parameter (`getTeamsByDivision`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.division_ids - `number | string` — the `divisionIds` query parameter.
+ * @param params.get_teams_by_division - `number | string` — the `getTeamsByDivision` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeagueTeams({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeagueTeams: Wrapper<Row[], YahooLeagueTeamsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_TEAMS_DEF, params);
 /** snake_case alias of {@link yahooLeagueTeams} (py/R parity). */
@@ -2694,10 +2734,11 @@ const LEAGUES_SEASON_STATES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leaguesSeasonStates`
  *
- * @param params.leagues - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.leagues - `number | string` — the `leagues` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooLeaguesSeasonStates({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooLeaguesSeasonStates: Wrapper<Row[], YahooLeaguesSeasonStatesParams> = (params: WrapperParams = {}) => callFlat(LEAGUES_SEASON_STATES_DEF, params);
 /** snake_case alias of {@link yahooLeaguesSeasonStates} (py/R parity). */
@@ -2734,12 +2775,13 @@ const MODULE_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/moduleGame`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.image_height - query parameter (`imageHeight`).
- * @param params.image_width - query parameter (`imageWidth`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.image_height - `number | string` — the `imageHeight` query parameter.
+ * @param params.image_width - `number | string` — the `imageWidth` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooModuleGame({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooModuleGame: Wrapper<Row[], YahooModuleGameParams> = (params: WrapperParams = {}) => callFlat(MODULE_GAME_DEF, params);
 /** snake_case alias of {@link yahooModuleGame} (py/R parity). */
@@ -2772,11 +2814,12 @@ const MOTORSPORT_STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/motorsportStandings`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooMotorsportStandings({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooMotorsportStandings: Wrapper<Row[], YahooMotorsportStandingsParams> = (params: WrapperParams = {}) => callFlat(MOTORSPORT_STANDINGS_DEF, params);
 /** snake_case alias of {@link yahooMotorsportStandings} (py/R parity). */
@@ -2805,10 +2848,11 @@ const NASCAR_DRIVERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/nascarDrivers`
  *
- * @param params.league - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooNascarDrivers({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooNascarDrivers: Wrapper<Row[], YahooNascarDriversParams> = (params: WrapperParams = {}) => callFlat(NASCAR_DRIVERS_DEF, params);
 /** snake_case alias of {@link yahooNascarDrivers} (py/R parity). */
@@ -2845,12 +2889,13 @@ const NAV_DROPDOWN_TRAY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/navDropdownTray`
  *
- * @param params.get_soccer_data - query parameter (`getSoccerData`).
- * @param params.soccer_league_ids - query parameter (`soccerLeagueIds`).
- * @param params.soccer_team_ids - query parameter (`soccerTeamIds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.get_soccer_data - `number | string` — the `getSoccerData` query parameter.
+ * @param params.soccer_league_ids - `number | string` — the `soccerLeagueIds` query parameter.
+ * @param params.soccer_team_ids - `number | string` — the `soccerTeamIds` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooNavDropdownTray({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooNavDropdownTray: Wrapper<Row[], YahooNavDropdownTrayParams> = (params: WrapperParams = {}) => callFlat(NAV_DROPDOWN_TRAY_DEF, params);
 /** snake_case alias of {@link yahooNavDropdownTray} (py/R parity). */
@@ -2883,11 +2928,12 @@ const OLY_MEDAL_COUNT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/OlyMedalCount`
  *
- * @param params.season - query parameter.
- * @param params.sort_method - query parameter (`sortMethod`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.sort_method - `number | string` — the `sortMethod` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooOlyMedalCount({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooOlyMedalCount: Wrapper<Row[], YahooOlyMedalCountParams> = (params: WrapperParams = {}) => callFlat(OLY_MEDAL_COUNT_DEF, params);
 /** snake_case alias of {@link yahooOlyMedalCount} (py/R parity). */
@@ -2916,10 +2962,11 @@ const OLY_SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/OlySeasons`
  *
- * @param params.seasons - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.seasons - `number | string` — the `seasons` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooOlySeasons({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooOlySeasons: Wrapper<Row[], YahooOlySeasonsParams> = (params: WrapperParams = {}) => callFlat(OLY_SEASONS_DEF, params);
 /** snake_case alias of {@link yahooOlySeasons} (py/R parity). */
@@ -2956,12 +3003,13 @@ const PICK_DISTRIBUTION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/pickDistribution`
  *
- * @param params.league - query parameter.
- * @param params.dates - query parameter.
- * @param params.count - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.dates - `number | string` — the `dates` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPickDistribution({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPickDistribution: Wrapper<Row[], YahooPickDistributionParams> = (params: WrapperParams = {}) => callFlat(PICK_DISTRIBUTION_DEF, params);
 /** snake_case alias of {@link yahooPickDistribution} (py/R parity). */
@@ -3030,20 +3078,21 @@ const PLAYBOOK_BOXSCORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscore`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.standings_season_phases - query parameter (`standingsSeasonPhases`).
- * @param params.image_height - query parameter (`imageHeight`).
- * @param params.image_width - query parameter (`imageWidth`).
- * @param params.is_baseball - query parameter (`isBaseball`).
- * @param params.is_football - query parameter (`isFootball`).
- * @param params.is_pro_basketball - query parameter (`isProBasketball`).
- * @param params.is_college_basketball - query parameter (`isCollegeBasketball`).
- * @param params.is_hockey - query parameter (`isHockey`).
- * @param params.is_soccer - query parameter (`isSoccer`).
- * @param params.event_state - query parameter (`eventState`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.standings_season_phases - `number | string` — the `standingsSeasonPhases` query parameter.
+ * @param params.image_height - `number | string` — the `imageHeight` query parameter.
+ * @param params.image_width - `number | string` — the `imageWidth` query parameter.
+ * @param params.is_baseball - `number | string` — the `isBaseball` query parameter.
+ * @param params.is_football - `number | string` — the `isFootball` query parameter.
+ * @param params.is_pro_basketball - `number | string` — the `isProBasketball` query parameter.
+ * @param params.is_college_basketball - `number | string` — the `isCollegeBasketball` query parameter.
+ * @param params.is_hockey - `number | string` — the `isHockey` query parameter.
+ * @param params.is_soccer - `number | string` — the `isSoccer` query parameter.
+ * @param params.event_state - `number | string` — the `eventState` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookBoxscore({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookBoxscore: Wrapper<Row[], YahooPlaybookBoxscoreParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_BOXSCORE_DEF, params);
 /** snake_case alias of {@link yahooPlaybookBoxscore} (py/R parity). */
@@ -3104,18 +3153,19 @@ const PLAYBOOK_BOXSCORE_POLL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscorePoll`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.standings_season_phases - query parameter (`standingsSeasonPhases`).
- * @param params.is_baseball - query parameter (`isBaseball`).
- * @param params.is_football - query parameter (`isFootball`).
- * @param params.is_pro_basketball - query parameter (`isProBasketball`).
- * @param params.is_college_basketball - query parameter (`isCollegeBasketball`).
- * @param params.is_hockey - query parameter (`isHockey`).
- * @param params.is_soccer - query parameter (`isSoccer`).
- * @param params.event_state - query parameter (`eventState`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.standings_season_phases - `number | string` — the `standingsSeasonPhases` query parameter.
+ * @param params.is_baseball - `number | string` — the `isBaseball` query parameter.
+ * @param params.is_football - `number | string` — the `isFootball` query parameter.
+ * @param params.is_pro_basketball - `number | string` — the `isProBasketball` query parameter.
+ * @param params.is_college_basketball - `number | string` — the `isCollegeBasketball` query parameter.
+ * @param params.is_hockey - `number | string` — the `isHockey` query parameter.
+ * @param params.is_soccer - `number | string` — the `isSoccer` query parameter.
+ * @param params.event_state - `number | string` — the `eventState` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookBoxscorePoll({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookBoxscorePoll: Wrapper<Row[], YahooPlaybookBoxscorePollParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_BOXSCORE_POLL_DEF, params);
 /** snake_case alias of {@link yahooPlaybookBoxscorePoll} (py/R parity). */
@@ -3144,10 +3194,11 @@ const PLAYBOOK_BOXSCORE_SOCIAL_SHARE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscoreSocialShare`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookBoxscoreSocialShare({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookBoxscoreSocialShare: Wrapper<Row[], YahooPlaybookBoxscoreSocialShareParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_BOXSCORE_SOCIAL_SHARE_DEF, params);
 /** snake_case alias of {@link yahooPlaybookBoxscoreSocialShare} (py/R parity). */
@@ -3192,14 +3243,15 @@ const PLAYBOOK_COMBAT_MATCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookCombatMatch`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.image_height - query parameter (`imageHeight`).
- * @param params.image_width - query parameter (`imageWidth`).
- * @param params.headshot_height - query parameter (`headshotHeight`).
- * @param params.headshot_width - query parameter (`headshotWidth`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.image_height - `number | string` — the `imageHeight` query parameter.
+ * @param params.image_width - `number | string` — the `imageWidth` query parameter.
+ * @param params.headshot_height - `number | string` — the `headshotHeight` query parameter.
+ * @param params.headshot_width - `number | string` — the `headshotWidth` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookCombatMatch({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookCombatMatch: Wrapper<Row[], YahooPlaybookCombatMatchParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_COMBAT_MATCH_DEF, params);
 /** snake_case alias of {@link yahooPlaybookCombatMatch} (py/R parity). */
@@ -3236,12 +3288,13 @@ const PLAYBOOK_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookGame`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.image_height - query parameter (`imageHeight`).
- * @param params.image_width - query parameter (`imageWidth`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.image_height - `number | string` — the `imageHeight` query parameter.
+ * @param params.image_width - `number | string` — the `imageWidth` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookGame({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookGame: Wrapper<Row[], YahooPlaybookGameParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_GAME_DEF, params);
 /** snake_case alias of {@link yahooPlaybookGame} (py/R parity). */
@@ -3274,11 +3327,12 @@ const PLAYBOOK_GAME_ODDS_POLL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookGameOddsPoll`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.event_state - query parameter (`eventState`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.event_state - `number | string` — the `eventState` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookGameOddsPoll({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookGameOddsPoll: Wrapper<Row[], YahooPlaybookGameOddsPollParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_GAME_ODDS_POLL_DEF, params);
 /** snake_case alias of {@link yahooPlaybookGameOddsPoll} (py/R parity). */
@@ -3323,14 +3377,15 @@ const PLAYBOOK_GOLF_TOURNAMENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookGolfTournament`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.season - query parameter.
- * @param params.count - query parameter.
- * @param params.stat_ids - query parameter (`statIds`).
- * @param params.show_hole_results - query parameter (`showHoleResults`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.stat_ids - `number | string` — the `statIds` query parameter.
+ * @param params.show_hole_results - `number | string` — the `showHoleResults` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookGolfTournament({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookGolfTournament: Wrapper<Row[], YahooPlaybookGolfTournamentParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_GOLF_TOURNAMENT_DEF, params);
 /** snake_case alias of {@link yahooPlaybookGolfTournament} (py/R parity). */
@@ -3379,15 +3434,16 @@ const PLAYBOOK_LEAGUE_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookLeagueOdds`
  *
- * @param params.league - query parameter.
- * @param params.dates - query parameter.
- * @param params.count - query parameter.
- * @param params.start_time_filter - query parameter (`startTimeFilter`).
- * @param params.range_start_date - query parameter (`rangeStartDate`).
- * @param params.range_end_date - query parameter (`rangeEndDate`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.dates - `number | string` — the `dates` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.start_time_filter - `number | string` — the `startTimeFilter` query parameter.
+ * @param params.range_start_date - `number | string` — the `rangeStartDate` query parameter.
+ * @param params.range_end_date - `number | string` — the `rangeEndDate` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookLeagueOdds({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookLeagueOdds: Wrapper<Row[], YahooPlaybookLeagueOddsParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_LEAGUE_ODDS_DEF, params);
 /** snake_case alias of {@link yahooPlaybookLeagueOdds} (py/R parity). */
@@ -3420,11 +3476,12 @@ const PLAYBOOK_PLAYER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookPlayer`
  *
- * @param params.player_id - query parameter (`playerId`).
- * @param params.season_phases - query parameter (`seasonPhases`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `playerId` query parameter.
+ * @param params.season_phases - `number | string` — the `seasonPhases` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookPlayer({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookPlayer: Wrapper<Row[], YahooPlaybookPlayerParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_PLAYER_DEF, params);
 /** snake_case alias of {@link yahooPlaybookPlayer} (py/R parity). */
@@ -3453,10 +3510,11 @@ const PLAYBOOK_PLAYER_SOCIAL_SHARE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookPlayerSocialShare`
  *
- * @param params.player_id - query parameter (`playerId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `playerId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookPlayerSocialShare({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookPlayerSocialShare: Wrapper<Row[], YahooPlaybookPlayerSocialShareParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_PLAYER_SOCIAL_SHARE_DEF, params);
 /** snake_case alias of {@link yahooPlaybookPlayerSocialShare} (py/R parity). */
@@ -3493,12 +3551,13 @@ const PLAYBOOK_RACE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookRace`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.player_image_height - query parameter (`playerImageHeight`).
- * @param params.player_image_width - query parameter (`playerImageWidth`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.player_image_height - `number | string` — the `playerImageHeight` query parameter.
+ * @param params.player_image_width - `number | string` — the `playerImageWidth` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookRace({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookRace: Wrapper<Row[], YahooPlaybookRaceParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_RACE_DEF, params);
 /** snake_case alias of {@link yahooPlaybookRace} (py/R parity). */
@@ -3547,15 +3606,16 @@ const PLAYBOOK_TEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeam`
  *
- * @param params.team_id - query parameter (`teamId`).
- * @param params.image_height - query parameter (`imageHeight`).
- * @param params.image_width - query parameter (`imageWidth`).
- * @param params.league_short_name - query parameter (`leagueShortName`).
- * @param params.disable_conference - query parameter (`disableConference`).
- * @param params.disable_division - query parameter (`disableDivision`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.image_height - `number | string` — the `imageHeight` query parameter.
+ * @param params.image_width - `number | string` — the `imageWidth` query parameter.
+ * @param params.league_short_name - `number | string` — the `leagueShortName` query parameter.
+ * @param params.disable_conference - `number | string` — the `disableConference` query parameter.
+ * @param params.disable_division - `number | string` — the `disableDivision` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookTeam({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookTeam: Wrapper<Row[], YahooPlaybookTeamParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_TEAM_DEF, params);
 /** snake_case alias of {@link yahooPlaybookTeam} (py/R parity). */
@@ -3592,12 +3652,13 @@ const PLAYBOOK_TEAM_BASIC_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeamBasic`
  *
- * @param params.team_id - query parameter (`teamId`).
- * @param params.image_height - query parameter (`imageHeight`).
- * @param params.image_width - query parameter (`imageWidth`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.image_height - `number | string` — the `imageHeight` query parameter.
+ * @param params.image_width - `number | string` — the `imageWidth` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookTeamBasic({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookTeamBasic: Wrapper<Row[], YahooPlaybookTeamBasicParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_TEAM_BASIC_DEF, params);
 /** snake_case alias of {@link yahooPlaybookTeamBasic} (py/R parity). */
@@ -3626,10 +3687,11 @@ const PLAYBOOK_TEAM_SOCIAL_SHARE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeamSocialShare`
  *
- * @param params.team_id - query parameter (`teamId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookTeamSocialShare({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookTeamSocialShare: Wrapper<Row[], YahooPlaybookTeamSocialShareParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_TEAM_SOCIAL_SHARE_DEF, params);
 /** snake_case alias of {@link yahooPlaybookTeamSocialShare} (py/R parity). */
@@ -3658,10 +3720,11 @@ const PLAYBOOK_TENNIS_MATCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTennisMatch`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlaybookTennisMatch({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlaybookTennisMatch: Wrapper<Row[], YahooPlaybookTennisMatchParams> = (params: WrapperParams = {}) => callFlat(PLAYBOOK_TENNIS_MATCH_DEF, params);
 /** snake_case alias of {@link yahooPlaybookTennisMatch} (py/R parity). */
@@ -3694,11 +3757,12 @@ const PLAYER_BASIC_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerBasic`
  *
- * @param params.league - query parameter.
- * @param params.player_id - query parameter (`playerId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.player_id - `number | string` — the `playerId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayerBasic({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlayerBasic: Wrapper<Row[], YahooPlayerBasicParams> = (params: WrapperParams = {}) => callFlat(PLAYER_BASIC_DEF, params);
 /** snake_case alias of {@link yahooPlayerBasic} (py/R parity). */
@@ -3751,16 +3815,17 @@ const PLAYER_CAREER_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerCareerStats`
  *
- * @param params.player_id - query parameter (`playerId`).
- * @param params.season_phases - query parameter (`seasonPhases`).
- * @param params.football_stat_ids - query parameter (`footballStatIds`).
- * @param params.basketball_stat_ids - query parameter (`basketballStatIds`).
- * @param params.baseball_stat_ids - query parameter (`baseballStatIds`).
- * @param params.hockey_stat_ids - query parameter (`hockeyStatIds`).
- * @param params.soccer_stat_ids - query parameter (`soccerStatIds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `playerId` query parameter.
+ * @param params.season_phases - `number | string` — the `seasonPhases` query parameter.
+ * @param params.football_stat_ids - `number | string` — the `footballStatIds` query parameter.
+ * @param params.basketball_stat_ids - `number | string` — the `basketballStatIds` query parameter.
+ * @param params.baseball_stat_ids - `number | string` — the `baseballStatIds` query parameter.
+ * @param params.hockey_stat_ids - `number | string` — the `hockeyStatIds` query parameter.
+ * @param params.soccer_stat_ids - `number | string` — the `soccerStatIds` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayerCareerStats({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlayerCareerStats: Wrapper<Row[], YahooPlayerCareerStatsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_CAREER_STATS_DEF, params);
 /** snake_case alias of {@link yahooPlayerCareerStats} (py/R parity). */
@@ -3821,18 +3886,19 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerGameLog`
  *
- * @param params.player_id - query parameter (`playerId`).
- * @param params.count - query parameter.
- * @param params.seasons - query parameter.
- * @param params.season_phases - query parameter (`seasonPhases`).
- * @param params.football_stat_ids - query parameter (`footballStatIds`).
- * @param params.basketball_stat_ids - query parameter (`basketballStatIds`).
- * @param params.baseball_stat_ids - query parameter (`baseballStatIds`).
- * @param params.hockey_stat_ids - query parameter (`hockeyStatIds`).
- * @param params.soccer_stat_ids - query parameter (`soccerStatIds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `playerId` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.seasons - `number | string` — the `seasons` query parameter.
+ * @param params.season_phases - `number | string` — the `seasonPhases` query parameter.
+ * @param params.football_stat_ids - `number | string` — the `footballStatIds` query parameter.
+ * @param params.basketball_stat_ids - `number | string` — the `basketballStatIds` query parameter.
+ * @param params.baseball_stat_ids - `number | string` — the `baseballStatIds` query parameter.
+ * @param params.hockey_stat_ids - `number | string` — the `hockeyStatIds` query parameter.
+ * @param params.soccer_stat_ids - `number | string` — the `soccerStatIds` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayerGameLog({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlayerGameLog: Wrapper<Row[], YahooPlayerGameLogParams> = (params: WrapperParams = {}) => callFlat(PLAYER_GAME_LOG_DEF, params);
 /** snake_case alias of {@link yahooPlayerGameLog} (py/R parity). */
@@ -3861,10 +3927,11 @@ const PLAYER_PROPS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerProps`
  *
- * @param params.player_id - query parameter (`playerId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `playerId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayerProps({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlayerProps: Wrapper<Row[], YahooPlayerPropsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_PROPS_DEF, params);
 /** snake_case alias of {@link yahooPlayerProps} (py/R parity). */
@@ -3917,16 +3984,17 @@ const PLAYER_SEARCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerSearch`
  *
- * @param params.league - query parameter.
- * @param params.name - query parameter.
- * @param params.on_active_roster_only - query parameter (`onActiveRosterOnly`).
- * @param params.nfl_position_id - query parameter (`nflPositionId`).
- * @param params.nba_position_id - query parameter (`nbaPositionId`).
- * @param params.mlb_position_id - query parameter (`mlbPositionId`).
- * @param params.nhl_position_id - query parameter (`nhlPositionId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.name - `number | string` — the `name` query parameter.
+ * @param params.on_active_roster_only - `number | string` — the `onActiveRosterOnly` query parameter.
+ * @param params.nfl_position_id - `number | string` — the `nflPositionId` query parameter.
+ * @param params.nba_position_id - `number | string` — the `nbaPositionId` query parameter.
+ * @param params.mlb_position_id - `number | string` — the `mlbPositionId` query parameter.
+ * @param params.nhl_position_id - `number | string` — the `nhlPositionId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayerSearch({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlayerSearch: Wrapper<Row[], YahooPlayerSearchParams> = (params: WrapperParams = {}) => callFlat(PLAYER_SEARCH_DEF, params);
 /** snake_case alias of {@link yahooPlayerSearch} (py/R parity). */
@@ -4003,22 +4071,23 @@ const PLAYER_SEASON_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerSeasonStats`
  *
- * @param params.player_id - query parameter (`playerId`).
- * @param params.seasons - query parameter.
- * @param params.season_phases - query parameter (`seasonPhases`).
- * @param params.football_stat_ids - query parameter (`footballStatIds`).
- * @param params.football_cut_type_groups - query parameter (`footballCutTypeGroups`).
- * @param params.basketball_stat_ids - query parameter (`basketballStatIds`).
- * @param params.basketball_cut_type_groups - query parameter (`basketballCutTypeGroups`).
- * @param params.baseball_stat_ids - query parameter (`baseballStatIds`).
- * @param params.baseball_cut_type_groups - query parameter (`baseballCutTypeGroups`).
- * @param params.hockey_stat_ids - query parameter (`hockeyStatIds`).
- * @param params.hockey_cut_type_groups - query parameter (`hockeyCutTypeGroups`).
- * @param params.group_by_season_phase - query parameter (`groupBySeasonPhase`).
- * @param params.use_player_unique_id - query parameter (`usePlayerUniqueId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — the `playerId` query parameter.
+ * @param params.seasons - `number | string` — the `seasons` query parameter.
+ * @param params.season_phases - `number | string` — the `seasonPhases` query parameter.
+ * @param params.football_stat_ids - `number | string` — the `footballStatIds` query parameter.
+ * @param params.football_cut_type_groups - `number | string` — the `footballCutTypeGroups` query parameter.
+ * @param params.basketball_stat_ids - `number | string` — the `basketballStatIds` query parameter.
+ * @param params.basketball_cut_type_groups - `number | string` — the `basketballCutTypeGroups` query parameter.
+ * @param params.baseball_stat_ids - `number | string` — the `baseballStatIds` query parameter.
+ * @param params.baseball_cut_type_groups - `number | string` — the `baseballCutTypeGroups` query parameter.
+ * @param params.hockey_stat_ids - `number | string` — the `hockeyStatIds` query parameter.
+ * @param params.hockey_cut_type_groups - `number | string` — the `hockeyCutTypeGroups` query parameter.
+ * @param params.group_by_season_phase - `number | string` — the `groupBySeasonPhase` query parameter.
+ * @param params.use_player_unique_id - `number | string` — the `usePlayerUniqueId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayerSeasonStats({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlayerSeasonStats: Wrapper<Row[], YahooPlayerSeasonStatsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_SEASON_STATS_DEF, params);
 /** snake_case alias of {@link yahooPlayerSeasonStats} (py/R parity). */
@@ -4063,14 +4132,15 @@ const PLAYOFF_BRACKET_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playoffBracket`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.tournament - query parameter.
- * @param params.type - query parameter.
- * @param params.playoff_rounds - query parameter (`playoffRounds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.tournament - `number | string` — the `tournament` query parameter.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.playoff_rounds - `number | string` — the `playoffRounds` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayoffBracket({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlayoffBracket: Wrapper<Row[], YahooPlayoffBracketParams> = (params: WrapperParams = {}) => callFlat(PLAYOFF_BRACKET_DEF, params);
 /** snake_case alias of {@link yahooPlayoffBracket} (py/R parity). */
@@ -4099,10 +4169,11 @@ const PLAYOFF_SERIES_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playoffSeriesGame`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPlayoffSeriesGame({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPlayoffSeriesGame: Wrapper<Row[], YahooPlayoffSeriesGameParams> = (params: WrapperParams = {}) => callFlat(PLAYOFF_SERIES_GAME_DEF, params);
 /** snake_case alias of {@link yahooPlayoffSeriesGame} (py/R parity). */
@@ -4131,10 +4202,11 @@ const POLYMARKET_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/polymarketGame`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooPolymarketGame({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooPolymarketGame: Wrapper<Row[], YahooPolymarketGameParams> = (params: WrapperParams = {}) => callFlat(POLYMARKET_GAME_DEF, params);
 /** snake_case alias of {@link yahooPolymarketGame} (py/R parity). */
@@ -4175,13 +4247,14 @@ const RACING_SCHEDULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/racingSchedule`
  *
- * @param params.league - query parameter.
- * @param params.season - query parameter.
- * @param params.today - query parameter.
- * @param params.has_series - query parameter (`hasSeries`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.today - `number | string` — the `today` query parameter.
+ * @param params.has_series - `number | string` — the `hasSeries` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooRacingSchedule({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooRacingSchedule: Wrapper<Row[], YahooRacingScheduleParams> = (params: WrapperParams = {}) => callFlat(RACING_SCHEDULE_DEF, params);
 /** snake_case alias of {@link yahooRacingSchedule} (py/R parity). */
@@ -4230,15 +4303,16 @@ const SCOREBOARD_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/scoreboardGame`
  *
- * @param params.game_id - query parameter (`gameId`).
- * @param params.season - query parameter.
- * @param params.season_phase - query parameter (`seasonPhase`).
- * @param params.stat_leader_count - query parameter (`statLeaderCount`).
- * @param params.single_stat_leader - query parameter (`singleStatLeader`).
- * @param params.bet_event_state - query parameter (`betEventState`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — the `gameId` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.season_phase - `number | string` — the `seasonPhase` query parameter.
+ * @param params.stat_leader_count - `number | string` — the `statLeaderCount` query parameter.
+ * @param params.single_stat_leader - `number | string` — the `singleStatLeader` query parameter.
+ * @param params.bet_event_state - `number | string` — the `betEventState` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooScoreboardGame({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooScoreboardGame: Wrapper<Row[], YahooScoreboardGameParams> = (params: WrapperParams = {}) => callFlat(SCOREBOARD_GAME_DEF, params);
 /** snake_case alias of {@link yahooScoreboardGame} (py/R parity). */
@@ -4283,14 +4357,15 @@ const SEASON_STATS_FOOTBALL_DEFENSE_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballDefenseNcaaf`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballDefenseNcaaf({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonStatsFootballDefenseNcaaf: Wrapper<Row[], YahooSeasonStatsFootballDefenseNcaafParams> = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_DEFENSE_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballDefenseNcaaf} (py/R parity). */
@@ -4335,14 +4410,15 @@ const SEASON_STATS_FOOTBALL_KICKING_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballKickingNcaaf`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballKickingNcaaf({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonStatsFootballKickingNcaaf: Wrapper<Row[], YahooSeasonStatsFootballKickingNcaafParams> = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_KICKING_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballKickingNcaaf} (py/R parity). */
@@ -4387,14 +4463,15 @@ const SEASON_STATS_FOOTBALL_PASSING_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballPassingNcaaf`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballPassingNcaaf({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonStatsFootballPassingNcaaf: Wrapper<Row[], YahooSeasonStatsFootballPassingNcaafParams> = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_PASSING_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballPassingNcaaf} (py/R parity). */
@@ -4439,14 +4516,15 @@ const SEASON_STATS_FOOTBALL_PUNTING_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballPuntingNcaaf`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballPuntingNcaaf({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonStatsFootballPuntingNcaaf: Wrapper<Row[], YahooSeasonStatsFootballPuntingNcaafParams> = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_PUNTING_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballPuntingNcaaf} (py/R parity). */
@@ -4491,14 +4569,15 @@ const SEASON_STATS_FOOTBALL_RECEIVING_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballReceivingNcaaf`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballReceivingNcaaf({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonStatsFootballReceivingNcaaf: Wrapper<Row[], YahooSeasonStatsFootballReceivingNcaafParams> = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_RECEIVING_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballReceivingNcaaf} (py/R parity). */
@@ -4543,14 +4622,15 @@ const SEASON_STATS_FOOTBALL_RETURNS_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballReturnsNcaaf`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballReturnsNcaaf({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonStatsFootballReturnsNcaaf: Wrapper<Row[], YahooSeasonStatsFootballReturnsNcaafParams> = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_RETURNS_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballReturnsNcaaf} (py/R parity). */
@@ -4595,14 +4675,15 @@ const SEASON_STATS_FOOTBALL_RUSHING_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballRushingNcaaf`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonStatsFootballRushingNcaaf({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonStatsFootballRushingNcaaf: Wrapper<Row[], YahooSeasonStatsFootballRushingNcaafParams> = (params: WrapperParams = {}) => callFlat(SEASON_STATS_FOOTBALL_RUSHING_NCAAF_DEF, params);
 /** snake_case alias of {@link yahooSeasonStatsFootballRushingNcaaf} (py/R parity). */
@@ -4647,14 +4728,15 @@ const SEASON_TEAM_STATS_FOOTBALL_DEFENSE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballDefense`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballDefense({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonTeamStatsFootballDefense: Wrapper<Row[], YahooSeasonTeamStatsFootballDefenseParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_DEFENSE_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballDefense} (py/R parity). */
@@ -4699,14 +4781,15 @@ const SEASON_TEAM_STATS_FOOTBALL_KICKING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballKicking`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballKicking({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonTeamStatsFootballKicking: Wrapper<Row[], YahooSeasonTeamStatsFootballKickingParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_KICKING_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballKicking} (py/R parity). */
@@ -4751,14 +4834,15 @@ const SEASON_TEAM_STATS_FOOTBALL_KICKOFFS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballKickoffs`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballKickoffs({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonTeamStatsFootballKickoffs: Wrapper<Row[], YahooSeasonTeamStatsFootballKickoffsParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_KICKOFFS_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballKickoffs} (py/R parity). */
@@ -4803,14 +4887,15 @@ const SEASON_TEAM_STATS_FOOTBALL_OFFENSE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballOffense`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballOffense({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonTeamStatsFootballOffense: Wrapper<Row[], YahooSeasonTeamStatsFootballOffenseParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_OFFENSE_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballOffense} (py/R parity). */
@@ -4855,14 +4940,15 @@ const SEASON_TEAM_STATS_FOOTBALL_PASSING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPassing`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballPassing({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonTeamStatsFootballPassing: Wrapper<Row[], YahooSeasonTeamStatsFootballPassingParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_PASSING_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballPassing} (py/R parity). */
@@ -4907,14 +4993,15 @@ const SEASON_TEAM_STATS_FOOTBALL_PASSING_DEFENSE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPassingDefense`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballPassingDefense({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonTeamStatsFootballPassingDefense: Wrapper<Row[], YahooSeasonTeamStatsFootballPassingDefenseParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_PASSING_DEFENSE_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballPassingDefense} (py/R parity). */
@@ -4959,14 +5046,15 @@ const SEASON_TEAM_STATS_FOOTBALL_PUNTING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPunting`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballPunting({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonTeamStatsFootballPunting: Wrapper<Row[], YahooSeasonTeamStatsFootballPuntingParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_PUNTING_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballPunting} (py/R parity). */
@@ -5011,14 +5099,15 @@ const SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReceiving`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballReceiving({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonTeamStatsFootballReceiving: Wrapper<Row[], YahooSeasonTeamStatsFootballReceivingParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballReceiving} (py/R parity). */
@@ -5063,14 +5152,15 @@ const SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEFENSE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReceivingDefense`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballReceivingDefense({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonTeamStatsFootballReceivingDefense: Wrapper<Row[], YahooSeasonTeamStatsFootballReceivingDefenseParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEFENSE_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballReceivingDefense} (py/R parity). */
@@ -5115,14 +5205,15 @@ const SEASON_TEAM_STATS_FOOTBALL_RETURNS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReturns`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballReturns({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonTeamStatsFootballReturns: Wrapper<Row[], YahooSeasonTeamStatsFootballReturnsParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RETURNS_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballReturns} (py/R parity). */
@@ -5167,14 +5258,15 @@ const SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballRushing`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballRushing({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonTeamStatsFootballRushing: Wrapper<Row[], YahooSeasonTeamStatsFootballRushingParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballRushing} (py/R parity). */
@@ -5219,14 +5311,15 @@ const SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEFENSE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballRushingDefense`
  *
- * @param params.season - query parameter.
- * @param params.league - query parameter.
- * @param params.league_structure - query parameter (`leagueStructure`).
- * @param params.count - query parameter.
- * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.league_structure - `number | string` — the `leagueStructure` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.sort_stat_id - `number | string` — the `sortStatId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballRushingDefense({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooSeasonTeamStatsFootballRushingDefense: Wrapper<Row[], YahooSeasonTeamStatsFootballRushingDefenseParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEFENSE_DEF, params);
 /** snake_case alias of {@link yahooSeasonTeamStatsFootballRushingDefense} (py/R parity). */
@@ -5255,10 +5348,11 @@ const TEAM_INJURIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamInjuries`
  *
- * @param params.team_id - query parameter (`teamId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamInjuries({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTeamInjuries: Wrapper<Row[], YahooTeamInjuriesParams> = (params: WrapperParams = {}) => callFlat(TEAM_INJURIES_DEF, params);
 /** snake_case alias of {@link yahooTeamInjuries} (py/R parity). */
@@ -5291,11 +5385,12 @@ const TEAM_PLAYOFF_SERIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamPlayoffSeries`
  *
- * @param params.team_id - query parameter (`teamId`).
- * @param params.season - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamPlayoffSeries({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTeamPlayoffSeries: Wrapper<Row[], YahooTeamPlayoffSeriesParams> = (params: WrapperParams = {}) => callFlat(TEAM_PLAYOFF_SERIES_DEF, params);
 /** snake_case alias of {@link yahooTeamPlayoffSeries} (py/R parity). */
@@ -5332,12 +5427,13 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamRoster`
  *
- * @param params.team_id - query parameter (`teamId`).
- * @param params.player_image_height - query parameter (`playerImageHeight`).
- * @param params.player_image_width - query parameter (`playerImageWidth`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.player_image_height - `number | string` — the `playerImageHeight` query parameter.
+ * @param params.player_image_width - `number | string` — the `playerImageWidth` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamRoster({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTeamRoster: Wrapper<Row[], YahooTeamRosterParams> = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_DEF, params);
 /** snake_case alias of {@link yahooTeamRoster} (py/R parity). */
@@ -5370,11 +5466,12 @@ const TEAM_SCHEDULE_BY_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamScheduleBySeason`
  *
- * @param params.season - query parameter.
- * @param params.team_id - query parameter (`teamId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamScheduleBySeason({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTeamScheduleBySeason: Wrapper<Row[], YahooTeamScheduleBySeasonParams> = (params: WrapperParams = {}) => callFlat(TEAM_SCHEDULE_BY_SEASON_DEF, params);
 /** snake_case alias of {@link yahooTeamScheduleBySeason} (py/R parity). */
@@ -5411,12 +5508,13 @@ const TEAM_SEARCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamSearch`
  *
- * @param params.name - query parameter.
- * @param params.image_height - query parameter (`imageHeight`).
- * @param params.image_width - query parameter (`imageWidth`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.name - `number | string` — the `name` query parameter.
+ * @param params.image_height - `number | string` — the `imageHeight` query parameter.
+ * @param params.image_width - `number | string` — the `imageWidth` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamSearch({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTeamSearch: Wrapper<Row[], YahooTeamSearchParams> = (params: WrapperParams = {}) => callFlat(TEAM_SEARCH_DEF, params);
 /** snake_case alias of {@link yahooTeamSearch} (py/R parity). */
@@ -5477,18 +5575,19 @@ const TEAM_STATS_LEADERS_V2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamStatsLeadersV2`
  *
- * @param params.league - query parameter.
- * @param params.team_id - query parameter (`teamId`).
- * @param params.count - query parameter.
- * @param params.season - query parameter.
- * @param params.baseball_cut_type - query parameter (`baseballCutType`).
- * @param params.qualified - query parameter.
- * @param params.include_team_stats - query parameter (`includeTeamStats`).
- * @param params.include_player_stats - query parameter (`includePlayerStats`).
- * @param params.is_baseball - query parameter (`isBaseball`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.baseball_cut_type - `number | string` — the `baseballCutType` query parameter.
+ * @param params.qualified - `number | string` — the `qualified` query parameter.
+ * @param params.include_team_stats - `number | string` — the `includeTeamStats` query parameter.
+ * @param params.include_player_stats - `number | string` — the `includePlayerStats` query parameter.
+ * @param params.is_baseball - `number | string` — the `isBaseball` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamStatsLeadersV2({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTeamStatsLeadersV2: Wrapper<Row[], YahooTeamStatsLeadersV2Params> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_LEADERS_V2_DEF, params);
 /** snake_case alias of {@link yahooTeamStatsLeadersV2} (py/R parity). */
@@ -5517,10 +5616,11 @@ const TEAM_TRANSACTIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamTransactions`
  *
- * @param params.team_id - query parameter (`teamId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamTransactions({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTeamTransactions: Wrapper<Row[], YahooTeamTransactionsParams> = (params: WrapperParams = {}) => callFlat(TEAM_TRANSACTIONS_DEF, params);
 /** snake_case alias of {@link yahooTeamTransactions} (py/R parity). */
@@ -5557,12 +5657,13 @@ const TEAMS_BASIC_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamsBasic`
  *
- * @param params.team_ids - query parameter (`teamIds`).
- * @param params.image_height - query parameter (`imageHeight`).
- * @param params.image_width - query parameter (`imageWidth`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_ids - `number | string` — the `teamIds` query parameter.
+ * @param params.image_height - `number | string` — the `imageHeight` query parameter.
+ * @param params.image_width - `number | string` — the `imageWidth` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTeamsBasic({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTeamsBasic: Wrapper<Row[], YahooTeamsBasicParams> = (params: WrapperParams = {}) => callFlat(TEAMS_BASIC_DEF, params);
 /** snake_case alias of {@link yahooTeamsBasic} (py/R parity). */
@@ -5599,12 +5700,13 @@ const TENNIS_MATCHES_BY_DATE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisMatchesByDate`
  *
- * @param params.tournament_id - query parameter (`tournamentId`).
- * @param params.season - query parameter.
- * @param params.date - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.tournament_id - `number | string` — the `tournamentId` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTennisMatchesByDate({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTennisMatchesByDate: Wrapper<Row[], YahooTennisMatchesByDateParams> = (params: WrapperParams = {}) => callFlat(TENNIS_MATCHES_BY_DATE_DEF, params);
 /** snake_case alias of {@link yahooTennisMatchesByDate} (py/R parity). */
@@ -5637,11 +5739,12 @@ const TENNIS_TOURNAMENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisTournament`
  *
- * @param params.tournament_id - query parameter (`tournamentId`).
- * @param params.season - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.tournament_id - `number | string` — the `tournamentId` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTennisTournament({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTennisTournament: Wrapper<Row[], YahooTennisTournamentParams> = (params: WrapperParams = {}) => callFlat(TENNIS_TOURNAMENT_DEF, params);
 /** snake_case alias of {@link yahooTennisTournament} (py/R parity). */
@@ -5678,12 +5781,13 @@ const TENNIS_TOURNAMENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisTournaments`
  *
- * @param params.league_id - query parameter (`leagueId`).
- * @param params.match_type - query parameter (`matchType`).
- * @param params.season - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `leagueId` query parameter.
+ * @param params.match_type - `number | string` — the `matchType` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTennisTournaments({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTennisTournaments: Wrapper<Row[], YahooTennisTournamentsParams> = (params: WrapperParams = {}) => callFlat(TENNIS_TOURNAMENTS_DEF, params);
 /** snake_case alias of {@link yahooTennisTournaments} (py/R parity). */
@@ -5716,11 +5820,12 @@ const TENNIS_TOURNAMENTS_BY_DATE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisTournamentsByDate`
  *
- * @param params.season - query parameter.
- * @param params.date - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTennisTournamentsByDate({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTennisTournamentsByDate: Wrapper<Row[], YahooTennisTournamentsByDateParams> = (params: WrapperParams = {}) => callFlat(TENNIS_TOURNAMENTS_BY_DATE_DEF, params);
 /** snake_case alias of {@link yahooTennisTournamentsByDate} (py/R parity). */
@@ -5757,12 +5862,13 @@ const TRENDING_EVENT_IDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/trendingEventIds`
  *
- * @param params.count - query parameter.
- * @param params.league - query parameter.
- * @param params.date_flip_offset - query parameter (`dateFlipOffset`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.date_flip_offset - `number | string` — the `dateFlipOffset` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTrendingEventIds({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTrendingEventIds: Wrapper<Row[], YahooTrendingEventIdsParams> = (params: WrapperParams = {}) => callFlat(TRENDING_EVENT_IDS_DEF, params);
 /** snake_case alias of {@link yahooTrendingEventIds} (py/R parity). */
@@ -5803,13 +5909,14 @@ const TRENDING_GAME_IDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/trendingGameIds`
  *
- * @param params.count - query parameter.
- * @param params.league - query parameter.
- * @param params.date_flip_offset - query parameter (`dateFlipOffset`).
- * @param params.dates - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.count - `number | string` — the `count` query parameter.
+ * @param params.league - `number | string` — the `league` query parameter.
+ * @param params.date_flip_offset - `number | string` — the `dateFlipOffset` query parameter.
+ * @param params.dates - `number | string` — the `dates` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.yahoo.yahooTrendingGameIds({});
+ * @see https://js.sportsdataverse.org/docs/reference/yahoo#native-api--yahoo-sports
  */
 export const yahooTrendingGameIds: Wrapper<Row[], YahooTrendingGameIdsParams> = (params: WrapperParams = {}) => callFlat(TRENDING_GAME_IDS_DEF, params);
 /** snake_case alias of {@link yahooTrendingGameIds} (py/R parity). */

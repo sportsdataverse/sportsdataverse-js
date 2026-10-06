@@ -139,16 +139,17 @@ const BULK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/bulk`
  *
- * @param params.player_resource - query parameter (`PlayerResource`).
- * @param params.team_resource - query parameter (`TeamResource`).
- * @param params.game_resource - query parameter (`GameResource`).
- * @param params.venue_resource - query parameter (`VenueResource`).
- * @param params.event_resource - query parameter (`EventResource`).
- * @param params.featured_game_resource - query parameter (`FeaturedGameResource`).
- * @param params.golf_event_markets_resource - query parameter (`GolfEventMarketsResource`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_resource - `number | string` — CSV list of player IDs to retrieve.
+ * @param params.team_resource - `number | string` — CSV list of team IDs to retrieve.
+ * @param params.game_resource - `number | string` — CSV list of game IDs to retrieve.
+ * @param params.venue_resource - `number | string` — CSV list of venue IDs to retrieve.
+ * @param params.event_resource - `number | string` — CSV list of event IDs to retrieve.
+ * @param params.featured_game_resource - `number | string` — CSV list of game IDs to retrieve.
+ * @param params.golf_event_markets_resource - `number | string` — CSV list of golf event markets IDs to retrieve.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsBulk({});
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsBulk: Wrapper<Row[], CbsBulkParams> = (params: WrapperParams = {}) => callFlat(BULK_DEF, params);
 /** snake_case alias of {@link cbsBulk} (py/R parity). */
@@ -194,14 +195,15 @@ const CLIENT_CONFIG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/client/config/{client_name}`
  *
- * @param params.client_name - path parameter.
- * @param params.resources - query parameter.
- * @param params.league_id - query parameter (`leagueId`).
- * @param params.classifier - query parameter.
- * @param params.key_name - query parameter (`keyName`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.client_name - `number | string` — Client name as it appears in the database.
+ * @param params.resources - `number | string` — Allowed: league, season.
+ * @param params.league_id - `number | string` — View option. Filter by leagueId.
+ * @param params.classifier - `number | string` — View option. Filter by a certain classifier.
+ * @param params.key_name - `number | string` — View option. Filter by a custom key name.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsClientConfig({ client_name: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsClientConfig: Wrapper<Row[], CbsClientConfigParams> = (params: WrapperParams = {}) => callFlat(CLIENT_CONFIG_DEF, params);
 /** snake_case alias of {@link cbsClientConfig} (py/R parity). */
@@ -229,10 +231,11 @@ const COACH_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/coach/rankings/{coach_id}`
  *
- * @param params.coach_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.coach_id - `number | string` — Numerical player ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsCoachRankings({ coach_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsCoachRankings: Wrapper<Row[], CbsCoachRankingsParams> = (params: WrapperParams = {}) => callFlat(COACH_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsCoachRankings} (py/R parity). */
@@ -265,11 +268,12 @@ const COACH_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/coach/teamAssociations/{coach_id}`
  *
- * @param params.coach_id - path parameter.
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.coach_id - `number | string` — Numerical player ID.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: team.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsCoachTeamAssociations({ coach_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsCoachTeamAssociations: Wrapper<Row[], CbsCoachTeamAssociationsParams> = (params: WrapperParams = {}) => callFlat(COACH_TEAM_ASSOCIATIONS_DEF, params);
 /** snake_case alias of {@link cbsCoachTeamAssociations} (py/R parity). */
@@ -307,12 +311,13 @@ const DIVISION_SUBDIVISIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/division/subdivisions/{division_id}`
  *
- * @param params.division_id - path parameter.
- * @param params.sub_division_id - query parameter (`subDivisionId`).
- * @param params.name - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.division_id - `number | string` — Numerical division ID.
+ * @param params.sub_division_id - `number | string` — View option for rendering only a certain subdivision.
+ * @param params.name - `number | string` — View option for a csv of subdivsion names to render.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsDivisionSubdivisions({ division_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsDivisionSubdivisions: Wrapper<Row[], CbsDivisionSubdivisionsParams> = (params: WrapperParams = {}) => callFlat(DIVISION_SUBDIVISIONS_DEF, params);
 /** snake_case alias of {@link cbsDivisionSubdivisions} (py/R parity). */
@@ -336,9 +341,10 @@ const ENDPOINT_REGISTRY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/endpoint/registry`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsEndpointRegistry({});
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsEndpointRegistry: Wrapper<Row[], CbsEndpointRegistryParams> = (params: WrapperParams = {}) => callFlat(ENDPOINT_REGISTRY_DEF, params);
 /** snake_case alias of {@link cbsEndpointRegistry} (py/R parity). */
@@ -375,12 +381,13 @@ const EVENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/event/{event_id}`
  *
- * @param params.event_id - path parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.event_id - `number | string` — Numerical event ID.
+ * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: entrants, venues, leaderboard, weather, markets.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsEvent({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsEvent: Wrapper<Row[], CbsEventParams> = (params: WrapperParams = {}) => callFlat(EVENT_DEF, params);
 /** snake_case alias of {@link cbsEvent} (py/R parity). */
@@ -408,10 +415,11 @@ const EVENT_ENTRANTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/event/entrants/{event_id}`
  *
- * @param params.event_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.event_id - `number | string` — Numerical event ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsEventEntrants({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsEventEntrants: Wrapper<Row[], CbsEventEntrantsParams> = (params: WrapperParams = {}) => callFlat(EVENT_ENTRANTS_DEF, params);
 /** snake_case alias of {@link cbsEventEntrants} (py/R parity). */
@@ -439,10 +447,11 @@ const EVENT_LEADERBOARD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/event/leaderboard/{event_id}`
  *
- * @param params.event_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.event_id - `number | string` — Numerical event ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsEventLeaderboard({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsEventLeaderboard: Wrapper<Row[], CbsEventLeaderboardParams> = (params: WrapperParams = {}) => callFlat(EVENT_LEADERBOARD_DEF, params);
 /** snake_case alias of {@link cbsEventLeaderboard} (py/R parity). */
@@ -470,10 +479,11 @@ const EVENT_SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/event/seasons/{event_id}`
  *
- * @param params.event_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.event_id - `number | string` — Numerical event ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsEventSeasons({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsEventSeasons: Wrapper<Row[], CbsEventSeasonsParams> = (params: WrapperParams = {}) => callFlat(EVENT_SEASONS_DEF, params);
 /** snake_case alias of {@link cbsEventSeasons} (py/R parity). */
@@ -501,10 +511,11 @@ const EVENT_VENUES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/event/venues/{event_id}`
  *
- * @param params.event_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.event_id - `number | string` — Numerical event ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsEventVenues({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsEventVenues: Wrapper<Row[], CbsEventVenuesParams> = (params: WrapperParams = {}) => callFlat(EVENT_VENUES_DEF, params);
 /** snake_case alias of {@link cbsEventVenues} (py/R parity). */
@@ -541,12 +552,13 @@ const GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: homeTeam, awayTeam, league, lineup, odds, players, standings, conference, division, probablePlayers, player, playerTeamAssociations, injuries, transactions, depthCharts, metaData, boxscore, venue, scoringLeaders, scoringPlayerStats, scoringScoreboard, scoringScores, scoringYtdPlayerStats, scoringYtdTeamStats, scoringRosters, scoringPlays, scoringTeamStats, scoringBoxscores, gameOdds, gameOutcomes, ticket, scoringDrives, scoringWinProb, gameHqOdds, weather, featured, gameProps, bettingSplits, gameRTWP.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGame({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGame: Wrapper<Row[], CbsGameParams> = (params: WrapperParams = {}) => callFlat(GAME_DEF, params);
 /** snake_case alias of {@link cbsGame} (py/R parity). */
@@ -574,10 +586,11 @@ const GAME_BETTING_SPLITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/bettingSplits/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameBettingSplits({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameBettingSplits: Wrapper<Row[], CbsGameBettingSplitsParams> = (params: WrapperParams = {}) => callFlat(GAME_BETTING_SPLITS_DEF, params);
 /** snake_case alias of {@link cbsGameBettingSplits} (py/R parity). */
@@ -606,10 +619,11 @@ const GAME_BOXSCORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/boxscore/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameBoxscore({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameBoxscore: Wrapper<Row[], CbsGameBoxscoreParams> = (params: WrapperParams = {}) => callFlat(GAME_BOXSCORE_DEF, params);
 /** snake_case alias of {@link cbsGameBoxscore} (py/R parity). */
@@ -637,10 +651,11 @@ const GAME_CONTENT_PREVIEW_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/content/preview/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameContentPreview({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameContentPreview: Wrapper<Row[], CbsGameContentPreviewParams> = (params: WrapperParams = {}) => callFlat(GAME_CONTENT_PREVIEW_DEF, params);
 /** snake_case alias of {@link cbsGameContentPreview} (py/R parity). */
@@ -668,10 +683,11 @@ const GAME_CONTENT_RECAP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/content/recap/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameContentRecap({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameContentRecap: Wrapper<Row[], CbsGameContentRecapParams> = (params: WrapperParams = {}) => callFlat(GAME_CONTENT_RECAP_DEF, params);
 /** snake_case alias of {@link cbsGameContentRecap} (py/R parity). */
@@ -704,11 +720,12 @@ const GAME_CONTENT_STORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/content/story/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.game_ids_story_tags - query parameter (`gameIdsStoryTags`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.game_ids_story_tags - `number | string` — The tags used to retrieve stories.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameContentStory({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameContentStory: Wrapper<Row[], CbsGameContentStoryParams> = (params: WrapperParams = {}) => callFlat(GAME_CONTENT_STORY_DEF, params);
 /** snake_case alias of {@link cbsGameContentStory} (py/R parity). */
@@ -737,10 +754,11 @@ const GAME_FEATURED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/featured/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameFeatured({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameFeatured: Wrapper<Row[], CbsGameFeaturedParams> = (params: WrapperParams = {}) => callFlat(GAME_FEATURED_DEF, params);
 /** snake_case alias of {@link cbsGameFeatured} (py/R parity). */
@@ -773,11 +791,12 @@ const GAME_LINEUP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/lineup/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: playerTeamAssociations, injuries, metaData, playerStats.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameLineup({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameLineup: Wrapper<Row[], CbsGameLineupParams> = (params: WrapperParams = {}) => callFlat(GAME_LINEUP_DEF, params);
 /** snake_case alias of {@link cbsGameLineup} (py/R parity). */
@@ -826,15 +845,16 @@ const GAME_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/odds/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.market_ids - query parameter (`marketIds`).
- * @param params.book_ids - query parameter (`bookIds`).
- * @param params.state - query parameter.
- * @param params.model - query parameter.
- * @param params.show_hidden_odds - query parameter (`showHiddenOdds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.market_ids - `number | string` — This value can be used to specify markets, using the marketIds.
+ * @param params.book_ids - `number | string` — This value can be used to specify books, using the bookIds.
+ * @param params.state - `number | string` — This value can be used to specify a state.
+ * @param params.model - `number | string` — This value can be used set the model to be used.
+ * @param params.show_hidden_odds - `number | string` — If set to 1, show the odds that has been hidden within the market and/or consensus nodes.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameOdds({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameOdds: Wrapper<Row[], CbsGameOddsParams> = (params: WrapperParams = {}) => callFlat(GAME_ODDS_DEF, params);
 /** snake_case alias of {@link cbsGameOdds} (py/R parity). */
@@ -863,10 +883,11 @@ const GAME_ODDS_HQ_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/odds/hq/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameOddsHq({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameOddsHq: Wrapper<Row[], CbsGameOddsHqParams> = (params: WrapperParams = {}) => callFlat(GAME_ODDS_HQ_DEF, params);
 /** snake_case alias of {@link cbsGameOddsHq} (py/R parity). */
@@ -894,10 +915,11 @@ const GAME_OUTCOMES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/outcomes/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameOutcomes({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameOutcomes: Wrapper<Row[], CbsGameOutcomesParams> = (params: WrapperParams = {}) => callFlat(GAME_OUTCOMES_DEF, params);
 /** snake_case alias of {@link cbsGameOutcomes} (py/R parity). */
@@ -935,12 +957,13 @@ const GAME_PROBABLE_PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/probablePlayers/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: player, playerTeamAssociations, injuries, transactions, depthCharts, metaData.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameProbablePlayers({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameProbablePlayers: Wrapper<Row[], CbsGameProbablePlayersParams> = (params: WrapperParams = {}) => callFlat(GAME_PROBABLE_PLAYERS_DEF, params);
 /** snake_case alias of {@link cbsGameProbablePlayers} (py/R parity). */
@@ -989,15 +1012,16 @@ const GAME_PROPS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/props/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.market_ids - query parameter (`marketIds`).
- * @param params.book_ids - query parameter (`bookIds`).
- * @param params.prop_bet_types - query parameter (`propBetTypes`).
- * @param params.state - query parameter.
- * @param params.include_inactive_markets - query parameter (`includeInactiveMarkets`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.market_ids - `number | string` — This value can be used to specify markets, using the marketIds.
+ * @param params.book_ids - `number | string` — This value can be used to specify books, using the bookIds.
+ * @param params.prop_bet_types - `number | string` — This value can be used to specify prop bet types, using the propBetTypes. Allowed: player, game, team.
+ * @param params.state - `number | string` — This value can be used to specify a state.
+ * @param params.include_inactive_markets - `number | string` — This value can be used to filter out inactive markets.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameProps({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameProps: Wrapper<Row[], CbsGamePropsParams> = (params: WrapperParams = {}) => callFlat(GAME_PROPS_DEF, params);
 /** snake_case alias of {@link cbsGameProps} (py/R parity). */
@@ -1025,10 +1049,11 @@ const GAME_RTWP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/rtwp/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameRtwp({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameRtwp: Wrapper<Row[], CbsGameRtwpParams> = (params: WrapperParams = {}) => callFlat(GAME_RTWP_DEF, params);
 /** snake_case alias of {@link cbsGameRtwp} (py/R parity). */
@@ -1057,10 +1082,11 @@ const GAME_RUWT_HIGHLIGHTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/ruwtHighlights/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameRuwtHighlights({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameRuwtHighlights: Wrapper<Row[], CbsGameRuwtHighlightsParams> = (params: WrapperParams = {}) => callFlat(GAME_RUWT_HIGHLIGHTS_DEF, params);
 /** snake_case alias of {@link cbsGameRuwtHighlights} (py/R parity). */
@@ -1088,10 +1114,11 @@ const GAME_SCORING_BOXSCORES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/boxscores/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringBoxscores({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameScoringBoxscores: Wrapper<Row[], CbsGameScoringBoxscoresParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_BOXSCORES_DEF, params);
 /** snake_case alias of {@link cbsGameScoringBoxscores} (py/R parity). */
@@ -1119,10 +1146,11 @@ const GAME_SCORING_DRIVES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/drives/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringDrives({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameScoringDrives: Wrapper<Row[], CbsGameScoringDrivesParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_DRIVES_DEF, params);
 /** snake_case alias of {@link cbsGameScoringDrives} (py/R parity). */
@@ -1150,10 +1178,11 @@ const GAME_SCORING_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/leaders/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringLeaders({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameScoringLeaders: Wrapper<Row[], CbsGameScoringLeadersParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_LEADERS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringLeaders} (py/R parity). */
@@ -1181,10 +1210,11 @@ const GAME_SCORING_PLAYER_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/playerStats/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringPlayerStats({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameScoringPlayerStats: Wrapper<Row[], CbsGameScoringPlayerStatsParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringPlayerStats} (py/R parity). */
@@ -1212,10 +1242,11 @@ const GAME_SCORING_PLAYS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/plays/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringPlays({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameScoringPlays: Wrapper<Row[], CbsGameScoringPlaysParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_PLAYS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringPlays} (py/R parity). */
@@ -1243,10 +1274,11 @@ const GAME_SCORING_ROSTERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/rosters/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringRosters({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameScoringRosters: Wrapper<Row[], CbsGameScoringRostersParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_ROSTERS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringRosters} (py/R parity). */
@@ -1274,10 +1306,11 @@ const GAME_SCORING_SCOREBOARD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/scoreboard/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringScoreboard({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameScoringScoreboard: Wrapper<Row[], CbsGameScoringScoreboardParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_SCOREBOARD_DEF, params);
 /** snake_case alias of {@link cbsGameScoringScoreboard} (py/R parity). */
@@ -1305,10 +1338,11 @@ const GAME_SCORING_SCORES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/scores/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringScores({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameScoringScores: Wrapper<Row[], CbsGameScoringScoresParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_SCORES_DEF, params);
 /** snake_case alias of {@link cbsGameScoringScores} (py/R parity). */
@@ -1336,10 +1370,11 @@ const GAME_SCORING_TEAM_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/teamStats/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringTeamStats({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameScoringTeamStats: Wrapper<Row[], CbsGameScoringTeamStatsParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_TEAM_STATS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringTeamStats} (py/R parity). */
@@ -1367,10 +1402,11 @@ const GAME_SCORING_WINPROB_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/winprob/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringWinprob({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameScoringWinprob: Wrapper<Row[], CbsGameScoringWinprobParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_WINPROB_DEF, params);
 /** snake_case alias of {@link cbsGameScoringWinprob} (py/R parity). */
@@ -1398,10 +1434,11 @@ const GAME_SCORING_YTD_PLAYER_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/ytdPlayerStats/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringYtdPlayerStats({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameScoringYtdPlayerStats: Wrapper<Row[], CbsGameScoringYtdPlayerStatsParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_YTD_PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringYtdPlayerStats} (py/R parity). */
@@ -1429,10 +1466,11 @@ const GAME_SCORING_YTD_TEAM_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/ytdTeamStats/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameScoringYtdTeamStats({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameScoringYtdTeamStats: Wrapper<Row[], CbsGameScoringYtdTeamStatsParams> = (params: WrapperParams = {}) => callFlat(GAME_SCORING_YTD_TEAM_STATS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringYtdTeamStats} (py/R parity). */
@@ -1460,10 +1498,11 @@ const GAME_TICKET_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/ticket/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameTicket({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameTicket: Wrapper<Row[], CbsGameTicketParams> = (params: WrapperParams = {}) => callFlat(GAME_TICKET_DEF, params);
 /** snake_case alias of {@link cbsGameTicket} (py/R parity). */
@@ -1492,10 +1531,11 @@ const GAME_WEATHER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/weather/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGameWeather({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGameWeather: Wrapper<Row[], CbsGameWeatherParams> = (params: WrapperParams = {}) => callFlat(GAME_WEATHER_DEF, params);
 /** snake_case alias of {@link cbsGameWeather} (py/R parity). */
@@ -1523,10 +1563,11 @@ const GOLF_EVENT_MARKETS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/golf/event/markets/{event_id}`
  *
- * @param params.event_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.event_id - `number | string` — Numerical event ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGolfEventMarkets({ event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGolfEventMarkets: Wrapper<Row[], CbsGolfEventMarketsParams> = (params: WrapperParams = {}) => callFlat(GOLF_EVENT_MARKETS_DEF, params);
 /** snake_case alias of {@link cbsGolfEventMarkets} (py/R parity). */
@@ -1559,11 +1600,12 @@ const GOLF_PLAYER_MARKETS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/golf/player/markets/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.event_id - query parameter (`eventId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.event_id - `number | string` — View option. Filter by eventId.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGolfPlayerMarkets({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGolfPlayerMarkets: Wrapper<Row[], CbsGolfPlayerMarketsParams> = (params: WrapperParams = {}) => callFlat(GOLF_PLAYER_MARKETS_DEF, params);
 /** snake_case alias of {@link cbsGolfPlayerMarkets} (py/R parity). */
@@ -1600,12 +1642,13 @@ const GOLFER_RESULTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/golfer/results/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.season_year - query parameter (`seasonYear`).
- * @param params.season_id - query parameter (`seasonId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.season_year - `number | string` — View option. Filter by seasonType.
+ * @param params.season_id - `number | string` — View option. Filter by seasonId.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsGolferResults({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsGolferResults: Wrapper<Row[], CbsGolferResultsParams> = (params: WrapperParams = {}) => callFlat(GOLFER_RESULTS_DEF, params);
 /** snake_case alias of {@link cbsGolferResults} (py/R parity). */
@@ -1638,11 +1681,12 @@ const LEAGUE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/league/{league_id}`
  *
- * @param params.league_id - path parameter.
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — Numerical league ID.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: teams, players, standings, conference, division, polls, teamSeasons.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsLeague({ league_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsLeague: Wrapper<Row[], CbsLeagueParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_DEF, params);
 /** snake_case alias of {@link cbsLeague} (py/R parity). */
@@ -1675,11 +1719,12 @@ const LEAGUE_TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/league/teams/{league_id}`
  *
- * @param params.league_id - path parameter.
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — Numerical league Id - gets team from team table not teams for season.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: players, standings, conference, division, playerTeamAssociations, injuries, transactions, depthCharts, polls, teamSeasons, sportsLineStandings.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsLeagueTeams({ league_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsLeagueTeams: Wrapper<Row[], CbsLeagueTeamsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_TEAMS_DEF, params);
 /** snake_case alias of {@link cbsLeagueTeams} (py/R parity). */
@@ -1707,10 +1752,11 @@ const ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/odds/{game_id}`
  *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_id - `number | string` — Numerical game ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsOdds({ game_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsOdds: Wrapper<Row[], CbsOddsParams> = (params: WrapperParams = {}) => callFlat(ODDS_DEF, params);
 /** snake_case alias of {@link cbsOdds} (py/R parity). */
@@ -1751,13 +1797,14 @@ const PLAYER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.year - query parameter.
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.date_format - `number | string` — Optional for any date field. Options here: http://momentjs.com/docs/#/displaying/format/.
+ * @param params.year - `number | string` — Optional year in YYYY format (for Transactions only).
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: playerTeamAssociations, injuries, transactions, depthCharts, metaData, playerStats, standings, rankings, playerOutlook, draftInfo, combineData, positionRankings, gameStats, encyclopedia, golferResults, playerGolfMetadata, playerFutures, golferMarkets, recruitTeamAssociations, coachTeamAssociations, recruitRankings, coachRankings.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayer({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayer: Wrapper<Row[], CbsPlayerParams> = (params: WrapperParams = {}) => callFlat(PLAYER_DEF, params);
 /** snake_case alias of {@link cbsPlayer} (py/R parity). */
@@ -1785,10 +1832,11 @@ const PLAYER_COMBINE_DATA_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/combineData/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerCombineData({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerCombineData: Wrapper<Row[], CbsPlayerCombineDataParams> = (params: WrapperParams = {}) => callFlat(PLAYER_COMBINE_DATA_DEF, params);
 /** snake_case alias of {@link cbsPlayerCombineData} (py/R parity). */
@@ -1826,12 +1874,13 @@ const PLAYER_DEPTH_CHARTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/depthCharts/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.position - query parameter.
- * @param params.pitch_pos - query parameter (`pitchPos`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.position - `number | string` — A csv of positions to filter with.
+ * @param params.pitch_pos - `number | string` — A csv of pitch positions to filter with (baseball only).
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerDepthCharts({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerDepthCharts: Wrapper<Row[], CbsPlayerDepthChartsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_DEPTH_CHARTS_DEF, params);
 /** snake_case alias of {@link cbsPlayerDepthCharts} (py/R parity). */
@@ -1872,13 +1921,14 @@ const PLAYER_DRAFT_INFO_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/draftInfo/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.season_year - query parameter (`seasonYear`).
- * @param params.season_type - query parameter (`seasonType`).
- * @param params.season_id - query parameter (`seasonId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.season_year - `number | string` — View option, filter by seasonYear.
+ * @param params.season_type - `number | string` — View option, filter by seasonType Allowed: regular, pre, post.
+ * @param params.season_id - `number | string` — View option, filter by seasonId.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerDraftInfo({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerDraftInfo: Wrapper<Row[], CbsPlayerDraftInfoParams> = (params: WrapperParams = {}) => callFlat(PLAYER_DRAFT_INFO_DEF, params);
 /** snake_case alias of {@link cbsPlayerDraftInfo} (py/R parity). */
@@ -1915,12 +1965,13 @@ const PLAYER_ENCYCLOPEDIA_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/encyclopedia/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.season_year - query parameter (`seasonYear`).
- * @param params.season_id - query parameter (`seasonId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.season_year - `number | string` — View option. Filter by seasonType.
+ * @param params.season_id - `number | string` — View option. Filter by seasonId.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerEncyclopedia({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerEncyclopedia: Wrapper<Row[], CbsPlayerEncyclopediaParams> = (params: WrapperParams = {}) => callFlat(PLAYER_ENCYCLOPEDIA_DEF, params);
 /** snake_case alias of {@link cbsPlayerEncyclopedia} (py/R parity). */
@@ -1948,10 +1999,11 @@ const PLAYER_FUTURES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/futures/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerFutures({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerFutures: Wrapper<Row[], CbsPlayerFuturesParams> = (params: WrapperParams = {}) => callFlat(PLAYER_FUTURES_DEF, params);
 /** snake_case alias of {@link cbsPlayerFutures} (py/R parity). */
@@ -1992,13 +2044,14 @@ const PLAYER_GAME_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/gameStats/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.game_id - query parameter (`gameId`).
- * @param params.season_year - query parameter (`seasonYear`).
- * @param params.season_type - query parameter (`seasonType`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.game_id - `number | string` — View option, filter by gameId.
+ * @param params.season_year - `number | string` — Season Year in YYYY format.
+ * @param params.season_type - `number | string` — Csv list of pre, regular, or post Allowed: pre, regular, post.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerGameStats({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerGameStats: Wrapper<Row[], CbsPlayerGameStatsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_GAME_STATS_DEF, params);
 /** snake_case alias of {@link cbsPlayerGameStats} (py/R parity). */
@@ -2027,10 +2080,11 @@ const PLAYER_HOCKEY_META_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/hockey/meta/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerHockeyMeta({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerHockeyMeta: Wrapper<Row[], CbsPlayerHockeyMetaParams> = (params: WrapperParams = {}) => callFlat(PLAYER_HOCKEY_META_DEF, params);
 /** snake_case alias of {@link cbsPlayerHockeyMeta} (py/R parity). */
@@ -2063,11 +2117,12 @@ const PLAYER_INJURIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/injuries/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerInjuries({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerInjuries: Wrapper<Row[], CbsPlayerInjuriesParams> = (params: WrapperParams = {}) => callFlat(PLAYER_INJURIES_DEF, params);
 /** snake_case alias of {@link cbsPlayerInjuries} (py/R parity). */
@@ -2096,10 +2151,11 @@ const PLAYER_META_BASEBALL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/meta/baseball/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerMetaBaseball({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerMetaBaseball: Wrapper<Row[], CbsPlayerMetaBaseballParams> = (params: WrapperParams = {}) => callFlat(PLAYER_META_BASEBALL_DEF, params);
 /** snake_case alias of {@link cbsPlayerMetaBaseball} (py/R parity). */
@@ -2128,10 +2184,11 @@ const PLAYER_META_GOLF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/meta/golf/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerMetaGolf({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerMetaGolf: Wrapper<Row[], CbsPlayerMetaGolfParams> = (params: WrapperParams = {}) => callFlat(PLAYER_META_GOLF_DEF, params);
 /** snake_case alias of {@link cbsPlayerMetaGolf} (py/R parity). */
@@ -2164,11 +2221,12 @@ const PLAYER_OUTLOOK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/outlook/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.date_format - `number | string` — Optional format for dateCreated field. Available options here: http://momentjs.com/docs/#/displaying/format/.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerOutlook({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerOutlook: Wrapper<Row[], CbsPlayerOutlookParams> = (params: WrapperParams = {}) => callFlat(PLAYER_OUTLOOK_DEF, params);
 /** snake_case alias of {@link cbsPlayerOutlook} (py/R parity). */
@@ -2202,11 +2260,12 @@ const PLAYER_POSITION_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/positionRankings/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.position - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.position - `number | string` — Filter by position.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerPositionRankings({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerPositionRankings: Wrapper<Row[], CbsPlayerPositionRankingsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_POSITION_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsPlayerPositionRankings} (py/R parity). */
@@ -2255,15 +2314,16 @@ const PLAYER_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/rankings/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.season_year - query parameter (`seasonYear`).
- * @param params.season_type - query parameter (`seasonType`).
- * @param params.season_id - query parameter (`seasonId`).
- * @param params.is_current - query parameter (`isCurrent`).
- * @param params.categories - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.season_year - `number | string` — View option. Filter by seasonYear.
+ * @param params.season_type - `number | string` — View option. Filter by seasonType. Allowed: regular, pre, post.
+ * @param params.season_id - `number | string` — View option. Filter by seasonId.
+ * @param params.is_current - `number | string` — View option. Only show stats for seasons where isCurrent is true. Allowed: 1.
+ * @param params.categories - `number | string` — View option. Only return the specified rankings categories.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerRankings({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerRankings: Wrapper<Row[], CbsPlayerRankingsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsPlayerRankings} (py/R parity). */
@@ -2297,11 +2357,12 @@ const PLAYER_RECRUIT_ASSOCIATIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/recruitAssociations/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: team.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerRecruitAssociations({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerRecruitAssociations: Wrapper<Row[], CbsPlayerRecruitAssociationsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_RECRUIT_ASSOCIATIONS_DEF, params);
 /** snake_case alias of {@link cbsPlayerRecruitAssociations} (py/R parity). */
@@ -2350,15 +2411,16 @@ const PLAYER_STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/standings/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.season_year - query parameter (`seasonYear`).
- * @param params.season_type - query parameter (`seasonType`).
- * @param params.season_id - query parameter (`seasonId`).
- * @param params.is_current - query parameter (`isCurrent`).
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.season_year - `number | string` — View option. Filter by seasonYear.
+ * @param params.season_type - `number | string` — View option. Filter by seasonType. Allowed: regular, pre, post.
+ * @param params.season_id - `number | string` — View option. Filter by seasonId.
+ * @param params.is_current - `number | string` — View option. Only show standings for seasons where isCurrent is true. Allowed: 1.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: league.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerStandings({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerStandings: Wrapper<Row[], CbsPlayerStandingsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_STANDINGS_DEF, params);
 /** snake_case alias of {@link cbsPlayerStandings} (py/R parity). */
@@ -2415,17 +2477,18 @@ const PLAYER_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/stats/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.season_year - query parameter (`seasonYear`).
- * @param params.season_type - query parameter (`seasonType`).
- * @param params.season_id - query parameter (`seasonId`).
- * @param params.is_current - query parameter (`isCurrent`).
- * @param params.team_id - query parameter (`teamId`).
- * @param params.team_abbr - query parameter (`teamAbbr`).
- * @param params.is_total - query parameter (`isTotal`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.season_year - `number | string` — View option. Filter by seasonYear.
+ * @param params.season_type - `number | string` — View option. Filter by seasonType. Allowed: regular, pre, post.
+ * @param params.season_id - `number | string` — View option. Filter by seasonId.
+ * @param params.is_current - `number | string` — View option. Only show stats for seasons where isCurrent is true. Allowed: 1.
+ * @param params.team_id - `number | string` — View option. Filter by teamId.
+ * @param params.team_abbr - `number | string` — View option. Filter by a specific team abbreviation.
+ * @param params.is_total - `number | string` — View option. Filter only the isTotal record for players who played for multiple teams. Allowed: 1.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerStats({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerStats: Wrapper<Row[], CbsPlayerStatsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link cbsPlayerStats} (py/R parity). */
@@ -2466,13 +2529,14 @@ const PLAYER_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/teamAssociations/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.assoc_type - query parameter (`assocType`).
- * @param params.roster_status - query parameter (`rosterStatus`).
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.assoc_type - `number | string` — Filter associations by assoc type Allowed: C, H, S, F.
+ * @param params.roster_status - `number | string` — Filter associations by roster status Allowed: ACT, NWT, MIN, MNR, RET, DEV, CUT, DIS, DL, IR, UFA, UDF, EXE, TRA, SUS, PUP, FA, RFA, KIA, INA.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: team.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerTeamAssociations({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerTeamAssociations: Wrapper<Row[], CbsPlayerTeamAssociationsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_TEAM_ASSOCIATIONS_DEF, params);
 /** snake_case alias of {@link cbsPlayerTeamAssociations} (py/R parity). */
@@ -2521,15 +2585,16 @@ const PLAYER_TRANSACTIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/transactions/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.season_year - query parameter (`seasonYear`).
- * @param params.season_type - query parameter (`seasonType`).
- * @param params.season_id - query parameter (`seasonId`).
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
+ * @param params.season_year - `number | string` — View option. Filter by seasonYear.
+ * @param params.season_type - `number | string` — View option. Filter by seasonType. Allowed: regular, pre, post.
+ * @param params.season_id - `number | string` — View option. Filter by seasonId.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: targetTeam, currentTeam, fromTeam.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsPlayerTransactions({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsPlayerTransactions: Wrapper<Row[], CbsPlayerTransactionsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_TRANSACTIONS_DEF, params);
 /** snake_case alias of {@link cbsPlayerTransactions} (py/R parity). */
@@ -2557,10 +2622,11 @@ const RECRUIT_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/recruit/rankings/{player_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.player_id - `number | string` — Numerical player ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsRecruitRankings({ player_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsRecruitRankings: Wrapper<Row[], CbsRecruitRankingsParams> = (params: WrapperParams = {}) => callFlat(RECRUIT_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsRecruitRankings} (py/R parity). */
@@ -2597,12 +2663,13 @@ const SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/season/{season_id}`
  *
- * @param params.season_id - path parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season_id - `number | string` — Numerical season ID.
+ * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: sport, league, teams.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsSeason({ season_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsSeason: Wrapper<Row[], CbsSeasonParams> = (params: WrapperParams = {}) => callFlat(SEASON_DEF, params);
 /** snake_case alias of {@link cbsSeason} (py/R parity). */
@@ -2635,11 +2702,12 @@ const SEASON_TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/season/teams/{season_id}`
  *
- * @param params.season_id - path parameter.
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season_id - `number | string` — Optional seasonYear for leagues that change teams each year.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: players, standings, conference, division, playerTeamAssociations, injuries, transactions, depthCharts, polls, teamSeasons, sportsLineStandings, league.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsSeasonTeams({ season_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsSeasonTeams: Wrapper<Row[], CbsSeasonTeamsParams> = (params: WrapperParams = {}) => callFlat(SEASON_TEAMS_DEF, params);
 /** snake_case alias of {@link cbsSeasonTeams} (py/R parity). */
@@ -2672,11 +2740,12 @@ const SPORT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/sport/{sport_id}`
  *
- * @param params.sport_id - path parameter.
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — Numerical sport ID.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: leagues.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsSport({ sport_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsSport: Wrapper<Row[], CbsSportParams> = (params: WrapperParams = {}) => callFlat(SPORT_DEF, params);
 /** snake_case alias of {@link cbsSport} (py/R parity). */
@@ -2704,10 +2773,11 @@ const SPORT_LEAGUES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/sport/leagues/{sport_id}`
  *
- * @param params.sport_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — Numerical league ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsSportLeagues({ sport_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsSportLeagues: Wrapper<Row[], CbsSportLeaguesParams> = (params: WrapperParams = {}) => callFlat(SPORT_LEAGUES_DEF, params);
 /** snake_case alias of {@link cbsSportLeagues} (py/R parity). */
@@ -2735,10 +2805,11 @@ const TEAM_FUTURES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/futures/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — Numerical team ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamFutures({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsTeamFutures: Wrapper<Row[], CbsTeamFuturesParams> = (params: WrapperParams = {}) => callFlat(TEAM_FUTURES_DEF, params);
 /** snake_case alias of {@link cbsTeamFutures} (py/R parity). */
@@ -2771,11 +2842,12 @@ const TEAM_METADATA_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/metadata/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — Numerical team ID.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: team.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamMetadata({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsTeamMetadata: Wrapper<Row[], CbsTeamMetadataParams> = (params: WrapperParams = {}) => callFlat(TEAM_METADATA_DEF, params);
 /** snake_case alias of {@link cbsTeamMetadata} (py/R parity). */
@@ -2808,11 +2880,12 @@ const TEAM_PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/players/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — Numerical team ID.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: playerTeamAssociations, injuries, transactions, depthCharts.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamPlayers({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsTeamPlayers: Wrapper<Row[], CbsTeamPlayersParams> = (params: WrapperParams = {}) => callFlat(TEAM_PLAYERS_DEF, params);
 /** snake_case alias of {@link cbsTeamPlayers} (py/R parity). */
@@ -2849,12 +2922,13 @@ const TEAM_POLLS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/polls/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.polls - query parameter.
- * @param params.season_id - query parameter (`seasonId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — Numerical team ID.
+ * @param params.polls - `number | string` — View option. Filter by a certain poll name. Allowed: coaches, ap, fcscoachespoll, statstsnfcspoll, rpi, playoffselectioncommitteepoll, net.
+ * @param params.season_id - `number | string` — View option. Filter by seasonId.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamPolls({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsTeamPolls: Wrapper<Row[], CbsTeamPollsParams> = (params: WrapperParams = {}) => callFlat(TEAM_POLLS_DEF, params);
 /** snake_case alias of {@link cbsTeamPolls} (py/R parity). */
@@ -2895,13 +2969,14 @@ const TEAM_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/rankings/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.season_year - query parameter (`seasonYear`).
- * @param params.season_type - query parameter (`seasonType`).
- * @param params.season_id - query parameter (`seasonId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — Numerical team id.
+ * @param params.season_year - `number | string` — View option. Filter by seasonYear.
+ * @param params.season_type - `number | string` — View option. Filter by seasonType. Allowed: regular, pre, post.
+ * @param params.season_id - `number | string` — View option. Filter by seasonId.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamRankings({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsTeamRankings: Wrapper<Row[], CbsTeamRankingsParams> = (params: WrapperParams = {}) => callFlat(TEAM_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsTeamRankings} (py/R parity). */
@@ -2930,10 +3005,11 @@ const TEAM_RANKINGS_SPORTSLINE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/rankings/sportsline/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — Numerical team id.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamRankingsSportsline({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsTeamRankingsSportsline: Wrapper<Row[], CbsTeamRankingsSportslineParams> = (params: WrapperParams = {}) => callFlat(TEAM_RANKINGS_SPORTSLINE_DEF, params);
 /** snake_case alias of {@link cbsTeamRankingsSportsline} (py/R parity). */
@@ -2982,15 +3058,16 @@ const TEAM_SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/seasons/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.season_year - query parameter (`seasonYear`).
- * @param params.season_type - query parameter (`seasonType`).
- * @param params.season_id - query parameter (`seasonId`).
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — Numerical team ID.
+ * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
+ * @param params.season_year - `number | string` — View option. Filter by seasonYear.
+ * @param params.season_type - `number | string` — View option. Filter by seasonType. Allowed: regular, pre, post.
+ * @param params.season_id - `number | string` — View option. Filter by seasonId.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: league.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamSeasons({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsTeamSeasons: Wrapper<Row[], CbsTeamSeasonsParams> = (params: WrapperParams = {}) => callFlat(TEAM_SEASONS_DEF, params);
 /** snake_case alias of {@link cbsTeamSeasons} (py/R parity). */
@@ -3031,13 +3108,14 @@ const TEAM_STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/standings/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.year - query parameter.
- * @param params.season_type - query parameter (`seasonType`).
- * @param params.season_id - query parameter (`seasonId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — Numerical team ID.
+ * @param params.year - `number | string` — Optional year in YYYY format.
+ * @param params.season_type - `number | string` — View option. Filter by seasonType. v3 only! Allowed: regular, pre, post.
+ * @param params.season_id - `number | string` — View option. Filter by seasonId. v3 only!.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamStandings({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsTeamStandings: Wrapper<Row[], CbsTeamStandingsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STANDINGS_DEF, params);
 /** snake_case alias of {@link cbsTeamStandings} (py/R parity). */
@@ -3071,11 +3149,12 @@ const TEAM_STANDINGS_SPORTSLINE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/standings/sportsline/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — Numerical team ID.
+ * @param params.date_format - `number | string` — Optional. Options here: http://momentjs.com/docs/#/displaying/format/.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamStandingsSportsline({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsTeamStandingsSportsline: Wrapper<Row[], CbsTeamStandingsSportslineParams> = (params: WrapperParams = {}) => callFlat(TEAM_STANDINGS_SPORTSLINE_DEF, params);
 /** snake_case alias of {@link cbsTeamStandingsSportsline} (py/R parity). */
@@ -3120,14 +3199,15 @@ const TEAM_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/stats/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.season_year - query parameter (`seasonYear`).
- * @param params.season_type - query parameter (`seasonType`).
- * @param params.season_id - query parameter (`seasonId`).
- * @param params.is_current - query parameter (`isCurrent`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — Numerical team ID.
+ * @param params.season_year - `number | string` — View option. Filter by seasonYear.
+ * @param params.season_type - `number | string` — View option. Filter by seasonType. Allowed: regular, pre, post.
+ * @param params.season_id - `number | string` — View option. Filter by seasonId.
+ * @param params.is_current - `number | string` — View option. Only show stats for seasons where isCurrent is true. Allowed: 1.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsTeamStats({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsTeamStats: Wrapper<Row[], CbsTeamStatsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link cbsTeamStats} (py/R parity). */
@@ -3160,11 +3240,12 @@ const VENUE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/venue/{venue_id}`
  *
- * @param params.venue_id - path parameter.
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.venue_id - `number | string` — Numerical venue ID.
+ * @param params.resources - `number | string` — Specify specific sub-resources to resolve. Defaults to none. Allowed: metaData.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsVenue({ venue_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsVenue: Wrapper<Row[], CbsVenueParams> = (params: WrapperParams = {}) => callFlat(VENUE_DEF, params);
 /** snake_case alias of {@link cbsVenue} (py/R parity). */
@@ -3192,10 +3273,11 @@ const VENUE_METADATA_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/venue/metadata/{venue_id}`
  *
- * @param params.venue_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.venue_id - `number | string` — Numerical venue ID.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.cbs.cbsVenueMetadata({ venue_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/cbs#native-api--cbs-sports
  */
 export const cbsVenueMetadata: Wrapper<Row[], CbsVenueMetadataParams> = (params: WrapperParams = {}) => callFlat(VENUE_METADATA_DEF, params);
 /** snake_case alias of {@link cbsVenueMetadata} (py/R parity). */

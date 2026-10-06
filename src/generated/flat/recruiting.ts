@@ -69,12 +69,13 @@ const ARCHIVED_PLAYER_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/rankings/{ranking_key}/archivedPlayerRankings`
  *
- * @param params.ranking_key - path parameter.
- * @param params.page_size - query parameter (`pagesize`) — default `3`.
- * @param params.page - query parameter — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.ranking_key - `number | string` — the `{ranking_key}` path segment.
+ * @param params.page_size - `number | string` — the `pagesize` query parameter; default `3`.
+ * @param params.page - `number | string` — the `page` query parameter; default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingArchivedPlayerRankings({ ranking_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingArchivedPlayerRankings: Wrapper<Row[], RecruitingArchivedPlayerRankingsParams> = (params: WrapperParams = {}) => callFlat(ARCHIVED_PLAYER_RANKINGS_DEF, params);
@@ -113,11 +114,12 @@ const BIGGEST_MOVERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/rankings/{ranking_key}/biggestMovers`
  *
- * @param params.ranking_key - path parameter.
- * @param params.page_size - query parameter (`pageSize`) — default `10`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.ranking_key - `number | string` — the `{ranking_key}` path segment.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `10`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingBiggestMovers({ ranking_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingBiggestMovers: Wrapper<Row[], RecruitingBiggestMoversParams> = (params: WrapperParams = {}) => callFlat(BIGGEST_MOVERS_DEF, params);
@@ -165,13 +167,14 @@ const COACHES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/coaches`
  *
- * @param params.sport_key - query parameter (`sportKey`).
- * @param params.year - query parameter.
- * @param params.page - query parameter — default `1`.
- * @param params.page_size - query parameter (`pageSize`) — default `25`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `sportKey` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.page - `number | string` — the `page` query parameter; default `1`.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `25`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingCoaches({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_coaches() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingCoaches: Wrapper<Row[], RecruitingCoachesParams> = (params: WrapperParams = {}) => callFlat(COACHES_DEF, params);
@@ -221,14 +224,15 @@ const CURRENT_TARGET_PREDICTIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/sites/{site_key}/years/{year}/sports/{sport_key}/currentTargetPredictions`
  *
- * @param params.site_key - path parameter.
- * @param params.year - path parameter.
- * @param params.sport_key - path parameter.
- * @param params.page - query parameter — default `1`.
- * @param params.page_size - query parameter (`pageSize`) — default `10`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.site_key - `number | string` — the `{site_key}` path segment.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.page - `number | string` — the `page` query parameter; default `1`.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `10`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingCurrentTargetPredictions({ site_key: '…', year: '…', sport_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_target_predictions() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingCurrentTargetPredictions: Wrapper<Row[], RecruitingCurrentTargetPredictionsParams> = (params: WrapperParams = {}) => callFlat(CURRENT_TARGET_PREDICTIONS_DEF, params);
@@ -257,9 +261,10 @@ const INSTITUTION_GROUPS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/institutionGroups`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingInstitutionGroups({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingInstitutionGroups: Wrapper<Row[], RecruitingInstitutionGroupsParams> = (params: WrapperParams = {}) => callFlat(INSTITUTION_GROUPS_DEF, params);
@@ -327,18 +332,19 @@ const INSTITUTION_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/rankings/{sport_key}/{year}/institutionrankings`
  *
- * @param params.sport_key - path parameter.
- * @param params.year - path parameter.
- * @param params.institution_key - query parameter (`institutionKey`).
- * @param params.ranking_type - query parameter (`rankingType`).
- * @param params.conference_abbreviation - query parameter (`conferenceAbbreviation`).
- * @param params.use_composite - query parameter (`useComposite`) — default `false`.
- * @param params.institutions - query parameter.
- * @param params.page_size - query parameter (`pagesize`) — default `10`.
- * @param params.page - query parameter — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.institution_key - `number | string` — the `institutionKey` query parameter.
+ * @param params.ranking_type - `number | string` — the `rankingType` query parameter.
+ * @param params.conference_abbreviation - `number | string` — the `conferenceAbbreviation` query parameter.
+ * @param params.use_composite - `number | string` — the `useComposite` query parameter; default `false`.
+ * @param params.institutions - `number | string` — the `institutions` query parameter.
+ * @param params.page_size - `number | string` — the `pagesize` query parameter; default `10`.
+ * @param params.page - `number | string` — the `page` query parameter; default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingInstitutionRankings({ sport_key: '…', year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_institution_rankings() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingInstitutionRankings: Wrapper<Row[], RecruitingInstitutionRankingsParams> = (params: WrapperParams = {}) => callFlat(INSTITUTION_RANKINGS_DEF, params);
@@ -404,18 +410,19 @@ const PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/playerSportRankings`
  *
- * @param params.state_abbreviation - query parameter (`stateAbbreviation`).
- * @param params.position_abbreviation - query parameter (`positionAbbreviation`).
- * @param params.ranking_key - query parameter (`rankingKey`).
- * @param params.year - query parameter.
- * @param params.sport - query parameter.
- * @param params.institution_group - query parameter (`institutionGroup`).
- * @param params.player_sport_rating - query parameter (`playerSportRating`).
- * @param params.page_size - query parameter (`pagesize`).
- * @param params.page - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.state_abbreviation - `number | string` — the `stateAbbreviation` query parameter.
+ * @param params.position_abbreviation - `number | string` — the `positionAbbreviation` query parameter.
+ * @param params.ranking_key - `number | string` — the `rankingKey` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.sport - `number | string` — the `sport` query parameter.
+ * @param params.institution_group - `number | string` — the `institutionGroup` query parameter.
+ * @param params.player_sport_rating - `number | string` — the `playerSportRating` query parameter.
+ * @param params.page_size - `number | string` — the `pagesize` query parameter.
+ * @param params.page - `number | string` — the `page` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingPlayerSportRankings({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingPlayerSportRankings: Wrapper<Row[], RecruitingPlayerSportRankingsParams> = (params: WrapperParams = {}) => callFlat(PLAYER_SPORT_RANKINGS_DEF, params);
@@ -448,10 +455,11 @@ const PLAYERS_UNDER_SPECIAL_EVALUATION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/rankings/{ranking_key}/playerSportsUnderSpecialEvaluation`
  *
- * @param params.ranking_key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.ranking_key - `number | string` — the `{ranking_key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingPlayersUnderSpecialEvaluation({ ranking_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingPlayersUnderSpecialEvaluation: Wrapper<Row[], RecruitingPlayersUnderSpecialEvaluationParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_UNDER_SPECIAL_EVALUATION_DEF, params);
@@ -493,12 +501,13 @@ const POSITIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/positions`
  *
- * @param params.ranking_key - query parameter (`rankingKey`).
- * @param params.sport_key - query parameter (`sportKey`).
- * @param params.year - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.ranking_key - `number | string` — the `rankingKey` query parameter.
+ * @param params.sport_key - `number | string` — the `sportKey` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingPositions({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_positions() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingPositions: Wrapper<Row[], RecruitingPositionsParams> = (params: WrapperParams = {}) => callFlat(POSITIONS_DEF, params);
@@ -544,13 +553,14 @@ const RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/rankings`
  *
- * @param params.year - query parameter.
- * @param params.sport_key - query parameter (`sportKey`).
- * @param params.ranking_type - query parameter (`rankingType`).
- * @param params.ranking_version - query parameter (`rankingVersion`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.sport_key - `number | string` — the `sportKey` query parameter.
+ * @param params.ranking_type - `number | string` — the `rankingType` query parameter.
+ * @param params.ranking_version - `number | string` — the `rankingVersion` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingRankings({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingRankings: Wrapper<Row[], RecruitingRankingsParams> = (params: WrapperParams = {}) => callFlat(RANKINGS_DEF, params);
@@ -592,12 +602,13 @@ const RANKINGS_COMPOSITE_TEAM_FEED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/rankings/{sport_key}/{year}/compositeTeamRankingFeed`
  *
- * @param params.sport_key - path parameter.
- * @param params.year - path parameter.
- * @param params.page_size - query parameter (`pageSize`) — default `9`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `9`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingRankingsCompositeTeamFeed({ sport_key: '…', year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_composite_team_ranking_feed() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingRankingsCompositeTeamFeed: Wrapper<Row[], RecruitingRankingsCompositeTeamFeedParams> = (params: WrapperParams = {}) => callFlat(RANKINGS_COMPOSITE_TEAM_FEED_DEF, params);
@@ -639,12 +650,13 @@ const RANKINGS_TRANSFER_PORTAL_PLAYER_FEED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/rankings/{sport_key}/{year}/transferPortalPlayerfeed`
  *
- * @param params.sport_key - path parameter.
- * @param params.year - path parameter.
- * @param params.page_size - query parameter (`pageSize`) — default `9`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `9`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingRankingsTransferPortalPlayerFeed({ sport_key: '…', year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_transfer_portal_player_feed() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingRankingsTransferPortalPlayerFeed: Wrapper<Row[], RecruitingRankingsTransferPortalPlayerFeedParams> = (params: WrapperParams = {}) => callFlat(RANKINGS_TRANSFER_PORTAL_PLAYER_FEED_DEF, params);
@@ -686,12 +698,13 @@ const RANKINGS_TRANSFER_PORTAL_TEAM_FEED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/rankings/{sport_key}/{year}/transferPortalOnlyTeamFeed`
  *
- * @param params.sport_key - path parameter.
- * @param params.year - path parameter.
- * @param params.page_size - query parameter (`pageSize`) — default `9`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `9`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingRankingsTransferPortalTeamFeed({ sport_key: '…', year: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_transfer_portal_team_feed() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingRankingsTransferPortalTeamFeed: Wrapper<Row[], RecruitingRankingsTransferPortalTeamFeedParams> = (params: WrapperParams = {}) => callFlat(RANKINGS_TRANSFER_PORTAL_TEAM_FEED_DEF, params);
@@ -743,14 +756,15 @@ const RECRUITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/recruits`
  *
- * @param params.sport_key - query parameter (`sportKey`).
- * @param params.year - query parameter.
- * @param params.min_date - query parameter (`minDate`).
- * @param params.page - query parameter — default `1`.
- * @param params.page_size - query parameter (`pageSize`) — default `25`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `sportKey` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.min_date - `number | string` — the `minDate` query parameter.
+ * @param params.page - `number | string` — the `page` query parameter; default `1`.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `25`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingRecruits({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_recruits() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingRecruits: Wrapper<Row[], RecruitingRecruitsParams> = (params: WrapperParams = {}) => callFlat(RECRUITS_DEF, params);
@@ -783,10 +797,11 @@ const SPORT_YEARS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/sports/{sport_key}/year`
  *
- * @param params.sport_key - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingSportYears({ sport_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_sport_years() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingSportYears: Wrapper<Row[], RecruitingSportYearsParams> = (params: WrapperParams = {}) => callFlat(SPORT_YEARS_DEF, params);
@@ -820,10 +835,11 @@ const SPORTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/sports`
  *
- * @param params.ranking_key - query parameter (`rankingKey`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.ranking_key - `number | string` — the `rankingKey` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingSports({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingSports: Wrapper<Row[], RecruitingSportsParams> = (params: WrapperParams = {}) => callFlat(SPORTS_DEF, params);
@@ -862,11 +878,12 @@ const TAGS_AUTOCOMPLETE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/tags/autocomplete`
  *
- * @param params.default_name - query parameter (`defaultName`).
- * @param params.items - query parameter — default `100`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.default_name - `number | string` — the `defaultName` query parameter.
+ * @param params.items - `number | string` — the `items` query parameter; default `100`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingTagsAutocomplete({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_tags_autocomplete() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingTagsAutocomplete: Wrapper<Row[], RecruitingTagsAutocompleteParams> = (params: WrapperParams = {}) => callFlat(TAGS_AUTOCOMPLETE_DEF, params);
@@ -910,12 +927,13 @@ const TAGS_PHOTOS_BY_KEY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/tags/{prefixed_key}/photos`
  *
- * @param params.prefixed_key - path parameter.
- * @param params.page - query parameter — default `1`.
- * @param params.page_size - query parameter (`pageSize`) — default `25`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.prefixed_key - `number | string` — the `{prefixed_key}` path segment.
+ * @param params.page - `number | string` — the `page` query parameter; default `1`.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `25`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingTagsPhotosByKey({ prefixed_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingTagsPhotosByKey: Wrapper<Row[], RecruitingTagsPhotosByKeyParams> = (params: WrapperParams = {}) => callFlat(TAGS_PHOTOS_BY_KEY_DEF, params);
@@ -962,13 +980,14 @@ const TAGS_PHOTOS_BY_TYPE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/tags/{type}/{key}/photos`
  *
- * @param params.type - path parameter.
- * @param params.key - path parameter.
- * @param params.page - query parameter — default `1`.
- * @param params.page_size - query parameter (`pageSize`) — default `25`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `{type}` path segment.
+ * @param params.key - `number | string` — the `{key}` path segment.
+ * @param params.page - `number | string` — the `page` query parameter; default `1`.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter; default `25`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingTagsPhotosByType({ type: '…', key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingTagsPhotosByType: Wrapper<Row[], RecruitingTagsPhotosByTypeParams> = (params: WrapperParams = {}) => callFlat(TAGS_PHOTOS_BY_TYPE_DEF, params);
@@ -1010,12 +1029,13 @@ const TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/teams`
  *
- * @param params.sport_key - query parameter (`sportKey`).
- * @param params.year - query parameter.
- * @param params.institution_type - query parameter (`institutionType`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `sportKey` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.institution_type - `number | string` — the `institutionType` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingTeams({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_teams() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingTeams: Wrapper<Row[], RecruitingTeamsParams> = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
@@ -1081,18 +1101,19 @@ const TRANSFER_PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/transferPlayerSportRankings`
  *
- * @param params.state_abbreviation - query parameter (`stateAbbreviation`).
- * @param params.position_abbreviation - query parameter (`positionAbbreviation`).
- * @param params.ranking_key - query parameter (`rankingKey`).
- * @param params.year - query parameter.
- * @param params.sport - query parameter.
- * @param params.institution_group - query parameter (`institutionGroup`).
- * @param params.player_sport_rating - query parameter (`playerSportRating`).
- * @param params.page_size - query parameter (`pagesize`).
- * @param params.page - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.state_abbreviation - `number | string` — the `stateAbbreviation` query parameter.
+ * @param params.position_abbreviation - `number | string` — the `positionAbbreviation` query parameter.
+ * @param params.ranking_key - `number | string` — the `rankingKey` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.sport - `number | string` — the `sport` query parameter.
+ * @param params.institution_group - `number | string` — the `institutionGroup` query parameter.
+ * @param params.player_sport_rating - `number | string` — the `playerSportRating` query parameter.
+ * @param params.page_size - `number | string` — the `pagesize` query parameter.
+ * @param params.page - `number | string` — the `page` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingTransferPlayerSportRankings({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingTransferPlayerSportRankings: Wrapper<Row[], RecruitingTransferPlayerSportRankingsParams> = (params: WrapperParams = {}) => callFlat(TRANSFER_PLAYER_SPORT_RANKINGS_DEF, params);
@@ -1162,19 +1183,20 @@ const TRANSFERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/transfers`
  *
- * @param params.sport_key - query parameter (`sportKey`).
- * @param params.year - query parameter.
- * @param params.list_type - query parameter (`listType`).
- * @param params.position_group_key - query parameter (`positionGroupKey`).
- * @param params.position_key - query parameter (`positionKey`).
- * @param params.eligibility - query parameter.
- * @param params.institution_key - query parameter (`institutionKey`).
- * @param params.status - query parameter.
- * @param params.page_size - query parameter (`pageSize`).
- * @param params.page - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `sportKey` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.list_type - `number | string` — the `listType` query parameter.
+ * @param params.position_group_key - `number | string` — the `positionGroupKey` query parameter.
+ * @param params.position_key - `number | string` — the `positionKey` query parameter.
+ * @param params.eligibility - `number | string` — the `eligibility` query parameter.
+ * @param params.institution_key - `number | string` — the `institutionKey` query parameter.
+ * @param params.status - `number | string` — the `status` query parameter.
+ * @param params.page_size - `number | string` — the `pageSize` query parameter.
+ * @param params.page - `number | string` — the `page` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingTransfers({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated use sdv.sports247.sports247_transfers() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingTransfers: Wrapper<Row[], RecruitingTransfersParams> = (params: WrapperParams = {}) => callFlat(TRANSFERS_DEF, params);
@@ -1244,19 +1266,20 @@ const UNRANKED_RECRUITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/unrankedRecruits`
  *
- * @param params.state_abbreviation - query parameter (`stateAbbreviation`).
- * @param params.position_abbreviation - query parameter (`positionAbbreviation`).
- * @param params.ranking_key - query parameter (`rankingKey`).
- * @param params.year - query parameter.
- * @param params.sport - query parameter.
- * @param params.institution_group - query parameter (`institutionGroup`).
- * @param params.player_sport_rating - query parameter (`playerSportRating`).
- * @param params.list_type - query parameter (`listType`).
- * @param params.page_size - query parameter (`pagesize`).
- * @param params.page - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.state_abbreviation - `number | string` — the `stateAbbreviation` query parameter.
+ * @param params.position_abbreviation - `number | string` — the `positionAbbreviation` query parameter.
+ * @param params.ranking_key - `number | string` — the `rankingKey` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.sport - `number | string` — the `sport` query parameter.
+ * @param params.institution_group - `number | string` — the `institutionGroup` query parameter.
+ * @param params.player_sport_rating - `number | string` — the `playerSportRating` query parameter.
+ * @param params.list_type - `number | string` — the `listType` query parameter.
+ * @param params.page_size - `number | string` — the `pagesize` query parameter.
+ * @param params.page - `number | string` — the `page` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingUnrankedRecruits({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingUnrankedRecruits: Wrapper<Row[], RecruitingUnrankedRecruitsParams> = (params: WrapperParams = {}) => callFlat(UNRANKED_RECRUITS_DEF, params);
@@ -1307,14 +1330,15 @@ const UNRANKED_TRANSFERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/transferrankings/{ranking_key}/unrankedtransfers`
  *
- * @param params.ranking_key - path parameter.
- * @param params.state_abbreviation - query parameter (`stateAbbreviation`).
- * @param params.position_abbreviation - query parameter (`positionAbbreviation`).
- * @param params.page_size - query parameter (`pagesize`).
- * @param params.page - query parameter — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.ranking_key - `number | string` — the `{ranking_key}` path segment.
+ * @param params.state_abbreviation - `number | string` — the `stateAbbreviation` query parameter.
+ * @param params.position_abbreviation - `number | string` — the `positionAbbreviation` query parameter.
+ * @param params.page_size - `number | string` — the `pagesize` query parameter.
+ * @param params.page - `number | string` — the `page` query parameter; default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingUnrankedTransfers({ ranking_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingUnrankedTransfers: Wrapper<Row[], RecruitingUnrankedTransfersParams> = (params: WrapperParams = {}) => callFlat(UNRANKED_TRANSFERS_DEF, params);
@@ -1348,10 +1372,11 @@ const YEAR_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/year`
  *
- * @param params.ranking_key - query parameter (`rankingKey`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.ranking_key - `number | string` — the `rankingKey` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.recruiting.recruitingYear({});
+ * @see https://js.sportsdataverse.org/docs/reference/recruiting#native-api--247sports
  * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingYear: Wrapper<Row[], RecruitingYearParams> = (params: WrapperParams = {}) => callFlat(YEAR_DEF, params);

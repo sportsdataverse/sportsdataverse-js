@@ -85,13 +85,14 @@ const EVENT_DATA_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/data`
  *
- * @param params.sport - path parameter.
- * @param params.event_id - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.event_id - `number | string` — Numeric Fox game (event) id, e.g. `11195`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiEventData({ sport: '…', event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiEventData: Wrapper<Row[], FoxApiEventDataParams> = (params: WrapperParams = {}) => callFlat(EVENT_DATA_DEF, params);
 /** snake_case alias of {@link foxApiEventData} (py/R parity). */
@@ -134,13 +135,14 @@ const EVENT_MATCHUP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/matchup`
  *
- * @param params.sport - path parameter.
- * @param params.event_id - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.event_id - `number | string` — Numeric Fox game (event) id, e.g. `11195`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiEventMatchup({ sport: '…', event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiEventMatchup: Wrapper<Row[], FoxApiEventMatchupParams> = (params: WrapperParams = {}) => callFlat(EVENT_MATCHUP_DEF, params);
 /** snake_case alias of {@link foxApiEventMatchup} (py/R parity). */
@@ -183,13 +185,14 @@ const EVENT_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/odds`
  *
- * @param params.sport - path parameter.
- * @param params.event_id - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.event_id - `number | string` — Numeric Fox game (event) id, e.g. `11195`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiEventOdds({ sport: '…', event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiEventOdds: Wrapper<Row[], FoxApiEventOddsParams> = (params: WrapperParams = {}) => callFlat(EVENT_ODDS_DEF, params);
 /** snake_case alias of {@link foxApiEventOdds} (py/R parity). */
@@ -232,13 +235,14 @@ const EVENT_RECAP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/recap`
  *
- * @param params.sport - path parameter.
- * @param params.event_id - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.event_id - `number | string` — Numeric Fox game (event) id, e.g. `11195`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiEventRecap({ sport: '…', event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiEventRecap: Wrapper<Row[], FoxApiEventRecapParams> = (params: WrapperParams = {}) => callFlat(EVENT_RECAP_DEF, params);
 /** snake_case alias of {@link foxApiEventRecap} (py/R parity). */
@@ -281,13 +285,14 @@ const EVENT_STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/standings`
  *
- * @param params.sport - path parameter.
- * @param params.event_id - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.event_id - `number | string` — Numeric Fox game (event) id, e.g. `11195`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiEventStandings({ sport: '…', event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiEventStandings: Wrapper<Row[], FoxApiEventStandingsParams> = (params: WrapperParams = {}) => callFlat(EVENT_STANDINGS_DEF, params);
 /** snake_case alias of {@link foxApiEventStandings} (py/R parity). */
@@ -327,12 +332,13 @@ const EXPLORE_BROWSE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/explore/browse/{section}/main`
  *
- * @param params.section - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.section - `number | string` — Browse section: `sports`, `players`, `shows`, `personalities` or `topics`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiExploreBrowse({ section: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiExploreBrowse: Wrapper<Row[], FoxApiExploreBrowseParams> = (params: WrapperParams = {}) => callFlat(EXPLORE_BROWSE_DEF, params);
 /** snake_case alias of {@link foxApiExploreBrowse} (py/R parity). */
@@ -372,12 +378,13 @@ const EXPLORE_FAVORITE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/explore/favorite/{section}/main`
  *
- * @param params.section - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.section - `number | string` — the `{section}` path segment.
+ * @param params.apikey - `number | string` — the `apikey` query parameter; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — the `api-version` query parameter; default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxExploreFavorite({ section: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  * @deprecated Fox never returned data for this route (sdv-py probe 2026-10-05: 400 for sports/players, 404 for nfl/cfb/teams, with ids/sections taken from a live explore/browse payload); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml). Use fox_api_explore_browse().
  */
 export const foxExploreFavorite: Wrapper<Row[], FoxExploreFavoriteParams> = (params: WrapperParams = {}) => callFlat(EXPLORE_FAVORITE_DEF, params);
@@ -417,11 +424,12 @@ const EXPLORE_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/explore/odds/main`
  *
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiExploreOdds({});
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiExploreOdds: Wrapper<Row[], FoxApiExploreOddsParams> = (params: WrapperParams = {}) => callFlat(EXPLORE_ODDS_DEF, params);
 /** snake_case alias of {@link foxApiExploreOdds} (py/R parity). */
@@ -462,12 +470,13 @@ const FOXPOLLS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/foxpolls/v1/polls`
  *
- * @param params.apikey - query parameter — default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
- * @param params.associated_entity_ids - query parameter (`associatedEntityIds`).
- * @param params.include_answers - query parameter (`includeAnswers`) — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.apikey - `number | string` — Public Fox Sports feed-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
+ * @param params.associated_entity_ids - `number | string` — Comma-separated Fox entity ids the polls are associated with.
+ * @param params.include_answers - `boolean` — Include poll answer options; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiFoxpolls({});
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiFoxpolls: Wrapper<Row[], FoxApiFoxpollsParams> = (params: WrapperParams = {}) => callFlat(FOXPOLLS_DEF, params);
 /** snake_case alias of {@link foxApiFoxpolls} (py/R parity). */
@@ -503,11 +512,12 @@ const FS_FEED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/fs/feed`
  *
- * @param params.apikey - query parameter — default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.apikey - `number | string` — the `apikey` query parameter; default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
+ * @param params.api_version - `number | string` — the `api-version` query parameter; default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxFsFeed({});
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/feed with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
  */
 export const foxFsFeed: Wrapper<Row[], FoxFsFeedParams> = (params: WrapperParams = {}) => callFlat(FS_FEED_DEF, params);
@@ -547,11 +557,12 @@ const FS_IMAGES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/fs/images`
  *
- * @param params.apikey - query parameter — default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.apikey - `number | string` — the `apikey` query parameter; default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
+ * @param params.api_version - `number | string` — the `api-version` query parameter; default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxFsImages({});
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/images with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
  */
 export const foxFsImages: Wrapper<Row[], FoxFsImagesParams> = (params: WrapperParams = {}) => callFlat(FS_IMAGES_DEF, params);
@@ -591,11 +602,12 @@ const FS_LAYOUTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/fs/layouts`
  *
- * @param params.apikey - query parameter — default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.apikey - `number | string` — the `apikey` query parameter; default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
+ * @param params.api_version - `number | string` — the `api-version` query parameter; default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxFsLayouts({});
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/layouts with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
  */
 export const foxFsLayouts: Wrapper<Row[], FoxFsLayoutsParams> = (params: WrapperParams = {}) => callFlat(FS_LAYOUTS_DEF, params);
@@ -635,11 +647,12 @@ const FS_VIDEOS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/fs/videos`
  *
- * @param params.apikey - query parameter — default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.apikey - `number | string` — the `apikey` query parameter; default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
+ * @param params.api_version - `number | string` — the `api-version` query parameter; default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxFsVideos({});
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/videos with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
  */
 export const foxFsVideos: Wrapper<Row[], FoxFsVideosParams> = (params: WrapperParams = {}) => callFlat(FS_VIDEOS_DEF, params);
@@ -683,12 +696,13 @@ const LEAGUE_CONFERENCES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/league/conferences`
  *
- * @param params.sport - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiLeagueConferences({ sport: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiLeagueConferences: Wrapper<Row[], FoxApiLeagueConferencesParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_CONFERENCES_DEF, params);
 /** snake_case alias of {@link foxApiLeagueConferences} (py/R parity). */
@@ -728,12 +742,13 @@ const LEAGUE_HEADER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/league/header`
  *
- * @param params.sport - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiLeagueHeader({ sport: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiLeagueHeader: Wrapper<Row[], FoxApiLeagueHeaderParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_HEADER_DEF, params);
 /** snake_case alias of {@link foxApiLeagueHeader} (py/R parity). */
@@ -777,13 +792,14 @@ const LEAGUE_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/league/odds`
  *
- * @param params.sport - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.group_id - query parameter (`groupId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.group_id - `number | string` — Conference / group id filter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiLeagueOdds({ sport: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiLeagueOdds: Wrapper<Row[], FoxApiLeagueOddsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_ODDS_DEF, params);
 /** snake_case alias of {@link foxApiLeagueOdds} (py/R parity). */
@@ -823,12 +839,13 @@ const LEAGUE_PLAYERNEWS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/league/playernews`
  *
- * @param params.sport - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiLeaguePlayernews({ sport: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiLeaguePlayernews: Wrapper<Row[], FoxApiLeaguePlayernewsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_PLAYERNEWS_DEF, params);
 /** snake_case alias of {@link foxApiLeaguePlayernews} (py/R parity). */
@@ -868,12 +885,13 @@ const LEAGUE_POLLS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/league/polls`
  *
- * @param params.sport - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiLeaguePolls({ sport: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiLeaguePolls: Wrapper<Row[], FoxApiLeaguePollsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_POLLS_DEF, params);
 /** snake_case alias of {@link foxApiLeaguePolls} (py/R parity). */
@@ -913,12 +931,13 @@ const LEAGUE_SCHEDULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/league/schedule`
  *
- * @param params.sport - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiLeagueSchedule({ sport: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiLeagueSchedule: Wrapper<Row[], FoxApiLeagueScheduleParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_SCHEDULE_DEF, params);
 /** snake_case alias of {@link foxApiLeagueSchedule} (py/R parity). */
@@ -958,12 +977,13 @@ const LEAGUE_SCORES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/league/scores`
  *
- * @param params.sport - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiLeagueScores({ sport: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiLeagueScores: Wrapper<Row[], FoxApiLeagueScoresParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_SCORES_DEF, params);
 /** snake_case alias of {@link foxApiLeagueScores} (py/R parity). */
@@ -1010,14 +1030,15 @@ const LEAGUE_SCORES_SEGMENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/league/scores-segment/{segment_id}`
  *
- * @param params.sport - path parameter.
- * @param params.segment_id - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.group_id - query parameter (`groupId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.segment_id - `number | string` — Scores segment id, `<season>-<week>-<seasonTypeCode>`, e.g. `2026-3-1`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.group_id - `number | string` — Conference / group id filter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiLeagueScoresSegment({ sport: '…', segment_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiLeagueScoresSegment: Wrapper<Row[], FoxApiLeagueScoresSegmentParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_SCORES_SEGMENT_DEF, params);
 /** snake_case alias of {@link foxApiLeagueScoresSegment} (py/R parity). */
@@ -1057,12 +1078,13 @@ const LEAGUE_STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/league/standings`
  *
- * @param params.sport - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiLeagueStandings({ sport: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiLeagueStandings: Wrapper<Row[], FoxApiLeagueStandingsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_STANDINGS_DEF, params);
 /** snake_case alias of {@link foxApiLeagueStandings} (py/R parity). */
@@ -1102,12 +1124,13 @@ const LEAGUE_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/league/stats`
  *
- * @param params.sport - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiLeagueStats({ sport: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiLeagueStats: Wrapper<Row[], FoxApiLeagueStatsParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_DEF, params);
 /** snake_case alias of {@link foxApiLeagueStats} (py/R parity). */
@@ -1160,16 +1183,17 @@ const LEAGUE_STATS_CON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/league/stats-con/{who}/{category}/{page}`
  *
- * @param params.sport - path parameter.
- * @param params.who - path parameter.
- * @param params.category - path parameter.
- * @param params.page - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.group_id - query parameter (`groupId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.who - `number | string` — Stat subject, e.g. `player` or `team`.
+ * @param params.category - `number | string` — Stat category slug, e.g. `passing`.
+ * @param params.page - `number | string` — Results page number.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.group_id - `number | string` — Conference / group id filter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiLeagueStatsCon({ sport: '…', who: '…', category: '…', page: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiLeagueStatsCon: Wrapper<Row[], FoxApiLeagueStatsConParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_STATS_CON_DEF, params);
 /** snake_case alias of {@link foxApiLeagueStatsCon} (py/R parity). */
@@ -1209,12 +1233,13 @@ const LEAGUE_TEAMNAV_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/league/teamnav`
  *
- * @param params.sport - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiLeagueTeamnav({ sport: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiLeagueTeamnav: Wrapper<Row[], FoxApiLeagueTeamnavParams> = (params: WrapperParams = {}) => callFlat(LEAGUE_TEAMNAV_DEF, params);
 /** snake_case alias of {@link foxApiLeagueTeamnav} (py/R parity). */
@@ -1258,13 +1283,14 @@ const SCOREBOARD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/scoreboard/main`
  *
- * @param params.sport - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.group_id - query parameter (`groupId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.group_id - `number | string` — Conference / group id filter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiScoreboard({ sport: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiScoreboard: Wrapper<Row[], FoxApiScoreboardParams> = (params: WrapperParams = {}) => callFlat(SCOREBOARD_DEF, params);
 /** snake_case alias of {@link foxApiScoreboard} (py/R parity). */
@@ -1302,12 +1328,13 @@ const SCORECHIP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/scorechip/{chip_id}`
  *
- * @param params.sport - path parameter.
- * @param params.chip_id - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.chip_id - `number | string` — Score-chip id: the league slug plus the numeric game id, e.g. `nfl11195`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiScorechip({ sport: '…', chip_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiScorechip: Wrapper<Row[], FoxApiScorechipParams> = (params: WrapperParams = {}) => callFlat(SCORECHIP_DEF, params);
 /** snake_case alias of {@link foxApiScorechip} (py/R parity). */
@@ -1347,12 +1374,13 @@ const SEARCH_CONTENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/search/content`
  *
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.text - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.text - `number | string` — Search text.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiSearchContent({});
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiSearchContent: Wrapper<Row[], FoxApiSearchContentParams> = (params: WrapperParams = {}) => callFlat(SEARCH_CONTENT_DEF, params);
 /** snake_case alias of {@link foxApiSearchContent} (py/R parity). */
@@ -1392,12 +1420,13 @@ const SEARCH_ENTITIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/search/entities`
  *
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.text - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.text - `number | string` — Search text.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiSearchEntities({});
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiSearchEntities: Wrapper<Row[], FoxApiSearchEntitiesParams> = (params: WrapperParams = {}) => callFlat(SEARCH_ENTITIES_DEF, params);
 /** snake_case alias of {@link foxApiSearchEntities} (py/R parity). */
@@ -1433,11 +1462,12 @@ const SEARCH_POPULAR_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/search/popular`
  *
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiSearchPopular({});
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiSearchPopular: Wrapper<Row[], FoxApiSearchPopularParams> = (params: WrapperParams = {}) => callFlat(SEARCH_POPULAR_DEF, params);
 /** snake_case alias of {@link foxApiSearchPopular} (py/R parity). */
@@ -1480,13 +1510,14 @@ const TEAM_GAMELOG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/gamelog`
  *
- * @param params.sport - path parameter.
- * @param params.team_id - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.team_id - `number | string` — Numeric Fox team id, e.g. `25`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiTeamGamelog({ sport: '…', team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiTeamGamelog: Wrapper<Row[], FoxApiTeamGamelogParams> = (params: WrapperParams = {}) => callFlat(TEAM_GAMELOG_DEF, params);
 /** snake_case alias of {@link foxApiTeamGamelog} (py/R parity). */
@@ -1529,13 +1560,14 @@ const TEAM_HEADER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/header`
  *
- * @param params.sport - path parameter.
- * @param params.team_id - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.team_id - `number | string` — Numeric Fox team id, e.g. `25`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiTeamHeader({ sport: '…', team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiTeamHeader: Wrapper<Row[], FoxApiTeamHeaderParams> = (params: WrapperParams = {}) => callFlat(TEAM_HEADER_DEF, params);
 /** snake_case alias of {@link foxApiTeamHeader} (py/R parity). */
@@ -1578,13 +1610,14 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/roster`
  *
- * @param params.sport - path parameter.
- * @param params.team_id - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.team_id - `number | string` — Numeric Fox team id, e.g. `25`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiTeamRoster({ sport: '…', team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiTeamRoster: Wrapper<Row[], FoxApiTeamRosterParams> = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_DEF, params);
 /** snake_case alias of {@link foxApiTeamRoster} (py/R parity). */
@@ -1627,13 +1660,14 @@ const TEAM_STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/standings`
  *
- * @param params.sport - path parameter.
- * @param params.team_id - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.team_id - `number | string` — Numeric Fox team id, e.g. `25`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiTeamStandings({ sport: '…', team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiTeamStandings: Wrapper<Row[], FoxApiTeamStandingsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STANDINGS_DEF, params);
 /** snake_case alias of {@link foxApiTeamStandings} (py/R parity). */
@@ -1676,13 +1710,14 @@ const TEAM_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/stats`
  *
- * @param params.sport - path parameter.
- * @param params.team_id - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport - `number | string` — Fox sport/league slug as used in foxsports.com URLs, e.g. `nfl`, `cfb`, `nba`, `cbk`, `wcbk`, `mlb`, `nhl`.
+ * @param params.team_id - `number | string` — Numeric Fox team id, e.g. `25`.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiTeamStats({ sport: '…', team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiTeamStats: Wrapper<Row[], FoxApiTeamStatsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link foxApiTeamStats} (py/R parity). */
@@ -1722,12 +1757,13 @@ const TOPEVENTS_SCOREBOARD_SEGMENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/topevents/scoreboard/segment/{segment}`
  *
- * @param params.segment - path parameter.
- * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.segment - `number | string` — Top-events scoreboard segment id (`0` / `1` ... as listed by `topevents/scoreboard/main`); NOT a league `<season>-<week>-<type>` id.
+ * @param params.apikey - `number | string` — Public Fox Sports data-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiTopeventsScoreboardSegment({ segment: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiTopeventsScoreboardSegment: Wrapper<Row[], FoxApiTopeventsScoreboardSegmentParams> = (params: WrapperParams = {}) => callFlat(TOPEVENTS_SCOREBOARD_SEGMENT_DEF, params);
 /** snake_case alias of {@link foxApiTopeventsScoreboardSegment} (py/R parity). */
@@ -1772,13 +1808,14 @@ const TRENDING_ARTICLES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/general/trending/articles`
  *
- * @param params.apikey - query parameter — default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.duration - query parameter — default `4`.
- * @param params.tags - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.apikey - `number | string` — Public Fox Sports feed-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.duration - `number | string` — Trending look-back window; default `4`.
+ * @param params.tags - `number | string` — Comma-separated tag filter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiTrendingArticles({});
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiTrendingArticles: Wrapper<Row[], FoxApiTrendingArticlesParams> = (params: WrapperParams = {}) => callFlat(TRENDING_ARTICLES_DEF, params);
 /** snake_case alias of {@link foxApiTrendingArticles} (py/R parity). */
@@ -1824,13 +1861,14 @@ const TRENDING_VIDEOS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.foxsports.com/bifrost/v1/general/trending/videos`
  *
- * @param params.apikey - query parameter — default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.duration - query parameter — default `4`.
- * @param params.max_items - query parameter (`maxItems`) — default `12`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.apikey - `number | string` — Public Fox Sports feed-tier key shipped in the foxsports.com web bundle (not a secret); override only if Fox rotates it; default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
+ * @param params.api_version - `number | string` — Fox API version (`api-version` query key); default `1.1`.
+ * @param params.duration - `number | string` — Trending look-back window; default `4`.
+ * @param params.max_items - `number | string` — Maximum items to return; default `12`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.fox.foxApiTrendingVideos({});
+ * @see https://js.sportsdataverse.org/docs/reference/fox#native-api--fox-sports
  */
 export const foxApiTrendingVideos: Wrapper<Row[], FoxApiTrendingVideosParams> = (params: WrapperParams = {}) => callFlat(TRENDING_VIDEOS_DEF, params);
 /** snake_case alias of {@link foxApiTrendingVideos} (py/R parity). */

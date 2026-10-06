@@ -30,11 +30,11 @@ export interface NwslApiCompetitionsRow {
 export interface NwslApiMatchLineupsRow {
   /** Composite Match id (Utf8 join key). Schema `character` (an id). */
   match_id?: string | null;
-  /** Schema `character`. */
+  /** Side label (e.g. 'home', 'away', or 'overUnder'). Schema `character`. */
   side?: string | null;
   /** Composite Team id (Utf8 join key). Schema `character` (an id). */
   team_id?: string | null;
-  /** Schema `character`. */
+  /** Selection. Schema `character`. */
   selection?: string | null;
   /** Underlying StatsPerform/Opta provider id (e.g. `opta:...`). Schema `character` (an id). */
   provider_id?: string | null;
@@ -54,7 +54,7 @@ export interface NwslApiMatchLineupsRow {
   shirt_name?: string | null;
   /** Short team name. Schema `character`. */
   short_name?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   display_name?: string | null;
   /** Nationality name. Schema `character`. */
   nationality?: string | null;
@@ -100,7 +100,7 @@ export interface NwslApiPlayerStatsRow {
   shirt_name?: string | null;
   /** Short team name. Schema `character`. */
   short_name?: string | null;
-  /** Schema `character`. */
+  /** Display name. Schema `character`. */
   display_name?: string | null;
   /** Nationality name. Schema `character`. */
   nationality?: string | null;
@@ -222,9 +222,9 @@ export interface NwslApiSeasonMatchesRow {
   stadium_name?: string | null;
   /** City the stadium is in. Schema `character`. */
   city_name?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Stat group (e.g. "hitting", "pitching", "fielding"). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   group?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Group name (conference / division). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   group_name?: unknown;
   /** Composite id of the round. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   round_id?: unknown;
@@ -236,11 +236,11 @@ export interface NwslApiSeasonMatchesRow {
   provider_home_score?: number | null;
   /** Provider-reported: away side's score. Schema `integer`. */
   provider_away_score?: number | null;
-  /** Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** ESPN group id. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   group_id?: unknown;
   /** Sub-league label. Schema `character`. */
   sub_league?: string | null;
-  /** Schema `character`. */
+  /** Time at start of play provided in string format as minutes:seconds remaining in the quarter. Schema `character`. */
   time?: string | null;
   /** Stoppage time added, in minutes. Schema `character`. */
   additional_time?: string | null;

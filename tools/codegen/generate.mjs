@@ -29,10 +29,17 @@ import {
   renderLoaderOnlyIndex,
 } from "./render-loaders.mjs";
 import { flatWrapperType, loadParityCoverage, renderRowsBarrel, renderRowsModule } from "./row-types.mjs";
+import { coverageLines, describeColumns, descriptionCoverage } from "./descriptions.mjs";
+import { loadLoaderSchemas, loaderRowName } from "./loader-types.mjs";
+import { breakingAdmonition, breakingTable, loadBreaking } from "./breaking.mjs";
+import { registerUtilityDocs, utilitiesCoverage, utilitiesSidebar, loadUtilities, renderUtilitiesTs } from "./utilities.mjs";
+import { architectureSidebar, registerArchitectureDocs } from "./architecture.mjs";
 import {
+  CONTROL_TYPES,
   espnParamsName,
   flatParamsName,
   loadParamSpecs,
+  paramTsType,
   renderEspnParams,
   renderFlatParams,
   renderParamsBarrel,
@@ -741,6 +748,79 @@ function humanizeShort(short) {
   return short.replace(/_/g, " ");
 }
 
+const DOCS_URL = "https://js.sportsdataverse.org";
+/** A Docusaurus heading slug (github-slugger): lower-case, punctuation dropped, spaces -> `-`. */
+const slug = (s) =>
+  s
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N} _-]/gu, "")
+    .replace(/ /g, "-");
+/** sdv-py's RST-flavoured YAML text as markdown / TSDoc: ``x`` -> `x`, one line. */
+const yamlDoc = (s) => String(s).replace(/``/g, "`").replace(/\s+/g, " ").trim();
+
+/**
+ * One param's TypeScript type + description for the generated TSDoc and the docs
+ * param table: the YAML `description` when sdv-py wrote one, else what the param is
+ * (its path segment / query key), plus optional / default / example notes.
+ * `specKey` is `espn.<short>` or `<api>.<short>` (PARAM_SPECS).
+ */
+function paramDescription(specKey, p, kind, apiLabel = "") {
+  const spec = PARAM_SPECS.get(specKey);
+  const y = kind === "path" ? spec?.path.get(p.name) : spec?.query.get(p.name);
+  const ts = paramTsType(y?.type, `${specKey}.${p.name}`);
+  const bits = [];
+  const known = specKey.startsWith("espn.") ? ESPN_PARAM_DOC[p.name] : undefined;
+  if (y?.description) bits.push(yamlDoc(y.description).replace(/\.$/, ""));
+  else if (known) bits.push(known);
+  else if (kind === "path") bits.push(`the \`{${p.name}}\` path segment`);
+  else bits.push(`the \`${p.queryKey || p.name}\`${apiLabel ? ` ${apiLabel}` : ""} query parameter`);
+  if (p.required === false || (kind === "path" && (p.default !== undefined || p.defaultFrom !== undefined))) bits.push("optional");
+  if (p.default !== undefined) bits.push(`default \`${p.default}\``);
+  else if (p.defaultFrom !== undefined) bits.push(`default from \`${p.defaultFrom}\``);
+  if (y?.example !== undefined && y?.example !== null) bits.push(`e.g. \`${y.example}\``);
+  return { ts, text: bits.join("; ") };
+}
+// What the recurring ESPN params mean (sdv-py's ESPN YAML carries no param
+// descriptions). JS-owned; a param not listed here is described by its query key.
+const ESPN_PARAM_DOC = {
+  dates: "a date `YYYYMMDD`, a range `YYYYMMDD-YYYYMMDD` or a season year `YYYY`",
+  week: "the week of the season (football)",
+  season_type: "the season type: `1` preseason, `2` regular season, `3` postseason",
+  seasontype: "the season type: `1` preseason, `2` regular season, `3` postseason",
+  groups: "an ESPN group (conference / division) id, e.g. `50` for all of men's college basketball",
+  group: "an ESPN group (conference / division) id",
+  limit: "the maximum number of items to return",
+  page: "the page of a paginated Core v2 list (1-based)",
+  season: "the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25)",
+  year: "the season year",
+  team_id: "the ESPN team id (see `espn_<league>_teams`)",
+  athlete_id: "the ESPN athlete id",
+  event_id: "the ESPN event (game) id",
+  game_id: "the ESPN event (game) id",
+  competition_id: "the ESPN competition id (equals the event id for a single-competition event)",
+  competitor_id: "the ESPN competitor (team) id on the event",
+  coach_id: "the ESPN coach id",
+  venue_id: "the ESPN venue id",
+  franchise_id: "the ESPN franchise id",
+  position_id: "the ESPN position id",
+  award_id: "the ESPN award id",
+  provider_id: "the odds provider id (ESPN pickcenter)",
+  poll_id: "the ESPN poll (ranking) id, e.g. `1` AP, `2` Coaches",
+  lang: "the response language (`en`)",
+  region: "the response region (`us`)",
+  calendartype: "the calendar type (`blacklist` for the regular schedule)",
+  sort: "the sort key and direction, e.g. `offensive.avgPoints:desc`",
+  category: "the statistics category",
+  contentorigin: "the content origin (`espn`)",
+  xhr: "`1`: ask espn.com for the page's JSON instead of HTML (fixed)",
+};
+
+/** `\`<TS type>\` — <description>` for a `@param` / a docs cell. */
+const paramDoc = (specKey, p, kind, apiLabel) => {
+  const { ts, text } = paramDescription(specKey, p, kind, apiLabel);
+  return `\`${ts}\` — ${text}`;
+};
+
 /**
  * Render one WRITTEN ESPN source module for a league (`src/generated/espn/
  * <prefix>.ts`). Every wrapper in the league's scopes becomes an explicit
@@ -826,34 +906,31 @@ function renderWrittenEspnModule(league, wrappers) {
       jsdoc += ` *\n`;
     }
     for (const p of w.pathParams) {
-      const req = p.required === false ? " *(optional)*" : "";
-      jsdoc += ` * @param params.${p.name} - path parameter${req}.\n`;
+      jsdoc += ` * @param params.${p.name} - ${paramDoc(`espn.${w.short}`, p, "path")}.\n`;
     }
     for (const p of w.queryParams) {
-      const note = p.queryKey && p.queryKey !== p.name ? ` (ESPN \`${p.queryKey}\`)` : "";
-      const def = p.default !== undefined ? ` — default \`${p.default}\`` : "";
-      jsdoc += ` * @param params.${p.name} - query parameter${note}${def}.\n`;
+      jsdoc += ` * @param params.${p.name} - ${paramDoc(`espn.${w.short}`, p, "query", "ESPN")}.\n`;
     }
     jsdoc +=
-      ` * @param params.parsed - when \`true\`, route the payload through this ` +
+      ` * @param params.parsed - \`boolean\` — when \`true\`, route the payload through this ` +
       `endpoint's tidy.js parser and return rows instead of raw JSON.\n`;
     if (isSummary) {
       jsdoc +=
-        ` * @param params.section - (with \`parsed: true\`) return just one named ` +
+        ` * @param params.section - \`string\` — (with \`parsed: true\`) return just one named ` +
         `sub-frame (e.g. \`boxscore\`, \`plays\`, \`winprobability\`) instead of the ` +
         `object of all summary sub-frames.\n`;
     }
-    jsdoc +=
-      ` * @returns Raw ESPN JSON by default; a tidy array of row objects when ` +
-      `called with \`{ parsed: true }\`` +
-      `${isSummary ? " (an object of sub-frames, or the chosen `section`)" : ""}.\n`;
+    jsdoc += isSummary
+      ? ` * @returns Promise<\`ParsedTables\`> with \`{ parsed: true }\` (an object of sub-frames, or the chosen \`section\`'s \`Row[]\`); the raw ESPN payload (\`unknown\`) otherwise.\n`
+      : ` * @returns Promise<\`Row[]\`> with \`{ parsed: true }\` (rows are untyped: not parity-verified yet); the raw ESPN payload (\`unknown\`) otherwise.\n`;
     const exampleArgs = w.pathParams.length
       ? `{ ${w.pathParams
           .filter((p) => p.required !== false)
           .map((p) => `${p.name}: '…'`)
           .join(", ")} }`
       : "{}";
-    jsdoc += ` * @example await sdv.${league.prefix}.${camel}(${exampleArgs});\n */\n`;
+    jsdoc += ` * @example await sdv.${league.prefix}.${camel}(${exampleArgs});\n`;
+    jsdoc += ` * @see ${DOCS_URL}/docs/${league.prefix}/reference/${referenceGroupFor(w)}#${slug(camel)}\n */\n`;
 
     body += `\nconst ${defConst}: WrapperDef = ${defLiteral};\n`;
     body += jsdoc;
@@ -1012,14 +1089,42 @@ const _schemaCache = new Map();
 function loadReturnsColumns(returnsSchema) {
   if (!returnsSchema) return null;
   if (_schemaCache.has(returnsSchema)) return _schemaCache.get(returnsSchema);
-  const file = join(schemasDir, `${returnsSchema}.yaml`);
-  let columns = null;
-  if (existsSync(file)) {
-    const doc = parse(readFileSync(file, "utf8"));
-    if (Array.isArray(doc?.columns) && doc.columns.length) columns = doc.columns;
-  }
+  const doc = loadSchemaDoc(returnsSchema);
+  const columns = Array.isArray(doc?.columns) && doc.columns.length ? doc.columns : null;
   _schemaCache.set(returnsSchema, columns);
   return columns;
+}
+
+/** The parsed returns-schema YAML (cached), or `null` without a file. */
+const _docCache = new Map();
+function loadSchemaDoc(returnsSchema) {
+  if (!returnsSchema) return null;
+  if (_docCache.has(returnsSchema)) return _docCache.get(returnsSchema);
+  const file = join(schemasDir, `${returnsSchema}.yaml`);
+  const doc = existsSync(file) ? parse(readFileSync(file, "utf8")) : null;
+  _docCache.set(returnsSchema, doc);
+  return doc;
+}
+
+/**
+ * The candidate manual_column_descriptions.yaml keys of a returns schema: its
+ * `schema:` field, its file stem, and any extra names the caller knows the table by
+ * (the endpoint short, its public name, a loader's `load_*` fn).
+ */
+function schemaKeys(returnsSchema, ...extra) {
+  const doc = loadSchemaDoc(returnsSchema);
+  const stem = returnsSchema ? returnsSchema.split("/").pop() : null;
+  return [...new Set([doc?.schema, stem, ...extra].filter(Boolean))];
+}
+
+/** The ESPN schema ref of a parser (`parse_scoreboard` -> `espn/scoreboard`). */
+const espnSchemaRef = (parser) => `espn/${(ESPN_PARSER_SCHEMA[parser] ?? parser).replace(/^parse_/, "")}`;
+
+/** An ESPN parser's columns, descriptions filled for `league` (null: the shared page). */
+function espnColumns(parser, league = null, ...extra) {
+  const ref = espnSchemaRef(parser);
+  const cols = loadReturnsColumns(ref);
+  return cols && describeColumns("espn", ref, cols, { keys: schemaKeys(ref, parser, ...extra), league });
 }
 
 /** A flat endpoint's returns schema for the docs (returns-tables.mjs flatReturnsSchema), or `null` without a file. */
@@ -1027,11 +1132,42 @@ const _flatSchemaCache = new Map();
 function loadReturnsSchema(returnsSchema) {
   if (!returnsSchema) return null;
   if (_flatSchemaCache.has(returnsSchema)) return _flatSchemaCache.get(returnsSchema);
-  const file = join(schemasDir, `${returnsSchema}.yaml`);
-  const out = existsSync(file) ? flatReturnsSchema(parse(readFileSync(file, "utf8"))) : null;
+  const doc = loadSchemaDoc(returnsSchema);
+  const out = doc ? flatReturnsSchema(doc) : null;
   _flatSchemaCache.set(returnsSchema, out);
   return out;
 }
+
+/**
+ * A flat wrapper's returns schema with every column description resolved
+ * (descriptions.mjs): one table, or one per frame (`<ref>#<section>`).
+ */
+function describedFlatSchema(w) {
+  const schema = loadReturnsSchema(w.returnsSchema);
+  if (!schema) return null;
+  const league = FLAT_API_NAMESPACES[w.api] ?? null;
+  const keys = schemaKeys(w.returnsSchema, w.short, flatSnake(w));
+  if (schema.columns) {
+    return { ...schema, columns: describeColumns(w.api, w.returnsSchema, schema.columns, { keys, league }) };
+  }
+  if (schema.frames) {
+    const frames = schema.frames.map((f) => ({
+      ...f,
+      columns: describeColumns(w.api, `${w.returnsSchema}#${f.section}`, f.columns ?? [], { keys: [...keys, f.section], league }),
+    }));
+    return { ...schema, frames };
+  }
+  return schema;
+}
+
+/** The `**Row type:**` line of a flat wrapper (its verified row interface, or the untyped note). */
+function flatRowTypeLine(w) {
+  const typed = FLAT_ROW_TYPES.get(w.api)?.get(w.short);
+  if (!typed) return UNTYPED_ROWS_NOTE;
+  const names = typed.names.map((n) => `\`${n}\``);
+  return `**Row type:** ${names.join(", ")} (exported from the package root).\n`;
+}
+const UNTYPED_ROWS_NOTE = "_Rows are untyped `Row[]` (not parity-verified yet)._\n";
 
 // Hand-written Baseball Savant / Statcast wrappers (src/leagues/
 // mlb_statcast_extra.ts) — not in any endpoint YAML, so they never reach
@@ -1107,19 +1243,22 @@ function renderNativeFamilySection(api, rows, nsPrefix) {
   // frame of a `kind: frames` schema, or sdv-py's `unverified` reason).
   // Endpoints with no schema (raw-JSON / generic-list passthroughs) emit none.
   for (const w of sorted) {
-    const schema = loadReturnsSchema(w.returnsSchema);
+    const schema = describedFlatSchema(w);
     if (!schema) continue;
     const snake = flatSnake(w);
     body += renderFlatReturns(`\`${snake}\` / \`${toCamel(snake)}\``, schema);
+    body += `\n${flatRowTypeLine(w)}`;
   }
   // The Statcast family additionally exposes hand-written search / player
   // wrappers (not in the YAML); document their returns frames from autodoc.
   if (api === "mlb_statcast") {
     for (const hw of STATCAST_HANDWRITTEN) {
-      const cols = loadReturnsColumns(hw.schema);
-      if (!cols) continue;
+      const raw = loadReturnsColumns(hw.schema);
+      if (!raw) continue;
+      const cols = describeColumns(api, hw.schema, raw, { keys: schemaKeys(hw.schema, hw.snake), league: "mlb" });
       const camel = toCamel(hw.snake);
       body += renderReturnsTable(`\`${hw.snake}\` / \`${camel}\``, cols);
+      body += `\n${UNTYPED_ROWS_NOTE}`;
     }
   }
   return body;
@@ -1319,15 +1458,14 @@ function renderFunctionBlock(league, wrapper, parserMap) {
     rows.push(["`league`", "`league`", "no", `ESPN league slug override (default \`${league.league}\`)`]);
   }
   for (const p of wrapper.pathParams) {
-    const req = p.required === false ? "no" : "yes";
-    rows.push([`\`{${p.name}}\``, `\`${p.name}\``, req, "path parameter"]);
+    const req = p.required === false || p.default !== undefined || p.defaultFrom !== undefined ? "no" : "yes";
+    rows.push([`\`{${p.name}}\``, `\`${p.name}\``, req, escapeCell(paramDoc(`espn.${wrapper.short}`, p, "path"))]);
   }
   for (const p of wrapper.queryParams) {
     const apiName = p.queryKey || p.name;
-    const def = p.default !== undefined ? ` (default \`${p.default}\`)` : "";
-    rows.push([`\`${apiName}\``, `\`${p.name}\``, "no", `query parameter${def}`]);
+    rows.push([`\`${apiName}\``, `\`${p.name}\``, "no", escapeCell(paramDoc(`espn.${wrapper.short}`, p, "query", "ESPN"))]);
   }
-  rows.push(["—", "`parsed`", "no", "return tidy rows instead of raw JSON"]);
+  rows.push(["—", "`parsed`", "no", "`boolean` — return tidy rows instead of raw JSON"]);
   if (SECTIONED_SHORTS.has(wrapper.short)) {
     rows.push([
       "—",
@@ -1347,7 +1485,7 @@ function renderFunctionBlock(league, wrapper, parserMap) {
   const parser = parserMap[wrapper.short];
   let cols = null;
   if (parser && !SUMMARY_DISPATCH.has(parser)) {
-    cols = loadReturnsColumns(`espn/${(ESPN_PARSER_SCHEMA[parser] ?? parser).replace(/^parse_/, "")}`);
+    cols = espnColumns(parser, league.prefix, wrapper.short, espnPublicShort(league, wrapper));
   }
   if (cols) {
     body += `\n**Returns** (with \`{ parsed: true }\`, via \`${parser}\`):\n\n`;
@@ -1360,15 +1498,23 @@ function renderFunctionBlock(league, wrapper, parserMap) {
         : "page's `gamepackageJSON` (a Site v2 summary) goes through the `summary` dispatcher, which returns") +
       ` an object of 21 sub-frames keyed by section ` +
       `(\`{ parsed: true, section: '<name>' }\` for one); see ` +
-      `[ESPN parsed returns](../../reference/espn-parsed-returns).\n`;
+      `[ESPN parsed returns](../../reference/espn-parsed-returns#summary-sub-frames).\n`;
   } else {
+    // A generic / league-variable passthrough: no fixed table. Say which leagues
+    // expose this short (every one routes it through the same parser) and link the
+    // parser's section of the shared page.
+    const leaguesWith = ESPN_LEAGUES_BY_SHORT.get(wrapper.short) ?? [];
+    const anchor = parser ? `#${parser}` : "";
     body +=
       `\n**Returns:** raw ESPN \`Dict\` by default. With \`{ parsed: true }\` the ` +
       `payload is routed through its parser` +
       (parser ? ` (\`${parser}\`)` : ` (generic / league-variable passthrough)`) +
-      `; the column set varies by league — see ` +
-      `[ESPN parsed returns](../../reference/espn-parsed-returns).\n`;
+      `; the column set varies by league and payload, so no fixed table is published. ` +
+      `This endpoint is exposed on ${leaguesWith.length} league${leaguesWith.length === 1 ? "" : "s"} ` +
+      `(${leaguesWith.map((p) => `\`${p}\``).join(", ")}) — see ` +
+      `[\`${parser ?? "ESPN parsed returns"}\`](../../reference/espn-parsed-returns${anchor}) for the shared parser note.\n`;
   }
+  body += `\n${UNTYPED_ROWS_NOTE}`;
 
   // Example.
   const exampleArgs = wrapper.pathParams.length
@@ -1488,7 +1634,7 @@ function registerWrittenLeagueDocs(outputs, league, wrappers, flatWrappers, pars
   // Release dataset loaders (releases.yaml) get their own reference page, last.
   if (loaders.length) {
     indexGroups.push({ id: "loaders", label: "Dataset loaders", rows: loaders });
-    outputs[join(refDir, "loaders.md")] = renderLoadersPage(league.prefix, loaders, 50);
+    outputs[join(refDir, "loaders.md")] = renderLoadersPage(league.prefix, loaders, 50, LOADER_SCHEMAS, describeLoader);
   }
 
   outputs[join(leagueDir, "index.md")] = renderWrittenLeagueIndex(league, wrappers, indexGroups);
@@ -1658,7 +1804,7 @@ function renderEspnParsedReturns() {
         `returns just that one. See [Summary sub-frames](#summary-sub-frames) below.\n`;
       continue;
     }
-    const cols = loadReturnsColumns(`espn/${(ESPN_PARSER_SCHEMA[fn] ?? fn).replace(/^parse_/, "")}`);
+    const cols = espnColumns(fn, null);
     if (cols) body += renderColumnsTable(cols);
     else
       body +=
@@ -1676,7 +1822,9 @@ function renderEspnParsedReturns() {
     `past-game captures.\n`;
   for (const sec of ESPN_SUMMARY_SECTIONS) {
     body += `\n### \`${sec}\`\n\n`;
-    const cols = loadReturnsColumns(`espn/summary_${sec}`);
+    const ref = `espn/summary_${sec}`;
+    const raw = loadReturnsColumns(ref);
+    const cols = raw && describeColumns("espn", ref, raw, { keys: schemaKeys(ref, sec) });
     if (cols) body += renderColumnsTable(cols);
     else
       body +=
@@ -1882,11 +2030,20 @@ function renderReferenceSidebar(leagues, standaloneNs, loaderOnly = []) {
     });
   }
 
+  const groups = {
+    // The ESPN Reference tree: leagues nested by sport + a Providers category.
+    reference: items,
+    // "How this library is built" (docs/docs/architecture/), right after Getting Started.
+    architecture: architectureSidebar(),
+    // The utilities catalogue (docs/docs/utilities/), after the ESPN Reference.
+    utilities: utilitiesSidebar(UTILITIES),
+  };
   return (
     `// @generated by tools/codegen/generate.mjs — do not edit by hand.\n` +
-    `// Grouped ESPN reference sidebar (leagues nested by sport + a Providers\n` +
-    `// category). Imported by docs/sidebars.js. Re-run \`npm run codegen\` to refresh.\n` +
-    `module.exports = ${JSON.stringify(items, null, 2)};\n`
+    `// The generated sidebar groups: \`reference\` (ESPN leagues nested by sport + a\n` +
+    `// Providers category), \`architecture\` (How this library is built) and \`utilities\`\n` +
+    `// (the utilities catalogue). Imported by docs/sidebars.js. Re-run \`npm run codegen\` to refresh.\n` +
+    `module.exports = ${JSON.stringify(groups, null, 2)};\n`
   );
 }
 
@@ -2235,6 +2392,58 @@ const loaderOnly = [...releaseLoaders.keys()]
     return [ns, LOADER_ONLY[ns].sport];
   });
 
+// short -> the league prefixes that expose it (the generic-parser docs note).
+const ESPN_LEAGUES_BY_SHORT = new Map();
+for (const league of leagues) {
+  for (const w of wrappersForLeague(league, wrappers)) {
+    if (!ESPN_LEAGUES_BY_SHORT.has(w.short)) ESPN_LEAGUES_BY_SHORT.set(w.short, []);
+    ESPN_LEAGUES_BY_SHORT.get(w.short).push(league.prefix);
+  }
+}
+
+// Row types (tools/codegen/row-types.mjs) are computed BEFORE the docs so a
+// reference block can name its verified row interface. The parser-parity
+// harness's verified endpoints are the only ones that get row types.
+const PARITY_COVERAGE = loadParityCoverage(repoRoot);
+// api -> renderRowsModule result ({ source, types, exports }).
+const FLAT_ROWS = new Map();
+// api -> Map(short -> { parsed, sections, names }) for the docs' `Row type` lines.
+const FLAT_ROW_TYPES = new Map();
+for (const api of FLAT_API_FILES) {
+  const defs = flatWrappers.filter((w) => w.api === api);
+  if (!defs.length) continue;
+  const ns = FLAT_API_NAMESPACES[api] ?? api;
+  const rows = renderRowsModule(api, defs, {
+    coverage: PARITY_COVERAGE,
+    schemasDir,
+    sectionsOf: (d) => (d.parser ? FLAT_PARSER_SECTIONS[d.parser] : undefined),
+    snakeOf: flatSnake,
+    nsOf: (d) => FLAT_API_NAMESPACES[d.api] ?? d.api,
+    describe: (def, ref, columns, section) =>
+      describeColumns(api, section ? `${ref}#${section}` : ref, columns, {
+        keys: [...schemaKeys(ref, def.short, flatSnake(def)), ...(section ? [section] : [])],
+        league: ns,
+      }),
+  });
+  FLAT_ROWS.set(api, rows);
+  FLAT_ROW_TYPES.set(api, rows.types);
+}
+
+// Release loader schemas (vendored loader_schemas.yaml): the loaders' returns tables.
+const LOADER_SCHEMAS = loadLoaderSchemas(schemasDir);
+/** A loader's columns with descriptions (manual key = its `load_*` fn, R package = its league). */
+const describeLoader = (ns, ld, cols) =>
+  describeColumns("loaders", ld.fn, cols, { keys: [ld.fn, ld.deprecatedFor].filter(Boolean), league: ns });
+
+// Breaking-change callouts (tools/codegen/breaking.yaml): an admonition at the top
+// of every affected generated page + the table on reference/deprecations.md.
+const BREAKING = loadBreaking(here);
+// Params types (tools/codegen/param-types.mjs): the YAML type + description of every
+// param, for the generated params modules, the TSDoc and the docs param tables.
+const PARAM_SPECS = loadParamSpecs(endpointsDir, FAMILY_FILES, FLAT_API_FILES);
+// Utilities catalogue (tools/codegen/utilities.yaml): the hand-written non-data exports.
+const UTILITIES = loadUtilities(here);
+
 // The generated wrappers module exports the ESPN `WRAPPERS` table (unchanged)
 // plus a separate `FLAT_WRAPPERS` table for the non-ESPN flat APIs.
 const wrappersTs =
@@ -2315,12 +2524,9 @@ outputs[join(generatedEspnDir, "index.ts")] = renderWrittenEspnBarrel(writtenPre
 // WRITTEN flat-API source modules — one `src/generated/flat/<api>.ts` per family,
 // composed in src/index.ts via the generated barrel instead of makeFlatModule.
 const generatedFlatDir = join(generatedDir, "flat");
-// The parser-parity harness's verified endpoints: the only ones that get row types.
-const PARITY_COVERAGE = loadParityCoverage(repoRoot);
 // api -> the row / tables interfaces its rows module exports (for the barrel).
 const rowTypeNames = new Map();
 // Params types (tools/codegen/param-types.mjs): module -> the names it exports.
-const PARAM_SPECS = loadParamSpecs(endpointsDir, FAMILY_FILES, FLAT_API_FILES);
 const paramTypeNames = new Map();
 {
   const espnParams = renderEspnParams(wrappers, PARAM_SPECS);
@@ -2331,13 +2537,7 @@ const writtenFlatApis = [];
 for (const api of FLAT_API_FILES) {
   const defs = flatWrappers.filter((w) => w.api === api);
   if (!defs.length) continue;
-  const rows = renderRowsModule(api, defs, {
-    coverage: PARITY_COVERAGE,
-    schemasDir,
-    sectionsOf: (d) => (d.parser ? FLAT_PARSER_SECTIONS[d.parser] : undefined),
-    snakeOf: flatSnake,
-    nsOf: (d) => FLAT_API_NAMESPACES[d.api] ?? d.api,
-  });
+  const rows = FLAT_ROWS.get(api);
   if (rows.source) {
     outputs[join(generatedDir, "rows", `${api}.ts`)] = rows.source;
     rowTypeNames.set(api, rows.exports);
@@ -2354,7 +2554,7 @@ outputs[join(generatedDir, "params", "index.ts")] = renderParamsBarrel(paramType
 
 // Release loader modules (src/generated/loaders/) + the docs dir of each
 // loader-only namespace (written leagues got their loaders page above).
-registerLoaderModules(outputs, generatedDir, releaseLoaders, schemasDir);
+registerLoaderModules(outputs, generatedDir, releaseLoaders, schemasDir, describeLoader);
 outputs[join(generatedDir, "namespaces.ts")] = renderNamespacesTs(
   [...rowTypeNames.values()].flat(),
   [...releaseLoaders.keys()],
@@ -2377,8 +2577,15 @@ loaderOnly.forEach(([ns], i) => {
     ) + "\n";
   outputs[join(dir, "reference", "_category_.json")] =
     JSON.stringify({ label: "Reference", position: 1, collapsed: true }, null, 2) + "\n";
-  outputs[join(dir, "reference", "loaders.md")] = renderLoadersPage(ns, loaders, 1);
+  outputs[join(dir, "reference", "loaders.md")] = renderLoadersPage(ns, loaders, 1, LOADER_SCHEMAS, describeLoader);
 });
+
+/** The docs page + section of a flat family (`@see` in the generated TSDoc). */
+function flatDocsUrl(api, ns) {
+  const meta = FLAT_API_META[api] ?? { label: api };
+  const page = leagues.some((l) => l.prefix === ns) ? `/docs/${ns}/reference/native` : `/docs/reference/${ns}`;
+  return `${DOCS_URL}${page}#${slug(`Native API — ${meta.label}`)}`;
+}
 
 // One WRITTEN flat-API module: each wrapper a real `export const` delegating to
 // the shared `callFlat(def, params)` core (its def hoisted to a module const).
@@ -2406,20 +2613,19 @@ function renderWrittenFlatModule(api, defs, rowTypes = new Map()) {
     const defLiteral = JSON.stringify(def, null, 2);
     let jsdoc = `\n/**\n * ${meta.label} — ${humanizeShort(def.short)}.\n *\n`;
     jsdoc += ` * **Endpoint:** \`GET ${def.host}${def.path}\`\n *\n`;
+    const specKey = `${api}.${def.short}`;
     for (const p of def.pathParams ?? []) {
-      const req = p.required === false ? " *(optional)*" : "";
-      jsdoc += ` * @param params.${p.name} - path parameter${req}.\n`;
+      jsdoc += ` * @param params.${p.name} - ${paramDoc(specKey, p, "path")}.\n`;
     }
     for (const p of def.queryParams ?? []) {
-      const note = p.queryKey && p.queryKey !== p.name ? ` (\`${p.queryKey}\`)` : "";
-      const d = p.default !== undefined ? ` — default \`${p.default}\`` : "";
-      jsdoc += ` * @param params.${p.name} - query parameter${note}${d}.\n`;
+      jsdoc += ` * @param params.${p.name} - ${paramDoc(specKey, p, "query")}.\n`;
     }
     if (meta.controls) {
-      for (const [name, doc] of Object.entries(meta.controls)) jsdoc += ` * @param params.${name} - ${doc}\n`;
+      for (const [name, doc] of Object.entries(meta.controls)) jsdoc += ` * @param params.${name} - \`${CONTROL_TYPES[name] ?? "string"}\` — ${doc}\n`;
     } else if (def.auth) {
-      jsdoc += ` * @param params.headers - optional bearer headers (auto-minted if omitted).\n`;
+      jsdoc += ` * @param params.headers - \`Record<string, string>\` — optional bearer headers (auto-minted if omitted).\n`;
     }
+    const typed = rowTypes.get(def.short);
     if (def.parser) {
       const sec = FLAT_PARSER_SECTIONS[def.parser];
       // A `kind: frames` schema (and no single default sub-frame): the parser returns
@@ -2427,25 +2633,28 @@ function renderWrittenFlatModule(api, defs, rowTypes = new Map()) {
       // table, whose columns that request parameter picks.
       const { frames, framesBy } = loadReturnsSchema(def.returnsSchema) ?? {};
       const objectOfTables = frames && !framesBy && !(sec && sec.default !== null);
-      jsdoc += ` * @param params.parsed - when \`true\`, route the payload through this endpoint's parser and return ${objectOfTables ? "an object of tables keyed by result set" : "tidy rows"} instead of the raw response.\n`;
+      jsdoc += ` * @param params.parsed - \`boolean\` — when \`true\`, route the payload through this endpoint's parser and return ${objectOfTables ? "an object of tables keyed by result set" : "tidy rows"} instead of the raw response.\n`;
       if (sec) {
         const names = sec.sections ? sec.sections.map((s) => `\`${s}\``).join(", ") : sec.dynamic;
         const dflt = sec.default === null ? sectionDefaultDoc(sec) : `\`${sec.default}\``;
-        jsdoc += ` * @param params.section - (with \`parsed: true\`) the table to return: ${names}. Default: ${dflt}; ${sectionUnknownDoc(sec)}.\n`;
+        jsdoc += ` * @param params.section - \`string\` — (with \`parsed: true\`) the table to return: ${names}. Default: ${dflt}; ${sectionUnknownDoc(sec)}.\n`;
       }
+      const parsedType = typed ? typed.parsed : objectOfTables ? "ParsedTables" : "Row[]";
+      const verified = typed ? "" : " (rows are untyped: not parity-verified yet)";
       jsdoc +=
         objectOfTables
-          ? ` * @returns The raw response by default; with \`{ parsed: true }\`, an object of tables (arrays of row objects) keyed by result set: ${frames.map((f) => `\`${f.section}\``).join(", ")}.\n`
-          : ` * @returns The raw response by default; a tidy array of row objects when \`{ parsed: true }\`${framesBy ? ` (its columns depend on \`${framesBy}\`)` : ""}.\n`;
+          ? ` * @returns Promise<\`${parsedType}\`> with \`{ parsed: true }\`: an object of tables (arrays of row objects) keyed by result set: ${frames.map((f) => `\`${f.section}\``).join(", ")}${verified}; the raw response (\`unknown\`) otherwise.\n`
+          : ` * @returns Promise<\`${parsedType}\`> with \`{ parsed: true }\`${framesBy ? ` (its columns depend on \`${framesBy}\`)` : ""}${verified}; the raw response (\`unknown\`) otherwise.\n`;
     } else {
-      jsdoc += ` * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.\n`;
-      jsdoc += ` * @returns The raw response (this endpoint has no parser).\n`;
+      jsdoc += ` * @param params.parsed - \`boolean\` — accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.\n`;
+      jsdoc += ` * @returns Promise<\`unknown\`>: the raw response (this endpoint has no parser).\n`;
     }
     const reqPath = (def.pathParams ?? []).filter((p) => p.required !== false);
     const flatExampleArgs = reqPath.length
       ? `{ ${reqPath.map((p) => `${p.name}: '…'`).join(", ")} }`
       : "{}";
     jsdoc += ` * @example await sdv.${ns}.${camel}(${flatExampleArgs});\n`;
+    jsdoc += ` * @see ${flatDocsUrl(api, ns)}\n`;
     if (def.deprecated) jsdoc += ` * @deprecated ${def.deprecated}\n`;
     jsdoc += ` */\n`;
     body += `\nconst ${defConst}: WrapperDef = ${defLiteral};\n`;
@@ -2502,6 +2711,130 @@ function renderWrittenEspnBarrel(prefixes) {
   return body;
 }
 
+// Utilities catalogue (tools/codegen/utilities.yaml): docs/docs/utilities/, the
+// runtime table src/generated/utilities.ts, a sidebar group + a coverage block.
+registerUtilityDocs(outputs, referenceRootDir, UTILITIES);
+outputs[join(generatedDir, "utilities.ts")] = renderUtilitiesTs(UTILITIES);
+
+// "How this library is built" (hand-authored pages under docs/docs/architecture/):
+// codegen rewrites only their `<!-- gen:status -->` block.
+registerArchitectureDocs(outputs, referenceRootDir, {
+  vendorRef: readFileSync(join(here, "vendor", "upstream", "REF"), "utf8").trim(),
+  vendorRepo: NAMING_MANIFEST.source.repo,
+  vendorDate: NAMING_MANIFEST.source.date ?? null,
+  espn: { wrappers: wrappers.length, leagues: leagues.length, families: FAMILY_FILES },
+  flat: {
+    vendored: FLAT_API_FILES.filter((api) => NAMING_MANIFEST.families?.[api]),
+    jsOwned: FLAT_API_FILES.filter((api) => !NAMING_MANIFEST.families?.[api]),
+    wrappers: flatWrappers.length,
+    counts: Object.fromEntries(FLAT_API_FILES.map((api) => [api, flatWrappers.filter((w) => w.api === api).length])),
+  },
+  loaders: { count: [...releaseLoaders.values()].flat().length, namespaces: [...releaseLoaders.keys()] },
+  utilities: utilitiesCoverage(UTILITIES),
+  breaking: BREAKING.length,
+  rows: { typed: [...FLAT_ROW_TYPES.values()].reduce((n, m) => n + m.size, 0), families: FLAT_ROWS.size },
+});
+
+// Every generated docs page: the breaking-change admonition of its surface (after
+// the front matter) and the visible provenance footer instead of the hidden MDX
+// comment. The surface is read off the page's path.
+const HIDDEN_NOTE = /^\{\/\* AUTO-GENERATED by tools\/codegen\/generate\.mjs[^\n]*\*\/\}\n(?:\{\/\* Run `npm run codegen`[^\n]*\*\/\}\n)?/m;
+const BREAKING_PAGES = new Set();
+for (const [file, content] of Object.entries(outputs)) {
+  if (!file.endsWith(".md") || !file.startsWith(referenceRootDir)) continue;
+  const rel = file.slice(referenceRootDir.length + 1).replace(/\\/g, "/");
+  if (rel.startsWith("architecture/")) continue; // hand-authored; only its status block is generated
+  outputs[file] = finishDocsPage(content, rel);
+}
+
+/** The docs surface of a generated page (its breaking-change scope + architecture page). */
+function docsSurface(rel) {
+  const m = /^reference\/([^/]+)\.md$/.exec(rel);
+  if (rel.startsWith("utilities/")) return { surface: "core", arch: "hand-written", source: "tools/codegen/utilities.yaml" };
+  if (rel.endsWith("/reference/loaders.md") || (m && m[1] === "index")) {
+    return { surface: "loaders", arch: "loaders", source: "tools/codegen/endpoints/releases.yaml (vendored from sdv-py)" };
+  }
+  if (m && (m[1] === "deprecations" || m[1] === "espn-parsed-returns")) {
+    return { surface: "espn", arch: "espn-vendored", source: "tools/codegen/endpoints/*.yaml (vendored from sdv-py)" };
+  }
+  if (m) {
+    // a standalone provider page: its families decide (vendored or JS-owned)
+    const apis = FLAT_API_FILES.filter((api) => FLAT_API_NAMESPACES[api] === m[1]);
+    const vendored = apis.some((api) => NAMING_MANIFEST.families?.[api]);
+    return {
+      surface: apis.map((api) => `flat:${api}`),
+      arch: vendored ? "flat-vendored" : "flat-js-owned",
+      source: `${apis.map((api) => `tools/codegen/endpoints/${api}.yaml`).join(" + ")}${vendored ? " (vendored from sdv-py)" : " (JS-owned)"}`,
+    };
+  }
+  const nativeM = /^([^/]+)\/reference\/native\.md$/.exec(rel);
+  if (nativeM) {
+    const apis = FLAT_API_FILES.filter((api) => FLAT_API_NAMESPACES[api] === nativeM[1]);
+    const vendored = apis.some((api) => NAMING_MANIFEST.families?.[api]);
+    return {
+      surface: apis.map((api) => `flat:${api}`),
+      arch: vendored ? "flat-vendored" : "flat-js-owned",
+      source: `${apis.map((api) => `tools/codegen/endpoints/${api}.yaml`).join(" + ")}${vendored ? " (vendored from sdv-py)" : " (JS-owned)"}`,
+    };
+  }
+  const prefix = rel.split("/")[0];
+  if (LOADER_ONLY[prefix] && rel.endsWith("index.md")) {
+    return { surface: "loaders", arch: "loaders", source: "tools/codegen/endpoints/releases.yaml (vendored from sdv-py)" };
+  }
+  return { surface: "espn", arch: "espn-vendored", source: "tools/codegen/endpoints/espn_*.yaml (vendored from sdv-py)" };
+}
+
+function finishDocsPage(content, rel) {
+  const { surface, arch, source } = docsSurface(rel);
+  let out = content.replace(HIDDEN_NOTE, "");
+  const admonition = breakingAdmonition(BREAKING, surface);
+  if (admonition) {
+    BREAKING_PAGES.add(rel);
+    // after the front matter (`---\n...\n---\n`), else at the top
+    const fm = /^---\n[\s\S]*?\n---\n/.exec(out);
+    out = fm ? out.slice(0, fm[0].length) + "\n" + admonition + out.slice(fm[0].length) : admonition + out;
+  }
+  if (!out.endsWith("\n")) out += "\n";
+  out +=
+    `\n_Generated by tools/codegen/generate.mjs from ${source} — ` +
+    `see [How this library is built](/docs/architecture/${arch})._\n`;
+  return out;
+}
+
+// The breaking-changes table on reference/deprecations.md (after its front matter + admonition).
+{
+  const file = join(referenceDir, "deprecations.md");
+  const fm = /^---\n[\s\S]*?\n---\n/.exec(outputs[file]);
+  const head = outputs[file].slice(0, fm[0].length);
+  const rest = outputs[file].slice(fm[0].length);
+  // the admonition (if any) was inserted right after the front matter; keep it first
+  const adm = /^\n:::danger[\s\S]*?\n:::\n/.exec(rest);
+  outputs[file] = adm
+    ? head + adm[0] + "\n" + breakingTable(BREAKING) + rest.slice(adm[0].length)
+    : head + "\n" + breakingTable(BREAKING) + rest;
+}
+
+// Column-description coverage (descriptions.mjs): what the tables above rendered.
+outputs[join(docsGeneratedDir, "description_coverage.json")] =
+  JSON.stringify(
+    {
+      _generated: "tools/codegen/generate.mjs — do not edit by hand",
+      _doc:
+        "Returns-table column descriptions filled per family after resolving each cell through " +
+        "tools/codegen/descriptions.mjs (schema text -> manual_column_descriptions.yaml -> " +
+        "r_column_descriptions.yaml). One count per table and league.",
+      ...descriptionCoverage(),
+      breaking_pages: BREAKING_PAGES.size,
+    },
+    null,
+    2
+  ) + "\n";
+// coverage.json gains the utilities block (homepage + tests).
+outputs[join(docsGeneratedDir, "coverage.json")] = outputs[join(docsGeneratedDir, "coverage.json")].replace(
+  /\n}\n$/,
+  `,\n  "utilities": ${JSON.stringify(utilitiesCoverage(UTILITIES), null, 2).replace(/\n/g, "\n  ")}\n}\n`
+);
+
 const check = process.argv.includes("--check");
 let drift = false;
 for (const [file, content] of Object.entries(outputs)) {
@@ -2523,6 +2856,12 @@ console.log(
     `+ ${flatWrappers.length} flat-API wrappers (${FLAT_API_FILES.length} families) ` +
     `+ ${[...releaseLoaders.values()].flat().length} release loaders ` +
     `(+ ${leagues.length + standaloneNs.length + 3} reference pages + playground metadata)`
+);
+for (const line of coverageLines()) console.log(`codegen: ${line}`);
+console.log(
+  `codegen: utilities ${utilitiesCoverage(UTILITIES).exports} exports in ${utilitiesCoverage(UTILITIES).modules} modules ` +
+    `(${Object.keys(utilitiesCoverage(UTILITIES).categories).length} categories); ` +
+    `breaking admonitions on ${BREAKING_PAGES.size} pages (${BREAKING.length} entries)`
 );
 if (check && drift) process.exit(1);
 if (check) console.log("codegen: generated files are up to date");

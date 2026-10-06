@@ -335,7 +335,9 @@ export {
   listFunctions, functionCount, findTeam, findAthlete, findEvent, clearTeamCache,
   list_functions, function_count, find_team, find_athlete, find_event, clear_team_cache,
 } from './discover.js';
-export type { ListFunctionsOptions, Namespaces } from './discover.js';
+export type { ListFunctionsOptions, Namespaces, FunctionEntry } from './discover.js';
+export { UTILITY_CATEGORIES } from './generated/utilities.js';
+export type { UtilityCategory } from './generated/utilities.js';
 export { normalize } from './parsers/_normalize.js';
 export { PARSERS, parserFor, NODE_ONLY_PARSERS } from './parsers/_registry.js';
 export type { ParserFn, FlatParserFn, ParsedTables } from './parsers/_registry.js';

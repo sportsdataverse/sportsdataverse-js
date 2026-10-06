@@ -5523,6 +5523,16 @@ export const function_count: typeof functionCount;
 export function functionCount(league?: string | null, ns?: Namespaces): Promise<number | Record<string, number>>;
 
 // @public
+export interface FunctionEntry {
+    // (undocumented)
+    category?: UtilityCategory;
+    // (undocumented)
+    kind: 'data' | 'utility';
+    // (undocumented)
+    name: string;
+}
+
+// @public
 export interface GeneratedNamespaces {
     asa: AsaWrappers;
     bundesliga: BundesligaWrappers;
@@ -7156,10 +7166,16 @@ export interface Ligue1Wrappers {
 export const list_functions: typeof listFunctions;
 
 // @public
+export function listFunctions(league: string | null | undefined, opts: ListFunctionsOptions & {
+    detail: true;
+}, ns?: Namespaces): Promise<FunctionEntry[] | Record<string, FunctionEntry[]>>;
+
+// @public (undocumented)
 export function listFunctions(league?: string | null, opts?: ListFunctionsOptions, ns?: Namespaces): Promise<string[] | Record<string, string[]>>;
 
 // @public (undocumented)
 export interface ListFunctionsOptions {
+    detail?: boolean;
     parsersOnly?: boolean;
     search?: string;
     wrappersOnly?: boolean;
@@ -58238,6 +58254,12 @@ export interface UflWrappers {
     espnUflVenue: Wrapper<Row[], EspnVenueParams>;
     espnUflVenues: Wrapper<Row[], EspnVenuesParams>;
 }
+
+// @public (undocumented)
+export const UTILITY_CATEGORIES: Record<string, UtilityCategory>;
+
+// @public (undocumented)
+export type UtilityCategory = "parsers" | "analytics" | "odds" | "models" | "producers" | "discovery" | "transforms" | "http-core" | "errors" | "config";
 
 // @public
 export interface WbbWrappers {

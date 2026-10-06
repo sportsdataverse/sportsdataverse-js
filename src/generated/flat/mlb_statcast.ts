@@ -78,11 +78,12 @@ const GAMEFEED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/gf`
  *
- * @param params.game_pk - query parameter.
- * @param params.at_bat_number - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `game_pk` query parameter.
+ * @param params.at_bat_number - `number | string` — the `at_bat_number` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastGamefeed({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastGamefeed: Wrapper<Row[], MlbStatcastGamefeedParams> = (params: WrapperParams = {}) => callFlat(GAMEFEED_DEF, params);
 /** snake_case alias of {@link mlbStatcastGamefeed} (py/R parity). */
@@ -124,13 +125,14 @@ const LEADERBOARD_ACTIVE_SPIN_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/active-spin`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardActiveSpin({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardActiveSpin: Wrapper<Row[], MlbStatcastLeaderboardActiveSpinParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_ACTIVE_SPIN_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardActiveSpin} (py/R parity). */
@@ -172,13 +174,14 @@ const LEADERBOARD_ARM_ANGLES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/pitcher-arm-angles`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardArmAngles({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardArmAngles: Wrapper<Row[], MlbStatcastLeaderboardArmAnglesParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_ARM_ANGLES_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardArmAngles} (py/R parity). */
@@ -220,13 +223,14 @@ const LEADERBOARD_ARM_STRENGTH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/arm-strength`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardArmStrength({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardArmStrength: Wrapper<Row[], MlbStatcastLeaderboardArmStrengthParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_ARM_STRENGTH_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardArmStrength} (py/R parity). */
@@ -268,13 +272,14 @@ const LEADERBOARD_BASERUNNING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/baserunning`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardBaserunning({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardBaserunning: Wrapper<Row[], MlbStatcastLeaderboardBaserunningParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_BASERUNNING_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardBaserunning} (py/R parity). */
@@ -316,13 +321,14 @@ const LEADERBOARD_BASERUNNING_RUN_VALUE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/baserunning-run-value`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardBaserunningRunValue({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardBaserunningRunValue: Wrapper<Row[], MlbStatcastLeaderboardBaserunningRunValueParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_BASERUNNING_RUN_VALUE_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardBaserunningRunValue} (py/R parity). */
@@ -364,13 +370,14 @@ const LEADERBOARD_BASESTEALING_RUN_VALUE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/basestealing-run-value`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardBasestealingRunValue({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardBasestealingRunValue: Wrapper<Row[], MlbStatcastLeaderboardBasestealingRunValueParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_BASESTEALING_RUN_VALUE_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardBasestealingRunValue} (py/R parity). */
@@ -412,13 +419,14 @@ const LEADERBOARD_BAT_TRACKING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/bat-tracking`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardBatTracking({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardBatTracking: Wrapper<Row[], MlbStatcastLeaderboardBatTrackingParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_BAT_TRACKING_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardBatTracking} (py/R parity). */
@@ -460,13 +468,14 @@ const LEADERBOARD_BATTED_BALL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/batted-ball`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardBattedBall({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardBattedBall: Wrapper<Row[], MlbStatcastLeaderboardBattedBallParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_BATTED_BALL_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardBattedBall} (py/R parity). */
@@ -508,13 +517,14 @@ const LEADERBOARD_CATCH_PROBABILITY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/catch_probability`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatchProbability({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardCatchProbability: Wrapper<Row[], MlbStatcastLeaderboardCatchProbabilityParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_CATCH_PROBABILITY_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardCatchProbability} (py/R parity). */
@@ -556,13 +566,14 @@ const LEADERBOARD_CATCHER_BLOCKING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/catcher-blocking`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherBlocking({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardCatcherBlocking: Wrapper<Row[], MlbStatcastLeaderboardCatcherBlockingParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_CATCHER_BLOCKING_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardCatcherBlocking} (py/R parity). */
@@ -604,13 +615,14 @@ const LEADERBOARD_CATCHER_FRAMING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/catcher-framing`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherFraming({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardCatcherFraming: Wrapper<Row[], MlbStatcastLeaderboardCatcherFramingParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_CATCHER_FRAMING_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardCatcherFraming} (py/R parity). */
@@ -651,13 +663,14 @@ const LEADERBOARD_CATCHER_STANCE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/catcher-stance`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherStance({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardCatcherStance: Wrapper<Row[], MlbStatcastLeaderboardCatcherStanceParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_CATCHER_STANCE_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardCatcherStance} (py/R parity). */
@@ -699,13 +712,14 @@ const LEADERBOARD_CATCHER_THROWING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/catcher-throwing`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherThrowing({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardCatcherThrowing: Wrapper<Row[], MlbStatcastLeaderboardCatcherThrowingParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_CATCHER_THROWING_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardCatcherThrowing} (py/R parity). */
@@ -763,17 +777,18 @@ const LEADERBOARD_CUSTOM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/custom`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.selections - query parameter.
- * @param params.filter - query parameter.
- * @param params.min - query parameter.
- * @param params.sort - query parameter.
- * @param params.sort_dir - query parameter (`sortDir`).
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.selections - `number | string` — the `selections` query parameter.
+ * @param params.filter - `number | string` — the `filter` query parameter.
+ * @param params.min - `number | string` — the `min` query parameter.
+ * @param params.sort - `number | string` — the `sort` query parameter.
+ * @param params.sort_dir - `number | string` — the `sortDir` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardCustom({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardCustom: Wrapper<Row[], MlbStatcastLeaderboardCustomParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_CUSTOM_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardCustom} (py/R parity). */
@@ -815,13 +830,14 @@ const LEADERBOARD_EXIT_VELOCITY_BARRELS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/statcast`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardExitVelocityBarrels({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardExitVelocityBarrels: Wrapper<Row[], MlbStatcastLeaderboardExitVelocityBarrelsParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_EXIT_VELOCITY_BARRELS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardExitVelocityBarrels} (py/R parity). */
@@ -863,13 +879,14 @@ const LEADERBOARD_EXPECTED_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/expected_statistics`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardExpectedStats({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardExpectedStats: Wrapper<Row[], MlbStatcastLeaderboardExpectedStatsParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_EXPECTED_STATS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardExpectedStats} (py/R parity). */
@@ -906,12 +923,13 @@ const LEADERBOARD_FIELDING_RUN_VALUE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/fielding-run-value`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardFieldingRunValue({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardFieldingRunValue: Wrapper<Row[], MlbStatcastLeaderboardFieldingRunValueParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_FIELDING_RUN_VALUE_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardFieldingRunValue} (py/R parity). */
@@ -953,13 +971,14 @@ const LEADERBOARD_HOME_RUNS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/home-runs`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardHomeRuns({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardHomeRuns: Wrapper<Row[], MlbStatcastLeaderboardHomeRunsParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_HOME_RUNS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardHomeRuns} (py/R parity). */
@@ -1001,13 +1020,14 @@ const LEADERBOARD_OUTFIELD_DIRECTIONAL_OAA_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/outfield_directional_outs_above_average`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardOutfieldDirectionalOaa({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardOutfieldDirectionalOaa: Wrapper<Row[], MlbStatcastLeaderboardOutfieldDirectionalOaaParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_OUTFIELD_DIRECTIONAL_OAA_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardOutfieldDirectionalOaa} (py/R parity). */
@@ -1049,13 +1069,14 @@ const LEADERBOARD_OUTFIELD_JUMP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/outfield_jump`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardOutfieldJump({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardOutfieldJump: Wrapper<Row[], MlbStatcastLeaderboardOutfieldJumpParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_OUTFIELD_JUMP_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardOutfieldJump} (py/R parity). */
@@ -1097,13 +1118,14 @@ const LEADERBOARD_OUTS_ABOVE_AVERAGE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/outs_above_average`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardOutsAboveAverage({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardOutsAboveAverage: Wrapper<Row[], MlbStatcastLeaderboardOutsAboveAverageParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_OUTS_ABOVE_AVERAGE_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardOutsAboveAverage} (py/R parity). */
@@ -1140,12 +1162,13 @@ const LEADERBOARD_PARK_FACTORS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/statcast-park-factors`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardParkFactors({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardParkFactors: Wrapper<Row[], MlbStatcastLeaderboardParkFactorsParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PARK_FACTORS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardParkFactors} (py/R parity). */
@@ -1187,13 +1210,14 @@ const LEADERBOARD_PERCENTILE_RANKINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/percentile-rankings`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPercentileRankings({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardPercentileRankings: Wrapper<Row[], MlbStatcastLeaderboardPercentileRankingsParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PERCENTILE_RANKINGS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPercentileRankings} (py/R parity). */
@@ -1235,13 +1259,14 @@ const LEADERBOARD_PITCH_ARSENAL_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/pitch-arsenal-stats`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchArsenalStats({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardPitchArsenalStats: Wrapper<Row[], MlbStatcastLeaderboardPitchArsenalStatsParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PITCH_ARSENAL_STATS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPitchArsenalStats} (py/R parity). */
@@ -1283,13 +1308,14 @@ const LEADERBOARD_PITCH_ARSENALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/pitch-arsenals`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchArsenals({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardPitchArsenals: Wrapper<Row[], MlbStatcastLeaderboardPitchArsenalsParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PITCH_ARSENALS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPitchArsenals} (py/R parity). */
@@ -1331,13 +1357,14 @@ const LEADERBOARD_PITCH_MOVEMENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/pitch-movement`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchMovement({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardPitchMovement: Wrapper<Row[], MlbStatcastLeaderboardPitchMovementParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PITCH_MOVEMENT_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPitchMovement} (py/R parity). */
@@ -1379,13 +1406,14 @@ const LEADERBOARD_PITCH_TEMPO_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/pitch-tempo`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchTempo({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardPitchTempo: Wrapper<Row[], MlbStatcastLeaderboardPitchTempoParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PITCH_TEMPO_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPitchTempo} (py/R parity). */
@@ -1427,13 +1455,14 @@ const LEADERBOARD_PITCHER_RUNNING_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/pitcher-running-game`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitcherRunningGame({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardPitcherRunningGame: Wrapper<Row[], MlbStatcastLeaderboardPitcherRunningGameParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_PITCHER_RUNNING_GAME_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPitcherRunningGame} (py/R parity). */
@@ -1475,13 +1504,14 @@ const LEADERBOARD_POPTIME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/poptime`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardPoptime({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardPoptime: Wrapper<Row[], MlbStatcastLeaderboardPoptimeParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_POPTIME_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardPoptime} (py/R parity). */
@@ -1523,13 +1553,14 @@ const LEADERBOARD_RUNNING_SPLITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/running_splits`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardRunningSplits({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardRunningSplits: Wrapper<Row[], MlbStatcastLeaderboardRunningSplitsParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_RUNNING_SPLITS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardRunningSplits} (py/R parity). */
@@ -1571,13 +1602,14 @@ const LEADERBOARD_SPIN_DIRECTION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/spin-direction-pitches`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardSpinDirection({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardSpinDirection: Wrapper<Row[], MlbStatcastLeaderboardSpinDirectionParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_SPIN_DIRECTION_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardSpinDirection} (py/R parity). */
@@ -1619,13 +1651,14 @@ const LEADERBOARD_SPRINT_SPEED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/sprint_speed`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardSprintSpeed({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardSprintSpeed: Wrapper<Row[], MlbStatcastLeaderboardSprintSpeedParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_SPRINT_SPEED_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardSprintSpeed} (py/R parity). */
@@ -1667,13 +1700,14 @@ const LEADERBOARD_SWING_PATH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/bat-tracking/swing-path-attack-angle`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardSwingPath({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardSwingPath: Wrapper<Row[], MlbStatcastLeaderboardSwingPathParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_SWING_PATH_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardSwingPath} (py/R parity). */
@@ -1715,13 +1749,14 @@ const LEADERBOARD_SWING_TAKE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/swing-take`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardSwingTake({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardSwingTake: Wrapper<Row[], MlbStatcastLeaderboardSwingTakeParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_SWING_TAKE_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardSwingTake} (py/R parity). */
@@ -1763,13 +1798,14 @@ const LEADERBOARD_SWING_TIMING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/bat-tracking/swing-timing-miss-distance`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardSwingTiming({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardSwingTiming: Wrapper<Row[], MlbStatcastLeaderboardSwingTimingParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_SWING_TIMING_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardSwingTiming} (py/R parity). */
@@ -1811,13 +1847,14 @@ const LEADERBOARD_TIMER_INFRACTIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/pitch-timer-infractions`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardTimerInfractions({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardTimerInfractions: Wrapper<Row[], MlbStatcastLeaderboardTimerInfractionsParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_TIMER_INFRACTIONS_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardTimerInfractions} (py/R parity). */
@@ -1859,13 +1896,14 @@ const LEADERBOARD_YEAR_TO_YEAR_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/leaderboard/statcast-year-to-year`
  *
- * @param params.type - query parameter.
- * @param params.year - query parameter.
- * @param params.team - query parameter.
- * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.type - `number | string` — the `type` query parameter.
+ * @param params.year - `number | string` — the `year` query parameter.
+ * @param params.team - `number | string` — the `team` query parameter.
+ * @param params.csv - `boolean` — the `csv` query parameter; default `true`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`Row[]`> with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastLeaderboardYearToYear({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastLeaderboardYearToYear: Wrapper<Row[], MlbStatcastLeaderboardYearToYearParams> = (params: WrapperParams = {}) => callFlat(LEADERBOARD_YEAR_TO_YEAR_DEF, params);
 /** snake_case alias of {@link mlbStatcastLeaderboardYearToYear} (py/R parity). */
@@ -1894,10 +1932,11 @@ const SCHEDULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://baseballsavant.mlb.com/schedule`
  *
- * @param params.date - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns Promise<`MlbStatcastScheduleRow[]`> with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatcastSchedule({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--baseball-savant--statcast
  */
 export const mlbStatcastSchedule: Wrapper<MlbStatcastScheduleRow[], MlbStatcastScheduleParams> = (params: WrapperParams = {}) => callFlat(SCHEDULE_DEF, params);
 /** snake_case alias of {@link mlbStatcastSchedule} (py/R parity). */

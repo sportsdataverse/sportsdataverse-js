@@ -7,15 +7,15 @@
 
 /** One row of `sdv.mlb.loadMlbRe24Matrix` (`mlb_game_state`; sdv-py loader schema `load_mlb_re24_matrix`). */
 export interface LoadMlbRe24MatrixRow {
-  /** `String` */
+  /** Three-character pre-play base occupancy where each slot carries its base number when occupied and an underscore when empty, so ___ is bases empty and 123 is bases loaded. `String` */
   base_state?: string | null;
-  /** `Int64` */
+  /** Outs in the inning after the play. `Int64` */
   outs?: number | bigint | null;
-  /** `Float64` */
+  /** Mean runs the batting team went on to score from this base-out state through the end of the half-inning, with bottom-of-the-9th-and-later halves excluded to avoid walk-off selection bias. `Float64` */
   re?: number | null;
-  /** `UInt32` */
+  /** Plate appearances observed starting in this base-out state, the sample size behind re. `UInt32` */
   n?: number | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -23,23 +23,23 @@ export interface LoadMlbRe24MatrixRow {
 
 /** One row of `sdv.mlb.loadMlbWeTable` (`mlb_game_state`; sdv-py loader schema `load_mlb_we_table`). */
 export interface LoadMlbWeTableRow {
-  /** `Int64` */
+  /** Inning number with the ninth and every extra inning collapsed into 9, so extras share the ninth-inning win-expectancy cells. `Int64` */
   inning_capped?: number | bigint | null;
-  /** `String` */
+  /** Half of the game (1 or 2). `String` */
   half?: string | null;
-  /** `String` */
+  /** Three-character pre-play base occupancy where each slot carries its base number when occupied and an underscore when empty, so ___ is bases empty and 123 is bases loaded. `String` */
   base_state?: string | null;
-  /** `Int64` */
+  /** Outs already recorded when the plate appearance began, normally 0 through 2, though a handful of published rows carry a stale 3 that the RE24 matrix filters out but this table does not. `Int64` */
   outs_start?: number | bigint | null;
-  /** `Int64` */
+  /** Home score minus away score before the play, clipped to the range -6 through +6 so blowouts collapse into the end buckets. `Int64` */
   score_diff_bucket?: number | bigint | null;
-  /** `Float64` */
+  /** Home team win expectancy before the play. `Float64` */
   home_win_exp?: number | null;
-  /** `UInt32` */
+  /** Plate appearances observed in this state bucket, the sample size behind the Laplace-smoothed home_win_exp. `UInt32` */
   n?: number | null;
-  /** `Boolean` */
+  /** Whether the win-expectancy cell was estimated from a thin sample of historical games. `Boolean` */
   thin?: boolean | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -47,13 +47,13 @@ export interface LoadMlbWeTableRow {
 
 /** One row of `sdv.mlb.loadMlbWpa` (`mlb_game_state`; sdv-py loader schema `load_mlb_wpa`). */
 export interface LoadMlbWpaRow {
-  /** `String` (an id) */
+  /** Unique ESPN game/event identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Zero-based index of the at-bat within the game. `Int64` */
   at_bat_index?: number | bigint | null;
-  /** `Float64` */
+  /** Win probability added (WPA) for the posteam. `Float64` */
   wpa?: number | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -61,43 +61,43 @@ export interface LoadMlbWpaRow {
 
 /** One row of `sdv.mlb.loadMlbPbp` (`mlb_pbp`; sdv-py loader schema `load_mlb_pbp`). */
 export interface LoadMlbPbpRow {
-  /** `Int64` (an id) */
+  /** statsapi game identifier; the join key to every other MLB release. `Int64` (an id) */
   game_pk?: string | null;
-  /** `Int64` */
+  /** Zero-based index of the plate appearance within the game; joins to mlb_pitches and mlb_runners. `Int64` */
   at_bat_index?: number | bigint | null;
-  /** `Int64` */
+  /** Inning number, counting from 1; extra innings continue the sequence. `Int64` */
   inning?: number | bigint | null;
-  /** `String` */
+  /** `top` or `bottom`. `String` */
   half_inning?: string | null;
-  /** `Int64` (an id) */
+  /** statsapi person id of the batter. `Int64` (an id) */
   batter_id?: string | null;
-  /** `Int64` (an id) */
+  /** statsapi person id of the pitcher. `Int64` (an id) */
   pitcher_id?: string | null;
-  /** `String` */
+  /** Machine-readable plate-appearance outcome (e.g. `single`, `strikeout`, `field_out`). `String` */
   event_type?: string | null;
-  /** `String` */
+  /** Human-readable outcome of the plate appearance. `String` */
   event?: string | null;
-  /** `String` */
+  /** Narrative text for the plate appearance. `String` */
   description?: string | null;
-  /** `Int64` */
+  /** Runs batted in credited to this plate appearance. `Int64` */
   rbi?: number | bigint | null;
-  /** `Int64` */
+  /** Away score AFTER the plate appearance. `Int64` */
   away_score?: number | bigint | null;
-  /** `Int64` */
+  /** Home score AFTER the plate appearance. `Int64` */
   home_score?: number | bigint | null;
-  /** `Boolean` */
+  /** Whether the plate appearance scored a run. `Boolean` */
   is_scoring_play?: boolean | null;
-  /** `Int64` */
+  /** Outs recorded after the plate appearance. `Int64` */
   outs?: number | bigint | null;
-  /** `String` */
+  /** UTC timestamp when the plate appearance began; null in older seasons. `String` */
   start_time?: string | null;
-  /** `String` */
+  /** UTC timestamp when the plate appearance ended; null in older seasons. `String` */
   end_time?: string | null;
-  /** `Int64` (an id) */
+  /** Person id on first base after the plate appearance; null when unoccupied. `Int64` (an id) */
   post_on_first_id?: string | null;
-  /** `Int64` (an id) */
+  /** Person id on second base after the plate appearance; null when unoccupied. `Int64` (an id) */
   post_on_second_id?: string | null;
-  /** `Int64` (an id) */
+  /** Person id on third base after the plate appearance; null when unoccupied. `Int64` (an id) */
   post_on_third_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -105,55 +105,55 @@ export interface LoadMlbPbpRow {
 
 /** One row of `sdv.mlb.loadMlbPitches` (`mlb_pitches`; sdv-py loader schema `load_mlb_pitches`). */
 export interface LoadMlbPitchesRow {
-  /** `Int64` (an id) */
+  /** statsapi game identifier; the join key to every other MLB release. `Int64` (an id) */
   game_pk?: string | null;
-  /** `Int64` */
+  /** Zero-based index of the plate appearance within the game; joins to mlb_pbp and mlb_runners. `Int64` */
   at_bat_index?: number | bigint | null;
-  /** `Int64` */
+  /** One-based pitch number within the plate appearance. `Int64` */
   pitch_number?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** statsapi person id of the batter. `Int64` (an id) */
   batter_id?: string | null;
-  /** `Int64` (an id) */
+  /** statsapi person id of the pitcher. `Int64` (an id) */
   pitcher_id?: string | null;
-  /** `String` */
+  /** Classified pitch-type code (FF, SL, CH, ...). statsapi `pitchData`, measured fill: ~0% before 2007, 45.7% in 2007 (mid-season PITCHf/x rollout across ballparks), 96.6% in 2008, ~100% from 2015. Null for pitches the system never tracked. `String` */
   pitch_type?: string | null;
-  /** `String` */
+  /** Human-readable pitch type. statsapi `pitchData`, measured fill: ~0% before 2007, 45.7% in 2007 (mid-season PITCHf/x rollout across ballparks), 96.6% in 2008, ~100% from 2015. Null for pitches the system never tracked. `String` */
   pitch_name?: string | null;
-  /** `String` */
+  /** Umpire call code (B, C, S, X, ...). `String` */
   call_code?: string | null;
-  /** `String` */
+  /** Human-readable umpire call. `String` */
   call_description?: string | null;
-  /** `Int64` */
+  /** Ball count BEFORE the pitch. `Int64` */
   balls?: number | bigint | null;
-  /** `Int64` */
+  /** Strike count BEFORE the pitch. `Int64` */
   strikes?: number | bigint | null;
-  /** `Int64` */
+  /** Outs BEFORE the pitch. `Int64` */
   outs?: number | bigint | null;
-  /** `Float64` */
+  /** Release speed in mph. statsapi `pitchData`, measured fill: ~0% before 2007, 45.7% in 2007 (mid-season PITCHf/x rollout across ballparks), 96.6% in 2008, ~100% from 2015. Null for pitches the system never tracked. `Float64` */
   start_speed?: number | null;
-  /** `Float64` */
+  /** Speed crossing the plate in mph. statsapi `pitchData`, measured fill: ~0% before 2007, 45.7% in 2007 (mid-season PITCHf/x rollout across ballparks), 96.6% in 2008, ~100% from 2015. Null for pitches the system never tracked. `Float64` */
   end_speed?: number | null;
-  /** `Float64` */
+  /** Spin rate in rpm. statsapi `pitchData`, measured fill: ~0% before 2007, 45.7% in 2007 (mid-season PITCHf/x rollout across ballparks), 96.6% in 2008, ~100% from 2015. Null for pitches the system never tracked. `Float64` */
   spin_rate?: number | null;
-  /** `Float64` */
+  /** Release extension toward the plate in feet. Later than the rest of `pitchData`: measured 0% through 2016 and ~100% from 2017, so it is null for the 2007-2016 PITCHf/x seasons that do carry speed and spin. `Float64` */
   extension?: number | null;
-  /** `Float64` */
+  /** Horizontal location crossing the plate in feet from the plate's centre, catcher's view. statsapi `pitchData`, measured fill: ~0% before 2007, 45.7% in 2007 (mid-season PITCHf/x rollout across ballparks), 96.6% in 2008, ~100% from 2015. Null for pitches the system never tracked. `Float64` */
   px?: number | null;
-  /** `Float64` */
+  /** Height crossing the plate in feet above the ground. statsapi `pitchData`, measured fill: ~0% before 2007, 45.7% in 2007 (mid-season PITCHf/x rollout across ballparks), 96.6% in 2008, ~100% from 2015. Null for pitches the system never tracked. `Float64` */
   pz?: number | null;
-  /** `Float64` */
+  /** Top of the batter's strike zone in feet. Derived from the batter, not `pitchData`, so it is populated back to 1988. `Float64` */
   sz_top?: number | null;
-  /** `Float64` */
+  /** Bottom of the batter's strike zone in feet. Derived from the batter, not `pitchData`, so it is populated back to 1988. `Float64` */
   sz_bot?: number | null;
-  /** `Float64` */
+  /** Exit velocity off the bat in mph. statsapi `hitData`, Statcast-era and batted balls only: null before 2015 and ~17% populated after, which is the share of pitches put in play rather than a coverage gap. `Float64` */
   launch_speed?: number | null;
-  /** `Float64` */
+  /** Vertical launch angle in degrees. statsapi `hitData`, Statcast-era and batted balls only: null before 2015 and ~17% populated after, which is the share of pitches put in play rather than a coverage gap. `Float64` */
   launch_angle?: number | null;
-  /** `Float64` */
+  /** Batted-ball distance travelled in feet. statsapi `hitData`, Statcast-era and batted balls only: null before 2015 and ~17% populated after, which is the share of pitches put in play rather than a coverage gap. `Float64` */
   total_distance?: number | null;
-  /** `String` */
+  /** Batted-ball trajectory (`ground_ball`, `line_drive`, `fly_ball`, `popup`). Legacy scorer field, batted balls only: ~20% populated in every season back to 1988, and present long before Statcast. `String` */
   trajectory?: string | null;
-  /** `String` */
+  /** Scorer's contact-quality grade (`soft`, `medium`, `hard`). Legacy scorer field, batted balls only: ~20% populated in every season back to 1988, and present long before Statcast. `String` */
   hardness?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -161,37 +161,37 @@ export interface LoadMlbPitchesRow {
 
 /** One row of `sdv.mlb.loadMlbRunners` (`mlb_runners`; sdv-py loader schema `load_mlb_runners`). */
 export interface LoadMlbRunnersRow {
-  /** `Int64` (an id) */
+  /** statsapi game identifier; the join key to every other MLB release. `Int64` (an id) */
   game_pk?: string | null;
-  /** `Int64` */
+  /** Zero-based index of the plate appearance within the game; joins to mlb_pbp and mlb_pitches. `Int64` */
   at_bat_index?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** statsapi person id of the baserunner. `Int64` (an id) */
   runner_id?: string | null;
-  /** `String` */
+  /** Base the runner occupied when the plate appearance began; null for the batter. `String` */
   origin_base?: string | null;
-  /** `String` */
+  /** Base the runner started this movement from; null when the movement begins at the plate. `String` */
   start_base?: string | null;
-  /** `String` */
+  /** Base the runner finished on; null when retired or when scoring is recorded by `is_scoring_event`. `String` */
   end_base?: string | null;
-  /** `String` */
+  /** Base at which the runner was retired; null when not retired. `String` */
   out_base?: string | null;
-  /** `Boolean` */
+  /** Whether the runner was retired on this movement. `Boolean` */
   is_out?: boolean | null;
-  /** `Int64` */
+  /** Which out of the half-inning this retirement was; null when not retired. `Int64` */
   out_number?: number | bigint | null;
-  /** `String` */
+  /** Human-readable event that caused the movement. `String` */
   event?: string | null;
-  /** `String` */
+  /** Machine-readable event that caused the movement. `String` */
   event_type?: string | null;
-  /** `String` */
+  /** statsapi reason code for a movement not caused by the plate appearance itself (e.g. `r_stolen_base_2b`). `String` */
   movement_reason?: string | null;
-  /** `Boolean` */
+  /** Whether this movement scored a run. `Boolean` */
   is_scoring_event?: boolean | null;
-  /** `Boolean` */
+  /** Whether the run was credited as an RBI to the batter. `Boolean` */
   rbi?: boolean | null;
-  /** `Boolean` */
+  /** Whether the run was earned against the responsible pitcher. `Boolean` */
   earned?: boolean | null;
-  /** `Int64` (an id) */
+  /** statsapi person id of the pitcher charged with the runner. `Int64` (an id) */
   responsible_pitcher_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -199,23 +199,23 @@ export interface LoadMlbRunnersRow {
 
 /** One row of `sdv.mlb.loadMlbExpectedStats` (`mlb_hitting_models`; sdv-py loader schema `load_mlb_expected_stats`). */
 export interface LoadMlbExpectedStatsRow {
-  /** `Int64` (an id) */
+  /** MLBAM player id of the batter. `Int64` (an id) */
   batter?: string | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` */
+  /** Plate appearances for the batter in the season, counted as the Statcast rows that END a plate appearance (a non-empty events value). Pitches within a plate appearance are not counted. `Int64` */
   pa?: number | bigint | null;
-  /** `Int64` */
+  /** At-bats, derived from the same plate-appearance-ending rows by excluding walks, hit-by-pitches, sacrifice flies, sacrifice bunts and catcher's interference. `Int64` */
   ab?: number | bigint | null;
-  /** `Float64` */
+  /** Expected wOBA blending the exit-velocity by launch-angle grid's predicted contact value on balls in play with realized wOBA value on walks, hit-by-pitches and strikeouts, over the wOBA denominator; low-sample batters can exceed 1. `Float64` */
   xwoba?: number | null;
-  /** `Float64` */
+  /** Grid-predicted hit probability summed over the at-bat balls in play that carry launch data, plus the realized hit for balls in play Statcast did not track, divided by at-bats, on the conventional batting-average scale. An untracked ball in play takes its realized outcome exactly as xwoba does, rather than counting in ab with a zero numerator, which deflated league-mean xBA by the untracked share. `Float64` */
   xba?: number | null;
-  /** `Float64` */
+  /** The same construction on total bases -- grid-predicted total bases where launch data exists, realized total bases for untracked balls in play -- divided by at-bats, on the conventional slugging scale. `Float64` */
   xslg?: number | null;
-  /** `Float64` */
+  /** Actual weighted on-base average (wOBA) for the player over the sample. `Float64` */
   woba?: number | null;
-  /** `Float64` */
+  /** Actual batting average for the player over the sample (0-1), alongside the expected-stat columns. `Float64` */
   ba?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -223,17 +223,17 @@ export interface LoadMlbExpectedStatsRow {
 
 /** One row of `sdv.mlb.loadMlbExpectedHr` (`mlb_hitting_models`; sdv-py loader schema `load_mlb_expected_hr`). */
 export interface LoadMlbExpectedHrRow {
-  /** `Int64` (an id) */
+  /** MLBAM player id of the batter. `Int64` (an id) */
   batter?: string | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
-  /** `Int64` */
+  /** Home runs hit by the batter over the covered sample. `Int64` */
   hr?: number | bigint | null;
-  /** `Float64` */
+  /** Park-neutral expected home runs, summing over the batter's balls in play the home-run probability read off the exit-velocity by launch-angle by spray-angle grid. `Float64` */
   xhr_neutral?: number | null;
-  /** `Float64` */
+  /** The same expected-home-run sum after scaling each ball by its ballpark's Savant home-run park factor over 100; published values run between 0.77 and 1.26 times xhr_neutral. `Float64` */
   xhr_park_adj?: number | null;
-  /** `Float64` */
+  /** Home runs actually hit minus xhr_neutral, so it grades over- and under-performance against the park-neutral expectation rather than the park-adjusted one. `Float64` */
   hr_above_expected?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -241,13 +241,13 @@ export interface LoadMlbExpectedHrRow {
 
 /** One row of `sdv.mlb.loadMlbBatterProjection` (`mlb_hitting_models`; sdv-py loader schema `load_mlb_batter_projection`). */
 export interface LoadMlbBatterProjectionRow {
-  /** `Int64` (an id) */
+  /** MLBAM player id of the batter. `Int64` (an id) */
   batter?: string | null;
-  /** `Int64` */
+  /** Player age (in years). `Int64` */
   age?: number | bigint | null;
-  /** `Float64` */
+  /** Projected expected weighted on-base average for the batter. `Float64` */
   proj_xwoba?: number | null;
-  /** `Float64` */
+  /** Combined prior-three-season pa behind the projection, its effective sample size; it inherits the pitch-row counting of load_mlb_expected_stats pa rather than true plate appearances. `Float64` */
   proj_pa?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -255,15 +255,15 @@ export interface LoadMlbBatterProjectionRow {
 
 /** One row of `sdv.mlb.loadMlbOaa` (`mlb_fielding_models`; sdv-py loader schema `load_mlb_oaa`). */
 export interface LoadMlbOaaRow {
-  /** `String` (an id) */
+  /** MLBAM identifier of the fielder charged with the ball in play, resolved from whichever fielder_N column matches the responsible position and published as a string rather than an integer. `String` (an id) */
   fielder_id?: string | null;
-  /** `Int64` */
+  /** Listed roster position (G, F, C, etc.). `Int64` */
   position?: number | bigint | null;
-  /** `UInt32` */
+  /** Balls in play charged to this fielder at this position, the sample the oaa sum runs over. `UInt32` */
   opportunities?: number | null;
-  /** `Float64` */
+  /** Outs above average: outs the fielder actually recorded minus what a per-position catch-probability logistic expected from the same batted-ball trajectories, summed across their opportunities. `Float64` */
   oaa?: number | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -271,15 +271,15 @@ export interface LoadMlbOaaRow {
 
 /** One row of `sdv.mlb.loadMlbCatcherFraming` (`mlb_fielding_models`; sdv-py loader schema `load_mlb_catcher_framing`). */
 export interface LoadMlbCatcherFramingRow {
-  /** `String` (an id) */
+  /** MLBAM identifier of the receiving catcher, taken from Savant's fielder_2 and published as a string rather than an integer. `String` (an id) */
   catcher_id?: string | null;
-  /** `UInt32` */
+  /** Called strikes plus balls the catcher received across the season, a pure workload count; the framing figures themselves sum only over the shadow-zone subset of these. `UInt32` */
   takes?: number | null;
-  /** `Float64` */
+  /** Runs saved by receiving, summing actual called strike minus modeled strike probability times that count's strike run value over shadow-zone takes only. `Float64` */
   framing_runs?: number | null;
-  /** `Float64` */
+  /** The same shadow-zone sum of actual called strike minus modeled strike probability left unweighted by run value, so it measures stolen strikes rather than runs. `Float64` */
   strikes_gained?: number | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -287,13 +287,13 @@ export interface LoadMlbCatcherFramingRow {
 
 /** One row of `sdv.mlb.loadMlbXera` (`mlb_pitching_models`; sdv-py loader schema `load_mlb_xera`). */
 export interface LoadMlbXeraRow {
-  /** `Int64` (an id) */
+  /** Whether the position is a pitcher. `Int64` (an id) */
   pitcher?: string | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
-  /** `Float64` */
+  /** Expected weighted on-base average, derived from batted-ball quality rather than outcomes. `Float64` */
   x_woba?: number | null;
-  /** `Float64` */
+  /** ERA-scale conversion of x_woba as league_era plus (x_woba minus league_woba) over woba_scale times pa_per_9, an exact linear function of x_woba that can go negative for extreme pitchers. `Float64` */
   x_era?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -301,15 +301,15 @@ export interface LoadMlbXeraRow {
 
 /** One row of `sdv.mlb.loadMlbStuffPlus` (`mlb_pitching_models`; sdv-py loader schema `load_mlb_stuff_plus`). */
 export interface LoadMlbStuffPlusRow {
-  /** `Int64` (an id) */
+  /** Whether the position is a pitcher. `Int64` (an id) */
   pitcher?: string | null;
-  /** `String` */
+  /** Abbreviation of the pitch type thrown (e.g. FF, SL, CH). `String` */
   pitch_type?: string | null;
-  /** `Float64` */
+  /** Mean predicted per-pitch run value from the bundled xgboost stuff model over this pitcher's pitches of this type, on Savant's batter-perspective delta_run_exp scale so lower is better for the pitcher. `Float64` */
   stuff_rv_hat?: number | null;
-  /** `Float64` */
+  /** Stuff+ on the 100-is-average scale, exactly 100 minus 10 times (stuff_rv_hat minus the league mean) over the league SD, so higher is better and outlier run-value predictions can push it well below zero. `Float64` */
   stuff_plus?: number | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -317,13 +317,13 @@ export interface LoadMlbStuffPlusRow {
 
 /** One row of `sdv.mlb.loadMlbCommandPlus` (`mlb_pitching_models`; sdv-py loader schema `load_mlb_command_plus`). */
 export interface LoadMlbCommandPlusRow {
-  /** `Int64` (an id) */
+  /** Whether the position is a pitcher. `Int64` (an id) */
   pitcher?: string | null;
-  /** `Float64` */
+  /** Mean predicted per-pitch run value from the bundled location model, which sees plate location, count, handedness and pitch type but no raw pitch physics; lower is better for the pitcher. `Float64` */
   location_rv_hat?: number | null;
-  /** `Float64` */
+  /** Command+/Location+ on the 100-is-average scale, exactly 100 minus 10 times (location_rv_hat minus the league mean) over the league SD; it grades where the pitch finished, not intent, since Statcast ships no catcher target. `Float64` */
   command_plus?: number | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -331,79 +331,79 @@ export interface LoadMlbCommandPlusRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballPbp` (`ncaa_baseball_pbp`; sdv-py loader schema `load_ncaa_baseball_pbp`). */
 export interface LoadNcaaBaseballPbpRow {
-  /** `String` (an id) */
+  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
   contest_id?: string | null;
-  /** `Int64` */
+  /** Inning number. `Int64` */
   inning?: number | bigint | null;
-  /** `String` */
+  /** Half-inning ("top" or "bot"). `String` */
   inning_top_bot?: string | null;
-  /** `String` */
+  /** Whether the situation applies to batting stats. `String` */
   batting?: string | null;
-  /** `String` */
+  /** Whether the situation applies to fielding stats. `String` */
   fielding?: string | null;
-  /** `Int64` */
+  /** Sequential play number within the game (1-indexed). `Int64` */
   play_number?: number | bigint | null;
-  /** `Int64` */
+  /** Score away. `Int64` */
   score_away?: number | bigint | null;
-  /** `Int64` */
+  /** Score home. `Int64` */
   score_home?: number | bigint | null;
-  /** `String` (an id) */
+  /** MLBAM player id of the batter. `String` (an id) */
   batter?: string | null;
-  /** `String` */
+  /** Play category the NCAA baseball parser classified from the play text: single, double, triple, home_run, strikeout, walk, hit_by_pitch, groundout, flyout, lineout, out, double_play, fielders_choice, reached_on_error, stolen_base, wild_pitch, passed_ball, runner_advance, substitution, other, or unknown when the clause could not be classified. `String` */
   play_type?: string | null;
-  /** `String` */
+  /** Batted-ball trajectory: one of ground, line, fly, pop, foul. `String` */
   hit_trajectory?: string | null;
-  /** `String` */
+  /** Free-text description of where/how the ball was fielded or the runner advanced, as written by the scorer. `String` */
   fielded_position?: string | null;
-  /** `Boolean` */
+  /** Whether the plate appearance resulted in a hit. `Boolean` */
   is_hit?: boolean | null;
-  /** `Boolean` */
+  /** Whether the play recorded at least one out. `Boolean` */
   is_out?: boolean | null;
-  /** `String` */
+  /** How the strikeout ended: 'swinging' or 'looking'. `String` */
   strikeout_type?: string | null;
-  /** `Boolean` */
+  /** Whether the play was scored as a sacrifice. `Boolean` */
   is_sacrifice?: boolean | null;
-  /** `String` */
+  /** Kind of sacrifice when one was scored: 'fly' or 'bunt'. `String` */
   sac_type?: string | null;
-  /** `Boolean` */
+  /** Whether the play resulted in a double play. `Boolean` */
   is_double_play?: boolean | null;
-  /** `Int64` */
+  /** Runs batted in. `Int64` */
   rbi?: number | bigint | null;
-  /** `Int64` */
+  /** Ball count when the plate appearance resolved. `Int64` */
   count_balls?: number | bigint | null;
-  /** `Int64` */
+  /** Strike count when the plate appearance resolved. `Int64` */
   count_strikes?: number | bigint | null;
-  /** `String` */
+  /** Per-pitch result string for the plate appearance (e.g. 'BBKKS'), one character per pitch. `String` */
   pitch_sequence?: string | null;
-  /** `String` */
+  /** Fielding position credited with the error, as the feed labels it (e.g. 'ss', 'rf', 'c'). `String` */
   error_position?: string | null;
-  /** `Boolean` */
+  /** Whether the run(s) on the play were scored as unearned. `Boolean` */
   unearned?: boolean | null;
-  /** `Int64` */
+  /** Runs that scored on the play. `Int64` */
   runs_scored?: number | bigint | null;
-  /** `List(String)` */
+  /** List of runner names who scored on the play. `List(String)` */
   scoring_runners?: Array<string | null> | null;
-  /** `List(String)` */
+  /** List of 'runner->base' strings describing each runner's advance on the play. `List(String)` */
   runners_advanced?: Array<string | null> | null;
-  /** `Int64` */
+  /** Number of outs recorded on the play (0-3). `Int64` */
   outs_on_play?: number | bigint | null;
-  /** `Boolean` */
+  /** Flag indicating that the play put points on the board (1 = scoring play, 0 = not). `Boolean` */
   is_scoring_play?: boolean | null;
-  /** `String` */
+  /** Long-form description text. `String` */
   description?: string | null;
-  /** `String` */
+  /** Source. `String` */
   source?: string | null;
-  /** `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `String` (an id) */
   espn_game_id?: string | null;
-  /** `String` */
+  /** NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. `String` */
   game_key?: string | null;
-  /** `String` */
+  /** Game date (YYYY-MM-DD). `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Team city/region (e.g. "Los Angeles"). `String` */
   location?: string | null;
-  /** `Int64` */
+  /** Reported attendance (NA on the redesigned page). `Int64` */
   attendance?: number | bigint | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -411,33 +411,33 @@ export interface LoadNcaaBaseballPbpRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballSchedule` (`ncaa_baseball_schedules`; sdv-py loader schema `load_ncaa_baseball_schedule`). */
 export interface LoadNcaaBaseballScheduleRow {
-  /** `String` (an id) */
+  /** Unique ESPN team identifier. `String` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team name. `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Date in YYYY-MM-DD format. `String` */
   date?: string | null;
-  /** `Int64` */
+  /** Game number within a doubleheader. `Int64` */
   game_number?: number | bigint | null;
-  /** `String` (an id) */
+  /** Unique identifier for opponent. `String` (an id) */
   opponent_id?: string | null;
-  /** `String` */
+  /** Opposing team of player `String` */
   opponent?: string | null;
-  /** `String` */
+  /** Win/loss/tie result for `team_id`. `String` */
   result?: string | null;
-  /** `String` */
+  /** Result for the team the row is keyed to: 'W', 'L' or 'T'. `String` */
   outcome?: string | null;
-  /** `Int64` */
+  /** Team's score / final score. `Int64` */
   team_score?: number | bigint | null;
-  /** `Int64` */
+  /** Opponent score. `Int64` */
   opponent_score?: number | bigint | null;
-  /** `String` (an id) */
+  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
   contest_id?: string | null;
-  /** `Int64` */
+  /** Reported attendance (NA on the redesigned page). `Int64` */
   attendance?: number | bigint | null;
-  /** `Int64` */
+  /** NCAA division (1, 2, 3). `Int64` */
   division?: number | bigint | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -445,13 +445,13 @@ export interface LoadNcaaBaseballScheduleRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballTeams` (`ncaa_baseball_teams`; sdv-py loader schema `load_ncaa_baseball_teams`). */
 export interface LoadNcaaBaseballTeamsRow {
-  /** `String` (an id) */
+  /** Unique ESPN team identifier. `String` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team name. `String` */
   team_name?: string | null;
-  /** `Int64` */
+  /** NCAA division (1, 2, 3). `Int64` */
   division?: number | bigint | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -459,35 +459,35 @@ export interface LoadNcaaBaseballTeamsRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballRosters` (`ncaa_baseball_rosters`; sdv-py loader schema `load_ncaa_baseball_rosters`). */
 export interface LoadNcaaBaseballRostersRow {
-  /** `String` (an id) */
+  /** Unique ESPN team identifier. `String` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team name. `String` */
   team_name?: string | null;
-  /** `String` (an id) */
+  /** stats.ncaa.org player identifier. `String` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   jersey?: string | null;
-  /** `String` */
+  /** StatCrew jersey number; present in the schema but entirely unpopulated in the published asset. `String` */
   statcrew_jersey?: string | null;
-  /** `String` */
+  /** Class year as the feed reports it (Fr., So., Jr., Sr.); '---' when unreported. `String` */
   player_class?: string | null;
-  /** `String` */
+  /** Position the NCAA baseball feed reports for the player. `String` */
   position?: string | null;
-  /** `String` */
+  /** Height (feet and inches). `String` */
   height?: string | null;
-  /** `Int64` */
+  /** Weight in pounds. `Int64` */
   weight?: number | bigint | null;
-  /** `String` */
+  /** Prospect hometown. `String` */
   hometown?: string | null;
-  /** `String` */
+  /** High school `String` */
   high_school?: string | null;
-  /** `Int64` */
+  /** Games played. `Int64` */
   games_played?: number | bigint | null;
-  /** `Int64` */
+  /** Games started. `Int64` */
   games_started?: number | bigint | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -495,37 +495,37 @@ export interface LoadNcaaBaseballRostersRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballLinescore` (`ncaa_baseball_linescore`; sdv-py loader schema `load_ncaa_baseball_linescore`). */
 export interface LoadNcaaBaseballLinescoreRow {
-  /** `String` (an id) */
+  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
   contest_id?: string | null;
-  /** `String` */
+  /** Team. `String` */
   team?: string | null;
-  /** `String` */
+  /** Venue label for the team ('home' or 'away'). `String` */
   home_away?: string | null;
-  /** `String` */
+  /** Inning number. `String` */
   inning?: string | null;
-  /** `Int64` */
+  /** Runs scored. `Int64` */
   runs?: number | bigint | null;
-  /** `Int64` */
+  /** Total runs scored by the team across the whole game. `Int64` */
   runs_total?: number | bigint | null;
-  /** `Int64` */
+  /** Hits. `Int64` */
   hits?: number | bigint | null;
-  /** `Int64` */
+  /** Fielding errors. `Int64` */
   errors?: number | bigint | null;
-  /** `String` */
+  /** Game date (YYYY-MM-DD). `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Venue name. `String` */
   venue?: string | null;
-  /** `Int64` */
+  /** Reported attendance (NA on the redesigned page). `Int64` */
   attendance?: number | bigint | null;
-  /** `String` */
+  /** Source. `String` */
   source?: string | null;
-  /** `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `String` (an id) */
   espn_game_id?: string | null;
-  /** `String` */
+  /** NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. `String` */
   game_key?: string | null;
-  /** `String` */
+  /** Team city/region (e.g. "Los Angeles"). `String` */
   location?: string | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -533,35 +533,35 @@ export interface LoadNcaaBaseballLinescoreRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballTeamStats` (`ncaa_baseball_team_stats`; sdv-py loader schema `load_ncaa_baseball_team_stats`). */
 export interface LoadNcaaBaseballTeamStatsRow {
-  /** `String` (an id) */
+  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
   contest_id?: string | null;
-  /** `String` */
+  /** Category label. `String` */
   category?: string | null;
-  /** `String` */
+  /** Stat. `String` */
   stat?: string | null;
-  /** `String` */
+  /** Inning number. `String` */
   period?: string | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team?: string | null;
-  /** `String` */
+  /** Away team's value for the stat named by the row, as a string (the table is long/tidy, one stat per row). `String` */
   away_value?: string | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team?: string | null;
-  /** `String` */
+  /** Home team's value for the stat named by the row, as a string (the table is long/tidy, one stat per row). `String` */
   home_value?: string | null;
-  /** `String` */
+  /** Source. `String` */
   source?: string | null;
-  /** `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `String` (an id) */
   espn_game_id?: string | null;
-  /** `String` */
+  /** NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. `String` */
   game_key?: string | null;
-  /** `String` */
+  /** Game date (YYYY-MM-DD). `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Team city/region (e.g. "Los Angeles"). `String` */
   location?: string | null;
-  /** `Int64` */
+  /** Reported attendance (NA on the redesigned page). `Int64` */
   attendance?: number | bigint | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -569,123 +569,123 @@ export interface LoadNcaaBaseballTeamStatsRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballPlayerStats` (`ncaa_baseball_player_stats`; sdv-py loader schema `load_ncaa_baseball_player_stats`). */
 export interface LoadNcaaBaseballPlayerStatsRow {
-  /** `String` (an id) */
+  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
   contest_id?: string | null;
-  /** `String` (an id) */
+  /** Unique ESPN team identifier. `String` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Jersey number. `String` */
   number?: string | null;
-  /** `String` */
+  /** Display name. `String` */
   name?: string | null;
-  /** `String` */
+  /** Position the NCAA baseball feed reports for the player. `String` */
   position?: string | null;
-  /** `String` */
+  /** Runs scored. `String` */
   r?: string | null;
-  /** `String` */
+  /** At-bats. `String` */
   ab?: string | null;
-  /** `String` */
+  /** Hits. `String` */
   h?: string | null;
-  /** `String` */
+  /** Doubles hit by the batter. `String` */
   "2b"?: string | null;
-  /** `String` */
+  /** Triples hit by the batter. `String` */
   "3b"?: string | null;
-  /** `String` */
+  /** Total bases accumulated by the batter. `String` */
   tb?: string | null;
-  /** `String` */
+  /** Home runs hit by the batter over the covered sample. `String` */
   hr?: string | null;
-  /** `String` */
+  /** Runs batted in. `String` */
   rbi?: string | null;
-  /** `String` */
+  /** Bases on balls (walks). `String` */
   bb?: string | null;
-  /** `String` */
+  /** Times the batter was hit by a pitch. `String` */
   hbp?: string | null;
-  /** `String` */
+  /** Sacrifice flies hit by the batter. `String` */
   sf?: string | null;
-  /** `String` */
+  /** Sacrifice hits (bunts) laid down by the batter. `String` */
   sh?: string | null;
-  /** `String` */
+  /** Strikeouts. `String` */
   k?: string | null;
-  /** `String` */
+  /** Double plays turned by the opposing defense against this side. `String` */
   opp_dp?: string | null;
-  /** `String` */
+  /** Times the baserunner was caught stealing. `String` */
   cs?: string | null;
-  /** `String` */
+  /** Times the baserunner was picked off. `String` */
   picked?: string | null;
-  /** `String` */
+  /** Stolen bases by the baserunner. `String` */
   sb?: string | null;
-  /** `String` */
+  /** Intentional bases on balls drawn by the batter. `String` */
   ibb?: string | null;
-  /** `String` */
+  /** Strikeouts looking -- called third strikes, as opposed to swinging strikeouts. `String` */
   kl?: string | null;
-  /** `String` */
+  /** Category label. `String` */
   category?: string | null;
-  /** `String` */
+  /** Source. `String` */
   source?: string | null;
-  /** `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `String` (an id) */
   espn_game_id?: string | null;
-  /** `String` */
+  /** NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. `String` */
   game_key?: string | null;
-  /** `String` */
+  /** Game date (YYYY-MM-DD). `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Team city/region (e.g. "Los Angeles"). `String` */
   location?: string | null;
-  /** `Int64` */
+  /** Reported attendance (NA on the redesigned page). `Int64` */
   attendance?: number | bigint | null;
-  /** `String` */
+  /** Innings pitched. `String` */
   ip?: string | null;
-  /** `String` */
+  /** Earned runs. `String` */
   er?: string | null;
-  /** `String` */
+  /** Strikeouts: the batter's strikeouts on the batting line, the pitcher's strikeouts recorded on the pitching line. `String` */
   so?: string | null;
-  /** `String` */
+  /** Batters faced by the pitcher. `String` */
   bf?: string | null;
-  /** `String` */
+  /** Doubles allowed by the pitcher. `String` */
   "2b_a"?: string | null;
-  /** `String` */
+  /** Triples allowed by the pitcher. `String` */
   "3b_a"?: string | null;
-  /** `String` */
+  /** Balks charged to the pitcher. `String` */
   bk?: string | null;
-  /** `String` */
+  /** Home runs allowed by the pitcher. `String` */
   hr_a?: string | null;
-  /** `String` */
+  /** Wild pitches charged to the pitcher. `String` */
   wp?: string | null;
-  /** `String` */
+  /** Batters hit by a pitch from this pitcher. `String` */
   hb?: string | null;
-  /** `String` */
+  /** Inherited runners on base when this relief pitcher entered. `String` */
   inh_run?: string | null;
-  /** `String` */
+  /** Inherited runners who subsequently scored. `String` */
   inh_run_score?: string | null;
-  /** `String` */
+  /** Sacrifice hits allowed by the pitcher. `String` */
   sha?: string | null;
-  /** `String` */
+  /** Sacrifice flies allowed by the pitcher. `String` */
   sfa?: string | null;
-  /** `String` */
+  /** Team unearned runs scored while this pitcher was in the game. `String` */
   tuer?: string | null;
-  /** `String` */
+  /** Pickoffs. `String` */
   pickoffs?: string | null;
-  /** `String` */
+  /** Putouts recorded by the fielder. `String` */
   po?: string | null;
-  /** `String` */
+  /** Fielding assists credited to the player. `String` */
   a?: string | null;
-  /** `String` */
+  /** Total chances for the fielder (putouts + assists + errors). `String` */
   tc?: string | null;
-  /** `String` */
+  /** Errors charged to the fielder. `String` */
   e?: string | null;
-  /** `String` */
+  /** Times the batter reached base on catcher's interference. `String` */
   ci?: string | null;
-  /** `String` */
+  /** Passed balls charged to the catcher. `String` */
   pb?: string | null;
-  /** `String` */
+  /** Stolen bases allowed while this catcher was behind the plate. `String` */
   sba?: string | null;
-  /** `String` */
+  /** Runners caught stealing while this catcher was behind the plate. `String` */
   csb?: string | null;
-  /** `String` */
+  /** Times the batter grounded into a double play. `String` */
   idp?: string | null;
-  /** `String` */
+  /** Triple plays the player took part in. `String` */
   tp?: string | null;
-  /** `String` */
+  /** Stolen-base success rate allowed by the catcher, as a PROPORTION on 0-1 (e.g. 0.625), not a percentage. `String` */
   sbapct?: string | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -693,71 +693,71 @@ export interface LoadNcaaBaseballPlayerStatsRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballSituationalStats` (`ncaa_baseball_situational_stats`; sdv-py loader schema `load_ncaa_baseball_situational_stats`). */
 export interface LoadNcaaBaseballSituationalStatsRow {
-  /** `String` (an id) */
+  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
   contest_id?: string | null;
-  /** `Int64` */
+  /** Side indicator for the row: 0 and 1 distinguish the two teams in the contest. `Int64` */
   team_seq?: number | bigint | null;
-  /** `String` */
+  /** Player name. `String` */
   player?: string | null;
-  /** `String` */
+  /** Position the NCAA baseball feed reports for the player. `String` */
   position?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- plate appearances with runners on base. `String` */
   with_runrs?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- at-bats with runners in scoring position. `String` */
   hits_scorepos?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- batting against left-handed pitching. `String` */
   vs_lhp?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- batting against right-handed pitching. `String` */
   vs_rhp?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- leadoff batters reaching base; despite the name it is a pair string, not a percentage. `String` */
   leadoff_pct?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- chances to drive in a runner from third. `String` */
   rbi3rd?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- pinch-hitting appearances. `String` */
   h_pinchit?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- advancing-opportunity situations. `String` */
   adv_ops?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- plate appearances with two outs. `String` */
   with_2_outs?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- secondary runners-on split emitted by the feed. `String` */
   with_runrs2?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- secondary runners-in-scoring-position split emitted by the feed. `String` */
   with_scorepos2?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- plate appearances with the bases empty. `String` */
   bases_empty?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- plate appearances with the bases loaded. `String` */
   bases_loaded?: string | null;
-  /** `String` */
+  /** Category label. `String` */
   category?: string | null;
-  /** `String` */
+  /** Source. `String` */
   source?: string | null;
-  /** `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `String` (an id) */
   espn_game_id?: string | null;
-  /** `String` */
+  /** NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. `String` */
   game_key?: string | null;
-  /** `String` */
+  /** Game date (YYYY-MM-DD). `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Team city/region (e.g. "Los Angeles"). `String` */
   location?: string | null;
-  /** `Int64` */
+  /** Reported attendance (NA on the redesigned page). `Int64` */
   attendance?: number | bigint | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- plate appearances with runners on base. `String` */
   runners?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- pitching against left-handed batters. `String` */
   vs_lhb?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- two-out split under the feed's second, unpunctuated key (distinct column from with_2_outs). `String` */
   with_2outs?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- bases-empty split under the upstream feed's misspelled key ('emtpy', sic). `String` */
   emtpy?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- plate appearances with runners in scoring position. `String` */
   with_scorepos?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- secondary runners-on split emitted by the feed alongside with_runrs2. `String` */
   with_runners2?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- pitching against right-handed batters. `String` */
   vs_rhb?: string | null;
-  /** `String` */
+  /** Situational split as a 'successes-opportunities' pair string (e.g. '5-13'), not a numeric rate -- fielding chances handled cleanly; despite the name it is a pair string, not a fielding percentage. `String` */
   field_pct?: string | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -765,25 +765,25 @@ export interface LoadNcaaBaseballSituationalStatsRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballGames` (`ncaa_baseball_games`; sdv-py loader schema `load_ncaa_baseball_games`). */
 export interface LoadNcaaBaseballGamesRow {
-  /** `String` */
+  /** NCAA contest identifier for the game the row belongs to; the join key to the other ncaa_baseball_* tables. `String` */
   game_key?: string | null;
-  /** `String` (an id) */
+  /** stats.ncaa.org contest (game) identifier. `String` (an id) */
   contest_id?: string | null;
-  /** `Int64` (an id) */
+  /** stats.ncaa.org play-by-play (contest) identifier. `Int64` (an id) */
   game_pbp_id?: string | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Source. `String` */
   source?: string | null;
-  /** `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `String` (an id) */
   espn_game_id?: string | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team?: string | null;
-  /** `Int64` */
+  /** Final runs scored by the away team. `Int64` */
   away_final?: number | bigint | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team?: string | null;
-  /** `Int64` */
+  /** Final runs scored by the home team. `Int64` */
   home_final?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -791,17 +791,17 @@ export interface LoadNcaaBaseballGamesRow {
 
 /** One row of `sdv.mlb.loadMlbGroups` (`mlb_groups`; sdv-py loader schema `load_mlb_groups`). */
 export interface LoadMlbGroupsRow {
-  /** `String` */
+  /** League code of the table ("mlb"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `String` */
+  /** Hierarchy level of the group: "league", "subdivision", "conference" or "division". `String` */
   level?: string | null;
-  /** `Int32` */
+  /** First season in which the group had at least one member (calendar year). `Int32` */
   first_season?: number | null;
-  /** `Int32` */
+  /** Last season in which the group had at least one member (calendar year). `Int32` */
   last_season?: number | null;
-  /** `String` */
+  /** Builder notes on the group: the lineage decisions behind its group_id and any source caveats. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -809,23 +809,23 @@ export interface LoadMlbGroupsRow {
 
 /** One row of `sdv.mlb.loadMlbGroupSeasons` (`mlb_groups`; sdv-py loader schema `load_mlb_group_seasons`). */
 export interface LoadMlbGroupSeasonsRow {
-  /** `String` */
+  /** League code of the table ("mlb"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `Int32` */
+  /** Season the row describes (calendar year). `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Hierarchy level of the group: "league", "subdivision", "conference" or "division". `String` */
   level?: string | null;
-  /** `String` */
+  /** Full name of the group as of that season -- the label in use then, not today's name. `String` */
   name?: string | null;
-  /** `String` */
+  /** Short display name of the group as of that season. `String` */
   short_name?: string | null;
-  /** `String` */
+  /** Abbreviation of the group as of that season. `String` */
   abbreviation?: string | null;
-  /** `String` (an id) */
+  /** group_id one level up as of that season (division -> conference -> subdivision -> league); null at the top level or where no higher group applied that season. `String` (an id) */
   parent_group_id?: string | null;
-  /** `Int32` */
+  /** Number of member teams in the group that season. `Int32` */
   n_teams?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -833,21 +833,21 @@ export interface LoadMlbGroupSeasonsRow {
 
 /** One row of `sdv.mlb.loadMlbGroupAliases` (`mlb_groups`; sdv-py loader schema `load_mlb_group_aliases`). */
 export interface LoadMlbGroupAliasesRow {
-  /** `String` */
+  /** League code of the table ("mlb"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `String` */
+  /** Source that uses this label or id (in this table: espn, mlb); "sdv" marks SDV's own labels. `String` */
   source?: string | null;
-  /** `String` (an id) */
+  /** The source's own id for the group (ESPN group id, NCAA conf_id, CFBD id, MLB division id) when it has one; null otherwise. `String` (an id) */
   source_id?: string | null;
-  /** `String` */
+  /** Kind of label in value: "name", "short_name", "abbreviation", "slug" or "code". `String` */
   name_kind?: string | null;
-  /** `String` */
+  /** The label exactly as the source writes it; match a source's conference or division label against it to reach group_id. `String` */
   value?: string | null;
-  /** `Int32` */
+  /** First season the alias is valid for, inclusive (calendar year); null = unbounded. `Int32` */
   valid_from?: number | null;
-  /** `Int32` */
+  /** Last season the alias is valid for, inclusive (calendar year); null = unbounded (still in use). `Int32` */
   valid_to?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -855,27 +855,27 @@ export interface LoadMlbGroupAliasesRow {
 
 /** One row of `sdv.mlb.loadMlbTeamGroupSeasons` (`mlb_groups`; sdv-py loader schema `load_mlb_team_group_seasons`). */
 export interface LoadMlbTeamGroupSeasonsRow {
-  /** `String` */
+  /** League code of the table ("mlb"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `Int32` */
+  /** Season of the membership (calendar year). `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Team id as a string: the ESPN team id where ESPN covers the team, otherwise the league's own id; team_id_source says which. `String` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Id space of team_id (in this table: espn, mlb). `String` */
   team_id_source?: string | null;
-  /** `String` */
+  /** Team name as of that season, not today's. `String` */
   team_name?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's subdivision that season (e.g. FBS / FCS, Division I); null where the league has no subdivision level. `String` (an id) */
   subdivision_id?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's conference that season; null where the team had no conference (an independent, or a season played without conferences). `String` (an id) */
   conference_id?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's division that season; null where the level does not apply. `String` (an id) */
   division_id?: string | null;
-  /** `String` */
+  /** Source the membership was taken from -- the most reliable per-season source for that era. `String` */
   source?: string | null;
-  /** `Boolean` */
+  /** Whether a second source agreed on the membership; null when only one source covers the season. `Boolean` */
   sources_agree?: boolean | null;
-  /** `String` */
+  /** Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -883,17 +883,17 @@ export interface LoadMlbTeamGroupSeasonsRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballGroups` (`ncaa_baseball_groups`; sdv-py loader schema `load_ncaa_baseball_groups`). */
 export interface LoadNcaaBaseballGroupsRow {
-  /** `String` */
+  /** League code of the table ("ncaa_baseball"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `String` */
+  /** Hierarchy level of the group: "league", "subdivision", "conference" or "division". `String` */
   level?: string | null;
-  /** `Int32` */
+  /** First season in which the group had at least one member (calendar year). `Int32` */
   first_season?: number | null;
-  /** `Int32` */
+  /** Last season in which the group had at least one member (calendar year). `Int32` */
   last_season?: number | null;
-  /** `String` */
+  /** Builder notes on the group: the lineage decisions behind its group_id and any source caveats. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -901,23 +901,23 @@ export interface LoadNcaaBaseballGroupsRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballGroupSeasons` (`ncaa_baseball_groups`; sdv-py loader schema `load_ncaa_baseball_group_seasons`). */
 export interface LoadNcaaBaseballGroupSeasonsRow {
-  /** `String` */
+  /** League code of the table ("ncaa_baseball"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `Int32` */
+  /** Season the row describes (calendar year). `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Hierarchy level of the group: "league", "subdivision", "conference" or "division". `String` */
   level?: string | null;
-  /** `String` */
+  /** Full name of the group as of that season -- the label in use then, not today's name. `String` */
   name?: string | null;
-  /** `String` */
+  /** Short display name of the group as of that season. `String` */
   short_name?: string | null;
-  /** `String` */
+  /** Abbreviation of the group as of that season. `String` */
   abbreviation?: string | null;
-  /** `String` (an id) */
+  /** group_id one level up as of that season (division -> conference -> subdivision -> league); null at the top level or where no higher group applied that season. `String` (an id) */
   parent_group_id?: string | null;
-  /** `Int32` */
+  /** Number of member teams in the group that season. `Int32` */
   n_teams?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -925,21 +925,21 @@ export interface LoadNcaaBaseballGroupSeasonsRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballGroupAliases` (`ncaa_baseball_groups`; sdv-py loader schema `load_ncaa_baseball_group_aliases`). */
 export interface LoadNcaaBaseballGroupAliasesRow {
-  /** `String` */
+  /** League code of the table ("ncaa_baseball"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `String` */
+  /** Source that uses this label or id (in this table: ncaa, sdv); "sdv" marks SDV's own labels. `String` */
   source?: string | null;
-  /** `String` (an id) */
+  /** The source's own id for the group (ESPN group id, NCAA conf_id, CFBD id, MLB division id) when it has one; null otherwise. `String` (an id) */
   source_id?: string | null;
-  /** `String` */
+  /** Kind of label in value: "name", "short_name", "abbreviation", "slug" or "code". `String` */
   name_kind?: string | null;
-  /** `String` */
+  /** The label exactly as the source writes it; match a source's conference or division label against it to reach group_id. `String` */
   value?: string | null;
-  /** `Int32` */
+  /** First season the alias is valid for, inclusive (calendar year); null = unbounded. `Int32` */
   valid_from?: number | null;
-  /** `Int32` */
+  /** Last season the alias is valid for, inclusive (calendar year); null = unbounded (still in use). `Int32` */
   valid_to?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -947,27 +947,27 @@ export interface LoadNcaaBaseballGroupAliasesRow {
 
 /** One row of `sdv.mlb.loadNcaaBaseballTeamGroupSeasons` (`ncaa_baseball_groups`; sdv-py loader schema `load_ncaa_baseball_team_group_seasons`). */
 export interface LoadNcaaBaseballTeamGroupSeasonsRow {
-  /** `String` */
+  /** League code of the table ("ncaa_baseball"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `Int32` */
+  /** Season of the membership (calendar year). `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Team id as a string: the ESPN team id where ESPN covers the team, otherwise the league's own id; team_id_source says which. `String` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Id space of team_id (in this table: ncaa_org). `String` */
   team_id_source?: string | null;
-  /** `String` */
+  /** Team name as of that season, not today's. `String` */
   team_name?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's subdivision that season (e.g. FBS / FCS, Division I); null where the league has no subdivision level. `String` (an id) */
   subdivision_id?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's conference that season; null where the team had no conference (an independent, or a season played without conferences). `String` (an id) */
   conference_id?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's division that season; null where the level does not apply. `String` (an id) */
   division_id?: string | null;
-  /** `String` */
+  /** Source the membership was taken from -- the most reliable per-season source for that era. `String` */
   source?: string | null;
-  /** `Boolean` */
+  /** Whether a second source agreed on the membership; null when only one source covers the season. `Boolean` */
   sources_agree?: boolean | null;
-  /** `String` */
+  /** Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -975,45 +975,45 @@ export interface LoadNcaaBaseballTeamGroupSeasonsRow {
 
 /** One row of `sdv.mlb.loadMlbParkDimensions` (`mlb_parks`; sdv-py loader schema `load_mlb_park_dimensions`). */
 export interface LoadMlbParkDimensionsRow {
-  /** `String` */
+  /** League code of the table ("mlb"). `String` */
   league?: string | null;
-  /** `Int32` */
+  /** Season the row describes (calendar year, 2001 on). `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** MLB Stats API venue id (venue.id in MLB game feeds and schedules), published as a string. `String` (an id) */
   venue_id?: string | null;
-  /** `String` */
+  /** Venue name as of that season (e.g. PacBell Park 2001-03, SBC Park 2004-05, AT&T Park 2006-18, Oracle Park 2019-), not today's name. `String` */
   venue_name?: string | null;
-  /** `String` (an id) */
+  /** Retrosheet park id (e.g. "BOS07") from the MLB Stats API's cross-reference; null for most spring-training and minor-league parks. `String` (an id) */
   retro_park_id?: string | null;
-  /** `Int32` */
+  /** Distance in feet from home plate to the fence at the left-field foul pole. `Int32` */
   left_line_ft?: number | null;
-  /** `Int32` */
+  /** Distance in feet from home plate to the fence at MLB's left-field marker. `Int32` */
   left_ft?: number | null;
-  /** `Int32` */
+  /** Distance in feet from home plate to the fence at MLB's left-centre marker; a park may re-label which point this is (Oracle Park's reads 364 through 2019, then the 399 ft deep left-centre). `Int32` */
   left_center_ft?: number | null;
-  /** `Int32` */
+  /** Distance in feet from home plate to the fence in straightaway centre field. `Int32` */
   center_ft?: number | null;
-  /** `Int32` */
+  /** Distance in feet from home plate to the fence at MLB's right-centre marker. `Int32` */
   right_center_ft?: number | null;
-  /** `Int32` */
+  /** Distance in feet from home plate to the fence at MLB's right-field marker. `Int32` */
   right_ft?: number | null;
-  /** `Int32` */
+  /** Distance in feet from home plate to the fence at the right-field foul pole. `Int32` */
   right_line_ft?: number | null;
-  /** `Int32` */
+  /** Seating capacity that season. `Int32` */
   capacity?: number | null;
-  /** `String` */
+  /** Playing surface: "Grass" or "Artificial Turf". `String` */
   turf_type?: string | null;
-  /** `String` */
+  /** Roof: "Open", "Retractable" or "Dome". `String` */
   roof_type?: string | null;
-  /** `Float64` */
+  /** MLB's azimuthAngle: degrees clockwise from north of the line from home plate to centre field (Fenway Park 45, Progressive Field 0). `Float64` */
   azimuth_deg?: number | null;
-  /** `Int32` */
+  /** Elevation of the venue in feet above sea level. `Int32` */
   elevation_ft?: number | null;
-  /** `Float64` */
+  /** Latitude of the venue in decimal degrees. `Float64` */
   latitude?: number | null;
-  /** `Float64` */
+  /** Longitude of the venue in decimal degrees. `Float64` */
   longitude?: number | null;
-  /** `String` */
+  /** Null unless a curated correction applies to the row; then which columns changed, from what to what, why, and the citation. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
