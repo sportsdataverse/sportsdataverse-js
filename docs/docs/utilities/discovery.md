@@ -1,0 +1,133 @@
+---
+title: Discovery
+sidebar_label: Discovery
+sidebar_position: 6
+---
+
+:::danger Breaking in 4.0.0
+
+- **Integer id columns are decimal strings** — Every id column of integers (`id`, `*_id`, `game_pk`, `playerId`, …) comes back as exact decimal strings on every surface — parsers, producers, loaders, HockeyTech analytics. Compare and join ids as strings; `Number(row.game_id)` for a safe number back. ([changelog](/CHANGELOG#integer-id-columns-are-decimal-strings-everywhere))
+- **400 / 422 raise `InvalidParameterError`** — For every family (it was `AssetFetchError`), never retried; the message names host, path and status with a redacted excerpt of the body. ([changelog](/CHANGELOG#a-failed-fetch-never-comes-back-as-empty-data-400--422-raise-invalidparametererror-sdv-py-696--700))
+- **Typed returns — generated row types for `parsed: true`** — TypeScript only. A wrapper's raw payload resolves to `unknown` (was `any`); verified endpoints resolve to their row interfaces; the summary dispatchers to `ParsedTables`. Narrow or cast a raw payload. ([changelog](/CHANGELOG#typescript--typed-returns-generated-row-types-for-parsed-true))
+- **Wrapper failures raise `NoDataError` / `AssetFetchError`** — Instead of raw axios errors. `NoDataError` = the fetch worked and there is nothing there (404, ESPN `{ code: 404 }`); `AssetFetchError` = the fetch failed (403 / 429 / 5xx after retries, network). Retries follow `DEFAULT_RETRY_STATUSES` with backoff. ([changelog](/CHANGELOG#error-vocabulary-pluggable-transport--auth))
+
+:::
+
+# Discovery
+
+:::info Not data functions
+These utilities never fetch a provider payload by themselves — they transform, classify, configure or look things up. The data surface (every `espn*` / native wrapper and `load*` loader) is under [ESPN Reference](/docs/reference/).
+:::
+
+Index the callable surface and resolve team / athlete / game names to ESPN ids.
+
+| Export | kind | module |
+|---|---|---|
+| [`listFunctions`](#listfunctions) | function | `src/discover.ts` |
+| [`functionCount`](#functioncount) | function | `src/discover.ts` |
+| [`findTeam`](#findteam) | function | `src/discover.ts` |
+| [`findAthlete`](#findathlete) | function | `src/discover.ts` |
+| [`findEvent`](#findevent) | function | `src/discover.ts` |
+| [`clearTeamCache`](#clearteamcache) | function | `src/discover.ts` |
+| [`ListFunctionsOptions`](#listfunctionsoptions) | type | `src/discover.ts` |
+| [`Namespaces`](#namespaces) | type | `src/discover.ts` |
+| [`FunctionEntry`](#functionentry) | type | `src/discover.ts` |
+
+## `src/discover.ts`
+
+Discovery and name -\> id lookup (port of sdv-py `discover.py` / `find.py`), built over the live registries so renamed or new wrappers appear with no edit.
+
+**Import:** `import { … } from 'sportsdataverse'`
+
+### `listFunctions`
+
+Index of callable functions — a sorted name array for one namespace, or an object keyed by namespace; `search` filters, `parsersOnly` / `wrappersOnly` narrow; each entry is labelled `data` or `utility` (with its category) through `listFunctions(ns, \{ detail: true \})`.
+
+```ts
+export async function listFunctions( league: string | null | undefined, opts: ListFunctionsOptions & { detail: true }, ns?: Namespaces, ): Promise<FunctionEntry[] | Record<string, FunctionEntry[]>>;
+```
+
+**Aliases:** `list_functions`
+
+**Example:**
+
+```js
+const fns = await sdv.listFunctions('nba', { search: 'roster' });
+```
+
+### `functionCount`
+
+Number of callable functions per namespace, or in one.
+
+```ts
+export async function functionCount( league?: string | null, ns?: Namespaces, ): Promise<number | Record<string, number>>
+```
+
+**Aliases:** `function_count`
+
+### `findTeam`
+
+Resolve a team name / abbreviation (case-insensitive substring) to ESPN team metadata.
+
+```ts
+export async function findTeam( name: string, league: string, opts: { multi?: boolean }
+```
+
+**Aliases:** `find_team`
+
+### `findAthlete`
+
+Resolve an athlete name through team rosters (`team` narrows to one roster).
+
+```ts
+export async function findAthlete( name: string, league: string, opts: { team?: string; multi?: boolean }
+```
+
+**Aliases:** `find_athlete`
+
+### `findEvent`
+
+Resolve a game on a date to its ESPN event, optionally by home / away team.
+
+```ts
+export async function findEvent( date: string, league: string, opts: { home?: string; away?: string; multi?: boolean }
+```
+
+**Aliases:** `find_event`
+
+### `clearTeamCache`
+
+Reset the in-process team-list cache (one league, or all).
+
+```ts
+export function clearTeamCache(league?: string): void
+```
+
+**Aliases:** `clear_team_cache`
+
+### `ListFunctionsOptions`
+
+Options of `listFunctions`.
+
+```ts
+export interface ListFunctionsOptions
+```
+
+### `Namespaces`
+
+The namespace map `listFunctions` indexes (default - the package default export).
+
+```ts
+export type Namespaces
+```
+
+### `FunctionEntry`
+
+A detailed `listFunctions` row — `\{ name, kind, category? \}`.
+
+```ts
+export interface FunctionEntry
+```
+
+
+_Generated by tools/codegen/generate.mjs from tools/codegen/utilities.yaml — see [How this library is built](/docs/architecture/hand-written)._
