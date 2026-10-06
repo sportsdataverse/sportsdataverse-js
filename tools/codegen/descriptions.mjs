@@ -102,17 +102,18 @@ export function loadDescriptionSources(dir = here) {
 }
 
 /**
- * The description of one column: `existing` (the schema's own text) if non-empty, else
- * the manual file under each of `keys`, then `_global`, then the R package(s) of
- * `league`'s own sport (LEAGUE_R_PACKAGES; none for an unmapped namespace or `null`), else "".
- */
-/**
  * Families whose tables are player / team AGGREGATES while their sport's R dicts describe
  * play-by-play columns ("Binary indicator for if the play ended in a sack" on a season
  * total): no R fallback, manual text only. Keyed by flat family (api stem).
  */
 export const FAMILY_R_PACKAGES = { nfl_api: [], nfl_pro: [], pff_api: [] };
 
+/**
+ * The description of one column: `existing` (the schema's own text) if non-empty, else
+ * the manual file under each of `keys`, then `_global`, then the R package(s) of
+ * `league`'s own sport (LEAGUE_R_PACKAGES; none for an unmapped namespace or `null`;
+ * `packages` overrides the list, `[]` for no R fallback), else "".
+ */
 export function describeColumn(existing, col, keys = [], league = null, sources = loadDescriptionSources(), packages = null) {
   if (existing && String(existing).trim()) return String(existing).trim();
   if (!col) return "";
@@ -138,7 +139,7 @@ const COUNTED = new Set();
  * `columns` with every `description` resolved (a new array; the input is not
  * mutated), counted once per `(family, league, ref)` into the coverage stats.
  * `keys`: the candidate manual keys of this table; `league`: the namespace whose R
- * package backs the fallback (null: `_merged` only).
+ * own-sport packages back the fallback (null, or an unmapped namespace: no R fallback).
  */
 export function describeColumns(family, ref, columns, { keys = [], league = null } = {}) {
   if (!columns) return columns;

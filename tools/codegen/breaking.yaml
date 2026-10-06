@@ -139,18 +139,18 @@ entries:
     title: "`sdv.fox` is vendored from sdv-py's `fox_api`"
     note: >-
       The canonical names are `fox_api_*` / `foxApi*`; every pre-v4 `fox_*` name is a deprecated alias.
-    changelog_anchor: 400-2026-10-06
+    changelog_anchor: vendor-pin-81eb7e7060-espn-cdn-fox-statson3-returns-tables-on_missing
   - version: "4.0.0"
     surface: flat:yahoo
     title: "`sdv.yahoo.*` no longer defaults `league=ncaaf` or sets a locale"
     note: >-
       The stats queries send no `lang` / `region` / `tz` and no default `league` — pass `league`
       explicitly.
-    changelog_anchor: 400-2026-10-06
+    changelog_anchor: shared-endpoint-yaml-is-vendored-from-sportsdataverse-py
   - version: "4.0.0"
     surface: legacy
     title: Legacy `get*` methods throw typed errors
     note: >-
       A failed fetch throws `NoDataError` (404, ESPN's `{ code: 404 }`) or `AssetFetchError`
       instead of a raw axios error.
-    changelog_anchor: 400-2026-10-06
+    changelog_anchor: legacy-get-methods-fetch-through-the-request-layer
