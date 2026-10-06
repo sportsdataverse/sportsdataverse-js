@@ -18,7 +18,10 @@
 // `parse_mlb_statcast_gamefeed` consumes the JSON object, the HTML-leaderboard
 // parser consumes HTML text).
 
-import { requestResponse } from "./request.js";
+// A JSON-labelled body that does not decode, and an empty 200, are failed
+// fetches (sdv-py `mlb_statcast_runtime._get`), never an empty table.
+
+import { jsonBody, requestResponse } from "./request.js";
 
 /**
  * GET a Baseball Savant URL and return JSON (object) or raw text (string).
@@ -26,14 +29,15 @@ import { requestResponse } from "./request.js";
  * Content-type drives the shape: `application/json` is parsed to an object;
  * anything else (`text/csv`, `application/download` for the search export,
  * `text/html` for the embedded-JSON leaderboards) is returned as the raw
- * response text. Returns `{}` for an empty body, and `""` only when a body is
- * present but unreadable.
+ * response text. A 204 / 205 returns `{}` (JSON-labelled) or `""`.
  *
  * @param url    Fully-qualified Savant endpoint URL.
  * @param config `{ params, headers }`; `params` are passed through verbatim
  *               (the caller drops `undefined`/`null`).
  * @returns Parsed JSON object for JSON responses, raw `string` for CSV/HTML.
- * @throws NoDataError on 404; AssetFetchError on any other failed fetch.
+ * @throws NoDataError on 404; InvalidParameterError on 400 / 422; AssetFetchError on any
+ *         other failed fetch, an empty 200, or a JSON-labelled body that does not decode
+ *         (Savant's error page is not data).
  */
 export async function statcastGet(
   url: string,
@@ -48,23 +52,8 @@ export async function statcastGet(
     headers: config.headers,
     responseType: "text",
   });
-  if (res.data == null) return {};
-  const ctype = String(res.headers["content-type"] ?? "").toLowerCase();
-  const body = res.data;
-  if (ctype.includes("json")) {
-    if (typeof body !== "string") return body; // already-parsed object
-    try {
-      return JSON.parse(body);
-    } catch {
-      // fall through to the raw-text return below
-    }
+  if (String(res.headers["content-type"] ?? "").toLowerCase().includes("json")) {
+    return jsonBody("mlb_statcast", res, url);
   }
-  if (typeof body === "string") return body;
-  // No content-type hint and a non-string body — last-ditch stringify so the
-  // CSV/HTML parsers (which expect text) still get something usable.
-  try {
-    return String(body);
-  } catch {
-    return "";
-  }
+  return typeof res.data === "string" ? res.data : String(res.data ?? "");
 }

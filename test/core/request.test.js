@@ -16,6 +16,7 @@ import sdv, {
   NoDataError,
   NoESPNDataError,
   AssetFetchError,
+  InvalidParameterError,
   SeasonNotFoundError,
   TransportUnavailableError,
   nflClearTokenCache,
@@ -56,6 +57,8 @@ function fakeTransport(...script) {
 }
 
 const GET = (url = 'https://example.test/x') => ({ method: 'GET', url });
+// A text request: its 2xx body comes back as the string (a JSON request would reject non-JSON).
+const TEXT = (url) => ({ ...GET(url), responseType: 'text' });
 
 let sleeps;
 
@@ -133,7 +136,7 @@ describe('core/request: retry + classification', () => {
       { status: 200, data: 'ok' }
     );
     configure({ transport: t });
-    (await request('mlb', GET())).should.equal('ok');
+    (await request('mlb', TEXT())).should.equal('ok');
     sleeps.should.eql([7000, 120000]);
     const inTwo = new Date(Date.now() + 2000).toUTCString();
     retryDelayMs(0, inTwo).should.be.within(0, 2000);
@@ -174,15 +177,15 @@ describe('core/request: retry + classification', () => {
   it('408 is retried', async () => {
     const t = fakeTransport({ status: 408 }, { status: 200, data: 'ok' });
     configure({ transport: t });
-    (await request('mlb', GET())).should.equal('ok');
+    (await request('mlb', TEXT())).should.equal('ok');
     t.calls.length.should.equal(2);
   });
 
   it('non-listed statuses (400, 501) fail on the first attempt', async () => {
-    for (const status of [400, 501]) {
+    for (const [status, Err] of [[400, InvalidParameterError], [501, AssetFetchError]]) {
       const t = fakeTransport({ status });
       configure({ transport: t });
-      const err = await request('mlb', GET()).should.be.rejectedWith(AssetFetchError);
+      const err = await request('mlb', GET()).should.be.rejectedWith(Err);
       err.status.should.equal(status);
       t.calls.length.should.equal(1);
     }
@@ -250,7 +253,7 @@ describe('core/request: retry + classification', () => {
     configure({ transport: fakeTransport({ status: 200, data: [] }) });
     (await request('cdn', GET())).should.eql([]);
     configure({ transport: fakeTransport({ status: 200, data: 'text,csv' }) });
-    (await request('mlb_statcast', GET())).should.equal('text,csv'); // non-ESPN families pass text through
+    (await request('mlb_statcast', TEXT())).should.equal('text,csv'); // a text request passes text through
   });
 
   it('network errors are retried, then wrapped in AssetFetchError with the cause', async () => {
@@ -295,17 +298,17 @@ describe('core/config: per-family transport selection', () => {
 
   it('level 3: a user "default" transport applies to a family with no registered default', async () => {
     configure({ transport: { default: fakeTransport({ status: 200, data: 'user-default' }) } });
-    (await request('t2_unregistered', GET())).should.equal('user-default');
+    (await request('t2_unregistered', TEXT())).should.equal('user-default');
   });
 
   it('level 2: a registered family default beats the user "default" (host-required transports survive)', async () => {
     registerFamilyDefaults('t2_test_family', {
       transport: fakeTransport({ status: 200, data: 'family-default' }),
     });
-    (await request('t2_test_family', GET())).should.equal('family-default');
+    (await request('t2_test_family', TEXT())).should.equal('family-default');
     configure({ transport: fakeTransport({ status: 200, data: 'user-default' }) }); // bare = default
-    (await request('t2_test_family', GET())).should.equal('family-default');
-    (await request('t2_unregistered', GET())).should.equal('user-default');
+    (await request('t2_test_family', TEXT())).should.equal('family-default');
+    (await request('t2_unregistered', TEXT())).should.equal('user-default');
   });
 
   it('level 1: a user per-family entry beats the registered family default', async () => {
@@ -313,9 +316,9 @@ describe('core/config: per-family transport selection', () => {
       transport: fakeTransport({ status: 200, data: 'family-default' }),
     });
     configure({ transport: { t2_test_family: fakeTransport({ status: 200, data: 'specific' }) } });
-    (await request('t2_test_family', GET())).should.equal('specific');
+    (await request('t2_test_family', TEXT())).should.equal('specific');
     resetConfig();
-    (await request('t2_test_family', GET())).should.equal('family-default');
+    (await request('t2_test_family', TEXT())).should.equal('family-default');
     getConfig().transport.should.eql({});
     _unregisterFamilyDefaults('t2_test_family');
     resolveFamily('t2_test_family').transport.should.equal(axiosTransport); // the seam really forgets it
@@ -405,16 +408,16 @@ describe('core/auth', () => {
     configure({ transport: t, auth: { fam: auth } });
 
     // first call: mint t1 -> 401 -> refresh mints t2 -> 200
-    (await request('fam', GET())).should.equal('Bearer t2');
+    (await request('fam', TEXT())).should.equal('Bearer t2');
     mints.should.equal(2);
     t.calls.length.should.equal(2);
     // cached
-    (await request('fam', GET())).should.equal('Bearer t2');
+    (await request('fam', TEXT())).should.equal('Bearer t2');
     mints.should.equal(2);
     // inside the skew window -> re-mint
     expiresAt = Date.now() / 1000 + 30;
     await auth.refresh({ family: 'fam', transport: t }); // t3, expiring in 30s
-    (await request('fam', GET())).should.equal('Bearer t4');
+    (await request('fam', TEXT())).should.equal('Bearer t4');
   });
 
   it('a persistent 401 refreshes once, then AssetFetchError', async () => {

@@ -3,7 +3,7 @@
 
 import type { AuthContext } from "./auth.js";
 import { resolveFamily } from "./config.js";
-import { AssetFetchError, NoDataError, SdvError } from "./errors.js";
+import { AssetFetchError, InvalidParameterError, NoDataError, SdvError, redactSecrets } from "./errors.js";
 import {
   headerValue,
   mergeHeaders,
@@ -56,6 +56,62 @@ function isEspnCode404(data: unknown): boolean {
   return (
     typeof data === "object" && data !== null && Number((data as { code?: unknown }).code) === 404
   );
+}
+
+/** `host/path` of `url` — never the query string, which can carry an API key (sdv-py `_where`). */
+function hostPath(url: string): string {
+  try {
+    const u = new URL(url);
+    return `${u.host}${u.pathname}`;
+  } catch {
+    return url.split(/[?#]/)[0];
+  }
+}
+
+/** A bounded, single-line head of a body for an error message (sdv-py `_excerpt`). */
+function excerpt(data: unknown): string {
+  let text = "";
+  if (typeof data === "string") text = data;
+  else if (data !== undefined && data !== null && !(data instanceof ArrayBuffer) && !ArrayBuffer.isView(data)) {
+    try {
+      text = JSON.stringify(data) ?? "";
+    } catch {
+      // a BigInt / circular body: no excerpt
+    }
+  }
+  return text.trim().replace(/\s+/g, " ").slice(0, 200);
+}
+
+/** A 2xx body that carries nothing: no body, blank text, or zero bytes (204 / 205 aside). */
+function isEmptyBody(data: unknown): boolean {
+  if (data === undefined) return true;
+  if (typeof data === "string") return data.trim() === "";
+  return (data instanceof ArrayBuffer || ArrayBuffer.isView(data)) && data.byteLength === 0;
+}
+
+/** `AssetFetchError("<family>: <host/path> answered HTTP <status> <what>")`, redacted. */
+function failedBody(family: string, url: string, status: number, what: string): AssetFetchError {
+  return new AssetFetchError(redactSecrets(`${family}: ${hostPath(url)} answered HTTP ${status} ${what}`), {
+    url,
+    status,
+  });
+}
+
+/**
+ * Decode the text body of a JSON-labelled response (sdv-py `_json_body`): a body
+ * that does not decode is a failed fetch, never text for a parser. A blank body
+ * is a 204 / 205 (`request()` already raised on every other empty 2xx) → `{}`.
+ * Used by the text getters that branch on content-type (statcast, torvik).
+ * @internal
+ */
+export function jsonBody(family: string, res: TransportResponse, url: string): unknown {
+  if (typeof res.data !== "string") return res.data;
+  if (!res.data.trim()) return {};
+  try {
+    return JSON.parse(res.data);
+  } catch {
+    throw failedBody(family, url, res.status, `with a JSON content-type but a body that does not decode: ${excerpt(res.data)}`);
+  }
 }
 
 /**
@@ -122,10 +178,23 @@ export async function requestResponse(
       continue;
     }
     if (status >= 200 && status < 300) {
+      // sdv-py `_json_text` / `_text_body`. 204 / 205 carry no content by
+      // definition: success with nothing in it.
+      if (status === 204 || status === 205) return { ...res, data: req.responseType === "text" ? "" : {} };
+      // Any other empty 2xx is not "nothing" (barttorvik's block, pro.nfl.com's
+      // rejected params, a throttled stats host all answer that way), and a JSON
+      // request whose body is still text did not decode (an HTML challenge or
+      // error page): both are failed fetches, never an empty result. The family's
+      // `classifyError` may name it (pro.nfl.com: InvalidParameterError).
+      const bad = isEmptyBody(res.data)
+        ? "with an empty body"
+        : (req.responseType ?? "json") === "json" && typeof res.data === "string"
+          ? `with a non-JSON body: ${excerpt(res.data)}`
+          : undefined;
+      if (bad) throw classifyError?.(res, req.url) ?? failedBody(family, req.url, status, bad);
       if (ESPN_FAMILIES.has(family)) {
-        // ESPN's are JSON APIs: a 2xx whose body is not a JSON object / array (an
-        // HTML bot-challenge page, e.g. the CDN's HTTP 202 to some User-Agents, or
-        // an empty body) is a failed fetch, never an empty result.
+        // ESPN's are JSON APIs: a 2xx body that is not a JSON object / array is a
+        // failed fetch too.
         if (typeof res.data !== "object" || res.data === null) {
           throw new AssetFetchError(
             `${family}: HTTP ${status} with a non-JSON body (a bot challenge or error page?): ${req.url}`,
@@ -143,6 +212,13 @@ export async function requestResponse(
     }
     if (status === 404) {
       throw new NoDataError(`${family}: HTTP 404: ${req.url}`, { ...where, status });
+    }
+    if (status === 400 || status === 422) {
+      // The request itself is wrong; no retry can help (sdv-py ValueError).
+      throw new InvalidParameterError(
+        redactSecrets(`${family}: ${hostPath(req.url)} rejected the request: HTTP ${status}: ${excerpt(res.data)}`),
+        { ...where, status }
+      );
     }
     if (retryStatuses.includes(status) && statusRetries < statusBudget && attempt < retries) {
       await _timer.sleep(retryDelayMs(attempt, headerValue(res.headers, "retry-after")));
@@ -169,10 +245,17 @@ export async function requestResponse(
  * (default 403 / 408 / 429 / 500 / 502 / 503 / 504; auth-gated families drop
  * 403) are retried with bounded exponential backoff + jitter (honouring
  * `Retry-After`), up to `retries` (default 3) attempts in all, at most 4 of
- * them on statuses. Then: 2xx returns the data; 404 — or an ESPN-family 200
- * body `{ code: 404 }` — throws {@link NoDataError}; anything else (including a
- * 403 that persists) throws the family's `classifyError` result when it
- * registered one (`registerFamilyDefaults`), else {@link AssetFetchError}.
+ * them on statuses. Then (sdv-py `_check_status` / `_json_body`):
+ * - 2xx returns the data; 204 / 205 return `{}` (`""` for a `"text"` request).
+ * - 404 — or an ESPN-family 200 body `{ code: 404 }` — throws {@link NoDataError}.
+ * - 400 / 422 throw {@link InvalidParameterError}: the request is wrong.
+ * - Any other failure throws the family's `classifyError` result when it
+ *   registered one (`registerFamilyDefaults`), else {@link AssetFetchError}:
+ *   a non-2xx that outlived the retries (a persisting 403 included), an empty
+ *   2xx body, or a JSON request whose 2xx body is not JSON (an HTML page).
+ *
+ * A failed fetch never comes back as empty data. Error messages name the host,
+ * path and status, never the query string, and are redacted.
  *
  * @param family Family stem (`"site_v2"`, `"mlb"`, `"nfl_api"`, …) — selects transport + auth.
  */
