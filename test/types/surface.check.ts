@@ -6,12 +6,15 @@ import sdv from "../../dist/index.js";
 import type {
   AsaPlayersGoalsAddedRow,
   EspnTeamRosterParams,
+  LoadNflPbpRow,
+  LoadNhlGroupsRow,
   MlbAwardsRow,
   NbaStatsBoxscoredefensivev2Tables,
   NbaStatsBoxscoredefensivev2TeamStatsRow,
   NbaStatsLeaguedashplayerstatsRow,
   NhlRecordsAllTimeRecordVsFranchiseRow,
   ParsedTables,
+  ReleaseColumns,
   Row,
 } from "../../dist/index.js";
 
@@ -81,8 +84,29 @@ type _alias = [
 ];
 
 // Loaders, legacy services and hand-written members are on their namespaces, typed.
+// Loaders return their generated row type (sdv-py's loader schema); `columns` narrows it
+// (`Pick`), `format: "columns"` gives column arrays, both together the picked arrays.
 const pbp = p(sdv.nfl.loadNflPbp({ seasons: 2024, format: "columns" }));
-type _loader = Expect<Equal<typeof pbp, Record<string, unknown[]>>>;
+const pbpRows = p(sdv.nfl.loadNflPbp({ seasons: [2023, 2024] }));
+const pbpPick = p(sdv.nfl.loadNflPbp({ seasons: 2024, columns: ["game_id", "epa"] }));
+const pbpPickCols = p(sdv.nfl.loadNflPbp({ seasons: 2024, columns: ["game_id", "epa"], format: "columns" }));
+const groups = p(sdv.nhl.loadNhlGroups());
+type _loader = [
+  Expect<Equal<typeof pbp, ReleaseColumns<LoadNflPbpRow>>>,
+  Expect<Equal<typeof pbpRows, LoadNflPbpRow[]>>,
+  Expect<Equal<typeof pbpPick, Pick<LoadNflPbpRow, "game_id" | "epa">[]>>,
+  Expect<Equal<typeof pbpPickCols, ReleaseColumns<Pick<LoadNflPbpRow, "game_id" | "epa">>>>,
+  Expect<Equal<NonNullable<typeof pbpPickCols.epa>, (number | null)[]>>,
+  // an id is a decimal string (a DOUBLE one: or the number past 2^53); a column the schema lacks: unknown
+  Expect<Equal<LoadNflPbpRow["game_id"], string | null | undefined>>,
+  Expect<Equal<LoadNflPbpRow["play_id"], string | number | null | undefined>>,
+  Expect<Equal<LoadNflPbpRow["no_such_column"], unknown>>,
+  Expect<Equal<typeof groups, LoadNhlGroupsRow[]>>,
+  // a deprecated loader has its replacement's type
+  Expect<Equal<typeof sdv.nba.loadNbaStatsPbpV3, typeof sdv.nba.loadNbaStatsPbp>>,
+];
+// @ts-expect-error a per-season loader needs `seasons`
+sdv.nfl.loadNflPbp({ columns: ["game_id"] });
 sdv.nba.getPlayByPlay;
 sdv.hockeytech.pwhlGameShifts;
 sdv.hockeytech.pwhl_game_corsi;

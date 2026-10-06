@@ -10,6 +10,37 @@ import {
   seasonLoader,
   type ReleaseLoaderDef,
 } from "../../core/releases.js";
+import type {
+  LoadNflPbpRow,
+  LoadNflModelPbpRow,
+  LoadNflRatingsWeeklyRow,
+  LoadNflNgsRow,
+  LoadNflRostersRow,
+  LoadNflWeeklyRostersRow,
+  LoadNflDepthChartsRow,
+  LoadNflInjuriesRow,
+  LoadNflSnapCountsRow,
+  LoadNflPbpParticipationRow,
+  LoadNflFtnChartingRow,
+  LoadNflUsagePlayersRow,
+  LoadNflUsagePositionGroupsRow,
+  LoadNflUsageTacklesRow,
+  LoadNflUsagePositionGroupTacklesRow,
+  LoadNflUsageTeamsRow,
+  LoadNflUsageDriveScriptingRow,
+  LoadNflUsageStKickersRow,
+  LoadNflUsageStPuntersRow,
+  LoadNflUsageStReturnersRow,
+  LoadNflUsageStBlocksRow,
+  LoadNflUsageStTeamRow,
+  LoadNflTeamTendenciesRow,
+  LoadNflCoachTendenciesRow,
+  LoadNflCoachCareersRow,
+  LoadNflGroupsRow,
+  LoadNflGroupSeasonsRow,
+  LoadNflGroupAliasesRow,
+  LoadNflTeamGroupSeasonsRow,
+} from "../loader_rows/nfl.js";
 
 const LOAD_NFL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_pbp","url":"https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season}.parquet","minSeason":1999,"onMissing":"raise"};
 
@@ -30,7 +61,7 @@ const LOAD_NFL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_pbp","url":"https://githu
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflPbp({ seasons: 2024, columns: ['game_id', 'play_id', 'desc', 'epa', 'wp'] });
  */
-export const loadNflPbp = seasonLoader(LOAD_NFL_PBP);
+export const loadNflPbp = seasonLoader<LoadNflPbpRow>(LOAD_NFL_PBP);
 /** snake_case alias of {@link loadNflPbp} (py/R parity). */
 export const load_nfl_pbp = loadNflPbp;
 
@@ -53,7 +84,7 @@ const LOAD_NFL_MODEL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_model_pbp","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflModelPbp({ seasons: 2024, columns: ['game_id', 'play_id', 'desc', 'epa', 'wp'] });
  */
-export const loadNflModelPbp = seasonLoader(LOAD_NFL_MODEL_PBP);
+export const loadNflModelPbp = seasonLoader<LoadNflModelPbpRow>(LOAD_NFL_MODEL_PBP);
 /** snake_case alias of {@link loadNflModelPbp} (py/R parity). */
 export const load_nfl_model_pbp = loadNflModelPbp;
 
@@ -76,7 +107,7 @@ const LOAD_NFL_RATINGS_WEEKLY: ReleaseLoaderDef = {"fn":"load_nfl_ratings_weekly
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflRatingsWeekly({ seasons: 2024 });
  */
-export const loadNflRatingsWeekly = seasonLoader(LOAD_NFL_RATINGS_WEEKLY);
+export const loadNflRatingsWeekly = seasonLoader<LoadNflRatingsWeeklyRow>(LOAD_NFL_RATINGS_WEEKLY);
 /** snake_case alias of {@link loadNflRatingsWeekly} (py/R parity). */
 export const load_nfl_ratings_weekly = loadNflRatingsWeekly;
 
@@ -99,7 +130,7 @@ const LOAD_NFL_NGS: ReleaseLoaderDef = {"fn":"load_nfl_ngs","url":"https://githu
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflNgs({ seasons: 2024 });
  */
-export const loadNflNgs = seasonLoader(LOAD_NFL_NGS);
+export const loadNflNgs = seasonLoader<LoadNflNgsRow>(LOAD_NFL_NGS);
 /** snake_case alias of {@link loadNflNgs} (py/R parity). */
 export const load_nfl_ngs = loadNflNgs;
 
@@ -122,7 +153,7 @@ const LOAD_NFL_ROSTERS: ReleaseLoaderDef = {"fn":"load_nfl_rosters","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflRosters({ seasons: 2024 });
  */
-export const loadNflRosters = seasonLoader(LOAD_NFL_ROSTERS);
+export const loadNflRosters = seasonLoader<LoadNflRostersRow>(LOAD_NFL_ROSTERS);
 /** snake_case alias of {@link loadNflRosters} (py/R parity). */
 export const load_nfl_rosters = loadNflRosters;
 
@@ -145,7 +176,7 @@ const LOAD_NFL_WEEKLY_ROSTERS: ReleaseLoaderDef = {"fn":"load_nfl_weekly_rosters
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflWeeklyRosters({ seasons: 2024 });
  */
-export const loadNflWeeklyRosters = seasonLoader(LOAD_NFL_WEEKLY_ROSTERS);
+export const loadNflWeeklyRosters = seasonLoader<LoadNflWeeklyRostersRow>(LOAD_NFL_WEEKLY_ROSTERS);
 /** snake_case alias of {@link loadNflWeeklyRosters} (py/R parity). */
 export const load_nfl_weekly_rosters = loadNflWeeklyRosters;
 
@@ -168,7 +199,7 @@ const LOAD_NFL_DEPTH_CHARTS: ReleaseLoaderDef = {"fn":"load_nfl_depth_charts","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflDepthCharts({ seasons: 2024 });
  */
-export const loadNflDepthCharts = seasonLoader(LOAD_NFL_DEPTH_CHARTS);
+export const loadNflDepthCharts = seasonLoader<LoadNflDepthChartsRow>(LOAD_NFL_DEPTH_CHARTS);
 /** snake_case alias of {@link loadNflDepthCharts} (py/R parity). */
 export const load_nfl_depth_charts = loadNflDepthCharts;
 
@@ -191,7 +222,7 @@ const LOAD_NFL_INJURIES: ReleaseLoaderDef = {"fn":"load_nfl_injuries","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflInjuries({ seasons: 2024 });
  */
-export const loadNflInjuries = seasonLoader(LOAD_NFL_INJURIES);
+export const loadNflInjuries = seasonLoader<LoadNflInjuriesRow>(LOAD_NFL_INJURIES);
 /** snake_case alias of {@link loadNflInjuries} (py/R parity). */
 export const load_nfl_injuries = loadNflInjuries;
 
@@ -214,7 +245,7 @@ const LOAD_NFL_SNAP_COUNTS: ReleaseLoaderDef = {"fn":"load_nfl_snap_counts","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflSnapCounts({ seasons: 2024 });
  */
-export const loadNflSnapCounts = seasonLoader(LOAD_NFL_SNAP_COUNTS);
+export const loadNflSnapCounts = seasonLoader<LoadNflSnapCountsRow>(LOAD_NFL_SNAP_COUNTS);
 /** snake_case alias of {@link loadNflSnapCounts} (py/R parity). */
 export const load_nfl_snap_counts = loadNflSnapCounts;
 
@@ -237,7 +268,7 @@ const LOAD_NFL_PBP_PARTICIPATION: ReleaseLoaderDef = {"fn":"load_nfl_pbp_partici
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflPbpParticipation({ seasons: 2024, columns: ['nflverse_game_id', 'play_id', 'offense_formation', 'defenders_in_box'] });
  */
-export const loadNflPbpParticipation = seasonLoader(LOAD_NFL_PBP_PARTICIPATION);
+export const loadNflPbpParticipation = seasonLoader<LoadNflPbpParticipationRow>(LOAD_NFL_PBP_PARTICIPATION);
 /** snake_case alias of {@link loadNflPbpParticipation} (py/R parity). */
 export const load_nfl_pbp_participation = loadNflPbpParticipation;
 
@@ -260,7 +291,7 @@ const LOAD_NFL_FTN_CHARTING: ReleaseLoaderDef = {"fn":"load_nfl_ftn_charting","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflFtnCharting({ seasons: 2024 });
  */
-export const loadNflFtnCharting = seasonLoader(LOAD_NFL_FTN_CHARTING);
+export const loadNflFtnCharting = seasonLoader<LoadNflFtnChartingRow>(LOAD_NFL_FTN_CHARTING);
 /** snake_case alias of {@link loadNflFtnCharting} (py/R parity). */
 export const load_nfl_ftn_charting = loadNflFtnCharting;
 
@@ -285,7 +316,7 @@ const LOAD_NFL_USAGE_PLAYERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_players",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsagePlayers({ seasons: 2024 });
  */
-export const loadNflUsagePlayers = seasonLoader(LOAD_NFL_USAGE_PLAYERS);
+export const loadNflUsagePlayers = seasonLoader<LoadNflUsagePlayersRow>(LOAD_NFL_USAGE_PLAYERS);
 /** snake_case alias of {@link loadNflUsagePlayers} (py/R parity). */
 export const load_nfl_usage_players = loadNflUsagePlayers;
 
@@ -310,7 +341,7 @@ const LOAD_NFL_USAGE_POSITION_GROUPS: ReleaseLoaderDef = {"fn":"load_nfl_usage_p
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsagePositionGroups({ seasons: 2024 });
  */
-export const loadNflUsagePositionGroups = seasonLoader(LOAD_NFL_USAGE_POSITION_GROUPS);
+export const loadNflUsagePositionGroups = seasonLoader<LoadNflUsagePositionGroupsRow>(LOAD_NFL_USAGE_POSITION_GROUPS);
 /** snake_case alias of {@link loadNflUsagePositionGroups} (py/R parity). */
 export const load_nfl_usage_position_groups = loadNflUsagePositionGroups;
 
@@ -335,7 +366,7 @@ const LOAD_NFL_USAGE_TACKLES: ReleaseLoaderDef = {"fn":"load_nfl_usage_tackles",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageTackles({ seasons: 2024 });
  */
-export const loadNflUsageTackles = seasonLoader(LOAD_NFL_USAGE_TACKLES);
+export const loadNflUsageTackles = seasonLoader<LoadNflUsageTacklesRow>(LOAD_NFL_USAGE_TACKLES);
 /** snake_case alias of {@link loadNflUsageTackles} (py/R parity). */
 export const load_nfl_usage_tackles = loadNflUsageTackles;
 
@@ -360,7 +391,7 @@ const LOAD_NFL_USAGE_POSITION_GROUP_TACKLES: ReleaseLoaderDef = {"fn":"load_nfl_
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsagePositionGroupTackles({ seasons: 2024 });
  */
-export const loadNflUsagePositionGroupTackles = seasonLoader(LOAD_NFL_USAGE_POSITION_GROUP_TACKLES);
+export const loadNflUsagePositionGroupTackles = seasonLoader<LoadNflUsagePositionGroupTacklesRow>(LOAD_NFL_USAGE_POSITION_GROUP_TACKLES);
 /** snake_case alias of {@link loadNflUsagePositionGroupTackles} (py/R parity). */
 export const load_nfl_usage_position_group_tackles = loadNflUsagePositionGroupTackles;
 
@@ -385,7 +416,7 @@ const LOAD_NFL_USAGE_TEAMS: ReleaseLoaderDef = {"fn":"load_nfl_usage_teams","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageTeams({ seasons: 2024 });
  */
-export const loadNflUsageTeams = seasonLoader(LOAD_NFL_USAGE_TEAMS);
+export const loadNflUsageTeams = seasonLoader<LoadNflUsageTeamsRow>(LOAD_NFL_USAGE_TEAMS);
 /** snake_case alias of {@link loadNflUsageTeams} (py/R parity). */
 export const load_nfl_usage_teams = loadNflUsageTeams;
 
@@ -410,7 +441,7 @@ const LOAD_NFL_USAGE_DRIVE_SCRIPTING: ReleaseLoaderDef = {"fn":"load_nfl_usage_d
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageDriveScripting({ seasons: 2024 });
  */
-export const loadNflUsageDriveScripting = seasonLoader(LOAD_NFL_USAGE_DRIVE_SCRIPTING);
+export const loadNflUsageDriveScripting = seasonLoader<LoadNflUsageDriveScriptingRow>(LOAD_NFL_USAGE_DRIVE_SCRIPTING);
 /** snake_case alias of {@link loadNflUsageDriveScripting} (py/R parity). */
 export const load_nfl_usage_drive_scripting = loadNflUsageDriveScripting;
 
@@ -435,7 +466,7 @@ const LOAD_NFL_USAGE_ST_KICKERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_kic
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStKickers({ seasons: 2024 });
  */
-export const loadNflUsageStKickers = seasonLoader(LOAD_NFL_USAGE_ST_KICKERS);
+export const loadNflUsageStKickers = seasonLoader<LoadNflUsageStKickersRow>(LOAD_NFL_USAGE_ST_KICKERS);
 /** snake_case alias of {@link loadNflUsageStKickers} (py/R parity). */
 export const load_nfl_usage_st_kickers = loadNflUsageStKickers;
 
@@ -460,7 +491,7 @@ const LOAD_NFL_USAGE_ST_PUNTERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_pun
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStPunters({ seasons: 2024 });
  */
-export const loadNflUsageStPunters = seasonLoader(LOAD_NFL_USAGE_ST_PUNTERS);
+export const loadNflUsageStPunters = seasonLoader<LoadNflUsageStPuntersRow>(LOAD_NFL_USAGE_ST_PUNTERS);
 /** snake_case alias of {@link loadNflUsageStPunters} (py/R parity). */
 export const load_nfl_usage_st_punters = loadNflUsageStPunters;
 
@@ -485,7 +516,7 @@ const LOAD_NFL_USAGE_ST_RETURNERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_r
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStReturners({ seasons: 2024 });
  */
-export const loadNflUsageStReturners = seasonLoader(LOAD_NFL_USAGE_ST_RETURNERS);
+export const loadNflUsageStReturners = seasonLoader<LoadNflUsageStReturnersRow>(LOAD_NFL_USAGE_ST_RETURNERS);
 /** snake_case alias of {@link loadNflUsageStReturners} (py/R parity). */
 export const load_nfl_usage_st_returners = loadNflUsageStReturners;
 
@@ -510,7 +541,7 @@ const LOAD_NFL_USAGE_ST_BLOCKS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_bloc
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStBlocks({ seasons: 2024 });
  */
-export const loadNflUsageStBlocks = seasonLoader(LOAD_NFL_USAGE_ST_BLOCKS);
+export const loadNflUsageStBlocks = seasonLoader<LoadNflUsageStBlocksRow>(LOAD_NFL_USAGE_ST_BLOCKS);
 /** snake_case alias of {@link loadNflUsageStBlocks} (py/R parity). */
 export const load_nfl_usage_st_blocks = loadNflUsageStBlocks;
 
@@ -535,7 +566,7 @@ const LOAD_NFL_USAGE_ST_TEAM: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_team",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStTeam({ seasons: 2024 });
  */
-export const loadNflUsageStTeam = seasonLoader(LOAD_NFL_USAGE_ST_TEAM);
+export const loadNflUsageStTeam = seasonLoader<LoadNflUsageStTeamRow>(LOAD_NFL_USAGE_ST_TEAM);
 /** snake_case alias of {@link loadNflUsageStTeam} (py/R parity). */
 export const load_nfl_usage_st_team = loadNflUsageStTeam;
 
@@ -560,7 +591,7 @@ const LOAD_NFL_TEAM_TENDENCIES: ReleaseLoaderDef = {"fn":"load_nfl_team_tendenci
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflTeamTendencies({ seasons: 2024 });
  */
-export const loadNflTeamTendencies = seasonLoader(LOAD_NFL_TEAM_TENDENCIES);
+export const loadNflTeamTendencies = seasonLoader<LoadNflTeamTendenciesRow>(LOAD_NFL_TEAM_TENDENCIES);
 /** snake_case alias of {@link loadNflTeamTendencies} (py/R parity). */
 export const load_nfl_team_tendencies = loadNflTeamTendencies;
 
@@ -585,7 +616,7 @@ const LOAD_NFL_COACH_TENDENCIES: ReleaseLoaderDef = {"fn":"load_nfl_coach_tenden
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflCoachTendencies({ seasons: 2024 });
  */
-export const loadNflCoachTendencies = seasonLoader(LOAD_NFL_COACH_TENDENCIES);
+export const loadNflCoachTendencies = seasonLoader<LoadNflCoachTendenciesRow>(LOAD_NFL_COACH_TENDENCIES);
 /** snake_case alias of {@link loadNflCoachTendencies} (py/R parity). */
 export const load_nfl_coach_tendencies = loadNflCoachTendencies;
 
@@ -608,7 +639,7 @@ const LOAD_NFL_COACH_CAREERS: ReleaseLoaderDef = {"fn":"load_nfl_coach_careers",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflCoachCareers();
  */
-export const loadNflCoachCareers = assetLoader(LOAD_NFL_COACH_CAREERS);
+export const loadNflCoachCareers = assetLoader<LoadNflCoachCareersRow>(LOAD_NFL_COACH_CAREERS);
 /** snake_case alias of {@link loadNflCoachCareers} (py/R parity). */
 export const load_nfl_coach_careers = loadNflCoachCareers;
 
@@ -631,7 +662,7 @@ const LOAD_NFL_GROUPS: ReleaseLoaderDef = {"fn":"load_nfl_groups","url":"https:/
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflGroups();
  */
-export const loadNflGroups = assetLoader(LOAD_NFL_GROUPS);
+export const loadNflGroups = assetLoader<LoadNflGroupsRow>(LOAD_NFL_GROUPS);
 /** snake_case alias of {@link loadNflGroups} (py/R parity). */
 export const load_nfl_groups = loadNflGroups;
 
@@ -654,7 +685,7 @@ const LOAD_NFL_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nfl_group_seasons",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflGroupSeasons();
  */
-export const loadNflGroupSeasons = assetLoader(LOAD_NFL_GROUP_SEASONS);
+export const loadNflGroupSeasons = assetLoader<LoadNflGroupSeasonsRow>(LOAD_NFL_GROUP_SEASONS);
 /** snake_case alias of {@link loadNflGroupSeasons} (py/R parity). */
 export const load_nfl_group_seasons = loadNflGroupSeasons;
 
@@ -677,7 +708,7 @@ const LOAD_NFL_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_nfl_group_aliases",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflGroupAliases();
  */
-export const loadNflGroupAliases = assetLoader(LOAD_NFL_GROUP_ALIASES);
+export const loadNflGroupAliases = assetLoader<LoadNflGroupAliasesRow>(LOAD_NFL_GROUP_ALIASES);
 /** snake_case alias of {@link loadNflGroupAliases} (py/R parity). */
 export const load_nfl_group_aliases = loadNflGroupAliases;
 
@@ -702,6 +733,6 @@ const LOAD_NFL_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nfl_team_group
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflTeamGroupSeasons({ seasons: 2024 });
  */
-export const loadNflTeamGroupSeasons = seasonLoader(LOAD_NFL_TEAM_GROUP_SEASONS);
+export const loadNflTeamGroupSeasons = seasonLoader<LoadNflTeamGroupSeasonsRow>(LOAD_NFL_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadNflTeamGroupSeasons} (py/R parity). */
 export const load_nfl_team_group_seasons = loadNflTeamGroupSeasons;

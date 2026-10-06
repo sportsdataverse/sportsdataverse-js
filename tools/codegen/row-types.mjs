@@ -19,8 +19,8 @@
 //     column the payload did not carry.
 // Dates: no verified returns schema has a date type; parsers return dates as the
 // payload's ISO strings (`character` -> `string`). Release loaders decode DATE /
-// TIMESTAMP to `Date`, but no loader row type is generated (no verified loader
-// schema): loader rows stay `Record<string, unknown>`.
+// TIMESTAMP to `Date`; their row types come from sdv-py's loader schemas instead
+// (tools/codegen/loader-types.mjs).
 //
 // test/types/agreement.test.js parses the GENERATED TypeScript (not this module)
 // and checks every value the parsers return on the committed captures against it.

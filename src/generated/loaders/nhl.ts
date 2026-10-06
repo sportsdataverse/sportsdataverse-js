@@ -10,6 +10,35 @@ import {
   seasonLoader,
   type ReleaseLoaderDef,
 } from "../../core/releases.js";
+import type {
+  LoadNhlPbpRow,
+  LoadNhlPlayerBoxscoreRow,
+  LoadNhlScheduleRow,
+  LoadNhlTeamBoxscoreRow,
+  LoadNhlGameInfoRow,
+  LoadNhlGameRostersRow,
+  LoadNhlGoalieBoxscoresRow,
+  LoadNhlLinescoreRow,
+  LoadNhlOfficialsRow,
+  LoadNhlPbpFullRow,
+  LoadNhlPbpLiteRow,
+  LoadNhlPenaltiesRow,
+  LoadNhlPlayerBoxscoresRow,
+  LoadNhlRostersRow,
+  LoadNhlSchedulesRow,
+  LoadNhlScoringRow,
+  LoadNhlScratchesRow,
+  LoadNhlShiftsRow,
+  LoadNhlShootoutRow,
+  LoadNhlShotsByPeriodRow,
+  LoadNhlSkaterBoxscoresRow,
+  LoadNhlTeamBoxscoresRow,
+  LoadNhlThreeStarsRow,
+  LoadNhlGroupsRow,
+  LoadNhlGroupSeasonsRow,
+  LoadNhlGroupAliasesRow,
+  LoadNhlTeamGroupSeasonsRow,
+} from "../loader_rows/nhl.js";
 
 const LOAD_NHL_PBP: ReleaseLoaderDef = {"fn":"load_nhl_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_pbp_full/play_by_play_{season}.parquet","minSeason":2010};
 
@@ -29,7 +58,7 @@ const LOAD_NHL_PBP: ReleaseLoaderDef = {"fn":"load_nhl_pbp","url":"https://githu
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlPbp({ seasons: 2024, columns: ['game_id', 'period', 'event_type', 'description', 'strength_state'] });
  */
-export const loadNhlPbp = seasonLoader(LOAD_NHL_PBP);
+export const loadNhlPbp = seasonLoader<LoadNhlPbpRow>(LOAD_NHL_PBP);
 /** snake_case alias of {@link loadNhlPbp} (py/R parity). */
 export const load_nhl_pbp = loadNhlPbp;
 
@@ -51,7 +80,7 @@ const LOAD_NHL_PLAYER_BOXSCORE: ReleaseLoaderDef = {"fn":"load_nhl_player_boxsco
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlPlayerBoxscore({ seasons: 2024 });
  */
-export const loadNhlPlayerBoxscore = seasonLoader(LOAD_NHL_PLAYER_BOXSCORE);
+export const loadNhlPlayerBoxscore = seasonLoader<LoadNhlPlayerBoxscoreRow>(LOAD_NHL_PLAYER_BOXSCORE);
 /** snake_case alias of {@link loadNhlPlayerBoxscore} (py/R parity). */
 export const load_nhl_player_boxscore = loadNhlPlayerBoxscore;
 
@@ -73,7 +102,7 @@ const LOAD_NHL_SCHEDULE: ReleaseLoaderDef = {"fn":"load_nhl_schedule","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlSchedule({ seasons: 2024 });
  */
-export const loadNhlSchedule = seasonLoader(LOAD_NHL_SCHEDULE);
+export const loadNhlSchedule = seasonLoader<LoadNhlScheduleRow>(LOAD_NHL_SCHEDULE);
 /** snake_case alias of {@link loadNhlSchedule} (py/R parity). */
 export const load_nhl_schedule = loadNhlSchedule;
 
@@ -95,7 +124,7 @@ const LOAD_NHL_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_nhl_team_boxscore",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlTeamBoxscore({ seasons: 2024 });
  */
-export const loadNhlTeamBoxscore = seasonLoader(LOAD_NHL_TEAM_BOXSCORE);
+export const loadNhlTeamBoxscore = seasonLoader<LoadNhlTeamBoxscoreRow>(LOAD_NHL_TEAM_BOXSCORE);
 /** snake_case alias of {@link loadNhlTeamBoxscore} (py/R parity). */
 export const load_nhl_team_boxscore = loadNhlTeamBoxscore;
 
@@ -117,7 +146,7 @@ const LOAD_NHL_GAME_INFO: ReleaseLoaderDef = {"fn":"load_nhl_game_info","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlGameInfo({ seasons: 2024 });
  */
-export const loadNhlGameInfo = seasonLoader(LOAD_NHL_GAME_INFO);
+export const loadNhlGameInfo = seasonLoader<LoadNhlGameInfoRow>(LOAD_NHL_GAME_INFO);
 /** snake_case alias of {@link loadNhlGameInfo} (py/R parity). */
 export const load_nhl_game_info = loadNhlGameInfo;
 
@@ -139,7 +168,7 @@ const LOAD_NHL_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_nhl_game_rosters","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlGameRosters({ seasons: 2024 });
  */
-export const loadNhlGameRosters = seasonLoader(LOAD_NHL_GAME_ROSTERS);
+export const loadNhlGameRosters = seasonLoader<LoadNhlGameRostersRow>(LOAD_NHL_GAME_ROSTERS);
 /** snake_case alias of {@link loadNhlGameRosters} (py/R parity). */
 export const load_nhl_game_rosters = loadNhlGameRosters;
 
@@ -161,7 +190,7 @@ const LOAD_NHL_GOALIE_BOXSCORES: ReleaseLoaderDef = {"fn":"load_nhl_goalie_boxsc
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlGoalieBoxscores({ seasons: 2024 });
  */
-export const loadNhlGoalieBoxscores = seasonLoader(LOAD_NHL_GOALIE_BOXSCORES);
+export const loadNhlGoalieBoxscores = seasonLoader<LoadNhlGoalieBoxscoresRow>(LOAD_NHL_GOALIE_BOXSCORES);
 /** snake_case alias of {@link loadNhlGoalieBoxscores} (py/R parity). */
 export const load_nhl_goalie_boxscores = loadNhlGoalieBoxscores;
 
@@ -183,7 +212,7 @@ const LOAD_NHL_LINESCORE: ReleaseLoaderDef = {"fn":"load_nhl_linescore","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlLinescore({ seasons: 2024 });
  */
-export const loadNhlLinescore = seasonLoader(LOAD_NHL_LINESCORE);
+export const loadNhlLinescore = seasonLoader<LoadNhlLinescoreRow>(LOAD_NHL_LINESCORE);
 /** snake_case alias of {@link loadNhlLinescore} (py/R parity). */
 export const load_nhl_linescore = loadNhlLinescore;
 
@@ -205,7 +234,7 @@ const LOAD_NHL_OFFICIALS: ReleaseLoaderDef = {"fn":"load_nhl_officials","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlOfficials({ seasons: 2025 });
  */
-export const loadNhlOfficials = seasonLoader(LOAD_NHL_OFFICIALS);
+export const loadNhlOfficials = seasonLoader<LoadNhlOfficialsRow>(LOAD_NHL_OFFICIALS);
 /** snake_case alias of {@link loadNhlOfficials} (py/R parity). */
 export const load_nhl_officials = loadNhlOfficials;
 
@@ -227,7 +256,7 @@ const LOAD_NHL_PBP_FULL: ReleaseLoaderDef = {"fn":"load_nhl_pbp_full","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlPbpFull({ seasons: 2010, columns: ['game_id', 'period', 'event_type', 'description', 'event'] });
  */
-export const loadNhlPbpFull = seasonLoader(LOAD_NHL_PBP_FULL);
+export const loadNhlPbpFull = seasonLoader<LoadNhlPbpFullRow>(LOAD_NHL_PBP_FULL);
 /** snake_case alias of {@link loadNhlPbpFull} (py/R parity). */
 export const load_nhl_pbp_full = loadNhlPbpFull;
 
@@ -249,7 +278,7 @@ const LOAD_NHL_PBP_LITE: ReleaseLoaderDef = {"fn":"load_nhl_pbp_lite","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlPbpLite({ seasons: 2010, columns: ['game_id', 'period', 'event_type', 'description', 'event'] });
  */
-export const loadNhlPbpLite = seasonLoader(LOAD_NHL_PBP_LITE);
+export const loadNhlPbpLite = seasonLoader<LoadNhlPbpLiteRow>(LOAD_NHL_PBP_LITE);
 /** snake_case alias of {@link loadNhlPbpLite} (py/R parity). */
 export const load_nhl_pbp_lite = loadNhlPbpLite;
 
@@ -271,7 +300,7 @@ const LOAD_NHL_PENALTIES: ReleaseLoaderDef = {"fn":"load_nhl_penalties","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlPenalties({ seasons: 2024 });
  */
-export const loadNhlPenalties = seasonLoader(LOAD_NHL_PENALTIES);
+export const loadNhlPenalties = seasonLoader<LoadNhlPenaltiesRow>(LOAD_NHL_PENALTIES);
 /** snake_case alias of {@link loadNhlPenalties} (py/R parity). */
 export const load_nhl_penalties = loadNhlPenalties;
 
@@ -293,7 +322,7 @@ const LOAD_NHL_PLAYER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_nhl_player_boxsc
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlPlayerBoxscores({ seasons: 2010 });
  */
-export const loadNhlPlayerBoxscores = seasonLoader(LOAD_NHL_PLAYER_BOXSCORES);
+export const loadNhlPlayerBoxscores = seasonLoader<LoadNhlPlayerBoxscoresRow>(LOAD_NHL_PLAYER_BOXSCORES);
 /** snake_case alias of {@link loadNhlPlayerBoxscores} (py/R parity). */
 export const load_nhl_player_boxscores = loadNhlPlayerBoxscores;
 
@@ -315,7 +344,7 @@ const LOAD_NHL_ROSTERS: ReleaseLoaderDef = {"fn":"load_nhl_rosters","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlRosters({ seasons: 2010 });
  */
-export const loadNhlRosters = seasonLoader(LOAD_NHL_ROSTERS);
+export const loadNhlRosters = seasonLoader<LoadNhlRostersRow>(LOAD_NHL_ROSTERS);
 /** snake_case alias of {@link loadNhlRosters} (py/R parity). */
 export const load_nhl_rosters = loadNhlRosters;
 
@@ -337,7 +366,7 @@ const LOAD_NHL_SCHEDULES: ReleaseLoaderDef = {"fn":"load_nhl_schedules","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlSchedules({ seasons: 2010 });
  */
-export const loadNhlSchedules = seasonLoader(LOAD_NHL_SCHEDULES);
+export const loadNhlSchedules = seasonLoader<LoadNhlSchedulesRow>(LOAD_NHL_SCHEDULES);
 /** snake_case alias of {@link loadNhlSchedules} (py/R parity). */
 export const load_nhl_schedules = loadNhlSchedules;
 
@@ -359,7 +388,7 @@ const LOAD_NHL_SCORING: ReleaseLoaderDef = {"fn":"load_nhl_scoring","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlScoring({ seasons: 2024 });
  */
-export const loadNhlScoring = seasonLoader(LOAD_NHL_SCORING);
+export const loadNhlScoring = seasonLoader<LoadNhlScoringRow>(LOAD_NHL_SCORING);
 /** snake_case alias of {@link loadNhlScoring} (py/R parity). */
 export const load_nhl_scoring = loadNhlScoring;
 
@@ -381,7 +410,7 @@ const LOAD_NHL_SCRATCHES: ReleaseLoaderDef = {"fn":"load_nhl_scratches","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlScratches({ seasons: 2024 });
  */
-export const loadNhlScratches = seasonLoader(LOAD_NHL_SCRATCHES);
+export const loadNhlScratches = seasonLoader<LoadNhlScratchesRow>(LOAD_NHL_SCRATCHES);
 /** snake_case alias of {@link loadNhlScratches} (py/R parity). */
 export const load_nhl_scratches = loadNhlScratches;
 
@@ -403,7 +432,7 @@ const LOAD_NHL_SHIFTS: ReleaseLoaderDef = {"fn":"load_nhl_shifts","url":"https:/
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlShifts({ seasons: 2025 });
  */
-export const loadNhlShifts = seasonLoader(LOAD_NHL_SHIFTS);
+export const loadNhlShifts = seasonLoader<LoadNhlShiftsRow>(LOAD_NHL_SHIFTS);
 /** snake_case alias of {@link loadNhlShifts} (py/R parity). */
 export const load_nhl_shifts = loadNhlShifts;
 
@@ -425,7 +454,7 @@ const LOAD_NHL_SHOOTOUT: ReleaseLoaderDef = {"fn":"load_nhl_shootout","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlShootout({ seasons: 2025 });
  */
-export const loadNhlShootout = seasonLoader(LOAD_NHL_SHOOTOUT);
+export const loadNhlShootout = seasonLoader<LoadNhlShootoutRow>(LOAD_NHL_SHOOTOUT);
 /** snake_case alias of {@link loadNhlShootout} (py/R parity). */
 export const load_nhl_shootout = loadNhlShootout;
 
@@ -447,7 +476,7 @@ const LOAD_NHL_SHOTS_BY_PERIOD: ReleaseLoaderDef = {"fn":"load_nhl_shots_by_peri
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlShotsByPeriod({ seasons: 2025 });
  */
-export const loadNhlShotsByPeriod = seasonLoader(LOAD_NHL_SHOTS_BY_PERIOD);
+export const loadNhlShotsByPeriod = seasonLoader<LoadNhlShotsByPeriodRow>(LOAD_NHL_SHOTS_BY_PERIOD);
 /** snake_case alias of {@link loadNhlShotsByPeriod} (py/R parity). */
 export const load_nhl_shots_by_period = loadNhlShotsByPeriod;
 
@@ -469,7 +498,7 @@ const LOAD_NHL_SKATER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_nhl_skater_boxsc
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlSkaterBoxscores({ seasons: 2024 });
  */
-export const loadNhlSkaterBoxscores = seasonLoader(LOAD_NHL_SKATER_BOXSCORES);
+export const loadNhlSkaterBoxscores = seasonLoader<LoadNhlSkaterBoxscoresRow>(LOAD_NHL_SKATER_BOXSCORES);
 /** snake_case alias of {@link loadNhlSkaterBoxscores} (py/R parity). */
 export const load_nhl_skater_boxscores = loadNhlSkaterBoxscores;
 
@@ -491,7 +520,7 @@ const LOAD_NHL_TEAM_BOXSCORES: ReleaseLoaderDef = {"fn":"load_nhl_team_boxscores
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlTeamBoxscores({ seasons: 2010 });
  */
-export const loadNhlTeamBoxscores = seasonLoader(LOAD_NHL_TEAM_BOXSCORES);
+export const loadNhlTeamBoxscores = seasonLoader<LoadNhlTeamBoxscoresRow>(LOAD_NHL_TEAM_BOXSCORES);
 /** snake_case alias of {@link loadNhlTeamBoxscores} (py/R parity). */
 export const load_nhl_team_boxscores = loadNhlTeamBoxscores;
 
@@ -513,7 +542,7 @@ const LOAD_NHL_THREE_STARS: ReleaseLoaderDef = {"fn":"load_nhl_three_stars","url
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlThreeStars({ seasons: 2024 });
  */
-export const loadNhlThreeStars = seasonLoader(LOAD_NHL_THREE_STARS);
+export const loadNhlThreeStars = seasonLoader<LoadNhlThreeStarsRow>(LOAD_NHL_THREE_STARS);
 /** snake_case alias of {@link loadNhlThreeStars} (py/R parity). */
 export const load_nhl_three_stars = loadNhlThreeStars;
 
@@ -536,7 +565,7 @@ const LOAD_NHL_GROUPS: ReleaseLoaderDef = {"fn":"load_nhl_groups","url":"https:/
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlGroups();
  */
-export const loadNhlGroups = assetLoader(LOAD_NHL_GROUPS);
+export const loadNhlGroups = assetLoader<LoadNhlGroupsRow>(LOAD_NHL_GROUPS);
 /** snake_case alias of {@link loadNhlGroups} (py/R parity). */
 export const load_nhl_groups = loadNhlGroups;
 
@@ -559,7 +588,7 @@ const LOAD_NHL_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nhl_group_seasons",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlGroupSeasons();
  */
-export const loadNhlGroupSeasons = assetLoader(LOAD_NHL_GROUP_SEASONS);
+export const loadNhlGroupSeasons = assetLoader<LoadNhlGroupSeasonsRow>(LOAD_NHL_GROUP_SEASONS);
 /** snake_case alias of {@link loadNhlGroupSeasons} (py/R parity). */
 export const load_nhl_group_seasons = loadNhlGroupSeasons;
 
@@ -582,7 +611,7 @@ const LOAD_NHL_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_nhl_group_aliases",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlGroupAliases();
  */
-export const loadNhlGroupAliases = assetLoader(LOAD_NHL_GROUP_ALIASES);
+export const loadNhlGroupAliases = assetLoader<LoadNhlGroupAliasesRow>(LOAD_NHL_GROUP_ALIASES);
 /** snake_case alias of {@link loadNhlGroupAliases} (py/R parity). */
 export const load_nhl_group_aliases = loadNhlGroupAliases;
 
@@ -606,6 +635,6 @@ const LOAD_NHL_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nhl_team_group
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlTeamGroupSeasons({ seasons: 2024 });
  */
-export const loadNhlTeamGroupSeasons = seasonLoader(LOAD_NHL_TEAM_GROUP_SEASONS);
+export const loadNhlTeamGroupSeasons = seasonLoader<LoadNhlTeamGroupSeasonsRow>(LOAD_NHL_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadNhlTeamGroupSeasons} (py/R parity). */
 export const load_nhl_team_group_seasons = loadNhlTeamGroupSeasons;

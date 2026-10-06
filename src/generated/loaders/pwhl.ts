@@ -9,6 +9,29 @@ import {
   seasonLoader,
   type ReleaseLoaderDef,
 } from "../../core/releases.js";
+import type {
+  LoadPhfPbpRow,
+  LoadPhfPlayerBoxscoresRow,
+  LoadPhfSchedulesRow,
+  LoadPhfTeamBoxscoresRow,
+  LoadPwhlGameInfoRow,
+  LoadPwhlGameRostersRow,
+  LoadPwhlShiftsRow,
+  LoadPwhlGoalieBoxscoresRow,
+  LoadPwhlOfficialsRow,
+  LoadPwhlPbpRow,
+  LoadPwhlXgPbpRow,
+  LoadPwhlPenaltySummaryRow,
+  LoadPwhlPlayerBoxscoresRow,
+  LoadPwhlRostersRow,
+  LoadPwhlSchedulesRow,
+  LoadPwhlScoringSummaryRow,
+  LoadPwhlShootoutRow,
+  LoadPwhlShotsByPeriodRow,
+  LoadPwhlSkaterBoxscoresRow,
+  LoadPwhlTeamBoxscoresRow,
+  LoadPwhlThreeStarsRow,
+} from "../loader_rows/pwhl.js";
 
 const LOAD_PHF_PBP: ReleaseLoaderDef = {"fn":"load_phf_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/phf_pbp/play_by_play_{season}.parquet","minSeason":2016};
 
@@ -28,7 +51,7 @@ const LOAD_PHF_PBP: ReleaseLoaderDef = {"fn":"load_phf_pbp","url":"https://githu
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPhfPbp({ seasons: 2023, columns: ['game_id', 'period_id', 'play_type', 'play_description'] });
  */
-export const loadPhfPbp = seasonLoader(LOAD_PHF_PBP);
+export const loadPhfPbp = seasonLoader<LoadPhfPbpRow>(LOAD_PHF_PBP);
 /** snake_case alias of {@link loadPhfPbp} (py/R parity). */
 export const load_phf_pbp = loadPhfPbp;
 
@@ -50,7 +73,7 @@ const LOAD_PHF_PLAYER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_phf_player_boxsc
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPhfPlayerBoxscores({ seasons: 2023 });
  */
-export const loadPhfPlayerBoxscores = seasonLoader(LOAD_PHF_PLAYER_BOXSCORES);
+export const loadPhfPlayerBoxscores = seasonLoader<LoadPhfPlayerBoxscoresRow>(LOAD_PHF_PLAYER_BOXSCORES);
 /** snake_case alias of {@link loadPhfPlayerBoxscores} (py/R parity). */
 export const load_phf_player_boxscores = loadPhfPlayerBoxscores;
 
@@ -72,7 +95,7 @@ const LOAD_PHF_SCHEDULES: ReleaseLoaderDef = {"fn":"load_phf_schedules","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPhfSchedules({ seasons: 2023 });
  */
-export const loadPhfSchedules = seasonLoader(LOAD_PHF_SCHEDULES);
+export const loadPhfSchedules = seasonLoader<LoadPhfSchedulesRow>(LOAD_PHF_SCHEDULES);
 /** snake_case alias of {@link loadPhfSchedules} (py/R parity). */
 export const load_phf_schedules = loadPhfSchedules;
 
@@ -94,7 +117,7 @@ const LOAD_PHF_TEAM_BOXSCORES: ReleaseLoaderDef = {"fn":"load_phf_team_boxscores
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPhfTeamBoxscores({ seasons: 2023 });
  */
-export const loadPhfTeamBoxscores = seasonLoader(LOAD_PHF_TEAM_BOXSCORES);
+export const loadPhfTeamBoxscores = seasonLoader<LoadPhfTeamBoxscoresRow>(LOAD_PHF_TEAM_BOXSCORES);
 /** snake_case alias of {@link loadPhfTeamBoxscores} (py/R parity). */
 export const load_phf_team_boxscores = loadPhfTeamBoxscores;
 
@@ -116,7 +139,7 @@ const LOAD_PWHL_GAME_INFO: ReleaseLoaderDef = {"fn":"load_pwhl_game_info","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlGameInfo({ seasons: 2024 });
  */
-export const loadPwhlGameInfo = seasonLoader(LOAD_PWHL_GAME_INFO);
+export const loadPwhlGameInfo = seasonLoader<LoadPwhlGameInfoRow>(LOAD_PWHL_GAME_INFO);
 /** snake_case alias of {@link loadPwhlGameInfo} (py/R parity). */
 export const load_pwhl_game_info = loadPwhlGameInfo;
 
@@ -138,7 +161,7 @@ const LOAD_PWHL_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_pwhl_game_rosters",
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlGameRosters({ seasons: 2024 });
  */
-export const loadPwhlGameRosters = seasonLoader(LOAD_PWHL_GAME_ROSTERS);
+export const loadPwhlGameRosters = seasonLoader<LoadPwhlGameRostersRow>(LOAD_PWHL_GAME_ROSTERS);
 /** snake_case alias of {@link loadPwhlGameRosters} (py/R parity). */
 export const load_pwhl_game_rosters = loadPwhlGameRosters;
 
@@ -160,7 +183,7 @@ const LOAD_PWHL_SHIFTS: ReleaseLoaderDef = {"fn":"load_pwhl_shifts","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlShifts({ seasons: 2025 });
  */
-export const loadPwhlShifts = seasonLoader(LOAD_PWHL_SHIFTS);
+export const loadPwhlShifts = seasonLoader<LoadPwhlShiftsRow>(LOAD_PWHL_SHIFTS);
 /** snake_case alias of {@link loadPwhlShifts} (py/R parity). */
 export const load_pwhl_shifts = loadPwhlShifts;
 
@@ -182,7 +205,7 @@ const LOAD_PWHL_GOALIE_BOXSCORES: ReleaseLoaderDef = {"fn":"load_pwhl_goalie_box
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlGoalieBoxscores({ seasons: 2024 });
  */
-export const loadPwhlGoalieBoxscores = seasonLoader(LOAD_PWHL_GOALIE_BOXSCORES);
+export const loadPwhlGoalieBoxscores = seasonLoader<LoadPwhlGoalieBoxscoresRow>(LOAD_PWHL_GOALIE_BOXSCORES);
 /** snake_case alias of {@link loadPwhlGoalieBoxscores} (py/R parity). */
 export const load_pwhl_goalie_boxscores = loadPwhlGoalieBoxscores;
 
@@ -204,7 +227,7 @@ const LOAD_PWHL_OFFICIALS: ReleaseLoaderDef = {"fn":"load_pwhl_officials","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlOfficials({ seasons: 2024 });
  */
-export const loadPwhlOfficials = seasonLoader(LOAD_PWHL_OFFICIALS);
+export const loadPwhlOfficials = seasonLoader<LoadPwhlOfficialsRow>(LOAD_PWHL_OFFICIALS);
 /** snake_case alias of {@link loadPwhlOfficials} (py/R parity). */
 export const load_pwhl_officials = loadPwhlOfficials;
 
@@ -226,7 +249,7 @@ const LOAD_PWHL_PBP: ReleaseLoaderDef = {"fn":"load_pwhl_pbp","url":"https://git
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlPbp({ seasons: 2024, columns: ['game_id', 'period_of_game', 'event', 'event_type', 'strength_state'] });
  */
-export const loadPwhlPbp = seasonLoader(LOAD_PWHL_PBP);
+export const loadPwhlPbp = seasonLoader<LoadPwhlPbpRow>(LOAD_PWHL_PBP);
 /** snake_case alias of {@link loadPwhlPbp} (py/R parity). */
 export const load_pwhl_pbp = loadPwhlPbp;
 
@@ -248,7 +271,7 @@ const LOAD_PWHL_XG_PBP: ReleaseLoaderDef = {"fn":"load_pwhl_xg_pbp","url":"https
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlXgPbp({ seasons: 2025, columns: ['game_id', 'period_of_game', 'sec_from_start', 'event_type'] });
  */
-export const loadPwhlXgPbp = seasonLoader(LOAD_PWHL_XG_PBP);
+export const loadPwhlXgPbp = seasonLoader<LoadPwhlXgPbpRow>(LOAD_PWHL_XG_PBP);
 /** snake_case alias of {@link loadPwhlXgPbp} (py/R parity). */
 export const load_pwhl_xg_pbp = loadPwhlXgPbp;
 
@@ -270,7 +293,7 @@ const LOAD_PWHL_PENALTY_SUMMARY: ReleaseLoaderDef = {"fn":"load_pwhl_penalty_sum
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlPenaltySummary({ seasons: 2024 });
  */
-export const loadPwhlPenaltySummary = seasonLoader(LOAD_PWHL_PENALTY_SUMMARY);
+export const loadPwhlPenaltySummary = seasonLoader<LoadPwhlPenaltySummaryRow>(LOAD_PWHL_PENALTY_SUMMARY);
 /** snake_case alias of {@link loadPwhlPenaltySummary} (py/R parity). */
 export const load_pwhl_penalty_summary = loadPwhlPenaltySummary;
 
@@ -292,7 +315,7 @@ const LOAD_PWHL_PLAYER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_pwhl_player_box
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlPlayerBoxscores({ seasons: 2024 });
  */
-export const loadPwhlPlayerBoxscores = seasonLoader(LOAD_PWHL_PLAYER_BOXSCORES);
+export const loadPwhlPlayerBoxscores = seasonLoader<LoadPwhlPlayerBoxscoresRow>(LOAD_PWHL_PLAYER_BOXSCORES);
 /** snake_case alias of {@link loadPwhlPlayerBoxscores} (py/R parity). */
 export const load_pwhl_player_boxscores = loadPwhlPlayerBoxscores;
 
@@ -314,7 +337,7 @@ const LOAD_PWHL_ROSTERS: ReleaseLoaderDef = {"fn":"load_pwhl_rosters","url":"htt
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlRosters({ seasons: 2024 });
  */
-export const loadPwhlRosters = seasonLoader(LOAD_PWHL_ROSTERS);
+export const loadPwhlRosters = seasonLoader<LoadPwhlRostersRow>(LOAD_PWHL_ROSTERS);
 /** snake_case alias of {@link loadPwhlRosters} (py/R parity). */
 export const load_pwhl_rosters = loadPwhlRosters;
 
@@ -336,7 +359,7 @@ const LOAD_PWHL_SCHEDULES: ReleaseLoaderDef = {"fn":"load_pwhl_schedules","url":
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlSchedules({ seasons: 2024 });
  */
-export const loadPwhlSchedules = seasonLoader(LOAD_PWHL_SCHEDULES);
+export const loadPwhlSchedules = seasonLoader<LoadPwhlSchedulesRow>(LOAD_PWHL_SCHEDULES);
 /** snake_case alias of {@link loadPwhlSchedules} (py/R parity). */
 export const load_pwhl_schedules = loadPwhlSchedules;
 
@@ -358,7 +381,7 @@ const LOAD_PWHL_SCORING_SUMMARY: ReleaseLoaderDef = {"fn":"load_pwhl_scoring_sum
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlScoringSummary({ seasons: 2024 });
  */
-export const loadPwhlScoringSummary = seasonLoader(LOAD_PWHL_SCORING_SUMMARY);
+export const loadPwhlScoringSummary = seasonLoader<LoadPwhlScoringSummaryRow>(LOAD_PWHL_SCORING_SUMMARY);
 /** snake_case alias of {@link loadPwhlScoringSummary} (py/R parity). */
 export const load_pwhl_scoring_summary = loadPwhlScoringSummary;
 
@@ -380,7 +403,7 @@ const LOAD_PWHL_SHOOTOUT: ReleaseLoaderDef = {"fn":"load_pwhl_shootout","url":"h
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlShootout({ seasons: 2026 });
  */
-export const loadPwhlShootout = seasonLoader(LOAD_PWHL_SHOOTOUT);
+export const loadPwhlShootout = seasonLoader<LoadPwhlShootoutRow>(LOAD_PWHL_SHOOTOUT);
 /** snake_case alias of {@link loadPwhlShootout} (py/R parity). */
 export const load_pwhl_shootout = loadPwhlShootout;
 
@@ -402,7 +425,7 @@ const LOAD_PWHL_SHOTS_BY_PERIOD: ReleaseLoaderDef = {"fn":"load_pwhl_shots_by_pe
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlShotsByPeriod({ seasons: 2024 });
  */
-export const loadPwhlShotsByPeriod = seasonLoader(LOAD_PWHL_SHOTS_BY_PERIOD);
+export const loadPwhlShotsByPeriod = seasonLoader<LoadPwhlShotsByPeriodRow>(LOAD_PWHL_SHOTS_BY_PERIOD);
 /** snake_case alias of {@link loadPwhlShotsByPeriod} (py/R parity). */
 export const load_pwhl_shots_by_period = loadPwhlShotsByPeriod;
 
@@ -424,7 +447,7 @@ const LOAD_PWHL_SKATER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_pwhl_skater_box
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlSkaterBoxscores({ seasons: 2024 });
  */
-export const loadPwhlSkaterBoxscores = seasonLoader(LOAD_PWHL_SKATER_BOXSCORES);
+export const loadPwhlSkaterBoxscores = seasonLoader<LoadPwhlSkaterBoxscoresRow>(LOAD_PWHL_SKATER_BOXSCORES);
 /** snake_case alias of {@link loadPwhlSkaterBoxscores} (py/R parity). */
 export const load_pwhl_skater_boxscores = loadPwhlSkaterBoxscores;
 
@@ -446,7 +469,7 @@ const LOAD_PWHL_TEAM_BOXSCORES: ReleaseLoaderDef = {"fn":"load_pwhl_team_boxscor
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlTeamBoxscores({ seasons: 2024 });
  */
-export const loadPwhlTeamBoxscores = seasonLoader(LOAD_PWHL_TEAM_BOXSCORES);
+export const loadPwhlTeamBoxscores = seasonLoader<LoadPwhlTeamBoxscoresRow>(LOAD_PWHL_TEAM_BOXSCORES);
 /** snake_case alias of {@link loadPwhlTeamBoxscores} (py/R parity). */
 export const load_pwhl_team_boxscores = loadPwhlTeamBoxscores;
 
@@ -468,6 +491,6 @@ const LOAD_PWHL_THREE_STARS: ReleaseLoaderDef = {"fn":"load_pwhl_three_stars","u
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlThreeStars({ seasons: 2024 });
  */
-export const loadPwhlThreeStars = seasonLoader(LOAD_PWHL_THREE_STARS);
+export const loadPwhlThreeStars = seasonLoader<LoadPwhlThreeStarsRow>(LOAD_PWHL_THREE_STARS);
 /** snake_case alias of {@link loadPwhlThreeStars} (py/R parity). */
 export const load_pwhl_three_stars = loadPwhlThreeStars;

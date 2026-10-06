@@ -2354,7 +2354,7 @@ outputs[join(generatedDir, "params", "index.ts")] = renderParamsBarrel(paramType
 
 // Release loader modules (src/generated/loaders/) + the docs dir of each
 // loader-only namespace (written leagues got their loaders page above).
-registerLoaderModules(outputs, generatedDir, releaseLoaders);
+registerLoaderModules(outputs, generatedDir, releaseLoaders, schemasDir);
 outputs[join(generatedDir, "namespaces.ts")] = renderNamespacesTs(
   [...rowTypeNames.values()].flat(),
   [...releaseLoaders.keys()],

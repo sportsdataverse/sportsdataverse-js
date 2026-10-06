@@ -50,9 +50,12 @@ source:
 
 # Copied verbatim (no transform, not generated here).
 # espn_rename_map.yaml: sdv-py's curated ESPN renames, read by generate.mjs.
+# schemas/loader_schemas.yaml: the polars dtype of every column of every load_*
+# frame, the source of the generated loader row types (tools/codegen/loader-types.mjs).
 copy:
   - endpoints/releases.yaml
   - espn_rename_map.yaml
+  - schemas/loader_schemas.yaml
 
 # sdv-py public names, written by hand in sdv-py at `source.ref`, that its
 # emit-time rename layer treats as taken: py reads them off its own package

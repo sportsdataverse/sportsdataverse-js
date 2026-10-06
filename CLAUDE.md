@@ -116,6 +116,14 @@ npm run pack:check      # npm pack, then attw + publint --strict against that ta
   `src/core/id_columns.ts`. `test/types/agreement.test.js` checks every parsed value of
   every committed capture against the GENERATED TypeScript; `test/types/surface.check.ts`
   holds the overloads (compiled against `dist/*.d.ts` by `test/types/namespaces.test.js`).
+- Every wrapper has a generated params type (`src/generated/params/`, rule in
+  `tools/codegen/param-types.mjs`: required path params, `number | string` for
+  `int` / `str`, snake_case or camelCase names, the family's per-call controls), and
+  every release loader a row type from sdv-py's vendored `schemas/loader_schemas.yaml`
+  (`src/generated/loader_rows/`, rule in `tools/codegen/loader-types.mjs`;
+  `test/types/loader-agreement.test.js` checks the real release fixtures against it).
+- The build is `strict: true` over all of `src/` (`tsconfig.strict.json` equals it). No
+  new `any`: type a dynamic payload `unknown` and narrow it.
 
 - `test` runs Mocha against `test/**/*.test.js` with no network access.
 - `prepare` / `prepublishOnly` build `dist/`; only `dist/` is published (`files:

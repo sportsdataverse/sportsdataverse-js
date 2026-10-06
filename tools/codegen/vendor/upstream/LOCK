@@ -100,6 +100,7 @@ b030b91846c48a45910cfc9b0ea024b67059e0cb  schemas/leaders/nfl.yaml
 b030b91846c48a45910cfc9b0ea024b67059e0cb  schemas/leaders/nhl.yaml
 893c6d1e48c668fa38648bfeb9594b9754eed897  schemas/leaders/wbb.yaml
 fd17fe122deb2de5dab080437e161688a16d5c8b  schemas/leaders/wnba.yaml
+9671324cf3ded8afbd737cf49b6bea70da19e63b  schemas/loader_schemas.yaml
 fcc6cb7600dca5b93299ce738e512b2c193bd4a2  schemas/native/asa/games_xgoals.yaml
 32a1811d010e187ae9075a4c5fb52eab0ae87a41  schemas/native/asa/games.yaml
 1b3012ed46c9fc1d5665290f258e2c8b3e9e219c  schemas/native/asa/goalkeepers_goals_added.yaml

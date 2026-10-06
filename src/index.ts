@@ -375,3 +375,5 @@ export * from './generated/rows/index.js';
 export * from './generated/namespaces.js';
 // Every wrapper's params type (src/generated/params/, tools/codegen/param-types.mjs). Type-only.
 export * from './generated/params/index.js';
+// Every release loader's row type (src/generated/loader_rows/, tools/codegen/loader-types.mjs). Type-only.
+export * from './generated/loader_rows/index.js';
