@@ -63,15 +63,16 @@ const EVENT_MARKETS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.the-odds-api.com/v4/sports/{sport_key}/events/{event_id}/markets`
  *
- * @param params.sport_key - path parameter.
- * @param params.event_id - path parameter.
- * @param params.api_key - query parameter (`apiKey`).
- * @param params.regions - query parameter — default `us`.
- * @param params.bookmakers - query parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.event_id - `number | string` — the `{event_id}` path segment.
+ * @param params.api_key - `number | string` — the `apiKey` query parameter.
+ * @param params.regions - `number | string` — the `regions` query parameter; default `us`.
+ * @param params.bookmakers - `number | string` — the `bookmakers` query parameter.
+ * @param params.date_format - `number | string` — the `dateFormat` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiEventMarkets({ sport_key: '…', event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
 export const oddsApiEventMarkets: Wrapper<Row[], OddsApiEventMarketsParams> = (params: WrapperParams = {}) => callFlat(EVENT_MARKETS_DEF, params);
 /** snake_case alias of {@link oddsApiEventMarkets} (py/R parity). */
@@ -129,17 +130,18 @@ const EVENT_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.the-odds-api.com/v4/sports/{sport_key}/events/{event_id}/odds`
  *
- * @param params.sport_key - path parameter.
- * @param params.event_id - path parameter.
- * @param params.api_key - query parameter (`apiKey`).
- * @param params.regions - query parameter — default `us`.
- * @param params.markets - query parameter — default `h2h`.
- * @param params.odds_format - query parameter (`oddsFormat`).
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.bookmakers - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.event_id - `number | string` — the `{event_id}` path segment.
+ * @param params.api_key - `number | string` — the `apiKey` query parameter.
+ * @param params.regions - `number | string` — the `regions` query parameter; default `us`.
+ * @param params.markets - `number | string` — the `markets` query parameter; default `h2h`.
+ * @param params.odds_format - `number | string` — the `oddsFormat` query parameter.
+ * @param params.date_format - `number | string` — the `dateFormat` query parameter.
+ * @param params.bookmakers - `number | string` — the `bookmakers` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiEventOdds({ sport_key: '…', event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
 export const oddsApiEventOdds: Wrapper<Row[], OddsApiEventOddsParams> = (params: WrapperParams = {}) => callFlat(EVENT_ODDS_DEF, params);
 /** snake_case alias of {@link oddsApiEventOdds} (py/R parity). */
@@ -201,18 +203,19 @@ const EVENT_ODDS_HISTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.the-odds-api.com/v4/historical/sports/{sport_key}/events/{event_id}/odds`
  *
- * @param params.sport_key - path parameter.
- * @param params.event_id - path parameter.
- * @param params.api_key - query parameter (`apiKey`).
- * @param params.date - query parameter.
- * @param params.regions - query parameter — default `us`.
- * @param params.markets - query parameter — default `h2h`.
- * @param params.odds_format - query parameter (`oddsFormat`).
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.bookmakers - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.event_id - `number | string` — the `{event_id}` path segment.
+ * @param params.api_key - `number | string` — the `apiKey` query parameter.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.regions - `number | string` — the `regions` query parameter; default `us`.
+ * @param params.markets - `number | string` — the `markets` query parameter; default `h2h`.
+ * @param params.odds_format - `number | string` — the `oddsFormat` query parameter.
+ * @param params.date_format - `number | string` — the `dateFormat` query parameter.
+ * @param params.bookmakers - `number | string` — the `bookmakers` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiEventOddsHistory({ sport_key: '…', event_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
 export const oddsApiEventOddsHistory: Wrapper<Row[], OddsApiEventOddsHistoryParams> = (params: WrapperParams = {}) => callFlat(EVENT_ODDS_HISTORY_DEF, params);
 /** snake_case alias of {@link oddsApiEventOddsHistory} (py/R parity). */
@@ -245,11 +248,12 @@ const SPORTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.the-odds-api.com/v4/sports`
  *
- * @param params.api_key - query parameter (`apiKey`).
- * @param params.all - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.api_key - `number | string` — the `apiKey` query parameter.
+ * @param params.all - `number | string` — the `all` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSports({});
+ * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
 export const oddsApiSports: Wrapper<Row[], OddsApiSportsParams> = (params: WrapperParams = {}) => callFlat(SPORTS_DEF, params);
 /** snake_case alias of {@link oddsApiSports} (py/R parity). */
@@ -298,15 +302,16 @@ const SPORTS_EVENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.the-odds-api.com/v4/sports/{sport_key}/events`
  *
- * @param params.sport_key - path parameter.
- * @param params.api_key - query parameter (`apiKey`).
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.event_ids - query parameter (`eventIds`).
- * @param params.commence_time_from - query parameter (`commenceTimeFrom`).
- * @param params.commence_time_to - query parameter (`commenceTimeTo`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.api_key - `number | string` — the `apiKey` query parameter.
+ * @param params.date_format - `number | string` — the `dateFormat` query parameter.
+ * @param params.event_ids - `number | string` — the `eventIds` query parameter.
+ * @param params.commence_time_from - `number | string` — the `commenceTimeFrom` query parameter.
+ * @param params.commence_time_to - `number | string` — the `commenceTimeTo` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSportsEvents({ sport_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
 export const oddsApiSportsEvents: Wrapper<Row[], OddsApiSportsEventsParams> = (params: WrapperParams = {}) => callFlat(SPORTS_EVENTS_DEF, params);
 /** snake_case alias of {@link oddsApiSportsEvents} (py/R parity). */
@@ -359,16 +364,17 @@ const SPORTS_EVENTS_HISTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.the-odds-api.com/v4/historical/sports/{sport_key}/events`
  *
- * @param params.sport_key - path parameter.
- * @param params.api_key - query parameter (`apiKey`).
- * @param params.date - query parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.event_ids - query parameter (`eventIds`).
- * @param params.commence_time_from - query parameter (`commenceTimeFrom`).
- * @param params.commence_time_to - query parameter (`commenceTimeTo`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.api_key - `number | string` — the `apiKey` query parameter.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.date_format - `number | string` — the `dateFormat` query parameter.
+ * @param params.event_ids - `number | string` — the `eventIds` query parameter.
+ * @param params.commence_time_from - `number | string` — the `commenceTimeFrom` query parameter.
+ * @param params.commence_time_to - `number | string` — the `commenceTimeTo` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSportsEventsHistory({ sport_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
 export const oddsApiSportsEventsHistory: Wrapper<Row[], OddsApiSportsEventsHistoryParams> = (params: WrapperParams = {}) => callFlat(SPORTS_EVENTS_HISTORY_DEF, params);
 /** snake_case alias of {@link oddsApiSportsEventsHistory} (py/R parity). */
@@ -435,19 +441,20 @@ const SPORTS_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.the-odds-api.com/v4/sports/{sport_key}/odds`
  *
- * @param params.sport_key - path parameter.
- * @param params.api_key - query parameter (`apiKey`).
- * @param params.regions - query parameter — default `us`.
- * @param params.markets - query parameter — default `spreads`.
- * @param params.odds_format - query parameter (`oddsFormat`).
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.event_ids - query parameter (`eventIds`).
- * @param params.bookmakers - query parameter.
- * @param params.commence_time_from - query parameter (`commenceTimeFrom`).
- * @param params.commence_time_to - query parameter (`commenceTimeTo`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.api_key - `number | string` — the `apiKey` query parameter.
+ * @param params.regions - `number | string` — the `regions` query parameter; default `us`.
+ * @param params.markets - `number | string` — the `markets` query parameter; default `spreads`.
+ * @param params.odds_format - `number | string` — the `oddsFormat` query parameter.
+ * @param params.date_format - `number | string` — the `dateFormat` query parameter.
+ * @param params.event_ids - `number | string` — the `eventIds` query parameter.
+ * @param params.bookmakers - `number | string` — the `bookmakers` query parameter.
+ * @param params.commence_time_from - `number | string` — the `commenceTimeFrom` query parameter.
+ * @param params.commence_time_to - `number | string` — the `commenceTimeTo` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSportsOdds({ sport_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
 export const oddsApiSportsOdds: Wrapper<Row[], OddsApiSportsOddsParams> = (params: WrapperParams = {}) => callFlat(SPORTS_ODDS_DEF, params);
 /** snake_case alias of {@link oddsApiSportsOdds} (py/R parity). */
@@ -510,18 +517,19 @@ const SPORTS_ODDS_HISTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.the-odds-api.com/v4/historical/sports/{sport_key}/odds`
  *
- * @param params.sport_key - path parameter.
- * @param params.api_key - query parameter (`apiKey`).
- * @param params.date - query parameter.
- * @param params.regions - query parameter — default `us`.
- * @param params.markets - query parameter — default `spreads`.
- * @param params.odds_format - query parameter (`oddsFormat`).
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.event_ids - query parameter (`eventIds`).
- * @param params.bookmakers - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.api_key - `number | string` — the `apiKey` query parameter.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.regions - `number | string` — the `regions` query parameter; default `us`.
+ * @param params.markets - `number | string` — the `markets` query parameter; default `spreads`.
+ * @param params.odds_format - `number | string` — the `oddsFormat` query parameter.
+ * @param params.date_format - `number | string` — the `dateFormat` query parameter.
+ * @param params.event_ids - `number | string` — the `eventIds` query parameter.
+ * @param params.bookmakers - `number | string` — the `bookmakers` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSportsOddsHistory({ sport_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
 export const oddsApiSportsOddsHistory: Wrapper<Row[], OddsApiSportsOddsHistoryParams> = (params: WrapperParams = {}) => callFlat(SPORTS_ODDS_HISTORY_DEF, params);
 /** snake_case alias of {@link oddsApiSportsOddsHistory} (py/R parity). */
@@ -554,11 +562,12 @@ const SPORTS_PARTICIPANTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.the-odds-api.com/v4/sports/{sport_key}/participants`
  *
- * @param params.sport_key - path parameter.
- * @param params.api_key - query parameter (`apiKey`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.api_key - `number | string` — the `apiKey` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSportsParticipants({ sport_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
 export const oddsApiSportsParticipants: Wrapper<Row[], OddsApiSportsParticipantsParams> = (params: WrapperParams = {}) => callFlat(SPORTS_PARTICIPANTS_DEF, params);
 /** snake_case alias of {@link oddsApiSportsParticipants} (py/R parity). */
@@ -603,14 +612,15 @@ const SPORTS_SCORES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.the-odds-api.com/v4/sports/{sport_key}/scores`
  *
- * @param params.sport_key - path parameter.
- * @param params.api_key - query parameter (`apiKey`).
- * @param params.days_from - query parameter (`daysFrom`).
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.event_ids - query parameter (`eventIds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_key - `number | string` — the `{sport_key}` path segment.
+ * @param params.api_key - `number | string` — the `apiKey` query parameter.
+ * @param params.days_from - `number | string` — the `daysFrom` query parameter.
+ * @param params.date_format - `number | string` — the `dateFormat` query parameter.
+ * @param params.event_ids - `number | string` — the `eventIds` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.odds.oddsApiSportsScores({ sport_key: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/odds#native-api--the-odds-api
  */
 export const oddsApiSportsScores: Wrapper<Row[], OddsApiSportsScoresParams> = (params: WrapperParams = {}) => callFlat(SPORTS_SCORES_DEF, params);
 /** snake_case alias of {@link oddsApiSportsScores} (py/R parity). */

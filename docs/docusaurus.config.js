@@ -32,24 +32,50 @@ module.exports = {
     [
       'docusaurus-plugin-typedoc',
       {
-        // A SAMPLE of written modules (the four basketball ESPN leagues) for
-        // TypeDoc API docs. NOTE: `../src/index.ts` is deliberately NOT an entry
-        // point — it imports the written-module barrels, which would pull all
-        // ~44 generated modules into TypeDoc's program and OOM the docs build
-        // (measured: heap-exhaustion, >8 min). The `tsconfig` below is a minimal
-        // program (just these 4 modules + their deps) for the same reason. The
-        // codegen Markdown per-function reference already covers every league +
-        // flat family; the written source gives IDE/hover for all of them.
+        // A SAMPLE of written modules (the four basketball ESPN leagues) plus every
+        // hand-written module the utilities catalogue covers (tools/codegen/utilities.yaml:
+        // parsers, analytics, odds, models, producers, discovery, the HTTP core). NOTE:
+        // `../src/index.ts` and the other `src/generated/**` modules are deliberately
+        // NOT entry points — the index imports the written-module barrels, which would
+        // pull all ~44 generated modules into TypeDoc's program and OOM the docs build
+        // (measured: heap-exhaustion, >8 min). The `tsconfig` below is the same minimal
+        // program. The codegen Markdown per-function reference already covers every
+        // league + flat family; the written source gives IDE/hover for all of them.
+        // src/discover.ts is left out too: its `await import('./index.js')` makes tsc
+        // follow the whole index (measured: 13 -> 204 program files, 127 generated);
+        // the utilities catalogue (docs/docs/utilities/discovery.md) documents it.
         entryPoints: [
           '../src/generated/espn/nba.ts',
           '../src/generated/espn/wnba.ts',
           '../src/generated/espn/mbb.ts',
           '../src/generated/espn/wbb.ts',
+          '../src/parsers/index.ts',
+          '../src/analytics/hockeytech.ts',
+          '../src/analytics/hockeytech_family.ts',
+          '../src/odds/math.ts',
+          '../src/models/cricket_wp.ts',
+          '../src/producers/espn_basketball_box.ts',
+          '../src/producers/espn_basketball_pbp.ts',
+          '../src/core/int64.ts',
+          '../src/core/id_columns.ts',
+          '../src/core/transforms.ts',
+          '../src/core/releases.ts',
+          '../src/core/errors.ts',
+          '../src/core/config.ts',
+          '../src/core/request.ts',
+          '../src/core/transport.ts',
+          '../src/core/auth.ts',
+          '../src/core/deprecation.ts',
         ],
         tsconfig: 'typedoc.tsconfig.json',
         out: 'docs/api',
         readme: 'none',
         skipErrorChecking: true,
+        // Docusaurus compiles TypeDoc's Markdown as MDX, where a bare `<Type>` or `{...}`
+        // in comment prose is JSX / an expression and breaks the build. The generator keeps
+        // every type in a code span and test/tsdoc-mdx.test.js scans the hand-written
+        // modules; this escapes whatever slips through.
+        sanitizeComments: true,
         excludePrivate: true,
         excludeInternal: true,
         // Don't document re-exported external deps (e.g. `export * as tidy from

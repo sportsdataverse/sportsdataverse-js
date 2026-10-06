@@ -2,6 +2,7 @@
 # Parsed by parse_yahoo_stats. Columns derived from the spec's typed nested stat-array item props (deep-flattened with `_`, snake_cased to match the parser output).
 schema: season_stats_football_returns_ncaaf
 kind: dataframe
+unverified: these columns were written for parse_yahoo_stats's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 columns:
 - name: stat_id
   type: character

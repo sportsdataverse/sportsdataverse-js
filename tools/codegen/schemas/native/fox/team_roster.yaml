@@ -1,13 +1,32 @@
-# Fox Sports Bifrost — generated returns schema. Columns are derived from the
-# spec's captured `components.schemas` (the item props of the list the parser
-# flattens), snake_cased to match the parser's output. Untyped (`object`)
-# responses carry `columns: []` (the parser flattens whatever the payload ships).
+# fox returns schema (JS-owned): columns derived from the registered parser's rows on
+# the committed real capture(s) fox/nfl_team_roster.json by
+# tools/codegen/regen-capture-schemas.mjs. Types are inferred from the captured values;
+# `description` is JS-owned text kept across regeneration (blanks fill at render time from
+# sdv-py's manual_column_descriptions.yaml). Do not hand-type columns: re-run the script.
 schema: team_roster
 kind: dataframe
 columns:
-- name: group_template
+- name: position_group
   type: character
-  description: Bifrost team_roster field `template`.
-- name: group_headers
-  type: list
-  description: Bifrost team_roster field `headers`.
+  description: ""
+- name: player
+  type: character
+  description: ""
+- name: pos
+  type: character
+  description: ""
+- name: age
+  type: character
+  description: ""
+- name: ht
+  type: character
+  description: ""
+- name: wt
+  type: character
+  description: ""
+- name: college
+  type: character
+  description: ""
+- name: athlete_id
+  type: character
+  description: ""

@@ -36,9 +36,15 @@ import type { ParserRow } from "../core/types.js";
 import { MULTI_TABLE_SECTIONS } from "./_frames.js";
 import { SECTIONED_ENDPOINTS, parserForEndpoint } from "./espn.js";
 
-/** Tidy rows, or — for the ESPN `summary` dispatcher, or a dict-default flat
+/**
+ * Tidy rows, or — for the ESPN `summary` dispatcher, or a dict-default flat
  * multi-table parser, with no section — a dict of sub-frames. `null` when no
- * parser is registered for the endpoint. */
+ * parser is registered for the endpoint.
+ *
+ * @remarks
+ * The result of {@link parseEndpoint}. Narrow with `Array.isArray` (rows) / `=== null` (no
+ * parser) before indexing.
+ */
 export type ParsedResult = ParserRow[] | Record<string, ParserRow[]> | null;
 
 /**
@@ -54,6 +60,26 @@ export type ParsedResult = ParserRow[] | Record<string, ParserRow[]> | null;
  *   `{ parsed: true, section }` does.
  *
  * Returns `null` when no parser is registered, so callers fall back to raw.
+ *
+ * @param kind - `"espn"` (look `key` up in `ESPN_ENDPOINT_PARSERS` via `parserForEndpoint`) or
+ *   `"flat"` (look it up in the flat `PARSERS` registry via `parserFor`).
+ * @param key - The ESPN endpoint short name, or the flat parser's registered name.
+ * @param raw - The raw payload exactly as the endpoint returned it (decoded JSON, or the text
+ *   body for CSV / HTML parsers).
+ * @param section - A sub-frame name. Forwarded only to a sectioned ESPN endpoint
+ *   (`SECTIONED_ENDPOINTS`) or a flat parser listed in `MULTI_TABLE_SECTIONS`; otherwise
+ *   ignored. Omitted = the parser's default (a dict of every sub-frame for the ESPN
+ *   `summary` dispatcher and the dict-default flat parsers).
+ * @returns Rows, a dict of row arrays, or `null` when `key` has no parser of that `kind`.
+ * @remarks
+ * This function throws nothing itself, but a multi-table flat parser rejects an unknown
+ * `section` with an `Error` listing the valid names (`sectionError` in `_frames.ts`). The
+ * flat branch dispatches exactly as the wrapper's `{ parsed: true, section }` does
+ * (`callFlat`, src/leagues/_make_flat.ts). Browser-safe: no network, no node-only parser —
+ * a `"flat"` key registered only on node (`parse_kenpom_page`) returns `null` here.
+ * @example
+ * const rows = parseEndpoint("espn", "scoreboard", raw);
+ * const players = parseEndpoint("flat", "parse_mls_match", match, "players");
  */
 export function parseEndpoint(
   kind: "espn" | "flat",

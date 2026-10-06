@@ -167,12 +167,13 @@ const ALL_STAR_BALLOT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/league/{league_id}/allStarBallot`
  *
- * @param params.league_id - path parameter.
- * @param params.season - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `{league_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbAllStarBallotRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbAllStarBallot({ league_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbAllStarBallot: Wrapper<MlbAllStarBallotRow[], MlbAllStarBallotParams> = (params: WrapperParams = {}) => callFlat(ALL_STAR_BALLOT_DEF, params);
 /** snake_case alias of {@link mlbAllStarBallot} (py/R parity). */
@@ -209,12 +210,13 @@ const ALL_STAR_FINAL_VOTE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/league/{league_id}/allStarFinalVote`
  *
- * @param params.league_id - path parameter.
- * @param params.season - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `{league_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbAllStarFinalVoteRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbAllStarFinalVote({ league_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbAllStarFinalVote: Wrapper<MlbAllStarFinalVoteRow[], MlbAllStarFinalVoteParams> = (params: WrapperParams = {}) => callFlat(ALL_STAR_FINAL_VOTE_DEF, params);
 /** snake_case alias of {@link mlbAllStarFinalVote} (py/R parity). */
@@ -251,12 +253,13 @@ const ALL_STAR_WRITE_INS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/league/{league_id}/allStarWriteIns`
  *
- * @param params.league_id - path parameter.
- * @param params.season - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `{league_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbAllStarWriteInsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbAllStarWriteIns({ league_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbAllStarWriteIns: Wrapper<MlbAllStarWriteInsRow[], MlbAllStarWriteInsParams> = (params: WrapperParams = {}) => callFlat(ALL_STAR_WRITE_INS_DEF, params);
 /** snake_case alias of {@link mlbAllStarWriteIns} (py/R parity). */
@@ -308,16 +311,17 @@ const ANALYTICS_GAMES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/analytics/game`
  *
- * @param params.game_mode_id - query parameter (`gameModeId`).
- * @param params.timecode - query parameter.
- * @param params.limit - query parameter.
- * @param params.sort_by - query parameter (`sortBy`).
- * @param params.is_non_statcast - query parameter (`isNonStatcast`).
- * @param params.offset - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_mode_id - `number | string` — the `gameModeId` query parameter.
+ * @param params.timecode - `number | string` — the `timecode` query parameter.
+ * @param params.limit - `number | string` — the `limit` query parameter.
+ * @param params.sort_by - `number | string` — the `sortBy` query parameter.
+ * @param params.is_non_statcast - `boolean` — the `isNonStatcast` query parameter.
+ * @param params.offset - `number | string` — the `offset` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbAnalyticsGames({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbAnalyticsGames: Wrapper<Row[], MlbAnalyticsGamesParams> = (params: WrapperParams = {}) => callFlat(ANALYTICS_GAMES_DEF, params);
 /** snake_case alias of {@link mlbAnalyticsGames} (py/R parity). */
@@ -369,16 +373,17 @@ const ANALYTICS_GUIDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/analytics/guids`
  *
- * @param params.game_mode_id - query parameter (`gameModeId`).
- * @param params.timecode - query parameter.
- * @param params.limit - query parameter.
- * @param params.sort_by - query parameter (`sortBy`).
- * @param params.is_non_statcast - query parameter (`isNonStatcast`).
- * @param params.offset - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_mode_id - `number | string` — the `gameModeId` query parameter.
+ * @param params.timecode - `number | string` — the `timecode` query parameter.
+ * @param params.limit - `number | string` — the `limit` query parameter.
+ * @param params.sort_by - `number | string` — the `sortBy` query parameter.
+ * @param params.is_non_statcast - `boolean` — the `isNonStatcast` query parameter.
+ * @param params.offset - `number | string` — the `offset` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbAnalyticsGuids({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbAnalyticsGuids: Wrapper<Row[], MlbAnalyticsGuidsParams> = (params: WrapperParams = {}) => callFlat(ANALYTICS_GUIDS_DEF, params);
 /** snake_case alias of {@link mlbAnalyticsGuids} (py/R parity). */
@@ -422,14 +427,15 @@ const ATTENDANCE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/attendance`
  *
- * @param params.team_id - query parameter (`teamId`).
- * @param params.league_id - query parameter (`leagueId`).
- * @param params.season - query parameter.
- * @param params.league_list_id - query parameter (`leagueListId`).
- * @param params.game_type - query parameter (`gameType`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.league_id - `number | string` — the `leagueId` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league_list_id - `number | string` — the `leagueListId` query parameter.
+ * @param params.game_type - `number | string` — the `gameType` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbAttendance({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbAttendance: Wrapper<Row[], MlbAttendanceParams> = (params: WrapperParams = {}) => callFlat(ATTENDANCE_DEF, params);
 /** snake_case alias of {@link mlbAttendance} (py/R parity). */
@@ -471,13 +477,14 @@ const AWARD_RECIPIENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/awards/{award_id}/recipients`
  *
- * @param params.award_id - path parameter.
- * @param params.season - query parameter.
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.hydrate - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.award_id - `number | string` — the `{award_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbAwardRecipientsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbAwardRecipients({ award_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbAwardRecipients: Wrapper<MlbAwardRecipientsRow[], MlbAwardRecipientsParams> = (params: WrapperParams = {}) => callFlat(AWARD_RECIPIENTS_DEF, params);
 /** snake_case alias of {@link mlbAwardRecipients} (py/R parity). */
@@ -506,10 +513,11 @@ const AWARDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/awards`
  *
- * @param params.sport_id - query parameter (`sportId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbAwardsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbAwards({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbAwards: Wrapper<MlbAwardsRow[], MlbAwardsParams> = (params: WrapperParams = {}) => callFlat(AWARDS_DEF, params);
 /** snake_case alias of {@link mlbAwards} (py/R parity). */
@@ -546,12 +554,13 @@ const BOXSCORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/boxscore`
  *
- * @param params.game_pk - path parameter.
- * @param params.timecode - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.timecode - `number | string` — the `timecode` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbBoxscoreRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbBoxscore({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbBoxscore: Wrapper<MlbBoxscoreRow[], MlbBoxscoreParams> = (params: WrapperParams = {}) => callFlat(BOXSCORE_DEF, params);
 /** snake_case alias of {@link mlbBoxscore} (py/R parity). */
@@ -588,12 +597,13 @@ const CONFERENCE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/conferences/{conference_id}`
  *
- * @param params.conference_id - path parameter.
- * @param params.season - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.conference_id - `number | string` — the `{conference_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbConferenceRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbConference({ conference_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbConference: Wrapper<MlbConferenceRow[], MlbConferenceParams> = (params: WrapperParams = {}) => callFlat(CONFERENCE_DEF, params);
 /** snake_case alias of {@link mlbConference} (py/R parity). */
@@ -630,12 +640,13 @@ const CONFERENCES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/conferences`
  *
- * @param params.conference_id - query parameter (`conferenceId`).
- * @param params.season - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.conference_id - `number | string` — the `conferenceId` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbConferencesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbConferences({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbConferences: Wrapper<MlbConferencesRow[], MlbConferencesParams> = (params: WrapperParams = {}) => callFlat(CONFERENCES_DEF, params);
 /** snake_case alias of {@link mlbConferences} (py/R parity). */
@@ -676,13 +687,14 @@ const DATACASTERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/jobs/datacasters`
  *
- * @param params.sport_id - query parameter (`sportId`).
- * @param params.date - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbDatacastersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbDatacasters({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbDatacasters: Wrapper<MlbDatacastersRow[], MlbDatacastersParams> = (params: WrapperParams = {}) => callFlat(DATACASTERS_DEF, params);
 /** snake_case alias of {@link mlbDatacasters} (py/R parity). */
@@ -719,12 +731,13 @@ const DIVISIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/divisions`
  *
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.league_id - query parameter (`leagueId`).
- * @param params.division_id - query parameter (`divisionId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.league_id - `number | string` — the `leagueId` query parameter.
+ * @param params.division_id - `number | string` — the `divisionId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbDivisions({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbDivisions: Wrapper<Row[], MlbDivisionsParams> = (params: WrapperParams = {}) => callFlat(DIVISIONS_DEF, params);
 /** snake_case alias of {@link mlbDivisions} (py/R parity). */
@@ -770,14 +783,15 @@ const DRAFT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/draft/{year}`
  *
- * @param params.year - path parameter.
- * @param params.round_ - query parameter (`round`).
- * @param params.team_id - query parameter (`teamId`).
- * @param params.player_id - query parameter (`playerId`).
- * @param params.limit - query parameter — default `100`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.round_ - `number | string` — the `round` query parameter.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.player_id - `number | string` — the `playerId` query parameter.
+ * @param params.limit - `number | string` — the `limit` query parameter; default `100`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbDraft({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbDraft: Wrapper<Row[], MlbDraftParams> = (params: WrapperParams = {}) => callFlat(DRAFT_DEF, params);
 /** snake_case alias of {@link mlbDraft} (py/R parity). */
@@ -805,10 +819,11 @@ const DRAFT_LATEST_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/draft/{year}/latest`
  *
- * @param params.year - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbDraftLatestRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbDraftLatest({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbDraftLatest: Wrapper<MlbDraftLatestRow[], MlbDraftLatestParams> = (params: WrapperParams = {}) => callFlat(DRAFT_LATEST_DEF, params);
 /** snake_case alias of {@link mlbDraftLatest} (py/R parity). */
@@ -845,12 +860,13 @@ const DRAFT_PROSPECTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/draft/prospects/{year}`
  *
- * @param params.year - path parameter.
- * @param params.scouting_report - query parameter (`scoutingReport`).
- * @param params.limit - query parameter — default `100`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.year - `number | string` — the `{year}` path segment.
+ * @param params.scouting_report - `number | string` — the `scoutingReport` query parameter.
+ * @param params.limit - `number | string` — the `limit` query parameter; default `100`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbDraftProspects({ year: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbDraftProspects: Wrapper<Row[], MlbDraftProspectsParams> = (params: WrapperParams = {}) => callFlat(DRAFT_PROSPECTS_DEF, params);
 /** snake_case alias of {@link mlbDraftProspects} (py/R parity). */
@@ -891,13 +907,14 @@ const FREE_AGENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/people/freeAgents`
  *
- * @param params.season - query parameter.
- * @param params.order - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.order - `number | string` — the `order` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbFreeAgentsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbFreeAgents({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbFreeAgents: Wrapper<MlbFreeAgentsRow[], MlbFreeAgentsParams> = (params: WrapperParams = {}) => callFlat(FREE_AGENTS_DEF, params);
 /** snake_case alias of {@link mlbFreeAgents} (py/R parity). */
@@ -934,12 +951,13 @@ const GAME_CHANGES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/changes`
  *
- * @param params.updated_since - query parameter (`updatedSince`).
- * @param params.sport_id - query parameter (`sportId`).
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.updated_since - `number | string` — the `updatedSince` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbGameChangesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbGameChanges({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbGameChanges: Wrapper<MlbGameChangesRow[], MlbGameChangesParams> = (params: WrapperParams = {}) => callFlat(GAME_CHANGES_DEF, params);
 /** snake_case alias of {@link mlbGameChanges} (py/R parity). */
@@ -975,12 +993,13 @@ const GAME_COLOR_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/color`
  *
- * @param params.game_pk - path parameter.
- * @param params.timecode - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.timecode - `number | string` — the `timecode` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbGameColor({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbGameColor: Wrapper<Row[], MlbGameColorParams> = (params: WrapperParams = {}) => callFlat(GAME_COLOR_DEF, params);
 /** snake_case alias of {@link mlbGameColor} (py/R parity). */
@@ -1016,12 +1035,13 @@ const GAME_COLOR_DIFF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/color/diffPatch`
  *
- * @param params.game_pk - path parameter.
- * @param params.start_timecode - query parameter (`startTimecode`).
- * @param params.end_timecode - query parameter (`endTimecode`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.start_timecode - `number | string` — the `startTimecode` query parameter.
+ * @param params.end_timecode - `number | string` — the `endTimecode` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbGameColorDiff({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbGameColorDiff: Wrapper<Row[], MlbGameColorDiffParams> = (params: WrapperParams = {}) => callFlat(GAME_COLOR_DIFF_DEF, params);
 /** snake_case alias of {@link mlbGameColorDiff} (py/R parity). */
@@ -1048,10 +1068,11 @@ const GAME_COLOR_TIMESTAMPS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/color/timestamps`
  *
- * @param params.game_pk - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbGameColorTimestamps({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbGameColorTimestamps: Wrapper<Row[], MlbGameColorTimestampsParams> = (params: WrapperParams = {}) => callFlat(GAME_COLOR_TIMESTAMPS_DEF, params);
 /** snake_case alias of {@link mlbGameColorTimestamps} (py/R parity). */
@@ -1079,10 +1100,11 @@ const GAME_CONTENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/content`
  *
- * @param params.game_pk - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbGameContent({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbGameContent: Wrapper<Row[], MlbGameContentParams> = (params: WrapperParams = {}) => callFlat(GAME_CONTENT_DEF, params);
 /** snake_case alias of {@link mlbGameContent} (py/R parity). */
@@ -1115,11 +1137,12 @@ const GAME_CONTEXT_METRICS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/contextMetrics`
  *
- * @param params.game_pk - path parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbGameContextMetrics({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbGameContextMetrics: Wrapper<Row[], MlbGameContextMetricsParams> = (params: WrapperParams = {}) => callFlat(GAME_CONTEXT_METRICS_DEF, params);
 /** snake_case alias of {@link mlbGameContextMetrics} (py/R parity). */
@@ -1179,18 +1202,19 @@ const GAME_GUIDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/guids`
  *
- * @param params.game_pk - path parameter.
- * @param params.game_mode_id - query parameter (`gameModeId`).
- * @param params.updated_since - query parameter (`updatedSince`).
- * @param params.is_pitch - query parameter (`isPitch`).
- * @param params.is_hit - query parameter (`isHit`).
- * @param params.is_pickoff - query parameter (`isPickoff`).
- * @param params.hydrate - query parameter.
- * @param params.parsed_raw - query parameter (`parsed/raw`).
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.game_mode_id - `number | string` — the `gameModeId` query parameter.
+ * @param params.updated_since - `number | string` — the `updatedSince` query parameter.
+ * @param params.is_pitch - `number | string` — the `isPitch` query parameter.
+ * @param params.is_hit - `number | string` — the `isHit` query parameter.
+ * @param params.is_pickoff - `number | string` — the `isPickoff` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.parsed_raw - `number | string` — the `parsed/raw` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbGameGuids({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbGameGuids: Wrapper<Row[], MlbGameGuidsParams> = (params: WrapperParams = {}) => callFlat(GAME_GUIDS_DEF, params);
 /** snake_case alias of {@link mlbGameGuids} (py/R parity). */
@@ -1263,21 +1287,22 @@ const GAME_PACE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/gamePace`
  *
- * @param params.season - query parameter.
- * @param params.team_ids - query parameter (`teamIds`).
- * @param params.league_ids - query parameter (`leagueIds`).
- * @param params.league_list_id - query parameter (`leagueListId`).
- * @param params.sport_id - query parameter (`sportId`).
- * @param params.game_type - query parameter (`gameType`).
- * @param params.start_date - query parameter (`startDate`).
- * @param params.end_date - query parameter (`endDate`).
- * @param params.venue_ids - query parameter (`venueIds`).
- * @param params.org_type - query parameter (`orgType`).
- * @param params.include_children - query parameter (`includeChildren`).
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.team_ids - `number | string` — the `teamIds` query parameter.
+ * @param params.league_ids - `number | string` — the `leagueIds` query parameter.
+ * @param params.league_list_id - `number | string` — the `leagueListId` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter.
+ * @param params.game_type - `number | string` — the `gameType` query parameter.
+ * @param params.start_date - `number | string` — the `startDate` query parameter.
+ * @param params.end_date - `number | string` — the `endDate` query parameter.
+ * @param params.venue_ids - `number | string` — the `venueIds` query parameter.
+ * @param params.org_type - `number | string` — the `orgType` query parameter.
+ * @param params.include_children - `boolean` — the `includeChildren` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbGamePaceRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbGamePace({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbGamePace: Wrapper<MlbGamePaceRow[], MlbGamePaceParams> = (params: WrapperParams = {}) => callFlat(GAME_PACE_DEF, params);
 /** snake_case alias of {@link mlbGamePace} (py/R parity). */
@@ -1305,10 +1330,11 @@ const GAME_TIMESTAMPS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1.1/game/{game_pk}/feed/live/timestamps`
  *
- * @param params.game_pk - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbGameTimestampsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbGameTimestamps({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbGameTimestamps: Wrapper<MlbGameTimestampsRow[], MlbGameTimestampsParams> = (params: WrapperParams = {}) => callFlat(GAME_TIMESTAMPS_DEF, params);
 /** snake_case alias of {@link mlbGameTimestamps} (py/R parity). */
@@ -1373,19 +1399,20 @@ const HIGH_LOW_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/highLow/{org_type}`
  *
- * @param params.org_type - path parameter.
- * @param params.stat_group - query parameter (`statGroup`).
- * @param params.sort_stat - query parameter (`sortStat`).
- * @param params.season - query parameter.
- * @param params.game_type - query parameter (`gameType`).
- * @param params.team_id - query parameter (`teamId`).
- * @param params.league_id - query parameter (`leagueId`).
- * @param params.sport_ids - query parameter (`sportIds`).
- * @param params.limit - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.org_type - `number | string` — the `{org_type}` path segment.
+ * @param params.stat_group - `number | string` — the `statGroup` query parameter.
+ * @param params.sort_stat - `number | string` — the `sortStat` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.game_type - `number | string` — the `gameType` query parameter.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.league_id - `number | string` — the `leagueId` query parameter.
+ * @param params.sport_ids - `number | string` — the `sportIds` query parameter.
+ * @param params.limit - `number | string` — the `limit` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbHighLowRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbHighLow({ org_type: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbHighLow: Wrapper<MlbHighLowRow[], MlbHighLowParams> = (params: WrapperParams = {}) => callFlat(HIGH_LOW_DEF, params);
 /** snake_case alias of {@link mlbHighLow} (py/R parity). */
@@ -1418,11 +1445,12 @@ const HOME_RUN_DERBY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/homeRunDerby/{game_pk}`
  *
- * @param params.game_pk - path parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbHomeRunDerbyRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbHomeRunDerby({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbHomeRunDerby: Wrapper<MlbHomeRunDerbyRow[], MlbHomeRunDerbyParams> = (params: WrapperParams = {}) => callFlat(HOME_RUN_DERBY_DEF, params);
 /** snake_case alias of {@link mlbHomeRunDerby} (py/R parity). */
@@ -1455,11 +1483,12 @@ const HOME_RUN_DERBY_BRACKET_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/homeRunDerby/{game_pk}/bracket`
  *
- * @param params.game_pk - path parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbHomeRunDerbyBracketRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbHomeRunDerbyBracket({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbHomeRunDerbyBracket: Wrapper<MlbHomeRunDerbyBracketRow[], MlbHomeRunDerbyBracketParams> = (params: WrapperParams = {}) => callFlat(HOME_RUN_DERBY_BRACKET_DEF, params);
 /** snake_case alias of {@link mlbHomeRunDerbyBracket} (py/R parity). */
@@ -1492,11 +1521,12 @@ const HOME_RUN_DERBY_POOL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/homeRunDerby/{game_pk}/pool`
  *
- * @param params.game_pk - path parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbHomeRunDerbyPoolRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbHomeRunDerbyPool({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbHomeRunDerbyPool: Wrapper<MlbHomeRunDerbyPoolRow[], MlbHomeRunDerbyPoolParams> = (params: WrapperParams = {}) => callFlat(HOME_RUN_DERBY_POOL_DEF, params);
 /** snake_case alias of {@link mlbHomeRunDerbyPool} (py/R parity). */
@@ -1537,13 +1567,14 @@ const JOBS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/jobs`
  *
- * @param params.job_type - query parameter (`jobType`).
- * @param params.sport_id - query parameter (`sportId`).
- * @param params.date - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.job_type - `number | string` — the `jobType` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbJobsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbJobs({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbJobs: Wrapper<MlbJobsRow[], MlbJobsParams> = (params: WrapperParams = {}) => callFlat(JOBS_DEF, params);
 /** snake_case alias of {@link mlbJobs} (py/R parity). */
@@ -1581,12 +1612,13 @@ const LEAGUES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/leagues`
  *
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.season - query parameter.
- * @param params.league_ids - query parameter (`leagueIds`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league_ids - `number | string | ReadonlyArray<number | string>` — the `leagueIds` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbLeaguesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbLeagues({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbLeagues: Wrapper<MlbLeaguesRow[], MlbLeaguesParams> = (params: WrapperParams = {}) => callFlat(LEAGUES_DEF, params);
 /** snake_case alias of {@link mlbLeagues} (py/R parity). */
@@ -1623,12 +1655,13 @@ const LINESCORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/linescore`
  *
- * @param params.game_pk - path parameter.
- * @param params.timecode - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.timecode - `number | string` — the `timecode` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbLinescoreRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbLinescore({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbLinescore: Wrapper<MlbLinescoreRow[], MlbLinescoreParams> = (params: WrapperParams = {}) => callFlat(LINESCORE_DEF, params);
 /** snake_case alias of {@link mlbLinescore} (py/R parity). */
@@ -1656,10 +1689,11 @@ const META_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/{meta_type}`
  *
- * @param params.meta_type - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.meta_type - `number | string` — the `{meta_type}` path segment.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbMeta({ meta_type: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbMeta: Wrapper<Row[], MlbMetaParams> = (params: WrapperParams = {}) => callFlat(META_DEF, params);
 /** snake_case alias of {@link mlbMeta} (py/R parity). */
@@ -1700,13 +1734,14 @@ const OFFICIAL_SCORERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/jobs/officialScorers`
  *
- * @param params.sport_id - query parameter (`sportId`).
- * @param params.date - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbOfficialScorersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbOfficialScorers({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbOfficialScorers: Wrapper<MlbOfficialScorersRow[], MlbOfficialScorersParams> = (params: WrapperParams = {}) => callFlat(OFFICIAL_SCORERS_DEF, params);
 /** snake_case alias of {@link mlbOfficialScorers} (py/R parity). */
@@ -1751,14 +1786,15 @@ const PBP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1.1/game/{game_pk}/feed/live`
  *
- * @param params.game_pk - path parameter.
- * @param params.language - query parameter.
- * @param params.timecode - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.language - `number | string` — the `language` query parameter.
+ * @param params.timecode - `number | string` — the `timecode` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbPbp({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbPbp: Wrapper<Row[], MlbPbpParams> = (params: WrapperParams = {}) => callFlat(PBP_DEF, params);
 /** snake_case alias of {@link mlbPbp} (py/R parity). */
@@ -1794,12 +1830,13 @@ const PBP_DIFF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/live/diffPatch`
  *
- * @param params.game_pk - path parameter.
- * @param params.start_timecode - query parameter (`startTimecode`).
- * @param params.end_timecode - query parameter (`endTimecode`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.start_timecode - `number | string` — the `startTimecode` query parameter.
+ * @param params.end_timecode - `number | string` — the `endTimecode` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbPbpDiff({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbPbpDiff: Wrapper<Row[], MlbPbpDiffParams> = (params: WrapperParams = {}) => callFlat(PBP_DIFF_DEF, params);
 /** snake_case alias of {@link mlbPbpDiff} (py/R parity). */
@@ -1836,12 +1873,13 @@ const PEOPLE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/people`
  *
- * @param params.person_ids - query parameter (`personIds`).
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.person_ids - `number | string | ReadonlyArray<number | string>` — the `personIds` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbPeopleRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbPeople({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbPeople: Wrapper<MlbPeopleRow[], MlbPeopleParams> = (params: WrapperParams = {}) => callFlat(PEOPLE_DEF, params);
 /** snake_case alias of {@link mlbPeople} (py/R parity). */
@@ -1882,13 +1920,14 @@ const PERSON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/people/{person_id}`
  *
- * @param params.person_id - path parameter.
- * @param params.season - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.person_id - `number | string` — the `{person_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbPersonRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbPerson({ person_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbPerson: Wrapper<MlbPersonRow[], MlbPersonParams> = (params: WrapperParams = {}) => callFlat(PERSON_DEF, params);
 /** snake_case alias of {@link mlbPerson} (py/R parity). */
@@ -1924,12 +1963,13 @@ const PERSON_GAME_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/people/{person_id}/stats/game/{game_pk}`
  *
- * @param params.person_id - path parameter.
- * @param params.game_pk - path parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.person_id - `number | string` — the `{person_id}` path segment.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbPersonGameStatsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbPersonGameStats({ person_id: '…', game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbPersonGameStats: Wrapper<MlbPersonGameStatsRow[], MlbPersonGameStatsParams> = (params: WrapperParams = {}) => callFlat(PERSON_GAME_STATS_DEF, params);
 /** snake_case alias of {@link mlbPersonGameStats} (py/R parity). */
@@ -1982,16 +2022,17 @@ const PERSON_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/people/{person_id}/stats`
  *
- * @param params.person_id - path parameter.
- * @param params.stats - query parameter — default `season`.
- * @param params.group - query parameter.
- * @param params.season - query parameter.
- * @param params.sport_id - query parameter (`sportId`).
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.person_id - `number | string` — the `{person_id}` path segment.
+ * @param params.stats - `number | string` — the `stats` query parameter; default `season`.
+ * @param params.group - `number | string` — the `group` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbPersonStats({ person_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbPersonStats: Wrapper<Row[], MlbPersonStatsParams> = (params: WrapperParams = {}) => callFlat(PERSON_STATS_DEF, params);
 /** snake_case alias of {@link mlbPersonStats} (py/R parity). */
@@ -2030,13 +2071,14 @@ const PLAY_ANALYTICS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/{guid}/analytics`
  *
- * @param params.game_pk - path parameter.
- * @param params.guid - path parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.guid - `number | string` — the `{guid}` path segment.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbPlayAnalytics({ game_pk: '…', guid: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbPlayAnalytics: Wrapper<Row[], MlbPlayAnalyticsParams> = (params: WrapperParams = {}) => callFlat(PLAY_ANALYTICS_DEF, params);
 /** snake_case alias of {@link mlbPlayAnalytics} (py/R parity). */
@@ -2073,12 +2115,13 @@ const PLAY_BY_PLAY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/playByPlay`
  *
- * @param params.game_pk - path parameter.
- * @param params.timecode - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.timecode - `number | string` — the `timecode` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbPlayByPlayRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbPlayByPlay({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbPlayByPlay: Wrapper<MlbPlayByPlayRow[], MlbPlayByPlayParams> = (params: WrapperParams = {}) => callFlat(PLAY_BY_PLAY_DEF, params);
 /** snake_case alias of {@link mlbPlayByPlay} (py/R parity). */
@@ -2113,12 +2156,13 @@ const PLAY_CONTEXT_METRICS_AVERAGES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/{guid}/contextMetricsAverages`
  *
- * @param params.game_pk - path parameter.
- * @param params.guid - path parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.guid - `number | string` — the `{guid}` path segment.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbPlayContextMetricsAverages({ game_pk: '…', guid: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbPlayContextMetricsAverages: Wrapper<Row[], MlbPlayContextMetricsAveragesParams> = (params: WrapperParams = {}) => callFlat(PLAY_CONTEXT_METRICS_AVERAGES_DEF, params);
 /** snake_case alias of {@link mlbPlayContextMetricsAverages} (py/R parity). */
@@ -2179,18 +2223,19 @@ const SCHEDULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/schedule`
  *
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.date - query parameter.
- * @param params.season - query parameter.
- * @param params.team_id - query parameter (`teamId`).
- * @param params.start_date - query parameter (`startDate`).
- * @param params.end_date - query parameter (`endDate`).
- * @param params.game_type - query parameter (`gameType`).
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.start_date - `number | string` — the `startDate` query parameter.
+ * @param params.end_date - `number | string` — the `endDate` query parameter.
+ * @param params.game_type - `number | string` — the `gameType` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbSchedule({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbSchedule: Wrapper<Row[], MlbScheduleParams> = (params: WrapperParams = {}) => callFlat(SCHEDULE_DEF, params);
 /** snake_case alias of {@link mlbSchedule} (py/R parity). */
@@ -2228,12 +2273,13 @@ const SCHEDULE_POSTSEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/schedule/postseason`
  *
- * @param params.season - query parameter.
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.hydrate - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbSchedulePostseasonRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbSchedulePostseason({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbSchedulePostseason: Wrapper<MlbSchedulePostseasonRow[], MlbSchedulePostseasonParams> = (params: WrapperParams = {}) => callFlat(SCHEDULE_POSTSEASON_DEF, params);
 /** snake_case alias of {@link mlbSchedulePostseason} (py/R parity). */
@@ -2282,15 +2328,16 @@ const SCHEDULE_POSTSEASON_SERIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/schedule/postseason/series`
  *
- * @param params.game_types - query parameter (`gameTypes`).
- * @param params.series_number - query parameter (`seriesNumber`).
- * @param params.team_id - query parameter (`teamId`).
- * @param params.sport_id - query parameter (`sportId`).
- * @param params.season - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_types - `number | string` — the `gameTypes` query parameter.
+ * @param params.series_number - `number | string` — the `seriesNumber` query parameter.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbSchedulePostseasonSeriesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbSchedulePostseasonSeries({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbSchedulePostseasonSeries: Wrapper<MlbSchedulePostseasonSeriesRow[], MlbSchedulePostseasonSeriesParams> = (params: WrapperParams = {}) => callFlat(SCHEDULE_POSTSEASON_SERIES_DEF, params);
 /** snake_case alias of {@link mlbSchedulePostseasonSeries} (py/R parity). */
@@ -2335,14 +2382,15 @@ const SCHEDULE_POSTSEASON_TUNEIN_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/schedule/postseason/tuneIn`
  *
- * @param params.team_id - query parameter (`teamId`).
- * @param params.sport_id - query parameter (`sportId`).
- * @param params.season - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbSchedulePostseasonTunein({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbSchedulePostseasonTunein: Wrapper<Row[], MlbSchedulePostseasonTuneinParams> = (params: WrapperParams = {}) => callFlat(SCHEDULE_POSTSEASON_TUNEIN_DEF, params);
 /** snake_case alias of {@link mlbSchedulePostseasonTunein} (py/R parity). */
@@ -2383,13 +2431,14 @@ const SCHEDULE_TIED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/schedule/games/tied`
  *
- * @param params.game_types - query parameter (`gameTypes`).
- * @param params.season - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_types - `number | string` — the `gameTypes` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbScheduleTiedRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbScheduleTied({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbScheduleTied: Wrapper<MlbScheduleTiedRow[], MlbScheduleTiedParams> = (params: WrapperParams = {}) => callFlat(SCHEDULE_TIED_DEF, params);
 /** snake_case alias of {@link mlbScheduleTied} (py/R parity). */
@@ -2423,11 +2472,12 @@ const SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/seasons/{season_id}`
  *
- * @param params.season_id - path parameter.
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season_id - `number | string` — the `{season_id}` path segment.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbSeasonRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbSeason({ season_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbSeason: Wrapper<MlbSeasonRow[], MlbSeasonParams> = (params: WrapperParams = {}) => callFlat(SEASON_DEF, params);
 /** snake_case alias of {@link mlbSeason} (py/R parity). */
@@ -2464,12 +2514,13 @@ const SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/seasons`
  *
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.season - query parameter.
- * @param params.all_seasons - query parameter (`all`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.all_seasons - `number | string` — the `all` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbSeasons({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbSeasons: Wrapper<Row[], MlbSeasonsParams> = (params: WrapperParams = {}) => callFlat(SEASONS_DEF, params);
 /** snake_case alias of {@link mlbSeasons} (py/R parity). */
@@ -2514,14 +2565,15 @@ const SEASONS_ALL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/seasons/all`
  *
- * @param params.division_id - query parameter (`divisionId`).
- * @param params.league_id - query parameter (`leagueId`).
- * @param params.with_game_type_dates - query parameter (`withGameTypeDates`).
- * @param params.sport_id - query parameter (`sportId`).
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.division_id - `number | string` — the `divisionId` query parameter.
+ * @param params.league_id - `number | string` — the `leagueId` query parameter.
+ * @param params.with_game_type_dates - `number | string` — the `withGameTypeDates` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbSeasonsAllRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbSeasonsAll({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbSeasonsAll: Wrapper<MlbSeasonsAllRow[], MlbSeasonsAllParams> = (params: WrapperParams = {}) => callFlat(SEASONS_ALL_DEF, params);
 /** snake_case alias of {@link mlbSeasonsAll} (py/R parity). */
@@ -2554,11 +2606,12 @@ const SPORT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/sports/{sport_id}`
  *
- * @param params.sport_id - path parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — the `{sport_id}` path segment.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbSportRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbSport({ sport_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbSport: Wrapper<MlbSportRow[], MlbSportParams> = (params: WrapperParams = {}) => callFlat(SPORT_DEF, params);
 /** snake_case alias of {@link mlbSport} (py/R parity). */
@@ -2601,13 +2654,14 @@ const SPORT_PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/sports/{sport_id}/players`
  *
- * @param params.sport_id - path parameter *(optional)*.
- * @param params.season - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — the `{sport_id}` path segment; optional; default `1`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbSportPlayersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbSportPlayers({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbSportPlayers: Wrapper<MlbSportPlayersRow[], MlbSportPlayersParams> = (params: WrapperParams = {}) => callFlat(SPORT_PLAYERS_DEF, params);
 /** snake_case alias of {@link mlbSportPlayers} (py/R parity). */
@@ -2636,10 +2690,11 @@ const SPORTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/sports`
  *
- * @param params.sport_id - query parameter (`sportId`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbSportsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbSports({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbSports: Wrapper<MlbSportsRow[], MlbSportsParams> = (params: WrapperParams = {}) => callFlat(SPORTS_DEF, params);
 /** snake_case alias of {@link mlbSports} (py/R parity). */
@@ -2684,14 +2739,15 @@ const STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/standings`
  *
- * @param params.league_id - query parameter (`leagueId`) — default `103,104`.
- * @param params.season - query parameter.
- * @param params.standings_types - query parameter (`standingsTypes`).
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.league_id - `number | string` — the `leagueId` query parameter; default `103,104`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.standings_types - `number | string` — the `standingsTypes` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStandings({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbStandings: Wrapper<Row[], MlbStandingsParams> = (params: WrapperParams = {}) => callFlat(STANDINGS_DEF, params);
 /** snake_case alias of {@link mlbStandings} (py/R parity). */
@@ -2762,20 +2818,21 @@ const STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/stats`
  *
- * @param params.stats - query parameter.
- * @param params.group - query parameter.
- * @param params.season - query parameter.
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.league_id - query parameter (`leagueId`).
- * @param params.team_id - query parameter (`teamId`).
- * @param params.player_pool - query parameter (`playerPool`).
- * @param params.game_type - query parameter (`gameType`).
- * @param params.limit - query parameter — default `50`.
- * @param params.offset - query parameter — default `0`.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.stats - `number | string` — the `stats` query parameter.
+ * @param params.group - `number | string` — the `group` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.league_id - `number | string` — the `leagueId` query parameter.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.player_pool - `number | string` — the `playerPool` query parameter.
+ * @param params.game_type - `number | string` — the `gameType` query parameter.
+ * @param params.limit - `number | string` — the `limit` query parameter; default `50`.
+ * @param params.offset - `number | string` — the `offset` query parameter; default `0`.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStats({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbStats: Wrapper<Row[], MlbStatsParams> = (params: WrapperParams = {}) => callFlat(STATS_DEF, params);
 /** snake_case alias of {@link mlbStats} (py/R parity). */
@@ -2829,16 +2886,17 @@ const STATS_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/stats/leaders`
  *
- * @param params.leader_categories - query parameter (`leaderCategories`).
- * @param params.season - query parameter.
- * @param params.leader_game_types - query parameter (`leaderGameTypes`).
- * @param params.stat_group - query parameter (`statGroup`).
- * @param params.league_id - query parameter (`leagueId`).
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.limit - query parameter — default `10`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.leader_categories - `number | string` — the `leaderCategories` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.leader_game_types - `number | string` — the `leaderGameTypes` query parameter.
+ * @param params.stat_group - `number | string` — the `statGroup` query parameter.
+ * @param params.league_id - `number | string` — the `leagueId` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.limit - `number | string` — the `limit` query parameter; default `10`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatsLeaders({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbStatsLeaders: Wrapper<Row[], MlbStatsLeadersParams> = (params: WrapperParams = {}) => callFlat(STATS_LEADERS_DEF, params);
 /** snake_case alias of {@link mlbStatsLeaders} (py/R parity). */
@@ -2922,24 +2980,25 @@ const STATS_METRICS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/stats/metrics`
  *
- * @param params.stats - query parameter.
- * @param params.group - query parameter.
- * @param params.game_type - query parameter (`gameType`).
- * @param params.season - query parameter.
- * @param params.start_date - query parameter (`startDate`).
- * @param params.end_date - query parameter (`endDate`).
- * @param params.venue_id - query parameter (`venueId`).
- * @param params.min_occurrences - query parameter (`minOccurrences`).
- * @param params.percentile - query parameter.
- * @param params.person_id - query parameter (`personId`).
- * @param params.team_id - query parameter (`teamId`).
- * @param params.limit - query parameter.
- * @param params.offset - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.stats - `number | string` — the `stats` query parameter.
+ * @param params.group - `number | string` — the `group` query parameter.
+ * @param params.game_type - `number | string` — the `gameType` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.start_date - `number | string` — the `startDate` query parameter.
+ * @param params.end_date - `number | string` — the `endDate` query parameter.
+ * @param params.venue_id - `number | string` — the `venueId` query parameter.
+ * @param params.min_occurrences - `number | string` — the `minOccurrences` query parameter.
+ * @param params.percentile - `number | string` — the `percentile` query parameter.
+ * @param params.person_id - `number | string` — the `personId` query parameter.
+ * @param params.team_id - `number | string` — the `teamId` query parameter.
+ * @param params.limit - `number | string` — the `limit` query parameter.
+ * @param params.offset - `number | string` — the `offset` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatsMetrics({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbStatsMetrics: Wrapper<Row[], MlbStatsMetricsParams> = (params: WrapperParams = {}) => callFlat(STATS_METRICS_DEF, params);
 /** snake_case alias of {@link mlbStatsMetrics} (py/R parity). */
@@ -2989,15 +3048,16 @@ const STATS_STREAKS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/stats/streaks`
  *
- * @param params.streak_type - query parameter (`streakType`).
- * @param params.streak_threshold - query parameter (`streakThreshold`) — default `1`.
- * @param params.season - query parameter.
- * @param params.stat_group - query parameter (`statGroup`).
- * @param params.active_streak - query parameter (`activeStreak`).
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.streak_type - `number | string` — the `streakType` query parameter.
+ * @param params.streak_threshold - `number | string` — the `streakThreshold` query parameter; default `1`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.stat_group - `number | string` — the `statGroup` query parameter.
+ * @param params.active_streak - `number | string` — the `activeStreak` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbStatsStreaks({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbStatsStreaks: Wrapper<Row[], MlbStatsStreaksParams> = (params: WrapperParams = {}) => callFlat(STATS_STREAKS_DEF, params);
 /** snake_case alias of {@link mlbStatsStreaks} (py/R parity). */
@@ -3043,14 +3103,15 @@ const TEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams/{team_id}`
  *
- * @param params.team_id - path parameter.
- * @param params.season - query parameter.
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbTeamRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeam({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeam: Wrapper<MlbTeamRow[], MlbTeamParams> = (params: WrapperParams = {}) => callFlat(TEAM_DEF, params);
 /** snake_case alias of {@link mlbTeam} (py/R parity). */
@@ -3092,13 +3153,14 @@ const TEAM_AFFILIATES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams/affiliates`
  *
- * @param params.team_ids - query parameter (`teamIds`).
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.season - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_ids - `number | string | ReadonlyArray<number | string>` — the `teamIds` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbTeamAffiliatesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeamAffiliates({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeamAffiliates: Wrapper<MlbTeamAffiliatesRow[], MlbTeamAffiliatesParams> = (params: WrapperParams = {}) => callFlat(TEAM_AFFILIATES_DEF, params);
 /** snake_case alias of {@link mlbTeamAffiliates} (py/R parity). */
@@ -3140,13 +3202,14 @@ const TEAM_ALUMNI_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams/{team_id}/alumni`
  *
- * @param params.team_id - path parameter.
- * @param params.season - query parameter.
- * @param params.group - query parameter — default `hitting`.
- * @param params.hydrate - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.group - `number | string` — the `group` query parameter; default `hitting`.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbTeamAlumniRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeamAlumni({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeamAlumni: Wrapper<MlbTeamAlumniRow[], MlbTeamAlumniParams> = (params: WrapperParams = {}) => callFlat(TEAM_ALUMNI_DEF, params);
 /** snake_case alias of {@link mlbTeamAlumni} (py/R parity). */
@@ -3187,13 +3250,14 @@ const TEAM_COACHES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams/{team_id}/coaches`
  *
- * @param params.team_id - path parameter.
- * @param params.season - query parameter.
- * @param params.date - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbTeamCoachesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeamCoaches({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeamCoaches: Wrapper<MlbTeamCoachesRow[], MlbTeamCoachesParams> = (params: WrapperParams = {}) => callFlat(TEAM_COACHES_DEF, params);
 /** snake_case alias of {@link mlbTeamCoaches} (py/R parity). */
@@ -3238,14 +3302,15 @@ const TEAM_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams/{team_id}/leaders`
  *
- * @param params.team_id - path parameter.
- * @param params.leader_categories - query parameter (`leaderCategories`).
- * @param params.season - query parameter.
- * @param params.leader_game_types - query parameter (`leaderGameTypes`).
- * @param params.limit - query parameter — default `10`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.leader_categories - `number | string` — the `leaderCategories` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.leader_game_types - `number | string` — the `leaderGameTypes` query parameter.
+ * @param params.limit - `number | string` — the `limit` query parameter; default `10`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeamLeaders({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeamLeaders: Wrapper<Row[], MlbTeamLeadersParams> = (params: WrapperParams = {}) => callFlat(TEAM_LEADERS_DEF, params);
 /** snake_case alias of {@link mlbTeamLeaders} (py/R parity). */
@@ -3282,12 +3347,13 @@ const TEAM_PERSONNEL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams/{team_id}/personnel`
  *
- * @param params.team_id - path parameter.
- * @param params.date - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbTeamPersonnelRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeamPersonnel({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeamPersonnel: Wrapper<MlbTeamPersonnelRow[], MlbTeamPersonnelParams> = (params: WrapperParams = {}) => callFlat(TEAM_PERSONNEL_DEF, params);
 /** snake_case alias of {@link mlbTeamPersonnel} (py/R parity). */
@@ -3337,15 +3403,16 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams/{team_id}/roster`
  *
- * @param params.team_id - path parameter.
- * @param params.season - query parameter.
- * @param params.roster_type - query parameter (`rosterType`) — default `active`.
- * @param params.date - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.roster_type - `number | string` — the `rosterType` query parameter; default `active`.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbTeamRosterRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeamRoster({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeamRoster: Wrapper<MlbTeamRosterRow[], MlbTeamRosterParams> = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_DEF, params);
 /** snake_case alias of {@link mlbTeamRoster} (py/R parity). */
@@ -3393,15 +3460,16 @@ const TEAM_ROSTER_TYPE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams/{team_id}/roster/{roster_type}`
  *
- * @param params.team_id - path parameter.
- * @param params.roster_type - path parameter.
- * @param params.season - query parameter.
- * @param params.date - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.roster_type - `number | string` — the `{roster_type}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.date - `number | string` — the `date` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeamRosterType({ team_id: '…', roster_type: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeamRosterType: Wrapper<Row[], MlbTeamRosterTypeParams> = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_TYPE_DEF, params);
 /** snake_case alias of {@link mlbTeamRosterType} (py/R parity). */
@@ -3455,16 +3523,17 @@ const TEAM_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams/{team_id}/stats`
  *
- * @param params.team_id - path parameter.
- * @param params.season - query parameter.
- * @param params.stats - query parameter — default `season`.
- * @param params.group - query parameter — default `hitting`.
- * @param params.sport_ids - query parameter (`sportIds`).
- * @param params.game_type - query parameter (`gameType`).
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_id - `number | string` — the `{team_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.stats - `number | string` — the `stats` query parameter; default `season`.
+ * @param params.group - `number | string` — the `group` query parameter; default `hitting`.
+ * @param params.sport_ids - `number | string | ReadonlyArray<number | string>` — the `sportIds` query parameter.
+ * @param params.game_type - `number | string` — the `gameType` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeamStats({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeamStats: Wrapper<Row[], MlbTeamStatsParams> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link mlbTeamStats} (py/R parity). */
@@ -3513,15 +3582,16 @@ const TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams`
  *
- * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.season - query parameter.
- * @param params.league_ids - query parameter (`leagueIds`).
- * @param params.active_status - query parameter (`activeStatus`).
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter; default `1`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league_ids - `number | string | ReadonlyArray<number | string>` — the `leagueIds` query parameter.
+ * @param params.active_status - `number | string` — the `activeStatus` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeams({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeams: Wrapper<Row[], MlbTeamsParams> = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
 /** snake_case alias of {@link mlbTeams} (py/R parity). */
@@ -3562,13 +3632,14 @@ const TEAMS_HISTORY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams/history`
  *
- * @param params.team_ids - query parameter (`teamIds`).
- * @param params.start_season - query parameter (`startSeason`).
- * @param params.end_season - query parameter (`endSeason`).
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.team_ids - `number | string` — the `teamIds` query parameter.
+ * @param params.start_season - `number | string` — the `startSeason` query parameter.
+ * @param params.end_season - `number | string` — the `endSeason` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbTeamsHistoryRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeamsHistory({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeamsHistory: Wrapper<MlbTeamsHistoryRow[], MlbTeamsHistoryParams> = (params: WrapperParams = {}) => callFlat(TEAMS_HISTORY_DEF, params);
 /** snake_case alias of {@link mlbTeamsHistory} (py/R parity). */
@@ -3625,17 +3696,18 @@ const TEAMS_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams/stats`
  *
- * @param params.season - query parameter.
- * @param params.sport_ids - query parameter (`sportIds`).
- * @param params.stat_group - query parameter (`group`).
- * @param params.game_type - query parameter (`gameType`).
- * @param params.stats - query parameter.
- * @param params.order - query parameter.
- * @param params.sort_stat - query parameter (`sortStat`).
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.sport_ids - `number | string` — the `sportIds` query parameter.
+ * @param params.stat_group - `number | string` — the `group` query parameter.
+ * @param params.game_type - `number | string` — the `gameType` query parameter.
+ * @param params.stats - `number | string` — the `stats` query parameter.
+ * @param params.order - `number | string` — the `order` query parameter.
+ * @param params.sort_stat - `number | string` — the `sortStat` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeamsStats({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeamsStats: Wrapper<Row[], MlbTeamsStatsParams> = (params: WrapperParams = {}) => callFlat(TEAMS_STATS_DEF, params);
 /** snake_case alias of {@link mlbTeamsStats} (py/R parity). */
@@ -3708,21 +3780,22 @@ const TEAMS_STATS_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/teams/stats/leaders`
  *
- * @param params.leader_categories - query parameter (`leaderCategories`).
- * @param params.sit_codes - query parameter (`sitCodes`).
- * @param params.game_types - query parameter (`gameTypes`).
- * @param params.stat_group - query parameter (`statGroup`).
- * @param params.season - query parameter.
- * @param params.league_ids - query parameter (`leagueIds`).
- * @param params.start_date - query parameter (`startDate`).
- * @param params.end_date - query parameter (`endDate`).
- * @param params.sport_id - query parameter (`sportId`).
- * @param params.hydrate - query parameter.
- * @param params.limit - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.leader_categories - `number | string` — the `leaderCategories` query parameter.
+ * @param params.sit_codes - `number | string` — the `sitCodes` query parameter.
+ * @param params.game_types - `number | string` — the `gameTypes` query parameter.
+ * @param params.stat_group - `number | string` — the `statGroup` query parameter.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.league_ids - `number | string` — the `leagueIds` query parameter.
+ * @param params.start_date - `number | string` — the `startDate` query parameter.
+ * @param params.end_date - `number | string` — the `endDate` query parameter.
+ * @param params.sport_id - `number | string` — the `sportId` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.limit - `number | string` — the `limit` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbTeamsStatsLeadersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbTeamsStatsLeaders({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbTeamsStatsLeaders: Wrapper<MlbTeamsStatsLeadersRow[], MlbTeamsStatsLeadersParams> = (params: WrapperParams = {}) => callFlat(TEAMS_STATS_LEADERS_DEF, params);
 /** snake_case alias of {@link mlbTeamsStatsLeaders} (py/R parity). */
@@ -3762,13 +3835,14 @@ const UMPIRE_GAMES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/jobs/umpires/games/{umpire_id}`
  *
- * @param params.umpire_id - path parameter.
- * @param params.season - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.umpire_id - `number | string` — the `{umpire_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbUmpireGames({ umpire_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbUmpireGames: Wrapper<Row[], MlbUmpireGamesParams> = (params: WrapperParams = {}) => callFlat(UMPIRE_GAMES_DEF, params);
 /** snake_case alias of {@link mlbUmpireGames} (py/R parity). */
@@ -3792,9 +3866,10 @@ const UMPIRES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/jobs/umpires`
  *
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbUmpiresRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbUmpires({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbUmpires: Wrapper<MlbUmpiresRow[], MlbUmpiresParams> = (params: WrapperParams = {}) => callFlat(UMPIRES_DEF, params);
 /** snake_case alias of {@link mlbUmpires} (py/R parity). */
@@ -3831,12 +3906,13 @@ const VENUE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/venues/{venue_id}`
  *
- * @param params.venue_id - path parameter.
- * @param params.season - query parameter.
- * @param params.hydrate - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.venue_id - `number | string` — the `{venue_id}` path segment.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbVenueRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbVenue({ venue_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbVenue: Wrapper<MlbVenueRow[], MlbVenueParams> = (params: WrapperParams = {}) => callFlat(VENUE_DEF, params);
 /** snake_case alias of {@link mlbVenue} (py/R parity). */
@@ -3873,12 +3949,13 @@ const VENUES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/venues`
  *
- * @param params.season - query parameter.
- * @param params.sport_ids - query parameter (`sportIds`).
- * @param params.hydrate - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.season - `number | string` — the `season` query parameter.
+ * @param params.sport_ids - `number | string | ReadonlyArray<number | string>` — the `sportIds` query parameter.
+ * @param params.hydrate - `number | string` — the `hydrate` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbVenuesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbVenues({});
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbVenues: Wrapper<MlbVenuesRow[], MlbVenuesParams> = (params: WrapperParams = {}) => callFlat(VENUES_DEF, params);
 /** snake_case alias of {@link mlbVenues} (py/R parity). */
@@ -3911,11 +3988,12 @@ const WIN_PROBABILITY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/winProbability`
  *
- * @param params.game_pk - path parameter.
- * @param params.fields - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @param params.game_pk - `number | string` — the `{game_pk}` path segment.
+ * @param params.fields - `number | string` — the `fields` query parameter.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<MlbWinProbabilityRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.mlb.mlbWinProbability({ game_pk: '…' });
+ * @see https://js.sportsdataverse.org/docs/mlb/reference/native#native-api--mlb-stats-api
  */
 export const mlbWinProbability: Wrapper<MlbWinProbabilityRow[], MlbWinProbabilityParams> = (params: WrapperParams = {}) => callFlat(WIN_PROBABILITY_DEF, params);
 /** snake_case alias of {@link mlbWinProbability} (py/R parity). */

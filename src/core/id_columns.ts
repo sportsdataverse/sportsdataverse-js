@@ -9,6 +9,10 @@
  * Savant columns holding MLBAM integer ids (players, game): sdv-py's
  * `_MLBAM_ID_COLUMNS` at the vendor pin. Their names do not end in `_id`, so the
  * id rule lists them.
+ *
+ * @remarks `batter`, `pitcher`, `on_1b` / `on_2b` / `on_3b`, `fielder_2` .. `fielder_9` and
+ *   `game_pk` (13 names). `fielder_1`, `fielder_10` and `n_pk` are NOT ids. Re-exported from
+ *   `./int64.ts`.
  */
 export const MLBAM_ID_COLUMNS: readonly string[] = [
   "batter", "pitcher", "on_1b", "on_2b", "on_3b",
@@ -44,6 +48,26 @@ const ID_SEGMENT =
  * `playerId`, `homeTeamId`; dotted `start.team.id`), or it is a listed id column
  * (MLBAM: `batter`, `on_1b`, `game_pk`, ...; stats.nba.com `hid` / `vid`). The one
  * id-name predicate: every surface and the parity harness use it.
+ *
+ * @param name - A column name, possibly dotted (`participants.0.athlete.id`); only the part
+ *   after the last `.` is tested against the segment pattern, the whole name against the
+ *   listed exact ids.
+ * @returns `true` when the column holds ids and must be decimal strings (the v4 id rule).
+ * @remarks Case matters: lower-case `id` must stand alone or touch `_`, camelCase needs the
+ *   capital `I`, so `valid`, `paid`, `idle`, `Idaho`, `width`, `event_idx`, `ID`, `ids`, `pk`
+ *   never match. The only words allowed after `id_` / `_id_` are a number, `started`, `ended`,
+ *   `play`, `drive`; `team_id_source`, `*_sportec_id_overwrite` and `player_id_list` are not
+ *   ids. `tools/codegen/id-columns.mjs` transpiles this file, so the generated row types use
+ *   the same predicate.
+ * @example
+ * ```ts
+ * import { isIdColumn } from "./id_columns.js";
+ * isIdColumn("game_id");         // true
+ * isIdColumn("start.team.id");   // true (last dotted segment)
+ * isIdColumn("homeTeamId");      // true
+ * isIdColumn("game_pk");         // true (listed MLBAM id)
+ * isIdColumn("team_id_source");  // false
+ * ```
  */
 export function isIdColumn(name: string): boolean {
   return ID_SEGMENT.test(name.slice(name.lastIndexOf(".") + 1)) || EXACT_IDS.has(name);

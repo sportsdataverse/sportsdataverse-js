@@ -7,139 +7,139 @@
 
 /** One row of `sdv.nba.loadNbaPbp` (`espn_nba_pbp`; sdv-py loader schema `load_nba_pbp`). */
 export interface LoadNbaPbpRow {
-  /** `Int32` */
+  /** Sequential play number within the game. `Int32` */
   game_play_number?: number | null;
-  /** `Int64` (an id) */
+  /** Id. `Int64` (an id) */
   id?: string | null;
-  /** `Int32` */
+  /** Sequence number representing a shot-possession (V3 PBP). `Int32` */
   sequence_number?: number | null;
-  /** `Int32` (an id) */
+  /** Type identifier (numeric). `Int32` (an id) */
   type_id?: string | null;
-  /** `String` */
+  /** Display text for the type field. `String` */
   type_text?: string | null;
-  /** `String` */
+  /** Text description of the play / record. `String` */
   text?: string | null;
-  /** `Int32` */
+  /** Away team score at the time of the play. `Int32` */
   away_score?: number | null;
-  /** `Int32` */
+  /** Home team score at the time of the play. `Int32` */
   home_score?: number | null;
-  /** `Int32` */
+  /** Numeric period (1-4 for quarters; 5+ for OT). `Int32` */
   period_number?: number | null;
-  /** `String` */
+  /** Period display label (e.g. '1st Quarter', 'OT'). `String` */
   period_display_value?: string | null;
-  /** `String` */
+  /** Game clock display string (e.g. '8:32'). `String` */
   clock_display_value?: string | null;
-  /** `Boolean` */
+  /** TRUE if the play resulted in points scored. `Boolean` */
   scoring_play?: boolean | null;
-  /** `Int32` */
+  /** Point value of the play (2 / 3 / 1). `Int32` */
   score_value?: number | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `Int32` (an id) */
+  /** Primary athlete identifier (e.g. shooter). `Int32` (an id) */
   athlete_id_1?: string | null;
-  /** `Int32` (an id) */
+  /** Secondary athlete identifier (e.g. assister / fouler). `Int32` (an id) */
   athlete_id_2?: string | null;
-  /** `Int32` (an id) */
+  /** Athlete id 3. `Int32` (an id) */
   athlete_id_3?: string | null;
-  /** `String` */
+  /** Wallclock. `String` */
   wallclock?: string | null;
-  /** `Boolean` */
+  /** TRUE if the play was a shooting attempt. `Boolean` */
   shooting_play?: boolean | null;
-  /** `Float64` */
+  /** X coordinate as returned by the API before any adjustment. `Float64` */
   coordinate_x_raw?: number | null;
-  /** `Float64` */
+  /** Y coordinate as returned by the API before any adjustment. `Float64` */
   coordinate_y_raw?: number | null;
-  /** `Int32` */
+  /** Point value attempted on the shot (2 or 3; 1 for a free throw). `Int32` */
   points_attempted?: number | null;
-  /** `String` */
+  /** Short text description of the play from ESPN. `String` */
   short_description?: string | null;
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `Int32` */
   season_type?: number | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for the home team. `Int32` (an id) */
   home_team_id?: string | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team_name?: string | null;
-  /** `String` */
+  /** Home team mascot. `String` */
   home_team_mascot?: string | null;
-  /** `String` */
+  /** Home team three-letter abbreviation. `String` */
   home_team_abbrev?: string | null;
-  /** `String` */
+  /** Alternate home team name. `String` */
   home_team_name_alt?: string | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for the away team. `Int32` (an id) */
   away_team_id?: string | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team_name?: string | null;
-  /** `String` */
+  /** Away team mascot. `String` */
   away_team_mascot?: string | null;
-  /** `String` */
+  /** Away team three-letter abbreviation. `String` */
   away_team_abbrev?: string | null;
-  /** `String` */
+  /** Alternate away team name. `String` */
   away_team_name_alt?: string | null;
-  /** `Float64` */
+  /** Game spread (signed; positive = home favored). `Float64` */
   game_spread?: number | null;
-  /** `Boolean` */
+  /** TRUE if the home team is the betting favorite. `Boolean` */
   home_favorite?: boolean | null;
-  /** `Boolean` */
+  /** TRUE if a point spread was available. `Boolean` */
   game_spread_available?: boolean | null;
-  /** `Float64` */
+  /** Home team's point spread. `Float64` */
   home_team_spread?: number | null;
-  /** `Int32` */
+  /** Quarter (1-4) or OT period (5+). `Int32` */
   qtr?: number | null;
-  /** `String` */
+  /** Time / clock value. `String` */
   time?: string | null;
-  /** `Int32` */
+  /** Clock minutes split out for convenience. `Int32` */
   clock_minutes?: number | null;
-  /** `Float64` */
+  /** Clock seconds split out for convenience. `Float64` */
   clock_seconds?: number | null;
-  /** `Boolean` */
+  /** Whether the play is a timeout called by the home team. `Boolean` */
   home_timeout_called?: boolean | null;
-  /** `Boolean` */
+  /** Whether the play is a timeout called by the away team. `Boolean` */
   away_timeout_called?: boolean | null;
-  /** `Int32` */
+  /** Half of the game (1 or 2). `Int32` */
   half?: number | null;
-  /** `Int32` */
+  /** Half of the game (1 or 2). `Int32` */
   game_half?: number | null;
-  /** `Int32` */
+  /** Quarter lag (the previous-play's quarter). `Int32` */
   lag_qtr?: number | null;
-  /** `Int32` */
+  /** Quarter lead (the next-play's quarter). `Int32` */
   lead_qtr?: number | null;
-  /** `Int32` */
+  /** A lag column on the half `Int32` */
   lag_half?: number | null;
-  /** `Int32` */
+  /** A lead column on the half `Int32` */
   lead_half?: number | null;
-  /** `Float64` */
+  /** Seconds remaining in the period at the start of the play. `Float64` */
   start_quarter_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Seconds remaining in the half at the start of the play. `Float64` */
   start_half_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Seconds remaining in the game at the start of the play. `Float64` */
   start_game_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Seconds remaining in the period at the end of the play. `Float64` */
   end_quarter_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Seconds remaining in the half at the end of the play. `Float64` */
   end_half_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Seconds remaining in the game at the end of the play. `Float64` */
   end_game_seconds_remaining?: number | null;
-  /** `Int32` */
+  /** Period of the game (1-4 quarters; 5+ for OT). `Int32` */
   period?: number | null;
-  /** `Float64` */
+  /** X coordinate on the court (half-court layout). `Float64` */
   coordinate_x?: number | null;
-  /** `Float64` */
+  /** Y coordinate on the court (half-court layout). `Float64` */
   coordinate_y?: number | null;
-  /** `Date` */
+  /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
-  /** `Datetime(time_unit='us', time_zone='America/New_York')` */
+  /** Game start date/time (ISO 8601). `Datetime(time_unit='us', time_zone='America/New_York')` */
   game_date_time?: Date | null;
-  /** `String` */
+  /** Name of the primary athlete involved in the play (pairs with athlete_id_1). `String` */
   athlete_name_1?: string | null;
-  /** `String` */
+  /** Name of the secondary athlete involved in the play (e.g. the assister or fouled player). `String` */
   athlete_name_2?: string | null;
-  /** `String` */
+  /** Name of the tertiary athlete involved in the play. `String` */
   athlete_name_3?: string | null;
-  /** `String` */
+  /** Type abbreviation. `String` */
   type_abbreviation?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -147,119 +147,119 @@ export interface LoadNbaPbpRow {
 
 /** One row of `sdv.nba.loadNbaPlayerBoxscore` (`espn_nba_player_boxscores`; sdv-py loader schema `load_nba_player_boxscore`). */
 export interface LoadNbaPlayerBoxscoreRow {
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `Int32` */
   season_type?: number | null;
-  /** `Date` */
+  /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
-  /** `Datetime(time_unit='us', time_zone='America/New_York')` */
+  /** Game start date/time (ISO 8601). `Datetime(time_unit='us', time_zone='America/New_York')` */
   game_date_time?: Date | null;
-  /** `Int32` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
-  /** `String` */
+  /** Athlete display name (full). `String` */
   athlete_display_name?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Team city or location string. `String` */
   team_location?: string | null;
-  /** `String` */
+  /** Short team display name (e.g. 'Aces'). `String` */
   team_short_display_name?: string | null;
-  /** `Float64` */
+  /** Minutes played, formatted MM:SS (V3 PT-duration parsed) or decimal minutes (V2). `Float64` */
   minutes?: number | null;
-  /** `Int32` */
+  /** Field goals made (2-pt + 3-pt). `Int32` */
   field_goals_made?: number | null;
-  /** `Int32` */
+  /** Field goal attempts (2-pt + 3-pt). `Int32` */
   field_goals_attempted?: number | null;
-  /** `Int32` */
+  /** Three-point field goals made. `Int32` */
   three_point_field_goals_made?: number | null;
-  /** `Int32` */
+  /** Three-point field goal attempts. `Int32` */
   three_point_field_goals_attempted?: number | null;
-  /** `Int32` */
+  /** Free throws made. `Int32` */
   free_throws_made?: number | null;
-  /** `Int32` */
+  /** Free throw attempts. `Int32` */
   free_throws_attempted?: number | null;
-  /** `Int32` */
+  /** Offensive rebounds. `Int32` */
   offensive_rebounds?: number | null;
-  /** `Int32` */
+  /** Defensive rebounds. `Int32` */
   defensive_rebounds?: number | null;
-  /** `Int32` */
+  /** Total rebounds. `Int32` */
   rebounds?: number | null;
-  /** `Int32` */
+  /** Total assists. `Int32` */
   assists?: number | null;
-  /** `Int32` */
+  /** Total steals. `Int32` */
   steals?: number | null;
-  /** `Int32` */
+  /** Total blocks. `Int32` */
   blocks?: number | null;
-  /** `Int32` */
+  /** Total turnovers. `Int32` */
   turnovers?: number | null;
-  /** `Int32` */
+  /** Personal fouls. `Int32` */
   fouls?: number | null;
-  /** `String` */
+  /** Plus/minus point differential while on court. `String` */
   plus_minus?: string | null;
-  /** `Int32` */
+  /** Points scored. `Int32` */
   points?: number | null;
-  /** `Boolean` */
+  /** TRUE if the player was in the starting lineup; FALSE otherwise. `Boolean` */
   starter?: boolean | null;
-  /** `Boolean` */
+  /** TRUE if the player was ejected from the game. `Boolean` */
   ejected?: boolean | null;
-  /** `Boolean` */
+  /** TRUE if the player did not appear in the game. `Boolean` */
   did_not_play?: boolean | null;
-  /** `String` */
+  /** Reason. `String` */
   reason?: string | null;
-  /** `Boolean` */
+  /** TRUE if the row represents an active record (player / team / season). `Boolean` */
   active?: boolean | null;
-  /** `String` */
+  /** Athlete jersey number. `String` */
   athlete_jersey?: string | null;
-  /** `String` */
+  /** Athlete short display name. `String` */
   athlete_short_name?: string | null;
-  /** `String` */
+  /** Athlete headshot image URL. `String` */
   athlete_headshot_href?: string | null;
-  /** `String` */
+  /** Athlete position ('Guard', 'Forward', 'Center'). `String` */
   athlete_position_name?: string | null;
-  /** `String` */
+  /** Athlete position abbreviation (G / F / C). `String` */
   athlete_position_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** ESPN universal team identifier (UID format 's:40~l:...~t:...'). `String` */
   team_uid?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Team primary color (hex without leading '#'). `String` */
   team_color?: string | null;
-  /** `String` */
+  /** Team alternate color (hex without leading '#'). `String` */
   team_alternate_color?: string | null;
-  /** `String` */
+  /** Game venue label ('home' or 'away'). `String` */
   home_away?: string | null;
-  /** `Boolean` */
+  /** TRUE if the team won this game. `Boolean` */
   team_winner?: boolean | null;
-  /** `Int32` */
+  /** Team's score / final score. `Int32` */
   team_score?: number | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for the opponent team. `Int32` (an id) */
   opponent_team_id?: string | null;
-  /** `String` */
+  /** Opponent team display name. `String` */
   opponent_team_name?: string | null;
-  /** `String` */
+  /** Opponent team city / location. `String` */
   opponent_team_location?: string | null;
-  /** `String` */
+  /** Opponent team full display name. `String` */
   opponent_team_display_name?: string | null;
-  /** `String` */
+  /** Opponent team abbreviation. `String` */
   opponent_team_abbreviation?: string | null;
-  /** `String` */
+  /** Opponent team logo URL. `String` */
   opponent_team_logo?: string | null;
-  /** `String` */
+  /** Opponent team primary color (hex). `String` */
   opponent_team_color?: string | null;
-  /** `String` */
+  /** Opponent team alternate color (hex). `String` */
   opponent_team_alternate_color?: string | null;
-  /** `Int32` */
+  /** Opponent team's score. `Int32` */
   opponent_team_score?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -267,159 +267,159 @@ export interface LoadNbaPlayerBoxscoreRow {
 
 /** One row of `sdv.nba.loadNbaSchedule` (`espn_nba_schedules`; sdv-py loader schema `load_nba_schedule`). */
 export interface LoadNbaScheduleRow {
-  /** `Int32` (an id) */
+  /** Id. `Int32` (an id) */
   id?: string | null;
-  /** `String` */
+  /** ESPN UID string. `String` */
   uid?: string | null;
-  /** `String` */
+  /** Date in YYYY-MM-DD format. `String` */
   date?: string | null;
-  /** `Float64` */
+  /** Reported attendance. `Float64` */
   attendance?: number | null;
-  /** `Boolean` */
+  /** Time valid. `Boolean` */
   time_valid?: boolean | null;
-  /** `Boolean` */
+  /** Neutral site. `Boolean` */
   neutral_site?: boolean | null;
-  /** `Boolean` */
+  /** Conference competition. `Boolean` */
   conference_competition?: boolean | null;
   /** `Boolean` */
   play_by_play_available?: boolean | null;
-  /** `Boolean` */
+  /** Recent. `Boolean` */
   recent?: boolean | null;
-  /** `String` */
+  /** Start date (YYYY-MM-DD). `String` */
   start_date?: string | null;
-  /** `String` */
+  /** Broadcast information string. `String` */
   broadcast?: string | null;
   /** `String` */
   highlights?: string | null;
-  /** `String` */
+  /** Notes type. `String` */
   notes_type?: string | null;
-  /** `String` */
+  /** Notes headline. `String` */
   notes_headline?: string | null;
-  /** `String` */
+  /** Broadcast market label (e.g. 'national', 'home'). `String` */
   broadcast_market?: string | null;
-  /** `String` */
+  /** Broadcast name. `String` */
   broadcast_name?: string | null;
-  /** `Int32` (an id) */
+  /** Type identifier (numeric). `Int32` (an id) */
   type_id?: string | null;
-  /** `String` */
+  /** Type abbreviation. `String` */
   type_abbreviation?: string | null;
-  /** `Int32` (an id) */
+  /** Unique venue identifier. `Int32` (an id) */
   venue_id?: string | null;
-  /** `String` */
+  /** Venue full name. `String` */
   venue_full_name?: string | null;
-  /** `String` */
+  /** Venue address city. `String` */
   venue_address_city?: string | null;
-  /** `Boolean` */
+  /** TRUE if the venue is indoors. `Boolean` */
   venue_indoor?: boolean | null;
-  /** `Float64` */
+  /** Status clock. `Float64` */
   status_clock?: number | null;
-  /** `String` */
+  /** Status display clock. `String` */
   status_display_clock?: string | null;
-  /** `Float64` */
+  /** Status period. `Float64` */
   status_period?: number | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for status type. `Int32` (an id) */
   status_type_id?: string | null;
-  /** `String` */
+  /** Status type name. `String` */
   status_type_name?: string | null;
-  /** `String` */
+  /** Status type state. `String` */
   status_type_state?: string | null;
-  /** `Boolean` */
+  /** Status type completed. `Boolean` */
   status_type_completed?: boolean | null;
-  /** `String` */
+  /** Status type description. `String` */
   status_type_description?: string | null;
-  /** `String` */
+  /** Status type detail. `String` */
   status_type_detail?: string | null;
-  /** `String` */
+  /** Status type short detail. `String` */
   status_type_short_detail?: string | null;
-  /** `Float64` */
+  /** Format regulation periods. `Float64` */
   format_regulation_periods?: number | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for home. `Int32` (an id) */
   home_id?: string | null;
-  /** `String` */
+  /** Home team's uid. `String` */
   home_uid?: string | null;
-  /** `String` */
+  /** Home team's location. `String` */
   home_location?: string | null;
-  /** `String` */
+  /** Home name. `String` */
   home_name?: string | null;
-  /** `String` */
+  /** Home team's abbreviation. `String` */
   home_abbreviation?: string | null;
-  /** `String` */
+  /** Home display name. `String` */
   home_display_name?: string | null;
-  /** `String` */
+  /** Home short display name. `String` */
   home_short_display_name?: string | null;
-  /** `String` */
+  /** Color code (hex) for home. `String` */
   home_color?: string | null;
-  /** `String` */
+  /** Color code (hex) for home alternate. `String` */
   home_alternate_color?: string | null;
-  /** `Boolean` */
+  /** Home team's is active. `Boolean` */
   home_is_active?: boolean | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for home venue. `Int32` (an id) */
   home_venue_id?: string | null;
-  /** `String` */
+  /** Home team logo URL. `String` */
   home_logo?: string | null;
-  /** `Int32` */
+  /** Home team score at the time of the play. `Int32` */
   home_score?: number | null;
-  /** `Boolean` */
+  /** Home team's winner. `Boolean` */
   home_winner?: boolean | null;
-  /** `String` */
+  /** Period-by-period points for the home team, stringified from ESPN's linescores array. `String` */
   home_linescores?: string | null;
-  /** `String` */
+  /** Home team's records at game time (overall, home, away), stringified from ESPN. `String` */
   home_records?: string | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for away. `Int32` (an id) */
   away_id?: string | null;
-  /** `String` */
+  /** Away team's uid. `String` */
   away_uid?: string | null;
-  /** `String` */
+  /** Away team's location. `String` */
   away_location?: string | null;
-  /** `String` */
+  /** Away name. `String` */
   away_name?: string | null;
-  /** `String` */
+  /** Away team's abbreviation. `String` */
   away_abbreviation?: string | null;
-  /** `String` */
+  /** Away display name. `String` */
   away_display_name?: string | null;
-  /** `String` */
+  /** Away short display name. `String` */
   away_short_display_name?: string | null;
-  /** `String` */
+  /** Color code (hex) for away. `String` */
   away_color?: string | null;
-  /** `String` */
+  /** Color code (hex) for away alternate. `String` */
   away_alternate_color?: string | null;
-  /** `Boolean` */
+  /** Away team's is active. `Boolean` */
   away_is_active?: boolean | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for away venue. `Int32` (an id) */
   away_venue_id?: string | null;
-  /** `String` */
+  /** Away team logo URL. `String` */
   away_logo?: string | null;
-  /** `Int32` */
+  /** Away team score at the time of the play. `Int32` */
   away_score?: number | null;
-  /** `Boolean` */
+  /** Away team's winner. `Boolean` */
   away_winner?: boolean | null;
-  /** `String` */
+  /** Period-by-period points for the away team, stringified from ESPN's linescores array. `String` */
   away_linescores?: string | null;
-  /** `String` */
+  /** Away team's records at game time (overall, home, away), stringified from ESPN. `String` */
   away_records?: string | null;
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `Int32` */
   season_type?: number | null;
-  /** `String` */
+  /** Venue address state / region. `String` */
   venue_address_state?: string | null;
-  /** `String` */
+  /** Status type alt detail. `String` */
   status_type_alt_detail?: string | null;
   /** `Boolean` */
   game_json?: boolean | null;
   /** `String` */
   game_json_url?: string | null;
-  /** `Datetime(time_unit='us', time_zone='America/New_York')` */
+  /** Game start date/time (ISO 8601). `Datetime(time_unit='us', time_zone='America/New_York')` */
   game_date_time?: Date | null;
-  /** `Date` */
+  /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
   /** `Boolean` */
   PBP?: boolean | null;
-  /** `Boolean` */
+  /** Team box. `Boolean` */
   team_box?: boolean | null;
-  /** `Boolean` */
+  /** Player box. `Boolean` */
   player_box?: boolean | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -427,123 +427,123 @@ export interface LoadNbaScheduleRow {
 
 /** One row of `sdv.nba.loadNbaTeamBoxscore` (`espn_nba_team_boxscores`; sdv-py loader schema `load_nba_team_boxscore`). */
 export interface LoadNbaTeamBoxscoreRow {
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `Int32` */
   season_type?: number | null;
-  /** `Date` */
+  /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
-  /** `Datetime(time_unit='us', time_zone='America/New_York')` */
+  /** Game start date/time (ISO 8601). `Datetime(time_unit='us', time_zone='America/New_York')` */
   game_date_time?: Date | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** ESPN universal team identifier (UID format 's:40~l:...~t:...'). `String` */
   team_uid?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Team city or location string. `String` */
   team_location?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Short team display name (e.g. 'Aces'). `String` */
   team_short_display_name?: string | null;
-  /** `String` */
+  /** Team primary color (hex without leading '#'). `String` */
   team_color?: string | null;
-  /** `String` */
+  /** Team alternate color (hex without leading '#'). `String` */
   team_alternate_color?: string | null;
-  /** `String` */
+  /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** `String` */
+  /** Team home away. `String` */
   team_home_away?: string | null;
-  /** `Int32` */
+  /** Team's score / final score. `Int32` */
   team_score?: number | null;
-  /** `Boolean` */
+  /** TRUE if the team won this game. `Boolean` */
   team_winner?: boolean | null;
-  /** `Int32` */
+  /** Total assists. `Int32` */
   assists?: number | null;
-  /** `Int32` */
+  /** Total blocks. `Int32` */
   blocks?: number | null;
-  /** `Int32` */
+  /** Defensive rebounds. `Int32` */
   defensive_rebounds?: number | null;
-  /** `String` */
+  /** Fast-break points scored. `String` */
   fast_break_points?: string | null;
-  /** `Float64` */
+  /** Field goal percentage (0-1). `Float64` */
   field_goal_pct?: number | null;
-  /** `Int32` */
+  /** Field goals made (2-pt + 3-pt). `Int32` */
   field_goals_made?: number | null;
-  /** `Int32` */
+  /** Field goal attempts (2-pt + 3-pt). `Int32` */
   field_goals_attempted?: number | null;
-  /** `Int32` */
+  /** Total flagrant fouls. `Int32` */
   flagrant_fouls?: number | null;
-  /** `Int32` */
+  /** Personal fouls. `Int32` */
   fouls?: number | null;
-  /** `Float64` */
+  /** Free throw percentage (0-1). `Float64` */
   free_throw_pct?: number | null;
-  /** `Int32` */
+  /** Free throws made. `Int32` */
   free_throws_made?: number | null;
-  /** `Int32` */
+  /** Free throw attempts. `Int32` */
   free_throws_attempted?: number | null;
-  /** `String` */
+  /** Largest lead during the game. `String` */
   largest_lead?: string | null;
-  /** `Int32` */
+  /** Offensive rebounds. `Int32` */
   offensive_rebounds?: number | null;
-  /** `String` */
+  /** Points scored in the paint. `String` */
   points_in_paint?: string | null;
-  /** `Int32` */
+  /** Total steals. `Int32` */
   steals?: number | null;
-  /** `Int32` */
+  /** Team turnovers (turnovers credited to the team rather than a player). `Int32` */
   team_turnovers?: number | null;
-  /** `Int32` */
+  /** Total technical fouls. `Int32` */
   technical_fouls?: number | null;
-  /** `Float64` */
+  /** Three-point field goal percentage (0-1). `Float64` */
   three_point_field_goal_pct?: number | null;
-  /** `Int32` */
+  /** Three-point field goals made. `Int32` */
   three_point_field_goals_made?: number | null;
-  /** `Int32` */
+  /** Three-point field goal attempts. `Int32` */
   three_point_field_goals_attempted?: number | null;
-  /** `Int32` */
+  /** Total rebounds. `Int32` */
   total_rebounds?: number | null;
-  /** `Int32` */
+  /** Total technical fouls (player + team). `Int32` */
   total_technical_fouls?: number | null;
-  /** `Int32` */
+  /** Total turnovers (player + team). `Int32` */
   total_turnovers?: number | null;
-  /** `String` */
+  /** Turnover points. `String` */
   turnover_points?: string | null;
-  /** `Int32` */
+  /** Total turnovers. `Int32` */
   turnovers?: number | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for the opponent team. `Int32` (an id) */
   opponent_team_id?: string | null;
-  /** `String` */
+  /** Opponent team uid. `String` */
   opponent_team_uid?: string | null;
-  /** `String` */
+  /** Opponent team slug. `String` */
   opponent_team_slug?: string | null;
-  /** `String` */
+  /** Opponent team city / location. `String` */
   opponent_team_location?: string | null;
-  /** `String` */
+  /** Opponent team display name. `String` */
   opponent_team_name?: string | null;
-  /** `String` */
+  /** Opponent team abbreviation. `String` */
   opponent_team_abbreviation?: string | null;
-  /** `String` */
+  /** Opponent team full display name. `String` */
   opponent_team_display_name?: string | null;
-  /** `String` */
+  /** Opponent team short display name. `String` */
   opponent_team_short_display_name?: string | null;
-  /** `String` */
+  /** Opponent team primary color (hex). `String` */
   opponent_team_color?: string | null;
-  /** `String` */
+  /** Opponent team alternate color (hex). `String` */
   opponent_team_alternate_color?: string | null;
-  /** `String` */
+  /** Opponent team logo URL. `String` */
   opponent_team_logo?: string | null;
-  /** `Int32` */
+  /** Opponent team's score. `Int32` */
   opponent_team_score?: number | null;
-  /** `String` */
+  /** Lead changes. `String` */
   lead_changes?: string | null;
-  /** `String` */
+  /** Percentage of the game the team held the lead, from ESPN's team box score stats. `String` */
   lead_percentage?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -551,49 +551,49 @@ export interface LoadNbaTeamBoxscoreRow {
 
 /** One row of `sdv.nba.loadNbaGameRosters` (`espn_nba_game_rosters`; sdv-py loader schema `load_nba_game_rosters`). */
 export interface LoadNbaGameRostersRow {
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Game venue label ('home' or 'away'). `String` */
   home_away?: string | null;
-  /** `Int32` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
-  /** `String` */
+  /** ESPN athlete UID (universal identifier). `String` */
   athlete_uid?: string | null;
-  /** `String` */
+  /** ESPN athlete GUID. `String` */
   athlete_guid?: string | null;
-  /** `String` */
+  /** Athlete display name (full). `String` */
   athlete_display_name?: string | null;
-  /** `String` */
+  /** Athlete short display name. `String` */
   athlete_short_name?: string | null;
   /** `String` */
   athlete_first_name?: string | null;
   /** `String` */
   athlete_last_name?: string | null;
-  /** `String` */
+  /** Athlete jersey number. `String` */
   athlete_jersey?: string | null;
-  /** `String` */
+  /** Athlete position. `String` */
   athlete_position?: string | null;
-  /** `String` */
+  /** URL of the player's headshot image. `String` */
   athlete_headshot?: string | null;
-  /** `Boolean` */
+  /** TRUE if the player was in the starting lineup; FALSE otherwise. `Boolean` */
   starter?: boolean | null;
-  /** `Boolean` */
+  /** TRUE if the player did not appear in the game. `Boolean` */
   did_not_play?: boolean | null;
-  /** `Boolean` */
+  /** TRUE if the row represents an active record (player / team / season). `Boolean` */
   active?: boolean | null;
-  /** `Boolean` */
+  /** TRUE if the player was ejected from the game. `Boolean` */
   ejected?: boolean | null;
-  /** `String` */
+  /** Reason. `String` */
   reason?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -601,19 +601,19 @@ export interface LoadNbaGameRostersRow {
 
 /** One row of `sdv.nba.loadNbaOfficials` (`espn_nba_officials`; sdv-py loader schema `load_nba_officials`). */
 export interface LoadNbaOfficialsRow {
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** Full name of an on-court game official as ESPN publishes it in the summary gameInfo.officials array; it is identical to official_display_name in every released NBA row. `String` */
   official_full_name?: string | null;
-  /** `String` */
+  /** ESPN's display-form name for the official, falling back to the full name when ESPN omits it; it never diverges from official_full_name in the released NBA data. `String` */
   official_display_name?: string | null;
-  /** `String` */
+  /** ESPN's label for the official's assignment slot; the NBA summary feed only ever ships Referee, so this reads the same on every released row. `String` */
   official_position?: string | null;
-  /** `Int32` (an id) */
+  /** ESPN's numeric identifier for the official's assignment slot, constant at 40 (Referee) across every released NBA season. `Int32` (an id) */
   official_position_id?: string | null;
-  /** `Int32` */
+  /** The official's listing index within the game's crew as ESPN orders them, normally 1 through 3 for a three-person crew; a fourth entry appears in a small share of recent-season games and the sequence is not guaranteed to be gap-free. `Int32` */
   official_order?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -621,45 +621,45 @@ export interface LoadNbaOfficialsRow {
 
 /** One row of `sdv.nba.loadNbaShots` (`espn_nba_shots`; sdv-py loader schema `load_nba_shots`). */
 export interface LoadNbaShotsRow {
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Numeric period (1-4 for quarters; 5+ for OT). `Int32` */
   period_number?: number | null;
-  /** `String` */
+  /** Game clock display string (e.g. '8:32'). `String` */
   clock_display_value?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `Int32` (an id) */
+  /** Primary athlete identifier (e.g. shooter). `Int32` (an id) */
   athlete_id_1?: string | null;
-  /** `Int32` (an id) */
+  /** Secondary athlete identifier (e.g. assister / fouler). `Int32` (an id) */
   athlete_id_2?: string | null;
-  /** `Int32` (an id) */
+  /** Type identifier (numeric). `Int32` (an id) */
   type_id?: string | null;
-  /** `String` */
+  /** Display text for the type field. `String` */
   type_text?: string | null;
-  /** `Boolean` */
+  /** TRUE if the play resulted in points scored. `Boolean` */
   scoring_play?: boolean | null;
-  /** `Int32` */
+  /** Point value of the play (2 / 3 / 1). `Int32` */
   score_value?: number | null;
-  /** `Float64` */
+  /** X coordinate on the court (half-court layout). `Float64` */
   coordinate_x?: number | null;
-  /** `Float64` */
+  /** Y coordinate on the court (half-court layout). `Float64` */
   coordinate_y?: number | null;
-  /** `Float64` */
+  /** X coordinate as returned by the API before any adjustment. `Float64` */
   coordinate_x_raw?: number | null;
-  /** `Float64` */
+  /** Y coordinate as returned by the API before any adjustment. `Float64` */
   coordinate_y_raw?: number | null;
-  /** `String` */
+  /** Name of the shooter on the attempt. `String` */
   athlete_name_1?: string | null;
-  /** `String` */
+  /** Name of the secondary athlete on the attempt (e.g. the assister). `String` */
   athlete_name_2?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Mascot (nickname) portion of the shooting team's name. `String` */
   team_mascot?: string | null;
-  /** `String` */
+  /** Abbreviation for team. `String` */
   team_abbrev?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -667,53 +667,53 @@ export interface LoadNbaShotsRow {
 
 /** One row of `sdv.nba.loadNbaStandings` (`espn_nba_standings`; sdv-py loader schema `load_nba_standings`). */
 export interface LoadNbaStandingsRow {
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** ESPN group id. `String` (an id) */
   group_id?: string | null;
   /** `String` */
   group_name?: string | null;
   /** `String` */
   group_abbreviation?: string | null;
-  /** `String` */
+  /** ESPN's short name for the standings grouping the team sits in, read from the group node's shortName; the NBA standings payload supplies only the group name and abbreviation, so this is null throughout. `String` */
   group_short_name?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** ESPN universal team identifier (UID format 's:40~l:...~t:...'). `String` */
   team_uid?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Team city or location string. `String` */
   team_location?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Short team display name (e.g. 'Aces'). `String` */
   team_short_display_name?: string | null;
-  /** `String` */
+  /** Team primary color (hex without leading '#'). `String` */
   team_color?: string | null;
-  /** `String` */
+  /** Team alternate color (hex without leading '#'). `String` */
   team_alternate_color?: string | null;
-  /** `String` */
+  /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** `String` */
+  /** Stat key. `String` */
   stat_name?: string | null;
-  /** `String` */
+  /** Stat display name. `String` */
   stat_display_name?: string | null;
   /** `String` */
   stat_short_display_name?: string | null;
-  /** `String` */
+  /** ESPN's prose gloss for the standings statistic on this row; for the clincher stat it is not a fixed label but the team's actual status text, such as Clinched Playoff Berth or Eliminated From Playoff. `String` */
   stat_description?: string | null;
-  /** `String` */
+  /** ESPN's short code for the standings statistic, such as PCT, GB or OPP PPG; it is null for the four record-style splits (Home, Road, vs. Conf., vs. Div.), which ship no abbreviation. `String` */
   stat_abbreviation?: string | null;
-  /** `String` */
+  /** Stat type code (e.g. "win", "loss"). `String` */
   stat_type?: string | null;
-  /** `String` */
+  /** Display-formatted value. `String` */
   display_value?: string | null;
-  /** `Float64` */
+  /** Numeric or string value field. `Float64` */
   value?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -721,35 +721,35 @@ export interface LoadNbaStandingsRow {
 
 /** One row of `sdv.nba.loadNbaPlayerSeasonStats` (`espn_nba_player_season_stats`; sdv-py loader schema `load_nba_player_season_stats`). */
 export interface LoadNbaPlayerSeasonStatsRow {
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int32` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
-  /** `String` */
+  /** Athlete display name (full). `String` */
   athlete_display_name?: string | null;
-  /** `String` */
+  /** Athlete position abbreviation (G / F / C). `String` */
   athlete_position_abbreviation?: string | null;
-  /** `String` */
+  /** Athlete jersey number. `String` */
   athlete_jersey?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Category label. `String` */
   category?: string | null;
   /** `String` */
   stat_label?: string | null;
-  /** `String` */
+  /** Stat key. `String` */
   stat_name?: string | null;
-  /** `String` */
+  /** Stat display name. `String` */
   stat_display_name?: string | null;
-  /** `String` */
+  /** ESPN's prose definition of the statistic on this row, for example the ratio of field goals made to field goals attempted; for the paired Made-Attempted stats it is the two definitions joined with a hyphen. `String` */
   stat_description?: string | null;
-  /** `String` */
+  /** Display-formatted value. `String` */
   display_value?: string | null;
-  /** `Float64` */
+  /** Numeric or string value field. `Float64` */
   value?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -757,37 +757,37 @@ export interface LoadNbaPlayerSeasonStatsRow {
 
 /** One row of `sdv.nba.loadNbaTeamSeasonStats` (`espn_nba_team_season_stats`; sdv-py loader schema `load_nba_team_season_stats`). */
 export interface LoadNbaTeamSeasonStatsRow {
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Short team display name (e.g. 'Aces'). `String` */
   team_short_display_name?: string | null;
-  /** `String` */
+  /** Team primary color (hex without leading '#'). `String` */
   team_color?: string | null;
-  /** `String` */
+  /** Team alternate color (hex without leading '#'). `String` */
   team_alternate_color?: string | null;
-  /** `String` */
+  /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** `String` */
+  /** Category label. `String` */
   category?: string | null;
   /** `String` */
   stat_label?: string | null;
-  /** `String` */
+  /** Stat key. `String` */
   stat_name?: string | null;
-  /** `String` */
+  /** Stat display name. `String` */
   stat_display_name?: string | null;
-  /** `String` */
+  /** ESPN's prose definition of the team statistic on this row, for example the average number of assists a team records per turnover. `String` */
   stat_description?: string | null;
-  /** `String` */
+  /** Display-formatted value. `String` */
   display_value?: string | null;
-  /** `Float64` */
+  /** Numeric or string value field. `Float64` */
   value?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -795,25 +795,25 @@ export interface LoadNbaTeamSeasonStatsRow {
 
 /** One row of `sdv.nba.loadNbaDraft` (`espn_nba_draft`; sdv-py loader schema `load_nba_draft`). */
 export interface LoadNbaDraftRow {
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Tournament / playoff round. `Int32` */
   round?: number | null;
-  /** `String` */
+  /** ESPN's display label for the draft round a pick belongs to, read from the round object's displayName; the NBA payload supplies no round metadata, so this is null for every released season 2003 through 2025. `String` */
   round_display_name?: string | null;
-  /** `Int32` */
+  /** Pick number within the round. `Int32` */
   pick?: number | null;
-  /** `Int32` */
+  /** Overall pick. `Int32` */
   overall_pick?: number | null;
-  /** `String` */
+  /** ESPN's traded flag for the pick, carried through as a string rather than a boolean; every released NBA row reads FALSE, so it does not currently identify traded picks. `String` */
   pick_traded?: string | null;
-  /** `String` */
+  /** Free-text note ESPN can attach to a pick, read from the pick's notes or note field; the NBA draft payload never populates it, so it is null across all released seasons. `String` */
   pick_notes?: string | null;
-  /** `Int32` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
-  /** `String` */
+  /** ESPN athlete UID (universal identifier). `String` */
   athlete_uid?: string | null;
-  /** `String` */
+  /** ESPN athlete GUID. `String` */
   athlete_guid?: string | null;
   /** `String` */
   athlete_first_name?: string | null;
@@ -821,49 +821,49 @@ export interface LoadNbaDraftRow {
   athlete_last_name?: string | null;
   /** `String` */
   athlete_full_name?: string | null;
-  /** `String` */
+  /** Athlete display name (full). `String` */
   athlete_display_name?: string | null;
-  /** `String` */
+  /** Athlete short display name. `String` */
   athlete_short_name?: string | null;
   /** `String` */
   athlete_height?: string | null;
   /** `String` */
   athlete_weight?: string | null;
-  /** `String` */
+  /** Athlete position abbreviation (G / F / C). `String` */
   athlete_position_abbreviation?: string | null;
-  /** `String` */
+  /** Athlete position ('Guard', 'Forward', 'Center'). `String` */
   athlete_position_name?: string | null;
-  /** `String` */
+  /** Athlete headshot image URL. `String` */
   athlete_headshot_href?: string | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for college. `Int32` (an id) */
   college_id?: string | null;
-  /** `String` */
+  /** College / pre-draft team. `String` */
   college_name?: string | null;
   /** `String` */
   college_short_name?: string | null;
-  /** `String` */
+  /** Abbreviation of the drafted player's college taken from the pick's nested college block; the ESPN NBA draft feed omits that block entirely, so this and the other college columns are null throughout. `String` */
   college_abbreviation?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** ESPN universal team identifier (UID format 's:40~l:...~t:...'). `String` */
   team_uid?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Team city or location string. `String` */
   team_location?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Short team display name (e.g. 'Aces'). `String` */
   team_short_display_name?: string | null;
-  /** `String` */
+  /** Team primary color (hex without leading '#'). `String` */
   team_color?: string | null;
-  /** `String` */
+  /** Team alternate color (hex without leading '#'). `String` */
   team_alternate_color?: string | null;
-  /** `String` */
+  /** Team logo image URL. `String` */
   team_logo?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -871,77 +871,77 @@ export interface LoadNbaDraftRow {
 
 /** One row of `sdv.nba.loadNbaRosters` (`espn_nba_rosters`; sdv-py loader schema `load_nba_rosters`). */
 export interface LoadNbaRostersRow {
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Short team display name (e.g. 'Aces'). `String` */
   team_short_display_name?: string | null;
-  /** `String` */
+  /** Team primary color (hex without leading '#'). `String` */
   team_color?: string | null;
-  /** `String` */
+  /** Team alternate color (hex without leading '#'). `String` */
   team_alternate_color?: string | null;
-  /** `String` */
+  /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** `String` (an id) */
+  /** Unique athlete identifier (ESPN). `String` (an id) */
   athlete_id?: string | null;
-  /** `String` */
+  /** ESPN UID string. `String` */
   uid?: string | null;
-  /** `String` */
+  /** Stable cross-league team GUID. `String` */
   guid?: string | null;
-  /** `String` */
+  /** Player's full name. `String` */
   full_name?: string | null;
-  /** `String` */
+  /** Display name. `String` */
   display_name?: string | null;
-  /** `String` */
+  /** Short display name. `String` */
   short_name?: string | null;
-  /** `String` */
+  /** Player's first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   jersey?: string | null;
-  /** `String` */
+  /** Position abbreviation ('G' / 'F' / 'C'). `String` */
   position_abbreviation?: string | null;
-  /** `String` */
+  /** Listed roster position ('Guard', 'Forward', 'Center'). `String` */
   position_name?: string | null;
-  /** `String` (an id) */
+  /** Unique position identifier. `String` (an id) */
   position_id?: string | null;
-  /** `String` */
+  /** Player height (string e.g. '6-2' or inches). `String` */
   height?: string | null;
-  /** `String` */
+  /** Player weight in pounds. `String` */
   weight?: string | null;
-  /** `String` */
+  /** Player age (in years). `String` */
   age?: string | null;
-  /** `String` */
+  /** Date of birth (YYYY-MM-DD). `String` */
   date_of_birth?: string | null;
-  /** `String` */
+  /** Birth place city. `String` */
   birth_place_city?: string | null;
-  /** `String` */
+  /** Birth place state. `String` */
   birth_place_state?: string | null;
-  /** `String` */
+  /** Birth place country. `String` */
   birth_place_country?: string | null;
-  /** `String` */
+  /** Experience years. `String` */
   experience_years?: string | null;
-  /** `String` */
+  /** Experience display value. `String` */
   experience_display_value?: string | null;
-  /** `String` */
+  /** Headshot image URL. `String` */
   headshot_href?: string | null;
-  /** `String` */
+  /** Alternative-text label for the headshot. `String` */
   headshot_alt?: string | null;
-  /** `String` */
+  /** Web link / URL. `String` */
   link_web?: string | null;
-  /** `String` (an id) */
+  /** Status identifier. `String` (an id) */
   status_id?: string | null;
-  /** `String` */
+  /** Status label. `String` */
   status_name?: string | null;
-  /** `String` */
+  /** Status type. `String` */
   status_type?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -949,35 +949,35 @@ export interface LoadNbaRostersRow {
 
 /** One row of `sdv.nba.loadNbaStatsSchedules` (`nba_stats_schedules`; sdv-py loader schema `load_nba_stats_schedules`). */
 export interface LoadNbaStatsSchedulesRow {
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
-  /** `String` */
+  /** Game date (YYYY-MM-DD). `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Matchup. `String` */
   matchup?: string | null;
-  /** `Int64` (an id) */
+  /** Unique identifier for the home team. `Int64` (an id) */
   home_team_id?: string | null;
   /** `String` */
   home_team_abbreviation?: string | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team_name?: string | null;
-  /** `Int64` */
+  /** Final points scored by the home team. `Int64` */
   home_pts?: number | bigint | null;
-  /** `String` */
+  /** Home team's result for the game (W or L). `String` */
   home_wl?: string | null;
-  /** `Int64` (an id) */
+  /** Unique identifier for the away team. `Int64` (an id) */
   away_team_id?: string | null;
   /** `String` */
   away_team_abbreviation?: string | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team_name?: string | null;
-  /** `Int64` */
+  /** Final points scored by the away team. `Int64` */
   away_pts?: number | bigint | null;
-  /** `String` */
+  /** Away team's result for the game (W or L). `String` */
   away_wl?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -985,27 +985,27 @@ export interface LoadNbaStatsSchedulesRow {
 
 /** One row of `sdv.nba.loadNbaStatsCoaches` (`nba_stats_coaches`; sdv-py loader schema `load_nba_stats_coaches`). */
 export interface LoadNbaStatsCoachesRow {
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int64` (an id) */
+  /** ESPN coach id. `Int64` (an id) */
   coach_id?: string | null;
-  /** `String` */
+  /** Player's first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Coach's full name. `String` */
   coach_name?: string | null;
-  /** `Int64` */
+  /** Numeric flag from the NBA Stats API distinguishing assistants from head coaches. `Int64` */
   is_assistant?: number | bigint | null;
-  /** `String` */
+  /** Coach role description (e.g. "Head Coach", "Assistant Coach"). `String` */
   coach_type?: string | null;
-  /** `Int64` */
+  /** Sort order of the coach within the team's staff listing. `Int64` */
   sort_sequence?: number | bigint | null;
-  /** `Int64` */
+  /** Secondary sort order within the coach type. `Int64` */
   sub_sort_sequence?: number | bigint | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1013,27 +1013,27 @@ export interface LoadNbaStatsCoachesRow {
 
 /** One row of `sdv.nba.loadNbaStatsGameRosters` (`nba_stats_game_rosters`; sdv-py loader schema `load_nba_stats_game_rosters`). */
 export interface LoadNbaStatsGameRostersRow {
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player's first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   jersey_num?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team city or region (e.g. 'Las Vegas'). `String` */
   team_city?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `String` (an id) */
+  /** Season-type digit: the 3rd character of game_id (and the leading digit of season_id). 1 = preseason, 2 = regular season, 3 = All-Star, 4 = playoffs, 5 = play-in, 6 = NBA Cup final, 9 = international. `String` (an id) */
   season_type_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1041,369 +1041,369 @@ export interface LoadNbaStatsGameRostersRow {
 
 /** One row of `sdv.nba.loadNbaStatsLineups` (`nba_stats_lineups`; sdv-py loader schema `load_nba_stats_lineups`). */
 export interface LoadNbaStatsLineupsRow {
-  /** `String` */
+  /** Lineup grouping label from the NBA Stats API (e.g. "Lineups"). `String` */
   group_set?: string | null;
-  /** `String` (an id) */
+  /** ESPN group id. `String` (an id) */
   group_id?: string | null;
   /** `String` */
   group_name?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `Int64` */
+  /** Games played. `Int64` */
   gp?: number | bigint | null;
-  /** `Int64` */
+  /** Wins. `Int64` */
   w?: number | bigint | null;
-  /** `Int64` */
+  /** Losses. `Int64` */
   l?: number | bigint | null;
-  /** `Float64` */
+  /** Wins percentage (0-1 decimal). `Float64` */
   w_pct?: number | null;
-  /** `Float64` */
+  /** Minutes played. `Float64` */
   min?: number | null;
-  /** `Float64` */
+  /** Estimated offensive rating (NBA Stats estimated-metrics family) over the split. `Float64` */
   e_off_rating?: number | null;
-  /** `Float64` */
+  /** Offensive rating (points scored per 100 possessions) over the split. `Float64` */
   off_rating?: number | null;
-  /** `Float64` */
+  /** Estimated defensive rating (NBA Stats estimated-metrics family) over the split. `Float64` */
   e_def_rating?: number | null;
-  /** `Float64` */
+  /** Defensive rating (points allowed per 100 possessions) over the split. `Float64` */
   def_rating?: number | null;
-  /** `Float64` */
+  /** Estimated net rating (NBA Stats estimated-metrics family) over the split. `Float64` */
   e_net_rating?: number | null;
-  /** `Float64` */
+  /** Net rating (off rating - def rating). `Float64` */
   net_rating?: number | null;
-  /** `Float64` */
+  /** Assist percentage. `Float64` */
   ast_pct?: number | null;
-  /** `Float64` */
+  /** Assist-to-turnover ratio over the split. `Float64` */
   ast_to?: number | null;
-  /** `Float64` */
+  /** Assist ratio (assists per 100 possessions used) over the split. `Float64` */
   ast_ratio?: number | null;
-  /** `Float64` */
+  /** Offensive rebound percentage over the split, as a decimal. `Float64` */
   oreb_pct?: number | null;
-  /** `Float64` */
+  /** Defensive rebound percentage over the split, as a decimal. `Float64` */
   dreb_pct?: number | null;
-  /** `Float64` */
+  /** Total rebound percentage over the split, as a decimal. `Float64` */
   reb_pct?: number | null;
-  /** `Float64` */
+  /** Team turnover percentage (turnovers per 100 possessions) over the split, as a decimal. `Float64` */
   tm_tov_pct?: number | null;
-  /** `Float64` */
+  /** Effective field goal percentage over the split, as a decimal. `Float64` */
   efg_pct?: number | null;
-  /** `Float64` */
+  /** True shooting percentage (0-1). `Float64` */
   ts_pct?: number | null;
-  /** `Float64` */
+  /** Estimated pace (NBA Stats estimated-metrics family) over the split. `Float64` */
   e_pace?: number | null;
-  /** `Float64` */
+  /** Possessions per 48 minutes. `Float64` */
   pace?: number | null;
-  /** `Float64` */
+  /** Pace per40. `Float64` */
   pace_per40?: number | null;
-  /** `Int64` */
+  /** Poss. `Int64` */
   poss?: number | bigint | null;
-  /** `Float64` */
+  /** Player Impact Estimate (0-1). `Float64` */
   pie?: number | null;
-  /** `Int64` */
+  /** League rank of the row's games played for the season and split. `Int64` */
   gp_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's wins for the season and split. `Int64` */
   w_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's losses for the season and split. `Int64` */
   l_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's win percentage for the season and split. `Int64` */
   w_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's minutes played for the season and split. `Int64` */
   min_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's offensive rating (points scored per 100 possessions) for the season and split. `Int64` */
   off_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's defensive rating (points allowed per 100 possessions) for the season and split. `Int64` */
   def_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's net rating (offensive minus defensive rating) for the season and split. `Int64` */
   net_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's assist percentage (share of teammate field goals assisted while on the floor) for the season and split. `Int64` */
   ast_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's assist-to-turnover ratio for the season and split. `Int64` */
   ast_to_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's assist ratio (assists per 100 possessions used) for the season and split. `Int64` */
   ast_ratio_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's offensive rebound percentage for the season and split. `Int64` */
   oreb_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's defensive rebound percentage for the season and split. `Int64` */
   dreb_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's total rebound percentage for the season and split. `Int64` */
   reb_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's team turnover percentage (turnovers per 100 possessions) for the season and split. `Int64` */
   tm_tov_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's effective field goal percentage for the season and split. `Int64` */
   efg_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's true shooting percentage for the season and split. `Int64` */
   ts_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's pace (possessions per 48 minutes) for the season and split. `Int64` */
   pace_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's Player Impact Estimate (PIE, the NBA Stats catch-all impact metric) for the season and split. `Int64` */
   pie_rank?: number | bigint | null;
-  /** `Int64` */
+  /** Total time the five-man lineup was on the floor across the split. `Int64` */
   sum_time_played?: number | bigint | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
-  /** `String` */
+  /** NBA Stats measure type the row was pulled from (e.g. Base, Advanced, Misc, Scoring, Opponent, Usage, Defense). `String` */
   measure_type?: string | null;
-  /** `String` */
+  /** NBA Stats per-mode of the row values (e.g. Totals, PerGame, Per100Possessions). `String` */
   per_mode?: string | null;
-  /** `Float64` */
+  /** Field goals made. `Float64` */
   fgm?: number | null;
-  /** `Float64` */
+  /** Field goal attempts. `Float64` */
   fga?: number | null;
-  /** `Float64` */
+  /** Field goal percentage (0-1). `Float64` */
   fg_pct?: number | null;
-  /** `Float64` */
+  /** Three-point field goals made. `Float64` */
   fg3m?: number | null;
-  /** `Float64` */
+  /** Three-point field goal attempts. `Float64` */
   fg3a?: number | null;
-  /** `Float64` */
+  /** Three-point field goal percentage (0-1). `Float64` */
   fg3_pct?: number | null;
-  /** `Float64` */
+  /** Free throws made. `Float64` */
   ftm?: number | null;
-  /** `Float64` */
+  /** Free throw attempts. `Float64` */
   fta?: number | null;
-  /** `Float64` */
+  /** Free throw percentage (0-1). `Float64` */
   ft_pct?: number | null;
-  /** `Float64` */
+  /** Offensive rebounds. `Float64` */
   oreb?: number | null;
-  /** `Float64` */
+  /** Defensive rebounds. `Float64` */
   dreb?: number | null;
-  /** `Float64` */
+  /** Rebounds per game. `Float64` */
   reb?: number | null;
-  /** `Float64` */
+  /** Assists. `Float64` */
   ast?: number | null;
-  /** `Float64` */
+  /** Turnovers. `Float64` */
   tov?: number | null;
-  /** `Float64` */
+  /** Steals. `Float64` */
   stl?: number | null;
-  /** `Float64` */
+  /** Blocks. `Float64` */
   blk?: number | null;
-  /** `Float64` */
+  /** Shot attempts blocked by opponents (blocks against). `Float64` */
   blka?: number | null;
-  /** `Float64` */
+  /** Personal fouls. `Float64` */
   pf?: number | null;
-  /** `Float64` */
+  /** Personal fouls drawn. `Float64` */
   pfd?: number | null;
-  /** `Float64` */
+  /** Points scored. `Float64` */
   pts?: number | null;
-  /** `Float64` */
+  /** Plus/minus point differential while on court. `Float64` */
   plus_minus?: number | null;
-  /** `Int64` */
+  /** League rank of the row's field goals made for the season and split. `Int64` */
   fgm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's field goals attempted for the season and split. `Int64` */
   fga_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's field goal percentage for the season and split. `Int64` */
   fg_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's three-point field goals made for the season and split. `Int64` */
   fg3m_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's three-point field goals attempted for the season and split. `Int64` */
   fg3a_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's three-point field goal percentage for the season and split. `Int64` */
   fg3_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's free throws made for the season and split. `Int64` */
   ftm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's free throws attempted for the season and split. `Int64` */
   fta_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's free throw percentage for the season and split. `Int64` */
   ft_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's offensive rebounds for the season and split. `Int64` */
   oreb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's defensive rebounds for the season and split. `Int64` */
   dreb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's total rebounds for the season and split. `Int64` */
   reb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's assists for the season and split. `Int64` */
   ast_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's turnovers for the season and split. `Int64` */
   tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's steals for the season and split. `Int64` */
   stl_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's blocked shots for the season and split. `Int64` */
   blk_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's shot attempts blocked by opponents (blocks against) for the season and split. `Int64` */
   blka_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's personal fouls committed for the season and split. `Int64` */
   pf_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's personal fouls drawn for the season and split. `Int64` */
   pfd_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's points scored for the season and split. `Int64` */
   pts_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's plus-minus point differential while on the floor for the season and split. `Int64` */
   plus_minus_rank?: number | bigint | null;
-  /** `Float64` */
+  /** Points scored off opponent turnovers over the split. `Float64` */
   pts_off_tov?: number | null;
-  /** `Float64` */
+  /** Second-chance points over the split. `Float64` */
   pts_2nd_chance?: number | null;
-  /** `Float64` */
+  /** Fast-break points over the split. `Float64` */
   pts_fb?: number | null;
-  /** `Float64` */
+  /** Points in the paint over the split. `Float64` */
   pts_paint?: number | null;
-  /** `Float64` */
+  /** Opponent points scored off opponent turnovers allowed over the split. `Float64` */
   opp_pts_off_tov?: number | null;
-  /** `Float64` */
+  /** Opponent second-chance points allowed over the split. `Float64` */
   opp_pts_2nd_chance?: number | null;
-  /** `Float64` */
+  /** Opponent fast-break points allowed over the split. `Float64` */
   opp_pts_fb?: number | null;
-  /** `Float64` */
+  /** Opponent points in the paint allowed over the split. `Float64` */
   opp_pts_paint?: number | null;
-  /** `Int64` */
+  /** League rank of the row's points scored off opponent turnovers for the season and split. `Int64` */
   pts_off_tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's second-chance points for the season and split. `Int64` */
   pts_2nd_chance_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's fast-break points for the season and split. `Int64` */
   pts_fb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's points in the paint for the season and split. `Int64` */
   pts_paint_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent points scored off opponent turnovers for the season and split. `Int64` */
   opp_pts_off_tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent second-chance points for the season and split. `Int64` */
   opp_pts_2nd_chance_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent fast-break points for the season and split. `Int64` */
   opp_pts_fb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent points in the paint for the season and split. `Int64` */
   opp_pts_paint_rank?: number | bigint | null;
-  /** `Float64` */
+  /** Opponent field goals made allowed over the split. `Float64` */
   opp_fgm?: number | null;
-  /** `Float64` */
+  /** Opponent field goals attempted allowed over the split. `Float64` */
   opp_fga?: number | null;
-  /** `Float64` */
+  /** Opponent field goal percentage allowed over the split. `Float64` */
   opp_fg_pct?: number | null;
-  /** `Float64` */
+  /** Opponent three-point field goals made allowed over the split. `Float64` */
   opp_fg3m?: number | null;
-  /** `Float64` */
+  /** Opponent three-point field goals attempted allowed over the split. `Float64` */
   opp_fg3a?: number | null;
-  /** `Float64` */
+  /** Opponent three-point field goal percentage allowed over the split. `Float64` */
   opp_fg3_pct?: number | null;
-  /** `Float64` */
+  /** Opponent free throws made allowed over the split. `Float64` */
   opp_ftm?: number | null;
-  /** `Float64` */
+  /** Opponent free throws attempted allowed over the split. `Float64` */
   opp_fta?: number | null;
-  /** `Float64` */
+  /** Opponent free throw percentage allowed over the split. `Float64` */
   opp_ft_pct?: number | null;
-  /** `Float64` */
+  /** Opponent offensive rebounds allowed over the split. `Float64` */
   opp_oreb?: number | null;
-  /** `Float64` */
+  /** Opponent defensive rebounds allowed over the split. `Float64` */
   opp_dreb?: number | null;
-  /** `Float64` */
+  /** Opponent total rebounds allowed over the split. `Float64` */
   opp_reb?: number | null;
-  /** `Float64` */
+  /** Opponent assists allowed over the split. `Float64` */
   opp_ast?: number | null;
-  /** `Float64` */
+  /** Opponent turnovers allowed over the split. `Float64` */
   opp_tov?: number | null;
-  /** `Float64` */
+  /** Opponent steals allowed over the split. `Float64` */
   opp_stl?: number | null;
-  /** `Float64` */
+  /** Opponent blocked shots allowed over the split. `Float64` */
   opp_blk?: number | null;
-  /** `Float64` */
+  /** Opponent shot attempts blocked by opponents (blocks against) allowed over the split. `Float64` */
   opp_blka?: number | null;
-  /** `Float64` */
+  /** Opponent personal fouls committed allowed over the split. `Float64` */
   opp_pf?: number | null;
-  /** `Float64` */
+  /** Opponent personal fouls drawn allowed over the split. `Float64` */
   opp_pfd?: number | null;
-  /** `Float64` */
+  /** Opponent points. `Float64` */
   opp_pts?: number | null;
-  /** `Int64` */
+  /** League rank of the row's opponent field goals made for the season and split. `Int64` */
   opp_fgm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent field goals attempted for the season and split. `Int64` */
   opp_fga_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent field goal percentage for the season and split. `Int64` */
   opp_fg_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent three-point field goals made for the season and split. `Int64` */
   opp_fg3m_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent three-point field goals attempted for the season and split. `Int64` */
   opp_fg3a_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent three-point field goal percentage for the season and split. `Int64` */
   opp_fg3_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent free throws made for the season and split. `Int64` */
   opp_ftm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent free throws attempted for the season and split. `Int64` */
   opp_fta_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent free throw percentage for the season and split. `Int64` */
   opp_ft_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent offensive rebounds for the season and split. `Int64` */
   opp_oreb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent defensive rebounds for the season and split. `Int64` */
   opp_dreb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent total rebounds for the season and split. `Int64` */
   opp_reb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent assists for the season and split. `Int64` */
   opp_ast_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent turnovers for the season and split. `Int64` */
   opp_tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent steals for the season and split. `Int64` */
   opp_stl_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent blocked shots for the season and split. `Int64` */
   opp_blk_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent shot attempts blocked by opponents (blocks against) for the season and split. `Int64` */
   opp_blka_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent personal fouls committed for the season and split. `Int64` */
   opp_pf_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent personal fouls drawn for the season and split. `Int64` */
   opp_pfd_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent points scored for the season and split. `Int64` */
   opp_pts_rank?: number | bigint | null;
-  /** `Float64` */
+  /** Share of field goal attempts taken as two-pointers, as a decimal. `Float64` */
   pct_fga_2pt?: number | null;
-  /** `Float64` */
+  /** Share of field goal attempts taken as three-pointers, as a decimal. `Float64` */
   pct_fga_3pt?: number | null;
-  /** `Float64` */
+  /** Share of points scored on two-point field goals, as a decimal. `Float64` */
   pct_pts_2pt?: number | null;
-  /** `Float64` */
+  /** Share of points scored on mid-range two-pointers, as a decimal. `Float64` */
   pct_pts_2pt_mr?: number | null;
-  /** `Float64` */
+  /** Share of points scored on three-pointers, as a decimal. `Float64` */
   pct_pts_3pt?: number | null;
-  /** `Float64` */
+  /** Share of points scored on fast breaks, as a decimal. `Float64` */
   pct_pts_fb?: number | null;
-  /** `Float64` */
+  /** Share of points scored at the free throw line, as a decimal. `Float64` */
   pct_pts_ft?: number | null;
-  /** `Float64` */
+  /** Share of points scored off opponent turnovers, as a decimal. `Float64` */
   pct_pts_off_tov?: number | null;
-  /** `Float64` */
+  /** Share of points scored in the paint, as a decimal. `Float64` */
   pct_pts_paint?: number | null;
-  /** `Float64` */
+  /** Percentage of made two-pointers that were assisted, as a decimal. `Float64` */
   pct_ast_2pm?: number | null;
-  /** `Float64` */
+  /** Percentage of made two-pointers that were unassisted, as a decimal. `Float64` */
   pct_uast_2pm?: number | null;
-  /** `Float64` */
+  /** Percentage of made three-pointers that were assisted, as a decimal. `Float64` */
   pct_ast_3pm?: number | null;
-  /** `Float64` */
+  /** Percentage of made three-pointers that were unassisted, as a decimal. `Float64` */
   pct_uast_3pm?: number | null;
-  /** `Float64` */
+  /** Percentage of made field goals that were assisted, as a decimal. `Float64` */
   pct_ast_fgm?: number | null;
-  /** `Float64` */
+  /** Percentage of made field goals that were unassisted, as a decimal. `Float64` */
   pct_uast_fgm?: number | null;
-  /** `Int64` */
+  /** League rank of the row's share of field goal attempts taken as two-pointers for the season and split. `Int64` */
   pct_fga_2pt_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of field goal attempts taken as three-pointers for the season and split. `Int64` */
   pct_fga_3pt_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored on two-point field goals for the season and split. `Int64` */
   pct_pts_2pt_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored on mid-range two-pointers for the season and split. `Int64` */
   pct_pts_2pt_mr_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored on three-pointers for the season and split. `Int64` */
   pct_pts_3pt_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored on fast breaks for the season and split. `Int64` */
   pct_pts_fb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored at the free throw line for the season and split. `Int64` */
   pct_pts_ft_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored off opponent turnovers for the season and split. `Int64` */
   pct_pts_off_tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored in the paint for the season and split. `Int64` */
   pct_pts_paint_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made two-pointers that were assisted for the season and split. `Int64` */
   pct_ast_2pm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made two-pointers that were unassisted for the season and split. `Int64` */
   pct_uast_2pm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made three-pointers that were assisted for the season and split. `Int64` */
   pct_ast_3pm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made three-pointers that were unassisted for the season and split. `Int64` */
   pct_uast_3pm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made field goals that were assisted for the season and split. `Int64` */
   pct_ast_fgm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made field goals that were unassisted for the season and split. `Int64` */
   pct_uast_fgm_rank?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1411,19 +1411,19 @@ export interface LoadNbaStatsLineupsRow {
 
 /** One row of `sdv.nba.loadNbaStatsOfficials` (`nba_stats_officials`; sdv-py loader schema `load_nba_stats_officials`). */
 export interface LoadNbaStatsOfficialsRow {
-  /** `Int64` (an id) */
+  /** Unique official / referee identifier. `Int64` (an id) */
   official_id?: string | null;
-  /** `String` */
+  /** Player's first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   jersey_num?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `String` (an id) */
+  /** Season-type digit: the 3rd character of game_id (and the leading digit of season_id). 1 = preseason, 2 = regular season, 3 = All-Star, 4 = playoffs, 5 = play-in, 6 = NBA Cup final, 9 = international. `String` (an id) */
   season_type_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1431,103 +1431,103 @@ export interface LoadNbaStatsOfficialsRow {
 
 /** One row of `sdv.nba.loadNbaStatsPbp` (`nba_stats_pbp`; sdv-py loader schema `load_nba_stats_pbp`). */
 export interface LoadNbaStatsPbpRow {
-  /** `Int64` */
+  /** Stable within-game ordering index for events after pbpstats-style reordering of the raw feed. `Int64` */
   order_index?: number | bigint | null;
-  /** `Int64` */
+  /** Sequential action number within a game (V3 PBP). `Int64` */
   action_number?: number | bigint | null;
-  /** `String` */
+  /** Game clock value. `String` */
   clock?: string | null;
-  /** `Int64` */
+  /** Period of the game (1-4 quarters; 5+ for OT). `Int64` */
   period?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Three-letter team code (e.g. 'LAS' / 'NYL'). `String` */
   team_tricode?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier (V3 endpoints). `Int64` (an id) */
   person_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `String` */
+  /** Player name i. `String` */
   player_name_i?: string | null;
-  /** `Int64` */
+  /** V2-format X coordinate (preserved for V3-to-V2 compatibility). `Int64` */
   x_legacy?: number | bigint | null;
-  /** `Int64` */
+  /** V2-format Y coordinate (preserved for V3-to-V2 compatibility). `Int64` */
   y_legacy?: number | bigint | null;
-  /** `Int64` */
+  /** Shot distance from the basket, in feet. `Int64` */
   shot_distance?: number | bigint | null;
-  /** `String` */
+  /** Shot result ('Made' / 'Missed'). `String` */
   shot_result?: string | null;
-  /** `Int64` */
+  /** 1 if the action was a field goal; 0 otherwise. `Int64` */
   is_field_goal?: number | bigint | null;
-  /** `String` */
+  /** Score home. `String` */
   score_home?: string | null;
-  /** `String` */
+  /** Score away. `String` */
   score_away?: string | null;
-  /** `Int64` */
+  /** Running total of points scored. `Int64` */
   points_total?: number | bigint | null;
-  /** `String` */
+  /** Location. `String` */
   location?: string | null;
-  /** `String` */
+  /** Long-form description text. `String` */
   description?: string | null;
-  /** `String` */
+  /** Action type label (e.g. 'Made Shot', 'Substitution'). `String` */
   action_type?: string | null;
-  /** `String` */
+  /** Action sub-type label. `String` */
   sub_type?: string | null;
-  /** `Int64` */
+  /** Video available. `Int64` */
   video_available?: number | bigint | null;
-  /** `Int64` */
+  /** Point value of the shot (2 or 3). `Int64` */
   shot_value?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique action identifier within a game (V3 PBP). `Int64` (an id) */
   action_id?: string | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Float64` */
+  /** Seconds remaining in the period. `Float64` */
   seconds_remaining?: number | null;
-  /** `String` */
+  /** Event / play type code (V2 PBP). `String` */
   event_type?: string | null;
-  /** `Boolean` */
+  /** Whether the event is a made field goal. `Boolean` */
   is_made_shot?: boolean | null;
-  /** `Boolean` */
+  /** Whether the event is a missed field goal. `Boolean` */
   is_missed_shot?: boolean | null;
-  /** `Boolean` */
+  /** Whether the event is a free throw attempt. `Boolean` */
   is_free_throw?: boolean | null;
-  /** `Boolean` */
+  /** Whether the event is a rebound. `Boolean` */
   is_rebound?: boolean | null;
   /** `Boolean` */
   is_turnover?: boolean | null;
-  /** `Boolean` */
+  /** Whether the event is a foul. `Boolean` */
   is_foul?: boolean | null;
-  /** `Boolean` */
+  /** Whether the event is a substitution. `Boolean` */
   is_substitution?: boolean | null;
-  /** `Boolean` */
+  /** Whether the event is a jump ball. `Boolean` */
   is_jump_ball?: boolean | null;
-  /** `Boolean` */
+  /** Whether the event is a timeout. `Boolean` */
   is_timeout?: boolean | null;
-  /** `Boolean` */
+  /** Whether the event is a period start or end marker. `Boolean` */
   is_period?: boolean | null;
-  /** `Int64` */
+  /** Possession number. `Int64` */
   possession_number?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of offensive on-court player 1 of 5 during the event. `Int64` */
   off_player_1?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of offensive on-court player 2 of 5 during the event. `Int64` */
   off_player_2?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of offensive on-court player 3 of 5 during the event. `Int64` */
   off_player_3?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of offensive on-court player 4 of 5 during the event. `Int64` */
   off_player_4?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of offensive on-court player 5 of 5 during the event. `Int64` */
   off_player_5?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of defensive on-court player 1 of 5 during the event. `Int64` */
   def_player_1?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of defensive on-court player 2 of 5 during the event. `Int64` */
   def_player_2?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of defensive on-court player 3 of 5 during the event. `Int64` */
   def_player_3?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of defensive on-court player 4 of 5 during the event. `Int64` */
   def_player_4?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of defensive on-court player 5 of 5 during the event. `Int64` */
   def_player_5?: number | bigint | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1535,75 +1535,75 @@ export interface LoadNbaStatsPbpRow {
 
 /** One row of `sdv.nba.loadNbaStatsPossessions` (`nba_stats_possessions`; sdv-py loader schema `load_nba_stats_possessions`). */
 export interface LoadNbaStatsPossessionsRow {
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Period of the game (1-4 quarters; 5+ for OT). `Int64` */
   period?: number | bigint | null;
-  /** `Int64` */
+  /** Possession number. `Int64` */
   possession_number?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique identifier for offense team. `Int64` (an id) */
   offense_team_id?: string | null;
-  /** `Int64` (an id) */
+  /** NBA Stats team id of the defending team for the possession. `Int64` (an id) */
   defense_team_id?: string | null;
-  /** `Int64` */
+  /** order_index of the play-by-play event that starts the possession. `Int64` */
   start_order_index?: number | bigint | null;
-  /** `Int64` */
+  /** order_index of the play-by-play event that ends the possession. `Int64` */
   end_order_index?: number | bigint | null;
-  /** `Float64` */
+  /** Seconds remaining in the period when the possession started. `Float64` */
   start_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Seconds remaining in the period when the possession ended. `Float64` */
   end_seconds_remaining?: number | null;
-  /** `Int64` */
+  /** Points scored. `Int64` */
   points?: number | bigint | null;
-  /** `Boolean` */
+  /** Whether the row is a second-chance continuation following an offensive rebound. `Boolean` */
   is_second_chance?: boolean | null;
-  /** `Int64` */
+  /** Sequential possession number for the offense within the period. `Int64` */
   number_in_period?: number | bigint | null;
-  /** `String` */
+  /** How the possession began (e.g. off a made shot, defensive rebound, turnover, or period start). `String` */
   possession_start_type?: string | null;
-  /** `Boolean` */
+  /** Whether the row counts as a true possession for per-possession rate stats. `Boolean` */
   count_as_possession?: boolean | null;
-  /** `Int64` */
+  /** Two-point field goal attempts during the possession. `Int64` */
   fg2a?: number | bigint | null;
-  /** `Int64` */
+  /** Two-point field goals made during the possession. `Int64` */
   fg2m?: number | bigint | null;
-  /** `Int64` */
+  /** Three-point field goal attempts. `Int64` */
   fg3a?: number | bigint | null;
-  /** `Int64` */
+  /** Three-point field goals made. `Int64` */
   fg3m?: number | bigint | null;
-  /** `Int64` */
+  /** Free throw attempts. `Int64` */
   fta?: number | bigint | null;
-  /** `Int64` */
+  /** Free throws made. `Int64` */
   ftm?: number | bigint | null;
-  /** `Int64` */
+  /** Offensive rebounds. `Int64` */
   oreb?: number | bigint | null;
-  /** `Int64` */
+  /** Defensive rebounds. `Int64` */
   dreb?: number | bigint | null;
-  /** `Int64` */
+  /** Turnovers. `Int64` */
   tov?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of offensive on-court player 1 of 5 for the possession. `Int64` */
   off_player_1?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of offensive on-court player 2 of 5 for the possession. `Int64` */
   off_player_2?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of offensive on-court player 3 of 5 for the possession. `Int64` */
   off_player_3?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of offensive on-court player 4 of 5 for the possession. `Int64` */
   off_player_4?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of offensive on-court player 5 of 5 for the possession. `Int64` */
   off_player_5?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of defensive on-court player 1 of 5 for the possession. `Int64` */
   def_player_1?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of defensive on-court player 2 of 5 for the possession. `Int64` */
   def_player_2?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of defensive on-court player 3 of 5 for the possession. `Int64` */
   def_player_3?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of defensive on-court player 4 of 5 for the possession. `Int64` */
   def_player_4?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of defensive on-court player 5 of 5 for the possession. `Int64` */
   def_player_5?: number | bigint | null;
-  /** `String` */
+  /** Provenance of the on-court lineup identification for the row (how the five-man units were resolved). `String` */
   lineup_source?: string | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1611,33 +1611,33 @@ export interface LoadNbaStatsPossessionsRow {
 
 /** One row of `sdv.nba.loadNbaStatsGameLineups` (`nba_stats_game_lineups`; sdv-py loader schema `load_nba_stats_game_lineups`). */
 export interface LoadNbaStatsGameLineupsRow {
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Sequential action number within a game (V3 PBP). `Int64` */
   action_number?: number | bigint | null;
-  /** `Int64` */
+  /** Period of the game (1-4 quarters; 5+ for OT). `Int64` */
   period?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of the home on-court player 1 of 5 for the row. `Int64` */
   home_player_1?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of the home on-court player 2 of 5 for the row. `Int64` */
   home_player_2?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of the home on-court player 3 of 5 for the row. `Int64` */
   home_player_3?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of the home on-court player 4 of 5 for the row. `Int64` */
   home_player_4?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of the home on-court player 5 of 5 for the row. `Int64` */
   home_player_5?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of the away on-court player 1 of 5 for the row. `Int64` */
   away_player_1?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of the away on-court player 2 of 5 for the row. `Int64` */
   away_player_2?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of the away on-court player 3 of 5 for the row. `Int64` */
   away_player_3?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of the away on-court player 4 of 5 for the row. `Int64` */
   away_player_4?: number | bigint | null;
-  /** `Int64` */
+  /** NBA Stats player id of the away on-court player 5 of 5 for the row. `Int64` */
   away_player_5?: number | bigint | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1645,105 +1645,105 @@ export interface LoadNbaStatsGameLineupsRow {
 
 /** One row of `sdv.nba.loadNbaStatsGameMatchups` (`nba_stats_game_matchups`; sdv-py loader schema `load_nba_stats_game_matchups`). */
 export interface LoadNbaStatsGameMatchupsRow {
-  /** `Int64` (an id) */
+  /** Team id of the offensive player. Taken from the payload's team block. `Int64` (an id) */
   off_team_id?: string | null;
-  /** `String` */
+  /** City/market of the offensive player's team ("Indiana"). `String` */
   off_team_city?: string | null;
-  /** `String` */
+  /** Nickname of the offensive player's team ("Pacers") -- pair with `off_team_city` for the full club name. `String` */
   off_team_name?: string | null;
-  /** `String` */
+  /** Three-letter abbreviation of the offensive player's team ("IND"). `String` */
   off_team_tricode?: string | null;
-  /** `String` */
+  /** URL slug of the offensive player's team ("pacers"). `String` */
   off_team_slug?: string | null;
-  /** `Int64` (an id) */
+  /** Team id of the defender, read from the game envelope's homeTeamId/awayTeamId rather than the nested team object, which is 0 on uncovered captures. `Int64` (an id) */
   def_team_id?: string | null;
-  /** `String` */
+  /** Which side of the game the row's team was on: "home" or "away". In `game_matchups`, where a row carries two teams, it is the OFFENSIVE player's team (`off_team_id`) -- the defender is always the other side. `String` */
   side?: string | null;
-  /** `Int64` (an id) */
+  /** stats.nba.com person id of the offensive player -- the one being guarded. `Int64` (an id) */
   off_person_id?: string | null;
-  /** `String` */
+  /** First name of the offensive player. `String` */
   off_first_name?: string | null;
-  /** `String` */
+  /** Family name of the offensive player. `String` */
   off_family_name?: string | null;
-  /** `String` */
+  /** Offensive player's abbreviated display name ("B. Mathurin"). `String` */
   off_name_i?: string | null;
-  /** `String` */
+  /** URL slug of the offensive player ("bennedict-mathurin"). `String` */
   off_player_slug?: string | null;
-  /** `String` */
+  /** Starting position of the offensive player as the payload reports it; empty for players who did not start. `String` */
   off_position?: string | null;
-  /** `String` */
+  /** Availability note on the offensive player (DNP reason); empty when they played. `String` */
   off_comment?: string | null;
-  /** `String` */
+  /** Jersey number of the offensive player, as a string (it can carry a leading zero, e.g. "00"). `String` */
   off_jersey_num?: string | null;
-  /** `Int64` (an id) */
+  /** stats.nba.com person id of the defender guarding the offensive player. `Int64` (an id) */
   def_person_id?: string | null;
-  /** `String` */
+  /** First name of the defender. `String` */
   def_first_name?: string | null;
-  /** `String` */
+  /** Family name of the defender. `String` */
   def_family_name?: string | null;
-  /** `String` */
+  /** Defender's abbreviated display name ("J. Allen"). `String` */
   def_name_i?: string | null;
-  /** `String` */
+  /** URL slug of the defender ("jarrett-allen"). `String` */
   def_player_slug?: string | null;
-  /** `String` */
+  /** Jersey number of the defender, as a string (it can carry a leading zero). `String` */
   def_jersey_num?: string | null;
-  /** `String` */
+  /** Time the pair were matched up, as the payload's MM:SS string; use `matchup_minutes_sort` for arithmetic. `String` */
   matchup_minutes?: string | null;
-  /** `Float64` */
+  /** The same matchup time in seconds, as a float -- the sortable/summable form. `Float64` */
   matchup_minutes_sort?: number | null;
-  /** `Float64` */
+  /** Possessions credited to the matchup. Fractional because a possession is split across every defender who guarded the ball-handler during it, which is why matchup counting stats do not sum exactly to a player's game totals. `Float64` */
   partial_possessions?: number | null;
-  /** `Float64` */
+  /** Share of the defender's floor time spent guarding this offensive player. `Float64` */
   percentage_defender_total_time?: number | null;
-  /** `Float64` */
+  /** Share of the offensive player's floor time spent guarded by this defender. `Float64` */
   percentage_offensive_total_time?: number | null;
-  /** `Float64` */
+  /** Share of the time both players were on the floor together that they were matched up. `Float64` */
   percentage_total_time_both_on?: number | null;
-  /** `Int64` */
+  /** Times the defense switched this defender onto the offensive player. `Int64` */
   switches_on?: number | bigint | null;
-  /** `Int64` */
+  /** Points the offensive player scored while guarded by this defender. `Int64` */
   player_points?: number | bigint | null;
-  /** `Int64` */
+  /** Points the offensive player's team scored while this matchup was on. `Int64` */
   team_points?: number | bigint | null;
-  /** `Int64` */
+  /** Assists by the offensive player while guarded by this defender. `Int64` */
   matchup_assists?: number | bigint | null;
-  /** `Int64` */
+  /** Passes by the offensive player that would have been assists had the shot fallen, while guarded by this defender. `Int64` */
   matchup_potential_assists?: number | bigint | null;
-  /** `Int64` */
+  /** Turnovers by the offensive player while guarded by this defender. `Int64` */
   matchup_turnovers?: number | bigint | null;
-  /** `Int64` */
+  /** Shots by the offensive player blocked by this defender. `Int64` */
   matchup_blocks?: number | bigint | null;
-  /** `Int64` */
+  /** Field goals made by the offensive player against this defender. `Int64` */
   matchup_field_goals_made?: number | bigint | null;
-  /** `Int64` */
+  /** Field goals attempted by the offensive player against this defender. `Int64` */
   matchup_field_goals_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Field-goal percentage of the offensive player against this defender. `Float64` */
   matchup_field_goals_percentage?: number | null;
-  /** `Int64` */
+  /** Three-pointers made by the offensive player against this defender. `Int64` */
   matchup_three_pointers_made?: number | bigint | null;
-  /** `Int64` */
+  /** Three-pointers attempted by the offensive player against this defender. `Int64` */
   matchup_three_pointers_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Three-point percentage of the offensive player against this defender. `Float64` */
   matchup_three_pointers_percentage?: number | null;
-  /** `Int64` */
+  /** Blocks by this defender on the offensive player when helping off another assignment rather than as the primary defender. `Int64` */
   help_blocks?: number | bigint | null;
-  /** `Int64` */
+  /** Field goals the offensive player made against this defender in help defense. `Int64` */
   help_field_goals_made?: number | bigint | null;
-  /** `Int64` */
+  /** Field goals the offensive player attempted against this defender in help defense. `Int64` */
   help_field_goals_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Field-goal percentage allowed by this defender in help defense. `Float64` */
   help_field_goals_percentage?: number | null;
-  /** `Int64` */
+  /** Free throws made by the offensive player on trips drawn against this defender. `Int64` */
   matchup_free_throws_made?: number | bigint | null;
-  /** `Int64` */
+  /** Free throws attempted by the offensive player on trips drawn against this defender. `Int64` */
   matchup_free_throws_attempted?: number | bigint | null;
-  /** `Int64` */
+  /** Shooting fouls committed by this defender on the offensive player. `Int64` */
   shooting_fouls?: number | bigint | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Season-type digit: the 3rd character of game_id (and the leading digit of season_id). 1 = preseason, 2 = regular season, 3 = All-Star, 4 = playoffs, 5 = play-in, 6 = NBA Cup final, 9 = international. `String` (an id) */
   season_type_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1751,79 +1751,79 @@ export interface LoadNbaStatsGameMatchupsRow {
 
 /** One row of `sdv.nba.loadNbaStatsPlayerBoxscores` (`nba_stats_player_boxscores`; sdv-py loader schema `load_nba_stats_player_boxscores`). */
 export interface LoadNbaStatsPlayerBoxscoresRow {
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** City/market of the team ("Indiana"); pair with `team_name` for the full club name. `String` */
   team_city?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Three-letter team code (e.g. 'LAS' / 'NYL'). `String` */
   team_tricode?: string | null;
-  /** `String` */
+  /** URL slug of the team ("pacers"). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Side label (e.g. 'home', 'away', or 'overUnder'). `String` */
   side?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier (V3 endpoints). `Int64` (an id) */
   person_id?: string | null;
-  /** `String` */
+  /** Player's first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's family / last name. `String` */
   family_name?: string | null;
-  /** `String` */
+  /** Initialed name (e.g. 'A. Wilson'). `String` */
   name_i?: string | null;
-  /** `String` */
+  /** URL-safe player identifier. `String` */
   player_slug?: string | null;
-  /** `String` */
+  /** Listed roster position (G, F, C, etc.). `String` */
   position?: string | null;
-  /** `String` */
+  /** Player status / inactive reason (e.g. 'DNP - Coach's Decision', 'Inactive'). `String` */
   comment?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   jersey_num?: string | null;
-  /** `String` */
+  /** Minutes played, formatted MM:SS (V3 PT-duration parsed) or decimal minutes (V2). `String` */
   minutes?: string | null;
-  /** `Int64` */
+  /** Field goals made (2-pt + 3-pt). `Int64` */
   field_goals_made?: number | bigint | null;
-  /** `Int64` */
+  /** Field goal attempts (2-pt + 3-pt). `Int64` */
   field_goals_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Field goal percentage (0-1 decimal). `Float64` */
   field_goals_percentage?: number | null;
-  /** `Int64` */
+  /** Three-point field goals made. `Int64` */
   three_pointers_made?: number | bigint | null;
-  /** `Int64` */
+  /** Three-point field goal attempts. `Int64` */
   three_pointers_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Three-point field goal percentage (0-1 decimal). `Float64` */
   three_pointers_percentage?: number | null;
-  /** `Int64` */
+  /** Free throws made. `Int64` */
   free_throws_made?: number | bigint | null;
-  /** `Int64` */
+  /** Free throw attempts. `Int64` */
   free_throws_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Free throw percentage (0-1 decimal). `Float64` */
   free_throws_percentage?: number | null;
-  /** `Int64` */
+  /** Offensive rebounds. `Int64` */
   rebounds_offensive?: number | bigint | null;
-  /** `Int64` */
+  /** Defensive rebounds. `Int64` */
   rebounds_defensive?: number | bigint | null;
-  /** `Int64` */
+  /** Total rebounds. `Int64` */
   rebounds_total?: number | bigint | null;
-  /** `Int64` */
+  /** Total assists. `Int64` */
   assists?: number | bigint | null;
-  /** `Int64` */
+  /** Total steals. `Int64` */
   steals?: number | bigint | null;
-  /** `Int64` */
+  /** Total blocks. `Int64` */
   blocks?: number | bigint | null;
-  /** `Int64` */
+  /** Total turnovers. `Int64` */
   turnovers?: number | bigint | null;
-  /** `Int64` */
+  /** Personal fouls. `Int64` */
   fouls_personal?: number | bigint | null;
-  /** `Int64` */
+  /** Points scored. `Int64` */
   points?: number | bigint | null;
-  /** `Float64` */
+  /** Plus/minus point differential while on court. `Float64` */
   plus_minus_points?: number | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Season-type digit: the 3rd character of game_id (and the leading digit of season_id). 1 = preseason, 2 = regular season, 3 = All-Star, 4 = playoffs, 5 = play-in, 6 = NBA Cup final, 9 = international. `String` (an id) */
   season_type_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1831,67 +1831,67 @@ export interface LoadNbaStatsPlayerBoxscoresRow {
 
 /** One row of `sdv.nba.loadNbaStatsPlayerGameLogs` (`nba_stats_player_game_logs`; sdv-py loader schema `load_nba_stats_player_game_logs`). */
 export interface LoadNbaStatsPlayerGameLogsRow {
-  /** `String` (an id) */
+  /** Unique season identifier. `String` (an id) */
   season_id?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** Game date (YYYY-MM-DD). `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Matchup. `String` */
   matchup?: string | null;
-  /** `String` */
+  /** Wl. `String` */
   wl?: string | null;
-  /** `Int64` */
+  /** Minutes played. `Int64` */
   min?: number | bigint | null;
-  /** `Int64` */
+  /** Field goals made. `Int64` */
   fgm?: number | bigint | null;
-  /** `Int64` */
+  /** Field goal attempts. `Int64` */
   fga?: number | bigint | null;
-  /** `Float64` */
+  /** Field goal percentage (0-1). `Float64` */
   fg_pct?: number | null;
-  /** `Int64` */
+  /** Three-point field goals made. `Int64` */
   fg3m?: number | bigint | null;
-  /** `Int64` */
+  /** Three-point field goal attempts. `Int64` */
   fg3a?: number | bigint | null;
-  /** `Float64` */
+  /** Three-point field goal percentage (0-1). `Float64` */
   fg3_pct?: number | null;
-  /** `Int64` */
+  /** Free throws made. `Int64` */
   ftm?: number | bigint | null;
-  /** `Int64` */
+  /** Free throw attempts. `Int64` */
   fta?: number | bigint | null;
-  /** `Float64` */
+  /** Free throw percentage (0-1). `Float64` */
   ft_pct?: number | null;
-  /** `Int64` */
+  /** Offensive rebounds. `Int64` */
   oreb?: number | bigint | null;
-  /** `Int64` */
+  /** Defensive rebounds. `Int64` */
   dreb?: number | bigint | null;
-  /** `Int64` */
+  /** Rebounds per game. `Int64` */
   reb?: number | bigint | null;
-  /** `Int64` */
+  /** Assists. `Int64` */
   ast?: number | bigint | null;
-  /** `Int64` */
+  /** Steals. `Int64` */
   stl?: number | bigint | null;
-  /** `Int64` */
+  /** Blocks. `Int64` */
   blk?: number | bigint | null;
-  /** `Int64` */
+  /** Turnovers. `Int64` */
   tov?: number | bigint | null;
-  /** `Int64` */
+  /** Personal fouls. `Int64` */
   pf?: number | bigint | null;
-  /** `Int64` */
+  /** Points scored. `Int64` */
   pts?: number | bigint | null;
-  /** `Int64` */
+  /** Plus/minus point differential while on court. `Int64` */
   plus_minus?: number | bigint | null;
-  /** `Int64` */
+  /** Video available. `Int64` */
   video_available?: number | bigint | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1899,425 +1899,425 @@ export interface LoadNbaStatsPlayerGameLogsRow {
 
 /** One row of `sdv.nba.loadNbaStatsPlayerSeasonStats` (`nba_stats_player_season_stats`; sdv-py loader schema `load_nba_stats_player_season_stats`). */
 export interface LoadNbaStatsPlayerSeasonStatsRow {
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `String` */
+  /** Team or athlete nickname. `String` */
   nickname?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `Float64` */
+  /** Player age (in years). `Float64` */
   age?: number | null;
-  /** `Int64` */
+  /** Games played. `Int64` */
   gp?: number | bigint | null;
-  /** `Int64` */
+  /** Wins. `Int64` */
   w?: number | bigint | null;
-  /** `Int64` */
+  /** Losses. `Int64` */
   l?: number | bigint | null;
-  /** `Float64` */
+  /** Wins percentage (0-1 decimal). `Float64` */
   w_pct?: number | null;
-  /** `Float64` */
+  /** Minutes played. `Float64` */
   min?: number | null;
-  /** `Float64` */
+  /** Estimated offensive rating (NBA Stats estimated-metrics family) over the split. `Float64` */
   e_off_rating?: number | null;
-  /** `Float64` */
+  /** Offensive rating (points scored per 100 possessions) over the split. `Float64` */
   off_rating?: number | null;
-  /** `Float64` */
+  /** Offensive rating carried in the stats API's SP_WORK column set (mirrors off_rating) over the split. `Float64` */
   sp_work_off_rating?: number | null;
-  /** `Float64` */
+  /** Estimated defensive rating (NBA Stats estimated-metrics family) over the split. `Float64` */
   e_def_rating?: number | null;
-  /** `Float64` */
+  /** Defensive rating (points allowed per 100 possessions) over the split. `Float64` */
   def_rating?: number | null;
-  /** `Float64` */
+  /** Defensive rating carried in the stats API's SP_WORK column set (mirrors def_rating) over the split. `Float64` */
   sp_work_def_rating?: number | null;
-  /** `Float64` */
+  /** Estimated net rating (NBA Stats estimated-metrics family) over the split. `Float64` */
   e_net_rating?: number | null;
-  /** `Float64` */
+  /** Net rating (off rating - def rating). `Float64` */
   net_rating?: number | null;
-  /** `Float64` */
+  /** Net rating carried in the stats API's SP_WORK column set (mirrors net_rating) over the split. `Float64` */
   sp_work_net_rating?: number | null;
-  /** `Float64` */
+  /** Assist percentage. `Float64` */
   ast_pct?: number | null;
-  /** `Float64` */
+  /** Assist-to-turnover ratio over the split. `Float64` */
   ast_to?: number | null;
-  /** `Float64` */
+  /** Assist ratio (assists per 100 possessions used) over the split. `Float64` */
   ast_ratio?: number | null;
-  /** `Float64` */
+  /** Offensive rebound percentage over the split, as a decimal. `Float64` */
   oreb_pct?: number | null;
-  /** `Float64` */
+  /** Defensive rebound percentage over the split, as a decimal. `Float64` */
   dreb_pct?: number | null;
-  /** `Float64` */
+  /** Total rebound percentage over the split, as a decimal. `Float64` */
   reb_pct?: number | null;
-  /** `Float64` */
+  /** Team turnover percentage (turnovers per 100 possessions) over the split, as a decimal. `Float64` */
   tm_tov_pct?: number | null;
-  /** `Float64` */
+  /** Estimated turnover percentage (NBA Stats estimated-metrics family) over the split, as a decimal. `Float64` */
   e_tov_pct?: number | null;
-  /** `Float64` */
+  /** Effective field goal percentage over the split, as a decimal. `Float64` */
   efg_pct?: number | null;
-  /** `Float64` */
+  /** True shooting percentage (0-1). `Float64` */
   ts_pct?: number | null;
-  /** `Float64` */
+  /** Usage percentage (share of team plays used while on the floor) over the split, as a decimal. `Float64` */
   usg_pct?: number | null;
-  /** `Float64` */
+  /** Estimated usage percentage (NBA Stats estimated-metrics family) over the split, as a decimal. `Float64` */
   e_usg_pct?: number | null;
-  /** `Float64` */
+  /** Estimated pace (NBA Stats estimated-metrics family) over the split. `Float64` */
   e_pace?: number | null;
-  /** `Float64` */
+  /** Possessions per 48 minutes. `Float64` */
   pace?: number | null;
-  /** `Float64` */
+  /** Pace per40. `Float64` */
   pace_per40?: number | null;
-  /** `Float64` */
+  /** Pace carried in the stats API's SP_WORK column set (mirrors pace) over the split. `Float64` */
   sp_work_pace?: number | null;
-  /** `Float64` */
+  /** Player Impact Estimate (0-1). `Float64` */
   pie?: number | null;
-  /** `Int64` */
+  /** Poss. `Int64` */
   poss?: number | bigint | null;
-  /** `Float64` */
+  /** Field goals made. `Float64` */
   fgm?: number | null;
-  /** `Float64` */
+  /** Field goal attempts. `Float64` */
   fga?: number | null;
-  /** `Float64` */
+  /** Field goals made per game over the split. `Float64` */
   fgm_pg?: number | null;
-  /** `Float64` */
+  /** Field goals attempted per game over the split. `Float64` */
   fga_pg?: number | null;
-  /** `Float64` */
+  /** Field goal percentage (0-1). `Float64` */
   fg_pct?: number | null;
-  /** `Int64` */
+  /** League rank of the row's games played for the season and split. `Int64` */
   gp_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's wins for the season and split. `Int64` */
   w_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's losses for the season and split. `Int64` */
   l_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's win percentage for the season and split. `Int64` */
   w_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's minutes played for the season and split. `Int64` */
   min_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's estimated offensive rating (NBA Stats estimated-metrics family) for the season and split. `Int64` */
   e_off_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's offensive rating (points scored per 100 possessions) for the season and split. `Int64` */
   off_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's offensive rating carried in the stats API's SP_WORK column set (mirrors off_rating) for the season and split. `Int64` */
   sp_work_off_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's estimated defensive rating (NBA Stats estimated-metrics family) for the season and split. `Int64` */
   e_def_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's defensive rating (points allowed per 100 possessions) for the season and split. `Int64` */
   def_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's defensive rating carried in the stats API's SP_WORK column set (mirrors def_rating) for the season and split. `Int64` */
   sp_work_def_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's estimated net rating (NBA Stats estimated-metrics family) for the season and split. `Int64` */
   e_net_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's net rating (offensive minus defensive rating) for the season and split. `Int64` */
   net_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's net rating carried in the stats API's SP_WORK column set (mirrors net_rating) for the season and split. `Int64` */
   sp_work_net_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's assist percentage (share of teammate field goals assisted while on the floor) for the season and split. `Int64` */
   ast_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's assist-to-turnover ratio for the season and split. `Int64` */
   ast_to_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's assist ratio (assists per 100 possessions used) for the season and split. `Int64` */
   ast_ratio_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's offensive rebound percentage for the season and split. `Int64` */
   oreb_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's defensive rebound percentage for the season and split. `Int64` */
   dreb_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's total rebound percentage for the season and split. `Int64` */
   reb_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's team turnover percentage (turnovers per 100 possessions) for the season and split. `Int64` */
   tm_tov_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's estimated turnover percentage (NBA Stats estimated-metrics family) for the season and split. `Int64` */
   e_tov_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's effective field goal percentage for the season and split. `Int64` */
   efg_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's true shooting percentage for the season and split. `Int64` */
   ts_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's usage percentage (share of team plays used while on the floor) for the season and split. `Int64` */
   usg_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's estimated usage percentage (NBA Stats estimated-metrics family) for the season and split. `Int64` */
   e_usg_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's estimated pace (NBA Stats estimated-metrics family) for the season and split. `Int64` */
   e_pace_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's pace (possessions per 48 minutes) for the season and split. `Int64` */
   pace_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's pace carried in the stats API's SP_WORK column set (mirrors pace) for the season and split. `Int64` */
   sp_work_pace_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's Player Impact Estimate (PIE, the NBA Stats catch-all impact metric) for the season and split. `Int64` */
   pie_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's field goals made for the season and split. `Int64` */
   fgm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's field goals attempted for the season and split. `Int64` */
   fga_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's field goals made per game for the season and split. `Int64` */
   fgm_pg_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's field goals attempted per game for the season and split. `Int64` */
   fga_pg_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's field goal percentage for the season and split. `Int64` */
   fg_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** Number of distinct teams aggregated into the split row. `Int64` */
   team_count?: number | bigint | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
-  /** `String` */
+  /** NBA Stats measure type the row was pulled from (e.g. Base, Advanced, Misc, Scoring, Opponent, Usage, Defense). `String` */
   measure_type?: string | null;
-  /** `String` */
+  /** NBA Stats per-mode of the row values (e.g. Totals, PerGame, Per100Possessions). `String` */
   per_mode?: string | null;
-  /** `Float64` */
+  /** Three-point field goals made. `Float64` */
   fg3m?: number | null;
-  /** `Float64` */
+  /** Three-point field goal attempts. `Float64` */
   fg3a?: number | null;
-  /** `Float64` */
+  /** Three-point field goal percentage (0-1). `Float64` */
   fg3_pct?: number | null;
-  /** `Float64` */
+  /** Free throws made. `Float64` */
   ftm?: number | null;
-  /** `Float64` */
+  /** Free throw attempts. `Float64` */
   fta?: number | null;
-  /** `Float64` */
+  /** Free throw percentage (0-1). `Float64` */
   ft_pct?: number | null;
-  /** `Float64` */
+  /** Offensive rebounds. `Float64` */
   oreb?: number | null;
-  /** `Float64` */
+  /** Defensive rebounds. `Float64` */
   dreb?: number | null;
-  /** `Float64` */
+  /** Rebounds per game. `Float64` */
   reb?: number | null;
-  /** `Float64` */
+  /** Assists. `Float64` */
   ast?: number | null;
-  /** `Float64` */
+  /** Turnovers. `Float64` */
   tov?: number | null;
-  /** `Float64` */
+  /** Steals. `Float64` */
   stl?: number | null;
-  /** `Float64` */
+  /** Blocks. `Float64` */
   blk?: number | null;
-  /** `Float64` */
+  /** Shot attempts blocked by opponents (blocks against). `Float64` */
   blka?: number | null;
-  /** `Float64` */
+  /** Personal fouls. `Float64` */
   pf?: number | null;
-  /** `Float64` */
+  /** Personal fouls drawn. `Float64` */
   pfd?: number | null;
-  /** `Float64` */
+  /** Points scored. `Float64` */
   pts?: number | null;
-  /** `Float64` */
+  /** Plus/minus point differential while on court. `Float64` */
   plus_minus?: number | null;
-  /** `Float64` */
+  /** Fantasy points under the NBA's fantasy scoring formula. `Float64` */
   nba_fantasy_pts?: number | null;
-  /** `Int64` */
+  /** Double-doubles recorded over the split. `Int64` */
   dd2?: number | bigint | null;
-  /** `Int64` */
+  /** Triple-doubles recorded over the split. `Int64` */
   td3?: number | bigint | null;
-  /** `Float64` */
+  /** Fantasy points under the WNBA's fantasy scoring formula. `Float64` */
   wnba_fantasy_pts?: number | null;
-  /** `Int64` */
+  /** League rank of the row's three-point field goals made for the season and split. `Int64` */
   fg3m_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's three-point field goals attempted for the season and split. `Int64` */
   fg3a_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's three-point field goal percentage for the season and split. `Int64` */
   fg3_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's free throws made for the season and split. `Int64` */
   ftm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's free throws attempted for the season and split. `Int64` */
   fta_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's free throw percentage for the season and split. `Int64` */
   ft_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's offensive rebounds for the season and split. `Int64` */
   oreb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's defensive rebounds for the season and split. `Int64` */
   dreb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's total rebounds for the season and split. `Int64` */
   reb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's assists for the season and split. `Int64` */
   ast_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's turnovers for the season and split. `Int64` */
   tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's steals for the season and split. `Int64` */
   stl_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's blocked shots for the season and split. `Int64` */
   blk_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's shot attempts blocked by opponents (blocks against) for the season and split. `Int64` */
   blka_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's personal fouls committed for the season and split. `Int64` */
   pf_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's personal fouls drawn for the season and split. `Int64` */
   pfd_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's points scored for the season and split. `Int64` */
   pts_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's plus-minus point differential while on the floor for the season and split. `Int64` */
   plus_minus_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's NBA fantasy points (league scoring formula) for the season and split. `Int64` */
   nba_fantasy_pts_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's double-doubles for the season and split. `Int64` */
   dd2_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's triple-doubles for the season and split. `Int64` */
   td3_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's WNBA fantasy points (league scoring formula) for the season and split. `Int64` */
   wnba_fantasy_pts_rank?: number | bigint | null;
-  /** `Float64` */
+  /** Share of the team's defensive rebounds accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_dreb?: number | null;
-  /** `Float64` */
+  /** Share of the team's steals accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_stl?: number | null;
-  /** `Float64` */
+  /** Share of the team's blocked shots accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_blk?: number | null;
-  /** `Float64` */
+  /** Opponent points scored off opponent turnovers allowed over the split. `Float64` */
   opp_pts_off_tov?: number | null;
-  /** `Float64` */
+  /** Opponent second-chance points allowed over the split. `Float64` */
   opp_pts_2nd_chance?: number | null;
-  /** `Float64` */
+  /** Opponent fast-break points allowed over the split. `Float64` */
   opp_pts_fb?: number | null;
-  /** `Float64` */
+  /** Opponent points in the paint allowed over the split. `Float64` */
   opp_pts_paint?: number | null;
-  /** `Float64` */
+  /** Defensive win shares credited to the player (NBA Stats defense dashboard metric). `Float64` */
   def_ws?: number | null;
-  /** `Float64` */
+  /** Unscaled (raw) defensive win shares value carried alongside def_ws by the NBA Stats API. `Float64` */
   def_ws_raw?: number | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's defensive rebounds accounted for by the player while on the floor for the season and split. `Int64` */
   pct_dreb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's steals accounted for by the player while on the floor for the season and split. `Int64` */
   pct_stl_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's blocked shots accounted for by the player while on the floor for the season and split. `Int64` */
   pct_blk_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent points scored off opponent turnovers for the season and split. `Int64` */
   opp_pts_off_tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent second-chance points for the season and split. `Int64` */
   opp_pts_2nd_chance_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent fast-break points for the season and split. `Int64` */
   opp_pts_fb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent points in the paint for the season and split. `Int64` */
   opp_pts_paint_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's defensive win shares (NBA Stats defense dashboard metric) for the season and split. `Int64` */
   def_ws_rank?: number | bigint | null;
-  /** `Float64` */
+  /** Points scored off opponent turnovers over the split. `Float64` */
   pts_off_tov?: number | null;
-  /** `Float64` */
+  /** Second-chance points over the split. `Float64` */
   pts_2nd_chance?: number | null;
-  /** `Float64` */
+  /** Fast-break points over the split. `Float64` */
   pts_fb?: number | null;
-  /** `Float64` */
+  /** Points in the paint over the split. `Float64` */
   pts_paint?: number | null;
-  /** `Int64` */
+  /** League rank of the row's points scored off opponent turnovers for the season and split. `Int64` */
   pts_off_tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's second-chance points for the season and split. `Int64` */
   pts_2nd_chance_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's fast-break points for the season and split. `Int64` */
   pts_fb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's points in the paint for the season and split. `Int64` */
   pts_paint_rank?: number | bigint | null;
-  /** `Float64` */
+  /** Share of field goal attempts taken as two-pointers, as a decimal. `Float64` */
   pct_fga_2pt?: number | null;
-  /** `Float64` */
+  /** Share of field goal attempts taken as three-pointers, as a decimal. `Float64` */
   pct_fga_3pt?: number | null;
-  /** `Float64` */
+  /** Share of points scored on two-point field goals, as a decimal. `Float64` */
   pct_pts_2pt?: number | null;
-  /** `Float64` */
+  /** Share of points scored on mid-range two-pointers, as a decimal. `Float64` */
   pct_pts_2pt_mr?: number | null;
-  /** `Float64` */
+  /** Share of points scored on three-pointers, as a decimal. `Float64` */
   pct_pts_3pt?: number | null;
-  /** `Float64` */
+  /** Share of points scored on fast breaks, as a decimal. `Float64` */
   pct_pts_fb?: number | null;
-  /** `Float64` */
+  /** Share of points scored at the free throw line, as a decimal. `Float64` */
   pct_pts_ft?: number | null;
-  /** `Float64` */
+  /** Share of points scored off opponent turnovers, as a decimal. `Float64` */
   pct_pts_off_tov?: number | null;
-  /** `Float64` */
+  /** Share of points scored in the paint, as a decimal. `Float64` */
   pct_pts_paint?: number | null;
-  /** `Float64` */
+  /** Percentage of made two-pointers that were assisted, as a decimal. `Float64` */
   pct_ast_2pm?: number | null;
-  /** `Float64` */
+  /** Percentage of made two-pointers that were unassisted, as a decimal. `Float64` */
   pct_uast_2pm?: number | null;
-  /** `Float64` */
+  /** Percentage of made three-pointers that were assisted, as a decimal. `Float64` */
   pct_ast_3pm?: number | null;
-  /** `Float64` */
+  /** Percentage of made three-pointers that were unassisted, as a decimal. `Float64` */
   pct_uast_3pm?: number | null;
-  /** `Float64` */
+  /** Percentage of made field goals that were assisted, as a decimal. `Float64` */
   pct_ast_fgm?: number | null;
-  /** `Float64` */
+  /** Percentage of made field goals that were unassisted, as a decimal. `Float64` */
   pct_uast_fgm?: number | null;
-  /** `Int64` */
+  /** League rank of the row's share of field goal attempts taken as two-pointers for the season and split. `Int64` */
   pct_fga_2pt_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of field goal attempts taken as three-pointers for the season and split. `Int64` */
   pct_fga_3pt_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored on two-point field goals for the season and split. `Int64` */
   pct_pts_2pt_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored on mid-range two-pointers for the season and split. `Int64` */
   pct_pts_2pt_mr_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored on three-pointers for the season and split. `Int64` */
   pct_pts_3pt_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored on fast breaks for the season and split. `Int64` */
   pct_pts_fb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored at the free throw line for the season and split. `Int64` */
   pct_pts_ft_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored off opponent turnovers for the season and split. `Int64` */
   pct_pts_off_tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored in the paint for the season and split. `Int64` */
   pct_pts_paint_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made two-pointers that were assisted for the season and split. `Int64` */
   pct_ast_2pm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made two-pointers that were unassisted for the season and split. `Int64` */
   pct_uast_2pm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made three-pointers that were assisted for the season and split. `Int64` */
   pct_ast_3pm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made three-pointers that were unassisted for the season and split. `Int64` */
   pct_uast_3pm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made field goals that were assisted for the season and split. `Int64` */
   pct_ast_fgm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made field goals that were unassisted for the season and split. `Int64` */
   pct_uast_fgm_rank?: number | bigint | null;
-  /** `Float64` */
+  /** Share of the team's field goals made accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_fgm?: number | null;
-  /** `Float64` */
+  /** Share of the team's field goals attempted accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_fga?: number | null;
-  /** `Float64` */
+  /** Share of the team's three-point field goals made accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_fg3m?: number | null;
-  /** `Float64` */
+  /** Share of the team's three-point field goals attempted accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_fg3a?: number | null;
-  /** `Float64` */
+  /** Share of the team's free throws made accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_ftm?: number | null;
-  /** `Float64` */
+  /** Share of the team's free throws attempted accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_fta?: number | null;
-  /** `Float64` */
+  /** Share of the team's offensive rebounds accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_oreb?: number | null;
-  /** `Float64` */
+  /** Share of the team's total rebounds accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_reb?: number | null;
-  /** `Float64` */
+  /** Share of the team's assists accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_ast?: number | null;
-  /** `Float64` */
+  /** Share of the team's turnovers accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_tov?: number | null;
-  /** `Float64` */
+  /** Share of the team's shot attempts blocked by opponents (blocks against) accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_blka?: number | null;
-  /** `Float64` */
+  /** Share of the team's personal fouls committed accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_pf?: number | null;
-  /** `Float64` */
+  /** Share of the team's personal fouls drawn accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_pfd?: number | null;
-  /** `Float64` */
+  /** Share of the team's points scored accounted for by the player while on the floor, as a decimal. `Float64` */
   pct_pts?: number | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's field goals made accounted for by the player while on the floor for the season and split. `Int64` */
   pct_fgm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's field goals attempted accounted for by the player while on the floor for the season and split. `Int64` */
   pct_fga_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's three-point field goals made accounted for by the player while on the floor for the season and split. `Int64` */
   pct_fg3m_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's three-point field goals attempted accounted for by the player while on the floor for the season and split. `Int64` */
   pct_fg3a_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's free throws made accounted for by the player while on the floor for the season and split. `Int64` */
   pct_ftm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's free throws attempted accounted for by the player while on the floor for the season and split. `Int64` */
   pct_fta_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's offensive rebounds accounted for by the player while on the floor for the season and split. `Int64` */
   pct_oreb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's total rebounds accounted for by the player while on the floor for the season and split. `Int64` */
   pct_reb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's assists accounted for by the player while on the floor for the season and split. `Int64` */
   pct_ast_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's turnovers accounted for by the player while on the floor for the season and split. `Int64` */
   pct_tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's shot attempts blocked by opponents (blocks against) accounted for by the player while on the floor for the season and split. `Int64` */
   pct_blka_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's personal fouls committed accounted for by the player while on the floor for the season and split. `Int64` */
   pct_pf_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's personal fouls drawn accounted for by the player while on the floor for the season and split. `Int64` */
   pct_pfd_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of the team's points scored accounted for by the player while on the floor for the season and split. `Int64` */
   pct_pts_rank?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2325,41 +2325,41 @@ export interface LoadNbaStatsPlayerSeasonStatsRow {
 
 /** One row of `sdv.nba.loadNbaStatsRosters` (`nba_stats_rosters`; sdv-py loader schema `load_nba_stats_rosters`). */
 export interface LoadNbaStatsRostersRow {
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** League identifier ('10' = WNBA). `String` (an id) */
   league_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player?: string | null;
-  /** `String` */
+  /** Team or athlete nickname. `String` */
   nickname?: string | null;
-  /** `String` */
+  /** URL-safe player identifier. `String` */
   player_slug?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   num?: string | null;
-  /** `String` */
+  /** Listed roster position (G, F, C, etc.). `String` */
   position?: string | null;
-  /** `String` */
+  /** Player height (string e.g. '6-2' or inches). `String` */
   height?: string | null;
-  /** `String` */
+  /** Player weight in pounds. `String` */
   weight?: string | null;
-  /** `String` */
+  /** Date of birth (YYYY-MM-DD). `String` */
   birth_date?: string | null;
-  /** `Float64` */
+  /** Player age (in years). `Float64` */
   age?: number | null;
-  /** `String` */
+  /** Years of NBA playing experience entering the season ('R' = rookie). `String` */
   exp?: string | null;
-  /** `String` */
+  /** Player school / pre-draft team. `String` */
   school?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** How the team acquired the player (e.g. draft, trade, free agency). `String` */
   how_acquired?: string | null;
-  /** `Int64` */
+  /** Numeric supplemental roster-status code from the stats.nba.com roster feed. `Int64` */
   supplemental_status?: number | bigint | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2367,43 +2367,43 @@ export interface LoadNbaStatsRostersRow {
 
 /** One row of `sdv.nba.loadNbaStatsShots` (`nba_stats_shots`; sdv-py loader schema `load_nba_stats_shots`). */
 export interface LoadNbaStatsShotsRow {
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Season-type digit: the 3rd character of game_id (and the leading digit of season_id). 1 = preseason, 2 = regular season, 3 = All-Star, 4 = playoffs, 5 = play-in, 6 = NBA Cup final, 9 = international. `String` (an id) */
   season_type_id?: string | null;
-  /** `Int64` */
+  /** Period of the game (1-4 quarters; 5+ for OT). `Int64` */
   period?: number | bigint | null;
-  /** `String` */
+  /** Game clock value. `String` */
   clock?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Three-letter team code (e.g. 'LAS' / 'NYL'). `String` */
   team_tricode?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier (V3 endpoints). `Int64` (an id) */
   person_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `String` */
+  /** Action type label (e.g. 'Made Shot', 'Substitution'). `String` */
   action_type?: string | null;
-  /** `String` */
+  /** Action sub-type label. `String` */
   sub_type?: string | null;
-  /** `String` */
+  /** Shot result ('Made' / 'Missed'). `String` */
   shot_result?: string | null;
-  /** `Int64` */
+  /** Point value of the shot (2 or 3). `Int64` */
   shot_value?: number | bigint | null;
-  /** `Int64` */
+  /** Shot distance from the basket, in feet. `Int64` */
   shot_distance?: number | bigint | null;
-  /** `Int64` */
+  /** V2-format X coordinate (preserved for V3-to-V2 compatibility). `Int64` */
   x_legacy?: number | bigint | null;
-  /** `Int64` */
+  /** V2-format Y coordinate (preserved for V3-to-V2 compatibility). `Int64` */
   y_legacy?: number | bigint | null;
-  /** `String` */
+  /** Long-form description text. `String` */
   description?: string | null;
-  /** `String` */
+  /** Score home. `String` */
   score_home?: string | null;
-  /** `String` */
+  /** Score away. `String` */
   score_away?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2411,193 +2411,193 @@ export interface LoadNbaStatsShotsRow {
 
 /** One row of `sdv.nba.loadNbaStatsStandings` (`nba_stats_standings`; sdv-py loader schema `load_nba_stats_standings`). */
 export interface LoadNbaStatsStandingsRow {
-  /** `String` (an id) */
+  /** League identifier ('10' = WNBA). `String` (an id) */
   league_id?: string | null;
-  /** `String` (an id) */
+  /** Unique season identifier. `String` (an id) */
   season_id?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team city or region (e.g. 'Las Vegas'). `String` */
   team_city?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Conference name. `String` */
   conference?: string | null;
-  /** `String` */
+  /** Conference win-loss record. `String` */
   conference_record?: string | null;
-  /** `Int64` */
+  /** League/season rank for playoff. `Int64` */
   playoff_rank?: number | bigint | null;
-  /** `String` */
+  /** Playoff clinch indicator (e.g. 'x' clinched playoff, 'e' eliminated). `String` */
   clinch_indicator?: string | null;
-  /** `String` */
+  /** Team division. `String` */
   division?: string | null;
-  /** `String` */
+  /** Win-loss record against division opponents. `String` */
   division_record?: string | null;
-  /** `Int64` */
+  /** Team's rank within its division. `Int64` */
   division_rank?: number | bigint | null;
-  /** `Int64` */
+  /** Total wins. `Int64` */
   wins?: number | bigint | null;
-  /** `Int64` */
+  /** Total losses. `Int64` */
   losses?: number | bigint | null;
-  /** `Float64` */
+  /** Win percentage (0-1 decimal). `Float64` */
   win_pct?: number | null;
-  /** `Int64` */
+  /** Team's rank in the overall league standings. `Int64` */
   league_rank?: number | bigint | null;
-  /** `String` */
+  /** Overall win-loss record. `String` */
   record?: string | null;
-  /** `String` */
+  /** Home. `String` */
   home?: string | null;
-  /** `String` */
+  /** Road. `String` */
   road?: string | null;
-  /** `String` */
+  /** Last-ten record. `String` */
   l10?: string | null;
-  /** `String` */
+  /** Win-loss record over the team's last 10 home games. `String` */
   last10_home?: string | null;
-  /** `String` */
+  /** Win-loss record over the team's last 10 road games. `String` */
   last10_road?: string | null;
-  /** `String` */
+  /** Ot. `String` */
   ot?: string | null;
-  /** `String` */
+  /** Win-loss record in games decided by three points or fewer. `String` */
   three_pts_or_less?: string | null;
-  /** `String` */
+  /** Win-loss record in games decided by ten points or more. `String` */
   ten_pts_or_more?: string | null;
-  /** `Int64` */
+  /** Longest home streak of the season (positive counts wins, negative losses). `Int64` */
   long_home_streak?: number | bigint | null;
-  /** `String` */
+  /** Longest home streak of the season as display text (e.g. "W 5"). `String` */
   str_long_home_streak?: string | null;
-  /** `Int64` */
+  /** Longest road streak of the season (positive counts wins, negative losses). `Int64` */
   long_road_streak?: number | bigint | null;
-  /** `String` */
+  /** Longest road streak of the season as display text (e.g. "W 5"). `String` */
   str_long_road_streak?: string | null;
-  /** `Int64` */
+  /** Longest winning streak of the season, in games. `Int64` */
   long_win_streak?: number | bigint | null;
-  /** `Int64` */
+  /** Longest losing streak of the season, in games. `Int64` */
   long_loss_streak?: number | bigint | null;
-  /** `Int64` */
+  /** Current home streak (positive counts wins, negative losses). `Int64` */
   current_home_streak?: number | bigint | null;
-  /** `String` */
+  /** Current home streak as display text (e.g. "L 2"). `String` */
   str_current_home_streak?: string | null;
-  /** `Int64` */
+  /** Current road streak (positive counts wins, negative losses). `Int64` */
   current_road_streak?: number | bigint | null;
-  /** `String` */
+  /** Current road streak as display text (e.g. "W 3"). `String` */
   str_current_road_streak?: string | null;
-  /** `Int64` */
+  /** Current overall streak (positive counts wins, negative losses). `Int64` */
   current_streak?: number | bigint | null;
-  /** `String` */
+  /** Current overall streak as display text (e.g. "W 4"). `String` */
   str_current_streak?: string | null;
-  /** `Float64` */
+  /** Games behind the conference leader. `Float64` */
   conference_games_back?: number | null;
-  /** `Float64` */
+  /** Games behind the division leader. `Float64` */
   division_games_back?: number | null;
-  /** `Int64` */
+  /** Flag (1/0) for whether the team has clinched the conference title. `Int64` */
   clinched_conference_title?: number | bigint | null;
-  /** `Int64` */
+  /** Flag (1/0) for whether the team has clinched its division. `Int64` */
   clinched_division_title?: number | bigint | null;
-  /** `Int64` */
+  /** Flag (1/0) for whether the team has clinched a playoff berth. `Int64` */
   clinched_playoff_birth?: number | bigint | null;
-  /** `Int64` */
+  /** Flag (1/0) for whether the team has clinched a play-in tournament spot. `Int64` */
   clinched_play_in?: number | bigint | null;
-  /** `Int64` */
+  /** Flag (1/0) for whether the team is eliminated from conference contention. `Int64` */
   eliminated_conference?: number | bigint | null;
-  /** `Int64` */
+  /** Flag (1/0) for whether the team is eliminated from division contention. `Int64` */
   eliminated_division?: number | bigint | null;
-  /** `String` */
+  /** Win-loss record when leading at halftime. `String` */
   ahead_at_half?: string | null;
-  /** `String` */
+  /** Win-loss record when trailing at halftime. `String` */
   behind_at_half?: string | null;
-  /** `String` */
+  /** Win-loss record when tied at halftime. `String` */
   tied_at_half?: string | null;
-  /** `String` */
+  /** Win-loss record when leading after three quarters. `String` */
   ahead_at_third?: string | null;
-  /** `String` */
+  /** Win-loss record when trailing after three quarters. `String` */
   behind_at_third?: string | null;
-  /** `String` */
+  /** Win-loss record when tied after three quarters. `String` */
   tied_at_third?: string | null;
-  /** `String` */
+  /** Win-loss record when scoring 100 or more points. `String` */
   score100_pts?: string | null;
-  /** `String` */
+  /** Win-loss record when the opponent scores 100 or more points. `String` */
   opp_score100_pts?: string | null;
-  /** `String` */
+  /** Win-loss record against teams with winning (over .500) records. `String` */
   opp_over500?: string | null;
-  /** `String` */
+  /** Win-loss record when posting the higher field goal percentage. `String` */
   lead_in_fgpct?: string | null;
-  /** `String` */
+  /** Win-loss record when out-rebounding the opponent. `String` */
   lead_in_reb?: string | null;
-  /** `String` */
+  /** Win-loss record when committing fewer turnovers than the opponent. `String` */
   fewer_turnovers?: string | null;
-  /** `Float64` */
+  /** Points pg. `Float64` */
   points_pg?: number | null;
-  /** `Float64` */
+  /** Opponent points pg. `Float64` */
   opp_points_pg?: number | null;
-  /** `Float64` */
+  /** Diff points pg. `Float64` */
   diff_points_pg?: number | null;
-  /** `String` */
+  /** Win-loss record against Eastern Conference opponents. `String` */
   vs_east?: string | null;
-  /** `String` */
+  /** Win-loss record against Atlantic Division opponents. `String` */
   vs_atlantic?: string | null;
-  /** `String` */
+  /** Win-loss record against Central Division opponents. `String` */
   vs_central?: string | null;
-  /** `String` */
+  /** Win-loss record against Southeast Division opponents. `String` */
   vs_southeast?: string | null;
-  /** `String` */
+  /** Win-loss record against Western Conference opponents. `String` */
   vs_west?: string | null;
-  /** `String` */
+  /** Win-loss record against Northwest Division opponents. `String` */
   vs_northwest?: string | null;
-  /** `String` */
+  /** Win-loss record against Pacific Division opponents. `String` */
   vs_pacific?: string | null;
-  /** `String` */
+  /** Win-loss record against Southwest Division opponents. `String` */
   vs_southwest?: string | null;
-  /** `String` */
+  /** Win-loss record in games played in January. `String` */
   jan?: string | null;
-  /** `String` */
+  /** Win-loss record in games played in February. `String` */
   feb?: string | null;
-  /** `String` */
+  /** Win-loss record in games played in March. `String` */
   mar?: string | null;
-  /** `String` */
+  /** Win-loss record in games played in April. `String` */
   apr?: string | null;
-  /** `Null` */
+  /** Win-loss record in games played in May. `Null` */
   may?: unknown;
-  /** `Null` */
+  /** Win-loss record in games played in June. `Null` */
   jun?: unknown;
-  /** `Null` */
+  /** Win-loss record in games played in July. `Null` */
   jul?: unknown;
-  /** `Null` */
+  /** Win-loss record in games played in August. `Null` */
   aug?: unknown;
-  /** `Null` */
+  /** Win-loss record in games played in September. `Null` */
   sep?: unknown;
-  /** `String` */
+  /** Win-loss record in games played in October. `String` */
   oct?: string | null;
-  /** `String` */
+  /** Win-loss record in games played in November. `String` */
   nov?: string | null;
-  /** `String` */
+  /** Win-loss record in games played in December. `String` */
   dec?: string | null;
-  /** `String` */
+  /** Win-loss record when scoring 80 or more points. `String` */
   score_80_plus?: string | null;
-  /** `String` */
+  /** Win-loss record when the opponent scores 80 or more points. `String` */
   opp_score_80_plus?: string | null;
-  /** `String` */
+  /** Win-loss record when scoring fewer than 80 points. `String` */
   score_below_80?: string | null;
-  /** `String` */
+  /** Win-loss record when holding the opponent below 80 points. `String` */
   opp_score_below_80?: string | null;
-  /** `Int64` */
+  /** Total points scored by the team over the season to date. `Int64` */
   total_points?: number | bigint | null;
-  /** `Int64` */
+  /** Total points allowed by the team over the season to date. `Int64` */
   opp_total_points?: number | bigint | null;
-  /** `Int64` */
+  /** Season point differential (points scored minus points allowed). `Int64` */
   diff_total_points?: number | bigint | null;
-  /** `Float64` */
+  /** Games behind the overall league leader. `Float64` */
   league_games_back?: number | null;
-  /** `Int64` */
+  /** Team's current playoff seed. `Int64` */
   playoff_seeding?: number | bigint | null;
-  /** `Int64` */
+  /** Flag (1/0) for whether the team has clinched any postseason berth. `Int64` */
   clinched_post_season?: number | bigint | null;
-  /** `String` */
+  /** Neutral. `String` */
   neutral?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2605,63 +2605,63 @@ export interface LoadNbaStatsStandingsRow {
 
 /** One row of `sdv.nba.loadNbaStatsTeamBoxscores` (`nba_stats_team_boxscores`; sdv-py loader schema `load_nba_stats_team_boxscores`). */
 export interface LoadNbaStatsTeamBoxscoresRow {
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** City/market of the team ("Indiana"); pair with `team_name` for the full club name. `String` */
   team_city?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Three-letter team code (e.g. 'LAS' / 'NYL'). `String` */
   team_tricode?: string | null;
-  /** `String` */
+  /** URL slug of the team ("pacers"). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Side label (e.g. 'home', 'away', or 'overUnder'). `String` */
   side?: string | null;
-  /** `String` */
+  /** Minutes played, formatted MM:SS (V3 PT-duration parsed) or decimal minutes (V2). `String` */
   minutes?: string | null;
-  /** `Int64` */
+  /** Field goals made (2-pt + 3-pt). `Int64` */
   field_goals_made?: number | bigint | null;
-  /** `Int64` */
+  /** Field goal attempts (2-pt + 3-pt). `Int64` */
   field_goals_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Field goal percentage (0-1 decimal). `Float64` */
   field_goals_percentage?: number | null;
-  /** `Int64` */
+  /** Three-point field goals made. `Int64` */
   three_pointers_made?: number | bigint | null;
-  /** `Int64` */
+  /** Three-point field goal attempts. `Int64` */
   three_pointers_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Three-point field goal percentage (0-1 decimal). `Float64` */
   three_pointers_percentage?: number | null;
-  /** `Int64` */
+  /** Free throws made. `Int64` */
   free_throws_made?: number | bigint | null;
-  /** `Int64` */
+  /** Free throw attempts. `Int64` */
   free_throws_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Free throw percentage (0-1 decimal). `Float64` */
   free_throws_percentage?: number | null;
-  /** `Int64` */
+  /** Offensive rebounds. `Int64` */
   rebounds_offensive?: number | bigint | null;
-  /** `Int64` */
+  /** Defensive rebounds. `Int64` */
   rebounds_defensive?: number | bigint | null;
-  /** `Int64` */
+  /** Total rebounds. `Int64` */
   rebounds_total?: number | bigint | null;
-  /** `Int64` */
+  /** Total assists. `Int64` */
   assists?: number | bigint | null;
-  /** `Int64` */
+  /** Total steals. `Int64` */
   steals?: number | bigint | null;
-  /** `Int64` */
+  /** Total blocks. `Int64` */
   blocks?: number | bigint | null;
-  /** `Int64` */
+  /** Total turnovers. `Int64` */
   turnovers?: number | bigint | null;
-  /** `Int64` */
+  /** Personal fouls. `Int64` */
   fouls_personal?: number | bigint | null;
-  /** `Int64` */
+  /** Points scored. `Int64` */
   points?: number | bigint | null;
-  /** `Float64` */
+  /** Plus/minus point differential while on court. `Float64` */
   plus_minus_points?: number | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Season-type digit: the 3rd character of game_id (and the leading digit of season_id). 1 = preseason, 2 = regular season, 3 = All-Star, 4 = playoffs, 5 = play-in, 6 = NBA Cup final, 9 = international. `String` (an id) */
   season_type_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2669,361 +2669,361 @@ export interface LoadNbaStatsTeamBoxscoresRow {
 
 /** One row of `sdv.nba.loadNbaStatsTeamSeasonStats` (`nba_stats_team_season_stats`; sdv-py loader schema `load_nba_stats_team_season_stats`). */
 export interface LoadNbaStatsTeamSeasonStatsRow {
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `Int64` */
+  /** Games played. `Int64` */
   gp?: number | bigint | null;
-  /** `Int64` */
+  /** Wins. `Int64` */
   w?: number | bigint | null;
-  /** `Int64` */
+  /** Losses. `Int64` */
   l?: number | bigint | null;
-  /** `Float64` */
+  /** Wins percentage (0-1 decimal). `Float64` */
   w_pct?: number | null;
-  /** `Float64` */
+  /** Minutes played. `Float64` */
   min?: number | null;
-  /** `Float64` */
+  /** Estimated offensive rating (NBA Stats estimated-metrics family) over the split. `Float64` */
   e_off_rating?: number | null;
-  /** `Float64` */
+  /** Offensive rating (points scored per 100 possessions) over the split. `Float64` */
   off_rating?: number | null;
-  /** `Float64` */
+  /** Estimated defensive rating (NBA Stats estimated-metrics family) over the split. `Float64` */
   e_def_rating?: number | null;
-  /** `Float64` */
+  /** Defensive rating (points allowed per 100 possessions) over the split. `Float64` */
   def_rating?: number | null;
-  /** `Float64` */
+  /** Estimated net rating (NBA Stats estimated-metrics family) over the split. `Float64` */
   e_net_rating?: number | null;
-  /** `Float64` */
+  /** Net rating (off rating - def rating). `Float64` */
   net_rating?: number | null;
-  /** `Float64` */
+  /** Assist percentage. `Float64` */
   ast_pct?: number | null;
-  /** `Float64` */
+  /** Assist-to-turnover ratio over the split. `Float64` */
   ast_to?: number | null;
-  /** `Float64` */
+  /** Assist ratio (assists per 100 possessions used) over the split. `Float64` */
   ast_ratio?: number | null;
-  /** `Float64` */
+  /** Offensive rebound percentage over the split, as a decimal. `Float64` */
   oreb_pct?: number | null;
-  /** `Float64` */
+  /** Defensive rebound percentage over the split, as a decimal. `Float64` */
   dreb_pct?: number | null;
-  /** `Float64` */
+  /** Total rebound percentage over the split, as a decimal. `Float64` */
   reb_pct?: number | null;
-  /** `Float64` */
+  /** Team turnover percentage (turnovers per 100 possessions) over the split, as a decimal. `Float64` */
   tm_tov_pct?: number | null;
-  /** `Float64` */
+  /** Effective field goal percentage over the split, as a decimal. `Float64` */
   efg_pct?: number | null;
-  /** `Float64` */
+  /** True shooting percentage (0-1). `Float64` */
   ts_pct?: number | null;
-  /** `Float64` */
+  /** Estimated pace (NBA Stats estimated-metrics family) over the split. `Float64` */
   e_pace?: number | null;
-  /** `Float64` */
+  /** Possessions per 48 minutes. `Float64` */
   pace?: number | null;
-  /** `Float64` */
+  /** Pace per40. `Float64` */
   pace_per40?: number | null;
-  /** `Int64` */
+  /** Poss. `Int64` */
   poss?: number | bigint | null;
-  /** `Float64` */
+  /** Player Impact Estimate (0-1). `Float64` */
   pie?: number | null;
-  /** `Int64` */
+  /** League rank of the row's games played for the season and split. `Int64` */
   gp_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's wins for the season and split. `Int64` */
   w_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's losses for the season and split. `Int64` */
   l_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's win percentage for the season and split. `Int64` */
   w_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's minutes played for the season and split. `Int64` */
   min_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's offensive rating (points scored per 100 possessions) for the season and split. `Int64` */
   off_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's defensive rating (points allowed per 100 possessions) for the season and split. `Int64` */
   def_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's net rating (offensive minus defensive rating) for the season and split. `Int64` */
   net_rating_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's assist percentage (share of teammate field goals assisted while on the floor) for the season and split. `Int64` */
   ast_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's assist-to-turnover ratio for the season and split. `Int64` */
   ast_to_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's assist ratio (assists per 100 possessions used) for the season and split. `Int64` */
   ast_ratio_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's offensive rebound percentage for the season and split. `Int64` */
   oreb_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's defensive rebound percentage for the season and split. `Int64` */
   dreb_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's total rebound percentage for the season and split. `Int64` */
   reb_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's team turnover percentage (turnovers per 100 possessions) for the season and split. `Int64` */
   tm_tov_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's effective field goal percentage for the season and split. `Int64` */
   efg_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's true shooting percentage for the season and split. `Int64` */
   ts_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's pace (possessions per 48 minutes) for the season and split. `Int64` */
   pace_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's Player Impact Estimate (PIE, the NBA Stats catch-all impact metric) for the season and split. `Int64` */
   pie_rank?: number | bigint | null;
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
-  /** `String` */
+  /** NBA Stats measure type the row was pulled from (e.g. Base, Advanced, Misc, Scoring, Opponent, Usage, Defense). `String` */
   measure_type?: string | null;
-  /** `String` */
+  /** NBA Stats per-mode of the row values (e.g. Totals, PerGame, Per100Possessions). `String` */
   per_mode?: string | null;
-  /** `Float64` */
+  /** Field goals made. `Float64` */
   fgm?: number | null;
-  /** `Float64` */
+  /** Field goal attempts. `Float64` */
   fga?: number | null;
-  /** `Float64` */
+  /** Field goal percentage (0-1). `Float64` */
   fg_pct?: number | null;
-  /** `Float64` */
+  /** Three-point field goals made. `Float64` */
   fg3m?: number | null;
-  /** `Float64` */
+  /** Three-point field goal attempts. `Float64` */
   fg3a?: number | null;
-  /** `Float64` */
+  /** Three-point field goal percentage (0-1). `Float64` */
   fg3_pct?: number | null;
-  /** `Float64` */
+  /** Free throws made. `Float64` */
   ftm?: number | null;
-  /** `Float64` */
+  /** Free throw attempts. `Float64` */
   fta?: number | null;
-  /** `Float64` */
+  /** Free throw percentage (0-1). `Float64` */
   ft_pct?: number | null;
-  /** `Float64` */
+  /** Offensive rebounds. `Float64` */
   oreb?: number | null;
-  /** `Float64` */
+  /** Defensive rebounds. `Float64` */
   dreb?: number | null;
-  /** `Float64` */
+  /** Rebounds per game. `Float64` */
   reb?: number | null;
-  /** `Float64` */
+  /** Assists. `Float64` */
   ast?: number | null;
-  /** `Float64` */
+  /** Turnovers. `Float64` */
   tov?: number | null;
-  /** `Float64` */
+  /** Steals. `Float64` */
   stl?: number | null;
-  /** `Float64` */
+  /** Blocks. `Float64` */
   blk?: number | null;
-  /** `Float64` */
+  /** Shot attempts blocked by opponents (blocks against). `Float64` */
   blka?: number | null;
-  /** `Float64` */
+  /** Personal fouls. `Float64` */
   pf?: number | null;
-  /** `Float64` */
+  /** Personal fouls drawn. `Float64` */
   pfd?: number | null;
-  /** `Float64` */
+  /** Points scored. `Float64` */
   pts?: number | null;
-  /** `Float64` */
+  /** Plus/minus point differential while on court. `Float64` */
   plus_minus?: number | null;
-  /** `Int64` */
+  /** League rank of the row's field goals made for the season and split. `Int64` */
   fgm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's field goals attempted for the season and split. `Int64` */
   fga_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's field goal percentage for the season and split. `Int64` */
   fg_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's three-point field goals made for the season and split. `Int64` */
   fg3m_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's three-point field goals attempted for the season and split. `Int64` */
   fg3a_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's three-point field goal percentage for the season and split. `Int64` */
   fg3_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's free throws made for the season and split. `Int64` */
   ftm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's free throws attempted for the season and split. `Int64` */
   fta_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's free throw percentage for the season and split. `Int64` */
   ft_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's offensive rebounds for the season and split. `Int64` */
   oreb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's defensive rebounds for the season and split. `Int64` */
   dreb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's total rebounds for the season and split. `Int64` */
   reb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's assists for the season and split. `Int64` */
   ast_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's turnovers for the season and split. `Int64` */
   tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's steals for the season and split. `Int64` */
   stl_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's blocked shots for the season and split. `Int64` */
   blk_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's shot attempts blocked by opponents (blocks against) for the season and split. `Int64` */
   blka_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's personal fouls committed for the season and split. `Int64` */
   pf_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's personal fouls drawn for the season and split. `Int64` */
   pfd_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's points scored for the season and split. `Int64` */
   pts_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's plus-minus point differential while on the floor for the season and split. `Int64` */
   plus_minus_rank?: number | bigint | null;
-  /** `Float64` */
+  /** Opponent points scored off opponent turnovers allowed over the split. `Float64` */
   opp_pts_off_tov?: number | null;
-  /** `Float64` */
+  /** Opponent second-chance points allowed over the split. `Float64` */
   opp_pts_2nd_chance?: number | null;
-  /** `Float64` */
+  /** Opponent fast-break points allowed over the split. `Float64` */
   opp_pts_fb?: number | null;
-  /** `Float64` */
+  /** Opponent points in the paint allowed over the split. `Float64` */
   opp_pts_paint?: number | null;
-  /** `Int64` */
+  /** League rank of the row's opponent points scored off opponent turnovers for the season and split. `Int64` */
   opp_pts_off_tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent second-chance points for the season and split. `Int64` */
   opp_pts_2nd_chance_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent fast-break points for the season and split. `Int64` */
   opp_pts_fb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent points in the paint for the season and split. `Int64` */
   opp_pts_paint_rank?: number | bigint | null;
-  /** `Float64` */
+  /** Points scored off opponent turnovers over the split. `Float64` */
   pts_off_tov?: number | null;
-  /** `Float64` */
+  /** Second-chance points over the split. `Float64` */
   pts_2nd_chance?: number | null;
-  /** `Float64` */
+  /** Fast-break points over the split. `Float64` */
   pts_fb?: number | null;
-  /** `Float64` */
+  /** Points in the paint over the split. `Float64` */
   pts_paint?: number | null;
-  /** `Int64` */
+  /** League rank of the row's points scored off opponent turnovers for the season and split. `Int64` */
   pts_off_tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's second-chance points for the season and split. `Int64` */
   pts_2nd_chance_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's fast-break points for the season and split. `Int64` */
   pts_fb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's points in the paint for the season and split. `Int64` */
   pts_paint_rank?: number | bigint | null;
-  /** `Float64` */
+  /** Opponent field goals made allowed over the split. `Float64` */
   opp_fgm?: number | null;
-  /** `Float64` */
+  /** Opponent field goals attempted allowed over the split. `Float64` */
   opp_fga?: number | null;
-  /** `Float64` */
+  /** Opponent field goal percentage allowed over the split. `Float64` */
   opp_fg_pct?: number | null;
-  /** `Float64` */
+  /** Opponent three-point field goals made allowed over the split. `Float64` */
   opp_fg3m?: number | null;
-  /** `Float64` */
+  /** Opponent three-point field goals attempted allowed over the split. `Float64` */
   opp_fg3a?: number | null;
-  /** `Float64` */
+  /** Opponent three-point field goal percentage allowed over the split. `Float64` */
   opp_fg3_pct?: number | null;
-  /** `Float64` */
+  /** Opponent free throws made allowed over the split. `Float64` */
   opp_ftm?: number | null;
-  /** `Float64` */
+  /** Opponent free throws attempted allowed over the split. `Float64` */
   opp_fta?: number | null;
-  /** `Float64` */
+  /** Opponent free throw percentage allowed over the split. `Float64` */
   opp_ft_pct?: number | null;
-  /** `Float64` */
+  /** Opponent offensive rebounds allowed over the split. `Float64` */
   opp_oreb?: number | null;
-  /** `Float64` */
+  /** Opponent defensive rebounds allowed over the split. `Float64` */
   opp_dreb?: number | null;
-  /** `Float64` */
+  /** Opponent total rebounds allowed over the split. `Float64` */
   opp_reb?: number | null;
-  /** `Float64` */
+  /** Opponent assists allowed over the split. `Float64` */
   opp_ast?: number | null;
-  /** `Float64` */
+  /** Opponent turnovers allowed over the split. `Float64` */
   opp_tov?: number | null;
-  /** `Float64` */
+  /** Opponent steals allowed over the split. `Float64` */
   opp_stl?: number | null;
-  /** `Float64` */
+  /** Opponent blocked shots allowed over the split. `Float64` */
   opp_blk?: number | null;
-  /** `Float64` */
+  /** Opponent shot attempts blocked by opponents (blocks against) allowed over the split. `Float64` */
   opp_blka?: number | null;
-  /** `Float64` */
+  /** Opponent personal fouls committed allowed over the split. `Float64` */
   opp_pf?: number | null;
-  /** `Float64` */
+  /** Opponent personal fouls drawn allowed over the split. `Float64` */
   opp_pfd?: number | null;
-  /** `Float64` */
+  /** Opponent points. `Float64` */
   opp_pts?: number | null;
-  /** `Int64` */
+  /** League rank of the row's opponent field goals made for the season and split. `Int64` */
   opp_fgm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent field goals attempted for the season and split. `Int64` */
   opp_fga_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent field goal percentage for the season and split. `Int64` */
   opp_fg_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent three-point field goals made for the season and split. `Int64` */
   opp_fg3m_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent three-point field goals attempted for the season and split. `Int64` */
   opp_fg3a_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent three-point field goal percentage for the season and split. `Int64` */
   opp_fg3_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent free throws made for the season and split. `Int64` */
   opp_ftm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent free throws attempted for the season and split. `Int64` */
   opp_fta_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent free throw percentage for the season and split. `Int64` */
   opp_ft_pct_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent offensive rebounds for the season and split. `Int64` */
   opp_oreb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent defensive rebounds for the season and split. `Int64` */
   opp_dreb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent total rebounds for the season and split. `Int64` */
   opp_reb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent assists for the season and split. `Int64` */
   opp_ast_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent turnovers for the season and split. `Int64` */
   opp_tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent steals for the season and split. `Int64` */
   opp_stl_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent blocked shots for the season and split. `Int64` */
   opp_blk_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent shot attempts blocked by opponents (blocks against) for the season and split. `Int64` */
   opp_blka_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent personal fouls committed for the season and split. `Int64` */
   opp_pf_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent personal fouls drawn for the season and split. `Int64` */
   opp_pfd_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's opponent points scored for the season and split. `Int64` */
   opp_pts_rank?: number | bigint | null;
-  /** `Float64` */
+  /** Share of field goal attempts taken as two-pointers, as a decimal. `Float64` */
   pct_fga_2pt?: number | null;
-  /** `Float64` */
+  /** Share of field goal attempts taken as three-pointers, as a decimal. `Float64` */
   pct_fga_3pt?: number | null;
-  /** `Float64` */
+  /** Share of points scored on two-point field goals, as a decimal. `Float64` */
   pct_pts_2pt?: number | null;
-  /** `Float64` */
+  /** Share of points scored on mid-range two-pointers, as a decimal. `Float64` */
   pct_pts_2pt_mr?: number | null;
-  /** `Float64` */
+  /** Share of points scored on three-pointers, as a decimal. `Float64` */
   pct_pts_3pt?: number | null;
-  /** `Float64` */
+  /** Share of points scored on fast breaks, as a decimal. `Float64` */
   pct_pts_fb?: number | null;
-  /** `Float64` */
+  /** Share of points scored at the free throw line, as a decimal. `Float64` */
   pct_pts_ft?: number | null;
-  /** `Float64` */
+  /** Share of points scored off opponent turnovers, as a decimal. `Float64` */
   pct_pts_off_tov?: number | null;
-  /** `Float64` */
+  /** Share of points scored in the paint, as a decimal. `Float64` */
   pct_pts_paint?: number | null;
-  /** `Float64` */
+  /** Percentage of made two-pointers that were assisted, as a decimal. `Float64` */
   pct_ast_2pm?: number | null;
-  /** `Float64` */
+  /** Percentage of made two-pointers that were unassisted, as a decimal. `Float64` */
   pct_uast_2pm?: number | null;
-  /** `Float64` */
+  /** Percentage of made three-pointers that were assisted, as a decimal. `Float64` */
   pct_ast_3pm?: number | null;
-  /** `Float64` */
+  /** Percentage of made three-pointers that were unassisted, as a decimal. `Float64` */
   pct_uast_3pm?: number | null;
-  /** `Float64` */
+  /** Percentage of made field goals that were assisted, as a decimal. `Float64` */
   pct_ast_fgm?: number | null;
-  /** `Float64` */
+  /** Percentage of made field goals that were unassisted, as a decimal. `Float64` */
   pct_uast_fgm?: number | null;
-  /** `Int64` */
+  /** League rank of the row's share of field goal attempts taken as two-pointers for the season and split. `Int64` */
   pct_fga_2pt_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of field goal attempts taken as three-pointers for the season and split. `Int64` */
   pct_fga_3pt_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored on two-point field goals for the season and split. `Int64` */
   pct_pts_2pt_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored on mid-range two-pointers for the season and split. `Int64` */
   pct_pts_2pt_mr_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored on three-pointers for the season and split. `Int64` */
   pct_pts_3pt_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored on fast breaks for the season and split. `Int64` */
   pct_pts_fb_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored at the free throw line for the season and split. `Int64` */
   pct_pts_ft_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored off opponent turnovers for the season and split. `Int64` */
   pct_pts_off_tov_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's share of points scored in the paint for the season and split. `Int64` */
   pct_pts_paint_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made two-pointers that were assisted for the season and split. `Int64` */
   pct_ast_2pm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made two-pointers that were unassisted for the season and split. `Int64` */
   pct_uast_2pm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made three-pointers that were assisted for the season and split. `Int64` */
   pct_ast_3pm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made three-pointers that were unassisted for the season and split. `Int64` */
   pct_uast_3pm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made field goals that were assisted for the season and split. `Int64` */
   pct_ast_fgm_rank?: number | bigint | null;
-  /** `Int64` */
+  /** League rank of the row's percentage of made field goals that were unassisted for the season and split. `Int64` */
   pct_uast_fgm_rank?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -3031,47 +3031,47 @@ export interface LoadNbaStatsTeamSeasonStatsRow {
 
 /** One row of `sdv.nba.loadNbaPlayerCrosswalk` (`nba_crosswalk`; sdv-py loader schema `load_nba_player_crosswalk`). */
 export interface LoadNbaPlayerCrosswalkRow {
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int32` (an id) */
+  /** ESPN team id (canonical key). `Int32` (an id) */
   espn_team_id?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `String` (an id) */
+  /** ESPN athlete id. `String` (an id) */
   espn_athlete_id?: string | null;
-  /** `String` */
+  /** ESPN full name. `String` */
   espn_full_name?: string | null;
-  /** `String` */
+  /** ESPN jersey number. `String` */
   espn_jersey?: string | null;
-  /** `String` */
+  /** ESPN position abbreviation. `String` */
   espn_position?: string | null;
-  /** `String` (an id) */
+  /** NBA Stats player id side of the ESPN-to-NBA player crosswalk. `String` (an id) */
   nba_player_id?: string | null;
-  /** `String` */
+  /** Player name as listed by the NBA Stats API. `String` */
   nba_player_name?: string | null;
-  /** `String` */
+  /** Player's jersey number as listed by the NBA Stats API. `String` */
   nba_jersey_num?: string | null;
-  /** `String` */
+  /** Player's position as listed by the NBA Stats API. `String` */
   nba_position?: string | null;
-  /** `String` (an id) */
+  /** Fox athlete id (NA if unmatched). `String` (an id) */
   fox_athlete_id?: string | null;
-  /** `String` */
+  /** Fox player name (NA if unmatched). `String` */
   fox_player?: string | null;
-  /** `String` */
+  /** Fox jersey number (NA if unmatched). `String` */
   fox_jersey?: string | null;
-  /** `String` */
+  /** Fox position group label (NA if unmatched). `String` */
   fox_position_group?: string | null;
-  /** `String` (an id) */
+  /** Yahoo player id (NA placeholder). `String` (an id) */
   yahoo_player_id?: string | null;
-  /** `String` */
+  /** Yahoo player name (NA placeholder). `String` */
   yahoo_player_name?: string | null;
-  /** `String` */
+  /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
-  /** `Float64` */
+  /** Jaro-Winkler score or 1 for exact (NA if none). `Float64` */
   match_confidence?: number | null;
-  /** `String` */
+  /** NA (reserved for future use). `String` */
   match_keys?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -3079,37 +3079,37 @@ export interface LoadNbaPlayerCrosswalkRow {
 
 /** One row of `sdv.nba.loadNbaScheduleCrosswalk` (`nba_crosswalk`; sdv-py loader schema `load_nba_schedule_crosswalk`). */
 export interface LoadNbaScheduleCrosswalkRow {
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
-  /** `Date` */
+  /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
-  /** `Int32` (an id) */
+  /** ESPN home team id (NA for bart-only rows). `Int32` (an id) */
   home_espn_team_id?: string | null;
-  /** `Int32` (an id) */
+  /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
-  /** `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `String` (an id) */
   espn_game_id?: string | null;
-  /** `String` (an id) */
+  /** NBA Stats 10-character game id matched to the ESPN game in the crosswalk. `String` (an id) */
   nba_game_id?: string | null;
-  /** `String` */
+  /** NBA game code (date and matchup string) from the NBA Stats API. `String` */
   nba_game_code?: string | null;
-  /** `String` (an id) */
+  /** NBA Stats team id of the home team. `String` (an id) */
   nba_home_team_id?: string | null;
-  /** `String` (an id) */
+  /** NBA Stats team id of the away team. `String` (an id) */
   nba_away_team_id?: string | null;
-  /** `String` (an id) */
+  /** Fox game id (NA placeholder). `String` (an id) */
   fox_game_id?: string | null;
-  /** `String` (an id) */
+  /** FOX Sports team id of the home team in the crosswalk. `String` (an id) */
   fox_home_team_id?: string | null;
-  /** `String` (an id) */
+  /** FOX Sports team id of the away team in the crosswalk. `String` (an id) */
   fox_away_team_id?: string | null;
-  /** `String` (an id) */
+  /** Yahoo game id (NA placeholder). `String` (an id) */
   yahoo_game_id?: string | null;
-  /** `String` */
+  /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
-  /** `Float64` */
+  /** Jaro-Winkler score or 1 for exact (NA if none). `Float64` */
   match_confidence?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -3117,47 +3117,47 @@ export interface LoadNbaScheduleCrosswalkRow {
 
 /** One row of `sdv.nba.loadNbaTeamCrosswalk` (`nba_crosswalk`; sdv-py loader schema `load_nba_team_crosswalk`). */
 export interface LoadNbaTeamCrosswalkRow {
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int32` (an id) */
+  /** ESPN team id (canonical key). `Int32` (an id) */
   espn_team_id?: string | null;
-  /** `String` */
+  /** ESPN abbreviation. `String` */
   espn_abbreviation?: string | null;
-  /** `String` */
+  /** ESPN display name (school + mascot). `String` */
   espn_display_name?: string | null;
-  /** `String` */
+  /** ESPN short name. `String` */
   espn_short_name?: string | null;
-  /** `String` */
+  /** ESPN school/location only. `String` */
   espn_location?: string | null;
-  /** `String` */
+  /** ESPN mascot/nickname. `String` */
   espn_mascot?: string | null;
-  /** `String` (an id) */
+  /** NBA Stats team id side of the ESPN-to-NBA team crosswalk. `String` (an id) */
   nba_team_id?: string | null;
-  /** `String` */
+  /** Team abbreviation as listed by the NBA Stats API. `String` */
   nba_team_abbreviation?: string | null;
-  /** `String` */
+  /** Full NBA team name from the NBA Stats API, city followed by nickname (e.g. 'Boston Celtics'). `String` */
   nba_team_name?: string | null;
-  /** `String` */
+  /** Team city as listed by the NBA Stats API. `String` */
   nba_team_city?: string | null;
-  /** `String` */
+  /** URL-friendly slug for the team's name on NBA Stats. `String` */
   nba_team_slug?: string | null;
-  /** `String` */
+  /** Team's conference as listed by the NBA Stats API. `String` */
   nba_conference?: string | null;
-  /** `String` */
+  /** Team's division as listed by the NBA Stats API. `String` */
   nba_division?: string | null;
-  /** `String` (an id) */
+  /** Fox Bifrost team id (NA if unmatched). `String` (an id) */
   fox_team_id?: string | null;
-  /** `String` */
+  /** Fox team name (NA if unmatched). `String` */
   fox_team_name?: string | null;
-  /** `String` (an id) */
+  /** Yahoo team id (NA placeholder). `String` (an id) */
   yahoo_team_id?: string | null;
-  /** `String` */
+  /** Yahoo abbreviation (NA placeholder). `String` */
   yahoo_team_abbreviation?: string | null;
-  /** `String` */
+  /** Yahoo team name (NA placeholder). `String` */
   yahoo_team_name?: string | null;
-  /** `String` */
+  /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
-  /** `Float64` */
+  /** Jaro-Winkler score or 1 for exact (NA if none). `Float64` */
   match_confidence?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -3165,77 +3165,77 @@ export interface LoadNbaTeamCrosswalkRow {
 
 /** One row of `sdv.nba.loadNbaPlayerCore` (`espn_nba_player_core`; sdv-py loader schema `load_nba_player_core`). */
 export interface LoadNbaPlayerCoreRow {
-  /** `Int32` */
+  /** Season year. `Int32` */
   season?: number | null;
-  /** `Int64` (an id) */
+  /** Unique athlete identifier (ESPN). `Int64` (an id) */
   athlete_id?: string | null;
-  /** `String` */
+  /** Stable cross-league team GUID. `String` */
   guid?: string | null;
-  /** `String` */
+  /** ESPN UID string. `String` */
   uid?: string | null;
-  /** `String` */
+  /** URL-safe identifier. `String` */
   slug?: string | null;
-  /** `String` */
+  /** Record type / category. `String` */
   type?: string | null;
-  /** `String` */
+  /** Player's first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Player's full name. `String` */
   full_name?: string | null;
-  /** `String` */
+  /** Display name. `String` */
   display_name?: string | null;
-  /** `String` */
+  /** Short display name. `String` */
   short_name?: string | null;
-  /** `Float64` */
+  /** Player height (string e.g. '6-2' or inches). `Float64` */
   height?: number | null;
-  /** `String` */
+  /** Player height in display format (e.g. '6-2'). `String` */
   display_height?: string | null;
-  /** `Float64` */
+  /** Player weight in pounds. `Float64` */
   weight?: number | null;
-  /** `String` */
+  /** Player weight in display format (e.g. '180 lbs'). `String` */
   display_weight?: string | null;
-  /** `Int32` */
+  /** Player age (in years). `Int32` */
   age?: number | null;
-  /** `String` */
+  /** Date of birth (YYYY-MM-DD). `String` */
   date_of_birth?: string | null;
-  /** `String` */
+  /** Birth city. `String` */
   birth_city?: string | null;
-  /** `String` */
+  /** Birth state / region. `String` */
   birth_state?: string | null;
   /** `String` */
   birth_country?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   jersey?: string | null;
-  /** `Int32` (an id) */
+  /** Unique position identifier. `Int32` (an id) */
   position_id?: string | null;
-  /** `String` */
+  /** Listed roster position ('Guard', 'Forward', 'Center'). `String` */
   position_name?: string | null;
-  /** `String` */
+  /** Position abbreviation ('G' / 'F' / 'C'). `String` */
   position_abbreviation?: string | null;
-  /** `String` */
+  /** Position display name. `String` */
   position_display_name?: string | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for college. `Int32` (an id) */
   college_id?: string | null;
   /** `Int32` (an id) */
   current_team_id?: string | null;
-  /** `String` */
+  /** Headshot image URL. `String` */
   headshot_href?: string | null;
-  /** `Int32` */
+  /** Experience years. `Int32` */
   experience_years?: number | null;
-  /** `Int32` (an id) */
+  /** Status identifier. `Int32` (an id) */
   status_id?: string | null;
-  /** `String` */
+  /** Status label. `String` */
   status_name?: string | null;
-  /** `String` */
+  /** Status type. `String` */
   status_type?: string | null;
-  /** `Int32` */
+  /** Draft year (4-digit). `Int32` */
   draft_year?: number | null;
-  /** `Int32` */
+  /** Round of the draft selection. `Int32` */
   draft_round?: number | null;
-  /** `Int32` */
+  /** Draft selection. `Int32` */
   draft_selection?: number | null;
-  /** `Boolean` */
+  /** TRUE if the row represents an active record (player / team / season). `Boolean` */
   active?: boolean | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -3243,61 +3243,61 @@ export interface LoadNbaPlayerCoreRow {
 
 /** One row of `sdv.nba.loadNbaPlayerImpact` (`nba_player_impact`; sdv-py loader schema `load_nba_player_impact`). */
 export interface LoadNbaPlayerImpactRow {
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Nested list of member-team membership spans. `String` */
   teams?: string | null;
-  /** `Int64` */
+  /** Season year. `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
-  /** `Float64` */
+  /** Offensive regularized adjusted plus-minus per 100 possessions from the single-season ridge fit over possession-level lineup indicators; positive means the player raised his team's scoring rate while on offense. `Float64` */
   o_rapm?: number | null;
-  /** `Float64` */
+  /** Defensive regularized adjusted plus-minus per 100 possessions, negated from the raw points-allowed coefficient so a positive value marks a defender who suppresses opponent scoring. `Float64` */
   d_rapm?: number | null;
-  /** `Float64` */
+  /** Total regularized adjusted plus-minus per 100 possessions, exactly the sum of o_rapm and d_rapm. `Float64` */
   rapm?: number | null;
-  /** `Int64` */
+  /** Number of possessions the player was on the floor on offense, the count of design-matrix rows carrying his offensive indicator and therefore the offensive-side sample size behind o_rapm. `Int64` */
   off_poss?: number | bigint | null;
-  /** `Int64` */
+  /** Number of possessions the player was on the floor on defense, the sample size behind d_rapm; it tracks off_poss almost exactly because substitutions rarely split an offense-defense pair. `Int64` */
   def_poss?: number | bigint | null;
-  /** `Float64` */
+  /** Offensive regularized adjusted plus/minus after the ridge opponent adjustment. `Float64` */
   o_adj_rapm?: number | null;
-  /** `Float64` */
+  /** Defensive regularized adjusted plus/minus after the ridge opponent adjustment. `Float64` */
   d_adj_rapm?: number | null;
-  /** `Float64` */
+  /** Total prior-informed RAPM per 100 possessions, exactly the sum of o_adj_rapm and d_adj_rapm. `Float64` */
   adj_rapm?: number | null;
-  /** `Float64` */
+  /** Offensive statistical plus-minus per 100 possessions: the player's per-100 box-score feature vector scored through ridge coefficients trained on that season's o_rapm target. `Float64` */
   ospm?: number | null;
-  /** `Float64` */
+  /** Defensive statistical plus-minus per 100 possessions from the same box-score feature vector scored through coefficients trained on the d_rapm target. `Float64` */
   dspm?: number | null;
-  /** `Float64` */
+  /** Total statistical plus-minus per 100 possessions, exactly the sum of ospm and dspm. `Float64` */
   spm?: number | null;
-  /** `Float64` */
+  /** Minutes played. `Float64` */
   min?: number | null;
-  /** `Int64` */
+  /** Games played. `Int64` */
   gp?: number | bigint | null;
-  /** `Float64` */
+  /** Offensive box plus/minus. `Float64` */
   obpm?: number | null;
-  /** `Float64` */
+  /** Defensive box plus/minus. `Float64` */
   dbpm?: number | null;
-  /** `Float64` */
+  /** Career box plus/minus. `Float64` */
   bpm?: number | null;
-  /** `Float64` */
+  /** Wins above replacement, computed as (rapm minus a replacement level of -2.0 per 100) times total possessions divided by 100, divided by a points-per-win constant calibrated each season by regressing team wins on full-season point margin. `Float64` */
   war?: number | null;
-  /** `Float64` */
+  /** DARKO-style Kalman-filtered skill estimate at the end of the player's observed multi-season RAPM panel, i.e. his current-form rating after aging drift and possession-weighted observation noise. `Float64` */
   darko_filtered_skill?: number | null;
-  /** `Float64` */
+  /** One-season-ahead DARKO forecast, the filtered skill plus the empirical aging-curve drift at the player's last observed age; both season_type rows of a player-season carry the same value because the projection is not playoff-specific. `Float64` */
   darko_projected_rating?: number | null;
-  /** `Float64` */
+  /** Standard deviation of the one-season-ahead DARKO forecast, the square root of the filtered state variance plus the Kalman process variance; it sits at roughly 10.19 for a player with only one season in the panel, whose diffuse prior variance was never updated. `Float64` */
   darko_projected_sd?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -3305,17 +3305,17 @@ export interface LoadNbaPlayerImpactRow {
 
 /** One row of `sdv.nba.loadNbaGroups` (`nba_groups`; sdv-py loader schema `load_nba_groups`). */
 export interface LoadNbaGroupsRow {
-  /** `String` */
+  /** League code of the table ("nba"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `String` */
+  /** Hierarchy level of the group: "league", "subdivision", "conference" or "division". `String` */
   level?: string | null;
-  /** `Int32` */
+  /** First season in which the group had at least one member (ENDING year: 2025 = the 2024-25 season). `Int32` */
   first_season?: number | null;
-  /** `Int32` */
+  /** Last season in which the group had at least one member (ENDING year: 2025 = the 2024-25 season). `Int32` */
   last_season?: number | null;
-  /** `String` */
+  /** Builder notes on the group: the lineage decisions behind its group_id and any source caveats. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -3323,23 +3323,23 @@ export interface LoadNbaGroupsRow {
 
 /** One row of `sdv.nba.loadNbaGroupSeasons` (`nba_groups`; sdv-py loader schema `load_nba_group_seasons`). */
 export interface LoadNbaGroupSeasonsRow {
-  /** `String` */
+  /** League code of the table ("nba"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `Int32` */
+  /** Season the row describes (ENDING year: 2025 = the 2024-25 season). `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Hierarchy level of the group: "league", "subdivision", "conference" or "division". `String` */
   level?: string | null;
-  /** `String` */
+  /** Full name of the group as of that season -- the label in use then, not today's name. `String` */
   name?: string | null;
-  /** `String` */
+  /** Short display name of the group as of that season. `String` */
   short_name?: string | null;
-  /** `String` */
+  /** Abbreviation of the group as of that season. `String` */
   abbreviation?: string | null;
-  /** `String` (an id) */
+  /** group_id one level up as of that season (division -> conference -> subdivision -> league); null at the top level or where no higher group applied that season. `String` (an id) */
   parent_group_id?: string | null;
-  /** `Int32` */
+  /** Number of member teams in the group that season. `Int32` */
   n_teams?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -3347,21 +3347,21 @@ export interface LoadNbaGroupSeasonsRow {
 
 /** One row of `sdv.nba.loadNbaGroupAliases` (`nba_groups`; sdv-py loader schema `load_nba_group_aliases`). */
 export interface LoadNbaGroupAliasesRow {
-  /** `String` */
+  /** League code of the table ("nba"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `String` */
+  /** Source that uses this label or id (in this table: espn, nba_stats, sdv); "sdv" marks SDV's own labels. `String` */
   source?: string | null;
-  /** `String` (an id) */
+  /** The source's own id for the group (ESPN group id, NCAA conf_id, CFBD id, MLB division id) when it has one; null otherwise. `String` (an id) */
   source_id?: string | null;
-  /** `String` */
+  /** Kind of label in value: "name", "short_name", "abbreviation", "slug" or "code". `String` */
   name_kind?: string | null;
-  /** `String` */
+  /** The label exactly as the source writes it; match a source's conference or division label against it to reach group_id. `String` */
   value?: string | null;
-  /** `Int32` */
+  /** First season the alias is valid for, inclusive (ENDING year: 2025 = the 2024-25 season); null = unbounded. `Int32` */
   valid_from?: number | null;
-  /** `Int32` */
+  /** Last season the alias is valid for, inclusive (ENDING year: 2025 = the 2024-25 season); null = unbounded (still in use). `Int32` */
   valid_to?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -3369,27 +3369,27 @@ export interface LoadNbaGroupAliasesRow {
 
 /** One row of `sdv.nba.loadNbaTeamGroupSeasons` (`nba_groups`; sdv-py loader schema `load_nba_team_group_seasons`). */
 export interface LoadNbaTeamGroupSeasonsRow {
-  /** `String` */
+  /** League code of the table ("nba"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `Int32` */
+  /** Season of the membership (ENDING year: 2025 = the 2024-25 season). `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Team id as a string: the ESPN team id where ESPN covers the team, otherwise the league's own id; team_id_source says which. `String` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Id space of team_id (in this table: espn). `String` */
   team_id_source?: string | null;
-  /** `String` */
+  /** Team name as of that season, not today's. `String` */
   team_name?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's subdivision that season (e.g. FBS / FCS, Division I); null where the league has no subdivision level. `String` (an id) */
   subdivision_id?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's conference that season; null where the team had no conference (an independent, or a season played without conferences). `String` (an id) */
   conference_id?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's division that season; null where the level does not apply. `String` (an id) */
   division_id?: string | null;
-  /** `String` */
+  /** Source the membership was taken from -- the most reliable per-season source for that era. `String` */
   source?: string | null;
-  /** `Boolean` */
+  /** Whether a second source agreed on the membership; null when only one source covers the season. `Boolean` */
   sources_agree?: boolean | null;
-  /** `String` */
+  /** Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;

@@ -6,7 +6,17 @@
 import axios from "axios";
 import { SdvError, TransportUnavailableError, redactSecrets, safeCause } from "./errors.js";
 
+/**
+ * What `request()` hands a {@link Transport}: everything about one HTTP call, with the
+ * query kept separate from the URL.
+ *
+ * @remarks
+ * `url` is query-free on purpose: error messages and logging interceptors see the URL,
+ * and an API key rides in `query`. Auth providers add `headers` / `query` before the
+ * transport sees the request.
+ */
 export interface TransportRequest {
+  /** HTTP method; the built-in transports support `GET` and `POST`. */
   method: "GET" | "POST";
   /** Absolute URL without the query string. */
   url: string;
@@ -17,9 +27,11 @@ export interface TransportRequest {
    * ({@link encodeQuery}).
    */
   query?: Record<string, unknown>;
+  /** Request headers; `request()` adds the family `User-Agent` unless one is set here or by auth. */
   headers?: Record<string, string>;
   /** Request body (POST). Strings / URLSearchParams are sent as-is, objects as JSON. */
   body?: unknown;
+  /** Per-request timeout in milliseconds; `request()` fills in the family's when absent. */
   timeoutMs?: number;
   /**
    * How to decode the body. `"json"` (default) parses JSON when the body is JSON
@@ -29,18 +41,55 @@ export interface TransportRequest {
   responseType?: "json" | "text" | "arraybuffer";
 }
 
+/**
+ * What a {@link Transport} resolves with, for ANY HTTP status.
+ *
+ * @remarks
+ * `request()` classifies the status (404 → `NoDataError`, 400 / 422 →
+ * `InvalidParameterError`, retryable statuses retried, the rest `AssetFetchError`); a
+ * transport never does.
+ */
 export interface TransportResponse {
+  /** HTTP status code of the response. */
   status: number;
   /** Lower-cased header names. Multiple `set-cookie` values are joined with `"\n"`. */
   headers: Record<string, string>;
+  /**
+   * Decoded body per {@link TransportRequest.responseType}: parsed JSON (or the raw text
+   * when it was not JSON) for `"json"`, a string for `"text"`, an `ArrayBuffer` for
+   * `"arraybuffer"`.
+   */
   data: unknown;
   /** Final URL (after redirects) when the transport knows it, else the request URL. */
   url: string;
 }
 
+/**
+ * A pluggable HTTP transport: moves bytes, nothing more.
+ *
+ * @remarks
+ * Contract: resolve with a {@link TransportResponse} for ANY HTTP status and reject only
+ * when no response arrived (network error, timeout). `request()` retries a rejection as a
+ * network failure unless it is an `SdvError`, which passes through. Reject with a
+ * sanitized error (see `safeCause`), never a raw client error carrying the request
+ * config. Install one with `configure({ transport })` or `registerFamilyDefaults`.
+ */
 export type Transport = (req: TransportRequest) => Promise<TransportResponse>;
 
-/** Case-insensitive header lookup. */
+/**
+ * Case-insensitive header lookup.
+ *
+ * @param headers - A header map (any casing); `undefined` is treated as empty.
+ * @param name - Header name to find, any casing.
+ * @returns The first value whose key matches `name` case-insensitively, else `undefined`.
+ * @example
+ * ```ts
+ * import { headerValue } from './core/transport.js'; // not re-exported from the package root
+ *
+ * headerValue({ 'Content-Type': 'text/csv' }, 'content-type'); // 'text/csv'
+ * headerValue(undefined, 'retry-after'); // undefined
+ * ```
+ */
 export function headerValue(
   headers: Record<string, string> | undefined,
   name: string
@@ -52,7 +101,23 @@ export function headerValue(
   return undefined;
 }
 
-/** Merge header maps case-insensitively; a later map's value wins. */
+/**
+ * Merge header maps case-insensitively; a later map's value wins.
+ *
+ * @param maps - Header maps in increasing precedence; `undefined` entries are skipped.
+ * @returns A new map. When two keys differ only in case the earlier key is dropped and
+ *   the later key's spelling and value are kept.
+ * @example
+ * ```ts
+ * import { mergeHeaders } from './core/transport.js'; // not re-exported from the package root
+ *
+ * mergeHeaders({ 'user-agent': 'default' }, { 'User-Agent': 'mine' });
+ * // { 'User-Agent': 'mine' }
+ * ```
+ * @remarks
+ * The auth providers rely on the precedence: `mergeHeaders(provider, req.headers)` lets a
+ * header the caller set win over the provider's.
+ */
 export function mergeHeaders(
   ...maps: Array<Record<string, string> | undefined>
 ): Record<string, string> {
@@ -82,6 +147,32 @@ function flattenHeaders(raw: unknown): Record<string, string> {
 /**
  * Default transport (axios). Never throws on an HTTP status
  * (`validateStatus: () => true`); only a network failure rejects.
+ *
+ * @param req - The {@link TransportRequest}; `responseType` defaults to `"json"`.
+ * @returns The {@link TransportResponse}: lower-cased headers, axios' parsed body (text /
+ *   bytes untouched for `"text"` / `"arraybuffer"`), and the post-redirect URL when known.
+ * @throws SdvError when a `query` value is an invalid `Date` (raised before any request).
+ * @throws Error a sanitized copy (`safeCause`) of the axios error on a network failure or
+ *   timeout — name, message, code, errno, syscall; never the request config.
+ * @example
+ * ```ts
+ * import { axiosTransport, configure } from 'sportsdataverse';
+ *
+ * // Wrap the default transport to log every status, without touching retry / auth.
+ * configure({
+ *   transport: async (req) => {
+ *     const res = await axiosTransport(req);
+ *     console.log(req.method, res.url, res.status);
+ *     return res;
+ *   },
+ * });
+ * ```
+ * @remarks
+ * The query is encoded once with {@link encodeQuery} and handed to axios as `params` plus a
+ * serializer, never baked into `url`, so `config.url` stays query-free for any app-level
+ * interceptor that logs it. Arrays are sent as repeated keys (`k=a&k=b`), not axios'
+ * default `k[]=a`. This is what `resolveFamily` falls back to when no transport is
+ * configured or registered.
  */
 export const axiosTransport: Transport = async (req) => {
   const responseType = req.responseType ?? "json";
@@ -152,6 +243,19 @@ function queryValue(key: string, item: unknown): string {
  * (`k=a&k=b`), a `Date` as ISO-8601 UTC. Shared by every built-in transport so
  * the wire form is identical. A date-only API (`YYYY-MM-DD`, ESPN's
  * `YYYYMMDD`) wants a string: pass one rather than a `Date`.
+ *
+ * @param query - Query map; `undefined` is treated as empty. Each value is a scalar, a `Date`
+ *   or an array of those; `undefined` / `null` (also inside an array) are dropped.
+ * @returns The `&`-joined `key=value` pairs without a leading `?`; `""` when nothing remains.
+ *   Keys and values use axios' component encoding (`:`, `$`, `,` kept; space as `+`).
+ * @throws SdvError when a value is an invalid `Date` (`"query param "<key>" is an invalid Date"`).
+ * @example
+ * ```ts
+ * import { encodeQuery } from './core/transport.js'; // not re-exported from the package root
+ *
+ * encodeQuery({ dates: 20240908, groups: [80, 81], limit: undefined });
+ * // 'dates=20240908&groups=80&groups=81'
+ * ```
  */
 export function encodeQuery(query?: Record<string, unknown>): string {
   const parts: string[] = [];
@@ -191,6 +295,10 @@ const IMPIT_MODULE = "impit";
 /**
  * Test seam: how the optional `impit` package is loaded. The specifier is a
  * variable so TypeScript and bundlers never require `impit` to be installed.
+ *
+ * @remarks
+ * Replace `load` in a test to supply a fake `Impit` class, or make it reject to exercise
+ * `TransportUnavailableError`.
  * @internal
  */
 export const _impitLoader = {
@@ -204,8 +312,37 @@ export const _impitLoader = {
  * [`impit`](https://github.com/apify/impit) — `npm install impit`. If it is not
  * installed, every call rejects with {@link TransportUnavailableError}.
  *
- * @param opts.browser  impit browser profile (`"chrome"` default, `"firefox"`, `"chrome142"`, …).
- * @param opts.proxyUrl HTTP / HTTPS / SOCKS proxy URL.
+ * @param opts - Options; default `{}`.
+ * @param opts.browser - impit browser profile (`"chrome"` default, `"firefox"`, `"chrome142"`, …).
+ * @param opts.proxyUrl - HTTP / HTTPS / SOCKS proxy URL, passed to impit as `proxyUrl`.
+ * @returns A {@link Transport} that lazily creates one impit client on its first call and
+ *   reuses it; the body is decoded per `responseType` as `axiosTransport` does, and
+ *   `set-cookie` values are joined with `"\n"`.
+ * @throws TransportUnavailableError (from the returned transport) when `impit` cannot be
+ *   imported; its `cause` is the import error. The failure is not cached, so a call after
+ *   `npm install impit` succeeds.
+ * @throws SdvError (from the returned transport) when the impit client cannot be constructed,
+ *   e.g. an unknown browser profile; the message is redacted.
+ * @throws Error (from the returned transport) a sanitized copy (`safeCause`) of impit's error
+ *   on a network failure or timeout.
+ * @example
+ * ```ts
+ * import sdv, { configure, createImpersonatingTransport } from 'sportsdataverse';
+ *
+ * configure({
+ *   transport: {
+ *     nba_stats: createImpersonatingTransport({ browser: 'chrome' }),
+ *     wnba_stats: createImpersonatingTransport({ proxyUrl: process.env.HTTPS_PROXY }),
+ *   },
+ * });
+ * const rows = await sdv.nba.nbaStatsLeaguedashplayerstats({ leagueId: '00' });
+ * ```
+ * @remarks
+ * `impit` is an optional peer dependency: nothing in sportsdataverse imports it statically.
+ * A plain-object `body` is sent as JSON with `Content-Type: application/json` unless the
+ * request sets a content-type; a string / `URLSearchParams` body is sent as-is. Like every
+ * transport it resolves for any HTTP status and leaves retry / auth / classification to
+ * `request()`.
  */
 export function createImpersonatingTransport(
   opts: { browser?: string; proxyUrl?: string } = {}

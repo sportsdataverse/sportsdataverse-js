@@ -1,22 +1,47 @@
-# Fox Sports Bifrost — generated returns schema. Columns are derived from the
-# spec's captured `components.schemas` (the item props of the list the parser
-# flattens), snake_cased to match the parser's output. Untyped (`object`)
-# responses carry `columns: []` (the parser flattens whatever the payload ships).
+# fox returns schema (JS-owned): columns derived from the registered parser's rows on
+# the committed real capture(s) fox/cbk_league_polls.json by
+# tools/codegen/regen-capture-schemas.mjs. Types are inferred from the captured values;
+# `description` is JS-owned text kept across regeneration (blanks fill at render time from
+# sdv-py's manual_column_descriptions.yaml). Do not hand-type columns: re-run the script.
 schema: league_polls
 kind: dataframe
 columns:
-- name: section_id
+- name: section
   type: character
-  description: Bifrost league_polls field `id`.
-- name: section_title
+  description: ""
+- name: ranking
   type: character
-  description: Bifrost league_polls field `title`.
-- name: section_page_title
+  description: ""
+- name: v1
   type: character
-  description: Bifrost league_polls field `pageTitle`.
-- name: section_last_updated
+  description: ""
+- name: v2
   type: character
-  description: Bifrost league_polls field `lastUpdated`.
-- name: section_metadata
-  type: list
-  description: Bifrost league_polls field `metadata`.
+  description: ""
+- name: pts
+  type: character
+  description: ""
+- name: entity_id
+  type: character
+  description: ""
+- name: team
+  type: character
+  description: ""
+- name: rank_change
+  type: integer
+  description: ""
+- name: rpi
+  type: character
+  description: ""
+- name: sos
+  type: character
+  description: ""
+- name: home
+  type: character
+  description: ""
+- name: away
+  type: character
+  description: ""
+- name: neutral
+  type: character
+  description: ""

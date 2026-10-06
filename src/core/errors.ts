@@ -8,7 +8,14 @@
 //                         5xx, a network error, an exhausted retry budget).
 // Collapsing them would let a failed fetch masquerade as an empty season.
 
-/** Where a fetch error came from. `url` never carries the query string. */
+/**
+ * Where a fetch error came from. `url` never carries the query string.
+ *
+ * @remarks
+ * Passed to the constructors of {@link NoDataError}, {@link AssetFetchError} and
+ * {@link InvalidParameterError}; `cause` is stored through {@link safeCause}, so a raw
+ * HTTP-client error (request config, headers, cookies) never rides on the error.
+ */
 export interface FetchErrorDetails {
   /** Request URL (without query string, so keys passed as query params never leak). */
   url: string;
@@ -110,6 +117,26 @@ function redactJwts(run: string): string {
  * JWT-shaped strings, and the value of `password` / `token` / `accessToken` /
  * `api_key` / `client_secret` / … pairs (`=`, `:` or URL-encoded, also as
  * `"password": "…"`). Ordinary text is left alone.
+ *
+ * @param text - Free text that may hold a credential: an error message, a stack, a URL, a header dump.
+ * @returns The same text with each secret replaced by `<redacted>` (a URL's whole query
+ *   string becomes `?<redacted>`, a URL's `user:password@` becomes `<redacted>@`).
+ * @example
+ * ```ts
+ * import { redactSecrets } from './core/errors.js'; // not re-exported from the package root
+ *
+ * redactSecrets('https://api.the-odds-api.com/v4/sports?apiKey=abc123');
+ * // 'https://api.the-odds-api.com/v4/sports?<redacted>'
+ * redactSecrets('Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.e30.sig');
+ * // 'Authorization: <redacted>'
+ * ```
+ * @remarks
+ * Every pattern is linear in the input (a test bounds 100 KB of adversarial input at
+ * under 50 ms). A bare `Bearer x` is redacted only when `x` looks like a credential
+ * (8+ characters with a digit or symbol, or 20+), a bare `key=x` only when `x` is 16+
+ * characters, so prose such as "Bearer token required" or "primary key=player_id"
+ * survives. Every error message sportsdataverse builds goes through this; call it
+ * yourself before logging text from a third-party HTTP client.
  */
 export function redactSecrets(text: string): string {
   return text
@@ -133,6 +160,26 @@ export function redactSecrets(text: string): string {
  * `Authorization` header, cookies and a POSTed login form (password included)
  * would surface in `util.inspect(err)` or a logged stack. An SdvError is kept
  * (its own cause went through this when it was built).
+ *
+ * @param err - Anything caught: an `Error`, an axios / fetch client error, a string, `undefined`.
+ * @returns `err` itself when it is `undefined`, `null` or an {@link SdvError}; otherwise a new
+ *   plain `Error` carrying only the redacted `name`, `message` and `stack` plus a string or
+ *   number `code` / `errno` / `syscall`. A non-object `err` becomes `Error(String(err))`.
+ * @example
+ * ```ts
+ * import { AssetFetchError } from 'sportsdataverse';
+ * import { safeCause } from './core/errors.js'; // not re-exported from the package root
+ *
+ * try {
+ *   await myHttpClient.get(url);
+ * } catch (err) {
+ *   throw new AssetFetchError('my_family: fetch failed', { url, cause: safeCause(err) });
+ * }
+ * ```
+ * @remarks
+ * {@link SdvError}'s constructor already applies this to `options.cause`, so an error
+ * built through any sportsdataverse error class never needs it called explicitly; the
+ * built-in transports call it on the error they reject with.
  */
 export function safeCause(err: unknown): unknown {
   if (err === undefined || err === null || err instanceof SdvError) return err;
@@ -150,18 +197,63 @@ export function safeCause(err: unknown): unknown {
 /**
  * Base class for every error sportsdataverse raises. A `cause` is always stored
  * through {@link safeCause}, whichever code path built the error.
+ *
+ * @example
+ * ```ts
+ * import sdv, { SdvError } from 'sportsdataverse';
+ *
+ * try {
+ *   await sdv.nfl.espnNflScoreboard({ dates: 20240908 });
+ * } catch (err) {
+ *   if (err instanceof SdvError) console.error(err.name, err.message); // never a raw client error
+ *   else throw err;
+ * }
+ * ```
+ * @remarks
+ * `name` is the concrete subclass name (`new.target.name`), so `err.name` reads
+ * `"NoDataError"` / `"AssetFetchError"` / … in logs. The direct fetch subclasses
+ * {@link NoDataError} and {@link AssetFetchError} are deliberately siblings, never
+ * parent / child, so a failed fetch can never be caught as "no data".
  */
 export class SdvError extends Error {
+  /**
+   * @param message - Human-readable message; callers redact it (see {@link redactSecrets}).
+   * @param options - `{ cause }` as for `Error`; the cause is stored through {@link safeCause}.
+   *   When `options` has no `cause` key, no cause is attached.
+   */
   constructor(message: string, options?: { cause?: unknown }) {
     super(message, options && "cause" in options ? { cause: safeCause(options.cause) } : undefined);
     this.name = new.target.name;
   }
 }
 
-/** The fetch succeeded and there is nothing there (HTTP 404, ESPN `{ code: 404 }`). */
+/**
+ * The fetch succeeded and there is nothing there (HTTP 404, ESPN `{ code: 404 }`).
+ *
+ * @example
+ * ```ts
+ * import sdv, { NoDataError } from 'sportsdataverse';
+ *
+ * try {
+ *   await sdv.nfl.espnNflSummary({ event: 1 });
+ * } catch (err) {
+ *   if (err instanceof NoDataError) return []; // skip: a season gap, not a failure
+ *   throw err;
+ * }
+ * ```
+ * @remarks
+ * Sibling of {@link AssetFetchError}, never its parent or child: catching one never
+ * catches the other. `NoESPNDataError` is a back-compat alias of this class.
+ */
 export class NoDataError extends SdvError {
+  /** Request URL, without the query string. */
   readonly url: string;
+  /** HTTP status when a response was received (404, or 200 for ESPN's `{ code: 404 }` body). */
   readonly status?: number;
+  /**
+   * @param message - Message naming the family and the resource (`"site_v2: HTTP 404: …"`).
+   * @param details - `url` (query-free), optional `status` and `cause` ({@link FetchErrorDetails}).
+   */
   constructor(message: string, details: FetchErrorDetails) {
     super(message, { cause: details.cause });
     this.url = details.url;
@@ -169,10 +261,35 @@ export class NoDataError extends SdvError {
   }
 }
 
-/** The fetch failed (403, 429, 5xx, network, exhausted retries) — the answer is unknown. */
+/**
+ * The fetch failed (403, 429, 5xx, network, exhausted retries) — the answer is unknown.
+ *
+ * @example
+ * ```ts
+ * import sdv, { AssetFetchError, NoDataError } from 'sportsdataverse';
+ *
+ * try {
+ *   await sdv.nfl.espnNflSummary({ event: 401671789 });
+ * } catch (err) {
+ *   if (err instanceof NoDataError) return [];
+ *   if (err instanceof AssetFetchError) console.error(err.status, err.url, err.cause); // surface it
+ *   throw err;
+ * }
+ * ```
+ * @remarks
+ * Also what `request()` throws for a failing auth step (`"<family>: auth failed (apply)"`),
+ * an empty 2xx body, or a JSON request whose 2xx body is not JSON. Never record one as an
+ * empty season: a failed fetch is not "no data" ({@link NoDataError}).
+ */
 export class AssetFetchError extends SdvError {
+  /** Request URL, without the query string. */
   readonly url: string;
+  /** HTTP status of the final response; absent when no response arrived (network error). */
   readonly status?: number;
+  /**
+   * @param message - Message naming the family, host / path and status, already redacted.
+   * @param details - `url` (query-free), optional `status` and `cause` ({@link FetchErrorDetails}).
+   */
   constructor(message: string, details: FetchErrorDetails) {
     super(message, { cause: details.cause });
     this.url = details.url;
@@ -184,10 +301,31 @@ export class AssetFetchError extends SdvError {
  * The server rejected the request's parameters (e.g. HTTP 400 / 422 from the PFF
  * API, or NFL Pro's empty-body 200). Not a fetch failure and not "no data": the
  * call as made can never succeed — fix the arguments. (sdv-py raises ValueError.)
+ *
+ * @example
+ * ```ts
+ * import sdv, { InvalidParameterError } from 'sportsdataverse';
+ *
+ * try {
+ *   await sdv.nfl.pffApiTeamStats({ league: 'nfl', season: 'not-a-season' });
+ * } catch (err) {
+ *   if (err instanceof InvalidParameterError) console.error(err.status, err.message); // 400 / 422
+ *   else throw err;
+ * }
+ * ```
+ * @remarks
+ * `request()` throws it for HTTP 400 / 422 without retrying; a family's `classifyError`
+ * (see `registerFamilyDefaults`) may also return one for a 2xx with an empty body.
  */
 export class InvalidParameterError extends SdvError {
+  /** Request URL, without the query string. */
   readonly url: string;
+  /** HTTP status (400 / 422, or 200 when a family classified an empty body). */
   readonly status?: number;
+  /**
+   * @param message - Message naming the family, host / path, status and a body excerpt, redacted.
+   * @param details - `url` (query-free), optional `status` and `cause` ({@link FetchErrorDetails}).
+   */
   constructor(message: string, details: FetchErrorDetails) {
     super(message, { cause: details.cause });
     this.url = details.url;
@@ -195,12 +333,54 @@ export class InvalidParameterError extends SdvError {
   }
 }
 
-/** A requested season is outside what the source supports. */
+/**
+ * A requested season is outside what the source supports.
+ *
+ * @example
+ * ```ts
+ * import sdv, { SeasonNotFoundError } from 'sportsdataverse';
+ *
+ * try {
+ *   await sdv.nfl.loadNflPbp({ seasons: [1950] });
+ * } catch (err) {
+ *   if (err instanceof SeasonNotFoundError) console.warn(err.message);
+ *   else throw err;
+ * }
+ * ```
+ * @remarks
+ * Takes the {@link SdvError} constructor: `(message, options?)`; it carries no `url`.
+ */
 export class SeasonNotFoundError extends SdvError {}
 
-/** An optional transport dependency (e.g. `impit`) is not installed. */
+/**
+ * An optional transport dependency (e.g. `impit`) is not installed.
+ *
+ * @example
+ * ```ts
+ * import sdv, { configure, createImpersonatingTransport, TransportUnavailableError } from 'sportsdataverse';
+ *
+ * configure({ transport: { nba_stats: createImpersonatingTransport() } });
+ * try {
+ *   await sdv.nba.nbaStatsLeaguedashplayerstats({ leagueId: '00' });
+ * } catch (err) {
+ *   if (err instanceof TransportUnavailableError) console.error('run: npm install impit');
+ *   else throw err;
+ * }
+ * ```
+ * @remarks
+ * Thrown by the transport from `createImpersonatingTransport()` on every call until
+ * `impit` can be imported; its `cause` is the import error. `request()` never retries
+ * an SdvError, so it reaches the caller on the first attempt.
+ */
 export class TransportUnavailableError extends SdvError {}
 
-/** Back-compat alias: the error was ESPN-only when it was named. */
+/**
+ * Back-compat alias of {@link NoDataError}: the error was ESPN-only when it was named.
+ *
+ * @remarks
+ * The same class object, not a subclass: `err instanceof NoESPNDataError` and
+ * `err instanceof NoDataError` are always equal. Prefer `NoDataError` in new code.
+ */
 export const NoESPNDataError = NoDataError;
+/** Type alias of {@link NoDataError} for the back-compat `NoESPNDataError` name. */
 export type NoESPNDataError = NoDataError;

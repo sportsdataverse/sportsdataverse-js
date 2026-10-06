@@ -1,8 +1,62 @@
-# CBS NAPI game scoring drives resource (/resource/game/scoring/drives/{game_id}). Generic flattened frame parsed
-# by parse_cbs_list.
-# The CBS NAPI OpenAPI spec ships no typed 200-response schema (every resource is
-# a free-form {data: ...} envelope), so columns are not enumerable ahead of a
-# live capture; the parser snake_cases + flattens whatever keys the payload ships.
+# cbs returns schema (JS-owned): columns derived from the registered parser's rows on
+# the committed real capture(s) cbs/game_scoring_drives_nfl.json, cbs/game_scoring_drives_ncaaf.json by
+# tools/codegen/regen-capture-schemas.mjs. Types are inferred from the captured values;
+# `description` is JS-owned text kept across regeneration (blanks fill at render time from
+# sdv-py's manual_column_descriptions.yaml). Do not hand-type columns: re-run the script.
 schema: game_scoring_drives
 kind: dataframe
-columns: []
+columns:
+- name: id
+  type: character
+  description: ""
+- name: team_id
+  type: character
+  description: ""
+- name: quarter
+  type: integer
+  description: ""
+- name: starting_time
+  type: character
+  description: ""
+- name: ending_time
+  type: character
+  description: ""
+- name: time_of_possession
+  type: character
+  description: ""
+- name: starting_yardline
+  type: character
+  description: ""
+- name: ending_yardline
+  type: character
+  description: ""
+- name: starting_play_id
+  type: character
+  description: ""
+- name: ending_play_id
+  type: character
+  description: ""
+- name: drive_plays
+  type: integer
+  description: ""
+- name: yards_on_drive
+  type: integer
+  description: ""
+- name: drive_yards_total
+  type: integer
+  description: ""
+- name: penalty_yards
+  type: integer
+  description: ""
+- name: first_downs_on_drive
+  type: integer
+  description: ""
+- name: inside_the_20
+  type: logical
+  description: ""
+- name: score_on_drive
+  type: logical
+  description: ""
+- name: result
+  type: character
+  description: ""

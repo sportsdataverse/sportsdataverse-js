@@ -7,139 +7,139 @@
 
 /** One row of `sdv.wnba.loadWnbaPbp` (`espn_wnba_pbp`; sdv-py loader schema `load_wnba_pbp`). */
 export interface LoadWnbaPbpRow {
-  /** `Int32` */
+  /** Game play number `Int32` */
   game_play_number?: number | null;
-  /** `Int64` (an id) */
+  /** Unique play identification number `Int64` (an id) */
   id?: string | null;
-  /** `Int32` */
+  /** Sequence number representing a shot-possession (V3 PBP). `Int32` */
   sequence_number?: number | null;
-  /** `Int32` (an id) */
+  /** Type identifier (numeric). `Int32` (an id) */
   type_id?: string | null;
-  /** `String` */
+  /** Play type text, passed through verbatim from ESPN. ESPN labels the free-throw play type "MadeFreeThrow" for made AND missed free throws; filter makes vs. misses with scoring_play, not type_text. `String` */
   type_text?: string | null;
-  /** `String` */
+  /** Text description of the play / record. `String` */
   text?: string | null;
-  /** `Int32` */
+  /** Away team score at the time of the play. `Int32` */
   away_score?: number | null;
-  /** `Int32` */
+  /** Home team score at the time of the play. `Int32` */
   home_score?: number | null;
-  /** `Int32` */
+  /** Numeric period (1-4 for quarters; 5+ for OT). `Int32` */
   period_number?: number | null;
-  /** `String` */
+  /** Period display label (e.g. '1st Quarter', 'OT'). `String` */
   period_display_value?: string | null;
-  /** `String` */
+  /** Game clock display string (e.g. '8:32'). `String` */
   clock_display_value?: string | null;
-  /** `Boolean` */
+  /** TRUE if the play resulted in points scored. `Boolean` */
   scoring_play?: boolean | null;
-  /** `Int32` */
+  /** Point value of the attempt (1 / 2 / 3), carried even on misses (a missed free throw still shows 1); use scoring_play to identify points actually scored. `Int32` */
   score_value?: number | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `Int32` (an id) */
+  /** Primary athlete identifier (e.g. shooter). `Int32` (an id) */
   athlete_id_1?: string | null;
-  /** `Int32` (an id) */
+  /** Secondary athlete identifier (e.g. assister / fouler). `Int32` (an id) */
   athlete_id_2?: string | null;
-  /** `Int32` (an id) */
+  /** Athlete id 3. `Int32` (an id) */
   athlete_id_3?: string | null;
-  /** `String` */
+  /** Wallclock. `String` */
   wallclock?: string | null;
-  /** `Boolean` */
+  /** TRUE if the play was a shooting attempt. `Boolean` */
   shooting_play?: boolean | null;
-  /** `Float64` */
+  /** X coordinate as returned by the API before any adjustment. `Float64` */
   coordinate_x_raw?: number | null;
-  /** `Float64` */
+  /** Y coordinate as returned by the API before any adjustment. `Float64` */
   coordinate_y_raw?: number | null;
-  /** `Int32` */
+  /** Point value at stake on the play's shot attempt (1, 2, or 3); 0 for non-shooting plays. `Int32` */
   points_attempted?: number | null;
-  /** `String` */
+  /** Abbreviated ESPN text description of the play. `String` */
   short_description?: string | null;
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `Int32` */
   season_type?: number | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for the home team. `Int32` (an id) */
   home_team_id?: string | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team_name?: string | null;
-  /** `String` */
+  /** Home team mascot. `String` */
   home_team_mascot?: string | null;
-  /** `String` */
+  /** Home team three-letter abbreviation. `String` */
   home_team_abbrev?: string | null;
-  /** `String` */
+  /** Alternate versions of the home team abbreviation `String` */
   home_team_name_alt?: string | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for the away team. `Int32` (an id) */
   away_team_id?: string | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team_name?: string | null;
-  /** `String` */
+  /** Away team mascot. `String` */
   away_team_mascot?: string | null;
-  /** `String` */
+  /** Away team three-letter abbreviation. `String` */
   away_team_abbrev?: string | null;
-  /** `String` */
+  /** Alternate versions of the away team abbreviation `String` */
   away_team_name_alt?: string | null;
-  /** `Float64` */
+  /** Game spread in (-X Team) format. There are almost none, I would recommend not trusting any of these three columns `Float64` */
   game_spread?: number | null;
-  /** `Boolean` */
+  /** Logical (TRUE/FALSE) indicating whether the home team is favored `Boolean` */
   home_favorite?: boolean | null;
-  /** `Boolean` */
+  /** Logical (TRUE/FALSE) indicating whether the spread was available from ESPN. Basically, I would just not recommend using any of the spread information, I think I defaulted a lot of them to -2.5 for the home team. Most games probably do not have spread information. This column should really be listed first `Boolean` */
   game_spread_available?: boolean | null;
-  /** `Float64` */
+  /** The game spread with respect to the home team `Float64` */
   home_team_spread?: number | null;
-  /** `Int32` */
+  /** Quarter of the game `Int32` */
   qtr?: number | null;
-  /** `String` */
+  /** Time left within the period `String` */
   time?: string | null;
-  /** `Int32` */
+  /** Clock minutes split from seconds for developer convenience `Int32` */
   clock_minutes?: number | null;
-  /** `Float64` */
+  /** Clock seconds split from minutes for developer convenience `Float64` */
   clock_seconds?: number | null;
-  /** `Boolean` */
+  /** True when the play is a timeout charged to the home team. `Boolean` */
   home_timeout_called?: boolean | null;
-  /** `Boolean` */
+  /** True when the play is a timeout charged to the away team. `Boolean` */
   away_timeout_called?: boolean | null;
-  /** `Int32` */
+  /** Half of the game `Int32` */
   half?: number | null;
-  /** `Int32` */
+  /** Half of the game `Int32` */
   game_half?: number | null;
-  /** `Int32` */
+  /** A lag column on the quarter `Int32` */
   lag_qtr?: number | null;
-  /** `Int32` */
+  /** A lead column on the quarter `Int32` */
   lead_qtr?: number | null;
-  /** `Int32` */
+  /** A lag column on the half `Int32` */
   lag_half?: number | null;
-  /** `Int32` */
+  /** A lead column on the half `Int32` */
   lead_half?: number | null;
-  /** `Float64` */
+  /** Quarter seconds remaining at the start of the play (these are more or less code artifacts from other sports, but may eventually be used more seriously) `Float64` */
   start_quarter_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Game half seconds remaining at the start of the play (these are more or less code artifacts from other sports, but may eventually be used more seriously) `Float64` */
   start_half_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Game seconds remaining at the start of the play (''') `Float64` */
   start_game_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Quarter seconds remaining at the end of the play (''') `Float64` */
   end_quarter_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Game half seconds remaining at the end of the play (''') `Float64` */
   end_half_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Game seconds remaining at the end of the play (''') `Float64` */
   end_game_seconds_remaining?: number | null;
-  /** `Int32` */
+  /** Period of the game (1-4 quarters; 5+ for OT). `Int32` */
   period?: number | null;
-  /** `Float64` */
+  /** X coordinate on the court (half-court layout). `Float64` */
   coordinate_x?: number | null;
-  /** `Float64` */
+  /** Y coordinate on the court (half-court layout). `Float64` */
   coordinate_y?: number | null;
-  /** `Date` */
+  /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
-  /** `Datetime(time_unit='us', time_zone='America/New_York')` */
+  /** Game start date/time (ISO 8601). `Datetime(time_unit='us', time_zone='America/New_York')` */
   game_date_time?: Date | null;
-  /** `String` */
+  /** Display name of the primary athlete on the play (e.g. the shooter, rebounder, or fouler), per ESPN participant order. `String` */
   athlete_name_1?: string | null;
-  /** `String` */
+  /** Display name of the secondary athlete on the play (e.g. the assister or fouled player), when present. `String` */
   athlete_name_2?: string | null;
-  /** `String` */
+  /** Display name of the third athlete listed on the play, when present. `String` */
   athlete_name_3?: string | null;
-  /** `String` */
+  /** Play type abbreviation `String` */
   type_abbreviation?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -147,119 +147,119 @@ export interface LoadWnbaPbpRow {
 
 /** One row of `sdv.wnba.loadWnbaPlayerBoxscore` (`espn_wnba_player_boxscores`; sdv-py loader schema `load_wnba_player_boxscore`). */
 export interface LoadWnbaPlayerBoxscoreRow {
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `Int32` */
   season_type?: number | null;
-  /** `Date` */
+  /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
-  /** `Datetime(time_unit='us', time_zone='America/New_York')` */
+  /** Game start date/time (ISO 8601). `Datetime(time_unit='us', time_zone='America/New_York')` */
   game_date_time?: Date | null;
-  /** `Int32` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
-  /** `String` */
+  /** Athlete display name (full). `String` */
   athlete_display_name?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Team city or location string. `String` */
   team_location?: string | null;
-  /** `String` */
+  /** Short team display name (e.g. 'Aces'). `String` */
   team_short_display_name?: string | null;
-  /** `Float64` */
+  /** Minutes played, formatted MM:SS (V3 PT-duration parsed) or decimal minutes (V2). `Float64` */
   minutes?: number | null;
-  /** `Int32` */
+  /** Field goals made (2-pt + 3-pt). `Int32` */
   field_goals_made?: number | null;
-  /** `Int32` */
+  /** Field goal attempts (2-pt + 3-pt). `Int32` */
   field_goals_attempted?: number | null;
-  /** `Int32` */
+  /** Three-point field goals made. `Int32` */
   three_point_field_goals_made?: number | null;
-  /** `Int32` */
+  /** Three-point field goal attempts. `Int32` */
   three_point_field_goals_attempted?: number | null;
-  /** `Int32` */
+  /** Free throws made. `Int32` */
   free_throws_made?: number | null;
-  /** `Int32` */
+  /** Free throw attempts. `Int32` */
   free_throws_attempted?: number | null;
-  /** `Int32` */
+  /** Offensive rebounds. `Int32` */
   offensive_rebounds?: number | null;
-  /** `Int32` */
+  /** Defensive rebounds. `Int32` */
   defensive_rebounds?: number | null;
-  /** `Int32` */
+  /** Total rebounds. `Int32` */
   rebounds?: number | null;
-  /** `Int32` */
+  /** Total assists. `Int32` */
   assists?: number | null;
-  /** `Int32` */
+  /** Total steals. `Int32` */
   steals?: number | null;
-  /** `Int32` */
+  /** Total blocks. `Int32` */
   blocks?: number | null;
-  /** `Int32` */
+  /** Total turnovers. `Int32` */
   turnovers?: number | null;
-  /** `Int32` */
+  /** Personal fouls. `Int32` */
   fouls?: number | null;
-  /** `String` */
+  /** Plus/minus point differential while on court. `String` */
   plus_minus?: string | null;
-  /** `Int32` */
+  /** Points scored. `Int32` */
   points?: number | null;
-  /** `Boolean` */
+  /** TRUE if the player was in the starting lineup; FALSE otherwise. `Boolean` */
   starter?: boolean | null;
-  /** `Boolean` */
+  /** TRUE if the player was ejected from the game. `Boolean` */
   ejected?: boolean | null;
-  /** `Boolean` */
+  /** TRUE if the player did not appear in the game. `Boolean` */
   did_not_play?: boolean | null;
-  /** `String` */
+  /** Reason. `String` */
   reason?: string | null;
-  /** `Boolean` */
+  /** TRUE if the row represents an active record (player / team / season). `Boolean` */
   active?: boolean | null;
-  /** `String` */
+  /** Athlete jersey number. `String` */
   athlete_jersey?: string | null;
-  /** `String` */
+  /** Athlete short display name. `String` */
   athlete_short_name?: string | null;
-  /** `String` */
+  /** Athlete headshot image URL. `String` */
   athlete_headshot_href?: string | null;
-  /** `String` */
+  /** Athlete position ('Guard', 'Forward', 'Center'). `String` */
   athlete_position_name?: string | null;
-  /** `String` */
+  /** Athlete position abbreviation (G / F / C). `String` */
   athlete_position_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** ESPN universal team identifier (UID format 's:40~l:...~t:...'). `String` */
   team_uid?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Team primary color (hex without leading '#'). `String` */
   team_color?: string | null;
-  /** `String` */
+  /** Team alternate color (hex without leading '#'). `String` */
   team_alternate_color?: string | null;
-  /** `String` */
+  /** Game venue label ('home' or 'away'). `String` */
   home_away?: string | null;
-  /** `Boolean` */
+  /** TRUE if the team won this game. `Boolean` */
   team_winner?: boolean | null;
-  /** `Int32` */
+  /** Team's score / final score. `Int32` */
   team_score?: number | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for the opponent team. `Int32` (an id) */
   opponent_team_id?: string | null;
-  /** `String` */
+  /** Opponent team display name. `String` */
   opponent_team_name?: string | null;
-  /** `String` */
+  /** Opponent team city / location. `String` */
   opponent_team_location?: string | null;
-  /** `String` */
+  /** Opponent team full display name. `String` */
   opponent_team_display_name?: string | null;
-  /** `String` */
+  /** Opponent team abbreviation. `String` */
   opponent_team_abbreviation?: string | null;
-  /** `String` */
+  /** Opponent team logo URL. `String` */
   opponent_team_logo?: string | null;
-  /** `String` */
+  /** Opponent team primary color (hex). `String` */
   opponent_team_color?: string | null;
-  /** `String` */
+  /** Opponent team alternate color (hex). `String` */
   opponent_team_alternate_color?: string | null;
-  /** `Int32` */
+  /** Opponent team's score. `Int32` */
   opponent_team_score?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -267,159 +267,159 @@ export interface LoadWnbaPlayerBoxscoreRow {
 
 /** One row of `sdv.wnba.loadWnbaSchedule` (`espn_wnba_schedules`; sdv-py loader schema `load_wnba_schedule`). */
 export interface LoadWnbaScheduleRow {
-  /** `Int32` (an id) */
+  /** Unique play identification number `Int32` (an id) */
   id?: string | null;
-  /** `String` */
+  /** ESPN UID string. `String` */
   uid?: string | null;
-  /** `String` */
+  /** Date in YYYY-MM-DD format. `String` */
   date?: string | null;
-  /** `Float64` */
+  /** Reported attendance. `Float64` */
   attendance?: number | null;
-  /** `Boolean` */
+  /** Time valid. `Boolean` */
   time_valid?: boolean | null;
-  /** `Boolean` */
+  /** Neutral site. `Boolean` */
   neutral_site?: boolean | null;
-  /** `Boolean` */
+  /** Conference competition. `Boolean` */
   conference_competition?: boolean | null;
   /** `Boolean` */
   play_by_play_available?: boolean | null;
-  /** `Boolean` */
+  /** Recent. `Boolean` */
   recent?: boolean | null;
-  /** `String` */
+  /** Start date (YYYY-MM-DD). `String` */
   start_date?: string | null;
-  /** `String` */
+  /** Broadcast information string. `String` */
   broadcast?: string | null;
   /** `String` */
   highlights?: string | null;
-  /** `String` */
+  /** Notes type. `String` */
   notes_type?: string | null;
-  /** `String` */
+  /** Notes headline. `String` */
   notes_headline?: string | null;
-  /** `String` */
+  /** Broadcast market label (e.g. 'national', 'home'). `String` */
   broadcast_market?: string | null;
-  /** `String` */
+  /** Broadcast name. `String` */
   broadcast_name?: string | null;
-  /** `Int32` (an id) */
+  /** Type identifier (numeric). `Int32` (an id) */
   type_id?: string | null;
-  /** `String` */
+  /** Play type abbreviation `String` */
   type_abbreviation?: string | null;
-  /** `Int32` (an id) */
+  /** Unique venue identifier. `Int32` (an id) */
   venue_id?: string | null;
-  /** `String` */
+  /** Venue full name. `String` */
   venue_full_name?: string | null;
-  /** `String` */
+  /** Venue address city. `String` */
   venue_address_city?: string | null;
-  /** `String` */
+  /** Venue address state / region. `String` */
   venue_address_state?: string | null;
-  /** `Boolean` */
+  /** TRUE if the venue is indoors. `Boolean` */
   venue_indoor?: boolean | null;
-  /** `Float64` */
+  /** Status clock. `Float64` */
   status_clock?: number | null;
-  /** `String` */
+  /** Status display clock. `String` */
   status_display_clock?: string | null;
-  /** `Float64` */
+  /** Status period. `Float64` */
   status_period?: number | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for status type. `Int32` (an id) */
   status_type_id?: string | null;
-  /** `String` */
+  /** Status type name. `String` */
   status_type_name?: string | null;
-  /** `String` */
+  /** Status type state. `String` */
   status_type_state?: string | null;
-  /** `Boolean` */
+  /** Status type completed. `Boolean` */
   status_type_completed?: boolean | null;
-  /** `String` */
+  /** Status type description. `String` */
   status_type_description?: string | null;
-  /** `String` */
+  /** Status type detail. `String` */
   status_type_detail?: string | null;
-  /** `String` */
+  /** Status type short detail. `String` */
   status_type_short_detail?: string | null;
-  /** `Float64` */
+  /** Format regulation periods. `Float64` */
   format_regulation_periods?: number | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for home. `Int32` (an id) */
   home_id?: string | null;
-  /** `String` */
+  /** Home team's uid. `String` */
   home_uid?: string | null;
-  /** `String` */
+  /** Home team's location. `String` */
   home_location?: string | null;
-  /** `String` */
+  /** Home name. `String` */
   home_name?: string | null;
-  /** `String` */
+  /** Home team's abbreviation. `String` */
   home_abbreviation?: string | null;
-  /** `String` */
+  /** Home display name. `String` */
   home_display_name?: string | null;
-  /** `String` */
+  /** Home short display name. `String` */
   home_short_display_name?: string | null;
-  /** `String` */
+  /** Color code (hex) for home. `String` */
   home_color?: string | null;
-  /** `String` */
+  /** Color code (hex) for home alternate. `String` */
   home_alternate_color?: string | null;
-  /** `Boolean` */
+  /** Home team's is active. `Boolean` */
   home_is_active?: boolean | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for home venue. `Int32` (an id) */
   home_venue_id?: string | null;
-  /** `String` */
+  /** Home team logo URL. `String` */
   home_logo?: string | null;
-  /** `Int32` */
+  /** Home team score at the time of the play. `Int32` */
   home_score?: number | null;
-  /** `Boolean` */
+  /** Home team's winner. `Boolean` */
   home_winner?: boolean | null;
-  /** `String` */
+  /** Stringified list of the home team's period-by-period scores from the ESPN schedule feed. `String` */
   home_linescores?: string | null;
-  /** `String` */
+  /** Stringified list of the home team's record summaries (overall/home/away) from the ESPN schedule feed. `String` */
   home_records?: string | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for away. `Int32` (an id) */
   away_id?: string | null;
-  /** `String` */
+  /** Away team's uid. `String` */
   away_uid?: string | null;
-  /** `String` */
+  /** Away team's location. `String` */
   away_location?: string | null;
-  /** `String` */
+  /** Away name. `String` */
   away_name?: string | null;
-  /** `String` */
+  /** Away team's abbreviation. `String` */
   away_abbreviation?: string | null;
-  /** `String` */
+  /** Away display name. `String` */
   away_display_name?: string | null;
-  /** `String` */
+  /** Away short display name. `String` */
   away_short_display_name?: string | null;
-  /** `String` */
+  /** Color code (hex) for away. `String` */
   away_color?: string | null;
-  /** `String` */
+  /** Color code (hex) for away alternate. `String` */
   away_alternate_color?: string | null;
-  /** `Boolean` */
+  /** Away team's is active. `Boolean` */
   away_is_active?: boolean | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for away venue. `Int32` (an id) */
   away_venue_id?: string | null;
-  /** `String` */
+  /** Away team logo URL. `String` */
   away_logo?: string | null;
-  /** `Int32` */
+  /** Away team score at the time of the play. `Int32` */
   away_score?: number | null;
-  /** `Boolean` */
+  /** Away team's winner. `Boolean` */
   away_winner?: boolean | null;
-  /** `String` */
+  /** Stringified list of the away team's period-by-period scores from the ESPN schedule feed. `String` */
   away_linescores?: string | null;
-  /** `String` */
+  /** Stringified list of the away team's record summaries (overall/home/away) from the ESPN schedule feed. `String` */
   away_records?: string | null;
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `Int32` */
   season_type?: number | null;
-  /** `String` */
+  /** Status type alt detail. `String` */
   status_type_alt_detail?: string | null;
   /** `Boolean` */
   game_json?: boolean | null;
   /** `String` */
   game_json_url?: string | null;
-  /** `Datetime(time_unit='us', time_zone='America/New_York')` */
+  /** Game start date/time (ISO 8601). `Datetime(time_unit='us', time_zone='America/New_York')` */
   game_date_time?: Date | null;
-  /** `Date` */
+  /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
   /** `Boolean` */
   PBP?: boolean | null;
-  /** `Boolean` */
+  /** Team box. `Boolean` */
   team_box?: boolean | null;
-  /** `Boolean` */
+  /** Player box. `Boolean` */
   player_box?: boolean | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -427,123 +427,123 @@ export interface LoadWnbaScheduleRow {
 
 /** One row of `sdv.wnba.loadWnbaTeamBoxscore` (`espn_wnba_team_boxscores`; sdv-py loader schema `load_wnba_team_boxscore`). */
 export interface LoadWnbaTeamBoxscoreRow {
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `Int32` */
   season_type?: number | null;
-  /** `Date` */
+  /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
-  /** `Datetime(time_unit='us', time_zone='America/New_York')` */
+  /** Game start date/time (ISO 8601). `Datetime(time_unit='us', time_zone='America/New_York')` */
   game_date_time?: Date | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** ESPN universal team identifier (UID format 's:40~l:...~t:...'). `String` */
   team_uid?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Team city or location string. `String` */
   team_location?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Short team display name (e.g. 'Aces'). `String` */
   team_short_display_name?: string | null;
-  /** `String` */
+  /** Team primary color (hex without leading '#'). `String` */
   team_color?: string | null;
-  /** `String` */
+  /** Team alternate color (hex without leading '#'). `String` */
   team_alternate_color?: string | null;
-  /** `String` */
+  /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** `String` */
+  /** Team home away. `String` */
   team_home_away?: string | null;
-  /** `Int32` */
+  /** Team's score / final score. `Int32` */
   team_score?: number | null;
-  /** `Boolean` */
+  /** TRUE if the team won this game. `Boolean` */
   team_winner?: boolean | null;
-  /** `Int32` */
+  /** Total assists. `Int32` */
   assists?: number | null;
-  /** `Int32` */
+  /** Total blocks. `Int32` */
   blocks?: number | null;
-  /** `Int32` */
+  /** Defensive rebounds. `Int32` */
   defensive_rebounds?: number | null;
-  /** `String` */
+  /** Fast-break points scored. `String` */
   fast_break_points?: string | null;
-  /** `Float64` */
+  /** Field goal percentage (0-1). `Float64` */
   field_goal_pct?: number | null;
-  /** `Int32` */
+  /** Field goals made (2-pt + 3-pt). `Int32` */
   field_goals_made?: number | null;
-  /** `Int32` */
+  /** Field goal attempts (2-pt + 3-pt). `Int32` */
   field_goals_attempted?: number | null;
-  /** `Int32` */
+  /** Total flagrant fouls. `Int32` */
   flagrant_fouls?: number | null;
-  /** `Int32` */
+  /** Personal fouls. `Int32` */
   fouls?: number | null;
-  /** `Float64` */
+  /** Free throw percentage (0-1). `Float64` */
   free_throw_pct?: number | null;
-  /** `Int32` */
+  /** Free throws made. `Int32` */
   free_throws_made?: number | null;
-  /** `Int32` */
+  /** Free throw attempts. `Int32` */
   free_throws_attempted?: number | null;
-  /** `String` */
+  /** Largest lead during the game. `String` */
   largest_lead?: string | null;
-  /** `String` */
+  /** Lead changes. `String` */
   lead_changes?: string | null;
-  /** `String` */
+  /** Share of game time the team spent in the lead, as reported by ESPN. `String` */
   lead_percentage?: string | null;
-  /** `Int32` */
+  /** Offensive rebounds. `Int32` */
   offensive_rebounds?: number | null;
-  /** `String` */
+  /** Points scored in the paint. `String` */
   points_in_paint?: string | null;
-  /** `Int32` */
+  /** Total steals. `Int32` */
   steals?: number | null;
-  /** `Int32` */
+  /** Team turnovers (turnovers credited to the team rather than a player). `Int32` */
   team_turnovers?: number | null;
-  /** `Int32` */
+  /** Total technical fouls. `Int32` */
   technical_fouls?: number | null;
-  /** `Float64` */
+  /** Three-point field goal percentage (0-1). `Float64` */
   three_point_field_goal_pct?: number | null;
-  /** `Int32` */
+  /** Three-point field goals made. `Int32` */
   three_point_field_goals_made?: number | null;
-  /** `Int32` */
+  /** Three-point field goal attempts. `Int32` */
   three_point_field_goals_attempted?: number | null;
-  /** `Int32` */
+  /** Total rebounds. `Int32` */
   total_rebounds?: number | null;
-  /** `Int32` */
+  /** Total technical fouls (player + team). `Int32` */
   total_technical_fouls?: number | null;
-  /** `Int32` */
+  /** Total turnovers (player + team). `Int32` */
   total_turnovers?: number | null;
-  /** `String` */
+  /** Turnover points. `String` */
   turnover_points?: string | null;
-  /** `Int32` */
+  /** Total turnovers. `Int32` */
   turnovers?: number | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for the opponent team. `Int32` (an id) */
   opponent_team_id?: string | null;
-  /** `String` */
+  /** Opponent team uid. `String` */
   opponent_team_uid?: string | null;
-  /** `String` */
+  /** Opponent team slug. `String` */
   opponent_team_slug?: string | null;
-  /** `String` */
+  /** Opponent team city / location. `String` */
   opponent_team_location?: string | null;
-  /** `String` */
+  /** Opponent team display name. `String` */
   opponent_team_name?: string | null;
-  /** `String` */
+  /** Opponent team abbreviation. `String` */
   opponent_team_abbreviation?: string | null;
-  /** `String` */
+  /** Opponent team full display name. `String` */
   opponent_team_display_name?: string | null;
-  /** `String` */
+  /** Opponent team short display name. `String` */
   opponent_team_short_display_name?: string | null;
-  /** `String` */
+  /** Opponent team primary color (hex). `String` */
   opponent_team_color?: string | null;
-  /** `String` */
+  /** Opponent team alternate color (hex). `String` */
   opponent_team_alternate_color?: string | null;
-  /** `String` */
+  /** Opponent team logo URL. `String` */
   opponent_team_logo?: string | null;
-  /** `Int32` */
+  /** Opponent team's score. `Int32` */
   opponent_team_score?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -551,25 +551,25 @@ export interface LoadWnbaTeamBoxscoreRow {
 
 /** One row of `sdv.wnba.loadWnbaDraft` (`espn_wnba_draft`; sdv-py loader schema `load_wnba_draft`). */
 export interface LoadWnbaDraftRow {
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Tournament / playoff round. `Int32` */
   round?: number | null;
-  /** `String` */
+  /** Human-readable label for the draft round, read from the ESPN round object's displayName falling back to its name; null whenever ESPN ships the modern flat picks array with no round objects, which is the case for every published season. `String` */
   round_display_name?: string | null;
-  /** `Int32` */
+  /** Pick. `Int32` */
   pick?: number | null;
-  /** `Int32` */
+  /** Overall pick. `Int32` */
   overall_pick?: number | null;
-  /** `String` */
+  /** ESPN's pick-level traded flag stringified as TRUE or FALSE, marking selections made with a pick that had changed hands (17 of the 45 published 2026 picks are TRUE). `String` */
   pick_traded?: string | null;
-  /** `String` */
+  /** Free-text annotation ESPN attaches to a pick, taken from notes and falling back to note; empty for every pick published so far. `String` */
   pick_notes?: string | null;
-  /** `Int32` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
-  /** `String` */
+  /** ESPN athlete UID (universal identifier). `String` */
   athlete_uid?: string | null;
-  /** `String` */
+  /** ESPN athlete GUID. `String` */
   athlete_guid?: string | null;
   /** `String` */
   athlete_first_name?: string | null;
@@ -577,49 +577,49 @@ export interface LoadWnbaDraftRow {
   athlete_last_name?: string | null;
   /** `String` */
   athlete_full_name?: string | null;
-  /** `String` */
+  /** Athlete display name (full). `String` */
   athlete_display_name?: string | null;
-  /** `String` */
+  /** Athlete short display name. `String` */
   athlete_short_name?: string | null;
   /** `String` */
   athlete_height?: string | null;
   /** `String` */
   athlete_weight?: string | null;
-  /** `String` */
+  /** Athlete position abbreviation (G / F / C). `String` */
   athlete_position_abbreviation?: string | null;
-  /** `String` */
+  /** Athlete position ('Guard', 'Forward', 'Center'). `String` */
   athlete_position_name?: string | null;
-  /** `String` */
+  /** Athlete headshot image URL. `String` */
   athlete_headshot_href?: string | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for college. `Int32` (an id) */
   college_id?: string | null;
-  /** `String` */
+  /** College name. `String` */
   college_name?: string | null;
   /** `String` */
   college_short_name?: string | null;
-  /** `String` */
+  /** Short code for the drafted player's school, read from the athlete's ESPN college block; null throughout the published data because ESPN ships no college block on these picks. `String` */
   college_abbreviation?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** ESPN universal team identifier (UID format 's:40~l:...~t:...'). `String` */
   team_uid?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Team city or location string. `String` */
   team_location?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Short team display name (e.g. 'Aces'). `String` */
   team_short_display_name?: string | null;
-  /** `String` */
+  /** Team primary color (hex without leading '#'). `String` */
   team_color?: string | null;
-  /** `String` */
+  /** Team alternate color (hex without leading '#'). `String` */
   team_alternate_color?: string | null;
-  /** `String` */
+  /** Team logo image URL. `String` */
   team_logo?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -627,49 +627,49 @@ export interface LoadWnbaDraftRow {
 
 /** One row of `sdv.wnba.loadWnbaGameRosters` (`espn_wnba_game_rosters`; sdv-py loader schema `load_wnba_game_rosters`). */
 export interface LoadWnbaGameRostersRow {
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Game venue label ('home' or 'away'). `String` */
   home_away?: string | null;
-  /** `Int32` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
-  /** `String` */
+  /** ESPN athlete UID (universal identifier). `String` */
   athlete_uid?: string | null;
-  /** `String` */
+  /** ESPN athlete GUID. `String` */
   athlete_guid?: string | null;
-  /** `String` */
+  /** Athlete display name (full). `String` */
   athlete_display_name?: string | null;
-  /** `String` */
+  /** Athlete short display name. `String` */
   athlete_short_name?: string | null;
   /** `String` */
   athlete_first_name?: string | null;
   /** `String` */
   athlete_last_name?: string | null;
-  /** `String` */
+  /** Athlete jersey number. `String` */
   athlete_jersey?: string | null;
-  /** `String` */
+  /** Athlete position. `String` */
   athlete_position?: string | null;
-  /** `String` */
+  /** Direct link to the player's ESPN headshot image, always of the form https://a.espncdn.com/i/headshots/wnba/players/full/{athlete_id}.png, and null for the few players ESPN has no photo for. `String` */
   athlete_headshot?: string | null;
-  /** `Boolean` */
+  /** TRUE if the player was in the starting lineup; FALSE otherwise. `Boolean` */
   starter?: boolean | null;
-  /** `Boolean` */
+  /** TRUE if the player did not appear in the game. `Boolean` */
   did_not_play?: boolean | null;
-  /** `Boolean` */
+  /** TRUE if the row represents an active record (player / team / season). `Boolean` */
   active?: boolean | null;
-  /** `Boolean` */
+  /** TRUE if the player was ejected from the game. `Boolean` */
   ejected?: boolean | null;
-  /** `String` */
+  /** Reason. `String` */
   reason?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -677,27 +677,27 @@ export interface LoadWnbaGameRostersRow {
 
 /** One row of `sdv.wnba.loadWnbaOfficials` (`espn_wnba_officials`; sdv-py loader schema `load_wnba_officials`). */
 export interface LoadWnbaOfficialsRow {
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int32` (an id) */
+  /** Unique official / referee identifier. `Int32` (an id) */
   official_id?: string | null;
-  /** `String` */
+  /** ESPN's global uid string for the official, carried straight through from the officials payload; the Core v2 items ESPN serves omit it, so it is null in every published season. `String` */
   official_uid?: string | null;
-  /** `String` */
+  /** The official's full name, taken from ESPN fullName and falling back to displayName; it equals first plus last name on every published row. `String` */
   official_full_name?: string | null;
-  /** `String` */
+  /** ESPN's display rendering of the official's name, which is byte-identical to official_full_name on every published row and therefore adds nothing. `String` */
   official_display_name?: string | null;
-  /** `String` */
+  /** Given name of the official as ESPN splits it out, the leading token of official_full_name. `String` */
   official_first_name?: string | null;
-  /** `String` */
+  /** Family name of the official as ESPN splits it out, the trailing token of official_full_name, with hyphenated surnames kept intact. `String` */
   official_last_name?: string | null;
-  /** `Int32` */
+  /** ESPN's 1-based position of the official within that game's crew; most games run 1 through 3 for a three-person crew and 40 of 573 games in 2024-2025 add a fourth. `Int32` */
   official_order?: number | null;
-  /** `String` */
+  /** Listed roster position ('Guard', 'Forward', 'Center'). `String` */
   position_name?: string | null;
-  /** `String` */
+  /** Position display name. `String` */
   position_display_name?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -705,37 +705,37 @@ export interface LoadWnbaOfficialsRow {
 
 /** One row of `sdv.wnba.loadWnbaPlayerSeasonStats` (`espn_wnba_player_season_stats`; sdv-py loader schema `load_wnba_player_season_stats`). */
 export interface LoadWnbaPlayerSeasonStatsRow {
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int32` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
-  /** `String` */
+  /** Athlete display name (full). `String` */
   athlete_display_name?: string | null;
   /** `String` */
   athlete_first_name?: string | null;
   /** `String` */
   athlete_last_name?: string | null;
-  /** `String` */
+  /** Athlete position abbreviation (G / F / C). `String` */
   athlete_position_abbreviation?: string | null;
-  /** `String` */
+  /** Athlete jersey number. `String` */
   athlete_jersey?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Category label. `String` */
   category?: string | null;
   /** `String` */
   stat_label?: string | null;
-  /** `String` */
+  /** Internal stat key. `String` */
   stat_name?: string | null;
-  /** `String` */
+  /** Stat display name. `String` */
   stat_display_name?: string | null;
-  /** `String` */
+  /** ESPN's prose definition of the statistic on this row, for example The average number of points scored per game for avgPoints; combined made-attempted stats carry both halves joined by a hyphen. `String` */
   stat_description?: string | null;
-  /** `String` */
+  /** Display-formatted value. `String` */
   display_value?: string | null;
-  /** `Float64` */
+  /** Numeric or string value field. `Float64` */
   value?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -743,77 +743,77 @@ export interface LoadWnbaPlayerSeasonStatsRow {
 
 /** One row of `sdv.wnba.loadWnbaRosters` (`espn_wnba_rosters`; sdv-py loader schema `load_wnba_rosters`). */
 export interface LoadWnbaRostersRow {
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Short team display name (e.g. 'Aces'). `String` */
   team_short_display_name?: string | null;
-  /** `String` */
+  /** Team primary color (hex without leading '#'). `String` */
   team_color?: string | null;
-  /** `String` */
+  /** Team alternate color (hex without leading '#'). `String` */
   team_alternate_color?: string | null;
-  /** `String` */
+  /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** `String` (an id) */
+  /** Unique athlete identifier (ESPN). `String` (an id) */
   athlete_id?: string | null;
-  /** `String` */
+  /** ESPN UID string. `String` */
   uid?: string | null;
-  /** `String` */
+  /** Stable cross-league team GUID. `String` */
   guid?: string | null;
-  /** `String` */
+  /** Player's full name. `String` */
   full_name?: string | null;
-  /** `String` */
+  /** Display name. `String` */
   display_name?: string | null;
-  /** `String` */
+  /** Short display name. `String` */
   short_name?: string | null;
-  /** `String` */
+  /** Player's first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   jersey?: string | null;
-  /** `String` */
+  /** Position abbreviation ('G' / 'F' / 'C'). `String` */
   position_abbreviation?: string | null;
-  /** `String` */
+  /** Listed roster position ('Guard', 'Forward', 'Center'). `String` */
   position_name?: string | null;
-  /** `String` (an id) */
+  /** Unique position identifier. `String` (an id) */
   position_id?: string | null;
-  /** `String` */
+  /** Player height (string e.g. '6-2' or inches). `String` */
   height?: string | null;
-  /** `String` */
+  /** Player weight in pounds. `String` */
   weight?: string | null;
-  /** `String` */
+  /** Player age (in years). `String` */
   age?: string | null;
-  /** `String` */
+  /** Date of birth (YYYY-MM-DD). `String` */
   date_of_birth?: string | null;
-  /** `String` */
+  /** Birth place city. `String` */
   birth_place_city?: string | null;
-  /** `String` */
+  /** Birth place state. `String` */
   birth_place_state?: string | null;
-  /** `String` */
+  /** Birth place country. `String` */
   birth_place_country?: string | null;
-  /** `String` */
+  /** Experience years. `String` */
   experience_years?: string | null;
-  /** `String` */
+  /** Experience display value. `String` */
   experience_display_value?: string | null;
-  /** `String` */
+  /** Headshot image URL. `String` */
   headshot_href?: string | null;
-  /** `String` */
+  /** Alternative-text label for the headshot. `String` */
   headshot_alt?: string | null;
-  /** `String` */
+  /** Web link / URL. `String` */
   link_web?: string | null;
-  /** `String` (an id) */
+  /** Status identifier. `String` (an id) */
   status_id?: string | null;
-  /** `String` */
+  /** Status label. `String` */
   status_name?: string | null;
-  /** `String` */
+  /** Status type. `String` */
   status_type?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -821,45 +821,45 @@ export interface LoadWnbaRostersRow {
 
 /** One row of `sdv.wnba.loadWnbaShots` (`espn_wnba_shots`; sdv-py loader schema `load_wnba_shots`). */
 export interface LoadWnbaShotsRow {
-  /** `Int32` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int32` */
+  /** Numeric period (1-4 for quarters; 5+ for OT). `Int32` */
   period_number?: number | null;
-  /** `String` */
+  /** Game clock display string (e.g. '8:32'). `String` */
   clock_display_value?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `Int32` (an id) */
+  /** Primary athlete identifier (e.g. shooter). `Int32` (an id) */
   athlete_id_1?: string | null;
-  /** `Int32` (an id) */
+  /** Secondary athlete identifier (e.g. assister / fouler). `Int32` (an id) */
   athlete_id_2?: string | null;
-  /** `Int32` (an id) */
+  /** Type identifier (numeric). `Int32` (an id) */
   type_id?: string | null;
-  /** `String` */
+  /** Display text for the type field. `String` */
   type_text?: string | null;
-  /** `Boolean` */
+  /** TRUE if the play resulted in points scored. `Boolean` */
   scoring_play?: boolean | null;
-  /** `Int32` */
+  /** Point value of the play (2 / 3 / 1). `Int32` */
   score_value?: number | null;
-  /** `Float64` */
+  /** X coordinate on the court (half-court layout). `Float64` */
   coordinate_x?: number | null;
-  /** `Float64` */
+  /** Y coordinate on the court (half-court layout). `Float64` */
   coordinate_y?: number | null;
-  /** `Float64` */
+  /** X coordinate as returned by the API before any adjustment. `Float64` */
   coordinate_x_raw?: number | null;
-  /** `Float64` */
+  /** Y coordinate as returned by the API before any adjustment. `Float64` */
   coordinate_y_raw?: number | null;
-  /** `String` */
+  /** Display name of the shooter, per ESPN participant order. `String` */
   athlete_name_1?: string | null;
-  /** `String` */
+  /** Display name of the secondary athlete on the shot (typically the assister), when present. `String` */
   athlete_name_2?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** ESPN mascot (nickname) of the shooting team. `String` */
   team_mascot?: string | null;
-  /** `String` */
+  /** Abbreviation for team. `String` */
   team_abbrev?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -867,53 +867,53 @@ export interface LoadWnbaShotsRow {
 
 /** One row of `sdv.wnba.loadWnbaStandings` (`espn_wnba_standings`; sdv-py loader schema `load_wnba_standings`). */
 export interface LoadWnbaStandingsRow {
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** ESPN group id. `String` (an id) */
   group_id?: string | null;
   /** `String` */
   group_name?: string | null;
   /** `String` */
   group_abbreviation?: string | null;
-  /** `String` */
+  /** Short label of the standings group node the team sits under, read from ESPN shortName; the WNBA conference nodes ship only name and abbreviation, so it is null on every published row. `String` */
   group_short_name?: string | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** ESPN universal team identifier (UID format 's:40~l:...~t:...'). `String` */
   team_uid?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Team city or location string. `String` */
   team_location?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Short team display name (e.g. 'Aces'). `String` */
   team_short_display_name?: string | null;
-  /** `String` */
+  /** Team primary color (hex without leading '#'). `String` */
   team_color?: string | null;
-  /** `String` */
+  /** Team alternate color (hex without leading '#'). `String` */
   team_alternate_color?: string | null;
-  /** `String` */
+  /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** `String` */
+  /** Internal stat key. `String` */
   stat_name?: string | null;
-  /** `String` */
+  /** Stat display name. `String` */
   stat_display_name?: string | null;
   /** `String` */
   stat_short_display_name?: string | null;
-  /** `String` */
+  /** ESPN's long-form explanation of the standings stat, such as Clinched Best League Record for clincher or Record last 10 games for lasttengames. `String` */
   stat_description?: string | null;
-  /** `String` */
+  /** ESPN's abbreviation for the standings stat, which can differ from stat_short_display_name (playoffSeed is SEED here but POS there) and is null on the record-split rows such as Home and vs. Conf. `String` */
   stat_abbreviation?: string | null;
-  /** `String` */
+  /** Stat type code (e.g. "win", "loss"). `String` */
   stat_type?: string | null;
-  /** `String` */
+  /** Display-formatted value. `String` */
   display_value?: string | null;
-  /** `Float64` */
+  /** Numeric or string value field. `Float64` */
   value?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -921,37 +921,37 @@ export interface LoadWnbaStandingsRow {
 
 /** One row of `sdv.wnba.loadWnbaTeamSeasonStats` (`espn_wnba_team_season_stats`; sdv-py loader schema `load_wnba_team_season_stats`). */
 export interface LoadWnbaTeamSeasonStatsRow {
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int32` (an id) */
+  /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). `String` */
   team_slug?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name. `String` */
   team_display_name?: string | null;
-  /** `String` */
+  /** Short team display name (e.g. 'Aces'). `String` */
   team_short_display_name?: string | null;
-  /** `String` */
+  /** Team primary color (hex without leading '#'). `String` */
   team_color?: string | null;
-  /** `String` */
+  /** Team alternate color (hex without leading '#'). `String` */
   team_alternate_color?: string | null;
-  /** `String` */
+  /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** `String` */
+  /** Category label. `String` */
   category?: string | null;
   /** `String` */
   stat_label?: string | null;
-  /** `String` */
+  /** Internal stat key. `String` */
   stat_name?: string | null;
-  /** `String` */
+  /** Stat display name. `String` */
   stat_display_name?: string | null;
-  /** `String` */
+  /** Human-readable description of the statistic the row reports. `String` */
   stat_description?: string | null;
-  /** `String` */
+  /** Display-formatted value. `String` */
   display_value?: string | null;
-  /** `Float64` */
+  /** Numeric or string value field. `Float64` */
   value?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -959,47 +959,47 @@ export interface LoadWnbaTeamSeasonStatsRow {
 
 /** One row of `sdv.wnba.loadWnbaPlayerCrosswalk` (`wnba_crosswalk`; sdv-py loader schema `load_wnba_player_crosswalk`). */
 export interface LoadWnbaPlayerCrosswalkRow {
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int32` (an id) */
+  /** ESPN team id (canonical key). `Int32` (an id) */
   espn_team_id?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `String` (an id) */
+  /** ESPN athlete id. `String` (an id) */
   espn_athlete_id?: string | null;
-  /** `String` */
+  /** ESPN full name. `String` */
   espn_full_name?: string | null;
-  /** `String` */
+  /** ESPN jersey number. `String` */
   espn_jersey?: string | null;
-  /** `String` */
+  /** ESPN position abbreviation. `String` */
   espn_position?: string | null;
-  /** `String` (an id) */
+  /** Player identifier on stats.wnba.com matched to the ESPN player. `String` (an id) */
   wnba_player_id?: string | null;
-  /** `String` */
+  /** Player display name on the stats.wnba.com side of the crosswalk. `String` */
   wnba_player_name?: string | null;
-  /** `String` */
+  /** Jersey number listed on the stats.wnba.com side of the crosswalk. `String` */
   wnba_jersey_num?: string | null;
-  /** `String` */
+  /** Position listed on the stats.wnba.com side of the crosswalk. `String` */
   wnba_position?: string | null;
-  /** `String` (an id) */
+  /** Fox athlete id (NA if unmatched). `String` (an id) */
   fox_athlete_id?: string | null;
-  /** `String` */
+  /** Fox player name (NA if unmatched). `String` */
   fox_player?: string | null;
-  /** `String` */
+  /** Fox jersey number (NA if unmatched). `String` */
   fox_jersey?: string | null;
-  /** `String` */
+  /** Fox position group label (NA if unmatched). `String` */
   fox_position_group?: string | null;
-  /** `String` (an id) */
+  /** Yahoo player id (NA placeholder). `String` (an id) */
   yahoo_player_id?: string | null;
-  /** `String` */
+  /** Yahoo player name (NA placeholder). `String` */
   yahoo_player_name?: string | null;
-  /** `String` */
+  /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
-  /** `Float64` */
+  /** Jaro-Winkler score or 1 for exact (NA if none). `Float64` */
   match_confidence?: number | null;
-  /** `String` */
+  /** NA (reserved for future use). `String` */
   match_keys?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1007,37 +1007,37 @@ export interface LoadWnbaPlayerCrosswalkRow {
 
 /** One row of `sdv.wnba.loadWnbaScheduleCrosswalk` (`wnba_crosswalk`; sdv-py loader schema `load_wnba_schedule_crosswalk`). */
 export interface LoadWnbaScheduleCrosswalkRow {
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
-  /** `Date` */
+  /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
-  /** `Int32` (an id) */
+  /** ESPN home team id (NA for bart-only rows). `Int32` (an id) */
   home_espn_team_id?: string | null;
-  /** `Int32` (an id) */
+  /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
-  /** `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `String` (an id) */
   espn_game_id?: string | null;
-  /** `String` (an id) */
+  /** Game identifier on stats.wnba.com matched to the ESPN game. `String` (an id) */
   wnba_game_id?: string | null;
-  /** `String` */
+  /** stats.wnba.com game code (date/matchup slug) for the matched game. `String` */
   wnba_game_code?: string | null;
-  /** `String` (an id) */
+  /** Home team identifier on stats.wnba.com for the matched game. `String` (an id) */
   wnba_home_team_id?: string | null;
-  /** `String` (an id) */
+  /** Away team identifier on stats.wnba.com for the matched game. `String` (an id) */
   wnba_away_team_id?: string | null;
-  /** `String` (an id) */
+  /** Fox game id (NA placeholder). `String` (an id) */
   fox_game_id?: string | null;
-  /** `String` (an id) */
+  /** Home team identifier on Fox Sports for the matched game. `String` (an id) */
   fox_home_team_id?: string | null;
-  /** `String` (an id) */
+  /** Away team identifier on Fox Sports for the matched game. `String` (an id) */
   fox_away_team_id?: string | null;
-  /** `String` (an id) */
+  /** Yahoo game id (NA placeholder). `String` (an id) */
   yahoo_game_id?: string | null;
-  /** `String` */
+  /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
-  /** `Float64` */
+  /** Jaro-Winkler score or 1 for exact (NA if none). `Float64` */
   match_confidence?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1045,43 +1045,43 @@ export interface LoadWnbaScheduleCrosswalkRow {
 
 /** One row of `sdv.wnba.loadWnbaTeamCrosswalk` (`wnba_crosswalk`; sdv-py loader schema `load_wnba_team_crosswalk`). */
 export interface LoadWnbaTeamCrosswalkRow {
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int32` (an id) */
+  /** ESPN team id (canonical key). `Int32` (an id) */
   espn_team_id?: string | null;
-  /** `String` */
+  /** ESPN abbreviation. `String` */
   espn_abbreviation?: string | null;
-  /** `String` */
+  /** ESPN display name (school + mascot). `String` */
   espn_display_name?: string | null;
-  /** `String` */
+  /** ESPN short name. `String` */
   espn_short_name?: string | null;
-  /** `String` */
+  /** ESPN school/location only. `String` */
   espn_location?: string | null;
-  /** `String` */
+  /** ESPN team mascot/nickname. `String` */
   espn_mascot?: string | null;
-  /** `String` (an id) */
+  /** WNBA Stats team id. `String` (an id) */
   wnba_team_id?: string | null;
-  /** `String` */
+  /** WNBA Stats tricode. `String` */
   wnba_team_tricode?: string | null;
-  /** `String` */
+  /** WNBA Stats team name. `String` */
   wnba_team_name?: string | null;
-  /** `String` */
+  /** WNBA Stats team city. `String` */
   wnba_team_city?: string | null;
-  /** `String` */
+  /** WNBA Stats team slug. `String` */
   wnba_team_slug?: string | null;
-  /** `String` (an id) */
+  /** Fox Bifrost team id (NA if unmatched). `String` (an id) */
   fox_team_id?: string | null;
-  /** `String` */
+  /** Fox team name (NA if unmatched). `String` */
   fox_team_name?: string | null;
-  /** `String` (an id) */
+  /** Yahoo team id (NA placeholder). `String` (an id) */
   yahoo_team_id?: string | null;
-  /** `String` */
+  /** Yahoo abbreviation (NA placeholder). `String` */
   yahoo_team_abbreviation?: string | null;
-  /** `String` */
+  /** Yahoo team name (NA placeholder). `String` */
   yahoo_team_name?: string | null;
-  /** `String` */
+  /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
-  /** `Float64` */
+  /** Jaro-Winkler score or 1 for exact (NA if none). `Float64` */
   match_confidence?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1089,77 +1089,77 @@ export interface LoadWnbaTeamCrosswalkRow {
 
 /** One row of `sdv.wnba.loadWnbaPlayerCore` (`espn_wnba_player_core`; sdv-py loader schema `load_wnba_player_core`). */
 export interface LoadWnbaPlayerCoreRow {
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int64` (an id) */
+  /** Unique athlete identifier (ESPN). `Int64` (an id) */
   athlete_id?: string | null;
-  /** `String` */
+  /** Stable cross-league team GUID. `String` */
   guid?: string | null;
-  /** `String` */
+  /** ESPN UID string. `String` */
   uid?: string | null;
-  /** `String` */
+  /** URL-safe identifier. `String` */
   slug?: string | null;
-  /** `String` */
+  /** Record type / category. `String` */
   type?: string | null;
-  /** `String` */
+  /** Player's first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Player's full name. `String` */
   full_name?: string | null;
-  /** `String` */
+  /** Display name. `String` */
   display_name?: string | null;
-  /** `String` */
+  /** Short display name. `String` */
   short_name?: string | null;
-  /** `Float64` */
+  /** Player height (string e.g. '6-2' or inches). `Float64` */
   height?: number | null;
-  /** `String` */
+  /** Player height in display format (e.g. '6-2'). `String` */
   display_height?: string | null;
-  /** `Float64` */
+  /** Player weight in pounds. `Float64` */
   weight?: number | null;
-  /** `String` */
+  /** Player weight in display format (e.g. '180 lbs'). `String` */
   display_weight?: string | null;
-  /** `Int32` */
+  /** Player age (in years). `Int32` */
   age?: number | null;
-  /** `String` */
+  /** Date of birth (YYYY-MM-DD). `String` */
   date_of_birth?: string | null;
-  /** `String` */
+  /** Birth city. `String` */
   birth_city?: string | null;
-  /** `String` */
+  /** Birth state / region. `String` */
   birth_state?: string | null;
   /** `String` */
   birth_country?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   jersey?: string | null;
-  /** `Int32` (an id) */
+  /** Unique position identifier. `Int32` (an id) */
   position_id?: string | null;
-  /** `String` */
+  /** Listed roster position ('Guard', 'Forward', 'Center'). `String` */
   position_name?: string | null;
-  /** `String` */
+  /** Position abbreviation ('G' / 'F' / 'C'). `String` */
   position_abbreviation?: string | null;
-  /** `String` */
+  /** Position display name. `String` */
   position_display_name?: string | null;
-  /** `Int32` (an id) */
+  /** Unique identifier for college. `Int32` (an id) */
   college_id?: string | null;
   /** `Int32` (an id) */
   current_team_id?: string | null;
-  /** `String` */
+  /** Headshot image URL. `String` */
   headshot_href?: string | null;
-  /** `Int32` */
+  /** Experience years. `Int32` */
   experience_years?: number | null;
-  /** `Int32` (an id) */
+  /** Status identifier. `Int32` (an id) */
   status_id?: string | null;
-  /** `String` */
+  /** Status label. `String` */
   status_name?: string | null;
-  /** `String` */
+  /** Status type. `String` */
   status_type?: string | null;
-  /** `Int32` */
+  /** Draft year (4-digit). `Int32` */
   draft_year?: number | null;
-  /** `Int32` */
+  /** Round of the draft selection. `Int32` */
   draft_round?: number | null;
-  /** `Int32` */
+  /** Draft selection. `Int32` */
   draft_selection?: number | null;
-  /** `Boolean` */
+  /** TRUE if the row represents an active record (player / team / season). `Boolean` */
   active?: boolean | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1167,61 +1167,61 @@ export interface LoadWnbaPlayerCoreRow {
 
 /** One row of `sdv.wnba.loadWnbaPlayerImpact` (`wnba_player_impact`; sdv-py loader schema `load_wnba_player_impact`). */
 export interface LoadWnbaPlayerImpactRow {
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Nested list of member-team membership spans. `String` */
   teams?: string | null;
-  /** `Int64` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
-  /** `Float64` */
+  /** Offensive RAPM: ridge-regularized on/off impact on team offense, in points per 100 possessions. `Float64` */
   o_rapm?: number | null;
-  /** `Float64` */
+  /** Defensive RAPM: ridge-regularized on/off impact on team defense, in points per 100 possessions. `Float64` */
   d_rapm?: number | null;
-  /** `Float64` */
+  /** Total RAPM: offensive plus defensive regularized on/off impact, in points per 100 possessions. `Float64` */
   rapm?: number | null;
-  /** `Int64` */
+  /** Offensive possessions the player was on the floor for in the RAPM sample. `Int64` */
   off_poss?: number | bigint | null;
-  /** `Int64` */
+  /** Defensive possessions the player was on the floor for in the RAPM sample. `Int64` */
   def_poss?: number | bigint | null;
-  /** `Float64` */
+  /** Offensive prior-informed RAPM: ridge shrunk toward a box-score prior, in points per 100 possessions. `Float64` */
   o_adj_rapm?: number | null;
-  /** `Float64` */
+  /** Defensive prior-informed RAPM: ridge shrunk toward a box-score prior, in points per 100 possessions. `Float64` */
   d_adj_rapm?: number | null;
-  /** `Float64` */
+  /** Total prior-informed RAPM (offense plus defense), in points per 100 possessions. `Float64` */
   adj_rapm?: number | null;
-  /** `Float64` */
+  /** Offensive statistical plus-minus: box-score features regressed onto the offensive RAPM target, per 100 possessions. `Float64` */
   ospm?: number | null;
-  /** `Float64` */
+  /** Defensive statistical plus-minus: box-score features regressed onto the defensive RAPM target, per 100 possessions. `Float64` */
   dspm?: number | null;
-  /** `Float64` */
+  /** Statistical plus-minus: offensive plus defensive box-score estimate of the RAPM target, per 100 possessions. `Float64` */
   spm?: number | null;
-  /** `Float64` */
+  /** Minutes played. `Float64` */
   min?: number | null;
-  /** `Int64` */
+  /** Games played. `Int64` */
   gp?: number | bigint | null;
-  /** `Float64` */
+  /** Offensive box plus/minus. `Float64` */
   obpm?: number | null;
-  /** `Float64` */
+  /** Defensive box plus/minus. `Float64` */
   dbpm?: number | null;
-  /** `Float64` */
+  /** Career box plus/minus. `Float64` */
   bpm?: number | null;
-  /** `Float64` */
+  /** Wins above replacement implied by the player's impact and playing time, calibrated from team points-per-win. `Float64` */
   war?: number | null;
-  /** `Float64` */
+  /** DARKO-style Kalman-filtered estimate of the player's current skill level. `Float64` */
   darko_filtered_skill?: number | null;
-  /** `Float64` */
+  /** DARKO-style projected forward rating, including the empirical aging-curve drift. `Float64` */
   darko_projected_rating?: number | null;
-  /** `Float64` */
+  /** Posterior standard deviation of the DARKO-style projected rating. `Float64` */
   darko_projected_sd?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1229,27 +1229,27 @@ export interface LoadWnbaPlayerImpactRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsCoaches` (`wnba_stats_coaches`; sdv-py loader schema `load_wnba_stats_coaches`). */
 export interface LoadWnbaStatsCoachesRow {
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int64` (an id) */
+  /** Unique identifier for coach. `Int64` (an id) */
   coach_id?: string | null;
-  /** `String` */
+  /** Player's first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Full name of the staff member as the feed renders it, exactly first_name plus a space plus last_name on every published row. `String` */
   coach_name?: string | null;
-  /** `Int64` */
+  /** Numeric staff-role code rather than a boolean flag: 1 head coach, 2 assistant coach, 3 trainer, 9 associate head coach, mapping one-to-one onto coach_type. `Int64` */
   is_assistant?: number | bigint | null;
-  /** `String` */
+  /** Job title of the staff member, one of Head Coach, Associate Head Coach, Assistant Coach or Trainer in the published data. `String` */
   coach_type?: string | null;
-  /** `Null` */
+  /** Ordering field passed through unchanged from the stats.wnba.com coaches result set; it arrives empty, so every published row is null. `Null` */
   sort_sequence?: unknown;
-  /** `Int64` */
+  /** Secondary display-ordering rank that tracks coach_type exactly: 1 head coach, 2 associate head coach, 5 assistant coach, 7 trainer. `Int64` */
   sub_sort_sequence?: number | bigint | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1257,33 +1257,33 @@ export interface LoadWnbaStatsCoachesRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsDraft` (`wnba_stats_draft`; sdv-py loader schema `load_wnba_stats_draft`). */
 export interface LoadWnbaStatsDraftRow {
-  /** `Int64` (an id) */
+  /** Unique player identifier (V3 endpoints). `Int64` (an id) */
   person_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int64` */
+  /** Numeric round. `Int64` */
   round_number?: number | bigint | null;
-  /** `Int64` */
+  /** Round pick. `Int64` */
   round_pick?: number | bigint | null;
-  /** `Int64` */
+  /** Overall pick. `Int64` */
   overall_pick?: number | bigint | null;
-  /** `String` */
+  /** CONSTANT in the published asset: every row reads 'Draft', so it does not currently distinguish the main draft from any other selection event. `String` */
   draft_type?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team city or region (e.g. 'Las Vegas'). `String` */
   team_city?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Organization. `String` */
   organization?: string | null;
-  /** `String` */
+  /** Organization type. `String` */
   organization_type?: string | null;
-  /** `Int64` */
+  /** Player profile flag. `Int64` */
   player_profile_flag?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1291,25 +1291,25 @@ export interface LoadWnbaStatsDraftRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsGameRosters` (`wnba_stats_game_rosters`; sdv-py loader schema `load_wnba_stats_game_rosters`). */
 export interface LoadWnbaStatsGameRostersRow {
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player's first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   jersey_num?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Team city or region (e.g. 'Las Vegas'). `String` */
   team_city?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1317,17 +1317,17 @@ export interface LoadWnbaStatsGameRostersRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsOfficials` (`wnba_stats_officials`; sdv-py loader schema `load_wnba_stats_officials`). */
 export interface LoadWnbaStatsOfficialsRow {
-  /** `Int64` (an id) */
+  /** Unique official / referee identifier. `Int64` (an id) */
   official_id?: string | null;
-  /** `String` */
+  /** Player's first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's last name. `String` */
   last_name?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   jersey_num?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1335,81 +1335,81 @@ export interface LoadWnbaStatsOfficialsRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsPbp` (`wnba_stats_pbp`; sdv-py loader schema `load_wnba_stats_pbp`). */
 export interface LoadWnbaStatsPbpRow {
-  /** `Int64` */
+  /** Stable ordering index of the event within the game's stats.wnba.com play-by-play. `Int64` */
   order_index?: number | bigint | null;
-  /** `Int64` */
+  /** Sequential action number within a game (V3 PBP). `Int64` */
   action_number?: number | bigint | null;
-  /** `String` */
+  /** Game clock value. `String` */
   clock?: string | null;
-  /** `Int64` */
+  /** Period of the game (1-4 quarters; 5+ for OT). `Int64` */
   period?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Three-letter team code (e.g. 'LAS' / 'NYL'). `String` */
   team_tricode?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier (V3 endpoints). `Int64` (an id) */
   person_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `String` */
+  /** Player name i. `String` */
   player_name_i?: string | null;
-  /** `Int64` */
+  /** V2-format X coordinate (preserved for V3-to-V2 compatibility). `Int64` */
   x_legacy?: number | bigint | null;
-  /** `Int64` */
+  /** V2-format Y coordinate (preserved for V3-to-V2 compatibility). `Int64` */
   y_legacy?: number | bigint | null;
-  /** `Int64` */
+  /** Shot distance from the basket, in feet. `Int64` */
   shot_distance?: number | bigint | null;
-  /** `String` */
+  /** Shot result ('Made' / 'Missed'). `String` */
   shot_result?: string | null;
-  /** `Int64` */
+  /** 1 if the action was a field goal; 0 otherwise. `Int64` */
   is_field_goal?: number | bigint | null;
-  /** `String` */
+  /** Score home. `String` */
   score_home?: string | null;
-  /** `String` */
+  /** Score away. `String` */
   score_away?: string | null;
-  /** `Int64` */
+  /** Running total of points scored. `Int64` */
   points_total?: number | bigint | null;
-  /** `String` */
+  /** Filter results by game location. `String` */
   location?: string | null;
-  /** `String` */
+  /** Long-form description text. `String` */
   description?: string | null;
-  /** `String` */
+  /** Action type label (e.g. 'Made Shot', 'Substitution'). `String` */
   action_type?: string | null;
-  /** `String` */
+  /** Action sub-type label. `String` */
   sub_type?: string | null;
-  /** `Int64` */
+  /** Video available. `Int64` */
   video_available?: number | bigint | null;
-  /** `Int64` */
+  /** Point value of the shot (2 or 3). `Int64` */
   shot_value?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique action identifier within a game (V3 PBP). `Int64` (an id) */
   action_id?: string | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Float64` */
+  /** Seconds remaining in the period. `Float64` */
   seconds_remaining?: number | null;
-  /** `String` */
+  /** Event / play type code (V2 PBP). `String` */
   event_type?: string | null;
-  /** `Boolean` */
+  /** True when the event is a made field goal. `Boolean` */
   is_made_shot?: boolean | null;
-  /** `Boolean` */
+  /** True when the event is a missed field goal. `Boolean` */
   is_missed_shot?: boolean | null;
-  /** `Boolean` */
+  /** True when the event is a free throw attempt. `Boolean` */
   is_free_throw?: boolean | null;
-  /** `Boolean` */
+  /** True when the event is a rebound (player or team). `Boolean` */
   is_rebound?: boolean | null;
   /** `Boolean` */
   is_turnover?: boolean | null;
-  /** `Boolean` */
+  /** True when the event is a foul. `Boolean` */
   is_foul?: boolean | null;
-  /** `Boolean` */
+  /** True when the event is a substitution. `Boolean` */
   is_substitution?: boolean | null;
-  /** `Boolean` */
+  /** True when the event is a jump ball. `Boolean` */
   is_jump_ball?: boolean | null;
-  /** `Boolean` */
+  /** True when the event is a timeout. `Boolean` */
   is_timeout?: boolean | null;
-  /** `Boolean` */
+  /** True for period-start and period-end marker events. `Boolean` */
   is_period?: boolean | null;
-  /** `Int64` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1417,73 +1417,73 @@ export interface LoadWnbaStatsPbpRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsPossessions` (`wnba_stats_possessions`; sdv-py loader schema `load_wnba_stats_possessions`). */
 export interface LoadWnbaStatsPossessionsRow {
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Period of the game (1-4 quarters; 5+ for OT). `Int64` */
   period?: number | bigint | null;
-  /** `Int64` */
+  /** Possession number. `Int64` */
   possession_number?: number | bigint | null;
-  /** `Int64` (an id) */
+  /** Unique identifier for offense team. `Int64` (an id) */
   offense_team_id?: string | null;
-  /** `Int64` (an id) */
+  /** stats.wnba.com identifier of the defending team for the possession. `Int64` (an id) */
   defense_team_id?: string | null;
-  /** `Int64` */
+  /** order_index of the first event in the possession; joins to the wnba_stats_pbp table. `Int64` */
   start_order_index?: number | bigint | null;
-  /** `Int64` */
+  /** order_index of the last event in the possession; joins to the wnba_stats_pbp table. `Int64` */
   end_order_index?: number | bigint | null;
-  /** `Float64` */
+  /** Seconds remaining in the period when the possession began. `Float64` */
   start_seconds_remaining?: number | null;
-  /** `Float64` */
+  /** Seconds remaining in the period when the possession ended. `Float64` */
   end_seconds_remaining?: number | null;
-  /** `Int64` */
+  /** Points scored. `Int64` */
   points?: number | bigint | null;
-  /** `Boolean` */
+  /** True when the possession continued after an offensive rebound (contains a second-chance segment). `Boolean` */
   is_second_chance?: boolean | null;
-  /** `Int64` */
+  /** Possession number within the period, resetting to 1 at each period start. `Int64` */
   number_in_period?: number | bigint | null;
-  /** `String` */
+  /** How the possession began: OffDeadball, OffTimeout, OffMadeShot, OffMissedShot, or OffLiveBallTurnover. `String` */
   possession_start_type?: string | null;
-  /** `Boolean` */
+  /** False only for a possession starting with 2 seconds or less left in the period and no made basket before the period ends. `Boolean` */
   count_as_possession?: boolean | null;
-  /** `Int64` */
+  /** Two-point field goals attempted by the offense during the possession. `Int64` */
   fg2a?: number | bigint | null;
-  /** `Int64` */
+  /** Two-point field goals made by the offense during the possession. `Int64` */
   fg2m?: number | bigint | null;
-  /** `Int64` */
+  /** Three-point field goal attempts. `Int64` */
   fg3a?: number | bigint | null;
-  /** `Int64` */
+  /** Three-point field goals made. `Int64` */
   fg3m?: number | bigint | null;
-  /** `Int64` */
+  /** Free throw attempts. `Int64` */
   fta?: number | bigint | null;
-  /** `Int64` */
+  /** Free throws made. `Int64` */
   ftm?: number | bigint | null;
-  /** `Int64` */
+  /** Offensive rebounds. `Int64` */
   oreb?: number | bigint | null;
-  /** `Int64` */
+  /** Defensive rebounds. `Int64` */
   dreb?: number | bigint | null;
-  /** `Int64` */
+  /** Turnovers. `Int64` */
   tov?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of offensive on-court player 1 of 5 for the possession (unordered slot). `Int64` */
   off_player_1?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of offensive on-court player 2 of 5 for the possession (unordered slot). `Int64` */
   off_player_2?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of offensive on-court player 3 of 5 for the possession (unordered slot). `Int64` */
   off_player_3?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of offensive on-court player 4 of 5 for the possession (unordered slot). `Int64` */
   off_player_4?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of offensive on-court player 5 of 5 for the possession (unordered slot). `Int64` */
   off_player_5?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of defensive on-court player 1 of 5 for the possession (unordered slot). `Int64` */
   def_player_1?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of defensive on-court player 2 of 5 for the possession (unordered slot). `Int64` */
   def_player_2?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of defensive on-court player 3 of 5 for the possession (unordered slot). `Int64` */
   def_player_3?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of defensive on-court player 4 of 5 for the possession (unordered slot). `Int64` */
   def_player_4?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of defensive on-court player 5 of 5 for the possession (unordered slot). `Int64` */
   def_player_5?: number | bigint | null;
-  /** `Int64` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1491,33 +1491,33 @@ export interface LoadWnbaStatsPossessionsRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsGameLineups` (`wnba_stats_game_lineups`; sdv-py loader schema `load_wnba_stats_game_lineups`). */
 export interface LoadWnbaStatsGameLineupsRow {
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Sequential action number within a game (V3 PBP). `Int64` */
   action_number?: number | bigint | null;
-  /** `Int64` */
+  /** Period of the game (1-4 quarters; 5+ for OT). `Int64` */
   period?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of home on-court player 1 of 5 for the lineup stint. `Int64` */
   home_player_1?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of home on-court player 2 of 5 for the lineup stint. `Int64` */
   home_player_2?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of home on-court player 3 of 5 for the lineup stint. `Int64` */
   home_player_3?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of home on-court player 4 of 5 for the lineup stint. `Int64` */
   home_player_4?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of home on-court player 5 of 5 for the lineup stint. `Int64` */
   home_player_5?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of away on-court player 1 of 5 for the lineup stint. `Int64` */
   away_player_1?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of away on-court player 2 of 5 for the lineup stint. `Int64` */
   away_player_2?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of away on-court player 3 of 5 for the lineup stint. `Int64` */
   away_player_3?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of away on-court player 4 of 5 for the lineup stint. `Int64` */
   away_player_4?: number | bigint | null;
-  /** `Int64` */
+  /** stats.wnba.com identifier of away on-court player 5 of 5 for the lineup stint. `Int64` */
   away_player_5?: number | bigint | null;
-  /** `Int64` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1525,73 +1525,73 @@ export interface LoadWnbaStatsGameLineupsRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsPlayerBoxscores` (`wnba_stats_player_boxscores`; sdv-py loader schema `load_wnba_stats_player_boxscores`). */
 export interface LoadWnbaStatsPlayerBoxscoresRow {
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Three-letter team code (e.g. 'LAS' / 'NYL'). `String` */
   team_tricode?: string | null;
-  /** `String` */
+  /** Side label (e.g. 'home', 'away', or 'overUnder'). `String` */
   side?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier (V3 endpoints). `Int64` (an id) */
   person_id?: string | null;
-  /** `String` */
+  /** Player's first name. `String` */
   first_name?: string | null;
-  /** `String` */
+  /** Player's family / last name. `String` */
   family_name?: string | null;
-  /** `String` */
+  /** Initialed name (e.g. 'A. Wilson'). `String` */
   name_i?: string | null;
-  /** `String` */
+  /** URL-safe player identifier. `String` */
   player_slug?: string | null;
-  /** `String` */
+  /** Listed roster position (G, F, C, etc.). `String` */
   position?: string | null;
-  /** `String` */
+  /** Player status / inactive reason (e.g. 'DNP - Coach's Decision', 'Inactive'). `String` */
   comment?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   jersey_num?: string | null;
-  /** `String` */
+  /** Minutes played, formatted MM:SS (V3 PT-duration parsed) or decimal minutes (V2). `String` */
   minutes?: string | null;
-  /** `Int64` */
+  /** Field goals made (2-pt + 3-pt). `Int64` */
   field_goals_made?: number | bigint | null;
-  /** `Int64` */
+  /** Field goal attempts (2-pt + 3-pt). `Int64` */
   field_goals_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Field goal percentage (0-1 decimal). `Float64` */
   field_goals_percentage?: number | null;
-  /** `Int64` */
+  /** Three-point field goals made. `Int64` */
   three_pointers_made?: number | bigint | null;
-  /** `Int64` */
+  /** Three-point field goal attempts. `Int64` */
   three_pointers_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Three-point field goal percentage (0-1 decimal). `Float64` */
   three_pointers_percentage?: number | null;
-  /** `Int64` */
+  /** Free throws made. `Int64` */
   free_throws_made?: number | bigint | null;
-  /** `Int64` */
+  /** Free throw attempts. `Int64` */
   free_throws_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Free throw percentage (0-1 decimal). `Float64` */
   free_throws_percentage?: number | null;
-  /** `Int64` */
+  /** Offensive rebounds. `Int64` */
   rebounds_offensive?: number | bigint | null;
-  /** `Int64` */
+  /** Defensive rebounds. `Int64` */
   rebounds_defensive?: number | bigint | null;
-  /** `Int64` */
+  /** Total rebounds. `Int64` */
   rebounds_total?: number | bigint | null;
-  /** `Int64` */
+  /** Total assists. `Int64` */
   assists?: number | bigint | null;
-  /** `Int64` */
+  /** Total steals. `Int64` */
   steals?: number | bigint | null;
-  /** `Int64` */
+  /** Total blocks. `Int64` */
   blocks?: number | bigint | null;
-  /** `Int64` */
+  /** Total turnovers. `Int64` */
   turnovers?: number | bigint | null;
-  /** `Int64` */
+  /** Personal fouls. `Int64` */
   fouls_personal?: number | bigint | null;
-  /** `Int64` */
+  /** Points scored. `Int64` */
   points?: number | bigint | null;
-  /** `Float64` */
+  /** Plus/minus point differential while on court. `Float64` */
   plus_minus_points?: number | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1599,75 +1599,75 @@ export interface LoadWnbaStatsPlayerBoxscoresRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsPlayerGameLogs` (`wnba_stats_player_game_logs`; sdv-py loader schema `load_wnba_stats_player_game_logs`). */
 export interface LoadWnbaStatsPlayerGameLogsRow {
-  /** `String` (an id) */
+  /** Unique season identifier. `String` (an id) */
   season_id?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `String` */
+  /** Game date (YYYY-MM-DD). `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Matchup. `String` */
   matchup?: string | null;
-  /** `String` */
+  /** Wl. `String` */
   wl?: string | null;
-  /** `Int64` */
+  /** Minutes played. `Int64` */
   min?: number | bigint | null;
-  /** `Int64` */
+  /** Field goals made. `Int64` */
   fgm?: number | bigint | null;
-  /** `Int64` */
+  /** Field goals attempted. `Int64` */
   fga?: number | bigint | null;
-  /** `Float64` */
+  /** Field-goal percentage. `Float64` */
   fg_pct?: number | null;
-  /** `Int64` */
+  /** Three-point field goals made. `Int64` */
   fg3m?: number | bigint | null;
-  /** `Int64` */
+  /** Three-point field goals attempted. `Int64` */
   fg3a?: number | bigint | null;
-  /** `Float64` */
+  /** Three-point percentage. `Float64` */
   fg3_pct?: number | null;
-  /** `Int64` */
+  /** Free throws made. `Int64` */
   ftm?: number | bigint | null;
-  /** `Int64` */
+  /** Free throws attempted. `Int64` */
   fta?: number | bigint | null;
-  /** `Float64` */
+  /** Free-throw percentage. `Float64` */
   ft_pct?: number | null;
-  /** `Int64` */
+  /** Offensive rebounds collected. `Int64` */
   oreb?: number | bigint | null;
-  /** `Int64` */
+  /** Defensive rebounds collected. `Int64` */
   dreb?: number | bigint | null;
-  /** `Int64` */
+  /** Total rebounds collected. `Int64` */
   reb?: number | bigint | null;
-  /** `Int64` */
+  /** Assists credited. `Int64` */
   ast?: number | bigint | null;
-  /** `Int64` */
+  /** Steals recorded. `Int64` */
   stl?: number | bigint | null;
-  /** `Int64` */
+  /** Total shots blocked. `Int64` */
   blk?: number | bigint | null;
-  /** `Int64` */
+  /** Turnovers committed. `Int64` */
   tov?: number | bigint | null;
-  /** `Int64` */
+  /** Personal fouls committed. `Int64` */
   pf?: number | bigint | null;
-  /** `Int64` */
+  /** Total points scored. `Int64` */
   pts?: number | bigint | null;
-  /** `Int64` */
+  /** Plus-minus point differential. `Int64` */
   plus_minus?: number | bigint | null;
-  /** `Int64` */
+  /** Video available. `Int64` */
   video_available?: number | bigint | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `Float64` */
+  /** Fantasy points. `Float64` */
   fantasy_pts?: number | null;
-  /** `String` */
+  /** Stats API measure-type slice the row was pulled from (e.g. 'Base'). `String` */
   measure_type?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1675,41 +1675,41 @@ export interface LoadWnbaStatsPlayerGameLogsRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsRosters` (`wnba_stats_rosters`; sdv-py loader schema `load_wnba_stats_rosters`). */
 export interface LoadWnbaStatsRostersRow {
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** League identifier ('10' = WNBA). `String` (an id) */
   league_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player?: string | null;
-  /** `String` */
+  /** Team or athlete nickname. `String` */
   nickname?: string | null;
-  /** `String` */
+  /** URL-safe player identifier. `String` */
   player_slug?: string | null;
-  /** `String` */
+  /** Jersey number worn by the player. `String` */
   num?: string | null;
-  /** `String` */
+  /** Listed roster position (G, F, C, etc.). `String` */
   position?: string | null;
-  /** `String` */
+  /** Player height (string e.g. '6-2' or inches). `String` */
   height?: string | null;
-  /** `String` */
+  /** Player weight in pounds. `String` */
   weight?: string | null;
-  /** `String` */
+  /** Date of birth (YYYY-MM-DD). `String` */
   birth_date?: string | null;
-  /** `Float64` */
+  /** Player age (in years). `Float64` */
   age?: number | null;
-  /** `String` */
+  /** Years of WNBA playing experience entering the season ('R' = rookie). `String` */
   exp?: string | null;
-  /** `String` */
+  /** Player's school / college (when distinct from 'college'). `String` */
   school?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier. `Int64` (an id) */
   player_id?: string | null;
-  /** `String` */
+  /** How the team acquired the player (draft, trade, free agency). `String` */
   how_acquired?: string | null;
-  /** `Int64` */
+  /** Numeric supplemental roster-status code from the stats.wnba.com roster feed. `Int64` */
   supplemental_status?: number | bigint | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1717,35 +1717,35 @@ export interface LoadWnbaStatsRostersRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsSchedules` (`wnba_stats_schedules`; sdv-py loader schema `load_wnba_stats_schedules`). */
 export interface LoadWnbaStatsSchedulesRow {
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int64` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
-  /** `String` */
+  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
-  /** `String` */
+  /** Game date (YYYY-MM-DD). `String` */
   game_date?: string | null;
-  /** `String` */
+  /** Matchup. `String` */
   matchup?: string | null;
-  /** `Int64` (an id) */
+  /** Unique identifier for the home team. `Int64` (an id) */
   home_team_id?: string | null;
   /** `String` */
   home_team_abbreviation?: string | null;
-  /** `String` */
+  /** Home team name. `String` */
   home_team_name?: string | null;
-  /** `Int64` */
+  /** Final points scored by the home team. `Int64` */
   home_pts?: number | bigint | null;
-  /** `String` */
+  /** Result for the home team ('W' or 'L'); null before the game is final. `String` */
   home_wl?: string | null;
-  /** `Int64` (an id) */
+  /** Unique identifier for the away team. `Int64` (an id) */
   away_team_id?: string | null;
   /** `String` */
   away_team_abbreviation?: string | null;
-  /** `String` */
+  /** Away team name. `String` */
   away_team_name?: string | null;
-  /** `Int64` */
+  /** Final points scored by the away team. `Int64` */
   away_pts?: number | bigint | null;
-  /** `String` */
+  /** Result for the away team ('W' or 'L'); null before the game is final. `String` */
   away_wl?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1753,41 +1753,41 @@ export interface LoadWnbaStatsSchedulesRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsShots` (`wnba_stats_shots`; sdv-py loader schema `load_wnba_stats_shots`). */
 export interface LoadWnbaStatsShotsRow {
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** `Int64` */
+  /** Period of the game (1-4 quarters; 5+ for OT). `Int64` */
   period?: number | bigint | null;
-  /** `String` */
+  /** Game clock value. `String` */
   clock?: string | null;
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Three-letter team code (e.g. 'LAS' / 'NYL'). `String` */
   team_tricode?: string | null;
-  /** `Int64` (an id) */
+  /** Unique player identifier (V3 endpoints). `Int64` (an id) */
   person_id?: string | null;
-  /** `String` */
+  /** Player name. `String` */
   player_name?: string | null;
-  /** `String` */
+  /** Action type label (e.g. 'Made Shot', 'Substitution'). `String` */
   action_type?: string | null;
-  /** `String` */
+  /** Action sub-type label. `String` */
   sub_type?: string | null;
-  /** `String` */
+  /** Shot result ('Made' / 'Missed'). `String` */
   shot_result?: string | null;
-  /** `Int64` */
+  /** Point value of the shot (2 or 3). `Int64` */
   shot_value?: number | bigint | null;
-  /** `Int64` */
+  /** Shot distance from the basket, in feet. `Int64` */
   shot_distance?: number | bigint | null;
-  /** `Int64` */
+  /** V2-format X coordinate (preserved for V3-to-V2 compatibility). `Int64` */
   x_legacy?: number | bigint | null;
-  /** `Int64` */
+  /** V2-format Y coordinate (preserved for V3-to-V2 compatibility). `Int64` */
   y_legacy?: number | bigint | null;
-  /** `String` */
+  /** Long-form description text. `String` */
   description?: string | null;
-  /** `String` */
+  /** Score home. `String` */
   score_home?: string | null;
-  /** `String` */
+  /** Score away. `String` */
   score_away?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1795,57 +1795,57 @@ export interface LoadWnbaStatsShotsRow {
 
 /** One row of `sdv.wnba.loadWnbaStatsTeamBoxscores` (`wnba_stats_team_boxscores`; sdv-py loader schema `load_wnba_stats_team_boxscores`). */
 export interface LoadWnbaStatsTeamBoxscoresRow {
-  /** `Int64` (an id) */
+  /** Unique team identifier. `Int64` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
   team_name?: string | null;
-  /** `String` */
+  /** Three-letter team code (e.g. 'LAS' / 'NYL'). `String` */
   team_tricode?: string | null;
-  /** `String` */
+  /** Side label (e.g. 'home', 'away', or 'overUnder'). `String` */
   side?: string | null;
-  /** `String` */
+  /** Minutes played, formatted MM:SS (V3 PT-duration parsed) or decimal minutes (V2). `String` */
   minutes?: string | null;
-  /** `Int64` */
+  /** Field goals made (2-pt + 3-pt). `Int64` */
   field_goals_made?: number | bigint | null;
-  /** `Int64` */
+  /** Field goal attempts (2-pt + 3-pt). `Int64` */
   field_goals_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Field goal percentage (0-1 decimal). `Float64` */
   field_goals_percentage?: number | null;
-  /** `Int64` */
+  /** Three-point field goals made. `Int64` */
   three_pointers_made?: number | bigint | null;
-  /** `Int64` */
+  /** Three-point field goal attempts. `Int64` */
   three_pointers_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Three-point field goal percentage (0-1 decimal). `Float64` */
   three_pointers_percentage?: number | null;
-  /** `Int64` */
+  /** Free throws made. `Int64` */
   free_throws_made?: number | bigint | null;
-  /** `Int64` */
+  /** Free throw attempts. `Int64` */
   free_throws_attempted?: number | bigint | null;
-  /** `Float64` */
+  /** Free throw percentage (0-1 decimal). `Float64` */
   free_throws_percentage?: number | null;
-  /** `Int64` */
+  /** Offensive rebounds. `Int64` */
   rebounds_offensive?: number | bigint | null;
-  /** `Int64` */
+  /** Defensive rebounds. `Int64` */
   rebounds_defensive?: number | bigint | null;
-  /** `Int64` */
+  /** Total rebounds. `Int64` */
   rebounds_total?: number | bigint | null;
-  /** `Int64` */
+  /** Total assists. `Int64` */
   assists?: number | bigint | null;
-  /** `Int64` */
+  /** Total steals. `Int64` */
   steals?: number | bigint | null;
-  /** `Int64` */
+  /** Total blocks. `Int64` */
   blocks?: number | bigint | null;
-  /** `Int64` */
+  /** Total turnovers. `Int64` */
   turnovers?: number | bigint | null;
-  /** `Int64` */
+  /** Personal fouls. `Int64` */
   fouls_personal?: number | bigint | null;
-  /** `Int64` */
+  /** Points scored. `Int64` */
   points?: number | bigint | null;
-  /** `Float64` */
+  /** Plus/minus point differential while on court. `Float64` */
   plus_minus_points?: number | null;
-  /** `String` (an id) */
+  /** Unique game identifier. `String` (an id) */
   game_id?: string | null;
-  /** `Int32` */
+  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1853,17 +1853,17 @@ export interface LoadWnbaStatsTeamBoxscoresRow {
 
 /** One row of `sdv.wnba.loadWnbaGroups` (`wnba_groups`; sdv-py loader schema `load_wnba_groups`). */
 export interface LoadWnbaGroupsRow {
-  /** `String` */
+  /** League code of the table ("wnba"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `String` */
+  /** Hierarchy level of the group: "league", "subdivision", "conference" or "division". `String` */
   level?: string | null;
-  /** `Int32` */
+  /** First season in which the group had at least one member (calendar year). `Int32` */
   first_season?: number | null;
-  /** `Int32` */
+  /** Last season in which the group had at least one member (calendar year). `Int32` */
   last_season?: number | null;
-  /** `String` */
+  /** Builder notes on the group: the lineage decisions behind its group_id and any source caveats. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1871,23 +1871,23 @@ export interface LoadWnbaGroupsRow {
 
 /** One row of `sdv.wnba.loadWnbaGroupSeasons` (`wnba_groups`; sdv-py loader schema `load_wnba_group_seasons`). */
 export interface LoadWnbaGroupSeasonsRow {
-  /** `String` */
+  /** League code of the table ("wnba"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `Int32` */
+  /** Season the row describes (calendar year). `Int32` */
   season?: number | null;
-  /** `String` */
+  /** Hierarchy level of the group: "league", "subdivision", "conference" or "division". `String` */
   level?: string | null;
-  /** `String` */
+  /** Full name of the group as of that season -- the label in use then, not today's name. `String` */
   name?: string | null;
-  /** `String` */
+  /** Short display name of the group as of that season. `String` */
   short_name?: string | null;
-  /** `String` */
+  /** Abbreviation of the group as of that season. `String` */
   abbreviation?: string | null;
-  /** `String` (an id) */
+  /** group_id one level up as of that season (division -> conference -> subdivision -> league); null at the top level or where no higher group applied that season. `String` (an id) */
   parent_group_id?: string | null;
-  /** `Int32` */
+  /** Number of member teams in the group that season. `Int32` */
   n_teams?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1895,21 +1895,21 @@ export interface LoadWnbaGroupSeasonsRow {
 
 /** One row of `sdv.wnba.loadWnbaGroupAliases` (`wnba_groups`; sdv-py loader schema `load_wnba_group_aliases`). */
 export interface LoadWnbaGroupAliasesRow {
-  /** `String` */
+  /** League code of the table ("wnba"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `String` (an id) */
+  /** SDV group id, {league}:{slug}. It names a lineage: renames that keep continuity keep the id, and a new body (a new conference, or a merger the sources treat as new) gets a new one. `String` (an id) */
   group_id?: string | null;
-  /** `String` */
+  /** Source that uses this label or id (in this table: espn, sdv, wnba_stats); "sdv" marks SDV's own labels. `String` */
   source?: string | null;
-  /** `String` (an id) */
+  /** The source's own id for the group (ESPN group id, NCAA conf_id, CFBD id, MLB division id) when it has one; null otherwise. `String` (an id) */
   source_id?: string | null;
-  /** `String` */
+  /** Kind of label in value: "name", "short_name", "abbreviation", "slug" or "code". `String` */
   name_kind?: string | null;
-  /** `String` */
+  /** The label exactly as the source writes it; match a source's conference or division label against it to reach group_id. `String` */
   value?: string | null;
-  /** `Int32` */
+  /** First season the alias is valid for, inclusive (calendar year); null = unbounded. `Int32` */
   valid_from?: number | null;
-  /** `Int32` */
+  /** Last season the alias is valid for, inclusive (calendar year); null = unbounded (still in use). `Int32` */
   valid_to?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1917,27 +1917,27 @@ export interface LoadWnbaGroupAliasesRow {
 
 /** One row of `sdv.wnba.loadWnbaTeamGroupSeasons` (`wnba_groups`; sdv-py loader schema `load_wnba_team_group_seasons`). */
 export interface LoadWnbaTeamGroupSeasonsRow {
-  /** `String` */
+  /** League code of the table ("wnba"); the prefix of every group_id in it. `String` */
   league?: string | null;
-  /** `Int32` */
+  /** Season of the membership (calendar year). `Int32` */
   season?: number | null;
-  /** `String` (an id) */
+  /** Team id as a string: the ESPN team id where ESPN covers the team, otherwise the league's own id; team_id_source says which. `String` (an id) */
   team_id?: string | null;
-  /** `String` */
+  /** Id space of team_id (in this table: espn). `String` */
   team_id_source?: string | null;
-  /** `String` */
+  /** Team name as of that season, not today's. `String` */
   team_name?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's subdivision that season (e.g. FBS / FCS, Division I); null where the league has no subdivision level. `String` (an id) */
   subdivision_id?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's conference that season; null where the team had no conference (an independent, or a season played without conferences). `String` (an id) */
   conference_id?: string | null;
-  /** `String` (an id) */
+  /** SDV group_id of the team's division that season; null where the level does not apply. `String` (an id) */
   division_id?: string | null;
-  /** `String` */
+  /** Source the membership was taken from -- the most reliable per-season source for that era. `String` */
   source?: string | null;
-  /** `Boolean` */
+  /** Whether a second source agreed on the membership; null when only one source covers the season. `Boolean` */
   sources_agree?: boolean | null;
-  /** `String` */
+  /** Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. `String` */
   notes?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;

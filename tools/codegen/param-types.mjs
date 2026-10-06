@@ -42,7 +42,7 @@ export function paramTsType(type = "str", where = "") {
 }
 
 /** Per-call controls of a flat family that are not query params, by name -> TypeScript. */
-const CONTROL_TYPES = {
+export const CONTROL_TYPES = {
   headers: "Record<string, string>",
   api_key: "string",
   strict: "boolean",

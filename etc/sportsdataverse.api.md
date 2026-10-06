@@ -282,9 +282,7 @@ export interface AsaWrappers {
 // @public
 export class AssetFetchError extends SdvError {
     constructor(message: string, details: FetchErrorDetails);
-    // (undocumented)
     readonly status?: number;
-    // (undocumented)
     readonly url: string;
 }
 
@@ -303,7 +301,7 @@ export interface AssetLoader<R extends object = ReleaseRow> {
     (opts?: ReleaseLoaderOptions): Promise<R[]>;
 }
 
-// @public (undocumented)
+// @public
 export interface AuthContext {
     family: string;
     request?: TransportRequest;
@@ -2572,7 +2570,7 @@ export interface CflWrappers {
     espnCflVenues: Wrapper<Row[], EspnVenuesParams>;
 }
 
-// @public (undocumented)
+// @public
 export const clear_team_cache: typeof clearTeamCache;
 
 // @public
@@ -3451,7 +3449,7 @@ export interface CollegeSoftballWrappers {
 // @public
 export function configure(opts: ConfigureOptions): void;
 
-// @public (undocumented)
+// @public
 export interface ConfigureOptions {
     auth?: Record<string, AuthProvider>;
     retries?: number;
@@ -4846,13 +4844,11 @@ export type EspnVenuesParams = OptionalParams<{
 
 // @public
 export interface FamilyDefaults {
-    // (undocumented)
     auth?: AuthProvider;
     classifyError?: ClassifyError;
     retries?: number;
     retryStatuses?: readonly number[];
     timeoutMs?: number;
-    // (undocumented)
     transport?: Transport;
 }
 
@@ -4863,13 +4859,13 @@ export interface FetchErrorDetails {
     url: string;
 }
 
-// @public (undocumented)
+// @public
 export const find_athlete: typeof findAthlete;
 
-// @public (undocumented)
+// @public
 export const find_event: typeof findEvent;
 
-// @public (undocumented)
+// @public
 export const find_team: typeof findTeam;
 
 // @public
@@ -5516,11 +5512,21 @@ export interface FoxWrappers {
     foxTrendingVideos: Wrapper<Row[], FoxApiTrendingVideosParams>;
 }
 
-// @public (undocumented)
+// @public
 export const function_count: typeof functionCount;
 
 // @public
 export function functionCount(league?: string | null, ns?: Namespaces): Promise<number | Record<string, number>>;
+
+// @public
+export interface FunctionEntry {
+    // (undocumented)
+    category?: UtilityCategory;
+    // (undocumented)
+    kind: 'data' | 'utility';
+    // (undocumented)
+    name: string;
+}
 
 // @public
 export interface GeneratedNamespaces {
@@ -5769,9 +5775,7 @@ export interface HockeytechWrappers {
 // @public
 export class InvalidParameterError extends SdvError {
     constructor(message: string, details: FetchErrorDetails);
-    // (undocumented)
     readonly status?: number;
-    // (undocumented)
     readonly url: string;
 }
 
@@ -7152,14 +7156,20 @@ export interface Ligue1Wrappers {
     espnLigue1Venues: Wrapper<Row[], EspnVenuesParams>;
 }
 
-// @public (undocumented)
+// @public
 export const list_functions: typeof listFunctions;
 
 // @public
-export function listFunctions(league?: string | null, opts?: ListFunctionsOptions, ns?: Namespaces): Promise<string[] | Record<string, string[]>>;
+export function listFunctions(league: string | null | undefined, opts: ListFunctionsOptions & {
+    detail: true;
+}, ns?: Namespaces): Promise<FunctionEntry[] | Record<string, FunctionEntry[]>>;
 
 // @public (undocumented)
+export function listFunctions(league?: string | null, opts?: ListFunctionsOptions, ns?: Namespaces): Promise<string[] | Record<string, string[]>>;
+
+// @public
 export interface ListFunctionsOptions {
+    detail?: boolean;
     parsersOnly?: boolean;
     search?: string;
     wrappersOnly?: boolean;
@@ -30024,7 +30034,7 @@ export interface MlsWrappers {
     }, MlsStandingsParams>;
 }
 
-// @public (undocumented)
+// @public
 export type Namespaces = Record<string, Record<string, any>>;
 
 // @public
@@ -51785,9 +51795,7 @@ export interface NhlWrappers {
 // @public
 export class NoDataError extends SdvError {
     constructor(message: string, details: FetchErrorDetails);
-    // (undocumented)
     readonly status?: number;
-    // (undocumented)
     readonly url: string;
 }
 
@@ -51797,7 +51805,7 @@ export const NODE_ONLY_PARSERS: Set<string>;
 // @public
 export const NoESPNDataError: typeof NoDataError;
 
-// @public (undocumented)
+// @public
 export type NoESPNDataError = NoDataError;
 
 // @public
@@ -52678,19 +52686,19 @@ export type OddsApiSportsScoresParams = RequiredParam<"sport_key", number | stri
     event_ids: number | string;
 }> & OddsApiControls;
 
-// @public (undocumented)
+// @public
 export class OddsOverflowError extends SdvError {
     // (undocumented)
     name: string;
 }
 
-// @public (undocumented)
+// @public
 export class OddsRuntimeError extends SdvError {
     // (undocumented)
     name: string;
 }
 
-// @public (undocumented)
+// @public
 export class OddsValueError extends SdvError {
     // (undocumented)
     name: string;
@@ -52720,7 +52728,7 @@ export interface OddsWrappers {
     oddsApiSportsScores: Wrapper<Row[], OddsApiSportsScoresParams>;
 }
 
-// @public (undocumented)
+// @public
 export class OddsZeroDivisionError extends SdvError {
     // (undocumented)
     name: string;
@@ -55435,17 +55443,12 @@ export type Sdv = MergeNamespaces<MergeNamespaces<GeneratedNamespaces, LegacyNam
 const sdv: Sdv;
 export default sdv;
 
-// @public (undocumented)
+// @public
 export interface SdvConfig {
-    // (undocumented)
     auth: Record<string, AuthProvider>;
-    // (undocumented)
     retries: number;
-    // (undocumented)
     timeoutMs: number;
-    // (undocumented)
     transport: Record<string, Transport>;
-    // (undocumented)
     userAgent: string;
 }
 
@@ -56968,29 +56971,24 @@ export interface TorvikWrappers {
     torvikTeamFactors: Wrapper<Row[], TorvikTeamFactorsParams>;
 }
 
-// @public (undocumented)
+// @public
 export type Transport = (req: TransportRequest) => Promise<TransportResponse>;
 
-// @public (undocumented)
+// @public
 export interface TransportRequest {
     body?: unknown;
-    // (undocumented)
     headers?: Record<string, string>;
-    // (undocumented)
     method: "GET" | "POST";
     query?: Record<string, unknown>;
     responseType?: "json" | "text" | "arraybuffer";
-    // (undocumented)
     timeoutMs?: number;
     url: string;
 }
 
-// @public (undocumented)
+// @public
 export interface TransportResponse {
-    // (undocumented)
     data: unknown;
     headers: Record<string, string>;
-    // (undocumented)
     status: number;
     url: string;
 }
@@ -58238,6 +58236,12 @@ export interface UflWrappers {
     espnUflVenue: Wrapper<Row[], EspnVenueParams>;
     espnUflVenues: Wrapper<Row[], EspnVenuesParams>;
 }
+
+// @public (undocumented)
+export const UTILITY_CATEGORIES: Record<string, UtilityCategory>;
+
+// @public (undocumented)
+export type UtilityCategory = "parsers" | "analytics" | "odds" | "models" | "producers" | "discovery" | "transforms" | "http-core" | "errors" | "config";
 
 // @public
 export interface WbbWrappers {

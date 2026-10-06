@@ -2,6 +2,61 @@
 
 ## Unreleased
 
+### Added
+
+- **Returns-table column descriptions.** Every returns table (ESPN, native families, loaders)
+  resolves its blank `description` cells the way sdv-py's generator does: the schema's own text,
+  then sdv-py's hand-curated `manual_column_descriptions.yaml` (by schema key, then `_global`),
+  then the column descriptions mined from the SDV R packages (`r_column_descriptions.yaml`: the
+  league's package, its sport's siblings, the merged union). Both files are vendored verbatim at
+  the sdv-py pin (`vendor.yaml` `copy:`, in the LOCK). `npm run codegen` prints
+  `descriptions <family>: <filled>/<total>` and writes `docs/src/generated/description_coverage.json`;
+  overall fill went from 26% to 95.8% (stats.nba.com / stats.wnba.com / MLB / the four NHL
+  families from 0%). The generated row interfaces carry the descriptions as doc comments.
+- **Loader returns tables + row types in the docs.** Every `load*` block documents its columns
+  (`col_name | type | description`, the type being its generated row type's) and names its
+  `Load<Name>Row`; ESPN and native blocks name their verified row interface, or say
+  _Rows are untyped `Row[]` (not parity-verified yet)._ ESPN endpoints with no fixed table list
+  the leagues that expose them and link the parser's section of the parsed-returns page.
+- **Utilities catalogue.** `tools/codegen/utilities.yaml` labels every hand-written non-data export
+  (parsers, analytics, odds, models, producers, discovery, transforms, HTTP core, errors, config);
+  codegen renders `docs/docs/utilities/`, `src/generated/utilities.ts` and a "Utilities" sidebar
+  group. `listFunctions(…, { detail: true })` returns `{ name, kind: 'data' | 'utility', category }`
+  rows (`FunctionEntry`); `UTILITY_CATEGORIES` / `UtilityCategory` are exported.
+- **Typed TSDoc on every generated wrapper:** every `@param params.x` carries its TypeScript type and a description
+  (the YAML description where sdv-py wrote one, else what the param is), `@returns Promise<…>`
+  naming the row interface, and `@see` linking the docs page. The TypeDoc API pages now cover the
+  hand-written modules (parsers, analytics, odds, models, producers, HTTP core) besides the four
+  basketball ESPN samples.
+- **Breaking-change callouts.** `tools/codegen/breaking.yaml` records every 4.0.0 breaking change
+  by surface; each affected generated page opens with a `:::danger Breaking in 4.0.0` admonition
+  linking the changelog, and `reference/deprecations.md` carries the "Breaking changes by version" table.
+- **"How this library is built"** (`docs/docs/architecture/`): per surface (ESPN vendored,
+  native vendored, native JS-owned, loaders, hand-written) — source of truth, generator step,
+  output, CI gate, how to change it, and a codegen-rewritten status block (counts + the sdv-py
+  pin). Every generated docs page ends with a visible provenance footer linking its page
+  (the hidden MDX comment is gone).
+- **Capture-derived returns schemas for fox / cbs / yahoo / yahoo_scores.** `tools/codegen/regen-capture-schemas.mjs`
+  (`npm run schemas:captures`, `--check` gate) rewrites the JS-owned returns schemas of the four
+  families from the registered parsers' rows on the committed real captures (the parity manifest's
+  cbs / fox / yahoo entries; yahoo_scores reads the editorial captures), so the tables describe the
+  4.0.0 per-entity row builders (fox 13 endpoints, cbs 7, yahoo `season_stats_football_passing_ncaaf`,
+  yahoo_scores `boxscore` 33 columns / `scoreboard` 104). The 18 fox and 24 yahoo schemas written for
+  the pre-port output with no capture are marked `unverified` (the docs render the note, not the
+  table). `test/parsers/capture-schema-agreement.test.js` holds every one to its parser: the column
+  set is the rows' key union, every value is of its column's type, ids are decimal strings, and a
+  capture-less endpoint publishes no table.
+- **Column descriptions are sport-strict.** The cross-sport `_merged` union of the R-package
+  descriptions is never read: a league resolves through its own sport's packages only (hoopR +
+  wehoop for basketball, cfbfastR for cfb, the NFL packages for nfl, baseballr for baseball,
+  fastRhockey for hockey); an unmapped namespace and the shared parsed-returns page get sdv-py's
+  manual text only; the NFL aggregate families (nfl_api / nfl_pro / pff_api) get no play-level
+  nflfastR text. Overall fill is 90.4% (honest; it read 95.8% with the leak), floor 0.90, with a
+  denylist of sport-specific phrases asserted over the generated docs.
+- **Breaking-change register:** the Baseball Savant `parsed: true` typing change is on record (19
+  entries); a family's vendored / JS-owned label in the docs footer comes from vendor.mjs's
+  `# VENDORED` header (kenpom is vendored; the yahoo page names both its families).
+
 ### Changed
 
 - **Dependencies:** mocha 11 -> 12 and the root `overrides` block (js-yaml, serialize-javascript, diff — forced only for mocha 11) is gone; the resolved tree is at or above every forced floor. In-range bumps: papaparse 5.7.0 (the playground parser bundle is rebuilt for its BOM stripping), tabletojson 4.1.15, esbuild 0.28.2, typedoc 0.28.20, yaml 2.9.1, @microsoft/api-extractor 7.59.4, @types/node 22.20.5. `npm audit --omit=dev` is clean; the 4 dev-only moderate findings are `sprintf-js` under api-extractor with no upstream fix. `docs/`: lockfile refreshed (compression, proxy-addr) and `tinypool` overridden to `^2.2.0` under the `faster` build — 44 advisories (16 critical) down to 41 (0 critical).

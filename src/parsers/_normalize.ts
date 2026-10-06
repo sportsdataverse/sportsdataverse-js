@@ -15,7 +15,18 @@
 import { idColumnsToStrings } from "../core/int64.js";
 import type { ParserRow } from "../core/types.js";
 
-/** Is `v` a plain object (not null, not an array, not a Date)? */
+/**
+ * Is `v` a plain object (not null, not an array, not a Date)?
+ *
+ * @param v - Any value.
+ * @returns `true` for a non-null object that is neither an array nor a `Date`.
+ * @remarks
+ * A `Date` is excluded so {@link normalize} keeps it as a scalar cell instead of flattening
+ * it to nothing. The `_frames.ts` twin does not exclude `Date`.
+ * @example
+ * isPlainObject({ a: 1 }); // true
+ * isPlainObject(new Date()); // false
+ */
 export function isPlainObject(v: unknown): v is Record<string, unknown> {
   return (
     v !== null &&
@@ -28,6 +39,16 @@ export function isPlainObject(v: unknown): v is Record<string, unknown> {
 /**
  * Convert an arbitrary key to snake_case. Handles camelCase, PascalCase,
  * `dot.separated`, and runs of capitals (`ERA` -> `era`, `homeRBI` -> `home_rbi`).
+ *
+ * @param key - The source key.
+ * @returns The snake_cased name: dots, spaces and `-` become `_`, runs of `_` collapse to one,
+ *   leading / trailing `_` are trimmed, and the result is lower-cased.
+ * @remarks
+ * Stricter than sdv-py's `dl_utils.underscore` (see {@link underscore}): it also normalises
+ * dots, whitespace and repeated / edge underscores, so it is not byte-for-byte py parity.
+ * @example
+ * snakeCase("teams.home.team.id"); // "teams_home_team_id"
+ * snakeCase("homeRBI"); // "home_rbi"
  */
 export function snakeCase(key: string): string {
   return key
@@ -47,6 +68,13 @@ export function snakeCase(key: string): string {
  * Exact port of sdv-py's `dl_utils.underscore` (the inflection rule every py
  * parser snake-cases with). Unlike {@link snakeCase} it leaves dots, spaces and
  * repeated underscores alone — use it where output must match py byte-for-byte.
+ *
+ * @param word - The source key (camelCase, PascalCase, kebab-case, …).
+ * @returns The lower-cased name with `_` inserted at capital-run and camel-hump boundaries and
+ *   `-` replaced by `_`.
+ * @example
+ * underscore("MID-RANGE_FGM"); // "mid_range_fgm"
+ * underscore("gamePk"); // "game_pk"
  */
 export function underscore(word: string): string {
   return word
@@ -83,6 +111,23 @@ function flattenRow(
  * into rectangular rows with deep `_`-joined, snake_cased keys. Array-valued
  * cells are stringified; an id column of integers becomes decimal strings.
  * Non-array / empty input returns `[]`.
+ *
+ * @param rows - The records to flatten. A non-array (an object, `null`, `undefined`) or an
+ *   empty array yields `[]`. A non-object element is kept under a single `value` column (an
+ *   array element as its `JSON.stringify` text).
+ * @returns New row objects with deep `_`-joined, {@link snakeCase}d keys and no nested
+ *   structures: nested objects flatten, array cells are `JSON.stringify`'d. Rows are NOT
+ *   padded to a common column set — a key absent from a record is absent from its row.
+ * @remarks
+ * Mirrors sdv-py `mlb/mlb_parsers.py::_flatten_rows` (`pandas.json_normalize`). The id rule
+ * (`idColumnsToStrings`, src/core/int64.ts) runs last and in place over the new rows: an id
+ * column (`id`, `*_id`, `*_ids`, `*_pk`) whose non-null cells are all exact integers becomes
+ * decimal strings (`13` -> `"13"`, `-0` -> `"0"`); a JSON string id is kept exactly; a column
+ * holding a fraction, boolean or a number past 2^53 is left as read. Two source keys that
+ * snake_case to the same name overwrite each other (last wins) — unlike `rowsToFrame`.
+ * @example
+ * const rows = normalize(payload.dates[0].games);
+ * rows[0].teams_home_team_id; // "147"
  */
 export function normalize(rows: any[]): ParserRow[] {
   if (!Array.isArray(rows) || rows.length === 0) return [];

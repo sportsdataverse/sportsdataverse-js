@@ -11,7 +11,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
-import { loadLoaderSchemas, renderLoaderRows } from "./loader-types.mjs";
+import { loadLoaderSchemas, loaderColumnType, loaderRowName, renderLoaderRows } from "./loader-types.mjs";
 
 /** sdv-py `spec.SEASON_TOKEN`. */
 const SEASON_TOKEN = /\{season(?:\s*\+\s*(\d+))?\}/;
@@ -252,8 +252,13 @@ function renderBarrel(leagues) {
   return body;
 }
 
-/** The per-league "Dataset loaders" reference page. */
-export function renderLoadersPage(ns, loaders, position) {
+/**
+ * The per-league "Dataset loaders" reference page. `schemas` is loader_schemas.yaml
+ * (`load_* -> [{ name, type }]`); `describe(ns, ld, columns)` resolves the column
+ * descriptions (tools/codegen/descriptions.mjs). Every loader block gets a Returns
+ * table (col | type | description) and its generated row type's name.
+ */
+export function renderLoadersPage(ns, loaders, position, schemas, describe) {
   const bases = [...new Set(loaders.map((l) => l.baseLabel))].join(" / ");
   let body =
     `---\n` +
@@ -319,8 +324,31 @@ export function renderLoadersPage(ns, loaders, position) {
     body += `| \`maxCells\` | \`number\` | no | size guard; default scales with the heap, \`Infinity\` disables |\n`;
     body += `| \`timeoutMs\` | \`number\` | no | download timeout in ms (default 300000) |\n`;
     body += `\n\`\`\`js\nconst rows = ${exampleCall(ns, ld)};\n// snake_case alias (py/R parity): sdv.${ns}.${ld.fn}(...)\n\`\`\`\n`;
+    body += renderLoaderReturns(ns, ld, schemas, describe);
   }
   return body;
+}
+
+/**
+ * A loader's `**Returns**` table: every column of its sdv-py loader schema with the
+ * TypeScript type of its generated row interface (`| null` dropped: every column is
+ * nullable and optional) and its description. A deprecated loader documents its
+ * replacement's schema.
+ */
+function renderLoaderReturns(ns, ld, schemas, describe) {
+  const fn = ld.deprecatedFor ?? ld.fn;
+  const cols = schemas[fn];
+  if (!Array.isArray(cols)) throw new Error(`render-loaders: ${fn} has no loader schema`);
+  const rowType = loaderRowName(fn);
+  const described = describe ? describe(ns, ld, cols) : cols;
+  let out = `\n**Returns** (one row per record; every column optional and nullable):\n\n`;
+  out += `**Row type:** \`${rowType}\` (exported from the package root).\n\n`;
+  out += `| col_name | type | description |\n|---|---|---|\n`;
+  for (const c of described) {
+    const ts = loaderColumnType(c.name, c.type, fn).replace(/ \| null$/, "");
+    out += `| \`${mdxText(c.name).replace(/\|/g, "\\|")}\` | \`${ts.replace(/\|/g, "\\|")}\` | ${mdxText(String(c.description ?? "")).replace(/\|/g, "\\|").replace(/\r?\n/g, " ").trim()} |\n`;
+  }
+  return out;
 }
 
 /** "Dataset loaders" section appended to the reference overview (reference/index.md). */
@@ -362,13 +390,13 @@ export function renderLoaderOnlyIndex(ns, loaders, note = "") {
  * Register the generated loader TS modules into `outputs` (path -> content).
  * Docs pages are registered by generate.mjs, which owns the docs layout.
  */
-export function registerLoaderModules(outputs, generatedDir, byLeague, schemasDir) {
+export function registerLoaderModules(outputs, generatedDir, byLeague, schemasDir, describe) {
   const dir = join(generatedDir, "loaders");
   const rowsDir = join(generatedDir, "loader_rows");
   const schemas = loadLoaderSchemas(schemasDir);
   const names = new Map();
   for (const [ns, loaders] of byLeague) {
-    const rows = renderLoaderRows(ns, loaders, schemas);
+    const rows = renderLoaderRows(ns, loaders, schemas, describe && ((ld, cols) => describe(ns, ld, cols)));
     outputs[join(rowsDir, `${ns}.ts`)] = rows.source;
     names.set(ns, rows.names);
     outputs[join(dir, `${ns}.ts`)] = renderLeagueModule(ns, loaders, rows);

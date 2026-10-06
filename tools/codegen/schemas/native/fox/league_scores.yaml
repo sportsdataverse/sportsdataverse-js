@@ -4,6 +4,7 @@
 # responses carry `columns: []` (the parser flattens whatever the payload ships).
 schema: league_scores
 kind: dataframe
+unverified: these columns were written for parse_fox_scoreboard's output before it was ported to sdv-py's row builders (4.0.0) and no committed capture of this endpoint confirms them (tools/codegen/regen-capture-schemas.mjs)
 columns:
 - name: group_title
   type: character
