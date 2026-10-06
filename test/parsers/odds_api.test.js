@@ -61,7 +61,7 @@ const ODDS_PAYLOAD = [
   },
 ];
 
-describe('odds_api: sports', () => {
+describe('odds_api: sports (synthetic — no public capture)', () => {
   it('flattens the bare sports array (one row per sport)', () => {
     const rows = parse_odds_api_sports([
       { key: 'americanfootball_nfl', group: 'American Football', title: 'NFL', description: 'US Football', active: true, has_outrights: false },
@@ -79,7 +79,7 @@ describe('odds_api: sports', () => {
   });
 });
 
-describe('odds_api: sports_odds (unroll to one row per outcome)', () => {
+describe('odds_api: sports_odds (unroll to one row per outcome) (synthetic — no public capture)', () => {
   it('unrolls 1 event x 2 bookmakers x 1 market x 2 outcomes -> 4 rows', () => {
     const rows = parse_odds_api_sports_odds(ODDS_PAYLOAD);
     rows.length.should.equal(4);
@@ -125,7 +125,7 @@ describe('odds_api: sports_odds (unroll to one row per outcome)', () => {
   });
 });
 
-describe('odds_api: sports_scores', () => {
+describe('odds_api: sports_scores (synthetic — no public capture)', () => {
   it('flattens scores events (scores list cell stringified)', () => {
     const rows = parse_odds_api_sports_scores([
       {
@@ -150,7 +150,7 @@ describe('odds_api: sports_scores', () => {
   });
 });
 
-describe('odds_api: sports_events', () => {
+describe('odds_api: sports_events (synthetic — no public capture)', () => {
   it('flattens events (one row per event)', () => {
     const rows = parse_odds_api_sports_events([
       { id: 'evt1', sport_key: 'basketball_nba', sport_title: 'NBA', commence_time: '2024-01-01T00:00:00Z', home_team: 'Home', away_team: 'Away' },
@@ -160,7 +160,7 @@ describe('odds_api: sports_events', () => {
   });
 });
 
-describe('odds_api: sports_participants', () => {
+describe('odds_api: sports_participants (synthetic — no public capture)', () => {
   it('flattens participants (one row per participant)', () => {
     const rows = parse_odds_api_sports_participants([
       { id: 'par_1', full_name: 'Los Angeles Lakers' },
@@ -171,7 +171,7 @@ describe('odds_api: sports_participants', () => {
   });
 });
 
-describe('odds_api: event_odds (single event -> one row per outcome)', () => {
+describe('odds_api: event_odds (single event -> one row per outcome) (synthetic — no public capture)', () => {
   it('unrolls a single event object (props add outcomes_description)', () => {
     const rows = parse_odds_api_event_odds({
       id: 'evt1',
@@ -210,7 +210,7 @@ describe('odds_api: event_odds (single event -> one row per outcome)', () => {
   });
 });
 
-describe('odds_api: event_markets (one row per bookmaker x market)', () => {
+describe('odds_api: event_markets (one row per bookmaker x market) (synthetic — no public capture)', () => {
   it('lists available markets (no outcomes to unroll)', () => {
     const rows = parse_odds_api_event_markets({
       id: 'evt1',
@@ -237,7 +237,7 @@ describe('odds_api: event_markets (one row per bookmaker x market)', () => {
   });
 });
 
-describe('odds_api: sports_odds_history (snapshot timestamps prefixed)', () => {
+describe('odds_api: sports_odds_history (snapshot timestamps prefixed) (synthetic — no public capture)', () => {
   it('wraps data[] events and prefixes timestamp columns onto each outcome', () => {
     const rows = parse_odds_api_sports_odds_history({
       timestamp: '2024-01-01T00:00:00Z',
@@ -258,7 +258,7 @@ describe('odds_api: sports_odds_history (snapshot timestamps prefixed)', () => {
   });
 });
 
-describe('odds_api: sports_events_history (one row per event, timestamps prefixed)', () => {
+describe('odds_api: sports_events_history (one row per event, timestamps prefixed) (synthetic — no public capture)', () => {
   it('prefixes the snapshot timestamps onto each event row', () => {
     const rows = parse_odds_api_sports_events_history({
       timestamp: '2024-01-01T00:00:00Z',
@@ -274,7 +274,7 @@ describe('odds_api: sports_events_history (one row per event, timestamps prefixe
   });
 });
 
-describe('odds_api: event_odds_history (single nested event -> one row per outcome)', () => {
+describe('odds_api: event_odds_history (single nested event -> one row per outcome) (synthetic — no public capture)', () => {
   it('unrolls the data event object and prefixes snapshot timestamps', () => {
     const rows = parse_odds_api_event_odds_history({
       timestamp: '2024-01-01T00:00:00Z',

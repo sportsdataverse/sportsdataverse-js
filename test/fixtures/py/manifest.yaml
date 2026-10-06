@@ -500,3 +500,37 @@ sports247:
   sports247/sports247_sports_year_fb.json: sport_years
   sports247/sports247_tags_autocomplete.json: tags_autocomplete
   sports247/sports247_positions_fb_2026.json: positions
+# Provider families whose JS parsers were written independently of sdv-py's
+# (schema_compatible: false): no py returns table, so these are parity-only —
+# the JS parser must emit what sdv-py's does on the same bytes. The captures
+# live beside their family's README (test/fixtures/{cbs,fox,yahoo}/).
+cbs:
+  cbs/team_standings_nfl.json: team_standings
+  cbs/team_standings_nhl.json: team_standings
+  cbs/season_teams_nfl.json: season_teams
+  cbs/team_players_nfl.json: team_players
+  cbs/league_meta_nfl.json: league
+  cbs/endpoint_registry.json: endpoint_registry
+  cbs/game_scoring_plays_nfl.json: game_scoring_plays
+  cbs/game_scoring_plays_ncaaf.json: game_scoring_plays
+  cbs/game_scoring_drives_nfl.json: game_scoring_drives
+  cbs/game_scoring_drives_ncaaf.json: game_scoring_drives
+fox:
+  fox/nfl_league_scores_segment.json: league_scores_segment
+  fox/topevents_segment.json: topevents_scoreboard_segment
+  fox/nfl_league_standings.json: league_standings
+  fox/cbk_league_polls.json: league_polls
+  fox/cbk_league_conferences.json: league_conferences
+  fox/nfl_league_header.json: league_header
+  fox/search_content.json: search_content
+  fox/search_entities.json: search_entities
+  fox/search_popular.json: search_popular
+  fox/trending_videos.json: trending_videos
+  fox/nfl_team_roster.json: team_roster
+  fox/nfl_event_matchup.json: event_matchup
+  fox/cbk_event_data_pbp_first_half.json: event_data
+yahoo:
+  yahoo/shangrila_season_stats_football_passing_ncaaf.json: season_stats_football_passing_ncaaf
+  yahoo/editorial_boxscore_ncaaf.json: editorial_boxscore
+  yahoo/editorial_boxscore_ncaaf_ala_at_uk.json: editorial_boxscore
+  yahoo/editorial_scoreboard_ncaaf.json: editorial_scoreboard

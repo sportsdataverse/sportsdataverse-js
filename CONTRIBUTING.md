@@ -22,7 +22,10 @@ conventions. By participating you agree to the
 
 ## Prerequisites
 
-- **Node ≥ 20.18.1** (see `engines` in `package.json`).
+- **Node ≥ 20.18.1** (see `engines` in `package.json`) to *use* the package. To
+  *develop* it you need **Node ^20.19 or >= 22.12**: the test runner (`mocha` 12)
+  and coverage tool (`c8` 12) require that; `engines` is unchanged because they are
+  devDependencies.
 - npm (the repo commits `package-lock.json`).
 - The package is **ESM-only** and written in **TypeScript**.
 

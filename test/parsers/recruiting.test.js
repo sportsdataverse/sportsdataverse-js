@@ -14,7 +14,7 @@ import { FLAT_HOSTS } from '../../dist/core/client.js';
 // generic list flattener plus every dedicated parser (envelope unrolling), and a
 // flat-contract metadata block asserting the family registers correctly.
 
-describe('parsers/recruiting: parse_recruiting_list (generic flattener)', () => {
+describe('parsers/recruiting: parse_recruiting_list (generic flattener) (synthetic — no public capture)', () => {
   it('flattens a bare top-level JSON array (the common RDB shape)', () => {
     const raw = [
       { rankingKey: 1, firstName: 'John', lastName: 'Doe', currentStarRating: 5 },
@@ -54,7 +54,7 @@ describe('parsers/recruiting: parse_recruiting_list (generic flattener)', () => 
   });
 });
 
-describe('parsers/recruiting: parse_recruiting_paged_list', () => {
+describe('parsers/recruiting: parse_recruiting_paged_list (synthetic — no public capture)', () => {
   it('flattens the `list[]` of a {pagination, list} paged envelope', () => {
     const raw = {
       pagination: { count: 2, currentPage: 1 },
@@ -78,7 +78,7 @@ describe('parsers/recruiting: parse_recruiting_paged_list', () => {
   });
 });
 
-describe('parsers/recruiting: parse_recruiting_institution_rankings', () => {
+describe('parsers/recruiting: parse_recruiting_institution_rankings (synthetic — no public capture)', () => {
   it('unrolls list[] and prefixes the pagination_* context onto each row', () => {
     const raw = {
       pagination: { count: 25, currentPage: 1, pageCount: 3 },
@@ -108,7 +108,7 @@ describe('parsers/recruiting: parse_recruiting_institution_rankings', () => {
   });
 });
 
-describe('parsers/recruiting: parse_recruiting_ranking_feed', () => {
+describe('parsers/recruiting: parse_recruiting_ranking_feed (synthetic — no public capture)', () => {
   it('flattens the `rankings[]` of a PlayerRankingFeedDto envelope', () => {
     const raw = {
       rankings: [

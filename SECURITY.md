@@ -15,15 +15,17 @@ Only the latest release line (currently 4.x) receives security fixes.
 The npm package ships `dist/` only (`"files": ["dist"]`). Its runtime
 dependencies are the `dependencies` block of the root `package.json`: `axios`,
 `hyparquet`, `hyparquet-compressors`, `@tidyjs/tidy`, `papaparse`, and the
-HTML-scraping deps `cheerio`, `tabletojson`, and `decode-html` (see below). Root
+HTML-scraping deps `cheerio` and `tabletojson` (see below). Root
 `devDependencies` and everything under `docs/` (its own
 `docs/package-lock.json`) are build, test, or docs-site tooling and never reach
 a library user. The deployed docs site is static HTML plus the
 `docs/api/run.mjs` playground proxy, which uses the global `fetch` and local
 modules only; it imports no npm package.
 
-The root `overrides` (`js-yaml`, `serialize-javascript`, `diff`) are all
-dev-only: each pins a transitive dependency of `mocha`.
+The root `package.json` has no `overrides` block: the `js-yaml` /
+`serialize-javascript` / `diff` pins that mocha 11 needed went away with mocha 12.
+`docs/package.json` overrides `serialize-javascript`, `uuid` and `tinypool`, all
+docs-site build tooling.
 
 Policy: a HIGH advisory on a runtime dependency is fixed (upgrade or
 `overrides`), never accepted, unless no fixed version exists. Dev and docs
@@ -63,7 +65,7 @@ Revisit when `braces` publishes a fixed release or Docusaurus stops depending on
 
 ## HTML / CSV parsing dependencies
 
-All four are reachable from the public API, so removing any of them is a
+All three are reachable from the public API, so removing any of them is a
 breaking change.
 
 - `cheerio` **stays.** The live KenPom parser `parse_kenpom_page`
@@ -77,11 +79,12 @@ breaking change.
   output would need re-checking against real pages.
 - `papaparse` **stays.** It backs the `parse_torvik_*` parsers and the Statcast
   CSV parsers (`parse_mlb_statcast_search`, `parse_mlb_statcast_leaderboard`).
-- `decode-html`: only `sdv.ncaa.extractSelectList`, used by the deprecated
-  `sdv.ncaa` `getSports`, `getSeasons`, `getDivisions`, `getSportDivisionData`.
 - `tabletojson`: only the deprecated `sdv.ncaa.getPlayerData` and
   `sdv.ncaa.getTeamData`.
 
-`tabletojson` and `decode-html` are the only removal candidates. They can be
-dropped (BREAKING, in a major release) when the deprecated `sdv.ncaa` methods
-are removed.
+`tabletojson` is the only removal candidate. It can be dropped (BREAKING, in a
+major release) when the deprecated `sdv.ncaa` methods are removed. `decode-html`
+was dropped in 4.x without a behaviour change: the `<select>` scraper behind
+`getSports` / `getSeasons` / `getDivisions` / `getSportDivisionData` reads
+cheerio's already entity-decoded `.text()` instead (an offline test in
+`test/legacy_services.test.js` pins the decoding).

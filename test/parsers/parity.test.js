@@ -122,7 +122,15 @@ function runParser(def, raw) {
 
 // py dispatchers that return {name: frame} where JS returns one frame: the primary
 // sub-frame (src/parsers/nhl_api_web.ts header).
-const PRIMARY_FRAME = { parse_nhl_web_right_rail: 'season_series', parse_nhl_web_club_stats: 'skaters' };
+const PRIMARY_FRAME = {
+  parse_nhl_web_right_rail: 'season_series',
+  parse_nhl_web_club_stats: 'skaters',
+  // sdv-py's yahoo parsers return one frame per `data` collection / editorial
+  // collection; the JS parser returns the one its endpoint is about.
+  parse_yahoo_stats: 'leagues',
+  parse_yahoo_scores_scoreboard: 'games',
+  parse_yahoo_scores_boxscore: 'player_stats',
+};
 
 const columnsOf = (rows) => [...new Set(rows.flatMap((r) => Object.keys(r)))];
 
@@ -134,14 +142,14 @@ function assertFrame(rows, py, label, parser) {
   // every non-null JS value has the JS type of py's polars dtype for that column
   const bad = [];
   py.columns.forEach((c, k) => {
-    // Known sdv-py divergence, parse_on3_rdb ONLY: pandas stringifies a bool column
+    // Known sdv-py divergence, parse_on3_rdb + parse_cbs_standings ONLY: pandas stringifies a bool column
     // that has a null in it ('True' / 'False', 'nan' for the null), so py's dtype
     // is String; the JS port keeps booleans. Same values (same() folds case and
     // 'nan'); the column's py returns type (`character`) is wrong for JS, so
     // vendor.yaml marks those tables schema_incompatible. Scoped to that parser so
     // a "True"/"False" text column elsewhere (the nfl_pro ruling) stays strict.
     const boolText =
-      parser === 'parse_on3_rdb' &&
+      (parser === 'parse_on3_rdb' || parser === 'parse_cbs_standings') &&
       py.dtypes[k] === 'String' &&
       py.rows.some((r) => r[c] === 'True' || r[c] === 'False') &&
       py.rows.every((r) => nil(r[c]) || ['True', 'False', 'nan'].includes(r[c]));

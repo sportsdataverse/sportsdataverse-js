@@ -4,6 +4,28 @@ All notable changes to `sportsdataverse` (Node.js) are documented here. The
 docs-site copy lives at [`docs/src/pages/CHANGELOG.md`](docs/src/pages/CHANGELOG.md)
 and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
+## Unreleased
+
+### Changed
+
+- **Dependencies:** mocha 11 -> 12 and the root `overrides` block (js-yaml, serialize-javascript, diff — forced only for mocha 11) is gone; the resolved tree is at or above every forced floor. In-range bumps: papaparse 5.7.0 (the playground parser bundle is rebuilt for its BOM stripping), tabletojson 4.1.15, esbuild 0.28.2, typedoc 0.28.20, yaml 2.9.1, @microsoft/api-extractor 7.59.4, @types/node 22.20.5. `npm audit --omit=dev` is clean; the 4 dev-only moderate findings are `sprintf-js` under api-extractor with no upstream fix. `docs/`: lockfile refreshed (compression, proxy-addr) and `tinypool` overridden to `^2.2.0` under the `faster` build — 44 advisories (16 critical) down to 41 (0 critical).
+- **Coverage:** `npm test` runs mocha under `c8` (`.c8rc.json`: `dist/**` minus `dist/generated/**`, which is contract-tested by the codegen suites; `text-summary` + `lcov` into `coverage/`). The measured baseline is the threshold — lines 94% / functions 95% / branches 84% (measured 94.82 / 95.91 / 84.58 on 4,374 tests) — and `--check-coverage` fails the run below it; CI uploads `coverage/lcov.info` as an artifact. `npm run coverage:generated` re-reports the same run over `dist/generated/**` alone.
+
+### Fixed
+
+- **Fox Bifrost parsers** never reached the rows their endpoints are about on real captures (one row per date section with the games JSON-stringified; whole table objects for standings; `details[]` hijacking league/header, conferences and trending; layout cells for rosters; result buckets for search). They now port sdv-py's `_fox_layout` row builders and agree with sdv-py cell by cell on 13 captures; `search_popular` maps to `parse_fox_search` like py.
+- **CBS NAPI parsers**: team/standings came out as one 151-column row (py: one row per `season_year` x `season_type`), endpoint/registry as one 64-column row (py: one row per `key`), the scoring plays / drives feeds skipped py's pinned columns and integer casts, and `{plays: []}` yielded a bogus row. `parse_cbs_list` / `parse_cbs_standings` now port `cbs_napi_parsers` (10 captures, cell-by-cell parity; booleans stay native as for `parse_on3_rdb`).
+- **Yahoo parsers**: `parse_yahoo_stats` returned the statTypes dictionary instead of the leaders, and the editorial boxscore / scoreboard parsers joined the second id level into column names. They now port `yahoo_shangrila_parsers` (`entity_id` + `sub_id`, one column per stat type; the frame each endpoint is about — pinned in the parity harness) and agree with sdv-py on 4 captures.
+
+### Removed
+
+- The unused `tsx` devDependency, and `decode-html`: the one call site (`ncaa.service.ts`'s `<select>` scraper) reads cheerio's already-decoded `.text()`, which is identical to `decode($(el).html())` on every entity the old helper handled (an offline test pins `&amp;amp;` / `&#39;` decoding; `SECURITY.md` no longer lists it or the root `overrides`).
+
+### Tests
+
+- **Real captures replace synthetic payloads** in the CBS NAPI, Fox Bifrost, Yahoo shangrila + editorial, api.nfl.com, MLB Stats and NHL (api-web / EDGE / Stats REST / Records) parser suites. The CBS, Fox, Yahoo and NFL.com bodies are sdv-py's captures copied byte for byte into `test/fixtures/{cbs,fox,yahoo,nfl_api}/` (provenance READMEs); the MLB / NHL suites run on the captures already vendored under `test/fixtures/py/`. The assertions are concrete (row counts, named cells, snake_case keys, decimal-string id columns). Synthetic payloads survive only as labelled malformed-/empty-payload edge cases and in the three suites with no public capture anywhere (The Odds API, the 247 RDB, the token-gated api.nfl.com routes), listed under "Known synthetic suites" in `test/fixtures/README.md`.
+- **Offline behaviour tests:** `test/espn_shapes.test.js` drives 40 real ESPN captures through their generated wrappers with `{ parsed: true }` behind a stubbed transport (rows, snake_case keys, string ids, the documented URL); `tennis.getScoreboard` gets its first offline test on a live-captured ATP scoreboard (`test/fixtures/legacy/`).
+
 ## 4.0.0 (2026-10-06)
 
 _The first release after 3.0.0: 3.1.0 was never published, and its entries are folded in
