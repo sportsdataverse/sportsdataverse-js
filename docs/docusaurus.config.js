@@ -383,6 +383,11 @@ module.exports = {
       {
         hashed: true,
         indexBlog: false,
+        // Keep the TypeDoc API tree (docs/api/**, ~1k pages of generated
+        // signatures) out of the local index: it dwarfed the hand-written +
+        // codegen reference and every query surfaced TypeDoc noise first.
+        // The pages stay built, linked and in the sitemap.
+        ignoreFiles: [/^docs\/api(\/|$)/],
       },
     ],
     // ```jsx live``` code blocks (react-live); scope in src/theme/ReactLiveScope.
