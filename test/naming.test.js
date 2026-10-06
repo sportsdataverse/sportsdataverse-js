@@ -16,6 +16,10 @@ const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 const json = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url), 'utf8'));
 const yaml = (p) => parse(readFileSync(new URL(p, import.meta.url), 'utf8'));
 const PRE_V4 = json('../tools/codegen/pre_v4_names.json');
+// The npm 3.0.0 tarball's surface (ground truth: what users installed).
+const V3 = PRE_V4.published;
+/** ns -> Set of every pre-v4 name (published 3.0.0 + the mid-program snapshot). */
+const preV4Names = (ns) => new Set([...(V3.namespaces[ns] ?? []), ...(PRE_V4.namespaces[ns] ?? [])]);
 // sdv-py's generated public names at the pin: derived by `npm run vendor` from
 // the verbatim (LOCK-verified) py modules in tools/codegen/vendor/upstream/py/.
 const PY_NAMES = json('../tools/codegen/py_public_names.json');
@@ -43,6 +47,101 @@ function minimalParams(def, extra = {}) {
   for (const p of def.pathParams || []) if (p.required !== false && p.defaultFrom === undefined) params[p.name] = 12345;
   return params;
 }
+
+describe('v4 naming: no name of the published 3.0.0 disappears', () => {
+  it('the baseline is the npm 3.0.0 tarball', () => {
+    V3.version.should.equal('3.0.0');
+    V3.integrity.should.equal('sha512-SMbhkHzM2+783vI96WCzP/EOmROipR/TewUv0qYlwEutMq+SrJrRFB+tbqSC42J8wyJGnQI0mmLOq0hDAkqYoA==');
+  });
+
+  it('every 3.0.0 `sdv.<ns>.<name>` is still a function', () => {
+    let n = 0;
+    for (const [ns, names] of Object.entries(V3.namespaces)) {
+      (typeof sdv[ns]).should.equal('object', `namespace sdv.${ns} disappeared`);
+      for (const name of names) {
+        (typeof sdv[ns][name]).should.equal('function', `sdv.${ns}.${name} disappeared`);
+        n++;
+      }
+    }
+    n.should.equal(7579);
+  });
+
+  it('every 3.0.0 export of both entry points is still exported', async () => {
+    const parsers = await import('../dist/parsers/index.js');
+    for (const name of V3.exports) (name in pkg).should.be.true(`export ${name} disappeared`);
+    for (const name of V3.parsers_exports) (name in parsers).should.be.true(`sportsdataverse/parsers export ${name} disappeared`);
+  });
+
+  it('a renamed 3.0.0 name forwards to its v4 wrapper (same function) and warns once', async () => {
+    configure({ transport: async (req) => ({ status: 200, headers: {}, data: {}, url: req.url }) });
+    resetWarnOnce();
+    const renamed = [];
+    try {
+      const seen = await captureWarnings(async () => {
+        for (const [ns, names] of Object.entries(V3.namespaces)) {
+          for (const name of names) {
+            const fn = sdv[ns][name];
+            if (!isAlias(fn)) continue;
+            renamed.push([ns, name, fn]);
+            for (let i = 0; i < 2; i++) {
+              try {
+                await fn();
+              } catch {
+                // the warning comes before the call; params and responses don't matter here
+              }
+            }
+          }
+        }
+      });
+      const warned = new Map();
+      for (const w of seen.filter((w) => w.code === pkg.DEPRECATED_NAME_CODE)) {
+        const name = w.message.slice(0, w.message.indexOf('('));
+        warned.set(name, (warned.get(name) ?? 0) + 1);
+      }
+      for (const [ns, name, fn] of renamed) {
+        isAlias(sdv[ns][fn.replacement]).should.be.false(`sdv.${ns}.${fn.replacement} (the v4 name) is itself an alias`);
+        fn.deprecatedAliasOf.should.equal(sdv[ns][fn.replacement], `sdv.${ns}.${name}`);
+        (warned.get(name) ?? 0).should.equal(1, `sdv.${ns}.${name} warned ${warned.get(name) ?? 0} times`);
+      }
+    } finally {
+      resetConfig();
+    }
+    renamed.length.should.be.above(3000);
+  });
+
+  it("3.0.0's file-stem flat names call the same endpoint as their v4 names", async () => {
+    const calls = [];
+    configure({
+      transport: async (req) => {
+        calls.push(req.url);
+        return { status: 200, headers: {}, data: {}, url: req.url };
+      },
+    });
+    try {
+      const cases = [
+        ['mlb', 'mlb_api_teams', 'mlb_teams', '/api/v1/teams'],
+        ['cbs', 'cbsNapiBoxscore', 'cbsGameBoxscore', '/resource/game/boxscore/12345'],
+        ['fox', 'fox_bifrost_scorechip', 'fox_api_scorechip', '/scorechip/12345'],
+        ['yahoo', 'yahooShangrilaLeagueInfo', 'yahooLeagueInfo', '/shangrila/leagueInfo'],
+        ['recruiting', 'sports247_coaches', 'recruiting_coaches', '/rdb/v1/coaches'],
+      ];
+      await captureWarnings(async () => {
+        for (const [ns, old, now, path] of cases) {
+          calls.length = 0;
+          const params = { game_id: 12345, chip_id: 12345, sport: 'nfl' };
+          await sdv[ns][old](params);
+          await sdv[ns][now](params);
+          calls.length.should.equal(2, `${ns}.${old}`);
+          calls[0].should.equal(calls[1]);
+          calls[0].should.containEql(path);
+          sdv[ns][old].replacement.should.equal(now);
+        }
+      });
+    } finally {
+      resetConfig();
+    }
+  });
+});
 
 describe('v4 naming: no pre-v4 public name disappears', () => {
   it('every pre-v4 `sdv.<ns>.<name>` is still a function', () => {
@@ -79,7 +178,9 @@ describe('v4 naming: deprecated aliases', () => {
 
   it('cover the renamed ESPN + native names (both case forms)', () => {
     rows.length.should.be.above(1400);
-    Object.keys(FLAT_DEPRECATED_ALIASES).sort().should.eql(['cbs', 'fox', 'nfl_api', 'nhl_api_web']);
+    Object.keys(FLAT_DEPRECATED_ALIASES)
+      .sort()
+      .should.eql(['cbs', 'fox', 'mlb', 'nfl_api', 'nhl_api_web', 'recruiting', 'yahoo']);
   });
 
   it('each alias resolves to the same v4 wrapper, in snake_case and camelCase', () => {
@@ -116,7 +217,7 @@ describe('v4 naming: deprecated aliases', () => {
 
   it('every alias is a name JS shipped before v4 (no invented names)', () => {
     for (const [ns, old] of rows) {
-      const pre = new Set(PRE_V4.namespaces[ns]);
+      const pre = preV4Names(ns);
       pre.has(old).should.be.true(`sdv.${ns}.${old} was never public`);
       pre.has(toCamel(old)).should.be.true(`sdv.${ns}.${toCamel(old)} was never public`);
     }
@@ -250,9 +351,18 @@ describe('v4 naming: JS names equal sdv-py names at the vendor pin', () => {
     FLAT_DEPRECATED_ALIASES.nhl_api_web.nhl_api_web_pbp.should.equal('nhl_web_pbp'); // py hand-writes nhl_pbp
     FLAT_DEPRECATED_ALIASES.nfl_api.nfl_api_standings.should.equal('nfl_standings');
     FLAT_DEPRECATED_ALIASES.cbs.cbs_boxscore.should.equal('cbs_game_boxscore');
-    Object.keys(FLAT_DEPRECATED_ALIASES.cbs).length.should.equal(16);
+    Object.keys(FLAT_DEPRECATED_ALIASES.cbs).length.should.equal(16 + 82); // + every 3.0.0 cbs_napi_* name
     FLAT_DEPRECATED_ALIASES.fox.fox_scoreboard.should.equal('fox_api_scoreboard'); // vendored from sdv-py fox_api
-    Object.keys(FLAT_DEPRECATED_ALIASES.fox).length.should.equal(33); // the 5 dead routes keep their names
+    Object.keys(FLAT_DEPRECATED_ALIASES.fox).length.should.equal(33 + 38); // the 5 dead routes keep their names; + 3.0.0 fox_bifrost_*
+    // 3.0.0 named five families by their sdv-py file stem (generate.mjs PUBLISHED_API_STEMS)
+    FLAT_DEPRECATED_ALIASES.cbs.cbs_napi_boxscore.should.equal('cbs_game_boxscore');
+    FLAT_DEPRECATED_ALIASES.mlb.mlb_api_teams.should.equal('mlb_teams');
+    FLAT_DEPRECATED_ALIASES.yahoo.yahoo_shangrila_league_info.should.equal('yahoo_league_info');
+    FLAT_DEPRECATED_ALIASES.fox.fox_bifrost_scoreboard.should.equal('fox_api_scoreboard');
+    FLAT_DEPRECATED_ALIASES.recruiting.sports247_coaches.should.equal('recruiting_coaches');
+    for (const [api, n] of Object.entries({ mlb: 78, recruiting: 25, yahoo: 105 })) {
+      Object.keys(FLAT_DEPRECATED_ALIASES[api]).length.should.equal(n, api);
+    }
   });
 });
 

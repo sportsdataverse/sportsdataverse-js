@@ -393,9 +393,10 @@ function mapQueryParams(ep, api) {
 // `_versioned_on_collision`, `resolve_name` / `_flat_views`). Inputs:
 //   - espn_rename_map.yaml  sdv-py's curated ESPN renames (vendored verbatim)
 //   - vendor.yaml py_reserved  py's hand-written names its rule treats as taken
-//   - pre_v4_names.json     the frozen pre-v4 (3.x) public surface: every
-//                           pre-v4 name a rename replaces stays callable as a
-//                           deprecated alias (src/generated/aliases.ts).
+//   - pre_v4_names.json     the frozen pre-v4 (3.x) public surface — the
+//                           published npm 3.0.0 plus the mid-program snapshot:
+//                           every pre-v4 name a rename replaces stays callable
+//                           as a deprecated alias (src/generated/aliases.ts).
 //
 // Divergence from py, by design: py's `drop:` list (a generated ESPN wrapper
 // skipped because a hand-written py sibling serves the same endpoint under the
@@ -408,11 +409,24 @@ const ESPN_RENAMES = ESPN_RENAME_MAP.rename ?? {};
 // py `drop:` base names (`espn_wbb_event_officials`): JS emits these, under the
 // name py's hand-written sibling holds, and documents that the two differ.
 const ESPN_PY_DROPS = new Set(ESPN_RENAME_MAP.drop ?? []);
-const PRE_V4_NAMES = Object.fromEntries(
-  Object.entries(JSON.parse(readFileSync(join(here, "pre_v4_names.json"), "utf8")).namespaces).map(
-    ([ns, names]) => [ns, new Set(names)]
-  )
-);
+// ns -> Set of every pre-v4 name: the published 3.0.0 surface + the mid-program one.
+const PRE_V4_NAMES = {};
+{
+  const pre = JSON.parse(readFileSync(join(here, "pre_v4_names.json"), "utf8"));
+  for (const snap of [pre.published.namespaces, pre.namespaces]) {
+    for (const [ns, names] of Object.entries(snap)) for (const n of names) (PRE_V4_NAMES[ns] ??= new Set()).add(n);
+  }
+}
+// npm 3.0.0 (the last published 3.x) named these flat families by their sdv-py
+// file stem (`mlb_api_teams`, `cbs_napi_boxscore`, `sdv.recruiting.sports247_coaches`);
+// the never-published 3.1.0 renamed them. Each such name aliases the same endpoint.
+const PUBLISHED_API_STEMS = {
+  mlb: "mlb_api",
+  cbs: "cbs_napi",
+  fox: "fox_bifrost",
+  yahoo: "yahoo_shangrila",
+  recruiting: "sports247",
+};
 
 // py `_CONVENTION_TOKENS`: an athlete is a player, an event is a game.
 const CONVENTION_TOKENS = { athlete: "player", athletes: "players", event: "game", events: "games" };
@@ -1973,9 +1987,10 @@ function flatHostsFrom(flatWrappers) {
 
 /**
  * Fill ALIASES: for every wrapper, each name JS shipped before v4 (the pre-v4
- * rule `espn_<prefix>_<short>` / `<api>_<short>`, plus a CBS `legacy_short`)
- * that is in the frozen pre-v4 surface and differs from the v4 name. Names that
- * never shipped (a family vendored after v4) get no alias.
+ * rule `espn_<prefix>_<short>` / `<api>_<short>`, with 3.0.0's api stem from
+ * PUBLISHED_API_STEMS too, plus a CBS `legacy_short`) that is in the frozen
+ * pre-v4 surface and differs from the v4 name. Names that never shipped (a
+ * family vendored after v4) get no alias.
  */
 function computeAliases(leagues, wrappers, flatWrappers) {
   const add = (table, key, ns, old, now) => {
@@ -1992,7 +2007,14 @@ function computeAliases(leagues, wrappers, flatWrappers) {
     if (legacy && !PRE_V4_NAMES[ns]?.has(`${w.api}_${legacy}`)) {
       throw new Error(`${w.api}.${w.short}: legacy_short ${legacy} names no pre-v4 public name (${w.api}_${legacy})`);
     }
-    for (const s of [w.short, legacy].filter(Boolean)) add(ALIASES.flat, w.api, ns, `${w.api}_${s}`, flatSnake(w));
+    for (const api of [w.api, PUBLISHED_API_STEMS[w.api]].filter(Boolean)) {
+      for (const s of [w.short, legacy].filter(Boolean)) {
+        const old = `${api}_${s}`;
+        const prev = ALIASES.flat[w.api]?.[old];
+        if (prev && prev !== flatSnake(w)) throw new Error(`deprecated alias ${old} would forward to both ${prev} and ${flatSnake(w)}`);
+        add(ALIASES.flat, w.api, ns, old, flatSnake(w));
+      }
+    }
   }
 }
 
@@ -2133,7 +2155,10 @@ function renderDeprecationsPage(leagues) {
     `- Native APIs: sdv-py's name pattern — \`nhl_<endpoint>\` for the NHL api-web ` +
     `family (\`nhl_web_<endpoint>\` where sdv-py's name is taken), \`nfl_<endpoint>\` ` +
     `for NFL.com.\n` +
-    `- CBS: sdv-py's 16 short names replace the ones JS had picked.\n\n` +
+    `- CBS: sdv-py's 16 short names replace the ones JS had picked.\n` +
+    `- 3.0.0 (the last published 3.x) named five native families by their sdv-py ` +
+    `file stem: \`mlb_api_*\`, \`cbs_napi_*\`, \`fox_bifrost_*\`, \`yahoo_shangrila_*\` ` +
+    `and \`sdv.recruiting.sports247_*\`. Each forwards to the same endpoint's v4 name.\n\n` +
     `Every pre-v4 name below still works: it forwards to the new function and ` +
     `emits one \`DeprecationWarning\` per name per process. The aliases will be ` +
     `removed in a future major release. **${total}** names are deprecated, each ` +
