@@ -148,7 +148,7 @@ export default {
      */
     getSchedule: async function ({ year = null, month = null, day = null }) {
         // espn_nhl_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
-        const res = await espnNhlCdnSchedule({ date: cdnDate(year, month, day) });
+        const res = (await espnNhlCdnSchedule({ date: cdnDate(year, month, day) })) as any;
         return res.content.schedule;
     },
     /**

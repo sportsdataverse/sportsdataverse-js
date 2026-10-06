@@ -6,7 +6,7 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
 
 const EVENT_MARKETS_DEF: WrapperDef = {
   "short": "event_markets",
@@ -61,7 +61,7 @@ const EVENT_MARKETS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.odds.oddsApiEventMarkets({ sport_key: '…', event_id: '…' });
  */
-export const oddsApiEventMarkets: WrapperFn = (params = {}) => callFlat(EVENT_MARKETS_DEF, params);
+export const oddsApiEventMarkets: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_MARKETS_DEF, params);
 /** snake_case alias of {@link oddsApiEventMarkets} (py/R parity). */
 export const odds_api_event_markets = oddsApiEventMarkets;
 
@@ -129,7 +129,7 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.odds.oddsApiEventOdds({ sport_key: '…', event_id: '…' });
  */
-export const oddsApiEventOdds: WrapperFn = (params = {}) => callFlat(EVENT_ODDS_DEF, params);
+export const oddsApiEventOdds: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_ODDS_DEF, params);
 /** snake_case alias of {@link oddsApiEventOdds} (py/R parity). */
 export const odds_api_event_odds = oddsApiEventOdds;
 
@@ -202,7 +202,7 @@ const EVENT_ODDS_HISTORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.odds.oddsApiEventOddsHistory({ sport_key: '…', event_id: '…' });
  */
-export const oddsApiEventOddsHistory: WrapperFn = (params = {}) => callFlat(EVENT_ODDS_HISTORY_DEF, params);
+export const oddsApiEventOddsHistory: Wrapper = (params: WrapperParams = {}) => callFlat(EVENT_ODDS_HISTORY_DEF, params);
 /** snake_case alias of {@link oddsApiEventOddsHistory} (py/R parity). */
 export const odds_api_event_odds_history = oddsApiEventOddsHistory;
 
@@ -239,7 +239,7 @@ const SPORTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.odds.oddsApiSports({});
  */
-export const oddsApiSports: WrapperFn = (params = {}) => callFlat(SPORTS_DEF, params);
+export const oddsApiSports: Wrapper = (params: WrapperParams = {}) => callFlat(SPORTS_DEF, params);
 /** snake_case alias of {@link oddsApiSports} (py/R parity). */
 export const odds_api_sports = oddsApiSports;
 
@@ -296,7 +296,7 @@ const SPORTS_EVENTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.odds.oddsApiSportsEvents({ sport_key: '…' });
  */
-export const oddsApiSportsEvents: WrapperFn = (params = {}) => callFlat(SPORTS_EVENTS_DEF, params);
+export const oddsApiSportsEvents: Wrapper = (params: WrapperParams = {}) => callFlat(SPORTS_EVENTS_DEF, params);
 /** snake_case alias of {@link oddsApiSportsEvents} (py/R parity). */
 export const odds_api_sports_events = oddsApiSportsEvents;
 
@@ -358,7 +358,7 @@ const SPORTS_EVENTS_HISTORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.odds.oddsApiSportsEventsHistory({ sport_key: '…' });
  */
-export const oddsApiSportsEventsHistory: WrapperFn = (params = {}) => callFlat(SPORTS_EVENTS_HISTORY_DEF, params);
+export const oddsApiSportsEventsHistory: Wrapper = (params: WrapperParams = {}) => callFlat(SPORTS_EVENTS_HISTORY_DEF, params);
 /** snake_case alias of {@link oddsApiSportsEventsHistory} (py/R parity). */
 export const odds_api_sports_events_history = oddsApiSportsEventsHistory;
 
@@ -437,7 +437,7 @@ const SPORTS_ODDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.odds.oddsApiSportsOdds({ sport_key: '…' });
  */
-export const oddsApiSportsOdds: WrapperFn = (params = {}) => callFlat(SPORTS_ODDS_DEF, params);
+export const oddsApiSportsOdds: Wrapper = (params: WrapperParams = {}) => callFlat(SPORTS_ODDS_DEF, params);
 /** snake_case alias of {@link oddsApiSportsOdds} (py/R parity). */
 export const odds_api_sports_odds = oddsApiSportsOdds;
 
@@ -511,7 +511,7 @@ const SPORTS_ODDS_HISTORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.odds.oddsApiSportsOddsHistory({ sport_key: '…' });
  */
-export const oddsApiSportsOddsHistory: WrapperFn = (params = {}) => callFlat(SPORTS_ODDS_HISTORY_DEF, params);
+export const oddsApiSportsOddsHistory: Wrapper = (params: WrapperParams = {}) => callFlat(SPORTS_ODDS_HISTORY_DEF, params);
 /** snake_case alias of {@link oddsApiSportsOddsHistory} (py/R parity). */
 export const odds_api_sports_odds_history = oddsApiSportsOddsHistory;
 
@@ -548,7 +548,7 @@ const SPORTS_PARTICIPANTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.odds.oddsApiSportsParticipants({ sport_key: '…' });
  */
-export const oddsApiSportsParticipants: WrapperFn = (params = {}) => callFlat(SPORTS_PARTICIPANTS_DEF, params);
+export const oddsApiSportsParticipants: Wrapper = (params: WrapperParams = {}) => callFlat(SPORTS_PARTICIPANTS_DEF, params);
 /** snake_case alias of {@link oddsApiSportsParticipants} (py/R parity). */
 export const odds_api_sports_participants = oddsApiSportsParticipants;
 
@@ -600,6 +600,6 @@ const SPORTS_SCORES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.odds.oddsApiSportsScores({ sport_key: '…' });
  */
-export const oddsApiSportsScores: WrapperFn = (params = {}) => callFlat(SPORTS_SCORES_DEF, params);
+export const oddsApiSportsScores: Wrapper = (params: WrapperParams = {}) => callFlat(SPORTS_SCORES_DEF, params);
 /** snake_case alias of {@link oddsApiSportsScores} (py/R parity). */
 export const odds_api_sports_scores = oddsApiSportsScores;

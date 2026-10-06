@@ -6,6 +6,18 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ## Unreleased
 
+_The next release is **4.0.0**. The last published release is 3.0.0: 3.1.0 was never
+published, and its entries are folded in below._
+
+### Added (breaking for TypeScript) — typed returns: generated row types for `parsed: true`
+
+- **Row types for every verified endpoint.** Codegen writes a row interface for each returns schema the parser-parity harness verified on a real sdv-py capture: 438 endpoints in 13 families (MLB Stats API, Statcast, the four NHL APIs, stats.nba.com, stats.wnba.com, ASA, MLS, NWSL, On3, 247Sports). They are exported from the package root (`MlbTeamRosterRow`, `NbaStatsBoxscoredefensivev2Tables`, ...), and `sdv.nhl.nhlRecordsAllTimeRecordVsFranchise({ parsed: true })` resolves to `NhlRecordsAllTimeRecordVsFranchiseRow[]`. Every other wrapper's parsed rows are `Row` (`Record<string, unknown>`).
+- **The column rule:** an id column (the runtime's own `isIdColumn`) is `string`, or `string | number` when the schema stores a double (such an id past 2^53 is no exact integer and stays a number, as `load_cfb_pbp_r` `id_play` does); other numbers are `number`, `character` is `string`, `logical` is `boolean`. A column that is null in every capture is `unknown`. Every column is optional and nullable, because the MLB, NHL api-web and 247 parsers leave out a column the payload lacks. Dates are the payload's ISO strings (`string`). Release loader rows stay `Record<string, unknown>` (`Date` for DATE / TIMESTAMP columns at runtime): no loader schema is verified yet.
+- **Wrapper signatures:** every wrapper is a `Wrapper` or `SectionedWrapper`. Without `parsed: true` it resolves to `unknown` (the raw payload; it was `any`). A stats.nba.com / stats.wnba.com endpoint resolves to its tables or, for a one-set payload, that table, as a union; `section` with a table name the schema types resolves to that table's rows. The summary dispatchers resolve to `ParsedTables`.
+- **The default export is typed** `Sdv`: one interface per namespace (`NbaWrappers`, `NhlWrappers`, ...) lists every generated wrapper, and each pre-v4 alias carries `@deprecated` and its v4 wrapper's type. Legacy service methods, loaders and the hand-written members (Statcast search, HockeyTech analytics, cricket WP, the basketball producers, odds math) are typed too. A namespace or member that does not exist is now a type error.
+- **Checked:** `test/types/agreement.test.js` parses the generated TypeScript and checks every value the parsers return on the committed captures against it (27,441 typed columns, 468,325 cells, 0 mismatches), including the key set of every row and table object and each typed `section`. `test/types/namespaces.test.js` compiles type tests against `dist/*.d.ts` under `strict` and holds every namespace's typed members equal to the runtime object's.
+- **Migrating (TypeScript only; no runtime change):** narrow or cast a raw payload (`(await w(args)) as MyShape`), and read typed rows as `string | null | undefined` etc. The API report (`etc/sportsdataverse.api.md`) now lists every wrapper. The parser modules' row type is one exported `ParserRow`.
+
 ### Changed (breaking) — stats.nba.com / stats.wnba.com default season: the latest season with data (sdv-py #693)
 
 - **BREAKING: an unset season is now the latest season that has rows**, not the previous season. sdv-py #693 replaced `season_or_previous` with `season_latest_with_data`, and JS follows (`season_or_previous` is retired). The season is resolved per call, then dated for the request's league (`LeagueID`, else the host's), endpoint and `SeasonType`, in local time as sdv-py's `date.today()`. The NBA rolls over in November (`2025-26` until October 2026, `2026-27` from November). The G League (`league_id: "20"`) rolls over in January, the Summer League (`"15"`) in August (July 2026's is `2026-27`) and the WNBA in June. The draft combine (`SeasonYear`) rolls over in June, whichever league asks. `drafthistory` sends a year: July for the NBA, May for the WNBA. `commonplayoffseries` and a `SeasonType` of `Playoffs` or `PlayIn` roll over in the league's playoff month: May for the NBA and the G League, October for the WNBA. `All Star` rolls over in March for the NBA and August for the WNBA; the G League has no All-Star rows and keeps its regular rule. A fixed month table cannot follow a lockout or a pandemic calendar, so pass `season` for those years.
@@ -241,17 +253,25 @@ sdv-py's emit-time rename layer (`tools/codegen/generate.py` at the vendor pin):
   playground (share links `?e=flat:cbs:boxscore`, `RunCell`) and `/api/run`
   (`{ api: 'cbs', endpoint: 'boxscore' }`) still accept it. Code that matches
   `FLAT_WRAPPERS` by `short` should also match `legacyShort`.
-- Families already named like sdv-py (MLB, Statcast, NHL edge / stats-rest /
-  records, nba_stats, wnba_stats, Torvik, Yahoo) are unchanged.
+- **3.0.0's file-stem names** for five native families take the v4 name of the same
+  endpoint: `mlbApi*` → `mlb*` (`mlbApiSchedule` → `mlbSchedule`), `cbsNapi*` →
+  `cbs*` (`cbsNapiBoxscore` → `cbsGameBoxscore`), `foxBifrost*` → `foxApi*`
+  (`foxBifrostScoreboard` → `foxApiScoreboard`), `yahooShangrila*` → `yahoo*`, and
+  `sdv.recruiting.sports247*` → `recruiting*` (itself deprecated, see above).
+- Families already named like sdv-py (Statcast, NHL edge / stats-rest / records,
+  nba_stats, wnba_stats, Torvik) are unchanged.
 
-**Nothing is removed.** All 1,405 renamed pre-v4 names (2,810 counting both
-snake_case and camelCase) stay callable as deprecated aliases: each forwards to the
-new wrapper (its `.name` is the old name) and emits one `DeprecationWarning` per
-name per process, with `code: 'SDV_DEPRECATED_NAME'` so it can be filtered. The full
-mapping is the new [Deprecated names (v4)](https://js.sportsdataverse.org/docs/reference/deprecations)
-reference page; `test/naming.test.js` asserts every pre-v4 public name (frozen in
-`tools/codegen/pre_v4_names.json`) still resolves, and that the v4 names equal
-sdv-py's generated names at the pin. The raw-JSON default and `{ parsed: true }`
+**Nothing is removed.** Every public name of the published **3.0.0** (the
+`sportsdataverse@3.0.0` tarball on npm) is still callable. All 1,766 renamed pre-v4
+names (3,532 counting both snake_case and camelCase) are kept as deprecated aliases:
+each forwards to the new wrapper (its `.name` is the old name) and emits one
+`DeprecationWarning` per name per process, with `code: 'SDV_DEPRECATED_NAME'` so it
+can be filtered. The full mapping is the new [Deprecated names (v4)](https://js.sportsdataverse.org/docs/reference/deprecations)
+reference page. `tools/codegen/pre_v4_names.json` freezes the 3.0.0 tarball's names
+(7,579 namespace members, plus the exports of both entry points) and the later
+pre-v4 development names. `test/naming.test.js` asserts every one still resolves,
+that each renamed 3.0.0 name forwards to its v4 wrapper and warns once, and that
+the v4 names equal sdv-py's generated names at the pin. The raw-JSON default and `{ parsed: true }`
 are unchanged. Wrapper defs gain `publicShort` (ESPN) / `publicName` (flat) and
 `LeagueConfig` gains `publicShorts`; `makeLeagueModule` / `makeFlatModule` build
 the v4 names and register the same aliases.
@@ -386,26 +406,20 @@ Every wrapper (ESPN and flat-API) now fetches through one runtime core
   the runtime core (`npm run typecheck:strict`).
 
 
-### Changed (breaking) — provider method naming
+### Changed — provider method naming (every 3.0.0 name still works)
 
-Dropped internal vendor API codenames (and redundant `_api` stems) from the
-provider method names + labels so they read as the product / namespace, not the
-vendor's internal API name. The namespaces (`sdv.fox` / `sdv.cbs` / `sdv.yahoo` /
-`sdv.mlb` / `sdv.recruiting`) are unchanged; only the method prefixes were renamed:
+The provider methods no longer carry internal vendor API codenames. The namespaces
+(`sdv.fox` / `sdv.cbs` / `sdv.yahoo` / `sdv.mlb` / `sdv.recruiting`) are unchanged.
+The method prefixes `foxBifrost*`, `cbsNapi*`, `yahooShangrila*`, `mlbApi*` and
+`sports247*` (on `sdv.recruiting`) take their v4 names, listed in the 4.0.0 naming
+entry above. Each 3.0.0 name is kept as a deprecated alias of the same endpoint, so
+this is not a removal. `yahooEditorial*` keeps its 3.0.0 name.
 
-- `foxBifrost*` → `fox*` (e.g. `foxBifrostScoreboard` → `foxScoreboard`)
-- `cbsNapi*` → `cbs*`
-- `yahooShangrila*` → `yahoo*`, `yahooEditorial*` → `yahooScores*`
-- `mlbApi*` → `mlb*` (e.g. `mlbApiSchedule` → `mlbSchedule`)
-- `sports247*` → `recruiting*` (matches the `sdv.recruiting` namespace; the
-  "247Sports" label is kept — it's the real product)
-
-The same rename flows through the codegen `api` stems, returns-schema paths,
-parser names, playground endpoint ids, and reference docs. Upstream URL paths
-that genuinely contain the vendor codename (Fox's `/bifrost/v1/…`, Yahoo's
-`/v1/query/shangrila/…`) are unchanged — those are the real endpoints.
-(`odds_api` / `mlb_statcast` / the four `nhl_*` families /
-`hockeytech` / `torvik` are real product names and were left as-is.)
+The codegen `api` stems, returns-schema paths, parser names, playground endpoint ids
+and reference docs follow the new names. Upstream URL paths that contain the vendor
+codename (Fox's `/bifrost/v1/…`, Yahoo's `/v1/query/shangrila/…`) are the real
+endpoints and are unchanged. `odds_api`, `mlb_statcast`, the four `nhl_*` families,
+`hockeytech` and `torvik` are real product names and were left as they are.
 
 
 ### Changed — shared endpoint YAML is vendored from sportsdataverse-py
@@ -449,16 +463,11 @@ drifted since the 2026-06 fork:
   Yahoo, torvik, ESPN and the endpoints on a different or fallback parser keep JS's
   own schema or show none.
 
-## v3.1.0
+### Added — HockeyTech and BartTorvik families (planned as 3.1.0)
 
-A minor, additive release: two new flat-API families (no breaking changes), plus
-the docs-site overhaul.
+3.1.0 was never published to npm; its changes ship in 4.0.0.
 
-
-### New flat-API families (2)
-
-Two standalone provider namespaces join the flat-API surface, bringing the total
-to **532 flat-API wrappers across 15 families** (was 517 across 13). Both expose
+Two standalone provider namespaces join the flat-API surface. Both expose
 the usual dual-case names (snake_case + camelCase), accept `{ parsed: true }` for
 tidy rows, and ship fully column-described returns tables.
 
@@ -494,7 +503,7 @@ JSON-only.
 > primary host. Use the library directly for QMJHL.
 
 
-### Docs
+### Changed — docs-site overhaul (planned as 3.1.0)
 
 A docs-site overhaul that makes the guides literate and the navigation
 data-driven:

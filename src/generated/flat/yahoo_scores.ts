@@ -6,7 +6,7 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
 
 const BOXSCORE_DEF: WrapperDef = {
   "short": "boxscore",
@@ -65,7 +65,7 @@ const BOXSCORE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooScoresBoxscore({ game_id: '…' });
  */
-export const yahooScoresBoxscore: WrapperFn = (params = {}) => callFlat(BOXSCORE_DEF, params);
+export const yahooScoresBoxscore: Wrapper = (params: WrapperParams = {}) => callFlat(BOXSCORE_DEF, params);
 /** snake_case alias of {@link yahooScoresBoxscore} (py/R parity). */
 export const yahoo_scores_boxscore = yahooScoresBoxscore;
 
@@ -142,6 +142,6 @@ const SCOREBOARD_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooScoresScoreboard({});
  */
-export const yahooScoresScoreboard: WrapperFn = (params = {}) => callFlat(SCOREBOARD_DEF, params);
+export const yahooScoresScoreboard: Wrapper = (params: WrapperParams = {}) => callFlat(SCOREBOARD_DEF, params);
 /** snake_case alias of {@link yahooScoresScoreboard} (py/R parity). */
 export const yahoo_scores_scoreboard = yahooScoresScoreboard;

@@ -8,6 +8,7 @@
   "include": [],
   "files": [
     "src/core/errors.ts",
+    "src/core/id_columns.ts",
     "src/core/transport.ts",
     "src/core/auth.ts",
     "src/core/config.ts",

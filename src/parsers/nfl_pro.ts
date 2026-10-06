@@ -11,7 +11,7 @@
 import { idColumnsToStrings } from "../core/int64.js";
 import { isPlainObject, underscore } from "./_normalize.js";
 
-type Row = Record<string, any>;
+import type { ParserRow as Row } from "../core/types.js";
 
 /** Known record-collection keys, in py's preference order (`_COLLECTION_KEYS`). */
 export const NFL_PRO_COLLECTION_KEYS = [

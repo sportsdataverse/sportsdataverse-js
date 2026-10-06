@@ -28,6 +28,7 @@ import {
   renderLoadersIndexSection,
   renderLoaderOnlyIndex,
 } from "./render-loaders.mjs";
+import { flatWrapperType, loadParityCoverage, renderRowsBarrel, renderRowsModule } from "./row-types.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const endpointsDir = join(here, "endpoints");
@@ -392,9 +393,10 @@ function mapQueryParams(ep, api) {
 // `_versioned_on_collision`, `resolve_name` / `_flat_views`). Inputs:
 //   - espn_rename_map.yaml  sdv-py's curated ESPN renames (vendored verbatim)
 //   - vendor.yaml py_reserved  py's hand-written names its rule treats as taken
-//   - pre_v4_names.json     the frozen pre-v4 (3.x) public surface: every
-//                           pre-v4 name a rename replaces stays callable as a
-//                           deprecated alias (src/generated/aliases.ts).
+//   - pre_v4_names.json     the frozen pre-v4 (3.x) public surface — the
+//                           published npm 3.0.0 plus the mid-program snapshot:
+//                           every pre-v4 name a rename replaces stays callable
+//                           as a deprecated alias (src/generated/aliases.ts).
 //
 // Divergence from py, by design: py's `drop:` list (a generated ESPN wrapper
 // skipped because a hand-written py sibling serves the same endpoint under the
@@ -407,11 +409,24 @@ const ESPN_RENAMES = ESPN_RENAME_MAP.rename ?? {};
 // py `drop:` base names (`espn_wbb_event_officials`): JS emits these, under the
 // name py's hand-written sibling holds, and documents that the two differ.
 const ESPN_PY_DROPS = new Set(ESPN_RENAME_MAP.drop ?? []);
-const PRE_V4_NAMES = Object.fromEntries(
-  Object.entries(JSON.parse(readFileSync(join(here, "pre_v4_names.json"), "utf8")).namespaces).map(
-    ([ns, names]) => [ns, new Set(names)]
-  )
-);
+// ns -> Set of every pre-v4 name: the published 3.0.0 surface + the mid-program one.
+const PRE_V4_NAMES = {};
+{
+  const pre = JSON.parse(readFileSync(join(here, "pre_v4_names.json"), "utf8"));
+  for (const snap of [pre.published.namespaces, pre.namespaces]) {
+    for (const [ns, names] of Object.entries(snap)) for (const n of names) (PRE_V4_NAMES[ns] ??= new Set()).add(n);
+  }
+}
+// npm 3.0.0 (the last published 3.x) named these flat families by their sdv-py
+// file stem (`mlb_api_teams`, `cbs_napi_boxscore`, `sdv.recruiting.sports247_coaches`);
+// the never-published 3.1.0 renamed them. Each such name aliases the same endpoint.
+const PUBLISHED_API_STEMS = {
+  mlb: "mlb_api",
+  cbs: "cbs_napi",
+  fox: "fox_bifrost",
+  yahoo: "yahoo_shangrila",
+  recruiting: "sports247",
+};
 
 // py `_CONVENTION_TOKENS`: an athlete is a player, an event is a game.
 const CONVENTION_TOKENS = { athlete: "player", athletes: "players", event: "game", events: "games" };
@@ -754,7 +769,7 @@ function renderWrittenEspnModule(league, wrappers) {
     "// core with the module-private `CFG` below, so URLs resolve identically to the\n" +
     "// runtime-factory path. The non-basketball leagues still use the factory.\n\n" +
     'import { callWrapper } from "../../core/espn.js";\n' +
-    'import type { LeagueConfig, WrapperDef, WrapperFn } from "../../core/types.js";\n\n' +
+    'import type { LeagueConfig, ParsedTables, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";\n\n' +
     `/** Module-private league binding for \`${league.prefix}\` (not exported). */\n` +
     `const CFG: LeagueConfig = ${cfgLiteral};\n`;
 
@@ -833,7 +848,12 @@ function renderWrittenEspnModule(league, wrappers) {
 
     body += `\nconst ${defConst}: WrapperDef = ${defLiteral};\n`;
     body += jsdoc;
-    body += `export const ${camel}: WrapperFn = (params = {}) =>\n`;
+    // The summary dispatcher's parsed result is every sub-frame as a dict; `section` picks one.
+    const espnType = isSummary ? "SectionedWrapper<ParsedTables>" : "Wrapper";
+    const memberDoc = `${summary} \`GET ${host}${httpPath}${fixedQuery(w)}\``;
+    nsMember(league.prefix, camel, espnType, memberDoc);
+    nsMember(league.prefix, snake, espnType, memberDoc);
+    body += `export const ${camel}: ${espnType} = (params: WrapperParams = {}) =>\n`;
     body += `  callWrapper(${defConst}, CFG, params);\n`;
     body += `/** snake_case alias of {@link ${camel}} (py/R parity). */\n`;
     body += `export const ${snake} = ${camel};\n`;
@@ -1967,9 +1987,10 @@ function flatHostsFrom(flatWrappers) {
 
 /**
  * Fill ALIASES: for every wrapper, each name JS shipped before v4 (the pre-v4
- * rule `espn_<prefix>_<short>` / `<api>_<short>`, plus a CBS `legacy_short`)
- * that is in the frozen pre-v4 surface and differs from the v4 name. Names that
- * never shipped (a family vendored after v4) get no alias.
+ * rule `espn_<prefix>_<short>` / `<api>_<short>`, with 3.0.0's api stem from
+ * PUBLISHED_API_STEMS too, plus a CBS `legacy_short`) that is in the frozen
+ * pre-v4 surface and differs from the v4 name. Names that never shipped (a
+ * family vendored after v4) get no alias.
  */
 function computeAliases(leagues, wrappers, flatWrappers) {
   const add = (table, key, ns, old, now) => {
@@ -1986,7 +2007,14 @@ function computeAliases(leagues, wrappers, flatWrappers) {
     if (legacy && !PRE_V4_NAMES[ns]?.has(`${w.api}_${legacy}`)) {
       throw new Error(`${w.api}.${w.short}: legacy_short ${legacy} names no pre-v4 public name (${w.api}_${legacy})`);
     }
-    for (const s of [w.short, legacy].filter(Boolean)) add(ALIASES.flat, w.api, ns, `${w.api}_${s}`, flatSnake(w));
+    for (const api of [w.api, PUBLISHED_API_STEMS[w.api]].filter(Boolean)) {
+      for (const s of [w.short, legacy].filter(Boolean)) {
+        const old = `${api}_${s}`;
+        const prev = ALIASES.flat[w.api]?.[old];
+        if (prev && prev !== flatSnake(w)) throw new Error(`deprecated alias ${old} would forward to both ${prev} and ${flatSnake(w)}`);
+        add(ALIASES.flat, w.api, ns, old, flatSnake(w));
+      }
+    }
   }
 }
 
@@ -2012,6 +2040,70 @@ function assertUniqueNames(leagues, wrappers, flatWrappers) {
   for (const [api, table] of Object.entries(ALIASES.flat)) {
     for (const old of Object.keys(table)) claim(FLAT_API_NAMESPACES[api] ?? api, old, `alias ${old}`);
   }
+}
+
+
+/**
+ * Generated members of each namespace, filled by the ESPN and flat module renderers:
+ * namespace -> [{ name, type, doc, target? }] (`target`: an alias's v4 member).
+ */
+const NS_MEMBERS = new Map();
+function nsMember(ns, name, type, doc) {
+  if (!NS_MEMBERS.has(ns)) NS_MEMBERS.set(ns, []);
+  NS_MEMBERS.get(ns).push({ name, type, doc });
+}
+
+/**
+ * src/generated/namespaces.ts: one interface per namespace listing every generated
+ * member with its type (ESPN wrappers, the flat-API families merged onto it, every
+ * deprecated pre-v4 alias with `@deprecated`), plus its release loaders' module type.
+ * src/index.ts types the default export with it, so the API report lists every
+ * wrapper and a new one shows up there.
+ */
+function renderNamespacesTs(rowNames, loaderPrefixes) {
+  const pascal = (s) => s.split("_").map((w) => w[0].toUpperCase() + w.slice(1)).join("");
+  const members = new Map([...NS_MEMBERS].map(([n, ms]) => [n, [...ms]]));
+  for (const n of loaderPrefixes) if (!members.has(n)) members.set(n, []);
+  // deprecated aliases: the target's type, both snake and camel
+  const byName = (n) => new Map(members.get(n).map((m) => [m.name, m]));
+  const addAliases = (n, table) => {
+    const own = byName(n);
+    for (const [old, now] of Object.entries(table ?? {}).sort(([a], [b]) => a.localeCompare(b))) {
+      for (const [o, w] of [[old, now], [toCamel(old), toCamel(now)]]) {
+        const target = own.get(w);
+        if (!target) throw new Error(`namespaces: alias ${n}.${o} -> ${w}: no such member`);
+        members.get(n).push({ name: o, type: target.type, doc: `Pre-v4 name of \`${w}\`: forwards to it and warns once per process. @deprecated Renamed \`${w}\` in v4.` });
+      }
+    }
+  };
+  for (const [p, table] of Object.entries(ALIASES.espn)) if (members.has(p)) addAliases(p, table);
+  for (const [api, table] of Object.entries(ALIASES.flat)) addAliases(FLAT_API_NAMESPACES[api] ?? api, table);
+  const names = [...members.keys()].sort();
+  let body =
+    TS_HEADER +
+    "// Every `sdv.<namespace>`'s generated members as TYPES, one interface per namespace:\n" +
+    "// the ESPN wrappers, the flat-API families merged onto it, every deprecated pre-v4\n" +
+    "// alias (`@deprecated`) and its release loaders. src/index.ts types the default export\n" +
+    "// with them, so etc/sportsdataverse.api.md lists every wrapper.\n\n" +
+    'import type { ParsedTables, Row, SectionedWrapper, Wrapper } from "../core/types.js";\n' +
+    `import type {\n${[...rowNames].sort().map((r) => `  ${r},\n`).join("")}} from "./rows/index.js";\n`;
+  for (const p of [...loaderPrefixes].sort()) body += `import type * as loaders_${p} from "./loaders/${p}.js";\n`;
+  for (const n of names) {
+    const ms = members.get(n).slice().sort((a, b) => a.name.localeCompare(b.name));
+    const dup = ms.find((m, i) => i && ms[i - 1].name === m.name);
+    if (dup) throw new Error(`namespaces: sdv.${n}.${dup.name} is generated twice`);
+    body += `\n/** The generated wrappers of \`sdv.${n}\` (and their deprecated pre-v4 names). */\nexport interface ${pascal(n)}Wrappers {\n`;
+    for (const m of ms) body += `  /** ${m.doc.replace(/\*\//g, "*\/")} */\n  ${m.name}: ${m.type};\n`;
+    body += "}\n";
+  }
+  body += "\n/** Every namespace's generated members, keyed by namespace (wrappers + release loaders). */\nexport interface GeneratedNamespaces {\n";
+  for (const n of names) {
+    const parts = [`${pascal(n)}Wrappers`];
+    if (loaderPrefixes.includes(n)) parts.push(`typeof loaders_${n}`);
+    body += `  /** \`sdv.${n}\`. */\n  ${n}: ${parts.join(" & ")};\n`;
+  }
+  body += "}\n";
+  return body;
 }
 
 /** src/generated/aliases.ts: the deprecated-alias tables the runtime registers. */
@@ -2063,7 +2155,10 @@ function renderDeprecationsPage(leagues) {
     `- Native APIs: sdv-py's name pattern — \`nhl_<endpoint>\` for the NHL api-web ` +
     `family (\`nhl_web_<endpoint>\` where sdv-py's name is taken), \`nfl_<endpoint>\` ` +
     `for NFL.com.\n` +
-    `- CBS: sdv-py's 16 short names replace the ones JS had picked.\n\n` +
+    `- CBS: sdv-py's 16 short names replace the ones JS had picked.\n` +
+    `- 3.0.0 (the last published 3.x) named five native families by their sdv-py ` +
+    `file stem: \`mlb_api_*\`, \`cbs_napi_*\`, \`fox_bifrost_*\`, \`yahoo_shangrila_*\` ` +
+    `and \`sdv.recruiting.sports247_*\`. Each forwards to the same endpoint's v4 name.\n\n` +
     `Every pre-v4 name below still works: it forwards to the new function and ` +
     `emits one \`DeprecationWarning\` per name per process. The aliases will be ` +
     `removed in a future major release. **${total}** names are deprecated, each ` +
@@ -2209,18 +2304,35 @@ outputs[join(generatedEspnDir, "index.ts")] = renderWrittenEspnBarrel(writtenPre
 // WRITTEN flat-API source modules — one `src/generated/flat/<api>.ts` per family,
 // composed in src/index.ts via the generated barrel instead of makeFlatModule.
 const generatedFlatDir = join(generatedDir, "flat");
+// The parser-parity harness's verified endpoints: the only ones that get row types.
+const PARITY_COVERAGE = loadParityCoverage(repoRoot);
+// api -> the row / tables interfaces its rows module exports (for the barrel).
+const rowTypeNames = new Map();
 const writtenFlatApis = [];
 for (const api of FLAT_API_FILES) {
   const defs = flatWrappers.filter((w) => w.api === api);
   if (!defs.length) continue;
-  outputs[join(generatedFlatDir, `${api}.ts`)] = renderWrittenFlatModule(api, defs);
+  const rows = renderRowsModule(api, defs, {
+    coverage: PARITY_COVERAGE,
+    schemasDir,
+    sectionsOf: (d) => (d.parser ? FLAT_PARSER_SECTIONS[d.parser] : undefined),
+    snakeOf: flatSnake,
+    nsOf: (d) => FLAT_API_NAMESPACES[d.api] ?? d.api,
+  });
+  if (rows.source) {
+    outputs[join(generatedDir, "rows", `${api}.ts`)] = rows.source;
+    rowTypeNames.set(api, rows.exports);
+  }
+  outputs[join(generatedFlatDir, `${api}.ts`)] = renderWrittenFlatModule(api, defs, rows.types);
   writtenFlatApis.push(api);
 }
 outputs[join(generatedFlatDir, "index.ts")] = renderWrittenFlatBarrel(writtenFlatApis);
+outputs[join(generatedDir, "rows", "index.ts")] = renderRowsBarrel(rowTypeNames);
 
 // Release loader modules (src/generated/loaders/) + the docs dir of each
 // loader-only namespace (written leagues got their loaders page above).
 registerLoaderModules(outputs, generatedDir, releaseLoaders);
+outputs[join(generatedDir, "namespaces.ts")] = renderNamespacesTs([...rowTypeNames.values()].flat(), [...releaseLoaders.keys()]);
 loaderOnly.forEach(([ns], i) => {
   const dir = join(referenceRootDir, ns);
   const loaders = releaseLoaders.get(ns);
@@ -2243,7 +2355,7 @@ loaderOnly.forEach(([ns], i) => {
 
 // One WRITTEN flat-API module: each wrapper a real `export const` delegating to
 // the shared `callFlat(def, params)` core (its def hoisted to a module const).
-function renderWrittenFlatModule(api, defs) {
+function renderWrittenFlatModule(api, defs, rowTypes = new Map()) {
   const meta = FLAT_API_META[api] ?? { label: api, source: api };
   const ns = FLAT_API_NAMESPACES[api] ?? api;
   let body =
@@ -2254,7 +2366,9 @@ function renderWrittenFlatModule(api, defs) {
     "// delegates to the shared `callFlat(def, params)` core, so TypeScript /\n" +
     "// TypeDoc / IDEs see every wrapper.\n\n" +
     'import { callFlat } from "../../leagues/_make_flat.js";\n' +
-    'import type { WrapperDef, WrapperFn } from "../../core/types.js";\n';
+    'import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";\n';
+  const rowNames = [...rowTypes.values()].flatMap((t) => t.names);
+  if (rowNames.length) body += `import type {\n${rowNames.map((n) => `  ${n},\n`).join("")}} from "../rows/${api}.js";\n`;
   const sorted = defs.slice().sort((a, b) => a.short.localeCompare(b.short));
   for (const def of sorted) {
     const snake = flatSnake(def);
@@ -2307,7 +2421,11 @@ function renderWrittenFlatModule(api, defs) {
     jsdoc += ` */\n`;
     body += `\nconst ${defConst}: WrapperDef = ${defLiteral};\n`;
     body += jsdoc;
-    body += `export const ${camel}: WrapperFn = (params = {}) => callFlat(${defConst}, params);\n`;
+    const wrapperType = flatWrapperType(def, def.parser ? FLAT_PARSER_SECTIONS[def.parser] : undefined, rowTypes.get(def.short));
+    const memberDoc = `${meta.label} — ${humanizeShort(def.short)}. \`GET ${def.host}${def.path}\`${def.deprecated ? ` @deprecated ${def.deprecated}` : ""}`;
+    nsMember(ns, camel, wrapperType, memberDoc);
+    nsMember(ns, snake, wrapperType, memberDoc);
+    body += `export const ${camel}: ${wrapperType} = (params: WrapperParams = {}) => callFlat(${defConst}, params);\n`;
     body += def.deprecated
       ? `/**\n * snake_case alias of {@link ${camel}} (py/R parity).\n * @deprecated ${def.deprecated}\n */\n`
       : `/** snake_case alias of {@link ${camel}} (py/R parity). */\n`;

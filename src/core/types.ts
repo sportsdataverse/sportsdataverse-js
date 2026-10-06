@@ -134,5 +134,65 @@ export interface WrapperDef {
   deprecated?: string;
 }
 
+/** A snake_case name as the camelCase alias the namespaces also register (`espn_nba_pbp` -> `espnNbaPbp`). */
+export type SnakeToCamel<S extends string> = S extends `${infer H}_${infer C}${infer T}`
+  ? `${H}${Uppercase<C>}${SnakeToCamel<T>}`
+  : S;
+
+/** `T` plus every member again under its camelCase name. */
+export type WithCamelAliases<T> = T & { [K in keyof T & string as SnakeToCamel<K>]: T[K] };
+
 /** A generated cross-league wrapper: `(params?) => Promise<raw ESPN JSON>`. */
 export type WrapperFn = (params?: Record<string, any>) => Promise<any>;
+
+/**
+ * One parsed row (column name -> value) whose columns no verified returns schema
+ * describes: the base row type of every `{ parsed: true }` return. Endpoints whose
+ * returns schema the parser-parity harness verified on a real capture return a
+ * generated row interface instead (`src/generated/rows/`).
+ */
+export type Row = Record<string, unknown>;
+
+/** Several parsed tables keyed by name: a multi-table parser's output without `section`. */
+export type ParsedTables = Record<string, Row[]>;
+
+/**
+ * A row as a parser function builds it (the `sportsdataverse/parsers` functions'
+ * signatures). The wrappers return {@link Row} or a generated row type.
+ */
+export type ParserRow = Record<string, any>;
+
+/**
+ * The params of a generated wrapper call: the endpoint's path / query params plus
+ * the controls `parsed`, `section`, `headers` and any family control (`api_key`, ...).
+ */
+export type WrapperParams = { [param: string]: unknown };
+
+/**
+ * A generated wrapper. Without `parsed: true` it resolves to the raw payload
+ * (`unknown`: narrow it yourself); with `{ parsed: true }` to the endpoint parser's
+ * output `P`: rows of a generated row type for a verified endpoint, else {@link Row}`[]`.
+ * An endpoint with no parser has `P = unknown` (`parsed` returns the raw payload).
+ */
+export interface Wrapper<P = Row[]> {
+  /** `{ parsed: true }`: the parser's tidy output. */
+  (params: WrapperParams & { parsed: true }): Promise<P>;
+  /** The raw payload. */
+  (params?: WrapperParams): Promise<unknown>;
+}
+
+/**
+ * A generated wrapper whose parser returns several tables (sdv-py's dict of frames):
+ * as {@link Wrapper}, plus `{ parsed: true, section }`, which returns one table:
+ * `S[section]` for a table the verified schema names, else {@link Row}`[]`.
+ */
+export interface SectionedWrapper<P = Row[], S extends object = {}> {
+  /** `{ parsed: true, section }` naming a table the verified schema types. */
+  <K extends keyof S & string>(params: WrapperParams & { parsed: true; section: K }): Promise<S[K]>;
+  /** `{ parsed: true, section }`: any other table (an unknown name throws, or is `[]` for stats.nba.com). */
+  (params: WrapperParams & { parsed: true; section: string }): Promise<Row[]>;
+  /** `{ parsed: true }`: the parser's default output. */
+  (params: WrapperParams & { parsed: true }): Promise<P>;
+  /** The raw payload. */
+  (params?: WrapperParams): Promise<unknown>;
+}

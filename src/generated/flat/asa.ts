@@ -6,7 +6,16 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  AsaGamesRow,
+  AsaPlayersRow,
+  AsaPlayersGoalsAddedRow,
+  AsaPlayersSalariesRow,
+  AsaPlayersXgoalsRow,
+  AsaTeamsRow,
+  AsaTeamsGoalsAddedRow,
+} from "../rows/asa.js";
 
 const GAMES_DEF: WrapperDef = {
   "short": "games",
@@ -35,7 +44,7 @@ const GAMES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaGames({ league_slug: '…' });
  */
-export const asaGames: WrapperFn = (params = {}) => callFlat(GAMES_DEF, params);
+export const asaGames: Wrapper<AsaGamesRow[]> = (params: WrapperParams = {}) => callFlat(GAMES_DEF, params);
 /** snake_case alias of {@link asaGames} (py/R parity). */
 export const asa_games = asaGames;
 
@@ -112,7 +121,7 @@ const GAMES_XGOALS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaGamesXgoals({ league_slug: '…' });
  */
-export const asaGamesXgoals: WrapperFn = (params = {}) => callFlat(GAMES_XGOALS_DEF, params);
+export const asaGamesXgoals: Wrapper = (params: WrapperParams = {}) => callFlat(GAMES_XGOALS_DEF, params);
 /** snake_case alias of {@link asaGamesXgoals} (py/R parity). */
 export const asa_games_xgoals = asaGamesXgoals;
 
@@ -190,7 +199,7 @@ const GOALKEEPERS_GOALS_ADDED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaGoalkeepersGoalsAdded({ league_slug: '…' });
  */
-export const asaGoalkeepersGoalsAdded: WrapperFn = (params = {}) => callFlat(GOALKEEPERS_GOALS_ADDED_DEF, params);
+export const asaGoalkeepersGoalsAdded: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(GOALKEEPERS_GOALS_ADDED_DEF, params);
 /** snake_case alias of {@link asaGoalkeepersGoalsAdded} (py/R parity). */
 export const asa_goalkeepers_goals_added = asaGoalkeepersGoalsAdded;
 
@@ -267,7 +276,7 @@ const GOALKEEPERS_XGOALS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaGoalkeepersXgoals({ league_slug: '…' });
  */
-export const asaGoalkeepersXgoals: WrapperFn = (params = {}) => callFlat(GOALKEEPERS_XGOALS_DEF, params);
+export const asaGoalkeepersXgoals: Wrapper = (params: WrapperParams = {}) => callFlat(GOALKEEPERS_XGOALS_DEF, params);
 /** snake_case alias of {@link asaGoalkeepersXgoals} (py/R parity). */
 export const asa_goalkeepers_xgoals = asaGoalkeepersXgoals;
 
@@ -298,7 +307,7 @@ const MANAGERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaManagers({ league_slug: '…' });
  */
-export const asaManagers: WrapperFn = (params = {}) => callFlat(MANAGERS_DEF, params);
+export const asaManagers: Wrapper = (params: WrapperParams = {}) => callFlat(MANAGERS_DEF, params);
 /** snake_case alias of {@link asaManagers} (py/R parity). */
 export const asa_managers = asaManagers;
 
@@ -329,7 +338,7 @@ const PLAYERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaPlayers({ league_slug: '…' });
  */
-export const asaPlayers: WrapperFn = (params = {}) => callFlat(PLAYERS_DEF, params);
+export const asaPlayers: Wrapper<AsaPlayersRow[]> = (params: WrapperParams = {}) => callFlat(PLAYERS_DEF, params);
 /** snake_case alias of {@link asaPlayers} (py/R parity). */
 export const asa_players = asaPlayers;
 
@@ -407,7 +416,7 @@ const PLAYERS_GOALS_ADDED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaPlayersGoalsAdded({ league_slug: '…' });
  */
-export const asaPlayersGoalsAdded: WrapperFn = (params = {}) => callFlat(PLAYERS_GOALS_ADDED_DEF, params);
+export const asaPlayersGoalsAdded: SectionedWrapper<AsaPlayersGoalsAddedRow[], { summary: AsaPlayersGoalsAddedRow[] }> = (params: WrapperParams = {}) => callFlat(PLAYERS_GOALS_ADDED_DEF, params);
 /** snake_case alias of {@link asaPlayersGoalsAdded} (py/R parity). */
 export const asa_players_goals_added = asaPlayersGoalsAdded;
 
@@ -484,7 +493,7 @@ const PLAYERS_SALARIES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaPlayersSalaries({ league_slug: '…' });
  */
-export const asaPlayersSalaries: WrapperFn = (params = {}) => callFlat(PLAYERS_SALARIES_DEF, params);
+export const asaPlayersSalaries: Wrapper<AsaPlayersSalariesRow[]> = (params: WrapperParams = {}) => callFlat(PLAYERS_SALARIES_DEF, params);
 /** snake_case alias of {@link asaPlayersSalaries} (py/R parity). */
 export const asa_players_salaries = asaPlayersSalaries;
 
@@ -561,7 +570,7 @@ const PLAYERS_XGOALS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaPlayersXgoals({ league_slug: '…' });
  */
-export const asaPlayersXgoals: WrapperFn = (params = {}) => callFlat(PLAYERS_XGOALS_DEF, params);
+export const asaPlayersXgoals: Wrapper<AsaPlayersXgoalsRow[]> = (params: WrapperParams = {}) => callFlat(PLAYERS_XGOALS_DEF, params);
 /** snake_case alias of {@link asaPlayersXgoals} (py/R parity). */
 export const asa_players_xgoals = asaPlayersXgoals;
 
@@ -592,7 +601,7 @@ const REFEREES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaReferees({ league_slug: '…' });
  */
-export const asaReferees: WrapperFn = (params = {}) => callFlat(REFEREES_DEF, params);
+export const asaReferees: Wrapper = (params: WrapperParams = {}) => callFlat(REFEREES_DEF, params);
 /** snake_case alias of {@link asaReferees} (py/R parity). */
 export const asa_referees = asaReferees;
 
@@ -623,7 +632,7 @@ const STADIA_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaStadia({ league_slug: '…' });
  */
-export const asaStadia: WrapperFn = (params = {}) => callFlat(STADIA_DEF, params);
+export const asaStadia: Wrapper = (params: WrapperParams = {}) => callFlat(STADIA_DEF, params);
 /** snake_case alias of {@link asaStadia} (py/R parity). */
 export const asa_stadia = asaStadia;
 
@@ -654,7 +663,7 @@ const TEAMS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaTeams({ league_slug: '…' });
  */
-export const asaTeams: WrapperFn = (params = {}) => callFlat(TEAMS_DEF, params);
+export const asaTeams: Wrapper<AsaTeamsRow[]> = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
 /** snake_case alias of {@link asaTeams} (py/R parity). */
 export const asa_teams = asaTeams;
 
@@ -732,7 +741,7 @@ const TEAMS_GOALS_ADDED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaTeamsGoalsAdded({ league_slug: '…' });
  */
-export const asaTeamsGoalsAdded: WrapperFn = (params = {}) => callFlat(TEAMS_GOALS_ADDED_DEF, params);
+export const asaTeamsGoalsAdded: SectionedWrapper<AsaTeamsGoalsAddedRow[], { summary: AsaTeamsGoalsAddedRow[] }> = (params: WrapperParams = {}) => callFlat(TEAMS_GOALS_ADDED_DEF, params);
 /** snake_case alias of {@link asaTeamsGoalsAdded} (py/R parity). */
 export const asa_teams_goals_added = asaTeamsGoalsAdded;
 
@@ -809,7 +818,7 @@ const TEAMS_XGOALS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaTeamsXgoals({ league_slug: '…' });
  */
-export const asaTeamsXgoals: WrapperFn = (params = {}) => callFlat(TEAMS_XGOALS_DEF, params);
+export const asaTeamsXgoals: Wrapper = (params: WrapperParams = {}) => callFlat(TEAMS_XGOALS_DEF, params);
 /** snake_case alias of {@link asaTeamsXgoals} (py/R parity). */
 export const asa_teams_xgoals = asaTeamsXgoals;
 
@@ -886,6 +895,6 @@ const TEAMS_XPASS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaTeamsXpass({ league_slug: '…' });
  */
-export const asaTeamsXpass: WrapperFn = (params = {}) => callFlat(TEAMS_XPASS_DEF, params);
+export const asaTeamsXpass: Wrapper = (params: WrapperParams = {}) => callFlat(TEAMS_XPASS_DEF, params);
 /** snake_case alias of {@link asaTeamsXpass} (py/R parity). */
 export const asa_teams_xpass = asaTeamsXpass;

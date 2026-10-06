@@ -6,7 +6,7 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
 
 const FACET_DEFENSE_COVERAGE_DEF: WrapperDef = {
   "short": "facet_defense_coverage",
@@ -66,7 +66,7 @@ const FACET_DEFENSE_COVERAGE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetDefenseCoverage({});
  */
-export const pffApiFacetDefenseCoverage: WrapperFn = (params = {}) => callFlat(FACET_DEFENSE_COVERAGE_DEF, params);
+export const pffApiFacetDefenseCoverage: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_DEFENSE_COVERAGE_DEF, params);
 /** snake_case alias of {@link pffApiFacetDefenseCoverage} (py/R parity). */
 export const pff_api_facet_defense_coverage = pffApiFacetDefenseCoverage;
 
@@ -128,7 +128,7 @@ const FACET_DEFENSE_COVERAGE_MATCHUP_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `defenders`, `receivers`, `versus`.
  * @example await sdv.nfl.pffApiFacetDefenseCoverageMatchup({});
  */
-export const pffApiFacetDefenseCoverageMatchup: WrapperFn = (params = {}) => callFlat(FACET_DEFENSE_COVERAGE_MATCHUP_DEF, params);
+export const pffApiFacetDefenseCoverageMatchup: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_DEFENSE_COVERAGE_MATCHUP_DEF, params);
 /** snake_case alias of {@link pffApiFacetDefenseCoverageMatchup} (py/R parity). */
 export const pff_api_facet_defense_coverage_matchup = pffApiFacetDefenseCoverageMatchup;
 
@@ -190,7 +190,7 @@ const FACET_DEFENSE_COVERAGE_SCHEME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetDefenseCoverageScheme({});
  */
-export const pffApiFacetDefenseCoverageScheme: WrapperFn = (params = {}) => callFlat(FACET_DEFENSE_COVERAGE_SCHEME_DEF, params);
+export const pffApiFacetDefenseCoverageScheme: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_DEFENSE_COVERAGE_SCHEME_DEF, params);
 /** snake_case alias of {@link pffApiFacetDefenseCoverageScheme} (py/R parity). */
 export const pff_api_facet_defense_coverage_scheme = pffApiFacetDefenseCoverageScheme;
 
@@ -252,7 +252,7 @@ const FACET_DEFENSE_PASS_RUSH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetDefensePassRush({});
  */
-export const pffApiFacetDefensePassRush: WrapperFn = (params = {}) => callFlat(FACET_DEFENSE_PASS_RUSH_DEF, params);
+export const pffApiFacetDefensePassRush: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_DEFENSE_PASS_RUSH_DEF, params);
 /** snake_case alias of {@link pffApiFacetDefensePassRush} (py/R parity). */
 export const pff_api_facet_defense_pass_rush = pffApiFacetDefensePassRush;
 
@@ -314,7 +314,7 @@ const FACET_DEFENSE_RUN_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetDefenseRun({});
  */
-export const pffApiFacetDefenseRun: WrapperFn = (params = {}) => callFlat(FACET_DEFENSE_RUN_DEF, params);
+export const pffApiFacetDefenseRun: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_DEFENSE_RUN_DEF, params);
 /** snake_case alias of {@link pffApiFacetDefenseRun} (py/R parity). */
 export const pff_api_facet_defense_run = pffApiFacetDefenseRun;
 
@@ -376,7 +376,7 @@ const FACET_DEFENSE_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetDefenseSummary({});
  */
-export const pffApiFacetDefenseSummary: WrapperFn = (params = {}) => callFlat(FACET_DEFENSE_SUMMARY_DEF, params);
+export const pffApiFacetDefenseSummary: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_DEFENSE_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetDefenseSummary} (py/R parity). */
 export const pff_api_facet_defense_summary = pffApiFacetDefenseSummary;
 
@@ -438,7 +438,7 @@ const FACET_FIELD_GOAL_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetFieldGoalSummary({});
  */
-export const pffApiFacetFieldGoalSummary: WrapperFn = (params = {}) => callFlat(FACET_FIELD_GOAL_SUMMARY_DEF, params);
+export const pffApiFacetFieldGoalSummary: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_FIELD_GOAL_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetFieldGoalSummary} (py/R parity). */
 export const pff_api_facet_field_goal_summary = pffApiFacetFieldGoalSummary;
 
@@ -500,7 +500,7 @@ const FACET_KICKOFF_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetKickoffSummary({});
  */
-export const pffApiFacetKickoffSummary: WrapperFn = (params = {}) => callFlat(FACET_KICKOFF_SUMMARY_DEF, params);
+export const pffApiFacetKickoffSummary: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_KICKOFF_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetKickoffSummary} (py/R parity). */
 export const pff_api_facet_kickoff_summary = pffApiFacetKickoffSummary;
 
@@ -562,7 +562,7 @@ const FACET_OFFENSE_BLOCKING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetOffenseBlocking({});
  */
-export const pffApiFacetOffenseBlocking: WrapperFn = (params = {}) => callFlat(FACET_OFFENSE_BLOCKING_DEF, params);
+export const pffApiFacetOffenseBlocking: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_OFFENSE_BLOCKING_DEF, params);
 /** snake_case alias of {@link pffApiFacetOffenseBlocking} (py/R parity). */
 export const pff_api_facet_offense_blocking = pffApiFacetOffenseBlocking;
 
@@ -624,7 +624,7 @@ const FACET_OFFENSE_PASS_BLOCKING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetOffensePassBlocking({});
  */
-export const pffApiFacetOffensePassBlocking: WrapperFn = (params = {}) => callFlat(FACET_OFFENSE_PASS_BLOCKING_DEF, params);
+export const pffApiFacetOffensePassBlocking: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_OFFENSE_PASS_BLOCKING_DEF, params);
 /** snake_case alias of {@link pffApiFacetOffensePassBlocking} (py/R parity). */
 export const pff_api_facet_offense_pass_blocking = pffApiFacetOffensePassBlocking;
 
@@ -686,7 +686,7 @@ const FACET_OFFENSE_RUN_BLOCKING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetOffenseRunBlocking({});
  */
-export const pffApiFacetOffenseRunBlocking: WrapperFn = (params = {}) => callFlat(FACET_OFFENSE_RUN_BLOCKING_DEF, params);
+export const pffApiFacetOffenseRunBlocking: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_OFFENSE_RUN_BLOCKING_DEF, params);
 /** snake_case alias of {@link pffApiFacetOffenseRunBlocking} (py/R parity). */
 export const pff_api_facet_offense_run_blocking = pffApiFacetOffenseRunBlocking;
 
@@ -748,7 +748,7 @@ const FACET_OFFENSE_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetOffenseSummary({});
  */
-export const pffApiFacetOffenseSummary: WrapperFn = (params = {}) => callFlat(FACET_OFFENSE_SUMMARY_DEF, params);
+export const pffApiFacetOffenseSummary: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_OFFENSE_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetOffenseSummary} (py/R parity). */
 export const pff_api_facet_offense_summary = pffApiFacetOffenseSummary;
 
@@ -810,7 +810,7 @@ const FACET_PASSING_ALLOWED_PRESSURE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetPassingAllowedPressure({});
  */
-export const pffApiFacetPassingAllowedPressure: WrapperFn = (params = {}) => callFlat(FACET_PASSING_ALLOWED_PRESSURE_DEF, params);
+export const pffApiFacetPassingAllowedPressure: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_PASSING_ALLOWED_PRESSURE_DEF, params);
 /** snake_case alias of {@link pffApiFacetPassingAllowedPressure} (py/R parity). */
 export const pff_api_facet_passing_allowed_pressure = pffApiFacetPassingAllowedPressure;
 
@@ -872,7 +872,7 @@ const FACET_PASSING_CONCEPT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetPassingConcept({});
  */
-export const pffApiFacetPassingConcept: WrapperFn = (params = {}) => callFlat(FACET_PASSING_CONCEPT_DEF, params);
+export const pffApiFacetPassingConcept: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_PASSING_CONCEPT_DEF, params);
 /** snake_case alias of {@link pffApiFacetPassingConcept} (py/R parity). */
 export const pff_api_facet_passing_concept = pffApiFacetPassingConcept;
 
@@ -934,7 +934,7 @@ const FACET_PASSING_DEPTH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetPassingDepth({});
  */
-export const pffApiFacetPassingDepth: WrapperFn = (params = {}) => callFlat(FACET_PASSING_DEPTH_DEF, params);
+export const pffApiFacetPassingDepth: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_PASSING_DEPTH_DEF, params);
 /** snake_case alias of {@link pffApiFacetPassingDepth} (py/R parity). */
 export const pff_api_facet_passing_depth = pffApiFacetPassingDepth;
 
@@ -996,7 +996,7 @@ const FACET_PASSING_DETAIL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetPassingDetail({});
  */
-export const pffApiFacetPassingDetail: WrapperFn = (params = {}) => callFlat(FACET_PASSING_DETAIL_DEF, params);
+export const pffApiFacetPassingDetail: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_PASSING_DETAIL_DEF, params);
 /** snake_case alias of {@link pffApiFacetPassingDetail} (py/R parity). */
 export const pff_api_facet_passing_detail = pffApiFacetPassingDetail;
 
@@ -1058,7 +1058,7 @@ const FACET_PASSING_PRESSURE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetPassingPressure({});
  */
-export const pffApiFacetPassingPressure: WrapperFn = (params = {}) => callFlat(FACET_PASSING_PRESSURE_DEF, params);
+export const pffApiFacetPassingPressure: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_PASSING_PRESSURE_DEF, params);
 /** snake_case alias of {@link pffApiFacetPassingPressure} (py/R parity). */
 export const pff_api_facet_passing_pressure = pffApiFacetPassingPressure;
 
@@ -1120,7 +1120,7 @@ const FACET_PASSING_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetPassingSummary({});
  */
-export const pffApiFacetPassingSummary: WrapperFn = (params = {}) => callFlat(FACET_PASSING_SUMMARY_DEF, params);
+export const pffApiFacetPassingSummary: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_PASSING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetPassingSummary} (py/R parity). */
 export const pff_api_facet_passing_summary = pffApiFacetPassingSummary;
 
@@ -1182,7 +1182,7 @@ const FACET_PUNTING_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetPuntingSummary({});
  */
-export const pffApiFacetPuntingSummary: WrapperFn = (params = {}) => callFlat(FACET_PUNTING_SUMMARY_DEF, params);
+export const pffApiFacetPuntingSummary: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_PUNTING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetPuntingSummary} (py/R parity). */
 export const pff_api_facet_punting_summary = pffApiFacetPuntingSummary;
 
@@ -1244,7 +1244,7 @@ const FACET_RECEIVING_CONCEPT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetReceivingConcept({});
  */
-export const pffApiFacetReceivingConcept: WrapperFn = (params = {}) => callFlat(FACET_RECEIVING_CONCEPT_DEF, params);
+export const pffApiFacetReceivingConcept: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_RECEIVING_CONCEPT_DEF, params);
 /** snake_case alias of {@link pffApiFacetReceivingConcept} (py/R parity). */
 export const pff_api_facet_receiving_concept = pffApiFacetReceivingConcept;
 
@@ -1306,7 +1306,7 @@ const FACET_RECEIVING_COVERAGE_DEF: WrapperDef = {
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `defenders`, `receivers`, `versus`.
  * @example await sdv.nfl.pffApiFacetReceivingCoverage({});
  */
-export const pffApiFacetReceivingCoverage: WrapperFn = (params = {}) => callFlat(FACET_RECEIVING_COVERAGE_DEF, params);
+export const pffApiFacetReceivingCoverage: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_RECEIVING_COVERAGE_DEF, params);
 /** snake_case alias of {@link pffApiFacetReceivingCoverage} (py/R parity). */
 export const pff_api_facet_receiving_coverage = pffApiFacetReceivingCoverage;
 
@@ -1368,7 +1368,7 @@ const FACET_RECEIVING_DEPTH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetReceivingDepth({});
  */
-export const pffApiFacetReceivingDepth: WrapperFn = (params = {}) => callFlat(FACET_RECEIVING_DEPTH_DEF, params);
+export const pffApiFacetReceivingDepth: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_RECEIVING_DEPTH_DEF, params);
 /** snake_case alias of {@link pffApiFacetReceivingDepth} (py/R parity). */
 export const pff_api_facet_receiving_depth = pffApiFacetReceivingDepth;
 
@@ -1430,7 +1430,7 @@ const FACET_RECEIVING_SCHEME_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetReceivingScheme({});
  */
-export const pffApiFacetReceivingScheme: WrapperFn = (params = {}) => callFlat(FACET_RECEIVING_SCHEME_DEF, params);
+export const pffApiFacetReceivingScheme: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_RECEIVING_SCHEME_DEF, params);
 /** snake_case alias of {@link pffApiFacetReceivingScheme} (py/R parity). */
 export const pff_api_facet_receiving_scheme = pffApiFacetReceivingScheme;
 
@@ -1492,7 +1492,7 @@ const FACET_RECEIVING_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetReceivingSummary({});
  */
-export const pffApiFacetReceivingSummary: WrapperFn = (params = {}) => callFlat(FACET_RECEIVING_SUMMARY_DEF, params);
+export const pffApiFacetReceivingSummary: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_RECEIVING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetReceivingSummary} (py/R parity). */
 export const pff_api_facet_receiving_summary = pffApiFacetReceivingSummary;
 
@@ -1554,7 +1554,7 @@ const FACET_RETURN_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetReturnSummary({});
  */
-export const pffApiFacetReturnSummary: WrapperFn = (params = {}) => callFlat(FACET_RETURN_SUMMARY_DEF, params);
+export const pffApiFacetReturnSummary: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_RETURN_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetReturnSummary} (py/R parity). */
 export const pff_api_facet_return_summary = pffApiFacetReturnSummary;
 
@@ -1616,7 +1616,7 @@ const FACET_RUSHING_DIRECTION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetRushingDirection({});
  */
-export const pffApiFacetRushingDirection: WrapperFn = (params = {}) => callFlat(FACET_RUSHING_DIRECTION_DEF, params);
+export const pffApiFacetRushingDirection: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_RUSHING_DIRECTION_DEF, params);
 /** snake_case alias of {@link pffApiFacetRushingDirection} (py/R parity). */
 export const pff_api_facet_rushing_direction = pffApiFacetRushingDirection;
 
@@ -1678,7 +1678,7 @@ const FACET_RUSHING_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetRushingSummary({});
  */
-export const pffApiFacetRushingSummary: WrapperFn = (params = {}) => callFlat(FACET_RUSHING_SUMMARY_DEF, params);
+export const pffApiFacetRushingSummary: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_RUSHING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetRushingSummary} (py/R parity). */
 export const pff_api_facet_rushing_summary = pffApiFacetRushingSummary;
 
@@ -1740,7 +1740,7 @@ const FACET_SPECIAL_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiFacetSpecialSummary({});
  */
-export const pffApiFacetSpecialSummary: WrapperFn = (params = {}) => callFlat(FACET_SPECIAL_SUMMARY_DEF, params);
+export const pffApiFacetSpecialSummary: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(FACET_SPECIAL_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiFacetSpecialSummary} (py/R parity). */
 export const pff_api_facet_special_summary = pffApiFacetSpecialSummary;
 
@@ -1797,7 +1797,7 @@ const PLAYER_DEFENSE_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerDefenseSummary({});
  */
-export const pffApiPlayerDefenseSummary: WrapperFn = (params = {}) => callFlat(PLAYER_DEFENSE_SUMMARY_DEF, params);
+export const pffApiPlayerDefenseSummary: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_DEFENSE_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerDefenseSummary} (py/R parity). */
 export const pff_api_player_defense_summary = pffApiPlayerDefenseSummary;
 
@@ -1854,7 +1854,7 @@ const PLAYER_FIELD_GOAL_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerFieldGoalSummary({});
  */
-export const pffApiPlayerFieldGoalSummary: WrapperFn = (params = {}) => callFlat(PLAYER_FIELD_GOAL_SUMMARY_DEF, params);
+export const pffApiPlayerFieldGoalSummary: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_FIELD_GOAL_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerFieldGoalSummary} (py/R parity). */
 export const pff_api_player_field_goal_summary = pffApiPlayerFieldGoalSummary;
 
@@ -1911,7 +1911,7 @@ const PLAYER_KICKOFF_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerKickoffSummary({});
  */
-export const pffApiPlayerKickoffSummary: WrapperFn = (params = {}) => callFlat(PLAYER_KICKOFF_SUMMARY_DEF, params);
+export const pffApiPlayerKickoffSummary: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_KICKOFF_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerKickoffSummary} (py/R parity). */
 export const pff_api_player_kickoff_summary = pffApiPlayerKickoffSummary;
 
@@ -1968,7 +1968,7 @@ const PLAYER_OFFENSE_BLOCKING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerOffenseBlocking({});
  */
-export const pffApiPlayerOffenseBlocking: WrapperFn = (params = {}) => callFlat(PLAYER_OFFENSE_BLOCKING_DEF, params);
+export const pffApiPlayerOffenseBlocking: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_OFFENSE_BLOCKING_DEF, params);
 /** snake_case alias of {@link pffApiPlayerOffenseBlocking} (py/R parity). */
 export const pff_api_player_offense_blocking = pffApiPlayerOffenseBlocking;
 
@@ -2025,7 +2025,7 @@ const PLAYER_OFFENSE_PASS_BLOCKING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerOffensePassBlocking({});
  */
-export const pffApiPlayerOffensePassBlocking: WrapperFn = (params = {}) => callFlat(PLAYER_OFFENSE_PASS_BLOCKING_DEF, params);
+export const pffApiPlayerOffensePassBlocking: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_OFFENSE_PASS_BLOCKING_DEF, params);
 /** snake_case alias of {@link pffApiPlayerOffensePassBlocking} (py/R parity). */
 export const pff_api_player_offense_pass_blocking = pffApiPlayerOffensePassBlocking;
 
@@ -2082,7 +2082,7 @@ const PLAYER_OFFENSE_RUN_BLOCKING_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerOffenseRunBlocking({});
  */
-export const pffApiPlayerOffenseRunBlocking: WrapperFn = (params = {}) => callFlat(PLAYER_OFFENSE_RUN_BLOCKING_DEF, params);
+export const pffApiPlayerOffenseRunBlocking: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_OFFENSE_RUN_BLOCKING_DEF, params);
 /** snake_case alias of {@link pffApiPlayerOffenseRunBlocking} (py/R parity). */
 export const pff_api_player_offense_run_blocking = pffApiPlayerOffenseRunBlocking;
 
@@ -2139,7 +2139,7 @@ const PLAYER_OFFENSE_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerOffenseSummary({});
  */
-export const pffApiPlayerOffenseSummary: WrapperFn = (params = {}) => callFlat(PLAYER_OFFENSE_SUMMARY_DEF, params);
+export const pffApiPlayerOffenseSummary: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_OFFENSE_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerOffenseSummary} (py/R parity). */
 export const pff_api_player_offense_summary = pffApiPlayerOffenseSummary;
 
@@ -2196,7 +2196,7 @@ const PLAYER_PASSING_CONCEPT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerPassingConcept({});
  */
-export const pffApiPlayerPassingConcept: WrapperFn = (params = {}) => callFlat(PLAYER_PASSING_CONCEPT_DEF, params);
+export const pffApiPlayerPassingConcept: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYER_PASSING_CONCEPT_DEF, params);
 /** snake_case alias of {@link pffApiPlayerPassingConcept} (py/R parity). */
 export const pff_api_player_passing_concept = pffApiPlayerPassingConcept;
 
@@ -2253,7 +2253,7 @@ const PLAYER_PASSING_DEPTH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerPassingDepth({});
  */
-export const pffApiPlayerPassingDepth: WrapperFn = (params = {}) => callFlat(PLAYER_PASSING_DEPTH_DEF, params);
+export const pffApiPlayerPassingDepth: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYER_PASSING_DEPTH_DEF, params);
 /** snake_case alias of {@link pffApiPlayerPassingDepth} (py/R parity). */
 export const pff_api_player_passing_depth = pffApiPlayerPassingDepth;
 
@@ -2310,7 +2310,7 @@ const PLAYER_PASSING_PRESSURE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerPassingPressure({});
  */
-export const pffApiPlayerPassingPressure: WrapperFn = (params = {}) => callFlat(PLAYER_PASSING_PRESSURE_DEF, params);
+export const pffApiPlayerPassingPressure: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYER_PASSING_PRESSURE_DEF, params);
 /** snake_case alias of {@link pffApiPlayerPassingPressure} (py/R parity). */
 export const pff_api_player_passing_pressure = pffApiPlayerPassingPressure;
 
@@ -2367,7 +2367,7 @@ const PLAYER_PASSING_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerPassingSummary({});
  */
-export const pffApiPlayerPassingSummary: WrapperFn = (params = {}) => callFlat(PLAYER_PASSING_SUMMARY_DEF, params);
+export const pffApiPlayerPassingSummary: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_PASSING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerPassingSummary} (py/R parity). */
 export const pff_api_player_passing_summary = pffApiPlayerPassingSummary;
 
@@ -2419,7 +2419,7 @@ const PLAYER_POSITION_PIVOT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerPositionPivot({});
  */
-export const pffApiPlayerPositionPivot: WrapperFn = (params = {}) => callFlat(PLAYER_POSITION_PIVOT_DEF, params);
+export const pffApiPlayerPositionPivot: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYER_POSITION_PIVOT_DEF, params);
 /** snake_case alias of {@link pffApiPlayerPositionPivot} (py/R parity). */
 export const pff_api_player_position_pivot = pffApiPlayerPositionPivot;
 
@@ -2476,7 +2476,7 @@ const PLAYER_PUNTING_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerPuntingSummary({});
  */
-export const pffApiPlayerPuntingSummary: WrapperFn = (params = {}) => callFlat(PLAYER_PUNTING_SUMMARY_DEF, params);
+export const pffApiPlayerPuntingSummary: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_PUNTING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerPuntingSummary} (py/R parity). */
 export const pff_api_player_punting_summary = pffApiPlayerPuntingSummary;
 
@@ -2533,7 +2533,7 @@ const PLAYER_RECEIVING_DEPTH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerReceivingDepth({});
  */
-export const pffApiPlayerReceivingDepth: WrapperFn = (params = {}) => callFlat(PLAYER_RECEIVING_DEPTH_DEF, params);
+export const pffApiPlayerReceivingDepth: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYER_RECEIVING_DEPTH_DEF, params);
 /** snake_case alias of {@link pffApiPlayerReceivingDepth} (py/R parity). */
 export const pff_api_player_receiving_depth = pffApiPlayerReceivingDepth;
 
@@ -2590,7 +2590,7 @@ const PLAYER_RECEIVING_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerReceivingSummary({});
  */
-export const pffApiPlayerReceivingSummary: WrapperFn = (params = {}) => callFlat(PLAYER_RECEIVING_SUMMARY_DEF, params);
+export const pffApiPlayerReceivingSummary: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_RECEIVING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerReceivingSummary} (py/R parity). */
 export const pff_api_player_receiving_summary = pffApiPlayerReceivingSummary;
 
@@ -2647,7 +2647,7 @@ const PLAYER_RETURN_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerReturnSummary({});
  */
-export const pffApiPlayerReturnSummary: WrapperFn = (params = {}) => callFlat(PLAYER_RETURN_SUMMARY_DEF, params);
+export const pffApiPlayerReturnSummary: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_RETURN_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerReturnSummary} (py/R parity). */
 export const pff_api_player_return_summary = pffApiPlayerReturnSummary;
 
@@ -2704,7 +2704,7 @@ const PLAYER_RUSHING_DIRECTION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerRushingDirection({});
  */
-export const pffApiPlayerRushingDirection: WrapperFn = (params = {}) => callFlat(PLAYER_RUSHING_DIRECTION_DEF, params);
+export const pffApiPlayerRushingDirection: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYER_RUSHING_DIRECTION_DEF, params);
 /** snake_case alias of {@link pffApiPlayerRushingDirection} (py/R parity). */
 export const pff_api_player_rushing_direction = pffApiPlayerRushingDirection;
 
@@ -2761,7 +2761,7 @@ const PLAYER_RUSHING_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerRushingSummary({});
  */
-export const pffApiPlayerRushingSummary: WrapperFn = (params = {}) => callFlat(PLAYER_RUSHING_SUMMARY_DEF, params);
+export const pffApiPlayerRushingSummary: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_RUSHING_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerRushingSummary} (py/R parity). */
 export const pff_api_player_rushing_summary = pffApiPlayerRushingSummary;
 
@@ -2813,7 +2813,7 @@ const PLAYER_SEASONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerSeasons({});
  */
-export const pffApiPlayerSeasons: WrapperFn = (params = {}) => callFlat(PLAYER_SEASONS_DEF, params);
+export const pffApiPlayerSeasons: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYER_SEASONS_DEF, params);
 /** snake_case alias of {@link pffApiPlayerSeasons} (py/R parity). */
 export const pff_api_player_seasons = pffApiPlayerSeasons;
 
@@ -2865,7 +2865,7 @@ const PLAYER_SNAPS_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerSnapsSummary({});
  */
-export const pffApiPlayerSnapsSummary: WrapperFn = (params = {}) => callFlat(PLAYER_SNAPS_SUMMARY_DEF, params);
+export const pffApiPlayerSnapsSummary: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(PLAYER_SNAPS_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerSnapsSummary} (py/R parity). */
 export const pff_api_player_snaps_summary = pffApiPlayerSnapsSummary;
 
@@ -2922,7 +2922,7 @@ const PLAYER_SPECIAL_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiPlayerSpecialSummary({});
  */
-export const pffApiPlayerSpecialSummary: WrapperFn = (params = {}) => callFlat(PLAYER_SPECIAL_SUMMARY_DEF, params);
+export const pffApiPlayerSpecialSummary: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(PLAYER_SPECIAL_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiPlayerSpecialSummary} (py/R parity). */
 export const pff_api_player_special_summary = pffApiPlayerSpecialSummary;
 
@@ -2983,7 +2983,7 @@ const POSITION_REPORT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }` (its columns depend on `report`).
  * @example await sdv.nfl.pffApiPositionReport({ league: '…', report: '…' });
  */
-export const pffApiPositionReport: WrapperFn = (params = {}) => callFlat(POSITION_REPORT_DEF, params);
+export const pffApiPositionReport: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(POSITION_REPORT_DEF, params);
 /** snake_case alias of {@link pffApiPositionReport} (py/R parity). */
 export const pff_api_position_report = pffApiPositionReport;
 
@@ -3035,7 +3035,7 @@ const REF_GAMES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiRefGames({});
  */
-export const pffApiRefGames: WrapperFn = (params = {}) => callFlat(REF_GAMES_DEF, params);
+export const pffApiRefGames: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(REF_GAMES_DEF, params);
 /** snake_case alias of {@link pffApiRefGames} (py/R parity). */
 export const pff_api_ref_games = pffApiRefGames;
 
@@ -3066,7 +3066,7 @@ const REF_LEAGUES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiRefLeagues({});
  */
-export const pffApiRefLeagues: WrapperFn = (params = {}) => callFlat(REF_LEAGUES_DEF, params);
+export const pffApiRefLeagues: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(REF_LEAGUES_DEF, params);
 /** snake_case alias of {@link pffApiRefLeagues} (py/R parity). */
 export const pff_api_ref_leagues = pffApiRefLeagues;
 
@@ -3113,7 +3113,7 @@ const REF_PLAYERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiRefPlayers({});
  */
-export const pffApiRefPlayers: WrapperFn = (params = {}) => callFlat(REF_PLAYERS_DEF, params);
+export const pffApiRefPlayers: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(REF_PLAYERS_DEF, params);
 /** snake_case alias of {@link pffApiRefPlayers} (py/R parity). */
 export const pff_api_ref_players = pffApiRefPlayers;
 
@@ -3160,7 +3160,7 @@ const SIGNATURE_DEFENSE_OUTSIDE_PASS_RUSH_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiSignatureDefenseOutsidePassRush({});
  */
-export const pffApiSignatureDefenseOutsidePassRush: WrapperFn = (params = {}) => callFlat(SIGNATURE_DEFENSE_OUTSIDE_PASS_RUSH_DEF, params);
+export const pffApiSignatureDefenseOutsidePassRush: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(SIGNATURE_DEFENSE_OUTSIDE_PASS_RUSH_DEF, params);
 /** snake_case alias of {@link pffApiSignatureDefenseOutsidePassRush} (py/R parity). */
 export const pff_api_signature_defense_outside_pass_rush = pffApiSignatureDefenseOutsidePassRush;
 
@@ -3207,7 +3207,7 @@ const SIGNATURE_DEFENSE_SLOT_COVERAGE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiSignatureDefenseSlotCoverage({});
  */
-export const pffApiSignatureDefenseSlotCoverage: WrapperFn = (params = {}) => callFlat(SIGNATURE_DEFENSE_SLOT_COVERAGE_DEF, params);
+export const pffApiSignatureDefenseSlotCoverage: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(SIGNATURE_DEFENSE_SLOT_COVERAGE_DEF, params);
 /** snake_case alias of {@link pffApiSignatureDefenseSlotCoverage} (py/R parity). */
 export const pff_api_signature_defense_slot_coverage = pffApiSignatureDefenseSlotCoverage;
 
@@ -3254,7 +3254,7 @@ const SIGNATURE_PASS_BLOCKING_EFFICIENCY_LINE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiSignaturePassBlockingEfficiencyLine({});
  */
-export const pffApiSignaturePassBlockingEfficiencyLine: WrapperFn = (params = {}) => callFlat(SIGNATURE_PASS_BLOCKING_EFFICIENCY_LINE_DEF, params);
+export const pffApiSignaturePassBlockingEfficiencyLine: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(SIGNATURE_PASS_BLOCKING_EFFICIENCY_LINE_DEF, params);
 /** snake_case alias of {@link pffApiSignaturePassBlockingEfficiencyLine} (py/R parity). */
 export const pff_api_signature_pass_blocking_efficiency_line = pffApiSignaturePassBlockingEfficiencyLine;
 
@@ -3301,7 +3301,7 @@ const SIGNATURE_PASSING_TIME_IN_POCKET_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiSignaturePassingTimeInPocket({});
  */
-export const pffApiSignaturePassingTimeInPocket: WrapperFn = (params = {}) => callFlat(SIGNATURE_PASSING_TIME_IN_POCKET_DEF, params);
+export const pffApiSignaturePassingTimeInPocket: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(SIGNATURE_PASSING_TIME_IN_POCKET_DEF, params);
 /** snake_case alias of {@link pffApiSignaturePassingTimeInPocket} (py/R parity). */
 export const pff_api_signature_passing_time_in_pocket = pffApiSignaturePassingTimeInPocket;
 
@@ -3343,7 +3343,7 @@ const TEAM_DIRECTORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiTeamDirectory({ league: '…' });
  */
-export const pffApiTeamDirectory: WrapperFn = (params = {}) => callFlat(TEAM_DIRECTORY_DEF, params);
+export const pffApiTeamDirectory: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(TEAM_DIRECTORY_DEF, params);
 /** snake_case alias of {@link pffApiTeamDirectory} (py/R parity). */
 export const pff_api_team_directory = pffApiTeamDirectory;
 
@@ -3399,7 +3399,7 @@ const TEAM_LEADERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }` (its columns depend on `group`).
  * @example await sdv.nfl.pffApiTeamLeaders({ league: '…', team: '…' });
  */
-export const pffApiTeamLeaders: WrapperFn = (params = {}) => callFlat(TEAM_LEADERS_DEF, params);
+export const pffApiTeamLeaders: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(TEAM_LEADERS_DEF, params);
 /** snake_case alias of {@link pffApiTeamLeaders} (py/R parity). */
 export const pff_api_team_leaders = pffApiTeamLeaders;
 
@@ -3451,7 +3451,7 @@ const TEAM_LIST_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiTeamList({});
  */
-export const pffApiTeamList: WrapperFn = (params = {}) => callFlat(TEAM_LIST_DEF, params);
+export const pffApiTeamList: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(TEAM_LIST_DEF, params);
 /** snake_case alias of {@link pffApiTeamList} (py/R parity). */
 export const pff_api_team_list = pffApiTeamList;
 
@@ -3503,7 +3503,7 @@ const TEAM_OVERVIEW_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiTeamOverview({});
  */
-export const pffApiTeamOverview: WrapperFn = (params = {}) => callFlat(TEAM_OVERVIEW_DEF, params);
+export const pffApiTeamOverview: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(TEAM_OVERVIEW_DEF, params);
 /** snake_case alias of {@link pffApiTeamOverview} (py/R parity). */
 export const pff_api_team_overview = pffApiTeamOverview;
 
@@ -3568,7 +3568,7 @@ const TEAM_REPORT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }` (its columns depend on `report`).
  * @example await sdv.nfl.pffApiTeamReport({ league: '…', team: '…', report: '…' });
  */
-export const pffApiTeamReport: WrapperFn = (params = {}) => callFlat(TEAM_REPORT_DEF, params);
+export const pffApiTeamReport: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(TEAM_REPORT_DEF, params);
 /** snake_case alias of {@link pffApiTeamReport} (py/R parity). */
 export const pff_api_team_report = pffApiTeamReport;
 
@@ -3614,7 +3614,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiTeamRoster({ league: '…', team: '…' });
  */
-export const pffApiTeamRoster: WrapperFn = (params = {}) => callFlat(TEAM_ROSTER_DEF, params);
+export const pffApiTeamRoster: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_DEF, params);
 /** snake_case alias of {@link pffApiTeamRoster} (py/R parity). */
 export const pff_api_team_roster = pffApiTeamRoster;
 
@@ -3665,7 +3665,7 @@ const TEAM_RUSHING_DIRECTION_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiTeamRushingDirection({ league: '…', team: '…' });
  */
-export const pffApiTeamRushingDirection: WrapperFn = (params = {}) => callFlat(TEAM_RUSHING_DIRECTION_DEF, params);
+export const pffApiTeamRushingDirection: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(TEAM_RUSHING_DIRECTION_DEF, params);
 /** snake_case alias of {@link pffApiTeamRushingDirection} (py/R parity). */
 export const pff_api_team_rushing_direction = pffApiTeamRushingDirection;
 
@@ -3711,7 +3711,7 @@ const TEAM_SCHEDULE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiTeamSchedule({ league: '…', team: '…' });
  */
-export const pffApiTeamSchedule: WrapperFn = (params = {}) => callFlat(TEAM_SCHEDULE_DEF, params);
+export const pffApiTeamSchedule: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(TEAM_SCHEDULE_DEF, params);
 /** snake_case alias of {@link pffApiTeamSchedule} (py/R parity). */
 export const pff_api_team_schedule = pffApiTeamSchedule;
 
@@ -3773,7 +3773,7 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }` (its columns depend on `category`).
  * @example await sdv.nfl.pffApiTeamStats({ league: '…' });
  */
-export const pffApiTeamStats: WrapperFn = (params = {}) => callFlat(TEAM_STATS_DEF, params);
+export const pffApiTeamStats: SectionedWrapper<Row[]> = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link pffApiTeamStats} (py/R parity). */
 export const pff_api_team_stats = pffApiTeamStats;
 
@@ -3825,7 +3825,7 @@ const TEAM_SUMMARY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.pffApiTeamSummary({});
  */
-export const pffApiTeamSummary: WrapperFn = (params = {}) => callFlat(TEAM_SUMMARY_DEF, params);
+export const pffApiTeamSummary: SectionedWrapper<Row[] | ParsedTables> = (params: WrapperParams = {}) => callFlat(TEAM_SUMMARY_DEF, params);
 /** snake_case alias of {@link pffApiTeamSummary} (py/R parity). */
 export const pff_api_team_summary = pffApiTeamSummary;
 
@@ -3853,6 +3853,6 @@ const WHOAMI_DEF: WrapperDef = {
  * @returns The raw response (this endpoint has no parser).
  * @example await sdv.nfl.pffApiWhoami({});
  */
-export const pffApiWhoami: WrapperFn = (params = {}) => callFlat(WHOAMI_DEF, params);
+export const pffApiWhoami: Wrapper<unknown> = (params: WrapperParams = {}) => callFlat(WHOAMI_DEF, params);
 /** snake_case alias of {@link pffApiWhoami} (py/R parity). */
 export const pff_api_whoami = pffApiWhoami;

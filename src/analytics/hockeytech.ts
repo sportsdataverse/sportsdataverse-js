@@ -23,7 +23,8 @@
 //   * An EMPTY play-by-play: py's `enrich_pbp` raises (an empty polars frame has no
 //     `x_coord` column); this returns `[]`.
 
-export type Row = Record<string, any>;
+export type { ParserRow as Row } from "../core/types.js";
+import type { ParserRow as Row } from "../core/types.js";
 
 // ---------------------------------------------------------------------------
 // Python-semantics helpers
