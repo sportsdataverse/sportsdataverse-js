@@ -14,8 +14,8 @@ sidebar_position: 1
 [![Twitter Follow](https://img.shields.io/twitter/follow/SportsDataverse?color=blue&label=%40SportsDataverse&logo=twitter&style=for-the-badge)](https://twitter.com/SportsDataverse)
 
 **`sportsdataverse`** is the SportsDataverse's Node.js client for sports data. As
-of **v3.0.0** it is a **cross-league ESPN client**: a single, uniform surface of
-**126 endpoint wrappers** generated for **29 leagues** — play-by-play, box scores,
+of **v4.0.0** it is a **cross-league ESPN client**: a single, uniform surface of
+**126 endpoint wrappers** generated for **30 leagues** — play-by-play, box scores,
 schedules, rosters, standings, rankings, odds, and more — plus **1059 flat-API
 wrappers across 27 families** (league APIs such as MLB Stats, NHL, NFL.com, MLS, NWSL
 and stats.nba.com, and providers such as The Odds API, 247Sports, CBS, Fox, Yahoo,
@@ -104,7 +104,7 @@ const box = await sdv.cfb.getBoxScore(401628319);
 
 The ESPN client is **generated from a single YAML source of truth**
 (`tools/codegen/endpoints/*.yaml`). Each endpoint is wrapped once and bound to
-every applicable league, so the 126 endpoints × 29 leagues stay perfectly in
+every applicable league, so the 126 endpoints × 30 leagues stay perfectly in
 sync. Endpoints are grouped into **scopes**:
 
 | Scope | Applies to | Examples |

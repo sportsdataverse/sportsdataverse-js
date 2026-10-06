@@ -35,7 +35,7 @@ roster, standings, odds, and many other surfaces across the major leagues.
 As of **v3.0.0** the package is a **cross-league ESPN client _plus_ a native
 (non-ESPN) live-API client** with a tidy parser layer:
 
-- **126 ESPN endpoint short names** generated for **29 leagues** (31 namespaces),
+- **126 ESPN endpoint short names** generated for **30 leagues**,
   exposed as `espn_<league>_<short>` (snake) + `espn<League><Short>` (camelCase).
 - **1059 flat-API wrappers across 27 families** — 14 merged onto a league namespace
   and 13 on standalone provider namespaces (see
@@ -227,7 +227,7 @@ endpoints carry an `include_prefixes` league allowlist and a family `fixed_param
 `src/generated/wrappers.ts`. The pattern is **one core, parameterized on
 `(sport, league)` slugs**, wrapped once per URL family.
 
-- **126 distinct short names** are exposed across **29 leagues** (`leagues.yaml`).
+- **126 distinct short names** are exposed across **30 leagues** (`leagues.yaml`).
 - Each wrapper is registered under BOTH its sdv-py snake_case name (py/R parity)
   and the camelCase form (idiomatic JS) — both resolve to the same function.
 - **v4 names are sdv-py's.** `tools/codegen/generate.mjs` ports py's emit-time rename
@@ -239,10 +239,14 @@ endpoints carry an `include_prefixes` league allowlist and a family `fixed_param
   Never hand-rename; a new py collision goes in `py_reserved` (test/naming.test.js
   compares against sdv-py's generated names at the pin: `tools/codegen/py_public_names.json`,
   derived by `npm run vendor` from the verbatim py modules in `vendor/upstream/py/`).
-- **Pre-v4 names are deprecated aliases.** Every name in the frozen
+- **Pre-v4 names are deprecated aliases.** Every name in
   `tools/codegen/pre_v4_names.json` that a rename replaced is registered by
   `withDeprecatedAliases` (`src/core/deprecation.ts`) from `src/generated/aliases.ts`:
-  it forwards to the v4 wrapper and warns once per name per process. Never edit
+  it forwards to the v4 wrapper and warns once per name per process. The file holds
+  two frozen snapshots — `published` (every name of the `sportsdataverse@3.0.0` npm
+  tarball) and the later pre-v4 development names (`exports` / `namespaces`, read from
+  the built package at origin/main 76b0d719e4) — and aliases derive from their union.
+  Never regenerate or edit
   `pre_v4_names.json`; CBS's pre-v4 shorts are `legacy_short:` in `overlay/cbs.yaml`.
 - Endpoints carry a **scope**: `universal` (every league), `ncaa` (college),
   `football` (NFL / CFB / UFL), `mlb`. Each league gets exactly the endpoints in its
@@ -304,7 +308,7 @@ namespace — **keep the two copies in sync**. `standaloneFlatNamespaces()` in
 `generate.mjs` decides which namespaces are providers (not leagues) and renders them
 their own standalone reference page.
 
-**HockeyTech + BartTorvik (v3.1.0; HockeyTech is JS-owned, `torvik` vendored with JS parsers):**
+**HockeyTech + BartTorvik (4.0.0, planned as 3.1.0; HockeyTech is JS-owned, `torvik` vendored with JS parsers):**
 
 - **HockeyTech / LeagueStat** (`sdv.hockeytech.*`, 16 endpoints: `seasons`,
   `schedule`, `scorebar`, `teams`, `team_roster`, `player_stats`, `player_game_log`,
