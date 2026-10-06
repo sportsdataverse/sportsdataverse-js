@@ -12,3 +12,4 @@ typedoc-build/
 temp/
 # Python bytecode from the oracle generators (tools/parity, tools/oracle, tools/sdv_py_pin.py).
 __pycache__/
+coverage/
