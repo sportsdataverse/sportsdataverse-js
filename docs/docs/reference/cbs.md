@@ -2,6 +2,7 @@
 title: cbs
 sidebar_label: cbs
 sidebar_position: 35
+toc_max_heading_level: 2
 ---
 
 :::danger Breaking in 4.0.0

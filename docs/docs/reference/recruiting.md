@@ -2,6 +2,7 @@
 title: recruiting
 sidebar_label: recruiting
 sidebar_position: 33
+toc_max_heading_level: 2
 ---
 
 :::danger Breaking in 4.0.0

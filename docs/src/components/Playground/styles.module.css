@@ -75,17 +75,28 @@
 }
 
 .codeBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
   margin-top: 1.1rem;
   padding: 0.75rem 0.9rem;
   border-radius: 8px;
   background: var(--ifm-color-emphasis-100);
-  overflow-x: auto;
 }
 
+/* The call scrolls inside its own box at phone widths; the Copy button never leaves the row. */
 .codeBlock code {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.85rem;
   white-space: pre;
+}
+
+.codeBlock .copyBtn {
+  flex: 0 0 auto;
 }
 
 .requestRow {

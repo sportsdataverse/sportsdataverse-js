@@ -1306,6 +1306,7 @@ function renderStandaloneFlatPage(ns, position, flatWrappers) {
     `title: ${ns}\n` +
     `sidebar_label: ${ns}\n` +
     `sidebar_position: ${position}\n` +
+    `toc_max_heading_level: 2\n` +
     `---\n\n` +
     DOCS_NOTE +
     `\n# \`${ns}\` — native provider reference\n\n` +
@@ -1696,6 +1697,8 @@ function renderWrittenLeagueNativePage(league, flatWrappers, position) {
     `title: Native API\n` +
     `sidebar_label: Native API\n` +
     `sidebar_position: ${position}\n` +
+    // one h3 per endpoint (100+ on stats.nba.com): keep the right rail to the family h2s
+    `toc_max_heading_level: 2\n` +
     `---\n\n` +
     DOCS_NOTE +
     `\n# \`sdv.${league.prefix}\` — Native (non-ESPN) APIs\n\n` +
