@@ -91,13 +91,18 @@ npm ci                  # install from the lockfile
 
 npm run build           # tsc -> dist/
 npm run typecheck       # tsc --noEmit
-npm test                # mocha suite (no network) — runs `npm run build` first via pretest
+npm test                # c8 + mocha (no network) — runs `npm run build` first via pretest;
+                        # c8 thresholds (lines / functions / branches) are a GATE: never lower them
 
 npm run codegen         # regenerate src/generated + docs/docs/reference + playground JSON
 npm run codegen:check   # DRIFT GATE — fails if committed generated output is stale
 npm run vendor          # re-vendor sdv-py endpoint YAML + schemas (--ref <sha> | --offline)
 npm run vendor:check    # VENDOR GATE — fails on a hand-edit to a vendored file (offline)
+npm run schemas:captures        # rewrite the capture-derived fox/cbs/yahoo returns schemas
+npm run schemas:captures:check  # CAPTURE-SCHEMA GATE — fails if those schemas drift from the parsers
 npm run bundle:parsers  # esbuild the browser parser bundle for the playground
+npm run docs:examples   # re-run every injected example + examples/*.mjs script, freeze output into the docs
+npm run docs:examples:check # EXAMPLES GATE — fails if an injected block or examples-source.json is stale
 # (`npm run docs` — root TypeDoc HTML — is local-only; the site's TypeDoc API pages are built
 #  by docs/docusaurus.config.js from the entry points listed there, at `cd docs && npm run build`)
 
@@ -126,7 +131,13 @@ npm run pack:check      # npm pack, then attw + publint --strict against that ta
 - The build is `strict: true` over all of `src/` (`tsconfig.strict.json` equals it). No
   new `any`: type a dynamic payload `unknown` and narrow it.
 
-- `test` runs Mocha against `test/**/*.test.js` with no network access.
+- `test` runs Mocha against `test/**/*.test.js` with no network access, under c8.
+- **Local docs build gotcha (Windows dev box):** `@swc/html`'s native addon refuses to load
+  here, so `cd docs && npx docusaurus build` fails in the HTML minimizer. Build through a
+  throwaway wrapper config that spreads the real one and sets `future.faster` to the flag
+  object with every flag `true` except `swcHtmlMinimizer: false`; delete the wrapper before
+  committing (CI and Vercel build the real config). `npx docusaurus serve --port 3005
+  --config <wrapper>` serves the result for screenshots.
 - `prepare` / `prepublishOnly` build `dist/`; only `dist/` is published (`files:
   ["dist"]`).
 
@@ -456,10 +467,13 @@ tools/codegen/
   from-openapi.mjs# OpenAPI 3.x spec -> endpoint-YAML skeleton
   endpoints/*.yaml# SOURCE OF TRUTH (espn_* families + flat-API stems + leagues.yaml)
   schemas/        # return schemas consumed by the docs renderer
-  templates/      # rendering templates
+  *.mjs           # renderers (render-loaders, returns-tables, row-types, utilities,
+                  # architecture, breaking, descriptions, sources) — there are NO templates
 docs/             # Docusaurus 3 site (reference subtree is generated; rest authored)
 test/             # Mocha no-network tests (test/**/*.test.js)
-examples/         # runnable example scripts
+examples/         # NN_<topic>.mjs runnable scripts; _offline.mjs (fixture transport),
+                  # _resolve.mjs (node --import preload: `sportsdataverse` -> dist/,
+                  # `@sportsdataverse/*` -> $SDVPLOT_JS_DIR), _util.mjs, README.md
 package.json      # ESM, engines.node >= 20.18.1, scripts, exports (. and ./parsers)
 tsconfig.json, typedoc.json
 ```
@@ -527,14 +541,30 @@ tsconfig.json, typedoc.json
   the provider / shared reference pages (`docs/docs/reference/`), the utilities catalogue
   (`docs/docs/utilities/`), `docs/src/generated/` and the playground metadata are
   **generated** — never hand-edit them. Conceptual pages outside those dirs
-  (`docs/docs/intro.md`, `guides/`, `tutorials/`) are hand-authored and survive
+  (`docs/docs/intro.mdx`, `docs/docs/sources.mdx`, `guides/`, `tutorials/`) are hand-authored and survive
   regeneration; `docs/docs/architecture/` is hand-authored prose whose
   `<!-- gen:status -->` block codegen rewrites (so `codegen:check` guards it).
 - `CONTRIBUTING.md` is the canonical contributor onboarding file.
 - `README.md` carries Install / Quick start / Architecture and the companion-package
   cross-links.
-- Verify the docs build with `cd docs && npx docusaurus build` before shipping
-  doc-affecting changes.
+- Verify the docs build with `cd docs && npx docusaurus build` (`onBrokenLinks: 'throw'`)
+  before shipping doc-affecting changes (see the local swc gotcha above).
+- **Sidebar order** (`docs/sidebars.js`, hand-written): Getting started → Sources & coverage →
+  How this library is built → Guides → Tutorials → Playground → Reference (by sport, generated)
+  → Utilities (generated) → API reference (TypeDoc) → Changelog. The Guides category index
+  has the stable slug `/docs/guides`; there is ONE quickstart (`guides/01-quickstart.mdx`,
+  served at `/docs/guides/quickstart`) — `@docusaurus/plugin-client-redirects` sends the old
+  `/docs/guides/01-quickstart` and `/docs/tutorials/quickstart` there. Removing a page means
+  adding a redirect, not leaving a 404.
+- **Sources-first.** Codegen writes `docs/src/generated/sources.json` (`tools/codegen/sources.mjs`:
+  one row per upstream source — host, families with counts, leagues, `auth`, `ownership`,
+  parity verified/total, description fill, docs path). `docs/src/components/SourcesCovered`
+  renders it: `<SourcesCovered/>` on the homepage, `intro.mdx` and `sources.mdx`,
+  `<SourcesCovered league="nba"/>` at the top of every generated league index (the
+  generator emits the MDX import). `intro.mdx` quotes its counts as `{sources.totals.*}`
+  expressions, so `test/doc-counts.test.js` no longer scans it; `test/docs-sources.test.js`
+  holds the JSON to the registries. A new native family must be on a row in `SOURCES`
+  (sources.mjs) or codegen throws.
 
 ### Docs-overhaul features (live guides, injector, grouped sidebar)
 
@@ -580,13 +610,35 @@ The docs site grew a literate-docs / live-runner layer. Five pieces, each
   consistency guard lives in `test/docs-examples.test.js`.
 
 - **Programmatic homepage + Playground links are data-driven.**
-  `docs/src/pages/index.js` maps over the generated
-  `docs/src/playground/endpoints.json` (ESPN leagues grouped by `sport` + the
-  provider namespaces), so adding a sport/league/provider and re-running
-  `npm run codegen` updates the home page with no bespoke edit. The navbar and
-  footer both carry **Docs / News / Tutorials / Playground**, and the docs
-  sidebar has a 🛝 **Playground** link near the top
-  (`docs/docusaurus.config.js` + `docs/sidebars.js`).
+  `docs/src/pages/index.js` is a hero (Get started / Tutorials / Playground), the
+  `<SourcesCovered/>` grid (`docs/src/generated/sources.json`) and the leagues-by-sport
+  chips from `docs/src/generated/coverage.json`, so adding a source / league / provider and
+  re-running `npm run codegen` updates the home page with no bespoke edit. The navbar and
+  footer carry **Docs / News / Tutorials / Playground** (`docs/docusaurus.config.js`).
+
+- **Examples + tutorials are one artefact.** `examples/NN_<topic>.mjs` scripts run offline
+  by default (`_offline.mjs` serves `test/fixtures/**` by URL through `configure({ transport })`;
+  `SDV_LIVE=1` goes live) and resolve the package without an install
+  (`node --import ./_resolve.mjs <script>`; `SDVPLOT_JS_DIR` points at a built sdvplot-js
+  checkout, else the three `9x_sdvplot_*` scripts print `skipped:` and exit 0).
+  The injector's `script` family (`tools/docs/examples.mjs`) freezes each script's source and
+  stdout into `docs/docs/tutorials/<topic>.mdx` (artifacts to `docs/static/examples/`);
+  `tools/docs/examples-source.mjs` writes `docs/src/generated/examples-source.json` for the
+  StackBlitz button. `test/examples.test.js` runs every script; `docs:examples:check` gates
+  the frozen output. A new tutorial = a script + a manifest entry + a page with the markers.
+
+- **llms.txt.** `docusaurus-plugin-llms` emits `llms.txt`, `llms-full.txt` and a `.md` beside
+  every page at build; TypeDoc's `docs/api/**` is ignored in all three (the codegen reference
+  covers every wrapper). `test/docs-llms.test.js` pins the config by reading its source.
+  The local search (`@easyops-cn/docusaurus-search-local`) likewise ignores `docs/api/**`.
+
+- **Live blocks + StackBlitz.** ```` ```jsx live ```` blocks run through
+  `@docusaurus/theme-live-codeblock` with the swizzled `docs/src/theme/ReactLiveScope`
+  (the parsers bundle, `fetchViaProxy(requestBody)`, `resolve` + `endpoints`, `<Table/>`,
+  React) — see `guides/live-blocks.md`; react-live cannot `import`, so package snippets stay
+  `<RunCell>`s. `docs/src/components/OpenInStackBlitz` opens a snippet as a Node project
+  (`@stackblitz/sdk`, loaded on click) under every tutorial script and in the quickstart;
+  RunKit is gone.
 
 - **The `/api/run` proxy is what makes RunCell + the playground live.** It is a
   Vercel serverless function (`docs/api/run.mjs`) — host-allowlisted, with
