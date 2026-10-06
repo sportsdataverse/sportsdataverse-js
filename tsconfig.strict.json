@@ -1,13 +1,9 @@
 {
+  /* The strict ratchet (T18b-2) is done: the root tsconfig.json is `strict: true`
+     over all of src/, so this equals `npm run typecheck`. Kept so `typecheck:strict`
+     (CI) still holds the two equal. */
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "strict": true,
-    "noImplicitAny": true,
     "noEmit": true
-  },
-  /* Strict ratchet (T18b-2): every src/ directory passes, legacy src/services/*
-     included. Next: flip the root tsconfig.json to `strict: true` once JS-13's
-     request / errors / client / torvik / statcast changes are in (the five files
-     already pass, as part of this program). */
-  "include": ["src"]
+  }
 }

@@ -13,12 +13,7 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    /* Pragmatic first-pass migration: the service methods return dynamic ESPN
-       JSON and use untyped destructured params, so implicit `any` is allowed.
-       Declarations are still emitted (dist/*.d.ts) so signatures can be
-       tightened incrementally without breaking consumers. */
-    "strict": false,
-    "noImplicitAny": false
+    "strict": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "test"]
