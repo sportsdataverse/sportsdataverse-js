@@ -1453,7 +1453,7 @@ const SEARCH_POPULAR_DEF: WrapperDef = {
       "default": "1.1"
     }
   ],
-  "parser": "parse_fox_list",
+  "parser": "parse_fox_search",
   "returnsSchema": "native/fox/search_popular"
 };
 

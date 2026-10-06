@@ -296,7 +296,6 @@ families:
       league_stats_con: parse_fox_standings
       event_data: parse_fox_event
       event_matchup: parse_fox_event
-      search_popular: parse_fox_list
   yahoo:
     from: yahoo_shangrila
     # JS's Yahoo parsers were written independently of sdv-py's, so JS keeps its
