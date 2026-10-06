@@ -1,6 +1,5 @@
 node_modules
 .vscode
-examples
 mochawesome-report
 dist/
 # Local-only TypeDoc HTML (`npm run docs`). The DEPLOYED API reference is
@@ -12,3 +11,8 @@ typedoc-build/
 temp/
 # Python bytecode from the oracle generators (tools/parity, tools/oracle, tools/sdv_py_pin.py).
 __pycache__/
+
+# examples/ — local install of the worktree package (+ the unpublished sdvplot-js link) and script output
+examples/node_modules/
+examples/package-lock.json
+examples/out/
