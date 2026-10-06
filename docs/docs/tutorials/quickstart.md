@@ -78,7 +78,7 @@ const box = await sdv.cfb.getBoxScore(401628319);
 
 ## Next steps
 
-- **[The cross-league surface](./cross-league)** — one API across 29 leagues.
+- **[The cross-league surface](./cross-league)** — one API across 30 leagues.
 - **[From scoreboard to a table](./scoreboard-to-table)** — a real analysis.
 - **[Playground](/playground)** — try any endpoint live in your browser.
 - **[Reference](../reference/)** — every wrapper, by league.

@@ -441,7 +441,7 @@ describe('core/hockeytech_runtime: body classification', () => {
   it('sends the configured User-Agent (no hard-coded +https token)', async () => {
     let calls = useTransport(() => ({ data: SEASONS() }));
     await get();
-    calls[0].headers['User-Agent'].should.equal('Mozilla/5.0 (compatible; sportsdataverse-js/3.x)');
+    calls[0].headers['User-Agent'].should.equal('Mozilla/5.0 (compatible; sportsdataverse-js/4.x)');
     calls[0].headers.Referer.should.equal('https://www.thepwhl.com/');
     calls = useTransport(() => ({ data: SEASONS() }), { userAgent: 'my-agent/1.0' });
     await get();

@@ -355,7 +355,7 @@ describe('core/config: per-family transport selection', () => {
   });
 
   it('default User-Agent carries no +http token (ESPN site API 403s on one)', async () => {
-    getConfig().userAgent.should.equal('Mozilla/5.0 (compatible; sportsdataverse-js/3.x)');
+    getConfig().userAgent.should.equal('Mozilla/5.0 (compatible; sportsdataverse-js/4.x)');
     getConfig().userAgent.should.not.containEql('+http');
     const t = fakeTransport({ status: 200, data: {} });
     configure({ transport: t });
@@ -829,7 +829,7 @@ describe('core/request: wrappers route through request()', () => {
     resetConfig();
     configure({ transport: { torvik: echo() } });
     const ua = await torvikGet('https://barttorvik.com/x');
-    ua.should.equal('Mozilla/5.0 (compatible; sportsdataverse-js/3.x)');
+    ua.should.equal('Mozilla/5.0 (compatible; sportsdataverse-js/4.x)');
     ua.should.not.containEql('+http');
   });
 

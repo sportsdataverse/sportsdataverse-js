@@ -8,7 +8,7 @@ asking for a private contact and include **no** vulnerability details in it.
 
 ## Supported versions
 
-Only the latest release line (currently 3.x) receives security fixes.
+Only the latest release line (currently 4.x) receives security fixes.
 
 ## What ships
 

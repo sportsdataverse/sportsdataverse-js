@@ -4,7 +4,7 @@
 //
 // barttorvik.com is auth-free. hoopR sets a browser-like UA; sdv-js sends the
 // configured `userAgent` (`configure({ userAgent })`; the default
-// "Mozilla/5.0 (compatible; sportsdataverse-js/3.x)" answered 200 live,
+// "Mozilla/5.0 (compatible; sportsdataverse-js/4.x)" answered 200 live,
 // 2026-10-05), and a caller `User-Agent` header wins. The five wrapped endpoints are
 // heterogeneous — two CSV (`text/csv`), two JSON (one even served with a
 // `text/html` content-type), one headerless CSV — so this getter returns the RAW

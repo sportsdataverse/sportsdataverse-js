@@ -6,10 +6,10 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/SportsDataverse?color=blue&label=%40SportsDataverse&logo=twitter&style=for-the-badge)](https://twitter.com/SportsDataverse)
 
 `sportsdataverse` is the SportsDataverse's **Node.js** client for sports data. As of
-**v3.0.0** it is a **cross-league ESPN client _plus_ a native (non-ESPN) live-API
+**v4.0.0** it is a **cross-league ESPN client _plus_ a native (non-ESPN) live-API
 client** with a tidy parser layer:
 
-- **126 ESPN endpoint wrappers** generated for **29 leagues** (31 namespaces) from a
+- **126 ESPN endpoint wrappers** generated for **30 leagues** from a
   single YAML source of truth — play-by-play, box scores, schedules, rosters,
   standings, rankings, and more, identical on every league.
 - **1059 flat-API wrappers across 27 families** — **14 league families** merged onto
@@ -172,7 +172,7 @@ that fails CI if the committed output is stale. **Generated files are never
 hand-edited** — you edit the YAML (or the templates) and regenerate.
 
 - **ESPN surface** — one core, parameterized on `(sport, league)` slugs, is wrapped
-  once per URL family (Site v2 / Core v2 / Web v3) and exposed across **29 leagues**
+  once per URL family (Site v2 / Core v2 / Web v3) and exposed across **30 leagues**
   as `espn_<league>_<short>` (snake) **and** `espn<League><Short>` (camelCase). The
   per-league extension modules are thin; endpoints carry a **scope** (`universal`,
   `ncaa`, `football`, `mlb`) so each league gets exactly the endpoints that apply.

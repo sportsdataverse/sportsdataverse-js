@@ -6,7 +6,7 @@ import { HOSTS } from '../dist/core/client.js';
 
 // Exhaustive, no-network contract tests for the full generated ESPN surface:
 // every wrapper, on every league it applies to, is exposed under both names and
-// builds a well-formed ESPN URL. ~819 wrappers across 29 leagues.
+// builds a well-formed ESPN URL. ~819 wrappers across 30 leagues.
 
 const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 const FAMILIES = new Set(['site_v2', 'site_v2_alt', 'web_v3', 'core_v2', 'fitt_v3', 'cdn']);

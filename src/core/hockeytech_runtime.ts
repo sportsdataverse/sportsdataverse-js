@@ -93,7 +93,7 @@ const LEAGUE_REFERER: Record<string, string> = {
 };
 
 // No family User-Agent: the configured one (`configure({ userAgent })`, default
-// `Mozilla/5.0 (compatible; sportsdataverse-js/3.x)`) is sent. HockeyTech and Statcast both
+// `Mozilla/5.0 (compatible; sportsdataverse-js/4.x)`) is sent. HockeyTech and Statcast both
 // answered 200 to that UA on 2026-10-05; the old hard-coded `+https://` token overrode it.
 
 const LEAGUE_ID_VIEWS = new Set(["scorebar", "transactions", "brackets", "teams"]);

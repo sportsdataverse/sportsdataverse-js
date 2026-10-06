@@ -92,7 +92,7 @@ const DEFAULTS = {
   retries: 3,
   timeoutMs: 30000,
   // No `+https://…` token: ESPN's site API answers 403 to a UA carrying one.
-  userAgent: "Mozilla/5.0 (compatible; sportsdataverse-js/3.x)",
+  userAgent: "Mozilla/5.0 (compatible; sportsdataverse-js/4.x)",
 };
 
 let user: SdvConfig = fresh();

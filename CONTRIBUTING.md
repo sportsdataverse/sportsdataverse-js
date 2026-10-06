@@ -67,7 +67,7 @@ Two kinds of endpoints:
 
 - **ESPN** (`espn_site_v2.yaml`, `espn_core_v2.yaml`, `espn_web_v3.yaml`,
   `espn_fitt_v3.yaml`, `espn_cdn.yaml`) — one core, parameterized on `(sport, league)`
-  slugs: **126 endpoint short names** exposed across **29 leagues** as
+  slugs: **126 endpoint short names** exposed across **30 leagues** as
   `espn_<league>_<short>` + `espn<League><Short>`.
 - **Flat APIs** (non-ESPN absolute hosts) — **1059 wrappers across 27 families**:
   **14 league families** (MLB Stats, Statcast, NHL ×4, NFL.com, PFF API, NFL Pro,
@@ -201,7 +201,10 @@ npm run codegen                 # then regenerate as usual
   sdv-py's generated names at the pin (`tools/codegen/py_public_names.json`, which
   `npm run vendor` derives from verbatim, LOCK-verified copies of sdv-py's generated
   modules in `vendor/upstream/py/`; `vendor:check` covers it). Pre-v4 names stay callable as
-  deprecated aliases generated from the frozen `tools/codegen/pre_v4_names.json`.
+  deprecated aliases generated from `tools/codegen/pre_v4_names.json`, which holds two
+  frozen snapshots: `published` (every name of the `sportsdataverse@3.0.0` npm tarball)
+  and the later pre-v4 development names (`exports` / `namespaces`, read from the built
+  package at origin/main 76b0d719e4). Neither is regenerated; aliases derive from their union.
 
 ## Adding a new flat-API family
 
