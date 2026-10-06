@@ -1,5 +1,4 @@
 import * as cheerio from 'cheerio';
-import decode from 'decode-html';
 import { Tabletojson as tabletojson } from 'tabletojson';
 import { DEFAULT_RETRY_STATUSES, registerFamilyDefaults } from '../core/config.js';
 import { warnOnce } from '../core/deprecation.js';
@@ -34,8 +33,7 @@ function extractSelectList(doc: unknown, array: SelectList, id: string): undefin
     const selector = '#' + id + ' option';
     $(selector).each((_i, el) => {
         const value = $(el).prop('value');
-        // an <option> it just matched: never null
-        const name = decode($(el).html()!);
+        const name = $(el).text(); // entity-decoded by cheerio, as decode-html did on .html()
         if (value) {
             array.push({ value: value, name: name });
         }
