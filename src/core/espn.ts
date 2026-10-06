@@ -110,7 +110,8 @@ export function resolveRequest(
   params: Record<string, any> = {}
 ): { url: string; query?: Record<string, any> } {
   return {
-    url: `${HOSTS[def.family]}${buildPath(def, cfg, params)}`,
+    // ESPN defs always carry their family (codegen); only flat defs omit it.
+    url: `${HOSTS[def.family!]}${buildPath(def, cfg, params)}`,
     query: cleanQuery(def, params),
   };
 }
@@ -135,7 +136,7 @@ export async function callWrapper(
   params: Record<string, any> = {}
 ): Promise<any> {
   const { url, query } = resolveRequest(def, cfg, params);
-  const raw = await get(url, { params: query, family: def.family });
+  const raw = await get(url, { params: query, family: def.family! });
   if (!params.parsed) return raw;
   const parser = parserForEndpoint(def.short);
   if (!parser) return raw;

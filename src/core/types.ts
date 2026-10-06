@@ -23,11 +23,14 @@ export interface LeagueConfig {
   publicShorts?: Record<string, string>;
 }
 
-/** A query parameter: the call-param `name` -> ESPN `queryKey`, with optional default. */
+/**
+ * A query parameter: the call-param `name` -> ESPN `queryKey`, with optional default
+ * (`null` is sdv-py's `default: None`: sent only when the caller or a `transform` sets it).
+ */
 export interface QueryParam {
   name: string;
   queryKey: string;
-  default?: string | number | boolean;
+  default?: string | number | boolean | null;
   /** sdv-py param transform applied to the resolved value (src/core/transforms.ts). */
   transform?: string;
 }

@@ -5,30 +5,18 @@
     "noImplicitAny": true,
     "noEmit": true
   },
-  "include": [],
-  "files": [
-    "src/core/errors.ts",
-    "src/core/id_columns.ts",
-    "src/core/transport.ts",
-    "src/core/auth.ts",
-    "src/core/config.ts",
-    "src/core/request.ts",
-    "src/core/transforms.ts",
-    "src/core/pff_api_runtime.ts",
-    "src/core/nfl_pro_runtime.ts",
-    "src/core/kenpom_runtime.ts",
-    "src/parsers/pff_api.ts",
-    "src/parsers/nfl_pro.ts",
-    "src/parsers/kenpom.ts",
-    "src/core/releases.ts",
-    "src/core/sports247_runtime.ts",
-    "src/parsers/sports247.ts",
-    "src/core/deprecation.ts",
-    "src/core/nba_stats_runtime.ts",
-    "src/analytics/hockeytech.ts",
-    "src/models/cricket_wp.ts",
-    "src/odds/math.ts",
-    "src/producers/espn_basketball_box.ts",
-    "src/producers/espn_basketball_pbp.ts"
+  /* Strict ratchet (T18b-2), one directory at a time. A root file pulls in
+     everything it imports, so a directory is listed only once its whole import
+     graph passes. Still out: src/services/* (legacy hand-written ESPN methods)
+     and src/index.ts + src/discover.ts, which import them. */
+  "include": [
+    "src/analytics",
+    "src/core",
+    "src/generated",
+    "src/leagues",
+    "src/models",
+    "src/odds",
+    "src/parsers",
+    "src/producers"
   ]
 }
