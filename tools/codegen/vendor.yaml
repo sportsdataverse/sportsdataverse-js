@@ -46,7 +46,7 @@
 # A family with an overlay/<family>.yaml gets it merged on top.
 source:
   repo: sportsdataverse/sportsdataverse-py
-  ref: 28ee34b46520e1648b4f9fcf9ac20ba27ff37403
+  ref: afafaedae47bca0799d64578e446d85d43b3f5ed
 
 # Copied verbatim (no transform, not generated here).
 # espn_rename_map.yaml: sdv-py's curated ESPN renames, read by generate.mjs.
