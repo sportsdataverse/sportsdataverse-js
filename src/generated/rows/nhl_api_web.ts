@@ -252,7 +252,7 @@ export interface NhlApiWebClubScheduleSeasonRow {
  * One row of `sdv.nhl.nhl_draft_picks({ parsed: true })` (returns schema `native/nhl_api_web/draft_picks`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebDraftPicksRow {
-  /** Shootout round number. Schema `integer`. */
+  /** Draft round the pick was made in (1 = first round). Schema `integer`. */
   round?: number | null;
   /** Pick number within the round. Schema `integer`. */
   pick_in_round?: number | null;

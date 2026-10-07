@@ -4,7 +4,7 @@
     "sources": 23,
     "espnShorts": 126,
     "espnLeagues": 30,
-    "flatWrappers": 1059,
+    "flatWrappers": 1060,
     "flatFamilies": 27,
     "loaders": 323
   },
@@ -123,7 +123,7 @@
         "total": 126
       },
       "descriptionFill": {
-        "filled": 10530,
+        "filled": 10597,
         "total": 10909
       },
       "docsPath": "/docs/nba/reference/native",
@@ -156,7 +156,7 @@
         "total": 110
       },
       "descriptionFill": {
-        "filled": 9792,
+        "filled": 9828,
         "total": 10097
       },
       "docsPath": "/docs/wnba/reference/native",
@@ -341,7 +341,7 @@
         "total": 16
       },
       "descriptionFill": {
-        "filled": 0,
+        "filled": 1006,
         "total": 1036
       },
       "docsPath": "/docs/nfl/reference/native"
@@ -373,7 +373,7 @@
         "total": 67
       },
       "descriptionFill": {
-        "filled": 7887,
+        "filled": 7905,
         "total": 7905
       },
       "docsPath": "/docs/nfl/reference/native"
@@ -464,7 +464,7 @@
         "total": 23
       },
       "descriptionFill": {
-        "filled": 152,
+        "filled": 1024,
         "total": 1024
       },
       "docsPath": "/docs/reference/on3"
@@ -556,7 +556,7 @@
       "ownership": "vendored",
       "parity": null,
       "descriptionFill": {
-        "filled": 18,
+        "filled": 193,
         "total": 193
       },
       "docsPath": "/docs/reference/fox"
@@ -660,7 +660,7 @@
           "api": "asa",
           "label": "American Soccer Analysis",
           "host": "app.americansocceranalysis.com",
-          "count": 15,
+          "count": 16,
           "ownership": "vendored"
         }
       ],
@@ -668,16 +668,16 @@
       "namespaces": [
         "asa"
       ],
-      "wrapperCount": 15,
+      "wrapperCount": 16,
       "auth": "none",
       "ownership": "vendored",
       "parity": {
         "verified": 7,
-        "total": 15
+        "total": 16
       },
       "descriptionFill": {
-        "filled": 143,
-        "total": 143
+        "filled": 156,
+        "total": 156
       },
       "docsPath": "/docs/reference/asa"
     },

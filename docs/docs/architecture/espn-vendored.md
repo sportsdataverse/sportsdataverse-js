@@ -15,7 +15,7 @@ returns schemas (`tools/codegen/schemas/espn/*.yaml`) are JS-owned: the JS parse
 `src/parsers/espn.ts` are ports of sdv-py's, and their columns were captured from real payloads.
 
 <!-- gen:status -->
-sdv-py pin: [`afafaedae47b`](https://github.com/sportsdataverse/sportsdataverse-py/commit/afafaedae47bca0799d64578e446d85d43b3f5ed).
+sdv-py pin: [`89c638a61b8c`](https://github.com/sportsdataverse/sportsdataverse-py/commit/89c638a61b8c36f0f59159773260b8a0b998a5dc).
 
 | Family YAML | Host |
 |---|---|

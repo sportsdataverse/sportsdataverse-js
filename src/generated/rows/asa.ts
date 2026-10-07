@@ -42,7 +42,7 @@ export interface AsaGamesRow {
   status?: string | null;
   /** Last-updated timestamp (UTC, ISO 8601). Schema `character`. */
   last_updated_utc?: string | null;
-  /** Reported attendance (nullable). Schema `numeric`. */
+  /** Reported attendance (nullable). Schema `integer`. */
   attendance?: number | null;
 }
 

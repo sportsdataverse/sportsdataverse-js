@@ -1,4 +1,4 @@
-cb46afecd319b9d1cefb61c302672171f556e856  endpoints/asa.yaml
+08d239cc9d89526745b03d43c32f6e3b4f7ece1d  endpoints/asa.yaml
 86e9cbee21ce2fe080f3b969aa4c95e176e3805c  endpoints/bart_wbb.yaml
 c646ba8dd342fd7f603a85fdc49744de61b82672  endpoints/cbs_napi.yaml
 e85fad0ea83f376a2ffb40b97fb91a81391fb998  endpoints/espn_cdn.yaml
@@ -29,7 +29,7 @@ b2b250211ad6f78e961cfcd056fbef8021e06717  endpoints/sports247.yaml
 15bfb1cc8d2e9f5a0885d64996c54b466993c9e9  endpoints/wnba_stats.yaml
 f80d67c88c673b523cf5d921eba3a563b457fa24  endpoints/yahoo_shangrila.yaml
 27e776b2c23a4dc875141df8f9050c2ddec8280d  espn_rename_map.yaml
-b01d35151bac4f0b58e164353bdf56c5563b5571  manual_column_descriptions.yaml
+249a0b30bc5c5b88b4c3c1c7f4d42624536e0b1c  manual_column_descriptions.yaml
 2fd9ea7a2f1616aecc16eaa34cdfd3d6f4740f10  py/sportsdataverse/baseball/college_baseball/college_baseball_espn_ext.py
 a197f9cf605b1f66f6e942b7c5e0a0a52bc8ad65  py/sportsdataverse/baseball/college_softball/college_softball_espn_ext.py
 39ecfa762c288504376c1964c537991a19dd7351  py/sportsdataverse/cbs/cbs_napi.py
@@ -62,7 +62,7 @@ abf8c2062c6b236e57cb77908832d02aca8a881e  py/sportsdataverse/nfl/pff_api.py
 47df9c54bf205b74148ceda38f7deb47d3b4baee  py/sportsdataverse/nhl/nhl_espn_ext.py
 ad28f2bec1f6ddd80a7f7c544d94c9368aef1f3d  py/sportsdataverse/nhl/nhl_records.py
 9f6380900f1663826436629cd0e0eaa035d4347c  py/sportsdataverse/nhl/nhl_stats_rest.py
-00db20ef86269ae5665cf14ee0ca552228a9d40c  py/sportsdataverse/soccer/asa.py
+82e52b7b286d77f1a4e277ab76f9f972af0ab695  py/sportsdataverse/soccer/asa.py
 0b566ba5a26ea2b6cb312120cbabaab3a9b2f8d7  py/sportsdataverse/soccer/bundesliga/bundesliga_espn_ext.py
 bb4de4dc9cf0f86f9408a0207e5c9a29dda39535  py/sportsdataverse/soccer/epl/epl_espn_ext.py
 e0a495052a4c909f50cc599b42858156e9efa946  py/sportsdataverse/soccer/laliga/laliga_espn_ext.py
@@ -104,13 +104,14 @@ b030b91846c48a45910cfc9b0ea024b67059e0cb  schemas/leaders/nhl.yaml
 fd17fe122deb2de5dab080437e161688a16d5c8b  schemas/leaders/wnba.yaml
 9671324cf3ded8afbd737cf49b6bea70da19e63b  schemas/loader_schemas.yaml
 fcc6cb7600dca5b93299ce738e512b2c193bd4a2  schemas/native/asa/games_xgoals.yaml
-32a1811d010e187ae9075a4c5fb52eab0ae87a41  schemas/native/asa/games.yaml
+9f341614163a9e82089b9d1b5e072a0013749fbd  schemas/native/asa/games.yaml
 1b3012ed46c9fc1d5665290f258e2c8b3e9e219c  schemas/native/asa/goalkeepers_goals_added.yaml
 6749fd6da9ccddb7df6587e79754c1fe74815236  schemas/native/asa/goalkeepers_xgoals.yaml
 3e90fa87d463afc9fec1bec9537eef4621bb3a03  schemas/native/asa/managers.yaml
 488c7a0929f051af108f0c6f55774852f7026b7c  schemas/native/asa/players_goals_added.yaml
 4674b1ab6a453f6983f0c06aa856ac0b20e452e7  schemas/native/asa/players_salaries.yaml
 453ecbf09ff0d4a63406561d16ae807fe553d166  schemas/native/asa/players_xgoals.yaml
+6f9565fad603bf64d4c51a6ff1aab334f4e31ad5  schemas/native/asa/players_xpass.yaml
 cb46ed89573974071808cd5ce63a6449593fc65c  schemas/native/asa/players.yaml
 1f6188445f073b87555fbf3704460841a4b4f130  schemas/native/asa/referees.yaml
 a24a91bff5c12ab7b1ea9a9f3e9126793fc80b6a  schemas/native/asa/stadia.yaml
@@ -304,7 +305,7 @@ a472caf9bc4ca20807e1645e3c0e05230fc5fde0  schemas/native/mls_api/competitions.ya
 f877fad633db83f49f87e22180efd3f440c00364  schemas/native/mls_api/sportapi_club_players.yaml
 744476db1ef80ab0791927d53fab3944a3f39246  schemas/native/mls_api/sportapi_clubs_by_sportec_ids.yaml
 a01f1b8792f01f7af7e45368230857cd96122fef  schemas/native/mls_api/sportapi_match.yaml
-a73734e3036de1a01d1296789eef0bd8697a4373  schemas/native/mls_api/sportapi_matches_by_sportec_ids.yaml
+5b0a1cf8be402df514ddc28e1310d41c1c33e241  schemas/native/mls_api/sportapi_matches_by_sportec_ids.yaml
 c467d2594ade77524a19af7ffae36e15357780fb  schemas/native/mls_api/standings.yaml
 d8be66d096876998d58ecf7913d83df3b6ab6520  schemas/native/nba_stats/alltimeleadersgrids.yaml
 7983789bf59df2e90f2ab8163125669ddb40c4e2  schemas/native/nba_stats/assistleaders.yaml
@@ -575,7 +576,7 @@ d223a71073982369bbf9e69e0bc166ef3436f1cc  schemas/native/nwsl_api/competitions.y
 05089515d4b0cc170d3ca95f1844dd56226cb3ab  schemas/native/nwsl_api/player_stats.yaml
 5cd6982059d18a677fe4831532a7764c552322cd  schemas/native/nwsl_api/season_matches.yaml
 32f0ee3ceef3b70ee9a46af7ad477d9bae5f22d1  schemas/native/nwsl_api/stages.yaml
-07934c4ff04a0abeab34c7f56e5f59db161bcd10  schemas/native/nwsl_api/standings.yaml
+28c7b3d4bfefb90c9c119d1a615ebaf0c47c96fe  schemas/native/nwsl_api/standings.yaml
 12cb684ec983fe61b51b1603aa3d0e547ef209a7  schemas/native/nwsl_api/team_stats.yaml
 724dbc13109a5b2aa84c46e142908ad66b9293a6  schemas/native/nwsl_api/teams.yaml
 b08cd402f81ac2741bb69f85093eb23e28eb120f  schemas/native/on3/coaches_history.yaml
@@ -1009,7 +1010,7 @@ aa191e206640164bb011efa914af97e40d5e1526  schemas/summary/cfb.yaml
 5808aac9ba4090fb3915a361b5239ee7487b6838  schemas/summary/nba.yaml
 8f52a2eadb182c9641ab8213fb363d3a4929c9a9  schemas/summary/nfl.yaml
 3c5ce4010c05b566d8957abdea900d4705863fbe  schemas/summary/nhl.yaml
-00f92bf3b69996c2fe2d2776909b582103ae8043  schemas/summary/soccer.yaml
+9018299da1c16f682736c242e4680b2ef60d833d  schemas/summary/soccer.yaml
 19d8df64ffe18ba51bf6862fad7cdea96d198b7d  schemas/summary/wbb.yaml
 8fb597ce4425cb30b95b429bb57088364859c87f  schemas/summary/wnba.yaml
 74edbf743cb08623dcbfa4489d4294ea5b0464a4  schemas/team_roster.yaml

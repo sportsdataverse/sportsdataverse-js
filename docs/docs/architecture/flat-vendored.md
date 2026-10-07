@@ -16,7 +16,7 @@ wrong one). A family with `tools/codegen/overlay/<family>.yaml` gets JS-only end
 patches merged on top.
 
 <!-- gen:status -->
-sdv-py pin: [`afafaedae47b`](https://github.com/sportsdataverse/sportsdataverse-py/commit/afafaedae47bca0799d64578e446d85d43b3f5ed).
+sdv-py pin: [`89c638a61b8c`](https://github.com/sportsdataverse/sportsdataverse-py/commit/89c638a61b8c36f0f59159773260b8a0b998a5dc).
 
 | Family | wrappers |
 |---|---:|
@@ -38,7 +38,7 @@ sdv-py pin: [`afafaedae47b`](https://github.com/sportsdataverse/sportsdataverse-
 | `kenpom` | 30 |
 | `bart_wbb` | 1 |
 | `on3` | 78 |
-| `asa` | 15 |
+| `asa` | 16 |
 | `mls_api` | 12 |
 | `nwsl_api` | 9 |
 | `nba_stats` | 128 |
