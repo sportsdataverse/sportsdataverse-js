@@ -4,133 +4,7 @@ All notable changes to `sportsdataverse` (Node.js) are documented here. The
 docs-site copy lives at [`docs/src/pages/CHANGELOG.md`](docs/src/pages/CHANGELOG.md)
 and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
-## Unreleased
-
-_4.0.0 below is not yet published to npm (latest 3.0.0); these entries may be folded into 4.0.0 at release time._
-
-### Added
-
-- **Returns-table column descriptions.** Every returns table (ESPN, native families, loaders)
-  resolves its blank `description` cells the way sdv-py's generator does: the schema's own text,
-  then sdv-py's hand-curated `manual_column_descriptions.yaml` (by schema key, then `_global`),
-  then the column descriptions mined from the SDV R packages (`r_column_descriptions.yaml`: the
-  league's package, its sport's siblings, the merged union). Both files are vendored verbatim at
-  the sdv-py pin (`vendor.yaml` `copy:`, in the LOCK). `npm run codegen` prints
-  `descriptions <family>: <filled>/<total>` and writes `docs/src/generated/description_coverage.json`;
-  overall fill went from 26% to 95.8% (stats.nba.com / stats.wnba.com / MLB / the four NHL
-  families from 0%). The generated row interfaces carry the descriptions as doc comments. (#107)
-- **Loader returns tables + row types in the docs.** Every `load*` block documents its columns
-  (`col_name | type | description`, the type being its generated row type's) and names its
-  `Load<Name>Row`; ESPN and native blocks name their verified row interface, or say
-  _Rows are untyped `Row[]` (not parity-verified yet)._ ESPN endpoints with no fixed table list
-  the leagues that expose them and link the parser's section of the parsed-returns page. (#107)
-- **Utilities catalogue.** `tools/codegen/utilities.yaml` labels every hand-written non-data export
-  (parsers, analytics, odds, models, producers, discovery, transforms, HTTP core, errors, config);
-  codegen renders `docs/docs/utilities/`, `src/generated/utilities.ts` and a "Utilities" sidebar
-  group. `listFunctions(…, { detail: true })` returns `{ name, kind: 'data' | 'utility', category }`
-  rows (`FunctionEntry`); `UTILITY_CATEGORIES` / `UtilityCategory` are exported. (#107)
-- **Typed TSDoc on every generated wrapper:** every `@param params.x` carries its TypeScript type and a description
-  (the YAML description where sdv-py wrote one, else what the param is), `@returns Promise<…>`
-  naming the row interface, and `@see` linking the docs page. The TypeDoc API pages now cover the
-  hand-written modules (parsers, analytics, odds, models, producers, HTTP core) besides the four
-  basketball ESPN samples. (#107)
-- **Breaking-change callouts.** `tools/codegen/breaking.yaml` records every 4.0.0 breaking change
-  by surface; each affected generated page opens with a `:::danger Breaking in 4.0.0` admonition
-  linking the changelog, and `reference/deprecations.md` carries the "Breaking changes by version" table. (#107)
-- **"How this library is built"** (`docs/docs/architecture/`): per surface (ESPN vendored,
-  native vendored, native JS-owned, loaders, hand-written) — source of truth, generator step,
-  output, CI gate, how to change it, and a codegen-rewritten status block (counts + the sdv-py
-  pin). Every generated docs page ends with a visible provenance footer linking its page
-  (the hidden MDX comment is gone). (#107)
-- **Capture-derived returns schemas for fox / cbs / yahoo / yahoo_scores.** `tools/codegen/regen-capture-schemas.mjs`
-  (`npm run schemas:captures`, `--check` gate) rewrites the JS-owned returns schemas of the four
-  families from the registered parsers' rows on the committed real captures (the parity manifest's
-  cbs / fox / yahoo entries; yahoo_scores reads the editorial captures), so the tables describe the
-  4.0.0 per-entity row builders (fox 13 endpoints, cbs 7, yahoo `season_stats_football_passing_ncaaf`,
-  yahoo_scores `boxscore` 33 columns / `scoreboard` 104). The 18 fox and 24 yahoo schemas written for
-  the pre-port output with no capture are marked `unverified` (the docs render the note, not the
-  table). `test/parsers/capture-schema-agreement.test.js` holds every one to its parser: the column
-  set is the rows' key union, every value is of its column's type, ids are decimal strings, and a
-  capture-less endpoint publishes no table. (#107)
-- **Column descriptions are sport-strict.** The cross-sport `_merged` union of the R-package
-  descriptions is never read: a league resolves through its own sport's packages only (hoopR +
-  wehoop for basketball, cfbfastR for cfb, the NFL packages for nfl, baseballr for baseball,
-  fastRhockey for hockey); an unmapped namespace and the shared parsed-returns page get sdv-py's
-  manual text only; the NFL aggregate families (nfl_api / nfl_pro / pff_api) get no play-level
-  nflfastR text. Overall fill is 90.4% (honest; it read 95.8% with the leak), floor 0.90, with a
-  denylist of sport-specific phrases asserted over the generated docs. (#107)
-- **Breaking-change register:** the Baseball Savant `parsed: true` typing change is on record (19
-  entries); a family's vendored / JS-owned label in the docs footer comes from vendor.mjs's
-  `# VENDORED` header (kenpom is vendored; the yahoo page names both its families). (#107)
-- **Runnable examples.** `examples/` holds 16 ESM scripts (`NN_<topic>.mjs`), one per surface
-  (ESPN scoreboard / pbp / standings / rankings, Torvik, Statcast + MLB Stats, NHL api-web + EDGE,
-  HockeyTech Corsi, soccer, The Odds API + odds math, release loaders, discovery, and three
-  sdvplot-js integrations). They run **offline by default**: `examples/_offline.mjs` installs a
-  `configure({ transport })` that serves `test/fixtures/**` by URL (an unrouted URL throws);
-  `SDV_LIVE=1` hits the real hosts. `node --import ./_resolve.mjs <script>` resolves
-  `sportsdataverse` from the repo's `dist/` (no install) and `@sportsdataverse/*` from a sibling
-  sdvplot-js checkout (`SDVPLOT_JS_DIR`); a script that needs an unbuilt sdvplot-js prints
-  `skipped:` and exits 0. `test/examples.test.js` runs every script. (#108)
-- **Tutorials.** `docs/docs/tutorials/` grows to 17 pages (+ an index with a sources column), one
-  per example script: the script's source and its frozen output are injected by the output
-  injector's new `script` family (`inject:source` / `inject:example` markers; artifacts copied to
-  `docs/static/examples/`) and drift-gated by `npm run docs:examples:check`. The ESPN basketball
-  shot-coordinate frame used by the shot-chart tutorial was fitted on four captures, one of them
-  committed and held to it by `test/examples-shot-frame.test.js` (`coordinate_x` = feet across, hoop
-  at 25; `coordinate_y` = feet from the hoop, which fits at y ≈ 0–1; both teams on one basket; free
-  throws carry a sentinel). New fixtures with provenance READMEs: WNBA 2025 / NFL 2024 /
-  LaLiga 2024 standings, NFL 2024 week-1 scoreboard, one verbatim Odds API historical snapshot. (#108)
-- **llms.txt.** `docusaurus-plugin-llms` emits `llms.txt`, `llms-full.txt` and a `.md` copy beside
-  every docs page (TypeDoc's `docs/api/**` excluded from all three; `test/docs-llms.test.js` pins
-  the config). (#108)
-- **Live-editable code blocks.** `@docusaurus/theme-live-codeblock` with a swizzled
-  `ReactLiveScope` exposing the browser parser bundle, `fetchViaProxy` (the `/api/run` request
-  body), `resolve` + `endpoints`, `<Table/>` and React; new guide `guides/live-blocks.md`. (#108)
-- **Open in StackBlitz.** An `OpenInStackBlitz` button under every tutorial's script and in the
-  quickstart opens the snippet as a Node project on StackBlitz (`@stackblitz/sdk`, loaded on
-  click). The source map `docs/src/generated/examples-source.json` is written by
-  `tools/docs/examples-source.mjs` as part of `npm run docs:examples`. (#108)
-
-### Changed
-
-- **Dependencies:** mocha 11 -> 12 and the root `overrides` block (js-yaml, serialize-javascript, diff — forced only for mocha 11) is gone; the resolved tree is at or above every forced floor. In-range bumps: papaparse 5.7.0 (the playground parser bundle is rebuilt for its BOM stripping), tabletojson 4.1.15, esbuild 0.28.2, typedoc 0.28.20, yaml 2.9.1, @microsoft/api-extractor 7.59.4, @types/node 22.20.5. `npm audit --omit=dev` is clean; the 4 dev-only moderate findings are `sprintf-js` under api-extractor with no upstream fix. `docs/`: lockfile refreshed (compression, proxy-addr) and `tinypool` overridden to `^2.2.0` under the `faster` build — 44 advisories (16 critical) down to 41 (0 critical). (#106)
-- **Coverage:** `npm test` runs mocha under `c8` (`.c8rc.json`: `dist/**` minus `dist/generated/**`, which is contract-tested by the codegen suites; `text-summary` + `lcov` into `coverage/`). The measured baseline is the threshold — lines 94% / functions 95% / branches 84% (measured 94.82 / 95.91 / 84.58 on 4,374 tests) — and `--check-coverage` fails the run below it; CI uploads `coverage/lcov.info` as an artifact. `npm run coverage:generated` re-reports the same run over `dist/generated/**` alone. (#106)
-- **Docs search:** the local search index no longer indexes the TypeDoc tree (`docs/api/**`),
-  −13% on `search-index.json`; the playground copy says what it covers (every native family,
-  the Parsed toggle, share links) and links the tutorials and the live-blocks guide. (#108)
-
-### Fixed
-
-- **Fox Bifrost parsers** never reached the rows their endpoints are about on real captures (one row per date section with the games JSON-stringified; whole table objects for standings; `details[]` hijacking league/header, conferences and trending; layout cells for rosters; result buckets for search). They now port sdv-py's `_fox_layout` row builders and agree with sdv-py cell by cell on 13 captures; `search_popular` maps to `parse_fox_search` like py. (#106)
-- **CBS NAPI parsers**: team/standings came out as one 151-column row (py: one row per `season_year` x `season_type`), endpoint/registry as one 64-column row (py: one row per `key`), the scoring plays / drives feeds skipped py's pinned columns and integer casts, and `{plays: []}` yielded a bogus row. `parse_cbs_list` / `parse_cbs_standings` now port `cbs_napi_parsers` (10 captures, cell-by-cell parity; booleans stay native as for `parse_on3_rdb`). (#106)
-- **Yahoo parsers**: `parse_yahoo_stats` returned the statTypes dictionary instead of the leaders, and the editorial boxscore / scoreboard parsers joined the second id level into column names. They now port `yahoo_shangrila_parsers` (`entity_id` + `sub_id`, one column per stat type; the frame each endpoint is about — pinned in the parity harness) and agree with sdv-py on 4 captures. (#106)
-
-### Removed
-
-- The unused `tsx` devDependency, and `decode-html`: the one call site (`ncaa.service.ts`'s `<select>` scraper) reads cheerio's already-decoded `.text()`, which is identical to `decode($(el).html())` on every entity the old helper handled (an offline test pins `&amp;amp;` / `&#39;` decoding; `SECURITY.md` no longer lists it or the root `overrides`). (#106)
-- **RunKit:** the embedded RunKit notebooks (pinned to `sportsdataverse@^3`) and the `RunKit`
-  component are gone; the quickstart, NHL and providers guides use the StackBlitz button beside
-  their frozen output. (#108)
-
-### Tests
-
-- **Real captures replace synthetic payloads** in the CBS NAPI, Fox Bifrost, Yahoo shangrila + editorial, api.nfl.com, MLB Stats and NHL (api-web / EDGE / Stats REST / Records) parser suites. The CBS, Fox, Yahoo and NFL.com bodies are sdv-py's captures copied byte for byte into `test/fixtures/{cbs,fox,yahoo,nfl_api}/` (provenance READMEs); the MLB / NHL suites run on the captures already vendored under `test/fixtures/py/`. The assertions are concrete (row counts, named cells, snake_case keys, decimal-string id columns). Synthetic payloads survive only as labelled malformed-/empty-payload edge cases and in the three suites with no public capture anywhere (The Odds API, the 247 RDB, the token-gated api.nfl.com routes), listed under "Known synthetic suites" in `test/fixtures/README.md`. (#106)
-- **Offline behaviour tests:** `test/espn_shapes.test.js` drives 40 real ESPN captures through their generated wrappers with `{ parsed: true }` behind a stubbed transport (rows, snake_case keys, string ids, the documented URL); `tennis.getScoreboard` gets its first offline test on a live-captured ATP scoreboard (`test/fixtures/legacy/`). (#106)
-- `test/examples.test.js` (every example script offline), `test/docs-llms.test.js` (llms.txt
-  config), `test/docs-examples.test.js` (the `script` injector family wiring). (#108)
-
-### Docs
-
-- **CHANGELOG:** the three 4.0.0 breaking changes that sat outside the BREAKING heading (Fox vendor
-  pin, Yahoo `league` default, legacy `get*` errors) are under it; draft lines removed; sdv-js PR
-  numbers added; 3.0.0 dated; 2.0.0 → 1.0.x backfilled from the git history and npm publish dates. (#108)
-- **README** rewritten for 4.x (sources table, typed quick start, dataset loaders, utilities,
-  errors & config, examples, how the library is built); `.github/copilot-instructions.md` and
-  `CONTRIBUTING.md` brought up to date (loaders, error vocabulary, coverage gate, examples and
-  tutorials workflow, utilities catalogue, `breaking.yaml`); the phantom `tools/codegen/templates/`
-  references are gone. (#108)
-
-## 4.0.0 (2026-10-06)
+## 4.0.0 (2026-10-07)
 
 _The first release after 3.0.0: 3.1.0 was never published, and its entries are folded in
 here._
@@ -519,6 +393,89 @@ JSON-only.
 > proxy allowlist derives a single host per family, so QMJHL calls there hit the
 > primary host. Use the library directly for QMJHL.
 
+#### Returns-table descriptions, utilities catalogue, examples and tutorials
+
+- **Returns-table column descriptions.** Every returns table (ESPN, native families, loaders)
+  resolves its blank `description` cells the way sdv-py's generator does: the schema's own text,
+  then sdv-py's hand-curated `manual_column_descriptions.yaml` (by schema key, then `_global`),
+  then the column descriptions mined from the SDV R packages (`r_column_descriptions.yaml`: the
+  league's package, its sport's siblings, the merged union). Both files are vendored verbatim at
+  the sdv-py pin (`vendor.yaml` `copy:`, in the LOCK). `npm run codegen` prints
+  `descriptions <family>: <filled>/<total>` and writes `docs/src/generated/description_coverage.json`;
+  overall fill went from 26% to 95.8% (stats.nba.com / stats.wnba.com / MLB / the four NHL
+  families from 0%). The generated row interfaces carry the descriptions as doc comments. (#107)
+- **Loader returns tables + row types in the docs.** Every `load*` block documents its columns
+  (`col_name | type | description`, the type being its generated row type's) and names its
+  `Load<Name>Row`; ESPN and native blocks name their verified row interface, or say
+  _Rows are untyped `Row[]` (not parity-verified yet)._ ESPN endpoints with no fixed table list
+  the leagues that expose them and link the parser's section of the parsed-returns page. (#107)
+- **Utilities catalogue.** `tools/codegen/utilities.yaml` labels every hand-written non-data export
+  (parsers, analytics, odds, models, producers, discovery, transforms, HTTP core, errors, config);
+  codegen renders `docs/docs/utilities/`, `src/generated/utilities.ts` and a "Utilities" sidebar
+  group. `listFunctions(…, { detail: true })` returns `{ name, kind: 'data' | 'utility', category }`
+  rows (`FunctionEntry`); `UTILITY_CATEGORIES` / `UtilityCategory` are exported. (#107)
+- **Typed TSDoc on every generated wrapper:** every `@param params.x` carries its TypeScript type and a description
+  (the YAML description where sdv-py wrote one, else what the param is), `@returns Promise<…>`
+  naming the row interface, and `@see` linking the docs page. The TypeDoc API pages now cover the
+  hand-written modules (parsers, analytics, odds, models, producers, HTTP core) besides the four
+  basketball ESPN samples. (#107)
+- **Breaking-change callouts.** `tools/codegen/breaking.yaml` records every 4.0.0 breaking change
+  by surface; each affected generated page opens with a `:::danger Breaking in 4.0.0` admonition
+  linking the changelog, and `reference/deprecations.md` carries the "Breaking changes by version" table. (#107)
+- **"How this library is built"** (`docs/docs/architecture/`): per surface (ESPN vendored,
+  native vendored, native JS-owned, loaders, hand-written) — source of truth, generator step,
+  output, CI gate, how to change it, and a codegen-rewritten status block (counts + the sdv-py
+  pin). Every generated docs page ends with a visible provenance footer linking its page
+  (the hidden MDX comment is gone). (#107)
+- **Capture-derived returns schemas for fox / cbs / yahoo / yahoo_scores.** `tools/codegen/regen-capture-schemas.mjs`
+  (`npm run schemas:captures`, `--check` gate) rewrites the JS-owned returns schemas of the four
+  families from the registered parsers' rows on the committed real captures (the parity manifest's
+  cbs / fox / yahoo entries; yahoo_scores reads the editorial captures), so the tables describe the
+  4.0.0 per-entity row builders (fox 13 endpoints, cbs 7, yahoo `season_stats_football_passing_ncaaf`,
+  yahoo_scores `boxscore` 33 columns / `scoreboard` 104). The 18 fox and 24 yahoo schemas written for
+  the pre-port output with no capture are marked `unverified` (the docs render the note, not the
+  table). `test/parsers/capture-schema-agreement.test.js` holds every one to its parser: the column
+  set is the rows' key union, every value is of its column's type, ids are decimal strings, and a
+  capture-less endpoint publishes no table. (#107)
+- **Column descriptions are sport-strict.** The cross-sport `_merged` union of the R-package
+  descriptions is never read: a league resolves through its own sport's packages only (hoopR +
+  wehoop for basketball, cfbfastR for cfb, the NFL packages for nfl, baseballr for baseball,
+  fastRhockey for hockey); an unmapped namespace and the shared parsed-returns page get sdv-py's
+  manual text only; the NFL aggregate families (nfl_api / nfl_pro / pff_api) get no play-level
+  nflfastR text. Overall fill is 90.4% (honest; it read 95.8% with the leak), floor 0.90, with a
+  denylist of sport-specific phrases asserted over the generated docs. (#107)
+- **Breaking-change register:** the Baseball Savant `parsed: true` typing change is on record (19
+  entries); a family's vendored / JS-owned label in the docs footer comes from vendor.mjs's
+  `# VENDORED` header (kenpom is vendored; the yahoo page names both its families). (#107)
+- **Runnable examples.** `examples/` holds 16 ESM scripts (`NN_<topic>.mjs`), one per surface
+  (ESPN scoreboard / pbp / standings / rankings, Torvik, Statcast + MLB Stats, NHL api-web + EDGE,
+  HockeyTech Corsi, soccer, The Odds API + odds math, release loaders, discovery, and three
+  sdvplot-js integrations). They run **offline by default**: `examples/_offline.mjs` installs a
+  `configure({ transport })` that serves `test/fixtures/**` by URL (an unrouted URL throws);
+  `SDV_LIVE=1` hits the real hosts. `node --import ./_resolve.mjs <script>` resolves
+  `sportsdataverse` from the repo's `dist/` (no install) and `@sportsdataverse/*` from a sibling
+  sdvplot-js checkout (`SDVPLOT_JS_DIR`); a script that needs an unbuilt sdvplot-js prints
+  `skipped:` and exits 0. `test/examples.test.js` runs every script. (#108)
+- **Tutorials.** `docs/docs/tutorials/` grows to 17 pages (+ an index with a sources column), one
+  per example script: the script's source and its frozen output are injected by the output
+  injector's new `script` family (`inject:source` / `inject:example` markers; artifacts copied to
+  `docs/static/examples/`) and drift-gated by `npm run docs:examples:check`. The ESPN basketball
+  shot-coordinate frame used by the shot-chart tutorial was fitted on four captures, one of them
+  committed and held to it by `test/examples-shot-frame.test.js` (`coordinate_x` = feet across, hoop
+  at 25; `coordinate_y` = feet from the hoop, which fits at y ≈ 0–1; both teams on one basket; free
+  throws carry a sentinel). New fixtures with provenance READMEs: WNBA 2025 / NFL 2024 /
+  LaLiga 2024 standings, NFL 2024 week-1 scoreboard, one verbatim Odds API historical snapshot. (#108)
+- **llms.txt.** `docusaurus-plugin-llms` emits `llms.txt`, `llms-full.txt` and a `.md` copy beside
+  every docs page (TypeDoc's `docs/api/**` excluded from all three; `test/docs-llms.test.js` pins
+  the config). (#108)
+- **Live-editable code blocks.** `@docusaurus/theme-live-codeblock` with a swizzled
+  `ReactLiveScope` exposing the browser parser bundle, `fetchViaProxy` (the `/api/run` request
+  body), `resolve` + `endpoints`, `<Table/>` and React; new guide `guides/live-blocks.md`. (#108)
+- **Open in StackBlitz.** An `OpenInStackBlitz` button under every tutorial's script and in the
+  quickstart opens the snippet as a Node project on StackBlitz (`@stackblitz/sdk`, loaded on
+  click). The source map `docs/src/generated/examples-source.json` is written by
+  `tools/docs/examples-source.mjs` as part of `npm run docs:examples`. (#108)
+
 ### Changed
 
 #### Version 4.0.0
@@ -737,6 +694,14 @@ data-driven:
   printable sportsdataverse (Node.js) cheat sheet at
   [sportsdataverse.org/cheatsheets](https://sportsdataverse.org/cheatsheets).
 
+#### Dependencies, coverage gate, docs search
+
+- **Dependencies:** mocha 11 -> 12 and the root `overrides` block (js-yaml, serialize-javascript, diff — forced only for mocha 11) is gone; the resolved tree is at or above every forced floor. In-range bumps: papaparse 5.7.0 (the playground parser bundle is rebuilt for its BOM stripping), tabletojson 4.1.15, esbuild 0.28.2, typedoc 0.28.20, yaml 2.9.1, @microsoft/api-extractor 7.59.4, @types/node 22.20.5. `npm audit --omit=dev` is clean; the 4 dev-only moderate findings are `sprintf-js` under api-extractor with no upstream fix. `docs/`: lockfile refreshed (compression, proxy-addr) and `tinypool` overridden to `^2.2.0` under the `faster` build — 44 advisories (16 critical) down to 41 (0 critical). (#106)
+- **Coverage:** `npm test` runs mocha under `c8` (`.c8rc.json`: `dist/**` minus `dist/generated/**`, which is contract-tested by the codegen suites; `text-summary` + `lcov` into `coverage/`). The measured baseline is the threshold — lines 94% / functions 95% / branches 84% (measured 94.82 / 95.91 / 84.58 on 4,374 tests) — and `--check-coverage` fails the run below it; CI uploads `coverage/lcov.info` as an artifact. `npm run coverage:generated` re-reports the same run over `dist/generated/**` alone. (#106)
+- **Docs search:** the local search index no longer indexes the TypeDoc tree (`docs/api/**`),
+  −13% on `search-index.json`; the playground copy says what it covers (every native family,
+  the Parsed toggle, share links) and links the tutorials and the live-blocks guide. (#108)
+
 ### Deprecated
 
 #### `sdv.recruiting` (api.247sports.com)
@@ -750,6 +715,13 @@ _#68_
 _#59_
 
 - The six stats.ncaa.org scrapers in `sdv.ncaa` (`getSports`, `getSeasons`, `getDivisions`, `getSportDivisionData`, `getPlayerData`, `getTeamData`) are marked `@deprecated` and emit a one-time `DeprecationWarning` (the host 403s plain clients). `ncaa.getScoreboard` only serves historical seasons.
+
+### Removed
+
+- The unused `tsx` devDependency, and `decode-html`: the one call site (`ncaa.service.ts`'s `<select>` scraper) reads cheerio's already-decoded `.text()`, which is identical to `decode($(el).html())` on every entity the old helper handled (an offline test pins `&amp;amp;` / `&#39;` decoding; `SECURITY.md` no longer lists it or the root `overrides`). (#106)
+- **RunKit:** the embedded RunKit notebooks (pinned to `sportsdataverse@^3`) and the `RunKit`
+  component are gone; the quickstart, NHL and providers guides use the StackBlitz button beside
+  their frozen output. (#108)
 
 ### Fixed
 
@@ -812,6 +784,12 @@ _#77, #59, #56, #62_
 - `sdv.wnba.getTeamList()` no longer throws when called with no argument.
 - ESPN site API rejected the default User-Agent (HTTP 403 on every site_v2 wrapper: scoreboard, summary, teams, rosters…); the default UA no longer carries the `+https://…` token.
 
+#### Fox / CBS / Yahoo parsers on real captures
+
+- **Fox Bifrost parsers** never reached the rows their endpoints are about on real captures (one row per date section with the games JSON-stringified; whole table objects for standings; `details[]` hijacking league/header, conferences and trending; layout cells for rosters; result buckets for search). They now port sdv-py's `_fox_layout` row builders and agree with sdv-py cell by cell on 13 captures; `search_popular` maps to `parse_fox_search` like py. (#106)
+- **CBS NAPI parsers**: team/standings came out as one 151-column row (py: one row per `season_year` x `season_type`), endpoint/registry as one 64-column row (py: one row per `key`), the scoring plays / drives feeds skipped py's pinned columns and integer casts, and `{plays: []}` yielded a bogus row. `parse_cbs_list` / `parse_cbs_standings` now port `cbs_napi_parsers` (10 captures, cell-by-cell parity; booleans stay native as for `parse_on3_rdb`). (#106)
+- **Yahoo parsers**: `parse_yahoo_stats` returned the statTypes dictionary instead of the leaders, and the editorial boxscore / scoreboard parsers joined the second id level into column names. They now port `yahoo_shangrila_parsers` (`entity_id` + `sub_id`, one column per stat type; the frame each endpoint is about — pinned in the parity harness) and agree with sdv-py on 4 captures. (#106)
+
 ### Security
 
 #### Dependency patches and credential redaction
@@ -822,6 +800,24 @@ _#79, #70_
 - Dev-only dependencies patched (never shipped — `files` is `dist/` only): `js-yaml` 4.3.2 (override floor raised from `^4.2.0`), `brace-expansion` 2.1.7 / 5.0.12, `markdown-it` 14.3.2, `linkify-it` 5.0.2, all through `mocha` / `typedoc`. Root `npm audit` is clean.
 - Docs-site dependencies (`docs/package-lock.json`, build-time only, never shipped) refreshed: every `@docusaurus/*` package 3.10.1 → 3.10.2 on one version (including `@docusaurus/faster` and `@docusaurus/types`, which the lockfile refresh would otherwise have left on 3.10.1), plus in-range patches that close 53 of 54 Dependabot advisories (`brace-expansion`, `fast-uri`, `js-yaml`, `joi`, `svgo`, `postcss`, `nanoid`, `image-size`, `browserslist`, `shell-quote`, `http-cache-semantics`, `webpack-dev-server`, `qs`, …). The one left, `braces` (GHSA-vfj7-8cjw-p6xm), has no fixed release and is build-time only; see `SECURITY.md`.
 - Credentials no longer reach `err.cause`. A raw axios error carries its request config — the `Authorization` header, cookies, and a POSTed login form, password included — and it was attached as-is to `AssetFetchError` (network failures, auth failures), so `util.inspect(err)` or a logged error could expose them. Every `SdvError` now stores its `cause` through `safeCause` (name, message and stack with URL query strings and `user:password@` redacted, plus `code` / `errno` / `syscall` — nothing else). `axiosTransport` and the impersonating (impit) transport reject with the same sanitized errors. This applies to every family.
+
+### Tests
+
+- **Real captures replace synthetic payloads** in the CBS NAPI, Fox Bifrost, Yahoo shangrila + editorial, api.nfl.com, MLB Stats and NHL (api-web / EDGE / Stats REST / Records) parser suites. The CBS, Fox, Yahoo and NFL.com bodies are sdv-py's captures copied byte for byte into `test/fixtures/{cbs,fox,yahoo,nfl_api}/` (provenance READMEs); the MLB / NHL suites run on the captures already vendored under `test/fixtures/py/`. The assertions are concrete (row counts, named cells, snake_case keys, decimal-string id columns). Synthetic payloads survive only as labelled malformed-/empty-payload edge cases and in the three suites with no public capture anywhere (The Odds API, the 247 RDB, the token-gated api.nfl.com routes), listed under "Known synthetic suites" in `test/fixtures/README.md`. (#106)
+- **Offline behaviour tests:** `test/espn_shapes.test.js` drives 40 real ESPN captures through their generated wrappers with `{ parsed: true }` behind a stubbed transport (rows, snake_case keys, string ids, the documented URL); `tennis.getScoreboard` gets its first offline test on a live-captured ATP scoreboard (`test/fixtures/legacy/`). (#106)
+- `test/examples.test.js` (every example script offline), `test/docs-llms.test.js` (llms.txt
+  config), `test/docs-examples.test.js` (the `script` injector family wiring). (#108)
+
+### Docs
+
+- **CHANGELOG:** the three 4.0.0 breaking changes that sat outside the BREAKING heading (Fox vendor
+  pin, Yahoo `league` default, legacy `get*` errors) are under it; draft lines removed; sdv-js PR
+  numbers added; 3.0.0 dated; 2.0.0 → 1.0.x backfilled from the git history and npm publish dates. (#108)
+- **README** rewritten for 4.x (sources table, typed quick start, dataset loaders, utilities,
+  errors & config, examples, how the library is built); `.github/copilot-instructions.md` and
+  `CONTRIBUTING.md` brought up to date (loaders, error vocabulary, coverage gate, examples and
+  tutorials workflow, utilities catalogue, `breaking.yaml`); the phantom `tools/codegen/templates/`
+  references are gone. (#108)
 
 ## v3.0.0 (2026-06-17)
 
