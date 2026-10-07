@@ -395,7 +395,7 @@ JSON-only.
   resolves its blank `description` cells the way sdv-py's generator does: the schema's own text,
   then sdv-py's hand-curated `manual_column_descriptions.yaml` (by schema key, then `_global`),
   then the column descriptions mined from the SDV R packages (`r_column_descriptions.yaml`: the
-  league's package, its sport's siblings, the merged union). Both files are vendored verbatim at
+  league's own-sport packages only — see "Column descriptions are sport-strict" below). Both files are vendored verbatim at
   the sdv-py pin (`vendor.yaml` `copy:`, in the LOCK). `npm run codegen` prints
   `descriptions <family>: <filled>/<total>` and writes `docs/src/generated/description_coverage.json`;
   overall fill went from 26% to 95.8% (stats.nba.com / stats.wnba.com / MLB / the four NHL
