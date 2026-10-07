@@ -98,7 +98,7 @@ cd docs && npx docusaurus build   # for doc-affecting changes (onBrokenLinks: th
 - **Never add AI / assistant co-author trailers or "Generated with …" lines** to commits
   or PR bodies. The human author is the sole attributable contributor.
 - Regenerate and commit generated output in the same change as the YAML / renderer edit.
-- CHANGELOG: new work goes under `## Unreleased` (4.0.0 is unpublished on npm; latest is
+- CHANGELOG: new work goes under the top `## <version>` heading (4.0.0 is unpublished on npm; latest is
   3.0.0); `docs/src/pages/CHANGELOG.md` is a mirror of the root file.
 
 ## Cheat sheet

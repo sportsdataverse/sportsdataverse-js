@@ -503,7 +503,7 @@ Before opening a PR, confirm:
 - [ ] Parsers rebundled (`npm run bundle:parsers`) if you changed `src/parsers/`.
 - [ ] New fixtures are real captures with a provenance README entry.
 - [ ] A breaking change has a `tools/codegen/breaking.yaml` entry and a CHANGELOG line
-      under `BREAKING`; other changes go under `## Unreleased`.
+      under `BREAKING`; other changes go under the top (next-release) `## <version>` heading.
 - [ ] Conventional Commit messages, no AI attribution.
 
 Fill out the [pull request template](.github/pull_request_template.md) and link any
