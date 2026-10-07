@@ -359,7 +359,7 @@ export interface WnbaStatsAlltimeleadersgridsTables {
  * One row of `sdv.wnba.wnba_stats_assistleaders({ parsed: true })` (returns schema `native/wnba_stats/assistleaders`, verified on a real sdv-py capture).
  */
 export interface WnbaStatsAssistleadersRow {
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
@@ -373,7 +373,7 @@ export interface WnbaStatsAssistleadersRow {
   team_name?: string | null;
   /** Jersey number worn by the player. Schema `character`. */
   jersey_num?: string | null;
-  /** Schema `character`. */
+  /** Player's position abbreviation as stats.nba.com lists it (e.g. 'G', 'F-G', 'C'). Schema `character`. */
   player_position?: string | null;
   /** Assists. Schema `numeric`. */
   ast?: number | null;
@@ -2851,7 +2851,7 @@ export interface WnbaStatsCommonallplayersRow {
   team_name?: string | null;
   /** Short team abbreviation (e.g. 'LAS'). Schema `character`. */
   team_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Lowercase slug of the player's team used in stats.nba.com URLs (e.g. 'lakers'). Schema `character`. */
   team_code?: string | null;
   /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). Schema `character`. */
   team_slug?: string | null;
@@ -2881,7 +2881,7 @@ export interface WnbaStatsCommonplayerinfoCommonPlayerInfoRow {
   display_fi_last?: string | null;
   /** URL-safe player identifier. Schema `character`. */
   player_slug?: string | null;
-  /** Schema `character`. */
+  /** Player's date of birth as an ISO timestamp string (e.g. '1984-12-30T00:00:00'). Schema `character`. */
   birthdate?: string | null;
   /** Player's school / college (when distinct from 'college'). Schema `character`. */
   school?: string | null;
@@ -2909,7 +2909,7 @@ export interface WnbaStatsCommonplayerinfoCommonPlayerInfoRow {
   team_name?: string | null;
   /** Short team abbreviation (e.g. 'LAS'). Schema `character`. */
   team_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Lowercase slug of the player's current team used in stats.nba.com URLs (e.g. 'lakers'). Schema `character`. */
   team_code?: string | null;
   /** Team city or region (e.g. 'Las Vegas'). Schema `character`. */
   team_city?: string | null;
@@ -2929,7 +2929,7 @@ export interface WnbaStatsCommonplayerinfoCommonPlayerInfoRow {
   draft_year?: string | null;
   /** Round of the draft selection. Schema `character`. */
   draft_round?: string | null;
-  /** Schema `character`. */
+  /** Overall pick the player was selected with, as a string; 'Undrafted' when never drafted. Schema `character`. */
   draft_number?: string | null;
   /** Flag indicating greatest 75 flag for the requested NBA or WNBA Stats context. Schema `character`. */
   greatest_75_flag?: string | null;
@@ -2986,7 +2986,7 @@ export interface WnbaStatsCommonplayoffseriesRow {
   home_team_id?: string | null;
   /** Unique identifier for visitor team. Schema `integer` (an id). */
   visitor_team_id?: string | null;
-  /** Schema `character` (an id). */
+  /** Playoff series id, the game id stem without the game sequence digit (e.g. '004230010' for the 2023-24 playoffs' first series). Schema `character` (an id). */
   series_id?: string | null;
   /** NBA or WNBA Stats value for game number in the commonplayoffseries result set. Schema `integer`. */
   game_num?: number | null;
@@ -3008,7 +3008,7 @@ export interface WnbaStatsCommonteamrosterCommonTeamRosterRow {
   nickname?: string | null;
   /** URL-safe player identifier. Schema `character`. */
   player_slug?: string | null;
-  /** Schema `character`. */
+  /** Jersey number as printed on the roster (string; may be blank or carry a suffix). Schema `character`. */
   num?: string | null;
   /** Listed roster position (G, F, C, etc.). Schema `character`. */
   position?: string | null;
@@ -3611,7 +3611,7 @@ export interface WnbaStatsFantasywidgetRow {
   player_id?: string | null;
   /** Player name. Schema `character`. */
   player_name?: string | null;
-  /** Schema `character`. */
+  /** Player's position abbreviation as stats.nba.com lists it (e.g. 'G', 'F-G', 'C'). Schema `character`. */
   player_position?: string | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -3661,9 +3661,9 @@ export interface WnbaStatsFranchisehistoryFranchiseHistoryRow {
   team_city?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Schema `character`. */
+  /** First season (start year) of the franchise span, as a string (e.g. '1949'). Schema `character`. */
   start_year?: string | null;
-  /** Schema `character`. */
+  /** Last season (start year) of the franchise span, as a string; the current season for an active franchise. Schema `character`. */
   end_year?: string | null;
   /** Years. Schema `integer`. */
   years?: number | null;
@@ -3697,9 +3697,9 @@ export interface WnbaStatsFranchisehistoryDefunctTeamsRow {
   team_city?: string | null;
   /** Full team display name (e.g. 'Las Vegas Aces'). Schema `character`. */
   team_name?: string | null;
-  /** Schema `character`. */
+  /** First season (start year) of the franchise span, as a string (e.g. '1949'). Schema `character`. */
   start_year?: string | null;
-  /** Schema `character`. */
+  /** Last season (start year) of the franchise span, as a string; the current season for an active franchise. Schema `character`. */
   end_year?: string | null;
   /** Years. Schema `integer`. */
   years?: number | null;
@@ -4003,7 +4003,7 @@ export interface WnbaStatsGamerotationTables {
  * One row of the `HomePageLeaders` table of `sdv.wnba.wnba_stats_homepageleaders({ parsed: true })` (returns schema `native/wnba_stats/homepageleaders`, verified on a real sdv-py capture).
  */
 export interface WnbaStatsHomepageleadersHomePageLeadersRow {
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -4084,7 +4084,7 @@ export interface WnbaStatsHomepageleadersTables {
  * One row of the `HomePageStat1` table of `sdv.wnba.wnba_stats_homepagev2({ parsed: true })` (returns schema `native/wnba_stats/homepagev2`, verified on a real sdv-py capture).
  */
 export interface WnbaStatsHomepagev2HomePageStat1Row {
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -4100,7 +4100,7 @@ export interface WnbaStatsHomepagev2HomePageStat1Row {
  * One row of the `HomePageStat2` table of `sdv.wnba.wnba_stats_homepagev2({ parsed: true })` (returns schema `native/wnba_stats/homepagev2`, verified on a real sdv-py capture).
  */
 export interface WnbaStatsHomepagev2HomePageStat2Row {
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -4116,7 +4116,7 @@ export interface WnbaStatsHomepagev2HomePageStat2Row {
  * One row of the `HomePageStat3` table of `sdv.wnba.wnba_stats_homepagev2({ parsed: true })` (returns schema `native/wnba_stats/homepagev2`, verified on a real sdv-py capture).
  */
 export interface WnbaStatsHomepagev2HomePageStat3Row {
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -4132,7 +4132,7 @@ export interface WnbaStatsHomepagev2HomePageStat3Row {
  * One row of the `HomePageStat4` table of `sdv.wnba.wnba_stats_homepagev2({ parsed: true })` (returns schema `native/wnba_stats/homepagev2`, verified on a real sdv-py capture).
  */
 export interface WnbaStatsHomepagev2HomePageStat4Row {
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -4148,7 +4148,7 @@ export interface WnbaStatsHomepagev2HomePageStat4Row {
  * One row of the `HomePageStat5` table of `sdv.wnba.wnba_stats_homepagev2({ parsed: true })` (returns schema `native/wnba_stats/homepagev2`, verified on a real sdv-py capture).
  */
 export interface WnbaStatsHomepagev2HomePageStat5Row {
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -4164,7 +4164,7 @@ export interface WnbaStatsHomepagev2HomePageStat5Row {
  * One row of the `HomePageStat6` table of `sdv.wnba.wnba_stats_homepagev2({ parsed: true })` (returns schema `native/wnba_stats/homepagev2`, verified on a real sdv-py capture).
  */
 export interface WnbaStatsHomepagev2HomePageStat6Row {
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -4180,7 +4180,7 @@ export interface WnbaStatsHomepagev2HomePageStat6Row {
  * One row of the `HomePageStat7` table of `sdv.wnba.wnba_stats_homepagev2({ parsed: true })` (returns schema `native/wnba_stats/homepagev2`, verified on a real sdv-py capture).
  */
 export interface WnbaStatsHomepagev2HomePageStat7Row {
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -4196,7 +4196,7 @@ export interface WnbaStatsHomepagev2HomePageStat7Row {
  * One row of the `HomePageStat8` table of `sdv.wnba.wnba_stats_homepagev2({ parsed: true })` (returns schema `native/wnba_stats/homepagev2`, verified on a real sdv-py capture).
  */
 export interface WnbaStatsHomepagev2HomePageStat8Row {
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -4376,7 +4376,7 @@ export interface WnbaStatsInfographicfanduelplayerRow {
   team_abbreviation?: string | null;
   /** Jersey number worn by the player. Schema `character`. */
   jersey_num?: string | null;
-  /** Schema `character`. */
+  /** Player's position abbreviation as stats.nba.com lists it (e.g. 'G', 'F-G', 'C'). Schema `character`. */
   player_position?: string | null;
   /** Filter results by game location. Schema `character`. */
   location?: string | null;
@@ -4436,7 +4436,7 @@ export interface WnbaStatsInfographicfanduelplayerRow {
  * One row of the `LeadersTiles` table of `sdv.wnba.wnba_stats_leaderstiles({ parsed: true })` (returns schema `native/wnba_stats/leaderstiles`, verified on a real sdv-py capture).
  */
 export interface WnbaStatsLeaderstilesLeadersTilesRow {
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
@@ -4476,7 +4476,7 @@ export interface WnbaStatsLeaderstilesAllTimeSeasonHighRow {
  * One row of the `LastSeasonHigh` table of `sdv.wnba.wnba_stats_leaderstiles({ parsed: true })` (returns schema `native/wnba_stats/leaderstiles`, verified on a real sdv-py capture).
  */
 export interface WnbaStatsLeaderstilesLastSeasonHighRow {
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
@@ -4535,7 +4535,7 @@ export interface WnbaStatsLeaguedashlineupsRow {
   group_set?: string | null;
   /** ESPN group id. Schema `character` (an id). */
   group_id?: string | null;
-  /** Schema `character`. */
+  /** The lineup's five players as a ' - ' separated string of abbreviated names (e.g. 'K. Caldwell-Pope - A. Gordon - N. Jokic - ...'). Schema `character`. */
   group_name?: string | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -4663,11 +4663,11 @@ export interface WnbaStatsLeaguedashplayerbiostatsRow {
   team_abbreviation?: string | null;
   /** Player age (in years). Schema `numeric`. */
   age?: number | null;
-  /** Schema `character`. */
+  /** Player height as a feet-inches string (e.g. '6-4'). Schema `character`. */
   player_height?: string | null;
   /** NBA or WNBA Stats value for player height inches in the leaguedashplayerbiostats result set. Schema `integer`. */
   player_height_inches?: number | null;
-  /** Schema `character`. */
+  /** Player weight in pounds, as a string. Schema `character`. */
   player_weight?: string | null;
   /** College or school attended. Schema `character`. */
   college?: string | null;
@@ -4677,7 +4677,7 @@ export interface WnbaStatsLeaguedashplayerbiostatsRow {
   draft_year?: string | null;
   /** Round of the draft selection. Schema `character`. */
   draft_round?: string | null;
-  /** Schema `character`. */
+  /** Overall pick the player was selected with, as a string; 'Undrafted' when never drafted. Schema `character`. */
   draft_number?: string | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -5067,7 +5067,7 @@ export interface WnbaStatsLeaguedashptdefendRow {
   player_last_team_id?: string | null;
   /** NBA or WNBA Stats value for player last team abbreviation in the leaguedashptdefend result set. Schema `character`. */
   player_last_team_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Player's position abbreviation as stats.nba.com lists it (e.g. 'G', 'F-G', 'C'). Schema `character`. */
   player_position?: string | null;
   /** Player age (in years). Schema `numeric`. */
   age?: number | null;
@@ -5513,7 +5513,7 @@ export interface WnbaStatsLeaguegamelogRow {
 export interface WnbaStatsLeagueleadersRow {
   /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Rank. Schema `integer`. */
+  /** Rank of the row within the returned leaderboard (1 = best) for the stat the endpoint sorts by. Schema `integer`. */
   rank?: number | null;
   /** Player name. Schema `character`. */
   player?: string | null;
@@ -5569,7 +5569,7 @@ export interface WnbaStatsLeagueleadersRow {
 export interface WnbaStatsLeaguelineupvizRow {
   /** ESPN group id. Schema `character` (an id). */
   group_id?: string | null;
-  /** Schema `character`. */
+  /** The lineup's five players as a ' - ' separated string of abbreviated names. Schema `character`. */
   group_name?: string | null;
   /** Unique team identifier. Schema `integer` (an id). */
   team_id?: string | null;
@@ -6703,7 +6703,7 @@ export interface WnbaStatsPlayercareerstatsSeasonTotalsCollegeSeasonRow {
   league_id?: unknown;
   /** Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_id?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** College or school of the season row (SeasonTotalsCollegeSeason set). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   school_name?: unknown;
   /** NBA or WNBA Stats value for player age in the playercareerstats result set. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_age?: unknown;
@@ -13857,9 +13857,9 @@ export interface WnbaStatsPlayergamestreakfinderRow {
 export interface WnbaStatsPlayerindexRow {
   /** Unique player identifier (V3 endpoints). Schema `integer` (an id). */
   person_id?: string | null;
-  /** Schema `character`. */
+  /** Player's last name. Schema `character`. */
   player_last_name?: string | null;
-  /** Schema `character`. */
+  /** Player's first name. Schema `character`. */
   player_first_name?: string | null;
   /** URL-safe player identifier. Schema `character`. */
   player_slug?: string | null;
@@ -13889,9 +13889,9 @@ export interface WnbaStatsPlayerindexRow {
   draft_year?: number | null;
   /** Round of the draft selection. Schema `integer`. */
   draft_round?: number | null;
-  /** Schema `integer`. */
+  /** Overall pick the player was selected with, as a string; 'Undrafted' when never drafted. Schema `integer`. */
   draft_number?: number | null;
-  /** Schema `numeric`. */
+  /** Roster status flag: 1 when the player is on a current roster, 0 otherwise. Schema `numeric`. */
   roster_status?: number | null;
   /** First season. Schema `character`. */
   from_year?: string | null;
@@ -13923,11 +13923,11 @@ export interface WnbaStatsPlayernextngamesRow {
   home_team_name?: string | null;
   /** Full name of the visiting team in the upcoming game. Schema `character`. */
   visitor_team_name?: string | null;
-  /** Schema `character`. */
+  /** Home team's three-letter tricode (e.g. 'LAL'). Schema `character`. */
   home_team_abbreviation?: string | null;
   /** Abbreviation of the visiting team in the upcoming game. Schema `character`. */
   visitor_team_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Home team's nickname (e.g. 'Lakers'). Schema `character`. */
   home_team_nickname?: string | null;
   /** Nickname of the visiting team in the upcoming game. Schema `character`. */
   visitor_team_nickname?: string | null;
@@ -14293,7 +14293,7 @@ export interface WnbaStatsPlayerprofilev2SeasonTotalsCollegeSeasonRow {
   league_id?: unknown;
   /** Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_id?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** College or school of the season row (SeasonTotalsCollegeSeason set). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   school_name?: unknown;
   /** NBA or WNBA Stats value for player age in the playerprofilev2 result set. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_age?: unknown;
@@ -14697,7 +14697,7 @@ export interface WnbaStatsPlayerprofilev2NextGameRow {
   game_time?: string | null;
   /** Filter results by game location. Schema `character`. */
   location?: string | null;
-  /** Schema `integer` (an id). */
+  /** Team id of the player's current team in the NextGame set. Schema `integer` (an id). */
   player_team_id?: string | null;
   /** Schema `character`. */
   player_team_city?: string | null;
@@ -15052,7 +15052,7 @@ export interface WnbaStatsPlayervsplayerPlayerInfoRow {
   display_last_comma_first?: string | null;
   /** Schema `character`. */
   display_fi_last?: string | null;
-  /** Schema `character`. */
+  /** Date of birth as an ISO timestamp string (e.g. '1984-12-30T00:00:00'). Schema `character`. */
   birthdate?: string | null;
   /** Player's school / college (when distinct from 'college'). Schema `character`. */
   school?: string | null;
@@ -15078,7 +15078,7 @@ export interface WnbaStatsPlayervsplayerVsPlayerInfoRow {
   display_last_comma_first?: string | null;
   /** Schema `character`. */
   display_fi_last?: string | null;
-  /** Schema `character`. */
+  /** Date of birth as an ISO timestamp string (e.g. '1984-12-30T00:00:00'). Schema `character`. */
   birthdate?: string | null;
   /** Player's school / college (when distinct from 'college'). Schema `character`. */
   school?: string | null;
@@ -15670,7 +15670,7 @@ export interface WnbaStatsScoreboardv3Row {
   gameclock?: string | null;
   /** Gamecode. Schema `character`. */
   gamecode?: string | null;
-  /** Schema `character`. */
+  /** Game date the scoreboard was requested for (YYYY-MM-DD). Schema `character`. */
   gamedate?: string | null;
   /** Scheduled game start time in US Eastern time. Schema `character`. */
   gameet?: string | null;
@@ -15923,7 +15923,7 @@ export interface WnbaStatsShotchartlineupdetailShotChartLineupDetailRow {
   game_event_id?: unknown;
   /** ESPN group id. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   group_id?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** The lineup's five players as a ' - ' separated string of abbreviated names. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   group_name?: unknown;
   /** Unique player identifier. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_id?: unknown;
@@ -18110,7 +18110,7 @@ export interface WnbaStatsTeamdashboardbygeneralsplitsWinsLossesTeamDashboardRow
   group_set?: string | null;
   /** Specific grouping value for this dashboard or split row. Schema `character`. */
   group_value?: string | null;
-  /** Schema `character`. */
+  /** Split label of the win/loss rows: 'Wins' or 'Losses'. Schema `character`. */
   game_result?: string | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -21094,7 +21094,7 @@ export interface WnbaStatsTeamdashlineupsLineupsRow {
   group_set?: string | null;
   /** ESPN group id. Schema `character` (an id). */
   group_id?: string | null;
-  /** Schema `character`. */
+  /** The lineup's players as a ' - ' separated string of abbreviated names (two to five players, by group_quantity). Schema `character`. */
   group_name?: string | null;
   /** Games played. Schema `integer`. */
   gp?: number | null;
@@ -21634,7 +21634,7 @@ export interface WnbaStatsTeaminfocommonTeamInfoCommonRow {
   team_conference?: string | null;
   /** Division the team belongs to. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   team_division?: unknown;
-  /** Schema `character`. */
+  /** Lowercase slug of the team used in stats.nba.com URLs (e.g. 'lakers'). Schema `character`. */
   team_code?: string | null;
   /** URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). Schema `character`. */
   team_slug?: string | null;
@@ -23199,7 +23199,7 @@ export interface WnbaStatsVideostatusRow {
   home_team_city?: string | null;
   /** Home team name. Schema `character`. */
   home_team_name?: string | null;
-  /** Schema `character`. */
+  /** Home team's three-letter tricode (e.g. 'PHI'). Schema `character`. */
   home_team_abbreviation?: string | null;
   /** Game status label. Schema `integer`. */
   game_status?: number | null;

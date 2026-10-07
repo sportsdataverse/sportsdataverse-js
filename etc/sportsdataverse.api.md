@@ -176,6 +176,19 @@ export interface AsaPlayersXgoalsRow {
 }
 
 // @public
+export type AsaPlayersXpassParams = RequiredParam<"league_slug", number | string> & OptionalParams<{
+    season_name: number | string;
+    stage_name: number | string;
+    minimum_minutes: number | string;
+    general_position: number | string;
+    split_by_teams: number | string;
+    split_by_seasons: number | string;
+    split_by_games: number | string;
+    start_date: number | string;
+    end_date: number | string;
+}> & AsaControls;
+
+// @public
 export type AsaRefereesParams = RequiredParam<"league_slug", number | string> & AsaControls;
 
 // @public
@@ -250,6 +263,7 @@ export interface AsaWrappers {
     }, AsaPlayersGoalsAddedParams>;
     asa_players_salaries: Wrapper<AsaPlayersSalariesRow[], AsaPlayersSalariesParams>;
     asa_players_xgoals: Wrapper<AsaPlayersXgoalsRow[], AsaPlayersXgoalsParams>;
+    asa_players_xpass: Wrapper<Row[], AsaPlayersXpassParams>;
     asa_referees: Wrapper<Row[], AsaRefereesParams>;
     asa_stadia: Wrapper<Row[], AsaStadiaParams>;
     asa_teams: Wrapper<AsaTeamsRow[], AsaTeamsParams>;
@@ -269,6 +283,7 @@ export interface AsaWrappers {
     }, AsaPlayersGoalsAddedParams>;
     asaPlayersSalaries: Wrapper<AsaPlayersSalariesRow[], AsaPlayersSalariesParams>;
     asaPlayersXgoals: Wrapper<AsaPlayersXgoalsRow[], AsaPlayersXgoalsParams>;
+    asaPlayersXpass: Wrapper<Row[], AsaPlayersXpassParams>;
     asaReferees: Wrapper<Row[], AsaRefereesParams>;
     asaStadia: Wrapper<Row[], AsaStadiaParams>;
     asaTeams: Wrapper<AsaTeamsRow[], AsaTeamsParams>;

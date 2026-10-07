@@ -19341,6 +19341,59 @@
       "returnsSchema": "native/asa/players_xgoals"
     },
     {
+      "short": "players_xpass",
+      "flat": true,
+      "api": "asa",
+      "host": "https://app.americansocceranalysis.com/api/v1",
+      "scope": "universal",
+      "path": "/{league_slug}/players/xpass",
+      "pathParams": [
+        {
+          "name": "league_slug"
+        }
+      ],
+      "queryParams": [
+        {
+          "name": "season_name",
+          "queryKey": "season_name"
+        },
+        {
+          "name": "stage_name",
+          "queryKey": "stage_name"
+        },
+        {
+          "name": "minimum_minutes",
+          "queryKey": "minimum_minutes"
+        },
+        {
+          "name": "general_position",
+          "queryKey": "general_position"
+        },
+        {
+          "name": "split_by_teams",
+          "queryKey": "split_by_teams"
+        },
+        {
+          "name": "split_by_seasons",
+          "queryKey": "split_by_seasons"
+        },
+        {
+          "name": "split_by_games",
+          "queryKey": "split_by_games"
+        },
+        {
+          "name": "start_date",
+          "queryKey": "start_date"
+        },
+        {
+          "name": "end_date",
+          "queryKey": "end_date"
+        }
+      ],
+      "parser": "parse_asa",
+      "returnsSchema": "native/asa/players_xpass"
+    },
+    {
       "short": "referees",
       "flat": true,
       "api": "asa",

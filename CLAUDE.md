@@ -37,7 +37,7 @@ As of **v4.0.0** the package is a **cross-league ESPN client _plus_ a native
 
 - **126 ESPN endpoint short names** generated for **30 leagues**,
   exposed as `espn_<league>_<short>` (snake) + `espn<League><Short>` (camelCase).
-- **1059 flat-API wrappers across 27 families** — 14 merged onto a league namespace
+- **1060 flat-API wrappers across 27 families** — 14 merged onto a league namespace
   and 13 on standalone provider namespaces (see
   [Flat-API families](#flat-api-families-native--providers)). `npm run codegen` prints
   the current counts; take numbers from it, not from this file.
@@ -290,7 +290,7 @@ endpoints carry an `include_prefixes` league allowlist and a family `fixed_param
 ### Flat-API families (native + providers)
 
 Non-ESPN, absolute-host live APIs are generated into a **separate** `FLAT_WRAPPERS`
-table (so the ESPN table stays untouched). **1059 flat-API wrappers across 27
+table (so the ESPN table stays untouched). **1060 flat-API wrappers across 27
 families** (YAML stems; `npm run codegen` prints the counts):
 
 **14 league families** — merged onto their league namespace:

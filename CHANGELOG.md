@@ -588,6 +588,13 @@ _#104_
 
 - The vendored sdv-py ref moves to `afafaedae4`, the pin 4.0.0 ships with (the weekly `vendor-sync.yml` PR).
 
+#### Vendor sync to sdv-py `89c638a6`: NFL Pro / On3 / Fox column descriptions
+
+_#110_
+
+- The vendored sdv-py ref moves from `afafaedae4` to `89c638a6` (sdv-py #700 to #715). It brings sdv-py #714's `manual_column_descriptions.yaml` (the NFL Pro, On3 and `fox_api_<short>` blocks plus five single columns), so the generated returns tables now describe those families. Description fill 89.9% to 93.3% overall (57,520/63,987 to 59,707/64,000 cells): `nfl_pro` 0/1,036 to 1,006/1,036 (97.1%), `on3` 152/1,024 to 1,024/1,024, `fox` 18/193 to 193/193; `asa`, `nba_stats`, `wnba_stats` and `pff_api` gain cells too. `r_column_descriptions.yaml` is unchanged. `test/codegen-descriptions.test.js` raises the overall fill floor from 0.89 to 0.93 (the measured 93.3%, rounded down); the wrong-sport denylist still passes on the sport-scoped text.
+- ASA (sdv-py #715's codegen run): new `asa_players_xpass` wrapper (`/{league_slug}/players/xpass`, with its returns schema) and a `league_slug` parameter description on every ASA endpoint. The API report (`etc/sportsdataverse.api.md`), `test/fixtures/py/parity_coverage.json` (917 py tables, 617 documented, 438 verified) and the documented wrapper count (1,060 flat-API wrappers across 27 families) follow.
+
 #### Parser-parity harness: returns tables verified on real captures
 
 _#75_

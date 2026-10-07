@@ -26,6 +26,7 @@ import type {
   AsaPlayersParams,
   AsaPlayersSalariesParams,
   AsaPlayersXgoalsParams,
+  AsaPlayersXpassParams,
   AsaRefereesParams,
   AsaStadiaParams,
   AsaTeamsGoalsAddedParams,
@@ -56,7 +57,7 @@ const GAMES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/games`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns `Promise<AsaGamesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaGames({ league_slug: '…' });
@@ -125,7 +126,7 @@ const GAMES_XGOALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/games/xgoals`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
  * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
  * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
@@ -203,7 +204,7 @@ const GOALKEEPERS_GOALS_ADDED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/goalkeepers/goals-added`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
  * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
  * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
@@ -282,7 +283,7 @@ const GOALKEEPERS_XGOALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/goalkeepers/xgoals`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
  * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
  * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
@@ -323,7 +324,7 @@ const MANAGERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/managers`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaManagers({ league_slug: '…' });
@@ -355,7 +356,7 @@ const PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns `Promise<AsaPlayersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaPlayers({ league_slug: '…' });
@@ -424,7 +425,7 @@ const PLAYERS_GOALS_ADDED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/goals-added`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
  * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
  * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
@@ -503,7 +504,7 @@ const PLAYERS_SALARIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/salaries`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
  * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
  * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
@@ -581,7 +582,7 @@ const PLAYERS_XGOALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/xgoals`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
  * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
  * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
@@ -599,6 +600,84 @@ const PLAYERS_XGOALS_DEF: WrapperDef = {
 export const asaPlayersXgoals: Wrapper<AsaPlayersXgoalsRow[], AsaPlayersXgoalsParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_XGOALS_DEF, params);
 /** snake_case alias of {@link asaPlayersXgoals} (py/R parity). */
 export const asa_players_xgoals = asaPlayersXgoals;
+
+const PLAYERS_XPASS_DEF: WrapperDef = {
+  "short": "players_xpass",
+  "flat": true,
+  "api": "asa",
+  "host": "https://app.americansocceranalysis.com/api/v1",
+  "scope": "universal",
+  "path": "/{league_slug}/players/xpass",
+  "pathParams": [
+    {
+      "name": "league_slug"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "season_name",
+      "queryKey": "season_name"
+    },
+    {
+      "name": "stage_name",
+      "queryKey": "stage_name"
+    },
+    {
+      "name": "minimum_minutes",
+      "queryKey": "minimum_minutes"
+    },
+    {
+      "name": "general_position",
+      "queryKey": "general_position"
+    },
+    {
+      "name": "split_by_teams",
+      "queryKey": "split_by_teams"
+    },
+    {
+      "name": "split_by_seasons",
+      "queryKey": "split_by_seasons"
+    },
+    {
+      "name": "split_by_games",
+      "queryKey": "split_by_games"
+    },
+    {
+      "name": "start_date",
+      "queryKey": "start_date"
+    },
+    {
+      "name": "end_date",
+      "queryKey": "end_date"
+    }
+  ],
+  "parser": "parse_asa",
+  "returnsSchema": "native/asa/players_xpass"
+};
+
+/**
+ * American Soccer Analysis — players xpass.
+ *
+ * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/xpass`
+ *
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
+ * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
+ * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
+ * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
+ * @param params.general_position - `number | string` — Filter by general position code: GK, CB, FB, DM, CM, AM, W, ST (player/GK routes).
+ * @param params.split_by_teams - `number | string` — `true` => one row per entity per team (splits traded players).
+ * @param params.split_by_seasons - `number | string` — `true` => one row per entity per season.
+ * @param params.split_by_games - `number | string` — `true` => one row per entity per game.
+ * @param params.start_date - `number | string` — Lower date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.end_date - `number | string` — Upper date bound (`YYYY-MM-DD`), where the route supports date windows.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @example await sdv.asa.asaPlayersXpass({ league_slug: '…' });
+ * @see https://js.sportsdataverse.org/docs/reference/asa#native-api--american-soccer-analysis
+ */
+export const asaPlayersXpass: Wrapper<Row[], AsaPlayersXpassParams> = (params: WrapperParams = {}) => callFlat(PLAYERS_XPASS_DEF, params);
+/** snake_case alias of {@link asaPlayersXpass} (py/R parity). */
+export const asa_players_xpass = asaPlayersXpass;
 
 const REFEREES_DEF: WrapperDef = {
   "short": "referees",
@@ -622,7 +701,7 @@ const REFEREES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/referees`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaReferees({ league_slug: '…' });
@@ -654,7 +733,7 @@ const STADIA_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/stadia`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaStadia({ league_slug: '…' });
@@ -686,7 +765,7 @@ const TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/teams`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns `Promise<AsaTeamsRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.asa.asaTeams({ league_slug: '…' });
@@ -755,7 +834,7 @@ const TEAMS_GOALS_ADDED_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/teams/goals-added`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
  * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
  * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
@@ -834,7 +913,7 @@ const TEAMS_XGOALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/teams/xgoals`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
  * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
  * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.
@@ -912,7 +991,7 @@ const TEAMS_XPASS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/teams/xpass`
  *
- * @param params.league_slug - `number | string` — the `{league_slug}` path segment.
+ * @param params.league_slug - `number | string` — ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).
  * @param params.season_name - `number | string` — Filter to one or more seasons. Comma-list accepted (`2022,2023`).
  * @param params.stage_name - `number | string` — Filter to a competition stage, e.g. `Regular Season`. **URL-encode spaces.**.
  * @param params.minimum_minutes - `number | string` — Drop players/teams below this minutes-played threshold.

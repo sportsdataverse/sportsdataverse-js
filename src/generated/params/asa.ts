@@ -36,6 +36,9 @@ export type AsaPlayersSalariesParams = RequiredParam<"league_slug", number | str
 /** Params of `asa_players_xgoals` (`GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/xgoals`). */
 export type AsaPlayersXgoalsParams = RequiredParam<"league_slug", number | string> & OptionalParams<{ season_name: number | string; stage_name: number | string; minimum_minutes: number | string; general_position: number | string; split_by_teams: number | string; split_by_seasons: number | string; split_by_games: number | string; start_date: number | string; end_date: number | string }> & AsaControls;
 
+/** Params of `asa_players_xpass` (`GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/xpass`). */
+export type AsaPlayersXpassParams = RequiredParam<"league_slug", number | string> & OptionalParams<{ season_name: number | string; stage_name: number | string; minimum_minutes: number | string; general_position: number | string; split_by_teams: number | string; split_by_seasons: number | string; split_by_games: number | string; start_date: number | string; end_date: number | string }> & AsaControls;
+
 /** Params of `asa_referees` (`GET https://app.americansocceranalysis.com/api/v1/{league_slug}/referees`). */
 export type AsaRefereesParams = RequiredParam<"league_slug", number | string> & AsaControls;
 

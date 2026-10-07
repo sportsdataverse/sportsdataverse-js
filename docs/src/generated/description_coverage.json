@@ -3,8 +3,8 @@
   "_doc": "Returns-table column descriptions filled per family after resolving each cell through tools/codegen/descriptions.mjs (schema text -> manual_column_descriptions.yaml -> r_column_descriptions.yaml). One count per table and league.",
   "families": {
     "asa": {
-      "filled": 143,
-      "total": 143,
+      "filled": 156,
+      "total": 156,
       "rate": 1
     },
     "cbs": {
@@ -18,9 +18,9 @@
       "rate": 0.5894
     },
     "fox": {
-      "filled": 18,
+      "filled": 193,
       "total": 193,
-      "rate": 0.0933
+      "rate": 1
     },
     "hockeytech": {
       "filled": 574,
@@ -48,9 +48,9 @@
       "rate": 0.9796
     },
     "nba_stats": {
-      "filled": 10530,
+      "filled": 10597,
       "total": 10909,
-      "rate": 0.9653
+      "rate": 0.9714
     },
     "nfl_api": {
       "filled": 304,
@@ -58,9 +58,9 @@
       "rate": 1
     },
     "nfl_pro": {
-      "filled": 0,
+      "filled": 1006,
       "total": 1036,
-      "rate": 0
+      "rate": 0.971
     },
     "nhl_api_web": {
       "filled": 768,
@@ -93,14 +93,14 @@
       "rate": 1
     },
     "on3": {
-      "filled": 152,
+      "filled": 1024,
       "total": 1024,
-      "rate": 0.1484
+      "rate": 1
     },
     "pff_api": {
-      "filled": 7887,
+      "filled": 7905,
       "total": 7905,
-      "rate": 0.9977
+      "rate": 1
     },
     "recruiting": {
       "filled": 298,
@@ -123,9 +123,9 @@
       "rate": 1
     },
     "wnba_stats": {
-      "filled": 9792,
+      "filled": 9828,
       "total": 10097,
-      "rate": 0.9698
+      "rate": 0.9734
     },
     "yahoo": {
       "filled": 545,
@@ -139,9 +139,9 @@
     }
   },
   "totals": {
-    "filled": 57520,
-    "total": 63987,
-    "rate": 0.8989
+    "filled": 59707,
+    "total": 64000,
+    "rate": 0.9329
   },
   "breaking_pages": 213
 }

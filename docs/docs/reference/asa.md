@@ -21,7 +21,7 @@ toc_max_heading_level: 2
 
 - **namespace:** `sdv.asa` *(standalone — not an ESPN league)*
 - **families:** American Soccer Analysis
-- **wrappers:** 15 native
+- **wrappers:** 16 native
 
 `asa` is a Soccer provider namespace (no ESPN `{sport}`/`{league}` nesting). Every method is exposed under BOTH its snake_case name (`<family>_<endpoint>`, py/R parity) and a camelCase canonical name (`<family><Endpoint>`) on `sdv.asa`. Pass `{ parsed: true }` to any endpoint to get tidy rows instead of raw JSON.
 
@@ -47,6 +47,7 @@ Flat (non-ESPN) wrappers for the American Soccer Analysis public API. Host: `htt
 | `asa_players_goals_added` / `asaPlayersGoalsAdded` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/players/goals-added` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa_goals_added` — multi-table: `section` = `summary` (default), `actions` | — |
 | `asa_players_salaries` / `asaPlayersSalaries` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/players/salaries` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa` | — |
 | `asa_players_xgoals` / `asaPlayersXgoals` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/players/xgoals` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa` | — |
+| `asa_players_xpass` / `asaPlayersXpass` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/players/xpass` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa` | — |
 | `asa_referees` / `asaReferees` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/referees` | `league_slug`\* | — | `parse_asa` | — |
 | `asa_stadia` / `asaStadia` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/stadia` | `league_slug`\* | — | `parse_asa` | — |
 | `asa_teams` / `asaTeams` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/teams` | `league_slug`\* | — | `parse_asa` | — |
@@ -74,7 +75,7 @@ Flat (non-ESPN) wrappers for the American Soccer Analysis public API. Host: `htt
 | `knockout_game` | logical | True if a knockout/playoff fixture. |
 | `status` | character | Game status (e.g. `final`). |
 | `last_updated_utc` | character | Last-updated timestamp (UTC, ISO 8601). |
-| `attendance` | numeric | Reported attendance (nullable). |
+| `attendance` | integer | Reported attendance (nullable). |
 
 **Row type:** `AsaGamesRow` (exported from the package root).
 
@@ -205,6 +206,26 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `xpoints_added` | numeric | Expected team points added. |
 
 **Row type:** `AsaPlayersXgoalsRow` (exported from the package root).
+
+### Returns — `asa_players_xpass` / `asaPlayersXpass`
+
+| col_name | type | description |
+|---|---|---|
+| `player_id` | character | ASA player id (base62 string; Utf8 join key). |
+| `team_id` | character | ASA team id (base62 string; Utf8 join key, never numeric). |
+| `general_position` | character | General position code (GK/CB/FB/DM/CM/AM/W/ST). |
+| `minutes_played` | integer | Minutes played in the filtered window. |
+| `attempted_passes` | integer | Passes attempted. |
+| `pass_completion_percentage` | numeric | Actual pass completion (0-1). |
+| `xpass_completion_percentage` | numeric | Expected pass completion (0-1). |
+| `passes_completed_over_expected` | numeric | Passes completed over expected. |
+| `passes_completed_over_expected_p100` | numeric | Passes completed over expected per 100 passes. |
+| `avg_distance_yds` | numeric | Average pass distance in yards. |
+| `avg_vertical_distance_yds` | numeric | Average vertical (goalward) pass distance in yards. |
+| `share_team_touches` | numeric | Share of the team's touches (0-1). |
+| `count_games` | integer | Games included in the window. |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `asa_referees` / `asaReferees`
 

@@ -14,6 +14,7 @@ export type {
   AsaPlayersGoalsAddedParams,
   AsaPlayersSalariesParams,
   AsaPlayersXgoalsParams,
+  AsaPlayersXpassParams,
   AsaRefereesParams,
   AsaStadiaParams,
   AsaTeamsParams,

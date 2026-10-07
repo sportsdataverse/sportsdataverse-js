@@ -1948,13 +1948,13 @@ export interface MlbJobsRow {
  * One row of `sdv.mlb.mlb_leagues({ parsed: true })` (returns schema `native/mlb/leagues`, verified on a real sdv-py capture).
  */
 export interface MlbLeaguesRow {
-  /** Id. Schema `integer` (an id). */
+  /** Numeric league id from the source API (PFF: 1 = NFL). Schema `integer` (an id). */
   id?: string | null;
-  /** Display name. Schema `character`. */
+  /** League display name as the source lists it (PFF: 'Pro Football'). Schema `character`. */
   name?: string | null;
   /** API link to the game feed. Schema `character`. */
   link?: string | null;
-  /** Short abbreviation. Schema `character`. */
+  /** League abbreviation as the source lists it (e.g. NFL). Schema `character`. */
   abbreviation?: string | null;
   /** Schema `character`. */
   name_short?: string | null;

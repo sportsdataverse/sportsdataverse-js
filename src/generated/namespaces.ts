@@ -1056,6 +1056,7 @@ import type {
   AsaPlayersParams,
   AsaPlayersSalariesParams,
   AsaPlayersXgoalsParams,
+  AsaPlayersXpassParams,
   AsaRefereesParams,
   AsaStadiaParams,
   AsaTeamsGoalsAddedParams,
@@ -2289,6 +2290,8 @@ export interface AsaWrappers {
   asa_players_salaries: Wrapper<AsaPlayersSalariesRow[], AsaPlayersSalariesParams>;
   /** American Soccer Analysis — players xgoals. `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/xgoals` */
   asa_players_xgoals: Wrapper<AsaPlayersXgoalsRow[], AsaPlayersXgoalsParams>;
+  /** American Soccer Analysis — players xpass. `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/xpass` */
+  asa_players_xpass: Wrapper<Row[], AsaPlayersXpassParams>;
   /** American Soccer Analysis — referees. `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/referees` */
   asa_referees: Wrapper<Row[], AsaRefereesParams>;
   /** American Soccer Analysis — stadia. `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/stadia` */
@@ -2319,6 +2322,8 @@ export interface AsaWrappers {
   asaPlayersSalaries: Wrapper<AsaPlayersSalariesRow[], AsaPlayersSalariesParams>;
   /** American Soccer Analysis — players xgoals. `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/xgoals` */
   asaPlayersXgoals: Wrapper<AsaPlayersXgoalsRow[], AsaPlayersXgoalsParams>;
+  /** American Soccer Analysis — players xpass. `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/players/xpass` */
+  asaPlayersXpass: Wrapper<Row[], AsaPlayersXpassParams>;
   /** American Soccer Analysis — referees. `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/referees` */
   asaReferees: Wrapper<Row[], AsaRefereesParams>;
   /** American Soccer Analysis — stadia. `GET https://app.americansocceranalysis.com/api/v1/{league_slug}/stadia` */

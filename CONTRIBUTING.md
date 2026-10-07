@@ -85,7 +85,7 @@ Three kinds of callables:
   `espn_fitt_v3.yaml`, `espn_cdn.yaml`) — one core, parameterized on `(sport, league)`
   slugs: **126 endpoint short names** exposed across **30 leagues** as
   `espn_<league>_<short>` + `espn<League><Short>`.
-- **Flat APIs** (non-ESPN absolute hosts) — **1059 wrappers across 27 families**:
+- **Flat APIs** (non-ESPN absolute hosts) — **1060 wrappers across 27 families**:
   **14 league families** (MLB Stats, Statcast, NHL ×4, NFL.com, PFF API, NFL Pro,
   KenPom, MLS, NWSL, stats.nba.com, stats.wnba.com) merged onto their league
   namespace, and **13 provider families** (Odds / 247 RDB + site pages / old 247 /

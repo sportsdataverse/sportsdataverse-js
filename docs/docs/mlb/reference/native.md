@@ -1158,10 +1158,10 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 
 | col_name | type | description |
 |---|---|---|
-| `id` | integer | Id. |
-| `name` | character | Display name. |
+| `id` | integer | Numeric league id from the source API (PFF: 1 = NFL). |
+| `name` | character | League display name as the source lists it (PFF: 'Pro Football'). |
 | `link` | character | API link to the game feed. |
-| `abbreviation` | character | Short abbreviation. |
+| `abbreviation` | character | League abbreviation as the source lists it (e.g. NFL). |
 | `name_short` | character |  |
 | `season_state` | character | A string describing the current phase of the league's season (e.g., 'inProgress', 'offseason', 'preseason'). |
 | `has_wild_card` | logical | Boolean flag indicating whether this league includes a wild card playoff format for postseason eligibility. |

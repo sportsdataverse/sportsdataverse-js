@@ -250,7 +250,7 @@ describe('keyless families: counts, hosts, URLs, parser registry', () => {
   const n = (api) => FLAT_WRAPPERS.filter((w) => w.api === api).length;
   it('endpoint counts match sdv-py at the pin', () => {
     n('on3').should.equal(78);
-    n('asa').should.equal(15);
+    n('asa').should.equal(16);
     n('mls_api').should.equal(12);
     n('nwsl_api').should.equal(9);
     n('bart_wbb').should.equal(1);

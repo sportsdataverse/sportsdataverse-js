@@ -68,7 +68,7 @@ Native providers that aren't a single ESPN league — each gets its own `sdv.<na
 | [hockeytech](./hockeytech) | Hockey | HockeyTech / LeagueStat | 16 |
 | [torvik](./torvik) | Basketball | BartTorvik (T-Rank), BartTorvik women's (T-Rank) | 6 |
 | [on3](./on3) | *cross-sport* | On3 Recruit Database | 78 |
-| [asa](./asa) | Soccer | American Soccer Analysis | 15 |
+| [asa](./asa) | Soccer | American Soccer Analysis | 16 |
 
 :::tip Same call, every league
 ```js

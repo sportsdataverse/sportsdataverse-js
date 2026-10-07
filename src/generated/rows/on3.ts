@@ -12,7 +12,7 @@
 export interface On3CollectiveGroupsRow {
   /** On3 RDB key for the NIL collective group. Schema `integer`. */
   key?: number | null;
-  /** Schema `character`. */
+  /** Display name of the row's record. Schema `character`. */
   name?: string | null;
   /** On3 asset key for the collective's primary logo image. Schema `integer`. */
   default_asset_key?: number | null;
@@ -22,7 +22,7 @@ export interface On3CollectiveGroupsRow {
   organization_key?: number | null;
   /** Date the NIL collective launched. Schema `character`. */
   launch_date?: string | null;
-  /** Schema `character`. */
+  /** Legal form of the collective (e.g. LLC, 501(c)(3)). Schema `character`. */
   organization_type?: string | null;
   /** Collective's Twitter/X account handle. Schema `character`. */
   twitter_handle?: string | null;
@@ -40,7 +40,7 @@ export interface On3CollectiveGroupsRow {
   website_url?: string | null;
   /** Collective's stated mission, as published to On3. Schema `character`. */
   mission_statement?: string | null;
-  /** Schema `character`. */
+  /** Free-text description or biography shipped by On3. Schema `character`. */
   description?: string | null;
   /** Collective's annual fundraising goal in dollars, as reported to On3. Schema `numeric`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   annual_goal_amount?: unknown;
@@ -50,153 +50,153 @@ export interface On3CollectiveGroupsRow {
   merged_into_group_key?: unknown;
   /** Nested On3 record for the collective this group merged into (stringified). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   merged_into_group?: unknown;
-  /** Schema `character`. */
+  /** URL slug of the row's record on On3. Schema `character`. */
   slug?: string | null;
   /** Founders of the collective, as a stringified list. Schema `character`. */
   founders?: string | null;
   /** Sports the collective funds, as a stringified list. Schema `character`. */
   sports?: string | null;
-  /** Schema `integer`. */
+  /** Asset key repeated from the nested default-asset object (json_normalize de-duplication suffix). Schema `integer`. */
   default_asset_key_2?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the record's default asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the default asset. Schema `character`. */
   default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the default asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the default asset. Schema `character`. */
   default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the default asset. Schema `character`. */
   default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the default asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the default asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the default asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the default asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the default asset. Schema `integer`. */
   default_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the default asset. Schema `integer`. */
   default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the default asset (e.g. Image). Schema `character`. */
   default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the default asset. Schema `character`. */
   default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the default asset. Schema `character`. */
   default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the default asset (file extension, e.g. png). Schema `character`. */
   default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the default asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the default asset when it is a video (usually null or 0). Schema `integer`. */
   default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the default asset. Schema `character`. */
   default_asset_mime_type?: string | null;
-  /** Schema `integer`. */
+  /** Asset key repeated from the nested social-asset object (json_normalize de-duplication suffix). Schema `integer`. */
   social_asset_key_2?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the social-media asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   social_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the social-media asset. Schema `character`. */
   social_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the social-media asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   social_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the social-media asset. Schema `character`. */
   social_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the social-media asset. Schema `character`. */
   social_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the social-media asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   social_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the social-media asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   social_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the social-media asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   social_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the social-media asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   social_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the social-media asset. Schema `integer`. */
   social_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the social-media asset. Schema `integer`. */
   social_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the social-media asset (e.g. Image). Schema `character`. */
   social_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the social-media asset. Schema `character`. */
   social_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the social-media asset. Schema `character`. */
   social_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the social-media asset (file extension, e.g. png). Schema `character`. */
   social_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the social-media asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   social_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the social-media asset when it is a video (usually null or 0). Schema `integer`. */
   social_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the social-media asset. Schema `character`. */
   social_asset_mime_type?: string | null;
-  /** Schema `integer`. */
+  /** Organization key repeated from the nested organization object (json_normalize de-duplication suffix). Schema `integer`. */
   organization_key_2?: number | null;
-  /** Schema `character`. */
+  /** Full name of the program (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   organization_full_name?: string | null;
-  /** Schema `character`. */
+  /** Short name of the program. Schema `character`. */
   organization_name?: string | null;
-  /** Schema `character`. */
+  /** Common short name of the program, when On3 lists one. Schema `character`. */
   organization_known_as?: string | null;
-  /** Schema `character`. */
+  /** Mascot of the program. Schema `character`. */
   organization_mascot?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the program. Schema `character`. */
   organization_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Convenience CDN URL of the program's logo. Schema `character`. */
   organization_asset_url?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the program's logo asset. Schema `integer`. */
   organization_default_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the program's logo asset. Schema `character`. */
   organization_default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the program's logo asset. Schema `character`. */
   organization_default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the program's logo asset. Schema `character`. */
   organization_default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_default_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the program's logo asset. Schema `integer`. */
   organization_default_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the program's logo asset. Schema `integer`. */
   organization_default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the program's logo asset (e.g. Image). Schema `character`. */
   organization_default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the program's logo asset. Schema `character`. */
   organization_default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the program's logo asset. Schema `character`. */
   organization_default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the program's logo asset (file extension, e.g. png). Schema `character`. */
   organization_default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the program's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_default_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the program's logo asset when it is a video (usually null or 0). Schema `integer`. */
   organization_default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the program's logo asset. Schema `character`. */
   organization_default_asset_mime_type?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the program on On3. Schema `character`. */
   organization_slug?: string | null;
-  /** Schema `character`. */
+  /** Primary hex color of the program. Schema `character`. */
   organization_primary_color?: string | null;
-  /** Schema `character`. */
+  /** Organization type label of the program (e.g. HighSchool, College). Schema `character`. */
   organization_org_type?: string | null;
-  /** Schema `character`. */
+  /** Organization type enum of the program (same vocabulary as org_type). Schema `character`. */
   organization_org_type_enum?: string | null;
-  /** Schema `character`. */
+  /** Division or classification of the program (e.g. NCAA-FB). Schema `character`. */
   organization_division?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** JSON-encoded On3 site keys covering the program (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_site_keys?: unknown;
-  /** Schema `character`. */
+  /** URL slug variant of the program's page, with the key appended. Schema `character`. */
   organization_url_slug?: string | null;
 }
 
@@ -218,15 +218,15 @@ export interface On3DraftsByStarsRow {
   three_stars?: number | null;
   /** Number of drafted players who were unrated (zero-star) recruits. Schema `integer`. */
   zero_stars?: number | null;
-  /** Schema `integer`. */
+  /** Total drafted players counted in the row. Schema `integer`. */
   total?: number | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the state. Schema `integer`. */
   state_key?: number | null;
-  /** Schema `character`. */
+  /** Name of the state the row aggregates (e.g. Alabama). Schema `character`. */
   state_name?: string | null;
-  /** Schema `character`. */
+  /** Two-letter state abbreviation. Schema `character`. */
   state_abbreviation?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the state's country. Schema `integer`. */
   state_country_key?: number | null;
 }
 
@@ -234,7 +234,7 @@ export interface On3DraftsByStarsRow {
  * One row of `sdv.on3.on3_filters_draft_rounds({ parsed: true })` (returns schema `native/on3/filters_draft_rounds`, verified on a real sdv-py capture).
  */
 export interface On3FiltersDraftRoundsRow {
-  /** Schema `integer`. */
+  /** Draft round number. Schema `integer`. */
   round?: number | null;
 }
 
@@ -242,7 +242,7 @@ export interface On3FiltersDraftRoundsRow {
  * One row of `sdv.on3.on3_filters_status({ parsed: true })` (returns schema `native/on3/filters_status`, verified on a real sdv-py capture).
  */
 export interface On3FiltersStatusRow {
-  /** Schema `character`. */
+  /** Filter value as On3 lists it. Schema `character`. */
   value?: string | null;
 }
 
@@ -250,311 +250,311 @@ export interface On3FiltersStatusRow {
  * One row of `sdv.on3.on3_nil_100_v2({ parsed: true })` (returns schema `native/on3/nil_100_v2`, verified on a real sdv-py capture).
  */
 export interface On3Nil100V2Row {
-  /** Schema `numeric`. */
+  /** Industry-consensus numeric rating paired with the person's On3 rating (0-100 scale). Schema `numeric`. */
   person_rating_consensus_rating?: number | null;
-  /** Schema `integer`. */
+  /** Industry-consensus star rating paired with the person's On3 rating (2-5). Schema `integer`. */
   person_rating_consensus_stars?: number | null;
-  /** Schema `integer`. */
+  /** Industry-consensus national rank paired with the person's On3 rating. Schema `integer`. */
   person_rating_consensus_national_rank?: number | null;
-  /** Schema `integer`. */
+  /** Industry-consensus position rank paired with the person's On3 rating. Schema `integer`. */
   person_rating_consensus_position_rank?: number | null;
-  /** Schema `integer`. */
+  /** Industry-consensus state rank paired with the person's On3 rating. Schema `integer`. */
   person_rating_consensus_state_rank?: number | null;
-  /** Schema `integer`. */
+  /** On3 key of the person's On3 rating record. Schema `integer`. */
   person_rating_key?: number | null;
-  /** Schema `numeric`. */
+  /** Numeric value of the person's On3 rating (0-100 scale). Schema `numeric`. */
   person_rating_rating?: number | null;
-  /** Schema `integer`. */
+  /** Star rating of the person's On3 rating (2-5). Schema `integer`. */
   person_rating_stars?: number | null;
-  /** Schema `integer`. */
+  /** National rank of the person's On3 rating. Schema `integer`. */
   person_rating_national_rank?: number | null;
-  /** Schema `integer`. */
+  /** Position rank of the person's On3 rating. Schema `integer`. */
   person_rating_position_rank?: number | null;
-  /** Schema `integer`. */
+  /** State rank of the person's On3 rating. Schema `integer`. */
   person_rating_state_rank?: number | null;
-  /** Schema `character`. */
+  /** Position abbreviation the person's On3 rating was assigned at. Schema `character`. */
   person_rating_position_abbr?: string | null;
-  /** Schema `character`. */
+  /** State abbreviation the person's On3 rating was assigned in. Schema `character`. */
   person_rating_state_abbr?: string | null;
-  /** Schema `logical`. */
+  /** Five-star-plus flag on the person's On3 rating. Schema `logical`. */
   person_rating_five_star_plus?: boolean | null;
-  /** Schema `character`. */
+  /** Division of the person's current organization (e.g. NCAA-FB, NCAA-BK). Schema `character`. */
   person_division?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the person's primary sport. Schema `integer`. */
   person_default_sport_key?: number | null;
-  /** Schema `character`. */
+  /** Name of the person's primary sport (e.g. Football). Schema `character`. */
   person_default_sport_name?: string | null;
-  /** Schema `character`. */
+  /** Level of the person's current organization (e.g. HighSchool, College, Professional). Schema `character`. */
   person_organization_level?: string | null;
-  /** Schema `numeric`. */
+  /** Age of the person in years, when known. Schema `numeric`. */
   person_age?: number | null;
-  /** Schema `character`. */
+  /** JSON-encoded list of On3 profile tags on the person (e.g. Influencer). Schema `character`. */
   person_tags?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the person. Schema `integer`. */
   person_key?: number | null;
-  /** Schema `integer`. */
+  /** On3 key of the person's active recruitment record. Schema `integer`. */
   person_recruitment_key?: number | null;
-  /** Schema `character`. */
+  /** Display name of the person. Schema `character`. */
   person_name?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the person's On3 profile. Schema `character`. */
   person_slug?: string | null;
-  /** Schema `character`. */
+  /** High-school display name on the person's record. Schema `character`. */
   person_high_school_name?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the person's high school. Schema `integer`. */
   person_high_school_key?: number | null;
-  /** Schema `character`. */
+  /** Full name of the person's high school (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   person_high_school_full_name?: string | null;
-  /** Schema `character`. */
+  /** High-school display name on the person's record (json_normalize de-duplication suffix). Schema `character`. */
   person_high_school_name_2?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Common short name of the person's high school, when On3 lists one. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_known_as?: unknown;
-  /** Schema `character`. */
+  /** Mascot of the person's high school. Schema `character`. */
   person_high_school_mascot?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the person's high school. Schema `character`. */
   person_high_school_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Convenience CDN URL of the person's high school's logo. Schema `character`. */
   person_high_school_asset_url?: string | null;
-  /** Schema `numeric`. */
+  /** On3 asset key of the person's high school's logo asset. Schema `numeric`. */
   person_high_school_default_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_alt_text?: unknown;
-  /** Schema `numeric`. */
+  /** Pixel height of the person's high school's logo asset. Schema `numeric`. */
   person_high_school_default_asset_height?: number | null;
-  /** Schema `numeric`. */
+  /** Pixel width of the person's high school's logo asset. Schema `numeric`. */
   person_high_school_default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the person's high school's logo asset (e.g. Image). Schema `character`. */
   person_high_school_default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the person's high school's logo asset (file extension, e.g. png). Schema `character`. */
   person_high_school_default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the person's high school's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_thumbnail?: unknown;
-  /** Schema `numeric`. */
+  /** Duration of the person's high school's logo asset when it is a video (usually null or 0). Schema `numeric`. */
   person_high_school_default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_mime_type?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the person's high school on On3. Schema `character`. */
   person_high_school_slug?: string | null;
-  /** Schema `character`. */
+  /** Primary hex color of the person's high school. Schema `character`. */
   person_high_school_primary_color?: string | null;
-  /** Schema `character`. */
+  /** Organization type label of the person's high school (e.g. HighSchool, College). Schema `character`. */
   person_high_school_org_type?: string | null;
-  /** Schema `character`. */
+  /** Organization type enum of the person's high school (same vocabulary as org_type). Schema `character`. */
   person_high_school_org_type_enum?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Division or classification of the person's high school (e.g. NCAA-FB). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_division?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** JSON-encoded On3 site keys covering the person's high school (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_site_keys?: unknown;
-  /** Schema `character`. */
+  /** URL slug variant of the person's high school's page, with the key appended. Schema `character`. */
   person_high_school_url_slug?: string | null;
-  /** Schema `character`. */
+  /** Home town of the person as On3 lists it (e.g. 'Belleville, MI'). Schema `character`. */
   person_home_town_name?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person early-enrolled at college. Schema `logical`. */
   person_early_enrollee?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the person signed during the early signing period. Schema `logical`. */
   person_early_signee?: boolean | null;
-  /** Schema `character`. */
+  /** Convenience CDN URL of the person's headshot. Schema `character`. */
   person_default_asset_url?: string | null;
-  /** Schema `integer`. */
+  /** High-school graduating class year of the person. Schema `integer`. */
   person_class_year?: number | null;
-  /** Schema `logical`. */
+  /** Whether the person's athlete profile is verified by On3. Schema `logical`. */
   person_athlete_verified?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the person's prospect measurables are verified by On3. Schema `logical`. */
   person_prospect_verified?: boolean | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the person's headshot asset. Schema `integer`. */
   person_default_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the person's headshot asset. Schema `character`. */
   person_default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the person's headshot asset. Schema `character`. */
   person_default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the person's headshot asset. Schema `character`. */
   person_default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the person's headshot asset. Schema `integer`. */
   person_default_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the person's headshot asset. Schema `integer`. */
   person_default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the person's headshot asset (e.g. Image). Schema `character`. */
   person_default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the person's headshot asset. Schema `character`. */
   person_default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the person's headshot asset. Schema `character`. */
   person_default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the person's headshot asset (file extension, e.g. png). Schema `character`. */
   person_default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the person's headshot asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the person's headshot asset when it is a video (usually null or 0). Schema `integer`. */
   person_default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the person's headshot asset. Schema `character`. */
   person_default_asset_mime_type?: string | null;
-  /** Schema `character`. */
+  /** Position abbreviation on the person's record. Schema `character`. */
   person_position_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Height of the person: a formatted string (e.g. '6-8') or inches, depending on the endpoint. Schema `character`. */
   person_height?: string | null;
-  /** Schema `integer`. */
+  /** Weight of the person in pounds. Schema `integer`. */
   person_weight?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** On3 roster (transfer-portal-adjusted) rating of the person, when published. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_roster_rating?: unknown;
-  /** Schema `character`. */
+  /** Type of the person's commitment status (e.g. Committed, Signed, Enrolled, None). Schema `character`. */
   person_commit_status_type?: string | null;
-  /** Schema `logical`. */
+  /** Short-term-signee flag of the person's commitment status (null when not applicable). Schema `logical`. */
   person_commit_status_short_term_signee?: boolean | null;
-  /** Schema `character`. */
+  /** Date the person's commitment status took effect (ISO timestamp string). Schema `character`. */
   person_commit_status_date?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested asset of the committed-to program (the person's commitment status; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_committed_asset?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested logo asset of the committed-to program (the person's commitment status; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_committed_asset_res?: unknown;
-  /** Schema `integer`. */
+  /** On3 numeric key of the person's commitment status's program transferred to. Schema `integer`. */
   person_commit_status_transferred_asset_key?: number | null;
-  /** Schema `character`. */
+  /** CDN URL of the person's commitment status's program transferred to's logo. Schema `character`. */
   person_commit_status_transferred_asset_url?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the person's commitment status's program transferred to on On3. Schema `character`. */
   person_commit_status_transferred_asset_slug?: string | null;
-  /** Schema `character`. */
+  /** Full name of the person's commitment status's program transferred to (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   person_commit_status_transferred_asset_full_name?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested logo asset of the program transferred to (the person's commitment status; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_transferred_asset_res?: unknown;
-  /** Schema `integer`. */
+  /** On3 key of the committed-to program (the person's commitment status). Schema `integer`. */
   person_commit_status_committed_organization_key?: number | null;
-  /** Schema `character`. */
+  /** Full name of the person's commitment status's committed-to program (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   person_commit_status_committed_organization_full_name?: string | null;
-  /** Schema `character`. */
+  /** Short name of the person's commitment status's committed-to program. Schema `character`. */
   person_commit_status_committed_organization_name?: string | null;
-  /** Schema `character`. */
+  /** Mascot of the person's commitment status's committed-to program. Schema `character`. */
   person_commit_status_committed_organization_mascot?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the person's commitment status's committed-to program. Schema `character`. */
   person_commit_status_committed_organization_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the committed-to program's logo (the person's commitment status). Schema `character`. */
   person_commit_status_committed_organization_asset_url?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the person's commitment status's committed-to program's logo asset. Schema `integer`. */
   person_commit_status_committed_organization_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the person's commitment status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_committed_organization_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the person's commitment status's committed-to program's logo asset. Schema `character`. */
   person_commit_status_committed_organization_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the person's commitment status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_committed_organization_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the person's commitment status's committed-to program's logo asset. Schema `character`. */
   person_commit_status_committed_organization_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the person's commitment status's committed-to program's logo asset. Schema `character`. */
   person_commit_status_committed_organization_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the person's commitment status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_committed_organization_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the person's commitment status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_committed_organization_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the person's commitment status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_committed_organization_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the person's commitment status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_committed_organization_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the person's commitment status's committed-to program's logo asset. Schema `integer`. */
   person_commit_status_committed_organization_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the person's commitment status's committed-to program's logo asset. Schema `integer`. */
   person_commit_status_committed_organization_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the person's commitment status's committed-to program's logo asset (e.g. Image). Schema `character`. */
   person_commit_status_committed_organization_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the person's commitment status's committed-to program's logo asset. Schema `character`. */
   person_commit_status_committed_organization_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the person's commitment status's committed-to program's logo asset. Schema `character`. */
   person_commit_status_committed_organization_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the person's commitment status's committed-to program's logo asset (file extension, e.g. png). Schema `character`. */
   person_commit_status_committed_organization_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the person's commitment status's committed-to program's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_committed_organization_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the person's commitment status's committed-to program's logo asset when it is a video (usually null or 0). Schema `integer`. */
   person_commit_status_committed_organization_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the person's commitment status's committed-to program's logo asset. Schema `character`. */
   person_commit_status_committed_organization_asset_mime_type?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the committed-to program (the person's commitment status). Schema `character`. */
   person_commit_status_committed_organization_slug?: string | null;
-  /** Schema `character`. */
+  /** Primary hex color of the person's commitment status's committed-to program. Schema `character`. */
   person_commit_status_committed_organization_primary_color?: string | null;
-  /** Schema `character`. */
+  /** Academic class standing recorded on the person's commitment status (e.g. Senior). Schema `character`. */
   person_commit_status_class_rank?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Date the player entered the transfer portal (the person's commitment status; null when never entered). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_transfer_entered?: unknown;
-  /** Schema `integer`. */
+  /** Recruiting-cycle year the person's commitment status belongs to. Schema `integer`. */
   person_commit_status_recruitment_year?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested asset of the program decommitted from (the person's commitment status; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_decommitted_asset?: unknown;
-  /** Schema `logical`. */
+  /** Transfer flag of the person's commitment status (null when not applicable). Schema `logical`. */
   person_commit_status_transfer?: boolean | null;
-  /** Schema `logical`. */
+  /** Expected-to-transfer flag of the person's commitment status (null when not applicable). Schema `logical`. */
   person_commit_status_expected_to_transfer?: boolean | null;
-  /** Schema `integer`. */
+  /** On3 key of the recruitment record the person's commitment status belongs to. Schema `integer`. */
   person_commit_status_recruitment_key?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player withdrew from the transfer portal (the person's commitment status). Schema `logical`. */
   person_commit_status_withdrawn_transfer?: boolean | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Date the player withdrew from the transfer portal (the person's commitment status; null when never withdrawn). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_commit_status_withdrawn_transfer_date?: unknown;
-  /** Schema `character`. */
+  /** JSON-encoded On3 RPM (Recruiting Prediction Machine) entries for the person. Schema `character`. */
   person_predictions?: string | null;
-  /** Schema `character`. */
+  /** On3 NIL valuation status of the person (e.g. Normal). Schema `character`. */
   person_nil_status?: string | null;
-  /** Schema `numeric`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** On3 NIL valuation of the person in US dollars. Schema `numeric`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_nil_value?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Sport slug the video belongs to. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_sport?: unknown;
-  /** Schema `character`. */
+  /** Status of the NIL valuation (e.g. Normal). Schema `character`. */
   valuation_nil_status?: string | null;
-  /** Schema `integer`. */
+  /** The NIL valuation in US dollars. Schema `integer`. */
   valuation_valuation?: number | null;
-  /** Schema `integer`. */
+  /** Change in the NIL valuation since the previous update, in US dollars. Schema `integer`. */
   valuation_valuation_change?: number | null;
-  /** Schema `integer`. */
+  /** Social-media follower count feeding the NIL valuation. Schema `integer`. */
   valuation_followers?: number | null;
-  /** Schema `integer`. */
+  /** Overall rank of the NIL valuation across On3's NIL 100. Schema `integer`. */
   valuation_rank?: number | null;
-  /** Schema `integer`. */
+  /** Unix timestamp (seconds) of the last update to the NIL valuation. Schema `integer`. */
   valuation_last_updated?: number | null;
-  /** Schema `numeric`. */
+  /** On3 whisper valuation (reported deal value) behind the NIL valuation, in US dollars. Schema `numeric`. */
   valuation_whisper?: number | null;
-  /** Schema `numeric`. */
+  /** Change in the whisper valuation behind the NIL valuation, in US dollars. Schema `numeric`. */
   valuation_whisper_change?: number | null;
-  /** Schema `character`. */
+  /** JSON-encoded per-platform social valuations behind the NIL valuation. Schema `character`. */
   valuation_social_valuations?: string | null;
-  /** Schema `integer`. */
+  /** Rank of the NIL valuation within its group (sport or position). Schema `integer`. */
   valuation_group_rank?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Name of the group the NIL valuation is ranked within (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   valuation_group_name?: unknown;
-  /** Schema `character`. */
+  /** JSON-encoded list of NIL tags on the NIL valuation (e.g. Influencer). Schema `character`. */
   valuation_tags?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested roster-value object of the NIL valuation (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   valuation_roster_value?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested NIL-value object of the NIL valuation (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   valuation_nil_value?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested default-asset object of the person's high school (null when On3 ships none). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset?: unknown;
 }
 
@@ -562,291 +562,291 @@ export interface On3Nil100V2Row {
  * One row of `sdv.on3.on3_nil_rankings({ parsed: true })` (returns schema `native/on3/nil_rankings`, verified on a real sdv-py capture).
  */
 export interface On3NilRankingsRow {
-  /** Schema `integer`. */
+  /** On3 numeric key of the person's primary sport. Schema `integer`. */
   person_default_sport_key?: number | null;
-  /** Schema `character`. */
+  /** Name of the person's primary sport (e.g. Football). Schema `character`. */
   person_default_sport_name?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the person's primary sport. Schema `character`. */
   person_default_sport_slug?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the person's primary sport. Schema `character`. */
   person_default_sport_abbreviation?: string | null;
-  /** Schema `logical`. */
+  /** Whether On3 ranks players in the person's primary sport. Schema `logical`. */
   person_default_sport_is_rankable?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether industry-consensus rankings exist for the person's primary sport. Schema `logical`. */
   person_default_sport_is_industry_rankable?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether On3 scouting reports exist for the person's primary sport. Schema `logical`. */
   person_default_sport_is_scoutable?: boolean | null;
-  /** Schema `numeric`. */
+  /** Industry-consensus numeric rating paired with the person's On3 rating (0-100 scale). Schema `numeric`. */
   person_rating_consensus_rating?: number | null;
-  /** Schema `integer`. */
+  /** Industry-consensus star rating paired with the person's On3 rating (2-5). Schema `integer`. */
   person_rating_consensus_stars?: number | null;
-  /** Schema `integer`. */
+  /** Industry-consensus national rank paired with the person's On3 rating. Schema `integer`. */
   person_rating_consensus_national_rank?: number | null;
-  /** Schema `integer`. */
+  /** Industry-consensus position rank paired with the person's On3 rating. Schema `integer`. */
   person_rating_consensus_position_rank?: number | null;
-  /** Schema `integer`. */
+  /** Industry-consensus state rank paired with the person's On3 rating. Schema `integer`. */
   person_rating_consensus_state_rank?: number | null;
-  /** Schema `integer`. */
+  /** On3 key of the person's On3 rating record. Schema `integer`. */
   person_rating_key?: number | null;
-  /** Schema `numeric`. */
+  /** Numeric value of the person's On3 rating (0-100 scale). Schema `numeric`. */
   person_rating_rating?: number | null;
-  /** Schema `integer`. */
+  /** Star rating of the person's On3 rating (2-5). Schema `integer`. */
   person_rating_stars?: number | null;
-  /** Schema `integer`. */
+  /** National rank of the person's On3 rating. Schema `integer`. */
   person_rating_national_rank?: number | null;
-  /** Schema `integer`. */
+  /** Position rank of the person's On3 rating. Schema `integer`. */
   person_rating_position_rank?: number | null;
-  /** Schema `integer`. */
+  /** State rank of the person's On3 rating. Schema `integer`. */
   person_rating_state_rank?: number | null;
-  /** Schema `character`. */
+  /** Position abbreviation the person's On3 rating was assigned at. Schema `character`. */
   person_rating_position_abbr?: string | null;
-  /** Schema `character`. */
+  /** State abbreviation the person's On3 rating was assigned in. Schema `character`. */
   person_rating_state_abbr?: string | null;
-  /** Schema `logical`. */
+  /** Five-star-plus flag on the person's On3 rating. Schema `logical`. */
   person_rating_five_star_plus?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the recruit is committed (the person's recruiting status). Schema `logical`. */
   person_status_is_committed?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the recruit has signed (the person's recruiting status). Schema `logical`. */
   person_status_is_signed?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the recruit is a transfer (the person's recruiting status). Schema `logical`. */
   person_status_is_transfer?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the recruit is enrolled (the person's recruiting status). Schema `logical`. */
   person_status_is_enrolled?: boolean | null;
-  /** Schema `character`. */
+  /** Date of the commitment (the person's recruiting status; ISO timestamp string). Schema `character`. */
   person_status_commitment_date?: string | null;
-  /** Schema `numeric`. */
+  /** On3 key of the committed-to program (the person's recruiting status). Schema `numeric`. */
   person_status_committed_organization_key?: number | null;
-  /** Schema `character`. */
+  /** URL slug of the committed-to program (the person's recruiting status). Schema `character`. */
   person_status_committed_organization_slug?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the committed-to program's logo (the person's recruiting status). Schema `character`. */
   person_status_committed_organization_asset_url?: string | null;
-  /** Schema `numeric`. */
+  /** On3 asset key of the person's recruiting status's committed-to program's logo asset. Schema `numeric`. */
   person_status_committed_organization_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the person's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_status_committed_organization_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the person's recruiting status's committed-to program's logo asset. Schema `character`. */
   person_status_committed_organization_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the person's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_status_committed_organization_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the person's recruiting status's committed-to program's logo asset. Schema `character`. */
   person_status_committed_organization_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the person's recruiting status's committed-to program's logo asset. Schema `character`. */
   person_status_committed_organization_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the person's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_status_committed_organization_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the person's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_status_committed_organization_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the person's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_status_committed_organization_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the person's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_status_committed_organization_asset_alt_text?: unknown;
-  /** Schema `numeric`. */
+  /** Pixel height of the person's recruiting status's committed-to program's logo asset. Schema `numeric`. */
   person_status_committed_organization_asset_height?: number | null;
-  /** Schema `numeric`. */
+  /** Pixel width of the person's recruiting status's committed-to program's logo asset. Schema `numeric`. */
   person_status_committed_organization_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the person's recruiting status's committed-to program's logo asset (e.g. Image). Schema `character`. */
   person_status_committed_organization_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the person's recruiting status's committed-to program's logo asset. Schema `character`. */
   person_status_committed_organization_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the person's recruiting status's committed-to program's logo asset. Schema `character`. */
   person_status_committed_organization_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the person's recruiting status's committed-to program's logo asset (file extension, e.g. png). Schema `character`. */
   person_status_committed_organization_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the person's recruiting status's committed-to program's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_status_committed_organization_asset_thumbnail?: unknown;
-  /** Schema `numeric`. */
+  /** Duration of the person's recruiting status's committed-to program's logo asset when it is a video (usually null or 0). Schema `numeric`. */
   person_status_committed_organization_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the person's recruiting status's committed-to program's logo asset. Schema `character`. */
   person_status_committed_organization_asset_mime_type?: string | null;
-  /** Schema `character`. */
+  /** Primary hex color of the person's recruiting status's committed-to program. Schema `character`. */
   person_status_committed_organization_primary_color?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Convenience CDN URL of the person's recruiting status's program transferred from's logo. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_status_transferred_from_organization_asset_url?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** URL slug of the person's recruiting status's program transferred from on On3. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_status_transferred_from_organization_slug?: unknown;
-  /** Schema `numeric`. */
+  /** Highest interest level a program has logged for the recruit (the person's recruiting status). Schema `numeric`. */
   person_status_highest_interest_level?: number | null;
-  /** Schema `integer`. */
+  /** Number of programs with logged interest in the recruit (the person's recruiting status). Schema `integer`. */
   person_status_interest_count?: number | null;
-  /** Schema `integer`. */
+  /** Recruiting-cycle year the person's recruiting status belongs to. Schema `integer`. */
   person_status_recruitment_year?: number | null;
-  /** Schema `character`. */
+  /** Sport the person's recruiting status applies to. Schema `character`. */
   person_status_sport_name?: string | null;
-  /** Schema `logical`. */
+  /** Short-term-signee flag of the person's recruiting status (null when not applicable). Schema `logical`. */
   person_status_short_term_signee?: boolean | null;
-  /** Schema `character`. */
+  /** JSON-encoded On3 RPM (Recruiting Prediction Machine) entries for the person. Schema `character`. */
   person_predictions?: string | null;
-  /** Schema `character`. */
+  /** JSON-encoded list of On3 profile tags on the person (e.g. Influencer). Schema `character`. */
   person_tags?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the person. Schema `integer`. */
   person_key?: number | null;
-  /** Schema `character`. */
+  /** Display name of the person. Schema `character`. */
   person_name?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the person's On3 profile. Schema `character`. */
   person_slug?: string | null;
-  /** Schema `character`. */
+  /** High-school display name on the person's record. Schema `character`. */
   person_high_school_name?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the person's high school. Schema `integer`. */
   person_high_school_key?: number | null;
-  /** Schema `character`. */
+  /** Full name of the person's high school (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   person_high_school_full_name?: string | null;
-  /** Schema `character`. */
+  /** High-school display name on the person's record (json_normalize de-duplication suffix). Schema `character`. */
   person_high_school_name_2?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Common short name of the person's high school, when On3 lists one. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_known_as?: unknown;
-  /** Schema `character`. */
+  /** Mascot of the person's high school. Schema `character`. */
   person_high_school_mascot?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the person's high school. Schema `character`. */
   person_high_school_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Convenience CDN URL of the person's high school's logo. Schema `character`. */
   person_high_school_asset_url?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the person's high school's logo asset. Schema `integer`. */
   person_high_school_default_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the person's high school's logo asset. Schema `integer`. */
   person_high_school_default_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the person's high school's logo asset. Schema `integer`. */
   person_high_school_default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the person's high school's logo asset (e.g. Image). Schema `character`. */
   person_high_school_default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the person's high school's logo asset (file extension, e.g. png). Schema `character`. */
   person_high_school_default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the person's high school's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the person's high school's logo asset when it is a video (usually null or 0). Schema `integer`. */
   person_high_school_default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_mime_type?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the person's high school on On3. Schema `character`. */
   person_high_school_slug?: string | null;
-  /** Schema `character`. */
+  /** Primary hex color of the person's high school. Schema `character`. */
   person_high_school_primary_color?: string | null;
-  /** Schema `character`. */
+  /** Organization type label of the person's high school (e.g. HighSchool, College). Schema `character`. */
   person_high_school_org_type?: string | null;
-  /** Schema `character`. */
+  /** Organization type enum of the person's high school (same vocabulary as org_type). Schema `character`. */
   person_high_school_org_type_enum?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Division or classification of the person's high school (e.g. NCAA-FB). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_division?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** JSON-encoded On3 site keys covering the person's high school (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_site_keys?: unknown;
-  /** Schema `character`. */
+  /** URL slug variant of the person's high school's page, with the key appended. Schema `character`. */
   person_high_school_url_slug?: string | null;
-  /** Schema `character`. */
+  /** Home town of the person as On3 lists it (e.g. 'Belleville, MI'). Schema `character`. */
   person_home_town_name?: string | null;
-  /** Schema `character`. */
+  /** Convenience CDN URL of the person's headshot. Schema `character`. */
   person_default_asset_url?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the person's headshot asset. Schema `integer`. */
   person_default_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the person's headshot asset. Schema `character`. */
   person_default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the person's headshot asset. Schema `character`. */
   person_default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the person's headshot asset. Schema `character`. */
   person_default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the person's headshot asset. Schema `integer`. */
   person_default_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the person's headshot asset. Schema `integer`. */
   person_default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the person's headshot asset (e.g. Image). Schema `character`. */
   person_default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the person's headshot asset. Schema `character`. */
   person_default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the person's headshot asset. Schema `character`. */
   person_default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the person's headshot asset (file extension, e.g. png). Schema `character`. */
   person_default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the person's headshot asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the person's headshot asset when it is a video (usually null or 0). Schema `integer`. */
   person_default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the person's headshot asset. Schema `character`. */
   person_default_asset_mime_type?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person signed during the early signing period. Schema `logical`. */
   person_early_signee?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the person early-enrolled at college. Schema `logical`. */
   person_early_enrollee?: boolean | null;
-  /** Schema `character`. */
+  /** Position abbreviation on the person's record. Schema `character`. */
   person_position_abbreviation?: string | null;
-  /** Schema `numeric`. */
+  /** Height of the person: a formatted string (e.g. '6-8') or inches, depending on the endpoint. Schema `numeric`. */
   person_height?: number | null;
-  /** Schema `character`. */
+  /** Human-formatted height of the person (e.g. '6-3.5'). Schema `character`. */
   person_formatted_height?: string | null;
-  /** Schema `integer`. */
+  /** Weight of the person in pounds. Schema `integer`. */
   person_weight?: number | null;
-  /** Schema `integer`. */
+  /** High-school graduating class year of the person. Schema `integer`. */
   person_class_year?: number | null;
-  /** Schema `logical`. */
+  /** Whether the person's athlete profile is verified by On3. Schema `logical`. */
   person_athlete_verified?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the person's prospect measurables are verified by On3. Schema `logical`. */
   person_prospect_verified?: boolean | null;
-  /** Schema `character`. */
+  /** Academic class standing of the person (e.g. Senior, RedShirt Senior). Schema `character`. */
   person_class_rank?: string | null;
-  /** Schema `integer`. */
+  /** On3 key of the person's active recruitment record. Schema `integer`. */
   person_recruitment_key?: number | null;
-  /** Schema `integer`. */
+  /** Age of the person in years, when known. Schema `integer`. */
   person_age?: number | null;
-  /** Schema `character`. */
+  /** Status of the NIL valuation (e.g. Normal). Schema `character`. */
   valuation_nil_status?: string | null;
-  /** Schema `integer`. */
+  /** The NIL valuation in US dollars. Schema `integer`. */
   valuation_valuation?: number | null;
-  /** Schema `integer`. */
+  /** Change in the NIL valuation since the previous update, in US dollars. Schema `integer`. */
   valuation_valuation_change?: number | null;
-  /** Schema `integer`. */
+  /** Social-media follower count feeding the NIL valuation. Schema `integer`. */
   valuation_followers?: number | null;
-  /** Schema `integer`. */
+  /** Overall rank of the NIL valuation across On3's NIL 100. Schema `integer`. */
   valuation_rank?: number | null;
-  /** Schema `integer`. */
+  /** Unix timestamp (seconds) of the last update to the NIL valuation. Schema `integer`. */
   valuation_last_updated?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** On3 whisper valuation (reported deal value) behind the NIL valuation, in US dollars. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   valuation_whisper?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Change in the whisper valuation behind the NIL valuation, in US dollars. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   valuation_whisper_change?: unknown;
-  /** Schema `character`. */
+  /** JSON-encoded per-platform social valuations behind the NIL valuation. Schema `character`. */
   valuation_social_valuations?: string | null;
-  /** Schema `integer`. */
+  /** Rank of the NIL valuation within its group (sport or position). Schema `integer`. */
   valuation_group_rank?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Name of the group the NIL valuation is ranked within (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   valuation_group_name?: unknown;
-  /** Schema `character`. */
+  /** JSON-encoded list of NIL tags on the NIL valuation (e.g. Influencer). Schema `character`. */
   valuation_tags?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested roster-value object of the NIL valuation (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   valuation_roster_value?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested NIL-value object of the NIL valuation (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   valuation_nil_value?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested logo asset of the committed-to program (the person's recruiting status; stringified or null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_status_committed_organization_asset?: unknown;
 }
 
@@ -870,133 +870,133 @@ export interface On3OrganizationsRosterHeaderRow {
   average_nil_value?: number | null;
   /** Total On3 NIL valuation across the roster, in dollars. Schema `integer`. */
   total_nil_value?: number | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the head coach. Schema `integer`. */
   head_coach_key?: number | null;
-  /** Schema `character`. */
+  /** First name of the head coach. Schema `character`. */
   head_coach_first_name?: string | null;
-  /** Schema `character`. */
+  /** Last name of the head coach. Schema `character`. */
   head_coach_last_name?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Preferred name of the head coach, when it differs from the given name. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_known_as_name?: unknown;
-  /** Schema `character`. */
+  /** Full name of the head coach. Schema `character`. */
   head_coach_full_name?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the head coach's On3 profile. Schema `character`. */
   head_coach_slug?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the head coach's headshot asset. Schema `integer`. */
   head_coach_default_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the head coach's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the head coach's headshot asset. Schema `character`. */
   head_coach_default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the head coach's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the head coach's headshot asset. Schema `character`. */
   head_coach_default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the head coach's headshot asset. Schema `character`. */
   head_coach_default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the head coach's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the head coach's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the head coach's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the head coach's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_default_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the head coach's headshot asset. Schema `integer`. */
   head_coach_default_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the head coach's headshot asset. Schema `integer`. */
   head_coach_default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the head coach's headshot asset (e.g. Image). Schema `character`. */
   head_coach_default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the head coach's headshot asset. Schema `character`. */
   head_coach_default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the head coach's headshot asset. Schema `character`. */
   head_coach_default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the head coach's headshot asset (file extension, e.g. png). Schema `character`. */
   head_coach_default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the head coach's headshot asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_default_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the head coach's headshot asset when it is a video (usually null or 0). Schema `integer`. */
   head_coach_default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the head coach's headshot asset. Schema `character`. */
   head_coach_default_asset_mime_type?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the head coach's program. Schema `integer`. */
   head_coach_organization_key?: number | null;
-  /** Schema `character`. */
+  /** Full name of the head coach's program (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   head_coach_organization_full_name?: string | null;
-  /** Schema `character`. */
+  /** Short name of the head coach's program. Schema `character`. */
   head_coach_organization_name?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Common short name of the head coach's program, when On3 lists one. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_organization_known_as?: unknown;
-  /** Schema `character`. */
+  /** Mascot of the head coach's program. Schema `character`. */
   head_coach_organization_mascot?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the head coach's program. Schema `character`. */
   head_coach_organization_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Convenience CDN URL of the head coach's program's logo. Schema `character`. */
   head_coach_organization_asset_url?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the head coach's program's logo asset. Schema `integer`. */
   head_coach_organization_default_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the head coach's program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_organization_default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the head coach's program's logo asset. Schema `character`. */
   head_coach_organization_default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the head coach's program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_organization_default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the head coach's program's logo asset. Schema `character`. */
   head_coach_organization_default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the head coach's program's logo asset. Schema `character`. */
   head_coach_organization_default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the head coach's program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_organization_default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the head coach's program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_organization_default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the head coach's program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_organization_default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the head coach's program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_organization_default_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the head coach's program's logo asset. Schema `integer`. */
   head_coach_organization_default_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the head coach's program's logo asset. Schema `integer`. */
   head_coach_organization_default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the head coach's program's logo asset (e.g. Image). Schema `character`. */
   head_coach_organization_default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the head coach's program's logo asset. Schema `character`. */
   head_coach_organization_default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the head coach's program's logo asset. Schema `character`. */
   head_coach_organization_default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the head coach's program's logo asset (file extension, e.g. png). Schema `character`. */
   head_coach_organization_default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the head coach's program's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_organization_default_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the head coach's program's logo asset when it is a video (usually null or 0). Schema `integer`. */
   head_coach_organization_default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the head coach's program's logo asset. Schema `character`. */
   head_coach_organization_default_asset_mime_type?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the head coach's program on On3. Schema `character`. */
   head_coach_organization_slug?: string | null;
-  /** Schema `character`. */
+  /** Primary hex color of the head coach's program. Schema `character`. */
   head_coach_organization_primary_color?: string | null;
-  /** Schema `character`. */
+  /** Organization type label of the head coach's program (e.g. HighSchool, College). Schema `character`. */
   head_coach_organization_org_type?: string | null;
-  /** Schema `character`. */
+  /** Organization type enum of the head coach's program (same vocabulary as org_type). Schema `character`. */
   head_coach_organization_org_type_enum?: string | null;
-  /** Schema `character`. */
+  /** Division or classification of the head coach's program (e.g. NCAA-FB). Schema `character`. */
   head_coach_organization_division?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** JSON-encoded On3 site keys covering the head coach's program (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_organization_site_keys?: unknown;
-  /** Schema `character`. */
+  /** URL slug variant of the head coach's program's page, with the key appended. Schema `character`. */
   head_coach_organization_url_slug?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the head coach's primary position. Schema `integer`. */
   head_coach_primary_position_key?: number | null;
-  /** Schema `character`. */
+  /** Name of the head coach's primary position (e.g. Quarterback). Schema `character`. */
   head_coach_primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the head coach's primary position (e.g. QB). Schema `character`. */
   head_coach_primary_position_abbr?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Secondary position of the head coach, when listed. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   head_coach_secondary_position?: unknown;
-  /** Schema `integer`. */
+  /** Seasons the head coach has spent at the program. Schema `integer`. */
   head_coach_org_season_count?: number | null;
-  /** Schema `integer`. */
+  /** Years the head coach has been active in coaching. Schema `integer`. */
   head_coach_years_active?: number | null;
 }
 
@@ -1012,25 +1012,25 @@ export interface On3PeopleLatestValuationRow {
   valuation_change?: number | null;
   /** Total social-media followers counted toward the valuation. Schema `integer`. */
   followers?: number | null;
-  /** Schema `integer`. */
+  /** Overall rank of the player's NIL valuation across On3's NIL 100. Schema `integer`. */
   rank?: number | null;
-  /** Schema `integer`. */
+  /** Unix timestamp (seconds) of the last update to the NIL valuation. Schema `integer`. */
   last_updated?: number | null;
-  /** Schema `numeric`. */
+  /** On3 whisper valuation (reported deal value) behind the NIL valuation, in US dollars. Schema `numeric`. */
   whisper?: number | null;
-  /** Schema `numeric`. */
+  /** Change in the whisper valuation since the previous update, in US dollars. Schema `numeric`. */
   whisper_change?: number | null;
   /** Per-platform breakdown of the social components of the valuation (stringified list). Schema `character`. */
   social_valuations?: string | null;
-  /** Schema `integer`. */
+  /** Rank of the NIL valuation within its group (sport or position). Schema `integer`. */
   group_rank?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Name of the group the NIL valuation is ranked within (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   group_name?: unknown;
-  /** Schema `character`. */
+  /** JSON-encoded list of NIL tags on the valuation (e.g. Influencer). Schema `character`. */
   tags?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested roster-value object of the NIL valuation (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   roster_value?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** On3 NIL valuation in US dollars. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   nil_value?: unknown;
 }
 
@@ -1038,7 +1038,7 @@ export interface On3PeopleLatestValuationRow {
  * One row of `sdv.on3.on3_people_measurements({ parsed: true })` (returns schema `native/on3/people_measurements`, verified on a real sdv-py capture).
  */
 export interface On3PeopleMeasurementsRow {
-  /** Schema `character`. */
+  /** JSON-encoded list of the player's measurement records (type, value, verification). Schema `character`. */
   player_measurements?: string | null;
 }
 
@@ -1046,7 +1046,7 @@ export interface On3PeopleMeasurementsRow {
  * One row of `sdv.on3.on3_people_social({ parsed: true })` (returns schema `native/on3/people_social`, verified on a real sdv-py capture).
  */
 export interface On3PeopleSocialRow {
-  /** Schema `character`. */
+  /** Type label of the row (vocabulary depends on the endpoint). Schema `character`. */
   type?: string | null;
   /** Athlete's account handle on the social platform. Schema `character`. */
   handle?: string | null;
@@ -1060,7 +1060,7 @@ export interface On3PeopleSocialRow {
 export interface On3PeopleSocialPostSummaryRow {
   /** Social platform the post summary covers (e.g. Twitter/X, Instagram). Schema `character`. */
   social_type?: string | null;
-  /** Schema `character`. */
+  /** Type label of the row (vocabulary depends on the endpoint). Schema `character`. */
   type?: string | null;
   /** Athlete's follower count on the platform. Schema `integer`. */
   followers?: number | null;
@@ -1086,39 +1086,39 @@ export interface On3PeopleValuationGrowthRow {
  * One row of `sdv.on3.on3_player_all_rankings({ parsed: true })` (returns schema `native/on3/player_all_rankings`, verified on a real sdv-py capture).
  */
 export interface On3PlayerAllRankingsRow {
-  /** Schema `character`. */
+  /** Type label of the row (vocabulary depends on the endpoint). Schema `character`. */
   type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Site-relative On3 link for the row, when any. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   link?: unknown;
   /** On3 key of the ranking cycle the row belongs to. Schema `integer`. */
   ranking_key?: number | null;
-  /** Schema `integer`. */
+  /** Ranking cycle year. Schema `integer`. */
   ranking_year?: number | null;
-  /** Schema `character`. */
+  /** Ranking type (e.g. Player, TransferPortal, Team). Schema `character`. */
   ranking_type?: string | null;
-  /** Schema `numeric`. */
+  /** On3 rating of the player (0-100 scale), when published. Schema `numeric`. */
   rating?: number | null;
   /** Nested On3 sport object for the ranking row (stringified). Schema `character`. */
   sport?: string | null;
   /** Recruiting class year the ranking covers. Schema `integer`. */
   class_year?: number | null;
-  /** Schema `integer`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Rank within the player's state in the ranking. Schema `integer`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   state_rank?: unknown;
   /** Two-letter abbreviation of the player's home state. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   state_abbr?: unknown;
-  /** Schema `integer`. */
+  /** Rank at the player's position in the ranking. Schema `integer`. */
   position_rank?: number | null;
-  /** Schema `character`. */
+  /** Position abbreviation the ranking entry was assigned at. Schema `character`. */
   position_abbr?: string | null;
-  /** Schema `integer`. */
+  /** Overall national rank in the ranking. Schema `integer`. */
   overall_rank?: number | null;
-  /** Schema `integer`. */
+  /** Star rating (2-5). Schema `integer`. */
   stars?: number | null;
   /** Whether On3 designates the player a Five-Star Plus+ prospect. Schema `logical`. */
   five_star_plus?: boolean | null;
   /** On3 flag that the player narrowly missed the Five-Star Plus+ designation. Schema `logical`. */
   nearly_five_star_plus?: boolean | null;
-  /** Schema `character`. */
+  /** Direction of the rating change since the previous update (e.g. Increase); the numeric suffix is a json_normalize de-duplication artefact. Schema `character`. */
   change_1?: string | null;
 }
 
@@ -1128,13 +1128,13 @@ export interface On3PlayerAllRankingsRow {
 export interface On3PlayerDatabaseUpdatesRow {
   /** On3 RDB key for the database-update entry. Schema `integer`. */
   key?: number | null;
-  /** Schema `character`. */
+  /** Type label of the row (vocabulary depends on the endpoint). Schema `character`. */
   type?: string | null;
-  /** Schema `character`. */
+  /** Text of the update as On3 displays it. Schema `character`. */
   text?: string | null;
   /** Rendered text of the update entry (with references substituted in). Schema `character`. */
   replacement_text?: string | null;
-  /** Schema `character`. */
+  /** Site-relative On3 link for the row, when any. Schema `character`. */
   link?: string | null;
   /** Date the update entry was logged. Schema `integer`. */
   date_added?: number | null;
@@ -1162,19 +1162,19 @@ export interface On3PlayerImagesRow {
   domain?: string | null;
   /** Override source attribution for the image, when set. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the image asset. Schema `character`. */
   source?: string | null;
-  /** Schema `character`. */
+  /** Title of the row's record. Schema `character`. */
   title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Free-text description or biography shipped by On3. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   description?: unknown;
   /** Caption text for the image. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Category label On3 attaches to the row. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   category?: unknown;
   /** Alt text for the image. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Height as a formatted string (e.g. '6-3.5'). Schema `integer`. */
   height?: number | null;
   /** Image width in pixels. Schema `integer`. */
   width?: number | null;
@@ -1184,11 +1184,11 @@ export interface On3PlayerImagesRow {
   file_system?: string | null;
   /** Storage path of the image file. Schema `character`. */
   path?: string | null;
-  /** Schema `character`. */
+  /** Type label of the row (vocabulary depends on the endpoint). Schema `character`. */
   type?: string | null;
   /** URL or path of the image's thumbnail rendition. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the asset when it is a video (0 for images). Schema `integer`. */
   duration?: number | null;
   /** MIME type of the image file (e.g. image/jpeg). Schema `character`. */
   mime_type?: string | null;
@@ -1202,19 +1202,19 @@ export interface On3PlayerPersonRankingsRow {
   key?: number | null;
   /** On3 key of the ranking cycle the row belongs to. Schema `integer`. */
   ranking_key?: number | null;
-  /** Schema `integer`. */
+  /** On3 rating of the player (0-100 scale), when published. Schema `integer`. */
   rating?: number | null;
-  /** Schema `integer`. */
+  /** Rank within the player's state in the ranking. Schema `integer`. */
   state_rank?: number | null;
   /** Two-letter abbreviation of the player's home state. Schema `character`. */
   state_abbr?: string | null;
-  /** Schema `integer`. */
+  /** Rank at the player's position in the ranking. Schema `integer`. */
   position_rank?: number | null;
-  /** Schema `character`. */
+  /** Position abbreviation the ranking entry was assigned at. Schema `character`. */
   position_abbr?: string | null;
-  /** Schema `integer`. */
+  /** Overall national rank in the ranking. Schema `integer`. */
   overall_rank?: number | null;
-  /** Schema `integer`. */
+  /** Star rating (2-5). Schema `integer`. */
   stars?: number | null;
   /** Player's industry-consensus rating (blend of the major recruiting services). Schema `numeric`. */
   consensus_rating?: number | null;
@@ -1226,25 +1226,25 @@ export interface On3PlayerPersonRankingsRow {
   consensus_overall_rank?: number | null;
   /** Player's star rating under the industry consensus. Schema `integer`. */
   consensus_stars?: number | null;
-  /** Schema `integer`. */
+  /** Strength score On3 attaches to the ranking entry. Schema `integer`. */
   strength?: number | null;
   /** Whether On3 designates the player a Five-Star Plus+ prospect. Schema `logical`. */
   five_star_plus?: boolean | null;
-  /** Schema `character`. */
+  /** Ranking type (e.g. Player, TransferPortal, Team). Schema `character`. */
   ranking_type?: string | null;
-  /** Schema `integer`. */
+  /** Ranking key repeated from the nested ranking object (json_normalize de-duplication suffix). Schema `integer`. */
   ranking_key_2?: number | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the sport the ranking is in. Schema `integer`. */
   ranking_sport_key?: number | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the sport the ranking is in (json_normalize de-duplication suffix). Schema `integer`. */
   ranking_sport_key_2?: number | null;
-  /** Schema `character`. */
+  /** Name of the sport the ranking is in (e.g. Football). Schema `character`. */
   ranking_sport_name?: string | null;
-  /** Schema `integer`. */
+  /** Ranking cycle year. Schema `integer`. */
   ranking_year?: number | null;
-  /** Schema `character`. */
+  /** Direction of the On3 rating change since the previous update (e.g. Increase); the numeric suffix is a json_normalize de-duplication artefact. Schema `character`. */
   change_38?: string | null;
-  /** Schema `character`. */
+  /** Direction of the consensus rating change since the previous update (e.g. Increase); the numeric suffix is a json_normalize de-duplication artefact. Schema `character`. */
   consensus_change_41?: string | null;
 }
 
@@ -1266,31 +1266,31 @@ export interface On3PlayerProfileRow {
   person_sport_key?: number | null;
   /** On3's internal oracle identifier for the player record. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   oracle_key?: unknown;
-  /** Schema `character`. */
+  /** Display name of the row's record. Schema `character`. */
   name?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the row's record on On3. Schema `character`. */
   slug?: string | null;
-  /** Schema `character`. */
+  /** High-school display name (top-level field). Schema `character`. */
   high_school_name?: string | null;
   /** Player's hometown, as listed by On3. Schema `character`. */
   hometown_name?: string | null;
-  /** Schema `character`. */
+  /** Position abbreviation on the record. Schema `character`. */
   position_abbreviation?: string | null;
   /** Player's rank within their recruiting class. Schema `character`. */
   class_rank?: string | null;
-  /** Schema `character`. */
+  /** Height as a formatted string (e.g. '6-3.5'). Schema `character`. */
   height?: string | null;
-  /** Schema `integer`. */
+  /** Weight in pounds. Schema `integer`. */
   weight?: number | null;
   /** Player's recruiting class year. Schema `integer`. */
   class_year?: number | null;
   /** Degree the player earned or is pursuing, when listed. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   degree?: unknown;
-  /** Schema `integer`. */
+  /** Age in years, when known. Schema `integer`. */
   age?: number | null;
   /** Sports the player is profiled in, as a stringified list. Schema `character`. */
   sports?: string | null;
-  /** Schema `character`. */
+  /** Free-text description or biography shipped by On3. Schema `character`. */
   description?: string | null;
   /** Bio text framing the player as a pro prospect (On3 RDB). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   bio_pro_prospect?: unknown;
@@ -1322,7 +1322,7 @@ export interface On3PlayerProfileRow {
   tier?: string | null;
   /** Editorial review status of the profile in the On3 database. Schema `character`. */
   review_status?: string | null;
-  /** Schema `integer`. */
+  /** Jersey number, when listed. Schema `integer`. */
   jersey_number?: number | null;
   /** Profile badge assigned by On3, when any. Schema `character`. */
   badge?: string | null;
@@ -1330,341 +1330,341 @@ export interface On3PlayerProfileRow {
   ncaa_id?: unknown;
   /** On3 user account that manages the player's profile, when claimed. Schema `logical`. */
   managed_by_user?: boolean | null;
-  /** Schema `integer`. */
+  /** Ranking key repeated from the nested ranking object (json_normalize de-duplication suffix). Schema `integer`. */
   ranking_key_2?: number | null;
-  /** Schema `numeric`. */
+  /** Numeric value of the ranking (0-100 scale). Schema `numeric`. */
   ranking_rating?: number | null;
-  /** Schema `integer`. */
+  /** Star rating of the ranking (2-5). Schema `integer`. */
   ranking_stars?: number | null;
-  /** Schema `integer`. */
+  /** National rank of the ranking. Schema `integer`. */
   ranking_national_rank?: number | null;
-  /** Schema `integer`. */
+  /** Position rank of the ranking. Schema `integer`. */
   ranking_position_rank?: number | null;
-  /** Schema `integer`. */
+  /** State rank of the ranking. Schema `integer`. */
   ranking_state_rank?: number | null;
-  /** Schema `character`. */
+  /** Position abbreviation the ranking was assigned at. Schema `character`. */
   ranking_position_abbr?: string | null;
-  /** Schema `character`. */
+  /** State abbreviation the ranking was assigned in. Schema `character`. */
   ranking_state_abbr?: string | null;
-  /** Schema `logical`. */
+  /** Five-star-plus flag on the ranking. Schema `logical`. */
   ranking_five_star_plus?: boolean | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the high school. Schema `integer`. */
   high_school_key?: number | null;
-  /** Schema `character`. */
+  /** Full name of the high school (with mascot). Schema `character`. */
   high_school_full_name?: string | null;
-  /** Schema `character`. */
+  /** Name field of the nested high-school object (json_normalize de-duplication of high_school_name). Schema `character`. */
   high_school_name_2?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Common short name of the high school, when On3 lists one. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_known_as?: unknown;
-  /** Schema `character`. */
+  /** High-school mascot. Schema `character`. */
   high_school_mascot?: string | null;
-  /** Schema `character`. */
+  /** High-school abbreviation. Schema `character`. */
   high_school_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Convenience CDN URL of the high-school logo. Schema `character`. */
   high_school_asset_url?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the high school's logo asset. Schema `integer`. */
   high_school_default_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the high school's logo asset. Schema `character`. */
   high_school_default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the high school's logo asset. Schema `character`. */
   high_school_default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the high school's logo asset. Schema `character`. */
   high_school_default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_default_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the high school's logo asset. Schema `integer`. */
   high_school_default_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the high school's logo asset. Schema `integer`. */
   high_school_default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the high school's logo asset (e.g. Image). Schema `character`. */
   high_school_default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the high school's logo asset. Schema `character`. */
   high_school_default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the high school's logo asset. Schema `character`. */
   high_school_default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the high school's logo asset (file extension, e.g. png). Schema `character`. */
   high_school_default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the high school's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_default_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the high school's logo asset when it is a video (usually null or 0). Schema `integer`. */
   high_school_default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the high school's logo asset. Schema `character`. */
   high_school_default_asset_mime_type?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the high school on On3. Schema `character`. */
   high_school_slug?: string | null;
-  /** Schema `character`. */
+  /** Primary hex color of the high school. Schema `character`. */
   high_school_primary_color?: string | null;
-  /** Schema `character`. */
+  /** Organization type label of the school (e.g. HighSchool). Schema `character`. */
   high_school_org_type?: string | null;
-  /** Schema `character`. */
+  /** Organization type enum of the school. Schema `character`. */
   high_school_org_type_enum?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Division or classification of the high school, when listed. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_division?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** JSON-encoded On3 site keys covering the school (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_site_keys?: unknown;
-  /** Schema `character`. */
+  /** URL slug variant of the high-school page, with the key appended. Schema `character`. */
   high_school_url_slug?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the home-town state. Schema `integer`. */
   hometown_state_key?: number | null;
-  /** Schema `character`. */
+  /** Name of the home-town state. Schema `character`. */
   hometown_state_name?: string | null;
-  /** Schema `character`. */
+  /** Two-letter abbreviation of the home-town state. Schema `character`. */
   hometown_state_abbreviation?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the home-town state's country. Schema `integer`. */
   hometown_state_country_key?: number | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the current state. Schema `integer`. */
   current_state_key?: number | null;
-  /** Schema `character`. */
+  /** Name of the current state. Schema `character`. */
   current_state_name?: string | null;
-  /** Schema `character`. */
+  /** Two-letter abbreviation of the current state. Schema `character`. */
   current_state_abbreviation?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the current state's country. Schema `integer`. */
   current_state_country_key?: number | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the default asset. Schema `integer`. */
   default_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the record's default asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the default asset. Schema `character`. */
   default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the default asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the default asset. Schema `character`. */
   default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the default asset. Schema `character`. */
   default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the default asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the default asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the default asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the default asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the default asset. Schema `integer`. */
   default_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the default asset. Schema `integer`. */
   default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the default asset (e.g. Image). Schema `character`. */
   default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the default asset. Schema `character`. */
   default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the default asset. Schema `character`. */
   default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the default asset (file extension, e.g. png). Schema `character`. */
   default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the default asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   default_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the default asset when it is a video (usually null or 0). Schema `integer`. */
   default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the default asset. Schema `character`. */
   default_asset_mime_type?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the primary position. Schema `integer`. */
   primary_position_key?: number | null;
-  /** Schema `character`. */
+  /** Name of the primary position (e.g. Quarterback). Schema `character`. */
   primary_position_name?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the primary position (e.g. QB). Schema `character`. */
   primary_position_abbreviation?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the primary position's sport. Schema `integer`. */
   primary_position_sport_key?: number | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the primary position's sport (json_normalize de-duplication suffix). Schema `integer`. */
   primary_position_sport_key_2?: number | null;
-  /** Schema `character`. */
+  /** Name of the primary position's sport (e.g. Football). Schema `character`. */
   primary_position_sport_name?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the primary position's sport. Schema `character`. */
   primary_position_sport_slug?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the primary position's sport. Schema `character`. */
   primary_position_sport_abbreviation?: string | null;
-  /** Schema `logical`. */
+  /** Whether On3 ranks players in the primary position's sport. Schema `logical`. */
   primary_position_sport_is_rankable?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether industry-consensus rankings exist for the primary position's sport. Schema `logical`. */
   primary_position_sport_is_industry_rankable?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether On3 scouting reports exist for the primary position's sport. Schema `logical`. */
   primary_position_sport_is_scoutable?: boolean | null;
-  /** Schema `character`. */
+  /** Position type of the primary position (e.g. Offense, Defense). Schema `character`. */
   primary_position_position_type?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the primary sport. Schema `integer`. */
   default_sport_key?: number | null;
-  /** Schema `character`. */
+  /** Name of the primary sport (e.g. Football). Schema `character`. */
   default_sport_name?: string | null;
-  /** Schema `character`. */
+  /** Type of the player's recruiting status (e.g. Committed, Signed, Enrolled, None). Schema `character`. */
   player_status_type?: string | null;
-  /** Schema `logical`. */
+  /** Short-term-signee flag of the player's recruiting status (null when not applicable). Schema `logical`. */
   player_status_short_term_signee?: boolean | null;
-  /** Schema `character`. */
+  /** Date the player's recruiting status took effect (ISO timestamp string). Schema `character`. */
   player_status_date?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the player's recruiting status's committed-to program. Schema `integer`. */
   player_status_committed_asset_key?: number | null;
-  /** Schema `character`. */
+  /** CDN URL of the player's recruiting status's committed-to program's logo. Schema `character`. */
   player_status_committed_asset_url?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the player's recruiting status's committed-to program on On3. Schema `character`. */
   player_status_committed_asset_slug?: string | null;
-  /** Schema `character`. */
+  /** Full name of the player's recruiting status's committed-to program (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   player_status_committed_asset_full_name?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the player's recruiting status's committed-to program's logo asset. Schema `integer`. */
   player_status_committed_asset_res_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the player's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_asset_res_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the player's recruiting status's committed-to program's logo asset. Schema `character`. */
   player_status_committed_asset_res_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the player's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_asset_res_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the player's recruiting status's committed-to program's logo asset. Schema `character`. */
   player_status_committed_asset_res_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the player's recruiting status's committed-to program's logo asset. Schema `character`. */
   player_status_committed_asset_res_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the player's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_asset_res_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the player's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_asset_res_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the player's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_asset_res_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the player's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_asset_res_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the player's recruiting status's committed-to program's logo asset. Schema `integer`. */
   player_status_committed_asset_res_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the player's recruiting status's committed-to program's logo asset. Schema `integer`. */
   player_status_committed_asset_res_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the player's recruiting status's committed-to program's logo asset (e.g. Image). Schema `character`. */
   player_status_committed_asset_res_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the player's recruiting status's committed-to program's logo asset. Schema `character`. */
   player_status_committed_asset_res_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the player's recruiting status's committed-to program's logo asset. Schema `character`. */
   player_status_committed_asset_res_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the player's recruiting status's committed-to program's logo asset (file extension, e.g. png). Schema `character`. */
   player_status_committed_asset_res_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the player's recruiting status's committed-to program's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_asset_res_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the player's recruiting status's committed-to program's logo asset when it is a video (usually null or 0). Schema `integer`. */
   player_status_committed_asset_res_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the player's recruiting status's committed-to program's logo asset. Schema `character`. */
   player_status_committed_asset_res_mime_type?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the player's recruiting status's program transferred to. Schema `integer`. */
   player_status_transferred_asset_key?: number | null;
-  /** Schema `character`. */
+  /** CDN URL of the player's recruiting status's program transferred to's logo. Schema `character`. */
   player_status_transferred_asset_url?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the player's recruiting status's program transferred to on On3. Schema `character`. */
   player_status_transferred_asset_slug?: string | null;
-  /** Schema `character`. */
+  /** Full name of the player's recruiting status's program transferred to (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   player_status_transferred_asset_full_name?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the player's recruiting status's program transferred to's logo asset. Schema `integer`. */
   player_status_transferred_asset_res_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the player's recruiting status's program transferred to's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_transferred_asset_res_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the player's recruiting status's program transferred to's logo asset. Schema `character`. */
   player_status_transferred_asset_res_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the player's recruiting status's program transferred to's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_transferred_asset_res_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the player's recruiting status's program transferred to's logo asset. Schema `character`. */
   player_status_transferred_asset_res_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the player's recruiting status's program transferred to's logo asset. Schema `character`. */
   player_status_transferred_asset_res_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the player's recruiting status's program transferred to's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_transferred_asset_res_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the player's recruiting status's program transferred to's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_transferred_asset_res_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the player's recruiting status's program transferred to's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_transferred_asset_res_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the player's recruiting status's program transferred to's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_transferred_asset_res_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the player's recruiting status's program transferred to's logo asset. Schema `integer`. */
   player_status_transferred_asset_res_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the player's recruiting status's program transferred to's logo asset. Schema `integer`. */
   player_status_transferred_asset_res_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the player's recruiting status's program transferred to's logo asset (e.g. Image). Schema `character`. */
   player_status_transferred_asset_res_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the player's recruiting status's program transferred to's logo asset. Schema `character`. */
   player_status_transferred_asset_res_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the player's recruiting status's program transferred to's logo asset. Schema `character`. */
   player_status_transferred_asset_res_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the player's recruiting status's program transferred to's logo asset (file extension, e.g. png). Schema `character`. */
   player_status_transferred_asset_res_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the player's recruiting status's program transferred to's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_transferred_asset_res_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the player's recruiting status's program transferred to's logo asset when it is a video (usually null or 0). Schema `integer`. */
   player_status_transferred_asset_res_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the player's recruiting status's program transferred to's logo asset. Schema `character`. */
   player_status_transferred_asset_res_mime_type?: string | null;
-  /** Schema `integer`. */
+  /** On3 key of the committed-to program (the player's recruiting status). Schema `integer`. */
   player_status_committed_organization_key?: number | null;
-  /** Schema `character`. */
+  /** Full name of the player's recruiting status's committed-to program (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   player_status_committed_organization_full_name?: string | null;
-  /** Schema `character`. */
+  /** Short name of the player's recruiting status's committed-to program. Schema `character`. */
   player_status_committed_organization_name?: string | null;
-  /** Schema `character`. */
+  /** Mascot of the player's recruiting status's committed-to program. Schema `character`. */
   player_status_committed_organization_mascot?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the player's recruiting status's committed-to program. Schema `character`. */
   player_status_committed_organization_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** CDN URL of the committed-to program's logo (the player's recruiting status). Schema `character`. */
   player_status_committed_organization_asset_url?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the player's recruiting status's committed-to program's logo asset. Schema `integer`. */
   player_status_committed_organization_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the player's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_organization_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the player's recruiting status's committed-to program's logo asset. Schema `character`. */
   player_status_committed_organization_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the player's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_organization_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the player's recruiting status's committed-to program's logo asset. Schema `character`. */
   player_status_committed_organization_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the player's recruiting status's committed-to program's logo asset. Schema `character`. */
   player_status_committed_organization_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the player's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_organization_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the player's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_organization_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the player's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_organization_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the player's recruiting status's committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_organization_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the player's recruiting status's committed-to program's logo asset. Schema `integer`. */
   player_status_committed_organization_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the player's recruiting status's committed-to program's logo asset. Schema `integer`. */
   player_status_committed_organization_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the player's recruiting status's committed-to program's logo asset (e.g. Image). Schema `character`. */
   player_status_committed_organization_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the player's recruiting status's committed-to program's logo asset. Schema `character`. */
   player_status_committed_organization_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the player's recruiting status's committed-to program's logo asset. Schema `character`. */
   player_status_committed_organization_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the player's recruiting status's committed-to program's logo asset (file extension, e.g. png). Schema `character`. */
   player_status_committed_organization_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the player's recruiting status's committed-to program's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_committed_organization_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the player's recruiting status's committed-to program's logo asset when it is a video (usually null or 0). Schema `integer`. */
   player_status_committed_organization_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the player's recruiting status's committed-to program's logo asset. Schema `character`. */
   player_status_committed_organization_asset_mime_type?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the committed-to program (the player's recruiting status). Schema `character`. */
   player_status_committed_organization_slug?: string | null;
-  /** Schema `character`. */
+  /** Primary hex color of the player's recruiting status's committed-to program. Schema `character`. */
   player_status_committed_organization_primary_color?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Academic class standing recorded on the player's recruiting status (e.g. Senior). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_class_rank?: unknown;
-  /** Schema `character`. */
+  /** Date the player entered the transfer portal (the player's recruiting status; null when never entered). Schema `character`. */
   player_status_transfer_entered?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Recruiting-cycle year the player's recruiting status belongs to. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_recruitment_year?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested asset of the program decommitted from (the player's recruiting status; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_decommitted_asset?: unknown;
-  /** Schema `logical`. */
+  /** Transfer flag of the player's recruiting status (null when not applicable). Schema `logical`. */
   player_status_transfer?: boolean | null;
-  /** Schema `logical`. */
+  /** Expected-to-transfer flag of the player's recruiting status (null when not applicable). Schema `logical`. */
   player_status_expected_to_transfer?: boolean | null;
-  /** Schema `integer`. */
+  /** On3 key of the recruitment record the player's recruiting status belongs to. Schema `integer`. */
   player_status_recruitment_key?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player withdrew from the transfer portal (the player's recruiting status). Schema `logical`. */
   player_status_withdrawn_transfer?: boolean | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Date the player withdrew from the transfer portal (the player's recruiting status; null when never withdrawn). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_status_withdrawn_transfer_date?: unknown;
 }
 
@@ -1676,11 +1676,11 @@ export interface On3PlayerVideosRow {
   key?: number | null;
   /** Source URL of the hosted video. Schema `character`. */
   source_url?: string | null;
-  /** Schema `character`. */
+  /** Title of the row's record. Schema `character`. */
   title?: string | null;
   /** URL of the video's thumbnail image. Schema `character`. */
   thumbnail?: string | null;
-  /** Schema `character`. */
+  /** Free-text description or biography shipped by On3. Schema `character`. */
   description?: string | null;
   /** Publication date of the video, per On3. Schema `integer`. */
   date?: number | null;
@@ -1690,11 +1690,11 @@ export interface On3PlayerVideosRow {
   person_sport?: unknown;
   /** Whether the video is featured on the player's On3 profile. Schema `logical`. */
   is_featured?: boolean | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Display order among featured videos, when featured. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   featured_order?: unknown;
-  /** Schema `integer`. */
+  /** On3 key of the video category. Schema `integer`. */
   category_key?: number | null;
-  /** Schema `character`. */
+  /** Video category label (e.g. Highlights). Schema `character`. */
   category_value?: string | null;
 }
 
@@ -1706,145 +1706,145 @@ export interface On3PlayersIndustryComparisionRow {
   ratings?: string | null;
   /** On3 NIL valuation for the player (US dollars). Schema `integer`. */
   nil_value?: number | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the person. Schema `integer`. */
   person_key?: number | null;
-  /** Schema `character`. */
+  /** Display name of the person. Schema `character`. */
   person_name?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the person's On3 profile. Schema `character`. */
   person_slug?: string | null;
-  /** Schema `character`. */
+  /** High-school display name on the person's record. Schema `character`. */
   person_high_school_name?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the person's high school. Schema `integer`. */
   person_high_school_key?: number | null;
-  /** Schema `character`. */
+  /** Full name of the person's high school (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   person_high_school_full_name?: string | null;
-  /** Schema `character`. */
+  /** High-school display name on the person's record (json_normalize de-duplication suffix). Schema `character`. */
   person_high_school_name_2?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Common short name of the person's high school, when On3 lists one. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_known_as?: unknown;
-  /** Schema `character`. */
+  /** Mascot of the person's high school. Schema `character`. */
   person_high_school_mascot?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the person's high school. Schema `character`. */
   person_high_school_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Convenience CDN URL of the person's high school's logo. Schema `character`. */
   person_high_school_asset_url?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the person's high school's logo asset. Schema `integer`. */
   person_high_school_default_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the person's high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the person's high school's logo asset. Schema `integer`. */
   person_high_school_default_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the person's high school's logo asset. Schema `integer`. */
   person_high_school_default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the person's high school's logo asset (e.g. Image). Schema `character`. */
   person_high_school_default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the person's high school's logo asset (file extension, e.g. png). Schema `character`. */
   person_high_school_default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the person's high school's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_default_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the person's high school's logo asset when it is a video (usually null or 0). Schema `integer`. */
   person_high_school_default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the person's high school's logo asset. Schema `character`. */
   person_high_school_default_asset_mime_type?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the person's high school on On3. Schema `character`. */
   person_high_school_slug?: string | null;
-  /** Schema `character`. */
+  /** Primary hex color of the person's high school. Schema `character`. */
   person_high_school_primary_color?: string | null;
-  /** Schema `character`. */
+  /** Organization type label of the person's high school (e.g. HighSchool, College). Schema `character`. */
   person_high_school_org_type?: string | null;
-  /** Schema `character`. */
+  /** Organization type enum of the person's high school (same vocabulary as org_type). Schema `character`. */
   person_high_school_org_type_enum?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Division or classification of the person's high school (e.g. NCAA-FB). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_division?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** JSON-encoded On3 site keys covering the person's high school (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_high_school_site_keys?: unknown;
-  /** Schema `character`. */
+  /** URL slug variant of the person's high school's page, with the key appended. Schema `character`. */
   person_high_school_url_slug?: string | null;
-  /** Schema `character`. */
+  /** Home town of the person as On3 lists it (e.g. 'Belleville, MI'). Schema `character`. */
   person_home_town_name?: string | null;
-  /** Schema `character`. */
+  /** Convenience CDN URL of the person's headshot. Schema `character`. */
   person_default_asset_url?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the person's headshot asset. Schema `integer`. */
   person_default_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the person's headshot asset. Schema `character`. */
   person_default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the person's headshot asset. Schema `character`. */
   person_default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the person's headshot asset. Schema `character`. */
   person_default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the person's headshot asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the person's headshot asset. Schema `integer`. */
   person_default_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the person's headshot asset. Schema `integer`. */
   person_default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the person's headshot asset (e.g. Image). Schema `character`. */
   person_default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the person's headshot asset. Schema `character`. */
   person_default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the person's headshot asset. Schema `character`. */
   person_default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the person's headshot asset (file extension, e.g. png). Schema `character`. */
   person_default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the person's headshot asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_default_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the person's headshot asset when it is a video (usually null or 0). Schema `integer`. */
   person_default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the person's headshot asset. Schema `character`. */
   person_default_asset_mime_type?: string | null;
-  /** Schema `logical`. */
+  /** Whether the person signed during the early signing period. Schema `logical`. */
   person_early_signee?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the person early-enrolled at college. Schema `logical`. */
   person_early_enrollee?: boolean | null;
-  /** Schema `character`. */
+  /** Position abbreviation on the person's record. Schema `character`. */
   person_position_abbreviation?: string | null;
-  /** Schema `numeric`. */
+  /** Height of the person: a formatted string (e.g. '6-8') or inches, depending on the endpoint. Schema `numeric`. */
   person_height?: number | null;
-  /** Schema `character`. */
+  /** Human-formatted height of the person (e.g. '6-3.5'). Schema `character`. */
   person_formatted_height?: string | null;
-  /** Schema `integer`. */
+  /** Weight of the person in pounds. Schema `integer`. */
   person_weight?: number | null;
-  /** Schema `integer`. */
+  /** High-school graduating class year of the person. Schema `integer`. */
   person_class_year?: number | null;
-  /** Schema `logical`. */
+  /** Whether the person's athlete profile is verified by On3. Schema `logical`. */
   person_athlete_verified?: boolean | null;
-  /** Schema `logical`. */
+  /** Whether the person's prospect measurables are verified by On3. Schema `logical`. */
   person_prospect_verified?: boolean | null;
-  /** Schema `character`. */
+  /** Academic class standing of the person (e.g. Senior, RedShirt Senior). Schema `character`. */
   person_class_rank?: string | null;
-  /** Schema `integer`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** On3 key of the person's active recruitment record. Schema `integer`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_recruitment_key?: unknown;
-  /** Schema `integer`. */
+  /** Age of the person in years, when known. Schema `integer`. */
   person_age?: number | null;
 }
 
@@ -1856,7 +1856,7 @@ export interface On3QuotesRow {
   key?: number | null;
   /** Full text of the quote. Schema `character`. */
   body?: string | null;
-  /** Schema `character`. */
+  /** Category label On3 attaches to the row. Schema `character`. */
   category?: string | null;
   /** On3 person key of the person quoted or quoted about. Schema `integer`. */
   person_key?: number | null;
@@ -1864,27 +1864,27 @@ export interface On3QuotesRow {
   date_added?: string | null;
   /** Date the quote was last updated. Schema `character`. */
   date_updated?: string | null;
-  /** Schema `integer`. */
+  /** Person key repeated from the nested person object (json_normalize de-duplication suffix). Schema `integer`. */
   person_key_2?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Preferred name of the person, when it differs from the given name. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_known_as_name?: unknown;
-  /** Schema `character`. */
+  /** First name of the person. Schema `character`. */
   person_first_name?: string | null;
-  /** Schema `character`. */
+  /** Last name of the person. Schema `character`. */
   person_last_name?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Twitter/X handle of the person, when listed. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_twitter_handle?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Instagram profile of the person, when listed. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_instagram_profile?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** TikTok handle of the person, when listed. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_tik_tok_handle?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** ESPN profile link of the person, when listed. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_espn_profile?: unknown;
-  /** Schema `integer`. */
+  /** High-school graduating class year of the person. Schema `integer`. */
   person_class_year?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** 247Sports profile link of the person, when listed. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_two_four_seven_profile?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Rivals profile link of the person, when listed. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   person_rivals_profile?: unknown;
 }
 
@@ -1894,185 +1894,185 @@ export interface On3QuotesRow {
 export interface On3RecruitmentsProfileRow {
   /** Recruiting class year of the recruitment. Schema `integer`. */
   class_year?: number | null;
-  /** Schema `character`. */
+  /** High-school display name on the record. Schema `character`. */
   high_school?: string | null;
-  /** Schema `character`. */
+  /** Home town as On3 lists it (e.g. 'Pewaukee, WI'). Schema `character`. */
   home_town?: string | null;
-  /** Schema `integer`. */
+  /** On3 key of the On3 rating record. Schema `integer`. */
   rating_key?: number | null;
-  /** Schema `numeric`. */
+  /** Numeric value of the On3 rating (0-100 scale). Schema `numeric`. */
   rating_rating?: number | null;
-  /** Schema `integer`. */
+  /** Star rating of the On3 rating (2-5). Schema `integer`. */
   rating_stars?: number | null;
-  /** Schema `integer`. */
+  /** National rank of the On3 rating. Schema `integer`. */
   rating_national_rank?: number | null;
-  /** Schema `integer`. */
+  /** Position rank of the On3 rating. Schema `integer`. */
   rating_position_rank?: number | null;
-  /** Schema `integer`. */
+  /** State rank of the On3 rating. Schema `integer`. */
   rating_state_rank?: number | null;
-  /** Schema `character`. */
+  /** Position abbreviation the On3 rating was assigned at. Schema `character`. */
   rating_position_abbr?: string | null;
-  /** Schema `character`. */
+  /** State abbreviation the On3 rating was assigned in. Schema `character`. */
   rating_state_abbr?: string | null;
-  /** Schema `logical`. */
+  /** Five-star-plus flag on the On3 rating. Schema `logical`. */
   rating_five_star_plus?: boolean | null;
-  /** Schema `character`. */
+  /** Type of the commitment status (e.g. Committed, Signed, Enrolled, None). Schema `character`. */
   committed_status_type?: string | null;
-  /** Schema `logical`. */
+  /** Short-term-signee flag of the commitment status (null when not applicable). Schema `logical`. */
   committed_status_short_term_signee?: boolean | null;
-  /** Schema `character`. */
+  /** Date the commitment status took effect (ISO timestamp string). Schema `character`. */
   committed_status_date?: string | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the committed-to program. Schema `integer`. */
   committed_status_committed_asset_key?: number | null;
-  /** Schema `character`. */
+  /** CDN URL of the committed-to program's logo. Schema `character`. */
   committed_status_committed_asset_url?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the committed-to program on On3. Schema `character`. */
   committed_status_committed_asset_slug?: string | null;
-  /** Schema `character`. */
+  /** Full name of the committed-to program (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   committed_status_committed_asset_full_name?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the committed-to program's logo asset. Schema `integer`. */
   committed_status_committed_asset_res_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_committed_asset_res_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the committed-to program's logo asset. Schema `character`. */
   committed_status_committed_asset_res_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_committed_asset_res_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the committed-to program's logo asset. Schema `character`. */
   committed_status_committed_asset_res_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the committed-to program's logo asset. Schema `character`. */
   committed_status_committed_asset_res_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_committed_asset_res_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_committed_asset_res_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_committed_asset_res_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the committed-to program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_committed_asset_res_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the committed-to program's logo asset. Schema `integer`. */
   committed_status_committed_asset_res_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the committed-to program's logo asset. Schema `integer`. */
   committed_status_committed_asset_res_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the committed-to program's logo asset (e.g. Image). Schema `character`. */
   committed_status_committed_asset_res_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the committed-to program's logo asset. Schema `character`. */
   committed_status_committed_asset_res_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the committed-to program's logo asset. Schema `character`. */
   committed_status_committed_asset_res_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the committed-to program's logo asset (file extension, e.g. png). Schema `character`. */
   committed_status_committed_asset_res_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the committed-to program's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_committed_asset_res_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the committed-to program's logo asset when it is a video (usually null or 0). Schema `integer`. */
   committed_status_committed_asset_res_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the committed-to program's logo asset. Schema `character`. */
   committed_status_committed_asset_res_mime_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested asset of the program transferred to (the commitment status; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_transferred_asset?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested logo asset of the program transferred to (the commitment status; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_transferred_asset_res?: unknown;
-  /** Schema `integer`. */
+  /** On3 key of the committed-to program (the commitment status). Schema `integer`. */
   committed_status_committed_organization_key?: number | null;
-  /** Schema `character`. */
+  /** Full name of the commitment status's committed-to program (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   committed_status_committed_organization_full_name?: string | null;
-  /** Schema `character`. */
+  /** Short name of the commitment status's committed-to program. Schema `character`. */
   committed_status_committed_organization_name?: string | null;
-  /** Schema `character`. */
+  /** Mascot of the commitment status's committed-to program. Schema `character`. */
   committed_status_committed_organization_mascot?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the commitment status's committed-to program. Schema `character`. */
   committed_status_committed_organization_abbreviation?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN URL of the committed-to program's logo (the commitment status). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_committed_organization_asset_url?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested logo asset of the committed-to program (the commitment status; stringified or null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_committed_organization_asset?: unknown;
-  /** Schema `character`. */
+  /** URL slug of the committed-to program (the commitment status). Schema `character`. */
   committed_status_committed_organization_slug?: string | null;
-  /** Schema `character`. */
+  /** Primary hex color of the commitment status's committed-to program. Schema `character`. */
   committed_status_committed_organization_primary_color?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Academic class standing recorded on the commitment status (e.g. Senior). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_class_rank?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Date the player entered the transfer portal (the commitment status; null when never entered). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_transfer_entered?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Recruiting-cycle year the commitment status belongs to. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_recruitment_year?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Nested asset of the program decommitted from (the commitment status; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_decommitted_asset?: unknown;
-  /** Schema `logical`. */
+  /** Transfer flag of the commitment status (null when not applicable). Schema `logical`. */
   committed_status_transfer?: boolean | null;
-  /** Schema `logical`. */
+  /** Expected-to-transfer flag of the commitment status (null when not applicable). Schema `logical`. */
   committed_status_expected_to_transfer?: boolean | null;
-  /** Schema `integer`. */
+  /** On3 key of the recruitment record the commitment status belongs to. Schema `integer`. */
   committed_status_recruitment_key?: number | null;
-  /** Schema `logical`. */
+  /** Whether the player withdrew from the transfer portal (the commitment status). Schema `logical`. */
   committed_status_withdrawn_transfer?: boolean | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Date the player withdrew from the transfer portal (the commitment status; null when never withdrawn). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   committed_status_withdrawn_transfer_date?: unknown;
-  /** Schema `integer`. */
+  /** On3 numeric key of the high school. Schema `integer`. */
   high_school_org_key?: number | null;
-  /** Schema `character`. */
+  /** Full name of the high school (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   high_school_org_full_name?: string | null;
-  /** Schema `character`. */
+  /** Short name of the high school. Schema `character`. */
   high_school_org_name?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Common short name of the high school, when On3 lists one. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_org_known_as?: unknown;
-  /** Schema `character`. */
+  /** Mascot of the high school. Schema `character`. */
   high_school_org_mascot?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the high school. Schema `character`. */
   high_school_org_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Convenience CDN URL of the high school's logo. Schema `character`. */
   high_school_org_asset_url?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the high school's logo asset. Schema `integer`. */
   high_school_org_default_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_org_default_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the high school's logo asset. Schema `character`. */
   high_school_org_default_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_org_default_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the high school's logo asset. Schema `character`. */
   high_school_org_default_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the high school's logo asset. Schema `character`. */
   high_school_org_default_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_org_default_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_org_default_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_org_default_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the high school's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_org_default_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the high school's logo asset. Schema `integer`. */
   high_school_org_default_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the high school's logo asset. Schema `integer`. */
   high_school_org_default_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the high school's logo asset (e.g. Image). Schema `character`. */
   high_school_org_default_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the high school's logo asset. Schema `character`. */
   high_school_org_default_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the high school's logo asset. Schema `character`. */
   high_school_org_default_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the high school's logo asset (file extension, e.g. png). Schema `character`. */
   high_school_org_default_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the high school's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_org_default_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the high school's logo asset when it is a video (usually null or 0). Schema `integer`. */
   high_school_org_default_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the high school's logo asset. Schema `character`. */
   high_school_org_default_asset_mime_type?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the high school on On3. Schema `character`. */
   high_school_org_slug?: string | null;
-  /** Schema `character`. */
+  /** Primary hex color of the high school. Schema `character`. */
   high_school_org_primary_color?: string | null;
-  /** Schema `character`. */
+  /** Organization type label of the high school (e.g. HighSchool, College). Schema `character`. */
   high_school_org_org_type?: string | null;
-  /** Schema `character`. */
+  /** Organization type enum of the high school (same vocabulary as org_type). Schema `character`. */
   high_school_org_org_type_enum?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Division or classification of the high school (e.g. NCAA-FB). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_org_division?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** JSON-encoded On3 site keys covering the high school (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   high_school_org_site_keys?: unknown;
-  /** Schema `character`. */
+  /** URL slug variant of the high school's page, with the key appended. Schema `character`. */
   high_school_org_url_slug?: string | null;
 }
 
@@ -2092,7 +2092,7 @@ export interface On3RecruitmentsRpmSummaryRow {
 export interface On3TeamRankingTeamRankingsRow {
   /** On3 organization-ranking key for the class row. Schema `integer`. */
   key?: number | null;
-  /** Schema `integer`. */
+  /** Recruiting class year of the row. Schema `integer`. */
   year?: number | null;
   /** Total On3 rating applied to the class after deductions. Schema `numeric`. */
   applied_total_rating?: number | null;
@@ -2136,58 +2136,58 @@ export interface On3TeamRankingTeamRankingsRow {
   conference_rank?: number | null;
   /** Rank of the class within its conference by consensus score. Schema `integer`. */
   conference_consensus_rank?: number | null;
-  /** Schema `integer`. */
+  /** On3 numeric key of the program. Schema `integer`. */
   organization_key?: number | null;
-  /** Schema `character`. */
+  /** Full name of the program (e.g. 'Alabama Crimson Tide'). Schema `character`. */
   organization_full_name?: string | null;
-  /** Schema `character`. */
+  /** Short name of the program. Schema `character`. */
   organization_name?: string | null;
-  /** Schema `character`. */
+  /** Mascot of the program. Schema `character`. */
   organization_mascot?: string | null;
-  /** Schema `character`. */
+  /** Abbreviation of the program. Schema `character`. */
   organization_abbreviation?: string | null;
-  /** Schema `character`. */
+  /** Convenience CDN URL of the program's logo. Schema `character`. */
   organization_asset_url?: string | null;
-  /** Schema `integer`. */
+  /** On3 asset key of the program's logo asset. Schema `integer`. */
   organization_asset_key?: number | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** CDN domain override for the program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_asset_domain_override?: unknown;
-  /** Schema `character`. */
+  /** CDN domain serving the program's logo asset. Schema `character`. */
   organization_asset_domain?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Source-path override for the program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_asset_source_override?: unknown;
-  /** Schema `character`. */
+  /** CDN-relative source path of the program's logo asset. Schema `character`. */
   organization_asset_source?: string | null;
-  /** Schema `character`. */
+  /** Editorial title attached to the program's logo asset. Schema `character`. */
   organization_asset_title?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial description attached to the program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_asset_description?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial caption attached to the program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_asset_caption?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Editorial category label of the program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_asset_category?: unknown;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Accessibility alt text of the program's logo asset (usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_asset_alt_text?: unknown;
-  /** Schema `integer`. */
+  /** Pixel height of the program's logo asset. Schema `integer`. */
   organization_asset_height?: number | null;
-  /** Schema `integer`. */
+  /** Pixel width of the program's logo asset. Schema `integer`. */
   organization_asset_width?: number | null;
-  /** Schema `character`. */
+  /** On3 asset-type discriminator of the program's logo asset (e.g. Image). Schema `character`. */
   organization_asset_asset_type?: string | null;
-  /** Schema `character`. */
+  /** Storage file-system flag of the program's logo asset. Schema `character`. */
   organization_asset_file_system?: string | null;
-  /** Schema `character`. */
+  /** Storage path of the program's logo asset. Schema `character`. */
   organization_asset_path?: string | null;
-  /** Schema `character`. */
+  /** Media type field of the program's logo asset (file extension, e.g. png). Schema `character`. */
   organization_asset_type?: string | null;
-  /** Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Thumbnail variant of the program's logo asset (video assets; usually null). Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   organization_asset_thumbnail?: unknown;
-  /** Schema `integer`. */
+  /** Duration of the program's logo asset when it is a video (usually null or 0). Schema `integer`. */
   organization_asset_duration?: number | null;
-  /** Schema `character`. */
+  /** MIME type of the program's logo asset. Schema `character`. */
   organization_asset_mime_type?: string | null;
-  /** Schema `character`. */
+  /** URL slug of the program on On3. Schema `character`. */
   organization_slug?: string | null;
-  /** Schema `character`. */
+  /** Primary hex color of the program. Schema `character`. */
   organization_primary_color?: string | null;
 }
