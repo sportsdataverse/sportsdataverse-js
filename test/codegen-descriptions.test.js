@@ -13,9 +13,9 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const codegen = join(root, 'tools', 'codegen');
 const coverage = JSON.parse(readFileSync(join(root, 'docs', 'src', 'generated', 'description_coverage.json'), 'utf8'));
 
-// The measured overall fill rate at the time this gate was set (89.9% on 2026-10-06, after the cross-sport fallback was removed and the fox / cbs / yahoo schemas were re-derived from captures),
+// The measured overall fill rate at the time this gate was set (93.3% on 2026-10-07, after the sdv-py 89c638a6 vendor sync brought the NFL Pro / On3 / Fox column descriptions; 89.9% on 2026-10-06 before it),
 // rounded DOWN. Raise it when coverage improves; never lower it.
-const FLOOR = 0.89;
+const FLOOR = 0.93;
 
 describe('codegen: column descriptions', () => {
   it('vendors manual_column_descriptions.yaml + r_column_descriptions.yaml (verbatim copy + LOCK)', () => {
