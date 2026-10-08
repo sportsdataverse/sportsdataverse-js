@@ -12,7 +12,7 @@ import { parse_hockeytech_pbp } from '../../dist/parsers/hockeytech.js';
 import { isIdColumn, pyIdRows } from '../helpers/parity.mjs';
 
 // Parity: every case below is compared cell-by-cell against `oracle.json`, produced ONCE by
-// running sdv-py @719de79 (tools/oracle/hockeytech_analytics_oracle.py) over the REAL committed
+// running sdv-py @ac69bb7, HOCKEYTECH_PIN (tools/oracle/hockeytech_analytics_oracle.py) over the REAL committed
 // HockeyTech captures in test/fixtures/hockeytech/analytics/. Ids and strings compare strictly;
 // only the trig/sqrt geometry columns allow a 1e-12 relative slack.
 const dir = join(dirname(fileURLToPath(import.meta.url)), '..', 'fixtures', 'hockeytech', 'analytics');
@@ -24,18 +24,6 @@ const meta42 = load('pwhl_game_summary_42');
 const ohlPbp = load('ohl_pbp_27225');
 
 const FUZZY = new Set(['shot_distance', 'shot_angle']);
-// The six derived coordinate columns are rotations of the rink-feet frame (sdv-internal-refs #51,
-// hockeytech/CANVAS.md); sdv-py's add_coord_transforms at the oracle pin still has the old home
-// flip that put home x_coord_right at 191-290 ft (#50). They are held to the definitions by the
-// 'derived coordinates' tests below instead, until the oracle is regenerated from a fixed sdv-py.
-const NOT_PY_YET = new Set([
-  'x_coord_fixed',
-  'y_coord_fixed',
-  'x_coord_right',
-  'y_coord_right',
-  'x_coord_vertical',
-  'y_coord_vertical',
-]);
 /** An oracle frame as the public wrappers return it: py's integer ids as decimal strings (the v4 id rule). */
 const ids = (o) => ({ ...o, rows: pyIdRows(o.rows) });
 
@@ -48,7 +36,6 @@ function expectFrame(rows, oracle, { sortBy } = {}) {
   Object.keys(got[0]).should.eql(oracle.columns);
   got.forEach((row, i) => {
     for (const c of oracle.columns) {
-      if (NOT_PY_YET.has(c)) continue;
       const a = row[c];
       const b = want[i][c];
       if (FUZZY.has(c) && typeof a === 'number' && typeof b === 'number') {
@@ -212,8 +199,9 @@ describe('hockeytech analytics: edge cases vs the oracle (hand-built frames thro
       [-125.5 / 3, null, 125.5 / 3, null, null, 125.5 / 3],
       [200 / 3, -21.25, null, null, null, null],
     ];
+    const derived = ['x_coord_fixed', 'y_coord_fixed', 'x_coord_right', 'y_coord_right', 'x_coord_vertical', 'y_coord_vertical'];
     rows.forEach((r, i) =>
-      [...NOT_PY_YET].forEach((c, j) => {
+      derived.forEach((c, j) => {
         const w = want[i][j];
         if (w === null) should(r[c]).equal(null, `row ${i} ${c}`);
         else r[c].should.be.approximately(w, 1e-9, `row ${i} ${c}`);

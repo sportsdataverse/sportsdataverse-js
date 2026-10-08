@@ -1,10 +1,10 @@
 """Generate the sdv-py oracle for the sdv-js HockeyTech analytics port (Task 22a).
 
-Run ONCE from a throwaway sdv-py worktree checked out at PORT_PIN (tools/sdv_py_pin.py;
+Run ONCE from a throwaway sdv-py worktree checked out at HOCKEYTECH_PIN (tools/sdv_py_pin.py;
 the shared guard refuses any other checkout, a dirty one, or another installed copy):
 
-    git -C <sdv-py> worktree add --detach <scratch>/pyoracle <PORT_PIN>
-    cd <scratch>/pyoracle && uv sync --extra tests
+    git -C <sdv-py> worktree add --detach <scratch>/pyoracle <HOCKEYTECH_PIN>
+    cd <scratch>/pyoracle && uv sync --frozen --extra tests
     uv run python <sdv-js>/tools/oracle/hockeytech_analytics_oracle.py
 
 It reads the committed REAL HockeyTech captures from
@@ -13,7 +13,7 @@ It reads the committed REAL HockeyTech captures from
 client patched to serve those captures) and writes
 ``<sdv-js>/test/fixtures/hockeytech/analytics/oracle.json``.
 
-Provenance: sdv-py at PORT_PIN, polars as locked there.
+Provenance: sdv-py at HOCKEYTECH_PIN, polars as locked there.
 The ``synthetic_*`` cases are small hand-built frames that exercise edge cases the two
 captured games do not contain (goal-instant epsilon clamp, pulled goalie, line-change
 boundary, overlapping penalties); they are labelled as such and run through the same
@@ -35,9 +35,9 @@ from sportsdataverse.hockeytech import _parsers as P
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools"))
-from sdv_py_pin import PORT_PIN, pinned_checkout  # noqa: E402
+from sdv_py_pin import HOCKEYTECH_PIN, pinned_checkout  # noqa: E402
 
-PIN, _ = pinned_checkout(PORT_PIN)
+PIN, _ = pinned_checkout(HOCKEYTECH_PIN)
 FIX = ROOT / "test" / "fixtures" / "hockeytech" / "analytics"
 
 

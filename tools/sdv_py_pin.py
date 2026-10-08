@@ -8,7 +8,7 @@ HEAD is ``pin`` and it has no local changes. It returns ``(pin, root)``; a gener
 reads sdv-py files (fixtures, model tables) from ``root``. It does not depend on the
 working directory, so ``uv run --project <sdv-py>`` from the sdv-js root works too.
 
-Four pins:
+Five pins:
 
 * ``vendor_pin()`` -- ``tools/codegen/vendor.yaml`` ``source.ref``. The vendored
   parsers' oracle (tools/parity/py_oracle.py) tracks the vendor pin.
@@ -19,6 +19,10 @@ Four pins:
 * ``BASKETBALL_PBP_PIN`` -- the ESPN basketball pbp producers alone
   (tools/parity/espn_basketball_pbp_oracle.py), moved ahead of ``PORT_PIN`` to take sdv-py
   #688 (one-provider and paired pickcenter spreads, team timeouts, MBB overtime seconds).
+* ``HOCKEYTECH_PIN`` -- the HockeyTech analytics port alone
+  (tools/oracle/hockeytech_analytics_oracle.py), moved ahead of ``PORT_PIN`` to take sdv-py
+  #728 (``add_coord_transforms``: the derived ``x/y_coord_fixed``, ``_right`` and ``_vertical``
+  columns are rotations of the rink-feet frame).
 * ``ERROR_VOCAB_PIN`` -- the flat-API error vocabulary (sdv-py #696 / #700: 204 / 205,
   empty and non-JSON 2xx bodies, 400 / 422); tools/oracle/error_vocabulary_oracle.py.
 """
@@ -34,6 +38,7 @@ import yaml
 JS = Path(__file__).resolve().parents[1]
 PORT_PIN = "719de79edb685b89c524f8b4c0c146fea0b53855"
 BASKETBALL_PBP_PIN = "313587306d1031b0da46f5e1fef85dbaf5728200"
+HOCKEYTECH_PIN = "ac69bb72bbbffa12f4c0f92028f90872dbfa349a"
 ERROR_VOCAB_PIN = "938df901a5d50b3224c438dde817b3e1e48eb3ab"
 
 
