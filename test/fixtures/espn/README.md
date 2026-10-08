@@ -31,3 +31,16 @@ Captured live 2026-10-06 (verbatim, untrimmed) for the runnable examples (`examp
 | `scoreboard_nfl_2024_w1.json` | `GET https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=2024&week=1&seasontype=2&limit=500` (16 games) |
 | `standings_nfl_2024.json` | `GET https://site.api.espn.com/apis/v2/sports/football/nfl/standings?season=2024` (2 conferences, 32 teams) |
 | `standings_laliga_2024.json` | `GET https://site.api.espn.com/apis/v2/sports/soccer/esp.1/standings?season=2024` (20 teams) |
+
+## athlete_gamelog_nba_1966_2024.json.gz
+
+`GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/1966/gamelog?season=2024`
+(LeBron James, 2023-24), captured live 2026-10-08T22:58:10Z through
+`sdv.nba.espnNbaPlayerGamelog({ athlete_id: '1966', season: 2024 })`: the whole
+response (787,166 bytes as JSON; sha256 of the gunzipped bytes
+`a71cffd3cb45f6fcaadb6522abe396a10998842018092129d382b47152464695`), gzipped with
+zlib level 9 (25,087 bytes). Untrimmed: 82 games across the preseason, regular
+season (73, of which 71 count), play-in and postseason blocks. Served to
+`examples/97_sdvplot_player_gamelog.mjs` by `examples/_offline.mjs`;
+`test/tutorial-fixtures.test.js` checks the sha256 and re-derives the official
+regular season (71 games, 1,822 points).
