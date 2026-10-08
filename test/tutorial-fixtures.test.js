@@ -2,7 +2,7 @@ import 'should';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
-import sdv, { configure, axiosTransport } from '../dist/index.js';
+import sdv, { configure, resetConfig } from '../dist/index.js';
 import { capture, isThree, OUT, spotsFromShots } from '../tools/snapshots/nba-league-shots.mjs';
 
 // The two snapshots behind the sdvplot tutorials (examples/94 and 97), re-derived
@@ -49,13 +49,20 @@ describe('tutorial snapshot: 2023-24 NBA league shots per ESPN spot', function (
 
   (live ? describe : describe.skip)('re-derived from the release asset (SDV_LIVE=1)', function () {
     this.timeout(180_000);
-    after(() => configure({ transport: axiosTransport }));
+    after(() => resetConfig()); // capture() sets the transport AND retries: 0
     it('the asset hashes to the recorded sha256 and re-derives to the committed spots', async () => {
       const { rows, sha256 } = await capture(sdv, configure);
       sha256.should.equal(snap.provenance.sha256);
       rows.length.should.equal(snap.provenance.rows);
       spotsFromShots(rows).should.eql(snap.spots);
-      rows.filter((r) => r.game_id === '401585607' && !/free throw/i.test(r.type_text)).length.should.equal(169);
+      // the game's release rows ARE the summary's attempts: same team, spot, result and 2-or-3, one for one
+      const key = (team, x, y, made, value) => `${team},${x},${y},${made},${value}`;
+      const release = rows
+        .filter((r) => r.game_id === '401585607' && !/free throw/i.test(r.type_text))
+        .map((r) => key(r.team_id, r.coordinate_x_raw, r.coordinate_y_raw, r.scoring_play, r.scoring_play ? r.score_value : isThree(r.coordinate_x_raw, r.coordinate_y_raw) ? 3 : 2))
+        .sort();
+      const captured = game.map((p) => key(p.team.id, p.coordinate.x, p.coordinate.y, p.scoringPlay, p.pointsAttempted)).sort();
+      release.should.eql(captured);
     });
   });
 });

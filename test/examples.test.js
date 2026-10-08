@@ -11,7 +11,10 @@ import { dirname, join } from 'node:path';
 // examples/ is needed. The 9x_sdvplot_* scripts also need the unpublished
 // @sportsdataverse/{sdvplot,sporty} build from a sibling sdvplot-js checkout
 // (SDVPLOT_JS_DIR); without it the preload prints `skipped:` and exits 0, and
-// the case is skipped here (CI has no sibling checkout).
+// the case is skipped here (CI has no sibling checkout). That opt-in local run is
+// not network-free: 96 and 97 render PNGs whose images (32 NFL logos from
+// sdvplot's CDN, an ESPN headshot) are third-party artwork, deliberately not
+// committed as fixtures; their DATA still comes from the fixtures.
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const EXAMPLES = join(__dirname, '..', 'examples');
