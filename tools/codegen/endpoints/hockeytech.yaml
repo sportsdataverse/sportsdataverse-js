@@ -48,7 +48,7 @@ endpoints:
     path: /feed/index.php
     extra_params:
       - { name: league, query_key: league }
-      - { name: season_id, query_key: season_id }
+      - { name: season_id, query_key: season_id, required: true }
       - { name: team_id, query_key: team_id }
       - { name: feed, query_key: feed, default: modulekit }
       - { name: view, query_key: view, default: schedule }

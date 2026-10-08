@@ -436,7 +436,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `visiting_team_division_long` | character | Long division (or conference) name of the visiting team. |
 | `visiting_team_division_short` | character | Short division name of the visiting team. |
 | `notes_text` | character | Free-text game notes entered by the league (e.g. timeouts, goalie pulls); usually empty. |
-| `use_shootouts` | character | '1' when the competition settles ties with a shootout, else '0' (the CHL Memorial Cup). |
+| `use_shootouts` | character | '1' when the competition settles ties with a shootout, else '0' (NOJHL, whose 2025-26 games ended in overtime, never a shootout). |
 | `venue_name` | character | Name of the venue (e.g. 'TD Place \| Ottawa'). |
 | `venue_url` | character | Website of the venue; often empty. |
 | `venue_location` | character | City and province or state of the venue (e.g. 'Ottawa, ON'). |

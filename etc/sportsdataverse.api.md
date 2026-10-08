@@ -5675,9 +5675,8 @@ export type HockeytechPlayoffBracketParams = OptionalParams<{
 }> & HockeytechControls;
 
 // @public
-export type HockeytechScheduleParams = OptionalParams<{
+export type HockeytechScheduleParams = RequiredParam<"season_id", number | string> & OptionalParams<{
     league: number | string;
-    season_id: number | string;
     team_id: number | string;
     feed: number | string;
     view: number | string;

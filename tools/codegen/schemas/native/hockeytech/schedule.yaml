@@ -160,7 +160,7 @@ columns:
   description: 'Free-text game notes entered by the league (e.g. timeouts, goalie pulls); usually empty.'
 - name: use_shootouts
   type: character
-  description: '''1'' when the competition settles ties with a shootout, else ''0'' (the CHL Memorial Cup).'
+  description: '''1'' when the competition settles ties with a shootout, else ''0'' (NOJHL, whose 2025-26 games ended in overtime, never a shootout).'
 - name: venue_name
   type: character
   description: 'Name of the venue (e.g. ''TD Place | Ottawa'').'
