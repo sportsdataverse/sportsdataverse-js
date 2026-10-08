@@ -845,6 +845,14 @@ _#79, #70_
   `CONTRIBUTING.md` brought up to date (loaders, error vocabulary, coverage gate, examples and
   tutorials workflow, utilities catalogue, `breaking.yaml`); the phantom `tools/codegen/templates/`
   references are gone. (#108)
+- **Tutorials 17-19 with sdvplot-js** (`examples/94`, `96`, `97`): a game's shot chart against
+  the 2023-24 league (the shot kit's `cellsVsLeague` / `shotCells`, PNG via resvg), the final 2024
+  NFL standings as a publication table (sdvtables `gridTables` + `htmlToPNG`), and a player's
+  form from his ESPN game log (Plot in Node, `meanLines`, `headshots`). New real fixtures with
+  provenance and re-derivation tests (`test/tutorial-fixtures.test.js`): the 2023-24
+  `espn_nba_shots` release counted per ESPN spot (`tools/snapshots/nba-league-shots.mjs`) and
+  LeBron James's 2023-24 game log. `examples/_resolve.mjs` resolves `@observablehq/plot` and
+  `jsdom` from the sdvplot-js checkout.
 
 ## v3.0.0 (2026-06-17)
 

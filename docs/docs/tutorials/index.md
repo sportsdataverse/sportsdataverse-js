@@ -47,7 +47,12 @@ New here? Start with the [Quickstart](../guides/quickstart) guide (install, firs
 | 14 | [Shot chart with sdvplot + sporty](./sdvplot-shot-chart) | `90_sdvplot_shot_chart.mjs` | ESPN NBA summary (site.api.espn.com); `@sportsdataverse/sporty`, `@sportsdataverse/sdvplot` |
 | 15 | [Standings bars in team colours](./sdvplot-standings-colors) | `91_sdvplot_standings_colors.mjs` | ESPN WNBA standings (site.api.espn.com); `@sportsdataverse/sdvplot` |
 | 16 | [Roster table with headshots](./sdvplot-roster-table) | `92_sdvplot_roster_table.mjs` | ESPN NBA roster (site.api.espn.com); `@sportsdataverse/sdvplot` |
+| 17 | [A game's shot chart against the league](./sdvplot-shots-vs-league) | `94_sdvplot_shots_vs_league.mjs` | ESPN NBA summary (site.api.espn.com), the `espn_nba_shots` release (github.com); `@sportsdataverse/sdvplot` shot kit |
+| 18 | [NFL standings as a publication table](./sdvplot-standings-table) | `96_sdvplot_nfl_standings_table.mjs` | ESPN NFL standings (site.api.espn.com); `@sportsdataverse/sdvtables` |
+| 19 | [A player's form from his game log](./sdvplot-player-form) | `97_sdvplot_player_gamelog.mjs` | ESPN NBA player game log (site.web.api.espn.com); `@sportsdataverse/sdvplot` |
 
-Tutorials 14–16 use [sdvplot-js](https://github.com/sportsdataverse/sdvplot-js),
-which is not published to npm yet; see [the shot chart page](./sdvplot-shot-chart)
+Tutorials 14–19 use [sdvplot-js](https://github.com/sportsdataverse/sdvplot-js)
+([docs](https://plot.sportsdataverse.org), [notebooks](https://plot.sportsdataverse.org/notebooks/)),
+which is not published to npm yet; they need `sportsdataverse` ≥ 4.0.0 and
+`@sportsdataverse/*` ≥ 0.1.0. See [the shot chart page](./sdvplot-shot-chart)
 for how to build and link it.
