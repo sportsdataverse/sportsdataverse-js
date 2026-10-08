@@ -162,7 +162,7 @@ export function buildHockeytechUrl(params: Record<string, any>): string {
   for (const [k, v] of Object.entries(rest)) {
     if (v !== undefined && v !== null && v !== "") sp.set(k, String(v));
   }
-  // sdv-py sends the registry `league_id` on these views (schedule/scorebar,
+  // sdv-py sends the registry `league_id` on these views (scorebar,
   // standings, transactions, brackets); an explicit `league_id` param wins.
   if (LEAGUE_ID_VIEWS.has(String(view)) && !sp.has("league_id")) sp.set("league_id", String(cfg.leagueId));
   return `${cfg.baseUrl}?${sp.toString()}`;

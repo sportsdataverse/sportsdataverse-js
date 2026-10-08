@@ -131,7 +131,7 @@ await sdv.mlb.mlbStatcastSearch({ season: 2024, player_type: "batter" });     //
 await sdv.nhl.nhlWebPbp({ game_id: 2023030417, parsed: true });
 await sdv.nfl.nflWeeklyGameDetails({ season: 2024, week: 1, parsed: true });  // token minted for you
 await sdv.nba.nbaStatsLeaguedashplayerstats({ parsed: true });                // needs `impit`
-await sdv.hockeytech.hockeytechSchedule({ league: "pwhl", parsed: true });
+await sdv.hockeytech.hockeytechSchedule({ league: "pwhl", season_id: 8, parsed: true }); // one season
 await sdv.hockeytech.pwhlGameCorsi(42);                                       // shifts → on-ice → Corsi
 await sdv.odds.oddsApiSportsOdds({ sport: "americanfootball_nfl", api_key: process.env.ODDS_API_KEY, parsed: true });
 await sdv.fox.foxApiScoreboard({ parsed: true });

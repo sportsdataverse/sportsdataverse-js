@@ -19,6 +19,9 @@ toc_max_heading_level: 2
 - **`hockeytech_resolve_season_id` skips one-off events and ranks what is left** — All-star games, showcases, combines, exhibitions and play-ins are dropped for a regular season or playoffs; the rest rank by league code, named game type, two-year span, feed order. ([changelog](/CHANGELOG#hockeytech-season-years-and-season-resolution-sdv-py-parity))
 - **A failed HockeyTech fetch is no longer an empty result** — An empty or unparseable body and the in-body error sentinels throw `AssetFetchError`; only the recognised `Feed type access denied.` stays `{}` / `[]`. A missing or unknown `league` throws. ([changelog](/CHANGELOG#hockeytech-hardening-error-vocabulary-user-agent-returns-descriptions))
 - **`most_recent_hockeytech_season` / `hockeytech_season_id` throw on a failed fetch** — Instead of returning 2026 / `[]`. With no seasons in the feed, `hockeytech_season_id` returns `[]` and `most_recent_hockeytech_season` throws `NoDataError`. ([changelog](/CHANGELOG#hockeytech-hardening-error-vocabulary-user-agent-returns-descriptions))
+- **`hockeytech_schedule` reads the season-scoped `modulekit/schedule` view** — It read `modulekit/scorebar`, which ignores `season_id`, sorts oldest-first and stops at `limit`: AHL season 90 (2025-26) came back as 10,000 games from 1995 to 2012. Now only the requested season comes back (live 2026-10-08, all 20 leagues). ([changelog](/CHANGELOG#hockeytech-schedules-read-the-season-scoped-schedule-view))
+- **`hockeytech_schedule` drops the date-window params** — `number_of_days_back`, `number_of_days_ahead`, `limit` and `league_id` are gone; it takes `league`, `season_id` and an optional `team_id`. Use `hockeytech_scorebar` for a date window. ([changelog](/CHANGELOG#hockeytech-schedules-read-the-season-scoped-schedule-view))
+- **`hockeytech_schedule` rows carry the schedule view's columns** — `id` + `game_id`; `home_team` is the team id (name in `home_team_name`), `home_goal_count`, `visitor_*` → `visiting_*`; `game_status` is the label ("Final", "Final OT", …) and the numeric code is `status`. `date_time_played` is local time despite its `Z`. ([changelog](/CHANGELOG#hockeytech-schedules-read-the-season-scoped-schedule-view))
 
 :::
 
@@ -53,7 +56,7 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `hockeytech_player_search` / `hockeytechPlayerSearch` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `search_term`, `feed`, `view` | `parse_hockeytech_player_search` | — |
 | `hockeytech_player_stats` / `hockeytechPlayerStats` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `player_id`, `category`, `feed`, `view` | `parse_hockeytech_player_stats` | — |
 | `hockeytech_playoff_bracket` / `hockeytechPlayoffBracket` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `feed`, `league_id`, `view` | `parse_hockeytech_playoff_bracket` | — |
-| `hockeytech_schedule` / `hockeytechSchedule` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `number_of_days_back` → `numberofdaysback`, `number_of_days_ahead` → `numberofdaysahead`, `limit`, `feed`, `league_id`, `view` | `parse_hockeytech_schedule` | — |
+| `hockeytech_schedule` / `hockeytechSchedule` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `team_id`, `feed`, `view` | `parse_hockeytech_schedule` | — |
 | `hockeytech_scorebar` / `hockeytechScorebar` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `number_of_days_back` → `numberofdaysback`, `number_of_days_ahead` → `numberofdaysahead`, `limit`, `feed`, `league_id`, `view` | `parse_hockeytech_scorebar` | — |
 | `hockeytech_seasons` / `hockeytechSeasons` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `feed`, `view` | `parse_hockeytech_seasons` | — |
 | `hockeytech_standings` / `hockeytechStandings` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id` → `season`, `feed`, `league_id`, `view`, `group_teams_by` → `groupTeamsBy`, `context`, `special`, `sort` | `parse_hockeytech_standings` | — |
@@ -382,69 +385,84 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 | col_name | type | description |
 |---|---|---|
-| `id` | character | HockeyTech game id, the game_id the single-game functions (hockeytech_pbp, hockeytech_game_summary) take. |
-| `season_id` | character | HockeyTech season id. |
-| `league_id` | character | HockeyTech league id of the game within the feed (e.g. '1'; AHL '4', SJHL '3'); not always the league_id the standings call sends. |
-| `game_number` | character | Game number within the schedule. |
-| `game_letter` | character | Playoff-series letter (A, B, C, ... one per series), set on every playoff game and empty on regular-season games. |
-| `game_type` | character | Game type the row belongs to. |
-| `quick_score` | character | Unused by the feed: '0' in every captured row (final and scheduled games, 17 leagues), never a score. |
-| `date` | character | Game date as YYYY-MM-DD (date only, no time). |
-| `flo_core_event_id` | character | FloSports core event identifier linking this game to its FloSports broadcast event record. |
-| `flo_live_event_id` | character | FloSports live-stream event identifier for this game. |
-| `game_date` | character | Game date. |
-| `game_date_iso8601` | character | Scheduled start as an ISO 8601 date-time with UTC offset (e.g. '2023-12-04T13:00:00-05:00'). |
-| `scheduled_time` | character | Raw scheduled start time for the game as returned by the HockeyTech feed, typically in HH:MM:SS format. |
-| `scheduled_formatted_time` | character | Human-readable local game start time string formatted for display (e.g., "7:00 PM ET"). |
-| `timezone` | character | Time zone of the scheduled start as a tz database name (e.g. 'Canada/Eastern'). |
-| `ticket_url` | character | URL to the official ticketing page where fans can purchase tickets for this game. |
-| `home_id` | character | HockeyTech team id of the home team (the id of hockeytech_teams, e.g. PWHL '1' = Boston), not an ESPN id. |
-| `home_code` | character | Short team code (abbreviation) for the home team (e.g., "BOS", "MIN"). |
-| `home_city` | character | City name of the home team (e.g. 'Boston', 'Minnesota'). |
-| `home_nickname` | character | Franchise nickname for the home team (e.g., "Fleet", "Frost"). |
-| `home_long_name` | character | Full name including city and franchise for the home team (e.g., "Boston Fleet"). |
-| `home_division` | character | Home team division. |
-| `home_goals` | character | Goals scored by the home team in the game so far; the final score once game_status is '4'. |
-| `home_audio_url` | character | URL of the home-team radio or audio broadcast stream for this game. |
-| `home_video_url` | character | URL of the home-team video broadcast stream for this game. |
-| `home_webcast_url` | character | URL of the home-team webcast for online viewing of this game. |
-| `visitor_id` | character | HockeyTech team identifier for the visiting team in this game. |
-| `visitor_code` | character | Short team code (abbreviation) for the visiting team (e.g., "NYR", "OTT"). |
-| `visitor_city` | character | City name of the visiting team (e.g., "New York", "Ottawa"). |
-| `visitor_nickname` | character | Franchise nickname for the visiting team (e.g., "Charge", "Sceptres"). |
-| `visitor_long_name` | character | Full name including city and franchise for the visiting team (e.g., "Ottawa Charge"). |
-| `visiting_division` | character | Visiting team division. |
-| `visitor_goals` | character | Number of goals scored by the visiting team at the current point in the game. |
-| `visitor_audio_url` | character | URL of the visiting-team radio or audio broadcast stream for this game. |
-| `visitor_video_url` | character | URL of the visiting-team video broadcast stream for this game. |
-| `visitor_webcast_url` | character | URL of the visiting-team webcast for online viewing of this game. |
-| `period` | character | Period number. |
-| `period_name_short` | character | Abbreviated name of the current or final game period (e.g., "3rd", "OT"). |
-| `period_name_long` | character | Verbose name of the current or final game period (e.g., "Third Period", "Overtime"). |
-| `game_clock` | character | Game clock. |
-| `game_summary_url` | character | Game-summary link target, not a full URL: the bare game id in some leagues (e.g. PWHL '74') and a site-relative path in others (e.g. '/game-center/?game_id=4896'). |
-| `home_wins` | character | Home team's wins in its record for this game's season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date. |
-| `home_regulation_losses` | character | Home team's regulation losses in its record for this game's season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date. |
-| `home_ot_losses` | character | Home team's overtime losses in its record for this game's season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date. |
-| `home_shootout_losses` | character | Home team's shootout losses in its record for this game's season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date. |
-| `visitor_wins` | character | Visiting team's wins in its record for this game's season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date. |
-| `visitor_regulation_losses` | character | Visiting team's regulation losses in its record for this game's season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date. |
-| `visitor_ot_losses` | character | Visiting team's overtime losses in its record for this game's season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date. |
-| `visitor_shootout_losses` | character | Visiting team's shootout losses in its record for this game's season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date. |
-| `game_status` | character | Numeric game-status code as text: '1' for a scheduled game, '4' for a final. The label is in game_status_string ('Final', or the start time of a scheduled game). |
-| `intermission` | character | Flag or string indicating whether the game is currently in an intermission period. |
-| `game_status_string` | character | Short status label for the game's current state (e.g., "Final", "In Progress", "Scheduled"). |
-| `game_status_string_long` | character | Verbose status description for the game's current state, including period or overtime context. |
-| `ord` | character | Ordinal sort key used by the HockeyTech scorebar feed to order games within a day. |
-| `venue_name` | character | Name of the venue. |
-| `venue_location` | character | City and/or arena name indicating the physical location where the game is played. |
-| `league_name` | character | League name. |
-| `league_code` | character | Short code identifying the league for this scorebar record (e.g., "PWHL"). |
-| `timezone_short` | character | Abbreviated timezone label for the game's scheduled start time (e.g., "ET", "CT"). |
-| `home_logo` | character | Home team logo URL. |
-| `visitor_logo` | character | URL of the logo image for the visiting team. |
-| `flo_hockey_url` | character | URL to the FloHockey streaming page for this game. |
-| `combined_client_code` | character | Combined league-and-client identifier string used by the HockeyTech feed to distinguish multi-tenant deployments. |
+| `id` | character | HockeyTech game id, the game_id the single-game functions (hockeytech_pbp, hockeytech_game_summary) take. Equal to game_id. |
+| `game_id` | character | HockeyTech game id (equal to id). |
+| `season_id` | character | HockeyTech season id: always the season_id the call asked for. A regular season, its playoffs and its preseason are separate season ids. |
+| `quick_score` | character | Unused by the feed: '0' in every captured row, never a score. |
+| `date_played` | character | Game date as YYYY-MM-DD, local to the venue. |
+| `date_tbd` | character | '1' when the game date is still to be determined, else '0'. |
+| `date` | character | Short display date without the year (e.g. 'Sep. 19'). |
+| `date_with_day` | character | Display date with the weekday, without the year (e.g. 'Fri, Sep 19'). |
+| `date_time_played` | character | Scheduled start in LOCAL time with a misleading Z suffix: it is not UTC (an AHL 7:00 pm EDT game ships as '2025-10-10T19:00:00Z'). Use game_date_iso8601 for the true offset. |
+| `game_date_iso8601` | character | Scheduled start as an ISO 8601 date-time in local time with its real UTC offset (e.g. '2025-11-21T19:00:00-05:00'); the field to use for the start instant. |
+| `home_team` | character | HockeyTech team id of the home team (the id of hockeytech_teams), not a name or an ESPN id. The name is in home_team_name. |
+| `visiting_team` | character | HockeyTech team id of the visiting team (the id of hockeytech_teams). The name is in visiting_team_name. |
+| `home_goal_count` | character | Goals scored by the home team; the final score once status is '4'. |
+| `visiting_goal_count` | character | Goals scored by the visiting team; the final score once status is '4'. |
+| `period` | character | Last period played: '3' for a regulation game, '4' and up for overtime periods (shootout games included). |
+| `overtime` | character | '1' when the game went past regulation, shootout games included; else '0'. |
+| `schedule_time` | character | Scheduled local start time as HH:MM:SS (e.g. '19:00:00'). |
+| `time_tbd` | character | '1' when the start time is still to be determined, else '0'. |
+| `schedule_notes` | character | Schedule note for the game; empty in every captured row. |
+| `game_clock` | character | Game clock as HH:MM:SS: the time left in the last period for a live game, '00:00:00' once a regulation game is final. |
+| `timezone` | character | Time zone of the venue as a tz database name (e.g. 'America/Toronto'). |
+| `game_number` | character | Game number within the season's schedule. |
+| `shootout` | character | '0' when there was no shootout; non-zero ('1' or '2' in the captures) for a game decided in a shootout. |
+| `attendance` | character | Reported attendance as text; empty when not reported. |
+| `status` | character | Numeric game-status code as text: '1' not started, '2' in progress, '3' unofficial final, '4' final. |
+| `location` | character | HockeyTech venue (location) id. |
+| `game_status` | character | Status label: 'Final', 'Final OT', 'Final OT2', 'Final SO', 'Postponed', or the start time (e.g. '7:00 pm EST') for a game not yet played. |
+| `intermission` | character | '1' while the game is in an intermission, else '0'. |
+| `game_type` | character | Game-type code; empty in every captured regular-season row. |
+| `game_letter` | character | Playoff-series letter, set on playoff games; empty (or '0') on regular-season games. |
+| `if_necessary` | character | '1' for an if-necessary playoff game, else '0'. |
+| `period_trans` | character | Display name of the last period played: '1', '2', '3', 'OT', 'OT1', 'OT2', ... |
+| `started` | character | '1' once the game has started, else '0'. |
+| `final` | character | '1' once the game is final, else '0'. |
+| `tickets_url` | character | URL of the ticketing page for the game; often empty. |
+| `home_audio_url` | character | URL of the home team's radio or audio stream; often empty. |
+| `visiting_audio_url` | character | URL of the visiting team's radio or audio stream; often empty. |
+| `uses_spalk_rc` | character | Spalk remote-commentary flag; null in every captured row. |
+| `home_team_name` | character | Full name of the home team (e.g. 'Minnesota Frost'). |
+| `home_team_code` | character | Short code of the home team (e.g. 'MIN'). |
+| `home_team_nickname` | character | Nickname of the home team (e.g. 'Frost'). |
+| `home_team_city` | character | City of the home team (e.g. 'Minnesota'). |
+| `home_team_division_long` | character | Long division (or conference) name of the home team (e.g. 'Western Conference'; 'PWHL' in the PWHL). |
+| `home_team_division_short` | character | Short division name of the home team (e.g. 'South'). |
+| `visiting_team_name` | character | Full name of the visiting team (e.g. 'Toronto Sceptres'). |
+| `visiting_team_code` | character | Short code of the visiting team (e.g. 'TOR'). |
+| `visiting_team_nickname` | character | Nickname of the visiting team (e.g. 'Sceptres'). |
+| `visiting_team_city` | character | City of the visiting team (e.g. 'Toronto'). |
+| `visiting_team_division_long` | character | Long division (or conference) name of the visiting team. |
+| `visiting_team_division_short` | character | Short division name of the visiting team. |
+| `notes_text` | character | Free-text game notes entered by the league (e.g. timeouts, goalie pulls); usually empty. |
+| `use_shootouts` | character | '1' when the competition settles ties with a shootout, else '0' (NOJHL, whose 2025-26 games ended in overtime, never a shootout). |
+| `venue_name` | character | Name of the venue (e.g. 'TD Place \| Ottawa'). |
+| `venue_url` | character | Website of the venue; often empty. |
+| `venue_location` | character | City and province or state of the venue (e.g. 'Ottawa, ON'). |
+| `last_modified` | character | When the feed last changed the game record, as 'YYYY-MM-DD HH:MM:SS'. |
+| `flo_core_event_id` | character | FloSports core event identifier linking this game to its FloSports broadcast event record; empty when there is none. |
+| `flo_live_event_id` | character | FloSports live-stream event identifier for this game; empty when there is none. |
+| `htv_game_id` | character | HTV streaming game id the feed links to the game; empty when there is none. |
+| `client_code` | character | HockeyTech client code of the league that served the row (e.g. 'pwhl', 'lhjmq' for the QMJHL). |
+| `scheduled_time` | character | Display start time with the time-zone abbreviation (e.g. '7:00 pm EST'). |
+| `broadcasters_home_video_fr` | character | JSON-encoded list of the home team's TV broadcasters in French (broadcaster_id, name, logo_url, url), from the row's broadcasters object. Only in the leagues whose rows carry one (CHL, OHL, PWHL, WHL in the captures; QMJHL's is empty) and only when that list is set; the other 15 leagues ship the flat *_video_url / *_webcast_url columns instead. |
+| `broadcasters_home_video` | character | JSON-encoded list of the home team's TV broadcasters (broadcaster_id, name, logo_url, url), from the row's broadcasters object. Only in the leagues whose rows carry one (CHL, OHL, PWHL, WHL in the captures; QMJHL's is empty) and only when that list is set; the other 15 leagues ship the flat *_video_url / *_webcast_url columns instead. |
+| `mobile_calendar` | character | URL that adds the game to a calendar (iCal). |
+| `broadcasters_home_webcast` | character | JSON-encoded list of the home team's webcast broadcasters (broadcaster_id, name, logo_url, url), from the row's broadcasters object. Only in the leagues whose rows carry one (CHL, OHL, PWHL, WHL in the captures; QMJHL's is empty) and only when that list is set; the other 15 leagues ship the flat *_video_url / *_webcast_url columns instead. |
+| `broadcasters_home_webcast_fr` | character | JSON-encoded list of the home team's webcast broadcasters in French (broadcaster_id, name, logo_url, url), from the row's broadcasters object. Only in the leagues whose rows carry one (CHL, OHL, PWHL, WHL in the captures; QMJHL's is empty) and only when that list is set; the other 15 leagues ship the flat *_video_url / *_webcast_url columns instead. |
+| `home_video_url` | character | URL of the home team's video stream; often empty. Only in the 15 leagues without a broadcasters object (AHL, ECHL, SPHL, USHL and the junior A leagues). |
+| `home_video_url_fr` | character | URL of the home team's video stream (French); often empty. Only in the 15 leagues without a broadcasters object (AHL, ECHL, SPHL, USHL and the junior A leagues). |
+| `home_webcast_url` | character | URL of the home team's webcast stream; often empty. Only in the 15 leagues without a broadcasters object (AHL, ECHL, SPHL, USHL and the junior A leagues). |
+| `home_webcast_url_fr` | character | URL of the home team's webcast stream (French); often empty. Only in the 15 leagues without a broadcasters object (AHL, ECHL, SPHL, USHL and the junior A leagues). |
+| `visiting_video_url` | character | URL of the visiting team's video stream; often empty. Only in the 15 leagues without a broadcasters object (AHL, ECHL, SPHL, USHL and the junior A leagues). |
+| `visiting_video_url_fr` | character | URL of the visiting team's video stream (French); often empty. Only in the 15 leagues without a broadcasters object (AHL, ECHL, SPHL, USHL and the junior A leagues). |
+| `visiting_webcast_url` | character | URL of the visiting team's webcast stream; often empty. Only in the 15 leagues without a broadcasters object (AHL, ECHL, SPHL, USHL and the junior A leagues). |
+| `visiting_webcast_url_fr` | character | URL of the visiting team's webcast stream (French); often empty. Only in the 15 leagues without a broadcasters object (AHL, ECHL, SPHL, USHL and the junior A leagues). |
+| `broadcasters_visiting_video` | character | JSON-encoded list of the visiting team's TV broadcasters (broadcaster_id, name, logo_url, url), from the row's broadcasters object. Only in the leagues whose rows carry one (CHL, OHL, PWHL, WHL in the captures; QMJHL's is empty) and only when that list is set; the other 15 leagues ship the flat *_video_url / *_webcast_url columns instead. |
+| `broadcasters_visiting_video_fr` | character | JSON-encoded list of the visiting team's TV broadcasters in French (broadcaster_id, name, logo_url, url), from the row's broadcasters object. Only in the leagues whose rows carry one (CHL, OHL, PWHL, WHL in the captures; QMJHL's is empty) and only when that list is set; the other 15 leagues ship the flat *_video_url / *_webcast_url columns instead. |
+| `broadcasters_visiting_webcast` | character | JSON-encoded list of the visiting team's webcast broadcasters (broadcaster_id, name, logo_url, url), from the row's broadcasters object. Only in the leagues whose rows carry one (CHL, OHL, PWHL, WHL in the captures; QMJHL's is empty) and only when that list is set; the other 15 leagues ship the flat *_video_url / *_webcast_url columns instead. |
+| `broadcasters_visiting_webcast_fr` | character | JSON-encoded list of the visiting team's webcast broadcasters in French (broadcaster_id, name, logo_url, url), from the row's broadcasters object. Only in the leagues whose rows carry one (CHL, OHL, PWHL, WHL in the captures; QMJHL's is empty) and only when that list is set; the other 15 leagues ship the flat *_video_url / *_webcast_url columns instead. |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 

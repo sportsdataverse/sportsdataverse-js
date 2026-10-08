@@ -5675,14 +5675,10 @@ export type HockeytechPlayoffBracketParams = OptionalParams<{
 }> & HockeytechControls;
 
 // @public
-export type HockeytechScheduleParams = OptionalParams<{
+export type HockeytechScheduleParams = RequiredParam<"season_id", number | string> & OptionalParams<{
     league: number | string;
-    season_id: number | string;
-    number_of_days_back: number | string;
-    number_of_days_ahead: number | string;
-    limit: number | string;
+    team_id: number | string;
     feed: number | string;
-    league_id: number | string;
     view: number | string;
 }> & HockeytechControls;
 

@@ -133,6 +133,29 @@ entries:
       Instead of returning 2026 / `[]`. With no seasons in the feed, `hockeytech_season_id`
       returns `[]` and `most_recent_hockeytech_season` throws `NoDataError`.
     changelog_anchor: hockeytech-hardening-error-vocabulary-user-agent-returns-descriptions
+  - version: "4.0.0"
+    surface: hockeytech
+    title: "`hockeytech_schedule` reads the season-scoped `modulekit/schedule` view"
+    note: >-
+      It read `modulekit/scorebar`, which ignores `season_id`, sorts oldest-first and stops at
+      `limit`: AHL season 90 (2025-26) came back as 10,000 games from 1995 to 2012. Now only the
+      requested season comes back (live 2026-10-08, all 20 leagues).
+    changelog_anchor: hockeytech-schedules-read-the-season-scoped-schedule-view
+  - version: "4.0.0"
+    surface: hockeytech
+    title: "`hockeytech_schedule` drops the date-window params"
+    note: >-
+      `number_of_days_back`, `number_of_days_ahead`, `limit` and `league_id` are gone; it takes
+      `league`, `season_id` and an optional `team_id`. Use `hockeytech_scorebar` for a date window.
+    changelog_anchor: hockeytech-schedules-read-the-season-scoped-schedule-view
+  - version: "4.0.0"
+    surface: hockeytech
+    title: "`hockeytech_schedule` rows carry the schedule view's columns"
+    note: >-
+      `id` + `game_id`; `home_team` is the team id (name in `home_team_name`), `home_goal_count`,
+      `visitor_*` → `visiting_*`; `game_status` is the label ("Final", "Final OT", …) and the
+      numeric code is `status`. `date_time_played` is local time despite its `Z`.
+    changelog_anchor: hockeytech-schedules-read-the-season-scoped-schedule-view
   # Breaking notes filed under other 4.0.0 headings.
   - version: "4.0.0"
     surface: flat:fox

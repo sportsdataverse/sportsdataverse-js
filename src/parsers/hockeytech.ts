@@ -9,7 +9,7 @@
 //
 // HockeyTech responses come in three envelope shapes:
 //   - `modulekit` feeds wrap rows under `SiteKit.<View>` (`SiteKit.Seasons`,
-//     `SiteKit.Scorebar`, `SiteKit.Teamsbyseason`, `SiteKit.Roster`,
+//     `SiteKit.Schedule`, `SiteKit.Scorebar`, `SiteKit.Teamsbyseason`, `SiteKit.Roster`,
 //     `SiteKit.Player`, `SiteKit.Gameshifts`);
 //   - `statviewfeed` feeds are bespoke (standings: `[0].sections[].data[].row`;
 //     leaders: `skaters.<Category>.results[]`; pbp: a top-level `{event,
@@ -123,7 +123,7 @@ export function parse_hockeytech_seasons(payload: any): ParserRow[] {
   return normalize(rows);
 }
 
-/** Parse `hockeytech_schedule()` — one row per game (`SiteKit.Scorebar`). */
+/** Parse `hockeytech_schedule()` — one row per game of the requested season (`SiteKit.Schedule`). */
 export function parse_hockeytech_schedule(payload: any): ParserRow[] {
   return normalize(siteKitRows(payload));
 }
@@ -263,11 +263,12 @@ export function parse_hockeytech_game_summary(payload: any): ParserRow[] {
 }
 
 /**
- * Parse `hockeytech_scorebar()` — one row per game in the live window. Same `SiteKit.Scorebar`
- * payload as the schedule view, so it shares {@link parse_hockeytech_schedule}.
+ * Parse `hockeytech_scorebar()` — one row per game in the date window (`SiteKit.Scorebar`).
+ * Its columns are the scorebar names (`id`, `home_code`, `home_goals`, ...), not the
+ * schedule view's.
  */
 export function parse_hockeytech_scorebar(payload: any): ParserRow[] {
-  return parse_hockeytech_schedule(payload);
+  return normalize(siteKitRows(payload));
 }
 
 /** Parse `hockeytech_player_search()` — one row per match (`SiteKit.Searchplayers`). */

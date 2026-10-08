@@ -1,0 +1,807 @@
+{
+  "SiteKit": {
+    "Parameters": {
+      "feed": "modulekit",
+      "key": "REDACTED",
+      "client_code": "ohl",
+      "site_id": "1",
+      "lang": "en",
+      "view": "schedule",
+      "season_id": 83,
+      "lang_id": 1,
+      "league_id": "1"
+    },
+    "Schedule": [
+      {
+        "id": "28150",
+        "game_id": "28150",
+        "season_id": "83",
+        "quick_score": "0",
+        "date_played": "2025-09-18",
+        "date_tbd": "0",
+        "date": "Sep. 18",
+        "date_with_day": "Thu, Sep 18",
+        "date_time_played": "2025-09-18T19:00:00Z",
+        "GameDateISO8601": "2025-09-18T19:00:00-04:00",
+        "home_team": "19",
+        "visiting_team": "4",
+        "home_goal_count": "4",
+        "visiting_goal_count": "2",
+        "period": "3",
+        "overtime": "0",
+        "schedule_time": "19:00:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:00",
+        "timezone": "America/Toronto",
+        "game_number": "1",
+        "shootout": "0",
+        "attendance": "3135",
+        "status": "4",
+        "location": "130",
+        "game_status": "Final",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "3",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "",
+        "visiting_audio_url": "http://www.mixlr.com/oshawagenerals",
+        "uses_spalk_rc": null,
+        "home_team_name": "North Bay Battalion",
+        "home_team_code": "NB",
+        "home_team_nickname": "Battalion",
+        "home_team_city": "North Bay",
+        "home_team_division_long": "Central Division",
+        "home_team_division_short": "Central",
+        "visiting_team_name": "Oshawa Generals",
+        "visiting_team_code": "OSH",
+        "visiting_team_nickname": "Generals",
+        "visiting_team_city": "Oshawa",
+        "visiting_team_division_long": "East Division",
+        "visiting_team_division_short": "East",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Boart Longyear Memorial Gardens",
+        "venue_url": "",
+        "venue_location": "North Bay",
+        "last_modified": "2026-08-24 12:58:13",
+        "flo_core_event_id": "14476942",
+        "flo_live_event_id": "194271",
+        "htv_game_id": "1125864",
+        "client_code": "ohl",
+        "scheduled_time": "7:00 pm EDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": "https://flosports.link/3JEH4Xi"
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": "https://flosports.link/41PjIEe"
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=ohl&game_ids=28150"
+      },
+      {
+        "id": "28151",
+        "game_id": "28151",
+        "season_id": "83",
+        "quick_score": "0",
+        "date_played": "2025-09-18",
+        "date_tbd": "0",
+        "date": "Sep. 18",
+        "date_with_day": "Thu, Sep 18",
+        "date_time_played": "2025-09-18T19:05:00Z",
+        "GameDateISO8601": "2025-09-18T19:05:00-04:00",
+        "home_team": "6",
+        "visiting_team": "18",
+        "home_goal_count": "6",
+        "visiting_goal_count": "3",
+        "period": "3",
+        "overtime": "0",
+        "schedule_time": "19:05:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:00",
+        "timezone": "America/Toronto",
+        "game_number": "2",
+        "shootout": "0",
+        "attendance": "3761",
+        "status": "4",
+        "location": "15",
+        "game_status": "Final",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "3",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "https://tickets.memorialcentre.ca/Online/default.asp",
+        "home_audio_url": "https://player1.radioplace.co/player/popup/cjmb-fm/",
+        "visiting_audio_url": "https://sauga960am.ca/",
+        "uses_spalk_rc": null,
+        "home_team_name": "Peterborough Petes",
+        "home_team_code": "PBO",
+        "home_team_nickname": "Petes",
+        "home_team_city": "Peterborough",
+        "home_team_division_long": "East Division",
+        "home_team_division_short": "East",
+        "visiting_team_name": "Brampton Steelheads",
+        "visiting_team_code": "BRAM",
+        "visiting_team_nickname": "Steelheads",
+        "visiting_team_city": "Brampton",
+        "visiting_team_division_long": "Central Division",
+        "visiting_team_division_short": "Central",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Peterborough Memorial Centre",
+        "venue_url": "",
+        "venue_location": "Peterborough",
+        "last_modified": "2026-08-24 12:58:13",
+        "flo_core_event_id": "14476950",
+        "flo_live_event_id": "194274",
+        "htv_game_id": "1126449",
+        "client_code": "ohl",
+        "scheduled_time": "7:05 pm EDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": "https://flosports.link/4mPIGLN"
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": "https://flosports.link/3JFt2Et"
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=ohl&game_ids=28151"
+      },
+      {
+        "id": "28152",
+        "game_id": "28152",
+        "season_id": "83",
+        "quick_score": "0",
+        "date_played": "2025-09-19",
+        "date_tbd": "0",
+        "date": "Sep. 19",
+        "date_with_day": "Fri, Sep 19",
+        "date_time_played": "2025-09-19T19:00:00Z",
+        "GameDateISO8601": "2025-09-19T19:00:00-04:00",
+        "home_team": "18",
+        "visiting_team": "20",
+        "home_goal_count": "4",
+        "visiting_goal_count": "1",
+        "period": "3",
+        "overtime": "0",
+        "schedule_time": "19:00:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:00",
+        "timezone": "America/Toronto",
+        "game_number": "3",
+        "shootout": "0",
+        "attendance": "1823",
+        "status": "4",
+        "location": "125",
+        "game_status": "Final",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "3",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "https://www.ticketmaster.ca/brampton-steelheads-tickets/artist/1753776",
+        "home_audio_url": "https://sauga960am.ca/",
+        "visiting_audio_url": "https://mybroadcasting.streamb.online/36-WELLAND-CKYY-1780463284/streamb-popup",
+        "uses_spalk_rc": null,
+        "home_team_name": "Brampton Steelheads",
+        "home_team_code": "BRAM",
+        "home_team_nickname": "Steelheads",
+        "home_team_city": "Brampton",
+        "home_team_division_long": "Central Division",
+        "home_team_division_short": "Central",
+        "visiting_team_name": "Niagara IceDogs",
+        "visiting_team_code": "NIAG",
+        "visiting_team_nickname": "IceDogs",
+        "visiting_team_city": "Niagara",
+        "visiting_team_division_long": "Central Division",
+        "visiting_team_division_short": "Central",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "CAA Centre",
+        "venue_url": "",
+        "venue_location": "Brampton",
+        "last_modified": "2026-08-24 12:58:13",
+        "flo_core_event_id": "14476949",
+        "flo_live_event_id": "194278",
+        "htv_game_id": "1126450",
+        "client_code": "ohl",
+        "scheduled_time": "7:00 pm EDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": "https://flosports.link/3JFt2Et"
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": "https://flosports.link/3JEH4Xi"
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=ohl&game_ids=28152"
+      },
+      {
+        "id": "28155",
+        "game_id": "28155",
+        "season_id": "83",
+        "quick_score": "0",
+        "date_played": "2025-09-19",
+        "date_tbd": "0",
+        "date": "Sep. 19",
+        "date_with_day": "Fri, Sep 19",
+        "date_time_played": "2025-09-19T19:00:00Z",
+        "GameDateISO8601": "2025-09-19T19:00:00-04:00",
+        "home_team": "10",
+        "visiting_team": "1",
+        "home_goal_count": "4",
+        "visiting_goal_count": "3",
+        "period": "4",
+        "overtime": "1",
+        "schedule_time": "19:00:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:04:19",
+        "timezone": "America/Toronto",
+        "game_number": "6",
+        "shootout": "0",
+        "attendance": "6670",
+        "status": "4",
+        "location": "8",
+        "game_status": "Final OT",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "OT",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "https://kwtickets.evenue.net/events/RANGERS",
+        "home_audio_url": "https://kitchener.citynews.ca/audio/",
+        "visiting_audio_url": "https://chl.ca/ohl-bulldogs/audio/",
+        "uses_spalk_rc": null,
+        "home_team_name": "Kitchener Rangers",
+        "home_team_code": "KIT",
+        "home_team_nickname": "Rangers",
+        "home_team_city": "Kitchener",
+        "home_team_division_long": "Midwest Division",
+        "home_team_division_short": "Midwest",
+        "visiting_team_name": "Brantford Bulldogs",
+        "visiting_team_code": "BFD",
+        "visiting_team_nickname": "Bulldogs",
+        "visiting_team_city": "Brantford",
+        "visiting_team_division_long": "East Division",
+        "visiting_team_division_short": "East",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Kitchener Memorial Auditorium",
+        "venue_url": "",
+        "venue_location": "Kitchener",
+        "last_modified": "2026-08-24 12:58:13",
+        "flo_core_event_id": "14476958",
+        "flo_live_event_id": "194282",
+        "htv_game_id": "1126451",
+        "client_code": "ohl",
+        "scheduled_time": "7:00 pm EDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": "https://www.rogerstv.com/waterloo-region/onnow"
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": "https://flosports.link/4oHI5O7"
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": "https://flosports.link/4mIEuxm"
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=ohl&game_ids=28155"
+      },
+      {
+        "id": "28156",
+        "game_id": "28156",
+        "season_id": "83",
+        "quick_score": "0",
+        "date_played": "2025-09-19",
+        "date_tbd": "0",
+        "date": "Sep. 19",
+        "date_with_day": "Fri, Sep 19",
+        "date_time_played": "2025-09-19T19:00:00Z",
+        "GameDateISO8601": "2025-09-19T19:00:00-04:00",
+        "home_team": "14",
+        "visiting_team": "11",
+        "home_goal_count": "2",
+        "visiting_goal_count": "3",
+        "period": "4",
+        "overtime": "1",
+        "schedule_time": "19:00:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:28",
+        "timezone": "America/Toronto",
+        "game_number": "7",
+        "shootout": "0",
+        "attendance": "9061",
+        "status": "4",
+        "location": "129",
+        "game_status": "Final OT",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "OT",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "https://globalnews.ca/radio/am980/player/?gref=am980#/",
+        "visiting_audio_url": "https://bayshore.leanplayer.com/CFOSAM",
+        "uses_spalk_rc": null,
+        "home_team_name": "London Knights",
+        "home_team_code": "LDN",
+        "home_team_nickname": "Knights",
+        "home_team_city": "London",
+        "home_team_division_long": "Midwest Division",
+        "home_team_division_short": "Midwest",
+        "visiting_team_name": "Owen Sound Attack",
+        "visiting_team_code": "OS",
+        "visiting_team_nickname": "Attack",
+        "visiting_team_city": "Owen Sound",
+        "visiting_team_division_long": "Midwest Division",
+        "visiting_team_division_short": "Midwest",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Canada Life Place",
+        "venue_url": "",
+        "venue_location": "London, ON",
+        "last_modified": "2026-08-24 12:58:13",
+        "flo_core_event_id": "14476969",
+        "flo_live_event_id": "194285",
+        "htv_game_id": "1125873",
+        "client_code": "ohl",
+        "scheduled_time": "7:00 pm EDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": "https://www.rogerstv.com/london/onnow"
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": "https://flosports.link/46YmBWW"
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "15",
+              "name": "FLOHOCKEY",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/flohockey.png",
+              "url": "https://flosports.link/47CN8t3"
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=ohl&game_ids=28156"
+      },
+      {
+        "id": "28159",
+        "game_id": "28159",
+        "season_id": "83",
+        "quick_score": "0",
+        "date_played": "2025-09-19",
+        "date_tbd": "0",
+        "date": "Sep. 19",
+        "date_with_day": "Fri, Sep 19",
+        "date_time_played": "2025-09-19T19:05:00Z",
+        "GameDateISO8601": "2025-09-19T19:05:00-04:00",
+        "home_team": "12",
+        "visiting_team": "19",
+        "home_goal_count": "3",
+        "visiting_goal_count": "4",
+        "period": "4",
+        "overtime": "1",
+        "schedule_time": "19:05:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:03:48",
+        "timezone": "America/Toronto",
+        "game_number": "10",
+        "shootout": "0",
+        "attendance": "4071",
+        "status": "4",
+        "location": "17",
+        "game_status": "Final OT",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "OT",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "https://chl.ca/ohl-wolves/listen-live/",
+        "visiting_audio_url": "",
+        "uses_spalk_rc": null,
+        "home_team_name": "Sudbury Wolves",
+        "home_team_code": "SBY",
+        "home_team_nickname": "Wolves",
+        "home_team_city": "Sudbury",
+        "home_team_division_long": "Central Division",
+        "home_team_division_short": "Central",
+        "visiting_team_name": "North Bay Battalion",
+        "visiting_team_code": "NB",
+        "visiting_team_nickname": "Battalion",
+        "visiting_team_city": "North Bay",
+        "visiting_team_division_long": "Central Division",
+        "visiting_team_division_short": "Central",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Sudbury Community Arena",
+        "venue_url": "",
+        "venue_location": "Sudbury",
+        "last_modified": "2026-08-24 12:58:13",
+        "flo_core_event_id": "14476981",
+        "flo_live_event_id": "194293",
+        "htv_game_id": "1125880",
+        "client_code": "ohl",
+        "scheduled_time": "7:05 pm EDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "6",
+              "name": "CHL TV",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/chl-tv.png",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "6",
+              "name": "CHL TV",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/chl-tv.png",
+              "url": "https://flosports.link/41bS04t"
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "6",
+              "name": "CHL TV",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/chl-tv.png",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "6",
+              "name": "CHL TV",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/chl-tv.png",
+              "url": "https://flosports.link/3JEH4Xi"
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=ohl&game_ids=28159"
+      },
+      {
+        "id": "28154",
+        "game_id": "28154",
+        "season_id": "83",
+        "quick_score": "0",
+        "date_played": "2025-09-19",
+        "date_tbd": "0",
+        "date": "Sep. 19",
+        "date_with_day": "Fri, Sep 19",
+        "date_time_played": "2025-09-19T19:05:00Z",
+        "GameDateISO8601": "2025-09-19T19:05:00-04:00",
+        "home_team": "2",
+        "visiting_team": "5",
+        "home_goal_count": "2",
+        "visiting_goal_count": "6",
+        "period": "3",
+        "overtime": "0",
+        "schedule_time": "19:05:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:00",
+        "timezone": "America/Toronto",
+        "game_number": "5",
+        "shootout": "0",
+        "attendance": "3742",
+        "status": "4",
+        "location": "124",
+        "game_status": "Final",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "3",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "https://www.iheart.com/live/new-country-989-7478/",
+        "visiting_audio_url": "https://www.iheart.com/live/tsn-1200-7503/",
+        "uses_spalk_rc": null,
+        "home_team_name": "Kingston Frontenacs",
+        "home_team_code": "KGN",
+        "home_team_nickname": "Frontenacs",
+        "home_team_city": "Kingston",
+        "home_team_division_long": "East Division",
+        "home_team_division_short": "East",
+        "visiting_team_name": "Ottawa 67's",
+        "visiting_team_code": "OTT",
+        "visiting_team_nickname": "67's",
+        "visiting_team_city": "Ottawa",
+        "visiting_team_division_long": "East Division",
+        "visiting_team_division_short": "East",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Slush Puppie Place",
+        "venue_url": "",
+        "venue_location": "Kingston, ON",
+        "last_modified": "2026-08-24 12:58:13",
+        "flo_core_event_id": "14476973",
+        "flo_live_event_id": "194289",
+        "htv_game_id": "1125877",
+        "client_code": "ohl",
+        "scheduled_time": "7:05 pm EDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "6",
+              "name": "CHL TV",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/chl-tv.png",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "6",
+              "name": "CHL TV",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/chl-tv.png",
+              "url": "https://flosports.link/4oHI5O7"
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "6",
+              "name": "CHL TV",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/chl-tv.png",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "6",
+              "name": "CHL TV",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/chl-tv.png",
+              "url": "https://flosports.link/3UB9MKQ"
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=ohl&game_ids=28154"
+      },
+      {
+        "id": "28157",
+        "game_id": "28157",
+        "season_id": "83",
+        "quick_score": "0",
+        "date_played": "2025-09-19",
+        "date_tbd": "0",
+        "date": "Sep. 19",
+        "date_with_day": "Fri, Sep 19",
+        "date_time_played": "2025-09-19T19:05:00Z",
+        "GameDateISO8601": "2025-09-19T19:05:00-04:00",
+        "home_team": "15",
+        "visiting_team": "17",
+        "home_goal_count": "1",
+        "visiting_goal_count": "8",
+        "period": "3",
+        "overtime": "0",
+        "schedule_time": "19:05:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:00",
+        "timezone": "America/Toronto",
+        "game_number": "8",
+        "shootout": "0",
+        "attendance": "3468",
+        "status": "4",
+        "location": "63",
+        "game_status": "Final",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "3",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "https://chok.com/",
+        "visiting_audio_url": "https://www.iheart.com/live/am-800-cklw-7476/",
+        "uses_spalk_rc": null,
+        "home_team_name": "Sarnia Sting",
+        "home_team_code": "SAR",
+        "home_team_nickname": "Sting",
+        "home_team_city": "Sarnia",
+        "home_team_division_long": "West Division",
+        "home_team_division_short": "West",
+        "visiting_team_name": "Windsor Spitfires",
+        "visiting_team_code": "WSR",
+        "visiting_team_nickname": "Spitfires",
+        "visiting_team_city": "Windsor",
+        "visiting_team_division_long": "West Division",
+        "visiting_team_division_short": "West",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Progressive Auto Sales Arena",
+        "venue_url": "",
+        "venue_location": "Sarnia",
+        "last_modified": "2026-08-24 12:58:13",
+        "flo_core_event_id": "14476991",
+        "flo_live_event_id": "194297",
+        "htv_game_id": "1125883",
+        "client_code": "ohl",
+        "scheduled_time": "7:05 pm EDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "6",
+              "name": "CHL TV",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/chl-tv.png",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "6",
+              "name": "CHL TV",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/chl-tv.png",
+              "url": "https://flosports.link/45XHdNV"
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "6",
+              "name": "CHL TV",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/chl-tv.png",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "6",
+              "name": "CHL TV",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/chl-tv.png",
+              "url": "https://flosports.link/3JoZuLy"
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=ohl&game_ids=28157"
+      }
+    ],
+    "Copyright": {
+      "required_copyright": "Official statistics provided by Ontario Hockey League",
+      "required_link": "http://leaguestat.com",
+      "powered_by": "Powered by HockeyTech.com",
+      "powered_by_url": "http://hockeytech.com"
+    }
+  }
+}

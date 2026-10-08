@@ -47,3 +47,26 @@ trimmed from the 2026-07-12 sdv-internal-refs capture, and PWHL as committed 202
 (ids 1-10, ending at the "2026-27 Pre-Season", a real preseason-before-regular window). The
 `key` in `Parameters` is `REDACTED` in all 20. Sharing the files lets the JS and py outputs be
 compared cell for cell.
+
+## Added 2026-10-08 (season-scoped `modulekit/schedule`)
+
+Real `modulekit` / `schedule&season_id=<id>` replies, consumed by the `parse_hockeytech_schedule`
+and `hockeytech_schedule` wrapper tests in `test/parsers/hockeytech.test.js`, and the source of
+`tools/codegen/schemas/native/hockeytech/schedule.yaml` (a test holds the schema to the columns
+the parser emits on these 20 files).
+
+- `pwhl_schedule_8.jsonp`: PWHL `season_id=8` (2025-26 regular season), all 120 games, untrimmed.
+  The JSON inside the `angular.callbacks._0(...)` wrapper is a byte copy of sdv-py's
+  `tests/fixtures/hockeytech/pwhl_schedule_8.json` at sdv-py de8d24bd20 (PR "fix(hockeytech):
+  schedules read the season-scoped modulekit/schedule view"), captured live 2026-10-08 with
+  `hockeytech_api("pwhl", "modulekit", "schedule", {"season_id": 8})`; `key` is `REDACTED`.
+- `schedule/<league>.json`: the other 19 leagues' replies for their newest completed regular
+  season, from sdv-internal-refs `hockeytech/captures/samples/<league>/schedule.json` (captured
+  live 2026-10-08, internal-refs commit 1f69e2c, #49; URLs in `captures/capture.log`). Those
+  samples are cut to 8 games plus a `"...TRIMMED N more items..."` string; here the marker is
+  removed, `Parameters.key` is `REDACTED`, and the JSON is re-serialized with 2-space indent.
+  Full sizes: AHL 1,152 games (season 90), AJHL 330, BCHL 545, CCHL 330, CHL 8 (untrimmed),
+  ECHL 1,080, GOJHL 575, KIJHL 462, MHL 312, MJHL 377, NOJHL 287, OHL 682, OJHL 672, QMJHL 578,
+  SJHL 336, SPHL 290, USHL 496, VIJHL 264, WHL 782. Every row carries the requested `season_id`.
+
+`pwhl_scorebar.jsonp` stays the `hockeytech_scorebar` (date-window) fixture.

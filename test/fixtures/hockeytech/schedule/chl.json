@@ -1,0 +1,1711 @@
+{
+  "SiteKit": {
+    "Parameters": {
+      "feed": "modulekit",
+      "key": "REDACTED",
+      "client_code": "chl",
+      "site_id": "0",
+      "lang": "en",
+      "view": "schedule",
+      "season_id": 82,
+      "lang_id": 1,
+      "league_id": "1"
+    },
+    "Schedule": [
+      {
+        "id": "577",
+        "game_id": "577",
+        "season_id": "82",
+        "quick_score": "0",
+        "date_played": "2026-05-22",
+        "date_tbd": "0",
+        "date": "May. 22",
+        "date_with_day": "Fri, May 22",
+        "date_time_played": "2026-05-22T18:00:00Z",
+        "GameDateISO8601": "2026-05-22T18:00:00-07:00",
+        "home_team": "4",
+        "visiting_team": "32",
+        "home_goal_count": "0",
+        "visiting_goal_count": "5",
+        "period": "3",
+        "overtime": "0",
+        "schedule_time": "18:00:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:00",
+        "timezone": "America/Vancouver",
+        "game_number": "1",
+        "shootout": "0",
+        "attendance": "6007",
+        "status": "4",
+        "location": "1",
+        "game_status": "Final",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "3",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "",
+        "visiting_audio_url": "",
+        "uses_spalk_rc": null,
+        "home_team_name": "Kelowna Rockets",
+        "home_team_code": "KEL",
+        "home_team_nickname": "Rockets",
+        "home_team_city": "Kelowna",
+        "home_team_division_long": "Memorial Cup",
+        "home_team_division_short": "Memorial Cup",
+        "visiting_team_name": "Kitchener Rangers",
+        "visiting_team_code": "KIT",
+        "visiting_team_nickname": "Rangers",
+        "visiting_team_city": "Kitchener",
+        "visiting_team_division_long": "Memorial Cup",
+        "visiting_team_division_short": "Memorial Cup",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Prospera Place",
+        "venue_url": "",
+        "venue_location": "Kelowna, BC",
+        "last_modified": "2026-08-24 12:57:58",
+        "flo_core_event_id": "",
+        "flo_live_event_id": "",
+        "htv_game_id": "",
+        "client_code": "chl",
+        "scheduled_time": "6:00 pm PDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            }
+          ],
+          "visiting_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=chl&game_ids=577"
+      },
+      {
+        "id": "578",
+        "game_id": "578",
+        "season_id": "82",
+        "quick_score": "0",
+        "date_played": "2026-05-23",
+        "date_tbd": "0",
+        "date": "May. 23",
+        "date_with_day": "Sat, May 23",
+        "date_time_played": "2026-05-23T18:00:00Z",
+        "GameDateISO8601": "2026-05-23T18:00:00-07:00",
+        "home_team": "101",
+        "visiting_team": "100",
+        "home_goal_count": "3",
+        "visiting_goal_count": "5",
+        "period": "3",
+        "overtime": "0",
+        "schedule_time": "18:00:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:00",
+        "timezone": "America/Vancouver",
+        "game_number": "2",
+        "shootout": "0",
+        "attendance": "6007",
+        "status": "4",
+        "location": "1",
+        "game_status": "Final",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "3",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "",
+        "visiting_audio_url": "",
+        "uses_spalk_rc": null,
+        "home_team_name": "Chicoutimi Saguenéens",
+        "home_team_code": "CHI",
+        "home_team_nickname": "Saguenéens",
+        "home_team_city": "Chicoutimi",
+        "home_team_division_long": "Memorial Cup",
+        "home_team_division_short": "Memorial Cup",
+        "visiting_team_name": "Everett Silvertips",
+        "visiting_team_code": "EVT",
+        "visiting_team_nickname": "Silvertips",
+        "visiting_team_city": "Everett ",
+        "visiting_team_division_long": "Memorial Cup",
+        "visiting_team_division_short": "Memorial Cup",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Prospera Place",
+        "venue_url": "",
+        "venue_location": "Kelowna, BC",
+        "last_modified": "2026-08-24 12:57:58",
+        "flo_core_event_id": "",
+        "flo_live_event_id": "",
+        "htv_game_id": "",
+        "client_code": "chl",
+        "scheduled_time": "6:00 pm PDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            }
+          ],
+          "visiting_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=chl&game_ids=578"
+      },
+      {
+        "id": "579",
+        "game_id": "579",
+        "season_id": "82",
+        "quick_score": "0",
+        "date_played": "2026-05-24",
+        "date_tbd": "0",
+        "date": "May. 24",
+        "date_with_day": "Sun, May 24",
+        "date_time_played": "2026-05-24T18:00:00Z",
+        "GameDateISO8601": "2026-05-24T18:00:00-07:00",
+        "home_team": "101",
+        "visiting_team": "4",
+        "home_goal_count": "3",
+        "visiting_goal_count": "2",
+        "period": "4",
+        "overtime": "1",
+        "schedule_time": "18:00:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:14:32",
+        "timezone": "America/Vancouver",
+        "game_number": "3",
+        "shootout": "0",
+        "attendance": "6007",
+        "status": "4",
+        "location": "1",
+        "game_status": "Final OT",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "OT1",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "",
+        "visiting_audio_url": "",
+        "uses_spalk_rc": null,
+        "home_team_name": "Chicoutimi Saguenéens",
+        "home_team_code": "CHI",
+        "home_team_nickname": "Saguenéens",
+        "home_team_city": "Chicoutimi",
+        "home_team_division_long": "Memorial Cup",
+        "home_team_division_short": "Memorial Cup",
+        "visiting_team_name": "Kelowna Rockets",
+        "visiting_team_code": "KEL",
+        "visiting_team_nickname": "Rockets",
+        "visiting_team_city": "Kelowna",
+        "visiting_team_division_long": "Memorial Cup",
+        "visiting_team_division_short": "Memorial Cup",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Prospera Place",
+        "venue_url": "",
+        "venue_location": "Kelowna, BC",
+        "last_modified": "2026-08-24 12:57:58",
+        "flo_core_event_id": "",
+        "flo_live_event_id": "",
+        "htv_game_id": "",
+        "client_code": "chl",
+        "scheduled_time": "6:00 pm PDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=chl&game_ids=579"
+      },
+      {
+        "id": "580",
+        "game_id": "580",
+        "season_id": "82",
+        "quick_score": "0",
+        "date_played": "2026-05-25",
+        "date_tbd": "0",
+        "date": "May. 25",
+        "date_with_day": "Mon, May 25",
+        "date_time_played": "2026-05-25T18:00:00Z",
+        "GameDateISO8601": "2026-05-25T18:00:00-07:00",
+        "home_team": "32",
+        "visiting_team": "100",
+        "home_goal_count": "6",
+        "visiting_goal_count": "2",
+        "period": "3",
+        "overtime": "0",
+        "schedule_time": "18:00:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:00",
+        "timezone": "America/Vancouver",
+        "game_number": "4",
+        "shootout": "0",
+        "attendance": "6007",
+        "status": "4",
+        "location": "1",
+        "game_status": "Final",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "3",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "",
+        "visiting_audio_url": "",
+        "uses_spalk_rc": null,
+        "home_team_name": "Kitchener Rangers",
+        "home_team_code": "KIT",
+        "home_team_nickname": "Rangers",
+        "home_team_city": "Kitchener",
+        "home_team_division_long": "Memorial Cup",
+        "home_team_division_short": "Memorial Cup",
+        "visiting_team_name": "Everett Silvertips",
+        "visiting_team_code": "EVT",
+        "visiting_team_nickname": "Silvertips",
+        "visiting_team_city": "Everett ",
+        "visiting_team_division_long": "Memorial Cup",
+        "visiting_team_division_short": "Memorial Cup",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Prospera Place",
+        "venue_url": "",
+        "venue_location": "Kelowna, BC",
+        "last_modified": "2026-08-24 12:57:58",
+        "flo_core_event_id": "",
+        "flo_live_event_id": "",
+        "htv_game_id": "",
+        "client_code": "chl",
+        "scheduled_time": "6:00 pm PDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            }
+          ],
+          "home_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            }
+          ],
+          "visiting_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            }
+          ],
+          "visiting_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=chl&game_ids=580"
+      },
+      {
+        "id": "581",
+        "game_id": "581",
+        "season_id": "82",
+        "quick_score": "0",
+        "date_played": "2026-05-26",
+        "date_tbd": "0",
+        "date": "May. 26",
+        "date_with_day": "Tue, May 26",
+        "date_time_played": "2026-05-26T18:00:00Z",
+        "GameDateISO8601": "2026-05-26T18:00:00-07:00",
+        "home_team": "32",
+        "visiting_team": "101",
+        "home_goal_count": "3",
+        "visiting_goal_count": "2",
+        "period": "3",
+        "overtime": "0",
+        "schedule_time": "18:00:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:00",
+        "timezone": "America/Vancouver",
+        "game_number": "5",
+        "shootout": "0",
+        "attendance": "6007",
+        "status": "4",
+        "location": "1",
+        "game_status": "Final",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "3",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "",
+        "visiting_audio_url": "",
+        "uses_spalk_rc": null,
+        "home_team_name": "Kitchener Rangers",
+        "home_team_code": "KIT",
+        "home_team_nickname": "Rangers",
+        "home_team_city": "Kitchener",
+        "home_team_division_long": "Memorial Cup",
+        "home_team_division_short": "Memorial Cup",
+        "visiting_team_name": "Chicoutimi Saguenéens",
+        "visiting_team_code": "CHI",
+        "visiting_team_nickname": "Saguenéens",
+        "visiting_team_city": "Chicoutimi",
+        "visiting_team_division_long": "Memorial Cup",
+        "visiting_team_division_short": "Memorial Cup",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Prospera Place",
+        "venue_url": "",
+        "venue_location": "Kelowna, BC",
+        "last_modified": "2026-08-24 12:57:58",
+        "flo_core_event_id": "",
+        "flo_live_event_id": "",
+        "htv_game_id": "",
+        "client_code": "chl",
+        "scheduled_time": "6:00 pm PDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=chl&game_ids=581"
+      },
+      {
+        "id": "582",
+        "game_id": "582",
+        "season_id": "82",
+        "quick_score": "0",
+        "date_played": "2026-05-27",
+        "date_tbd": "0",
+        "date": "May. 27",
+        "date_with_day": "Wed, May 27",
+        "date_time_played": "2026-05-27T18:00:00Z",
+        "GameDateISO8601": "2026-05-27T18:00:00-07:00",
+        "home_team": "100",
+        "visiting_team": "4",
+        "home_goal_count": "4",
+        "visiting_goal_count": "0",
+        "period": "3",
+        "overtime": "0",
+        "schedule_time": "18:00:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:00",
+        "timezone": "America/Vancouver",
+        "game_number": "6",
+        "shootout": "0",
+        "attendance": "6007",
+        "status": "4",
+        "location": "1",
+        "game_status": "Final",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "3",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "",
+        "visiting_audio_url": "",
+        "uses_spalk_rc": null,
+        "home_team_name": "Everett Silvertips",
+        "home_team_code": "EVT",
+        "home_team_nickname": "Silvertips",
+        "home_team_city": "Everett ",
+        "home_team_division_long": "Memorial Cup",
+        "home_team_division_short": "Memorial Cup",
+        "visiting_team_name": "Kelowna Rockets",
+        "visiting_team_code": "KEL",
+        "visiting_team_nickname": "Rockets",
+        "visiting_team_city": "Kelowna",
+        "visiting_team_division_long": "Memorial Cup",
+        "visiting_team_division_short": "Memorial Cup",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Prospera Place",
+        "venue_url": "",
+        "venue_location": "Kelowna, BC",
+        "last_modified": "2026-08-24 12:57:58",
+        "flo_core_event_id": "",
+        "flo_live_event_id": "",
+        "htv_game_id": "",
+        "client_code": "chl",
+        "scheduled_time": "6:00 pm PDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=chl&game_ids=582"
+      },
+      {
+        "id": "584",
+        "game_id": "584",
+        "season_id": "82",
+        "quick_score": "0",
+        "date_played": "2026-05-29",
+        "date_tbd": "0",
+        "date": "May. 29",
+        "date_with_day": "Fri, May 29",
+        "date_time_played": "2026-05-29T18:00:00Z",
+        "GameDateISO8601": "2026-05-29T18:00:00-07:00",
+        "home_team": "100",
+        "visiting_team": "101",
+        "home_goal_count": "6",
+        "visiting_goal_count": "1",
+        "period": "3",
+        "overtime": "0",
+        "schedule_time": "18:00:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:00",
+        "timezone": "America/Vancouver",
+        "game_number": "7",
+        "shootout": "0",
+        "attendance": "6007",
+        "status": "4",
+        "location": "1",
+        "game_status": "Final",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "3",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "",
+        "visiting_audio_url": "",
+        "uses_spalk_rc": null,
+        "home_team_name": "Everett Silvertips",
+        "home_team_code": "EVT",
+        "home_team_nickname": "Silvertips",
+        "home_team_city": "Everett ",
+        "home_team_division_long": "Memorial Cup",
+        "home_team_division_short": "Memorial Cup",
+        "visiting_team_name": "Chicoutimi Saguenéens",
+        "visiting_team_code": "CHI",
+        "visiting_team_nickname": "Saguenéens",
+        "visiting_team_city": "Chicoutimi",
+        "visiting_team_division_long": "Memorial Cup",
+        "visiting_team_division_short": "Memorial Cup",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Prospera Place",
+        "venue_url": "",
+        "venue_location": "Kelowna, BC",
+        "last_modified": "2026-08-24 12:57:58",
+        "flo_core_event_id": "",
+        "flo_live_event_id": "",
+        "htv_game_id": "",
+        "client_code": "chl",
+        "scheduled_time": "6:00 pm PDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=chl&game_ids=584"
+      },
+      {
+        "id": "585",
+        "game_id": "585",
+        "season_id": "82",
+        "quick_score": "0",
+        "date_played": "2026-05-31",
+        "date_tbd": "0",
+        "date": "May. 31",
+        "date_with_day": "Sun, May 31",
+        "date_time_played": "2026-05-31T16:00:00Z",
+        "GameDateISO8601": "2026-05-31T16:00:00-07:00",
+        "home_team": "32",
+        "visiting_team": "100",
+        "home_goal_count": "6",
+        "visiting_goal_count": "2",
+        "period": "3",
+        "overtime": "0",
+        "schedule_time": "16:00:00",
+        "time_tbd": "0",
+        "schedule_notes": "",
+        "game_clock": "00:00:00",
+        "timezone": "America/Vancouver",
+        "game_number": "8",
+        "shootout": "0",
+        "attendance": "6007",
+        "status": "4",
+        "location": "1",
+        "game_status": "Final",
+        "intermission": "0",
+        "game_type": "",
+        "game_letter": "",
+        "if_necessary": "0",
+        "period_trans": "3",
+        "started": "1",
+        "final": "1",
+        "tickets_url": "",
+        "home_audio_url": "",
+        "visiting_audio_url": "",
+        "uses_spalk_rc": null,
+        "home_team_name": "Kitchener Rangers",
+        "home_team_code": "KIT",
+        "home_team_nickname": "Rangers",
+        "home_team_city": "Kitchener",
+        "home_team_division_long": "Memorial Cup",
+        "home_team_division_short": "Memorial Cup",
+        "visiting_team_name": "Everett Silvertips",
+        "visiting_team_code": "EVT",
+        "visiting_team_nickname": "Silvertips",
+        "visiting_team_city": "Everett ",
+        "visiting_team_division_long": "Memorial Cup",
+        "visiting_team_division_short": "Memorial Cup",
+        "notes_text": "",
+        "use_shootouts": "1",
+        "venue_name": "Prospera Place",
+        "venue_url": "",
+        "venue_location": "Kelowna, BC",
+        "last_modified": "2026-08-24 12:57:58",
+        "flo_core_event_id": "",
+        "flo_live_event_id": "",
+        "htv_game_id": "",
+        "client_code": "chl",
+        "scheduled_time": "4:00 pm PDT",
+        "broadcasters": {
+          "home_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "home_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_video": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_video_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ],
+          "visiting_webcast_fr": [
+            {
+              "broadcaster_id": "7",
+              "name": "RDS",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/rds.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "4",
+              "name": "TSN",
+              "logo_url": "https://assets.leaguestat.com/chl/broadcasters/tsn.png",
+              "url": ""
+            },
+            {
+              "broadcaster_id": "17",
+              "name": "VICTORY+",
+              "logo_url": "",
+              "url": ""
+            }
+          ]
+        },
+        "mobile_calendar": "https://lscluster.hockeytech.com/components/calendar/ical_add_games.php?client_code=chl&game_ids=585"
+      }
+    ],
+    "Copyright": {
+      "required_copyright": "Official statistics provided by CHL",
+      "required_link": "http://leaguestat.com",
+      "powered_by": "Powered by HockeyTech.com",
+      "powered_by_url": "http://hockeytech.com"
+    }
+  }
+}

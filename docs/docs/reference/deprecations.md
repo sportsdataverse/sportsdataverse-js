@@ -17,11 +17,14 @@ sidebar_position: 2
 
 ## Breaking changes by version
 
-19 breaking changes are on record (tools/codegen/breaking.yaml); each affected reference page carries them as a callout at its top.
+22 breaking changes are on record (tools/codegen/breaking.yaml); each affected reference page carries them as a callout at its top.
 
 | Version | Surface | Change | Changelog |
 |---|---|---|---|
 | 4.0.0 | `flat:hockeytech` | **`hockeytech_resolve_season_id` skips one-off events and ranks what is left** — All-star games, showcases, combines, exhibitions and play-ins are dropped for a regular season or playoffs; the rest rank by league code, named game type, two-year span, feed order. | [changelog](/CHANGELOG#hockeytech-season-years-and-season-resolution-sdv-py-parity) |
+| 4.0.0 | `flat:hockeytech` | **`hockeytech_schedule` drops the date-window params** — `number_of_days_back`, `number_of_days_ahead`, `limit` and `league_id` are gone; it takes `league`, `season_id` and an optional `team_id`. Use `hockeytech_scorebar` for a date window. | [changelog](/CHANGELOG#hockeytech-schedules-read-the-season-scoped-schedule-view) |
+| 4.0.0 | `flat:hockeytech` | **`hockeytech_schedule` reads the season-scoped `modulekit/schedule` view** — It read `modulekit/scorebar`, which ignores `season_id`, sorts oldest-first and stops at `limit`: AHL season 90 (2025-26) came back as 10,000 games from 1995 to 2012. Now only the requested season comes back (live 2026-10-08, all 20 leagues). | [changelog](/CHANGELOG#hockeytech-schedules-read-the-season-scoped-schedule-view) |
+| 4.0.0 | `flat:hockeytech` | **`hockeytech_schedule` rows carry the schedule view's columns** — `id` + `game_id`; `home_team` is the team id (name in `home_team_name`), `home_goal_count`, `visitor_*` → `visiting_*`; `game_status` is the label ("Final", "Final OT", …) and the numeric code is `status`. `date_time_played` is local time despite its `Z`. | [changelog](/CHANGELOG#hockeytech-schedules-read-the-season-scoped-schedule-view) |
 | 4.0.0 | `flat:hockeytech` | **`most_recent_hockeytech_season` / `hockeytech_season_id` throw on a failed fetch** — Instead of returning 2026 / `[]`. With no seasons in the feed, `hockeytech_season_id` returns `[]` and `most_recent_hockeytech_season` throws `NoDataError`. | [changelog](/CHANGELOG#hockeytech-hardening-error-vocabulary-user-agent-returns-descriptions) |
 | 4.0.0 | `flat:hockeytech` | **`most_recent_hockeytech_season` is the newest regular season** — One-off events and a preseason listed before its regular season are no longer the default (ECHL in the 2026 preseason window gives 2026, not 2027). | [changelog](/CHANGELOG#hockeytech-season-years-and-season-resolution-sdv-py-parity) |
 | 4.0.0 | `flat:fox` | **`sdv.fox` is vendored from sdv-py's `fox_api`** — The canonical names are `fox_api_*` / `foxApi*`; every pre-v4 `fox_*` name is a deprecated alias. | [changelog](/CHANGELOG#vendor-pin-81eb7e7060-espn-cdn-fox-statson3-returns-tables-on_missing) |

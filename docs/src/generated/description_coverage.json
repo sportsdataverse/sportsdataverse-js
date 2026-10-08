@@ -23,8 +23,8 @@
       "rate": 1
     },
     "hockeytech": {
-      "filled": 574,
-      "total": 574,
+      "filled": 589,
+      "total": 589,
       "rate": 1
     },
     "loaders": {
@@ -139,8 +139,8 @@
     }
   },
   "totals": {
-    "filled": 59707,
-    "total": 64000,
+    "filled": 59722,
+    "total": 64015,
     "rate": 0.9329
   },
   "breaking_pages": 213
