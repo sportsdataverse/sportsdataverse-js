@@ -6,6 +6,7 @@ import { readFileSync } from 'node:fs';
 // ```yaml title="examples/workflows/<f>.yml" block byte-equal to the template file.
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8').replace(/\r\n/g, '\n');
+const FENCE = '```';
 
 for (const [page, workflow] of [
   ['docs/docs/tutorials/sdvplot-scores-card.mdx', 'examples/workflows/scores-card.yml'],
@@ -13,10 +14,12 @@ for (const [page, workflow] of [
 ]) {
   describe(`${page} shows ${workflow}`, () => {
     it('as a yaml block identical to the file', () => {
-      const fence = '```';
-      const m = read(page).match(new RegExp(`${fence}yaml title="${workflow}"\\n([\\s\\S]*?)${fence}\\n`));
-      (m !== null).should.be.true(`no \`\`\`yaml title="${workflow}" block in ${page}`);
-      m[1].should.equal(read(workflow));
+      const text = read(page);
+      const open = `${FENCE}yaml title="${workflow}"\n`; // matched literally (indexOf), not as a RegExp
+      const start = text.indexOf(open);
+      start.should.not.equal(-1, `no ${open.trim()} block in ${page}`);
+      const body = text.slice(start + open.length, text.indexOf(`${FENCE}\n`, start + open.length));
+      body.should.equal(read(workflow));
     });
   });
 }

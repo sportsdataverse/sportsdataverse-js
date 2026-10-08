@@ -36,8 +36,9 @@ const raw = await sdv.cfb.espnCfbCdnRankings(args);
 const parsed = parseEndpoint('espn', 'cdn_rankings', raw);
 const ranked = parsed.filter((r) => r.poll_name === POLL && r.ranked === true).sort((a, b) => a.rank - b.rank);
 if (ranked.length === 0) {
-  console.log(`no "${POLL}" ranks for ${JSON.stringify(args)}; polls present: ${[...new Set(parsed.map((r) => r.poll_name))].join(' | ')}`);
-  process.exit(0);
+  // ESPN always serves some poll (the last one, off-season), so no rows means a wrong POLL or a changed payload: fail the run.
+  console.error(`no "${POLL}" ranks for ${JSON.stringify(args)}; polls present: ${[...new Set(parsed.map((r) => r.poll_name))].join(' | ')}`);
+  process.exit(1);
 }
 
 // The week ESPN actually served, from the page's own config (absent in the trimmed offline fixture).

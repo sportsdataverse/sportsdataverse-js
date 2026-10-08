@@ -52,7 +52,7 @@ Tutorials 14–16 use [sdvplot-js](https://github.com/sportsdataverse/sdvplot-js
 which is not published to npm yet; see [the shot chart page](./sdvplot-shot-chart)
 for how to build and link it.
 
-### Automations
+## Automations
 
 Scripts that run on a schedule in GitHub Actions and produce a PNG, each with a
 workflow template under `examples/workflows/`. The images on these pages come

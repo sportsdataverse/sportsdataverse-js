@@ -51,7 +51,10 @@ actually served, not the week the script asked for.
 
 **Which poll and week.** By default the script uses ESPN's current week and the
 `AP Top 25`. `POLL=AFCA Coaches Poll` switches poll. `SEASON=2025 WEEK=10`
-draws a past regular-season poll.
+draws a past regular-season poll. ESPN always serves some poll, the last one
+in the off-season, so a poll name that matches no rows is a mistake. The
+script then exits with status 1, which fails the scheduled run where you will
+see it.
 
 **Movement.** `previous_rank - rank` gives the arrows (up green, down red, a
 dash for no change). `previous_rank` is `0` for a team unranked last week, and
@@ -111,8 +114,9 @@ const raw = await sdv.cfb.espnCfbCdnRankings(args);
 const parsed = parseEndpoint('espn', 'cdn_rankings', raw);
 const ranked = parsed.filter((r) => r.poll_name === POLL && r.ranked === true).sort((a, b) => a.rank - b.rank);
 if (ranked.length === 0) {
-  console.log(`no "${POLL}" ranks for ${JSON.stringify(args)}; polls present: ${[...new Set(parsed.map((r) => r.poll_name))].join(' | ')}`);
-  process.exit(0);
+  // ESPN always serves some poll (the last one, off-season), so no rows means a wrong POLL or a changed payload: fail the run.
+  console.error(`no "${POLL}" ranks for ${JSON.stringify(args)}; polls present: ${[...new Set(parsed.map((r) => r.poll_name))].join(' | ')}`);
+  process.exit(1);
 }
 
 // The week ESPN actually served, from the page's own config (absent in the trimmed offline fixture).
@@ -290,8 +294,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: 22
       # resvg finds fonts through fontconfig; with none it draws no text at all
@@ -314,11 +318,11 @@ jobs:
           SEASON: ${{ inputs.season }}
           WEEK: ${{ inputs.week }}
         run: node scripts/rankings-ladder.mjs
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: rankings-ladder-${{ github.run_id }}
           path: scripts/out/
-          if-no-files-found: ignore
+          if-no-files-found: error
           retention-days: 30
 ```
 
