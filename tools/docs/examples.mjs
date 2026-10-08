@@ -110,6 +110,10 @@ export const EXAMPLES = [
     ['ex90', '90_sdvplot_shot_chart.mjs', 'sdvplot-shot-chart.mdx', ['shot_chart.svg']],
     ['ex91', '91_sdvplot_standings_colors.mjs', 'sdvplot-standings-colors.mdx', ['standings.svg']],
     ['ex92', '92_sdvplot_roster_table.mjs', 'sdvplot-roster-table.mdx', ['roster.html']],
+    // The automation scripts' PNGs come from LIVE runs (logos downloaded, fonts vary by OS),
+    // so they are committed by hand and not listed as artifacts; only source + offline stdout are frozen.
+    ['ex93', '93_scores_card_action.mjs', 'sdvplot-scores-card.mdx'],
+    ['ex95', '95_rankings_ladder_action.mjs', 'sdvplot-rankings-ladder.mdx'],
   ].map(([id, script, target, artifacts]) => ({
     id,
     family: 'script',

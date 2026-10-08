@@ -1,0 +1,62 @@
+# Weekly power-rankings ladder: a template for YOUR repository
+# (it is not active in sportsdataverse-js). Copy it to
+# .github/workflows/rankings-ladder.yml, and examples/95_rankings_ladder_action.mjs
+# to scripts/rankings-ladder.mjs. No secrets needed. Tutorial:
+# https://js.sportsdataverse.org/docs/tutorials/sdvplot-rankings-ladder
+name: Weekly rankings ladder
+
+on:
+  schedule:
+    # Tuesdays 14:00 UTC (10:00 EDT / 09:00 EST), January and August-December:
+    # the AP poll comes out on Sunday; off-season, ESPN keeps serving the last one.
+    - cron: '0 14 * 1,8-12 2'
+  workflow_dispatch:
+    inputs:
+      poll:
+        description: 'Poll name, e.g. AP Top 25 or AFCA Coaches Poll'
+        default: AP Top 25
+      season:
+        description: 'Season year for a past poll; empty means the current one'
+        default: ''
+      week:
+        description: 'Regular-season week for a past poll; empty means the current one'
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  ladder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # resvg finds fonts through fontconfig; with none it draws no text at all
+      - name: Make sure a text font is installed
+        run: |
+          fc-list | grep -qi dejavu || {
+            sudo apt-get update -q
+            sudo apt-get install -y -q fontconfig fonts-dejavu-core
+          }
+      - name: Install sportsdataverse, sdvplot and the resvg rasterizer
+        run: >-
+          npm install --no-save --no-package-lock
+          sportsdataverse@^4.0.0
+          @sportsdataverse/sdvplot@^0.1.0
+          @resvg/resvg-js@^2.6.2
+      - name: Render the ladder
+        env:
+          SDV_LIVE: '1' # real ESPN + logo CDN (the docs build runs it offline)
+          POLL: ${{ inputs.poll || 'AP Top 25' }}
+          SEASON: ${{ inputs.season }}
+          WEEK: ${{ inputs.week }}
+        run: node scripts/rankings-ladder.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rankings-ladder-${{ github.run_id }}
+          path: scripts/out/
+          if-no-files-found: ignore
+          retention-days: 30

@@ -38,6 +38,8 @@ plain `node NN_*.mjs`.
 | `90_sdvplot_shot_chart.mjs` | ESPN plays → sporty court → SVG (needs sdvplot-js, below) |
 | `91_sdvplot_standings_colors.mjs` | ESPN standings → bar chart in team colours (sdvplot-js) |
 | `92_sdvplot_roster_table.mjs` | ESPN roster → HTML table with headshots + logo (sdvplot-js) |
+| `93_scores_card_action.mjs` | ESPN scoreboard → scores card PNG for a nightly GitHub Action (sdvplot-js + `@resvg/resvg-js`; workflow in `workflows/`) |
+| `95_rankings_ladder_action.mjs` | ESPN CDN rankings → AP Top 25 ladder PNG for a weekly GitHub Action (sdvplot-js + `@resvg/resvg-js`; workflow in `workflows/`) |
 
 `test/examples.test.js` runs every script offline (exit 0 + at least one table).
 

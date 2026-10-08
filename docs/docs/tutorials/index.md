@@ -51,3 +51,14 @@ New here? Start with the [Quickstart](../guides/quickstart) guide (install, firs
 Tutorials 14–16 use [sdvplot-js](https://github.com/sportsdataverse/sdvplot-js),
 which is not published to npm yet; see [the shot chart page](./sdvplot-shot-chart)
 for how to build and link it.
+
+### Automations
+
+Scripts that run on a schedule in GitHub Actions and produce a PNG, each with a
+workflow template under `examples/workflows/`. The images on these pages come
+from live runs, not the offline fixtures.
+
+| Tutorial | Script | Sources used |
+| --- | --- | --- |
+| [Nightly scores card, posted by a GitHub Action](./sdvplot-scores-card) | `93_scores_card_action.mjs` | ESPN scoreboard (site.api.espn.com); `@sportsdataverse/sdvplot` + `/export` |
+| [Weekly power-rankings ladder, posted by a GitHub Action](./sdvplot-rankings-ladder) | `95_rankings_ladder_action.mjs` | ESPN CDN rankings (cdn.espn.com); `@sportsdataverse/sdvplot` + `/export` |

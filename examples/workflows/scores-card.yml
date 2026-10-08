@@ -1,0 +1,66 @@
+# Nightly scores card: a template for YOUR repository
+# (it is not active in sportsdataverse-js). Copy it to
+# .github/workflows/scores-card.yml, and examples/93_scores_card_action.mjs
+# to scripts/scores-card.mjs. No secrets needed. Tutorial:
+# https://js.sportsdataverse.org/docs/tutorials/sdvplot-scores-card
+name: Nightly scores card
+
+on:
+  schedule:
+    # Cron is UTC, with no daylight saving: 09:00 UTC is 05:00 EDT / 04:00 EST,
+    # after the night's last West Coast game has gone final.
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    inputs:
+      league:
+        description: 'ESPN league: nba, wnba, nfl, mlb, nhl, cfb, mbb or wbb'
+        default: nba
+      date:
+        description: 'YYYY-MM-DD; empty means yesterday in US Eastern time'
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  card:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # resvg finds fonts through fontconfig; with none it draws no text at all
+      - name: Make sure a text font is installed
+        run: |
+          fc-list | grep -qi dejavu || {
+            sudo apt-get update -q
+            sudo apt-get install -y -q fontconfig fonts-dejavu-core
+          }
+      - name: Install sportsdataverse, sdvplot and the resvg rasterizer
+        run: >-
+          npm install --no-save --no-package-lock
+          sportsdataverse@^4.0.0
+          @sportsdataverse/sdvplot@^0.1.0
+          @resvg/resvg-js@^2.6.2
+      - name: Render the card
+        env:
+          SDV_LIVE: '1' # real ESPN + logo CDN (the docs build runs it offline)
+          LEAGUE: ${{ inputs.league || 'nba' }}
+          DATE: ${{ inputs.date }}
+        run: node scripts/scores-card.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scores-card-${{ github.run_id }}
+          path: scripts/out/
+          if-no-files-found: ignore # an off night writes nothing
+          retention-days: 14
+      # Optional, NOT part of the verified template: post the PNG to Discord.
+      # Create a channel webhook, store its URL as the repository secret
+      # DISCORD_WEBHOOK_URL, then uncomment:
+      # - name: Post to Discord
+      #   if: hashFiles('scripts/out/scores_card.png') != ''
+      #   env:
+      #     DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      #   run: curl -fsS -F "file=@scripts/out/scores_card.png" "$DISCORD_WEBHOOK_URL"
