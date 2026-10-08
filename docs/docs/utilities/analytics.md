@@ -90,7 +90,7 @@ export function add_clock_columns(pbp: Row[]): Row[]
 
 ### `add_coord_transforms`
 
-Add the ten normalised coordinate columns (`*_original`, `*_neutral`, `*_fixed`, `*_right`, `*_vertical`) from `x_coord` / `y_coord`.
+Add the ten derived coordinate columns from `x_coord` / `y_coord`; `*_original` / `*_neutral` are canvas pixels, `*_fixed` (home team shoots right), `*_right` (every team shoots right, `null` when the side is unknown) and `*_vertical` (every team shoots up) are rotations of the rink-feet frame.
 
 ```ts
 export function add_coord_transforms(pbp: Row[]): Row[]

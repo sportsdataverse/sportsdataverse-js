@@ -172,7 +172,7 @@ modules:
         summary: Add `minute_start` / `second_start` / `clock` / `sec_from_start` from `time_of_period`.
       - name: add_coord_transforms
         kind: function
-        summary: Add the ten normalised coordinate columns (`*_original`, `*_neutral`, `*_fixed`, `*_right`, `*_vertical`) from `x_coord` / `y_coord`.
+        summary: Add the ten derived coordinate columns from `x_coord` / `y_coord`; `*_original` / `*_neutral` are canvas pixels, `*_fixed` (home team shoots right), `*_right` (every team shoots right, `null` when the side is unknown) and `*_vertical` (every team shoots up) are rotations of the rink-feet frame.
       - name: add_shot_distance_angle
         kind: function
         summary: Add shot distance (ft) and angle from the fixed coordinates, against a goal line at `goal_x`.
