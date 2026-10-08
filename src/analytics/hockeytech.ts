@@ -442,57 +442,57 @@ export function add_clock_columns(pbp: Row[]): Row[] {
 }
 
 /**
- * Add the ten normalised coordinate columns (`*_original`, `*_neutral`, `*_fixed`,
- * `*_right`, `*_vertical`) from raw `x_coord` / `y_coord` (~850x400 canvas).
- * Without a `home_team_id` column every row is treated as an away event; a row with
- * a null `team_id` / `home_team_id` takes the away (passthrough) branch.
+ * Add the ten derived coordinate columns (`*_original`, `*_neutral`, `*_fixed`, `*_right`,
+ * `*_vertical`) from raw `x_coord` / `y_coord` (canvas pixels, 600x300, top-left origin).
  *
  * @param pbp - Play-by-play rows with raw `x_coord` / `y_coord` (numbers or numeric strings;
  *   anything else becomes `null`), `team_id`, and optionally `home_team_id` (added by
  *   {@link enrich_pbp}).
  * @returns A new array of copied rows with `x_coord_original` / `y_coord_original` (the raw
- *   values as floats), `*_neutral` (origin moved to canvas centre: `x - 300`, `y - 150`),
- *   `*_fixed` (the canvas-to-feet step `xT = x / 3 - 100`, `yT = 42.5 - y * 85 / 300` applied a
- *   second time: `xT / 3` and `42.5 - (yT * 85 / 300 - 42.5)`), `*_right` (home-team
- *   events mirrored so both teams attack the same end; away events pass through) and
- *   `*_vertical` (the `*_right` frame rotated: `x_vertical` from `y_right`, `y_vertical` =
- *   `x_right`). Null coordinates stay `null` in every derived column.
+ *   values as floats), `*_neutral` (origin moved to canvas centre: `x - 300`, `y - 150`), and
+ *   three rotations of the rink-feet frame `x = x_coord / 3 - 100` (-100..100),
+ *   `y = 42.5 - y_coord * 85 / 300` (-42.5..42.5, positive = top of the canvas):
+ *   `*_fixed` = `(-x, -y)` for every event (the home team shoots right, +x);
+ *   `*_right` = `(-x, -y)` for home events and `(x, y)` for visitor events (every team shoots
+ *   right); `*_vertical` = `(-y_coord_right, x_coord_right)` (every team shoots up). Null
+ *   coordinates stay `null` in every derived column.
  * @example
  * ```ts
  * import { add_coord_transforms } from "sportsdataverse/dist/analytics/hockeytech.js";
- * const rows = add_coord_transforms(parsedPbp); // no home_team_id -> every row is "away"
- * rows[0].x_coord_neutral; // x_coord - 300
+ * const [r] = add_coord_transforms([{ x_coord: 450, y_coord: 75, team_id: "1", home_team_id: "2" }]);
+ * r.x_coord_right; // 50 (visitor: unchanged feet)
+ * r.y_coord_vertical; // 50
  * ```
- * @remarks Home / away is decided by comparing `String(team_id)` to `String(home_team_id)`.
- * Divisions by a float literal are computed as `a * (1 / c)` so the cells match sdv-py's polars
- * output bit-for-bit. Ported from fastRhockey `R/pwhl_pbp.R`.
+ * @remarks The feed's home team attacks raw x = 0 and the visitor x = 600 in every period, so the
+ * 180-degree rotation `(-x, -y)` points the home team right. Home / away is decided by comparing
+ * `String(team_id)` to `String(home_team_id)`; when either is null or `''` (faceoffs carry no
+ * team, and `home_team_id` is `''` without game metadata) the side is unknown and the `*_right`
+ * and `*_vertical` columns are `null`, never the visitor's. Divisions by a float literal are
+ * computed as `a * (1 / c)` so the feet match sdv-py's polars output bit-for-bit. Ported from
+ * fastRhockey `R/hockeytech_analytics.R`; definitions in sdv-internal-refs `hockeytech/CANVAS.md`.
  */
 export function add_coord_transforms(pbp: Row[]): Row[] {
-  const withHome = hasCol(pbp, "home_team_id");
+  const known = (v: unknown): boolean => v !== null && v !== undefined && v !== "";
   return pbp.map((r) => {
     const ox = toFloat(r.x_coord);
     const oy = toFloat(r.y_coord);
-    const xT = ox === null ? null : divc(ox, 3.0) - 100.0;
-    const yT = oy === null ? null : 42.5 - divc(oy * 85.0, 300.0);
-    const xFixed = xT === null ? null : divc(xT, 3.0);
-    const yFixed = yT === null ? null : 42.5 - (divc(yT * 85.0, 300.0) - 42.5);
+    const x = ox === null ? null : divc(ox, 3.0) - 100.0;
+    const y = oy === null ? null : 42.5 - divc(oy * 85.0, 300.0);
     const isHome =
-      withHome && r.team_id !== null && r.team_id !== undefined && r.home_team_id !== null && r.home_team_id !== undefined
-        ? pyStr(r.team_id) === pyStr(r.home_team_id)
-        : false;
-    const xRight = xT === null ? null : isHome ? 100.0 + (100.0 - xT) : xT;
-    const yRight = yT === null ? null : isHome ? 42.5 - (yT - 42.5) : yT;
+      known(r.team_id) && known(r.home_team_id) ? pyStr(r.team_id) === pyStr(r.home_team_id) : null;
+    const xRight = x === null || isHome === null ? null : isHome ? -x : x;
+    const yRight = y === null || isHome === null ? null : isHome ? -y : y;
     return {
       ...r,
       x_coord_original: ox,
       y_coord_original: oy,
       x_coord_neutral: ox === null ? null : ox - 300.0,
       y_coord_neutral: oy === null ? null : oy - 150.0,
-      x_coord_fixed: xFixed,
-      y_coord_fixed: yFixed,
+      x_coord_fixed: x === null ? null : -x,
+      y_coord_fixed: y === null ? null : -y,
       x_coord_right: xRight,
       y_coord_right: yRight,
-      x_coord_vertical: yRight === null ? null : 42.5 - (yRight - 42.5),
+      x_coord_vertical: yRight === null ? null : -yRight,
       y_coord_vertical: xRight,
     };
   });

@@ -24,6 +24,18 @@ const meta42 = load('pwhl_game_summary_42');
 const ohlPbp = load('ohl_pbp_27225');
 
 const FUZZY = new Set(['shot_distance', 'shot_angle']);
+// The six derived coordinate columns are rotations of the rink-feet frame (sdv-internal-refs #51,
+// hockeytech/CANVAS.md); sdv-py's add_coord_transforms at the oracle pin still has the old home
+// flip that put home x_coord_right at 191-290 ft (#50). They are held to the definitions by the
+// 'derived coordinates' tests below instead, until the oracle is regenerated from a fixed sdv-py.
+const NOT_PY_YET = new Set([
+  'x_coord_fixed',
+  'y_coord_fixed',
+  'x_coord_right',
+  'y_coord_right',
+  'x_coord_vertical',
+  'y_coord_vertical',
+]);
 /** An oracle frame as the public wrappers return it: py's integer ids as decimal strings (the v4 id rule). */
 const ids = (o) => ({ ...o, rows: pyIdRows(o.rows) });
 
@@ -36,6 +48,7 @@ function expectFrame(rows, oracle, { sortBy } = {}) {
   Object.keys(got[0]).should.eql(oracle.columns);
   got.forEach((row, i) => {
     for (const c of oracle.columns) {
+      if (NOT_PY_YET.has(c)) continue;
       const a = row[c];
       const b = want[i][c];
       if (FUZZY.has(c) && typeof a === 'number' && typeof b === 'number') {
@@ -95,6 +108,10 @@ describe('hockeytech analytics: enrichment + metrics vs the oracle', () => {
     });
     expectFrame(ohl, O.ohl_pbp_enriched_no_meta_no_shifts);
     ohl.every((r) => r.on_ice_home === null && r.on_ice_away === null).should.be.true();
+    // No meta means no home team id (''): no event has a known side, so the right / vertical
+    // frames are null while the fixed frame (no side needed) is filled.
+    ohl.every((r) => r.home_team_id === '' && r.x_coord_right === null && r.y_coord_vertical === null).should.be.true();
+    ohl.some((r) => r.x_coord_fixed !== null).should.be.true();
   });
   it('player_toi (tie order undefined in py -> compared sorted)', () => {
     expectFrame(A.player_toi(A.parse_shifts(shifts42, 42)), O.pwhl_player_toi, { sortBy: byPid });
@@ -110,6 +127,56 @@ describe('hockeytech analytics: enrichment + metrics vs the oracle', () => {
     const g = O.pwhl_strength_state.goalie_ids;
     expectFrame(A.add_strength_state(enriched, g), O.pwhl_strength_state.out);
     expectFrame(A.add_strength_state(enriched), O.pwhl_strength_state_no_goalies);
+  });
+});
+
+describe('hockeytech analytics: derived coordinates on the real PWHL game 42 (sdv-internal-refs #50 / #51)', () => {
+  const rows = A.enrich_pbp(A.parse_pbp(pbp42, 'hockeytech_a', 42), 'pwhl', 42, { meta_payload: meta42 });
+  const isHome = (r) => String(r.team_id) === String(r.home_team_id);
+  const shots = rows.filter((r) => (r.event === 'shot' || r.event === 'goal') && r.x_coord_original !== null);
+  const median = (xs) => {
+    const s = [...xs].sort((a, b) => a - b);
+    return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2;
+  };
+
+  it('every shot and goal is on the rink in the fixed, right and vertical frames', () => {
+    shots.length.should.be.above(50); // known-positive control: 70 shots + goals, both teams
+    for (const r of shots) {
+      for (const c of ['x_coord_fixed', 'x_coord_right', 'y_coord_vertical'])
+        Math.abs(r[c]).should.be.belowOrEqual(100, `${c} ${r[c]}`);
+      for (const c of ['y_coord_fixed', 'y_coord_right', 'x_coord_vertical'])
+        Math.abs(r[c]).should.be.belowOrEqual(42.5, `${c} ${r[c]}`);
+    }
+  });
+  it('every team shoots right in the right frame; the home team shoots right in the fixed frame', () => {
+    const home = shots.filter(isHome);
+    const visitor = shots.filter((r) => !isHome(r));
+    home.length.should.be.above(20);
+    visitor.length.should.be.above(20);
+    median(home.map((r) => r.x_coord_right)).should.be.above(0);
+    median(visitor.map((r) => r.x_coord_right)).should.be.above(0);
+    median(home.map((r) => r.x_coord_fixed)).should.be.above(0);
+    median(visitor.map((r) => r.x_coord_fixed)).should.be.below(0);
+  });
+  it('the vertical frame is the right frame turned 90 degrees: (-y_right, x_right)', () => {
+    for (const r of rows) {
+      should(r.x_coord_vertical).equal(r.y_coord_right === null ? null : -r.y_coord_right);
+      should(r.y_coord_vertical).equal(r.x_coord_right);
+    }
+  });
+  it('a centre-ice faceoff (raw 300, 150) is (0, 0) in the fixed frame', () => {
+    const ctr = rows.filter((r) => r.event === 'faceoff' && r.x_coord_original === 300 && r.y_coord_original === 150);
+    ctr.length.should.be.above(0);
+    for (const r of ctr) (r.x_coord_fixed === 0 && r.y_coord_fixed === 0).should.be.true(); // -0 == 0
+  });
+  it('an event with no known side (faceoffs carry no team) has null right / vertical frames', () => {
+    const fo = rows.filter((r) => r.event === 'faceoff');
+    fo.length.should.be.above(0);
+    for (const r of fo) {
+      should(r.team_id).be.null();
+      [r.x_coord_right, r.y_coord_right, r.x_coord_vertical, r.y_coord_vertical].should.eql([null, null, null, null]);
+      r.x_coord_fixed.should.be.a.Number(); // the fixed frame needs no side
+    }
   });
 });
 
@@ -132,7 +199,30 @@ describe('hockeytech analytics: edge cases vs the oracle (hand-built frames thro
     (() => A.add_clock_columns([{ time_of_period: 'oops', period_of_game: '1' }])).should.throw(/out of bounds/);
   });
   it('add_coord_transforms: home/away, null team, null coords', () => {
-    expectFrame(A.add_coord_transforms(O.synthetic_coords.rows), O.synthetic_coords.out);
+    const rows = A.add_coord_transforms(O.synthetic_coords.rows);
+    expectFrame(rows, O.synthetic_coords.out);
+    // [x_fixed, y_fixed, x_right, y_right, x_vertical, y_vertical], worked by hand from the feet
+    // x = raw_x / 3 - 100, y = 42.5 - raw_y * 85 / 300 (raw rows: (300,150) home, (0,0) visitor,
+    // (850,400) home, (null,20) null team, (425.5,null) visitor, (100,75) null home_team_id).
+    const want = [
+      [0, 0, 0, 0, 0, 0],
+      [100, -42.5, -100, 42.5, -42.5, -100],
+      [-550 / 3, 212.5 / 3, -550 / 3, 212.5 / 3, -212.5 / 3, -550 / 3],
+      [null, -110.5 / 3, null, null, null, null],
+      [-125.5 / 3, null, 125.5 / 3, null, null, 125.5 / 3],
+      [200 / 3, -21.25, null, null, null, null],
+    ];
+    rows.forEach((r, i) =>
+      [...NOT_PY_YET].forEach((c, j) => {
+        const w = want[i][j];
+        if (w === null) should(r[c]).equal(null, `row ${i} ${c}`);
+        else r[c].should.be.approximately(w, 1e-9, `row ${i} ${c}`);
+      })
+    );
+    // no home_team_id column at all: the side is unknown, never defaulted to the visitor
+    const [r] = A.add_coord_transforms([{ x_coord: 450, y_coord: 75, team_id: '1' }]);
+    [r.x_coord_right, r.y_coord_right, r.x_coord_vertical, r.y_coord_vertical].should.eql([null, null, null, null]);
+    [r.x_coord_fixed, r.y_coord_fixed].should.eql([-50, -21.25]);
   });
   it('add_shot_distance_angle / scoring_chances: thresholds, goal_x, non-shots, null coords, scale guard', () => {
     const G = O.synthetic_shot_geometry;

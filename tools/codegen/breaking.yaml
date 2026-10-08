@@ -156,6 +156,21 @@ entries:
       `visitor_*` → `visiting_*`; `game_status` is the label ("Final", "Final OT", …) and the
       numeric code is `status`. `date_time_played` is local time despite its `Z`.
     changelog_anchor: hockeytech-schedules-read-the-season-scoped-schedule-view
+  - version: "4.0.0"
+    surface: hockeytech
+    title: HockeyTech derived coordinates are rotations of the feet frame
+    note: >-
+      `*_fixed` = `(-x, -y)` (the home team shoots right), `*_right` = home `(-x, -y)` / visitor
+      `(x, y)` (every team shoots right), `*_vertical` = `(-y_coord_right, x_coord_right)`. The old
+      home flip put home `x_coord_right` at 191–290 ft on PWHL game 42.
+    changelog_anchor: hockeytech-derived-coordinates-are-rotations-of-the-feet-frame
+  - version: "4.0.0"
+    surface: hockeytech
+    title: Right / vertical coordinates are `null` when an event's side is unknown
+    note: >-
+      A null or empty `team_id` / `home_team_id` (faceoffs, a game enriched without its summary)
+      gives `null` `*_right` / `*_vertical` instead of the visitor's values.
+    changelog_anchor: hockeytech-derived-coordinates-are-rotations-of-the-feet-frame
   # Breaking notes filed under other 4.0.0 headings.
   - version: "4.0.0"
     surface: flat:fox
