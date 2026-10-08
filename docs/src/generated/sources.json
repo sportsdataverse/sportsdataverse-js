@@ -645,8 +645,8 @@
       "ownership": "js-owned",
       "parity": null,
       "descriptionFill": {
-        "filled": 574,
-        "total": 574
+        "filled": 589,
+        "total": 589
       },
       "docsPath": "/docs/reference/hockeytech",
       "note": "PWHL + 19 junior / minor leagues by `league`; public per-league keys are built in."

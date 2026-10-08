@@ -19,6 +19,10 @@
 #   - Each call's key / client_code / site_id / base host are injected by the
 #     runtime from the league registry; the caller only supplies `league` plus
 #     the per-view inputs (game_id / team_id / season_id / player_id).
+#   - `schedule` reads `modulekit/schedule&season_id=<id>`, which the feed scopes
+#     to that one season. `scorebar` is the date window around today: it ignores
+#     `season_id`, returns games oldest-first and stops at `limit` (a 10,000-game
+#     window gave AHL 1995-2012 games for season 90), so never use it for a season.
 #
 # Each endpoint declares its `feed` + `view` as defaulted query params so the
 # getter (which only receives the resolved query) can pick the feed gateway
@@ -45,12 +49,9 @@ endpoints:
     extra_params:
       - { name: league, query_key: league }
       - { name: season_id, query_key: season_id }
-      - { name: number_of_days_back, query_key: numberofdaysback, default: 10000 }
-      - { name: number_of_days_ahead, query_key: numberofdaysahead, default: 10000 }
-      - { name: limit, query_key: limit, default: 10000 }
+      - { name: team_id, query_key: team_id }
       - { name: feed, query_key: feed, default: modulekit }
-      - { name: league_id, query_key: league_id }
-      - { name: view, query_key: view, default: scorebar }
+      - { name: view, query_key: view, default: schedule }
     parser: parse_hockeytech_schedule
     returns_schema: native/hockeytech/schedule
   - short: teams

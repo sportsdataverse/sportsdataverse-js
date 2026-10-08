@@ -1,7 +1,8 @@
 import should from 'should';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { parse as parseYaml } from 'yaml';
 import {
   parse_hockeytech_seasons,
   parse_hockeytech_schedule,
@@ -160,13 +161,47 @@ describe('parsers/hockeytech: parse_hockeytech_seasons', () => {
   });
 });
 
-describe('parsers/hockeytech: parse_hockeytech_schedule', () => {
-  it('unrolls SiteKit.Scorebar into one row per game', () => {
-    const rows = parse_hockeytech_schedule(loadFixture('pwhl_scorebar.jsonp'));
-    rows.length.should.be.above(0);
-    rows[0].should.have.property('id'); // PWHL scorebar keys on `ID` -> `id`
-    rows[0].should.have.property('home_code');
-    rows[0].should.have.property('visitor_goals');
+describe('parsers/hockeytech: parse_hockeytech_schedule (modulekit/schedule)', () => {
+  it('unrolls the real PWHL season-8 SiteKit.Schedule: 120 games, unique ids, all in season 8', () => {
+    const rows = parse_hockeytech_schedule(loadFixture('pwhl_schedule_8.jsonp'));
+    rows.length.should.equal(120);
+    new Set(rows.map((r) => r.game_id)).size.should.equal(120);
+    for (const r of rows) {
+      r.season_id.should.equal('8');
+      r.id.should.equal(r.game_id);
+    }
+    rows[0].should.have.properties(['home_team', 'home_team_name', 'home_goal_count', 'visiting_team',
+      'visiting_team_name', 'visiting_goal_count', 'status', 'game_status', 'game_date_iso8601']);
+    rows[0].should.not.have.property('home_code'); // the scorebar's names are gone
+  });
+
+  // The other 19 leagues' real schedule replies (trimmed to 8 games each).
+  const leagueSamples = () => {
+    const dir = join(fixDir, 'schedule');
+    return readdirSync(dir).filter((f) => f.endsWith('.json'))
+      .map((f) => [f, JSON.parse(readFileSync(join(dir, f), 'utf8'))]);
+  };
+
+  it("every league's real schedule sample stays in the season it asked for", () => {
+    const samples = leagueSamples();
+    samples.length.should.equal(19); // + the full PWHL body above = all 20 leagues
+    for (const [file, raw] of samples) {
+      const sid = String(raw.SiteKit.Parameters.season_id);
+      const rows = parse_hockeytech_schedule(raw);
+      rows.length.should.equal(8, file);
+      rows.forEach((r) => r.season_id.should.equal(sid, file));
+      new Set(rows.map((r) => r.game_id)).size.should.equal(8, file);
+    }
+  });
+
+  it('the returns schema lists exactly the columns the parser emits on the 20 captures', () => {
+    const schemaFile = join(here, '..', '..', 'tools', 'codegen', 'schemas', 'native', 'hockeytech', 'schedule.yaml');
+    const schema = parseYaml(readFileSync(schemaFile, 'utf8'));
+    const seen = new Set();
+    for (const raw of [loadFixture('pwhl_schedule_8.jsonp'), ...leagueSamples().map(([, r]) => r)]) {
+      for (const row of parse_hockeytech_schedule(raw)) Object.keys(row).forEach((k) => seen.add(k));
+    }
+    schema.columns.map((c) => c.name).sort().should.eql([...seen].sort());
   });
 });
 
@@ -288,11 +323,10 @@ describe('parsers/hockeytech: registry wiring', () => {
     }
   });
 
-  it('parse_hockeytech_scorebar is the schedule parser under a second name (same SiteKit.Scorebar)', () => {
-    const fx = loadFixture('pwhl_scorebar.jsonp');
-    const rows = parse_hockeytech_scorebar(fx);
+  it('parse_hockeytech_scorebar still returns the SiteKit.Scorebar rows (the date-window view)', () => {
+    const rows = parse_hockeytech_scorebar(loadFixture('pwhl_scorebar.jsonp'));
     rows.length.should.be.above(0);
-    rows.should.eql(parse_hockeytech_schedule(fx));
+    rows[0].should.have.properties(['id', 'season_id', 'home_code', 'home_goals', 'visitor_goals', 'game_status_string']);
   });
 });
 
@@ -541,6 +575,19 @@ describe('hockeytech: resolveSeasonId (gameType filter + PWHL fallback)', () => 
 
 describe('hockeytech: T5 view URL defaults (generated wrappers)', () => {
   afterEach(() => resetConfig());
+
+  it('hockeytech_schedule reads modulekit/schedule for one season, never the scorebar date window', async () => {
+    const calls = useTransport(() => ({ data: readFix('pwhl_schedule_8.jsonp') }));
+    const rows = await FLAT.hockeytech_schedule({ league: 'pwhl', season_id: 8, parsed: true });
+    rows.length.should.equal(120);
+    await FLAT.hockeytech_schedule({ league: 'ahl', season_id: 90, team_id: 319 });
+    const q = calls.map((c) => c.query);
+    q[0].should.containEql({ feed: 'modulekit', view: 'schedule', season_id: '8', client_code: 'pwhl' });
+    q[1].should.containEql({ feed: 'modulekit', view: 'schedule', season_id: '90', team_id: '319', client_code: 'ahl' });
+    for (const c of q) {
+      for (const k of ['numberofdaysback', 'numberofdaysahead', 'limit', 'league_id']) c.should.not.have.property(k);
+    }
+  });
 
   it('each new view sends its feed/view and documented defaults', async () => {
     const calls = useTransport(() => ({ data: '{"SiteKit":{}}' }));

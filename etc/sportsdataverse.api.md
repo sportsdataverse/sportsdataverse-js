@@ -5678,11 +5678,8 @@ export type HockeytechPlayoffBracketParams = OptionalParams<{
 export type HockeytechScheduleParams = OptionalParams<{
     league: number | string;
     season_id: number | string;
-    number_of_days_back: number | string;
-    number_of_days_ahead: number | string;
-    limit: number | string;
+    team_id: number | string;
     feed: number | string;
-    league_id: number | string;
     view: number | string;
 }> & HockeytechControls;
 

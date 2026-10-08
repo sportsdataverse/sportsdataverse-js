@@ -490,19 +490,8 @@ const SCHEDULE_DEF: WrapperDef = {
       "queryKey": "season_id"
     },
     {
-      "name": "number_of_days_back",
-      "queryKey": "numberofdaysback",
-      "default": 10000
-    },
-    {
-      "name": "number_of_days_ahead",
-      "queryKey": "numberofdaysahead",
-      "default": 10000
-    },
-    {
-      "name": "limit",
-      "queryKey": "limit",
-      "default": 10000
+      "name": "team_id",
+      "queryKey": "team_id"
     },
     {
       "name": "feed",
@@ -510,13 +499,9 @@ const SCHEDULE_DEF: WrapperDef = {
       "default": "modulekit"
     },
     {
-      "name": "league_id",
-      "queryKey": "league_id"
-    },
-    {
       "name": "view",
       "queryKey": "view",
-      "default": "scorebar"
+      "default": "schedule"
     }
   ],
   "parser": "parse_hockeytech_schedule",
@@ -530,12 +515,9 @@ const SCHEDULE_DEF: WrapperDef = {
  *
  * @param params.league - `number | string` — the `league` query parameter.
  * @param params.season_id - `number | string` — the `season_id` query parameter.
- * @param params.number_of_days_back - `number | string` — the `numberofdaysback` query parameter; default `10000`.
- * @param params.number_of_days_ahead - `number | string` — the `numberofdaysahead` query parameter; default `10000`.
- * @param params.limit - `number | string` — the `limit` query parameter; default `10000`.
+ * @param params.team_id - `number | string` — the `team_id` query parameter.
  * @param params.feed - `number | string` — the `feed` query parameter; default `modulekit`.
- * @param params.league_id - `number | string` — the `league_id` query parameter.
- * @param params.view - `number | string` — the `view` query parameter; default `scorebar`.
+ * @param params.view - `number | string` — the `view` query parameter; default `schedule`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.hockeytech.hockeytechSchedule({});

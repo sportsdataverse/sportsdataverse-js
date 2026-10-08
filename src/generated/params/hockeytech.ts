@@ -34,7 +34,7 @@ export type HockeytechPlayerStatsParams = OptionalParams<{ league: number | stri
 export type HockeytechPlayoffBracketParams = OptionalParams<{ league: number | string; season_id: number | string; feed: number | string; league_id: number | string; view: number | string }> & HockeytechControls;
 
 /** Params of `hockeytech_schedule` (`GET https://lscluster.hockeytech.com/feed/index.php`). */
-export type HockeytechScheduleParams = OptionalParams<{ league: number | string; season_id: number | string; number_of_days_back: number | string; number_of_days_ahead: number | string; limit: number | string; feed: number | string; league_id: number | string; view: number | string }> & HockeytechControls;
+export type HockeytechScheduleParams = OptionalParams<{ league: number | string; season_id: number | string; team_id: number | string; feed: number | string; view: number | string }> & HockeytechControls;
 
 /** Params of `hockeytech_scorebar` (`GET https://lscluster.hockeytech.com/feed/index.php`). */
 export type HockeytechScorebarParams = OptionalParams<{ league: number | string; number_of_days_back: number | string; number_of_days_ahead: number | string; limit: number | string; feed: number | string; league_id: number | string; view: number | string }> & HockeytechControls;

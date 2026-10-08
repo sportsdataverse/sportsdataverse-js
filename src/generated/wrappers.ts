@@ -17311,19 +17311,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "season_id"
       },
       {
-        "name": "number_of_days_back",
-        "queryKey": "numberofdaysback",
-        "default": 10000
-      },
-      {
-        "name": "number_of_days_ahead",
-        "queryKey": "numberofdaysahead",
-        "default": 10000
-      },
-      {
-        "name": "limit",
-        "queryKey": "limit",
-        "default": 10000
+        "name": "team_id",
+        "queryKey": "team_id"
       },
       {
         "name": "feed",
@@ -17331,13 +17320,9 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "modulekit"
       },
       {
-        "name": "league_id",
-        "queryKey": "league_id"
-      },
-      {
         "name": "view",
         "queryKey": "view",
-        "default": "scorebar"
+        "default": "schedule"
       }
     ],
     "parser": "parse_hockeytech_schedule",

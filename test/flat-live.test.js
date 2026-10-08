@@ -18,11 +18,11 @@ run('HockeyTech live smoke (PWHL)', function () {
     rows[0].should.have.property('season_id');
   });
 
-  it('hockeytech_schedule returns parsed game rows', async () => {
-    const rows = await sdv.hockeytech.hockeytech_schedule({ league: 'pwhl', parsed: true });
+  it('hockeytech_schedule returns one season of parsed game rows', async () => {
+    const rows = await sdv.hockeytech.hockeytech_schedule({ league: 'pwhl', season_id: 8, parsed: true });
     rows.should.be.an.Array();
     rows.length.should.be.above(0);
-    rows[0].should.have.property('id');
+    rows.forEach((r) => r.season_id.should.equal('8')); // the scorebar view ignored season_id
   });
 
   it('hockeytech_pbp resolves the PWHL override key and returns plays', async () => {
