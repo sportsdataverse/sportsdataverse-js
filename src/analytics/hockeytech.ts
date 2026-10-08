@@ -521,8 +521,9 @@ const MAX_PLAUSIBLE_GOAL_X = 110.0;
  * @param goal_x - Offensive goal-line x in feet, `0 < goal_x <= 110`. Default
  *   {@link NHL_SIZE_RINK_GOAL_X} (89 ft).
  * @returns A new array of copied rows with `shot_distance` (feet from the net:
- *   `sqrt((goal_x - |x|)^2 + y^2)`) and `shot_angle` (degrees off the goal line's normal,
- *   `|atan2(|y|, goal_x - |x|)|`); `null` for non-shot events and for null coordinates.
+ *   `sqrt(dx^2 + y^2)`) and `shot_angle` (degrees off the goal line's normal,
+ *   `|atan2(|y|, dx)|`); `null` for non-shot events and for null coordinates. `dx` is
+ *   `goal_x - |x|` (the nearer net) except for an empty-net goal, see remarks.
  * @throws RangeError when `goal_x` is outside `(0, 110]` — the guard against passing raw
  *   feed-scale coordinates.
  * @example
@@ -531,8 +532,15 @@ const MAX_PLAUSIBLE_GOAL_X = 110.0;
  * const rows = add_shot_distance_angle(rinkFeetPbp); // default 89 ft net
  * const olympic = add_shot_distance_angle(rinkFeetPbp, 80); // custom goal line
  * ```
- * @remarks Uses `|x|`, so shots at either end measure to the nearer net. {@link enrich_pbp}
- * calls this on the rink-feet frame it derives from `x_coord_original` / `y_coord_original`.
+ * @remarks Distance is to the nearer net: an own-half event with a goalie in net is a near-net
+ * event whose coordinates the feed mirrored. An empty-net goal (`empty_net` `"1"`, the goal-level
+ * field {@link parse_pbp} takes from `properties.isEmptyNet`) is measured to the net its team
+ * attacks instead, `dx = |attack_x - x|`: the feed puts the home team's attack at `x = -goal_x`
+ * and the visitor's at `+goal_x`, and an own-half empty-net goal is a genuine long shot. When
+ * `team_id` or `home_team_id` is null, `''` or absent the side is unknown and the nearer net is
+ * kept. Validated per event on 320 PWHL games (sdv-internal-refs #52, `hockeytech/CANVAS.md`).
+ * {@link enrich_pbp} calls this on the rink-feet frame it derives from `x_coord_original` /
+ * `y_coord_original`.
  */
 export function add_shot_distance_angle(pbp: Row[], goal_x: number = NHL_SIZE_RINK_GOAL_X): Row[] {
   if (!(goal_x > 0 && goal_x <= MAX_PLAUSIBLE_GOAL_X)) {
@@ -541,6 +549,7 @@ export function add_shot_distance_angle(pbp: Row[], goal_x: number = NHL_SIZE_RI
         "coordinates must be in standard rink-feet (offensive net near +89 ft), not RAW feed scale."
     );
   }
+  const known = (v: unknown): boolean => v !== null && v !== undefined && v !== "";
   return pbp.map((r) => {
     const x = toFloat(r.x_coord);
     const y = toFloat(r.y_coord);
@@ -548,7 +557,9 @@ export function add_shot_distance_angle(pbp: Row[], goal_x: number = NHL_SIZE_RI
     let dist: number | null = null;
     let angle: number | null = null;
     if (isShot && x !== null && y !== null) {
-      const dx = goal_x - Math.abs(x);
+      const emptyNet = known(r.empty_net) && String(r.empty_net) === "1" && known(r.team_id) && known(r.home_team_id);
+      const attackX = pyStr(r.team_id) === pyStr(r.home_team_id) ? -goal_x : goal_x;
+      const dx = emptyNet ? Math.abs(attackX - x) : goal_x - Math.abs(x);
       dist = Math.sqrt(dx * dx + y * y);
       angle = Math.abs(Math.atan2(Math.abs(y), dx)) * (180.0 / Math.PI);
     }

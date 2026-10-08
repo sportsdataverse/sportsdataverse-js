@@ -219,6 +219,40 @@ describe('hockeytech analytics: edge cases vs the oracle (hand-built frames thro
     (() => A.add_shot_distance_angle(G.rows, 250)).should.throw(RangeError);
     (() => A.add_shot_distance_angle(G.rows, 0)).should.throw(RangeError);
   });
+  it('add_shot_distance_angle: an empty-net goal measures to the net its team attacks (sdv-internal-refs #52)', () => {
+    // A real PWHL game-42 goal row (no committed capture has an empty-net goal) moved to the
+    // shooter's own half. Canvas (560, 150) is x = 86.67 ft, y = 0; the home team attacks x = -89,
+    // so the shot is 175.67 ft, not the 2.33 ft to the nearer net.
+    const parsed = A.parse_pbp(pbp42, 'hockeytech_a', 42);
+    const goal = parsed.find((r) => r.event === 'goal');
+    const { home_team_id: home, away_team_id: away } = A.enrich_pbp(parsed, 'pwhl', 42, { meta_payload: meta42 })[0];
+    home.should.not.equal(away);
+    const run = (over, meta = meta42) => A.enrich_pbp([{ ...goal, ...over }], 'pwhl', 42, { meta_payload: meta })[0];
+    const FAR = 175 + 2 / 3;
+    const NEAR = 2 + 1 / 3;
+    const homeEN = run({ x_coord: 560, y_coord: 150, team_id: home, empty_net: '1' });
+    homeEN.shot_distance.should.be.approximately(FAR, 1e-9);
+    homeEN.shot_angle.should.equal(0);
+    homeEN.scoring_chance.should.be.false();
+    // the same goal with a goalie in net: mirrored coordinates, nearer net
+    const homeGoalie = run({ x_coord: 560, y_coord: 150, team_id: home, empty_net: '0' });
+    homeGoalie.shot_distance.should.be.approximately(NEAR, 1e-9);
+    homeGoalie.scoring_chance.should.be.true();
+    run({ x_coord: 40, y_coord: 150, team_id: away, empty_net: '1' }).shot_distance.should.be.approximately(FAR, 1e-9);
+    // on the attacking half the two formulas agree
+    run({ x_coord: 40, y_coord: 150, team_id: home, empty_net: '1' }).shot_distance.should.be.approximately(NEAR, 1e-9);
+    // unknown side (no meta, so home_team_id ''; or a null team_id): nearer net kept
+    run({ x_coord: 560, y_coord: 150, team_id: home, empty_net: '1' }, {}).shot_distance.should.be.approximately(NEAR, 1e-9);
+    run({ x_coord: 560, y_coord: 150, team_id: null, empty_net: '1' }).shot_distance.should.be.approximately(NEAR, 1e-9);
+    // the goal-twin shot row carries no empty_net: unchanged
+    const twin = run({ event: 'shot', x_coord: 560, y_coord: 150, team_id: home, empty_net: undefined });
+    twin.shot_distance.should.be.approximately(NEAR, 1e-9);
+    // feet frame, columns absent: nearer net; a custom goal_x moves the attacked net too
+    A.add_shot_distance_angle([{ event: 'goal', x_coord: 50, y_coord: 0, empty_net: '1' }])[0].shot_distance.should.equal(39);
+    const g80 = A.add_shot_distance_angle([{ event: 'goal', x_coord: 50, y_coord: 30, empty_net: '1', team_id: 7, home_team_id: '7' }], 80)[0];
+    g80.shot_distance.should.be.approximately(Math.hypot(130, 30), 1e-9);
+    g80.shot_angle.should.be.approximately((Math.atan2(30, 130) * 180) / Math.PI, 1e-9);
+  });
   it('backfill_power_play: window truncated at a goal, shorthanded flag, second penalty', () => {
     expectFrame(A.backfill_power_play(O.synthetic_backfill_power_play.rows), O.synthetic_backfill_power_play.out);
   });

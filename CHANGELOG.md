@@ -210,6 +210,13 @@ _sdv-internal-refs #50 / #51 (`hockeytech/CANVAS.md`, "The derived columns, defi
 - `x_coord`, `y_coord`, `*_original`, `*_neutral`, `shot_distance` and `shot_angle` are unchanged. The `load_pwhl_pbp` release dataset is built by the R / Python producers, so its derived columns change when it is rebuilt with the fix.
 - **Oracle:** the HockeyTech analytics oracle moves to sdv-py ac69bb7, the merge of sdv-py #728, which makes the same fix there (`HOCKEYTECH_PIN` in `tools/sdv_py_pin.py`; the other ports stay at `PORT_PIN`). Regenerated there, it differs from the old oracle only in the six derived columns, and the cell-by-cell parity test now compares them too.
 
+#### HockeyTech empty-net goals measure to the net their team attacks
+
+_sdv-internal-refs #52 (`hockeytech/CANVAS.md`, "Shot geometry"); the same rule as fastRhockey and sdv-py's `add_shot_distance_angle`_
+
+- **BREAKING: `shot_distance` / `shot_angle` change for empty-net goals scored from the shooter's own half** in `add_shot_distance_angle`, `enrich_pbp` and the `<lg>_pbp` / `hockeytech_enriched_pbp` analytics, and `scoring_chance` (distance ≤ 25 ft) follows. A goal whose `empty_net` is `"1"` (the goal-level field `parse_pbp` takes from `properties.isEmptyNet`) is measured to the net its team attacks, `dx = |attack_x - x|`, with `attack_x = -goal_x` (−89 ft) for the home team and `+goal_x` for the visitor, as the feed lays out the rink; it used to measure to the nearer net, `dx = goal_x - |x|`. On 320 PWHL games, 27 such goals move from a median 59 ft to 126 ft. On the attacking half the two formulas agree.
+- Every other event keeps the nearer net: per-event validation found that own-half events with a goalie in net carry mirrored coordinates. The goal-twin shot rows carry no `empty_net`, and a row with a null or empty `team_id` / `home_team_id` (or no such column, e.g. a game enriched without its summary) also keeps the nearer net.
+
 #### Fox is vendored from sdv-py's `fox_api`
 
 _#85_
