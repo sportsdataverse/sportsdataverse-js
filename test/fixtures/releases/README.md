@@ -34,3 +34,24 @@ f696736c3a5ae9ada88537ac0bd89d85dc0331cc5952583a90faa3a09a47df6f  crafted_ids_20
 
 The two codecs are the two the release assets actually use: Polars-written
 SportsDataverse assets are ZSTD, arrow-cpp (R / nflverse) assets are SNAPPY.
+
+## nba_shots_2024_spots.json (tutorial snapshot)
+
+The league baseline for the "shot chart vs league" tutorial
+(`examples/94_sdvplot_shots_vs_league.mjs`). **Derived**, not verbatim:
+`tools/snapshots/nba-league-shots.mjs` downloads `sportsdataverse-data` release
+`espn_nba_shots`, `shots_2024.parquet` (3,641,778 bytes, sha256
+`bdfc1be853d0a7f56e8b7529eb3523a496fabababf6ffd7bd7473f518ea87972`, 291,139 rows,
+1,320 games) on 2026-10-08T23:04:57Z, decodes those bytes with
+`sdv.nba.loadNbaShots({ seasons: 2024 })`, drops free throws, and counts the
+234,063 field-goal attempts per ESPN spot as `[x, y, value, attempts, makes]`
+(2,310 rows). The provenance block inside the file records the same, plus the
+sdv-js commit. A miss's `value` (2 or 3) comes from the measured `isThree` rule in
+that script (99.95% agreement with the scorer on the season's 110,857 makes; 169 of
+169 on game 401585607). `test/tutorial-fixtures.test.js` checks it against
+`espn/summary_nba.json` offline and, with `SDV_LIVE=1`, re-downloads the asset,
+checks its sha256 and re-derives every row.
+
+```
+9244145c4322b9dad164b8b69bfcbd036fb8e96975f10ef56ce8075dc7ab9a18  nba_shots_2024_spots.json
+```
