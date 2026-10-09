@@ -4551,6 +4551,56 @@ function parse_cdn_rankings(payload) {
   });
   return idColumnsToStrings(tidy);
 }
+function intOrNull(v) {
+  const s = typeof v === "number" ? String(v) : typeof v === "string" ? v.trim() : "";
+  return /^-?\d+$/.test(s) ? Number(s) : null;
+}
+function parse_rankings(payload) {
+  const polls2 = isPlainObject14(payload) ? payload.rankings : void 0;
+  const rows = [];
+  for (const poll of Array.isArray(polls2) ? polls2 : []) {
+    if (!isPlainObject14(poll)) continue;
+    const season = isPlainObject14(poll.season) ? poll.season : {};
+    const occurrence = isPlainObject14(poll.occurrence) ? poll.occurrence : {};
+    const head = {
+      poll_id: poll.id ?? null,
+      poll_name: poll.name ?? null,
+      poll_short_name: poll.shortName ?? null,
+      poll_type: poll.type ?? null,
+      season: season.year ?? null,
+      season_type: (isPlainObject14(season.type) ? season.type.type : null) ?? null,
+      week: intOrNull(occurrence.value),
+      week_display: occurrence.displayValue ?? null,
+      poll_date: poll.date ?? null
+    };
+    for (const [ranked, key] of [[true, "ranks"], [false, "others"]]) {
+      for (const entry of Array.isArray(poll[key]) ? poll[key] : []) {
+        if (!isPlainObject14(entry)) continue;
+        const team = isPlainObject14(entry.team) ? entry.team : {};
+        rows.push({
+          ...head,
+          ranked,
+          team_id: team.id ?? null,
+          rank: ranked ? entry.current ?? null : null,
+          previous_rank: entry.previous ?? null,
+          points: entry.points ?? null,
+          first_place_votes: entry.firstPlaceVotes ?? null,
+          trend: entry.trend ?? null,
+          record_summary: entry.recordSummary ?? null,
+          team_uid: team.uid ?? null,
+          team_location: team.location ?? null,
+          team_name: team.name ?? null,
+          team_nickname: team.nickname ?? null,
+          team_abbreviation: team.abbreviation ?? null,
+          team_color: team.color ?? null,
+          team_logo: team.logo ?? null,
+          last_updated: entry.lastUpdated ?? null
+        });
+      }
+    }
+  }
+  return idColumnsToStrings(rows);
+}
 var ESPN_ENDPOINT_PARSERS = {
   // Site v2 (rich nested)
   scoreboard: parse_scoreboard,
@@ -4631,7 +4681,7 @@ var ESPN_ENDPOINT_PARSERS = {
   statistics_league: parse_items,
   team_depthcharts: parse_items,
   team_leaders: parse_items,
-  rankings: parse_items,
+  rankings: parse_rankings,
   season_qbr: parse_items,
   season_qbr_week: parse_items,
   athlete_notes: parse_items,

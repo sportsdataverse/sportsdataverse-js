@@ -116,6 +116,17 @@ const CASES = [
     url: `${CDN}/nba/scoreboard`, query: { xhr: '1', date: '20250115' } },
   { file: 'cdn/scoreboard_epl.json.gz', league: 'epl', short: 'cdn_scoreboard', args: { date: '20250201' }, family: 'cdn',
     url: `${CDN}/eng.1/scoreboard`, query: { xhr: '1', date: '20250201' } },
+  // Site v2 rankings (README: rankings_*.json.gz, sdv-py captures 2026-10-08)
+  { file: 'rankings_cfb.json.gz', league: 'cfb', short: 'rankings', args: {}, family: 'site_v2',
+    url: `${SITE}/football/college-football/rankings`, query: {} },
+  { file: 'rankings_mbb.json.gz', league: 'mbb', short: 'rankings', args: {}, family: 'site_v2',
+    url: `${SITE}/basketball/mens-college-basketball/rankings`, query: {} },
+  { file: 'rankings_wbb.json.gz', league: 'wbb', short: 'rankings', args: {}, family: 'site_v2',
+    url: `${SITE}/basketball/womens-college-basketball/rankings`, query: {} },
+  { file: 'rankings_mch.json.gz', league: 'mch', short: 'rankings', args: {}, family: 'site_v2',
+    url: `${SITE}/hockey/mens-college-hockey/rankings`, query: {} },
+  { file: 'rankings_wch.json.gz', league: 'wch', short: 'rankings', args: {}, family: 'site_v2',
+    url: `${SITE}/hockey/womens-college-hockey/rankings`, query: {} },
   { file: 'cdn/rankings_cfb.json.gz', league: 'cfb', short: 'cdn_rankings', args: { week: 5, season: 2024, season_type: 2 }, family: 'cdn',
     url: `${CDN}/college-football/rankings`, query: { xhr: '1', week: '5', year: '2024', seasontype: '2' } },
 ];

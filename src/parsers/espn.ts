@@ -1305,6 +1305,70 @@ export function parse_cdn_rankings(payload: any): ParserRow[] {
   return idColumnsToStrings(tidy);
 }
 
+/** An integer or decimal-integer string as a number, else `null` (sdv-py's non-strict Utf8 -> Int64 cast). */
+function intOrNull(v: any): number | null {
+  const s = typeof v === "number" ? String(v) : typeof v === "string" ? v.trim() : "";
+  return /^-?\d+$/.test(s) ? Number(s) : null;
+}
+
+/**
+ * Parse a Site v2 `rankings` payload into one row per (poll, team). Port of sdv-py's
+ * `parse_rankings`. The top-level `rankings` list holds one poll per entry (AP,
+ * Coaches, FCS, USCHO, ...), each with `ranks` (`ranked: true`) and `others` (teams
+ * receiving votes, `ranked: false`); `droppedOut` is not emitted (it lists last
+ * week's teams, most of which reappear under `others`). `rank` is null on the
+ * vote-receiving rows (ESPN ships `0`); `previous_rank` keeps ESPN's `0` for a team
+ * unranked in the previous poll. `week` is the poll's week within its `season_type`
+ * (`occurrence.value`, the week ESPN's own Core v2 rankings URL uses). `poll_id` and
+ * `team_id` are decimal strings (the v4 id rule). Rows are rectangular.
+ */
+export function parse_rankings(payload: any): ParserRow[] {
+  const polls = isPlainObject(payload) ? payload.rankings : undefined;
+  const rows: Record<string, any>[] = [];
+  for (const poll of Array.isArray(polls) ? polls : []) {
+    if (!isPlainObject(poll)) continue;
+    const season = isPlainObject(poll.season) ? poll.season : {};
+    const occurrence = isPlainObject(poll.occurrence) ? poll.occurrence : {};
+    const head = {
+      poll_id: poll.id ?? null,
+      poll_name: poll.name ?? null,
+      poll_short_name: poll.shortName ?? null,
+      poll_type: poll.type ?? null,
+      season: season.year ?? null,
+      season_type: (isPlainObject(season.type) ? season.type.type : null) ?? null,
+      week: intOrNull(occurrence.value),
+      week_display: occurrence.displayValue ?? null,
+      poll_date: poll.date ?? null,
+    };
+    for (const [ranked, key] of [[true, "ranks"], [false, "others"]] as const) {
+      for (const entry of Array.isArray(poll[key]) ? poll[key] : []) {
+        if (!isPlainObject(entry)) continue;
+        const team = isPlainObject(entry.team) ? entry.team : {};
+        rows.push({
+          ...head,
+          ranked,
+          team_id: team.id ?? null,
+          rank: ranked ? entry.current ?? null : null,
+          previous_rank: entry.previous ?? null,
+          points: entry.points ?? null,
+          first_place_votes: entry.firstPlaceVotes ?? null,
+          trend: entry.trend ?? null,
+          record_summary: entry.recordSummary ?? null,
+          team_uid: team.uid ?? null,
+          team_location: team.location ?? null,
+          team_name: team.name ?? null,
+          team_nickname: team.nickname ?? null,
+          team_abbreviation: team.abbreviation ?? null,
+          team_color: team.color ?? null,
+          team_logo: team.logo ?? null,
+          last_updated: entry.lastUpdated ?? null,
+        });
+      }
+    }
+  }
+  return idColumnsToStrings(rows);
+}
+
 // ===========================================================================
 // Endpoint -> parser registry
 // ===========================================================================
@@ -1396,7 +1460,7 @@ export const ESPN_ENDPOINT_PARSERS: Record<string, ParserFn | typeof parse_summa
   statistics_league: parse_items,
   team_depthcharts: parse_items,
   team_leaders: parse_items,
-  rankings: parse_items,
+  rankings: parse_rankings,
   season_qbr: parse_items,
   season_qbr_week: parse_items,
   athlete_notes: parse_items,

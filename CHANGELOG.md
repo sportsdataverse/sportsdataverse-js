@@ -4,6 +4,14 @@ All notable changes to `sportsdataverse` (Node.js) are documented here. The
 docs-site copy lives at [`docs/src/pages/CHANGELOG.md`](docs/src/pages/CHANGELOG.md)
 and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
+## Unreleased
+
+### Fixed
+
+#### ESPN Site v2 rankings parse (mirrors sdv-py #732)
+
+- `espn_{cfb,mbb,wbb,mch,wch}_rankings({ parsed: true })` returned `[]` on the live payload: the `rankings` short was registered to `parse_items`, which reads a Core v2 `items` list, but the Site v2 payload keeps its polls in a top-level `rankings` list. A new `parse_rankings` (a port of sdv-py's) gives one row per ranked or vote-receiving team per poll: on the 2026-10-08 captures, cfb 208 rows over 5 polls, mbb 77, wbb 75, mch 35, wch 20. `poll_id` and `team_id` are decimal strings; `week` is the poll's week within its `season_type` (`occurrence.value`); `rank` is `null` on the vote-receiving rows. The college baseball and softball wrappers route through it too, but ESPN answers their rankings URL with a 404.
+
 ## 4.0.0 (2026-10-07)
 
 _The first release after 3.0.0: 3.1.0 was never published, and its entries are folded in

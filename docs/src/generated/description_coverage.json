@@ -13,9 +13,9 @@
       "rate": 0.957
     },
     "espn": {
-      "filled": 4162,
-      "total": 7062,
-      "rate": 0.5894
+      "filled": 4362,
+      "total": 7262,
+      "rate": 0.6007
     },
     "fox": {
       "filled": 193,
@@ -139,9 +139,9 @@
     }
   },
   "totals": {
-    "filled": 59722,
-    "total": 64015,
-    "rate": 0.9329
+    "filled": 59922,
+    "total": 64215,
+    "rate": 0.9331
   },
   "breaking_pages": 213
 }

@@ -25,7 +25,7 @@ const raw  = await sdv.nba.espnNbaScoreboard({});               // raw Dict
 const rows = await sdv.nba.espnNbaScoreboard({ parsed: true }); // tidy row[]
 ```
 
-The **126** ESPN endpoints route through just **27** parsers, so the returned columns are determined by the endpoint's *parser*, not the league — the same parser yields the same shape across every league. Each parser's column set is documented once below; the **Endpoints** line under each lists the short names that use it. Columns are snake_cased and nested objects flattened with `_` (e.g. `team.abbreviation` -> `team_abbreviation`). Generic / league-variable passthroughs show no fixed table.
+The **126** ESPN endpoints route through just **28** parsers, so the returned columns are determined by the endpoint's *parser*, not the league — the same parser yields the same shape across every league. Each parser's column set is documented once below; the **Endpoints** line under each lists the short names that use it. Columns are snake_cased and nested objects flattened with `_` (e.g. `team.abbreviation` -> `team_abbreviation`). Generic / league-variable passthroughs show no fixed table.
 
 ## `parse_scoreboard`
 
@@ -407,6 +407,40 @@ Injury report rows (league / team / athlete scoped).
 | `display_name` | character | Athlete's full display name as shown on ESPN. |
 | `injuries` | character | Injury entries for the athlete (list of dicts, stringified): status, type, details, dates. |
 
+## `parse_rankings`
+
+Site v2 poll rankings (cfb, mbb, wbb, mch, wch): one row per (poll, team), ranked teams and those receiving votes.
+
+**Endpoints (1):** `rankings`
+
+| col_name | type | description |
+|---|---|---|
+| `poll_id` | integer | ESPN poll id as a decimal string, e.g. '1' = AP Top 25, '2' = Coaches Poll, '20' = FCS Coaches Poll, '10624' = USCHO Men's Poll. |
+| `poll_name` | character | Full poll name, e.g. 'AP Top 25', 'AFCA Coaches Poll', "USCHO Women's Poll". |
+| `poll_short_name` | character | Short poll label, e.g. 'AP Poll'. |
+| `poll_type` | character | ESPN poll type code, e.g. 'ap', 'usa' (coaches), 'fcs', 'USCHOMENSPOLL'. |
+| `season` | integer | Season year of the poll (ESPN's ending year for a season that spans two calendar years, e.g. 2026 for 2025-26). |
+| `season_type` | integer | Season phase of the poll: 1 = preseason, 2 = regular season, 3 = postseason. |
+| `week` | integer | Poll week within season_type (the week ESPN's Core v2 rankings URL uses). |
+| `week_display` | character | Poll week as ESPN labels it, e.g. 'Week 6'. |
+| `poll_date` | character | Date the poll was released (ISO 8601, UTC). |
+| `ranked` | logical | true for the poll's ranked teams; false for teams that only received votes. |
+| `team_id` | character | ESPN team id as a decimal string (the dtype of scoreboard home_id / away_id). |
+| `rank` | integer | Rank in this poll (1 = top). Null on vote-receiving rows. |
+| `previous_rank` | integer | Position in the previous poll; 0 when the team was unranked then. |
+| `points` | double | Poll points received (0 for polls ESPN ships without points, such as USCHO). |
+| `first_place_votes` | integer | First-place votes received. Null when the poll does not report them. |
+| `trend` | character | Movement since the previous poll as ESPN prints it, e.g. '+3', '-2', or '-' for no change. |
+| `record_summary` | character | Team's win-loss record at the poll date, e.g. '5-0'. |
+| `team_uid` | character | ESPN universal team id, e.g. 's:20~l:23~t:251'. |
+| `team_location` | character | Team location (school name), e.g. 'Texas'. |
+| `team_name` | character | Team mascot name, e.g. 'Longhorns'. |
+| `team_nickname` | character | Short team name ESPN displays, e.g. 'Texas'. |
+| `team_abbreviation` | character | Short team code ESPN displays, e.g. 'TEX'. |
+| `team_color` | character | Team primary color as a hex string without '#'. Null for teams ESPN ships without one. |
+| `team_logo` | character | URL of the team logo on ESPN's CDN. |
+| `last_updated` | character | When ESPN last updated this poll entry (ISO 8601, UTC). |
+
 ## `parse_summary`
 
 Site v2 game summary dispatcher — returns 21 sub-frames.
@@ -419,7 +453,7 @@ Site v2 game summary dispatcher — returns 21 sub-frames.
 
 Generic Core v2 paginated list — one row per item (often a `$ref` pointer).
 
-**Endpoints (63):** `athlete_awards`, `athlete_career_stats`, `athlete_contracts`, `athlete_eventlog`, `athlete_notes`, `athlete_records`, `athlete_seasons`, `athlete_statisticslog`, `athletes_index`, `awards`, `calendar`, `draft`, `event_broadcasts`, `event_competitor_leaders`, `event_competitors`, `event_leaders`, `event_odds`, `event_officials`, `event_play_personnel`, `event_probabilities`, `event_propbets`, `event_scoringplays`, `events`, `franchises`, `leaders_core`, `league_notes`, `positions`, `rankings`, `recruiting_athletes`, `recruiting_rankings`, `recruiting_years`, `season_athletes`, `season_awards`, `season_draft_round_picks`, `season_freeagents`, `season_futures`, `season_group_children`, `season_group_teams`, `season_groups`, `season_powerindex`, `season_powerindex_leaders`, `season_qbr`, `season_qbr_week`, `season_recruits`, `season_teams`, `season_type_corrections`, `season_type_leaders`, `season_types`, `season_week_events`, `season_week_powerindex`, `season_week_rankings`, `season_weeks`, `seasons`, `statistics_league`, `talentpicks`, `team_depthcharts`, `team_history`, `team_leaders`, `team_record`, `team_transactions`, `tournaments`, `transactions`, `venues`
+**Endpoints (62):** `athlete_awards`, `athlete_career_stats`, `athlete_contracts`, `athlete_eventlog`, `athlete_notes`, `athlete_records`, `athlete_seasons`, `athlete_statisticslog`, `athletes_index`, `awards`, `calendar`, `draft`, `event_broadcasts`, `event_competitor_leaders`, `event_competitors`, `event_leaders`, `event_odds`, `event_officials`, `event_play_personnel`, `event_probabilities`, `event_propbets`, `event_scoringplays`, `events`, `franchises`, `leaders_core`, `league_notes`, `positions`, `recruiting_athletes`, `recruiting_rankings`, `recruiting_years`, `season_athletes`, `season_awards`, `season_draft_round_picks`, `season_freeagents`, `season_futures`, `season_group_children`, `season_group_teams`, `season_groups`, `season_powerindex`, `season_powerindex_leaders`, `season_qbr`, `season_qbr_week`, `season_recruits`, `season_teams`, `season_type_corrections`, `season_type_leaders`, `season_types`, `season_week_events`, `season_week_powerindex`, `season_week_rankings`, `season_weeks`, `seasons`, `statistics_league`, `talentpicks`, `team_depthcharts`, `team_history`, `team_leaders`, `team_record`, `team_transactions`, `tournaments`, `transactions`, `venues`
 
 | col_name | type | description |
 |---|---|---|

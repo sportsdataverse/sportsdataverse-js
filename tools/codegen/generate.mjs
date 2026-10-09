@@ -1731,7 +1731,7 @@ const ESPN_PARSER_ORDER = [
   "parse_leaders", "parse_coaches", "parse_draft",
   "parse_event_competitor_roster", "parse_event_competitor_statistics",
   "parse_event_competitor_linescores", "parse_event_plays",
-  "parse_team_schedule", "parse_team_roster", "parse_news", "parse_injuries",
+  "parse_team_schedule", "parse_team_roster", "parse_news", "parse_injuries", "parse_rankings",
   "parse_summary", "parse_items", "parse_single_entity",
   "parse_cdn_game", "parse_cdn_scoreboard", "parse_cdn_schedule", "parse_cdn_rankings",
 ];
@@ -1764,6 +1764,8 @@ const ESPN_PARSER_DESC = {
   parse_team_roster: "A team's roster (one row per athlete).",
   parse_news: "ESPN news articles (league / team / athlete scoped).",
   parse_injuries: "Injury report rows (league / team / athlete scoped).",
+  parse_rankings:
+    "Site v2 poll rankings (cfb, mbb, wbb, mch, wch): one row per (poll, team), ranked teams and those receiving votes.",
   parse_summary: "Site v2 game summary dispatcher — returns 21 sub-frames.",
   parse_items: "Generic Core v2 paginated list — one row per item (often a `$ref` pointer).",
   parse_single_entity: "Generic Core v2 single resource — one row for the entity.",
