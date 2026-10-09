@@ -218,7 +218,7 @@ playground proxy. `docs/llms.txt` / `llms-full.txt` give LLMs the whole site as 
 
 [`@sportsdataverse/sdvplot`](https://www.npmjs.com/package/@sportsdataverse/sdvplot) puts
 team colours, logos, wordmarks and headshots on Observable Plot, D3, React, Chart.js,
-Plotly, Vega and ECharts charts, and draws shot charts with linked interactivity.
+Plotly, Vega-Lite and ECharts charts, and draws shot charts with linked interactivity.
 [`@sportsdataverse/sporty`](https://www.npmjs.com/package/@sportsdataverse/sporty) draws the
 playing surfaces and [`@sportsdataverse/sdvtables`](https://www.npmjs.com/package/@sportsdataverse/sdvtables)
 the tables. The `sdvplot-*` [tutorials](https://js.sportsdataverse.org/docs/tutorials/) pair
@@ -226,7 +226,7 @@ them with this package, and the plotting docs are at
 [plot.sportsdataverse.org](https://plot.sportsdataverse.org/).
 
 ```sh
-npm install sportsdataverse @sportsdataverse/sdvplot @sportsdataverse/sporty
+npm install sportsdataverse @sportsdataverse/sdvplot @sportsdataverse/sporty @sportsdataverse/sdvtables
 ```
 
 ## How this library is built
