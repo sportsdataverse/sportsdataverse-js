@@ -26,6 +26,7 @@ const ROUTES = [
   [(u) => u.endsWith('/basketball/nba/summary'), 'espn/summary_nba.json'],
   [(u) => u.endsWith('/basketball/nba/teams'), 'espn/teams_site_nba.json'],
   [(u) => u.endsWith('/basketball/nba/teams/13/roster'), 'espn/team_roster_nba.json'],
+  [(u) => u.endsWith('/basketball/nba/athletes/1966/gamelog'), 'espn/athlete_gamelog_nba_1966_2024.json.gz'],
   [(u) => u.endsWith('/basketball/wnba/standings'), 'espn/standings_wnba_2025.json'],
   [(u) => u.endsWith('/football/nfl/scoreboard'), 'espn/scoreboard_nfl_2024_w1.json'],
   [(u) => u.endsWith('/football/nfl/standings'), 'espn/standings_nfl_2024.json'],

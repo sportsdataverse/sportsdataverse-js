@@ -11,6 +11,8 @@
 //   sportsdataverse/parsers    → ../dist/parsers/index.js
 //   @sportsdataverse/<pkg>[/x] → $SDVPLOT_JS_DIR/packages/<pkg>/<its package.json exports>
 //                                 (default: ../../sdvplot-js, the sibling clone)
+//   any other bare specifier this repo does not install (@observablehq/plot,
+//   jsdom) → resolved from $SDVPLOT_JS_DIR/packages/sdvplot (its dev install)
 //
 // The unpublished sdvplot-js packages are optional: when a script imports one
 // and its dist is absent, this preload prints one `skipped:` line and exits 0
@@ -53,7 +55,14 @@ export async function resolve(specifier, context, next) {
   if (LOCAL[specifier]) return { url: LOCAL[specifier].href, shortCircuit: true };
   const sdvplot = sdvplotEntry(specifier);
   if (sdvplot) return { url: sdvplot.href, shortCircuit: true };
-  return next(specifier, context);
+  try {
+    return await next(specifier, context);
+  } catch (e) {
+    // A peer the 9x scripts share with sdvplot (@observablehq/plot, jsdom) resolves from
+    // sdvplot-js's own install, so the script and sdvplot load ONE copy of Plot.
+    if (e?.code !== 'ERR_MODULE_NOT_FOUND' || /^[./]|^[a-z]+:/i.test(specifier)) throw e;
+    return next(specifier, { ...context, parentURL: new URL('packages/sdvplot/package.json', SDVPLOT_JS).href });
+  }
 }
 
 if (isMainThread) {

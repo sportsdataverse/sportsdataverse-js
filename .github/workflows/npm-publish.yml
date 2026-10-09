@@ -37,15 +37,16 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write # npm provenance (OIDC)
+      id-token: write # npm trusted publishing (OIDC) + automatic provenance
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      # Trusted publishing (https://docs.npmjs.com/trusted-publishers) needs Node >= 22.14 and npm >= 11.5.1,
+      # and no package cache in a release build. No token: the publisher configured on npmjs.com for this
+      # workflow file authenticates over OIDC, which also satisfies the package's 2FA rule a token cannot (EOTP).
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: 24
           registry-url: https://registry.npmjs.org/
+      - run: npm install -g npm@^11.5.1
       - run: npm ci
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --access public

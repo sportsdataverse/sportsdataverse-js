@@ -39,7 +39,10 @@ plain `node NN_*.mjs`.
 | `91_sdvplot_standings_colors.mjs` | ESPN standings → bar chart in team colours (sdvplot-js) |
 | `92_sdvplot_roster_table.mjs` | ESPN roster → HTML table with headshots + logo (sdvplot-js) |
 | `93_scores_card_action.mjs` | ESPN scoreboard → scores card PNG for a nightly GitHub Action (sdvplot-js + `@resvg/resvg-js`; workflow in `workflows/`) |
+| `94_sdvplot_shots_vs_league.mjs` | ESPN plays + the 2023-24 league snapshot → hexagons vs league → PNG (sdvplot-js, Plot, jsdom, resvg) |
 | `95_rankings_ladder_action.mjs` | ESPN CDN rankings → AP Top 25 ladder PNG for a weekly GitHub Action (sdvplot-js + `@resvg/resvg-js`; workflow in `workflows/`) |
+| `96_sdvplot_nfl_standings_table.mjs` | ESPN NFL standings → two sdvtables tables → PNG (sdvplot-js, playwright + chromium) |
+| `97_sdvplot_player_gamelog.mjs` | ESPN player game log → rolling form chart → PNG (sdvplot-js, Plot, jsdom, resvg) |
 
 `test/examples.test.js` runs every script offline (exit 0 + at least one table).
 
@@ -70,8 +73,14 @@ changing a `9x_*` script or its tutorial, run the injector with it set and commi
 ```sh
 ```
 
+`@observablehq/plot` and `jsdom` (94, 97) resolve from the same checkout
+(`packages/sdvplot` has them as dev dependencies), so no install is needed here
+either. 94 and 97 write PNGs with `@resvg/resvg-js`; 96 drives Chromium through
+playwright (`npx playwright install chromium` once). 96 and 97 load their logos /
+headshot over the network for the PNG; their data stays offline.
+
 Without that build, a `9x` script prints `skipped: build sdvplot-js first` and
 exits 0: `test/examples.test.js` skips it and the docs injector keeps the
 committed output for its tutorial. Colours and URLs come from sdvplot's bundled
-index, so the `9x` scripts are offline too (the logo / headshot values are URL
+index, so 90-92 are offline too (the logo / headshot values are URL
 strings; nothing is fetched).
