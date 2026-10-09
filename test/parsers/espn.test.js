@@ -281,8 +281,19 @@ describe('parsers/espn: parse_rankings (Site v2 rankings, real captures)', () =>
     [...new Set(rows.map((r) => r.season_type))].should.eql([3]);
   });
 
+  it('the literal "NULL" ESPN ships as one mch team color is null', () => {
+    const raw = loadGz('rankings_mch');
+    const sentinel = new Set(
+      raw.rankings.flatMap((p) => [...p.ranks, ...p.others]).filter((e) => e.team.color === 'NULL').map((e) => e.team.id)
+    );
+    sentinel.size.should.be.above(0, 'the capture no longer carries the sentinel');
+    const rows = parse_rankings(raw);
+    rows.map((r) => r.team_color).should.not.containEql('NULL');
+    rows.filter((r) => sentinel.has(r.team_id)).every((r) => r.team_color === null).should.be.true();
+  });
+
   it('an empty or malformed payload is []', () => {
-    for (const p of [null, {}, [], 'x', { rankings: [] }, { rankings: 'x' }, { rankings: [null, { ranks: null }] }, { code: 404 }]) {
+    for (const p of [null, {}, [], 'x', { rankings: [] }, { rankings: 'x' }, { rankings: [null, { ranks: null }] }, { rankings: [{ ranks: 1, others: 'x' }] }, { code: 404 }]) {
       parse_rankings(p).should.eql([]);
     }
   });

@@ -1359,7 +1359,8 @@ export function parse_rankings(payload: any): ParserRow[] {
           team_name: team.name ?? null,
           team_nickname: team.nickname ?? null,
           team_abbreviation: team.abbreviation ?? null,
-          team_color: team.color ?? null,
+          // ESPN ships the literal string "NULL" for some teams with no color.
+          team_color: team.color === "NULL" ? null : team.color ?? null,
           team_logo: team.logo ?? null,
           last_updated: entry.lastUpdated ?? null,
         });
