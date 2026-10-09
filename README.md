@@ -287,7 +287,7 @@ umbrella.
 **Node.js** — [js.sportsdataverse.org](https://js.sportsdataverse.org)
 
 - [`sportsdataverse`](https://js.sportsdataverse.org) — this package.
-- [`sdvplot-js`](https://github.com/sportsdataverse/sdvplot-js) — `@sportsdataverse/sdvplot` (team colours, logos) + `@sportsdataverse/sporty` (sport surfaces); unpublished, used by the `9x` examples.
+- [`sdvplot-js`](https://plot.sportsdataverse.org/) — [`@sportsdataverse/sdvplot`](https://www.npmjs.com/package/@sportsdataverse/sdvplot) (team colours, logos), [`@sportsdataverse/sporty`](https://www.npmjs.com/package/@sportsdataverse/sporty) (sport surfaces) and [`@sportsdataverse/sdvtables`](https://www.npmjs.com/package/@sportsdataverse/sdvtables) (publication tables), published on npm; the `9x` examples use them.
 
 **Python** — [py.sportsdataverse.org](https://py.sportsdataverse.org)
 
@@ -296,6 +296,7 @@ umbrella.
 | [`sportsdataverse-py`](https://py.sportsdataverse.org/) | Cross-sport sister package (NBA/WNBA/NFL/MLB/NHL/MBB/WBB/CFB + odds) |
 | [`collegebaseball`](https://collegebaseball.readthedocs.io/) | College baseball |
 | [`sportypy`](https://sportypy.sportsdataverse.org/) | Matplotlib sport field/court/rink plotting |
+| [`sdvplot`](https://sdvplot.sportsdataverse.org/) | Team logos, wordmarks, headshots and colors for Python plots and tables |
 | [`nwslpy`](https://github.com/nwslR/nwslpy) | NWSL women's soccer |
 
 **R** — [r.sportsdataverse.org](https://r.sportsdataverse.org)
@@ -313,6 +314,8 @@ umbrella.
 | [`cfb4th`](https://cfb4th.sportsdataverse.org) | College football 4th-down models |
 | [`cfbplotR`](https://cfbplotR.sportsdataverse.org) | College football ggplot2 helpers |
 | [`sportyR`](https://sportyR.sportsdataverse.org) | ggplot2 sport field/court/rink plotting |
+| [`sdvplotR`](https://sdvplotR.sportsdataverse.org) | Team logos, wordmarks, headshots and colors for ggplot2, gt and reactable |
+| [`cfbseedR`](https://cfbseedR.sportsdataverse.org) | College football season simulation, tiebreakers and CFP seeding |
 | [`nflfastR`](https://www.nflfastr.com) / [`nflverse`](https://nflverse.nflverse.com) | NFL ecosystem |
 
 ## Our Authors

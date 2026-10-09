@@ -185,23 +185,33 @@ module.exports = {
           to: '/playground',
           position: 'left',
         },
+        // The `sdv-packages-dropdown` className gives this 33-entry list the multi-column mega-menu the
+        // other SDV sites use (rules in src/css/custom.css); as one column it ran past the fold.
         {
           label: 'SDV',
           position: 'left',
+          className: 'sdv-packages-dropdown',
           items: [
             {
               href: 'https://sportsdataverse.org',
               label: 'SportsDataverse',
               target: '_self',
+              className: 'sdv-section-header',
             },
             {
               label: 'Python Packages',
               href: 'https://py.sportsdataverse.org/',
               target: '_self',
+              className: 'sdv-section-header',
             },
             {
               label: 'sportsdataverse-py',
               href: 'https://py.sportsdataverse.org/',
+              target: '_self',
+            },
+            {
+              label: 'sdvplot',
+              href: 'https://sdvplot.sportsdataverse.org/',
               target: '_self',
             },
             {
@@ -222,10 +232,16 @@ module.exports = {
             {
               label: 'R Packages',
               href: 'https://r.sportsdataverse.org/',
+              className: 'sdv-section-header',
             },
             {
               label: 'sportsdataverse-R',
               href: 'https://r.sportsdataverse.org/',
+              target: '_self',
+            },
+            {
+              label: 'sdvplotR',
+              href: 'https://sdvplotR.sportsdataverse.org/',
               target: '_self',
             },
             {
@@ -304,6 +320,11 @@ module.exports = {
               target: '_self',
             },
             {
+              label: 'cfbseedR',
+              href: 'https://cfbseedR.sportsdataverse.org/',
+              target: '_self',
+            },
+            {
               label: 'nwslR',
               href: 'https://github.com/nwslR/nwslR/',
               target: '_self',
@@ -321,10 +342,16 @@ module.exports = {
             {
               label: 'Node.js Packages',
               href: 'https://js.sportsdataverse.org/',
+              className: 'sdv-section-header',
             },
             {
               label: 'sportsdataverse.js',
               href: 'https://js.sportsdataverse.org/',
+              target: '_self',
+            },
+            {
+              label: 'sdvplot-js',
+              href: 'https://plot.sportsdataverse.org/',
               target: '_self',
             },
             {
