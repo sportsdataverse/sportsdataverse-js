@@ -21,6 +21,18 @@ sdv-py@81eb7e7060 `tests/fixtures/espn/cdn/*.json`, gzipped verbatim (`gzip -9 -
 | `scoreboard_epl` | `eng.1/scoreboard?date=20250201` (6 games) |
 | `rankings_cfb` | `college-football/rankings?week=5&year=2024&seasontype=2` (5 polls) |
 
+## rankings_*.json.gz
+
+sdv-py@410c66c259 (sportsdataverse-py#732) `tests/fixtures/espn/rankings_*.json`, gzipped verbatim (`gzip -9 -n`; byte-identical to the sdv-py blob after gunzip). Captured live 2026-10-08 from `https://site.api.espn.com/apis/site/v2/sports/{sport}/{league}/rankings` (no query) and trimmed by sdv-py to the top-level `rankings` list, without each team's `logos` list or the season's `$ref` links. Used by `test/parsers/espn.test.js` and `test/espn_shapes.test.js`.
+
+| File | Request | Polls |
+|---|---|---|
+| `rankings_cfb` | `football/college-football/rankings` | 5 (AP, AFCA Coaches, FCS, D-II, D-III), 2026 week 6; 125 ranked + 83 receiving votes |
+| `rankings_mbb` | `basketball/mens-college-basketball/rankings` | 2 (AP, Coaches), 2025-26 postseason week 3 (`occurrence` number 20); 50 + 27 |
+| `rankings_wbb` | `basketball/womens-college-basketball/rankings` | 2 (AP, Coaches), 2025-26 postseason week 3; 50 + 25 |
+| `rankings_mch` | `hockey/mens-college-hockey/rankings` | 1 (USCHO Men's), 2026-27 week 2; 20 + 15, no `firstPlaceVotes` on ranked entries |
+| `rankings_wch` | `hockey/womens-college-hockey/rankings` | 1 (USCHO Women's), 2026-27 week 3; 15 + 5 |
+
 ## standings_wnba_2025.json / scoreboard_nfl_2024_w1.json / standings_nfl_2024.json / standings_laliga_2024.json
 
 Captured live 2026-10-06 (verbatim, untrimmed) for the runnable examples (`examples/`, served by `examples/_offline.mjs`) and the tutorial output injector.

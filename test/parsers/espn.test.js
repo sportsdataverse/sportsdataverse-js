@@ -1,5 +1,7 @@
 import should from 'should';
 import fs from 'fs';
+import { gunzipSync } from 'zlib';
+import { parse as parseYaml } from 'yaml';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {
@@ -16,6 +18,7 @@ import {
   parse_summary,
   parse_summary_boxscore_player,
   parse_summary_plays,
+  parse_rankings,
   SUMMARY_SECTION_PARSERS,
   ESPN_ENDPOINT_PARSERS,
   parserForEndpoint,
@@ -223,5 +226,75 @@ describe('parsers/espn: ESPN_ENDPOINT_PARSERS registry', () => {
     const entries = Object.entries(SUMMARY_SECTION_PARSERS);
     entries.length.should.equal(21);
     for (const [, fn] of entries) (typeof fn).should.equal('function');
+  });
+});
+
+// Site v2 `rankings` (cfb / mbb / wbb / mch / wch): the polls sit in a top-level
+// `rankings` list, not the Core v2 `{items: [...]}` that parse_items reads (it
+// returned [] on every league). Real captures: sdv-py's tests/fixtures/espn/
+// rankings_*.json, gzipped verbatim (provenance in ../fixtures/espn/README.md).
+describe('parsers/espn: parse_rankings (Site v2 rankings, real captures)', () => {
+  const loadGz = (stem) => JSON.parse(gunzipSync(fs.readFileSync(path.join(FIX, `${stem}.json.gz`))).toString('utf8'));
+  const ROWS = { cfb: 208, mbb: 77, wbb: 75, mch: 35, wch: 20 }; // ranks + others per poll
+  const schema = parseYaml(
+    fs.readFileSync(path.join(__dirname, '..', '..', 'tools', 'codegen', 'schemas', 'espn', 'rankings.yaml'), 'utf8')
+  ).columns.map((c) => c.name);
+
+  it('is the registered parser for the rankings short', () => {
+    ESPN_ENDPOINT_PARSERS.rankings.should.equal(parse_rankings);
+  });
+
+  for (const [league, n] of Object.entries(ROWS)) {
+    it(`${league}: one row per ranked or vote-receiving team, every poll`, () => {
+      const raw = loadGz(`rankings_${league}`);
+      const rows = parse_rankings(raw);
+      rows.length.should.equal(n);
+      for (const r of rows) Object.keys(r).should.eql(schema);
+      for (const poll of raw.rankings) {
+        const mine = rows.filter((r) => r.poll_id === String(poll.id));
+        const ranked = mine.filter((r) => r.ranked === true);
+        ranked.map((r) => r.rank).should.eql(poll.ranks.map((e) => e.current));
+        ranked.map((r) => r.team_id).should.eql(poll.ranks.map((e) => e.team.id));
+        const others = mine.filter((r) => r.ranked === false);
+        others.length.should.equal(poll.others.length);
+        // ESPN ships current=0 for a vote-receiving team; 0 is not a rank.
+        for (const r of others) should(r.rank).be.null();
+      }
+      for (const r of rows) {
+        r.team_id.should.be.a.String();
+        r.poll_id.should.match(/^\d+$/); // the v4 id rule: ids are decimal strings
+        r.week.should.be.a.Number();
+      }
+    });
+  }
+
+  it('the first cfb row is the AP number one', () => {
+    const r = parse_rankings(loadGz('rankings_cfb'))[0];
+    r.poll_name.should.equal('AP Top 25');
+    [r.season, r.season_type, r.week].should.eql([2026, 2, 6]);
+    [r.rank, r.team_id, r.team_abbreviation, r.first_place_votes].should.eql([1, '251', 'TEX', 61]);
+  });
+
+  it('week is the occurrence value, not its running number (mbb final poll: number 20, value 3)', () => {
+    const rows = parse_rankings(loadGz('rankings_mbb'));
+    [...new Set(rows.map((r) => r.week))].should.eql([3]);
+    [...new Set(rows.map((r) => r.season_type))].should.eql([3]);
+  });
+
+  it('the literal "NULL" ESPN ships as one mch team color is null', () => {
+    const raw = loadGz('rankings_mch');
+    const sentinel = new Set(
+      raw.rankings.flatMap((p) => [...p.ranks, ...p.others]).filter((e) => e.team.color === 'NULL').map((e) => e.team.id)
+    );
+    sentinel.size.should.be.above(0, 'the capture no longer carries the sentinel');
+    const rows = parse_rankings(raw);
+    rows.map((r) => r.team_color).should.not.containEql('NULL');
+    rows.filter((r) => sentinel.has(r.team_id)).every((r) => r.team_color === null).should.be.true();
+  });
+
+  it('an empty or malformed payload is []', () => {
+    for (const p of [null, {}, [], 'x', { rankings: [] }, { rankings: 'x' }, { rankings: [null, { ranks: null }] }, { rankings: [{ ranks: 1, others: 'x' }] }, { code: 404 }]) {
+      parse_rankings(p).should.eql([]);
+    }
   });
 });

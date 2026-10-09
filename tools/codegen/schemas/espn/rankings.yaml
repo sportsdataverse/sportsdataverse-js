@@ -1,0 +1,79 @@
+schema: rankings
+kind: dataframe
+columns:
+- name: poll_id
+  type: integer
+  description: ESPN poll id as a decimal string, e.g. '1' = AP Top 25, '2' = Coaches Poll, '20' = FCS Coaches Poll, '10624'
+    = USCHO Men's Poll.
+- name: poll_name
+  type: character
+  description: Full poll name, e.g. 'AP Top 25', 'AFCA Coaches Poll', "USCHO Women's Poll".
+- name: poll_short_name
+  type: character
+  description: Short poll label, e.g. 'AP Poll'.
+- name: poll_type
+  type: character
+  description: ESPN poll type code, e.g. 'ap', 'usa' (coaches), 'fcs', 'USCHOMENSPOLL'.
+- name: season
+  type: integer
+  description: Season year of the poll (ESPN's ending year for a season that spans two calendar years, e.g. 2026 for 2025-26).
+- name: season_type
+  type: integer
+  description: 'Season phase of the poll: 1 = preseason, 2 = regular season, 3 = postseason.'
+- name: week
+  type: integer
+  description: Poll week within season_type (the week ESPN's Core v2 rankings URL uses).
+- name: week_display
+  type: character
+  description: Poll week as ESPN labels it, e.g. 'Week 6'.
+- name: poll_date
+  type: character
+  description: Date the poll was released (ISO 8601, UTC).
+- name: ranked
+  type: logical
+  description: true for the poll's ranked teams; false for teams that only received votes.
+- name: team_id
+  type: character
+  description: ESPN team id as a decimal string (the dtype of scoreboard home_id / away_id).
+- name: rank
+  type: integer
+  description: Rank in this poll (1 = top). Null on vote-receiving rows.
+- name: previous_rank
+  type: integer
+  description: Position in the previous poll; 0 when the team was unranked then.
+- name: points
+  type: double
+  description: Poll points received (0 for polls ESPN ships without points, such as USCHO).
+- name: first_place_votes
+  type: integer
+  description: First-place votes received. Null when the poll does not report them.
+- name: trend
+  type: character
+  description: Movement since the previous poll as ESPN prints it, e.g. '+3', '-2', or '-' for no change.
+- name: record_summary
+  type: character
+  description: Team's win-loss record at the poll date, e.g. '5-0'.
+- name: team_uid
+  type: character
+  description: ESPN universal team id, e.g. 's:20~l:23~t:251'.
+- name: team_location
+  type: character
+  description: Team location (school name), e.g. 'Texas'.
+- name: team_name
+  type: character
+  description: Team mascot name, e.g. 'Longhorns'.
+- name: team_nickname
+  type: character
+  description: Short team name ESPN displays, e.g. 'Texas'.
+- name: team_abbreviation
+  type: character
+  description: Short team code ESPN displays, e.g. 'TEX'.
+- name: team_color
+  type: character
+  description: Team primary color as a hex string without '#'. Null for teams ESPN ships without one.
+- name: team_logo
+  type: character
+  description: URL of the team logo on ESPN's CDN.
+- name: last_updated
+  type: character
+  description: When ESPN last updated this poll entry (ISO 8601, UTC).

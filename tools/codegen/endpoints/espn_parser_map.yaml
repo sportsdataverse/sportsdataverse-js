@@ -75,7 +75,7 @@ endpoints:
   news: parse_news
   position: parse_single_entity
   positions: parse_items
-  rankings: parse_items
+  rankings: parse_rankings
   recruiting_athletes: parse_items
   recruiting_rankings: parse_items
   recruiting_years: parse_items

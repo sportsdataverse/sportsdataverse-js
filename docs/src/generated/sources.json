@@ -90,8 +90,8 @@
       "ownership": "vendored",
       "parity": null,
       "descriptionFill": {
-        "filled": 4162,
-        "total": 7062
+        "filled": 4362,
+        "total": 7262
       },
       "docsPath": "/docs/reference/",
       "note": "Site v2 / Core v2 / Web v3 / FPI / CDN, one wrapper set bound on every league."
