@@ -1306,9 +1306,14 @@ export function parse_cdn_rankings(payload: any): ParserRow[] {
 }
 
 /** An integer or decimal-integer string as a number, else `null` (sdv-py's non-strict Utf8 -> Int64 cast). */
-function intOrNull(v: any): number | null {
+function intOrNull(v: unknown): number | null {
   const s = typeof v === "number" ? String(v) : typeof v === "string" ? v.trim() : "";
   return /^-?\d+$/.test(s) ? Number(s) : null;
+}
+
+/** `v` as a record when it is a plain object, else `{}`. */
+function rec(v: unknown): Record<string, unknown> {
+  return isPlainObject(v) ? (v as Record<string, unknown>) : {};
 }
 
 /**
@@ -1322,28 +1327,31 @@ function intOrNull(v: any): number | null {
  * (`occurrence.value`, the week ESPN's own Core v2 rankings URL uses). `poll_id` and
  * `team_id` are decimal strings (the v4 id rule). Rows are rectangular.
  */
-export function parse_rankings(payload: any): ParserRow[] {
-  const polls = isPlainObject(payload) ? payload.rankings : undefined;
-  const rows: Record<string, any>[] = [];
-  for (const poll of Array.isArray(polls) ? polls : []) {
-    if (!isPlainObject(poll)) continue;
-    const season = isPlainObject(poll.season) ? poll.season : {};
-    const occurrence = isPlainObject(poll.occurrence) ? poll.occurrence : {};
+export function parse_rankings(payload: unknown): ParserRow[] {
+  const polls = rec(payload).rankings;
+  const rows: Record<string, unknown>[] = [];
+  for (const p of Array.isArray(polls) ? polls : []) {
+    if (!isPlainObject(p)) continue;
+    const poll = rec(p);
+    const season = rec(poll.season);
+    const occurrence = rec(poll.occurrence);
     const head = {
       poll_id: poll.id ?? null,
       poll_name: poll.name ?? null,
       poll_short_name: poll.shortName ?? null,
       poll_type: poll.type ?? null,
       season: season.year ?? null,
-      season_type: (isPlainObject(season.type) ? season.type.type : null) ?? null,
+      season_type: rec(season.type).type ?? null,
       week: intOrNull(occurrence.value),
       week_display: occurrence.displayValue ?? null,
       poll_date: poll.date ?? null,
     };
     for (const [ranked, key] of [[true, "ranks"], [false, "others"]] as const) {
-      for (const entry of Array.isArray(poll[key]) ? poll[key] : []) {
-        if (!isPlainObject(entry)) continue;
-        const team = isPlainObject(entry.team) ? entry.team : {};
+      const entries = poll[key];
+      for (const e of Array.isArray(entries) ? entries : []) {
+        if (!isPlainObject(e)) continue;
+        const entry = rec(e);
+        const team = rec(entry.team);
         rows.push({
           ...head,
           ranked,

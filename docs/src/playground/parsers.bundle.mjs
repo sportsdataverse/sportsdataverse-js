@@ -2008,8 +2008,8 @@ function roster(raw) {
   return rows;
 }
 var scorechip = (raw) => raw.id ? [flatten2(raw)] : [];
-function flatten2(rec, prefix = "", out = {}) {
-  for (const [k, v] of Object.entries(rec)) {
+function flatten2(rec2, prefix = "", out = {}) {
+  for (const [k, v] of Object.entries(rec2)) {
     const key = `${prefix}${underscore(String(k))}`;
     if (isPlainObject(v)) flatten2(v, `${key}_`, out);
     else if (Array.isArray(v)) out[key] = JSON.stringify(v);
@@ -2100,10 +2100,10 @@ function pyStr(v) {
   return String(v);
 }
 var pyName = (key) => underscore(key.replace(/[^\p{L}\p{N}_]+/gu, "_")).replace(/^_+|_+$/g, "");
-function flattenRecord(rec) {
+function flattenRecord(rec2) {
   const out = {};
   const nested = {};
-  for (const [k, v] of Object.entries(rec)) (isPlainObject(v) ? nested : out)[k] = v;
+  for (const [k, v] of Object.entries(rec2)) (isPlainObject(v) ? nested : out)[k] = v;
   const walk = (obj2, prefix) => {
     for (const [k, v] of Object.entries(obj2)) {
       const key = `${prefix}_${k}`;
@@ -2203,7 +2203,7 @@ function collectionRows(collection) {
   const rows = [];
   for (const [entity_id, entry] of Object.entries(collection)) {
     if (isIdMap(entry)) {
-      for (const [sub_id, rec] of Object.entries(entry)) rows.push({ entity_id, sub_id, ...rec });
+      for (const [sub_id, rec2] of Object.entries(entry)) rows.push({ entity_id, sub_id, ...rec2 });
     } else if (isPlainObject(entry)) {
       rows.push({ entity_id, ...entry });
     } else if (Array.isArray(entry)) {
@@ -3274,9 +3274,9 @@ function boxscoreV3ResultSets(box) {
   const sets = [setFromRows("PlayerStats", playerRows), setFromRows("TeamStats", teamRows)];
   for (const [k, v] of Object.entries(box)) {
     if (Array.isArray(v) && v.length && isObj(v[0])) {
-      const rows = v.map((rec) => {
+      const rows = v.map((rec2) => {
         const o = {};
-        for (const [rk, rv] of Object.entries(rec)) o[rk] = isNested(rv) ? pyJson2(rv) : rv;
+        for (const [rk, rv] of Object.entries(rec2)) o[rk] = isNested(rv) ? pyJson2(rv) : rv;
         return o;
       });
       sets.push(setFromRows(k.charAt(0).toUpperCase() + k.slice(1), rows));
@@ -4334,9 +4334,9 @@ function parse_summary_against_the_spread(payload) {
       team_abbreviation: team.abbreviation,
       team_display_name: team.displayName
     };
-    for (const rec of entry.records || []) {
+    for (const rec2 of entry.records || []) {
       const row = { ...teamBase };
-      for (const [k, v] of Object.entries(rec || {})) {
+      for (const [k, v] of Object.entries(rec2 || {})) {
         if (isScalar(v)) {
           row[k] = v;
         } else if (isPlainObject14(v)) {
@@ -4555,28 +4555,34 @@ function intOrNull(v) {
   const s = typeof v === "number" ? String(v) : typeof v === "string" ? v.trim() : "";
   return /^-?\d+$/.test(s) ? Number(s) : null;
 }
+function rec(v) {
+  return isPlainObject14(v) ? v : {};
+}
 function parse_rankings(payload) {
-  const polls2 = isPlainObject14(payload) ? payload.rankings : void 0;
+  const polls2 = rec(payload).rankings;
   const rows = [];
-  for (const poll of Array.isArray(polls2) ? polls2 : []) {
-    if (!isPlainObject14(poll)) continue;
-    const season = isPlainObject14(poll.season) ? poll.season : {};
-    const occurrence = isPlainObject14(poll.occurrence) ? poll.occurrence : {};
+  for (const p of Array.isArray(polls2) ? polls2 : []) {
+    if (!isPlainObject14(p)) continue;
+    const poll = rec(p);
+    const season = rec(poll.season);
+    const occurrence = rec(poll.occurrence);
     const head = {
       poll_id: poll.id ?? null,
       poll_name: poll.name ?? null,
       poll_short_name: poll.shortName ?? null,
       poll_type: poll.type ?? null,
       season: season.year ?? null,
-      season_type: (isPlainObject14(season.type) ? season.type.type : null) ?? null,
+      season_type: rec(season.type).type ?? null,
       week: intOrNull(occurrence.value),
       week_display: occurrence.displayValue ?? null,
       poll_date: poll.date ?? null
     };
     for (const [ranked, key] of [[true, "ranks"], [false, "others"]]) {
-      for (const entry of Array.isArray(poll[key]) ? poll[key] : []) {
-        if (!isPlainObject14(entry)) continue;
-        const team = isPlainObject14(entry.team) ? entry.team : {};
+      const entries = poll[key];
+      for (const e of Array.isArray(entries) ? entries : []) {
+        if (!isPlainObject14(e)) continue;
+        const entry = rec(e);
+        const team = rec(entry.team);
         rows.push({
           ...head,
           ranked,
