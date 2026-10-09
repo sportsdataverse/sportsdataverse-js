@@ -110,7 +110,11 @@ export const EXAMPLES = [
     ['ex90', '90_sdvplot_shot_chart.mjs', 'sdvplot-shot-chart.mdx', ['shot_chart.svg']],
     ['ex91', '91_sdvplot_standings_colors.mjs', 'sdvplot-standings-colors.mdx', ['standings.svg']],
     ['ex92', '92_sdvplot_roster_table.mjs', 'sdvplot-roster-table.mdx', ['roster.html']],
+    // ex93 and ex95 are automation scripts whose PNGs come from LIVE runs (logos downloaded, fonts vary by OS),
+    // so they are committed by hand and not listed as artifacts; only source + offline stdout are frozen.
+    ['ex93', '93_scores_card_action.mjs', 'sdvplot-scores-card.mdx'],
     ['ex94', '94_sdvplot_shots_vs_league.mjs', 'sdvplot-shots-vs-league.mdx', ['shots_vs_league.png']],
+    ['ex95', '95_rankings_ladder_action.mjs', 'sdvplot-rankings-ladder.mdx'],
     ['ex96', '96_sdvplot_nfl_standings_table.mjs', 'sdvplot-standings-table.mdx', ['nfl_standings_2024.png']],
     ['ex97', '97_sdvplot_player_gamelog.mjs', 'sdvplot-player-form.mdx', ['lebron_2024_form.png']],
   ].map(([id, script, target, artifacts]) => ({

@@ -38,7 +38,9 @@ plain `node NN_*.mjs`.
 | `90_sdvplot_shot_chart.mjs` | ESPN plays → sporty court → SVG (needs sdvplot-js, below) |
 | `91_sdvplot_standings_colors.mjs` | ESPN standings → bar chart in team colours (sdvplot-js) |
 | `92_sdvplot_roster_table.mjs` | ESPN roster → HTML table with headshots + logo (sdvplot-js) |
+| `93_scores_card_action.mjs` | ESPN scoreboard → scores card PNG for a nightly GitHub Action (sdvplot-js + `@resvg/resvg-js`; workflow in `workflows/`) |
 | `94_sdvplot_shots_vs_league.mjs` | ESPN plays + the 2023-24 league snapshot → hexagons vs league → PNG (sdvplot-js, Plot, jsdom, resvg) |
+| `95_rankings_ladder_action.mjs` | ESPN CDN rankings → AP Top 25 ladder PNG for a weekly GitHub Action (sdvplot-js + `@resvg/resvg-js`; workflow in `workflows/`) |
 | `96_sdvplot_nfl_standings_table.mjs` | ESPN NFL standings → two sdvtables tables → PNG (sdvplot-js, playwright + chromium) |
 | `97_sdvplot_player_gamelog.mjs` | ESPN player game log → rolling form chart → PNG (sdvplot-js, Plot, jsdom, resvg) |
 
