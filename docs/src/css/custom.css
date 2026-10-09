@@ -325,3 +325,39 @@ html[data-theme='dark'] {
 .grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
 .gap-2 { gap: 0.5rem; }
 .col-auto { grid-column: auto; }
+
+/*
+ * SDV packages dropdown: a multi-column mega-menu, the same rules as the other SDV Docusaurus sites'
+ * sdv-theme.css (sportsdataverse-py, sdvplot, sdvplot-js). Docusaurus puts the className on the toggle
+ * link, so the menu is reached from its parent. The phone drawer does not render this markup.
+ */
+.dropdown:has(> .sdv-packages-dropdown) > .dropdown__menu {
+  width: min(640px, calc(100vw - 32px));
+  max-height: min(80vh, 640px);
+  overflow-y: auto;
+  column-count: 3;
+  column-gap: 0.5rem;
+  padding: 0.5rem 0.25rem;
+}
+
+.dropdown:has(> .sdv-packages-dropdown) > .dropdown__menu > li {
+  break-inside: avoid;
+  display: block;
+}
+
+.dropdown:has(> .sdv-packages-dropdown) .dropdown__link.sdv-section-header {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.75rem;
+  color: var(--ifm-color-primary);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.dropdown:has(> .sdv-packages-dropdown) > .dropdown__menu > li:first-child .dropdown__link.sdv-section-header {
+  margin-top: 0;
+  padding-top: 0.25rem;
+  border-top: none;
+}
