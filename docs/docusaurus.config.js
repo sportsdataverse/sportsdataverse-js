@@ -185,7 +185,7 @@ module.exports = {
           to: '/playground',
           position: 'left',
         },
-        // The `sdv-packages-dropdown` className gives this ~37-entry list the multi-column mega-menu the
+        // The `sdv-packages-dropdown` className gives this 33-entry list the multi-column mega-menu the
         // other SDV sites use (rules in src/css/custom.css); as one column it ran past the fold.
         {
           label: 'SDV',
