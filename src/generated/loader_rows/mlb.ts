@@ -197,6 +197,296 @@ export interface LoadMlbRunnersRow {
   [column: string]: unknown;
 }
 
+/** One row of `sdv.mlb.loadMlbStatcast` (`mlb_statcast`; sdv-py loader schema `load_mlb_statcast`). */
+export interface LoadMlbStatcastRow {
+  /** Abbreviation of the pitch type thrown (e.g. FF, SL, CH). `String` */
+  pitch_type?: string | null;
+  /** Game date (YYYY-MM-DD). `String` */
+  game_date?: string | null;
+  /** Pitch velocity out of the hand (mph). `Float64` */
+  release_speed?: number | null;
+  /** Horizontal release position of the ball, catcher's perspective (feet). `Float64` */
+  release_pos_x?: number | null;
+  /** Vertical release position of the ball, catcher's perspective (feet). `Float64` */
+  release_pos_z?: number | null;
+  /** Batter name, `Last, First` (Baseball Savant's batter-side `player_name`). `String` */
+  player_name?: string | null;
+  /** MLBAM player id of the batter. `Int64` (an id) */
+  batter?: string | null;
+  /** MLBAM player id of the pitcher. `Int64` (an id) */
+  pitcher?: string | null;
+  /** Plate-appearance result on the pitch that ended it (e.g. `single`, `strikeout`, `walk`); null on every other pitch. `String` */
+  events?: string | null;
+  /** Pitch outcome (e.g. `ball`, `called_strike`, `swinging_strike`, `foul`, `hit_into_play`). `String` */
+  description?: string | null;
+  /** Deprecated spin direction field, no longer populated. `Float64` */
+  spin_dir?: number | null;
+  /** Deprecated legacy spin-rate field, no longer populated. `Float64` */
+  spin_rate_deprecated?: number | null;
+  /** Deprecated legacy break-angle field, no longer populated. `Float64` */
+  break_angle_deprecated?: number | null;
+  /** Deprecated legacy break-length field, no longer populated. `Float64` */
+  break_length_deprecated?: number | null;
+  /** Strike-zone region the pitch crossed (1-14 Gameday zone). `Float64` */
+  zone?: number | null;
+  /** Full text description of the play. `String` */
+  des?: string | null;
+  /** Game-type code; spring training (`S`) and exhibition (`E`) games are included alongside `R` and the postseason. `String` */
+  game_type?: string | null;
+  /** Side of the plate the batter is standing (L or R). `String` */
+  stand?: string | null;
+  /** Hand the pitcher throws with (L or R). `String` */
+  p_throws?: string | null;
+  /** Home team abbreviation (e.g. `SF`). `String` */
+  home_team?: string | null;
+  /** Away team abbreviation (e.g. `LAD`). `String` */
+  away_team?: string | null;
+  /** Pitch result class -- `B` ball, `S` strike (including fouls), `X` ball in play. `String` */
+  type?: string | null;
+  /** Fielder position number that fielded the ball. `Float64` */
+  hit_location?: number | null;
+  /** Batted-ball type (ground_ball, line_drive, fly_ball, popup). `String` */
+  bb_type?: string | null;
+  /** Ball count before the pitch. `Int64` */
+  balls?: number | bigint | null;
+  /** Strike count before the pitch. `Int64` */
+  strikes?: number | bigint | null;
+  /** Season year of the game. `Int64` */
+  game_year?: number | bigint | null;
+  /** Horizontal pitch movement from the catcher's perspective (feet). `Float64` */
+  pfx_x?: number | null;
+  /** Vertical pitch movement from the catcher's perspective (feet). `Float64` */
+  pfx_z?: number | null;
+  /** Horizontal position of the pitch crossing the plate (feet from center). `Float64` */
+  plate_x?: number | null;
+  /** Vertical position of the pitch crossing the plate (feet above ground). `Float64` */
+  plate_z?: number | null;
+  /** MLBAM ID of the runner on third base, if any; published as a float and cast to Int64 by the loader. `Int64` (an id) */
+  on_3b?: string | null;
+  /** MLBAM ID of the runner on second base, if any; published as a float and cast to Int64 by the loader. `Int64` (an id) */
+  on_2b?: string | null;
+  /** MLBAM ID of the runner on first base, if any; published as a float and cast to Int64 by the loader. `Int64` (an id) */
+  on_1b?: string | null;
+  /** Number of outs when the batter came to the plate. `Int64` */
+  outs_when_up?: number | bigint | null;
+  /** Inning number. `Int64` */
+  inning?: number | bigint | null;
+  /** Half of the inning (Top or Bot). `String` */
+  inning_topbot?: string | null;
+  /** Hit coordinate X on the field diagram. `Float64` */
+  hc_x?: number | null;
+  /** Hit coordinate Y on the field diagram. `Float64` */
+  hc_y?: number | null;
+  /** Deprecated time-from-start field, no longer populated. `Float64` */
+  tfs_deprecated?: number | null;
+  /** Deprecated Zulu time-from-start field, no longer populated. `Float64` */
+  tfs_zulu_deprecated?: number | null;
+  /** Deprecated umpire field; always null. `Float64` */
+  umpire?: number | null;
+  /** Deprecated Sportvision/Statcast pitch identifier, no longer populated. `String` (an id) */
+  sv_id?: string | null;
+  /** Velocity of the pitch in the x-direction at y=50 ft (ft/s). `Float64` */
+  vx0?: number | null;
+  /** Velocity of the pitch in the y-direction at y=50 ft (ft/s). `Float64` */
+  vy0?: number | null;
+  /** Velocity of the pitch in the z-direction at y=50 ft (ft/s). `Float64` */
+  vz0?: number | null;
+  /** Acceleration of the pitch in the x-direction at y=50 ft (ft/s^2). `Float64` */
+  ax?: number | null;
+  /** Acceleration of the pitch in the y-direction at y=50 ft (ft/s^2). `Float64` */
+  ay?: number | null;
+  /** Acceleration of the pitch in the z-direction at y=50 ft (ft/s^2). `Float64` */
+  az?: number | null;
+  /** Top of the batter's strike zone for the pitch (feet). `Float64` */
+  sz_top?: number | null;
+  /** Bottom of the batter's strike zone for the pitch (feet). `Float64` */
+  sz_bot?: number | null;
+  /** Statcast-measured projected distance of the batted ball (feet). `Float64` */
+  hit_distance_sc?: number | null;
+  /** Exit velocity of the batted ball (mph). `Float64` */
+  launch_speed?: number | null;
+  /** Vertical launch angle of the batted ball (degrees). `Float64` */
+  launch_angle?: number | null;
+  /** Perceived velocity adjusted for release extension (mph). `Float64` */
+  effective_speed?: number | null;
+  /** Spin rate of the pitch at release (rpm). `Float64` */
+  release_spin_rate?: number | null;
+  /** Distance toward the plate at release (feet). `Float64` */
+  release_extension?: number | null;
+  /** Unique game identifier. `Int64` (an id) */
+  game_pk?: string | null;
+  /** MLBAM ID of the catcher. `Int64` (an id) */
+  fielder_2?: string | null;
+  /** MLBAM ID of the first baseman. `Int64` (an id) */
+  fielder_3?: string | null;
+  /** MLBAM ID of the second baseman. `Int64` (an id) */
+  fielder_4?: string | null;
+  /** MLBAM ID of the third baseman. `Int64` (an id) */
+  fielder_5?: string | null;
+  /** MLBAM ID of the shortstop. `Int64` (an id) */
+  fielder_6?: string | null;
+  /** MLBAM ID of the left fielder. `Int64` (an id) */
+  fielder_7?: string | null;
+  /** MLBAM ID of the center fielder. `Int64` (an id) */
+  fielder_8?: string | null;
+  /** MLBAM ID of the right fielder. `Int64` (an id) */
+  fielder_9?: string | null;
+  /** Release position of the ball toward the plate (feet). `Float64` */
+  release_pos_y?: number | null;
+  /** Expected batting average based on exit velocity and launch angle. `Float64` */
+  estimated_ba_using_speedangle?: number | null;
+  /** Expected wOBA based on exit velocity and launch angle. `Float64` */
+  estimated_woba_using_speedangle?: number | null;
+  /** wOBA value assigned to the event. `Float64` */
+  woba_value?: number | null;
+  /** wOBA denominator (plate-appearance weight) for the event. `Float64` */
+  woba_denom?: number | null;
+  /** BABIP value assigned to the event (0 or 1). `Float64` */
+  babip_value?: number | null;
+  /** Isolated power value assigned to the event. `Float64` */
+  iso_value?: number | null;
+  /** Batted-ball classification code (1-6) from exit velocity and angle. `Float64` */
+  launch_speed_angle?: number | null;
+  /** Sequential plate-appearance number within the game. `Int64` */
+  at_bat_number?: number | bigint | null;
+  /** Pitch number within the plate appearance. `Int64` */
+  pitch_number?: number | bigint | null;
+  /** Full name of the pitch type (e.g. 4-Seam Fastball, Slider). `String` */
+  pitch_name?: string | null;
+  /** Home team score before the pitch (see post_home_score). `Int64` */
+  home_score?: number | bigint | null;
+  /** Away team score before the pitch (see post_away_score). `Int64` */
+  away_score?: number | bigint | null;
+  /** Batting team score before the pitch. `Int64` */
+  bat_score?: number | bigint | null;
+  /** Fielding team score before the pitch. `Int64` */
+  fld_score?: number | bigint | null;
+  /** Away team score after the pitch. `Int64` */
+  post_away_score?: number | bigint | null;
+  /** Home team score after the pitch. `Int64` */
+  post_home_score?: number | bigint | null;
+  /** Batting team score after the pitch. `Int64` */
+  post_bat_score?: number | bigint | null;
+  /** Fielding team score after the pitch. `Int64` */
+  post_fld_score?: number | bigint | null;
+  /** Infield defensive alignment (Standard, Strategic, Infield shift). `String` */
+  if_fielding_alignment?: string | null;
+  /** Outfield defensive alignment (Standard, Strategic, 4th outfielder). `String` */
+  of_fielding_alignment?: string | null;
+  /** Spin axis of the pitch as a clock-face angle (degrees). `Float64` */
+  spin_axis?: number | null;
+  /** Change in home team win expectancy on the play. `Float64` */
+  delta_home_win_exp?: number | null;
+  /** Change in run expectancy on the play. `Float64` */
+  delta_run_exp?: number | null;
+  /** Bat speed at the point of contact (mph). `Float64` */
+  bat_speed?: number | null;
+  /** Length of the swing path to contact (feet). `Float64` */
+  swing_length?: number | null;
+  /** How far the bat missed the ball on a swing and miss (Savant bat tracking); null on every other pitch and before bat tracking. `Float64` */
+  miss_distance?: number | null;
+  /** Expected slugging based on exit velocity and launch angle. `Float64` */
+  estimated_slg_using_speedangle?: number | null;
+  /** Change in run expectancy credited to the pitcher. `Float64` */
+  delta_pitcher_run_exp?: number | null;
+  /** Adjusted (90th-percentile) exit velocity (mph). `Float64` */
+  hyper_speed?: number | null;
+  /** Home team score minus away team score before the pitch. `Int64` */
+  home_score_diff?: number | bigint | null;
+  /** Batting team score minus fielding team score before the pitch. `Int64` */
+  bat_score_diff?: number | bigint | null;
+  /** Home team win expectancy before the play. `Float64` */
+  home_win_exp?: number | null;
+  /** Batting team win expectancy before the play. `Float64` */
+  bat_win_exp?: number | null;
+  /** Pitcher age using the legacy calculation. `Int64` */
+  age_pit_legacy?: number | bigint | null;
+  /** Batter age using the legacy calculation. `Int64` */
+  age_bat_legacy?: number | bigint | null;
+  /** Pitcher age for the season. `Int64` */
+  age_pit?: number | bigint | null;
+  /** Batter age for the season. `Int64` */
+  age_bat?: number | bigint | null;
+  /** Times through the order the pitcher is facing the lineup. `Int64` */
+  n_thruorder_pitcher?: number | bigint | null;
+  /** Number of prior plate appearances by the batter in the game. `Int64` */
+  n_priorpa_thisgame_player_at_bat?: number | bigint | null;
+  /** Days since the pitcher's previous game appearance. `Float64` */
+  pitcher_days_since_prev_game?: number | null;
+  /** Days since the batter's previous game appearance. `Float64` */
+  batter_days_since_prev_game?: number | null;
+  /** Days until the pitcher's next game appearance. `Float64` */
+  pitcher_days_until_next_game?: number | null;
+  /** Days until the batter's next game appearance. `Float64` */
+  batter_days_until_next_game?: number | null;
+  /** Vertical pitch break including gravity (inches). `Float64` */
+  api_break_z_with_gravity?: number | null;
+  /** Horizontal pitch break to the pitcher's arm side (inches). `Float64` */
+  api_break_x_arm?: number | null;
+  /** Horizontal pitch break toward/away from the batter (inches). `Float64` */
+  api_break_x_batter_in?: number | null;
+  /** Pitcher's arm angle at release (degrees). `Float64` */
+  arm_angle?: number | null;
+  /** Angle of the bat's path at contact (degrees). `Float64` */
+  attack_angle?: number | null;
+  /** Horizontal direction of the swing at contact (degrees). `Float64` */
+  attack_direction?: number | null;
+  /** Vertical tilt of the swing path (degrees). `Float64` */
+  swing_path_tilt?: number | null;
+  /** Horizontal offset of ball-bat intercept from batter position (inches). `Float64` */
+  intercept_ball_minus_batter_pos_x_inches?: number | null;
+  /** Depth offset of ball-bat intercept from batter position (inches). `Float64` */
+  intercept_ball_minus_batter_pos_y_inches?: number | null;
+  /** Season year. `Int64` */
+  season?: number | bigint | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
+/** One row of `sdv.mlb.loadMlbSchedule` (`mlb_schedules`; sdv-py loader schema `load_mlb_schedule`). */
+export interface LoadMlbScheduleRow {
+  /** statsapi game identifier; the join key to every other MLB release. `Int64` (an id) */
+  game_pk?: string | null;
+  /** Official game date (YYYY-MM-DD, local to the venue). `String` */
+  game_date?: string | null;
+  /** Scheduled first-pitch time as an ISO-8601 UTC timestamp string (e.g. `2024-02-22T20:10:00Z`). `String` */
+  game_datetime?: string | null;
+  /** MLB season year the game belongs to (the asset's season). `Int64` */
+  season?: number | bigint | null;
+  /** statsapi game-type code (`R` regular season, `S` spring training, `E` exhibition, `A` All-Star, `F`/`D`/`L`/`W` wild card / division series / LCS / World Series). `String` */
+  game_type?: string | null;
+  /** Status code identifier (e.g. 'S', 'P', 'I', 'F'). `String` */
+  status_code?: string | null;
+  /** Detailed status description (e.g. 'Scheduled', 'Pre-Game', 'In Progress'). `String` */
+  detailed_state?: string | null;
+  /** Coarse game state (`Preview`, `Live` or `Final`). `String` */
+  abstract_state?: string | null;
+  /** Home team id. `Int64` (an id) */
+  home_team_id?: string | null;
+  /** Home team name. `String` */
+  home_team_name?: string | null;
+  /** Home team's final run total (null for a game not yet played). `Int64` */
+  home_score?: number | bigint | null;
+  /** Away team id. `Int64` (an id) */
+  away_team_id?: string | null;
+  /** Away team name. `String` */
+  away_team_name?: string | null;
+  /** Away team's final run total (null for a game not yet played). `Int64` */
+  away_score?: number | bigint | null;
+  /** MLBAM venue ID. `Int64` (an id) */
+  venue_id?: string | null;
+  /** Venue name. `String` */
+  venue_name?: string | null;
+  /** Doubleheader indicator ('N', 'S', 'Y'). `String` */
+  double_header?: string | null;
+  /** Game number within a doubleheader. `Int64` */
+  game_number?: number | bigint | null;
+  /** Description of the series. `String` */
+  series_description?: string | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
 /** One row of `sdv.mlb.loadMlbExpectedStats` (`mlb_hitting_models`; sdv-py loader schema `load_mlb_expected_stats`). */
 export interface LoadMlbExpectedStatsRow {
   /** MLBAM player id of the batter. `Int64` (an id) */
@@ -287,7 +577,7 @@ export interface LoadMlbCatcherFramingRow {
 
 /** One row of `sdv.mlb.loadMlbXera` (`mlb_pitching_models`; sdv-py loader schema `load_mlb_xera`). */
 export interface LoadMlbXeraRow {
-  /** Whether the position is a pitcher. `Int64` (an id) */
+  /** MLBAM player id of the pitcher. `Int64` (an id) */
   pitcher?: string | null;
   /** Season year. `Int64` */
   season?: number | bigint | null;
@@ -301,7 +591,7 @@ export interface LoadMlbXeraRow {
 
 /** One row of `sdv.mlb.loadMlbStuffPlus` (`mlb_pitching_models`; sdv-py loader schema `load_mlb_stuff_plus`). */
 export interface LoadMlbStuffPlusRow {
-  /** Whether the position is a pitcher. `Int64` (an id) */
+  /** MLBAM player id of the pitcher. `Int64` (an id) */
   pitcher?: string | null;
   /** Abbreviation of the pitch type thrown (e.g. FF, SL, CH). `String` */
   pitch_type?: string | null;
@@ -317,7 +607,7 @@ export interface LoadMlbStuffPlusRow {
 
 /** One row of `sdv.mlb.loadMlbCommandPlus` (`mlb_pitching_models`; sdv-py loader schema `load_mlb_command_plus`). */
 export interface LoadMlbCommandPlusRow {
-  /** Whether the position is a pitcher. `Int64` (an id) */
+  /** MLBAM player id of the pitcher. `Int64` (an id) */
   pitcher?: string | null;
   /** Mean predicted per-pitch run value from the bundled location model, which sees plate location, count, handedness and pitch type but no raw pitch physics; lower is better for the pitcher. `Float64` */
   location_rv_hat?: number | null;

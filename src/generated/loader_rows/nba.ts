@@ -1011,6 +1011,40 @@ export interface LoadNbaStatsCoachesRow {
   [column: string]: unknown;
 }
 
+/** One row of `sdv.nba.loadNbaStatsDraft` (`nba_stats_draft`; sdv-py loader schema `load_nba_stats_draft`). */
+export interface LoadNbaStatsDraftRow {
+  /** stats.nba.com player identifier (PERSON_ID) of the pick; Int64, joins to ``player_id`` elsewhere. `Int64` (an id) */
+  person_id?: string | null;
+  /** Drafted player's name. `String` */
+  player_name?: string | null;
+  /** END year of the season the draft class enters (2026 = the June 2025 draft) -- one more than the ``seasons`` argument, which is the draft year. Int32 in this asset. `Int32` */
+  season?: number | null;
+  /** Draft round (1 or 2). `Int64` */
+  round_number?: number | bigint | null;
+  /** Pick number within the round. `Int64` */
+  round_pick?: number | bigint | null;
+  /** Overall pick number. `Int64` */
+  overall_pick?: number | bigint | null;
+  /** Selection type as stats.nba.com reports it (e.g. 'Draft'). `String` */
+  draft_type?: string | null;
+  /** stats.nba.com identifier of the team that made the pick; Int64. `Int64` (an id) */
+  team_id?: string | null;
+  /** City of the team that made the pick. `String` */
+  team_city?: string | null;
+  /** Nickname of the team that made the pick. `String` */
+  team_name?: string | null;
+  /** Tricode of the team that made the pick. `String` */
+  team_abbreviation?: string | null;
+  /** School, club or team the player was drafted from. `String` */
+  organization?: string | null;
+  /** Kind of organization drafted from (e.g. 'College/University', 'Other Team/Club'). `String` */
+  organization_type?: string | null;
+  /** 1 when stats.nba.com has a player profile page for the pick, else 0. `Int64` */
+  player_profile_flag?: number | bigint | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
 /** One row of `sdv.nba.loadNbaStatsGameRosters` (`nba_stats_game_rosters`; sdv-py loader schema `load_nba_stats_game_rosters`). */
 export interface LoadNbaStatsGameRostersRow {
   /** Unique player identifier. `Int64` (an id) */
@@ -3099,13 +3133,13 @@ export interface LoadNbaScheduleCrosswalkRow {
   nba_home_team_id?: string | null;
   /** NBA Stats team id of the away team. `String` (an id) */
   nba_away_team_id?: string | null;
-  /** Fox game id (NA placeholder). `String` (an id) */
+  /** Fox Sports game id (string), filled when the crosswalk is built with fox=True from Fox's per-date scoreboard, matched on the US-Eastern date and the two teams in either home/away order; null otherwise and where Fox lists no matching game. `String` (an id) */
   fox_game_id?: string | null;
-  /** FOX Sports team id of the home team in the crosswalk. `String` (an id) */
+  /** Fox Sports team id of the side Fox calls home in fox_game_id, filled with fox=True; at a neutral site it can be the reverse of home_espn_team_id. Null when fox_game_id is. `String` (an id) */
   fox_home_team_id?: string | null;
-  /** FOX Sports team id of the away team in the crosswalk. `String` (an id) */
+  /** Fox Sports team id of the side Fox calls away in fox_game_id, filled with fox=True; at a neutral site it can be the reverse of away_espn_team_id. Null when fox_game_id is. `String` (an id) */
   fox_away_team_id?: string | null;
-  /** Yahoo game id (NA placeholder). `String` (an id) */
+  /** Yahoo Sports game id, nba.g.<YYYYMMDD US-Eastern date><home ESPN team id, 2 digits> (Yahoo's NBA team ids equal ESPN's), from the 2014 season on; null for earlier seasons. `String` (an id) */
   yahoo_game_id?: string | null;
   /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
@@ -3149,7 +3183,7 @@ export interface LoadNbaTeamCrosswalkRow {
   fox_team_id?: string | null;
   /** Fox team name (NA if unmatched). `String` */
   fox_team_name?: string | null;
-  /** Yahoo team id (NA placeholder). `String` (an id) */
+  /** Yahoo Sports team id, nba.t.<espn_team_id> (Yahoo's NBA ids equal ESPN's), from the 2014 season on; null for earlier seasons. `String` (an id) */
   yahoo_team_id?: string | null;
   /** Yahoo abbreviation (NA placeholder). `String` */
   yahoo_team_abbreviation?: string | null;

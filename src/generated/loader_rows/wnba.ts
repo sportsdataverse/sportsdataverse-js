@@ -1027,13 +1027,13 @@ export interface LoadWnbaScheduleCrosswalkRow {
   wnba_home_team_id?: string | null;
   /** Away team identifier on stats.wnba.com for the matched game. `String` (an id) */
   wnba_away_team_id?: string | null;
-  /** Fox game id (NA placeholder). `String` (an id) */
+  /** Fox Sports game id (string), filled when the crosswalk is built with fox=True from Fox's per-date scoreboard, matched on the US-Eastern date and the two teams in either home/away order; null otherwise and where Fox lists no matching game. `String` (an id) */
   fox_game_id?: string | null;
-  /** Home team identifier on Fox Sports for the matched game. `String` (an id) */
+  /** Fox Sports team id of the side Fox calls home in fox_game_id, filled with fox=True; at a neutral site it can be the reverse of home_espn_team_id. Null when fox_game_id is. `String` (an id) */
   fox_home_team_id?: string | null;
-  /** Away team identifier on Fox Sports for the matched game. `String` (an id) */
+  /** Fox Sports team id of the side Fox calls away in fox_game_id, filled with fox=True; at a neutral site it can be the reverse of away_espn_team_id. Null when fox_game_id is. `String` (an id) */
   fox_away_team_id?: string | null;
-  /** Yahoo game id (NA placeholder). `String` (an id) */
+  /** Yahoo Sports game id, wnba.g.<YYYYMMDD US-Eastern date><home Yahoo team id, 3 digits>, filled when built with yahoo=True and checked against the ids Yahoo lists, so a neutral-site game carries the side Yahoo calls home; null otherwise and where Yahoo lists no such game (a non-Division-I home team). `String` (an id) */
   yahoo_game_id?: string | null;
   /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
@@ -1073,11 +1073,11 @@ export interface LoadWnbaTeamCrosswalkRow {
   fox_team_id?: string | null;
   /** Fox team name (NA if unmatched). `String` */
   fox_team_name?: string | null;
-  /** Yahoo team id (NA placeholder). `String` (an id) */
+  /** Dotted Yahoo Sports team id (e.g. 'wnba.t.4'), filled when built with yahoo=True from Yahoo's team listing joined on full name, short name, then nickname; null otherwise and where no Yahoo team matched. `String` (an id) */
   yahoo_team_id?: string | null;
-  /** Yahoo abbreviation (NA placeholder). `String` */
+  /** Yahoo Sports team abbreviation for yahoo_team_id; null when yahoo_team_id is. `String` */
   yahoo_team_abbreviation?: string | null;
-  /** Yahoo team name (NA placeholder). `String` */
+  /** Yahoo Sports full team name for yahoo_team_id; null when yahoo_team_id is. `String` */
   yahoo_team_name?: string | null;
   /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;

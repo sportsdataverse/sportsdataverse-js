@@ -3470,7 +3470,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 
 ### Returns — `wnba_stats_playbyplayv3` / `wnbaStatsPlaybyplayv3`
 
-No returns table is published for this endpoint: parse_nba_stats_result_sets emits no columns for the committed capture tests/fixtures/wnba_stats/endpoints/playbyplayv3.json
+No returns table is published for this endpoint: the committed capture tests/fixtures/wnba_stats/endpoints/playbyplayv3.json holds no rows, so parse_nba_stats_result_sets emits no columns; a capture with rows needs a residential IP (stats.nba.com / stats.wnba.com hang on datacenter IPs) and SDV_PY_NBA_STATS_LIVE=1
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 

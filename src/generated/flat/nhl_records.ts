@@ -1309,7 +1309,8 @@ const SKATER_CAREER_LEADERS_DEF: WrapperDef = {
   "path": "/skater-career-leaders",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/skater_career_leaders"
 };
 
 /**
@@ -1335,7 +1336,8 @@ const SKATER_CAREER_STATS_DEF: WrapperDef = {
   "path": "/skater-career-statistics",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/skater_career_stats"
 };
 
 /**

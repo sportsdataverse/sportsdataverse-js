@@ -928,7 +928,7 @@ const REFEREE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://kenpom.com/referee.php`
  *
- * @param params.referee - `number | string` — Referee name as KenPom spells it (take it from the officials table).
+ * @param params.referee - `number | string` — KenPom referee id - the `r=` value on an officials-table link.
  * @param params.year - `number | string` — Season as a 4-digit ENDING year.
  * @param params.email - `string` — KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.
  * @param params.password - `string` — KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.

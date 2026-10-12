@@ -251,8 +251,8 @@ const CLUB_STATS_DEF: WrapperDef = {
  * @param params.team - `number | string` — the `{team}` path segment.
  * @param params.season - `number | string` — the `{season}` path segment; optional.
  * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
- * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @returns `Promise<ParsedTables>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `skaters`, `goalies` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlClubStats({ team: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
@@ -734,8 +734,8 @@ const RIGHT_RAIL_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api-web.nhle.com/v1/gamecenter/{game_id}/right-rail`
  *
  * @param params.game_id - `number | string` — the `{game_id}` path segment.
- * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
+ * @returns `Promise<ParsedTables>` with `{ parsed: true }`: an object of tables (arrays of row objects) keyed by result set: `season_series`, `shots_by_period`, `team_game_stats`, `game_info`, `linescore_by_period`, `season_series_wins` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRightRail({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */

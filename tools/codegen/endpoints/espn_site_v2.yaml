@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@89c638a61b8c36f0f59159773260b8a0b998a5dc
+# VENDORED from sportsdataverse/sportsdataverse-py@79dd939371d245b0935362b491b03f50d63f8a8d
 # tools/codegen/endpoints/espn_site_v2.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/espn_site_v2.yaml; shared changes land in sdv-py first.
@@ -74,7 +74,7 @@ endpoints:
     query_key: limit
     type: int
     default: 500
-  parser: parse_items
+  parser: parse_transactions
 - short: conferences
   scope: universal
   path: /{sport}/{league}/groups
@@ -261,4 +261,4 @@ endpoints:
 - short: rankings
   scope: ncaa
   path: /{sport}/{league}/rankings
-  parser: parse_items
+  parser: parse_rankings

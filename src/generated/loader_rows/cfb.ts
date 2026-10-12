@@ -2659,7 +2659,7 @@ export interface LoadCfbAdvPassingRow {
   Comp?: number | bigint | null;
   /** Pass attempts recorded in the advanced box score. `Int64` */
   Att?: number | bigint | null;
-  /** Expected completions, summed from the per-play completion model. `Float64` */
+  /** Expected completions: the per-play completion probability (cp_game_state) summed over the passer's pass attempts, sacks excluded. `Float64` */
   xComp?: number | null;
   /** Passing yards from the advanced box score. `Float64` */
   Yds?: number | null;
@@ -2681,9 +2681,9 @@ export interface LoadCfbAdvPassingRow {
   Sck?: number | bigint | null;
   /** Completion percentage from the advanced box score. `Float64` */
   CompPct?: number | null;
-  /** Expected completion percentage from the per-play completion model. `Float64` */
+  /** Expected completion rate on a 0-to-1 scale: xComp divided by Att (sacks excluded). 0 when Att is 0. `Float64` */
   xCompPct?: number | null;
-  /** Completion percentage over expected -- actual minus modelled completion rate. `Float64` */
+  /** Completion rate over expected: CompPct minus xCompPct, both over the passer's attempts (sacks excluded), as a 0-to-1 difference. `Float64` */
   CPOE?: number | null;
   /** Air yards -- distance the ball travelled in the air, past the line of scrimmage, summed over the player's attempts/targets. `Int64` */
   AirYds?: number | bigint | null;
@@ -2837,7 +2837,7 @@ export interface LoadCfbAdvDefensiveRow {
   fumbles?: number | bigint | null;
   /** Interceptions the defense recorded, counted from plays ESPN types as Interception Return or Interception Return Touchdown. `Int64` */
   def_int?: number | bigint | null;
-  /** Percentage from 0 to 100 of the defense's scrimmage plays that occurred on drives ending in a punt, fumble, interception, or turnover on downs; the denominator is plays, not drives. `Float64` */
+  /** Percentage from 0 to 100 of opponents' drives against this defense, one row per drive, that ended in a punt, fumble, interception (ESPN's INT or INT TD) or turnover on downs. `Float64` */
   drive_stopped_rate?: number | null;
   /** Number of pass scrimmage plays the defense faced, the denominator behind havoc_total_pass_rate and sacks_rate. `Int64` */
   num_pass_plays?: number | bigint | null;
@@ -2905,19 +2905,19 @@ export interface LoadCfbAdvDrivesRow {
   pos_team_id?: string | null;
   /** Team name in possession at the start of the play (offense, kickoff-aware). `String` */
   pos_team?: string | null;
-  /** Sum of each drive's starting distance to the opponent end zone taken across every scrimmage play, so a drive contributes its available yards once per play rather than once per drive. `Float64` */
+  /** Sum over the team's drives of each drive's starting distance to the opponent end zone, one row per drive. A drive counts under ESPN's drive team (all its snaps when none are that team's), and a start of 0 counts as missing. `Float64` */
   drive_total_available_yards?: number | null;
-  /** Sum of ESPN's per-drive yardage repeated across every scrimmage play of that drive, so a drive contributes its yardage once per play. `Int64` */
+  /** Sum of ESPN's per-drive yardage over the team's drives, one row per drive. `Int64` */
   drive_total_gained_yards?: number | bigint | null;
-  /** Mean distance to the opponent end zone at drive start averaged over the team's scrimmage plays, exactly drive_total_available_yards divided by that play count. `Float64` */
+  /** Mean distance to the opponent end zone at drive start over the team's drives with a known start, one row per drive. `Float64` */
   avg_field_position?: number | null;
-  /** Mean of ESPN's per-drive offensivePlays taken over plays rather than over drives, which weights every drive by its own length. `Float64` */
+  /** Mean of ESPN's per-drive offensivePlays over the team's drives, one row per drive. `Float64` */
   plays_per_drive?: number | null;
-  /** Mean of ESPN's per-drive yardage taken over plays rather than over drives, exactly drive_total_gained_yards divided by the team's scrimmage-play count. `Float64` */
+  /** Mean of ESPN's per-drive yardage over the team's drives, one row per drive. `Float64` */
   yards_per_drive?: number | null;
-  /** Number of distinct ESPN drive ids on which the team ran at least one scrimmage play. `Int64` */
+  /** Number of distinct ESPN drive ids credited to the team: drives ESPN labels with the team on which it ran at least one scrimmage play. `Int64` */
   drives?: number | bigint | null;
-  /** Available-yards conversion as a percentage, 100 times drive_total_gained_yards over drive_total_available_yards with both sums play-weighted. `Float64` */
+  /** Available-yards conversion as a percentage from 0 to 100: each drive's yardage capped at its available yards, summed over the team's drives and divided by drive_total_available_yards. Null when no drive start is known. `Float64` */
   drive_total_gained_yards_rate?: number | null;
   /** ESPN game identifier. `Int64` (an id) */
   game_id?: string | null;
@@ -3045,9 +3045,9 @@ export interface LoadCfbAdvSituationalRow {
   EPA_late_down_per_play?: number | null;
   /** Success rate on late downs -- the share of those plays ESPN scored as successful. `Float64` */
   EPA_success_late_down_rate?: number | null;
-  /** Success rate on late downs on pass plays -- the share of those plays ESPN scored as successful. `Float64` */
+  /** Success rate on late-down pass plays: EPA_success_late_down_pass divided by late_down_pass. Null when the team ran no late-down pass play. `Float64` */
   EPA_success_late_down_pass_rate?: number | null;
-  /** Success rate on late downs on rush plays -- the share of those plays ESPN scored as successful. `Float64` */
+  /** Success rate on late-down rush plays: EPA_success_late_down_rush divided by late_down_rush. Null when the team ran no late-down rush play. `Float64` */
   EPA_success_late_down_rush_rate?: number | null;
   /** Share of the team's plays on late downs that were pass plays. `Float64` */
   late_down_pass_rate?: number | null;
@@ -3091,9 +3091,9 @@ export interface LoadCfbAdvSpecialistsRow {
   pos_team?: string | null;
   /** `String` */
   player_name?: string | null;
-  /** Number of field-goal attempts. `Int64` */
+  /** Field-goal attempts credited to this kicker, counted on field-goal attempts only (never kickoffs or PATs), under the kicking team. `Int64` */
   field_goals?: number | bigint | null;
-  /** Sum of the field-goal attempt distances parsed out of the play text; it stays at zero when no distance could be parsed from the narrative. `Int64` */
+  /** Sum of the kicker's field-goal attempt distances parsed out of the play text; it stays at zero when no distance could be parsed from the narrative. `Int64` */
   field_goals_yards?: number | bigint | null;
   /** Punts attempted. `Int64` */
   punts?: number | bigint | null;
@@ -3129,13 +3129,15 @@ export interface LoadCfbAdvTurnoverRow {
   st_turnovers_lost?: number | bigint | null;
   /** Interceptions thrown. `Int64` */
   Int?: number | bigint | null;
-  /** Fumbles lost. `Int64` */
+  /** Fumbles this team lost to the opponent on every play, special teams included: ESPN's team box fumblesLost where the game has one, else the play-by-play count (fumbles_lost_pbp). `Int64` */
   fumbles_lost?: number | bigint | null;
   /** Passes thrown by this offense that the opposing defense broke up; it equals the opponent's row in the advanced defensive table exactly. `Int64` */
   pass_breakups?: number | bigint | null;
-  /** Team total fumbles. `Int64` */
+  /** Passes thrown by this offense that the opposing defense defended, from ESPN's box score (the defense's passesDefended, which excludes interceptions, plus Int). Null where ESPN's box has no passesDefended, mostly before 2023. `Int64` */
+  passes_defended?: number | bigint | null;
+  /** Fumbles by this team on every play, special teams included, charged to the team that fumbled (a returner's muffed punt counts against the return team): the same plays fumbles_lost counts. `Int64` */
   total_fumbles?: number | bigint | null;
-  /** Team fumbles recovered. `Int64` */
+  /** Of total_fumbles, the ones this team recovered itself. `Int64` */
   fumbles_recovered?: number | bigint | null;
   /** ESPN team id. `Int64` (an id) */
   team_id?: string | null;
@@ -3147,7 +3149,7 @@ export interface LoadCfbAdvTurnoverRow {
   fumbles_lost_pbp?: number | bigint | null;
   /** CONSTANT: true on every published row. It records that the row was built from the ESPN feed rather than an alternate provider, and no other provider is currently used. `Boolean` */
   espn_sourced?: boolean | null;
-  /** Turnover expectation for this team, computed as half its total fumbles plus 0.22 times the sum of its pass breakups and interceptions. `Float64` */
+  /** Turnover expectation for this team, computed as `0.5 * total_fumbles + 0.22 * passes_defended` where passes_defended is present, otherwise `0.5 * total_fumbles + 0.22 * (pass_breakups + Int)`. `Float64` */
   expected_turnovers?: number | null;
   /** The opponent's expected_turnovers minus this team's, so positive means the team was expected to win the turnover battle. `Float64` */
   expected_turnover_margin?: number | null;
@@ -3291,7 +3293,7 @@ export interface LoadCfbPassingRow {
   EPAplay?: number | null;
   /** Total yards gained on the drive. `Float64` */
   yards?: number | null;
-  /** Success rate across the team plays. `Float64` */
+  /** Success rate over the passer's dropbacks (completions, incompletions, sacks and interceptions), like EPAplay. A sack keeps its own success value; an interception is never a success. `Float64` */
   success?: number | null;
   /** Completed passes. `Float64` */
   comp?: number | null;
@@ -3329,6 +3331,18 @@ export interface LoadCfbPassingRow {
   sack_adj_yards?: number | null;
   /** Yards per dropback. `Float64` */
   yardsdropback?: number | null;
+  /** Games with at least one dropback by the passer: the sample the dispersion columns (EPAplay_sd, EPAplay_p10, EPAplay_p90, boom_rate, bust_rate) are computed over. Those five are null below 3 games. `Int64` */
+  dispersion_games?: number | bigint | null;
+  /** Population standard deviation (ddof=0) of the passer's per-game EPA per play (a game's EPA summed over the passer's dropbacks, divided by those dropbacks), across dispersion_games. Null when dispersion_games is below 3. `Float64` */
+  EPAplay_sd?: number | null;
+  /** 10th percentile (the floor) of the passer's per-game EPA per play (a game's EPA summed over the passer's dropbacks, divided by those dropbacks), across dispersion_games; linear interpolation (R type 7). Null when dispersion_games is below 3. `Float64` */
+  EPAplay_p10?: number | null;
+  /** 90th percentile (the ceiling) of the passer's per-game EPA per play (a game's EPA summed over the passer's dropbacks, divided by those dropbacks), across dispersion_games; linear interpolation (R type 7). Null when dispersion_games is below 3. `Float64` */
+  EPAplay_p90?: number | null;
+  /** Share of dispersion_games in which the passer's EPA per play was more than one EPAplay_sd ABOVE their own unweighted per-game mean (not the play-weighted EPAplay). Strict, so a player whose games are all equal is neither a boom nor a bust. Null when dispersion_games is below 3. `Float64` */
+  boom_rate?: number | null;
+  /** Share of dispersion_games in which the passer's EPA per play was more than one EPAplay_sd BELOW their own unweighted per-game mean (not the play-weighted EPAplay). Strict, so a player whose games are all equal is neither a boom nor a bust. Null when dispersion_games is below 3. `Float64` */
+  bust_rate?: number | null;
   /** Rank of the passer's total EPA summed over every play among passers clearing the leaderboard minimum of 14 dropbacks per team game, where 1 is best. `Float64` */
   TEPA_rank?: number | null;
   /** Rank of the passer's EPA generated per game among passers clearing the leaderboard minimum of 14 dropbacks per team game, where 1 is best. `Float64` */
@@ -3359,6 +3373,8 @@ export interface LoadCfbPassingRow {
   pass_int_rank?: number | null;
   /** Ordinal rank of the player's times sacked among qualifying players that season; ties share a fractional rank. `Float64` */
   sacked_rank?: number | null;
+  /** Rank of the passer's boom rate (share of games more than one standard deviation above their own per-game EPA per play) among passers clearing the leaderboard minimum of 14 dropbacks per team game, where 1 is best. `Float64` */
+  boom_rate_rank?: number | null;
   /** Percentile position (0-100) of the player's total EPA among qualifying players that season. `Float64` */
   TEPA_pct?: number | null;
   /** Percentile position (0-100) of the player's EPA per game among qualifying players that season. `Float64` */
@@ -3389,13 +3405,15 @@ export interface LoadCfbPassingRow {
   pass_int_pct?: number | null;
   /** Percentile position (0-100) of the player's times sacked among qualifying players that season. `Float64` */
   sacked_pct?: number | null;
+  /** Percentile (0-100) of boom rate (share of games more than one standard deviation above their own per-game EPA per play) among passers clearing the leaderboard minimum of 14 dropbacks per team game, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, and null rows are excluded from the denominator. `Float64` */
+  boom_rate_pct?: number | null;
   /** Sample size behind EPAplay: the number of dropbacks (completions, incompletions, sacks and interceptions) the passer's value is computed over. 0 where EPAplay is null. `Int64` */
   EPAplay_n?: number | bigint | null;
   /** Sample size behind yardsdropback: the number of dropbacks (completions, incompletions, sacks and interceptions) the passer's value is computed over. 0 where yardsdropback is null. `Int64` */
   yardsdropback_n?: number | bigint | null;
   /** Sample size behind comppct: the number of throws (including interceptions, excluding sacks) the passer's value is computed over. 0 where comppct is null. `Int64` */
   comppct_n?: number | bigint | null;
-  /** Sample size behind success: the number of completions and incompletions (interceptions and sacks excluded) the passer's value is computed over. 0 where success is null. nfl-data's nfl_passing table counts its success_n over dropbacks instead. `Int64` */
+  /** Sample size behind success: the number of dropbacks (completions, incompletions, sacks and interceptions) the passer's value is computed over. 0 where success is null. `Int64` */
   success_n?: number | bigint | null;
   /** Sample size behind yardsplay: the number of completions and incompletions (interceptions and sacks excluded) the passer's value is computed over. 0 where yardsplay is null. nfl-data's nfl_passing table counts its yardsplay_n over pass attempts instead: interceptions included, sacks still excluded. `Int64` */
   yardsplay_n?: number | bigint | null;
@@ -3443,6 +3461,8 @@ export interface LoadCfbPassingRow {
   pass_int_pos_pct?: number | null;
   /** Percentile (0-100) of times sacked among passers clearing the leaderboard minimum of 14 dropbacks per team game at the same position group (position_group), where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, when position_group is null, or when fewer than 10 qualifiers in the group have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   sacked_pos_pct?: number | null;
+  /** Percentile (0-100) of boom rate (share of games more than one standard deviation above their own per-game EPA per play) among passers clearing the leaderboard minimum of 14 dropbacks per team game at the same position group (position_group), where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, when position_group is null, or when fewer than 10 qualifiers in the group have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  boom_rate_pos_pct?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }
@@ -3467,7 +3487,7 @@ export interface LoadCfbPercentilesRow {
   late_down_success?: number | null;
   /** Value of success rate across the team plays at the percentile this row reports. `Float64` */
   success?: number | null;
-  /** Value of yards per play at the percentile this row reports. `Float64` */
+  /** Value of yards per play (an interception counts as 0 yards) at the percentile this row reports. `Float64` */
   yardsplay?: number | null;
   /** Value of dropbacks taken by the passer at the percentile this row reports. `Float64` */
   dropbacks?: number | null;
@@ -3489,7 +3509,7 @@ export interface LoadCfbPercentilesRow {
   third_down_success?: number | null;
   /** Value of success rate in the red zone at the percentile this row reports. `Float64` */
   red_zone_success?: number | null;
-  /** Value of stuffed-play rate at the percentile this row reports. `Float64` */
+  /** Value of run-stuff rate (the share of rushes stopped for 0 or fewer yards) at the percentile this row reports. `Float64` */
   play_stuffed?: number | null;
   /** Value of EPA per play excluding explosive plays at the percentile this row reports. `Float64` */
   nonExplosiveEpaPerPlay?: number | null;
@@ -3499,7 +3519,7 @@ export interface LoadCfbPercentilesRow {
   yardsrush?: number | null;
   /** Value of line yards per rush at the percentile this row reports. `Float64` */
   lineyards?: number | null;
-  /** Value of opportunity-run rate at the percentile this row reports. `Float64` */
+  /** Value of opportunity-run rate (the share of rushes gaining 4 or more yards) at the percentile this row reports. `Float64` */
   opportunity_run?: number | null;
   /** Value of average yards to go on third down at the percentile this row reports. `Float64` */
   third_down_distance?: number | null;
@@ -3523,7 +3543,7 @@ export interface LoadCfbReceivingRow {
   player_id?: string | null;
   /** Display name of the targeted receiver -- the FIRST participant in that role on the play. `String` */
   receiver_player_name?: string | null;
-  /** Total qualifying passing plays included in the WEPA calculation. `UInt32` */
+  /** Attributed targets: pass plays naming the receiver as the target or the catcher. `UInt32` */
   plays?: number | null;
   /** Number of games included in the ATS summary. `UInt32` */
   games?: number | null;
@@ -3531,15 +3551,15 @@ export interface LoadCfbReceivingRow {
   team_games?: number | null;
   /** Total EPA summed over every play. `Float64` */
   TEPA?: number | null;
-  /** EPA generated per play. `Float64` */
+  /** EPA per target. Null, with any _rank, _pct and _pos_pct, in seasons where more than 30% of incompletions name no receiver (2021-2024): those throws drop out of every receiver's targets, so per-target rates would read high. `Float64` */
   EPAplay?: number | null;
   /** Total yards gained on the drive. `Int64` */
   yards?: number | bigint | null;
-  /** Success rate across the team plays. `Float64` */
+  /** Success rate over the receiver's targets. Null, with any _rank, _pct and _pos_pct, in seasons where more than 30% of incompletions name no receiver (2021-2024): those throws drop out of every receiver's targets, so per-target rates would read high. `Float64` */
   success?: number | null;
   /** Completed passes. `UInt32` */
   comp?: number | null;
-  /** `UInt32` */
+  /** Attributed targets: passes ESPN charts to this receiver. An incompletion that names no receiver counts for nobody, so this undercounts real targets: 22-24% of incompletions name no receiver in 2014-2020, 42-77% in 2021-2024 and under 10% from 2025. `UInt32` */
   targets?: number | null;
   /** Passing touchdowns thrown. `Float64` */
   passing_td?: number | null;
@@ -3549,12 +3569,24 @@ export interface LoadCfbReceivingRow {
   playsgame?: number | null;
   /** EPA generated per game. `Float64` */
   EPAgame?: number | null;
-  /** Yards per play. `Float64` */
+  /** Yards per target. Null, with any _rank, _pct and _pos_pct, in seasons where more than 30% of incompletions name no receiver (2021-2024): those throws drop out of every receiver's targets, so per-target rates would read high. `Float64` */
   yardsplay?: number | null;
   /** Yards per game. `Float64` */
   yardsgame?: number | null;
-  /** Catch rate on a 0-to-1 scale, receptions divided by targets for the season. `Float64` */
+  /** Catch rate on a 0-to-1 scale, receptions divided by targets for the season. Null, with any _rank, _pct and _pos_pct, in seasons where more than 30% of incompletions name no receiver (2021-2024): those throws drop out of every receiver's targets, so per-target rates would read high. `Float64` */
   catchpct?: number | null;
+  /** Games with at least one target by the receiver: the sample the dispersion columns (EPAplay_sd, EPAplay_p10, EPAplay_p90, boom_rate, bust_rate) are computed over. Those five are null below 3 games. `Int64` */
+  dispersion_games?: number | bigint | null;
+  /** Population standard deviation (ddof=0) of the receiver's per-game EPA per play (a game's EPA summed over the receiver's targets, divided by those targets), across dispersion_games. Null when dispersion_games is below 3. Null, with any _rank, _pct and _pos_pct, in seasons where more than 30% of incompletions name no receiver (2021-2024): those throws drop out of every receiver's targets, so per-target rates would read high. `Float64` */
+  EPAplay_sd?: number | null;
+  /** 10th percentile (the floor) of the receiver's per-game EPA per play (a game's EPA summed over the receiver's targets, divided by those targets), across dispersion_games; linear interpolation (R type 7). Null when dispersion_games is below 3. Null, with any _rank, _pct and _pos_pct, in seasons where more than 30% of incompletions name no receiver (2021-2024): those throws drop out of every receiver's targets, so per-target rates would read high. `Float64` */
+  EPAplay_p10?: number | null;
+  /** 90th percentile (the ceiling) of the receiver's per-game EPA per play (a game's EPA summed over the receiver's targets, divided by those targets), across dispersion_games; linear interpolation (R type 7). Null when dispersion_games is below 3. Null, with any _rank, _pct and _pos_pct, in seasons where more than 30% of incompletions name no receiver (2021-2024): those throws drop out of every receiver's targets, so per-target rates would read high. `Float64` */
+  EPAplay_p90?: number | null;
+  /** Share of dispersion_games in which the receiver's EPA per play was more than one EPAplay_sd ABOVE their own unweighted per-game mean (not the play-weighted EPAplay). Strict, so a player whose games are all equal is neither a boom nor a bust. Null when dispersion_games is below 3. Null, with any _rank, _pct and _pos_pct, in seasons where more than 30% of incompletions name no receiver (2021-2024): those throws drop out of every receiver's targets, so per-target rates would read high. `Float64` */
+  boom_rate?: number | null;
+  /** Share of dispersion_games in which the receiver's EPA per play was more than one EPAplay_sd BELOW their own unweighted per-game mean (not the play-weighted EPAplay). Strict, so a player whose games are all equal is neither a boom nor a bust. Null when dispersion_games is below 3. Null, with any _rank, _pct and _pos_pct, in seasons where more than 30% of incompletions name no receiver (2021-2024): those throws drop out of every receiver's targets, so per-target rates would read high. `Float64` */
+  bust_rate?: number | null;
   /** Rank of the receiver's total EPA summed over every play among receivers clearing the leaderboard minimum of 1.875 targets per team game, where 1 is best. `Float64` */
   TEPA_rank?: number | null;
   /** Rank of the receiver's EPA generated per game among receivers clearing the leaderboard minimum of 1.875 targets per team game, where 1 is best. `Float64` */
@@ -3579,6 +3611,8 @@ export interface LoadCfbReceivingRow {
   yardsplay_rank?: number | null;
   /** Rank of the receiver's yards per game among receivers clearing the leaderboard minimum of 1.875 targets per team game, where 1 is best. `Float64` */
   yardsgame_rank?: number | null;
+  /** Rank of the receiver's boom rate (share of games more than one standard deviation above their own per-game EPA per play) among receivers clearing the leaderboard minimum of 1.875 targets per team game, where 1 is best. `Float64` */
+  boom_rate_rank?: number | null;
   /** Percentile position (0-100) of the player's total EPA among qualifying players that season. `Float64` */
   TEPA_pct?: number | null;
   /** Percentile position (0-100) of the player's EPA per game among qualifying players that season. `Float64` */
@@ -3603,6 +3637,8 @@ export interface LoadCfbReceivingRow {
   yardsplay_pct?: number | null;
   /** Percentile position (0-100) of the player's yards per game among qualifying players that season. `Float64` */
   yardsgame_pct?: number | null;
+  /** Percentile (0-100) of boom rate (share of games more than one standard deviation above their own per-game EPA per play) among receivers clearing the leaderboard minimum of 1.875 targets per team game, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, and null rows are excluded from the denominator. `Float64` */
+  boom_rate_pct?: number | null;
   /** Sample size behind EPAplay: the number of targets the receiver's value is computed over. 0 where EPAplay is null. `Int64` */
   EPAplay_n?: number | bigint | null;
   /** Sample size behind success: the number of targets the receiver's value is computed over. 0 where success is null. `Int64` */
@@ -3645,6 +3681,8 @@ export interface LoadCfbReceivingRow {
   yardsplay_pos_pct?: number | null;
   /** Percentile (0-100) of yards per game among receivers clearing the leaderboard minimum of 1.875 targets per team game at the same position group (position_group), where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, when position_group is null, or when fewer than 10 qualifiers in the group have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_pos_pct?: number | null;
+  /** Percentile (0-100) of boom rate (share of games more than one standard deviation above their own per-game EPA per play) among receivers clearing the leaderboard minimum of 1.875 targets per team game at the same position group (position_group), where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, when position_group is null, or when fewer than 10 qualifiers in the group have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  boom_rate_pos_pct?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }
@@ -3691,6 +3729,34 @@ export interface LoadCfbRushingRow {
   yardsplay?: number | null;
   /** Yards per game. `Float64` */
   yardsgame?: number | null;
+  /** Games with at least one carry by the rusher: the sample the dispersion columns (EPAplay_sd, EPAplay_p10, EPAplay_p90, boom_rate, bust_rate) are computed over. Those five are null below 3 games. `Int64` */
+  dispersion_games?: number | bigint | null;
+  /** Population standard deviation (ddof=0) of the rusher's per-game EPA per play (a game's EPA summed over the rusher's carries, divided by those carries), across dispersion_games. Null when dispersion_games is below 3. `Float64` */
+  EPAplay_sd?: number | null;
+  /** 10th percentile (the floor) of the rusher's per-game EPA per play (a game's EPA summed over the rusher's carries, divided by those carries), across dispersion_games; linear interpolation (R type 7). Null when dispersion_games is below 3. `Float64` */
+  EPAplay_p10?: number | null;
+  /** 90th percentile (the ceiling) of the rusher's per-game EPA per play (a game's EPA summed over the rusher's carries, divided by those carries), across dispersion_games; linear interpolation (R type 7). Null when dispersion_games is below 3. `Float64` */
+  EPAplay_p90?: number | null;
+  /** Share of dispersion_games in which the rusher's EPA per play was more than one EPAplay_sd ABOVE their own unweighted per-game mean (not the play-weighted EPAplay). Strict, so a player whose games are all equal is neither a boom nor a bust. Null when dispersion_games is below 3. `Float64` */
+  boom_rate?: number | null;
+  /** Share of dispersion_games in which the rusher's EPA per play was more than one EPAplay_sd BELOW their own unweighted per-game mean (not the play-weighted EPAplay). Strict, so a player whose games are all equal is neither a boom nor a bust. Null when dispersion_games is below 3. `Float64` */
+  bust_rate?: number | null;
+  /** Share of the rusher's carries that gained 4 or fewer yards, losses included (the line-yards tier of Football Outsiders' cut-points), on the carry's own yds_rushed (penalty yardage excluded), over carries with a recorded yds_rushed; line_yards_share + second_level_share + open_field_share = 1. `Float64` */
+  line_yards_share?: number | null;
+  /** Share of the rusher's carries that gained 5 to 10 yards (the second-level tier), on the carry's own yds_rushed (penalty yardage excluded), over carries with a recorded yds_rushed; line_yards_share + second_level_share + open_field_share = 1. `Float64` */
+  second_level_share?: number | null;
+  /** Share of the rusher's carries that gained 11 or more yards (the open-field tier), on the carry's own yds_rushed (penalty yardage excluded), over carries with a recorded yds_rushed; line_yards_share + second_level_share + open_field_share = 1. `Float64` */
+  open_field_share?: number | null;
+  /** Share of the rusher's carries for 0 or fewer yards, over carries with a recorded yds_rushed. A stuff is also a line-yards-tier carry. `Float64` */
+  stuff_rate?: number | null;
+  /** EPA per carry on the rusher's carries with the offense within 8 points either way at the snap (pos_score_diff_start, the margin before the play). Null when there were none. `Float64` */
+  EPAplay_one_score?: number | null;
+  /** Sample size behind EPAplay_one_score: the number of carries with the offense within 8 points either way at the snap the rusher's value is computed over. 0 where EPAplay_one_score is null. `Int64` */
+  EPAplay_one_score_n?: number | bigint | null;
+  /** EPA per carry on the rusher's carries with the offense more than 8 points ahead or behind at the snap (pos_score_diff_start). Null when there were none. `Float64` */
+  EPAplay_not_one_score?: number | null;
+  /** Sample size behind EPAplay_not_one_score: the number of carries with the offense more than 8 points ahead or behind at the snap the rusher's value is computed over. 0 where EPAplay_not_one_score is null. `Int64` */
+  EPAplay_not_one_score_n?: number | bigint | null;
   /** Rank of the rusher's total EPA summed over every play among rushers clearing the leaderboard minimum of 6.25 plays per team game, where 1 is best. `Float64` */
   TEPA_rank?: number | null;
   /** Rank of the rusher's EPA generated per game among rushers clearing the leaderboard minimum of 6.25 plays per team game, where 1 is best. `Float64` */
@@ -3711,6 +3777,10 @@ export interface LoadCfbRushingRow {
   yardsplay_rank?: number | null;
   /** Rank of the rusher's yards per game among rushers clearing the leaderboard minimum of 6.25 plays per team game, where 1 is best. `Float64` */
   yardsgame_rank?: number | null;
+  /** Rank of the rusher's boom rate (share of games more than one standard deviation above their own per-game EPA per play) among rushers clearing the leaderboard minimum of 6.25 plays per team game, where 1 is best. `Float64` */
+  boom_rate_rank?: number | null;
+  /** Rank of the rusher's stuff rate (share of carries for 0 or fewer yards) among rushers clearing the leaderboard minimum of 6.25 plays per team game, where 1 is best. `Float64` */
+  stuff_rate_rank?: number | null;
   /** Percentile position (0-100) of the player's total EPA among qualifying players that season. `Float64` */
   TEPA_pct?: number | null;
   /** Percentile position (0-100) of the player's EPA per game among qualifying players that season. `Float64` */
@@ -3731,6 +3801,10 @@ export interface LoadCfbRushingRow {
   yardsplay_pct?: number | null;
   /** Percentile position (0-100) of the player's yards per game among qualifying players that season. `Float64` */
   yardsgame_pct?: number | null;
+  /** Percentile (0-100) of boom rate (share of games more than one standard deviation above their own per-game EPA per play) among rushers clearing the leaderboard minimum of 6.25 plays per team game, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, and null rows are excluded from the denominator. `Float64` */
+  boom_rate_pct?: number | null;
+  /** Percentile (0-100) of stuff rate (share of carries for 0 or fewer yards) among rushers clearing the leaderboard minimum of 6.25 plays per team game, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, and null rows are excluded from the denominator. `Float64` */
+  stuff_rate_pct?: number | null;
   /** Sample size behind EPAplay: the number of carries the rusher's value is computed over. 0 where EPAplay is null. `Int64` */
   EPAplay_n?: number | bigint | null;
   /** Sample size behind success: the number of carries the rusher's value is computed over. 0 where success is null. `Int64` */
@@ -3767,6 +3841,10 @@ export interface LoadCfbRushingRow {
   yardsplay_pos_pct?: number | null;
   /** Percentile (0-100) of yards per game among rushers clearing the leaderboard minimum of 6.25 plays per team game at the same position group (position_group), where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, when position_group is null, or when fewer than 10 qualifiers in the group have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_pos_pct?: number | null;
+  /** Percentile (0-100) of boom rate (share of games more than one standard deviation above their own per-game EPA per play) among rushers clearing the leaderboard minimum of 6.25 plays per team game at the same position group (position_group), where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, when position_group is null, or when fewer than 10 qualifiers in the group have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  boom_rate_pos_pct?: number | null;
+  /** Percentile (0-100) of stuff rate (share of carries for 0 or fewer yards) among rushers clearing the leaderboard minimum of 6.25 plays per team game at the same position group (position_group), where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, when position_group is null, or when fewer than 10 qualifiers in the group have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  stuff_rate_pos_pct?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }
@@ -3795,7 +3873,7 @@ export interface LoadCfbTeamSummariesRow {
   EPAplay_off_n?: number | bigint | null;
   /** Sample size behind yardsplay_off: the number of plays it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   yardsplay_off_n?: number | bigint | null;
-  /** Sample size behind play_stuffed_off: the number of plays it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind play_stuffed_off: the number of rushes it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   play_stuffed_off_n?: number | bigint | null;
   /** Sample size behind success_off: the number of plays it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   success_off_n?: number | bigint | null;
@@ -3813,7 +3891,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_off_n?: number | bigint | null;
   /** Sample size behind line_yards_off: the number of rushes it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   line_yards_off_n?: number | bigint | null;
-  /** Sample size behind opportunity_rate_off: the number of plays it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind opportunity_rate_off: the number of rushes it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   opportunity_rate_off_n?: number | bigint | null;
   /** Plays run, with the team on offense. `UInt32` */
   plays_off?: number | null;
@@ -3829,11 +3907,11 @@ export interface LoadCfbTeamSummariesRow {
   TEPA_off?: number | null;
   /** EPA per play, with the team on offense. `Float64` */
   EPAplay_off?: number | null;
-  /** Total yards gained, with the team on offense. `Int64` */
+  /** Total yards gained (an interception counts as 0 yards), with the team on offense. `Int64` */
   yards_off?: number | bigint | null;
-  /** Yards gained per play, with the team on offense. `Float64` */
+  /** Yards gained per play (an interception counts as 0 yards), with the team on offense. `Float64` */
   yardsplay_off?: number | null;
-  /** Stuffed-play rate -- the share of plays carrying the stuffed flag, with the team on offense. `Float64` */
+  /** Run-stuff rate -- the share of rushes stopped for 0 or fewer yards, with the team on offense. `Float64` */
   play_stuffed_off?: number | null;
   /** Success rate -- the share of plays flagged as successful by EPA, with the team on offense. `Float64` */
   success_off?: number | null;
@@ -3851,7 +3929,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_off?: number | null;
   /** Average line yards credited to the offensive line on rushes, with the team on offense. `Float64` */
   line_yards_off?: number | null;
-  /** Opportunity rate -- opportunity-flagged rushes as a share of all plays, with the team on offense. `Float64` */
+  /** Opportunity rate -- the share of rushes gaining 4 or more yards, with the team on offense. `Float64` */
   opportunity_rate_off?: number | null;
   /** Sample size behind playsgame_off: the number of games it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   playsgame_off_n?: number | bigint | null;
@@ -3887,57 +3965,57 @@ export interface LoadCfbTeamSummariesRow {
   yardsdrive_off?: number | null;
   /** Plays run per drive, with the team on offense. `Float64` */
   playsdrive_off?: number | null;
-  /** National rank of the team's plays run per game with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's plays run per game with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsgame_off_rank?: number | null;
-  /** National rank of the team's total EPA summed over every play with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's total EPA summed over every play with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_off_rank?: number | null;
-  /** National rank of the team's EPA per game (total EPA divided by games) with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game (total EPA divided by games) with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_off_rank?: number | null;
-  /** National rank of the team's EPA per play with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_off_rank?: number | null;
-  /** National rank of the team's EPA per drive (total EPA divided by drives) with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per drive (total EPA divided by drives) with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_off_rank?: number | null;
-  /** National rank of the team's EPA per early-down play with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per early-down play with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   early_down_EPA_off_rank?: number | null;
-  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_off_rank?: number | null;
-  /** National rank of the team's total yards gained with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's total yards gained (an interception counts as 0 yards) with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yards_off_rank?: number | null;
-  /** National rank of the team's yards gained per play with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per play (an interception counts as 0 yards) with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_off_rank?: number | null;
-  /** National rank of the team's yards gained per game with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per game with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsgame_off_rank?: number | null;
-  /** National rank of the team's drives per game with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's drives per game with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drivesgame_off_rank?: number | null;
-  /** National rank of the team's yards gained per drive with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per drive with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsdrive_off_rank?: number | null;
-  /** National rank of the team's plays run per drive with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's plays run per drive with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsdrive_off_rank?: number | null;
-  /** National rank of the team's stuffed-play rate -- the share of plays carrying the stuffed flag with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's run-stuff rate -- the share of rushes stopped for 0 or fewer yards with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   play_stuffed_off_rank?: number | null;
-  /** National rank of the team's success rate on red-zone plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on red-zone plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   red_zone_success_off_rank?: number | null;
-  /** National rank of the team's success rate on third-down plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on third-down plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_success_off_rank?: number | null;
-  /** National rank of the team's success rate on late-down plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on late-down plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   late_down_success_off_rank?: number | null;
-  /** National rank of the team's average yards to go on third down with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average yards to go on third down with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_distance_off_rank?: number | null;
-  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_off_rank?: number | null;
-  /** National rank of turnovers_off, where 1 is best (fewest giveaways per game). `Float64` */
+  /** National rank of turnovers_off, where 1 is best (fewest giveaways per game). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   turnovers_off_rank?: number | null;
-  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_off_rank?: number | null;
-  /** National rank of the team's share of plays that were pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   passrate_off_rank?: number | null;
-  /** National rank of the team's share of plays that were rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   rushrate_off_rank?: number | null;
-  /** National rank of the team's EPA per play with explosive plays excluded with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with explosive plays excluded with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   nonExplosiveEpaPerPlay_off_rank?: number | null;
-  /** National rank of the team's average line yards credited to the offensive line on rushes with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average line yards credited to the offensive line on rushes with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   line_yards_off_rank?: number | null;
-  /** National rank of the team's opportunity rate -- opportunity-flagged rushes as a share of all plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's opportunity rate -- the share of rushes gaining 4 or more yards with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   opportunity_rate_off_rank?: number | null;
   /** Sample size behind passrate_def: the number of plays it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   passrate_def_n?: number | bigint | null;
@@ -3951,7 +4029,7 @@ export interface LoadCfbTeamSummariesRow {
   EPAplay_def_n?: number | bigint | null;
   /** Sample size behind yardsplay_def: the number of plays it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   yardsplay_def_n?: number | bigint | null;
-  /** Sample size behind play_stuffed_def: the number of plays it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind play_stuffed_def: the number of rushes it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   play_stuffed_def_n?: number | bigint | null;
   /** Sample size behind success_def: the number of plays it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   success_def_n?: number | bigint | null;
@@ -3969,7 +4047,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_def_n?: number | bigint | null;
   /** Sample size behind line_yards_def: the number of rushes it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   line_yards_def_n?: number | bigint | null;
-  /** Sample size behind opportunity_rate_def: the number of plays it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind opportunity_rate_def: the number of rushes it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   opportunity_rate_def_n?: number | bigint | null;
   /** Plays run, with the team on defense (i.e. allowed to opponents). `UInt32` */
   plays_def?: number | null;
@@ -3985,11 +4063,11 @@ export interface LoadCfbTeamSummariesRow {
   TEPA_def?: number | null;
   /** EPA per play, with the team on defense (i.e. allowed to opponents). `Float64` */
   EPAplay_def?: number | null;
-  /** Total yards gained, with the team on defense (i.e. allowed to opponents). `Int64` */
+  /** Total yards gained (an interception counts as 0 yards), with the team on defense (i.e. allowed to opponents). `Int64` */
   yards_def?: number | bigint | null;
-  /** Yards gained per play, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Yards gained per play (an interception counts as 0 yards), with the team on defense (i.e. allowed to opponents). `Float64` */
   yardsplay_def?: number | null;
-  /** Stuffed-play rate -- the share of plays carrying the stuffed flag, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Run-stuff rate -- the share of rushes stopped for 0 or fewer yards, with the team on defense (i.e. allowed to opponents). `Float64` */
   play_stuffed_def?: number | null;
   /** Success rate -- the share of plays flagged as successful by EPA, with the team on defense (i.e. allowed to opponents). `Float64` */
   success_def?: number | null;
@@ -4007,7 +4085,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_def?: number | null;
   /** Average line yards credited to the offensive line on rushes, with the team on defense (i.e. allowed to opponents). `Float64` */
   line_yards_def?: number | null;
-  /** Opportunity rate -- opportunity-flagged rushes as a share of all plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Opportunity rate -- the share of rushes gaining 4 or more yards, with the team on defense (i.e. allowed to opponents). `Float64` */
   opportunity_rate_def?: number | null;
   /** Sample size behind playsgame_def: the number of games it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   playsgame_def_n?: number | bigint | null;
@@ -4043,57 +4121,57 @@ export interface LoadCfbTeamSummariesRow {
   yardsdrive_def?: number | null;
   /** Plays run per drive, with the team on defense (i.e. allowed to opponents). `Float64` */
   playsdrive_def?: number | null;
-  /** National rank of the team's plays run per game with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's plays run per game with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsgame_def_rank?: number | null;
-  /** National rank of the team's total EPA summed over every play with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's total EPA summed over every play with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_def_rank?: number | null;
-  /** National rank of the team's EPA per game (total EPA divided by games) with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game (total EPA divided by games) with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_def_rank?: number | null;
-  /** National rank of the team's EPA per play with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_def_rank?: number | null;
-  /** National rank of the team's EPA per drive (total EPA divided by drives) with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per drive (total EPA divided by drives) with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_def_rank?: number | null;
-  /** National rank of the team's EPA per early-down play with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per early-down play with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   early_down_EPA_def_rank?: number | null;
-  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_def_rank?: number | null;
-  /** National rank of the team's total yards gained with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's total yards gained (an interception counts as 0 yards) with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yards_def_rank?: number | null;
-  /** National rank of the team's yards gained per play with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per play (an interception counts as 0 yards) with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_def_rank?: number | null;
-  /** National rank of the team's yards gained per game with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per game with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsgame_def_rank?: number | null;
-  /** National rank of the team's drives per game with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's drives per game with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drivesgame_def_rank?: number | null;
-  /** National rank of the team's yards gained per drive with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per drive with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsdrive_def_rank?: number | null;
-  /** National rank of the team's plays run per drive with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's plays run per drive with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsdrive_def_rank?: number | null;
-  /** National rank of the team's stuffed-play rate -- the share of plays carrying the stuffed flag with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's run-stuff rate -- the share of rushes stopped for 0 or fewer yards with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   play_stuffed_def_rank?: number | null;
-  /** National rank of the team's success rate on red-zone plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on red-zone plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   red_zone_success_def_rank?: number | null;
-  /** National rank of the team's success rate on third-down plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on third-down plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_success_def_rank?: number | null;
-  /** National rank of the team's success rate on late-down plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on late-down plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   late_down_success_def_rank?: number | null;
-  /** National rank of the team's average yards to go on third down with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average yards to go on third down with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_distance_def_rank?: number | null;
-  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_def_rank?: number | null;
-  /** National rank of turnovers_def, where 1 is best (most takeaways per game). `Float64` */
+  /** National rank of turnovers_def, where 1 is best (most takeaways per game). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   turnovers_def_rank?: number | null;
-  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_def_rank?: number | null;
-  /** National rank of the team's share of plays that were pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   passrate_def_rank?: number | null;
-  /** National rank of the team's share of plays that were rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   rushrate_def_rank?: number | null;
-  /** National rank of the team's EPA per play with explosive plays excluded with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with explosive plays excluded with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   nonExplosiveEpaPerPlay_def_rank?: number | null;
-  /** National rank of the team's average line yards credited to the offensive line on rushes with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average line yards credited to the offensive line on rushes with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   line_yards_def_rank?: number | null;
-  /** National rank of the team's opportunity rate -- opportunity-flagged rushes as a share of all plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's opportunity rate -- the share of rushes gaining 4 or more yards with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   opportunity_rate_def_rank?: number | null;
   /** Margin in total EPA summed over every play: the team's offensive value minus the value it allowed on defense. `Float64` */
   TEPA_margin?: number | null;
@@ -4105,19 +4183,19 @@ export interface LoadCfbTeamSummariesRow {
   EPAgame_margin?: number | null;
   /** Margin in success rate -- the share of plays flagged as successful by EPA: the team's offensive value minus the value it allowed on defense. `Float64` */
   success_margin?: number | null;
-  /** Margin in yards gained per play: the team's offensive value minus the value it allowed on defense. `Float64` */
+  /** Margin in yards gained per play (an interception counts as 0 yards): the team's offensive value minus the value it allowed on defense. `Float64` */
   yardsplay_margin?: number | null;
-  /** Margin in total EPA summed over every play: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in total EPA summed over every play: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_margin_rank?: number | null;
-  /** Margin in EPA per play: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per play: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_margin_rank?: number | null;
-  /** Margin in EPA per drive (total EPA divided by drives): the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per drive (total EPA divided by drives): the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_margin_rank?: number | null;
-  /** Margin in EPA per game (total EPA divided by games): the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per game (total EPA divided by games): the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_margin_rank?: number | null;
-  /** Margin in success rate -- the share of plays flagged as successful by EPA: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in success rate -- the share of plays flagged as successful by EPA: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_margin_rank?: number | null;
-  /** Margin in yards gained per play: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in yards gained per play (an interception counts as 0 yards): the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_margin_rank?: number | null;
   /** Margin in explosive-play rate -- the share of plays carrying the explosive flag: the team's offensive value minus the value it allowed on defense. `Float64` */
   explosive_margin?: number | null;
@@ -4125,15 +4203,15 @@ export interface LoadCfbTeamSummariesRow {
   turnover_margin?: number | null;
   /** Havoc-rate margin, as a share of plays: the havoc rate the defense created (havoc_def) minus the rate the offense allowed (havoc_off). Positive is good -- the team disrupts more than it is disrupted. Runs created minus allowed, the opposite direction from the offense-minus-defense margins. `Float64` */
   havoc_margin?: number | null;
-  /** Margin in explosive-play rate -- the share of plays carrying the explosive flag: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in explosive-play rate -- the share of plays carrying the explosive flag: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_margin_rank?: number | null;
-  /** National rank of turnover_margin, 1 = largest margin. `Float64` */
+  /** National rank of turnover_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   turnover_margin_rank?: number | null;
-  /** National rank of havoc_margin, 1 = largest margin. `Float64` */
+  /** National rank of havoc_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_margin_rank?: number | null;
-  /** Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on the team's own drives. `Float64` */
+  /** Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on the team's own drives (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. `Float64` */
   total_available_yards_off?: number | null;
-  /** Total yards the team actually gained across its own drives. `Int64` */
+  /** Total yards the team gained across its own drives, each drive's gain capped at its available yards. `Int64` */
   total_gained_yards_off?: number | bigint | null;
   /** Sample size behind pts_per_opp_off: the number of scoring opportunities on the team's own drives. 0 when there were none, and pts_per_opp_off is then null. `Int64` */
   pts_per_opp_off_n?: number | bigint | null;
@@ -4145,25 +4223,25 @@ export interface LoadCfbTeamSummariesRow {
   start_position_off_n?: number | bigint | null;
   /** Average expected points (EP) at the first snap of a drive, over the drives the side owned, with the team on offense. `Float64` */
   drive_start_ep_off?: number | null;
-  /** Share of available yards the team's offense actually gained (total_gained_yards_off divided by total_available_yards_off). Higher is better. `Float64` */
+  /** Share of available yards the team's offense actually gained (total_gained_yards_off divided by total_available_yards_off), from 0 to 1. Null when no available yards are on record. Higher is better. `Float64` */
   available_yards_pct_off?: number | null;
   /** Points per scoring opportunity. A scoring opportunity is a drive with a run or pass snap at or inside the opponent 40, charged only to the drive's owner (ESPN's drive team); it scores its ESPN drive result, 7 for a touchdown, 3 for a field goal and 0 otherwise. Counted on the team's own drives. Null when the team had no scoring opportunity. `Float64` */
   pts_per_opp_off?: number | null;
   /** Drive-result points per drive, attributed to the drive's owner (not always points the team scored or allowed; see the return-touchdown note). A drive is one with at least one run or pass snap (kneel-downs excluded) in an FBS-vs-FBS game, charged only to its owner: ESPN's drive team, or the team with the most snaps in it when that label fits none of its snaps. It scores its ESPN drive result, 7 for a touchdown, 3 for a field goal and 0 otherwise. A drive ESPN labels as a return touchdown ("INT TD", "PUNT RETURN TD") scores 0, but a return or defensive touchdown on a drive ESPN labels plain "TD" is credited to the drive's owner, the team that gave it up. Counted on the team's own drives. Higher is better. Null when the team owned no drive. `Float64` */
   pts_per_drive_off?: number | null;
-  /** National rank of the team's offensive available-yards share, where 1 is best. `Float64` */
+  /** National rank of the team's offensive available-yards share, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   available_yards_pct_off_rank?: number | null;
   /** National rank of pts_per_opp_off, where 1 is best (most points per opportunity). Null when pts_per_opp_off is null: unranked, not last. `Float64` */
   pts_per_opp_off_rank?: number | null;
   /** National rank of pts_per_drive_off, where 1 is best (most points per drive). Ties share the average rank. Null when pts_per_drive_off is null: unranked, not last. `Float64` */
   pts_per_drive_off_rank?: number | null;
-  /** National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   start_position_off_rank?: number | null;
-  /** National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drive_start_ep_off_rank?: number | null;
-  /** Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on drives the team defended. `Float64` */
+  /** Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on opponents' drives against the team's defense (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. `Float64` */
   total_available_yards_def?: number | null;
-  /** Total yards the team allowed across the drives it defended. `Int64` */
+  /** Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. `Int64` */
   total_gained_yards_def?: number | bigint | null;
   /** Sample size behind pts_per_opp_def: the number of scoring opportunities on opponents' drives against the team's defense. 0 when there were none, and pts_per_opp_def is then null. `Int64` */
   pts_per_opp_def_n?: number | bigint | null;
@@ -4175,21 +4253,21 @@ export interface LoadCfbTeamSummariesRow {
   start_position_def_n?: number | bigint | null;
   /** Average expected points (EP) at the first snap of a drive, over the drives the side owned, with the team on defense (i.e. allowed to opponents). `Float64` */
   drive_start_ep_def?: number | null;
-  /** Share of available yards the team's defense allowed opponents to gain. Lower is better. `Float64` */
+  /** Share of available yards the team's defense allowed opponents to gain (total_gained_yards_def divided by total_available_yards_def), from 0 to 1. Null when no available yards are on record. Lower is better. `Float64` */
   available_yards_pct_def?: number | null;
   /** Points per scoring opportunity. A scoring opportunity is a drive with a run or pass snap at or inside the opponent 40, charged only to the drive's owner (ESPN's drive team); it scores its ESPN drive result, 7 for a touchdown, 3 for a field goal and 0 otherwise. Counted on opponents' drives against the team's defense. Null when opponents had no scoring opportunity. `Float64` */
   pts_per_opp_def?: number | null;
   /** Drive-result points per drive, attributed to the drive's owner (not always points the team scored or allowed; see the return-touchdown note). A drive is one with at least one run or pass snap (kneel-downs excluded) in an FBS-vs-FBS game, charged only to its owner: ESPN's drive team, or the team with the most snaps in it when that label fits none of its snaps. It scores its ESPN drive result, 7 for a touchdown, 3 for a field goal and 0 otherwise. A drive ESPN labels as a return touchdown ("INT TD", "PUNT RETURN TD") scores 0, but a return or defensive touchdown on a drive ESPN labels plain "TD" is credited to the drive's owner, the team that gave it up. Counted on opponents' drives against the team's defense. Lower is better. Null when opponents owned no drive. `Float64` */
   pts_per_drive_def?: number | null;
-  /** National rank of the team's defensive available-yards share, where 1 is best. `Float64` */
+  /** National rank of the team's defensive available-yards share, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   available_yards_pct_def_rank?: number | null;
   /** National rank of pts_per_opp_def, where 1 is best (fewest points allowed per opportunity). Null when pts_per_opp_def is null: unranked, not last. `Float64` */
   pts_per_opp_def_rank?: number | null;
   /** National rank of pts_per_drive_def, where 1 is best (fewest points allowed per drive). Ties share the average rank. Null when pts_per_drive_def is null: unranked, not last. `Float64` */
   pts_per_drive_def_rank?: number | null;
-  /** National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   start_position_def_rank?: number | null;
-  /** National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drive_start_ep_def_rank?: number | null;
   /** Available yards on the team's own drives minus available yards on drives it defended. `Float64` */
   total_available_yards_margin?: number | null;
@@ -4205,19 +4283,19 @@ export interface LoadCfbTeamSummariesRow {
   drive_start_ep_margin?: number | null;
   /** Field-position margin: the team's own average starting field position minus the average starting field position it allowed, both measured as yards gained from their own goal line. Positive means the team started closer to scoring than its opponents. `Float64` */
   start_position_margin?: number | null;
-  /** National rank of total_available_yards_margin, 1 = largest margin. `Float64` */
+  /** National rank of total_available_yards_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   total_available_yards_margin_rank?: number | null;
-  /** National rank of total_gained_yards_margin, 1 = largest margin. `Float64` */
+  /** National rank of total_gained_yards_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   total_gained_yards_margin_rank?: number | null;
-  /** National rank of available_yards_pct_margin, 1 = largest margin. `Float64` */
+  /** National rank of available_yards_pct_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   available_yards_pct_margin_rank?: number | null;
   /** National rank of pts_per_opp_margin, 1 = largest margin. Null when pts_per_opp_margin is null: unranked, not last. `Float64` */
   pts_per_opp_margin_rank?: number | null;
   /** National rank of pts_per_drive_margin, 1 = largest margin. Ties share the average rank. Null when pts_per_drive_margin is null: unranked, not last. `Float64` */
   pts_per_drive_margin_rank?: number | null;
-  /** Margin in average expected points (EP) at the first snap of a drive, over the drives the side owned: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in average expected points (EP) at the first snap of a drive, over the drives the side owned: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drive_start_ep_margin_rank?: number | null;
-  /** Field-position margin: the team's own average starting field position minus the average starting field position it allowed, both measured as yards gained from their own goal line. Positive means the team started closer to scoring than its opponents. National rank of that margin, 1 = largest. `Float64` */
+  /** Field-position margin: the team's own average starting field position minus the average starting field position it allowed, both measured as yards gained from their own goal line. Positive means the team started closer to scoring than its opponents. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   start_position_margin_rank?: number | null;
   /** Sample size behind passrate_off_pass: the number of plays it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   passrate_off_pass_n?: number | bigint | null;
@@ -4231,7 +4309,7 @@ export interface LoadCfbTeamSummariesRow {
   EPAplay_off_pass_n?: number | bigint | null;
   /** Sample size behind yardsplay_off_pass: the number of plays it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   yardsplay_off_pass_n?: number | bigint | null;
-  /** Sample size behind play_stuffed_off_pass: the number of plays it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind play_stuffed_off_pass: the number of rushes it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. Always 0 here: only rushes carry the stuffed flag. `Int64` */
   play_stuffed_off_pass_n?: number | bigint | null;
   /** Sample size behind success_off_pass: the number of plays it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   success_off_pass_n?: number | bigint | null;
@@ -4249,7 +4327,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_off_pass_n?: number | bigint | null;
   /** Sample size behind line_yards_off_pass: the number of rushes it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. Always 0 here: line yards are credited only on rushes. `Int64` */
   line_yards_off_pass_n?: number | bigint | null;
-  /** Sample size behind opportunity_rate_off_pass: the number of plays it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind opportunity_rate_off_pass: the number of rushes it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. Always 0 here: only rushes carry the opportunity flag. `Int64` */
   opportunity_rate_off_pass_n?: number | bigint | null;
   /** Plays run on pass plays, with the team on offense. `UInt32` */
   plays_off_pass?: number | null;
@@ -4265,11 +4343,11 @@ export interface LoadCfbTeamSummariesRow {
   TEPA_off_pass?: number | null;
   /** EPA per play on pass plays, with the team on offense. `Float64` */
   EPAplay_off_pass?: number | null;
-  /** Total yards gained on pass plays, with the team on offense. `Int64` */
+  /** Total yards gained (an interception counts as 0 yards) on pass plays, with the team on offense. `Int64` */
   yards_off_pass?: number | bigint | null;
-  /** Yards gained per play on pass plays, with the team on offense. `Float64` */
+  /** Yards gained per play (an interception counts as 0 yards) on pass plays, with the team on offense. `Float64` */
   yardsplay_off_pass?: number | null;
-  /** Stuffed-play rate -- the share of plays carrying the stuffed flag on pass plays, with the team on offense. `Float64` */
+  /** Run-stuff rate (always null: only rushes carry the stuffed flag) on pass plays, with the team on offense. `Float64` */
   play_stuffed_off_pass?: number | null;
   /** Success rate -- the share of plays flagged as successful by EPA on pass plays, with the team on offense. `Float64` */
   success_off_pass?: number | null;
@@ -4287,7 +4365,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_off_pass?: number | null;
   /** Average line yards credited to the offensive line on rushes on pass plays, with the team on offense. `Float64` */
   line_yards_off_pass?: number | null;
-  /** Opportunity rate (always 0: only rushes carry the opportunity flag) on pass plays, with the team on offense. `Float64` */
+  /** Opportunity rate (always null: only rushes carry the opportunity flag) on pass plays, with the team on offense. `Float64` */
   opportunity_rate_off_pass?: number | null;
   /** Sample size behind playsgame_off_pass: the number of games it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   playsgame_off_pass_n?: number | bigint | null;
@@ -4319,55 +4397,55 @@ export interface LoadCfbTeamSummariesRow {
   yardsdrive_off_pass?: number | null;
   /** Plays run per drive on pass plays, with the team on offense. `Float64` */
   playsdrive_off_pass?: number | null;
-  /** National rank of the team's plays run per game on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's plays run per game on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsgame_off_pass_rank?: number | null;
-  /** National rank of the team's total EPA summed over every play on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's total EPA summed over every play on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_off_pass_rank?: number | null;
-  /** National rank of the team's EPA per game (total EPA divided by games) on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game (total EPA divided by games) on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_off_pass_rank?: number | null;
-  /** National rank of the team's EPA per play on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_off_pass_rank?: number | null;
-  /** National rank of the team's EPA per drive (total EPA divided by drives) on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per drive (total EPA divided by drives) on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_off_pass_rank?: number | null;
-  /** National rank of the team's EPA per early-down play on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per early-down play on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   early_down_EPA_off_pass_rank?: number | null;
-  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_off_pass_rank?: number | null;
-  /** National rank of the team's total yards gained on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's total yards gained (an interception counts as 0 yards) on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yards_off_pass_rank?: number | null;
-  /** National rank of the team's yards gained per play on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per play (an interception counts as 0 yards) on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_off_pass_rank?: number | null;
-  /** National rank of the team's yards gained per game on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per game on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsgame_off_pass_rank?: number | null;
-  /** National rank of the team's drives per game on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's drives per game on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drivesgame_off_pass_rank?: number | null;
-  /** National rank of the team's yards gained per drive on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per drive on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsdrive_off_pass_rank?: number | null;
-  /** National rank of the team's plays run per drive on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's plays run per drive on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsdrive_off_pass_rank?: number | null;
-  /** National rank of the team's stuffed-play rate -- the share of plays carrying the stuffed flag on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's run-stuff rate (always null: only rushes carry the stuffed flag) on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   play_stuffed_off_pass_rank?: number | null;
-  /** National rank of the team's success rate on red-zone plays on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on red-zone plays on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   red_zone_success_off_pass_rank?: number | null;
-  /** National rank of the team's success rate on third-down plays on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on third-down plays on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_success_off_pass_rank?: number | null;
-  /** National rank of the team's success rate on late-down plays on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on late-down plays on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   late_down_success_off_pass_rank?: number | null;
-  /** National rank of the team's average yards to go on third down on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average yards to go on third down on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_distance_off_pass_rank?: number | null;
-  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_off_pass_rank?: number | null;
-  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_off_pass_rank?: number | null;
-  /** National rank of the team's share of plays that were pass plays on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were pass plays on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   passrate_off_pass_rank?: number | null;
-  /** National rank of the team's share of plays that were rush plays on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were rush plays on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   rushrate_off_pass_rank?: number | null;
-  /** National rank of the team's EPA per play with explosive plays excluded on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with explosive plays excluded on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   nonExplosiveEpaPerPlay_off_pass_rank?: number | null;
-  /** National rank of the team's average line yards credited to the offensive line on rushes on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average line yards credited to the offensive line on rushes on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   line_yards_off_pass_rank?: number | null;
-  /** National rank of the team's opportunity rate (always 0: only rushes carry the opportunity flag) on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's opportunity rate (always null: only rushes carry the opportunity flag) on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   opportunity_rate_off_pass_rank?: number | null;
   /** Sample size behind passrate_def_pass: the number of plays it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   passrate_def_pass_n?: number | bigint | null;
@@ -4381,7 +4459,7 @@ export interface LoadCfbTeamSummariesRow {
   EPAplay_def_pass_n?: number | bigint | null;
   /** Sample size behind yardsplay_def_pass: the number of plays it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   yardsplay_def_pass_n?: number | bigint | null;
-  /** Sample size behind play_stuffed_def_pass: the number of plays it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind play_stuffed_def_pass: the number of rushes it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. Always 0 here: only rushes carry the stuffed flag. `Int64` */
   play_stuffed_def_pass_n?: number | bigint | null;
   /** Sample size behind success_def_pass: the number of plays it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   success_def_pass_n?: number | bigint | null;
@@ -4399,7 +4477,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_def_pass_n?: number | bigint | null;
   /** Sample size behind line_yards_def_pass: the number of rushes it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. Always 0 here: line yards are credited only on rushes. `Int64` */
   line_yards_def_pass_n?: number | bigint | null;
-  /** Sample size behind opportunity_rate_def_pass: the number of plays it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind opportunity_rate_def_pass: the number of rushes it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. Always 0 here: only rushes carry the opportunity flag. `Int64` */
   opportunity_rate_def_pass_n?: number | bigint | null;
   /** Plays run on pass plays, with the team on defense (i.e. allowed to opponents). `UInt32` */
   plays_def_pass?: number | null;
@@ -4415,11 +4493,11 @@ export interface LoadCfbTeamSummariesRow {
   TEPA_def_pass?: number | null;
   /** EPA per play on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   EPAplay_def_pass?: number | null;
-  /** Total yards gained on pass plays, with the team on defense (i.e. allowed to opponents). `Int64` */
+  /** Total yards gained (an interception counts as 0 yards) on pass plays, with the team on defense (i.e. allowed to opponents). `Int64` */
   yards_def_pass?: number | bigint | null;
-  /** Yards gained per play on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Yards gained per play (an interception counts as 0 yards) on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   yardsplay_def_pass?: number | null;
-  /** Stuffed-play rate -- the share of plays carrying the stuffed flag on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Run-stuff rate (always null: only rushes carry the stuffed flag) on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   play_stuffed_def_pass?: number | null;
   /** Success rate -- the share of plays flagged as successful by EPA on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   success_def_pass?: number | null;
@@ -4437,7 +4515,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_def_pass?: number | null;
   /** Average line yards credited to the offensive line on rushes on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   line_yards_def_pass?: number | null;
-  /** Opportunity rate (always 0: only rushes carry the opportunity flag) on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Opportunity rate (always null: only rushes carry the opportunity flag) on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   opportunity_rate_def_pass?: number | null;
   /** Sample size behind playsgame_def_pass: the number of games it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   playsgame_def_pass_n?: number | bigint | null;
@@ -4469,55 +4547,55 @@ export interface LoadCfbTeamSummariesRow {
   yardsdrive_def_pass?: number | null;
   /** Plays run per drive on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   playsdrive_def_pass?: number | null;
-  /** National rank of the team's plays run per game on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's plays run per game on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsgame_def_pass_rank?: number | null;
-  /** National rank of the team's total EPA summed over every play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's total EPA summed over every play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_def_pass_rank?: number | null;
-  /** National rank of the team's EPA per game (total EPA divided by games) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game (total EPA divided by games) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_def_pass_rank?: number | null;
-  /** National rank of the team's EPA per play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_def_pass_rank?: number | null;
-  /** National rank of the team's EPA per drive (total EPA divided by drives) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per drive (total EPA divided by drives) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_def_pass_rank?: number | null;
-  /** National rank of the team's EPA per early-down play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per early-down play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   early_down_EPA_def_pass_rank?: number | null;
-  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_def_pass_rank?: number | null;
-  /** National rank of the team's total yards gained on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's total yards gained (an interception counts as 0 yards) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yards_def_pass_rank?: number | null;
-  /** National rank of the team's yards gained per play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per play (an interception counts as 0 yards) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_def_pass_rank?: number | null;
-  /** National rank of the team's yards gained per game on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per game on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsgame_def_pass_rank?: number | null;
-  /** National rank of the team's drives per game on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's drives per game on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drivesgame_def_pass_rank?: number | null;
-  /** National rank of the team's yards gained per drive on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per drive on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsdrive_def_pass_rank?: number | null;
-  /** National rank of the team's plays run per drive on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's plays run per drive on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsdrive_def_pass_rank?: number | null;
-  /** National rank of the team's stuffed-play rate -- the share of plays carrying the stuffed flag on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's run-stuff rate (always null: only rushes carry the stuffed flag) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   play_stuffed_def_pass_rank?: number | null;
-  /** National rank of the team's success rate on red-zone plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on red-zone plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   red_zone_success_def_pass_rank?: number | null;
-  /** National rank of the team's success rate on third-down plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on third-down plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_success_def_pass_rank?: number | null;
-  /** National rank of the team's success rate on late-down plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on late-down plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   late_down_success_def_pass_rank?: number | null;
-  /** National rank of the team's average yards to go on third down on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average yards to go on third down on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_distance_def_pass_rank?: number | null;
-  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_def_pass_rank?: number | null;
-  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_def_pass_rank?: number | null;
-  /** National rank of the team's share of plays that were pass plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were pass plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   passrate_def_pass_rank?: number | null;
-  /** National rank of the team's share of plays that were rush plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were rush plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   rushrate_def_pass_rank?: number | null;
-  /** National rank of the team's EPA per play with explosive plays excluded on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with explosive plays excluded on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   nonExplosiveEpaPerPlay_def_pass_rank?: number | null;
-  /** National rank of the team's average line yards credited to the offensive line on rushes on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average line yards credited to the offensive line on rushes on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   line_yards_def_pass_rank?: number | null;
-  /** National rank of the team's opportunity rate (always 0: only rushes carry the opportunity flag) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's opportunity rate (always null: only rushes carry the opportunity flag) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   opportunity_rate_def_pass_rank?: number | null;
   /** Margin in total EPA summed over every play on pass plays: the team's offensive value minus the value it allowed on defense. `Float64` */
   TEPA_margin_pass?: number | null;
@@ -4529,19 +4607,19 @@ export interface LoadCfbTeamSummariesRow {
   EPAgame_margin_pass?: number | null;
   /** Margin in success rate -- the share of plays flagged as successful by EPA on pass plays: the team's offensive value minus the value it allowed on defense. `Float64` */
   success_margin_pass?: number | null;
-  /** Margin in yards gained per play on pass plays: the team's offensive value minus the value it allowed on defense. `Float64` */
+  /** Margin in yards gained per play (an interception counts as 0 yards) on pass plays: the team's offensive value minus the value it allowed on defense. `Float64` */
   yardsplay_margin_pass?: number | null;
-  /** Margin in total EPA summed over every play on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in total EPA summed over every play on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_margin_pass_rank?: number | null;
-  /** Margin in EPA per play on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per play on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_margin_pass_rank?: number | null;
-  /** Margin in EPA per drive (total EPA divided by drives) on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per drive (total EPA divided by drives) on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_margin_pass_rank?: number | null;
-  /** Margin in EPA per game (total EPA divided by games) on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per game (total EPA divided by games) on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_margin_pass_rank?: number | null;
-  /** Margin in success rate -- the share of plays flagged as successful by EPA on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in success rate -- the share of plays flagged as successful by EPA on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_margin_pass_rank?: number | null;
-  /** Margin in yards gained per play on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in yards gained per play (an interception counts as 0 yards) on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_margin_pass_rank?: number | null;
   /** Sample size behind passrate_off_rush: the number of plays it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   passrate_off_rush_n?: number | bigint | null;
@@ -4555,7 +4633,7 @@ export interface LoadCfbTeamSummariesRow {
   EPAplay_off_rush_n?: number | bigint | null;
   /** Sample size behind yardsplay_off_rush: the number of plays it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   yardsplay_off_rush_n?: number | bigint | null;
-  /** Sample size behind play_stuffed_off_rush: the number of plays it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind play_stuffed_off_rush: the number of rushes it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   play_stuffed_off_rush_n?: number | bigint | null;
   /** Sample size behind success_off_rush: the number of plays it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   success_off_rush_n?: number | bigint | null;
@@ -4573,7 +4651,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_off_rush_n?: number | bigint | null;
   /** Sample size behind line_yards_off_rush: the number of rushes it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   line_yards_off_rush_n?: number | bigint | null;
-  /** Sample size behind opportunity_rate_off_rush: the number of plays it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind opportunity_rate_off_rush: the number of rushes it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   opportunity_rate_off_rush_n?: number | bigint | null;
   /** Plays run on rush plays, with the team on offense. `UInt32` */
   plays_off_rush?: number | null;
@@ -4589,11 +4667,11 @@ export interface LoadCfbTeamSummariesRow {
   TEPA_off_rush?: number | null;
   /** EPA per play on rush plays, with the team on offense. `Float64` */
   EPAplay_off_rush?: number | null;
-  /** Total yards gained on rush plays, with the team on offense. `Int64` */
+  /** Total yards gained (an interception counts as 0 yards) on rush plays, with the team on offense. `Int64` */
   yards_off_rush?: number | bigint | null;
-  /** Yards gained per play on rush plays, with the team on offense. `Float64` */
+  /** Yards gained per play (an interception counts as 0 yards) on rush plays, with the team on offense. `Float64` */
   yardsplay_off_rush?: number | null;
-  /** Stuffed-play rate -- the share of plays carrying the stuffed flag on rush plays, with the team on offense. `Float64` */
+  /** Run-stuff rate -- the share of rushes stopped for 0 or fewer yards on rush plays, with the team on offense. `Float64` */
   play_stuffed_off_rush?: number | null;
   /** Success rate -- the share of plays flagged as successful by EPA on rush plays, with the team on offense. `Float64` */
   success_off_rush?: number | null;
@@ -4611,7 +4689,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_off_rush?: number | null;
   /** Average line yards credited to the offensive line on rushes on rush plays, with the team on offense. `Float64` */
   line_yards_off_rush?: number | null;
-  /** Opportunity rate -- the share of rushes carrying the opportunity flag on rush plays, with the team on offense. `Float64` */
+  /** Opportunity rate -- the share of rushes gaining 4 or more yards on rush plays, with the team on offense. `Float64` */
   opportunity_rate_off_rush?: number | null;
   /** Sample size behind playsgame_off_rush: the number of games it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   playsgame_off_rush_n?: number | bigint | null;
@@ -4643,55 +4721,55 @@ export interface LoadCfbTeamSummariesRow {
   yardsdrive_off_rush?: number | null;
   /** Plays run per drive on rush plays, with the team on offense. `Float64` */
   playsdrive_off_rush?: number | null;
-  /** National rank of the team's plays run per game on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's plays run per game on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsgame_off_rush_rank?: number | null;
-  /** National rank of the team's total EPA summed over every play on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's total EPA summed over every play on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_off_rush_rank?: number | null;
-  /** National rank of the team's EPA per game (total EPA divided by games) on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game (total EPA divided by games) on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_off_rush_rank?: number | null;
-  /** National rank of the team's EPA per play on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_off_rush_rank?: number | null;
-  /** National rank of the team's EPA per drive (total EPA divided by drives) on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per drive (total EPA divided by drives) on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_off_rush_rank?: number | null;
-  /** National rank of the team's EPA per early-down play on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per early-down play on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   early_down_EPA_off_rush_rank?: number | null;
-  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_off_rush_rank?: number | null;
-  /** National rank of the team's total yards gained on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's total yards gained (an interception counts as 0 yards) on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yards_off_rush_rank?: number | null;
-  /** National rank of the team's yards gained per play on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per play (an interception counts as 0 yards) on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_off_rush_rank?: number | null;
-  /** National rank of the team's yards gained per game on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per game on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsgame_off_rush_rank?: number | null;
-  /** National rank of the team's drives per game on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's drives per game on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drivesgame_off_rush_rank?: number | null;
-  /** National rank of the team's yards gained per drive on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per drive on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsdrive_off_rush_rank?: number | null;
-  /** National rank of the team's plays run per drive on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's plays run per drive on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsdrive_off_rush_rank?: number | null;
-  /** National rank of the team's stuffed-play rate -- the share of plays carrying the stuffed flag on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's run-stuff rate -- the share of rushes stopped for 0 or fewer yards on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   play_stuffed_off_rush_rank?: number | null;
-  /** National rank of the team's success rate on red-zone plays on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on red-zone plays on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   red_zone_success_off_rush_rank?: number | null;
-  /** National rank of the team's success rate on third-down plays on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on third-down plays on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_success_off_rush_rank?: number | null;
-  /** National rank of the team's success rate on late-down plays on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on late-down plays on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   late_down_success_off_rush_rank?: number | null;
-  /** National rank of the team's average yards to go on third down on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average yards to go on third down on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_distance_off_rush_rank?: number | null;
-  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_off_rush_rank?: number | null;
-  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_off_rush_rank?: number | null;
-  /** National rank of the team's share of plays that were pass plays on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were pass plays on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   passrate_off_rush_rank?: number | null;
-  /** National rank of the team's share of plays that were rush plays on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were rush plays on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   rushrate_off_rush_rank?: number | null;
-  /** National rank of the team's EPA per play with explosive plays excluded on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with explosive plays excluded on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   nonExplosiveEpaPerPlay_off_rush_rank?: number | null;
-  /** National rank of the team's average line yards credited to the offensive line on rushes on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average line yards credited to the offensive line on rushes on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   line_yards_off_rush_rank?: number | null;
-  /** National rank of the team's opportunity rate -- the share of rushes carrying the opportunity flag on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's opportunity rate -- the share of rushes gaining 4 or more yards on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   opportunity_rate_off_rush_rank?: number | null;
   /** Sample size behind passrate_def_rush: the number of plays it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   passrate_def_rush_n?: number | bigint | null;
@@ -4705,7 +4783,7 @@ export interface LoadCfbTeamSummariesRow {
   EPAplay_def_rush_n?: number | bigint | null;
   /** Sample size behind yardsplay_def_rush: the number of plays it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   yardsplay_def_rush_n?: number | bigint | null;
-  /** Sample size behind play_stuffed_def_rush: the number of plays it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind play_stuffed_def_rush: the number of rushes it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   play_stuffed_def_rush_n?: number | bigint | null;
   /** Sample size behind success_def_rush: the number of plays it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   success_def_rush_n?: number | bigint | null;
@@ -4723,7 +4801,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_def_rush_n?: number | bigint | null;
   /** Sample size behind line_yards_def_rush: the number of rushes it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   line_yards_def_rush_n?: number | bigint | null;
-  /** Sample size behind opportunity_rate_def_rush: the number of plays it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind opportunity_rate_def_rush: the number of rushes it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   opportunity_rate_def_rush_n?: number | bigint | null;
   /** Plays run on rush plays, with the team on defense (i.e. allowed to opponents). `UInt32` */
   plays_def_rush?: number | null;
@@ -4739,11 +4817,11 @@ export interface LoadCfbTeamSummariesRow {
   TEPA_def_rush?: number | null;
   /** EPA per play on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   EPAplay_def_rush?: number | null;
-  /** Total yards gained on rush plays, with the team on defense (i.e. allowed to opponents). `Int64` */
+  /** Total yards gained (an interception counts as 0 yards) on rush plays, with the team on defense (i.e. allowed to opponents). `Int64` */
   yards_def_rush?: number | bigint | null;
-  /** Yards gained per play on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Yards gained per play (an interception counts as 0 yards) on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   yardsplay_def_rush?: number | null;
-  /** Stuffed-play rate -- the share of plays carrying the stuffed flag on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Run-stuff rate -- the share of rushes stopped for 0 or fewer yards on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   play_stuffed_def_rush?: number | null;
   /** Success rate -- the share of plays flagged as successful by EPA on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   success_def_rush?: number | null;
@@ -4761,7 +4839,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_def_rush?: number | null;
   /** Average line yards credited to the offensive line on rushes on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   line_yards_def_rush?: number | null;
-  /** Opportunity rate -- the share of rushes carrying the opportunity flag on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Opportunity rate -- the share of rushes gaining 4 or more yards on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   opportunity_rate_def_rush?: number | null;
   /** Sample size behind playsgame_def_rush: the number of games it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   playsgame_def_rush_n?: number | bigint | null;
@@ -4793,55 +4871,55 @@ export interface LoadCfbTeamSummariesRow {
   yardsdrive_def_rush?: number | null;
   /** Plays run per drive on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   playsdrive_def_rush?: number | null;
-  /** National rank of the team's plays run per game on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's plays run per game on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsgame_def_rush_rank?: number | null;
-  /** National rank of the team's total EPA summed over every play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's total EPA summed over every play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_def_rush_rank?: number | null;
-  /** National rank of the team's EPA per game (total EPA divided by games) on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game (total EPA divided by games) on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_def_rush_rank?: number | null;
-  /** National rank of the team's EPA per play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_def_rush_rank?: number | null;
-  /** National rank of the team's EPA per drive (total EPA divided by drives) on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per drive (total EPA divided by drives) on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_def_rush_rank?: number | null;
-  /** National rank of the team's EPA per early-down play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per early-down play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   early_down_EPA_def_rush_rank?: number | null;
-  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_def_rush_rank?: number | null;
-  /** National rank of the team's total yards gained on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's total yards gained (an interception counts as 0 yards) on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yards_def_rush_rank?: number | null;
-  /** National rank of the team's yards gained per play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per play (an interception counts as 0 yards) on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_def_rush_rank?: number | null;
-  /** National rank of the team's yards gained per game on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per game on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsgame_def_rush_rank?: number | null;
-  /** National rank of the team's drives per game on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's drives per game on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drivesgame_def_rush_rank?: number | null;
-  /** National rank of the team's yards gained per drive on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per drive on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsdrive_def_rush_rank?: number | null;
-  /** National rank of the team's plays run per drive on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's plays run per drive on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsdrive_def_rush_rank?: number | null;
-  /** National rank of the team's stuffed-play rate -- the share of plays carrying the stuffed flag on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's run-stuff rate -- the share of rushes stopped for 0 or fewer yards on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   play_stuffed_def_rush_rank?: number | null;
-  /** National rank of the team's success rate on red-zone plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on red-zone plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   red_zone_success_def_rush_rank?: number | null;
-  /** National rank of the team's success rate on third-down plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on third-down plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_success_def_rush_rank?: number | null;
-  /** National rank of the team's success rate on late-down plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on late-down plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   late_down_success_def_rush_rank?: number | null;
-  /** National rank of the team's average yards to go on third down on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average yards to go on third down on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_distance_def_rush_rank?: number | null;
-  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_def_rush_rank?: number | null;
-  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_def_rush_rank?: number | null;
-  /** National rank of the team's share of plays that were pass plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were pass plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   passrate_def_rush_rank?: number | null;
-  /** National rank of the team's share of plays that were rush plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were rush plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   rushrate_def_rush_rank?: number | null;
-  /** National rank of the team's EPA per play with explosive plays excluded on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with explosive plays excluded on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   nonExplosiveEpaPerPlay_def_rush_rank?: number | null;
-  /** National rank of the team's average line yards credited to the offensive line on rushes on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average line yards credited to the offensive line on rushes on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   line_yards_def_rush_rank?: number | null;
-  /** National rank of the team's opportunity rate -- the share of rushes carrying the opportunity flag on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's opportunity rate -- the share of rushes gaining 4 or more yards on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   opportunity_rate_def_rush_rank?: number | null;
   /** Margin in total EPA summed over every play on rush plays: the team's offensive value minus the value it allowed on defense. `Float64` */
   TEPA_margin_rush?: number | null;
@@ -4853,19 +4931,19 @@ export interface LoadCfbTeamSummariesRow {
   EPAgame_margin_rush?: number | null;
   /** Margin in success rate -- the share of plays flagged as successful by EPA on rush plays: the team's offensive value minus the value it allowed on defense. `Float64` */
   success_margin_rush?: number | null;
-  /** Margin in yards gained per play on rush plays: the team's offensive value minus the value it allowed on defense. `Float64` */
+  /** Margin in yards gained per play (an interception counts as 0 yards) on rush plays: the team's offensive value minus the value it allowed on defense. `Float64` */
   yardsplay_margin_rush?: number | null;
-  /** Margin in total EPA summed over every play on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in total EPA summed over every play on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_margin_rush_rank?: number | null;
-  /** Margin in EPA per play on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per play on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_margin_rush_rank?: number | null;
-  /** Margin in EPA per drive (total EPA divided by drives) on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per drive (total EPA divided by drives) on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_margin_rush_rank?: number | null;
-  /** Margin in EPA per game (total EPA divided by games) on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per game (total EPA divided by games) on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_margin_rush_rank?: number | null;
-  /** Margin in success rate -- the share of plays flagged as successful by EPA on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in success rate -- the share of plays flagged as successful by EPA on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_margin_rush_rank?: number | null;
-  /** Margin in yards gained per play on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in yards gained per play (an interception counts as 0 yards) on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_margin_rush_rank?: number | null;
   /** EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps, with the team on offense. `Float64` */
   havoc_EPAgame_off?: number | null;
@@ -4873,23 +4951,23 @@ export interface LoadCfbTeamSummariesRow {
   havoc_EPAgame_def?: number | null;
   /** Margin in EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps: the team's offensive value minus the value it allowed on defense. `Float64` */
   havoc_EPAgame_margin?: number | null;
-  /** Expected giveaways per game: half of every scrimmage fumble, plus interceptions at the season's national share of passes defensed (INT + PBU) that were intercepted, counted on the team's own plays. Lower is better. `Float64` */
+  /** Expected giveaways per game: half of every scrimmage fumble, plus interceptions at the season's national share of passes defensed (INT + PBU) that were intercepted, counted on the team's own plays. Breakups come from ESPN's game box passesDefended (breakups only, so passes defensed = INT + PD) in seasons where it covers at least 95% of team-games (2024 on), and from the play text otherwise. Lower is better. `Float64` */
   expected_turnovers_off?: number | null;
-  /** Expected takeaways per game: half of every scrimmage fumble, plus interceptions at the season's national share of passes defensed (INT + PBU) that were intercepted, counted on opponents' plays against the team's defense. Higher is better. `Float64` */
+  /** Expected takeaways per game: half of every scrimmage fumble, plus interceptions at the season's national share of passes defensed (INT + PBU) that were intercepted, counted on opponents' plays against the team's defense. Breakups come from ESPN's game box passesDefended (breakups only, so passes defensed = INT + PD) in seasons where it covers at least 95% of team-games (2024 on), and from the play text otherwise. Higher is better. `Float64` */
   expected_turnovers_def?: number | null;
   /** Expected turnover margin per game: expected_turnovers_def minus expected_turnovers_off (expected takeaways minus expected giveaways). Higher is better. Spelled singular, like turnover_margin. `Float64` */
   expected_turnover_margin?: number | null;
-  /** National rank of the team's EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_EPAgame_off_rank?: number | null;
-  /** National rank of the team's EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_EPAgame_def_rank?: number | null;
-  /** Margin in EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_EPAgame_margin_rank?: number | null;
-  /** National rank of expected_turnovers_off, where 1 is best (fewest expected giveaways per game). `Float64` */
+  /** National rank of expected_turnovers_off, where 1 is best (fewest expected giveaways per game). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   expected_turnovers_off_rank?: number | null;
-  /** National rank of expected_turnovers_def, where 1 is best (most expected takeaways per game). `Float64` */
+  /** National rank of expected_turnovers_def, where 1 is best (most expected takeaways per game). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   expected_turnovers_def_rank?: number | null;
-  /** National rank of expected_turnover_margin, 1 = largest margin. `Float64` */
+  /** National rank of expected_turnover_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   expected_turnover_margin_rank?: number | null;
   /** Offensive turnover luck in points per game: 5 points for every giveaway fewer than expected -- 5 x (expected_turnovers_off minus turnovers_off). Positive = lucky. `Float64` */
   turnover_luck_off?: number | null;
@@ -4897,11 +4975,11 @@ export interface LoadCfbTeamSummariesRow {
   turnover_luck_def?: number | null;
   /** Turnover luck in points per game: 5 x (turnover_margin minus expected_turnover_margin), the part of the turnover margin the team's fumble and pass-defensed volume did not earn; turnover_luck_off plus turnover_luck_def. Positive = lucky. `Float64` */
   turnover_luck?: number | null;
-  /** National rank of turnover_luck_off, 1 = luckiest (largest). `Float64` */
+  /** National rank of turnover_luck_off, 1 = luckiest (largest). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   turnover_luck_off_rank?: number | null;
-  /** National rank of turnover_luck_def, 1 = luckiest (largest). `Float64` */
+  /** National rank of turnover_luck_def, 1 = luckiest (largest). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   turnover_luck_def_rank?: number | null;
-  /** National rank of turnover_luck, 1 = luckiest (largest). `Float64` */
+  /** National rank of turnover_luck, 1 = luckiest (largest). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   turnover_luck_rank?: number | null;
   /** Power/Group classification for the season: P4 or G6 from 2024 on, P5 or G5 through 2023, derived from conference membership (Notre Dame is classified with the power group). Null for teams outside FBS. `String` */
   fbs_class?: string | null;
@@ -4917,11 +4995,11 @@ export interface LoadCfbTeamSummariesRow {
   def_strength_faced?: number | null;
   /** Net opponent-adjusted EPA per play: adj_off_epa minus adj_def_epa. Higher is better. `Float64` */
   net_adj_epa?: number | null;
-  /** National rank of the team's adj_off_epa, where 1 is best. `Float64` */
+  /** National rank of the team's adj_off_epa, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   adj_off_epa_rank?: number | null;
-  /** National rank of the team's adj_def_epa, where 1 is best (fewest EPA allowed). `Float64` */
+  /** National rank of the team's adj_def_epa, where 1 is best (fewest EPA allowed). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   adj_def_epa_rank?: number | null;
-  /** National rank of the team's net_adj_epa, 1 = largest net adjusted EPA. `Float64` */
+  /** National rank of the team's net_adj_epa, 1 = largest net adjusted EPA. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   net_adj_epa_rank?: number | null;
   /** National rank of off_strength_faced, where 1 = toughest slate (the strongest opposing offenses). Ties share the average rank. Null when off_strength_faced is null: unranked, not last. `Float64` */
   off_strength_faced_rank?: number | null;
@@ -4941,9 +5019,9 @@ export interface LoadCfbTeamSummariesRow {
   early_down_EPA_off_conf_pct?: number | null;
   /** Percentile (0-100) of success rate -- the share of plays flagged as successful by EPA with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_off_conf_pct?: number | null;
-  /** Percentile (0-100) of total yards gained with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of total yards gained (an interception counts as 0 yards) with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yards_off_conf_pct?: number | null;
-  /** Percentile (0-100) of yards gained per play with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of yards gained per play (an interception counts as 0 yards) with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_off_conf_pct?: number | null;
   /** Percentile (0-100) of yards gained per game with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_off_conf_pct?: number | null;
@@ -4953,7 +5031,7 @@ export interface LoadCfbTeamSummariesRow {
   yardsdrive_off_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per drive with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsdrive_off_conf_pct?: number | null;
-  /** Percentile (0-100) of stuffed-play rate -- the share of plays carrying the stuffed flag with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of run-stuff rate -- the share of rushes stopped for 0 or fewer yards with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   play_stuffed_off_conf_pct?: number | null;
   /** Percentile (0-100) of success rate on red-zone plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   red_zone_success_off_conf_pct?: number | null;
@@ -4977,7 +5055,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_off_conf_pct?: number | null;
   /** Percentile (0-100) of average line yards credited to the offensive line on rushes with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   line_yards_off_conf_pct?: number | null;
-  /** Percentile (0-100) of opportunity rate -- opportunity-flagged rushes as a share of all plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of opportunity rate -- the share of rushes gaining 4 or more yards with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   opportunity_rate_off_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per game with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsgame_def_conf_pct?: number | null;
@@ -4993,9 +5071,9 @@ export interface LoadCfbTeamSummariesRow {
   early_down_EPA_def_conf_pct?: number | null;
   /** Percentile (0-100) of success rate -- the share of plays flagged as successful by EPA with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_def_conf_pct?: number | null;
-  /** Percentile (0-100) of total yards gained with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of total yards gained (an interception counts as 0 yards) with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yards_def_conf_pct?: number | null;
-  /** Percentile (0-100) of yards gained per play with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of yards gained per play (an interception counts as 0 yards) with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_def_conf_pct?: number | null;
   /** Percentile (0-100) of yards gained per game with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_def_conf_pct?: number | null;
@@ -5005,7 +5083,7 @@ export interface LoadCfbTeamSummariesRow {
   yardsdrive_def_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per drive with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsdrive_def_conf_pct?: number | null;
-  /** Percentile (0-100) of stuffed-play rate -- the share of plays carrying the stuffed flag with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of run-stuff rate -- the share of rushes stopped for 0 or fewer yards with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   play_stuffed_def_conf_pct?: number | null;
   /** Percentile (0-100) of success rate on red-zone plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   red_zone_success_def_conf_pct?: number | null;
@@ -5029,7 +5107,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_def_conf_pct?: number | null;
   /** Percentile (0-100) of average line yards credited to the offensive line on rushes with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   line_yards_def_conf_pct?: number | null;
-  /** Percentile (0-100) of opportunity rate -- opportunity-flagged rushes as a share of all plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of opportunity rate -- the share of rushes gaining 4 or more yards with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   opportunity_rate_def_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in total EPA summed over every play (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   TEPA_margin_conf_pct?: number | null;
@@ -5041,7 +5119,7 @@ export interface LoadCfbTeamSummariesRow {
   EPAgame_margin_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in success rate -- the share of plays flagged as successful by EPA (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_margin_conf_pct?: number | null;
-  /** Percentile (0-100) of the margin in yards gained per play (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of the margin in yards gained per play (an interception counts as 0 yards) (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_margin_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in explosive-play rate -- the share of plays carrying the explosive flag (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   explosive_margin_conf_pct?: number | null;
@@ -5097,9 +5175,9 @@ export interface LoadCfbTeamSummariesRow {
   early_down_EPA_off_pass_conf_pct?: number | null;
   /** Percentile (0-100) of success rate -- the share of plays flagged as successful by EPA on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_off_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of total yards gained on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of total yards gained (an interception counts as 0 yards) on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yards_off_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of yards gained per play on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of yards gained per play (an interception counts as 0 yards) on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_off_pass_conf_pct?: number | null;
   /** Percentile (0-100) of yards gained per game on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_off_pass_conf_pct?: number | null;
@@ -5109,7 +5187,7 @@ export interface LoadCfbTeamSummariesRow {
   yardsdrive_off_pass_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per drive on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsdrive_off_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of stuffed-play rate -- the share of plays carrying the stuffed flag on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of run-stuff rate (always null: only rushes carry the stuffed flag) on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   play_stuffed_off_pass_conf_pct?: number | null;
   /** Percentile (0-100) of success rate on red-zone plays on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   red_zone_success_off_pass_conf_pct?: number | null;
@@ -5131,7 +5209,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_off_pass_conf_pct?: number | null;
   /** Percentile (0-100) of average line yards credited to the offensive line on rushes on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   line_yards_off_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of opportunity rate (always 0: only rushes carry the opportunity flag) on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of opportunity rate (always null: only rushes carry the opportunity flag) on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   opportunity_rate_off_pass_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per game on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsgame_def_pass_conf_pct?: number | null;
@@ -5147,9 +5225,9 @@ export interface LoadCfbTeamSummariesRow {
   early_down_EPA_def_pass_conf_pct?: number | null;
   /** Percentile (0-100) of success rate -- the share of plays flagged as successful by EPA on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_def_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of total yards gained on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of total yards gained (an interception counts as 0 yards) on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yards_def_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of yards gained per play on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of yards gained per play (an interception counts as 0 yards) on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_def_pass_conf_pct?: number | null;
   /** Percentile (0-100) of yards gained per game on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_def_pass_conf_pct?: number | null;
@@ -5159,7 +5237,7 @@ export interface LoadCfbTeamSummariesRow {
   yardsdrive_def_pass_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per drive on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsdrive_def_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of stuffed-play rate -- the share of plays carrying the stuffed flag on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of run-stuff rate (always null: only rushes carry the stuffed flag) on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   play_stuffed_def_pass_conf_pct?: number | null;
   /** Percentile (0-100) of success rate on red-zone plays on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   red_zone_success_def_pass_conf_pct?: number | null;
@@ -5181,7 +5259,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_def_pass_conf_pct?: number | null;
   /** Percentile (0-100) of average line yards credited to the offensive line on rushes on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   line_yards_def_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of opportunity rate (always 0: only rushes carry the opportunity flag) on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of opportunity rate (always null: only rushes carry the opportunity flag) on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   opportunity_rate_def_pass_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in total EPA summed over every play on pass plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   TEPA_margin_pass_conf_pct?: number | null;
@@ -5193,7 +5271,7 @@ export interface LoadCfbTeamSummariesRow {
   EPAgame_margin_pass_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in success rate -- the share of plays flagged as successful by EPA on pass plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_margin_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of the margin in yards gained per play on pass plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of the margin in yards gained per play (an interception counts as 0 yards) on pass plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_margin_pass_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per game on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsgame_off_rush_conf_pct?: number | null;
@@ -5209,9 +5287,9 @@ export interface LoadCfbTeamSummariesRow {
   early_down_EPA_off_rush_conf_pct?: number | null;
   /** Percentile (0-100) of success rate -- the share of plays flagged as successful by EPA on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_off_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of total yards gained on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of total yards gained (an interception counts as 0 yards) on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yards_off_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of yards gained per play on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of yards gained per play (an interception counts as 0 yards) on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_off_rush_conf_pct?: number | null;
   /** Percentile (0-100) of yards gained per game on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_off_rush_conf_pct?: number | null;
@@ -5221,7 +5299,7 @@ export interface LoadCfbTeamSummariesRow {
   yardsdrive_off_rush_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per drive on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsdrive_off_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of stuffed-play rate -- the share of plays carrying the stuffed flag on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of run-stuff rate -- the share of rushes stopped for 0 or fewer yards on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   play_stuffed_off_rush_conf_pct?: number | null;
   /** Percentile (0-100) of success rate on red-zone plays on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   red_zone_success_off_rush_conf_pct?: number | null;
@@ -5243,7 +5321,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_off_rush_conf_pct?: number | null;
   /** Percentile (0-100) of average line yards credited to the offensive line on rushes on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   line_yards_off_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of opportunity rate -- the share of rushes carrying the opportunity flag on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of opportunity rate -- the share of rushes gaining 4 or more yards on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   opportunity_rate_off_rush_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per game on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsgame_def_rush_conf_pct?: number | null;
@@ -5259,9 +5337,9 @@ export interface LoadCfbTeamSummariesRow {
   early_down_EPA_def_rush_conf_pct?: number | null;
   /** Percentile (0-100) of success rate -- the share of plays flagged as successful by EPA on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_def_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of total yards gained on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of total yards gained (an interception counts as 0 yards) on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yards_def_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of yards gained per play on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of yards gained per play (an interception counts as 0 yards) on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_def_rush_conf_pct?: number | null;
   /** Percentile (0-100) of yards gained per game on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_def_rush_conf_pct?: number | null;
@@ -5271,7 +5349,7 @@ export interface LoadCfbTeamSummariesRow {
   yardsdrive_def_rush_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per drive on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsdrive_def_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of stuffed-play rate -- the share of plays carrying the stuffed flag on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of run-stuff rate -- the share of rushes stopped for 0 or fewer yards on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   play_stuffed_def_rush_conf_pct?: number | null;
   /** Percentile (0-100) of success rate on red-zone plays on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   red_zone_success_def_rush_conf_pct?: number | null;
@@ -5293,7 +5371,7 @@ export interface LoadCfbTeamSummariesRow {
   nonExplosiveEpaPerPlay_def_rush_conf_pct?: number | null;
   /** Percentile (0-100) of average line yards credited to the offensive line on rushes on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   line_yards_def_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of opportunity rate -- the share of rushes carrying the opportunity flag on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of opportunity rate -- the share of rushes gaining 4 or more yards on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   opportunity_rate_def_rush_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in total EPA summed over every play on rush plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   TEPA_margin_rush_conf_pct?: number | null;
@@ -5305,7 +5383,7 @@ export interface LoadCfbTeamSummariesRow {
   EPAgame_margin_rush_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in success rate -- the share of plays flagged as successful by EPA on rush plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_margin_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of the margin in yards gained per play on rush plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of the margin in yards gained per play (an interception counts as 0 yards) on rush plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_margin_rush_conf_pct?: number | null;
   /** Percentile (0-100) of EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   havoc_EPAgame_off_conf_pct?: number | null;
@@ -5593,7 +5671,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   EPAplay_off_n?: number | bigint | null;
   /** Sample size behind yardsplay_off: the number of plays it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   yardsplay_off_n?: number | bigint | null;
-  /** Sample size behind play_stuffed_off: the number of plays it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind play_stuffed_off: the number of rushes it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   play_stuffed_off_n?: number | bigint | null;
   /** Sample size behind success_off: the number of plays it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   success_off_n?: number | bigint | null;
@@ -5611,7 +5689,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_off_n?: number | bigint | null;
   /** Sample size behind line_yards_off: the number of rushes it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   line_yards_off_n?: number | bigint | null;
-  /** Sample size behind opportunity_rate_off: the number of plays it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind opportunity_rate_off: the number of rushes it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   opportunity_rate_off_n?: number | bigint | null;
   /** Plays run, with the team on offense. `UInt32` */
   plays_off?: number | null;
@@ -5627,11 +5705,11 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   TEPA_off?: number | null;
   /** EPA per play, with the team on offense. `Float64` */
   EPAplay_off?: number | null;
-  /** Total yards gained, with the team on offense. `Int64` */
+  /** Total yards gained (an interception counts as 0 yards), with the team on offense. `Int64` */
   yards_off?: number | bigint | null;
-  /** Yards gained per play, with the team on offense. `Float64` */
+  /** Yards gained per play (an interception counts as 0 yards), with the team on offense. `Float64` */
   yardsplay_off?: number | null;
-  /** Stuffed-play rate -- the share of plays carrying the stuffed flag, with the team on offense. `Float64` */
+  /** Run-stuff rate -- the share of rushes stopped for 0 or fewer yards, with the team on offense. `Float64` */
   play_stuffed_off?: number | null;
   /** Success rate -- the share of plays flagged as successful by EPA, with the team on offense. `Float64` */
   success_off?: number | null;
@@ -5649,7 +5727,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_off?: number | null;
   /** Average line yards credited to the offensive line on rushes, with the team on offense. `Float64` */
   line_yards_off?: number | null;
-  /** Opportunity rate -- opportunity-flagged rushes as a share of all plays, with the team on offense. `Float64` */
+  /** Opportunity rate -- the share of rushes gaining 4 or more yards, with the team on offense. `Float64` */
   opportunity_rate_off?: number | null;
   /** Sample size behind playsgame_off: the number of games it is computed over, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   playsgame_off_n?: number | bigint | null;
@@ -5685,57 +5763,57 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   yardsdrive_off?: number | null;
   /** Plays run per drive, with the team on offense. `Float64` */
   playsdrive_off?: number | null;
-  /** National rank of the team's plays run per game with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's plays run per game with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsgame_off_rank?: number | null;
-  /** National rank of the team's total EPA summed over every play with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's total EPA summed over every play with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_off_rank?: number | null;
-  /** National rank of the team's EPA per game (total EPA divided by games) with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game (total EPA divided by games) with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_off_rank?: number | null;
-  /** National rank of the team's EPA per play with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_off_rank?: number | null;
-  /** National rank of the team's EPA per drive (total EPA divided by drives) with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per drive (total EPA divided by drives) with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_off_rank?: number | null;
-  /** National rank of the team's EPA per early-down play with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per early-down play with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   early_down_EPA_off_rank?: number | null;
-  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_off_rank?: number | null;
-  /** National rank of the team's total yards gained with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's total yards gained (an interception counts as 0 yards) with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yards_off_rank?: number | null;
-  /** National rank of the team's yards gained per play with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per play (an interception counts as 0 yards) with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_off_rank?: number | null;
-  /** National rank of the team's yards gained per game with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per game with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsgame_off_rank?: number | null;
-  /** National rank of the team's drives per game with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's drives per game with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drivesgame_off_rank?: number | null;
-  /** National rank of the team's yards gained per drive with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per drive with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsdrive_off_rank?: number | null;
-  /** National rank of the team's plays run per drive with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's plays run per drive with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsdrive_off_rank?: number | null;
-  /** National rank of the team's stuffed-play rate -- the share of plays carrying the stuffed flag with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's run-stuff rate -- the share of rushes stopped for 0 or fewer yards with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   play_stuffed_off_rank?: number | null;
-  /** National rank of the team's success rate on red-zone plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on red-zone plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   red_zone_success_off_rank?: number | null;
-  /** National rank of the team's success rate on third-down plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on third-down plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_success_off_rank?: number | null;
-  /** National rank of the team's success rate on late-down plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on late-down plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   late_down_success_off_rank?: number | null;
-  /** National rank of the team's average yards to go on third down with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average yards to go on third down with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_distance_off_rank?: number | null;
-  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_off_rank?: number | null;
-  /** National rank of turnovers_off, where 1 is best (fewest giveaways per game). `Float64` */
+  /** National rank of turnovers_off, where 1 is best (fewest giveaways per game). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   turnovers_off_rank?: number | null;
-  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_off_rank?: number | null;
-  /** National rank of the team's share of plays that were pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   passrate_off_rank?: number | null;
-  /** National rank of the team's share of plays that were rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   rushrate_off_rank?: number | null;
-  /** National rank of the team's EPA per play with explosive plays excluded with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with explosive plays excluded with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   nonExplosiveEpaPerPlay_off_rank?: number | null;
-  /** National rank of the team's average line yards credited to the offensive line on rushes with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average line yards credited to the offensive line on rushes with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   line_yards_off_rank?: number | null;
-  /** National rank of the team's opportunity rate -- opportunity-flagged rushes as a share of all plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's opportunity rate -- the share of rushes gaining 4 or more yards with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   opportunity_rate_off_rank?: number | null;
   /** Sample size behind passrate_def: the number of plays it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   passrate_def_n?: number | bigint | null;
@@ -5749,7 +5827,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   EPAplay_def_n?: number | bigint | null;
   /** Sample size behind yardsplay_def: the number of plays it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   yardsplay_def_n?: number | bigint | null;
-  /** Sample size behind play_stuffed_def: the number of plays it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind play_stuffed_def: the number of rushes it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   play_stuffed_def_n?: number | bigint | null;
   /** Sample size behind success_def: the number of plays it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   success_def_n?: number | bigint | null;
@@ -5767,7 +5845,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_def_n?: number | bigint | null;
   /** Sample size behind line_yards_def: the number of rushes it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   line_yards_def_n?: number | bigint | null;
-  /** Sample size behind opportunity_rate_def: the number of plays it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind opportunity_rate_def: the number of rushes it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   opportunity_rate_def_n?: number | bigint | null;
   /** Plays run, with the team on defense (i.e. allowed to opponents). `UInt32` */
   plays_def?: number | null;
@@ -5783,11 +5861,11 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   TEPA_def?: number | null;
   /** EPA per play, with the team on defense (i.e. allowed to opponents). `Float64` */
   EPAplay_def?: number | null;
-  /** Total yards gained, with the team on defense (i.e. allowed to opponents). `Int64` */
+  /** Total yards gained (an interception counts as 0 yards), with the team on defense (i.e. allowed to opponents). `Int64` */
   yards_def?: number | bigint | null;
-  /** Yards gained per play, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Yards gained per play (an interception counts as 0 yards), with the team on defense (i.e. allowed to opponents). `Float64` */
   yardsplay_def?: number | null;
-  /** Stuffed-play rate -- the share of plays carrying the stuffed flag, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Run-stuff rate -- the share of rushes stopped for 0 or fewer yards, with the team on defense (i.e. allowed to opponents). `Float64` */
   play_stuffed_def?: number | null;
   /** Success rate -- the share of plays flagged as successful by EPA, with the team on defense (i.e. allowed to opponents). `Float64` */
   success_def?: number | null;
@@ -5805,7 +5883,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_def?: number | null;
   /** Average line yards credited to the offensive line on rushes, with the team on defense (i.e. allowed to opponents). `Float64` */
   line_yards_def?: number | null;
-  /** Opportunity rate -- opportunity-flagged rushes as a share of all plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Opportunity rate -- the share of rushes gaining 4 or more yards, with the team on defense (i.e. allowed to opponents). `Float64` */
   opportunity_rate_def?: number | null;
   /** Sample size behind playsgame_def: the number of games it is computed over, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   playsgame_def_n?: number | bigint | null;
@@ -5841,57 +5919,57 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   yardsdrive_def?: number | null;
   /** Plays run per drive, with the team on defense (i.e. allowed to opponents). `Float64` */
   playsdrive_def?: number | null;
-  /** National rank of the team's plays run per game with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's plays run per game with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsgame_def_rank?: number | null;
-  /** National rank of the team's total EPA summed over every play with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's total EPA summed over every play with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_def_rank?: number | null;
-  /** National rank of the team's EPA per game (total EPA divided by games) with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game (total EPA divided by games) with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_def_rank?: number | null;
-  /** National rank of the team's EPA per play with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_def_rank?: number | null;
-  /** National rank of the team's EPA per drive (total EPA divided by drives) with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per drive (total EPA divided by drives) with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_def_rank?: number | null;
-  /** National rank of the team's EPA per early-down play with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per early-down play with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   early_down_EPA_def_rank?: number | null;
-  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_def_rank?: number | null;
-  /** National rank of the team's total yards gained with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's total yards gained (an interception counts as 0 yards) with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yards_def_rank?: number | null;
-  /** National rank of the team's yards gained per play with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per play (an interception counts as 0 yards) with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_def_rank?: number | null;
-  /** National rank of the team's yards gained per game with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per game with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsgame_def_rank?: number | null;
-  /** National rank of the team's drives per game with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's drives per game with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drivesgame_def_rank?: number | null;
-  /** National rank of the team's yards gained per drive with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per drive with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsdrive_def_rank?: number | null;
-  /** National rank of the team's plays run per drive with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's plays run per drive with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsdrive_def_rank?: number | null;
-  /** National rank of the team's stuffed-play rate -- the share of plays carrying the stuffed flag with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's run-stuff rate -- the share of rushes stopped for 0 or fewer yards with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   play_stuffed_def_rank?: number | null;
-  /** National rank of the team's success rate on red-zone plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on red-zone plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   red_zone_success_def_rank?: number | null;
-  /** National rank of the team's success rate on third-down plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on third-down plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_success_def_rank?: number | null;
-  /** National rank of the team's success rate on late-down plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on late-down plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   late_down_success_def_rank?: number | null;
-  /** National rank of the team's average yards to go on third down with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average yards to go on third down with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_distance_def_rank?: number | null;
-  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_def_rank?: number | null;
-  /** National rank of turnovers_def, where 1 is best (most takeaways per game). `Float64` */
+  /** National rank of turnovers_def, where 1 is best (most takeaways per game). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   turnovers_def_rank?: number | null;
-  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_def_rank?: number | null;
-  /** National rank of the team's share of plays that were pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   passrate_def_rank?: number | null;
-  /** National rank of the team's share of plays that were rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   rushrate_def_rank?: number | null;
-  /** National rank of the team's EPA per play with explosive plays excluded with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with explosive plays excluded with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   nonExplosiveEpaPerPlay_def_rank?: number | null;
-  /** National rank of the team's average line yards credited to the offensive line on rushes with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average line yards credited to the offensive line on rushes with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   line_yards_def_rank?: number | null;
-  /** National rank of the team's opportunity rate -- opportunity-flagged rushes as a share of all plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's opportunity rate -- the share of rushes gaining 4 or more yards with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   opportunity_rate_def_rank?: number | null;
   /** Margin in total EPA summed over every play: the team's offensive value minus the value it allowed on defense. `Float64` */
   TEPA_margin?: number | null;
@@ -5903,19 +5981,19 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   EPAgame_margin?: number | null;
   /** Margin in success rate -- the share of plays flagged as successful by EPA: the team's offensive value minus the value it allowed on defense. `Float64` */
   success_margin?: number | null;
-  /** Margin in yards gained per play: the team's offensive value minus the value it allowed on defense. `Float64` */
+  /** Margin in yards gained per play (an interception counts as 0 yards): the team's offensive value minus the value it allowed on defense. `Float64` */
   yardsplay_margin?: number | null;
-  /** Margin in total EPA summed over every play: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in total EPA summed over every play: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_margin_rank?: number | null;
-  /** Margin in EPA per play: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per play: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_margin_rank?: number | null;
-  /** Margin in EPA per drive (total EPA divided by drives): the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per drive (total EPA divided by drives): the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_margin_rank?: number | null;
-  /** Margin in EPA per game (total EPA divided by games): the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per game (total EPA divided by games): the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_margin_rank?: number | null;
-  /** Margin in success rate -- the share of plays flagged as successful by EPA: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in success rate -- the share of plays flagged as successful by EPA: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_margin_rank?: number | null;
-  /** Margin in yards gained per play: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in yards gained per play (an interception counts as 0 yards): the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_margin_rank?: number | null;
   /** Margin in explosive-play rate -- the share of plays carrying the explosive flag: the team's offensive value minus the value it allowed on defense. `Float64` */
   explosive_margin?: number | null;
@@ -5923,15 +6001,15 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   turnover_margin?: number | null;
   /** Havoc-rate margin, as a share of plays: the havoc rate the defense created (havoc_def) minus the rate the offense allowed (havoc_off). Positive is good -- the team disrupts more than it is disrupted. Runs created minus allowed, the opposite direction from the offense-minus-defense margins. `Float64` */
   havoc_margin?: number | null;
-  /** Margin in explosive-play rate -- the share of plays carrying the explosive flag: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in explosive-play rate -- the share of plays carrying the explosive flag: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_margin_rank?: number | null;
-  /** National rank of turnover_margin, 1 = largest margin. `Float64` */
+  /** National rank of turnover_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   turnover_margin_rank?: number | null;
-  /** National rank of havoc_margin, 1 = largest margin. `Float64` */
+  /** National rank of havoc_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_margin_rank?: number | null;
-  /** Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on the team's own drives. `Float64` */
+  /** Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on the team's own drives (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. `Float64` */
   total_available_yards_off?: number | null;
-  /** Total yards the team actually gained across its own drives. `Int64` */
+  /** Total yards the team gained across its own drives, each drive's gain capped at its available yards. `Int64` */
   total_gained_yards_off?: number | bigint | null;
   /** Sample size behind pts_per_opp_off: the number of scoring opportunities on the team's own drives. 0 when there were none, and pts_per_opp_off is then null. `Int64` */
   pts_per_opp_off_n?: number | bigint | null;
@@ -5943,25 +6021,25 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   start_position_off_n?: number | bigint | null;
   /** Average expected points (EP) at the first snap of a drive, over the drives the side owned, with the team on offense. `Float64` */
   drive_start_ep_off?: number | null;
-  /** Share of available yards the team's offense actually gained (total_gained_yards_off divided by total_available_yards_off). Higher is better. `Float64` */
+  /** Share of available yards the team's offense actually gained (total_gained_yards_off divided by total_available_yards_off), from 0 to 1. Null when no available yards are on record. Higher is better. `Float64` */
   available_yards_pct_off?: number | null;
   /** Points per scoring opportunity. A scoring opportunity is a drive with a run or pass snap at or inside the opponent 40, charged only to the drive's owner (ESPN's drive team); it scores its ESPN drive result, 7 for a touchdown, 3 for a field goal and 0 otherwise. Counted on the team's own drives. Null when the team had no scoring opportunity. `Float64` */
   pts_per_opp_off?: number | null;
   /** Drive-result points per drive, attributed to the drive's owner (not always points the team scored or allowed; see the return-touchdown note). A drive is one with at least one run or pass snap (kneel-downs excluded) in an FBS-vs-FBS game, charged only to its owner: ESPN's drive team, or the team with the most snaps in it when that label fits none of its snaps. It scores its ESPN drive result, 7 for a touchdown, 3 for a field goal and 0 otherwise. A drive ESPN labels as a return touchdown ("INT TD", "PUNT RETURN TD") scores 0, but a return or defensive touchdown on a drive ESPN labels plain "TD" is credited to the drive's owner, the team that gave it up. Counted on the team's own drives. Higher is better. Null when the team owned no drive. `Float64` */
   pts_per_drive_off?: number | null;
-  /** National rank of the team's offensive available-yards share, where 1 is best. `Float64` */
+  /** National rank of the team's offensive available-yards share, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   available_yards_pct_off_rank?: number | null;
   /** National rank of pts_per_opp_off, where 1 is best (most points per opportunity). Null when pts_per_opp_off is null: unranked, not last. `Float64` */
   pts_per_opp_off_rank?: number | null;
   /** National rank of pts_per_drive_off, where 1 is best (most points per drive). Ties share the average rank. Null when pts_per_drive_off is null: unranked, not last. `Float64` */
   pts_per_drive_off_rank?: number | null;
-  /** National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   start_position_off_rank?: number | null;
-  /** National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drive_start_ep_off_rank?: number | null;
-  /** Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on drives the team defended. `Float64` */
+  /** Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on opponents' drives against the team's defense (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. `Float64` */
   total_available_yards_def?: number | null;
-  /** Total yards the team allowed across the drives it defended. `Int64` */
+  /** Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. `Int64` */
   total_gained_yards_def?: number | bigint | null;
   /** Sample size behind pts_per_opp_def: the number of scoring opportunities on opponents' drives against the team's defense. 0 when there were none, and pts_per_opp_def is then null. `Int64` */
   pts_per_opp_def_n?: number | bigint | null;
@@ -5973,21 +6051,21 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   start_position_def_n?: number | bigint | null;
   /** Average expected points (EP) at the first snap of a drive, over the drives the side owned, with the team on defense (i.e. allowed to opponents). `Float64` */
   drive_start_ep_def?: number | null;
-  /** Share of available yards the team's defense allowed opponents to gain. Lower is better. `Float64` */
+  /** Share of available yards the team's defense allowed opponents to gain (total_gained_yards_def divided by total_available_yards_def), from 0 to 1. Null when no available yards are on record. Lower is better. `Float64` */
   available_yards_pct_def?: number | null;
   /** Points per scoring opportunity. A scoring opportunity is a drive with a run or pass snap at or inside the opponent 40, charged only to the drive's owner (ESPN's drive team); it scores its ESPN drive result, 7 for a touchdown, 3 for a field goal and 0 otherwise. Counted on opponents' drives against the team's defense. Null when opponents had no scoring opportunity. `Float64` */
   pts_per_opp_def?: number | null;
   /** Drive-result points per drive, attributed to the drive's owner (not always points the team scored or allowed; see the return-touchdown note). A drive is one with at least one run or pass snap (kneel-downs excluded) in an FBS-vs-FBS game, charged only to its owner: ESPN's drive team, or the team with the most snaps in it when that label fits none of its snaps. It scores its ESPN drive result, 7 for a touchdown, 3 for a field goal and 0 otherwise. A drive ESPN labels as a return touchdown ("INT TD", "PUNT RETURN TD") scores 0, but a return or defensive touchdown on a drive ESPN labels plain "TD" is credited to the drive's owner, the team that gave it up. Counted on opponents' drives against the team's defense. Lower is better. Null when opponents owned no drive. `Float64` */
   pts_per_drive_def?: number | null;
-  /** National rank of the team's defensive available-yards share, where 1 is best. `Float64` */
+  /** National rank of the team's defensive available-yards share, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   available_yards_pct_def_rank?: number | null;
   /** National rank of pts_per_opp_def, where 1 is best (fewest points allowed per opportunity). Null when pts_per_opp_def is null: unranked, not last. `Float64` */
   pts_per_opp_def_rank?: number | null;
   /** National rank of pts_per_drive_def, where 1 is best (fewest points allowed per drive). Ties share the average rank. Null when pts_per_drive_def is null: unranked, not last. `Float64` */
   pts_per_drive_def_rank?: number | null;
-  /** National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   start_position_def_rank?: number | null;
-  /** National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drive_start_ep_def_rank?: number | null;
   /** Available yards on the team's own drives minus available yards on drives it defended. `Float64` */
   total_available_yards_margin?: number | null;
@@ -6003,19 +6081,19 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   drive_start_ep_margin?: number | null;
   /** Field-position margin: the team's own average starting field position minus the average starting field position it allowed, both measured as yards gained from their own goal line. Positive means the team started closer to scoring than its opponents. `Float64` */
   start_position_margin?: number | null;
-  /** National rank of total_available_yards_margin, 1 = largest margin. `Float64` */
+  /** National rank of total_available_yards_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   total_available_yards_margin_rank?: number | null;
-  /** National rank of total_gained_yards_margin, 1 = largest margin. `Float64` */
+  /** National rank of total_gained_yards_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   total_gained_yards_margin_rank?: number | null;
-  /** National rank of available_yards_pct_margin, 1 = largest margin. `Float64` */
+  /** National rank of available_yards_pct_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   available_yards_pct_margin_rank?: number | null;
   /** National rank of pts_per_opp_margin, 1 = largest margin. Null when pts_per_opp_margin is null: unranked, not last. `Float64` */
   pts_per_opp_margin_rank?: number | null;
   /** National rank of pts_per_drive_margin, 1 = largest margin. Ties share the average rank. Null when pts_per_drive_margin is null: unranked, not last. `Float64` */
   pts_per_drive_margin_rank?: number | null;
-  /** Margin in average expected points (EP) at the first snap of a drive, over the drives the side owned: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in average expected points (EP) at the first snap of a drive, over the drives the side owned: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drive_start_ep_margin_rank?: number | null;
-  /** Field-position margin: the team's own average starting field position minus the average starting field position it allowed, both measured as yards gained from their own goal line. Positive means the team started closer to scoring than its opponents. National rank of that margin, 1 = largest. `Float64` */
+  /** Field-position margin: the team's own average starting field position minus the average starting field position it allowed, both measured as yards gained from their own goal line. Positive means the team started closer to scoring than its opponents. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   start_position_margin_rank?: number | null;
   /** Sample size behind passrate_off_pass: the number of plays it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   passrate_off_pass_n?: number | bigint | null;
@@ -6029,7 +6107,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   EPAplay_off_pass_n?: number | bigint | null;
   /** Sample size behind yardsplay_off_pass: the number of plays it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   yardsplay_off_pass_n?: number | bigint | null;
-  /** Sample size behind play_stuffed_off_pass: the number of plays it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind play_stuffed_off_pass: the number of rushes it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. Always 0 here: only rushes carry the stuffed flag. `Int64` */
   play_stuffed_off_pass_n?: number | bigint | null;
   /** Sample size behind success_off_pass: the number of plays it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   success_off_pass_n?: number | bigint | null;
@@ -6047,7 +6125,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_off_pass_n?: number | bigint | null;
   /** Sample size behind line_yards_off_pass: the number of rushes it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. Always 0 here: line yards are credited only on rushes. `Int64` */
   line_yards_off_pass_n?: number | bigint | null;
-  /** Sample size behind opportunity_rate_off_pass: the number of plays it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind opportunity_rate_off_pass: the number of rushes it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. Always 0 here: only rushes carry the opportunity flag. `Int64` */
   opportunity_rate_off_pass_n?: number | bigint | null;
   /** Plays run on pass plays, with the team on offense. `UInt32` */
   plays_off_pass?: number | null;
@@ -6063,11 +6141,11 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   TEPA_off_pass?: number | null;
   /** EPA per play on pass plays, with the team on offense. `Float64` */
   EPAplay_off_pass?: number | null;
-  /** Total yards gained on pass plays, with the team on offense. `Int64` */
+  /** Total yards gained (an interception counts as 0 yards) on pass plays, with the team on offense. `Int64` */
   yards_off_pass?: number | bigint | null;
-  /** Yards gained per play on pass plays, with the team on offense. `Float64` */
+  /** Yards gained per play (an interception counts as 0 yards) on pass plays, with the team on offense. `Float64` */
   yardsplay_off_pass?: number | null;
-  /** Stuffed-play rate -- the share of plays carrying the stuffed flag on pass plays, with the team on offense. `Float64` */
+  /** Run-stuff rate (always null: only rushes carry the stuffed flag) on pass plays, with the team on offense. `Float64` */
   play_stuffed_off_pass?: number | null;
   /** Success rate -- the share of plays flagged as successful by EPA on pass plays, with the team on offense. `Float64` */
   success_off_pass?: number | null;
@@ -6085,7 +6163,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_off_pass?: number | null;
   /** Average line yards credited to the offensive line on rushes on pass plays, with the team on offense. `Float64` */
   line_yards_off_pass?: number | null;
-  /** Opportunity rate (always 0: only rushes carry the opportunity flag) on pass plays, with the team on offense. `Float64` */
+  /** Opportunity rate (always null: only rushes carry the opportunity flag) on pass plays, with the team on offense. `Float64` */
   opportunity_rate_off_pass?: number | null;
   /** Sample size behind playsgame_off_pass: the number of games it is computed over on pass plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   playsgame_off_pass_n?: number | bigint | null;
@@ -6117,55 +6195,55 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   yardsdrive_off_pass?: number | null;
   /** Plays run per drive on pass plays, with the team on offense. `Float64` */
   playsdrive_off_pass?: number | null;
-  /** National rank of the team's plays run per game on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's plays run per game on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsgame_off_pass_rank?: number | null;
-  /** National rank of the team's total EPA summed over every play on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's total EPA summed over every play on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_off_pass_rank?: number | null;
-  /** National rank of the team's EPA per game (total EPA divided by games) on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game (total EPA divided by games) on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_off_pass_rank?: number | null;
-  /** National rank of the team's EPA per play on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_off_pass_rank?: number | null;
-  /** National rank of the team's EPA per drive (total EPA divided by drives) on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per drive (total EPA divided by drives) on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_off_pass_rank?: number | null;
-  /** National rank of the team's EPA per early-down play on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per early-down play on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   early_down_EPA_off_pass_rank?: number | null;
-  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_off_pass_rank?: number | null;
-  /** National rank of the team's total yards gained on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's total yards gained (an interception counts as 0 yards) on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yards_off_pass_rank?: number | null;
-  /** National rank of the team's yards gained per play on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per play (an interception counts as 0 yards) on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_off_pass_rank?: number | null;
-  /** National rank of the team's yards gained per game on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per game on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsgame_off_pass_rank?: number | null;
-  /** National rank of the team's drives per game on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's drives per game on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drivesgame_off_pass_rank?: number | null;
-  /** National rank of the team's yards gained per drive on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per drive on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsdrive_off_pass_rank?: number | null;
-  /** National rank of the team's plays run per drive on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's plays run per drive on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsdrive_off_pass_rank?: number | null;
-  /** National rank of the team's stuffed-play rate -- the share of plays carrying the stuffed flag on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's run-stuff rate (always null: only rushes carry the stuffed flag) on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   play_stuffed_off_pass_rank?: number | null;
-  /** National rank of the team's success rate on red-zone plays on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on red-zone plays on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   red_zone_success_off_pass_rank?: number | null;
-  /** National rank of the team's success rate on third-down plays on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on third-down plays on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_success_off_pass_rank?: number | null;
-  /** National rank of the team's success rate on late-down plays on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on late-down plays on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   late_down_success_off_pass_rank?: number | null;
-  /** National rank of the team's average yards to go on third down on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average yards to go on third down on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_distance_off_pass_rank?: number | null;
-  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_off_pass_rank?: number | null;
-  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_off_pass_rank?: number | null;
-  /** National rank of the team's share of plays that were pass plays on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were pass plays on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   passrate_off_pass_rank?: number | null;
-  /** National rank of the team's share of plays that were rush plays on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were rush plays on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   rushrate_off_pass_rank?: number | null;
-  /** National rank of the team's EPA per play with explosive plays excluded on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with explosive plays excluded on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   nonExplosiveEpaPerPlay_off_pass_rank?: number | null;
-  /** National rank of the team's average line yards credited to the offensive line on rushes on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average line yards credited to the offensive line on rushes on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   line_yards_off_pass_rank?: number | null;
-  /** National rank of the team's opportunity rate (always 0: only rushes carry the opportunity flag) on pass plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's opportunity rate (always null: only rushes carry the opportunity flag) on pass plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   opportunity_rate_off_pass_rank?: number | null;
   /** Sample size behind passrate_def_pass: the number of plays it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   passrate_def_pass_n?: number | bigint | null;
@@ -6179,7 +6257,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   EPAplay_def_pass_n?: number | bigint | null;
   /** Sample size behind yardsplay_def_pass: the number of plays it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   yardsplay_def_pass_n?: number | bigint | null;
-  /** Sample size behind play_stuffed_def_pass: the number of plays it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind play_stuffed_def_pass: the number of rushes it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. Always 0 here: only rushes carry the stuffed flag. `Int64` */
   play_stuffed_def_pass_n?: number | bigint | null;
   /** Sample size behind success_def_pass: the number of plays it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   success_def_pass_n?: number | bigint | null;
@@ -6197,7 +6275,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_def_pass_n?: number | bigint | null;
   /** Sample size behind line_yards_def_pass: the number of rushes it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. Always 0 here: line yards are credited only on rushes. `Int64` */
   line_yards_def_pass_n?: number | bigint | null;
-  /** Sample size behind opportunity_rate_def_pass: the number of plays it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind opportunity_rate_def_pass: the number of rushes it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. Always 0 here: only rushes carry the opportunity flag. `Int64` */
   opportunity_rate_def_pass_n?: number | bigint | null;
   /** Plays run on pass plays, with the team on defense (i.e. allowed to opponents). `UInt32` */
   plays_def_pass?: number | null;
@@ -6213,11 +6291,11 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   TEPA_def_pass?: number | null;
   /** EPA per play on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   EPAplay_def_pass?: number | null;
-  /** Total yards gained on pass plays, with the team on defense (i.e. allowed to opponents). `Int64` */
+  /** Total yards gained (an interception counts as 0 yards) on pass plays, with the team on defense (i.e. allowed to opponents). `Int64` */
   yards_def_pass?: number | bigint | null;
-  /** Yards gained per play on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Yards gained per play (an interception counts as 0 yards) on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   yardsplay_def_pass?: number | null;
-  /** Stuffed-play rate -- the share of plays carrying the stuffed flag on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Run-stuff rate (always null: only rushes carry the stuffed flag) on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   play_stuffed_def_pass?: number | null;
   /** Success rate -- the share of plays flagged as successful by EPA on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   success_def_pass?: number | null;
@@ -6235,7 +6313,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_def_pass?: number | null;
   /** Average line yards credited to the offensive line on rushes on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   line_yards_def_pass?: number | null;
-  /** Opportunity rate (always 0: only rushes carry the opportunity flag) on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Opportunity rate (always null: only rushes carry the opportunity flag) on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   opportunity_rate_def_pass?: number | null;
   /** Sample size behind playsgame_def_pass: the number of games it is computed over on pass plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   playsgame_def_pass_n?: number | bigint | null;
@@ -6267,55 +6345,55 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   yardsdrive_def_pass?: number | null;
   /** Plays run per drive on pass plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   playsdrive_def_pass?: number | null;
-  /** National rank of the team's plays run per game on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's plays run per game on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsgame_def_pass_rank?: number | null;
-  /** National rank of the team's total EPA summed over every play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's total EPA summed over every play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_def_pass_rank?: number | null;
-  /** National rank of the team's EPA per game (total EPA divided by games) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game (total EPA divided by games) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_def_pass_rank?: number | null;
-  /** National rank of the team's EPA per play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_def_pass_rank?: number | null;
-  /** National rank of the team's EPA per drive (total EPA divided by drives) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per drive (total EPA divided by drives) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_def_pass_rank?: number | null;
-  /** National rank of the team's EPA per early-down play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per early-down play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   early_down_EPA_def_pass_rank?: number | null;
-  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_def_pass_rank?: number | null;
-  /** National rank of the team's total yards gained on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's total yards gained (an interception counts as 0 yards) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yards_def_pass_rank?: number | null;
-  /** National rank of the team's yards gained per play on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per play (an interception counts as 0 yards) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_def_pass_rank?: number | null;
-  /** National rank of the team's yards gained per game on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per game on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsgame_def_pass_rank?: number | null;
-  /** National rank of the team's drives per game on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's drives per game on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drivesgame_def_pass_rank?: number | null;
-  /** National rank of the team's yards gained per drive on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per drive on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsdrive_def_pass_rank?: number | null;
-  /** National rank of the team's plays run per drive on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's plays run per drive on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsdrive_def_pass_rank?: number | null;
-  /** National rank of the team's stuffed-play rate -- the share of plays carrying the stuffed flag on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's run-stuff rate (always null: only rushes carry the stuffed flag) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   play_stuffed_def_pass_rank?: number | null;
-  /** National rank of the team's success rate on red-zone plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on red-zone plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   red_zone_success_def_pass_rank?: number | null;
-  /** National rank of the team's success rate on third-down plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on third-down plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_success_def_pass_rank?: number | null;
-  /** National rank of the team's success rate on late-down plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on late-down plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   late_down_success_def_pass_rank?: number | null;
-  /** National rank of the team's average yards to go on third down on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average yards to go on third down on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_distance_def_pass_rank?: number | null;
-  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_def_pass_rank?: number | null;
-  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_def_pass_rank?: number | null;
-  /** National rank of the team's share of plays that were pass plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were pass plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   passrate_def_pass_rank?: number | null;
-  /** National rank of the team's share of plays that were rush plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were rush plays on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   rushrate_def_pass_rank?: number | null;
-  /** National rank of the team's EPA per play with explosive plays excluded on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with explosive plays excluded on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   nonExplosiveEpaPerPlay_def_pass_rank?: number | null;
-  /** National rank of the team's average line yards credited to the offensive line on rushes on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average line yards credited to the offensive line on rushes on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   line_yards_def_pass_rank?: number | null;
-  /** National rank of the team's opportunity rate (always 0: only rushes carry the opportunity flag) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's opportunity rate (always null: only rushes carry the opportunity flag) on pass plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   opportunity_rate_def_pass_rank?: number | null;
   /** Margin in total EPA summed over every play on pass plays: the team's offensive value minus the value it allowed on defense. `Float64` */
   TEPA_margin_pass?: number | null;
@@ -6327,19 +6405,19 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   EPAgame_margin_pass?: number | null;
   /** Margin in success rate -- the share of plays flagged as successful by EPA on pass plays: the team's offensive value minus the value it allowed on defense. `Float64` */
   success_margin_pass?: number | null;
-  /** Margin in yards gained per play on pass plays: the team's offensive value minus the value it allowed on defense. `Float64` */
+  /** Margin in yards gained per play (an interception counts as 0 yards) on pass plays: the team's offensive value minus the value it allowed on defense. `Float64` */
   yardsplay_margin_pass?: number | null;
-  /** Margin in total EPA summed over every play on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in total EPA summed over every play on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_margin_pass_rank?: number | null;
-  /** Margin in EPA per play on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per play on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_margin_pass_rank?: number | null;
-  /** Margin in EPA per drive (total EPA divided by drives) on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per drive (total EPA divided by drives) on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_margin_pass_rank?: number | null;
-  /** Margin in EPA per game (total EPA divided by games) on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per game (total EPA divided by games) on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_margin_pass_rank?: number | null;
-  /** Margin in success rate -- the share of plays flagged as successful by EPA on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in success rate -- the share of plays flagged as successful by EPA on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_margin_pass_rank?: number | null;
-  /** Margin in yards gained per play on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in yards gained per play (an interception counts as 0 yards) on pass plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_margin_pass_rank?: number | null;
   /** Sample size behind passrate_off_rush: the number of plays it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   passrate_off_rush_n?: number | bigint | null;
@@ -6353,7 +6431,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   EPAplay_off_rush_n?: number | bigint | null;
   /** Sample size behind yardsplay_off_rush: the number of plays it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   yardsplay_off_rush_n?: number | bigint | null;
-  /** Sample size behind play_stuffed_off_rush: the number of plays it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind play_stuffed_off_rush: the number of rushes it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   play_stuffed_off_rush_n?: number | bigint | null;
   /** Sample size behind success_off_rush: the number of plays it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   success_off_rush_n?: number | bigint | null;
@@ -6371,7 +6449,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_off_rush_n?: number | bigint | null;
   /** Sample size behind line_yards_off_rush: the number of rushes it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   line_yards_off_rush_n?: number | bigint | null;
-  /** Sample size behind opportunity_rate_off_rush: the number of plays it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind opportunity_rate_off_rush: the number of rushes it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   opportunity_rate_off_rush_n?: number | bigint | null;
   /** Plays run on rush plays, with the team on offense. `UInt32` */
   plays_off_rush?: number | null;
@@ -6387,11 +6465,11 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   TEPA_off_rush?: number | null;
   /** EPA per play on rush plays, with the team on offense. `Float64` */
   EPAplay_off_rush?: number | null;
-  /** Total yards gained on rush plays, with the team on offense. `Int64` */
+  /** Total yards gained (an interception counts as 0 yards) on rush plays, with the team on offense. `Int64` */
   yards_off_rush?: number | bigint | null;
-  /** Yards gained per play on rush plays, with the team on offense. `Float64` */
+  /** Yards gained per play (an interception counts as 0 yards) on rush plays, with the team on offense. `Float64` */
   yardsplay_off_rush?: number | null;
-  /** Stuffed-play rate -- the share of plays carrying the stuffed flag on rush plays, with the team on offense. `Float64` */
+  /** Run-stuff rate -- the share of rushes stopped for 0 or fewer yards on rush plays, with the team on offense. `Float64` */
   play_stuffed_off_rush?: number | null;
   /** Success rate -- the share of plays flagged as successful by EPA on rush plays, with the team on offense. `Float64` */
   success_off_rush?: number | null;
@@ -6409,7 +6487,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_off_rush?: number | null;
   /** Average line yards credited to the offensive line on rushes on rush plays, with the team on offense. `Float64` */
   line_yards_off_rush?: number | null;
-  /** Opportunity rate -- the share of rushes carrying the opportunity flag on rush plays, with the team on offense. `Float64` */
+  /** Opportunity rate -- the share of rushes gaining 4 or more yards on rush plays, with the team on offense. `Float64` */
   opportunity_rate_off_rush?: number | null;
   /** Sample size behind playsgame_off_rush: the number of games it is computed over on rush plays, with the team on offense. Null when the team has no rows in that split; read it as 0. `Int64` */
   playsgame_off_rush_n?: number | bigint | null;
@@ -6441,55 +6519,55 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   yardsdrive_off_rush?: number | null;
   /** Plays run per drive on rush plays, with the team on offense. `Float64` */
   playsdrive_off_rush?: number | null;
-  /** National rank of the team's plays run per game on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's plays run per game on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsgame_off_rush_rank?: number | null;
-  /** National rank of the team's total EPA summed over every play on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's total EPA summed over every play on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_off_rush_rank?: number | null;
-  /** National rank of the team's EPA per game (total EPA divided by games) on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game (total EPA divided by games) on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_off_rush_rank?: number | null;
-  /** National rank of the team's EPA per play on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_off_rush_rank?: number | null;
-  /** National rank of the team's EPA per drive (total EPA divided by drives) on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per drive (total EPA divided by drives) on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_off_rush_rank?: number | null;
-  /** National rank of the team's EPA per early-down play on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per early-down play on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   early_down_EPA_off_rush_rank?: number | null;
-  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_off_rush_rank?: number | null;
-  /** National rank of the team's total yards gained on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's total yards gained (an interception counts as 0 yards) on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yards_off_rush_rank?: number | null;
-  /** National rank of the team's yards gained per play on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per play (an interception counts as 0 yards) on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_off_rush_rank?: number | null;
-  /** National rank of the team's yards gained per game on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per game on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsgame_off_rush_rank?: number | null;
-  /** National rank of the team's drives per game on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's drives per game on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drivesgame_off_rush_rank?: number | null;
-  /** National rank of the team's yards gained per drive on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per drive on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsdrive_off_rush_rank?: number | null;
-  /** National rank of the team's plays run per drive on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's plays run per drive on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsdrive_off_rush_rank?: number | null;
-  /** National rank of the team's stuffed-play rate -- the share of plays carrying the stuffed flag on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's run-stuff rate -- the share of rushes stopped for 0 or fewer yards on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   play_stuffed_off_rush_rank?: number | null;
-  /** National rank of the team's success rate on red-zone plays on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on red-zone plays on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   red_zone_success_off_rush_rank?: number | null;
-  /** National rank of the team's success rate on third-down plays on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on third-down plays on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_success_off_rush_rank?: number | null;
-  /** National rank of the team's success rate on late-down plays on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's success rate on late-down plays on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   late_down_success_off_rush_rank?: number | null;
-  /** National rank of the team's average yards to go on third down on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average yards to go on third down on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_distance_off_rush_rank?: number | null;
-  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_off_rush_rank?: number | null;
-  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_off_rush_rank?: number | null;
-  /** National rank of the team's share of plays that were pass plays on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were pass plays on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   passrate_off_rush_rank?: number | null;
-  /** National rank of the team's share of plays that were rush plays on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were rush plays on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   rushrate_off_rush_rank?: number | null;
-  /** National rank of the team's EPA per play with explosive plays excluded on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with explosive plays excluded on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   nonExplosiveEpaPerPlay_off_rush_rank?: number | null;
-  /** National rank of the team's average line yards credited to the offensive line on rushes on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's average line yards credited to the offensive line on rushes on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   line_yards_off_rush_rank?: number | null;
-  /** National rank of the team's opportunity rate -- the share of rushes carrying the opportunity flag on rush plays with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's opportunity rate -- the share of rushes gaining 4 or more yards on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   opportunity_rate_off_rush_rank?: number | null;
   /** Sample size behind passrate_def_rush: the number of plays it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   passrate_def_rush_n?: number | bigint | null;
@@ -6503,7 +6581,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   EPAplay_def_rush_n?: number | bigint | null;
   /** Sample size behind yardsplay_def_rush: the number of plays it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   yardsplay_def_rush_n?: number | bigint | null;
-  /** Sample size behind play_stuffed_def_rush: the number of plays it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind play_stuffed_def_rush: the number of rushes it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   play_stuffed_def_rush_n?: number | bigint | null;
   /** Sample size behind success_def_rush: the number of plays it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   success_def_rush_n?: number | bigint | null;
@@ -6521,7 +6599,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_def_rush_n?: number | bigint | null;
   /** Sample size behind line_yards_def_rush: the number of rushes it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   line_yards_def_rush_n?: number | bigint | null;
-  /** Sample size behind opportunity_rate_def_rush: the number of plays it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
+  /** Sample size behind opportunity_rate_def_rush: the number of rushes it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   opportunity_rate_def_rush_n?: number | bigint | null;
   /** Plays run on rush plays, with the team on defense (i.e. allowed to opponents). `UInt32` */
   plays_def_rush?: number | null;
@@ -6537,11 +6615,11 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   TEPA_def_rush?: number | null;
   /** EPA per play on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   EPAplay_def_rush?: number | null;
-  /** Total yards gained on rush plays, with the team on defense (i.e. allowed to opponents). `Int64` */
+  /** Total yards gained (an interception counts as 0 yards) on rush plays, with the team on defense (i.e. allowed to opponents). `Int64` */
   yards_def_rush?: number | bigint | null;
-  /** Yards gained per play on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Yards gained per play (an interception counts as 0 yards) on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   yardsplay_def_rush?: number | null;
-  /** Stuffed-play rate -- the share of plays carrying the stuffed flag on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Run-stuff rate -- the share of rushes stopped for 0 or fewer yards on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   play_stuffed_def_rush?: number | null;
   /** Success rate -- the share of plays flagged as successful by EPA on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   success_def_rush?: number | null;
@@ -6559,7 +6637,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_def_rush?: number | null;
   /** Average line yards credited to the offensive line on rushes on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   line_yards_def_rush?: number | null;
-  /** Opportunity rate -- the share of rushes carrying the opportunity flag on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
+  /** Opportunity rate -- the share of rushes gaining 4 or more yards on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   opportunity_rate_def_rush?: number | null;
   /** Sample size behind playsgame_def_rush: the number of games it is computed over on rush plays, with the team on defense (i.e. allowed to opponents). Null when the team has no rows in that split; read it as 0. `Int64` */
   playsgame_def_rush_n?: number | bigint | null;
@@ -6591,55 +6669,55 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   yardsdrive_def_rush?: number | null;
   /** Plays run per drive on rush plays, with the team on defense (i.e. allowed to opponents). `Float64` */
   playsdrive_def_rush?: number | null;
-  /** National rank of the team's plays run per game on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's plays run per game on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsgame_def_rush_rank?: number | null;
-  /** National rank of the team's total EPA summed over every play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's total EPA summed over every play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_def_rush_rank?: number | null;
-  /** National rank of the team's EPA per game (total EPA divided by games) on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game (total EPA divided by games) on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_def_rush_rank?: number | null;
-  /** National rank of the team's EPA per play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_def_rush_rank?: number | null;
-  /** National rank of the team's EPA per drive (total EPA divided by drives) on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per drive (total EPA divided by drives) on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_def_rush_rank?: number | null;
-  /** National rank of the team's EPA per early-down play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per early-down play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   early_down_EPA_def_rush_rank?: number | null;
-  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate -- the share of plays flagged as successful by EPA on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_def_rush_rank?: number | null;
-  /** National rank of the team's total yards gained on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's total yards gained (an interception counts as 0 yards) on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yards_def_rush_rank?: number | null;
-  /** National rank of the team's yards gained per play on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per play (an interception counts as 0 yards) on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_def_rush_rank?: number | null;
-  /** National rank of the team's yards gained per game on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per game on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsgame_def_rush_rank?: number | null;
-  /** National rank of the team's drives per game on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's drives per game on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   drivesgame_def_rush_rank?: number | null;
-  /** National rank of the team's yards gained per drive on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's yards gained per drive on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsdrive_def_rush_rank?: number | null;
-  /** National rank of the team's plays run per drive on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's plays run per drive on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   playsdrive_def_rush_rank?: number | null;
-  /** National rank of the team's stuffed-play rate -- the share of plays carrying the stuffed flag on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's run-stuff rate -- the share of rushes stopped for 0 or fewer yards on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   play_stuffed_def_rush_rank?: number | null;
-  /** National rank of the team's success rate on red-zone plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on red-zone plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   red_zone_success_def_rush_rank?: number | null;
-  /** National rank of the team's success rate on third-down plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on third-down plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_success_def_rush_rank?: number | null;
-  /** National rank of the team's success rate on late-down plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's success rate on late-down plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   late_down_success_def_rush_rank?: number | null;
-  /** National rank of the team's average yards to go on third down on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average yards to go on third down on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   third_down_distance_def_rush_rank?: number | null;
-  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's havoc rate -- the share of plays carrying the defensive-disruption flag on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_def_rush_rank?: number | null;
-  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's explosive-play rate -- the share of plays carrying the explosive flag on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   explosive_def_rush_rank?: number | null;
-  /** National rank of the team's share of plays that were pass plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were pass plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   passrate_def_rush_rank?: number | null;
-  /** National rank of the team's share of plays that were rush plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's share of plays that were rush plays on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   rushrate_def_rush_rank?: number | null;
-  /** National rank of the team's EPA per play with explosive plays excluded on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per play with explosive plays excluded on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   nonExplosiveEpaPerPlay_def_rush_rank?: number | null;
-  /** National rank of the team's average line yards credited to the offensive line on rushes on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's average line yards credited to the offensive line on rushes on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   line_yards_def_rush_rank?: number | null;
-  /** National rank of the team's opportunity rate -- the share of rushes carrying the opportunity flag on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's opportunity rate -- the share of rushes gaining 4 or more yards on rush plays with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   opportunity_rate_def_rush_rank?: number | null;
   /** Margin in total EPA summed over every play on rush plays: the team's offensive value minus the value it allowed on defense. `Float64` */
   TEPA_margin_rush?: number | null;
@@ -6651,19 +6729,19 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   EPAgame_margin_rush?: number | null;
   /** Margin in success rate -- the share of plays flagged as successful by EPA on rush plays: the team's offensive value minus the value it allowed on defense. `Float64` */
   success_margin_rush?: number | null;
-  /** Margin in yards gained per play on rush plays: the team's offensive value minus the value it allowed on defense. `Float64` */
+  /** Margin in yards gained per play (an interception counts as 0 yards) on rush plays: the team's offensive value minus the value it allowed on defense. `Float64` */
   yardsplay_margin_rush?: number | null;
-  /** Margin in total EPA summed over every play on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in total EPA summed over every play on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   TEPA_margin_rush_rank?: number | null;
-  /** Margin in EPA per play on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per play on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAplay_margin_rush_rank?: number | null;
-  /** Margin in EPA per drive (total EPA divided by drives) on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per drive (total EPA divided by drives) on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAdrive_margin_rush_rank?: number | null;
-  /** Margin in EPA per game (total EPA divided by games) on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per game (total EPA divided by games) on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   EPAgame_margin_rush_rank?: number | null;
-  /** Margin in success rate -- the share of plays flagged as successful by EPA on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in success rate -- the share of plays flagged as successful by EPA on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   success_margin_rush_rank?: number | null;
-  /** Margin in yards gained per play on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in yards gained per play (an interception counts as 0 yards) on rush plays: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   yardsplay_margin_rush_rank?: number | null;
   /** EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps, with the team on offense. `Float64` */
   havoc_EPAgame_off?: number | null;
@@ -6671,23 +6749,23 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   havoc_EPAgame_def?: number | null;
   /** Margin in EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps: the team's offensive value minus the value it allowed on defense. `Float64` */
   havoc_EPAgame_margin?: number | null;
-  /** Expected giveaways per game: half of every scrimmage fumble, plus interceptions at the season's national share of passes defensed (INT + PBU) that were intercepted, counted on the team's own plays. Lower is better. `Float64` */
+  /** Expected giveaways per game: half of every scrimmage fumble, plus interceptions at the season's national share of passes defensed (INT + PBU) that were intercepted, counted on the team's own plays. Breakups come from ESPN's game box passesDefended (breakups only, so passes defensed = INT + PD) in seasons where it covers at least 95% of team-games (2024 on), and from the play text otherwise. Lower is better. `Float64` */
   expected_turnovers_off?: number | null;
-  /** Expected takeaways per game: half of every scrimmage fumble, plus interceptions at the season's national share of passes defensed (INT + PBU) that were intercepted, counted on opponents' plays against the team's defense. Higher is better. `Float64` */
+  /** Expected takeaways per game: half of every scrimmage fumble, plus interceptions at the season's national share of passes defensed (INT + PBU) that were intercepted, counted on opponents' plays against the team's defense. Breakups come from ESPN's game box passesDefended (breakups only, so passes defensed = INT + PD) in seasons where it covers at least 95% of team-games (2024 on), and from the play text otherwise. Higher is better. `Float64` */
   expected_turnovers_def?: number | null;
   /** Expected turnover margin per game: expected_turnovers_def minus expected_turnovers_off (expected takeaways minus expected giveaways). Higher is better. Spelled singular, like turnover_margin. `Float64` */
   expected_turnover_margin?: number | null;
-  /** National rank of the team's EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps with the team on offense, where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_EPAgame_off_rank?: number | null;
-  /** National rank of the team's EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps with the team on defense (i.e. allowed to opponents), where 1 is best. `Float64` */
+  /** National rank of the team's EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_EPAgame_def_rank?: number | null;
-  /** Margin in EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. `Float64` */
+  /** Margin in EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps: the team's offensive value minus the value it allowed on defense. National rank of that margin, 1 = largest. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   havoc_EPAgame_margin_rank?: number | null;
-  /** National rank of expected_turnovers_off, where 1 is best (fewest expected giveaways per game). `Float64` */
+  /** National rank of expected_turnovers_off, where 1 is best (fewest expected giveaways per game). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   expected_turnovers_off_rank?: number | null;
-  /** National rank of expected_turnovers_def, where 1 is best (most expected takeaways per game). `Float64` */
+  /** National rank of expected_turnovers_def, where 1 is best (most expected takeaways per game). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   expected_turnovers_def_rank?: number | null;
-  /** National rank of expected_turnover_margin, 1 = largest margin. `Float64` */
+  /** National rank of expected_turnover_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   expected_turnover_margin_rank?: number | null;
   /** Offensive turnover luck in points per game: 5 points for every giveaway fewer than expected -- 5 x (expected_turnovers_off minus turnovers_off). Positive = lucky. `Float64` */
   turnover_luck_off?: number | null;
@@ -6695,11 +6773,11 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   turnover_luck_def?: number | null;
   /** Turnover luck in points per game: 5 x (turnover_margin minus expected_turnover_margin), the part of the turnover margin the team's fumble and pass-defensed volume did not earn; turnover_luck_off plus turnover_luck_def. Positive = lucky. `Float64` */
   turnover_luck?: number | null;
-  /** National rank of turnover_luck_off, 1 = luckiest (largest). `Float64` */
+  /** National rank of turnover_luck_off, 1 = luckiest (largest). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   turnover_luck_off_rank?: number | null;
-  /** National rank of turnover_luck_def, 1 = luckiest (largest). `Float64` */
+  /** National rank of turnover_luck_def, 1 = luckiest (largest). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   turnover_luck_def_rank?: number | null;
-  /** National rank of turnover_luck, 1 = luckiest (largest). `Float64` */
+  /** National rank of turnover_luck, 1 = luckiest (largest). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   turnover_luck_rank?: number | null;
   /** Power/Group classification for the season: P4 or G6 from 2024 on, P5 or G5 through 2023, derived from conference membership (Notre Dame is classified with the power group). Null for teams outside FBS. `String` */
   fbs_class?: string | null;
@@ -6715,11 +6793,11 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   def_strength_faced?: number | null;
   /** Net opponent-adjusted EPA per play: adj_off_epa minus adj_def_epa. Higher is better. `Float64` */
   net_adj_epa?: number | null;
-  /** National rank of the team's adj_off_epa, where 1 is best. `Float64` */
+  /** National rank of the team's adj_off_epa, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   adj_off_epa_rank?: number | null;
-  /** National rank of the team's adj_def_epa, where 1 is best (fewest EPA allowed). `Float64` */
+  /** National rank of the team's adj_def_epa, where 1 is best (fewest EPA allowed). Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   adj_def_epa_rank?: number | null;
-  /** National rank of the team's net_adj_epa, 1 = largest net adjusted EPA. `Float64` */
+  /** National rank of the team's net_adj_epa, 1 = largest net adjusted EPA. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. `Float64` */
   net_adj_epa_rank?: number | null;
   /** National rank of off_strength_faced, where 1 = toughest slate (the strongest opposing offenses). Ties share the average rank. Null when off_strength_faced is null: unranked, not last. `Float64` */
   off_strength_faced_rank?: number | null;
@@ -6739,9 +6817,9 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   early_down_EPA_off_conf_pct?: number | null;
   /** Percentile (0-100) of success rate -- the share of plays flagged as successful by EPA with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_off_conf_pct?: number | null;
-  /** Percentile (0-100) of total yards gained with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of total yards gained (an interception counts as 0 yards) with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yards_off_conf_pct?: number | null;
-  /** Percentile (0-100) of yards gained per play with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of yards gained per play (an interception counts as 0 yards) with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_off_conf_pct?: number | null;
   /** Percentile (0-100) of yards gained per game with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_off_conf_pct?: number | null;
@@ -6751,7 +6829,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   yardsdrive_off_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per drive with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsdrive_off_conf_pct?: number | null;
-  /** Percentile (0-100) of stuffed-play rate -- the share of plays carrying the stuffed flag with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of run-stuff rate -- the share of rushes stopped for 0 or fewer yards with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   play_stuffed_off_conf_pct?: number | null;
   /** Percentile (0-100) of success rate on red-zone plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   red_zone_success_off_conf_pct?: number | null;
@@ -6775,7 +6853,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_off_conf_pct?: number | null;
   /** Percentile (0-100) of average line yards credited to the offensive line on rushes with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   line_yards_off_conf_pct?: number | null;
-  /** Percentile (0-100) of opportunity rate -- opportunity-flagged rushes as a share of all plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of opportunity rate -- the share of rushes gaining 4 or more yards with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   opportunity_rate_off_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per game with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsgame_def_conf_pct?: number | null;
@@ -6791,9 +6869,9 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   early_down_EPA_def_conf_pct?: number | null;
   /** Percentile (0-100) of success rate -- the share of plays flagged as successful by EPA with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_def_conf_pct?: number | null;
-  /** Percentile (0-100) of total yards gained with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of total yards gained (an interception counts as 0 yards) with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yards_def_conf_pct?: number | null;
-  /** Percentile (0-100) of yards gained per play with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of yards gained per play (an interception counts as 0 yards) with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_def_conf_pct?: number | null;
   /** Percentile (0-100) of yards gained per game with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_def_conf_pct?: number | null;
@@ -6803,7 +6881,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   yardsdrive_def_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per drive with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsdrive_def_conf_pct?: number | null;
-  /** Percentile (0-100) of stuffed-play rate -- the share of plays carrying the stuffed flag with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of run-stuff rate -- the share of rushes stopped for 0 or fewer yards with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   play_stuffed_def_conf_pct?: number | null;
   /** Percentile (0-100) of success rate on red-zone plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   red_zone_success_def_conf_pct?: number | null;
@@ -6827,7 +6905,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_def_conf_pct?: number | null;
   /** Percentile (0-100) of average line yards credited to the offensive line on rushes with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   line_yards_def_conf_pct?: number | null;
-  /** Percentile (0-100) of opportunity rate -- opportunity-flagged rushes as a share of all plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of opportunity rate -- the share of rushes gaining 4 or more yards with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   opportunity_rate_def_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in total EPA summed over every play (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   TEPA_margin_conf_pct?: number | null;
@@ -6839,7 +6917,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   EPAgame_margin_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in success rate -- the share of plays flagged as successful by EPA (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_margin_conf_pct?: number | null;
-  /** Percentile (0-100) of the margin in yards gained per play (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of the margin in yards gained per play (an interception counts as 0 yards) (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_margin_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in explosive-play rate -- the share of plays carrying the explosive flag (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   explosive_margin_conf_pct?: number | null;
@@ -6895,9 +6973,9 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   early_down_EPA_off_pass_conf_pct?: number | null;
   /** Percentile (0-100) of success rate -- the share of plays flagged as successful by EPA on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_off_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of total yards gained on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of total yards gained (an interception counts as 0 yards) on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yards_off_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of yards gained per play on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of yards gained per play (an interception counts as 0 yards) on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_off_pass_conf_pct?: number | null;
   /** Percentile (0-100) of yards gained per game on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_off_pass_conf_pct?: number | null;
@@ -6907,7 +6985,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   yardsdrive_off_pass_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per drive on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsdrive_off_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of stuffed-play rate -- the share of plays carrying the stuffed flag on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of run-stuff rate (always null: only rushes carry the stuffed flag) on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   play_stuffed_off_pass_conf_pct?: number | null;
   /** Percentile (0-100) of success rate on red-zone plays on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   red_zone_success_off_pass_conf_pct?: number | null;
@@ -6929,7 +7007,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_off_pass_conf_pct?: number | null;
   /** Percentile (0-100) of average line yards credited to the offensive line on rushes on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   line_yards_off_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of opportunity rate (always 0: only rushes carry the opportunity flag) on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of opportunity rate (always null: only rushes carry the opportunity flag) on pass plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   opportunity_rate_off_pass_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per game on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsgame_def_pass_conf_pct?: number | null;
@@ -6945,9 +7023,9 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   early_down_EPA_def_pass_conf_pct?: number | null;
   /** Percentile (0-100) of success rate -- the share of plays flagged as successful by EPA on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_def_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of total yards gained on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of total yards gained (an interception counts as 0 yards) on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yards_def_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of yards gained per play on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of yards gained per play (an interception counts as 0 yards) on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_def_pass_conf_pct?: number | null;
   /** Percentile (0-100) of yards gained per game on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_def_pass_conf_pct?: number | null;
@@ -6957,7 +7035,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   yardsdrive_def_pass_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per drive on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsdrive_def_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of stuffed-play rate -- the share of plays carrying the stuffed flag on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of run-stuff rate (always null: only rushes carry the stuffed flag) on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   play_stuffed_def_pass_conf_pct?: number | null;
   /** Percentile (0-100) of success rate on red-zone plays on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   red_zone_success_def_pass_conf_pct?: number | null;
@@ -6979,7 +7057,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_def_pass_conf_pct?: number | null;
   /** Percentile (0-100) of average line yards credited to the offensive line on rushes on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   line_yards_def_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of opportunity rate (always 0: only rushes carry the opportunity flag) on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of opportunity rate (always null: only rushes carry the opportunity flag) on pass plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   opportunity_rate_def_pass_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in total EPA summed over every play on pass plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   TEPA_margin_pass_conf_pct?: number | null;
@@ -6991,7 +7069,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   EPAgame_margin_pass_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in success rate -- the share of plays flagged as successful by EPA on pass plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_margin_pass_conf_pct?: number | null;
-  /** Percentile (0-100) of the margin in yards gained per play on pass plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of the margin in yards gained per play (an interception counts as 0 yards) on pass plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_margin_pass_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per game on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsgame_off_rush_conf_pct?: number | null;
@@ -7007,9 +7085,9 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   early_down_EPA_off_rush_conf_pct?: number | null;
   /** Percentile (0-100) of success rate -- the share of plays flagged as successful by EPA on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_off_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of total yards gained on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of total yards gained (an interception counts as 0 yards) on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yards_off_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of yards gained per play on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of yards gained per play (an interception counts as 0 yards) on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_off_rush_conf_pct?: number | null;
   /** Percentile (0-100) of yards gained per game on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_off_rush_conf_pct?: number | null;
@@ -7019,7 +7097,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   yardsdrive_off_rush_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per drive on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsdrive_off_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of stuffed-play rate -- the share of plays carrying the stuffed flag on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of run-stuff rate -- the share of rushes stopped for 0 or fewer yards on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   play_stuffed_off_rush_conf_pct?: number | null;
   /** Percentile (0-100) of success rate on red-zone plays on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   red_zone_success_off_rush_conf_pct?: number | null;
@@ -7041,7 +7119,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_off_rush_conf_pct?: number | null;
   /** Percentile (0-100) of average line yards credited to the offensive line on rushes on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   line_yards_off_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of opportunity rate -- the share of rushes carrying the opportunity flag on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of opportunity rate -- the share of rushes gaining 4 or more yards on rush plays with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   opportunity_rate_off_rush_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per game on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsgame_def_rush_conf_pct?: number | null;
@@ -7057,9 +7135,9 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   early_down_EPA_def_rush_conf_pct?: number | null;
   /** Percentile (0-100) of success rate -- the share of plays flagged as successful by EPA on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_def_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of total yards gained on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of total yards gained (an interception counts as 0 yards) on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yards_def_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of yards gained per play on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of yards gained per play (an interception counts as 0 yards) on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_def_rush_conf_pct?: number | null;
   /** Percentile (0-100) of yards gained per game on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsgame_def_rush_conf_pct?: number | null;
@@ -7069,7 +7147,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   yardsdrive_def_rush_conf_pct?: number | null;
   /** Percentile (0-100) of plays run per drive on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   playsdrive_def_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of stuffed-play rate -- the share of plays carrying the stuffed flag on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of run-stuff rate -- the share of rushes stopped for 0 or fewer yards on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   play_stuffed_def_rush_conf_pct?: number | null;
   /** Percentile (0-100) of success rate on red-zone plays on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   red_zone_success_def_rush_conf_pct?: number | null;
@@ -7091,7 +7169,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   nonExplosiveEpaPerPlay_def_rush_conf_pct?: number | null;
   /** Percentile (0-100) of average line yards credited to the offensive line on rushes on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   line_yards_def_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of opportunity rate -- the share of rushes carrying the opportunity flag on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of opportunity rate -- the share of rushes gaining 4 or more yards on rush plays with the team on defense (i.e. allowed to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   opportunity_rate_def_rush_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in total EPA summed over every play on rush plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   TEPA_margin_rush_conf_pct?: number | null;
@@ -7103,7 +7181,7 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   EPAgame_margin_rush_conf_pct?: number | null;
   /** Percentile (0-100) of the margin in success rate -- the share of plays flagged as successful by EPA on rush plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   success_margin_rush_conf_pct?: number | null;
-  /** Percentile (0-100) of the margin in yards gained per play on rush plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
+  /** Percentile (0-100) of the margin in yards gained per play (an interception counts as 0 yards) on rush plays (offense minus defense allowed) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   yardsplay_margin_rush_conf_pct?: number | null;
   /** Percentile (0-100) of EPA per game on havoc-flagged plays -- the EPA cost of the disruption to the offense on those snaps with the team on offense among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   havoc_EPAgame_off_conf_pct?: number | null;

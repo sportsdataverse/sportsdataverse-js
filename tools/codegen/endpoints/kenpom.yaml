@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@89c638a61b8c36f0f59159773260b8a0b998a5dc
+# VENDORED from sportsdataverse/sportsdataverse-py@79dd939371d245b0935362b491b03f50d63f8a8d
 # tools/codegen/endpoints/kenpom.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/kenpom.yaml; shared changes land in sdv-py first.
@@ -268,7 +268,7 @@ endpoints:
     type: int
     required: true
     description: Season (4-digit ENDING year) the game belongs to.
-  example_args: { game_id: 20250401, year: 2025 }
+  example_args: { game_id: 1097, year: 2025 }
   parser: parse_kenpom_page
 
 - short: win_probability
@@ -285,7 +285,7 @@ endpoints:
     type: int
     required: true
     description: Season (4-digit ENDING year) the game belongs to.
-  example_args: { game_id: 20250401, year: 2025 }
+  example_args: { game_id: 3577, year: 2025 }
   parser: parse_kenpom_page
 
 - short: fan_match
@@ -427,15 +427,15 @@ endpoints:
   extra_params:
   - name: referee
     query_key: r
-    type: str
+    type: int|str
     required: true
-    description: Referee name as KenPom spells it (take it from the officials table).
+    description: KenPom referee id - the `r=` value on an officials-table link.
   - name: year
     query_key: y
     type: int
     required: true
     description: Season as a 4-digit ENDING year.
-  example_args: { referee: Ron Groover, year: 2025 }
+  example_args: { referee: 714294, year: 2025 }
   parser: parse_kenpom_page
 
 - short: game_attributes

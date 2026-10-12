@@ -2898,7 +2898,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/analytics_games"
   },
   {
     "short": "analytics_guids",
@@ -2938,7 +2939,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/analytics_guids"
   },
   {
     "short": "game_guids",
@@ -2986,7 +2988,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/game_guids"
   },
   {
     "short": "play_analytics",
@@ -3013,7 +3016,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/play_analytics"
   },
   {
     "short": "play_context_metrics_averages",
@@ -3036,7 +3040,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/play_context_metrics_averages"
   },
   {
     "short": "game_color",
@@ -3060,7 +3065,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/game_color"
   },
   {
     "short": "game_color_diff",
@@ -3084,7 +3090,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "endTimecode"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/game_color_diff"
   },
   {
     "short": "game_color_timestamps",
@@ -3099,7 +3106,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_mlb_timecodes"
+    "parser": "parse_mlb_timecodes",
+    "returnsSchema": "native/mlb/game_color_timestamps"
   },
   {
     "short": "game_pace",
@@ -3495,7 +3503,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/umpire_games"
   },
   {
     "short": "schedule_tied",
@@ -3720,7 +3729,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/stats_metrics"
   },
   {
     "short": "teams_history",
@@ -6252,7 +6262,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_top10"
+    "parser": "parse_edge_top10",
+    "returnsSchema": "native/nhl_edge/skater_shot_location_top_10"
   },
   {
     "short": "skater_shot_speed_detail",
@@ -6310,7 +6321,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_top10"
+    "parser": "parse_edge_top10",
+    "returnsSchema": "native/nhl_edge/skater_shot_speed_top_10"
   },
   {
     "short": "skater_skating_distance_detail",
@@ -6396,7 +6408,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_top10"
+    "parser": "parse_edge_top10",
+    "returnsSchema": "native/nhl_edge/skater_speed_top_10"
   },
   {
     "short": "skater_distance_top_10",
@@ -6429,7 +6442,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_top10"
+    "parser": "parse_edge_top10",
+    "returnsSchema": "native/nhl_edge/skater_distance_top_10"
   },
   {
     "short": "skater_zone_time",
@@ -6490,7 +6504,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_top10"
+    "parser": "parse_edge_top10",
+    "returnsSchema": "native/nhl_edge/skater_zone_time_top_10"
   },
   {
     "short": "skater_landing",
@@ -6598,7 +6613,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_top10"
+    "parser": "parse_edge_top10",
+    "returnsSchema": "native/nhl_edge/goalie_5v5_top_10"
   },
   {
     "short": "goalie_comparison",
@@ -6681,7 +6697,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_top10"
+    "parser": "parse_edge_top10",
+    "returnsSchema": "native/nhl_edge/goalie_edge_save_pctg_top_10"
   },
   {
     "short": "goalie_shot_location_detail",
@@ -6739,7 +6756,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_top10"
+    "parser": "parse_edge_top10",
+    "returnsSchema": "native/nhl_edge/goalie_shot_location_top_10"
   },
   {
     "short": "goalie_landing",
@@ -6878,7 +6896,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_top10"
+    "parser": "parse_edge_top10",
+    "returnsSchema": "native/nhl_edge/team_shot_location_top_10"
   },
   {
     "short": "team_shot_speed_detail",
@@ -6965,7 +6984,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_top10"
+    "parser": "parse_edge_top10",
+    "returnsSchema": "native/nhl_edge/team_skating_distance_top_10"
   },
   {
     "short": "team_skating_speed_detail",
@@ -7021,7 +7041,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_top10"
+    "parser": "parse_edge_top10",
+    "returnsSchema": "native/nhl_edge/team_skating_speed_top_10"
   },
   {
     "short": "team_zone_time_details",
@@ -7079,7 +7100,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_top10"
+    "parser": "parse_edge_top10",
+    "returnsSchema": "native/nhl_edge/team_zone_time_top_10"
   },
   {
     "short": "cat_skater_detail",
@@ -7752,7 +7774,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/skater-career-statistics",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/skater_career_stats"
   },
   {
     "short": "skater_career_leaders",
@@ -7763,7 +7786,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/skater-career-leaders",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/skater_career_leaders"
   },
   {
     "short": "consecutive_100pt_seasons",

@@ -27,25 +27,25 @@ sidebar_position: 50
 | [`loadNhlPlayerBoxscore`](#loadnhlplayerboxscore) | [nhl_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_player_boxscores) | 2010+ |
 | [`loadNhlSchedule`](#loadnhlschedule) | [nhl_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_schedules) | 2010+ |
 | [`loadNhlTeamBoxscore`](#loadnhlteamboxscore) | [nhl_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_team_boxscores) | 2010+ |
-| [`loadNhlGameInfo`](#loadnhlgameinfo) | [nhl_game_info](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_game_info) | 2024+ |
-| [`loadNhlGameRosters`](#loadnhlgamerosters) | [nhl_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_game_rosters) | 2024+ |
-| [`loadNhlGoalieBoxscores`](#loadnhlgoalieboxscores) | [nhl_goalie_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_goalie_boxscores) | 2024+ |
-| [`loadNhlLinescore`](#loadnhllinescore) | [nhl_linescore](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_linescore) | 2024+ |
-| [`loadNhlOfficials`](#loadnhlofficials) | [nhl_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_officials) | 2025+ |
+| [`loadNhlGameInfo`](#loadnhlgameinfo) | [nhl_game_info](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_game_info) | 2010+ |
+| [`loadNhlGameRosters`](#loadnhlgamerosters) | [nhl_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_game_rosters) | 2010+ |
+| [`loadNhlGoalieBoxscores`](#loadnhlgoalieboxscores) | [nhl_goalie_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_goalie_boxscores) | 2010+ |
+| [`loadNhlLinescore`](#loadnhllinescore) | [nhl_linescore](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_linescore) | 2010+ |
+| [`loadNhlOfficials`](#loadnhlofficials) | [nhl_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_officials) | 2010+ |
 | [`loadNhlPbpFull`](#loadnhlpbpfull) | [nhl_pbp_full](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_pbp_full) | 2010+ |
 | [`loadNhlPbpLite`](#loadnhlpbplite) | [nhl_pbp_lite](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_pbp_lite) | 2010+ |
-| [`loadNhlPenalties`](#loadnhlpenalties) | [nhl_penalties](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_penalties) | 2024+ |
+| [`loadNhlPenalties`](#loadnhlpenalties) | [nhl_penalties](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_penalties) | 2010+ |
 | [`loadNhlPlayerBoxscores`](#loadnhlplayerboxscores) | [nhl_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_player_boxscores) | 2010+ |
 | [`loadNhlRosters`](#loadnhlrosters) | [nhl_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_rosters) | 2010+ |
 | [`loadNhlSchedules`](#loadnhlschedules) | [nhl_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_schedules) | 2010+ |
-| [`loadNhlScoring`](#loadnhlscoring) | [nhl_scoring](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_scoring) | 2024+ |
-| [`loadNhlScratches`](#loadnhlscratches) | [nhl_scratches](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_scratches) | 2024+ |
-| [`loadNhlShifts`](#loadnhlshifts) | [nhl_shifts](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_shifts) | 2025+ |
-| [`loadNhlShootout`](#loadnhlshootout) | [nhl_shootout](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_shootout) | 2025+ |
-| [`loadNhlShotsByPeriod`](#loadnhlshotsbyperiod) | [nhl_shots_by_period](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_shots_by_period) | 2025+ |
-| [`loadNhlSkaterBoxscores`](#loadnhlskaterboxscores) | [nhl_skater_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_skater_boxscores) | 2024+ |
+| [`loadNhlScoring`](#loadnhlscoring) | [nhl_scoring](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_scoring) | 2010+ |
+| [`loadNhlScratches`](#loadnhlscratches) | [nhl_scratches](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_scratches) | 2010+ |
+| [`loadNhlShifts`](#loadnhlshifts) | [nhl_shifts](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_shifts) | 2010+ |
+| [`loadNhlShootout`](#loadnhlshootout) | [nhl_shootout](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_shootout) | 2010+ |
+| [`loadNhlShotsByPeriod`](#loadnhlshotsbyperiod) | [nhl_shots_by_period](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_shots_by_period) | 2010+ |
+| [`loadNhlSkaterBoxscores`](#loadnhlskaterboxscores) | [nhl_skater_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_skater_boxscores) | 2010+ |
 | [`loadNhlTeamBoxscores`](#loadnhlteamboxscores) | [nhl_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_team_boxscores) | 2010+ |
-| [`loadNhlThreeStars`](#loadnhlthreestars) | [nhl_three_stars](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_three_stars) | 2024+ |
+| [`loadNhlThreeStars`](#loadnhlthreestars) | [nhl_three_stars](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_three_stars) | 2010+ |
 | [`loadNhlGroups`](#loadnhlgroups) | [nhl_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_groups) | one asset |
 | [`loadNhlGroupSeasons`](#loadnhlgroupseasons) | [nhl_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_groups) | one asset |
 | [`loadNhlGroupAliases`](#loadnhlgroupaliases) | [nhl_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_groups) | one asset |
@@ -338,7 +338,7 @@ Release: [nhl_game_info](https://github.com/sportsdataverse/sportsdataverse-data
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -372,7 +372,7 @@ Release: [nhl_game_rosters](https://github.com/sportsdataverse/sportsdataverse-d
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -408,7 +408,7 @@ Release: [nhl_goalie_boxscores](https://github.com/sportsdataverse/sportsdataver
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -456,7 +456,7 @@ Release: [nhl_linescore](https://github.com/sportsdataverse/sportsdataverse-data
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -490,7 +490,7 @@ Release: [nhl_officials](https://github.com/sportsdataverse/sportsdataverse-data
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -633,7 +633,7 @@ const rows = await sdv.nhl.loadNhlPbpFull({ seasons: 2010, columns: ['game_id', 
 
 ## `loadNhlPbpLite`
 
-Release: [nhl_pbp_lite](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_pbp_lite) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_pbp_lite/play_by_play_{season}_lite.parquet`
+Release: [nhl_pbp_lite](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_pbp_lite) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_pbp_lite/play_by_play_lite_{season}.parquet`
 
 | option | type | required | description |
 |---|---|---|---|
@@ -754,7 +754,7 @@ Release: [nhl_penalties](https://github.com/sportsdataverse/sportsdataverse-data
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -981,7 +981,7 @@ Release: [nhl_scoring](https://github.com/sportsdataverse/sportsdataverse-data/r
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1056,7 +1056,7 @@ Release: [nhl_scratches](https://github.com/sportsdataverse/sportsdataverse-data
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1084,7 +1084,7 @@ Release: [nhl_shifts](https://github.com/sportsdataverse/sportsdataverse-data/re
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1125,7 +1125,7 @@ Release: [nhl_shootout](https://github.com/sportsdataverse/sportsdataverse-data/
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1181,7 +1181,7 @@ Release: [nhl_shots_by_period](https://github.com/sportsdataverse/sportsdatavers
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1214,7 +1214,7 @@ Release: [nhl_skater_boxscores](https://github.com/sportsdataverse/sportsdataver
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1305,7 +1305,7 @@ Release: [nhl_three_stars](https://github.com/sportsdataverse/sportsdataverse-da
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |

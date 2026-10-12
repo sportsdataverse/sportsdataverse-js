@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@89c638a61b8c36f0f59159773260b8a0b998a5dc
+# VENDORED from sportsdataverse/sportsdataverse-py@79dd939371d245b0935362b491b03f50d63f8a8d
 # tools/codegen/endpoints/nhl_records.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/nhl_records.yaml; shared changes land in sdv-py first.
@@ -129,10 +129,12 @@ endpoints:
   path: /all-time-record-vs-franchise
   parser: parse_nhl_records
 - short: skater_career_stats
+  returns_schema: native/nhl_records/skater_career_stats
   summary: Skater career statistics (all-time, regular season).
   path: /skater-career-statistics
   parser: parse_nhl_records
 - short: skater_career_leaders
+  returns_schema: native/nhl_records/skater_career_leaders
   summary: All-time skater career leaderboards.
   path: /skater-career-leaders
   parser: parse_nhl_records

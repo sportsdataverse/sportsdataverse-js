@@ -27,6 +27,7 @@ from sportsdataverse._common_espn_parsers import (
     parse_items,
     parse_leaders,
     parse_news,
+    parse_rankings,
     parse_scoreboard,
     parse_single_entity,
     parse_standings,
@@ -34,6 +35,7 @@ from sportsdataverse._common_espn_parsers import (
     parse_team_roster,
     parse_team_schedule,
     parse_teams,
+    parse_transactions,
     parse_weekly_powerindex,
 )
 
@@ -419,7 +421,7 @@ def espn_mbb_transactions(
 
     Args:
         limit: Maximum number of items to return.
-        return_parsed: parse the payload through parse_items -> polars DataFrame (default True). Pass return_parsed=False for the raw JSON Dict.
+        return_parsed: parse the payload through parse_transactions -> polars DataFrame (default True). Pass return_parsed=False for the raw JSON Dict.
         return_as_pandas: with return_parsed, return a pandas DataFrame instead of polars.
 
     Returns:
@@ -446,7 +448,7 @@ def espn_mbb_transactions(
         **kwargs,
     )
     if return_parsed:
-        return parse_items(raw, return_as_pandas=return_as_pandas)
+        return parse_transactions(raw, return_as_pandas=return_as_pandas)
     return raw
 
 
@@ -1290,7 +1292,7 @@ def espn_mbb_rankings(
     Example URL: https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/rankings
 
     Args:
-        return_parsed: parse the payload through parse_items -> polars DataFrame (default True). Pass return_parsed=False for the raw JSON Dict.
+        return_parsed: parse the payload through parse_rankings -> polars DataFrame (default True). Pass return_parsed=False for the raw JSON Dict.
         return_as_pandas: with return_parsed, return a pandas DataFrame instead of polars.
 
     Returns:
@@ -1315,7 +1317,7 @@ def espn_mbb_rankings(
         **kwargs,
     )
     if return_parsed:
-        return parse_items(raw, return_as_pandas=return_as_pandas)
+        return parse_rankings(raw, return_as_pandas=return_as_pandas)
     return raw
 
 

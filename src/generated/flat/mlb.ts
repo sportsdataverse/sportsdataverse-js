@@ -303,7 +303,8 @@ const ANALYTICS_GAMES_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/analytics_games"
 };
 
 /**
@@ -365,7 +366,8 @@ const ANALYTICS_GUIDS_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/analytics_guids"
 };
 
 /**
@@ -985,7 +987,8 @@ const GAME_COLOR_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/game_color"
 };
 
 /**
@@ -1027,7 +1030,8 @@ const GAME_COLOR_DIFF_DEF: WrapperDef = {
       "queryKey": "endTimecode"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/game_color_diff"
 };
 
 /**
@@ -1060,7 +1064,8 @@ const GAME_COLOR_TIMESTAMPS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_mlb_timecodes"
+  "parser": "parse_mlb_timecodes",
+  "returnsSchema": "native/mlb/game_color_timestamps"
 };
 
 /**
@@ -1194,7 +1199,8 @@ const GAME_GUIDS_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/game_guids"
 };
 
 /**
@@ -2063,7 +2069,8 @@ const PLAY_ANALYTICS_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/play_analytics"
 };
 
 /**
@@ -2148,7 +2155,8 @@ const PLAY_CONTEXT_METRICS_AVERAGES_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/play_context_metrics_averages"
 };
 
 /**
@@ -2972,7 +2980,8 @@ const STATS_METRICS_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/stats_metrics"
 };
 
 /**
@@ -3827,7 +3836,8 @@ const UMPIRE_GAMES_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/umpire_games"
 };
 
 /**
