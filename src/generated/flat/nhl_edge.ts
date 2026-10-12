@@ -231,7 +231,8 @@ const GOALIE_5V5_TOP_10_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_top10"
+  "parser": "parse_edge_top10",
+  "returnsSchema": "native/nhl_edge/goalie_5v5_top_10"
 };
 
 /**
@@ -368,7 +369,8 @@ const GOALIE_EDGE_SAVE_PCTG_TOP_10_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_top10"
+  "parser": "parse_edge_top10",
+  "returnsSchema": "native/nhl_edge/goalie_edge_save_pctg_top_10"
 };
 
 /**
@@ -550,7 +552,8 @@ const GOALIE_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_top10"
+  "parser": "parse_edge_top10",
+  "returnsSchema": "native/nhl_edge/goalie_shot_location_top_10"
 };
 
 /**
@@ -694,7 +697,8 @@ const SKATER_DISTANCE_TOP_10_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_top10"
+  "parser": "parse_edge_top10",
+  "returnsSchema": "native/nhl_edge/skater_distance_top_10"
 };
 
 /**
@@ -835,7 +839,8 @@ const SKATER_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_top10"
+  "parser": "parse_edge_top10",
+  "returnsSchema": "native/nhl_edge/skater_shot_location_top_10"
 };
 
 /**
@@ -931,7 +936,8 @@ const SKATER_SHOT_SPEED_TOP_10_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_top10"
+  "parser": "parse_edge_top10",
+  "returnsSchema": "native/nhl_edge/skater_shot_speed_top_10"
 };
 
 /**
@@ -1072,7 +1078,8 @@ const SKATER_SPEED_TOP_10_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_top10"
+  "parser": "parse_edge_top10",
+  "returnsSchema": "native/nhl_edge/skater_speed_top_10"
 };
 
 /**
@@ -1170,7 +1177,8 @@ const SKATER_ZONE_TIME_TOP_10_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_top10"
+  "parser": "parse_edge_top10",
+  "returnsSchema": "native/nhl_edge/skater_zone_time_top_10"
 };
 
 /**
@@ -1357,7 +1365,8 @@ const TEAM_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_top10"
+  "parser": "parse_edge_top10",
+  "returnsSchema": "native/nhl_edge/team_shot_location_top_10"
 };
 
 /**
@@ -1500,7 +1509,8 @@ const TEAM_SKATING_DISTANCE_TOP_10_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_top10"
+  "parser": "parse_edge_top10",
+  "returnsSchema": "native/nhl_edge/team_skating_distance_top_10"
 };
 
 /**
@@ -1594,7 +1604,8 @@ const TEAM_SKATING_SPEED_TOP_10_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_top10"
+  "parser": "parse_edge_top10",
+  "returnsSchema": "native/nhl_edge/team_skating_speed_top_10"
 };
 
 /**
@@ -1689,7 +1700,8 @@ const TEAM_ZONE_TIME_TOP_10_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_top10"
+  "parser": "parse_edge_top10",
+  "returnsSchema": "native/nhl_edge/team_zone_time_top_10"
 };
 
 /**

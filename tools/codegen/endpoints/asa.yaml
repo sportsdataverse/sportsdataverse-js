@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@89c638a61b8c36f0f59159773260b8a0b998a5dc
+# VENDORED from sportsdataverse/sportsdataverse-py@79dd939371d245b0935362b491b03f50d63f8a8d
 # tools/codegen/endpoints/asa.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/asa.yaml; shared changes land in sdv-py first.
@@ -21,7 +21,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/games
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -70,7 +70,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/games/xgoals
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -119,7 +119,7 @@ endpoints:
   parser: parse_asa_goals_added
   path: /{league_slug}/goalkeepers/goals-added
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns empty `summary` and `actions` frames. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -168,7 +168,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/goalkeepers/xgoals
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -180,7 +180,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/managers
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -192,7 +192,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/players
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -241,7 +241,7 @@ endpoints:
   parser: parse_asa_goals_added
   path: /{league_slug}/players/goals-added
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns empty `summary` and `actions` frames. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -290,7 +290,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/players/salaries
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -339,7 +339,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/players/xgoals
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -388,7 +388,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/players/xpass
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -400,7 +400,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/referees
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -412,7 +412,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/stadia
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -424,7 +424,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/teams
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -473,7 +473,7 @@ endpoints:
   parser: parse_asa_goals_added
   path: /{league_slug}/teams/goals-added
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns empty `summary` and `actions` frames. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -522,7 +522,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/teams/xgoals
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str
@@ -571,7 +571,7 @@ endpoints:
   parser: parse_asa
   path: /{league_slug}/teams/xpass
   path_params:
-  - description: 'ASA league slug: `mls`, `nwsl`, `uslc`, `usl1`, `mlsnp`, `nasl` (2011-2017) or `usls`. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
+  - description: 'ASA league slug: `mls` (2013+), `nwsl` (2016+), `uslc` (2017+), `usl1` (2019+), `mlsnp` (2022+), `nasl` (2017 only) or `usls`. A season before the league floor returns an empty frame. USL Super League seasons use split-year labels (`season_name="2024-25"`).'
     name: league_slug
     required: true
     type: str

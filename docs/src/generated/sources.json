@@ -6,7 +6,7 @@
     "espnLeagues": 30,
     "flatWrappers": 1060,
     "flatFamilies": 27,
-    "loaders": 323
+    "loaders": 326
   },
   "sources": [
     {
@@ -90,7 +90,7 @@
       "ownership": "vendored",
       "parity": null,
       "descriptionFill": {
-        "filled": 4362,
+        "filled": 4382,
         "total": 7262
       },
       "docsPath": "/docs/reference/",
@@ -275,8 +275,8 @@
         "total": 98
       },
       "descriptionFill": {
-        "filled": 2756,
-        "total": 2795
+        "filled": 2993,
+        "total": 3105
       },
       "docsPath": "/docs/nhl/reference/native",
       "note": "api-web game feed, EDGE tracking, Stats REST and Records."
@@ -797,14 +797,14 @@
           "api": "loaders:mlb",
           "label": "sdv.mlb loaders",
           "host": "github.com",
-          "count": 32,
+          "count": 34,
           "ownership": "loaders"
         },
         {
           "api": "loaders:nba",
           "label": "sdv.nba loaders",
           "host": "github.com",
-          "count": 41,
+          "count": 42,
           "ownership": "loaders"
         },
         {
@@ -865,13 +865,13 @@
         "wbb",
         "wnba"
       ],
-      "wrapperCount": 323,
+      "wrapperCount": 326,
       "auth": "none",
       "ownership": "loaders",
       "parity": null,
       "descriptionFill": {
-        "filled": 15475,
-        "total": 15732
+        "filled": 15669,
+        "total": 15925
       },
       "docsPath": "/docs/reference/#dataset-loaders",
       "note": "Pre-built parquet datasets (`load*`) published as GitHub release assets."

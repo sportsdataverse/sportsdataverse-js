@@ -14,7 +14,7 @@ sidebar_position: 50
 
 # `sdv.mlb` — dataset loaders
 
-32 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
+34 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
 - **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding each season a loader adds its rows × columns (from the parquet footer) to a running total and checks it against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
 - **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning (loaders marked so in their `seasons` row — sdv-py's hand-written ones — throw `NoDataError` instead); any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
@@ -29,6 +29,8 @@ sidebar_position: 50
 | [`loadMlbPbp`](#loadmlbpbp) | [mlb_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_pbp) | 1988+ |
 | [`loadMlbPitches`](#loadmlbpitches) | [mlb_pitches](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_pitches) | 1988+ |
 | [`loadMlbRunners`](#loadmlbrunners) | [mlb_runners](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_runners) | 1988+ |
+| [`loadMlbStatcast`](#loadmlbstatcast) | [mlb_statcast](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_statcast) | 2015+ |
+| [`loadMlbSchedule`](#loadmlbschedule) | [mlb_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_schedules) | 1988+ |
 | [`loadMlbExpectedStats`](#loadmlbexpectedstats) | [mlb_hitting_models](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_hitting_models) | 2015+ |
 | [`loadMlbExpectedHr`](#loadmlbexpectedhr) | [mlb_hitting_models](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_hitting_models) | 2015+ |
 | [`loadMlbBatterProjection`](#loadmlbbatterprojection) | [mlb_hitting_models](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_hitting_models) | 2016+ |
@@ -278,6 +280,193 @@ const rows = await sdv.mlb.loadMlbRunners({ seasons: 2024 });
 | `earned` | `boolean` | Whether the run was earned against the responsible pitcher. |
 | `responsible_pitcher_id` | `string` | statsapi person id of the pitcher charged with the runner. |
 
+## `loadMlbStatcast`
+
+Release: [mlb_statcast](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_statcast) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/mlb_statcast/mlb_statcast_{season}.parquet`
+
+| option | type | required | description |
+|---|---|---|---|
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2015) |
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.mlb.loadMlbStatcast({ seasons: 2024 });
+// snake_case alias (py/R parity): sdv.mlb.load_mlb_statcast(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadMlbStatcastRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `pitch_type` | `string` | Abbreviation of the pitch type thrown (e.g. FF, SL, CH). |
+| `game_date` | `string` | Game date (YYYY-MM-DD). |
+| `release_speed` | `number` | Pitch velocity out of the hand (mph). |
+| `release_pos_x` | `number` | Horizontal release position of the ball, catcher's perspective (feet). |
+| `release_pos_z` | `number` | Vertical release position of the ball, catcher's perspective (feet). |
+| `player_name` | `string` | Batter name, `Last, First` (Baseball Savant's batter-side `player_name`). |
+| `batter` | `string` | MLBAM player id of the batter. |
+| `pitcher` | `string` | MLBAM player id of the pitcher. |
+| `events` | `string` | Plate-appearance result on the pitch that ended it (e.g. `single`, `strikeout`, `walk`); null on every other pitch. |
+| `description` | `string` | Pitch outcome (e.g. `ball`, `called_strike`, `swinging_strike`, `foul`, `hit_into_play`). |
+| `spin_dir` | `number` | Deprecated spin direction field, no longer populated. |
+| `spin_rate_deprecated` | `number` | Deprecated legacy spin-rate field, no longer populated. |
+| `break_angle_deprecated` | `number` | Deprecated legacy break-angle field, no longer populated. |
+| `break_length_deprecated` | `number` | Deprecated legacy break-length field, no longer populated. |
+| `zone` | `number` | Strike-zone region the pitch crossed (1-14 Gameday zone). |
+| `des` | `string` | Full text description of the play. |
+| `game_type` | `string` | Game-type code; spring training (`S`) and exhibition (`E`) games are included alongside `R` and the postseason. |
+| `stand` | `string` | Side of the plate the batter is standing (L or R). |
+| `p_throws` | `string` | Hand the pitcher throws with (L or R). |
+| `home_team` | `string` | Home team abbreviation (e.g. `SF`). |
+| `away_team` | `string` | Away team abbreviation (e.g. `LAD`). |
+| `type` | `string` | Pitch result class -- `B` ball, `S` strike (including fouls), `X` ball in play. |
+| `hit_location` | `number` | Fielder position number that fielded the ball. |
+| `bb_type` | `string` | Batted-ball type (ground_ball, line_drive, fly_ball, popup). |
+| `balls` | `number \| bigint` | Ball count before the pitch. |
+| `strikes` | `number \| bigint` | Strike count before the pitch. |
+| `game_year` | `number \| bigint` | Season year of the game. |
+| `pfx_x` | `number` | Horizontal pitch movement from the catcher's perspective (feet). |
+| `pfx_z` | `number` | Vertical pitch movement from the catcher's perspective (feet). |
+| `plate_x` | `number` | Horizontal position of the pitch crossing the plate (feet from center). |
+| `plate_z` | `number` | Vertical position of the pitch crossing the plate (feet above ground). |
+| `on_3b` | `string` | MLBAM ID of the runner on third base, if any; published as a float and cast to Int64 by the loader. |
+| `on_2b` | `string` | MLBAM ID of the runner on second base, if any; published as a float and cast to Int64 by the loader. |
+| `on_1b` | `string` | MLBAM ID of the runner on first base, if any; published as a float and cast to Int64 by the loader. |
+| `outs_when_up` | `number \| bigint` | Number of outs when the batter came to the plate. |
+| `inning` | `number \| bigint` | Inning number. |
+| `inning_topbot` | `string` | Half of the inning (Top or Bot). |
+| `hc_x` | `number` | Hit coordinate X on the field diagram. |
+| `hc_y` | `number` | Hit coordinate Y on the field diagram. |
+| `tfs_deprecated` | `number` | Deprecated time-from-start field, no longer populated. |
+| `tfs_zulu_deprecated` | `number` | Deprecated Zulu time-from-start field, no longer populated. |
+| `umpire` | `number` | Deprecated umpire field; always null. |
+| `sv_id` | `string` | Deprecated Sportvision/Statcast pitch identifier, no longer populated. |
+| `vx0` | `number` | Velocity of the pitch in the x-direction at y=50 ft (ft/s). |
+| `vy0` | `number` | Velocity of the pitch in the y-direction at y=50 ft (ft/s). |
+| `vz0` | `number` | Velocity of the pitch in the z-direction at y=50 ft (ft/s). |
+| `ax` | `number` | Acceleration of the pitch in the x-direction at y=50 ft (ft/s^2). |
+| `ay` | `number` | Acceleration of the pitch in the y-direction at y=50 ft (ft/s^2). |
+| `az` | `number` | Acceleration of the pitch in the z-direction at y=50 ft (ft/s^2). |
+| `sz_top` | `number` | Top of the batter's strike zone for the pitch (feet). |
+| `sz_bot` | `number` | Bottom of the batter's strike zone for the pitch (feet). |
+| `hit_distance_sc` | `number` | Statcast-measured projected distance of the batted ball (feet). |
+| `launch_speed` | `number` | Exit velocity of the batted ball (mph). |
+| `launch_angle` | `number` | Vertical launch angle of the batted ball (degrees). |
+| `effective_speed` | `number` | Perceived velocity adjusted for release extension (mph). |
+| `release_spin_rate` | `number` | Spin rate of the pitch at release (rpm). |
+| `release_extension` | `number` | Distance toward the plate at release (feet). |
+| `game_pk` | `string` | Unique game identifier. |
+| `fielder_2` | `string` | MLBAM ID of the catcher. |
+| `fielder_3` | `string` | MLBAM ID of the first baseman. |
+| `fielder_4` | `string` | MLBAM ID of the second baseman. |
+| `fielder_5` | `string` | MLBAM ID of the third baseman. |
+| `fielder_6` | `string` | MLBAM ID of the shortstop. |
+| `fielder_7` | `string` | MLBAM ID of the left fielder. |
+| `fielder_8` | `string` | MLBAM ID of the center fielder. |
+| `fielder_9` | `string` | MLBAM ID of the right fielder. |
+| `release_pos_y` | `number` | Release position of the ball toward the plate (feet). |
+| `estimated_ba_using_speedangle` | `number` | Expected batting average based on exit velocity and launch angle. |
+| `estimated_woba_using_speedangle` | `number` | Expected wOBA based on exit velocity and launch angle. |
+| `woba_value` | `number` | wOBA value assigned to the event. |
+| `woba_denom` | `number` | wOBA denominator (plate-appearance weight) for the event. |
+| `babip_value` | `number` | BABIP value assigned to the event (0 or 1). |
+| `iso_value` | `number` | Isolated power value assigned to the event. |
+| `launch_speed_angle` | `number` | Batted-ball classification code (1-6) from exit velocity and angle. |
+| `at_bat_number` | `number \| bigint` | Sequential plate-appearance number within the game. |
+| `pitch_number` | `number \| bigint` | Pitch number within the plate appearance. |
+| `pitch_name` | `string` | Full name of the pitch type (e.g. 4-Seam Fastball, Slider). |
+| `home_score` | `number \| bigint` | Home team score before the pitch (see post_home_score). |
+| `away_score` | `number \| bigint` | Away team score before the pitch (see post_away_score). |
+| `bat_score` | `number \| bigint` | Batting team score before the pitch. |
+| `fld_score` | `number \| bigint` | Fielding team score before the pitch. |
+| `post_away_score` | `number \| bigint` | Away team score after the pitch. |
+| `post_home_score` | `number \| bigint` | Home team score after the pitch. |
+| `post_bat_score` | `number \| bigint` | Batting team score after the pitch. |
+| `post_fld_score` | `number \| bigint` | Fielding team score after the pitch. |
+| `if_fielding_alignment` | `string` | Infield defensive alignment (Standard, Strategic, Infield shift). |
+| `of_fielding_alignment` | `string` | Outfield defensive alignment (Standard, Strategic, 4th outfielder). |
+| `spin_axis` | `number` | Spin axis of the pitch as a clock-face angle (degrees). |
+| `delta_home_win_exp` | `number` | Change in home team win expectancy on the play. |
+| `delta_run_exp` | `number` | Change in run expectancy on the play. |
+| `bat_speed` | `number` | Bat speed at the point of contact (mph). |
+| `swing_length` | `number` | Length of the swing path to contact (feet). |
+| `miss_distance` | `number` | How far the bat missed the ball on a swing and miss (Savant bat tracking); null on every other pitch and before bat tracking. |
+| `estimated_slg_using_speedangle` | `number` | Expected slugging based on exit velocity and launch angle. |
+| `delta_pitcher_run_exp` | `number` | Change in run expectancy credited to the pitcher. |
+| `hyper_speed` | `number` | Adjusted (90th-percentile) exit velocity (mph). |
+| `home_score_diff` | `number \| bigint` | Home team score minus away team score before the pitch. |
+| `bat_score_diff` | `number \| bigint` | Batting team score minus fielding team score before the pitch. |
+| `home_win_exp` | `number` | Home team win expectancy before the play. |
+| `bat_win_exp` | `number` | Batting team win expectancy before the play. |
+| `age_pit_legacy` | `number \| bigint` | Pitcher age using the legacy calculation. |
+| `age_bat_legacy` | `number \| bigint` | Batter age using the legacy calculation. |
+| `age_pit` | `number \| bigint` | Pitcher age for the season. |
+| `age_bat` | `number \| bigint` | Batter age for the season. |
+| `n_thruorder_pitcher` | `number \| bigint` | Times through the order the pitcher is facing the lineup. |
+| `n_priorpa_thisgame_player_at_bat` | `number \| bigint` | Number of prior plate appearances by the batter in the game. |
+| `pitcher_days_since_prev_game` | `number` | Days since the pitcher's previous game appearance. |
+| `batter_days_since_prev_game` | `number` | Days since the batter's previous game appearance. |
+| `pitcher_days_until_next_game` | `number` | Days until the pitcher's next game appearance. |
+| `batter_days_until_next_game` | `number` | Days until the batter's next game appearance. |
+| `api_break_z_with_gravity` | `number` | Vertical pitch break including gravity (inches). |
+| `api_break_x_arm` | `number` | Horizontal pitch break to the pitcher's arm side (inches). |
+| `api_break_x_batter_in` | `number` | Horizontal pitch break toward/away from the batter (inches). |
+| `arm_angle` | `number` | Pitcher's arm angle at release (degrees). |
+| `attack_angle` | `number` | Angle of the bat's path at contact (degrees). |
+| `attack_direction` | `number` | Horizontal direction of the swing at contact (degrees). |
+| `swing_path_tilt` | `number` | Vertical tilt of the swing path (degrees). |
+| `intercept_ball_minus_batter_pos_x_inches` | `number` | Horizontal offset of ball-bat intercept from batter position (inches). |
+| `intercept_ball_minus_batter_pos_y_inches` | `number` | Depth offset of ball-bat intercept from batter position (inches). |
+| `season` | `number \| bigint` | Season year. |
+
+## `loadMlbSchedule`
+
+Release: [mlb_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_schedules) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/mlb_schedules/mlb_schedule_{season}.parquet`
+
+| option | type | required | description |
+|---|---|---|---|
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1988) |
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.mlb.loadMlbSchedule({ seasons: 2024 });
+// snake_case alias (py/R parity): sdv.mlb.load_mlb_schedule(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadMlbScheduleRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `game_pk` | `string` | statsapi game identifier; the join key to every other MLB release. |
+| `game_date` | `string` | Official game date (YYYY-MM-DD, local to the venue). |
+| `game_datetime` | `string` | Scheduled first-pitch time as an ISO-8601 UTC timestamp string (e.g. `2024-02-22T20:10:00Z`). |
+| `season` | `number \| bigint` | MLB season year the game belongs to (the asset's season). |
+| `game_type` | `string` | statsapi game-type code (`R` regular season, `S` spring training, `E` exhibition, `A` All-Star, `F`/`D`/`L`/`W` wild card / division series / LCS / World Series). |
+| `status_code` | `string` | Status code identifier (e.g. 'S', 'P', 'I', 'F'). |
+| `detailed_state` | `string` | Detailed status description (e.g. 'Scheduled', 'Pre-Game', 'In Progress'). |
+| `abstract_state` | `string` | Coarse game state (`Preview`, `Live` or `Final`). |
+| `home_team_id` | `string` | Home team id. |
+| `home_team_name` | `string` | Home team name. |
+| `home_score` | `number \| bigint` | Home team's final run total (null for a game not yet played). |
+| `away_team_id` | `string` | Away team id. |
+| `away_team_name` | `string` | Away team name. |
+| `away_score` | `number \| bigint` | Away team's final run total (null for a game not yet played). |
+| `venue_id` | `string` | MLBAM venue ID. |
+| `venue_name` | `string` | Venue name. |
+| `double_header` | `string` | Doubleheader indicator ('N', 'S', 'Y'). |
+| `game_number` | `number \| bigint` | Game number within a doubleheader. |
+| `series_description` | `string` | Description of the series. |
+
 ## `loadMlbExpectedStats`
 
 Release: [mlb_hitting_models](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_hitting_models) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/mlb_hitting_models/mlb_expected_stats_{season}.parquet`
@@ -450,7 +639,7 @@ const rows = await sdv.mlb.loadMlbXera({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `pitcher` | `string` | Whether the position is a pitcher. |
+| `pitcher` | `string` | MLBAM player id of the pitcher. |
 | `season` | `number \| bigint` | Season year. |
 | `x_woba` | `number` | Expected weighted on-base average, derived from batted-ball quality rather than outcomes. |
 | `x_era` | `number` | ERA-scale conversion of x_woba as league_era plus (x_woba minus league_woba) over woba_scale times pa_per_9, an exact linear function of x_woba that can go negative for extreme pitchers. |
@@ -478,7 +667,7 @@ const rows = await sdv.mlb.loadMlbStuffPlus({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `pitcher` | `string` | Whether the position is a pitcher. |
+| `pitcher` | `string` | MLBAM player id of the pitcher. |
 | `pitch_type` | `string` | Abbreviation of the pitch type thrown (e.g. FF, SL, CH). |
 | `stuff_rv_hat` | `number` | Mean predicted per-pitch run value from the bundled xgboost stuff model over this pitcher's pitches of this type, on Savant's batter-perspective delta_run_exp scale so lower is better for the pitcher. |
 | `stuff_plus` | `number` | Stuff+ on the 100-is-average scale, exactly 100 minus 10 times (stuff_rv_hat minus the league mean) over the league SD, so higher is better and outlier run-value predictions can push it well below zero. |
@@ -507,7 +696,7 @@ const rows = await sdv.mlb.loadMlbCommandPlus({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `pitcher` | `string` | Whether the position is a pitcher. |
+| `pitcher` | `string` | MLBAM player id of the pitcher. |
 | `location_rv_hat` | `number` | Mean predicted per-pitch run value from the bundled location model, which sees plate location, count, handedness and pitch type but no raw pitch physics; lower is better for the pitcher. |
 | `command_plus` | `number` | Command+/Location+ on the 100-is-average scale, exactly 100 minus 10 times (location_rv_hat minus the league mean) over the league SD; it grades where the pitch finished, not intent, since Statcast ships no catcher target. |
 | `season` | `number \| bigint` | Season year. |

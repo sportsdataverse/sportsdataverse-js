@@ -2,7 +2,7 @@
 // Run `npm run codegen` to regenerate from tools/codegen/endpoints/releases.yaml
 // (vendored verbatim from sportsdataverse-py).
 //
-// 41 dataset loaders for `sdv.nba`: each reads a published
+// 42 dataset loaders for `sdv.nba`: each reads a published
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
@@ -26,6 +26,7 @@ import type {
   LoadNbaRostersRow,
   LoadNbaStatsSchedulesRow,
   LoadNbaStatsCoachesRow,
+  LoadNbaStatsDraftRow,
   LoadNbaStatsGameRostersRow,
   LoadNbaStatsLineupsRow,
   LoadNbaStatsOfficialsRow,
@@ -363,6 +364,32 @@ const LOAD_NBA_STATS_COACHES: ReleaseLoaderDef = {"fn":"load_nba_stats_coaches",
 export const loadNbaStatsCoaches = seasonLoader<LoadNbaStatsCoachesRow>(LOAD_NBA_STATS_COACHES);
 /** snake_case alias of {@link loadNbaStatsCoaches} (py/R parity). */
 export const load_nba_stats_coaches = loadNbaStatsCoaches;
+
+const LOAD_NBA_STATS_DRAFT: ReleaseLoaderDef = {"fn":"load_nba_stats_draft","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_draft/draft_{season + 1}.parquet","minSeason":1996};
+
+/**
+ * Load `nba_stats_draft` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_draft
+ *
+ * Note: ``seasons`` is the draft year: ``load_nba_stats_draft(2025)`` returns the June 2025 draft, read from ``draft_2026.parquet``, whose rows carry ``season`` 2026 (the END year of the 2025-26 season the picks enter). ``season`` is Int32 in this asset, not the Int64 of the other nba_stats loaders.
+ *
+ * Pass the season's START year (e.g. `1996` for the 1996-97 season); the asset is keyed by the END year and the loader translates internally, so a `season` column in the rows carries that END year.
+ *
+ * @param opts.seasons - a season or a list of seasons (>= 1996); one with no published asset is skipped with a warning.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @throws SeasonNotFoundError if a season is below 1996.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.nba.loadNbaStatsDraft({ seasons: 2025 });
+ */
+export const loadNbaStatsDraft = seasonLoader<LoadNbaStatsDraftRow>(LOAD_NBA_STATS_DRAFT);
+/** snake_case alias of {@link loadNbaStatsDraft} (py/R parity). */
+export const load_nba_stats_draft = loadNbaStatsDraft;
 
 const LOAD_NBA_STATS_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_nba_stats_game_rosters","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_game_rosters/game_rosters_{season + 1}.parquet","minSeason":1996};
 

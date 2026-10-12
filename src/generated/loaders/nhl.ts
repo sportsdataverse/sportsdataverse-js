@@ -128,20 +128,20 @@ export const loadNhlTeamBoxscore = seasonLoader<LoadNhlTeamBoxscoreRow>(LOAD_NHL
 /** snake_case alias of {@link loadNhlTeamBoxscore} (py/R parity). */
 export const load_nhl_team_boxscore = loadNhlTeamBoxscore;
 
-const LOAD_NHL_GAME_INFO: ReleaseLoaderDef = {"fn":"load_nhl_game_info","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_game_info/game_info_{season}.parquet","minSeason":2024};
+const LOAD_NHL_GAME_INFO: ReleaseLoaderDef = {"fn":"load_nhl_game_info","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_game_info/game_info_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_game_info` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_game_info
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlGameInfo({ seasons: 2024 });
@@ -150,20 +150,20 @@ export const loadNhlGameInfo = seasonLoader<LoadNhlGameInfoRow>(LOAD_NHL_GAME_IN
 /** snake_case alias of {@link loadNhlGameInfo} (py/R parity). */
 export const load_nhl_game_info = loadNhlGameInfo;
 
-const LOAD_NHL_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_nhl_game_rosters","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_game_rosters/game_rosters_{season}.parquet","minSeason":2024};
+const LOAD_NHL_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_nhl_game_rosters","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_game_rosters/game_rosters_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_game_rosters` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_game_rosters
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlGameRosters({ seasons: 2024 });
@@ -172,20 +172,20 @@ export const loadNhlGameRosters = seasonLoader<LoadNhlGameRostersRow>(LOAD_NHL_G
 /** snake_case alias of {@link loadNhlGameRosters} (py/R parity). */
 export const load_nhl_game_rosters = loadNhlGameRosters;
 
-const LOAD_NHL_GOALIE_BOXSCORES: ReleaseLoaderDef = {"fn":"load_nhl_goalie_boxscores","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_goalie_boxscores/goalie_box_{season}.parquet","minSeason":2024};
+const LOAD_NHL_GOALIE_BOXSCORES: ReleaseLoaderDef = {"fn":"load_nhl_goalie_boxscores","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_goalie_boxscores/goalie_box_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_goalie_boxscores` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_goalie_boxscores
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlGoalieBoxscores({ seasons: 2024 });
@@ -194,20 +194,20 @@ export const loadNhlGoalieBoxscores = seasonLoader<LoadNhlGoalieBoxscoresRow>(LO
 /** snake_case alias of {@link loadNhlGoalieBoxscores} (py/R parity). */
 export const load_nhl_goalie_boxscores = loadNhlGoalieBoxscores;
 
-const LOAD_NHL_LINESCORE: ReleaseLoaderDef = {"fn":"load_nhl_linescore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_linescore/linescore_{season}.parquet","minSeason":2024};
+const LOAD_NHL_LINESCORE: ReleaseLoaderDef = {"fn":"load_nhl_linescore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_linescore/linescore_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_linescore` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_linescore
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlLinescore({ seasons: 2024 });
@@ -216,20 +216,20 @@ export const loadNhlLinescore = seasonLoader<LoadNhlLinescoreRow>(LOAD_NHL_LINES
 /** snake_case alias of {@link loadNhlLinescore} (py/R parity). */
 export const load_nhl_linescore = loadNhlLinescore;
 
-const LOAD_NHL_OFFICIALS: ReleaseLoaderDef = {"fn":"load_nhl_officials","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_officials/officials_{season}.parquet","minSeason":2025};
+const LOAD_NHL_OFFICIALS: ReleaseLoaderDef = {"fn":"load_nhl_officials","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_officials/officials_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_officials` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_officials
  *
- * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlOfficials({ seasons: 2025 });
@@ -260,7 +260,7 @@ export const loadNhlPbpFull = seasonLoader<LoadNhlPbpFullRow>(LOAD_NHL_PBP_FULL)
 /** snake_case alias of {@link loadNhlPbpFull} (py/R parity). */
 export const load_nhl_pbp_full = loadNhlPbpFull;
 
-const LOAD_NHL_PBP_LITE: ReleaseLoaderDef = {"fn":"load_nhl_pbp_lite","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_pbp_lite/play_by_play_{season}_lite.parquet","minSeason":2010};
+const LOAD_NHL_PBP_LITE: ReleaseLoaderDef = {"fn":"load_nhl_pbp_lite","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_pbp_lite/play_by_play_lite_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_pbp_lite` (sportsdataverse-data releases).
@@ -282,20 +282,20 @@ export const loadNhlPbpLite = seasonLoader<LoadNhlPbpLiteRow>(LOAD_NHL_PBP_LITE)
 /** snake_case alias of {@link loadNhlPbpLite} (py/R parity). */
 export const load_nhl_pbp_lite = loadNhlPbpLite;
 
-const LOAD_NHL_PENALTIES: ReleaseLoaderDef = {"fn":"load_nhl_penalties","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_penalties/penalties_{season}.parquet","minSeason":2024};
+const LOAD_NHL_PENALTIES: ReleaseLoaderDef = {"fn":"load_nhl_penalties","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_penalties/penalties_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_penalties` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_penalties
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlPenalties({ seasons: 2024 });
@@ -370,20 +370,20 @@ export const loadNhlSchedules = seasonLoader<LoadNhlSchedulesRow>(LOAD_NHL_SCHED
 /** snake_case alias of {@link loadNhlSchedules} (py/R parity). */
 export const load_nhl_schedules = loadNhlSchedules;
 
-const LOAD_NHL_SCORING: ReleaseLoaderDef = {"fn":"load_nhl_scoring","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_scoring/scoring_{season}.parquet","minSeason":2024};
+const LOAD_NHL_SCORING: ReleaseLoaderDef = {"fn":"load_nhl_scoring","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_scoring/scoring_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_scoring` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_scoring
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlScoring({ seasons: 2024 });
@@ -392,20 +392,20 @@ export const loadNhlScoring = seasonLoader<LoadNhlScoringRow>(LOAD_NHL_SCORING);
 /** snake_case alias of {@link loadNhlScoring} (py/R parity). */
 export const load_nhl_scoring = loadNhlScoring;
 
-const LOAD_NHL_SCRATCHES: ReleaseLoaderDef = {"fn":"load_nhl_scratches","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_scratches/scratches_{season}.parquet","minSeason":2024};
+const LOAD_NHL_SCRATCHES: ReleaseLoaderDef = {"fn":"load_nhl_scratches","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_scratches/scratches_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_scratches` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_scratches
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlScratches({ seasons: 2024 });
@@ -414,20 +414,20 @@ export const loadNhlScratches = seasonLoader<LoadNhlScratchesRow>(LOAD_NHL_SCRAT
 /** snake_case alias of {@link loadNhlScratches} (py/R parity). */
 export const load_nhl_scratches = loadNhlScratches;
 
-const LOAD_NHL_SHIFTS: ReleaseLoaderDef = {"fn":"load_nhl_shifts","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_shifts/shifts_{season}.parquet","minSeason":2025};
+const LOAD_NHL_SHIFTS: ReleaseLoaderDef = {"fn":"load_nhl_shifts","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_shifts/shifts_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_shifts` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_shifts
  *
- * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlShifts({ seasons: 2025 });
@@ -436,20 +436,20 @@ export const loadNhlShifts = seasonLoader<LoadNhlShiftsRow>(LOAD_NHL_SHIFTS);
 /** snake_case alias of {@link loadNhlShifts} (py/R parity). */
 export const load_nhl_shifts = loadNhlShifts;
 
-const LOAD_NHL_SHOOTOUT: ReleaseLoaderDef = {"fn":"load_nhl_shootout","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_shootout/shootout_summary_{season}.parquet","minSeason":2025};
+const LOAD_NHL_SHOOTOUT: ReleaseLoaderDef = {"fn":"load_nhl_shootout","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_shootout/shootout_summary_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_shootout` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_shootout
  *
- * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlShootout({ seasons: 2025 });
@@ -458,20 +458,20 @@ export const loadNhlShootout = seasonLoader<LoadNhlShootoutRow>(LOAD_NHL_SHOOTOU
 /** snake_case alias of {@link loadNhlShootout} (py/R parity). */
 export const load_nhl_shootout = loadNhlShootout;
 
-const LOAD_NHL_SHOTS_BY_PERIOD: ReleaseLoaderDef = {"fn":"load_nhl_shots_by_period","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_shots_by_period/shots_by_period_{season}.parquet","minSeason":2025};
+const LOAD_NHL_SHOTS_BY_PERIOD: ReleaseLoaderDef = {"fn":"load_nhl_shots_by_period","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_shots_by_period/shots_by_period_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_shots_by_period` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_shots_by_period
  *
- * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlShotsByPeriod({ seasons: 2025 });
@@ -480,20 +480,20 @@ export const loadNhlShotsByPeriod = seasonLoader<LoadNhlShotsByPeriodRow>(LOAD_N
 /** snake_case alias of {@link loadNhlShotsByPeriod} (py/R parity). */
 export const load_nhl_shots_by_period = loadNhlShotsByPeriod;
 
-const LOAD_NHL_SKATER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_nhl_skater_boxscores","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_skater_boxscores/skater_box_{season}.parquet","minSeason":2024};
+const LOAD_NHL_SKATER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_nhl_skater_boxscores","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_skater_boxscores/skater_box_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_skater_boxscores` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_skater_boxscores
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlSkaterBoxscores({ seasons: 2024 });
@@ -524,20 +524,20 @@ export const loadNhlTeamBoxscores = seasonLoader<LoadNhlTeamBoxscoresRow>(LOAD_N
 /** snake_case alias of {@link loadNhlTeamBoxscores} (py/R parity). */
 export const load_nhl_team_boxscores = loadNhlTeamBoxscores;
 
-const LOAD_NHL_THREE_STARS: ReleaseLoaderDef = {"fn":"load_nhl_three_stars","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_three_stars/three_stars_{season}.parquet","minSeason":2024};
+const LOAD_NHL_THREE_STARS: ReleaseLoaderDef = {"fn":"load_nhl_three_stars","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_three_stars/three_stars_{season}.parquet","minSeason":2010};
 
 /**
  * Load `nhl_three_stars` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_three_stars
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nhl.loadNhlThreeStars({ seasons: 2024 });

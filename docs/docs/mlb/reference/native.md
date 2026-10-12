@@ -267,6 +267,18 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 
 **Row type:** `MlbAllStarWriteInsRow` (exported from the package root).
 
+### Returns — `mlb_analytics_games` / `mlbAnalyticsGames`
+
+No returns table is published for this endpoint: no capture: statsapi.mlb.com answers 406 to the datacenter IP and 404 through the residential proxy with the documented example arguments (2026-10-07)
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
+### Returns — `mlb_analytics_guids` / `mlbAnalyticsGuids`
+
+No returns table is published for this endpoint: no capture: statsapi.mlb.com answers 406 to the datacenter IP and 401 'Please Login' through the residential proxy; the route needs an MLB login session the package does not hold
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
 ### Returns — `mlb_award_recipients` / `mlbAwardRecipients`
 
 | col_name | type | description |
@@ -786,6 +798,30 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `resumed_from_date` | character | Original date if the game was resumed. |
 
 **Row type:** `MlbGameChangesRow` (exported from the package root).
+
+### Returns — `mlb_game_color` / `mlbGameColor`
+
+No returns table is published for this endpoint: no capture: statsapi.mlb.com answers 406 to the datacenter IP and 404 through the residential proxy with the documented example arguments (2026-10-07)
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
+### Returns — `mlb_game_color_diff` / `mlbGameColorDiff`
+
+No returns table is published for this endpoint: no capture: statsapi.mlb.com answers 406 to the datacenter IP and 404 through the residential proxy with the documented example arguments (2026-10-07)
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
+### Returns — `mlb_game_color_timestamps` / `mlbGameColorTimestamps`
+
+No returns table is published for this endpoint: no capture: statsapi.mlb.com answers 406 to the datacenter IP and 404 through the residential proxy with the documented example arguments (2026-10-07)
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
+### Returns — `mlb_game_guids` / `mlbGameGuids`
+
+No returns table is published for this endpoint: no capture: statsapi.mlb.com answers 406 to the datacenter IP and 401 'Please Login' through the residential proxy; the route needs an MLB login session the package does not hold
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `mlb_game_pace` / `mlbGamePace`
 
@@ -1341,6 +1377,12 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 
 **Row type:** `MlbPersonGameStatsRow` (exported from the package root).
 
+### Returns — `mlb_play_analytics` / `mlbPlayAnalytics`
+
+No returns table is published for this endpoint: no capture: statsapi.mlb.com answers 406 to the datacenter IP and 401 'Please Login' through the residential proxy; the route needs an MLB login session the package does not hold
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
 ### Returns — `mlb_play_by_play` / `mlbPlayByPlay`
 
 | col_name | type | description |
@@ -1404,6 +1446,12 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `review_details_challenge_team_id` | double | The MLB Stats API numeric identifier for the team that initiated the manager's challenge review on this play. |
 
 **Row type:** `MlbPlayByPlayRow` (exported from the package root).
+
+### Returns — `mlb_play_context_metrics_averages` / `mlbPlayContextMetricsAverages`
+
+No returns table is published for this endpoint: no capture: statsapi.mlb.com answers 406 to the datacenter IP and 401 'Please Login' through the residential proxy; the route needs an MLB login session the package does not hold
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `mlb_schedule_postseason` / `mlbSchedulePostseason`
 
@@ -1693,6 +1741,12 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 
 **Row type:** `MlbSportsRow` (exported from the package root).
 
+### Returns — `mlb_stats_metrics` / `mlbStatsMetrics`
+
+No returns table is published for this endpoint: no capture: statsapi.mlb.com answers 406 to the datacenter IP and 401 'Please Login' through the residential proxy; the route needs an MLB login session the package does not hold
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
 ### Returns — `mlb_team` / `mlbTeam`
 
 | col_name | type | description |
@@ -1950,6 +2004,12 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `game_type_description` | character | Game type description. |
 
 **Row type:** `MlbTeamsStatsLeadersRow` (exported from the package root).
+
+### Returns — `mlb_umpire_games` / `mlbUmpireGames`
+
+No returns table is published for this endpoint: no capture: statsapi.mlb.com answers 406 to the datacenter IP and 401 'Please Login' through the residential proxy; the route needs an MLB login session the package does not hold
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `mlb_umpires` / `mlbUmpires`
 

@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@89c638a61b8c36f0f59159773260b8a0b998a5dc
+# VENDORED from sportsdataverse/sportsdataverse-py@79dd939371d245b0935362b491b03f50d63f8a8d
 # tools/codegen/endpoints/nhl_edge.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/nhl_edge.yaml; shared changes land in sdv-py first.
@@ -77,6 +77,7 @@ endpoints:
     player_id: 8480801
   parser: parse_edge_shot_location
 - short: skater_shot_location_top_10
+  returns_schema: native/nhl_edge/skater_shot_location_top_10
   summary: Pull the EDGE top-10 skaters for a shot-location category.
   path: /v1/edge/skater-shot-location-top-10/{position}/{category}/{sort_by}/{season}/{game_type}
   now_variant: /v1/edge/skater-shot-location-top-10/{position}/{category}/{sort_by}/now
@@ -126,6 +127,7 @@ endpoints:
     player_id: 8480801
   parser: parse_edge_detail
 - short: skater_shot_speed_top_10
+  returns_schema: native/nhl_edge/skater_shot_speed_top_10
   summary: Pull the EDGE top-10 skaters by shot speed.
   path: /v1/edge/skater-shot-speed-top-10/{positions}/{sort_by}/{season}/{game_type}
   now_variant: /v1/edge/skater-shot-speed-top-10/{positions}/{sort_by}/now
@@ -147,7 +149,8 @@ endpoints:
     default: 2
   example_args:
     positions: defense
-    sort_by: points
+    sort_by: max
+    season: 20242025
   parser: parse_edge_top10
 - short: skater_skating_distance_detail
   returns_schema: native/nhl_edge/skater_skating_distance_detail
@@ -192,6 +195,7 @@ endpoints:
     player_id: 8480801
   parser: parse_edge_detail
 - short: skater_speed_top_10
+  returns_schema: native/nhl_edge/skater_speed_top_10
   summary: Pull the EDGE top-10 skaters by skating speed.
   path: /v1/edge/skater-speed-top-10/{positions}/{sort_by}/{season}/{game_type}
   now_variant: /v1/edge/skater-speed-top-10/{positions}/{sort_by}/now
@@ -213,9 +217,11 @@ endpoints:
     default: 2
   example_args:
     positions: defense
-    sort_by: points
+    sort_by: max
+    season: 20242025
   parser: parse_edge_top10
 - short: skater_distance_top_10
+  returns_schema: native/nhl_edge/skater_distance_top_10
   summary: Pull the EDGE top-10 skaters by skating distance.
   path: /v1/edge/skater-distance-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}
   now_variant: /v1/edge/skater-distance-top-10/{positions}/{strength}/{sort_by}/now
@@ -240,8 +246,9 @@ endpoints:
     default: 2
   example_args:
     positions: defense
-    strength: ev
-    sort_by: points
+    strength: all
+    sort_by: total
+    season: 20242025
   parser: parse_edge_top10
 - short: skater_zone_time
   returns_schema: native/nhl_edge/skater_zone_time
@@ -265,6 +272,7 @@ endpoints:
     player_id: 8480801
   parser: parse_edge_zone_time
 - short: skater_zone_time_top_10
+  returns_schema: native/nhl_edge/skater_zone_time_top_10
   summary: Pull the EDGE top-10 skaters by zone time.
   path: /v1/edge/skater-zone-time-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}
   now_variant: /v1/edge/skater-zone-time-top-10/{positions}/{strength}/{sort_by}/now
@@ -289,8 +297,9 @@ endpoints:
     default: 2
   example_args:
     positions: defense
-    strength: ev
-    sort_by: points
+    strength: all
+    sort_by: offensive
+    season: 20242025
   parser: parse_edge_top10
 - short: skater_landing
   returns_schema: native/nhl_edge/skater_landing
@@ -351,6 +360,7 @@ endpoints:
     player_id: 8480801
   parser: parse_edge_detail
 - short: goalie_5v5_top_10
+  returns_schema: native/nhl_edge/goalie_5v5_top_10
   summary: Pull the EDGE top-10 goalies by 5-on-5 metrics.
   path: /v1/edge/goalie-5v5-top-10/{sort_by}/{season}/{game_type}
   now_variant: /v1/edge/goalie-5v5-top-10/{sort_by}/now
@@ -368,7 +378,8 @@ endpoints:
     required: false
     default: 2
   example_args:
-    sort_by: points
+    sort_by: save-pctg
+    season: 20242025
   parser: parse_edge_top10
 - short: goalie_comparison
   returns_schema: native/nhl_edge/goalie_comparison
@@ -413,6 +424,7 @@ endpoints:
     player_id: 8480801
   parser: parse_edge_detail
 - short: goalie_edge_save_pctg_top_10
+  returns_schema: native/nhl_edge/goalie_edge_save_pctg_top_10
   summary: Pull the EDGE top-10 goalies by save-percentage.
   path: /v1/edge/goalie-edge-save-pctg-top-10/{sort_by}/{season}/{game_type}
   now_variant: /v1/edge/goalie-edge-save-pctg-top-10/{sort_by}/now
@@ -454,6 +466,7 @@ endpoints:
     player_id: 8480801
   parser: parse_edge_shot_location
 - short: goalie_shot_location_top_10
+  returns_schema: native/nhl_edge/goalie_shot_location_top_10
   summary: Pull the EDGE top-10 goalies for a shot-location category.
   path: /v1/edge/goalie-shot-location-top-10/{category}/{sort_by}/{season}/{game_type}
   now_variant: /v1/edge/goalie-shot-location-top-10/{category}/{sort_by}/now
@@ -552,6 +565,7 @@ endpoints:
     team_id: 10
   parser: parse_edge_shot_location
 - short: team_shot_location_top_10
+  returns_schema: native/nhl_edge/team_shot_location_top_10
   summary: Pull the EDGE top-10 teams for a shot-location category.
   path: /v1/edge/team-shot-location-top-10/{position}/{category}/{sort_by}/{season}/{game_type}
   now_variant: /v1/edge/team-shot-location-top-10/{position}/{category}/{sort_by}/now
@@ -620,6 +634,7 @@ endpoints:
   example_args:
     team_id: 10
 - short: team_skating_distance_top_10
+  returns_schema: native/nhl_edge/team_skating_distance_top_10
   summary: Pull the EDGE top-10 teams by skating distance.
   path: /v1/edge/team-skating-distance-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}
   now_variant: /v1/edge/team-skating-distance-top-10/{positions}/{strength}/{sort_by}/now
@@ -644,8 +659,9 @@ endpoints:
     default: 2
   example_args:
     positions: defense
-    strength: ev
-    sort_by: points
+    strength: all
+    sort_by: total
+    season: 20242025
   parser: parse_edge_top10
 - short: team_skating_speed_detail
   summary: Pull EDGE skating-speed detail for a single team.
@@ -667,6 +683,7 @@ endpoints:
   example_args:
     team_id: 10
 - short: team_skating_speed_top_10
+  returns_schema: native/nhl_edge/team_skating_speed_top_10
   summary: Pull the EDGE top-10 teams by skating speed.
   path: /v1/edge/team-skating-speed-top-10/{positions}/{sort_by}/{season}/{game_type}
   now_variant: /v1/edge/team-skating-speed-top-10/{positions}/{sort_by}/now
@@ -688,7 +705,8 @@ endpoints:
     default: 2
   example_args:
     positions: defense
-    sort_by: points
+    sort_by: max
+    season: 20242025
   parser: parse_edge_top10
 - short: team_zone_time_details
   returns_schema: native/nhl_edge/team_zone_time_details
@@ -712,6 +730,7 @@ endpoints:
     team_id: 10
   parser: parse_edge_zone_time
 - short: team_zone_time_top_10
+  returns_schema: native/nhl_edge/team_zone_time_top_10
   summary: Pull the EDGE top-10 teams by zone time.
   path: /v1/edge/team-zone-time-top-10/{strength}/{sort_by}/{season}/{game_type}
   now_variant: /v1/edge/team-zone-time-top-10/{strength}/{sort_by}/now
@@ -732,8 +751,9 @@ endpoints:
     required: false
     default: 2
   example_args:
-    strength: ev
-    sort_by: points
+    strength: all
+    sort_by: offensive
+    season: 20242025
   parser: parse_edge_top10
 - short: cat_skater_detail
   returns_schema: native/nhl_edge/cat_skater_detail

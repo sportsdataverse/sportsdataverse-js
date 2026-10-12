@@ -14,7 +14,7 @@ sidebar_position: 50
 
 # `sdv.nba` — dataset loaders
 
-41 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
+42 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
 - **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding each season a loader adds its rows × columns (from the parquet footer) to a running total and checks it against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
 - **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning (loaders marked so in their `seasons` row — sdv-py's hand-written ones — throw `NoDataError` instead); any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
@@ -37,6 +37,7 @@ sidebar_position: 50
 | [`loadNbaRosters`](#loadnbarosters) | [espn_nba_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_rosters) | 2025+ |
 | [`loadNbaStatsSchedules`](#loadnbastatsschedules) | [nba_stats_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_schedules) | 1996+ |
 | [`loadNbaStatsCoaches`](#loadnbastatscoaches) | [nba_stats_coaches](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_coaches) | 1996+ |
+| [`loadNbaStatsDraft`](#loadnbastatsdraft) | [nba_stats_draft](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_draft) | 1996+ |
 | [`loadNbaStatsGameRosters`](#loadnbastatsgamerosters) | [nba_stats_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_game_rosters) | 1996+ |
 | [`loadNbaStatsLineups`](#loadnbastatslineups) | [nba_stats_lineups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_lineups) | 2007+ |
 | [`loadNbaStatsLineupsV3`](#loadnbastatslineupsv3) *(deprecated)* | [nba_stats_game_lineups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_game_lineups) | 1996+ |
@@ -865,6 +866,50 @@ const rows = await sdv.nba.loadNbaStatsCoaches({ seasons: 2025 });
 | `sort_sequence` | `number \| bigint` | Sort order of the coach within the team's staff listing. |
 | `sub_sort_sequence` | `number \| bigint` | Secondary sort order within the coach type. |
 | `season_type` | `string` | Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). |
+
+## `loadNbaStatsDraft`
+
+Release: [nba_stats_draft](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_draft) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_draft/draft_{season + 1}.parquet`
+
+:::caution[Coverage]
+``seasons`` is the draft year: ``load_nba_stats_draft(2025)`` returns the June 2025 draft, read from ``draft_2026.parquet``, whose rows carry ``season`` 2026 (the END year of the 2025-26 season the picks enter). ``season`` is Int32 in this asset, not the Int64 of the other nba_stats loaders.
+:::
+
+Pass the season's START year (e.g. `1996` for the 1996-97 season); the asset is keyed by the END year and the loader translates internally, so a `season` column in the rows carries that END year.
+
+| option | type | required | description |
+|---|---|---|---|
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1996) |
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.nba.loadNbaStatsDraft({ seasons: 2025 });
+// snake_case alias (py/R parity): sdv.nba.load_nba_stats_draft(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadNbaStatsDraftRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `person_id` | `string` | stats.nba.com player identifier (PERSON_ID) of the pick; Int64, joins to ``player_id`` elsewhere. |
+| `player_name` | `string` | Drafted player's name. |
+| `season` | `number` | END year of the season the draft class enters (2026 = the June 2025 draft) -- one more than the ``seasons`` argument, which is the draft year. Int32 in this asset. |
+| `round_number` | `number \| bigint` | Draft round (1 or 2). |
+| `round_pick` | `number \| bigint` | Pick number within the round. |
+| `overall_pick` | `number \| bigint` | Overall pick number. |
+| `draft_type` | `string` | Selection type as stats.nba.com reports it (e.g. 'Draft'). |
+| `team_id` | `string` | stats.nba.com identifier of the team that made the pick; Int64. |
+| `team_city` | `string` | City of the team that made the pick. |
+| `team_name` | `string` | Nickname of the team that made the pick. |
+| `team_abbreviation` | `string` | Tricode of the team that made the pick. |
+| `organization` | `string` | School, club or team the player was drafted from. |
+| `organization_type` | `string` | Kind of organization drafted from (e.g. 'College/University', 'Other Team/Club'). |
+| `player_profile_flag` | `number \| bigint` | 1 when stats.nba.com has a player profile page for the pick, else 0. |
 
 ## `loadNbaStatsGameRosters`
 
@@ -2486,10 +2531,10 @@ const rows = await sdv.nba.loadNbaScheduleCrosswalk({ seasons: 2026 });
 | `nba_game_code` | `string` | NBA game code (date and matchup string) from the NBA Stats API. |
 | `nba_home_team_id` | `string` | NBA Stats team id of the home team. |
 | `nba_away_team_id` | `string` | NBA Stats team id of the away team. |
-| `fox_game_id` | `string` | Fox game id (NA placeholder). |
-| `fox_home_team_id` | `string` | FOX Sports team id of the home team in the crosswalk. |
-| `fox_away_team_id` | `string` | FOX Sports team id of the away team in the crosswalk. |
-| `yahoo_game_id` | `string` | Yahoo game id (NA placeholder). |
+| `fox_game_id` | `string` | Fox Sports game id (string), filled when the crosswalk is built with fox=True from Fox's per-date scoreboard, matched on the US-Eastern date and the two teams in either home/away order; null otherwise and where Fox lists no matching game. |
+| `fox_home_team_id` | `string` | Fox Sports team id of the side Fox calls home in fox_game_id, filled with fox=True; at a neutral site it can be the reverse of home_espn_team_id. Null when fox_game_id is. |
+| `fox_away_team_id` | `string` | Fox Sports team id of the side Fox calls away in fox_game_id, filled with fox=True; at a neutral site it can be the reverse of away_espn_team_id. Null when fox_game_id is. |
+| `yahoo_game_id` | `string` | Yahoo Sports game id, nba.g.\<YYYYMMDD US-Eastern date\>\<home ESPN team id, 2 digits\> (Yahoo's NBA team ids equal ESPN's), from the 2014 season on; null for earlier seasons. |
 | `match_method` | `string` | Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". |
 | `match_confidence` | `number` | Jaro-Winkler score or 1 for exact (NA if none). |
 
@@ -2532,7 +2577,7 @@ const rows = await sdv.nba.loadNbaTeamCrosswalk({ seasons: 2026 });
 | `nba_division` | `string` | Team's division as listed by the NBA Stats API. |
 | `fox_team_id` | `string` | Fox Bifrost team id (NA if unmatched). |
 | `fox_team_name` | `string` | Fox team name (NA if unmatched). |
-| `yahoo_team_id` | `string` | Yahoo team id (NA placeholder). |
+| `yahoo_team_id` | `string` | Yahoo Sports team id, nba.t.\<espn_team_id\> (Yahoo's NBA ids equal ESPN's), from the 2014 season on; null for earlier seasons. |
 | `yahoo_team_abbreviation` | `string` | Yahoo abbreviation (NA placeholder). |
 | `yahoo_team_name` | `string` | Yahoo team name (NA placeholder). |
 | `match_method` | `string` | Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". |

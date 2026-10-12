@@ -13,9 +13,9 @@
       "rate": 0.957
     },
     "espn": {
-      "filled": 4362,
+      "filled": 4382,
       "total": 7262,
-      "rate": 0.6007
+      "rate": 0.6034
     },
     "fox": {
       "filled": 193,
@@ -28,9 +28,9 @@
       "rate": 1
     },
     "loaders": {
-      "filled": 15475,
-      "total": 15732,
-      "rate": 0.9837
+      "filled": 15669,
+      "total": 15925,
+      "rate": 0.9839
     },
     "mlb": {
       "filled": 1605,
@@ -63,14 +63,14 @@
       "rate": 0.971
     },
     "nhl_api_web": {
-      "filled": 768,
-      "total": 774,
-      "rate": 0.9922
+      "filled": 841,
+      "total": 858,
+      "rate": 0.9802
     },
     "nhl_edge": {
-      "filled": 871,
-      "total": 883,
-      "rate": 0.9864
+      "filled": 1035,
+      "total": 1109,
+      "rate": 0.9333
     },
     "nhl_records": {
       "filled": 889,
@@ -139,9 +139,9 @@
     }
   },
   "totals": {
-    "filled": 59922,
-    "total": 64215,
-    "rate": 0.9331
+    "filled": 60373,
+    "total": 64718,
+    "rate": 0.9329
   },
   "breaking_pages": 213
 }

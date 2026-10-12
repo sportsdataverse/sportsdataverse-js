@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@89c638a61b8c36f0f59159773260b8a0b998a5dc
+# VENDORED from sportsdataverse/sportsdataverse-py@79dd939371d245b0935362b491b03f50d63f8a8d
 # tools/codegen/endpoints/mls_api.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/mls_api.yaml; shared changes land in sdv-py first.
@@ -7,7 +7,7 @@ api: mls_api
 docstring:
   example_import: true
   raises:
-  - 'sportsdataverse.errors.NoESPNDataError: the MLS host returned 404 (unknown id, or an unplayed match on ``/matches/{matchId}``).'
+  - 'sportsdataverse.errors.NoESPNDataError: the MLS host returned 404 (unknown id, or an unplayed match on ``/matches/{matchId}``). On the season-addressable stats-api endpoints (``season_matches``, ``standings``, ``competition_seasons``) a season before 2024 has no addressable id -- the stats-api serves 2024+ only.'
   see_also:
   - name: MLS
     note: the public site these hosts render
