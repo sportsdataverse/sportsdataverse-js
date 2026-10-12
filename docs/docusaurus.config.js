@@ -199,6 +199,11 @@ module.exports = {
               className: 'sdv-section-header',
             },
             {
+              href: 'https://sportsdataverse.org/cheatsheets/sportsdataverse-js.pdf',
+              label: 'Cheat Sheet (PDF)',
+              target: '_self',
+            },
+            {
               label: 'Python Packages',
               href: 'https://py.sportsdataverse.org/',
               target: '_self',
