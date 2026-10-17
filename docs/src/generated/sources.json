@@ -271,8 +271,8 @@
       "auth": "none",
       "ownership": "vendored",
       "parity": {
-        "verified": 98,
-        "total": 98
+        "verified": 100,
+        "total": 108
       },
       "descriptionFill": {
         "filled": 2993,

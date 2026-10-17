@@ -24,7 +24,7 @@ Beyond the ESPN surface, `sdv.nhl` also wraps the league's own live APIs. Same `
 
 ## Native API — NHL api-web (game feed)
 
-Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-web.nhle.com`. Each method is exposed under BOTH its snake_case name `nhl_<endpoint>` (`nhl_web_<endpoint>` where sdv-py's name is taken) (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-web.nhle.com`. Each method is exposed under BOTH its snake_case name `nhl_<endpoint>` (`nhl_web_<endpoint>` where sdv-py's name is taken) (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default shown in the Parser column (one sub-frame, or every table as a dict), and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
@@ -32,8 +32,8 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `nhl_club_schedule_month` / `nhlClubScheduleMonth` *(was `nhl_api_web_club_schedule_month`)* | `https://api-web.nhle.com/v1/club-schedule/{team}/month/{month}` | `team`\*, `month` | — | `parse_nhl_web_club_schedule` | — |
 | `nhl_club_schedule_season` / `nhlClubScheduleSeason` *(was `nhl_api_web_club_schedule_season`)* | `https://api-web.nhle.com/v1/club-schedule-season/{team}/{season}` | `team`\*, `season` | — | `parse_nhl_web_club_schedule` | — |
 | `nhl_club_schedule_week` / `nhlClubScheduleWeek` *(was `nhl_api_web_club_schedule_week`)* | `https://api-web.nhle.com/v1/club-schedule/{team}/week/{date}` | `team`\*, `date` | — | `parse_nhl_web_club_schedule` | — |
-| `nhl_club_stats` / `nhlClubStats` *(was `nhl_api_web_club_stats`)* | `https://api-web.nhle.com/v1/club-stats/{team}/{season}/{game_type}` | `team`\*, `season`, `game_type` | — | `parse_nhl_web_club_stats` | — |
-| `nhl_club_stats_season` / `nhlClubStatsSeason` *(was `nhl_api_web_club_stats_season`)* | `https://api-web.nhle.com/v1/club-stats-season/{team}` | `team`\* | — | `parse_nhl_web_club_stats` | — |
+| `nhl_club_stats` / `nhlClubStats` *(was `nhl_api_web_club_stats`)* | `https://api-web.nhle.com/v1/club-stats/{team}/{season}/{game_type}` | `team`\*, `season`, `game_type` | — | `parse_nhl_web_club_stats` — multi-table: `section` = `skaters` (default), `goalies` | — |
+| `nhl_club_stats_season` / `nhlClubStatsSeason` *(was `nhl_api_web_club_stats_season`)* | `https://api-web.nhle.com/v1/club-stats-season/{team}` | `team`\* | — | `parse_nhl_web_club_stats` — multi-table: `section` = `skaters` (default), `goalies` | — |
 | `nhl_draft_picks` / `nhlDraftPicks` *(was `nhl_api_web_draft_picks`)* | `https://api-web.nhle.com/v1/draft/picks/{year}/{round_}` | `year`\*, `round_` | — | `parse_nhl_web_draft_picks` | — |
 | `nhl_draft_picks_now` / `nhlDraftPicksNow` *(was `nhl_api_web_draft_picks_now`)* | `https://api-web.nhle.com/v1/draft/picks/now` | — | — | `parse_nhl_web_draft_picks` | — |
 | `nhl_draft_rankings` / `nhlDraftRankings` *(was `nhl_api_web_draft_rankings`)* | `https://api-web.nhle.com/v1/draft/rankings/{year}/{category}` | `year`\*, `category` | — | `parse_nhl_web_draft_rankings` | — |
@@ -46,7 +46,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `nhl_player_landing` / `nhlPlayerLanding` *(was `nhl_api_web_player_landing`)* | `https://api-web.nhle.com/v1/player/{player_id}/landing` | `player_id`\* | — | `parse_nhl_web_player_landing` | — |
 | `nhl_player_spotlight` / `nhlPlayerSpotlight` *(was `nhl_api_web_player_spotlight`)* | `https://api-web.nhle.com/v1/player-spotlight` | — | — | `parse_nhl_web_player_spotlight` | — |
 | `nhl_playoff_series` / `nhlPlayoffSeries` *(was `nhl_api_web_playoff_series`)* | `https://api-web.nhle.com/v1/schedule/playoff-series/{season}/{series_letter}` | `season`\*, `series_letter`\* | — | `parse_nhl_web_playoff_series` | — |
-| `nhl_right_rail` / `nhlRightRail` *(was `nhl_api_web_right_rail`)* | `https://api-web.nhle.com/v1/gamecenter/{game_id}/right-rail` | `game_id`\* | — | `parse_nhl_web_right_rail` | — |
+| `nhl_right_rail` / `nhlRightRail` *(was `nhl_api_web_right_rail`)* | `https://api-web.nhle.com/v1/gamecenter/{game_id}/right-rail` | `game_id`\* | — | `parse_nhl_web_right_rail` — multi-table: `section` = `season_series` (default), `shots_by_period`, `team_game_stats`, `game_info`, `linescore_by_period`, `season_series_wins` | — |
 | `nhl_roster` / `nhlRoster` *(was `nhl_api_web_roster`)* | `https://api-web.nhle.com/v1/roster/{team}/{season}` | `team`\*, `season` | — | `parse_nhl_web_roster` | — |
 | `nhl_roster_season` / `nhlRosterSeason` *(was `nhl_api_web_roster_season`)* | `https://api-web.nhle.com/v1/roster-season/{team}` | `team`\* | — | `parse_nhl_web_roster` | — |
 | `nhl_web_schedule` / `nhlWebSchedule` *(was `nhl_api_web_schedule`)* | `https://api-web.nhle.com/v1/schedule/{date}` | `date` | — | `parse_nhl_web_schedule` | — |
@@ -239,7 +239,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `first_name_default` | character | Player first name (default language). |
 | `last_name_default` | character | Player last name (default language). |
 
-_Rows are untyped `Row[]` (not parity-verified yet)._
+**Row type:** `NhlApiWebClubStatsTables`, `NhlApiWebClubStatsSkatersRow`, `NhlApiWebClubStatsGoaliesRow` (exported from the package root).
 
 ### Returns — `nhl_draft_picks` / `nhlDraftPicks`
 
@@ -819,7 +819,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `home_team_wins` | integer |  |
 | `needed_to_win` | integer |  |
 
-_Rows are untyped `Row[]` (not parity-verified yet)._
+**Row type:** `NhlApiWebRightRailTables`, `NhlApiWebRightRailSeasonSeriesRow`, `NhlApiWebRightRailShotsByPeriodRow`, `NhlApiWebRightRailTeamGameStatsRow`, `NhlApiWebRightRailGameInfoRow`, `NhlApiWebRightRailLinescoreByPeriodRow`, `NhlApiWebRightRailSeasonSeriesWinsRow` (exported from the package root).
 
 ### Returns — `nhl_roster` / `nhlRoster`
 

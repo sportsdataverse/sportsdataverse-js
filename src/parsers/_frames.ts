@@ -234,6 +234,11 @@ export const MULTI_TABLE_SECTIONS: Record<string, SectionSpec> = {
     sections: ["match_information", "environment", "teams", "players", "staff", "referees", "last_matches"],
   },
   parse_nwsl_lineups: { default: "players", sections: ["teams", "players", "staff"] },
+  parse_nhl_web_club_stats: { default: "skaters", sections: ["skaters", "goalies"] },
+  parse_nhl_web_right_rail: {
+    default: "season_series",
+    sections: ["season_series", "shots_by_period", "team_game_stats", "game_info", "linescore_by_period", "season_series_wins"],
+  },
   // PFF (py's `report` / `career` / `table` arguments) and KenPom (one table per
   // HTML id). The two dict-default parsers keep sdv-py's return shape.
   parse_pff_report: {

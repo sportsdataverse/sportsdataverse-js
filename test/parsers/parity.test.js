@@ -120,11 +120,21 @@ function runParser(def, raw) {
   return def.parser in MULTI_TABLE_SECTIONS ? fn(raw, undefined) : fn(raw);
 }
 
+/**
+ * A sectioned parser (a fixed `default` and `sections` list) whose returns schema is
+ * `kind: frames` documents EVERY section: its output for the harness is each
+ * `{ section }` call keyed by name (py's dict). Any other parser: `runParser`.
+ */
+function runDocumented(def, raw, ref) {
+  const spec = MULTI_TABLE_SECTIONS[def.parser];
+  if (!ref || schemaDoc(ref).kind !== 'frames' || !spec?.default || !spec.sections) return runParser(def, raw);
+  const fn = parserFor(def.parser);
+  return Object.fromEntries(spec.sections.map((s) => [s, fn(raw, s)]));
+}
+
 // py dispatchers that return {name: frame} where JS returns one frame: the primary
-// sub-frame (src/parsers/nhl_api_web.ts header).
+// sub-frame.
 const PRIMARY_FRAME = {
-  parse_nhl_web_right_rail: 'season_series',
-  parse_nhl_web_club_stats: 'skaters',
   // sdv-py's yahoo parsers return one frame per `data` collection / editorial
   // collection; the JS parser returns the one its endpoint is about.
   parse_yahoo_stats: 'leagues',
@@ -192,7 +202,7 @@ for (const [family, fixtures] of Object.entries(manifest)) {
     let out;
     let error;
     try {
-      out = def && runParser(def, body(join(FIX, path)));
+      out = def && runDocumented(def, body(join(FIX, path)), verifiable(family, short));
     } catch (e) {
       error = e;
     }
@@ -244,7 +254,7 @@ for (const [family, fixtures] of Object.entries(manifest)) {
         let py = oracle[path].out;
         // a fixed default sub-frame; a `default: null` parser returns py's own shape
         const dflt = MULTI_TABLE_SECTIONS[def.parser]?.default;
-        if (dflt) py = py[dflt];
+        if (dflt && Array.isArray(out)) py = py[dflt];
         if (def.parser in PRIMARY_FRAME) py = py[PRIMARY_FRAME[def.parser]];
 
         if (ref) {
