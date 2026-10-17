@@ -116,7 +116,11 @@ export function renderRowsModule(api, defs, { coverage, schemasDir, sectionsOf, 
     const sec = sectionsOf(def);
     const where = `returns schema \`${ref}\`, verified on a real sdv-py capture`;
     if (schema.kind === "frames") {
-      if (!sec?.resultSet) throw new Error(`row types: ${api}.${def.short}: kind: frames on a parser without result sets`);
+      // A result-set parser (`resultSet`) returns a one-set payload's table or every
+      // table; a sectioned one (a `default` sub-frame) returns the default's rows.
+      const dflt = sec?.resultSet ? null : sec?.default;
+      if (!sec?.resultSet && !dflt) throw new Error(`row types: ${api}.${def.short}: kind: frames on a parser with neither result sets nor a default section`);
+      if (dflt && !schema.frames.some((f) => f.section === dflt)) throw new Error(`row types: ${api}.${def.short}: default section ${dflt} is not a frame of ${ref}`);
       const tables = `${base}Tables`;
       const names = [tables];
       const members = [];
@@ -124,11 +128,14 @@ export function renderRowsModule(api, defs, { coverage, schemasDir, sectionsOf, 
         const row = `${base}${pascal(f.section)}Row`;
         iface(row, `${ref}#${f.section}`, `One row of the \`${f.section}\` table of ${call} (${where}).`, described(def, ref, f.columns, f.section), unexercised, `${f.section}.`);
         names.push(row);
-        members.push(`  /** The \`${f.section}\` result set. */\n  ${tsKey(f.section)}: ${row}[];\n`);
+        members.push(`  /** The \`${f.section}\` ${dflt ? "table" : "result set"}. */\n  ${tsKey(f.section)}: ${row}[];\n`);
       }
-      source += `\n/**\n * The tables of ${call}, keyed by result set (${where}). A payload with one result\n * set returns that table itself; \`section\` picks one table.\n */\nexport interface ${tables} {\n${members.join("")}}\n`;
+      const how = dflt
+        ? `keyed by section (${where}). Without \`section\` it returns the\n * \`${dflt}\` table; \`section\` picks one table.`
+        : `keyed by result set (${where}). A payload with one result\n * set returns that table itself; \`section\` picks one table.`;
+      source += `\n/**\n * The tables of ${call}, ${how}\n */\nexport interface ${tables} {\n${members.join("")}}\n`;
       seen.set(tables, ref);
-      types.set(def.short, { parsed: `${tables} | Row[]`, sections: tables, names });
+      types.set(def.short, { parsed: dflt ? `${base}${pascal(dflt)}Row[]` : `${tables} | Row[]`, sections: tables, names });
     } else {
       const row = `${base}Row`;
       iface(row, ref, `One row of ${call} (${where}).`, described(def, ref, schema.columns), unexercised, "");

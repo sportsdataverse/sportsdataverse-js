@@ -76,7 +76,7 @@ describe('release loaders', () => {
 
   describe('release loaders: surface', () => {
     it('generates one loader per releases.yaml entry on its league namespace (camel + snake)', () => {
-      MANIFEST.loaders.length.should.equal(323);
+      MANIFEST.loaders.length.should.equal(326);
       for (const ld of MANIFEST.loaders) {
         const camel = ld.fn.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
         should(sdv[ld.league]).be.ok();

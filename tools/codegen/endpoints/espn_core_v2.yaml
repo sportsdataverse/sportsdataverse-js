@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@89c638a61b8c36f0f59159773260b8a0b998a5dc
+# VENDORED from sportsdataverse/sportsdataverse-py@79dd939371d245b0935362b491b03f50d63f8a8d
 # tools/codegen/endpoints/espn_core_v2.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/espn_core_v2.yaml; shared changes land in sdv-py first.
@@ -611,6 +611,10 @@ endpoints:
   example_args:
     event_id: '401584793'
     team_id: '4'
+  league_example_args:
+    nba:
+      event_id: '401584793'
+      team_id: '15'
 - short: event_competitor_roster
   scope: universal
   path: /{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster
@@ -629,6 +633,10 @@ endpoints:
   example_args:
     event_id: '401584793'
     team_id: '4'
+  league_example_args:
+    nba:
+      event_id: '401584793'
+      team_id: '15'
 - short: event_competitor_linescores
   scope: universal
   path: /{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores
@@ -665,6 +673,10 @@ endpoints:
   example_args:
     event_id: '401584793'
     team_id: '4'
+  league_example_args:
+    nba:
+      event_id: '401584793'
+      team_id: '15'
 - short: event_competitor_record
   scope: universal
   path: /{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record
@@ -771,6 +783,10 @@ endpoints:
   example_args:
     event_id: '401584793'
     play_id: '1'
+  league_example_args:
+    nba:
+      event_id: '401584793'
+      play_id: '4015847934'
 - short: event_play_personnel
   scope: universal
   path: /{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel
@@ -789,6 +805,10 @@ endpoints:
   example_args:
     event_id: '401584793'
     play_id: '1'
+  league_example_args:
+    nba:
+      event_id: '401584793'
+      play_id: '4015847934'
 - short: event_situation
   scope: universal
   path: /{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/situation

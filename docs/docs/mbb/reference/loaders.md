@@ -142,7 +142,7 @@ const rows = await sdv.mbb.loadMbbPbp({ seasons: 2024, columns: ['game_id', 'seq
 | `athlete_name_2` | `string` | Display name of the second athlete in the ESPN play participants (e.g., the assisting player), when present. |
 | `athlete_name_3` | `string` | Display name of the third athlete in the ESPN play participants, when present. |
 | `media_id` | `string` | Media identifier (video / image). |
-| `pregame_home_prob` | `number` | Model's pre-game win probability for the home team (0-1), constant within a game. |
+| `pregame_home_prob` | `number` | Model's pre-game win probability for the home team (0-1), constant within a game. Present only on assets published with the WP model (2003, 2006-07 to 2019-20 and the 2021+ republishes); absent on other seasons (rules/mbb.yaml#mbb-2003-pbp-wp-columns). |
 | `home_win_prob` | `number` |  |
 
 ## `loadMbbPlayerBoxscore`
@@ -831,6 +831,7 @@ const rows = await sdv.mbb.loadMbbPlayerCrosswalk({ seasons: 2026 });
 | `fox_position_group` | `string` | Fox position group label (NA if unmatched). |
 | `yahoo_player_id` | `string` | Yahoo player id (NA placeholder). |
 | `yahoo_player_name` | `string` | Yahoo player name (NA placeholder). |
+| `kp_player_id` | `string` | KenPom player id (string), matched by hoopR-mbb-data on the normalized name within the ESPN team (a repeated name broken by jersey), then on last name plus jersey. Null for players KenPom does not list, which includes every ESPN roster row without minutes, and for every row when the build ran without the private KenPom capture. Added by the data repo, so the live player-crosswalk builder does not emit it. |
 | `match_method` | `string` | Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". |
 | `match_confidence` | `number` | Jaro-Winkler score or 1 for exact (NA if none). |
 | `match_keys` | `string` | NA (reserved for future use). |
@@ -867,9 +868,9 @@ const rows = await sdv.mbb.loadMbbScheduleCrosswalk({ seasons: 2026 });
 | `bart_team1` | `string` | Torvik team1 name (NA for espn-only rows). |
 | `bart_team2` | `string` | Torvik team2 name (NA for espn-only rows). |
 | `bart_winner` | `string` | Torvik winner name (NA for espn-only rows). |
-| `kp_game_id` | `string` | KenPom game id (NA unless kenpom enabled). |
-| `fox_game_id` | `string` | Fox game id (NA placeholder). |
-| `yahoo_game_id` | `string` | Yahoo game id (NA placeholder). |
+| `kp_game_id` | `string` | KenPom game id (string), matched by hoopR-mbb-data on the game date and the unordered pair of ESPN team ids. Null where KenPom lists no matching game, and for every row when the build ran without the private KenPom capture. |
+| `fox_game_id` | `string` | Fox Sports game id (string), filled when the crosswalk is built with fox=True from Fox's per-date scoreboard, matched on the US-Eastern date and the two teams in either home/away order; null otherwise and where Fox lists no matching game. |
+| `yahoo_game_id` | `string` | Yahoo Sports game id, ncaab.g.\<YYYYMMDD US-Eastern date\>\<home Yahoo team id, 4 digits\>, filled when built with yahoo=True and checked against the ids Yahoo lists, so a neutral-site game carries the side Yahoo calls home; null otherwise and where Yahoo lists no such game (a non-Division-I home team). |
 | `match_method` | `string` | Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". |
 | `match_confidence` | `number` | Jaro-Winkler score or 1 for exact (NA if none). |
 
@@ -911,8 +912,8 @@ const rows = await sdv.mbb.loadMbbTeamCrosswalk({ seasons: 2026 });
 | `bart_conf` | `string` | Torvik conference abbreviation (NA if unmatched). |
 | `kp_team` | `string` | KenPom team name (NA if unmatched). |
 | `kp_conf` | `string` | KenPom conference abbreviation (NA if unmatched). |
-| `yahoo_team_id` | `string` | Yahoo team id (NA placeholder). |
-| `yahoo_team_name` | `string` | Yahoo team name (NA placeholder). |
+| `yahoo_team_id` | `string` | Dotted Yahoo Sports team id (e.g. 'ncaab.t.173'), filled when built with yahoo=True from Yahoo's team listing joined on full name, short name, then nickname; null otherwise and where no Yahoo team matched. |
+| `yahoo_team_name` | `string` | Yahoo Sports full team name for yahoo_team_id; null when yahoo_team_id is. |
 | `fox_match_confidence` | `number` | 1 for matched, NA for unmatched. |
 | `bart_match_confidence` | `number` | 1 for matched, NA for unmatched. |
 | `kp_match_confidence` | `number` | 1 for matched, NA for unmatched. |

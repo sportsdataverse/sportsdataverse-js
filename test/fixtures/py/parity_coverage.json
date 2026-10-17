@@ -1,16 +1,16 @@
 {
   "_doc": "Parser-parity coverage of the vendored py returns tables, written by test/parsers/parity.test.js (SDV_PARITY_WRITE=1). py_tables = documented (attached, with columns) + no_schema (attached, missing or empty schema file) + incompatible (schema_compatible: false or schema_incompatible) + overridden (parser_overrides) + overlay_schema (the overlay attaches a JS-owned schema) + undeclared (no declaration). verified = documented endpoints checked on a real sdv-py capture; generated row types are emitted only for verified_endpoints, and each listed unexercised column (null in every capture, so its type is unchecked) must be typed unknown. A kind: frames schema counts the columns of every frame, and lists its unexercised ones as <section>.<column>. One with frames_by (a single table, the frame a request parameter picks) is always unverified: a capture records no request parameter to pick it by.",
-  "source_ref": "89c638a61b8c36f0f59159773260b8a0b998a5dc",
+  "source_ref": "79dd939371d245b0935362b491b03f50d63f8a8d",
   "totals": {
-    "py_tables": 917,
-    "documented": 617,
-    "no_schema": 65,
-    "incompatible": 185,
-    "overridden": 25,
+    "py_tables": 1114,
+    "documented": 627,
+    "no_schema": 79,
+    "incompatible": 215,
+    "overridden": 28,
     "overlay_schema": 0,
-    "undeclared": 25,
-    "verified": 438,
-    "unverified": 179,
+    "undeclared": 165,
+    "verified": 440,
+    "unverified": 187,
     "unexercised_columns": 1819
   },
   "families": {
@@ -99,13 +99,13 @@
       "verified_endpoints": {}
     },
     "espn_core_v2": {
-      "py_tables": 4,
+      "py_tables": 90,
       "documented": 0,
       "no_schema": 0,
       "incompatible": 1,
       "overridden": 0,
       "overlay_schema": 0,
-      "undeclared": 3,
+      "undeclared": 89,
       "verified": 0,
       "unverified": 0,
       "verified_endpoints": {}
@@ -123,33 +123,57 @@
       "verified_endpoints": {}
     },
     "espn_site_v2": {
-      "py_tables": 11,
+      "py_tables": 25,
       "documented": 0,
       "no_schema": 0,
       "incompatible": 0,
       "overridden": 0,
       "overlay_schema": 0,
-      "undeclared": 11,
+      "undeclared": 25,
       "verified": 0,
       "unverified": 0,
       "verified_endpoints": {}
     },
     "espn_web_v3": {
-      "py_tables": 1,
+      "py_tables": 5,
       "documented": 0,
       "no_schema": 0,
       "incompatible": 0,
       "overridden": 0,
       "overlay_schema": 0,
-      "undeclared": 1,
+      "undeclared": 5,
+      "verified": 0,
+      "unverified": 0,
+      "verified_endpoints": {}
+    },
+    "fox": {
+      "py_tables": 33,
+      "documented": 0,
+      "no_schema": 0,
+      "incompatible": 30,
+      "overridden": 3,
+      "overlay_schema": 0,
+      "undeclared": 0,
+      "verified": 0,
+      "unverified": 0,
+      "verified_endpoints": {}
+    },
+    "kenpom": {
+      "py_tables": 30,
+      "documented": 0,
+      "no_schema": 0,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 30,
       "verified": 0,
       "unverified": 0,
       "verified_endpoints": {}
     },
     "mlb": {
-      "py_tables": 54,
+      "py_tables": 64,
       "documented": 46,
-      "no_schema": 6,
+      "no_schema": 16,
       "incompatible": 0,
       "overridden": 2,
       "overlay_schema": 0,
@@ -1998,13 +2022,13 @@
     },
     "nhl_api_web": {
       "py_tables": 27,
-      "documented": 20,
-      "no_schema": 7,
+      "documented": 22,
+      "no_schema": 5,
       "incompatible": 0,
       "overridden": 0,
       "overlay_schema": 0,
       "undeclared": 0,
-      "verified": 20,
+      "verified": 22,
       "unverified": 0,
       "verified_endpoints": {
         "boxscore": {
@@ -2015,6 +2039,11 @@
         "club_schedule_season": {
           "columns": 79,
           "exercised": 79,
+          "unexercised_columns": []
+        },
+        "club_stats": {
+          "columns": 40,
+          "exercised": 40,
           "unexercised_columns": []
         },
         "draft_picks": {
@@ -2077,6 +2106,11 @@
           "exercised": 44,
           "unexercised_columns": []
         },
+        "right_rail": {
+          "columns": 44,
+          "exercised": 44,
+          "unexercised_columns": []
+        },
         "roster": {
           "columns": 21,
           "exercised": 21,
@@ -2110,15 +2144,15 @@
       }
     },
     "nhl_edge": {
-      "py_tables": 22,
-      "documented": 21,
-      "no_schema": 0,
+      "py_tables": 35,
+      "documented": 29,
+      "no_schema": 4,
       "incompatible": 0,
       "overridden": 0,
       "overlay_schema": 0,
-      "undeclared": 1,
+      "undeclared": 2,
       "verified": 21,
-      "unverified": 0,
+      "unverified": 8,
       "verified_endpoints": {
         "cat_goalie_detail": {
           "columns": 38,
@@ -2228,9 +2262,9 @@
       }
     },
     "nhl_records": {
-      "py_tables": 42,
+      "py_tables": 44,
       "documented": 41,
-      "no_schema": 1,
+      "no_schema": 3,
       "incompatible": 0,
       "overridden": 0,
       "overlay_schema": 0,
@@ -2537,13 +2571,13 @@
       }
     },
     "nhl_stats_rest": {
-      "py_tables": 17,
+      "py_tables": 21,
       "documented": 16,
       "no_schema": 1,
       "incompatible": 0,
       "overridden": 0,
       "overlay_schema": 0,
-      "undeclared": 0,
+      "undeclared": 4,
       "verified": 16,
       "unverified": 0,
       "verified_endpoints": {
@@ -3101,13 +3135,13 @@
       }
     },
     "pff_api": {
-      "py_tables": 67,
+      "py_tables": 68,
       "documented": 67,
       "no_schema": 0,
       "incompatible": 0,
       "overridden": 0,
       "overlay_schema": 0,
-      "undeclared": 0,
+      "undeclared": 1,
       "verified": 0,
       "unverified": 67,
       "verified_endpoints": {}

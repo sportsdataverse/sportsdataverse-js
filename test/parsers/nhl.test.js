@@ -648,3 +648,39 @@ describe('parsers/_registry: NHL parsers are registered + resolvable by name', (
     }
   });
 });
+
+describe('parsers/nhl_api_web: dispatchers return every sub-frame via `section` (real captures)', () => {
+  it('parse_nhl_web_right_rail: each section of sdv-py\'s dispatcher, default season_series', () => {
+    const raw = capture('nhl_api_web', 'right_rail_2024_scf_g7.json');
+    parse_nhl_web_right_rail(raw, 'season_series').should.eql(parse_nhl_web_right_rail(raw));
+    const shots = parse_nhl_web_right_rail(raw, 'shots_by_period');
+    shots.length.should.equal(3);
+    shots[0].should.containEql({ period_descriptor_number: 1, period_descriptor_period_type: 'REG', away: 6, home: 7 });
+    const stats = parse_nhl_web_right_rail(raw, 'team_game_stats');
+    stats.length.should.equal(10);
+    // a column mixing numbers and text is py's str() column: every value a string
+    stats[0].should.eql({ category: 'sog', away_value: '24', home_value: '21' });
+    stats[2].should.eql({ category: 'faceoffWins', away_value: '31/59', home_value: '28/59' });
+    const info = parse_nhl_web_right_rail(raw, 'game_info');
+    info.length.should.equal(1);
+    info[0].should.have.property('away_team_head_coach_default', 'Kris Knoblauch');
+    parse_nhl_web_right_rail(raw, 'linescore_by_period').length.should.equal(3);
+    parse_nhl_web_right_rail(raw, 'season_series_wins').should.eql([{ away_team_wins: 3, home_team_wins: 4, needed_to_win: 4 }]);
+    (() => parse_nhl_web_right_rail(raw, 'boxscore')).should.throw(/unknown section 'boxscore'/);
+    parse_nhl_web_right_rail(null, 'game_info').should.eql([]);
+  });
+
+  it('parse_nhl_web_club_stats: section goalies returns the 3 Oilers goalies', () => {
+    const raw = capture('nhl_api_web', 'club_stats_edm_2024.json.gz');
+    parse_nhl_web_club_stats(raw, 'skaters').should.eql(parse_nhl_web_club_stats(raw));
+    const goalies = parse_nhl_web_club_stats(raw, 'goalies');
+    assertTidy(goalies);
+    goalies.map((r) => [r.player_id, r.last_name_default, r.games_played, r.wins]).should.eql([
+      ['8475717', 'Pickard', 23, 12],
+      ['8475789', 'Campbell', 5, 1],
+      ['8479973', 'Skinner', 59, 36],
+    ]);
+    (() => parse_nhl_web_club_stats(raw, 'bench')).should.throw(/Choose one of \["skaters","goalies"\]/);
+    parse_nhl_web_club_stats(null, 'goalies').should.eql([]);
+  });
+});

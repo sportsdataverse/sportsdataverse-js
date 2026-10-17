@@ -75,6 +75,9 @@ export function same(a, b, col) {
   // CSV cells arrive as text in JS; py parsed them numerically.
   if (typeof a === 'string' && typeof b === 'number' && a.trim() !== '' && !Number.isNaN(Number(a))) a = Number(a);
   if (typeof a === 'number' && typeof b === 'number') return a === b || Math.abs(a - b) < 1e-9;
+  // py's str() of an integral float in a stringified mixed column ("0.0"): JSON.parse
+  // leaves JS the integer, so its String() is "0" (src/parsers/nhl_api_web.ts stringifyMixed).
+  if (typeof a === 'string' && typeof b === 'string' && /^-?\d+\.0$/.test(b) && a === b.slice(0, -2)) return true;
   return String(a).toLowerCase() === String(b).toLowerCase();
 }
 

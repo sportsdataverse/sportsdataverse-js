@@ -2,7 +2,7 @@
 // Run `npm run codegen` to regenerate from tools/codegen/endpoints/releases.yaml
 // (vendored verbatim from sportsdataverse-py).
 //
-// 32 dataset loaders for `sdv.mlb`: each reads a published
+// 34 dataset loaders for `sdv.mlb`: each reads a published
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
@@ -17,6 +17,8 @@ import type {
   LoadMlbPbpRow,
   LoadMlbPitchesRow,
   LoadMlbRunnersRow,
+  LoadMlbStatcastRow,
+  LoadMlbScheduleRow,
   LoadMlbExpectedStatsRow,
   LoadMlbExpectedHrRow,
   LoadMlbBatterProjectionRow,
@@ -176,6 +178,50 @@ const LOAD_MLB_RUNNERS: ReleaseLoaderDef = {"fn":"load_mlb_runners","url":"https
 export const loadMlbRunners = seasonLoader<LoadMlbRunnersRow>(LOAD_MLB_RUNNERS);
 /** snake_case alias of {@link loadMlbRunners} (py/R parity). */
 export const load_mlb_runners = loadMlbRunners;
+
+const LOAD_MLB_STATCAST: ReleaseLoaderDef = {"fn":"load_mlb_statcast","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/mlb_statcast/mlb_statcast_{season}.parquet","minSeason":2015,"idInt64":["on_1b","on_2b","on_3b"]};
+
+/**
+ * Load `mlb_statcast` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_statcast
+ *
+ * @param opts.seasons - a season or a list of seasons (>= 2015); one with no published asset is skipped with a warning.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @throws SeasonNotFoundError if a season is below 2015.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.mlb.loadMlbStatcast({ seasons: 2024 });
+ */
+export const loadMlbStatcast = seasonLoader<LoadMlbStatcastRow>(LOAD_MLB_STATCAST);
+/** snake_case alias of {@link loadMlbStatcast} (py/R parity). */
+export const load_mlb_statcast = loadMlbStatcast;
+
+const LOAD_MLB_SCHEDULE: ReleaseLoaderDef = {"fn":"load_mlb_schedule","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/mlb_schedules/mlb_schedule_{season}.parquet","minSeason":1988};
+
+/**
+ * Load `mlb_schedules` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_schedules
+ *
+ * @param opts.seasons - a season or a list of seasons (>= 1988); one with no published asset is skipped with a warning.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @throws SeasonNotFoundError if a season is below 1988.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.mlb.loadMlbSchedule({ seasons: 2024 });
+ */
+export const loadMlbSchedule = seasonLoader<LoadMlbScheduleRow>(LOAD_MLB_SCHEDULE);
+/** snake_case alias of {@link loadMlbSchedule} (py/R parity). */
+export const load_mlb_schedule = loadMlbSchedule;
 
 const LOAD_MLB_EXPECTED_STATS: ReleaseLoaderDef = {"fn":"load_mlb_expected_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/mlb_hitting_models/mlb_expected_stats_{season}.parquet","minSeason":2015};
 

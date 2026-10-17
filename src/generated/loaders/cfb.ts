@@ -350,20 +350,20 @@ export const loadCfbTeamTalent = seasonLoader<LoadCfbTeamTalentRow>(LOAD_CFB_TEA
 /** snake_case alias of {@link loadCfbTeamTalent} (py/R parity). */
 export const load_cfb_team_talent = loadCfbTeamTalent;
 
-const LOAD_CFB_TEAMS_CROSSWALK: ReleaseLoaderDef = {"fn":"load_cfb_teams_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_crosswalk/cfb_teams_crosswalk_{season}.parquet","minSeason":2014};
+const LOAD_CFB_TEAMS_CROSSWALK: ReleaseLoaderDef = {"fn":"load_cfb_teams_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_crosswalk/cfb_teams_crosswalk_{season}.parquet","minSeason":2013};
 
 /**
  * Load `cfb_crosswalk` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_crosswalk
  *
- * @param opts.seasons - a season or a list of seasons (>= 2014); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2013); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2014.
+ * @throws SeasonNotFoundError if a season is below 2013.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbTeamsCrosswalk({ seasons: 2024 });
@@ -372,20 +372,20 @@ export const loadCfbTeamsCrosswalk = seasonLoader<LoadCfbTeamsCrosswalkRow>(LOAD
 /** snake_case alias of {@link loadCfbTeamsCrosswalk} (py/R parity). */
 export const load_cfb_teams_crosswalk = loadCfbTeamsCrosswalk;
 
-const LOAD_CFB_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_cfb_schedule_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_crosswalk/cfb_schedule_crosswalk_{season}.parquet","minSeason":2014};
+const LOAD_CFB_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_cfb_schedule_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_crosswalk/cfb_schedule_crosswalk_{season}.parquet","minSeason":2013};
 
 /**
  * Load `cfb_crosswalk` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_crosswalk
  *
- * @param opts.seasons - a season or a list of seasons (>= 2014); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2013); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2014.
+ * @throws SeasonNotFoundError if a season is below 2013.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbScheduleCrosswalk({ seasons: 2024 });

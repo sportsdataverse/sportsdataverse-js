@@ -249,6 +249,109 @@ export interface NhlApiWebClubScheduleSeasonRow {
 }
 
 /**
+ * One row of the `skaters` table of `sdv.nhl.nhl_club_stats({ parsed: true })` (returns schema `native/nhl_api_web/club_stats`, verified on a real sdv-py capture).
+ */
+export interface NhlApiWebClubStatsSkatersRow {
+  /** Unique player identifier. Schema `integer` (an id). */
+  player_id?: string | null;
+  /** URL to the player headshot image. Schema `character`. */
+  headshot?: string | null;
+  /** Player position code. Schema `character`. */
+  position_code?: string | null;
+  /** Games played. Schema `integer`. */
+  games_played?: number | null;
+  /** Goals scored. Schema `integer`. */
+  goals?: number | null;
+  /** Assists. Schema `integer`. */
+  assists?: number | null;
+  /** Total points (goals + assists). Schema `integer`. */
+  points?: number | null;
+  /** Plus/minus rating. Schema `integer`. */
+  plus_minus?: number | null;
+  /** Penalty minutes. Schema `integer`. */
+  penalty_minutes?: number | null;
+  /** Power-play goals. Schema `integer`. */
+  power_play_goals?: number | null;
+  /** Shorthanded goals. Schema `integer`. */
+  shorthanded_goals?: number | null;
+  /** Game-winning goals. Schema `integer`. */
+  game_winning_goals?: number | null;
+  /** Overtime goals. Schema `integer`. */
+  overtime_goals?: number | null;
+  /** Shots on goal. Schema `integer`. */
+  shots?: number | null;
+  /** Shooting percentage from the area. Schema `double`. */
+  shooting_pctg?: number | null;
+  /** Average time on ice per game. Schema `double`. */
+  avg_time_on_ice_per_game?: number | null;
+  /** Average shifts per game. Schema `double`. */
+  avg_shifts_per_game?: number | null;
+  /** Faceoff win percentage. Schema `double`. */
+  faceoff_win_pctg?: number | null;
+  /** Player first name (default language). Schema `character`. */
+  first_name_default?: string | null;
+  /** Player last name (default language). Schema `character`. */
+  last_name_default?: string | null;
+}
+
+/**
+ * One row of the `goalies` table of `sdv.nhl.nhl_club_stats({ parsed: true })` (returns schema `native/nhl_api_web/club_stats`, verified on a real sdv-py capture).
+ */
+export interface NhlApiWebClubStatsGoaliesRow {
+  /** Unique player identifier. Schema `integer` (an id). */
+  player_id?: string | null;
+  /** URL to the player headshot image. Schema `character`. */
+  headshot?: string | null;
+  /** Games played. Schema `integer`. */
+  games_played?: number | null;
+  /** Games started (goalies). Schema `integer`. */
+  games_started?: number | null;
+  /** Wins. Schema `integer`. */
+  wins?: number | null;
+  /** Losses. Schema `integer`. */
+  losses?: number | null;
+  /** Total overtime losses. Schema `integer`. */
+  overtime_losses?: number | null;
+  /** Goals against average. Schema `double`. */
+  goals_against_average?: number | null;
+  /** Save percentage (goalies). Schema `double`. */
+  save_percentage?: number | null;
+  /** Shots faced. Schema `integer`. */
+  shots_against?: number | null;
+  /** Saves made. Schema `integer`. */
+  saves?: number | null;
+  /** Goals against. Schema `integer`. */
+  goals_against?: number | null;
+  /** Shutouts recorded. Schema `integer`. */
+  shutouts?: number | null;
+  /** Goals scored. Schema `integer`. */
+  goals?: number | null;
+  /** Assists. Schema `integer`. */
+  assists?: number | null;
+  /** Total points (goals + assists). Schema `integer`. */
+  points?: number | null;
+  /** Penalty minutes. Schema `integer`. */
+  penalty_minutes?: number | null;
+  /** Time on ice in seconds. Schema `integer`. */
+  time_on_ice?: number | null;
+  /** Player first name (default language). Schema `character`. */
+  first_name_default?: string | null;
+  /** Player last name (default language). Schema `character`. */
+  last_name_default?: string | null;
+}
+
+/**
+ * The tables of `sdv.nhl.nhl_club_stats({ parsed: true })`, keyed by section (returns schema `native/nhl_api_web/club_stats`, verified on a real sdv-py capture). Without `section` it returns the
+ * `skaters` table; `section` picks one table.
+ */
+export interface NhlApiWebClubStatsTables {
+  /** The `skaters` table. */
+  skaters: NhlApiWebClubStatsSkatersRow[];
+  /** The `goalies` table. */
+  goalies: NhlApiWebClubStatsGoaliesRow[];
+}
+
+/**
  * One row of `sdv.nhl.nhl_draft_picks({ parsed: true })` (returns schema `native/nhl_api_web/draft_picks`, verified on a real sdv-py capture).
  */
 export interface NhlApiWebDraftPicksRow {
@@ -1150,6 +1253,149 @@ export interface NhlApiWebPlayoffSeriesRow {
   game_outcome_ot_periods?: number | null;
   /** Away team place name (French). Schema `character`. */
   away_team_place_name_fr?: string | null;
+}
+
+/**
+ * One row of the `season_series` table of `sdv.nhl.nhl_right_rail({ parsed: true })` (returns schema `native/nhl_api_web/right_rail`, verified on a real sdv-py capture).
+ */
+export interface NhlApiWebRightRailSeasonSeriesRow {
+  /** Unique player identifier. Schema `integer` (an id). */
+  id?: string | null;
+  /** Season year (echoed from arg). Schema `integer`. */
+  season?: number | null;
+  /** Game type the row belongs to. Schema `integer`. */
+  game_type?: number | null;
+  /** Game date. Schema `character`. */
+  game_date?: string | null;
+  /** Scheduled start time in UTC. Schema `character`. */
+  start_time_utc?: string | null;
+  /** Eastern time UTC offset. Schema `character`. */
+  eastern_utc_offset?: string | null;
+  /** Venue UTC offset. Schema `character`. */
+  venue_utc_offset?: string | null;
+  /** Game state (e.g., FINAL, LIVE). Schema `character`. */
+  game_state?: string | null;
+  /** Schedule state of the game. Schema `character`. */
+  game_schedule_state?: string | null;
+  /** Link to the NHL game center page. Schema `character`. */
+  game_center_link?: string | null;
+  /** Away team identifier. Schema `integer` (an id). */
+  away_team_id?: string | null;
+  /** Away team abbreviation. Schema `character`. */
+  away_team_abbrev?: string | null;
+  /** URL to the away team logo. Schema `character`. */
+  away_team_logo?: string | null;
+  /** Away team final score. Schema `integer`. */
+  away_team_score?: number | null;
+  /** Home team identifier. Schema `integer` (an id). */
+  home_team_id?: string | null;
+  /** Home team abbreviation. Schema `character`. */
+  home_team_abbrev?: string | null;
+  /** URL to the home team logo. Schema `character`. */
+  home_team_logo?: string | null;
+  /** Home team final score. Schema `integer`. */
+  home_team_score?: number | null;
+  /** Period number. Schema `integer`. */
+  period_descriptor_number?: number | null;
+  /** Period type (e.g., REG, OT). Schema `character`. */
+  period_descriptor_period_type?: string | null;
+  /** Maximum number of regulation periods. Schema `integer`. */
+  period_descriptor_max_regulation_periods?: number | null;
+  /** Period type in which the game ended. Schema `character`. */
+  game_outcome_last_period_type?: string | null;
+}
+
+/**
+ * One row of the `shots_by_period` table of `sdv.nhl.nhl_right_rail({ parsed: true })` (returns schema `native/nhl_api_web/right_rail`, verified on a real sdv-py capture).
+ */
+export interface NhlApiWebRightRailShotsByPeriodRow {
+  /** Away team shots in the period. Schema `integer`. */
+  away?: number | null;
+  /** Whether the player's team was home. Schema `integer`. */
+  home?: number | null;
+  /** Period number. Schema `integer`. */
+  period_descriptor_number?: number | null;
+  /** Period type (e.g., REG, OT). Schema `character`. */
+  period_descriptor_period_type?: string | null;
+  /** Maximum number of regulation periods. Schema `integer`. */
+  period_descriptor_max_regulation_periods?: number | null;
+}
+
+/**
+ * One row of the `team_game_stats` table of `sdv.nhl.nhl_right_rail({ parsed: true })` (returns schema `native/nhl_api_web/right_rail`, verified on a real sdv-py capture).
+ */
+export interface NhlApiWebRightRailTeamGameStatsRow {
+  /** Stat leader category. Schema `character`. */
+  category?: string | null;
+  /** Schema `character`. */
+  away_value?: string | null;
+  /** Schema `character`. */
+  home_value?: string | null;
+}
+
+/**
+ * One row of the `game_info` table of `sdv.nhl.nhl_right_rail({ parsed: true })` (returns schema `native/nhl_api_web/right_rail`, verified on a real sdv-py capture).
+ */
+export interface NhlApiWebRightRailGameInfoRow {
+  /** Schema `character`. */
+  referees?: string | null;
+  /** Schema `character`. */
+  linesmen?: string | null;
+  /** Schema `character`. */
+  away_team_head_coach_default?: string | null;
+  /** Schema `character`. */
+  away_team_scratches?: string | null;
+  /** Schema `character`. */
+  home_team_head_coach_default?: string | null;
+  /** Schema `character`. */
+  home_team_scratches?: string | null;
+}
+
+/**
+ * One row of the `linescore_by_period` table of `sdv.nhl.nhl_right_rail({ parsed: true })` (returns schema `native/nhl_api_web/right_rail`, verified on a real sdv-py capture).
+ */
+export interface NhlApiWebRightRailLinescoreByPeriodRow {
+  /** Away team shots in the period. Schema `integer`. */
+  away?: number | null;
+  /** Whether the player's team was home. Schema `integer`. */
+  home?: number | null;
+  /** Period number. Schema `integer`. */
+  period_descriptor_number?: number | null;
+  /** Period type (e.g., REG, OT). Schema `character`. */
+  period_descriptor_period_type?: string | null;
+  /** Maximum number of regulation periods. Schema `integer`. */
+  period_descriptor_max_regulation_periods?: number | null;
+}
+
+/**
+ * One row of the `season_series_wins` table of `sdv.nhl.nhl_right_rail({ parsed: true })` (returns schema `native/nhl_api_web/right_rail`, verified on a real sdv-py capture).
+ */
+export interface NhlApiWebRightRailSeasonSeriesWinsRow {
+  /** Schema `integer`. */
+  away_team_wins?: number | null;
+  /** Schema `integer`. */
+  home_team_wins?: number | null;
+  /** Schema `integer`. */
+  needed_to_win?: number | null;
+}
+
+/**
+ * The tables of `sdv.nhl.nhl_right_rail({ parsed: true })`, keyed by section (returns schema `native/nhl_api_web/right_rail`, verified on a real sdv-py capture). Without `section` it returns the
+ * `season_series` table; `section` picks one table.
+ */
+export interface NhlApiWebRightRailTables {
+  /** The `season_series` table. */
+  season_series: NhlApiWebRightRailSeasonSeriesRow[];
+  /** The `shots_by_period` table. */
+  shots_by_period: NhlApiWebRightRailShotsByPeriodRow[];
+  /** The `team_game_stats` table. */
+  team_game_stats: NhlApiWebRightRailTeamGameStatsRow[];
+  /** The `game_info` table. */
+  game_info: NhlApiWebRightRailGameInfoRow[];
+  /** The `linescore_by_period` table. */
+  linescore_by_period: NhlApiWebRightRailLinescoreByPeriodRow[];
+  /** The `season_series_wins` table. */
+  season_series_wins: NhlApiWebRightRailSeasonSeriesWinsRow[];
 }
 
 /**

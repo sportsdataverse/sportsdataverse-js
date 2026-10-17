@@ -143,7 +143,7 @@ export interface LoadWbbPbpRow {
   athlete_name_2?: string | null;
   /** Display name of the third athlete in the ESPN play participants, when present. `String` */
   athlete_name_3?: string | null;
-  /** Model's pre-game win probability for the home team (0-1), constant within a game. `Float64` */
+  /** Model's pre-game win probability for the home team (0-1), constant within a game. Present only on assets published with the WP model (2012-13 onward); absent on earlier seasons (rules/wbb.yaml#wbb-2013-pbp-wp-columns). `Float64` */
   pregame_home_prob?: number | null;
   /** `Float64` */
   home_win_prob?: number | null;
@@ -1029,9 +1029,9 @@ export interface LoadWbbScheduleCrosswalkRow {
   bart_team2?: string | null;
   /** Torvik winner name (NA for espn-only rows). `String` */
   bart_winner?: string | null;
-  /** Fox game id (NA placeholder). `String` (an id) */
+  /** Fox Sports game id (string), filled when the crosswalk is built with fox=True from Fox's per-date scoreboard, matched on the US-Eastern date and the two teams in either home/away order; null otherwise and where Fox lists no matching game. `String` (an id) */
   fox_game_id?: string | null;
-  /** Yahoo game id (NA placeholder). `String` (an id) */
+  /** Yahoo Sports game id, ncaaw.g.<YYYYMMDD US-Eastern date><home Yahoo team id, 4 digits>, filled when built with yahoo=True and checked against the ids Yahoo lists, so a neutral-site game carries the side Yahoo calls home; null otherwise and where Yahoo lists no such game (a non-Division-I home team). `String` (an id) */
   yahoo_game_id?: string | null;
   /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
@@ -1069,9 +1069,9 @@ export interface LoadWbbTeamCrosswalkRow {
   bart_team?: string | null;
   /** Torvik conference abbreviation (NA if unmatched). `String` */
   bart_conf?: string | null;
-  /** Yahoo team id (NA placeholder). `String` (an id) */
+  /** Dotted Yahoo Sports team id (e.g. 'ncaab.t.173'), filled when built with yahoo=True from Yahoo's team listing joined on full name, short name, then nickname; null otherwise and where no Yahoo team matched. `String` (an id) */
   yahoo_team_id?: string | null;
-  /** Yahoo team name (NA placeholder). `String` */
+  /** Yahoo Sports full team name for yahoo_team_id; null when yahoo_team_id is. `String` */
   yahoo_team_name?: string | null;
   /** 1 for matched, NA for unmatched. `Float64` */
   fox_match_confidence?: number | null;

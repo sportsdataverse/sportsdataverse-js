@@ -11,11 +11,14 @@
 // leaderboards key by stat-category, and the right-rail endpoint exposes
 // multiple independent sub-frames. The two Python dispatchers
 // (`parse_nhl_web_right_rail`, `parse_nhl_web_club_stats`) return a dict of
-// sub-frames by default; in the JS flat-API contract a parser returns a single
-// rectangular frame, so these are ported to their PRIMARY sub-frame
-// (right_rail -> season_series, club_stats -> skaters).
+// sub-frames by default; in the JS flat-API contract a parser returns one frame,
+// so these return their PRIMARY sub-frame by default (right_rail ->
+// season_series, club_stats -> skaters) and any other via `section`
+// (MULTI_TABLE_SECTIONS). The every-frame forms are exported as
+// `parse_nhl_web_right_rail_tables` / `parse_nhl_web_club_stats_tables`.
 
 import { normalize } from "./_normalize.js";
+import { pickSection } from "./_frames.js";
 import type { ParserRow } from "../core/types.js";
 
 /** Is `v` a plain object (not null, not an array)? */
@@ -73,17 +76,50 @@ export function parse_nhl_web_landing(raw: any): ParserRow[] {
 }
 
 /**
- * Parse `nhl_api_web_right_rail()` into one row per head-to-head game.
- *
- * The right-rail endpoint exposes several independent sub-frames
- * (`seasonSeries`, `shotsByPeriod`, `teamGameStats`, `gameInfo`,
- * `linescore.byPeriod`, `seasonSeriesWins`). The Python parser is a dispatcher
- * that returns all of them keyed by section; in the flat-API single-frame
- * contract this returns the PRIMARY sub-frame, `seasonSeries`.
+ * py `_to_output`'s fallback: a column mixing numbers and strings is a pandas object
+ * column polars cannot type, so py casts it with `str()`. Its numbers become strings
+ * here too (right_rail `team_game_stats`: `24`, `"31/59"`, `0.525424`).
  */
-export function parse_nhl_web_right_rail(raw: any): ParserRow[] {
-  if (!isPlainObject(raw)) return [];
-  return normalize(raw.seasonSeries ?? []);
+function stringifyMixed(rows: ParserRow[]): ParserRow[] {
+  const cols = new Set(rows.flatMap((r) => Object.keys(r)));
+  for (const c of cols) {
+    const kinds = new Set(rows.map((r) => r[c]).filter((v) => v !== null && v !== undefined).map((v) => typeof v));
+    if (!(kinds.has("string") && kinds.has("number"))) continue;
+    // ponytail: Python prints an integral float as "1.0", JS "1" (JSON can't tell them apart).
+    for (const r of rows) if (typeof r[c] === "number") r[c] = String(r[c]);
+  }
+  return rows;
+}
+
+/** A non-empty dict as a one-row frame, else `[]` (py `_single_row`). */
+function singleRow(v: any): ParserRow[] {
+  return isPlainObject(v) && Object.keys(v).length ? normalize([v]) : [];
+}
+
+/**
+ * Every sub-frame of `nhl_api_web_right_rail()`, keyed as sdv-py's dispatcher keys them:
+ * `season_series` (head-to-head games), `shots_by_period`, `team_game_stats` (one row per
+ * category), `game_info` (one row), `linescore_by_period` and `season_series_wins` (one row).
+ */
+export function parse_nhl_web_right_rail_tables(raw: any): Record<string, ParserRow[]> {
+  const p = isPlainObject(raw) ? raw : {};
+  return {
+    season_series: normalize(p.seasonSeries),
+    shots_by_period: normalize(p.shotsByPeriod),
+    team_game_stats: stringifyMixed(normalize(p.teamGameStats)),
+    game_info: singleRow(p.gameInfo),
+    linescore_by_period: normalize((p.linescore ?? {}).byPeriod),
+    season_series_wins: singleRow(p.seasonSeriesWins),
+  };
+}
+
+/**
+ * Parse `nhl_api_web_right_rail()`: `season_series` (default; one row per head-to-head
+ * game), or `shots_by_period` / `team_game_stats` / `game_info` / `linescore_by_period` /
+ * `season_series_wins` via `section`.
+ */
+export function parse_nhl_web_right_rail(raw: any, section?: string): ParserRow[] {
+  return pickSection("parse_nhl_web_right_rail", parse_nhl_web_right_rail_tables(raw), section);
 }
 
 // ---------------------------------------------------------------------------
@@ -157,17 +193,18 @@ export function parse_nhl_web_standings_season(raw: any): ParserRow[] {
 // 4. Team / player surfaces
 // ---------------------------------------------------------------------------
 
+/** Both sub-frames of `nhl_api_web_club_stats()` / `_club_stats_season()`: `{ skaters, goalies }`. */
+export function parse_nhl_web_club_stats_tables(raw: any): Record<string, ParserRow[]> {
+  const p = isPlainObject(raw) ? raw : {};
+  return { skaters: normalize(p.skaters), goalies: normalize(p.goalies) };
+}
+
 /**
- * Parse `nhl_api_web_club_stats()` / `_club_stats_season()` into one row per
- * skater.
- *
- * The payload ships `{skaters: [...], goalies: [...]}`. The Python parser is a
- * dispatcher returning both keyed by section; in the flat-API single-frame
- * contract this returns the PRIMARY sub-frame, `skaters`.
+ * Parse `nhl_api_web_club_stats()` / `_club_stats_season()`: one row per skater
+ * (`skaters`, the default) or per goalie (`section: "goalies"`).
  */
-export function parse_nhl_web_club_stats(raw: any): ParserRow[] {
-  if (!isPlainObject(raw)) return [];
-  return normalize(raw.skaters ?? []);
+export function parse_nhl_web_club_stats(raw: any, section?: string): ParserRow[] {
+  return pickSection("parse_nhl_web_club_stats", parse_nhl_web_club_stats_tables(raw), section);
 }
 
 /**

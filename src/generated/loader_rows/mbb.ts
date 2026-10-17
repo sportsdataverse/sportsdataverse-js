@@ -129,7 +129,7 @@ export interface LoadMbbPbpRow {
   athlete_name_3?: string | null;
   /** Media identifier (video / image). `String` (an id) */
   media_id?: string | null;
-  /** Model's pre-game win probability for the home team (0-1), constant within a game. `Float64` */
+  /** Model's pre-game win probability for the home team (0-1), constant within a game. Present only on assets published with the WP model (2003, 2006-07 to 2019-20 and the 2021+ republishes); absent on other seasons (rules/mbb.yaml#mbb-2003-pbp-wp-columns). `Float64` */
   pregame_home_prob?: number | null;
   /** `Float64` */
   home_win_prob?: number | null;
@@ -961,6 +961,8 @@ export interface LoadMbbPlayerCrosswalkRow {
   yahoo_player_id?: string | null;
   /** Yahoo player name (NA placeholder). `String` */
   yahoo_player_name?: string | null;
+  /** KenPom player id (string), matched by hoopR-mbb-data on the normalized name within the ESPN team (a repeated name broken by jersey), then on last name plus jersey. Null for players KenPom does not list, which includes every ESPN roster row without minutes, and for every row when the build ran without the private KenPom capture. Added by the data repo, so the live player-crosswalk builder does not emit it. `String` (an id) */
+  kp_player_id?: string | null;
   /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
   /** Jaro-Winkler score or 1 for exact (NA if none). `Float64` */
@@ -991,11 +993,11 @@ export interface LoadMbbScheduleCrosswalkRow {
   bart_team2?: string | null;
   /** Torvik winner name (NA for espn-only rows). `String` */
   bart_winner?: string | null;
-  /** KenPom game id (NA unless kenpom enabled). `String` (an id) */
+  /** KenPom game id (string), matched by hoopR-mbb-data on the game date and the unordered pair of ESPN team ids. Null where KenPom lists no matching game, and for every row when the build ran without the private KenPom capture. `String` (an id) */
   kp_game_id?: string | null;
-  /** Fox game id (NA placeholder). `String` (an id) */
+  /** Fox Sports game id (string), filled when the crosswalk is built with fox=True from Fox's per-date scoreboard, matched on the US-Eastern date and the two teams in either home/away order; null otherwise and where Fox lists no matching game. `String` (an id) */
   fox_game_id?: string | null;
-  /** Yahoo game id (NA placeholder). `String` (an id) */
+  /** Yahoo Sports game id, ncaab.g.<YYYYMMDD US-Eastern date><home Yahoo team id, 4 digits>, filled when built with yahoo=True and checked against the ids Yahoo lists, so a neutral-site game carries the side Yahoo calls home; null otherwise and where Yahoo lists no such game (a non-Division-I home team). `String` (an id) */
   yahoo_game_id?: string | null;
   /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
@@ -1037,9 +1039,9 @@ export interface LoadMbbTeamCrosswalkRow {
   kp_team?: string | null;
   /** KenPom conference abbreviation (NA if unmatched). `String` */
   kp_conf?: string | null;
-  /** Yahoo team id (NA placeholder). `String` (an id) */
+  /** Dotted Yahoo Sports team id (e.g. 'ncaab.t.173'), filled when built with yahoo=True from Yahoo's team listing joined on full name, short name, then nickname; null otherwise and where no Yahoo team matched. `String` (an id) */
   yahoo_team_id?: string | null;
-  /** Yahoo team name (NA placeholder). `String` */
+  /** Yahoo Sports full team name for yahoo_team_id; null when yahoo_team_id is. `String` */
   yahoo_team_name?: string | null;
   /** 1 for matched, NA for unmatched. `Float64` */
   fox_match_confidence?: number | null;

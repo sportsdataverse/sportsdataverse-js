@@ -10,6 +10,9 @@ import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperP
 import type {
   NhlApiWebBoxscoreRow,
   NhlApiWebClubScheduleSeasonRow,
+  NhlApiWebClubStatsTables,
+  NhlApiWebClubStatsSkatersRow,
+  NhlApiWebClubStatsGoaliesRow,
   NhlApiWebDraftPicksRow,
   NhlApiWebDraftPicksNowRow,
   NhlApiWebDraftRankingsRow,
@@ -22,6 +25,13 @@ import type {
   NhlApiWebPlayerLandingRow,
   NhlApiWebPlayerSpotlightRow,
   NhlApiWebPlayoffSeriesRow,
+  NhlApiWebRightRailTables,
+  NhlApiWebRightRailSeasonSeriesRow,
+  NhlApiWebRightRailShotsByPeriodRow,
+  NhlApiWebRightRailTeamGameStatsRow,
+  NhlApiWebRightRailGameInfoRow,
+  NhlApiWebRightRailLinescoreByPeriodRow,
+  NhlApiWebRightRailSeasonSeriesWinsRow,
   NhlApiWebRosterRow,
   NhlApiWebScheduleRow,
   NhlApiWebScoreRow,
@@ -252,11 +262,12 @@ const CLUB_STATS_DEF: WrapperDef = {
  * @param params.season - `number | string` — the `{season}` path segment; optional.
  * @param params.game_type - `number | string` — the `{game_type}` path segment; optional; default `2`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `skaters`, `goalies`. Default: `skaters`; an unknown name throws, listing the valid ones.
+ * @returns `Promise<NhlApiWebClubStatsSkatersRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlClubStats({ team: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
-export const nhlClubStats: Wrapper<Row[], NhlClubStatsParams> = (params: WrapperParams = {}) => callFlat(CLUB_STATS_DEF, params);
+export const nhlClubStats: SectionedWrapper<NhlApiWebClubStatsSkatersRow[], NhlApiWebClubStatsTables, NhlClubStatsParams> = (params: WrapperParams = {}) => callFlat(CLUB_STATS_DEF, params);
 /** snake_case alias of {@link nhlClubStats} (py/R parity). */
 export const nhl_club_stats = nhlClubStats;
 
@@ -285,11 +296,12 @@ const CLUB_STATS_SEASON_DEF: WrapperDef = {
  *
  * @param params.team - `number | string` — the `{team}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `skaters`, `goalies`. Default: `skaters`; an unknown name throws, listing the valid ones.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlClubStatsSeason({ team: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
-export const nhlClubStatsSeason: Wrapper<Row[], NhlClubStatsSeasonParams> = (params: WrapperParams = {}) => callFlat(CLUB_STATS_SEASON_DEF, params);
+export const nhlClubStatsSeason: SectionedWrapper<Row[], {}, NhlClubStatsSeasonParams> = (params: WrapperParams = {}) => callFlat(CLUB_STATS_SEASON_DEF, params);
 /** snake_case alias of {@link nhlClubStatsSeason} (py/R parity). */
 export const nhl_club_stats_season = nhlClubStatsSeason;
 
@@ -735,11 +747,12 @@ const RIGHT_RAIL_DEF: WrapperDef = {
  *
  * @param params.game_id - `number | string` — the `{game_id}` path segment.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw response (`unknown`) otherwise.
+ * @param params.section - `string` — (with `parsed: true`) the table to return: `season_series`, `shots_by_period`, `team_game_stats`, `game_info`, `linescore_by_period`, `season_series_wins`. Default: `season_series`; an unknown name throws, listing the valid ones.
+ * @returns `Promise<NhlApiWebRightRailSeasonSeriesRow[]>` with `{ parsed: true }`; the raw response (`unknown`) otherwise.
  * @example await sdv.nhl.nhlRightRail({ game_id: '…' });
  * @see https://js.sportsdataverse.org/docs/nhl/reference/native#native-api--nhl-api-web-game-feed
  */
-export const nhlRightRail: Wrapper<Row[], NhlRightRailParams> = (params: WrapperParams = {}) => callFlat(RIGHT_RAIL_DEF, params);
+export const nhlRightRail: SectionedWrapper<NhlApiWebRightRailSeasonSeriesRow[], NhlApiWebRightRailTables, NhlRightRailParams> = (params: WrapperParams = {}) => callFlat(RIGHT_RAIL_DEF, params);
 /** snake_case alias of {@link nhlRightRail} (py/R parity). */
 export const nhl_right_rail = nhlRightRail;
 

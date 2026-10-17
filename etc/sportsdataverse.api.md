@@ -7631,6 +7631,7 @@ export interface LoadCfbAdvTurnoverRow {
     Int?: number | bigint | null;
     Int_pbp?: number | bigint | null;
     pass_breakups?: number | bigint | null;
+    passes_defended?: number | bigint | null;
     pos_team?: string | null;
     pos_team_id?: string | null;
     season?: number | bigint | null;
@@ -9135,6 +9136,11 @@ export interface LoadCfbModelPbpRow {
 export interface LoadCfbPassingRow {
     [column: string]: unknown;
     att?: number | null;
+    boom_rate?: number | null;
+    boom_rate_pct?: number | null;
+    boom_rate_pos_pct?: number | null;
+    boom_rate_rank?: number | null;
+    bust_rate?: number | null;
     comp?: number | null;
     comppct?: number | null;
     comppct_n?: number | bigint | null;
@@ -9152,6 +9158,7 @@ export interface LoadCfbPassingRow {
     detmergame_pct?: number | null;
     detmergame_pos_pct?: number | null;
     detmergame_rank?: number | null;
+    dispersion_games?: number | bigint | null;
     division?: string | null;
     dropbacks?: number | null;
     EPAgame?: number | null;
@@ -9161,9 +9168,12 @@ export interface LoadCfbPassingRow {
     EPAgame_rank?: number | null;
     EPAplay?: number | null;
     EPAplay_n?: number | bigint | null;
+    EPAplay_p10?: number | null;
+    EPAplay_p90?: number | null;
     EPAplay_pct?: number | null;
     EPAplay_pos_pct?: number | null;
     EPAplay_rank?: number | null;
+    EPAplay_sd?: number | null;
     fbs_class?: string | null;
     games?: number | null;
     int_epa?: number | null;
@@ -10357,6 +10367,11 @@ export interface LoadCfbRatingsWeeklyRow {
 // @public
 export interface LoadCfbReceivingRow {
     [column: string]: unknown;
+    boom_rate?: number | null;
+    boom_rate_pct?: number | null;
+    boom_rate_pos_pct?: number | null;
+    boom_rate_rank?: number | null;
+    bust_rate?: number | null;
     catchpct?: number | null;
     catchpct_n?: number | bigint | null;
     catchpct_pct?: number | null;
@@ -10367,6 +10382,7 @@ export interface LoadCfbReceivingRow {
     comp_pos_pct?: number | null;
     comp_rank?: number | null;
     conference?: string | null;
+    dispersion_games?: number | bigint | null;
     division?: string | null;
     EPAgame?: number | null;
     EPAgame_n?: number | bigint | null;
@@ -10375,9 +10391,12 @@ export interface LoadCfbReceivingRow {
     EPAgame_rank?: number | null;
     EPAplay?: number | null;
     EPAplay_n?: number | bigint | null;
+    EPAplay_p10?: number | null;
+    EPAplay_p90?: number | null;
     EPAplay_pct?: number | null;
     EPAplay_pos_pct?: number | null;
     EPAplay_rank?: number | null;
+    EPAplay_sd?: number | null;
     fbs_class?: string | null;
     fumbles?: number | null;
     fumbles_pct?: number | null;
@@ -10581,7 +10600,13 @@ export interface LoadCfbRostersRow {
 // @public
 export interface LoadCfbRushingRow {
     [column: string]: unknown;
+    boom_rate?: number | null;
+    boom_rate_pct?: number | null;
+    boom_rate_pos_pct?: number | null;
+    boom_rate_rank?: number | null;
+    bust_rate?: number | null;
     conference?: string | null;
+    dispersion_games?: number | bigint | null;
     division?: string | null;
     EPAgame?: number | null;
     EPAgame_n?: number | bigint | null;
@@ -10590,15 +10615,24 @@ export interface LoadCfbRushingRow {
     EPAgame_rank?: number | null;
     EPAplay?: number | null;
     EPAplay_n?: number | bigint | null;
+    EPAplay_not_one_score?: number | null;
+    EPAplay_not_one_score_n?: number | bigint | null;
+    EPAplay_one_score?: number | null;
+    EPAplay_one_score_n?: number | bigint | null;
+    EPAplay_p10?: number | null;
+    EPAplay_p90?: number | null;
     EPAplay_pct?: number | null;
     EPAplay_pos_pct?: number | null;
     EPAplay_rank?: number | null;
+    EPAplay_sd?: number | null;
     fbs_class?: string | null;
     fumbles?: number | null;
     fumbles_pct?: number | null;
     fumbles_pos_pct?: number | null;
     fumbles_rank?: number | null;
     games?: number | null;
+    line_yards_share?: number | null;
+    open_field_share?: number | null;
     player_id?: string | null;
     plays?: number | null;
     plays_pct?: number | null;
@@ -10614,6 +10648,11 @@ export interface LoadCfbRushingRow {
     rushing_td_pos_pct?: number | null;
     rushing_td_rank?: number | null;
     season?: number | bigint | null;
+    second_level_share?: number | null;
+    stuff_rate?: number | null;
+    stuff_rate_pct?: number | null;
+    stuff_rate_pos_pct?: number | null;
+    stuff_rate_rank?: number | null;
     success?: number | null;
     success_n?: number | bigint | null;
     success_pct?: number | null;
@@ -13684,6 +13723,7 @@ export interface LoadMbbPlayerCrosswalkRow {
     fox_jersey?: string | null;
     fox_player?: string | null;
     fox_position_group?: string | null;
+    kp_player_id?: string | null;
     match_confidence?: number | null;
     match_keys?: string | null;
     match_method?: string | null;
@@ -14286,6 +14326,155 @@ export interface LoadMlbRunnersRow {
     responsible_pitcher_id?: string | null;
     runner_id?: string | null;
     start_base?: string | null;
+}
+
+// @public
+export interface LoadMlbScheduleRow {
+    [column: string]: unknown;
+    abstract_state?: string | null;
+    away_score?: number | bigint | null;
+    away_team_id?: string | null;
+    away_team_name?: string | null;
+    detailed_state?: string | null;
+    double_header?: string | null;
+    game_date?: string | null;
+    game_datetime?: string | null;
+    game_number?: number | bigint | null;
+    game_pk?: string | null;
+    game_type?: string | null;
+    home_score?: number | bigint | null;
+    home_team_id?: string | null;
+    home_team_name?: string | null;
+    season?: number | bigint | null;
+    series_description?: string | null;
+    status_code?: string | null;
+    venue_id?: string | null;
+    venue_name?: string | null;
+}
+
+// @public
+export interface LoadMlbStatcastRow {
+    [column: string]: unknown;
+    age_bat?: number | bigint | null;
+    age_bat_legacy?: number | bigint | null;
+    age_pit?: number | bigint | null;
+    age_pit_legacy?: number | bigint | null;
+    api_break_x_arm?: number | null;
+    api_break_x_batter_in?: number | null;
+    api_break_z_with_gravity?: number | null;
+    arm_angle?: number | null;
+    at_bat_number?: number | bigint | null;
+    attack_angle?: number | null;
+    attack_direction?: number | null;
+    away_score?: number | bigint | null;
+    away_team?: string | null;
+    ax?: number | null;
+    ay?: number | null;
+    az?: number | null;
+    babip_value?: number | null;
+    balls?: number | bigint | null;
+    bat_score?: number | bigint | null;
+    bat_score_diff?: number | bigint | null;
+    bat_speed?: number | null;
+    bat_win_exp?: number | null;
+    batter?: string | null;
+    batter_days_since_prev_game?: number | null;
+    batter_days_until_next_game?: number | null;
+    bb_type?: string | null;
+    break_angle_deprecated?: number | null;
+    break_length_deprecated?: number | null;
+    delta_home_win_exp?: number | null;
+    delta_pitcher_run_exp?: number | null;
+    delta_run_exp?: number | null;
+    des?: string | null;
+    description?: string | null;
+    effective_speed?: number | null;
+    estimated_ba_using_speedangle?: number | null;
+    estimated_slg_using_speedangle?: number | null;
+    estimated_woba_using_speedangle?: number | null;
+    events?: string | null;
+    fielder_2?: string | null;
+    fielder_3?: string | null;
+    fielder_4?: string | null;
+    fielder_5?: string | null;
+    fielder_6?: string | null;
+    fielder_7?: string | null;
+    fielder_8?: string | null;
+    fielder_9?: string | null;
+    fld_score?: number | bigint | null;
+    game_date?: string | null;
+    game_pk?: string | null;
+    game_type?: string | null;
+    game_year?: number | bigint | null;
+    hc_x?: number | null;
+    hc_y?: number | null;
+    hit_distance_sc?: number | null;
+    hit_location?: number | null;
+    home_score?: number | bigint | null;
+    home_score_diff?: number | bigint | null;
+    home_team?: string | null;
+    home_win_exp?: number | null;
+    hyper_speed?: number | null;
+    if_fielding_alignment?: string | null;
+    inning?: number | bigint | null;
+    inning_topbot?: string | null;
+    intercept_ball_minus_batter_pos_x_inches?: number | null;
+    intercept_ball_minus_batter_pos_y_inches?: number | null;
+    iso_value?: number | null;
+    launch_angle?: number | null;
+    launch_speed?: number | null;
+    launch_speed_angle?: number | null;
+    miss_distance?: number | null;
+    n_priorpa_thisgame_player_at_bat?: number | bigint | null;
+    n_thruorder_pitcher?: number | bigint | null;
+    of_fielding_alignment?: string | null;
+    on_1b?: string | null;
+    on_2b?: string | null;
+    on_3b?: string | null;
+    outs_when_up?: number | bigint | null;
+    p_throws?: string | null;
+    pfx_x?: number | null;
+    pfx_z?: number | null;
+    pitch_name?: string | null;
+    pitch_number?: number | bigint | null;
+    pitch_type?: string | null;
+    pitcher?: string | null;
+    pitcher_days_since_prev_game?: number | null;
+    pitcher_days_until_next_game?: number | null;
+    plate_x?: number | null;
+    plate_z?: number | null;
+    player_name?: string | null;
+    post_away_score?: number | bigint | null;
+    post_bat_score?: number | bigint | null;
+    post_fld_score?: number | bigint | null;
+    post_home_score?: number | bigint | null;
+    release_extension?: number | null;
+    release_pos_x?: number | null;
+    release_pos_y?: number | null;
+    release_pos_z?: number | null;
+    release_speed?: number | null;
+    release_spin_rate?: number | null;
+    season?: number | bigint | null;
+    spin_axis?: number | null;
+    spin_dir?: number | null;
+    spin_rate_deprecated?: number | null;
+    stand?: string | null;
+    strikes?: number | bigint | null;
+    sv_id?: string | null;
+    swing_length?: number | null;
+    swing_path_tilt?: number | null;
+    sz_bot?: number | null;
+    sz_top?: number | null;
+    tfs_deprecated?: number | null;
+    tfs_zulu_deprecated?: number | null;
+    type?: string | null;
+    umpire?: number | null;
+    vx0?: number | null;
+    vy0?: number | null;
+    vz0?: number | null;
+    woba_denom?: number | null;
+    woba_value?: number | null;
+    zone?: number | null;
 }
 
 // @public
@@ -14929,6 +15118,25 @@ export interface LoadNbaStatsCoachesRow {
     sort_sequence?: number | bigint | null;
     sub_sort_sequence?: number | bigint | null;
     team_id?: string | null;
+}
+
+// @public
+export interface LoadNbaStatsDraftRow {
+    [column: string]: unknown;
+    draft_type?: string | null;
+    organization?: string | null;
+    organization_type?: string | null;
+    overall_pick?: number | bigint | null;
+    person_id?: string | null;
+    player_name?: string | null;
+    player_profile_flag?: number | bigint | null;
+    round_number?: number | bigint | null;
+    round_pick?: number | bigint | null;
+    season?: number | null;
+    team_abbreviation?: string | null;
+    team_city?: string | null;
+    team_id?: string | null;
+    team_name?: string | null;
 }
 
 // @public
@@ -47376,6 +47584,60 @@ export interface NhlApiWebClubScheduleSeasonRow {
 }
 
 // @public
+export interface NhlApiWebClubStatsGoaliesRow {
+    assists?: number | null;
+    first_name_default?: string | null;
+    games_played?: number | null;
+    games_started?: number | null;
+    goals?: number | null;
+    goals_against?: number | null;
+    goals_against_average?: number | null;
+    headshot?: string | null;
+    last_name_default?: string | null;
+    losses?: number | null;
+    overtime_losses?: number | null;
+    penalty_minutes?: number | null;
+    player_id?: string | null;
+    points?: number | null;
+    save_percentage?: number | null;
+    saves?: number | null;
+    shots_against?: number | null;
+    shutouts?: number | null;
+    time_on_ice?: number | null;
+    wins?: number | null;
+}
+
+// @public
+export interface NhlApiWebClubStatsSkatersRow {
+    assists?: number | null;
+    avg_shifts_per_game?: number | null;
+    avg_time_on_ice_per_game?: number | null;
+    faceoff_win_pctg?: number | null;
+    first_name_default?: string | null;
+    game_winning_goals?: number | null;
+    games_played?: number | null;
+    goals?: number | null;
+    headshot?: string | null;
+    last_name_default?: string | null;
+    overtime_goals?: number | null;
+    penalty_minutes?: number | null;
+    player_id?: string | null;
+    plus_minus?: number | null;
+    points?: number | null;
+    position_code?: string | null;
+    power_play_goals?: number | null;
+    shooting_pctg?: number | null;
+    shorthanded_goals?: number | null;
+    shots?: number | null;
+}
+
+// @public
+export interface NhlApiWebClubStatsTables {
+    goalies: NhlApiWebClubStatsGoaliesRow[];
+    skaters: NhlApiWebClubStatsSkatersRow[];
+}
+
+// @public
 export type NhlApiWebControls = OptionalParams<{
     headers: Record<string, string>;
 }>;
@@ -47842,6 +48104,84 @@ export interface NhlApiWebPlayoffSeriesRow {
     venue_default?: string | null;
     venue_timezone?: string | null;
     venue_utc_offset?: string | null;
+}
+
+// @public
+export interface NhlApiWebRightRailGameInfoRow {
+    away_team_head_coach_default?: string | null;
+    away_team_scratches?: string | null;
+    home_team_head_coach_default?: string | null;
+    home_team_scratches?: string | null;
+    linesmen?: string | null;
+    referees?: string | null;
+}
+
+// @public
+export interface NhlApiWebRightRailLinescoreByPeriodRow {
+    away?: number | null;
+    home?: number | null;
+    period_descriptor_max_regulation_periods?: number | null;
+    period_descriptor_number?: number | null;
+    period_descriptor_period_type?: string | null;
+}
+
+// @public
+export interface NhlApiWebRightRailSeasonSeriesRow {
+    away_team_abbrev?: string | null;
+    away_team_id?: string | null;
+    away_team_logo?: string | null;
+    away_team_score?: number | null;
+    eastern_utc_offset?: string | null;
+    game_center_link?: string | null;
+    game_date?: string | null;
+    game_outcome_last_period_type?: string | null;
+    game_schedule_state?: string | null;
+    game_state?: string | null;
+    game_type?: number | null;
+    home_team_abbrev?: string | null;
+    home_team_id?: string | null;
+    home_team_logo?: string | null;
+    home_team_score?: number | null;
+    id?: string | null;
+    period_descriptor_max_regulation_periods?: number | null;
+    period_descriptor_number?: number | null;
+    period_descriptor_period_type?: string | null;
+    season?: number | null;
+    start_time_utc?: string | null;
+    venue_utc_offset?: string | null;
+}
+
+// @public
+export interface NhlApiWebRightRailSeasonSeriesWinsRow {
+    away_team_wins?: number | null;
+    home_team_wins?: number | null;
+    needed_to_win?: number | null;
+}
+
+// @public
+export interface NhlApiWebRightRailShotsByPeriodRow {
+    away?: number | null;
+    home?: number | null;
+    period_descriptor_max_regulation_periods?: number | null;
+    period_descriptor_number?: number | null;
+    period_descriptor_period_type?: string | null;
+}
+
+// @public
+export interface NhlApiWebRightRailTables {
+    game_info: NhlApiWebRightRailGameInfoRow[];
+    linescore_by_period: NhlApiWebRightRailLinescoreByPeriodRow[];
+    season_series: NhlApiWebRightRailSeasonSeriesRow[];
+    season_series_wins: NhlApiWebRightRailSeasonSeriesWinsRow[];
+    shots_by_period: NhlApiWebRightRailShotsByPeriodRow[];
+    team_game_stats: NhlApiWebRightRailTeamGameStatsRow[];
+}
+
+// @public
+export interface NhlApiWebRightRailTeamGameStatsRow {
+    away_value?: string | null;
+    category?: string | null;
+    home_value?: string | null;
 }
 
 // @public
@@ -51448,9 +51788,9 @@ export interface NhlWrappers {
     // @deprecated
     nhl_api_web_club_schedule_week: Wrapper<Row[], NhlClubScheduleWeekParams>;
     // @deprecated
-    nhl_api_web_club_stats: Wrapper<Row[], NhlClubStatsParams>;
+    nhl_api_web_club_stats: SectionedWrapper<NhlApiWebClubStatsSkatersRow[], NhlApiWebClubStatsTables, NhlClubStatsParams>;
     // @deprecated
-    nhl_api_web_club_stats_season: Wrapper<Row[], NhlClubStatsSeasonParams>;
+    nhl_api_web_club_stats_season: SectionedWrapper<Row[], {}, NhlClubStatsSeasonParams>;
     // @deprecated
     nhl_api_web_draft_picks: Wrapper<NhlApiWebDraftPicksRow[], NhlDraftPicksParams>;
     // @deprecated
@@ -51476,7 +51816,7 @@ export interface NhlWrappers {
     // @deprecated
     nhl_api_web_playoff_series: Wrapper<NhlApiWebPlayoffSeriesRow[], NhlPlayoffSeriesParams>;
     // @deprecated
-    nhl_api_web_right_rail: Wrapper<Row[], NhlRightRailParams>;
+    nhl_api_web_right_rail: SectionedWrapper<NhlApiWebRightRailSeasonSeriesRow[], NhlApiWebRightRailTables, NhlRightRailParams>;
     // @deprecated
     nhl_api_web_roster: Wrapper<NhlApiWebRosterRow[], NhlRosterParams>;
     // @deprecated
@@ -51497,8 +51837,8 @@ export interface NhlWrappers {
     nhl_club_schedule_month: Wrapper<Row[], NhlClubScheduleMonthParams>;
     nhl_club_schedule_season: Wrapper<NhlApiWebClubScheduleSeasonRow[], NhlClubScheduleSeasonParams>;
     nhl_club_schedule_week: Wrapper<Row[], NhlClubScheduleWeekParams>;
-    nhl_club_stats: Wrapper<Row[], NhlClubStatsParams>;
-    nhl_club_stats_season: Wrapper<Row[], NhlClubStatsSeasonParams>;
+    nhl_club_stats: SectionedWrapper<NhlApiWebClubStatsSkatersRow[], NhlApiWebClubStatsTables, NhlClubStatsParams>;
+    nhl_club_stats_season: SectionedWrapper<Row[], {}, NhlClubStatsSeasonParams>;
     nhl_draft_picks: Wrapper<NhlApiWebDraftPicksRow[], NhlDraftPicksParams>;
     nhl_draft_picks_now: Wrapper<NhlApiWebDraftPicksNowRow[], NhlDraftPicksNowParams>;
     nhl_draft_rankings: Wrapper<NhlApiWebDraftRankingsRow[], NhlDraftRankingsParams>;
@@ -51589,7 +51929,7 @@ export interface NhlWrappers {
     nhl_records_home_team_record: Wrapper<NhlRecordsHomeTeamRecordRow[], NhlRecordsHomeTeamRecordParams>;
     nhl_records_skater_career_leaders: Wrapper<Row[], NhlRecordsSkaterCareerLeadersParams>;
     nhl_records_skater_career_stats: Wrapper<Row[], NhlRecordsSkaterCareerStatsParams>;
-    nhl_right_rail: Wrapper<Row[], NhlRightRailParams>;
+    nhl_right_rail: SectionedWrapper<NhlApiWebRightRailSeasonSeriesRow[], NhlApiWebRightRailTables, NhlRightRailParams>;
     nhl_roster: Wrapper<NhlApiWebRosterRow[], NhlRosterParams>;
     nhl_roster_season: Wrapper<Row[], NhlRosterSeasonParams>;
     nhl_schedule_calendar: Wrapper<Row[], NhlScheduleCalendarParams>;
@@ -51629,9 +51969,9 @@ export interface NhlWrappers {
     // @deprecated
     nhlApiWebClubScheduleWeek: Wrapper<Row[], NhlClubScheduleWeekParams>;
     // @deprecated
-    nhlApiWebClubStats: Wrapper<Row[], NhlClubStatsParams>;
+    nhlApiWebClubStats: SectionedWrapper<NhlApiWebClubStatsSkatersRow[], NhlApiWebClubStatsTables, NhlClubStatsParams>;
     // @deprecated
-    nhlApiWebClubStatsSeason: Wrapper<Row[], NhlClubStatsSeasonParams>;
+    nhlApiWebClubStatsSeason: SectionedWrapper<Row[], {}, NhlClubStatsSeasonParams>;
     // @deprecated
     nhlApiWebDraftPicks: Wrapper<NhlApiWebDraftPicksRow[], NhlDraftPicksParams>;
     // @deprecated
@@ -51657,7 +51997,7 @@ export interface NhlWrappers {
     // @deprecated
     nhlApiWebPlayoffSeries: Wrapper<NhlApiWebPlayoffSeriesRow[], NhlPlayoffSeriesParams>;
     // @deprecated
-    nhlApiWebRightRail: Wrapper<Row[], NhlRightRailParams>;
+    nhlApiWebRightRail: SectionedWrapper<NhlApiWebRightRailSeasonSeriesRow[], NhlApiWebRightRailTables, NhlRightRailParams>;
     // @deprecated
     nhlApiWebRoster: Wrapper<NhlApiWebRosterRow[], NhlRosterParams>;
     // @deprecated
@@ -51678,8 +52018,8 @@ export interface NhlWrappers {
     nhlClubScheduleMonth: Wrapper<Row[], NhlClubScheduleMonthParams>;
     nhlClubScheduleSeason: Wrapper<NhlApiWebClubScheduleSeasonRow[], NhlClubScheduleSeasonParams>;
     nhlClubScheduleWeek: Wrapper<Row[], NhlClubScheduleWeekParams>;
-    nhlClubStats: Wrapper<Row[], NhlClubStatsParams>;
-    nhlClubStatsSeason: Wrapper<Row[], NhlClubStatsSeasonParams>;
+    nhlClubStats: SectionedWrapper<NhlApiWebClubStatsSkatersRow[], NhlApiWebClubStatsTables, NhlClubStatsParams>;
+    nhlClubStatsSeason: SectionedWrapper<Row[], {}, NhlClubStatsSeasonParams>;
     nhlDraftPicks: Wrapper<NhlApiWebDraftPicksRow[], NhlDraftPicksParams>;
     nhlDraftPicksNow: Wrapper<NhlApiWebDraftPicksNowRow[], NhlDraftPicksNowParams>;
     nhlDraftRankings: Wrapper<NhlApiWebDraftRankingsRow[], NhlDraftRankingsParams>;
@@ -51770,7 +52110,7 @@ export interface NhlWrappers {
     nhlRecordsHomeTeamRecord: Wrapper<NhlRecordsHomeTeamRecordRow[], NhlRecordsHomeTeamRecordParams>;
     nhlRecordsSkaterCareerLeaders: Wrapper<Row[], NhlRecordsSkaterCareerLeadersParams>;
     nhlRecordsSkaterCareerStats: Wrapper<Row[], NhlRecordsSkaterCareerStatsParams>;
-    nhlRightRail: Wrapper<Row[], NhlRightRailParams>;
+    nhlRightRail: SectionedWrapper<NhlApiWebRightRailSeasonSeriesRow[], NhlApiWebRightRailTables, NhlRightRailParams>;
     nhlRoster: Wrapper<NhlApiWebRosterRow[], NhlRosterParams>;
     nhlRosterSeason: Wrapper<Row[], NhlRosterSeasonParams>;
     nhlScheduleCalendar: Wrapper<Row[], NhlScheduleCalendarParams>;

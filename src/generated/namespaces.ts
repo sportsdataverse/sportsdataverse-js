@@ -511,6 +511,9 @@ import type {
   NbaStatsVideostatusRow,
   NhlApiWebBoxscoreRow,
   NhlApiWebClubScheduleSeasonRow,
+  NhlApiWebClubStatsGoaliesRow,
+  NhlApiWebClubStatsSkatersRow,
+  NhlApiWebClubStatsTables,
   NhlApiWebDraftPicksNowRow,
   NhlApiWebDraftPicksRow,
   NhlApiWebDraftRankingsNowRow,
@@ -523,6 +526,13 @@ import type {
   NhlApiWebPlayerLandingRow,
   NhlApiWebPlayerSpotlightRow,
   NhlApiWebPlayoffSeriesRow,
+  NhlApiWebRightRailGameInfoRow,
+  NhlApiWebRightRailLinescoreByPeriodRow,
+  NhlApiWebRightRailSeasonSeriesRow,
+  NhlApiWebRightRailSeasonSeriesWinsRow,
+  NhlApiWebRightRailShotsByPeriodRow,
+  NhlApiWebRightRailTables,
+  NhlApiWebRightRailTeamGameStatsRow,
   NhlApiWebRosterRow,
   NhlApiWebScheduleRow,
   NhlApiWebScoreRow,
@@ -17065,9 +17075,9 @@ export interface NhlWrappers {
   /** Pre-v4 name of `nhl_club_schedule_week`: forwards to it and warns once per process. @deprecated Renamed `nhl_club_schedule_week` in v4. */
   nhl_api_web_club_schedule_week: Wrapper<Row[], NhlClubScheduleWeekParams>;
   /** Pre-v4 name of `nhl_club_stats`: forwards to it and warns once per process. @deprecated Renamed `nhl_club_stats` in v4. */
-  nhl_api_web_club_stats: Wrapper<Row[], NhlClubStatsParams>;
+  nhl_api_web_club_stats: SectionedWrapper<NhlApiWebClubStatsSkatersRow[], NhlApiWebClubStatsTables, NhlClubStatsParams>;
   /** Pre-v4 name of `nhl_club_stats_season`: forwards to it and warns once per process. @deprecated Renamed `nhl_club_stats_season` in v4. */
-  nhl_api_web_club_stats_season: Wrapper<Row[], NhlClubStatsSeasonParams>;
+  nhl_api_web_club_stats_season: SectionedWrapper<Row[], {}, NhlClubStatsSeasonParams>;
   /** Pre-v4 name of `nhl_draft_picks`: forwards to it and warns once per process. @deprecated Renamed `nhl_draft_picks` in v4. */
   nhl_api_web_draft_picks: Wrapper<NhlApiWebDraftPicksRow[], NhlDraftPicksParams>;
   /** Pre-v4 name of `nhl_draft_picks_now`: forwards to it and warns once per process. @deprecated Renamed `nhl_draft_picks_now` in v4. */
@@ -17093,7 +17103,7 @@ export interface NhlWrappers {
   /** Pre-v4 name of `nhl_playoff_series`: forwards to it and warns once per process. @deprecated Renamed `nhl_playoff_series` in v4. */
   nhl_api_web_playoff_series: Wrapper<NhlApiWebPlayoffSeriesRow[], NhlPlayoffSeriesParams>;
   /** Pre-v4 name of `nhl_right_rail`: forwards to it and warns once per process. @deprecated Renamed `nhl_right_rail` in v4. */
-  nhl_api_web_right_rail: Wrapper<Row[], NhlRightRailParams>;
+  nhl_api_web_right_rail: SectionedWrapper<NhlApiWebRightRailSeasonSeriesRow[], NhlApiWebRightRailTables, NhlRightRailParams>;
   /** Pre-v4 name of `nhl_roster`: forwards to it and warns once per process. @deprecated Renamed `nhl_roster` in v4. */
   nhl_api_web_roster: Wrapper<NhlApiWebRosterRow[], NhlRosterParams>;
   /** Pre-v4 name of `nhl_roster_season`: forwards to it and warns once per process. @deprecated Renamed `nhl_roster_season` in v4. */
@@ -17119,9 +17129,9 @@ export interface NhlWrappers {
   /** NHL api-web (game feed) — club schedule week. `GET https://api-web.nhle.com/v1/club-schedule/{team}/week/{date}` */
   nhl_club_schedule_week: Wrapper<Row[], NhlClubScheduleWeekParams>;
   /** NHL api-web (game feed) — club stats. `GET https://api-web.nhle.com/v1/club-stats/{team}/{season}/{game_type}` */
-  nhl_club_stats: Wrapper<Row[], NhlClubStatsParams>;
+  nhl_club_stats: SectionedWrapper<NhlApiWebClubStatsSkatersRow[], NhlApiWebClubStatsTables, NhlClubStatsParams>;
   /** NHL api-web (game feed) — club stats season. `GET https://api-web.nhle.com/v1/club-stats-season/{team}` */
-  nhl_club_stats_season: Wrapper<Row[], NhlClubStatsSeasonParams>;
+  nhl_club_stats_season: SectionedWrapper<Row[], {}, NhlClubStatsSeasonParams>;
   /** NHL api-web (game feed) — draft picks. `GET https://api-web.nhle.com/v1/draft/picks/{year}/{round_}` */
   nhl_draft_picks: Wrapper<NhlApiWebDraftPicksRow[], NhlDraftPicksParams>;
   /** NHL api-web (game feed) — draft picks now. `GET https://api-web.nhle.com/v1/draft/picks/now` */
@@ -17303,7 +17313,7 @@ export interface NhlWrappers {
   /** NHL Records — skater career stats. `GET https://records.nhl.com/site/api/skater-career-statistics` */
   nhl_records_skater_career_stats: Wrapper<Row[], NhlRecordsSkaterCareerStatsParams>;
   /** NHL api-web (game feed) — right rail. `GET https://api-web.nhle.com/v1/gamecenter/{game_id}/right-rail` */
-  nhl_right_rail: Wrapper<Row[], NhlRightRailParams>;
+  nhl_right_rail: SectionedWrapper<NhlApiWebRightRailSeasonSeriesRow[], NhlApiWebRightRailTables, NhlRightRailParams>;
   /** NHL api-web (game feed) — roster. `GET https://api-web.nhle.com/v1/roster/{team}/{season}` */
   nhl_roster: Wrapper<NhlApiWebRosterRow[], NhlRosterParams>;
   /** NHL api-web (game feed) — roster season. `GET https://api-web.nhle.com/v1/roster-season/{team}` */
@@ -17373,9 +17383,9 @@ export interface NhlWrappers {
   /** Pre-v4 name of `nhlClubScheduleWeek`: forwards to it and warns once per process. @deprecated Renamed `nhlClubScheduleWeek` in v4. */
   nhlApiWebClubScheduleWeek: Wrapper<Row[], NhlClubScheduleWeekParams>;
   /** Pre-v4 name of `nhlClubStats`: forwards to it and warns once per process. @deprecated Renamed `nhlClubStats` in v4. */
-  nhlApiWebClubStats: Wrapper<Row[], NhlClubStatsParams>;
+  nhlApiWebClubStats: SectionedWrapper<NhlApiWebClubStatsSkatersRow[], NhlApiWebClubStatsTables, NhlClubStatsParams>;
   /** Pre-v4 name of `nhlClubStatsSeason`: forwards to it and warns once per process. @deprecated Renamed `nhlClubStatsSeason` in v4. */
-  nhlApiWebClubStatsSeason: Wrapper<Row[], NhlClubStatsSeasonParams>;
+  nhlApiWebClubStatsSeason: SectionedWrapper<Row[], {}, NhlClubStatsSeasonParams>;
   /** Pre-v4 name of `nhlDraftPicks`: forwards to it and warns once per process. @deprecated Renamed `nhlDraftPicks` in v4. */
   nhlApiWebDraftPicks: Wrapper<NhlApiWebDraftPicksRow[], NhlDraftPicksParams>;
   /** Pre-v4 name of `nhlDraftPicksNow`: forwards to it and warns once per process. @deprecated Renamed `nhlDraftPicksNow` in v4. */
@@ -17401,7 +17411,7 @@ export interface NhlWrappers {
   /** Pre-v4 name of `nhlPlayoffSeries`: forwards to it and warns once per process. @deprecated Renamed `nhlPlayoffSeries` in v4. */
   nhlApiWebPlayoffSeries: Wrapper<NhlApiWebPlayoffSeriesRow[], NhlPlayoffSeriesParams>;
   /** Pre-v4 name of `nhlRightRail`: forwards to it and warns once per process. @deprecated Renamed `nhlRightRail` in v4. */
-  nhlApiWebRightRail: Wrapper<Row[], NhlRightRailParams>;
+  nhlApiWebRightRail: SectionedWrapper<NhlApiWebRightRailSeasonSeriesRow[], NhlApiWebRightRailTables, NhlRightRailParams>;
   /** Pre-v4 name of `nhlRoster`: forwards to it and warns once per process. @deprecated Renamed `nhlRoster` in v4. */
   nhlApiWebRoster: Wrapper<NhlApiWebRosterRow[], NhlRosterParams>;
   /** Pre-v4 name of `nhlRosterSeason`: forwards to it and warns once per process. @deprecated Renamed `nhlRosterSeason` in v4. */
@@ -17427,9 +17437,9 @@ export interface NhlWrappers {
   /** NHL api-web (game feed) — club schedule week. `GET https://api-web.nhle.com/v1/club-schedule/{team}/week/{date}` */
   nhlClubScheduleWeek: Wrapper<Row[], NhlClubScheduleWeekParams>;
   /** NHL api-web (game feed) — club stats. `GET https://api-web.nhle.com/v1/club-stats/{team}/{season}/{game_type}` */
-  nhlClubStats: Wrapper<Row[], NhlClubStatsParams>;
+  nhlClubStats: SectionedWrapper<NhlApiWebClubStatsSkatersRow[], NhlApiWebClubStatsTables, NhlClubStatsParams>;
   /** NHL api-web (game feed) — club stats season. `GET https://api-web.nhle.com/v1/club-stats-season/{team}` */
-  nhlClubStatsSeason: Wrapper<Row[], NhlClubStatsSeasonParams>;
+  nhlClubStatsSeason: SectionedWrapper<Row[], {}, NhlClubStatsSeasonParams>;
   /** NHL api-web (game feed) — draft picks. `GET https://api-web.nhle.com/v1/draft/picks/{year}/{round_}` */
   nhlDraftPicks: Wrapper<NhlApiWebDraftPicksRow[], NhlDraftPicksParams>;
   /** NHL api-web (game feed) — draft picks now. `GET https://api-web.nhle.com/v1/draft/picks/now` */
@@ -17611,7 +17621,7 @@ export interface NhlWrappers {
   /** NHL Records — skater career stats. `GET https://records.nhl.com/site/api/skater-career-statistics` */
   nhlRecordsSkaterCareerStats: Wrapper<Row[], NhlRecordsSkaterCareerStatsParams>;
   /** NHL api-web (game feed) — right rail. `GET https://api-web.nhle.com/v1/gamecenter/{game_id}/right-rail` */
-  nhlRightRail: Wrapper<Row[], NhlRightRailParams>;
+  nhlRightRail: SectionedWrapper<NhlApiWebRightRailSeasonSeriesRow[], NhlApiWebRightRailTables, NhlRightRailParams>;
   /** NHL api-web (game feed) — roster. `GET https://api-web.nhle.com/v1/roster/{team}/{season}` */
   nhlRoster: Wrapper<NhlApiWebRosterRow[], NhlRosterParams>;
   /** NHL api-web (game feed) — roster season. `GET https://api-web.nhle.com/v1/roster-season/{team}` */

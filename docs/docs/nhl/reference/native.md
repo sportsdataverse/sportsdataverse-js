@@ -24,7 +24,7 @@ Beyond the ESPN surface, `sdv.nhl` also wraps the league's own live APIs. Same `
 
 ## Native API — NHL api-web (game feed)
 
-Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-web.nhle.com`. Each method is exposed under BOTH its snake_case name `nhl_<endpoint>` (`nhl_web_<endpoint>` where sdv-py's name is taken) (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-web.nhle.com`. Each method is exposed under BOTH its snake_case name `nhl_<endpoint>` (`nhl_web_<endpoint>` where sdv-py's name is taken) (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default shown in the Parser column (one sub-frame, or every table as a dict), and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
@@ -32,8 +32,8 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `nhl_club_schedule_month` / `nhlClubScheduleMonth` *(was `nhl_api_web_club_schedule_month`)* | `https://api-web.nhle.com/v1/club-schedule/{team}/month/{month}` | `team`\*, `month` | — | `parse_nhl_web_club_schedule` | — |
 | `nhl_club_schedule_season` / `nhlClubScheduleSeason` *(was `nhl_api_web_club_schedule_season`)* | `https://api-web.nhle.com/v1/club-schedule-season/{team}/{season}` | `team`\*, `season` | — | `parse_nhl_web_club_schedule` | — |
 | `nhl_club_schedule_week` / `nhlClubScheduleWeek` *(was `nhl_api_web_club_schedule_week`)* | `https://api-web.nhle.com/v1/club-schedule/{team}/week/{date}` | `team`\*, `date` | — | `parse_nhl_web_club_schedule` | — |
-| `nhl_club_stats` / `nhlClubStats` *(was `nhl_api_web_club_stats`)* | `https://api-web.nhle.com/v1/club-stats/{team}/{season}/{game_type}` | `team`\*, `season`, `game_type` | — | `parse_nhl_web_club_stats` | — |
-| `nhl_club_stats_season` / `nhlClubStatsSeason` *(was `nhl_api_web_club_stats_season`)* | `https://api-web.nhle.com/v1/club-stats-season/{team}` | `team`\* | — | `parse_nhl_web_club_stats` | — |
+| `nhl_club_stats` / `nhlClubStats` *(was `nhl_api_web_club_stats`)* | `https://api-web.nhle.com/v1/club-stats/{team}/{season}/{game_type}` | `team`\*, `season`, `game_type` | — | `parse_nhl_web_club_stats` — multi-table: `section` = `skaters` (default), `goalies` | — |
+| `nhl_club_stats_season` / `nhlClubStatsSeason` *(was `nhl_api_web_club_stats_season`)* | `https://api-web.nhle.com/v1/club-stats-season/{team}` | `team`\* | — | `parse_nhl_web_club_stats` — multi-table: `section` = `skaters` (default), `goalies` | — |
 | `nhl_draft_picks` / `nhlDraftPicks` *(was `nhl_api_web_draft_picks`)* | `https://api-web.nhle.com/v1/draft/picks/{year}/{round_}` | `year`\*, `round_` | — | `parse_nhl_web_draft_picks` | — |
 | `nhl_draft_picks_now` / `nhlDraftPicksNow` *(was `nhl_api_web_draft_picks_now`)* | `https://api-web.nhle.com/v1/draft/picks/now` | — | — | `parse_nhl_web_draft_picks` | — |
 | `nhl_draft_rankings` / `nhlDraftRankings` *(was `nhl_api_web_draft_rankings`)* | `https://api-web.nhle.com/v1/draft/rankings/{year}/{category}` | `year`\*, `category` | — | `parse_nhl_web_draft_rankings` | — |
@@ -46,7 +46,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `nhl_player_landing` / `nhlPlayerLanding` *(was `nhl_api_web_player_landing`)* | `https://api-web.nhle.com/v1/player/{player_id}/landing` | `player_id`\* | — | `parse_nhl_web_player_landing` | — |
 | `nhl_player_spotlight` / `nhlPlayerSpotlight` *(was `nhl_api_web_player_spotlight`)* | `https://api-web.nhle.com/v1/player-spotlight` | — | — | `parse_nhl_web_player_spotlight` | — |
 | `nhl_playoff_series` / `nhlPlayoffSeries` *(was `nhl_api_web_playoff_series`)* | `https://api-web.nhle.com/v1/schedule/playoff-series/{season}/{series_letter}` | `season`\*, `series_letter`\* | — | `parse_nhl_web_playoff_series` | — |
-| `nhl_right_rail` / `nhlRightRail` *(was `nhl_api_web_right_rail`)* | `https://api-web.nhle.com/v1/gamecenter/{game_id}/right-rail` | `game_id`\* | — | `parse_nhl_web_right_rail` | — |
+| `nhl_right_rail` / `nhlRightRail` *(was `nhl_api_web_right_rail`)* | `https://api-web.nhle.com/v1/gamecenter/{game_id}/right-rail` | `game_id`\* | — | `parse_nhl_web_right_rail` — multi-table: `section` = `season_series` (default), `shots_by_period`, `team_game_stats`, `game_info`, `linescore_by_period`, `season_series_wins` | — |
 | `nhl_roster` / `nhlRoster` *(was `nhl_api_web_roster`)* | `https://api-web.nhle.com/v1/roster/{team}/{season}` | `team`\*, `season` | — | `parse_nhl_web_roster` | — |
 | `nhl_roster_season` / `nhlRosterSeason` *(was `nhl_api_web_roster_season`)* | `https://api-web.nhle.com/v1/roster-season/{team}` | `team`\* | — | `parse_nhl_web_roster` | — |
 | `nhl_web_schedule` / `nhlWebSchedule` *(was `nhl_api_web_schedule`)* | `https://api-web.nhle.com/v1/schedule/{date}` | `date` | — | `parse_nhl_web_schedule` | — |
@@ -184,6 +184,62 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `series_status_game_number_of_series` | double | Sequential game number within the playoff series (e.g., 1 through 7 for a best-of-seven). |
 
 **Row type:** `NhlApiWebClubScheduleSeasonRow` (exported from the package root).
+
+### Returns — `nhl_club_stats` / `nhlClubStats`
+
+With `{ parsed: true }`: an object of tables, one per key below.
+
+**`skaters`**
+
+| col_name | type | description |
+|---|---|---|
+| `player_id` | integer | Unique player identifier. |
+| `headshot` | character | URL to the player headshot image. |
+| `position_code` | character | Player position code. |
+| `games_played` | integer | Games played. |
+| `goals` | integer | Goals scored. |
+| `assists` | integer | Assists. |
+| `points` | integer | Total points (goals + assists). |
+| `plus_minus` | integer | Plus/minus rating. |
+| `penalty_minutes` | integer | Penalty minutes. |
+| `power_play_goals` | integer | Power-play goals. |
+| `shorthanded_goals` | integer | Shorthanded goals. |
+| `game_winning_goals` | integer | Game-winning goals. |
+| `overtime_goals` | integer | Overtime goals. |
+| `shots` | integer | Shots on goal. |
+| `shooting_pctg` | double | Shooting percentage from the area. |
+| `avg_time_on_ice_per_game` | double | Average time on ice per game. |
+| `avg_shifts_per_game` | double | Average shifts per game. |
+| `faceoff_win_pctg` | double | Faceoff win percentage. |
+| `first_name_default` | character | Player first name (default language). |
+| `last_name_default` | character | Player last name (default language). |
+
+**`goalies`**
+
+| col_name | type | description |
+|---|---|---|
+| `player_id` | integer | Unique player identifier. |
+| `headshot` | character | URL to the player headshot image. |
+| `games_played` | integer | Games played. |
+| `games_started` | integer | Games started (goalies). |
+| `wins` | integer | Wins. |
+| `losses` | integer | Losses. |
+| `overtime_losses` | integer | Total overtime losses. |
+| `goals_against_average` | double | Goals against average. |
+| `save_percentage` | double | Save percentage (goalies). |
+| `shots_against` | integer | Shots faced. |
+| `saves` | integer | Saves made. |
+| `goals_against` | integer | Goals against. |
+| `shutouts` | integer | Shutouts recorded. |
+| `goals` | integer | Goals scored. |
+| `assists` | integer | Assists. |
+| `points` | integer | Total points (goals + assists). |
+| `penalty_minutes` | integer | Penalty minutes. |
+| `time_on_ice` | integer | Time on ice in seconds. |
+| `first_name_default` | character | Player first name (default language). |
+| `last_name_default` | character | Player last name (default language). |
+
+**Row type:** `NhlApiWebClubStatsTables`, `NhlApiWebClubStatsSkatersRow`, `NhlApiWebClubStatsGoaliesRow` (exported from the package root).
 
 ### Returns — `nhl_draft_picks` / `nhlDraftPicks`
 
@@ -685,6 +741,86 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 
 **Row type:** `NhlApiWebPlayoffSeriesRow` (exported from the package root).
 
+### Returns — `nhl_right_rail` / `nhlRightRail`
+
+With `{ parsed: true }`: an object of tables, one per key below.
+
+**`season_series`**
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer | Unique player identifier. |
+| `season` | integer | Season year (echoed from arg). |
+| `game_type` | integer | Game type the row belongs to. |
+| `game_date` | character | Game date. |
+| `start_time_utc` | character | Scheduled start time in UTC. |
+| `eastern_utc_offset` | character | Eastern time UTC offset. |
+| `venue_utc_offset` | character | Venue UTC offset. |
+| `game_state` | character | Game state (e.g., FINAL, LIVE). |
+| `game_schedule_state` | character | Schedule state of the game. |
+| `game_center_link` | character | Link to the NHL game center page. |
+| `away_team_id` | integer | Away team identifier. |
+| `away_team_abbrev` | character | Away team abbreviation. |
+| `away_team_logo` | character | URL to the away team logo. |
+| `away_team_score` | integer | Away team final score. |
+| `home_team_id` | integer | Home team identifier. |
+| `home_team_abbrev` | character | Home team abbreviation. |
+| `home_team_logo` | character | URL to the home team logo. |
+| `home_team_score` | integer | Home team final score. |
+| `period_descriptor_number` | integer | Period number. |
+| `period_descriptor_period_type` | character | Period type (e.g., REG, OT). |
+| `period_descriptor_max_regulation_periods` | integer | Maximum number of regulation periods. |
+| `game_outcome_last_period_type` | character | Period type in which the game ended. |
+
+**`shots_by_period`**
+
+| col_name | type | description |
+|---|---|---|
+| `away` | integer | Away team shots in the period. |
+| `home` | integer | Whether the player's team was home. |
+| `period_descriptor_number` | integer | Period number. |
+| `period_descriptor_period_type` | character | Period type (e.g., REG, OT). |
+| `period_descriptor_max_regulation_periods` | integer | Maximum number of regulation periods. |
+
+**`team_game_stats`**
+
+| col_name | type | description |
+|---|---|---|
+| `category` | character | Stat leader category. |
+| `away_value` | character |  |
+| `home_value` | character |  |
+
+**`game_info`**
+
+| col_name | type | description |
+|---|---|---|
+| `referees` | character |  |
+| `linesmen` | character |  |
+| `away_team_head_coach_default` | character |  |
+| `away_team_scratches` | character |  |
+| `home_team_head_coach_default` | character |  |
+| `home_team_scratches` | character |  |
+
+**`linescore_by_period`**
+
+| col_name | type | description |
+|---|---|---|
+| `away` | integer | Away team shots in the period. |
+| `home` | integer | Whether the player's team was home. |
+| `period_descriptor_number` | integer | Period number. |
+| `period_descriptor_period_type` | character | Period type (e.g., REG, OT). |
+| `period_descriptor_max_regulation_periods` | integer | Maximum number of regulation periods. |
+
+**`season_series_wins`**
+
+| col_name | type | description |
+|---|---|---|
+| `away_team_wins` | integer |  |
+| `home_team_wins` | integer |  |
+| `needed_to_win` | integer |  |
+
+**Row type:** `NhlApiWebRightRailTables`, `NhlApiWebRightRailSeasonSeriesRow`, `NhlApiWebRightRailShotsByPeriodRow`, `NhlApiWebRightRailTeamGameStatsRow`, `NhlApiWebRightRailGameInfoRow`, `NhlApiWebRightRailLinescoreByPeriodRow`, `NhlApiWebRightRailSeasonSeriesWinsRow` (exported from the package root).
+
 ### Returns — `nhl_roster` / `nhlRoster`
 
 | col_name | type | description |
@@ -1136,6 +1272,35 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 
 **Row type:** `NhlEdgeGoalie5v5DetailRow` (exported from the package root).
 
+### Returns — `nhl_edge_goalie_5v5_top_10` / `nhlEdgeGoalie5v5Top10`
+
+| col_name | type | description |
+|---|---|---|
+| `save_pctg` | double | Save percentage. |
+| `save_pctg_close` | double |  |
+| `shots` | integer | Shots on goal. |
+| `shots_per60` | double |  |
+| `player_first_name_default` | character | Player first name (default language). |
+| `player_headshot` | character | URL to the player headshot image. |
+| `player_last_name_default` | character | Player last name (default language). |
+| `player_position` | character | Primary player position. |
+| `player_slug` | character | URL slug for the player. |
+| `player_sweater_number` | integer | Player jersey number. |
+| `player_team_abbrev` | character | Player team abbreviation. |
+| `player_team_common_name_default` | character | Player team common name (default locale). |
+| `player_team_place_name_with_preposition_default` | character | Player team place name with preposition (default locale). |
+| `player_team_place_name_with_preposition_fr` | character | Player team place name with preposition (French locale). |
+| `player_team_slug` | character | Player team URL-friendly slug. |
+| `player_team_team_logo_dark` | character | Player team dark-mode logo URL. |
+| `player_team_team_logo_light` | character | Player team light-mode logo URL. |
+| `player_first_name_cs` | character | Player first name (Czech locale). |
+| `player_first_name_sk` | character | Player first name (Slovak locale). |
+| `player_last_name_cs` | character | Player last name (Czech locale). |
+| `player_last_name_fi` | character | Player last name (Finnish). |
+| `player_last_name_sk` | character | Player last name (Slovak locale). |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
 ### Returns — `nhl_edge_goalie_comparison` / `nhlEdgeGoalieComparison`
 
 | col_name | type | description |
@@ -1221,6 +1386,12 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 | `stats_point_pctg_league_avg` | double | League-average points percentage (team winning percentage when the goalie starts) used as the EDGE comparative baseline. |
 
 **Row type:** `NhlEdgeGoalieDetailRow` (exported from the package root).
+
+### Returns — `nhl_edge_goalie_edge_save_pctg_top_10` / `nhlEdgeGoalieEdgeSavePctgTop10`
+
+No returns table is published for this endpoint: no capture: every value tried 404s for season 20242025 (sort_by points/total/savePctg/save-pctg, position F/forwards/all, category shots/high/all/high-danger, fastRhockey's examples included), so the valid path values are unconfirmed
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `nhl_edge_goalie_landing` / `nhlEdgeGoalieLanding`
 
@@ -1336,6 +1507,12 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 | `save_pctg_percentile` | double | League percentile rank for save percentage. |
 
 **Row type:** `NhlEdgeGoalieShotLocationDetailRow` (exported from the package root).
+
+### Returns — `nhl_edge_goalie_shot_location_top_10` / `nhlEdgeGoalieShotLocationTop10`
+
+No returns table is published for this endpoint: no capture: every value tried 404s for season 20242025 (sort_by points/total/savePctg/save-pctg, position F/forwards/all, category shots/high/all/high-danger, fastRhockey's examples included), so the valid path values are unconfirmed
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `nhl_edge_skater_comparison` / `nhlEdgeSkaterComparison`
 
@@ -1552,6 +1729,59 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 
 **Row type:** `NhlEdgeSkaterDetailRow` (exported from the package root).
 
+### Returns — `nhl_edge_skater_distance_top_10` / `nhlEdgeSkaterDistanceTop10`
+
+| col_name | type | description |
+|---|---|---|
+| `distance_max_per_game_imperial` | double | Maximum single-game skating distance (imperial units). |
+| `distance_max_per_game_metric` | double | Maximum distance skated in a single game, in kilometers. |
+| `distance_max_per_game_overlay_away_team_abbrev` | character | Away team abbreviation in the max-per-game game. |
+| `distance_max_per_game_overlay_away_team_score` | integer | Away team score in the max-per-game game. |
+| `distance_max_per_game_overlay_game_date` | character | Game date of the max-per-game performance. |
+| `distance_max_per_game_overlay_game_outcome_last_period_type` | character | Last period type of the max-per-game game outcome. |
+| `distance_max_per_game_overlay_game_type` | integer | Game type of the max-per-game performance. |
+| `distance_max_per_game_overlay_home_team_abbrev` | character | Home team abbreviation in the max-per-game game. |
+| `distance_max_per_game_overlay_home_team_score` | integer | Home team score in the max-per-game game. |
+| `distance_max_per_game_overlay_period_descriptor_max_regulation_periods` | integer | Maximum regulation periods for the max-per-game game. |
+| `distance_max_per_game_overlay_period_descriptor_number` | integer | Period number for the max-per-game game descriptor. |
+| `distance_max_per_game_overlay_period_descriptor_period_type` | character | Period type for the max-per-game game descriptor. |
+| `distance_max_per_game_overlay_player_first_name_default` | character | Max-per-game player first name (default locale). |
+| `distance_max_per_game_overlay_player_last_name_default` | character | Max-per-game player last name (default locale). |
+| `distance_max_per_period_imperial` | double | Maximum single-period skating distance (imperial units). |
+| `distance_max_per_period_metric` | double | Maximum distance skated in a single period, in kilometers. |
+| `distance_max_per_period_overlay_away_team_abbrev` | character | Away team abbreviation in the max-per-period game. |
+| `distance_max_per_period_overlay_away_team_score` | integer | Away team score in the max-per-period game. |
+| `distance_max_per_period_overlay_game_date` | character | Game date of the max-per-period performance. |
+| `distance_max_per_period_overlay_game_outcome_last_period_type` | character | Last period type of the max-per-period game outcome. |
+| `distance_max_per_period_overlay_game_type` | integer | Game type of the max-per-period performance. |
+| `distance_max_per_period_overlay_home_team_abbrev` | character | Home team abbreviation in the max-per-period game. |
+| `distance_max_per_period_overlay_home_team_score` | integer | Home team score in the max-per-period game. |
+| `distance_max_per_period_overlay_period_descriptor_max_regulation_periods` | integer | Maximum regulation periods for the max-per-period game. |
+| `distance_max_per_period_overlay_period_descriptor_number` | integer | Period number for the max-per-period game descriptor. |
+| `distance_max_per_period_overlay_period_descriptor_period_type` | character | Period type for the max-per-period game descriptor. |
+| `distance_max_per_period_overlay_player_first_name_default` | character | Max-per-period player first name (default locale). |
+| `distance_max_per_period_overlay_player_last_name_default` | character | Max-per-period player last name (default locale). |
+| `distance_per60_imperial` | double | Skating distance per 60 minutes (imperial units). |
+| `distance_per60_metric` | double | Skating distance per 60 minutes (metric units). |
+| `distance_total_imperial` | double | Total skating distance (imperial units). |
+| `distance_total_metric` | double | Total skating distance (metric units). |
+| `player_first_name_default` | character | Player first name (default language). |
+| `player_headshot` | character | URL to the player headshot image. |
+| `player_last_name_default` | character | Player last name (default language). |
+| `player_position` | character | Primary player position. |
+| `player_slug` | character | URL slug for the player. |
+| `player_sweater_number` | integer | Player jersey number. |
+| `player_team_abbrev` | character | Player team abbreviation. |
+| `player_team_common_name_default` | character | Player team common name (default locale). |
+| `player_team_place_name_with_preposition_default` | character | Player team place name with preposition (default locale). |
+| `player_team_place_name_with_preposition_fr` | character | Player team place name with preposition (French locale). |
+| `player_team_slug` | character | Player team URL-friendly slug. |
+| `player_team_team_logo_dark` | character | Player team dark-mode logo URL. |
+| `player_team_team_logo_light` | character | Player team light-mode logo URL. |
+| `distance_max_per_game_overlay_game_outcome_ot_periods` | double | Number of overtime periods in the max-per-game game. |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
 ### Returns — `nhl_edge_skater_landing` / `nhlEdgeSkaterLanding`
 
 | col_name | type | description |
@@ -1718,6 +1948,12 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 
 **Row type:** `NhlEdgeSkaterShotLocationDetailRow` (exported from the package root).
 
+### Returns — `nhl_edge_skater_shot_location_top_10` / `nhlEdgeSkaterShotLocationTop10`
+
+No returns table is published for this endpoint: no capture: every value tried 404s for season 20242025 (sort_by points/total/savePctg/save-pctg, position F/forwards/all, category shots/high/all/high-danger, fastRhockey's examples included), so the valid path values are unconfirmed
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
 ### Returns — `nhl_edge_skater_shot_speed_detail` / `nhlEdgeSkaterShotSpeedDetail`
 
 | col_name | type | description |
@@ -1760,6 +1996,47 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 | `shot_speed_details_shot_attempts70_to80_league_avg` | double | League-average number of shot attempts falling in the 70–80 mph speed band among qualifying skaters for the season. |
 
 **Row type:** `NhlEdgeSkaterShotSpeedDetailRow` (exported from the package root).
+
+### Returns — `nhl_edge_skater_shot_speed_top_10` / `nhlEdgeSkaterShotSpeedTop10`
+
+| col_name | type | description |
+|---|---|---|
+| `shot_attempts70_to80` | integer |  |
+| `shot_attempts80_to90` | integer |  |
+| `shot_attempts90_to100` | integer |  |
+| `shot_attempts_over100` | integer |  |
+| `hardest_shot_imperial` | double |  |
+| `hardest_shot_metric` | double |  |
+| `hardest_shot_overlay_away_team_abbrev` | character |  |
+| `hardest_shot_overlay_away_team_score` | integer |  |
+| `hardest_shot_overlay_game_date` | character |  |
+| `hardest_shot_overlay_game_outcome_last_period_type` | character |  |
+| `hardest_shot_overlay_game_outcome_ot_periods` | double |  |
+| `hardest_shot_overlay_game_type` | integer |  |
+| `hardest_shot_overlay_home_team_abbrev` | character |  |
+| `hardest_shot_overlay_home_team_score` | integer |  |
+| `hardest_shot_overlay_period_descriptor_max_regulation_periods` | integer |  |
+| `hardest_shot_overlay_period_descriptor_number` | integer |  |
+| `hardest_shot_overlay_period_descriptor_period_type` | character |  |
+| `hardest_shot_overlay_player_first_name_default` | character |  |
+| `hardest_shot_overlay_player_last_name_default` | character |  |
+| `hardest_shot_overlay_time_in_period` | character |  |
+| `player_first_name_default` | character | Player first name (default language). |
+| `player_headshot` | character | URL to the player headshot image. |
+| `player_last_name_default` | character | Player last name (default language). |
+| `player_position` | character | Primary player position. |
+| `player_slug` | character | URL slug for the player. |
+| `player_sweater_number` | integer | Player jersey number. |
+| `player_team_abbrev` | character | Player team abbreviation. |
+| `player_team_common_name_default` | character | Player team common name (default locale). |
+| `player_team_place_name_with_preposition_default` | character | Player team place name with preposition (default locale). |
+| `player_team_place_name_with_preposition_fr` | character | Player team place name with preposition (French locale). |
+| `player_team_slug` | character | Player team URL-friendly slug. |
+| `player_team_team_logo_dark` | character | Player team dark-mode logo URL. |
+| `player_team_team_logo_light` | character | Player team light-mode logo URL. |
+| `player_team_common_name_fr` | character |  |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `nhl_edge_skater_skating_distance_detail` / `nhlEdgeSkaterSkatingDistanceDetail`
 
@@ -1805,6 +2082,46 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 
 **Row type:** `NhlEdgeSkaterSkatingSpeedDetailRow` (exported from the package root).
 
+### Returns — `nhl_edge_skater_speed_top_10` / `nhlEdgeSkaterSpeedTop10`
+
+| col_name | type | description |
+|---|---|---|
+| `bursts18_to20` | integer |  |
+| `bursts20_to22` | integer |  |
+| `bursts_over22` | integer |  |
+| `max_speed_imperial` | double |  |
+| `max_speed_metric` | double |  |
+| `max_speed_overlay_away_team_abbrev` | character |  |
+| `max_speed_overlay_away_team_score` | integer |  |
+| `max_speed_overlay_game_date` | character |  |
+| `max_speed_overlay_game_outcome_last_period_type` | character |  |
+| `max_speed_overlay_game_type` | integer |  |
+| `max_speed_overlay_home_team_abbrev` | character |  |
+| `max_speed_overlay_home_team_score` | integer |  |
+| `max_speed_overlay_period_descriptor_max_regulation_periods` | integer |  |
+| `max_speed_overlay_period_descriptor_number` | integer |  |
+| `max_speed_overlay_period_descriptor_period_type` | character |  |
+| `max_speed_overlay_player_first_name_default` | character |  |
+| `max_speed_overlay_player_last_name_default` | character |  |
+| `max_speed_overlay_time_in_period` | character |  |
+| `player_first_name_default` | character | Player first name (default language). |
+| `player_headshot` | character | URL to the player headshot image. |
+| `player_last_name_default` | character | Player last name (default language). |
+| `player_position` | character | Primary player position. |
+| `player_slug` | character | URL slug for the player. |
+| `player_sweater_number` | integer | Player jersey number. |
+| `player_team_abbrev` | character | Player team abbreviation. |
+| `player_team_common_name_default` | character | Player team common name (default locale). |
+| `player_team_place_name_with_preposition_default` | character | Player team place name with preposition (default locale). |
+| `player_team_place_name_with_preposition_fr` | character | Player team place name with preposition (French locale). |
+| `player_team_slug` | character | Player team URL-friendly slug. |
+| `player_team_team_logo_dark` | character | Player team dark-mode logo URL. |
+| `player_team_team_logo_light` | character | Player team light-mode logo URL. |
+| `max_speed_overlay_game_outcome_ot_periods` | double |  |
+| `player_team_common_name_fr` | character |  |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
 ### Returns — `nhl_edge_skater_zone_time` / `nhlEdgeSkaterZoneTime`
 
 | col_name | type | description |
@@ -1821,6 +2138,29 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 | `defensive_zone_league_avg` | double | League average defensive-zone time percentage. |
 
 **Row type:** `NhlEdgeSkaterZoneTimeRow` (exported from the package root).
+
+### Returns — `nhl_edge_skater_zone_time_top_10` / `nhlEdgeSkaterZoneTimeTop10`
+
+| col_name | type | description |
+|---|---|---|
+| `defensive_zone_time` | double | Percentage of time spent in the defensive zone. |
+| `neutral_zone_time` | double | Percentage of time spent in the neutral zone. |
+| `offensive_zone_time` | double | Percentage of time spent in the offensive zone. |
+| `player_first_name_default` | character | Player first name (default language). |
+| `player_headshot` | character | URL to the player headshot image. |
+| `player_last_name_default` | character | Player last name (default language). |
+| `player_position` | character | Primary player position. |
+| `player_slug` | character | URL slug for the player. |
+| `player_sweater_number` | integer | Player jersey number. |
+| `player_team_abbrev` | character | Player team abbreviation. |
+| `player_team_common_name_default` | character | Player team common name (default locale). |
+| `player_team_place_name_with_preposition_default` | character | Player team place name with preposition (default locale). |
+| `player_team_place_name_with_preposition_fr` | character | Player team place name with preposition (French locale). |
+| `player_team_slug` | character | Player team URL-friendly slug. |
+| `player_team_team_logo_dark` | character | Player team dark-mode logo URL. |
+| `player_team_team_logo_light` | character | Player team light-mode logo URL. |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `nhl_edge_team_detail` / `nhlEdgeTeamDetail`
 
@@ -2016,6 +2356,12 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 
 **Row type:** `NhlEdgeTeamShotLocationDetailRow` (exported from the package root).
 
+### Returns — `nhl_edge_team_shot_location_top_10` / `nhlEdgeTeamShotLocationTop10`
+
+No returns table is published for this endpoint: no capture: every value tried 404s for season 20242025 (sort_by points/total/savePctg/save-pctg, position F/forwards/all, category shots/high/all/high-danger, fastRhockey's examples included), so the valid path values are unconfirmed
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
 ### Returns — `nhl_edge_team_shot_speed_detail` / `nhlEdgeTeamShotSpeedDetail`
 
 | col_name | type | description |
@@ -2024,6 +2370,84 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 | `shot_speed_details` | character | Serialized shot-speed breakdown object containing aggregate and top-speed metrics for the team. |
 
 **Row type:** `NhlEdgeTeamShotSpeedDetailRow` (exported from the package root).
+
+### Returns — `nhl_edge_team_skating_distance_top_10` / `nhlEdgeTeamSkatingDistanceTop10`
+
+| col_name | type | description |
+|---|---|---|
+| `distance_max_per_game_imperial` | double | Maximum single-game skating distance (imperial units). |
+| `distance_max_per_game_metric` | double | Maximum distance skated in a single game, in kilometers. |
+| `distance_max_per_game_overlay_away_team_abbrev` | character | Away team abbreviation in the max-per-game game. |
+| `distance_max_per_game_overlay_away_team_score` | integer | Away team score in the max-per-game game. |
+| `distance_max_per_game_overlay_game_date` | character | Game date of the max-per-game performance. |
+| `distance_max_per_game_overlay_game_outcome_last_period_type` | character | Last period type of the max-per-game game outcome. |
+| `distance_max_per_game_overlay_game_type` | integer | Game type of the max-per-game performance. |
+| `distance_max_per_game_overlay_home_team_abbrev` | character | Home team abbreviation in the max-per-game game. |
+| `distance_max_per_game_overlay_home_team_score` | integer | Home team score in the max-per-game game. |
+| `distance_max_per_game_overlay_period_descriptor_max_regulation_periods` | integer | Maximum regulation periods for the max-per-game game. |
+| `distance_max_per_game_overlay_period_descriptor_number` | integer | Period number for the max-per-game game descriptor. |
+| `distance_max_per_game_overlay_period_descriptor_period_type` | character | Period type for the max-per-game game descriptor. |
+| `distance_max_per_period_imperial` | double | Maximum single-period skating distance (imperial units). |
+| `distance_max_per_period_metric` | double | Maximum distance skated in a single period, in kilometers. |
+| `distance_max_per_period_overlay_away_team_abbrev` | character | Away team abbreviation in the max-per-period game. |
+| `distance_max_per_period_overlay_away_team_score` | integer | Away team score in the max-per-period game. |
+| `distance_max_per_period_overlay_game_date` | character | Game date of the max-per-period performance. |
+| `distance_max_per_period_overlay_game_outcome_last_period_type` | character | Last period type of the max-per-period game outcome. |
+| `distance_max_per_period_overlay_game_type` | integer | Game type of the max-per-period performance. |
+| `distance_max_per_period_overlay_home_team_abbrev` | character | Home team abbreviation in the max-per-period game. |
+| `distance_max_per_period_overlay_home_team_score` | integer | Home team score in the max-per-period game. |
+| `distance_max_per_period_overlay_period_descriptor_max_regulation_periods` | integer | Maximum regulation periods for the max-per-period game. |
+| `distance_max_per_period_overlay_period_descriptor_number` | integer | Period number for the max-per-period game descriptor. |
+| `distance_max_per_period_overlay_period_descriptor_period_type` | character | Period type for the max-per-period game descriptor. |
+| `distance_per60_imperial` | double | Skating distance per 60 minutes (imperial units). |
+| `distance_per60_metric` | double | Skating distance per 60 minutes (metric units). |
+| `distance_total_imperial` | double | Total skating distance (imperial units). |
+| `distance_total_metric` | double | Total skating distance (metric units). |
+| `team_abbrev` | character | Team abbreviation. |
+| `team_common_name_default` | character | Team common name (default language). |
+| `team_place_name_with_preposition_default` | character | Team place name with preposition (default). |
+| `team_slug` | character | Team URL slug. |
+| `team_team_logo_dark` | character | URL to the team dark logo. |
+| `team_team_logo_light` | character | URL to the team light logo. |
+| `distance_max_per_game_overlay_game_outcome_ot_periods` | double | Number of overtime periods in the max-per-game game. |
+| `distance_max_per_period_overlay_game_outcome_ot_periods` | double | Number of overtime periods in the max-per-period game. |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
+### Returns — `nhl_edge_team_skating_speed_top_10` / `nhlEdgeTeamSkatingSpeedTop10`
+
+| col_name | type | description |
+|---|---|---|
+| `bursts18_to20` | integer |  |
+| `bursts20_to22` | integer |  |
+| `bursts_over22` | integer |  |
+| `max_skating_speed_imperial` | double |  |
+| `max_skating_speed_metric` | double |  |
+| `max_skating_speed_overlay_away_team_abbrev` | character |  |
+| `max_skating_speed_overlay_away_team_score` | integer |  |
+| `max_skating_speed_overlay_game_date` | character |  |
+| `max_skating_speed_overlay_game_outcome_last_period_type` | character |  |
+| `max_skating_speed_overlay_game_type` | integer |  |
+| `max_skating_speed_overlay_home_team_abbrev` | character |  |
+| `max_skating_speed_overlay_home_team_score` | integer |  |
+| `max_skating_speed_overlay_period_descriptor_max_regulation_periods` | integer |  |
+| `max_skating_speed_overlay_period_descriptor_number` | integer |  |
+| `max_skating_speed_overlay_period_descriptor_period_type` | character |  |
+| `max_skating_speed_overlay_player_first_name_default` | character |  |
+| `max_skating_speed_overlay_player_last_name_default` | character |  |
+| `max_skating_speed_overlay_time_in_period` | character |  |
+| `team_abbrev` | character | Team abbreviation. |
+| `team_common_name_default` | character | Team common name (default language). |
+| `team_id` | integer | Unique team identifier. |
+| `team_place_name_with_preposition_default` | character | Team place name with preposition (default). |
+| `team_place_name_with_preposition_fr` | character | Team place name with preposition (French). |
+| `team_slug` | character | Team URL slug. |
+| `team_team_logo_dark` | character | URL to the team dark logo. |
+| `team_team_logo_light` | character | URL to the team light logo. |
+| `max_skating_speed_overlay_game_outcome_ot_periods` | double |  |
+| `team_common_name_fr` | character | Team common name (French localization). |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `nhl_edge_team_zone_time_details` / `nhlEdgeTeamZoneTimeDetails`
 
@@ -2041,6 +2465,24 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 | `defensive_zone_league_avg` | double | League average defensive-zone time percentage. |
 
 **Row type:** `NhlEdgeTeamZoneTimeDetailsRow` (exported from the package root).
+
+### Returns — `nhl_edge_team_zone_time_top_10` / `nhlEdgeTeamZoneTimeTop10`
+
+| col_name | type | description |
+|---|---|---|
+| `defensive_zone_time` | double | Percentage of time spent in the defensive zone. |
+| `neutral_zone_time` | double | Percentage of time spent in the neutral zone. |
+| `offensive_zone_time` | double | Percentage of time spent in the offensive zone. |
+| `team_abbrev` | character | Team abbreviation. |
+| `team_common_name_default` | character | Team common name (default language). |
+| `team_place_name_with_preposition_default` | character | Team place name with preposition (default). |
+| `team_place_name_with_preposition_fr` | character | Team place name with preposition (French). |
+| `team_slug` | character | Team URL slug. |
+| `team_team_logo_dark` | character | URL to the team dark logo. |
+| `team_team_logo_light` | character | URL to the team light logo. |
+| `team_common_name_fr` | character | Team common name (French localization). |
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
 
 ## Native API — NHL Stats REST
 
@@ -3657,5 +4099,17 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `wins` | integer | Wins. |
 
 **Row type:** `NhlRecordsHomeTeamRecordRow` (exported from the package root).
+
+### Returns — `nhl_records_skater_career_leaders` / `nhlRecordsSkaterCareerLeaders`
+
+No returns table is published for this endpoint: no capture: records.nhl.com answers 404 for this route with the documented example arguments (2026-10-07)
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
+
+### Returns — `nhl_records_skater_career_stats` / `nhlRecordsSkaterCareerStats`
+
+No returns table is published for this endpoint: no capture: records.nhl.com answers 404 for this route with the documented example arguments (2026-10-07)
+
+_Rows are untyped `Row[]` (not parity-verified yet)._
 
 _Generated by tools/codegen/generate.mjs from tools/codegen/endpoints/nhl_api_web.yaml (vendored from sdv-py) + tools/codegen/endpoints/nhl_edge.yaml (vendored from sdv-py) + tools/codegen/endpoints/nhl_stats_rest.yaml (vendored from sdv-py) + tools/codegen/endpoints/nhl_records.yaml (vendored from sdv-py) — see [How this library is built](/docs/architecture/flat-vendored)._

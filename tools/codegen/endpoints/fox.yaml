@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@89c638a61b8c36f0f59159773260b8a0b998a5dc
+# VENDORED from sportsdataverse/sportsdataverse-py@79dd939371d245b0935362b491b03f50d63f8a8d
 # tools/codegen/endpoints/fox_api.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/fox.yaml; shared changes land in sdv-py first.
@@ -128,7 +128,7 @@ endpoints:
     default: '1.1'
     description: Fox API version (``api-version`` query key).
   example_args:
-    sport: nfl
+    sport: cfb
   returns_schema: native/fox/league_conferences
 - short: league_header
   summary: GET /bifrost/v1/{sport}/league/header -- Fox Sports API league header.
@@ -224,7 +224,7 @@ endpoints:
     default: '1.1'
     description: Fox API version (``api-version`` query key).
   example_args:
-    sport: nfl
+    sport: cfb
   returns_schema: native/fox/league_polls
 - short: league_schedule
   summary: GET /bifrost/v1/{sport}/league/schedule -- Fox Sports API league schedule.

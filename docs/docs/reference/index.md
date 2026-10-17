@@ -98,8 +98,8 @@ Since v4 every wrapper carries sdv-py's name (`athlete` â†’ `player`, `event` â†
 |---|---:|
 | [cfb](../cfb/reference/loaders.md) | 71 |
 | [mbb](../mbb/reference/loaders.md) | 34 |
-| [mlb](../mlb/reference/loaders.md) | 32 |
-| [nba](../nba/reference/loaders.md) | 41 |
+| [mlb](../mlb/reference/loaders.md) | 34 |
+| [nba](../nba/reference/loaders.md) | 42 |
 | [nfl](../nfl/reference/loaders.md) | 29 |
 | [nhl](../nhl/reference/loaders.md) | 27 |
 | [pwhl](../pwhl/reference/loaders.md) | 21 |

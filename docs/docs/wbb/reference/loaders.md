@@ -149,7 +149,7 @@ const rows = await sdv.wbb.loadWbbPbp({ seasons: 2024, columns: ['game_id', 'seq
 | `athlete_name_1` | `string` | Display name of the first athlete in the ESPN play participants (e.g., the shooter on a shot attempt). |
 | `athlete_name_2` | `string` | Display name of the second athlete in the ESPN play participants (e.g., the assisting player), when present. |
 | `athlete_name_3` | `string` | Display name of the third athlete in the ESPN play participants, when present. |
-| `pregame_home_prob` | `number` | Model's pre-game win probability for the home team (0-1), constant within a game. |
+| `pregame_home_prob` | `number` | Model's pre-game win probability for the home team (0-1), constant within a game. Present only on assets published with the WP model (2012-13 onward); absent on earlier seasons (rules/wbb.yaml#wbb-2013-pbp-wp-columns). |
 | `home_win_prob` | `number` |  |
 
 ## `loadWbbPlayerBoxscore`
@@ -886,8 +886,8 @@ const rows = await sdv.wbb.loadWbbScheduleCrosswalk({ seasons: 2026 });
 | `bart_team1` | `string` | Torvik team1 name (NA for espn-only rows). |
 | `bart_team2` | `string` | Torvik team2 name (NA for espn-only rows). |
 | `bart_winner` | `string` | Torvik winner name (NA for espn-only rows). |
-| `fox_game_id` | `string` | Fox game id (NA placeholder). |
-| `yahoo_game_id` | `string` | Yahoo game id (NA placeholder). |
+| `fox_game_id` | `string` | Fox Sports game id (string), filled when the crosswalk is built with fox=True from Fox's per-date scoreboard, matched on the US-Eastern date and the two teams in either home/away order; null otherwise and where Fox lists no matching game. |
+| `yahoo_game_id` | `string` | Yahoo Sports game id, ncaaw.g.\<YYYYMMDD US-Eastern date\>\<home Yahoo team id, 4 digits\>, filled when built with yahoo=True and checked against the ids Yahoo lists, so a neutral-site game carries the side Yahoo calls home; null otherwise and where Yahoo lists no such game (a non-Division-I home team). |
 | `match_method` | `string` | Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". |
 | `match_confidence` | `number` | Jaro-Winkler score or 1 for exact (NA if none). |
 
@@ -927,8 +927,8 @@ const rows = await sdv.wbb.loadWbbTeamCrosswalk({ seasons: 2026 });
 | `fox_section` | `string` | Fox conference/section label (NA if unmatched). |
 | `bart_team` | `string` | Torvik team name (NA if unmatched). |
 | `bart_conf` | `string` | Torvik conference abbreviation (NA if unmatched). |
-| `yahoo_team_id` | `string` | Yahoo team id (NA placeholder). |
-| `yahoo_team_name` | `string` | Yahoo team name (NA placeholder). |
+| `yahoo_team_id` | `string` | Dotted Yahoo Sports team id (e.g. 'ncaab.t.173'), filled when built with yahoo=True from Yahoo's team listing joined on full name, short name, then nickname; null otherwise and where no Yahoo team matched. |
+| `yahoo_team_name` | `string` | Yahoo Sports full team name for yahoo_team_id; null when yahoo_team_id is. |
 | `fox_match_confidence` | `number` | 1 for matched, NA for unmatched. |
 | `bart_match_confidence` | `number` | 1 for matched, NA for unmatched. |
 | `match_method` | `string` | Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". |

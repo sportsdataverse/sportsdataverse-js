@@ -50,7 +50,7 @@ Endpoints are grouped by ESPN API family. Pick a page for its per-function refer
 | [FPI API (fitt v3)](./reference/fitt) | 1 |
 | [CDN (espn.com page data)](./reference/cdn) | 4 |
 | [Native API](./reference/native) | 117 |
-| [Dataset loaders](./reference/loaders) | 32 |
+| [Dataset loaders](./reference/loaders) | 34 |
 
 > **Parsed output:** pass `{ parsed: true }` to any endpoint to get tidy rows instead of raw JSON. The columns are determined by each endpoint's parser — see [ESPN parsed returns](../reference/espn-parsed-returns) for the full column reference.
 

@@ -16,6 +16,12 @@ parsers:
   parse_nwsl_lineups:
     default: players
     sections: [teams, players, staff]
+  parse_nhl_web_club_stats:
+    default: skaters
+    sections: [skaters, goalies]
+  parse_nhl_web_right_rail:
+    default: season_series
+    sections: [season_series, shots_by_period, team_game_stats, game_info, linescore_by_period, season_series_wins]
   # PFF (py's report / career / table arguments) and KenPom (one table per HTML
   # id). `default: null` keeps sdv-py's dict-of-tables shape; `sections: null`
   # means the payload names its tables (`dynamic` says how).
