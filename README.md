@@ -318,7 +318,11 @@ umbrella.
 | [`cfbseedR`](https://cfbseedR.sportsdataverse.org) | College football season simulation, tiebreakers and CFP seeding |
 | [`nflfastR`](https://www.nflfastr.com) / [`nflverse`](https://nflverse.nflverse.com) | NFL ecosystem |
 
-## Star History
+## Follow the SportsDataverse (@SportsDataverse) on X and star this repo
+
+[![X Follow](https://img.shields.io/twitter/follow/SportsDataverse?color=blue&label=%40SportsDataverse&logo=x&style=for-the-badge)](https://x.com/SportsDataverse)
+
+[![GitHub stars](https://img.shields.io/github/stars/sportsdataverse/sportsdataverse-js.svg?color=eee&logo=github&style=for-the-badge&label=Star%20sportsdataverse-js&maxAge=2592000)](https://github.com/sportsdataverse/sportsdataverse-js)
 
 <a href="https://github.com/sportsdataverse/sportsdataverse-js/stargazers">
   <picture>
